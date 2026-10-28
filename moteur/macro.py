@@ -79,6 +79,9 @@ def _montee(t, annees):
 
 def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scenario]:
     pv = _prov()
+    from .emploi import entrees_macro, population_active
+    pv.update(entrees_macro(p))
+    pa = population_active(p)
     m = lambda cle, s: p.val(f"macro.{cle}", s)
     tend0 = m("tendance", "prudent")
     pib_2026 = 2920 * facteur(p, 2024, "recettes")  # Total!F18, Md€
@@ -232,6 +235,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             sc.pib_effet[t], sc.solde_effet[t], sc.emplois[t] = pib, solde_total, emp_ref + emp_sen
             sc.charge_dette[t], sc.solde_public[t], sc.dette[t] = interets, solde_public, dette
             sc.maastricht[t], sc.dette_pib[t], sc.clause[t] = maastricht, dette / pib_total, mesures
+            # Taux de chômage (Emploi lignes 28 à 30) : hors seniors, effet récessif de la bascule compris
+            sc.detail.setdefault("chomage", {})[t] = (p.val("inactifs.chomeurs_bit") - emp_ref
+                                                        - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa
             # Année suivante : capital du fonds, part à l'étranger
             capital = capital + b24 * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
             if maastricht >= etr["solde_minimum"]:

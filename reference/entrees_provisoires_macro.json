@@ -1,34 +1,5 @@
 {
  "_note": "Valeurs de la v235 (feuilles non encore portées) utilisées par moteur/macro.py. Chaque entrée disparaît quand son module est écrit.",
- "emplois_terme": {
-  "prudent": 456418.175988273,
-  "median": 786173.021100592,
-  "optimiste": 1206367.13605553,
-  "_cellules": "Effets macro!B8:D8 (RUI!B34:D34)"
- },
- "gain_par_emploi": {
-  "prudent": 15159.7308727859,
-  "median": 15994.9308727859,
-  "optimiste": 15994.9308727859,
-  "_cellules": "Emploi!B245:D245"
- },
- "valeur_ajoutee_par_emploi": {
-  "valeur": 47942.6751592357,
-  "_cellules": "Effets macro!B11 (Emploi B43-B48)"
- },
- "emplois_perdus_subventions": {
-  "prudent": 118072,
-  "median": 81174.5,
-  "optimiste": 59036,
-  "_cellules": "Emploi!B143:D143"
- },
- "emplois_perdus_tardifs": {
-  "prudent": 0,
-  "median": 24000,
-  "optimiste": 150000,
-  "annee": 9999,
-  "_cellules": "Emploi!B157:D157, B154"
- },
  "prix_logement": {
   "valeur": 250000,
   "_cellules": "Logement!B72"

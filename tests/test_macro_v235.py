@@ -45,3 +45,18 @@ def test_clause_de_trajectoire(cle, ligne):
 def test_prudent_avant_clause_publie():
     c = R["prudent"].detail["clause"]
     assert [round(c[t]["avant"] * 100, 2) for t in (2029, 2032, 2037)] == [5.23, 5.18, 4.07]
+
+
+@pytest.mark.parametrize("scenario, ligne", [("prudent", 28), ("median", 29), ("optimiste", 30)])
+def test_chomage(scenario, ligne):
+    c = R[scenario].detail["chomage"]
+    for i, t in enumerate(macro.ANNEES):
+        cible = VAL.get(("Emploi", f"{get_column_letter(i + 2)}{ligne}"))
+        if cible is None:  # la v235 s'arrête en 2040
+            break
+        assert c[t] == pytest.approx(cible, abs=1e-9), (scenario, t)
+
+
+def test_chomage_2037_publie():
+    assert round(R["prudent"].detail["chomage"][2037] * 100, 2) == 7.26
+    assert round(R["median"].detail["chomage"][2037] * 100, 2) == 6.13

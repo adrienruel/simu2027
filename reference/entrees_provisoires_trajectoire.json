@@ -1,11 +1,5 @@
 {
  "_note": "Valeurs de la v235 (feuilles non encore portées) utilisées par moteur/trajectoire_annuelle.py.",
- "emploi_cout_reformes": {
-  "g24": 16.687018457754,
-  "b155": 0.96,
-  "b154": 9999,
-  "_cellules": "Emploi!G24, B155, B154"
- },
  "anciennes_pensions": {
   "serie": [
    45.0402140006989,

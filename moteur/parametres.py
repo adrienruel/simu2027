@@ -73,7 +73,9 @@ class Parametres:
             raise ErreurParametre(f"{cle} : statut SOURCE sans source")
         if c["unite"] in UNITES_MONTANT and "annee_euros" not in c:
             raise ErreurParametre(f"{cle} : montant sans année des euros")
-        par_scenario = isinstance(c["valeur"], dict) and bool(set(c["valeur"]) & set(self.scenarios))
+        # Ventilé par scénario si toutes les clés sont des scénarios ; un dictionnaire qui mêle
+        # scénarios et autres champs est une valeur structurée, lue par le module qui l'utilise.
+        par_scenario = isinstance(c["valeur"], dict) and bool(c["valeur"]) and set(c["valeur"]) <= set(self.scenarios)
         if par_scenario and set(c["valeur"]) != set(self.scenarios):
             raise ErreurParametre(f"{cle} : scénarios incomplets {sorted(c['valeur'])}")
         return Parametre(

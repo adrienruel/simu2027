@@ -50,7 +50,21 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - `python -m moteur.simulation` donne les déficits des trois scénarios et le prudent avant clause, identiques à la v235.
 - Entrées encore provisoires pour la trajectoire (`reference/entrees_provisoires_trajectoire.json`) : santé année par année, anciennes pensions, successions, ascenseur social, économies, coût des réformes de l'emploi, RUI des étudiants.
 
+## 29 octobre 2026 — Feuilles annexes et emploi
+
+- Portés et testés contre la v235 : calendrier 2027-2028 (dette fin 2028), successions, ascenseur social, registre des mesures d'économies (`moteur/mesures.py`, premier embryon du registre des lois), objectifs (TVA de 2028, gel, RUI des étudiants), santé année par année avec pentes recalculées depuis les repères de l'Assurance maladie et du Trésor, garde-fou, volet santé de la TVA, feuille Emploi entière (14 réformes, rendements décroissants, marge intensive, localisation, gain par emploi, coût des réformes, taux de chômage par année).
+- Le chargeur de paramètres refuse désormais les clés en double (YAML gardait la dernière sans prévenir : c'est arrivé une fois pendant le portage).
+- Chômage 2037 retrouvé : 7,26 % (prudent), 6,13 % (médian).
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Gain budgétaire par emploi (Emploi!B245)** : la TVA sur la consommation en plus est calculée au taux moyen de l'ancien système (13 %, Total!B140), pas aux taux effectifs du nouveau (≈ 17-18 %), et appliquée au montant toutes taxes comprises. Le gain par emploi est un peu sous-estimé.
+- **Prudent de l'emploi** : il prend le milieu de la crise et du médian pour les emplois créés (Effets macro!B8), mais la valeur de crise pour les emplois perdus (fin des subventions, fin de la prime) : asymétrie volontairement prudente, à écrire noir sur blanc.
+- **Impôt local dans la feuille Emploi** : lu dans Collectivités!B32 (0,07203594340), alors que les feuilles de salariés lisent la copie B91 (0,07203594282) ; le point fixe n'est pas tout à fait atteint.
+- **Libellés périmés** : « RUI de 850 € » (Emploi ligne 10) ; « part remboursée 60 % » des prépas (Ascenseur social ligne 62) contre 55 % dans le calcul ; « Moyenne 2026-2070 » pour des moyennes 2029-2073.
+- **Constantes dans les formules** : 52 Md€ d'impôts de production sur les salaires (Emploi!B217 « =52 »), dépense par élève ingénieur 13 000 × 0,6, prix du tabac 14,7 / 12,54 (Santé!B69).
+- **Décès après 2070** : gardés constants (la formule de prolongation n'a plus de second point) ; sans effet notable.
+
 
 - **Revalorisation des pensions sous le minimum vieillesse** (Objectifs!B16) : exposant compté depuis 2028, alors que tout le reste part de 2029 ; une année de croissance en plus dès 2029.
 

@@ -55,7 +55,9 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     tva2028 = {t: objectifs.surcroit_tva_2028(p, t)[0] for t in ANNEES}
     rendu = {t: objectifs.surcroit_tva_2028(p, t)[1] for t in ANNEES}
     gel = {t: objectifs.fin_gel(p, t) for t in ANNEES}
-    em = pv["emploi_cout_reformes"]
+    from .emploi import cout_reformes, cout_prime_jeunes
+    em = {"g24": cout_reformes(p), "b155": cout_prime_jeunes(p) * p.val("emploi.retenues_calculees")["prime_jeunes"],
+          "b154": p.val("emploi.prime_jeunes")["derniere_annee"]}
     is_inv = dict(zip(ANNEES, _macro_prov()["is_investissement_etalement"]["b41"]))
     # Renouvelables (Budget État 2026, lignes 136 à 144)
     soutien_2026, soutien_2029 = p.val("renouvelables.soutien_budget_2026"), p.val("renouvelables.soutien_2029")
