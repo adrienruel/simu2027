@@ -119,7 +119,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     sante = {"median": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["median"][t] for t in ANNEES},
              "optimiste": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["optimiste"][t] for t in ANNEES},
              "tva_prudent": tv["prudent"], "tva_median": tv["median"], "tva_optimiste": tv["optimiste"]}
-    carbone = {k: dict(zip(ANNEES, v)) for k, v in pv["carbone_solde"].items() if not k.startswith("_")}
+    from .carbone import effet_solde
+    from .recettes.total import ligne_3_tva
+    carbone = effet_solde(p, ligne_3_tva(p) / 1e9)
     from .logement import reprise_amortissements
     logement104 = reprise_amortissements(p)
     personnes_en_emploi = p.val("inactifs.chomeurs_bit") / p.val("chomage.taux_2026") - p.val("inactifs.chomeurs_bit")

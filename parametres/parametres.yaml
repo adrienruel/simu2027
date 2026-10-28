@@ -925,3 +925,15 @@ hauts_revenus:
   elasticite_croisee_travail: {valeur: {crise: null, prudent: 0.05, median: 0.03, optimiste: 0.03}, unite: sans_unite, statut: SOURCE, source: "Lefebvre, Lehmann et Sicsic, IZA DP n° 16112 (2023)"}
   elasticite_classes_moyennes: {valeur: {crise: null, prudent: 0.05, median: 0.02, optimiste: 0}, unite: sans_unite, statut: HYPOTHESE, note: "Au-dessus de la valeur sourcée de 0,02 pour l'ensemble en prudent (audit)."}
   classes_moyennes_bornes: {valeur: [24000, 95000], unite: eur_an, annee_euros: 2026, statut: HYPOTHESE}
+
+# --- Carbone dynamique (feuille Carbone) ---------------------------------------------
+carbone:
+  recette_2029_nette_is: {valeur: 57.7, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Écart des recettes totales du modèle entre 269 € et 0 € (v180), saisi : à recalculer par le moteur (test prévu)."}
+  option_prix: {valeur: 2, unite: sans_unite, statut: DECISION, note: "0 = prix fixe ; 1 = 300 € dès 2030 puis fixe ; 2 = 300 € en 2030 puis valeur de l'action pour le climat."}
+  prix_option_2030: {valeur: 300, unite: eur_par_tco2, statut: DECISION}
+  hausse_valeur_action_climat: {valeur: 0.032, unite: taux, statut: SOURCE, source: "Valeur de l'action pour le climat (rapport Quinet)"}
+  part_accise_prix_final: {valeur: 0.35, unite: taux, statut: HYPOTHESE}
+  baisse_tendancielle_emissions: {valeur: {crise: null, prudent: -0.019, median: -0.018, optimiste: -0.0165}, unite: taux, statut: HYPOTHESE}
+  ets2: {valeur: {emissions_mt: 180, prix: 45, part_fonds_social: 0.187, dotation_france: 1.04}, unite: sans_unite, statut: SOURCE, source: "Directive ETS2 ; Fonds social pour le climat"}
+  ets1_complement: {valeur: {active: 0, emissions_mt: 70, prix_quota: 75}, unite: sans_unite, statut: DECISION}
+  dom: {valeur: {cout_regime_tva: 3, exonerer_vols: 1, preserver_fiscalite: 1, passagers_millions: 3.88, part_metropole: 0.8, distance_km: 7800, accise_aller_retour_ref: 370, distance_ref_km: 5840}, unite: sans_unite, statut: DECISION, note: "Accise par passager-km = 370 / (2 × 5 840), écrit dans la formule B42."}

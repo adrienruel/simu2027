@@ -80,3 +80,10 @@ def test_emploi():
         assert e[j]["emplois"] == pytest.approx(VAL[("Emploi", f"{col}22")], abs=1)
     assert em.cout_reformes(P) == pytest.approx(VAL[("Emploi", "G24")], abs=0.01)
     assert em.gain_par_emploi(P, "prudent") == pytest.approx(VAL[("Emploi", "B245")], abs=0.01)
+
+
+@pytest.mark.parametrize("scenario, ligne", [("prudent", 72), ("median", 73), ("optimiste", 74)])
+def test_carbone(scenario, ligne):
+    from moteur import carbone
+    from moteur.recettes.total import ligne_3_tva
+    comparer(carbone.effet_solde(P, ligne_3_tva(P) / 1e9)[scenario], "Carbone", ligne)
