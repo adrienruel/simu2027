@@ -1,0 +1,36 @@
+mission,credits,titre2,cas_pensions,part_conservee,ligne_modele,cas_source
+"Sécurités (police, gendarmerie, sécurité civile)",25.948,21.492,8.36,1,Intérieur,s
+Administration générale et territoriale de l’État,5.082,3.063,0.869,1,Intérieur,s
+"Immigration, asile et intégration",2.13,0,0,1,Intérieur,s
+Justice,13.055,7.777,2.42,1,Justice,s
+Gestion des finances publiques,11.018,8.892,calcul,1,Finances,r
+Économie,3.513,0.992,calcul,1,Finances,r
+Engagements financiers hors charge de la dette,1.726,0,0,1,Finances,s
+Action extérieure de l’État,3.454,1.386,calcul,1,Affaires étrangères,r
+Aide publique au développement,3.569,0,0,1,Affaires étrangères,s
+Enseignement scolaire public,80.75,76.482,25.16,1,Éducation,s
+Enseignement privé sous contrat,8.871,7.974,0,0,Éducation,s
+Recherche et enseignement supérieur,31.5,0.721,calcul,1,Recherche,r
+"Agriculture, alimentation, forêt",4.126,0.936,calcul,1,Agriculture,r
+"Culture, médias, livre et industries culturelles",4.456,0.764,calcul,1,Culture,r
+Audiovisuel public,3.878,0,0,1,Culture,s
+"Écologie, hors énergie et hors infrastructures de transport",7.45,3.146,calcul,1,Écologie,r
+Infrastructures et services de transport,4.608,0,0,0,Fonds,s
+"Service public de l’énergie, énergie et climat",10.71,0,0,0,Fonds,s
+"Sport, jeunesse et vie associative",1.246,0.134,calcul,1,Sports,r
+Conseil et contrôle de l’État,0.866,0.733,calcul,1,Administration,r
+Direction de l’action du Gouvernement,1.052,0.387,calcul,1,Administration,r
+Pouvoirs publics,1.14,0,0,1,Administration,s
+Transformation publique et crédits non répartis,1,0.405,calcul,1,Administration,r
+Outre-mer,3.288,0.213,calcul,1,Autres,r
+"Monde combattant, mémoire et liens avec la Nation",1.738,0.0015,0,1,Autres,s
+"Santé (aide médicale de l’État, prévention)",1.478,0.0007,0,1,Autres,s
+Aide sociale à l’enfance (reprise des départements),11.2,0,0,1,Justice,s
+Protection de l’enfance et des majeurs : part déjà à l’État,1.2,0,0,1,Justice,s
+"Solidarité, insertion et égalité des chances : reste",30.104,0.0034,0,0,Autres,s
+"Travail, emploi et administration des ministères sociaux",22.124,1.077,calcul,calcul,Autres,r
+Cohésion des territoires,22.571,0.027,0,0,Supprimé,s
+Régimes sociaux et de retraite,6.068,0,0,0,Retraites,s
+Relations avec les collectivités territoriales,4.009,0,0,0,Supprimé,s
+Investir pour la France de 2030,4.398,0,0,0,Fonds,s
+Défense,calcul,23.831,9.58,1,Armées,s

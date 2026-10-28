@@ -125,3 +125,31 @@ def test_ancienne_tva():
 def test_recettes_totales_total_b17():
     """Critère de sortie de l'étape 1 pour les recettes statiques."""
     assert tot.recettes_nouveau_systeme(P)["total"] == pytest.approx(1_167_767_351_278, abs=TOL)
+
+
+# --- Dépenses statiques -----------------------------------------------------------
+from moteur.depenses import budget_etat as be, statique as st
+
+
+@pytest.mark.parametrize("ligne, cible", [
+    ("Intérieur", 26.7002139995783), ("Justice", 24.0029420198187), ("Armées", 73.6178056612685),
+    ("Finances", 15.6771992499163), ("Affaires étrangères", 6.94169649538487), ("Éducation", 75.8632350832806),
+    ("Recherche", 28.9876067427487), ("Agriculture", 4.07109373714303), ("Culture", 8.28918334954837),
+    ("Écologie", 7.26545394984185), ("Sports", 1.23813948800979), ("Administration", 3.96854268070846),
+    ("Autres", 11.3757254190831), ("Contribution UE", 30.3536345776031),
+])
+def test_missions_etat(ligne, cible):
+    assert be.lignes_modele(P)[ligne] == pytest.approx(cible, abs=0.01)
+
+
+@pytest.mark.parametrize("ligne, cible", [
+    ("sante", 305.932977141111), ("rui_aah", 127.70289191419), ("securite_sociale_hors_sante", 17.1589964751672),
+    ("autres_missions", 14.1107254190831), ("subventions_restees", 15.213), ("collectivites", 15.9119989539),
+])
+def test_lignes_depenses(ligne, cible):
+    assert st.depenses(P)["lignes"][ligne] == pytest.approx(cible, abs=0.01)
+
+
+def test_depenses_totales_total_b44():
+    """Avec quatre termes encore provisoires (coût de transition, IA, économies des missions, quotient familial)."""
+    assert st.depenses(P)["total"] == pytest.approx(1217.58240587589, abs=0.01)
