@@ -73,9 +73,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     from .trajectoire_annuelle import postes
     traj = postes(p, scenario_retenu)
     sp_hors = {t: traj[t]["solde_primaire_hors_macro"] for t in ANNEES}
-    transferts = dict(zip(ANNEES, pv["transferts_collectivites"]["serie"]))
-    dette0 = pv["dette_depart"]["valeur"]
-    infl = pv["inflation"]["valeur"]
+    from .calendrier import dette_fin_2028, transferts_collectivites
+    transferts = {t: transferts_collectivites(p) for t in ANNEES}
+    dette0 = dette_fin_2028(p)
+    infl = p.val("calendrier.inflation")
     participations = {t: v["participations"] for t, v in cout_transition(p).items()}
     j20 = entreprises.is_beneficiaires(p) / 1e9
     s17 = p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")

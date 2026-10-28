@@ -11,6 +11,7 @@ import pytest
 
 from moteur.parametres import Parametres
 from moteur.trajectoire import Annee, calculer
+from moteur.calendrier import dette_fin_2028
 
 CIBLES = Path(__file__).resolve().parent.parent / "reference" / "cibles" / "trajectoire.csv"
 P = Parametres()
@@ -30,7 +31,7 @@ def _entrees():
     pib, rec = g("PIB"), g("Recettes (e")
     sa, re_, rui, inv, aut, cd = g("Santé"), g("Retraites"), g("RUI"), g("Investissement"), g("Autres"), g("Charge")
     so, de = g("Solde budg"), g("Dette en")
-    dette_prec = P.val("trajectoire.dette_depart")
+    dette_prec = dette_fin_2028(P)
     out = []
     for i, an in enumerate(ANNEES):
         participations = dette_prec - so[i] - de[i]  # à remplacer par le module du remboursement
@@ -39,7 +40,7 @@ def _entrees():
     return out
 
 
-RES = calculer(_entrees(), P.val("trajectoire.dette_depart"), P.val("trajectoire.inflation"))
+RES = calculer(_entrees(), dette_fin_2028(P), P.val("calendrier.inflation"))
 
 
 @pytest.mark.parametrize("attr, poste", [

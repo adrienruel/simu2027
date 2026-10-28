@@ -31,7 +31,7 @@ def _macro_prov():
 def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     pv = _prov()
     g = p.val("macro.tendance", "prudent")
-    infl = _macro_prov()["inflation"]["valeur"]
+    infl = p.val("calendrier.inflation")
     rec = recettes_nouveau_systeme(p)["total"] / 1e9
     dep = depenses(p)
     l = dep["lignes"]

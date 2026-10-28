@@ -107,21 +107,6 @@ profils:
     statut: SOURCE
     source: État du programme v232 (salarié médian, profil type)
 
-# --- Trajectoire --------------------------------------------------------------
-trajectoire:
-  dette_depart:
-    valeur: 3810.31529768761
-    unite: md_eur
-    annee_euros: 2026
-    statut: SOURCE
-    source: Classeur v235, Trajectoire (dette fin 2028, feuille Calendrier budgétaire)
-    note: Valeur reprise telle quelle ; sera calculée par le module Calendrier (déficits 2027-2028).
-  inflation:
-    valeur: 0.018
-    unite: taux
-    statut: HYPOTHESE
-    note: Sert au passage au déficit de Maastricht (intérêts réels + inflation × dette de l'année précédente).
-
 # --- RUI ------------------------------------------------------------------------
 rui:
   montant:
@@ -784,3 +769,16 @@ renouvelables:
   soutien_2029: {valeur: 10.67, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149 (prévision 2027, gardée en 2029 par prudence)"}
   derniere_signature: {valeur: 2028, unite: annee, statut: DECISION}
   duree_contrats: {valeur: 20, unite: sans_unite, statut: SOURCE, source: "Cour des comptes, mars 2026"}
+
+# --- Calendrier 2027-2028 (feuille Calendrier budgétaire) ---------------------------
+calendrier:
+  dette_fin_2026_pib: {valeur: 1.193, unite: taux, statut: SOURCE, source: "Prévision de Bercy, septembre 2026 (119,3 % du PIB)"}
+  deficit_tendanciel_2027_2028: {valeur: 0.05, unite: taux, statut: SOURCE, source: "PLF 2027 : 5 % en 2027 ; 2028 gardé au même niveau (prudence)"}
+  mesures_2028:
+    valeur: {fin_impots_production_is: -24, tva_ecologique: 0, retraites_actuels: 7, dividendes_fonds: 0, ia_education: -0.7}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Md€ (Calendrier B8:B12). La fin des impôts de production (−24) est un « écart du modèle » saisi, à recalculer depuis les recettes.
+  dotations_collectivites: {valeur: 90, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "≈ 54 Md€ de concours et ≈ 40 Md€ de fractions de TVA."}
+  part_dotations_versee: {valeur: 0, unite: taux, statut: DECISION, note: "Fin des dotations dès la bascule de 2029."}
+  inflation: {valeur: 0.018, unite: taux, statut: HYPOTHESE, note: "Objectifs!B8 ; sert au passage en euros constants de la dette et au déficit de Maastricht."}
