@@ -166,3 +166,98 @@ alignement:
     unite: sans_unite
     statut: HYPOTHESE
     note: Militaires = même baisse que les civils, faute de détail. CNRACL ≈ 37,65 % du traitement en 2026.
+
+# --- Épargne obligatoire et fonds ----------------------------------------------
+epargne:
+  taux_plein:
+    valeur: 0.10
+    unite: taux
+    statut: DECISION
+    note: Part du salaire net après impôt (Total!B62).
+  multiple_smic_taux_plein:
+    valeur: 2
+    unite: sans_unite
+    statut: DECISION
+    note: 0 % au SMIC, taux plein à 2 SMIC, linéaire entre les deux (Total!B74).
+  contribution_transition:
+    valeur: 0.0
+    unite: taux
+    statut: DECISION
+    note: Part des 10 % versée à l'État (Total!B126) ; la clause de trajectoire l'active.
+  cout_smic_mensuel:
+    valeur: 1930
+    unite: eur_mois
+    annee_euros: 2026
+    statut: SOURCE
+    source: Coût employeur d'un temps plein au SMIC, juin 2026 (Total!B73)
+  rendement_fonds:
+    valeur: 0.0233
+    unite: taux
+    statut: DECISION
+    note: Rendement réel net de frais, prudent publié (Budget État 2026!B86, v225).
+  annees_carriere:
+    valeur: 43
+    unite: sans_unite
+    statut: HYPOTHESE
+  taux_emploi_carriere:
+    valeur: 0.75
+    unite: taux
+    statut: HYPOTHESE
+  part_rente_viagere:
+    valeur: 0.5
+    unite: taux
+    statut: DECISION
+  age_acces_socle:
+    valeur: 67
+    unite: sans_unite
+    statut: DECISION
+  gompertz_a:
+    valeur: 1.126434642571e-05
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Mortalité de Gompertz, paramètre A (Socle actuariel!B12).
+  gompertz_b:
+    valeur: 0.1
+    unite: sans_unite
+    statut: HYPOTHESE
+
+# --- Retraités en régime de croisière -----------------------------------------
+retraites:
+  socle_plein:
+    valeur: 1300
+    unite: eur_mois
+    annee_euros: 2026
+    statut: DECISION
+  rente_annulant_socle:
+    valeur: 2500
+    unite: eur_mois
+    annee_euros: 2026
+    statut: DECISION
+    note: Le socle décroît linéairement avec le revenu du capital, nul à 2 500 €/mois.
+  nombre_retraites:
+    valeur: 17300000
+    unite: sans_unite
+    statut: SOURCE
+    source: DREES 2024, ensemble des régimes (Retraités!B62)
+  socle_exonere:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+  part_imposable_rente:
+    valeur: 0.67
+    unite: taux
+    statut: HYPOTHESE
+    note: Gains seulement ; les versements sont déjà imposés.
+  bornes_rente_annuelle:
+    valeur: [0, 1000, 2500, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 20000, 22000, 25000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 125000, 150000, 200000, 300000, 500000, 1000000, 2000000]
+    unite: eur_an
+    annee_euros: 2026
+    statut: DECISION
+    note: Classes de rente annuelle du fonds (Retraités, colonnes A et B).
+
+# --- Fiscalité du capital -------------------------------------------------------
+capital:
+  flat_tax_dividendes:
+    valeur: 0.33
+    unite: taux
+    statut: DECISION
