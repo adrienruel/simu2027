@@ -77,3 +77,10 @@ def test_impot_croissant():
 
 def test_facteur_public_2023():
     assert facteur(P, 2023, "salaire_public") == pytest.approx(1.03924956063269, abs=1e-12)
+
+
+def test_cle_en_double_refusee(tmp_path):
+    f = tmp_path / "p.yaml"
+    f.write_text("scenarios: [prudent]\ng:\n  x: {valeur: 1, unite: taux, statut: DECISION}\n  x: {valeur: 2, unite: taux, statut: DECISION}\n")
+    with pytest.raises(ErreurParametre):
+        Parametres(f)

@@ -106,7 +106,13 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     etr = p.val("macro.etranger")
     isv = pv["is_investissement"]
     l25 = dict(zip(ANNEES, isv["ligne25"]))
-    sante = {k: dict(zip(ANNEES, v)) for k, v in pv["sante_solde"].items() if not k.startswith("_")}
+    from . import sante as module_sante
+    dep_s = {s_: module_sante.depenses(p, s_) for s_ in SCENARIOS}
+    gf_s = module_sante.garde_fou(p, scenario_retenu)
+    tv = module_sante.tva_sante(p)
+    sante = {"median": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["median"][t] for t in ANNEES},
+             "optimiste": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["optimiste"][t] for t in ANNEES},
+             "tva_prudent": tv["prudent"], "tva_median": tv["median"], "tva_optimiste": tv["optimiste"]}
     carbone = {k: dict(zip(ANNEES, v)) for k, v in pv["carbone_solde"].items() if not k.startswith("_")}
     logement104 = dict(zip(ANNEES, pv["logement_solde"]["serie"]))
     personnes_en_emploi = p.val("inactifs.chomeurs_bit") / p.val("chomage.taux_2026") - p.val("inactifs.chomeurs_bit")

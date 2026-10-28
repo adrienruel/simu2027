@@ -825,3 +825,38 @@ objectifs:
   tva_annees_extinction: {valeur: 5, unite: sans_unite, statut: DECISION}
   tva_rendue_par_bareme: {valeur: false, unite: sans_unite, statut: DECISION, note: "v231 : désactivé."}
   fin_gel_anciennes_pensions: {valeur: 9999, unite: annee, statut: DECISION, note: "9999 = gel sans limite."}
+
+# --- Santé année par année (feuille Santé) ------------------------------------------
+sante_trajectoire:
+  depenses_2024: {valeur: {sante_md: 210, pib_md: 2919.9}, unite: sans_unite, statut: SOURCE, source: "Assurance maladie, cartographie 2024 ; Insee"}
+  scenarios_assurance_maladie:
+    valeur: {tendanciel: 0.007, regulation_volontariste: 0.003, virage_preventif: 0.001, rythme_pib: 0}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Assurance maladie, Charges et produits : hausse de la part du PIB de 2024 à 2030 (points)"
+  promede:
+    valeur: {reference: {part_2011: 0.068, part_2060: 0.088}, vieillissement: {part_2011: 0.068, part_2060: 0.081}}
+    unite: sans_unite
+    statut: SOURCE
+    source: "DG Trésor, modèle PROMEDE"
+  derive_prise_en_compte: {valeur: true, unite: sans_unite, statut: DECISION}
+  scenario_2027_2029: {valeur: regulation_volontariste, unite: sans_unite, statut: HYPOTHESE}
+  pente_phase_1: {valeur: {crise: null, prudent: virage_preventif, median: virage_preventif, optimiste: rythme_pib}, unite: sans_unite, statut: DECISION, note: "DÉCISION du 23 octobre (v221) : le prudent prend la pente du médian."}
+  pente_phase_2: {valeur: {crise: null, prudent: reference, median: vieillissement, optimiste: vieillissement}, unite: sans_unite, statut: SOURCE, source: "DG Trésor, modèle PROMEDE"}
+  derniere_annee_phase_1: {valeur: 2035, unite: annee, statut: HYPOTHESE}
+  montee_mesures: {valeur: {fraude: 4, carence: 1, transports: 2, cures: 1, imagerie: 5, conge_naissance: 1}, unite: sans_unite, statut: HYPOTHESE}
+  options: {valeur: {carence_supplement: {montant: 0.45, comptee: 1}, franchises: {montant: 2.3, comptee: 0}, ald_non_exonerantes: {montant: 0.1, comptee: 0}}, unite: sans_unite, statut: SOURCE, source: "Options sourcées de la feuille Santé (lignes 59 à 61)"}
+  hopitaux_administratifs: {valeur: {postes: 108602, cout_aligne: 42000}, unite: sans_unite, statut: HYPOTHESE}
+  forfait_generalistes: {valeur: {depense_am_2024: 8.3, revalorise_croissance: 1, part_perdue: {crise: null, prudent: 1, median: 0.5, optimiste: 0}}, unite: sans_unite, statut: HYPOTHESE}
+tva_sante_long_terme:
+  produits:
+    valeur:
+      tabac: {recette: 16.4, hausse_prix: calcul_tabac, cout_soins: 16.4}
+      alcool: {recette: calcul, hausse_prix: calcul_alcool, cout_soins: calcul}
+      sucres: {recette: 3.9, hausse_prix: calcul_sucres, cout_soins: 0}
+    unite: sans_unite
+    statut: HYPOTHESE
+  hausse_prix_tabac: {valeur: {prix_apres: 14.7, prix_avant: 12.54}, unite: sans_unite, statut: HYPOTHESE, note: "Écrit dans la formule Santé!B69."}
+  elasticite_prix: {valeur: -0.5, unite: sans_unite, statut: HYPOTHESE}
+  vraie_baisse_consommation: {valeur: {crise: null, prudent: {tabac: 0.7, alcool: 0.9, sucres: 1}, median: {tabac: 0.85, alcool: 0.95, sucres: 1}, optimiste: {tabac: 1, alcool: 1, sucres: 1}}, unite: sans_unite, statut: HYPOTHESE}
+  annees_plein_effet: {valeur: {crise: null, prudent: 20, median: 15, optimiste: 10}, unite: sans_unite, statut: HYPOTHESE}

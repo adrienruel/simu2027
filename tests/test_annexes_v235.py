@@ -46,3 +46,16 @@ def test_ascenseur_social():
 def test_economies_registre():
     from moteur.mesures import economies
     comparer(economies(P), "Économies", 28)
+
+
+@pytest.mark.parametrize("scenario, ligne", [("prudent", 49), ("median", 50), ("optimiste", 51)])
+def test_sante(scenario, ligne):
+    from moteur import sante
+    comparer(sante.depenses(P, scenario), "Santé", ligne)
+
+
+def test_tva_sante():
+    from moteur import sante
+    tv = sante.tva_sante(P)
+    comparer(tv["prudent"], "Santé", 85)
+    comparer(tv["median"], "Santé", 86)

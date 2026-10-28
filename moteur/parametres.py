@@ -16,6 +16,23 @@ class ErreurParametre(ValueError):
     pass
 
 
+class _ChargeurStrict(yaml.SafeLoader):
+    """Refuse les clés en double : YAML garderait silencieusement la dernière."""
+
+
+def _sans_doublon(loader, node, deep=False):
+    vues = set()
+    for k, _ in node.value:
+        cle = loader.construct_object(k, deep=deep)
+        if cle in vues:
+            raise ErreurParametre(f"Clé en double dans le fichier de paramètres : {cle} (ligne {k.start_mark.line + 1})")
+        vues.add(cle)
+    return loader.construct_mapping(node, deep)
+
+
+_ChargeurStrict.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _sans_doublon)
+
+
 @dataclass(frozen=True)
 class Parametre:
     cle: str
@@ -38,7 +55,7 @@ class Parametre:
 
 class Parametres:
     def __init__(self, chemin: Path | str = CHEMIN_DEFAUT):
-        brut = yaml.safe_load(Path(chemin).read_text(encoding="utf-8"))
+        brut = yaml.load(Path(chemin).read_text(encoding="utf-8"), Loader=_ChargeurStrict)
         self.scenarios: list[str] = brut.pop("scenarios")
         self._p: dict[str, Parametre] = {}
         for groupe, contenu in brut.items():

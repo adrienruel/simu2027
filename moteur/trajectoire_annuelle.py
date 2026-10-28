@@ -47,7 +47,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     asc_r, asc_d = {t: v["recettes"] for t, v in asc.items()}, {t: v["depenses"] for t, v in asc.items()}
     from .mesures import economies
     eco = economies(p)
-    sante, gf = serie("sante_prudent"), serie("garde_fou_sante")
+    from . import sante as module_sante
+    sante, gf = module_sante.depenses(p, scenario_retenu), module_sante.garde_fou(p, scenario_retenu)
     from . import objectifs
     anc_p = serie("anciennes_pensions")
     etu = objectifs.rui_etudiants(p)
