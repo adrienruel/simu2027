@@ -485,14 +485,6 @@
   ],
   "_cellules": "Carbone lignes 72 à 74"
  },
- "tva_par_point_eviction": {
-  "valeur": 10.9270376352756,
-  "_cellules": "Total!B70"
- },
- "rui_chomeurs_effectif": {
-  "valeur": 29830120.4819277,
-  "_cellules": "RUI!B29"
- },
  "is_investissement": {
   "investissement": 364.8,
   "b18": 0.742,
@@ -552,12 +544,6 @@
    1
   ],
   "_cellules": "IS investissement B4, B6, B18-B21, ligne 25"
- },
- "fonds_repris": {
-  "b83": 39.716,
-  "d83": 15.213,
-  "total_b71": 1,
-  "_cellules": "Budget État 2026!B83, D83 ; Total!B71"
  },
  "is_investissement_etalement": {
   "b41": [

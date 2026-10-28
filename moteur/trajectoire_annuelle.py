@@ -48,8 +48,12 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     from .mesures import economies
     eco = economies(p)
     sante, gf = serie("sante_prudent"), serie("garde_fou_sante")
-    anc_p, etu = serie("anciennes_pensions"), serie("rui_etudiants")
-    tva2028, gel, rendu = serie("objectifs_b15"), serie("objectifs_b40"), serie("objectifs_b63")
+    from . import objectifs
+    anc_p = serie("anciennes_pensions")
+    etu = objectifs.rui_etudiants(p)
+    tva2028 = {t: objectifs.surcroit_tva_2028(p, t)[0] for t in ANNEES}
+    rendu = {t: objectifs.surcroit_tva_2028(p, t)[1] for t in ANNEES}
+    gel = {t: objectifs.fin_gel(p, t) for t in ANNEES}
     em = pv["emploi_cout_reformes"]
     is_inv = dict(zip(ANNEES, _macro_prov()["is_investissement_etalement"]["b41"]))
     # Renouvelables (Budget État 2026, lignes 136 à 144)

@@ -58,6 +58,21 @@ def flux_epargne_obligatoire(p: Parametres, scenario: str = "prudent") -> float:
     return total
 
 
+def tva_par_point_eviction(p: Parametres, scenario: str = "prudent") -> float:
+    """Total!B70 : TVA en plus si toute l'épargne obligatoire évinçait l'épargne volontaire (Md€)."""
+    from .recettes.tva_menages import budget_actif
+    total = 0.0
+    d = effectifs_prive_2026(p)
+    for c, n in zip(d.milieux, d.effectifs):
+        b = budget_actif(c, p, scenario, part_rui_salarie(c, p))
+        total += n * (b["oblig"] * b["taux"] / (1 + b["taux"]) if b["volontaire"] > 0 else 0.0)
+    d, a = effectifs_public_2026(p), facteur_alignement_public(p)
+    for c, n in zip(d.milieux, d.effectifs):
+        b = budget_actif(c * a, p, scenario, part_rui_agent(c))
+        total += n * (b["oblig"] * b["taux"] / (1 + b["taux"]) if b["volontaire"] > 0 else 0.0)
+    return total / 1e9
+
+
 def _montee(t, annees):
     return min(1.0, (t - 2029 + 1) / annees)
 
@@ -80,8 +95,13 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     participations = {t: v["participations"] for t, v in cout_transition(p).items()}
     j20 = entreprises.is_beneficiaires(p) / 1e9
     s17 = p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
-    fr = pv["fonds_repris"]
-    b24 = flux_epargne_obligatoire(p) / 1e9 * (1 - p.val("epargne.contribution_transition")) - (fr["b83"] - fr["d83"]) * fr["total_b71"]
+    from .depenses.statique import subventions_restees
+    from .depenses import budget_etat
+    cr = {x["mission"]: float(x["credits"]) for x in budget_etat._missions() if x["credits"] != "calcul"}
+    repris = (cr["Infrastructures et services de transport"] + cr["Service public de l’énergie, énergie et climat"]
+              + cr["Investir pour la France de 2030"] + p.val("fonds_reprises.investissements_locaux_rentables"))
+    # Part des investissements publics reprise par le fonds : 100 % (Total!B71)
+    b24 = flux_epargne_obligatoire(p) / 1e9 * (1 - p.val("epargne.contribution_transition")) - (repris - subventions_restees(p)) * 1.0
     rendement = p.val("epargne.rendement_fonds")
     etr = p.val("macro.etranger")
     isv = pv["is_investissement"]
@@ -89,7 +109,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     sante = {k: dict(zip(ANNEES, v)) for k, v in pv["sante_solde"].items() if not k.startswith("_")}
     carbone = {k: dict(zip(ANNEES, v)) for k, v in pv["carbone_solde"].items() if not k.startswith("_")}
     logement104 = dict(zip(ANNEES, pv["logement_solde"]["serie"]))
-    rui_ch = pv["rui_chomeurs_effectif"]["valeur"] * p.val("rui.montant") * 12 / 1e9
+    personnes_en_emploi = p.val("inactifs.chomeurs_bit") / p.val("chomage.taux_2026") - p.val("inactifs.chomeurs_bit")
+    rui_ch = personnes_en_emploi * p.val("rui.montant") * 12 / 1e9
     va = pv["valeur_ajoutee_par_emploi"]["valeur"]
 
     # Taux d'intérêt (lignes 204 à 222)
@@ -107,6 +128,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
 
     from .trajectoire_annuelle import _prov as tp
     traj_anc_2029 = tp()["anciennes_pensions"]["serie"][0]
+    tva_point = tva_par_point_eviction(p)
     out = {}
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent se cale sur le médian
         sc = Scenario(s)
@@ -171,7 +193,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                      + (pib_ia + pib_adopt) * q)
             if s == "prudent":
                 solde += (sante["tva_prudent"][t] + pib_inv * part_budget + carbone["prudent"][t]
-                          + (m("eviction", s) - m("eviction", scenario_retenu)) * pv["tva_par_point_eviction"]["valeur"] * (1 + tend0) ** n)
+                          + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
                 # Clause de trajectoire : ramène le prudent sur le déficit du médian
                 interets_t = taux_reel(t, s) * dette_prec
                 pib_t = pib0[t] + pib
@@ -193,7 +215,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                                                          "reste": montant - mesures}
             else:
                 solde += (sante[s][t] + sante[f"tva_{s}"][t] + (pib_tend + pib_ecole) * q + pib_inv * part_budget + carbone[s][t]
-                          + (m("eviction", s) - m("eviction", scenario_retenu)) * pv["tva_par_point_eviction"]["valeur"] * (1 + tend0) ** n)
+                          + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
                 mesures = 0.0
             solde_total = solde + mesures
             interets = taux_reel(t, s) * dette_prec

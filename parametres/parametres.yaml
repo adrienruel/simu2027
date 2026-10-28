@@ -807,3 +807,21 @@ ascenseur:
     unite: sans_unite
     statut: HYPOTHESE
     note: Dépense par élève = 13 000 × 0,6, écrit dans la formule B95.
+
+# --- Divers (RUI des étudiants, chômage, fonds, gel) -------------------------------
+etudiants_rui:
+  boursiers_rui_plein: {valeur: 656000, unite: sans_unite, statut: SOURCE, source: "Étudiants boursiers sur critères sociaux (Objectifs!B44)"}
+  juste_au_dessus_demi_rui: {valeur: 656000, unite: sans_unite, statut: HYPOTHESE, note: "Autant que de boursiers (Objectifs!B45 = B44)."}
+  bourses_actuelles: {valeur: 2.3, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Bourses sur critères sociaux, budget 2026"}
+  duree_etudes: {valeur: 5, unite: sans_unite, statut: HYPOTHESE}
+  part_chez_parents: {valeur: 0.33, unite: taux, statut: HYPOTHESE, note: "Demi-RUI pour l'étudiant logé chez ses parents (Budget État!C110)."}
+chomage:
+  taux_2026: {valeur: 0.083, unite: taux, statut: SOURCE, source: "Insee, 2e trimestre 2026 (Mayotte comprise)"}
+fonds_reprises:
+  investissements_locaux_rentables: {valeur: 20, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "10 Md€ d'origine + 10 Md€ « même doctrine » (Collectivités D17, C64)."}
+objectifs:
+  surcroit_tva_2028: {valeur: 0, unite: md_eur, annee_euros: 2026, statut: DECISION, note: "v231 : plus de hausse de TVA en 2028 (Calendrier!B9)."}
+  tva_derniere_annee_pleine: {valeur: 2032, unite: annee, statut: DECISION}
+  tva_annees_extinction: {valeur: 5, unite: sans_unite, statut: DECISION}
+  tva_rendue_par_bareme: {valeur: false, unite: sans_unite, statut: DECISION, note: "v231 : désactivé."}
+  fin_gel_anciennes_pensions: {valeur: 9999, unite: annee, statut: DECISION, note: "9999 = gel sans limite."}
