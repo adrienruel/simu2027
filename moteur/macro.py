@@ -4,15 +4,11 @@ Chaque scénario part du PIB de référence (économie de 2026 placée en 2029, 
 solde primaire hors effets macro, puis ajoute des effets sur le PIB et sur le solde ; la charge de la
 dette et la dette se calculent année par année.
 
-Les termes venant de feuilles pas encore portées sont lus dans reference/entrees_provisoires_macro.json.
-
 FIDELITE_V235 regroupera les écarts de la v235 reproduits volontairement (aucun à ce jour dans cette feuille).
 """
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass, field
-from pathlib import Path
 
 from .parametres import Parametres
 from .recettes.total import recettes_nouveau_systeme
@@ -25,13 +21,8 @@ from .unites import facteur
 
 ANNEES = list(range(2029, 2074))
 SCENARIOS = ("prudent", "median", "optimiste")
-PROVISOIRES = Path(__file__).resolve().parents[1] / "reference" / "entrees_provisoires_macro.json"
 
 FIDELITE_V235: dict[str, bool] = {}
-
-
-def _prov():
-    return json.loads(PROVISOIRES.read_text(encoding="utf-8"))
 
 
 @dataclass
@@ -78,7 +69,7 @@ def _montee(t, annees):
 
 
 def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scenario]:
-    pv = _prov()
+    pv: dict = {}
     from .emploi import entrees_macro, population_active
     pv.update(entrees_macro(p))
     from .hauts_revenus import reactions, baisse_revenus_declares
@@ -142,8 +133,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     gain_etalement = {t: c8[t] - c16[t] for t in ANNEES}
     etalement_declenche = None
 
-    from .trajectoire_annuelle import _prov as tp
-    traj_anc_2029 = tp()["anciennes_pensions"]["serie"][0]
+    from .anciennes_pensions import recette_nette
+    traj_anc_2029 = recette_nette(p)[2029]
     tva_point = tva_par_point_eviction(p)
     out = {}
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent se cale sur le médian
@@ -196,7 +187,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             # Réactions à l'impôt et hauts revenus
             ri = pv["reactions_impot"][s]
             s_react = -ri["montant"] * min(1, (n + 1) / ri["montee"]) * (1 + tend0) ** n
-            pib_hr = -pv["baisse_revenus_declares"][s] * m("part_reelle_hauts_revenus", s) * min(1, (n + 1) / pv["reactions_impot"]["prudent" if s == "prudent" else s]["montee"]) * (1 + tend0) ** n
+            pib_hr = -pv["baisse_revenus_declares"][s] * m("part_reelle_hauts_revenus", s) * min(1, (n + 1) / pv["reactions_impot"][s]["montee"]) * (1 + tend0) ** n
             # Investissement des entreprises
             k_inv = k_inv * (1 - m("usure_capital", s)) - m("elasticite_invest", s) * (
                 cout_capital - isv["b4"] * isv["b20"][s] * isv["b21"] * l25[t]) * isv["investissement"] * _montee(t, m("montee_invest", s))

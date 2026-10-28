@@ -10,7 +10,6 @@ from ..parametres import Parametres
 from ..tva import consommation_ht, taux_pour_revenu
 from .impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
 from .retraites_croisiere import classes_retraites
-from ..distribution import lire
 from ..collectivites import taux_impot_local
 
 

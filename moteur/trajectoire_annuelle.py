@@ -6,8 +6,6 @@ Le solde primaire hors effets macro qui en résulte alimente le module macro.
 """
 from __future__ import annotations
 
-import json
-from pathlib import Path
 
 from .parametres import Parametres
 from .recettes.total import recettes_nouveau_systeme
@@ -16,20 +14,9 @@ from .depenses import ia_administration
 from .retraites_transition import cout_transition, cout_socle, _csv as _csv_retraites
 
 ANNEES = list(range(2029, 2074))
-PROVISOIRES = Path(__file__).resolve().parents[1] / "reference" / "entrees_provisoires_trajectoire.json"
-
-
-def _prov():
-    return json.loads(PROVISOIRES.read_text(encoding="utf-8"))
-
-
-def _macro_prov():
-    from .macro import _prov as mp
-    return mp()
 
 
 def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
-    pv = _prov()
     g = p.val("macro.tendance", "prudent")
     infl = p.val("calendrier.inflation")
     rec = recettes_nouveau_systeme(p)["total"] / 1e9
@@ -39,7 +26,6 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     socle = cout_socle(p)
     ia = ia_administration.economie_nette(p)
     anc = {int(x["annee"]): x for x in _csv_retraites("ancien_systeme_retraites.csv")}
-    serie = lambda cle: dict(zip(ANNEES, pv[cle]["serie"]))
     from .recettes import successions, autres
     succ = successions.supplement(p, autres.ligne_8_successions(p) / 1e9)
     from .ascenseur_social import annuel as ascenseur
@@ -50,7 +36,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     from . import sante as module_sante
     sante, gf = module_sante.depenses(p, scenario_retenu), module_sante.garde_fou(p, scenario_retenu)
     from . import objectifs
-    anc_p = serie("anciennes_pensions")
+    from .anciennes_pensions import recette_nette
+    anc_p = recette_nette(p)
     etu = objectifs.rui_etudiants(p)
     tva2028 = {t: objectifs.surcroit_tva_2028(p, t)[0] for t in ANNEES}
     rendu = {t: objectifs.surcroit_tva_2028(p, t)[1] for t in ANNEES}

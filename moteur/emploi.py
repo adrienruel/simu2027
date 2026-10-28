@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import math
 
-from .distribution import lire
 from .epargne import taux_epargne
 from .impot_unique import impot
 from .parametres import Parametres

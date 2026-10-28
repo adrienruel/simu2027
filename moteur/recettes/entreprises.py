@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import csv
 
-from ..distribution import DONNEES, lire
+from ..distribution import DONNEES
 from ..parametres import Parametres
 from ..systeme_actuel import consommation_actuelle_ht, net_actuel
 from .impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
@@ -33,7 +33,7 @@ def _capte(net_act: float, conso_nouvelle: float, p: Parametres) -> float:
 def benefice_capte(p: Parametres, scenario: str = "prudent") -> float:
     """Bénéfice supplémentaire total capté (€) — Entreprises & Dividendes!S13."""
     total = 0.0
-    d, orig = effectifs_prive_2026(p), lire("salaries_prive.csv")
+    d = effectifs_prive_2026(p)
     for c, n, an in zip(d.milieux, d.effectifs, _net_avant_aides("salaries_prive.csv")):
         total += n * _capte(net_actuel(an, p, False), budget_actif(c, p, scenario, part_rui_salarie(c, p))["conso_ht"], p)
     d, a = effectifs_public_2026(p), facteur_alignement_public(p)

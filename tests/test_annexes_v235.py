@@ -115,3 +115,16 @@ def test_economies_missions():
     e = em.economies(P)
     assert e["missions"] == pytest.approx(VAL[("Budget État 2026", "D105")], abs=0.01)
     assert e["autres"] == pytest.approx(VAL[("Budget État 2026", "D111")], abs=0.01)
+
+
+def test_anciennes_pensions():
+    from moteur.anciennes_pensions import recette_nette
+    comparer(recette_nette(P), "Anciennes pensions", 85)
+
+
+def test_plus_aucune_entree_provisoire():
+    """Étape 1 : le moteur ne lit plus aucune valeur calculée de la v235 (seuls les tests le font)."""
+    racine = Path(__file__).resolve().parents[1] / "moteur"
+    for f in racine.rglob("*.py"):
+        texte = f.read_text(encoding="utf-8")
+        assert "arbre" not in texte and "entrees_provisoires" not in texte, f

@@ -10,7 +10,7 @@ import csv
 import math
 
 from .distribution import DONNEES
-from .epargne import capital_par_euro_de_rente, revenu_par_euro_de_capital
+from .epargne import revenu_par_euro_de_capital
 from .impot_unique import impot
 from .parametres import Parametres
 

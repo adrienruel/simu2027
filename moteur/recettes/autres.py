@@ -3,9 +3,9 @@ from __future__ import annotations
 
 from ..parametres import Parametres
 from ..systeme_actuel import consommation_actuelle_ht, net_actuel
-from ..tva import accises_calculees, produits, taux_effectifs
+from ..tva import accises_calculees, taux_effectifs
 from .impot_salaires import effectifs_prive_2026, effectifs_public_2026
-from . import entreprises, tva_menages
+from . import tva_menages
 from ..unites import facteur
 
 MD = 1e9

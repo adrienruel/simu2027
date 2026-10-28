@@ -41,7 +41,6 @@ def is_local(p: Parametres) -> dict[str, float]:
 
 def besoin(p: Parametres) -> dict[str, float]:
     """Besoin de recettes locales nouvelles (Md€, ligne 27)."""
-    from .depenses.statique import autonomie
     from .unites import facteur
     conc = p.val("collectivites_detail.concours_etat_aujourdhui")
     part_om = p.val("budget_statique.concours_outre_mer")["part"]

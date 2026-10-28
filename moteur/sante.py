@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from .parametres import Parametres
 from .depenses.statique import sante_statique, economies_sante_a_terme
-from .depenses import ia_administration
 from .tva import produits as produits_tva
 
 ANNEES = list(range(2029, 2074))

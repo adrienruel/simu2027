@@ -22,7 +22,6 @@ def prix(p: Parametres, t: int) -> float:
 
 def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, float]]:
     """Effet sur le solde par scénario (Md€), lignes 72 à 74."""
-    from .recettes.autres import carbone_importe_2029
     r5 = p.val("carbone.recette_2029_nette_is")
     g = p.val("macro.tendance", "prudent")
     p0 = prix_carbone(p)

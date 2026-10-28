@@ -1,14 +1,10 @@
 """Dépenses statiques du nouveau système (feuille Total, lignes 23 à 44), en euros de 2026.
 
-Les termes dont la feuille n'est pas encore portée sont lus dans reference/entrees_provisoires.yaml.
 """
 from __future__ import annotations
 
-from pathlib import Path
 
-import yaml
 
-from ..distribution import lire
 from ..parametres import Parametres
 from ..unites import facteur
 from ..recettes import tva_menages
@@ -19,11 +15,6 @@ from . import budget_etat, ia_administration, economies_missions, quotient
 from ..retraites_transition import cout_transition_moyen
 
 MD = 1e9
-PROVISOIRES = Path(__file__).resolve().parents[2] / "reference" / "entrees_provisoires.yaml"
-
-
-def provisoire(cle: str) -> float:
-    return yaml.safe_load(PROVISOIRES.read_text(encoding="utf-8"))[cle]["valeur"]
 
 
 def economies_sante_a_terme(p: Parametres, scenario: str = "prudent") -> float:
