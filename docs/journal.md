@@ -36,7 +36,19 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - **IA dans l'administration** reproduite (masse de gestion ministère par ministère, non-remplacement, plafond 40 %).
 - Encore provisoires (valeurs v235 lues dans `reference/entrees_provisoires.yaml`) : économies sur les missions conservées (Total!B121) et quotient familial (Total!B122).
 
+## 29 octobre 2026 — Effets macro et clause de trajectoire
+
+- **Feuille Effets macro reproduite pour les trois scénarios, 2029-2073** (`moteur/macro.py`) : emploi, seniors, ajustement budgétaire, capital du fonds (avec la part placée à l'étranger qui dépend de la dette), logement, érosion de l'IS, fraude à la TVA, productivité, tendance, école, IA et adoption, réactions à l'impôt, investissement des entreprises, carbone, éviction de l'épargne, taux d'intérêt, dette, déficit de Maastricht. Écart maximal : 10⁻¹¹ Md€.
+- **Clause de trajectoire reproduite** : prudent avant clause 5,23 / 5,18 / 4,07 %, mesures (étalement définitif, contribution jusqu'à 5 points, baisse du RUI jusqu'au RSA), prudent publié 4,67 / 3,81 / 2,31 %.
+- Les trois scénarios sont calculés ensemble à chaque appel (fin de la limite I5 de l'audit pour la trajectoire macro).
+- Entrées encore provisoires (`reference/entrees_provisoires_macro.json`) : emplois et gain par emploi (Emploi), réactions à l'impôt (Hauts revenus), écarts de santé, carbone dynamique, logement, IS investissement, dette de départ et transferts aux collectivités (Calendrier), solde primaire hors effets macro (Trajectoire, lignes 18 à 22 et 43).
+- Mise en garde de méthode : en lisant des formules tronquées à l'affichage, j'ai cru un moment que le médian et l'optimiste omettaient le carbone ; la formule complète les inclut. Les constats du journal ont été revérifiés sur formules complètes.
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Coût du capital (Effets macro!B273:D273)** : trois constantes sans libellé retranchées dans les formules (0,047 / 0,055 / 0,121 selon le scénario).
+- **« Prudent avant clause »** : c'est le déficit d'une seule année sans les mesures, avec la dette et les intérêts de la trajectoire après clause, pas une trajectoire entière sans clause. L'écart s'accumule : la vraie trajectoire sans clause est un peu plus haute que ces chiffres.
+
 
 - **Constantes encore écrites dans des formules** (en plus de celles déjà signalées) : AAH 14,6 Md€ (RUI!B17), aide sociale à l'autonomie 20,2 Md€ (Santé!B103), heures d'APA 4,29/25,18 (Santé!B105), gestion de la Sécurité sociale 14,63 Md€ et 48 632 agents de France Travail (Sécurité sociale!B15, C22), contribution à l'UE 30,9/1,018, crédits du programme 155 (2,0594 Md€, Budget État!B133).
 - **Gestion de l'assurance maladie** : sa part conservée (Sécurité sociale!C13) est calculée à partir du gain d'IA de France Travail. La baisse de 30 % annoncée pour la gestion de la Sécurité sociale passe donc par un ratio propre à France Travail.
