@@ -1,0 +1,60 @@
+QUOTIENT FAMILIAL DANS L’IMPÔT UNIQUE — coût d’une demi-part par enfant, plafonnée								QUOTIENT CONJUGAL — imposition commune des couples (deux parts)
+Principe : le revenu du parent est divisé par son nombre de parts (1 + 0,5 par enfant), le barème s’applique à ce quotient, puis l’impôt est multiplié par le nombre de parts. Le gain par enfant est plafonné. Calculé sur la distribution des salaires du modèle (privé et public).								Principe : les deux revenus sont additionnés, divisés par deux, le barème s’applique à cette moitié, puis l’impôt est doublé. Deux couples au même revenu total paient le même impôt, quelle que soit la répartition entre les conjoints. Sans plafond, comme aujourd’hui.
+Parts par enfant	0.5			Règle actuelle pour les deux premiers enfants. La part entière du troisième enfant et la demi-part du parent isolé ne sont pas chiffrées.				Couples mariés ou pacsés d’âge actif avec au moins un salarié	7000000	HYPOTHÈSE (ordre de grandeur : ≈ 15 millions de couples, dont ≈ 5 de retraités, ≈ 80 % mariés ou pacsés, hors indépendants). À vérifier.
+Plafond du gain par demi-part (€/an)	1000			DÉCISION du 8 octobre : 1 000 €. Aujourd’hui : environ 1 800 €.				Part des couples à un seul revenu	0.25	HYPOTHÈSE. Fourchette testée : 20 à 30 %.
+Enfants mineurs	14000000			Effectifs de la feuille RUI.				Gain moyen d’un couple à un seul revenu (€/an)	8510	RÉSULTAT DE SIMULATION (300 000 couples tirés dans la distribution des salaires du modèle, barème de la feuille Total). Valeur figée : à recalculer si le barème change.
+Part des enfants dont un parent paie l’impôt unique	0.85			HYPOTHÈSE : environ 12 à 15 % des enfants vivent dans un foyer sans emploi. À vérifier.				Gain moyen d’un couple à deux revenus (€/an)	580	RÉSULTAT DE SIMULATION, corrélation de 0,4 entre les revenus des conjoints. Fourchette : 400 (corrélation 0,6) à 740 (0,2).
+Quotient familial appliqué au budget (1) ou simple chiffrage (0)	1			DÉCISION du 8 octobre : appliqué, coût assumé. Le coût s’ajoute aux dépenses (feuille Total, ligne 122).				Couples de retraités : coût forfaitaire (Md€)	1	ORDRE DE GRANDEUR FRAGILE : la plupart des pensions sont dans la tranche à 20 %, donc le gain est faible.
+								Quotient conjugal appliqué au budget (1) ou simple chiffrage (0)	1	DÉCISION du 8 octobre : appliqué.
+Gain moyen par enfant, plafond appliqué (€/an)	956.964674113422
+Coût du quotient familial (Md€/an)	11.3878796219497			LIMITE : suppose que les enfants sont répartis comme les salariés dans l’échelle des revenus, et rattachés à un seul parent. Sans réaction des comportements.				Coût du quotient conjugal (Md€/an)	18.9375	Fourchette selon les hypothèses : 15 à 25 Md€. ATTENTION : le conjoint sans revenu peut aussi toucher le RUI ; sans règle de ressources du couple, le foyer à un seul revenu cumule les deux avantages.
+SELON LE PLAFOND								RUI DU CONJOINT SANS REVENU : SOUS CONDITION DE RESSOURCES DU COUPLE
+Plafond (€/an par demi-part)	Gain moyen par enfant (€/an)	Coût (Md€/an)						Inactifs vivant en couple avec un salarié	1300000	HYPOTHÈSE : environ un tiers des 3,8 millions d’inactifs de la feuille RUI. À vérifier.
+500	482.524382375515	5.74204015026863		Sans plafond, une demi-part vaut 1 250 €/an au SMIC et 4 850 €/an au salaire médian : le barème monte vite (50 % dès 24 000 €), donc le plafond est indispensable.				Complément de RUI moyen d’un inactif (€/an)	6100.34378947368	Calculé : coût du complément des inactifs / effectif (feuille RUI).
+1000	956.964674113422	11.3878796219497						Part du complément supprimée par la condition de ressources	0.75	HYPOTHÈSE : le RUI s’éteint quand le revenu du conjoint dépasse deux RUI par personne ; les couples modestes en gardent une partie.
+1500	1404.09883597378	16.708776148088						Part nette de la TVA perdue	0.86	Même ratio que pour le RUI des étudiants.
+1800	1667.75663044478	19.8463039022929						Économie sur le RUI des inactifs (Md€/an)	5.11513826747369	DÉCISION du 8 octobre : le RUI du conjoint dépend des revenus du couple. Les conjoints au chômage ne sont pas concernés par ce chiffrage (ils gardent le RUI plein) : à trancher.
+3000	2671.47893588793	31.7905993370663
+1000000	5640.94249023356	67.1272156337793		Dernière ligne : sans plafond.
+AVEC LE RUI DES ENFANTS
+Taux du RUI par enfant (parent isolé : le double)	Coût du RUI des enfants (Md€)	Économie par rapport à 25 % (Md€)	Solde avec le quotient au plafond retenu (Md€, + = économie nette)
+0.25	42.075	0	-11.3878796219497	Hors TVA perdue sur la consommation des familles. Aides actuelles pour comparaison : allocations par enfant 26,0 Md€, garde 7,3 Md€ (Drees, 2024), quotient familial ≈ 12 Md€ (ordre de grandeur). DÉCISION du 8 octobre : RUI des enfants à 15 % (30 % pour l’enfant d’un parent isolé), le quotient familial prenant le relais pour les familles qui travaillent. Le tableau ci-contre garde 25 % comme référence.
+0.2	33.66	8.415	-2.97287962194972
+0.15	25.245	16.83	5.44212037805029
+DÉTAIL PAR CLASSE DE REVENU (gain non plafonné d’une demi-part, €/an)
+Classe de coût employeur	Effectif privé	Revenu imposable privé	Gain privé	Effectif public	Revenu imposable public (aligné)	Gain public
+0–10 k€	394304.272364138	7500	0	0	6486.36268890047	0
+10–12,5 k€	331264.240539573	11250	0	0	9729.5440333507	0
+12,5–15 k€	375799.816002342	13750	223.75	0	11891.6649296509	0
+15–17,5 k€	400790.859393054	16250	671.25	0	14053.785825951	278.127662845232
+17,5–20 k€	410354.753028665	18750	1118.75	0	16215.9067222512	665.14730328296
+20–22,5 k€	416467.002665479	21250	1118.75	0	18378.0276185513	1052.16694372069
+22,5–25 k€	905475.105806545	23750	1118.75	0	20540.1485148515	1118.75
+25–27,5 k€	1328074.87200379	26250	1998.5	0	22702.2694111516	1118.75
+27,5–30 k€	1216658.66837845	28750	2976	0	24864.3903074518	1456.72661021365
+30–32,5 k€	1043113.490531	31250	3953.5	0	27026.511203752	2302.11588066701
+32,5–35 k€	1035657.48803725	33750	5088.5	0	29188.6321000521	3147.50515112037
+35–37,5 k€	981846.033482292	36250	6193.25	47137.0206294109	31350.7529963523	3992.89442157373
+37,5–40 k€	1092961.0829695	38750	6418.25	152336.245951883	33512.8738926524	4974.44234236582
+40–45 k€	1351332.78835448	42500	6755.75	338770.670404544	36756.0552371027	6238.79497133924
+45–50 k€	1426623.67719341	47500	7205.75	489581.303816061	41080.297029703	6627.97673267327
+50–55 k€	1350952.30807169	52500	7250.75	583712.781081701	45404.5388223033	7017.1584940073
+55–60 k€	1174901.49752286	57500	7250.75	624774.428426389	49728.7806149036	7250.75
+60–65 k€	919459.934912581	62500	7250.75	614903.034695878	54053.0224075039	7250.75
+65–70 k€	869696.777273174	67500	7250.75	662295.370497698	58377.2642001042	7250.75
+70–80 k€	899578.866115211	75000	7250.75	787163.053472091	64863.6268890047	7250.75
+80–90 k€	744447.413709223	85000	7250.75	603298.857760801	73512.1104742053	7250.75000000001
+90–100 k€	553726.996815594	95000	7250.75	364480.998132259	82160.5940594059	7250.75000000001
+100–110 k€	373505.373304072	105000	7250.75	205327.533534284	90809.0776446066	7250.75
+110–120 k€	348946.018018872	115000	7250.74999999999	128176.764579787	99457.5612298072	7250.75
+120–150 k€	340438.406504687	135000	7250.75	74496.0492908072	116754.528400208	7250.75000000001
+150–175 k€	202798.205412556	162500	7250.75	19971.4587478177	140537.85825951	7250.75
+175–200 k€	166306.244606336	187500	7250.75	3022.05764438508	162159.067222512	7250.75
+200–250 k€	178043.3419152	225000	7250.75	469.641176684478	194590.880667014	7250.75
+250–300 k€	83168.4242299435	275000	7250.74999999997	56.2934062679226	237833.298593017	7250.75
+300–400 k€	45786.3790731544	350000	7250.75	1.43675125335614	302696.925482022	7250.75
+400–500 k€	19823.3570650597	450000	7250.75	17.6561096042476	389181.761334028	7250.75
+500–750 k€	12007.7610367444	625000	7250.75	6.77179451105673	540530.224075039	7250.75000000006
+750 k€–1 M€	3712.54806409038	875000	7250.74999999988	0.572095884695653	756742.313705055	7250.75000000006
+1–2 M€	1710.10129732266	1400000	7250.75000000012	0	1210787.70192809	7250.75
+>2 M€	263.894301672704	3000000	7250.75	0	2594545.07556019	7250.75

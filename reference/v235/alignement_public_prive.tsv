@@ -1,0 +1,15 @@
+ALIGNEMENT DU COÛT EMPLOYEUR PUBLIC SUR LE PRIVÉ, PAR VERSANT
+Principe : le nouveau coût employeur d'un agent = son brut × (1 + taux de charges patronales d'un employeur privé). Le facteur d'alignement compare ce coût au coût employeur public actuel. Taux exprimés en % du brut total (traitement + primes), ordres de grandeur.
+Taux de charges patronales privé équivalent (% du brut)	0.4	Moyenne pour des salaires de 1,5 à 3 SMIC, après allègements
+Versant	Part de la masse salariale publique	Charges patronales actuelles (% du brut)	Dont retraite	Facteur d’alignement	Variation du coût employeur
+État — civils (enseignants, police, administrations)	0.43	0.85	Recalculé par la feuille Budget État 2026 : CAS retiré, charges alignées sur le privé, calé sur les rémunérations d’activité de l’État	0.803960396039604	-0.196039603960396
+État — militaires	0.05	1.1	Même baisse moyenne que les civils, faute de détail	0.803960396039604	-0.196039603960396
+Territoriale (communes, régions)	0.29	0.52	CNRACL ≈ 37,65 % du traitement en 2026	0.921052631578947	-0.0789473684210527
+Hospitalière	0.23	0.52	CNRACL ≈ 37,65 % du traitement en 2026	0.921052631578947	-0.0789473684210527
+Moyenne pondérée (toute la fonction publique)				0.864848358520063	-0.135151641479938
+Paramètre utilisé par le modèle (feuille Fonctionnaires, AY1) — relié à la moyenne pondérée ci-dessus					-0.135151641479938
+Exemple : professeur certifié, 8e échelon (brut 2 980 €/mois)
+Coût employeur actuel (€/mois)	5592
+Coût aligné, hypothèse uniforme −15 % (€/mois)	4753.2
+Coût aligné par versant : brut × (1 + taux privé) (€/mois)	4172
+Sources : DGAFP, rapport annuel 2025 (effectifs 2023 : FPE ≈ 2,57 M, FPT 1,99 M, FPH 1,24 M ; salaires nets moyens 2 886 €, 2 254 €, 2 842 €), d'où les parts de masse salariale ; décret CAS Pensions 2025 (78,28 %) ; CNRACL : +3 points par an de 2025 à 2028 ; taux privé : ordre de grandeur (Urssaf).

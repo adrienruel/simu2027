@@ -1,0 +1,48 @@
+SCÉNARIO DE CRISE — valeurs figées du 28 octobre 2026, régénérées par recalcul complet du modèle v235 (paramètres ci-dessous appliqués au modèle, puis lecture du scénario prudent)
+DÉCISION d'Adrien du 17 octobre : quatre scénarios — crise, prudent, médian, optimiste. Le scénario de crise est l'ancien prudent : toutes les hypothèses à leur valeur la plus défavorable en même temps. Un test rapide (chaque hypothèse tirée au hasard entre ses valeurs, celles de croissance liées entre elles) le place au-delà d'une chance sur cent. Il n'a pas d'objectif de déficit : il montre ce qui se passe si tout va mal, et ce que le Parlement voterait. Pour le recalculer, recopier les valeurs de la colonne B ci-dessous dans la colonne B de la feuille Effets macro (et les cellules indiquées), puis prendre le scénario prudent.
+v235 (28 octobre 2026) : régénéré par la procédure scriptée (paramètres de la colonne B recopiés, recalcul, lecture du bloc prudent de la feuille Effets macro). Résultat : 4.68 / 3.81 / 2.64 % en 2029 / 2032 / 2037, dette au plus haut 132.6 % en 2044, chômage 2037 8.27 %. Les valeurs figées de la v232 ne se retrouvaient pas exactement avec le modèle v232 (PIB plus bas de ≈ 8 Md€ à partir de 2032) : elles venaient d'un état antérieur du modèle.
+Année	2029	2030	2031	2032	2033	2034	2035	2036	2037	2038	2039	2040	2041	2042	2043	2044	2045	2046	2047	2048	2049	2050	2051	2052	2053	2054	2055	2056	2057	2058	2059	2060	2061	2062	2063	2064	2065	2066	2067	2068	2069	2070	2071	2072	2073
+Déficit au sens de Maastricht (% du PIB)	0.04677	0.043633	0.041629	0.038112	0.035745	0.033597	0.031737	0.028764	0.026365	0.042786	0.041828	0.041014	0.040223	0.039369	0.038388	0.037359	0.031635	0.026305	0.047323	0.042489	0.039247	0.034599	0.030465	0.025343	0.02155	0.017551	0.013347	0.009029	0.004798	0.00042	-0.003771	-0.008166	-0.012336	-0.016744	-0.020876	-0.024804	-0.02885	-0.032891	-0.036849	-0.040781	-0.044536	-0.048432	-0.05233	-0.056217	-0.058321
+Dette publique (% du PIB)	1.297122	1.304245	1.30916	1.304873	1.302064	1.297131	1.293421	1.28678	1.278255	1.286416	1.294667	1.303158	1.310667	1.317153	1.322153	1.326017	1.32408	1.316844	1.306192	1.306314	1.312518	1.31393	1.311186	1.303401	1.29236	1.277604	1.259018	1.236613	1.210541	1.180745	1.147506	1.110703	1.070651	1.027193	0.980689	0.931419	0.879334	0.82451	0.767098	0.707188	0.645019	0.580507	0.513706	0.444685	0.375281
+PIB (Md€ de 2026)	2992.540786	3023.786235	3055.364925	3100.793146	3137.685646	3175.163905	3205.61234	3236.503081	3266.822219	3297.336672	3324.768021	3349.052064	3373.456337	3397.98678	3423.607718	3449.36535	3475.264353	3501.404951	3527.695292	3554.139139	3580.74001	3607.501206	3634.425831	3661.516813	3687.81807	3714.291089	3740.938376	3767.66644	3794.573462	3821.661649	3848.933129	3876.38996	3904.034139	3931.867607	3959.892258	3988.109943	4016.519578	4045.118427	4073.907754	4102.888811	4132.062844	4161.431094	4190.994816	4220.758164	4250.729484
+Croissance du PIB (%)		0.010441	0.010443	0.014868	0.011898	0.011945	0.00959	0.009636	0.009368	0.009341	0.008319	0.007304	0.007287	0.007272	0.00754	0.007524	0.007508	0.007522	0.007509	0.007496	0.007484	0.007474	0.007464	0.007454	0.007183	0.007179	0.007174	0.007145	0.007142	0.007139	0.007136	0.007134	0.007131	0.007129	0.007128	0.007126	0.007124	0.00712	0.007117	0.007114	0.007111	0.007107	0.007104	0.007102	0.007101
+Chômage (2029-2040)	0.091646	0.09006	0.088474	0.086888	0.085302	0.083716	0.08323	0.082744	0.082744	0.082744	0.082744	0.082744
+PARAMÈTRES DU SCÉNARIO DE CRISE (anciennes valeurs « prudent »)
+Feuille et cellule	Valeur ou formule	Libellé
+Effets macro!B8	126663.330875954	Emplois supplémentaires à terme (baisse du chômage, feuille RUI)
+Effets macro!B9	8	Années de montée en charge
+Effets macro!B13	85000	Emplois de seniors supplémentaires, court terme (64 ans)
+Effets macro!B15	200000	Emplois de seniors supplémentaires, long terme (67 ans / 45 annuités)
+Effets macro!B19	0.012	Effort budgétaire ressenti par l’économie en 2029 (% du PIB)
+Effets macro!B20	1	Multiplicateur budgétaire
+Effets macro!B21	5	Années avant disparition de l’effet
+Effets macro!B27	0.2	Épargne privée remplacée par l’épargne obligatoire
+Effets macro!B29	0.022	Supplément de PIB par euro de capital, net d’amortissement
+Effets macro!B31	-40000	Logements construits en plus ou en moins par an, phase initiale
+Effets macro!B32	3	Durée de la phase initiale (années)
+Effets macro!B33	25000	Logements supplémentaires par an, régime de croisière
+Effets macro!B315	1.5	Érosion de l'IS : semi-élasticité du transfert de bénéfices (crise)
+Effets macro!B41	1.5	Fraude à la TVA récupérée par la facturation électronique et l’IA, à terme (Md€/an)
+Effets macro!B45	1	Permis rapide pour les usines et l’énergie : investissement privé additionnel (Md€/an)
+Effets macro!B46	20000	Cumul emploi-socle sans pénalité : emplois supplémentaires après 67 ans
+Effets macro!B52	0.5	Ajustement budgétaire : emplois détruits pour 1 % de PIB perdu (en % de l’emploi)
+Effets macro!B185	0.001	Croissance supplémentaire par an (points)
+Effets macro!B227	0.5	Part réelle (moins de travail, départs) plutôt que décalage ou optimisation
+Effets macro!B241	0.5	Part des rendements réinvestie (comptes en phase d’épargne, moitié du capital laissée placée à la retraite)
+Effets macro!B245	0	Hausse du niveau des élèves due au programme (écarts-types)
+Effets macro!B246	0	Croissance annuelle en plus pour un écart-type, une fois toute la population active formée (points)
+Effets macro!B256	0.001	Productivité en plus par an grâce à l’IA, pendant dix ans (points)
+Effets macro!B266	0	Part de l’effet de l’IA en plus, grâce au programme (fonds, administration, électricité peu taxée)
+Effets macro!B273	0.0751849991628993	Variation du coût du capital pour un investissement en France
+Effets macro!B274	0.37	Élasticité de l’investissement au coût du capital
+Santé!B32	0.3	IA contre la fraude des professionnels et des assurés (détection, déconventionnement rapide)
+Santé!B33	0.7183	Délai de carence porté de 3 à 7 jours, d’ordre public (salariés du privé) — DÉCISIONS d’Adrien des 14 et 15 octobre (« public comme privé ») ; v218 : 6e et 7e jours ajoutés avec la même décroissance que dans la fonction publique (+44 % sur les 4e et 5e jours). Avant : 3 à 5 jours seulement.
+Santé!B34	0.2	Transports sanitaires : transport partagé et taxis conventionnés
+Santé!B35	0.1	Cures thermales : déremboursement partiel, puis selon l’avis de la Haute Autorité de santé
+Santé!B36	0	IA dans l’imagerie : tarifs baissés au rythme des gains de productivité
+Carbone!B11	-0.02
+Hauts revenus!B5	0.31
+Coût transition!I76	0.2	Décote de la valeur des participations au moment du crédit
+Effets macro!B317	0.4	Érosion de l'IS : réaction réelle (crise)
+Hauts revenus!B59	0.08	Élasticité du revenu imposable des classes moyennes (crise ; v233)
+Emploi!B238	0.7	Part des nouveaux emplois occupés par des personnes au RUI plein (crise ; v233)

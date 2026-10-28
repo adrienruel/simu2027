@@ -1,0 +1,40 @@
+INDÉPENDANTS DANS LE NOUVEAU SYSTÈME (v193)
+Le modèle ne comptait aucun impôt des non-salariés dans le nouveau système (Total, ligne 16), alors que leur complément de RUI est compté (feuille RUI). Règle (Adrien, 18 octobre 2026) : l'indépendant exerce en société ; il se salarie et paie le barème de l'impôt unique, ou laisse le bénéfice dans la société et paie l'IS (État + local) puis la flat tax sur les dividendes. On retient pour chacun le moins cher des deux. Revenus Insee 2023 (Insee Première n° 2060) : revenu net des charges et cotisations, sans réintégrer les cotisations supprimées (prudent : la base réelle serait plus large).
+Groupe et décile	Effectif	Revenu annuel par personne (€ de 2026)	Impôt unique au barème (€)	IS + flat tax (€)	Impôt retenu, le moins cher (€)	Revenu net d'impôt (€)	TVA et accises payées (€)	Taux d'épargne (v214)	Bénéfice gardé dans la société (€)	Part perçue	Bénéfice passé par la société (€, v233)
+Classiques, décile 1	185100	6533	0	4288.55028525	0	6791.0535	1031.99704671113	0	0	0.978	0
+Classiques, décile 2	185100	11973	0	7859.60700525	0	12445.9335	1801.86210960665	0	0	0.978	0
+Classiques, décile 3	185100	16799	888.298329500001	11027.60695575	794.138706573001	16668.421793427	2357.43212782286	0	0	0.978	0
+Classiques, décile 4	185100	21999	1855.8649295	14441.11705575	1659.143246973	21208.817253027	3050.32738638496	0	0	0.978	0
+Classiques, décile 5	185100	28026	4984.32539	18397.5065505	4455.98689866	24677.04010134	3506.39583211733	0	0	0.978	0
+Classiques, décile 6	185100	35433	9808.01831	23259.78911025	8599.7248604637	27738.8234047863	3904.74172101132	0.07	898.282245	0.978	898.282245
+Classiques, décile 7	185100	45170	16488.2819	29651.5867725	14430.012403007	31640.4653194931	4407.32171045088	0.07	1606.79505	0.978	1954.215
+Classiques, décile 8	185100	59266	26159.12462	38904.8249205	22169.8479057595	36748.2580937405	5157.04627847644	0.13	4888.91091	0.978	16607.007
+Classiques, décile 9	185100	83696	42919.81472	54941.757948	35971.1859964034	46526.1635755966	6407.14680890553	0.13	8190.25896	0.978	42001.992
+Classiques, décile 10	185100	175904	106180.95728	115471.169352	82907.518420333	71113.013827667	9613.86913677053	0.33	52421.22864	0.978	137852.208
+Micro-entrepreneurs, classe 1 (feuille RUI)	570000	1924.00192400192	0	1263	0	2000	335.153586189203	0	0	0.58	0
+Micro-entrepreneurs, classe 2 (feuille RUI)	570000	5772.00577200577	0	3789	0	6000	920.863851558429	0	0	0.58	0
+Micro-entrepreneurs, classe 3 (feuille RUI)	475000	11544.0115440115	0	7578	0	12000	1742.38057672007	0	0	0.58	0
+Micro-entrepreneurs, classe 4 (feuille RUI)	285000	24050.024050024	2628.5	15787.5	2349.879	22650.121	3240.53117771183	0	0	0.58	0
+Agriculteurs, classe 1 (feuille RUI)	89760	0	0	0	0	0	0	0	0	0.978	0
+Agriculteurs, classe 2 (feuille RUI)	40800	5772.00577200577	0	3789	0	6000	920.863851558429	0	0	0.978	0
+Agriculteurs, classe 3 (feuille RUI)	53040	14430.0144300144	447.5	9472.5	400.065	14599.935	2086.88791091474	0	0	0.978	0
+Agriculteurs, classe 4 (feuille RUI)	61200	23088.0230880231	2058.5	15156	1840.299	22159.701	3175.92402354421	0	0	0.978	0
+Agriculteurs, classe 5 (feuille RUI)	163200	43290.0432900433	15198.5	28417.5	13587.459	31412.541	4378.10469625269	0	0	0.978	0
+Effectif total	4159000
+Revenus totaux (Md€)	120.51907854855
+IMPÔT DES INDÉPENDANTS, après optimisation (Md€) — Total ligne 16	33.6415265661194
+TVA ET ACCISES PAYÉES PAR LES INDÉPENDANTS (Md€) — Total ligne 3	11.1574248590074
+Pour comparaison : cotisations, CSG et IR des indépendants aujourd'hui (Md€)	38
+Bénéfice des indépendants passé par une société (Md€, v233) : assiette de l'IS local des indépendants	36.081321389323
+dont IS local payé par les indépendants (Md€) : recette des collectivités, retirée de la recette de l'État (Total, ligne 16)	1.80406606946615
+PARAMÈTRES
+Passage des revenus de 2023 en euros de 2026	1.0395
+Non-salariés classiques (hors micro), fin 2023	1851000
+Micro-entrepreneurs économiquement actifs	1900000
+Non-salariés agricoles	408000
+Correction pour l'imposition commune des couples	0.894
+Part de l'impôt réellement perçue, non-salariés classiques et agricoles (fraude estimée de 1,1 à 2,2 % des cotisations des indépendants, Urssaf 2022, reprise par le HCFiPS ; borne haute)	0.978
+Taux d'IS total (État + local)	0.45
+Flat tax sur les dividendes	0.33
+Part de l'impôt réellement perçue, micro-entrepreneurs (42 % des cotisations éludées chez les micro-entrepreneurs des plateformes, Urssaf ; appliqué à tous, prudent)	0.58
+Règle d'optimisation (v214) : salaire jusqu'au seuil de 45 000 € (au-delà, 66 %), bénéfice distribué au-delà (IS + flat tax, 63,15 %), et part épargnée du revenu au-delà de 24 000 € gardée dans la société (IS seul, 45 %). Taux d'épargne par niveau de vie : 33 % (aisés), 13 % (plutôt aisés), 7 % (médians), 0 en dessous (Observatoire des inégalités d'après l'Insee, 2022).

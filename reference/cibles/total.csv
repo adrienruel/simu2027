@@ -1,0 +1,114 @@
+poste,nouveau,ancien
+IS + Impots de Production,149259992012.39,145609915000
+Nouvelle TVA,248150266888.005,213574450264.849
+Impots sur le Revenu (Privé),452838702211.722,506243608835.463
+Impôts sur le Revenu (Retraités),24097348601.3389,50000000000
+Impots sur le Revenu (Public),140079910374.771,202882311551.712
+Impôts sur les dividendes et sur la fortune immobilière (IFI),11961865379.2212,14132000000
+Impôts sur les successions (transmissions d’entreprises en activité exonérées),15100000000,20819000000
+Contribution d’épargne retraite (v107) et recettes non fiscales restant au budget — les recettes non fiscales de l’État sont versées au fonds (feuille Fonds) ; ,29000000000,29000000000
+Contribution UE,0,0
+"Impôts locaux et taxes affectées des ménages et entreprises (taxe foncière, versement mobilité, taxe d’apprentissage)",0,16700000000
+Droits de mutation (DMTO),0,14742000000
+"Autres impôts sur les produits (TICPE, tabac, assurance, alcool, jeux)",0,103834000000
+Taxe pollution des entreprises (supprimée : intégrée à l’accise écologie de la TVA),0,0
+"Accises payées par les entreprises (carbone, et accise de transition v231), nettes de l'effet IS",34305400355.2415,
+"Indépendants : cotisations, CSG et impôt sur le revenu (actuel) / impôt unique (nouveau)",31837460496.6533,38000000000
+TOTAL,1167767351278,1347898202436.69
+"Revenus du capital hors dividendes : intérêts, plus-values (barème de l’impôt unique) — loyers sortis du barème, voir feuille Logement",12682130400.4462,24000000000
+"IS des bailleurs : loyers et plus-values immobilières en société, et IS des bailleurs sociaux (ESH et offices) sur les loyers libérés (feuille Logement)",6392000000,
+Intérieur,26700213999.5783,0.00879681791756223
+Justice,24002942019.8187,0.00790815798096162
+"Armées (LPM actualisée, niveau 2030)",73617805661.2685,0.0242545783304542
+Finances et Economie,15677199249.9163,0.00516510718831824
+MFA,6941696495.38487,0.00228705433259243
+Charge de la Dette,60000000000,0.0197679717122144
+Sous-total Regalien,206939857425.967,0.068179687462103
+Education Nationale,75863235083.2806,0.0249943714187226
+Recherche et Enseignement Supérieur,28987606742.7487,0.00955043650159084
+Contribution UE,30353634577.6031,0.0100004964948825
+"Subventions restées au budget de l’État : soutien aux renouvelables et péréquation, moitié des transports, moitié de France 2030 (v182)",15213000000,0.00501216922763195
+Agriculture,4071093737.14303,0.00134128776389361
+Culture,8289183349.54837,0.00273100569952051
+Ecologie (Hors energie),7265453949.84185,0.00239372146928116
+Sports / Jeunesse / Association,1238139488.00979,0.000407925106245886
+Adminsitration,3968542680.70846,0.001307500657516
+Sous Total Regalien Elargie,175249889608.884,0.0577389143392851
+Santé,305932977141.111,0.100794573965983
+Retraites — socle (paramètre B61),220000000000,0.072482562944786
+RUI + AAH,127702891914.19,0.0420737859154614
+Sous-Total Sécurité Sociale,653635869055.301,0.215350922826231
+TOTAL,1217582405875.89,0.40115224261074
+"Investissement (exclu, endettement acceptable)",15213000000,
+TOTAL hors investissement,1202369405875.89,
+Coût de la transition retraite — moyenne 2029-2073 (inclus dans le TOTAL),132911922023.133,0.0437899852461555
+Coût de la transition retraite — année 1 (2029),206929631842.105,0.0681763184778945
+Equilibre Budgetaire,-49815054597.8887,-0.0164123765022246
+Equilibre Budgétaire (hors investissement),-34602054597.8887,-0.0114002072745927
+"Équilibre budgétaire — année 1 (2029, transition au coût de la première année)",-123832764416.861,-0.0407987097339636
+"PARAMÈTRE — Dépenses de retraite dans le budget (Md€), financées par l’impôt",220,
+PARAMÈTRE — Capitalisation obligatoire (% du salaire net après impôt),0.1,
+"Flux annuel vers le fonds — capitalisation obligatoire (€) — HORS BUDGET, épargne forcée appartenant au salarié — dont une part versée par le fonds à la place d",69967060746.6158,
+"Coût de la transition retraite, remboursement 35 % compris (€)",132911922023.133,0.0437899852461555
+"Flux annuel vers le fonds — épargne obligatoire + part de l’épargne volontaire placée au fonds (€, hors budget)",69967060746.6158,
+PARAMÈTRE — Part de l’épargne volontaire placée au fonds (abondement libre),0,
+Épargne volontaire des salariés et agents publics avec le programme (Md€) / sans épargne obligatoire (Md€),61.4960455421426,73.7402811728003
+PARAMÈTRE — Prime d’assurance chômage privée obligatoire (supprimée : 0 %),0,
+Primes d’assurance chômage (supprimées),0,
+"TVA en plus si toute l’épargne obligatoire évinçait l’épargne volontaire (Md€ pour un taux d’éviction de 100 % ; un point = un centième, sert aux scénarios dans",10.9270376352756,
+"PARAMÈTRE — Part des investissements publics (énergie, infrastructures) reprise par le fonds souverain",1,
+"Économie nette de l'IA dans l'administration — moyenne 2026-2070 (€, déduite du TOTAL)",5317827094.05686,
+PARAMÈTRE — Coût employeur d’un temps plein au SMIC (€/mois),1930,
+PARAMÈTRE — Multiple du SMIC à partir duquel l’épargne obligatoire atteint son taux plein,2,
+PARAMÈTRE — Financement de l’apprentissage repris par l’Éducation nationale (€),8000000000,
+"PARAMÈTRE — Budget des armées, LPM actualisée 2030 (Md€ courants, hors pensions)",76.3,
+PARAMÈTRE — Inflation cumulée 2026-2030 (pour passer en euros constants 2026),0.074,
+"Économies de santé immédiates (moyenne, Md€) — déduites de la ligne Santé",1769200000,
+PARAMÈTRE — Fin du financement public de l’enseignement privé sous contrat : crédits supprimés (€),8000000000,
+PARAMÈTRE — Part des élèves du privé qui reviennent dans le public,0.2,
+PARAMÈTRE — Coût annuel d’un élève dans le public pour l’État (€),7500,
+Économie nette sur l’enseignement privé (€),5000000000,
+Tranche 0,0,0
+Tranche 1,12500,0.179
+Tranche 2,24000,0.57
+Tranche 3,32000,0.66
+Tranche 4,45000,0.66
+Tranche 5,65000,0.66
+Tranche 6,100000,0.66
+Tranche 7,160000,0.66
+"Aides aux entreprises : désormais comprises dans les missions supprimées ou réduites (France 2030, emploi) — feuille Budget État 2026",0,
+Opérateurs et agences de l’État : fusions et suppressions,2,
+Non-remplacement dans les fonctions support de l’État : désormais compris dans la feuille IA administration (v74),0,
+"Aide publique au développement : conservée en l’état (décision du 8 octobre) — l’ancienne économie de 5 Md€ dépassait les crédits de la mission (3,57 Md€)",0,
+Barème fort sur les hautes pensions de l’ancien système,0,
+Audiovisuel public : conservé et recentré (DÉCISION du 8 octobre : 2 Md€ d’économie maintenus),2,
+Total des économies supplémentaires (€),4000000000,
+"Loyers (revenus fonciers nets), Md€ — imposés à l’IS, feuille Logement",30,
+"Intérêts imposables, Md€",15,
+"Plus-values immobilières hors résidence principale, Md€",10,
+"Plus-values sur actions achetées sur le marché secondaire, Md€",17,
+"Taux moyen sur les intérêts et plus-values : barème plafonné à 40 % (DÉCISION d’Adrien du 15 octobre, v171 : maximiser la recette)",0.38,
+"Réaction des comportements, en % de la base (élasticité sourcée, feuille Hauts revenus, ligne 51)",0.0979992602812096,
+"Recettes actuelles sur ces revenus (impôt sur le revenu et prélèvements sociaux), Md€",24,
+"Exonération totale des transmissions d’entreprises en activité (hors SCI et holdings patrimoniales), Md€",1.5,
+Hébergement d’urgence conservé par l’État,0,
+Retrait de la capitalisation pour la résidence principale : surcoût moyen du socle,0,
+"Autres missions de l’État conservées (outre-mer, monde combattant, santé, solidarité, emploi) — feuille Budget État 2026 — et concours aux collectivités d’outre",14.1107254190831,
+Besoin de financement des collectivités laissé en déficit public (feuille Collectivités),15.9119989539,
+"Sécurité sociale, France Travail et opérateurs, hors santé : postes absents du modèle (feuille Sécurité sociale 2026)",17.1589964751672,
+"Dotation transports aux communes, en remplacement du versement mobilité (feuille Collectivités)",0,
+"Économies sur les missions conservées, l’université, la santé, l’éducation et le RUI des étudiants (feuille Budget État 2026)",-14.2292673459683,
+"Quotient familial, quotient conjugal et RUI du conjoint sous condition de ressources (feuille Quotient familial)",25.210241354476,
+PARAMÈTRE — Passage des montants de 2024 en euros de 2026 (PIB en valeur),1.039456425,
+PARAMÈTRE — Contribution de transition : part des 10 % d'épargne obligatoire versée à l'État au lieu du compte (v221),0,
+PIB 2024 (€),2920000000000,
+"Croissance du PIB en valeur, 2025",0.019,
+"Croissance du PIB en volume, 2026",0.005,
+"Déflateur du PIB, 2026",0.015,
+"IFI, système actuel (€)",2200000000,
+"Droits de succession, base du nouveau système avant l'exonération des transmissions d'entreprises (€)",16600000000,
+"Impôts locaux des ménages et entreprises, système actuel — première composante (€)",12200000000,
+"Impôts locaux des ménages et entreprises, système actuel — seconde composante (€)",4500000000,
+"Pensions d'invalidité hors objectif de dépenses, 2024 (€)",8600000000,
+Élèves de l'enseignement privé sous contrat,2000000,
+"Taux de TVA moyen sur la consommation, système actuel (profils salariés, fonctionnaires, retraités)",0.13,

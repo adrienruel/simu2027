@@ -1,0 +1,74 @@
+FONDS SOUVERAIN : LES RECETTES NON FISCALES DE L’ÉTAT VERSÉES AU FONDS (v107)
+DÉCISION du 8 octobre : les recettes non fiscales sortent du budget et vont au fonds, qui les crédite sur les comptes retraite. En contrepartie, l’épargne obligatoire à la charge du salarié baisse et une contribution du même montant entre dans l’impôt. L’opération est neutre pour le budget, pour le revenu disponible et pour le capital de chacun : elle clarifie la comptabilité. Cellules jaunes : modifiables.
+CE QUI CHANGE DE PLACE
+Recettes non fiscales de l’État (Md€)	29	Dividendes, redevances, produits du domaine, amendes. VÉRIFIÉ (v170) : pas de double compte au budget. Quand les participations sont apportées au fonds (feuille Coût transition, H72), l’État perd leurs dividendes (colonne T, 2,06 %) mais continue de verser 29 Md€ au fonds : la ligne T est exactement ce complément. Côté fonds, ces dividendes rémunèrent les titres remis aux épargnants, pas les comptes crédités ici.
+Part versée au fonds	1	DÉCISION : la totalité.
+Versé au fonds chaque année (Md€)	29
+Recettes non fiscales restant au budget (Md€)	0
+Contribution d’épargne levée en contrepartie, comptée dans l’impôt (Md€)	29	Assise comme l’épargne obligatoire : nulle au SMIC, taux plein à partir de deux SMIC. Chaque salarié paie en contribution exactement ce qu’il n’épargne plus.
+CE QUE ÇA DONNE SUR LES COMPTES RETRAITE
+Taux crédité sur le compte retraite, à partir de deux SMIC	0.1	Inchangé : c’est le taux utilisé par la feuille Socle actuariel.
+Montant crédité sur les comptes chaque année (Md€)	69.9670607466158
+   dont versé par le fonds, à partir des recettes non fiscales (Md€)	29
+   dont versé par les salariés (Md€)	40.9670607466158
+Taux d’épargne obligatoire à la charge du salarié, à partir de deux SMIC	0.0585519247335216
+Taux de la contribution d’épargne, à partir de deux SMIC	0.0414480752664784
+CONTRÔLE : L’OPÉRATION EST NEUTRE
+Effet sur le budget de l’État (Md€)	0	Recettes non fiscales en moins, contribution en plus.
+Effet sur le revenu disponible des ménages (Md€)	0	Épargne en moins, contribution en plus.
+Effet sur les sommes créditées sur les comptes retraite (Md€)	0
+PLAN D’INVESTISSEMENT DU FONDS (v131, 9 octobre 2026) — Md€ par an, moyenne 2029-2040, euros de 2026
+Lecture : ce bloc confronte l’argent que reçoit le fonds aux projets identifiés et sourcés. Il ne change aucun solde du modèle.
+RESSOURCES
+Épargne versée au fonds chaque année, obligatoire et libre	69.9670607466158	Calculé par le modèle.
+Investissements publics repris par le fonds	39.716	Transports, énergie et climat, France 2030, investissements locaux rentables (feuille Budget État 2026, lignes 79 à 82).
+   dont charges sans recette	15.213	v182 : ces charges restent au budget de l’État (feuille Total, ligne 33) ; le fonds ne finance plus que des projets rémunérés.
+Épargne nouvelle à placer	45.4640607466158
+   dont capital nouveau : réacteurs, réseaux, usines, logements	32.3931432819637	Règle du modèle : 75 % de capital nouveau en scénario prudent, sur la part placée en France (v203).
+   dont actifs existants en France et placements à l’étranger	13.070917464652
+PROJETS IDENTIFIÉS, FINANCÉS SUR LE CAPITAL NOUVEAU
+Six réacteurs EPR2 (Penly, Gravelines, Bugey)	3.4125	SOURCÉ : devis de 72,8 Md€ aux conditions de 2020, hors coût de financement (EDF, décembre 2025) ; première mise en service en 2038. HYPOTHÈSES prudentes : +25 % pour passer en euros de 2026 ; chantier étalé sur 16 ans (2027-2042). v223 : le fonds porte la part que finançait le prêt de l'État sur fonds d'épargne (60 % du programme, ligne 50) ; EDF finance le reste sur le marché. Avant : 100 %, ce qui faisait dépasser le capital nouveau disponible.
+Réseau de transport d’électricité (RTE)	3.33333333333333	SOURCÉ : près de 100 Md€ d’ici 2040 (schéma décennal, avis favorable de la CRE, février 2026). HYPOTHÈSE : le fonds apporte la moitié du financement, le reste vient des recettes du tarif d’acheminement.
+Réseau de distribution (Enedis)	2.66666666666667	SOURCÉ : 96 Md€ d’ici 2040, plus de 5 Md€ par an à partir de 2032 (Enedis, 2023). HYPOTHÈSE : moitié financée par le fonds.
+Régénération du réseau ferroviaire	1.5	SOURCÉ : 1,5 Md€ de plus par an à partir de 2028, pour atteindre 4,5 Md€ (contrat État-SNCF Réseau). Le fonds apporte le supplément.
+Renouvelables et réseaux de chaleur	3.4	SOURCÉ : 13,6 Md€ investis en 2024 (I4CE, Panorama 2025). HYPOTHÈSE : le fonds en porte un quart, le reste reste privé.
+Décarbonation de l’industrie	3	HYPOTHÈSE. Repère SOURCÉ : 1,1 Md€ investi en 2024 (I4CE).
+Logement locatif neuf	9.375	25 000 logements par an à 250 000 € (scénario prudent du volet logement).
+Total des projets identifiés	26.917	Y compris le bombardier d’eau français (feuille Environnement, ligne 10).
+Reste pour le compartiment industrie, intelligence artificielle, technologies	5.47614328196374	Capital nouveau dans des entreprises françaises, sans projet nommé à ce stade.
+CONTRÔLES
+Total orienté vers l’énergie, les transports et l’industrie verte	37.0285	Projets nouveaux hors logement + missions reprises (transports, énergie et climat, France 2030). Le manifeste annonce « environ 50 Md€ » : les projets sourcés en justifient une quarantaine.
+Minimum que les épargnants placent dans le compartiment écologique (15 % depuis la v225)	10.4950591119924	Règle du manifeste : au moins 15 % dans chaque compartiment (v225 ; 25 % avant).
+Le compartiment écologique a-t-il assez de projets pour ce minimum ?	oui	Si les épargnants y plaçaient 70 %, le maximum permis, il faudrait environ 75 Md€ de projets par an : ils n’existent pas aujourd’hui. La limite du plan n’est pas l’argent, c’est le nombre de projets prêts.
+Rentabilité du nouveau nucléaire		SOURCÉ : prix garanti de 100 € par MWh au maximum, en euros de 2024 ; coût de production estimé à 92,9 € par MWh (Cour des comptes, euros de 2023). La marge est mince : un dérapage du chantier comme à Flamanville se paierait sur le rendement des épargnants.
+Pour mémoire, non comptés		Huit EPR2 supplémentaires (à l’étude, décision non prise) : environ 7,6 Md€ par an de plus dans les années 2040, à coût unitaire égal. Grand carénage du parc existant : 66 Md€ sur 2015-2028 (EDF), financé par EDF sur ses recettes. Besoin national : 87 Md€ d’investissements climat de plus par an d’ici 2030, publics et privés (I4CE), surtout dans la rénovation des bâtiments et les véhicules, qui relèvent des ménages et des entreprises.
+   dont placements à l’étranger, part moyenne 2029-2040 (scénario prudent)	0.05	v203 : 5 % au départ ; la part ne monte qu’une fois la dette publique sous 100 % du PIB, jusqu’à 15 % à 60 % (feuille Effets macro, section 21).
+   montant moyen placé à l’étranger 2029-2040 (Md€/an)	2.27320303733079
+Part du programme EPR2 portée par le fonds (v223)	0.6	SOURCÉ : le prêt de l'État sur fonds d'épargne couvre environ 60 % du programme (décision du gouvernement, 2025-2026) ; le fonds prend sa place.
+CLOUD ET IA SOUVERAINS (v208, DÉCISION d’Adrien du 22 octobre 2026) — financés sur le compartiment industrie, IA et technologies, sans plafond
+Part du compartiment disponible (ligne 40, Md€/an, moyenne 2029-2040)	5.47614328196374	Le montant dépend des choix des épargnants (pas de fléchage au-delà des 15 % par compartiment) et des projets prêts.
+Marché français du cloud, 2025 (Md€)	27	SOURCÉ : ≈ 27 Md€ attendus en 2025, croissance ≈ 14 % par an (Autorité de la concurrence, avis 23-A-08, 2023).
+Part des trois hyperscalers américains dans le cloud d’infrastructure en France	0.71	SOURCÉ : 71 % en 2022 pour AWS, Microsoft et Google (Markess by Exaegis, repris par L’Usine nouvelle, juillet 2023) ; OVHcloud 2,6 %. En 2021, ils captaient ≈ 80 % de la croissance (Autorité de la concurrence).
+Repère : investissements annoncés dans les centres de données en France (Md€)	202	SOURCÉ : ≈ 109 Md€ au sommet de l’IA de février 2025, puis ≈ 93 Md€ en juin 2026 ; 28,6 GW de projets, dont 5,8 GW avec site et raccordement (AFP, Connaissance des énergies, 12 juin 2026). Pour l’essentiel des capitaux privés, souvent étrangers.
+Repère : Mistral AI		SOURCÉ : 3 Md€ levés en septembre 2026 (Samsung, Scaleup Europe, ASML…), valorisation de plus de 21 Md€, 4 Md€ investis dans des centres de données, objectif de 1 GW de calcul en 2030 et d’un milliard d’euros de revenus annualisés (AFP, 8 septembre 2026).
+Risque pour les épargnants		Mise concentrée sur quelques entreprises, valorisations élevées : ce risque est porté par le rendement du fonds (prudent 2,5 %, Budget État 2026, ligne 86), pas par l’État, qui ne garantit que la non-faillite du fonds.
+Effet compté dans le chiffrage		Le capital placé dans le cloud et l’IA souverains est compté comme capital nouveau du fonds (Effets macro, ligne 98, rendement pour le pays de 3,2 % en prudent, ligne 29). L’accélération de l’adoption est comptée à part (Effets macro, ligne 266).
+TROIS COMPARTIMENTS : ÉCOLOGIE, INDUSTRIE, IA ET TECHNOLOGIES (v209, DÉCISION d’Adrien du 22 octobre 2026) — rendement réel net de frais
+Compartiment	Prudent	Médian	Optimiste	Risque	Source / hypothèse
+Écologie : réseaux, nucléaire, renouvelables, rénovation	0.02	0.025	0.035	Faible : tarifs régulés ou prix garantis	SOURCÉ : rémunération du capital de RTE fixée à 5 % nominal avant impôt pour 2025-2028 (CRE, TURPE 7, février 2025), soit ≈ 3 % réel ; marge mince du nouveau nucléaire (prix garanti de 100 €/MWh au plus pour un coût de 92,9 €, Cour des comptes). Rendement plus bas, mais stable.
+Industrie : usines, décarbonation, défense, santé	0.0275	0.0325	0.0425	Moyen : celui des actions	SOURCÉ : sur dix ans (2014-2023), le CAC 40 a rapporté ≈ 10,5 % par an dividendes réinvestis et le capital-transmission ≈ 14,8 % nominal (France Invest et EY, 2024). Repère relatif, le niveau du fonds restant prudent (capital nouveau, pas de sélection des meilleurs fonds).
+IA et technologies : IA souveraine, cloud souverain, centres de données	0.0275	0.0325	0.0425	Élevé : dispersion du capital-risque	SOURCÉ : le capital-risque et de croissance a rapporté ≈ 10,6 % par an sur dix ans, autant que le CAC 40, mais avec une dispersion très forte : quart des fonds le moins bon à −1,6 %, quart le meilleur à +24,6 % depuis l’origine (France Invest et EY, 2024, ensemble du capital-investissement). En France, plus de risque n’a pas apporté plus de rendement moyen sur dix ans : même rendement attendu que l’industrie, risque plus élevé.
+Part minimale par compartiment (v225 : 25 % → 15 %, DÉCISION d'Adrien du 23 octobre 2026)	0.15	DÉCISION d'Adrien du 23 octobre 2026 (v225) : le minimum par compartiment passe de 25 % à 15 %, pour que le plan d'investissement (≈ 56 % en écologie) respecte la règle ; l'écologie peut monter jusqu'à 70 %.			Règle du manifeste, gardée avec trois compartiments : 75 % répartis d’office, 25 % au choix de l’épargnant.
+Répartition en tiers (pour mémoire) : rendement moyen	0.025	0.03	0.04		Égal au rendement retenu dans le modèle (Budget État 2026, ligne 86 et note E86 : 2,5 / 3 / 4 %) : le chiffrage ne change pas.
+Contrôle : écart entre le rendement implicite du plan (ligne 79) et le rendement du modèle (prudent, doit rester sous 0,0001)	0.000274956600012907
+Rendement prudent si l’épargnant met son quart libre en IA / en écologie	0.025625	0.02375			Colonne B : 25 % écologie, 25 % industrie, 50 % IA. Colonne C : 50 % écologie. L’écart de rendement reste faible ; c’est le risque qui change.
+Versements minimaux par compartiment (Md€/an)	10.4950591119924				Chaque compartiment doit trouver au moins ce montant de projets par an.
+Le compartiment IA et technologies a-t-il assez de projets pour ce minimum ?	oui				Repère : ≈ 202 Md€ de centres de données annoncés en 2025-2026 (ligne 55), soit ≈ 25 Md€ par an sur huit ans, surtout privés et étrangers. Le minimum de 25 % est atteignable si le fonds prend une part de ces projets.
+RÉPARTITION DES PLACEMENTS DU FONDS ENTRE LES COMPARTIMENTS (v223, contrôle) — Md€ par an, moyenne 2029-2040
+Écologie : transports et énergie repris (part rentable), investissements locaux rentables, EPR2, réseaux, rail, renouvelables	36.6165	Les investissements locaux rentables (eau, réseaux, transports) et les réseaux d'énergie relèvent du compartiment écologie.
+Industrie : France 2030 (part rentable), décarbonation, bombardier d'eau, logement locatif neuf (v225)	14.8035	DÉCISION d'Adrien du 23 octobre 2026 (v225) : le logement locatif neuf est rattaché au compartiment industrie, dont le rendement est le plus proche de celui d'un bailleur.
+Logement locatif neuf : rattaché au compartiment industrie (ligne 74, v225)	0	Pour mémoire : compté ligne 74.
+Reste : capital nouveau sans projet nommé, actifs existants et étranger	18.5470607466158
+Part de l'épargne que le plan suppose placée en écologie	0.523339119998279	Règle du manifeste (v225) : au moins 15 % dans chaque compartiment, donc au plus 70 % en écologie.
+Le plan respecte-t-il la règle des 15 % ?	oui
+Rendement prudent implicite si les épargnants suivent le plan (écologie à la part ligne 77, le reste en industrie et IA)	0.0235749566000129	DÉCISION d'Adrien du 23 octobre 2026 (v225) : ce rendement implicite devient le rendement prudent du modèle (2,33 %, 'Budget État 2026'!B86), au lieu des 2,5 % d'un tiers par compartiment (ligne 66). Écart = coût du fléchage vers l'écologie pour les épargnants.

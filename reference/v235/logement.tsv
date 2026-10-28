@@ -1,0 +1,96 @@
+LOGEMENT : UN CHOC D’OFFRE, UNE RESPONSABILITÉ LOCALE (Md€/an, ordres de grandeur)
+L’État sort de la politique du logement (aides personnelles, logement social, aides à la pierre) : les communes qui en veulent la financent. Droit à construire national dès 2028. Le bailleur exerce en société, imposée à l’IS. Le statut du logement social disparaît : loyers libres, ESH et offices publics à l’IS. Retrait de la capitalisation pour la résidence principale (modèle suisse). Cellules jaunes : hypothèses modifiables. Règle du 9 octobre : une hypothèse sans source est fixée à sa valeur prudente.
+1. LES AIDES AU LOGEMENT AUJOURD’HUI ET DEMAIN	Aujourd’hui	État demain	Traitement
+Aides personnelles au logement (APL, ALS, ALF)	15.9	0	Remplacées par le RUI (850 €) : déjà dans le modèle, aucune économie nouvelle à inscrire. Source : SDES, compte du logement 2024.
+Autres aides aux occupants (chèque énergie, avantages de loyer…)	6.6	0	Aides aux occupants : 22,5 Md€ au total (SDES 2024), dont 15,9 d’aides personnelles.
+Avantages fiscaux aux propriétaires et producteurs	13	0	TVA réduite, exonérations, niches d’investissement locatif : disparaissent avec le nouveau système fiscal (impôt unique, barème TVA). Source : SDES 2024.
+MaPrimeRénov’ et prêt à taux zéro	1.9	0	Supprimés. Source : SDES 2024.
+Autres aides aux producteurs (subventions, avantages de taux)	5.7	0	Aides à la pierre et prêts bonifiés du logement social : l’État ne les finance plus ; choix et financement communaux.
+Total des aides au logement	43.1	0	43,1 Md€ en 2024 (SDES, compte du logement 2024). Ces dépenses ne figuraient pas dans les dépenses « Nouveau » de la feuille Total : le volet confirme leur fin, sans économie supplémentaire.
+Pour mémoire — aides aux occupants (total)	22.5		SDES, compte du logement 2024.
+Pour mémoire — aides aux propriétaires et producteurs (total)	20.6		SDES, compte du logement 2024.
+Hébergement d’urgence et « Logement d’abord » (Md€)	3.07		Programme 177, mission Cohésion des territoires, budget 2026 : 3,07 Md€. Absent des dépenses du modèle jusqu’à la v69.
+Part conservée par l’État (1 = État, 0 = communes)	0		DÉCISION d’Adrien du 14 octobre (v158) : l’hébergement d’urgence est renvoyé aux communes, qui le financent par leur impôt (feuille Collectivités, ligne 27). L’État n’en garde que la police : expulsion, hébergement des cas relevant de l’asile (mission Immigration).
+Hébergement d’urgence à la charge de l’État	0		Ajouté aux dépenses (feuille Total, B44).
+2. LE BAILLEUR EST UNE ENTREPRISE : LOYERS À L’IS	Valeur		Hypothèse / source
+Loyers nets des bailleurs privés (revenus fonciers nets)	30		Paramètre de la feuille Total (B106). Pour mémoire : 95 Md€ de loyers réels versés par l’ensemble des locataires, parc social compris (SDES 2024).
+Amortissement du bien déductible, en % des loyers nets	0.85		DÉCISION du 9 octobre : droit commun des sociétés, amortissement par composants (cohérence avec « le bailleur est une entreprise »), plutôt qu’un forfait de 2 % par an. HYPOTHÈSE prudente, sans source directe : 85 % des loyers nets. Repères : un immeuble en société à l’IS s’amortit d’environ 2,8 % du prix d’achat par an les douze premières années (exemple de cabinet comptable), pour un rendement net de 2,5 à 3 % (non sourcé) ; 68 % des loueurs en meublé au régime réel ne paient aucun impôt sur leurs loyers (rapport Le Meur, mai 2024). Avec le forfait de 2 % hors terrain : ≈ 60 %. Avant : 50 %.
+Taux de l’impôt sur les sociétés	0.4		Taux du projet (feuille Entreprises & Dividendes).
+IS sur les loyers	1.8		Dividendes ensuite exonérés, comme pour toute société.
+Plus-values immobilières hors résidence principale	10		Paramètre de la feuille Total (B108).
+Part réalisée par des bailleurs (passe à l’IS)	0.5		Hypothèse : la moitié concerne des biens loués ; le reste (résidences secondaires, terrains) reste au barème.
+IS sur les plus-values des bailleurs	2		La reprise des amortissements à la revente est comptée à part, avec prudence (section 9).
+Recettes d’IS des bailleurs	3.8		Nouvelle ligne de recettes (feuille Total, B20).
+Revenus du capital restant au barème (intérêts, plus-values)	12.6821304004462		Feuille Total, B19 : les loyers et la part des plus-values des bailleurs sortent du barème.
+Pour mémoire — recettes avec les loyers au barème (v69)	24.6787402387061		Formule de la v69.
+Effet sur les recettes de l’État	-8.19660983825991		Sensibilité : 10 points d’amortissement déductible en moins = +1,2 Md€. Attention : cette ligne compare à une version antérieure du programme (loyers au barème de l’impôt unique), pas à aujourd’hui. Aujourd’hui, l’État tire environ 9 Md€ des loyers privés : 4,2 Md€ d’impôt sur le revenu en 2022 (rapport Le Meur) et ≈ 5 Md€ de prélèvements sociaux (17,2 % de 30 Md€, calcul).
+Pour mémoire — taux d’imposition d’un bailleur aujourd’hui (tranche à 30 % + 17,2 %)	0.472		Contre 40 % demain, sans IFI ni droits de mutation : la location devient plus rentable (choc d’offre recherché).
+3. RETRAIT DE LA CAPITALISATION POUR LA RÉSIDENCE PRINCIPALE (MODÈLE SUISSE)	Valeur		Hypothèse / source
+Retraités en régime de croisière (millions)	21		Projection actuarielle du projet (vers 2078).
+Socle plein (€/mois)	1300		Paramètre du projet.
+Coût du socle en régime de croisière	260		Feuille Socle actuariel, ordre de grandeur retenu dans le manifeste.
+Seuil de revenus du capital où le socle s’annule (€/mois)	2500		Paramètre du projet.
+Revenus du capital pris en compte dans la dégressivité	130		Réduction du socle ÷ pente de la dégressivité (0,52 € de socle en moins par euro de revenu du capital).
+Part du capital retirée et non remboursée au départ en retraite	0.1		Hypothèse. Le retrait est plafonné et remboursé au fonds à la revente : seuls comptent ceux qui gardent leur logement.
+Surcoût du socle en régime de croisière, sans règle correctrice	6.76		Celui qui a retiré son capital touche moins de rente, donc plus de socle. Nul avant 2046 (premiers retraités du nouveau système).
+Règle du revenu notionnel (1 = retenue, 0 = non)	1		À CONFIRMER. Si 1 : le socle est calculé comme si le capital retiré était resté placé (« le capital change seulement de forme ») : coût nul pour le budget.
+Montée en charge moyenne 2029-2073	0.2		Part moyenne des retraités du nouveau système sur la période, pondérée par leur capital.
+Surcoût moyen retenu dans le budget	0		Ajouté aux dépenses (feuille Total, B44). Nul si la règle du revenu notionnel est retenue.
+4. LE PARC SOCIAL : FIN DU STATUT, LOYERS LIBRES	Valeur		Hypothèse / source
+Logements locatifs sociaux (millions)	5.4		SDES, RPLS au 1er janvier 2025. L’État n’en possède presque aucun : le parc appartient aux offices publics (collectivités) et aux ESH (sociétés privées). Il n’y a donc ni transfert ni vente par l’État.
+Part du parc détenue par les ESH (sociétés privées)	0.43		SOURCÉ : les ESH gèrent environ 2,3 millions de logements, « près de la moitié du parc HLM » (Fédération des ESH), soit 43 % des 5,4 millions de logements sociaux. Les offices publics en gèrent environ 2 millions (Union sociale pour l’habitat) ; le reste appartient aux sociétés d’économie mixte et aux autres bailleurs. Avant : 50 %, hypothèse.
+Loyers perçus par les bailleurs sociaux (Md€)	27.8		SOURCÉ : 27,8 Md€ de loyers en 2024 (Banque des Territoires, Perspectives 2026). Pour mémoire.
+Logements familiaux loués ou occupés (millions)	4.8		SOURCÉ : Banque des Territoires, Perspectives 2026 (RPLS au 1er janvier 2025).
+Écart moyen au loyer de marché (€ par mois et par logement)	225		SOURCÉ : avantage monétaire moyen des locataires du parc social, 225 € par mois en 2020, en métropole (SDES, juin 2023). Non revalorisé depuis 2020 : prudent.
+Écart total au loyer de marché (Md€/an)	12.96		Ce que les locataires du parc social paient en moins que le prix du marché.
+Part de l’écart récupérée par les bailleurs	0.5		HYPOTHÈSE prudente : le choc d’offre fait baisser les loyers de marché, des locataires partent, des logements restent vacants. À 100 %, les lignes ci-dessous doublent.
+Loyers supplémentaires perçus (Md€/an)	6.48		Les loyers sont libres : le propriétaire fixe le nouveau loyer ou vend, le locataire a six mois pour partir.
+   dont ESH	2.7864		Sociétés privées.
+   dont offices publics et sociétés d’économie mixte	3.6936		Ressource des collectivités avant IS, hors budget de l’État et non comptée dans la feuille Collectivités. Chaque collectivité propriétaire choisit ses loyers : c’est un maximum. Elle peut faire baisser l’impôt local.
+IS des bailleurs sociaux sur les loyers supplémentaires (ESH et offices)	2.592		DÉCISION du 9 octobre : le bailleur est une entreprise, quel que soit son propriétaire. Le plafond des dividendes des ESH est levé (aujourd’hui : taux du Livret A + 1,5 point du capital, soit 3,2 % en 2026) ; ESH et offices publics passent à l’IS, dont ils sont exonérés pour leur activité de logement social (4° du 1 de l’article 207 du CGI, BOFiP BOI-IS-CHAMP-30-30-10-10). L’impôt payé par les offices est un prélèvement de l’État sur les collectivités : assumé au titre de la transition. Prudent : seule la hausse des loyers est imposée. Nouvelle recette (feuille Total, B20), comptée en année pleine. Plafond du prix de cession des actions (article L. 423-4 du CCH) : cité de mémoire, texte non relu.
+Hausse moyenne de loyer pour un ménage occupant (€/mois)	112.5		Coût pour les occupants actuels, avec l’hypothèse de la ligne 51 ; 225 € si l’écart est récupéré en entier. S’y ajoute la fin des aides personnelles, remplacées par le RUI.
+Pour mémoire — dette des bailleurs sociaux (Md€)	220.7		SOURCÉ : 220,7 Md€ d’encours de dette financière en 2024, 205,7 en 2023 (Banque des Territoires, Perspectives 2026). Elle reste chez les propriétaires.
+Pour mémoire — fonds propres des bailleurs sociaux (Md€)	124		SOURCÉ : 124,0 Md€ en 2024 (Banque des Territoires, Perspectives 2026).
+Valeur moyenne de cession d’un logement (€)	100000		HYPOTHÈSE à affiner. Repères : 320,7 Md€ d’immobilisations en valeur comptable en 2024, soit ≈ 57 000 € par logement (Banque des Territoires, Perspectives 2026) ; 10 900 logements vendus en 2024 (SDES, RPLS 2025).
+Part du parc des offices vendue chaque année (choix de chaque commune)	0.02		Illustration : chaque collectivité propriétaire décide de garder ou de vendre.
+Recettes de cession des collectivités, nettes de dette (Md€/an)	3.64002		Parc des offices seulement, après remboursement de la dette attachée aux logements vendus. Ressource des collectivités, non comptée dans la feuille Collectivités.
+5. L’ACCÈS AU LOGEMENT SANS PARC RÉSERVÉ (coût nul pour l’État)	Règle		Portée
+Loyer prélevé à la source sur le RUI	Sur demande		Le locataire peut demander que son loyer soit versé directement au bailleur. Le RUI ne dépend pas du loyer : contrairement aux aides personnelles, il ne pousse pas les loyers à la hausse.
+Délai entre le premier impayé et l’expulsion (mois)	3		Proposition validée le 9 octobre. La trêve hivernale est supprimée. La personne expulsée garde le RUI ; l’hébergement d’urgence reste financé par l’État (ligne 16).
+Préavis du locataire du parc social en cas de nouveau loyer ou de vente (mois)	6		Décision du 9 octobre.
+Garantie des loyers	Marché privé		Ni garantie publique ni dispositif transitoire : le trou des premières années est assumé. Visale s’éteint avec la cotisation patronale qui la finance. Dépôt de garantie libre. Une commune peut créer sa garantie, à ses frais.
+Normes de construction	Allégées		Droit de construire du logement bon marché (colocations, résidences, studios compacts) dans le droit à construire opposable.
+6. CHOC D’OFFRE : POUR MÉMOIRE, NON RETENU DANS LE SOLDE	Valeur		Hypothèse / source
+Logements supplémentaires construits par an	100000		Hypothèse d’illustration. Aucun gain n’est inscrit au budget tant que les effets macroéconomiques ne sont pas évalués.
+Prix moyen hors taxe (€)	250000		Hypothèse.
+Taux de TVA sur le neuf	0.15		Taux normal du projet. Pour mémoire : 6,3 Md€ de TVA sur le neuf en 2024 (SDES).
+TVA supplémentaire potentielle	3.75		Non comptée.
+7. EFFET DU VOLET SUR LE BUDGET DE L’ÉTAT	Md€/an
+IS des bailleurs	3.8
+IS des bailleurs sociaux, ESH et offices (fin de l’exonération, loyers libres)	2.592
+Loyers et plus-values des bailleurs sortis du barème	-11.9966098382599
+Hébergement d’urgence conservé par l’État	-0
+Retrait de la capitalisation (surcoût du socle)	-0
+Effet total sur le solde	-5.60460983825991
+Solde hors investissement après le volet (feuille Total)	-34.6020545978887
+Solde 2029, année de la bascule (% du PIB)	-0.0467056983515169
+8. BAISSE DES LOYERS DU PARC PRIVÉ (pour mémoire, hors budget ; reprise dans les simulateurs du site)	Valeur		Hypothèse / source
+Loyers versés par l’ensemble des locataires (Md€)	95		SOURCÉ : SDES, compte du logement 2024.
+Loyers du parc privé (Md€)	67.2		Total moins les loyers des bailleurs sociaux (ligne 47).
+Part des aides personnelles versée à des locataires du parc privé	0.5		SOURCÉ : la moitié des locataires bénéficiaires réside dans le parc social, donc l’autre moitié dans le parc privé (Cour des comptes, audition au Sénat, 2015). Donnée ancienne, en nombre de bénéficiaires et non en montants.
+Part des aides passée en hausses de loyers	0.78		SOURCÉ : 78 % (Fack, 2006, réforme des aides des années 1990). L’Insee cite une fourchette de 60 à 80 % (Insee Analyses n° 19, 2014).
+Part de cette hausse qui se défait à la fin des aides	0.25		HYPOTHÈSE sans source, donc prudente (règle du 9 octobre) : un quart. Les loyers baissent moins facilement qu’ils ne montent, le RUI remplace une partie du revenu perdu, et 90 % des locataires aidés du parc privé payaient en 2012 un loyer supérieur au plafond de l’aide (Cour des comptes) ; un rapport de l’Assemblée nationale juge aides et loyers « aujourd’hui décorrélés » (n° 1695, juillet 2025). À 100 %, la baisse serait de 9 %. Avant : un tiers. | v212 (22 octobre 2026) — SOURCES PLUS RÉCENTES : sur les bénéficiaires de 2018, le CGEDD ne trouve pas de concentration des loyers sous le loyer-plafond et juge l’effet haussier du barème « faible s’il existe » (Friggit, CGEDD, août 2020) ; l’Assemblée nationale juge aides et loyers « aujourd’hui décorrélés » (rapport n° 1695, juillet 2025). Ces travaux portent sur l’effet à la marge du barème actuel ; la part captée de 78 % (ligne 90) mesure l’extension des aides des années 1990 (Fack, 2006). Le quart retenu reste donc prudent ; la baisse des loyers due à la fin des aides pourrait être plus faible encore.
+Baisse des loyers privés : fin des aides personnelles	0.0230691964285714		Aides personnelles (ligne 5) × part du parc privé × part captée × part qui se défait, rapportée aux loyers privés.
+Parc de logements (millions)	38.4		SOURCÉ : 38,4 millions de logements au 1er janvier 2025, France hors Mayotte (Insee Focus n° 359, septembre 2025). Avant : 38,2, ordre de grandeur.
+Logements supplémentaires par an, scénario retenu	37500		Feuille Effets macro, ligne 33 : 25 000 en prudent, 50 000 en médian, 100 000 en optimiste.
+Baisse des loyers pour 1 % de logements en plus (%)	0.5		HYPOTHÈSE sans source nationale, donc prudente (règle du 9 octobre) : 0,5. Les études locales trouvent 0,1 (10 % de logements en plus dans un quartier : loyers en baisse de 1 %, Li, 2022) ; à l’échelle d’une ville entière, Auckland donne 1,4 à 3,5 (parc en hausse de 10 % en sept ans, loyers inférieurs de 14 à 35 % au contrefactuel, Greenaway-McGrevy, 2023). Avant : 1.
+Baisse des loyers en dix ans : choc d’offre	0.0048828125		Moyenne nationale. Environ trois fois plus si la construction se concentre dans les villes tendues.
+Baisse totale des loyers privés à dix ans	0.0279520089285714		Chiffre repris dans les simulateurs du site pour un locataire du parc privé. Le locataire du parc social subit au contraire la hausse de la ligne 56.
+9. REPRISE DES AMORTISSEMENTS À LA REVENTE (recette différée, comptée avec prudence)	Valeur		Hypothèse / source
+Amortissement déduit chaque année par les bailleurs (Md€)	25.5		Loyers nets × part amortie (lignes 19 et 20). À la revente, la plus-value se calcule sur la valeur nette comptable : l’amortissement déduit redevient imposable.
+Part du parc vendue chaque année	0.025		SOURCÉ : 951 000 ventes de logements anciens en 2025, soit 2,5 % du parc (Insee, Informations rapides n° 47, février 2026).
+Part des amortissements effectivement reprise à la revente	0.5		HYPOTHÈSE sans source, donc prudente (règle du 9 octobre) : une partie des biens n’est jamais vendue, ou l’est par cession des parts de la société, sans reprise.
+Année	2029	2030	2031	2032	2033	2034	2035	2036	2037	2038	2039	2040	2041	2042	2043	2044	2045	2046	2047	2048	2049	2050	2051	2052	2053	2054	2055	2056	2057	2058	2059	2060	2061	2062	2063	2064	2065	2066	2067	2068	2069	2070	2071	2072	2073
+Recette d’IS sur les amortissements repris (Md€)	0	0.125919448655504	0.248729935046359	0.36850821972438	0.485329168016606	0.599265796818563	0.710389320232205	0.818769194077043	0.924473159302293	1.02756728432718	1.12811600633584	1.22618217155266	1.32182707452324	1.41511049642543	1.50609074243456	1.59482467816604	1.68136776521824	1.76577409583778	1.84809642672896	1.9283862120284	2.00669363546557	2.08306764172924	2.15755596705952	2.23020516908453	2.30106065592047	2.37016671455315	2.43756653851882	2.5033022549015	2.56741495066381	2.62994469832765	2.69093058102083	2.75041071690527	2.80842228300217	2.86500153842876	2.92018384706149	2.97400369963961	3.02649473532294	3.07768976271754	3.12762078038204	3.1763189968279	3.22381485002564	3.27013802642965	3.31531747953311	3.35938144796493	3.40235747313979
+Lecture : chaque année, 2,5 % du stock d’amortissements accumulés depuis 2029 est repris, pour moitié, et imposé à l’IS. La recette monte lentement et tend vers la moitié de l’impôt différé. Elle est ajoutée à la ligne « Effet sur le solde : logement » de la feuille Effets macro, dans les trois scénarios. Les colonnes B à AT suivent les années 2029 à 2073.
+Sources : SDES, rapport du compte du logement 2024 (nov. 2025) ; SDES, RPLS au 1er janvier 2025 (janv. 2026) ; SDES, « Les loyers réduits du parc social procurent un avantage monétaire estimé à 225 euros mensuels » (juin 2023) ; Banque des Territoires, Perspectives 2026 ; Fack (2006) et Insee Analyses n° 19 (2014) sur les aides et les loyers ; Greenaway-McGrevy (2023, 2025) sur Auckland ; Insee, Informations rapides n° 47 (2026) sur les ventes de logements anciens ; Assemblée nationale, commission des finances, audition de la ministre du Logement (exécution 2024). Les hypothèses propres au projet sont signalées en colonne D.

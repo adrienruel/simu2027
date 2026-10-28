@@ -1,0 +1,24 @@
+BUDGET DE L’ÉDUCATION — vérification du « budget constant » (horizon 2035, Md€ par an)
+Ordres de grandeur. La ligne Éducation nationale du budget (feuille Total) n'est pas modifiée : le bilan net est proche de zéro à court terme et dégage une marge à l'horizon 2035.
+Mesure	Hypothèse	Paramètre	Effet budgétaire (Md€/an)
+Baisse démographique : effectifs enseignants réduits de moitié moins vite que les élèves	Élèves −15 % d’ici 2035 ; enseignants −7,5 % par non-remplacement	0.075	3.2625
+Revalorisation des chefs d’établissement et directeurs d’école	≈ 59 000 personnes, +300 € net/mois	59000	-0.33984
+Plateforme publique de soutien scolaire par l’IA	Développement et fonctionnement	0.3	-0.3
+Formation des enseignants à l’IA	Programme national	0.1	-0.1
+Tenue commune en primaire	≈ 4 M d’élèves, 200 € par kit tous les 2 ans, moitié payée par l’État	4000000	-0.2
+Supérieur : années au-delà de 5 (licence) et 3 (master) payées par l’étudiant	≈ 3 % des 1,6 M d’étudiants à l’université × 12 250 €	0.03	0.588
+Rythmes (5 jours, journées plus courtes)	Même volume horaire enseignant ; transport et cantine du mercredi à la charge des communes	0	0
+Bilan net à l’horizon 2035 (Md€/an, + = économie)			2.91066
+Enseignants (Éducation nationale)		870000
+Coût employeur moyen aligné d’un enseignant (€/an)		50000
+Pour mémoire : le RUI plein des étudiants (≈ 30,7 Md€, ligne RUI) remplace les bourses sur critères sociaux (≈ 2,3 Md€) et une partie des aides au logement étudiantes. C'est la vraie dépense nouvelle liée à l'éducation, et elle est comptée dans le RUI.
+Sources : ministère de l'Éducation nationale, projections d'effectifs à 2035 ; coût d'un étudiant à l'université (2023) ; DEPP, évaluation de la tenue commune.
+v169 : les mesures d’ascenseur social (classes de 12 étendues, moyens par élève pondérés, bac à tout âge, prêts des classes préparatoires) sont chiffrées dans la feuille Ascenseur social et reportées dans la Trajectoire.
+CONNAISSANCE DES RELIGIONS (v169) — cours de 4e, environ 20 heures pris sur l’enseignement moral et civique et l’histoire : heures redéployées, seuls la formation et les manuels coûtent
+Professeurs d’histoire-géographie à former	HYPOTHÈSE PRUDENTE (haute) : effectif non trouvé	40000
+Jours de formation initiale par professeur	Avec l’Institut d’étude des religions et de la laïcité (EPHE)	3
+Coût d’une journée de formation, remplacement compris (€)	HYPOTHÈSE	300
+Années pour amortir la formation initiale	Montée en charge 2028-2032	5
+Élèves de 4e dans le public et coût d’un manuel (€), renouvelé tous les 5 ans	HYPOTHÈSE : ≈ 700 000 élèves, 12 € le manuel	700000	12
+Coût annuel moyen (Md€, négatif = dépense)			-0.01008
+Reporté dans les économies d’éducation (feuille Budget État 2026, ligne 109). Les visites de lieux de culte sont des sorties scolaires, à la charge des établissements et de leurs collectivités : effet nul pour l’État. Formation renouvelée pour les nouveaux professeurs (1/30 par an).

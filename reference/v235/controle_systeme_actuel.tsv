@@ -1,0 +1,31 @@
+CONTRÔLE « SYSTÈME ACTUEL » (v219, 22 octobre 2026) — le modèle retrouve-t-il les comptes publics d'aujourd'hui ?
+Relecture indépendante, point B1. Objet : vérifier que les bases et les recettes du système actuel, reconstituées avec la méthode du modèle, retrouvent les comptes de l'Insee, et que chaque bloc de dépense actuelle a une place dans le nouveau système (conservé, transformé ou supprimé). Les cellules jaunes sont des données publiques saisies ; les autres sont liées au modèle.
+
+1. RECETTES 2024 : IMPÔTS ET COTISATIONS (Md€, montants de 2024)	Modèle	Insee	Écart	Source / lecture
+Recettes « Ancien » du modèle, hors recettes non fiscales et contribution UE (Total C17 − C9 − C10)	1318.89820243669	1322.5	-3.60179756330717	Insee : impôts et cotisations sociales des administrations publiques, 1 374,1 Md€ en 2025 en hausse de 3,9 %, soit ≈ 1 322,5 Md€ en 2024 (Insee Première n° 2106, compte des APU 2025), cotisations imputées comprises.
+Écart en % des impôts et cotisations			-0.00272347641837972
+Pour mémoire : écart avant le recalage de la masse salariale du privé (v218)	1439.2	1322.5	116.7	v218 : +117 Md€ (+8,8 %). La reconstitution « coïncidait » avec le total des recettes publiques parce que le modèle ignore ≈ 187 Md€ de recettes non fiscales (ventes, revenus de la propriété, transferts) et surestimait d'autant les impôts et cotisations.
+Lecture (v233) : l'écart restant vient des lignes du système actuel sans source (impôt sur le revenu des retraités, IS avant crédits d'impôt, TVA des retraités). Avant la v233, la colonne « Ancien » comptait deux fois les prélèvements actuels des indépendants (bloc 4 de la feuille Entreprises & Dividendes et Total, ligne 16) : c'était l'essentiel de l'écart de ≈ 4 %.
+
+2. MASSE SALARIALE DU PRIVÉ (Md€ de coût employeur, 2024)	Modèle	Repère	Écart	Source / lecture
+Coût employeur total des salariés du privé (feuille Salariés du privé)	1080.3571796892	1035	0.0438233620185484	Repère : ≈ 740 Md€ de salaires bruts du privé en 2025 (Urssaf, Stat'Ur n° 415 : 185,9 Md€ au 4e trimestre, hors prime de partage de la valeur), majorés des cotisations patronales après allègements (≈ 37 % en moyenne), ramenés en 2024 : 1 000 à 1 070 Md€. Milieu retenu. v235 : la distribution du modèle est en euros de 2026 ; elle est ramenée en 2024 par le facteur de la feuille « Passage en euros de 2026 ».
+Personnes salariées du privé (millions)	20.999998	21		Insee, fin 2024.
+Volume de travail (millions d'équivalents temps plein)	18.48	18.5		Insee Première n° 2079 (salaires du privé en 2024) : ≈ 18,5 M d'EQTP. Modèle : 0,88 EQTP par personne (feuille Salariés du privé, A50).
+Avant la v219 : 21,0 M de personnes comptées chacune au salaire d'un temps plein toute l'année	1180	1035	0.140096618357488	Biais corrigé en v219 : impôt unique du privé surestimé de ≈ 56 Md€, TVA de ≈ 4 Md€, RUI des temps partiels sous-estimé de ≈ 4,5 Md€.
+
+3. DÉPENSES ACTUELLES : OÙ CHAQUE BLOC SE RETROUVE DANS LE NOUVEAU SYSTÈME (Md€, 2026)	Actuel	Nouveau (2029, statique)		Traitement dans le programme
+Missions du budget général de l'État (crédits 2026, CAS Pensions compris), hors défense	326.926	203.381032215062		Mission par mission : feuille Budget État 2026 (missions conservées, alignement du coût des agents, missions reprises par le fonds ou supprimées). Actuel : hors aide sociale à l'enfance (dépense des départements aujourd'hui, comptée dans les collectivités) ; nouveau : la comprend.
+Défense (loi de programmation)	66.7	73.6178056612685		2026 avec pensions ; nouveau : niveau 2030 de la LPM actualisée, hors pensions, coût des agents aligné.
+Contribution à l'Union européenne	28.44	30.3536345776031		Conservée.
+Retraites, tous régimes (pensions de droit direct et dérivé)	428.007695	426.929631842105		Socle + coût de la transition en 2029 (anciennes pensions désindexées).
+Assurance maladie (objectif national 2026), invalidité, gestion, accidents du travail, complémentaire santé solidaire	302.259325255	305.932977141111		Ligne Santé (autonomie reprise des départements comprise dans le nouveau).
+Famille (branche famille, hors gestion)	59.4	48.970241354476		Remplacée par le RUI des enfants et le quotient familial.
+Assurance chômage (Unédic, 2026)	46.6	24.7725529891049		Remplacée par le RUI des chômeurs ; France Travail conservé (part Unédic).
+Opérateurs financés par des taxes affectées	21.68	0		Supprimés (transports au fonds, eau maintenue par les redevances, formation dans l'Éducation).
+Collectivités locales (dépenses 2025 de l'Insee, +0,3 % en 2026)	336.5	254.555959162368		Hors budget de l'État : financées par l'impôt local unique ; charges reprises par l'État et économies (feuille Collectivités, ligne 24).
+Charge d'intérêts de toutes les administrations publiques	79	102.878513037565		Haut Conseil des finances publiques (avis 2026-5) : 79 Md€ en 2026, 91 en 2027. Nouveau : intérêts nominaux 2029 du modèle.
+Crédits d'impôt restituables (crédit d'impôt recherche ≈ 7,7 Md€, services à la personne ≈ 5,5 Md€, etc.)	15	0		DÉCIDÉ le 22 octobre 2026 (« au revoir les crédits d'impôt ») : le nouvel IS et l'impôt unique ne prévoient aucun crédit d'impôt, ce qui supprime le crédit d'impôt recherche. Le crédit d'impôt pour l'emploi à domicile est remplacé par le montage RUI (feuille Emploi). Montant : ordre de grandeur.
+Lecture : tous les blocs de la dépense actuelle ont une place dans le nouveau système, sauf les crédits d'impôt aux entreprises (crédit d'impôt recherche), supprimés implicitement. La somme des blocs ne se compare pas au total de l'Insee (1 742 Md€ en 2026, 57,1 % du PIB) : celui-ci est consolidé et comprend des dépenses financées par des recettes que le modèle ne suit pas (ventes des hôpitaux et des collectivités, ≈ 187 Md€ de recettes non fiscales). C'est pourquoi le contrôle porte sur les bases et les recettes (sections 1 et 2), qui portent le solde du programme.
+
+4. CONCLUSION
+Conclusion (v233) : après le recalage de la masse salariale (v219) et la suppression du double compte des indépendants (v233), les impôts et cotisations du système actuel sont retrouvés à l'écart de la cellule D6 près. La couverture des dépenses est complète.

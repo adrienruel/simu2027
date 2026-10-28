@@ -1,0 +1,134 @@
+BUDGET DE L’ÉTAT 2026, MISSION PAR MISSION : CE QUE LE PROGRAMME GARDE, ET À QUEL COÛT (Md€/an)
+Point de départ : les crédits de paiement de chaque mission du budget général pour 2026 (texte de nouvelle lecture, janvier 2026 ; version du Sénat pour les missions de Justice à Travail). Pour chaque mission gardée : on retire le CAS Pensions, puis l’État paie le brut majoré de 40 %, comme dans le privé. La colonne « Part conservée » traduit le programme ; c’est là que tu arbitres.
+Masse salariale de l’État 2026, CAS Pensions compris	161.6	Assemblée nationale, PLF 2026, amendement II-CF2339. Contrôle : la somme des titres 2 ci-dessous (C48) doit en être proche.
+Rémunérations d’activité de l’État 2026 (≈ brut)	92.8	Même source.
+CAS Pensions versé par les ministères en 2026	50.4	Estimation : 45,5 Md€ en 2024 (rapport sur les pensions annexé au PLF 2026), + 4 points de taux en 2025 (≈ 2,2 Md€, estimé), + 2,7 Md€ au PLF 2026.
+Taux de charges patronales du privé appliqué au brut	0.4	Feuille Alignement public-privé.
+Brut par euro de masse salariale hors CAS	0.843348091924942	Cale le brut total sur les rémunérations d’activité de l’État.
+MISSION	Crédits 2026	dont titre 2 (salaires, CAS compris)	CAS Pensions	Part conservée	Ligne du modèle	Hors salaires	Salaires hors CAS	Brut	Salaires alignés (brut + 40 %)	Coût dans le programme	Traitement et source
+Sécurités (police, gendarmerie, sécurité civile)	25.948	21.492	8.36	1	Intérieur	4.456	13.132	11.0748471431583	15.5047860004217	19.9607860004217	CAS sourcé : 25,95 Md€ avec CAS, 17,59 Md€ hors CAS.	s
+Administration générale et territoriale de l’État	5.082	3.063	0.869	1	Intérieur	2.019	2.194	1.85030571368332	2.59042799915665	4.60942799915665	CAS sourcé : programmes 354 et 216, avec et hors CAS (Assemblée nationale).	s
+Immigration, asile et intégration	2.13	0	0	1	Intérieur	2.13	0	0	0	2.13	Conservée.	s
+Justice	13.055	7.777	2.42	1	Justice	5.278	5.357	4.51781572844191	6.32494201981868	11.6029420198187	CAS sourcé : 13,05 Md€ avec CAS, 10,63 Md€ hors CAS.	s
+Gestion des finances publiques	11.018	8.892	1.80257818659658	1	Finances	2.126	7.08942181340342	5.97885035918483	8.37039050285877	10.4963905028588	CAS non sourcé : solde réparti au prorata des salaires.	r
+Économie	3.513	0.992	0.201097341554634	1	Finances	2.521	0.790902658445366	0.667006247898263	0.933808747057568	3.45480874705757	Conservée.	r
+Engagements financiers hors charge de la dette	1.726	0	0	1	Finances	1.726	0	0	0	1.726	Garanties, épargne, dette SNCF Réseau. La charge de la dette (58,6 Md€) est une ligne à part.	s
+Action extérieure de l’État	3.454	1.386	0.280968664712423	1	Affaires étrangères	2.068	1.10503133528758	0.931926068132049	1.30469649538487	3.37269649538487	Conservée.	r
+Aide publique au développement	3.569	0	0	1	Affaires étrangères	3.569	0	0	0	3.569	Conservée en l’état (décision). Les crédits étaient de 5,9 Md€ en 2024 ; ils ont été réduits depuis.	s
+Enseignement scolaire public	80.75	76.482	25.16	1	Éducation	4.268	51.322	43.2823107737719	60.5952350832806	64.8632350832806	CAS sourcé : 89,64 Md€ avec CAS, 64,49 Md€ hors CAS pour la mission (Sénat).	s
+Enseignement privé sous contrat	8.871	7.974	0	0	Éducation	0.897	7.974	6.72485768500949	9.41480075901328	0	Supprimé par le programme. Le retour d’une partie des élèves dans le public est ajouté dans la ligne Éducation (Total).	s
+Recherche et enseignement supérieur	31.5	0.721	0.146160466996866	1	Recherche	30.779	0.574839533003134	0.484789823321217	0.678705752649704	31.4577057526497	Conservée. L’alignement des salaires des opérateurs (universités, organismes) est ajouté ligne 50.	r
+Agriculture, alimentation, forêt	4.126	0.936	0.189745072273324	1	Agriculture	3.19	0.746254927726676	0.629352669387877	0.881093737143028	4.07109373714303	Conservée.	r
+Culture, médias, livre et industries culturelles	4.456	0.764	0.154877388052158	1	Culture	3.692	0.609122611947842	0.513702392534549	0.719183349548369	4.41118334954837	Missions Culture (3,75 Md€) et Médias, livre (0,71 Md€). Conservées.	r
+Audiovisuel public	3.878	0	0	1	Culture	3.878	0	0	0	3.878	Conservé ; l’économie de 2 Md€ est comptée à part (Total!B102).	s
+Écologie, hors énergie et hors infrastructures de transport	7.45	3.146	0.637754270696451	1	Écologie	4.304	2.50824572930355	2.11532424988703	2.96145394984185	7.26545394984185	22,77 Md€ pour la mission, moins l’énergie et les transports ci-dessous.	r
+Infrastructures et services de transport	4.608	0	0	0	Fonds	4.608	0	0	0	0	DÉCISION : repris par le fonds souverain.	s
+Service public de l’énergie, énergie et climat	10.71	0	0	0	Fonds	10.71	0	0	0	0	DÉCISION : repris par le fonds souverain. v182 : la charge sans recette reste au budget de l’État (Total, ligne 33) ; le rendement servi aux épargnants n’est pas réduit.	s
+Sport, jeunesse et vie associative	1.246	0.134	0.0271643586374204	1	Sports	1.112	0.10683564136258	0.0900996342927089	0.126139488009793	1.23813948800979	Conservée.	r
+Conseil et contrôle de l’État	0.866	0.733	0.148593096128576	1	Administration	0.133	0.584406903871424	0.492858447287729	0.69000182620282	0.82300182620282	Conseil d’État, Cour des comptes, CESE.	r
+Direction de l’action du Gouvernement	1.052	0.387	0.0784522894976245	1	Administration	0.665	0.308547710502376	0.260213122919988	0.364298372087983	1.02929837208798	Conservée.	r
+Pouvoirs publics	1.14	0	0	1	Administration	1.14	0	0	0	1.14	Présidence, Assemblée nationale, Sénat.	s
+Transformation publique et crédits non répartis	1	0.405	0.0821012331951884	1	Administration	0.595	0.322898766804812	0.272316058869755	0.381242482417656	0.976242482417656	Missions Transformation et fonction publiques (0,53 Md€) et Crédits non répartis (0,48 Md€).	r
+Outre-mer	3.288	0.213	0.0431791670878398	1	Autres	3.075	0.16982083291216	0.143218075405575	0.200505305567804	3.2755053055678	DÉCISION d’Adrien du 15 octobre (v162) : l’État dépense en outre-mer au moins autant qu’aujourd’hui. Mission conservée en entier, y compris les 2,07 Md€ de compensations d’exonérations, qui financent désormais les compétences que l’État exerce sur place (écoles, eau, voirie) en attendant le dialogue avec chaque territoire. Avant : conditions de vie et service militaire adapté seuls (44 %).	r
+Monde combattant, mémoire et liens avec la Nation	1.738	0.0015	0	1	Autres	1.7365	0.0015	0.00126502213788741	0.00177103099304238	1.73827103099304	Conservée. Absente du modèle jusqu’ici.	s
+Santé (aide médicale de l’État, prévention)	1.478	0.0007	0	1	Autres	1.4773	0.0007	0.000590343664347459	0.000826481130086443	1.47812648113009	DÉCISION : conservée. Absente du modèle jusqu’ici.	s
+Aide sociale à l’enfance (reprise des départements)	11.2	0	0	1	Justice	11.2	0	0	0	11.2	DÉCISION : compétence de l’État, rattachée à la Justice. 11,2 Md€ nets dépensés par les départements en 2024 (Drees). Retiré du besoin de recettes des régions (feuille Collectivités).	s
+Protection de l’enfance et des majeurs : part déjà à l’État	1.2	0	0	1	Justice	1.2	0	0	0	1.2	HYPOTHÈSE : ≈ 1,2 Md€ dans la mission Solidarité (majeurs protégés, stratégie de protection de l’enfance). Rattachée à la Justice.	s
+Solidarité, insertion et égalité des chances : reste	30.104	0.0034	0	0	Autres	30.1006	0.0034	0.0028673835125448	0.00401433691756272	0	AAH et prime d’activité remplacées par le RUI et le barème. DÉCISION du 8 octobre : le reste de la mission (≈ 1 Md€ : aide alimentaire, égalité) est supprimé. Mission : 29,8 Md€ + 1,5 Md€ ajoutés en nouvelle lecture.	s
+Travail, emploi et administration des ministères sociaux	22.124	1.077	0.218328464570909	0.22137989546609	Autres	21.047	0.858671535429092	0.724159000994385	1.01382260139214	4.88382260139214	DÉCISION du 11 octobre : toutes les subventions à l’emploi sont supprimées (insertion par l’activité économique, contrats aidés, territoires zéro chômeur, aides aux employeurs d’apprentis, activité partielle). Restent le service public de l’emploi, l’accompagnement, la formation des demandeurs d’emploi, les entreprises adaptées (à trancher) et l’administration. La part conservée n’est plus un forfait de 25 % : elle vient du détail ligne par ligne (lignes 114 à 134), SOURCÉ. L’apprentissage est déjà compté dans l’Éducation.	r
+Cohésion des territoires	22.571	0.027	0	0	Supprimé	22.544	0.027	0.0227703984819734	0.0318785578747628	0	APL remplacées par le RUI ; habitat et politique de la ville renvoyés aux communes. L’hébergement d’urgence (3,07 Md€) est compté dans la feuille Logement.	s
+Régimes sociaux et de retraite	6.068	0	0	0	Retraites	6.068	0	0	0	0	Pensions des régimes spéciaux : comprises dans le système de retraite (socle et transition). À VÉRIFIER dans la feuille Coût transition.	s
+Relations avec les collectivités territoriales	4.009	0	0	0	Supprimé	4.009	0	0	0	0	Fin des dotations.	s
+Investir pour la France de 2030	4.398	0	0	0	Fonds	4.398	0	0	0	0	Investissements repris par le fonds souverain.	s
+Défense	71.0428305400372	23.831	9.58	1	Armées	56.7918305400372	14.251	12.0185536580223	16.8259751212313	73.6178056612685	Budget = loi de programmation hors pensions, niveau 2030 (paramètre Total!B78). CAS sourcé : 66,7 Md€ avec pensions, 57,1 Md€ hors pensions.	s
+Total (budget général hors dette et remboursements, plus l’aide sociale à l’enfance)	363.157	160.4376	50.4				110.0376	92.8	129.92	279.468936886232	Colonne B : missions civiles + salaires de la Défense. Contrôles : titre 2 total ≈ masse salariale de l’État (B4) ; brut total = rémunérations d’activité (B5).
+Baisse du coût employeur des agents de l’État	-0.196039603960396	Brut × 1,40 rapporté à la masse salariale actuelle. Alimente la feuille Alignement public-privé, donc la feuille Fonctionnaires.
+Opérateurs de recherche et universités : alignement de leurs salaires	0.4									-2.47009900990099	Part salariale des crédits de la mission Recherche (hypothèse du modèle) × baisse du coût employeur.
+TOTAUX PAR LIGNE DU MODÈLE (feuille Total)	Nouveau	Jusqu’à la v77	Écart
+Intérieur	26.7002139995783	17.38	9.32021399957832
+Justice	24.0029420198187	9.85	14.1529420198187
+Armées	73.6178056612685	71.92	1.69780566126853
+Finances	15.6771992499163	17.98	-2.30280075008366
+Affaires étrangères	6.94169649538487	6.19	0.751696495384868
+Éducation	75.8632350832806	73.63	2.23323508328062	Y compris l’apprentissage (8 Md€) et le retour d’un cinquième des élèves du privé.
+Recherche	28.9876067427487	28.57	0.417606742748713
+Agriculture	4.07109373714303	5	-0.928906262856971
+Culture	8.28918334954837	10	-1.71081665045163
+Écologie	7.26545394984185	20	-12.7345460501582
+Sports	1.23813948800979	5	-3.76186051199021
+Administration	3.96854268070846	28.65	-24.6814573192915	L’ancienne ligne (30 Md€) ne correspondait à aucun ensemble de missions identifiable.
+Autres	11.3757254190831	-0.32	11.6957254190831	Missions absentes du modèle jusqu’ici : outre-mer, monde combattant, santé, solidarité résiduelle, emploi.
+Contribution à l’Union européenne	30.3536345776031	28	2.35363457760314	v222 (23 octobre 2026) — SOURCÉ : prélèvement sur recettes au profit de l'UE de 30,9 Md€ dans le projet de loi de finances pour 2027 (28,8 Md€ en 2026), ramené en euros de 2026. La programmation 2028-2034, en négociation, et le remboursement de la dette du plan de relance européen pourraient l'augmenter encore : non compté. Avant : 28,44 Md€ (2026).
+Total	318.352472453934	321.85	-3.49752754606624
+HÔPITAUX
+Coût employeur actuel de tous les agents publics (feuille Fonctionnaires)	390.216780989024
+Part de la fonction publique hospitalière	0.23
+Baisse du coût employeur hospitalier (taux aligné sur le privé)	0.0789473684210527
+Économie sur la ligne Santé	7.08551523374808
+Limites : 1) les crédits des missions de Justice à Travail sont ceux votés par le Sénat en première lecture, pas le texte final ; 2) le CAS est sourcé pour l’Éducation, la Défense, les Sécurités, la Justice et l’administration territoriale (46,4 Md€ sur 50,4), réparti pour le reste ; 3) les taxes affectées aux opérateurs, les budgets annexes et les comptes spéciaux ne sont pas repris ; 4) les parts conservées en jaune sont des hypothèses à valider.
+CE QUE LE FONDS SOUVERAIN REPREND	Md€/an	Part sans recette	Charge sans recette
+Infrastructures et services de transport	4.608	0.5	2.304	HYPOTHÈSE : la moitié se rémunère (péages ferroviaires, concessions), l’autre moitié est une subvention.
+Service public de l’énergie, énergie et climat	10.71	1	10.71	Soutien aux renouvelables déjà contractualisé et péréquation tarifaire : charges sans recette. v226 : la part du soutien aux renouvelables s'éteint dans la trajectoire (lignes 136-144) ; le budget statique garde le niveau de 2026.
+Investir pour la France de 2030	4.398	0.5	2.199	HYPOTHÈSE : moitié subventions, moitié prises de participation et avances remboursables.
+Investissements locaux rentables (feuille Collectivités)	20	0	0	Repris parce que rentables : 10 Md€ d’origine + 10 Md€ du levier « même doctrine » (feuille Collectivités, ligne 64).
+Total repris par le fonds	39.716		15.213	Remplace l’ancien forfait de 60 Md€ « d’investissements publics », qui ne correspondait à aucun ensemble de missions.
+Épargne annuelle versée au fonds (obligatoire + libre)	69.9670607466158			Feuille Total.
+Part de l’épargne absorbée par les charges sans recette	0.217430885872047			Prudent : charges supposées constantes, alors que les contrats de soutien aux renouvelables s’éteignent en partie d’ici 2045.
+Rendement réel du fonds, net des frais de gestion (scénario prudent publié)	0.0233	v225 (23 octobre 2026), DÉCISION d'Adrien : rendement prudent ramené de 2,5 à 2,33 %, le rendement implicite du plan d'investissement (≈ 56 % de l'épargne en écologie à 2 %, le reste en industrie et IA à 2,75 %, feuille Fonds B79).		v182, CADRAGE DU RENDEMENT À TERME. Prudent 2,5 % réel net de frais ; médian 3 % ; optimiste 4 % (repères pour les simulations). SOURCÉ : le fonds souverain norvégien a servi 4,3 % réel par an depuis 1998, après inflation et frais (NBIM, rapport annuel 2025), avec 71 % d’actions mondiales. Notre fonds est moins diversifié : investi en France (5 % à l’étranger au départ, 15 % au plus, v203 ; aucun gain de rendement compté pour cette diversification), au moins 75 % dans du capital nouveau, beaucoup d’actifs régulés (réseaux électriques, nucléaire à prix garanti de 100 €/MWh pour un coût de 93 €, logement). D’où un prudent nettement plus bas. Règles de crédibilité : mandat d’investisseur avisé (aucune subvention, aucune mission de politique publique sans rémunération), conseil indépendant, comptes publiés, aucune garantie de l’État sur le rendement, plafond de 75 % par compartiment. Avant : 3 % brut, ramenés à 2,28 % par les charges sans recette.
+Durée d’épargne (années)	45			De 22 ans à l’âge d’accès au socle.
+Rendement net servi aux épargnants	0.0133226680551411			Rendement qui donne le même capital final qu’une épargne amputée des charges sans recette.
+Correction appliquée (1 = oui, 0 = non)	0			v182 : 0. Le fonds n’assume plus de charges sans recette (elles restent au budget de l’État, feuille Total, ligne 33) : l’épargnant reçoit tout le rendement.
+Rendement retenu dans le modèle	0.0233			Alimente la feuille Socle actuariel (rendement et taux de rente).
+État des sources des crédits (octobre 2026) : 14 missions, de Justice à Travail, restent au vote du Sénat en première lecture : le tableau final (état B de la loi n° 2026-103) n’a pas pu être lu. Sur les 11 missions dont les deux versions ont pu être comparées (≈ 135 Md€), l’écart total est d’environ +0,1 Md€, et au plus 0,35 Md€ par mission.
+ÉCONOMIES DÉCIDÉES LE 8 OCTOBRE SUR LES MISSIONS CONSERVÉES (Md€/an)
+Poste	Base	Part coupée	Économie	Source / hypothèse
+Aides à la presse	0.2	1	0.2	DÉCISION : supprimées ; un journaliste à temps partiel touche le RUI au prorata. Montant : ORDRE DE GRANDEUR des aides directes du programme « Presse et médias », hors Agence France-Presse. À vérifier.
+Sport, jeunesse et vie associative	1.23813948800979	0.8	0.990511590407834	DÉCISION : renvoyé aux communes. HYPOTHÈSE : 80 % coupés, il reste le haut niveau et l’antidopage.
+Économie (aides sectorielles)	3.45480874705757	0.5	1.72740437352878	DÉCISION : aides sectorielles coupées. HYPOTHÈSE : 50 % de la mission (compensations aux industriels et à La Poste) ; restent l’Insee, la concurrence et la répression des fraudes. Détail par programme à vérifier.
+Écologie hors énergie et transports	7.26545394984185	0.3	2.17963618495255	DÉCISION. HYPOTHÈSE : 30 %, soit le fonds vert (1,07 Md€, SOURCÉ, déjà compté comme ressource perdue par les collectivités) et les subventions de l’Ademe (ordre de grandeur).
+Emploi : administration (agents IA)	0.3	1	0.3	DÉCISION. ORDRE DE GRANDEUR sur l’administration des ministères sociaux.
+Bourses sur critères sociaux	2.3	1	2.3	OUBLI CORRIGÉ : les étudiants touchent le RUI plein (30,7 Md€ comptés), mais les bourses restaient dans la mission Recherche et enseignement supérieur. ≈ 2,3 Md€ (chiffre de la feuille Éducation).
+Université : années au-delà de 5 (licence) et 3 (master) payées par l’étudiant	0.588	1	0.588	Mesure du manifeste, calculée dans la feuille Éducation mais jamais reportée au budget. HYPOTHÈSE : 3 % des étudiants concernés.
+Université : sélection à l’entrée	19.6	0.05	0.98	HYPOTHÈSE PRUDENTE : 10 % d’étudiants en moins à l’université, coût évité égal à la moitié du coût moyen (12 250 €), car les charges fixes restent. Soit 5 % de la dépense. Le RUI de ces jeunes n’est pas réduit (ils le touchent comme inactifs ou chômeurs tant qu’ils ne travaillent pas).
+Total des économies			8.94294066436824	Retiré des dépenses (feuille Total, ligne 121). Audiovisuel public conservé ; l’économie de 2 Md€ de « recentrage » déjà inscrite (Total, ligne 102) n’est pas modifiée. v148 : comprend le solde des mesures d’environnement (écosystèmes transférés aux régions moins loyer des bombardiers d’eau, feuille Environnement, ligne 34).
+AUTRES ÉCONOMIES DÉCIDÉES LE 8 OCTOBRE (Md€/an)
+Santé : objectif d’économie supplémentaire	305.932977141111	0	0	v155 : objectif de 1 % sans mesure retiré, remplacé par la feuille Santé (mesures sourcées et pente par scénario). Valeur précédente : 1 %, soit 2,8 Md€.
+Éducation : baisse démographique, nette des mesures nouvelles (niveau 2032)	3.2625	0.57	0.909705	DÉCISION. Non-remplacement d’un départ sur deux par rapport à la baisse des élèves (3,3 Md€ en 2035), dont 4/7 acquis en 2032, moins les mesures nouvelles jamais comptées jusqu’ici (chefs d’établissement, soutien par l’IA, formation, tenue : 0,9 Md€). En 2029 le solde est légèrement négatif ; en 2035 il atteint 2,3 Md€.
+RUI des étudiants : demi-RUI pour l’étudiant logé chez ses parents	28.92288	0.33	4.06686772729428	DÉCISION. HYPOTHÈSE : un tiers des étudiants vivent chez leurs parents (ordre de grandeur des enquêtes sur les conditions de vie étudiante, à vérifier). Économie nette de la TVA perdue sur leur consommation. Risque : déclarations de fausse adresse.
+Total des autres économies			5.28632668160007
+Délai de carence de 1 à 7 jours dans la fonction publique, part de l’État et des hôpitaux — DÉCISIONS des 14 et 15 octobre (« public comme privé »)	0.47	0.659050966608084	0.3097539543058	SOURCÉ : 2e jour de carence ≈ 174 M€, 3e jour ≈ 115 M€ pour toute la fonction publique (rapports d’inspection, Acteurs publics, 15 janvier 2025). HYPOTHÈSE : les 4e et 5e jours suivent la même décroissance (≈ 76 et 50 M€), soit 0,415 Md€ pour quatre jours ; v167 : 6e et 7e jours ≈ 33 et 22 M€, soit 0,47 Md€ pour six jours. Seules les parts de l’État et des hôpitaux réduisent le déficit (effectifs : feuille Fonctionnaires) ; la part territoriale (≈ 0,14 Md€) réduit le besoin de recettes locales (feuille Collectivités, ligne 27, v159).
+Concours financiers de l’État aux collectivités d’outre-mer, maintenus (Md€) — DÉCISION du 15 octobre (v162)	54.7	0.05	2.735	Engagement d’Adrien : l’État prend au moins autant qu’aujourd’hui en outre-mer ; un territoire qui veut plus d’autonomie lève lui-même son impôt local, et ce montant lui est alors retiré. Les compétences exercées par l’État se décident avec chaque territoire. Base SOURCÉE : 54,7 Md€ de concours financiers à toutes les collectivités (LFI 2026). HYPOTHÈSE PRUDENTE (part non trouvée) : 5 % pour l’outre-mer, pour 3,2 % de la population, les recettes par habitant des collectivités d’outre-mer dépassant de 19 % celles de l’Hexagone (Cour des comptes, 2024). Retiré des ressources perdues des collectivités (feuille Collectivités, ligne 5).
+MISSION TRAVAIL ET EMPLOI, LIGNE PAR LIGNE (Md€, crédits de paiement 2026)
+Poste	Crédits 2026	Part conservée	Coût conservé	Traitement
+France Travail : subvention de l’État	1.1629	1	1.1629	Conservé : conseil, placement, contrôle. Les aides financières versées par France Travail sont retirées dans la feuille Sécurité sociale 2026, ligne 29.
+Missions locales	0.5354	1	0.5354	Conservé : accompagnement des jeunes, pas une subvention à l’emploi.
+Autres structures du service public de l’emploi	0.2072	1	0.2072	Conservé par prudence (reste de l’action 02, contenu non détaillé).
+Indemnisation des demandeurs d’emploi (allocation de solidarité spécifique)	2.0609	0	0	Supprimé : remplacé par le RUI.
+Insertion par l’activité économique (aides au poste des contrats d’insertion)	1.3036	0	0	DÉCISION du 11 octobre : supprimé. « On attire avec des salaires corrects, pas des subventions. »
+Contrats aidés	0.0361	0	0	DÉCISION du 11 octobre : supprimé.
+Territoires zéro chômeur de longue durée	0.0688	0	0	DÉCISION du 11 octobre : supprimé (emplois subventionnés).
+Autres dépenses du fonds d’inclusion dans l’emploi	0.0149	0	0	Supprimé.
+Entreprises adaptées (aide au poste des travailleurs handicapés)	0.4278	0	0	DÉCISION du 11 octobre : conservées, mais l’aide au poste est versée avec l’AAH, sans guichet séparé (feuille RUI, B17). Retirée de la mission Travail.
+Contrat d’engagement jeune : allocations	0.7983	0	0	Supprimé : remplacé par le RUI (allocation du contrat 755 M€, allocation d’accompagnement 43,3 M€).
+Contrat d’engagement jeune : accompagnement	0.1498	1	0.1498	Conservé : accompagnement, pas une subvention.
+Alternance : aides aux employeurs d’apprentis et exonérations	3.4184	0	0	Supprimé : aides à l’embauche (2,37 Md€) et compensations d’exonérations, qui disparaissent avec les cotisations. L’apprentissage est compté dans l’Éducation.
+Formation des demandeurs d’emploi	0.7551	1	0.7551	Conservé (DÉCISION antérieure : formation conservée).
+Activité partielle et mutations économiques	0.2818	0	0	DÉCISION du 11 octobre : supprimé (subvention au maintien dans l’emploi).
+Structures de formation (France compétences)	0.6735	0	0	Financement de l’apprentissage, déjà compté dans l’Éducation.
+Compensations d’exonérations de cotisations (aide à domicile, heures supplémentaires)	3.6188	0	0	Disparaissent avec les cotisations.
+Relations du travail (programme 111)	0.0772	1	0.0772	Conservé.
+Administration des ministères sociaux, hors salaires (programme 155)	0.9824	1	0.9824	Conservé. 2,059 Md€ moins le titre 2 de la mission (colonne C, ligne 40).
+Total hors salaires	16.5729		3.87	Alimente la part conservée de la ligne 40. Source : Assemblée nationale, rapport spécial sur le projet de loi de finances pour 2026, annexe 46 (mission : 17,65 Md€). Le montant de la ligne 40 (22,1 Md€, vote du Sénat en première lecture) n’a pas pu être rapproché de ce total : À VÉRIFIER.
+EXTINCTION DU SOUTIEN AUX RENOUVELABLES (v226, DÉCISION d'Adrien du 23 octobre 2026)
+Principe : plus aucun contrat de soutien nouveau après 2028 ; les contrats signés s'éteignent au budget de l'État ; le fonds ne porte que des projets rentables (feuille Fonds, ligne 36). Le fonds reste hors des administrations publiques.
+Soutien aux renouvelables payé par le budget de l'État en 2026 (Md€), compris dans la mission ligne 28	9.06			SOURCÉ : CRE, délibération n° 2026-149 du 15 juillet 2026 (charges de service public 2026-2027), 9,06 Md€ pour 2026. Le reste de la mission (≈ 1,65 Md€) est conservé tel quel.
+Soutien prévu en 2027 (Md€)	10.67			SOURCÉ : même délibération, prévision 2027 (+ 9,7 TWh de volumes, contrats de la programmation pluriannuelle).
+Dernière année de signature de contrats de soutien	2028			DÉCISION : fin des nouveaux contrats à la création du fonds (2028).
+Durée des contrats (années)	20			SOURCÉ : « de l'ordre de vingt ans » (Cour des comptes, rapport sur le soutien aux énergies renouvelables, mars 2026).
+Niveau retenu en 2029 (Md€)	10.67			HYPOTHÈSE PRUDENTE : le niveau de 2027 est maintenu en 2029 (les contrats de 2027-2028 compensent l'extinction des vieux contrats solaires), puis baisse linéaire jusqu'à zéro.
+Année où le dernier contrat s'éteint	2048
+Total payé de 2029 à l'extinction (Md€)	106.7			Contrôle : ≈ 107 Md€ à partir de 2029, contre 87 Md€ d'engagements hors bilan fin 2024 pour tous les contrats signés (Cour des comptes), dont ≈ 38 Md€ payés de 2025 à 2028 : la trajectoire retenue surestime la charge, sauf si les contrats de 2025-2028 sont très lourds ou si les prix de gros baissent (sens prudent).
+PARAMÈTRES AUPARAVANT ÉCRITS DANS LES FORMULES (v233)
+Délai de carence : poids de la fonction publique d'État	2.54	Ligne 112 (part de l'État et des hôpitaux) et feuille Collectivités.
+Délai de carence : poids de la fonction publique territoriale	1.94	Idem.
+Délai de carence : poids de la fonction publique hospitalière	1.21	Idem.

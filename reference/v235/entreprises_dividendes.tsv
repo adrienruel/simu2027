@@ -1,0 +1,76 @@
+BLOC 1 — Impôt sur les sociétés, par tranche de bénéfice imposable													PARAMÈTRES				PARAMÈTRES
+Classe de bénéfice imposable annuel	Nombre d'entreprises bénéficiaires	Bénéfice médian	IS actuel (15%/25%)	Taux de rétention actuel	Nouvel IS	Nouveau résultat net	Assiette totale (Md€)	Total IS actuel (Md€)	Total nouvel IS (Md€)	Diff (Md€)	Taxes de production actuelles (€/entreprise)	Nouvelles taxes de production	Total taxes production actuelles (Md€)	Total nouvelles taxes prod. (Md€)	Diff taxes prod. (Md€)	Nouveau bénéfice imposable (C+L)	Nouveau taux IS (unique)	0.4	Bénéfice suppl. / entreprise (effet conso)	TVA entreprises actuelle (€/entreprise, non déductible)	Nouvelle TVA entreprises	Total TVA entreprises actuelle (Md€)	Total nouvelle TVA entreprises (Md€)	Taxe pollution (nouvelle, €/entreprise)	Total taxe pollution (Md€)	Taxes de production, valeur d'origine du modèle (€/entreprise, avant recalage v234)
+0–10 k€	350000	5000	750	0.85	4939.44182342109	7409.16273513164	1.75	0.2625	1.72880463819738	1.46630463819738	7400.42956506326	0	2.59015034777214	0	-2.59015034777214	12348.6045585527	Nouvelle fiscalité dividendes (flat tax) — pilotée par la feuille Formules, colonne D	0.33	-51.8250065105282	7470	7470	2.6145	2.6145	0	0	10118
+10–20 k€	300000	15000	2250	0.85	9390.36857282826	14085.5528592424	4.5	0.675	2.81711057184848	2.14211057184848	8631.39645160224	0	2.58941893548067	0	-2.58941893548067	23475.9214320707	PFU actuel sur dividendes (2026)	0.314	-155.475019531585	8713	8713	2.6139	2.6139	0	0	11801
+20–42,5 k€	380000	31250	4687.5	0.85	16802.7959700138	25204.1939550207	11.875	1.78125	6.38506246860524	4.60381246860524	11080.8962157253	0	4.21074056197561	0	-4.21074056197561	42006.9899250345	Taux réduit IS actuel (≤ seuil)	0.15	-323.906290690801	11185	11185	4.2503	4.2503	0	0	15150
+42,5–75 k€	300000	58750	10437.5	0.822340425531915	29160.6750510389	43741.0125765583	17.625	3.13125	8.74820251531166	5.61695251531166	14760.6314540958	0	4.42818943622875	0	-4.42818943622875	72901.6876275971	Seuil taux réduit IS	42500	-608.943826498707	14900	14900	4.47	4.47	0	0	20181
+75–150 k€	195000	112500	23875	0.787777777777778	53397.9993490689	80096.9990236033	21.9375	4.655625	10.4126098730684	5.75698487306843	22161.0610191591	0	4.32140689873602	0	-4.32140689873602	133494.998372672	Taux normal IS actuel	0.25	-1166.06264648689	22370	22370	4.36215	4.36215	0	0	30299
+150–300 k€	98000	225000	52000	0.768888888888889	106782.248147058	160173.372220587	22.05	5.096	10.4646603184117	5.3686603184117	44287.7456606192	0	4.34019907474069	0	-4.34019907474069	266955.620367645	Nouvelles taxes de production (€/entreprise, 0=supprimées)	0	-2332.12529297377	44705	44705	4.38109	4.38109	0	0	60551
+300–500 k€	50000	400000	95750	0.760625	189845.575139564	284768.362709345	20	4.7875	9.49227875697818	4.70477875697818	78759.9383697511	0	3.93799691848756	0	-3.93799691848756	474613.937848909	Nouvelle TVA non déductible (ratio de l’actuelle ; v231 : 1, TVA légale aux taux actuels)	1	-4146.00052084226	79503	79503	3.97515	3.97515	0	0	107682
+500 k€–1 M€	32000	750000	183250	0.755666666666667	355956.138054162	533934.207081243	24	5.864	11.3905964177332	5.52659641773319	147664.096111984	0	4.72525107558349	0	-4.72525107558349	889890.345135405	Taux marge captée (profil) : voir feuilles salaires, cols AL:AO		-7773.75097657924	149057	149057	4.769824	4.769824	0	0	201889
+1–2 M€	9200	1500000	370750	0.752833333333333	731622.081973861	1097433.12296079	13.8	3.4109	6.73092315415952	3.32002315415952	344602.70688781	0	3.17034490336785	0	-3.17034490336785	1829055.20493465	Δ Consommation totale (indicatif, Md€)	-84.5619951829177	-15547.5019531585	347852	347852	3.2002384	3.2002384	0	0	471147
+2–5 M€	3600	3500000	870750	0.751214285714286	1700541.03938255	2550811.55907383	12.6	3.1347	6.12194774177719	2.98724774177719	787630.103013753	0	2.83546837084951	0	-2.83546837084951	4251352.59845638	Conso captée par entreprises françaises (Md€)		-36277.5045573698	795057	795057	2.8622052	2.8622052	0	0	1076862
+5–10 M€	2600	7500000	1870750	0.750566666666667	3608853.59538292	5413280.39307437	19.5	4.86395	9.38301934799558	4.51906934799558	1599871.49822308	0	4.15966589538001	0	-4.15966589538001	9022133.98845729	Bénéfice supplémentaire capté (profil conso, Md€)	-3.1122212034735	-77737.5097657924	1614956	1614956	4.1988856	4.1988856	0	0	2187373
+10–25 M€	1400	17500000	4370750	0.750242857142857	8404248.61809873	12606372.9271481	24.5	6.11905	11.7659480653382	5.64689806533822	3692009.06803366	0	5.16881269524713	0	-5.16881269524713	21010621.5452468	IS local des communes — taux de base pour les simulations (chaque commune vote le sien ; part calée sur les charges des communes)	0.026	-181387.522786849	3726820	3726820	5.217548	5.217548	0	0	5047781
+25–50 M€	350	37500000	9370750	0.750113333333333	18585766.141253	27878649.2118795	13.125	3.2797625	6.50501814943856	3.22525564943855	9353102.90196149	0	3.27358601568652	0	-3.27358601568652	46464415.3531325	IS local des régions — taux de base pour les simulations (chaque région vote le sien ; part calée sur les charges des régions)	0.024	-388687.548828962	9441290	9441290	3.3044515	3.3044515	0	0	12787730
+50–100 M€	200	75000000	18745750	0.750056666666667	38057623.0602427	57086434.590364	15	3.74915	7.61152461204853	3.86237461204853	20921432.7482646	0	4.18428654965291	0	-4.18428654965291	95144057.6506066	IS local — taux de base total (communes + régions)	0.05	-777375.097657924	21118693	21118693	4.2237386	4.2237386	0	0	28604158
+100–500 M€	140	300000000	74995750	0.750014166666667	150261425.028971	225392137.543457	42	10.499405	21.036599504056	10.537194504056	78763062.9630603	0	11.0268288148284	0	-11.0268288148284	375653562.572429	Taux d’IS total payé par l’entreprise (État + local)	0.45	-3109500.39063169	79505690	79505690	11.1307966	11.1307966	0	0	107686272
+>500 M€	30	1200000000	299995750	0.750003541666667	612860179.454759	919290269.182139	36	8.9998725	18.3858053836428	9.38593288364277	344588450.199424	0	10.3376535059827	0	-10.3376535059827	1532150448.6369	Plafond légal de l’impôt local (commune + région), sur les bénéfices comme sur les revenus des ménages	0.1	-12438001.5625268	347837442	347837442	10.43512326	10.43512326	0	0	471127508
+																	Contrôle : taux de base sous le plafond (1 = oui)	1
+TOTAL	1722520						300.2625	70.309915	148.980111518611	78.6701965186106			75.3	0	-75.3		Élasticité des dividendes versés au taux net d’impôt (au-delà du taux actuel)	2	SOURCÉ pour l’ordre de grandeur : après la flat tax de 2018, les dividendes déclarés sont passés de 14,3 Md€ (2017) à 23,6 Md€ (2020), +65 %, quand le taux net d’impôt montait d’environ 0,55 à 0,70 (France Stratégie, point de vue d’octobre 2022) : élasticité ≈ 2 (calcul). Règle prudente : la base de dividendes du modèle est celle d’aujourd’hui (taux de 31,4 %) ; sous ce taux, on ne compte pas la hausse des versements ; au-dessus, la base baisse selon cette élasticité (Total, ligne 7).			76.00990116	76.00990116		0
+Taux effectif moyen actuel								0.234161492027809
+																	Recalage des impôts de production sur le périmètre des entreprises (v234)	0.731412291467015
+																	Impôts de production des entreprises, 2023, hors administration publique, enseignement, santé et action sociale (Md€)	75.3	SOURCÉ : DGFiP Statistiques n° 35 (2025) : 92,7 Md€ d'impôts de production collectés auprès des entreprises en 2023 (colonne U), dont 17,4 Md€ dans l'administration publique, l'enseignement, la santé et l'action sociale (colonne V : hôpitaux, établissements et associations, qui ne paient pas ou peu d'IS). La taxe foncière des particuliers sur leurs logements est exclue. Reste une surestimation possible : les entreprises déficitaires et individuelles sont attribuées ici aux seules entreprises bénéficiaires (aucune ventilation publiée).	92.7	17.4
+BLOC 2 — Fiscalité des dividendes perçus par les ménages																	Recalage des dividendes des ménages (v235)	1.14282277224745
+Classe de dividendes annuels perçus (foyer)	Effectif (foyers)	Dividende brut médian	Fiscalité actuelle (PFU 31,4%)	Net actuel	Nouvelle fiscalité	Nouveau net	Total dividendes bruts (Md€)	Total prélèvement actuel (Md€)	Total prélèvement nouveau (Md€)	Diff (Md€)							Revenus de capitaux mobiliers déclarés par les foyers, revenus de 2023 (Md€)	53	SOURCÉ : DGFiP Statistiques n° 41 (2025) : 53 Md€ pour les revenus de 2023, 70 Md€ pour ceux de 2024 (+32 %). Retenu : 2023 (le bond de 2024 peut tenir à des versements anticipés). Dividendes = revenus de capitaux mobiliers − intérêts (Total, ligne 107). Avant : 33,5 Md€ de dividendes de 2021.
+0–500 €	1500000	200	62.8	137.2	66	134	0.3	0.0942	0.099	0.0048
+500–1 000 €	500000	700	219.8	480.2	231	469	0.35	0.1099	0.1155	0.00560000000000001
+1 000–2 500 €	220000	1600	502.4	1097.6	528	1072	0.352	0.110528	0.11616	0.005632
+2 500–5 000 €	70000	3500	1099	2401	1155	2345	0.245	0.07693	0.08085	0.00392000000000001
+5 000–10 000 €	12000	7000	2198	4802	2310	4690	0.084	0.026376	0.02772	0.001344
+10 000–25 000 €	150000	16000	5024	10976	5280	10720	2.4	0.7536	0.792	0.0384
+25 000–50 000 €	80000	35000	10990	24010	11550	23450	2.8	0.8792	0.924	0.0448000000000001
+50 000–100 000 €	45000	72000	22608	49392	23760	48240	3.24	1.01736	1.0692	0.0518399999999999
+100 000–250 000 €	20000	160000	50240	109760	52800	107200	3.2	1.0048	1.056	0.0512000000000001
+250 000–500 000 €	6000	350000	109900	240100	115500	234500	2.1	0.6594	0.693	0.0336
+500 000 €–1 M€	2200	700000	219800	480200	231000	469000	1.54	0.48356	0.5082	0.02464
+1–5 M€	1200	2200000	690800	1509200	726000	1474000	2.64	0.82896	0.8712	0.0422399999999999
+>5 M€	200	70000000	21980000	48020000	23100000	46900000	14	4.396	4.62	0.224
+TOTAL	2606600						33.251	10.440814	10.97283	0.532016
+BLOC 3 — Cascade combinée IS + dividendes (pour 100 € de profit distribué)
+Scénario	Taux taxes prod. (%)	Bénéfice imposable (€)	IS (%)	Résultat net entreprise (€)	Fiscalité dividende (%)	Net actionnaire (€)	Prélèvement cumulé (%)
+Actuel	0.250780567003872	100	0.234161492027809	76.5838507972191	0.314	52.5365216468923	0.38771153935763
+Nouveau	0	125.078056700387	0.4	75.0468340202323	0.33	50.2813787935556	0.598
+Sources et hypothèses :
+— Bloc 1 (IS) : répartition du nombre d'entreprises bénéficiaires (1,72 M) et des bénéfices par taille (TPE/PME/ETI/GE)
+  calibrée sur DGFiP Statistiques n°39 (sept. 2025, données 2024) : 2,718 M entreprises à l'IS, 1,7 M bénéficiaires, bénéfices 284 Md€, IS brut 69 Md€.
+  Barème actuel : 15% jusqu'à 42 500 € de bénéfice (PME <10 M€ CA détenues ≥75% par personnes physiques), 25% au-delà (taux normal depuis 2022).
+  Les 972 000 entreprises déficitaires (IS=0) ne sont pas représentées dans les classes (bénéfice imposable nul ou négatif).
+— Taxes de production (col. L:P) : périmètre complet INSEE/comptabilité nationale (catégorie D29), source FIPECO (données 2024) : 129,1 Md€ au total.
+  Impôts divers sur la production (71,1 Md€) : taxe foncière entreprises 42,9 Md€, CFE 7,7 Md€, C3S 5,2 Md€, CVAE 3,9 Md€, autres (chambres consulaires, IFER...) pour le solde.
+  Impôts sur salaires et main-d'œuvre (58,0 Md€) : taxe sur les salaires 17,3 Md€, versement mobilité 12,2 Md€, contribution formation/apprentissage 11,4 Md€, forfait social 6,3 Md€, autres (AGS, CNSA...).
+  Répartition par tranche de bénéfice estimée par extrapolation (pas de croisement officiel taxes de production x tranche de bénéfice) — les taxes sur la masse salariale
+  sont ainsi réparties selon la même clé que les taxes foncières/CA, ce qui est une approximation (elles suivent en réalité la masse salariale, pas le bénéfice).
+— Bénéfice imposable nouveau (col. Q) : les taxes de production actuelles étant déductibles du résultat fiscal, leur suppression réintègre mécaniquement ce montant
+  dans le bénéfice imposable. Nouveau bénéfice imposable = bénéfice actuel + taxes de production actuelles (col. C + col. L). Le nouvel IS (col. F) et le nouveau
+  résultat net (col. G) sont calculés sur cette base élargie, pas sur le bénéfice actuel.
+— Bloc 2 (Dividendes) : calibré sur le chiffre DGFiP relayé par franceinfo (avril 2024) : 33,5 Md€ de dividendes déclarés en 2021,
+  dont 96% perçus par 1% des foyers fiscaux (400 000 foyers, ~32,2 Md€). Répartition par tranche estimée (non officielle) pour reconstituer ce total
+  et cette concentration ; la bosse observée vers 10-25 k€ reflète une population distincte (dirigeants de PME se versant des dividendes plutôt qu'un salaire)
+  par rapport aux petits porteurs (PEA / compte-titres) des tranches basses.
+  PFU (flat tax) actuel = 31,4% (12,8% IR + 18,6% prélèvements sociaux) depuis le 1er janvier 2026, suite à la hausse de CSG votée en LFSS 2026 (contre 30% en 2025).
+— Bloc 3 (cascade) : même logique de transvasement — le bénéfice imposable "nouveau" est grossi du taux de taxes de production actuel avant application du nouvel IS.
+— Paramètres modifiables (colonnes R:S) : nouveau taux IS (40%, doctrine "Projet France"), nouvelle fiscalité dividendes (0% par défaut,
+  cohérent avec le principe "taxation uniquement sur les profits des entreprises"), et nouvelles taxes de production (0€/entreprise par défaut = suppression totale).
+— Modèle simplifié et illustratif : pas de distinction sectorielle, médianes de tranche = point milieu, tranche haute ouverte (>500 M€, >5 M€) avec valeur représentative arbitraire.
+BLOC 4 — SUPPRIMÉ EN v233 (28 octobre 2026). Il recalculait l'impôt des indépendants avec un ancien barème et ce montant (≈ 19,5 Md€) entrait dans la ligne 2 de la feuille Total, alors que la feuille Indépendants le compte déjà (Total, ligne 16) : double compte. De même, la colonne « Ancien » comptait deux fois les prélèvements actuels des indépendants (≈ 40 Md€ ici et 38 Md€ en Total, ligne 16). Le calcul des indépendants est désormais entièrement dans la feuille Indépendants.
+
+BLOC 5 — Entreprises déficitaires basculant en bénéfice (effet suppression taxes prod + conso)
+Classe de perte annuelle actuelle	Effectif	Perte médiane (actuelle)	Nouveau bénéfice (après allègement)	Nouvel IS (40%)	Total nouvel IS (Md€)
+0–2 000 €	35346	1000	6418.17499348947	2567.26999739579	0.0907427253279516
+2 000–4 000 €	65347	3000	4418.17499348947	1767.26999739579	0.115485792519823
+4 000–6 000 €	65712	5000	2418.17499348947	967.269997395789	0.0635612460688721
+6 000–8 000 €	60326	7000	418.174993489472	167.269997395789	0.0100907298628983
+8 000–10 000 €	54115	9000	-1581.82500651053	0	0
+10 000–10 218 €	5535	10109	-2690.82500651053	0	0
+TOTAL	286381				0.279880493779545

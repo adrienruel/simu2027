@@ -1,0 +1,56 @@
+PROJET DE RÉFÉRENCE ET VARIANTES SOUMISES AU VOTE
+Principe : la trajectoire est votée une fois en début de mandat (prudent : moins de 4 % en 2029, 3 % en 2032, 2 % en 2037 ; médian, l'engagement : 3 %, 2 %, 1 % ; optimiste : 2 %, 1 %, 0 % (DÉCISION du 18 octobre)). Chaque automne, le Haut Conseil des finances publiques certifie l'écart à la trajectoire et au moins trois variantes qui la tiennent, calculées sur la trajectoire que suit réellement l'économie. Le Parlement en choisit une ; faute d'accord, « effort partagé » s'applique, et un référendum peut trancher entre les variantes certifiées (DÉCISION du 16 octobre, v179 : à inscrire à l'article 47 lors de la révision constitutionnelle de 2027-2028). Garde-fous : barème ±1 point par an ; RUI ±30 € par an en plus de sa revalorisation ; RUI jamais sous le RSA actuel, 651,69 € (DÉCISION du 16 octobre, v179). Si le déficit passe sous la trajectoire deux années de suite, on desserre d'abord le dernier levier serré. Cellules jaunes : modifiables.
+Formule retenue dans le chiffrage (0 = projet de référence, 1 à 3 = variantes)	0	DÉCISION d’Adrien du 22 octobre 2026 (v220) : projet de référence = tranche de 24 000 à 45 000 € au plafond de 66 % et RUI à 800 €, règle « le SMIC et le salarié médian ne paient pas plus d’impôts et de TVA qu’aujourd’hui ; les retraités aisés, les inactifs et les hauts revenus perdent ». Avant : RUI à 850 €, tranche à 53,1 %. v221 (23 octobre 2026) : + paquet « fonctionnement » (effectifs de l'État hors missions prioritaires, achats, gestion de la Sécurité sociale), pente de la santé du médian dans le prudent, déduction intégrale gardée, et clause de trajectoire (feuille du même nom) : si le prudent s'écarte du médian, étalement de la déduction sur 16 ans, contribution de transition jusqu'à 5 points, puis baisse du RUI, jusqu'en 2037.
+Formule	RUI mensuel (€)	Supplément de barème (points, toutes tranches imposées)	Taux sur les dividendes (flat tax)	v160 : la flat tax devient un levier du vote annuel. DÉCISION du 15 octobre (v167) : projet de référence à 31 %, le taux d’aujourd’hui (31,4 %) arrondi.
+1. (caduque) Prudent, les travailleurs paient	850	0.01	0.33	v194 (18 octobre) : variantes caduques, le projet de référence tenant la trajectoire dans tous les scénarios. Les lignes 7 à 9 restent comme outils de test (Formules B4).
+2. (caduque) Prudent, effort partagé	820	0.007	0.33
+3. (caduque) Prudent, le RUI d'abord	760	0	0.33
+0. Projet de référence : RUI à 800 €, barème 0 / 17,9 / 57 / 66 % (v232 : TVA et accises à recettes égales, ménages comme aujourd'hui)	800	0	0.33	DÉCISION d’Adrien du 16 octobre (v177) : flat tax à 33 %, le taux qui maximise la recette avec l’élasticité de 2 du modèle (maximum en 1/3). +0,16 Md€ par rapport à 31 %. Toutes les formules passent à 33 %.
+BARÈME DE BASE (v164) — taux marginal par tranche, avant supplément. Au-dessus de 24 000 € de coût employeur (SMIC non touché) : +9 points (v159), +3 points de transfert de l’autonomie, +1,1 point pour les crèches et l’outre-mer (v163). DÉCISION du 15 octobre (v164) : les deux tranches du haut ramenées à 66 % (100 000 à 160 000 €) et 70 % (au-delà), proches du taux qui maximise la recette une fois la réaction des hauts revenus comptée (feuille Hauts revenus). DÉCISION d'Adrien du 18 octobre (v197) : tranche de 24 000 à 45 000 € ramenée de 63,1 à 53,1 %. Barème (v207) : 0 / 19,1 / 53,1 / 53,1 / 66 / 66 / 66 / 66 %. DÉCISION d'Adrien du 22 octobre 2026 (v220) : tranche de 24 000 à 45 000 € portée au plafond de 66 % ; barème 0 / 19,1 / 66 / 66 / 66 / 66 / 66 / 66 %. DÉCISION d'Adrien du 23 octobre 2026 (v224) : tranche de 12 500 à 24 000 € ramenée de 19,1 à 18,2 % pour rendre aux ménages le carbone des produits importés ; barème 0 / 18,2 / 66 / 66 / 66 / 66 / 66 / 66 %. DÉCISION d'Adrien du 23 octobre 2026 (v227) : tranche de 24 000 à 32 000 € ramenée de 66 à 45 %, pour adoucir la marche au-dessus du SMIC (« on verra après » pour le financement) ; barème 0 / 18,2 / 45 / 66 / 66 / 66 / 66 / 66 %.		Taux appliqué
+Tranche 0 — à partir de  0 € de coût employeur	0	0
+Tranche 1 — à partir de 12 500 € de coût employeur	0.179	0.179	v232 (28 octobre 2026), DÉCISION d'Adrien : la TVA des ménages colle à celle d'aujourd'hui ; tranche basse à 17,9 % pour que le SMIC ne paie pas plus d'impôts et de TVA qu'aujourd'hui (sa TVA monte de ≈ 3 € par mois).
+Tranche 2 — à partir de 24 000 € de coût employeur	0.57	0.57	v232 : tranche de 24 000 à 32 000 € à 57 %, le taux qui tient les objectifs prudents (4 / 3 / 2 %).
+Tranche 3 — à partir de 32 000 € de coût employeur	0.66	0.66
+Tranche 4 — à partir de 45 000 € de coût employeur	0.66	0.66
+Tranche 5 — à partir de 65 000 € de coût employeur	0.66	0.66
+Tranche 6 — à partir de 100 000 € de coût employeur	0.66	0.66
+Tranche 7 — à partir de 160 000 € de coût employeur	0.66	0.66	DÉCISION d'Adrien du 17 octobre (v187 puis v188) : « l'impôt doit être progressif », « maximise la recette en prenant en compte les optimisations », puis « on limite à 66 ». L'ancien barème (67,1 / 68,1 / 66 / 66 %) faisait baisser le taux marginal au-delà de 100 000 €. Sans plafond, le taux unique qui rapportait le plus au-delà de 45 000 € était 67,1 % (juste au-dessus des deux tiers, risque constitutionnel). Retenu : 66 % au-delà de 45 000 €, plafond absolu (B20) ; un relèvement voté du barème ne touche donc que les tranches de 12 500 à 45 000 €, tant qu'elles restent sous 66 %.
+Plafond du taux marginal (DÉCISION d'Adrien du 17 octobre, v188 : « on limite à 66 »), y compris quand une variante relève le barème	0.66
+FORMULE RETENUE — calcul en direct
+Salarié au SMIC à temps plein : revenu actuel, impôt et aides compris (€/mois)	1741.8088949723	Classe 22,5–25 k€ de coût employeur du modèle. Célibataire sans enfant.
+   Écart avec aujourd’hui, avant / après épargne obligatoire (€/mois)	2.01157475257636	-2.6028421659615
+Salarié médian : revenu actuel, impôt et aides compris (€/mois)	2068.00895172442	Classe 40–45 k€ de coût employeur du modèle. Célibataire sans enfant.
+   Écart avec aujourd’hui, avant / après épargne obligatoire (€/mois)	164.526189764136	-36.9425818248104
+Déficit public 2029, prudent (% du PIB)	0.0467056983515169
+Déficit public 2032, prudent (% du PIB)	0.0381329755276314
+Déficit public 2032, médian (% du PIB)	0.0381329755276314
+Coût du RUI (Md€)	112.67509191419
+Recettes de l’impôt unique : privé, public, retraités (Md€)	617.015961187832
+SITUATION PAR SCÉNARIO — calcul en direct (v233 ; avant : valeurs figées en texte)
+Déficit public (% du PIB)	2029	2032	2037	Lecture
+Prudent publié (clause de trajectoire comprise)	0.0467056983515169	0.0381329755276314	0.0230577123406229	Égal au médian tant que la clause joue.
+   dont mesures de la clause (Md€)	16.7442107262325	43.0823550931888	59.0803625808718	Étalement de la déduction intégrale, contribution de transition, baisse du RUI.
+Prudent avant la clause	0.0522824647561006	0.0518428946957234	0.0407151328821743	Objectifs du prudent : 4 / 3 / 2 %.
+Médian	0.0467056983515169	0.0381329755276314	0.0230577123406229	Objectifs du médian : 3 / 2 / 1 %.
+Optimiste (« tout le monde joue le jeu »)	0.0421597223293878	0.023166735827899	0.00211361581316768	Sans objectif.
+Crise (feuille Scénario de crise, régénérée par recalcul complet)	0.04677	0.038112	0.026365	Sans objectif.
+
+PROFESSEUR CERTIFIÉ DU MANIFESTE (classe normale, 8e échelon, célibataire) — calcul en direct
+Coût employeur aligné sur le privé (€/mois)	4172	Brut de 2 980 € × 1,40 (feuille Alignement public-privé, B18). Coût actuel pour l’État : 5 592 €.
+Disponible aujourd’hui, après impôt sur le revenu (€/mois)	2251	Manifeste : brut 2 980 €, retenues 602 €, impôt sur le revenu 127 €.
+Net après impôt unique (€/mois)	2626.93833333333
+Impôt local, taux moyen de la feuille Collectivités (€/mois)	225.496514837468
+Épargne retraite obligatoire (€/mois)	262.693833333333
+Écart de revenu disponible avec aujourd’hui, avant épargne (€/mois)	150.441818495865
+Écart de revenu disponible avec aujourd’hui, après épargne (€/mois)	-112.252014837468
+Le manifeste annonce +338 € : il ne compte pas l’impôt local. La ligne « agent public à 65–70 k€ » du tableau est un autre profil : coût actuel de 5 625 €/mois, disponible actuel de 2 771 €, alignement moyen des trois versants (−13,5 %) et non celui de l’État.
+LEVIERS DU VOTE ANNUEL : EFFET D'UN CRAN — recalcul complet du modèle v235 (28 octobre 2026), un levier à la fois. À régénérer après tout changement du modèle.
+Levier	Effet sur le solde 2032, médian (Md€ ; + = amélioration)	Déficit 2032, médian (points de PIB ; + = amélioration)	SMIC / médian (€/mois après épargne)	Prudent avant la clause : effet sur le solde 2032 (Md€) — en prudent publié, la clause absorbe l'effet
+Flat tax sur les dividendes : 33 % → 10 %	-13.96	-0.459	+0 / +0	-14.67
+Flat tax sur les dividendes : 33 % → 40 %	1.99	0.066	-1 / -2	2.01
+Impôt sur les sociétés de l'État : +1 point	1.15	0.039	-0 / -0	0.41
+Impôt sur les sociétés de l'État : −1 point	-1.21	-0.041	+0 / +0	-0.49
+Supplément de barème : +1 point (tranches sous le plafond de 66 %)	6.08	0.197	-9 / -15	5.91
+Supplément de barème : −1 point sur toutes les tranches (66 % compris)	-11.07	-0.36	+9 / +23	-8.81
+RUI : −10 € par mois	1	0.033	-0 / -0	1.04
+RUI : +10 € par mois	-1	-0.033	+0 / +0	-1.04

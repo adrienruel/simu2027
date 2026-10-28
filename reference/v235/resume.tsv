@@ -1,0 +1,49 @@
+RÉSUMÉ — Projet France : synthèse dynamique des mesures
+Version v235 du 28 octobre 2026. Toutes les valeurs ci-dessous sont liées en direct aux paramètres des feuilles. Avant de publier : feuille « Contrôles automatiques ». Paramètres : feuille « Registre des paramètres ».
+1. Barème de l’impôt unique (7 tranches, coût employeur annuel) — feuille Total, lignes 87 à 94
+Tranche	De (€)	À (€)	Taux marginal
+Tranche 1	0	12500	0
+Tranche 2	12500	24000	0.179
+Tranche 3 (24 000 à 45 000 €)	24000	45000	0.57
+Tranche 4	45000	65000	0.66
+Tranche 5	65000	100000	0.66
+Tranches 6 et 7 : de 100 000 à 160 000 €, puis au-delà	100000	160000	0.66	0.66	← colonne D : taux de 100 000 à 160 000 € ; colonne E : taux au-delà
+2. Fiscalité des entreprises
+Taux d'IS (nouveau, flat)	0.4
+Fiscalité des dividendes (nouveau)	0.33
+PFU actuel (référence)	0.314
+Taxes de production (nouveau, 0=supprimées)	0
+TVA entreprises non déductible (nouveau, 0=supprimée)	1
+Taxe pollution — total collecté (Md€)	0
+IS local des collectivités — taux de base (communes + régions)	0.05
+3. Revenu Universel d'Inactivité (RUI)
+Montant mensuel du RUI (€)	800
+Coût total du RUI (Md€)	112.67509191419
+4. Équilibre budgétaire global
+Recettes publiques — Nouveau système (Md€)	1167.767351278
+Recettes publiques — Système actuel (Md€ de 2026)	1401.08144676877
+Dépenses publiques — Nouveau système (Md€)	1217.58240587589
+dont Investissement (endettement jugé acceptable, Md€)	15.213
+Dépenses hors investissement (Md€)	1202.36940587589
+ÉQUILIBRE BUDGÉTAIRE (Md€)	-49.8150545978887
+ÉQUILIBRE HORS INVESTISSEMENT (Md€)	-34.6020545978887
+Flux annuel vers le fonds — capitalisation obligatoire 10 % (Md€, hors budget)	69.9670607466158
+Coût de la transition retraite, remboursement compris (Md€, inclus dans les dépenses)	132.911922023133
+Flux annuel vers le fonds — épargne totale, obligatoire + libre (Md€, hors budget)	69.9670607466158
+Primes d’assurance chômage (supprimées)	0
+Coût de la transition retraite — moyenne 2029-2073 (Md€)	132.911922023133
+Coût de la transition retraite — année 1, 2029 (Md€)	206.929631842105
+ÉQUILIBRE BUDGÉTAIRE — année moyenne (Md€)	-49.8150545978887
+ÉQUILIBRE BUDGÉTAIRE — année moyenne (% du PIB)	-0.0164123765022246
+ÉQUILIBRE BUDGÉTAIRE — année 1, 2029 (Md€)	-123.832764416861
+ÉQUILIBRE BUDGÉTAIRE — année 1, 2029 (% du PIB)	-0.0407987097339636
+5. Scénarios (v233, calcul en direct) — déficit au sens de Maastricht et chômage
+Année	2029	2032	2037
+Déficit — prudent publié (clause de trajectoire comprise)	0.0467056983515169	0.0381329755276314	0.0230577123406229
+Mesures déclenchées par la clause (Md€)	16.7442107262325	43.0823550931888	59.0803625808718
+Déficit — prudent avant la clause	0.0522824647561006	0.0518428946957234	0.0407151328821743
+Déficit — médian	0.0467056983515169	0.0381329755276314	0.0230577123406229
+Déficit — optimiste	0.0421597223293878	0.023166735827899	0.00211361581316768
+Chômage — prudent	0.0891868514304178	0.0801326518757955	0.0725989879233235
+Chômage — médian	0.0839872151599123	0.0700136138475362	0.0613278232402411
+Chômage — optimiste	0.078531784978564	0.055147114876264	0.0477301910027375

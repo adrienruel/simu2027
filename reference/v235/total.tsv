@@ -1,0 +1,125 @@
+Total	Nouveau	Ancien	Evolution
+IS + Impots de Production	149259992012.39	145609915000	0.0250675032149437
+Nouvelle TVA	248150266888.005	213574450264.849	0.161891165260077	TVA ajusté pour prendre en compte la consommation des retraités								Estimation TVA retraité
+Impots sur le Revenu (Privé)	452838702211.722	506243608835.463	-0.105492505370271									41000000000
+Impôts sur le Revenu (Retraités)	24097348601.3389	50000000000	-0.518053027973222	v214 : ≈ 32 Md€ de CSG, CRDS et Casa (écart brut-net de 7,5 % de la pension, DREES fin 2023 : 1 666 € bruts, 1 541 € nets, appliqué aux 428 Md€ de pensions) + ≈ 18 Md€ d'impôt sur le revenu (estimation non sourcée). Colonne de comparaison seulement : sans effet sur la trajectoire. Avant : 35 Md€ sans source.
+Impots sur le Revenu (Public)	140079910374.771	202882311551.712	-0.309550895278188
+Impôts sur les dividendes et sur la fortune immobilière (IFI)	11961865379.2212	14132000000	Actuel : prélèvement forfaitaire sur les dividendes + IFI (≈ 2,2 Md€). Nouveau : flat tax de 33 % sur les dividendes versés aux ménages (Formules, D10 ; DÉCISION du 16 octobre : le taux qui maximise la recette), base réduite selon l’élasticité de la feuille Entreprises (S20) ; IFI supprimé. (v218)
+Impôts sur les successions (transmissions d’entreprises en activité exonérées)	15100000000	20819000000	-0.274700994284067
+Contribution d’épargne retraite (v107) et recettes non fiscales restant au budget — les recettes non fiscales de l’État sont versées au fonds (feuille Fonds) ; v221 : + contribution de transition (ligne 126)	29000000000	29000000000	0
+Contribution UE	0	0	0	v222 — SOURCÉ (relecture du 23 octobre 2026) : aucune recette européenne ne revient au budget de l'État après 2026. Les dépenses de l'Union en France sont de 16,4 Md€ en 2025 (annexe « Relations financières avec l'UE » du PLF 2027, reprise par Comptes Publics) : politique agricole commune 9,5 Md€, versée directement aux exploitants et hors des comptes des administrations publiques ; compétitivité 2,9 Md€ (recherche, entreprises) ; cohésion 2,0 Md€, versés aux régions et déjà dans leur budget (feuille Collectivités) ; autres 1,4 ; dépenses administratives 0,6. Le plan de relance européen (40,3 Md€ reçus par la France) se termine en 2026, dernière tranche de 6,1 Md€ validée le 29 septembre 2026. Ligne nouvelle : 0. Colonne « Ancien » : les 20 Md€ n'ont pas de source (ordre de grandeur des subventions du plan de relance et des fonds de cohésion reçus par les administrations, à préciser) ; sans effet sur la trajectoire. v223 : colonne « système actuel » mise à 0 aussi. Les 20 Md€ qui y figuraient n'avaient pas de source ; le plan de relance européen (6,1 Md€ de dernière tranche en 2026) est temporaire et ne fait pas partie du système.
+Impôts locaux et taxes affectées des ménages et entreprises (taxe foncière, versement mobilité, taxe d’apprentissage)	0	16700000000	Actuel : versement mobilité ≈ 12,2 + taxe d’apprentissage ≈ 4,5 Md€. v218 : la taxe foncière des ménages (26,2 Md€) est retirée de cette ligne : elle était déjà déduite du revenu des salariés et des agents (colonnes AW et AV), donc comptée deux fois. Nouveau : la taxe foncière est remplacée par l’impôt local unique (hors budget de l’État), versement mobilité et taxe d’apprentissage supprimés.
+Droits de mutation (DMTO)	0	14742000000	-1
+Autres impôts sur les produits (TICPE, tabac, assurance, alcool, jeux)	0	103834000000	Actuel : TICPE, tabac, alcool, assurances, jeux, électricité. Nouveau : remplacés par les accises de la TVA écologique et santé (ligne 3) et par les accises carbone des entreprises (ligne 15). DÉCISION d'Adrien du 18 octobre 2026 : la baisse des accises payées par les entreprises (≈ −42 Md€ : plus de taxe sur les assurances professionnelles, électricité à 5 %, seul le carbone reste) est assumée, « c'est le prix de la cohérence ». Avec la TVA non déductible ramenée au taux légal de 15 % (≈ −19 Md€) et la baisse pour les ménages (≈ −14 Md€), TVA et accises rapportent ≈ 254 Md€ contre 318 aujourd'hui.
+Taxe pollution des entreprises (supprimée : intégrée à l’accise écologie de la TVA)	0	0
+Accises payées par les entreprises (carbone, et accise de transition v231), nettes de l'effet IS	34305400355.2415
+Indépendants : cotisations, CSG et impôt sur le revenu (actuel) / impôt unique (nouveau)	31837460496.6533	38000000000	Actuel ≈ 30 Md€ de cotisations et CSG + ≈ 8 Md€ d’IR. Nouveau (v193) : chaque indépendant exerce en société et paie le moins cher du barème (en se salariant) ou de l’IS + flat tax ; feuille Indépendants.
+TOTAL	1167767351278	1347898202436.69	v235 : chaque ligne est convertie selon l'année de ses montants. En euros de 2024, multipliées par B124 : IS et impôts de production (2), dividendes (7), successions (8), accises des entreprises (15), revenus du capital (19), bailleurs (20), TVA non déductible des entreprises (part de la ligne 3). Déjà en euros de 2026 : impôt unique et TVA des salariés, des fonctionnaires, des retraités et des inactifs (3 à 6, distributions de 2026), contribution d'épargne (9, budget 2026), indépendants (16, revenus de 2023 déjà passés en 2026 dans leur feuille). Avant : tout était multiplié par B124, ce qui relevait deux fois les indépendants et la contribution d'épargne.
+				PIB	3035212761000	v180 : PIB 2024 (2 920 Md€) passé en euros et niveau de 2026 (B124).
+Revenus du capital hors dividendes : intérêts, plus-values (barème de l’impôt unique) — loyers sortis du barème, voir feuille Logement	12682130400.4462	24000000000		% Recettes publiques	0.384739866108515							Calcul Santé
+IS des bailleurs : loyers et plus-values immobilières en société, et IS des bailleurs sociaux (ESH et offices) sur les loyers libérés (feuille Logement)	6392000000		Le bailleur exerce en société imposée à l’IS ; dividendes exonérés. Actuel : compris dans la ligne 19 (colonne Ancien).									ONDAM 2026 (hôpital, soins de ville, médico-social, IJ maladie)	274400000000	LFSS 2026 : ONDAM fixé à 274,4 Md€
+Recettes du système actuel en euros de 2026 (v223 : la colonne C est en euros de 2024, comme le contrôle de la feuille « Contrôle système actuel » ; la colonne B est passée en euros de 2026 par la ligne 124)		1401081446768.77										Pensions d'invalidité (hors ONDAM)	8939325255	SOURCÉ (v155) : 8,6 Md€ en équivalent annuel fin 2023 (Drees, Les retraités et les retraites 2025, fiche 24)
+DÉPENSES — lignes de l’État recalculées à partir des missions du budget 2026 (feuille Budget État 2026)				% Du Budget Disponible								AAH — déplacée dans la ligne RUI + AAH (évite le double compte)	0
+Intérieur	26700213999.5783	0.00879681791756223	0.00879681791756223	0.0228643265033551	0.0228643265033551							Autonomie : aide sociale aux personnes âgées et handicapées reprise des départements (feuille Santé, ligne 103)	20098367119.8586	Drees, 2024, brut. DÉCISION du 15 octobre (v161), moins le double paiement avec le montage RUI (v162, Santé, ligne 106).
+Justice	24002942019.8187	0.00790815798096162	0.0167049758985238	0.0205545582290428	0.0434188847323979
+Armées (LPM actualisée, niveau 2030)	73617805661.2685	0.0242545783304542	0.040959554228978	0.0630415001590015	0.106460384891399
+Finances et Economie	15677199249.9163	0.00516510718831824	0.0461246614172963	0.0134249336845728	0.119885318575972
+MFA	6941696495.38487	0.00228705433259243	0.0484117157498887	0.00594441734287906	0.125829735918851
+Charge de la Dette	60000000000	0.0197679717122144	0.068179687462103	0.0513800971865983	0.17720983310545
+Sous-total Regalien	206939857425.967	0.068179687462103		0.17720983310545								Paramètre Consommation	2.05
+Education Nationale	75863235083.2806	0.0249943714187226	0.0931740588808257	0.0649643398578119	0.242174172963262								0.92
+Recherche et Enseignement Supérieur	28987606742.7487	0.00955043650159084	0.102724495382417	0.024823100860822	0.266997273824084
+Contribution UE	30353634577.6031	0.0100004964948825	0.112724991877299	0.025992878242729	0.292990152066813
+Subventions restées au budget de l’État : soutien aux renouvelables et péréquation, moitié des transports, moitié de France 2030 (v182)	15213000000	0.00501216922763195	0.117737161104931	0.013027423641662	0.306017575708475		v182, DÉCISION d’Adrien du 16 octobre : le fonds reste hors des administrations publiques. Condition pour que ce soit défendable (Eurostat, décision de 2004 sur les régimes par capitalisation à cotisations définies) : comptes individuels, aucune garantie de rendement par l’État, et un fonds qui n’investit qu’aux conditions du marché. Il ne peut donc pas verser de subventions : les 15,2 Md€ de charges sans recette restent au budget de l’État. Avant : le fonds les payait sur le rendement des épargnants (3 % ramenés à 2,3 %).					Paramètre Rendement	0.025
+Agriculture	4071093737.14303	0.00134128776389361	0.119078448868825	0.00348621986450268	0.309503795572977
+Culture	8289183349.54837	0.00273100569952051	0.121809454568345	0.00709831743495547	0.316602113007933
+Ecologie (Hors energie)	7265453949.84185	0.00239372146928116	0.124203176037626	0.00622166216746048	0.322823775175393
+Sports / Jeunesse / Association	1238139488.00979	0.000407925106245886	0.124611101143872	0.00106026212040847	0.323884037295802
+Adminsitration	3968542680.70846	0.001307500657516	0.125918601801388	0.0033984018103994	0.327282439106201
+Sous Total Regalien Elargie	175249889608.884	0.0577389143392851
+Santé	305932977141.111	0.100794573965983	0.226713175767371	0.261981101634927	0.589263540741128
+Retraites — socle (paramètre B61)	220000000000	0.072482562944786	0.299195738712157	0.188393689684194	0.777657230425322
+RUI + AAH	127702891914.19	0.0420737859154614	0.341269524627619	0.109356449959346	0.887013680384668
+Sous-Total Sécurité Sociale	653635869055.301	0.215350922826231		0.559731241278467
+TOTAL	1217582405875.89	0.40115224261074
+Investissement (exclu, endettement acceptable)	15213000000
+TOTAL hors investissement	1202369405875.89
+Coût de la transition retraite — moyenne 2029-2073 (inclus dans le TOTAL)	132911922023.133	0.0437899852461555
+Coût de la transition retraite — année 1 (2029)	206929631842.105	0.0681763184778945	Excédent/Deficit
+Equilibre Budgetaire	-49815054597.8887	-0.0164123765022246	-0.0164123765022246
+Equilibre Budgétaire (hors investissement)	-34602054597.8887	-0.0114002072745927	-0.0114002072745927
+Équilibre budgétaire — année 1 (2029, transition au coût de la première année)	-123832764416.861	-0.0407987097339636
+v218 — RAPPROCHEMENT AVEC L’INSEE (remplace les notes précédentes, qui comparaient 2024 au total de 2025) : recettes publiques de 1 503,6 Md€ en 2024 et 1 561,6 Md€ en 2025 (Insee, comptes des administrations publiques 2025). La colonne « Ancien » (C17, montants de 2024) en est à environ 1 % près une fois la taxe foncière comptée une seule fois : la reconstitution des recettes actuelles tient. Les dépenses actuelles ne sont pas reconstituées avec la même méthode (relecture du 22 octobre, point B1).
+
+PARAMÈTRE — Dépenses de retraite dans le budget (Md€), financées par l’impôt	220
+PARAMÈTRE — Capitalisation obligatoire (% du salaire net après impôt)	0.1
+Flux annuel vers le fonds — capitalisation obligatoire (€) — HORS BUDGET, épargne forcée appartenant au salarié — dont une part versée par le fonds à la place du salarié (feuille Fonds)	69967060746.6158
+Coût de la transition retraite, remboursement 35 % compris (€)	132911922023.133	0.0437899852461555
+Flux annuel vers le fonds — épargne obligatoire + part de l’épargne volontaire placée au fonds (€, hors budget)	69967060746.6158
+PARAMÈTRE — Part de l’épargne volontaire placée au fonds (abondement libre)	0	v218 : 0, faute de source (règle de prudence). L’abondement libre reste possible, mais il n’est pas compté dans les ressources du fonds. N’a aucun effet sur le solde : l’effet sur le PIB passe par l’épargne obligatoire (Effets macro, ligne 24).
+Épargne volontaire des salariés et agents publics avec le programme (Md€) / sans épargne obligatoire (Md€)	61.4960455421426	73.7402811728003
+PARAMÈTRE — Prime d’assurance chômage privée obligatoire (supprimée : 0 %)	0	Assurance chômage obligatoire abandonnée : en cas de chômage, le RUI sert de filet.
+Primes d’assurance chômage (supprimées)	0
+TVA en plus si toute l’épargne obligatoire évinçait l’épargne volontaire (Md€ pour un taux d’éviction de 100 % ; un point = un centième, sert aux scénarios dans Effets macro, ligne 305)	10.9270376352756
+PARAMÈTRE — Part des investissements publics (énergie, infrastructures) reprise par le fonds souverain	1	Retenu : 100 % — le fonds reprend les transports, l’énergie et France 2030 (feuille Budget État 2026, lignes 78 à 83). L’ancien forfait de 60 Md€ ne correspondait à aucun ensemble de missions.
+Économie nette de l'IA dans l'administration — moyenne 2026-2070 (€, déduite du TOTAL)	5317827094.05686
+PARAMÈTRE — Coût employeur d’un temps plein au SMIC (€/mois)	1930	Épargne progressive : 0 % au SMIC, taux plein (B62) à partir de B74 × SMIC, linéaire entre les deux.
+PARAMÈTRE — Multiple du SMIC à partir duquel l’épargne obligatoire atteint son taux plein	2
+CALENDRIER : TVA, IS et fonds en 2028 ; impôt unique, RUI et bascule des retraites au 1er janvier 2029. L'« année 1 » du budget est 2029.
+PARAMÈTRE — Financement de l’apprentissage repris par l’Éducation nationale (€)	8000000000	La taxe d'apprentissage est supprimée ; le financement des contrats d'apprentissage devient une dépense du ministère. Ordre de grandeur.
+PARAMÈTRE — Budget des armées, LPM actualisée 2030 (Md€ courants, hors pensions)	76.3	Trajectoire de l'actualisation de la LPM : 57,1 (2026), 63,3 (2027), 68,3 (2028), 72,8 (2029), 76,3 Md€ (2030), hors pensions. Maintenue ensuite au niveau de 2030 en euros constants. L'objectif OTAN de 3,5 % du PIB n'est pas inclus.
+PARAMÈTRE — Inflation cumulée 2026-2030 (pour passer en euros constants 2026)	0.074
+Économies de santé immédiates (moyenne, Md€) — déduites de la ligne Santé	1769200000
+PARAMÈTRE — Fin du financement public de l’enseignement privé sous contrat : crédits supprimés (€)	8000000000	Programme 139 « Enseignement privé du premier et du second degrés », hors pensions, ordre de grandeur. Environ 2 millions d'élèves (17 %).
+PARAMÈTRE — Part des élèves du privé qui reviennent dans le public	0.2
+PARAMÈTRE — Coût annuel d’un élève dans le public pour l’État (€)	7500
+Économie nette sur l’enseignement privé (€)	5000000000
+BARÈME DE L’IMPÔT UNIQUE (v232 : 0 / 17,9 / 57 / 66 %, seuils 12 500, 24 000 et 32 000 €)
+Tranche 0	0	0	0
+Tranche 1	12500	0.179	0.179
+Tranche 2	24000	0.57	0.391
+Tranche 3	32000	0.66	0.0900000000000001
+Tranche 4	45000	0.66	0
+Tranche 5	65000	0.66	0
+Tranche 6	100000	0.66	0
+Tranche 7	160000	0.66	0
+ÉCONOMIES SUPPLÉMENTAIRES (finance le barème à 7 tranches), Md€/an
+Aides aux entreprises : désormais comprises dans les missions supprimées ou réduites (France 2030, emploi) — feuille Budget État 2026	0
+Opérateurs et agences de l’État : fusions et suppressions	2	v230 (28 octobre 2026) : 5 → 2 Md€. SOURCÉ : la commission d'enquête du Sénat (juillet 2025) n'attend qu'≈ 540 M€ de la mise en commun des fonctions support des opérateurs ; le gouvernement annonçait 2 à 3 Md€. Règle d'Adrien : quand une source existe, on la prend.
+Non-remplacement dans les fonctions support de l’État : désormais compris dans la feuille IA administration (v74)	0
+Aide publique au développement : conservée en l’état (décision du 8 octobre) — l’ancienne économie de 5 Md€ dépassait les crédits de la mission (3,57 Md€)	0
+Barème fort sur les hautes pensions de l’ancien système	0	v234 : 0. Double compte : la baisse des hautes pensions de l'ancien système est déjà comptée dans la feuille Coût transition (colonne M, barème « doux » 5 % au-delà de 3 000 €, 5 % de plus au-delà de 5 000 €) et son doublement dans la feuille Économies (ligne 6). Avant : 3 Md€ de plus ici.
+Audiovisuel public : conservé et recentré (DÉCISION du 8 octobre : 2 Md€ d’économie maintenus)	2
+Total des économies supplémentaires (€)	4000000000
+REVENUS DU CAPITAL HORS DIVIDENDES : BARÈME (intérêts, plus-values) ET IS DES BAILLEURS (loyers)
+Loyers (revenus fonciers nets), Md€ — imposés à l’IS, feuille Logement	30	Les plus-values sur des actions souscrites à leur émission (création d'entreprise, augmentation de capital) sont exonérées, comme les dividendes : seul l'investissement réel est encouragé.
+Intérêts imposables, Md€	15
+Plus-values immobilières hors résidence principale, Md€	10
+Plus-values sur actions achetées sur le marché secondaire, Md€	17
+Taux moyen sur les intérêts et plus-values : barème plafonné à 40 % (DÉCISION d’Adrien du 15 octobre, v171 : maximiser la recette)	0.38	Plafond de 40 % (feuille Hauts revenus, ligne 50), le même taux que l’IS de l’État. Les petits épargnants restent au barème (0 ou 20 %) : taux moyen 38 %, HYPOTHÈSE. Avant (v170) : barème complet, 55 % en moyenne et jusqu’à 70 %, au-dessus du taux qui maximise la recette.
+Réaction des comportements, en % de la base (élasticité sourcée, feuille Hauts revenus, ligne 51)	0.0979992602812096
+Recettes actuelles sur ces revenus (impôt sur le revenu et prélèvements sociaux), Md€	24
+Exonération totale des transmissions d’entreprises en activité (hors SCI et holdings patrimoniales), Md€	1.5	RECOUPÉ (v170) : pacte Dutreil 5,5 Md€ en 2024 pour un abattement de 75 % (Cour des comptes, 2025) ; l’impôt sur les 25 % restants vaut au plus ≈ 1,8 Md€. Voir feuille Ascenseur social, ligne 47.
+LOGEMENT (feuille Logement) — dépenses ajoutées au TOTAL, Md€/an
+Hébergement d’urgence conservé par l’État	0
+Retrait de la capitalisation pour la résidence principale : surcoût moyen du socle	0
+Autres missions de l’État conservées (outre-mer, monde combattant, santé, solidarité, emploi) — feuille Budget État 2026 — et concours aux collectivités d’outre-mer maintenus (ligne 113)	14.1107254190831
+Besoin de financement des collectivités laissé en déficit public (feuille Collectivités)	15.9119989539
+Sécurité sociale, France Travail et opérateurs, hors santé : postes absents du modèle (feuille Sécurité sociale 2026)	17.1589964751672
+Dotation transports aux communes, en remplacement du versement mobilité (feuille Collectivités)	0
+Économies sur les missions conservées, l’université, la santé, l’éducation et le RUI des étudiants (feuille Budget État 2026)	-14.2292673459683
+Quotient familial, quotient conjugal et RUI du conjoint sous condition de ressources (feuille Quotient familial)	25.210241354476
+PARAMÈTRE — Passage des montants de 2024 en euros de 2026 (PIB en valeur)	1.039456425	v180, AUDIT EUROS CONSTANTS (16 octobre) : le modèle est en euros de 2026 et place l'économie de 2026 en 2029 (feuille Santé, H27). Or le PIB (2 920 Md€), la dette de départ et les recettes (TVA calée sur Insee 2024, IS et impôts de production DGFiP 2024, effectifs fin 2024, successions 2024, dividendes 2021) étaient au niveau de 2024, alors que les dépenses viennent du PLF et de la LFSS 2026. SOURCÉ : PIB 2025 +1,9 % en valeur (Insee Première n° 2105) ; 2026 : +0,5 % en volume (prévision du gouvernement, septembre 2026). HYPOTHÈSE prudente : déflateur 2026 de 1,5 %, sous l'inflation prévue (2,1 %). Appliqué au PIB (F18), aux recettes (B17, sauf la contribution UE, montant fixe) et à la dette de départ (Calendrier B4, Trajectoire B8). Les montants par ménage (SMIC, médian, professeur) ne changent pas : ils comparent deux systèmes sur les mêmes revenus. Aussi appliqué aux dépenses datées de 2024 ou avant : autonomie (Santé B103), pensions d'invalidité (N21), besoin des collectivités (B118), quotient familial (B122).
+PARAMÈTRE — Contribution de transition : part des 10 % d'épargne obligatoire versée à l'État au lieu du compte (v221)	0	DÉCISION d'Adrien du 23 octobre 2026 (v221) : pendant la transition, une partie de l'épargne obligatoire devient une contribution. Le prélèvement total reste de 10 % (revenu disponible inchangé) ; le compte de chacun reçoit (1 − cette part) × 10 %. Recette : ligne 9. Effets : capital du fonds (Effets macro, ligne 24), socle (Socle actuariel, B6) et rentes du régime de croisière (Salariés du privé, colonne BB) réduits d'autant.
+PARAMÈTRES AUPARAVANT ÉCRITS DANS LES FORMULES (v233, 28 octobre 2026) — valeurs inchangées
+PIB 2024 (€)	2920000000000	Insee, comptes nationaux 2024. Sert au PIB de 2026 (F18 = valeur × B124).
+Croissance du PIB en valeur, 2025	0.019	SOURCÉ : Insee Première n° 2105 (B124).
+Croissance du PIB en volume, 2026	0.005	Prévision du gouvernement, septembre 2026 (B124).
+Déflateur du PIB, 2026	0.015	HYPOTHÈSE prudente, sous l'inflation prévue de 2,1 % (B124).
+IFI, système actuel (€)	2200000000	Ligne 7, colonne Ancien.
+Droits de succession, base du nouveau système avant l'exonération des transmissions d'entreprises (€)	16600000000	Ligne 8.
+Impôts locaux des ménages et entreprises, système actuel — première composante (€)	12200000000	Ligne 11, colonne Ancien.
+Impôts locaux des ménages et entreprises, système actuel — seconde composante (€)	4500000000	Ligne 11, colonne Ancien.
+Pensions d'invalidité hors objectif de dépenses, 2024 (€)	8600000000	Cellule N21.
+Élèves de l'enseignement privé sous contrat	2000000	Ligne 84.
+Taux de TVA moyen sur la consommation, système actuel (profils salariés, fonctionnaires, retraités)	0.13	Auparavant 13 % écrit dans 105 formules (Salariés du privé V, Fonctionnaires U, Retraités L).

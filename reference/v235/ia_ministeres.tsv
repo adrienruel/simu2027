@@ -1,0 +1,34 @@
+IA ET ÉCONOMIES : CONTRÔLE MINISTÈRE PAR MINISTÈRE (ordres de grandeur)
+Cette feuille vérifie, ministère par ministère, si le programme laisse des économies d’IA non comptées. Elle ne modifie pas le budget. Conclusion : pour l’État, les économies déjà inscrites dépassent le potentiel estimé ici ; les marges restantes sont hors des ministères (hôpitaux, organismes sociaux).
+Masse salariale de l’État en 2026 (Md€)	161.6					Assemblée nationale, PLF 2026, amendement II-CF2712 : 161,6 Md€, dont 92,8 Md€ de rémunérations d’activité.
+Masse salariale alignée sur le privé (Md€)	129.92					Variation du coût employeur des agents civils de l’État (feuille Alignement public-privé).
+Coût moyen aligné d’un agent (€/an)	66036.5610362942
+Plafond de tâches automatisables	0.4					Paramètre de la feuille IA administration.
+Coût des services d’IA (part des salaires économisés)	0.25
+1. MINISTÈRES	Effectifs (ETPT)	Part gestion et support	ETPT concernés	Masse salariale concernée (Md€)	Économie brute au plafond (Md€)	Source des effectifs / commentaire
+Éducation nationale	1060503	0.08	84840.24	5.60255768709385	2.24102307483754	PLF 2024 (amendement AN n° 4688). Les enseignants ne sont pas concernés : gestion académique, rectorats, intendance.
+Intérieur	304040	0.15	45606	3.01166340262123	1.20466536104849	PLF 2024. Préfectures, titres, soutien ; hors policiers et gendarmes de terrain.
+Armées	270554	0.1	27055.4	1.78664557346135	0.714658229384542	PLF 2024. Soutien et administration ; hors forces.
+Économie et finances	126000	0.6	75600	4.99236401434384	1.99694560573754	≈ ordre de grandeur À VÉRIFIER. DGFiP, douanes : cœur des tâches de gestion. L’impôt unique simplifie en plus l’assiette.
+Justice	94698	0.2	18939.6	1.250706051403	0.500282420561199	PLF 2024. Greffes et administration ; hors magistrats et surveillants. L’IA y réduirait surtout les délais.
+Écologie et territoires	36000	0.5	18000	1.1886580986533	0.475463239461318	≈ À VÉRIFIER.
+Agriculture	30000	0.4	12000	0.79243873243553	0.316975492974212	≈ À VÉRIFIER.
+Affaires étrangères	13600	0.4	5440	0.35923889203744	0.143695556814976	≈ À VÉRIFIER.
+Travail, santé, solidarités	13000	0.6	7800	0.515085176083095	0.206034070433238	≈ À VÉRIFIER.
+Services du Premier ministre	10000	0.5	5000	0.330182805181471	0.132073122072588	≈ À VÉRIFIER.
+Culture	9000	0.4	3600	0.237731619730659	0.0950926478922636	≈ À VÉRIFIER.
+Total État	1967395	0.154458682674298	303881.24	20.0672720530448	8.02690882121791
+2. COMPARAISON AVEC CE QUE LE BUDGET COMPTE DÉJÀ	Md€/an
+Masse salariale de gestion retenue par la feuille IA administration (alignée en v74)	20.0672720530448					À comparer à l’estimation ministère par ministère (E22).
+Économie brute inscrite — IA administration (régime de croisière)	8.02690882121791
+Économie inscrite — fonctions support de l’État (feuille Total, B99)	0
+Total inscrit pour l’État	8.02690882121791
+Potentiel estimé ministère par ministère (au plafond)	8.02690882121791
+Marge supplémentaire pour l’État (négatif = le budget compte déjà plus que le potentiel)	0					Si le chiffre est négatif, les économies d’IA de l’État sont déjà comptées au maximum, voire au-delà.
+3. HORS MINISTÈRES : MARGES NON COMPTÉES	Agents	Part automatisable ou simplifiable	Coût moyen (€/an)	Économie brute (Md€)	Économie nette (Md€)	Commentaire
+Hôpitaux : personnels administratifs	108602	0.4	42000	1.8245136	1.3683852	v155 : effectif SOURCÉ (Drees, 108 602 postes fin 2023). Désormais COMPTÉ dans la feuille Santé (ligne 48), avec la même montée en charge que l’État : retiré de la marge non inscrite.
+Organismes sociaux (Urssaf, CAF, caisses de retraite, assurance maladie)	150000	0.3	60000	2.7	2.025	Effectif ≈ À VÉRIFIER. L’impôt unique, le RUI et le socle suppriment une grande part du recouvrement et de l’instruction. ATTENTION : je n’ai pas trouvé leurs frais de gestion dans les dépenses du modèle — à inscrire avant de compter une économie.
+Opérateurs de l’État						Déjà compté : 2 Md€ de fusions et suppressions (feuille Total, B98 ; 5 Md€ avant la v230).
+Collectivités						Déjà compté : 7 Md€ sur les agents (feuille Collectivités).
+Marge potentielle hors ministères (non inscrite au budget)					2.025
+v74 — correction appliquée : pas de réduction de postes hors gestion. La masse de gestion de la feuille IA administration (B4) est alignée sur l’estimation ci-dessus (E22) et l’économie « fonctions support » de la feuille Total (B99) est ramenée à 0, car ces fonctions sont déjà dans le périmètre. Pour revenir en arrière : remettre 30 en IA administration!B4 et 5,5 en Total!B99.

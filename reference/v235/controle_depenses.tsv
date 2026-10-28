@@ -1,0 +1,33 @@
+CONTRÔLE « SYSTÈME ACTUEL » DES DÉPENSES (v229, passe de correction du 23 octobre 2026)
+Objet : vérifier que les dépenses publiques du programme, collectivités comprises, se comparent sur le même périmètre que les dépenses publiques de l'Insee. Montants en Md€ ; euros de 2026 sauf mention.
+1. AUJOURD'HUI (Insee, comptes nationaux 2024)
+Dépenses publiques 2024 (Md€ courants)	1670.2	SOURCÉ : Insee Première n° 2054, mai 2025 (comptes nationaux des administrations publiques 2024).
+dont administrations centrales (État et ODAC)	670.3	Idem, non consolidé.
+dont collectivités locales (APUL)	329.7	Idem, non consolidé.
+dont sécurité sociale (ASSO)	776.8	Idem, non consolidé.
+Part du PIB en 2024	0.572	Idem.
+Passage en euros de 2026 (paramètre du modèle)	1.039456425
+Dépenses publiques actuelles en euros de 2026	1736.100121035
+Dépenses des collectivités actuelles en euros de 2026	342.7087833225
+2. LE PROGRAMME, ANNÉE MOYENNE (budget statique)
+Dépenses de l'État et de la protection sociale (feuille Total, B44)	1217.58240587589	Comprend déjà le besoin de financement des collectivités laissé en déficit (Total B118).
+Charges reprises par l'État et le fonds, et économies des collectivités (feuille Collectivités, D24)	-81.9440408376316
+Hébergement d'urgence repris par les communes (Md€)	3	Feuille Logement ; ordre de grandeur repris dans le manifeste.
+Dépenses des collectivités après la réforme	263.764742484868
+dont déjà comptées dans les dépenses de l'État (déficit laissé aux collectivités)	15.9119989539
+Dépenses publiques totales, collectivités comprises	1465.43514940685
+PIB de 2026 (Md€)	3035.212761
+Part du PIB : État et protection sociale	0.40115224261074
+Part du PIB : collectivités comprises	0.482811342992655	Le site et le manifeste annonçaient ≈ 44,4 % : seules les recettes nouvelles et quelques ressources locales y étaient comptées, pas toutes les dépenses que les collectivités financent elles-mêmes.
+Écart avec aujourd'hui (points de PIB)	-0.0891886570073449
+3. LE PROGRAMME, ANNÉE DE LA BASCULE (2029, trajectoire, scénario retenu)
+Dépenses de l'État et de la protection sociale, intérêts réels (Trajectoire, B24)	1265.81880991798
+Passage aux intérêts nominaux, au sens de Maastricht (inflation × dette)	68.5856753583769
+Dépenses publiques totales en 2029, collectivités comprises	1582.25722880733
+Part du PIB en 2029	0.526980883201532	La bascule coûte ≈ 75 Md€ de transition de plus que l'année moyenne.
+4. D'OÙ VIENT L'ÉCART AVEC AUJOURD'HUI (ordres de grandeur, Md€, année moyenne)
+Écart total (programme moins aujourd'hui)	-270.664971628145
+Retraites : socle et coût moyen de la transition, contre ≈ 420 Md€ aujourd'hui (Total B41 + B64)	-67.0880779768672	Les retraites actuelles : ≈ 420 Md€ (manifeste, partie II.1 g).
+Épargne retraite obligatoire sortie des administrations publiques (fonds souverain)	0	Pour mémoire : elle n'était pas une dépense publique ; ce n'est pas une économie.
+Alignement du coût employeur des agents publics sur le privé (prélèvements sur les traitements publics : aujourd'hui moins programme)	-62.8024011769406	La dépense baisse autant que l'impôt payé par les agents : opération neutre pour le solde.
+Reste : missions supprimées ou réduites, aides au logement, aides aux entreprises, minima et prestations remplacés par le RUI, dotations, économies	-140.774492474338	Non ventilé ligne par ligne : le modèle reconstruit les dépenses du programme mission par mission, pas celles du système actuel.

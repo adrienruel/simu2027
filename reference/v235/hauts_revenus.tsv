@@ -1,0 +1,89 @@
+HAUTS REVENUS : RÉACTION À L’IMPÔT ET OPTIMISATION — v164, 15 octobre 2026 (DÉCISION d’Adrien : modéliser la réaction, baisser le haut du barème, fermer la faille de la société)
+Les 10 % de salariés les mieux payés (coût employeur ≥ 95 000 €) réduisent leur revenu imposable quand la part qui leur reste sur le dernier euro baisse : moins de travail, décalage, départ, ou passage par une société. On applique une élasticité au revenu imposable, par scénario. Une partie de la baisse passe par une société : la règle nordique (lignes 12 à 14) en ramène une partie au barème, le reste paie l’impôt sur les sociétés. Le résultat (ligne 9) entre dans la feuille Effets macro, lignes 199 à 201.
+PARAMÈTRES	Prudent	Médian	Optimiste
+Élasticité du revenu imposable au taux net d’impôt	0.31	0.2	0.1		SOURCÉ pour le prudent : 0,31 pour les 10 % de foyers les plus aisés, réformes de 1997 à 2004 (Cabannes, Houdré et Landais, Économie et Statistique n° 467, 2014). Médian et optimiste : HYPOTHÈSES. Mesurée sur de petites réformes : appliquée à une forte hausse, le prudent est un plafond. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : élasticité de 0,10 : les hauts revenus acceptent le barème, ancien optimiste (avant : 0.15).
+Part de la baisse qui passe par une société	0.25	0.5	0.5		HYPOTHÈSE. Prudent : faible, donc peu de recette récupérée à l’impôt sur les sociétés.
+Impôt sur les sociétés payé sur ce qui passe par une société (État + local)	0.45	0.45	0.45
+Années de montée en charge	3	3	3
+PERTE DE RECETTES À TERME (Md€ de 2026, + = perte) — perte croisée du plafond comprise (ligne 55) ; classes moyennes et localisation comprises (v233, lignes 98 et 99)	24.8337526791438	12.0293945942812	5.57613487932947
+Impôt local moyen sur les revenus (feuille Collectivités)	0.0720359434045792
+RÈGLE NORDIQUE : LE DIRIGEANT-ACTIONNAIRE
+Part de ce qui passe par une société ramenée au barème par la règle	0.5	0.7	0.8		HYPOTHÈSE. Au-delà d’un rendement normal du capital investi, le bénéfice qu’un actionnaire qui travaille dans sa société en tire (dividende ou plus-value) est imposé au barème, comme un salaire. Modèle : actionnaires des sociétés étroitement contrôlées en Suède (règles « 3:12 », depuis 1991), en Norvège (modèle de l’actionnaire, depuis 2006) et en Finlande. Prudent : la moitié seulement est rattrapée (montages, holdings, sorties).
+Plus-values sur ses propres parts : exonération réservée aux associés qui ne dirigent pas la société (1 = oui)	1				Ferme la sortie « garder le bénéfice dans la société puis vendre ses parts ». L’exonération à la souscription reste entière pour les investisseurs extérieurs.
+Revenus du capital (intérêts, plus-values au barème) : réaction supplémentaire, en points de la base	0	0	0		v171 : la réaction des revenus du capital est désormais calculée à partir de l’élasticité sourcée (lignes 49 à 53) et passe par Total, ligne 111. Plus de réaction supplémentaire ici.
+Perte sur les revenus du capital (Md€)	0	0	0
+Feuille	Ligne	Coût employeur	Effectif	Taux marginal aujourd’hui	Taux marginal nouveau (impôt unique + local)	Revenu après réaction — prudent	— médian	— optimiste	Perte — prudent (€/pers.)	— médian	— optimiste
+Salariés du privé	23	95000	553726.996815594	0.682	0.732035943404579	90089.6555973281	91802.2847730019	93387.4566172309	2869.02314994463	1305.7018360852	635.699377667103
+Salariés du privé	24	105000	373505.373304072	0.7063	0.732035943404579	102057.00147248	103091.727831263	104041.488946875	1719.53944841677	779.192109864301	377.865728432354
+Salariés du privé	25	115000	348946.018018872	0.6407	0.732035943404579	105004.964293969	108448.039581546	111675.980192151	5839.91395990929	2675.31851370148	1310.40029420722
+Salariés du privé	26	135000	340438.406504687	0.649	0.732035943404579	124163.026756353	127905.038851169	131404.643163428	6331.84244560021	2897.03839815618	1417.36720259601
+Salariés du privé	27	162500	202798.205412556	0.6822	0.732035943404579	154130.783858349	157049.983640358	159751.752233139	4889.97774661614	2225.36900953469	1083.41853852546
+Salariés du privé	28	187500	166306.244606336	0.6541	0.732035943404579	173232.880322814	178166.672241834	182773.770124009	8336.01337914353	3811.01578018327	1863.18174319137
+Salariés du privé	29	225000	178043.3419152	0.6403	0.732035943404579	205373.644934752	212133.735355146	218472.173182096	11467.3152051392	5253.59645177509	2573.41011100992
+Salariés du privé	30	275000	83168.4242299435	0.6612	0.732035943404579	255713.683321132	262397.276015617	268624.739933415	11268.6370835263	5145.98664294796	2513.26500737899
+Salariés du privé	31	350000	45786.3790731544	0.6901	0.732035943404579	334574.690036095	339968.780859093	344947.928390189	9012.72247979868	4095.98113674136	1991.63558177995
+Salariés du privé	32	450000	19823.3570650597	0.6769	0.732035943404579	424640.864519917	433471.382507808	441658.377174614	14816.8724611964	6749.02068367268	3288.4476135616
+Salariés du privé	33	625000	12007.7610367444	0.6627	0.732035943404579	581967.430333546	596886.914313867	610781.729790739	25143.1322225546	11479.2296976565	5605.14874831399
+Salariés du privé	34	875000	3712.54806409038	0.687	0.732035943404579	833859.799518194	848231.691104975	861511.885998593	24037.4560105068	10930.1259155405	5317.30542459772
+Salariés du privé	35	1400000	1710.10129732266	0.7012	0.732035943404579	1353517.20428905	1369831.74281829	1384833.72285109	27159.0353003121	12318.4042347094	5978.87352868202
+Salariés du privé	36	3000000	263.894301672704	0.7012	0.732035943404579	2900394.00919083	2935353.73461062	2967500.83468091	58197.932786383	26396.5805029486	12811.8718471754
+Fonctionnaires	23	95000	364480.998132259	0.682	0.732035943404579	90089.6555973281	91802.2847730019	93387.4566172309	3594.54859725135	2340.84248293472	1180.43971648619
+Fonctionnaires	24	105000	205327.533534284	0.7063	0.732035943404579	102057.00147248	103091.727831263	104041.488946875	2154.38070353114	1396.92381731389	701.664543038323
+Fonctionnaires	25	115000	128176.764579787	0.6407	0.732035943404579	105004.964293969	108448.039581546	111675.980192151	7316.7253924269	4796.27052607252	2433.30197593401
+Fonctionnaires	26	135000	74496.0492908072	0.649	0.732035943404579	124163.026756353	127905.038851169	131404.643163428	7933.05393206325	5193.76657800353	2631.93043373627
+Fonctionnaires	27	162500	19971.4587478177	0.6822	0.732035943404579	154130.783858349	157049.983640358	159751.752233139	6126.5670338103	3989.60786740079	2011.81614672368
+Fonctionnaires	28	187500	3022.05764438508	0.6541	0.732035943404579	173232.880322814	178166.672241834	182773.770124009	10444.0444125545	6832.33139055302	3459.7701460183
+Fonctionnaires	29	225000	469.641176684478	0.6403	0.732035943404579	205373.644934752	212133.735355146	218472.173182096	14367.1973457822	9418.56817738884	4778.60386302599
+Fonctionnaires	30	275000	56.2934062679226	0.6612	0.732035943404579	255713.683321132	262397.276015617	268624.739933415	14118.2770248145	9225.64694137506	4666.91951729221
+Fonctionnaires	32	450000	17.6561096042476	0.6769	0.732035943404579	424640.864519917	433471.382507808	441658.377174614	18563.7986650869	12099.5420990702	6106.36773450662
+Fonctionnaires	33	625000	6.77179451105673	0.6627	0.732035943404579	581967.430333546	596886.914313867	610781.729790739	31501.3877329059	20579.7892022622	10408.2848462179
+Lecture : la perte compare la recette du nouveau barème avant et après réaction. Ce qui passe par une société et que la règle nordique ramène au barème ne coûte rien ; le reste paie l’impôt sur les sociétés. Le taux marginal d’aujourd’hui est déduit des impôts par classe de la feuille Salariés du privé (cotisations, CSG et impôt sur le revenu). Les agents publics ne peuvent pas passer par une société. Non compté : la TVA perdue sur la consommation, les départs définitifs au-delà de ce que mesure l’élasticité.
+CORRIGÉ (v196, 18 octobre 2026) : la division par MAX(1 ; écart de revenu) donnait des résultats absurdes pour une baisse du barème (écart négatif, divisé par 1) ; elle est remplacée par une division par l'écart lui-même. Le module vaut désormais pour les hausses comme pour les baisses de taux.
+PLAFOND SUR LES INTÉRÊTS ET PLUS-VALUES : LE TAUX QUI MAXIMISE LA RECETTE (v171, DÉCISION d’Adrien du 15 octobre : « je veux maximiser les recettes fiscales »)
+Taux actuel sur ces revenus (prélèvement forfaitaire, prélèvements sociaux compris)	0.314				Prélèvement forfaitaire unique de 2026 (12,8 % + 18,6 % de prélèvements sociaux). Même taux que la feuille Formules.
+Plafond retenu sur les intérêts et plus-values	0.4				Taux qui maximise la recette, compte tenu de deux réactions : la base elle-même (ligne 51) et les revenus du travail des mêmes foyers (lignes 52 à 55). SOURCÉ : ≈ 44 % avec les effets croisés, ≈ 56 % sans (Lefebvre, Lehmann et Sicsic, IZA DP n° 16112, 2023). Avec la masse salariale des 10 % les mieux payés du modèle, le maximum tombe entre 34 % (élasticité croisée 0,05) et 41 % (0,03) ; la courbe est plate autour. 40 % : bas de la fourchette de l’étude, haut de celle du modèle, et même taux que l’IS de l’État.
+Réaction de la base au plafond (part de la base perdue)	0.0979992602812096				Reportée en Total, ligne 111. Avant (v170), au barème : 42 % en prudent.
+Élasticité croisée des revenus du travail au taux net sur le capital	0.05	0.03	0.03		SOURCÉ : 0,03 à 0,10 selon la tranche (Lefebvre, Lehmann et Sicsic, 2023). Appliquée ici à toute la masse salariale des 10 % les mieux payés, dont une partie seulement a des revenus du capital : prudent 0,05, médian et optimiste 0,03.
+Élasticité de la base des revenus du capital au taux net	0.77				SOURCÉ : 0,77 (0,76 à 1,17), même étude.
+Masse salariale des 10 % les mieux payés (Md€) et taux marginal moyen	428.7909078141	0.732035943404579
+Perte croisée sur l’impôt des revenus du travail (Md€, + = perte)	2.10224884368363	1.26134930621018	1.26134930621018		Un taux plus élevé sur le capital fait baisser les revenus du travail déclarés par les mêmes foyers. Repère : au barème complet (taux marginal ≈ 66 %), cette perte atteindrait ≈ 10 Md€ en prudent, que le modèle ne comptait pas en v170 ; au plafond de 40 %, ≈ 1,9 Md€.
+CLASSES MOYENNES ET LOCALISATION (v233, 28 octobre 2026) — s'ajoutent à la perte de la ligne 9 ; colonnes B / C / D = prudent / médian / optimiste
+Élasticité du revenu imposable des classes moyennes au taux net d'impôt	0.05	0.02	0	SOURCÉ : 0,02 pour l'ensemble des contribuables, 0,31 pour les 10 % du haut (Cabannes, Houdré et Landais, Économie et Statistique n° 467, 2014). Classes moyennes : HYPOTHÈSE 0,05 en prudent, 0,02 (la valeur de l'ensemble) en médian, 0 en optimiste.
+Classes concernées : coût employeur de … à … (€)	24000	95000		Au-dessus de 95 000 € : lignes 21 à 44. Sous 24 000 € : marge intensive des bas salaires (feuille Emploi, lignes 199 à 210).
+Coût employeur de la classe (€)	Effectif	Taux marginal aujourd'hui (impôts, cotisations et aides)	Taux marginal nouveau (impôt unique + impôt local)	Taux de l'impôt unique (État)	Dans le champ (1/0)	Perte — prudent (€)	— médian (€)	— optimiste (€)
+7500	394304.272364138	0.536307821054208	0.0720359434045792	0	0	0	0	0
+11250	331264.240539573	0.467448576650943	0.0720359434045792	0	0	0	0	0
+13750	375799.816002342	0.467448576650943	0.251035943404579	0.179	0	0	0	0
+16250	400790.859393054	0.467169899820307	0.251035943404579	0.179	0	0	0	0
+18750	410354.753028665	0.467448576650942	0.251035943404579	0.179	0	0	0	0
+21250	416467.002665479	0.523183942778526	0.251035943404579	0.179	0	0	0	0
+23750	905475.105806545	1.10723965046369	0.251035943404579	0.179	0	0	0	0
+26250	1328074.87200379	0.759176600129061	0.642035943404579	0.57	1	-393818465.73578	-157527386.294312	-0
+28750	1216658.66837845	0.845271009526512	0.642035943404579	0.57	1	-836157040.030798	-334462816.012319	-0
+31250	1043113.490531	0.843775626249565	0.642035943404579	0.57	1	-770289453.176775	-308115781.27071	-0
+33750	1035657.48803725	0.840267230689247	0.732035943404579	0.66	1	-596745079.341376	-238698031.73655	-0
+36250	981846.033482292	0.70628821999678	0.732035943404579	0.66	1	107758841.845513	43103536.7382053	0
+38750	1092961.0829695	0.554814260356651	0.732035943404579	0.66	1	709488069.16356	283795227.665424	0
+42500	1351332.78835448	0.513408750152436	0.732035943404579	0.66	1	1130648873.97878	452259549.59151	0
+47500	1426623.67719341	0.610390999450965	0.732035943404579	0.66	1	837001336.997507	334800534.799003	0
+52500	1350952.30807169	0.610121763263381	0.732035943404579	0.66	1	877653814.757408	351061525.902963	0
+57500	1174901.49752286	0.609875469198735	0.732035943404579	0.66	1	837382774.133358	334953109.653343	0
+62500	919459.934912581	0.609648956820149	0.732035943404579	0.66	1	713408302.144472	285363320.857789	0
+67500	869696.777273174	0.609390512333683	0.732035943404579	0.66	1	730063066.330874	292025226.53235	0
+75000	899578.866115211	0.609065974935881	0.732035943404579	0.66	1	840901805.991366	336360722.396546	0
+85000	744447.413709223	0.657662329253636	0.732035943404579	0.66	1	511487475.051246	204594990.020498	0
+95000	553726.996815594	0.706387676079463	0.732035943404579	0.66	0	0	0	0
+105000	373505.373304072	0.70623608893573	0.732035943404579	0.66	0	0	0	0
+115000	348946.018018872	0.607987108045133	0.732035943404579	0.66	0	0	0	0
+135000	340438.406504687	0.678908639084547	0.732035943404579	0.66	0	0	0	0
+162500	202798.205412556	0.685755133337259	0.732035943404579	0.66	0	0	0	0
+187500	166306.244606336	0.633021209577005	0.732035943404579	0.66	0	0	0	0
+225000	178043.3419152	0.645719739845887	0.732035943404579	0.66	0	0	0	0
+275000	83168.4242299435	0.671570407413042	0.732035943404579	0.66	0	0	0	0
+350000	45786.3790731544	0.704069781611894	0.732035943404579	0.66	0	0	0	0
+450000	19823.3570650597	0.661336066990627	0.732035943404579	0.66	0	0	0	0
+625000	12007.7610367444	0.663664895391268	0.732035943404579	0.66	0	0	0	0
+875000	3712.54806409038	0.698067834981075	0.732035943404579	0.66	0	0	0	0
+1400000	1710.10129732266	0.702207664177736	0.732035943404579	0.66	0	0	0	0
+Perte de recettes à terme, classes moyennes (Md€, + = perte)	4.69878432210935	1.87951372884374	0
+Emplois perdus par la localisation : recette en moins par rapport à l'emploi moyen créé (Md€, + = perte) — l'emploi perdu est payé au salaire médian	1.64885415461696	0.731138640777713	0.292455456311085

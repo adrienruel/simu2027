@@ -93,6 +93,21 @@ profils:
     statut: SOURCE
     source: État du programme v232 (salarié médian, profil type)
 
+# --- Trajectoire --------------------------------------------------------------
+trajectoire:
+  dette_depart:
+    valeur: 3810.31529768761
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: Classeur v235, Trajectoire (dette fin 2028, feuille Calendrier budgétaire)
+    note: Valeur reprise telle quelle ; sera calculée par le module Calendrier (déficits 2027-2028).
+  inflation:
+    valeur: 0.018
+    unite: taux
+    statut: HYPOTHESE
+    note: Sert au passage au déficit de Maastricht (intérêts réels + inflation × dette de l'année précédente).
+
 # --- RUI ------------------------------------------------------------------------
 rui:
   montant:

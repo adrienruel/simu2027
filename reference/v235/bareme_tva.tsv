@@ -1,0 +1,167 @@
+ÉBAUCHE DE BARÈME — « TVA » affichée = TVA légale (taux actuels depuis la v231 ; 0 % sur l'alimentation et 5,5 % sur l'énergie du logement depuis la v232) + accise écologie + accise santé (remplace TVA, TICPE et accises actuelles)
+Parts de consommation : INSEE, enquête Budget de famille 2017, structure des dépenses par quintile de niveau de vie (Modeste = Q1, Médian = Q2-Q3, Aisé = Q4, Très aisé = Q5), ventilées dans les catégories du barème avec des clés de répartition (ex. alimentation : 35 % brute, 50 % transformée, 15 % produits sucrés ; transports : 33 % carburants, 40 % véhicules). Bleu = modifiable.
+v53 : accise écologie hors énergie relevée de 62 % pour intégrer l’ancienne taxe pollution des entreprises (15 Md€), à recettes égales.											Ancien taux : poids actuel de la TVA et des accises rapporté au prix hors taxe. Vérifié en v127 ligne par ligne (colonne N) : tabac, carburants, alcool, électricité, gaz et aérien sont recalculés à partir des tarifs 2026 ; le reste est signalé comme hypothèse.
+Catégorie	Exemples	TVA légale (taux actuels depuis la v231)	Accise écologie	Accise santé	Taux total affiché	Remplace	Modeste	Médian	Aisé	Très aisé	Ancien taux (TVA + accises, approx.)	Écart (points)	Source ou statut (v127)
+Logement (loyers, charges hors énergie)	Loyers, copropriété	0	0	0	0	Exonération actuelle	0.1547	0.1323	0.1029	0.0854	0	0	SOURCÉ (droit) : les loyers d’habitation sont exonérés de TVA aujourd’hui ; inchangé.
+Santé, éducation, action sociale	Soins, scolarité, crèche	0	0	0	0	Exonérations actuelles	0.032	0.0245	0.026	0.027	0	0	SOURCÉ (droit) : soins, enseignement et action sociale sont exonérés de TVA aujourd’hui ; inchangé.
+Alimentation brute	Fruits, légumes, céréales, œufs (accise selon mode de production : 0 % bio, 3 % raisonné, 8 % conventionnel)	0	0.0335214965331136	0	0.0335214965331136	TVA 5,5 %	0.0641	0.0604	0.0549	0.0497	0.055	-0.0214785034668864	v232 (28 octobre 2026), DÉCISION d'Adrien (« coller à avant ») : TVA légale à 0 % (permis par la directive de 2022 sur les taux) ; accise hors carbone (pesticides, 3,2 %) supprimée ; reste le carbone agricole. La taxe totale reste supérieure à aujourd'hui (5,5 %) : aucune baisse de prix à répercuter. Accise = pesticides (3,2 %, CHOIX) + carbone agricole (ligne 99). Repère SOURCÉ : coût social des pesticides de synthèse en France 372 M€ par an au minimum, dont 260 M€ de traitement de l’eau, jusqu’à 8,2 Md€ en borne haute (Alliot et al., Frontiers in Sustainable Food Systems, 2022, année 2017). Ancien taux SOURCÉ : TVA 5,5 %.
+Alimentation transformée, viande, laitiers	Plats préparés, viande, fromages	0	0.09957856323072	0	0.09957856323072	TVA 5,5 %	0.0915	0.0862	0.0785	0.071	0.055	0.04457856323072	v232 : TVA légale à 0 % ; reliquat d'accise de 2,4 % supprimé ; reste le carbone agricole (≈ 10 %), au-dessus des 5,5 % d'aujourd'hui. Accise = 2,4 % (CHOIX, reliquat d’avant le carbone) + carbone agricole (ligne 98). Ancien taux SOURCÉ : TVA 5,5 %.
+Produits sucrés et ultra-transformés	Sodas, confiseries, snacks	0.055	0.0243	0.15	0.2293	TVA 5,5 % + taxe soda	0.0275	0.0259	0.0235	0.0213	0.08	0.1493	Accise santé 15 % : CHOIX. Elle rapporte environ 3,9 Md€ dans le modèle. Repère SOURCÉ : coût social de la surcharge pondérale ≈ 20 Md€ en 2012 (Trésor-Éco n° 179, 2016) : l’accise en couvre un cinquième. Ancien taux 8 % : HYPOTHÈSE (TVA 5,5 % + taxe soda).
+Alcool	Accise santé au litre d’alcool pur (ligne 139) + accise agricole modulée selon le mode de production (ligne 151)	0.2	0.025596	0.593623629511647	0.819219629511647	TVA 20 % + droits sur l’alcool	0.0119	0.0151	0.0143	0.0149	0.55	0.269219629511647	v128 : accise au litre d’alcool pur, calibrée pour couvrir le coût des soins dus à l’alcool, 7,8 Md€ (SOURCÉ : OFDT, Kopp, 2023, année 2019), comme le tabac couvre le sien. Volumes SOURCÉS (OFDT 2024). Ancien taux 55 % : ordre de grandeur recalculé à partir des tarifs douaniers 2026, prudent. v129 : s’y ajoute l’accise agricole sur les pesticides, dont le bio est exonéré (21 % du vignoble, SOURCÉ). v130 : le vin paie la moitié de l’accise santé (ligne 158).
+Tabac	Cigarettes, tabac à rouler — calibré pour couvrir les 16,4 Md€ de soins (OFDT 2019) : paquet ≈ 14,70 €	0.2	0	6.55	6.75	TVA 20 % + accise tabac	0.0221	0.0184	0.0117	0.008	5	1.75	SOURCÉ : calibrée sur le coût des soins dus au tabac, 16,4 Md€ (OFDT, Kopp, 2023, année 2019). Ancien taux SOURCÉ : accise 55 % du prix + 73,30 € pour 1 000 cigarettes + TVA, soit 82 à 84 % du prix de vente (douane 2026), donc ≈ 500 % du prix hors taxe.
+Carburants	Essence, gazole — accise carbone uniforme (ligne 61)	0.2	0.7774185303552	0	0.9774185303552	TVA 20 % + TICPE	0.0449	0.0508	0.0574	0.0581	1.1	-0.1225814696448	SOURCÉ pour le prix du carbone et les facteurs d’émission (lignes 56 à 58). HYPOTHÈSE : prix hors taxe de 0,85 € le litre, qui est un prix de période normale. Au 22 septembre 2026 le gazole vaut 2,41 € le litre, dont accise 0,6075 € et TVA 0,40 € (SOURCÉ), soit ≈ 1,40 € hors taxe : à ce prix l’accise carbone pèse 49 % et non 74 %. L’accise est due par tonne de CO₂ : le pourcentage affiché varie avec le cours du pétrole, pas la recette. Ancien taux 110 % : cohérent avec l’accise 2026 à prix normal.
+Électricité	Électricité du logement	0.055	0	0	0.055	TVA 20 % + accise électricité	0.0376	0.0321	0.025	0.0207	0.37	-0.315	v232 : TVA légale à 5,5 % (taux réduit autorisé sur l'énergie), aucune accise : l'électricité française est presque sans carbone. Baisse réelle par rapport à aujourd'hui (≈ 37 %). CHOIX : aucune accise, l’électricité française est presque sans carbone. Ancien taux : accise SOURCÉE 30,35 € par MWh pour les ménages depuis le 1er août 2026 (loi de finances 2026) ; le taux de 37 % suppose un prix hors taxe non sourcé (HYPOTHÈSE, plutôt basse).
+Gaz et fioul	Chauffage fossile — accise carbone uniforme (ligne 66)	0.055	0.6438664766976	0	0.6988664766976	TVA 20 % + accises énergie	0.0287	0.0246	0.0191	0.0159	0.4	0.2988664766976	v232 : TVA légale à 5,5 % plus le carbone (≈ 64 %) : la taxe totale reste bien au-dessus d'aujourd'hui (≈ 40 %). SOURCÉ pour le carbone (lignes 56, 58, 62). HYPOTHÈSES : prix hors taxe du gaz et du fioul, part du gaz. Ancien taux : accise gaz SOURCÉE 16,66 € par MWh depuis le 1er août 2026 ; le taux de 40 % est une HYPOTHÈSE prudente.
+Transports collectifs	Train, bus, métro	0.1	0	0	0.1	TVA 10 %	0.0109	0.0123	0.0139	0.0141	0.1	0	SOURCÉ (droit) : TVA à 10 % aujourd’hui, ramenée au taux réduit de 5 %.
+Transport aérien	Billets d’avion — accise carbone uniforme (ligne 121)	0.1	0.45515299424256	0	0.55515299424256	TVA 10 % + taxes aériennes	0.0041	0.0077	0.0139	0.0211	0.1	0.45515299424256	v128 : accise carbone, traînées comprises (lignes 115 à 123). SOURCÉ : émissions par passager-kilomètre (DGAC, bilan 2024) ; rapport de 1,8 pour les effets hors CO₂ (ADEME, source secondaire). HYPOTHÈSE prudente : recette du billet par kilomètre. Ancien taux 10 % : HYPOTHÈSE (taxe de solidarité 7,40 €, 15 € et 40 € en classe économique depuis mars 2025, SOURCÉ).
+Biens manufacturés	Électronique, électroménager, meubles — accise générale supprimée (v126) : le carbone est payé une fois, sur l’énergie	0.2	0	0	0.2	TVA 20 %	0.0912	0.1069	0.1268	0.1446	0.2	0	CHOIX (v126) : plus d’accise. Ancien taux SOURCÉ : TVA 20 %.
+Textile et chaussures	Accise selon la durabilité : 0 % au-dessus du seuil légal, jusqu’à 50 % en dessous (ligne 130)	0.2	0.01	0	0.21	TVA 20 % + pénalité fast fashion (loi du 8 juillet 2026)	0.055	0.0475	0.049	0.052	0.2	0.01	v128 : accise modulée selon la durabilité, sur le critère de la loi du 8 juillet 2026. SOURCÉ : plafond de 50 % ; part de l’ultra-éphémère 2 % en valeur (IFM, 2026). Le vêtement standard ne paie plus d’accise, comme les autres biens manufacturés.
+Produits contenant des PFAS (usages non interdits)	Poêles antiadhésives, emballages, textiles d’ameublement jusqu’en 2030	0.2	0	0.2	0.4	TVA 20 %	0.005	0.005	0.005	0.005	0.2	0.2	Accise 20 % : CHOIX, rapporte ≈ 1 Md€. Repère : dépolluer l’Europe coûterait 95 à 2 000 Md€ sur vingt ans (enquête Forever Lobbying Project, Le Monde, janvier 2025) ; part française NON SOURCÉE.
+Véhicules	Accise supprimée (v126) : le carbone est déjà payé sur le carburant ; l’électrique garde l’avantage d’une électricité à 5 %	0.2	0	0	0.2	TVA 20 % + malus	0.0544	0.0616	0.0696	0.0704	0.25	-0.05	CHOIX (v126) : plus d’accise. Ancien taux 25 % : HYPOTHÈSE (TVA 20 % + malus moyen).
+Services	Restauration et rénovation à 5 %, autres services à 15 % : moyenne	0.15	0	0	0.15	TVA 10 à 20 %	0.2098	0.2247	0.2411	0.2579	0.15	0	CHOIX : restauration et rénovation à 5 %, autres services à 15 %. La moyenne de 12 % dépend d’une répartition NON SOURCÉE. Ancien taux 15 % : HYPOTHÈSE (TVA 10 à 20 %).
+Assurances et jeux d’argent	Exonérés de TVA en droit européen : accise seule	0	0.15	0	0.15	Taxe sur les assurances, prélèvements sur les jeux	0.0548	0.064	0.0672	0.0628	0.15	0	v128 : ramenée à 15 %, niveau estimé des taxes actuelles qu’elle remplace (taxe sur les conventions d’assurance, prélèvements sur les jeux ; HYPOTHÈSE). Ce n’est pas une accise écologique : aucune externalité n’est visée.
+Total des parts (normalisé dans les calculs)							1.0002	1	0.9998	0.9999
+TAUX EFFECTIFS PAR PROFIL (sur la consommation hors taxe)
+						Seuil de revenu net annuel (à partir de)	0	20000	32000	50000
+						Part de taxes dans la dépense TTC	0.14824080347059	0.153604286484244	0.156571677584907	0.158977548019252
+						Taux effectif total (HT)	0.174040743058149	0.181480463607505	0.185637206415569	0.1890288988657
+						dont accise santé	0.0312595903213796	0.0287723815411384	0.0215074266406591	0.0177618092873585
+						dont TVA légale + accise écologie	0.142781152736769	0.152708082066367	0.16412977977491	0.171267089578342
+Juridiquement : la TVA légale garde ses taux actuels (v231), avec le taux zéro sur l'alimentation et le taux réduit de 5,5 % sur l'énergie du logement (v232), permis par la directive (UE) 2022/542 ; le taux réduit sur le gaz et le fioul doit disparaître d'ici 2030 : la TVA remontera alors et l'accise baissera d'autant, à recettes égales. Les volets écologie et santé sont des accises nationales, perçues en une seule fois (production ou importation), selon des critères objectifs appliqués à l'identique aux produits importés.
+						Ancien taux effectif total (HT), même méthode	0.171768744585908	0.17774723703791	0.1801070455956	0.180799825662712
+						Écart nouveau − ancien (points)	0.00227199847224135	0.0037332265695954	0.00553016081996843	0.00822907320298766
+ACCISES PAYÉES PAR LES ENTREPRISES SUR LEURS ACHATS (ordres de grandeur)
+Principe : les accises énergie s'appliquent aussi aux achats professionnels. Les accises sur les biens (manufacturés, textile, PFAS) ne visent que les biens de consommation finale, sinon on recrée un impôt de production. Les installations soumises au marché carbone européen sont exclues de l'accise sur le gaz.
+Poste	Base : achats HT des entreprises (Md€)	Taux d’accise (barème)	Accise brute (Md€)	Hypothèse
+Carburants routiers et non routiers (flottes, transport de marchandises, BTP, agriculture)	15	0.7774185303552	11.661277955328	≈ 40 % des carburants consommés, prix hors taxe ≈ 0,85 €/L
+Gaz et fioul (hors installations soumises au marché carbone)	8	0.6438664766976	5.1509318135808	≈ 100 TWh de gaz professionnel + fioul
+Électricité	0	0	0	Accise nulle : favorise l’électrification de l’industrie
+Billets d’avion achetés par les entreprises et les non-résidents	10	0.45515299424256	4.5515299424256	v128 : tout billet au départ de la France paie l’accise, pas seulement ceux des ménages. Trafic 292,8 Md de passagers-kilomètres (DGAC 2024) × 8 centimes ≈ 23 Md€, moins ≈ 10 Md€ de billets des ménages, moins 20 % de baisse du trafic (HYPOTHÈSE prudente).
+Biens manufacturés, textile, PFAS	0	0	0	Accises limitées aux biens de consommation finale
+Total accises brutes payées par les entreprises (Md€)			21.3637397113344
+Effet sur l'impôt sur les sociétés (charges déductibles, Md€)			-8.54549588453376
+Recette nette pour le budget (Md€)			12.8182438268006
+ACCISE CARBONE UNIFORME — décision du 9 octobre : le carbone est taxé au même prix par tonne pour tous les usages des énergies fossiles, sans niche
+Paramètre	Valeur	Source ou hypothèse
+Prix du carbone (€ par tonne de CO₂)	269.00295168	SOURCÉ : valeur de l’action pour le climat en 2025, en euros de 2023 (rapport Quinet, France Stratégie, mars 2025). Elle monte à 300 € en 2030 : hausse non comptée ici.	Passage en euros de 2026	1.05079278	v180 : la valeur de l'action pour le climat est en euros de 2023 ; le modèle est en euros de 2026. SOURCÉ : inflation 2024 2,0 %, 2025 ≈ 0,9 % (Insee) ; 2026 2,1 % (prévision du gouvernement, septembre 2026).
+Essence : kg de CO₂ par litre	2.22	SOURCÉ : 2,9 t de CO₂ par tep (SDES, Chiffres clés du climat, facteurs du GIEC) ; 8,9 kWh par litre.
+Gazole et fioul : kg de CO₂ par litre	2.65	SOURCÉ : 3,1 t de CO₂ par tep (SDES) ; 9,96 kWh par litre.
+Part du gazole dans les carburants des ménages	0.55	HYPOTHÈSE.
+Prix hors taxe du carburant (€ par litre)	0.85	HYPOTHÈSE déjà retenue ligne 44.
+Accise carbone sur les carburants (% du prix hors taxe)	0.7774185303552	Reportée en D12. Essence ≈ 67 %, gazole ≈ 80 %. Avant : 65 %.
+Gaz naturel : kg de CO₂ par kWh	0.198	SOURCÉ : 2,3 t de CO₂ par tep (SDES).
+Prix hors taxe du gaz pour un ménage (€ par kWh)	0.085	HYPOTHÈSE.
+Prix hors taxe du fioul domestique (€ par litre)	1	HYPOTHÈSE.
+Part du gaz dans le poste « gaz et fioul »	0.8	HYPOTHÈSE.
+Accise carbone sur le gaz et le fioul (% du prix hors taxe)	0.6438664766976	Reportée en D14. Gaz ≈ 60 %, fioul ≈ 68 %. Avant : 20 %. Aujourd’hui, le gaz des ménages paie 41 € par tonne et l’essence 226 € (CGDD pour le Haut Conseil pour le climat, données 2022).
+Transport aérien	0.45515299424256	Recalculée sur le carbone en v127 (lignes 115 à 123). Le kérosène des vols internationaux ne peut pas être taxé seul : l’accise porte sur le billet.
+Périmètre	énergies fossiles et agriculture	Tous les usagers, entreprises et agriculture comprises (lignes 44 et 45), et les émissions agricoles hors énergie (lignes 87 à 106). Hors périmètre, à assumer : l’industrie soumise au marché européen du carbone. À articuler avec l’extension du marché européen aux carburants et au chauffage.
+EFFET DU BARÈME SUR LES ÉMISSIONS, PAR RAPPORT À AUJOURD’HUI (Mt de CO₂ par an, inventaire national, ordres de grandeur prudents)
+Paramètre	Valeur	Source ou hypothèse
+Émissions du transport routier (Mt)	117	SOURCÉ : Citepa, rapport Secten 2026, année 2024.
+Part des voitures des ménages	0.53	HYPOTHÈSE.
+Variation du prix des carburants pour les ménages	-0.0583721284022857	Taux affiché du projet comparé au taux actuel (colonne L).
+Élasticité-prix des carburants, long terme	0.65	SOURCÉ : 0,6 à 0,7 à long terme (Insee, Calvet et Marical, 2012). Valeur haute retenue, parce que l’effet est défavorable.
+Effet sur les émissions : carburants	2.35277619344673	Positif : le carburant reste moins taxé qu’aujourd’hui.
+Émissions des bâtiments (Mt)	56.1	SOURCÉ : Citepa, rapport Secten 2026, année 2024.
+Variation du prix du gaz et du fioul	0.213476054784
+Élasticité-prix du chauffage fossile	0.22	SOURCÉ : −0,22 à court terme pour la demande résidentielle d’énergie, −0,22 à −0,24 pour le gaz ; −0,61 à long terme (Labandeira, Labeaga et López-Otero, méta-analyse de 416 études, Energy Policy, 2017). Valeur de court terme retenue par prudence ; source non française.
+Effet sur les émissions : gaz et fioul	-2.63472146814413
+Émissions des vols intérieurs (Mt)	4.1	SOURCÉ : DGAC, bilan 2024. Les vols internationaux (17,9 Mt) ne sont pas dans l’inventaire national.
+Variation du prix des billets d’avion	0.413775449311418
+Élasticité-prix du transport aérien	0.5	HYPOTHÈSE sans source, donc prudente.
+Effet sur les émissions : vols intérieurs	-0.848239671088407	Sur l’ensemble des vols au départ de la France : environ cinq fois plus.
+Effet net sur l’inventaire national, agriculture comprise (Mt de CO₂ par an)	-6.18705994578581	Pour mémoire : 367 Mt en 2024. Non chiffrés : électricité presque détaxée, alimentation, textile, biens manufacturés, investissements du fonds.
+ACCISE CARBONE AGRICOLE, MODULÉE SELON LE MODE DE PRODUCTION — décision du 9 octobre : l’agriculture entre dans le périmètre du carbone uniforme
+Paramètre	Valeur	Source ou hypothèse
+Émissions de l’agriculture (Mt de CO₂ équivalent)	77.5	SOURCÉ : Citepa, rapport Secten 2026, année 2024.
+Part hors énergie (élevage 60 %, cultures 27 %)	0.87	SOURCÉ : SDES, Chiffres clés du climat. Les 13 % d’engins et de chaudières paient déjà l’accise sur les énergies fossiles.
+Recette au prix plein, avant réaction des consommateurs (Md€)	18.137524017024	HYPOTHÈSE : les émissions de ce que la France consomme sont proches de celles de ce qu’elle produit (35 % de la viande est importée, des céréales et du lait sont exportés).
+Baisse des volumes consommés	0.3	HYPOTHÈSE prudente pour les recettes. Repère : en Allemagne, une taxe de 201 € par tonne réduirait les émissions agricoles de 22,5 % et la consommation de bœuf de 53 % (Schaper et al., Food Policy, 2025).
+Abattement moyen obtenu par la modulation	0.2	HYPOTHÈSE prudente. Le taux plein s’applique par défaut ; le producteur qui prouve des émissions nettes plus faibles (diagnostic certifié, stockage de carbone des prairies, absence d’engrais de synthèse) paie moins.
+Recette retenue (Md€)	10.1570134495334
+Part portée par la viande, les produits laitiers et les produits transformés	0.8	HYPOTHÈSE : l’élevage pèse 69 % des émissions agricoles hors énergie.
+Assiette hors taxe : viande, laitiers, transformés (Md€)	81.6	Calculée par le modèle : un point d’accise sur la ligne 8 rapporte 0,82 Md€.
+Assiette hors taxe : alimentation brute (Md€)	60.6	Calculée par le modèle : un point d’accise sur la ligne 7 rapporte 0,61 Md€.
+Accise carbone moyenne : viande, laitiers, transformés	0.09957856323072	Ajoutée en D8 à l’accise existante, divisée par deux en v126 (2,4 % au lieu de 4,9 %). C’est une moyenne : le bœuf paie bien plus, la volaille bien moins.
+Accise carbone moyenne : alimentation brute	0.0335214965331136	Ajoutée en D7 à l’accise sur les pesticides, divisée par deux en v126 (3,2 % au lieu de 6,5 %).
+Exemple : bœuf, kg de CO₂ équivalent par kg	27.3	SOURCÉ : Agribalyse 3.2 (ADEME), stade agricole. Porc ≈ 7, poulet ≈ 4,7.
+Accise au taux plein (€ par kg de bœuf)	7.343780580864
+Steak de 150 g, taux plein (€)	1.1015670871296	Soit environ un tiers du prix d’un steak à 22 € le kilo (prix non sourcé).
+Steak de 150 g, élevage à l’herbe avec un tiers d’abattement (€)	0.7343780580864	Repère : un tiers des émissions compensé par le stockage de carbone des prairies en élevage allaitant (Institut de l’élevage, d’après la presse agricole, non vérifié à la source).
+Baisse de l’empreinte carbone alimentaire	0.15	HYPOTHÈSE prudente (étude allemande : −22,5 % à 201 € par tonne).
+Part de cette baisse qui se retrouve dans l’inventaire national	0.5	HYPOTHÈSE prudente : une partie de la production se reporte sur l’exportation.
+Effet sur les émissions : agriculture (Mt)	-5.056875
+ÉGALISATION DE LA TVA DES MÉNAGES — décision du 9 octobre (v126)
+Le carbone uniforme ne doit pas alourdir la TVA des ménages. En contrepartie des accises carbone (énergies fossiles et agriculture), trois accises baissent :
+— biens manufacturés : accise générale de 8 % supprimée (aucune externalité identifiée une fois le carbone payé) ;
+— véhicules : accise moyenne de 8 % supprimée (double emploi avec le carbone payé sur le carburant) ;
+— alimentation : accise d’avant le carbone divisée par deux. Raison donnée par Adrien : préserver les agriculteurs et les accompagner dans la transition, ne pas en faire des boucs émissaires.
+Résultat : le taux effectif de chaque profil de ménage revient à peu près à son niveau d’aujourd’hui (ligne 28 comparée à la ligne 34). Le surplus de recettes du carbone est rendu ; il ne réduit plus le déficit.
+ACCISE CARBONE SUR LE TRANSPORT AÉRIEN — v127 : même prix du carbone que les autres usages
+Paramètre	Valeur	Source ou hypothèse
+Émissions par passager-kilomètre, moyenne des vols au départ de la France (g de CO₂)	75.2	SOURCÉ : DGAC, bilan des émissions du transport aérien 2024. Long-courrier 68,9 ; moyen-courrier 88,5 ; intérieur métropole 116,2.
+Coût du carbone par passager-kilomètre (centimes d’euro)	2.0229021966336	CO₂ seul. Avec les traînées : Paris–New York aller-retour (11 700 km) environ 370 € ; vol européen de 1 000 km, 41 € l’aller.
+Recette moyenne d’un billet par passager-kilomètre, hors taxe (centimes d’euro)	8	HYPOTHÈSE prudente pour les recettes (repère mondial ≈ 7 centimes). Plus le billet est cher, plus le pourcentage affiché est bas.
+Effets hors CO₂ (traînées, oxydes d’azote)	1.8	v128 : comptés. L’ADEME retient 101 g de CO₂ de combustion et 83 g pour les traînées par passager-kilomètre, soit un rapport de 1,8 (chiffres ADEME cités par Greenly, source secondaire). Même externalité, même prix : le réchauffement dû aux traînées est taxé comme celui du CO₂.
+Accise carbone sur les billets d’avion (% du prix hors taxe)	0.45515299424256	Reportée en D16. v126 : 40,5 %. v127, CO₂ seul : 24 %.
+Émissions de tous les vols au départ de la France (Mt de CO₂)	22.1	SOURCÉ : DGAC 2024 (4,1 Mt intérieur, 17,9 Mt international).
+Recette si tous les billets au départ paient l’accise (Md€)	10.7009374178304	Dont billets des entreprises et des non-résidents, comptés en v128 (ligne 47).
+CONTRÔLE PHYSIQUE DES RECETTES CARBONE (v127)
+Poste	Valeur (Md€)	Lecture
+Carburants des ménages : émissions × prix du carbone	16.6808730336768	Le modèle applique un taux à la part des carburants dans le budget (Insee, Budget de famille 2017), qui est plus forte que dans les comptes nationaux. L’effet est prudent sur le solde : les carburants étant moins taxés qu’aujourd’hui, leur surpoids grossit la perte.
+Chauffage fossile des ménages : ordre de grandeur	9	HYPOTHÈSE : ≈ 35 Mt pour le résidentiel. Le modèle retient ≈ 10 Md€ avant baisse des volumes.
+Agriculture : recette retenue	10.1570134495334	Après baisse des volumes de 30 % et abattement moyen de 20 %.
+ACCISE TEXTILE MODULÉE SELON LA DURABILITÉ — décision du 9 octobre (v128)
+Paramètre	Valeur	Source ou hypothèse
+Accise des vêtements durables et standard (coefficient de durabilité > 0,8)	0	CHOIX de cohérence : comme les autres biens manufacturés, ils ne paient que le carbone de l’énergie.
+Accise maximale des vêtements à faible durabilité (coefficient ≤ 0,8)	0.5	SOURCÉ : c’est le plafond de la loi du 8 juillet 2026 (50 % du prix hors taxe). L’accise reprend son critère et sa grille par article ; elle remplace la pénalité.
+Part de la mode ultra-éphémère dans les achats d’habillement, en valeur	0.02	SOURCÉ : 2 % en valeur et 6 % en volume en 2025 (Institut français de la mode, baromètre de février 2026).
+Part des autres vêtements à faible durabilité	0	HYPOTHÈSE prudente : aucune source, donc aucune recette comptée.
+Accise moyenne du poste textile	0.01	Reportée en D18. Avant : 19,4 %, sur une répartition sans source.
+ACCISE SUR L’ALCOOL, AU LITRE D’ALCOOL PUR — décision du 9 octobre (v128)
+Paramètre	Valeur	Source ou hypothèse
+Coût des soins dus à l’alcool (Md€)	7.849	SOURCÉ : OFDT, Kopp, 2023, année 2019. Même règle que pour le tabac : l’accise couvre le coût des soins.
+Alcool pur vendu par habitant de 15 ans et plus (litres par an)	9.75	SOURCÉ : OFDT, bilan 2024.
+Habitants de 15 ans et plus (millions)	56	HYPOTHÈSE (ordre de grandeur Insee).
+Accise par litre d’alcool pur (€)	14.3754578754579	La même pour le vin, la bière et les spiritueux : même alcool, même taxe.
+Bouteille de vin, 75 cl à 12,5 % (€)	0.673849587912088	Demi-tarif (ligne 158). Aujourd’hui 0,03 € (4,19 € par hectolitre, douane 2026).
+Bière, 33 cl à 5 % (€)	0.237195054945055	Aujourd’hui 0,14 € (8,24 € par hectolitre et par degré).
+Bouteille de spiritueux, 70 cl à 40 % (€)	4.02512820512821	Aujourd’hui 7,15 € (2 553 € par hectolitre d’alcool pur, cotisation sociale comprise).
+Dépense d’alcool des ménages dans le modèle, toutes taxes comprises (Md€)	17.8	Calculée par le modèle (part du budget × consommation).
+Taux équivalent, en % du prix hors taxe	0.593623629511647	Reporté en E10. v129 : 93 %, sans demi-tarif pour le vin.
+ACCISE AGRICOLE SUR LES BOISSONS ALCOOLISÉES, MODULÉE SELON LE MODE DE PRODUCTION — décision du 9 octobre (v129)
+Paramètre	Valeur	Source ou hypothèse
+Accise pesticides au taux plein (% du prix hors taxe)	0.0324	Le même taux que sur l’alimentation brute (ligne 7). Jusqu’en v128, le vin, la bière et les spiritueux n’en payaient aucune. Repère : la vigne couvre 3,7 % de la surface agricole et consomme environ 20 % des pesticides (chiffre cité par Public Sénat, 2018, source d’origine non retrouvée).
+Part exonérée : production en agriculture biologique	0.21	SOURCÉ pour la vigne : 21 % du vignoble est en bio ou en conversion en 2024 (141 839 ha). HYPOTHÈSE prudente : la même part appliquée à la bière et aux spiritueux, où le bio pèse moins.
+Accise moyenne	0.025596	Reportée en D10. Le label bio est le critère par défaut. Limite : la viticulture bio utilise du cuivre ; un critère fondé sur les traitements réellement appliqués serait plus juste. Le carbone agricole n’est pas ajouté : sa recette (ligne 94) est déjà entièrement répartie sur l’alimentation.
+Exemple : bouteille de vin à 5 € hors taxe, conventionnel (€)	0.162	En bio : 0 €. À comparer à l’accise santé de 1,35 € par bouteille, identique pour tous.
+DEMI-TARIF DU VIN, MESURE DE TRANSITION — décision d’Adrien du 9 octobre (v130)
+Paramètre	Valeur	Source ou hypothèse
+Part du vin dans l’alcool pur vendu	0.52	SOURCÉ : OFDT, bilan 2024.
+Abattement de l’accise santé sur le vin	0.5	CHOIX d’Adrien : préserver la filière viticole, comme l’accise alimentaire a été divisée par deux pour les agriculteurs. Exception assumée à la règle « même alcool, même taxe », présentée comme une transition.
+Recette de l’accise santé sur l’alcool (Md€)	5.80826	Le coût des soins (ligne 141) n’est plus couvert qu’aux trois quarts. Bière et spiritueux paient le tarif plein.
+EFFET DE LA TVA DANS LE SIMULATEUR DE REVENU DU SITE (v148)
+Paramètre	Valeur	Source ou hypothèse
+Surcroît de TVA de 2028, maintenu jusqu’en 2032 (Md€)	0	Feuille Calendrier budgétaire ; réduit par étapes de 2033 à 2037 (feuille Objectifs).
+TVA et accises payées par les ménages dans le projet (Md€)	248.150266888005
+Majoration des taux effectifs de 2029 à 2032	0	HYPOTHÈSE prudente : tout le surcroît est payé par les ménages, au prorata de leur TVA.
+Part des ménages chauffés au gaz ou au fioul	0.435	SOURCÉ (v170) : en 2022, 35 % des résidences principales de métropole sont chauffées au gaz (réseau, citerne, bouteille) et 8,5 % au fioul, soit 43,5 % (Insee Première n° 2088, janvier 2026). Avant : 45 %, ordre de grandeur. La dépense moyenne de gaz et de fioul (ligne 14) est portée par ces seuls ménages.
+						Écart de taux effectif avec aujourd’hui, de 2029 à 2032 (points)	0.00227199847224135	0.0037332265695954	0.00553016081996843	0.00822907320298766
+						Écart de taux effectif avec aujourd’hui, après 2037 (points)	0.00227199847224135	0.0037332265695954	0.00553016081996843	0.00822907320298766
+Salarié médian : consommation hors taxe (€ par an)	19150.1454886587
+   TVA en plus par mois de 2029 à 2032 (€)	5.95765266248984	À comparer au gain de revenu de la bascule (feuille Formules, C25).
+   TVA en plus par mois après 2037 (€, négatif = gain)	5.95765266248984
+Salarié au SMIC : consommation hors taxe (€ par an)	16562.9293750729
+   TVA en plus par mois de 2029 à 2032 (€)	5.15276400111285	Profil « médian » du barème (net annuel de 20 000 à 32 000 €). À comparer à la feuille Formules, C23.
+   TVA en plus par mois après 2037 (€, négatif = gain)	5.15276400111285
+POINT DE DÉPART À RECETTES ÉGALES (v231, DÉCISION d'Adrien du 28 octobre 2026)
+La TVA légale garde ses taux actuels (« au même seuil »), sauf l'alimentation (0 %) et l'énergie domestique (5,5 %), où le carbone s'ajoute et où la taxe totale reste au-dessus d'aujourd'hui, sauf pour l'électricité. Les ménages paient ainsi à peu près ce qu'ils paient aujourd'hui (v232, « coller à avant »). Au départ, la TVA et les accises rapportent autant que l'ancienne TVA et toutes les taxes qu'elles remplacent ; l'accise de transition sur les achats des entreprises maintient ce qu'elles payaient hors carbone.
+Ancienne TVA et autres impôts sur les produits (Md€, assiettes 2024)	317.408450264849
+Nouvelle TVA, ménages et entreprises (Md€)	248.150266888005
+Accises des entreprises, brutes (Md€)	21.3637397113344
+Accise carbone sur les produits importés, 2029 (Md€, ramenée en assiettes 2024)	12.0825161181075
+Accise de transition sur les achats des entreprises, brute (Md€) : ce qui manque pour l'égalité	35.8119275474014
+Effet sur l'impôt sur les sociétés (charge déductible, Md€)	-14.3247710189606
+Recette nette de l'accise de transition (Md€, ajoutée à Total B15)	21.4871565284409
+Contrôle : TVA et accises, nouveau moins ancien (doit valoir 0)	0

@@ -1,0 +1,32 @@
+Calcul Revenu Universel D'Inactivité						AGRICULTEURS : complément de RUI selon le revenu (même règle que les inactifs : dégressif jusqu’à 2 000 €/mois)
+						Classe	Part des agriculteurs	Revenu agricole annuel (€)	Complément RUI annuel (€)
+						Revenu nul ou négatif	0.22	0	9600
+Etudiants		Temps partiel	Mineurs	Mineurs dans famille Monoparentale		Très modeste	0.1	6000	7200
+3012800		821719.324394829	11500000	2500000		Modeste	0.13	15000	3600
+Reste		Equivalent horaires	Pourcentage			Moyen	0.15	24000	0
+3800000		0.62	0.15	0.3		Aisé	0.4	45000	0
+Agriculteurs (non-salariés agricoles, Insee fin 2023)		Equivalent Inactifs				Coût total agriculteurs (€)			1346400000
+408000		312253.343270035				Insee : 408 000 non-salariés agricoles fin 2023 ; 22 % des exploitants au régime réel déclarent un revenu nul ou déficitaire en 2024 ; médiane ≈ 2 540 €/mois, 1er décile ≈ 620 €/mois (2022). Les bénéfices agricoles ne font que 35 % du revenu des ménages agricoles : le complément réel est sans doute plus faible.
+Montant RUI			DÉCOMPOSITION DU COÛT (Md€)
+800	← Piloté par la feuille Formules (v104).		Étudiants (RUI plein)	28.92288		MICRO-ENTREPRENEURS : complément de RUI selon le revenu (même règle que les inactifs et les agriculteurs)
+			Mineurs (15 % du RUI)	16.56		Micro-entrepreneurs économiquement actifs			1900000
+			Mineurs en famille monoparentale (30 %)	7.2		dont part exerçant en complément d’un emploi ou d’une retraite (pas de RUI)			0.4
+Total RUI	112675091914.19		Agriculteurs (complément selon le revenu)	1.3464		Classe	Part	Revenu annuel (€)	Complément RUI annuel (€)
+			Inactifs (complément différentiel)	23.1813064		Très faible	0.3	2000	8800
+AAH, maintenue à part du RUI (Md€)	15.0278	Sénat, PLF 2026 : 14,6 Md€ pour 1,35 million d’allocataires ; plus l’aide au poste des entreprises adaptées (0,43 Md€), intégrée à l’AAH par décision du 11 octobre.	Temps partiel (salariés du privé)	7.88850551419036		Faible	0.3	6000	7200
+Total RUI + AAH (€)	127702891914.19		Total RUI	112.67509191419		Modeste	0.25	12000	4800
+			Micro-entrepreneurs (complément selon le revenu)	6.84		Moyen	0.15	25000	0
+			Chômeurs (RUI plein)	20.736		Coût total micro-entrepreneurs (€)			6840000000
+						Ordres de grandeur : ≈ 1,9 M de micro-entrepreneurs économiquement actifs (Urssaf), revenu moyen modeste ; une part importante cumule avec un emploi salarié. À affiner.
+CHÔMEURS : l’assurance chômage est supprimée, le RUI sert de filet
+Chômeurs au sens du BIT	2700000	Insee, 2e trimestre 2026 : 2,7 millions, taux de chômage de 8,3 %. Absents du modèle jusqu’à la v81.
+Part déjà comptée ailleurs (allocataires du RSA parmi les inactifs, étudiants)	0.2	HYPOTHÈSE à vérifier selon l’origine des 3,8 millions d’inactifs.
+RUI moyen versé, en part du RUI plein	1	Prudent : aucun autre revenu une fois l’allocation chômage supprimée.
+Coût du RUI des chômeurs (€)	20736000000	Ajouté au total du RUI (B15).
+TVA payée par les chômeurs sur ce revenu (€)	3065064092.28578	Même consommation qu’un étudiant au RUI plein. Ajoutée à la TVA (Total!B3).
+Taux de chômage	0.083	Insee, 2e trimestre 2026.
+Personnes en emploi	29830120.4819277	Sert à l’effet de la récession de 2029 sur l’emploi (feuille Effets macro).
+BAISSE DU CHÔMAGE ATTENDUE DE LA RÉFORME (alimente la feuille Effets macro)	Crise (ancien prudent)	Médian	Optimiste	v218 : la colonne B est le scénario de crise ; le prudent publié prend le milieu entre la crise et le médian (Effets macro, B8).
+Baisse du taux de chômage à terme (points)	0.00389372461581637	0.0241675410190182	0.0370846193676329	Détail par réforme : feuille Emploi (v101). Auparavant : fourchette des études sur les réformes Hartz, de 0,1 à 2,8 points.
+Taux de chômage à terme	0.0791062753841836	0.0588324589809818	0.0459153806323671
+Emplois supplémentaires correspondants	126663.330875954	786173.021100592	1206367.13605553

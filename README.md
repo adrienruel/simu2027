@@ -18,6 +18,10 @@ python -m pytest
 | `moteur/parametres.py` | Chargement et validation (source obligatoire si SOURCE, année obligatoire pour un montant, scénarios complets) |
 | `moteur/unites.py` | Seul endroit où l'on convertit en euros de 2026 ; une double conversion lève une erreur |
 | `moteur/impot_unique.py` | Barème de l'impôt unique (personne seule) |
+| `moteur/trajectoire.py` | Bloc comptable de la trajectoire 2029-2073 (solde, dette, Maastricht) |
+| `reference/v235/` | Export de la v235, une feuille par fichier (valeurs seules) |
+| `reference/cibles/` | Valeurs cibles de Total et Trajectoire, que le moteur doit reproduire |
+| `outils/` | Scripts d'extraction de la référence |
 | `tests/` | Tests automatiques |
 | `docs/journal.md` | Journal des décisions et des écarts avec la v235 |
 

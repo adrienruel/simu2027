@@ -1,0 +1,90 @@
+COLLECTIVITÉS : CE QU’ELLES PERDENT, CE QU’ELLES ÉCONOMISENT, CE QU’ELLES DEVRONT LEVER (Md€/an) — refait sur les comptes 2024 et la loi de finances 2026
+Chaque collectivité choisit librement son impôt (la commune pour ce qu'elle finance, la région pour ce qu'elle finance). Pour estimer l'effet sur le revenu des ménages, le besoin est converti en un taux moyen équivalent sur les revenus au-delà de 12 500 € : c'est une hypothèse de répartition, pas un impôt imposé. Les entreprises paient un impôt local sur leurs bénéfices, voté par chaque commune et chaque région (ligne 33) ; le reste du besoin est converti en taux moyen sur les revenus des ménages.
+Poste	Communes et intercommunalités	Régions (ex-départements compris)	Total	Source / hypothèse
+Concours financiers de l’État (DGF, FCTVA, compensations, dotations d’investissement)	30.4	21.565	51.965	Total SOURCÉ : 54,7 Md€ en loi de finances 2026 (annexe du rapport OFGL). Répartition entre niveaux : mon estimation. v162 : la part de l’outre-mer (Budget État 2026, ligne 113) reste versée par l’État.
+Fractions de TVA (hors ancienne DGF des régions, déjà dans la ligne précédente)	15.4	31.6	47	SOURCÉ : 52,1 Md€ en 2024, dont 5,2 Md€ d’ancienne DGF des régions (Cour des comptes, finances publiques locales 2025, tableau 3).
+Accise sur les énergies (ancienne TICPE)	0	11.7	11.7	SOURCÉ : 11,7 Md€ en 2024 (Cour des comptes). Absorbée par la TVA.
+Taxe sur les conventions d’assurance	0	9.7	9.7	SOURCÉ : 9,7 Md€ en 2024 (Cour des comptes). Absorbée par la TVA.
+Subventions des ministères, fonds vert, amendes	2.6	2.6	5.2	Total SOURCÉ : 5,2 Md€ en loi de finances 2026. Répartition par moitié : hypothèse.
+Concours de la branche autonomie aux départements (APA, PCH)	0	5.4	5.4	SOURCÉ : 5,4 Md€ en 2024 (Cour des comptes). Financés par des cotisations qui disparaissent. v161 : la dépense qu’ils finançaient passe à l’État (ligne 16), la perte de ressource reste comptée.
+Droits de mutation	3	10.5	13.5	Total SOURCÉ : 13,5 Md€ en 2024 (Cour des comptes). Supprimés. Répartition : estimation.
+Impôts de production locaux (CFE, foncier bâti des entreprises)	23.7	0	23.7	CFE 8,0 Md€ (SOURCÉ, 2024) + foncier bâti des entreprises ≈ 15,7 Md€ (41,9 Md€ de foncier bâti moins 26,2 Md€ payés par les ménages dans le modèle).
+Versement mobilité (taxe sur les salaires, supprimée avec les cotisations)	12.2	0	12.2	SOURCÉ : 12,2 Md€ en 2024, 11,3 Md€ en 2023 (Insee, cité par la Fondation iFRAP). Valeur précédente : 11 Md€, non vérifiée. Compensé par l’État : voir ligne 28.
+Total des ressources perdues	87.3	93.065	180.365
+RSA remplacé par le RUI	0	-11.5	-11.5	SOURCÉ : 11,5 Md€ de dépenses brutes en 2024 (Drees).
+Aide sociale à l’enfance reprise par l’État (11,2) ; autonomie des personnes âgées et handicapées reprise par l’État (feuille Santé, ligne 103, v161)	0	-32.197019785	-32.197019785	SOURCÉ : 11,2 Md€ nets en 2024 (Drees). Inscrite dans la ligne Justice de l’État. v161 : plus l’autonomie (20,2 Md€ bruts, Drees 2024), reprise dans les dépenses de santé de l’État (DÉCISION du 15 octobre).
+Investissements rentables repris par le fonds	-5	-5	-10	Hypothèse du projet, inchangée.
+Alignement du coût des agents territoriaux	-4.72894736842105	-1.53947368421053	-6.26842105263158	Frais de personnel 2024 SOURCÉS : communes 45,3 + intercommunalités 14,6 ; départements 14,7 + régions 4,8 Md€ (Cour des comptes). Baisse : feuille Alignement public-privé.
+Économies : réorganisation territoriale	-3	-4	-7	Hypothèse du projet, inchangée.
+Économies : agents (non-remplacement, IA)	-4.1331	-1.3455	-5.4786	Recalé sur les seuls postes de gestion, comme pour l’État : filière administrative ≈ 23 % des agents territoriaux (HYPOTHÈSE à vérifier), 30 % de tâches automatisées, nettes du coût de l’IA. Ancienne valeur : −3,5 et −3,5.
+Économies : achats et fonctionnement	-2.5	-2	-4.5	Hypothèse du projet, inchangée. Achats 2024 : 51,8 Md€ (Cour des comptes).
+Économies : satellites, subventions, communication	-1.5	-1.5	-3	Hypothèse du projet, inchangée. Subventions de fonctionnement 2024 : 16,8 Md€.
+Économies : temps de travail (1 607 h)	-1	-1	-2	Hypothèse du projet, inchangée.
+Total des charges reprises et des économies	-21.8620473684211	-60.0819934692105	-81.9440408376316
+Besoin de financement actuel des collectivités (elles empruntent)	5.608	9.7	15.308	v181 : besoin de financement des administrations locales en comptabilité nationale, 15,6 Md€ en 2025 (SOURCÉ : Insee, comptes des administrations publiques 2025), +2 % pour 2026, ramené au niveau de 2024 car la feuille Total le multiplie par B124. Répartition des budgets principaux conservée (OFGL 2025 : bloc communal 3,7 ; départements et régions 6,4). Avant : 10,1 Md€, budgets principaux seuls, qui oublient les budgets annexes et les syndicats.
+Besoin de financement couvert par l’impôt local (1) ou laissé en déficit public (0)	0			DÉCISION du 8 octobre : 0. Les collectivités empruntent pour investir, jamais pour fonctionner ; ce besoin s’ajoute au déficit public (feuille Total, ligne 118). À 1, il est couvert par l’impôt local.
+Besoin de recettes locales nouvelles	68.8478561791564	15.3621616607966	84.210017839953	En plus des impôts locaux qui restent : foncier des ménages, enlèvement des ordures, résidences secondaires, tarifs des services. Après les leviers « même doctrine » des lignes 64 à 70 (répartition communes / régions : hypothèse, colonne D). v148 : comprend l’entretien des espaces protégés transféré aux régions (feuille Environnement, ligne 35). v150 : moins l’IS local des entreprises (ligne 33). v158 : la colonne Communes inclut l’hébergement d’urgence renvoyé par l’État (3,07 Md€, feuille Logement, ligne 14). v159 : moins la part territoriale du délai de carence porté à 5 jours (≈ 0,14 Md€, Budget État 2026, ligne 112), répartie selon les frais de personnel. v217 (22 octobre 2026) : DÉCISION d'Adrien, la taxe foncière des ménages est remplacée par l'impôt local unique : ses 26,2 Md€ (B51) s'ajoutent au besoin des communes. Chaque commune reste libre de lever cet impôt sous forme de taxe foncière, de retenue sur salaire ou des deux.
+Versement mobilité compensé par l’État sur ses recettes d’impôt sur les sociétés et sur le revenu (1) ou par l’impôt local (0)	0			DÉCISION : 0. Les transports en commun relèvent des collectivités, qui les financent par leur impôt et leurs tarifs. À 1, l’État verse une dotation du même montant (feuille Total, ligne 120).
+Assiette : revenus au-delà de 12 500 € (salaires, traitements, pensions), Md€	1169
+Taux moyen équivalent — communes	0.0588946588358909
+Taux moyen équivalent — régions	0.0131412845686883
+Taux moyen équivalent — total	0.0720359434045792
+Recette de l’IS local au taux de base (même bénéfice imposable que l’IS de l’État, net de l’érosion de l’assiette)	8.35920554389502	7.71618973282617	16.0753952767212	DÉCISIONS des 14 octobre : impôt local sur les bénéfices des entreprises, dont chaque commune et chaque région vote le taux. Taux pilotables : une collectivité qui les baisse taxe davantage ses habitants ou dépense moins. Plafond légal : 10 % au total (commune + région), pour les entreprises comme pour les ménages (Entreprises & Dividendes, S18). Taux de base des simulations : 2,6 % commune + 2,4 % région, en proportion des charges de chaque niveau (les responsabilités suivent les moyens). Répartition du bénéfice entre communes : moitié selon le lieu de travail (effectifs et locaux), moitié selon le domicile des salariés (déclaration sociale nominative). Écarts entre communes : pas de péréquation nationale ; les communes voisines peuvent partager librement la recette d’une zone d’activité par accord. Assiette : bénéfice imposable des entreprises, des indépendants et des bailleurs, après déduction des accises écologie ; érosion de l’assiette recalculée sur le taux total (Effets macro, ligne 38). Non déductible de l’IS de l’État. Lissage de la recette sur trois ans.
+Exemples (€/mois)
+Coût employeur mensuel	Commune	Région	Total fiscalité locale nouvelle
+1930	52.3180885992164	11.6738411251848	63.9919297244011
+2600	91.7775100192633	20.4785017862059	112.256011805469
+3570	148.905329090077	33.2255478178335	182.130876907911
+4800	221.345759458223	49.3893278373201	270.735087295543
+6250	306.743014770265	68.4441904619181	375.187205232183
+11250	601.216308949719	134.150613305359	735.366922255079
+POUR MÉMOIRE — comptes 2024 des collectivités (Cour des comptes, hors syndicats)
+Produits réels de fonctionnement	258.2
+Charges réelles de fonctionnement	220.5
+dont personnel	78.4
+dont achats de biens et services	51.8
+dont aides à la personne et hébergement (départements : 36,4)	40.5
+Dépenses d’investissement	77.4
+Dette fin 2024	194.5
+Taxe foncière des ménages (modèle) : SUPPRIMÉE, remplacée par l'impôt local unique — ajoutée au besoin des communes (B27). DÉCISION d'Adrien du 22 octobre 2026 (v217)	26.2
+Ressources locales conservées : enlèvement des ordures ménagères	9
+Ressources locales conservées : résidences secondaires et logements vacants	3.7
+Ressources locales conservées : tarifs des services et du domaine	24
+Part des produits de fonctionnement à remplacer par un impôt local nouveau	0.326142594267827
+Sources : Cour des comptes, Les finances publiques locales 2025, fascicule 1 (comptes 2024) ; OFGL, rapport 2025 et annexe sur les concours financiers (loi de finances 2026) ; Drees, dépenses d’aide sociale des départements en 2024. Les répartitions entre niveaux et les économies sont des hypothèses, signalées colonne E.
+Logement : compétence communale. L’État ne finance plus ni aides personnelles ni logement social. Le parc social (5,4 millions de logements) appartient déjà aux offices publics des collectivités et aux ESH, sociétés privées : son statut disparaît, les loyers sont libres et chaque propriétaire garde, développe ou vend. Les loyers supplémentaires et les cessions des offices sont une ressource des collectivités, non comptée ici. Toute politique locale du logement s’ajoute au besoin de recettes ci-dessus, au choix de chaque commune (voir feuille Logement).
+LES COLLECTIVITÉS APPLIQUENT LA MÊME DOCTRINE QUE L’ÉTAT — DÉCISION du 8 octobre : retenu dans le chiffrage central
+Lecture : le taux « même doctrine » est désormais celui du chiffrage. Le taux « gestion actuelle » est gardé pour mémoire : c’est ce que coûterait une collectivité qui ne change rien. L’écart est ce que l’habitant peut réclamer à ses élus.
+Levier	Base (Md€)	Gain (Md€)	Part des communes	Source / hypothèse
+Le fonds reprend tous les investissements qui ont une recette (eau, réseaux, transports, rénovation énergétique)	77.4	10	0.5	HYPOTHÈSE : 20 Md€ repris au lieu de 10. Base SOURCÉE : investissement local 2024 (Cour des comptes).
+L’investissement restant est financé par l’emprunt, jamais le fonctionnement	15.308	15.308		Règle déjà en vigueur pour les collectivités. Besoin de financement 2024 SOURCÉ. CONTREPARTIE : +10,1 Md€ de déficit public (0,3 point de PIB), non compté dans le budget central. Appliqué par l’interrupteur de la ligne 26 (mis à 0) : le besoin s’ajoute au déficit public (feuille Total, ligne 118).
+Effectifs : un départ sur trois non remplacé pendant dix ans	78.4	5	0.75	ORDRE DE GRANDEUR (≈ −8 % des effectifs, net de l’alignement déjà compté). Va plus loin que la règle retenue pour l’État (seuls les postes de gestion).
+Achats et fonctionnement : −15 % au lieu de −9 %	51.8	3.3	0.6	ORDRE DE GRANDEUR. Base SOURCÉE.
+Subventions aux associations, à la culture, au sport : −40 % au lieu de −18 %	16.8	3.7	0.5	ORDRE DE GRANDEUR. Base SOURCÉE.
+Transports en commun : l’usager paie la moitié du coût	11	3	1	ORDRE DE GRANDEUR. Base non vérifiée (produit du versement mobilité).
+Tarifs des services (cantines, crèches, piscines) : +10 %	24	2.4	0.75	Base : tarifs des services et du domaine (ligne 54).
+Total des gains		42.708
+Impôt local à lever — gestion actuelle (Md€)		126.918017839953
+Impôt local à lever — même doctrine (Md€)		84.210017839953
+Taux moyen — gestion actuelle		0.108569732968309
+Taux moyen — même doctrine		0.0720359434045792
+CE QUE ÇA CHANGE PAR MOIS (célibataire sans enfant) : écart avec aujourd’hui, + = gagne
+Profil	Avant épargne — gestion actuelle	Avant épargne — même doctrine	Après épargne — gestion actuelle	Après épargne — même doctrine
+Privé, SMIC (23 750 €/an de coût employeur)	-32.23885296342	2.01157475257636	-36.8532698819578	-2.6028421659615
+Privé, 31 250 €	116.7357431229	173.819789316227	43.7912590987201	100.875305292048
+Privé, salaire médian (42 500 €)	73.1917158548119	164.526189764136	-128.277055734135	-36.9425818248104
+Privé, 57 500 €	-165.053153327748	-28.0514424637619	-448.815653327749	-311.813942463762
+Privé, 75 000 €	-396.879766190112	-206.599612212353	-730.225599523445	-539.945445545687
+Privé, 105 000 €	-674.040781720067	-392.426153832984	-1092.3866150534	-810.771987166318
+Public, 40 000–45 000 € de coût actuel	135.237506088635	209.084640895177	3.15852778430144	77.005662590844
+Public, 65 000–70 000 € de coût actuel (moyenne des trois versants ; ce n’est pas le professeur du manifeste, voir feuille Formules)	-323.870628001295	-184.198101664108	-610.11870990159	-470.446183564404
+Public, 80 000–90 000 €	-584.098856590059	-398.348556181422	-913.229002933641	-727.478702525004
+Avant épargne : net après impôt unique et impôt local, comparé au net actuel. Après épargne : une fois retirée l’épargne retraite obligatoire, qui reste la propriété du salarié. Hors quotient familial et conjugal.
+TAUX DE L'IMPÔT LOCAL UTILISÉ POUR LA CONSOMMATION ET L'ÉPARGNE DES MÉNAGES (v217)
+Taux moyen recopié de B32 (v235 : point fixe atteint par recopie répétée ; la feuille Contrôles automatiques vérifie l'écart). Valeur saisie : la consommation alimente l'impôt local, un lien direct créerait une boucle.	0.0720359428150974
+Contrôle : écart entre B32 et B91 (doit rester sous 0,0001 ; sinon recopier B32 dans B91)	5.8948175507556E-010
+PARAMÈTRES AUPARAVANT ÉCRITS DANS LES FORMULES (v233) — colonnes B / C = communes et départements / régions
+Concours financiers de l'État aujourd'hui (Md€)	32	22.7	Ligne 5.
+Masse salariale des agents (Md€)	59.9	19.5	Lignes 18, 20 et 27.
+Part des agents dans les fonctions de gestion	0.23	0.23	Ligne 20.
+Aide sociale à l'enfance reprise par l'État (Md€)		11.2	Cellule C16.

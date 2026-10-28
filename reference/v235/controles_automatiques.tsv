@@ -1,0 +1,26 @@
+CONTRÔLES AUTOMATIQUES (v235, 28 octobre 2026) — chaque ligne se recalcule avec le modèle. « OK » attendu partout ; « À VÉRIFIER » signale une incohérence à regarder avant de publier.
+Contrôle	Valeur	Attendu	Statut	Explication
+Taux d'IS : même valeur dans toutes les feuilles qui le lisent	0	0	OK	Résumé, IS investissement, Indépendants, Hauts revenus.
+Flat tax : même valeur dans les feuilles Indépendants et Retraités	0	0	OK
+Impôt local : la copie de la cellule Collectivités!B91 suit le calcul (B32)	5.8948175507556E-010	< 0,0001	OK	B91 est une copie (le calcul direct créerait une boucle). Après tout changement, recopier la valeur de B32 dans B91, deux ou trois fois.
+Bloc 4 de la feuille Entreprises & Dividendes vide (pas de double compte des indépendants)	0	0	OK	Les indépendants ne sont comptés que dans la feuille Indépendants (Total, ligne 16).
+Recettes du système actuel contre l'Insee (écart relatif, 2024)	-0.00272347641837972	|écart| < 2 %	OK	Feuille Contrôle système actuel.
+Salariés du privé : effectif total (millions)	20.999998	21,0 ± 1 %	OK	Insee, fin 2024.
+Retraités : la somme des classes égale le nombre de retraités	0	0	OK
+Fonds : le versement des recettes non fiscales est neutre pour le budget, les ménages et les comptes	0	0	OK
+Barème : aucun taux marginal au-dessus du plafond	0	≤ 0	OK
+Gain budgétaire par emploi : la trajectoire lit la valeur calculée	0	0	OK	Calcul : feuille Emploi, lignes 238 à 251.
+Chômage à terme du médian au-dessus du chômage incompressible	0.0238324589809818	> 0	OK
+Clause de trajectoire : mesures déclenchées en 2032 (Md€)	43.0823550931888	pour information	JOUE	Si elle joue, le prudent publié est le médian : lire la ligne « avant la clause » (Formules, ligne 35).
+Prudent avant la clause, 2032 : objectif de 3 % tenu ?	0.0518428946957234	≤ 3 %	NON TENU
+Médian, 2032 : objectif de 2 % tenu ?	0.0381329755276314	≤ 2 %	NON TENU
+Tableaux recalculés hors Excel à jour (scénario de crise, leviers, tests de leviers)	1	1	OK	Ces tableaux demandent un recalcul complet du modèle sous plusieurs jeux d'hypothèses : ils portent la version qui les a produits. Si la version du classeur change, les régénérer.
+Passage en euros de 2026 : effectifs conservés (privé, public)	0	0	OK
+Passage en euros de 2026 : la masse salariale du privé croît comme le facteur (rapport / facteur)	1.00166758760994	1 ± 1 %	OK
+
+TESTS DE LEVIERS (v235) — recalcul complet du modèle, un levier à la fois, dans les deux sens (rempli par la procédure de recalcul)
+Levier (hausse / baisse)	Effet hausse, médian 2032 (Md€)	Effet baisse, médian 2032 (Md€)	Statut	Lecture
+Flat tax : 33 % → 40 % (colonne B) et 33 % → 10 % (colonne C)	1.99	-13.96	OK	Une baisse à 10 % coûte. Une hausse à 40 % rapporte encore ≈ 2 Md€ : 33 % ne maximise que la recette sur les dividendes ; la rente du fonds et les indépendants qui distribuent n'ont pas d'élasticité dans le modèle.
+IS de l'État ±1 point	1.15	-1.21	OK	Les deux sens doivent jouer en sens contraire.
+Supplément de barème ±1 point	6.08	-11.07	OK	Les deux sens doivent jouer en sens contraire.
+RUI ±10 €	-1	1	OK	Les deux sens doivent jouer en sens contraire.
