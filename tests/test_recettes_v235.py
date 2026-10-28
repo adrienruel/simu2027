@@ -49,3 +49,30 @@ def test_rente_classe_27_5_30k():
 
 def test_impot_retraites_ligne_5():
     assert rc.impot_retraites(P) == pytest.approx(24_097_348_601.3389, abs=TOL)
+
+
+from moteur import tva
+from moteur.recettes import tva_menages as tm
+
+
+def test_taux_effectifs_profils():
+    t = tva.taux_effectifs(P)
+    assert t["median"] == pytest.approx((0.0287723815411384, 0.152708082066367), abs=1e-12)
+    assert t["tres_aise"][1] == pytest.approx(0.171267089578342, abs=1e-12)
+
+
+# Valeurs v235 (€) : Salariés du privé!Z37, Fonctionnaires!Y37, Retraités!R36,
+# Inactifs & Étudiants!I3 et I43, RUI!B27
+CIBLES_TVA = {
+    "tva_prive": 80_566_423_065.2441,
+    "tva_public": 22_757_029_279.7504,
+    "tva_retraites": 42_122_112_518.2071,
+    "tva_etudiants": 4_275_196_804.27712,
+    "tva_inactifs": 8_197_115_109.23356,
+    "tva_chomeurs": 3_065_064_092.28578,
+}
+
+
+@pytest.mark.parametrize("fonction", list(CIBLES_TVA))
+def test_tva_par_population(fonction):
+    assert getattr(tm, fonction)(P) == pytest.approx(CIBLES_TVA[fonction], abs=TOL)

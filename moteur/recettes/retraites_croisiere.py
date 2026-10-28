@@ -33,17 +33,23 @@ def socle(rente_mensuelle_: float, p: Parametres) -> float:
     return max(0.0, (plafond - rente_mensuelle_) / plafond * plein)
 
 
-def impot_retraites(p: Parametres, scenario: str = "prudent") -> float:
+def classes_retraites(p: Parametres, scenario: str = "prudent") -> list[dict]:
+    """Une ligne par classe de rente : effectif, rente et socle mensuels, impôt annuel par tête."""
     bornes = p.val("retraites.bornes_rente_annuelle")
     rentes = rentes_des_actifs(p, scenario)
     echelle = p.val("retraites.nombre_retraites") / sum(n for _, n in rentes)
     flat = p.val("capital.flat_tax_dividendes")
     part_imposable = p.val("retraites.part_imposable_rente")
-    total = 0.0
+    out = []
     for bas, haut in zip(bornes[:-1], bornes[1:]):
         effectif = sum(n for r, n in rentes if bas <= r * 12 < haut) * echelle
         rente = (bas + haut) / 2 / 12  # rente au milieu de la classe
         s = socle(rente, p)
         base_socle = 0.0 if p.val("retraites.socle_exonere") else s * 12
-        total += effectif * (impot(base_socle, p, scenario) + rente * 12 * part_imposable * flat)
-    return total
+        imp = impot(base_socle, p, scenario) + rente * 12 * part_imposable * flat
+        out.append({"effectif": effectif, "rente": rente, "socle": s, "impot": imp})
+    return out
+
+
+def impot_retraites(p: Parametres, scenario: str = "prudent") -> float:
+    return sum(c["effectif"] * c["impot"] for c in classes_retraites(p, scenario))

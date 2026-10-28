@@ -1,0 +1,19 @@
+categorie,tva,accise_ecologie,accise_sante,part_modeste,part_median,part_aise,part_tres_aise,ancien_taux
+"Logement (loyers, charges hors énergie)",0,0,0,0.1547,0.1323,0.1029,0.0854,0
+"Santé, éducation, action sociale",0,0,0,0.032,0.0245,0.026,0.027,0
+Alimentation brute,0,calcul:agriculture_brute,0,0.0641,0.0604,0.0549,0.0497,0.055
+"Alimentation transformée, viande, laitiers",0,calcul:agriculture_transformee,0,0.0915,0.0862,0.0785,0.071,0.055
+Produits sucrés et ultra-transformés,0.055,0.0243,0.15,0.0275,0.0259,0.0235,0.0213,0.08
+Alcool,0.2,calcul:pesticides,calcul:alcool_sante,0.0119,0.0151,0.0143,0.0149,0.55
+Tabac,0.2,0,6.55,0.0221,0.0184,0.0117,0.008,5
+Carburants,0.2,calcul:carburants,0,0.0449,0.0508,0.0574,0.0581,1.1
+Électricité,0.055,0,0,0.0376,0.0321,0.025,0.0207,0.37
+Gaz et fioul,0.055,calcul:gaz_fioul,0,0.0287,0.0246,0.0191,0.0159,0.4
+Transports collectifs,0.1,0,0,0.0109,0.0123,0.0139,0.0141,0.1
+Transport aérien,0.1,calcul:aerien,0,0.0041,0.0077,0.0139,0.0211,0.1
+Biens manufacturés,0.2,0,0,0.0912,0.1069,0.1268,0.1446,0.2
+Textile et chaussures,0.2,calcul:textile,0,0.055,0.0475,0.049,0.052,0.2
+Produits contenant des PFAS (usages non interdits),0.2,0,0.2,0.005,0.005,0.005,0.005,0.2
+Véhicules,0.2,0,0,0.0544,0.0616,0.0696,0.0704,0.25
+Services,0.15,0,0,0.2098,0.2247,0.2411,0.2579,0.15
+Assurances et jeux d’argent,0,0.15,0,0.0548,0.064,0.0672,0.0628,0.15

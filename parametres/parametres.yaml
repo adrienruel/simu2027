@@ -261,3 +261,94 @@ capital:
     valeur: 0.33
     unite: taux
     statut: DECISION
+
+# --- TVA écologique et santé (feuille Barème TVA) --------------------------------
+# Statuts provisoires : ils seront repris du registre des paramètres de la v235 à l'étape 2.
+tva:
+  prix_carbone_2024:
+    valeur: 256
+    unite: eur_par_tco2
+    statut: HYPOTHESE
+    note: Écrit dans la formule Barème TVA!B56 (256 × facteur), à sourcer.
+  croissance_prix_carbone:
+    valeur: [0.02, 0.009, 0.021]
+    unite: taux
+    statut: HYPOTHESE
+    note: Trois hausses écrites dans la formule Barème TVA!E56, à sourcer et nommer.
+  carburants: {valeur: {co2_essence: 2.22, co2_gazole: 2.65, part_gazole: 0.55, prix_ht: 0.85}, unite: sans_unite, statut: HYPOTHESE}
+  gaz_fioul: {valeur: {co2_gaz_kwh: 0.198, prix_gaz_kwh: 0.085, prix_fioul_litre: 1.0, part_gaz: 0.8}, unite: sans_unite, statut: HYPOTHESE}
+  agriculture:
+    valeur: {emissions_mt: 77.5, part_hors_energie: 0.87, baisse_volumes: 0.3, abattement_modulation: 0.2, part_transformes: 0.8, assiette_transformes_md: 81.6, assiette_brute_md: 60.6}
+    unite: sans_unite
+    statut: HYPOTHESE
+  aerien: {valeur: {g_co2_par_pkm: 75.2, recette_centimes_pkm: 8, effets_hors_co2: 1.8}, unite: sans_unite, statut: HYPOTHESE}
+  textile: {valeur: {accise_max: 0.5, part_ultra_ephemere: 0.02, part_autres_faible_durabilite: 0}, unite: sans_unite, statut: HYPOTHESE}
+  pesticides: {valeur: {accise_pleine: 0.0324, part_bio: 0.21}, unite: sans_unite, statut: HYPOTHESE}
+  alcool:
+    valeur: {cout_soins_md: 7.849, depense_ttc_md: 17.8, part_vin: 0.52, abattement_vin: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+  seuils_profils:
+    valeur: [0, 20000, 32000, 50000]
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: Revenu net annuel à partir duquel s'applique chaque profil (modeste, médian, aisé, très aisé).
+
+# --- Consommation des ménages ---------------------------------------------------
+consommation:
+  coefficient:
+    valeur: 2.05
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Consommation HT = coefficient × (revenu disponible HT)^exposant (Total!N29, rangé à côté des dépenses régaliennes).
+  exposant:
+    valeur: 0.92
+    unite: sans_unite
+    statut: HYPOTHESE
+  eviction_epargne_volontaire:
+    valeur: {crise: 0.20, prudent: 0.175, median: 0.15, optimiste: 0.10}
+    unite: taux
+    statut: SOURCE
+    source: Chetty et al. (2014), Danemark (Effets macro, ligne 27)
+
+# --- Impôt local unique -------------------------------------------------------
+impot_local:
+  abattement:
+    valeur: 12500
+    unite: eur_an
+    annee_euros: 2026
+    statut: DECISION
+  taux_point_fixe:
+    valeur: 0.0720359428150974
+    unite: taux
+    statut: HYPOTHESE
+    note: Copie manuelle de Collectivités!B32 dans la v235 (point fixe par recopie). À calculer par itération quand le module Collectivités sera porté.
+
+# --- Inactifs, étudiants, chômeurs ---------------------------------------------
+inactifs:
+  revenu_annulant_rui:
+    valeur: 2000
+    unite: eur_mois
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: Le RUI d'un inactif baisse linéairement avec son autre revenu, nul à 2 000 €/mois (Inactifs!P14).
+  etudiants:
+    valeur: 3012800
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: RUI!A5, à sourcer.
+  chomeurs_bit:
+    valeur: 2700000
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: RUI!B23, à sourcer.
+  part_chomeurs_deja_comptee:
+    valeur: 0.2
+    unite: taux
+    statut: HYPOTHESE
+    note: Allocataires du RSA parmi les inactifs, étudiants (RUI!B24).
+  rui_moyen_chomeurs:
+    valeur: 1.0
+    unite: taux
+    statut: HYPOTHESE
