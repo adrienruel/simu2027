@@ -308,7 +308,7 @@ impot_local:
     valeur: 0.0720359428150974
     unite: taux
     statut: HYPOTHESE
-    note: Copie manuelle de Collectivités!B32 dans la v235 (point fixe par recopie). À calculer par itération quand le module Collectivités sera porté.
+    note: Valeur de départ de l'itération (copie manuelle de Collectivités!B32 dans la v235) ; le moteur calcule le point fixe (moteur/collectivites.py).
 
 # --- Inactifs, étudiants, chômeurs ---------------------------------------------
 inactifs:
@@ -951,3 +951,54 @@ is_investissement:
   taux_is_actuel: {valeur: 0.25, unite: taux, statut: SOURCE, source: "CGI, art. 219"}
   part_investissement_concernee: {valeur: {crise: null, prudent: 0.6, median: 0.75, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE}
   interets: {valeur: {part_va: 0.04, ebe_2025: 497.5, taux_marge_2025: 0.322, part_sans_recette: 0.5, part_reactions: 0.2}, unite: sans_unite, statut: SOURCE, source: "OFCE (2025) d'après la Banque de France ; Insee, comptes de la Nation 2025 ; parts : hypothèses prudentes"}
+
+# --- Collectivités : besoin de recettes locales, impôt local unique (feuille Collectivités) ---
+collectivites_detail:
+  concours_etat_aujourdhui: {valeur: {communes: 32, regions: 22.7}, unite: sans_unite, statut: SOURCE, source: "54,7 Md€ en loi de finances 2026 (OFGL) ; répartition : estimation"}
+  ressources_perdues_fixes:
+    valeur:
+      fractions_tva: {communes: 15.4, regions: 31.6}
+      accise_energies: {communes: 0, regions: 11.7}
+      taxe_assurances: {communes: 0, regions: 9.7}
+      subventions_ministeres: {communes: 2.6, regions: 2.6}
+      concours_autonomie: {communes: 0, regions: 5.4}
+      droits_mutation: {communes: 3, regions: 10.5}
+      impots_production_locaux: {communes: 23.7, regions: 0}
+      versement_mobilite: {communes: 12.2, regions: 0}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Cour des comptes, finances publiques locales 2025 (comptes 2024) ; répartitions : estimations"
+  charges_fixes:
+    valeur:
+      rsa: {communes: 0, regions: -11.5}
+      investissements_repris_fonds: {communes: -5, regions: -5}
+      reorganisation_territoriale: {communes: -3, regions: -4}
+      achats_fonctionnement: {communes: -2.5, regions: -2}
+      satellites_subventions: {communes: -1.5, regions: -1.5}
+      temps_de_travail: {communes: -1, regions: -1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees).
+  aide_sociale_enfance: {valeur: 11.2, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Drees 2024"}
+  masse_salariale_agents: {valeur: {communes: 59.9, regions: 19.5}, unite: sans_unite, statut: SOURCE, source: "Cour des comptes (2024)"}
+  part_agents_gestion: {valeur: 0.23, unite: taux, statut: HYPOTHESE}
+  versement_mobilite_compense: {valeur: 0, unite: taux, statut: DECISION}
+  meme_doctrine:
+    valeur:
+      investissements_rentables: {gain: 10, part_communes: 0.5}
+      effectifs: {gain: 5, part_communes: 0.75}
+      achats: {gain: 3.3, part_communes: 0.6}
+      subventions: {gain: 3.7, part_communes: 0.5}
+      transports: {gain: 3, part_communes: 1}
+      tarifs: {gain: 2.4, part_communes: 0.75}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur.
+  hebergement_urgence: {valeur: {montant: 3.07, part_etat: 0}, unite: sans_unite, statut: DECISION}
+  taxe_fonciere_menages: {valeur: 26.2, unite: md_eur, annee_euros: 2024, statut: DECISION, note: "Remplacée par l'impôt local unique (v217)."}
+  assiette_revenus: {valeur: 1169, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Revenus au-delà de 12 500 € (salaires, traitements, pensions) : saisi, à recalculer depuis les distributions."}
+  carence_poids: {valeur: {etat: 2.54, territoriale: 1.94, hospitaliere: 1.21, economie_etat_hopitaux: 0.47}, unite: sans_unite, statut: SOURCE, source: "Rapport sur le délai de carence (Budget État 2026, B112, B148-B150)"}
+environnement:
+  bombardiers: {valeur: {appareils: 12, prix_unitaire_m: 104.5, rendement_fonds: 0.03, duree_location: 30}, unite: sans_unite, statut: HYPOTHESE}
+  ecosystemes_transferes_regions_m: {valeur: {espaces_proteges: 145.1, sites_paysages: 9.6}, unite: sans_unite, statut: HYPOTHESE}
+  chaleur: {valeur: {logements_millions: 12.4, part_sans_protection: 0.5, cout_logement: 2500, part_recours: 1, duree_amortissement: 15}, unite: sans_unite, statut: HYPOTHESE, note: "Perte d'IS comptée chaque année, sans fin après les 15 ans d'amortissement."}

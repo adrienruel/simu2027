@@ -11,6 +11,7 @@ from ..tva import consommation_ht, taux_pour_revenu
 from .impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
 from .retraites_croisiere import classes_retraites
 from ..distribution import lire
+from ..collectivites import taux_impot_local
 
 
 def budget_actif(cout_employeur: float, p: Parametres, scenario: str, part_rui: float) -> dict:
@@ -19,7 +20,7 @@ def budget_actif(cout_employeur: float, p: Parametres, scenario: str, part_rui: 
     net = net_apres_impot(base_epargne, p, scenario, part_rui)
     sante, tva = taux_pour_revenu(net, p)
     t = sante + tva
-    local = max(0.0, base_epargne - p.val("impot_local.abattement")) * p.val("impot_local.taux_point_fixe")
+    local = max(0.0, base_epargne - p.val("impot_local.abattement")) * taux_impot_local(p)
     dispo = net - local
     oblig = epargne_annuelle(base_epargne, p, scenario, part_rui, contribution=False)
     spontanee = max(0.0, dispo - consommation_ht(dispo, t, p) * (1 + t))

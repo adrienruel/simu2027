@@ -19,8 +19,8 @@ SCENARIOS = ("prudent", "median", "optimiste")
 
 
 def _taux_local(p):
-    from .depenses.statique import provisoire
-    return provisoire("taux_impot_local_calcule")
+    from .collectivites import taux_impot_local
+    return taux_impot_local(p)
 
 
 def _classes_hautes(p: Parametres):

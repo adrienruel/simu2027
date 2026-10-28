@@ -6,6 +6,3 @@ quotient_familial:
 economies_missions:
   cellule: Total!B121
   valeur: -14.2292673459683
-taux_impot_local_calcule:
-  cellule: Collectivités!B32
-  valeur: 0.0720359434045792

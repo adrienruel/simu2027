@@ -27,8 +27,8 @@ def cout_smic_annuel(p: Parametres) -> float:
 
 
 def _taux_local(p: Parametres) -> float:
-    from .depenses.statique import provisoire
-    return provisoire("taux_impot_local_calcule")
+    from .collectivites import taux_impot_local
+    return taux_impot_local(p)
 
 
 def baisse_cout_travail(p: Parametres) -> float:

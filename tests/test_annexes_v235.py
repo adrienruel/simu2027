@@ -93,3 +93,13 @@ def test_carbone(scenario, ligne):
 def test_is_investissement(etale, ligne):
     from moteur.is_investissement import cout_net_etat
     comparer(cout_net_etat(P, etale), "IS investissement", ligne)
+
+
+def test_collectivites_point_fixe():
+    from moteur import collectivites as co
+    t = co.taux_impot_local(P)
+    assert t == pytest.approx(VAL[("Collectivités", "B32")], abs=1e-8)
+    assert abs(co.taux_calcule(P) - t) < 1e-12  # le taux finance bien le besoin qu'il induit
+    b = co.besoin(P)
+    assert b["communes"] == pytest.approx(VAL[("Collectivités", "B27")], abs=0.01)
+    assert b["regions"] == pytest.approx(VAL[("Collectivités", "C27")], abs=0.01)
