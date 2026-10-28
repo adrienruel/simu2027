@@ -566,3 +566,204 @@ penibilite:
   part_concernes: {valeur: 0.1, unite: taux, statut: HYPOTHESE}
   avance_annees: {valeur: 2, unite: sans_unite, statut: DECISION, note: "Plafond actuel du C2P."}
   hausse_socle_mensuelle: {valeur: 20, unite: eur_mois, annee_euros: 2026, statut: HYPOTHESE}
+
+# --- Effets macroéconomiques (feuille Effets macro), un jeu par scénario ----------------
+# Le scénario de crise est une feuille figée dans la v235 : ses valeurs viendront avec son portage (null en attendant).
+macro:
+  annees_montee_emploi:
+    valeur: {crise: null, prudent: 7, median: 6, optimiste: 5}
+    unite: sans_unite
+    statut: HYPOTHESE
+  seniors_court:
+    valeur: {crise: null, prudent: 127500, median: 170000, optimiste: 170000}
+    unite: sans_unite
+    statut: HYPOTHESE
+  montee_seniors_court:
+    valeur: {crise: null, prudent: 4, median: 4, optimiste: 4}
+    unite: sans_unite
+    statut: HYPOTHESE
+  seniors_long:
+    valeur: {crise: null, prudent: 300000, median: 400000, optimiste: 400000}
+    unite: sans_unite
+    statut: HYPOTHESE
+  annee_seniors_long:
+    valeur: {crise: null, prudent: 2043, median: 2043, optimiste: 2043}
+    unite: sans_unite
+    statut: HYPOTHESE
+  montee_seniors_long:
+    valeur: {crise: null, prudent: 10, median: 10, optimiste: 10}
+    unite: sans_unite
+    statut: HYPOTHESE
+  multiplicateur:
+    valeur: {crise: null, prudent: 0.75, median: 0.5, optimiste: 0.3}
+    unite: sans_unite
+    statut: HYPOTHESE
+  annees_effet_ajustement:
+    valeur: {crise: null, prudent: 4.5, median: 4, optimiste: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+  part_capital_nouveau:
+    valeur: {crise: null, prudent: 0.75, median: 0.75, optimiste: 0.85}
+    unite: sans_unite
+    statut: HYPOTHESE
+  eviction:
+    valeur: {crise: null, prudent: 0.175, median: 0.15, optimiste: 0.1}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Chetty et al. (2014), Danemark"
+    note: "Chetty et al. (2014). Doublon de consommation.eviction_epargne_volontaire, à fusionner."
+  pib_par_euro_capital:
+    valeur: {crise: null, prudent: 0.032, median: 0.042, optimiste: 0.052}
+    unite: sans_unite
+    statut: HYPOTHESE
+  logements_initial:
+    valeur: {crise: null, prudent: -30000, median: -20000, optimiste: 0}
+    unite: sans_unite
+    statut: HYPOTHESE
+  duree_initiale:
+    valeur: {crise: null, prudent: 2.5, median: 2, optimiste: 1}
+    unite: sans_unite
+    statut: HYPOTHESE
+  logements_croisiere:
+    valeur: {crise: null, prudent: 37500, median: 50000, optimiste: 100000}
+    unite: sans_unite
+    statut: HYPOTHESE
+  part_additionnelle_logement:
+    valeur: {crise: null, prudent: 0.5, median: 0.5, optimiste: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+  montee_erosion_is:
+    valeur: {crise: null, prudent: 3, median: 3, optimiste: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+  fraude_tva:
+    valeur: {crise: null, prudent: 2.25, median: 3, optimiste: 5}
+    unite: sans_unite
+    statut: HYPOTHESE
+  montee_fraude:
+    valeur: {crise: null, prudent: 4, median: 4, optimiste: 4}
+    unite: sans_unite
+    statut: HYPOTHESE
+  extinction_aides_construction:
+    valeur: {crise: null, prudent: 1, median: 1, optimiste: 1}
+    unite: sans_unite
+    statut: HYPOTHESE
+  aides_construction:
+    valeur: {crise: null, prudent: 3, median: 3, optimiste: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+  permis_rapide:
+    valeur: {crise: null, prudent: 2, median: 3, optimiste: 6}
+    unite: sans_unite
+    statut: HYPOTHESE
+  cumul_emploi_socle:
+    valeur: {crise: null, prudent: 40000, median: 60000, optimiste: 120000}
+    unite: sans_unite
+    statut: HYPOTHESE
+  annee_cumul:
+    valeur: {crise: null, prudent: 2046, median: 2046, optimiste: 2046}
+    unite: sans_unite
+    statut: HYPOTHESE
+  montee_cumul:
+    valeur: {crise: null, prudent: 10, median: 10, optimiste: 10}
+    unite: sans_unite
+    statut: HYPOTHESE
+  emplois_par_point_pib:
+    valeur: {crise: null, prudent: 0.45, median: 0.4, optimiste: 0.3}
+    unite: sans_unite
+    statut: HYPOTHESE
+  productivite:
+    valeur: {crise: null, prudent: 0.002, median: 0.003, optimiste: 0.004}
+    unite: sans_unite
+    statut: HYPOTHESE
+  annees_productivite:
+    valeur: {crise: null, prudent: 10, median: 10, optimiste: 10}
+    unite: sans_unite
+    statut: HYPOTHESE
+  baisse_spread:
+    valeur: {crise: null, prudent: 0, median: 0.002, optimiste: 0.004}
+    unite: sans_unite
+    statut: HYPOTHESE
+  part_reelle_hauts_revenus:
+    valeur: {crise: null, prudent: 0.375, median: 0.25, optimiste: 0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+  tendance:
+    valeur: {crise: null, prudent: 0.007, median: 0.01, optimiste: 0.01}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Prudent : 0,7 % (COR, juin 2026) ; médian et optimiste : 1 %."
+  part_reinvestie:
+    valeur: {crise: null, prudent: 0.625, median: 0.75, optimiste: 0.9}
+    unite: sans_unite
+    statut: HYPOTHESE
+  niveau_eleves:
+    valeur: {crise: null, prudent: 0, median: 0, optimiste: 0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+  croissance_par_ecart_type:
+    valeur: {crise: null, prudent: 0.00305, median: 0.0061, optimiste: 0.0096}
+    unite: sans_unite
+    statut: HYPOTHESE
+  ia_productivite:
+    valeur: {crise: null, prudent: 0.00185, median: 0.0027, optimiste: 0.00475}
+    unite: sans_unite
+    statut: HYPOTHESE
+  adoption_ia:
+    valeur: {crise: null, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}
+    unite: sans_unite
+    statut: HYPOTHESE
+  elasticite_invest:
+    valeur: {crise: null, prudent: 0.335, median: 0.3, optimiste: 0.37}
+    unite: sans_unite
+    statut: HYPOTHESE
+  usure_capital:
+    valeur: {crise: null, prudent: 0.1, median: 0.1, optimiste: 0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+  montee_invest:
+    valeur: {crise: null, prudent: 3, median: 3, optimiste: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+  semi_elasticite_transfert:
+    valeur: {crise: null, prudent: 1.25, median: 1, optimiste: 0.8}
+    unite: sans_unite
+    statut: SOURCE
+    source: "FMI, Beer, de Mooij et Liu (2018)"
+    note: "FMI, Beer, de Mooij et Liu (2018)."
+  part_grandes_entreprises:
+    valeur: {crise: null, prudent: 0.56, median: 0.56, optimiste: 0.56}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, Les entreprises en France 2023"
+    note: "Insee, Les entreprises en France 2023, fiche 3.6."
+  reaction_reelle:
+    valeur: {crise: null, prudent: 0.3, median: 0.2, optimiste: 0}
+    unite: sans_unite
+    statut: HYPOTHESE
+  taux_reference_is:
+    valeur: {crise: null, prudent: 0.25, median: 0.25, optimiste: 0.25}
+    unite: sans_unite
+    statut: HYPOTHESE
+  effort_2029:
+    valeur: {crise: null, prudent: 0.012, median: 0.011, optimiste: 0.011}
+    unite: sans_unite
+    statut: HYPOTHESE
+  reduction_cout_capital_autres:
+    valeur: {crise: null, prudent: 0.047, median: 0.055, optimiste: 0.121}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Écrit dans les formules B273:D273 (−0,047 / −0,055 / −0,121), sans libellé : à documenter."
+  taux_apparent_2029: {valeur: 0.027, unite: taux, statut: SOURCE, source: "Charge d'intérêts des APU ≈ 3,2 % du PIB (Effets macro!B211)"}
+  taux_long_terme: {valeur: 0.033, unite: taux, statut: HYPOTHESE}
+  annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
+  annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
+  premiere_annee_productivite: {valeur: 2030, unite: annee, statut: HYPOTHESE}
+  premiere_annee_ecole: {valeur: 2045, unite: annee, statut: HYPOTHESE}
+  annees_ecole: {valeur: 40, unite: sans_unite, statut: HYPOTHESE}
+  annees_ia: {valeur: 10, unite: sans_unite, statut: HYPOTHESE}
+  premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}
+  part_pib_tendanciel_au_solde: {valeur: 0.1, unite: taux, statut: HYPOTHESE}
+  assouplissement_2029: {valeur: 0.0121, unite: taux, statut: DECISION, note: "Arrêté à 1,21 point de PIB (v218)."}
+  etranger: {valeur: {depart: 0.05, plafond: 0.15, dette_debut: 1.0, dette_plafond: 0.6, solde_minimum: -0.03}, unite: sans_unite, statut: DECISION}
+  cible_dette: {valeur: 0.6, unite: taux, statut: DECISION}
