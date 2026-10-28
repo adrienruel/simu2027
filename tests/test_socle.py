@@ -40,7 +40,7 @@ def test_facteur_salaire_prive_2024():
 
 
 def test_facteur_recettes_2024():
-    assert facteur(P, 2024, "recettes") == pytest.approx(1.039)
+    assert facteur(P, 2024, "recettes") == pytest.approx(1.039456425, abs=1e-9)  # Total!B124
 
 
 def test_aucun_montant_converti_deux_fois():
@@ -73,3 +73,7 @@ def test_impot_croissant():
         i = iu.impot(cout, P)
         assert i >= precedent
         precedent = i
+
+
+def test_facteur_public_2023():
+    assert facteur(P, 2023, "salaire_public") == pytest.approx(1.03924956063269, abs=1e-12)

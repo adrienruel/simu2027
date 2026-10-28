@@ -34,12 +34,15 @@ def facteur(p: Parametres, de: int, nature: str) -> float:
     if nature == "recettes":
         if de != 2024:
             raise NotImplementedError(f"Facteur recettes {de}→{cible} non défini")
-        return p.val("unites.facteur_recettes_2024_2026")
+        return ((1 + p.val("unites.pib_valeur_2025")) * (1 + p.val("unites.pib_volume_2026"))
+                * (1 + p.val("unites.deflateur_2026")))
     if nature == "salaire_prive":
         hausses = {2025: p.val("unites.salaire_prive_2025"),
                    2026: p.val("unites.salaire_prive_2026")}
     elif nature == "salaire_public":
-        hausses = {2024: p.val("unites.salaire_public_2024"),
+        v = p.val("unites.salaire_public_2024")
+        h2024 = sum(x["hausse"] * x["effectif"] for x in v.values()) / sum(x["effectif"] for x in v.values())
+        hausses = {2024: h2024,
                    2025: p.val("unites.salaire_public_2025_2026"),
                    2026: p.val("unites.salaire_public_2025_2026")}
     else:

@@ -25,10 +25,11 @@ class Parametre:
     annee_euros: int | None = None
     source: str | None = None
     note: str | None = None
+    par_scenario: bool = False
 
     def pour(self, scenario: str) -> Any:
         """Valeur du paramètre dans un scénario (identique partout si non ventilée)."""
-        if isinstance(self.valeur, dict):
+        if self.par_scenario:
             if scenario not in self.valeur:
                 raise ErreurParametre(f"{self.cle} : pas de valeur pour le scénario {scenario}")
             return self.valeur[scenario]
@@ -55,11 +56,13 @@ class Parametres:
             raise ErreurParametre(f"{cle} : statut SOURCE sans source")
         if c["unite"] in UNITES_MONTANT and "annee_euros" not in c:
             raise ErreurParametre(f"{cle} : montant sans année des euros")
-        if isinstance(c["valeur"], dict) and set(c["valeur"]) != set(self.scenarios):
+        par_scenario = isinstance(c["valeur"], dict) and bool(set(c["valeur"]) & set(self.scenarios))
+        if par_scenario and set(c["valeur"]) != set(self.scenarios):
             raise ErreurParametre(f"{cle} : scénarios incomplets {sorted(c['valeur'])}")
         return Parametre(
             cle=cle, valeur=c["valeur"], unite=c["unite"], statut=c["statut"],
             annee_euros=c.get("annee_euros"), source=c.get("source"), note=c.get("note"),
+            par_scenario=par_scenario,
         )
 
     def __getitem__(self, cle: str) -> Parametre:

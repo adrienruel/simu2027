@@ -25,12 +25,22 @@ unites:
     valeur: 2029
     unite: annee
     statut: DECISION
-  facteur_recettes_2024_2026:
-    valeur: 1.039
-    unite: sans_unite
+  pib_valeur_2025:
+    valeur: 0.019
+    unite: taux
     statut: SOURCE
-    source: Classeur v235, coefficient appliqué aux recettes calées sur 2024 (Total)
-    note: Ne s'applique qu'aux recettes calées sur des montants de 2024 (audit v235, §1).
+    source: Insee Première n° 2105 (croissance du PIB en valeur 2025)
+    note: Sert au passage des montants de 2024 en euros de 2026 (Total!B124), recettes calées sur 2024 seulement.
+  pib_volume_2026:
+    valeur: 0.005
+    unite: taux
+    statut: SOURCE
+    source: Prévision du gouvernement, septembre 2026
+  deflateur_2026:
+    valeur: 0.015
+    unite: taux
+    statut: HYPOTHESE
+    note: Prudente, sous l'inflation prévue de 2,1 %.
   salaire_prive_2025:
     valeur: 0.020
     unite: taux
@@ -42,10 +52,14 @@ unites:
     statut: SOURCE
     source: Insee, Note de conjoncture juin 2026 (salaire moyen par tête)
   salaire_public_2024:
-    valeur: 0.039
-    unite: taux
+    # hausse du salaire net moyen en 2024 par versant, pondérée par les effectifs (millions)
+    valeur:
+      etat: {hausse: 0.047, effectif: 2.54}
+      territoriale: {hausse: 0.033, effectif: 1.94}
+      hospitaliere: {hausse: 0.033, effectif: 1.21}
+    unite: sans_unite
     statut: SOURCE
-    source: Insee (État +4,7 %, territoriale +3,3 %)
+    source: Insee Première n° 2100 (État) et n° 2101 (territoriale) ; hospitalière = territoriale (HYPOTHÈSE)
   salaire_public_2025_2026:
     valeur: 0.0
     unite: taux
@@ -122,3 +136,33 @@ rui:
     annee_euros: 2026
     statut: SOURCE
     source: Montant du RSA 2026
+
+# --- Fonction publique : alignement du coût employeur sur le privé --------------
+alignement:
+  charges_patronales_prive:
+    valeur: 0.40
+    unite: taux
+    statut: HYPOTHESE
+    note: Moyenne pour des salaires de 1,5 à 3 SMIC, après allègements (feuille Alignement public-privé, B4).
+  masse_salariale_etat_2026:
+    valeur: 161.6
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: Budget de l'État 2026, masse salariale CAS Pensions compris (feuille Budget État 2026, B4)
+  remunerations_activite_etat_2026:
+    valeur: 92.8
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: Budget de l'État 2026, rémunérations d'activité ≈ brut (feuille Budget État 2026, B5)
+  versants:
+    # part de la masse salariale publique ; charges patronales actuelles (% du brut, null = calcul État)
+    valeur:
+      etat_civils: {part: 0.43, charges_actuelles: null}
+      etat_militaires: {part: 0.05, charges_actuelles: null}
+      territoriale: {part: 0.29, charges_actuelles: 0.52}
+      hospitaliere: {part: 0.23, charges_actuelles: 0.52}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Militaires = même baisse que les civils, faute de détail. CNRACL ≈ 37,65 % du traitement en 2026.
