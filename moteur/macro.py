@@ -86,7 +86,6 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     sante = {k: dict(zip(ANNEES, v)) for k, v in pv["sante_solde"].items() if not k.startswith("_")}
     carbone = {k: dict(zip(ANNEES, v)) for k, v in pv["carbone_solde"].items() if not k.startswith("_")}
     logement104 = dict(zip(ANNEES, pv["logement_solde"]["serie"]))
-    clause = dict(zip(ANNEES, pv["clause_mesures"]["serie"]))
     rui_ch = pv["rui_chomeurs_effectif"]["valeur"] * p.val("rui.montant") * 12 / 1e9
     va = pv["valeur_ajoutee_par_emploi"]["valeur"]
 
@@ -96,8 +95,15 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                       p.val("macro.taux_apparent_2029") + (p.val("macro.taux_long_terme") - p.val("macro.taux_apparent_2029")) * (t - 2029) / p.val("macro.annees_taux_long_terme"))
         return nominal - infl - m("baisse_spread", s) * min(1.0, max(0, t - 2029) / p.val("macro.annees_baisse_spread"))
 
+    from .depenses.statique import rui_aah
+    flux_epargne = flux_epargne_obligatoire(p) / 1e9
+    rui_total = rui_aah(p) - p.val("rui_complements.aah") - p.val("rui_complements.aide_poste_entreprises_adaptees")
+    etal = pv["is_investissement_etalement"]
+    gain_etalement = {t: a - b for t, a, b in zip(ANNEES, etal["b41"], etal["b78"])}
+    etalement_declenche = None
+
     out = {}
-    for s in SCENARIOS:
+    for s in ("median", "optimiste", "prudent"):  # la clause du prudent se cale sur le médian
         sc = Scenario(s)
         eff = m("effort_2029", s) + pv["anciennes_pensions_2029"]["valeur"] / pib0[2029] - p.val("macro.assouplissement_2029")
         erosion_taux = (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
@@ -161,7 +167,25 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             if s == "prudent":
                 solde += (sante["tva_prudent"][t] + pib_inv * part_budget + carbone["prudent"][t]
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * pv["tva_par_point_eviction"]["valeur"] * (1 + tend0) ** n)
-                mesures = clause[t]
+                # Clause de trajectoire : ramène le prudent sur le déficit du médian
+                interets_t = taux_reel(t, s) * dette_prec
+                pib_t = pib0[t] + pib
+                avant = -(sp_hors[t] + solde - transferts[t] - interets_t - infl * dette_prec) / pib_t
+                ecart = max(0.0, avant - (-out["median"].maastricht[t]))
+                montant = ecart * pib_t
+                if etalement_declenche is None:
+                    etalement_declenche = 1.0 if ecart > 0 else 0.0
+                c_etal = etalement_declenche * gain_etalement[t]
+                actif = t <= p.val("clause.derniere_annee")
+                cap_point = flux_epargne / 10 * (1 + tend0) ** n
+                c_contrib = max(0.0, min(montant - c_etal, cap_point * p.val("clause.points_contribution_max"))) if actif else 0.0
+                cap_rui = rui_total / p.val("rui.montant") * 10 * (1 + tend0) ** n
+                c_rui = max(0.0, min(montant - c_etal - c_contrib, cap_rui * (p.val("rui.montant") - p.val("clause.plancher_rui")) / 10)) if actif else 0.0
+                mesures = c_etal + c_contrib + c_rui
+                sc.detail.setdefault("clause", {})[t] = {"avant": avant, "etalement": c_etal, "contribution": c_contrib,
+                                                         "points": c_contrib / cap_point if cap_point else 0.0,
+                                                         "rui": c_rui, "rui_euros": c_rui / cap_rui * 10 if cap_rui else 0.0,
+                                                         "reste": montant - mesures}
             else:
                 solde += (sante[s][t] + sante[f"tva_{s}"][t] + (pib_tend + pib_ecole) * q + pib_inv * part_budget + carbone[s][t]
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * pv["tva_par_point_eviction"]["valeur"] * (1 + tend0) ** n)
@@ -175,11 +199,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             sc.pib_effet[t], sc.solde_effet[t], sc.emplois[t] = pib, solde_total, emp_ref + emp_sen
             sc.charge_dette[t], sc.solde_public[t], sc.dette[t] = interets, solde_public, dette
             sc.maastricht[t], sc.dette_pib[t], sc.clause[t] = maastricht, dette / pib_total, mesures
-            sc.detail[t] = {"pib_inv": pib_inv, "carbone": carbone.get(s, {}).get(t)}
             # Année suivante : capital du fonds, part à l'étranger
             capital = capital + b24 * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
             if maastricht >= etr["solde_minimum"]:
                 part_etr = max(part_etr, min(etr["plafond"], etr["depart"] + (etr["plafond"] - etr["depart"]) * max(0, (etr["dette_debut"] - dette / pib_total) / (etr["dette_debut"] - etr["dette_plafond"]))))
             dette_prec = dette
         out[s] = sc
-    return out
+    return {k: out[k] for k in SCENARIOS}

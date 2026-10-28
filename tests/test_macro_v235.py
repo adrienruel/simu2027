@@ -32,3 +32,16 @@ def test_effets_macro(scenario, grandeur, ligne):
 def test_deficits_publies_prudent():
     d = R["prudent"].maastricht
     assert [round(-d[t] * 100, 2) for t in (2029, 2032, 2037)] == [4.67, 3.81, 2.31]
+
+
+@pytest.mark.parametrize("cle, ligne", [("avant", 8), ("etalement", 12), ("contribution", 14), ("points", 15), ("rui", 17), ("rui_euros", 18), ("reste", 19)])
+def test_clause_de_trajectoire(cle, ligne):
+    c = R["prudent"].detail["clause"]
+    for i, t in enumerate(macro.ANNEES):
+        cible = VAL[("Clause de trajectoire", f"{get_column_letter(i + 2)}{ligne}")]
+        assert c[t][cle] == pytest.approx(cible, abs=1e-6 if cle == "avant" else 0.01), (cle, t)
+
+
+def test_prudent_avant_clause_publie():
+    c = R["prudent"].detail["clause"]
+    assert [round(c[t]["avant"] * 100, 2) for t in (2029, 2032, 2037)] == [5.23, 5.18, 4.07]

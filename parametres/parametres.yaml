@@ -767,3 +767,9 @@ macro:
   assouplissement_2029: {valeur: 0.0121, unite: taux, statut: DECISION, note: "Arrêté à 1,21 point de PIB (v218)."}
   etranger: {valeur: {depart: 0.05, plafond: 0.15, dette_debut: 1.0, dette_plafond: 0.6, solde_minimum: -0.03}, unite: sans_unite, statut: DECISION}
   cible_dette: {valeur: 0.6, unite: taux, statut: DECISION}
+
+# --- Clause de trajectoire (DÉCISION du 23 octobre 2026, v221) ---------------------
+clause:
+  derniere_annee: {valeur: 2037, unite: annee, statut: DECISION, note: "Dernière année de la contribution et de la baisse du RUI ; l'étalement de la déduction, une fois déclenché, est définitif."}
+  points_contribution_max: {valeur: 5, unite: sans_unite, statut: DECISION, note: "Sur les 10 points d'épargne obligatoire."}
+  plancher_rui: {valeur: 651.69, unite: eur_mois, annee_euros: 2026, statut: DECISION, note: "RSA d'une personne seule en 2026."}
