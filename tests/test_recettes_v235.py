@@ -76,3 +76,52 @@ CIBLES_TVA = {
 @pytest.mark.parametrize("fonction", list(CIBLES_TVA))
 def test_tva_par_population(fonction):
     assert getattr(tm, fonction)(P) == pytest.approx(CIBLES_TVA[fonction], abs=TOL)
+
+
+from moteur.recettes import entreprises as en, independants as ind, total as tot
+
+CIBLES_ENTREPRISES = {
+    "benefice_capte": -3.1122212034735e9,     # Entreprises & Dividendes!S13
+    "is_beneficiaires": 148.980111518611e9,  # J20
+    "is_deficitaires": 0.279880493779545e9,  # F122
+    "tva_non_deductible": 76.00990116e9,     # X20
+}
+
+
+@pytest.mark.parametrize("fonction", list(CIBLES_ENTREPRISES))
+def test_entreprises(fonction):
+    assert getattr(en, fonction)(P) == pytest.approx(CIBLES_ENTREPRISES[fonction], abs=TOL)
+
+
+def test_independants():
+    assert ind.impot_independants(P) == pytest.approx(33.6415265661194e9, abs=TOL)
+    assert ind.tva_independants(P) == pytest.approx(11.1574248590074e9, abs=TOL)
+    assert ind.is_local_independants(P) == pytest.approx(1.80406606946615e9, abs=TOL)
+
+
+@pytest.mark.parametrize("ligne, cible", [
+    (2, 149_259_992_012.39), (3, 248_150_266_888.005), (4, 452_838_702_211.722),
+    (5, 24_097_348_601.3389), (6, 140_079_910_374.771), (16, 31_837_460_496.6533),
+])
+def test_lignes_total(ligne, cible):
+    assert tot.lignes_calculees(P)[ligne] == pytest.approx(cible, abs=TOL)
+
+
+from moteur.recettes import autres as au
+
+
+@pytest.mark.parametrize("ligne, cible", [
+    (7, 11_961_865_379.2212), (8, 15_100_000_000), (9, 29_000_000_000), (15, 34_305_400_355.2415),
+    (19, 12_682_130_400.4462), (20, 6_392_000_000),
+])
+def test_autres_lignes_total(ligne, cible):
+    assert tot.recettes_nouveau_systeme(P)["lignes"][ligne] == pytest.approx(cible, abs=TOL)
+
+
+def test_ancienne_tva():
+    assert au.ancienne_tva_ligne_3(P) == pytest.approx(213_574_450_264.849, abs=TOL)
+
+
+def test_recettes_totales_total_b17():
+    """Critère de sortie de l'étape 1 pour les recettes statiques."""
+    assert tot.recettes_nouveau_systeme(P)["total"] == pytest.approx(1_167_767_351_278, abs=TOL)

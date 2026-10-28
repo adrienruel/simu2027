@@ -1,0 +1,20 @@
+groupe,classe,part_effectif,revenu_annuel,annee_euros,taux_retention_societe
+classiques,"Classiques, décile 1",0.1,6533,2023,0
+classiques,"Classiques, décile 2",0.1,11973,2023,0
+classiques,"Classiques, décile 3",0.1,16799,2023,0
+classiques,"Classiques, décile 4",0.1,21999,2023,0
+classiques,"Classiques, décile 5",0.1,28026,2023,0
+classiques,"Classiques, décile 6",0.1,35433,2023,0.07
+classiques,"Classiques, décile 7",0.1,45170,2023,0.07
+classiques,"Classiques, décile 8",0.1,59266,2023,0.13
+classiques,"Classiques, décile 9",0.1,83696,2023,0.13
+classiques,"Classiques, décile 10",0.1,175904,2023,0.33
+micro,Très faible,0.3,2000.0,2026,0
+micro,Faible,0.3,6000.0,2026,0
+micro,Modeste,0.25,12000.0,2026,0
+micro,Moyen,0.15,25000.0,2026,0
+agriculteurs,Revenu nul ou négatif,0.22,0.0,2026,0
+agriculteurs,Très modeste,0.1,6000.0,2026,0
+agriculteurs,Modeste,0.13,15000.0,2026,0
+agriculteurs,Moyen,0.15,24000.0,2026,0
+agriculteurs,Aisé,0.4,45000.0,2026,0

@@ -352,3 +352,114 @@ inactifs:
     valeur: 1.0
     unite: taux
     statut: HYPOTHESE
+
+# --- Système actuel (approximation par classe, remplacée par OpenFisca à l'étape 3) ---
+systeme_actuel:
+  taux_tva_moyen:
+    valeur: 0.13
+    unite: taux
+    statut: HYPOTHESE
+    note: Total!B140.
+  rsa_personne_seule: {valeur: 651.69, unite: eur_mois, annee_euros: 2026, statut: SOURCE, source: "RSA au 1er avril 2026"}
+  rsa_forfait_logement: {valeur: 78.2, unite: eur_mois, annee_euros: 2026, statut: SOURCE, source: "RSA, forfait logement 12 %"}
+  prime_activite:
+    valeur: {forfaitaire: 638.28, part_revenus: 0.61, bonus_debut: 709, bonus_max_a: 1658.76, bonus_max: 240.63, forfait_logement: 75.99, seuil_versement: 15}
+    unite: sans_unite
+    statut: SOURCE
+    source: Décret n° 2026-222 du 30 mars 2026 (Salariés du privé, AV9 à AV14 et B69)
+  prime_activite_agents:
+    valeur: {revenu_max: 1470, montant_max: 230, revenu_extinction: 2150}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Barème simplifié propre aux agents (Fonctionnaires B71-B73), différent de celui du privé.
+  apl: {valeur: {revenu_plein: 700, montant_plein: 200, revenu_extinction: 1900}, unite: sans_unite, statut: HYPOTHESE}
+  taxe_fonciere:
+    valeur: {coef_prive: 2.65661297612247, coef_public: 2.90995818494813, exposant: 0.6}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Taxe foncière et locale estimée = coefficient × net^exposant.
+  exoneration_taxe_fonciere_prive:
+    valeur: 18000
+    unite: eur_an
+    annee_euros: 2024
+    statut: HYPOTHESE
+    note: >-
+      Dans la v235, la taxe foncière des sept premières classes du privé (net avant aides jusqu'à
+      17 956 €) est saisie à 0 au lieu d'être calculée. Seuil reconstitué entre 17 956 et 18 978 €.
+      Rien d'équivalent pour les agents publics.
+
+# --- Entreprises ----------------------------------------------------------------
+entreprises:
+  taux_is_etat: {valeur: 0.40, unite: taux, statut: DECISION}
+  is_actuel: {valeur: {taux_reduit: 0.15, seuil_reduit: 42500, taux_normal: 0.25}, unite: sans_unite, statut: SOURCE, source: "CGI, art. 219"}
+  ratio_tva_non_deductible: {valeur: 1.0, unite: taux, statut: DECISION, note: "v231 : TVA légale aux taux actuels."}
+  impots_production_2023: {valeur: 92.7, unite: md_eur, annee_euros: 2023, note: "Traité comme euros de 2024 par la v235 (ligne 2 de Total × facteur 2024)", statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025)"}
+  impots_production_hors_marchand: {valeur: 17.4, unite: md_eur, annee_euros: 2023, statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025)"}
+  profil_import_marge:
+    valeur: {import_bas: 0.245, import_hausse: 0.04, marge_bas: 0.048, marge_hausse: 0.005, plafond_revenu: 150000}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Part importée et marge captée par les entreprises françaises sur la consommation en plus (Salariés du privé B61-B65).
+
+# --- Indépendants (feuille Indépendants, v193) ------------------------------------
+independants:
+  classiques: {valeur: 1851000, unite: sans_unite, statut: SOURCE, source: "Insee, non-salariés hors micro, fin 2023"}
+  micro_actifs: {valeur: 1900000, unite: sans_unite, statut: HYPOTHESE, note: "Micro-entrepreneurs économiquement actifs (RUI!J13)."}
+  agriculteurs: {valeur: 408000, unite: sans_unite, statut: SOURCE, source: "Insee, non-salariés agricoles fin 2023"}
+  passage_2023_2026:
+    valeur: 1.0395
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Facteur saisi à part dans la v235 (Indépendants!B40), distinct des facteurs de salaire et de PIB.
+  part_percue: {valeur: {classiques: 0.978, micro: 0.58, agriculteurs: 0.978}, unite: sans_unite, statut: SOURCE, source: "Fraude estimée : 1,1 à 2,2 % des cotisations ; 42 % éludées chez les micro (Urssaf)"}
+  correction_couples: {valeur: 0.894, unite: sans_unite, statut: HYPOTHESE, note: "Imposition commune des couples (Anciennes pensions!B21)."}
+  salaire_pivot:
+    valeur: 45000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: >-
+      Salaire au-delà duquel le reste passe par la société (Total!B91, ancien seuil du taux de 66 %).
+      Depuis la v227 le taux de 66 % commence à 32 000 € : voir le journal.
+  seuil_retention: {valeur: 24000, unite: eur_an, annee_euros: 2026, statut: HYPOTHESE, note: "Bénéfice gardé dans la société au-delà de ce revenu (Total!B89)."}
+
+impot_local_entreprises:
+  taux_communes: {valeur: 0.026, unite: taux, statut: DECISION}
+  taux_regions: {valeur: 0.024, unite: taux, statut: DECISION}
+
+# --- Autres recettes de la feuille Total ------------------------------------------
+dividendes:
+  revenus_capitaux_mobiliers_2023: {valeur: 53, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "DGFiP Statistiques n° 41 (revenus de 2023)", note: "Traité en euros de 2024 par la v235."}
+  pfu_actuel: {valeur: 0.314, unite: taux, statut: SOURCE, source: "PFU 2026"}
+  elasticite_taux_net: {valeur: 2, unite: sans_unite, statut: SOURCE, source: "Ordre de grandeur : dividendes déclarés +65 % après la flat tax de 2018"}
+revenus_capital:
+  loyers: {valeur: 30, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
+  interets: {valeur: 15, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
+  plus_values_immobilieres: {valeur: 10, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
+  plus_values_actions: {valeur: 17, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
+  taux_moyen_bareme: {valeur: 0.38, unite: taux, statut: DECISION, note: "Barème plafonné à 40 % (v171)."}
+  plafond: {valeur: 0.40, unite: taux, statut: DECISION}
+  taux_actuel: {valeur: 0.314, unite: taux, statut: SOURCE, source: "Prélèvement forfaitaire et prélèvements sociaux 2026"}
+  elasticite: {valeur: 0.77, unite: sans_unite, statut: SOURCE, source: "Feuille Hauts revenus, B53 (à reprendre du registre)"}
+logement:
+  amortissement_loyers: {valeur: 0.85, unite: taux, statut: HYPOTHESE}
+  part_plus_values_bailleurs: {valeur: 0.5, unite: taux, statut: HYPOTHESE}
+  is_bailleurs_sociaux: {valeur: 6.48, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "Loyers supplémentaires des bailleurs sociaux (Logement!B52), à porter avec la feuille Logement."}
+successions:
+  base_nouveau_systeme: {valeur: 16.6, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
+  exoneration_entreprises: {valeur: 1.5, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Cour des comptes 2025 (pacte Dutreil), recoupé v170"}
+fonds:
+  recettes_non_fiscales: {valeur: 29, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Budget de l'État 2026"}
+  part_versee_au_fonds: {valeur: 1.0, unite: taux, statut: DECISION}
+accises_entreprises:
+  achats_ht: {valeur: {carburants: 15, gaz_fioul: 8, electricite: 0, aerien: 10}, unite: sans_unite, statut: HYPOTHESE, note: "Achats HT des entreprises soumis aux accises (Md€, Barème TVA B44-B47)."}
+  ancienne_tva_entreprises: {valeur: 76.00990116, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "TVA non déductible actuelle, somme de la colonne U (à reprendre en données)."}
+  autres_impots_produits_actuels: {valeur: 103.834, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Total!C13 (TICPE, tabac, alcool, assurances, jeux, électricité)"}
+  tva_retraites_actuelle: {valeur: 41, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "Total!M4, saisie."}
+carbone_importe:
+  intensite_kg_par_euro: {valeur: 0.543, unite: sans_unite, statut: HYPOTHESE}
+  part_importee: {valeur: 0.64, unite: taux, statut: HYPOTHESE}
+  part_hors_ue: {valeur: 0.75, unite: taux, statut: HYPOTHESE}
+  abattement_preuve: {valeur: 0.2, unite: taux, statut: HYPOTHESE}
+  elasticite_prix: {valeur: 0.6, unite: sans_unite, statut: HYPOTHESE}
+  passage_prix_vente: {valeur: 1.15, unite: sans_unite, statut: HYPOTHESE, note: "Coefficient de 1,15 signalé par l'audit comme à étayer."}

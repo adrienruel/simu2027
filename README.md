@@ -35,7 +35,7 @@ python -m pytest
 
 ## Étapes
 
-1. **Moteur budgétaire identique à la v235** (Total et trajectoire, 4 scénarios, à 0,01 Md€) — *en cours : socle posé*
+1. **Moteur budgétaire identique à la v235** (Total et trajectoire, 4 scénarios, à 0,01 Md€) — *en cours : recettes statiques et bloc comptable de la trajectoire faits ; dépenses, effets macro et trajectoire à suivre*
 2. Paramètres complets (1 278 du registre) et tests de la partie 6
 3. Microsimulation OpenFisca
 4. Bloc emploi unifié et incertitude

@@ -13,8 +13,9 @@ from .retraites_croisiere import classes_retraites
 from ..distribution import lire
 
 
-def tva_actif(cout_employeur: float, p: Parametres, scenario: str, part_rui: float, base_epargne: float) -> float:
-    """TVA annuelle d'un actif. base_epargne : coût employeur servant au taux d'épargne et à l'impôt local."""
+def budget_actif(cout_employeur: float, p: Parametres, scenario: str, part_rui: float) -> dict:
+    """Budget annuel d'un actif dans le nouveau système (coût employeur en euros de 2026)."""
+    base_epargne = cout_employeur
     net = net_apres_impot(base_epargne, p, scenario, part_rui)
     sante, tva = taux_pour_revenu(net, p)
     t = sante + tva
@@ -24,18 +25,28 @@ def tva_actif(cout_employeur: float, p: Parametres, scenario: str, part_rui: flo
     spontanee = max(0.0, dispo - consommation_ht(dispo, t, p) * (1 + t))
     volontaire = max(0.0, min(spontanee, dispo - oblig) - p.val("consommation.eviction_epargne_volontaire", scenario) * oblig)
     conso = max(0.0, dispo - oblig - volontaire) / (1 + t)
-    return t * conso
+    return {"net": net, "dispo": dispo, "oblig": oblig, "volontaire": volontaire,
+            "spontanee": spontanee, "taux": t, "conso_ht": conso, "tva": t * conso}
+
+
+def tva_actif(cout_employeur: float, p: Parametres, scenario: str, part_rui: float) -> float:
+    return budget_actif(cout_employeur, p, scenario, part_rui)["tva"]
+
+
+def part_rui_agent(cout_origine: float) -> float:
+    """v235 : la part de RUI des agents s'éteint à 12 500 € de coût d'origine (voir le journal)."""
+    return 1 - min(1.0, cout_origine / 12500)
 
 
 def tva_prive(p: Parametres, scenario: str = "prudent") -> float:
     d = effectifs_prive_2026(p)
-    return sum(n * tva_actif(c, p, scenario, part_rui_salarie(c, p), c) for c, n in zip(d.milieux, d.effectifs))
+    return sum(n * tva_actif(c, p, scenario, part_rui_salarie(c, p)) for c, n in zip(d.milieux, d.effectifs))
 
 
 def tva_public(p: Parametres, scenario: str = "prudent") -> float:
     d = effectifs_public_2026(p)
     a = facteur_alignement_public(p)
-    return sum(n * tva_actif(c * a, p, scenario, 1 - min(1.0, c / 12500), c * a)
+    return sum(n * tva_actif(c * a, p, scenario, part_rui_agent(c))
                for c, n in zip(d.milieux, d.effectifs))
 
 
