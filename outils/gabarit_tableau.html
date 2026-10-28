@@ -1,0 +1,380 @@
+<title>Trajectoire budgétaire 2029-2073</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : bandeau de synthèse (le prudent publié), puis trois courbes, puis la décomposition et les comptes d'une année. */
+:root {
+  --fond: #f6f7f9;
+  --surface: #ffffff;
+  --encre: #121826;
+  --encre-2: #4a5263;
+  --encre-3: #7b8394;
+  --trait: #dfe3ea;
+  --trait-fort: #c3c9d4;
+  --accent: #1f5fae;
+  --s-crise: #eb6834;
+  --s-prudent: #2a78d6;
+  --s-median: #1baf7a;
+  --s-optimiste: #6250d6;
+  --alerte: #b54708;
+  --f-titre: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-texte: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-chiffre: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fond: #11141a; --surface: #181c24; --encre: #eef0f4; --encre-2: #b7bdc9; --encre-3: #8891a2;
+    --trait: #2a303b; --trait-fort: #3a414e; --accent: #6fa6ec;
+    --s-crise: #d95926; --s-prudent: #3987e5; --s-median: #199e70; --s-optimiste: #9085e9; --alerte: #f0a35e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --fond: #11141a; --surface: #181c24; --encre: #eef0f4; --encre-2: #b7bdc9; --encre-3: #8891a2;
+  --trait: #2a303b; --trait-fort: #3a414e; --accent: #6fa6ec;
+  --s-crise: #d95926; --s-prudent: #3987e5; --s-median: #199e70; --s-optimiste: #9085e9; --alerte: #f0a35e;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--fond); color: var(--encre); font-family: var(--f-texte); font-size: 15px; line-height: 1.5; }
+.page { max-width: 1180px; margin: 0 auto; padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--f-titre); font-weight: 600; margin: 0; text-wrap: balance; letter-spacing: 0.005em; }
+h1 { font-size: 30px; line-height: 1.15; }
+h2 { font-size: 21px; }
+h3 { font-size: 16px; }
+p { margin: 0; }
+.chiffre { font-family: var(--f-chiffre); font-variant-numeric: tabular-nums; }
+.etiquette { font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--encre-3); font-weight: 500; }
+.discret { color: var(--encre-2); }
+
+header { display: grid; gap: 10px; }
+.entete-ligne { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; justify-content: space-between; }
+.meta { font-size: 13px; color: var(--encre-3); }
+.regles { display: flex; flex-wrap: wrap; gap: 6px; }
+.regle { font-size: 12.5px; padding: 3px 9px; border: 1px solid var(--trait-fort); border-radius: 999px; color: var(--encre-2); }
+
+.synthese { background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; padding: 18px 20px; display: grid; gap: 14px; }
+.tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px 24px; }
+.tuile { display: grid; gap: 2px; align-content: start; }
+.tuile .valeur { font-family: var(--f-chiffre); font-size: 26px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.tuile .sous { font-size: 13px; color: var(--encre-2); }
+.tuile .sous b { font-family: var(--f-chiffre); font-weight: 500; color: var(--alerte); }
+
+.bloc { display: grid; gap: 12px; min-width: 0; }
+.bloc-tete { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.grille-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); gap: 28px; }
+.carte { background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; padding: 16px 16px 12px; min-width: 0; }
+.legende { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--encre-2); }
+.legende span { display: inline-flex; align-items: center; gap: 6px; }
+.pastille { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+.pastille.tiret { background: none !important; border-top: 2px dashed currentColor; height: 0; }
+
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { font-family: var(--f-chiffre); font-size: 11px; fill: var(--encre-3); }
+svg .lib { font-family: var(--f-texte); font-size: 12px; font-weight: 500; }
+.grille line { stroke: var(--trait); stroke-width: 1; }
+.zero { stroke: var(--trait-fort); stroke-width: 1; }
+.seuil { stroke: var(--alerte); stroke-width: 1; stroke-dasharray: 4 4; }
+.curseur { stroke: var(--encre-3); stroke-width: 1; }
+
+.bulle { position: fixed; pointer-events: none; z-index: 20; background: var(--surface); color: var(--encre);
+  border: 1px solid var(--trait-fort); border-radius: 8px; padding: 8px 10px; font-size: 13px; box-shadow: 0 4px 16px rgba(0,0,0,.12); min-width: 170px; }
+.bulle .an { font-family: var(--f-titre); font-weight: 600; margin-bottom: 4px; }
+.bulle .l { display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+.bulle .l span:first-child { display: inline-flex; align-items: center; gap: 6px; color: var(--encre-2); }
+.bulle .l span:last-child { font-family: var(--f-chiffre); font-variant-numeric: tabular-nums; }
+
+.commandes { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.segments { display: inline-flex; border: 1px solid var(--trait-fort); border-radius: 8px; overflow: hidden; }
+.segments button { font: inherit; font-size: 13px; padding: 5px 11px; background: var(--surface); color: var(--encre-2); border: 0; cursor: pointer; }
+.segments button + button { border-left: 1px solid var(--trait-fort); }
+.segments button[aria-pressed="true"] { background: var(--encre); color: var(--surface); }
+.segments button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+label.choix { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--encre-2); }
+select { font: inherit; font-size: 13px; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--trait-fort); background: var(--surface); color: var(--encre); }
+input[type="range"] { width: 200px; max-width: 50vw; accent-color: var(--accent); }
+
+.defile { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--trait); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; white-space: normal; }
+thead th { font-weight: 500; font-size: 12px; color: var(--encre-3); text-transform: uppercase; letter-spacing: 0.05em; border-bottom-color: var(--trait-fort); }
+td.n { font-family: var(--f-chiffre); font-variant-numeric: tabular-nums; }
+tr.total td { font-weight: 600; border-top: 1px solid var(--trait-fort); }
+.neg { color: var(--alerte); }
+
+.barres-stat { display: flex; height: 14px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.barres-stat div { height: 100%; }
+.note { font-size: 13px; color: var(--encre-2); max-width: 72ch; }
+footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
+@media (max-width: 560px) { h1 { font-size: 24px; } .tuile .valeur { font-size: 22px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="page">
+  <header>
+    <div class="etiquette">Écologie de droite · moteur de simulation</div>
+    <div class="entete-ligne">
+      <h1>Trajectoire budgétaire 2029-2073</h1>
+      <div class="meta" id="meta"></div>
+    </div>
+    <div class="regles">
+      <span class="regle">Prudent publié</span>
+      <span class="regle">Euros constants de 2026</span>
+      <span class="regle">Aucune indexation sur l'inflation</span>
+      <span class="regle">Déficit au sens de Maastricht</span>
+    </div>
+  </header>
+
+  <section class="synthese" aria-labelledby="t-synthese">
+    <div class="bloc-tete">
+      <h2 id="t-synthese">Le scénario publié</h2>
+      <p class="note">Scénario prudent, clause de trajectoire comprise. En rouge, le même scénario sans la clause.</p>
+    </div>
+    <div class="tuiles" id="tuiles"></div>
+  </section>
+
+  <section class="bloc" aria-labelledby="t-deficit">
+    <div class="bloc-tete">
+      <h2 id="t-deficit">Déficit public, en % du PIB</h2>
+      <div class="commandes">
+        <div class="segments" role="group" aria-label="Clause de trajectoire">
+          <button type="button" id="b-apres" aria-pressed="true">Après clause</button>
+          <button type="button" id="b-avant" aria-pressed="false">Avec l'avant-clause</button>
+        </div>
+      </div>
+    </div>
+    <div class="carte">
+      <div class="legende" id="leg-deficit"></div>
+      <div id="g-deficit"></div>
+    </div>
+    <p class="note">La clause de trajectoire ramène le prudent (et la crise) sur le déficit du médian, par l'étalement de la déduction, la contribution de transition (jusqu'à 5 points) puis une baisse du RUI. Les traits pointillés montrent le déficit avant la clause : c'est là que se voit l'écart entre les hypothèses.</p>
+  </section>
+
+  <div class="grille-2">
+    <section class="bloc" aria-labelledby="t-dette">
+      <h2 id="t-dette">Dette publique, en % du PIB</h2>
+      <div class="carte"><div class="legende" id="leg-dette"></div><div id="g-dette"></div></div>
+    </section>
+    <section class="bloc" aria-labelledby="t-chomage">
+      <h2 id="t-chomage">Taux de chômage, en %</h2>
+      <div class="carte"><div class="legende" id="leg-chomage"></div><div id="g-chomage"></div></div>
+    </section>
+  </div>
+
+  <section class="bloc" aria-labelledby="t-annee">
+    <div class="bloc-tete">
+      <h2 id="t-annee">Une année en détail : <span id="annee-titre"></span></h2>
+      <div class="commandes">
+        <label class="choix" for="annee">Année <input type="range" id="annee" min="2029" max="2073" step="1" value="2032"> <span class="chiffre" id="annee-val"></span></label>
+        <label class="choix" for="scenario">Scénario <select id="scenario"></select></label>
+      </div>
+    </div>
+    <div class="grille-2">
+      <div class="carte bloc">
+        <h3>Effets sur le solde, par canal (Md€)</h3>
+        <p class="note">Ce que les réactions de l'économie ajoutent au budget statique ou lui retirent, cette année-là.</p>
+        <div id="g-canaux"></div>
+      </div>
+      <div class="carte bloc">
+        <h3>Comptes de l'année (Md€ de 2026)</h3>
+        <div class="defile"><table id="t-comptes"></table></div>
+        <div id="clause-annee" class="note"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloc" aria-labelledby="t-param">
+    <h2 id="t-param">D'où viennent les chiffres</h2>
+    <div class="carte bloc">
+      <div class="barres-stat" id="stat-barre" aria-hidden="true"></div>
+      <div class="legende" id="stat-leg"></div>
+      <p class="note" id="stat-note"></p>
+    </div>
+  </section>
+
+  <footer>
+    <span id="pied"></span>
+    <span>Généré par <span class="chiffre">python -m outils.tableau_de_bord</span> à partir du moteur ; chaque chiffre se recalcule depuis le fichier de paramètres.</span>
+  </footer>
+</div>
+<div class="bulle" id="bulle" hidden></div>
+
+<script id="donnees" type="application/json">/*DONNEES*/</script>
+<script>
+(function () {
+  const D = JSON.parse(document.getElementById("donnees").textContent);
+  const A = D.annees, S = D.scenarios;
+  const NOM = { crise: "Crise", prudent: "Prudent", median: "Médian", optimiste: "Optimiste" };
+  const coul = s => `var(--s-${s})`;
+  const fr = (x, n = 1) => x.toLocaleString("fr-FR", { minimumFractionDigits: n, maximumFractionDigits: n });
+  const iA = t => A.indexOf(t);
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, at = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); if (parent) parent.appendChild(e); return e; };
+  const bulle = document.getElementById("bulle");
+
+  document.getElementById("meta").textContent = `Version ${D.meta.version} · ${new Date(D.meta.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}`;
+  document.getElementById("pied").textContent = `${D.meta.euros.charAt(0).toUpperCase() + D.meta.euros.slice(1)}. Chômage calculé jusqu'en ${D.meta.chomage_jusqu_a}.`;
+
+  // Synthèse
+  const P = D.series.prudent;
+  // première année à partir de laquelle le déficit reste sous 3 % jusqu'au bout
+  const sous3 = arr => { let k = arr.length; while (k > 0 && arr[k - 1] < 3) k--; return k >= arr.length ? "jamais" : A[k]; };
+  const premiere = arr => { const k = arr.findIndex(v => v < 3); return k < 0 ? "jamais" : A[k]; };
+  const pic = arr => { let m = -Infinity, k = 0; arr.forEach((v, i) => { if (v > m) { m = v; k = i; } }); return [m, A[k]]; };
+  const [picV, picA] = pic(P.dette_pib);
+  const [picVa] = pic(D.series.crise ? D.series.crise.dette_pib : P.dette_pib);
+  const tuiles = [
+    ...[2029, 2032, 2037].map(t => ({ e: `Déficit ${t}`, v: fr(P.deficit[iA(t)], 2) + " %", s: `sans clause <b>${fr(P.deficit_avant_clause[iA(t)], 2)} %</b>` })),
+    { e: "Durablement sous 3 %", v: String(sous3(P.deficit)), s: `une première fois en ${premiere(P.deficit)} ; sans clause <b>${sous3(P.deficit_avant_clause)}</b>` },
+    { e: "Pic de dette", v: fr(picV, 1) + " %", s: `en ${picA} ; crise ${fr(picVa, 1)} %` },
+    { e: "Chômage 2037", v: fr(P.chomage[iA(2037)], 1) + " %", s: `${fr(P.chomage[0], 1)} % en 2029` },
+  ];
+  document.getElementById("tuiles").innerHTML = tuiles.map(x => `<div class="tuile"><span class="etiquette">${x.e}</span><span class="valeur">${x.v}</span><span class="sous">${x.s}</span></div>`).join("");
+
+  // Courbes
+  function courbe(id, legId, series, opts) {
+    const box = document.getElementById(id);
+    box.innerHTML = "";
+    const W = Math.max(320, box.clientWidth || 760), H = opts.h || Math.round(Math.min(320, Math.max(220, W * 0.5))), m = { g: 40, d: 78, h: 12, b: 26 };
+    const xs = opts.annees;
+    const vals = series.flatMap(s => s.v.filter(v => v != null));
+    let lo = Math.min(...vals, opts.min ?? Infinity), hi = Math.max(...vals, opts.max ?? -Infinity);
+    const brut = (hi - lo) / 6, mag = Math.pow(10, Math.floor(Math.log10(brut)));
+    const pas = [1, 2, 2.5, 5, 10].map(k => k * mag).find(k => k >= brut);
+    lo = Math.floor(lo / pas) * pas; hi = Math.ceil(hi / pas) * pas;
+    const X = t => m.g + (t - xs[0]) / (xs[xs.length - 1] - xs[0]) * (W - m.g - m.d);
+    const Y = v => m.h + (hi - v) / (hi - lo) * (H - m.h - m.b);
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": opts.aria });
+    const g = el("g", { class: "grille" }, svg);
+    for (let v = lo; v <= hi + 1e-9; v += pas) {
+      el("line", { x1: m.g, x2: W - m.d, y1: Y(v), y2: Y(v) }, g);
+      const t = el("text", { x: m.g - 8, y: Y(v) + 4, "text-anchor": "end" }, svg); t.textContent = fr(v, 0);
+    }
+    if (lo < 0 && hi > 0) el("line", { class: "zero", x1: m.g, x2: W - m.d, y1: Y(0), y2: Y(0) }, svg);
+    const pasX = xs.length > 20 ? 10 : 5;
+    xs.forEach(t => { if (t % pasX === 0 || (t === xs[0] && pasX - t % pasX >= 3)) { const tx = el("text", { x: X(t), y: H - 6, "text-anchor": "middle" }, svg); tx.textContent = t; } });
+    if (opts.seuil != null) {
+      el("line", { class: "seuil", x1: m.g, x2: W - m.d, y1: Y(opts.seuil), y2: Y(opts.seuil) }, svg);
+      const st = el("text", { x: W - m.d - 4, y: Y(opts.seuil) - 5, "text-anchor": "end" }, svg); st.textContent = opts.seuilLib; st.setAttribute("style", "fill: var(--alerte)");
+    }
+    // lignes : les pointillés d'abord, le prudent publié en dernier
+    const ordre = [...series].sort((a, b) => (a.tiret ? 0 : 1) - (b.tiret ? 0 : 1) || (a.s === "prudent") - (b.s === "prudent"));
+    const fins = [];
+    ordre.forEach(s => {
+      const pts = xs.map((t, i) => s.v[i] == null ? null : [X(t), Y(s.v[i])]).filter(Boolean);
+      el("path", { d: "M" + pts.map(p => p.join(",")).join("L"), fill: "none", stroke: coul(s.s), "stroke-width": s.s === "prudent" && !s.tiret ? 2.5 : 2,
+        "stroke-dasharray": s.tiret ? "5 4" : "none", "stroke-linejoin": "round", "stroke-linecap": "round", opacity: s.tiret ? 0.85 : 1 }, svg);
+      if (!s.tiret) fins.push({ s: s.s, y: pts[pts.length - 1][1], x: pts[pts.length - 1][0] });
+    });
+    // étiquettes directes en bout de courbe, écartées pour ne pas se chevaucher
+    fins.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < fins.length; i++) if (fins[i].y - fins[i - 1].y < 14) fins[i].y = fins[i - 1].y + 14;
+    fins.forEach(f => {
+      el("circle", { cx: f.x, cy: Y(series.find(s => s.s === f.s && !s.tiret).v.filter(v => v != null).slice(-1)[0]), r: 3.5, fill: coul(f.s), stroke: "var(--surface)", "stroke-width": 2 }, svg);
+      const t = el("text", { x: f.x + 8, y: f.y + 4, class: "lib" }, svg); t.textContent = NOM[f.s]; t.setAttribute("style", "fill: var(--encre-2)");
+    });
+    // survol : curseur et bulle
+    const cur = el("line", { class: "curseur", y1: m.h, y2: H - m.b, visibility: "hidden" }, svg);
+    const zone = el("rect", { x: m.g, y: 0, width: W - m.g - m.d, height: H, fill: "transparent" }, svg);
+    const montrer = ev => {
+      const r = svg.getBoundingClientRect();
+      const px = (ev.clientX - r.left) / r.width * W;
+      const t = Math.max(xs[0], Math.min(xs[xs.length - 1], Math.round(xs[0] + (px - m.g) / (W - m.g - m.d) * (xs[xs.length - 1] - xs[0]))));
+      const i = xs.indexOf(t);
+      cur.setAttribute("x1", X(t)); cur.setAttribute("x2", X(t)); cur.setAttribute("visibility", "visible");
+      const lignes = series.filter(s => s.v[i] != null).map(s => `<div class="l"><span><i class="pastille${s.tiret ? " tiret" : ""}" style="background:${coul(s.s)};color:${coul(s.s)}"></i>${NOM[s.s]}${s.tiret ? " sans clause" : ""}</span><span>${fr(s.v[i], opts.dec)}${opts.unite}</span></div>`).join("");
+      bulle.innerHTML = `<div class="an">${t}</div>${lignes}`;
+      bulle.hidden = false;
+      const bw = bulle.offsetWidth, bh = bulle.offsetHeight;
+      let lx = ev.clientX + 14; if (lx + bw > window.innerWidth - 8) lx = ev.clientX - bw - 14;
+      bulle.style.left = Math.max(8, lx) + "px"; bulle.style.top = Math.max(8, Math.min(window.innerHeight - bh - 8, ev.clientY - bh / 2)) + "px";
+    };
+    zone.addEventListener("pointermove", montrer);
+    zone.addEventListener("pointerdown", montrer);
+    zone.addEventListener("pointerleave", () => { bulle.hidden = true; cur.setAttribute("visibility", "hidden"); });
+    box.appendChild(svg);
+    const leg = document.getElementById(legId);
+    leg.innerHTML = series.map(s => `<span><i class="pastille${s.tiret ? " tiret" : ""}" style="background:${coul(s.s)};color:${coul(s.s)}"></i>${NOM[s.s]}${s.tiret ? " sans clause" : ""}</span>`).join("");
+  }
+
+  let avant = false;
+  function dessinerDeficit() {
+    const series = S.map(s => ({ s, v: D.series[s].deficit }));
+    if (avant) S.filter(s => D.series[s].deficit_avant_clause).forEach(s => series.push({ s, v: D.series[s].deficit_avant_clause, tiret: true }));
+    courbe("g-deficit", "leg-deficit", series, { annees: A, seuil: 3, seuilLib: "3 %", unite: " %", dec: 2, aria: "Déficit public par scénario, 2029-2073", h: 320 });
+  }
+  const bA = document.getElementById("b-apres"), bB = document.getElementById("b-avant");
+  bA.onclick = () => { avant = false; bA.setAttribute("aria-pressed", "true"); bB.setAttribute("aria-pressed", "false"); dessinerDeficit(); };
+  bB.onclick = () => { avant = true; bB.setAttribute("aria-pressed", "true"); bA.setAttribute("aria-pressed", "false"); dessinerDeficit(); };
+  const AC = A.filter(t => t <= D.meta.chomage_jusqu_a);
+
+  // Une année en détail
+  const selS = document.getElementById("scenario"), rng = document.getElementById("annee");
+  selS.innerHTML = S.map(s => `<option value="${s}"${s === "prudent" ? " selected" : ""}>${NOM[s]}</option>`).join("");
+  function detail() {
+    const t = +rng.value, i = iA(t), s = selS.value, d = D.series[s];
+    document.getElementById("annee-val").textContent = t;
+    document.getElementById("annee-titre").textContent = `${t}, scénario ${NOM[s].toLowerCase()}`;
+    // barres des canaux
+    const c = Object.entries(d.canaux).map(([k, v]) => [k, v[i]]).filter(([, v]) => Math.abs(v) >= 0.005).sort((a, b) => b[1] - a[1]);
+    const box = document.getElementById("g-canaux"); box.innerHTML = "";
+    if (!c.length) { box.textContent = "Aucun effet cette année."; return; }
+    const W = Math.max(280, box.clientWidth || 560), etroit = W < 480, hL = etroit ? 40 : 26, lib = etroit ? 0 : Math.min(250, W * 0.45), H = c.length * hL + 24;
+    const maxA = Math.max(...c.map(([, v]) => Math.abs(v)));
+    const neg = c.some(([, v]) => v < 0), pos = c.some(([, v]) => v > 0);
+    const zone = W - lib - (etroit ? 100 : 70);
+    const x0 = lib + (neg && pos ? zone / 2 : neg ? zone : 0) + (etroit ? 50 : 30);
+    const k = (neg && pos ? zone / 2 : zone) / maxA;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Effets sur le solde par canal" });
+    c.forEach(([key, v], j) => {
+      const y = 6 + j * hL + (etroit ? 16 : 0);
+      const t = el("text", { x: 0, y: etroit ? y - 2 : y + 14, class: "lib" }, svg); t.textContent = D.libelles_canaux[key]; t.setAttribute("style", "fill: var(--encre-2)");
+      const w = Math.max(2, Math.abs(v) * k);
+      el("rect", { x: v >= 0 ? x0 : x0 - w, y: y + 3, width: w, height: 14, rx: 3, fill: coul(s) }, svg);
+      const tv = el("text", { x: v >= 0 ? x0 + w + 6 : x0 - w - 6, y: y + 14, "text-anchor": v >= 0 ? "start" : "end" }, svg);
+      tv.textContent = (v > 0 ? "+" : "") + fr(v, 1); tv.setAttribute("style", "fill: var(--encre)");
+    });
+    if (etroit) c.forEach((_, j) => { const y = 6 + j * hL + 16; el("line", { class: "zero", x1: x0, x2: x0, y1: y, y2: y + 20 }, svg); });
+    else el("line", { class: "zero", x1: x0, x2: x0, y1: 0, y2: H - 18 }, svg);
+    const tot = c.reduce((a, [, v]) => a + v, 0);
+    const tt = el("text", { x: 0, y: H - 2, class: "lib" }, svg); tt.textContent = `Total : ${tot > 0 ? "+" : ""}${fr(tot, 1)} Md€`; tt.setAttribute("style", "fill: var(--encre)");
+    box.appendChild(svg);
+    // comptes : toutes les colonnes de scénario pour l'année choisie
+    const tab = document.getElementById("t-comptes");
+    const ligne = (lib, f, cls = "") => `<tr class="${cls}"><td>${lib}</td>${S.map(x => { const v = f(D.series[x]); return `<td class="n${v < 0 ? " neg" : ""}">${fr(v, 1)}</td>`; }).join("")}</tr>`;
+    let h = `<thead><tr><th>Md€</th>${S.map(x => `<th>${NOM[x]}</th>`).join("")}</tr></thead><tbody>`;
+    D.postes.forEach(([key, lib]) => { h += ligne(lib, d2 => d2.postes[key][i], key === "solde" ? "total" : ""); });
+    h += ligne("Déficit (% du PIB)", d2 => d2.deficit[i]);
+    h += ligne("Dette (% du PIB)", d2 => d2.dette_pib[i]);
+    h += ligne("PIB", d2 => d2.pib[i]);
+    tab.innerHTML = h + "</tbody>";
+    const cl = d.clause;
+    const ca = document.getElementById("clause-annee");
+    if (cl && cl.etalement[i] + cl.contribution[i] + cl.rui[i] > 0.001) {
+      ca.innerHTML = `Clause de trajectoire en ${t} : étalement de la déduction ${fr(cl.etalement[i], 1)} Md€, contribution de transition ${fr(cl.contribution[i], 1)} Md€ (${fr(cl.points[i], 2)} point${cl.points[i] >= 2 ? "s" : ""})${cl.rui[i] > 0.001 ? `, baisse du RUI ${fr(cl.rui[i], 1)} Md€ (${fr(cl.rui_euros[i], 0)} €/mois)` : ""}${cl.reste[i] > 0.001 ? `, écart non couvert ${fr(cl.reste[i], 1)} Md€` : ""}.`;
+    } else ca.textContent = cl ? `Clause de trajectoire : rien à corriger en ${t}.` : "Pas de clause dans ce scénario.";
+  }
+  rng.addEventListener("input", detail); selS.addEventListener("change", detail);
+  const toutDessiner = () => {
+    dessinerDeficit();
+    courbe("g-dette", "leg-dette", S.map(s => ({ s, v: D.series[s].dette_pib })), { annees: A, seuil: 60, seuilLib: "60 %", unite: " %", dec: 1, aria: "Dette publique par scénario", min: 0 });
+    courbe("g-chomage", "leg-chomage", S.map(s => ({ s, v: D.series[s].chomage.slice(0, AC.length) })), { annees: AC, unite: " %", dec: 2, aria: "Taux de chômage par scénario, 2029-2040" });
+    detail();
+  };
+  let largeur = window.innerWidth;
+  toutDessiner();
+  window.addEventListener("resize", () => { if (Math.abs(window.innerWidth - largeur) > 40) { largeur = window.innerWidth; toutDessiner(); } });
+
+  // Paramètres
+  const st = D.parametres.statuts, tot = D.parametres.total;
+  const cat = [["SOURCE", "Sourcés", "var(--s-median)"], ["DECISION", "Décisions du programme", "var(--s-prudent)"], ["HYPOTHESE", "Hypothèses sans source", "var(--s-crise)"]];
+  document.getElementById("stat-barre").innerHTML = cat.map(([k, , c]) => `<div style="width:${st[k] / tot * 100}%;background:${c}" title="${k}"></div>`).join("");
+  document.getElementById("stat-leg").innerHTML = cat.map(([k, l, c]) => `<span><i class="pastille" style="background:${c}"></i>${l} : <b class="chiffre">${st[k]}</b></span>`).join("");
+  const top = D.parametres.hypotheses_par_groupe.slice(0, 4).map(([g, n]) => `${g} (${n})`).join(", ");
+  document.getElementById("stat-note").textContent = `${tot} paramètres. Les hypothèses sans source sont prises prudentes ; elles se concentrent dans : ${top}. Les sourcer est la prochaine étape du chantier.`;
+})();
+</script>

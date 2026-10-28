@@ -67,7 +67,15 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Cible en pleine précision `reference/cibles/crise.csv` (`outils/cibles_crise.py`) : le moteur la reproduit à 1e-9 (déficit, dette, chômage) et la feuille figée à six décimales.
 - Résultats publiés (crise, clause comprise) : **4,68 % / 3,81 % / 2,64 %** en 2029 / 2032 / 2037 ; **avant clause : 5,45 % / 5,89 % / 4,91 %**.
 
+## 29 octobre 2026 — Tableau de bord
+
+- `moteur/restitution.py` met une simulation en forme (JSON) ; `python -m outils.tableau_de_bord` écrit `sorties/tableau_de_bord.html`, page autonome : synthèse du prudent publié avant et après la clause, déficit, dette et chômage des quatre scénarios, décomposition par canal de l'effet sur le solde et comptes d'une année au choix, part des paramètres sourcés.
+- Le module macro garde désormais la décomposition par canal (emploi, ajustement, fonds, logement, érosion de l'IS, réactions à l'impôt, IA, santé, carbone, clause…) ; un test vérifie que la somme des canaux redonne l'effet total.
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Le prudent repasse au-dessus de 3 % après la clause.** Il passe sous 3 % en 2036, puis remonte à 3,42 % en 2038, dès que la contribution de transition s'arrête (dernière année : 2037), et reste au-dessus de 3 % jusqu'en 2041 ; nouveau passage à 3,55 % en 2047-2048. Il n'est durablement sous 3 % qu'à partir de 2049. À partir de 2040, l'étalement de la déduction coûte au lieu de rapporter (jusqu'à −15 Md€ par an). L'indicateur « première année sous 3 % » de la v235 ne montre pas cette remontée ; le tableau de bord affiche l'année à partir de laquelle le déficit reste sous 3 %.
+- **Excédents de long terme sans rétroaction.** En fin de période, tous les scénarios dégagent de gros excédents (prudent : 7,7 % du PIB en 2073, optimiste : plus de 15 %), et la dette devient négative dans le médian et l'optimiste. Le modèle n'a aucune règle qui rende ces excédents (baisse d'impôt, dépenses) : les chiffres d'après 2050 décrivent une marge de manœuvre, pas une trajectoire plausible.
 
 - **Scénario de crise : le point fixe de l'impôt local n'est pas recalculé.** Les feuilles de salariés lisent un taux recopié à la main (Collectivités!B91 = 7,2036 %), resté à la valeur du prudent ; en crise, le taux qui équilibre les collectivités est 7,2800 %. Les feuilles Emploi et Hauts revenus lisent, elles, le taux recalculé (B32). Le moteur publie la crise avec le point fixe recalculé ; l'écart de déficit est inférieur à 0,01 point. Le test de reproduction garde l'ancienne copie (`en_crise(comme_v235=True)`).
 - **Scénario de crise : la liste des paramètres ne dit pas ce qui a servi.** Elle affiche Effets macro!B8 = 126 663 emplois (le milieu prudent, valeur collée), alors que les valeurs figées ont été produites avec B8 = RUI!B34 recalculé en crise (126 391). Avec 126 663, le PIB s'écarte de la feuille figée ; avec 126 391, il la reproduit. Effets macro!B273 est stocké en texte.

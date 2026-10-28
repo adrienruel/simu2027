@@ -227,12 +227,29 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
                 mesures = 0.0
             solde_total = solde + mesures
+            # Décomposition par canal (Md€, effet sur le solde), pour la restitution
+            if s == "prudent":
+                c_sante, c_tva_sante, c_tend = 0.0, sante["tva_prudent"][t], 0.0
+                c_carbone = carbone["prudent"][t]
+            else:
+                c_sante, c_tva_sante, c_tend = sante[s][t], sante[f"tva_{s}"][t], (pib_tend + pib_ecole) * q
+                c_carbone = carbone[s][t]
+            sc.detail.setdefault("canaux", {})[t] = {
+                "emploi": s_emploi, "ajustement_budgetaire": s_aj, "capital_du_fonds": s_cap, "logement": s_log,
+                "erosion_is": s_erosion, "fraude_tva": s_fraude, "fin_aides_construction": s_aides,
+                "productivite": pib_prod * q, "reactions_impot": s_react, "ia": (pib_ia + pib_adopt) * q,
+                "tendance_et_ecole": c_tend, "investissement_entreprises": pib_inv * part_budget,
+                "sante": c_sante + c_tva_sante, "carbone": c_carbone,
+                "eviction_epargne": (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n,
+                "clause": mesures,
+            }
             interets = taux_reel(t, s) * dette_prec
             solde_public = sp_hors[t] + solde_total - transferts[t] - interets
             dette = dette_prec - solde_public - participations[t]
             pib_total = pib0[t] + pib
             maastricht = (solde_public - infl * dette_prec) / pib_total
             sc.pib_effet[t], sc.solde_effet[t], sc.emplois[t] = pib, solde_total, emp_ref + emp_sen
+            sc.detail.setdefault("pib_reference", {})[t] = pib0[t]
             sc.charge_dette[t], sc.solde_public[t], sc.dette[t] = interets, solde_public, dette
             sc.maastricht[t], sc.dette_pib[t], sc.clause[t] = maastricht, dette / pib_total, mesures
             # Taux de chômage (Emploi lignes 28 à 30) : hors seniors, effet récessif de la bascule compris

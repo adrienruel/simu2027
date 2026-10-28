@@ -66,3 +66,9 @@ def test_publie_recalcule_le_point_fixe():
 def test_parametres_de_base_intacts():
     assert P.colonne_prudent == "prudent" and P.val("transition.decote_participations") == 0.1
     assert C.val("transition.decote_participations") == 0.2 and C.val("macro.multiplicateur") == 1
+
+
+def test_canaux_somment_a_l_effet_total():
+    for nom, sc in calculer(P).items():
+        for t in (2029, 2040, 2073):
+            assert sum(sc.detail["canaux"][t].values()) == pytest.approx(sc.solde_effet[t], abs=1e-9), (nom, t)

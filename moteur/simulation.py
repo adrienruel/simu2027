@@ -26,9 +26,13 @@ def _bloc(m, traj, avec_clause: bool) -> dict:
             "deficit": -m.maastricht[t] * 100, "dette_pib": m.dette_pib[t] * 100,
             "emplois_supplementaires": m.emplois[t], "effet_pib": m.pib_effet[t], "clause": m.clause[t],
             "chomage": m.detail["chomage"][t] * 100,
+            "pib": m.detail["pib_reference"][t] + m.pib_effet[t],
+            "canaux": dict(m.detail["canaux"][t]),
         }
         if avec_clause:
-            ligne["deficit_avant_clause"] = m.detail["clause"][t]["avant"] * 100
+            c = m.detail["clause"][t]
+            ligne["deficit_avant_clause"] = c["avant"] * 100
+            ligne["clause_detail"] = {k: c[k] for k in ("etalement", "contribution", "points", "rui", "rui_euros", "reste")}
         out[t] = ligne
     return out
 
