@@ -81,6 +81,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     pv = _prov()
     from .emploi import entrees_macro, population_active
     pv.update(entrees_macro(p))
+    from .hauts_revenus import reactions, baisse_revenus_declares
+    pv["reactions_impot"] = reactions(p)
+    pv["baisse_revenus_declares"] = baisse_revenus_declares(p)
     pa = population_active(p)
     m = lambda cle, s: p.val(f"macro.{cle}", s)
     tend0 = m("tendance", "prudent")
@@ -117,7 +120,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
              "optimiste": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["optimiste"][t] for t in ANNEES},
              "tva_prudent": tv["prudent"], "tva_median": tv["median"], "tva_optimiste": tv["optimiste"]}
     carbone = {k: dict(zip(ANNEES, v)) for k, v in pv["carbone_solde"].items() if not k.startswith("_")}
-    logement104 = dict(zip(ANNEES, pv["logement_solde"]["serie"]))
+    from .logement import reprise_amortissements
+    logement104 = reprise_amortissements(p)
     personnes_en_emploi = p.val("inactifs.chomeurs_bit") / p.val("chomage.taux_2026") - p.val("inactifs.chomeurs_bit")
     rui_ch = personnes_en_emploi * p.val("rui.montant") * 12 / 1e9
     va = pv["valeur_ajoutee_par_emploi"]["valeur"]
@@ -169,7 +173,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 logements = m("logements_initial", s) * (1 - m("extinction_aides_construction", s) * max(0, 1 - (n + 1) / 3))
             else:
                 logements = m("logements_croisiere", s)
-            pib_log = logements * pv["prix_logement"]["valeur"] * m("part_additionnelle_logement", s) / 1e9
+            pib_log = logements * p.val("logement_dynamique.prix_moyen_ht_neuf") * m("part_additionnelle_logement", s) / 1e9
             s_log = pib_log * part_budget + logement104[t]
             s_erosion = -j20 * (1 + tend0) ** n * erosion_taux * _montee(t, m("montee_erosion_is", s))
             s_fraude = m("fraude_tva", s) * _montee(t, m("montee_fraude", s))

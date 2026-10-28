@@ -908,3 +908,20 @@ emploi:
   aide_personne: {valeur: {retenue: 1, etp: {autonomie_direct: 60000, autonomie_saad: 104200, garde_domicile: 27000, assistantes_maternelles: 194000}}, unite: sans_unite, statut: SOURCE, source: "Cour des comptes (2026), Urssaf Stat'ur n° 405"}
   assistantes_maternelles: {valeur: {retenue: 1, part_etat_bas_revenu: 0.85, heures: 1037000000, part_heures_modestes: 0.28, cout_heure: 4.85, part_complement: 0.6}, unite: sans_unite, statut: SOURCE, source: "Urssaf, Caf, HCFEA ; part du complément 0,6 = hypothèse prudente"}
   creches: {valeur: {retenue: 1, places_psu: 419800, cout_psu: 19450, places_micro: 79300, cout_micro: 20729}, unite: sans_unite, statut: SOURCE, source: "Onape, édition 2025"}
+
+# --- Logement (feuille Logement) -------------------------------------------------------
+logement_dynamique:
+  prix_moyen_ht_neuf: {valeur: 250000, unite: eur_an, annee_euros: 2026, statut: HYPOTHESE, note: "Logement!B72 ; sert à l'effet du choc d'offre sur le PIB (Effets macro, ligne 34)."}
+  part_parc_vendue_par_an: {valeur: 0.025, unite: taux, statut: HYPOTHESE}
+  part_amortissements_repris: {valeur: 0.5, unite: taux, statut: HYPOTHESE}
+
+# --- Hauts revenus et classes moyennes : réaction à l'impôt (feuille Hauts revenus) -----
+hauts_revenus:
+  elasticite_revenu: {valeur: {crise: null, prudent: 0.31, median: 0.2, optimiste: 0.1}, unite: sans_unite, statut: SOURCE, source: "Cabannes, Houdré et Landais, Économie et Statistique n° 467 (2014), 10 % du haut ; médian et optimiste : hypothèses"}
+  part_par_societe: {valeur: {crise: null, prudent: 0.25, median: 0.5, optimiste: 0.5}, unite: sans_unite, statut: HYPOTHESE}
+  regle_nordique: {valeur: {crise: null, prudent: 0.5, median: 0.7, optimiste: 0.8}, unite: sans_unite, statut: HYPOTHESE, note: "Part de ce qui passe par une société ramenée au barème (règle du dirigeant-actionnaire)."}
+  montee: {valeur: {crise: null, prudent: 3, median: 3, optimiste: 3}, unite: sans_unite, statut: HYPOTHESE}
+  reaction_capital_supplementaire: {valeur: {crise: null, prudent: 0, median: 0, optimiste: 0}, unite: sans_unite, statut: DECISION}
+  elasticite_croisee_travail: {valeur: {crise: null, prudent: 0.05, median: 0.03, optimiste: 0.03}, unite: sans_unite, statut: SOURCE, source: "Lefebvre, Lehmann et Sicsic, IZA DP n° 16112 (2023)"}
+  elasticite_classes_moyennes: {valeur: {crise: null, prudent: 0.05, median: 0.02, optimiste: 0}, unite: sans_unite, statut: HYPOTHESE, note: "Au-dessus de la valeur sourcée de 0,02 pour l'ensemble en prudent (audit)."}
+  classes_moyennes_bornes: {valeur: [24000, 95000], unite: eur_an, annee_euros: 2026, statut: HYPOTHESE}

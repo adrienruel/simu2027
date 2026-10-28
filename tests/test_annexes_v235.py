@@ -59,3 +59,24 @@ def test_tva_sante():
     tv = sante.tva_sante(P)
     comparer(tv["prudent"], "Santé", 85)
     comparer(tv["median"], "Santé", 86)
+
+
+def test_logement_reprise_amortissements():
+    from moteur.logement import reprise_amortissements
+    comparer(reprise_amortissements(P), "Logement", 104)
+
+
+@pytest.mark.parametrize("scenario, col", [("prudent", "B"), ("median", "C"), ("optimiste", "D")])
+def test_hauts_revenus(scenario, col):
+    from moteur import hauts_revenus as hr
+    assert hr.reactions(P)[scenario]["montant"] == pytest.approx(VAL[("Hauts revenus", f"{col}9")], abs=0.01)
+    assert hr.baisse_revenus_declares(P)[scenario] == pytest.approx(VAL[("Effets macro", f"{col}226")], abs=0.01)
+
+
+def test_emploi():
+    from moteur import emploi as em
+    e = em.effets_reformes(P)
+    for j, col in (("crise", "D"), ("median", "E"), ("optimiste", "F")):
+        assert e[j]["emplois"] == pytest.approx(VAL[("Emploi", f"{col}22")], abs=1)
+    assert em.cout_reformes(P) == pytest.approx(VAL[("Emploi", "G24")], abs=0.01)
+    assert em.gain_par_emploi(P, "prudent") == pytest.approx(VAL[("Emploi", "B245")], abs=0.01)
