@@ -110,7 +110,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     b24 = flux_epargne_obligatoire(p) / 1e9 * (1 - p.val("epargne.contribution_transition")) - (repris - subventions_restees(p)) * 1.0
     rendement = p.val("epargne.rendement_fonds")
     etr = p.val("macro.etranger")
-    isv = pv["is_investissement"]
+    from . import is_investissement as module_isi
+    isv = module_isi.entrees_macro(p)
     l25 = dict(zip(ANNEES, isv["ligne25"]))
     from . import sante as module_sante
     dep_s = {s_: module_sante.depenses(p, s_) for s_ in SCENARIOS}
@@ -137,8 +138,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     from .depenses.statique import rui_aah
     flux_epargne = flux_epargne_obligatoire(p) / 1e9
     rui_total = rui_aah(p) - p.val("rui_complements.aah") - p.val("rui_complements.aide_poste_entreprises_adaptees")
-    etal = pv["is_investissement_etalement"]
-    gain_etalement = {t: a - b for t, a, b in zip(ANNEES, etal["b41"], etal["b78"])}
+    c8, c16 = module_isi.cout_net_etat(p), module_isi.cout_net_etat(p, etale=True)
+    gain_etalement = {t: c8[t] - c16[t] for t in ANNEES}
     etalement_declenche = None
 
     from .trajectoire_annuelle import _prov as tp

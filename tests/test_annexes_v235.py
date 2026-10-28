@@ -87,3 +87,9 @@ def test_carbone(scenario, ligne):
     from moteur import carbone
     from moteur.recettes.total import ligne_3_tva
     comparer(carbone.effet_solde(P, ligne_3_tva(P) / 1e9)[scenario], "Carbone", ligne)
+
+
+@pytest.mark.parametrize("etale, ligne", [(False, 41), (True, 78)])
+def test_is_investissement(etale, ligne):
+    from moteur.is_investissement import cout_net_etat
+    comparer(cout_net_etat(P, etale), "IS investissement", ligne)

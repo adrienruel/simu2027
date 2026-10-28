@@ -937,3 +937,17 @@ carbone:
   ets2: {valeur: {emissions_mt: 180, prix: 45, part_fonds_social: 0.187, dotation_france: 1.04}, unite: sans_unite, statut: SOURCE, source: "Directive ETS2 ; Fonds social pour le climat"}
   ets1_complement: {valeur: {active: 0, emissions_mt: 70, prix_quota: 75}, unite: sans_unite, statut: DECISION}
   dom: {valeur: {cout_regime_tva: 3, exonerer_vols: 1, preserver_fiscalite: 1, passagers_millions: 3.88, part_metropole: 0.8, distance_km: 7800, accise_aller_retour_ref: 370, distance_ref_km: 5840}, unite: sans_unite, statut: DECISION, note: "Accise par passager-km = 370 / (2 × 5 840), écrit dans la formule B42."}
+
+# --- Déduction intégrale de l'investissement (feuille IS investissement, v210-v221) -------
+is_investissement:
+  active: {valeur: 1, unite: sans_unite, statut: DECISION, note: "DÉCISION du 22 octobre 2026 (v211)."}
+  montee_annees: {valeur: 8, unite: sans_unite, statut: DECISION}
+  montee_etalee_annees: {valeur: 16, unite: sans_unite, statut: DECISION, note: "Étalement de la clause de trajectoire (v221)."}
+  part_admise: {valeur: 1, unite: taux, statut: DECISION}
+  investissement_snf_2025: {valeur: 364.8, unite: md_eur, annee_euros: 2025, statut: SOURCE, source: "Insee, comptes nationaux annuels 2025 (FBCF des SNF)"}
+  categories: {valeur: {construction: {part: 0.28, duree: 25}, equipements: {part: 0.32, duree: 7}, immateriel: {part: 0.4, duree: 3}}, unite: sans_unite, statut: HYPOTHESE}
+  part_payeurs_is: {valeur: 0.8, unite: taux, statut: HYPOTHESE}
+  valeur_actuelle_amortissements: {valeur: 0.742, unite: taux, statut: SOURCE, source: "Tax Foundation, Capital Allowances in Europe (2024)"}
+  taux_is_actuel: {valeur: 0.25, unite: taux, statut: SOURCE, source: "CGI, art. 219"}
+  part_investissement_concernee: {valeur: {crise: null, prudent: 0.6, median: 0.75, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE}
+  interets: {valeur: {part_va: 0.04, ebe_2025: 497.5, taux_marge_2025: 0.322, part_sans_recette: 0.5, part_reactions: 0.2}, unite: sans_unite, statut: SOURCE, source: "OFCE (2025) d'après la Banque de France ; Insee, comptes de la Nation 2025 ; parts : hypothèses prudentes"}
