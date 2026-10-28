@@ -45,7 +45,9 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     from .ascenseur_social import annuel as ascenseur
     asc = ascenseur(p, autres.ligne_8_successions(p) / 1e9, p.val("successions.exoneration_entreprises"))
     asc_r, asc_d = {t: v["recettes"] for t, v in asc.items()}, {t: v["depenses"] for t, v in asc.items()}
-    eco, sante, gf = serie("economies_retenues"), serie("sante_prudent"), serie("garde_fou_sante")
+    from .mesures import economies
+    eco = economies(p)
+    sante, gf = serie("sante_prudent"), serie("garde_fou_sante")
     anc_p, etu = serie("anciennes_pensions"), serie("rui_etudiants")
     tva2028, gel, rendu = serie("objectifs_b15"), serie("objectifs_b40"), serie("objectifs_b63")
     em = pv["emploi_cout_reformes"]

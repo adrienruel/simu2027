@@ -41,3 +41,8 @@ def test_ascenseur_social():
     a = annuel(P, autres.ligne_8_successions(P) / 1e9, P.val("successions.exoneration_entreprises"))
     comparer({t: v["recettes"] for t, v in a.items()}, "Ascenseur social", 57)
     comparer({t: v["depenses"] for t, v in a.items()}, "Ascenseur social", 53)
+
+
+def test_economies_registre():
+    from moteur.mesures import economies
+    comparer(economies(P), "Économies", 28)
