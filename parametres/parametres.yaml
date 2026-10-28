@@ -1,0 +1,109 @@
+# Fichier de paramètres unique du programme « Écologie de droite ».
+#
+# Chaque paramètre porte :
+#   valeur      : un nombre, ou un dictionnaire par scénario (crise, prudent, median, optimiste)
+#   unite       : taux, eur_an, eur_mois, md_eur, sans_unite, annee…
+#   annee_euros : année des euros pour tout montant (2024, 2025 ou 2026) ; absent pour un taux
+#   statut      : SOURCE, HYPOTHESE ou DECISION
+#   source      : référence (obligatoire si statut = SOURCE)
+#   note        : facultatif
+#
+# Règle : une valeur sans source est prise prudente. Le scénario prudent est publié.
+# Valeurs reprises de l'état du programme (v232) et de l'audit v235 ; elles seront
+# recontrôlées contre le registre des paramètres de la v235 à l'étape 2.
+
+scenarios: [crise, prudent, median, optimiste]
+
+# --- Unités -----------------------------------------------------------------
+unites:
+  annee_modele:
+    valeur: 2026
+    unite: annee
+    statut: DECISION
+    note: Modèle en euros constants de 2026 ; l'économie de 2026 est placée en 2029.
+  annee_bascule:
+    valeur: 2029
+    unite: annee
+    statut: DECISION
+  facteur_recettes_2024_2026:
+    valeur: 1.039
+    unite: sans_unite
+    statut: SOURCE
+    source: Classeur v235, coefficient appliqué aux recettes calées sur 2024 (Total)
+    note: Ne s'applique qu'aux recettes calées sur des montants de 2024 (audit v235, §1).
+  salaire_prive_2025:
+    valeur: 0.020
+    unite: taux
+    statut: SOURCE
+    source: Insee, Note de conjoncture juin 2026 (salaire moyen par tête)
+  salaire_prive_2026:
+    valeur: 0.022
+    unite: taux
+    statut: SOURCE
+    source: Insee, Note de conjoncture juin 2026 (salaire moyen par tête)
+  salaire_public_2024:
+    valeur: 0.039
+    unite: taux
+    statut: SOURCE
+    source: Insee (État +4,7 %, territoriale +3,3 %)
+  salaire_public_2025_2026:
+    valeur: 0.0
+    unite: taux
+    statut: HYPOTHESE
+    note: Grille stable (DGAFP) ; glissement vieillesse-technicité non compté. Sens prudent.
+
+# --- Impôt unique sur le revenu (sur le coût employeur annuel) ----------------
+impot_unique:
+  seuils:
+    valeur: [12500, 24000, 32000]
+    unite: eur_an
+    annee_euros: 2026
+    statut: DECISION
+    note: DÉCISION du 23 octobre 2026 (seuil de 32 000 €, v227).
+  taux:
+    valeur: [0.0, 0.179, 0.57, 0.66]
+    unite: taux
+    statut: DECISION
+    note: DÉCISION du 28 octobre 2026 (v232). 66 % est le plafond de tous les taux marginaux.
+  plafond_taux_marginal:
+    valeur: 0.66
+    unite: taux
+    statut: DECISION
+    note: DÉCISIONS du 17 octobre 2026.
+  demi_part_enfant_plafond:
+    valeur: 1000
+    unite: eur_an
+    annee_euros: 2026
+    statut: DECISION
+    note: Mécanique du quotient à préciser avant codage (couples imposés ensemble).
+
+# --- Repères de profils -------------------------------------------------------
+profils:
+  cout_smic_annuel:
+    valeur: 23750
+    unite: eur_an
+    annee_euros: 2026
+    statut: SOURCE
+    source: État du programme v232 (coût employeur du SMIC, profil type)
+    note: L'audit v235 cite 1 930 €/mois (juin 2026) ; écart avec 1 979 €/mois à éclaircir à l'étape 1.
+  cout_median_annuel:
+    valeur: 42500
+    unite: eur_an
+    annee_euros: 2026
+    statut: SOURCE
+    source: État du programme v232 (salarié médian, profil type)
+
+# --- RUI ------------------------------------------------------------------------
+rui:
+  montant:
+    valeur: 800
+    unite: eur_mois
+    annee_euros: 2026
+    statut: DECISION
+    note: DÉCISION du 22 octobre 2026 (v220). Revalorisé de la croissance, jamais de l'inflation.
+  plancher_rsa_2026:
+    valeur: 651.69
+    unite: eur_mois
+    annee_euros: 2026
+    statut: SOURCE
+    source: Montant du RSA 2026
