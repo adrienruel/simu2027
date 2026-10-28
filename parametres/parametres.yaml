@@ -782,3 +782,28 @@ calendrier:
   dotations_collectivites: {valeur: 90, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "≈ 54 Md€ de concours et ≈ 40 Md€ de fractions de TVA."}
   part_dotations_versee: {valeur: 0, unite: taux, statut: DECISION, note: "Fin des dotations dès la bascule de 2029."}
   inflation: {valeur: 0.018, unite: taux, statut: HYPOTHESE, note: "Objectifs!B8 ; sert au passage en euros constants de la dette et au déficit de Maastricht."}
+deces:
+  reperes: {valeur: {2023: 639000, 2026: 650000, 2037: 752000, 2048: 840000, 2060: 840000, 2070: 819500}, unite: sans_unite, statut: SOURCE, source: "Insee, projections de population (repères de la feuille Successions)"}
+  annee_reference: {valeur: 2023, unite: annee, statut: HYPOTHESE, note: "Décès de 2023 (Successions!C5), année des droits de succession de la base."}
+
+# --- Ascenseur social (feuille Ascenseur social, DÉCISIONS d'Adrien) ----------------
+ascenseur:
+  classes_12:
+    valeur: {eleves_par_niveau: 600000, part_supplementaire: 0.1, niveaux: 3, eleves_dedoublee: 12, eleves_ordinaire: 22, cout_enseignant: 50000, montee: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Coût enseignant = Éducation!C15 (coût employeur aligné).
+  bac_tout_age: {valeur: {candidats: 100000, cout_2010: 140, inflation_2010_2026: 1.3}, unite: sans_unite, statut: HYPOTHESE}
+  prepas:
+    valeur: {etudiants: 87100, etudiants_public: 73800, cout_annuel: 18560, part_facturee: 1, part_remboursee: 0.55, premiere_annee: 2035, montee: 10}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Part remboursée de 55 % ; le texte de la feuille (ligne 62) parle de 60 %.
+  succession_cumul: {valeur: {gain: 0.03, part_immediate: 0.3, annees_plein_effet: 15}, unite: sans_unite, statut: HYPOTHESE}
+  plafond_exoneration_entreprises: {valeur: {part_recuperee: 0.5}, unite: sans_unite, statut: HYPOTHESE}
+  assurance_vie: {valeur: {recette: 4, part_perdue: 0.25, part_premiere_annee: 0.5, annees_plein_effet: 3}, unite: sans_unite, statut: HYPOTHESE}
+  ecoles_ingenieurs:
+    valeur: {inscrits: 107623, part_apprentissage: 0.2, duree: 3, eleves_fonctionnaires: 700, part_prepa: 0.5, depense_par_eleve: 7800, rembourse_autres: 0.7, rembourse_prepa: 0.4, debut_autres: 2032, montee_autres: 25, debut_prepa: 2049, montee_prepa: 20}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Dépense par élève = 13 000 × 0,6, écrit dans la formule B95.

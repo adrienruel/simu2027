@@ -40,7 +40,11 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     ia = ia_administration.economie_nette(p)
     anc = {int(x["annee"]): x for x in _csv_retraites("ancien_systeme_retraites.csv")}
     serie = lambda cle: dict(zip(ANNEES, pv[cle]["serie"]))
-    succ, asc_r, asc_d = serie("successions_supplement"), serie("ascenseur_recettes"), serie("ascenseur_depenses")
+    from .recettes import successions, autres
+    succ = successions.supplement(p, autres.ligne_8_successions(p) / 1e9)
+    from .ascenseur_social import annuel as ascenseur
+    asc = ascenseur(p, autres.ligne_8_successions(p) / 1e9, p.val("successions.exoneration_entreprises"))
+    asc_r, asc_d = {t: v["recettes"] for t, v in asc.items()}, {t: v["depenses"] for t, v in asc.items()}
     eco, sante, gf = serie("economies_retenues"), serie("sante_prudent"), serie("garde_fou_sante")
     anc_p, etu = serie("anciennes_pensions"), serie("rui_etudiants")
     tva2028, gel, rendu = serie("objectifs_b15"), serie("objectifs_b40"), serie("objectifs_b63")
