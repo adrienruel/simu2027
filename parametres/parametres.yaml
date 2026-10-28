@@ -1002,3 +1002,43 @@ environnement:
   bombardiers: {valeur: {appareils: 12, prix_unitaire_m: 104.5, rendement_fonds: 0.03, duree_location: 30}, unite: sans_unite, statut: HYPOTHESE}
   ecosystemes_transferes_regions_m: {valeur: {espaces_proteges: 145.1, sites_paysages: 9.6}, unite: sans_unite, statut: HYPOTHESE}
   chaleur: {valeur: {logements_millions: 12.4, part_sans_protection: 0.5, cout_logement: 2500, part_recours: 1, duree_amortissement: 15}, unite: sans_unite, statut: HYPOTHESE, note: "Perte d'IS comptée chaque année, sans fin après les 15 ans d'amortissement."}
+
+# --- Économies sur les missions conservées (Budget État 2026, lignes 95 à 113) et Éducation ---
+economies_missions:
+  coupes:
+    valeur:
+      aides_presse: {base: 0.2, part: 1}
+      sport_jeunesse: {base: "mission:Sport, jeunesse et vie associative", part: 0.8}
+      economie_aides_sectorielles: {base: "mission:Économie", part: 0.5}
+      ecologie_hors_energie: {base: "mission:Écologie, hors énergie et hors infrastructures de transport", part: 0.3}
+      emploi_administration_ia: {base: 0.3, part: 1}
+      bourses_criteres_sociaux: {base: 2.3, part: 1}
+      universite_annees_supplementaires: {base: "education:annees_supplementaires", part: 1}
+      universite_selection: {base: "education:selection", part: 0.05}
+    unite: sans_unite
+    statut: DECISION
+    note: DÉCISIONS du 8 octobre ; parts coupées = hypothèses.
+  education_demographie_part: {valeur: 0.57, unite: taux, statut: HYPOTHESE}
+education:
+  baisse_enseignants: {valeur: 0.075, unite: taux, statut: HYPOTHESE, note: "Élèves −15 % d'ici 2035, enseignants −7,5 %."}
+  enseignants: {valeur: 870000, unite: sans_unite, statut: SOURCE, source: "Ministère de l'Éducation nationale"}
+  cout_enseignant_aligne: {valeur: 50000, unite: eur_an, annee_euros: 2026, statut: HYPOTHESE}
+  chefs_etablissement: {valeur: {personnes: 59000, hausse_nette_mensuelle: 300, coefficient_charge: 1.6}, unite: sans_unite, statut: HYPOTHESE, note: "1,6 et 300 € écrits dans la formule Éducation!D6."}
+  plateforme_ia: {valeur: 0.3, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE}
+  formation_ia: {valeur: 0.1, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE}
+  tenue_commune: {valeur: {eleves: 4000000, prix_kit: 200, annees_kit: 2, part_etat: 0.5}, unite: sans_unite, statut: HYPOTHESE}
+  universite: {valeur: {etudiants: 1600000, cout_etudiant: 12250, part_annees_supplementaires: 0.03}, unite: sans_unite, statut: HYPOTHESE}
+  connaissance_religions: {valeur: {professeurs: 40000, jours_formation: 3, cout_jour: 300, annees_amortissement: 5, eleves_4e: 700000, prix_manuel: 12, renouvellement_manuel: 5, renouvellement_formation: 30}, unite: sans_unite, statut: HYPOTHESE}
+
+# --- Quotient familial et conjugal (feuille Quotient familial, DÉCISIONS du 8 octobre) -------
+quotient:
+  parts_par_enfant: {valeur: 0.5, unite: sans_unite, statut: DECISION}
+  plafond_demi_part: {valeur: 1000, unite: eur_an, annee_euros: 2026, statut: DECISION}
+  part_enfants_parent_imposable: {valeur: 0.85, unite: taux, statut: HYPOTHESE}
+  familial_applique: {valeur: 1, unite: sans_unite, statut: DECISION}
+  conjugal:
+    valeur: {couples: 7000000, part_un_revenu: 0.25, gain_un_revenu: 8510, gain_deux_revenus: 580, retraites_forfait: 1, applique: 1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Gains moyens = résultats d'une simulation figée (300 000 couples, corrélation 0,4) faite avec un ancien barème ; à recalculer par le moteur.
+  rui_conjoint: {valeur: {inactifs_en_couple: 1300000, inactifs_feuille_rui: 3800000, part_supprimee: 0.75, part_nette_tva: 0.86}, unite: sans_unite, statut: HYPOTHESE}

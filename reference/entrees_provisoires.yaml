@@ -1,8 +1,2 @@
-# Valeurs de la v235 utilisées en attendant le portage de leur feuille.
-# Chaque entrée disparaît quand son module est écrit ; le test associé la remplace.
-quotient_familial:
-  cellule: Total!B122
-  valeur: 25.210241354476
-economies_missions:
-  cellule: Total!B121
-  valeur: -14.2292673459683
+# Plus aucune valeur de la v235 lue ici : fichier gardé vide pour mémoire.
+{}

@@ -103,3 +103,15 @@ def test_collectivites_point_fixe():
     b = co.besoin(P)
     assert b["communes"] == pytest.approx(VAL[("Collectivités", "B27")], abs=0.01)
     assert b["regions"] == pytest.approx(VAL[("Collectivités", "C27")], abs=0.01)
+
+
+def test_quotient():
+    from moteur.depenses import quotient as q
+    assert q.cout(P)["total"] == pytest.approx(VAL[("Total", "B122")], abs=0.01)
+
+
+def test_economies_missions():
+    from moteur.depenses import economies_missions as em
+    e = em.economies(P)
+    assert e["missions"] == pytest.approx(VAL[("Budget État 2026", "D105")], abs=0.01)
+    assert e["autres"] == pytest.approx(VAL[("Budget État 2026", "D111")], abs=0.01)

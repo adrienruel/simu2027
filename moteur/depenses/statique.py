@@ -15,7 +15,7 @@ from ..recettes import tva_menages
 from ..recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
 from ..epargne import part_rui_salarie
 from ..recettes.independants import classes as classes_independants
-from . import budget_etat, ia_administration
+from . import budget_etat, ia_administration, economies_missions, quotient
 from ..retraites_transition import cout_transition_moyen
 
 MD = 1e9
@@ -125,7 +125,7 @@ def depenses(p: Parametres, scenario: str = "prudent") -> dict:
         "autres_missions": b["Autres"] + p.val("budget_statique.concours_outre_mer")["montant"] * p.val("budget_statique.concours_outre_mer")["part"],
         "collectivites": sum(p.val("collectivites.besoin_financement_2024")) * (1 - p.val("collectivites.part_financee")) * facteur(p, 2024, "recettes"),
         "securite_sociale_hors_sante": secu_hors_sante,
-        "economies_missions": provisoire("economies_missions"),
-        "quotient_familial": provisoire("quotient_familial"),
+        "economies_missions": -sum(economies_missions.economies(p).values()),
+        "quotient_familial": quotient.cout(p)["total"],
     }
     return {"lignes": l, "total": sum(l.values())}
