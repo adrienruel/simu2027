@@ -8,7 +8,8 @@ Cahier des charges : `Refonte_outil_de_simulation.md` (projet).
 ```
 pip install pyyaml pytest openpyxl
 python -m pytest
-python -m moteur.simulation   # déficits des trois scénarios
+python -m moteur.simulation   # déficits des quatre scénarios, avant et après la clause
+python -m outils.cibles_crise  # (LibreOffice) recalcule la crise de la v235 en pleine précision
 ```
 
 ## Organisation
@@ -22,7 +23,7 @@ python -m moteur.simulation   # déficits des trois scénarios
 | `moteur/trajectoire.py` | Bloc comptable de la trajectoire 2029-2073 (solde, dette, Maastricht) |
 | `reference/v235/` | Export de la v235, une feuille par fichier (valeurs seules) |
 | `reference/cibles/` | Valeurs cibles de Total et Trajectoire, que le moteur doit reproduire |
-| `outils/` | Scripts d'extraction de la référence |
+| `outils/` | Extraction de la référence ; `recalcul.py` recalcule la v235 dans LibreOffice avec des cellules modifiées |
 | `tests/` | Tests automatiques |
 | `docs/journal.md` | Journal des décisions et des écarts avec la v235 |
 
@@ -36,7 +37,7 @@ python -m moteur.simulation   # déficits des trois scénarios
 
 ## Étapes
 
-1. **Moteur budgétaire identique à la v235** (Total et trajectoire, 4 scénarios, à 0,01 Md€) — *en cours : recettes statiques et bloc comptable de la trajectoire faits ; dépenses, effets macro et trajectoire à suivre*
+1. **Moteur budgétaire identique à la v235** (Total et trajectoire, 4 scénarios, à 0,01 Md€) — *fait : crise, prudent, médian, optimiste reproduits ; aucune valeur lue dans la v235*
 2. Paramètres complets (1 278 du registre) et tests de la partie 6
 3. Microsimulation OpenFisca
 4. Bloc emploi unifié et incertitude

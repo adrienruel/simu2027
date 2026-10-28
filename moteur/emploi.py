@@ -182,7 +182,8 @@ def entrees_macro(p: Parametres) -> dict:
     e = effets_reformes(p)
     perdus, fin_prime = emplois_perdus_subventions(p), emplois_perdus_fin_prime(p)
     return {
-        "emplois_terme": {"prudent": (e["crise"]["emplois"] + e["median"]["emplois"]) / 2,
+        # prudent : milieu des jeux crise et médian ; calcul de crise : jeu de crise seul (Effets macro!B8)
+        "emplois_terme": {"prudent": e["crise"]["emplois"] if p.colonne_prudent == "crise" else (e["crise"]["emplois"] + e["median"]["emplois"]) / 2,
                           "median": e["median"]["emplois"], "optimiste": e["optimiste"]["emplois"]},
         # v235 : le prudent prend la valeur de crise pour les emplois perdus
         "emplois_perdus_subventions": {"prudent": perdus["crise"], "median": perdus["median"], "optimiste": perdus["optimiste"]},

@@ -34,14 +34,14 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - **Dépenses statiques (Total!B44) : 1 217,58 Md€ retrouvés.** Budget de l'État mission par mission (salaires alignés, CAS Pensions réparti), santé (ONDAM, invalidité, autonomie, alignement hospitalier, Sécurité sociale), RUI de toutes les populations et AAH, collectivités.
 - **Coût de la transition des retraites, 2029-2073, reproduit année par année** (`moteur/retraites_transition.py`) : socle par génération (5 quintiles, épargne capitalisée), survie de Gompertz, remboursement de 35 % au départ en retraite payé d'abord en participations (135 Md€ en 2047-2048), économie sur les hautes pensions (Pareto), pénibilité. Moyenne 132,91 Md€.
 - **IA dans l'administration** reproduite (masse de gestion ministère par ministère, non-remplacement, plafond 40 %).
-- Encore provisoires (valeurs v235 lues dans `reference/entrees_provisoires.yaml`) : économies sur les missions conservées (Total!B121) et quotient familial (Total!B122).
+- Encore provisoires à cette date : économies sur les missions conservées (Total!B121) et quotient familial (Total!B122). *Portés depuis (voir plus bas).*
 
 ## 29 octobre 2026 — Effets macro et clause de trajectoire
 
 - **Feuille Effets macro reproduite pour les trois scénarios, 2029-2073** (`moteur/macro.py`) : emploi, seniors, ajustement budgétaire, capital du fonds (avec la part placée à l'étranger qui dépend de la dette), logement, érosion de l'IS, fraude à la TVA, productivité, tendance, école, IA et adoption, réactions à l'impôt, investissement des entreprises, carbone, éviction de l'épargne, taux d'intérêt, dette, déficit de Maastricht. Écart maximal : 10⁻¹¹ Md€.
 - **Clause de trajectoire reproduite** : prudent avant clause 5,23 / 5,18 / 4,07 %, mesures (étalement définitif, contribution jusqu'à 5 points, baisse du RUI jusqu'au RSA), prudent publié 4,67 / 3,81 / 2,31 %.
 - Les trois scénarios sont calculés ensemble à chaque appel (fin de la limite I5 de l'audit pour la trajectoire macro).
-- Entrées encore provisoires (`reference/entrees_provisoires_macro.json`) : emplois et gain par emploi (Emploi), réactions à l'impôt (Hauts revenus), écarts de santé, carbone dynamique, logement, IS investissement, dette de départ et transferts aux collectivités (Calendrier), solde primaire hors effets macro (Trajectoire, lignes 18 à 22 et 43).
+- Entrées encore provisoires à cette date, *toutes portées depuis* : emplois et gain par emploi (Emploi), réactions à l'impôt (Hauts revenus), écarts de santé, carbone dynamique, logement, IS investissement, dette de départ et transferts aux collectivités (Calendrier), solde primaire hors effets macro (Trajectoire, lignes 18 à 22 et 43).
 - Mise en garde de méthode : en lisant des formules tronquées à l'affichage, j'ai cru un moment que le médian et l'optimiste omettaient le carbone ; la formule complète les inclut. Les constats du journal ont été revérifiés sur formules complètes.
 
 ## 29 octobre 2026 — Chaîne complète : budget statique → trajectoire → effets macro → déficit
@@ -56,7 +56,29 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Le chargeur de paramètres refuse désormais les clés en double (YAML gardait la dernière sans prévenir : c'est arrivé une fois pendant le portage).
 - Chômage 2037 retrouvé : 7,26 % (prudent), 6,13 % (médian).
 
+## 29 octobre 2026 — Plus aucune valeur lue dans la v235 ; anciennes pensions
+
+- Le moteur ne lit plus aucune valeur calculée de la v235 : les fichiers d'entrées provisoires sont supprimés, et un test vérifie qu'aucun module n'y fait référence. Portés en dernier : hauts revenus, collectivités (point fixe de l'impôt local calculé par itération), environnement, économies des missions, quotient conjugal, anciennes pensions.
+
+## 29 octobre 2026 — Scénario de crise calculé
+
+- La crise est maintenant le quatrième scénario calculé (`Parametres.en_crise()`, `simuler()["crise"]`), comme le fait la v235 : les valeurs de crise remplacent la colonne prudente (macro, santé, carbone, hauts revenus, emploi), la décote des participations passe à 20 %, l'effort ressenti en 2029 est saisi à 1,2 point, puis la clause de trajectoire s'applique.
+- Outil `outils/recalcul.py` : recalcule la v235 dans LibreOffice avec des cellules modifiées. Vérifié d'abord sur la v235 telle quelle : **aucune cellule numérique** ne diffère des valeurs d'Excel. Il permet de vérifier le moteur sur n'importe quelle variante de paramètres.
+- Cible en pleine précision `reference/cibles/crise.csv` (`outils/cibles_crise.py`) : le moteur la reproduit à 1e-9 (déficit, dette, chômage) et la feuille figée à six décimales.
+- Résultats publiés (crise, clause comprise) : **4,68 % / 3,81 % / 2,64 %** en 2029 / 2032 / 2037 ; **avant clause : 5,45 % / 5,89 % / 4,91 %**.
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Scénario de crise : le point fixe de l'impôt local n'est pas recalculé.** Les feuilles de salariés lisent un taux recopié à la main (Collectivités!B91 = 7,2036 %), resté à la valeur du prudent ; en crise, le taux qui équilibre les collectivités est 7,2800 %. Les feuilles Emploi et Hauts revenus lisent, elles, le taux recalculé (B32). Le moteur publie la crise avec le point fixe recalculé ; l'écart de déficit est inférieur à 0,01 point. Le test de reproduction garde l'ancienne copie (`en_crise(comme_v235=True)`).
+- **Scénario de crise : la liste des paramètres ne dit pas ce qui a servi.** Elle affiche Effets macro!B8 = 126 663 emplois (le milieu prudent, valeur collée), alors que les valeurs figées ont été produites avec B8 = RUI!B34 recalculé en crise (126 391). Avec 126 663, le PIB s'écarte de la feuille figée ; avec 126 391, il la reproduit. Effets macro!B273 est stocké en texte.
+- **En crise, le médian bouge aussi.** Comme la clause aligne le prudent sur le déficit du médian, et que le médian lit la colonne prudente (part du PIB qui revient au budget, IS, santé du budget statique, gain par emploi), le déficit publié de la crise en 2029 (4,68 %) n'est pas celui du médian de base (4,67 %). La crise ne mesure donc pas « le prudent sous des hypothèses dures » mais « le médian recalculé sous des hypothèses dures, plus ce que la clause ne compense pas ».
+- **La clause efface la crise jusqu'en 2032** : jusque-là, le déficit publié de la crise est celui du médian (4,68 %, 3,81 %), parce que la contribution de transition (jusqu'à 5 points) absorbe tout l'écart. C'est l'affichage « avant clause » (5,45 %, 5,89 %, 4,91 %) qui montre la crise. Les deux doivent toujours figurer ensemble.
+- **Taux marginal combiné de 73,2 %** au-delà de 32 000 € : 66 % d'impôt unique plus 7,2 % d'impôt local. Le « plafond de 66 % » affiché n'en est pas un pour le contribuable.
+- **Hauts revenus** : la réaction des agents publics à hauts revenus est calculée sur leur coût non aligné ; le canal « passage par une société » leur est neutralisé par un facteur 0 écrit dans la formule.
+- **Collectivités** : constantes écrites dans les formules (par exemple la part 59,9 / (59,9 + 19,5) entre communes et régions).
+- **Quotient conjugal** : les gains sont des résultats de simulation figés, calculés avec un ancien barème ; ils ne suivent pas le barème actuel.
+- **Anciennes pensions** : avec la réversion, les pensions par décile ne sont plus rangées par ordre croissant ; à vérifier dans la source.
+- **IS « protection contre la chaleur »** : la perte d'IS est comptée chaque année jusqu'en 2073, sans extinction ; à confirmer que c'est voulu.
 
 - **Gain budgétaire par emploi (Emploi!B245)** : la TVA sur la consommation en plus est calculée au taux moyen de l'ancien système (13 %, Total!B140), pas aux taux effectifs du nouveau (≈ 17-18 %), et appliquée au montant toutes taxes comprises. Le gain par emploi est un peu sous-estimé.
 - **Prudent de l'emploi** : il prend le milieu de la crise et du médian pour les emplois créés (Effets macro!B8), mais la valeur de crise pour les emplois perdus (fin des subventions, fin de la prime) : asymétrie volontairement prudente, à écrire noir sur blanc.

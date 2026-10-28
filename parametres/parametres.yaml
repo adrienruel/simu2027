@@ -473,13 +473,13 @@ sante:
   heures_mensuelles_temps_plein: {valeur: 151.67, unite: sans_unite, statut: SOURCE, source: "Durée légale (35 h)"}
   mesures_a_terme:
     valeur:
-      crise: {fraude: 0.55, carence: 0.7542, transports: 0.25, cures: 0.15, imagerie: 0.065, conge_naissance: 0}
+      crise: {fraude: 0.3, carence: 0.7183, transports: 0.2, cures: 0.1, imagerie: 0, conge_naissance: 0}
       prudent: {fraude: 0.55, carence: 0.7542, transports: 0.25, cures: 0.15, imagerie: 0.065, conge_naissance: 0}
       median: {fraude: 0.8, carence: 0.7901, transports: 0.3, cures: 0.2, imagerie: 0.13, conge_naissance: 0}
       optimiste: {fraude: 1.0, carence: 0.8619, transports: 0.4, cures: 0.2, imagerie: 0.3, conge_naissance: 0}
     unite: sans_unite
     statut: HYPOTHESE
-    note: Md€/an (Santé B32:D37). Crise = prudent, faute de colonne. Le budget statique prend toujours le prudent (Total!B80).
+    note: Md€/an (Santé B32:D37) ; crise = paramètres de la feuille Scénario de crise. Le budget statique prend la colonne prudente (Total!B80).
 securite_sociale:
   postes_absents:
     valeur:
@@ -553,189 +553,189 @@ penibilite:
   hausse_socle_mensuelle: {valeur: 20, unite: eur_mois, annee_euros: 2026, statut: HYPOTHESE}
 
 # --- Effets macroéconomiques (feuille Effets macro), un jeu par scénario ----------------
-# Le scénario de crise est une feuille figée dans la v235 : ses valeurs viendront avec son portage (null en attendant).
+# Crise : valeurs de la feuille « Scénario de crise » de la v235 (anciennes valeurs « prudent ») ; à défaut, celles du prudent.
 macro:
   annees_montee_emploi:
-    valeur: {crise: null, prudent: 7, median: 6, optimiste: 5}
+    valeur: {crise: 8, prudent: 7, median: 6, optimiste: 5}
     unite: sans_unite
     statut: HYPOTHESE
   seniors_court:
-    valeur: {crise: null, prudent: 127500, median: 170000, optimiste: 170000}
+    valeur: {crise: 85000, prudent: 127500, median: 170000, optimiste: 170000}
     unite: sans_unite
     statut: HYPOTHESE
   montee_seniors_court:
-    valeur: {crise: null, prudent: 4, median: 4, optimiste: 4}
+    valeur: {crise: 4, prudent: 4, median: 4, optimiste: 4}
     unite: sans_unite
     statut: HYPOTHESE
   seniors_long:
-    valeur: {crise: null, prudent: 300000, median: 400000, optimiste: 400000}
+    valeur: {crise: 200000, prudent: 300000, median: 400000, optimiste: 400000}
     unite: sans_unite
     statut: HYPOTHESE
   annee_seniors_long:
-    valeur: {crise: null, prudent: 2043, median: 2043, optimiste: 2043}
+    valeur: {crise: 2043, prudent: 2043, median: 2043, optimiste: 2043}
     unite: sans_unite
     statut: HYPOTHESE
   montee_seniors_long:
-    valeur: {crise: null, prudent: 10, median: 10, optimiste: 10}
+    valeur: {crise: 10, prudent: 10, median: 10, optimiste: 10}
     unite: sans_unite
     statut: HYPOTHESE
   multiplicateur:
-    valeur: {crise: null, prudent: 0.75, median: 0.5, optimiste: 0.3}
+    valeur: {crise: 1, prudent: 0.75, median: 0.5, optimiste: 0.3}
     unite: sans_unite
     statut: HYPOTHESE
   annees_effet_ajustement:
-    valeur: {crise: null, prudent: 4.5, median: 4, optimiste: 3}
+    valeur: {crise: 5, prudent: 4.5, median: 4, optimiste: 3}
     unite: sans_unite
     statut: HYPOTHESE
   part_capital_nouveau:
-    valeur: {crise: null, prudent: 0.75, median: 0.75, optimiste: 0.85}
+    valeur: {crise: 0.75, prudent: 0.75, median: 0.75, optimiste: 0.85}
     unite: sans_unite
     statut: HYPOTHESE
   eviction:
-    valeur: {crise: null, prudent: 0.175, median: 0.15, optimiste: 0.1}
+    valeur: {crise: 0.2, prudent: 0.175, median: 0.15, optimiste: 0.1}
     unite: sans_unite
     statut: SOURCE
     source: "Chetty et al. (2014), Danemark"
     note: "Chetty et al. (2014). Doublon de consommation.eviction_epargne_volontaire, à fusionner."
   pib_par_euro_capital:
-    valeur: {crise: null, prudent: 0.032, median: 0.042, optimiste: 0.052}
+    valeur: {crise: 0.022, prudent: 0.032, median: 0.042, optimiste: 0.052}
     unite: sans_unite
     statut: HYPOTHESE
   logements_initial:
-    valeur: {crise: null, prudent: -30000, median: -20000, optimiste: 0}
+    valeur: {crise: -40000, prudent: -30000, median: -20000, optimiste: 0}
     unite: sans_unite
     statut: HYPOTHESE
   duree_initiale:
-    valeur: {crise: null, prudent: 2.5, median: 2, optimiste: 1}
+    valeur: {crise: 3, prudent: 2.5, median: 2, optimiste: 1}
     unite: sans_unite
     statut: HYPOTHESE
   logements_croisiere:
-    valeur: {crise: null, prudent: 37500, median: 50000, optimiste: 100000}
+    valeur: {crise: 25000, prudent: 37500, median: 50000, optimiste: 100000}
     unite: sans_unite
     statut: HYPOTHESE
   part_additionnelle_logement:
-    valeur: {crise: null, prudent: 0.5, median: 0.5, optimiste: 0.5}
+    valeur: {crise: 0.5, prudent: 0.5, median: 0.5, optimiste: 0.5}
     unite: sans_unite
     statut: HYPOTHESE
   montee_erosion_is:
-    valeur: {crise: null, prudent: 3, median: 3, optimiste: 3}
+    valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}
     unite: sans_unite
     statut: HYPOTHESE
   fraude_tva:
-    valeur: {crise: null, prudent: 2.25, median: 3, optimiste: 5}
+    valeur: {crise: 1.5, prudent: 2.25, median: 3, optimiste: 5}
     unite: sans_unite
     statut: HYPOTHESE
   montee_fraude:
-    valeur: {crise: null, prudent: 4, median: 4, optimiste: 4}
+    valeur: {crise: 4, prudent: 4, median: 4, optimiste: 4}
     unite: sans_unite
     statut: HYPOTHESE
   extinction_aides_construction:
-    valeur: {crise: null, prudent: 1, median: 1, optimiste: 1}
+    valeur: {crise: 1, prudent: 1, median: 1, optimiste: 1}
     unite: sans_unite
     statut: HYPOTHESE
   aides_construction:
-    valeur: {crise: null, prudent: 3, median: 3, optimiste: 3}
+    valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}
     unite: sans_unite
     statut: HYPOTHESE
   permis_rapide:
-    valeur: {crise: null, prudent: 2, median: 3, optimiste: 6}
+    valeur: {crise: 1, prudent: 2, median: 3, optimiste: 6}
     unite: sans_unite
     statut: HYPOTHESE
   cumul_emploi_socle:
-    valeur: {crise: null, prudent: 40000, median: 60000, optimiste: 120000}
+    valeur: {crise: 20000, prudent: 40000, median: 60000, optimiste: 120000}
     unite: sans_unite
     statut: HYPOTHESE
   annee_cumul:
-    valeur: {crise: null, prudent: 2046, median: 2046, optimiste: 2046}
+    valeur: {crise: 2046, prudent: 2046, median: 2046, optimiste: 2046}
     unite: sans_unite
     statut: HYPOTHESE
   montee_cumul:
-    valeur: {crise: null, prudent: 10, median: 10, optimiste: 10}
+    valeur: {crise: 10, prudent: 10, median: 10, optimiste: 10}
     unite: sans_unite
     statut: HYPOTHESE
   emplois_par_point_pib:
-    valeur: {crise: null, prudent: 0.45, median: 0.4, optimiste: 0.3}
+    valeur: {crise: 0.5, prudent: 0.45, median: 0.4, optimiste: 0.3}
     unite: sans_unite
     statut: HYPOTHESE
   productivite:
-    valeur: {crise: null, prudent: 0.002, median: 0.003, optimiste: 0.004}
+    valeur: {crise: 0.001, prudent: 0.002, median: 0.003, optimiste: 0.004}
     unite: sans_unite
     statut: HYPOTHESE
   annees_productivite:
-    valeur: {crise: null, prudent: 10, median: 10, optimiste: 10}
+    valeur: {crise: 10, prudent: 10, median: 10, optimiste: 10}
     unite: sans_unite
     statut: HYPOTHESE
   baisse_spread:
-    valeur: {crise: null, prudent: 0, median: 0.002, optimiste: 0.004}
+    valeur: {crise: 0, prudent: 0, median: 0.002, optimiste: 0.004}
     unite: sans_unite
     statut: HYPOTHESE
   part_reelle_hauts_revenus:
-    valeur: {crise: null, prudent: 0.375, median: 0.25, optimiste: 0.1}
+    valeur: {crise: 0.5, prudent: 0.375, median: 0.25, optimiste: 0.1}
     unite: sans_unite
     statut: HYPOTHESE
   tendance:
-    valeur: {crise: null, prudent: 0.007, median: 0.01, optimiste: 0.01}
+    valeur: {crise: 0.007, prudent: 0.007, median: 0.01, optimiste: 0.01}
     unite: sans_unite
     statut: HYPOTHESE
     note: "Prudent : 0,7 % (COR, juin 2026) ; médian et optimiste : 1 %."
   part_reinvestie:
-    valeur: {crise: null, prudent: 0.625, median: 0.75, optimiste: 0.9}
+    valeur: {crise: 0.5, prudent: 0.625, median: 0.75, optimiste: 0.9}
     unite: sans_unite
     statut: HYPOTHESE
   niveau_eleves:
-    valeur: {crise: null, prudent: 0, median: 0, optimiste: 0.1}
+    valeur: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}
     unite: sans_unite
     statut: HYPOTHESE
   croissance_par_ecart_type:
-    valeur: {crise: null, prudent: 0.00305, median: 0.0061, optimiste: 0.0096}
+    valeur: {crise: 0, prudent: 0.00305, median: 0.0061, optimiste: 0.0096}
     unite: sans_unite
     statut: HYPOTHESE
   ia_productivite:
-    valeur: {crise: null, prudent: 0.00185, median: 0.0027, optimiste: 0.00475}
+    valeur: {crise: 0.001, prudent: 0.00185, median: 0.0027, optimiste: 0.00475}
     unite: sans_unite
     statut: HYPOTHESE
   adoption_ia:
-    valeur: {crise: null, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}
+    valeur: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}
     unite: sans_unite
     statut: HYPOTHESE
   elasticite_invest:
-    valeur: {crise: null, prudent: 0.335, median: 0.3, optimiste: 0.37}
+    valeur: {crise: 0.37, prudent: 0.335, median: 0.3, optimiste: 0.37}
     unite: sans_unite
     statut: HYPOTHESE
   usure_capital:
-    valeur: {crise: null, prudent: 0.1, median: 0.1, optimiste: 0.1}
+    valeur: {crise: 0.1, prudent: 0.1, median: 0.1, optimiste: 0.1}
     unite: sans_unite
     statut: HYPOTHESE
   montee_invest:
-    valeur: {crise: null, prudent: 3, median: 3, optimiste: 3}
+    valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}
     unite: sans_unite
     statut: HYPOTHESE
   semi_elasticite_transfert:
-    valeur: {crise: null, prudent: 1.25, median: 1, optimiste: 0.8}
+    valeur: {crise: 1.5, prudent: 1.25, median: 1, optimiste: 0.8}
     unite: sans_unite
     statut: SOURCE
     source: "FMI, Beer, de Mooij et Liu (2018)"
     note: "FMI, Beer, de Mooij et Liu (2018)."
   part_grandes_entreprises:
-    valeur: {crise: null, prudent: 0.56, median: 0.56, optimiste: 0.56}
+    valeur: {crise: 0.56, prudent: 0.56, median: 0.56, optimiste: 0.56}
     unite: sans_unite
     statut: SOURCE
     source: "Insee, Les entreprises en France 2023"
     note: "Insee, Les entreprises en France 2023, fiche 3.6."
   reaction_reelle:
-    valeur: {crise: null, prudent: 0.3, median: 0.2, optimiste: 0}
+    valeur: {crise: 0.4, prudent: 0.3, median: 0.2, optimiste: 0}
     unite: sans_unite
     statut: HYPOTHESE
   taux_reference_is:
-    valeur: {crise: null, prudent: 0.25, median: 0.25, optimiste: 0.25}
+    valeur: {crise: 0.25, prudent: 0.25, median: 0.25, optimiste: 0.25}
     unite: sans_unite
     statut: HYPOTHESE
   effort_2029:
-    valeur: {crise: null, prudent: 0.012, median: 0.011, optimiste: 0.011}
+    valeur: {crise: 0.012, prudent: 0.012, median: 0.011, optimiste: 0.011}
     unite: sans_unite
     statut: HYPOTHESE
   reduction_cout_capital_autres:
-    valeur: {crise: null, prudent: 0.047, median: 0.055, optimiste: 0.121}
+    valeur: {crise: 0.04, prudent: 0.047, median: 0.055, optimiste: 0.121}
     unite: sans_unite
     statut: HYPOTHESE
     note: "Écrit dans les formules B273:D273 (−0,047 / −0,055 / −0,121), sans libellé : à documenter."
@@ -841,13 +841,13 @@ sante_trajectoire:
     source: "DG Trésor, modèle PROMEDE"
   derive_prise_en_compte: {valeur: true, unite: sans_unite, statut: DECISION}
   scenario_2027_2029: {valeur: regulation_volontariste, unite: sans_unite, statut: HYPOTHESE}
-  pente_phase_1: {valeur: {crise: null, prudent: virage_preventif, median: virage_preventif, optimiste: rythme_pib}, unite: sans_unite, statut: DECISION, note: "DÉCISION du 23 octobre (v221) : le prudent prend la pente du médian."}
-  pente_phase_2: {valeur: {crise: null, prudent: reference, median: vieillissement, optimiste: vieillissement}, unite: sans_unite, statut: SOURCE, source: "DG Trésor, modèle PROMEDE"}
+  pente_phase_1: {valeur: {crise: virage_preventif, prudent: virage_preventif, median: virage_preventif, optimiste: rythme_pib}, unite: sans_unite, statut: DECISION, note: "DÉCISION du 23 octobre (v221) : le prudent prend la pente du médian."}
+  pente_phase_2: {valeur: {crise: reference, prudent: reference, median: vieillissement, optimiste: vieillissement}, unite: sans_unite, statut: SOURCE, source: "DG Trésor, modèle PROMEDE"}
   derniere_annee_phase_1: {valeur: 2035, unite: annee, statut: HYPOTHESE}
   montee_mesures: {valeur: {fraude: 4, carence: 1, transports: 2, cures: 1, imagerie: 5, conge_naissance: 1}, unite: sans_unite, statut: HYPOTHESE}
   options: {valeur: {carence_supplement: {montant: 0.45, comptee: 1}, franchises: {montant: 2.3, comptee: 0}, ald_non_exonerantes: {montant: 0.1, comptee: 0}}, unite: sans_unite, statut: SOURCE, source: "Options sourcées de la feuille Santé (lignes 59 à 61)"}
   hopitaux_administratifs: {valeur: {postes: 108602, cout_aligne: 42000}, unite: sans_unite, statut: HYPOTHESE}
-  forfait_generalistes: {valeur: {depense_am_2024: 8.3, revalorise_croissance: 1, part_perdue: {crise: null, prudent: 1, median: 0.5, optimiste: 0}}, unite: sans_unite, statut: HYPOTHESE}
+  forfait_generalistes: {valeur: {depense_am_2024: 8.3, revalorise_croissance: 1, part_perdue: {crise: 1, prudent: 1, median: 0.5, optimiste: 0}}, unite: sans_unite, statut: HYPOTHESE}
 tva_sante_long_terme:
   produits:
     valeur:
@@ -858,8 +858,8 @@ tva_sante_long_terme:
     statut: HYPOTHESE
   hausse_prix_tabac: {valeur: {prix_apres: 14.7, prix_avant: 12.54}, unite: sans_unite, statut: HYPOTHESE, note: "Écrit dans la formule Santé!B69."}
   elasticite_prix: {valeur: -0.5, unite: sans_unite, statut: HYPOTHESE}
-  vraie_baisse_consommation: {valeur: {crise: null, prudent: {tabac: 0.7, alcool: 0.9, sucres: 1}, median: {tabac: 0.85, alcool: 0.95, sucres: 1}, optimiste: {tabac: 1, alcool: 1, sucres: 1}}, unite: sans_unite, statut: HYPOTHESE}
-  annees_plein_effet: {valeur: {crise: null, prudent: 20, median: 15, optimiste: 10}, unite: sans_unite, statut: HYPOTHESE}
+  vraie_baisse_consommation: {valeur: {crise: {tabac: 0.7, alcool: 0.9, sucres: 1}, prudent: {tabac: 0.7, alcool: 0.9, sucres: 1}, median: {tabac: 0.85, alcool: 0.95, sucres: 1}, optimiste: {tabac: 1, alcool: 1, sucres: 1}}, unite: sans_unite, statut: HYPOTHESE}
+  annees_plein_effet: {valeur: {crise: 20, prudent: 20, median: 15, optimiste: 10}, unite: sans_unite, statut: HYPOTHESE}
 
 # --- Emploi : quatorze réformes (feuille Emploi) -------------------------------------
 # Colonnes de la v235 : crise (« ancien prudent »), médian, optimiste. Le prudent des effets macro
@@ -904,7 +904,7 @@ emploi:
     unite: sans_unite
     statut: HYPOTHESE
     note: Ljungqvist et Smolyansky (NBER w20753), Giroud et Rauh (JPE 2019) sourcés ; mobilité internationale = hypothèse à étayer.
-  gain_par_emploi: {valeur: {crise: null, prudent: 0.8, median: 0.9, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE, note: "Part des nouveaux emplois occupés par des personnes au RUI plein (Emploi!B238)."}
+  gain_par_emploi: {valeur: {crise: 0.7, prudent: 0.8, median: 0.9, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE, note: "Part des nouveaux emplois occupés par des personnes au RUI plein (Emploi!B238)."}
   aide_personne: {valeur: {retenue: 1, etp: {autonomie_direct: 60000, autonomie_saad: 104200, garde_domicile: 27000, assistantes_maternelles: 194000}}, unite: sans_unite, statut: SOURCE, source: "Cour des comptes (2026), Urssaf Stat'ur n° 405"}
   assistantes_maternelles: {valeur: {retenue: 1, part_etat_bas_revenu: 0.85, heures: 1037000000, part_heures_modestes: 0.28, cout_heure: 4.85, part_complement: 0.6}, unite: sans_unite, statut: SOURCE, source: "Urssaf, Caf, HCFEA ; part du complément 0,6 = hypothèse prudente"}
   creches: {valeur: {retenue: 1, places_psu: 419800, cout_psu: 19450, places_micro: 79300, cout_micro: 20729}, unite: sans_unite, statut: SOURCE, source: "Onape, édition 2025"}
@@ -917,13 +917,13 @@ logement_dynamique:
 
 # --- Hauts revenus et classes moyennes : réaction à l'impôt (feuille Hauts revenus) -----
 hauts_revenus:
-  elasticite_revenu: {valeur: {crise: null, prudent: 0.31, median: 0.2, optimiste: 0.1}, unite: sans_unite, statut: SOURCE, source: "Cabannes, Houdré et Landais, Économie et Statistique n° 467 (2014), 10 % du haut ; médian et optimiste : hypothèses"}
-  part_par_societe: {valeur: {crise: null, prudent: 0.25, median: 0.5, optimiste: 0.5}, unite: sans_unite, statut: HYPOTHESE}
-  regle_nordique: {valeur: {crise: null, prudent: 0.5, median: 0.7, optimiste: 0.8}, unite: sans_unite, statut: HYPOTHESE, note: "Part de ce qui passe par une société ramenée au barème (règle du dirigeant-actionnaire)."}
-  montee: {valeur: {crise: null, prudent: 3, median: 3, optimiste: 3}, unite: sans_unite, statut: HYPOTHESE}
-  reaction_capital_supplementaire: {valeur: {crise: null, prudent: 0, median: 0, optimiste: 0}, unite: sans_unite, statut: DECISION}
-  elasticite_croisee_travail: {valeur: {crise: null, prudent: 0.05, median: 0.03, optimiste: 0.03}, unite: sans_unite, statut: SOURCE, source: "Lefebvre, Lehmann et Sicsic, IZA DP n° 16112 (2023)"}
-  elasticite_classes_moyennes: {valeur: {crise: null, prudent: 0.05, median: 0.02, optimiste: 0}, unite: sans_unite, statut: HYPOTHESE, note: "Au-dessus de la valeur sourcée de 0,02 pour l'ensemble en prudent (audit)."}
+  elasticite_revenu: {valeur: {crise: 0.31, prudent: 0.31, median: 0.2, optimiste: 0.1}, unite: sans_unite, statut: SOURCE, source: "Cabannes, Houdré et Landais, Économie et Statistique n° 467 (2014), 10 % du haut ; médian et optimiste : hypothèses"}
+  part_par_societe: {valeur: {crise: 0.25, prudent: 0.25, median: 0.5, optimiste: 0.5}, unite: sans_unite, statut: HYPOTHESE}
+  regle_nordique: {valeur: {crise: 0.5, prudent: 0.5, median: 0.7, optimiste: 0.8}, unite: sans_unite, statut: HYPOTHESE, note: "Part de ce qui passe par une société ramenée au barème (règle du dirigeant-actionnaire)."}
+  montee: {valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}, unite: sans_unite, statut: HYPOTHESE}
+  reaction_capital_supplementaire: {valeur: {crise: 0, prudent: 0, median: 0, optimiste: 0}, unite: sans_unite, statut: DECISION}
+  elasticite_croisee_travail: {valeur: {crise: 0.05, prudent: 0.05, median: 0.03, optimiste: 0.03}, unite: sans_unite, statut: SOURCE, source: "Lefebvre, Lehmann et Sicsic, IZA DP n° 16112 (2023)"}
+  elasticite_classes_moyennes: {valeur: {crise: 0.08, prudent: 0.05, median: 0.02, optimiste: 0}, unite: sans_unite, statut: HYPOTHESE, note: "Au-dessus de la valeur sourcée de 0,02 pour l'ensemble en prudent (audit)."}
   classes_moyennes_bornes: {valeur: [24000, 95000], unite: eur_an, annee_euros: 2026, statut: HYPOTHESE}
 
 # --- Carbone dynamique (feuille Carbone) ---------------------------------------------
@@ -933,7 +933,7 @@ carbone:
   prix_option_2030: {valeur: 300, unite: eur_par_tco2, statut: DECISION}
   hausse_valeur_action_climat: {valeur: 0.032, unite: taux, statut: SOURCE, source: "Valeur de l'action pour le climat (rapport Quinet)"}
   part_accise_prix_final: {valeur: 0.35, unite: taux, statut: HYPOTHESE}
-  baisse_tendancielle_emissions: {valeur: {crise: null, prudent: -0.019, median: -0.018, optimiste: -0.0165}, unite: taux, statut: HYPOTHESE}
+  baisse_tendancielle_emissions: {valeur: {crise: -0.02, prudent: -0.019, median: -0.018, optimiste: -0.0165}, unite: taux, statut: HYPOTHESE}
   ets2: {valeur: {emissions_mt: 180, prix: 45, part_fonds_social: 0.187, dotation_france: 1.04}, unite: sans_unite, statut: SOURCE, source: "Directive ETS2 ; Fonds social pour le climat"}
   ets1_complement: {valeur: {active: 0, emissions_mt: 70, prix_quota: 75}, unite: sans_unite, statut: DECISION}
   dom: {valeur: {cout_regime_tva: 3, exonerer_vols: 1, preserver_fiscalite: 1, passagers_millions: 3.88, part_metropole: 0.8, distance_km: 7800, accise_aller_retour_ref: 370, distance_ref_km: 5840}, unite: sans_unite, statut: DECISION, note: "Accise par passager-km = 370 / (2 × 5 840), écrit dans la formule B42."}
@@ -949,7 +949,7 @@ is_investissement:
   part_payeurs_is: {valeur: 0.8, unite: taux, statut: HYPOTHESE}
   valeur_actuelle_amortissements: {valeur: 0.742, unite: taux, statut: SOURCE, source: "Tax Foundation, Capital Allowances in Europe (2024)"}
   taux_is_actuel: {valeur: 0.25, unite: taux, statut: SOURCE, source: "CGI, art. 219"}
-  part_investissement_concernee: {valeur: {crise: null, prudent: 0.6, median: 0.75, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE}
+  part_investissement_concernee: {valeur: {crise: 0.6, prudent: 0.6, median: 0.75, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE}
   interets: {valeur: {part_va: 0.04, ebe_2025: 497.5, taux_marge_2025: 0.322, part_sans_recette: 0.5, part_reactions: 0.2}, unite: sans_unite, statut: SOURCE, source: "OFCE (2025) d'après la Banque de France ; Insee, comptes de la Nation 2025 ; parts : hypothèses prudentes"}
 
 # --- Collectivités : besoin de recettes locales, impôt local unique (feuille Collectivités) ---
@@ -1049,3 +1049,11 @@ anciennes_pensions:
   part_reversion: {valeur: 0.088, unite: taux, statut: SOURCE, source: "DREES, fin 2023 (1 827 € bruts avec réversion)"}
   deciles_avec_reversion: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "v215 : les 6 premiers déciles reçoivent la réversion ; cela rend la distribution non monotone (décile 7 sous le décile 6)."}
   retraites_ancien_2029_millions: {valeur: [19.15, 19.3029, 19.4547, 19.6076, 19.7595, 19.9123, 20.0642, 20.217, 20.3699, 20.5218, 20.6746, 20.8265, 20.9794, 21.1312, 21.2841, 21.408, 21.5318, 21.6557, 21.7795, 21.9034, 22.0273, 22.1511, 22.275, 22.3989, 22.5227, 22.5216, 22.5205, 22.5193, 22.5182, 22.517, 22.5159, 22.5148, 22.5136, 22.5125, 22.5114, 22.5102, 22.5091, 22.508, 22.5068, 22.5057, 22.5045, 22.5034, 22.5023, 22.5011, 22.5], unite: sans_unite, statut: SOURCE, source: "COR, retraités totaux 2029-2073 (Socle actuariel, ligne 82)"}
+
+# --- Scénario de crise : ce qui change hors des paramètres par scénario ---------------
+# Le calcul de crise remplace la colonne prudente par la colonne crise (feuille « Scénario de crise »),
+# applique ces deux valeurs, et prend pour emplois créés ceux du jeu de crise de la feuille Emploi
+# (Effets macro!B8 = RUI!B34) au lieu du milieu crise/médian.
+crise:
+  effort_2029_saisi: {valeur: 0.012, unite: taux, statut: HYPOTHESE, note: "En crise, Effets macro!B19 est saisi (1,2 point) au lieu d'être calculé."}
+  decote_participations: {valeur: 0.2, unite: taux, statut: HYPOTHESE, note: "Coût transition!I76 en crise."}

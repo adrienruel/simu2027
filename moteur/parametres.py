@@ -1,6 +1,7 @@
 """Chargement et validation du fichier de paramètres unique."""
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -84,11 +85,37 @@ class Parametres:
             par_scenario=par_scenario,
         )
 
+    # Colonne lue quand un module demande le prudent : « crise » pour le calcul du scénario de crise.
+    colonne_prudent: str = "prudent"
+    _surcharges: dict = {}
+    taux_local_copie: float | None = None
+
     def __getitem__(self, cle: str) -> Parametre:
         return self._p[cle]
 
     def val(self, cle: str, scenario: str = "prudent") -> Any:
+        if cle in self._surcharges:
+            return self._surcharges[cle]
+        if scenario == "prudent":
+            scenario = self.colonne_prudent
         return self._p[cle].pour(scenario)
+
+    def en_crise(self, comme_v235: bool = False) -> "Parametres":
+        """Copie pour le calcul de crise : la v235 recopie les valeurs de crise dans la colonne prudente,
+        recalcule, puis lit le bloc prudent. On fait de même, sans toucher au fichier de paramètres.
+
+        comme_v235 : reproduit aussi le défaut de la v235, dont les feuilles de salariés gardent le taux
+        d'impôt local recopié à la main (Collectivités!B91, point fixe du prudent) au lieu de le recalculer ;
+        sert au test de reproduction. Par défaut, le point fixe est recalculé avec les paramètres de crise.
+        """
+        c = copy.copy(self)
+        c.__dict__.pop("_cache", None)
+        c.__dict__.pop("_taux_local_force", None)
+        c.colonne_prudent = "crise"
+        c._surcharges = {"transition.decote_participations": self.val("crise.decote_participations")}
+        if comme_v235:
+            c.taux_local_copie = self.val("impot_local.taux_point_fixe")
+        return c
 
     def __iter__(self):
         return iter(self._p.values())

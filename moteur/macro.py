@@ -140,6 +140,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent se cale sur le médian
         sc = Scenario(s)
         eff = m("effort_2029", s) + traj_anc_2029 / pib0[2029] - p.val("macro.assouplissement_2029")
+        if s == "prudent" and p.colonne_prudent == "crise":
+            eff = p.val("crise.effort_2029_saisi")  # Effets macro!B19 saisi dans le scénario de crise
         erosion_taux = (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
         cout_capital = (((1 - s17 * isv["b18"]) / (1 - s17)) / ((1 - isv["b19"] * isv["b18"]) / (1 - isv["b19"])) - 1
                         - m("reduction_cout_capital_autres", s))

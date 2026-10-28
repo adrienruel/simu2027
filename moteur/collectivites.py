@@ -83,15 +83,28 @@ def taux_calcule(p: Parametres) -> float:
     return besoin(p)["total"] / p.val("collectivites_detail.assiette_revenus")
 
 
-def taux_impot_local(p: Parametres, tolerance: float = 1e-13, iterations_max: int = 50) -> float:
+def taux_impot_local(p: Parametres, salaries: bool = False, tolerance: float = 1e-13, iterations_max: int = 50) -> float:
     """Taux moyen de l'impôt local unique au point fixe (le taux finance le besoin qu'il influence).
 
     Valeur de départ : impot_local.taux_point_fixe. Le résultat est gardé sur l'objet de paramètres.
+    Si p.taux_local_copie est donné (reproduction de la v235), les feuilles de salariés (salaries=True)
+    lisent cette copie (Collectivités!B91) et les autres le taux calculé en un pas à partir d'elle (B32).
     """
     force = getattr(p, "_taux_local_force", None)
     if force is not None:
         return force
     cache = p.__dict__.setdefault("_cache", {})
+    copie = getattr(p, "taux_local_copie", None)
+    if copie is not None:
+        if salaries:
+            return copie
+        if "taux_local_un_pas" not in cache:
+            p._taux_local_force = copie
+            try:
+                cache["taux_local_un_pas"] = taux_calcule(p)
+            finally:
+                p._taux_local_force = None
+        return cache["taux_local_un_pas"]
     if "taux_local" in cache:
         return cache["taux_local"]
     x = p.val("impot_local.taux_point_fixe")
