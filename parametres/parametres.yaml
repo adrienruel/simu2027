@@ -773,3 +773,14 @@ clause:
   derniere_annee: {valeur: 2037, unite: annee, statut: DECISION, note: "Dernière année de la contribution et de la baisse du RUI ; l'étalement de la déduction, une fois déclenché, est définitif."}
   points_contribution_max: {valeur: 5, unite: sans_unite, statut: DECISION, note: "Sur les 10 points d'épargne obligatoire."}
   plancher_rui: {valeur: 651.69, unite: eur_mois, annee_euros: 2026, statut: DECISION, note: "RSA d'une personne seule en 2026."}
+
+# --- Trajectoire 2029-2073 : revalorisations (feuille Objectifs) ---------------------
+revalorisation:
+  pensions_sous_minimum_vieillesse: {valeur: true, unite: sans_unite, statut: DECISION}
+  part_pensions_sous_seuil: {valeur: 0.12, unite: taux, statut: HYPOTHESE}
+  rui_aah_socle_croissance: {valeur: true, unite: sans_unite, statut: DECISION, note: "Revalorisés du taux de croissance, sans l'inflation (règle d'Adrien)."}
+renouvelables:
+  soutien_budget_2026: {valeur: 9.06, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149"}
+  soutien_2029: {valeur: 10.67, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149 (prévision 2027, gardée en 2029 par prudence)"}
+  derniere_signature: {valeur: 2028, unite: annee, statut: DECISION}
+  duree_contrats: {valeur: 20, unite: sans_unite, statut: SOURCE, source: "Cour des comptes, mars 2026"}

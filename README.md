@@ -6,8 +6,9 @@ Cahier des charges : `Refonte_outil_de_simulation.md` (projet).
 ## Lancer
 
 ```
-pip install pyyaml pytest
+pip install pyyaml pytest openpyxl
 python -m pytest
+python -m moteur.simulation   # déficits des trois scénarios
 ```
 
 ## Organisation

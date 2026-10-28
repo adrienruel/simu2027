@@ -70,7 +70,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     pib0 = {t: pib_2026 * (1 + tend0) ** (t - 2029) for t in ANNEES}
     rec = recettes_nouveau_systeme(p)["total"] / 1e9
     part_budget = rec / pib_2026  # Total!F19
-    sp_hors = dict(zip(ANNEES, pv["solde_primaire_hors_macro"]["serie"]))
+    from .trajectoire_annuelle import postes
+    traj = postes(p, scenario_retenu)
+    sp_hors = {t: traj[t]["solde_primaire_hors_macro"] for t in ANNEES}
     transferts = dict(zip(ANNEES, pv["transferts_collectivites"]["serie"]))
     dette0 = pv["dette_depart"]["valeur"]
     infl = pv["inflation"]["valeur"]
@@ -102,10 +104,12 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     gain_etalement = {t: a - b for t, a, b in zip(ANNEES, etal["b41"], etal["b78"])}
     etalement_declenche = None
 
+    from .trajectoire_annuelle import _prov as tp
+    traj_anc_2029 = tp()["anciennes_pensions"]["serie"][0]
     out = {}
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent se cale sur le médian
         sc = Scenario(s)
-        eff = m("effort_2029", s) + pv["anciennes_pensions_2029"]["valeur"] / pib0[2029] - p.val("macro.assouplissement_2029")
+        eff = m("effort_2029", s) + traj_anc_2029 / pib0[2029] - p.val("macro.assouplissement_2029")
         erosion_taux = (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
         cout_capital = (((1 - s17 * isv["b18"]) / (1 - s17)) / ((1 - isv["b19"] * isv["b18"]) / (1 - isv["b19"])) - 1
                         - m("reduction_cout_capital_autres", s))

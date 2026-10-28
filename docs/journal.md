@@ -44,7 +44,16 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Entrées encore provisoires (`reference/entrees_provisoires_macro.json`) : emplois et gain par emploi (Emploi), réactions à l'impôt (Hauts revenus), écarts de santé, carbone dynamique, logement, IS investissement, dette de départ et transferts aux collectivités (Calendrier), solde primaire hors effets macro (Trajectoire, lignes 18 à 22 et 43).
 - Mise en garde de méthode : en lisant des formules tronquées à l'affichage, j'ai cru un moment que le médian et l'optimiste omettaient le carbone ; la formule complète les inclut. Les constats du journal ont été revérifiés sur formules complètes.
 
+## 29 octobre 2026 — Chaîne complète : budget statique → trajectoire → effets macro → déficit
+
+- Lignes 17 à 22 et 43 de la Trajectoire reproduites (`moteur/trajectoire_annuelle.py`) ; le solde primaire hors effets macro est désormais calculé, plus lu dans la v235.
+- `python -m moteur.simulation` donne les déficits des trois scénarios et le prudent avant clause, identiques à la v235.
+- Entrées encore provisoires pour la trajectoire (`reference/entrees_provisoires_trajectoire.json`) : santé année par année, anciennes pensions, successions, ascenseur social, économies, coût des réformes de l'emploi, RUI des étudiants.
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Revalorisation des pensions sous le minimum vieillesse** (Objectifs!B16) : exposant compté depuis 2028, alors que tout le reste part de 2029 ; une année de croissance en plus dès 2029.
+
 
 - **Coût du capital (Effets macro!B273:D273)** : trois constantes sans libellé retranchées dans les formules (0,047 / 0,055 / 0,121 selon le scénario).
 - **« Prudent avant clause »** : c'est le déficit d'une seule année sans les mesures, avec la dette et les intérêts de la trajectoire après clause, pas une trajectoire entière sans clause. L'écart s'accumule : la vraie trajectoire sans clause est un peu plus haute que ces chiffres.
