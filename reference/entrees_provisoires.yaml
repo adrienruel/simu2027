@@ -1,11 +1,5 @@
 # Valeurs de la v235 utilisées en attendant le portage de leur feuille.
 # Chaque entrée disparaît quand son module est écrit ; le test associé la remplace.
-cout_transition_moyen:
-  cellule: Coût transition!B55
-  valeur: 132.911922023133
-ia_administration_moyenne:
-  cellule: IA administration!E59
-  valeur: 5.31782709405686
 quotient_familial:
   cellule: Total!B122
   valeur: 25.210241354476

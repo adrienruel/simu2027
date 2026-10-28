@@ -521,7 +521,15 @@ ia:
     valeur: {education_nationale: 1060503, interieur: 304040, armees: 270554, economie_finances: 126000, justice: 94698, ecologie_territoires: 36000, agriculture: 30000, affaires_etrangeres: 13600, travail_sante_solidarites: 13000, premier_ministre: 10000, culture: 9000}
     unite: sans_unite
     statut: HYPOTHESE
-    note: Effectifs par ministère (IA ministères B11:B21), à sourcer.
+    note: ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite.
+  part_gestion:
+    valeur: {education_nationale: 0.08, interieur: 0.15, armees: 0.1, economie_finances: 0.6, justice: 0.2, ecologie_territoires: 0.5, agriculture: 0.4, affaires_etrangeres: 0.4, travail_sante_solidarites: 0.6, premier_ministre: 0.5, culture: 0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Part des effectifs en gestion et support (IA ministères C11:C21).
+  departs_retraite_annuels: {valeur: 0.03, unite: taux, statut: HYPOTHESE}
+  part_departs_non_remplaces: {valeur: 1.0, unite: taux, statut: DECISION, note: "DÉCISION du 16 octobre 2026 (v185)."}
+  premiere_annee: {valeur: 2028, unite: annee, statut: DECISION}
 rui_complements:
   enfants: {valeur: 11500000, unite: sans_unite, statut: HYPOTHESE}
   part_enfant: {valeur: 0.15, unite: taux, statut: DECISION}
@@ -538,3 +546,23 @@ budget_statique:
   charge_dette_statique: {valeur: 60, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE}
   economies_supplementaires: {valeur: {operateurs: 2, audiovisuel: 2}, unite: sans_unite, statut: DECISION, note: "Md€ (Total B97:B102)."}
   concours_outre_mer: {valeur: {montant: 54.7, part: 0.05}, unite: sans_unite, statut: DECISION, note: "Budget État D113."}
+
+# --- Transition des retraites (feuilles Socle actuariel, Coût transition, Pénibilité) ---
+transition:
+  salaires_quintiles: {valeur: [21994, 28168, 33044, 38790, 53921], unite: eur_an, annee_euros: 2026, statut: HYPOTHESE, note: "Socle actuariel E6:I6, nature (net ou coût) à préciser."}
+  age_debut_carriere: {valeur: 22, unite: sans_unite, statut: HYPOTHESE}
+  taux_remboursement: {valeur: 0.35, unite: taux, statut: DECISION, note: "DÉCISION du 22 octobre 2026 (v217)."}
+  taux_implicite_fichier_source: {valeur: 0.4793, unite: taux, statut: HYPOTHESE, note: "Taux du fichier de cohortes d'origine ; les remboursements par actif sont ramenés à 35 % par ce rapport."}
+  participations_etat: {valeur: 150, unite: md_eur, annee_euros: 2026, statut: DECISION}
+  decote_participations: {valeur: 0.1, unite: taux, statut: HYPOTHESE, note: "Prudent, v214."}
+  rendement_dividendes_perdu: {valeur: 0.0206, unite: taux, statut: HYPOTHESE}
+  delai_paiement_titres: {valeur: 0, unite: sans_unite, statut: DECISION}
+  hautes_pensions:
+    valeur: {retraites_millions: 17.3, part_3000: 0.08, part_5000: 0.0112, pareto: 3.85, seuil_1: 3000, taux_1: 0.05, seuil_2: 5000, taux_2: 0.05}
+    unite: sans_unite
+    statut: SOURCE
+    source: DREES fin 2023 (part au-dessus de 3 000 €) ; loi de Pareto ; barème « doux » décidé
+penibilite:
+  part_concernes: {valeur: 0.1, unite: taux, statut: HYPOTHESE}
+  avance_annees: {valeur: 2, unite: sans_unite, statut: DECISION, note: "Plafond actuel du C2P."}
+  hausse_socle_mensuelle: {valeur: 20, unite: eur_mois, annee_euros: 2026, statut: HYPOTHESE}

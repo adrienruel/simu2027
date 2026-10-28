@@ -15,7 +15,8 @@ from ..recettes import tva_menages
 from ..recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
 from ..epargne import part_rui_salarie
 from ..recettes.independants import classes as classes_independants
-from . import budget_etat
+from . import budget_etat, ia_administration
+from ..retraites_transition import cout_transition_moyen
 
 MD = 1e9
 PROVISOIRES = Path(__file__).resolve().parents[2] / "reference" / "entrees_provisoires.yaml"
@@ -118,8 +119,8 @@ def depenses(p: Parametres, scenario: str = "prudent") -> dict:
         "sante": sante_statique(p),
         "retraites_socle": p.val("budget_statique.retraites_socle"),
         "rui_aah": rui_aah(p, scenario),
-        "cout_transition_moyen": provisoire("cout_transition_moyen"),
-        "ia_administration": -provisoire("ia_administration_moyenne"),
+        "cout_transition_moyen": cout_transition_moyen(p),
+        "ia_administration": -ia_administration.economie_moyenne(p),
         "economies_supplementaires": -sum(p.val("budget_statique.economies_supplementaires").values()),
         "autres_missions": b["Autres"] + p.val("budget_statique.concours_outre_mer")["montant"] * p.val("budget_statique.concours_outre_mer")["part"],
         "collectivites": sum(p.val("collectivites.besoin_financement_2024")) * (1 - p.val("collectivites.part_financee")) * facteur(p, 2024, "recettes"),

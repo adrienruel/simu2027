@@ -153,3 +153,38 @@ def test_lignes_depenses(ligne, cible):
 def test_depenses_totales_total_b44():
     """Avec quatre termes encore provisoires (coût de transition, IA, économies des missions, quotient familial)."""
     assert st.depenses(P)["total"] == pytest.approx(1217.58240587589, abs=0.01)
+
+
+# --- Transition des retraites et IA ---------------------------------------------
+from moteur import retraites_transition as rt
+from moteur.depenses import ia_administration as iam
+import sys as _sys
+_sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parents[1] / "outils"))
+
+
+def _serie(feuille, colonne, ligne0):
+    from arbre import VAL
+    return [VAL[(feuille, f"{colonne}{ligne0 + i}")] for i in range(45)]
+
+
+def test_cout_transition_par_annee():
+    """Coût transition!F5:F49 (coût net lissé), 2029-2073."""
+    c = rt.cout_transition(P)
+    for an, cible in zip(rt.ANNEES, _serie("Coût transition", "F", 5)):
+        assert c[an]["net"] == pytest.approx(cible, abs=0.01), an
+
+
+def test_participations_remises_au_fonds_v235():
+    c = rt.cout_transition(P)
+    for an, cible in zip(rt.ANNEES, _serie("Coût transition", "V", 5)):
+        assert c[an]["participations"] == pytest.approx(cible, abs=0.01), an
+
+
+def test_cout_transition_moyen():
+    assert rt.cout_transition_moyen(P) == pytest.approx(132.911922023133, abs=0.01)
+
+
+def test_ia_administration():
+    e = iam.economie_nette(P)
+    for an, cible in zip(iam.ANNEES, _serie("IA administration", "E", 13)):
+        assert e[an] == pytest.approx(cible, abs=0.01), an
