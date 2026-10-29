@@ -32,6 +32,7 @@ LIBELLES_CANAUX = {
     "carbone": "Carbone",
     "eviction_epargne": "Éviction de l'épargne volontaire",
     "clause": "Clause de trajectoire",
+    "demographie": "Démographie (écart au prudent)",
 }
 
 POSTES = [("recettes", "Recettes"), ("sante", "Santé"), ("retraites", "Retraites"), ("rui_aah", "RUI et AAH"),
@@ -133,6 +134,19 @@ def donnees(p: Parametres | None = None) -> dict:
                        "canal": x["canal"], "crise": round(x["emplois_crise"]), "prudent": round(x["emplois_prudent"]),
                        "median": round(x["emplois_median"]), "optimiste": round(x["emplois_optimiste"]),
                        "gain": round(x["gain_par_emploi"]), "solde": round(x["solde_md"], 2)} for x in tableau_emploi(p)]
+    from . import demographie as demo_m
+    population = None
+    if p.val("demographie.active"):
+        jalons = [2029, 2037, 2050, 2060, 2073]
+        population = {"jalons": jalons, "ecart_soutien": round(demo_m.ecart_soutien_enfant(p)),
+                      "effet_naissances": {j: round(100 * demo_m.effet_naissances(p, j), 1) for j in ("crise", "prudent", "optimiste")},
+                      "scenarios": {}}
+        for j in ("crise", "prudent", "optimiste"):
+            e = demo_m.effectifs(p, j)
+            population["scenarios"][j] = {k: [round(e[t][k] / 1e6, 2) for t in jalons] for k in ("emploi", "enfants", "seniors", "total")}
+        import csv as _csv
+        with (demo_m.DONNEES / "valeur_enfant_2026.csv").open(encoding="utf-8") as fe:
+            population["valeur_enfant"] = [{k: (v if k == "menage" else float(v)) for k, v in l.items()} for l in _csv.DictReader(fe)]
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))
@@ -150,6 +164,7 @@ def donnees(p: Parametres | None = None) -> dict:
         "menages": menages,
         "emploi_mesures": emploi_mesures,
         "retraites_futurs": retraites_futurs,
+        "population": population,
         "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts), "sensibilite": sensibilite, "corriges": corriges,
                        "hypotheses_par_groupe": groupes.most_common()},
     }

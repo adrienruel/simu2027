@@ -74,6 +74,13 @@ def sante_statique(p: Parametres) -> float:
             + autonomie(p) - economies_sante_a_terme(p, "prudent") - economie_hopitaux(p) + securite_sociale(p)[1])
 
 
+def rui_enfants(p: Parametres) -> float:
+    """Part de la ligne 42 versée pour les enfants (compléments de RUI, Md€)."""
+    rui = p.val("rui.montant") * 12
+    return (p.val("rui_complements.enfants") * p.val("rui_complements.part_enfant")
+            + p.val("rui_complements.enfants_parent_isole") * p.val("rui_complements.part_enfant_parent_isole")) * rui / MD
+
+
 def rui_aah(p: Parametres, scenario: str = "prudent") -> float:
     """Ligne 42 (Md€) : RUI de toutes les populations + AAH."""
     rui = p.val("rui.montant") * 12

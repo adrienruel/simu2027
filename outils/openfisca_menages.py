@@ -32,14 +32,15 @@ def _cout_en_brut(cout: float, table: list[dict]) -> float:
 from moteur.menages_types import couts_adultes, pensions_adultes  # noqa: E402
 
 
-def calculer(annee: int = 2026) -> list[dict]:
+def calculer(annee: int = 2026, menages: list[dict] | None = None) -> list[dict]:
     from openfisca_core.simulation_builder import SimulationBuilder
     from openfisca_france import FranceTaxBenefitSystem
     from moteur.parametres import Parametres
     p = Parametres()
     from outils.openfisca_reforme import construire
     tbs = construire(FranceTaxBenefitSystem(), p)
-    menages = yaml.safe_load((RACINE / "parametres" / "menages_types.yaml").read_text(encoding="utf-8"))["menages"]
+    if menages is None:
+        menages = yaml.safe_load((RACINE / "parametres" / "menages_types.yaml").read_text(encoding="utf-8"))["menages"]
     with (RACINE / "parametres" / "donnees" / f"openfisca_prive_{annee}.csv").open(encoding="utf-8") as f:
         table = sorted(csv.DictReader(f), key=lambda l: float(l["cout_du_travail"]))
     an = str(annee)

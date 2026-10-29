@@ -79,11 +79,16 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     m = lambda cle, s: p.val(f"macro.{cle}", s)
     tend0 = m("tendance", "prudent")
     pib_2026 = 2920 * facteur(p, 2024, "recettes")  # Total!F18, Md€
-    pib0 = {t: pib_2026 * (1 + tend0) ** (t - 2029) for t in ANNEES}
+    from .demographie import indices as indices_demo
+    demo = {s_: indices_demo(p, s_) for s_ in SCENARIOS}  # « prudent » lit la colonne de crise dans le calcul de crise
+    pib0 = {t: pib_2026 * (1 + tend0) ** (t - 2029) * demo["prudent"][t]["emploi"] for t in ANNEES}
     rec = recettes_nouveau_systeme(p)["total"] / 1e9
     part_budget = rec / pib_2026  # Total!F19
     from .trajectoire_annuelle import postes
     traj = postes(p, scenario_retenu)
+    from .trajectoire_annuelle import lignes as lignes_traj
+    bases_demo = lignes_traj(p, scenario_retenu).bases_demographie
+    cle_indice = {"recettes": "emploi", "adultes": "adultes", "enfants": "enfants", "total": "total"}
     sp_hors = {t: traj[t]["solde_primaire_hors_macro"] for t in ANNEES}
     from .calendrier import dette_fin_2028, transferts_collectivites
     transferts = {t: transferts_collectivites(p) for t in ANNEES}
@@ -210,11 +215,15 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             k_inv = k_inv * (1 - m("usure_capital", s)) - m("elasticite_invest", s) * (
                 cout_capital - isv["b4"] * isv["b20"][s] * isv["b21"] * l25[t]) * isv["investissement"] * _montee(t, m("montee_invest", s))
             pib_inv = k_inv * (m("pib_par_euro_capital", s) + m("usure_capital", s))
+            # Démographie : écart au prudent (fécondité et effet sur la natalité du scénario)
+            dp, ds = demo["prudent"][t], demo[s][t]
+            pib_demo = pib0[t] * (ds["emploi"] / dp["emploi"] - 1)
+            s_demo = sum(b * (ds[cle_indice[k]] - dp[cle_indice[k]]) for k, b in bases_demo[t].items())
             # Totaux
-            pib = ((emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
+            pib = (pib_demo + (emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
                    + pib_tend + pib_ecole)
             q = p.val("macro.part_pib_tendanciel_au_solde")
-            solde = (s_emploi + s_aj + s_cap + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
+            solde = (s_demo + s_emploi + s_aj + s_cap + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
                      + (pib_ia + pib_adopt) * q)
             if s == "prudent":
                 solde += (sante["tva_prudent"][t] + pib_inv * part_budget + carbone["prudent"][t]
@@ -257,7 +266,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 "tendance_et_ecole": c_tend, "investissement_entreprises": pib_inv * part_budget,
                 "sante": c_sante + c_tva_sante, "carbone": c_carbone,
                 "eviction_epargne": (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n,
-                "clause": mesures,
+                "clause": mesures, "demographie": s_demo,
             }
             interets = taux_reel(t, s) * dette_prec
             solde_public = sp_hors[t] + solde_total - transferts[t] - interets
@@ -272,7 +281,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             sc.detail.setdefault("chomage", {})[t] = (p.val("inactifs.chomeurs_bit") - emp_ref
                                                         - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa
             # Année suivante : capital du fonds, part à l'étranger
-            capital = capital + b24 * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
+            capital = capital + b24 * ds["emploi"] * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
             if maastricht >= etr["solde_minimum"]:
                 part_etr = max(part_etr, min(etr["plafond"], etr["depart"] + (etr["plafond"] - etr["depart"]) * max(0, (etr["dette_debut"] - dette / pib_total) / (etr["dette_debut"] - etr["dette_plafond"]))))
             dette_prec = dette

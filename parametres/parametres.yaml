@@ -1139,3 +1139,30 @@ anciennes_pensions:
 crise:
   effort_2029_saisi: {valeur: 0.012, unite: taux, statut: HYPOTHESE, note: "En crise, Effets macro!B19 est saisi (1,2 point) au lieu d'être calculé."}
   decote_participations: {valeur: 0.2, unite: taux, statut: HYPOTHESE, note: "Coût transition!I76 en crise."}
+
+# --- Démographie (module de population annuel, 29 octobre 2026) -------------------------
+# Projections de population de l'Insee (juin 2026), par âge et par année ; taux d'emploi par âge ; effet du
+# programme sur la natalité. Voir moteur/demographie.py et docs/demographie.md.
+demographie:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Population mise à jour chaque année (Adrien, 29/10/2026). v235 : population figée en 2026, tout suit la tendance de 0,7 %."}
+  scenario_fecondite:
+    valeur: {crise: fec_basse, prudent: central, median: central, optimiste: fec_haute}
+    unite: sans_unite
+    statut: DECISION
+    source: "Insee, projections de population 2026-2070 (Insee Résultats et Insee Première n° 2108, 8 juin 2026) : central 1,45 enfant par femme dès 2028, solde migratoire +150 000 par an ; fécondité basse 1,20 ; haute 1,70"
+    note: "Correspondance proposée le 29/10/2026 et validée par Adrien (« Go »)."
+  fecondite_variantes: {valeur: {fec_basse: 1.20, central: 1.45, fec_haute: 1.70}, unite: sans_unite, statut: SOURCE, source: "Insee, projections de population 2026 (Insee Première n° 2108)"}
+  taux_emploi_age:
+    valeur: {"15-24": 0.345, "25-49": 0.828, "50-54": 0.844, "55-59": 0.788, "60-64": 0.444, "65-69": 0.11, "70+": 0.0}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, Emploi selon le sexe et l'âge, 2025 (15-24 : 34,5 % ; 25-49 : 82,8 % ; 50-64 : 69,2 %) ; Dares et COR (rapport annuel juin 2026, partie 4, chapitre 1) : 55-59 : 78,8 % ; 60-64 : 44,4 % ; 65-69 : environ 11 %"
+    note: "50-54 ans calculé : 3 × 69,2 − 78,8 − 44,4 = 84,4 % (tranches de tailles voisines) ; recoupé : 84 % des personnes de 50 ans sont en emploi (COR). 70 ans ou plus : 0 (prudent, moins de 3 %). Taux figés à leur niveau de 2025 : la démographie seule fait varier l'emploi ; les hausses de l'emploi des seniors dues au programme sont comptées dans leurs mesures. La fin de la montée à 64 ans de la réforme de 2023 n'est pas comptée (prudent)."
+  natalite_semi_elasticite:
+    valeur: {crise: 0.02, prudent: 0.01, median: 0.01, optimiste: 0.005}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : allocation de naissance de 2 500 € en Espagne (2007-2010) : +3 % de naissances (González et Trommlerová, 2023), soit ≈ 2 % par 100 € par an d'enfance ; Israël, baisse de l'allocation de 150 shekels par mois (≈ 400 € par an) en 2003 : −7,5 % de fécondité (Cohen, Dehejia et Romanov, 2013) ; une grande part de ces effets est de calendrier (revue CFFP, Université de Sherbrooke, 2026)."
+    note: "Variation relative des naissances pour 100 € par an de soutien en plus par enfant. Crise : borne haute (l'effet le plus défavorable si le soutien baisse) ; prudent et médian : la moitié, effets de calendrier retirés ; optimiste : le quart."
+  natalite_montee: {valeur: 3, unite: sans_unite, statut: HYPOTHESE, note: "Années pour que l'effet sur les naissances soit plein, à partir de 2030 (premières naissances conçues sous le nouveau système)."}
+  creches_effet: {valeur: 0.0, unite: sans_unite, statut: HYPOTHESE, note: "La mesure finance par l'État les places existantes (Onape 2025) sans en créer : pas d'effet de l'offre de garde sur la natalité (+2,8 % de naissances pour 10 points de couverture en Allemagne, Bauernschuster, Hener et Rainer, 2016, si des places étaient créées)."}
