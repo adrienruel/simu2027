@@ -65,3 +65,21 @@ def test_baisse_du_rui_par_la_clause_respecte_le_plancher():
             # RUI réel de l'année (sans le surcroît de productivité, qui ne fait que l'augmenter)
             rui_t = P.val("rui.montant") * ((1 + g) / (1 + infl)) ** (t - 2029)
             assert c["rui_euros"] <= rui_t - plancher + 60, t
+
+
+def test_regle_automatique_vise_3_pour_cent():
+    """Règle permanente : quand ses instruments suffisent, le déficit publié du prudent ne dépasse pas 3 % ;
+    sinon, ils sont au maximum (5 points d'épargne, RUI au plancher)."""
+    from moteur.macro import calculer
+    sc = calculer(P)["prudent"]
+    for t, c in sc.detail["clause"].items():
+        if c["reste"] <= 1e-6:
+            assert -sc.maastricht[t] <= 0.03 + 1e-6, t
+        else:
+            assert c["points"] >= P.val("clause.points_contribution_max") - 1e-6, t
+
+
+def test_socle_supplementaire_quand_l_epargne_est_prise():
+    from moteur.retraites_transition import socle_supplementaire
+    assert socle_supplementaire(P, {}, 2060) == 0.0
+    assert socle_supplementaire(P, {t: 0.5 for t in range(2030, 2040)}, 2060) > 0

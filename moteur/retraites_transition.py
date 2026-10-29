@@ -68,6 +68,37 @@ def survivants(p: Parametres, g: dict, an: int) -> float:
     return g["population_2026"] * survie(p, g["age_2029"], age)
 
 
+def socle_supplementaire(p: Parametres, part_prelevee: dict[int, float], an: int) -> float:
+    """Socle en plus (Md€ de 2026, avant revalorisation) l'année an, quand une part de l'épargne obligatoire a été
+    versée à l'État certaines années (part_prelevee : année → part des 10 points) : les générations concernées ont
+    moins de capital à 67 ans, donc un socle plus élevé (relecture du 29/10/2026)."""
+    if not any(v > 0 for v in part_prelevee.values()):
+        return 0.0
+    r = p.val("epargne.rendement_fonds")
+    rev = revenu_par_euro_de_capital(p)
+    emploi = p.val("epargne.taux_emploi_carriere")
+    socle, seuil = p.val("retraites.socle_plein") * 12, p.val("retraites.rente_annulant_socle") * 12
+    ratio = p.val("transition.taux_remboursement") / p.val("transition.taux_implicite_fichier_source")
+    acces = p.val("epargne.age_acces_socle")
+    total = 0.0
+    for c in _csv("cohortes_2029.csv"):
+        depart = int(2029 + acces - c["age_2029"])
+        if depart > an:
+            continue
+        annees = acces - max(c["age_2029"], p.val("transition.age_debut_carriere"))
+        f = ((1 + r) ** annees - 1) / r
+        perte = sum(v * (1 + r) ** (depart - 1 - y) for y, v in part_prelevee.items() if y < depart)
+        if perte <= 0:
+            continue
+        ecart = 0.0
+        for q in p.val("transition.salaires_quintiles"):
+            a = taux_epargne_net(q, p) * q * emploi
+            capital = a * f + c["remboursement_par_actif"] * ratio * emploi
+            ecart += socle * (max(0.0, 1 - (capital - a * perte) * rev / seuil) - max(0.0, 1 - capital * rev / seuil))
+        total += survivants(p, c, an) * ecart / len(p.val("transition.salaires_quintiles"))
+    return total / 1e9
+
+
 def _attente(p: Parametres) -> tuple[dict, float, float, float]:
     a = p.val("retraites.attente_age_legal_67")
     legal = p.val("ancien_systeme.age_legal")["programme"]

@@ -226,12 +226,12 @@ retraites:
     statut: DECISION
     note: "DÉCISION d'Adrien du 29/10/2026 : 1 200 € (avant : 1 300 €)."
   attente_age_legal_67:
-    valeur: {active: true, part_annuites_completes: 0.9}
+    valeur: {active: true, part_annuites_completes: 0.0}
     v235: {active: false, part_annuites_completes: 0.9}
     unite: sans_unite
     statut: DECISION
     source: "Encadrement de la part : DREES, Les retraités et les retraites 2025, fiche 16 : 7 % d'une génération partent à 67 ans (âge du taux plein automatique, faute de trimestres)"
-    note: "DÉCISION d'Adrien du 29/10/2026 : entre l'âge légal (65 ans) et 67 ans, une personne sans emploi touche le socle si elle a ses annuités, le RUI sinon. S'applique au nouveau système (générations de 22 à 49 ans en 2029, de 65 à 66 ans) et aux personnes de l'ancien système dont le départ est reporté de 64 à 65 ans. Part avec les annuités complètes : 90 % (hypothèse ; plus elle est haute, plus le coût est élevé, le socle étant au-dessus du RUI). Point relevé par la relecture du 29/10/2026 (le modèle ne versait rien entre l'âge légal et 67 ans)."
+    note: "DÉCISION d'Adrien du 29/10/2026 (révisée le même jour) : le socle n'est versé qu'à 67 ans ; entre l'âge légal (65 ans) et 67 ans, une personne sans emploi touche le RUI ; si elle a ses annuités, elle peut en plus tirer la rente de son épargne (son capital, sans coût pour l'État ; prudent : le RUI n'est pas réduit par cette rente). Part avec socle anticipé : 0. Première version (remplacée) : socle si annuités, RUI sinon. S'applique au nouveau système (générations de 22 à 49 ans en 2029, de 65 à 66 ans) et aux personnes de l'ancien système dont le départ est reporté de 64 à 65 ans. Part avec les annuités complètes : 90 % (hypothèse ; plus elle est haute, plus le coût est élevé, le socle étant au-dessus du RUI). Point relevé par la relecture du 29/10/2026 (le modèle ne versait rien entre l'âge légal et 67 ans)."
   rente_annulant_socle:
     valeur: 2500
     unite: eur_mois
@@ -868,7 +868,9 @@ macro:
 # --- Clause de trajectoire (DÉCISION du 23 octobre 2026, v221) ---------------------
 clause:
   active: {valeur: true, unite: sans_unite, statut: DECISION, note: "Clause de trajectoire appliquée au prudent. Désactivée pour l'attribution par mesure, où elle masquerait l'effet de chaque mesure."}
-  derniere_annee: {valeur: 2037, unite: annee, statut: DECISION, note: "Dernière année de la contribution et de la baisse du RUI ; l'étalement de la déduction, une fois déclenché, est définitif."}
+  derniere_annee: {valeur: 2073, v235: 2037, unite: annee, statut: DECISION, note: "Dernière année de la contribution et de la baisse du RUI ; l'étalement de la déduction, une fois déclenché, est définitif. DÉCISION d'Adrien du 29/10/2026 : règle permanente (v235 : 2037)."}
+  ordre: {valeur: [contribution, rui], unite: sans_unite, statut: DECISION, note: "Ordre des instruments de la règle après l'étalement de la déduction : contribution (points d'épargne obligatoire versés à l'État, jusqu'au maximum) puis baisse du RUI (jusqu'au plancher). Ordre de la v221."}
+  cible: {valeur: 0.03, v235: median, unite: taux, statut: DECISION, note: "Déficit visé par la règle : 3 % du PIB (DÉCISION d'Adrien du 29/10/2026, règle automatique au lieu d'une clause temporaire calée sur le médian ; la relecture relevait que viser le médian faisait publier le médian). v235 : déficit du scénario médian."}
   points_contribution_max: {valeur: 5, unite: sans_unite, statut: DECISION, note: "Sur les 10 points d'épargne obligatoire."}
   plancher_rui: {valeur: 651.69, unite: eur_mois, annee_euros: 2026, statut: DECISION, note: "RSA d'une personne seule en 2026."}
 

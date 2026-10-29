@@ -168,6 +168,14 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Règle automatique à 3 % ; socle à 67 ans
+
+- Décisions d'Adrien : socle seulement à 67 ans (RUI entre l'âge légal et 67 ans, rente de son épargne possible en plus) ; règle automatique permanente visant 3 % de déficit au lieu de la clause temporaire calée sur le médian (`clause.cible`, `clause.derniere_annee` = 2073, `clause.ordre`).
+- Refusés par Adrien : capitalisation plus progressive (perte de capacité d'investissement), remboursement réduit (injuste pour la génération qui paie les deux systèmes).
+- Ajouté : socle en plus des générations dont l'épargne est prise par la règle (moins de capital à 67 ans) ; capacité de la règle proportionnelle aux actifs.
+- Constat : sans la clause, le prudent est à 12,8 % de déficit et 270 % de dette en 2073 ; la clause de la v235 reposait déjà sur 5 points d'épargne pris de 2031 à 2037.
+- Prudent publié avec la règle : 3,43 % (2029), 3,52 % (2037), 3,24 % (2050), excédent en 2073, dette 104 % ; la règle prend 5 points d'épargne presque chaque année jusqu'en 2050 et baisse le RUI de 141 € en 2030. Crise : 6 % en 2073, dette 182 %.
+
 ## 29 octobre 2026 — Attente entre l'âge légal et 67 ans ; recette carbone ; génération 1979
 
 - Décision d'Adrien : entre l'âge légal et 67 ans, socle si annuités complètes (90 %), RUI sinon ; pour le nouveau système et les reportés de l'ancien.

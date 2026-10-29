@@ -146,6 +146,14 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     from .anciennes_pensions import recette_nette
     traj_anc_2029 = recette_nette(p)[2029]
     tva_point = tva_par_point_eviction(p)
+    from .retraites_transition import socle_supplementaire
+
+    def reval_socle(t):
+        if not p.val("revalorisation.rui_aah_socle_croissance"):
+            return 0.0
+        n_ = t - 2029
+        prod_ = (1 + m("productivite", "prudent")) ** max(0, min(m("annees_productivite", "prudent"), t - p.val("macro.premiere_annee_productivite") + 1))
+        return ((1 + tend0) / (1 + infl)) ** n_ * prod_ - 1
     out = {}
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent se cale sur le médian
         sc = Scenario(s)
@@ -169,6 +177,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         dette_prec = dette0
         corr = p.val("macro.corrections_relecture")
         hist_rui = {}  # baisses du RUI décidées par la clause (Md€), pour leur effet récessif
+        part_prelevee = {}  # part des 10 points d'épargne versée à l'État par la clause, par année
         prime_app = 0.0  # prime de taux liée à la dette, sur le taux apparent
         ratio_ref = None
         r_ecole = r_ia = r_adopt = 0.0
@@ -263,30 +272,44 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             if s == "prudent":
                 solde += (sante["tva_prudent"][t] + inv_taxe + carbone["prudent"][t]
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
-                # Clause de trajectoire : ramène le prudent sur le déficit du médian
+                if corr:  # socle en plus des générations dont l'épargne a été prise par la clause les années passées
+                    solde -= socle_supplementaire(p, part_prelevee, t) * (1 + reval_socle(t))
+                # Clause de trajectoire : ramène le prudent sur le déficit du médian (ou sous un seuil fixe)
                 interets_t = (taux_reel(t, s) + prime_app) * dette_prec
                 pib_t = pib0[t] + pib
                 avant = -(sp_hors[t] + solde - transferts[t] - interets_t - infl * dette_prec) / pib_t
-                ecart = max(0.0, avant - (-out["median"].maastricht[t])) if p.val("clause.active") else 0.0
+                cible = p.val("clause.cible")
+                cible = -out["median"].maastricht[t] if cible == "median" else cible
+                ecart = max(0.0, avant - cible) if p.val("clause.active") else 0.0
                 montant = ecart * pib_t
                 if etalement_declenche is None:
                     etalement_declenche = 1.0 if ecart > 0 else 0.0
                 c_etal = etalement_declenche * gain_etalement[t]
                 actif = t <= p.val("clause.derniere_annee")
-                cap_point = flux_epargne / 10 * (1 + tend0) ** n
-                c_contrib = max(0.0, min(montant - c_etal, cap_point * p.val("clause.points_contribution_max"))) if actif else 0.0
+                cap_point = flux_epargne / 10 * (1 + tend0) ** n * (ds["emploi"] if corr else 1.0)
                 cap_rui = rui_total / p.val("rui.montant") * 10 * (1 + tend0) ** n
                 if corr:  # marge jusqu'au plancher, sur le RUI réel de l'année (non indexé sur l'inflation)
                     prod_t = (1 + m("productivite", s)) ** max(0, min(m("annees_productivite", s), t - p.val("macro.premiere_annee_productivite") + 1))
                     reval_t = ((1 + tend0) / (1 + infl)) ** n * prod_t
                     rui_t = p.val("rui.montant") * reval_t
                     base_rui = rui_total * reval_t * demo["prudent"][t]["adultes"]
-                    c_rui = max(0.0, min(montant - c_etal - c_contrib, base_rui * max(0.0, 1 - p.val("clause.plancher_rui") / rui_t))) if actif else 0.0
+                    marge_rui = base_rui * max(0.0, 1 - p.val("clause.plancher_rui") / rui_t)
                     cap_rui = base_rui / rui_t * 10  # pour le détail : Md€ par tranche de 10 € de RUI
                 else:
-                    c_rui = max(0.0, min(montant - c_etal - c_contrib, cap_rui * (p.val("rui.montant") - p.val("clause.plancher_rui")) / 10)) if actif else 0.0
+                    marge_rui = cap_rui * (p.val("rui.montant") - p.val("clause.plancher_rui")) / 10
+                marge_contrib = cap_point * p.val("clause.points_contribution_max")
+                reste_a_couvrir = max(0.0, montant - c_etal) if actif else 0.0
+                c_contrib = c_rui = 0.0
+                for instrument in p.val("clause.ordre"):
+                    if instrument == "contribution":
+                        c_contrib = min(reste_a_couvrir, marge_contrib)
+                        reste_a_couvrir -= c_contrib
+                    elif instrument == "rui":
+                        c_rui = min(reste_a_couvrir, marge_rui)
+                        reste_a_couvrir -= c_rui
                 mesures = c_etal + c_contrib + c_rui
                 hist_rui[t] = c_rui
+                part_prelevee[t] = (c_contrib / cap_point / 10) if cap_point else 0.0
                 sc.detail.setdefault("clause", {})[t] = {"avant": avant, "etalement": c_etal, "contribution": c_contrib,
                                                          "points": c_contrib / cap_point if cap_point else 0.0,
                                                          "rui": c_rui, "rui_euros": c_rui / cap_rui * 10 if cap_rui else 0.0,
