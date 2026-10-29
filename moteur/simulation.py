@@ -50,7 +50,7 @@ def simuler(p: Parametres | None = None, scenario_retenu: str = "prudent", crise
         pc = p.en_crise()
         out["crise"] = _bloc(calculer(pc, scenario_retenu)["prudent"], postes(pc, scenario_retenu), True, transferts_collectivites(pc))
     for s in SCENARIOS:
-        out[s] = _bloc(macro[s], traj, s == "prudent", transferts_collectivites(p))
+        out[s] = _bloc(macro[s], traj, "clause" in macro[s].detail, transferts_collectivites(p))
     return out
 
 
@@ -58,7 +58,7 @@ def resume(res: dict, annees=(2029, 2032, 2037)) -> str:
     lignes = ["Déficit au sens de Maastricht (% du PIB)"]
     for s in [x for x in ORDRE if x in res]:
         lignes.append(f"  {s:<10}" + "  ".join(f"{t} : {res[s][t]['deficit']:.2f}" for t in annees))
-    for s in [x for x in ("crise", "prudent") if x in res]:
+    for s in [x for x in ORDRE if x in res and "deficit_avant_clause" in res[x][2029]]:
         lignes.append(f"  {s} avant clause " + "  ".join(f"{t} : {res[s][t]['deficit_avant_clause']:.2f}" for t in annees))
     return "\n".join(lignes)
 

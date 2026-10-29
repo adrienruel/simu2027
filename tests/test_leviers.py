@@ -73,7 +73,7 @@ def test_regle_automatique_vise_3_pour_cent():
     from moteur.macro import calculer
     sc = calculer(P)["prudent"]
     for t, c in sc.detail["clause"].items():
-        if c["reste"] <= 1e-6:
+        if c["non_couvert"] <= 1e-6:
             assert -sc.maastricht[t] <= 0.03 + 1e-6, t
         else:
             assert c["points"] >= P.val("clause.points_contribution_max") - 1e-6, t

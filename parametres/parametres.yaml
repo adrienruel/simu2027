@@ -869,6 +869,7 @@ macro:
 # --- Clause de trajectoire (DÉCISION du 23 octobre 2026, v221) ---------------------
 clause:
   active: {valeur: true, unite: sans_unite, statut: DECISION, note: "Clause de trajectoire appliquée au prudent. Désactivée pour l'attribution par mesure, où elle masquerait l'effet de chaque mesure."}
+  scenarios: {valeur: [prudent, median, optimiste], v235: [prudent], unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : même point de départ pour tous les scénarios. La règle s'applique aussi au médian et à l'optimiste (déficit ramené à la cible, puis sortie de la règle quand le déficit sans règle passe dessous) ; chaque scénario est publié avec et sans règle. v235 : prudent seul. Le scénario de crise est le prudent calculé avec les valeurs de crise : il a la règle."}
   derniere_annee: {valeur: 2073, v235: 2037, unite: annee, statut: DECISION, note: "Dernière année de la contribution et de la baisse du RUI ; l'étalement de la déduction, une fois déclenché, est définitif. DÉCISION d'Adrien du 29/10/2026 : règle permanente (v235 : 2037)."}
   restitution:
     valeur: {active: true, debut: 2029}
