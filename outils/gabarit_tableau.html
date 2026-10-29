@@ -139,11 +139,15 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
 
   <section class="bloc" aria-labelledby="t-deficit">
     <div class="bloc-tete">
-      <h2 id="t-deficit">Déficit public, en % du PIB</h2>
+      <h2 id="t-deficit">Solde public, en % du PIB</h2>
       <div class="commandes">
+        <div class="segments" role="group" aria-label="Période">
+          <button type="button" id="b-2050" aria-pressed="true">2029-2050</button>
+          <button type="button" id="b-2073" aria-pressed="false">2029-2073</button>
+        </div>
         <div class="segments" role="group" aria-label="Clause de trajectoire">
           <button type="button" id="b-apres" aria-pressed="true">Après clause</button>
-          <button type="button" id="b-avant" aria-pressed="false">Avec l'avant-clause</button>
+          <button type="button" id="b-avant" aria-pressed="false">Avant et après clause</button>
         </div>
       </div>
     </div>
@@ -151,7 +155,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       <div class="legende" id="leg-deficit"></div>
       <div id="g-deficit"></div>
     </div>
-    <p class="note">La clause de trajectoire ramène le prudent (et la crise) sur le déficit du médian, par l'étalement de la déduction, la contribution de transition (jusqu'à 5 points) puis une baisse du RUI. Les traits pointillés montrent le déficit avant la clause : c'est là que se voit l'écart entre les hypothèses.</p>
+    <p class="note">Sous zéro, l'État est en déficit ; au-dessus, en excédent. La ligne pointillée rouge marque un déficit de 3 % du PIB. La clause de trajectoire ramène le prudent (et la crise) sur le déficit du médian, par l'étalement de la déduction, la contribution de transition (jusqu'à 5 points) puis une baisse du RUI. Les traits pointillés montrent le déficit avant la clause : c'est là que se voit l'écart entre les hypothèses.</p>
   </section>
 
   <div class="grille-2">
@@ -252,14 +256,21 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     const g = el("g", { class: "grille" }, svg);
     for (let v = lo; v <= hi + 1e-9; v += pas) {
       el("line", { x1: m.g, x2: W - m.d, y1: Y(v), y2: Y(v) }, g);
-      const t = el("text", { x: m.g - 8, y: Y(v) + 4, "text-anchor": "end" }, svg); t.textContent = fr(v, 0);
+      const t = el("text", { x: m.g - 8, y: Y(v) + 4, "text-anchor": "end" }, svg); t.textContent = fr(v, 0) + (opts.pctAxe ? " %" : "");
     }
-    if (lo < 0 && hi > 0) el("line", { class: "zero", x1: m.g, x2: W - m.d, y1: Y(0), y2: Y(0) }, svg);
+    if (lo < 0 && hi > 0) {
+      el("line", { class: "zero", x1: m.g, x2: W - m.d, y1: Y(0), y2: Y(0) }, svg);
+      if (opts.zones) {
+        const za = el("text", { x: m.g + 6, y: Y(0) - 6, class: "lib" }, svg); za.textContent = "↑ " + opts.zones[0];
+        const zb = el("text", { x: m.g + 6, y: Y(0) + 15, class: "lib" }, svg); zb.textContent = "↓ " + opts.zones[1];
+        za.setAttribute("style", "fill: var(--encre-3)"); zb.setAttribute("style", "fill: var(--encre-3)");
+      }
+    }
     const pasX = xs.length > 20 ? 10 : 5;
     xs.forEach(t => { if (t % pasX === 0 || (t === xs[0] && pasX - t % pasX >= 3)) { const tx = el("text", { x: X(t), y: H - 6, "text-anchor": "middle" }, svg); tx.textContent = t; } });
     if (opts.seuil != null) {
       el("line", { class: "seuil", x1: m.g, x2: W - m.d, y1: Y(opts.seuil), y2: Y(opts.seuil) }, svg);
-      const st = el("text", { x: W - m.d - 4, y: Y(opts.seuil) - 5, "text-anchor": "end" }, svg); st.textContent = opts.seuilLib; st.setAttribute("style", "fill: var(--alerte)");
+      const st = opts.seuil < 0 ? el("text", { x: m.g + 6, y: Y(opts.seuil) + 15 }, svg) : el("text", { x: W - m.d - 4, y: Y(opts.seuil) - 5, "text-anchor": "end" }, svg); st.textContent = opts.seuilLib; st.setAttribute("style", "fill: var(--alerte)");
     }
     // lignes : les pointillés d'abord, le prudent publié en dernier
     const ordre = [...series].sort((a, b) => (a.tiret ? 0 : 1) - (b.tiret ? 0 : 1) || (a.s === "prudent") - (b.s === "prudent"));
@@ -286,7 +297,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       const t = Math.max(xs[0], Math.min(xs[xs.length - 1], Math.round(xs[0] + (px - m.g) / (W - m.g - m.d) * (xs[xs.length - 1] - xs[0]))));
       const i = xs.indexOf(t);
       cur.setAttribute("x1", X(t)); cur.setAttribute("x2", X(t)); cur.setAttribute("visibility", "visible");
-      const lignes = series.filter(s => s.v[i] != null).map(s => `<div class="l"><span><i class="pastille${s.tiret ? " tiret" : ""}" style="background:${coul(s.s)};color:${coul(s.s)}"></i>${NOM[s.s]}${s.tiret ? " sans clause" : ""}</span><span>${fr(s.v[i], opts.dec)}${opts.unite}</span></div>`).join("");
+      const lignes = series.filter(s => s.v[i] != null).map(s => `<div class="l"><span><i class="pastille${s.tiret ? " tiret" : ""}" style="background:${coul(s.s)};color:${coul(s.s)}"></i>${NOM[s.s]}${s.tiret ? " sans clause" : ""}</span><span>${opts.fmtVal ? opts.fmtVal(s.v[i]) : fr(s.v[i], opts.dec) + opts.unite}</span></div>`).join("");
       bulle.innerHTML = `<div class="an">${t}</div>${lignes}`;
       bulle.hidden = false;
       const bw = bulle.offsetWidth, bh = bulle.offsetHeight;
@@ -301,12 +312,18 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     leg.innerHTML = series.map(s => `<span><i class="pastille${s.tiret ? " tiret" : ""}" style="background:${coul(s.s)};color:${coul(s.s)}"></i>${NOM[s.s]}${s.tiret ? " sans clause" : ""}</span>`).join("");
   }
 
-  let avant = false;
+  // Solde = − déficit : un déficit est sous zéro, un excédent au-dessus (convention des comptes publics)
+  let avant = false, fin = 2050;
   function dessinerDeficit() {
-    const series = S.map(s => ({ s, v: D.series[s].deficit }));
-    if (avant) S.filter(s => D.series[s].deficit_avant_clause).forEach(s => series.push({ s, v: D.series[s].deficit_avant_clause, tiret: true }));
-    courbe("g-deficit", "leg-deficit", series, { annees: A, seuil: 3, seuilLib: "3 %", unite: " %", dec: 2, aria: "Déficit public par scénario, 2029-2073", h: 320 });
+    const n = A.filter(t => t <= fin).length, sol = arr => arr.slice(0, n).map(v => -v);
+    const series = S.map(s => ({ s, v: sol(D.series[s].deficit) }));
+    if (avant) S.filter(s => D.series[s].deficit_avant_clause).forEach(s => series.push({ s, v: sol(D.series[s].deficit_avant_clause), tiret: true }));
+    courbe("g-deficit", "leg-deficit", series, { annees: A.slice(0, n), seuil: -3, seuilLib: "déficit de 3 %", pctAxe: true, zones: ["excédent", "déficit"],
+      fmtVal: v => (v < 0 ? "déficit " : "excédent ") + fr(Math.abs(v), 2) + " %", aria: `Solde public par scénario, 2029-${fin}`, h: 340 });
   }
+  const b50 = document.getElementById("b-2050"), b73 = document.getElementById("b-2073");
+  b50.onclick = () => { fin = 2050; b50.setAttribute("aria-pressed", "true"); b73.setAttribute("aria-pressed", "false"); dessinerDeficit(); };
+  b73.onclick = () => { fin = 2073; b73.setAttribute("aria-pressed", "true"); b50.setAttribute("aria-pressed", "false"); dessinerDeficit(); };
   const bA = document.getElementById("b-apres"), bB = document.getElementById("b-avant");
   bA.onclick = () => { avant = false; bA.setAttribute("aria-pressed", "true"); bB.setAttribute("aria-pressed", "false"); dessinerDeficit(); };
   bB.onclick = () => { avant = true; bB.setAttribute("aria-pressed", "true"); bA.setAttribute("aria-pressed", "false"); dessinerDeficit(); };
