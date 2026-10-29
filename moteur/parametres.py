@@ -91,7 +91,8 @@ class Parametres:
             raise ErreurParametre(f"{cle} : scénarios incomplets {sorted(c['valeur'])}")
         return Parametre(
             cle=cle, valeur=c["valeur"], unite=c["unite"], statut=c["statut"],
-            annee_euros=c.get("annee_euros"), source=c.get("source"), note=c.get("note"),
+            annee_euros=c.get("annee_euros"), source=c.get("source"),
+            note=" | ".join(x for x in (c.get("note"), ("Note de la v235 : " + c["note_v235"]) if c.get("note_v235") else None) if x) or None,
             par_scenario=par_scenario, v235=c.get("v235", _ABSENT),
         )
 

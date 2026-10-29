@@ -128,7 +128,14 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Déficit 2037 sans clause : 80 % des tirages entre 3,8 % et 4,9 % (médiane 4,4 %) ; le prudent (6,0 %) est plus défavorable que tous les tirages ; la crise donne 7,1 %. Le prudent cumule les hypothèses défavorables : il n'est pas un scénario central.
 - Ce qui pèse le plus sur 2037 : emplois créés par les réformes, productivité de l'IA, baisse de l'écart de taux, élasticités des revenus déclarés, érosion de l'IS. Ce sont les hypothèses de comportement à étayer en priorité.
 
+## 29 octobre 2026 — Sources des hypothèses macro
+
+- Les notes de la v235 sur les hypothèses macro (feuille Effets macro, colonnes E à H) sont reportées dans le fichier de paramètres (`note_v235`), et 13 hypothèses reçoivent leur encadrement par la littérature (Okun, CAE, FMI, OCDE, Acemoglu, Aghion et Bunel, Mésange, Saez et al., Auckland, Insee).
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Les notes décrivent l'ancien prudent.** Depuis la v186 (décision du 17 octobre), l'ancien prudent est devenu la crise et le nouveau prudent est souvent le milieu entre crise et médian. Les notes de la v235 n'ont pas suivi : « prudent : la moitié » (seniors : 85 000, c'est la crise ; le prudent vaut 127 500), « prudent : 25 000 logements » (c'est la crise ; prudent 37 500), « prudent : 0,37 » (élasticité de l'investissement ; prudent 0,335), « prudent : multiplicateur de 1 » (c'est la crise ; prudent 0,75).
+- **IA : même la crise est au-dessus de la source la plus prudente.** Acemoglu (2024) estime le gain de productivité de l'IA à 0,07 point par an ; la crise en compte 0,10 et le prudent 0,185 (milieu de la crise et du médian). L'effet de l'IA de la tendance mondiale est compté en plus de la croissance du COR (0,7 %), ce qui se défend puisque le COR ne le compte pas à part, mais ce n'est pas un effet du programme.
 
 - **Couples de retraités comptés deux fois.** La v235 réduit l'impôt des anciennes pensions de 10,6 % pour l'imposition commune (≈ 6 Md€) et ajoute en plus un forfait de 1 Md€ « couples de retraités » dans le coût du quotient conjugal. Le moteur ne compte plus qu'une fois les retraités de l'ancien système.
 

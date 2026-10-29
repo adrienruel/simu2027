@@ -577,21 +577,27 @@ penibilite:
 # Crise : valeurs de la feuille « Scénario de crise » de la v235 (anciennes valeurs « prudent ») ; à défaut, celles du prudent.
 macro:
   annees_montee_emploi:
+    source: "Encadrement : Duval (FMI, 2012) sur les réformes Hartz ; Banque de France, Bulletin n° 264 (2026)"
     valeur: {crise: 8, prudent: 7, median: 6, optimiste: 5}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "v215 (22 octobre 2026) — ÉTAYÉ : une réforme de l'assurance chômage produit l'essentiel de son effet en 3 ans et tout en 5 (Duval, FMI, 2012, sur les réformes Hartz) ; l'apprentissage agit plus tard (Banque de France, Bulletin n° 264, 2026), le logement plus lentement encore. Prudent 7 ans, médian 6, optimiste 5 : la source est la borne optimiste. | Avant : v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : montée en charge plus rapide de l'emploi, ancien optimiste (avant : 5.5)."
   seniors_court:
+    source: "Encadrement : Insee (2017), cité par Fipeco : réforme de 2010, +17 points d'emploi à 60 ans"
     valeur: {crise: 85000, prudent: 127500, median: 170000, optimiste: 170000}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "SOURCÉ (v176) : après la réforme de 2010, la probabilité d’être en emploi à 60 ans a augmenté de 17 points pour les générations concernées, et celle d’être au chômage de 7 points (Insee, 2017, cité par Fipeco). Transposé : ≈ 800 000 personnes par génération × 1,25 an de report (retour à 64 ans dès 2028) × 17 % ≈ 170 000 emplois (médian, et optimiste, qui ne dépasse pas la source). Prudent : la moitié, les emplois aux âges plus élevés étant plus difficiles à garder. Avant : 80 000 / 150 000 / 250 000."
   montee_seniors_court:
     valeur: {crise: 4, prudent: 4, median: 4, optimiste: 4}
     unite: sans_unite
     statut: HYPOTHESE
   seniors_long:
+    source: "Encadrement : Même source que seniors_court, transposée au socle à 67 ans"
     valeur: {crise: 200000, prudent: 300000, median: 400000, optimiste: 400000}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "SOURCÉ (v176), même transposition : socle à 67 ans au lieu de 64, trois ans × 800 000 × 17 % ≈ 400 000 (médian et optimiste), la moitié en prudent ; la voie des 45 annuités permet à une partie de partir plus tôt. Concerne les générations nées à partir de 1979. Avant : 100 000 / 300 000 / 600 000."
   annee_seniors_long:
     valeur: {crise: 2043, prudent: 2043, median: 2043, optimiste: 2043}
     unite: sans_unite
@@ -601,13 +607,16 @@ macro:
     unite: sans_unite
     statut: HYPOTHESE
   multiplicateur:
+    source: "Encadrement : Auclert, Philippon et Ragot (CAE, Focus n° 108, 2024) : 1 ; FMI (2012) : 0,5 avant crise, 0,9 à 1,7 en crise"
     valeur: {crise: 1, prudent: 0.75, median: 0.5, optimiste: 0.3}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "Prudent : multiplicateur de 1, valeur retenue par Auclert, Philippon et Ragot (CAE, Focus n° 108, juillet 2024). Médian : 0,5, valeur que les prévisionnistes retenaient avant la crise de 2008 (FMI, Perspectives de l’économie mondiale, octobre 2012, qui trouve ensuite 0,9 à 1,7 dans les années de crise ; revue d’É. Heyer, OFCE). Optimiste : 0,3, HYPOTHÈSE, pour un ajustement portant surtout sur la dépense (Alesina et Ardagna, 2009, sans valeur transposable). En temps normal, la dépense a un effet plus fort que l’impôt (Gechert, Hughes Hallett et Rannenberg, 2015). | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : multiplicateur de 0,3, valeur optimiste de la note : la confiance compense l'ajustement (avant : 0.4)."
   annees_effet_ajustement:
     valeur: {crise: 5, prudent: 4.5, median: 4, optimiste: 3}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "L’effet décroît linéairement. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : effet récessif dissipé en trois ans, ancien optimiste (avant : 3.5)."
   part_capital_nouveau:
     valeur: {crise: 0.75, prudent: 0.75, median: 0.75, optimiste: 0.85}
     unite: sans_unite
@@ -619,21 +628,26 @@ macro:
     source: "Chetty et al. (2014), Danemark"
     note: "Chetty et al. (2014). Doublon de consommation.eviction_epargne_volontaire, à fusionner."
   pib_par_euro_capital:
+    source: "Encadrement : Banque de France (Sicsic, 2018), Insee 2025 : rendement net du capital ≈ 4 % réel ; actifs régulés ≈ 3,2 % (CRE)"
     valeur: {crise: 0.022, prudent: 0.032, median: 0.042, optimiste: 0.052}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "v215 (22 octobre 2026) — SOURCÉ. Usure du capital des sociétés non financières : ≈ 10 % par an (9,3 % en 1999, 10 % en 2016, plus d'immatériel ; Banque de France, Bloc-notes Éco n° 64, Sicsic, 2018) ; consommation de capital fixe ≈ 20 % de la valeur ajoutée (même auteur, billet n° 59), soit ≈ 309 Md€ pour 1 545 Md€ de valeur ajoutée (Insee 2025). Rendement net : (excédent brut 497,5 − usure 309) / (actifs fixes 3 084 + terrains bâtis 1 596 Md€, Insee) ≈ 4,0 % réel, terrains rémunérés au même taux (≈ 65 Md€ de rente, au lieu de 48 supposés). Actifs régulés ≈ 3,2 % réel (CRE, TURPE 7). Mélange du fonds : ≈ 3,6 %, ≈ 3,2 % après rendements décroissants. Repère : taux d'actualisation public de 3,2 % pour un bêta de 1 (avis Guesnerie, 2021). Prudent 3,2 %, médian 4,2 % (effets d'entraînement des réseaux et de l'énergie, hypothèse), optimiste 5,2 %. Avant : 5 / 6 / 7 %, avec une usure supposée de 6,4 %. | Avant : v213 (22 octobre 2026) — RECOUPÉ À PARTIR DE SOURCES. Rendement des entreprises : excédent brut d’exploitation des sociétés non financières de 497,5 Md€ (Insee, 2025), moins ≈ 48 Md€ de rente des terrains bâtis (1 596 Md€ × ≈ 3 %, HYPOTHÈSE), pour 3 084 Md€ d’actifs fixes produits (Insee, patrimoine national 2024) : ≈ 14,6 % brut ; usure ≈ 6,4 % par an (bâtiments 2,5 %, machines 12 %, autres actifs 20 %, HYPOTHÈSES, pondérées par les stocks de l’Insee), soit ≈ 8,2 % net. Actifs régulés : rémunération de RTE de 5 % nominal avant impôt (CRE, TURPE 7), ≈ 3,2 % réel. Le capital nouveau du fonds est pour moitié régulé ou à rendement faible (nucléaire, réseaux, renouvelables, logement : feuille Fonds, lignes 32 à 38), pour moitié industrie et IA : ≈ 0,5 × 3,2 % + 0,5 × 8,2 % ≈ 5,7 %, ≈ 5,1 % après les rendements décroissants (capital des entreprises en hausse d’environ un tiers en 2050). Prudent 5 %, médian 6 % (effets d’entraînement des réseaux et de l’énergie), optimiste 7 % : inchangés, désormais recoupés."
   logements_initial:
     valeur: {crise: -40000, prudent: -30000, median: -20000, optimiste: 0}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "La fin des aides à la pierre et des dispositifs fiscaux agit tout de suite ; le droit à construire met plusieurs années à produire. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : les promoteurs anticipent le droit à construire : pas de creux, ancien optimiste (avant : -10000)."
   duree_initiale:
     valeur: {crise: 3, prudent: 2.5, median: 2, optimiste: 1}
     unite: sans_unite
     statut: HYPOTHESE
   logements_croisiere:
+    source: "Encadrement : Greenaway-McGrevy (2025), Auckland : +87 % de permis en sept ans ; SDES 2026 : 274 600 mises en chantier en 2025"
     valeur: {crise: 25000, prudent: 37500, median: 50000, optimiste: 100000}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "DÉCISION du 9 octobre. Prudent : un dixième de l’effet mesuré à Auckland, où la libéralisation du zonage de 2016 a presque doublé les permis de construire en sept ans (+87 %, Greenaway-McGrevy, 2025), appliqué aux 274 600 logements mis en chantier en 2025 (SDES, Sit@del, janvier 2026), soit ≈ 24 000, arrondi à 25 000. La fin des aides à la pierre et de la production HLM justifie cette prudence. Avant la v119 : 0. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : 100 000 logements de plus par an, ≈ 40 % de l'effet mesuré à Auckland : communes et promoteurs jouent le jeu, ancien optimiste (avant : 75000)."
   part_additionnelle_logement:
     valeur: {crise: 0.5, prudent: 0.5, median: 0.5, optimiste: 0.5}
     unite: sans_unite
@@ -662,10 +676,12 @@ macro:
     valeur: {crise: 1, prudent: 2, median: 3, optimiste: 6}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "HYPOTHÈSE à étayer. Aucun coût budgétaire. S’ajoute au capital productif. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : les industriels saisissent le permis rapide, ancien optimiste (avant : 4.5)."
   cumul_emploi_socle:
     valeur: {crise: 20000, prudent: 40000, median: 60000, optimiste: 120000}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "HYPOTHÈSE à étayer. Le socle ne baisse pas avec les revenus du travail. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : les seniors cumulent massivement emploi et socle, ancien optimiste (avant : 90000)."
   annee_cumul:
     valeur: {crise: 2046, prudent: 2046, median: 2046, optimiste: 2046}
     unite: sans_unite
@@ -675,13 +691,17 @@ macro:
     unite: sans_unite
     statut: HYPOTHESE
   emplois_par_point_pib:
+    source: "Encadrement : Loi d'Okun : fourchette usuelle 0,3 à 0,5"
     valeur: {crise: 0.5, prudent: 0.45, median: 0.4, optimiste: 0.3}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "Loi d’Okun : fourchette usuelle de 0,3 à 0,5. Chaque emploi détruit coûte un RUI plein. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : 0,3, bas de la fourchette d'Okun (avant : 0.35)."
   productivite:
+    source: "Encadrement : OCDE (2014) : réformes françaises, +3,7 % de PIB en dix ans (≈ 0,4 point par an)"
     valeur: {crise: 0.001, prudent: 0.002, median: 0.003, optimiste: 0.004}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "OCDE, 17 octobre 2014 : les réformes françaises de l’époque (concurrence, marché du travail, fiscalité des entreprises, énergie, professions réglementées) pouvaient relever le PIB de 3,7 % en dix ans, soit ≈ 0,4 point par an. OCDE, 2024 : l’IA pourrait ajouter 0,25 à 0,6 point de productivité par an sur dix ans. Médian : un peu sous l’estimation de 2014, les taux marginaux élevés du barème jouant en sens inverse. Prudent : un quart de cette estimation (CHOIX à confirmer : mettre 0 pour ne rien compter). Optimiste : avec une part de l’effet de l’IA."
   annees_productivite:
     valeur: {crise: 10, prudent: 10, median: 10, optimiste: 10}
     unite: sans_unite
@@ -693,9 +713,11 @@ macro:
     source: "Encadrement : écart OAT − Bund à 10 ans ≈ 0,8 point le 24 juillet 2026 (4,01 % contre 3,22 %)"
     note: "Baisse du taux long attendue de la crédibilité des réformes, atteinte en 8 ans. DÉCISION d'Adrien du 29/10/2026 : l'effet des réformes sur les taux est incertain, il varie selon le scénario (aucun dans la crise et le prudent, un quart de l'écart avec le Bund dans le médian, la moitié dans l'optimiste)."
   part_reelle_hauts_revenus:
+    source: "Encadrement : Saez, Slemrod et Giertz (Journal of Economic Literature, 2012)"
     valeur: {crise: 0.5, prudent: 0.375, median: 0.25, optimiste: 0.1}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "HYPOTHÈSE PRUDENTE. La littérature trouve que la réaction des hauts revenus à l’impôt passe surtout par le moment et la forme de déclaration, peu par les heures travaillées (Saez, Slemrod et Giertz, Journal of Economic Literature, 2012). Prudent : la moitié est réelle ; médian : un quart ; optimiste : un dixième. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : un dixième seulement de réaction réelle des hauts revenus, valeur optimiste de la note (avant : 0.175)."
   tendance:
     valeur: {crise: 0.007, prudent: 0.007, median: 0.01, optimiste: 0.01}
     unite: sans_unite
@@ -705,26 +727,36 @@ macro:
     valeur: {crise: 0.5, prudent: 0.625, median: 0.75, optimiste: 0.9}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "HYPOTHÈSE PRUDENTE. Les comptes réinvestissent tout jusqu’à la retraite ; à la retraite, la moitié du capital part en rente et l’autre reste placée. Prudent : la moitié des rendements est réinvestie. Ces rendements naissent d’un capital qui n’existerait pas sans le fonds (ligne 28) : leur réinvestissement est de l’épargne nouvelle. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : les épargnants laissent leurs rendements placés, ancien optimiste (avant : 0.825)."
   niveau_eleves:
     valeur: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "HYPOTHÈSE. 0,05 écart-type ≈ 5 points PISA, 0,1 ≈ 10 points (la France a perdu 21 points en mathématiques entre 2018 et 2022). Prudent : zéro, aucun effet durable compté. Mesures concernées : semaine de cinq jours, classes de 12, bac sur épreuves, sélection, ascenseur social. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : enseignants et familles adhèrent aux réformes : +0,1 écart-type (≈ 10 points PISA, la moitié de la perte 2018-2022), ancien optimiste (avant : 0.075). | v212 (22 octobre 2026) — SOURCÉ : la seule mesure du programme évaluée en France, le dédoublement des classes en éducation prioritaire, améliore les résultats en CP et CE1, mais l’effet a disparu à l’entrée en 6e : aucune différence significative en français ni en mathématiques (DEPP, note du 3 février 2026, première cohorte). La DEPP n’a pas pu mesurer l’effet des rythmes scolaires sur les acquis (dossier de juillet 2017, faute de groupe témoin). Les autres mesures (semaine de cinq jours, bac sur épreuves, sélection, ascenseur social) ne sont pas évaluées. Règle de prudence : médian ramené à zéro, comme le prudent. Optimiste gardé à 0,1 écart-type, à titre d’indication (« tout le monde joue le jeu »). Avant : médian 0,05 sans source."
   croissance_par_ecart_type:
+    source: "Encadrement : Heller-Sahlgren et Jordahl (IFN, 2023) ; Hanushek et Woessmann"
     valeur: {crise: 0, prudent: 0.00305, median: 0.0061, optimiste: 0.0096}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "SOURCÉ : 1,3 point de croissance par habitant par écart-type de niveau, 49 pays, 1960-2016 ; 0,61 point au lycée sur 1990-2016, 21 pays (Heller-Sahlgren et Jordahl, IFN, 2023, mise à jour plus prudente de Hanushek et Woessmann, qui trouvaient jusqu’à 2 points). Médian : 0,61 ; optimiste : 1,3. Lien très discuté (causalité, poids de quelques pays) : c’est pourquoi le prudent ne le compte pas."
   ia_productivite:
+    source: "Encadrement : Acemoglu (2024) : 0,07 point par an ; Aghion et Bunel (2024) : 0,27 à 0,4 (fourchette 0,07 à 1,24)"
     valeur: {crise: 0.001, prudent: 0.00185, median: 0.0027, optimiste: 0.00475}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "SOURCÉ : Acemoglu (2024) ≈ 0,07 point par an sur dix ans (prudent) ; Aghion et Bunel (2024) : 0,27 à 0,4 point selon les gains mesurés tâche par tâche (médian : 0,27), médiane de leur fourchette 0,68 point (optimiste), fourchette 0,07 à 1,24. Repères de la Commission de l’IA (2024) : électricité en Europe +1,3 point pendant dix ans, numérique aux États-Unis +0,8 point de 1995 à 2006. Le COR (0,7 %) ne compte pas cet effet à part. | v209 (22 octobre 2026), DEMANDE d’Adrien : compter la hausse de la demande d’IA due à la baisse des coûts. SOURCÉ : le coût d’une requête de niveau GPT-3.5 a été divisé par 280 entre novembre 2022 et octobre 2024 (Stanford, AI Index 2025) ; l’usage de l’IA par les entreprises françaises a triplé de 2023 à 2025 (Insee). L’estimation basse d’Acemoglu (0,07 point) suppose que seuls 23 % des tâches exposées sont rentables à automatiser au coût actuel (Svanberg et al., MIT, 2024). Ces auteurs montrent que si le coût des systèmes baisse de 50 % par an, la moitié des tâches devient rentable en trois ans ; s’il baisse de 10 % par an, moins de la moitié en 2042. Crise : baisse de 10 % par an, part rentable portée à ≈ un tiers en moyenne sur la décennie, soit 0,07 × 33 / 23 ≈ 0,10 point. Prudent : milieu entre crise et médian, 0,185 point (avant : 0,17). Médian et optimiste inchangés : Aghion et Bunel comptent déjà une diffusion large."
   adoption_ia:
+    source: "Encadrement : Eurostat (décembre 2025) : 18,2 % des entreprises françaises utilisent l'IA, contre 20 % dans l'Union"
     valeur: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "v208 (22 octobre 2026), DÉCISION d’Adrien : le programme finance l’IA souveraine (Mistral et autres) et le cloud souverain, sans cap ; l’IA est prise dans sa globalité, cloud compris. CANAL RETENU : le rattrapage de l’adoption. SOURCÉ : 18,2 % des entreprises françaises de 10 salariés ou plus utilisent l’IA en 2025, contre 20 % dans l’Union, 26 % en Allemagne, 33 à 42 % aux Pays-Bas et dans les pays nordiques (Eurostat, décembre 2025 ; Insee Première, 2025). L’effet de la tendance (ligne 256, Aghion et Bunel pour la France) est supposé proportionnel au taux d’adoption. Crise : aucun rattrapage. Médian : la France rejoint la moyenne de l’Union (20 / 18,2 − 1 ≈ +10 %). Optimiste (« tout le monde joue le jeu ») : la France rejoint l’Allemagne (26 / 18,2 − 1 ≈ +43 %). Prudent : milieu entre crise et médian (+5 %, règle du 17 octobre). Leviers du programme : l’État client de l’IA française (feuille IA administration, 25 % des salaires économisés versés à des entreprises françaises), capital du fonds pour le cloud et l’IA souverains (feuille Fonds, ligne 51), électricité nucléaire peu taxée (5 %). Le frein principal reste la demande : 71 % des entreprises qui n’utilisent pas l’IA n’y voient pas d’utilité, 54 % manquent d’expertise (Insee). NON COMPTÉ À PART, pour éviter un double compte : la valeur ajoutée du cloud et de l’IA souverains produits en France, déjà comptée comme rendement du capital du fonds (ligne 98). Avant : 5 % / 10 % / 25 %, sans source."
   elasticite_invest:
+    source: "Encadrement : France, long terme : −0,24 (OFCE, 2026) à −0,37 (Mésange, 2017)"
     valeur: {crise: 0.37, prudent: 0.335, median: 0.3, optimiste: 0.37}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "SOURCÉ (v176) pour la France, long terme : −0,24 (OFCE, Daudignon, avril 2026, 1993-2023), −0,22 à −0,28 (Heyer, 2023), −0,3 (Ducoudré, Plane et Villemot, 2015), −0,37 (Bardaji et al., modèle Mésange, 2017). Prudent et optimiste : 0,37, le haut de la fourchette (le pire si le coût monte, le meilleur s’il baisse) ; médian : 0,3. Avant : 0,5 sans source, trop élevé. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : 0,37, haut de la fourchette sourcée (Mésange), le plus favorable quand le coût du capital baisse (avant : 0.335)."
   usure_capital:
     valeur: {crise: 0.1, prudent: 0.1, median: 0.1, optimiste: 0.1}
     unite: sans_unite
@@ -749,6 +781,7 @@ macro:
     valeur: {crise: 0.4, prudent: 0.3, median: 0.2, optimiste: 0}
     unite: sans_unite
     statut: HYPOTHESE
+    note_v235: "HYPOTHÈSE (ligne 38). Crise : 0,4."
   taux_reference_is:
     valeur: {crise: 0.25, prudent: 0.25, median: 0.25, optimiste: 0.25}
     unite: sans_unite
