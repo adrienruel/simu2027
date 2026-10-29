@@ -1,7 +1,7 @@
 """Pensions de l'ancien système, génération par génération (29 octobre 2026).
 
-Qui reste dans l'ancien système : les générations nées en 1978 ou avant (51 ans ou plus en 2029). Les plus
-jeunes (22 à 50 ans en 2029) reçoivent le remboursement de leurs cotisations et relèvent du nouveau système
+Qui reste dans l'ancien système : les générations nées en 1979 ou avant (50 ans ou plus en 2029). Les plus
+jeunes (22 à 49 ans en 2029) reçoivent le remboursement de leurs cotisations et relèvent du nouveau système
 (feuille Socle actuariel, cohortes_2029.csv).
 
 Pour chaque génération et chaque année :
@@ -27,7 +27,7 @@ from .distribution import DONNEES
 from .parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
-DERNIERE_GENERATION = 1978
+DERNIERE_GENERATION = 1979  # 50 ans en 2029 ; les générations du nouveau système ont 22 à 49 ans en 2029 (cohortes_2029.csv)
 
 
 def _csv_v235() -> dict[int, dict]:
@@ -128,3 +128,11 @@ def serie(p: Parametres) -> dict[int, dict[str, float]]:
 
 def depenses(p: Parametres) -> dict[int, float]:
     return {t: x["depenses_md"] for t, x in serie(p).items()}
+
+
+def retraites_reportes(p: Parametres) -> dict[int, float]:
+    """Personnes dont le départ dans l'ancien système est reporté par l'âge légal à 65 ans (millions)."""
+    if not (p.val("ancien_systeme.par_generation") and p.val("demographie.active")):
+        return {t: 0.0 for t in ANNEES}
+    sans, avec = par_generation(p), par_generation(p, avec_report=True)
+    return {t: max(0.0, sans[t]["retraites_millions"] - avec[t]["retraites_millions"]) for t in ANNEES}

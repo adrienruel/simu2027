@@ -225,6 +225,13 @@ retraites:
     annee_euros: 2026
     statut: DECISION
     note: "DÉCISION d'Adrien du 29/10/2026 : 1 200 € (avant : 1 300 €)."
+  attente_age_legal_67:
+    valeur: {active: true, part_annuites_completes: 0.9}
+    v235: {active: false, part_annuites_completes: 0.9}
+    unite: sans_unite
+    statut: DECISION
+    source: "Encadrement de la part : DREES, Les retraités et les retraites 2025, fiche 16 : 7 % d'une génération partent à 67 ans (âge du taux plein automatique, faute de trimestres)"
+    note: "DÉCISION d'Adrien du 29/10/2026 : entre l'âge légal (65 ans) et 67 ans, une personne sans emploi touche le socle si elle a ses annuités, le RUI sinon. S'applique au nouveau système (générations de 22 à 49 ans en 2029, de 65 à 66 ans) et aux personnes de l'ancien système dont le départ est reporté de 64 à 65 ans. Part avec les annuités complètes : 90 % (hypothèse ; plus elle est haute, plus le coût est élevé, le socle étant au-dessus du RUI). Point relevé par la relecture du 29/10/2026 (le modèle ne versait rien entre l'âge légal et 67 ans)."
   rente_annulant_socle:
     valeur: 2500
     unite: eur_mois
@@ -1048,7 +1055,7 @@ hauts_revenus:
 
 # --- Carbone dynamique (feuille Carbone) ---------------------------------------------
 carbone:
-  recette_2029_nette_is: {valeur: 57.7, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Écart des recettes totales du modèle entre 269 € et 0 € (v180), saisi : à recalculer par le moteur (test prévu)."}
+  recette_2029_nette_is: {valeur: calcul, v235: 57.7, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Calculée par le moteur (moteur/carbone.recette_statique) : recettes statiques qui dépendent du prix du carbone", note: "Recette carbone de 2029 qui s'érode avec les émissions : accises carbone des ménages et des collectivités (TVA écologique, ligne 3 : 41,6 Md€) et accises carbone brutes des entreprises nettes d'IS (13,3 Md€) = 54,9 Md€. L'accise sur le contenu importé est comptée à part, année par année, par le module carbone ; l'accise de transition (calage) est un montant fixe. v235 : 57,7 Md€ saisis (écart des recettes totales entre 269 € et 0 €, v180). Recalculée le 29/10/2026 à la demande d'Adrien."}
   option_prix: {valeur: 2, unite: sans_unite, statut: DECISION, note: "0 = prix fixe ; 1 = 300 € dès 2030 puis fixe ; 2 = 300 € en 2030 puis valeur de l'action pour le climat. Confirmé par Adrien le 29/10/2026 : le prix des externalités monte."}
   prix_option_2030: {valeur: 300, unite: eur_par_tco2, statut: DECISION}
   hausse_valeur_action_climat: {valeur: 0.032, unite: taux, statut: SOURCE, source: "Valeur de l'action pour le climat : progression au rythme du taux d'actualisation socioéconomique (3,2 %) jusqu'en 2060 (commission Quinet III ; avis du CS ESE de France Stratégie du 21 mai 2025)"}
@@ -1239,7 +1246,7 @@ ancien_systeme:
     statut: HYPOTHESE
     source: "Encadrement : DREES, Les retraités et les retraites 2025, fiche 16 : en 2023 (âge légal 62 ans), 4 à 5 % des 59 ans sont retraités, 94 à 97 % des 67 ans ; 10 % partent à 60 ans (carrières longues), 31 % à 62 ans, 7 % à 67 ans"
     note: "Part d'une génération partie à la retraite à chaque âge, pour l'âge légal de 64 ans (réforme de 2023, générations 1968 et suivantes) : profil de 2023 décalé de deux ans au-delà de 60 ans, carrières longues gardées. Le passage à 65 ans du programme est compté dans sa propre mesure."
-  droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 (première option) : la pension des départs dans l'ancien système de 2029 à 2043 (générations 1978 et avant) est calculée normalement au départ, puis gelée en euros courants. Autre option écartée : droits gelés dès 2029 (−0,2 point de déficit en 2037, −0,7 en 2050)."}
+  droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 (première option) : la pension des départs dans l'ancien système de 2029 à 2043 (générations 1979 et avant) est calculée normalement au départ, puis gelée en euros courants. Autre option écartée : droits gelés dès 2029 (−0,2 point de déficit en 2037, −0,7 en 2050)."}
   age_legal:
     valeur: {actuel: 64, programme: 65, premiere_annee: 2029, pas_par_generation: 0.5}
     unite: sans_unite

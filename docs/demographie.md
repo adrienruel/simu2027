@@ -57,7 +57,7 @@ l'alourdit (moins d'actifs).
 
 ## Pensions de l'ancien système, génération par génération
 
-`moteur/ancien_systeme.py`. Générations nées en 1978 ou avant (les plus jeunes sont remboursées et relèvent du
+`moteur/ancien_systeme.py`. Générations nées en 1979 ou avant (les plus jeunes sont remboursées et relèvent du
 nouveau système). Survivants : population de l'Insee ; part partie à la retraite à chaque âge (âge légal de 64
 ans, profil DREES 2023 décalé, hypothèse encadrée) ; pension identique en 2029, 0,935 de la moyenne pour les
 départs suivants (DREES : nouveaux retraités 1 557 €, ensemble 1 666 €), gelée en euros courants. Calée sur
@@ -71,7 +71,7 @@ départs suivants (DREES : nouveaux retraités 1 557 €, ensemble 1 666 €), g
 | Retraités par génération (millions) | 19,2 | 21,2 | 15,2 | 7,6 | 1,1 |
 
 La série de la v235 gardait 6,7 millions de retraités de l'ancien système en 2073, alors que les générations nées
-en 1978 ou avant auront 95 ans ou plus : c'était le complément entre le total du COR et les retraités du nouveau
+en 1979 ou avant auront 94 ans ou plus : c'était le complément entre le total du COR et les retraités du nouveau
 système. Ce complément venait en fait d'un défaut du nouveau système, qui ne comptait ni les arrivées après 2029
 ni la mortalité de l'Insee : **retraités touchant le socle en 2073 : 18,5 millions au lieu de 15,0 ; socle versé :
 227 Md€ au lieu de 184.** Les deux corrections vont en sens contraire.

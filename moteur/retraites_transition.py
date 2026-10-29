@@ -68,10 +68,20 @@ def survivants(p: Parametres, g: dict, an: int) -> float:
     return g["population_2026"] * survie(p, g["age_2029"], age)
 
 
+def _attente(p: Parametres) -> tuple[dict, float, float, float]:
+    a = p.val("retraites.attente_age_legal_67")
+    legal = p.val("ancien_systeme.age_legal")["programme"]
+    taux = p.val("demographie.taux_emploi_age")
+    sans_emploi = 1 - taux.get("65-69", 0.0)
+    return a, legal, sans_emploi, a["part_annuites_completes"]
+
+
 def cout_socle(p: Parametres) -> dict[int, float]:
-    """Socle versé aux retraités du nouveau système vivants (Md€), par année."""
+    """Socle versé aux retraités du nouveau système vivants (Md€), par année ; avec les personnes sans emploi
+    ayant leurs annuités entre l'âge légal et l'âge d'accès général (décision du 29/10/2026)."""
     gens = socle_par_generation(p)
     acces = p.val("epargne.age_acces_socle")
+    a, legal, sans_emploi, part = _attente(p)
     out = {}
     for an in ANNEES:
         total = 0.0
@@ -79,7 +89,30 @@ def cout_socle(p: Parametres) -> dict[int, float]:
             age = g["age_2029"] + (an - 2029)
             if age >= acces:
                 total += survivants(p, g, an) * g["socle_moyen"]
+            elif a["active"] and legal <= age < acces:
+                total += survivants(p, g, an) * sans_emploi * part * g["socle_moyen"]
         out[an] = total / 1e9
+    return out
+
+
+def attente_rui_et_socle(p: Parametres) -> dict[int, float]:
+    """Entre l'âge légal et 67 ans, hors socle du nouveau système (déjà dans cout_socle), en Md€ de 2026 avant
+    revalorisation : RUI des personnes du nouveau système sans emploi et sans leurs annuités ; personnes de
+    l'ancien système dont le départ est reporté à 65 ans : socle plein si elles ont leurs annuités, RUI sinon."""
+    a, legal, sans_emploi, part = _attente(p)
+    if not a["active"]:
+        return {an: 0.0 for an in ANNEES}
+    from .ancien_systeme import retraites_reportes
+    rui = p.val("rui.montant") * 12
+    socle = p.val("retraites.socle_plein") * 12
+    acces = p.val("epargne.age_acces_socle")
+    reportes = retraites_reportes(p)
+    out = {}
+    for an in ANNEES:
+        n = sum(survivants(p, g, an) for g in _csv("cohortes_2029.csv") if legal <= g["age_2029"] + an - 2029 < acces)
+        nouveau = n * sans_emploi * (1 - part) * rui
+        ancien = reportes[an] * 1e6 * (part * socle + (1 - part) * rui)
+        out[an] = (nouveau + ancien) / 1e9
     return out
 
 

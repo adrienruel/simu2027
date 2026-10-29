@@ -41,8 +41,8 @@ Crise : dette 150 % en 2050, 235 % en 2073 (pas de retour à l'équilibre).
 3. **La clause de trajectoire** (`moteur/macro.py`) ramène le prudent sur le déficit du médian : tout ce qui
    améliore le médian (retombées du fonds, par exemple) rend la clause plus exigeante et améliore le prudent
    publié. Vérifier que le publié n'en devient pas flatteur.
-4. **La transition des retraites** : ancien système (générations nées en 1978 ou avant), socle des générations
-   de 22 à 50 ans en 2029 (population de l'Insee, arrivées comprises), remboursement de 35 % au départ
+4. **La transition des retraites** : ancien système (générations nées en 1979 ou avant), socle des générations
+   de 22 à 49 ans en 2029 (population de l'Insee, arrivées comprises), remboursement de 35 % au départ
    (pic du déficit en 2047-2052).
 5. **La concordance OpenFisca** : le nouveau système est codé deux fois (moteur et réforme OpenFisca), tests au
    centime ; le système actuel vient d'OpenFisca-France 176.1.10, législation 2026.
@@ -83,8 +83,20 @@ vérifiées, corrigées sous `macro.corrections_relecture` (valeur v235 : non, p
 Prudent après corrections : avant clause 5,39 % (2037), 4,40 % (2050), 0,09 % (2073) ; publié 3,63 % (2037),
 4,97 % (2038), 4,46 % (2050) ; dette 124 % en 2073. Avant corrections : publié 3,04 % (2037), dette 98 % (2073).
 
-**En attente d'une décision d'Adrien** (point 5) : RUI des personnes sans emploi entre l'âge légal et 67 ans
-(≈ 10 à 15 Md€ par an après 2046 s'il est dû ; sinon le gain des emplois de seniors est surestimé).
+**Point 5 tranché par Adrien** : entre l'âge légal (65 ans) et 67 ans, une personne sans emploi touche le socle
+si elle a ses annuités (90 %, hypothèse), le RUI sinon ; appliqué au nouveau système et aux reportés de l'ancien
+(`retraites.attente_age_legal_67`). Coût : 6 à 9 Md€ par an de 2030 à 2043 (reportés de l'ancien système),
+≈ 15 Md€ de socle anticipé à partir de 2045 (nouveau système).
+
+**Recette carbone recalculée** (demande d'Adrien) : 54,9 Md€ calculés par le moteur (accises carbone de la
+ligne 3 et accises brutes des entreprises nettes d'IS) au lieu de 57,7 saisis.
+
+**Erreur trouvée en corrigeant** : la génération née en 1979 (50 ans en 2029) n'était ni dans l'ancien système
+(arrêté à 1978) ni dans les cohortes du nouveau (22 à 49 ans). Elle est rattachée à l'ancien système.
+
+Prudent après tout cela : avant clause 5,78 % (2037), 5,85 % (2050), 4,18 % (2073) ; publié 4,03 % (2037),
+5,38 % (2038), 5,91 % (2050) ; dette 180 % en 2073. La prime de taux liée à la dette amplifie fortement la fin de
+période : sans elle, 0,26 % de déficit et 131 % de dette en 2073.
 
 **Points discutables relevés, non changés** : la clause fait du médian le chiffre publié jusqu'en 2036, puis le
 publié saute en 2038 (désormais affiché) ; rendement versé aux épargnants (2,33 %) supérieur au rendement net

@@ -21,9 +21,32 @@ def prix(p: Parametres, t: int) -> float:
     return base if opt == 1 else base * (1 + p.val("carbone.hausse_valeur_action_climat")) ** (min(t, fin) - 2030)
 
 
+def recette_statique(p: Parametres) -> float:
+    """Recette carbone statique de 2029 (Md€ de 2026) : la part des recettes statiques qui dépend du prix du carbone.
+
+    Accises carbone de la ligne 3 (écart entre le prix du carbone et un prix nul) et accises carbone brutes des
+    entreprises, nettes d'IS. L'accise sur le contenu importé est comptée à part (effet_solde) ; l'accise de
+    transition qui cale la ligne 15 est un montant fixe."""
+    v = p.val("carbone.recette_2029_nette_is")
+    if v != "calcul":
+        return v
+    cache = p.__dict__.setdefault("_cache", {})
+    if "recette_carbone" not in cache:
+        from .recettes import autres, entreprises
+        from .recettes.total import ligne_3_tva
+        from .unites import facteur
+        z = p.avec({"tva.prix_carbone_2024": 0.0})
+        z.colonne_prudent, z._surcharges, z.taux_local_copie = p.colonne_prudent, p._surcharges, p.taux_local_copie
+        menages = (ligne_3_tva(p) - entreprises.tva_non_deductible(p)) - (ligne_3_tva(z) - entreprises.tva_non_deductible(z))
+        brutes = (autres.accises_entreprises_brutes(p) * (1 - p.val("entreprises.taux_is_etat"))
+                  * facteur(p, 2024, "recettes"))
+        cache["recette_carbone"] = (menages + brutes) / 1e9
+    return cache["recette_carbone"]
+
+
 def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, float]]:
     """Effet sur le solde par scénario (Md€), lignes 72 à 74."""
-    r5 = p.val("carbone.recette_2029_nette_is")
+    r5 = recette_statique(p)
     g = p.val("macro.tendance", "prudent")
     p0 = prix_carbone(p)
     e2, dom = p.val("carbone.ets2"), p.val("carbone.dom")

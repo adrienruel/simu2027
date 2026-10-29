@@ -24,14 +24,15 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     # parts des recettes statiques qui ne suivent pas l'emploi (relecture du 29/10/2026), indice 1 :
     # - impôt et TVA des retraités en croisière : anciennes_pensions.recette_nette les ramène déjà au nombre de
     #   retraités du nouveau système de chaque année (population de l'Insee) ;
-    # - recette carbone statique (carbone.recette_2029_nette_is) : carbone.effet_solde la retranche sans indice
+    # - recette carbone statique (carbone.recette_statique) : carbone.effet_solde la retranche sans indice
     #   démographique ; on retire la part déjà dans la TVA des retraités (même part que dans la ligne 3).
     # Le reste suit les personnes en emploi.
     if p.val("macro.corrections_relecture"):
         from .recettes import tva_menages
+        from .carbone import recette_statique as recette_carbone
         tva_ret = tva_menages.tva_retraites(p)
         part_ret = tva_ret / _rns["lignes"][3]
-        rec_ret = (_rns["lignes"][5] + tva_ret) / 1e9 + p.val("carbone.recette_2029_nette_is") * (1 - part_ret)
+        rec_ret = (_rns["lignes"][5] + tva_ret) / 1e9 + recette_carbone(p) * (1 - part_ret)
     else:
         rec_ret = 0.0
     rec_pop = 0.0
@@ -40,6 +41,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     l = dep["lignes"]
     ct = cout_transition(p)
     socle = cout_socle(p)
+    from .retraites_transition import attente_rui_et_socle
+    attente = attente_rui_et_socle(p)
     ia = ia_administration.economie_nette(p)
     from .ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
@@ -120,6 +123,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "rui_aah", "rui_aah_revalorisation", "RUI et AAH : revalorisation sur la croissance", "croissance", l["rui_aah"] * reval_rui)
         L.ajouter(t, "rui_aah", "rui_aah_demographie", "RUI : démographie (adultes, enfants)", "demographie",
                   ((l["rui_aah"] - rui_enf) * (d["adultes"] - 1) + rui_enf * (d["enfants"] - 1)) * (1 + reval_rui))
+        L.ajouter(t, "retraites", "attente_age_legal_67", "Entre l'âge légal et 67 ans : RUI ou socle selon les annuités", "mesure",
+                  attente[t] * (1 + reval_rui))
         L.ajouter(t, "rui_aah", "rui_etudiants", "RUI étudiant sous condition de ressources", "mesure", etu[t])
         L.ajouter(t, "investissement", "subventions_restees", "Subventions d'investissement restées à l'État", "socle", l["subventions_restees"] - soutien_2026)
         L.ajouter(t, "investissement", "renouvelables", "Soutien aux renouvelables (contrats en cours)", "trajectoire", soutien_2029 * max(0, (fin - t) / (fin - 2029)))

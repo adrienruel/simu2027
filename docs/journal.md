@@ -168,6 +168,13 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Attente entre l'âge légal et 67 ans ; recette carbone ; génération 1979
+
+- Décision d'Adrien : entre l'âge légal et 67 ans, socle si annuités complètes (90 %), RUI sinon ; pour le nouveau système et les reportés de l'ancien.
+- Recette carbone statique calculée par le moteur : 54,9 Md€ (v235 : 57,7 saisis).
+- Erreur corrigée : la génération 1979 (50 ans en 2029) manquait (ni ancien système, ni cohortes du nouveau).
+- Prudent : publié 4,03 % en 2037, 5,91 % en 2050 ; avant clause 4,18 % en 2073 ; dette 180 % en 2073 (131 % sans la prime de taux).
+
 ## 29 octobre 2026 — Relecture indépendante : corrections
 
 - Erreurs vérifiées par la relecture et corrigées (`macro.corrections_relecture`, détail dans `docs/relecture.md`) : usure non taxée ; contribution de la clause retirée du fonds ; baisse du RUI bornée par le plancher sur le RUI réel ; effet récessif de cette baisse ; recettes des retraités et carbone statique hors indice de l'emploi ; pertes d'emplois hors rendements décroissants ; emplois proportionnels à la population de 18 à 64 ans.
