@@ -869,6 +869,12 @@ macro:
 clause:
   active: {valeur: true, unite: sans_unite, statut: DECISION, note: "Clause de trajectoire appliquée au prudent. Désactivée pour l'attribution par mesure, où elle masquerait l'effet de chaque mesure."}
   derniere_annee: {valeur: 2073, v235: 2037, unite: annee, statut: DECISION, note: "Dernière année de la contribution et de la baisse du RUI ; l'étalement de la déduction, une fois déclenché, est définitif. DÉCISION d'Adrien du 29/10/2026 : règle permanente (v235 : 2037)."}
+  restitution:
+    valeur: {active: true, debut: 2029}
+    v235: {active: false, debut: 2029}
+    unite: sans_unite
+    statut: DECISION
+    note: "Chiffrage demandé par Adrien le 29/10/2026 : les points d'épargne pris par la règle sont rendus à la génération qui les a versés, avec le rendement du fonds, sur son compte au départ à 67 ans (version « pas avant 2055 » écartée : elle crée un versement de 316 Md€ en 2055, 10 % de déficit cette année-là). Répartis entre générations selon l'emploi par âge l'année du prélèvement. Compté en dépense l'année du versement (comme le remboursement de 35 %) ; le capital ainsi rendu rejoint le fonds et le socle n'augmente plus pour ces générations. Les droits des générations qui partent après 2073 restent dus : affichés à part."
   ordre: {valeur: [contribution, rui], unite: sans_unite, statut: DECISION, note: "Ordre des instruments de la règle après l'étalement de la déduction : contribution (points d'épargne obligatoire versés à l'État, jusqu'au maximum) puis baisse du RUI (jusqu'au plancher). Ordre de la v221."}
   cible: {valeur: 0.03, v235: median, unite: taux, statut: DECISION, note: "Déficit visé par la règle : 3 % du PIB (DÉCISION d'Adrien du 29/10/2026, règle automatique au lieu d'une clause temporaire calée sur le médian ; la relecture relevait que viser le médian faisait publier le médian). v235 : déficit du scénario médian."}
   points_contribution_max: {valeur: 5, unite: sans_unite, statut: DECISION, note: "Sur les 10 points d'épargne obligatoire."}
@@ -1248,6 +1254,12 @@ ancien_systeme:
     statut: HYPOTHESE
     source: "Encadrement : DREES, Les retraités et les retraites 2025, fiche 16 : en 2023 (âge légal 62 ans), 4 à 5 % des 59 ans sont retraités, 94 à 97 % des 67 ans ; 10 % partent à 60 ans (carrières longues), 31 % à 62 ans, 7 % à 67 ans"
     note: "Part d'une génération partie à la retraite à chaque âge, pour l'âge légal de 64 ans (réforme de 2023, générations 1968 et suivantes) : profil de 2023 décalé de deux ans au-delà de 60 ans, carrières longues gardées. Le passage à 65 ans du programme est compté dans sa propre mesure."
+  contribution_solidarite:
+    valeur: {taux: 0.05, debut: 2029, fuite: 0.25}
+    v235: {taux: 0.0, debut: 2029, fuite: 0.25}
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 29/10/2026 : « tout le monde contribue, mais surtout les retraités actuels ». Contribution sur les pensions de l'ancien système au-dessus du minimum vieillesse (les 12 % de dépenses sous le seuil exclues). Taux de 5 % proposé, à confirmer. Fuite (hypothèse) : impôt unique et TVA que les retraités ne paient plus sur la part prélevée (25 %)."
   droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 (première option) : la pension des départs dans l'ancien système de 2029 à 2043 (générations 1979 et avant) est calculée normalement au départ, puis gelée en euros courants. Autre option écartée : droits gelés dès 2029 (−0,2 point de déficit en 2037, −0,7 en 2050)."}
   age_legal:
     valeur: {actuel: 64, programme: 65, premiere_annee: 2029, pas_par_generation: 0.5}

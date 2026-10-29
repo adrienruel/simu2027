@@ -83,3 +83,19 @@ def test_socle_supplementaire_quand_l_epargne_est_prise():
     from moteur.retraites_transition import socle_supplementaire
     assert socle_supplementaire(P, {}, 2060) == 0.0
     assert socle_supplementaire(P, {t: 0.5 for t in range(2030, 2040)}, 2060) > 0
+
+
+def test_restitution_rend_l_epargne_prise():
+    """Restitution : ce qui est rendu plus ce qui reste dû correspond à ce qui a été pris, avec le rendement."""
+    from moteur.macro import calculer
+    d = calculer(P)["prudent"].detail
+    paye = sum(x["paiement"] for x in d["restitution"].values())
+    assert paye > 0 and d["restitution"][2073]["creances"] > 0
+    sans = calculer(P.avec({"clause.restitution/active": False}))["prudent"].detail
+    assert "restitution" not in sans or all(x["paiement"] == 0 for x in sans["restitution"].values())
+
+
+def test_contribution_des_anciens_retraites():
+    from moteur.trajectoire_annuelle import lignes
+    v = lignes(P).lignes["contribution_anciens_retraites"]["valeurs"]
+    assert v[2030] < 0 and abs(v[2030]) > abs(v[2060])  # économie qui s'éteint avec l'ancien système

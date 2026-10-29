@@ -168,6 +168,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Contribution des anciens retraités ; épargne rendue
+
+- Décision d'Adrien : « tout le monde contribue, mais surtout les retraités actuels ». Contribution de solidarité de 5 % (taux proposé, à confirmer) sur les pensions de l'ancien système au-dessus du minimum vieillesse, nette d'une fuite de 25 % (impôt et TVA perdus).
+- Chiffrage demandé : l'épargne prise par la règle est rendue à chaque génération, avec le rendement du fonds, à son départ à 67 ans ; le capital rendu rejoint le fonds. Version « pas avant 2055 » écartée (316 Md€ d'un coup en 2055). Droits encore dus en 2073 : ≈ 450 Md€.
+- Prudent publié : 3,00 % en 2029, 3,04 % en 2037, 3,24 % en 2050 ; excédent léger en 2073 ; dette 107 %. Crise : 7,2 % en 2073, dette 182 %.
+
 ## 29 octobre 2026 — Règle automatique à 3 % ; socle à 67 ans
 
 - Décisions d'Adrien : socle seulement à 67 ans (RUI entre l'âge légal et 67 ans, rente de son épargne possible en plus) ; règle automatique permanente visant 3 % de déficit au lieu de la clause temporaire calée sur le médian (`clause.cible`, `clause.derniere_annee` = 2073, `clause.ordre`).

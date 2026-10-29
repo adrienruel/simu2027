@@ -146,6 +146,12 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     from .anciennes_pensions import recette_nette
     traj_anc_2029 = recette_nette(p)[2029]
     tva_point = tva_par_point_eviction(p)
+    restit = p.val("clause.restitution")
+    acces_socle = int(p.val("epargne.age_acces_socle"))
+    if restit["active"]:
+        from .demographie import population as population_demo, _tranche
+        pop_age = population_demo(p, "prudent")
+        taux_age = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
     from .retraites_transition import socle_supplementaire
 
     def reval_socle(t):
@@ -178,6 +184,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         corr = p.val("macro.corrections_relecture")
         hist_rui = {}  # baisses du RUI décidées par la clause (Md€), pour leur effet récessif
         part_prelevee = {}  # part des 10 points d'épargne versée à l'État par la clause, par année
+        creances = {}  # épargne prise par la règle, due à chaque génération (année de naissance → Md€ de 2026)
+        paiement = 0.0
         prime_app = 0.0  # prime de taux liée à la dette, sur le taux apparent
         ratio_ref = None
         r_ecole = r_ia = r_adopt = 0.0
@@ -272,7 +280,15 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             if s == "prudent":
                 solde += (sante["tva_prudent"][t] + inv_taxe + carbone["prudent"][t]
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
-                if corr:  # socle en plus des générations dont l'épargne a été prise par la clause les années passées
+                if restit["active"]:
+                    # épargne rendue avec le rendement du fonds, au départ à 67 ans mais pas avant l'année de début
+                    for g_ in list(creances):
+                        creances[g_] *= 1 + p.val("epargne.rendement_fonds")
+                    paiement = sum(v for g_, v in creances.items() if g_ + acces_socle <= t) if t >= restit["debut"] else 0.0
+                    for g_ in [g_ for g_ in creances if g_ + acces_socle <= t and t >= restit["debut"]]:
+                        del creances[g_]
+                    solde -= paiement
+                elif corr:  # socle en plus des générations dont l'épargne a été prise par la clause les années passées
                     solde -= socle_supplementaire(p, part_prelevee, t) * (1 + reval_socle(t))
                 # Clause de trajectoire : ramène le prudent sur le déficit du médian (ou sous un seuil fixe)
                 interets_t = (taux_reel(t, s) + prime_app) * dette_prec
@@ -310,6 +326,12 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 mesures = c_etal + c_contrib + c_rui
                 hist_rui[t] = c_rui
                 part_prelevee[t] = (c_contrib / cap_point / 10) if cap_point else 0.0
+                if restit["active"] and c_contrib > 0:
+                    w = {t - a: pop_age[t][a] * taux_age.get(a, 0.0) for a in range(18, acces_socle)}
+                    tot_w = sum(w.values())
+                    for g_, v in w.items():
+                        creances[g_] = creances.get(g_, 0.0) + c_contrib * v / tot_w
+                sc.detail.setdefault("restitution", {})[t] = {"paiement": paiement, "creances": sum(creances.values())}
                 sc.detail.setdefault("clause", {})[t] = {"avant": avant, "etalement": c_etal, "contribution": c_contrib,
                                                          "points": c_contrib / cap_point if cap_point else 0.0,
                                                          "rui": c_rui, "rui_euros": c_rui / cap_rui * 10 if cap_rui else 0.0,
@@ -350,7 +372,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                                                         - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa
             # Année suivante : capital du fonds, part à l'étranger
             capital = (capital + b24 * ds["emploi"] * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
-                       - (c_contrib * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if corr else 0.0))
+                       - (c_contrib * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if corr else 0.0)
+                       + (paiement * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if s == "prudent" else 0.0))
             if maastricht >= etr["solde_minimum"]:
                 part_etr = max(part_etr, min(etr["plafond"], etr["depart"] + (etr["plafond"] - etr["depart"]) * max(0, (etr["dette_debut"] - dette / pib_total) / (etr["dette_debut"] - etr["dette_plafond"]))))
             dette_prec = dette
