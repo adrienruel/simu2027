@@ -64,6 +64,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     rui_enf = rui_enfants(p)
     from .demographie import creches_nouvelles
     creches = creches_nouvelles(p)
+    from .macro import flux_epargne_obligatoire
+    contrib = p.val("epargne.contribution_transition") * flux_epargne_obligatoire(p) / 1e9 if p.val("epargne.contribution_transition") else 0.0
     def reval(t):
         n = t - 2029
         return (((1 + g) / (1 + infl)) ** n * (1 + prod[t]) - 1) if p.val("revalorisation.rui_aah_socle_croissance") else 0.0
@@ -82,6 +84,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         d = demo[t]
         L.ajouter(t, "recettes", "recettes_demographie", "Recettes : démographie (actifs en emploi)", "demographie",
                   rec * crois * (d["emploi"] - 1))
+        L.ajouter(t, "recettes", "contribution_transition", "Épargne obligatoire versée à l'État (contribution de transition)",
+                  "mesure", contrib * crois * d["emploi"])
         L.ajouter(t, "recettes", "successions", "Successions : supplément", "mesure", succ[t])
         L.ajouter(t, "recettes", "tva_2028", "TVA de 2028 maintenue", "mesure", tva2028[t])
         L.ajouter(t, "recettes", "tva_2028_rendue", "TVA de 2028 rendue par le barème", "mesure", -rendu[t])

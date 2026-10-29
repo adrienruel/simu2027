@@ -168,6 +168,11 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Pistes pour améliorer les comptes
+
+- `outils/leviers.py`, `docs/leviers.md` : 15 variantes et paquets chiffrés. Paramètre ajouté : part du RUI pour le 2e enfant (15 %, variante à 25 %).
+- Défaut corrigé : la contribution de transition (part de l'épargne obligatoire versée à l'État) n'était pas comptée en recette hors clause.
+
 ## 29 octobre 2026 — Âge légal à 65 ans par génération ; chiffrage du parent isolé à 50 %
 
 - Âge légal à 65 ans (mesure du programme) : économie calculée génération par génération (12,5 Md€ vers 2033-2035 au lieu de 7 forfaitaires). Décision : départs de 2029-2043 calculés au départ puis gelés. Prudent avant clause : 6,03 % en 2037 ; publié 4,10 %.

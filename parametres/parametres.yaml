@@ -545,6 +545,8 @@ rui_complements:
   part_enfant: {valeur: 0.15, unite: taux, statut: DECISION}
   enfants_parent_isole: {valeur: 3158000, v235: 2500000, unite: sans_unite, statut: SOURCE, source: "Insee Première n° 2032 (2025) : 3 158 000 enfants mineurs en famille monoparentale en 2023 (22,8 %)", note: "Corrigé le 29/10/2026 (v235 : 2,5 millions, sans source)."}
   part_enfant_parent_isole: {valeur: 0.30, unite: taux, statut: DECISION}
+  part_enfant_rang2: {valeur: 0.15, unite: taux, statut: DECISION, note: "Part du RUI pour le 2e enfant d'un couple (15 % comme le premier, sauf décision contraire). Variante chiffrée le 29/10/2026 : 25 %."}
+  enfants_rang2: {valeur: 4303600, unite: sans_unite, statut: SOURCE, source: "Insee, Familles selon le nombre d'enfants mineurs, RP 2023 : 3 039 000 familles de 2 enfants, 956 200 de 3, 308 400 de 4 ou plus ; une famille de 2 enfants ou plus compte un enfant de rang 2", note: "Tous comptés au taux des couples (prudent)."}
   part_enfant_rang3: {valeur: 0.25, v235: 0.15, unite: taux, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : 25 % du RUI à partir du 3e enfant (15 % pour les deux premiers). Parent isolé : 30 % pour chaque enfant, inchangé (déjà au-dessus). v235 : 15 % pour tous."}
   enfants_rang3:
     valeur: 1696600

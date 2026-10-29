@@ -78,6 +78,7 @@ def rui_enfants(p: Parametres) -> float:
     """Part de la ligne 42 versée pour les enfants (compléments de RUI, Md€)."""
     rui = p.val("rui.montant") * 12
     return (p.val("rui_complements.enfants") * p.val("rui_complements.part_enfant")
+            + p.val("rui_complements.enfants_rang2") * max(0.0, p.val("rui_complements.part_enfant_rang2") - p.val("rui_complements.part_enfant"))
             + p.val("rui_complements.enfants_rang3") * max(0.0, p.val("rui_complements.part_enfant_rang3") - p.val("rui_complements.part_enfant"))
             + p.val("rui_complements.enfants_parent_isole") * p.val("rui_complements.part_enfant_parent_isole")) * rui / MD
 

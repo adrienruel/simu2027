@@ -1,0 +1,268 @@
+[
+ {
+  "variante": "Programme actuel",
+  "modifs": {},
+  "deficit_sans_clause": {
+   "2029": 5.68,
+   "2037": 6.03,
+   "2050": 4.75,
+   "2060": 1.96,
+   "2073": 0.62
+  },
+  "deficit_publie_2037": 4.1,
+  "dette_2073": 132,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Famille : 2e enfant à 25 % du RUI (au lieu de 15 %)",
+  "modifs": {
+   "rui_complements.part_enfant_rang2": 0.25
+  },
+  "deficit_sans_clause": {
+   "2029": 5.81,
+   "2037": 6.2,
+   "2050": 4.99,
+   "2060": 2.15,
+   "2073": 0.6
+  },
+  "deficit_publie_2037": 4.26,
+  "dette_2073": 136,
+  "naissances": -1.9
+ },
+ {
+  "variante": "Famille : crèches +20 points de couverture (au lieu de +10)",
+  "modifs": {
+   "famille.creches_nouvelles/points_couverture": 0.2
+  },
+  "deficit_sans_clause": {
+   "2029": 5.68,
+   "2037": 6.17,
+   "2050": 4.96,
+   "2060": 2.17,
+   "2073": 0.76
+  },
+  "deficit_publie_2037": 4.24,
+  "dette_2073": 137,
+  "naissances": -3.2
+ },
+ {
+  "variante": "Famille : parent isolé à 50 % du RUI par enfant",
+  "modifs": {
+   "rui_complements.part_enfant_parent_isole": 0.5
+  },
+  "deficit_sans_clause": {
+   "2029": 5.88,
+   "2037": 6.28,
+   "2050": 5.1,
+   "2060": 2.25,
+   "2073": 0.61
+  },
+  "deficit_publie_2037": 4.34,
+  "dette_2073": 137,
+  "naissances": -0.8
+ },
+ {
+  "variante": "Retraites : socle à 1 200 € (au lieu de 1 300)",
+  "modifs": {
+   "retraites.socle_plein": 1200
+  },
+  "deficit_sans_clause": {
+   "2029": 5.67,
+   "2037": 5.98,
+   "2050": 4.62,
+   "2060": 1.64,
+   "2073": 0.08
+  },
+  "deficit_publie_2037": 4.06,
+  "dette_2073": 125,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Retraites : socle annulé à 2 000 € de rente (au lieu de 2 500)",
+  "modifs": {
+   "retraites.rente_annulant_socle": 2000
+  },
+  "deficit_sans_clause": {
+   "2029": 5.67,
+   "2037": 5.99,
+   "2050": 4.64,
+   "2060": 1.69,
+   "2073": 0.15
+  },
+  "deficit_publie_2037": 4.06,
+  "dette_2073": 126,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Retraites : accès au socle à 68 ans (au lieu de 67)",
+  "modifs": {
+   "epargne.age_acces_socle": 68
+  },
+  "deficit_sans_clause": {
+   "2029": 5.67,
+   "2037": 6.03,
+   "2050": 4.67,
+   "2060": 1.78,
+   "2073": 0.34
+  },
+  "deficit_publie_2037": 4.1,
+  "dette_2073": 126,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Retraites : âge légal de l'ancien système à 66 ans",
+  "modifs": {
+   "ancien_systeme.age_legal/programme": 66
+  },
+  "deficit_sans_clause": {
+   "2029": 5.68,
+   "2037": 5.58,
+   "2050": 4.63,
+   "2060": 1.79,
+   "2073": 0.37
+  },
+  "deficit_publie_2037": 3.68,
+  "dette_2073": 126,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Entreprises : déduction de l'investissement à 50 %",
+  "modifs": {
+   "is_investissement.part_admise": 0.5
+  },
+  "deficit_sans_clause": {
+   "2029": 5.49,
+   "2037": 5.34,
+   "2050": 4.25,
+   "2060": 1.38,
+   "2073": -0.17
+  },
+  "deficit_publie_2037": 3.44,
+  "dette_2073": 114,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Emploi : baisse du coût employeur de 2,5 % (au lieu de 5 %)",
+  "modifs": {
+   "emploi.baisse_cout_travail/taux": 0.025
+  },
+  "deficit_sans_clause": {
+   "2029": 5.54,
+   "2037": 5.88,
+   "2050": 4.53,
+   "2060": 1.65,
+   "2073": 0.17
+  },
+  "deficit_publie_2037": 3.96,
+  "dette_2073": 124,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Emploi : sans la baisse du coût employeur",
+  "modifs": {
+   "emploi.retenues_calculees/baisse_cout_travail": 0
+  },
+  "deficit_sans_clause": {
+   "2029": 5.41,
+   "2037": 5.73,
+   "2050": 4.3,
+   "2060": 1.33,
+   "2073": -0.3
+  },
+  "deficit_publie_2037": 3.81,
+  "dette_2073": 116,
+  "naissances": -4.6
+ },
+ {
+  "variante": "RUI à 750 € (au lieu de 800)",
+  "modifs": {
+   "rui.montant": 750
+  },
+  "deficit_sans_clause": {
+   "2029": 5.5,
+   "2037": 5.82,
+   "2050": 4.51,
+   "2060": 1.7,
+   "2073": 0.41
+  },
+  "deficit_publie_2037": 3.92,
+  "dette_2073": 126,
+  "naissances": -5.6
+ },
+ {
+  "variante": "Épargne obligatoire : 1 point versé à l'État pour la transition",
+  "modifs": {
+   "epargne.contribution_transition": 0.1
+  },
+  "deficit_sans_clause": {
+   "2029": 5.46,
+   "2037": 5.75,
+   "2050": 4.39,
+   "2060": 1.55,
+   "2073": 0.18
+  },
+  "deficit_publie_2037": 3.84,
+  "dette_2073": 121,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Paquet A : déduction 50 %, coût employeur −2,5 %, âge légal 66 ans",
+  "modifs": {
+   "is_investissement.part_admise": 0.5,
+   "emploi.baisse_cout_travail/taux": 0.025,
+   "ancien_systeme.age_legal/programme": 66
+  },
+  "deficit_sans_clause": {
+   "2029": 5.36,
+   "2037": 4.75,
+   "2050": 3.89,
+   "2060": 0.9,
+   "2073": -0.88
+  },
+  "deficit_publie_2037": 2.88,
+  "dette_2073": 99,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Paquet B : A + socle 1 200 € + 1 point d'épargne pour la transition",
+  "modifs": {
+   "is_investissement.part_admise": 0.5,
+   "emploi.baisse_cout_travail/taux": 0.025,
+   "ancien_systeme.age_legal/programme": 66,
+   "retraites.socle_plein": 1200,
+   "epargne.contribution_transition": 0.1
+  },
+  "deficit_sans_clause": {
+   "2029": 5.14,
+   "2037": 4.42,
+   "2050": 3.39,
+   "2060": 0.17,
+   "2073": -1.89
+  },
+  "deficit_publie_2037": 2.58,
+  "dette_2073": 80,
+  "naissances": -4.6
+ },
+ {
+  "variante": "Paquet B + 2e enfant à 25 % et crèches +20 points",
+  "modifs": {
+   "is_investissement.part_admise": 0.5,
+   "emploi.baisse_cout_travail/taux": 0.025,
+   "ancien_systeme.age_legal/programme": 66,
+   "retraites.socle_plein": 1200,
+   "epargne.contribution_transition": 0.1,
+   "rui_complements.part_enfant_rang2": 0.25,
+   "famille.creches_nouvelles/points_couverture": 0.2
+  },
+  "deficit_sans_clause": {
+   "2029": 5.28,
+   "2037": 4.74,
+   "2050": 3.84,
+   "2060": 0.6,
+   "2073": -1.71
+  },
+  "deficit_publie_2037": 2.89,
+  "dette_2073": 89,
+  "naissances": -0.5
+ }
+]

@@ -70,7 +70,8 @@ def parts_enfants(n: int, parent_isole: bool, p: Parametres) -> float:
     if parent_isole:
         return n * p.val("rui_complements.part_enfant_parent_isole")
     base = p.val("rui_complements.part_enfant")
-    return min(n, 2) * base + max(0, n - 2) * max(base, p.val("rui_complements.part_enfant_rang3"))
+    r2 = max(base, p.val("rui_complements.part_enfant_rang2"))
+    return min(n, 1) * base + (1 if n >= 2 else 0) * r2 + max(0, n - 2) * max(base, p.val("rui_complements.part_enfant_rang3"))
 
 
 def nouveau(m: dict, p: Parametres, scenario: str = "prudent") -> dict:
