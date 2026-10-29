@@ -106,7 +106,7 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 
 ## Constats sur la v235 (pour Adrien)
 
-- **Assiette de l'impôt local incohérente avec ceux qui le paient.** Le taux est calculé sur une assiette de 1 169 Md€ décrite comme « salaires, traitements et pensions au-delà de 12 500 € », mais le modèle ne fait payer l'impôt local qu'aux actifs, dont l'assiette fait déjà 1 132 Md€ ; les retraités n'en paient pas. Il faut décider qui paie l'impôt local avant de recalculer l'assiette.
+- **Assiette de l'impôt local : libellé faux, valeur juste.** La v235 décrit ses 1 169 Md€ comme « salaires, traitements et pensions », mais le montant correspond aux seuls revenus d'activité (le moteur les recalcule à 1 174 Md€). Décision d'Adrien du 29/10 : l'impôt local est payé par les entreprises sur leurs bénéfices et par les actifs sur leur salaire, pas par les retraités ; le barème relève de chaque collectivité (le modèle prend un taux moyen). L'assiette est maintenant calculée, et les indépendants paient l'impôt local sur la part de leur revenu prise en salaire (3,0 Md€), ce que la v235 omettait.
 
 - **Le taux long de la dette (3,3 %) est sous le marché.** L'OAT à 10 ans a dépassé 4 % en juillet 2026. À 4 %, le déficit de 2037 passe de 2,31 % à 3,29 % et la dette de 2050 de 117 % à 134 % du PIB. C'est, de loin, l'hypothèse non sourcée qui pèse le plus parmi celles qu'on peut vérifier sur le marché.
 

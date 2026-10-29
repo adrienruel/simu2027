@@ -79,8 +79,26 @@ def besoin(p: Parametres) -> dict[str, float]:
     return {"communes": communes, "regions": regions, "total": communes + regions}
 
 
+def assiette_impot_local(p: Parametres) -> float:
+    """Assiette de l'impôt local sur les revenus d'activité (Md€) : coût employeur des salariés et des agents
+    (alignés), salaire des indépendants, au-delà de l'abattement. Les retraités n'en paient pas."""
+    v = p.val("collectivites_detail.assiette_revenus")
+    if v != "calcul":
+        return v
+    from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
+    from .recettes import independants
+    ab = p.val("impot_local.abattement")
+    a = facteur_alignement_public(p)
+    dp, dg = effectifs_prive_2026(p), effectifs_public_2026(p)
+    total = sum(n * max(0.0, c - ab) for c, n in zip(dp.milieux, dp.effectifs))
+    total += sum(n * max(0.0, c * a - ab) for c, n in zip(dg.milieux, dg.effectifs))
+    if p.val("impot_local.independants_sur_salaire"):
+        total += sum(x["effectif"] * x["part_percue"] * max(0.0, x["salaire"] - ab) for x in independants.classes(p))
+    return total / 1e9
+
+
 def taux_calcule(p: Parametres) -> float:
-    return besoin(p)["total"] / p.val("collectivites_detail.assiette_revenus")
+    return besoin(p)["total"] / assiette_impot_local(p)
 
 
 def taux_impot_local(p: Parametres, salaries: bool = False, tolerance: float = 1e-13, iterations_max: int = 50) -> float:

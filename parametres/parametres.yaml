@@ -304,6 +304,7 @@ consommation:
 
 # --- Impôt local unique -------------------------------------------------------
 impot_local:
+  independants_sur_salaire: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Les indépendants paient l'impôt local sur la part de leur revenu prise en salaire (décision du 29/10/2026 : les actifs le paient sur leur salaire) ; le bénéfice laissé en société paie l'IS local."}
   abattement:
     valeur: 12500
     unite: eur_an
@@ -1006,7 +1007,7 @@ collectivites_detail:
     note: DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur.
   hebergement_urgence: {valeur: {montant: 3.07, part_etat: 0}, unite: sans_unite, statut: DECISION}
   taxe_fonciere_menages: {valeur: 26.2, unite: md_eur, annee_euros: 2024, statut: DECISION, note: "Remplacée par l'impôt local unique (v217)."}
-  assiette_revenus: {valeur: 1169, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Revenus au-delà de 12 500 € (salaires, traitements, pensions) : saisi, à recalculer depuis les distributions."}
+  assiette_revenus: {valeur: calcul, v235: 1169, unite: md_eur, annee_euros: 2026, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : l'impôt local est payé par les entreprises (sur leurs bénéfices, via l'IS local) et par les actifs (sur leur salaire, au-delà de l'abattement) ; les retraités n'en paient pas, et le barème est fixé par chaque collectivité (le modèle en prend la moyenne). L'assiette est donc calculée : coût employeur des salariés du privé et des agents publics (alignés) et salaire des indépendants, au-delà de l'abattement (collectivites.assiette_impot_local). v235 : 1 169 Md€ saisis, décrits comme comprenant les pensions."}
   carence_poids: {valeur: {etat: 2.54, territoriale: 1.94, hospitaliere: 1.21, economie_etat_hopitaux: 0.47}, unite: sans_unite, statut: SOURCE, source: "Rapport sur le délai de carence (Budget État 2026, B112, B148-B150)"}
 environnement:
   bombardiers: {valeur: {appareils: 12, prix_unitaire_m: 104.5, rendement_fonds: 0.03, duree_location: 30}, unite: sans_unite, statut: HYPOTHESE}

@@ -43,6 +43,8 @@ Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 
 |---|---|---|---|
 | Gains du quotient conjugal | 8 510 € (couple à un revenu), 580 € (deux revenus) : résultats figés d'une simulation avec un ancien barème | Calculés avec le barème en vigueur sur la distribution des coûts employeur (privé et public aligné), corrélation des revenus 0,4 : **9 900 €** et **500 €** | coût du quotient conjugal 20,9 Md€ au lieu de 18,9 ; déficit +0,07 point |
 
+| Assiette de l'impôt local | 1 169 Md€ saisis, décrits comme « salaires, traitements, pensions » | Calculée sur ceux qui paient l'impôt local (décision du 29/10) : coût employeur des salariés et des agents, salaire des indépendants, au-delà de 12 500 € : **1 174 Md€** ; les indépendants paient désormais l'impôt local sur leur salaire (3,0 Md€) | taux moyen 7,17 % au lieu de 7,20 % ; déficit inchangé à 0,01 point près |
+
 ## Sources ajoutées (sans changement de valeur)
 
 | Paramètre | Source |
@@ -55,7 +57,6 @@ Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 
 
 | Paramètre | Constat |
 |---|---|
-| collectivites_detail.assiette_revenus (1 169 Md€) | Le taux de l'impôt local est le besoin des collectivités divisé par cette assiette « salaires, traitements, pensions au-delà de 12 500 € ». Mais le moteur ne prélève l'impôt local que sur les actifs (coût employeur au-delà de 12 500 €), dont l'assiette vaut déjà 1 132 Md€ à elle seule ; les retraités n'en paient pas dans le modèle. Il faut trancher qui paie l'impôt local (retraités, indépendants), puis calculer l'assiette à partir des mêmes revenus. |
 | tva.prix_carbone_2024 | 256 € est la valeur de l'action pour le climat **de 2025, en euros de 2023** (Quinet III, avis du CS ESE du 21 mai 2025), puis +3,2 % par an (300 € en 2030) ; le modèle la traite comme un prix de 2024 et ne la fait pas monter |
 
 ## Sources consultées

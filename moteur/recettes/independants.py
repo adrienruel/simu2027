@@ -39,7 +39,17 @@ def classes(p: Parametres, scenario: str = "prudent") -> list[dict]:
         reste_bareme = impot(r - j, p, scenario) - impot(s, p, scenario)
         mixte = impot(s, p, scenario) + min(reste_societe, reste_bareme) + j * is_t
         fiscal = min(d, e, mixte) * k
-        net = r - fiscal - j * (1 - is_t)
+        if abs(min(d, e, mixte) - e) < 0.5:
+            salaire = 0.0
+        elif abs(min(d, e, mixte) - d) < 0.5:
+            salaire = r
+        else:
+            salaire = s + ((r - j - s) if reste_bareme <= reste_societe else 0.0)
+        local = 0.0
+        if p.val("impot_local.independants_sur_salaire"):
+            from ..collectivites import taux_impot_local
+            local = max(0.0, salaire - p.val("impot_local.abattement")) * taux_impot_local(p, salaries=True)
+        net = r - fiscal - j * (1 - is_t) - local
         sante, tva = taux_pour_revenu(net, p)
         tva_payee = consommation_ht(max(0.0, net), sante + tva, p) * (sante + tva)
         if abs(fiscal - e) < 0.5:
@@ -48,7 +58,7 @@ def classes(p: Parametres, scenario: str = "prudent") -> list[dict]:
             passe_societe = 0.0
         else:
             passe_societe = j + ((r - j - s) if reste_societe < reste_bareme else 0.0)
-        out.append({"groupe": g, "effectif": effectif, "revenu": r, "impot": fiscal, "net": net,
+        out.append({"groupe": g, "effectif": effectif, "revenu": r, "impot": fiscal, "net": net, "salaire": salaire, "impot_local": local,
                     "tva": tva_payee, "part_percue": p.val("independants.part_percue")[g],
                     "benefice_societe": passe_societe})
     return out
