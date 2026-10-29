@@ -10,7 +10,7 @@ import csv
 
 from ..distribution import DONNEES
 from ..parametres import Parametres
-from ..systeme_actuel import consommation_actuelle_ht, net_actuel
+from ..systeme_actuel import consommation_actuelle_ht
 from .impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
 from .tva_menages import budget_actif, part_rui_agent
 from ..epargne import part_rui_salarie
@@ -34,11 +34,13 @@ def benefice_capte(p: Parametres, scenario: str = "prudent") -> float:
     """Bénéfice supplémentaire total capté (€) — Entreprises & Dividendes!S13."""
     total = 0.0
     d = effectifs_prive_2026(p)
-    for c, n, an in zip(d.milieux, d.effectifs, _net_avant_aides("salaries_prive.csv")):
-        total += n * _capte(net_actuel(an, p, False), budget_actif(c, p, scenario, part_rui_salarie(c, p))["conso_ht"], p)
+    from ..systeme_actuel import nets_prive
+    for c, n, na in zip(d.milieux, d.effectifs, nets_prive(p)["actuel"]):
+        total += n * _capte(na, budget_actif(c, p, scenario, part_rui_salarie(c, p))["conso_ht"], p)
     d, a = effectifs_public_2026(p), facteur_alignement_public(p)
-    for c, n, an in zip(d.milieux, d.effectifs, _net_avant_aides("fonctionnaires.csv")):
-        total += n * _capte(net_actuel(an, p, True), budget_actif(c * a, p, scenario, part_rui_agent(c))["conso_ht"], p)
+    from ..systeme_actuel import nets_public
+    for c, n, na in zip(d.milieux, d.effectifs, nets_public(p)["actuel"]):
+        total += n * _capte(na, budget_actif(c * a, p, scenario, part_rui_agent(c))["conso_ht"], p)
     return total
 
 

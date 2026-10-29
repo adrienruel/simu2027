@@ -138,7 +138,15 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Le multiplicateur de 1 dans le médian relève le déficit de 2029 du médian, sur lequel la clause aligne le prudent : 5,31 % en 2029 au lieu de 4,97 %.
 - Déficit publié du prudent : 5,31 % / 4,70 % / 3,73 %.
 
+## 29 octobre 2026 — Étape 3 : OpenFisca-France
+
+- OpenFisca-France 176.1 installé. `outils/openfisca_actuel.py` calcule le système actuel (législation 2026) sur une grille de salaires : salariés du privé et fonctionnaires de chaque versant (primes à 24,6 % du brut, DGAFP), personne seule locataire en zone 2. Les tables sont dans `parametres/donnees/openfisca_*_2026.csv` ; le moteur les lit sans avoir besoin d'OpenFisca.
+- Le système actuel du moteur (nets, RSA, prime d'activité, aides au logement) vient désormais d'OpenFisca (`systeme_actuel.source`), sauf la taxe foncière, qu'OpenFisca ne calcule pas. Écarts avec la v235 : nets du privé à ±5 % ; agents publics : la v235 surestimait le net d'environ 5 % sur les classes les plus nombreuses et le sous-estimait au-dessus de 110 000 € de coût. Effet sur le déficit : +0,01 point.
+- Ménages types (`parametres/menages_types.yaml`, `outils/openfisca_menages.py`, `moteur/menages_types.py`) : huit ménages, système actuel par OpenFisca (prestations familiales comprises), nouveau système par le moteur.
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Ménages types : le programme fait des perdants nets.** À consommation hors taxes comparable (TVA et accises de chaque système comprises, épargne obligatoire mise à part) : personne seule au SMIC −1,6 %, au salaire médian −4,3 %, cadre à 100 000 € −22,6 %, parent isolé au SMIC −10,3 %, couple de deux médians −3,7 % ; gagnants : couple de deux SMIC avec deux enfants +6,0 %, couple à un salaire médian avec deux enfants +11,1 % (quotient conjugal). L'épargne obligatoire (2 400 € par an au salaire médian) reste au ménage, mais elle n'est pas disponible. Le parent isolé perd l'allocation de soutien familial, la prime d'activité et l'aide au logement, que le complément de RUI (30 % par enfant) ne compense pas.
 
 - **Les notes décrivent l'ancien prudent.** Depuis la v186 (décision du 17 octobre), l'ancien prudent est devenu la crise et le nouveau prudent est souvent le milieu entre crise et médian. Les notes de la v235 n'ont pas suivi : « prudent : la moitié » (seniors : 85 000, c'est la crise ; le prudent vaut 127 500), « prudent : 25 000 logements » (c'est la crise ; prudent 37 500), « prudent : 0,37 » (élasticité de l'investissement ; prudent 0,335), « prudent : multiplicateur de 1 » (c'est la crise ; prudent 0,75).
 - **IA : même la crise est au-dessus de la source la plus prudente.** Acemoglu (2024) estime le gain de productivité de l'IA à 0,07 point par an ; la crise en compte 0,10 et le prudent 0,185 (milieu de la crise et du médian). L'effet de l'IA de la tendance mondiale est compté en plus de la croissance du COR (0,7 %), ce qui se défend puisque le COR ne le compte pas à part, mais ce n'est pas un effet du programme.

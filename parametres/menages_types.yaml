@@ -1,0 +1,40 @@
+# Ménages types : comparés dans le système actuel (OpenFisca-France) et dans le nouveau système (moteur).
+#
+# Revenus d'activité donnés en coût employeur annuel (euros de 2026) ; le brut du système actuel en est
+# déduit par la table OpenFisca du privé. Âges des enfants au 1er janvier 2026. Locataires du parc privé
+# en zone 2 (loyer 550 € par mois pour une personne seule, 800 € pour une famille).
+# Couples mariés (imposition commune dans les deux systèmes).
+
+menages:
+  - id: seul_smic
+    libelle: "Personne seule au SMIC"
+    adultes: [smic]
+    enfants: []
+  - id: seul_median
+    libelle: "Personne seule, salaire médian"
+    adultes: [median]
+    enfants: []
+  - id: seul_cadre
+    libelle: "Personne seule, cadre (100 000 € de coût employeur)"
+    adultes: [100000]
+    enfants: []
+  - id: parent_isole_smic
+    libelle: "Parent isolé au SMIC, un enfant de 8 ans"
+    adultes: [smic]
+    enfants: [8]
+  - id: couple_deux_smic_deux_enfants
+    libelle: "Couple, deux SMIC, deux enfants (6 et 10 ans)"
+    adultes: [smic, smic]
+    enfants: [6, 10]
+  - id: couple_median_inactif_deux_enfants
+    libelle: "Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)"
+    adultes: [median, 0]
+    enfants: [6, 10]
+  - id: couple_deux_medians
+    libelle: "Couple, deux salaires médians, sans enfant"
+    adultes: [median, median]
+    enfants: []
+  - id: couple_cadre_median_deux_enfants
+    libelle: "Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)"
+    adultes: [100000, median]
+    enfants: [6, 10]

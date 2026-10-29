@@ -116,6 +116,9 @@ tr.sous-total td { font-weight: 600; }
 td.barre { width: 18%; min-width: 120px; }
 #t-att td:first-child { min-width: 240px; max-width: 420px; }
 #t-att th { white-space: normal; }
+#t-menages-tab th { white-space: normal; }
+#t-menages-tab td:first-child { min-width: 240px; }
+@media (max-width: 760px) { #t-menages-tab .detail { display: none; } #t-menages-tab td:first-child { min-width: 0; } }
 @media (max-width: 760px) { #t-att td:first-child { min-width: 0; } #t-att td.barre, #t-att th.barre-th { display: none; } }
 .bar-w { position: relative; height: 16px; }
 .bar-w .axe { position: absolute; top: -4px; bottom: -4px; width: 1px; background: var(--trait-fort); }
@@ -249,6 +252,12 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       <p class="note">Corrélation entre le tirage de l'hypothèse (0 = valeur de crise, 1 = valeur optimiste) et le déficit de 2037. Plus elle est forte en valeur absolue, plus l'hypothèse pèse ; négative, la valeur optimiste réduit le déficit. Ce sont les hypothèses à étayer en priorité.</p>
       <div class="defile"><table id="t-incert-inf"></table></div>
     </div>
+  </section>
+
+  <section class="bloc" aria-labelledby="t-menages">
+    <h2 id="t-menages">Ménages types : aujourd'hui et demain</h2>
+    <p class="note">Système actuel calculé par OpenFisca-France (législation 2026 : impôt sur le revenu, cotisations, CSG, prime d'activité, RSA, aides au logement, prestations familiales ; locataires en zone 2). Nouveau système calculé par le moteur : impôt unique, impôt local, RUI et compléments pour enfants ; l'épargne obligatoire est versée sur le compte du ménage, elle n'est pas comptée dans le revenu disponible. La dernière colonne compare ce que le ménage peut consommer hors taxes, la TVA et les accises de chaque système comprises.</p>
+    <div class="carte defile"><table id="t-menages-tab"></table></div>
   </section>
 
   <section class="bloc" aria-labelledby="t-param">
@@ -536,6 +545,13 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     document.getElementById("t-incert-inf").innerHTML = `<thead><tr><th>Hypothèse</th><th>Corrélation avec le déficit 2037</th></tr></thead><tbody>` +
       I.influence.map(([k, v]) => `<tr><td><span class="chiffre">${k === "emplois_reformes" ? "emplois créés par les réformes (feuille Emploi)" : k}</span>${I.notes[k] ? `<br><span class="discret" style="font-size:12.5px">${I.notes[k]}</span>` : ""}</td><td class="n">${sg(v, 2)}</td></tr>`).join("") + "</tbody>";
   }
+  // Ménages types
+  (function () {
+    const M = D.menages || [];
+    const eur = v => fr(v, 0) + " €";
+    document.getElementById("t-menages-tab").innerHTML = `<thead><tr><th>Ménage</th><th>Revenu disponible aujourd'hui</th><th>Demain</th><th class="detail">dont impôt unique</th><th class="detail">impôt local</th><th class="detail">RUI et compléments</th><th>Épargne sur le compte</th><th>Consommation possible</th></tr></thead><tbody>` +
+      M.map(x => `<tr><td>${x.libelle}</td><td class="n">${eur(x.actuel)}</td><td class="n">${eur(x.nouveau)}</td><td class="n detail">${eur(x.impot_unique)}</td><td class="n detail">${eur(x.impot_local)}</td><td class="n detail">${eur(x.rui)}</td><td class="n">${eur(x.epargne)}</td><td class="n${x.ecart_conso < 0 ? " neg" : ""}"><b>${sg(x.ecart_conso, 1)} %</b></td></tr>`).join("") + "</tbody>";
+  })();
   selN.addEventListener("change", tableLignes);
   rng.addEventListener("input", detail); selS.addEventListener("change", detail);
   rng.addEventListener("input", tableLignes); selS.addEventListener("change", tableLignes);

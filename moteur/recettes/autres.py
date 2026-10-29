@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from ..parametres import Parametres
-from ..systeme_actuel import consommation_actuelle_ht, net_actuel
+from ..systeme_actuel import consommation_actuelle_ht
 from ..tva import accises_calculees, taux_effectifs
 from .impot_salaires import effectifs_prive_2026, effectifs_public_2026
 from . import tva_menages
@@ -64,13 +64,14 @@ def ancienne_tva_ligne_3(p: Parametres) -> float:
     """Colonne « Ancien », ligne 3 (base brute, avant le passage en euros de 2024 de la ligne 17)."""
     t = p.val("systeme_actuel.taux_tva_moyen")
     total = 0.0
-    from .entreprises import _net_avant_aides
     d = effectifs_prive_2026(p)
-    for n, an in zip(d.effectifs, _net_avant_aides("salaries_prive.csv")):
-        total += n * t * consommation_actuelle_ht(net_actuel(an, p, False), p)
+    from ..systeme_actuel import nets_prive
+    for n, na in zip(d.effectifs, nets_prive(p)["actuel"]):
+        total += n * t * consommation_actuelle_ht(na, p)
     d = effectifs_public_2026(p)
-    for n, an in zip(d.effectifs, _net_avant_aides("fonctionnaires.csv")):
-        total += n * t * consommation_actuelle_ht(net_actuel(an, p, True), p)
+    from ..systeme_actuel import nets_public
+    for n, na in zip(d.effectifs, nets_public(p)["actuel"]):
+        total += n * t * consommation_actuelle_ht(na, p)
     total += tva_retraites_actuelle(p)
     total += tva_menages.tva_etudiants(p) + tva_menages.tva_inactifs(p)  # v235 : même valeur que le nouveau système
     total += p.val("accises_entreprises.ancienne_tva_entreprises") * MD

@@ -358,6 +358,8 @@ inactifs:
 
 # --- Système actuel (approximation par classe, remplacée par OpenFisca à l'étape 3) ---
 systeme_actuel:
+  taux_accises_menages: {valeur: 0.03, unite: taux, statut: HYPOTHESE, source: "Encadrement : TICPE 31 Md€ en 2019 (Fipeco, fiche carburants), droits sur le tabac ≈ 14 Md€, sur les alcools ≈ 4 Md€, accise sur l'électricité ≈ 9 Md€", note: "Accises payées aujourd'hui par les ménages, en part de leur consommation hors taxes (≈ 40 Md€ sur ≈ 1 350 Md€, en supposant 60 % de la TICPE et la moitié de l'accise sur l'électricité payées par les ménages). Sert seulement à comparer le pouvoir d'achat des ménages types : le nouveau taux de consommation comprend les accises écologie et santé, qui remplacent celles-ci."}
+  source: {valeur: openfisca, v235: classeur, unite: sans_unite, statut: DECISION, note: "Salariés du privé : net après cotisations, CSG et impôt sur le revenu, RSA, prime d'activité et aide au logement calculés par OpenFisca-France (législation 2026, personne seule locataire en zone 2, loyer 550 €/mois ; outils/openfisca_actuel.py). Agents publics : fonctionnaires titulaires de chaque versant (primes à 24,6 % du brut, DGAFP, rapport annuel 2025), moyenne pondérée par versant. La taxe foncière reste estimée par le moteur (OpenFisca ne la calcule pas)."}
   taux_tva_moyen:
     valeur: 0.13
     unite: taux

@@ -12,7 +12,6 @@ from .impot_unique import impot
 from .parametres import Parametres
 from .recettes.impot_salaires import effectifs_prive_2026
 from .recettes import entreprises
-from .systeme_actuel import net_actuel
 
 JEUX = ("crise", "median", "optimiste")
 
@@ -46,7 +45,8 @@ def baisse_cout_travail(p: Parametres) -> float:
 def marge_intensive(p: Parametres) -> dict[str, float]:
     """Variation des heures des bas salaires (EQTP), selon la part gardée par euro de coût en plus."""
     d = effectifs_prive_2026(p)
-    nets = [net_actuel(x, p, False) / 12 for x in [l for l in _net_avant_aides()]]
+    from .systeme_actuel import nets_prive
+    nets = [x / 12 for x in nets_prive(p)["actuel"]]
     c = d.milieux
     gard_auj_1 = (nets[1] - nets[0]) * 12 / (c[1] - c[0])
     gard_prog_1 = 1 - p.val("rui.montant") / p.val("epargne.cout_smic_mensuel")
@@ -57,11 +57,6 @@ def marge_intensive(p: Parametres) -> dict[str, float]:
     v2 = (sum(d.effectifs[2:6]) + d.effectifs[6] * (cout_smic_annuel(p) - 22500) / 2500) * mi["facteur_eqtp"]
     base = v1 * math.log(gard_prog_1 / gard_auj_1) + v2 * math.log(gard_prog_2 / gard_auj_2)
     return {j: mi[j] * base for j in JEUX}
-
-
-def _net_avant_aides():
-    from .recettes.entreprises import _net_avant_aides as n
-    return n("salaries_prive.csv")
 
 
 def emplois_reforme_entreprises(p: Parametres) -> dict[str, float]:

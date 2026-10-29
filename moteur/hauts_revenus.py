@@ -12,8 +12,6 @@ from .distribution import DONNEES
 from .impot_unique import impot, taux_marginal
 from .parametres import Parametres
 from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
-from .recettes.entreprises import _net_avant_aides
-from .systeme_actuel import net_actuel
 
 SCENARIOS = ("prudent", "median", "optimiste")
 
@@ -65,7 +63,8 @@ def perte_croisee_capital(p: Parametres, s: str) -> float:
 def perte_classes_moyennes(p: Parametres, s: str) -> float:
     lo, hi = p.val("hauts_revenus.classes_moyennes_bornes")
     d = effectifs_prive_2026(p)
-    nets = [net_actuel(x, p, False) for x in _net_avant_aides("salaries_prive.csv")]
+    from .systeme_actuel import nets_prive
+    nets = nets_prive(p)["actuel"]
     loc = _taux_local(p)
     total = 0.0
     for i in range(len(d.milieux) - 1):

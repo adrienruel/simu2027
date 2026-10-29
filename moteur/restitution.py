@@ -108,6 +108,12 @@ def donnees(p: Parametres | None = None) -> dict:
         incertitude = {"n": incertitude["n"], "resume": incertitude["resume"],
                        "influence": [[k, round(v, 3)] for k, v in list(incertitude["influence_deficit_2037"].items())[:10]],
                        "notes": {k: (p[k].note or "")[:160] for k in list(incertitude["influence_deficit_2037"])[:10] if k in p._p}}
+    from .menages_types import comparer
+    menages = [{"libelle": x["libelle"], "actuel": round(x["actuel"]["revenu_disponible"]),
+                "nouveau": round(x["nouveau"]["revenu_disponible"]), "epargne": round(x["nouveau"]["epargne_obligatoire"]),
+                "impot_unique": round(x["nouveau"]["impot_unique"]), "impot_local": round(x["nouveau"]["impot_local"]),
+                "rui": round(x["nouveau"]["rui"] + x["nouveau"]["complements_enfants"]),
+                "ecart_conso": round(100 * x["ecart_consommation_pct"], 1)} for x in comparer(p)]
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))
@@ -122,6 +128,7 @@ def donnees(p: Parametres | None = None) -> dict:
         "postes": POSTES,
         "attribution": attribution,
         "incertitude": incertitude,
+        "menages": menages,
         "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts), "sensibilite": sensibilite, "corriges": corriges,
                        "hypotheses_par_groupe": groupes.most_common()},
     }
