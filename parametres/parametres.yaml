@@ -932,6 +932,12 @@ tva_sante_long_terme:
 # de crise pour les emplois perdus (fin des subventions, prime d'embauche).
 emploi:
   chomage_incompressible: {valeur: 0.035, unite: taux, statut: SOURCE, source: "Taux les plus bas tenus durablement en Europe de l'Ouest (Allemagne, Pays-Bas)"}
+  gain_par_canal: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Bloc emploi unifié (étape 4, moteur/emploi_canaux.py) : chaque emploi rapporte au budget selon le salaire de son canal, avec les taux de TVA du nouveau système. v235 : un seul gain par emploi, pour un emploi à 1,3 SMIC, avec le taux de TVA de l'ancien système (13 %)."}
+  cout_par_canal:
+    valeur: {offre: 1.0, appariement: 1.0, cout_travail: 1.0, localisation: moyen, population_active: median, perdus: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rapportent moins) ; le coût moyen pour les emplois perdus par localisation (activités mobiles et rentables) ; le salaire médian pour les seniors. Règles : docs/bloc_emploi.md."
   reformes_directes:
     source: "Encadrement, par réforme (v235, feuille Emploi, colonne Justification) : allocation chômage : réformes de 2021 et 2023, −0,4 et −0,6 point (Banque de France, Bulletin n° 264, 2026), Hartz IV −1,4 (Krebs et Scheffel) ; France Travail : quart du paquet 2017 de la Banque de France (−0,4) ; apprentissage : −0,1 point (Banque de France) ; logement : Insee Analyses n° 37 (2018) ; accompagnement : Cour des comptes (2026), Crépon et al. (2013) ; alternance : Banque de France, CAE note n° 91 ; contrat de travail : France Stratégie (Cahuc et al., 2024 ; note n° 151, 2025), moitié du paquet 2017-2018"
     valeur:

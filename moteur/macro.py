@@ -157,7 +157,17 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             emp_sen = (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
                        + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s)))
                        + m("cumul_emploi_socle", s) * max(0, min(1, (t - m("annee_cumul", s) + 1) / m("montee_cumul", s))))
-            s_emploi = (emp_ref + emp_sen) * pv["gain_par_emploi"][s] / 1e9
+            if "solde_reformes_terme" in pv:  # bloc emploi unifié : chaque emploi au gain de son canal
+                gc = pv["gains_canaux"][s]
+                seniors = (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
+                           + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s))))
+                cumul = emp_sen - seniors
+                perdus = (pv["emplois_perdus_subventions"][s]
+                          + pv["emplois_perdus_tardifs"][s] * (t > pv["emplois_perdus_tardifs"]["annee"]))
+                s_emploi = (pv["solde_reformes_terme"][s] * _montee(t, m("annees_montee_emploi", s))
+                            - perdus * gc["perdus"] + seniors * gc["population_active"] + cumul * gc["perdus"]) / 1e9
+            else:
+                s_emploi = (emp_ref + emp_sen) * pv["gain_par_emploi"][s] / 1e9
             # Ajustement budgétaire
             pib_aj = -eff * m("multiplicateur", s) * max(0, 1 - n / m("annees_effet_ajustement", s)) * pib0[t]
             s_aj = pib_aj * part_budget + pib_aj / pib0[t] * 100 * m("emplois_par_point_pib", s) / 100 * rui_ch

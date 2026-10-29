@@ -122,6 +122,17 @@ def donnees(p: Parametres | None = None) -> dict:
         retraites_futurs.append({"libelle": x["libelle"], "rente": round(x["rente"]), "socle": round(x["socle"]),
                                  "net": round(x["net_mensuel"]), "net_actif": round(net_actif),
                                  "remplacement": round(100 * x["net_mensuel"] / net_actif)})
+    from .emploi_canaux import tableau as tableau_emploi
+    from .attribution import mesures as registre_mesures
+    libelles = {m["id"]: m["libelle"] for m in registre_mesures()}
+    alias = {"bas_salaires": "bas_salaires_rui", "entreprises_cout_travail": "reforme_entreprises_emploi",
+             "droit_a_construire": "droit_a_construire_emploi"}
+    libelles["reforme_entreprises_emploi"] = "Réforme des entreprises : fin des impôts de production sur les salaires"
+    libelles["entreprises_localisation"] = "Réforme des entreprises : activités qui partent avec l'IS à 45 %"
+    emploi_mesures = [{"libelle": libelles.get(alias.get(x["mesure"], x["mesure"]), x["mesure"]),
+                       "canal": x["canal"], "crise": round(x["emplois_crise"]), "prudent": round(x["emplois_prudent"]),
+                       "median": round(x["emplois_median"]), "optimiste": round(x["emplois_optimiste"]),
+                       "gain": round(x["gain_par_emploi"]), "solde": round(x["solde_md"], 2)} for x in tableau_emploi(p)]
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))
@@ -137,6 +148,7 @@ def donnees(p: Parametres | None = None) -> dict:
         "attribution": attribution,
         "incertitude": incertitude,
         "menages": menages,
+        "emploi_mesures": emploi_mesures,
         "retraites_futurs": retraites_futurs,
         "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts), "sensibilite": sensibilite, "corriges": corriges,
                        "hypotheses_par_groupe": groupes.most_common()},

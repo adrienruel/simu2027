@@ -156,6 +156,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Futurs retraités du nouveau système (croisière, carrière entière) : SMIC 1 300 € nets par mois (socle seul), médian 1 530 € (rente 480 + socle 1 050), cadre à 100 000 € 1 762 € (rente 963 + socle 799). Taux de remplacement du revenu d'actif du nouveau système : 76 %, 75 %, 57 %.
 - Pas de ménage d'indépendant : OpenFisca couvre mal les cotisations des non-salariés au réel ; à reprendre avec un cas micro-entrepreneur.
 
+## 29 octobre 2026 — Étape 4 : bloc emploi unifié
+
+- `moteur/emploi_canaux.py` et `docs/bloc_emploi.md` : chaque mesure dans un canal (offre, appariement, coût du travail, localisation, population active, perdus), rendements décroissants répartis au prorata, règles écrites contre le double compte. La somme des emplois par mesure redonne exactement le total de la feuille Emploi.
+- Chaque emploi rapporte selon le salaire de son canal, avec les taux du nouveau système (`emploi.gain_par_canal`). Gain d'un emploi au SMIC : 11 556 € (v235 : 15 161 € pour 1,3 SMIC, TVA de l'ancien système) ; emploi perdu par localisation : 31 512 €.
+- Déficit publié du prudent : 5,33 % / 4,74 % / 3,81 %.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Ménages types : le programme fait des perdants nets.** À consommation hors taxes comparable (TVA et accises de chaque système comprises, épargne obligatoire mise à part) : personne seule au SMIC −1,6 %, au salaire médian −4,3 %, cadre à 100 000 € −22,6 %, parent isolé au SMIC −10,3 %, couple de deux médians −3,7 % ; gagnants : couple de deux SMIC avec deux enfants +6,0 %, couple à un salaire médian avec deux enfants +11,1 % (quotient conjugal). L'épargne obligatoire (2 400 € par an au salaire médian) reste au ménage, mais elle n'est pas disponible. Le parent isolé perd l'allocation de soutien familial, la prime d'activité et l'aide au logement, que le complément de RUI (30 % par enfant) ne compense pas.
@@ -169,7 +175,7 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 
 - **Le taux long de la dette (3,3 %) est sous le marché.** L'OAT à 10 ans a dépassé 4 % en juillet 2026. À 4 %, le déficit de 2037 passe de 2,31 % à 3,29 % et la dette de 2050 de 117 % à 134 % du PIB. C'est, de loin, l'hypothèse non sourcée qui pèse le plus parmi celles qu'on peut vérifier sur le marché.
 
-- **La réforme des entreprises détruit des emplois dans le prudent.** Avec l'IS à 45 %, le jeu de crise de la feuille Emploi compte 178 000 emplois perdus par délocalisation, et aucun gagné par la fin des impôts de production ; le médian en compte 181 000 gagnés. Le prudent prenant le milieu des deux, l'effet net est à peu près nul, et même légèrement négatif après rendements décroissants (+0,09 point de chômage en 2037 du fait de cette réforme).
+- **La réforme des entreprises détruit des emplois dans le prudent.** Avec l'IS à 45 %, le jeu de crise de la feuille Emploi compte 293 000 emplois perdus par délocalisation et 125 000 gagnés par la fin des impôts de production sur les salaires, soit 168 000 perdus au net, après rendements décroissants (correction du 29/10 : le chiffre net de 178 000, avant rendements décroissants, avait été présenté comme un effet de localisation seul) ; le médian en compte 181 000 gagnés au net. Le prudent prenant le milieu des deux, l'effet net est à peu près nul, et même légèrement négatif après rendements décroissants (+0,09 point de chômage en 2037 du fait de cette réforme).
 - **Les mesures les plus coûteuses du programme hors bascule** sont, en 2037 : la baisse de 5 % du coût employeur jusqu'à 1,3 SMIC (−8,2 Md€, net de ses emplois), les crèches (−5,7 Md€), l'aide à l'autonomie et à la garde d'enfants (−4,4 Md€). Les plus rentables : la division par deux du besoin de financement des collectivités (+9,4 Md€), l'âge légal de l'ancien système (+7,2 Md€), l'IA dans l'administration (+6,2 Md€).
 - **Fin des contrats aidés et de l'insertion** : elle ajoute 0,36 point de chômage et coûte 2,0 Md€ par l'activité perdue ; l'économie budgétaire correspondante est dans le budget statique de la bascule, pas dans cette ligne.
 

@@ -197,5 +197,23 @@ def entrees_macro_sans_tirage(p: Parametres, e: dict, perdus: dict, fin_prime: d
         "emplois_perdus_tardifs": {"prudent": fin_prime["crise"], "median": fin_prime["median"], "optimiste": fin_prime["optimiste"],
                                    "annee": p.val("emploi.prime_jeunes")["derniere_annee"]},
         "gain_par_emploi": {s: gain_par_emploi(p, s) for s in ("prudent", "median", "optimiste")},
+        **_entrees_canaux(p),
         "valeur_ajoutee_par_emploi": {"valeur": valeur_ajoutee_par_emploi(p)},
     }
+
+
+def _entrees_canaux(p: Parametres) -> dict:
+    """Bloc emploi unifié (emploi.gain_par_canal) : solde à terme des réformes et gains par canal."""
+    if not p.val("emploi.gain_par_canal"):
+        return {}
+    from .emploi_canaux import gains_par_canal, solde_reformes
+    u = getattr(p, "emplois_tirage", None)
+    if u is not None:
+        poids_prudent = {"crise": 1 - u, "optimiste": u}
+    elif p.colonne_prudent == "crise":
+        poids_prudent = {"crise": 1.0}
+    else:
+        poids_prudent = {"crise": 0.5, "median": 0.5}
+    poids = {"prudent": poids_prudent, "median": {"median": 1.0}, "optimiste": {"optimiste": 1.0}}
+    return {"solde_reformes_terme": {s: solde_reformes(p, s, poids[s]) for s in poids},
+            "gains_canaux": {s: gains_par_canal(p, s) for s in poids}}
