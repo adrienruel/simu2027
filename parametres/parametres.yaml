@@ -150,7 +150,8 @@ alignement:
       hospitaliere: {part: 0.23, charges_actuelles: 0.52}
     unite: sans_unite
     statut: HYPOTHESE
-    note: Militaires = même baisse que les civils, faute de détail. CNRACL ≈ 37,65 % du traitement en 2026.
+    source: "Encadrement des parts : Insee, dépenses par administration publique 2025, rémunération des salariés (D1) : État 153,8 Md€, administrations locales 97,0 Md€, sécurité sociale 88,2 Md€ (hôpitaux publics compris), soit environ 45 % / 29 % / 26 %. Charges : récapitulatif des cotisations CNRACL au 1er juin 2026 (CDG 33) : 60,7 % du traitement indiciaire hors versement mobilité, dont CNRACL 37,65 %"
+    note: "Militaires = même baisse que les civils, faute de détail. Les parts sont cohérentes avec l'Insee. Les charges de 52 % s'appliquent au brut, primes comprises (le traitement indiciaire porte 60,7 %, les primes surtout la RAFP) et mêlent titulaires et contractuels : ordre de grandeur plausible, à recalculer à l'étape OpenFisca."
 
 # --- Épargne obligatoire et fonds ----------------------------------------------
 epargne:
@@ -330,8 +331,9 @@ inactifs:
   chomeurs_bit:
     valeur: 2700000
     unite: sans_unite
-    statut: HYPOTHESE
-    note: RUI!B23, à sourcer.
+    statut: SOURCE
+    source: "Insee, Informations rapides n° 192 (7 août 2026) : 2,7 millions de chômeurs au sens du BIT au 2e trimestre 2026, taux de 8,3 %"
+    note: RUI!B23.
   part_chomeurs_deja_comptee:
     valeur: 0.2
     unite: taux
@@ -1045,10 +1047,11 @@ quotient:
   part_enfants_parent_imposable: {valeur: 0.85, unite: taux, statut: HYPOTHESE}
   familial_applique: {valeur: 1, unite: sans_unite, statut: DECISION}
   conjugal:
-    valeur: {couples: 7000000, part_un_revenu: 0.25, gain_un_revenu: 8510, gain_deux_revenus: 580, retraites_forfait: 1, applique: 1}
+    valeur: {couples: 7000000, part_un_revenu: 0.25, correlation: 0.4, retraites_forfait: 1, applique: 1}
+    v235: {couples: 7000000, part_un_revenu: 0.25, gain_un_revenu: 8510, gain_deux_revenus: 580, retraites_forfait: 1, applique: 1}
     unite: sans_unite
     statut: HYPOTHESE
-    note: Gains moyens = résultats d'une simulation figée (300 000 couples, corrélation 0,4) faite avec un ancien barème ; à recalculer par le moteur.
+    note: "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Restent des hypothèses : nombre de couples, part à un seul revenu, corrélation des revenus."
   rui_conjoint: {valeur: {inactifs_en_couple: 1300000, inactifs_feuille_rui: 3800000, part_supprimee: 0.75, part_nette_tva: 0.86}, unite: sans_unite, statut: HYPOTHESE}
 
 # --- Anciennes pensions au barème (feuille Anciennes pensions, v190-v215) ---------------

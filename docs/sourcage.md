@@ -37,10 +37,25 @@ Règles :
 
 Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 % ; avant clause 5,23 % / 5,18 % / 4,07 %.)
 
+## Calculé par le moteur au lieu d'être saisi (29 octobre 2026)
+
+| Paramètre | v235 | Maintenant | Effet |
+|---|---|---|---|
+| Gains du quotient conjugal | 8 510 € (couple à un revenu), 580 € (deux revenus) : résultats figés d'une simulation avec un ancien barème | Calculés avec le barème en vigueur sur la distribution des coûts employeur (privé et public aligné), corrélation des revenus 0,4 : **9 900 €** et **500 €** | coût du quotient conjugal 20,9 Md€ au lieu de 18,9 ; déficit +0,07 point |
+
+## Sources ajoutées (sans changement de valeur)
+
+| Paramètre | Source |
+|---|---|
+| inactifs.chomeurs_bit (2,7 millions) | Insee, Informations rapides n° 192, 2e trimestre 2026 |
+| alignement.versants (parts) | Insee, rémunération des salariés des administrations publiques 2025 : État 45 %, local 29 %, sécurité sociale 26 % ; le modèle retient 48 / 29 / 23 (hôpitaux seuls dans la sécurité sociale) |
+| alignement.versants (charges 52 %) | Cotisations CNRACL 2026 : 60,7 % du traitement indiciaire ; 52 % du brut primes comprises est plausible, à recalculer avec OpenFisca |
+
 ## Reste à reprendre
 
 | Paramètre | Constat |
 |---|---|
+| collectivites_detail.assiette_revenus (1 169 Md€) | Le taux de l'impôt local est le besoin des collectivités divisé par cette assiette « salaires, traitements, pensions au-delà de 12 500 € ». Mais le moteur ne prélève l'impôt local que sur les actifs (coût employeur au-delà de 12 500 €), dont l'assiette vaut déjà 1 132 Md€ à elle seule ; les retraités n'en paient pas dans le modèle. Il faut trancher qui paie l'impôt local (retraités, indépendants), puis calculer l'assiette à partir des mêmes revenus. |
 | tva.prix_carbone_2024 | 256 € est la valeur de l'action pour le climat **de 2025, en euros de 2023** (Quinet III, avis du CS ESE du 21 mai 2025), puis +3,2 % par an (300 € en 2030) ; le modèle la traite comme un prix de 2024 et ne la fait pas monter |
 
 ## Sources consultées

@@ -94,9 +94,13 @@ def donnees(p: Parametres | None = None) -> dict:
         if x.statut == "HYPOTHESE":
             return "HYPOTHESE_ENCADREE" if x.source else "HYPOTHESE"
         return x.statut
-    from .sensibilite import sensibilites
-    sens = [r for r in sensibilites(p) if "erreur" not in r][:15]
-    sensibilite = [{"cle": r["cle"], "note": (p[r["cle"]].note or "")[:200], "encadree": bool(p[r["cle"]].source),
+    # Sensibilité : lue dans sorties/sensibilite.json (python -m moteur.sensibilite, quelques minutes)
+    import json
+    fichier = RACINE / "sorties" / "sensibilite.json"
+    brut = json.loads(fichier.read_text(encoding="utf-8")) if fichier.exists() else []
+    sens = [r for r in brut if "erreur" not in r and r.get("parametre", r["cle"]) in p._p
+            and p[r.get("parametre", r["cle"])].statut == "HYPOTHESE"][:15]
+    sensibilite = [{"cle": r["cle"], "note": (p[r.get("parametre", r["cle"])].note or "")[:200], "encadree": bool(p[r.get("parametre", r["cle"])].source),
                     "deficit_2037": _r(r["deficit_2037"], 3), "deficit_2050": _r(r["deficit_2050"], 3)} for r in sens]
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)

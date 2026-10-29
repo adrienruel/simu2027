@@ -97,7 +97,16 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Taux long de la dette au niveau du marché (4,0 %) ; l'effet des réformes sur les taux reste porté par l'écart avec le Bund, différent selon le scénario. Inflation gardée à 1,8 %. Fonction de consommation recalée sur l'Insee. Détail et résultats : `docs/sourcage.md`.
 - Déficit publié du prudent : 4,86 % / 4,46 % / 3,51 % en 2029 / 2032 / 2037 (v235 : 4,67 / 3,81 / 2,31) ; durablement sous 3 % en 2053 ; dette 139 % du PIB en 2050.
 
+## 29 octobre 2026 — Quotient conjugal calculé, sensibilité champ par champ
+
+- Les gains du quotient conjugal sont calculés par le moteur avec le barème en vigueur (9 900 € pour un couple à un revenu, 500 € à deux revenus) au lieu des résultats figés d'une ancienne simulation (8 510 € et 580 €) : +2,0 Md€ de coût, +0,07 point de déficit.
+- La sensibilité perturbe désormais chaque champ d'une valeur structurée séparément (398 variantes, `python -m moteur.sensibilite`, résultat dans `sorties/sensibilite.json`, lu par le tableau de bord). L'ancienne méthode augmentait d'un bloc toutes les parts de l'alignement public-privé, ce qui n'avait pas de sens.
+- Sources ajoutées : chômeurs BIT (Insee, 2e trimestre 2026), parts et charges des versants de la fonction publique (Insee 2025, cotisations CNRACL 2026).
+- Déficit publié du prudent : 4,93 % / 4,53 % / 3,59 %.
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Assiette de l'impôt local incohérente avec ceux qui le paient.** Le taux est calculé sur une assiette de 1 169 Md€ décrite comme « salaires, traitements et pensions au-delà de 12 500 € », mais le modèle ne fait payer l'impôt local qu'aux actifs, dont l'assiette fait déjà 1 132 Md€ ; les retraités n'en paient pas. Il faut décider qui paie l'impôt local avant de recalculer l'assiette.
 
 - **Le taux long de la dette (3,3 %) est sous le marché.** L'OAT à 10 ans a dépassé 4 % en juillet 2026. À 4 %, le déficit de 2037 passe de 2,31 % à 3,29 % et la dette de 2050 de 117 % à 134 % du PIB. C'est, de loin, l'hypothèse non sourcée qui pèse le plus parmi celles qu'on peut vérifier sur le marché.
 
