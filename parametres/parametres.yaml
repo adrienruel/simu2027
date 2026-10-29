@@ -254,13 +254,15 @@ tva:
   prix_carbone_2024:
     valeur: 256
     unite: eur_par_tco2
-    statut: HYPOTHESE
-    note: Écrit dans la formule Barème TVA!B56 (256 × facteur), à sourcer.
+    statut: SOURCE
+    source: "Valeur de l'action pour le climat 2025 : 256 € de 2023 par tonne (commission Quinet III ; avis du conseil scientifique de France Stratégie du 21 mai 2025)"
+    note: "Écrit dans la formule Barème TVA!B56. Malgré le nom du paramètre, c'est la valeur de 2025 en euros de 2023 ; elle passe en euros de 2026 par les trois hausses de prix de tva.croissance_prix_carbone. Le modèle la garde constante en euros de 2026, alors que la valeur de l'action pour le climat monte de 3,2 % par an au-delà de l'inflation (300 € de 2023 en 2030)."
   croissance_prix_carbone:
     valeur: [0.02, 0.009, 0.021]
     unite: taux
-    statut: HYPOTHESE
-    note: Trois hausses écrites dans la formule Barème TVA!E56, à sourcer et nommer.
+    statut: SOURCE
+    source: "Inflation (IPC, moyenne annuelle) : 2,0 % en 2024 et 0,9 % en 2025 (Insee, Informations rapides n° 8, janvier 2026) ; 2,1 % prévu pour 2026"
+    note: "Passage du prix du carbone d'euros de 2023 en euros de 2026 (Barème TVA!E56). La valeur de 2026 est une prévision."
   carburants: {valeur: {co2_essence: 2.22, co2_gazole: 2.65, part_gazole: 0.55, prix_ht: 0.85}, unite: sans_unite, statut: HYPOTHESE}
   gaz_fioul: {valeur: {co2_gaz_kwh: 0.198, prix_gaz_kwh: 0.085, prix_fioul_litre: 1.0, part_gaz: 0.8}, unite: sans_unite, statut: HYPOTHESE}
   agriculture:
@@ -400,10 +402,12 @@ independants:
   micro_actifs: {valeur: 1900000, unite: sans_unite, statut: HYPOTHESE, note: "Micro-entrepreneurs économiquement actifs (RUI!J13)."}
   agriculteurs: {valeur: 408000, unite: sans_unite, statut: SOURCE, source: "Insee, non-salariés agricoles fin 2023"}
   passage_2023_2026:
-    valeur: 1.0395
+    v235: 1.0395
+    valeur: 1.0706
     unite: sans_unite
-    statut: HYPOTHESE
-    note: Facteur saisi à part dans la v235 (Indépendants!B40), distinct des facteurs de salaire et de PIB.
+    statut: SOURCE
+    source: "2024 : revenu moyen des non-salariés classiques +0,7 % en euros constants, inflation 2,0 %, soit +2,7 % (Insee Première n° 2114, 30 juin 2026) ; 2025 et 2026 : comme le salaire moyen du privé, +2,0 % et +2,2 % (unites.salaire_prive_2025 et _2026). 1,027 × 1,020 × 1,022 = 1,0706"
+    note: "Passage des revenus 2023 des indépendants classiques en euros de 2026 (Indépendants!B40). Corrigé le 29/10/2026 (v235 : 1,0395 saisi sans source). 2025 et 2026 supposés suivre les salaires, faute de donnée sur les non-salariés."
   part_percue: {valeur: {classiques: 0.978, micro: 0.58, agriculteurs: 0.978}, unite: sans_unite, statut: SOURCE, source: "Fraude estimée : 1,1 à 2,2 % des cotisations ; 42 % éludées chez les micro (Urssaf)"}
   correction_couples: {valeur: 0.894, unite: sans_unite, statut: HYPOTHESE, note: "Imposition commune des couples d'indépendants (Anciennes pensions!B21). Depuis le 29/10/2026, ne sert plus qu'aux indépendants : les retraités ont un calcul propre (anciennes_pensions.couples). Reste un forfait, gardé à la valeur la plus favorable aux couples (prudent pour les recettes)."}
   salaire_pivot:
@@ -463,7 +467,7 @@ budget_etat:
   lpm_2030_courants: {valeur: 76.3, unite: md_eur, annee_euros: 2030, statut: SOURCE, source: "Actualisation de la LPM : 76,3 Md€ en 2030 hors pensions (Total!B78)"}
   inflation_2026_2030: {valeur: 0.074, unite: taux, statut: HYPOTHESE, note: "Total!B79."}
   contribution_ue_courants: {valeur: 30.9, unite: md_eur, annee_euros: 2027, statut: SOURCE, source: "Prélèvement sur recettes au profit de l'UE (PLF), v222"}
-  deflateur_contribution_ue: {valeur: 1.018, unite: sans_unite, statut: HYPOTHESE, note: "Écrit dans la formule B66 (30,9/1,018)."}
+  deflateur_contribution_ue: {valeur: 1.018, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : inflation 2027 prévue à 1,9 % (IPCH, Banque de France, septembre 2026)", note: "Passage de la contribution de 2027 en euros de 2026 (B66 : 30,9/1,018). La contribution de 30,9 Md€ est confirmée par le PLF 2027 (rapport de Nicole Le Peih, Banque des territoires, 15/10/2026 ; 28,4 Md€ en LFI 2026)."}
   part_salariale_recherche: {valeur: 0.4, unite: taux, statut: HYPOTHESE}
   apprentissage: {valeur: 8.0, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Ordre de grandeur (Total!B77)."}
   eleves_prive: {valeur: 2000000, unite: sans_unite, statut: HYPOTHESE}

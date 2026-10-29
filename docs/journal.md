@@ -109,6 +109,13 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - L'imposition commune des couples de retraités de l'ancien système est calculée par le moteur, année par année, au lieu du coefficient fixe de 0,894. Le gain des couples grandit avec le temps (0,92 en 2029, 0,82 vers 2050), parce que les pensions gelées baissent en euros constants et passent dans la tranche à 0 %. Hypothèses prises prudentes faute de source : 60 % en couple, corrélation 0,2.
 - Déficit publié du prudent : 4,87 % / 4,49 % / 3,58 %.
 
+## 29 octobre 2026 — Indépendants, carbone, contribution européenne
+
+- Passage des revenus 2023 des indépendants en euros de 2026 sourcé (Insee Première n° 2114, puis évolution des salaires) : 1,0706 au lieu de 1,0395.
+- Prix du carbone : 256 € est bien la valeur de l'action pour le climat de 2025 en euros de 2023, et les trois hausses qui la convertissent sont l'inflation 2024, 2025 et 2026 (Insee). Seul le nom du paramètre trompe. Reste à décider si le prix suit la trajectoire de la valeur de l'action pour le climat (300 € de 2023 en 2030).
+- Contribution à l'UE : 30,9 Md€ confirmés par le PLF 2027.
+- Déficit publié du prudent : 4,83 % / 4,45 % / 3,53 %.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Couples de retraités comptés deux fois.** La v235 réduit l'impôt des anciennes pensions de 10,6 % pour l'imposition commune (≈ 6 Md€) et ajoute en plus un forfait de 1 Md€ « couples de retraités » dans le coût du quotient conjugal. Le moteur ne compte plus qu'une fois les retraités de l'ancien système.

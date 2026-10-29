@@ -47,10 +47,14 @@ Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 
 
 | Imposition commune des couples de retraités | 0,894 fixe (correction de l'impôt des anciennes pensions), plus un forfait de 1 Md€ « couples de retraités » dans le quotient conjugal : les mêmes couples comptés deux fois | Calculée année par année sur la distribution DREES des pensions : 60 % des retraités en couple, corrélation 0,2 (valeurs prudentes, sans source) ; la part du forfait qui porte sur l'ancien système est rendue | correction 0,92 en 2029, 0,82 vers 2050 ; recette +2,4 Md€ en 2029, −0,6 Md€ en 2050 ; déficit 2029 −0,06 point |
 
+| independants.passage_2023_2026 | 1,0395 saisi | **1,0706** : +2,7 % en 2024 pour les non-salariés classiques (Insee Première n° 2114), puis comme les salaires (+2,0 % et +2,2 %) | déficit −0,04 point |
+
 ## Sources ajoutées (sans changement de valeur)
 
 | Paramètre | Source |
 |---|---|
+| tva.prix_carbone_2024 (256 €) | Valeur de l'action pour le climat **2025**, en euros de **2023** (Quinet III) ; les trois hausses qui la passent en euros de 2026 sont l'inflation 2024 (2,0 %), 2025 (0,9 %, Insee) et la prévision 2026 (2,1 %). La valeur est juste ; seul le nom du paramètre trompe. |
+| budget_etat.contribution_ue_courants (30,9 Md€) | PLF 2027 (28,4 Md€ en LFI 2026) |
 | inactifs.chomeurs_bit (2,7 millions) | Insee, Informations rapides n° 192, 2e trimestre 2026 |
 | alignement.versants (parts) | Insee, rémunération des salariés des administrations publiques 2025 : État 45 %, local 29 %, sécurité sociale 26 % ; le modèle retient 48 / 29 / 23 (hôpitaux seuls dans la sécurité sociale) |
 | alignement.versants (charges 52 %) | Cotisations CNRACL 2026 : 60,7 % du traitement indiciaire ; 52 % du brut primes comprises est plausible, à recalculer avec OpenFisca |
@@ -59,7 +63,7 @@ Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 
 
 | Paramètre | Constat |
 |---|---|
-| tva.prix_carbone_2024 | 256 € est la valeur de l'action pour le climat **de 2025, en euros de 2023** (Quinet III, avis du CS ESE du 21 mai 2025), puis +3,2 % par an (300 € en 2030) ; le modèle la traite comme un prix de 2024 et ne la fait pas monter |
+| Trajectoire du prix du carbone | Le prix reste à 256 € de 2023 (constant en euros) alors que la valeur de l'action pour le climat monte de 3,2 % par an au-delà de l'inflation (300 € de 2023 en 2030). Le prix de la TVA écologique est une décision du programme : à trancher. |
 
 ## Sources consultées
 
