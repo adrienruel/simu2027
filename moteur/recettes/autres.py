@@ -46,6 +46,20 @@ def ligne_20_bailleurs(p: Parametres, scenario: str = "prudent") -> float:
     return (loyers + pv + sociaux) * MD
 
 
+def tva_retraites_actuelle(p: Parametres) -> float:
+    """TVA payée aujourd'hui par les retraités (€ de 2024) : distribution DREES des pensions, recalée sur la pension
+    nette moyenne de fin 2023 revalorisée en 2024, impôt sur le revenu moyen retiré, fonction de consommation actuelle."""
+    v = p.val("accises_entreprises.tva_retraites_actuelle")
+    if v != "calcul":
+        return v * MD
+    r = p.val("retraites_actuels.donnees")
+    dec = p.val("anciennes_pensions.deciles_drees_2020")
+    echelle = r["pension_nette_moyenne_2023"] * (1 + r["revalorisation_2024"]) / (sum(dec) / len(dec))
+    t = p.val("systeme_actuel.taux_tva_moyen")
+    conso = sum(t * consommation_actuelle_ht(12 * d * echelle * (1 - r["taux_ir_moyen"]), p) for d in dec) / len(dec)
+    return conso * r["residents_france_2023"]
+
+
 def ancienne_tva_ligne_3(p: Parametres) -> float:
     """Colonne « Ancien », ligne 3 (base brute, avant le passage en euros de 2024 de la ligne 17)."""
     t = p.val("systeme_actuel.taux_tva_moyen")
@@ -57,7 +71,7 @@ def ancienne_tva_ligne_3(p: Parametres) -> float:
     d = effectifs_public_2026(p)
     for n, an in zip(d.effectifs, _net_avant_aides("fonctionnaires.csv")):
         total += n * t * consommation_actuelle_ht(net_actuel(an, p, True), p)
-    total += p.val("accises_entreprises.tva_retraites_actuelle") * MD
+    total += tva_retraites_actuelle(p)
     total += tva_menages.tva_etudiants(p) + tva_menages.tva_inactifs(p)  # v235 : même valeur que le nouveau système
     total += p.val("accises_entreprises.ancienne_tva_entreprises") * MD
     return total

@@ -116,6 +116,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Contribution à l'UE : 30,9 Md€ confirmés par le PLF 2027.
 - Déficit publié du prudent : 4,83 % / 4,45 % / 3,53 %.
 
+## 29 octobre 2026 — TVA des retraités, successions, AAH
+
+- TVA payée aujourd'hui par les retraités calculée par le moteur à partir des données DREES : 34,0 Md€ au lieu de 41 Md€ saisis. La TVA actuelle reconstituée passe à 202 Md€ (206 Md€ perçus en 2024).
+- Sources : droits de succession 2023 (16,6 Md€, Fipeco), AAH 2026 (14,6 Md€, PLF).
+- Déficit publié du prudent : 4,97 % / 4,60 % / 3,70 %.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Couples de retraités comptés deux fois.** La v235 réduit l'impôt des anciennes pensions de 10,6 % pour l'imposition commune (≈ 6 Md€) et ajoute en plus un forfait de 1 Md€ « couples de retraités » dans le coût du quotient conjugal. Le moteur ne compte plus qu'une fois les retraités de l'ancien système.

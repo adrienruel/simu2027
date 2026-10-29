@@ -207,6 +207,15 @@ epargne:
     unite: sans_unite
     statut: HYPOTHESE
 
+# --- Retraités d'aujourd'hui (système actuel) ------------------------------------
+retraites_actuels:
+  donnees:
+    valeur: {residents_france_2023: 16300000, pension_nette_moyenne_2023: 1692, revalorisation_2024: 0.053, taux_ir_moyen: 0.06}
+    unite: sans_unite
+    statut: SOURCE
+    source: "DREES, Les retraités et les retraites, édition 2025, vue d'ensemble : 17,2 millions de retraités de droit direct fin 2023, dont environ 900 000 à l'étranger ; pension moyenne avec réversion 1 827 € bruts, 1 692 € après prélèvements sociaux. Revalorisation des pensions de base au 1er janvier 2024 : 5,3 %."
+    note: "taux_ir_moyen (impôt sur le revenu moyen des retraités, 6 % de la pension nette) reste une HYPOTHÈSE sans source ; une valeur haute est prudente ici (elle réduit la TVA actuelle, donc la recette du nouveau système calée dessus)."
+
 # --- Retraités en régime de croisière -----------------------------------------
 retraites:
   socle_plein:
@@ -443,7 +452,7 @@ logement:
   part_plus_values_bailleurs: {valeur: 0.5, unite: taux, statut: HYPOTHESE}
   is_bailleurs_sociaux: {valeur: 6.48, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "Loyers supplémentaires des bailleurs sociaux (Logement!B52), à porter avec la feuille Logement."}
 successions:
-  base_nouveau_systeme: {valeur: 16.6, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
+  base_nouveau_systeme: {valeur: 16.6, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Droits de succession 2023 : 16,6 Md€ (sur 20,8 Md€ de droits de mutation à titre gratuit, dont 4,3 Md€ de donations) ; Fipeco, F. Écalle, 12 novembre 2024", note: "Montant de 2023 compté comme des euros de 2024 : léger sous-chiffrage (≈ 2 %), dans le sens prudent."}
   exoneration_entreprises: {valeur: 1.5, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Cour des comptes 2025 (pacte Dutreil), recoupé v170"}
 fonds:
   recettes_non_fiscales: {valeur: 29, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Budget de l'État 2026"}
@@ -452,7 +461,7 @@ accises_entreprises:
   achats_ht: {valeur: {carburants: 15, gaz_fioul: 8, electricite: 0, aerien: 10}, unite: sans_unite, statut: HYPOTHESE, note: "Achats HT des entreprises soumis aux accises (Md€, Barème TVA B44-B47)."}
   ancienne_tva_entreprises: {valeur: 76.00990116, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, source: "Encadrement : Fipeco, fiche TVA : TVA nette 2024 de 206 Md€ ; emplois taxables : consommation des ménages ≈ 60 %, logements neufs ≈ 8 %, achats des entreprises non assujetties ≈ 15 %, achats des administrations ≈ 16 % ; soit ≈ 80 Md€ de TVA hors consommation des ménages", note: "TVA non déductible actuelle, somme de la colonne U (à reprendre en données). Ordre de grandeur cohérent avec Fipeco."}
   autres_impots_produits_actuels: {valeur: 103.834, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Total!C13 (TICPE, tabac, alcool, assurances, jeux, électricité)"}
-  tva_retraites_actuelle: {valeur: 41, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "Total!M4, saisie."}
+  tva_retraites_actuelle: {valeur: calcul, v235: 41, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Calculée par le moteur (recettes/autres.tva_retraites_actuelle) à partir de retraites_actuels.donnees", note: "TVA payée aujourd'hui par les retraités : 34,0 Md€ calculés (€ de 2024), contre 41 Md€ saisis dans la v235 (Total!M4) sans source."}
 carbone_importe:
   intensite_kg_par_euro: {valeur: 0.543, unite: sans_unite, statut: HYPOTHESE}
   part_importee: {valeur: 0.64, unite: taux, statut: HYPOTHESE}
@@ -533,7 +542,7 @@ rui_complements:
   enfants_parent_isole: {valeur: 3158000, v235: 2500000, unite: sans_unite, statut: SOURCE, source: "Insee Première n° 2032 (2025) : 3 158 000 enfants mineurs en famille monoparentale en 2023 (22,8 %)", note: "Corrigé le 29/10/2026 (v235 : 2,5 millions, sans source)."}
   part_enfant_parent_isole: {valeur: 0.30, unite: taux, statut: DECISION}
   micro_en_complement: {valeur: 0.4, unite: taux, statut: HYPOTHESE, note: "Part des micro-entrepreneurs exerçant en complément d'un emploi ou d'une retraite (RUI!J14)."}
-  aah: {valeur: 14.6, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Écrit dans la formule RUI!B17 (14,6 + aide au poste des entreprises adaptées)."}
+  aah: {valeur: 14.6, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "PLF 2026 : 14,6 Md€ pour l'AAH, +1,7 % sur 2025 (Sénat, rapport sur la mission Solidarité, insertion et égalité des chances)", note: "Écrit dans la formule RUI!B17 (14,6 + aide au poste des entreprises adaptées)."}
   aide_poste_entreprises_adaptees: {valeur: 0.4278, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Mission Travail et emploi 2026"}
 collectivites:
   besoin_financement_2024: {valeur: [5.608, 9.7], unite: sans_unite, statut: HYPOTHESE, note: "Md€ de 2024, Collectivités!B25:C25."}

@@ -51,15 +51,23 @@ Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 
 
 | carbone.fin_hausse | Prix porté à 300 € (de 2023) en 2030 puis +3,2 % par an jusqu'en 2073 (1 221 € de 2026) | Hausse arrêtée en 2060, comme la valeur de l'action pour le climat (811 € de 2026) ; la montée du prix est confirmée par Adrien | effet après 2060 seulement |
 
+| TVA payée aujourd'hui par les retraités | 41 Md€ saisis | **34,0 Md€** calculés : 16,3 millions de retraités résidant en France, pension nette moyenne 1 692 € fin 2023 (DREES) revalorisée de 5,3 %, distribution DREES, impôt sur le revenu moyen 6 % (hypothèse), fonction de consommation actuelle | déficit +0,15 point environ |
+
 ## Sources ajoutées (sans changement de valeur)
 
 | Paramètre | Source |
 |---|---|
 | tva.prix_carbone_2024 (256 €) | Valeur de l'action pour le climat **2025**, en euros de **2023** (Quinet III) ; les trois hausses qui la passent en euros de 2026 sont l'inflation 2024 (2,0 %), 2025 (0,9 %, Insee) et la prévision 2026 (2,1 %). La valeur est juste ; seul le nom du paramètre trompe. |
 | budget_etat.contribution_ue_courants (30,9 Md€) | PLF 2027 (28,4 Md€ en LFI 2026) |
+| successions.base_nouveau_systeme (16,6 Md€) | Droits de succession 2023 (Fipeco) ; montant de 2023 compté en euros de 2024 |
+| rui_complements.aah (14,6 Md€) | PLF 2026 |
 | inactifs.chomeurs_bit (2,7 millions) | Insee, Informations rapides n° 192, 2e trimestre 2026 |
 | alignement.versants (parts) | Insee, rémunération des salariés des administrations publiques 2025 : État 45 %, local 29 %, sécurité sociale 26 % ; le modèle retient 48 / 29 / 23 (hôpitaux seuls dans la sécurité sociale) |
 | alignement.versants (charges 52 %) | Cotisations CNRACL 2026 : 60,7 % du traitement indiciaire ; 52 % du brut primes comprises est plausible, à recalculer avec OpenFisca |
+
+## Contrôle global
+
+Avec la TVA des retraités recalculée, le modèle reconstitue une TVA actuelle d'environ 202 Md€, contre 206 Md€ perçus en 2024 (Fipeco) : l'écart (−2 %) va dans le sens prudent, puisque les recettes du nouveau système sont calées sur cette TVA actuelle.
 
 ## Reste à reprendre
 
