@@ -158,6 +158,10 @@ def donnees(p: Parametres | None = None) -> dict:
                                    "depenses_ancien": [round(sa[t]["depenses_md"]) for t in jalons],
                                    "nouveau": [round(rn[t] / 1e6, 2) for t in jalons],
                                    "socle": [round(cs[t]) for t in jalons]}
+        from .macro import calculer as _calc
+        _f = _calc(p)["prudent"].detail.get("fonds")
+        if _f:
+            population["fonds"] = {k: [round(_f[t][k]) for t in jalons] for k in ("encours_comptes", "capital", "rentes")}
         population["valeur_enfant"] = [{**x, "nouveau": round(x["nouveau"], 2)} for x in demo_m.valeur_enfant(p)]
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)

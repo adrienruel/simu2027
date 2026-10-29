@@ -279,6 +279,9 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     <h3>Retraités : ancien et nouveau système</h3>
     <p class="note">Ancien système : générations nées en 1979 ou avant, suivies une à une (projections de l'Insee, part partie à la retraite à chaque âge, pension calculée au départ puis gelée en euros courants ; âge légal porté à 65 ans, deux trimestres par génération), calées sur 428 Md€ et 19,15 millions de retraités en 2029. Nouveau système : générations de 22 à 49 ans en 2029, socle à partir de 67 ans, population de l'Insee (arrivées après 2029 comprises).</p>
     <div class="carte defile"><table id="t-retraites-tab"></table></div>
+    <h3>Le fonds : comptes d'épargne et capital nouveau (prudent)</h3>
+    <p class="note">Encours des comptes d'épargne obligatoire de toutes les générations (versements des salariés, rendement du fonds, rente viagère pour moitié à 67 ans, l'autre moitié placée) ; capital nouveau : la part placée dans des investissements nouveaux en France (après les investissements publics repris, l'éviction de l'épargne volontaire et la part placée à l'étranger), qui produit du PIB ; rentes versées aux retraités par les comptes. Md€ de 2026, hors croissance.</p>
+    <div class="carte defile"><table id="t-fonds-tab"></table></div>
     <h3>Ce que rapporte un enfant de plus au ménage (€ par an)</h3>
     <div class="carte defile"><table id="t-enfant-tab"></table></div>
   </section>
@@ -607,6 +610,11 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     document.getElementById("t-retraites-tab").innerHTML = `<thead><tr><th></th>${P.jalons.map(t => `<th>${t}</th>`).join("")}</tr></thead><tbody>` +
       ligneR("Retraités de l'ancien système (millions)", R.ancien, 1) + ligneR("Pensions de l'ancien système (Md€)", R.depenses_ancien, 0) +
       ligneR("Retraités du nouveau système touchant le socle (millions)", R.nouveau, 1) + ligneR("Socle versé (Md€)", R.socle, 0) + "</tbody>";
+    if (P.fonds) {
+      const Fd = P.fonds;
+      document.getElementById("t-fonds-tab").innerHTML = `<thead><tr><th>Md€</th>${P.jalons.map(t => `<th>${t}</th>`).join("")}</tr></thead><tbody>` +
+        ligneR("Encours des comptes", Fd.encours_comptes, 0) + ligneR("Capital nouveau (produit du PIB)", Fd.capital, 0) + ligneR("Rentes versées par les comptes", Fd.rentes, 0) + "</tbody>";
+    }
     const MEN = { deux_smic: "Couple, deux SMIC", smic_median: "Couple, SMIC et médian", deux_medians: "Couple, deux médians", cadre_median: "Couple, cadre et médian", median_inactif: "Couple, médian et conjoint sans emploi", parent_isole_smic: "Parent isolé au SMIC" };
     const V = P.valeur_enfant, ids = [...new Set(V.map(x => x.menage))];
     document.getElementById("t-enfant-tab").innerHTML = `<thead><tr><th>Ménage</th>${[1, 2, 3].map(r => `<th>${r === 1 ? "1er" : r + "e"} enfant : aujourd'hui</th><th>demain</th>`).join("")}</tr></thead><tbody>` +
