@@ -114,6 +114,14 @@ def donnees(p: Parametres | None = None) -> dict:
                 "impot_unique": round(x["nouveau"]["impot_unique"]), "impot_local": round(x["nouveau"]["impot_local"]),
                 "rui": round(x["nouveau"]["rui"] + x["nouveau"]["complements_enfants"]),
                 "ecart_conso": round(100 * x["ecart_consommation_pct"], 1)} for x in comparer(p)]
+    from .menages_types import futurs_retraites, nouveau
+    actifs = {"Carrière au SMIC": "smic", "Carrière au salaire médian": "median", "Carrière de cadre (100 000 €)": 100000}
+    retraites_futurs = []
+    for x in futurs_retraites(p):
+        net_actif = nouveau({"adultes": [actifs[x["libelle"]]], "enfants": []}, p)["revenu_disponible"] / 12
+        retraites_futurs.append({"libelle": x["libelle"], "rente": round(x["rente"]), "socle": round(x["socle"]),
+                                 "net": round(x["net_mensuel"]), "net_actif": round(net_actif),
+                                 "remplacement": round(100 * x["net_mensuel"] / net_actif)})
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))
@@ -129,6 +137,7 @@ def donnees(p: Parametres | None = None) -> dict:
         "attribution": attribution,
         "incertitude": incertitude,
         "menages": menages,
+        "retraites_futurs": retraites_futurs,
         "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts), "sensibilite": sensibilite, "corriges": corriges,
                        "hypotheses_par_groupe": groupes.most_common()},
     }

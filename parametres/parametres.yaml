@@ -1109,7 +1109,7 @@ quotient:
     unite: sans_unite
     statut: HYPOTHESE
     note: "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Restent des hypothèses : nombre de couples, part à un seul revenu, corrélation des revenus."
-  rui_conjoint: {valeur: {inactifs_en_couple: 1300000, inactifs_feuille_rui: 3800000, part_supprimee: 0.75, part_nette_tva: 0.86}, unite: sans_unite, statut: HYPOTHESE}
+  rui_conjoint: {valeur: {inactifs_en_couple: 1300000, inactifs_feuille_rui: 3800000, part_supprimee: 0.75, part_nette_tva: 0.86}, unite: sans_unite, statut: HYPOTHESE, note: "Règle confirmée par Adrien le 29/10/2026 : le RUI du conjoint sans revenu baisse avec le revenu net du couple et s'éteint quand il atteint deux RUI par personne (moteur/menages_types.py, réforme OpenFisca). La part supprimée (0,75) reste une hypothèse de chiffrage global."}
 
 # --- Anciennes pensions au barème (feuille Anciennes pensions, v190-v215) ---------------
 anciennes_pensions:

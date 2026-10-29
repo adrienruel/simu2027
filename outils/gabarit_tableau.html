@@ -258,6 +258,9 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     <h2 id="t-menages">Ménages types : aujourd'hui et demain</h2>
     <p class="note">Système actuel calculé par OpenFisca-France (législation 2026 : impôt sur le revenu, cotisations, CSG, prime d'activité, RSA, aides au logement, prestations familiales ; locataires en zone 2). Nouveau système calculé par le moteur : impôt unique, impôt local, RUI et compléments pour enfants ; l'épargne obligatoire est versée sur le compte du ménage, elle n'est pas comptée dans le revenu disponible. La dernière colonne compare ce que le ménage peut consommer hors taxes, la TVA et les accises de chaque système comprises.</p>
     <div class="carte defile"><table id="t-menages-tab"></table></div>
+    <h3>Futurs retraités du nouveau système</h3>
+    <p class="note">Carrière entière au même niveau de coût employeur, en régime de croisière (euros de 2026, par mois) : rente de l'épargne obligatoire (rendement du fonds, 75 % des années en emploi) et socle, qui baisse quand la rente monte. Le taux de remplacement rapporte la pension au revenu disponible d'actif dans le nouveau système, épargne obligatoire déduite. La comparaison avec les pensions du système actuel demande les cas types du COR, à ajouter.</p>
+    <div class="carte defile"><table id="t-retraites-futurs"></table></div>
   </section>
 
   <section class="bloc" aria-labelledby="t-param">
@@ -551,6 +554,9 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     const eur = v => fr(v, 0) + " €";
     document.getElementById("t-menages-tab").innerHTML = `<thead><tr><th>Ménage</th><th>Revenu disponible aujourd'hui</th><th>Demain</th><th class="detail">dont impôt unique</th><th class="detail">impôt local</th><th class="detail">RUI et compléments</th><th>Épargne sur le compte</th><th>Consommation possible</th></tr></thead><tbody>` +
       M.map(x => `<tr><td>${x.libelle}</td><td class="n">${eur(x.actuel)}</td><td class="n">${eur(x.nouveau)}</td><td class="n detail">${eur(x.impot_unique)}</td><td class="n detail">${eur(x.impot_local)}</td><td class="n detail">${eur(x.rui)}</td><td class="n">${eur(x.epargne)}</td><td class="n${x.ecart_conso < 0 ? " neg" : ""}"><b>${sg(x.ecart_conso, 1)} %</b></td></tr>`).join("") + "</tbody>";
+    const F = D.retraites_futurs || [];
+    document.getElementById("t-retraites-futurs").innerHTML = `<thead><tr><th>Carrière</th><th>Rente</th><th>Socle</th><th>Pension nette</th><th>Revenu d'actif</th><th>Taux de remplacement</th></tr></thead><tbody>` +
+      F.map(x => `<tr><td>${x.libelle}</td><td class="n">${eur(x.rente)}</td><td class="n">${eur(x.socle)}</td><td class="n"><b>${eur(x.net)}</b></td><td class="n">${eur(x.net_actif)}</td><td class="n">${x.remplacement} %</td></tr>`).join("") + "</tbody>";
   })();
   selN.addEventListener("change", tableLignes);
   rng.addEventListener("input", detail); selS.addEventListener("change", detail);

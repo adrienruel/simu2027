@@ -150,6 +150,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Les deux écritures (réforme OpenFisca et `moteur/menages_types.py`) donnent le même revenu disponible à moins d'un centime sur les dix ménages types ; un test le vérifie, et un second recalcule la table avec OpenFisca quand il est installé.
 - Ménages de retraités de l'ancien système ajoutés : retraité seul à 1 700 € bruts −3,9 % de consommation possible (il perd l'aide au logement), couple de retraités +0,5 %.
 
+## 29 octobre 2026 — Futurs retraités, règle du RUI du conjoint
+
+- Règle du RUI du conjoint sans revenu confirmée par Adrien (il s'éteint quand le revenu net du couple atteint deux RUI par personne).
+- Futurs retraités du nouveau système (croisière, carrière entière) : SMIC 1 300 € nets par mois (socle seul), médian 1 530 € (rente 480 + socle 1 050), cadre à 100 000 € 1 762 € (rente 963 + socle 799). Taux de remplacement du revenu d'actif du nouveau système : 76 %, 75 %, 57 %.
+- Pas de ménage d'indépendant : OpenFisca couvre mal les cotisations des non-salariés au réel ; à reprendre avec un cas micro-entrepreneur.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Ménages types : le programme fait des perdants nets.** À consommation hors taxes comparable (TVA et accises de chaque système comprises, épargne obligatoire mise à part) : personne seule au SMIC −1,6 %, au salaire médian −4,3 %, cadre à 100 000 € −22,6 %, parent isolé au SMIC −10,3 %, couple de deux médians −3,7 % ; gagnants : couple de deux SMIC avec deux enfants +6,0 %, couple à un salaire médian avec deux enfants +11,1 % (quotient conjugal). L'épargne obligatoire (2 400 € par an au salaire médian) reste au ménage, mais elle n'est pas disponible. Le parent isolé perd l'allocation de soutien familial, la prime d'activité et l'aide au logement, que le complément de RUI (30 % par enfant) ne compense pas.

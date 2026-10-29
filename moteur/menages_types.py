@@ -118,3 +118,23 @@ if __name__ == "__main__":
         a, n = r["actuel"], r["nouveau"]
         print(f"{r['libelle'][:60]:60} actuel {a['revenu_disponible']:8.0f}  nouveau {n['revenu_disponible']:8.0f} "
               f"(+ épargne {n['epargne_obligatoire']:6.0f})  conso HT {r['ecart_consommation_pct']*100:+5.1f} %")
+
+
+def futurs_retraites(p: Parametres | None = None, scenario: str = "prudent") -> list[dict]:
+    """Retraités du nouveau système en régime de croisière, après une carrière entière au même niveau de coût
+    employeur (euros de 2026) : rente de leur épargne obligatoire et socle, qui décroît avec la rente."""
+    from .epargne import rente_mensuelle
+    p = p or Parametres()
+    smic = p.val("epargne.cout_smic_mensuel") * 12
+    out = []
+    for libelle, c in (("Carrière au SMIC", smic), ("Carrière au salaire médian", p.val("profils.cout_median_annuel")),
+                       ("Carrière de cadre (100 000 €)", 100000.0)):
+        e = epargne_annuelle(c, p, scenario, part_rui_salarie(c, p), contribution=False)
+        rente = rente_mensuelle(e, p)
+        socle = p.val("retraites.socle_plein") * max(0.0, 1 - rente / p.val("retraites.rente_annulant_socle"))
+        imp = impot(12 * rente * p.val("retraites.part_imposable_rente"), p, scenario) / 12
+        if not p.val("retraites.socle_exonere"):
+            imp = impot(12 * (rente * p.val("retraites.part_imposable_rente") + socle), p, scenario) / 12
+        out.append({"libelle": libelle, "epargne_annuelle": e, "rente": rente, "socle": socle, "impot": imp,
+                    "net_mensuel": rente + socle - imp})
+    return out
