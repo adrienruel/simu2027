@@ -61,6 +61,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     from .depenses.statique import rui_enfants
     demo = indices(p, "prudent")
     rui_enf = rui_enfants(p)
+    from .demographie import creches_nouvelles
+    creches = creches_nouvelles(p)
     def reval(t):
         n = t - 2029
         return (((1 + g) / (1 + infl)) ** n * (1 + prod[t]) - 1) if p.val("revalorisation.rui_aah_socle_croissance") else 0.0
@@ -104,6 +106,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "autres", "autres_croissance", "Autres dépenses : croissance tendancielle", "croissance", autres_base * (crois - 1))
         L.ajouter(t, "autres", "autres_demographie", "Autres dépenses : démographie (population)", "demographie",
                   autres_base * crois * (d["total"] - 1))
+        L.ajouter(t, "autres", "creches_nouvelles", "Crèches : places créées (fonctionnement et construction)", "mesure",
+                  creches[t])
         L.ajouter(t, "autres", "ia_administration", "IA dans l'administration : économie", "mesure", -ia[t] * crois)
         L.ajouter(t, "autres", "reformes_emploi", "Réformes de l'emploi : coût", "mesure", (em["g24"] - em["b155"] * (t > em["b154"])) * crois)
         L.ajouter(t, "autres", "ascenseur_depenses", "Ascenseur social : dépenses", "mesure", asc_d[t])

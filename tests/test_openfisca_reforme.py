@@ -37,3 +37,14 @@ def test_reforme_recalculee_par_openfisca():
     for i, l in lignes.items():
         assert frais[i]["revenu_disponible"] == pytest.approx(float(l["revenu_disponible"]), abs=0.05), i
         assert frais[i]["nouveau_revenu_disponible"] == pytest.approx(float(l["nouveau_revenu_disponible"]), abs=0.05), i
+
+
+def test_troisieme_enfant_openfisca_egale_moteur():
+    """Familles de 3 enfants (part majorée dès le 3e) : la réforme OpenFisca et le moteur concordent."""
+    pytest.importorskip("openfisca_france")
+    from outils.openfisca_menages import calculer
+    from outils.valeur_enfant import menages
+    ms = [m for m in menages() if len(m["enfants"]) == 3]
+    for l, m in zip(calculer(2026, ms), ms):
+        n = nouveau(_menage_avec_couts_openfisca(m, l), P)
+        assert l["nouveau_revenu_disponible"] == pytest.approx(n["revenu_disponible"], abs=0.05), m["id"]

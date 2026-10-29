@@ -78,14 +78,14 @@ def rui_enfants(p: Parametres) -> float:
     """Part de la ligne 42 versée pour les enfants (compléments de RUI, Md€)."""
     rui = p.val("rui.montant") * 12
     return (p.val("rui_complements.enfants") * p.val("rui_complements.part_enfant")
+            + p.val("rui_complements.enfants_rang3") * max(0.0, p.val("rui_complements.part_enfant_rang3") - p.val("rui_complements.part_enfant"))
             + p.val("rui_complements.enfants_parent_isole") * p.val("rui_complements.part_enfant_parent_isole")) * rui / MD
 
 
 def rui_aah(p: Parametres, scenario: str = "prudent") -> float:
     """Ligne 42 (Md€) : RUI de toutes les populations + AAH."""
     rui = p.val("rui.montant") * 12
-    enfants = (p.val("rui_complements.enfants") * p.val("rui_complements.part_enfant")
-               + p.val("rui_complements.enfants_parent_isole") * p.val("rui_complements.part_enfant_parent_isole")) * rui
+    enfants = rui_enfants(p) * MD
     plafond = p.val("inactifs.revenu_annulant_rui") * 12
     complement = lambda revenu: max(0.0, (plafond - revenu) / plafond * rui)
     agri = sum(c["effectif"] * complement(c["revenu"]) for c in classes_independants(p, scenario) if c["groupe"] == "agriculteurs")

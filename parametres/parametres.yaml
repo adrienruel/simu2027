@@ -545,6 +545,13 @@ rui_complements:
   part_enfant: {valeur: 0.15, unite: taux, statut: DECISION}
   enfants_parent_isole: {valeur: 3158000, v235: 2500000, unite: sans_unite, statut: SOURCE, source: "Insee Première n° 2032 (2025) : 3 158 000 enfants mineurs en famille monoparentale en 2023 (22,8 %)", note: "Corrigé le 29/10/2026 (v235 : 2,5 millions, sans source)."}
   part_enfant_parent_isole: {valeur: 0.30, unite: taux, statut: DECISION}
+  part_enfant_rang3: {valeur: 0.25, v235: 0.15, unite: taux, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : 25 % du RUI à partir du 3e enfant (15 % pour les deux premiers). Parent isolé : 30 % pour chaque enfant, inchangé (déjà au-dessus). v235 : 15 % pour tous."}
+  enfants_rang3:
+    valeur: 1696600
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, Familles selon le nombre d'enfants mineurs, RP 2023 : 956 200 familles de 3 enfants, 308 400 de 4 ou plus ; 13 882 000 enfants mineurs en famille (Insee Première n° 2032), d'où 4,40 enfants en moyenne dans les familles de 4 ou plus"
+    note: "Enfants de rang 3 ou plus : 956 200 + 308 400 × 2,40 = 1 696 600. Tous comptés au taux des couples (prudent : les familles monoparentales gardent 30 % mais la ventilation n'est pas publiée)."
   micro_en_complement: {valeur: 0.4, unite: taux, statut: HYPOTHESE, note: "Part des micro-entrepreneurs exerçant en complément d'un emploi ou d'une retraite (RUI!J14)."}
   aah: {valeur: 14.6, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "PLF 2026 : 14,6 Md€ pour l'AAH, +1,7 % sur 2025 (Sénat, rapport sur la mission Solidarité, insertion et égalité des chances)", note: "Écrit dans la formule RUI!B17 (14,6 + aide au poste des entreprises adaptées)."}
   aide_poste_entreprises_adaptees: {valeur: 0.4278, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Mission Travail et emploi 2026"}
@@ -1140,6 +1147,17 @@ crise:
   effort_2029_saisi: {valeur: 0.012, unite: taux, statut: HYPOTHESE, note: "En crise, Effets macro!B19 est saisi (1,2 point) au lieu d'être calculé."}
   decote_participations: {valeur: 0.2, unite: taux, statut: HYPOTHESE, note: "Coût transition!I76 en crise."}
 
+# --- Famille : places de crèche créées (29 octobre 2026) -------------------------------
+famille:
+  creches_nouvelles:
+    valeur: {points_couverture: 0.10, debut: 2030, montee_annees: 5}
+    v235: {points_couverture: 0.0, debut: 2030, montee_annees: 5}
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 29/10/2026 : créer des places de crèche, +10 points de couverture des moins de 3 ans (≈ 195 000 places), montée en 5 ans à partir de 2030. Places proportionnelles au nombre d'enfants de moins de 3 ans (démographie)."
+  cout_place_fonctionnement: {valeur: 19450, unite: eur_an, annee_euros: 2026, statut: SOURCE, source: "Onape, édition 2025 : prix de revient d'une place en crèche PSU", note: "Payé entièrement par l'État (prudent : la participation des familles n'est pas déduite)."}
+  cout_place_investissement: {valeur: 42000, unite: eur_an, annee_euros: 2026, statut: HYPOTHESE, source: "Encadrement : 33 551 € par place créée en moyenne (de 20 410 € en gestion privée à 47 908 € en régie municipale), revue de dépenses IGAS-IGF sur l'accueil du jeune enfant (2017), cité par l'Institut Montaigne", note: "Montant de 2017 porté à 2026 avec ≈ 25 % de hausse des coûts de construction (hypothèse). Une fois par place créée."}
+
 # --- Démographie (module de population annuel, 29 octobre 2026) -------------------------
 # Projections de population de l'Insee (juin 2026), par âge et par année ; taux d'emploi par âge ; effet du
 # programme sur la natalité. Voir moteur/demographie.py et docs/demographie.md.
@@ -1165,4 +1183,9 @@ demographie:
     source: "Encadrement : allocation de naissance de 2 500 € en Espagne (2007-2010) : +3 % de naissances (González et Trommlerová, 2023), soit ≈ 2 % par 100 € par an d'enfance ; Israël, baisse de l'allocation de 150 shekels par mois (≈ 400 € par an) en 2003 : −7,5 % de fécondité (Cohen, Dehejia et Romanov, 2013) ; une grande part de ces effets est de calendrier (revue CFFP, Université de Sherbrooke, 2026)."
     note: "Variation relative des naissances pour 100 € par an de soutien en plus par enfant. Crise : borne haute (l'effet le plus défavorable si le soutien baisse) ; prudent et médian : la moitié, effets de calendrier retirés ; optimiste : le quart."
   natalite_montee: {valeur: 3, unite: sans_unite, statut: HYPOTHESE, note: "Années pour que l'effet sur les naissances soit plein, à partir de 2030 (premières naissances conçues sous le nouveau système)."}
-  creches_effet: {valeur: 0.0, unite: sans_unite, statut: HYPOTHESE, note: "La mesure finance par l'État les places existantes (Onape 2025) sans en créer : pas d'effet de l'offre de garde sur la natalité (+2,8 % de naissances pour 10 points de couverture en Allemagne, Bauernschuster, Hener et Rainer, 2016, si des places étaient créées)."}
+  creches_effet:
+    valeur: {crise: 0.0, prudent: 0.014, median: 0.028, optimiste: 0.028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Bauernschuster, Hener et Rainer (Journal of the European Economic Association, 2016) : +10 points de couverture des moins de 3 ans en accueil public → +1,2 naissance pour 1 000 femmes, soit +2,8 % ; pas un simple effet de calendrier"
+    note: "Hausse relative des naissances pour +10 points de couverture (mise à l'échelle des places créées : famille.creches_nouvelles). Médian et optimiste : l'estimation allemande ; prudent : la moitié (transposition à la France, où la couverture est déjà plus haute) ; crise : aucun effet. v235 : pas de places créées."

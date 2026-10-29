@@ -179,3 +179,13 @@ mesures:
     domaine: sante
     debut: 2029
     neutraliser: {"sante.mesures_a_terme/imagerie": 0}
+  - id: creches_nouvelles
+    libelle: "Crèches : +10 points de couverture des moins de 3 ans (places créées)"
+    domaine: famille
+    debut: 2030
+    neutraliser: {"famille.creches_nouvelles/points_couverture": 0}
+  - id: rui_troisieme_enfant
+    libelle: "RUI : 25 % par enfant à partir du 3e"
+    domaine: famille
+    debut: 2029
+    neutraliser: {"rui_complements.part_enfant_rang3": 0.15}

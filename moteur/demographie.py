@@ -58,8 +58,9 @@ def ecart_soutien_enfant(p: Parametres) -> float:
 
 def effet_naissances(p: Parametres, jeu: str = "prudent") -> float:
     """Variation relative des naissances due au programme (à plein effet)."""
+    places = p.val("famille.creches_nouvelles")["points_couverture"] / 0.10
     return (p.val("demographie.natalite_semi_elasticite", jeu) * ecart_soutien_enfant(p) / 100
-            + p.val("demographie.creches_effet"))
+            + p.val("demographie.creches_effet", jeu) * places)
 
 
 def population(p: Parametres, jeu: str = "prudent") -> dict[int, tuple[float, ...]]:
@@ -112,3 +113,20 @@ def indices(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
         return {t: {g: 1.0 for g in groupes} for t in ANNEES}
     e = effectifs(p, jeu)
     return {t: {g: e[t][g] / e[2029][g] for g in groupes} for t in ANNEES}
+
+
+def creches_nouvelles(p: Parametres) -> dict[int, float]:
+    """Coût des places de crèche créées (Md€ par an) : fonctionnement des places ouvertes et construction des
+    places de l'année. Places = points de couverture × enfants de moins de 3 ans (population de 2029 si le
+    module de population est désactivé)."""
+    c = p.val("famille.creches_nouvelles")
+    e = effectifs(p, "prudent") if c["points_couverture"] else None
+    out, avant = {}, 0.0
+    for t in range(2029, 2074):
+        k = min(1.0, max(0.0, (t - c["debut"] + 1) / c["montee_annees"]))
+        moins3 = e[t]["moins_de_3_ans"] if (e and p.val("demographie.active")) else (e[2029]["moins_de_3_ans"] if e else 0.0)
+        places = c["points_couverture"] * moins3 * k
+        construites = max(0.0, places - avant)
+        avant = max(avant, places)
+        out[t] = (places * p.val("famille.cout_place_fonctionnement") + construites * p.val("famille.cout_place_investissement")) / 1e9
+    return out

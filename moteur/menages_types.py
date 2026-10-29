@@ -65,6 +65,14 @@ def impot_menage(couts: list[float], n_enfants: int, p: Parametres, scenario: st
     return max(avec, sans_enfant - p.val("quotient.plafond_demi_part") * demi_parts)
 
 
+def parts_enfants(n: int, parent_isole: bool, p: Parametres) -> float:
+    """Somme des parts de RUI versées pour n enfants (rang 3 et plus : part majorée)."""
+    if parent_isole:
+        return n * p.val("rui_complements.part_enfant_parent_isole")
+    base = p.val("rui_complements.part_enfant")
+    return min(n, 2) * base + max(0, n - 2) * max(base, p.val("rui_complements.part_enfant_rang3"))
+
+
 def nouveau(m: dict, p: Parametres, scenario: str = "prudent") -> dict:
     couts = couts_adultes(m, p)
     pensions = pensions_adultes(m)
@@ -83,8 +91,7 @@ def nouveau(m: dict, p: Parametres, scenario: str = "prudent") -> dict:
         rui_conjoint = rui * max(0.0, 1 - par_personne / (2 * rui))
     elif len(couts) == 1 and sans_revenu[0]:
         rui_conjoint = rui
-    part = p.val("rui_complements.part_enfant_parent_isole" if len(couts) == 1 else "rui_complements.part_enfant")
-    complements = n_enf * part * rui
+    complements = parts_enfants(n_enf, len(couts) == 1, p) * rui
     epargne = sum(epargne_annuelle(c, p, scenario, part_rui_salarie(c, p), contribution=False) for c in couts if c > 0)
     dispo = net_avant_conjoint + rui_conjoint + complements - epargne
     sante, tva = taux_pour_revenu(dispo / max(1, len(couts)), p)

@@ -38,6 +38,7 @@ def construire(tbs, p, scenario: str = "prudent"):
     parts_enfant = p.val("quotient.parts_par_enfant")
     part_enfant = p.val("rui_complements.part_enfant")
     part_enfant_isole = p.val("rui_complements.part_enfant_parent_isole")
+    part_rang3 = max(part_enfant, p.val("rui_complements.part_enfant_rang3"))
 
     def bareme_vect(x):
         x = np.asarray(x, dtype=float)
@@ -130,8 +131,9 @@ def construire(tbs, p, scenario: str = "prudent"):
             seul = (parents == 1) * (inactifs >= 1) * rui
             couple = (parents == 2) * (inactifs == 1) * rui * max_(0, 1 - (net / 2) / (2 * rui))
             couple_deux = (parents == 2) * (inactifs == 2) * 2 * rui
-            part = np.where(parents == 1, part_enfant_isole, part_enfant)
-            return seul + couple + couple_deux + enfants * part * rui
+            parts = np.where(parents == 1, enfants * part_enfant_isole,
+                             np.minimum(enfants, 2) * part_enfant + np.maximum(enfants - 2, 0) * part_rang3)
+            return seul + couple + couple_deux + parts * rui
 
     class revenu_disponible_nouveau(Variable):
         value_type = float
