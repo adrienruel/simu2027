@@ -516,9 +516,9 @@ ia:
   part_departs_non_remplaces: {valeur: 1.0, unite: taux, statut: DECISION, note: "DÉCISION du 16 octobre 2026 (v185)."}
   premiere_annee: {valeur: 2028, unite: annee, statut: DECISION}
 rui_complements:
-  enfants: {valeur: 11500000, unite: sans_unite, statut: HYPOTHESE}
+  enfants: {valeur: 10724000, v235: 11500000, unite: sans_unite, statut: SOURCE, source: "Insee Première n° 2032 (2025), enfants mineurs vivant en famille en 2023 : 13 882 000, dont 3 158 000 en famille monoparentale ; 13 882 000 − 3 158 000 = 10 724 000 avec leurs deux parents ou en famille recomposée", note: "Corrigé le 29/10/2026 (v235 : 11,5 millions, sans source)."}
   part_enfant: {valeur: 0.15, unite: taux, statut: DECISION}
-  enfants_parent_isole: {valeur: 2500000, unite: sans_unite, statut: HYPOTHESE}
+  enfants_parent_isole: {valeur: 3158000, v235: 2500000, unite: sans_unite, statut: SOURCE, source: "Insee Première n° 2032 (2025) : 3 158 000 enfants mineurs en famille monoparentale en 2023 (22,8 %)", note: "Corrigé le 29/10/2026 (v235 : 2,5 millions, sans source)."}
   part_enfant_parent_isole: {valeur: 0.30, unite: taux, statut: DECISION}
   micro_en_complement: {valeur: 0.4, unite: taux, statut: HYPOTHESE, note: "Part des micro-entrepreneurs exerçant en complément d'un emploi ou d'une retraite (RUI!J14)."}
   aah: {valeur: 14.6, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Écrit dans la formule RUI!B17 (14,6 + aide au poste des entreprises adaptées)."}
@@ -729,7 +729,8 @@ macro:
   taux_reference_is:
     valeur: {crise: 0.25, prudent: 0.25, median: 0.25, optimiste: 0.25}
     unite: sans_unite
-    statut: HYPOTHESE
+    statut: SOURCE
+    source: "Taux normal de l'IS, article 219 du code général des impôts (25 % depuis 2022)"
   effort_2029:
     valeur: {crise: 0.012, prudent: 0.012, median: 0.011, optimiste: 0.011}
     unite: sans_unite
@@ -740,7 +741,7 @@ macro:
     statut: HYPOTHESE
     note: "Écrit dans les formules B273:D273 (−0,047 / −0,055 / −0,121), sans libellé : à documenter."
   taux_apparent_2029: {valeur: 0.027, unite: taux, statut: SOURCE, source: "Charge d'intérêts des APU ≈ 3,2 % du PIB (Effets macro!B211)"}
-  taux_long_terme: {valeur: 0.033, unite: taux, statut: HYPOTHESE}
+  taux_long_terme: {valeur: 0.033, unite: taux, statut: HYPOTHESE, source: "Encadrement : OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026) ; Bund 3,22 %", note: "Taux nominal de long terme de la dette. 3,3 % est sous le marché actuel (≈ 4 %) : pas prudent. Paramètre le plus influent après la fonction de consommation. À trancher."}
   annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
   premiere_annee_productivite: {valeur: 2030, unite: annee, statut: HYPOTHESE}
@@ -782,7 +783,7 @@ calendrier:
     note: Md€ (Calendrier B8:B12). La fin des impôts de production (−24) est un « écart du modèle » saisi, à recalculer depuis les recettes.
   dotations_collectivites: {valeur: 90, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "≈ 54 Md€ de concours et ≈ 40 Md€ de fractions de TVA."}
   part_dotations_versee: {valeur: 0, unite: taux, statut: DECISION, note: "Fin des dotations dès la bascule de 2029."}
-  inflation: {valeur: 0.018, unite: taux, statut: HYPOTHESE, note: "Objectifs!B8 ; sert au passage en euros constants de la dette et au déficit de Maastricht."}
+  inflation: {valeur: 0.018, unite: taux, statut: HYPOTHESE, source: "Encadrement : Banque de France, projections de septembre 2026 (IPCH 1,9 % en 2027, 1,6 % en 2028) ; cible de la BCE 2 %", note: "Objectifs!B8 ; sert au passage en euros constants de la dette et au déficit de Maastricht. Une inflation plus basse est défavorable (elle érode moins la dette) : le prudent serait 1,6 %. À trancher."}
 deces:
   reperes: {valeur: {2023: 639000, 2026: 650000, 2037: 752000, 2048: 840000, 2060: 840000, 2070: 819500}, unite: sans_unite, statut: SOURCE, source: "Insee, projections de population (repères de la feuille Successions)"}
   annee_reference: {valeur: 2023, unite: annee, statut: HYPOTHESE, note: "Décès de 2023 (Successions!C5), année des droits de succession de la base."}

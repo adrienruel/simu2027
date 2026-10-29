@@ -90,8 +90,17 @@ def donnees(p: Parametres | None = None) -> dict:
         "ensemble": {k: [_r(att["ensemble"][t][k], 3) for t in annees] for k in cles},
         "somme": {k: [_r(sum(m["annees"][t][k] for m in att["mesures"]), 3) for t in annees] for k in cles},
     }
-    statuts = Counter(x.statut for x in p)
-    hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE"))
+    def categorie(x):
+        if x.statut == "HYPOTHESE":
+            return "HYPOTHESE_ENCADREE" if x.source else "HYPOTHESE"
+        return x.statut
+    from .sensibilite import sensibilites
+    sens = [r for r in sensibilites(p) if "erreur" not in r][:15]
+    sensibilite = [{"cle": r["cle"], "note": (p[r["cle"]].note or "")[:200], "encadree": bool(p[r["cle"]].source),
+                    "deficit_2037": _r(r["deficit_2037"], 3), "deficit_2050": _r(r["deficit_2050"], 3)} for r in sens]
+    corriges = sorted(x.cle for x in p if x.v235 is not None)
+    statuts = Counter(categorie(x) for x in p)
+    hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))
     groupes = Counter(c.split(".")[0] for c in hypotheses)
     return {
         "meta": {"version": _version(), "date": date.today().isoformat(), "euros": "euros constants de 2026",
@@ -102,6 +111,6 @@ def donnees(p: Parametres | None = None) -> dict:
         "libelles_canaux": LIBELLES_CANAUX,
         "postes": POSTES,
         "attribution": attribution,
-        "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts),
+        "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts), "sensibilite": sensibilite, "corriges": corriges,
                        "hypotheses_par_groupe": groupes.most_common()},
     }

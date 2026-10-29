@@ -11,7 +11,7 @@ from arbre import VAL  # noqa: E402
 from moteur import macro
 from moteur.parametres import Parametres
 
-R = macro.calculer(Parametres())
+R = macro.calculer(Parametres(reference="v235"))
 LIGNES = {
     "prudent": {"pib_effet": 107, "solde_effet": 109, "charge_dette": 111, "solde_public": 112, "dette": 113, "maastricht": 114, "dette_pib": 115},
     "median": {"pib_effet": 136, "solde_effet": 138, "charge_dette": 140, "solde_public": 141, "dette": 142, "maastricht": 143, "dette_pib": 144},

@@ -18,6 +18,9 @@ class ErreurParametre(ValueError):
     pass
 
 
+_ABSENT = None
+
+
 class _ChargeurStrict(yaml.SafeLoader):
     """Refuse les clés en double : YAML garderait silencieusement la dernière."""
 
@@ -45,6 +48,7 @@ class Parametre:
     source: str | None = None
     note: str | None = None
     par_scenario: bool = False
+    v235: Any = None  # valeur de la v235 si le paramètre a été corrigé depuis (_ABSENT sinon)
 
     def pour(self, scenario: str) -> Any:
         """Valeur du paramètre dans un scénario (identique partout si non ventilée)."""
@@ -56,8 +60,11 @@ class Parametre:
 
 
 class Parametres:
-    def __init__(self, chemin: Path | str = CHEMIN_DEFAUT):
+    def __init__(self, chemin: Path | str = CHEMIN_DEFAUT, reference: str | None = None):
+        """reference="v235" : reprend, pour chaque paramètre corrigé depuis, la valeur de la v235 (champ v235)
+        — sert aux tests de reproduction du classeur. Par défaut : valeurs actuelles (publiées)."""
         brut = yaml.load(Path(chemin).read_text(encoding="utf-8"), Loader=_ChargeurStrict)
+        self.reference = reference
         self.scenarios: list[str] = brut.pop("scenarios")
         self._p: dict[str, Parametre] = {}
         for groupe, contenu in brut.items():
@@ -66,6 +73,8 @@ class Parametres:
                 self._p[cle] = self._valider(cle, champs)
 
     def _valider(self, cle: str, c: dict) -> Parametre:
+        if getattr(self, "reference", None) == "v235" and "v235" in c:
+            c = {**c, "valeur": c["v235"]}
         for champ in ("valeur", "unite", "statut"):
             if champ not in c:
                 raise ErreurParametre(f"{cle} : champ « {champ} » manquant")
@@ -83,7 +92,7 @@ class Parametres:
         return Parametre(
             cle=cle, valeur=c["valeur"], unite=c["unite"], statut=c["statut"],
             annee_euros=c.get("annee_euros"), source=c.get("source"), note=c.get("note"),
-            par_scenario=par_scenario,
+            par_scenario=par_scenario, v235=c.get("v235", _ABSENT),
         )
 
     # Colonne lue quand un module demande le prudent : « crise » pour le calcul du scénario de crise.

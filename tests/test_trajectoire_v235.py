@@ -14,7 +14,7 @@ from moteur.trajectoire import Annee, calculer
 from moteur.calendrier import dette_fin_2028
 
 CIBLES = Path(__file__).resolve().parent.parent / "reference" / "cibles" / "trajectoire.csv"
-P = Parametres()
+P = Parametres(reference="v235")
 TOLERANCE_MD = 0.01
 
 

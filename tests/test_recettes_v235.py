@@ -4,7 +4,7 @@ import pytest
 from moteur.parametres import Parametres
 from moteur.recettes import impot_salaires as sal
 
-P = Parametres()
+P = Parametres(reference="v235")
 MD = 1e9
 TOL = 0.01 * MD  # 0,01 Md€
 

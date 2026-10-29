@@ -10,7 +10,7 @@ from arbre import VAL  # noqa: E402
 
 from moteur.parametres import Parametres
 
-P = Parametres()
+P = Parametres(reference="v235")
 ANNEES = list(range(2029, 2074))
 
 

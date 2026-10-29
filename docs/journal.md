@@ -86,7 +86,15 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - `moteur/attribution.py` : contribution de chaque mesure = solde avec tout − solde sans la mesure, prudent sans clause, décomposée en ligne budgétaire, effets sur l'activité et intérêts. Ensemble des mesures séparables en 2037 : +33,0 Md€, −1,12 point de déficit, −1,04 point de chômage ; la somme mesure par mesure (+31,4 Md€) en diffère de 1,7 Md€ (interactions).
 - Tableau de bord : section « Ce que rapporte chaque mesure » (2029, 2032, 2037, 2050, filtre par domaine).
 
+## 29 octobre 2026 — Début du sourçage
+
+- `moteur/sensibilite.py` classe les hypothèses par poids sur le déficit (+10 % sur chacune) : la fonction de consommation, l'alignement public-privé par versant, le taux long de la dette, le quotient conjugal figé et la correction des couples arrivent en tête.
+- Chaque paramètre corrigé garde sa valeur de la v235 (champ `v235`) ; les tests de reproduction la lisent (`Parametres(reference="v235")`), le calcul publié prend la valeur corrigée.
+- Premiers corrigés et points à trancher : `docs/sourcage.md`. Le déficit publié passe à 4,69 % / 3,84 % / 2,33 % (enfants : chiffres de l'Insee).
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Le taux long de la dette (3,3 %) est sous le marché.** L'OAT à 10 ans a dépassé 4 % en juillet 2026. À 4 %, le déficit de 2037 passe de 2,31 % à 3,29 % et la dette de 2050 de 117 % à 134 % du PIB. C'est, de loin, l'hypothèse non sourcée qui pèse le plus parmi celles qu'on peut vérifier sur le marché.
 
 - **La réforme des entreprises détruit des emplois dans le prudent.** Avec l'IS à 45 %, le jeu de crise de la feuille Emploi compte 178 000 emplois perdus par délocalisation, et aucun gagné par la fin des impôts de production ; le médian en compte 181 000 gagnés. Le prudent prenant le milieu des deux, l'effet net est à peu près nul, et même légèrement négatif après rendements décroissants (+0,09 point de chômage en 2037 du fait de cette réforme).
 - **Les mesures les plus coûteuses du programme hors bascule** sont, en 2037 : la baisse de 5 % du coût employeur jusqu'à 1,3 SMIC (−8,2 Md€, net de ses emplois), les crèches (−5,7 Md€), l'aide à l'autonomie et à la garde d'enfants (−4,4 Md€). Les plus rentables : la division par deux du besoin de financement des collectivités (+9,4 Md€), l'âge légal de l'ancien système (+7,2 Md€), l'IA dans l'administration (+6,2 Md€).

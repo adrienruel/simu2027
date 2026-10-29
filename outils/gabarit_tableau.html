@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Trajectoire budgétaire 2029-2073</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -244,6 +245,11 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       <div class="barres-stat" id="stat-barre" aria-hidden="true"></div>
       <div class="legende" id="stat-leg"></div>
       <p class="note" id="stat-note"></p>
+    </div>
+    <div class="carte bloc">
+      <h3>Les hypothèses qui pèsent le plus</h3>
+      <p class="note">Écart de déficit (points de PIB, prudent sans clause) si l'hypothèse est augmentée de 10 %. C'est l'ordre dans lequel les sourcer.</p>
+      <div class="defile"><table id="t-sens"></table></div>
     </div>
   </section>
 
@@ -508,10 +514,14 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
 
   // Paramètres
   const st = D.parametres.statuts, tot = D.parametres.total;
-  const cat = [["SOURCE", "Sourcés", "var(--s-median)"], ["DECISION", "Décisions du programme", "var(--s-prudent)"], ["HYPOTHESE", "Hypothèses sans source", "var(--s-crise)"]];
-  document.getElementById("stat-barre").innerHTML = cat.map(([k, , c]) => `<div style="width:${st[k] / tot * 100}%;background:${c}" title="${k}"></div>`).join("");
-  document.getElementById("stat-leg").innerHTML = cat.map(([k, l, c]) => `<span><i class="pastille" style="background:${c}"></i>${l} : <b class="chiffre">${st[k]}</b></span>`).join("");
+  const cat = [["SOURCE", "Sourcés", "var(--s-median)"], ["DECISION", "Décisions du programme", "var(--s-prudent)"],
+    ["HYPOTHESE_ENCADREE", "Hypothèses encadrées par une source", "var(--s-optimiste)"], ["HYPOTHESE", "Hypothèses sans source", "var(--s-crise)"]];
+  document.getElementById("stat-barre").innerHTML = cat.map(([k, , c]) => `<div style="width:${(st[k] || 0) / tot * 100}%;background:${c}" title="${k}"></div>`).join("");
+  document.getElementById("stat-leg").innerHTML = cat.map(([k, l, c]) => `<span><i class="pastille" style="background:${c}"></i>${l} : <b class="chiffre">${st[k] || 0}</b></span>`).join("");
   const top = D.parametres.hypotheses_par_groupe.slice(0, 4).map(([g, n]) => `${g} (${n})`).join(", ");
-  document.getElementById("stat-note").textContent = `${tot} paramètres. Les hypothèses sans source sont prises prudentes ; elles se concentrent dans : ${top}. Les sourcer est la prochaine étape du chantier.`;
+  document.getElementById("stat-note").textContent = `${tot} paramètres, dont ${D.parametres.corriges.length} corrigés depuis la v235 sur source. Les hypothèses sans source sont prises prudentes ; elles se concentrent dans : ${top}.`;
+  const SE = D.parametres.sensibilite;
+  document.getElementById("t-sens").innerHTML = `<thead><tr><th>Hypothèse</th><th>Déficit 2037</th><th>Déficit 2050</th><th>Source</th></tr></thead><tbody>` +
+    SE.map(r => `<tr><td><span class="chiffre">${r.cle}</span><br><span class="discret" style="font-size:12.5px">${r.note}</span></td><td class="n">${sg(r.deficit_2037, 2)}</td><td class="n">${sg(r.deficit_2050, 2)}</td><td>${r.encadree ? '<span class="puce mesure">encadrée</span>' : '<span class="puce">aucune</span>'}</td></tr>`).join("") + "</tbody>";
 })();
 </script>

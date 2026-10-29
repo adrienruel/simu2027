@@ -11,7 +11,7 @@ from arbre import VAL  # noqa: E402
 from moteur import trajectoire_annuelle as ta
 from moteur.parametres import Parametres
 
-R = ta.postes(Parametres())
+R = ta.postes(Parametres(reference="v235"))
 
 
 @pytest.mark.parametrize("poste, ligne", [("recettes_hors_macro", 43), ("sante", 18), ("retraites", 19), ("rui_aah", 20),
@@ -24,7 +24,7 @@ def test_postes(poste, ligne):
 
 def test_recettes_avec_effets_macro_ligne_17():
     from moteur.simulation import simuler
-    res = simuler()
+    res = simuler(Parametres(reference="v235"), crise=False)
     for i, t in enumerate(ta.ANNEES):
         cible = VAL[("Trajectoire 2029-2073", f"{get_column_letter(i + 2)}17")]
         assert res["prudent"][t]["recettes"] == pytest.approx(cible, abs=0.01), t

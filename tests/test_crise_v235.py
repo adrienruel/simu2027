@@ -17,7 +17,7 @@ from moteur.parametres import Parametres
 from moteur.unites import facteur
 
 RACINE = Path(__file__).resolve().parent.parent
-P = Parametres()
+P = Parametres(reference="v235")
 C = P.en_crise(comme_v235=True)
 RES = calculer(C)["prudent"]
 PIB0 = 2920 * facteur(C, 2024, "recettes")
