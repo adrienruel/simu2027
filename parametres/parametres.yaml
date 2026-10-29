@@ -820,6 +820,13 @@ macro:
   taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
   annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
+  usure_capital_fonds:
+    valeur: {crise: 0.035, prudent: 0.04, median: 0.055, optimiste: 0.065}
+    v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : usure du capital des sociétés non financières ≈ 10 % par an (Banque de France, Sicsic, 2018) ; actifs régulés à longue durée de vie (réseaux, nucléaire, logement) : 2,5 à 4 % (durées d'amortissement de 25 à 40 ans) ; le capital nouveau du fonds est pour moitié régulé, pour moitié industrie et IA (feuille Fonds)"
+    note: "Correction du 29/10/2026 : le capital du fonds produit une valeur ajoutée brute = rendement net + usure (la part qui paie le renouvellement du capital fait partie du PIB), comme le canal de l'investissement des entreprises (pib_par_euro_capital + usure_capital). La v235 ne comptait que le rendement net. Prudent : 4 % (proche des actifs régulés, bas de la fourchette) ; médian : 5,5 % ; optimiste : 6,5 % ; crise : 3,5 %."
   externalites_capital_fonds:
     valeur: {crise: 0.0, prudent: 0.0, median: 0.01, optimiste: 0.02}
     v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
@@ -1052,7 +1059,7 @@ is_investissement:
   montee_annees: {valeur: 8, unite: sans_unite, statut: DECISION}
   montee_etalee_annees: {valeur: 16, unite: sans_unite, statut: DECISION, note: "Étalement de la clause de trajectoire (v221)."}
   part_admise: {valeur: 0.5, v235: 1, unite: taux, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : déduction immédiate de 50 % de l'investissement au départ (atteinte en 2036 avec la montée de 8 ans), puis progressivement 100 % (hausse_part_admise). v235 : 100 %."}
-  hausse_part_admise: {valeur: {cible: 1.0, debut: 2040, fin: 2049}, v235: {cible: 1.0, debut: 2029, fin: 2029}, unite: sans_unite, statut: DECISION, note: "Calendrier proposé le 29/10/2026 pour « progressivement vers 100 % » : de 50 % à 100 % par pas égaux de 2040 à 2049, après le pic de déficit des années 2030. À confirmer par Adrien."}
+  hausse_part_admise: {valeur: {cible: 1.0, debut: conditionnel, fin: conditionnel, duree: 10, seuil_deficit: 0.03}, v235: {cible: 1.0, debut: 2029, fin: 2029, duree: 1, seuil_deficit: 0.03}, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : hausse conditionnée au déficit. De 50 % à 100 % par pas de 5 points : un pas chaque année qui suit une année où le déficit du prudent, avant clause, est sous 3 % du PIB (calculé sans la hausse) ; pause sinon. Une année chiffrée à la place de « conditionnel » fixe un calendrier (début, fin)."}
   investissement_snf_2025: {valeur: 364.8, unite: md_eur, annee_euros: 2025, statut: SOURCE, source: "Insee, comptes nationaux annuels 2025 (FBCF des SNF)"}
   categories: {valeur: {construction: {part: 0.28, duree: 25}, equipements: {part: 0.32, duree: 7}, immateriel: {part: 0.4, duree: 3}}, unite: sans_unite, statut: HYPOTHESE}
   part_payeurs_is: {valeur: 0.8, unite: taux, statut: HYPOTHESE}

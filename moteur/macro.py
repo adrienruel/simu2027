@@ -201,7 +201,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             pib_aj = -eff * m("multiplicateur", s) * max(0, 1 - n / m("annees_effet_ajustement", s)) * pib0[t]
             s_aj = pib_aj * part_budget + pib_aj / pib0[t] * 100 * m("emplois_par_point_pib", s) / 100 * rui_ch
             # Capital du fonds (début d'année)
-            pib_cap = capital * (m("pib_par_euro_capital", s) + m("externalites_capital_fonds", s))
+            # valeur ajoutée brute du capital du fonds : rendement net + usure (+ retombées dans le médian et l'optimiste)
+            pib_cap = capital * (m("pib_par_euro_capital", s) + m("usure_capital_fonds", s) + m("externalites_capital_fonds", s))
             s_cap = pib_cap * part_budget
             # Logement
             if n < m("duree_initiale", s):

@@ -5,8 +5,10 @@ seul changement. Prudent, déficit avant clause en % du PIB, écart au programme
 
 ## Décisions d'Adrien du 29 octobre 2026 (intégrées)
 
-- Déduction immédiate de l'investissement : 50 % (atteinte en 2036), puis hausse vers 100 % de 2040 à 2049
-  (calendrier proposé, à confirmer).
+- Déduction immédiate de l'investissement : 50 % (atteinte en 2036), puis hausse vers 100 % **conditionnée au
+  déficit** : un pas de 5 points chaque année qui suit une année où le déficit du prudent, avant clause, calculé
+  sans la hausse, est sous 3 % ; pause sinon. Dans le prudent : 55 % en 2047, pause pendant le pic des
+  remboursements de 2047-2052, puis 60 % en 2054 et 100 % en 2063. En crise : 50 % jusqu'au bout.
 - Socle à 1 200 € (au lieu de 1 300).
 - Baisse du coût employeur jusqu'à 1,3 SMIC : 2,5 % (au lieu de 5 %).
 
@@ -24,19 +26,32 @@ seul changement. Prudent, déficit avant clause en % du PIB, écart au programme
 - Défaut corrigé avant : la contribution de transition (part de l'épargne obligatoire versée à l'État) est
   comptée en recette.
 
+## Capital du fonds : valeur ajoutée brute (correction du 29/10/2026, question d'Adrien)
+
+Le capital du fonds était compté dans les retours économiques (canal « capital du fonds »), mais pour son seul
+rendement net (3,2 % dans le prudent). Or la valeur ajoutée d'un capital comprend aussi l'usure (la part qui paie
+son renouvellement fait partie du PIB), comme le canal de l'investissement des entreprises la comptait déjà.
+Ajouté : usure de 4 % dans le prudent (actifs régulés à longue durée de vie), 5,5 % médian, 6,5 % optimiste.
+Effet du canal sur le solde (prudent) : 6,6 Md€ en 2037, 18,4 en 2050, 42,7 en 2073 (environ le double d'avant).
+
+Ce qui reste hors du canal : les investissements publics repris par le fonds (transports, énergie, France 2030,
+investissements locaux rentables) sont une économie du budget, pas une production en plus (ils existaient déjà) ;
+les retombées au-delà du rendement ne sont comptées que dans le médian et l'optimiste.
+
 ## Résultat (prudent)
 
 | Déficit avant clause | 2029 | 2037 | 2050 | 2060 | 2073 | Publié 2037 | Dette 2073 |
 |---|---|---|---|---|---|---|---|
 | Avant les décisions | 5,68 | 6,03 | 4,75 | 1,96 | 0,62 | 4,10 | 132 % |
 | Après les décisions | 5,36 | 5,15 | 4,59 | 1,33 | −0,52 | 3,26 | 112 % |
-| **Après décisions et corrections** | **5,35** | **5,22** | **5,18** | **2,83** | **1,77** | **3,19** | **145 %** |
+| Après décisions et trois canaux ajoutés | 5,35 | 5,22 | 5,18 | 2,83 | 1,77 | 3,19 | 145 % |
+| **Plus hausse conditionnée et usure du capital du fonds** | **5,35** | **5,06** | **3,85** | **1,31** | **−1,71** | **3,04** | **98 %** |
 
 Ce que pèse chaque correction (écart au programme actuel si on la retire) : prime de taux −0,11 en 2037,
 −0,63 en 2050, −2,36 en 2073 (dette 111 % sans elle) ; participation des inactifs +0,04 / +0,07 / +0,29 ;
 retombées du fonds +0,01 / +0,01 / +0,06 (le prudent n'en compte pas ; seul le médian, cible de la clause).
 
-## Leviers encore ouverts (sur la base actuelle)
+## Leviers encore ouverts (chiffrés avant la hausse conditionnée et l'usure du fonds ; ordres de grandeur)
 
 | Variante | 2037 | 2050 | 2073 | Publié 2037 | Dette 2073 | Naissances |
 |---|---|---|---|---|---|---|

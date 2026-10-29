@@ -34,3 +34,19 @@ def test_participation_des_inactifs():
 
 def test_externalites_du_fonds_nulles_dans_le_prudent():
     assert P.val("macro.externalites_capital_fonds", "prudent") == 0 == P.val("macro.externalites_capital_fonds", "crise")
+
+
+def test_hausse_de_la_deduction_conditionnee_au_deficit():
+    """La part déduite ne monte que les années qui suivent un déficit (prudent, avant clause) sous 3 %."""
+    from moteur.is_investissement import part_deduite
+    assert part_deduite(P, 2045) == 0.5
+    assert all(part_deduite(P, t + 1) >= part_deduite(P, t) for t in range(2036, 2073))
+    crise = P.en_crise()
+    assert part_deduite(crise, 2073) == 0.5  # en crise, le déficit ne repasse jamais sous 3 %
+
+
+def test_valeur_ajoutee_du_fonds_compte_l_usure():
+    from moteur.macro import calculer
+    avec = calculer(P)["prudent"].detail["canaux"][2050]["capital_du_fonds"]
+    sans = calculer(P.avec({"macro.usure_capital_fonds": 0.0}))["prudent"].detail["canaux"][2050]["capital_du_fonds"]
+    assert avec > sans > 0

@@ -11,11 +11,28 @@ def part_admise(p: Parametres, t: int | None = None) -> float:
     depart = p.val("is_investissement.part_admise")
     if t is None:
         return depart
-    h = p.val("is_investissement.hausse_part_admise")
+    h = dict(p.val("is_investissement.hausse_part_admise"))
+    if h["debut"] == "conditionnel":
+        pas = annees_sous_seuil(p, t)
+        return depart + (max(depart, h["cible"]) - depart) * min(1.0, pas / h["duree"])
     if h["fin"] <= h["debut"]:
         return depart if t < h["debut"] else max(depart, h["cible"])
     k = min(1.0, max(0.0, (t - h["debut"] + 1) / (h["fin"] - h["debut"] + 1)))
     return depart + (max(depart, h["cible"]) - depart) * k
+
+
+def annees_sous_seuil(p: Parametres, t: int) -> int:
+    """Nombre d'années avant t où le déficit du prudent, avant clause, calculé sans la hausse, est sous le seuil :
+    la part déduite monte d'un pas chacune de ces années (pause quand le déficit repasse au-dessus)."""
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("deficit_sans_hausse_deduction", p.colonne_prudent)
+    if cle not in cache:
+        from .macro import calculer
+        sans = p.avec({"is_investissement.hausse_part_admise/debut": 9999, "is_investissement.hausse_part_admise/fin": 9999})
+        sans.colonne_prudent, sans._surcharges, sans.taux_local_copie = p.colonne_prudent, p._surcharges, p.taux_local_copie
+        cache[cle] = {u: c["avant"] for u, c in calculer(sans)["prudent"].detail["clause"].items()}
+    seuil = p.val("is_investissement.hausse_part_admise")["seuil_deficit"]
+    return sum(1 for u, d in cache[cle].items() if u < t and d < seuil)
 
 
 def part_deduite(p: Parametres, t: int, montee: int | None = None) -> float:
