@@ -283,14 +283,18 @@ tva:
 # --- Consommation des ménages ---------------------------------------------------
 consommation:
   coefficient:
-    valeur: 2.05
+    valeur: 7.184
+    v235: 2.05
     unite: sans_unite
-    statut: HYPOTHESE
-    note: Consommation HT = coefficient × (revenu disponible HT)^exposant (Total!N29, rangé à côté des dépenses régaliennes).
+    statut: SOURCE
+    source: "Ajusté sur Insee Première n° 1815 (septembre 2020), consommation et revenu disponible par unité de consommation, par quintile, 2017 : régression log-log de la consommation TTC sur le revenu, convertie en hors taxe avec le taux moyen de 13 %"
+    note: "Consommation HT = coefficient × (revenu disponible HT)^exposant. DÉCISION d'Adrien du 29/10/2026 : recalée sur l'Insee maintenant, à recaler sur des ménages à l'étape OpenFisca. Épargne implicite : −2 % à 13 000 €, 12 % à 26 000 €, 25 % à 56 000 € (Insee : 2,7 % ; 9,7 % ; 28,4 %). v235 : 2,05 × revenu^0,92 (3 % à 17 %)."
   exposant:
-    valeur: 0.92
+    valeur: 0.7914
+    v235: 0.92
     unite: sans_unite
-    statut: HYPOTHESE
+    statut: SOURCE
+    source: "Ajusté sur Insee Première n° 1815, voir consommation.coefficient"
   eviction_epargne_volontaire:
     valeur: {crise: 0.20, prudent: 0.175, median: 0.15, optimiste: 0.10}
     unite: taux
@@ -669,6 +673,8 @@ macro:
     valeur: {crise: 0, prudent: 0, median: 0.002, optimiste: 0.004}
     unite: sans_unite
     statut: HYPOTHESE
+    source: "Encadrement : écart OAT − Bund à 10 ans ≈ 0,8 point le 24 juillet 2026 (4,01 % contre 3,22 %)"
+    note: "Baisse du taux long attendue de la crédibilité des réformes, atteinte en 8 ans. DÉCISION d'Adrien du 29/10/2026 : l'effet des réformes sur les taux est incertain, il varie selon le scénario (aucun dans la crise et le prudent, un quart de l'écart avec le Bund dans le médian, la moitié dans l'optimiste)."
   part_reelle_hauts_revenus:
     valeur: {crise: 0.5, prudent: 0.375, median: 0.25, optimiste: 0.1}
     unite: sans_unite
@@ -741,7 +747,7 @@ macro:
     statut: HYPOTHESE
     note: "Écrit dans les formules B273:D273 (−0,047 / −0,055 / −0,121), sans libellé : à documenter."
   taux_apparent_2029: {valeur: 0.027, unite: taux, statut: SOURCE, source: "Charge d'intérêts des APU ≈ 3,2 % du PIB (Effets macro!B211)"}
-  taux_long_terme: {valeur: 0.033, unite: taux, statut: HYPOTHESE, source: "Encadrement : OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026) ; Bund 3,22 %", note: "Taux nominal de long terme de la dette. 3,3 % est sous le marché actuel (≈ 4 %) : pas prudent. Paramètre le plus influent après la fonction de consommation. À trancher."}
+  taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
   annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
   premiere_annee_productivite: {valeur: 2030, unite: annee, statut: HYPOTHESE}
@@ -783,7 +789,7 @@ calendrier:
     note: Md€ (Calendrier B8:B12). La fin des impôts de production (−24) est un « écart du modèle » saisi, à recalculer depuis les recettes.
   dotations_collectivites: {valeur: 90, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "≈ 54 Md€ de concours et ≈ 40 Md€ de fractions de TVA."}
   part_dotations_versee: {valeur: 0, unite: taux, statut: DECISION, note: "Fin des dotations dès la bascule de 2029."}
-  inflation: {valeur: 0.018, unite: taux, statut: HYPOTHESE, source: "Encadrement : Banque de France, projections de septembre 2026 (IPCH 1,9 % en 2027, 1,6 % en 2028) ; cible de la BCE 2 %", note: "Objectifs!B8 ; sert au passage en euros constants de la dette et au déficit de Maastricht. Une inflation plus basse est défavorable (elle érode moins la dette) : le prudent serait 1,6 %. À trancher."}
+  inflation: {valeur: 0.018, unite: taux, statut: DECISION, source: "Encadrement : Banque de France, projections de septembre 2026 (IPCH 1,9 % en 2027, 1,6 % en 2028) ; cible de la BCE 2 %", note: "Objectifs!B8 ; sert au passage en euros constants de la dette et au déficit de Maastricht. DÉCISION d'Adrien du 29/10/2026 : 1,8 % gardé, entre la Banque de France (1,6 % en 2028) et la cible de la BCE (2 %). Une inflation plus basse aggraverait le déficit (1,6 % : +0,13 point en 2037)."}
 deces:
   reperes: {valeur: {2023: 639000, 2026: 650000, 2037: 752000, 2048: 840000, 2060: 840000, 2070: 819500}, unite: sans_unite, statut: SOURCE, source: "Insee, projections de population (repères de la feuille Successions)"}
   annee_reference: {valeur: 2023, unite: annee, statut: HYPOTHESE, note: "Décès de 2023 (Successions!C5), année des droits de succession de la base."}

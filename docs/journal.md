@@ -92,6 +92,11 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Chaque paramètre corrigé garde sa valeur de la v235 (champ `v235`) ; les tests de reproduction la lisent (`Parametres(reference="v235")`), le calcul publié prend la valeur corrigée.
 - Premiers corrigés et points à trancher : `docs/sourcage.md`. Le déficit publié passe à 4,69 % / 3,84 % / 2,33 % (enfants : chiffres de l'Insee).
 
+## 29 octobre 2026 — Décisions d'Adrien sur le taux long, l'inflation et la consommation
+
+- Taux long de la dette au niveau du marché (4,0 %) ; l'effet des réformes sur les taux reste porté par l'écart avec le Bund, différent selon le scénario. Inflation gardée à 1,8 %. Fonction de consommation recalée sur l'Insee. Détail et résultats : `docs/sourcage.md`.
+- Déficit publié du prudent : 4,86 % / 4,46 % / 3,51 % en 2029 / 2032 / 2037 (v235 : 4,67 / 3,81 / 2,31) ; durablement sous 3 % en 2053 ; dette 139 % du PIB en 2050.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Le taux long de la dette (3,3 %) est sous le marché.** L'OAT à 10 ans a dépassé 4 % en juillet 2026. À 4 %, le déficit de 2037 passe de 2,31 % à 3,29 % et la dette de 2050 de 117 % à 134 % du PIB. C'est, de loin, l'hypothèse non sourcée qui pèse le plus parmi celles qu'on peut vérifier sur le marché.

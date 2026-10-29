@@ -27,6 +27,7 @@ python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribu
 | `outils/` | Extraction de la référence ; `recalcul.py` recalcule la v235 dans LibreOffice avec des cellules modifiées |
 | `tests/` | Tests automatiques |
 | `parametres/registre_lois.yaml` | Registre des mesures séparables et façon de les neutraliser (attribution) |
+| `docs/sourcage.md` | Paramètres sourcés, corrigés, et décisions sur les hypothèses |
 | `docs/journal.md` | Journal des décisions et des écarts avec la v235 |
 
 ## Règles
