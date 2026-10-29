@@ -72,3 +72,15 @@ def test_canaux_somment_a_l_effet_total():
     for nom, sc in calculer(P).items():
         for t in (2029, 2040, 2073):
             assert sum(sc.detail["canaux"][t].values()) == pytest.approx(sc.solde_effet[t], abs=1e-9), (nom, t)
+
+
+def test_le_solde_se_reconstitue_ligne_par_ligne():
+    """Registre de la trajectoire : lignes datées + effets de l'économie − transferts − charge de la dette = solde."""
+    from moteur.simulation import simuler
+    from moteur.trajectoire_annuelle import lignes
+    r = simuler(P)
+    for sc, reg in (("prudent", lignes(P)), ("crise", lignes(P.en_crise()))):
+        for t in (2029, 2037, 2050, 2073):
+            x = r[sc][t]
+            total = sum(reg.effet_sur_solde(k, t) for k in reg.lignes) + x["effet_macro"] - x["transferts_collectivites"] - x["charge_dette"]
+            assert total == pytest.approx(x["solde"], abs=1e-9), (sc, t)

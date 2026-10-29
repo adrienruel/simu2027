@@ -106,10 +106,17 @@ td.n { font-family: var(--f-chiffre); font-variant-numeric: tabular-nums; }
 tr.total td { font-weight: 600; border-top: 1px solid var(--trait-fort); }
 .neg { color: var(--alerte); }
 
+.puce { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--trait-fort); color: var(--encre-2); white-space: nowrap; }
+.puce.mesure { border-color: var(--accent); color: var(--accent); }
+tr.groupe td { font-family: var(--f-titre); font-weight: 600; font-size: 13px; color: var(--encre-2); text-transform: uppercase; letter-spacing: 0.05em; padding-top: 14px; }
+td.spark { width: 110px; padding-block: 2px; }
+td.spark svg { width: 100px; height: 22px; }
+tr.sous-total td { font-weight: 600; }
 .barres-stat { display: flex; height: 14px; border-radius: 4px; overflow: hidden; gap: 2px; }
 .barres-stat div { height: 100%; }
 .note { font-size: 13px; color: var(--encre-2); max-width: 72ch; }
 footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
+@media (max-width: 640px) { #t-lignes-tab td:nth-child(2), #t-lignes-tab th:nth-child(2), #t-lignes-tab td.spark, #t-lignes-tab th:nth-child(4) { display: none; } }
 @media (max-width: 560px) { h1 { font-size: 24px; } .tuile .valeur { font-size: 22px; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -191,6 +198,18 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     </div>
   </section>
 
+  <section class="bloc" aria-labelledby="t-lignes">
+    <div class="bloc-tete">
+      <h2 id="t-lignes">Le budget ligne par ligne : <span id="lignes-titre"></span></h2>
+      <label class="choix" for="filtre-nature">Afficher <select id="filtre-nature">
+        <option value="tout">toutes les lignes</option>
+        <option value="mesure">les mesures datées seulement</option>
+      </select></label>
+    </div>
+    <p class="note">Chaque ligne est un élément du registre : le budget statique de la feuille Total (« socle »), son évolution avec la croissance, les dépenses qui suivent leur propre trajectoire, et les mesures datées. Montants en effet sur le solde : positif quand la ligne l'améliore. La petite courbe montre la ligne de 2029 à 2073 ; le point marque l'année choisie.</p>
+    <div class="carte defile"><table id="t-lignes-tab"></table></div>
+  </section>
+
   <section class="bloc" aria-labelledby="t-param">
     <h2 id="t-param">D'où viennent les chiffres</h2>
     <div class="carte bloc">
@@ -214,7 +233,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
   const A = D.annees, S = D.scenarios;
   const NOM = { crise: "Crise", prudent: "Prudent", median: "Médian", optimiste: "Optimiste" };
   const coul = s => `var(--s-${s})`;
-  const fr = (x, n = 1) => x.toLocaleString("fr-FR", { minimumFractionDigits: n, maximumFractionDigits: n });
+  const fr = (x, n = 1) => (Math.abs(x) < 0.5 * Math.pow(10, -n) ? 0 : x).toLocaleString("fr-FR", { minimumFractionDigits: n, maximumFractionDigits: n });
   const iA = t => A.indexOf(t);
   const NS = "http://www.w3.org/2000/svg";
   const el = (tag, at = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); if (parent) parent.appendChild(e); return e; };
@@ -375,9 +394,47 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       ca.innerHTML = `Clause de trajectoire en ${t} : étalement de la déduction ${fr(cl.etalement[i], 1)} Md€, contribution de transition ${fr(cl.contribution[i], 1)} Md€ (${fr(cl.points[i], 2)} point${cl.points[i] >= 2 ? "s" : ""})${cl.rui[i] > 0.001 ? `, baisse du RUI ${fr(cl.rui[i], 1)} Md€ (${fr(cl.rui_euros[i], 0)} €/mois)` : ""}${cl.reste[i] > 0.001 ? `, écart non couvert ${fr(cl.reste[i], 1)} Md€` : ""}.`;
     } else ca.textContent = cl ? `Clause de trajectoire : rien à corriger en ${t}.` : "Pas de clause dans ce scénario.";
   }
+  // Budget ligne par ligne
+  const NATURE = { socle: "socle", croissance: "croissance", trajectoire: "trajectoire", mesure: "mesure" };
+  const POSTE = { recettes: "Recettes", sante: "Santé", retraites: "Retraites", rui_aah: "RUI et AAH", investissement: "Investissement", autres: "Autres dépenses" };
+  const selN = document.getElementById("filtre-nature");
+  function spark(vals, i) {
+    const w = 100, h = 22, lo = Math.min(0, ...vals), hi = Math.max(0, ...vals), sp = hi - lo || 1;
+    const X = k => 2 + k / (vals.length - 1) * (w - 4), Y = v => 2 + (hi - v) / sp * (h - 4);
+    const d = vals.map((v, k) => (k ? "L" : "M") + X(k).toFixed(1) + "," + Y(v).toFixed(1)).join("");
+    return `<svg viewBox="0 0 ${w} ${h}" aria-hidden="true"><line x1="2" x2="${w - 2}" y1="${Y(0)}" y2="${Y(0)}" class="zero"/><path d="${d}" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="${X(i)}" cy="${Y(vals[i])}" r="2.5" fill="var(--accent)"/></svg>`;
+  }
+  function tableLignes() {
+    const t = +rng.value, i = iA(t), s = selS.value, d = D.series[s], seul = selN.value === "mesure";
+    document.getElementById("lignes-titre").textContent = `${t}, scénario ${NOM[s].toLowerCase()}`;
+    const signe = x => x.poste === "recettes" ? 1 : -1;
+    let h = `<thead><tr><th>Ligne</th><th>Nature</th><th>Md€</th><th>2029-2073</th></tr></thead><tbody>`;
+    let sp = 0;
+    Object.keys(POSTE).forEach(po => {
+      const ls = d.lignes.filter(x => x.poste === po);
+      const tot = ls.reduce((a, x) => a + signe(x) * x.valeurs[i], 0); sp += tot;
+      const vis = ls.filter(x => !seul || x.nature === "mesure").sort((a, b) => Math.abs(b.valeurs[i]) - Math.abs(a.valeurs[i]));
+      h += `<tr class="groupe"><td colspan="4">${POSTE[po]}</td></tr>`;
+      vis.forEach(x => { const v = signe(x) * x.valeurs[i];
+        h += `<tr><td>${x.libelle}</td><td><span class="puce ${x.nature}">${NATURE[x.nature]}</span></td><td class="n${v < 0 ? " neg" : ""}">${(v > 0 ? "+" : "") + fr(v, 1)}</td><td class="spark">${spark(x.valeurs.map(y => signe(x) * y), i)}</td></tr>`; });
+      h += `<tr class="sous-total"><td>Total : ${POSTE[po]}</td><td></td><td class="n${tot < 0 ? " neg" : ""}">${(tot > 0 ? "+" : "") + fr(tot, 1)}</td><td></td></tr>`;
+    });
+    const macro = Object.values(d.canaux).reduce((a, v) => a + v[i], 0), cd = d.postes.charge_dette[i], tr = d.postes.transferts_collectivites[i];
+    const ligneTot = (lib, v, cls = "sous-total") => `<tr class="${cls}"><td>${lib}</td><td></td><td class="n${v < 0 ? " neg" : ""}">${(v > 0 ? "+" : "") + fr(v, 1)}</td><td></td></tr>`;
+    h += `<tr class="groupe"><td colspan="4">Du solde primaire au solde public</td></tr>`;
+    h += ligneTot("Solde primaire hors effets de l'économie", sp);
+    h += ligneTot("Effets de l'économie et clause (détail par canal plus haut)", macro, "");
+    if (Math.abs(tr) > 0.005) h += ligneTot("Transferts aux collectivités", -tr, "");
+    h += ligneTot("Charge de la dette (intérêts réels)", -cd, "");
+    h += ligneTot("Solde public", d.postes.solde[i], "total");
+    document.getElementById("t-lignes-tab").innerHTML = h + "</tbody>";
+  }
+  selN.addEventListener("change", tableLignes);
   rng.addEventListener("input", detail); selS.addEventListener("change", detail);
+  rng.addEventListener("input", tableLignes); selS.addEventListener("change", tableLignes);
   const toutDessiner = () => {
     dessinerDeficit();
+    tableLignes();
     courbe("g-dette", "leg-dette", S.map(s => ({ s, v: D.series[s].dette_pib })), { annees: A, seuil: 60, seuilLib: "60 %", unite: " %", dec: 1, aria: "Dette publique par scénario", min: 0 });
     courbe("g-chomage", "leg-chomage", S.map(s => ({ s, v: D.series[s].chomage.slice(0, AC.length) })), { annees: AC, unite: " %", dec: 2, aria: "Taux de chômage par scénario, 2029-2040" });
     detail();

@@ -72,6 +72,14 @@ def donnees(p: Parametres | None = None) -> dict:
             series[s]["deficit_avant_clause"] = [_r(b[t]["deficit_avant_clause"]) for t in annees]
             series[s]["clause"] = {k: [_r(b[t]["clause_detail"][k], 3) for t in annees]
                                    for k in ("etalement", "contribution", "points", "rui", "rui_euros", "reste")}
+    from .trajectoire_annuelle import lignes as lignes_traj
+    registres = {"prudent": lignes_traj(p), "crise": lignes_traj(p.en_crise())}
+    for s in scen:
+        reg = registres["crise" if s == "crise" else "prudent"]
+        series[s]["lignes"] = [{"cle": x["cle"], "libelle": x["libelle"], "poste": x["poste"], "nature": x["nature"],
+                                "valeurs": [_r(x["valeurs"].get(t, 0.0), 3) for t in annees]}
+                               for x in reg.lignes.values() if any(abs(v) > 1e-6 for v in x["valeurs"].values())]
+        series[s]["postes"]["transferts_collectivites"] = [_r(res[s][t]["transferts_collectivites"], 3) for t in annees]
     statuts = Counter(x.statut for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE"))
     groupes = Counter(c.split(".")[0] for c in hypotheses)

@@ -9,12 +9,13 @@ from __future__ import annotations
 from .macro import ANNEES, SCENARIOS, calculer
 from .parametres import Parametres
 from .trajectoire_annuelle import postes
+from .calendrier import transferts_collectivites
 
 
 ORDRE = ("crise",) + tuple(SCENARIOS)
 
 
-def _bloc(m, traj, avec_clause: bool) -> dict:
+def _bloc(m, traj, avec_clause: bool, transferts: float) -> dict:
     out = {}
     for t in ANNEES:
         x = traj[t]
@@ -23,6 +24,7 @@ def _bloc(m, traj, avec_clause: bool) -> dict:
             "sante": x["sante"], "retraites": x["retraites"], "rui_aah": x["rui_aah"],
             "investissement": x["investissement"], "autres": x["autres"],
             "charge_dette": m.charge_dette[t], "solde": m.solde_public[t], "dette": m.dette[t],
+            "transferts_collectivites": transferts, "effet_macro": m.solde_effet[t],
             "deficit": -m.maastricht[t] * 100, "dette_pib": m.dette_pib[t] * 100,
             "emplois_supplementaires": m.emplois[t], "effet_pib": m.pib_effet[t], "clause": m.clause[t],
             "chomage": m.detail["chomage"][t] * 100,
@@ -46,9 +48,9 @@ def simuler(p: Parametres | None = None, scenario_retenu: str = "prudent", crise
     out = {}
     if crise:
         pc = p.en_crise()
-        out["crise"] = _bloc(calculer(pc, scenario_retenu)["prudent"], postes(pc, scenario_retenu), True)
+        out["crise"] = _bloc(calculer(pc, scenario_retenu)["prudent"], postes(pc, scenario_retenu), True, transferts_collectivites(pc))
     for s in SCENARIOS:
-        out[s] = _bloc(macro[s], traj, s == "prudent")
+        out[s] = _bloc(macro[s], traj, s == "prudent", transferts_collectivites(p))
     return out
 
 

@@ -35,3 +35,14 @@ def economies(p: Parametres) -> dict[int, float]:
     anc = {int(x["annee"]): x["depenses_desindexees_md"] * x["part_ancien_systeme"] for x in _csv_retraites("ancien_systeme_retraites.csv")}
     reg = registre()
     return {t: sum(effet(m, t, p, anc) for m in reg) for t in ANNEES}
+
+
+def economies_par_mesure(p: Parametres) -> dict[str, dict[int, float]]:
+    """Économie de chaque mesure du registre, année par année (Md€, positif = économie)."""
+    anc = {int(x["annee"]): x["depenses_desindexees_md"] * x["part_ancien_systeme"] for x in _csv_retraites("ancien_systeme_retraites.csv")}
+    out: dict[str, dict[int, float]] = {}
+    for m in registre():
+        d = out.setdefault(m["mesure"], {t: 0.0 for t in ANNEES})
+        for t in ANNEES:
+            d[t] += effet(m, t, p, anc)
+    return out

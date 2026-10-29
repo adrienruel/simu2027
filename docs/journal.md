@@ -72,6 +72,13 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - `moteur/restitution.py` met une simulation en forme (JSON) ; `python -m outils.tableau_de_bord` écrit `sorties/tableau_de_bord.html`, page autonome : synthèse du prudent publié avant et après la clause, déficit, dette et chômage des quatre scénarios, décomposition par canal de l'effet sur le solde et comptes d'une année au choix, part des paramètres sourcés.
 - Le module macro garde désormais la décomposition par canal (emploi, ajustement, fonds, logement, érosion de l'IS, réactions à l'impôt, IA, santé, carbone, clause…) ; un test vérifie que la somme des canaux redonne l'effet total.
 
+## 29 octobre 2026 — Registre des lignes du budget (architecture année par année, première étape)
+
+- La trajectoire hors effets de l'économie est désormais construite comme une liste de lignes datées (`trajectoire_annuelle.Lignes`) : socle du budget statique, croissance tendancielle, dépenses à trajectoire propre (santé, transition des retraites, renouvelables), et mesures datées (une ligne par mesure du registre des économies, TVA de 2028, successions, RUI étudiant, IA, réformes de l'emploi…). Les postes de la feuille Trajectoire sont la somme de ces lignes : résultats inchangés.
+- Un test vérifie que lignes + effets de l'économie − charge de la dette redonnent le solde public, pour le prudent et la crise.
+- Tableau de bord : graphique du solde public (déficit sous zéro) au lieu d'un « déficit » qui devenait négatif en cas d'excédent ; période 2029-2050 par défaut ; tableau « le budget ligne par ligne » pour l'année et le scénario choisis.
+- Étape suivante : faire porter aux mesures leurs propres dates et paramètres (aujourd'hui une partie vit encore dans des modules), puis attribuer aux mesures leur part des effets de l'économie.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Le prudent repasse au-dessus de 3 % après la clause.** Il passe sous 3 % en 2036, puis remonte à 3,42 % en 2038, dès que la contribution de transition s'arrête (dernière année : 2037), et reste au-dessus de 3 % jusqu'en 2041 ; nouveau passage à 3,55 % en 2047-2048. Il n'est durablement sous 3 % qu'à partir de 2049. À partir de 2040, l'étalement de la déduction coûte au lieu de rapporter (jusqu'à −15 Md€ par an). L'indicateur « première année sous 3 % » de la v235 ne montre pas cette remontée ; le tableau de bord affiche l'année à partir de laquelle le déficit reste sous 3 %.
