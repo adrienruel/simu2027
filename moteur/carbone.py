@@ -17,7 +17,8 @@ def prix(p: Parametres, t: int) -> float:
     for g in p.val("tva.croissance_prix_carbone"):
         f *= 1 + g
     base = p.val("carbone.prix_option_2030") * f
-    return base if opt == 1 else base * (1 + p.val("carbone.hausse_valeur_action_climat")) ** (t - 2030)
+    fin = p.val("carbone.fin_hausse")
+    return base if opt == 1 else base * (1 + p.val("carbone.hausse_valeur_action_climat")) ** (min(t, fin) - 2030)
 
 
 def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, float]]:

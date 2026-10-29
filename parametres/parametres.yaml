@@ -256,7 +256,7 @@ tva:
     unite: eur_par_tco2
     statut: SOURCE
     source: "Valeur de l'action pour le climat 2025 : 256 € de 2023 par tonne (commission Quinet III ; avis du conseil scientifique de France Stratégie du 21 mai 2025)"
-    note: "Écrit dans la formule Barème TVA!B56. Malgré le nom du paramètre, c'est la valeur de 2025 en euros de 2023 ; elle passe en euros de 2026 par les trois hausses de prix de tva.croissance_prix_carbone. Le modèle la garde constante en euros de 2026, alors que la valeur de l'action pour le climat monte de 3,2 % par an au-delà de l'inflation (300 € de 2023 en 2030)."
+    note: "Écrit dans la formule Barème TVA!B56. Malgré le nom du paramètre, c'est la valeur de 2025 en euros de 2023 ; elle passe en euros de 2026 par les trois hausses de prix de tva.croissance_prix_carbone. Le budget statique la prend telle quelle ; la trajectoire du prix (300 € de 2023 en 2030, puis +3,2 % par an jusqu'en 2060) est portée par le module carbone (carbone.option_prix)."
   croissance_prix_carbone:
     valeur: [0.02, 0.009, 0.021]
     unite: taux
@@ -945,9 +945,10 @@ hauts_revenus:
 # --- Carbone dynamique (feuille Carbone) ---------------------------------------------
 carbone:
   recette_2029_nette_is: {valeur: 57.7, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Écart des recettes totales du modèle entre 269 € et 0 € (v180), saisi : à recalculer par le moteur (test prévu)."}
-  option_prix: {valeur: 2, unite: sans_unite, statut: DECISION, note: "0 = prix fixe ; 1 = 300 € dès 2030 puis fixe ; 2 = 300 € en 2030 puis valeur de l'action pour le climat."}
+  option_prix: {valeur: 2, unite: sans_unite, statut: DECISION, note: "0 = prix fixe ; 1 = 300 € dès 2030 puis fixe ; 2 = 300 € en 2030 puis valeur de l'action pour le climat. Confirmé par Adrien le 29/10/2026 : le prix des externalités monte."}
   prix_option_2030: {valeur: 300, unite: eur_par_tco2, statut: DECISION}
-  hausse_valeur_action_climat: {valeur: 0.032, unite: taux, statut: SOURCE, source: "Valeur de l'action pour le climat (rapport Quinet)"}
+  hausse_valeur_action_climat: {valeur: 0.032, unite: taux, statut: SOURCE, source: "Valeur de l'action pour le climat : progression au rythme du taux d'actualisation socioéconomique (3,2 %) jusqu'en 2060 (commission Quinet III ; avis du CS ESE de France Stratégie du 21 mai 2025)"}
+  fin_hausse: {valeur: 2060, v235: 9999, unite: annee, statut: SOURCE, source: "Commission Quinet III : la valeur de l'action pour le climat progresse jusqu'en 2060, puis reste stable (avis du CS ESE du 21 mai 2025)", note: "La v235 faisait monter le prix jusqu'en 2073 (1 221 € de 2026), au-delà de la trajectoire publiée (811 € en 2060)."}
   part_accise_prix_final: {valeur: 0.35, unite: taux, statut: HYPOTHESE}
   baisse_tendancielle_emissions: {valeur: {crise: -0.02, prudent: -0.019, median: -0.018, optimiste: -0.0165}, unite: taux, statut: HYPOTHESE}
   ets2: {valeur: {emissions_mt: 180, prix: 45, part_fonds_social: 0.187, dotation_france: 1.04}, unite: sans_unite, statut: SOURCE, source: "Directive ETS2 ; Fonds social pour le climat"}

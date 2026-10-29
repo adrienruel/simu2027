@@ -112,7 +112,7 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 ## 29 octobre 2026 — Indépendants, carbone, contribution européenne
 
 - Passage des revenus 2023 des indépendants en euros de 2026 sourcé (Insee Première n° 2114, puis évolution des salaires) : 1,0706 au lieu de 1,0395.
-- Prix du carbone : 256 € est bien la valeur de l'action pour le climat de 2025 en euros de 2023, et les trois hausses qui la convertissent sont l'inflation 2024, 2025 et 2026 (Insee). Seul le nom du paramètre trompe. Reste à décider si le prix suit la trajectoire de la valeur de l'action pour le climat (300 € de 2023 en 2030).
+- Prix du carbone : 256 € est bien la valeur de l'action pour le climat de 2025 en euros de 2023, et les trois hausses qui la convertissent sont l'inflation 2024, 2025 et 2026 (Insee). Seul le nom du paramètre trompe. Le module carbone fait déjà monter le prix (300 € de 2023 en 2030, puis +3,2 % par an) ; Adrien confirme la hausse. Corrigé : la hausse s'arrête en 2060 comme la valeur de l'action pour le climat, au lieu de continuer jusqu'en 2073.
 - Contribution à l'UE : 30,9 Md€ confirmés par le PLF 2027.
 - Déficit publié du prudent : 4,83 % / 4,45 % / 3,53 %.
 

@@ -49,6 +49,8 @@ Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 
 
 | independants.passage_2023_2026 | 1,0395 saisi | **1,0706** : +2,7 % en 2024 pour les non-salariés classiques (Insee Première n° 2114), puis comme les salaires (+2,0 % et +2,2 %) | déficit −0,04 point |
 
+| carbone.fin_hausse | Prix porté à 300 € (de 2023) en 2030 puis +3,2 % par an jusqu'en 2073 (1 221 € de 2026) | Hausse arrêtée en 2060, comme la valeur de l'action pour le climat (811 € de 2026) ; la montée du prix est confirmée par Adrien | effet après 2060 seulement |
+
 ## Sources ajoutées (sans changement de valeur)
 
 | Paramètre | Source |
@@ -63,7 +65,6 @@ Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 
 
 | Paramètre | Constat |
 |---|---|
-| Trajectoire du prix du carbone | Le prix reste à 256 € de 2023 (constant en euros) alors que la valeur de l'action pour le climat monte de 3,2 % par an au-delà de l'inflation (300 € de 2023 en 2030). Le prix de la TVA écologique est une décision du programme : à trancher. |
 
 ## Sources consultées
 
