@@ -37,9 +37,13 @@ def test_decomposition():
 
 
 def test_interactions_limitees():
+    """Les effets des mesures s'additionnent à peu près. Depuis la prime de taux liée à la dette (29/10/2026),
+    les intérêts dépendent de la dette accumulée : les interactions croissent avec le temps (tolérance : 5 Md€
+    ou 10 % de l'effet d'ensemble)."""
     for t in (2029, 2037, 2050):
         somme = sum(m["annees"][t]["solde_avant_clause"] for m in R["mesures"])
-        assert abs(R["ensemble"][t]["solde_avant_clause"] - somme) < 5, t
+        ens = R["ensemble"][t]["solde_avant_clause"]
+        assert abs(ens - somme) < max(5, 0.1 * abs(ens)), t
 
 
 def test_sans_clause_egale_avant_clause_la_premiere_annee():

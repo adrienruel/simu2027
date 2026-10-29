@@ -220,3 +220,22 @@ def _entrees_canaux(p: Parametres) -> dict:
     poids = {"prudent": poids_prudent, "median": {"median": 1.0}, "optimiste": {"optimiste": 1.0}}
     return {"solde_reformes_terme": {s: solde_reformes(p, s, poids[s]) for s in poids},
             "gains_canaux": {s: gains_par_canal(p, s) for s in poids}}
+
+
+def participation_inactifs(p: Parametres) -> dict[str, float]:
+    """Inactifs du halo du chômage qui prennent un emploi (personnes, à terme), par scénario du modèle."""
+    import csv
+    from .distribution import DONNEES
+    from .menages_types import nouveau
+    with (DONNEES / "participation_2026.csv").open(encoding="utf-8") as f:
+        actuel = {float(l["quotite_smic"]): float(l["revenu_disponible_actuel"]) for l in csv.DictReader(f)}
+    smic = cout_smic_annuel(p)
+    nouv = {q: nouveau({"adultes": [q * smic], "enfants": []}, p)["revenu_disponible"] for q in actuel}
+    ecarts = []
+    for q in (0.5, 1.0):
+        garde_auj = (actuel[q] - actuel[0.0]) / (q * smic)
+        garde_nouv = (nouv[q] - nouv[0.0]) / (q * smic)
+        ecarts.append(math.log(garde_nouv / garde_auj))
+    d = sum(ecarts) / len(ecarts)
+    c = p.val("emploi.participation_inactifs")
+    return {s: c[s] * d * c["base"] for s in ("crise", "prudent", "median", "optimiste")}

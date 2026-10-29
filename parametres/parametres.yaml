@@ -820,6 +820,21 @@ macro:
   taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
   annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
+  externalites_capital_fonds:
+    valeur: {crise: 0.0, prudent: 0.0, median: 0.01, optimiste: 0.02}
+    v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : méta-analyse de Bom et Ligthart (Journal of Economic Surveys, 2014) : élasticité de la production au capital public ≈ 0,08 à court terme, ≈ 0,12 à long terme pour les infrastructures de base, soit un rendement social bien au-dessus du rendement financier"
+    note: "Canal ajouté le 29/10/2026 : PIB en plus par euro de capital du fonds, au-delà de son rendement (réseaux, énergie, IA : effets d'entraînement sur le reste de l'économie). Prudent et crise : zéro ; médian 1 % ; optimiste 2 % par an. Le médian sert de cible à la clause : ce canal rend la clause plus exigeante pour le prudent publié."
+  prime_dette:
+    valeur: {crise: 0.035, prudent: 0.03, median: 0.02, optimiste: 0.015}
+    v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "CBO, Working Paper 2019-01 (Debt and Interest Rates) : 2 à 3 points de base de taux long par point de dette/PIB (1,9 à 2,9 selon l'échantillon) ; Laubach (2009) : 2,1 à 3,5 points de base selon l'éviction compensée"
+    note: "Hausse du taux long (en points de pourcentage) par point de dette/PIB au-dessus du niveau de 2029 (symétrique : baisse quand la dette baisse). Prudent : 3 points de base (haut de la fourchette du CBO) ; crise : 3,5 (Laubach sans compensation) ; médian 2 ; optimiste 1,5. Ajouté le 29/10/2026 (canal manquant)."
+  maturite_moyenne_dette: {valeur: 8.5, unite: sans_unite, statut: SOURCE, source: "Agence France Trésor : durée de vie moyenne de la dette négociable de l'État ≈ 8,5 ans (2025)", note: "Le taux apparent rejoint le taux de marché au rythme du renouvellement de la dette (1 / 8,5 par an)."}
   premiere_annee_productivite: {valeur: 2030, unite: annee, statut: HYPOTHESE}
   premiere_annee_ecole: {valeur: 2045, unite: annee, statut: HYPOTHESE}
   annees_ecole: {valeur: 40, unite: sans_unite, statut: HYPOTHESE}
@@ -946,8 +961,15 @@ tva_sante_long_terme:
 emploi:
   chomage_incompressible: {valeur: 0.035, unite: taux, statut: SOURCE, source: "Taux les plus bas tenus durablement en Europe de l'Ouest (Allemagne, Pays-Bas)"}
   gain_par_canal: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Bloc emploi unifié (étape 4, moteur/emploi_canaux.py) : chaque emploi rapporte au budget selon le salaire de son canal, avec les taux de TVA du nouveau système. v235 : un seul gain par emploi, pour un emploi à 1,3 SMIC, avec le taux de TVA de l'ancien système (13 %)."}
+  participation_inactifs:
+    valeur: {crise: 0.0, prudent: 0.1, median: 0.2, optimiste: 0.3, base: 1926000}
+    v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0, base: 1926000}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Élasticité de participation : ≈ 0,25 en moyenne dans la littérature (Chetty, Guren, Manoli et Weber, 2013), 0,1 à 0,3 pour les bas revenus en Europe (Bargain, Orsini et Peichl, 2014) ; prime d'activité 2019 : pas d'effet causal établi (Bozio et al., IPP, 2023), d'où la crise à zéro. Base : 1 926 000 personnes dans le halo autour du chômage en 2025 (Insee)"
+    note: "Canal ajouté le 29/10/2026 : des inactifs (halo du chômage) prennent un emploi parce que travailler rapporte plus. Emplois = élasticité × variation du log de la part gardée en travaillant (1 − taux de prélèvement à la participation, moyenne du mi-temps et du temps plein au SMIC, système actuel par OpenFisca contre nouveau système) × base. Ils s'ajoutent à l'emploi sans réduire le taux de chômage (ces personnes n'y sont pas comptées) ; coût employeur 0,75 SMIC (mi-temps et temps plein). Distinct du canal « bas salaires » (chômeurs)."
   cout_par_canal:
-    valeur: {offre: 1.0, appariement: 1.0, cout_travail: 1.0, localisation: moyen, population_active: median, perdus: 1.0}
+    valeur: {offre: 1.0, appariement: 1.0, cout_travail: 1.0, localisation: moyen, population_active: median, perdus: 1.0, inactifs: 0.75}
     unite: sans_unite
     statut: HYPOTHESE
     note: "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rapportent moins) ; le coût moyen pour les emplois perdus par localisation (activités mobiles et rentables) ; le salaire médian pour les seniors. Règles : docs/bloc_emploi.md."

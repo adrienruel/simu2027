@@ -16,3 +16,21 @@ def test_contribution_de_transition_est_une_recette():
 
 def test_socle_plus_bas_reduit_le_deficit_a_long_terme():
     assert _deficit({"retraites.socle_plein": 1100}, 2073) < _deficit({}, 2073)
+
+
+def test_prime_de_taux_alourdit_quand_la_dette_monte():
+    """Prime de taux liée à la dette : la crise (dette qui monte) paie plus d'intérêts avec la prime que sans."""
+    from moteur.macro import calculer
+    avec = calculer(P.en_crise())["prudent"]
+    sans = calculer(P.en_crise().avec({"macro.prime_dette": 0.0}))["prudent"]
+    assert avec.charge_dette[2050] > sans.charge_dette[2050]
+
+
+def test_participation_des_inactifs():
+    from moteur.emploi import participation_inactifs
+    e = participation_inactifs(P)
+    assert e["crise"] == 0 < e["prudent"] < e["median"] < e["optimiste"]
+
+
+def test_externalites_du_fonds_nulles_dans_le_prudent():
+    assert P.val("macro.externalites_capital_fonds", "prudent") == 0 == P.val("macro.externalites_capital_fonds", "crise")

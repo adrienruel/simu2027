@@ -76,6 +76,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     pv["reactions_impot"] = reactions(p)
     pv["baisse_revenus_declares"] = baisse_revenus_declares(p)
     pa = population_active(p)
+    from .emploi import participation_inactifs
+    _pi = participation_inactifs(p)
+    inactifs_terme = {"prudent": _pi["crise"] if p.colonne_prudent == "crise" else _pi["prudent"],
+                      "median": _pi["median"], "optimiste": _pi["optimiste"]}
     m = lambda cle, s: p.val(f"macro.{cle}", s)
     tend0 = m("tendance", "prudent")
     pib_2026 = 2920 * facteur(p, 2024, "recettes")  # Total!F18, Md€
@@ -162,31 +166,42 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         accumulation = rendement * m("part_reinvestie", s) * m("part_capital_nouveau", s)
         capital, k_inv, part_etr = 0.0, 0.0, etr["depart"]
         dette_prec = dette0
+        prime_app = 0.0  # prime de taux liée à la dette, sur le taux apparent
+        ratio_ref = None
         r_ecole = r_ia = r_adopt = 0.0
         for t in ANNEES:
             n = t - 2029
+            # Prime de taux liée à la dette : taux de marché selon l'écart de dette/PIB à 2029, transmise au taux
+            # apparent au rythme du renouvellement de la dette
+            ratio_prec = dette_prec / (pib0[t] + (sc.pib_effet[t - 1] if t > 2029 else 0.0))
+            ratio_ref = ratio_ref if ratio_ref is not None else ratio_prec
+            prime_marche = m("prime_dette", s) / 100 * (ratio_prec - ratio_ref) * 100
+            prime_app += (prime_marche - prime_app) / p.val("macro.maturite_moyenne_dette")
             # Emploi
             emp_ref = (pv["emplois_terme"][s] * _montee(t, m("annees_montee_emploi", s)) - pv["emplois_perdus_subventions"][s]
                        - pv["emplois_perdus_tardifs"][s] * (t > pv["emplois_perdus_tardifs"]["annee"]))
             emp_sen = (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
                        + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s)))
                        + m("cumul_emploi_socle", s) * max(0, min(1, (t - m("annee_cumul", s) + 1) / m("montee_cumul", s))))
+            inactifs = inactifs_terme[s] * _montee(t, m("annees_montee_emploi", s)) * demo[s][t]["adultes"]
+            emp_sen += inactifs
             if "solde_reformes_terme" in pv:  # bloc emploi unifié : chaque emploi au gain de son canal
                 gc = pv["gains_canaux"][s]
                 seniors = (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
                            + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s))))
-                cumul = emp_sen - seniors
+                cumul = emp_sen - seniors - inactifs
                 perdus = (pv["emplois_perdus_subventions"][s]
                           + pv["emplois_perdus_tardifs"][s] * (t > pv["emplois_perdus_tardifs"]["annee"]))
                 s_emploi = (pv["solde_reformes_terme"][s] * _montee(t, m("annees_montee_emploi", s))
-                            - perdus * gc["perdus"] + seniors * gc["population_active"] + cumul * gc["perdus"]) / 1e9
+                            - perdus * gc["perdus"] + seniors * gc["population_active"] + cumul * gc["perdus"]
+                            + inactifs * gc["inactifs"]) / 1e9
             else:
                 s_emploi = (emp_ref + emp_sen) * pv["gain_par_emploi"][s] / 1e9
             # Ajustement budgétaire
             pib_aj = -eff * m("multiplicateur", s) * max(0, 1 - n / m("annees_effet_ajustement", s)) * pib0[t]
             s_aj = pib_aj * part_budget + pib_aj / pib0[t] * 100 * m("emplois_par_point_pib", s) / 100 * rui_ch
             # Capital du fonds (début d'année)
-            pib_cap = capital * m("pib_par_euro_capital", s)
+            pib_cap = capital * (m("pib_par_euro_capital", s) + m("externalites_capital_fonds", s))
             s_cap = pib_cap * part_budget
             # Logement
             if n < m("duree_initiale", s):
@@ -232,7 +247,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 solde += (sante["tva_prudent"][t] + pib_inv * part_budget + carbone["prudent"][t]
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
                 # Clause de trajectoire : ramène le prudent sur le déficit du médian
-                interets_t = taux_reel(t, s) * dette_prec
+                interets_t = (taux_reel(t, s) + prime_app) * dette_prec
                 pib_t = pib0[t] + pib
                 avant = -(sp_hors[t] + solde - transferts[t] - interets_t - infl * dette_prec) / pib_t
                 ecart = max(0.0, avant - (-out["median"].maastricht[t])) if p.val("clause.active") else 0.0
@@ -271,13 +286,14 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 "eviction_epargne": (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n,
                 "clause": mesures, "demographie": s_demo,
             }
-            interets = taux_reel(t, s) * dette_prec
+            interets = (taux_reel(t, s) + prime_app) * dette_prec
             solde_public = sp_hors[t] + solde_total - transferts[t] - interets
             dette = dette_prec - solde_public - participations[t]
             pib_total = pib0[t] + pib
             maastricht = (solde_public - infl * dette_prec) / pib_total
             sc.pib_effet[t], sc.solde_effet[t], sc.emplois[t] = pib, solde_total, emp_ref + emp_sen
             sc.detail.setdefault("pib_reference", {})[t] = pib0[t]
+            sc.detail.setdefault("prime_dette", {})[t] = prime_app
             sc.charge_dette[t], sc.solde_public[t], sc.dette[t] = interets, solde_public, dette
             sc.maastricht[t], sc.dette_pib[t], sc.clause[t] = maastricht, dette / pib_total, mesures
             # Taux de chômage (Emploi lignes 28 à 30) : hors seniors, effet récessif de la bascule compris

@@ -168,6 +168,13 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Décisions (déduction, socle, coût employeur) et trois canaux ajoutés
+
+- Décisions d'Adrien : déduction de l'investissement à 50 % puis vers 100 % (2040-2049, calendrier proposé) ; socle 1 200 € ; baisse du coût employeur 2,5 %. Le taux effectif (localisation, érosion de l'IS) suit la part déduite de chaque année.
+- Canaux ajoutés : prime de taux liée à la dette (CBO, Laubach ; maturité 8,5 ans) ; participation des inactifs du halo du chômage (OpenFisca contre moteur, `outils/participation.py`) ; retombées du capital du fonds (médian et optimiste seulement).
+- Prudent avant clause : 5,22 % en 2037, 5,18 % en 2050, 1,77 % en 2073 ; publié 3,19 % en 2037 ; dette 145 % en 2073. La prime de taux pèse 2,4 points en 2073.
+- Test d'attribution : tolérance d'interaction relative (les intérêts dépendent désormais de la dette).
+
 ## 29 octobre 2026 — Pistes pour améliorer les comptes
 
 - `outils/leviers.py`, `docs/leviers.md` : 15 variantes et paquets chiffrés. Paramètre ajouté : part du RUI pour le 2e enfant (15 %, variante à 25 %).
