@@ -7,9 +7,15 @@ Cahier des charges : `Refonte_outil_de_simulation.md` (projet).
 
 ```
 pip install pyyaml pytest openpyxl
+pip install openfisca-france   # seulement pour régénérer les tables du système actuel
 python -m pytest
 python -m moteur.simulation   # déficits des quatre scénarios, avant et après la clause
 python -m outils.cibles_crise  # (LibreOffice) recalcule la crise de la v235 en pleine précision
+python -m outils.openfisca_actuel   # tables OpenFisca du système actuel (privé, public)
+python -m outils.openfisca_menages  # ménages types, système actuel
+python -m moteur.menages_types      # ménages types : actuel contre nouveau
+python -m moteur.sensibilite        # sorties/sensibilite.json
+python -m moteur.incertitude        # sorties/incertitude.json
 python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribution par mesure, ~20 s)
 ```
 
@@ -42,6 +48,6 @@ python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribu
 
 1. **Moteur budgétaire identique à la v235** (Total et trajectoire, 4 scénarios, à 0,01 Md€) — *fait : crise, prudent, médian, optimiste reproduits ; aucune valeur lue dans la v235*
 2. Paramètres complets (1 278 du registre) et tests de la partie 6
-3. Microsimulation OpenFisca
+3. Microsimulation OpenFisca — *en cours : système actuel et ménages types faits ; réforme à coder dans OpenFisca*
 4. Bloc emploi unifié et incertitude
 5. Sorties (Excel généré, site, manifeste)
