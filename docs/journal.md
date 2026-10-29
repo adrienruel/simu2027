@@ -144,6 +144,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Le système actuel du moteur (nets, RSA, prime d'activité, aides au logement) vient désormais d'OpenFisca (`systeme_actuel.source`), sauf la taxe foncière, qu'OpenFisca ne calcule pas. Écarts avec la v235 : nets du privé à ±5 % ; agents publics : la v235 surestimait le net d'environ 5 % sur les classes les plus nombreuses et le sous-estimait au-dessus de 110 000 € de coût. Effet sur le déficit : +0,01 point.
 - Ménages types (`parametres/menages_types.yaml`, `outils/openfisca_menages.py`, `moteur/menages_types.py`) : huit ménages, système actuel par OpenFisca (prestations familiales comprises), nouveau système par le moteur.
 
+## 29 octobre 2026 — Le nouveau système codé dans OpenFisca
+
+- `outils/openfisca_reforme.py` : réforme OpenFisca-France (impôt unique du foyer avec imposition commune et quotient familial plafonné, impôt local des actifs, RUI au prorata et RUI du conjoint sans revenu, compléments par enfant, épargne obligatoire, revenu disponible). Ses valeurs viennent du fichier de paramètres du moteur.
+- Les deux écritures (réforme OpenFisca et `moteur/menages_types.py`) donnent le même revenu disponible à moins d'un centime sur les dix ménages types ; un test le vérifie, et un second recalcule la table avec OpenFisca quand il est installé.
+- Ménages de retraités de l'ancien système ajoutés : retraité seul à 1 700 € bruts −3,9 % de consommation possible (il perd l'aide au logement), couple de retraités +0,5 %.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Ménages types : le programme fait des perdants nets.** À consommation hors taxes comparable (TVA et accises de chaque système comprises, épargne obligatoire mise à part) : personne seule au SMIC −1,6 %, au salaire médian −4,3 %, cadre à 100 000 € −22,6 %, parent isolé au SMIC −10,3 %, couple de deux médians −3,7 % ; gagnants : couple de deux SMIC avec deux enfants +6,0 %, couple à un salaire médian avec deux enfants +11,1 % (quotient conjugal). L'épargne obligatoire (2 400 € par an au salaire médian) reste au ménage, mais elle n'est pas disponible. Le parent isolé perd l'allocation de soutien familial, la prime d'activité et l'aide au logement, que le complément de RUI (30 % par enfant) ne compense pas.

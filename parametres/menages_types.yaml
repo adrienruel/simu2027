@@ -4,6 +4,8 @@
 # déduit par la table OpenFisca du privé. Âges des enfants au 1er janvier 2026. Locataires du parc privé
 # en zone 2 (loyer 550 € par mois pour une personne seule, 800 € pour une famille).
 # Couples mariés (imposition commune dans les deux systèmes).
+# « retraite:N » : retraité de l'ancien système, pension brute de N € par mois (gardée telle quelle, imposée
+# au barème de l'impôt unique, sans impôt local ni RUI).
 
 menages:
   - id: seul_smic
@@ -38,3 +40,11 @@ menages:
     libelle: "Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)"
     adultes: [100000, median]
     enfants: [6, 10]
+  - id: retraite_seul
+    libelle: "Retraité seul, pension de 1 700 € bruts par mois"
+    adultes: ["retraite:1700"]
+    enfants: []
+  - id: couple_retraites
+    libelle: "Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois"
+    adultes: ["retraite:2200", "retraite:1300"]
+    enfants: []

@@ -36,9 +36,21 @@ def definitions() -> list[dict]:
 
 
 def couts_adultes(m: dict, p: Parametres) -> list[float]:
+    """Coût employeur annuel de chaque adulte (0 pour un retraité ou un inactif)."""
     smic = p.val("epargne.cout_smic_mensuel") * 12
     median = p.val("profils.cout_median_annuel")
-    return [smic if a == "smic" else median if a == "median" else float(a) for a in m["adultes"]]
+    out = []
+    for a in m["adultes"]:
+        if isinstance(a, str) and a.startswith("retraite:"):
+            out.append(0.0)
+        else:
+            out.append(smic if a == "smic" else median if a == "median" else float(a))
+    return out
+
+
+def pensions_adultes(m: dict) -> list[float]:
+    """Pension brute annuelle de chaque adulte (retraités de l'ancien système)."""
+    return [12 * float(a.split(":")[1]) if isinstance(a, str) and a.startswith("retraite:") else 0.0 for a in m["adultes"]]
 
 
 def impot_menage(couts: list[float], n_enfants: int, p: Parametres, scenario: str = "prudent") -> float:
@@ -55,31 +67,35 @@ def impot_menage(couts: list[float], n_enfants: int, p: Parametres, scenario: st
 
 def nouveau(m: dict, p: Parametres, scenario: str = "prudent") -> dict:
     couts = couts_adultes(m, p)
+    pensions = pensions_adultes(m)
     n_enf = len(m["enfants"])
     rui = p.val("rui.montant") * 12
-    imp = impot_menage(couts, n_enf, p, scenario)
+    imp = impot_menage([c + r for c, r in zip(couts, pensions)], n_enf, p, scenario)
     local = sum(max(0.0, c - p.val("impot_local.abattement")) * taux_impot_local(p, salaries=True) for c in couts)
     rui_actifs = sum(part_rui_salarie(c, p) * rui for c in couts if c > 0)
-    net_avant_conjoint = sum(couts) - imp - local + rui_actifs
+    net_avant_conjoint = sum(couts) + sum(pensions) - imp - local + rui_actifs
     rui_conjoint = 0.0
-    if len(couts) == 2 and min(couts) == 0:
+    sans_revenu = [c + r <= 0 for c, r in zip(couts, pensions)]
+    if len(couts) == 2 and sum(sans_revenu) == 2:
+        rui_conjoint = 2 * rui
+    elif len(couts) == 2 and sum(sans_revenu) == 1:
         par_personne = net_avant_conjoint / 2
         rui_conjoint = rui * max(0.0, 1 - par_personne / (2 * rui))
-    elif len(couts) == 1 and couts[0] == 0:
+    elif len(couts) == 1 and sans_revenu[0]:
         rui_conjoint = rui
     part = p.val("rui_complements.part_enfant_parent_isole" if len(couts) == 1 else "rui_complements.part_enfant")
     complements = n_enf * part * rui
     epargne = sum(epargne_annuelle(c, p, scenario, part_rui_salarie(c, p), contribution=False) for c in couts if c > 0)
     dispo = net_avant_conjoint + rui_conjoint + complements - epargne
     sante, tva = taux_pour_revenu(dispo / max(1, len(couts)), p)
-    return {"cout_employeur": sum(couts), "impot_unique": imp, "impot_local": local, "rui": rui_actifs + rui_conjoint,
+    return {"cout_employeur": sum(couts), "pensions": sum(pensions), "impot_unique": imp, "impot_local": local, "rui": rui_actifs + rui_conjoint,
             "complements_enfants": complements, "epargne_obligatoire": epargne, "revenu_disponible": dispo,
             "taux_consommation": sante + tva, "consommation_ht": dispo / (1 + sante + tva)}
 
 
 def actuel(annee: int = 2026) -> dict[str, dict]:
     with (DONNEES / f"openfisca_menages_types_{annee}.csv").open(encoding="utf-8") as f:
-        return {l["id"]: {k: (float(v) if k != "id" else v) for k, v in l.items()} for l in csv.DictReader(f)}
+        return {l["id"]: {k: (v if k in ("id", "couts") else float(v)) for k, v in l.items()} for l in csv.DictReader(f)}
 
 
 def comparer(p: Parametres | None = None, scenario: str = "prudent") -> list[dict]:

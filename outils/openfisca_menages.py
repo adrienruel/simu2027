@@ -29,10 +29,7 @@ def _cout_en_brut(cout: float, table: list[dict]) -> float:
     return ys[-1] * cout / xs[-1]
 
 
-def couts_adultes(m: dict, p) -> list[float]:
-    smic = p.val("epargne.cout_smic_mensuel") * 12
-    median = p.val("profils.cout_median_annuel")
-    return [smic if a == "smic" else median if a == "median" else float(a) for a in m["adultes"]]
+from moteur.menages_types import couts_adultes, pensions_adultes  # noqa: E402
 
 
 def calculer(annee: int = 2026) -> list[dict]:
@@ -40,7 +37,8 @@ def calculer(annee: int = 2026) -> list[dict]:
     from openfisca_france import FranceTaxBenefitSystem
     from moteur.parametres import Parametres
     p = Parametres()
-    tbs = FranceTaxBenefitSystem()
+    from outils.openfisca_reforme import construire
+    tbs = construire(FranceTaxBenefitSystem(), p)
     menages = yaml.safe_load((RACINE / "parametres" / "menages_types.yaml").read_text(encoding="utf-8"))["menages"]
     with (RACINE / "parametres" / "donnees" / f"openfisca_prive_{annee}.csv").open(encoding="utf-8") as f:
         table = sorted(csv.DictReader(f), key=lambda l: float(l["cout_du_travail"]))
@@ -51,9 +49,11 @@ def calculer(annee: int = 2026) -> list[dict]:
         i = m["id"]
         adultes = [f"{i}_a{k}" for k in range(len(m["adultes"]))]
         enfants = [f"{i}_e{k}" for k in range(len(m["enfants"]))]
-        for nom, cout in zip(adultes, couts_adultes(m, p)):
+        for nom, cout, pension in zip(adultes, couts_adultes(m, p), pensions_adultes(m)):
             individus[nom] = {"salaire_de_base": {y: _cout_en_brut(cout, table) for y in annees},
-                              "date_naissance": {y: "1985-01-01" for y in annees}}
+                              "date_naissance": {y: "1985-01-01" if pension == 0 else "1955-01-01" for y in annees}}
+            if pension > 0:
+                individus[nom]["retraite_brute"] = {y: pension for y in annees}
             if len(adultes) == 2:
                 individus[nom]["statut_marital"] = {y: "marie" for y in annees}
         for nom, age in zip(enfants, m["enfants"]):
@@ -70,6 +70,13 @@ def calculer(annee: int = 2026) -> list[dict]:
     sim = SimulationBuilder().build_from_entities(tbs, {"individus": individus, "foyers_fiscaux": foyers,
                                                          "familles": familles, "menages": menages_of})
     rd = sim.calculate_add("revenu_disponible", an)
+    nouv = {v: sim.calculate(v, an) for v in ("revenu_disponible_nouveau",)}
+    imp_u = sim.calculate("impot_unique", an)
+    cout_i = sim.calculate("cout_employeur_annuel", an)
+    rui_f = sim.calculate("rui_famille", an)
+    ep_i = sim.calculate("epargne_obligatoire", an)
+    loc_i = sim.calculate("impot_local_actif", an)
+    rui_i = sim.calculate("rui_actif", an)
     ir = sim.calculate_add("impot_revenu_restant_a_payer", an)
     net = sim.calculate_add("salaire_net", an)
     prest = {}
@@ -84,7 +91,14 @@ def calculer(annee: int = 2026) -> list[dict]:
     for k, m in enumerate(menages):
         i = m["id"]
         net_m = sum(float(net[ids_ind.index(n)]) for n in individus if n.startswith(i + "_a"))
-        ligne = {"id": i, "revenu_disponible": float(rd[k]), "impot_revenu": float(ir[k]), "salaire_net": net_m}
+        idx = [ids_ind.index(n) for n in individus if n.startswith(i + "_a")]
+        ligne = {"id": i, "revenu_disponible": float(rd[k]), "impot_revenu": float(ir[k]), "salaire_net": net_m,
+                 "couts": ";".join(f"{float(cout_i[j]):.2f}" for j in idx),
+                 "nouveau_revenu_disponible": float(nouv["revenu_disponible_nouveau"][k]),
+                 "nouveau_impot_unique": float(imp_u[k]),
+                 "nouveau_impot_local": float(sum(loc_i[j] for j in idx)),
+                 "nouveau_rui": float(sum(rui_i[j] for j in idx) + rui_f[k]),
+                 "nouveau_epargne": float(sum(ep_i[j] for j in idx))}
         for v, x in prest.items():
             entite = tbs.variables[v].entity.key
             ligne[v] = float(x[k]) if entite in ("famille", "menage", "foyer_fiscal") else 0.0
