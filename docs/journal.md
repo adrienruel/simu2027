@@ -168,6 +168,14 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Cellules de salariés et comptes d'épargne par génération
+
+- `moteur/cohortes.py`, `docs/cohortes.md` : salariés par âge et tranche de salaire chaque année (profil de l'Insee), impôt, TVA, RUI, épargne par cellule ; comptes par génération et socle par cellule (part sans carrière au socle plein). Calage 2026 sur le budget statique vérifié.
+- Effet de composition des salaires retiré dans le prudent et la crise (double compte avec la tendance de productivité).
+- Correction : l'emploi commence à 18 ans (les 15-17 ans comptaient au taux des 15-24 ans).
+- Prudent : publié 3,00 % en 2029, 2037 et 2050 ; avant clause −1,4 % en 2073 ; dette 89 % en 2073. Crise : 4,2 % en 2073, dette 154 %.
+- Limite connue : le capital du fonds ne baisse pas quand les retraités tirent leur rente (à traiter ensuite).
+
 ## 29 octobre 2026 — Contribution progressive ; vérification de la TVA
 
 - Décision d'Adrien : contribution des anciens retraités progressive de 5 à 10 % (barème proposé : 5 % au-dessus du minimum vieillesse de 1 043,59 €, 10 % à partir de 3 000 € bruts) ; taux moyen 7,6 %, 33 Md€ en 2029, 16 en 2050.
