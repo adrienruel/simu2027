@@ -134,6 +134,13 @@ def donnees(p: Parametres | None = None) -> dict:
                        "canal": x["canal"], "crise": round(x["emplois_crise"]), "prudent": round(x["emplois_prudent"]),
                        "median": round(x["emplois_median"]), "optimiste": round(x["emplois_optimiste"]),
                        "gain": round(x["gain_par_emploi"]), "solde": round(x["solde_md"], 2)} for x in tableau_emploi(p)]
+    from .emploi import participation_inactifs
+    from .emploi_canaux import gains_par_canal
+    pi, g_in = participation_inactifs(p), gains_par_canal(p, "prudent")["inactifs"]
+    emploi_mesures.append({"libelle": "RUI : inactifs du halo du chômage qui prennent un emploi (travailler rapporte plus)",
+                           "canal": "inactifs", "crise": round(pi["crise"]), "prudent": round(pi["prudent"]),
+                           "median": round(pi["median"]), "optimiste": round(pi["optimiste"]), "gain": round(g_in),
+                           "solde": round(pi["prudent"] * g_in / 1e9, 2)})
     from . import demographie as demo_m
     population = None
     if p.val("demographie.active"):

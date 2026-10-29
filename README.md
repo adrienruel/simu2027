@@ -16,8 +16,15 @@ python -m outils.openfisca_menages  # ménages types, système actuel
 python -m moteur.menages_types      # ménages types : actuel contre nouveau
 python -m moteur.sensibilite        # sorties/sensibilite.json
 python -m moteur.incertitude        # sorties/incertitude.json
-python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribution par mesure, ~20 s)
+python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribution par mesure)
+python -m outils.population_insee <dossier>  # projections de l'Insee (xlsx) → parametres/donnees/population_insee_2026_*.csv
+python -m outils.valeur_enfant      # soutien par enfant, système actuel (OpenFisca)
+python -m outils.participation      # gain à travailler d'un inactif, système actuel (OpenFisca)
+python -m outils.levier_is          # grille taux de l'IS × déduction de l'investissement
+python -m outils.leviers            # variantes et paquets chiffrés (sorties/leviers.json, ~20 min)
 ```
+
+Relecture indépendante : `docs/relecture.md`.
 
 ## Organisation
 
@@ -33,7 +40,12 @@ python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribu
 | `outils/` | Extraction de la référence ; `recalcul.py` recalcule la v235 dans LibreOffice avec des cellules modifiées |
 | `tests/` | Tests automatiques |
 | `parametres/registre_lois.yaml` | Registre des mesures séparables et façon de les neutraliser (attribution) |
+| `moteur/demographie.py` | Population année par année (Insee 2026), emploi par âge, effet du programme sur la natalité, crèches |
+| `moteur/ancien_systeme.py` | Pensions de l'ancien système génération par génération, âge légal à 65 ans |
+| `moteur/taux_effectifs.py` | Taux effectif moyen d'imposition (Devereux et Griffith) pour la localisation |
+| `moteur/emploi_canaux.py` | Bloc emploi unifié : canaux, rendements décroissants, gain par emploi |
 | `docs/sourcage.md` | Paramètres sourcés, corrigés, et décisions sur les hypothèses |
+| `docs/demographie.md`, `docs/leviers.md`, `docs/levier_is.md`, `docs/bloc_emploi.md` | Notes de méthode et résultats |
 | `docs/journal.md` | Journal des décisions et des écarts avec la v235 |
 
 ## Règles
@@ -48,6 +60,6 @@ python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribu
 
 1. **Moteur budgétaire identique à la v235** (Total et trajectoire, 4 scénarios, à 0,01 Md€) — *fait : crise, prudent, médian, optimiste reproduits ; aucune valeur lue dans la v235*
 2. Paramètres complets (1 278 du registre) et tests de la partie 6
-3. Microsimulation OpenFisca — *en cours : système actuel et ménages types faits ; réforme à coder dans OpenFisca*
-4. Bloc emploi unifié et incertitude
+3. Microsimulation OpenFisca — *fait : système actuel, ménages types, réforme codée dans OpenFisca (concordance au centime)*
+4. Bloc emploi unifié et incertitude — *fait ; population annuelle, ancien système par génération, prime de taux, participation des inactifs*
 5. Sorties (Excel généré, site, manifeste)

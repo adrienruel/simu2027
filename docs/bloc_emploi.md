@@ -60,3 +60,15 @@ Déficit publié du prudent : 5,33 % / 4,74 % / 3,81 % en 2029 / 2032 / 2037 (av
 - **Réactions à l'impôt des classes moyennes et des hauts revenus** : elles passent par le module des
   hauts revenus (élasticité du revenu imposable), pas par le bloc emploi. C'est le canal « offre » à la
   marge intensive pour les revenus moyens et élevés ; il n'est pas compté deux fois.
+
+
+## Canal ajouté le 29 octobre 2026 : participation des inactifs
+
+Des personnes du halo du chômage (1,93 million en 2025, Insee) prennent un emploi parce que travailler rapporte
+davantage dans le nouveau système : au mi-temps au SMIC, une personne seule garde 59 % de ce qu'elle gagne en
+plus, contre 36 % aujourd'hui (OpenFisca, RSA, prime d'activité et aides au logement compris) ; au temps plein,
+47 % contre 42 %. Emplois = élasticité de participation × variation moyenne du log de la part gardée × base :
+élasticité 0 en crise, 0,1 dans le prudent, 0,2 médian, 0,3 optimiste (Chetty et al., 2013 ; Bargain, Orsini et
+Peichl, 2014). Prudent : ≈ 59 000 emplois à terme (suivent la population de 18 à 64 ans). Ils s'ajoutent à
+l'emploi sans réduire le taux de chômage (ces personnes n'y sont pas comptées), au coût de 0,75 SMIC. Distinct
+du canal « bas salaires », qui porte sur les chômeurs.

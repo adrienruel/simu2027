@@ -93,3 +93,29 @@ Avec la TVA des retraités recalculée, le modèle reconstitue une TVA actuelle 
 - France Stratégie, avis du CS ESE du 21 mai 2025 sur la valeur de l'action pour le climat.
 - ABC Bourse, 29 juillet 2026 : OAT à 10 ans au-dessus de 4 %.
 - CAE, Focus n° 124 (octobre 2025) : taux apparent de la dette 2,0 % en 2025, OAT 10 ans 3,5 % à l'époque.
+
+## Paramètres ajoutés le 29 octobre 2026 (fin d'après-midi)
+
+| Paramètre | Statut | Valeur (prudent) | Source ou raison |
+|---|---|---|---|
+| demographie.scenario_fecondite | DÉCISION | central (crise : fécondité basse ; optimiste : haute) | Insee, projections 2026 |
+| demographie.taux_emploi_age | SOURCE | 2025, figés | Insee, Dares, COR (50-54 ans calculé) |
+| demographie.natalite_semi_elasticite | HYPOTHÈSE encadrée | 1 % de naissances pour 100 € par an | Espagne (González et Trommlerová), Israël (Cohen, Dehejia, Romanov) |
+| demographie.creches_effet | HYPOTHÈSE encadrée | +1,4 % pour +10 points | Bauernschuster, Hener et Rainer (2016), moitié |
+| famille.creches_nouvelles | DÉCISION | +10 points de couverture dès 2030 | Adrien |
+| famille.cout_place_fonctionnement / investissement | SOURCE / HYPOTHÈSE encadrée | 19 450 € / 42 000 € | Onape 2025 ; IGAS-IGF 2017 |
+| rui_complements.part_enfant_rang3 / enfants_rang3 | DÉCISION / SOURCE | 25 % / 1 696 600 | Adrien ; Insee RP 2023 |
+| rui_complements.part_enfant_rang2 / enfants_rang2 | DÉCISION / SOURCE | 15 % (variante 25 %) / 4 303 600 | Insee RP 2023 |
+| ancien_systeme.part_retraites_age | HYPOTHÈSE encadrée | profil de 2023 décalé à 64 ans | DREES, fiche 16 |
+| ancien_systeme.pension_nouveaux_relative | SOURCE | 0,935 | DREES, fiches 5 et 7 |
+| ancien_systeme.droits_geles_des_2029 | DÉCISION | non (calculée au départ, puis gelée) | Adrien |
+| ancien_systeme.age_legal | DÉCISION | 64 → 65 ans, deux trimestres par génération | programme |
+| is_investissement.part_admise / hausse_part_admise | DÉCISION | 50 %, puis +5 points par année suivant un déficit < 3 % | Adrien |
+| retraites.socle_plein | DÉCISION | 1 200 € (v235 : 1 300) | Adrien |
+| emploi.baisse_cout_travail | DÉCISION | 2,5 % (v235 : 5 %) | Adrien |
+| emploi.participation_inactifs | HYPOTHÈSE encadrée | élasticité 0,1 sur 1,93 million | Chetty et al. ; Bargain et al. ; Insee |
+| macro.prime_dette / maturite_moyenne_dette | HYPOTHÈSE encadrée / SOURCE | 3 points de base par point de dette ; 8,5 ans | CBO 2019, Laubach 2009 ; AFT |
+| macro.usure_capital_fonds | HYPOTHÈSE encadrée | 4 % | Banque de France ; durées des actifs régulés |
+| macro.externalites_capital_fonds | HYPOTHÈSE encadrée | 0 (médian 1 %, optimiste 2 %) | Bom et Ligthart (2014) |
+
+Décompte des paramètres : 404, dont 109 sourcés, 89 décisions, 31 hypothèses encadrées, 175 hypothèses sans source.

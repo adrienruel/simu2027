@@ -1,5 +1,4 @@
 """Tests de cohérence du levier IS : taux légal et déduction de l'investissement."""
-import pytest
 
 from moteur.is_investissement import cout_net_etat
 from moteur.macro import calculer

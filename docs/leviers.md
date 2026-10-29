@@ -47,27 +47,28 @@ les retombées au-delà du rendement ne sont comptées que dans le médian et l'
 | Après décisions et trois canaux ajoutés | 5,35 | 5,22 | 5,18 | 2,83 | 1,77 | 3,19 | 145 % |
 | **Plus hausse conditionnée et usure du capital du fonds** | **5,35** | **5,06** | **3,85** | **1,31** | **−1,71** | **3,04** | **98 %** |
 
-Ce que pèse chaque correction (écart au programme actuel si on la retire) : prime de taux −0,11 en 2037,
-−0,63 en 2050, −2,36 en 2073 (dette 111 % sans elle) ; participation des inactifs +0,04 / +0,07 / +0,29 ;
-retombées du fonds +0,01 / +0,01 / +0,06 (le prudent n'en compte pas ; seul le médian, cible de la clause).
+Ce que pèse chaque correction sur la base actuelle (écart si on la retire, 2037 / 2050 / 2073) : prime de taux
+−0,09 / −0,31 / −0,24 (dette 87 % sans elle ; la prime devient négative quand la dette repasse sous son niveau de
+2029) ; participation des inactifs +0,04 / +0,07 / +0,18 ; retombées du fonds +0,01 / +0,01 / +0,04 (le prudent
+n'en compte pas ; seul le médian, cible de la clause).
 
-## Leviers encore ouverts (chiffrés avant la hausse conditionnée et l'usure du fonds ; ordres de grandeur)
+## Leviers encore ouverts (base actuelle, rechiffrés)
 
 | Variante | 2037 | 2050 | 2073 | Publié 2037 | Dette 2073 | Naissances |
 |---|---|---|---|---|---|---|
-| **Programme actuel** | 5,22 | 5,18 | 1,77 | 3,19 | 145 % | −4,6 % |
-| Famille : 2e enfant à 25 % du RUI | +0,19 | +0,38 | +0,92 | 3,36 | 159 % | −1,9 % |
-| Famille : crèches +20 points (au lieu de +10) | +0,16 | +0,32 | +1,00 | 3,35 | 159 % | −3,2 % |
-| Famille : parent isolé à 50 % | +0,28 | +0,56 | +1,42 | 3,43 | 166 % | −0,8 % |
-| Retraites : socle annulé à 2 000 € de rente | −0,04 | −0,14 | −0,86 | 3,15 | 136 % | |
-| Retraites : accès au socle à 68 ans | 0,00 | −0,10 | −0,80 | 3,19 | 134 % | |
-| Retraites : âge légal de l'ancien système à 66 ans | −0,46 | −0,36 | −1,41 | 2,75 | 125 % | |
-| Entreprises : déduction gardée à 50 % (pas de hausse) | 0,00 | −0,81 | −1,96 | 3,19 | 118 % | |
-| Emploi : sans la baisse du coût employeur | −0,17 | −0,36 | −1,41 | 3,02 | 127 % | |
-| RUI à 750 € | −0,23 | −0,40 | −1,18 | 3,19 | 128 % | −5,6 % |
-| Épargne obligatoire : 1 point sur 10 versé à l'État | −0,31 | −0,59 | −1,86 | 2,90 | 119 % | |
-| Paquet : âge légal 66 ans + 1 point d'épargne à l'État | −0,77 | −0,93 | −2,94 | 2,48 | 101 % | |
-| Paquet + 2e enfant à 25 % | −0,58 | −0,57 | −2,40 | 2,65 | 112 % | −1,9 % |
-
-Avec la prime de taux, chaque dépense en plus coûte davantage à long terme (la dette porte intérêt plus cher) :
-les mesures familiales qui s'autofinançaient presque en 2073 ne le font plus.
+| **Programme actuel** | 5,06 | 3,85 | −1,71 | 3,04 | 98 % | −4,6 % |
+| Famille : 2e enfant à 25 % du RUI | +0,19 | +0,37 | +0,52 | 3,20 | 108 % | −1,9 % |
+| Famille : crèches +20 points (au lieu de +10) | +0,15 | +0,31 | +0,60 | 3,19 | 108 % | −3,2 % |
+| Famille : parent isolé à 50 % | +0,28 | +0,45 | +0,72 | 3,28 | 112 % | −0,8 % |
+| Retraites : socle annulé à 2 000 € de rente | −0,04 | −0,05 | −0,57 | 3,00 | 91 % | |
+| Retraites : accès au socle à 68 ans | 0,00 | 0,00 | −0,47 | 3,04 | 90 % | |
+| Retraites : âge légal de l'ancien système à 66 ans | −0,46 | −0,25 | −0,82 | 2,58 | 83 % | |
+| Entreprises : déduction gardée à 50 % (pas de hausse) | 0,00 | −0,08 | −0,89 | 3,04 | 85 % | |
+| Emploi : sans la baisse du coût employeur | −0,17 | −0,27 | −0,89 | 2,87 | 84 % | |
+| RUI à 750 € | −0,23 | −0,30 | −0,67 | 3,04 | 86 % | −5,6 % |
+| Épargne obligatoire : 1 point sur 10 versé à l'État | −0,29 | −0,40 | −0,83 | 2,75 | 82 % | |
+| Sans la prime de taux liée à la dette | −0,09 | −0,31 | −0,24 | 2,99 | 87 % | |
+| Sans la participation des inactifs | +0,04 | +0,07 | +0,18 | 3,07 | 101 % | |
+| Sans les retombées du capital du fonds | +0,01 | +0,01 | +0,04 | 3,04 | 98 % | |
+| Paquet : âge légal 66 ans + 1 point d'épargne à l'État | −0,74 | −0,58 | −1,47 | 2,31 | 70 % | |
+| Paquet + 2e enfant à 25 % | −0,55 | −0,30 | −1,19 | 2,49 | 78 % | −1,9 % |
