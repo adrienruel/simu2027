@@ -102,6 +102,12 @@ def donnees(p: Parametres | None = None) -> dict:
             and p[r.get("parametre", r["cle"])].statut == "HYPOTHESE"][:15]
     sensibilite = [{"cle": r["cle"], "note": (p[r.get("parametre", r["cle"])].note or "")[:200], "encadree": bool(p[r.get("parametre", r["cle"])].source),
                     "deficit_2037": _r(r["deficit_2037"], 3), "deficit_2050": _r(r["deficit_2050"], 3)} for r in sens]
+    fichier_inc = RACINE / "sorties" / "incertitude.json"
+    incertitude = json.loads(fichier_inc.read_text(encoding="utf-8")) if fichier_inc.exists() else None
+    if incertitude:
+        incertitude = {"n": incertitude["n"], "resume": incertitude["resume"],
+                       "influence": [[k, round(v, 3)] for k, v in list(incertitude["influence_deficit_2037"].items())[:10]],
+                       "notes": {k: (p[k].note or "")[:160] for k in list(incertitude["influence_deficit_2037"])[:10] if k in p._p}}
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))
@@ -115,6 +121,7 @@ def donnees(p: Parametres | None = None) -> dict:
         "libelles_canaux": LIBELLES_CANAUX,
         "postes": POSTES,
         "attribution": attribution,
+        "incertitude": incertitude,
         "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts), "sensibilite": sensibilite, "corriges": corriges,
                        "hypotheses_par_groupe": groupes.most_common()},
     }

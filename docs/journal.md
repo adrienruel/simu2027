@@ -122,6 +122,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Sources : droits de succession 2023 (16,6 Md€, Fipeco), AAH 2026 (14,6 Md€, PLF).
 - Déficit publié du prudent : 4,97 % / 4,60 % / 3,70 %.
 
+## 29 octobre 2026 — Incertitude sur les hypothèses de comportement
+
+- `moteur/incertitude.py` : 300 tirages, chaque hypothèse ventilée par scénario tirée entre sa valeur de crise et sa valeur optimiste, indépendamment des autres, emplois créés par les réformes compris ; prudent sans clause. Résultat dans `sorties/incertitude.json`, affiché par le tableau de bord.
+- Déficit 2037 sans clause : 80 % des tirages entre 3,8 % et 4,9 % (médiane 4,4 %) ; le prudent (6,0 %) est plus défavorable que tous les tirages ; la crise donne 7,1 %. Le prudent cumule les hypothèses défavorables : il n'est pas un scénario central.
+- Ce qui pèse le plus sur 2037 : emplois créés par les réformes, productivité de l'IA, baisse de l'écart de taux, élasticités des revenus déclarés, érosion de l'IS. Ce sont les hypothèses de comportement à étayer en priorité.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Couples de retraités comptés deux fois.** La v235 réduit l'impôt des anciennes pensions de 10,6 % pour l'imposition commune (≈ 6 Md€) et ajoute en plus un forfait de 1 Md€ « couples de retraités » dans le coût du quotient conjugal. Le moteur ne compte plus qu'une fois les retraités de l'ancien système.

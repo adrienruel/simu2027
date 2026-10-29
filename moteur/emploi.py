@@ -181,6 +181,18 @@ def entrees_macro(p: Parametres) -> dict:
     """Ce que la feuille Effets macro lit dans la feuille Emploi, par scénario du modèle."""
     e = effets_reformes(p)
     perdus, fin_prime = emplois_perdus_subventions(p), emplois_perdus_fin_prime(p)
+    u = getattr(p, "emplois_tirage", None)  # incertitude : tirage entre le jeu de crise et le jeu optimiste
+    if u is not None:
+        mix = lambda d: d["crise"] + u * (d["optimiste"] - d["crise"])
+        sortie = entrees_macro_sans_tirage(p, e, perdus, fin_prime)
+        sortie["emplois_terme"]["prudent"] = mix({k: e[k]["emplois"] for k in JEUX})
+        sortie["emplois_perdus_subventions"]["prudent"] = mix(perdus)
+        sortie["emplois_perdus_tardifs"]["prudent"] = mix(fin_prime)
+        return sortie
+    return entrees_macro_sans_tirage(p, e, perdus, fin_prime)
+
+
+def entrees_macro_sans_tirage(p: Parametres, e: dict, perdus: dict, fin_prime: dict) -> dict:
     return {
         # prudent : milieu des jeux crise et médian ; calcul de crise : jeu de crise seul (Effets macro!B8)
         "emplois_terme": {"prudent": e["crise"]["emplois"] if p.colonne_prudent == "crise" else (e["crise"]["emplois"] + e["median"]["emplois"]) / 2,

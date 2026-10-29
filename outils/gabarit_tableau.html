@@ -239,6 +239,18 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     <div class="carte defile"><table id="t-lignes-tab"></table></div>
   </section>
 
+  <section class="bloc" aria-labelledby="t-incert" id="bloc-incert">
+    <h2 id="t-incert">Le prudent face à l'incertitude</h2>
+    <p class="note">Chaque hypothèse de comportement (emplois créés, productivité, taux, réactions à l'impôt…) est tirée au hasard entre sa valeur de crise et sa valeur optimiste, indépendamment des autres, <span id="inc-n"></span> fois. On calcule le déficit sans clause de trajectoire. La barre couvre 80 % des tirages (du 10e au 90e centile), le trait la médiane ; le point bleu est le prudent publié, le point orange la crise, où tout va mal en même temps.</p>
+    <div class="carte bloc">
+      <div id="g-incert"></div>
+      <p class="note" id="inc-lecture"></p>
+      <h3>Ce qui fait le plus bouger le déficit de 2037</h3>
+      <p class="note">Corrélation entre le tirage de l'hypothèse (0 = valeur de crise, 1 = valeur optimiste) et le déficit de 2037. Plus elle est forte en valeur absolue, plus l'hypothèse pèse ; négative, la valeur optimiste réduit le déficit. Ce sont les hypothèses à étayer en priorité.</p>
+      <div class="defile"><table id="t-incert-inf"></table></div>
+    </div>
+  </section>
+
   <section class="bloc" aria-labelledby="t-param">
     <h2 id="t-param">D'où viennent les chiffres</h2>
     <div class="carte bloc">
@@ -497,6 +509,33 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     document.getElementById("att-note").textContent = `Mesure par mesure, la somme fait ${sg(so.solde_avant_clause[i])} Md€ ; retirées ensemble, ${sg(e.solde_avant_clause[i])} Md€. L'écart vient des interactions : rendements décroissants des réformes de l'emploi, impôt local recalculé. « Activité seule » : la mesure n'a pas de ligne budgétaire propre ; ce qu'elle coûte ou économise directement est compris dans le budget statique de la bascule, et seul son effet sur l'activité est mesuré ici.`;
   }
   selD.addEventListener("change", tableAtt);
+  // Incertitude
+  function dessinerIncert() {
+    const I = D.incertitude, box = document.getElementById("g-incert");
+    if (!I) { document.getElementById("bloc-incert").hidden = true; return; }
+    document.getElementById("inc-n").textContent = I.n;
+    const ans = [2029, 2032, 2037, 2050], R = ans.map(t => I.resume["deficit_" + t]);
+    const W = Math.max(300, box.clientWidth || 700), hL = 46, H = ans.length * hL + 30, g = 52, d = 20;
+    const lo = Math.floor(Math.min(...R.map(r => Math.min(r.p10, r.prudent, r.crise, r.min))) - 0.5), hi = Math.ceil(Math.max(...R.map(r => Math.max(r.p90, r.crise, r.max))) + 0.5);
+    const X = v => g + (v - lo) / (hi - lo) * (W - g - d);
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Déficit sans clause : distribution des tirages, prudent et crise" });
+    for (let v = lo; v <= hi; v += 1) { el("line", { x1: X(v), x2: X(v), y1: 0, y2: H - 22, class: "zero", opacity: 0.4 }, svg); const tx = el("text", { x: X(v), y: H - 6, "text-anchor": "middle" }, svg); tx.textContent = fr(v, 0) + " %"; }
+    if (lo < 3 && hi > 3) el("line", { class: "seuil", x1: X(3), x2: X(3), y1: 0, y2: H - 22 }, svg);
+    ans.forEach((t, k) => {
+      const r = R[k], y = 10 + k * hL + 14;
+      const lb = el("text", { x: 0, y: y + 4, class: "lib" }, svg); lb.textContent = t; lb.setAttribute("style", "fill: var(--encre-2)");
+      el("line", { x1: X(r.min), x2: X(r.max), y1: y, y2: y, stroke: "var(--trait-fort)", "stroke-width": 1 }, svg);
+      el("rect", { x: X(r.p10), y: y - 7, width: Math.max(2, X(r.p90) - X(r.p10)), height: 14, rx: 4, fill: "var(--s-median)", opacity: 0.35 }, svg);
+      el("line", { x1: X(r.p50), x2: X(r.p50), y1: y - 9, y2: y + 9, stroke: "var(--s-median)", "stroke-width": 2.5 }, svg);
+      el("circle", { cx: X(r.prudent), cy: y, r: 5.5, fill: "var(--s-prudent)", stroke: "var(--surface)", "stroke-width": 2 }, svg);
+      el("circle", { cx: X(r.crise), cy: y, r: 5.5, fill: "var(--s-crise)", stroke: "var(--surface)", "stroke-width": 2 }, svg);
+    });
+    box.innerHTML = ""; box.appendChild(svg);
+    const r37 = I.resume.deficit_2037;
+    document.getElementById("inc-lecture").textContent = `En 2037, sans clause : 80 % des tirages donnent un déficit entre ${fr(r37.p10, 1)} % et ${fr(r37.p90, 1)} % (médiane ${fr(r37.p50, 1)} %). Le prudent publié (${fr(r37.prudent, 1)} %) est plus défavorable que ${r37.part_pire_que_prudent === 0 ? "tous les" : fr(100 * (1 - r37.part_pire_que_prudent), 0) + " %" + " des"} tirages : il cumule des hypothèses défavorables, ce qui est voulu. La crise (${fr(r37.crise, 1)} %) les cumule toutes.`;
+    document.getElementById("t-incert-inf").innerHTML = `<thead><tr><th>Hypothèse</th><th>Corrélation avec le déficit 2037</th></tr></thead><tbody>` +
+      I.influence.map(([k, v]) => `<tr><td><span class="chiffre">${k === "emplois_reformes" ? "emplois créés par les réformes (feuille Emploi)" : k}</span>${I.notes[k] ? `<br><span class="discret" style="font-size:12.5px">${I.notes[k]}</span>` : ""}</td><td class="n">${sg(v, 2)}</td></tr>`).join("") + "</tbody>";
+  }
   selN.addEventListener("change", tableLignes);
   rng.addEventListener("input", detail); selS.addEventListener("change", detail);
   rng.addEventListener("input", tableLignes); selS.addEventListener("change", tableLignes);
@@ -504,6 +543,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     dessinerDeficit();
     tableLignes();
     tableAtt();
+    dessinerIncert();
     courbe("g-dette", "leg-dette", S.map(s => ({ s, v: D.series[s].dette_pib })), { annees: A, seuil: 60, seuilLib: "60 %", unite: " %", dec: 1, aria: "Dette publique par scénario", min: 0 });
     courbe("g-chomage", "leg-chomage", S.map(s => ({ s, v: D.series[s].chomage.slice(0, AC.length) })), { annees: AC, unite: " %", dec: 2, aria: "Taux de chômage par scénario, 2029-2040" });
     detail();
