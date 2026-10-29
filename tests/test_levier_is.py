@@ -12,7 +12,7 @@ P = Parametres()
 
 
 def _v(te, d):
-    return P.avec({"entreprises.taux_is_etat": te, "is_investissement.part_admise": d, "clause.active": False})
+    return P.avec({"entreprises.taux_is_etat": te, "is_investissement.part_admise": d, "is_investissement.hausse_part_admise/cible": d, "clause.active": False})
 
 
 def _loc(p):

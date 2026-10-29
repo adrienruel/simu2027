@@ -219,10 +219,12 @@ retraites_actuels:
 # --- Retraités en régime de croisière -----------------------------------------
 retraites:
   socle_plein:
-    valeur: 1300
+    valeur: 1200
+    v235: 1300
     unite: eur_mois
     annee_euros: 2026
     statut: DECISION
+    note: "DÉCISION d'Adrien du 29/10/2026 : 1 200 € (avant : 1 300 €)."
   rente_annulant_socle:
     valeur: 2500
     unite: eur_mois
@@ -965,7 +967,7 @@ emploi:
   bas_salaires_rui_prorata: {valeur: {retenue: 1, crise: 0, median: 0.0048, optimiste: 0.0128, cout: -1.77}, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : élasticités de participation de Bartels et Shupe (médian) ; prime d'activité 2019 : aucun effet causal établi (Bozio et al., IPP pour France Stratégie, 2023), d'où la crise à zéro", note: "Ligne 11, avant l'effet de la marge intensive."}
   retenues_calculees: {valeur: {entreprises: 1, baisse_cout_travail: 1, commerces: 1, smic_croissance: 1, prime_jeunes: 1, accords_branche: 1}, unite: sans_unite, statut: DECISION}
   emplois_par_milliard: {valeur: {prudent: null, crise: 12500, median: 18750, optimiste: 25000}, unite: sans_unite, statut: SOURCE, source: "Mésange 12 500 ; jusqu'à 25 000 au voisinage du SMIC (CAE n° 51)"}
-  baisse_cout_travail: {valeur: {taux: 0.05, plein_jusqu_a: 1.3, nulle_a: 1.6}, unite: sans_unite, statut: DECISION, note: "DÉCISION du 15 octobre (v167)."}
+  baisse_cout_travail: {valeur: {taux: 0.025, plein_jusqu_a: 1.3, nulle_a: 1.6}, v235: {taux: 0.05, plein_jusqu_a: 1.3, nulle_a: 1.6}, unite: sans_unite, statut: DECISION, note: "DÉCISION du 15 octobre (v167) ; taux ramené de 5 % à 2,5 % par décision d'Adrien du 29/10/2026."}
   taux_marge_snf: {valeur: 0.322, unite: taux, statut: SOURCE, source: "Insee Première n° 2105 (comptes de la Nation 2025)"}
   impots_production_va: {valeur: 0.05, unite: taux, statut: HYPOTHESE}
   cout_emploi_cree_smic: {valeur: 1.3, unite: sans_unite, statut: HYPOTHESE}
@@ -1027,7 +1029,8 @@ is_investissement:
   active: {valeur: 1, unite: sans_unite, statut: DECISION, note: "DÉCISION du 22 octobre 2026 (v211)."}
   montee_annees: {valeur: 8, unite: sans_unite, statut: DECISION}
   montee_etalee_annees: {valeur: 16, unite: sans_unite, statut: DECISION, note: "Étalement de la clause de trajectoire (v221)."}
-  part_admise: {valeur: 1, unite: taux, statut: DECISION}
+  part_admise: {valeur: 0.5, v235: 1, unite: taux, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : déduction immédiate de 50 % de l'investissement au départ (atteinte en 2036 avec la montée de 8 ans), puis progressivement 100 % (hausse_part_admise). v235 : 100 %."}
+  hausse_part_admise: {valeur: {cible: 1.0, debut: 2040, fin: 2049}, v235: {cible: 1.0, debut: 2029, fin: 2029}, unite: sans_unite, statut: DECISION, note: "Calendrier proposé le 29/10/2026 pour « progressivement vers 100 % » : de 50 % à 100 % par pas égaux de 2040 à 2049, après le pic de déficit des années 2030. À confirmer par Adrien."}
   investissement_snf_2025: {valeur: 364.8, unite: md_eur, annee_euros: 2025, statut: SOURCE, source: "Insee, comptes nationaux annuels 2025 (FBCF des SNF)"}
   categories: {valeur: {construction: {part: 0.28, duree: 25}, equipements: {part: 0.32, duree: 7}, immateriel: {part: 0.4, duree: 3}}, unite: sans_unite, statut: HYPOTHESE}
   part_payeurs_is: {valeur: 0.8, unite: taux, statut: HYPOTHESE}

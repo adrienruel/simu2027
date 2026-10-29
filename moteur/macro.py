@@ -148,12 +148,15 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         if s == "prudent" and p.colonne_prudent == "crise":
             eff = p.val("crise.effort_2029_saisi")  # Effets macro!B19 saisi dans le scénario de crise
         from .taux_effectifs import ecart_localisation
-        ecart_eff = ecart_localisation(p, "crise" if (s == "prudent" and p.colonne_prudent == "crise") else s)
-        if ecart_eff is None:
-            erosion_taux = (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
-        else:  # transfert de bénéfices : taux légal ; réaction réelle : taux effectif moyen (déduction comprise)
-            erosion_taux = ((s17 - m("taux_reference_is", s)) * m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s)
-                            + ecart_eff / 100 * m("reaction_reelle", s))
+        jeu_eff = "crise" if (s == "prudent" and p.colonne_prudent == "crise") else s
+
+        def erosion_taux_annee(t):
+            ecart_eff = ecart_localisation(p, jeu_eff, t)
+            if ecart_eff is None:
+                return (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
+            # transfert de bénéfices : taux légal ; réaction réelle : taux effectif moyen (déduction en vigueur comprise)
+            return ((s17 - m("taux_reference_is", s)) * m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s)
+                    + ecart_eff / 100 * m("reaction_reelle", s))
         cout_capital = (((1 - s17 * isv["b18"]) / (1 - s17)) / ((1 - isv["b19"] * isv["b18"]) / (1 - isv["b19"])) - 1
                         - m("reduction_cout_capital_autres", s))
         accumulation = rendement * m("part_reinvestie", s) * m("part_capital_nouveau", s)
@@ -192,7 +195,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 logements = m("logements_croisiere", s)
             pib_log = logements * p.val("logement_dynamique.prix_moyen_ht_neuf") * m("part_additionnelle_logement", s) / 1e9
             s_log = pib_log * part_budget + logement104[t]
-            s_erosion = -j20 * (1 + tend0) ** n * erosion_taux * _montee(t, m("montee_erosion_is", s))
+            s_erosion = -j20 * (1 + tend0) ** n * erosion_taux_annee(t) * _montee(t, m("montee_erosion_is", s))
             s_fraude = m("fraude_tva", s) * _montee(t, m("montee_fraude", s))
             s_aides = -m("extinction_aides_construction", s) * m("aides_construction", s) * max(0, 1 - (n + 1) / 3)
             # Productivité, tendance, école, IA

@@ -6,9 +6,21 @@ from .parametres import Parametres
 ANNEES = list(range(2029, 2074))
 
 
+def part_admise(p: Parametres, t: int | None = None) -> float:
+    """Part de l'investissement déduite immédiatement, à plein régime, l'année t (None : part de départ)."""
+    depart = p.val("is_investissement.part_admise")
+    if t is None:
+        return depart
+    h = p.val("is_investissement.hausse_part_admise")
+    if h["fin"] <= h["debut"]:
+        return depart if t < h["debut"] else max(depart, h["cible"])
+    k = min(1.0, max(0.0, (t - h["debut"] + 1) / (h["fin"] - h["debut"] + 1)))
+    return depart + (max(depart, h["cible"]) - depart) * k
+
+
 def part_deduite(p: Parametres, t: int, montee: int | None = None) -> float:
     montee = montee or p.val("is_investissement.montee_annees")
-    return min(1, (t - 2029 + 1) / montee) * p.val("is_investissement.part_admise")
+    return min(1, (t - 2029 + 1) / montee) * part_admise(p, t)
 
 
 def _deduction_en_plus(p: Parametres, montee: int) -> dict[int, float]:

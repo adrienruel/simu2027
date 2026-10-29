@@ -15,4 +15,4 @@ def test_contribution_de_transition_est_une_recette():
 
 
 def test_socle_plus_bas_reduit_le_deficit_a_long_terme():
-    assert _deficit({"retraites.socle_plein": 1200}, 2073) < _deficit({}, 2073)
+    assert _deficit({"retraites.socle_plein": 1100}, 2073) < _deficit({}, 2073)

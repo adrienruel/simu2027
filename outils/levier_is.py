@@ -47,7 +47,7 @@ def grille(p: Parametres | None = None) -> list[dict]:
     out = []
     for te in TAUX_ETAT:
         for d in DEDUCTION:
-            v = p.avec({"entreprises.taux_is_etat": te, "is_investissement.part_admise": d})
+            v = p.avec({"entreprises.taux_is_etat": te, "is_investissement.part_admise": d, "is_investissement.hausse_part_admise/cible": d})
             out.append({"taux_etat": te, "deduction": d, **mesurer(v)})
     return out
 
