@@ -147,6 +147,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     traj_anc_2029 = recette_nette(p)[2029]
     tva_point = tva_par_point_eviction(p)
     restit = p.val("clause.restitution")
+    from .tva import taux_effectifs as _taux_eff
+    fuite_rui = (1 + sum(_taux_eff(p)["modeste"])) if p.val("macro.corrections_relecture") else 1.0
     acces_socle = int(p.val("epargne.age_acces_socle"))
     if restit["active"]:
         from .demographie import population as population_demo, _tranche
@@ -321,9 +323,11 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                         c_contrib = min(reste_a_couvrir, marge_contrib)
                         reste_a_couvrir -= c_contrib
                     elif instrument == "rui":
-                        c_rui = min(reste_a_couvrir, marge_rui)
-                        reste_a_couvrir -= c_rui
-                mesures = c_etal + c_contrib + c_rui
+                        # une baisse du RUI de X fait perdre la TVA et les accises sur la consommation qu'il finançait :
+                        # le solde gagne X / (1 + taux des ménages modestes) (relecture du 29/10/2026)
+                        c_rui = min(reste_a_couvrir * fuite_rui, marge_rui)
+                        reste_a_couvrir -= c_rui / fuite_rui
+                mesures = c_etal + c_contrib + c_rui / fuite_rui
                 hist_rui[t] = c_rui
                 part_prelevee[t] = (c_contrib / cap_point / 10) if cap_point else 0.0
                 if restit["active"] and c_contrib > 0:

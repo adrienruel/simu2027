@@ -370,11 +370,12 @@ systeme_actuel:
   taux_accises_menages: {valeur: 0.03, unite: taux, statut: HYPOTHESE, source: "Encadrement : TICPE 31 Md€ en 2019 (Fipeco, fiche carburants), droits sur le tabac ≈ 14 Md€, sur les alcools ≈ 4 Md€, accise sur l'électricité ≈ 9 Md€", note: "Accises payées aujourd'hui par les ménages, en part de leur consommation hors taxes (≈ 40 Md€ sur ≈ 1 350 Md€, en supposant 60 % de la TICPE et la moitié de l'accise sur l'électricité payées par les ménages). Sert seulement à comparer le pouvoir d'achat des ménages types : le nouveau taux de consommation comprend les accises écologie et santé, qui remplacent celles-ci."}
   source: {valeur: openfisca, v235: classeur, unite: sans_unite, statut: DECISION, note: "Salariés du privé : net après cotisations, CSG et impôt sur le revenu, RSA, prime d'activité et aide au logement calculés par OpenFisca-France (législation 2026, personne seule locataire en zone 2, loyer 550 €/mois ; outils/openfisca_actuel.py). Agents publics : fonctionnaires titulaires de chaque versant (primes à 24,6 % du brut, DGAFP, rapport annuel 2025), moyenne pondérée par versant. La taxe foncière reste estimée par le moteur (OpenFisca ne la calcule pas)."}
   taux_tva_moyen:
-    valeur: 0.13
+    valeur: 0.125
+    v235: 0.13
     unite: taux
     statut: HYPOTHESE
     source: "Encadrement : IPP (cité par Fipeco) : 11,5 à 12 % de la consommation des ménages hors loyers (2005) ; TVA nette 2024 : 206 Md€ (Fipeco)"
-    note: "Total!B140. Contrôle : avec 13 %, le modèle reconstitue une TVA actuelle de 209 Md€ (salariés, agents, retraités, inactifs, TVA non déductible des entreprises), contre 206 Md€ en 2024 ; 12,5 % donnerait le montant exact. Le taux de 11,5 à 12 % de l'IPP est ancien. Gardé à 13 %, à recaler avec OpenFisca."
+    note: "Total!B140. Contrôle : avec 13 %, le modèle reconstitue une TVA actuelle de 209 Md€ (salariés, agents, retraités, inactifs, TVA non déductible des entreprises), contre 206 Md€ en 2024 ; 12,5 % donnerait le montant exact. Le taux de 11,5 à 12 % de l'IPP est ancien. Ramené à 12,5 % le 29/10/2026 (question d’Adrien sur la TVA) : il reconstitue les 206 Md€ de 2024 ; 13 % gonflait l’ancienne TVA, donc l’accise de transition qui cale le nouveau système sur les recettes actuelles (prudent : plus bas). v235 : 13 %."
   rsa_personne_seule: {valeur: 651.69, unite: eur_mois, annee_euros: 2026, statut: SOURCE, source: "RSA au 1er avril 2026"}
   rsa_forfait_logement: {valeur: 78.2, unite: eur_mois, annee_euros: 2026, statut: SOURCE, source: "RSA, forfait logement 12 %"}
   prime_activite:
@@ -1255,11 +1256,12 @@ ancien_systeme:
     source: "Encadrement : DREES, Les retraités et les retraites 2025, fiche 16 : en 2023 (âge légal 62 ans), 4 à 5 % des 59 ans sont retraités, 94 à 97 % des 67 ans ; 10 % partent à 60 ans (carrières longues), 31 % à 62 ans, 7 % à 67 ans"
     note: "Part d'une génération partie à la retraite à chaque âge, pour l'âge légal de 64 ans (réforme de 2023, générations 1968 et suivantes) : profil de 2023 décalé de deux ans au-delà de 60 ans, carrières longues gardées. Le passage à 65 ans du programme est compté dans sa propre mesure."
   contribution_solidarite:
-    valeur: {taux: 0.05, debut: 2029, fuite: 0.25}
-    v235: {taux: 0.0, debut: 2029, fuite: 0.25}
+    valeur: {taux_bas: 0.05, taux_haut: 0.10, seuil_bas: 1043.59, seuil_haut: 3000, debut: 2029, fuite: 0.25}
+    v235: {taux_bas: 0.0, taux_haut: 0.0, seuil_bas: 1043.59, seuil_haut: 3000, debut: 2029, fuite: 0.25}
     unite: sans_unite
     statut: DECISION
-    note: "DÉCISION d'Adrien du 29/10/2026 : « tout le monde contribue, mais surtout les retraités actuels ». Contribution sur les pensions de l'ancien système au-dessus du minimum vieillesse (les 12 % de dépenses sous le seuil exclues). Taux de 5 % proposé, à confirmer. Fuite (hypothèse) : impôt unique et TVA que les retraités ne paient plus sur la part prélevée (25 %)."
+    source: "Seuil bas : ASPA (minimum vieillesse) d'une personne seule au 1er janvier 2026, 1 043,59 € par mois (circulaire Cnav)"
+    note: "DÉCISION d'Adrien du 29/10/2026 : « tout le monde contribue, mais surtout les retraités actuels », contribution progressive de 5 à 10 %. Barème proposé : rien sous le minimum vieillesse ; 5 % juste au-dessus, montant jusqu'à 10 % à 3 000 € bruts par mois (seuil des hautes pensions), 10 % au-delà (taux appliqué à toute la pension, seuils en euros de 2026). Appliqué à la distribution des pensions de la DREES, recalée chaque année sur la pension moyenne de l'ancien système (gelée : la contribution baisse avec le temps). Fuite (hypothèse) : impôt unique et TVA que les retraités ne paient plus sur la part prélevée (25 %)."
   droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 (première option) : la pension des départs dans l'ancien système de 2029 à 2043 (générations 1979 et avant) est calculée normalement au départ, puis gelée en euros courants. Autre option écartée : droits gelés dès 2029 (−0,2 point de déficit en 2037, −0,7 en 2050)."}
   age_legal:
     valeur: {actuel: 64, programme: 65, premiere_annee: 2029, pas_par_generation: 0.5}

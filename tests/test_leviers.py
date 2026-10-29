@@ -96,6 +96,8 @@ def test_restitution_rend_l_epargne_prise():
 
 
 def test_contribution_des_anciens_retraites():
-    from moteur.trajectoire_annuelle import lignes
-    v = lignes(P).lignes["contribution_anciens_retraites"]["valeurs"]
-    assert v[2030] < 0 and abs(v[2030]) > abs(v[2060])  # économie qui s'éteint avec l'ancien système
+    """Contribution progressive (5 à 10 %) : taux moyen entre les deux bornes, recette qui s'éteint avec l'ancien système."""
+    from moteur.ancien_systeme import contribution_solidarite, serie
+    c, s = contribution_solidarite(P), serie(P)
+    assert 0.05 < c[2030] / s[2030]["depenses_md"] < 0.10
+    assert c[2030] > c[2060] > 0

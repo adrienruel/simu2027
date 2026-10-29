@@ -136,3 +136,28 @@ def retraites_reportes(p: Parametres) -> dict[int, float]:
         return {t: 0.0 for t in ANNEES}
     sans, avec = par_generation(p), par_generation(p, avec_report=True)
     return {t: max(0.0, sans[t]["retraites_millions"] - avec[t]["retraites_millions"]) for t in ANNEES}
+
+
+def contribution_solidarite(p: Parametres) -> dict[int, float]:
+    """Contribution progressive des retraités de l'ancien système (Md€, avant fuite), par année."""
+    c = p.val("ancien_systeme.contribution_solidarite")
+    if c["taux_haut"] <= 0 and c["taux_bas"] <= 0:
+        return {t: 0.0 for t in ANNEES}
+    deciles = p.val("anciennes_pensions.deciles_drees_2020")
+    moy = sum(deciles) / len(deciles)
+    def taux(x):
+        if x <= c["seuil_bas"]:
+            return 0.0
+        if x >= c["seuil_haut"]:
+            return c["taux_haut"]
+        return c["taux_bas"] + (c["taux_haut"] - c["taux_bas"]) * (x - c["seuil_bas"]) / (c["seuil_haut"] - c["seuil_bas"])
+    out = {}
+    for t, x in serie(p).items():
+        if t < c["debut"] or x["retraites_millions"] <= 0:
+            out[t] = 0.0
+            continue
+        moyenne = x["depenses_md"] * 1e9 / (x["retraites_millions"] * 1e6) / 12
+        pensions = [d * moyenne / moy for d in deciles]
+        effectif = sum(taux(v) * v for v in pensions) / sum(pensions)
+        out[t] = effectif * x["depenses_md"]
+    return out

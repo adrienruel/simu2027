@@ -41,6 +41,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     l = dep["lignes"]
     ct = cout_transition(p)
     socle = cout_socle(p)
+    from .ancien_systeme import contribution_solidarite
+    contrib_anciens = contribution_solidarite(p)
     from .retraites_transition import attente_rui_et_socle
     attente = attente_rui_et_socle(p)
     ia = ia_administration.economie_nette(p)
@@ -116,9 +118,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "sante", "sante_garde_fou", "Santé : garde-fou", "mesure", -gf[t])
         L.ajouter(t, "retraites", "retraites_socle", "Retraites : socle (budget statique)", "socle", l["retraites_socle"])
         L.ajouter(t, "retraites", "transition_retraites", "Transition des retraites : coût net", "trajectoire", ct[t]["net"])
-        cs = p.val("ancien_systeme.contribution_solidarite")
-        L.ajouter(t, "retraites", "contribution_anciens_retraites", "Contribution de solidarité des retraités de l'ancien système",
-                  "mesure", -cs["taux"] * (t >= cs["debut"]) * ancien_86 * (1 - p.val("revalorisation.part_pensions_sous_seuil")) * (1 - cs["fuite"]))
+        L.ajouter(t, "retraites", "contribution_anciens_retraites", "Contribution de solidarité des retraités de l'ancien système (5 à 10 %)",
+                  "mesure", -contrib_anciens[t] * (1 - p.val("ancien_systeme.contribution_solidarite")["fuite"]))
         L.ajouter(t, "retraites", "pensions_sous_minimum", "Pensions sous le minimum vieillesse : revalorisation", "mesure", pensions_min)
         L.ajouter(t, "retraites", "socle_revalorisation", "Socle : revalorisation sur la croissance", "croissance", socle[t] * reval_rui)
         L.ajouter(t, "retraites", "fin_gel", "Fin du gel des anciennes pensions", "mesure", gel[t])

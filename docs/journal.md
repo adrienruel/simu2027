@@ -168,6 +168,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Contribution progressive ; vérification de la TVA
+
+- Décision d'Adrien : contribution des anciens retraités progressive de 5 à 10 % (barème proposé : 5 % au-dessus du minimum vieillesse de 1 043,59 €, 10 % à partir de 3 000 € bruts) ; taux moyen 7,6 %, 33 Md€ en 2029, 16 en 2050.
+- Vérification de la TVA (question d'Adrien) : la baisse du RUI par la règle ne comptait pas la TVA perdue sur la consommation qu'il finance (corrigé : gain divisé par 1 + taux des ménages modestes) ; taux de TVA actuel ramené de 13 % à 12,5 % (reconstitue les 206 Md€ de 2024 ; prudent). Constat : 29 Md€ des recettes viennent d'une « accise de transition » qui cale le nouveau système sur les recettes de consommation actuelles, sans instrument défini.
+- Prudent publié : 3,00 % en 2029 et 2037, 3,18 % en 2050, excédent en 2073 ; dette 105 % en 2073. Crise : 6,3 % en 2073, dette 171 %.
+
 ## 29 octobre 2026 — Contribution des anciens retraités ; épargne rendue
 
 - Décision d'Adrien : « tout le monde contribue, mais surtout les retraités actuels ». Contribution de solidarité de 5 % (taux proposé, à confirmer) sur les pensions de l'ancien système au-dessus du minimum vieillesse, nette d'une fuite de 25 % (impôt et TVA perdus).
