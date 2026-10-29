@@ -30,7 +30,8 @@ def interets_non_deduits(p: Parametres, taux: float) -> dict[int, float]:
     i = p.val("is_investissement.interets")
     va = i["ebe_2025"] / i["taux_marge_2025"]
     g = p.val("macro.tendance", "prudent")
-    return {t: p.val("is_investissement.active") * part_deduite(p, t, p.val("is_investissement.montee_annees")) / p.val("is_investissement.part_admise")
+    montee = p.val("is_investissement.montee_annees")
+    return {t: p.val("is_investissement.active") * min(1, (t - 2029 + 1) / montee)
             * p.val("is_investissement.part_payeurs_is") * taux * i["part_va"] * va * (1 - i["part_sans_recette"]) * (1 - i["part_reactions"]) * (1 + g) ** (t - 2029)
             for t in ANNEES}
 

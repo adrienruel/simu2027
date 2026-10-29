@@ -54,7 +54,8 @@ def eatr_nouveau(p: Parametres, jeu: str = "prudent") -> float:
     taux = (p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes")
             + p.val("impot_local_entreprises.taux_regions"))
     z0 = p.val("is_investissement.valeur_actuelle_amortissements")
-    part = p.val("is_investissement.part_investissement_concernee", jeu) * p.val("is_investissement.active")
+    part = (p.val("is_investissement.part_investissement_concernee", jeu) * p.val("is_investissement.active")
+            * p.val("is_investissement.part_admise"))
     z = part * 1.0 + (1 - part) * z0
     return eatr(taux, z, c["rentabilite"], c["taux_reel"], c["depreciation"])
 

@@ -168,6 +168,11 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Levier IS : taux et déduction
+
+- `outils/levier_is.py`, `docs/levier_is.md`, `tests/test_levier_is.py` : grille taux légal × part déduite. Baisser le taux dégrade les comptes (45 → 35 % : +0,3 point de déficit en 2037 sans clause). La déduction immédiate coûte 34,5 Md€ en 2037 ; la supprimer réduirait le déficit de 1,4 point en 2037, au prix de 63 000 emplois perdus de plus et de moins d'investissement.
+- Deux défauts trouvés par ces tests et corrigés : division par la part déduite (fin de la déduction des intérêts) ; taux effectif qui ignorait la part déduite.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Le vrai coût de l'IS à 45 % est le transfert de bénéfices.** Il suit le taux légal (45 % contre 25 % aujourd'hui, et contre 15 à 25 % dans la plupart des pays voisins) : ≈ 14 % de l'assiette des grandes entreprises part vers l'étranger dans le prudent, soit ≈ 21 Md€ par an. La déduction de l'investissement ne le réduit pas. C'est le premier canal par lequel l'IS à 45 % coûte au budget.
