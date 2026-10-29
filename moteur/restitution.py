@@ -162,6 +162,11 @@ def donnees(p: Parametres | None = None) -> dict:
         _f = _calc(p)["prudent"].detail.get("fonds")
         if _f:
             population["fonds"] = {k: [round(_f[t][k]) for t in jalons] for k in ("encours_comptes", "capital", "rentes")}
+        from .carrieres import actif as _car_actif, resume as _car_resume
+        if _car_actif(p):
+            population["carrieres"] = {j: {k: [_car_resume(p, j, jalons)[t][k] for t in jalons]
+                                           for k in ("emplois_milliers", "prime_salaire_pct")}
+                                       for j in ("crise", "prudent", "median", "optimiste")}
         population["valeur_enfant"] = [{**x, "nouveau": round(x["nouveau"], 2)} for x in demo_m.valeur_enfant(p)]
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)

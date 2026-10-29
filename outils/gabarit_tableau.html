@@ -282,6 +282,9 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     <h3>Le fonds : comptes d'épargne et capital nouveau (prudent)</h3>
     <p class="note">Encours des comptes d'épargne obligatoire de toutes les générations (versements des salariés, rendement du fonds, rente viagère pour moitié à 67 ans, l'autre moitié placée) ; capital nouveau : la part placée dans des investissements nouveaux en France (après les investissements publics repris, l'éviction de l'épargne volontaire et la part placée à l'étranger), qui produit du PIB ; rentes versées aux retraités par les comptes. Md€ de 2026, hors croissance.</p>
     <div class="carte defile"><table id="t-fonds-tab"></table></div>
+    <h3>Réformes du supérieur : effets sur les carrières</h3>
+    <p class="note">Sélection à l'université, apprentissage et alternance, RUI étudiant sous condition, prépas et écoles facturées. Entrée plus tôt dans l'emploi : les années d'études en plus supprimées (48 000 par an), dont une part en emploi (38 % en crise, 50 % en prudent, 63 % en médian et optimiste, Céreq). Moins de décrochage : une part d'une génération obtient une licence et gagne la moitié de l'écart de salaire licence − bac général du Céreq (14,7 %) ; nul en prudent et en crise, faute d'estimation causale. Le meilleur emploi des jeunes est déjà compté dans le bloc emploi (sélection et alternance) et n'est pas ajouté.</p>
+    <div class="carte defile"><table id="t-carrieres-tab"></table></div>
     <h3>Ce que rapporte un enfant de plus au ménage (€ par an)</h3>
     <div class="carte defile"><table id="t-enfant-tab"></table></div>
   </section>
@@ -614,6 +617,12 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       const Fd = P.fonds;
       document.getElementById("t-fonds-tab").innerHTML = `<thead><tr><th>Md€</th>${P.jalons.map(t => `<th>${t}</th>`).join("")}</tr></thead><tbody>` +
         ligneR("Encours des comptes", Fd.encours_comptes, 0) + ligneR("Capital nouveau (produit du PIB)", Fd.capital, 0) + ligneR("Rentes versées par les comptes", Fd.rentes, 0) + "</tbody>";
+    }
+    if (P.carrieres) {
+      const C = P.carrieres, NJ = { crise: "crise", prudent: "prudent", median: "médian", optimiste: "optimiste" };
+      document.getElementById("t-carrieres-tab").innerHTML = `<thead><tr><th></th>${P.jalons.map(t => `<th>${t}</th>`).join("")}</tr></thead><tbody>` +
+        Object.keys(NJ).map(j => ligneR(`Emplois en plus, ${NJ[j]} (milliers)`, C[j].emplois_milliers, 0)).join("") +
+        Object.keys(NJ).map(j => ligneR(`Gain de salaire moyen des salariés, ${NJ[j]} (%)`, C[j].prime_salaire_pct, 2)).join("") + "</tbody>";
     }
     const MEN = { deux_smic: "Couple, deux SMIC", smic_median: "Couple, SMIC et médian", deux_medians: "Couple, deux médians", cadre_median: "Couple, cadre et médian", median_inactif: "Couple, médian et conjoint sans emploi", parent_isole_smic: "Parent isolé au SMIC" };
     const V = P.valeur_enfant, ids = [...new Set(V.map(x => x.menage))];

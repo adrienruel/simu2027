@@ -19,7 +19,9 @@ def test_calage_2026_sur_le_budget_statique():
 
 
 def test_indices_valent_un_en_2029():
-    assert all(v == pytest.approx(1.0) for v in indices(P)[2029].values())
+    """Sans les effets des réformes du supérieur (moteur/carrieres.py), présents dès 2029."""
+    q = Parametres().avec({"carrieres.active": False})
+    assert all(v == pytest.approx(1.0) for v in indices(q)[2029].values())
 
 
 def test_socle_par_cellule_borne():

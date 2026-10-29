@@ -1291,3 +1291,30 @@ cohortes:
     statut: SOURCE
     source: "Insee, recensement de 2006 (« Vivre en couple : la proportion de jeunes en couple se stabilise ») : part des hommes et des femmes vivant en couple par âge, moyenne des deux sexes"
     note: "Forme par âge seulement : le niveau est calé sur les 7 millions de couples du quotient conjugal (quotient.conjugal) en 2026. Données anciennes (2006), à remplacer par un recensement récent."
+
+# --- Carrières : effets des réformes de l'enseignement supérieur (moteur/carrieres.py, 29/10/2026) ---------
+carrieres:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : les réformes du supérieur (sélection, apprentissage et alternance, RUI étudiant sous condition, prépas et écoles facturées) modifient les carrières des générations."}
+  entree_plus_tot:
+    valeur: {ages: "19-23", debut: 2029, montee: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Les années d'études en plus supprimées (education.universite : 3 % × 1,6 million = 48 000 années par an, économie déjà au budget) réparties également de 19 à 23 ans ; montée en trois ans (les redoublements de L1 disparaissent avec les premières générations sélectionnées)."
+  entree_plus_tot_part_en_emploi:
+    valeur: {crise: 0.38, prudent: 0.50, median: 0.63, optimiste: 0.63}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Céreq, Bref n° 422 (2022), enquête Génération 2017, tableau 7 : taux d'emploi en octobre 2020, trois ans après la sortie, des bacheliers généraux 63 %, des non-diplômés 38 %"
+    note: "Part en emploi des jeunes qui ne font plus ces années d'études. Médian et optimiste : bacheliers généraux trois ans après la sortie (63 %) ; crise : non-diplômés (38 %, borne basse) ; prudent : 50 %, entre les deux, parce que l'emploi trois ans après surestime l'emploi des premières années."
+  decrochage:
+    valeur: {ecart_salaire: 0.147, part_causale: 0.5, age_diplome: 22, premiere_generation: 2011, montee_generations: 4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Céreq, Bref n° 422 (2022), tableau 7 : rémunération médiane en 2020, licence (L3, M1 et autres bac+3/4) 1 560 €, bac général 1 360 € (+14,7 %). Décrochage : 14,7 % des néo-bacheliers quittent le supérieur après la L1, 49,1 % passent en L2 en un an (SIES, Note Flash n° 29, novembre 2025)"
+    note: "Écart descriptif : la moitié seulement est retenue comme effet du diplôme (part_causale, HYPOTHÈSE ; le reste est un effet de sélection). Générations nées à partir de 2011 (18 ans en 2029), montée sur quatre générations (études en partie faites avant la réforme)."
+  decrochage_points:
+    valeur: {crise: 0.0, prudent: 0.0, median: 0.01, optimiste: 0.03}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Aucune estimation causale de l'effet de la sélection sur la réussite : après la loi ORE, le passage en L2 passe de 45,5 % (2018) à 53,5 % (2019), mais le profil des étudiants n'en explique que 0,3 à 2,2 points et le reste tient surtout aux conditions d'examen de la crise sanitaire (SIES, Note d'information 2023-01)"
+    note: "Points d'une génération qui obtiennent une licence au lieu de sortir sans diplôme. Prudent et crise : 0 (pas de source causale) ; médian : 1 point ; optimiste : 3 points."

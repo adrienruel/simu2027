@@ -339,3 +339,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - **Coût du SMIC** : 1 979 €/mois (23 750 €/an, profil type v232) contre 1 930 €/mois (juin 2026) cité dans l'audit v235. Lequel sert à quoi ?
 - **Couples et enfants** : « couples imposés ensemble, demi-part par enfant plafonnée à 1 000 € » — mécanique exacte du quotient à préciser.
 - **État du programme en v232** : les résultats publiés ont bougé en v233-v235 (déficits, chômage, profils). Les valeurs de référence des tests seront celles de la v235.
+
+
+## 29 octobre 2026 — Réformes du supérieur dans les carrières
+
+Demande d'Adrien : les quatre réformes du supérieur et leurs quatre effets (entrée plus tôt, emploi des jeunes,
+salaires, décrochage), sourcés, le bas des estimations en prudent. `moteur/carrieres.py` ; détail dans
+docs/cohortes.md. Retenu en prudent : l'entrée plus tôt seulement (24 000 emplois). L'emploi des jeunes est déjà dans
+le bloc emploi ; décrochage et salaires sont nuls en prudent faute d'estimation causale (positifs en médian et
+optimiste). Effet modeste : −0,03 point de déficit avant règle en 2037, −0,08 en 2073.

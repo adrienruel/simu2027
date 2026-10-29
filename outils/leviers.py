@@ -38,6 +38,7 @@ VARIANTES = [
     ("Sans la participation des inactifs", {"emploi.participation_inactifs/prudent": 0.0, "emploi.participation_inactifs/median": 0.0,
                                              "emploi.participation_inactifs/optimiste": 0.0}),
     ("Sans les retombées du capital du fonds", {"macro.externalites_capital_fonds": 0.0}),
+    ("Sans les effets des réformes du supérieur sur les carrières", {"carrieres.active": False}),
     # Paquet
     ("Paquet : âge légal 66 ans + 1 point d'épargne à l'État",
      {"ancien_systeme.age_legal/programme": 66, "epargne.contribution_transition": 0.1}),

@@ -115,12 +115,18 @@ def _tranche(nom: str) -> range:
     return range(int(a), int(b) + 1)
 
 
-def effectifs(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
-    """Effectifs par grand groupe et emploi (personnes), par année."""
+def effectifs(p: Parametres, jeu: str = "prudent", carrieres: bool = True) -> dict[int, dict[str, float]]:
+    """Effectifs par grand groupe et emploi (personnes), par année. carrieres : avec l'entrée plus tôt dans
+    l'emploi due aux réformes du supérieur (moteur/carrieres.py)."""
+    from .carrieres import emplois_entree_plus_tot
+    prof = {a: v for k, v in p.val("cohortes.profil_salaire_age").items() for a in _tranche(k)}
     taux = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
     out = {}
     for t, v in population(p, jeu).items():
-        out[t] = {"emploi": sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1)),  # 18 ans et plus, comme les cellules
+        # emplois des jeunes entrés plus tôt, pondérés par leur salaire relatif (profil par âge de l'Insee) :
+        # l'indice d'emploi fait suivre le PIB et des recettes moyennes par emploi, un jeune y pèse moins
+        plus = sum(n * prof.get(a, 1.0) for a, n in emplois_entree_plus_tot(p, jeu, t).items()) if carrieres else 0.0
+        out[t] = {"emploi": sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1)) + plus,  # 18 ans et plus, comme les cellules
                   "adultes": sum(v[18:65]), "enfants": sum(v[0:18]), "total": sum(v),
                   "seniors": sum(v[65:]), "moins_de_3_ans": sum(v[0:3])}
     return out
@@ -133,7 +139,10 @@ def indices(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
         out = {t: {g: 1.0 for g in groupes} for t in ANNEES}
     else:
         e = effectifs(p, jeu)
-        out = {t: {g: e[t][g] / e[2029][g] for g in groupes} for t in ANNEES}
+        # base de 2029 sans les effets des réformes du supérieur sur les carrières : un effet présent dès 2029
+        # n'est pas effacé par la normalisation
+        e0 = effectifs(p, jeu, carrieres=False)[2029]
+        out = {t: {g: e[t][g] / e0[g] for g in groupes} for t in ANNEES}
     # cellules de salariés (moteur/cohortes.py) : impôt, TVA, RUI gardé et épargne des salariés ; sans les
     # cellules, ces grandeurs suivent les personnes en emploi
     from .cohortes import indices as indices_cohortes

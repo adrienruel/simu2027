@@ -90,11 +90,14 @@ def _par_cellule(p: Parametres, scenario: str = "prudent") -> dict[float, dict[s
     return out
 
 
-def agregats(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
+def agregats(p: Parametres, jeu: str = "prudent", carrieres: bool = True) -> dict[int, dict[str, float]]:
     """Totaux annuels des salariés (euros de 2026, hors croissance) : impôt unique, impôt local, RUI gardé,
-    TVA, épargne obligatoire, masse salariale, nombre de salariés."""
+    TVA, épargne obligatoire, masse salariale, nombre de salariés. carrieres : avec les effets des réformes du
+    supérieur (moteur/carrieres.py : entrée plus tôt dans l'emploi, gain de salaire des générations diplômées ;
+    le gain est appliqué en proportion à l'impôt, ce qui sous-estime un peu l'effet de la progressivité)."""
+    from .carrieres import emplois_entree_plus_tot, prime_salaire
     cache = p.__dict__.setdefault("_cache", {})
-    cle = ("cohortes_agregats", jeu, p.colonne_prudent)
+    cle = ("cohortes_agregats", jeu, p.colonne_prudent, carrieres)
     if cle in cache:
         return cache[cle]
     cell = _par_cellule(p)
@@ -107,12 +110,14 @@ def agregats(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]
     out = {}
     for t in range(2026, 2074):
         tot = {"impot": 0.0, "local": 0.0, "rui": 0.0, "tva": 0.0, "epargne": 0.0, "masse": 0.0, "salaries": 0.0}
+        plus = emplois_entree_plus_tot(p, jeu, t) if carrieres else {}
         for a in AGES_ACTIFS:
-            n = pops[t][a] * te.get(a, 0.0) * part_sal
+            n = (pops[t][a] * te.get(a, 0.0) + plus.get(a, 0.0)) * part_sal
             c = cell[pr.get(a, 1.0)]
+            g = 1 + (prime_salaire(p, jeu, t, a) if carrieres else 0.0)
             tot["salaries"] += n
             for key in ("impot", "local", "rui", "tva", "epargne", "masse"):
-                tot[key] += n * c[key]
+                tot[key] += n * c[key] * (g if key != "rui" else 1.0)
         out[t] = tot
     cache[cle] = out
     return out
@@ -124,12 +129,15 @@ def indices(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
     if not (p.val("cohortes.active") and p.val("demographie.active")):
         return {t: {k: 1.0 for k in cles} for t in range(2026, 2074)}
     ag = agregats(p, jeu)
+    # base sans les effets des réformes du supérieur : référence de 2029 et effet de composition par âge (ces
+    # effets ne sont pas de la composition par âge et ne doivent pas en être retirés)
+    ag0 = agregats(p, jeu, carrieres=False)
     w = p.val("cohortes.effet_composition_salaires", jeu)
     out = {}
     for t in range(2026, 2074):
-        brut = {k: ag[t][k] / ag[2029][k] for k in cles}
+        brut = {k: ag[t][k] / ag0[2029][k] for k in cles}
         # salaire moyen relatif à 2029 (composition par âge) ; retiré en partie (double compte avec la tendance)
-        comp = (brut["masse"] / brut["salaries"]) ** (1 - w)
+        comp = ((ag0[t]["masse"] / ag0[2029]["masse"]) / (ag0[t]["salaries"] / ag0[2029]["salaries"])) ** (1 - w)
         out[t] = {k: (v / comp if k not in ("salaries", "rui") else v) for k, v in brut.items()}
         # RUI gardé par les salariés : même logique (moins de jeunes à bas salaire) ; prudent : suit le nombre de salariés
         out[t]["rui"] = brut["salaries"] ** (1 - w) * brut["rui"] ** w
@@ -185,6 +193,7 @@ def comptes(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
     moitié placée. Les points pris par la règle et l'épargne rendue sont comptés à part, dans le module macro.
 
     Renvoie par année : encours (début d'année), versements, rendements, paiements aux retraités."""
+    from .carrieres import emplois_entree_plus_tot, prime_salaire
     from .epargne import capital_par_euro_de_rente
     cache = p.__dict__.setdefault("_cache", {})
     cle = ("comptes", jeu, p.colonne_prudent)
@@ -206,11 +215,13 @@ def comptes(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
         encours = sum(actif.values()) + sum(pool.values()) + sum(place.values())
         versements = paiements = 0.0
         # versements des actifs (18 à 66 ans)
+        plus = emplois_entree_plus_tot(p, jeu, t)
         for a in AGES_ACTIFS:
             if a >= acces:
                 continue
             c = t - a
-            v = pops[t][a] * s_age.get(a, 0.0)
+            # salariés de l'âge (avec l'entrée plus tôt) × épargne par salarié (avec le gain de salaire)
+            v = (pops[t][a] + (plus.get(a, 0.0) / te[a] if te.get(a) else 0.0)) * s_age.get(a, 0.0) * (1 + prime_salaire(p, jeu, t, a))
             actif[c] = actif.get(c, 0.0) * (1 + r) + v if c in actif else v
             versements += v
         # générations qui atteignent 67 ans : la moitié en rente, l'autre placée

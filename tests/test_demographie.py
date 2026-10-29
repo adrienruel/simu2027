@@ -17,7 +17,8 @@ def test_population_insee_totaux():
 
 
 def test_indices_valent_un_en_2029_et_sans_module():
-    assert all(v == pytest.approx(1.0) for v in demographie.indices(P)[2029].values())
+    q = P.avec({"carrieres.active": False})  # effets des réformes du supérieur présents dès 2029
+    assert all(v == pytest.approx(1.0) for v in demographie.indices(q)[2029].values())
     sans = P.avec({"demographie.active": False})
     assert all(v == 1.0 for t in (2040, 2073) for v in demographie.indices(sans)[t].values())
 

@@ -65,6 +65,28 @@ pondérés par leur gain (9 900 € à un revenu, 500 € à deux), le quotient 
 RUI du conjoint suit les personnes sans emploi en couple (au lieu de la population totale) : −2 Md€ de dépenses
 en 2050, −5 Md€ en 2073 (moins d'enfants et de couples d'âge actif).
 
+## Réformes du supérieur : carrières (cinquième étape)
+
+`moteur/carrieres.py`, paramètres `carrieres.*`. Réformes : sélection à l'université, apprentissage et alternance,
+RUI étudiant sous condition, prépas et écoles facturées. Leurs coûts et économies sont déjà au budget ; le module
+ajoute leurs effets sur les carrières.
+
+| Effet | Ce qui est retenu | Crise | Prudent | Médian | Optimiste |
+|---|---|---|---|---|---|
+| Entrée plus tôt dans l'emploi | 48 000 années d'études en moins par an (3 % de 1,6 million, déjà au budget), de 19 à 23 ans ; part en emploi (Céreq, Génération 2017 : 63 % des bacheliers généraux, 38 % des non-diplômés, trois ans après la sortie) | 38 % | 50 % | 63 % | 63 % |
+| Meilleur emploi des jeunes | Déjà dans le bloc emploi (« sélection et apprentissage », « alternance », en points de chômage) : rien n'est ajouté | — | — | — | — |
+| Moins de décrochage | Points d'une génération qui obtiennent une licence au lieu de sortir sans diplôme ; aucune estimation causale (SIES 2023 : la hausse du passage en L2 après la loi ORE tient surtout à la crise sanitaire) | 0 | 0 | 1 | 3 |
+| Salaires plus élevés | Moitié de l'écart licence − bac général du Céreq (+14,7 %), pour les générations nées à partir de 2011, dès 22 ans ; l'emploi lié au diplôme n'est pas ajouté (canal « sélection » du bloc emploi) | 0 | 0 | +0,07 % par génération | +0,22 % |
+
+Les jeunes entrés plus tôt s'ajoutent aux cellules de salariés (impôt, TVA, épargne au salaire de leur âge) et à
+l'indice d'emploi du PIB, pondérés par leur salaire relatif (0,59 du salaire moyen). Les indices sont rapportés à
+2029 sans ces effets, pour que l'effet présent dès 2029 ne soit pas effacé. Pas d'effet compté : apprentissage sur
+les salaires (pas d'estimation causale ; Cart et Léné, 2014, ne trouvent pas d'écart de salaire à l'embauche) ;
+prépas facturées (moins d'inscrits possible, effet inconnu).
+
+Effet, prudent : 24 000 emplois en plus à partir de 2031 ; déficit avant règle −0,01 point en 2029, −0,03 en 2037
+et 2050, −0,08 en 2073 ; dette de 2073 −1 point.
+
 ## Ce qui reste à faire
 
 1. Indépendants dans les cellules ; profils de salaire par génération ; couples de l'enquête la plus récente.
