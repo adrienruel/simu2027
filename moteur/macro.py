@@ -207,7 +207,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 interets_t = taux_reel(t, s) * dette_prec
                 pib_t = pib0[t] + pib
                 avant = -(sp_hors[t] + solde - transferts[t] - interets_t - infl * dette_prec) / pib_t
-                ecart = max(0.0, avant - (-out["median"].maastricht[t]))
+                ecart = max(0.0, avant - (-out["median"].maastricht[t])) if p.val("clause.active") else 0.0
                 montant = ecart * pib_t
                 if etalement_declenche is None:
                     etalement_declenche = 1.0 if ecart > 0 else 0.0

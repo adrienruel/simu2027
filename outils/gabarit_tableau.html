@@ -112,6 +112,18 @@ tr.groupe td { font-family: var(--f-titre); font-weight: 600; font-size: 13px; c
 td.spark { width: 110px; padding-block: 2px; }
 td.spark svg { width: 100px; height: 22px; }
 tr.sous-total td { font-weight: 600; }
+td.barre { width: 18%; min-width: 120px; }
+#t-att td:first-child { min-width: 240px; max-width: 420px; }
+#t-att th { white-space: normal; }
+@media (max-width: 760px) { #t-att td:first-child { min-width: 0; } #t-att td.barre, #t-att th.barre-th { display: none; } }
+.bar-w { position: relative; height: 16px; }
+.bar-w .axe { position: absolute; top: -4px; bottom: -4px; width: 1px; background: var(--trait-fort); }
+.bar-w .b { position: absolute; top: 2px; height: 12px; border-radius: 3px; }
+.bar-w .b.pos { background: var(--accent); }
+.bar-w .b.neg { background: var(--s-crise); }
+.resume-att { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 14px; }
+.resume-att b { font-family: var(--f-chiffre); font-weight: 500; }
+@media (max-width: 760px) { #t-att .detail { display: none; } }
 .barres-stat { display: flex; height: 14px; border-radius: 4px; overflow: hidden; gap: 2px; }
 .barres-stat div { height: 100%; }
 .note { font-size: 13px; color: var(--encre-2); max-width: 72ch; }
@@ -195,6 +207,22 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
         <div class="defile"><table id="t-comptes"></table></div>
         <div id="clause-annee" class="note"></div>
       </div>
+    </div>
+  </section>
+
+  <section class="bloc" aria-labelledby="t-mesures">
+    <div class="bloc-tete">
+      <h2 id="t-mesures">Ce que rapporte chaque mesure</h2>
+      <div class="commandes">
+        <div class="segments" role="group" aria-label="Année" id="att-annees"></div>
+        <label class="choix" for="att-domaine">Domaine <select id="att-domaine"></select></label>
+      </div>
+    </div>
+    <p class="note">Pour chaque mesure séparable : le solde avec tout le programme, moins le solde sans cette mesure, dans le scénario prudent et sans la clause de trajectoire (elle compenserait l'effet de la mesure). Positif : la mesure améliore le solde. La contribution se partage entre la ligne budgétaire de la mesure, ses effets sur l'activité, et les intérêts de la dette qu'elle évite ou ajoute. La bascule elle-même (impôt unique, TVA, RUI, retraites, fonds) forme un seul système et n'est pas dans cette liste.</p>
+    <div class="carte bloc">
+      <div class="resume-att" id="att-resume"></div>
+      <div class="defile"><table id="t-att"></table></div>
+      <p class="note" id="att-note"></p>
     </div>
   </section>
 
@@ -429,12 +457,47 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     h += ligneTot("Solde public", d.postes.solde[i], "total");
     document.getElementById("t-lignes-tab").innerHTML = h + "</tbody>";
   }
+  // Ce que rapporte chaque mesure
+  const AT = D.attribution, DOM = { emploi: "Emploi", retraites: "Retraites", recettes: "Recettes", croissance: "Croissance", logement: "Logement",
+    education: "Éducation", dette: "Dette", etat: "État", sante: "Santé", economies: "Économies de l'État" };
+  let attAn = 2037;
+  const selD = document.getElementById("att-domaine");
+  const doms = [...new Set(AT.mesures.map(m => m.domaine))];
+  selD.innerHTML = `<option value="tout">tous</option>` + doms.map(d => `<option value="${d}">${DOM[d] || d}</option>`).join("");
+  const segA = document.getElementById("att-annees");
+  segA.innerHTML = [2029, 2032, 2037, 2050].map(t => `<button type="button" data-an="${t}" aria-pressed="${t === attAn}">${t}</button>`).join("");
+  segA.querySelectorAll("button").forEach(b => b.onclick = () => { attAn = +b.dataset.an; segA.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); tableAtt(); });
+  const sg = (v, n = 1) => (v > 0.0049 ? "+" : "") + fr(v, n);
+  function tableAtt() {
+    const i = iA(attAn), dom = selD.value;
+    const ms = AT.mesures.filter(m => dom === "tout" || m.domaine === dom).sort((a, b) => b.solde_avant_clause[i] - a.solde_avant_clause[i]);
+    const mx = Math.max(0.01, ...ms.map(m => Math.abs(m.solde_avant_clause[i])));
+    const neg = ms.some(m => m.solde_avant_clause[i] < -0.005), pos = ms.some(m => m.solde_avant_clause[i] > 0.005);
+    const x0 = neg && pos ? 50 : neg ? 100 : 0, k = (neg && pos ? 50 : 100) / mx;
+    let h = `<thead><tr><th>Mesure</th><th class="detail">Début</th><th class="detail">Ligne budgétaire</th><th class="detail">Activité</th><th class="detail">Intérêts</th><th class="barre-th"></th><th>Effet sur le solde (Md€)</th><th class="detail">Chômage (points)</th></tr></thead><tbody>`;
+    ms.forEach(m => {
+      const v = m.solde_avant_clause[i], w = Math.abs(v) * k;
+      const barre = `<div class="bar-w"><span class="axe" style="left:${x0}%"></span><span class="b ${v >= 0 ? "pos" : "neg"}" style="left:${v >= 0 ? x0 : x0 - w}%;width:${Math.max(w, 0.4)}%"></span></div>`;
+      h += `<tr><td>${m.libelle}${m.sans_ligne ? ` <span class="puce">activité seule</span>` : ""}</td><td class="n detail">${m.debut}</td>
+        <td class="n detail">${sg(m.statique[i])}</td><td class="n detail">${sg(m.economie[i])}</td><td class="n detail">${sg(m.dette_interets[i])}</td>
+        <td class="barre">${barre}</td><td class="n${v < 0 ? " neg" : ""}"><b>${sg(v)}</b></td><td class="n detail">${Math.abs(m.chomage[i]) < 0.0005 ? "" : sg(m.chomage[i], 2)}</td></tr>`;
+    });
+    document.getElementById("t-att").innerHTML = h + "</tbody>";
+    const e = AT.ensemble, so = AT.somme;
+    document.getElementById("att-resume").innerHTML =
+      `<span>Toutes les mesures séparables, en ${attAn} : <b>${sg(e.solde_avant_clause[i])} Md€</b></span>` +
+      `<span>Déficit : <b>${sg(e.deficit_avant_clause[i], 2)} point de PIB</b></span>` +
+      `<span>Chômage : <b>${sg(e.chomage[i], 2)} point</b></span>`;
+    document.getElementById("att-note").textContent = `Mesure par mesure, la somme fait ${sg(so.solde_avant_clause[i])} Md€ ; retirées ensemble, ${sg(e.solde_avant_clause[i])} Md€. L'écart vient des interactions : rendements décroissants des réformes de l'emploi, impôt local recalculé. « Activité seule » : la mesure n'a pas de ligne budgétaire propre ; ce qu'elle coûte ou économise directement est compris dans le budget statique de la bascule, et seul son effet sur l'activité est mesuré ici.`;
+  }
+  selD.addEventListener("change", tableAtt);
   selN.addEventListener("change", tableLignes);
   rng.addEventListener("input", detail); selS.addEventListener("change", detail);
   rng.addEventListener("input", tableLignes); selS.addEventListener("change", tableLignes);
   const toutDessiner = () => {
     dessinerDeficit();
     tableLignes();
+    tableAtt();
     courbe("g-dette", "leg-dette", S.map(s => ({ s, v: D.series[s].dette_pib })), { annees: A, seuil: 60, seuilLib: "60 %", unite: " %", dec: 1, aria: "Dette publique par scénario", min: 0 });
     courbe("g-chomage", "leg-chomage", S.map(s => ({ s, v: D.series[s].chomage.slice(0, AC.length) })), { annees: AC, unite: " %", dec: 2, aria: "Taux de chômage par scénario, 2029-2040" });
     detail();

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import dataclasses
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -89,6 +90,7 @@ class Parametres:
     colonne_prudent: str = "prudent"
     _surcharges: dict = {}
     taux_local_copie: float | None = None
+    mesures_desactivees: frozenset = frozenset()
 
     def __getitem__(self, cle: str) -> Parametre:
         return self._p[cle]
@@ -119,3 +121,34 @@ class Parametres:
 
     def __iter__(self):
         return iter(self._p.values())
+
+    def avec(self, modifs: dict[str, Any] | None = None, mesures_desactivees: set[str] | frozenset = frozenset()) -> "Parametres":
+        """Copie avec des valeurs remplacées, pour les variantes et l'attribution par mesure.
+
+        modifs : {"groupe.nom": valeur} ou {"groupe.nom/sous/chemin": valeur} pour une valeur structurée.
+        Un paramètre par scénario reçoit la même valeur dans tous les scénarios (sauf chemin explicite).
+        mesures_desactivees : libellés du registre des économies (mesures_economies.csv) à neutraliser.
+        """
+        c = copy.copy(self)
+        c.__dict__.pop("_cache", None)
+        c.__dict__.pop("_taux_local_force", None)
+        c._p = dict(self._p)
+        for cle_chemin, v in (modifs or {}).items():
+            cle, *chemin = cle_chemin.split("/")
+            if cle not in c._p:
+                raise ErreurParametre(f"Paramètre inconnu : {cle}")
+            par = c._p[cle]
+            if not chemin:
+                nouvelle = {s: v for s in self.scenarios} if par.par_scenario else v
+            else:
+                nouvelle = copy.deepcopy(par.valeur)
+                cibles = [nouvelle[s] for s in self.scenarios] if par.par_scenario and chemin[0] not in self.scenarios else [nouvelle]
+                for cible in cibles:
+                    for k in chemin[:-1]:
+                        cible = cible[k]
+                    if chemin[-1] not in cible:
+                        raise ErreurParametre(f"{cle} : pas de champ {'/'.join(chemin)}")
+                    cible[chemin[-1]] = v
+            c._p[cle] = dataclasses.replace(par, valeur=nouvelle)
+        c.mesures_desactivees = frozenset(self.mesures_desactivees) | frozenset(mesures_desactivees)
+        return c

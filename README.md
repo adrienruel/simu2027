@@ -10,6 +10,7 @@ pip install pyyaml pytest openpyxl
 python -m pytest
 python -m moteur.simulation   # déficits des quatre scénarios, avant et après la clause
 python -m outils.cibles_crise  # (LibreOffice) recalcule la crise de la v235 en pleine précision
+python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribution par mesure, ~20 s)
 ```
 
 ## Organisation
@@ -25,6 +26,7 @@ python -m outils.cibles_crise  # (LibreOffice) recalcule la crise de la v235 en 
 | `reference/cibles/` | Valeurs cibles de Total et Trajectoire, que le moteur doit reproduire |
 | `outils/` | Extraction de la référence ; `recalcul.py` recalcule la v235 dans LibreOffice avec des cellules modifiées |
 | `tests/` | Tests automatiques |
+| `parametres/registre_lois.yaml` | Registre des mesures séparables et façon de les neutraliser (attribution) |
 | `docs/journal.md` | Journal des décisions et des écarts avec la v235 |
 
 ## Règles

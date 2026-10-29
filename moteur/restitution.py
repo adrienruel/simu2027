@@ -80,6 +80,16 @@ def donnees(p: Parametres | None = None) -> dict:
                                 "valeurs": [_r(x["valeurs"].get(t, 0.0), 3) for t in annees]}
                                for x in reg.lignes.values() if any(abs(v) > 1e-6 for v in x["valeurs"].values())]
         series[s]["postes"]["transferts_collectivites"] = [_r(res[s][t]["transferts_collectivites"], 3) for t in annees]
+    from .attribution import attribuer
+    att = attribuer(p)
+    cles = ("solde_avant_clause", "statique", "economie", "dette_interets", "deficit_avant_clause", "chomage")
+    attribution = {
+        "mesures": [{"id": m["id"], "libelle": m["libelle"], "domaine": m["domaine"], "debut": m["debut"],
+                     "sans_ligne": m["sans_ligne_budgetaire"],
+                     **{k: [_r(m["annees"][t][k], 3) for t in annees] for k in cles}} for m in att["mesures"]],
+        "ensemble": {k: [_r(att["ensemble"][t][k], 3) for t in annees] for k in cles},
+        "somme": {k: [_r(sum(m["annees"][t][k] for m in att["mesures"]), 3) for t in annees] for k in cles},
+    }
     statuts = Counter(x.statut for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE"))
     groupes = Counter(c.split(".")[0] for c in hypotheses)
@@ -91,6 +101,7 @@ def donnees(p: Parametres | None = None) -> dict:
         "series": series,
         "libelles_canaux": LIBELLES_CANAUX,
         "postes": POSTES,
+        "attribution": attribution,
         "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts),
                        "hypotheses_par_groupe": groupes.most_common()},
     }

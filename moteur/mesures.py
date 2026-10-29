@@ -22,6 +22,8 @@ def registre() -> list[dict]:
 
 
 def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float]) -> float:
+    if m["mesure"] in p.mesures_desactivees:
+        return 0.0
     debut, plein = int(m["premiere_annee"]), int(m["annee_plein_effet"])
     montee = min(1.0, max(0.0, (t - debut + 1) / (plein - debut + 1)))
     if m["indexation"] == "pib":

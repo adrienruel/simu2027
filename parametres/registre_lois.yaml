@@ -1,0 +1,181 @@
+# Registre des lois et mesures séparables du programme.
+#
+# Chaque entrée dit comment neutraliser la mesure (« neutraliser ») pour mesurer sa contribution :
+# contribution = résultat avec tout le programme − résultat sans cette mesure.
+# Les mesures du registre des économies (parametres/donnees/mesures_economies.csv) sont ajoutées
+# automatiquement, une entrée par ligne.
+#
+# Ce registre ne couvre pas la bascule elle-même (impôt unique, TVA, RUI, retraites par capitalisation,
+# fonds souverain) : ces pièces forment un seul système et ne se retirent pas une à une. Leur effet
+# d'ensemble est ce qui reste quand on retire toutes les mesures séparables.
+#
+# debut : première année d'effet (indicatif ; la montée en charge est portée par les modules).
+
+mesures:
+  # --- Emploi : réformes chiffrées dans la feuille Emploi -----------------------------------------
+  - id: allocation_chomage_rui
+    libelle: "Allocation chômage remplacée par le RUI, sous condition d'activité"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.reformes_directes/allocation_chomage_rui/retenue": 0}
+  - id: france_travail_conseil
+    libelle: "France Travail gardé pour le conseil et le placement, sans aide financière"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.reformes_directes/france_travail_conseil/retenue": 0}
+  - id: selection_universite_apprentissage
+    libelle: "Éducation : sélection à l'université, apprentissage repris par l'Éducation nationale"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.reformes_directes/selection_universite_apprentissage/retenue": 0}
+  - id: droit_a_construire_emploi
+    libelle: "Logement : droit à construire opposable (effet sur l'emploi)"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.reformes_directes/droit_a_construire/retenue": 0}
+  - id: accompagnement_ia
+    libelle: "Accompagnement intensif des chômeurs (l'IA reprend la gestion de France Travail)"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.reformes_directes/accompagnement_ia/retenue": 0}
+  - id: alternance
+    libelle: "Alternance généralisée au lycée professionnel et en premier cycle"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.reformes_directes/alternance/retenue": 0}
+  - id: contrat_assoupli
+    libelle: "Contrat de travail assoupli"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.reformes_directes/contrat_assoupli/retenue": 0}
+  - id: reforme_entreprises_emploi
+    libelle: "Réforme des entreprises : effet sur l'emploi (fin des impôts de production, IS à 45 %)"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.retenues_calculees/entreprises": 0}
+  - id: bas_salaires_rui
+    libelle: "Bas salaires : RUI au prorata du salaire, fin de la trappe entre 1 et 1,6 SMIC"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.bas_salaires_rui_prorata/retenue": 0}
+  - id: baisse_cout_travail
+    libelle: "Baisse de 5 % du coût employeur jusqu'à 1,3 SMIC"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.retenues_calculees/baisse_cout_travail": 0}
+  - id: commerces
+    libelle: "Horaires des commerces libres"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.retenues_calculees/commerces": 0}
+  - id: smic_croissance
+    libelle: "SMIC revalorisé sur la croissance (et non sur l'inflation)"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.retenues_calculees/smic_croissance": 0}
+  - id: prime_jeunes
+    libelle: "Prime d'embauche jeune : la moitié du RUI versée à l'employeur pendant un an"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.retenues_calculees/prime_jeunes": 0}
+  - id: accords_branche
+    libelle: "Accords de branche : droit de dérogation par accord d'entreprise"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.retenues_calculees/accords_branche": 0}
+  - id: aide_personne
+    libelle: "Aide à l'autonomie et garde d'enfants : part du RUI versée au ménage employeur"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.aide_personne/retenue": 0}
+  - id: assistantes_maternelles
+    libelle: "Assistantes maternelles : complément pour les familles modestes"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.assistantes_maternelles/retenue": 0}
+  - id: creches
+    libelle: "Crèches : financement par l'État"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.creches/retenue": 0}
+  - id: fin_subventions_emploi
+    libelle: "Fin de l'insertion par l'activité, des territoires zéro chômeur et des contrats aidés"
+    domaine: emploi
+    debut: 2029
+    neutraliser: {"emploi.subventions_supprimees/retenu": 0}
+
+  # --- Effets de l'économie portés par une mesure identifiable -------------------------------------
+  - id: seniors
+    libelle: "Emploi des seniors (âge de départ du nouveau système)"
+    domaine: retraites
+    debut: 2029
+    neutraliser: {"macro.seniors_court": 0, "macro.seniors_long": 0}
+  - id: cumul_emploi_socle
+    libelle: "Cumul emploi-socle sans pénalité"
+    domaine: retraites
+    debut: 2046
+    neutraliser: {"macro.cumul_emploi_socle": 0}
+  - id: fraude_tva
+    libelle: "Facturation électronique et IA contre la fraude à la TVA"
+    domaine: recettes
+    debut: 2029
+    neutraliser: {"macro.fraude_tva": 0}
+  - id: permis_rapide
+    libelle: "Permis rapide pour les usines et l'énergie"
+    domaine: croissance
+    debut: 2029
+    neutraliser: {"macro.permis_rapide": 0}
+  - id: choc_logement
+    libelle: "Choc d'offre de logement"
+    domaine: logement
+    debut: 2029
+    neutraliser: {"macro.logements_initial": 0, "macro.logements_croisiere": 0}
+  - id: ecole
+    libelle: "École : hausse du niveau des élèves"
+    domaine: education
+    debut: 2045
+    neutraliser: {"macro.niveau_eleves": 0}
+  - id: adoption_ia
+    libelle: "Adoption de l'IA accélérée (fonds, administration, électricité)"
+    domaine: croissance
+    debut: 2029
+    neutraliser: {"macro.adoption_ia": 0}
+  - id: credibilite
+    libelle: "Crédibilité budgétaire : baisse de l'écart de taux"
+    domaine: dette
+    debut: 2029
+    neutraliser: {"macro.baisse_spread": 0}
+
+  # --- État -------------------------------------------------------------------------------------
+  - id: ia_administration
+    libelle: "IA dans l'administration : départs non remplacés"
+    domaine: etat
+    debut: 2029
+    neutraliser: {"ia.part_departs_non_remplaces": 0}
+
+  # --- Santé ------------------------------------------------------------------------------------
+  - id: sante_fraude
+    libelle: "Santé : IA contre la fraude"
+    domaine: sante
+    debut: 2029
+    neutraliser: {"sante.mesures_a_terme/fraude": 0}
+  - id: sante_carence
+    libelle: "Santé : délai de carence porté à 7 jours"
+    domaine: sante
+    debut: 2029
+    neutraliser: {"sante.mesures_a_terme/carence": 0}
+  - id: sante_transports
+    libelle: "Santé : transports sanitaires partagés"
+    domaine: sante
+    debut: 2029
+    neutraliser: {"sante.mesures_a_terme/transports": 0}
+  - id: sante_cures
+    libelle: "Santé : cures thermales"
+    domaine: sante
+    debut: 2029
+    neutraliser: {"sante.mesures_a_terme/cures": 0}
+  - id: sante_imagerie
+    libelle: "Santé : IA dans l'imagerie"
+    domaine: sante
+    debut: 2029
+    neutraliser: {"sante.mesures_a_terme/imagerie": 0}
