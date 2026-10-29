@@ -796,6 +796,7 @@ macro:
     unite: sans_unite
     statut: HYPOTHESE
   reduction_cout_capital_autres:
+    source: "Encadrement (v235, Effets macro!E273) : fin des impôts de production, calculée avec un coût d'usage du capital ≈ 14 % (rendement réel exigé ≈ 4 %, usure ≈ 10 %) : CFE et taxe foncière ≈ 3,9 %, C3S et CVAE ≈ 1,6 % ; médian −5,5 %, prudent −4,7 %, optimiste −12,1 %"
     valeur: {crise: 0.04, prudent: 0.047, median: 0.055, optimiste: 0.121}
     unite: sans_unite
     statut: HYPOTHESE
@@ -930,6 +931,7 @@ tva_sante_long_terme:
 emploi:
   chomage_incompressible: {valeur: 0.035, unite: taux, statut: SOURCE, source: "Taux les plus bas tenus durablement en Europe de l'Ouest (Allemagne, Pays-Bas)"}
   reformes_directes:
+    source: "Encadrement, par réforme (v235, feuille Emploi, colonne Justification) : allocation chômage : réformes de 2021 et 2023, −0,4 et −0,6 point (Banque de France, Bulletin n° 264, 2026), Hartz IV −1,4 (Krebs et Scheffel) ; France Travail : quart du paquet 2017 de la Banque de France (−0,4) ; apprentissage : −0,1 point (Banque de France) ; logement : Insee Analyses n° 37 (2018) ; accompagnement : Cour des comptes (2026), Crépon et al. (2013) ; alternance : Banque de France, CAE note n° 91 ; contrat de travail : France Stratégie (Cahuc et al., 2024 ; note n° 151, 2025), moitié du paquet 2017-2018"
     valeur:
       allocation_chomage_rui: {retenue: 1, crise: 0.004, median: 0.006, optimiste: 0.014, cout: 0}
       france_travail_conseil: {retenue: 1, crise: 0, median: 0.001, optimiste: 0.003, cout: 0}
@@ -941,7 +943,7 @@ emploi:
     unite: sans_unite
     statut: HYPOTHESE
     note: Baisse du taux de chômage à terme (points) par réforme ; coût en Md€/an (Emploi lignes 10 à 18).
-  bas_salaires_rui_prorata: {valeur: {retenue: 1, crise: 0, median: 0.0048, optimiste: 0.0128, cout: -1.77}, unite: sans_unite, statut: HYPOTHESE, note: "Ligne 11, avant l'effet de la marge intensive."}
+  bas_salaires_rui_prorata: {valeur: {retenue: 1, crise: 0, median: 0.0048, optimiste: 0.0128, cout: -1.77}, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : élasticités de participation de Bartels et Shupe (médian) ; prime d'activité 2019 : aucun effet causal établi (Bozio et al., IPP pour France Stratégie, 2023), d'où la crise à zéro", note: "Ligne 11, avant l'effet de la marge intensive."}
   retenues_calculees: {valeur: {entreprises: 1, baisse_cout_travail: 1, commerces: 1, smic_croissance: 1, prime_jeunes: 1, accords_branche: 1}, unite: sans_unite, statut: DECISION}
   emplois_par_milliard: {valeur: {prudent: null, crise: 12500, median: 18750, optimiste: 25000}, unite: sans_unite, statut: SOURCE, source: "Mésange 12 500 ; jusqu'à 25 000 au voisinage du SMIC (CAE n° 51)"}
   baisse_cout_travail: {valeur: {taux: 0.05, plein_jusqu_a: 1.3, nulle_a: 1.6}, unite: sans_unite, statut: DECISION, note: "DÉCISION du 15 octobre (v167)."}
@@ -985,7 +987,7 @@ hauts_revenus:
   montee: {valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}, unite: sans_unite, statut: HYPOTHESE}
   reaction_capital_supplementaire: {valeur: {crise: 0, prudent: 0, median: 0, optimiste: 0}, unite: sans_unite, statut: DECISION}
   elasticite_croisee_travail: {valeur: {crise: 0.05, prudent: 0.05, median: 0.03, optimiste: 0.03}, unite: sans_unite, statut: SOURCE, source: "Lefebvre, Lehmann et Sicsic, IZA DP n° 16112 (2023)"}
-  elasticite_classes_moyennes: {valeur: {crise: 0.08, prudent: 0.05, median: 0.02, optimiste: 0}, unite: sans_unite, statut: HYPOTHESE, note: "Au-dessus de la valeur sourcée de 0,02 pour l'ensemble en prudent (audit)."}
+  elasticite_classes_moyennes: {valeur: {crise: 0.08, prudent: 0.05, median: 0.02, optimiste: 0}, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : 0,02 pour l'ensemble des contribuables, 0,31 pour les 10 % du haut (Cabannes, Houdré et Landais, Économie et Statistique n° 467, 2014) ; 0,05 en prudent, au-dessus de la valeur moyenne", note: "Au-dessus de la valeur sourcée de 0,02 pour l'ensemble en prudent (audit)."}
   classes_moyennes_bornes: {valeur: [24000, 95000], unite: eur_an, annee_euros: 2026, statut: HYPOTHESE}
 
 # --- Carbone dynamique (feuille Carbone) ---------------------------------------------
