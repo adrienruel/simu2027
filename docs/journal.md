@@ -162,7 +162,15 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Chaque emploi rapporte selon le salaire de son canal, avec les taux du nouveau système (`emploi.gain_par_canal`). Gain d'un emploi au SMIC : 11 556 € (v235 : 15 161 € pour 1,3 SMIC, TVA de l'ancien système) ; emploi perdu par localisation : 31 512 €.
 - Déficit publié du prudent : 5,33 % / 4,74 % / 3,81 %.
 
+## 29 octobre 2026 — IS à 45 % : taux légal, taux effectif, coût du capital
+
+- Remarque d'Adrien : avec la déduction immédiate de l'investissement, l'IS à 45 % dissuade moins. `moteur/taux_effectifs.py` calcule le taux effectif moyen (Devereux et Griffith, projet type de l'OCDE) : 32,8 % aujourd'hui (IS à 25 % et impôts de production sur le capital), 41,3 % dans le prudent, 39,0 % dans l'optimiste.
+- La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
+- Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Le vrai coût de l'IS à 45 % est le transfert de bénéfices.** Il suit le taux légal (45 % contre 25 % aujourd'hui, et contre 15 à 25 % dans la plupart des pays voisins) : ≈ 14 % de l'assiette des grandes entreprises part vers l'étranger dans le prudent, soit ≈ 21 Md€ par an. La déduction de l'investissement ne le réduit pas. C'est le premier canal par lequel l'IS à 45 % coûte au budget.
 
 - **Ménages types : le programme fait des perdants nets.** À consommation hors taxes comparable (TVA et accises de chaque système comprises, épargne obligatoire mise à part) : personne seule au SMIC −1,6 %, au salaire médian −4,3 %, cadre à 100 000 € −22,6 %, parent isolé au SMIC −10,3 %, couple de deux médians −3,7 % ; gagnants : couple de deux SMIC avec deux enfants +6,0 %, couple à un salaire médian avec deux enfants +11,1 % (quotient conjugal). L'épargne obligatoire (2 400 € par an au salaire médian) reste au ménage, mais elle n'est pas disponible. Le parent isolé perd l'allocation de soutien familial, la prime d'activité et l'aide au logement, que le complément de RUI (30 % par enfant) ne compense pas.
 

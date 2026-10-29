@@ -142,7 +142,13 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         eff = m("effort_2029", s) + traj_anc_2029 / pib0[2029] - p.val("macro.assouplissement_2029")
         if s == "prudent" and p.colonne_prudent == "crise":
             eff = p.val("crise.effort_2029_saisi")  # Effets macro!B19 saisi dans le scénario de crise
-        erosion_taux = (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
+        from .taux_effectifs import ecart_localisation
+        ecart_eff = ecart_localisation(p, "crise" if (s == "prudent" and p.colonne_prudent == "crise") else s)
+        if ecart_eff is None:
+            erosion_taux = (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
+        else:  # transfert de bénéfices : taux légal ; réaction réelle : taux effectif moyen (déduction comprise)
+            erosion_taux = ((s17 - m("taux_reference_is", s)) * m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s)
+                            + ecart_eff / 100 * m("reaction_reelle", s))
         cout_capital = (((1 - s17 * isv["b18"]) / (1 - s17)) / ((1 - isv["b19"] * isv["b18"]) / (1 - isv["b19"])) - 1
                         - m("reduction_cout_capital_autres", s))
         accumulation = rendement * m("part_reinvestie", s) * m("part_capital_nouveau", s)

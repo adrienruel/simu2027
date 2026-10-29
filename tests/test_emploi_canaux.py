@@ -25,3 +25,13 @@ def test_gain_croissant_avec_le_salaire():
     assert all(b > a for a, b in zip(g, g[1:]))
     gc = gains_par_canal(P, "prudent")
     assert gc["localisation"] > gc["cout_travail"]
+
+
+def test_taux_effectif_moyen():
+    from moteur.taux_effectifs import eatr, eatr_actuel, eatr_nouveau
+    # déduction immédiate : seule la rente est taxée, EATR = τ (p − r) / p
+    assert eatr(0.45, 1.0, 0.20, 0.03, 0.10) == pytest.approx(0.45 * 0.17 / 0.20)
+    # sans déduction meilleure qu'aujourd'hui, le taux effectif dépasse le taux légal (amortissements lents)
+    assert eatr(0.45, 0.742, 0.20, 0.03, 0.10) > 0.45
+    assert eatr_actuel(P) < eatr_nouveau(P, "prudent") < 0.45
+    assert eatr_nouveau(P, "optimiste") < eatr_nouveau(P, "crise")

@@ -34,14 +34,25 @@ branché sur la macro par `emploi.gain_par_canal` (la v235 se reproduit avec la 
 
 Gain par emploi au SMIC : 11 556 € par an (la v235 comptait 15 161 € pour un emploi à 1,3 SMIC, avec la TVA
 de l'ancien système) ; emploi perdu par localisation : 31 512 € ; emploi d'un senior : 23 822 €.
-Déficit publié du prudent : 5,33 % / 4,74 % / 3,81 % en 2029 / 2032 / 2037 (avant : 5,33 / 4,71 / 3,73).
+Déficit publié du prudent : 5,33 % / 4,74 % / 3,81 % en 2029 / 2032 / 2037 (avant : 5,33 / 4,71 / 3,73) ; puis 5,28 % / 4,59 % / 3,64 % avec les taux effectifs pour la localisation.
 
 ## Recouvrements et manques encore ouverts
 
-- **Localisation, érosion réelle de l'IS et investissement** : la hausse de l'IS à 45 % fait partir des
-  emplois (localisation, ≈ 178 000 dans le prudent), réduit l'assiette réelle de l'IS (≈ 6 % dans le
-  prudent) et freine l'investissement (coût du capital +6,8 %). Ce sont trois faces d'un même choc : les
-  assiettes sont distinctes (emplois, bénéfices, capital), mais leur cohérence de taille n'est pas vérifiée.
+- **Localisation, érosion réelle de l'IS et investissement : corrigé le 29 octobre.** La hausse de l'IS à
+  45 % joue sur trois décisions, chacune selon le taux qui la gouverne (`moteur/taux_effectifs.py`) :
+  - le **transfert de bénéfices** (montages comptables) suit le **taux légal** : 45 % contre 25 %, la déduction
+    de l'investissement n'y change rien ; c'est l'essentiel de l'érosion de l'IS (≈ 14 % de l'assiette des
+    grandes entreprises dans le prudent, ≈ −21 Md€ par an) ;
+  - la **localisation** des activités rentables et la **réaction réelle** de l'assiette suivent le **taux
+    effectif moyen** (Devereux et Griffith), qui tient compte de la déduction immédiate et de la fin des
+    impôts de production : 32,8 % aujourd'hui, 41,3 % dans le prudent (60 % de l'investissement déduit
+    immédiatement), 39,0 % dans l'optimiste. Hausse de 8,5 points au lieu de 14 avec le taux légal ;
+  - l'**investissement** à la marge suit le coût du capital : la déduction immédiate le fait baisser,
+    l'investissement monte (+0,6 Md€ sur le solde en 2037, +2,4 Md€ en 2050).
+  Emplois perdus par localisation dans le prudent : 101 000 au lieu de 178 000. Les trois effets sont
+  cohérents avec la théorie : la déduction exonère le rendement normal (l'investissement monte), mais la rente
+  reste taxée à 45 % (les activités les plus rentables restent plus mobiles), et les bénéfices comptables
+  suivent le taux légal.
 - **Valeur ajoutée par emploi** : l'effet d'un emploi sur le PIB compte toute la valeur ajoutée (part du
   capital comprise), alors que le capital a son propre canal. Effet sur le ratio de déficit très faible.
 - **Canal manquant : le RUI des inactifs.** Un revenu garanti sans condition d'activité peut réduire la

@@ -83,7 +83,10 @@ def emplois_reforme_entreprises(p: Parametres) -> dict[str, float]:
         epm = p.val("emploi.emplois_par_milliard_tranches", j)
         cout_travail = p.val("emploi.impots_production_salaires") * sum(a * b for a, b in zip(parts, epm))
         l = p.val("emploi.localisation", j)
-        loc = -ecart * (l["hausse"] if ecart > 0 else l["baisse"]) * l["part"] * l["mobilite"] * salaries
+        from .taux_effectifs import ecart_localisation
+        e_j = ecart_localisation(p, j)
+        e_j = ecart if e_j is None else e_j
+        loc = -e_j * (l["hausse"] if e_j > 0 else l["baisse"]) * l["part"] * l["mobilite"] * salaries
         out[j] = cout_travail + loc
     return out
 
