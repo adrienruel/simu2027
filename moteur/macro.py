@@ -92,7 +92,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     traj = postes(p, scenario_retenu)
     from .trajectoire_annuelle import lignes as lignes_traj
     bases_demo = lignes_traj(p, scenario_retenu).bases_demographie
-    cle_indice = {"recettes": "emploi", "recettes_population": "total",
+    cle_indice = {"recettes": "emploi", "recettes_population": "total", "salaries_impot": "c_impot",
+                  "salaries_tva": "c_tva", "salaries_rui": "c_rui",
                   "adultes": "adultes", "enfants": "enfants", "total": "total"}
     sp_hors = {t: traj[t]["solde_primaire_hors_macro"] for t in ANNEES}
     from .calendrier import dette_fin_2028, transferts_collectivites
@@ -304,7 +305,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                     etalement_declenche = 1.0 if ecart > 0 else 0.0
                 c_etal = etalement_declenche * gain_etalement[t]
                 actif = t <= p.val("clause.derniere_annee")
-                cap_point = flux_epargne / 10 * (1 + tend0) ** n * (ds["emploi"] if corr else 1.0)
+                cap_point = flux_epargne / 10 * (1 + tend0) ** n * (ds["c_epargne"] if corr else 1.0)
                 cap_rui = rui_total / p.val("rui.montant") * 10 * (1 + tend0) ** n
                 if corr:  # marge jusqu'au plancher, sur le RUI réel de l'année (non indexé sur l'inflation)
                     prod_t = (1 + m("productivite", s)) ** max(0, min(m("annees_productivite", s), t - p.val("macro.premiere_annee_productivite") + 1))
@@ -375,7 +376,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             sc.detail.setdefault("chomage", {})[t] = (p.val("inactifs.chomeurs_bit") - emp_ref
                                                         - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa
             # Année suivante : capital du fonds, part à l'étranger
-            capital = (capital + b24 * ds["emploi"] * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
+            capital = (capital + b24 * ds["c_epargne"] * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
                        - (c_contrib * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if corr else 0.0)
                        + (paiement * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if s == "prudent" else 0.0))
             if maastricht >= etr["solde_minimum"]:

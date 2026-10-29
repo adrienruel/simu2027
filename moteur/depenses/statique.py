@@ -83,6 +83,13 @@ def rui_enfants(p: Parametres) -> float:
             + p.val("rui_complements.enfants_parent_isole") * p.val("rui_complements.part_enfant_parent_isole")) * rui / MD
 
 
+def rui_salaries(p: Parametres) -> float:
+    """Part de la ligne 42 versée aux salariés du privé (RUI au prorata, Md€)."""
+    rui = p.val("rui.montant") * 12
+    d = effectifs_prive_2026(p)
+    return sum(n * part_rui_salarie(c, p) * rui for c, n in zip(d.milieux, d.effectifs)) / MD
+
+
 def rui_aah(p: Parametres, scenario: str = "prudent") -> float:
     """Ligne 42 (Md€) : RUI de toutes les populations + AAH."""
     rui = p.val("rui.montant") * 12

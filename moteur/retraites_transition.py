@@ -109,8 +109,13 @@ def _attente(p: Parametres) -> tuple[dict, float, float, float]:
 
 def cout_socle(p: Parametres) -> dict[int, float]:
     """Socle versé aux retraités du nouveau système vivants (Md€), par année ; avec les personnes sans emploi
-    ayant leurs annuités entre l'âge légal et l'âge d'accès général (décision du 29/10/2026)."""
-    gens = socle_par_generation(p)
+    ayant leurs annuités entre l'âge légal et l'âge d'accès général (décision du 29/10/2026). Socle par
+    génération : cellules de salariés (moteur/cohortes.py) si le module est actif."""
+    if p.val("cohortes.active") and p.val("demographie.active"):
+        from .cohortes import socle_par_cellule
+        gens = socle_par_cellule(p)
+    else:
+        gens = socle_par_generation(p)
     acces = p.val("epargne.age_acces_socle")
     a, legal, sans_emploi, part = _attente(p)
     out = {}

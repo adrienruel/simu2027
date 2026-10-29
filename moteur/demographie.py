@@ -120,7 +120,7 @@ def effectifs(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]
     taux = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
     out = {}
     for t, v in population(p, jeu).items():
-        out[t] = {"emploi": sum(v[a] * taux.get(a, 0.0) for a in range(AGE_MAX + 1)),
+        out[t] = {"emploi": sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1)),  # 18 ans et plus, comme les cellules
                   "adultes": sum(v[18:65]), "enfants": sum(v[0:18]), "total": sum(v),
                   "seniors": sum(v[65:]), "moins_de_3_ans": sum(v[0:3])}
     return out
@@ -130,9 +130,18 @@ def indices(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
     """Effectifs rapportés à 2029 (1 partout si le module est désactivé)."""
     groupes = ("emploi", "adultes", "enfants", "total", "seniors", "moins_de_3_ans")
     if not p.val("demographie.active"):
-        return {t: {g: 1.0 for g in groupes} for t in ANNEES}
-    e = effectifs(p, jeu)
-    return {t: {g: e[t][g] / e[2029][g] for g in groupes} for t in ANNEES}
+        out = {t: {g: 1.0 for g in groupes} for t in ANNEES}
+    else:
+        e = effectifs(p, jeu)
+        out = {t: {g: e[t][g] / e[2029][g] for g in groupes} for t in ANNEES}
+    # cellules de salariés (moteur/cohortes.py) : impôt, TVA, RUI gardé et épargne des salariés ; sans les
+    # cellules, ces grandeurs suivent les personnes en emploi
+    from .cohortes import indices as indices_cohortes
+    ic = indices_cohortes(p, jeu) if p.val("cohortes.active") and p.val("demographie.active") else None
+    for t in ANNEES:
+        for k in ("impot", "tva", "rui", "epargne"):
+            out[t]["c_" + k] = ic[t][k] if ic else out[t]["emploi"]
+    return out
 
 
 def creches_nouvelles(p: Parametres) -> dict[int, float]:

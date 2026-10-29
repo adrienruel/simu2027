@@ -37,12 +37,12 @@ def test_externalites_du_fonds_nulles_dans_le_prudent():
 
 
 def test_hausse_de_la_deduction_conditionnee_au_deficit():
-    """La part déduite ne monte que les années qui suivent un déficit (prudent, avant clause) sous 3 %."""
-    from moteur.is_investissement import part_deduite
-    assert part_deduite(P, 2045) == 0.5
+    """La part déduite ne monte que les années qui suivent un déficit (prudent, avant clause, sans la hausse) sous 3 %."""
+    from moteur.is_investissement import annees_sous_seuil, part_deduite
     assert all(part_deduite(P, t + 1) >= part_deduite(P, t) for t in range(2036, 2073))
-    crise = P.en_crise()
-    assert part_deduite(crise, 2073) == 0.5  # en crise, le déficit ne repasse jamais sous 3 %
+    for t in range(2037, 2074):
+        attendu = 0.5 + 0.5 * min(1.0, annees_sous_seuil(P, t) / 10)
+        assert part_deduite(P, t) == attendu, t
 
 
 def test_usure_du_fonds_dans_le_pib_pas_dans_les_impots():

@@ -36,7 +36,12 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     else:
         rec_ret = 0.0
     rec_pop = 0.0
-    rec_emp = rec - rec_ret - rec_pop
+    # impôt unique et TVA des salariés (privé et public) : suivent les cellules de salariés (âge, salaire)
+    from .recettes import tva_menages as _tm
+    from .recettes.impot_salaires import impot_prive as _ip, impot_public as _ipu
+    rec_sal_impot = (_ip(p) + _ipu(p)) / 1e9
+    rec_sal_tva = (_tm.tva_prive(p) + _tm.tva_public(p)) / 1e9
+    rec_emp = rec - rec_ret - rec_pop - rec_sal_impot - rec_sal_tva
     dep = depenses(p)
     l = dep["lignes"]
     ct = cout_transition(p)
@@ -83,6 +88,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     from .depenses.statique import rui_enfants
     demo = indices(p, "prudent")
     rui_enf = rui_enfants(p)
+    from .depenses.statique import rui_salaries as _rui_salaries
+    rui_sal = _rui_salaries(p)
     from .demographie import creches_nouvelles
     creches = creches_nouvelles(p)
     from .macro import flux_epargne_obligatoire
@@ -104,7 +111,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "recettes", "recettes_croissance", "Recettes : croissance tendancielle", "croissance", rec * (crois - 1))
         d = demo[t]
         L.ajouter(t, "recettes", "recettes_demographie", "Recettes : démographie (actifs, retraités, population)", "demographie",
-                  crois * (rec_emp * (d["emploi"] - 1) + rec_pop * (d["total"] - 1)))
+                  crois * (rec_emp * (d["emploi"] - 1) + rec_pop * (d["total"] - 1)
+                           + rec_sal_impot * (d["c_impot"] - 1) + rec_sal_tva * (d["c_tva"] - 1)))
         L.ajouter(t, "recettes", "contribution_transition", "Épargne obligatoire versée à l'État (contribution de transition)",
                   "mesure", contrib * crois * d["emploi"])
         L.ajouter(t, "recettes", "successions", "Successions : supplément", "mesure", succ[t])
@@ -126,7 +134,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "rui_aah", "rui_aah_socle", "RUI et AAH (budget statique)", "socle", l["rui_aah"])
         L.ajouter(t, "rui_aah", "rui_aah_revalorisation", "RUI et AAH : revalorisation sur la croissance", "croissance", l["rui_aah"] * reval_rui)
         L.ajouter(t, "rui_aah", "rui_aah_demographie", "RUI : démographie (adultes, enfants)", "demographie",
-                  ((l["rui_aah"] - rui_enf) * (d["adultes"] - 1) + rui_enf * (d["enfants"] - 1)) * (1 + reval_rui))
+                  ((l["rui_aah"] - rui_enf - rui_sal) * (d["adultes"] - 1) + rui_sal * (d["c_rui"] - 1)
+                   + rui_enf * (d["enfants"] - 1)) * (1 + reval_rui))
         L.ajouter(t, "retraites", "attente_age_legal_67", "Entre l'âge légal et 67 ans : RUI ou socle selon les annuités", "mesure",
                   attente[t] * (1 + reval_rui))
         L.ajouter(t, "rui_aah", "rui_etudiants", "RUI étudiant sous condition de ressources", "mesure", etu[t])
@@ -146,7 +155,10 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     # Bases des lignes démographiques, pour recalculer l'effet dans les autres scénarios (macro)
     L.bases_demographie = {t: {"recettes": rec_emp * (1 + g) ** (t - 2029),
                                "recettes_population": rec_pop * (1 + g) ** (t - 2029),
-                               "adultes": -(l["rui_aah"] - rui_enf) * (1 + reval(t)),
+                               "salaries_impot": rec_sal_impot * (1 + g) ** (t - 2029),
+                               "salaries_tva": rec_sal_tva * (1 + g) ** (t - 2029),
+                               "salaries_rui": -rui_sal * (1 + reval(t)),
+                               "adultes": -(l["rui_aah"] - rui_enf - rui_sal) * (1 + reval(t)),
                                "enfants": -rui_enf * (1 + reval(t)),
                                "total": -autres_base * (1 + g) ** (t - 2029)} for t in ANNEES}
     p.__dict__.setdefault("_cache", {})[("lignes", scenario_retenu)] = L

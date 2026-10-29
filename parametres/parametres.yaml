@@ -1269,3 +1269,19 @@ ancien_systeme:
     statut: DECISION
     note: "Loi actuelle : 64 ans (réforme de 2023). Programme (mesure du registre des économies, rappelée par Adrien le 29/10/2026) : 65 ans, deux trimestres de plus par génération à partir de celle qui a 64 ans en 2029 (65 ans pour celle qui a 64 ans en 2030). Économie calculée génération par génération (moteur/ancien_systeme.economie_age_legal) au lieu des 7 Md€ forfaitaires de la v235."
   pension_nouveaux_relative: {valeur: 0.935, unite: sans_unite, statut: SOURCE, source: "DREES, Les retraités et les retraites 2025, fiches 5 et 7 : pension brute de droit direct des nouveaux retraités fin 2023, 1 557 € par mois, contre 1 666 € pour l'ensemble des retraités", note: "Pension des départs de 2029 et après, rapportée à la pension moyenne de 2029 (1 557 / 1 666). Les générations n'ont pas de pension plus élevée que leurs aînées (effet noria faible depuis 2017)."}
+
+# --- Cellules de ménages (moteur/cohortes.py, 29 octobre 2026) -----------------------------
+cohortes:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : simulation par cellules (âge × niveau de salaire) et comptes d'épargne par génération. v235 : budget statique × croissance."}
+  profil_salaire_age:
+    valeur: {"18-24": 0.593, "25-39": 0.934, "40-49": 1.103, "50-54": 1.161, "55+": 1.198}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, Salaires dans le secteur privé en 2024 : salaire net mensuel moyen en EQTP, moins de 25 ans 1 620 €, 25-39 ans 2 550 €, 40-49 ans 3 010 €, 50-54 ans 3 170 €, 55 ans ou plus 3 270 € ; ensemble 2 730 €"
+    note: "Rapport au salaire moyen. Profil en coupe de 2024 (mêle effets d'âge et de génération) ; même dispersion supposée à tous les âges."
+  effet_composition_salaires:
+    valeur: {crise: 0.0, prudent: 0.0, median: 1.0, optimiste: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Part retenue de l'effet de composition : des actifs plus âgés gagnent plus en moyenne (profil de l'Insee en coupe). La croissance tendancielle de la productivité (COR, 0,7 %) est une moyenne par actif qui contient déjà une partie de cet effet : le compter en entier risque un double compte. Prudent et crise : 0 (le salaire moyen suit la seule tendance ; restent la progressivité de l'impôt, le RUI, l'épargne et le socle par cellule) ; médian et optimiste : 1."
+  part_salaries_emploi: {valeur: calcul, unite: taux, statut: SOURCE, source: "Calculée par le moteur : salariés des distributions de 2026 (privé 21,0 millions, public 5,7) / personnes en emploi de 2026 du module de population (population de l'Insee × taux d'emploi par âge, 18-69 ans) ≈ 0,92", note: "Garde le nombre de salariés de 2026 ; les indépendants restent dans le budget statique."}
