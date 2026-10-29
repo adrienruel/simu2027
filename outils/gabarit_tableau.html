@@ -157,7 +157,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
   <section class="synthese" aria-labelledby="t-synthese">
     <div class="bloc-tete">
       <h2 id="t-synthese">Le scénario publié</h2>
-      <p class="note">Scénario prudent, clause de trajectoire comprise. En rouge, le même scénario sans la clause.</p>
+      <p class="note">Scénario prudent, clause de trajectoire comprise ; en dessous, le même scénario sans la clause. Les mesures temporaires de la clause s’arrêtent en 2037 : 2038 est montré à côté.</p>
     </div>
     <div class="tuiles" id="tuiles"></div>
   </section>
@@ -329,7 +329,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
   const [picV, picA] = pic(P.dette_pib);
   const [picVa] = pic(D.series.crise ? D.series.crise.dette_pib : P.dette_pib);
   const tuiles = [
-    ...[2029, 2032, 2037].map(t => ({ e: `Déficit ${t}`, v: fr(P.deficit[iA(t)], 2) + " %", s: `sans clause <b>${fr(P.deficit_avant_clause[iA(t)], 2)} %</b>` })),
+    ...[2029, 2032, 2037, 2038, 2050].map(t => ({ e: `Déficit ${t}`, v: fr(P.deficit[iA(t)], 2) + " %", s: `sans clause <b>${fr(P.deficit_avant_clause[iA(t)], 2)} %</b>` })),
     { e: "Durablement sous 3 %", v: String(sous3(P.deficit)), s: `une première fois en ${premiere(P.deficit)} ; sans clause <b>${sous3(P.deficit_avant_clause)}</b>` },
     { e: "Pic de dette", v: fr(picV, 1) + " %", s: `en ${picA} ; crise ${fr(picVa, 1)} %` },
     { e: "Chômage 2037", v: fr(P.chomage[iA(2037)], 1) + " %", s: `${fr(P.chomage[0], 1)} % en 2029` },

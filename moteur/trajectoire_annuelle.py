@@ -19,7 +19,23 @@ ANNEES = list(range(2029, 2074))
 def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     g = p.val("macro.tendance", "prudent")
     infl = p.val("calendrier.inflation")
-    rec = recettes_nouveau_systeme(p)["total"] / 1e9
+    _rns = recettes_nouveau_systeme(p)
+    rec = _rns["total"] / 1e9
+    # parts des recettes statiques qui ne suivent pas l'emploi (relecture du 29/10/2026), indice 1 :
+    # - impôt et TVA des retraités en croisière : anciennes_pensions.recette_nette les ramène déjà au nombre de
+    #   retraités du nouveau système de chaque année (population de l'Insee) ;
+    # - recette carbone statique (carbone.recette_2029_nette_is) : carbone.effet_solde la retranche sans indice
+    #   démographique ; on retire la part déjà dans la TVA des retraités (même part que dans la ligne 3).
+    # Le reste suit les personnes en emploi.
+    if p.val("macro.corrections_relecture"):
+        from .recettes import tva_menages
+        tva_ret = tva_menages.tva_retraites(p)
+        part_ret = tva_ret / _rns["lignes"][3]
+        rec_ret = (_rns["lignes"][5] + tva_ret) / 1e9 + p.val("carbone.recette_2029_nette_is") * (1 - part_ret)
+    else:
+        rec_ret = 0.0
+    rec_pop = 0.0
+    rec_emp = rec - rec_ret - rec_pop
     dep = depenses(p)
     l = dep["lignes"]
     ct = cout_transition(p)
@@ -82,8 +98,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "recettes", "recettes_nouveau_systeme", "Recettes du nouveau système (budget statique)", "socle", rec)
         L.ajouter(t, "recettes", "recettes_croissance", "Recettes : croissance tendancielle", "croissance", rec * (crois - 1))
         d = demo[t]
-        L.ajouter(t, "recettes", "recettes_demographie", "Recettes : démographie (actifs en emploi)", "demographie",
-                  rec * crois * (d["emploi"] - 1))
+        L.ajouter(t, "recettes", "recettes_demographie", "Recettes : démographie (actifs, retraités, population)", "demographie",
+                  crois * (rec_emp * (d["emploi"] - 1) + rec_pop * (d["total"] - 1)))
         L.ajouter(t, "recettes", "contribution_transition", "Épargne obligatoire versée à l'État (contribution de transition)",
                   "mesure", contrib * crois * d["emploi"])
         L.ajouter(t, "recettes", "successions", "Successions : supplément", "mesure", succ[t])
@@ -119,7 +135,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         for nom, v in eco_detail.items():
             L.ajouter(t, "autres", "economie:" + nom[:60], nom, "mesure", -v[t])
     # Bases des lignes démographiques, pour recalculer l'effet dans les autres scénarios (macro)
-    L.bases_demographie = {t: {"recettes": rec * (1 + g) ** (t - 2029),
+    L.bases_demographie = {t: {"recettes": rec_emp * (1 + g) ** (t - 2029),
+                               "recettes_population": rec_pop * (1 + g) ** (t - 2029),
                                "adultes": -(l["rui_aah"] - rui_enf) * (1 + reval(t)),
                                "enfants": -rui_enf * (1 + reval(t)),
                                "total": -autres_base * (1 + g) ** (t - 2029)} for t in ANNEES}

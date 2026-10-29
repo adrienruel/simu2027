@@ -45,8 +45,23 @@ def test_hausse_de_la_deduction_conditionnee_au_deficit():
     assert part_deduite(crise, 2073) == 0.5  # en crise, le déficit ne repasse jamais sous 3 %
 
 
-def test_valeur_ajoutee_du_fonds_compte_l_usure():
+def test_usure_du_fonds_dans_le_pib_pas_dans_les_impots():
+    """Relecture du 29/10/2026 : l'usure du capital du fonds compte dans le PIB, mais n'est pas taxée."""
     from moteur.macro import calculer
-    avec = calculer(P)["prudent"].detail["canaux"][2050]["capital_du_fonds"]
-    sans = calculer(P.avec({"macro.usure_capital_fonds": 0.0}))["prudent"].detail["canaux"][2050]["capital_du_fonds"]
-    assert avec > sans > 0
+    avec, sans = calculer(P)["prudent"], calculer(P.avec({"macro.usure_capital_fonds": 0.0}))["prudent"]
+    assert avec.pib_effet[2050] > sans.pib_effet[2050]
+    # la recette ne bouge qu'à la marge (le capital lui-même dépend un peu de la dette, via la part placée à l'étranger)
+    import pytest
+    assert avec.detail["canaux"][2050]["capital_du_fonds"] == pytest.approx(sans.detail["canaux"][2050]["capital_du_fonds"], rel=0.05)
+
+
+def test_baisse_du_rui_par_la_clause_respecte_le_plancher():
+    """La baisse du RUI décidée par la clause ne descend pas sous le plancher, sur le RUI réel de l'année."""
+    from moteur.macro import calculer
+    sc = calculer(P)["prudent"]
+    plancher, infl, g = P.val("clause.plancher_rui"), P.val("calendrier.inflation"), P.val("macro.tendance")
+    for t, c in sc.detail["clause"].items():
+        if c["rui"] > 0:
+            # RUI réel de l'année (sans le surcroît de productivité, qui ne fait que l'augmenter)
+            rui_t = P.val("rui.montant") * ((1 + g) / (1 + infl)) ** (t - 2029)
+            assert c["rui_euros"] <= rui_t - plancher + 60, t

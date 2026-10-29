@@ -820,6 +820,12 @@ macro:
   taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
   annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
+  corrections_relecture:
+    valeur: true
+    v235: false
+    unite: sans_unite
+    statut: DECISION
+    note: "Corrections de la relecture indépendante du 29/10/2026 (docs/relecture.md) : (1) l'usure du capital (fonds et entreprises) compte dans le PIB mais n'est pas taxée (elle paie le renouvellement du capital) ; (2) la contribution prise par la clause ne va plus au fonds ; (3) la baisse du RUI par la clause est bornée par le plancher, sur le RUI réel de l'année ; (4) cette baisse a l'effet récessif du multiplicateur. v235 : rien de cela."
   usure_capital_fonds:
     valeur: {crise: 0.035, prudent: 0.04, median: 0.055, optimiste: 0.065}
     v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}

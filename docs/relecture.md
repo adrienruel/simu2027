@@ -62,3 +62,31 @@ Crise : dette 150 % en 2050, 235 % en 2073 (pas de retour à l'équilibre).
 ## Historique
 
 `docs/journal.md` (décisions datées et écarts à la v235), `git log`.
+
+
+## Relecture du 29 octobre 2026 : résultats et corrections
+
+Relecture faite par un agent indépendant (aucune participation au travail, dépôt en lecture seule). Erreurs
+vérifiées, corrigées sous `macro.corrections_relecture` (valeur v235 : non, pour les tests de reproduction) :
+
+1. **Usure du capital taxée comme un revenu** : l'usure du capital du fonds (et de l'investissement des entreprises)
+   compte dans le PIB mais pas dans l'assiette des impôts (elle paie le renouvellement du capital).
+2. **Contribution de la clause comptée deux fois** : la part de l'épargne versée à l'État par la clause ne va
+   plus au fonds. Reste à faire : l'effet sur le socle des générations concernées (moins de capital, plus de socle).
+3. **Baisse du RUI de la clause sous le plancher** : marge calculée sur le RUI réel de l'année (non indexé).
+4. **Baisse du RUI sans effet récessif** : même multiplicateur et même dissipation que l'effort de 2029.
+6. **Recettes des retraités et carbone statique** (erreur pénalisante) : elles ne suivent plus l'emploi
+   (indice 1 ; la recette nette des anciennes pensions et le module carbone les règlent déjà).
+7. **Emplois perdus par localisation** : retirés en entier, hors de la courbe de rendements décroissants.
+8. (petit) Emplois des réformes, seniors et perdus : suivent la population de 18 à 64 ans.
+
+Prudent après corrections : avant clause 5,39 % (2037), 4,40 % (2050), 0,09 % (2073) ; publié 3,63 % (2037),
+4,97 % (2038), 4,46 % (2050) ; dette 124 % en 2073. Avant corrections : publié 3,04 % (2037), dette 98 % (2073).
+
+**En attente d'une décision d'Adrien** (point 5) : RUI des personnes sans emploi entre l'âge légal et 67 ans
+(≈ 10 à 15 Md€ par an après 2046 s'il est dû ; sinon le gain des emplois de seniors est surestimé).
+
+**Points discutables relevés, non changés** : la clause fait du médian le chiffre publié jusqu'en 2036, puis le
+publié saute en 2038 (désormais affiché) ; rendement versé aux épargnants (2,33 %) supérieur au rendement net
+d'impôt du capital ; RUI réel sous le RSA de 2026 vers 2050 (règle de non-indexation) ; recette carbone saisie
+(57,7 Md€, à recalculer) ; prime de taux symétrique ; permis rapide sans coût ; seniors sur 1,25 an de report.

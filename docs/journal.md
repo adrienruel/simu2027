@@ -168,6 +168,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Relecture indépendante : corrections
+
+- Erreurs vérifiées par la relecture et corrigées (`macro.corrections_relecture`, détail dans `docs/relecture.md`) : usure non taxée ; contribution de la clause retirée du fonds ; baisse du RUI bornée par le plancher sur le RUI réel ; effet récessif de cette baisse ; recettes des retraités et carbone statique hors indice de l'emploi ; pertes d'emplois hors rendements décroissants ; emplois proportionnels à la population de 18 à 64 ans.
+- Prudent publié : 3,63 % en 2037 (3,04 avant), 4,97 % en 2038, 4,46 % en 2050 ; avant clause 0,09 % en 2073 ; dette 124 % en 2073 (98 avant).
+- Tableau de bord : 2038 et 2050 affichés à côté de 2037 (fin des mesures temporaires de la clause).
+
 ## 29 octobre 2026 — Hausse de la déduction conditionnée ; usure du capital du fonds
 
 - Décision d'Adrien : la hausse de la déduction vers 100 % avance d'un pas (5 points) chaque année qui suit un déficit du prudent, avant clause, sous 3 % (calculé sans la hausse). Prudent : 55 % en 2047, 100 % en 2063 ; crise : 50 %.

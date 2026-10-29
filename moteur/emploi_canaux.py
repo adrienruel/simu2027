@@ -111,12 +111,15 @@ def emplois_par_mesure(p: Parametres) -> dict[str, dict[str, float]]:
     """Emplois à terme de chaque mesure, rendements décroissants répartis au prorata (règle 1)."""
     pa = population_active(p)
     ecart = p.val("chomage.taux_2026") - p.val("emploi.chomage_incompressible")
+    corr = p.val("macro.corrections_relecture")
     out = {}
     for j, x in points_par_mesure(p).items():
-        total = sum(x.values())
+        # relecture du 29/10/2026 : la courbe de rendements décroissants ne porte que sur les gains ; les emplois
+        # perdus (localisation) sont retirés en entier
+        total = sum(v for v in x.values() if v > 0) if corr else sum(x.values())
         baisse = ecart * (1 - math.exp(-total / ecart))
         k = baisse / total if total else 1.0
-        out[j] = {m: v * k * pa for m, v in x.items()}
+        out[j] = {m: (v * k if (v > 0 or not corr) else v) * pa for m, v in x.items()}
     return out
 
 

@@ -121,6 +121,10 @@ def effets_reformes(p: Parametres) -> dict[str, dict]:
         total += r["accords_branche"] * sum(d.effectifs) * ab["baisse_emploi_portugal"] * ab[j] / pa
         ecart = p.val("chomage.taux_2026") - p.val("emploi.chomage_incompressible")
         baisse = ecart * (1 - math.exp(-total / ecart))
+        if p.val("macro.corrections_relecture") and p.val("emploi.gain_par_canal"):
+            # même décompte que le bloc emploi unifié : courbe sur les gains, pertes retirées en entier
+            from .emploi_canaux import emplois_par_mesure
+            baisse = sum(emplois_par_mesure(p)[j].values()) / pa
         out[j] = {"somme": total, "baisse": baisse, "emplois": baisse * pa, "chomage": p.val("chomage.taux_2026") - baisse}
     return out
 
