@@ -404,7 +404,7 @@ independants:
     statut: HYPOTHESE
     note: Facteur saisi à part dans la v235 (Indépendants!B40), distinct des facteurs de salaire et de PIB.
   part_percue: {valeur: {classiques: 0.978, micro: 0.58, agriculteurs: 0.978}, unite: sans_unite, statut: SOURCE, source: "Fraude estimée : 1,1 à 2,2 % des cotisations ; 42 % éludées chez les micro (Urssaf)"}
-  correction_couples: {valeur: 0.894, unite: sans_unite, statut: HYPOTHESE, note: "Imposition commune des couples (Anciennes pensions!B21)."}
+  correction_couples: {valeur: 0.894, unite: sans_unite, statut: HYPOTHESE, note: "Imposition commune des couples d'indépendants (Anciennes pensions!B21). Depuis le 29/10/2026, ne sert plus qu'aux indépendants : les retraités ont un calcul propre (anciennes_pensions.couples). Reste un forfait, gardé à la valeur la plus favorable aux couples (prudent pour les recettes)."}
   salaire_pivot:
     valeur: 45000
     unite: eur_an
@@ -1059,6 +1059,12 @@ quotient:
 anciennes_pensions:
   deciles_drees_2020: {valeur: [200, 565, 833, 1048, 1270, 1490, 1735, 2030, 2460, 3700], unite: eur_mois, annee_euros: 2020, statut: SOURCE, source: "DREES, forme de la distribution des pensions brutes (2020) ; recalée chaque année sur la pension moyenne du modèle"}
   part_reversion: {valeur: 0.088, unite: taux, statut: SOURCE, source: "DREES, fin 2023 (1 827 € bruts avec réversion)"}
+  couples:
+    valeur: {part_en_couple: 0.6, correlation: 0.2}
+    v235: forfait
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Imposition commune des couples de retraités de l'ancien système, calculée par le moteur année par année (le gain grandit quand les pensions gelées baissent en euros constants). Hypothèses prises prudentes faute de source (elles maximisent le gain des couples, donc la perte de recette) : 60 % des retraités en couple marié ou pacsé (borne haute : environ 60 % des 65 ans ou plus vivent en couple, union libre comprise) ; corrélation des rangs de pension des conjoints 0,2. Correction obtenue : 0,92 en 2029, 0,82 vers 2050. La part du forfait « couples de retraités » du quotient conjugal qui porte sur l'ancien système est rendue, pour ne pas la compter deux fois. v235 : 0,894 fixe (forfait = reprendre independants.correction_couples)."
   deciles_avec_reversion: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "v215 : les 6 premiers déciles reçoivent la réversion ; cela rend la distribution non monotone (décile 7 sous le décile 6)."}
   retraites_ancien_2029_millions: {valeur: [19.15, 19.3029, 19.4547, 19.6076, 19.7595, 19.9123, 20.0642, 20.217, 20.3699, 20.5218, 20.6746, 20.8265, 20.9794, 21.1312, 21.2841, 21.408, 21.5318, 21.6557, 21.7795, 21.9034, 22.0273, 22.1511, 22.275, 22.3989, 22.5227, 22.5216, 22.5205, 22.5193, 22.5182, 22.517, 22.5159, 22.5148, 22.5136, 22.5125, 22.5114, 22.5102, 22.5091, 22.508, 22.5068, 22.5057, 22.5045, 22.5034, 22.5023, 22.5011, 22.5], unite: sans_unite, statut: SOURCE, source: "COR, retraités totaux 2029-2073 (Socle actuariel, ligne 82)"}
 

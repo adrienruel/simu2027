@@ -104,7 +104,14 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - Sources ajoutées : chômeurs BIT (Insee, 2e trimestre 2026), parts et charges des versants de la fonction publique (Insee 2025, cotisations CNRACL 2026).
 - Déficit publié du prudent : 4,93 % / 4,53 % / 3,59 %.
 
+## 29 octobre 2026 — Couples de retraités
+
+- L'imposition commune des couples de retraités de l'ancien système est calculée par le moteur, année par année, au lieu du coefficient fixe de 0,894. Le gain des couples grandit avec le temps (0,92 en 2029, 0,82 vers 2050), parce que les pensions gelées baissent en euros constants et passent dans la tranche à 0 %. Hypothèses prises prudentes faute de source : 60 % en couple, corrélation 0,2.
+- Déficit publié du prudent : 4,87 % / 4,49 % / 3,58 %.
+
 ## Constats sur la v235 (pour Adrien)
+
+- **Couples de retraités comptés deux fois.** La v235 réduit l'impôt des anciennes pensions de 10,6 % pour l'imposition commune (≈ 6 Md€) et ajoute en plus un forfait de 1 Md€ « couples de retraités » dans le coût du quotient conjugal. Le moteur ne compte plus qu'une fois les retraités de l'ancien système.
 
 - **Assiette de l'impôt local : libellé faux, valeur juste.** La v235 décrit ses 1 169 Md€ comme « salaires, traitements et pensions », mais le montant correspond aux seuls revenus d'activité (le moteur les recalcule à 1 174 Md€). Décision d'Adrien du 29/10 : l'impôt local est payé par les entreprises sur leurs bénéfices et par les actifs sur leur salaire, pas par les retraités ; le barème relève de chaque collectivité (le modèle prend un taux moyen). L'assiette est maintenant calculée, et les indépendants paient l'impôt local sur la part de leur revenu prise en salaire (3,0 Md€), ce que la v235 omettait.
 

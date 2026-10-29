@@ -7,6 +7,21 @@ from .retraites_transition import ANNEES, _csv as _csv_retraites, retraites_nouv
 from .tva import consommation_ht, taux_pour_revenu
 
 
+def probabilites_paires(rho: float, n: int = 400) -> list[list[float]]:
+    """Probabilité qu'un couple réunisse le décile i et le décile j (copule gaussienne de corrélation rho)."""
+    import math
+    from statistics import NormalDist
+    nd = NormalDist()
+    z = [nd.inv_cdf((k + 0.5) / n) for k in range(n)]
+    m = [[0.0] * 10 for _ in range(10)]
+    for a in z:
+        i = min(9, int(nd.cdf(a) * 10))
+        for e in z:
+            j = min(9, int(nd.cdf(rho * a + math.sqrt(1 - rho * rho) * e) * 10))
+            m[i][j] += 1 / (n * n)
+    return m
+
+
 def recette_nette(p: Parametres) -> dict[int, float]:
     """Recette nette ajoutée à la trajectoire (Md€, ligne 85) : impôt au barème net de la baisse des hautes pensions,
     moins l'impôt de croisière déjà compté pour ces retraités, plus la correction de TVA."""
@@ -19,7 +34,10 @@ def recette_nette(p: Parametres) -> dict[int, float]:
     deciles = p.val("anciennes_pensions.deciles_drees_2020")
     moy = sum(deciles) / len(deciles)
     rev, k_rev = p.val("anciennes_pensions.part_reversion"), p.val("anciennes_pensions.deciles_avec_reversion")
-    k_couples = p.val("independants.correction_couples")
+    cc = p.val("anciennes_pensions.couples")
+    calcul_couples = cc != "forfait"
+    k_couples = 1.0 if calcul_couples else p.val("independants.correction_couples")
+    paires = probabilites_paires(cc["correlation"]) if calcul_couples else None
     g = p.val("macro.tendance", "prudent")
     tm_haut = p.val("impot_unique.taux")[-1]
     nouveaux = retraites_nouveau_systeme(p)
@@ -38,8 +56,16 @@ def recette_nette(p: Parametres) -> dict[int, float]:
         echelle = moyenne / moy
         index = (1 + g * 1) ** (t - 2029)
         impot_total = tva_total = 0.0
+        pensions = [d * echelle * (1 - rev) + (moyenne * rev * 10 / k_rev if i <= k_rev else 0.0)
+                    for i, d in enumerate(deciles, start=1)]
+        if calcul_couples:
+            # impôt par personne : seuls, chacun au barème ; en couple, deux fois l'impôt du revenu moyen du couple
+            seul = [index * impot(12 * x / index, p) for x in pensions]
+            ensemble = [sum(paires[i][j] * index * impot(6 * (pensions[i] + pensions[j]) / index, p) for j in range(10)) * 10
+                        for i in range(10)]
+            k_couples = ((1 - cc["part_en_couple"]) * sum(seul) + cc["part_en_couple"] * sum(ensemble)) / sum(seul)
         for i, d in enumerate(deciles, start=1):
-            pension = d * echelle * (1 - rev) + (moyenne * rev * 10 / k_rev if i <= k_rev else 0.0)
+            pension = pensions[i - 1]
             imp = index * impot(12 * pension / index, p)
             net = 12 * pension - imp * k_couples
             sante, tva = taux_pour_revenu(net, p)
@@ -51,5 +77,12 @@ def recette_nette(p: Parametres) -> dict[int, float]:
         tva = tva_total / 10 * retraites * 1e6 / 1e9
         impot_trop = (impot_croisiere - impot_croisiere / n_croisiere * nouveaux[t] / 1e6) * index
         tva_trop = (tva_croisiere - tva_croisiere / n_croisiere * nouveaux[t] / 1e6) * index
-        out[t] = impot_net - impot_trop + (tva - tva_trop)
+        # Le budget statique compte un forfait pour les couples de retraités (quotient conjugal) ; pour la part
+        # des retraités encore dans l'ancien système, l'imposition commune est désormais calculée ici : on rend
+        # cette part du forfait pour ne pas la compter deux fois.
+        forfait_rendu = 0.0
+        if calcul_couples:
+            c = p.val("quotient.conjugal")
+            forfait_rendu = c["retraites_forfait"] * c["applique"] * (1 - nouveaux[t] / 1e6 / n_croisiere)
+        out[t] = impot_net - impot_trop + (tva - tva_trop) + forfait_rendu
     return out

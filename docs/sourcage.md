@@ -45,6 +45,8 @@ Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 
 
 | Assiette de l'impôt local | 1 169 Md€ saisis, décrits comme « salaires, traitements, pensions » | Calculée sur ceux qui paient l'impôt local (décision du 29/10) : coût employeur des salariés et des agents, salaire des indépendants, au-delà de 12 500 € : **1 174 Md€** ; les indépendants paient désormais l'impôt local sur leur salaire (3,0 Md€) | taux moyen 7,17 % au lieu de 7,20 % ; déficit inchangé à 0,01 point près |
 
+| Imposition commune des couples de retraités | 0,894 fixe (correction de l'impôt des anciennes pensions), plus un forfait de 1 Md€ « couples de retraités » dans le quotient conjugal : les mêmes couples comptés deux fois | Calculée année par année sur la distribution DREES des pensions : 60 % des retraités en couple, corrélation 0,2 (valeurs prudentes, sans source) ; la part du forfait qui porte sur l'ancien système est rendue | correction 0,92 en 2029, 0,82 vers 2050 ; recette +2,4 Md€ en 2029, −0,6 Md€ en 2050 ; déficit 2029 −0,06 point |
+
 ## Sources ajoutées (sans changement de valeur)
 
 | Paramètre | Source |
