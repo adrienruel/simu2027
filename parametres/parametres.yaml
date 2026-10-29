@@ -1199,5 +1199,10 @@ ancien_systeme:
     statut: HYPOTHESE
     source: "Encadrement : DREES, Les retraités et les retraites 2025, fiche 16 : en 2023 (âge légal 62 ans), 4 à 5 % des 59 ans sont retraités, 94 à 97 % des 67 ans ; 10 % partent à 60 ans (carrières longues), 31 % à 62 ans, 7 % à 67 ans"
     note: "Part d'une génération partie à la retraite à chaque âge, pour l'âge légal de 64 ans (réforme de 2023, générations 1968 et suivantes) : profil de 2023 décalé de deux ans au-delà de 60 ans, carrières longues gardées. Le passage à 65 ans du programme est compté dans sa propre mesure."
-  droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: HYPOTHESE, note: "Pension des départs dans l'ancien système de 2029 à 2043 (générations 1978 et avant) : false = calculée normalement au départ, puis gelée (prudent) ; true = droits gelés en euros courants dès 2029, la pension perd l'inflation dès 2029 même avant le départ. À trancher par Adrien."}
+  droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 (première option) : la pension des départs dans l'ancien système de 2029 à 2043 (générations 1978 et avant) est calculée normalement au départ, puis gelée en euros courants. Autre option écartée : droits gelés dès 2029 (−0,2 point de déficit en 2037, −0,7 en 2050)."}
+  age_legal:
+    valeur: {actuel: 64, programme: 65, premiere_annee: 2029, pas_par_generation: 0.5}
+    unite: sans_unite
+    statut: DECISION
+    note: "Loi actuelle : 64 ans (réforme de 2023). Programme (mesure du registre des économies, rappelée par Adrien le 29/10/2026) : 65 ans, deux trimestres de plus par génération à partir de celle qui a 64 ans en 2029 (65 ans pour celle qui a 64 ans en 2030). Économie calculée génération par génération (moteur/ancien_systeme.economie_age_legal) au lieu des 7 Md€ forfaitaires de la v235."
   pension_nouveaux_relative: {valeur: 0.935, unite: sans_unite, statut: SOURCE, source: "DREES, Les retraités et les retraites 2025, fiches 5 et 7 : pension brute de droit direct des nouveaux retraités fin 2023, 1 557 € par mois, contre 1 666 € pour l'ensemble des retraités", note: "Pension des départs de 2029 et après, rapportée à la pension moyenne de 2029 (1 557 / 1 666). Les générations n'ont pas de pension plus élevée que leurs aînées (effet noria faible depuis 2017)."}

@@ -168,6 +168,11 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Âge légal à 65 ans par génération ; chiffrage du parent isolé à 50 %
+
+- Âge légal à 65 ans (mesure du programme) : économie calculée génération par génération (12,5 Md€ vers 2033-2035 au lieu de 7 forfaitaires). Décision : départs de 2029-2043 calculés au départ puis gelés. Prudent avant clause : 6,03 % en 2037 ; publié 4,10 %.
+- Chiffrage (non retenu) : RUI à 50 % par enfant pour le parent isolé : 6,1 Md€ par an, naissances −0,8 % au lieu de −4,6 %, +0,2 à +0,35 point de déficit jusqu'en 2060, autofinancé en flux en 2073, dette 2073 +5 points.
+
 ## 29 octobre 2026 — 3e enfant, crèches, ancien système par génération
 
 - Décisions d'Adrien : RUI à 25 % par enfant dès le 3e ; +10 points de couverture en crèche (places créées). Réforme OpenFisca mise à jour, test de concordance pour 3 enfants.

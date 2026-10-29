@@ -76,9 +76,30 @@ système. Ce complément venait en fait d'un défaut du nouveau système, qui ne
 ni la mortalité de l'Insee : **retraités touchant le socle en 2073 : 18,5 millions au lieu de 15,0 ; socle versé :
 227 Md€ au lieu de 184.** Les deux corrections vont en sens contraire.
 
-Question ouverte (paramètre `ancien_systeme.droits_geles_des_2029`) : les départs de 2029 à 2043 touchent-ils une
-pension calculée normalement puis gelée (retenu, prudent), ou des droits gelés dès 2029 ? Le gel dès 2029
-réduirait le déficit de 0,2 point en 2037 et de 0,7 point en 2050.
+Décision d'Adrien (29/10/2026) : les départs de 2029 à 2043 touchent une pension calculée normalement au départ,
+puis gelée (le gel des droits dès 2029 est écarté).
+
+**Âge légal à 65 ans** (mesure du programme, deux trimestres par génération, 65 ans pour la génération qui a 64
+ans en 2030) : économie calculée génération par génération en décalant le profil de départ d'un an à partir de
+64 ans, au lieu des 7 Md€ forfaitaires de la v235. 4,3 Md€ en 2029, 9,3 en 2030, 12,5 à 12,8 de 2033 à 2035,
+11,3 en 2040, puis nulle vers 2045 (légèrement négative ensuite : les pensions liquidées plus tard ont été gelées
+moins longtemps).
+
+## Chiffrage demandé : RUI à 50 % par enfant pour le parent isolé (au lieu de 30 %)
+
+Non retenu à ce jour (question d'Adrien du 29/10/2026). Coût direct : 6,1 Md€ par an (3 158 000 enfants × 20 % ×
+9 600 €). Le soutien moyen par enfant passe de −601 € à −217 € par rapport au système actuel ; naissances −0,8 %
+au lieu de −4,6 % dans le prudent.
+
+| Prudent, déficit avant clause | 2029 | 2037 | 2045 | 2050 | 2060 | 2065 | 2073 |
+|---|---|---|---|---|---|---|---|
+| Effet total | +0,20 | +0,25 | +0,33 | +0,34 | +0,29 | +0,21 | −0,02 |
+| dont naissances en plus | 0 | +0,05 | +0,11 | +0,09 | −0,02 | −0,13 | −0,41 |
+
+Dette en 2073 : 137 % au lieu de 132 %. Les naissances en plus coûtent jusque vers 2058 (enfants à soutenir),
+puis rapportent (actifs) : en 2073 la mesure s'autofinance en flux, mais la dette accumulée reste plus haute.
+Fragile : la réaction des naissances chez les parents isolés (beaucoup le deviennent après la naissance) ; un
+soutien bien plus élevé pour un parent seul qu'en couple pousse aussi à déclarer une séparation.
 
 ## Résultat d'ensemble (prudent)
 
@@ -86,9 +107,10 @@ réduirait le déficit de 0,2 point en 2037 et de 0,7 point en 2050.
 |---|---|---|---|---|---|---|
 | Population figée (v235) | 5,69 | 5,55 | 4,13 | 0,0 | −4,2 | 64 % |
 | Population, première version | 5,69 | 5,50 | 4,87 | 2,9 | 3,2 | 155 % |
-| **Avec 3e enfant, crèches, ancien système et socle par génération** | **5,74** | **6,25** | **4,63** | **1,9** | **0,6** | **132 %** |
+| Avec 3e enfant, crèches, ancien système et socle par génération | 5,74 | 6,25 | 4,63 | 1,9 | 0,6 | 132 % |
+| **Âge légal à 65 ans calculé par génération** | **5,68** | **6,03** | **4,75** | **2,0** | **0,6** | **132 %** |
 
-Publié (après clause) : 5,34 % en 2029, 4,31 % en 2037, 4,75 % en 2050.
+Publié (après clause) : 5,27 % en 2029, 4,10 % en 2037, 4,87 % en 2050.
 
 ## Limites
 
