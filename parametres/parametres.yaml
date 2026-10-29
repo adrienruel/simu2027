@@ -1189,3 +1189,15 @@ demographie:
     statut: HYPOTHESE
     source: "Bauernschuster, Hener et Rainer (Journal of the European Economic Association, 2016) : +10 points de couverture des moins de 3 ans en accueil public → +1,2 naissance pour 1 000 femmes, soit +2,8 % ; pas un simple effet de calendrier"
     note: "Hausse relative des naissances pour +10 points de couverture (mise à l'échelle des places créées : famille.creches_nouvelles). Médian et optimiste : l'estimation allemande ; prudent : la moitié (transposition à la France, où la couverture est déjà plus haute) ; crise : aucun effet. v235 : pas de places créées."
+
+# --- Ancien système : pensions génération par génération (29 octobre 2026) ---------------
+ancien_systeme:
+  par_generation: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : recalculer les pensions de l'ancien système génération par génération avec la mortalité de l'Insee 2026. v235 : dépenses désindexées du COR × part des retraités de l'ancien système."}
+  part_retraites_age:
+    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.24, 63: 0.30, 64: 0.72, 65: 0.80, 66: 0.86, 67: 0.95, 68: 0.97, 69: 0.98, 70: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : DREES, Les retraités et les retraites 2025, fiche 16 : en 2023 (âge légal 62 ans), 4 à 5 % des 59 ans sont retraités, 94 à 97 % des 67 ans ; 10 % partent à 60 ans (carrières longues), 31 % à 62 ans, 7 % à 67 ans"
+    note: "Part d'une génération partie à la retraite à chaque âge, pour l'âge légal de 64 ans (réforme de 2023, générations 1968 et suivantes) : profil de 2023 décalé de deux ans au-delà de 60 ans, carrières longues gardées. Le passage à 65 ans du programme est compté dans sa propre mesure."
+  droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: HYPOTHESE, note: "Pension des départs dans l'ancien système de 2029 à 2043 (générations 1978 et avant) : false = calculée normalement au départ, puis gelée (prudent) ; true = droits gelés en euros courants dès 2029, la pension perd l'inflation dès 2029 même avant le départ. À trancher par Adrien."}
+  pension_nouveaux_relative: {valeur: 0.935, unite: sans_unite, statut: SOURCE, source: "DREES, Les retraités et les retraites 2025, fiches 5 et 7 : pension brute de droit direct des nouveaux retraités fin 2023, 1 557 € par mois, contre 1 666 € pour l'ensemble des retraités", note: "Pension des départs de 2029 et après, rapportée à la pension moyenne de 2029 (1 557 / 1 666). Les générations n'ont pas de pension plus élevée que leurs aînées (effet noria faible depuis 2017)."}

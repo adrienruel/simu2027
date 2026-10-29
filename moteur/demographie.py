@@ -45,10 +45,30 @@ def _projection(nom: str) -> dict[int, tuple[float, ...]]:
     return {t: tuple(v) for t, v in pop.items() if t in ANNEES}
 
 
+COUPLES = {"deux_smic": ["smic", "smic"], "smic_median": ["smic", "median"], "deux_medians": ["median", "median"],
+           "cadre_median": [100000, "median"], "median_inactif": ["median", 0], "parent_isole_smic": ["smic"]}
+AGES = [10, 6, 3]  # âges des enfants de rang 1, 2, 3
+
+
+def menages_valeur_enfant() -> list[dict]:
+    return [{"id": f"{c}_{n}", "libelle": f"{c} {n}", "adultes": a, "enfants": AGES[:n]}
+            for c, a in COUPLES.items() for n in range(4)]
+
+
+def valeur_enfant(p: Parametres) -> list[dict]:
+    """Soutien apporté par un enfant de plus (€ par an), par ménage et par rang : système actuel lu dans la table
+    OpenFisca (outils/valeur_enfant.py), nouveau système recalculé par le moteur avec les paramètres courants."""
+    from .menages_types import nouveau
+    with (DONNEES / "valeur_enfant_2026.csv").open(encoding="utf-8") as f:
+        actuel = {(l["menage"], int(l["rang"])): float(l["actuel"]) for l in csv.DictReader(f)}
+    rd = {m["id"]: nouveau(m, p)["revenu_disponible"] for m in menages_valeur_enfant()}
+    return [{"menage": c, "rang": n, "actuel": actuel[(c, n)], "nouveau": rd[f"{c}_{n}"] - rd[f"{c}_{n - 1}"]}
+            for c in COUPLES for n in (1, 2, 3)]
+
+
 def ecart_soutien_enfant(p: Parametres) -> float:
     """Écart moyen de soutien par enfant, nouveau système − système actuel (€ par an), pondéré par rang et ménage."""
-    with (DONNEES / "valeur_enfant_2026.csv").open(encoding="utf-8") as f:
-        lignes = list(csv.DictReader(f))
+    lignes = valeur_enfant(p)
     menages = sorted({l["menage"] for l in lignes})
     reste = 1 - sum(POIDS_MENAGES.values())
     autres = [m for m in menages if m not in POIDS_MENAGES]

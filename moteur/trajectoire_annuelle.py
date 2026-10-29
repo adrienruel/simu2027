@@ -11,7 +11,7 @@ from .parametres import Parametres
 from .recettes.total import recettes_nouveau_systeme
 from .depenses.statique import depenses
 from .depenses import ia_administration
-from .retraites_transition import cout_transition, cout_socle, _csv as _csv_retraites
+from .retraites_transition import cout_transition, cout_socle
 
 ANNEES = list(range(2029, 2074))
 
@@ -25,7 +25,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     ct = cout_transition(p)
     socle = cout_socle(p)
     ia = ia_administration.economie_nette(p)
-    anc = {int(x["annee"]): x for x in _csv_retraites("ancien_systeme_retraites.csv")}
+    from .ancien_systeme import depenses as depenses_ancien
+    anc = depenses_ancien(p)
     from .recettes import successions, autres
     succ = successions.supplement(p, autres.ligne_8_successions(p) / 1e9)
     from .ascenseur_social import annuel as ascenseur
@@ -72,7 +73,7 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         n = t - 2029
         crois = (1 + g) ** n
         reval_rui = (((1 + g) / (1 + infl)) ** n * (1 + prod[t]) - 1) if p.val("revalorisation.rui_aah_socle_croissance") else 0.0
-        ancien_86 = anc[t]["depenses_desindexees_md"] * anc[t]["part_ancien_systeme"]
+        ancien_86 = anc[t]
         pensions_min = (p.val("revalorisation.part_pensions_sous_seuil") * ancien_86 * ((1 + g) ** (t - 2028) - 1)
                         if p.val("revalorisation.pensions_sous_minimum_vieillesse") else 0.0)
         # Recettes (montants positifs)

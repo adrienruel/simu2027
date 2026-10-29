@@ -16,14 +16,7 @@ import csv
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
-COUPLES = {"deux_smic": ["smic", "smic"], "smic_median": ["smic", "median"], "deux_medians": ["median", "median"],
-           "cadre_median": [100000, "median"], "median_inactif": ["median", 0], "parent_isole_smic": ["smic"]}
-AGES = [10, 6, 3]  # âges des enfants de rang 1, 2, 3
-
-
-def menages() -> list[dict]:
-    return [{"id": f"{c}_{n}", "libelle": f"{c} {n}", "adultes": a, "enfants": AGES[:n]}
-            for c, a in COUPLES.items() for n in range(4)]
+from moteur.demographie import COUPLES, menages_valeur_enfant as menages  # noqa: F401  (une seule définition)
 
 
 def calculer() -> list[dict]:

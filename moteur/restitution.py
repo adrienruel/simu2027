@@ -144,9 +144,14 @@ def donnees(p: Parametres | None = None) -> dict:
         for j in ("crise", "prudent", "optimiste"):
             e = demo_m.effectifs(p, j)
             population["scenarios"][j] = {k: [round(e[t][k] / 1e6, 2) for t in jalons] for k in ("emploi", "enfants", "seniors", "total")}
-        import csv as _csv
-        with (demo_m.DONNEES / "valeur_enfant_2026.csv").open(encoding="utf-8") as fe:
-            population["valeur_enfant"] = [{k: (v if k == "menage" else float(v)) for k, v in l.items()} for l in _csv.DictReader(fe)]
+        from .ancien_systeme import serie as serie_ancien
+        from .retraites_transition import retraites_nouveau_systeme, cout_socle
+        sa, rn, cs = serie_ancien(p), retraites_nouveau_systeme(p), cout_socle(p)
+        population["retraites"] = {"ancien": [round(sa[t]["retraites_millions"], 2) for t in jalons],
+                                   "depenses_ancien": [round(sa[t]["depenses_md"]) for t in jalons],
+                                   "nouveau": [round(rn[t] / 1e6, 2) for t in jalons],
+                                   "socle": [round(cs[t]) for t in jalons]}
+        population["valeur_enfant"] = [{**x, "nouveau": round(x["nouveau"], 2)} for x in demo_m.valeur_enfant(p)]
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))

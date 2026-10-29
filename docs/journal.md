@@ -168,6 +168,13 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — 3e enfant, crèches, ancien système par génération
+
+- Décisions d'Adrien : RUI à 25 % par enfant dès le 3e ; +10 points de couverture en crèche (places créées). Réforme OpenFisca mise à jour, test de concordance pour 3 enfants.
+- `moteur/ancien_systeme.py` : pensions de l'ancien système génération par génération (nés en 1978 ou avant), mortalité de l'Insee, gel en euros courants. La série de la v235 gardait 6,7 millions d'anciens retraités en 2073 (95 ans ou plus) : 1,1 million par génération.
+- Socle du nouveau système : survivants pris dans la population de l'Insee (arrivées après 2029 et mortalité comprises) au lieu de la population de 2026 × Gompertz : 18,5 millions de bénéficiaires en 2073 au lieu de 15,0 ; 227 Md€ au lieu de 184.
+- Prudent avant clause : 6,25 % en 2037, 4,63 % en 2050, 0,6 % en 2073 ; dette 132 % en 2073. Question ouverte : droits des départs de 2029-2043 gelés dès 2029 ou au départ.
+
 ## 29 octobre 2026 — Population année par année
 
 - `moteur/demographie.py`, `docs/demographie.md` : projections de l'Insee de juin 2026 (fécondité basse en crise, centrale en prudent et médian, haute en optimiste) ; emploi par âge à taux de 2025 figés ; recettes, PIB, épargne versée au fonds, RUI et autres dépenses suivent la population. La v235 figeait la population de 2026.

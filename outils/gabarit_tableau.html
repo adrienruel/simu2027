@@ -276,6 +276,9 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     <p class="note">Projections de population de l'Insee (juin 2026) : fécondité basse (1,20 enfant par femme) en crise, centrale (1,45) en prudent et médian, haute (1,70) en optimiste ; solde migratoire de +150 000 par an. Emploi : population par âge × taux d'emploi par âge de 2025, figés (la démographie seule ; les hausses dues au programme sont comptées dans leurs mesures). Il fait évoluer les recettes, le PIB et l'épargne versée au fonds ; le RUI suit les adultes et les enfants, les autres dépenses la population. Les naissances changent avec le soutien par enfant du nouveau système, comparé au système actuel (OpenFisca).</p>
     <p id="pop-lecture"></p>
     <div class="carte defile"><table id="t-pop-tab"></table></div>
+    <h3>Retraités : ancien et nouveau système</h3>
+    <p class="note">Ancien système : générations nées en 1978 ou avant, suivies une à une (projections de l'Insee, part partie à la retraite à chaque âge, pension gelée en euros courants dès 2029 ou dès le départ), calées sur 428 Md€ et 19,15 millions de retraités en 2029. Nouveau système : générations de 22 à 50 ans en 2029, socle à partir de 67 ans, population de l'Insee (arrivées après 2029 comprises).</p>
+    <div class="carte defile"><table id="t-retraites-tab"></table></div>
     <h3>Ce que rapporte un enfant de plus au ménage (€ par an)</h3>
     <div class="carte defile"><table id="t-enfant-tab"></table></div>
   </section>
@@ -599,6 +602,11 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     document.getElementById("t-pop-tab").innerHTML = h + "</tbody>";
     const pe = P.scenarios.prudent.emploi;
     document.getElementById("pop-lecture").textContent = `Prudent : ${fr(pe[0], 1)} millions de personnes en emploi en 2029, ${fr(pe[pe.length - 1], 1)} millions en 2073 (${sg(100 * (pe[pe.length - 1] / pe[0] - 1), 0)} %). Le nouveau système verse en moyenne ${fr(Math.abs(P.ecart_soutien), 0)} € par an ${P.ecart_soutien < 0 ? "de moins" : "de plus"} par enfant que le système actuel (moyenne par rang et par ménage) : naissances ${sg(P.effet_naissances.prudent, 1)} % dans le prudent (de ${sg(P.effet_naissances.optimiste, 1)} % à ${sg(P.effet_naissances.crise, 1)} % selon le scénario).`;
+    const R = P.retraites;
+    const ligneR = (lib, v, d) => `<tr><td>${lib}</td>${v.map(x => `<td class="n">${fr(x, d)}</td>`).join("")}</tr>`;
+    document.getElementById("t-retraites-tab").innerHTML = `<thead><tr><th></th>${P.jalons.map(t => `<th>${t}</th>`).join("")}</tr></thead><tbody>` +
+      ligneR("Retraités de l'ancien système (millions)", R.ancien, 1) + ligneR("Pensions de l'ancien système (Md€)", R.depenses_ancien, 0) +
+      ligneR("Retraités du nouveau système touchant le socle (millions)", R.nouveau, 1) + ligneR("Socle versé (Md€)", R.socle, 0) + "</tbody>";
     const MEN = { deux_smic: "Couple, deux SMIC", smic_median: "Couple, SMIC et médian", deux_medians: "Couple, deux médians", cadre_median: "Couple, cadre et médian", median_inactif: "Couple, médian et conjoint sans emploi", parent_isole_smic: "Parent isolé au SMIC" };
     const V = P.valeur_enfant, ids = [...new Set(V.map(x => x.menage))];
     document.getElementById("t-enfant-tab").innerHTML = `<thead><tr><th>Ménage</th>${[1, 2, 3].map(r => `<th>${r === 1 ? "1er" : r + "e"} enfant : aujourd'hui</th><th>demain</th>`).join("")}</tr></thead><tbody>` +

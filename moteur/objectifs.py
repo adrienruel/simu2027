@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 from .parametres import Parametres
-from .retraites_transition import _csv as _csv_retraites
 
 ANNEES = list(range(2029, 2074))
 
@@ -19,7 +18,8 @@ def surcroit_tva_2028(p: Parametres, t: int) -> tuple[float, float]:
 
 
 def fin_gel(p: Parametres, t: int) -> float:
-    anc = {int(x["annee"]): x["depenses_desindexees_md"] * x["part_ancien_systeme"] for x in _csv_retraites("ancien_systeme_retraites.csv")}
+    from .ancien_systeme import depenses as depenses_ancien
+    anc = depenses_ancien(p)
     part_sous = p.val("revalorisation.part_pensions_sous_seuil") if p.val("revalorisation.pensions_sous_minimum_vieillesse") else 0
     g = p.val("macro.tendance", "prudent")
     return (1 - part_sous) * anc[t] * ((1 + g) ** max(0, t - p.val("objectifs.fin_gel_anciennes_pensions")) - 1)

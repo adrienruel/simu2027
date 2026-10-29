@@ -43,10 +43,55 @@ travailler baisse avec une fécondité de 1,45 : c'est la projection de l'Insee,
 L'effet du programme sur la natalité allège le budget jusque vers 2060 (moins d'enfants à soutenir), puis
 l'alourdit (moins d'actifs).
 
+## Décisions du 29 octobre 2026 (après la première version)
+
+- **RUI à 25 % par enfant dès le 3e** (15 % pour les deux premiers ; parent isolé : 30 %, inchangé). Coût
+  1,6 Md€ par an (1 696 600 enfants de rang 3 ou plus, Insee RP 2023, tous comptés au taux des couples).
+- **Crèches : +10 points de couverture des moins de 3 ans** (≈ 160 000 places en 2034, selon les naissances),
+  dès 2030, montée en 5 ans : ≈ 3 Md€ par an de fonctionnement (19 450 € par place, Onape, payés entièrement par
+  l'État), plus la construction (42 000 € par place, une fois) ; 4,5 Md€ en 2034. Effet sur les naissances :
+  +1,4 % dans le prudent (moitié de l'estimation allemande), +2,8 % en médian et optimiste, 0 en crise. Ni les
+  emplois des crèches ni le retour à l'emploi des mères ne sont comptés (prudent).
+- Soutien moyen par enfant : 601 € de moins que le système actuel (762 avant) ; naissances −4,6 % dans le
+  prudent (−7,6 avant). Reste défavorable : le 2e enfant et les parents isolés.
+
+## Pensions de l'ancien système, génération par génération
+
+`moteur/ancien_systeme.py`. Générations nées en 1978 ou avant (les plus jeunes sont remboursées et relèvent du
+nouveau système). Survivants : population de l'Insee ; part partie à la retraite à chaque âge (âge légal de 64
+ans, profil DREES 2023 décalé, hypothèse encadrée) ; pension identique en 2029, 0,935 de la moyenne pour les
+départs suivants (DREES : nouveaux retraités 1 557 €, ensemble 1 666 €), gelée en euros courants. Calée sur
+428 Md€ et 19,15 millions de retraités en 2029.
+
+| | 2029 | 2037 | 2050 | 2060 | 2073 |
+|---|---|---|---|---|---|
+| Dépenses, série de la v235 (Md€) | 428 | 392 | 271 | 154 | 89 |
+| Dépenses par génération (Md€) | 428 | 413 | 244 | 105 | 12 |
+| Retraités, v235 (millions) | 19,2 | 20,5 | 17,2 | 10,6 | 6,7 |
+| Retraités par génération (millions) | 19,2 | 21,2 | 15,2 | 7,6 | 1,1 |
+
+La série de la v235 gardait 6,7 millions de retraités de l'ancien système en 2073, alors que les générations nées
+en 1978 ou avant auront 95 ans ou plus : c'était le complément entre le total du COR et les retraités du nouveau
+système. Ce complément venait en fait d'un défaut du nouveau système, qui ne comptait ni les arrivées après 2029
+ni la mortalité de l'Insee : **retraités touchant le socle en 2073 : 18,5 millions au lieu de 15,0 ; socle versé :
+227 Md€ au lieu de 184.** Les deux corrections vont en sens contraire.
+
+Question ouverte (paramètre `ancien_systeme.droits_geles_des_2029`) : les départs de 2029 à 2043 touchent-ils une
+pension calculée normalement puis gelée (retenu, prudent), ou des droits gelés dès 2029 ? Le gel dès 2029
+réduirait le déficit de 0,2 point en 2037 et de 0,7 point en 2050.
+
+## Résultat d'ensemble (prudent)
+
+| Déficit avant clause | 2029 | 2037 | 2050 | 2060 | 2073 | Dette 2073 |
+|---|---|---|---|---|---|---|
+| Population figée (v235) | 5,69 | 5,55 | 4,13 | 0,0 | −4,2 | 64 % |
+| Population, première version | 5,69 | 5,50 | 4,87 | 2,9 | 3,2 | 155 % |
+| **Avec 3e enfant, crèches, ancien système et socle par génération** | **5,74** | **6,25** | **4,63** | **1,9** | **0,6** | **132 %** |
+
+Publié (après clause) : 5,34 % en 2029, 4,31 % en 2037, 4,75 % en 2050.
+
 ## Limites
 
 - Santé : la trajectoire est déjà calée sur des projections qui comptent le vieillissement ; pas de second compte.
-- Pensions de l'ancien système : série de la v235. Recoupée : retraités du COR +17,6 % de 2029 à 2060, 63 ans
-  ou plus de l'Insee +22 % (l'âge de départ qui monte explique l'écart) ; pas recalculée génération par génération.
 - Le système actuel souffrirait davantage de la même démographie (répartition) : la comparaison avec le statu
   quo reste à faire.

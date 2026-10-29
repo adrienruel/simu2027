@@ -56,6 +56,18 @@ def socle_par_generation(p: Parametres) -> list[dict]:
     return out
 
 
+def survivants(p: Parametres, g: dict, an: int) -> float:
+    """Personnes de la génération g (âge en 2029) vivant en France l'année an.
+
+    Module de population actif : projection de l'Insee 2026 (mortalité et migrations comprises : le socle est
+    versé aux résidents, arrivés après 2029 compris). Sinon (v235) : population de 2026 × survie de Gompertz."""
+    age = int(g["age_2029"] + an - 2029)
+    if p.val("demographie.active"):
+        from .demographie import _projection
+        return _projection("central")[an][min(age, 105)] if age <= 105 else 0.0
+    return g["population_2026"] * survie(p, g["age_2029"], age)
+
+
 def cout_socle(p: Parametres) -> dict[int, float]:
     """Socle versé aux retraités du nouveau système vivants (Md€), par année."""
     gens = socle_par_generation(p)
@@ -66,15 +78,15 @@ def cout_socle(p: Parametres) -> dict[int, float]:
         for g in gens:
             age = g["age_2029"] + (an - 2029)
             if age >= acces:
-                total += g["population_2026"] * survie(p, g["age_2029"], age) * g["socle_moyen"]
+                total += survivants(p, g, an) * g["socle_moyen"]
         out[an] = total / 1e9
     return out
 
 
 def retraites_nouveau_systeme(p: Parametres) -> dict[int, float]:
     acces = p.val("epargne.age_acces_socle")
-    return {an: sum(g["population_2026"] * survie(p, g["age_2029"], g["age_2029"] + an - 2029)
-                    for g in _csv("cohortes_2029.csv") if g["age_2029"] + an - 2029 >= acces) for an in ANNEES}
+    return {an: sum(survivants(p, g, an) for g in _csv("cohortes_2029.csv") if g["age_2029"] + an - 2029 >= acces)
+            for an in ANNEES}
 
 
 def remboursements(p: Parametres) -> dict[int, dict]:
@@ -109,25 +121,25 @@ def penibilite(p: Parametres) -> dict[int, float]:
     nouveaux = retraites_nouveau_systeme(p)
     out = {}
     for an in ANNEES:
-        dans_avance = sum(g["population_2026"] * survie(p, g["age_2029"], g["age_2029"] + an - 2029)
-                          for g in gens if acces - avance <= g["age_2029"] + an - 2029 < acces)
+        dans_avance = sum(survivants(p, g, an) for g in gens if acces - avance <= g["age_2029"] + an - 2029 < acces)
         out[an] = (dans_avance * part * socle_modeste * 12 + nouveaux[an] * part * p.val("penibilite.hausse_socle_mensuelle") * 12) / 1e9
     return out
 
 
 def cout_transition(p: Parametres) -> dict[int, dict]:
-    anc = {int(l["annee"]): l for l in _csv("ancien_systeme_retraites.csv")}
+    from .ancien_systeme import depenses as depenses_ancien
+    anc = depenses_ancien(p)
     socle = cout_socle(p)
     remb = remboursements(p)
     pen = penibilite(p)
     hp = economie_hautes_pensions_2026(p)
     budget = p.val("budget_statique.retraites_socle")
-    base85 = anc[2029]["depenses_desindexees_md"]
+    base85 = anc[2029]
     out = {}
     for an in ANNEES:
-        ancien = anc[an]["depenses_desindexees_md"] * anc[an]["part_ancien_systeme"]
+        ancien = anc[an]
         actuariel = ancien + socle[an] + remb[an]["maastricht"] - budget
-        hautes = hp * anc[an]["part_ancien_systeme"] * anc[an]["depenses_desindexees_md"] / base85
+        hautes = hp * anc[an] / base85
         out[an] = {"actuariel": actuariel, "hautes_pensions": hautes, "penibilite": pen[an],
                    "net": actuariel - hautes + pen[an], "participations": remb[an]["participations"]}
     return out
