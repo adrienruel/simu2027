@@ -36,12 +36,28 @@ gardé dans le médian et l'optimiste (`cohortes.effet_composition_salaires`).
 Correction faite en passant : l'emploi du module de population comptait les 15-17 ans au taux des 15-24 ans
 (34,5 %) ; il commence désormais à 18 ans, comme les cellules.
 
-## Ce qui reste à faire (prochaines étapes)
+## Le fonds comme somme des comptes (deuxième étape)
 
-1. **Le fonds comme somme des comptes** : aujourd'hui, le capital du fonds (canal macro) et les comptes (socle)
-   sont deux calculs séparés ; le capital du fonds ne baisse pas quand les retraités tirent leur rente
-   (décumulation non comptée, ce qui le surestime après 2046).
-2. **Les retraités du nouveau système par cellule** : impôt et TVA calculés sur leur rente et leur socle (encore
-   le budget de croisière ramené au nombre de retraités).
-3. **Ménages** (couples, enfants) et quotient ; indépendants ; profils de salaire par génération.
-4. **Scénario sans réforme** (système actuel projeté), puis bibliothèque de mesures pour d'autres programmes.
+`cohortes.comptes` : comptes de toutes les générations qui travaillent après 2029 (y compris celles de l'ancien
+système, qui épargnent aussi). Avant 67 ans, versements des salariés (cellules) capitalisés au rendement du fonds ;
+à 67 ans, la moitié du capital part en rente viagère (prix de la rente : mortalité de Gompertz), l'autre reste
+placée et verse ses rendements ; au décès, elle passe aux héritiers et reste placée. Encours : 605 Md€ en 2037,
+1 780 en 2050, 3 780 en 2073 ; rentes versées : 16 Md€ en 2050, 87 en 2073.
+
+Capital nouveau du fonds (canal macro) : apport net de l'année (versements − investissements publics repris, après
+éviction et part placée à l'étranger) + rendements gardés moins rentes versées, au prorata de la part des comptes
+placée en capital nouveau. Remplace l'ancienne règle « 62,5 % des rendements réinvestis », qui ne voyait pas la
+décumulation. Capital nouveau : 414 Md€ en 2050, 1 466 en 2073.
+
+## Impôt et TVA des nouveaux retraités par profil (troisième étape)
+
+`cohortes.fiscalite_retraites_nouveaux` : rente et socle de chaque profil (tranches de ceux qui ont fait carrière,
+et ceux sans capital), mêmes règles que le budget de croisière. Résultat très proche de l'ancienne approximation
+(croisière au prorata du nombre de retraités) : 24,0 contre 25,8 Md€ d'impôt et 43,7 contre 44,0 Md€ de TVA en 2073.
+
+## Ce qui reste à faire
+
+1. **Ménages** (couples, enfants) et quotient ; indépendants ; profils de salaire par génération.
+2. Les points pris par la règle et l'épargne rendue dans les comptes eux-mêmes (aujourd'hui dans le capital
+   seulement) ; le remboursement de 35 % dans les comptes.
+3. **Scénario sans réforme** (système actuel projeté), puis bibliothèque de mesures pour d'autres programmes.

@@ -41,6 +41,10 @@ def recette_nette(p: Parametres) -> dict[int, float]:
     g = p.val("macro.tendance", "prudent")
     tm_haut = p.val("impot_unique.taux")[-1]
     nouveaux = retraites_nouveau_systeme(p)
+    fisc_cellules = None
+    if p.val("cohortes.active") and p.val("demographie.active"):
+        from .cohortes import fiscalite_retraites_nouveaux
+        fisc_cellules = fiscalite_retraites_nouveaux(p)
     impot_croisiere = impot_retraites(p) / 1e9
     tva_croisiere = tva_retraites(p) / 1e9
     n_croisiere = p.val("retraites.nombre_retraites") / 1e6
@@ -75,8 +79,12 @@ def recette_nette(p: Parametres) -> dict[int, float]:
         baisse_hautes = hp_2026 * anc_md[t] / base85 + effet(bareme_fort, t, p, anc_md)
         impot_net = impot_bareme - baisse_hautes * tm_haut
         tva = tva_total / 10 * retraites * 1e6 / 1e9
-        impot_trop = (impot_croisiere - impot_croisiere / n_croisiere * nouveaux[t] / 1e6) * index
-        tva_trop = (tva_croisiere - tva_croisiere / n_croisiere * nouveaux[t] / 1e6) * index
+        if fisc_cellules:  # impôt et TVA des nouveaux retraités calculés profil par profil (cellules)
+            impot_trop = (impot_croisiere - fisc_cellules[t]["impot"] / 1e9) * index
+            tva_trop = (tva_croisiere - fisc_cellules[t]["tva"] / 1e9) * index
+        else:
+            impot_trop = (impot_croisiere - impot_croisiere / n_croisiere * nouveaux[t] / 1e6) * index
+            tva_trop = (tva_croisiere - tva_croisiere / n_croisiere * nouveaux[t] / 1e6) * index
         # Le budget statique compte un forfait pour les couples de retraités (quotient conjugal) ; pour la part
         # des retraités encore dans l'ancien système, l'imposition commune est désormais calculée ici : on rend
         # cette part du forfait pour ne pas la compter deux fois.

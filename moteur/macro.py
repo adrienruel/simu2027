@@ -110,6 +110,13 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
               + cr["Investir pour la France de 2030"] + p.val("fonds_reprises.investissements_locaux_rentables"))
     # Part des investissements publics reprise par le fonds : 100 % (Total!B71)
     b24 = flux_epargne_obligatoire(p) / 1e9 * (1 - p.val("epargne.contribution_transition")) - (repris - subventions_restees(p)) * 1.0
+    # comptes d'épargne génération par génération (cellules) : rendements gardés et rentes versées aux retraités
+    comptes_actifs = p.val("cohortes.active") and p.val("demographie.active") and p.val("macro.corrections_relecture")
+    if comptes_actifs:
+        from .cohortes import comptes as comptes_cohortes
+        comptes_s = {s_: comptes_cohortes(p, "prudent" if s_ == "prudent" else s_) for s_ in SCENARIOS}
+        flux_brut = flux_epargne_obligatoire(p) / 1e9 * (1 - p.val("epargne.contribution_transition"))
+        repris_net = repris - subventions_restees(p)
     rendement = p.val("epargne.rendement_fonds")
     etr = p.val("macro.etranger")
     from . import is_investissement as module_isi
@@ -376,9 +383,22 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             sc.detail.setdefault("chomage", {})[t] = (p.val("inactifs.chomeurs_bit") - emp_ref
                                                         - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa
             # Année suivante : capital du fonds, part à l'étranger
-            capital = (capital + b24 * ds["c_epargne"] * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
-                       - (c_contrib * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if corr else 0.0)
-                       + (paiement * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if s == "prudent" else 0.0))
+            if comptes_actifs:
+                cpt = comptes_s[s][t]
+                cal = flux_brut / (comptes_s[s][2029]["versements"] / 1e9)  # calage du flux des cellules sur le flux statique
+                rend_net = (cpt["rendements"] - cpt["paiements"]) / 1e9 * cal
+                apport = (flux_brut * ds["c_epargne"] - repris_net) * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr)
+                # rendements gardés et rentes versées : au prorata de la part des comptes placée en capital nouveau
+                part_k = min(1.0, capital / (cpt["encours"] / 1e9 * cal)) if cpt["encours"] > 0 else 0.0
+                capital = (capital + apport + rend_net * part_k + m("permis_rapide", s)
+                           - c_contrib * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr)
+                           + (paiement * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if s == "prudent" else 0.0))
+                sc.detail.setdefault("fonds", {})[t] = {"capital": capital, "encours_comptes": cpt["encours"] / 1e9 * cal,
+                                                        "rentes": cpt["paiements"] / 1e9 * cal}
+            else:
+                capital = (capital + b24 * ds["c_epargne"] * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
+                           - (c_contrib * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if corr else 0.0)
+                           + (paiement * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if s == "prudent" else 0.0))
             if maastricht >= etr["solde_minimum"]:
                 part_etr = max(part_etr, min(etr["plafond"], etr["depart"] + (etr["plafond"] - etr["depart"]) * max(0, (etr["dette_debut"] - dette / pib_total) / (etr["dette_debut"] - etr["dette_plafond"]))))
             dette_prec = dette

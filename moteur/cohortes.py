@@ -166,5 +166,106 @@ def socle_par_cellule(p: Parametres) -> list[dict]:
         tranches = cell[1.0]["tranches"] if 1.0 in cell else next(iter(cell.values()))["tranches"]
         socle_carriere = sum(x["part"] * socle * max(0.0, 1 - (k + remb) * rev / seuil) for x, k in zip(tranches, capitaux))
         moyen = q * socle_carriere + (1 - q) * socle
-        out.append({**g, "socle_moyen": moyen, "socle_carriere": socle_carriere, "part_carriere": q})
+        # profils de retraite (annuels) : chaque tranche de ceux qui ont fait carrière, et ceux sans capital
+        profils = [{"poids": q * x["part"], "rente": (k + remb) * rev, "socle": socle * max(0.0, 1 - (k + remb) * rev / seuil)}
+                   for x, k in zip(tranches, capitaux)]
+        profils.append({"poids": 1 - q, "rente": 0.0, "socle": socle})
+        out.append({**g, "socle_moyen": moyen, "socle_carriere": socle_carriere, "part_carriere": q, "profils": profils})
+    return out
+
+
+def comptes(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
+    """Comptes d'épargne obligatoire de tous les ménages, génération par génération (euros de 2026, hors
+    croissance, comme le flux du fonds dans le module macro).
+
+    Avant 67 ans : chaque génération verse l'épargne obligatoire de ses salariés (cellules), capitalisée au
+    rendement du fonds. À 67 ans : la moitié du capital part en rente viagère (prix de la rente : mortalité de
+    Gompertz), l'autre moitié reste placée et verse ses rendements (epargne.part_rente_viagere) ; au décès, elle
+    passe aux héritiers et reste placée. Sorties du fonds chaque année : rentes viagères + rendements de la
+    moitié placée. Les points pris par la règle et l'épargne rendue sont comptés à part, dans le module macro.
+
+    Renvoie par année : encours (début d'année), versements, rendements, paiements aux retraités."""
+    from .epargne import capital_par_euro_de_rente
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("comptes", jeu, p.colonne_prudent)
+    if cle in cache:
+        return cache[cle]
+    cell = _par_cellule(p)
+    pr, te = _profil(p), _taux_emploi(p)
+    pops = population(p, jeu)
+    r = p.val("epargne.rendement_fonds")
+    part_rente = p.val("epargne.part_rente_viagere")
+    af = capital_par_euro_de_rente(p)
+    acces = int(p.val("epargne.age_acces_socle"))
+    emploi_2026 = sum(population(p, "prudent")[2026][a] * te.get(a, 0.0) for a in AGES_ACTIFS)
+    part_sal = sum(x["n"] for x in _tranches(p)) / emploi_2026
+    s_age = {a: te.get(a, 0.0) * part_sal * cell[pr.get(a, 1.0)]["epargne"] for a in AGES_ACTIFS}
+    actif, pool, place, rente = {}, {}, {}, {}  # par année de naissance
+    out = {}
+    for t in range(2029, 2074):
+        encours = sum(actif.values()) + sum(pool.values()) + sum(place.values())
+        versements = paiements = 0.0
+        # versements des actifs (18 à 66 ans)
+        for a in AGES_ACTIFS:
+            if a >= acces:
+                continue
+            c = t - a
+            v = pops[t][a] * s_age.get(a, 0.0)
+            actif[c] = actif.get(c, 0.0) * (1 + r) + v if c in actif else v
+            versements += v
+        # générations qui atteignent 67 ans : la moitié en rente, l'autre placée
+        c67 = t - acces
+        if c67 in actif:
+            k = actif.pop(c67) * (1 + r)
+            pool[c67] = part_rente * k
+            place[c67] = (1 - part_rente) * k
+            n67 = pops[t][acces] if acces <= 105 else 0.0
+            rente[c67] = pool[c67] / (n67 * af) if n67 > 0 else 0.0
+        # retraités : rente viagère aux survivants, rendements de la part placée versés
+        for c in list(pool):
+            age = t - c
+            n = pops[t][min(age, 105)] if age <= 105 else 0.0
+            versee = n * rente[c]
+            paiements += versee + r * place[c]
+            pool[c] = max(0.0, pool[c] * (1 + r) - versee)
+        out[t] = {"encours": encours, "versements": versements, "rendements": r * encours, "paiements": paiements}
+    cache[cle] = out
+    return out
+
+
+def fiscalite_retraites_nouveaux(p: Parametres) -> dict[int, dict[str, float]]:
+    """Impôt et TVA des retraités du nouveau système (générations de 22 à 49 ans en 2029, à partir de 67 ans),
+    calculés sur la rente et le socle de chaque profil (euros de 2026, hors croissance). Mêmes règles que le
+    budget de croisière (moteur/recettes/retraites_croisiere.py) : socle exonéré ou au barème, rente imposée à
+    la flat tax sur sa part imposable ; TVA sur la consommation du revenu net."""
+    from .impot_unique import impot
+    from .recettes.tva_menages import consommation_ht
+    from .retraites_transition import survivants
+    from .tva import taux_pour_revenu
+    cache = p.__dict__.setdefault("_cache", {})
+    if "fiscalite_retraites_nouveaux" in cache:
+        return cache["fiscalite_retraites_nouveaux"]
+    flat, part_imp = p.val("capital.flat_tax_dividendes"), p.val("retraites.part_imposable_rente")
+    exonere = p.val("retraites.socle_exonere")
+    acces = int(p.val("epargne.age_acces_socle"))
+    gens = socle_par_cellule(p)
+    par_gen = []
+    for g in gens:
+        imp = tva = 0.0
+        for x in g["profils"]:
+            i = (0.0 if exonere else impot(x["socle"], p)) + x["rente"] * part_imp * flat
+            net = x["rente"] + x["socle"] - i
+            sante, t = taux_pour_revenu(net, p)
+            imp += x["poids"] * i
+            tva += x["poids"] * (sante + t) * consommation_ht(max(0.0, net), sante + t, p)
+        par_gen.append((g, imp, tva))
+    out = {}
+    for an in ANNEES:
+        imp = tva = n = 0.0
+        for g, i, v in par_gen:
+            if g["age_2029"] + an - 2029 >= acces:
+                k = survivants(p, g, an)
+                imp, tva, n = imp + k * i, tva + k * v, n + k
+        out[an] = {"impot": imp, "tva": tva, "effectif": n}
+    cache["fiscalite_retraites_nouveaux"] = out
     return out

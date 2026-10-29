@@ -168,6 +168,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Fonds = somme des comptes ; fiscalité des nouveaux retraités par profil
+
+- `cohortes.comptes` : comptes de toutes les générations, rente viagère pour moitié à 67 ans, l'autre moitié placée ; le capital nouveau du fonds suit les versements, les rendements gardés et les rentes versées (décumulation), au lieu de « 62,5 % des rendements réinvestis ».
+- `cohortes.fiscalite_retraites_nouveaux` : impôt et TVA des nouveaux retraités sur la rente et le socle de chaque profil ; très proche de l'ancienne approximation.
+- Prudent : publié 3,00 % en 2029, 2037 et 2050 ; avant clause −1,3 % en 2073 ; dette 90 %. Crise : 4,2 % en 2073, dette 154 %.
+
 ## 29 octobre 2026 — Cellules de salariés et comptes d'épargne par génération
 
 - `moteur/cohortes.py`, `docs/cohortes.md` : salariés par âge et tranche de salaire chaque année (profil de l'Insee), impôt, TVA, RUI, épargne par cellule ; comptes par génération et socle par cellule (part sans carrière au socle plein). Calage 2026 sur le budget statique vérifié.

@@ -31,3 +31,21 @@ def test_socle_par_cellule_borne():
 def test_sans_cellules_les_indices_valent_un():
     sans = P.avec({"cohortes.active": False})
     assert all(v == 1.0 for v in indices(sans)[2073].values())
+
+
+def test_comptes_et_decumulation():
+    """Les comptes grossissent, puis les rentes versées aux retraités montent après 2046."""
+    from moteur.cohortes import comptes
+    c = comptes(P)
+    assert c[2029]["encours"] == 0 and c[2050]["encours"] > c[2040]["encours"] > 0
+    assert c[2045]["paiements"] < c[2060]["paiements"] < c[2073]["paiements"]
+
+
+def test_fiscalite_des_nouveaux_retraites_proche_de_la_croisiere():
+    """Impôt et TVA des nouveaux retraités par profil : même ordre de grandeur que la croisière au prorata."""
+    from moteur.cohortes import fiscalite_retraites_nouveaux
+    from moteur.recettes.retraites_croisiere import impot_retraites
+    from moteur.retraites_transition import retraites_nouveau_systeme
+    f, n = fiscalite_retraites_nouveaux(P), retraites_nouveau_systeme(P)
+    prorata = impot_retraites(P) * n[2073] / P.val("retraites.nombre_retraites")
+    assert f[2073]["impot"] == pytest.approx(prorata, rel=0.15)
