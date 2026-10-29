@@ -65,9 +65,9 @@ départs suivants (DREES : nouveaux retraités 1 557 €, ensemble 1 666 €), g
 
 | | 2029 | 2037 | 2050 | 2060 | 2073 |
 |---|---|---|---|---|---|
-| Dépenses, série de la v235 (Md€) | 428 | 392 | 271 | 154 | 89 |
+| Dépenses, série de la v235 (Md€) | 428 | 391 | 271 | 154 | 89 |
 | Dépenses par génération (Md€) | 428 | 413 | 244 | 105 | 12 |
-| Retraités, v235 (millions) | 19,2 | 20,5 | 17,2 | 10,6 | 6,7 |
+| Retraités, v235 (millions) | 19,2 | 20,4 | 17,2 | 10,6 | 6,7 |
 | Retraités par génération (millions) | 19,2 | 21,2 | 15,2 | 7,6 | 1,1 |
 
 La série de la v235 gardait 6,7 millions de retraités de l'ancien système en 2073, alors que les générations nées
