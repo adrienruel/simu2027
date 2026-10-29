@@ -608,7 +608,9 @@ macro:
     statut: HYPOTHESE
   multiplicateur:
     source: "Encadrement : Auclert, Philippon et Ragot (CAE, Focus n° 108, 2024) : 1 ; FMI (2012) : 0,5 avant crise, 0,9 à 1,7 en crise"
-    valeur: {crise: 1, prudent: 0.75, median: 0.5, optimiste: 0.3}
+    valeur: {crise: 1.3, prudent: 1.0, median: 1.0, optimiste: 0.5}
+    v235: {crise: 1, prudent: 0.75, median: 0.5, optimiste: 0.3}
+    note: "DÉCISION d'Adrien du 29/10/2026 : se caler sur les experts. Prudent et médian : 1, valeur du CAE (Auclert, Philippon et Ragot, Focus n° 108, 2024) ; crise : 1,3, milieu de la fourchette du FMI en période de crise (0,9 à 1,7, Perspectives de l'économie mondiale, octobre 2012) ; optimiste : 0,5, valeur des prévisionnistes avant 2008 (FMI). La v235 retenait 0,3 en optimiste, sans source transposable."
     unite: sans_unite
     statut: HYPOTHESE
     note_v235: "Prudent : multiplicateur de 1, valeur retenue par Auclert, Philippon et Ragot (CAE, Focus n° 108, juillet 2024). Médian : 0,5, valeur que les prévisionnistes retenaient avant la crise de 2008 (FMI, Perspectives de l’économie mondiale, octobre 2012, qui trouve ensuite 0,9 à 1,7 dans les années de crise ; revue d’É. Heyer, OFCE). Optimiste : 0,3, HYPOTHÈSE, pour un ajustement portant surtout sur la dépense (Alesina et Ardagna, 2009, sans valeur transposable). En temps normal, la dépense a un effet plus fort que l’impôt (Gechert, Hughes Hallett et Rannenberg, 2015). | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : multiplicateur de 0,3, valeur optimiste de la note : la confiance compense l'ajustement (avant : 0.4)."
@@ -741,7 +743,9 @@ macro:
     note_v235: "SOURCÉ : 1,3 point de croissance par habitant par écart-type de niveau, 49 pays, 1960-2016 ; 0,61 point au lycée sur 1990-2016, 21 pays (Heller-Sahlgren et Jordahl, IFN, 2023, mise à jour plus prudente de Hanushek et Woessmann, qui trouvaient jusqu’à 2 points). Médian : 0,61 ; optimiste : 1,3. Lien très discuté (causalité, poids de quelques pays) : c’est pourquoi le prudent ne le compte pas."
   ia_productivite:
     source: "Encadrement : Acemoglu (2024) : 0,07 point par an ; Aghion et Bunel (2024) : 0,27 à 0,4 (fourchette 0,07 à 1,24)"
-    valeur: {crise: 0.001, prudent: 0.00185, median: 0.0027, optimiste: 0.00475}
+    valeur: {crise: 0.0007, prudent: 0.0007, median: 0.0027, optimiste: 0.00475}
+    v235: {crise: 0.001, prudent: 0.00185, median: 0.0027, optimiste: 0.00475}
+    note: "DÉCISION d'Adrien du 29/10/2026 : crise et prudent prennent la source la plus prudente, Acemoglu (2024), 0,07 point par an pendant dix ans ; médian 0,27 (Aghion et Bunel, bas de leur fourchette) ; optimiste 0,475. v235 : 0,10 en crise et 0,185 en prudent (milieu crise-médian)."
     unite: sans_unite
     statut: HYPOTHESE
     note_v235: "SOURCÉ : Acemoglu (2024) ≈ 0,07 point par an sur dix ans (prudent) ; Aghion et Bunel (2024) : 0,27 à 0,4 point selon les gains mesurés tâche par tâche (médian : 0,27), médiane de leur fourchette 0,68 point (optimiste), fourchette 0,07 à 1,24. Repères de la Commission de l’IA (2024) : électricité en Europe +1,3 point pendant dix ans, numérique aux États-Unis +0,8 point de 1995 à 2006. Le COR (0,7 %) ne compte pas cet effet à part. | v209 (22 octobre 2026), DEMANDE d’Adrien : compter la hausse de la demande d’IA due à la baisse des coûts. SOURCÉ : le coût d’une requête de niveau GPT-3.5 a été divisé par 280 entre novembre 2022 et octobre 2024 (Stanford, AI Index 2025) ; l’usage de l’IA par les entreprises françaises a triplé de 2023 à 2025 (Insee). L’estimation basse d’Acemoglu (0,07 point) suppose que seuls 23 % des tâches exposées sont rentables à automatiser au coût actuel (Svanberg et al., MIT, 2024). Ces auteurs montrent que si le coût des systèmes baisse de 50 % par an, la moitié des tâches devient rentable en trois ans ; s’il baisse de 10 % par an, moins de la moitié en 2042. Crise : baisse de 10 % par an, part rentable portée à ≈ un tiers en moyenne sur la décennie, soit 0,07 × 33 / 23 ≈ 0,10 point. Prudent : milieu entre crise et médian, 0,185 point (avant : 0,17). Médian et optimiste inchangés : Aghion et Bunel comptent déjà une diffusion large."

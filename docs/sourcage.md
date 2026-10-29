@@ -37,6 +37,16 @@ Règles :
 
 Prudent avant clause : 5,42 % / 5,85 % / 5,33 %. (v235 : 4,67 % / 3,81 % / 2,31 % ; avant clause 5,23 % / 5,18 % / 4,07 %.)
 
+## Décisions d'Adrien du 29 octobre 2026 (après-midi)
+
+| Paramètre | v235 (crise / prudent / médian / optimiste) | Retenu | Source |
+|---|---|---|---|
+| macro.ia_productivite (points de productivité par an, dix ans) | 0,10 / 0,185 / 0,27 / 0,475 | **0,07 / 0,07** / 0,27 / 0,475 | Acemoglu (2024) pour la crise et le prudent ; Aghion et Bunel (2024) pour le médian |
+| macro.multiplicateur | 1 / 0,75 / 0,5 / 0,3 | **1,3 / 1 / 1 / 0,5** | « se caler sur les experts » : CAE (2024) 1 ; FMI (2012) 0,9 à 1,7 en crise, 0,5 avant 2008 |
+| carbone.option_prix | prix monté à 300 € en 2030 puis valeur de l'action pour le climat | confirmé, hausse arrêtée en 2060 | Quinet III |
+
+Déficit publié du prudent après ces décisions : 5,31 % / 4,70 % / 3,73 % en 2029 / 2032 / 2037 (avant clause 5,74 % / 6,15 % / 5,73 %).
+
 ## Calculé par le moteur au lieu d'être saisi (29 octobre 2026)
 
 | Paramètre | v235 | Maintenant | Effet |

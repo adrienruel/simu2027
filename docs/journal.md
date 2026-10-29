@@ -132,6 +132,12 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 
 - Les notes de la v235 sur les hypothèses macro (feuille Effets macro, colonnes E à H) sont reportées dans le fichier de paramètres (`note_v235`), et 13 hypothèses reçoivent leur encadrement par la littérature (Okun, CAE, FMI, OCDE, Acemoglu, Aghion et Bunel, Mésange, Saez et al., Auckland, Insee).
 
+## 29 octobre 2026 — Décisions sur l'IA et le multiplicateur
+
+- IA : 0,07 point de productivité par an en crise et en prudent (Acemoglu, 2024). Multiplicateur calé sur les experts : 1,3 / 1 / 1 / 0,5 (FMI en crise, CAE, FMI avant 2008).
+- Le multiplicateur de 1 dans le médian relève le déficit de 2029 du médian, sur lequel la clause aligne le prudent : 5,31 % en 2029 au lieu de 4,97 %.
+- Déficit publié du prudent : 5,31 % / 4,70 % / 3,73 %.
+
 ## Constats sur la v235 (pour Adrien)
 
 - **Les notes décrivent l'ancien prudent.** Depuis la v186 (décision du 17 octobre), l'ancien prudent est devenu la crise et le nouveau prudent est souvent le milieu entre crise et médian. Les notes de la v235 n'ont pas suivi : « prudent : la moitié » (seniors : 85 000, c'est la crise ; le prudent vaut 127 500), « prudent : 25 000 logements » (c'est la crise ; prudent 37 500), « prudent : 0,37 » (élasticité de l'investissement ; prudent 0,335), « prudent : multiplicateur de 1 » (c'est la crise ; prudent 0,75).
