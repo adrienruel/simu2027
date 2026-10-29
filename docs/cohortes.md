@@ -55,9 +55,19 @@ décumulation. Capital nouveau : 414 Md€ en 2050, 1 466 en 2073.
 et ceux sans capital), mêmes règles que le budget de croisière. Résultat très proche de l'ancienne approximation
 (croisière au prorata du nombre de retraités) : 24,0 contre 25,8 Md€ d'impôt et 43,7 contre 44,0 Md€ de TVA en 2073.
 
+## Ménages : couples et enfants (quatrième étape)
+
+`cohortes.menages` : couples d'âge actif (20 à 66 ans) chaque année, à partir de la population de l'Insee et de la
+part des personnes en couple par âge (recensement de 2006, forme seulement ; niveau calé sur les 7 millions de
+couples du quotient conjugal en 2026). Part des couples à un seul revenu : emploi des conjoints supposé
+indépendant (prudent : plus de couples à un revenu), calée sur 25 % en 2026. Le quotient conjugal suit les couples
+pondérés par leur gain (9 900 € à un revenu, 500 € à deux), le quotient familial suit les enfants, l'économie sur le
+RUI du conjoint suit les personnes sans emploi en couple (au lieu de la population totale) : −2 Md€ de dépenses
+en 2050, −5 Md€ en 2073 (moins d'enfants et de couples d'âge actif).
+
 ## Ce qui reste à faire
 
-1. **Ménages** (couples, enfants) et quotient ; indépendants ; profils de salaire par génération.
+1. Indépendants dans les cellules ; profils de salaire par génération ; couples de l'enquête la plus récente.
 2. Les points pris par la règle et l'épargne rendue dans les comptes eux-mêmes (aujourd'hui dans le capital
    seulement) ; le remboursement de 35 % dans les comptes.
 3. **Scénario sans réforme** (système actuel projeté), puis bibliothèque de mesures pour d'autres programmes.

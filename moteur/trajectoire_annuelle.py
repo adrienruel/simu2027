@@ -87,6 +87,23 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     from .demographie import indices
     from .depenses.statique import rui_enfants
     demo = indices(p, "prudent")
+    # quotient familial et conjugal, RUI du conjoint : suivent les enfants et les couples (cellules de ménages)
+    # au lieu de la population totale, comme le reste des autres dépenses
+    menages_idx = None
+    if p.val("cohortes.active") and p.val("demographie.active"):
+        from .cohortes import menages
+        from .depenses import quotient as _quotient
+        qc = _quotient.cout(p)
+        qcj = p.val("quotient.conjugal")
+        g_conj = qc["conjugal"] - qcj["retraites_forfait"]
+        mn = menages(p, "prudent")
+        # coût conjugal proportionnel aux couples pondérés par leur gain moyen (un revenu / deux revenus)
+        g1, g2 = _quotient.gains(p)
+        conj = {t: mn[t]["couples"] * (mn[t]["part_un_revenu"] * g1 + (1 - mn[t]["part_un_revenu"]) * g2) for t in mn}
+        menages_idx = {t: {"familial": qc["familial"] * p.val("quotient.familial_applique"), "conjugal": g_conj * qcj["applique"],
+                           "eco_rui": qc["economie_rui_conjoint"],
+                           "i_conj": conj[t] / conj[2029], "i_sans": mn[t]["sans_emploi_en_couple"] / mn[2029]["sans_emploi_en_couple"]}
+                       for t in ANNEES}
     rui_enf = rui_enfants(p)
     from .depenses.statique import rui_salaries as _rui_salaries
     rui_sal = _rui_salaries(p)
@@ -147,6 +164,11 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
                   autres_base * crois * (d["total"] - 1))
         L.ajouter(t, "autres", "creches_nouvelles", "Crèches : places créées (fonctionnement et construction)", "mesure",
                   creches[t])
+        if menages_idx:
+            mi = menages_idx[t]
+            L.ajouter(t, "autres", "menages_demographie", "Quotient familial et conjugal, RUI du conjoint : enfants et couples",
+                      "demographie", crois * (mi["familial"] * (d["enfants"] - d["total"]) + mi["conjugal"] * (mi["i_conj"] - d["total"])
+                                              - mi["eco_rui"] * (mi["i_sans"] - d["total"])))
         L.ajouter(t, "autres", "ia_administration", "IA dans l'administration : économie", "mesure", -ia[t] * crois)
         L.ajouter(t, "autres", "reformes_emploi", "Réformes de l'emploi : coût", "mesure", (em["g24"] - em["b155"] * (t > em["b154"])) * crois)
         L.ajouter(t, "autres", "ascenseur_depenses", "Ascenseur social : dépenses", "mesure", asc_d[t])

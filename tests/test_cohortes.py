@@ -49,3 +49,10 @@ def test_fiscalite_des_nouveaux_retraites_proche_de_la_croisiere():
     f, n = fiscalite_retraites_nouveaux(P), retraites_nouveau_systeme(P)
     prorata = impot_retraites(P) * n[2073] / P.val("retraites.nombre_retraites")
     assert f[2073]["impot"] == pytest.approx(prorata, rel=0.15)
+
+
+def test_menages_cales_en_2026():
+    from moteur.cohortes import menages
+    m = menages(P)[2026]
+    assert m["couples"] == pytest.approx(P.val("quotient.conjugal")["couples"])
+    assert m["part_un_revenu"] == pytest.approx(P.val("quotient.conjugal")["part_un_revenu"])

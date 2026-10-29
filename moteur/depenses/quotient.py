@@ -56,19 +56,24 @@ def gains_conjugaux(p: Parametres, n: int = 300) -> tuple[float, float]:
 _GAINS: dict = {}  # gains conjugaux par barème et distribution (calcul de 0,3 s)
 
 
+def gains(p: Parametres) -> tuple[float, float]:
+    """Gains moyens de l'imposition commune (couple à un revenu, à deux revenus), en €/an, mis en cache."""
+    c = p.val("quotient.conjugal")
+    if "gain_un_revenu" in c:  # v235 : gains figés d'une ancienne simulation
+        return c["gain_un_revenu"], c["gain_deux_revenus"]
+    cle = (repr(p.val("impot_unique.seuils")), repr(p.val("impot_unique.taux")), c["correlation"],
+           facteur_alignement_public(p), repr(effectifs_prive_2026(p).milieux[:3]), sum(effectifs_prive_2026(p).effectifs))
+    if cle not in _GAINS:
+        _GAINS[cle] = gains_conjugaux(p)
+    return _GAINS[cle]
+
+
 def cout(p: Parametres) -> dict[str, float]:
     from ..recettes.tva_menages import lire_inactifs
     enfants = p.val("rui_complements.enfants") + p.val("rui_complements.enfants_parent_isole")
     familial = enfants * p.val("quotient.part_enfants_parent_imposable") * gain_moyen_par_enfant(p) / 1e9
     c = p.val("quotient.conjugal")
-    if "gain_un_revenu" in c:  # v235 : gains figés d'une ancienne simulation
-        g1, g2 = c["gain_un_revenu"], c["gain_deux_revenus"]
-    else:
-        cle = (repr(p.val("impot_unique.seuils")), repr(p.val("impot_unique.taux")), c["correlation"],
-               facteur_alignement_public(p), repr(effectifs_prive_2026(p).milieux[:3]), sum(effectifs_prive_2026(p).effectifs))
-        if cle not in _GAINS:
-            _GAINS[cle] = gains_conjugaux(p)
-        g1, g2 = _GAINS[cle]
+    g1, g2 = gains(p)
     conjugal = c["couples"] * (c["part_un_revenu"] * g1 + (1 - c["part_un_revenu"]) * g2) / 1e9 + c["retraites_forfait"]
     r = p.val("quotient.rui_conjoint")
     rui = p.val("rui.montant") * 12

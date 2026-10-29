@@ -269,3 +269,39 @@ def fiscalite_retraites_nouveaux(p: Parametres) -> dict[int, dict[str, float]]:
         out[an] = {"impot": imp, "tva": tva, "effectif": n}
     cache["fiscalite_retraites_nouveaux"] = out
     return out
+
+
+def menages(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
+    """Couples d'âge actif (20 à 66 ans) chaque année : nombre, part des couples à un seul revenu, personnes sans
+    emploi en couple. Forme par âge de l'Insee ; emploi des conjoints indépendant (prudent : plus de couples à un
+    revenu, donc un quotient conjugal plus coûteux) ; niveaux calés en 2026 sur les paramètres du quotient."""
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("menages", jeu, p.colonne_prudent)
+    if cle in cache:
+        return cache[cle]
+    couple = {a: v for k, v in p.val("cohortes.part_en_couple_age").items() for a in _tranche(k)}
+    te = _taux_emploi(p)
+    pops = population(p, jeu)
+    brut = {}
+    for t in range(2026, 2074):
+        n = un = deux = sans = 0.0
+        for a in range(18, 67):
+            c = pops[t][a] * couple.get(a, 0.0) / 2  # couples (une personne sur deux compte le couple)
+            e = te.get(a, 0.0)
+            n += c
+            un += c * 2 * e * (1 - e)
+            deux += c * e * e
+            sans += 2 * c * (1 - e)
+        brut[t] = {"couples": n, "un": un, "deux": deux, "sans_emploi": sans}
+    q = p.val("quotient.conjugal")
+    k_n = q["couples"] / brut[2026]["couples"]
+    part0 = brut[2026]["un"] / (brut[2026]["un"] + brut[2026]["deux"])
+    k_u = q["part_un_revenu"] / part0
+    out = {}
+    for t, b in brut.items():
+        part = min(1.0, k_u * b["un"] / (b["un"] + b["deux"]))
+        out[t] = {"couples": b["couples"] * k_n, "part_un_revenu": part,
+                  "couples_avec_revenu": b["couples"] * k_n * (b["un"] + b["deux"]) / b["couples"],
+                  "sans_emploi_en_couple": b["sans_emploi"] / brut[2026]["sans_emploi"]}
+    cache[cle] = out
+    return out

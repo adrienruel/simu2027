@@ -1285,3 +1285,9 @@ cohortes:
     statut: HYPOTHESE
     note: "Part retenue de l'effet de composition : des actifs plus âgés gagnent plus en moyenne (profil de l'Insee en coupe). La croissance tendancielle de la productivité (COR, 0,7 %) est une moyenne par actif qui contient déjà une partie de cet effet : le compter en entier risque un double compte. Prudent et crise : 0 (le salaire moyen suit la seule tendance ; restent la progressivité de l'impôt, le RUI, l'épargne et le socle par cellule) ; médian et optimiste : 1."
   part_salaries_emploi: {valeur: calcul, unite: taux, statut: SOURCE, source: "Calculée par le moteur : salariés des distributions de 2026 (privé 21,0 millions, public 5,7) / personnes en emploi de 2026 du module de population (population de l'Insee × taux d'emploi par âge, 18-69 ans) ≈ 0,92", note: "Garde le nombre de salariés de 2026 ; les indépendants restent dans le budget statique."}
+  part_en_couple_age:
+    valeur: {"18-19": 0.02, "20-24": 0.235, "25-29": 0.55, "30-34": 0.70, "35-39": 0.735, "40-44": 0.73, "45-49": 0.735, "50-54": 0.735, "55-59": 0.74, "60-64": 0.735, "65-69": 0.715}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, recensement de 2006 (« Vivre en couple : la proportion de jeunes en couple se stabilise ») : part des hommes et des femmes vivant en couple par âge, moyenne des deux sexes"
+    note: "Forme par âge seulement : le niveau est calé sur les 7 millions de couples du quotient conjugal (quotient.conjugal) en 2026. Données anciennes (2006), à remplacer par un recensement récent."

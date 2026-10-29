@@ -168,6 +168,11 @@ Modules ajoutés : `tva.py` (accises calculées depuis le prix du carbone, taux 
 - La localisation des activités et la réaction réelle de l'assiette suivent désormais ce taux effectif ; le transfert de bénéfices suit toujours le taux légal (la déduction n'y change rien). Emplois perdus par localisation (prudent) : 101 000 au lieu de 178 000.
 - Déficit publié du prudent : 5,28 % / 4,59 % / 3,64 %.
 
+## 29 octobre 2026 — Ménages : couples et enfants
+
+- `cohortes.menages` : couples d'âge actif par année (Insee, forme par âge ; calage 2026 sur le quotient), part des couples à un revenu (emploi des conjoints indépendant, prudent). Quotient familial, conjugal et RUI du conjoint suivent enfants et couples.
+- Prudent : publié 3,00 % en 2029, 2037 et 2050 ; avant clause −1,7 % en 2073 ; dette 85 %. Crise : 4,0 % en 2073, dette 152 %.
+
 ## 29 octobre 2026 — Fonds = somme des comptes ; fiscalité des nouveaux retraités par profil
 
 - `cohortes.comptes` : comptes de toutes les générations, rente viagère pour moitié à 67 ans, l'autre moitié placée ; le capital nouveau du fonds suit les versements, les rendements gardés et les rentes versées (décumulation), au lieu de « 62,5 % des rendements réinvestis ».
