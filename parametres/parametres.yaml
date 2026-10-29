@@ -351,7 +351,8 @@ systeme_actuel:
     valeur: 0.13
     unite: taux
     statut: HYPOTHESE
-    note: Total!B140.
+    source: "Encadrement : IPP (cité par Fipeco) : 11,5 à 12 % de la consommation des ménages hors loyers (2005) ; TVA nette 2024 : 206 Md€ (Fipeco)"
+    note: "Total!B140. Contrôle : avec 13 %, le modèle reconstitue une TVA actuelle de 209 Md€ (salariés, agents, retraités, inactifs, TVA non déductible des entreprises), contre 206 Md€ en 2024 ; 12,5 % donnerait le montant exact. Le taux de 11,5 à 12 % de l'IPP est ancien. Gardé à 13 %, à recaler avec OpenFisca."
   rsa_personne_seule: {valeur: 651.69, unite: eur_mois, annee_euros: 2026, statut: SOURCE, source: "RSA au 1er avril 2026"}
   rsa_forfait_logement: {valeur: 78.2, unite: eur_mois, annee_euros: 2026, statut: SOURCE, source: "RSA, forfait logement 12 %"}
   prime_activite:
@@ -445,7 +446,7 @@ fonds:
   part_versee_au_fonds: {valeur: 1.0, unite: taux, statut: DECISION}
 accises_entreprises:
   achats_ht: {valeur: {carburants: 15, gaz_fioul: 8, electricite: 0, aerien: 10}, unite: sans_unite, statut: HYPOTHESE, note: "Achats HT des entreprises soumis aux accises (Md€, Barème TVA B44-B47)."}
-  ancienne_tva_entreprises: {valeur: 76.00990116, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "TVA non déductible actuelle, somme de la colonne U (à reprendre en données)."}
+  ancienne_tva_entreprises: {valeur: 76.00990116, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, source: "Encadrement : Fipeco, fiche TVA : TVA nette 2024 de 206 Md€ ; emplois taxables : consommation des ménages ≈ 60 %, logements neufs ≈ 8 %, achats des entreprises non assujetties ≈ 15 %, achats des administrations ≈ 16 % ; soit ≈ 80 Md€ de TVA hors consommation des ménages", note: "TVA non déductible actuelle, somme de la colonne U (à reprendre en données). Ordre de grandeur cohérent avec Fipeco."}
   autres_impots_produits_actuels: {valeur: 103.834, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Total!C13 (TICPE, tabac, alcool, assurances, jeux, électricité)"}
   tva_retraites_actuelle: {valeur: 41, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "Total!M4, saisie."}
 carbone_importe:
