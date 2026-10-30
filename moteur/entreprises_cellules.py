@@ -76,8 +76,9 @@ def bilan(p: Parametres) -> list[dict]:
     cl = classes_entreprises(p)
     benef = sum(c["benefice_median"] * c["entreprises_beneficiaires"] for c in cl) / 1e9
     prod = sum(c["impots_production"] * c["entreprises_beneficiaires"] for c in cl) / 1e9
-    taux = (p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes")
-            + p.val("impot_local_entreprises.taux_regions"))
+    from .is_bareme import benefice_representatif, impot_etat, taux_local
+    from .is_bareme import actif as bareme_actif
+    taux_unique = p.val("entreprises.taux_is_etat") + taux_local(p)
     d = p.val("entreprises_cellules.part_production_deficitaires") if actif(p) else 0.0
     recup = p.val("entreprises_cellules.recuperation_reports")
     k_is = facteur(p, 2024, "recettes")
@@ -87,6 +88,11 @@ def bilan(p: Parametres) -> list[dict]:
         pr = prod * x["part_production"]
         is_actuel = x["is_brut_md"] * k_is
         base = b + pr * (1 - d * (1 - recup))
+        if bareme_actif(p):  # IS progressif : taux moyen au bénéfice moyen de la taille (impôts de production compris)
+            rep = benefice_representatif(x) * base / b
+            taux = impot_etat(p, rep) / rep + taux_local(p)
+        else:
+            taux = taux_unique
         nouveau = taux * base
         out.append({"taille": x["taille"], "libelle": x["libelle"], "entreprises": x["entreprises_is"],
                     "is_actuel": is_actuel, "production_actuelle": pr, "actuel": is_actuel + pr,
@@ -95,23 +101,25 @@ def bilan(p: Parametres) -> list[dict]:
     return out
 
 
-def flux_investissement(p: Parametres, s: str, m, t_coef: float) -> float:
+def flux_investissement(p: Parametres, s: str, m, t_coef: float, par_taille: bool = False):
     """Investissement en plus de l'année (Md€, avant montée), somme des tailles : − élasticité × réaction relative ×
     (variation du coût du capital de la taille − baisse due à la déduction) × investissement de la taille.
 
     m : accesseur des paramètres macro du scénario ; t_coef : b4 × b20 × b21 × part déduite de l'année
     (déduction immédiate, même pour toutes les tailles, le taux nouveau étant le même)."""
     z = p.val("is_investissement.valeur_actuelle_amortissements")
-    tn = (p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes")
-          + p.val("impot_local_entreprises.taux_regions"))
+    from .is_bareme import taux_local, taux_taille
     inv = p.val("is_investissement.investissement_snf_2025")
-    total = 0.0
+    total, detail = 0.0, {}
     for x in tailles(p):
+        tn = taux_taille(p, x["taille"]) + taux_local(p)  # taux marginal de la taille (IS progressif) ou unique
         ta = x["taux_marginal_is_actuel"]
         cc = (((1 - tn * z) / (1 - tn)) / ((1 - ta * z) / (1 - ta)) - 1
               - m("reduction_cout_capital_autres", s) * x["production_relative"])
-        total -= m("elasticite_invest", s) * x["elasticite_normee"] * (cc - t_coef) * x["part_investissement"] * inv
-    return total
+        f_ = -m("elasticite_invest", s) * x["elasticite_normee"] * (cc - t_coef) * x["part_investissement"] * inv
+        total += f_
+        detail[x["taille"]] = f_
+    return detail if par_taille else total
 
 
 def arbitrage_tpe(p: Parametres, jeu: str = "prudent") -> dict:
@@ -133,12 +141,14 @@ def arbitrage_tpe(p: Parametres, jeu: str = "prudent") -> dict:
     if not actif(p) or not a["active"]:
         cache[cle] = {"perte": 0.0, "salaire": 0.0}
         return cache[cle]
-    tau = (p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes")
-           + p.val("impot_local_entreprises.taux_regions"))
+    from .is_bareme import impot_etat, taux_local as _tl, tranches as _tranches
     ft = p.val("capital.flat_tax_dividendes")
     d = p.val("entreprises_cellules.arbitrage_tpe_part_distribuee", jeu)
     recours = p.val("entreprises_cellules.arbitrage_tpe_recours", jeu)
-    garde = tau + d * (1 - tau) * ft  # impôt par euro de bénéfice laissé dans la société
+
+    def impot_societe(b):  # IS (barème de l'État ou taux unique, plus local) et flat tax sur la part distribuée
+        i = impot_etat(p, b) + _tl(p) * b
+        return i + d * (b - i) * ft
     t_loc = taux_impot_local(p, salaries=True)
     ab = p.val("impot_local.abattement")
     seuils = list(p.val("impot_unique.seuils")) + [ab]
@@ -159,8 +169,9 @@ def arbitrage_tpe(p: Parametres, jeu: str = "prudent") -> dict:
         for w, s0 in rem:
             base = impot_salaire(s0)
             def total(x):
-                return impot_salaire(s0 + x) - base + (pi - x) * garde
-            candidats = {0.0, pi} | {min(pi, max(0.0, sj - s0)) for sj in seuils}
+                return impot_salaire(s0 + x) - base + impot_societe(pi - x)
+            candidats = ({0.0, pi} | {min(pi, max(0.0, sj - s0)) for sj in seuils}
+                         | {min(pi, max(0.0, pi - st)) for st, _ in _tranches(p)})
             x = min(candidats, key=total)
             perte += n * w * recours * (total(0.0) - total(x))
             salaire += n * w * recours * x
@@ -175,7 +186,8 @@ def bilan_annees(p: Parametres, annees=(2032, 2037, 2050, 2073)) -> dict:
     intérêts : au prorata de la valeur ajoutée (faute de données sur la dette par taille, hypothèse)."""
     from .is_investissement import cout_net_etat, interets_non_deduits
     g = p.val("macro.tendance", "prudent")
-    t_is = p.val("entreprises.taux_is_etat")
+    from .is_bareme import taux_investissement
+    t_is = taux_investissement(p)
     if p.val("is_investissement.assiette_locale"):
         t_is += p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
     net, interets = cout_net_etat(p), interets_non_deduits(p, t_is)
@@ -246,3 +258,12 @@ def capital_efficace(p: Parametres, capital: float) -> float:
     moyen = sum(cap.values()) / sum(x["etp_milliers"] for x in tl)
     alloc = allocation_fonds(p, capital)
     return sum(alloc[x["taille"]] * moyen / (cap[x["taille"]] / x["etp_milliers"]) for x in tl)
+
+
+def intensite_emploi(p: Parametres) -> dict[str, float]:
+    """Emplois par euro de capital de chaque taille, relatifs à la moyenne (capital moyen par salarié / capital
+    par salarié de la taille)."""
+    tl = tailles(p)
+    cap = capital_productif(p)
+    moyen = sum(cap.values()) / sum(x["etp_milliers"] for x in tl)
+    return {x["taille"]: moyen / (cap[x["taille"]] / x["etp_milliers"]) for x in tl}

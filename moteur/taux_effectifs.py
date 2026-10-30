@@ -52,8 +52,9 @@ def eatr_nouveau(p: Parametres, jeu: str = "prudent", annee: int | None = None) 
     """IS du nouveau système (État et local), déduction immédiate pour la part de l'investissement concernée,
     sans impôts de production."""
     c = p.val("entreprises.taux_effectifs")
-    taux = (p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes")
-            + p.val("impot_local_entreprises.taux_regions"))
+    from .is_bareme import taux_grandes
+    taux = (taux_grandes(p) + p.val("impot_local_entreprises.taux_communes")
+            + p.val("impot_local_entreprises.taux_regions"))  # activités mobiles : taux des grandes entreprises
     z0 = p.val("is_investissement.valeur_actuelle_amortissements")
     part = (p.val("is_investissement.part_investissement_concernee", jeu) * p.val("is_investissement.active")
             * part_admise(p, annee))

@@ -115,6 +115,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     participations = {t: v["participations"] for t, v in cout_transition(p).items()}
     j20 = entreprises.is_beneficiaires(p) / 1e9
     s17 = p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
+    from .is_bareme import taux_grandes as _taux_grandes
+    # transfert de bénéfices : taux des grandes entreprises (égal au taux unique sans IS progressif)
+    s17_ge = _taux_grandes(p) + p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
     from .depenses.statique import subventions_restees
     from .depenses import budget_etat
     cr = {x["mission"]: float(x["credits"]) for x in budget_etat._missions() if x["credits"] != "calcul"}
@@ -231,6 +234,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                                        flux_investissement as flux_inv_tailles)
     ent_cellules = _ent_actif(p)
     k_productif = sum(capital_productif(p).values())
+    from .entreprises_cellules import intensite_emploi
+    intensite = intensite_emploi(p)
     from .emploi import cout_smic_annuel
     cout_smic = cout_smic_annuel(p)
     out = {}
@@ -264,13 +269,14 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             if ecart_eff is None:
                 return (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
             # transfert de bénéfices : taux légal ; réaction réelle : taux effectif moyen (déduction en vigueur comprise)
-            return ((s17 - m("taux_reference_is", s)) * m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s)
+            return ((s17_ge - m("taux_reference_is", s)) * m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s)
                     + ecart_eff / 100 * m("reaction_reelle", s))
         cout_capital = (((1 - s17 * isv["b18"]) / (1 - s17)) / ((1 - isv["b19"] * isv["b18"]) / (1 - isv["b19"])) - 1
                         - m("reduction_cout_capital_autres", s))
         accumulation = rendement * m("part_reinvestie", s) * m("part_capital_nouveau", s)
         capital, k_inv, part_etr = 0.0, 0.0, etr["depart"]
         k_permis = 0.0
+        k_inv_tailles = {}
         dette_prec = dette0
         corr = p.val("macro.corrections_relecture")
         hist_rui = {}  # baisses du RUI décidées par la clause (Md€), pour leur effet récessif
@@ -348,11 +354,14 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             # Emplois du capital du fonds (30/10/2026) : le chômage d'équilibre baisse quand le ratio capital/production
             # monte (élasticité entreprises_cellules.capital_chomage_elasticite), capital pondéré par l'intensité en
             # emploi des entreprises où le fonds investit (moteur/entreprises_cellules.allocation_fonds)
+            # (même canal pour le capital privé en plus ou en moins dû à l'IS : investissement par taille, 30/10/2026)
             emp_fonds = 0.0
-            if ent_cellules and dyn_ch and capital > 0:
-                k_eff = capital_efficace(p, capital / (1 + tend0) ** n)
-                x_k = math.log(1 + k_eff / k_productif) - math.log(1 + pib_cap / pib0[t])
-                du = p.val("entreprises_cellules.capital_chomage_elasticite", s) * ct[t]["taux"] * max(0.0, x_k)
+            if ent_cellules and dyn_ch:
+                k_eff = capital_efficace(p, capital / (1 + tend0) ** n) if capital > 0 else 0.0
+                k_eff += sum(v_ * intensite[k_] for k_, v_ in k_inv_tailles.items())
+                y_add = (pib_cap + k_inv * (m("pib_par_euro_capital", s) + m("usure_capital", s)) * (1 + tend0) ** n) / pib0[t]
+                x_k = math.log(max(1e-9, 1 + k_eff / k_productif)) - math.log(max(1e-9, 1 + y_add))
+                du = p.val("entreprises_cellules.capital_chomage_elasticite", s) * ct[t]["taux"] * x_k
                 du = min(du, max(0.0, ct[t]["taux"] - u_inc))
                 emp_fonds = du * ct[t]["actifs"] * k_pa
             pib_fonds_emploi = emp_fonds * cout_smic / 1e9 * (1 + tend0) ** n
@@ -390,8 +399,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             pib_hr = -PV["baisse_revenus_declares"] * m("part_reelle_hauts_revenus", s) * min(1, (n + 1) / PV["reactions_impot"]["montee"]) * (1 + tend0) ** n
             # Investissement des entreprises
             if ent_cellules:  # par taille (moteur/entreprises_cellules.py) : coût du capital et réaction propres
-                k_inv = k_inv * (1 - m("usure_capital", s)) + flux_inv_tailles(
-                    p, s, m, isv["b4"] * b20_t * isv["b21"] * l25[t]) * _montee(t, m("montee_invest", s))
+                fl = flux_inv_tailles(p, s, m, isv["b4"] * b20_t * isv["b21"] * l25[t], par_taille=True)
+                for k_, v_ in fl.items():
+                    k_inv_tailles[k_] = k_inv_tailles.get(k_, 0.0) * (1 - m("usure_capital", s)) + v_ * _montee(t, m("montee_invest", s))
+                k_inv = sum(k_inv_tailles.values())
             else:
                 k_inv = k_inv * (1 - m("usure_capital", s)) - m("elasticite_invest", s) * (
                     cout_capital - isv["b4"] * b20_t * isv["b21"] * l25[t]) * isv["investissement"] * _montee(t, m("montee_invest", s))

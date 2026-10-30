@@ -6,6 +6,7 @@ Ici il est calculé par itération (taux_impot_local).
 """
 from __future__ import annotations
 
+from .is_bareme import taux_grandes, taux_moyen
 from .parametres import Parametres
 
 _CACHE: dict[int, float] = {}
@@ -17,7 +18,7 @@ def environnement(p: Parametres) -> dict[str, float]:
     loyer = flotte * b["rendement_fonds"] / (1 - (1 + b["rendement_fonds"]) ** -b["duree_location"])
     transfere = sum(p.val("environnement.ecosystemes_transferes_regions_m").values()) / 1000
     c = p.val("environnement.chaleur")
-    perte_is = c["logements_millions"] * c["part_sans_protection"] * c["cout_logement"] * c["part_recours"] / 1000 / c["duree_amortissement"] * p.val("entreprises.taux_is_etat")
+    perte_is = c["logements_millions"] * c["part_sans_protection"] * c["cout_logement"] * c["part_recours"] / 1000 / c["duree_amortissement"] * taux_moyen(p)
     return {"economie_etat": transfere - loyer - perte_is, "recettes_regions": transfere}
 
 
@@ -26,10 +27,13 @@ def is_local(p: Parametres) -> dict[str, float]:
     from .recettes import entreprises, independants
     from .recettes.autres import accises_entreprises_brutes
     from .unites import facteur
-    t_is = p.val("entreprises.taux_is_etat")
-    s17 = t_is + p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
-    erosion = (s17 - p.val("macro.taux_reference_is", "prudent")) * (p.val("macro.semi_elasticite_transfert", "prudent")
-               * p.val("macro.part_grandes_entreprises", "prudent") + p.val("macro.reaction_reelle", "prudent"))
+    t_is = taux_moyen(p)
+    loc_ = p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
+    s17 = t_is + loc_
+    # transfert de bénéfices : taux des grandes entreprises ; réaction réelle : taux moyen (IS progressif)
+    erosion = ((taux_grandes(p) + loc_ - p.val("macro.taux_reference_is", "prudent")) * p.val("macro.semi_elasticite_transfert", "prudent")
+               * p.val("macro.part_grandes_entreprises", "prudent")
+               + (s17 - p.val("macro.taux_reference_is", "prudent")) * p.val("macro.reaction_reelle", "prudent"))
     j20 = entreprises.is_beneficiaires(p) / 1e9
     ind_b30 = independants.is_local_independants(p) / (p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")) / 1e9
     bailleurs = (p.val("revenus_capital.loyers") * (1 - p.val("logement.amortissement_loyers"))

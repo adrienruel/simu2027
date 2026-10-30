@@ -57,7 +57,9 @@ def classes_entreprises(p: Parametres, scenario: str = "prudent") -> list[dict]:
     r_tva = p.val("entreprises.ratio_tva_non_deductible")
     taux = p.val("entreprises.taux_is_etat", scenario)
     from ..entreprises_cellules import facteur_production
+    from ..is_bareme import actif as _bareme_actif, impot_etat
     fp = facteur_production(p, scenario)
+    bareme = _bareme_actif(p)
     out = []
     for e in ent:
         prod = e["impots_production_origine"] * recalage
@@ -67,7 +69,7 @@ def classes_entreprises(p: Parametres, scenario: str = "prudent") -> list[dict]:
         # imposable de l'année (moteur/entreprises_cellules.py ; v235 : tout entre)
         base = e["benefice_median"] + prod * fp + capte_e + e["tva_non_deductible"] - tva_nouvelle
         out.append({**e, "impots_production": prod, "capte": capte_e, "tva_nouvelle": tva_nouvelle,
-                    "base_is": base, "is": taux * base})
+                    "base_is": base, "is": impot_etat(p, base) if bareme else taux * base})
     return out
 
 
@@ -84,6 +86,9 @@ def is_deficitaires(p: Parametres, scenario: str = "prudent") -> float:
     c0 = classes_entreprises(p, scenario)[0]
     allegement = c0["tva_non_deductible"] + c0["capte"]
     taux = p.val("entreprises.taux_is_etat", scenario)
+    from ..is_bareme import actif as _bareme_actif, impot_etat
+    if _bareme_actif(p):
+        return sum(impot_etat(p, max(0.0, allegement - d["perte_mediane"])) * d["effectif"] for d in _lire("entreprises_deficitaires.csv"))
     return sum(max(0.0, allegement - d["perte_mediane"]) * taux * d["effectif"] for d in _lire("entreprises_deficitaires.csv"))
 
 

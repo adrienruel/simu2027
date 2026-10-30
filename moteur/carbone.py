@@ -1,6 +1,7 @@
 """Carbone dynamique : prix, érosion de l'assiette, ETS2, importations, DOM (feuille Carbone, lignes 56 à 75)."""
 from __future__ import annotations
 
+from .is_bareme import taux_moyen
 from .parametres import Parametres
 from .tva import prix_carbone
 
@@ -38,7 +39,7 @@ def recette_statique(p: Parametres) -> float:
         z = p.avec({"tva.prix_carbone_2024": 0.0})
         z.colonne_prudent, z._surcharges, z.taux_local_copie = p.colonne_prudent, p._surcharges, p.taux_local_copie
         menages = (ligne_3_tva(p) - entreprises.tva_non_deductible(p)) - (ligne_3_tva(z) - entreprises.tva_non_deductible(z))
-        brutes = (autres.accises_entreprises_brutes(p) * (1 - p.val("entreprises.taux_is_etat"))
+        brutes = (autres.accises_entreprises_brutes(p) * (1 - taux_moyen(p))
                   * facteur(p, 2024, "recettes"))
         cache["recette_carbone"] = (menages + brutes) / 1e9
     return cache["recette_carbone"]

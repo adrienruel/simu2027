@@ -39,7 +39,8 @@ def ligne_19_revenus_capital(p: Parametres) -> float:
 
 
 def ligne_20_bailleurs(p: Parametres, scenario: str = "prudent") -> float:
-    t = p.val("entreprises.taux_is_etat", scenario)
+    from ..is_bareme import taux_moyen
+    t = taux_moyen(p, scenario)  # taux unique, ou moyen effectif d'un IS progressif
     loyers = p.val("revenus_capital.loyers") * (1 - p.val("logement.amortissement_loyers")) * t
     pv = p.val("revenus_capital.plus_values_immobilieres") * p.val("logement.part_plus_values_bailleurs") * t
     sociaux = p.val("logement.is_bailleurs_sociaux") * t
@@ -100,7 +101,8 @@ def carbone_importe_2029(p: Parametres, tva_ligne_3: float) -> float:
 
 def ligne_15_accises_entreprises(p: Parametres, tva_ligne_3: float, scenario: str = "prudent") -> float:
     """Accises carbone des entreprises + accise de transition (calage « recettes TVA égales »), nettes de l'IS."""
-    t = p.val("entreprises.taux_is_etat", scenario)
+    from ..is_bareme import taux_moyen
+    t = taux_moyen(p, scenario)
     brutes = accises_entreprises_brutes(p)
     ancien = ancienne_tva_ligne_3(p) + p.val("accises_entreprises.autres_impots_produits_actuels") * MD
     importe = carbone_importe_2029(p, tva_ligne_3) / facteur(p, 2024, "recettes")

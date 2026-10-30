@@ -38,6 +38,7 @@ def revenu_apres_reaction(cout: float, tm_actuel: float, p: Parametres, s: str) 
 
 def perte_hauts_revenus(p: Parametres, s: str) -> float:
     loc = _taux_local(p)
+    from .is_bareme import actif as _bareme_actif, taux_marginal_etat
     is_total = p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
     soc, nord = p.val("hauts_revenus.part_par_societe", s), p.val("hauts_revenus.regle_nordique", s)
     total = 0.0
@@ -46,6 +47,9 @@ def perte_hauts_revenus(p: Parametres, s: str) -> float:
         di = impot(c, p) - impot(g, p)
         ecart = c - g
         # Un agent public ne peut pas faire passer son revenu par une société (Hauts revenus, lignes 35 à 44)
+        if _bareme_actif(p):  # IS progressif : la société d'un haut revenu paie le taux de la tranche de ce revenu
+            is_total = (taux_marginal_etat(p, ecart) + p.val("impot_local_entreprises.taux_communes")
+                        + p.val("impot_local_entreprises.taux_regions"))
         recupere = (pop == "prive") * soc * ecart * ((1 - nord) * is_total + nord * di / (ecart if abs(ecart) >= 1 else 1) + nord * loc)
         total += n * (di + loc * ecart - recupere)
     return total / 1e9

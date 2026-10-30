@@ -1,0 +1,282 @@
+[
+ {
+  "bareme": "Taux unique de 40 % (programme)",
+  "taux_haut_etat": 0.4,
+  "is_etat_statique": 145.1,
+  "deficit_sans_regle": {
+   "2029": 4.93,
+   "2037": 4.68,
+   "2050": 4.09,
+   "2073": 0.04
+  },
+  "deficit_publie": {
+   "2029": 3.04,
+   "2037": 3.0,
+   "2050": 3.04,
+   "2073": 0.04
+  },
+  "dette_2073": 106,
+  "chomage": {
+   "2029": 9.27,
+   "2037": 7.34,
+   "2050": 7.24,
+   "2073": 7.07
+  },
+  "median_sans_regle": {
+   "2029": 4.52,
+   "2037": 2.58,
+   "2050": -0.39,
+   "2073": -8.12
+  },
+  "median_chomage": {
+   "2029": 8.84,
+   "2037": 6.1,
+   "2050": 5.89,
+   "2073": 5.69
+  },
+  "crise_publie_2073": 5.1,
+  "emplois_localisation": {
+   "crise": -237511,
+   "median": -64079,
+   "optimiste": -24199
+  },
+  "salaires_dirigeants_perte": 0.9,
+  "ecart_par_taille": {
+   "TPE": 13.9,
+   "PME": 9.3,
+   "ETI": 0.1,
+   "GE": -6.1
+  },
+  "canaux_2050": {
+   "investissement_entreprises": -0.26,
+   "erosion_is": -28.68,
+   "emploi": 6.95,
+   "salaires_dirigeants": -1.04,
+   "emplois_fonds": 0.84
+  }
+ },
+ {
+  "bareme": "Taux réduit PME : 15 % jusqu'à 42 500 €, 30 % jusqu'à 250 000 €, 48.5 % au-delà",
+  "taux_haut_etat": 0.4855,
+  "is_etat_statique": 145.1,
+  "deficit_sans_regle": {
+   "2029": 5.21,
+   "2037": 5.63,
+   "2050": 5.36,
+   "2073": 3.21
+  },
+  "deficit_publie": {
+   "2029": 3.3,
+   "2037": 3.88,
+   "2050": 4.32,
+   "2073": 3.0
+  },
+  "dette_2073": 143,
+  "chomage": {
+   "2029": 9.32,
+   "2037": 7.7,
+   "2050": 7.61,
+   "2073": 7.46
+  },
+  "median_sans_regle": {
+   "2029": 4.76,
+   "2037": 3.14,
+   "2050": 0.29,
+   "2073": -7.81
+  },
+  "median_chomage": {
+   "2029": 8.87,
+   "2037": 6.34,
+   "2050": 6.06,
+   "2073": 5.9
+  },
+  "crise_publie_2073": 22.77,
+  "emplois_localisation": {
+   "crise": -421154,
+   "median": -115713,
+   "optimiste": -44581
+  },
+  "salaires_dirigeants_perte": 0.55,
+  "ecart_par_taille": {
+   "TPE": -3.8,
+   "PME": 9.7,
+   "ETI": 7.3,
+   "GE": 3.3
+  },
+  "canaux_2050": {
+   "investissement_entreprises": -0.65,
+   "erosion_is": -43.13,
+   "emploi": 3.55,
+   "salaires_dirigeants": -0.64,
+   "emplois_fonds": 0.59
+  }
+ },
+ {
+  "bareme": "Trois paliers : 20 % jusqu'à 100 000 €, 35 % jusqu'à 5 M€, 54.7 % au-delà",
+  "taux_haut_etat": 0.5469,
+  "is_etat_statique": 145.1,
+  "deficit_sans_regle": {
+   "2029": 5.32,
+   "2037": 6.14,
+   "2050": 6.37,
+   "2073": 6.9
+  },
+  "deficit_publie": {
+   "2029": 3.41,
+   "2037": 4.39,
+   "2050": 5.33,
+   "2073": 5.79
+  },
+  "dette_2073": 180,
+  "chomage": {
+   "2029": 9.36,
+   "2037": 7.95,
+   "2050": 7.82,
+   "2073": 7.72
+  },
+  "median_sans_regle": {
+   "2029": 4.83,
+   "2037": 3.38,
+   "2050": 0.71,
+   "2073": -7.42
+  },
+  "median_chomage": {
+   "2029": 8.89,
+   "2037": 6.45,
+   "2050": 6.14,
+   "2073": 5.97
+  },
+  "crise_publie_2073": 48.76,
+  "emplois_localisation": {
+   "crise": -553067,
+   "median": -152803,
+   "optimiste": -59221
+  },
+  "salaires_dirigeants_perte": 0.57,
+  "ecart_par_taille": {
+   "TPE": -0.8,
+   "PME": 2.4,
+   "ETI": 7.1,
+   "GE": 9.7
+  },
+  "canaux_2050": {
+   "investissement_entreprises": -0.71,
+   "erosion_is": -53.34,
+   "emploi": 1.1,
+   "salaires_dirigeants": -0.66,
+   "emplois_fonds": 0.67
+  }
+ },
+ {
+  "bareme": "Doux : 25 % jusqu'à 42 500 €, 35 % jusqu'à 1 M€, 47.1 % au-delà",
+  "taux_haut_etat": 0.4711,
+  "is_etat_statique": 145.1,
+  "deficit_sans_regle": {
+   "2029": 5.13,
+   "2037": 5.4,
+   "2050": 4.99,
+   "2073": 3.09
+  },
+  "deficit_publie": {
+   "2029": 3.23,
+   "2037": 3.66,
+   "2050": 3.94,
+   "2073": 3.0
+  },
+  "dette_2073": 139,
+  "chomage": {
+   "2029": 9.31,
+   "2037": 7.63,
+   "2050": 7.55,
+   "2073": 7.37
+  },
+  "median_sans_regle": {
+   "2029": 4.68,
+   "2037": 3.0,
+   "2050": 0.08,
+   "2073": -7.45
+  },
+  "median_chomage": {
+   "2029": 8.87,
+   "2037": 6.28,
+   "2050": 6.01,
+   "2073": 5.81
+  },
+  "crise_publie_2073": 16.72,
+  "emplois_localisation": {
+   "crise": -390290,
+   "median": -107035,
+   "optimiste": -41156
+  },
+  "salaires_dirigeants_perte": 0.69,
+  "ecart_par_taille": {
+   "TPE": 3.3,
+   "PME": 4.0,
+   "ETI": 5.6,
+   "GE": 1.7
+  },
+  "canaux_2050": {
+   "investissement_entreprises": -0.45,
+   "erosion_is": -40.74,
+   "emploi": 4.12,
+   "salaires_dirigeants": -0.8,
+   "emplois_fonds": 0.69
+  }
+ },
+ {
+  "bareme": "Fort : 10 % jusqu'à 42 500 €, 25 % jusqu'à 500 000 €, 40 % jusqu'à 50 M€, 71.7 % au-delà",
+  "taux_haut_etat": 0.7167,
+  "is_etat_statique": 145.1,
+  "deficit_sans_regle": {
+   "2029": 5.72,
+   "2037": 7.81,
+   "2050": 10.01,
+   "2073": 40.31
+  },
+  "deficit_publie": {
+   "2029": 3.8,
+   "2037": 6.02,
+   "2050": 8.97,
+   "2073": 39.2
+  },
+  "dette_2073": 460,
+  "chomage": {
+   "2029": 9.46,
+   "2037": 8.68,
+   "2050": 8.5,
+   "2073": 8.4
+  },
+  "median_sans_regle": {
+   "2029": 5.14,
+   "2037": 4.28,
+   "2050": 2.15,
+   "2073": -5.74
+  },
+  "median_chomage": {
+   "2029": 8.94,
+   "2037": 6.8,
+   "2050": 6.51,
+   "2073": 6.28
+  },
+  "crise_publie_2073": 524.57,
+  "emplois_localisation": {
+   "crise": -917871,
+   "median": -255373,
+   "optimiste": -99709
+  },
+  "salaires_dirigeants_perte": 0.46,
+  "ecart_par_taille": {
+   "TPE": -7.5,
+   "PME": -2.5,
+   "ETI": -0.3,
+   "GE": 24.4
+  },
+  "canaux_2050": {
+   "investissement_entreprises": -1.9,
+   "erosion_is": -81.59,
+   "emploi": -5.66,
+   "salaires_dirigeants": -0.53,
+   "emplois_fonds": 0.6
+  }
+ }
+]

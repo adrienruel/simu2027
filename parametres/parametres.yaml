@@ -411,6 +411,11 @@ entreprises:
   localisation_taux_effectif: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Remarque d'Adrien du 29/10/2026 : avec la déduction immédiate de l'investissement, l'IS à 45 % dissuade moins. La localisation des activités et la réaction réelle de l'assiette suivent le taux effectif moyen (EATR), qui tient compte de la déduction et de la fin des impôts de production ; le transfert de bénéfices suit toujours le taux légal (moteur/taux_effectifs.py). v235 : taux légal du nouveau système contre taux effectif actuel."}
   taux_effectifs: {valeur: {rentabilite: 0.20, taux_reel: 0.03, depreciation: 0.10}, unite: sans_unite, statut: SOURCE, source: "Projet type de l'OCDE pour les taux effectifs (Corporate Tax Statistics ; Hanappi, OECD Taxation Working Paper n° 38, 2018) : rentabilité 20 %, taux réel 3 % ; dépréciation moyenne ≈ 10 % (Banque de France, Bloc-notes Éco n° 64)", note: "Méthode Devereux et Griffith (1998, 2003)."}
   taux_is_etat: {valeur: 0.40, unite: taux, statut: DECISION}
+  is_progressif:
+    valeur: {active: false, tranches: [[0, 0.40]]}
+    unite: sans_unite
+    statut: DECISION
+    note: "Test demandé par Adrien le 30/10/2026 : IS de l'État progressif par tranches de bénéfice ([seuil bas en €, taux marginal]). Désactivé : taux unique entreprises.taux_is_etat. Variantes chiffrées dans outils/is_progressif.py et docs/is_progressif.md."
   is_actuel: {valeur: {taux_reduit: 0.15, seuil_reduit: 42500, taux_normal: 0.25}, unite: sans_unite, statut: SOURCE, source: "CGI, art. 219"}
   ratio_tva_non_deductible: {valeur: 1.0, unite: taux, statut: DECISION, note: "v231 : TVA légale aux taux actuels."}
   impots_production_2023: {valeur: 92.7, unite: md_eur, annee_euros: 2023, note: "Traité comme euros de 2024 par la v235 (ligne 2 de Total × facteur 2024)", statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025)"}

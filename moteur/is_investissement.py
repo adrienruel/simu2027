@@ -70,7 +70,8 @@ def cout_net_etat(p: Parametres, etale: bool = False) -> dict[int, float]:
     depuis le 30/10/2026, IS local (même assiette)."""
     montee = p.val("is_investissement.montee_etalee_annees") if etale else p.val("is_investissement.montee_annees")
     ded = _deduction_en_plus(p, montee)
-    t_is = p.val("entreprises.taux_is_etat")
+    from .is_bareme import taux_investissement
+    t_is = taux_investissement(p)  # taux unique, ou marginal pondéré par l'investissement (IS progressif)
     if p.val("is_investissement.assiette_locale"):
         # l'IS local (communes, régions) a la même assiette que l'IS de l'État (moteur/collectivites.py) : la
         # déduction de l'investissement et la fin de la déduction des intérêts jouent aussi sur lui (30/10/2026)
@@ -82,7 +83,8 @@ def cout_net_etat(p: Parametres, etale: bool = False) -> dict[int, float]:
 def baisse_cout_capital(p: Parametres) -> float:
     """Baisse du coût du capital pour les entreprises qui paient l'IS (part du coût actuel, ligne 21)."""
     z = p.val("is_investissement.valeur_actuelle_amortissements")
-    te = p.val("entreprises.taux_is_etat")
+    from .is_bareme import taux_investissement
+    te = taux_investissement(p)
     tl = p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
     ta = p.val("is_investissement.taux_is_actuel")
     return ((1 - te * z - tl * z) / (1 - te - tl) - 1) / ((1 - ta * z) / (1 - ta))
