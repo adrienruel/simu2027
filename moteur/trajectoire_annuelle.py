@@ -127,7 +127,7 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         pensions_min = (p.val("revalorisation.part_pensions_sous_seuil") * ancien_86 * ((1 + g) ** (t - 2028) - 1)
                         if p.val("revalorisation.pensions_sous_minimum_vieillesse") else 0.0)
         # Recettes (montants positifs)
-        L.ajouter(t, "recettes", "recettes_nouveau_systeme", "Recettes du nouveau système (budget statique)", "socle", rec)
+        L.ajouter(t, "recettes", "recettes_nouveau_systeme", "Recettes du nouveau système : point de départ (2029)", "socle", rec)
         L.ajouter(t, "recettes", "recettes_croissance", "Recettes : croissance tendancielle", "croissance", rec * (crois - 1))
         d = demo[t]
         L.ajouter(t, "recettes", "recettes_demographie", "Recettes : démographie (actifs, retraités, population)", "demographie",
@@ -144,14 +144,14 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         # Dépenses (montants positifs = dépense)
         L.ajouter(t, "sante", "sante_trajectoire", "Santé : trajectoire des dépenses", "trajectoire", sante[t])
         L.ajouter(t, "sante", "sante_garde_fou", "Santé : garde-fou", "mesure", -gf[t])
-        L.ajouter(t, "retraites", "retraites_socle", "Retraites : socle (budget statique)", "socle", l["retraites_socle"])
+        L.ajouter(t, "retraites", "retraites_socle", "Retraites : socle, point de départ (2029)", "socle", l["retraites_socle"])
         L.ajouter(t, "retraites", "transition_retraites", "Transition des retraites : coût net", "trajectoire", ct[t]["net"])
         L.ajouter(t, "retraites", "contribution_anciens_retraites", "Contribution de solidarité des retraités de l'ancien système (5 à 10 %)",
                   "mesure", -contrib_anciens[t] * (1 - p.val("ancien_systeme.contribution_solidarite")["fuite"]))
         L.ajouter(t, "retraites", "pensions_sous_minimum", "Pensions sous le minimum vieillesse : revalorisation", "mesure", pensions_min)
         L.ajouter(t, "retraites", "socle_revalorisation", "Socle : revalorisation (règle d'indexation)", "croissance", socle[t] * reval_rui)
         L.ajouter(t, "retraites", "fin_gel", "Fin du gel des anciennes pensions", "mesure", gel[t])
-        L.ajouter(t, "rui_aah", "rui_aah_socle", "RUI et AAH (budget statique)", "socle", l["rui_aah"])
+        L.ajouter(t, "rui_aah", "rui_aah_socle", "RUI et AAH : point de départ (2029)", "socle", l["rui_aah"])
         L.ajouter(t, "rui_aah", "rui_aah_revalorisation", "RUI et AAH : revalorisation (règle d'indexation)", "croissance", l["rui_aah"] * reval_rui)
         L.ajouter(t, "rui_aah", "rui_aah_demographie", "RUI : démographie (adultes, enfants)", "demographie",
                   ((l["rui_aah"] - rui_enf - rui_sal) * (d["adultes"] - 1) + rui_sal * (d["c_rui"] - 1)
@@ -161,7 +161,7 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "rui_aah", "rui_etudiants", "RUI étudiant sous condition de ressources", "mesure", etu[t])
         L.ajouter(t, "investissement", "subventions_restees", "Subventions d'investissement restées à l'État", "socle", l["subventions_restees"] - soutien_2026)
         L.ajouter(t, "investissement", "renouvelables", "Soutien aux renouvelables (contrats en cours)", "trajectoire", soutien_2029 * max(0, (fin - t) / (fin - 2029)))
-        L.ajouter(t, "autres", "autres_socle", "Autres dépenses (budget statique)", "socle", autres_base)
+        L.ajouter(t, "autres", "autres_socle", "Autres dépenses : point de départ (2029)", "socle", autres_base)
         L.ajouter(t, "autres", "autres_croissance", "Autres dépenses : croissance tendancielle", "croissance", autres_base * (crois - 1))
         L.ajouter(t, "autres", "autres_demographie", "Autres dépenses : démographie (population)", "demographie",
                   autres_base * crois * (d["total"] - 1))
