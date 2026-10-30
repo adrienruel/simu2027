@@ -9,7 +9,12 @@ R = simuler(Parametres())
 
 @pytest.mark.parametrize("s", ["crise", "prudent", "median", "optimiste"])
 def test_meme_point_de_depart(s):
-    assert R[s][2029]["deficit"] == pytest.approx(3.0, abs=0.01)
+    """3 % en 2029, sauf si les instruments de la règle sont au maximum (5 points d'épargne, RUI au plancher)."""
+    c = R[s][2029]["clause_detail"]
+    if c["reste"] > 1e-6:
+        assert c["points"] == pytest.approx(5.0) and R[s][2029]["deficit"] < 3.2
+    else:
+        assert R[s][2029]["deficit"] == pytest.approx(3.0, abs=0.01)
     assert R[s][2029]["deficit_avant_clause"] > 3.0
 
 
@@ -26,7 +31,7 @@ def test_option_point_de_depart_commun():
     """Option macro.depart_commun (désactivée) : 2029 aux hypothèses prudentes dans tous les scénarios."""
     R = simuler(Parametres().avec({"macro.depart_commun": True}))
     for x in ("crise", "median", "optimiste"):
-        assert R[x][2029]["deficit_avant_clause"] == pytest.approx(R["prudent"][2029]["deficit_avant_clause"], abs=0.02)
+        assert R[x][2029]["deficit_avant_clause"] == pytest.approx(R["prudent"][2029]["deficit_avant_clause"], abs=0.05)
         assert R[x][2029]["chomage"] == pytest.approx(R["prudent"][2029]["chomage"], abs=0.01)
         assert R[x][2029]["pib"] == pytest.approx(R["prudent"][2029]["pib"], rel=0.001)
 

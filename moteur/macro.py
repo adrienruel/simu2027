@@ -225,6 +225,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     # Permis rapide (correction du 30/10/2026) : capital privé à part, qui s'use comme celui des entreprises, et
     # coût des services instructeurs ; v235 : ajouté au capital du fonds, sans usure ni coût
     permis_separe = p.val("macro.permis_rapide_separe")
+    from .entreprises_cellules import actif as _ent_actif, flux_investissement as flux_inv_tailles
+    ent_cellules = _ent_actif(p)
     out = {}
     scenarios_clause = p.val("clause.scenarios")
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent peut se caler sur le médian
@@ -369,8 +371,12 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             s_react = -ri["montant"] * min(1, (n + 1) / ri["montee"]) * (1 + tend0) ** n
             pib_hr = -PV["baisse_revenus_declares"] * m("part_reelle_hauts_revenus", s) * min(1, (n + 1) / PV["reactions_impot"]["montee"]) * (1 + tend0) ** n
             # Investissement des entreprises
-            k_inv = k_inv * (1 - m("usure_capital", s)) - m("elasticite_invest", s) * (
-                cout_capital - isv["b4"] * b20_t * isv["b21"] * l25[t]) * isv["investissement"] * _montee(t, m("montee_invest", s))
+            if ent_cellules:  # par taille (moteur/entreprises_cellules.py) : coût du capital et réaction propres
+                k_inv = k_inv * (1 - m("usure_capital", s)) + flux_inv_tailles(
+                    p, s, m, isv["b4"] * b20_t * isv["b21"] * l25[t]) * _montee(t, m("montee_invest", s))
+            else:
+                k_inv = k_inv * (1 - m("usure_capital", s)) - m("elasticite_invest", s) * (
+                    cout_capital - isv["b4"] * b20_t * isv["b21"] * l25[t]) * isv["investissement"] * _montee(t, m("montee_invest", s))
             pib_inv = k_inv * (m("pib_par_euro_capital", s) + m("usure_capital", s))
             inv_taxe = (k_inv * m("pib_par_euro_capital", s) if corr else pib_inv) * part_budget
             # Démographie : écart au prudent (fécondité et effet sur la natalité du scénario)

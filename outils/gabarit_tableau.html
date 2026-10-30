@@ -290,6 +290,12 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     <div class="carte defile"><table id="t-enfant-tab"></table></div>
   </section>
 
+  <section class="bloc" aria-labelledby="t-entreprises" id="bloc-entreprises" hidden>
+    <h2 id="t-entreprises">Les entreprises par taille</h2>
+    <p class="note">Impôts payés par les entreprises de chaque taille, système actuel (IS de 2024, DGFiP ; impôts de production répartis selon la valeur ajoutée et leur poids dans chaque taille, DGFiP et Insee) contre nouveau système (IS à 45 % sur le bénéfice et sur les impôts de production supprimés), en Md€ de 2026, avant la déduction immédiate de l'investissement et avant les réactions. Une part des impôts de production supprimés (<span id="ent-def"></span>) allait à des entreprises déficitaires : elle réduit leurs pertes et n'est imposée que plus tard. Le programme déplace l'impôt des grandes entreprises vers les petites : les TPE passent du taux réduit de 15 % à 45 % et payaient peu d'impôts de production. L'investissement de chaque taille réagit à son propre coût du capital, les petites entreprises davantage (Zwick et Mahon, 2017).</p>
+    <div class="carte defile"><table id="t-ent-tab"></table></div>
+  </section>
+
   <section class="bloc" aria-labelledby="t-param">
     <h2 id="t-param">D'où viennent les chiffres</h2>
     <div class="carte bloc">
@@ -626,6 +632,13 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       document.getElementById("t-carrieres-tab").innerHTML = `<thead><tr><th></th>${P.jalons.map(t => `<th>${t}</th>`).join("")}</tr></thead><tbody>` +
         Object.keys(NJ).map(j => ligneR(`Emplois en plus, ${NJ[j]} (milliers)`, C[j].emplois_milliers, 0)).join("") +
         Object.keys(NJ).map(j => ligneR(`Gain de salaire moyen des salariés, ${NJ[j]} (%)`, C[j].prime_salaire_pct, 2)).join("") + "</tbody>";
+    }
+    if (D.entreprises_tailles) {
+      const E = D.entreprises_tailles;
+      document.getElementById("bloc-entreprises").hidden = false;
+      document.getElementById("ent-def").textContent = fr(100 * (1 - E.facteur_production), 0) + " % de la base, après les déficits reportés imputés plus tard";
+      document.getElementById("t-ent-tab").innerHTML = `<thead><tr><th>Taille</th><th>Entreprises à l'IS</th><th>IS actuel</th><th>Impôts de production</th><th>Total actuel</th><th>IS nouveau</th><th>Écart</th></tr></thead><tbody>` +
+        E.tailles.map(x => `<tr><td>${x.libelle}</td><td class="n">${fr(x.entreprises, 0)}</td><td class="n">${fr(x.is_actuel, 1)}</td><td class="n">${fr(x.production_actuelle, 1)}</td><td class="n">${fr(x.actuel, 1)}</td><td class="n">${fr(x.is_nouveau, 1)}</td><td class="n${x.ecart > 0 ? " neg" : ""}">${x.ecart > 0 ? "+" : ""}${fr(x.ecart, 1)} (${x.ecart > 0 ? "+" : ""}${fr(100 * x.ecart_pct, 0)} %)</td></tr>`).join("") + "</tbody>";
     }
     const MEN = { deux_smic: "Couple, deux SMIC", smic_median: "Couple, SMIC et médian", deux_medians: "Couple, deux médians", cadre_median: "Couple, cadre et médian", median_inactif: "Couple, médian et conjoint sans emploi", parent_isole_smic: "Parent isolé au SMIC" };
     const V = P.valeur_enfant, ids = [...new Set(V.map(x => x.menage))];

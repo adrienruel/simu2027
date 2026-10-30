@@ -56,12 +56,16 @@ def classes_entreprises(p: Parametres, scenario: str = "prudent") -> list[dict]:
     capte = benefice_capte(p, scenario)
     r_tva = p.val("entreprises.ratio_tva_non_deductible")
     taux = p.val("entreprises.taux_is_etat", scenario)
+    from ..entreprises_cellules import facteur_production
+    fp = facteur_production(p, scenario)
     out = []
     for e in ent:
         prod = e["impots_production_origine"] * recalage
         capte_e = capte * e["benefice_median"] / assiette
         tva_nouvelle = e["tva_non_deductible"] * r_tva
-        base = e["benefice_median"] + prod + capte_e + e["tva_non_deductible"] - tva_nouvelle
+        # impôts de production supprimés : la part payée par les entreprises déficitaires n'entre pas dans le bénéfice
+        # imposable de l'année (moteur/entreprises_cellules.py ; v235 : tout entre)
+        base = e["benefice_median"] + prod * fp + capte_e + e["tva_non_deductible"] - tva_nouvelle
         out.append({**e, "impots_production": prod, "capte": capte_e, "tva_nouvelle": tva_nouvelle,
                     "base_is": base, "is": taux * base})
     return out

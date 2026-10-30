@@ -180,6 +180,11 @@ def donnees(p: Parametres | None = None) -> dict:
                                            for k in ("emplois_milliers", "prime_salaire_pct")}
                                        for j in ("crise", "prudent", "median", "optimiste")}
         population["valeur_enfant"] = [{**x, "nouveau": round(x["nouveau"], 2)} for x in demo_m.valeur_enfant(p)]
+    entreprises_tailles = None
+    from .entreprises_cellules import actif as _ent_actif, bilan as _ent_bilan, facteur_production as _fp
+    if _ent_actif(p):
+        entreprises_tailles = {"facteur_production": round(_fp(p), 3),
+                               "tailles": [{k: (round(v, 2) if isinstance(v, float) else v) for k, v in x.items()} for x in _ent_bilan(p)]}
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))
@@ -198,6 +203,7 @@ def donnees(p: Parametres | None = None) -> dict:
         "emploi_mesures": emploi_mesures,
         "retraites_futurs": retraites_futurs,
         "population": population,
+        "entreprises_tailles": entreprises_tailles,
         "parametres": {"total": sum(statuts.values()), "statuts": dict(statuts), "sensibilite": sensibilite, "corriges": corriges,
                        "hypotheses_par_groupe": groupes.most_common()},
     }

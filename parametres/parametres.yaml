@@ -1350,3 +1350,25 @@ carrieres:
     statut: HYPOTHESE
     source: "Aucune estimation causale de l'effet de la sélection sur la réussite : après la loi ORE, le passage en L2 passe de 45,5 % (2018) à 53,5 % (2019), mais le profil des étudiants n'en explique que 0,3 à 2,2 points et le reste tient surtout aux conditions d'examen de la crise sanitaire (SIES, Note d'information 2023-01)"
     note: "Points d'une génération qui obtiennent une licence au lieu de sortir sans diplôme. Prudent et crise : 0 (pas de source causale) ; médian : 1 point ; optimiste : 3 points."
+
+
+# --- Entreprises par taille (moteur/entreprises_cellules.py, 30/10/2026) ---------------------------------
+entreprises_cellules:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : comportement des entreprises par taille, comme les cellules de ménages. Données : parametres/donnees/entreprises_tailles.csv (DGFiP, IS 2024 par taille ; Insee, Ésane 2021 ; DGFiP n° 35, impôts de production 2023)."}
+  part_production_deficitaires:
+    valeur: {crise: 0.25, prudent: 0.20, median: 0.15, optimiste: 0.10}
+    unite: taux
+    statut: HYPOTHESE
+    note: "Part des impôts de production payée par les entreprises déficitaires. Leur suppression réduit leurs pertes mais n'entre pas dans le bénéfice imposable de l'année (v235 : tout était ajouté au bénéfice des entreprises bénéficiaires). Sans source directe : 36 % des entreprises à l'IS sont déficitaires (972 000 sur 2,72 millions, DGFiP 2024) mais ce sont surtout de petites entreprises ; prudent 20 %, crise 25 %, médian 15 %, optimiste 10 %."
+  recuperation_reports:
+    valeur: 0.31
+    unite: taux
+    statut: SOURCE
+    source: "DGFiP, L'impôt sur le bénéfice 2024 des entreprises (Statistiques n° 39, 2025) : 35 Md€ de déficits imputés pour 112 Md€ de déficits de l'année (31 %)"
+    note: "Part de la baisse des pertes des entreprises déficitaires qui finit imposée plus tard (moins de déficits reportés à imputer)."
+  production_va_micro:
+    valeur: 0.010
+    unite: taux
+    statut: HYPOTHESE
+    note: "Impôts de production d'origine fiscale rapportés à la valeur ajoutée des microentreprises : « très faible » selon la DGFiP (Statistiques n° 35, 2025, qui donne 1,9 % pour les PME, 2,9 % pour les ETI, 3,4 % pour les GE) ; 1 % retenu."
+  elasticite_relative_source: {valeur: 1.95, unite: sans_unite, statut: SOURCE, source: "Zwick et Mahon (2017), American Economic Review, « Tax Policy and Heterogeneous Investment Behavior » : l'investissement des petites entreprises réagit 95 % plus que celui des grandes à l'amortissement accéléré", note: "Réaction relative des TPE (GE = 1) ; PME 1,5 et ETI 1,2 interpolées (hypothèse). L'élasticité moyenne pondérée par l'investissement reste macro.elasticite_invest : seule la répartition change."}

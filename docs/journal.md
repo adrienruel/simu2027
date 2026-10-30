@@ -396,3 +396,9 @@ Paramètre `chomage.dynamique` (v235 : non). Chaque année :
 Lecture : après 2040, le chômage remonte d'environ 0,3 point, parce que le report du socle à 67 ans met des seniors
 au chômage (la source de 2010 en compte 7 pour 17 emplois gardés) ; la baisse due aux réformes tient, un peu
 réduite par la démographie. Effet sur les comptes : négligeable (déficit sans règle 2073 prudent −1,77 → −1,76 %).
+
+## 30 octobre 2026 — Entreprises par taille (première étape)
+
+`moteur/entreprises_cellules.py` (détail dans docs/entreprises.md) : impôts de production des entreprises
+déficitaires retirés de la base de l'IS nouveau (−4,2 Md€), bilan des impôts par taille (TPE +14 Md€, GE −6 Md€),
+investissement par taille. Prudent 2073 sans règle −0,84 → −0,16 % ; dette 95 → 104 %.
