@@ -108,7 +108,9 @@ class Parametres:
     def val(self, cle: str, scenario: str = "prudent") -> Any:
         if cle in self._surcharges:
             return self._surcharges[cle]
-        if scenario == "prudent":
+        if scenario == "depart":  # colonne prudente, même dans le calcul de crise (point de départ commun)
+            scenario = "prudent"
+        elif scenario == "prudent":
             scenario = self.colonne_prudent
         return self._p[cle].pour(scenario)
 

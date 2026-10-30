@@ -80,7 +80,17 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     _pi = participation_inactifs(p)
     inactifs_terme = {"prudent": _pi["crise"] if p.colonne_prudent == "crise" else _pi["prudent"],
                       "median": _pi["median"], "optimiste": _pi["optimiste"]}
-    m = lambda cle, s: p.val(f"macro.{cle}", s)
+    # Point de départ commun (DÉCISION d'Adrien du 30/10/2026) : en 2029, toutes les hypothèses prennent leur valeur
+    # prudente dans tous les scénarios (crise comprise) ; chaque scénario rejoint ensuite ses propres valeurs en
+    # macro.convergence_scenarios_annees ans (valeur = prudent + poids × (scénario − prudent)), pour éviter un saut
+    etat = {"s": None, "w": 1.0}
+
+    def m(cle, s):
+        v = p.val(f"macro.{cle}", s)
+        if etat["w"] < 1.0 and s == etat["s"] and isinstance(v, (int, float)) and not isinstance(v, bool):
+            v_ref = p.val(f"macro.{cle}", "depart")
+            return v_ref + etat["w"] * (v - v_ref)
+        return v
     tend0 = m("tendance", "prudent")
     pib_2026 = 2920 * facteur(p, 2024, "recettes")  # Total!F18, Md€
     from .demographie import indices as indices_demo
@@ -169,6 +179,42 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         n_ = t - 2029
         prod_ = (1 + m("productivite", "prudent")) ** max(0, min(m("annees_productivite", "prudent"), t - p.val("macro.premiere_annee_productivite") + 1))
         return ((1 + tend0) / (1 + infl)) ** n_ * prod_ - 1
+    commun = p.val("macro.depart_commun")
+    n_conv = p.val("macro.convergence_scenarios_annees")
+
+    def poids(t):
+        return min(1.0, max(0.0, (t - 2029) / n_conv)) if commun else 1.0
+
+    def melange(a, b, w):
+        """b + w × (a − b), nombre par nombre (dictionnaires imbriqués) ; a si ce n'est pas un nombre."""
+        if isinstance(a, dict):
+            return {k: (melange(v, b[k], w) if isinstance(b, dict) and k in b else v) for k, v in a.items()}
+        if isinstance(a, (int, float)) and not isinstance(a, bool) and isinstance(b, (int, float)) and not isinstance(b, bool):
+            return b + w * (a - b)
+        return a
+
+    # valeurs prudentes de référence ; dans le calcul de crise, recalculées avec la colonne prudente
+    if commun and p.colonne_prudent == "crise":
+        import copy as _copy
+        q = _copy.copy(p)
+        q.__dict__.pop("_cache", None)
+        q.__dict__.pop("_taux_local_force", None)
+        q.colonne_prudent = "prudent"
+        q._surcharges = {}
+        pv_q = entrees_macro(q)
+        pv_q["reactions_impot"] = reactions(q)
+        pv_q["baisse_revenus_declares"] = baisse_revenus_declares(q)
+        ref = {"pv": {k: v["prudent"] for k, v in pv_q.items() if isinstance(v, dict) and "prudent" in v},
+               "inactifs": participation_inactifs(q)["prudent"], "b20": module_isi.entrees_macro(q)["b20"]["prudent"],
+               "tva_sante": module_sante.tva_sante(q)["prudent"], "carbone": effet_solde(q, ligne_3_tva(q) / 1e9)["prudent"],
+               "eff": q.val("macro.effort_2029") + recette_nette(q)[2029] / pib0[2029] - q.val("macro.assouplissement_2029"),
+               "p_ecart": q}
+    else:
+        ref = {"pv": {k: v["prudent"] for k, v in pv.items() if isinstance(v, dict) and "prudent" in v},
+               "inactifs": inactifs_terme["prudent"], "b20": isv["b20"]["prudent"], "tva_sante": tv["prudent"],
+               "carbone": carbone["prudent"],
+               "eff": p.val("macro.effort_2029", "prudent") + traj_anc_2029 / pib0[2029] - p.val("macro.assouplissement_2029"),
+               "p_ecart": p}
     out = {}
     scenarios_clause = p.val("clause.scenarios")
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent peut se caler sur le médian
@@ -194,6 +240,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
 
         def erosion_taux_annee(t):
             ecart_eff = ecart_localisation(p, jeu_eff, t)
+            if ecart_eff is not None and poids(t) < 1.0:
+                e_ref = ecart_localisation(ref["p_ecart"], "prudent", t)
+                ecart_eff = e_ref + poids(t) * (ecart_eff - e_ref)
             if ecart_eff is None:
                 return (s17 - m("taux_reference_is", s)) * (m("semi_elasticite_transfert", s) * m("part_grandes_entreprises", s) + m("reaction_reelle", s))
             # transfert de bénéfices : taux légal ; réaction réelle : taux effectif moyen (déduction en vigueur comprise)
@@ -212,8 +261,22 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         prime_app = 0.0  # prime de taux liée à la dette, sur le taux apparent
         ratio_ref = None
         r_ecole = r_ia = r_adopt = 0.0
+        eff_s = eff
         for t in ANNEES:
             n = t - 2029
+            w_t = poids(t)
+            etat["s"], etat["w"] = s, w_t
+            PV = {k: melange(v[s], ref["pv"][k], w_t) for k, v in pv.items() if isinstance(v, dict) and s in v and k in ref["pv"]}
+            eff = melange(eff_s, ref["eff"], w_t)
+            inact_t = melange(inactifs_terme[s], ref["inactifs"], w_t)
+            b20_t = melange(isv["b20"][s], ref["b20"], w_t)
+            if s == "prudent":
+                sante_t, tva_s_t, carb_t = 0.0, sante["tva_prudent"][t], carbone["prudent"][t]
+            else:
+                sante_t, tva_s_t, carb_t = sante[s][t], sante[f"tva_{s}"][t], carbone[s][t]
+            sante_t = w_t * sante_t
+            tva_s_t = melange(tva_s_t, ref["tva_sante"][t], w_t)
+            carb_t = melange(carb_t, ref["carbone"][t], w_t)
             c_contrib = 0.0
             # Prime de taux liée à la dette : taux de marché selon l'écart de dette/PIB à 2029, transmise au taux
             # apparent au rythme du renouvellement de la dette
@@ -223,27 +286,27 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             prime_app += (prime_marche - prime_app) / p.val("macro.maturite_moyenne_dette")
             # Emploi
             k_ch = max(0.0, ct[t]["taux"] - u_inc) / ecart_26 if dyn_ch else 1.0
-            emp_ref = (pv["emplois_terme"][s] * k_ch * _montee(t, m("annees_montee_emploi", s)) - pv["emplois_perdus_subventions"][s]
-                       - pv["emplois_perdus_tardifs"][s] * (t > pv["emplois_perdus_tardifs"]["annee"]))
+            emp_ref = (PV["emplois_terme"] * k_ch * _montee(t, m("annees_montee_emploi", s)) - PV["emplois_perdus_subventions"]
+                       - PV["emplois_perdus_tardifs"] * (t > pv["emplois_perdus_tardifs"]["annee"]))
             emp_sen = (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
                        + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s)))
                        + m("cumul_emploi_socle", s) * max(0, min(1, (t - m("annee_cumul", s) + 1) / m("montee_cumul", s))))
             fa = demo[s][t]["adultes"] if corr else 1.0  # emplois proportionnels à la population de 18 à 64 ans
             emp_ref, emp_sen = emp_ref * fa, emp_sen * fa
-            inactifs = inactifs_terme[s] * _montee(t, m("annees_montee_emploi", s)) * demo[s][t]["adultes"]
+            inactifs = inact_t * _montee(t, m("annees_montee_emploi", s)) * demo[s][t]["adultes"]
             emp_sen += inactifs
             if "solde_reformes_terme" in pv:  # bloc emploi unifié : chaque emploi au gain de son canal
-                gc = pv["gains_canaux"][s]
+                gc = PV["gains_canaux"]
                 seniors = fa * (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
                                 + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s))))
                 cumul = emp_sen - seniors - inactifs
-                perdus = fa * (pv["emplois_perdus_subventions"][s]
-                               + pv["emplois_perdus_tardifs"][s] * (t > pv["emplois_perdus_tardifs"]["annee"]))
-                s_emploi = (fa * pv["solde_reformes_terme"][s] * k_ch * _montee(t, m("annees_montee_emploi", s))
+                perdus = fa * (PV["emplois_perdus_subventions"]
+                               + PV["emplois_perdus_tardifs"] * (t > pv["emplois_perdus_tardifs"]["annee"]))
+                s_emploi = (fa * PV["solde_reformes_terme"] * k_ch * _montee(t, m("annees_montee_emploi", s))
                             - perdus * gc["perdus"] + seniors * gc["population_active"] + cumul * gc["perdus"]
                             + inactifs * gc["inactifs"]) / 1e9
             else:
-                s_emploi = (emp_ref + emp_sen) * pv["gain_par_emploi"][s] / 1e9
+                s_emploi = (emp_ref + emp_sen) * PV["gain_par_emploi"] / 1e9
             # Ajustement budgétaire
             pib_aj = -eff * m("multiplicateur", s) * max(0, 1 - n / m("annees_effet_ajustement", s)) * pib0[t]
             if corr and clause_s:
@@ -272,7 +335,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             s_aides = -m("extinction_aides_construction", s) * m("aides_construction", s) * max(0, 1 - (n + 1) / 3)
             # Productivité, tendance, école, IA
             pib_prod = pib0[t] * ((1 + m("productivite", s)) ** max(0, min(m("annees_productivite", s), t - p.val("macro.premiere_annee_productivite") + 1)) - 1)
-            pib_tend = pib0[t] * (((1 + m("tendance", s)) / (1 + tend0)) ** (t - 2028) - 1) if s != "prudent" else 0.0
+            pib_tend = pib0[t] * (((1 + m("tendance", s)) / (1 + tend0)) ** (t - (2029 if commun else 2028)) - 1) if s != "prudent" else 0.0
             base = pib0[t] + pib_tend
             g_ecole = m("niveau_eleves", s) * m("croissance_par_ecart_type", s) * min(1, max(0, (t - p.val("macro.premiere_annee_ecole") + 1) / p.val("macro.annees_ecole")))
             r_ecole = (1 + r_ecole) * (1 + g_ecole) - 1
@@ -283,12 +346,12 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             r_adopt = (1 + r_adopt) * (1 + g_ia * m("adoption_ia", s)) - 1
             pib_adopt = (base + pib_ia) * r_adopt
             # Réactions à l'impôt et hauts revenus
-            ri = pv["reactions_impot"][s]
+            ri = PV["reactions_impot"]
             s_react = -ri["montant"] * min(1, (n + 1) / ri["montee"]) * (1 + tend0) ** n
-            pib_hr = -pv["baisse_revenus_declares"][s] * m("part_reelle_hauts_revenus", s) * min(1, (n + 1) / pv["reactions_impot"][s]["montee"]) * (1 + tend0) ** n
+            pib_hr = -PV["baisse_revenus_declares"] * m("part_reelle_hauts_revenus", s) * min(1, (n + 1) / PV["reactions_impot"]["montee"]) * (1 + tend0) ** n
             # Investissement des entreprises
             k_inv = k_inv * (1 - m("usure_capital", s)) - m("elasticite_invest", s) * (
-                cout_capital - isv["b4"] * isv["b20"][s] * isv["b21"] * l25[t]) * isv["investissement"] * _montee(t, m("montee_invest", s))
+                cout_capital - isv["b4"] * b20_t * isv["b21"] * l25[t]) * isv["investissement"] * _montee(t, m("montee_invest", s))
             pib_inv = k_inv * (m("pib_par_euro_capital", s) + m("usure_capital", s))
             inv_taxe = (k_inv * m("pib_par_euro_capital", s) if corr else pib_inv) * part_budget
             # Démographie : écart au prudent (fécondité et effet sur la natalité du scénario)
@@ -302,10 +365,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             solde = (s_demo + s_emploi + s_aj + s_cap + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
                      + (pib_ia + pib_adopt) * q)
             if s == "prudent":
-                solde += (sante["tva_prudent"][t] + inv_taxe + carbone["prudent"][t]
+                solde += (tva_s_t + inv_taxe + carb_t
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
             else:
-                solde += (sante[s][t] + sante[f"tva_{s}"][t] + (pib_tend + pib_ecole) * q + inv_taxe + carbone[s][t]
+                solde += (sante_t + tva_s_t + (pib_tend + pib_ecole) * q + inv_taxe + carb_t
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
             mesures = 0.0
             if clause_s:
@@ -374,11 +437,11 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             solde_total = solde + mesures
             # Décomposition par canal (Md€, effet sur le solde), pour la restitution
             if s == "prudent":
-                c_sante, c_tva_sante, c_tend = 0.0, sante["tva_prudent"][t], 0.0
-                c_carbone = carbone["prudent"][t]
+                c_sante, c_tva_sante, c_tend = 0.0, tva_s_t, 0.0
+                c_carbone = carb_t
             else:
-                c_sante, c_tva_sante, c_tend = sante[s][t], sante[f"tva_{s}"][t], (pib_tend + pib_ecole) * q
-                c_carbone = carbone[s][t]
+                c_sante, c_tva_sante, c_tend = sante_t, tva_s_t, (pib_tend + pib_ecole) * q
+                c_carbone = carb_t
             sc.detail.setdefault("canaux", {})[t] = {
                 "emploi": s_emploi, "ajustement_budgetaire": s_aj, "capital_du_fonds": s_cap, "logement": s_log,
                 "erosion_is": s_erosion, "fraude_tva": s_fraude, "fin_aides_construction": s_aides,
@@ -404,8 +467,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 # + chômeurs seniors du report de l'âge de départ ; actifs : tendanciels + emplois venus de
                 # l'inactivité (seniors, cumul, inactifs, jeunes entrés plus tôt) + chômeurs seniors
                 emp_t = ct[t]["emploi"] * k_pa
-                sen_source = fa * (m("seniors_court", "median") * _montee(t, m("montee_seniors_court", s))
-                                   + m("seniors_long", "median") * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s))))
+                sen_source = fa * (p.val("macro.seniors_court", "median") * _montee(t, m("montee_seniors_court", s))
+                                   + p.val("macro.seniors_long", "median") * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s))))
                 ch_sen = p.val("chomage.seniors_chomeurs_par_emploi") * sen_source
                 from .carrieres import emplois_entree_plus_tot
                 jeunes = sum(emplois_entree_plus_tot(p, s, t).values())
@@ -437,5 +500,6 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             if maastricht >= etr["solde_minimum"]:
                 part_etr = max(part_etr, min(etr["plafond"], etr["depart"] + (etr["plafond"] - etr["depart"]) * max(0, (etr["dette_debut"] - dette / pib_total) / (etr["dette_debut"] - etr["dette_plafond"]))))
             dette_prec = dette
+        etat["s"], etat["w"] = None, 1.0
         out[s] = sc
     return {k: out[k] for k in SCENARIOS}

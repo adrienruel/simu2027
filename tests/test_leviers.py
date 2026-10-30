@@ -23,7 +23,7 @@ def test_prime_de_taux_alourdit_quand_la_dette_monte():
     from moteur.macro import calculer
     avec = calculer(P.en_crise())["prudent"]
     sans = calculer(P.en_crise().avec({"macro.prime_dette": 0.0}))["prudent"]
-    assert avec.charge_dette[2050] > sans.charge_dette[2050]
+    assert avec.charge_dette[2035] > sans.charge_dette[2035]  # dette au-dessus de son niveau de départ
 
 
 def test_participation_des_inactifs():
