@@ -61,3 +61,13 @@ def test_deduction_sur_l_is_local_aussi():
     from moteur.is_investissement import cout_net_etat
     sans = Parametres().avec({"is_investissement.assiette_locale": False})
     assert cout_net_etat(P)[2037] == pytest.approx(cout_net_etat(sans)[2037] * 0.45 / 0.40, rel=1e-6)
+
+
+def test_avantage_du_fonds():
+    from moteur.entreprises_cellules import bilan_annees
+    b = bilan_annees(P, (2037, 2073))
+    for t in (2037, 2073):
+        for x in b[t]:
+            assert x["avantage_fonds"] >= 0
+            assert x["ecart_avec_fonds"] == pytest.approx(x["ecart"] - x["avantage_fonds"])
+    assert sum(x["capital_fonds"] for x in b[2073]) > sum(x["capital_fonds"] for x in b[2037])

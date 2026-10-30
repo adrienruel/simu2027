@@ -1389,3 +1389,14 @@ entreprises_cellules:
     unite: taux
     statut: HYPOTHESE
     note: "Part des dirigeants qui font l'arbitrage (conseillés par leur expert-comptable). Sans source : prudent 75 %."
+  repartition_fonds:
+    valeur: investissement
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Répartition du capital nouveau du fonds entre les tailles d'entreprises (demande d'Adrien du 30/10/2026 : les investissements du fonds sont une aide à l'appareil productif). « investissement » : au prorata de l'investissement de chaque taille (TPE 20 %, PME 17 %, ETI 24 %, GE 39 %), à défaut de doctrine d'investissement du fonds ; sinon un dictionnaire {TPE, PME, ETI, GE}. À DÉCIDER par Adrien."
+  cout_financement_marche:
+    valeur: {fonds_propres: 0.086, dette: 0.02, part_fonds_propres: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Fonds propres : Banque de France, Bloc-notes Éco, billet n° 32, Coût des fonds propres et rentabilité des entreprises en France (2017, mis à jour en 2024) : 8,6 % réel pour les grandes entreprises cotées (moyenne longue 9,3 %)"
+    note: "Coût réel du financement que le fonds remplace : moitié fonds propres (8,6 %), moitié dette (2 % réel : taux des crédits nouveaux aux entreprises autour de 3,5 %, moins l'inflation ; hypothèse), soit 5,3 %. Avantage = capital du fonds × (5,3 % − rendement du capital du fonds, 3,2 % dans le prudent). Ce n'est pas une dépense publique : ce sont les épargnants qui acceptent un rendement plus bas que le marché."

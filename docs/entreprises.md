@@ -54,6 +54,21 @@ fiscale dans la valeur ajoutée (« très faible » pour les microentreprises).
    pendant la montée (2032-2037), puis surtout l'effet de la croissance. Elle profite d'abord aux grandes
    entreprises, qui investissent le plus.
 
+   **Le fonds comme aide à l'appareil productif** (demande d'Adrien) : le capital nouveau du fonds finance les
+   entreprises à 3,2 % réel (rendement de son capital dans le prudent) au lieu d'environ 5,3 % sur le marché
+   (moitié fonds propres à 8,6 % réel, Banque de France ; moitié dette à 2 %, hypothèse). L'écart joue comme une
+   aide, payée par les épargnants (rendement plus bas), pas par l'État : il ne change pas le déficit. Répartition
+   entre tailles au prorata de l'investissement, à défaut de doctrine d'investissement du fonds (À DÉCIDER).
+
+| Md€ (économie de 2029) | Capital du fonds 2037 | Avantage 2037 | Écart avec le fonds 2037 | Capital 2073 | Avantage 2073 | Écart avec le fonds 2073 |
+|---|---|---|---|---|---|---|
+| TPE | 11 | 0,2 | +10,6 (+55 %) | 175 | 3,7 | +8,5 (+44 %) |
+| PME | 10 | 0,2 | +7,3 (+22 %) | 151 | 3,2 | +5,5 (+16 %) |
+| ETI | 14 | 0,3 | −3,4 (−9 %) | 217 | 4,6 | −6,1 (−16 %) |
+| GE | 23 | 0,5 | −12,4 (−22 %) | 347 | 7,3 | −16,6 (−30 %) |
+
+   Le capital du fonds reste petit jusqu'en 2037 (62 Md€ dans le prudent) : l'aide ne compte vraiment qu'après 2050.
+
    **Correction trouvée en faisant ce tableau** (`is_investissement.assiette_locale`) : l'IS local (5 %) a la même
    assiette que l'IS de l'État, mais la déduction de l'investissement et la fin de la déduction des intérêts ne
    jouaient que sur l'IS de l'État (40 %). Elles jouent désormais sur les 45 % : coût net de la déduction +12,5 %.

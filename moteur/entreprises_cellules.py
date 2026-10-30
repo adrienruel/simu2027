@@ -182,15 +182,29 @@ def bilan_annees(p: Parametres, annees=(2032, 2037, 2050, 2073)) -> dict:
     tl = tailles(p)
     va = sum(x["valeur_ajoutee_md"] for x in tl)
     base = bilan(p)
+    # capital nouveau du fonds (prudent) : réparti entre les tailles ; avantage de financement = capital × (coût du
+    # financement de marché − rendement du capital du fonds), équivalent d'une aide à l'appareil productif
+    from .macro import calculer
+    fonds = calculer(p)["prudent"].detail.get("fonds", {})
+    rf = p.val("entreprises_cellules.repartition_fonds")
+    poids = {x["taille"]: (x["part_investissement"] if rf == "investissement" else rf[x["taille"]]) for x in tl}
+    marche = p.val("entreprises_cellules.cout_financement_marche")
+    cout_marche = marche["part_fonds_propres"] * marche["fonds_propres"] + (1 - marche["part_fonds_propres"]) * marche["dette"]
+    ecart_taux = max(0.0, cout_marche - p.val("macro.pib_par_euro_capital", "prudent"))
     out = {}
     for t in annees:
         k = (1 + g) ** (t - 2029)
         ded, it = (net[t] + interets[t]) / k, interets[t] / k
+        capital = fonds.get(t, {}).get("capital", 0.0) / k
         lignes = []
         for x, b in zip(tl, base):
             d_ = ded * x["part_investissement"]
             i_ = it * x["valeur_ajoutee_md"] / va
             e = b["ecart"] - d_ + i_
-            lignes.append({"taille": x["taille"], "deduction": d_, "interets": i_, "ecart": e, "ecart_pct": e / b["actuel"]})
+            kf = capital * poids[x["taille"]]
+            av = kf * ecart_taux
+            lignes.append({"taille": x["taille"], "deduction": d_, "interets": i_, "ecart": e, "ecart_pct": e / b["actuel"],
+                           "capital_fonds": kf, "avantage_fonds": av, "ecart_avec_fonds": e - av,
+                           "ecart_avec_fonds_pct": (e - av) / b["actuel"]})
         out[t] = lignes
     return out
