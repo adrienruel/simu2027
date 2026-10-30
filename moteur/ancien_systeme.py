@@ -61,7 +61,7 @@ def _part(r: dict[int, float], b: int, report: float, age_legal: int) -> float:
 def _brut(p: Parametres, avec_report: bool) -> dict[int, dict[str, float]]:
     from .demographie import _projection
     pop = _projection("central")
-    infl = p.val("calendrier.inflation")
+    from .inflation import facteur_prix
     nouveau = p.val("ancien_systeme.pension_nouveaux_relative")
     r = _part_age(p)
     geles = p.val("ancien_systeme.droits_geles_des_2029")
@@ -81,7 +81,7 @@ def _brut(p: Parametres, avec_report: bool) -> dict[int, dict[str, float]]:
                 depart = g + b
                 niveau = 1.0 if depart < 2029 else nouveau
                 gel = 2029 if geles else max(2029, depart)
-                dep += n * d * niveau * (1 + infl) ** -(t - gel)
+                dep += n * d * niveau / facteur_prix(p, gel, t)
                 eff += n * d
         brut[t] = {"depenses": dep, "retraites": eff}
     return brut
@@ -145,19 +145,23 @@ def contribution_solidarite(p: Parametres) -> dict[int, float]:
         return {t: 0.0 for t in ANNEES}
     deciles = p.val("anciennes_pensions.deciles_drees_2020")
     moy = sum(deciles) / len(deciles)
-    def taux(x):
-        if x <= c["seuil_bas"]:
+    def taux(x, k_=1.0):
+        sb, sh = c["seuil_bas"] * k_, c["seuil_haut"] * k_
+        if x <= sb:
             return 0.0
-        if x >= c["seuil_haut"]:
+        if x >= sh:
             return c["taux_haut"]
-        return c["taux_bas"] + (c["taux_haut"] - c["taux_bas"]) * (x - c["seuil_bas"]) / (c["seuil_haut"] - c["seuil_bas"])
+        return c["taux_bas"] + (c["taux_haut"] - c["taux_bas"]) * (x - sb) / (sh - sb)
+    from .inflation import indice_reel
+    idx = indice_reel(p)
     out = {}
     for t, x in serie(p).items():
+        k_ = idx.get(t, 1.0)  # seuils revalorisés comme le RUI (règle d'indexation)
         if t < c["debut"] or x["retraites_millions"] <= 0:
             out[t] = 0.0
             continue
         moyenne = x["depenses_md"] * 1e9 / (x["retraites_millions"] * 1e6) / 12
         pensions = [d * moyenne / moy for d in deciles]
-        effectif = sum(taux(v) * v for v in pensions) / sum(pensions)
+        effectif = sum(taux(v, k_) * v for v in pensions) / sum(pensions)
         out[t] = effectif * x["depenses_md"]
     return out

@@ -62,8 +62,9 @@ def test_baisse_du_rui_par_la_clause_respecte_le_plancher():
     plancher, infl, g = P.val("clause.plancher_rui"), P.val("calendrier.inflation"), P.val("macro.tendance")
     for t, c in sc.detail["clause"].items():
         if c["rui"] > 0:
-            # RUI réel de l'année (sans le surcroît de productivité, qui ne fait que l'augmenter)
-            rui_t = P.val("rui.montant") * ((1 + g) / (1 + infl)) ** (t - 2029)
+            # RUI réel de l'année (règle d'indexation, moteur/inflation.indice_reel)
+            from moteur.inflation import indice_reel
+            rui_t = P.val("rui.montant") * indice_reel(P)[t]
             assert c["rui_euros"] <= rui_t - plancher + 60, t
 
 

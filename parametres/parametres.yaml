@@ -911,6 +911,12 @@ revalorisation:
   pensions_sous_minimum_vieillesse: {valeur: true, unite: sans_unite, statut: DECISION}
   part_pensions_sous_seuil: {valeur: 0.12, unite: taux, statut: HYPOTHESE}
   rui_aah_socle_croissance: {valeur: true, unite: sans_unite, statut: DECISION, note: "Revalorisés du taux de croissance, sans l'inflation (règle d'Adrien)."}
+  regle:
+    valeur: min_inflation_croissance_nominale
+    v235: croissance_sans_inflation
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 30/10/2026 : RUI, AAH, socle et seuils de la contribution des retraités revalorisés du minimum de l'inflation et de la croissance nominale (moteur/inflation.indice_reel) : leur valeur réelle est garantie, sauf les années de croissance réelle négative (baisse sans rattrapage), sans part de la croissance. Les pensions de l'ancien système restent gelées en euros courants. Ancienne règle (« croissance_sans_inflation ») : revalorisés de la croissance réelle sans l'inflation, soit une perte de pouvoir d'achat d'environ 1,1 % par an ; « aucune » : valeur réelle constante."
 renouvelables:
   soutien_budget_2026: {valeur: 9.06, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149"}
   soutien_2029: {valeur: 10.67, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149 (prévision 2027, gardée en 2029 par prudence)"}
@@ -1303,10 +1309,11 @@ ancien_systeme:
     note: "DÉCISION d'Adrien du 29/10/2026, barème confirmé le 30/10/2026 (à retirer si de meilleures économies sont trouvées) : « tout le monde contribue, mais surtout les retraités actuels », contribution progressive de 5 à 10 %. Barème proposé : rien sous le minimum vieillesse ; 5 % juste au-dessus, montant jusqu'à 10 % à 3 000 € bruts par mois (seuil des hautes pensions), 10 % au-delà (taux appliqué à toute la pension, seuils en euros de 2026). Appliqué à la distribution des pensions de la DREES, recalée chaque année sur la pension moyenne de l'ancien système (gelée : la contribution baisse avec le temps). Fuite (hypothèse) : impôt unique et TVA que les retraités ne paient plus sur la part prélevée (25 %)."
   droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 (première option) : la pension des départs dans l'ancien système de 2029 à 2043 (générations 1979 et avant) est calculée normalement au départ, puis gelée en euros courants. Autre option écartée : droits gelés dès 2029 (−0,2 point de déficit en 2037, −0,7 en 2050)."}
   age_legal:
-    valeur: {actuel: 64, programme: 65, premiere_annee: 2029, pas_par_generation: 0.5}
+    valeur: {actuel: 64, programme: 67, premiere_annee: 2029, pas_par_generation: 1.0}
+    v235: {actuel: 64, programme: 65, premiere_annee: 2029, pas_par_generation: 0.5}
     unite: sans_unite
     statut: DECISION
-    note: "Loi actuelle : 64 ans (réforme de 2023). Programme (mesure du registre des économies, rappelée par Adrien le 29/10/2026) : 65 ans, deux trimestres de plus par génération à partir de celle qui a 64 ans en 2029 (65 ans pour celle qui a 64 ans en 2030). Économie calculée génération par génération (moteur/ancien_systeme.economie_age_legal) au lieu des 7 Md€ forfaitaires de la v235."
+    note: "DÉCISION d'Adrien du 30/10/2026 : âge de départ à 67 ans, quatre trimestres de plus par génération (67 ans pour la génération qui a 64 ans en 2031, née en 1967) ; avant 67 ans, une personne sans emploi touche le RUI, et, si elle a ses annuités, peut en plus tirer la rente de son capital (sans coût pour l'État). Avant : loi actuelle : 64 ans (réforme de 2023). Programme (mesure du registre des économies, rappelée par Adrien le 29/10/2026) : 65 ans, deux trimestres de plus par génération à partir de celle qui a 64 ans en 2029 (65 ans pour celle qui a 64 ans en 2030). Économie calculée génération par génération (moteur/ancien_systeme.economie_age_legal) au lieu des 7 Md€ forfaitaires de la v235."
   pension_nouveaux_relative: {valeur: 0.935, unite: sans_unite, statut: SOURCE, source: "DREES, Les retraités et les retraites 2025, fiches 5 et 7 : pension brute de droit direct des nouveaux retraités fin 2023, 1 557 € par mois, contre 1 666 € pour l'ensemble des retraités", note: "Pension des départs de 2029 et après, rapportée à la pension moyenne de 2029 (1 557 / 1 666). Les générations n'ont pas de pension plus élevée que leurs aînées (effet noria faible depuis 2017)."}
 
 # --- Cellules de ménages (moteur/cohortes.py, 29 octobre 2026) -----------------------------
@@ -1417,3 +1424,37 @@ entreprises_cellules:
     statut: HYPOTHESE
     source: "Fonds propres : Banque de France, Bloc-notes Éco, billet n° 32, Coût des fonds propres et rentabilité des entreprises en France (2017, mis à jour en 2024) : 8,6 % réel pour les grandes entreprises cotées (moyenne longue 9,3 %)"
     note: "Coût réel du financement que le fonds remplace : moitié fonds propres (8,6 %), moitié dette (2 % réel : taux des crédits nouveaux aux entreprises autour de 3,5 %, moins l'inflation ; hypothèse), soit 5,3 %. Avantage = capital du fonds × (5,3 % − rendement du capital du fonds, 3,2 % dans le prudent). Ce n'est pas une dépense publique : ce sont les épargnants qui acceptent un rendement plus bas que le marché."
+
+
+# --- Inflation (moteur/inflation.py, 30/10/2026) -----------------------------------------------------------
+inflation:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : modéliser l'inflation année par année (scénarios publiés, plus l'inflation due au programme). v235 : 1,8 % chaque année (calendrier.inflation)."}
+  base:
+    valeur: {"2027": 0.019, "2028": 0.016, convergence_annees: 4}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Banque de France, projections macroéconomiques intermédiaires de septembre 2026 : IPCH 2,3 % en 2026, 1,9 % en 2027, 1,6 % en 2028 (hors énergie et alimentation : 2,3 % puis 1,9 %)"
+    note: "Puis convergence linéaire en quatre ans vers l'inflation de long terme du scénario."
+  effet_fisher: {valeur: true, unite: sans_unite, statut: SOURCE, source: "Effet de Fisher : à long terme, les taux d'intérêt nominaux suivent l'inflation anticipée (le taux réel n'en dépend pas)", note: "Les taux nominaux du modèle (macro.taux_long_terme) supposent 1,8 % d'inflation ; avec une autre inflation, ils s'ajustent de l'écart, au rythme du renouvellement de la dette (8,5 ans)."}
+  long_terme:
+    valeur: {crise: 0.014, prudent: 0.018, median: 0.019, optimiste: 0.02}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Cible de la BCE : 2 % à moyen terme ; Banque de France : 1,6 % en 2028 ; enquête de la BCE auprès des prévisionnistes professionnels (2026) : anticipations de long terme autour de 2 %"
+    note: "Prudent : 1,8 % (DÉCISION d'Adrien du 29/10/2026, entre la Banque de France et la cible). Une inflation plus basse est défavorable aux comptes (moins d'érosion des pensions gelées et de la dette) : crise 1,4 % (inflation durablement sous la cible, comme en 2013-2020), médian 1,9 %, optimiste 2 %."
+  pente_phillips:
+    valeur: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Baisse de l'inflation (points) pour un point de PIB d'écart de production en moins. La courbe de Phillips est plate en zone euro depuis 2010 (Banque de France, billet « Où se situe l'inflation en zone euro dans le cône de Phillips ? ») ; ordre de grandeur des estimations de la BCE : 0,1 à 0,3. Sans source chiffrée vérifiée : plus elle est forte, plus l'inflation baisse en 2029 (défavorable)."
+  transmission_carbone:
+    valeur: {crise: 0.0, prudent: 0.0, median: 0.5, optimiste: 1.0}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Konradt et Weder di Mauro (2023), « Carbon Taxation and Greenflation: Evidence from Europe and Canada » : les taxes carbone ont changé les prix relatifs (énergie plus chère) sans hausse significative de l'inflation globale"
+    note: "Part de la hausse réelle du prix du carbone qui passe dans l'inflation globale. Prudent et crise : 0 (la source) ; médian : la moitié ; optimiste : en entier (l'inflation érode davantage les pensions gelées, ce qui est favorable aux comptes)."
+  poids_taxes_carbone_consommation:
+    valeur: 0.037
+    unite: taux
+    statut: HYPOTHESE
+    note: "Taxes carbone (55 Md€ en 2029 : accises des ménages et des collectivités 41,6 Md€, des entreprises 13,3 Md€, moteur/carbone.recette_statique) rapportées à la consommation des ménages toutes taxes comprises (environ 1 500 Md€). Baisse avec les émissions (carbone.baisse_tendancielle_emissions)."

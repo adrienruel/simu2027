@@ -101,7 +101,9 @@ def socle_supplementaire(p: Parametres, part_prelevee: dict[int, float], an: int
 
 def _attente(p: Parametres) -> tuple[dict, float, float, float]:
     a = p.val("retraites.attente_age_legal_67")
-    legal = p.val("ancien_systeme.age_legal")["programme"]
+    # début de la période d'attente : l'âge légal, mais pas après 65 ans (le RUI des adultes compte les 18-64 ans :
+    # avec l'âge de départ à 67 ans, les 65-66 ans sans emploi touchent le RUI ici ; correction du 30/10/2026)
+    legal = min(p.val("ancien_systeme.age_legal")["programme"], 65)
     taux = p.val("demographie.taux_emploi_age")
     sans_emploi = 1 - taux.get("65-69", 0.0)
     return a, legal, sans_emploi, a["part_annuites_completes"]

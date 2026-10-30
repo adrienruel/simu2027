@@ -111,15 +111,18 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     creches = creches_nouvelles(p)
     from .macro import flux_epargne_obligatoire
     contrib = p.val("epargne.contribution_transition") * flux_epargne_obligatoire(p) / 1e9 if p.val("epargne.contribution_transition") else 0.0
+    # revalorisation de la RUI, de l'AAH et du socle (moteur/inflation.indice_reel : règle d'indexation)
+    from .inflation import indice_reel
+    idx_reel = indice_reel(p, scenario_retenu)
+
     def reval(t):
-        n = t - 2029
-        return (((1 + g) / (1 + infl)) ** n * (1 + prod[t]) - 1) if p.val("revalorisation.rui_aah_socle_croissance") else 0.0
+        return (idx_reel[t] - 1) if p.val("revalorisation.rui_aah_socle_croissance") else 0.0
 
     L = Lignes()
     for t in ANNEES:
         n = t - 2029
         crois = (1 + g) ** n
-        reval_rui = (((1 + g) / (1 + infl)) ** n * (1 + prod[t]) - 1) if p.val("revalorisation.rui_aah_socle_croissance") else 0.0
+        reval_rui = reval(t)
         ancien_86 = anc[t]
         pensions_min = (p.val("revalorisation.part_pensions_sous_seuil") * ancien_86 * ((1 + g) ** (t - 2028) - 1)
                         if p.val("revalorisation.pensions_sous_minimum_vieillesse") else 0.0)
@@ -146,10 +149,10 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "retraites", "contribution_anciens_retraites", "Contribution de solidarité des retraités de l'ancien système (5 à 10 %)",
                   "mesure", -contrib_anciens[t] * (1 - p.val("ancien_systeme.contribution_solidarite")["fuite"]))
         L.ajouter(t, "retraites", "pensions_sous_minimum", "Pensions sous le minimum vieillesse : revalorisation", "mesure", pensions_min)
-        L.ajouter(t, "retraites", "socle_revalorisation", "Socle : revalorisation sur la croissance", "croissance", socle[t] * reval_rui)
+        L.ajouter(t, "retraites", "socle_revalorisation", "Socle : revalorisation (règle d'indexation)", "croissance", socle[t] * reval_rui)
         L.ajouter(t, "retraites", "fin_gel", "Fin du gel des anciennes pensions", "mesure", gel[t])
         L.ajouter(t, "rui_aah", "rui_aah_socle", "RUI et AAH (budget statique)", "socle", l["rui_aah"])
-        L.ajouter(t, "rui_aah", "rui_aah_revalorisation", "RUI et AAH : revalorisation sur la croissance", "croissance", l["rui_aah"] * reval_rui)
+        L.ajouter(t, "rui_aah", "rui_aah_revalorisation", "RUI et AAH : revalorisation (règle d'indexation)", "croissance", l["rui_aah"] * reval_rui)
         L.ajouter(t, "rui_aah", "rui_aah_demographie", "RUI : démographie (adultes, enfants)", "demographie",
                   ((l["rui_aah"] - rui_enf - rui_sal) * (d["adultes"] - 1) + rui_sal * (d["c_rui"] - 1)
                    + rui_enf * (d["enfants"] - 1)) * (1 + reval_rui))

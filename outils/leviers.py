@@ -26,7 +26,10 @@ VARIANTES = [
     # Retraites
     ("Retraites : socle annulé à 2 000 € de rente (au lieu de 2 500)", {"retraites.rente_annulant_socle": 2000}),
     ("Retraites : accès au socle à 68 ans (au lieu de 67)", {"epargne.age_acces_socle": 68}),
-    ("Retraites : âge légal de l'ancien système à 66 ans", {"ancien_systeme.age_legal/programme": 66}),
+    ("Retraites : départ à 65 ans au lieu de 67 (deux trimestres par génération)",
+     {"ancien_systeme.age_legal/programme": 65, "ancien_systeme.age_legal/pas_par_generation": 0.5}),
+    ("Indexation : ancienne règle (croissance réelle sans l'inflation)", {"revalorisation.regle": "croissance_sans_inflation"}),
+    ("Indexation : valeur réelle gelée, sans perte en 2030 (« aucune »)", {"revalorisation.regle": "aucune"}),
     # Entreprises et emploi
     ("Entreprises : déduction gardée à 50 % (pas de hausse vers 100 %)", {"is_investissement.hausse_part_admise/cible": 0.5}),
     ("Emploi : sans la baisse du coût employeur", {"emploi.retenues_calculees/baisse_cout_travail": 0}),
@@ -40,10 +43,8 @@ VARIANTES = [
     ("Sans les retombées du capital du fonds", {"macro.externalites_capital_fonds": 0.0}),
     ("Sans les effets des réformes du supérieur sur les carrières", {"carrieres.active": False}),
     # Paquet
-    ("Paquet : âge légal 66 ans + 1 point d'épargne à l'État",
-     {"ancien_systeme.age_legal/programme": 66, "epargne.contribution_transition": 0.1}),
-    ("Paquet + 2e enfant à 25 %",
-     {"ancien_systeme.age_legal/programme": 66, "epargne.contribution_transition": 0.1, "rui_complements.part_enfant_rang2": 0.25}),
+    ("Paquet : 1 point d'épargne à l'État + socle annulé à 2 000 € + accès au socle à 68 ans",
+     {"epargne.contribution_transition": 0.1, "retraites.rente_annulant_socle": 2000, "epargne.age_acces_socle": 68}),
 ]
 
 

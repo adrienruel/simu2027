@@ -15,14 +15,14 @@ def pib_2026(p: Parametres) -> float:
 
 def annees_2027_2028(p: Parametres) -> dict[int, dict]:
     pib = pib_2026(p)
-    infl = p.val("calendrier.inflation")
+    from .inflation import serie as serie_inflation
     deficit = p.val("calendrier.deficit_tendanciel_2027_2028")
     dette = p.val("calendrier.dette_fin_2026_pib") * pib
     mesures_2028 = sum(p.val("calendrier.mesures_2028").values())
     out = {}
     for an, mesures in ((2027, 0.0), (2028, mesures_2028)):
         solde = -deficit * pib + mesures
-        dette = dette - solde - infl * dette
+        dette = dette - solde - serie_inflation(p)[an] * dette
         out[an] = {"pib": pib, "solde": solde, "deficit": -solde / pib * 100, "dette": dette, "dette_pib": dette / pib}
     return out
 

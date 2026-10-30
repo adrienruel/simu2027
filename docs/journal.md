@@ -425,3 +425,9 @@ salaires, 37 % de bénéfices). Effet : la récession de l'ajustement de 2029 co
 le capital du fonds rapporte plus (17 Md€ en 2073 au lieu de 14). Prudent sans règle : 2029 4,93 → 5,16 % ;
 2037 4,68 → 4,72 ; 2073 inchangé (0,04). En 2029, la règle au maximum ne ramène plus le prudent qu'à 3,26 %
 (crise 3,31 %).
+
+## 30 octobre 2026 — Inflation, indexation, départ à 67 ans
+
+DÉCISIONS d'Adrien : indexation de la RUI, de l'AAH, du socle et des seuils de la contribution des retraités au
+minimum de l'inflation et de la croissance nominale ; départ à 67 ans (quatre trimestres par génération) ; inflation
+modélisée. Détail : docs/inflation_indexation.md. Prudent 2073 sans règle −0,14 → +5,17 % ; dette 105 → 137 %.

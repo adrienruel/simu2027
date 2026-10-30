@@ -173,7 +173,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     def taux_reel(t, s):
         nominal = min(p.val("macro.taux_long_terme"),
                       p.val("macro.taux_apparent_2029") + (p.val("macro.taux_long_terme") - p.val("macro.taux_apparent_2029")) * (t - 2029) / p.val("macro.annees_taux_long_terme"))
-        return nominal - infl - m("baisse_spread", s) * min(1.0, max(0, t - 2029) / p.val("macro.annees_baisse_spread"))
+        # effet de Fisher (30/10/2026) : les taux nominaux suivent l'écart d'inflation à la référence (1,8 %), au
+        # rythme du renouvellement de la dette (fisher_app, mis à jour dans la boucle) ; sans lui, une inflation plus
+        # basse relèverait mécaniquement le taux réel pendant cinquante ans
+        return nominal + fisher_app[s] - infl_s[s][t] - m("baisse_spread", s) * min(1.0, max(0, t - 2029) / p.val("macro.annees_baisse_spread"))
 
     from .depenses.statique import rui_aah
     flux_epargne = flux_epargne_obligatoire(p) / 1e9
@@ -194,9 +197,16 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         taux_age = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
     from .retraites_transition import socle_supplementaire
 
+    from .inflation import indice_reel as _indice_reel, serie as _serie_inflation
+    _idx_reel = _indice_reel(p, scenario_retenu)
+    infl_s = {s_: _serie_inflation(p, s_) for s_ in SCENARIOS}
+    fisher_app = {s_: 0.0 for s_ in SCENARIOS}
+    fisher_actif = p.val("inflation.active") and p.val("inflation.effet_fisher")
+
     def reval_socle(t):
         if not p.val("revalorisation.rui_aah_socle_croissance"):
             return 0.0
+        return _idx_reel[t] - 1
         n_ = t - 2029
         prod_ = (1 + m("productivite", "prudent")) ** max(0, min(m("annees_productivite", "prudent"), t - p.val("macro.premiere_annee_productivite") + 1))
         return ((1 + tend0) / (1 + infl)) ** n_ * prod_ - 1
@@ -325,6 +335,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             ratio_ref = ratio_ref if ratio_ref is not None else ratio_prec
             prime_marche = m("prime_dette", s) / 100 * (ratio_prec - ratio_ref) * 100
             prime_app += (prime_marche - prime_app) / p.val("macro.maturite_moyenne_dette")
+            if fisher_actif:
+                fisher_app[s] += ((infl_s[s][t] - p.val("calendrier.inflation")) - fisher_app[s]) / p.val("macro.maturite_moyenne_dette")
             # Emploi
             k_ch = max(0.0, ct[t]["taux"] - u_inc) / ecart_26 if dyn_ch else 1.0
             emp_ref = (PV["emplois_terme"] * k_ch * _montee(t, m("annees_montee_emploi", s)) - PV["emplois_perdus_subventions"]
@@ -460,7 +472,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 # Clause de trajectoire : ramène le prudent sur le déficit du médian (ou sous un seuil fixe)
                 interets_t = (taux_reel(t, s) + prime_app) * dette_prec
                 pib_t = pib0[t] + pib
-                avant = -(sp_hors[t] + solde - transferts[t] - interets_t - infl * dette_prec) / pib_t
+                avant = -(sp_hors[t] + solde - transferts[t] - interets_t - infl_s[s][t] * dette_prec) / pib_t
                 cible = p.val("clause.cible")
                 if cible == "median":  # ancienne règle : le prudent ramené sur le médian ; sans objet pour les autres
                     cible = -out["median"].maastricht[t] if s == "prudent" else float("inf")
@@ -474,7 +486,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 cap_rui = rui_total / p.val("rui.montant") * 10 * (1 + tend0) ** n
                 if corr:  # marge jusqu'au plancher, sur le RUI réel de l'année (non indexé sur l'inflation)
                     prod_t = (1 + m("productivite", s)) ** max(0, min(m("annees_productivite", s), t - p.val("macro.premiere_annee_productivite") + 1))
-                    reval_t = ((1 + tend0) / (1 + infl)) ** n * prod_t
+                    reval_t = _idx_reel[t] if p.val("revalorisation.rui_aah_socle_croissance") else 1.0
                     rui_t = p.val("rui.montant") * reval_t
                     base_rui = rui_total * reval_t * demo[s][t]["adultes"]
                     marge_rui = base_rui * max(0.0, 1 - p.val("clause.plancher_rui") / rui_t)
@@ -530,7 +542,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             solde_public = sp_hors[t] + solde_total - transferts[t] - interets
             dette = dette_prec - solde_public - participations[t]
             pib_total = pib0[t] + pib
-            maastricht = (solde_public - infl * dette_prec) / pib_total
+            maastricht = (solde_public - infl_s[s][t] * dette_prec) / pib_total
             sc.pib_effet[t], sc.solde_effet[t], sc.emplois[t] = pib, solde_total, emp_ref + emp_sen + emp_fonds
             sc.detail.setdefault("pib_reference", {})[t] = pib0[t]
             sc.detail.setdefault("prime_dette", {})[t] = prime_app
