@@ -145,7 +145,14 @@ def attente_rui_et_socle(p: Parametres) -> dict[int, float]:
     reportes = retraites_reportes(p)
     out = {}
     for an in ANNEES:
-        n = sum(survivants(p, g, an) for g in _csv("cohortes_2029.csv") if legal <= g["age_2029"] + an - 2029 < acces)
+        gens = _csv("cohortes_2029.csv")
+        n = sum(survivants(p, g, an) for g in gens if legal <= g["age_2029"] + an - 2029 < acces)
+        # générations nées après la dernière du fichier (2007 : 22 ans en 2029), qui atteignent l'âge légal à
+        # partir de 2072 : population de l'Insee (oubli corrigé le 30/10/2026 : 0,8 million de personnes en 2073)
+        if p.val("demographie.active"):
+            from .demographie import _projection
+            plus_jeune = min(g["age_2029"] for g in gens)
+            n += sum(_projection("central")[an][a_] for a_ in range(int(legal), int(acces)) if a_ - (an - 2029) < plus_jeune)
         nouveau = n * sans_emploi * (1 - part) * rui
         ancien = reportes[an] * 1e6 * (part * socle + (1 - part) * rui)
         out[an] = (nouveau + ancien) / 1e9
