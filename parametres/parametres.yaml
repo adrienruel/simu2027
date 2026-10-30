@@ -885,6 +885,7 @@ macro:
   annees_ia: {valeur: 10, unite: sans_unite, statut: HYPOTHESE}
   premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}
   part_pib_tendanciel_au_solde: {valeur: 0.1, unite: taux, statut: HYPOTHESE}
+  impots_par_revenu: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 (recalculer l'impôt au lieu d'une moyenne) : les revenus créés ou perdus par les effets macro sont imposés selon leur nature. Salaires : impôt unique, impôt local et TVA des cellules de salariés de l'année, 53 % du coût employeur (barème qui suit la croissance, DÉCISION d'Adrien du 30/10) ; bénéfices (capital du fonds, investissement des entreprises, permis rapide) : IS de 45 % ; valeur ajoutée mêlée (ajustement budgétaire, retombées) : 63 % de salaires (1 − taux de marge des SNF, 32,2 %, − impôts de production, 5 %), 37 % de bénéfices, soit 50 %. v235 : part des recettes dans le PIB (38 %) pour tout."}
   assouplissement_2029: {valeur: 0.0121, unite: taux, statut: DECISION, note: "Arrêté à 1,21 point de PIB (v218)."}
   etranger: {valeur: {depart: 0.05, plafond: 0.15, dette_debut: 1.0, dette_plafond: 0.6, solde_minimum: -0.03}, unite: sans_unite, statut: DECISION}
   cible_dette: {valeur: 0.6, unite: taux, statut: DECISION}

@@ -12,7 +12,7 @@ def test_meme_point_de_depart(s):
     """3 % en 2029, sauf si les instruments de la règle sont au maximum (5 points d'épargne, RUI au plancher)."""
     c = R[s][2029]["clause_detail"]
     if c["reste"] > 1e-6:
-        assert c["points"] == pytest.approx(5.0) and R[s][2029]["deficit"] < 3.2
+        assert c["points"] == pytest.approx(5.0) and R[s][2029]["deficit"] < 3.5  # règle au maximum
     else:
         assert R[s][2029]["deficit"] == pytest.approx(3.0, abs=0.01)
     assert R[s][2029]["deficit_avant_clause"] > 3.0

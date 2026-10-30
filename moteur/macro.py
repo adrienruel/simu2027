@@ -100,6 +100,22 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     pib0 = {t: pib_2026 * (1 + tend0) ** (t - 2029) * demo["prudent"][t]["emploi"] for t in ANNEES}
     rec = recettes_nouveau_systeme(p)["total"] / 1e9
     part_budget = rec / pib_2026  # Total!F19
+    # Impôts sur les revenus créés ou perdus par les effets macro (30/10/2026) : chaque revenu à son impôt, au lieu
+    # de la part moyenne des recettes dans le PIB (part_budget, 38 %). Salaires : impôt unique, impôt local et TVA
+    # des cellules de salariés de l'année (barème qui suit la croissance) ; bénéfices : IS (État et local) ;
+    # valeur ajoutée mêlée : part des salaires et part des bénéfices (Insee, taux de marge des SNF).
+    par_revenu = p.val("macro.impots_par_revenu") and p.val("cohortes.active") and p.val("demographie.active")
+    if par_revenu:
+        from .cohortes import agregats as _ag
+        from .is_bareme import taux_local as _tloc, taux_moyen as _tmoy
+        _a = _ag(p)
+        taux_salaires = {t: (_a[t]["impot"] + _a[t]["local"] + _a[t]["tva"]) / _a[t]["masse"] for t in ANNEES}
+        taux_benefices = _tmoy(p) + _tloc(p)
+        part_salaires_va = 1 - p.val("emploi.taux_marge_snf") - p.val("emploi.impots_production_va")
+        taux_va = {t: part_salaires_va * taux_salaires[t] + (1 - part_salaires_va) * taux_benefices for t in ANNEES}
+    else:
+        taux_benefices = part_budget
+        taux_va = {t: part_budget for t in ANNEES}
     from .trajectoire_annuelle import postes
     traj = postes(p, scenario_retenu)
     from .trajectoire_annuelle import lignes as lignes_traj
@@ -344,7 +360,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 for k in sorted(hist_rui):
                     pib_aj -= (hist_rui[k] - avant_k) * m("multiplicateur", s) * max(0, 1 - (t - k - 1) / m("annees_effet_ajustement", s))
                     avant_k = hist_rui[k]
-            s_aj = pib_aj * part_budget + pib_aj / pib0[t] * 100 * m("emplois_par_point_pib", s) / 100 * rui_ch
+            s_aj = pib_aj * taux_va[t] + pib_aj / pib0[t] * 100 * m("emplois_par_point_pib", s) / 100 * rui_ch
             # Capital du fonds (début d'année)
             # valeur ajoutée brute du capital du fonds : rendement net + usure (+ retombées dans le médian et l'optimiste)
             pib_cap = capital * (m("pib_par_euro_capital", s) + m("usure_capital_fonds", s) + m("externalites_capital_fonds", s))
@@ -366,10 +382,11 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 emp_fonds = du * ct[t]["actifs"] * k_pa
             pib_fonds_emploi = emp_fonds * cout_smic / 1e9 * (1 + tend0) ** n
             s_fonds_emploi = emp_fonds * PV["gains_canaux"]["offre"] / 1e9 * (1 + tend0) ** n if "gains_canaux" in PV else 0.0
-            s_permis = ((k_permis * m("pib_par_euro_capital", s) * part_budget - p.val("macro.permis_rapide_cout") * (1 + tend0) ** n)
+            s_permis = ((k_permis * m("pib_par_euro_capital", s) * taux_benefices - p.val("macro.permis_rapide_cout") * (1 + tend0) ** n)
                         if permis_separe else 0.0)
             # l'usure paie le renouvellement du capital : dans le PIB, pas dans l'assiette des impôts
-            s_cap = (capital * (m("pib_par_euro_capital", s) + m("externalites_capital_fonds", s)) * part_budget if corr
+            s_cap = ((capital * (m("pib_par_euro_capital", s) * taux_benefices + m("externalites_capital_fonds", s) * taux_va[t])
+                      if par_revenu else capital * (m("pib_par_euro_capital", s) + m("externalites_capital_fonds", s)) * part_budget) if corr
                      else pib_cap * part_budget)
             # Logement
             if n < m("duree_initiale", s):
@@ -407,7 +424,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 k_inv = k_inv * (1 - m("usure_capital", s)) - m("elasticite_invest", s) * (
                     cout_capital - isv["b4"] * b20_t * isv["b21"] * l25[t]) * isv["investissement"] * _montee(t, m("montee_invest", s))
             pib_inv = k_inv * (m("pib_par_euro_capital", s) + m("usure_capital", s))
-            inv_taxe = (k_inv * m("pib_par_euro_capital", s) if corr else pib_inv) * part_budget
+            inv_taxe = (k_inv * m("pib_par_euro_capital", s) * taux_benefices if (corr and par_revenu)
+                        else (k_inv * m("pib_par_euro_capital", s) if corr else pib_inv) * part_budget)
             # Démographie : écart au prudent (fécondité et effet sur la natalité du scénario)
             dp, ds = demo["prudent"][t], demo[s][t]
             pib_demo = pib0[t] * (ds["emploi"] / dp["emploi"] - 1)
