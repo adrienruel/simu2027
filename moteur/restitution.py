@@ -73,6 +73,17 @@ def donnees(p: Parametres | None = None) -> dict:
             series[s]["deficit_avant_clause"] = [_r(b[t]["deficit_avant_clause"]) for t in annees]
             series[s]["clause"] = {k: [_r(b[t]["clause_detail"][k], 3) for t in annees]
                                    for k in ("etalement", "contribution", "points", "rui", "rui_euros", "reste")}
+    # 2027-2028, avant la bascule : communes à tous les scénarios (moteur/calendrier.py ; chômage sans le programme)
+    from .calendrier import annees_2027_2028
+    avant_ = annees_2027_2028(p)
+    ch_ = None
+    if p.val("demographie.active"):
+        from .demographie import chomage_tendanciel
+        ch_ = chomage_tendanciel(p)
+    avant_bascule = {"annees": [2027, 2028],
+                     "deficit": [_r(avant_[t]["deficit"]) for t in (2027, 2028)],
+                     "dette_pib": [_r(avant_[t]["dette_pib"] * 100, 3) for t in (2027, 2028)],
+                     "chomage": [_r((ch_[t]["taux"] if ch_ else p.val("chomage.taux_2026")) * 100) for t in (2027, 2028)]}
     from .trajectoire_annuelle import lignes as lignes_traj
     registres = {"prudent": lignes_traj(p), "crise": lignes_traj(p.en_crise())}
     for s in scen:
@@ -174,7 +185,7 @@ def donnees(p: Parametres | None = None) -> dict:
     groupes = Counter(c.split(".")[0] for c in hypotheses)
     return {
         "meta": {"version": _version(), "date": date.today().isoformat(), "euros": "euros constants de 2026",
-                 "scenario_publie": "prudent", "chomage_jusqu_a": 2073 if (p.val("chomage.dynamique") and p.val("demographie.active")) else 2040},
+                 "scenario_publie": "prudent", "avant_bascule": avant_bascule, "chomage_jusqu_a": 2073 if (p.val("chomage.dynamique") and p.val("demographie.active")) else 2040},
         "annees": annees,
         "scenarios": scen,
         "series": series,

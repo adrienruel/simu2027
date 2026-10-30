@@ -180,7 +180,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       <div class="legende" id="leg-deficit"></div>
       <div id="g-deficit"></div>
     </div>
-    <p class="note">Sous zéro, l'État est en déficit ; au-dessus, en excédent. La ligne pointillée rouge marque un déficit de 3 % du PIB. La règle automatique (permanente) s'applique dans tous les scénarios, qui partent ainsi du même point (3 % en 2029) : elle ramène le déficit sous 3 % quand elle le peut, par l'étalement de la déduction, la contribution de transition (jusqu'à 5 points d'épargne obligatoire versés à l'État) puis une baisse du RUI jusqu'au plancher. Dans le médian et l'optimiste, elle s'arrête plus tôt, dès que le déficit sans règle passe sous 3 % (l'étalement de la déduction, une fois déclenché, reste acquis). Les traits pointillés montrent le déficit avant la clause : c'est là que se voit l'écart entre les hypothèses.</p>
+    <p class="note">Les courbes commencent en 2027 : 2027 et 2028, avant la bascule, sont communes à tous les scénarios (déficit de 5 % du PIB du PLF 2027, gardé en 2028 avec les mesures de 2028 ; chômage sans le programme) ; les scénarios se séparent en 2029, première année du programme. Sous zéro, l'État est en déficit ; au-dessus, en excédent. La ligne pointillée rouge marque un déficit de 3 % du PIB. La règle automatique (permanente) s'applique dans tous les scénarios, qui partent ainsi du même point (3 % en 2029) : elle ramène le déficit sous 3 % quand elle le peut, par l'étalement de la déduction, la contribution de transition (jusqu'à 5 points d'épargne obligatoire versés à l'État) puis une baisse du RUI jusqu'au plancher. Dans le médian et l'optimiste, elle s'arrête plus tôt, dès que le déficit sans règle passe sous 3 % (l'étalement de la déduction, une fois déclenché, reste acquis). Les traits pointillés montrent le déficit avant la clause : c'est là que se voit l'écart entre les hypothèses.</p>
   </section>
 
   <div class="grille-2">
@@ -419,11 +419,13 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
   // Solde = − déficit : un déficit est sous zéro, un excédent au-dessus (convention des comptes publics)
   let avant = false, fin = 2050;
   function dessinerDeficit() {
-    const n = A.filter(t => t <= fin).length, sol = arr => arr.slice(0, n).map(v => -v);
+    // 2027-2028 : avant la bascule, communes à tous les scénarios
+    const AV = D.meta.avant_bascule || { annees: [], deficit: [], dette_pib: [], chomage: [] };
+    const n = A.filter(t => t <= fin).length, sol = arr => [...AV.deficit, ...arr.slice(0, n)].map(v => -v);
     const series = S.map(s => ({ s, v: sol(D.series[s].deficit) }));
     if (avant) S.filter(s => D.series[s].deficit_avant_clause).forEach(s => series.push({ s, v: sol(D.series[s].deficit_avant_clause), tiret: true }));
-    courbe("g-deficit", "leg-deficit", series, { annees: A.slice(0, n), seuil: -3, seuilLib: "déficit de 3 %", pctAxe: true, zones: ["excédent", "déficit"],
-      fmtVal: v => (v < 0 ? "déficit " : "excédent ") + fr(Math.abs(v), 2) + " %", aria: `Solde public par scénario, 2029-${fin}`, h: 340 });
+    courbe("g-deficit", "leg-deficit", series, { annees: [...AV.annees, ...A.slice(0, n)], seuil: -3, seuilLib: "déficit de 3 %", pctAxe: true, zones: ["excédent", "déficit"],
+      fmtVal: v => (v < 0 ? "déficit " : "excédent ") + fr(Math.abs(v), 2) + " %", aria: `Solde public par scénario, ${AV.annees[0] || 2029}-${fin}`, h: 340 });
   }
   const b50 = document.getElementById("b-2050"), b73 = document.getElementById("b-2073");
   b50.onclick = () => { fin = 2050; b50.setAttribute("aria-pressed", "true"); b73.setAttribute("aria-pressed", "false"); dessinerDeficit(); };
@@ -638,8 +640,9 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     tableLignes();
     tableAtt();
     dessinerIncert();
-    courbe("g-dette", "leg-dette", S.map(s => ({ s, v: D.series[s].dette_pib })), { annees: A, seuil: 60, seuilLib: "60 %", unite: " %", dec: 1, aria: "Dette publique par scénario", min: 0 });
-    courbe("g-chomage", "leg-chomage", S.map(s => ({ s, v: D.series[s].chomage.slice(0, AC.length) })), { annees: AC, unite: " %", dec: 2, aria: `Taux de chômage par scénario, 2029-${D.meta.chomage_jusqu_a}` });
+    const AVb = D.meta.avant_bascule || { annees: [], dette_pib: [], chomage: [] };
+    courbe("g-dette", "leg-dette", S.map(s => ({ s, v: [...AVb.dette_pib, ...D.series[s].dette_pib] })), { annees: [...AVb.annees, ...A], seuil: 60, seuilLib: "60 %", unite: " %", dec: 1, aria: "Dette publique par scénario", min: 0 });
+    courbe("g-chomage", "leg-chomage", S.map(s => ({ s, v: [...AVb.chomage, ...D.series[s].chomage.slice(0, AC.length)] })), { annees: [...AVb.annees, ...AC], unite: " %", dec: 2, aria: `Taux de chômage par scénario, ${AVb.annees[0] || 2029}-${D.meta.chomage_jusqu_a}` });
     detail();
   };
   let largeur = window.innerWidth;
