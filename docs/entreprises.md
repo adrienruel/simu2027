@@ -54,20 +54,48 @@ fiscale dans la valeur ajoutée (« très faible » pour les microentreprises).
    pendant la montée (2032-2037), puis surtout l'effet de la croissance. Elle profite d'abord aux grandes
    entreprises, qui investissent le plus.
 
-   **Le fonds comme aide à l'appareil productif** (demande d'Adrien) : le capital nouveau du fonds finance les
+   **Le fonds comme aide à l'appareil productif** (demandes d'Adrien) : le capital nouveau du fonds finance les
    entreprises à 3,2 % réel (rendement de son capital dans le prudent) au lieu d'environ 5,3 % sur le marché
    (moitié fonds propres à 8,6 % réel, Banque de France ; moitié dette à 2 %, hypothèse). L'écart joue comme une
-   aide, payée par les épargnants (rendement plus bas), pas par l'État : il ne change pas le déficit. Répartition
-   entre tailles au prorata de l'investissement, à défaut de doctrine d'investissement du fonds (À DÉCIDER).
+   aide, payée par les épargnants (rendement plus bas), pas par l'État.
+
+   **Stratégie d'investissement du fonds** (DÉCISION d'Adrien : celle qui réduit le plus le chômage, donc le RUI,
+   et augmente les impôts) : le fonds investit d'abord là où un euro de capital fait le plus d'emplois, c'est-à-
+   dire là où il y a le moins de capital par salarié (immobilisations corporelles par ETP, Insee Ésane 2021 : PME
+   108 k€, TPE 134 k€, ETI 222 k€, GE 363 k€), jusqu'à 25 % du capital de chaque taille (capacité d'absorption,
+   hypothèse), puis passe à la suivante.
+
+   **Effet sur le chômage** : le chômage d'équilibre baisse quand le ratio capital/production monte (seule
+   estimation : −0,46 % de chômage pour +1 % de capital/production, États-Unis 1964-2003, Arestis, Baddeley et
+   Sawyer ; aucun effet à long terme selon Layard et Nickell avec une fonction Cobb-Douglas, un effet si la
+   substitution capital-travail est faible, ce que trouvent la plupart des estimations selon Rowthorn). Crise 0,
+   prudent la moitié (0,23), médian et optimiste 0,46. Le capital est pondéré par l'intensité en emploi des
+   entreprises où il va. Chaque emploi rapporte au budget comme un emploi au SMIC (RUI économisé, impôt, TVA).
+
+| Emplois du capital du fonds | 2037 | 2050 | 2073 |
+|---|---|---|---|
+| Prudent, stratégie emploi | 17 000 | 68 000 | 104 000 |
+| Prudent, au prorata de l'investissement | 10 000 | 45 000 | 116 000 |
+| Médian, stratégie emploi | 96 000 | 187 000 | 210 000 |
+| Optimiste, stratégie emploi | 133 000 | 201 000 | 262 000 |
+
+   La stratégie emploi fait plus d'emplois tant que le fonds est petit ; en 2073, les plafonds de 25 % sont
+   atteints (PME, TPE) et le reste va aux ETI et aux grandes entreprises, d'où un peu moins d'emplois que la
+   répartition au prorata de l'investissement, qui dépasse ces plafonds (47 % du capital des TPE).
 
 | Md€ (économie de 2029) | Capital du fonds 2037 | Avantage 2037 | Écart avec le fonds 2037 | Capital 2073 | Avantage 2073 | Écart avec le fonds 2073 |
 |---|---|---|---|---|---|---|
-| TPE | 11 | 0,2 | +10,6 (+55 %) | 175 | 3,7 | +8,5 (+44 %) |
-| PME | 10 | 0,2 | +7,3 (+22 %) | 151 | 3,2 | +5,5 (+16 %) |
-| ETI | 14 | 0,3 | −3,4 (−9 %) | 217 | 4,6 | −6,1 (−16 %) |
-| GE | 23 | 0,5 | −12,4 (−22 %) | 347 | 7,3 | −16,6 (−30 %) |
+| TPE | 0 | 0 | +10,9 (+57 %) | 97 | 2,0 | +10,1 (+53 %) |
+| PME | 58 | 1,2 | +6,3 (+19 %) | 129 | 2,7 | +5,9 (+18 %) |
+| ETI | 0 | 0 | −3,1 (−8 %) | 231 | 4,8 | −6,4 (−16 %) |
+| GE | 0 | 0 | −11,9 (−21 %) | 434 | 9,1 | −18,5 (−33 %) |
 
-   Le capital du fonds reste petit jusqu'en 2037 (62 Md€ dans le prudent) : l'aide ne compte vraiment qu'après 2050.
+| Sans règle / publié, chômage | 2037 | 2050 | 2073 |
+|---|---|---|---|
+| Prudent | 4,68 / 3,00 ; 7,32 % | 4,08 / 3,04 ; 7,22 % | 0,03 / 0,03 ; 7,08 % |
+| Médian | 2,58 / 2,34 ; 6,08 % | −0,39 / −0,33 ; 5,88 % | −8,12 ; 5,74 % |
+| Optimiste | 0,77 / 0,54 ; 4,60 % | −2,64 / −2,58 ; 4,57 % | −10,20 ; 4,40 % |
+| Crise | 5,30 / 3,58 ; 8,28 % | 4,70 / 3,64 ; 8,22 % | 6,23 / 5,10 ; 8,10 % |
 
    **Correction trouvée en faisant ce tableau** (`is_investissement.assiette_locale`) : l'IS local (5 %) a la même
    assiette que l'IS de l'État, mais la déduction de l'investissement et la fin de la déduction des intérêts ne

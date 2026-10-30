@@ -1390,10 +1390,21 @@ entreprises_cellules:
     statut: HYPOTHESE
     note: "Part des dirigeants qui font l'arbitrage (conseillés par leur expert-comptable). Sans source : prudent 75 %."
   repartition_fonds:
-    valeur: investissement
+    valeur: emploi
     unite: sans_unite
     statut: HYPOTHESE
-    note: "Répartition du capital nouveau du fonds entre les tailles d'entreprises (demande d'Adrien du 30/10/2026 : les investissements du fonds sont une aide à l'appareil productif). « investissement » : au prorata de l'investissement de chaque taille (TPE 20 %, PME 17 %, ETI 24 %, GE 39 %), à défaut de doctrine d'investissement du fonds ; sinon un dictionnaire {TPE, PME, ETI, GE}. À DÉCIDER par Adrien."
+    note: "Répartition du capital nouveau du fonds entre les tailles d'entreprises (demande d'Adrien du 30/10/2026 : les investissements du fonds sont une aide à l'appareil productif). DÉCISION d'Adrien du 30/10/2026 : « emploi », la stratégie qui réduit le plus le chômage (moins de RUI, plus d'impôts) : le fonds investit d'abord là où un euro de capital fait le plus d'emplois (le moins de capital par salarié : PME 108 k€, TPE 134 k€, ETI 222 k€, GE 363 k€ d'immobilisations corporelles par ETP, Insee Ésane 2021), jusqu'au plafond de chaque taille (entreprises_cellules.plafond_part_capital), puis passe à la suivante. Autres choix : « investissement » (au prorata de l'investissement de chaque taille) ou un dictionnaire {TPE, PME, ETI, GE}."
+  plafond_part_capital:
+    valeur: 0.25
+    unite: taux
+    statut: HYPOTHESE
+    note: "Part au plus du capital productif d'une taille d'entreprises que le fonds peut financer (capacité d'absorption : projets rentables, gouvernance). Sans source. Capital productif : immobilisations corporelles par ETP × ETP (Insee, Ésane 2021), en euros de 2026 (+14,5 % de prix de 2021 à 2026)."
+  capital_chomage_elasticite:
+    valeur: {crise: 0.0, prudent: 0.23, median: 0.46, optimiste: 0.46}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Seule estimation trouvée : États-Unis, 1964-2003, le chômage d'équilibre (NAIRU) baisse de 0,46 % pour 1 % de ratio capital/production en plus (Arestis, Baddeley et Sawyer, Levy Institute, document de travail n° 475, 2006). Théorie : aucun effet à long terme avec une fonction de production Cobb-Douglas (Layard, Nickell et Jackman, 1991), un effet si l'élasticité de substitution capital-travail est inférieure à 1, ce que trouvent la plupart des estimations (Rowthorn, 1999)."
+    note: "Effet du capital du fonds sur le chômage d'équilibre. Crise : 0 (théorie de Layard et Nickell) ; prudent : la moitié de la seule estimation (pas d'estimation pour la France) ; médian et optimiste : l'estimation. Le capital est pondéré par l'intensité en emploi de la taille où il va (capital moyen par salarié / capital par salarié de la taille)."
   cout_financement_marche:
     valeur: {fonds_propres: 0.086, dette: 0.02, part_fonds_propres: 0.5}
     unite: sans_unite

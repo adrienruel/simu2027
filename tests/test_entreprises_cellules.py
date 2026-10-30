@@ -71,3 +71,22 @@ def test_avantage_du_fonds():
             assert x["avantage_fonds"] >= 0
             assert x["ecart_avec_fonds"] == pytest.approx(x["ecart"] - x["avantage_fonds"])
     assert sum(x["capital_fonds"] for x in b[2073]) > sum(x["capital_fonds"] for x in b[2037])
+
+
+def test_strategie_emploi_du_fonds():
+    from moteur.entreprises_cellules import allocation_fonds, capital_efficace, capital_productif
+    cap = capital_productif(P)
+    a = allocation_fonds(P, 100.0)
+    assert a["PME"] == pytest.approx(min(100.0, 0.25 * cap["PME"]))  # d'abord la taille la moins capitalistique
+    assert a["GE"] == 0.0
+    assert sum(allocation_fonds(P, 2000.0).values()) == pytest.approx(2000.0)
+    inv = Parametres().avec({"entreprises_cellules.repartition_fonds": "investissement"})
+    assert capital_efficace(P, 100.0) > capital_efficace(inv, 100.0)
+
+
+def test_emplois_du_capital_du_fonds():
+    from moteur.macro import calculer
+    d = calculer(P)["prudent"].detail["chomage_detail"]
+    assert d[2073]["fonds"] > d[2037]["fonds"] > 0
+    sans = calculer(Parametres().avec({"entreprises_cellules.capital_chomage_elasticite": 0.0}))["prudent"].detail["chomage_detail"]
+    assert sans[2073]["fonds"] == 0.0

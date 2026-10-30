@@ -407,3 +407,6 @@ passés en salaire, 0,9 Md€ de recettes perdues par an dans le prudent. Pruden
 Suite (remarque d'Adrien) : bilan par taille avec la déduction de l'investissement et les intérêts non déduits ;
 correction : la déduction jouait sur l'IS de l'État seul, pas sur l'IS local de même assiette (+12,5 % de coût).
 Prudent 2073 sans règle −0,02 → +0,18 %.
+Suite (décision d'Adrien) : le fonds investit d'abord dans les entreprises les moins capitalistiques (PME, TPE, puis
+ETI et GE, 25 % au plus du capital de chaque taille) pour réduire le plus le chômage ; nouveau canal : le chômage
+d'équilibre baisse avec le capital (élasticité 0,23 en prudent). Prudent : 104 000 emplois en 2073, chômage 7,08 %.

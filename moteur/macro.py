@@ -8,6 +8,8 @@ FIDELITE_V235 regroupera les écarts de la v235 reproduits volontairement (aucun
 """
 from __future__ import annotations
 
+import math
+
 from dataclasses import dataclass, field
 
 from .parametres import Parametres
@@ -225,8 +227,12 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     # Permis rapide (correction du 30/10/2026) : capital privé à part, qui s'use comme celui des entreprises, et
     # coût des services instructeurs ; v235 : ajouté au capital du fonds, sans usure ni coût
     permis_separe = p.val("macro.permis_rapide_separe")
-    from .entreprises_cellules import actif as _ent_actif, arbitrage_tpe, flux_investissement as flux_inv_tailles
+    from .entreprises_cellules import (actif as _ent_actif, arbitrage_tpe, capital_efficace, capital_productif,
+                                       flux_investissement as flux_inv_tailles)
     ent_cellules = _ent_actif(p)
+    k_productif = sum(capital_productif(p).values())
+    from .emploi import cout_smic_annuel
+    cout_smic = cout_smic_annuel(p)
     out = {}
     scenarios_clause = p.val("clause.scenarios")
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent peut se caler sur le médian
@@ -339,6 +345,18 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             # permis rapide : capital privé (début d'année), valeur ajoutée brute au rendement et à l'usure des
             # entreprises ; impôts sur le rendement net ; coût des services instructeurs
             pib_permis = k_permis * (m("pib_par_euro_capital", s) + m("usure_capital", s)) if permis_separe else 0.0
+            # Emplois du capital du fonds (30/10/2026) : le chômage d'équilibre baisse quand le ratio capital/production
+            # monte (élasticité entreprises_cellules.capital_chomage_elasticite), capital pondéré par l'intensité en
+            # emploi des entreprises où le fonds investit (moteur/entreprises_cellules.allocation_fonds)
+            emp_fonds = 0.0
+            if ent_cellules and dyn_ch and capital > 0:
+                k_eff = capital_efficace(p, capital / (1 + tend0) ** n)
+                x_k = math.log(1 + k_eff / k_productif) - math.log(1 + pib_cap / pib0[t])
+                du = p.val("entreprises_cellules.capital_chomage_elasticite", s) * ct[t]["taux"] * max(0.0, x_k)
+                du = min(du, max(0.0, ct[t]["taux"] - u_inc))
+                emp_fonds = du * ct[t]["actifs"] * k_pa
+            pib_fonds_emploi = emp_fonds * cout_smic / 1e9 * (1 + tend0) ** n
+            s_fonds_emploi = emp_fonds * PV["gains_canaux"]["offre"] / 1e9 * (1 + tend0) ** n if "gains_canaux" in PV else 0.0
             s_permis = ((k_permis * m("pib_par_euro_capital", s) * part_budget - p.val("macro.permis_rapide_cout") * (1 + tend0) ** n)
                         if permis_separe else 0.0)
             # l'usure paie le renouvellement du capital : dans le PIB, pas dans l'assiette des impôts
@@ -384,13 +402,13 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             pib_demo = pib0[t] * (ds["emploi"] / dp["emploi"] - 1)
             s_demo = sum(b * (ds[cle_indice[k]] - dp[cle_indice[k]]) for k, b in bases_demo[t].items())
             # Totaux
-            pib = (pib_demo + (emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_permis + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
+            pib = (pib_demo + (emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_permis + pib_fonds_emploi + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
                    + pib_tend + pib_ecole)
             q = p.val("macro.part_pib_tendanciel_au_solde")
             # dirigeants de petites sociétés qui se versent un salaire au lieu du bénéfice (IS à 45 %)
             arb = p.val("entreprises_cellules.arbitrage_tpe") if ent_cellules else None
             s_tpe = (-arbitrage_tpe(p, s)["perte"] * min(1.0, (n + 1) / arb["montee"]) * (1 + tend0) ** n) if arb else 0.0
-            solde = (s_demo + s_emploi + s_aj + s_cap + s_permis + s_tpe + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
+            solde = (s_demo + s_emploi + s_aj + s_cap + s_permis + s_tpe + s_fonds_emploi + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
                      + (pib_ia + pib_adopt) * q)
             if s == "prudent":
                 solde += (tva_s_t + inv_taxe + carb_t
@@ -477,14 +495,14 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 "tendance_et_ecole": c_tend, "investissement_entreprises": inv_taxe,
                 "sante": c_sante + c_tva_sante, "carbone": c_carbone,
                 "eviction_epargne": (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n,
-                "clause": mesures, "demographie": s_demo, "permis_rapide": s_permis, "salaires_dirigeants": s_tpe,
+                "clause": mesures, "demographie": s_demo, "permis_rapide": s_permis, "salaires_dirigeants": s_tpe, "emplois_fonds": s_fonds_emploi,
             }
             interets = (taux_reel(t, s) + prime_app) * dette_prec
             solde_public = sp_hors[t] + solde_total - transferts[t] - interets
             dette = dette_prec - solde_public - participations[t]
             pib_total = pib0[t] + pib
             maastricht = (solde_public - infl * dette_prec) / pib_total
-            sc.pib_effet[t], sc.solde_effet[t], sc.emplois[t] = pib, solde_total, emp_ref + emp_sen
+            sc.pib_effet[t], sc.solde_effet[t], sc.emplois[t] = pib, solde_total, emp_ref + emp_sen + emp_fonds
             sc.detail.setdefault("pib_reference", {})[t] = pib0[t]
             sc.detail.setdefault("prime_dette", {})[t] = prime_app
             sc.charge_dette[t], sc.solde_public[t], sc.dette[t] = interets, solde_public, dette
@@ -501,11 +519,12 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 ch_sen = p.val("chomage.seniors_chomeurs_par_emploi") * sen_source
                 from .carrieres import emplois_entree_plus_tot
                 jeunes = sum(emplois_entree_plus_tot(p, s, t).values())
-                chomeurs = (ct[t]["chomeurs"] * k_pa - emp_ref - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * emp_t + ch_sen)
+                chomeurs = (ct[t]["chomeurs"] * k_pa - emp_ref - emp_fonds - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * emp_t + ch_sen)
                 actifs = ct[t]["actifs"] * k_pa + emp_sen + jeunes + ch_sen
                 sc.detail.setdefault("chomage", {})[t] = max(0.0, chomeurs) / actifs
                 sc.detail.setdefault("chomage_detail", {})[t] = {"tendanciel": ct[t]["taux"], "chomeurs": chomeurs, "actifs": actifs,
-                                                                 "seniors": ch_sen, "reformes": emp_ref, "k_reformes": k_ch}
+                                                                 "seniors": ch_sen, "reformes": emp_ref, "k_reformes": k_ch,
+                                                                 "fonds": emp_fonds}
             else:
                 sc.detail.setdefault("chomage", {})[t] = (p.val("inactifs.chomeurs_bit") - emp_ref
                                                             - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa

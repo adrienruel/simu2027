@@ -35,6 +35,7 @@ LIBELLES_CANAUX = {
     "demographie": "Démographie (écart au prudent)",
     "permis_rapide": "Permis rapide (capital privé, coût des services)",
     "salaires_dirigeants": "Dirigeants de petites sociétés payés en salaire",
+    "emplois_fonds": "Emplois du capital du fonds (chômage d'équilibre)",
 }
 
 POSTES = [("recettes", "Recettes"), ("sante", "Santé"), ("retraites", "Retraites"), ("rui_aah", "RUI et AAH"),

@@ -186,8 +186,6 @@ def bilan_annees(p: Parametres, annees=(2032, 2037, 2050, 2073)) -> dict:
     # financement de marché − rendement du capital du fonds), équivalent d'une aide à l'appareil productif
     from .macro import calculer
     fonds = calculer(p)["prudent"].detail.get("fonds", {})
-    rf = p.val("entreprises_cellules.repartition_fonds")
-    poids = {x["taille"]: (x["part_investissement"] if rf == "investissement" else rf[x["taille"]]) for x in tl}
     marche = p.val("entreprises_cellules.cout_financement_marche")
     cout_marche = marche["part_fonds_propres"] * marche["fonds_propres"] + (1 - marche["part_fonds_propres"]) * marche["dette"]
     ecart_taux = max(0.0, cout_marche - p.val("macro.pib_par_euro_capital", "prudent"))
@@ -196,15 +194,55 @@ def bilan_annees(p: Parametres, annees=(2032, 2037, 2050, 2073)) -> dict:
         k = (1 + g) ** (t - 2029)
         ded, it = (net[t] + interets[t]) / k, interets[t] / k
         capital = fonds.get(t, {}).get("capital", 0.0) / k
+        alloc = allocation_fonds(p, capital)
         lignes = []
         for x, b in zip(tl, base):
             d_ = ded * x["part_investissement"]
             i_ = it * x["valeur_ajoutee_md"] / va
             e = b["ecart"] - d_ + i_
-            kf = capital * poids[x["taille"]]
+            kf = alloc[x["taille"]]
             av = kf * ecart_taux
             lignes.append({"taille": x["taille"], "deduction": d_, "interets": i_, "ecart": e, "ecart_pct": e / b["actuel"],
                            "capital_fonds": kf, "avantage_fonds": av, "ecart_avec_fonds": e - av,
                            "ecart_avec_fonds_pct": (e - av) / b["actuel"]})
         out[t] = lignes
     return out
+
+
+PRIX_2021_2026 = 1.145  # Insee, indice des prix à la consommation, 2021 → 2026 (≈ +14,5 %)
+
+
+def capital_productif(p: Parametres) -> dict[str, float]:
+    """Immobilisations corporelles de chaque taille (Md€ de 2026) : par ETP × ETP (Insee, Ésane 2021)."""
+    return {x["taille"]: x["immobilisations_par_etp_k"] * x["etp_milliers"] / 1e3 * PRIX_2021_2026 for x in tailles(p)}
+
+
+def allocation_fonds(p: Parametres, capital: float) -> dict[str, float]:
+    """Capital nouveau du fonds (Md€, économie de 2029) réparti entre les tailles. « emploi » : d'abord là où un
+    euro fait le plus d'emplois (le moins de capital par salarié), jusqu'au plafond de chaque taille."""
+    tl = tailles(p)
+    rf = p.val("entreprises_cellules.repartition_fonds")
+    if rf == "investissement":
+        return {x["taille"]: capital * x["part_investissement"] for x in tl}
+    if isinstance(rf, dict):
+        return {x["taille"]: capital * rf[x["taille"]] for x in tl}
+    cap = capital_productif(p)
+    plafond = p.val("entreprises_cellules.plafond_part_capital")
+    out, reste = {x["taille"]: 0.0 for x in tl}, max(0.0, capital)
+    for x in sorted(tl, key=lambda y: y["immobilisations_par_etp_k"]):
+        part = min(reste, plafond * cap[x["taille"]])
+        out[x["taille"]], reste = part, reste - part
+    if reste > 0:  # au-delà des plafonds : au prorata du capital
+        tot = sum(cap.values())
+        for k in out:
+            out[k] += reste * cap[k] / tot
+    return out
+
+
+def capital_efficace(p: Parametres, capital: float) -> float:
+    """Capital du fonds pondéré par l'intensité en emploi de la taille où il va (1 = capital moyen par salarié)."""
+    tl = tailles(p)
+    cap = capital_productif(p)
+    moyen = sum(cap.values()) / sum(x["etp_milliers"] for x in tl)
+    alloc = allocation_fonds(p, capital)
+    return sum(alloc[x["taille"]] * moyen / (cap[x["taille"]] / x["etp_milliers"]) for x in tl)
