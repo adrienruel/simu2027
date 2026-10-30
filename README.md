@@ -3,7 +3,13 @@
 Refonte du classeur `Chiffrage_programme_complet_v235.xlsx` en moteur Python vérifiable.
 Cahier des charges : `Refonte_outil_de_simulation.md` (projet).
 
-## Lancer
+## Lancer sous Windows
+
+Double-cliquer sur `lancer.bat`. La première fois, il crée un environnement Python local (`.venv`) et installe les
+bibliothèques (Python 3.10 ou plus requis : https://www.python.org/downloads/, cocher « Add python.exe to PATH »).
+Menu : résumé rapide, tableau de bord (recalculé puis ouvert dans le navigateur), tout recalculer, tests.
+
+## Lancer (ligne de commande)
 
 ```
 pip install pyyaml pytest openpyxl
