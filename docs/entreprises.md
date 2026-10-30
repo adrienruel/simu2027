@@ -37,6 +37,26 @@ fiscale dans la valeur ajoutée (« très faible » pour les microentreprises).
 
    Le programme déplace l'impôt des grandes entreprises vers les petites : les TPE passent du taux réduit de 15 %
    à 45 % et payaient peu d'impôts de production.
+
+   Avec la déduction immédiate de l'investissement (au prorata de l'investissement de chaque taille) et la fin de
+   la déduction des intérêts (au prorata de la valeur ajoutée, faute de données sur la dette par taille), à la
+   taille de l'économie de 2029 :
+
+| Md€ | Écart avant déduction | Déduction 2037 | Intérêts 2037 | Écart net 2037 | Écart net 2073 |
+|---|---|---|---|---|---|
+| TPE | +13,9 | −4,5 | +1,4 | +10,9 (+57 %) | +12,1 (+63 %) |
+| PME | +9,3 | −3,9 | +2,1 | +7,5 (+23 %) | +8,6 (+26 %) |
+| ETI | +0,1 | −5,6 | +2,3 | −3,1 (−8 %) | −1,5 (−4 %) |
+| GE | −6,1 | −8,9 | +3,1 | −11,9 (−21 %) | −9,4 (−17 %) |
+| Total | +17,2 | −22,9 | +8,9 | +3,4 | +9,9 |
+
+   La déduction n'est qu'un avantage de trésorerie (déduire plus tôt ce qui aurait été amorti) : elle pèse le plus
+   pendant la montée (2032-2037), puis surtout l'effet de la croissance. Elle profite d'abord aux grandes
+   entreprises, qui investissent le plus.
+
+   **Correction trouvée en faisant ce tableau** (`is_investissement.assiette_locale`) : l'IS local (5 %) a la même
+   assiette que l'IS de l'État, mais la déduction de l'investissement et la fin de la déduction des intérêts ne
+   jouaient que sur l'IS de l'État (40 %). Elles jouent désormais sur les 45 % : coût net de la déduction +12,5 %.
 3. **Investissement par taille.** Chaque taille a son taux marginal actuel (TPE 19 %, mélange du taux réduit et du
    taux normal ; autres 25 %), sa part d'impôts de production sur le capital (relative à la moyenne) et sa
    réaction : les petites entreprises réagissent 95 % plus que les grandes (Zwick et Mahon, AER 2017 ; PME et ETI
@@ -69,6 +89,8 @@ fiscale dans la valeur ajoutée (« très faible » pour les microentreprises).
 | Crise après | 4,97 / 3,09 | 5,18 / 3,48 | 4,56 / 3,49 | 5,80 / 4,67 | 157 % |
 | Prudent avec les salaires des dirigeants | 4,91 / 3,03 | 4,63 / 3,00 | 4,07 / 3,02 | −0,02 / −0,02 | 105 % |
 | Crise avec les salaires des dirigeants | 4,99 / 3,11 | 5,24 / 3,55 | 4,67 / 3,60 | 6,14 / 5,01 | 159 % |
+| Prudent avec la déduction sur l'IS local | 4,93 / 3,04 | 4,69 / 3,00 | 4,12 / 3,08 | 0,18 / 0,18 | 108 % |
+| Crise avec la déduction sur l'IS local | 5,01 / 3,12 | 5,30 / 3,58 | 4,70 / 3,64 | 6,23 / 5,10 | 160 % |
 
 En 2029, la règle est au maximum dans le prudent (5 points d'épargne pris, RUI baissé de 148 € par mois jusqu'au
 plancher) et ne suffit plus tout à fait (3,01 %).

@@ -1109,6 +1109,7 @@ carbone:
 
 # --- Déduction intégrale de l'investissement (feuille IS investissement, v210-v221) -------
 is_investissement:
+  assiette_locale: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (remarque d'Adrien sur le bilan des entreprises) : l'IS local (5 %) est calculé sur la même assiette que l'IS de l'État (moteur/collectivites.py), mais la déduction de l'investissement et la fin de la déduction des intérêts ne jouaient que sur l'IS de l'État (40 %). Elles jouent désormais sur les 45 %. v235 : État seul."}
   active: {valeur: 1, unite: sans_unite, statut: DECISION, note: "DÉCISION du 22 octobre 2026 (v211)."}
   montee_annees: {valeur: 8, unite: sans_unite, statut: DECISION}
   montee_etalee_annees: {valeur: 16, unite: sans_unite, statut: DECISION, note: "Étalement de la clause de trajectoire (v221)."}

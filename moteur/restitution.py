@@ -188,6 +188,9 @@ def donnees(p: Parametres | None = None) -> dict:
         entreprises_tailles = {"facteur_production": round(_fp(p), 3),
                                "arbitrage": {j: {k: round(v, 2) for k, v in _arb(p, j).items()} for j in ("crise", "prudent", "median", "optimiste")},
                                "tailles": [{k: (round(v, 2) if isinstance(v, float) else v) for k, v in x.items()} for x in _ent_bilan(p)]}
+        from .entreprises_cellules import bilan_annees as _ent_bilan_annees
+        entreprises_tailles["annees"] = {t: [{k: (round(v, 2) if isinstance(v, float) else v) for k, v in x.items()} for x in l]
+                                         for t, l in _ent_bilan_annees(p, (2037, 2073)).items()}
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)
     hypotheses = sorted((x.cle for x in p if x.statut == "HYPOTHESE" and not x.source))

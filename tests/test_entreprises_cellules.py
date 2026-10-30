@@ -46,3 +46,18 @@ def test_dirigeants_payes_en_salaire():
     assert a["prudent"]["perte"] < 0.64 * a["prudent"]["salaire"]
     sans = Parametres().avec({"entreprises_cellules.arbitrage_tpe/active": False})
     assert arbitrage_tpe(sans)["perte"] == 0.0
+
+
+def test_bilan_avec_deduction_et_interets():
+    from moteur.entreprises_cellules import bilan_annees
+    b = {x["taille"]: x for x in bilan(P)}
+    for t, lignes in bilan_annees(P, (2037, 2073)).items():
+        for x in lignes:
+            assert x["deduction"] > 0 and x["interets"] > 0
+            assert x["ecart"] == pytest.approx(b[x["taille"]]["ecart"] - x["deduction"] + x["interets"])
+
+
+def test_deduction_sur_l_is_local_aussi():
+    from moteur.is_investissement import cout_net_etat
+    sans = Parametres().avec({"is_investissement.assiette_locale": False})
+    assert cout_net_etat(P)[2037] == pytest.approx(cout_net_etat(sans)[2037] * 0.45 / 0.40, rel=1e-6)

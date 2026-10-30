@@ -404,3 +404,6 @@ déficitaires retirés de la base de l'IS nouveau (−4,2 Md€), bilan des imp�
 investissement par taille. Prudent 2073 sans règle −0,84 → −0,16 % ; dette 95 → 104 %.
 Suite (demande d'Adrien) : dirigeants de petites sociétés qui se versent un salaire au lieu du bénéfice : 2,4 Md€
 passés en salaire, 0,9 Md€ de recettes perdues par an dans le prudent. Prudent 2073 sans règle −0,16 → −0,02 %.
+Suite (remarque d'Adrien) : bilan par taille avec la déduction de l'investissement et les intérêts non déduits ;
+correction : la déduction jouait sur l'IS de l'État seul, pas sur l'IS local de même assiette (+12,5 % de coût).
+Prudent 2073 sans règle −0,02 → +0,18 %.

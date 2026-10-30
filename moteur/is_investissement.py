@@ -66,10 +66,15 @@ def interets_non_deduits(p: Parametres, taux: float) -> dict[int, float]:
 
 
 def cout_net_etat(p: Parametres, etale: bool = False) -> dict[int, float]:
-    """Coût net pour l'État (Md€) : déduction en plus × IS, moins les intérêts non déduits (lignes 41 et 78)."""
+    """Coût net (Md€) : déduction en plus × IS, moins les intérêts non déduits (lignes 41 et 78) ; IS de l'État et,
+    depuis le 30/10/2026, IS local (même assiette)."""
     montee = p.val("is_investissement.montee_etalee_annees") if etale else p.val("is_investissement.montee_annees")
     ded = _deduction_en_plus(p, montee)
     t_is = p.val("entreprises.taux_is_etat")
+    if p.val("is_investissement.assiette_locale"):
+        # l'IS local (communes, régions) a la même assiette que l'IS de l'État (moteur/collectivites.py) : la
+        # déduction de l'investissement et la fin de la déduction des intérêts jouent aussi sur lui (30/10/2026)
+        t_is += p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
     rec = interets_non_deduits(p, t_is)
     return {t: p.val("is_investissement.active") * p.val("is_investissement.part_payeurs_is") * t_is * ded[t] - rec[t] for t in ANNEES}
 

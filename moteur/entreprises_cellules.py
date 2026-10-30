@@ -166,3 +166,31 @@ def arbitrage_tpe(p: Parametres, jeu: str = "prudent") -> dict:
             salaire += n * w * recours * x
     cache[cle] = {"perte": perte / 1e9, "salaire": salaire / 1e9}
     return cache[cle]
+
+
+def bilan_annees(p: Parametres, annees=(2032, 2037, 2050, 2073)) -> dict:
+    """Bilan par taille avec la déduction immédiate de l'investissement et la fin de la déduction des intérêts
+    (moteur/is_investissement.py), certaines années, ramené à la taille de l'économie de 2029 (Md€ de 2026, hors
+    croissance) pour être comparable au bilan statique. Déduction : au prorata de l'investissement de chaque taille ;
+    intérêts : au prorata de la valeur ajoutée (faute de données sur la dette par taille, hypothèse)."""
+    from .is_investissement import cout_net_etat, interets_non_deduits
+    g = p.val("macro.tendance", "prudent")
+    t_is = p.val("entreprises.taux_is_etat")
+    if p.val("is_investissement.assiette_locale"):
+        t_is += p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
+    net, interets = cout_net_etat(p), interets_non_deduits(p, t_is)
+    tl = tailles(p)
+    va = sum(x["valeur_ajoutee_md"] for x in tl)
+    base = bilan(p)
+    out = {}
+    for t in annees:
+        k = (1 + g) ** (t - 2029)
+        ded, it = (net[t] + interets[t]) / k, interets[t] / k
+        lignes = []
+        for x, b in zip(tl, base):
+            d_ = ded * x["part_investissement"]
+            i_ = it * x["valeur_ajoutee_md"] / va
+            e = b["ecart"] - d_ + i_
+            lignes.append({"taille": x["taille"], "deduction": d_, "interets": i_, "ecart": e, "ecart_pct": e / b["actuel"]})
+        out[t] = lignes
+    return out
