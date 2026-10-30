@@ -34,6 +34,7 @@ LIBELLES_CANAUX = {
     "clause": "Clause de trajectoire",
     "demographie": "Démographie (écart au prudent)",
     "permis_rapide": "Permis rapide (capital privé, coût des services)",
+    "salaires_dirigeants": "Dirigeants de petites sociétés payés en salaire",
 }
 
 POSTES = [("recettes", "Recettes"), ("sante", "Santé"), ("retraites", "Retraites"), ("rui_aah", "RUI et AAH"),
@@ -183,7 +184,9 @@ def donnees(p: Parametres | None = None) -> dict:
     entreprises_tailles = None
     from .entreprises_cellules import actif as _ent_actif, bilan as _ent_bilan, facteur_production as _fp
     if _ent_actif(p):
+        from .entreprises_cellules import arbitrage_tpe as _arb
         entreprises_tailles = {"facteur_production": round(_fp(p), 3),
+                               "arbitrage": {j: {k: round(v, 2) for k, v in _arb(p, j).items()} for j in ("crise", "prudent", "median", "optimiste")},
                                "tailles": [{k: (round(v, 2) if isinstance(v, float) else v) for k, v in x.items()} for x in _ent_bilan(p)]}
     corriges = sorted(x.cle for x in p if x.v235 is not None)
     statuts = Counter(categorie(x) for x in p)

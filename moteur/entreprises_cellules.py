@@ -112,3 +112,57 @@ def flux_investissement(p: Parametres, s: str, m, t_coef: float) -> float:
               - m("reduction_cout_capital_autres", s) * x["production_relative"])
         total -= m("elasticite_invest", s) * x["elasticite_normee"] * (cc - t_coef) * x["part_investissement"] * inv
     return total
+
+
+def arbitrage_tpe(p: Parametres, jeu: str = "prudent") -> dict:
+    """Dirigeants de petites sociétés qui se versent un salaire au lieu de laisser le bénéfice dans la société
+    (réaction à l'IS à 45 %). Pour chaque classe de bénéfice des petites sociétés (bénéfice jusqu'à 150 000 €) et
+    chaque niveau de rémunération actuelle du dirigeant (déciles des indépendants classiques, Insee), on cherche le
+    montant x passé en salaire qui minimise l'impôt total : barème de l'impôt unique et impôt local sur le salaire,
+    contre IS (État et local) et flat tax sur la part distribuée du bénéfice gardé. Le barème est linéaire par
+    morceaux : l'optimum est à un seuil. Renvoie la perte de recettes (Md€ de 2026, positive = perte) et le
+    bénéfice passé en salaire (Md€), à plein effet."""
+    from .collectivites import taux_impot_local
+    from .impot_unique import impot
+    from .recettes.entreprises import classes_entreprises
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("arbitrage_tpe", jeu, p.colonne_prudent)
+    if cle in cache:
+        return cache[cle]
+    a = p.val("entreprises_cellules.arbitrage_tpe")
+    if not actif(p) or not a["active"]:
+        cache[cle] = {"perte": 0.0, "salaire": 0.0}
+        return cache[cle]
+    tau = (p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes")
+           + p.val("impot_local_entreprises.taux_regions"))
+    ft = p.val("capital.flat_tax_dividendes")
+    d = p.val("entreprises_cellules.arbitrage_tpe_part_distribuee", jeu)
+    recours = p.val("entreprises_cellules.arbitrage_tpe_recours", jeu)
+    garde = tau + d * (1 - tau) * ft  # impôt par euro de bénéfice laissé dans la société
+    t_loc = taux_impot_local(p, salaries=True)
+    ab = p.val("impot_local.abattement")
+    seuils = list(p.val("impot_unique.seuils")) + [ab]
+    with (DONNEES / "independants.csv").open(encoding="utf-8") as f:
+        dirigeants = [l for l in csv.DictReader(f) if l["groupe"] == "classiques"]
+    passage = p.val("independants.passage_2023_2026")
+    rem = [(float(l["part_effectif"]), float(l["revenu_annuel"]) * passage) for l in dirigeants]
+
+    def impot_salaire(s):
+        return impot(s, p) + max(0.0, s - ab) * t_loc
+
+    perte = salaire = 0.0
+    for c in classes_entreprises(p):
+        pi = c["benefice_median"]
+        if pi > a["benefice_max"]:
+            continue
+        n = c["entreprises_beneficiaires"] * a["part_avec_dirigeant"]
+        for w, s0 in rem:
+            base = impot_salaire(s0)
+            def total(x):
+                return impot_salaire(s0 + x) - base + (pi - x) * garde
+            candidats = {0.0, pi} | {min(pi, max(0.0, sj - s0)) for sj in seuils}
+            x = min(candidats, key=total)
+            perte += n * w * recours * (total(0.0) - total(x))
+            salaire += n * w * recours * x
+    cache[cle] = {"perte": perte / 1e9, "salaire": salaire / 1e9}
+    return cache[cle]

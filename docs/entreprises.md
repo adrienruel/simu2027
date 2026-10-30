@@ -43,6 +43,23 @@ fiscale dans la valeur ajoutée (« très faible » pour les microentreprises).
    interpolées), l'élasticité moyenne restant celle du module macro. Effet : le canal reste petit (la déduction
    compense le taux), un peu plus défavorable (−0,3 Md€ en 2037 dans le prudent, contre −0,2).
 
+4. **Dirigeants qui se versent un salaire** (`entreprises_cellules.arbitrage_tpe`, demande d'Adrien). Avec l'IS à
+   45 % (63 % avec la flat tax sur la part distribuée), un dirigeant peu payé a intérêt à se verser davantage de
+   salaire : barème de 0 % jusqu'à 12 500 €, 17,9 % jusqu'à 24 000 €, 57 % jusqu'à 32 000 €. Pour chaque classe
+   de bénéfice des petites sociétés (jusqu'à 150 000 €, 1,5 million de sociétés) et chaque niveau de rémunération
+   actuelle du dirigeant (déciles des indépendants classiques, Insee), le modèle cherche le salaire qui minimise
+   l'impôt total. Sociétés avec un dirigeant actif : 69 % (hors sociétés immobilières et holdings, DGFiP).
+   Hypothèses : part du bénéfice gardé qui serait distribuée (75 % dans le prudent) ; part des dirigeants qui font
+   l'arbitrage (75 % dans le prudent, 100 % en crise, 25 % en optimiste).
+
+| Par an, à plein effet | Crise | Prudent | Médian | Optimiste |
+|---|---|---|---|---|
+| Bénéfice passé en salaire | 3,1 Md€ | 2,4 Md€ | 1,6 Md€ | 0,8 Md€ |
+| Recettes perdues | 1,3 Md€ | 0,9 Md€ | 0,5 Md€ | 0,3 Md€ |
+
+   L'effet est limité : les dirigeants déjà payés plus de 32 000 € (la moitié) n'y gagnent rien (66 % au barème),
+   et les petites sociétés ont de petits bénéfices.
+
 ## Effet sur les résultats
 
 | Sans règle / publié | 2029 | 2037 | 2050 | 2073 | Dette 2073 |
@@ -50,14 +67,16 @@ fiscale dans la valeur ajoutée (« très faible » pour les microentreprises).
 | Prudent avant | 4,76 / 3,00 | 4,34 / 3,00 | 3,83 / 3,00 | −0,84 / −0,84 | 95 % |
 | Prudent après | 4,90 / 3,01 | 4,59 / 3,00 | 4,08 / 3,03 | −0,16 / −0,16 | 104 % |
 | Crise après | 4,97 / 3,09 | 5,18 / 3,48 | 4,56 / 3,49 | 5,80 / 4,67 | 157 % |
+| Prudent avec les salaires des dirigeants | 4,91 / 3,03 | 4,63 / 3,00 | 4,07 / 3,02 | −0,02 / −0,02 | 105 % |
+| Crise avec les salaires des dirigeants | 4,99 / 3,11 | 5,24 / 3,55 | 4,67 / 3,60 | 6,14 / 5,01 | 159 % |
 
 En 2029, la règle est au maximum dans le prudent (5 points d'épargne pris, RUI baissé de 148 € par mois jusqu'au
 plancher) et ne suffit plus tout à fait (3,01 %).
 
 ## Ce qui manque (étapes suivantes)
 
-- **Réaction des TPE** : avec un IS à 45 %, des dirigeants de petites sociétés passeront à l'impôt sur le revenu
-  ou se verseront un salaire (arbitrage avec le barème de l'impôt unique) : base des TPE à risque, non comptée.
+- **Passage à l'impôt sur le revenu** (entreprise individuelle) : proche de l'arbitrage par le salaire, non
+  compté à part.
 - **Secteurs** (industrie, commerce, construction, services) : impôts de production très inégaux (industrie
   16 %, commerce et transports 18 %).
 - **Démographie des entreprises** : créations, défaillances, passage de PME à ETI.

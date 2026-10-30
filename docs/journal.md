@@ -402,3 +402,5 @@ réduite par la démographie. Effet sur les comptes : négligeable (déficit san
 `moteur/entreprises_cellules.py` (détail dans docs/entreprises.md) : impôts de production des entreprises
 déficitaires retirés de la base de l'IS nouveau (−4,2 Md€), bilan des impôts par taille (TPE +14 Md€, GE −6 Md€),
 investissement par taille. Prudent 2073 sans règle −0,84 → −0,16 % ; dette 95 → 104 %.
+Suite (demande d'Adrien) : dirigeants de petites sociétés qui se versent un salaire au lieu du bénéfice : 2,4 Md€
+passés en salaire, 0,9 Md€ de recettes perdues par an dans le prudent. Prudent 2073 sans règle −0,16 → −0,02 %.

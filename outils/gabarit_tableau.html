@@ -294,6 +294,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     <h2 id="t-entreprises">Les entreprises par taille</h2>
     <p class="note">Impôts payés par les entreprises de chaque taille, système actuel (IS de 2024, DGFiP ; impôts de production répartis selon la valeur ajoutée et leur poids dans chaque taille, DGFiP et Insee) contre nouveau système (IS à 45 % sur le bénéfice et sur les impôts de production supprimés), en Md€ de 2026, avant la déduction immédiate de l'investissement et avant les réactions. Une part des impôts de production supprimés (<span id="ent-def"></span>) allait à des entreprises déficitaires : elle réduit leurs pertes et n'est imposée que plus tard. Le programme déplace l'impôt des grandes entreprises vers les petites : les TPE passent du taux réduit de 15 % à 45 % et payaient peu d'impôts de production. L'investissement de chaque taille réagit à son propre coût du capital, les petites entreprises davantage (Zwick et Mahon, 2017).</p>
     <div class="carte defile"><table id="t-ent-tab"></table></div>
+    <p class="note" id="ent-arb"></p>
   </section>
 
   <section class="bloc" aria-labelledby="t-param">
@@ -637,6 +638,8 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
       const E = D.entreprises_tailles;
       document.getElementById("bloc-entreprises").hidden = false;
       document.getElementById("ent-def").textContent = fr(100 * (1 - E.facteur_production), 0) + " % de la base, après les déficits reportés imputés plus tard";
+      const Ar = E.arbitrage;
+      if (Ar) document.getElementById("ent-arb").textContent = `Réaction des dirigeants de petites sociétés : avec l'IS à 45 %, ceux qui se versent peu se paient davantage en salaire (barème de 0 % jusqu'à 12 500 €, 17,9 % jusqu'à 24 000 €, 57 % jusqu'à 32 000 €), au lieu de laisser le bénéfice dans la société. Bénéfice passé en salaire : ${fr(Ar.prudent.salaire, 1)} Md€ par an dans le prudent (${fr(Ar.crise.salaire, 1)} en crise, ${fr(Ar.optimiste.salaire, 1)} en optimiste) ; recettes perdues : ${fr(Ar.prudent.perte, 1)} Md€ (${fr(Ar.crise.perte, 1)} en crise).`;
       document.getElementById("t-ent-tab").innerHTML = `<thead><tr><th>Taille</th><th>Entreprises à l'IS</th><th>IS actuel</th><th>Impôts de production</th><th>Total actuel</th><th>IS nouveau</th><th>Écart</th></tr></thead><tbody>` +
         E.tailles.map(x => `<tr><td>${x.libelle}</td><td class="n">${fr(x.entreprises, 0)}</td><td class="n">${fr(x.is_actuel, 1)}</td><td class="n">${fr(x.production_actuelle, 1)}</td><td class="n">${fr(x.actuel, 1)}</td><td class="n">${fr(x.is_nouveau, 1)}</td><td class="n${x.ecart > 0 ? " neg" : ""}">${x.ecart > 0 ? "+" : ""}${fr(x.ecart, 1)} (${x.ecart > 0 ? "+" : ""}${fr(100 * x.ecart_pct, 0)} %)</td></tr>`).join("") + "</tbody>";
     }

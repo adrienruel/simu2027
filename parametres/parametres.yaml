@@ -1372,3 +1372,19 @@ entreprises_cellules:
     statut: HYPOTHESE
     note: "Impôts de production d'origine fiscale rapportés à la valeur ajoutée des microentreprises : « très faible » selon la DGFiP (Statistiques n° 35, 2025, qui donne 1,9 % pour les PME, 2,9 % pour les ETI, 3,4 % pour les GE) ; 1 % retenu."
   elasticite_relative_source: {valeur: 1.95, unite: sans_unite, statut: SOURCE, source: "Zwick et Mahon (2017), American Economic Review, « Tax Policy and Heterogeneous Investment Behavior » : l'investissement des petites entreprises réagit 95 % plus que celui des grandes à l'amortissement accéléré", note: "Réaction relative des TPE (GE = 1) ; PME 1,5 et ETI 1,2 interpolées (hypothèse). L'élasticité moyenne pondérée par l'investissement reste macro.elasticite_invest : seule la répartition change."}
+  arbitrage_tpe:
+    valeur: {active: true, benefice_max: 150000, part_avec_dirigeant: 0.69, montee: 2}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Part avec dirigeant : DGFiP 2024 (Statistiques n° 39), sociétés à l'IS hors activités immobilières (587 000, sociétés civiles immobilières surtout) et financières (233 000, holdings surtout) sur 2,72 millions, soit 69 % ; rémunération actuelle du dirigeant : déciles des revenus des indépendants classiques (Insee, parametres/donnees/independants.csv)"
+    note: "Demande d'Adrien du 30/10/2026 : compter les entrepreneurs qui se verseront des salaires. Petites sociétés : classes de bénéfice jusqu'à 150 000 € (1,5 million de sociétés, ≈ le nombre de TPE bénéficiaires). Montée en deux ans à partir de 2029."
+  arbitrage_tpe_part_distribuee:
+    valeur: {crise: 1.0, prudent: 0.75, median: 0.5, optimiste: 0.5}
+    unite: taux
+    statut: HYPOTHESE
+    note: "Part du bénéfice gardé qui serait distribuée en dividendes (flat tax de 33 %). Plus elle est haute, plus le salaire est intéressant (impôt de 63 % sur le bénéfice distribué, contre 57 % au plus jusqu'à 32 000 € de salaire)."
+  arbitrage_tpe_recours:
+    valeur: {crise: 1.0, prudent: 0.75, median: 0.5, optimiste: 0.25}
+    unite: taux
+    statut: HYPOTHESE
+    note: "Part des dirigeants qui font l'arbitrage (conseillés par leur expert-comptable). Sans source : prudent 75 %."

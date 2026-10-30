@@ -36,3 +36,13 @@ def test_impots_production_des_deficitaires_hors_base():
 
 def test_v235_inchangee():
     assert not Parametres(reference="v235").val("entreprises_cellules.active")
+
+
+def test_dirigeants_payes_en_salaire():
+    from moteur.entreprises_cellules import arbitrage_tpe
+    a = {j: arbitrage_tpe(P, j) for j in ("crise", "prudent", "median", "optimiste")}
+    assert a["crise"]["perte"] > a["prudent"]["perte"] > a["median"]["perte"] > a["optimiste"]["perte"] > 0
+    # on ne perd jamais plus que l'IS et la flat tax du bénéfice passé en salaire
+    assert a["prudent"]["perte"] < 0.64 * a["prudent"]["salaire"]
+    sans = Parametres().avec({"entreprises_cellules.arbitrage_tpe/active": False})
+    assert arbitrage_tpe(sans)["perte"] == 0.0

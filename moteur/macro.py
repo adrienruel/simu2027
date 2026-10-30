@@ -225,7 +225,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     # Permis rapide (correction du 30/10/2026) : capital privé à part, qui s'use comme celui des entreprises, et
     # coût des services instructeurs ; v235 : ajouté au capital du fonds, sans usure ni coût
     permis_separe = p.val("macro.permis_rapide_separe")
-    from .entreprises_cellules import actif as _ent_actif, flux_investissement as flux_inv_tailles
+    from .entreprises_cellules import actif as _ent_actif, arbitrage_tpe, flux_investissement as flux_inv_tailles
     ent_cellules = _ent_actif(p)
     out = {}
     scenarios_clause = p.val("clause.scenarios")
@@ -387,7 +387,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             pib = (pib_demo + (emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_permis + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
                    + pib_tend + pib_ecole)
             q = p.val("macro.part_pib_tendanciel_au_solde")
-            solde = (s_demo + s_emploi + s_aj + s_cap + s_permis + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
+            # dirigeants de petites sociétés qui se versent un salaire au lieu du bénéfice (IS à 45 %)
+            arb = p.val("entreprises_cellules.arbitrage_tpe") if ent_cellules else None
+            s_tpe = (-arbitrage_tpe(p, s)["perte"] * min(1.0, (n + 1) / arb["montee"]) * (1 + tend0) ** n) if arb else 0.0
+            solde = (s_demo + s_emploi + s_aj + s_cap + s_permis + s_tpe + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
                      + (pib_ia + pib_adopt) * q)
             if s == "prudent":
                 solde += (tva_s_t + inv_taxe + carb_t
@@ -474,7 +477,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 "tendance_et_ecole": c_tend, "investissement_entreprises": inv_taxe,
                 "sante": c_sante + c_tva_sante, "carbone": c_carbone,
                 "eviction_epargne": (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n,
-                "clause": mesures, "demographie": s_demo, "permis_rapide": s_permis,
+                "clause": mesures, "demographie": s_demo, "permis_rapide": s_permis, "salaires_dirigeants": s_tpe,
             }
             interets = (taux_reel(t, s) + prime_app) * dette_prec
             solde_public = sp_hors[t] + solde_total - transferts[t] - interets
