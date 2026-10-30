@@ -215,6 +215,16 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                "carbone": carbone["prudent"],
                "eff": p.val("macro.effort_2029", "prudent") + traj_anc_2029 / pib0[2029] - p.val("macro.assouplissement_2029"),
                "p_ecart": p}
+    # Seniors de l'ancien système (correction du 30/10/2026) : emplois et chômeurs proportionnels aux personnes dont
+    # le départ est reporté par l'âge légal à 65 ans, génération par génération (moteur/ancien_systeme.py), au lieu
+    # d'un forfait de la v235 calé sur 1,25 an de report et gardé jusqu'en 2073
+    from .ancien_systeme import retraites_reportes
+    lien_reportes = (p.val("macro.seniors_lies_aux_reportes") and p.val("ancien_systeme.par_generation")
+                     and p.val("demographie.active"))
+    reportes = {t: v * 1e6 for t, v in retraites_reportes(p).items()} if lien_reportes else None
+    # Permis rapide (correction du 30/10/2026) : capital privé à part, qui s'use comme celui des entreprises, et
+    # coût des services instructeurs ; v235 : ajouté au capital du fonds, sans usure ni coût
+    permis_separe = p.val("macro.permis_rapide_separe")
     out = {}
     scenarios_clause = p.val("clause.scenarios")
     for s in ("median", "optimiste", "prudent"):  # la clause du prudent peut se caler sur le médian
@@ -252,6 +262,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                         - m("reduction_cout_capital_autres", s))
         accumulation = rendement * m("part_reinvestie", s) * m("part_capital_nouveau", s)
         capital, k_inv, part_etr = 0.0, 0.0, etr["depart"]
+        k_permis = 0.0
         dette_prec = dette0
         corr = p.val("macro.corrections_relecture")
         hist_rui = {}  # baisses du RUI décidées par la clause (Md€), pour leur effet récessif
@@ -288,17 +299,20 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             k_ch = max(0.0, ct[t]["taux"] - u_inc) / ecart_26 if dyn_ch else 1.0
             emp_ref = (PV["emplois_terme"] * k_ch * _montee(t, m("annees_montee_emploi", s)) - PV["emplois_perdus_subventions"]
                        - PV["emplois_perdus_tardifs"] * (t > pv["emplois_perdus_tardifs"]["annee"]))
-            emp_sen = (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
-                       + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s)))
-                       + m("cumul_emploi_socle", s) * max(0, min(1, (t - m("annee_cumul", s) + 1) / m("montee_cumul", s))))
             fa = demo[s][t]["adultes"] if corr else 1.0  # emplois proportionnels à la population de 18 à 64 ans
+            sen_long = m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s)))
+            if lien_reportes:  # personnes reportées × part en emploi (déjà par génération : pas de facteur fa)
+                sen_court = m("seniors_part_emploi_reportes", s) * reportes[t] / fa
+            else:
+                sen_court = m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
+            emp_sen = (sen_court + sen_long
+                       + m("cumul_emploi_socle", s) * max(0, min(1, (t - m("annee_cumul", s) + 1) / m("montee_cumul", s))))
             emp_ref, emp_sen = emp_ref * fa, emp_sen * fa
             inactifs = inact_t * _montee(t, m("annees_montee_emploi", s)) * demo[s][t]["adultes"]
             emp_sen += inactifs
             if "solde_reformes_terme" in pv:  # bloc emploi unifié : chaque emploi au gain de son canal
                 gc = PV["gains_canaux"]
-                seniors = fa * (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
-                                + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s))))
+                seniors = fa * (sen_court + sen_long)
                 cumul = emp_sen - seniors - inactifs
                 perdus = fa * (PV["emplois_perdus_subventions"]
                                + PV["emplois_perdus_tardifs"] * (t > pv["emplois_perdus_tardifs"]["annee"]))
@@ -320,6 +334,11 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             # Capital du fonds (début d'année)
             # valeur ajoutée brute du capital du fonds : rendement net + usure (+ retombées dans le médian et l'optimiste)
             pib_cap = capital * (m("pib_par_euro_capital", s) + m("usure_capital_fonds", s) + m("externalites_capital_fonds", s))
+            # permis rapide : capital privé (début d'année), valeur ajoutée brute au rendement et à l'usure des
+            # entreprises ; impôts sur le rendement net ; coût des services instructeurs
+            pib_permis = k_permis * (m("pib_par_euro_capital", s) + m("usure_capital", s)) if permis_separe else 0.0
+            s_permis = ((k_permis * m("pib_par_euro_capital", s) * part_budget - p.val("macro.permis_rapide_cout") * (1 + tend0) ** n)
+                        if permis_separe else 0.0)
             # l'usure paie le renouvellement du capital : dans le PIB, pas dans l'assiette des impôts
             s_cap = (capital * (m("pib_par_euro_capital", s) + m("externalites_capital_fonds", s)) * part_budget if corr
                      else pib_cap * part_budget)
@@ -359,10 +378,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             pib_demo = pib0[t] * (ds["emploi"] / dp["emploi"] - 1)
             s_demo = sum(b * (ds[cle_indice[k]] - dp[cle_indice[k]]) for k, b in bases_demo[t].items())
             # Totaux
-            pib = (pib_demo + (emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
+            pib = (pib_demo + (emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_permis + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
                    + pib_tend + pib_ecole)
             q = p.val("macro.part_pib_tendanciel_au_solde")
-            solde = (s_demo + s_emploi + s_aj + s_cap + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
+            solde = (s_demo + s_emploi + s_aj + s_cap + s_permis + s_log + s_erosion + s_fraude + s_aides + pib_prod * q + s_react
                      + (pib_ia + pib_adopt) * q)
             if s == "prudent":
                 solde += (tva_s_t + inv_taxe + carb_t
@@ -449,7 +468,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 "tendance_et_ecole": c_tend, "investissement_entreprises": inv_taxe,
                 "sante": c_sante + c_tva_sante, "carbone": c_carbone,
                 "eviction_epargne": (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n,
-                "clause": mesures, "demographie": s_demo,
+                "clause": mesures, "demographie": s_demo, "permis_rapide": s_permis,
             }
             interets = (taux_reel(t, s) + prime_app) * dette_prec
             solde_public = sp_hors[t] + solde_total - transferts[t] - interets
@@ -467,8 +486,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 # + chômeurs seniors du report de l'âge de départ ; actifs : tendanciels + emplois venus de
                 # l'inactivité (seniors, cumul, inactifs, jeunes entrés plus tôt) + chômeurs seniors
                 emp_t = ct[t]["emploi"] * k_pa
-                sen_source = fa * (p.val("macro.seniors_court", "median") * _montee(t, m("montee_seniors_court", s))
-                                   + p.val("macro.seniors_long", "median") * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s))))
+                court_src = (p.val("macro.seniors_part_emploi_reportes", "median") * reportes[t] if lien_reportes
+                             else fa * p.val("macro.seniors_court", "median") * _montee(t, m("montee_seniors_court", s)))
+                sen_source = court_src + fa * p.val("macro.seniors_long", "median") * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s)))
                 ch_sen = p.val("chomage.seniors_chomeurs_par_emploi") * sen_source
                 from .carrieres import emplois_entree_plus_tot
                 jeunes = sum(emplois_entree_plus_tot(p, s, t).values())
@@ -488,15 +508,17 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 apport = (flux_brut * ds["c_epargne"] - repris_net) * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr)
                 # rendements gardés et rentes versées : au prorata de la part des comptes placée en capital nouveau
                 part_k = min(1.0, capital / (cpt["encours"] / 1e9 * cal)) if cpt["encours"] > 0 else 0.0
-                capital = (capital + apport + rend_net * part_k + m("permis_rapide", s)
+                capital = (capital + apport + rend_net * part_k + (0.0 if permis_separe else m("permis_rapide", s))
                            - c_contrib * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr)
                            + (paiement * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if clause_s else 0.0))
                 sc.detail.setdefault("fonds", {})[t] = {"capital": capital, "encours_comptes": cpt["encours"] / 1e9 * cal,
                                                         "rentes": cpt["paiements"] / 1e9 * cal}
             else:
-                capital = (capital + b24 * ds["c_epargne"] * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + m("permis_rapide", s) + capital * accumulation
+                capital = (capital + b24 * ds["c_epargne"] * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) + (0.0 if permis_separe else m("permis_rapide", s)) + capital * accumulation
                            - (c_contrib * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if corr else 0.0)
                            + (paiement * m("part_capital_nouveau", s) * (1 - m("eviction", s)) * (1 - part_etr) if clause_s else 0.0))
+            if permis_separe:
+                k_permis = k_permis * (1 - m("usure_capital", s)) + m("permis_rapide", s)
             if maastricht >= etr["solde_minimum"]:
                 part_etr = max(part_etr, min(etr["plafond"], etr["depart"] + (etr["plafond"] - etr["depart"]) * max(0, (etr["dette_debut"] - dette / pib_total) / (etr["dette_debut"] - etr["dette_plafond"]))))
             dette_prec = dette

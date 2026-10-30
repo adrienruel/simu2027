@@ -33,6 +33,7 @@ LIBELLES_CANAUX = {
     "eviction_epargne": "Éviction de l'épargne volontaire",
     "clause": "Clause de trajectoire",
     "demographie": "Démographie (écart au prudent)",
+    "permis_rapide": "Permis rapide (capital privé, coût des services)",
 }
 
 POSTES = [("recettes", "Recettes"), ("sante", "Santé"), ("retraites", "Retraites"), ("rui_aah", "RUI et AAH"),

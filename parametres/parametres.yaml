@@ -177,10 +177,12 @@ epargne:
     statut: SOURCE
     source: Coût employeur d'un temps plein au SMIC, juin 2026 (Total!B73)
   rendement_fonds:
-    valeur: 0.0233
+    valeur: 0.0176
+    v235: 0.0233
     unite: taux
-    statut: DECISION
-    note: Rendement réel net de frais, prudent publié (Budget État 2026!B86, v225).
+    statut: HYPOTHESE
+    source: "Calculé : rendement net du capital du fonds dans le prudent (macro.pib_par_euro_capital, 3,2 % réel, actifs régulés, CRE) × (1 − impôt sur les bénéfices du nouveau système, 45 % : taux de l'État, des communes et des régions)"
+    note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10, validé par Adrien) : les comptes ne peuvent pas rapporter plus que le capital qui les porte, une fois l'impôt payé. Avant : 2,33 %, DÉCISION de la v225 (prudent publié de Budget État 2026!B86), supérieur au rendement net d'impôt du prudent. Rendement réel, avant frais (frais non comptés : à ajouter)."
   annees_carriere:
     valeur: 43
     unite: sans_unite
@@ -607,6 +609,13 @@ macro:
     unite: sans_unite
     statut: HYPOTHESE
     note_v235: "v215 (22 octobre 2026) — ÉTAYÉ : une réforme de l'assurance chômage produit l'essentiel de son effet en 3 ans et tout en 5 (Duval, FMI, 2012, sur les réformes Hartz) ; l'apprentissage agit plus tard (Banque de France, Bulletin n° 264, 2026), le logement plus lentement encore. Prudent 7 ans, médian 6, optimiste 5 : la source est la borne optimiste. | Avant : v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : montée en charge plus rapide de l'emploi, ancien optimiste (avant : 5.5)."
+  seniors_lies_aux_reportes: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10) : les emplois de seniors de l'ancien système suivent les personnes dont le départ est réellement reporté par l'âge légal à 65 ans, génération par génération (moteur/ancien_systeme.retraites_reportes : 0,2 million en 2029, 0,68 en 2037, plus personne après 2050), au lieu du forfait macro.seniors_court calé sur 1,25 an de report et gardé jusqu'en 2073."}
+  seniors_part_emploi_reportes:
+    valeur: {crise: 0.085, prudent: 0.1275, median: 0.17, optimiste: 0.17}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Insee (2017), cité par Fipeco : après la réforme de 2010, +17 points d'emploi à 60 ans pour les générations concernées"
+    note: "Part des personnes reportées qui sont en emploi. Médian et optimiste : la source (17 %) ; prudent : les trois quarts, crise : la moitié (mêmes rapports que macro.seniors_court)."
   seniors_court:
     source: "Encadrement : Insee (2017), cité par Fipeco : réforme de 2010, +17 points d'emploi à 60 ans"
     valeur: {crise: 85000, prudent: 127500, median: 170000, optimiste: 170000}
@@ -699,6 +708,13 @@ macro:
     valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}
     unite: sans_unite
     statut: HYPOTHESE
+  permis_rapide_separe: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10) : le capital des projets accélérés est privé ; il est suivi à part, s'use comme celui des entreprises (macro.usure_capital, 10 % par an : l'investissement en plus chaque année fait un stock qui plafonne à environ dix fois le flux) et le permis rapide a un coût (services instructeurs). v235 : ajouté au capital du fonds, sans usure (il gonflait aussi la part des comptes placée en capital nouveau) et sans coût."}
+  permis_rapide_cout:
+    valeur: 0.1
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Coût annuel des services qui instruisent plus vite les autorisations (préfectures, DREAL) : environ 1 500 agents × 70 000 € de coût employeur ≈ 0,1 Md€. Sans source : ordre de grandeur, à remplacer par le chiffrage d'une loi d'accélération (loi Industrie verte de 2023, objectif de délais divisés par deux)."
   permis_rapide:
     valeur: {crise: 1, prudent: 2, median: 3, optimiste: 6}
     unite: sans_unite
@@ -1277,7 +1293,7 @@ ancien_systeme:
     unite: sans_unite
     statut: DECISION
     source: "Seuil bas : ASPA (minimum vieillesse) d'une personne seule au 1er janvier 2026, 1 043,59 € par mois (circulaire Cnav)"
-    note: "DÉCISION d'Adrien du 29/10/2026 : « tout le monde contribue, mais surtout les retraités actuels », contribution progressive de 5 à 10 %. Barème proposé : rien sous le minimum vieillesse ; 5 % juste au-dessus, montant jusqu'à 10 % à 3 000 € bruts par mois (seuil des hautes pensions), 10 % au-delà (taux appliqué à toute la pension, seuils en euros de 2026). Appliqué à la distribution des pensions de la DREES, recalée chaque année sur la pension moyenne de l'ancien système (gelée : la contribution baisse avec le temps). Fuite (hypothèse) : impôt unique et TVA que les retraités ne paient plus sur la part prélevée (25 %)."
+    note: "DÉCISION d'Adrien du 29/10/2026, barème confirmé le 30/10/2026 (à retirer si de meilleures économies sont trouvées) : « tout le monde contribue, mais surtout les retraités actuels », contribution progressive de 5 à 10 %. Barème proposé : rien sous le minimum vieillesse ; 5 % juste au-dessus, montant jusqu'à 10 % à 3 000 € bruts par mois (seuil des hautes pensions), 10 % au-delà (taux appliqué à toute la pension, seuils en euros de 2026). Appliqué à la distribution des pensions de la DREES, recalée chaque année sur la pension moyenne de l'ancien système (gelée : la contribution baisse avec le temps). Fuite (hypothèse) : impôt unique et TVA que les retraités ne paient plus sur la part prélevée (25 %)."
   droits_geles_des_2029: {valeur: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 (première option) : la pension des départs dans l'ancien système de 2029 à 2043 (générations 1979 et avant) est calculée normalement au départ, puis gelée en euros courants. Autre option écartée : droits gelés dès 2029 (−0,2 point de déficit en 2037, −0,7 en 2050)."}
   age_legal:
     valeur: {actuel: 64, programme: 65, premiere_annee: 2029, pas_par_generation: 0.5}

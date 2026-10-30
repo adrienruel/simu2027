@@ -102,3 +102,38 @@ période : sans elle, 0,26 % de déficit et 131 % de dette en 2073.
 publié saute en 2038 (désormais affiché) ; rendement versé aux épargnants (2,33 %) supérieur au rendement net
 d'impôt du capital ; RUI réel sous le RSA de 2026 vers 2050 (règle de non-indexation) ; recette carbone saisie
 (57,7 Md€, à recalculer) ; prime de taux symétrique ; permis rapide sans coût ; seniors sur 1,25 an de report.
+
+## Corrections avant l'audit (30 octobre 2026)
+
+Décisions d'Adrien : l'accise de transition (calage de 29 Md€) et le barème de la contribution des retraités actuels
+(5 à 10 %, seuil haut 3 000 €) sont gardés, à retirer si de meilleures économies sont trouvées.
+
+Points de la relecture du 29/10 traités :
+
+1. **Seniors sur 1,25 an de report** (`macro.seniors_lies_aux_reportes`) : les emplois de seniors de l'ancien
+   système suivent désormais les personnes dont le départ est réellement reporté par l'âge légal à 65 ans,
+   génération par génération (0,2 million en 2029, 0,68 en 2037, plus personne après 2050), × 12,75 % en emploi
+   dans le prudent (17 % dans la source, Insee 2017). Avant : un forfait de 127 500 emplois, calé sur 1,25 an de
+   report et gardé jusqu'en 2073, alors que l'ancien système s'éteint (double compte avec les seniors du socle à
+   67 ans à partir de 2043). Chômeurs seniors : même lien (7 pour 17 emplois).
+2. **Permis rapide sans coût** (`macro.permis_rapide_separe`, `macro.permis_rapide_cout`) : capital privé suivi à
+   part, qui s'use à 10 % par an comme celui des entreprises (2 Md€ d'investissement en plus par an font un stock
+   d'environ 20 Md€, au lieu de 90 Md€ en 2073 sans usure), coût des services instructeurs 0,1 Md€ par an
+   (hypothèse sans source). Avant : ajouté au capital du fonds, ce qui gonflait aussi la part des comptes placée
+   en capital nouveau.
+3. **Rendement versé aux épargnants** : 1,76 % au lieu de 2,33 % (calculé : rendement net du capital du prudent,
+   3,2 %, × (1 − 45 % d'impôt sur les bénéfices)). Les comptes ne peuvent pas rapporter plus que le capital qui
+   les porte. Frais de gestion non comptés (à ajouter).
+
+Point vérifié, pas d'incohérence : le RUI versé à 89 % des 65-66 ans alors que le bloc emploi compte des seniors en
+emploi. Le coût est compté pour toute la tranche d'âge, et le RUI économisé par les seniors qui travaillent est
+crédité dans le gain de chaque emploi (moteur/emploi_canaux.gain_au_cout) : rien n'est compté deux fois.
+
+| Sans règle / publié | 2037 | 2050 | 2073 | Dette 2073 |
+|---|---|---|---|---|
+| Prudent avant | 4,28 / 3,00 | 3,66 / 3,00 | −1,64 / −1,64 | 85 % |
+| Prudent après | 4,34 / 3,00 | 3,83 / 3,00 | −0,84 / −0,84 | 95 % |
+| Crise avant | 4,95 / 3,25 | 4,28 / 3,21 | 5,16 / 4,04 | 152 % |
+| Crise après | 4,96 / 3,26 | 4,37 / 3,29 | 5,71 / 4,58 | 155 % |
+
+Effet de chaque correction seule sur le prudent de 2073 : seniors +0,35 point, permis +0,10, rendement +0,42.
