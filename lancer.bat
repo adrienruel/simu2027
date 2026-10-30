@@ -1,6 +1,6 @@
 @echo off
 rem ============================================================================
-rem  Simulation du programme « Ecologie de droite » - lanceur Windows
+rem  Simulation du programme " Ecologie de droite " - lanceur Windows
 rem  Double-cliquer sur ce fichier. Premiere fois : installe un environnement
 rem  Python local (dossier .venv) et les bibliotheques necessaires.
 rem ============================================================================
@@ -19,7 +19,7 @@ if not defined PY (
 if not defined PY (
     echo.
     echo Python n'est pas installe.
-    echo Installez-le depuis https://www.python.org/downloads/ ^(cochez « Add python.exe to PATH »^),
+    echo Installez-le depuis https://www.python.org/downloads/ ^(cochez " Add python.exe to PATH "^),
     echo puis relancez ce fichier.
     echo.
     pause
