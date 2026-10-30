@@ -176,6 +176,16 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         # règle de trajectoire dans ce scénario (même point de départ pour tous : 3 % en 2029 ; Adrien, 29/10/2026)
         clause_s = s in scenarios_clause
         etalement_declenche = None
+        # Chômage dynamique (30/10/2026) : population active et chômeurs tendanciels de chaque année (population de
+        # l'Insee, taux par âge), calés sur 2026 ; l'effet des réformes sur le chômage suit l'écart au chômage
+        # incompressible (rendements décroissants : moins de chômeurs à ramener vers l'emploi, moins d'emplois)
+        dyn_ch = p.val("chomage.dynamique") and p.val("demographie.active")
+        if dyn_ch:
+            from .demographie import chomage_tendanciel
+            ct = chomage_tendanciel(p, s)
+            k_pa = pa / ct[2026]["actifs"]
+            u_inc = p.val("emploi.chomage_incompressible")
+            ecart_26 = p.val("chomage.taux_2026") - u_inc
         eff = m("effort_2029", s) + traj_anc_2029 / pib0[2029] - p.val("macro.assouplissement_2029")
         if s == "prudent" and p.colonne_prudent == "crise":
             eff = p.val("crise.effort_2029_saisi")  # Effets macro!B19 saisi dans le scénario de crise
@@ -212,7 +222,8 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             prime_marche = m("prime_dette", s) / 100 * (ratio_prec - ratio_ref) * 100
             prime_app += (prime_marche - prime_app) / p.val("macro.maturite_moyenne_dette")
             # Emploi
-            emp_ref = (pv["emplois_terme"][s] * _montee(t, m("annees_montee_emploi", s)) - pv["emplois_perdus_subventions"][s]
+            k_ch = max(0.0, ct[t]["taux"] - u_inc) / ecart_26 if dyn_ch else 1.0
+            emp_ref = (pv["emplois_terme"][s] * k_ch * _montee(t, m("annees_montee_emploi", s)) - pv["emplois_perdus_subventions"][s]
                        - pv["emplois_perdus_tardifs"][s] * (t > pv["emplois_perdus_tardifs"]["annee"]))
             emp_sen = (m("seniors_court", s) * _montee(t, m("montee_seniors_court", s))
                        + m("seniors_long", s) * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s)))
@@ -228,7 +239,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 cumul = emp_sen - seniors - inactifs
                 perdus = fa * (pv["emplois_perdus_subventions"][s]
                                + pv["emplois_perdus_tardifs"][s] * (t > pv["emplois_perdus_tardifs"]["annee"]))
-                s_emploi = (fa * pv["solde_reformes_terme"][s] * _montee(t, m("annees_montee_emploi", s))
+                s_emploi = (fa * pv["solde_reformes_terme"][s] * k_ch * _montee(t, m("annees_montee_emploi", s))
                             - perdus * gc["perdus"] + seniors * gc["population_active"] + cumul * gc["perdus"]
                             + inactifs * gc["inactifs"]) / 1e9
             else:
@@ -388,8 +399,24 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             sc.charge_dette[t], sc.solde_public[t], sc.dette[t] = interets, solde_public, dette
             sc.maastricht[t], sc.dette_pib[t], sc.clause[t] = maastricht, dette / pib_total, mesures
             # Taux de chômage (Emploi lignes 28 à 30) : hors seniors, effet récessif de la bascule compris
-            sc.detail.setdefault("chomage", {})[t] = (p.val("inactifs.chomeurs_bit") - emp_ref
-                                                        - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa
+            if dyn_ch:
+                # chômeurs tendanciels − emplois des réformes (chômeurs repris) − effet de l'ajustement budgétaire
+                # + chômeurs seniors du report de l'âge de départ ; actifs : tendanciels + emplois venus de
+                # l'inactivité (seniors, cumul, inactifs, jeunes entrés plus tôt) + chômeurs seniors
+                emp_t = ct[t]["emploi"] * k_pa
+                sen_source = fa * (m("seniors_court", "median") * _montee(t, m("montee_seniors_court", s))
+                                   + m("seniors_long", "median") * max(0, min(1, (t - m("annee_seniors_long", s) + 1) / m("montee_seniors_long", s))))
+                ch_sen = p.val("chomage.seniors_chomeurs_par_emploi") * sen_source
+                from .carrieres import emplois_entree_plus_tot
+                jeunes = sum(emplois_entree_plus_tot(p, s, t).values())
+                chomeurs = (ct[t]["chomeurs"] * k_pa - emp_ref - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * emp_t + ch_sen)
+                actifs = ct[t]["actifs"] * k_pa + emp_sen + jeunes + ch_sen
+                sc.detail.setdefault("chomage", {})[t] = max(0.0, chomeurs) / actifs
+                sc.detail.setdefault("chomage_detail", {})[t] = {"tendanciel": ct[t]["taux"], "chomeurs": chomeurs, "actifs": actifs,
+                                                                 "seniors": ch_sen, "reformes": emp_ref, "k_reformes": k_ch}
+            else:
+                sc.detail.setdefault("chomage", {})[t] = (p.val("inactifs.chomeurs_bit") - emp_ref
+                                                            - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa
             # Année suivante : capital du fonds, part à l'étranger
             if comptes_actifs:
                 cpt = comptes_s[s][t]

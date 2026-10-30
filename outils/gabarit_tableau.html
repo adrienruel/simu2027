@@ -191,6 +191,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     <section class="bloc" aria-labelledby="t-chomage">
       <h2 id="t-chomage">Taux de chômage, en %</h2>
       <div class="carte"><div class="legende" id="leg-chomage"></div><div id="g-chomage"></div></div>
+      <p class="note">Chômage sans le programme : population active de chaque année (projections de l'Insee, taux d'emploi et de chômage par âge de 2025, calés sur 8,3 % en 2026) ; il ne bouge qu'avec la composition par âge (moins de jeunes, un taux un peu plus bas). Le programme retire les chômeurs repris par ses réformes (effet proportionnel à l'écart au chômage incompressible de 3,5 %) et ceux de l'effet récessif de l'ajustement de 2029 ; il ajoute des chômeurs seniors avec le report de l'âge de départ (7 chômeurs pour 17 emplois gardés, réforme de 2010, Insee). Les emplois venus de l'inactivité (seniors, cumul, inactifs, jeunes entrés plus tôt) grossissent la population active sans réduire le nombre de chômeurs.</p>
     </section>
   </div>
 
@@ -638,7 +639,7 @@ footer { font-size: 12.5px; color: var(--encre-3); display: grid; gap: 4px; }
     tableAtt();
     dessinerIncert();
     courbe("g-dette", "leg-dette", S.map(s => ({ s, v: D.series[s].dette_pib })), { annees: A, seuil: 60, seuilLib: "60 %", unite: " %", dec: 1, aria: "Dette publique par scénario", min: 0 });
-    courbe("g-chomage", "leg-chomage", S.map(s => ({ s, v: D.series[s].chomage.slice(0, AC.length) })), { annees: AC, unite: " %", dec: 2, aria: "Taux de chômage par scénario, 2029-2040" });
+    courbe("g-chomage", "leg-chomage", S.map(s => ({ s, v: D.series[s].chomage.slice(0, AC.length) })), { annees: AC, unite: " %", dec: 2, aria: `Taux de chômage par scénario, 2029-${D.meta.chomage_jusqu_a}` });
     detail();
   };
   let largeur = window.innerWidth;

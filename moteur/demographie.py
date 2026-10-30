@@ -168,3 +168,27 @@ def creches_nouvelles(p: Parametres) -> dict[int, float]:
         avant = max(avant, places)
         out[t] = (places * p.val("famille.cout_place_fonctionnement") + construites * p.val("famille.cout_place_investissement")) / 1e9
     return out
+
+
+def chomage_tendanciel(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
+    """Chômage sans le programme, année par année : personnes en emploi par âge (population × taux d'emploi de
+    2025, figés) et chômeurs par âge au taux de chômage de 2025 de leur âge (Insee : 19,8 % avant 25 ans, 6,9 % de
+    25 à 49 ans, 5,0 % après 50 ans), niveau calé sur le taux de 2026 (chomage.taux_2026). Le taux de chômage
+    tendanciel ne bouge qu'avec la composition par âge des actifs (moins de jeunes : un taux plus bas)."""
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("chomage_tendanciel", jeu, p.colonne_prudent)
+    if cle in cache:
+        return cache[cle]
+    taux = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    u = {a: v for k, v in p.val("chomage.taux_par_age").items() for a in _tranche(k)}
+    brut = {}
+    for t, v in population(p, jeu).items():
+        e = sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1))
+        c = sum(v[a] * taux.get(a, 0.0) * u.get(a, 0.0) / (1 - u.get(a, 0.0)) for a in range(18, AGE_MAX + 1))
+        brut[t] = (e, c)
+    e26, c26 = brut[2026]
+    u26 = p.val("chomage.taux_2026")
+    k = u26 / (1 - u26) * e26 / c26  # chômeurs calés : taux de 2026 = chomage.taux_2026
+    out = {t: {"emploi": e, "chomeurs": c * k, "actifs": e + c * k, "taux": c * k / (e + c * k)} for t, (e, c) in brut.items()}
+    cache[cle] = out
+    return out

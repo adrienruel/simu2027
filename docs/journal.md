@@ -370,3 +370,29 @@ sous la cible. Effet : prudent 2073 −1,79 → −1,77 % (moins d'épargne pris
 | Prudent | 4,68 / 3,00 | 5,06 / 3,14 | 4,28 / 3,00 | 3,66 / 3,00 | −1,77 / −1,77 | 85 % |
 | Médian | 4,27 / 3,00 | 3,50 / 3,00 | 2,35 / 2,14 | −0,78 / −0,73 | −8,81 / −8,81 | −64 % |
 | Optimiste | 3,65 / 3,00 | 2,14 / 1,89 | 0,54 / 0,34 | −3,02 / −2,98 | −10,75 / −10,75 | −122 % |
+
+## 30 octobre 2026 — Chômage jusqu'en 2073
+
+Demande d'Adrien : le chômage n'était calculé que jusqu'en 2040 (population active figée en 2026, comme la v235).
+Paramètre `chomage.dynamique` (v235 : non). Chaque année :
+- **sans le programme** (`demographie.chomage_tendanciel`) : population de l'Insee × taux d'emploi par âge de 2025,
+  chômeurs par âge au taux de 2025 de leur âge (Insee : 19,8 % avant 25 ans, 6,9 % de 25 à 49, 5,0 % après 50),
+  calés sur 8,3 % en 2026. Taux tendanciel : 8,3 % en 2037, 8,1 % en 2050, 8,0 % en 2073 (moins de jeunes) ;
+- **réformes** : chômeurs repris par les réformes, proportionnels à l'écart entre le taux tendanciel et le
+  chômage incompressible de 3,5 % (rendements décroissants : −6 % d'emplois des réformes en 2073, effet aussi
+  sur le budget) ; effet récessif de l'ajustement de 2029 et des baisses du RUI de la règle ;
+- **seniors** : 7 chômeurs en plus pour 17 emplois de seniors gardés (réforme de 2010, Insee 2017), au niveau de la
+  source dans tous les scénarios : 70 000 en 2037, 195 000 à partir de 2050 avec le socle à 67 ans ;
+- **population active** : grossie des emplois venus de l'inactivité (seniors, cumul, inactifs, jeunes entrés plus
+  tôt), qui ne réduisent pas le nombre de chômeurs.
+
+| Chômage (%) | 2029 | 2032 | 2037 | 2040 | 2050 | 2060 | 2073 |
+|---|---|---|---|---|---|---|---|
+| Crise | 9,40 | 9,16 | 8,33 | 8,29 | 8,39 | 8,32 | 8,28 |
+| Prudent | 9,19 | 8,45 | 7,33 | 7,35 | 7,59 | 7,64 | 7,61 |
+| Médian | 8,78 | 7,34 | 6,42 | 6,41 | 6,61 | 6,66 | 6,63 |
+| Optimiste | 8,03 | 5,77 | 5,05 | 5,06 | 5,35 | 5,41 | 5,40 |
+
+Lecture : après 2040, le chômage remonte d'environ 0,3 point, parce que le report du socle à 67 ans met des seniors
+au chômage (la source de 2010 en compte 7 pour 17 emplois gardés) ; la baisse due aux réformes tient, un peu
+réduite par la démographie. Effet sur les comptes : négligeable (déficit sans règle 2073 prudent −1,77 → −1,76 %).

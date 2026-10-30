@@ -940,6 +940,19 @@ etudiants_rui:
   part_chez_parents: {valeur: 0.33, unite: taux, statut: HYPOTHESE, note: "Demi-RUI pour l'étudiant logé chez ses parents (Budget État!C110)."}
 chomage:
   taux_2026: {valeur: 0.083, unite: taux, statut: SOURCE, source: "Insee, 2e trimestre 2026 (Mayotte comprise)"}
+  dynamique: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : chômage modélisé jusqu'en 2073 (v235 : jusqu'en 2040, population active figée en 2026). Population active de chaque année (population de l'Insee × taux d'emploi et de chômage par âge), effet des réformes proportionnel à l'écart au chômage incompressible, chômeurs seniors du report de l'âge de départ (moteur/macro.py)."}
+  taux_par_age:
+    valeur: {"15-24": 0.198, "25-49": 0.069, "50+": 0.050}
+    unite: taux
+    statut: SOURCE
+    source: "Insee, Chômage selon le sexe et l'âge, données annuelles 2025 (publié le 25 mars 2026) : 15-24 ans 19,8 %, 25-49 ans 6,9 %, 50 ans ou plus 5,0 % ; ensemble 7,7 %"
+    note: "Forme par âge seulement : le niveau est calé sur le taux de 2026 (8,3 %). Taux figés : le chômage tendanciel ne bouge qu'avec la composition par âge des actifs."
+  seniors_chomeurs_par_emploi:
+    valeur: 0.41
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee (2017), cité par Fipeco : après la réforme de 2010, +17 points d'emploi et +7 points de chômage à 60 ans pour les générations concernées (7 / 17 = 0,41)"
+    note: "Chômeurs en plus par emploi de senior gardé, appliqué aux emplois de seniors au niveau de la source (colonne médiane de macro.seniors_court et macro.seniors_long) dans tous les scénarios : dans le prudent, moins d'emplois de seniors ne veut pas dire moins de chômeurs (prudent)."
 fonds_reprises:
   investissements_locaux_rentables: {valeur: 20, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "10 Md€ d'origine + 10 Md€ « même doctrine » (Collectivités D17, C64)."}
 objectifs:

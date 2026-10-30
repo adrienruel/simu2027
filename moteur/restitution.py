@@ -174,7 +174,7 @@ def donnees(p: Parametres | None = None) -> dict:
     groupes = Counter(c.split(".")[0] for c in hypotheses)
     return {
         "meta": {"version": _version(), "date": date.today().isoformat(), "euros": "euros constants de 2026",
-                 "scenario_publie": "prudent", "chomage_jusqu_a": 2040},
+                 "scenario_publie": "prudent", "chomage_jusqu_a": 2073 if (p.val("chomage.dynamique") and p.val("demographie.active")) else 2040},
         "annees": annees,
         "scenarios": scen,
         "series": series,
