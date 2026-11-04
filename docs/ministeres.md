@@ -26,17 +26,14 @@ mesure d'âge est corrigé (64 → 67 ans, quatre trimestres par génération).
 
 | Ministère | 2029 | 2037 | 2050 | 2073 |
 |---|---|---|---|---|
-| Éducation | 75,9 | 77,5 | 76,5 | 72,9 |
+| Éducation | 75,9 | 78,8 | 82,0 | 86,7 |
 | Armées | 73,6 | 78,0 | 83,7 | 85,8 |
 | Contribution à l'UE | 30,4 | 32,1 | 34,5 | 35,4 |
-| Recherche et enseignement supérieur | 29,0 | 30,4 | 29,4 | 30,8 |
+| Recherche et enseignement supérieur | 29,0 | 30,5 | 31,2 | 33,5 |
 | Intérieur | 26,7 | 28,3 | 30,5 | 33,4 |
 | Justice (avec l'aide sociale à l'enfance) | 24,0 | 23,9 | 25,0 | 25,8 |
 | Finances | 15,7 | 16,5 | 17,6 | 18,9 |
 | Autres (outre-mer, collectivités, Sécurité sociale hors santé…) | 29,0 | 30,6 | 32,9 | 35,5 |
-
-(Chiffres avant l'élasticité de 0,5 sur les élèves et les étudiants : Éducation et Recherche un peu plus hautes
-après 2035.)
 
 ## Effet
 
