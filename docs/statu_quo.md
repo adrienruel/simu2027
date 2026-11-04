@@ -58,6 +58,11 @@ l'Insee pour 2024). Chaque impôt suit son assiette, barèmes à législation co
 | Taxes locales et affectées | 0,6 | PIB |
 | Recettes non fiscales | 6,3 | PIB |
 
+**Contrôle par OpenFisca** (`statu_quo.prelevements_activite`) : cotisations, CSG, CRDS et impôt sur le revenu
+calculés par OpenFisca-France (législation 2026) sur les distributions de salaires de 2026 donnent 516 Md€ pour le privé
+(répartition : 519, −0,6 %) et 202 Md€ pour les agents publics (répartition : 208, −2,8 %). Deux calculs
+indépendants qui se recoupent ; limite : cas type d'une personne seule (l'impôt des couples n'y est pas).
+
 Avec des taux d'emploi par âge figés, la masse salariale suit le PIB : les recettes restent proches de 51,9 % du PIB ;
 ce qui bouge, ce sont les prélèvements sur les pensions (1,7 → 1,9 %) et les successions (0,7 → 0,8 %). Le détail
 sert surtout de base aux mesures : une mesure d'un programme agit sur un impôt et son assiette.
@@ -133,9 +138,25 @@ autres dépenses sont regroupés : le programme compte l'investissement dans ses
 une partie de l'investissement public vers le fonds (transports, énergie, France 2030, investissements locaux
 rentables), le statu quo le compte dans un bloc à part.
 
-**Question ouverte** : le fonds reprend des investissements publics et des participations de l'État. En comptabilité
-nationale, un fonds contrôlé par l'État qui finance des infrastructures publiques pourrait être classé parmi les
-administrations (Eurostat) ; ses dépenses compteraient alors dans le déficit. À trancher.
+**Fonds hors budget** (DÉCISION d'Adrien, 4/11/2026) : le fonds, qui reprend des investissements publics et des
+participations de l'État, reste hors des administrations publiques. À noter : en comptabilité nationale, un fonds
+contrôlé par l'État qui finance des infrastructures publiques pourrait être classé parmi les administrations
+(Eurostat) ; ses dépenses compteraient alors dans le déficit.
+
+## Feuille de route du statu quo (priorité d'Adrien, 4/11/2026 : chiffrer le statu quo avant de refaire le programme)
+
+1. Prélèvements sur les revenus d'activité par OpenFisca : contrôle fait (privé, public) ; reste les ménages réels
+   (couples, enfants) et les indépendants.
+2. Retraités : CSG, CASA et impôt sur le revenu sur la distribution des pensions (DREES).
+3. TVA et accises : consommation par niveau de revenu (fonction de consommation actuelle du moteur).
+4. IS, impôts de production, patrimoine (successions, droits de mutation, IFI) : données DGFiP déjà dans les
+   hypothèses communes.
+5. Prestations calculées (RSA, prime d'activité, aides au logement, prestations familiales) par OpenFisca, effectifs
+   de bénéficiaires ; assurance chômage par l'Unédic.
+6. Dépenses de l'État mission par mission (crédits 2026), collectivités, Sécurité sociale hors santé et retraites,
+   à la place du bloc « autres ».
+7. Validation : comptes de l'Insee par catégorie, Commission européenne (rapport sur le vieillissement), Cour des
+   comptes.
 
 ## Limites
 

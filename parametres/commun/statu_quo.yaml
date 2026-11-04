@@ -70,6 +70,13 @@ statu_quo:
     source: "Classeur v235, feuille Total, colonne « Ancien » (Md€ de 2024), reconstitution du système actuel impôt par impôt ; feuille « Contrôle système actuel » : 1 318,9 Md€ contre 1 322,5 Md€ d'impôts et cotisations des administrations à l'Insee pour 2024 (−0,27 %)"
     note: "Sert de clé de répartition (parts), le niveau étant celui du PLF 2027. Salaires du privé et du public, indépendants : cotisations, CSG, CRDS et impôt sur le revenu ; retraités : CSG, CASA et impôt sur le revenu des pensions (12 % des pensions) ; la taxe foncière des ménages est comptée avec leurs revenus. Moteur de chaque impôt : masse salariale (salaires, indépendants), pensions (retraités), PIB (consommation, bénéfices, patrimoine), PIB × décès (successions)."
 
+  versants_fonction_publique:
+    valeur: {etat_civils: 0.38, etat_militaires: 0.07, territoriale: 0.29, hospitaliere: 0.26}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, rémunération des salariés des administrations publiques 2025 : État 45 %, administrations locales 29 %, sécurité sociale (hôpitaux) 26 % ; part des militaires dans l'État : ≈ 15 % des effectifs (DGAFP), hypothèse"
+    note: "Poids des tables OpenFisca de chaque versant pour le contrôle des prélèvements sur les agents publics (statu_quo.prelevements_activite)."
+
   apul_depenses_2026:
     valeur: 336.5
     unite: md_eur

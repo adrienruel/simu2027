@@ -328,6 +328,37 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     return out
 
 
+def prelevements_activite(p: Parametres) -> dict[str, dict[str, float]]:
+    """Prélèvements sur les salaires calculés par OpenFisca-France (législation 2026), Md€ de 2026 : cotisations,
+    CSG, CRDS et impôt sur le revenu (coût employeur − salaire net − impôt), et prestations versées aux salariés
+    (RSA, prime d'activité, aides au logement), sur les distributions de salaires de 2026 (privé : Insee ;
+    public : DGAFP, tables de chaque versant pondérées par statu_quo.versants_fonction_publique).
+
+    Sert de contrôle de la répartition des recettes (structure_impots, reconstitution de la v235) : deux calculs
+    indépendants. Cas type d'OpenFisca : personne seule (l'impôt sur le revenu des couples n'est pas représenté)."""
+    from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
+    from .systeme_actuel import _interp, _table_openfisca
+
+    def somme(d, tables: dict[str, float]):
+        r = {"cout": 0.0, "prelevements": 0.0, "impot_revenu": 0.0, "rsa_prime": 0.0, "aide_logement": 0.0}
+        for c, n in zip(d.milieux, d.effectifs):
+            for nom, w in tables.items():
+                T = _table_openfisca() if nom == "prive" else _table_openfisca(versant=nom)
+                x = T["cout_du_travail"]
+                net, ir = _interp(c, x, T["salaire_net"]), _interp(c, x, T["impot_revenu_restant_a_payer"])
+                r["cout"] += w * n * c
+                r["prelevements"] += w * n * (c - net - ir)
+                r["impot_revenu"] += -w * n * ir
+                r["rsa_prime"] += w * n * (_interp(c, x, T["rsa"]) + _interp(c, x, T["ppa"]))
+                r["aide_logement"] += w * n * _interp(c, x, T["aide_logement"])
+        return {k: v / 1e9 for k, v in r.items()}
+    cache = p.__dict__.setdefault("_cache", {})
+    if "sq_activite" not in cache:
+        cache["sq_activite"] = {"prive": somme(effectifs_prive_2026(p), {"prive": 1.0}),
+                                "public": somme(effectifs_public_2026(p), p.val("statu_quo.versants_fonction_publique"))}
+    return cache["sq_activite"]
+
+
 def recettes(p: Parametres, s: str) -> dict[int, float]:
     """Recettes publiques totales (Md€ de 2026), somme des impôts et des recettes non fiscales."""
     return {t: sum(x.values()) for t, x in recettes_par_impot(p, s).items()}

@@ -101,3 +101,12 @@ def test_ecart_avec_un_programme(p, res):
     e = sq.ecart(simuler(p), res)
     assert set(e) == set(sq.SCENARIOS)
     assert set(e["prudent"][2037]) == {"deficit", "solde_primaire", "dette_pib", "chomage", "pib"}
+
+
+def test_prelevements_sur_les_salaires_controles_par_openfisca(p):
+    """Deux calculs indépendants : OpenFisca sur les distributions de salaires de 2026, et la répartition des
+    recettes (reconstitution de la v235, calée sur le PLF 2027). Écart sous 3 %."""
+    a = sq.prelevements_activite(p)
+    r = sq.recettes_par_impot(p, "prudent")[2029]
+    assert a["prive"]["prelevements"] == pytest.approx(r["salaires_prive"], rel=0.03)
+    assert a["public"]["prelevements"] == pytest.approx(r["salaires_public"], rel=0.03)

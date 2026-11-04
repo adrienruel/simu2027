@@ -470,3 +470,7 @@ remises au budget du programme (230 Md€ de dépenses, ressources propres égal
 compté). Écart de départ du programme, hors effets macro, prudent 2029 : recettes −163 Md€, retraites +31, santé −12,
 revenu universel contre prestations +68, investissement et autres dépenses +138 ; total +2,0 points de PIB. Aucun
 résultat du programme changé ; statu quo inchangé à 0,1 point près (recettes sur les pensions).
+
+DÉCISIONS d'Adrien (4 novembre 2026) : le fonds reste hors des administrations publiques ; priorité au chiffrage complet
+du statu quo avant de refaire le programme (feuille de route dans docs/statu_quo.md). Premier contrôle : les
+prélèvements sur les salaires calculés par OpenFisca recoupent la répartition des recettes (privé −0,6 %, public −2,8 %).
