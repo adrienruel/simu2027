@@ -9,7 +9,17 @@ from typing import Any
 
 import yaml
 
-CHEMIN_DEFAUT = Path(__file__).resolve().parent.parent / "parametres" / "parametres.yaml"
+RACINE = Path(__file__).resolve().parent.parent
+FICHIERS_COMMUNS = (RACINE / "parametres" / "commun" / "economie.yaml", RACINE / "parametres" / "commun" / "options.yaml")
+PROGRAMME_DEFAUT = "ecologie_de_droite"
+
+
+def dossier_programme(programme: str = PROGRAMME_DEFAUT) -> Path:
+    """Dossier d'un programme : paramètres, registre des mesures, ménages types, fiche."""
+    d = RACINE / "programmes" / programme
+    if not d.is_dir():
+        raise FileNotFoundError(f"Programme inconnu : {programme} (pas de dossier {d})")
+    return d
 STATUTS = {"SOURCE", "HYPOTHESE", "DECISION"}
 UNITES_MONTANT = {"eur_an", "eur_mois", "md_eur"}
 
@@ -60,17 +70,33 @@ class Parametre:
 
 
 class Parametres:
-    def __init__(self, chemin: Path | str = CHEMIN_DEFAUT, reference: str | None = None):
-        """reference="v235" : reprend, pour chaque paramètre corrigé depuis, la valeur de la v235 (champ v235)
+    def __init__(self, chemin: Path | str | None = None, reference: str | None = None,
+                 programme: str = PROGRAMME_DEFAUT):
+        """Hypothèses communes (parametres/commun/) + paramètres d'un programme (programmes/<programme>/).
+
+        Un programme ne peut pas redéfinir une hypothèse commune : une clé présente dans deux fichiers lève une
+        erreur. chemin : un fichier unique à la place (ancien format, ou fichier de test).
+        reference="v235" : reprend, pour chaque paramètre corrigé depuis, la valeur de la v235 (champ v235)
         — sert aux tests de reproduction du classeur. Par défaut : valeurs actuelles (publiées)."""
-        brut = yaml.load(Path(chemin).read_text(encoding="utf-8"), Loader=_ChargeurStrict)
         self.reference = reference
-        self.scenarios: list[str] = brut.pop("scenarios")
+        self.programme = None if chemin else programme
+        fichiers = [Path(chemin)] if chemin else [*FICHIERS_COMMUNS, dossier_programme(programme) / "parametres.yaml"]
+        self.scenarios: list[str] = []
         self._p: dict[str, Parametre] = {}
-        for groupe, contenu in brut.items():
-            for nom, champs in contenu.items():
-                cle = f"{groupe}.{nom}"
-                self._p[cle] = self._valider(cle, champs)
+        self.origine: dict[str, Path] = {}
+        for f in fichiers:
+            brut = yaml.load(f.read_text(encoding="utf-8"), Loader=_ChargeurStrict) or {}
+            if "scenarios" in brut:
+                if self.scenarios:
+                    raise ErreurParametre(f"{f.name} : liste des scénarios déjà définie")
+                self.scenarios = brut.pop("scenarios")
+            for groupe, contenu in brut.items():
+                for nom, champs in contenu.items():
+                    cle = f"{groupe}.{nom}"
+                    if cle in self._p:
+                        raise ErreurParametre(f"{cle} défini deux fois : {self.origine[cle]} et {f}")
+                    self._p[cle] = self._valider(cle, champs)
+                    self.origine[cle] = f
 
     def _valider(self, cle: str, c: dict) -> Parametre:
         if getattr(self, "reference", None) == "v235" and "v235" in c:

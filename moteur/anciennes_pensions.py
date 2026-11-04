@@ -50,7 +50,7 @@ def recette_nette(p: Parametres) -> dict[int, float]:
     n_croisiere = p.val("retraites.nombre_retraites") / 1e6
     hp_2026 = economie_hautes_pensions_2026(p)
     base85 = anc[2029]["depenses_md"]
-    bareme_fort = next(m for m in registre() if m["mesure"].startswith("Ancien système : barème des hautes pensions"))
+    bareme_fort = next(m for m in registre(p.programme) if m["mesure"].startswith("Ancien système : barème des hautes pensions"))
     anc_md = {t: anc[t]["depenses_md"] for t in ANNEES}
     out = {}
     for t in ANNEES:

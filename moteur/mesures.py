@@ -9,14 +9,16 @@ from __future__ import annotations
 
 import csv
 
-from .distribution import DONNEES
-from .parametres import Parametres
+from .parametres import PROGRAMME_DEFAUT, Parametres, dossier_programme
 
 ANNEES = list(range(2029, 2074))
 
 
-def registre() -> list[dict]:
-    with (DONNEES / "mesures_economies.csv").open(encoding="utf-8") as f:
+def registre(programme: str | None = PROGRAMME_DEFAUT) -> list[dict]:
+    """Mesures datées du programme (programmes/<programme>/mesures_economies.csv) ; aucune sans programme."""
+    if programme is None:
+        return []
+    with (dossier_programme(programme) / "mesures_economies.csv").open(encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 
@@ -40,7 +42,7 @@ def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float]) -> float:
 def economies(p: Parametres) -> dict[int, float]:
     from .ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
-    reg = registre()
+    reg = registre(p.programme)
     return {t: sum(effet(m, t, p, anc) for m in reg) for t in ANNEES}
 
 
@@ -49,7 +51,7 @@ def economies_par_mesure(p: Parametres) -> dict[str, dict[int, float]]:
     from .ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
     out: dict[str, dict[int, float]] = {}
-    for m in registre():
+    for m in registre(p.programme):
         d = out.setdefault(m["mesure"], {t: 0.0 for t in ANNEES})
         for t in ANNEES:
             d[t] += effet(m, t, p, anc)

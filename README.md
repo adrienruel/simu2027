@@ -1,4 +1,6 @@
-# Moteur de simulation — « Écologie de droite »
+# Simulation des programmes — présidentielle 2027
+
+Premier programme chiffré : « Écologie de droite ».
 
 Refonte du classeur `Chiffrage_programme_complet_v235.xlsx` en moteur Python vérifiable.
 Cahier des charges : `Refonte_outil_de_simulation.md` (projet).
@@ -36,7 +38,8 @@ Relecture indépendante : `docs/relecture.md`.
 
 | Dossier | Contenu |
 |---|---|
-| `parametres/parametres.yaml` | Fichier de paramètres unique : valeur (par scénario si besoin), unité, année des euros, statut, source |
+| `parametres/commun/` | Hypothèses communes à tous les programmes (`economie.yaml`) et options du modèle (`options.yaml`) : valeur (par scénario si besoin), unité, année des euros, statut, source |
+| `programmes/<programme>/` | Un dossier par programme : ses paramètres (qui ne peuvent pas redéfinir une hypothèse commune), son registre des mesures, ses économies datées. Architecture : `docs/architecture.md` |
 | `moteur/parametres.py` | Chargement et validation (source obligatoire si SOURCE, année obligatoire pour un montant, scénarios complets) |
 | `moteur/unites.py` | Seul endroit où l'on convertit en euros de 2026 ; une double conversion lève une erreur |
 | `moteur/impot_unique.py` | Barème de l'impôt unique (personne seule) |
@@ -45,7 +48,6 @@ Relecture indépendante : `docs/relecture.md`.
 | `reference/cibles/` | Valeurs cibles de Total et Trajectoire, que le moteur doit reproduire |
 | `outils/` | Extraction de la référence ; `recalcul.py` recalcule la v235 dans LibreOffice avec des cellules modifiées |
 | `tests/` | Tests automatiques |
-| `parametres/registre_lois.yaml` | Registre des mesures séparables et façon de les neutraliser (attribution) |
 | `moteur/demographie.py` | Population année par année (Insee 2026), emploi par âge, effet du programme sur la natalité, crèches |
 | `moteur/ancien_systeme.py` | Pensions de l'ancien système génération par génération, âge légal à 65 ans |
 | `moteur/taux_effectifs.py` | Taux effectif moyen d'imposition (Devereux et Griffith) pour la localisation |

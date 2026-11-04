@@ -20,16 +20,14 @@ import yaml
 
 from .macro import ANNEES, calculer
 from .mesures import registre as registre_economies
-from .parametres import Parametres
+from .parametres import PROGRAMME_DEFAUT, Parametres, dossier_programme
 from .trajectoire_annuelle import lignes
 
-REGISTRE = Path(__file__).resolve().parent.parent / "parametres" / "registre_lois.yaml"
-
-
-def mesures() -> list[dict]:
-    """Le registre complet : entrées du fichier registre_lois.yaml, puis une entrée par économie datée."""
-    out = list(yaml.safe_load(REGISTRE.read_text(encoding="utf-8"))["mesures"])
-    for m in registre_economies():
+def mesures(programme: str = PROGRAMME_DEFAUT) -> list[dict]:
+    """Le registre complet du programme : entrées de registre_lois.yaml, puis une entrée par économie datée."""
+    fichier = dossier_programme(programme) / "registre_lois.yaml"
+    out = list(yaml.safe_load(fichier.read_text(encoding="utf-8"))["mesures"])
+    for m in registre_economies(programme):
         if float(m["retenue"]) == 0:
             continue
         domaine = "retraites" if m["mesure"].startswith("Ancien système") else "economies"
@@ -64,7 +62,7 @@ def attribuer(p: Parametres | None = None, selection: list[str] | None = None) -
     p = (p or Parametres()).avec({"clause.active": False})
     base = _etat(p)
     resultats = []
-    for m in mesures():
+    for m in mesures(p.programme):
         if selection and m["id"] not in selection:
             continue
         v = _etat(variante(p, m))
@@ -78,7 +76,7 @@ def attribuer(p: Parametres | None = None, selection: list[str] | None = None) -
     ensemble = None
     if not selection:
         modifs, eco = {}, set()
-        for m in mesures():
+        for m in mesures(p.programme):
             if "economie" in m:
                 eco.add(m["economie"])
             else:

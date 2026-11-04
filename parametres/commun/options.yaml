@@ -1,0 +1,86 @@
+# Options du modèle, communes à tous les programmes : unités, modules activés, corrections de méthode.
+# Un programme ne peut pas les redéfinir (moteur/parametres.py).
+
+
+# --- Unités -----------------------------------------------------------------
+unites:
+  annee_modele:
+    valeur: 2026
+    unite: annee
+    statut: DECISION
+    note: Modèle en euros constants de 2026 ; l'économie de 2026 est placée en 2029.
+  annee_bascule:
+    valeur: 2029
+    unite: annee
+    statut: DECISION
+
+# --- Système actuel (approximation par classe, remplacée par OpenFisca à l'étape 3) ---
+systeme_actuel:
+  source: {valeur: openfisca, v235: classeur, unite: sans_unite, statut: DECISION, note: "Salariés du privé : net après cotisations, CSG et impôt sur le revenu, RSA, prime d'activité et aide au logement calculés par OpenFisca-France (législation 2026, personne seule locataire en zone 2, loyer 550 €/mois ; outils/openfisca_actuel.py). Agents publics : fonctionnaires titulaires de chaque versant (primes à 24,6 % du brut, DGAFP, rapport annuel 2025), moyenne pondérée par versant. La taxe foncière reste estimée par le moteur (OpenFisca ne la calcule pas)."}
+
+# --- Entreprises ----------------------------------------------------------------
+entreprises:
+  localisation_taux_effectif: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Remarque d'Adrien du 29/10/2026 : avec la déduction immédiate de l'investissement, l'IS à 45 % dissuade moins. La localisation des activités et la réaction réelle de l'assiette suivent le taux effectif moyen (EATR), qui tient compte de la déduction et de la fin des impôts de production ; le transfert de bénéfices suit toujours le taux légal (moteur/taux_effectifs.py). v235 : taux légal du nouveau système contre taux effectif actuel."}
+
+# --- Effets macroéconomiques (feuille Effets macro), un jeu par scénario ----------------
+# Crise : valeurs de la feuille « Scénario de crise » de la v235 (anciennes valeurs « prudent ») ; à défaut, celles du prudent.
+macro:
+  depart_commun: {valeur: false, v235: false, unite: sans_unite, statut: DECISION, note: "Option (désactivée le 30/10/2026, DÉCISION d'Adrien : chaque scénario garde son propre départ en 2029 ; le point commun est montré en 2027-2028, avant la bascule). Si activée : en 2029, toutes les hypothèses macro (multiplicateur, montées, réactions, érosion, emplois, productivité, santé, carbone…) prennent leur valeur prudente dans tous les scénarios, crise comprise ; chaque scénario rejoint ensuite ses propres valeurs (macro.convergence_scenarios_annees). Avant : l'optimiste avait 70 Md€ de PIB, 1 point de déficit et 1,4 point de chômage d'avance sur la crise dès 2029."}
+  seniors_lies_aux_reportes: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10) : les emplois de seniors de l'ancien système suivent les personnes dont le départ est réellement reporté par l'âge légal à 65 ans, génération par génération (moteur/ancien_systeme.retraites_reportes : 0,2 million en 2029, 0,68 en 2037, plus personne après 2050), au lieu du forfait macro.seniors_court calé sur 1,25 an de report et gardé jusqu'en 2073."}
+  permis_rapide_separe: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10) : le capital des projets accélérés est privé ; il est suivi à part, s'use comme celui des entreprises (macro.usure_capital, 10 % par an : l'investissement en plus chaque année fait un stock qui plafonne à environ dix fois le flux) et le permis rapide a un coût (services instructeurs). v235 : ajouté au capital du fonds, sans usure (il gonflait aussi la part des comptes placée en capital nouveau) et sans coût."}
+  corrections_relecture:
+    valeur: true
+    v235: false
+    unite: sans_unite
+    statut: DECISION
+    note: "Corrections de la relecture indépendante du 29/10/2026 (docs/relecture.md) : (1) l'usure du capital (fonds et entreprises) compte dans le PIB mais n'est pas taxée (elle paie le renouvellement du capital) ; (2) la contribution prise par la clause ne va plus au fonds ; (3) la baisse du RUI par la clause est bornée par le plancher, sur le RUI réel de l'année ; (4) cette baisse a l'effet récessif du multiplicateur. v235 : rien de cela."
+  impots_par_revenu: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 (recalculer l'impôt au lieu d'une moyenne) : les revenus créés ou perdus par les effets macro sont imposés selon leur nature. Salaires : impôt unique, impôt local et TVA des cellules de salariés de l'année, 53 % du coût employeur (barème qui suit la croissance, DÉCISION d'Adrien du 30/10) ; bénéfices (capital du fonds, investissement des entreprises, permis rapide) : IS de 45 % ; valeur ajoutée mêlée (ajustement budgétaire, retombées) : 63 % de salaires (1 − taux de marge des SNF, 32,2 %, − impôts de production, 5 %), 37 % de bénéfices, soit 50 %. v235 : part des recettes dans le PIB (38 %) pour tout."}
+
+chomage:
+  dynamique: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : chômage modélisé jusqu'en 2073 (v235 : jusqu'en 2040, population active figée en 2026). Population active de chaque année (population de l'Insee × taux d'emploi et de chômage par âge), effet des réformes proportionnel à l'écart au chômage incompressible, chômeurs seniors du report de l'âge de départ (moteur/macro.py)."}
+
+# --- Santé année par année (feuille Santé) ------------------------------------------
+sante_trajectoire:
+  derive_prise_en_compte: {valeur: true, unite: sans_unite, statut: DECISION}
+
+# --- Emploi : quatorze réformes (feuille Emploi) -------------------------------------
+# Colonnes de la v235 : crise (« ancien prudent »), médian, optimiste. Le prudent des effets macro
+# prend le milieu de la crise et du médian pour les emplois créés (Effets macro!B8), mais la valeur
+# de crise pour les emplois perdus (fin des subventions, prime d'embauche).
+emploi:
+  gain_par_canal: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Bloc emploi unifié (étape 4, moteur/emploi_canaux.py) : chaque emploi rapporte au budget selon le salaire de son canal, avec les taux de TVA du nouveau système. v235 : un seul gain par emploi, pour un emploi à 1,3 SMIC, avec le taux de TVA de l'ancien système (13 %)."}
+  retenues_calculees: {valeur: {entreprises: 1, baisse_cout_travail: 1, commerces: 1, smic_croissance: 1, prime_jeunes: 1, accords_branche: 1}, unite: sans_unite, statut: DECISION}
+
+# --- Déduction intégrale de l'investissement (feuille IS investissement, v210-v221) -------
+is_investissement:
+  assiette_locale: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (remarque d'Adrien sur le bilan des entreprises) : l'IS local (5 %) est calculé sur la même assiette que l'IS de l'État (moteur/collectivites.py), mais la déduction de l'investissement et la fin de la déduction des intérêts ne jouaient que sur l'IS de l'État (40 %). Elles jouent désormais sur les 45 %. v235 : État seul."}
+
+# --- Démographie (module de population annuel, 29 octobre 2026) -------------------------
+# Projections de population de l'Insee (juin 2026), par âge et par année ; taux d'emploi par âge ; effet du
+# programme sur la natalité. Voir moteur/demographie.py et docs/demographie.md.
+demographie:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Population mise à jour chaque année (Adrien, 29/10/2026). v235 : population figée en 2026, tout suit la tendance de 0,7 %."}
+
+# --- Ancien système : pensions génération par génération (29 octobre 2026) ---------------
+ancien_systeme:
+  par_generation: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : recalculer les pensions de l'ancien système génération par génération avec la mortalité de l'Insee 2026. v235 : dépenses désindexées du COR × part des retraités de l'ancien système."}
+
+# --- Cellules de ménages (moteur/cohortes.py, 29 octobre 2026) -----------------------------
+cohortes:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : simulation par cellules (âge × niveau de salaire) et comptes d'épargne par génération. v235 : budget statique × croissance."}
+
+# --- Carrières : effets des réformes de l'enseignement supérieur (moteur/carrieres.py, 29/10/2026) ---------
+carrieres:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : les réformes du supérieur (sélection, apprentissage et alternance, RUI étudiant sous condition, prépas et écoles facturées) modifient les carrières des générations."}
+
+# --- Entreprises par taille (moteur/entreprises_cellules.py, 30/10/2026) ---------------------------------
+entreprises_cellules:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : comportement des entreprises par taille, comme les cellules de ménages. Données : parametres/donnees/entreprises_tailles.csv (DGFiP, IS 2024 par taille ; Insee, Ésane 2021 ; DGFiP n° 35, impôts de production 2023)."}
+
+# --- Inflation (moteur/inflation.py, 30/10/2026) -----------------------------------------------------------
+inflation:
+  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : modéliser l'inflation année par année (scénarios publiés, plus l'inflation due au programme). v235 : 1,8 % chaque année (calendrier.inflation)."}
+
+# --- Dépenses des ministères année par année (moteur/depenses/ministeres.py, 04/11/2026) -------------------
+ministeres:
+  par_public: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : les dépenses des ministères augmentent avec le temps ; indexation laissée au choix le plus cohérent. Chaque mission suit la croissance (salaires publics alignés sur ceux du privé) et le public qu'elle sert (population, élèves, étudiants, enfants, personnes en emploi), ou le PIB (défense, Union européenne, aide au développement, économie, écologie, agriculture, moitié de la recherche), ou les prix seulement (engagements financiers, monde combattant). v235 : croissance et population totale pour tout."}

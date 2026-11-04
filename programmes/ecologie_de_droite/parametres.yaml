@@ -1,70 +1,6 @@
-# Fichier de paramètres unique du programme « Écologie de droite ».
-#
-# Chaque paramètre porte :
-#   valeur      : un nombre, ou un dictionnaire par scénario (crise, prudent, median, optimiste)
-#   unite       : taux, eur_an, eur_mois, md_eur, sans_unite, annee…
-#   annee_euros : année des euros pour tout montant (2024, 2025 ou 2026) ; absent pour un taux
-#   statut      : SOURCE, HYPOTHESE ou DECISION
-#   source      : référence (obligatoire si statut = SOURCE)
-#   note        : facultatif
-#
-# Règle : une valeur sans source est prise prudente. Le scénario prudent est publié.
-# Valeurs reprises de l'état du programme (v232) et de l'audit v235 ; elles seront
-# recontrôlées contre le registre des paramètres de la v235 à l'étape 2.
+# Programme « Écologie de droite » : mesures et hypothèses propres à ses mesures.
+# Les hypothèses communes sont dans parametres/commun/ ; ce fichier ne peut pas les redéfinir.
 
-scenarios: [crise, prudent, median, optimiste]
-
-# --- Unités -----------------------------------------------------------------
-unites:
-  annee_modele:
-    valeur: 2026
-    unite: annee
-    statut: DECISION
-    note: Modèle en euros constants de 2026 ; l'économie de 2026 est placée en 2029.
-  annee_bascule:
-    valeur: 2029
-    unite: annee
-    statut: DECISION
-  pib_valeur_2025:
-    valeur: 0.019
-    unite: taux
-    statut: SOURCE
-    source: Insee Première n° 2105 (croissance du PIB en valeur 2025)
-    note: Sert au passage des montants de 2024 en euros de 2026 (Total!B124), recettes calées sur 2024 seulement.
-  pib_volume_2026:
-    valeur: 0.005
-    unite: taux
-    statut: SOURCE
-    source: Prévision du gouvernement, septembre 2026
-  deflateur_2026:
-    valeur: 0.015
-    unite: taux
-    statut: HYPOTHESE
-    note: Prudente, sous l'inflation prévue de 2,1 %.
-  salaire_prive_2025:
-    valeur: 0.020
-    unite: taux
-    statut: SOURCE
-    source: Insee, Note de conjoncture juin 2026 (salaire moyen par tête)
-  salaire_prive_2026:
-    valeur: 0.022
-    unite: taux
-    statut: SOURCE
-    source: Insee, Note de conjoncture juin 2026 (salaire moyen par tête)
-  salaire_public_2024:
-    # hausse du salaire net moyen en 2024 par versant, pondérée par les effectifs (millions)
-    valeur:
-      etat: {hausse: 0.047, effectif: 2.54}
-      territoriale: {hausse: 0.033, effectif: 1.94}
-      hospitaliere: {hausse: 0.033, effectif: 1.21}
-    unite: sans_unite
-    statut: SOURCE
-    source: Insee Première n° 2100 (État) et n° 2101 (territoriale) ; hospitalière = territoriale (HYPOTHÈSE)
-  salaire_public_2025_2026:
-    valeur: 0.0
-    unite: taux
-    statut: HYPOTHESE
-    note: Grille stable (DGAFP) ; glissement vieillesse-technicité non compté. Sens prudent.
 
 # --- Impôt unique sur le revenu (sur le coût employeur annuel) ----------------
 impot_unique:
@@ -90,22 +26,6 @@ impot_unique:
     annee_euros: 2026
     statut: DECISION
     note: Mécanique du quotient à préciser avant codage (couples imposés ensemble).
-
-# --- Repères de profils -------------------------------------------------------
-profils:
-  cout_smic_annuel:
-    valeur: 23750
-    unite: eur_an
-    annee_euros: 2026
-    statut: SOURCE
-    source: État du programme v232 (coût employeur du SMIC, profil type)
-    note: L'audit v235 cite 1 930 €/mois (juin 2026) ; écart avec 1 979 €/mois à éclaircir à l'étape 1.
-  cout_median_annuel:
-    valeur: 42500
-    unite: eur_an
-    annee_euros: 2026
-    statut: SOURCE
-    source: État du programme v232 (salarié médian, profil type)
 
 # --- RUI ------------------------------------------------------------------------
 rui:
@@ -209,15 +129,6 @@ epargne:
     unite: sans_unite
     statut: HYPOTHESE
 
-# --- Retraités d'aujourd'hui (système actuel) ------------------------------------
-retraites_actuels:
-  donnees:
-    valeur: {residents_france_2023: 16300000, pension_nette_moyenne_2023: 1692, revalorisation_2024: 0.053, taux_ir_moyen: 0.06}
-    unite: sans_unite
-    statut: SOURCE
-    source: "DREES, Les retraités et les retraites, édition 2025, vue d'ensemble : 17,2 millions de retraités de droit direct fin 2023, dont environ 900 000 à l'étranger ; pension moyenne avec réversion 1 827 € bruts, 1 692 € après prélèvements sociaux. Revalorisation des pensions de base au 1er janvier 2024 : 5,3 %."
-    note: "taux_ir_moyen (impôt sur le revenu moyen des retraités, 6 % de la pension nette) reste une HYPOTHÈSE sans source ; une valeur haute est prudente ici (elle réduit la TVA actuelle, donc la recette du nouveau système calée dessus)."
-
 # --- Retraités en régime de croisière -----------------------------------------
 retraites:
   socle_plein:
@@ -303,27 +214,6 @@ tva:
     statut: HYPOTHESE
     note: Revenu net annuel à partir duquel s'applique chaque profil (modeste, médian, aisé, très aisé).
 
-# --- Consommation des ménages ---------------------------------------------------
-consommation:
-  coefficient:
-    valeur: 7.184
-    v235: 2.05
-    unite: sans_unite
-    statut: SOURCE
-    source: "Ajusté sur Insee Première n° 1815 (septembre 2020), consommation et revenu disponible par unité de consommation, par quintile, 2017 : régression log-log de la consommation TTC sur le revenu, convertie en hors taxe avec le taux moyen de 13 %"
-    note: "Consommation HT = coefficient × (revenu disponible HT)^exposant. DÉCISION d'Adrien du 29/10/2026 : recalée sur l'Insee maintenant, à recaler sur des ménages à l'étape OpenFisca. Épargne implicite : −2 % à 13 000 €, 12 % à 26 000 €, 25 % à 56 000 € (Insee : 2,7 % ; 9,7 % ; 28,4 %). v235 : 2,05 × revenu^0,92 (3 % à 17 %)."
-  exposant:
-    valeur: 0.7914
-    v235: 0.92
-    unite: sans_unite
-    statut: SOURCE
-    source: "Ajusté sur Insee Première n° 1815, voir consommation.coefficient"
-  eviction_epargne_volontaire:
-    valeur: {crise: 0.20, prudent: 0.175, median: 0.15, optimiste: 0.10}
-    unite: taux
-    statut: SOURCE
-    source: Chetty et al. (2014), Danemark (Effets macro, ligne 27)
-
 # --- Impôt local unique -------------------------------------------------------
 impot_local:
   independants_sur_salaire: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Les indépendants paient l'impôt local sur la part de leur revenu prise en salaire (décision du 29/10/2026 : les actifs le paient sur leur salaire) ; le bénéfice laissé en société paie l'IS local."}
@@ -346,17 +236,6 @@ inactifs:
     annee_euros: 2026
     statut: HYPOTHESE
     note: Le RUI d'un inactif baisse linéairement avec son autre revenu, nul à 2 000 €/mois (Inactifs!P14).
-  etudiants:
-    valeur: 3012800
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: RUI!A5, à sourcer.
-  chomeurs_bit:
-    valeur: 2700000
-    unite: sans_unite
-    statut: SOURCE
-    source: "Insee, Informations rapides n° 192 (7 août 2026) : 2,7 millions de chômeurs au sens du BIT au 2e trimestre 2026, taux de 8,3 %"
-    note: RUI!B23.
   part_chomeurs_deja_comptee:
     valeur: 0.2
     unite: taux
@@ -367,78 +246,18 @@ inactifs:
     unite: taux
     statut: HYPOTHESE
 
-# --- Système actuel (approximation par classe, remplacée par OpenFisca à l'étape 3) ---
-systeme_actuel:
-  taux_accises_menages: {valeur: 0.03, unite: taux, statut: HYPOTHESE, source: "Encadrement : TICPE 31 Md€ en 2019 (Fipeco, fiche carburants), droits sur le tabac ≈ 14 Md€, sur les alcools ≈ 4 Md€, accise sur l'électricité ≈ 9 Md€", note: "Accises payées aujourd'hui par les ménages, en part de leur consommation hors taxes (≈ 40 Md€ sur ≈ 1 350 Md€, en supposant 60 % de la TICPE et la moitié de l'accise sur l'électricité payées par les ménages). Sert seulement à comparer le pouvoir d'achat des ménages types : le nouveau taux de consommation comprend les accises écologie et santé, qui remplacent celles-ci."}
-  source: {valeur: openfisca, v235: classeur, unite: sans_unite, statut: DECISION, note: "Salariés du privé : net après cotisations, CSG et impôt sur le revenu, RSA, prime d'activité et aide au logement calculés par OpenFisca-France (législation 2026, personne seule locataire en zone 2, loyer 550 €/mois ; outils/openfisca_actuel.py). Agents publics : fonctionnaires titulaires de chaque versant (primes à 24,6 % du brut, DGAFP, rapport annuel 2025), moyenne pondérée par versant. La taxe foncière reste estimée par le moteur (OpenFisca ne la calcule pas)."}
-  taux_tva_moyen:
-    valeur: 0.125
-    v235: 0.13
-    unite: taux
-    statut: HYPOTHESE
-    source: "Encadrement : IPP (cité par Fipeco) : 11,5 à 12 % de la consommation des ménages hors loyers (2005) ; TVA nette 2024 : 206 Md€ (Fipeco)"
-    note: "Total!B140. Contrôle : avec 13 %, le modèle reconstitue une TVA actuelle de 209 Md€ (salariés, agents, retraités, inactifs, TVA non déductible des entreprises), contre 206 Md€ en 2024 ; 12,5 % donnerait le montant exact. Le taux de 11,5 à 12 % de l'IPP est ancien. Ramené à 12,5 % le 29/10/2026 (question d’Adrien sur la TVA) : il reconstitue les 206 Md€ de 2024 ; 13 % gonflait l’ancienne TVA, donc l’accise de transition qui cale le nouveau système sur les recettes actuelles (prudent : plus bas). v235 : 13 %."
-  rsa_personne_seule: {valeur: 651.69, unite: eur_mois, annee_euros: 2026, statut: SOURCE, source: "RSA au 1er avril 2026"}
-  rsa_forfait_logement: {valeur: 78.2, unite: eur_mois, annee_euros: 2026, statut: SOURCE, source: "RSA, forfait logement 12 %"}
-  prime_activite:
-    valeur: {forfaitaire: 638.28, part_revenus: 0.61, bonus_debut: 709, bonus_max_a: 1658.76, bonus_max: 240.63, forfait_logement: 75.99, seuil_versement: 15}
-    unite: sans_unite
-    statut: SOURCE
-    source: Décret n° 2026-222 du 30 mars 2026 (Salariés du privé, AV9 à AV14 et B69)
-  prime_activite_agents:
-    valeur: {revenu_max: 1470, montant_max: 230, revenu_extinction: 2150}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: Barème simplifié propre aux agents (Fonctionnaires B71-B73), différent de celui du privé.
-  apl: {valeur: {revenu_plein: 700, montant_plein: 200, revenu_extinction: 1900}, unite: sans_unite, statut: HYPOTHESE}
-  taxe_fonciere:
-    valeur: {coef_prive: 2.65661297612247, coef_public: 2.90995818494813, exposant: 0.6}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: Taxe foncière et locale estimée = coefficient × net^exposant.
-  exoneration_taxe_fonciere_prive:
-    valeur: 18000
-    unite: eur_an
-    annee_euros: 2024
-    statut: HYPOTHESE
-    note: >-
-      Dans la v235, la taxe foncière des sept premières classes du privé (net avant aides jusqu'à
-      17 956 €) est saisie à 0 au lieu d'être calculée. Seuil reconstitué entre 17 956 et 18 978 €.
-      Rien d'équivalent pour les agents publics.
-
 # --- Entreprises ----------------------------------------------------------------
 entreprises:
-  localisation_taux_effectif: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Remarque d'Adrien du 29/10/2026 : avec la déduction immédiate de l'investissement, l'IS à 45 % dissuade moins. La localisation des activités et la réaction réelle de l'assiette suivent le taux effectif moyen (EATR), qui tient compte de la déduction et de la fin des impôts de production ; le transfert de bénéfices suit toujours le taux légal (moteur/taux_effectifs.py). v235 : taux légal du nouveau système contre taux effectif actuel."}
-  taux_effectifs: {valeur: {rentabilite: 0.20, taux_reel: 0.03, depreciation: 0.10}, unite: sans_unite, statut: SOURCE, source: "Projet type de l'OCDE pour les taux effectifs (Corporate Tax Statistics ; Hanappi, OECD Taxation Working Paper n° 38, 2018) : rentabilité 20 %, taux réel 3 % ; dépréciation moyenne ≈ 10 % (Banque de France, Bloc-notes Éco n° 64)", note: "Méthode Devereux et Griffith (1998, 2003)."}
   taux_is_etat: {valeur: 0.40, unite: taux, statut: DECISION}
   is_progressif:
     valeur: {active: false, tranches: [[0, 0.40]]}
     unite: sans_unite
     statut: DECISION
     note: "Test demandé par Adrien le 30/10/2026 : IS de l'État progressif par tranches de bénéfice ([seuil bas en €, taux marginal]). Désactivé : taux unique entreprises.taux_is_etat. Variantes chiffrées dans outils/is_progressif.py et docs/is_progressif.md."
-  is_actuel: {valeur: {taux_reduit: 0.15, seuil_reduit: 42500, taux_normal: 0.25}, unite: sans_unite, statut: SOURCE, source: "CGI, art. 219"}
   ratio_tva_non_deductible: {valeur: 1.0, unite: taux, statut: DECISION, note: "v231 : TVA légale aux taux actuels."}
-  impots_production_2023: {valeur: 92.7, unite: md_eur, annee_euros: 2023, note: "Traité comme euros de 2024 par la v235 (ligne 2 de Total × facteur 2024)", statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025)"}
-  impots_production_hors_marchand: {valeur: 17.4, unite: md_eur, annee_euros: 2023, statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025)"}
-  profil_import_marge:
-    valeur: {import_bas: 0.245, import_hausse: 0.04, marge_bas: 0.048, marge_hausse: 0.005, plafond_revenu: 150000}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: Part importée et marge captée par les entreprises françaises sur la consommation en plus (Salariés du privé B61-B65).
 
 # --- Indépendants (feuille Indépendants, v193) ------------------------------------
 independants:
-  classiques: {valeur: 1851000, unite: sans_unite, statut: SOURCE, source: "Insee, non-salariés hors micro, fin 2023"}
-  micro_actifs: {valeur: 1900000, unite: sans_unite, statut: HYPOTHESE, note: "Micro-entrepreneurs économiquement actifs (RUI!J13)."}
-  agriculteurs: {valeur: 408000, unite: sans_unite, statut: SOURCE, source: "Insee, non-salariés agricoles fin 2023"}
-  passage_2023_2026:
-    v235: 1.0395
-    valeur: 1.0706
-    unite: sans_unite
-    statut: SOURCE
-    source: "2024 : revenu moyen des non-salariés classiques +0,7 % en euros constants, inflation 2,0 %, soit +2,7 % (Insee Première n° 2114, 30 juin 2026) ; 2025 et 2026 : comme le salaire moyen du privé, +2,0 % et +2,2 % (unites.salaire_prive_2025 et _2026). 1,027 × 1,020 × 1,022 = 1,0706"
-    note: "Passage des revenus 2023 des indépendants classiques en euros de 2026 (Indépendants!B40). Corrigé le 29/10/2026 (v235 : 1,0395 saisi sans source). 2025 et 2026 supposés suivre les salaires, faute de donnée sur les non-salariés."
-  part_percue: {valeur: {classiques: 0.978, micro: 0.58, agriculteurs: 0.978}, unite: sans_unite, statut: SOURCE, source: "Fraude estimée : 1,1 à 2,2 % des cotisations ; 42 % éludées chez les micro (Urssaf)"}
   correction_couples: {valeur: 0.894, unite: sans_unite, statut: HYPOTHESE, note: "Imposition commune des couples d'indépendants (Anciennes pensions!B21). Depuis le 29/10/2026, ne sert plus qu'aux indépendants : les retraités ont un calcul propre (anciennes_pensions.couples). Reste un forfait, gardé à la valeur la plus favorable aux couples (prudent pour les recettes)."}
   salaire_pivot:
     valeur: 45000
@@ -454,35 +273,19 @@ impot_local_entreprises:
   taux_communes: {valeur: 0.026, unite: taux, statut: DECISION}
   taux_regions: {valeur: 0.024, unite: taux, statut: DECISION}
 
-# --- Autres recettes de la feuille Total ------------------------------------------
-dividendes:
-  revenus_capitaux_mobiliers_2023: {valeur: 53, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "DGFiP Statistiques n° 41 (revenus de 2023)", note: "Traité en euros de 2024 par la v235."}
-  pfu_actuel: {valeur: 0.314, unite: taux, statut: SOURCE, source: "PFU 2026"}
-  elasticite_taux_net: {valeur: 2, unite: sans_unite, statut: SOURCE, source: "Ordre de grandeur : dividendes déclarés +65 % après la flat tax de 2018"}
 revenus_capital:
-  loyers: {valeur: 30, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
-  interets: {valeur: 15, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
-  plus_values_immobilieres: {valeur: 10, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
-  plus_values_actions: {valeur: 17, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
   taux_moyen_bareme: {valeur: 0.38, unite: taux, statut: DECISION, note: "Barème plafonné à 40 % (v171)."}
   plafond: {valeur: 0.40, unite: taux, statut: DECISION}
-  taux_actuel: {valeur: 0.314, unite: taux, statut: SOURCE, source: "Prélèvement forfaitaire et prélèvements sociaux 2026"}
-  elasticite: {valeur: 0.77, unite: sans_unite, statut: SOURCE, source: "Feuille Hauts revenus, B53 (à reprendre du registre)"}
+
 logement:
   amortissement_loyers: {valeur: 0.85, unite: taux, statut: HYPOTHESE}
   part_plus_values_bailleurs: {valeur: 0.5, unite: taux, statut: HYPOTHESE}
   is_bailleurs_sociaux: {valeur: 6.48, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "Loyers supplémentaires des bailleurs sociaux (Logement!B52), à porter avec la feuille Logement."}
-successions:
-  base_nouveau_systeme: {valeur: 16.6, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Droits de succession 2023 : 16,6 Md€ (sur 20,8 Md€ de droits de mutation à titre gratuit, dont 4,3 Md€ de donations) ; Fipeco, F. Écalle, 12 novembre 2024", note: "Montant de 2023 compté comme des euros de 2024 : léger sous-chiffrage (≈ 2 %), dans le sens prudent."}
-  exoneration_entreprises: {valeur: 1.5, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Cour des comptes 2025 (pacte Dutreil), recoupé v170"}
+
 fonds:
   recettes_non_fiscales: {valeur: 29, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Budget de l'État 2026"}
   part_versee_au_fonds: {valeur: 1.0, unite: taux, statut: DECISION}
-accises_entreprises:
-  achats_ht: {valeur: {carburants: 15, gaz_fioul: 8, electricite: 0, aerien: 10}, unite: sans_unite, statut: HYPOTHESE, note: "Achats HT des entreprises soumis aux accises (Md€, Barème TVA B44-B47)."}
-  ancienne_tva_entreprises: {valeur: 76.00990116, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, source: "Encadrement : Fipeco, fiche TVA : TVA nette 2024 de 206 Md€ ; emplois taxables : consommation des ménages ≈ 60 %, logements neufs ≈ 8 %, achats des entreprises non assujetties ≈ 15 %, achats des administrations ≈ 16 % ; soit ≈ 80 Md€ de TVA hors consommation des ménages", note: "TVA non déductible actuelle, somme de la colonne U (à reprendre en données). Ordre de grandeur cohérent avec Fipeco."}
-  autres_impots_produits_actuels: {valeur: 103.834, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Total!C13 (TICPE, tabac, alcool, assurances, jeux, électricité)"}
-  tva_retraites_actuelle: {valeur: calcul, v235: 41, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Calculée par le moteur (recettes/autres.tva_retraites_actuelle) à partir de retraites_actuels.donnees", note: "TVA payée aujourd'hui par les retraités : 34,0 Md€ calculés (€ de 2024), contre 41 Md€ saisis dans la v235 (Total!M4) sans source."}
+
 carbone_importe:
   intensite_kg_par_euro: {valeur: 0.543, unite: sans_unite, statut: HYPOTHESE}
   part_importee: {valeur: 0.64, unite: taux, statut: HYPOTHESE}
@@ -493,26 +296,12 @@ carbone_importe:
 
 # --- Budget de l'État 2026 (feuille Budget État 2026) ----------------------------
 budget_etat:
-  cas_pensions_2026: {valeur: 50.4, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "45,5 Md€ en 2024 + 4 points de taux (B6)."}
-  lpm_2030_courants: {valeur: 76.3, unite: md_eur, annee_euros: 2030, statut: SOURCE, source: "Actualisation de la LPM : 76,3 Md€ en 2030 hors pensions (Total!B78)"}
-  inflation_2026_2030: {valeur: 0.074, unite: taux, statut: HYPOTHESE, note: "Total!B79."}
-  contribution_ue_courants: {valeur: 30.9, unite: md_eur, annee_euros: 2027, statut: SOURCE, source: "Prélèvement sur recettes au profit de l'UE (PLF), v222"}
-  deflateur_contribution_ue: {valeur: 1.018, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : inflation 2027 prévue à 1,9 % (IPCH, Banque de France, septembre 2026)", note: "Passage de la contribution de 2027 en euros de 2026 (B66 : 30,9/1,018). La contribution de 30,9 Md€ est confirmée par le PLF 2027 (rapport de Nicole Le Peih, Banque des territoires, 15/10/2026 ; 28,4 Md€ en LFI 2026)."}
-  part_salariale_recherche: {valeur: 0.4, unite: taux, statut: HYPOTHESE}
   apprentissage: {valeur: 8.0, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Ordre de grandeur (Total!B77)."}
-  eleves_prive: {valeur: 2000000, unite: sans_unite, statut: HYPOTHESE}
   part_eleves_retour_public: {valeur: 0.2, unite: taux, statut: HYPOTHESE}
-  cout_eleve_public: {valeur: 7500, unite: eur_an, annee_euros: 2026, statut: HYPOTHESE}
 
 # --- Dépenses statiques (feuille Total, lignes 23 à 44) -----------------------------
 sante:
-  ondam_2026: {valeur: 274.4, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "LFSS 2026 (Total!N20)"}
-  pensions_invalidite_2024: {valeur: 8.6, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Hors objectif de dépenses, 2024 (Total!B138)"}
-  aide_sociale_autonomie_2024: {valeur: 20.2, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Drees 2024 (écrit dans la formule Santé!B103)"}
   reprise_autonomie_par_etat: {valeur: true, unite: sans_unite, statut: DECISION}
-  heures_apa_millions: {valeur: {montant_md: 4.29, cout_horaire: 25.18}, unite: sans_unite, statut: HYPOTHESE, note: "Santé!B105 = 4,29 / 25,18 × 1000, écrit dans la formule."}
-  etp_aide_autonomie: {valeur: {emploi_direct: 60000, prestataires: 104200}, unite: sans_unite, statut: HYPOTHESE}
-  heures_mensuelles_temps_plein: {valeur: 151.67, unite: sans_unite, statut: SOURCE, source: "Durée légale (35 h)"}
   mesures_a_terme:
     valeur:
       crise: {fraude: 0.3, carence: 0.7183, transports: 0.2, cures: 0.1, imagerie: 0, conge_naissance: 0}
@@ -522,6 +311,7 @@ sante:
     unite: sans_unite
     statut: HYPOTHESE
     note: Md€/an (Santé B32:D37) ; crise = paramètres de la feuille Scénario de crise. Le budget statique prend la colonne prudente (Total!B80).
+
 securite_sociale:
   postes_absents:
     valeur:
@@ -541,6 +331,7 @@ securite_sociale:
   gestion_total_hors_at_maladie: {valeur: 14.63, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Écrit dans la formule B15 (14,63 − B13 − B14)."}
   agents_france_travail: {valeur: 48632, unite: sans_unite, statut: HYPOTHESE, note: "Écrit dans la formule C22."}
   aides_france_travail_supprimees: {valeur: 0.2, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE}
+
 ia:
   plafond_taches_automatisables: {valeur: 0.4, unite: taux, statut: HYPOTHESE}
   cout_services_ia: {valeur: 0.25, unite: taux, statut: HYPOTHESE, note: "Part des salaires économisés (restée sans source)."}
@@ -557,6 +348,7 @@ ia:
   departs_retraite_annuels: {valeur: 0.03, unite: taux, statut: HYPOTHESE}
   part_departs_non_remplaces: {valeur: 1.0, unite: taux, statut: DECISION, note: "DÉCISION du 16 octobre 2026 (v185)."}
   premiere_annee: {valeur: 2028, unite: annee, statut: DECISION}
+
 rui_complements:
   enfants: {valeur: 10724000, v235: 11500000, unite: sans_unite, statut: SOURCE, source: "Insee Première n° 2032 (2025), enfants mineurs vivant en famille en 2023 : 13 882 000, dont 3 158 000 en famille monoparentale ; 13 882 000 − 3 158 000 = 10 724 000 avec leurs deux parents ou en famille recomposée", note: "Corrigé le 29/10/2026 (v235 : 11,5 millions, sans source)."}
   part_enfant: {valeur: 0.15, unite: taux, statut: DECISION}
@@ -574,9 +366,11 @@ rui_complements:
   micro_en_complement: {valeur: 0.4, unite: taux, statut: HYPOTHESE, note: "Part des micro-entrepreneurs exerçant en complément d'un emploi ou d'une retraite (RUI!J14)."}
   aah: {valeur: 14.6, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "PLF 2026 : 14,6 Md€ pour l'AAH, +1,7 % sur 2025 (Sénat, rapport sur la mission Solidarité, insertion et égalité des chances)", note: "Écrit dans la formule RUI!B17 (14,6 + aide au poste des entreprises adaptées)."}
   aide_poste_entreprises_adaptees: {valeur: 0.4278, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Mission Travail et emploi 2026"}
+
 collectivites:
   besoin_financement_2024: {valeur: [5.608, 9.7], unite: sans_unite, statut: HYPOTHESE, note: "Md€ de 2024, Collectivités!B25:C25."}
   part_financee: {valeur: 0, unite: taux, statut: HYPOTHESE}
+
 budget_statique:
   retraites_socle: {valeur: 220, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Hypothèse fixe signalée par l'audit, à côté du calcul actuariel du socle."}
   charge_dette_statique: {valeur: 60, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE}
@@ -598,6 +392,7 @@ transition:
     unite: sans_unite
     statut: SOURCE
     source: DREES fin 2023 (part au-dessus de 3 000 €) ; loi de Pareto ; barème « doux » décidé
+
 penibilite:
   part_concernes: {valeur: 0.1, unite: taux, statut: HYPOTHESE}
   avance_annees: {valeur: 2, unite: sans_unite, statut: DECISION, note: "Plafond actuel du C2P."}
@@ -606,15 +401,6 @@ penibilite:
 # --- Effets macroéconomiques (feuille Effets macro), un jeu par scénario ----------------
 # Crise : valeurs de la feuille « Scénario de crise » de la v235 (anciennes valeurs « prudent ») ; à défaut, celles du prudent.
 macro:
-  depart_commun: {valeur: false, v235: false, unite: sans_unite, statut: DECISION, note: "Option (désactivée le 30/10/2026, DÉCISION d'Adrien : chaque scénario garde son propre départ en 2029 ; le point commun est montré en 2027-2028, avant la bascule). Si activée : en 2029, toutes les hypothèses macro (multiplicateur, montées, réactions, érosion, emplois, productivité, santé, carbone…) prennent leur valeur prudente dans tous les scénarios, crise comprise ; chaque scénario rejoint ensuite ses propres valeurs (macro.convergence_scenarios_annees). Avant : l'optimiste avait 70 Md€ de PIB, 1 point de déficit et 1,4 point de chômage d'avance sur la crise dès 2029."}
-  convergence_scenarios_annees: {valeur: 3, unite: sans_unite, statut: HYPOTHESE, note: "Années pour que chaque scénario atteigne ses propres hypothèses à partir de la valeur prudente de 2029 (poids 0 en 2029, 1/3 en 2030, 2/3 en 2031, 1 en 2032). Sans montée, le passage brutal de 2029 à 2030 ferait baisser le chômage de l'optimiste de près de 2 points en un an. Hypothèse : l'information sur les comportements arrive en deux à trois ans."}
-  annees_montee_emploi:
-    source: "Encadrement : Duval (FMI, 2012) sur les réformes Hartz ; Banque de France, Bulletin n° 264 (2026)"
-    valeur: {crise: 8, prudent: 7, median: 6, optimiste: 5}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "v215 (22 octobre 2026) — ÉTAYÉ : une réforme de l'assurance chômage produit l'essentiel de son effet en 3 ans et tout en 5 (Duval, FMI, 2012, sur les réformes Hartz) ; l'apprentissage agit plus tard (Banque de France, Bulletin n° 264, 2026), le logement plus lentement encore. Prudent 7 ans, médian 6, optimiste 5 : la source est la borne optimiste. | Avant : v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : montée en charge plus rapide de l'emploi, ancien optimiste (avant : 5.5)."
-  seniors_lies_aux_reportes: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10) : les emplois de seniors de l'ancien système suivent les personnes dont le départ est réellement reporté par l'âge légal à 65 ans, génération par génération (moteur/ancien_systeme.retraites_reportes : 0,2 million en 2029, 0,68 en 2037, plus personne après 2050), au lieu du forfait macro.seniors_court calé sur 1,25 an de report et gardé jusqu'en 2073."}
   seniors_part_emploi_reportes:
     valeur: {crise: 0.085, prudent: 0.1275, median: 0.17, optimiste: 0.17}
     unite: taux
@@ -645,35 +431,10 @@ macro:
     valeur: {crise: 10, prudent: 10, median: 10, optimiste: 10}
     unite: sans_unite
     statut: HYPOTHESE
-  multiplicateur:
-    source: "Encadrement : Auclert, Philippon et Ragot (CAE, Focus n° 108, 2024) : 1 ; FMI (2012) : 0,5 avant crise, 0,9 à 1,7 en crise"
-    valeur: {crise: 1.3, prudent: 1.0, median: 1.0, optimiste: 0.5}
-    v235: {crise: 1, prudent: 0.75, median: 0.5, optimiste: 0.3}
-    note: "DÉCISION d'Adrien du 29/10/2026 : se caler sur les experts. Prudent et médian : 1, valeur du CAE (Auclert, Philippon et Ragot, Focus n° 108, 2024) ; crise : 1,3, milieu de la fourchette du FMI en période de crise (0,9 à 1,7, Perspectives de l'économie mondiale, octobre 2012) ; optimiste : 0,5, valeur des prévisionnistes avant 2008 (FMI). La v235 retenait 0,3 en optimiste, sans source transposable."
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "Prudent : multiplicateur de 1, valeur retenue par Auclert, Philippon et Ragot (CAE, Focus n° 108, juillet 2024). Médian : 0,5, valeur que les prévisionnistes retenaient avant la crise de 2008 (FMI, Perspectives de l’économie mondiale, octobre 2012, qui trouve ensuite 0,9 à 1,7 dans les années de crise ; revue d’É. Heyer, OFCE). Optimiste : 0,3, HYPOTHÈSE, pour un ajustement portant surtout sur la dépense (Alesina et Ardagna, 2009, sans valeur transposable). En temps normal, la dépense a un effet plus fort que l’impôt (Gechert, Hughes Hallett et Rannenberg, 2015). | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : multiplicateur de 0,3, valeur optimiste de la note : la confiance compense l'ajustement (avant : 0.4)."
-  annees_effet_ajustement:
-    valeur: {crise: 5, prudent: 4.5, median: 4, optimiste: 3}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "L’effet décroît linéairement. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : effet récessif dissipé en trois ans, ancien optimiste (avant : 3.5)."
   part_capital_nouveau:
     valeur: {crise: 0.75, prudent: 0.75, median: 0.75, optimiste: 0.85}
     unite: sans_unite
     statut: HYPOTHESE
-  eviction:
-    valeur: {crise: 0.2, prudent: 0.175, median: 0.15, optimiste: 0.1}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Chetty et al. (2014), Danemark"
-    note: "Chetty et al. (2014). Doublon de consommation.eviction_epargne_volontaire, à fusionner."
-  pib_par_euro_capital:
-    source: "Encadrement : Banque de France (Sicsic, 2018), Insee 2025 : rendement net du capital ≈ 4 % réel ; actifs régulés ≈ 3,2 % (CRE)"
-    valeur: {crise: 0.022, prudent: 0.032, median: 0.042, optimiste: 0.052}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "v215 (22 octobre 2026) — SOURCÉ. Usure du capital des sociétés non financières : ≈ 10 % par an (9,3 % en 1999, 10 % en 2016, plus d'immatériel ; Banque de France, Bloc-notes Éco n° 64, Sicsic, 2018) ; consommation de capital fixe ≈ 20 % de la valeur ajoutée (même auteur, billet n° 59), soit ≈ 309 Md€ pour 1 545 Md€ de valeur ajoutée (Insee 2025). Rendement net : (excédent brut 497,5 − usure 309) / (actifs fixes 3 084 + terrains bâtis 1 596 Md€, Insee) ≈ 4,0 % réel, terrains rémunérés au même taux (≈ 65 Md€ de rente, au lieu de 48 supposés). Actifs régulés ≈ 3,2 % réel (CRE, TURPE 7). Mélange du fonds : ≈ 3,6 %, ≈ 3,2 % après rendements décroissants. Repère : taux d'actualisation public de 3,2 % pour un bêta de 1 (avis Guesnerie, 2021). Prudent 3,2 %, médian 4,2 % (effets d'entraînement des réseaux et de l'énergie, hypothèse), optimiste 5,2 %. Avant : 5 / 6 / 7 %, avec une usure supposée de 6,4 %. | Avant : v213 (22 octobre 2026) — RECOUPÉ À PARTIR DE SOURCES. Rendement des entreprises : excédent brut d’exploitation des sociétés non financières de 497,5 Md€ (Insee, 2025), moins ≈ 48 Md€ de rente des terrains bâtis (1 596 Md€ × ≈ 3 %, HYPOTHÈSE), pour 3 084 Md€ d’actifs fixes produits (Insee, patrimoine national 2024) : ≈ 14,6 % brut ; usure ≈ 6,4 % par an (bâtiments 2,5 %, machines 12 %, autres actifs 20 %, HYPOTHÈSES, pondérées par les stocks de l’Insee), soit ≈ 8,2 % net. Actifs régulés : rémunération de RTE de 5 % nominal avant impôt (CRE, TURPE 7), ≈ 3,2 % réel. Le capital nouveau du fonds est pour moitié régulé ou à rendement faible (nucléaire, réseaux, renouvelables, logement : feuille Fonds, lignes 32 à 38), pour moitié industrie et IA : ≈ 0,5 × 3,2 % + 0,5 × 8,2 % ≈ 5,7 %, ≈ 5,1 % après les rendements décroissants (capital des entreprises en hausse d’environ un tiers en 2050). Prudent 5 %, médian 6 % (effets d’entraînement des réseaux et de l’énergie), optimiste 7 % : inchangés, désormais recoupés."
   logements_initial:
     valeur: {crise: -40000, prudent: -30000, median: -20000, optimiste: 0}
     unite: sans_unite
@@ -713,7 +474,6 @@ macro:
     valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}
     unite: sans_unite
     statut: HYPOTHESE
-  permis_rapide_separe: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10) : le capital des projets accélérés est privé ; il est suivi à part, s'use comme celui des entreprises (macro.usure_capital, 10 % par an : l'investissement en plus chaque année fait un stock qui plafonne à environ dix fois le flux) et le permis rapide a un coût (services instructeurs). v235 : ajouté au capital du fonds, sans usure (il gonflait aussi la part des comptes placée en capital nouveau) et sans coût."}
   permis_rapide_cout:
     valeur: 0.1
     unite: md_eur
@@ -738,12 +498,6 @@ macro:
     valeur: {crise: 10, prudent: 10, median: 10, optimiste: 10}
     unite: sans_unite
     statut: HYPOTHESE
-  emplois_par_point_pib:
-    source: "Encadrement : Loi d'Okun : fourchette usuelle 0,3 à 0,5"
-    valeur: {crise: 0.5, prudent: 0.45, median: 0.4, optimiste: 0.3}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "Loi d’Okun : fourchette usuelle de 0,3 à 0,5. Chaque emploi détruit coûte un RUI plein. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : 0,3, bas de la fourchette d'Okun (avant : 0.35)."
   productivite:
     source: "Encadrement : OCDE (2014) : réformes françaises, +3,7 % de PIB en dix ans (≈ 0,4 point par an)"
     valeur: {crise: 0.001, prudent: 0.002, median: 0.003, optimiste: 0.004}
@@ -760,17 +514,6 @@ macro:
     statut: HYPOTHESE
     source: "Encadrement : écart OAT − Bund à 10 ans ≈ 0,8 point le 24 juillet 2026 (4,01 % contre 3,22 %)"
     note: "Baisse du taux long attendue de la crédibilité des réformes, atteinte en 8 ans. DÉCISION d'Adrien du 29/10/2026 : l'effet des réformes sur les taux est incertain, il varie selon le scénario (aucun dans la crise et le prudent, un quart de l'écart avec le Bund dans le médian, la moitié dans l'optimiste)."
-  part_reelle_hauts_revenus:
-    source: "Encadrement : Saez, Slemrod et Giertz (Journal of Economic Literature, 2012)"
-    valeur: {crise: 0.5, prudent: 0.375, median: 0.25, optimiste: 0.1}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "HYPOTHÈSE PRUDENTE. La littérature trouve que la réaction des hauts revenus à l’impôt passe surtout par le moment et la forme de déclaration, peu par les heures travaillées (Saez, Slemrod et Giertz, Journal of Economic Literature, 2012). Prudent : la moitié est réelle ; médian : un quart ; optimiste : un dixième. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : un dixième seulement de réaction réelle des hauts revenus, valeur optimiste de la note (avant : 0.175)."
-  tendance:
-    valeur: {crise: 0.007, prudent: 0.007, median: 0.01, optimiste: 0.01}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Prudent : 0,7 % (COR, juin 2026) ; médian et optimiste : 1 %."
   part_reinvestie:
     valeur: {crise: 0.5, prudent: 0.625, median: 0.75, optimiste: 0.9}
     unite: sans_unite
@@ -781,62 +524,12 @@ macro:
     unite: sans_unite
     statut: HYPOTHESE
     note_v235: "HYPOTHÈSE. 0,05 écart-type ≈ 5 points PISA, 0,1 ≈ 10 points (la France a perdu 21 points en mathématiques entre 2018 et 2022). Prudent : zéro, aucun effet durable compté. Mesures concernées : semaine de cinq jours, classes de 12, bac sur épreuves, sélection, ascenseur social. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : enseignants et familles adhèrent aux réformes : +0,1 écart-type (≈ 10 points PISA, la moitié de la perte 2018-2022), ancien optimiste (avant : 0.075). | v212 (22 octobre 2026) — SOURCÉ : la seule mesure du programme évaluée en France, le dédoublement des classes en éducation prioritaire, améliore les résultats en CP et CE1, mais l’effet a disparu à l’entrée en 6e : aucune différence significative en français ni en mathématiques (DEPP, note du 3 février 2026, première cohorte). La DEPP n’a pas pu mesurer l’effet des rythmes scolaires sur les acquis (dossier de juillet 2017, faute de groupe témoin). Les autres mesures (semaine de cinq jours, bac sur épreuves, sélection, ascenseur social) ne sont pas évaluées. Règle de prudence : médian ramené à zéro, comme le prudent. Optimiste gardé à 0,1 écart-type, à titre d’indication (« tout le monde joue le jeu »). Avant : médian 0,05 sans source."
-  croissance_par_ecart_type:
-    source: "Encadrement : Heller-Sahlgren et Jordahl (IFN, 2023) ; Hanushek et Woessmann"
-    valeur: {crise: 0, prudent: 0.00305, median: 0.0061, optimiste: 0.0096}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "SOURCÉ : 1,3 point de croissance par habitant par écart-type de niveau, 49 pays, 1960-2016 ; 0,61 point au lycée sur 1990-2016, 21 pays (Heller-Sahlgren et Jordahl, IFN, 2023, mise à jour plus prudente de Hanushek et Woessmann, qui trouvaient jusqu’à 2 points). Médian : 0,61 ; optimiste : 1,3. Lien très discuté (causalité, poids de quelques pays) : c’est pourquoi le prudent ne le compte pas."
-  ia_productivite:
-    source: "Encadrement : Acemoglu (2024) : 0,07 point par an ; Aghion et Bunel (2024) : 0,27 à 0,4 (fourchette 0,07 à 1,24)"
-    valeur: {crise: 0.0007, prudent: 0.0007, median: 0.0027, optimiste: 0.00475}
-    v235: {crise: 0.001, prudent: 0.00185, median: 0.0027, optimiste: 0.00475}
-    note: "DÉCISION d'Adrien du 29/10/2026 : crise et prudent prennent la source la plus prudente, Acemoglu (2024), 0,07 point par an pendant dix ans ; médian 0,27 (Aghion et Bunel, bas de leur fourchette) ; optimiste 0,475. v235 : 0,10 en crise et 0,185 en prudent (milieu crise-médian)."
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "SOURCÉ : Acemoglu (2024) ≈ 0,07 point par an sur dix ans (prudent) ; Aghion et Bunel (2024) : 0,27 à 0,4 point selon les gains mesurés tâche par tâche (médian : 0,27), médiane de leur fourchette 0,68 point (optimiste), fourchette 0,07 à 1,24. Repères de la Commission de l’IA (2024) : électricité en Europe +1,3 point pendant dix ans, numérique aux États-Unis +0,8 point de 1995 à 2006. Le COR (0,7 %) ne compte pas cet effet à part. | v209 (22 octobre 2026), DEMANDE d’Adrien : compter la hausse de la demande d’IA due à la baisse des coûts. SOURCÉ : le coût d’une requête de niveau GPT-3.5 a été divisé par 280 entre novembre 2022 et octobre 2024 (Stanford, AI Index 2025) ; l’usage de l’IA par les entreprises françaises a triplé de 2023 à 2025 (Insee). L’estimation basse d’Acemoglu (0,07 point) suppose que seuls 23 % des tâches exposées sont rentables à automatiser au coût actuel (Svanberg et al., MIT, 2024). Ces auteurs montrent que si le coût des systèmes baisse de 50 % par an, la moitié des tâches devient rentable en trois ans ; s’il baisse de 10 % par an, moins de la moitié en 2042. Crise : baisse de 10 % par an, part rentable portée à ≈ un tiers en moyenne sur la décennie, soit 0,07 × 33 / 23 ≈ 0,10 point. Prudent : milieu entre crise et médian, 0,185 point (avant : 0,17). Médian et optimiste inchangés : Aghion et Bunel comptent déjà une diffusion large."
   adoption_ia:
     source: "Encadrement : Eurostat (décembre 2025) : 18,2 % des entreprises françaises utilisent l'IA, contre 20 % dans l'Union"
     valeur: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}
     unite: sans_unite
     statut: HYPOTHESE
     note_v235: "v208 (22 octobre 2026), DÉCISION d’Adrien : le programme finance l’IA souveraine (Mistral et autres) et le cloud souverain, sans cap ; l’IA est prise dans sa globalité, cloud compris. CANAL RETENU : le rattrapage de l’adoption. SOURCÉ : 18,2 % des entreprises françaises de 10 salariés ou plus utilisent l’IA en 2025, contre 20 % dans l’Union, 26 % en Allemagne, 33 à 42 % aux Pays-Bas et dans les pays nordiques (Eurostat, décembre 2025 ; Insee Première, 2025). L’effet de la tendance (ligne 256, Aghion et Bunel pour la France) est supposé proportionnel au taux d’adoption. Crise : aucun rattrapage. Médian : la France rejoint la moyenne de l’Union (20 / 18,2 − 1 ≈ +10 %). Optimiste (« tout le monde joue le jeu ») : la France rejoint l’Allemagne (26 / 18,2 − 1 ≈ +43 %). Prudent : milieu entre crise et médian (+5 %, règle du 17 octobre). Leviers du programme : l’État client de l’IA française (feuille IA administration, 25 % des salaires économisés versés à des entreprises françaises), capital du fonds pour le cloud et l’IA souverains (feuille Fonds, ligne 51), électricité nucléaire peu taxée (5 %). Le frein principal reste la demande : 71 % des entreprises qui n’utilisent pas l’IA n’y voient pas d’utilité, 54 % manquent d’expertise (Insee). NON COMPTÉ À PART, pour éviter un double compte : la valeur ajoutée du cloud et de l’IA souverains produits en France, déjà comptée comme rendement du capital du fonds (ligne 98). Avant : 5 % / 10 % / 25 %, sans source."
-  elasticite_invest:
-    source: "Encadrement : France, long terme : −0,24 (OFCE, 2026) à −0,37 (Mésange, 2017)"
-    valeur: {crise: 0.37, prudent: 0.335, median: 0.3, optimiste: 0.37}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "SOURCÉ (v176) pour la France, long terme : −0,24 (OFCE, Daudignon, avril 2026, 1993-2023), −0,22 à −0,28 (Heyer, 2023), −0,3 (Ducoudré, Plane et Villemot, 2015), −0,37 (Bardaji et al., modèle Mésange, 2017). Prudent et optimiste : 0,37, le haut de la fourchette (le pire si le coût monte, le meilleur s’il baisse) ; médian : 0,3. Avant : 0,5 sans source, trop élevé. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : 0,37, haut de la fourchette sourcée (Mésange), le plus favorable quand le coût du capital baisse (avant : 0.335)."
-  usure_capital:
-    valeur: {crise: 0.1, prudent: 0.1, median: 0.1, optimiste: 0.1}
-    unite: sans_unite
-    statut: HYPOTHESE
-  montee_invest:
-    valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}
-    unite: sans_unite
-    statut: HYPOTHESE
-  semi_elasticite_transfert:
-    valeur: {crise: 1.5, prudent: 1.25, median: 1, optimiste: 0.8}
-    unite: sans_unite
-    statut: SOURCE
-    source: "FMI, Beer, de Mooij et Liu (2018)"
-    note: "FMI, Beer, de Mooij et Liu (2018)."
-  part_grandes_entreprises:
-    valeur: {crise: 0.56, prudent: 0.56, median: 0.56, optimiste: 0.56}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Insee, Les entreprises en France 2023"
-    note: "Insee, Les entreprises en France 2023, fiche 3.6."
-  reaction_reelle:
-    valeur: {crise: 0.4, prudent: 0.3, median: 0.2, optimiste: 0}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note_v235: "HYPOTHÈSE (ligne 38). Crise : 0,4."
-  taux_reference_is:
-    valeur: {crise: 0.25, prudent: 0.25, median: 0.25, optimiste: 0.25}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Taux normal de l'IS, article 219 du code général des impôts (25 % depuis 2022)"
   effort_2029:
     valeur: {crise: 0.012, prudent: 0.012, median: 0.011, optimiste: 0.011}
     unite: sans_unite
@@ -847,16 +540,7 @@ macro:
     unite: sans_unite
     statut: HYPOTHESE
     note: "Écrit dans les formules B273:D273 (−0,047 / −0,055 / −0,121), sans libellé : à documenter."
-  taux_apparent_2029: {valeur: 0.027, unite: taux, statut: SOURCE, source: "Charge d'intérêts des APU ≈ 3,2 % du PIB (Effets macro!B211)"}
-  taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
-  annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
-  corrections_relecture:
-    valeur: true
-    v235: false
-    unite: sans_unite
-    statut: DECISION
-    note: "Corrections de la relecture indépendante du 29/10/2026 (docs/relecture.md) : (1) l'usure du capital (fonds et entreprises) compte dans le PIB mais n'est pas taxée (elle paie le renouvellement du capital) ; (2) la contribution prise par la clause ne va plus au fonds ; (3) la baisse du RUI par la clause est bornée par le plancher, sur le RUI réel de l'année ; (4) cette baisse a l'effet récessif du multiplicateur. v235 : rien de cela."
   usure_capital_fonds:
     valeur: {crise: 0.035, prudent: 0.04, median: 0.055, optimiste: 0.065}
     v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
@@ -871,21 +555,9 @@ macro:
     statut: HYPOTHESE
     source: "Encadrement : méta-analyse de Bom et Ligthart (Journal of Economic Surveys, 2014) : élasticité de la production au capital public ≈ 0,08 à court terme, ≈ 0,12 à long terme pour les infrastructures de base, soit un rendement social bien au-dessus du rendement financier"
     note: "Canal ajouté le 29/10/2026 : PIB en plus par euro de capital du fonds, au-delà de son rendement (réseaux, énergie, IA : effets d'entraînement sur le reste de l'économie). Prudent et crise : zéro ; médian 1 % ; optimiste 2 % par an. Le médian sert de cible à la clause : ce canal rend la clause plus exigeante pour le prudent publié."
-  prime_dette:
-    valeur: {crise: 0.035, prudent: 0.03, median: 0.02, optimiste: 0.015}
-    v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "CBO, Working Paper 2019-01 (Debt and Interest Rates) : 2 à 3 points de base de taux long par point de dette/PIB (1,9 à 2,9 selon l'échantillon) ; Laubach (2009) : 2,1 à 3,5 points de base selon l'éviction compensée"
-    note: "Hausse du taux long (en points de pourcentage) par point de dette/PIB au-dessus du niveau de 2029 (symétrique : baisse quand la dette baisse). Prudent : 3 points de base (haut de la fourchette du CBO) ; crise : 3,5 (Laubach sans compensation) ; médian 2 ; optimiste 1,5. Ajouté le 29/10/2026 (canal manquant)."
-  maturite_moyenne_dette: {valeur: 8.5, unite: sans_unite, statut: SOURCE, source: "Agence France Trésor : durée de vie moyenne de la dette négociable de l'État ≈ 8,5 ans (2025)", note: "Le taux apparent rejoint le taux de marché au rythme du renouvellement de la dette (1 / 8,5 par an)."}
   premiere_annee_productivite: {valeur: 2030, unite: annee, statut: HYPOTHESE}
   premiere_annee_ecole: {valeur: 2045, unite: annee, statut: HYPOTHESE}
   annees_ecole: {valeur: 40, unite: sans_unite, statut: HYPOTHESE}
-  annees_ia: {valeur: 10, unite: sans_unite, statut: HYPOTHESE}
-  premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}
-  part_pib_tendanciel_au_solde: {valeur: 0.1, unite: taux, statut: HYPOTHESE}
-  impots_par_revenu: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 (recalculer l'impôt au lieu d'une moyenne) : les revenus créés ou perdus par les effets macro sont imposés selon leur nature. Salaires : impôt unique, impôt local et TVA des cellules de salariés de l'année, 53 % du coût employeur (barème qui suit la croissance, DÉCISION d'Adrien du 30/10) ; bénéfices (capital du fonds, investissement des entreprises, permis rapide) : IS de 45 % ; valeur ajoutée mêlée (ajustement budgétaire, retombées) : 63 % de salaires (1 − taux de marge des SNF, 32,2 %, − impôts de production, 5 %), 37 % de bénéfices, soit 50 %. v235 : part des recettes dans le PIB (38 %) pour tout."}
   assouplissement_2029: {valeur: 0.0121, unite: taux, statut: DECISION, note: "Arrêté à 1,21 point de PIB (v218)."}
   etranger: {valeur: {depart: 0.05, plafond: 0.15, dette_debut: 1.0, dette_plafond: 0.6, solde_minimum: -0.03}, unite: sans_unite, statut: DECISION}
   cible_dette: {valeur: 0.6, unite: taux, statut: DECISION}
@@ -917,27 +589,18 @@ revalorisation:
     unite: sans_unite
     statut: DECISION
     note: "DÉCISION d'Adrien du 30/10/2026 : RUI, AAH, socle et seuils de la contribution des retraités revalorisés du minimum de l'inflation et de la croissance nominale (moteur/inflation.indice_reel) : leur valeur réelle est garantie, sauf les années de croissance réelle négative (baisse sans rattrapage), sans part de la croissance. Les pensions de l'ancien système restent gelées en euros courants. Ancienne règle (« croissance_sans_inflation ») : revalorisés de la croissance réelle sans l'inflation, soit une perte de pouvoir d'achat d'environ 1,1 % par an ; « aucune » : valeur réelle constante."
+
 renouvelables:
-  soutien_budget_2026: {valeur: 9.06, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149"}
-  soutien_2029: {valeur: 10.67, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149 (prévision 2027, gardée en 2029 par prudence)"}
   derniere_signature: {valeur: 2028, unite: annee, statut: DECISION}
-  duree_contrats: {valeur: 20, unite: sans_unite, statut: SOURCE, source: "Cour des comptes, mars 2026"}
 
 # --- Calendrier 2027-2028 (feuille Calendrier budgétaire) ---------------------------
 calendrier:
-  dette_fin_2026_pib: {valeur: 1.193, unite: taux, statut: SOURCE, source: "Prévision de Bercy, septembre 2026 (119,3 % du PIB)"}
-  deficit_tendanciel_2027_2028: {valeur: 0.05, unite: taux, statut: SOURCE, source: "PLF 2027 : 5 % en 2027 ; 2028 gardé au même niveau (prudence)"}
   mesures_2028:
     valeur: {fin_impots_production_is: -24, tva_ecologique: 0, retraites_actuels: 7, dividendes_fonds: 0, ia_education: -0.7}
     unite: sans_unite
     statut: HYPOTHESE
     note: Md€ (Calendrier B8:B12). La fin des impôts de production (−24) est un « écart du modèle » saisi, à recalculer depuis les recettes.
-  dotations_collectivites: {valeur: 90, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "≈ 54 Md€ de concours et ≈ 40 Md€ de fractions de TVA."}
   part_dotations_versee: {valeur: 0, unite: taux, statut: DECISION, note: "Fin des dotations dès la bascule de 2029."}
-  inflation: {valeur: 0.018, unite: taux, statut: DECISION, source: "Encadrement : Banque de France, projections de septembre 2026 (IPCH 1,9 % en 2027, 1,6 % en 2028) ; cible de la BCE 2 %", note: "Objectifs!B8 ; sert au passage en euros constants de la dette et au déficit de Maastricht. DÉCISION d'Adrien du 29/10/2026 : 1,8 % gardé, entre la Banque de France (1,6 % en 2028) et la cible de la BCE (2 %). Une inflation plus basse aggraverait le déficit (1,6 % : +0,13 point en 2037)."}
-deces:
-  reperes: {valeur: {2023: 639000, 2026: 650000, 2037: 752000, 2048: 840000, 2060: 840000, 2070: 819500}, unite: sans_unite, statut: SOURCE, source: "Insee, projections de population (repères de la feuille Successions)"}
-  annee_reference: {valeur: 2023, unite: annee, statut: HYPOTHESE, note: "Décès de 2023 (Successions!C5), année des droits de succession de la base."}
 
 # --- Ascenseur social (feuille Ascenseur social, DÉCISIONS d'Adrien) ----------------
 ascenseur:
@@ -968,23 +631,10 @@ etudiants_rui:
   bourses_actuelles: {valeur: 2.3, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Bourses sur critères sociaux, budget 2026"}
   duree_etudes: {valeur: 5, unite: sans_unite, statut: HYPOTHESE}
   part_chez_parents: {valeur: 0.33, unite: taux, statut: HYPOTHESE, note: "Demi-RUI pour l'étudiant logé chez ses parents (Budget État!C110)."}
-chomage:
-  taux_2026: {valeur: 0.083, unite: taux, statut: SOURCE, source: "Insee, 2e trimestre 2026 (Mayotte comprise)"}
-  dynamique: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : chômage modélisé jusqu'en 2073 (v235 : jusqu'en 2040, population active figée en 2026). Population active de chaque année (population de l'Insee × taux d'emploi et de chômage par âge), effet des réformes proportionnel à l'écart au chômage incompressible, chômeurs seniors du report de l'âge de départ (moteur/macro.py)."}
-  taux_par_age:
-    valeur: {"15-24": 0.198, "25-49": 0.069, "50+": 0.050}
-    unite: taux
-    statut: SOURCE
-    source: "Insee, Chômage selon le sexe et l'âge, données annuelles 2025 (publié le 25 mars 2026) : 15-24 ans 19,8 %, 25-49 ans 6,9 %, 50 ans ou plus 5,0 % ; ensemble 7,7 %"
-    note: "Forme par âge seulement : le niveau est calé sur le taux de 2026 (8,3 %). Taux figés : le chômage tendanciel ne bouge qu'avec la composition par âge des actifs."
-  seniors_chomeurs_par_emploi:
-    valeur: 0.41
-    unite: sans_unite
-    statut: SOURCE
-    source: "Insee (2017), cité par Fipeco : après la réforme de 2010, +17 points d'emploi et +7 points de chômage à 60 ans pour les générations concernées (7 / 17 = 0,41)"
-    note: "Chômeurs en plus par emploi de senior gardé, appliqué aux emplois de seniors au niveau de la source (colonne médiane de macro.seniors_court et macro.seniors_long) dans tous les scénarios : dans le prudent, moins d'emplois de seniors ne veut pas dire moins de chômeurs (prudent)."
+
 fonds_reprises:
   investissements_locaux_rentables: {valeur: 20, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "10 Md€ d'origine + 10 Md€ « même doctrine » (Collectivités D17, C64)."}
+
 objectifs:
   surcroit_tva_2028: {valeur: 0, unite: md_eur, annee_euros: 2026, statut: DECISION, note: "v231 : plus de hausse de TVA en 2028 (Calendrier!B9)."}
   tva_derniere_annee_pleine: {valeur: 2032, unite: annee, statut: DECISION}
@@ -994,26 +644,11 @@ objectifs:
 
 # --- Santé année par année (feuille Santé) ------------------------------------------
 sante_trajectoire:
-  depenses_2024: {valeur: {sante_md: 210, pib_md: 2919.9}, unite: sans_unite, statut: SOURCE, source: "Assurance maladie, cartographie 2024 ; Insee"}
-  scenarios_assurance_maladie:
-    valeur: {tendanciel: 0.007, regulation_volontariste: 0.003, virage_preventif: 0.001, rythme_pib: 0}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Assurance maladie, Charges et produits : hausse de la part du PIB de 2024 à 2030 (points)"
-  promede:
-    valeur: {reference: {part_2011: 0.068, part_2060: 0.088}, vieillissement: {part_2011: 0.068, part_2060: 0.081}}
-    unite: sans_unite
-    statut: SOURCE
-    source: "DG Trésor, modèle PROMEDE"
-  derive_prise_en_compte: {valeur: true, unite: sans_unite, statut: DECISION}
-  scenario_2027_2029: {valeur: regulation_volontariste, unite: sans_unite, statut: HYPOTHESE}
-  pente_phase_1: {valeur: {crise: virage_preventif, prudent: virage_preventif, median: virage_preventif, optimiste: rythme_pib}, unite: sans_unite, statut: DECISION, note: "DÉCISION du 23 octobre (v221) : le prudent prend la pente du médian."}
-  pente_phase_2: {valeur: {crise: reference, prudent: reference, median: vieillissement, optimiste: vieillissement}, unite: sans_unite, statut: SOURCE, source: "DG Trésor, modèle PROMEDE"}
-  derniere_annee_phase_1: {valeur: 2035, unite: annee, statut: HYPOTHESE}
   montee_mesures: {valeur: {fraude: 4, carence: 1, transports: 2, cures: 1, imagerie: 5, conge_naissance: 1}, unite: sans_unite, statut: HYPOTHESE}
   options: {valeur: {carence_supplement: {montant: 0.45, comptee: 1}, franchises: {montant: 2.3, comptee: 0}, ald_non_exonerantes: {montant: 0.1, comptee: 0}}, unite: sans_unite, statut: SOURCE, source: "Options sourcées de la feuille Santé (lignes 59 à 61)"}
   hopitaux_administratifs: {valeur: {postes: 108602, cout_aligne: 42000}, unite: sans_unite, statut: HYPOTHESE}
   forfait_generalistes: {valeur: {depense_am_2024: 8.3, revalorise_croissance: 1, part_perdue: {crise: 1, prudent: 1, median: 0.5, optimiste: 0}}, unite: sans_unite, statut: HYPOTHESE}
+
 tva_sante_long_terme:
   produits:
     valeur:
@@ -1032,20 +667,6 @@ tva_sante_long_terme:
 # prend le milieu de la crise et du médian pour les emplois créés (Effets macro!B8), mais la valeur
 # de crise pour les emplois perdus (fin des subventions, prime d'embauche).
 emploi:
-  chomage_incompressible: {valeur: 0.035, unite: taux, statut: SOURCE, source: "Taux les plus bas tenus durablement en Europe de l'Ouest (Allemagne, Pays-Bas)"}
-  gain_par_canal: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Bloc emploi unifié (étape 4, moteur/emploi_canaux.py) : chaque emploi rapporte au budget selon le salaire de son canal, avec les taux de TVA du nouveau système. v235 : un seul gain par emploi, pour un emploi à 1,3 SMIC, avec le taux de TVA de l'ancien système (13 %)."}
-  participation_inactifs:
-    valeur: {crise: 0.0, prudent: 0.1, median: 0.2, optimiste: 0.3, base: 1926000}
-    v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0, base: 1926000}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Élasticité de participation : ≈ 0,25 en moyenne dans la littérature (Chetty, Guren, Manoli et Weber, 2013), 0,1 à 0,3 pour les bas revenus en Europe (Bargain, Orsini et Peichl, 2014) ; prime d'activité 2019 : pas d'effet causal établi (Bozio et al., IPP, 2023), d'où la crise à zéro. Base : 1 926 000 personnes dans le halo autour du chômage en 2025 (Insee)"
-    note: "Canal ajouté le 29/10/2026 : des inactifs (halo du chômage) prennent un emploi parce que travailler rapporte plus. Emplois = élasticité × variation du log de la part gardée en travaillant (1 − taux de prélèvement à la participation, moyenne du mi-temps et du temps plein au SMIC, système actuel par OpenFisca contre nouveau système) × base. Ils s'ajoutent à l'emploi sans réduire le taux de chômage (ces personnes n'y sont pas comptées) ; coût employeur 0,75 SMIC (mi-temps et temps plein). Distinct du canal « bas salaires » (chômeurs)."
-  cout_par_canal:
-    valeur: {offre: 1.0, appariement: 1.0, cout_travail: 1.0, localisation: moyen, population_active: median, perdus: 1.0, inactifs: 0.75}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rapportent moins) ; le coût moyen pour les emplois perdus par localisation (activités mobiles et rentables) ; le salaire médian pour les seniors. Règles : docs/bloc_emploi.md."
   reformes_directes:
     source: "Encadrement, par réforme (v235, feuille Emploi, colonne Justification) : allocation chômage : réformes de 2021 et 2023, −0,4 et −0,6 point (Banque de France, Bulletin n° 264, 2026), Hartz IV −1,4 (Krebs et Scheffel) ; France Travail : quart du paquet 2017 de la Banque de France (−0,4) ; apprentissage : −0,1 point (Banque de France) ; logement : Insee Analyses n° 37 (2018) ; accompagnement : Cour des comptes (2026), Crépon et al. (2013) ; alternance : Banque de France, CAE note n° 91 ; contrat de travail : France Stratégie (Cahuc et al., 2024 ; note n° 151, 2025), moitié du paquet 2017-2018"
     valeur:
@@ -1060,14 +681,8 @@ emploi:
     statut: HYPOTHESE
     note: Baisse du taux de chômage à terme (points) par réforme ; coût en Md€/an (Emploi lignes 10 à 18).
   bas_salaires_rui_prorata: {valeur: {retenue: 1, crise: 0, median: 0.0048, optimiste: 0.0128, cout: -1.77}, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : élasticités de participation de Bartels et Shupe (médian) ; prime d'activité 2019 : aucun effet causal établi (Bozio et al., IPP pour France Stratégie, 2023), d'où la crise à zéro", note: "Ligne 11, avant l'effet de la marge intensive."}
-  retenues_calculees: {valeur: {entreprises: 1, baisse_cout_travail: 1, commerces: 1, smic_croissance: 1, prime_jeunes: 1, accords_branche: 1}, unite: sans_unite, statut: DECISION}
-  emplois_par_milliard: {valeur: {prudent: null, crise: 12500, median: 18750, optimiste: 25000}, unite: sans_unite, statut: SOURCE, source: "Mésange 12 500 ; jusqu'à 25 000 au voisinage du SMIC (CAE n° 51)"}
   baisse_cout_travail: {valeur: {taux: 0.025, plein_jusqu_a: 1.3, nulle_a: 1.6}, v235: {taux: 0.05, plein_jusqu_a: 1.3, nulle_a: 1.6}, unite: sans_unite, statut: DECISION, note: "DÉCISION du 15 octobre (v167) ; taux ramené de 5 % à 2,5 % par décision d'Adrien du 29/10/2026."}
-  taux_marge_snf: {valeur: 0.322, unite: taux, statut: SOURCE, source: "Insee Première n° 2105 (comptes de la Nation 2025)"}
-  impots_production_va: {valeur: 0.05, unite: taux, statut: HYPOTHESE}
-  cout_emploi_cree_smic: {valeur: 1.3, unite: sans_unite, statut: HYPOTHESE}
   commerces: {valeur: {salaries: 1613003, crise: 0, median: 0.02, optimiste: 0.035}, unite: sans_unite, statut: SOURCE, source: "Insee Ésane 2023 ; DGE, ZTI (aucun effet significatif)"}
-  smic_effet_salaire_moyen: {valeur: 0.08, unite: sans_unite, statut: SOURCE, source: "Gautier, Roux et Suarez Castillo, Insee Références 2018"}
   annee_objectif: {valeur: 2037, unite: annee, statut: DECISION}
   prime_jeunes: {valeur: {primes_par_an: 200000, part_rui: 0.5, duree_mois: 12, crise: {embauche: 0, annees: 2}, median: {embauche: 0.04, annees: 3}, optimiste: {embauche: 0.25, annees: 3}, derniere_annee: 9999}, unite: sans_unite, statut: HYPOTHESE, note: "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."}
   accords_branche: {valeur: {baisse_emploi_portugal: 0.02, crise: 0.04, median: 0.08, optimiste: 0.16}, unite: sans_unite, statut: SOURCE, source: "Martins (2014)"}
@@ -1076,14 +691,6 @@ emploi:
     unite: sans_unite
     statut: SOURCE
     source: "Dares Résultats n° 12 (2026) ; Assemblée nationale, question n° 10833 ; contrats aidés : hypothèse"
-  marge_intensive: {valeur: {facteur_eqtp: 0.88, crise: 0.08, median: 0.05, optimiste: 0.02}, unite: sans_unite, statut: SOURCE, source: "Bargain, Orsini et Peichl, JHR 2014"}
-  impots_production_salaires: {valeur: 52.0, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025), facteur travail 2023"}
-  emplois_par_milliard_tranches: {valeur: {prudent: null, crise: [12500, 0, 0], median: [18750, 5000, 0], optimiste: [25000, 5000, 0]}, unite: sans_unite, statut: SOURCE, source: "Mésange, CICE (comité de suivi 2018), CAE note n° 91"}
-  localisation:
-    valeur: {prudent: null, crise: {hausse: 0.00282, baisse: 0.00065, part: 0.5, mobilite: 0.75}, median: {hausse: 0.00241, baisse: 0.00241, part: 0.5, mobilite: 0.25}, optimiste: {hausse: 0.00241, baisse: 0.00241, part: 0.5, mobilite: 0.1}}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: Ljungqvist et Smolyansky (NBER w20753), Giroud et Rauh (JPE 2019) sourcés ; mobilité internationale = hypothèse à étayer.
   gain_par_emploi: {valeur: {crise: 0.7, prudent: 0.8, median: 0.9, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE, note: "Part des nouveaux emplois occupés par des personnes au RUI plein (Emploi!B238)."}
   aide_personne: {valeur: {retenue: 1, etp: {autonomie_direct: 60000, autonomie_saad: 104200, garde_domicile: 27000, assistantes_maternelles: 194000}}, unite: sans_unite, statut: SOURCE, source: "Cour des comptes (2026), Urssaf Stat'ur n° 405"}
   assistantes_maternelles: {valeur: {retenue: 1, part_etat_bas_revenu: 0.85, heures: 1037000000, part_heures_modestes: 0.28, cout_heure: 4.85, part_complement: 0.6}, unite: sans_unite, statut: SOURCE, source: "Urssaf, Caf, HCFEA ; part du complément 0,6 = hypothèse prudente"}
@@ -1097,60 +704,31 @@ logement_dynamique:
 
 # --- Hauts revenus et classes moyennes : réaction à l'impôt (feuille Hauts revenus) -----
 hauts_revenus:
-  elasticite_revenu: {valeur: {crise: 0.31, prudent: 0.31, median: 0.2, optimiste: 0.1}, unite: sans_unite, statut: SOURCE, source: "Cabannes, Houdré et Landais, Économie et Statistique n° 467 (2014), 10 % du haut ; médian et optimiste : hypothèses"}
   part_par_societe: {valeur: {crise: 0.25, prudent: 0.25, median: 0.5, optimiste: 0.5}, unite: sans_unite, statut: HYPOTHESE}
   regle_nordique: {valeur: {crise: 0.5, prudent: 0.5, median: 0.7, optimiste: 0.8}, unite: sans_unite, statut: HYPOTHESE, note: "Part de ce qui passe par une société ramenée au barème (règle du dirigeant-actionnaire)."}
   montee: {valeur: {crise: 3, prudent: 3, median: 3, optimiste: 3}, unite: sans_unite, statut: HYPOTHESE}
   reaction_capital_supplementaire: {valeur: {crise: 0, prudent: 0, median: 0, optimiste: 0}, unite: sans_unite, statut: DECISION}
-  elasticite_croisee_travail: {valeur: {crise: 0.05, prudent: 0.05, median: 0.03, optimiste: 0.03}, unite: sans_unite, statut: SOURCE, source: "Lefebvre, Lehmann et Sicsic, IZA DP n° 16112 (2023)"}
-  elasticite_classes_moyennes: {valeur: {crise: 0.08, prudent: 0.05, median: 0.02, optimiste: 0}, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : 0,02 pour l'ensemble des contribuables, 0,31 pour les 10 % du haut (Cabannes, Houdré et Landais, Économie et Statistique n° 467, 2014) ; 0,05 en prudent, au-dessus de la valeur moyenne", note: "Au-dessus de la valeur sourcée de 0,02 pour l'ensemble en prudent (audit)."}
-  classes_moyennes_bornes: {valeur: [24000, 95000], unite: eur_an, annee_euros: 2026, statut: HYPOTHESE}
 
 # --- Carbone dynamique (feuille Carbone) ---------------------------------------------
 carbone:
-  recette_2029_nette_is: {valeur: calcul, v235: 57.7, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Calculée par le moteur (moteur/carbone.recette_statique) : recettes statiques qui dépendent du prix du carbone", note: "Recette carbone de 2029 qui s'érode avec les émissions : accises carbone des ménages et des collectivités (TVA écologique, ligne 3 : 41,6 Md€) et accises carbone brutes des entreprises nettes d'IS (13,3 Md€) = 54,9 Md€. L'accise sur le contenu importé est comptée à part, année par année, par le module carbone ; l'accise de transition (calage) est un montant fixe. v235 : 57,7 Md€ saisis (écart des recettes totales entre 269 € et 0 €, v180). Recalculée le 29/10/2026 à la demande d'Adrien."}
   option_prix: {valeur: 2, unite: sans_unite, statut: DECISION, note: "0 = prix fixe ; 1 = 300 € dès 2030 puis fixe ; 2 = 300 € en 2030 puis valeur de l'action pour le climat. Confirmé par Adrien le 29/10/2026 : le prix des externalités monte."}
   prix_option_2030: {valeur: 300, unite: eur_par_tco2, statut: DECISION}
-  hausse_valeur_action_climat: {valeur: 0.032, unite: taux, statut: SOURCE, source: "Valeur de l'action pour le climat : progression au rythme du taux d'actualisation socioéconomique (3,2 %) jusqu'en 2060 (commission Quinet III ; avis du CS ESE de France Stratégie du 21 mai 2025)"}
-  fin_hausse: {valeur: 2060, v235: 9999, unite: annee, statut: SOURCE, source: "Commission Quinet III : la valeur de l'action pour le climat progresse jusqu'en 2060, puis reste stable (avis du CS ESE du 21 mai 2025)", note: "La v235 faisait monter le prix jusqu'en 2073 (1 221 € de 2026), au-delà de la trajectoire publiée (811 € en 2060)."}
   part_accise_prix_final: {valeur: 0.35, unite: taux, statut: HYPOTHESE}
-  baisse_tendancielle_emissions: {valeur: {crise: -0.02, prudent: -0.019, median: -0.018, optimiste: -0.0165}, unite: taux, statut: HYPOTHESE}
-  ets2: {valeur: {emissions_mt: 180, prix: 45, part_fonds_social: 0.187, dotation_france: 1.04}, unite: sans_unite, statut: SOURCE, source: "Directive ETS2 ; Fonds social pour le climat"}
   ets1_complement: {valeur: {active: 0, emissions_mt: 70, prix_quota: 75}, unite: sans_unite, statut: DECISION}
   dom: {valeur: {cout_regime_tva: 3, exonerer_vols: 1, preserver_fiscalite: 1, passagers_millions: 3.88, part_metropole: 0.8, distance_km: 7800, accise_aller_retour_ref: 370, distance_ref_km: 5840}, unite: sans_unite, statut: DECISION, note: "Accise par passager-km = 370 / (2 × 5 840), écrit dans la formule B42."}
 
 # --- Déduction intégrale de l'investissement (feuille IS investissement, v210-v221) -------
 is_investissement:
-  assiette_locale: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (remarque d'Adrien sur le bilan des entreprises) : l'IS local (5 %) est calculé sur la même assiette que l'IS de l'État (moteur/collectivites.py), mais la déduction de l'investissement et la fin de la déduction des intérêts ne jouaient que sur l'IS de l'État (40 %). Elles jouent désormais sur les 45 %. v235 : État seul."}
   active: {valeur: 1, unite: sans_unite, statut: DECISION, note: "DÉCISION du 22 octobre 2026 (v211)."}
   montee_annees: {valeur: 8, unite: sans_unite, statut: DECISION}
   montee_etalee_annees: {valeur: 16, unite: sans_unite, statut: DECISION, note: "Étalement de la clause de trajectoire (v221)."}
   part_admise: {valeur: 0.5, v235: 1, unite: taux, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : déduction immédiate de 50 % de l'investissement au départ (atteinte en 2036 avec la montée de 8 ans), puis progressivement 100 % (hausse_part_admise). v235 : 100 %."}
   hausse_part_admise: {valeur: {cible: 1.0, debut: conditionnel, fin: conditionnel, duree: 10, seuil_deficit: 0.03}, v235: {cible: 1.0, debut: 2029, fin: 2029, duree: 1, seuil_deficit: 0.03}, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : hausse conditionnée au déficit. De 50 % à 100 % par pas de 5 points : un pas chaque année qui suit une année où le déficit du prudent, avant clause, est sous 3 % du PIB (calculé sans la hausse) ; pause sinon. Une année chiffrée à la place de « conditionnel » fixe un calendrier (début, fin)."}
-  investissement_snf_2025: {valeur: 364.8, unite: md_eur, annee_euros: 2025, statut: SOURCE, source: "Insee, comptes nationaux annuels 2025 (FBCF des SNF)"}
   categories: {valeur: {construction: {part: 0.28, duree: 25}, equipements: {part: 0.32, duree: 7}, immateriel: {part: 0.4, duree: 3}}, unite: sans_unite, statut: HYPOTHESE}
-  part_payeurs_is: {valeur: 0.8, unite: taux, statut: HYPOTHESE}
-  valeur_actuelle_amortissements: {valeur: 0.742, unite: taux, statut: SOURCE, source: "Tax Foundation, Capital Allowances in Europe (2024)"}
-  taux_is_actuel: {valeur: 0.25, unite: taux, statut: SOURCE, source: "CGI, art. 219"}
   part_investissement_concernee: {valeur: {crise: 0.6, prudent: 0.6, median: 0.75, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE}
-  interets: {valeur: {part_va: 0.04, ebe_2025: 497.5, taux_marge_2025: 0.322, part_sans_recette: 0.5, part_reactions: 0.2}, unite: sans_unite, statut: SOURCE, source: "OFCE (2025) d'après la Banque de France ; Insee, comptes de la Nation 2025 ; parts : hypothèses prudentes"}
 
 # --- Collectivités : besoin de recettes locales, impôt local unique (feuille Collectivités) ---
 collectivites_detail:
-  concours_etat_aujourdhui: {valeur: {communes: 32, regions: 22.7}, unite: sans_unite, statut: SOURCE, source: "54,7 Md€ en loi de finances 2026 (OFGL) ; répartition : estimation"}
-  ressources_perdues_fixes:
-    valeur:
-      fractions_tva: {communes: 15.4, regions: 31.6}
-      accise_energies: {communes: 0, regions: 11.7}
-      taxe_assurances: {communes: 0, regions: 9.7}
-      subventions_ministeres: {communes: 2.6, regions: 2.6}
-      concours_autonomie: {communes: 0, regions: 5.4}
-      droits_mutation: {communes: 3, regions: 10.5}
-      impots_production_locaux: {communes: 23.7, regions: 0}
-      versement_mobilite: {communes: 12.2, regions: 0}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Cour des comptes, finances publiques locales 2025 (comptes 2024) ; répartitions : estimations"
   charges_fixes:
     valeur:
       rsa: {communes: 0, regions: -11.5}
@@ -1162,8 +740,6 @@ collectivites_detail:
     unite: sans_unite
     statut: HYPOTHESE
     note: Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees).
-  aide_sociale_enfance: {valeur: 11.2, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Drees 2024"}
-  masse_salariale_agents: {valeur: {communes: 59.9, regions: 19.5}, unite: sans_unite, statut: SOURCE, source: "Cour des comptes (2024)"}
   part_agents_gestion: {valeur: 0.23, unite: taux, statut: HYPOTHESE}
   versement_mobilite_compense: {valeur: 0, unite: taux, statut: DECISION}
   meme_doctrine:
@@ -1180,7 +756,7 @@ collectivites_detail:
   hebergement_urgence: {valeur: {montant: 3.07, part_etat: 0}, unite: sans_unite, statut: DECISION}
   taxe_fonciere_menages: {valeur: 26.2, unite: md_eur, annee_euros: 2024, statut: DECISION, note: "Remplacée par l'impôt local unique (v217)."}
   assiette_revenus: {valeur: calcul, v235: 1169, unite: md_eur, annee_euros: 2026, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : l'impôt local est payé par les entreprises (sur leurs bénéfices, via l'IS local) et par les actifs (sur leur salaire, au-delà de l'abattement) ; les retraités n'en paient pas, et le barème est fixé par chaque collectivité (le modèle en prend la moyenne). L'assiette est donc calculée : coût employeur des salariés du privé et des agents publics (alignés) et salaire des indépendants, au-delà de l'abattement (collectivites.assiette_impot_local). v235 : 1 169 Md€ saisis, décrits comme comprenant les pensions."}
-  carence_poids: {valeur: {etat: 2.54, territoriale: 1.94, hospitaliere: 1.21, economie_etat_hopitaux: 0.47}, unite: sans_unite, statut: SOURCE, source: "Rapport sur le délai de carence (Budget État 2026, B112, B148-B150)"}
+
 environnement:
   bombardiers: {valeur: {appareils: 12, prix_unitaire_m: 104.5, rendement_fonds: 0.03, duree_location: 30}, unite: sans_unite, statut: HYPOTHESE}
   ecosystemes_transferes_regions_m: {valeur: {espaces_proteges: 145.1, sites_paysages: 9.6}, unite: sans_unite, statut: HYPOTHESE}
@@ -1202,6 +778,7 @@ economies_missions:
     statut: DECISION
     note: DÉCISIONS du 8 octobre ; parts coupées = hypothèses.
   education_demographie_part: {valeur: 0.57, unite: taux, statut: HYPOTHESE}
+
 education:
   baisse_enseignants: {valeur: 0.075, unite: taux, statut: HYPOTHESE, note: "Élèves −15 % d'ici 2035, enseignants −7,5 %."}
   enseignants: {valeur: 870000, unite: sans_unite, statut: SOURCE, source: "Ministère de l'Éducation nationale"}
@@ -1227,19 +804,6 @@ quotient:
     note: "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Restent des hypothèses : nombre de couples, part à un seul revenu, corrélation des revenus."
   rui_conjoint: {valeur: {inactifs_en_couple: 1300000, inactifs_feuille_rui: 3800000, part_supprimee: 0.75, part_nette_tva: 0.86}, unite: sans_unite, statut: HYPOTHESE, note: "Règle confirmée par Adrien le 29/10/2026 : le RUI du conjoint sans revenu baisse avec le revenu net du couple et s'éteint quand il atteint deux RUI par personne (moteur/menages_types.py, réforme OpenFisca). La part supprimée (0,75) reste une hypothèse de chiffrage global."}
 
-# --- Anciennes pensions au barème (feuille Anciennes pensions, v190-v215) ---------------
-anciennes_pensions:
-  deciles_drees_2020: {valeur: [200, 565, 833, 1048, 1270, 1490, 1735, 2030, 2460, 3700], unite: eur_mois, annee_euros: 2020, statut: SOURCE, source: "DREES, forme de la distribution des pensions brutes (2020) ; recalée chaque année sur la pension moyenne du modèle"}
-  part_reversion: {valeur: 0.088, unite: taux, statut: SOURCE, source: "DREES, fin 2023 (1 827 € bruts avec réversion)"}
-  couples:
-    valeur: {part_en_couple: 0.6, correlation: 0.2}
-    v235: forfait
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Imposition commune des couples de retraités de l'ancien système, calculée par le moteur année par année (le gain grandit quand les pensions gelées baissent en euros constants). Hypothèses prises prudentes faute de source (elles maximisent le gain des couples, donc la perte de recette) : 60 % des retraités en couple marié ou pacsé (borne haute : environ 60 % des 65 ans ou plus vivent en couple, union libre comprise) ; corrélation des rangs de pension des conjoints 0,2. Correction obtenue : 0,92 en 2029, 0,82 vers 2050. La part du forfait « couples de retraités » du quotient conjugal qui porte sur l'ancien système est rendue, pour ne pas la compter deux fois. v235 : 0,894 fixe (forfait = reprendre independants.correction_couples)."
-  deciles_avec_reversion: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "v215 : les 6 premiers déciles reçoivent la réversion ; cela rend la distribution non monotone (décile 7 sous le décile 6)."}
-  retraites_ancien_2029_millions: {valeur: [19.15, 19.3029, 19.4547, 19.6076, 19.7595, 19.9123, 20.0642, 20.217, 20.3699, 20.5218, 20.6746, 20.8265, 20.9794, 21.1312, 21.2841, 21.408, 21.5318, 21.6557, 21.7795, 21.9034, 22.0273, 22.1511, 22.275, 22.3989, 22.5227, 22.5216, 22.5205, 22.5193, 22.5182, 22.517, 22.5159, 22.5148, 22.5136, 22.5125, 22.5114, 22.5102, 22.5091, 22.508, 22.5068, 22.5057, 22.5045, 22.5034, 22.5023, 22.5011, 22.5], unite: sans_unite, statut: SOURCE, source: "COR, retraités totaux 2029-2073 (Socle actuariel, ligne 82)"}
-
 # --- Scénario de crise : ce qui change hors des paramètres par scénario ---------------
 # Le calcul de crise remplace la colonne prudente par la colonne crise (feuille « Scénario de crise »),
 # applique ces deux valeurs, et prend pour emplois créés ceux du jeu de crise de la feuille Emploi
@@ -1259,47 +823,8 @@ famille:
   cout_place_fonctionnement: {valeur: 19450, unite: eur_an, annee_euros: 2026, statut: SOURCE, source: "Onape, édition 2025 : prix de revient d'une place en crèche PSU", note: "Payé entièrement par l'État (prudent : la participation des familles n'est pas déduite)."}
   cout_place_investissement: {valeur: 42000, unite: eur_an, annee_euros: 2026, statut: HYPOTHESE, source: "Encadrement : 33 551 € par place créée en moyenne (de 20 410 € en gestion privée à 47 908 € en régie municipale), revue de dépenses IGAS-IGF sur l'accueil du jeune enfant (2017), cité par l'Institut Montaigne", note: "Montant de 2017 porté à 2026 avec ≈ 25 % de hausse des coûts de construction (hypothèse). Une fois par place créée."}
 
-# --- Démographie (module de population annuel, 29 octobre 2026) -------------------------
-# Projections de population de l'Insee (juin 2026), par âge et par année ; taux d'emploi par âge ; effet du
-# programme sur la natalité. Voir moteur/demographie.py et docs/demographie.md.
-demographie:
-  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Population mise à jour chaque année (Adrien, 29/10/2026). v235 : population figée en 2026, tout suit la tendance de 0,7 %."}
-  scenario_fecondite:
-    valeur: {crise: fec_basse, prudent: central, median: central, optimiste: fec_haute}
-    unite: sans_unite
-    statut: DECISION
-    source: "Insee, projections de population 2026-2070 (Insee Résultats et Insee Première n° 2108, 8 juin 2026) : central 1,45 enfant par femme dès 2028, solde migratoire +150 000 par an ; fécondité basse 1,20 ; haute 1,70"
-    note: "Correspondance proposée le 29/10/2026 et validée par Adrien (« Go »)."
-  fecondite_variantes: {valeur: {fec_basse: 1.20, central: 1.45, fec_haute: 1.70}, unite: sans_unite, statut: SOURCE, source: "Insee, projections de population 2026 (Insee Première n° 2108)"}
-  taux_emploi_age:
-    valeur: {"15-24": 0.345, "25-49": 0.828, "50-54": 0.844, "55-59": 0.788, "60-64": 0.444, "65-69": 0.11, "70+": 0.0}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Insee, Emploi selon le sexe et l'âge, 2025 (15-24 : 34,5 % ; 25-49 : 82,8 % ; 50-64 : 69,2 %) ; Dares et COR (rapport annuel juin 2026, partie 4, chapitre 1) : 55-59 : 78,8 % ; 60-64 : 44,4 % ; 65-69 : environ 11 %"
-    note: "50-54 ans calculé : 3 × 69,2 − 78,8 − 44,4 = 84,4 % (tranches de tailles voisines) ; recoupé : 84 % des personnes de 50 ans sont en emploi (COR). 70 ans ou plus : 0 (prudent, moins de 3 %). Taux figés à leur niveau de 2025 : la démographie seule fait varier l'emploi ; les hausses de l'emploi des seniors dues au programme sont comptées dans leurs mesures. La fin de la montée à 64 ans de la réforme de 2023 n'est pas comptée (prudent)."
-  natalite_semi_elasticite:
-    valeur: {crise: 0.02, prudent: 0.01, median: 0.01, optimiste: 0.005}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Encadrement : allocation de naissance de 2 500 € en Espagne (2007-2010) : +3 % de naissances (González et Trommlerová, 2023), soit ≈ 2 % par 100 € par an d'enfance ; Israël, baisse de l'allocation de 150 shekels par mois (≈ 400 € par an) en 2003 : −7,5 % de fécondité (Cohen, Dehejia et Romanov, 2013) ; une grande part de ces effets est de calendrier (revue CFFP, Université de Sherbrooke, 2026)."
-    note: "Variation relative des naissances pour 100 € par an de soutien en plus par enfant. Crise : borne haute (l'effet le plus défavorable si le soutien baisse) ; prudent et médian : la moitié, effets de calendrier retirés ; optimiste : le quart."
-  natalite_montee: {valeur: 3, unite: sans_unite, statut: HYPOTHESE, note: "Années pour que l'effet sur les naissances soit plein, à partir de 2030 (premières naissances conçues sous le nouveau système)."}
-  creches_effet:
-    valeur: {crise: 0.0, prudent: 0.014, median: 0.028, optimiste: 0.028}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Bauernschuster, Hener et Rainer (Journal of the European Economic Association, 2016) : +10 points de couverture des moins de 3 ans en accueil public → +1,2 naissance pour 1 000 femmes, soit +2,8 % ; pas un simple effet de calendrier"
-    note: "Hausse relative des naissances pour +10 points de couverture (mise à l'échelle des places créées : famille.creches_nouvelles). Médian et optimiste : l'estimation allemande ; prudent : la moitié (transposition à la France, où la couverture est déjà plus haute) ; crise : aucun effet. v235 : pas de places créées."
-
 # --- Ancien système : pensions génération par génération (29 octobre 2026) ---------------
 ancien_systeme:
-  par_generation: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : recalculer les pensions de l'ancien système génération par génération avec la mortalité de l'Insee 2026. v235 : dépenses désindexées du COR × part des retraités de l'ancien système."}
-  part_retraites_age:
-    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.24, 63: 0.30, 64: 0.72, 65: 0.80, 66: 0.86, 67: 0.95, 68: 0.97, 69: 0.98, 70: 1.0}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Encadrement : DREES, Les retraités et les retraites 2025, fiche 16 : en 2023 (âge légal 62 ans), 4 à 5 % des 59 ans sont retraités, 94 à 97 % des 67 ans ; 10 % partent à 60 ans (carrières longues), 31 % à 62 ans, 7 % à 67 ans"
-    note: "Part d'une génération partie à la retraite à chaque âge, pour l'âge légal de 64 ans (réforme de 2023, générations 1968 et suivantes) : profil de 2023 décalé de deux ans au-delà de 60 ans, carrières longues gardées. Le passage à 65 ans du programme est compté dans sa propre mesure."
   contribution_solidarite:
     valeur: {taux_bas: 0.05, taux_haut: 0.10, seuil_bas: 1043.59, seuil_haut: 3000, debut: 2029, fuite: 0.25}
     v235: {taux_bas: 0.0, taux_haut: 0.0, seuil_bas: 1043.59, seuil_haut: 3000, debut: 2029, fuite: 0.25}
@@ -1314,33 +839,9 @@ ancien_systeme:
     unite: sans_unite
     statut: DECISION
     note: "DÉCISION d'Adrien du 30/10/2026 : âge de départ à 67 ans, quatre trimestres de plus par génération (67 ans pour la génération qui a 64 ans en 2031, née en 1967) ; avant 67 ans, une personne sans emploi touche le RUI, et, si elle a ses annuités, peut en plus tirer la rente de son capital (sans coût pour l'État). Avant : loi actuelle : 64 ans (réforme de 2023). Programme (mesure du registre des économies, rappelée par Adrien le 29/10/2026) : 65 ans, deux trimestres de plus par génération à partir de celle qui a 64 ans en 2029 (65 ans pour celle qui a 64 ans en 2030). Économie calculée génération par génération (moteur/ancien_systeme.economie_age_legal) au lieu des 7 Md€ forfaitaires de la v235."
-  pension_nouveaux_relative: {valeur: 0.935, unite: sans_unite, statut: SOURCE, source: "DREES, Les retraités et les retraites 2025, fiches 5 et 7 : pension brute de droit direct des nouveaux retraités fin 2023, 1 557 € par mois, contre 1 666 € pour l'ensemble des retraités", note: "Pension des départs de 2029 et après, rapportée à la pension moyenne de 2029 (1 557 / 1 666). Les générations n'ont pas de pension plus élevée que leurs aînées (effet noria faible depuis 2017)."}
-
-# --- Cellules de ménages (moteur/cohortes.py, 29 octobre 2026) -----------------------------
-cohortes:
-  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : simulation par cellules (âge × niveau de salaire) et comptes d'épargne par génération. v235 : budget statique × croissance."}
-  profil_salaire_age:
-    valeur: {"18-24": 0.593, "25-39": 0.934, "40-49": 1.103, "50-54": 1.161, "55+": 1.198}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Insee, Salaires dans le secteur privé en 2024 : salaire net mensuel moyen en EQTP, moins de 25 ans 1 620 €, 25-39 ans 2 550 €, 40-49 ans 3 010 €, 50-54 ans 3 170 €, 55 ans ou plus 3 270 € ; ensemble 2 730 €"
-    note: "Rapport au salaire moyen. Profil en coupe de 2024 (mêle effets d'âge et de génération) ; même dispersion supposée à tous les âges."
-  effet_composition_salaires:
-    valeur: {crise: 0.0, prudent: 0.0, median: 1.0, optimiste: 1.0}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Part retenue de l'effet de composition : des actifs plus âgés gagnent plus en moyenne (profil de l'Insee en coupe). La croissance tendancielle de la productivité (COR, 0,7 %) est une moyenne par actif qui contient déjà une partie de cet effet : le compter en entier risque un double compte. Prudent et crise : 0 (le salaire moyen suit la seule tendance ; restent la progressivité de l'impôt, le RUI, l'épargne et le socle par cellule) ; médian et optimiste : 1."
-  part_salaries_emploi: {valeur: calcul, unite: taux, statut: SOURCE, source: "Calculée par le moteur : salariés des distributions de 2026 (privé 21,0 millions, public 5,7) / personnes en emploi de 2026 du module de population (population de l'Insee × taux d'emploi par âge, 18-69 ans) ≈ 0,92", note: "Garde le nombre de salariés de 2026 ; les indépendants restent dans le budget statique."}
-  part_en_couple_age:
-    valeur: {"18-19": 0.02, "20-24": 0.235, "25-29": 0.55, "30-34": 0.70, "35-39": 0.735, "40-44": 0.73, "45-49": 0.735, "50-54": 0.735, "55-59": 0.74, "60-64": 0.735, "65-69": 0.715}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Insee, recensement de 2006 (« Vivre en couple : la proportion de jeunes en couple se stabilise ») : part des hommes et des femmes vivant en couple par âge, moyenne des deux sexes"
-    note: "Forme par âge seulement : le niveau est calé sur les 7 millions de couples du quotient conjugal (quotient.conjugal) en 2026. Données anciennes (2006), à remplacer par un recensement récent."
 
 # --- Carrières : effets des réformes de l'enseignement supérieur (moteur/carrieres.py, 29/10/2026) ---------
 carrieres:
-  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 29/10/2026 : les réformes du supérieur (sélection, apprentissage et alternance, RUI étudiant sous condition, prépas et écoles facturées) modifient les carrières des générations."}
   entree_plus_tot:
     valeur: {ages: "19-23", debut: 2029, montee: 3}
     unite: sans_unite
@@ -1365,43 +866,8 @@ carrieres:
     source: "Aucune estimation causale de l'effet de la sélection sur la réussite : après la loi ORE, le passage en L2 passe de 45,5 % (2018) à 53,5 % (2019), mais le profil des étudiants n'en explique que 0,3 à 2,2 points et le reste tient surtout aux conditions d'examen de la crise sanitaire (SIES, Note d'information 2023-01)"
     note: "Points d'une génération qui obtiennent une licence au lieu de sortir sans diplôme. Prudent et crise : 0 (pas de source causale) ; médian : 1 point ; optimiste : 3 points."
 
-
 # --- Entreprises par taille (moteur/entreprises_cellules.py, 30/10/2026) ---------------------------------
 entreprises_cellules:
-  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : comportement des entreprises par taille, comme les cellules de ménages. Données : parametres/donnees/entreprises_tailles.csv (DGFiP, IS 2024 par taille ; Insee, Ésane 2021 ; DGFiP n° 35, impôts de production 2023)."}
-  part_production_deficitaires:
-    valeur: {crise: 0.25, prudent: 0.20, median: 0.15, optimiste: 0.10}
-    unite: taux
-    statut: HYPOTHESE
-    note: "Part des impôts de production payée par les entreprises déficitaires. Leur suppression réduit leurs pertes mais n'entre pas dans le bénéfice imposable de l'année (v235 : tout était ajouté au bénéfice des entreprises bénéficiaires). Sans source directe : 36 % des entreprises à l'IS sont déficitaires (972 000 sur 2,72 millions, DGFiP 2024) mais ce sont surtout de petites entreprises ; prudent 20 %, crise 25 %, médian 15 %, optimiste 10 %."
-  recuperation_reports:
-    valeur: 0.31
-    unite: taux
-    statut: SOURCE
-    source: "DGFiP, L'impôt sur le bénéfice 2024 des entreprises (Statistiques n° 39, 2025) : 35 Md€ de déficits imputés pour 112 Md€ de déficits de l'année (31 %)"
-    note: "Part de la baisse des pertes des entreprises déficitaires qui finit imposée plus tard (moins de déficits reportés à imputer)."
-  production_va_micro:
-    valeur: 0.010
-    unite: taux
-    statut: HYPOTHESE
-    note: "Impôts de production d'origine fiscale rapportés à la valeur ajoutée des microentreprises : « très faible » selon la DGFiP (Statistiques n° 35, 2025, qui donne 1,9 % pour les PME, 2,9 % pour les ETI, 3,4 % pour les GE) ; 1 % retenu."
-  elasticite_relative_source: {valeur: 1.95, unite: sans_unite, statut: SOURCE, source: "Zwick et Mahon (2017), American Economic Review, « Tax Policy and Heterogeneous Investment Behavior » : l'investissement des petites entreprises réagit 95 % plus que celui des grandes à l'amortissement accéléré", note: "Réaction relative des TPE (GE = 1) ; PME 1,5 et ETI 1,2 interpolées (hypothèse). L'élasticité moyenne pondérée par l'investissement reste macro.elasticite_invest : seule la répartition change."}
-  arbitrage_tpe:
-    valeur: {active: true, benefice_max: 150000, part_avec_dirigeant: 0.69, montee: 2}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Part avec dirigeant : DGFiP 2024 (Statistiques n° 39), sociétés à l'IS hors activités immobilières (587 000, sociétés civiles immobilières surtout) et financières (233 000, holdings surtout) sur 2,72 millions, soit 69 % ; rémunération actuelle du dirigeant : déciles des revenus des indépendants classiques (Insee, parametres/donnees/independants.csv)"
-    note: "Demande d'Adrien du 30/10/2026 : compter les entrepreneurs qui se verseront des salaires. Petites sociétés : classes de bénéfice jusqu'à 150 000 € (1,5 million de sociétés, ≈ le nombre de TPE bénéficiaires). Montée en deux ans à partir de 2029."
-  arbitrage_tpe_part_distribuee:
-    valeur: {crise: 1.0, prudent: 0.75, median: 0.5, optimiste: 0.5}
-    unite: taux
-    statut: HYPOTHESE
-    note: "Part du bénéfice gardé qui serait distribuée en dividendes (flat tax de 33 %). Plus elle est haute, plus le salaire est intéressant (impôt de 63 % sur le bénéfice distribué, contre 57 % au plus jusqu'à 32 000 € de salaire)."
-  arbitrage_tpe_recours:
-    valeur: {crise: 1.0, prudent: 0.75, median: 0.5, optimiste: 0.25}
-    unite: taux
-    statut: HYPOTHESE
-    note: "Part des dirigeants qui font l'arbitrage (conseillés par leur expert-comptable). Sans source : prudent 75 %."
   repartition_fonds:
     valeur: emploi
     unite: sans_unite
@@ -1412,59 +878,9 @@ entreprises_cellules:
     unite: taux
     statut: HYPOTHESE
     note: "Part au plus du capital productif d'une taille d'entreprises que le fonds peut financer (capacité d'absorption : projets rentables, gouvernance). Sans source. Capital productif : immobilisations corporelles par ETP × ETP (Insee, Ésane 2021), en euros de 2026 (+14,5 % de prix de 2021 à 2026)."
-  capital_chomage_elasticite:
-    valeur: {crise: 0.0, prudent: 0.23, median: 0.46, optimiste: 0.46}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Seule estimation trouvée : États-Unis, 1964-2003, le chômage d'équilibre (NAIRU) baisse de 0,46 % pour 1 % de ratio capital/production en plus (Arestis, Baddeley et Sawyer, Levy Institute, document de travail n° 475, 2006). Théorie : aucun effet à long terme avec une fonction de production Cobb-Douglas (Layard, Nickell et Jackman, 1991), un effet si l'élasticité de substitution capital-travail est inférieure à 1, ce que trouvent la plupart des estimations (Rowthorn, 1999)."
-    note: "Effet du capital du fonds sur le chômage d'équilibre. Crise : 0 (théorie de Layard et Nickell) ; prudent : la moitié de la seule estimation (pas d'estimation pour la France) ; médian et optimiste : l'estimation. Le capital est pondéré par l'intensité en emploi de la taille où il va (capital moyen par salarié / capital par salarié de la taille)."
   cout_financement_marche:
     valeur: {fonds_propres: 0.086, dette: 0.02, part_fonds_propres: 0.5}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Fonds propres : Banque de France, Bloc-notes Éco, billet n° 32, Coût des fonds propres et rentabilité des entreprises en France (2017, mis à jour en 2024) : 8,6 % réel pour les grandes entreprises cotées (moyenne longue 9,3 %)"
     note: "Coût réel du financement que le fonds remplace : moitié fonds propres (8,6 %), moitié dette (2 % réel : taux des crédits nouveaux aux entreprises autour de 3,5 %, moins l'inflation ; hypothèse), soit 5,3 %. Avantage = capital du fonds × (5,3 % − rendement du capital du fonds, 3,2 % dans le prudent). Ce n'est pas une dépense publique : ce sont les épargnants qui acceptent un rendement plus bas que le marché."
-
-
-# --- Inflation (moteur/inflation.py, 30/10/2026) -----------------------------------------------------------
-inflation:
-  active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : modéliser l'inflation année par année (scénarios publiés, plus l'inflation due au programme). v235 : 1,8 % chaque année (calendrier.inflation)."}
-  base:
-    valeur: {"2027": 0.019, "2028": 0.016, convergence_annees: 4}
-    unite: sans_unite
-    statut: SOURCE
-    source: "Banque de France, projections macroéconomiques intermédiaires de septembre 2026 : IPCH 2,3 % en 2026, 1,9 % en 2027, 1,6 % en 2028 (hors énergie et alimentation : 2,3 % puis 1,9 %)"
-    note: "Puis convergence linéaire en quatre ans vers l'inflation de long terme du scénario."
-  effet_fisher: {valeur: true, unite: sans_unite, statut: SOURCE, source: "Effet de Fisher : à long terme, les taux d'intérêt nominaux suivent l'inflation anticipée (le taux réel n'en dépend pas)", note: "Les taux nominaux du modèle (macro.taux_long_terme) supposent 1,8 % d'inflation ; avec une autre inflation, ils s'ajustent de l'écart, au rythme du renouvellement de la dette (8,5 ans)."}
-  long_terme:
-    valeur: {crise: 0.014, prudent: 0.018, median: 0.019, optimiste: 0.02}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Cible de la BCE : 2 % à moyen terme ; Banque de France : 1,6 % en 2028 ; enquête de la BCE auprès des prévisionnistes professionnels (2026) : anticipations de long terme autour de 2 %"
-    note: "Prudent : 1,8 % (DÉCISION d'Adrien du 29/10/2026, entre la Banque de France et la cible). Une inflation plus basse est défavorable aux comptes (moins d'érosion des pensions gelées et de la dette) : crise 1,4 % (inflation durablement sous la cible, comme en 2013-2020), médian 1,9 %, optimiste 2 %."
-  pente_phillips:
-    valeur: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Baisse de l'inflation (points) pour un point de PIB d'écart de production en moins. La courbe de Phillips est plate en zone euro depuis 2010 (Banque de France, billet « Où se situe l'inflation en zone euro dans le cône de Phillips ? ») ; ordre de grandeur des estimations de la BCE : 0,1 à 0,3. Sans source chiffrée vérifiée : plus elle est forte, plus l'inflation baisse en 2029 (défavorable)."
-  transmission_carbone:
-    valeur: {crise: 0.0, prudent: 0.0, median: 0.5, optimiste: 1.0}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Konradt et Weder di Mauro (2023), « Carbon Taxation and Greenflation: Evidence from Europe and Canada » : les taxes carbone ont changé les prix relatifs (énergie plus chère) sans hausse significative de l'inflation globale"
-    note: "Part de la hausse réelle du prix du carbone qui passe dans l'inflation globale. Prudent et crise : 0 (la source) ; médian : la moitié ; optimiste : en entier (l'inflation érode davantage les pensions gelées, ce qui est favorable aux comptes)."
-  poids_taxes_carbone_consommation:
-    valeur: 0.037
-    unite: taux
-    statut: HYPOTHESE
-    note: "Taxes carbone (55 Md€ en 2029 : accises des ménages et des collectivités 41,6 Md€, des entreprises 13,3 Md€, moteur/carbone.recette_statique) rapportées à la consommation des ménages toutes taxes comprises (environ 1 500 Md€). Baisse avec les émissions (carbone.baisse_tendancielle_emissions)."
-
-
-# --- Dépenses des ministères année par année (moteur/depenses/ministeres.py, 04/11/2026) -------------------
-ministeres:
-  par_public: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : les dépenses des ministères augmentent avec le temps ; indexation laissée au choix le plus cohérent. Chaque mission suit la croissance (salaires publics alignés sur ceux du privé) et le public qu'elle sert (population, élèves, étudiants, enfants, personnes en emploi), ou le PIB (défense, Union européenne, aide au développement, économie, écologie, agriculture, moitié de la recherche), ou les prix seulement (engagements financiers, monde combattant). v235 : croissance et population totale pour tout."}
-  elasticite_eleves_etudiants:
-    valeur: 0.5
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Baisse des moyens de l'enseignement pour 1 % d'élèves (après 2035) ou d'étudiants en moins. Prudent : la moitié (les moyens par élève ont augmenté quand les effectifs baissaient ; c'est aussi la règle « un départ sur deux » de la v235). La baisse d'ici 2035 est déjà dans les mesures (enseignants ajustés aux élèves)."
