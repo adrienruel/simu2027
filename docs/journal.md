@@ -450,3 +450,13 @@ le test « programme vide = statu quo » (étape 2). Aucun résultat du programm
 
 DÉCISIONS d'Adrien (4 novembre 2026) : le statu quo garde le PLF 2027 comme point de départ provisoire (pas encore
 voté ; à actualiser avec la loi votée) ; la trajectoire des dépenses de santé est gardée telle quelle.
+
+## 4 novembre 2026 — Noyau commun : un programme = statu quo + mesures
+
+`moteur/noyau.py` (demande d'Adrien, étape 2 de la feuille de route) : la comptabilité 2029-2073 de tous les
+programmes passe par le même calcul (blocs du statu quo + mesures du programme, puis intérêts, dette, déficit). Le
+statu quo est le programme vide. « Écologie de droite » est rebranché (`programmes/ecologie_de_droite/programme.py`) :
+son budget devient des mesures poste par poste contre le statu quo, ses effets macro une mesure par canal, son
+contexte (PIB, inflation, baisse de l'écart de taux, chômage, dette de 2028) passe au noyau ; résultats identiques à
+1e-13 près. Constat : périmètres différents (collectivités en net dans le programme, en brut dans le statu quo) ; à
+aligner avant de découper le programme en mesures une à une. Aucun résultat changé.

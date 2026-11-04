@@ -48,9 +48,18 @@ Le code est encore dans `moteur/`, qui mêle le noyau et le programme. Carte des
    système actuel projeté avec la même démographie, la même macro, les retraites par répartition (calées sur le COR,
    contrôlées hors calage) et des blocs de dépense à législation constante. Reste : « programme vide = statu quo »
    (après l'étape 2) et la validation contre la Commission européenne et la Cour des comptes.
-2. **Scinder les modules mêlés** : le noyau calcule l'économie et le système actuel ; un programme lui passe des
-   mesures par des points d'entrée (recette, dépense, barème, transfert, choc sur le coût du travail, sur le taux
-   marginal, sur le taux effectif de l'IS). « Écologie de droite » est rebranché ainsi, résultats inchangés.
+2. **Scinder les modules mêlés.** Première partie faite le 4 novembre 2026 : le **noyau** (`moteur/noyau.py`) tient
+   la comptabilité de tous les programmes (statu quo + mesures, puis intérêts, dette, déficit) ; un programme lui
+   passe des **mesures** (recettes, blocs de dépense du statu quo, blocs nouveaux, participations) et un **contexte**
+   (PIB, inflation, écart de taux, chômage, dette de fin 2028). Tests (`tests/test_noyau.py`) : programme vide =
+   statu quo, à l'identique ; « Écologie de droite » (`programmes/ecologie_de_droite/programme.py`) rebranché sur le
+   noyau retrouve les résultats de son moteur à 1e-13 près.
+   Reste : le programme est encore traduit en écarts globaux par poste, calculés par son propre moteur. Avant de le
+   découper en mesures une à une, il faut **aligner les périmètres** : le budget du programme compte les collectivités
+   par leur seul besoin de financement, le statu quo compte toutes les recettes et dépenses des administrations
+   (en 2029, −378 Md€ de recettes et environ +370 Md€ d'autres dépenses de part et d'autre, pour un écart total de
+   +2,0 points de PIB hors effets macro). Ensuite : chaque mesure codée sur le noyau, et le moteur propre au
+   programme retiré.
 3. **Bibliothèque de mesures sur le système actuel** (barèmes, CSG, cotisations, prestations, TVA, IS, retraites,
    missions), avec leurs effets micro (OpenFisca) et leurs réactions par instrument.
 4. **Population représentative** passée dans OpenFisca : distribution par décile.

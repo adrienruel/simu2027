@@ -45,6 +45,7 @@ Relecture indépendante : `docs/relecture.md`.
 | `moteur/unites.py` | Seul endroit où l'on convertit en euros de 2026 ; une double conversion lève une erreur |
 | `moteur/impot_unique.py` | Barème de l'impôt unique (personne seule) |
 | `moteur/trajectoire.py` | Bloc comptable de la trajectoire 2029-2073 (solde, dette, Maastricht) |
+| `moteur/noyau.py` | Comptabilité commune : un programme = statu quo + mesures + contexte (`python -m moteur.noyau <programme>`) |
 | `moteur/statu_quo.py` | Scénario sans réforme (système actuel projeté), référence commune ; écart d'un programme (docs/statu_quo.md) |
 | `reference/v235/` | Export de la v235, une feuille par fichier (valeurs seules) |
 | `reference/cibles/` | Valeurs cibles de Total et Trajectoire, que le moteur doit reproduire |

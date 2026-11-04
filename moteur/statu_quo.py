@@ -288,42 +288,12 @@ def recettes(p: Parametres, s: str) -> dict[int, float]:
 
 def scenario(p: Parametres, s: str) -> dict[int, dict]:
     """Comptes de chaque année d'un scénario : recettes, blocs, intérêts, solde, dette, déficit au sens de
-    Maastricht (même identité que moteur/macro.py : intérêts réels sur la dette en euros constants, plus
-    l'inflation × la dette de l'année précédente)."""
-    y, infl, rec, bl = pib(p, s), inflation(p, s), recettes(p, s), blocs(p, s)
+    Maastricht. C'est le calcul du noyau sans aucune mesure (moteur/noyau.trajectoire)."""
+    from .noyau import trajectoire
+    out = trajectoire(p, s)
     e = effectifs(p, s)
-    infl_ref = p.val("calendrier.inflation")
-    app0, lt = p.val("macro.taux_apparent_2029"), p.val("macro.taux_long_terme")
-    n_lt, mat = p.val("macro.annees_taux_long_terme"), p.val("macro.maturite_moyenne_dette")
-    prime_par_point = _v(p, "macro.prime_dette", s)
-    fisher_actif = p.val("inflation.active") and p.val("inflation.effet_fisher")
-    dette_prec = dette_fin_2028(p)
-    fisher = prime = 0.0
-    ratio_ref = None
-    out = {}
-    for t in ANNEES:
-        ratio = dette_prec / y[t]
-        ratio_ref = ratio if ratio_ref is None else ratio_ref
-        prime += (prime_par_point * (ratio - ratio_ref) - prime) / mat
-        if fisher_actif:
-            fisher += ((infl[t] - infl_ref) - fisher) / mat
-        nominal = min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + prime
-        interets_reels = (nominal - infl[t]) * dette_prec
-        primaire = sum(bl[t].values())
-        solde = rec[t] - primaire - interets_reels
-        dette = dette_prec - solde
-        maastricht = (solde - infl[t] * dette_prec) / y[t]
-        out[t] = {
-            "pib": y[t], "recettes": rec[t], "depenses_primaires": primaire, "blocs": dict(bl[t]),
-            "charge_dette": interets_reels + infl[t] * dette_prec, "taux_apparent": nominal,
-            "solde_primaire": rec[t] - primaire, "solde": solde, "dette": dette,
-            "deficit": -maastricht * 100, "dette_pib": dette / y[t] * 100,
-            "chomage": e[t]["taux_chomage"] * 100, "emploi_millions": e[t]["emploi"] / 1e6,
-            "retraites_pib": bl[t]["retraites"] / y[t] * 100, "sante_pib": bl[t]["sante"] / y[t] * 100,
-            "recettes_pib": rec[t] / y[t] * 100, "depenses_primaires_pib": primaire / y[t] * 100,
-            "inflation": infl[t] * 100,
-        }
-        dette_prec = dette
+    for t, x in out.items():
+        x["emploi_millions"] = e[t]["emploi"] / 1e6
     return out
 
 
@@ -345,7 +315,8 @@ def ecart(programme: dict, statu_quo: dict, avant_regle: bool = False) -> dict[s
         for t, x in statu_quo[s].items():
             pr = programme[s][t]
             d_pr = pr["deficit_avant_clause"] if (avant_regle and "deficit_avant_clause" in pr) else pr["deficit"]
-            sp_pr = (pr["solde"] + pr["charge_dette"]) / pr["pib"] * 100
+            # solde primaire : solde + intérêts réels (moteur du programme : charge_dette ; noyau : interets_reels)
+            sp_pr = (pr["solde"] + pr.get("interets_reels", pr["charge_dette"])) / pr["pib"] * 100
             out[s][t] = {"deficit": d_pr - x["deficit"], "solde_primaire": sp_pr - x["solde_primaire"] / x["pib"] * 100,
                          "dette_pib": pr["dette_pib"] - x["dette_pib"],
                          "chomage": pr["chomage"] - x["chomage"], "pib": (pr["pib"] / x["pib"] - 1) * 100}
