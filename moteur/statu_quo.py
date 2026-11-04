@@ -16,7 +16,8 @@ La dépense primaire est découpée en blocs, chacun avec ce qui le fait vivre �
 | Assurance chômage | chômeurs du scénario × salaires |
 | Famille | enfants, prix |
 | Logement | population, prix |
-| Pauvreté (RSA, prime d'activité) ; AAH et invalidité | adultes de 18 à 64 ans, prix |
+| RSA ; prime d'activité | chômeurs, prix ; personnes en emploi et barème fixe (OpenFisca) face aux salaires qui montent |
+| AAH et invalidité | adultes de 18 à 64 ans, prix |
 | Investissement ; défense, UE et missions économiques | PIB |
 | Enseignement | salaires × (élèves et étudiants de 3 à 24 ans) ^ élasticité |
 | Autres dépenses (reste) | salaires × population (loi de Baumol) |
@@ -232,9 +233,9 @@ def depart(p: Parametres) -> dict[str, float]:
         "retraites": sq("retraites_part_pib_base") * y,
         "sante": sante_2027(p),
         "chomage": sq("chomage_indemnisation"),
-        "famille": sq("famille_part_pib") * y,
-        "logement": sq("logement_part_pib") * y,
-        "pauvrete": sq("pauvrete_part_pib") * y,
+        "famille": sq("prestations_familiales"),
+        "logement": sq("aides_logement"),
+        "pauvrete": sq("rsa") + sq("prime_activite"),
         "aah_invalidite": sq("aah") + p.val("sante.pensions_invalidite_2024") * facteur(p, 2024, "recettes"),
         "investissement": sq("investissement_part_pib") * y,
         "missions_pib": sq("missions_pib_part_pib") * y,
@@ -247,11 +248,29 @@ def depart(p: Parametres) -> dict[str, float]:
     return {"blocs": blocs, "primaire": primaire, "recettes": recettes, "pib": y}
 
 
+def prime_activite_relative(p: Parametres, s: str) -> dict[int, float]:
+    """Prime d'activité moyenne par personne en emploi, rapportée à 2029, à législation constante : le barème de
+    2026 (OpenFisca, personne seule) reste fixe en euros constants pendant que les salaires de la distribution de
+    2026 montent avec la productivité ; moins de salariés y ont droit."""
+    from .recettes.impot_salaires import effectifs_prive_2026
+    from .systeme_actuel import _interp, _table_openfisca
+    T = _table_openfisca()
+    x, v = T["cout_du_travail"], T["ppa"]
+    d = effectifs_prive_2026(p)
+    w = salaires(p, s)
+
+    def total(k):
+        return sum(n * _interp(c * k, x, v) for c, n in zip(d.milieux, d.effectifs))
+    t0 = total(1.0)
+    return {t: total(w[t] / w[2029]) / t0 for t in ANNEES}
+
+
 def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     """Dépense primaire par bloc, chaque année (Md€ de 2026)."""
     d = depart(p)["blocs"]
     e, w, y, y0 = effectifs(p, s), salaires(p, s), pib(p, s), pib_2026(p)
     ret, san = retraites(p, s), sante(p, s)
+    pa = prime_activite_relative(p, s)
     el = p.val("ministeres.elasticite_eleves_etudiants")
 
     def i(cle, t):
@@ -265,7 +284,8 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
             "chomage": d["chomage"] * i("chomeurs", t) * wt,
             "famille": d["famille"] * i("enfants", t),
             "logement": d["logement"] * i("total", t),
-            "pauvrete": d["pauvrete"] * i("adultes", t),
+            "pauvrete": (p.val("statu_quo.rsa") * i("chomeurs", t)
+                         + p.val("statu_quo.prime_activite") * i("emploi", t) * pa[t]),
             "aah_invalidite": d["aah_invalidite"] * i("adultes", t),
             "investissement": d["investissement"] * y[t] / y0,
             "missions_pib": d["missions_pib"] * y[t] / y0,

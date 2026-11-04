@@ -493,3 +493,10 @@ déductible ; le calcul explique 91 % de la TVA de départ (calage 1,10). TVA 7,
 IS (70,3) et impôts de production (75,3, Md€ de 2024) séparés. Législation en vigueur : CVAE de 0,28 % (2027) à 0,09 %
 (2029), supprimée en 2030 (≈ 3 Md€). Contribution exceptionnelle des grandes entreprises : versée en 2026, sans effet
 après. Statu quo prudent 2029 : 5,6 % de déficit (inchangé à 0,1 point près).
+
+## 4 novembre 2026 — Statu quo : prestations sourcées
+
+Famille (34,7 Md€, REPSS 2023), aides au logement (16,7, compte du logement 2025), RSA (13,5, DREES et Sénat) et prime
+d'activité (10,5, Sénat) remplacent les parts encadrées de la DREES (le reste de ces risques, action sociale et
+crèches, passe dans « autres », qui suit les salaires). Prime d'activité à législation constante : barème OpenFisca
+fixe face aux salaires qui montent (−52 % par personne en emploi en 2073). Statu quo prudent : 8,8 % en 2037.

@@ -122,24 +122,34 @@ statu_quo:
     statut: SOURCE
     source: "Unédic, prévisions financières d'octobre 2026 : dépenses totales 46,6 Md€ en 2026 (allocations et contribution à France Travail), 2,6 millions d'allocataires indemnisés"
     note: "Suit les chômeurs du scénario (population de l'Insee, taux par âge de 2025) et les salaires (allocations proportionnelles au salaire passé)."
-  famille_part_pib:
-    valeur: 0.020
-    unite: taux
+  prestations_familiales:
+    valeur: 34.7
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Rapport d'évaluation des politiques de sécurité sociale, Famille (PLACSS 2024, édition 2025), 1.5.2 : prestations familiales versées par la branche famille 33,0 Md€ en 2023"
+    note: "Passées en euros de 2026 par l'inflation 2024 (2,0 %), 2025 (0,9 %, Insee) et 2026 (2,1 %, prévision) : 33,0 × 1,051. Allocations familiales, prestation d'accueil du jeune enfant, complément familial, allocation de rentrée scolaire, allocation de soutien familial. Suivent le nombre d'enfants et les prix (base mensuelle des allocations familiales revalorisée sur l'inflation). Le reste de la politique familiale (action sociale, crèches, congés) est dans le bloc « autres »."
+  aides_logement:
+    valeur: 16.7
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "SDES, Rapport du compte du logement 2025 : aides personnelles au logement (APL, ALF, ALS) 16,4 Md€ en 2025"
+    note: "× 1,021 (inflation 2026). Suivent la population et les prix (barèmes revalorisés sur l'indice de référence des loyers)."
+  rsa:
+    valeur: 13.5
+    unite: md_eur
+    annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : DREES, comptes de la protection sociale : risque famille 2,2 % du PIB (2022), tous financeurs (administrations, employeurs, mutuelles)"
-    note: "Administrations seules, arrondi à la baisse. Suit le nombre d'enfants et les prix (base mensuelle des allocations familiales revalorisée sur l'inflation) : constant en euros de 2026 par enfant."
-  logement_part_pib:
-    valeur: 0.005
-    unite: taux
-    statut: HYPOTHESE
-    source: "Encadrement : DREES, risque logement 0,6 % du PIB (2022) ; aides personnelles au logement ≈ 16 Md€"
-    note: "Suit la population et les prix (barèmes revalorisés sur l'indice de référence des loyers, proche de l'inflation)."
-  pauvrete_part_pib:
-    valeur: 0.010
-    unite: taux
-    statut: HYPOTHESE
-    source: "Encadrement : DREES, risque pauvreté-exclusion 1,2 % du PIB (2022) : RSA, prime d'activité, autres minima"
-    note: "Suit les adultes de 18 à 64 ans et les prix (RSA et prime d'activité revalorisés sur l'inflation au 1er avril)."
+    source: "Encadrement : DREES, RSA versé par les départements 11,5 Md€ bruts en 2024 ; RSA recentralisé (État, programme 304) 1,7 Md€ en 2025 (Sénat, rapport sur la mission Solidarité du PLF 2025)"
+    note: "11,5 × 1,04 (revalorisations 2025-2026) + 1,7 ≈ 13,5. Suit le nombre de chômeurs du scénario (les entrées au RSA suivent le chômage) et les prix."
+  prime_activite:
+    valeur: 10.5
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Sénat, rapport sur la mission Solidarité, insertion et égalité des chances du PLF 2025 : prime d'activité 10,3 Md€ en 2025, 4,6 millions de foyers"
+    note: "× 1,021 (inflation 2026). Législation constante : barème revalorisé sur les prix, alors que les salaires montent avec la productivité ; la prime suit les personnes en emploi et le barème OpenFisca appliqué aux salaires de chaque année (statu_quo.blocs)."
   aah:
     valeur: 14.6
     unite: md_eur

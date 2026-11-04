@@ -151,3 +151,13 @@ def test_cvae_eteinte_en_2030(p):
     assert part[2029] == pytest.approx((d - 3.0 * (1 - 0.0009 / 0.0028)) / y0)
     assert part[2030] == pytest.approx((d - 3.0) / y0)
     assert part[2050] == pytest.approx(part[2030])
+
+
+def test_prime_activite_a_bareme_constant(p):
+    """Législation constante : barème de la prime d'activité fixe en euros constants, salaires qui montent ; moins de
+    salariés y ont droit (rien ne change sans croissance des salaires)."""
+    pa = sq.prime_activite_relative(p, "prudent")
+    assert pa[2029] == pytest.approx(1.0)
+    assert pa[2073] < pa[2050] < pa[2037] < 1.0
+    q = p.avec({"macro.tendance": 0.0, "macro.ia_productivite": 0.0})
+    assert sq.prime_activite_relative(q, "prudent")[2073] == pytest.approx(1.0)

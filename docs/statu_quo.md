@@ -30,14 +30,14 @@ Dépense publique 56,9 % du PIB, intérêts 2,9 %, déficit 5,0 % (PLF 2027, avi
 | Retraites | 428 | toutes les générations (voir plus bas) | COR 2026 : 14,1 % du PIB |
 | Santé (ONDAM, autonomie) | 301 | pentes communes (Assurance maladie jusqu'en 2035, puis PROMEDE) | LFSS 2026, DREES |
 | Assurance chômage | 47 | chômeurs × salaires | Unédic, octobre 2026 |
-| Famille | 61 | enfants, prix | encadré par la DREES (2,2 %) |
-| Logement | 15 | population, prix | encadré par la DREES (0,6 %) |
-| Pauvreté (RSA, prime d'activité) | 30 | adultes de 18 à 64 ans, prix | encadré par la DREES (1,2 %) |
+| Prestations familiales | 35 | enfants, prix | branche famille 2023 (REPSS) |
+| Aides personnelles au logement | 17 | population, prix | compte du logement 2025 |
+| RSA ; prime d'activité | 24 | chômeurs, prix ; emploi et barème fixe face aux salaires (OpenFisca) | DREES, Sénat (PLF 2025) |
 | AAH et invalidité | 24 | adultes, prix | PLF 2026 ; hors ONDAM 2024 |
 | Investissement | 134 | PIB | Insee, 2025 : 4,4 % |
 | Défense, UE, missions économiques | 106 | PIB | encadré (missions de l'État) |
 | Enseignement | 152 | salaires × élèves et étudiants (élasticité 0,5) | encadré par Eurostat (5,2 %) |
-| Autres (reste) | 346 | salaires × population (loi de Baumol) | dépense primaire − blocs |
+| Autres (reste, dont action sociale, crèches) | 377 | salaires × population (loi de Baumol) | dépense primaire − blocs |
 
 Recettes impôt par impôt : le niveau du PLF 2027 (51,9 % du PIB), dont 6,3 % de recettes non fiscales (Insee 2025),
 réparti entre impôts selon la reconstitution du système actuel de la v235 (colonne « Ancien », à 0,27 % des comptes de
@@ -111,10 +111,10 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,6 / 129 | 6,6 / 139 | 8,1 / 161 | 11,2 / 208 | 16,3 / 258 | 55 / 531 |
-| **Prudent** | **5,6 / 129** | **6,8 / 138** | **8,7 / 159** | **12,0 / 207** | **16,9 / 256** | **46 / 483** |
-| Médian | 5,5 / 128 | 6,4 / 135 | 7,4 / 148 | 8,3 / 174 | 10,1 / 197 | 17,8 / 280 |
-| Optimiste | 5,4 / 128 | 6,3 / 133 | 7,1 / 144 | 8,1 / 167 | 9,5 / 187 | 14,2 / 248 |
+| Crise | 5,6 / 129 | 6,7 / 139 | 8,3 / 162 | 11,6 / 211 | 17,1 / 265 | 60 / 558 |
+| **Prudent** | **5,6 / 129** | **6,9 / 138** | **8,8 / 160** | **12,4 / 209** | **17,5 / 260** | **49 / 499** |
+| Médian | 5,5 / 128 | 6,5 / 135 | 7,5 / 149 | 8,6 / 176 | 10,5 / 201 | 18,9 / 290 |
+| Optimiste | 5,4 / 128 | 6,3 / 133 | 7,2 / 144 | 8,3 / 169 | 9,8 / 190 | 14,9 / 254 |
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse
@@ -174,8 +174,9 @@ contrôlé par l'État qui finance des infrastructures publiques pourrait être 
 3. TVA : faite (par source de revenu). Accises : suivent le PIB (à détailler : carburants, tabac, alcool, énergie).
 4. IS et impôts de production : séparés, CVAE éteinte en 2030 (loi en vigueur) ; patrimoine : successions selon
    les décès, droits de mutation et capital selon le PIB. Reste : IS par taille d'entreprise (données DGFiP déjà là).
-5. Prestations calculées (RSA, prime d'activité, aides au logement, prestations familiales) par OpenFisca, effectifs
-   de bénéficiaires ; assurance chômage par l'Unédic.
+5. Prestations : faites (montants sourcés ; RSA selon les chômeurs ; prime d'activité au barème fixe d'OpenFisca
+   face aux salaires qui montent : −52 % par personne en emploi d'ici 2073 ; famille et logement aux prix). Reste :
+   prestations familiales par OpenFisca sur des ménages réels.
 6. Dépenses de l'État mission par mission (crédits 2026), collectivités, Sécurité sociale hors santé et retraites,
    à la place du bloc « autres ».
 7. Validation : comptes de l'Insee par catégorie, Commission européenne (rapport sur le vieillissement), Cour des
