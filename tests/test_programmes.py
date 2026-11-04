@@ -10,7 +10,7 @@ def test_programme_par_defaut_charge_les_trois_fichiers():
     p = Parametres()
     assert p.programme == "ecologie_de_droite"
     fichiers = {f.name if "commun" in str(f) else "programme" for f in p.origine.values()}
-    assert fichiers == {"economie.yaml", "options.yaml", "programme"}
+    assert fichiers == {"economie.yaml", "options.yaml", "statu_quo.yaml", "programme"}
 
 
 def test_hypotheses_communes_sans_mesure_du_programme():

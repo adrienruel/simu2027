@@ -30,6 +30,7 @@ python -m outils.valeur_enfant      # soutien par enfant, système actuel (OpenF
 python -m outils.participation      # gain à travailler d'un inactif, système actuel (OpenFisca)
 python -m outils.levier_is          # grille taux de l'IS × déduction de l'investissement
 python -m outils.leviers            # variantes et paquets chiffrés (sorties/leviers.json, ~20 min)
+python -m moteur.statu_quo --ecart  # scénario sans réforme et écart avec le programme (sorties/statu_quo.json)
 ```
 
 Relecture indépendante : `docs/relecture.md`.
@@ -38,12 +39,13 @@ Relecture indépendante : `docs/relecture.md`.
 
 | Dossier | Contenu |
 |---|---|
-| `parametres/commun/` | Hypothèses communes à tous les programmes (`economie.yaml`) et options du modèle (`options.yaml`) : valeur (par scénario si besoin), unité, année des euros, statut, source |
+| `parametres/commun/` | Hypothèses communes à tous les programmes (`economie.yaml`), options du modèle (`options.yaml`) et scénario sans réforme (`statu_quo.yaml`) : valeur (par scénario si besoin), unité, année des euros, statut, source |
 | `programmes/<programme>/` | Un dossier par programme : ses paramètres (qui ne peuvent pas redéfinir une hypothèse commune), son registre des mesures, ses économies datées. Architecture : `docs/architecture.md` |
 | `moteur/parametres.py` | Chargement et validation (source obligatoire si SOURCE, année obligatoire pour un montant, scénarios complets) |
 | `moteur/unites.py` | Seul endroit où l'on convertit en euros de 2026 ; une double conversion lève une erreur |
 | `moteur/impot_unique.py` | Barème de l'impôt unique (personne seule) |
 | `moteur/trajectoire.py` | Bloc comptable de la trajectoire 2029-2073 (solde, dette, Maastricht) |
+| `moteur/statu_quo.py` | Scénario sans réforme (système actuel projeté), référence commune ; écart d'un programme (docs/statu_quo.md) |
 | `reference/v235/` | Export de la v235, une feuille par fichier (valeurs seules) |
 | `reference/cibles/` | Valeurs cibles de Total et Trajectoire, que le moteur doit reproduire |
 | `outils/` | Extraction de la référence ; `recalcul.py` recalcule la v235 dans LibreOffice avec des cellules modifiées |

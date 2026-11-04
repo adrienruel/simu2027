@@ -436,3 +436,14 @@ modélisée. Détail : docs/inflation_indexation.md. Prudent 2073 sans règle �
 
 Demande d'Adrien du 30/10 : chaque mission suit sa règle (croissance et public servi, PIB, ou prix). Détail :
 docs/ministeres.md. Mesures de l'ancien système classées en « retraites ». Prudent 2073 sans règle 5,17 → 4,53 %.
+
+## 4 novembre 2026 — Scénario sans réforme (statu quo projeté)
+
+Première étape de la feuille de route multi-programmes (demande d'Adrien). `moteur/statu_quo.py`, paramètres communs
+`parametres/commun/statu_quo.yaml`, détail dans docs/statu_quo.md. Système actuel à législation constante (PLF 2027),
+mêmes hypothèses communes que les programmes, aucun paramètre de programme (test avec un programme vide). Retraites de
+toutes les générations, érosion relative calée sur le COR 2070 (0,46 % par an) ; contrôles hors calage : 2045 et
+variantes de productivité du COR à 0,2 point près. Résultat (prudent) : déficit 5,6 % en 2029, 8,6 % en 2037, dette
+au-dessus de 200 % vers 2045 (trajectoire divergente : déficit primaire de 2 % et taux au-dessus de la croissance).
+Écart du programme (solde primaire sans sa règle) : +0,6 point en 2029, +2,8 en 2037, +2,1 en 2050 ; à confirmer par
+le test « programme vide = statu quo » (étape 2). Aucun résultat du programme n'est changé.

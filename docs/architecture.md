@@ -11,7 +11,7 @@ dépôt, un noyau commun et un dossier par programme (`programmes/<candidat>/`).
    mesures et l'interprétation de son texte.
 3. **Les hypothèses communes sont figées avant de chiffrer les autres candidats**, et chaque changement du noyau
    recalcule tous les programmes.
-4. Le résultat d'un programme se lit comme un **écart au scénario sans réforme** (à construire, étape 2).
+4. Le résultat d'un programme se lit comme un **écart au scénario sans réforme** (`moteur/statu_quo.ecart`).
 
 ## Où en est le découpage
 
@@ -21,6 +21,7 @@ dépôt, un noyau commun et un dossier par programme (`programmes/<candidat>/`).
 |---|---|---|
 | `parametres/commun/economie.yaml` | Données et hypothèses communes : économie, démographie, système actuel, comportements, entreprises, santé, inflation | 171 |
 | `parametres/commun/options.yaml` | Options du modèle : unités, modules activés, corrections de méthode | 21 |
+| `parametres/commun/statu_quo.yaml` | Scénario sans réforme : point de départ (PLF 2027), blocs de dépense, retraites | 15 |
 | `programmes/ecologie_de_droite/parametres.yaml` | Mesures du programme et hypothèses propres à ses mesures | 263 |
 
 Le classement est écrit dans `outils/decouper_parametres.py` (utilisé une fois). Les 263 paramètres du programme
@@ -43,9 +44,10 @@ Le code est encore dans `moteur/`, qui mêle le noyau et le programme. Carte des
 
 ## Étapes suivantes
 
-1. **Scénario sans réforme, 2027-2073** : le système actuel projeté avec la même démographie, la même macro, les
-   retraites par répartition (COR) et les dépenses par mission. Critère : programme vide = statu quo, et statu quo
-   validé contre le PLF, le HCFP et le COR.
+1. **Scénario sans réforme, 2029-2073 : fait (4 novembre 2026)**, `moteur/statu_quo.py` (docs/statu_quo.md) : le
+   système actuel projeté avec la même démographie, la même macro, les retraites par répartition (calées sur le COR,
+   contrôlées hors calage) et des blocs de dépense à législation constante. Reste : « programme vide = statu quo »
+   (après l'étape 2) et la validation contre la Commission européenne et la Cour des comptes.
 2. **Scinder les modules mêlés** : le noyau calcule l'économie et le système actuel ; un programme lui passe des
    mesures par des points d'entrée (recette, dépense, barème, transfert, choc sur le coût du travail, sur le taux
    marginal, sur le taux effectif de l'IS). « Écologie de droite » est rebranché ainsi, résultats inchangés.

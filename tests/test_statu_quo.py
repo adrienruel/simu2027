@@ -1,0 +1,103 @@
+"""Scénario sans réforme (moteur/statu_quo.py) : indépendance vis-à-vis des programmes, identités comptables,
+calage de départ et validation contre le COR (rapport annuel de juin 2026)."""
+
+import pytest
+
+from moteur import parametres as mp
+from moteur import statu_quo as sq
+from moteur.parametres import Parametres
+
+
+@pytest.fixture(scope="module")
+def p():
+    return Parametres()
+
+
+@pytest.fixture(scope="module")
+def res(p):
+    return sq.simuler(p)
+
+
+def test_independant_du_programme(tmp_path, monkeypatch, res):
+    """Le statu quo ne lit aucun paramètre d'un programme : avec un programme vide, il est identique."""
+    (tmp_path / "programmes" / "vide").mkdir(parents=True)
+    (tmp_path / "programmes" / "vide" / "parametres.yaml").write_text("# programme vide\n", encoding="utf-8")
+    monkeypatch.setattr(mp, "RACINE", tmp_path)
+    vide = sq.simuler(Parametres(programme="vide"))
+    for s in sq.SCENARIOS:
+        for t in (2029, 2050, 2073):
+            assert vide[s][t]["deficit"] == pytest.approx(res[s][t]["deficit"], abs=1e-12)
+
+
+def test_identites_comptables(p, res):
+    infl = sq.inflation(p, "prudent")
+    v = res["prudent"]
+    dette_prec = sq.dette_fin_2028(p)
+    for t in sq.ANNEES:
+        x = v[t]
+        assert x["depenses_primaires"] == pytest.approx(sum(x["blocs"].values()))
+        assert x["dette"] == pytest.approx(dette_prec - x["solde"])
+        assert x["deficit"] == pytest.approx(-(x["solde"] - infl[t] * dette_prec) / x["pib"] * 100)
+        dette_prec = x["dette"]
+
+
+def test_depart_cale_sur_le_plf_2027(p, res):
+    x = res["prudent"][2029]
+    assert x["recettes_pib"] == pytest.approx(51.9, abs=0.01)
+    assert x["retraites_pib"] == pytest.approx(14.1, abs=0.01)
+    # dépense primaire de 2027 (54,0 %) + deux années de dérive de la santé (régulation de 2027-2029)
+    assert 54.0 < x["depenses_primaires_pib"] < 54.3
+    assert sq.depart(p)["blocs"]["autres"] > 0
+    # 2029 : déficit de 2027 + intérêts recalculés sur la dette de fin 2028
+    assert 5.0 < x["deficit"] < 6.0
+
+
+def test_chomage_de_depart(p):
+    assert sq.effectifs(p, "prudent")[2026]["taux_chomage"] == pytest.approx(p.val("chomage.taux_2026"))
+
+
+def _part_retraites(p, t, productivite=None):
+    q = p if productivite is None else p.avec({"macro.tendance": productivite, "macro.ia_productivite": 0.0})
+    return sq.retraites(q, "prudent")[t]["depenses"] / sq.pib(q, "prudent")[t] * 100
+
+
+def test_retraites_calees_sur_le_cor(p):
+    """Seul paramètre calé : l'érosion relative, sur 15,3 % du PIB en 2070 (productivité 0,7 %)."""
+    assert _part_retraites(p, 2070) == pytest.approx(15.3, abs=0.1)
+
+
+def test_retraites_controles_hors_calage(p):
+    """Contrôles non calés : 2030 (COR 14,1 %), 2045 (COR 14,2 %) et les variantes de productivité du COR
+    (0,4 % : 16,1 % ; 1,0 % : 14,5 % en 2070)."""
+    assert _part_retraites(p, 2030) == pytest.approx(14.1, abs=0.15)
+    assert _part_retraites(p, 2045) == pytest.approx(14.2, abs=0.15)
+    assert _part_retraites(p, 2070, 0.004) == pytest.approx(16.1, abs=0.3)
+    assert _part_retraites(p, 2070, 0.010) == pytest.approx(14.5, abs=0.3)
+    assert _part_retraites(p, 2070, 0.004) > _part_retraites(p, 2070, 0.007) > _part_retraites(p, 2070, 0.010)
+
+
+def test_prestations_indexees_sur_les_prix_perdent_du_poids(res):
+    """À législation constante, les prestations revalorisées sur les prix baissent en part du PIB quand la
+    productivité monte ; les dépenses qui suivent le PIB gardent leur part."""
+    a, b = res["prudent"][2029], res["prudent"][2073]
+    assert b["blocs"]["famille"] / b["pib"] < a["blocs"]["famille"] / a["pib"]
+    assert b["blocs"]["investissement"] / b["pib"] == pytest.approx(a["blocs"]["investissement"] / a["pib"])
+
+
+def test_sans_prime_de_dette_la_dette_monte_moins(p, res):
+    q = sq.simuler(p.avec({"macro.prime_dette": 0.0}))
+    assert q["prudent"][2050]["dette_pib"] < res["prudent"][2050]["dette_pib"]
+    assert q["prudent"][2029]["deficit"] == pytest.approx(res["prudent"][2029]["deficit"])
+
+
+def test_ordre_des_scenarios(res):
+    """Plus de productivité et de fécondité : un statu quo moins dégradé."""
+    t = 2050
+    assert res["optimiste"][t]["dette_pib"] < res["median"][t]["dette_pib"] < res["prudent"][t]["dette_pib"]
+
+
+def test_ecart_avec_un_programme(p, res):
+    from moteur.simulation import simuler
+    e = sq.ecart(simuler(p), res)
+    assert set(e) == set(sq.SCENARIOS)
+    assert set(e["prudent"][2037]) == {"deficit", "solde_primaire", "dette_pib", "chomage", "pib"}

@@ -49,8 +49,8 @@ Crise : dette 150 % en 2050, 235 % en 2073 (pas de retour à l'équilibre).
 
 ## Limites connues (non traitées)
 
-- Pas de comparaison avec le statu quo (système actuel projeté avec la même démographie) : le chiffre seul
-  ne dit pas si le programme fait mieux ou moins bien que de ne rien faire.
+- Comparaison avec le statu quo : faite le 4 novembre 2026 (docs/statu_quo.md), à confirmer par le test
+  « programme vide = statu quo » quand le programme sera branché sur le noyau par des mesures.
 - La correspondance fécondité ↔ scénario et la participation des inactifs ne sont pas tirées dans l'incertitude
   (valeurs structurées).
 - Taux d'emploi par âge figés à 2025 ; la fin de la montée à 64 ans (réforme de 2023) n'est pas comptée.

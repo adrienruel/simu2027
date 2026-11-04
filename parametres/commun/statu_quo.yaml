@@ -1,0 +1,105 @@
+# Scénario sans réforme (statu quo projeté), commun à tous les programmes (moteur/statu_quo.py, 4 novembre 2026).
+#
+# Le système actuel à législation constante, projeté de 2029 à 2073 avec la même démographie (Insee 2026), la même
+# macroéconomie (productivité, IA, inflation, taux) et la même santé que les programmes. Chaque programme se lit
+# comme un écart à ce scénario. Aucun paramètre d'un programme n'est lu par le module.
+#
+# Point de départ : la législation du PLF 2027 (déficit de 5 % en 2027, cohérent avec calendrier.deficit_tendanciel_2027_2028),
+# en parts du PIB, appliquée à l'économie de 2026 placée en 2029 (convention du modèle, unites.annee_modele).
+
+statu_quo:
+  # --- Point de départ (comptes de 2027, PLF 2027) ---------------------------------------------------------
+  depense_publique_base:
+    valeur: 0.569
+    unite: taux
+    statut: SOURCE
+    source: "PLF 2027 : dépense publique hors crédits d'impôt 56,9 % du PIB en 2027 (57,1 % en 2026) ; HCFP, avis n° 2026-5 sur les PLF et PLFSS pour 2027 (octobre 2026)"
+  deficit_base:
+    valeur: 0.050
+    unite: taux
+    statut: SOURCE
+    source: "PLF 2027 : déficit public de 5,0 % du PIB en 2027 (5,4 % en 2026) ; HCFP, avis n° 2026-5"
+    note: "Recettes publiques de départ = dépense − déficit = 51,9 % du PIB (prélèvements obligatoires 44,2 % ; le reste : ventes, revenus de la propriété, transferts). Hypothèse : les mesures du PLF 2027 sont votées et maintenues, comme dans calendrier.deficit_tendanciel_2027_2028."
+  charge_interets_base:
+    valeur: 0.029
+    unite: taux
+    statut: SOURCE
+    source: "HCFP, avis n° 2026-5 : charge d'intérêts des administrations publiques ≈ 91 Md€ en 2027 (+12 Md€) ; PIB en valeur 2027 ≈ 3 135 Md€ (croissance en valeur de 2,7 %)"
+    note: "Sert seulement à passer de la dépense totale à la dépense primaire de départ (56,9 − 2,9 = 54,0 % du PIB). Les intérêts de 2029 et après sont recalculés (taux apparent, taux de marché, dette)."
+
+  # --- Retraites (système actuel, toutes générations) -----------------------------------------------------
+  retraites_part_pib_base:
+    valeur: 0.141
+    unite: taux
+    statut: SOURCE
+    source: "COR, rapport annuel de juin 2026 : dépenses de retraite 422 Md€ en 2025, soit 14,1 % du PIB ; 14,1 % en 2030, 14,2 % en 2045, 15,3 % en 2070 (productivité 0,7 % par an ; 16,1 % à 0,4 % ; 14,5 % à 1,0 %)"
+  retraites_decalage_carriere:
+    valeur: 15
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : salaires portés au compte du régime général (25 meilleures années) revalorisés sur les prix ; points Agirc-Arrco acquis sur toute la carrière"
+    note: "Années de retard entre les salaires d'une carrière et le départ : la pension liquidée suit le salaire moyen de quinze ans plus tôt (centre de gravité des droits, revalorisés sur les prix). C'est ce retard qui fait qu'une productivité plus forte baisse le poids des retraites (mécanisme du COR)."
+  retraites_erosion_relative:
+    valeur: 0.0046
+    unite: taux
+    statut: HYPOTHESE
+    source: "Calée sur le COR, rapport annuel de juin 2026 (scénario de référence, productivité 0,7 % : 15,3 % du PIB en 2070) ; contrôles : 2045 et les variantes de productivité 0,4 % et 1,0 % (tests/test_statu_quo.py) : 2045 14,15 % (COR 14,2 %) ; productivité 0,4 % : 15,96 % (COR 16,1 %) ; 1,0 % : 14,72 % (COR 14,5 %)"
+    note: "Baisse annuelle de la pension liquidée rapportée au salaire décalé, à règles inchangées (rendement des points Agirc-Arrco dont la valeur de service suit les prix, décote et durée requise de la réforme de 2023, carrières plus heurtées). Seul paramètre calé : il porte aussi l'écart d'emploi avec le COR (le COR fait monter l'emploi des seniors et ramène le chômage à 7 % ; ici les taux d'emploi par âge restent ceux de 2025, donc le PIB est plus bas et la part des retraites un peu plus haute à pension égale)."
+  prelevements_sur_pensions:
+    valeur: 0.12
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : CSG, CRDS et CASA des retraités (taux de 0 à 9,1 %, environ 7 % en moyenne) ; impôt sur le revenu des retraités (environ 6 % des pensions, hypothèse aussi retenue pour la TVA des retraités, docs/sourcage.md)"
+    note: "Part des pensions qui revient aux administrations en prélèvements : cette part des recettes suit les pensions, le reste suit le PIB."
+
+  # --- Prestations : moteur de chaque bloc ------------------------------------------------------------------
+  chomage_indemnisation:
+    valeur: 46.6
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Unédic, prévisions financières d'octobre 2026 : dépenses totales 46,6 Md€ en 2026 (allocations et contribution à France Travail), 2,6 millions d'allocataires indemnisés"
+    note: "Suit les chômeurs du scénario (population de l'Insee, taux par âge de 2025) et les salaires (allocations proportionnelles au salaire passé)."
+  famille_part_pib:
+    valeur: 0.020
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : DREES, comptes de la protection sociale : risque famille 2,2 % du PIB (2022), tous financeurs (administrations, employeurs, mutuelles)"
+    note: "Administrations seules, arrondi à la baisse. Suit le nombre d'enfants et les prix (base mensuelle des allocations familiales revalorisée sur l'inflation) : constant en euros de 2026 par enfant."
+  logement_part_pib:
+    valeur: 0.005
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : DREES, risque logement 0,6 % du PIB (2022) ; aides personnelles au logement ≈ 16 Md€"
+    note: "Suit la population et les prix (barèmes revalorisés sur l'indice de référence des loyers, proche de l'inflation)."
+  pauvrete_part_pib:
+    valeur: 0.010
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : DREES, risque pauvreté-exclusion 1,2 % du PIB (2022) : RSA, prime d'activité, autres minima"
+    note: "Suit les adultes de 18 à 64 ans et les prix (RSA et prime d'activité revalorisés sur l'inflation au 1er avril)."
+  aah:
+    valeur: 14.6
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "PLF 2026 : 14,6 Md€ pour l'AAH, +1,7 % sur 2025 (Sénat, rapport sur la mission Solidarité, insertion et égalité des chances)"
+    note: "Avec les pensions d'invalidité (sante.pensions_invalidite_2024) : suit les adultes et les prix."
+  investissement_part_pib:
+    valeur: 0.044
+    unite: taux
+    statut: SOURCE
+    source: "Insee, Le compte des administrations publiques en 2025 (Insee Première n° 2106, mai 2026) : investissement 132,2 Md€, 4,4 % du PIB"
+    note: "Suit le PIB."
+  missions_pib_part_pib:
+    valeur: 0.035
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : défense (programmation militaire, ≈ 2 % du PIB pensions comprises), contribution à l'UE (30,9 Md€ en 2027, PLF), aide au développement, action extérieure, économie, agriculture, écologie (missions_etat_2026.csv)"
+    note: "Dépenses de fonctionnement qui suivent le PIB (même règle que moteur/depenses/ministeres.py)."
+  education_part_pib:
+    valeur: 0.050
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : Eurostat, dépenses des administrations par fonction (COFOG) : enseignement ≈ 5,2 % du PIB en France"
+    note: "Suit la croissance et les élèves et étudiants de 3 à 24 ans, avec l'élasticité de ministeres.elasticite_eleves_etudiants."
