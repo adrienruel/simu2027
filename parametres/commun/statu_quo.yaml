@@ -70,6 +70,20 @@ statu_quo:
     source: "Classeur v235, feuille Total, colonne « Ancien » (Md€ de 2024), reconstitution du système actuel impôt par impôt ; feuille « Contrôle système actuel » : 1 318,9 Md€ contre 1 322,5 Md€ d'impôts et cotisations des administrations à l'Insee pour 2024 (−0,27 %)"
     note: "Sert de clé de répartition (parts), le niveau étant celui du PLF 2027. Salaires du privé et du public, indépendants : cotisations, CSG, CRDS et impôt sur le revenu ; retraités : CSG, CASA et impôt sur le revenu des pensions (12 % des pensions) ; la taxe foncière des ménages est comptée avec leurs revenus. Moteur de chaque impôt : masse salariale (salaires, indépendants), pensions (retraités), PIB (consommation, bénéfices, patrimoine), PIB × décès (successions)."
 
+  baremes_retraites:
+    valeur: prix
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Législation : seuils de revenu fiscal de référence des taux de CSG sur les pensions revalorisés sur l'inflation (code de la sécurité sociale, art. L136-8) ; barème de l'impôt sur le revenu revalorisé chaque année par la loi de finances, d'ordinaire sur l'inflation"
+    note: "prix : seuils et barèmes revalorisés sur les prix (législation constante) ; le taux moyen sur les pensions reste vers 12 % (prudent : 1,7 % du PIB en 2029, 1,9 % en 2073). salaires : barèmes qui suivent la croissance, comme pour les programmes ; le taux moyen baisse quand les pensions baissent par rapport aux salaires (7,5 % en 2073, 0,7 point de PIB de recettes en moins). À trancher. Les prélèvements sur les salaires suivent la masse salariale (élasticité 1) dans les deux cas."
+
+  retraites_ratio_conjoint:
+    valeur: 0.62
+    unite: taux
+    statut: SOURCE
+    source: "DREES, Les retraités et les retraites (édition 2025) : la pension de droit direct des femmes est inférieure d'environ 38 % à celle des hommes"
+    note: "Pension du conjoint rapportée à celle de la personne, pour les couples de retraités du tableau OpenFisca (outils/openfisca_retraites.py, constante RATIO_CONJOINT à garder égale). Part des retraités en couple : anciennes_pensions.couples."
+
   versants_fonction_publique:
     valeur: {etat_civils: 0.38, etat_militaires: 0.07, territoriale: 0.29, hospitaliere: 0.26}
     unite: sans_unite

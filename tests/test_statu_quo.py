@@ -110,3 +110,18 @@ def test_prelevements_sur_les_salaires_controles_par_openfisca(p):
     r = sq.recettes_par_impot(p, "prudent")[2029]
     assert a["prive"]["prelevements"] == pytest.approx(r["salaires_prive"], rel=0.03)
     assert a["public"]["prelevements"] == pytest.approx(r["salaires_public"], rel=0.03)
+
+
+def test_prelevements_sur_les_pensions_par_openfisca(p):
+    """CSG, CRDS, CASA et impôt sur le revenu des retraités : OpenFisca sur la distribution de la DREES retrouve la
+    répartition des recettes (reconstitution de la v235) à 2 % près ; à barèmes sur les prix, taux moyen stable ;
+    à barèmes sur les salaires, il baisse quand les pensions baissent par rapport aux salaires."""
+    pr = sq.prelevements_retraites(p, "prudent")
+    r = sq.recettes_par_impot(p, "prudent")
+    assert pr[2029]["total"] == pytest.approx(r[2029]["retraites"], rel=0.02)
+    ret = sq.retraites(p, "prudent")
+    q = p.avec({"statu_quo.baremes_retraites": "salaires"})
+    pq = sq.prelevements_retraites(q, "prudent")
+    taux = {t: pq[t]["total"] / ret[t]["depenses"] for t in (2029, 2073)}
+    assert taux[2073] < taux[2029]  # barèmes sur les salaires : le taux baisse avec la pension relative
+    assert pr[2073]["total"] / ret[2073]["depenses"] == pytest.approx(pr[2029]["total"] / ret[2029]["depenses"], abs=0.01)

@@ -48,7 +48,7 @@ l'Insee pour 2024). Chaque impôt suit son assiette, barèmes à législation co
 | Cotisations, CSG et IR sur les salaires du privé | 17,1 | masse salariale (emploi × salaire) |
 | Idem, agents publics | 6,9 | masse salariale |
 | Idem, indépendants | 1,3 | masse salariale |
-| CSG, CASA et IR des retraités | 1,7 | pensions |
+| CSG, CRDS, CASA et IR des retraités | 1,7 | OpenFisca sur la distribution des pensions |
 | TVA | 7,2 | PIB (consommation) |
 | Accises et taxes sur les produits | 3,5 | PIB |
 | IS et impôts de production | 4,9 | PIB (bénéfices) |
@@ -62,6 +62,15 @@ l'Insee pour 2024). Chaque impôt suit son assiette, barèmes à législation co
 calculés par OpenFisca-France (législation 2026) sur les distributions de salaires de 2026 donnent 516 Md€ pour le privé
 (répartition : 519, −0,6 %) et 202 Md€ pour les agents publics (répartition : 208, −2,8 %). Deux calculs
 indépendants qui se recoupent ; limite : cas type d'une personne seule (l'impôt des couples n'y est pas).
+
+**Retraités par OpenFisca** (`statu_quo.prelevements_retraites`, table `outils/openfisca_retraites.py`) : CSG, CRDS,
+CASA et impôt sur le revenu sur la distribution des pensions de la DREES, personnes seules et couples (60 % en couple,
+pension du conjoint à 62 %) : 51,2 Md€ en 2029 (29,4 de prélèvements sociaux, 21,8 d'impôt sur le revenu), contre
+51,2 dans la répartition (−0,1 %). Le calcul est refait chaque année sur la pension moyenne du statu quo.
+Convention à trancher (`statu_quo.baremes_retraites`) : barèmes sur les **prix** (législation constante, retenu
+pour l'instant : taux moyen stable vers 12 % des pensions) ou sur les **salaires** (comme les barèmes des programmes :
+le taux tombe à 7,5 % en 2073 quand les pensions baissent par rapport aux salaires, 0,7 point de PIB de recettes en
+moins).
 
 Avec des taux d'emploi par âge figés, la masse salariale suit le PIB : les recettes restent proches de 51,9 % du PIB ;
 ce qui bouge, ce sont les prélèvements sur les pensions (1,7 → 1,9 %) et les successions (0,7 → 0,8 %). Le détail
@@ -88,10 +97,10 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,5 / 129 | 6,5 / 139 | 8,0 / 160 | 10,8 / 205 | 15,7 / 254 | 52 / 514 |
-| **Prudent** | **5,6 / 128** | **6,7 / 138** | **8,5 / 158** | **11,7 / 204** | **16,4 / 251** | **44 / 469** |
-| Médian | 5,5 / 128 | 6,3 / 134 | 7,1 / 147 | 7,9 / 171 | 9,5 / 192 | 16,7 / 268 |
-| Optimiste | 5,4 / 128 | 6,1 / 132 | 6,8 / 142 | 7,6 / 164 | 9,0 / 182 | 13,2 / 237 |
+| Crise | 5,5 / 129 | 6,5 / 139 | 8,0 / 160 | 10,9 / 206 | 15,9 / 255 | 53 / 518 |
+| **Prudent** | **5,6 / 128** | **6,7 / 138** | **8,5 / 159** | **11,8 / 205** | **16,5 / 253** | **45 / 472** |
+| Médian | 5,5 / 128 | 6,3 / 134 | 7,2 / 147 | 8,0 / 171 | 9,6 / 193 | 16,8 / 270 |
+| Optimiste | 5,4 / 128 | 6,1 / 133 | 6,9 / 143 | 7,7 / 164 | 9,0 / 183 | 13,3 / 238 |
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse
@@ -147,7 +156,7 @@ contrôlé par l'État qui finance des infrastructures publiques pourrait être 
 
 1. Prélèvements sur les revenus d'activité par OpenFisca : contrôle fait (privé, public) ; reste les ménages réels
    (couples, enfants) et les indépendants.
-2. Retraités : CSG, CASA et impôt sur le revenu sur la distribution des pensions (DREES).
+2. Retraités : fait (OpenFisca sur la distribution de la DREES, personnes seules et couples).
 3. TVA et accises : consommation par niveau de revenu (fonction de consommation actuelle du moteur).
 4. IS, impôts de production, patrimoine (successions, droits de mutation, IFI) : données DGFiP déjà dans les
    hypothèses communes.

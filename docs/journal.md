@@ -474,3 +474,10 @@ résultat du programme changé ; statu quo inchangé à 0,1 point près (recette
 DÉCISIONS d'Adrien (4 novembre 2026) : le fonds reste hors des administrations publiques ; priorité au chiffrage complet
 du statu quo avant de refaire le programme (feuille de route dans docs/statu_quo.md). Premier contrôle : les
 prélèvements sur les salaires calculés par OpenFisca recoupent la répartition des recettes (privé −0,6 %, public −2,8 %).
+
+## 4 novembre 2026 — Statu quo : prélèvements sur les pensions par OpenFisca
+
+`outils/openfisca_retraites.py` (table OpenFisca-France 176.1.10, législation 2026, personnes seules et couples) et
+`statu_quo.prelevements_retraites` : 51,2 Md€ en 2029, comme la répartition des recettes (−0,1 %). Option
+`statu_quo.baremes_retraites` (prix par défaut, législation constante ; salaires : −0,7 point de PIB de recettes en
+2073), à trancher par Adrien.

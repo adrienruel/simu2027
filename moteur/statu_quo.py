@@ -297,7 +297,8 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     Niveau de départ : recettes du PLF 2027 (statu_quo.depense_publique_base − deficit_base), dont les recettes non
     fiscales (statu_quo.recettes_non_fiscales_part_pib) ; le reste réparti entre impôts selon la reconstitution du
     système actuel (statu_quo.structure_impots). Chaque impôt suit son assiette : masse salariale (personnes en emploi
-    × salaires, comme le PIB), pensions, PIB, PIB × décès pour les successions."""
+    × salaires, comme le PIB), prélèvements sur les pensions calculés par OpenFisca (prelevements_retraites), PIB,
+    PIB × décès pour les successions."""
     cache = p.__dict__.setdefault("_cache", {})
     if ("sq_recettes", s) in cache:
         return cache[("sq_recettes", s)]
@@ -307,7 +308,8 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     struct = p.val("statu_quo.structure_impots")
     k = (d["recettes"] - nf) / sum(struct.values())
     base = {i: v * k for i, v in struct.items()}
-    ret, y = retraites(p, s), pib(p, s)
+    y = pib(p, s)
+    pr = prelevements_retraites(p, s)
     dc = deces(p, s)
     out = {}
     for t in ANNEES:
@@ -317,7 +319,7 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
             if i in IMPOTS_SALAIRES:
                 x[i] = v * masse
             elif i == "retraites":
-                x[i] = v * ret[t]["depenses"] / ret[2029]["depenses"]
+                x[i] = v * pr[t]["total"] / pr[2029]["total"]  # OpenFisca, progressivité comprise
             elif i == "successions":
                 x[i] = v * y[t] / y0 * dc[t] / dc[2029]
             else:
@@ -357,6 +359,50 @@ def prelevements_activite(p: Parametres) -> dict[str, dict[str, float]]:
         cache["sq_activite"] = {"prive": somme(effectifs_prive_2026(p), {"prive": 1.0}),
                                 "public": somme(effectifs_public_2026(p), p.val("statu_quo.versants_fonction_publique"))}
     return cache["sq_activite"]
+
+
+def prelevements_retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]:
+    """CSG, CRDS, CASA et impôt sur le revenu des retraités (Md€ de 2026), calculés par OpenFisca-France (table
+    parametres/donnees/openfisca_retraites_2026.csv, législation 2026) sur la distribution des pensions de la DREES
+    (déciles, forme seulement), recalée chaque année sur la pension moyenne du statu quo (dépenses / retraités).
+    Personnes seules et couples (anciennes_pensions.couples, pension du conjoint : statu_quo.retraites_ratio_conjoint).
+
+    statu_quo.baremes_retraites : « prix » (législation constante : seuils et barème revalorisés sur l'inflation, la
+    pension est évaluée telle quelle au barème de 2026 en euros constants) ou « salaires » (barèmes qui suivent la
+    croissance : la pension est divisée par l'indice des salaires ; quand elle baisse par rapport aux salaires, le
+    taux moyen baisse)."""
+    import csv
+    from .distribution import DONNEES
+    from .systeme_actuel import _interp
+    cache = p.__dict__.setdefault("_cache", {})
+    if "sq_table_retraites" not in cache:
+        with (DONNEES / "openfisca_retraites_2026.csv").open(encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+        cache["sq_table_retraites"] = {k: [float(r[k]) for r in rows] for k in rows[0]}
+    T = cache["sq_table_retraites"]
+    x = T["pension_brute_mensuelle"]
+    dec = p.val("anciennes_pensions.deciles_drees_2020")
+    moy = sum(dec) / len(dec)
+    pc = p.val("anciennes_pensions.couples")["part_en_couple"]
+    ret, w = retraites(p, s), salaires(p, s)
+    out = {}
+    for t in ANNEES:
+        n = ret[t]["retraites_millions"] * 1e6
+        m = ret[t]["depenses"] * 1e9 / n / 12
+        # barèmes qui suivent les salaires : pension exprimée aux barèmes de 2026 ; barèmes sur les prix : tels quels
+        k = w[2029] / w[t] if p.val("statu_quo.baremes_retraites") == "salaires" else 1.0
+        soc = ir = 0.0
+        for d in dec:
+            pm = d * m / moy
+            for nom, a, b in (("soc", "seul_prelevements_sociaux", "couple_prelevements_sociaux"),
+                              ("ir", "seul_impot_revenu", "couple_impot_revenu")):
+                v = ((1 - pc) * _interp(pm * k, x, T[a]) + pc * _interp(pm * k, x, T[b])) / k
+                if nom == "soc":
+                    soc += n / len(dec) * v
+                else:
+                    ir += n / len(dec) * v
+        out[t] = {"prelevements_sociaux": soc / 1e9, "impot_revenu": ir / 1e9, "total": (soc + ir) / 1e9}
+    return out
 
 
 def recettes(p: Parametres, s: str) -> dict[int, float]:
