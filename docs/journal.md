@@ -481,3 +481,9 @@ prélèvements sur les salaires calculés par OpenFisca recoupent la répartitio
 `statu_quo.prelevements_retraites` : 51,2 Md€ en 2029, comme la répartition des recettes (−0,1 %). Option
 `statu_quo.baremes_retraites` (prix par défaut, législation constante ; salaires : −0,7 point de PIB de recettes en
 2073), à trancher par Adrien.
+
+## 4 novembre 2026 — Statu quo : TVA par source de revenu ; barèmes des retraités sur les prix
+
+DÉCISION d'Adrien : `statu_quo.baremes_retraites` = prix (loi actuelle). `statu_quo.tva` : TVA des salariés et agents
+(revenus OpenFisca), des retraités (pension nette OpenFisca, chaque année), des inactifs et étudiants, et non
+déductible ; le calcul explique 91 % de la TVA de départ (calage 1,10). TVA 7,21 % du PIB en 2029, 7,34 % en 2073.

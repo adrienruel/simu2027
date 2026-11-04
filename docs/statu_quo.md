@@ -49,7 +49,7 @@ l'Insee pour 2024). Chaque impôt suit son assiette, barèmes à législation co
 | Idem, agents publics | 6,9 | masse salariale |
 | Idem, indépendants | 1,3 | masse salariale |
 | CSG, CRDS, CASA et IR des retraités | 1,7 | OpenFisca sur la distribution des pensions |
-| TVA | 7,2 | PIB (consommation) |
+| TVA | 7,2 | par source de revenu : salaires, pensions (OpenFisca), transferts, TVA non déductible |
 | Accises et taxes sur les produits | 3,5 | PIB |
 | IS et impôts de production | 4,9 | PIB (bénéfices) |
 | Capital (dividendes, intérêts, IFI) | 1,3 | PIB |
@@ -67,10 +67,18 @@ indépendants qui se recoupent ; limite : cas type d'une personne seule (l'impô
 CASA et impôt sur le revenu sur la distribution des pensions de la DREES, personnes seules et couples (60 % en couple,
 pension du conjoint à 62 %) : 51,2 Md€ en 2029 (29,4 de prélèvements sociaux, 21,8 d'impôt sur le revenu), contre
 51,2 dans la répartition (−0,1 %). Le calcul est refait chaque année sur la pension moyenne du statu quo.
-Convention à trancher (`statu_quo.baremes_retraites`) : barèmes sur les **prix** (législation constante, retenu
-pour l'instant : taux moyen stable vers 12 % des pensions) ou sur les **salaires** (comme les barèmes des programmes :
+Convention (`statu_quo.baremes_retraites`, DÉCISION d'Adrien du 4/11/2026 : la loi actuelle) : barèmes sur les
+**prix** (taux moyen stable vers 12 % des pensions), plutôt que sur les salaires ou sur les **salaires** (comme les barèmes des programmes :
 le taux tombe à 7,5 % en 2073 quand les pensions baissent par rapport aux salaires, 0,7 point de PIB de recettes en
 moins).
+
+**TVA par source de revenu** (`statu_quo.tva`) : la consommation est calculée avec la fonction de consommation du
+moteur (Insee) sur les revenus disponibles actuels : salariés et agents (OpenFisca, aides comprises), retraités
+(pension nette des prélèvements OpenFisca, chaque année), inactifs et étudiants (RSA compris), plus la TVA non
+déductible. En 2029 : salaires 82, pensions 40, transferts 10, non déductible 87 Md€ ; le calcul explique 91 % de la
+TVA de la répartition (219 Md€), le reste (indépendants, chômeurs, revenus du patrimoine, couples) est réparti au
+prorata. Chaque part suit sa source : la TVA passe de 7,21 % du PIB en 2029 à 7,34 % en 2073 (plus de retraités, dont
+la consommation pèse plus par euro de revenu).
 
 Avec des taux d'emploi par âge figés, la masse salariale suit le PIB : les recettes restent proches de 51,9 % du PIB ;
 ce qui bouge, ce sont les prélèvements sur les pensions (1,7 → 1,9 %) et les successions (0,7 → 0,8 %). Le détail
@@ -97,10 +105,10 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,5 / 129 | 6,5 / 139 | 8,0 / 160 | 10,9 / 206 | 15,9 / 255 | 53 / 518 |
-| **Prudent** | **5,6 / 128** | **6,7 / 138** | **8,5 / 159** | **11,8 / 205** | **16,5 / 253** | **45 / 472** |
-| Médian | 5,5 / 128 | 6,3 / 134 | 7,2 / 147 | 8,0 / 171 | 9,6 / 193 | 16,8 / 270 |
-| Optimiste | 5,4 / 128 | 6,1 / 133 | 6,9 / 143 | 7,7 / 164 | 9,0 / 183 | 13,3 / 238 |
+| Crise | 5,5 / 129 | 6,5 / 139 | 8,0 / 160 | 10,9 / 205 | 15,8 / 254 | 52 / 515 |
+| **Prudent** | **5,6 / 128** | **6,7 / 138** | **8,5 / 158** | **11,8 / 204** | **16,4 / 252** | **44 / 470** |
+| Médian | 5,5 / 128 | 6,3 / 134 | 7,2 / 147 | 8,1 / 172 | 9,8 / 194 | 17,1 / 273 |
+| Optimiste | 5,4 / 128 | 6,1 / 133 | 6,9 / 143 | 7,9 / 165 | 9,3 / 185 | 13,7 / 242 |
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse
@@ -157,7 +165,7 @@ contrôlé par l'État qui finance des infrastructures publiques pourrait être 
 1. Prélèvements sur les revenus d'activité par OpenFisca : contrôle fait (privé, public) ; reste les ménages réels
    (couples, enfants) et les indépendants.
 2. Retraités : fait (OpenFisca sur la distribution de la DREES, personnes seules et couples).
-3. TVA et accises : consommation par niveau de revenu (fonction de consommation actuelle du moteur).
+3. TVA : faite (par source de revenu). Accises : suivent le PIB (à détailler : carburants, tabac, alcool, énergie).
 4. IS, impôts de production, patrimoine (successions, droits de mutation, IFI) : données DGFiP déjà dans les
    hypothèses communes.
 5. Prestations calculées (RSA, prime d'activité, aides au logement, prestations familiales) par OpenFisca, effectifs

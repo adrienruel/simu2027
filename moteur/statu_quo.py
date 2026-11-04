@@ -302,14 +302,12 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     cache = p.__dict__.setdefault("_cache", {})
     if ("sq_recettes", s) in cache:
         return cache[("sq_recettes", s)]
-    d = depart(p)
-    y0 = d["pib"]
-    nf = p.val("statu_quo.recettes_non_fiscales_part_pib") * y0
-    struct = p.val("statu_quo.structure_impots")
-    k = (d["recettes"] - nf) / sum(struct.values())
-    base = {i: v * k for i, v in struct.items()}
+    y0 = pib_2026(p)
+    base = recettes_par_impot_depart(p)
+    nf = base.pop("non_fiscales")
     y = pib(p, s)
     pr = prelevements_retraites(p, s)
+    tv = tva(p, s)
     dc = deces(p, s)
     out = {}
     for t in ANNEES:
@@ -320,6 +318,8 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
                 x[i] = v * masse
             elif i == "retraites":
                 x[i] = v * pr[t]["total"] / pr[2029]["total"]  # OpenFisca, progressivité comprise
+            elif i == "tva":
+                x[i] = tv[t]["total"]  # par source de revenu (statu_quo.tva)
             elif i == "successions":
                 x[i] = v * y[t] / y0 * dc[t] / dc[2029]
             else:
@@ -403,6 +403,100 @@ def prelevements_retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]
                     ir += n / len(dec) * v
         out[t] = {"prelevements_sociaux": soc / 1e9, "impot_revenu": ir / 1e9, "total": (soc + ir) / 1e9}
     return out
+
+
+def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
+    """TVA par source de revenu (Md€ de 2026) : la consommation est financée par des salaires, des pensions, des
+    transferts, et la TVA non déductible (entreprises non assujetties, administrations, logement neuf).
+
+    Parts de départ calculées avec la fonction de consommation actuelle du moteur (consommation.coefficient et
+    exposant, Insee) et le taux moyen de TVA (systeme_actuel.taux_tva_moyen) :
+    - salariés du privé et agents publics : revenu disponible actuel par OpenFisca (systeme_actuel.nets_prive ;
+      tables des versants pondérées par statu_quo.versants_fonction_publique ; aides comprises) ; suit la masse salariale (le PIB) ;
+    - retraités : pension nette des prélèvements calculés par OpenFisca (prelevements_retraites), distribution de la
+      DREES, retraités résidant en France (retraites_actuels.donnees), recalculée chaque année ; la consommation
+      suit le revenu relatif aux salaires (fonction de consommation appliquée au revenu divisé par l'indice des
+      salaires, puis remultipliée) : si la pension baisse par rapport aux salaires, la TVA des retraités aussi ;
+    - inactifs et étudiants (revenus actuels, RSA compris) : adultes, prix (minima revalorisés sur l'inflation) ;
+    - TVA non déductible (accises_entreprises.ancienne_tva_entreprises, Md€ de 2024) : PIB.
+    Le total de 2029 est calé sur la TVA de la répartition des recettes (structure_impots) : l'écart (revenus non
+    représentés : indépendants, chômeurs, revenus du patrimoine, couples) est réparti au prorata des parts."""
+    cache = p.__dict__.setdefault("_cache", {})
+    if ("sq_tva", s) in cache:
+        return cache[("sq_tva", s)]
+    import csv
+    from .distribution import DONNEES
+    from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
+    from .recettes.tva_menages import lire_inactifs
+    from .systeme_actuel import _interp, consommation_actuelle_ht, net_actuel, nets_prive
+    from .unites import facteur
+    taux = p.val("systeme_actuel.taux_tva_moyen")
+    c = lambda revenu: taux * consommation_actuelle_ht(revenu, p)  # noqa: E731
+    # agents publics : tables OpenFisca de chaque versant, pondérées comme dans prelevements_activite (sans les
+    # pondérations d'un programme, que lit systeme_actuel.nets_public)
+    from .systeme_actuel import _table_openfisca, taxe_fonciere
+    poids = p.val("statu_quo.versants_fonction_publique")
+    tables = {v: _table_openfisca(versant=v) for v in poids}
+    public = 0.0
+    dp = effectifs_public_2026(p)
+    for cout, n in zip(dp.milieux, dp.effectifs):
+        for v, wv in poids.items():
+            T, xs = tables[v], tables[v]["cout_du_travail"]
+            net = _interp(cout, xs, T["salaire_net"]) + _interp(cout, xs, T["impot_revenu_restant_a_payer"])
+            aides = _interp(cout, xs, T["rsa"]) + _interp(cout, xs, T["ppa"]) + _interp(cout, xs, T["aide_logement"])
+            public += wv * n * c(net + aides - taxe_fonciere(net, p, True))
+    actifs = (sum(n * c(na) for n, na in zip(effectifs_prive_2026(p).effectifs, nets_prive(p)["actuel"])) + public) / 1e9
+    rev, eff = lire_inactifs()
+    transferts = (sum(n * c(net_actuel(x, p, False)) for x, n in zip(rev, eff))
+                  + p.val("inactifs.etudiants") * c(net_actuel(0.0, p, False))) / 1e9
+    non_ded = p.val("accises_entreprises.ancienne_tva_entreprises") * facteur(p, 2024, "recettes")
+    # retraités : pension nette (OpenFisca), chaque année
+    if "sq_table_retraites" not in cache:
+        prelevements_retraites(p, s)
+    T = cache["sq_table_retraites"]
+    x = T["pension_brute_mensuelle"]
+    dec = p.val("anciennes_pensions.deciles_drees_2020")
+    moy = sum(dec) / len(dec)
+    pc = p.val("anciennes_pensions.couples")["part_en_couple"]
+    rd = p.val("retraites_actuels.donnees")
+    part_france = rd["residents_france_2023"] / (rd["residents_france_2023"] + 900_000)
+    ret, w, y, e = retraites(p, s), salaires(p, s), pib(p, s), effectifs(p, s)
+    y0 = pib_2026(p)
+    brut = {}
+    for t in ANNEES:
+        n = ret[t]["retraites_millions"] * 1e6 * part_france
+        m = ret[t]["depenses"] * 1e9 / (ret[t]["retraites_millions"] * 1e6) / 12
+        wr = w[t] / w[2029]
+        v = 0.0
+        for d in dec:
+            pm = d * m / moy
+            prel = sum((1 - pc) * _interp(pm, x, T[f"seul_{k}"]) + pc * _interp(pm, x, T[f"couple_{k}"])
+                       for k in ("prelevements_sociaux", "impot_revenu"))
+            v += n / len(dec) * wr * c((12 * pm - prel) / wr)
+        brut[t] = v / 1e9
+    parts0 = {"actifs": actifs, "retraites": brut[2029], "transferts": transferts, "non_deductible": non_ded}
+    cible = recettes_par_impot_depart(p)["tva"]
+    k = cible / sum(parts0.values())
+    out = {}
+    for t in ANNEES:
+        out[t] = {"actifs": k * actifs * y[t] / y0,
+                  "retraites": k * brut[t],
+                  "transferts": k * transferts * e[t]["adultes"] / e[2029]["adultes"],
+                  "non_deductible": k * non_ded * y[t] / y0}
+        out[t]["total"] = sum(out[t].values())
+    out["calage"] = k
+    cache[("sq_tva", s)] = out
+    return out
+
+
+def recettes_par_impot_depart(p: Parametres) -> dict[str, float]:
+    """Recettes de départ impôt par impôt (Md€ de 2026, économie de 2026) : niveau du PLF 2027 réparti selon
+    statu_quo.structure_impots, plus les recettes non fiscales."""
+    d = depart(p)
+    nf = p.val("statu_quo.recettes_non_fiscales_part_pib") * d["pib"]
+    struct = p.val("statu_quo.structure_impots")
+    k = (d["recettes"] - nf) / sum(struct.values())
+    return {**{i: v * k for i, v in struct.items()}, "non_fiscales": nf}
 
 
 def recettes(p: Parametres, s: str) -> dict[int, float]:

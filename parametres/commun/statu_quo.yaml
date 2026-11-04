@@ -73,9 +73,9 @@ statu_quo:
   baremes_retraites:
     valeur: prix
     unite: sans_unite
-    statut: HYPOTHESE
+    statut: DECISION
     source: "Législation : seuils de revenu fiscal de référence des taux de CSG sur les pensions revalorisés sur l'inflation (code de la sécurité sociale, art. L136-8) ; barème de l'impôt sur le revenu revalorisé chaque année par la loi de finances, d'ordinaire sur l'inflation"
-    note: "prix : seuils et barèmes revalorisés sur les prix (législation constante) ; le taux moyen sur les pensions reste vers 12 % (prudent : 1,7 % du PIB en 2029, 1,9 % en 2073). salaires : barèmes qui suivent la croissance, comme pour les programmes ; le taux moyen baisse quand les pensions baissent par rapport aux salaires (7,5 % en 2073, 0,7 point de PIB de recettes en moins). À trancher. Les prélèvements sur les salaires suivent la masse salariale (élasticité 1) dans les deux cas."
+    note: "prix : seuils et barèmes revalorisés sur les prix (législation constante) ; le taux moyen sur les pensions reste vers 12 % (prudent : 1,7 % du PIB en 2029, 1,9 % en 2073). salaires : barèmes qui suivent la croissance, comme pour les programmes ; le taux moyen baisse quand les pensions baissent par rapport aux salaires (7,5 % en 2073, 0,7 point de PIB de recettes en moins). À trancher. Les prélèvements sur les salaires suivent la masse salariale (élasticité 1) dans les deux cas. DÉCISION d'Adrien du 04/11/2026 : la loi actuelle (prix)."
 
   retraites_ratio_conjoint:
     valeur: 0.62
