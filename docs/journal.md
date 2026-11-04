@@ -447,3 +447,6 @@ variantes de productivité du COR à 0,2 point près. Résultat (prudent) : déf
 au-dessus de 200 % vers 2045 (trajectoire divergente : déficit primaire de 2 % et taux au-dessus de la croissance).
 Écart du programme (solde primaire sans sa règle) : +0,6 point en 2029, +2,8 en 2037, +2,1 en 2050 ; à confirmer par
 le test « programme vide = statu quo » (étape 2). Aucun résultat du programme n'est changé.
+
+DÉCISIONS d'Adrien (4 novembre 2026) : le statu quo garde le PLF 2027 comme point de départ provisoire (pas encore
+voté ; à actualiser avec la loi votée) ; la trajectoire des dépenses de santé est gardée telle quelle.

@@ -19,7 +19,7 @@ statu_quo:
     unite: taux
     statut: SOURCE
     source: "PLF 2027 : déficit public de 5,0 % du PIB en 2027 (5,4 % en 2026) ; HCFP, avis n° 2026-5"
-    note: "Recettes publiques de départ = dépense − déficit = 51,9 % du PIB (prélèvements obligatoires 44,2 % ; le reste : ventes, revenus de la propriété, transferts). Hypothèse : les mesures du PLF 2027 sont votées et maintenues, comme dans calendrier.deficit_tendanciel_2027_2028."
+    note: "Recettes publiques de départ = dépense − déficit = 51,9 % du PIB (prélèvements obligatoires 44,2 % ; le reste : ventes, revenus de la propriété, transferts). Hypothèse : les mesures du PLF 2027 sont votées et maintenues, comme dans calendrier.deficit_tendanciel_2027_2028. DÉCISION d'Adrien du 04/11/2026 : point de départ provisoire, à actualiser quand la loi de finances 2027 sera votée."
   charge_interets_base:
     valeur: 0.029
     unite: taux

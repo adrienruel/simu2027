@@ -17,7 +17,8 @@ Première étape de la feuille de route multi-programmes : la référence commun
   (taux apparent, taux de marché, effet de Fisher, prime liée à la dette), pentes de la santé.
 - **Mêmes conventions** : euros constants de 2026, économie de 2026 placée en 2029, déficit au sens de Maastricht.
 - **Législation constante** : celle du PLF 2027 (déficit de 5 % en 2027), supposée votée et maintenue, comme dans
-  `calendrier.deficit_tendanciel_2027_2028`. Ensuite, aucune mesure nouvelle.
+  `calendrier.deficit_tendanciel_2027_2028`. Ensuite, aucune mesure nouvelle. DÉCISION d'Adrien (4/11/2026) : point
+  de départ provisoire, le PLF 2027 n'étant pas encore voté ; à actualiser avec la loi de finances votée.
 
 ## Point de départ (2029, Md€ de 2026)
 
@@ -104,7 +105,8 @@ noyau par des mesures.
   celui du COR ; l'érosion calée sur le COR en porte une partie.
 - **Santé** : la pente commune fait suivre la santé aux salaires (et à sa part du PIB selon PROMEDE), le PIB suivant
   les actifs ; avec moins d'actifs, la part de la santé monte de 4 points d'ici 2073. PROMEDE compte déjà une partie
-  du vieillissement : un recouvrement possible, commun au programme, à vérifier.
+  du vieillissement : un recouvrement possible, commun au programme. DÉCISION d'Adrien (4/11/2026) : la trajectoire
+  des dépenses de santé est gardée telle quelle (sujet important ; mieux vaut ne pas la sous-estimer).
 - **Blocs encadrés, pas sourcés** : famille, logement, pauvreté, défense et missions, enseignement (parts de la DREES
   et d'Eurostat, tous financeurs ou années anciennes). Une erreur de répartition entre blocs indexés sur les prix et
   blocs indexés sur les salaires pèse environ 0,2 point de PIB en 2073 par demi-point mal classé.
