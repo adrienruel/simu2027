@@ -51,7 +51,8 @@ l'Insee pour 2024). Chaque impôt suit son assiette, barèmes à législation co
 | CSG, CRDS, CASA et IR des retraités | 1,7 | OpenFisca sur la distribution des pensions |
 | TVA | 7,2 | par source de revenu : salaires, pensions (OpenFisca), transferts, TVA non déductible |
 | Accises et taxes sur les produits | 3,5 | PIB |
-| IS et impôts de production | 4,9 | PIB (bénéfices) |
+| Impôt sur les sociétés | 2,4 | PIB (bénéfices) |
+| Impôts de production | 2,5 | PIB ; CVAE supprimée en 2030 (loi en vigueur) |
 | Capital (dividendes, intérêts, IFI) | 1,3 | PIB |
 | Successions | 0,7 | PIB × décès (Insee) |
 | Droits de mutation | 0,5 | PIB |
@@ -80,6 +81,11 @@ TVA de la répartition (219 Md€), le reste (indépendants, chômeurs, revenus 
 prorata. Chaque part suit sa source : la TVA passe de 7,21 % du PIB en 2029 à 7,34 % en 2073 (plus de retraités, dont
 la consommation pèse plus par euro de revenu).
 
+**Législation en vigueur appliquée** : la CVAE, à 0,28 % en 2027 (environ 3 Md€), passe à 0,19 % en 2028, 0,09 % en
+2029 et disparaît en 2030 (loi de finances pour 2025, trajectoire maintenue en 2026) : −2 Md€ en 2029, −3 Md€ ensuite.
+La contribution exceptionnelle sur les bénéfices des grandes entreprises (exercices 2025 et 2026) est versée surtout
+en 2026 et n'existe plus après : rien à retirer des comptes de 2027.
+
 Avec des taux d'emploi par âge figés, la masse salariale suit le PIB : les recettes restent proches de 51,9 % du PIB ;
 ce qui bouge, ce sont les prélèvements sur les pensions (1,7 → 1,9 %) et les successions (0,7 → 0,8 %). Le détail
 sert surtout de base aux mesures : une mesure d'un programme agit sur un impôt et son assiette.
@@ -105,10 +111,10 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,5 / 129 | 6,5 / 139 | 8,0 / 160 | 10,9 / 205 | 15,8 / 254 | 52 / 515 |
-| **Prudent** | **5,6 / 128** | **6,7 / 138** | **8,5 / 158** | **11,8 / 204** | **16,4 / 252** | **44 / 470** |
-| Médian | 5,5 / 128 | 6,3 / 134 | 7,2 / 147 | 8,1 / 172 | 9,8 / 194 | 17,1 / 273 |
-| Optimiste | 5,4 / 128 | 6,1 / 133 | 6,9 / 143 | 7,9 / 165 | 9,3 / 185 | 13,7 / 242 |
+| Crise | 5,6 / 129 | 6,6 / 139 | 8,1 / 161 | 11,2 / 208 | 16,3 / 258 | 55 / 531 |
+| **Prudent** | **5,6 / 129** | **6,8 / 138** | **8,7 / 159** | **12,0 / 207** | **16,9 / 256** | **46 / 483** |
+| Médian | 5,5 / 128 | 6,4 / 135 | 7,4 / 148 | 8,3 / 174 | 10,1 / 197 | 17,8 / 280 |
+| Optimiste | 5,4 / 128 | 6,3 / 133 | 7,1 / 144 | 8,1 / 167 | 9,5 / 187 | 14,2 / 248 |
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse
@@ -166,8 +172,8 @@ contrôlé par l'État qui finance des infrastructures publiques pourrait être 
    (couples, enfants) et les indépendants.
 2. Retraités : fait (OpenFisca sur la distribution de la DREES, personnes seules et couples).
 3. TVA : faite (par source de revenu). Accises : suivent le PIB (à détailler : carburants, tabac, alcool, énergie).
-4. IS, impôts de production, patrimoine (successions, droits de mutation, IFI) : données DGFiP déjà dans les
-   hypothèses communes.
+4. IS et impôts de production : séparés, CVAE éteinte en 2030 (loi en vigueur) ; patrimoine : successions selon
+   les décès, droits de mutation et capital selon le PIB. Reste : IS par taille d'entreprise (données DGFiP déjà là).
 5. Prestations calculées (RSA, prime d'activité, aides au logement, prestations familiales) par OpenFisca, effectifs
    de bénéficiaires ; assurance chômage par l'Unédic.
 6. Dépenses de l'État mission par mission (crédits 2026), collectivités, Sécurité sociale hors santé et retraites,

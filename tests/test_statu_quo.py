@@ -43,7 +43,9 @@ def test_identites_comptables(p, res):
 
 def test_depart_cale_sur_le_plf_2027(p, res):
     x = res["prudent"][2029]
-    assert x["recettes_pib"] == pytest.approx(51.9, abs=0.01)
+    # recettes du PLF 2027 (51,9 %) moins la CVAE qui baisse de 0,28 % à 0,09 % de 2027 à 2029 (loi en vigueur)
+    baisse_cvae = 3.0 * (1 - 0.0009 / 0.0028) / sq.pib_2026(p) * 100
+    assert x["recettes_pib"] == pytest.approx(51.9 - baisse_cvae, abs=0.01)
     assert x["retraites_pib"] == pytest.approx(14.1, abs=0.01)
     # dépense primaire de 2027 (54,0 %) + deux années de dérive de la santé (régulation de 2027-2029)
     assert 54.0 < x["depenses_primaires_pib"] < 54.3
@@ -138,3 +140,14 @@ def test_tva_par_source_de_revenu(p):
     assert 1.0 <= tv["calage"] < 1.15
     ref = tva_retraites_actuelle(p) / 1e9 * facteur(p, 2024, "recettes")
     assert tv[2029]["retraites"] / tv["calage"] == pytest.approx(ref, rel=0.10)
+
+
+def test_cvae_eteinte_en_2030(p):
+    """Législation en vigueur : la CVAE (0,28 % en 2027) baisse à 0,09 % en 2029 et disparaît en 2030."""
+    r, y = sq.recettes_par_impot(p, "prudent"), sq.pib(p, "prudent")
+    d = sq.recettes_par_impot_depart(p)["impots_de_production"]
+    part = {t: r[t]["impots_de_production"] / y[t] for t in (2029, 2030, 2050)}
+    y0 = sq.pib_2026(p)
+    assert part[2029] == pytest.approx((d - 3.0 * (1 - 0.0009 / 0.0028)) / y0)
+    assert part[2030] == pytest.approx((d - 3.0) / y0)
+    assert part[2050] == pytest.approx(part[2030])

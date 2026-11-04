@@ -60,7 +60,8 @@ statu_quo:
       retraites: 50.0
       tva: 213.57
       accises_et_taxes_sur_produits: 103.83
-      is_et_impots_de_production: 145.61
+      impot_sur_les_societes: 70.3
+      impots_de_production: 75.31
       capital_dividendes_ifi: 38.13
       successions: 20.82
       droits_de_mutation: 14.74
@@ -90,6 +91,20 @@ statu_quo:
     statut: SOURCE
     source: "Insee, rémunération des salariés des administrations publiques 2025 : État 45 %, administrations locales 29 %, sécurité sociale (hôpitaux) 26 % ; part des militaires dans l'État : ≈ 15 % des effectifs (DGAFP), hypothèse"
     note: "Poids des tables OpenFisca de chaque versant pour le contrôle des prélèvements sur les agents publics (statu_quo.prelevements_activite)."
+
+  cvae_rendement_2027:
+    valeur: 3.0
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : CVAE ≈ 8 Md€ par an au taux de 0,75 % (Fipeco, « La suppression de la cotisation sur la valeur ajoutée », 29/10/2025) ; taux maximal 0,28 % en 2026 et 2027 (loi de finances pour 2025, art. 62, inchangé par la loi de finances pour 2026)"
+    note: "Rendement au taux de 2027, proportionnel au taux : 8 × 0,28 / 0,75."
+  cvae_taux_legaux:
+    valeur: {"2027": 0.0028, "2028": 0.0019, "2029": 0.0009, "2030": 0.0}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Loi de finances pour 2025, art. 62 (BOI-CVAE-LIQ-10-20251119) : taux maximal 0,28 % en 2026 et 2027, 0,19 % en 2028, 0,09 % en 2029, suppression en 2030 ; trajectoire maintenue par la loi de finances pour 2026"
+    note: "Législation en vigueur appliquée par le statu quo : la recette de CVAE du point de départ (2027) baisse avec le taux (statu_quo.recettes_par_impot). La contribution exceptionnelle sur les bénéfices des grandes entreprises (exercices 2025 et 2026, loi de finances pour 2026, art. 12 ; ≈ 6 Md€ attendus pour 2026) est versée surtout en 2026 (acompte de 98 %) : elle pèse peu dans les comptes de 2027 et n'existe plus après."
 
   apul_depenses_2026:
     valeur: 336.5

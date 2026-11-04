@@ -297,8 +297,9 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     Niveau de départ : recettes du PLF 2027 (statu_quo.depense_publique_base − deficit_base), dont les recettes non
     fiscales (statu_quo.recettes_non_fiscales_part_pib) ; le reste réparti entre impôts selon la reconstitution du
     système actuel (statu_quo.structure_impots). Chaque impôt suit son assiette : masse salariale (personnes en emploi
-    × salaires, comme le PIB), prélèvements sur les pensions calculés par OpenFisca (prelevements_retraites), PIB,
-    PIB × décès pour les successions."""
+    × salaires, comme le PIB), prélèvements sur les pensions calculés par OpenFisca (prelevements_retraites), TVA par
+    source de revenu (tva), PIB (IS, impôts de production moins la CVAE qui s'éteint en 2030, patrimoine), PIB × décès
+    pour les successions."""
     cache = p.__dict__.setdefault("_cache", {})
     if ("sq_recettes", s) in cache:
         return cache[("sq_recettes", s)]
@@ -318,6 +319,12 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
                 x[i] = v * masse
             elif i == "retraites":
                 x[i] = v * pr[t]["total"] / pr[2029]["total"]  # OpenFisca, progressivité comprise
+            elif i == "impots_de_production":
+                # législation en vigueur : la CVAE baisse jusqu'à sa suppression en 2030
+                tx = p.val("statu_quo.cvae_taux_legaux")
+                tau = tx.get(str(t), tx[max(tx, key=int)]) if t <= max(int(a) for a in tx) else tx[max(tx, key=int)]
+                cvae = p.val("statu_quo.cvae_rendement_2027") * (tau / tx["2027"] - 1)
+                x[i] = (v + cvae) * y[t] / y0
             elif i == "tva":
                 x[i] = tv[t]["total"]  # par source de revenu (statu_quo.tva)
             elif i == "successions":

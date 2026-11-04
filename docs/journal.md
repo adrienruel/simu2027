@@ -487,3 +487,9 @@ prélèvements sur les salaires calculés par OpenFisca recoupent la répartitio
 DÉCISION d'Adrien : `statu_quo.baremes_retraites` = prix (loi actuelle). `statu_quo.tva` : TVA des salariés et agents
 (revenus OpenFisca), des retraités (pension nette OpenFisca, chaque année), des inactifs et étudiants, et non
 déductible ; le calcul explique 91 % de la TVA de départ (calage 1,10). TVA 7,21 % du PIB en 2029, 7,34 % en 2073.
+
+## 4 novembre 2026 — Statu quo : IS, impôts de production, CVAE en extinction
+
+IS (70,3) et impôts de production (75,3, Md€ de 2024) séparés. Législation en vigueur : CVAE de 0,28 % (2027) à 0,09 %
+(2029), supprimée en 2030 (≈ 3 Md€). Contribution exceptionnelle des grandes entreprises : versée en 2026, sans effet
+après. Statu quo prudent 2029 : 5,6 % de déficit (inchangé à 0,1 point près).
