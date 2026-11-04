@@ -200,3 +200,15 @@ def test_indexation_des_prestations(p):
     for b in ("famille", "logement", "pauvrete", "aah_invalidite"):
         assert sal[2029][b] == pytest.approx(prix[2029][b])
         assert sal[2060][b] > prix[2060][b]
+
+
+def test_cellules_de_salaries(p):
+    """Cellules par âge et par salaire (même méthode que le programme) : en 2029, les prélèvements des cellules
+    retrouvent le calcul OpenFisca sur les distributions de 2026 (à 1 % près) ; dans le prudent, l'indice suit le
+    nombre de salariés (effet du salaire moyen par âge retiré)."""
+    c = sq.cellules_salaries(p, "prudent")
+    a = sq.prelevements_activite(p)
+    assert c["niveaux_2029"]["prive"] == pytest.approx(a["prive"]["prelevements"], rel=0.01)
+    assert c["niveaux_2029"]["public"] == pytest.approx(a["public"]["prelevements"], rel=0.01)
+    for t in (2050, 2073):
+        assert c[t]["prive"] == pytest.approx(c[t]["salaries"], rel=0.01)

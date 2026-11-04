@@ -522,3 +522,10 @@ en 2050 (18,1). Point de neutralité avec le programme (revenu universel sur les
 DÉCISION d'Adrien (4 novembre 2026) : la différence d'indexation est gardée et assumée. Le statu quo garde le niveau
 relatif des prestations (salaires) ; le programme revalorise le revenu universel sur les prix, ce qui le fait baisser
 par rapport aux salaires dans le temps : c'est un objectif du programme, à présenter comme une mesure à part entière.
+
+## 4 novembre 2026 — Statu quo : cellules de salariés (même méthode que le programme)
+
+Question d'Adrien : le statu quo suit-il la méthode des cohortes ? Retraités : oui (génération par génération) ;
+salariés : non jusqu'ici (nombre × salaire moyen). `statu_quo.cellules_salaries` : cellules par âge et tranche de
+salaire comme moteur/cohortes.py, prélèvements et TVA par OpenFisca. Effet faible (prudent 2050 : 19,4 %, inchangé à
+0,1 point ; optimiste +0,2 point), mais méthode identique des deux côtés.

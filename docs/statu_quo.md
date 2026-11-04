@@ -112,10 +112,10 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,6 / 129 | 6,8 / 139 | 8,7 / 163 | 12,8 / 218 | 19,4 / 280 | 73 / 632 |
-| **Prudent** | **5,6 / 129** | **7,0 / 138** | **9,2 / 161** | **13,4 / 216** | **19,4 / 273** | **58 / 553** |
-| Médian | 5,5 / 128 | 6,6 / 135 | 8,0 / 151 | 9,9 / 185 | 12,5 / 216 | 24 / 332 |
-| Optimiste | 5,4 / 128 | 6,5 / 133 | 7,8 / 146 | 9,5 / 178 | 11,6 / 205 | 18,7 / 290 |
+| Crise | 5,6 / 129 | 6,8 / 139 | 8,7 / 163 | 12,8 / 218 | 19,3 / 280 | 73 / 631 |
+| **Prudent** | **5,6 / 129** | **7,0 / 138** | **9,2 / 161** | **13,4 / 216** | **19,3 / 273** | **58 / 552** |
+| Médian | 5,5 / 128 | 6,7 / 135 | 8,1 / 151 | 9,8 / 185 | 12,2 / 215 | 23 / 326 |
+| Optimiste | 5,4 / 128 | 6,5 / 133 | 7,8 / 147 | 9,5 / 178 | 11,5 / 205 | 18,2 / 287 |
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse
@@ -181,6 +181,19 @@ contrôlé par l'État qui finance des infrastructures publiques pourrait être 
 6. Dépenses : faites. État mission par mission (210 Md€), défense et UE (88), collectivités (230) ; reste 106 Md€
    (Sécurité sociale hors blocs, opérateurs), positif comme il se doit (un reste négatif signalerait un double compte).
 7. Validation : faite (section « Validation »).
+
+## Même méthode que le programme : cohortes et cellules
+
+- **Retraités** : génération par génération (survivants de l'Insee, départs par âge, pension liquidée, revalorisation),
+  pour toutes les générations ; prélèvements par OpenFisca sur la distribution de chaque année.
+- **Salariés** (`statu_quo.cellules_salaries`) : cellules par âge (18-69 ans) et par tranche de coût de 2026 (privé, et
+  public à son coût actuel), profil de salaire par âge de l'Insee, comme `moteur/cohortes.py` ; prélèvements et TVA de
+  chaque cellule par OpenFisca (législation 2026) ; effet du salaire moyen par âge retiré dans le prudent et la crise,
+  gardé dans le médian et l'optimiste (`cohortes.effet_composition_salaires`). En 2029, les cellules retrouvent le
+  calcul OpenFisca sur les distributions (517 et 203 Md€).
+- **Chômeurs** : par âge (taux de 2025), même calcul que le chômage tendanciel du programme.
+- **Indépendants** : comme dans le programme, sans cellules (suivent la masse salariale).
+- Seule différence voulue : la population du statu quo n'a pas d'effet d'un programme sur les naissances.
 
 ## Indexation des prestations (DÉCISION d'Adrien, 4/11/2026)
 

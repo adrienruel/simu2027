@@ -410,13 +410,18 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     y = pib(p, s)
     pr = prelevements_retraites(p, s)
     tv = tva(p, s)
+    cel, w = cellules_salaries(p, s), salaires(p, s)
     dc = deces(p, s)
     out = {}
     for t in ANNEES:
         masse = y[t] / y0  # personnes en emploi × salaire moyen : comme le PIB (même indice)
         x = {}
         for i, v in base.items():
-            if i in IMPOTS_SALAIRES:
+            if i == "salaires_prive":
+                x[i] = v * cel[t]["prive"] * w[t]  # cellules par âge et salaire, barèmes qui suivent les salaires
+            elif i == "salaires_public":
+                x[i] = v * cel[t]["public"] * w[t]
+            elif i in IMPOTS_SALAIRES:
                 x[i] = v * masse
             elif i == "retraites":
                 x[i] = v * pr[t]["total"] / pr[2029]["total"]  # OpenFisca, progressivité comprise
@@ -569,6 +574,7 @@ def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     rd = p.val("retraites_actuels.donnees")
     part_france = rd["residents_france_2023"] / (rd["residents_france_2023"] + 900_000)
     ret, w, y, e = retraites(p, s), salaires(p, s), pib(p, s), effectifs(p, s)
+    cel = cellules_salaries(p, s)
     y0 = pib_2026(p)
     brut = {}
     for t in ANNEES:
@@ -587,7 +593,7 @@ def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     k = cible / sum(parts0.values())
     out = {}
     for t in ANNEES:
-        out[t] = {"actifs": k * actifs * y[t] / y0,
+        out[t] = {"actifs": k * actifs * cel[t]["tva"] * w[t],
                   "retraites": k * brut[t],
                   "transferts": k * transferts * e[t]["adultes"] / e[2029]["adultes"],
                   "non_deductible": k * non_ded * y[t] / y0}
@@ -605,6 +611,80 @@ def recettes_par_impot_depart(p: Parametres) -> dict[str, float]:
     struct = p.val("statu_quo.structure_impots")
     k = (d["recettes"] - nf) / sum(struct.values())
     return {**{i: v * k for i, v in struct.items()}, "non_fiscales": nf}
+
+
+def cellules_salaries(p: Parametres, s: str) -> dict[int, dict[str, float]]:
+    """Salariés du système actuel en cellules, comme le programme (moteur/cohortes.py) : chaque année, salariés par
+    âge (18-69 ans : population de l'Insee × taux d'emploi par âge × part des salariés) et par tranche de coût de
+    2026 (privé, public à son coût actuel), coût multiplié par le profil de salaire par âge (Insee) et normalisé sur
+    la masse de 2026. Pour chaque cellule : prélèvements (cotisations, CSG, CRDS, impôt sur le revenu = coût − net
+    − impôt, OpenFisca 2026) et TVA sur le revenu disponible actuel (aides comprises).
+
+    Rend, par année, les indices (1 en 2029) des prélèvements du privé, du public et de la TVA des salariés, en
+    retirant l'effet du salaire moyen par âge comme le programme (cohortes.effet_composition_salaires : retiré dans
+    le prudent et la crise, gardé dans le médian et l'optimiste) ; restent le nombre de salariés et la progressivité
+    (barèmes qui suivent les salaires). Seule la population diffère du programme : celle du statu quo, sans effet
+    d'un programme sur les naissances."""
+    cache = p.__dict__.setdefault("_cache", {})
+    if ("sq_cellules", s) in cache:
+        return cache[("sq_cellules", s)]
+    from .demographie import _tranche
+    from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
+    from .systeme_actuel import _interp, _table_openfisca, consommation_actuelle_ht, taxe_fonciere
+    taux_tva = p.val("systeme_actuel.taux_tva_moyen")
+    tp = _table_openfisca()
+    poids = p.val("statu_quo.versants_fonction_publique")
+    tv = {v: _table_openfisca(versant=v) for v in poids}
+
+    def cellule(c: float, public: bool) -> tuple[float, float]:
+        tables = [(tv[v], w) for v, w in poids.items()] if public else [(tp, 1.0)]
+        prel = tva_ = 0.0
+        for T, w in tables:
+            x = T["cout_du_travail"]
+            net = _interp(c, x, T["salaire_net"]) + _interp(c, x, T["impot_revenu_restant_a_payer"])
+            aides = _interp(c, x, T["rsa"]) + _interp(c, x, T["ppa"]) + _interp(c, x, T["aide_logement"])
+            prel += w * (c - net)
+            tva_ += w * taux_tva * consommation_actuelle_ht(net + aides - taxe_fonciere(net, p, public), p)
+        return prel, tva_
+    dp, dg = effectifs_prive_2026(p), effectifs_public_2026(p)
+    tr = ([{"cout": c, "n": n, "public": False} for c, n in zip(dp.milieux, dp.effectifs)]
+          + [{"cout": c, "n": n, "public": True} for c, n in zip(dg.milieux, dg.effectifs)])
+    total_n = sum(x["n"] for x in tr)
+    profil = {a: v for k, v in p.val("cohortes.profil_salaire_age").items() for a in _tranche(k)}
+    taux = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    pop = population(p, s)
+    ages = range(18, 70)
+    emploi26 = {a: pop[2026][a] * taux.get(a, 0.0) for a in ages}
+    k = sum(emploi26.values()) / sum(emploi26[a] * profil.get(a, 1.0) for a in ages)  # masse de 2026 inchangée
+    part_sal = total_n / sum(emploi26.values())
+    par_m = {}
+    for m in sorted(set(profil.get(a, 1.0) for a in ages)):
+        agr = {"prive": 0.0, "public": 0.0, "tva": 0.0, "masse": 0.0}
+        for x in tr:
+            c = x["cout"] * m * k
+            pr_, tv_ = cellule(c, x["public"])
+            agr["public" if x["public"] else "prive"] += x["n"] / total_n * pr_
+            agr["tva"] += x["n"] / total_n * tv_
+            agr["masse"] += x["n"] / total_n * c
+        par_m[m] = agr
+    brut = {}
+    for t in range(2026, 2074):
+        tot = {"prive": 0.0, "public": 0.0, "tva": 0.0, "masse": 0.0, "salaries": 0.0}
+        for a in ages:
+            n = pop[t][a] * taux.get(a, 0.0) * part_sal
+            tot["salaries"] += n
+            for key in ("prive", "public", "tva", "masse"):
+                tot[key] += n * par_m[profil.get(a, 1.0)][key]
+        brut[t] = tot
+    w = _v(p, "cohortes.effet_composition_salaires", s)
+    out = {}
+    for t in range(2026, 2074):
+        comp = ((brut[t]["masse"] / brut[2029]["masse"]) / (brut[t]["salaries"] / brut[2029]["salaries"])) ** (1 - w)
+        out[t] = {key: brut[t][key] / brut[2029][key] / comp for key in ("prive", "public", "tva", "masse")}
+        out[t]["salaries"] = brut[t]["salaries"] / brut[2029]["salaries"]
+    out["niveaux_2029"] = {key: v / 1e9 for key, v in brut[2029].items()}
+    cache[("sq_cellules", s)] = out
+    return out
 
 
 def recettes(p: Parametres, s: str) -> dict[int, float]:
