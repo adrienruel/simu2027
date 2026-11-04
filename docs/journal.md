@@ -541,3 +541,11 @@ docs/ecologie_de_droite_mesures.md (TVA et accises −82 Md€, impôt unique �
 Impôt unique (privé, public) et TVA des salariés recalculés sur les cellules communes : moteur du programme retrouvé
 (pas d'erreur), effet sur les naissances isolé (−16 Md€ en 2073), point de méthode sur l'IA (à unifier avec les
 dépenses). Déficit inchangé à 0,1 point près.
+
+## 4 novembre 2026 — Troisième passe : retraites et revenu universel mesure par mesure
+
+Retraites : gel de l'ancien système (−87 Md€ en 2050), fermeture aux nés à partir de 1980 (−307 Md€ en 2073), âge à
+67 ans, contribution de solidarité, attente 65-67 ans ; contrôle : ancien système sans gel = statu quo des mêmes
+générations (pas d'erreur). Revenu universel : −15 Md€ contre les prestations remplacées, revalorisation sur les prix
+isolée (−41 Md€ en 2073, décision d'Adrien), RUI étudiant, naissances. Statu quo des pensions par génération
+(`depenses_generations_recentes`). Déficit inchangé.

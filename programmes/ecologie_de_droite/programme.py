@@ -172,6 +172,87 @@ def recalcul_noyau_salaries(p: Parametres, q: Parametres, s_cellules: str) -> di
     return {"noyau": noyau, "moteur": moteur(q), "moteur_sans_naissances": moteur(sans_nat)}
 
 
+def mesures_retraites(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
+    """Retraites mesure par mesure contre le statu quo (troisième passe, 4/11/2026).
+
+    Le statu quo paie les pensions de toutes les générations au système actuel (statu_quo.retraites) ; le programme :
+    - ferme le régime aux générations nées à partir de 1980 (49 ans ou moins en 2029), qui reçoivent le socle à 67 ans
+      et le remboursement de 35 % de leurs cotisations (au sens de Maastricht), plus le surcoût de la pénibilité ;
+    - gèle les pensions des générations nées en 1979 ou avant (ancien système), en euros courants ;
+    - et les mesures datées de son registre (âge de départ, contribution de solidarité, hautes pensions, attente
+      entre l'âge légal et 67 ans, revalorisation du socle, fin du gel…).
+    Contrôle (4/11/2026) : l'ancien système du programme sans le gel retrouve les pensions du statu quo des mêmes
+    générations (463 contre 465 Md€ en 2037, 28 contre 29 en 2073)."""
+    from moteur import statu_quo as sq
+    from moteur.ancien_systeme import depenses as depenses_ancien
+    from moteur.retraites_transition import cout_socle, cout_transition, remboursements
+    from moteur.noyau import Mesure
+    ret_sq = sq.retraites(p, s)
+    anc, ct = depenses_ancien(q), cout_transition(q)
+    socle, remb = cout_socle(q), remboursements(q)
+    out = [
+        Mesure("Retraites : gel des pensions de l'ancien système (générations nées en 1979 ou avant)", "retraites",
+               {t: anc[t] - (ret_sq[t]["depenses"] - ret_sq[t]["depenses_generations_recentes"]) for t in ANNEES}, "budget"),
+        Mesure("Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",
+               "retraites", {t: socle[t] + remb[t]["maastricht"] + ct[t]["penibilite"] - ret_sq[t]["depenses_generations_recentes"]
+                             for t in ANNEES}, "budget"),
+        Mesure("Retraites : baisse des hautes pensions", "retraites", {t: -ct[t]["hautes_pensions"] for t in ANNEES}, "budget"),
+    ]
+    statiques = ("retraites_socle", "transition_retraites")
+    lignes_r = [x for x in L.lignes.values() if x["poste"] == "retraites" and x["cle"] not in statiques]
+    for x in lignes_r:
+        out.append(Mesure(f"Retraites : {x['libelle']}", "retraites", dict(x["valeurs"]), "budget"))
+    # contrôle : statu quo + mesures = retraites du moteur du programme
+    reste = {t: r[t]["retraites"] - bl_sq[t]["retraites"] - sum(mm.valeurs.get(t, 0.0) for mm in out) for t in ANNEES}
+    out.append(Mesure("Retraites : écart non réparti (contrôle, doit être nul)", "retraites", reste, "controle"))
+    return out
+
+
+def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
+    """Revenu universel et AAH mesure par mesure contre le statu quo (troisième passe, 4/11/2026).
+
+    - « RUI et AAH revalorisés comme les prestations du statu quo (salaires) » : le RUI de 2029 et sa démographie
+      (adultes, enfants, salariés), hors effet du programme sur les naissances, au salaire moyen de l'année ;
+      contre les prestations qu'il remplace (assurance chômage, famille, logement, RSA et prime d'activité, AAH) ;
+    - « RUI revalorisé sur les prix plutôt que sur les salaires » (DÉCISION d'Adrien du 04/11/2026 : baisse relative
+      assumée) : la différence entre la règle du programme (minimum de l'inflation et de la croissance nominale) et
+      les salaires ;
+    - effet du programme sur les naissances (moins d'enfants, donc moins de compléments de RUI) ;
+    - RUI étudiant sous condition de ressources (ligne du registre)."""
+    from moteur import statu_quo as sq
+    from moteur.inflation import indice_reel
+    from moteur.noyau import Mesure
+    from moteur.trajectoire_annuelle import lignes as lignes_traj
+    s_cel = "crise" if s == "crise" else "prudent"
+    w = sq.salaires(p, s_cel)
+    lig = {x["cle"]: x for x in L.lignes.values() if x["poste"] == "rui_aah"}
+    reval = {t: (indice_reel(q)[t] - 1) if q.val("revalorisation.rui_aah_socle_croissance") else 0.0 for t in ANNEES}
+    sans_nat = q.avec({"demographie.natalite_semi_elasticite": 0.0, "demographie.creches_effet": 0.0})
+    sans_nat.colonne_prudent, sans_nat._surcharges = q.colonne_prudent, q._surcharges
+    lig0 = {x["cle"]: x for x in lignes_traj(sans_nat, "prudent").lignes.values() if x["poste"] == "rui_aah"}
+    base = {t: lig["rui_aah_socle"]["valeurs"][t] + lig0["rui_aah_demographie"]["valeurs"][t] / (1 + reval[t]) for t in ANNEES}
+    nat = {t: (lig["rui_aah_demographie"]["valeurs"][t] - lig0["rui_aah_demographie"]["valeurs"][t]) for t in ANNEES}
+    blocs = CORRESPONDANCE["rui_aah"]
+    out = [
+        Mesure("Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces "
+               "prestations (chômage, famille, logement, RSA et prime d'activité, AAH)", "nouveau:rui_aah",
+               {t: base[t] * w[t] / w[2029] - sum(bl_sq[t][b] for b in blocs) for t in ANNEES}, "budget"),
+        Mesure("Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée)",
+               "nouveau:rui_aah", {t: base[t] * ((1 + reval[t]) - w[t] / w[2029]) for t in ANNEES}, "budget"),
+        Mesure("Effet du programme sur les naissances : compléments de revenu universel des enfants", "nouveau:rui_aah",
+               nat, "budget"),
+        Mesure("Revenu universel : " + lig["rui_etudiants"]["libelle"], "nouveau:rui_aah", dict(lig["rui_etudiants"]["valeurs"]), "budget"),
+    ]
+    for b in blocs:  # les prestations remplacées sont déjà retirées dans la première mesure
+        out.append(Mesure(f"(prestation remplacée, comptée dans la mesure du revenu universel) : {b}", b,
+                          {t: -bl_sq[t][b] for t in ANNEES}, "detail"))
+        out.append(Mesure(f"(contrepartie) : {b}", "nouveau:rui_aah", {t: bl_sq[t][b] for t in ANNEES}, "detail"))
+    reste = {t: r[t]["rui_aah"] - sum(bl_sq[t][b] for b in blocs) - sum(mm.valeurs.get(t, 0.0) for mm in out if mm.nature == "budget")
+             for t in ANNEES}
+    out.append(Mesure("Revenu universel : écart non réparti (contrôle, doit être nul)", "nouveau:rui_aah", reste, "controle"))
+    return out
+
+
 class EcologieDeDroite:
     nom = "ecologie_de_droite"
 
@@ -238,6 +319,12 @@ class EcologieDeDroite:
             # dépenses : chaque ligne du registre du programme dans un bloc nouveau de son poste, et les blocs du statu
             # quo que ce poste remplace retirés
             for poste, blocs in CORRESPONDANCE.items():
+                if poste == "retraites":
+                    m.extend(mesures_retraites(p, q, s, L, r, bl_sq))
+                    continue
+                if poste == "rui_aah":
+                    m.extend(mesures_revenu_universel(p, q, s, L, r, bl_sq))
+                    continue
                 lignes_p = [x for x in L.lignes.values() if x["poste"] == poste]
                 for x in lignes_p:
                     m.append(Mesure(f"{LIBELLES[poste]} — {x['libelle']}", f"nouveau:{poste}", dict(x["valeurs"]), "budget"))

@@ -169,6 +169,35 @@ Les lignes « Remplacé par … (statu quo) » sont les dépenses actuelles que 
   programme seront recalculées sur le noyau : l'IA dans les salaires des deux côtés.
 - `programme(recalcul_noyau=False)` garde le pont exact (test de reproduction).
 
+## Troisième passe (4 novembre 2026) : retraites et revenu universel
+
+**Retraites** (prudent, Md€, − = économie par rapport au statu quo) :
+
+| Mesure | 2029 | 2037 | 2050 | 2073 |
+|---|---|---|---|---|
+| Gel des pensions de l'ancien système (nés en 1979 ou avant) | 0 | −52 | −87 | −13 |
+| Nés à partir de 1980 : socle à 67 ans et remboursement de 35 % au lieu des pensions actuelles | 0 | 0 | −24 | −307 |
+| Âge de départ porté à 67 ans (ancien système) | −9 | −38 | +6 | +1 |
+| Contribution de solidarité des retraités (5 à 10 %) | −24 | −22 | −12 | −1 |
+| Entre l'âge légal et 67 ans : RUI ou socle | +4 | +19 | +14 | +14 |
+| Pensions sous le minimum vieillesse revalorisées | 0 | +3 | +5 | +1 |
+| Hautes pensions (baisse et doublement du barème), réversion | −2 | −2 | −2 | 0 |
+
+Contrôle : l'ancien système du programme, sans le gel, retrouve les pensions du statu quo des mêmes générations (463
+contre 465 Md€ en 2037, 28 contre 29 en 2073) : deux calculs indépendants qui concordent, pas d'erreur trouvée.
+
+**Revenu universel** :
+
+| Mesure | 2029 | 2037 | 2050 | 2073 |
+|---|---|---|---|---|
+| RUI et AAH (revalorisés sur les salaires) contre les prestations remplacées | −15 | −16 | −16 | −16 |
+| RUI revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée) | 0 | −9 | −22 | −41 |
+| RUI étudiant sous condition de ressources | −21 | −16 | −16 | −16 |
+| Effet du programme sur les naissances (compléments des enfants) | 0 | 0 | −1 | −3 |
+
+Le RUI et l'AAH coûtent 130 Md€ en 2029, contre 146 Md€ de prestations remplacées (assurance chômage 47, famille 35,
+RSA et prime d'activité 24, AAH et invalidité 24, logement 17).
+
 ## Reste à faire (passes suivantes)
 
 - Recalculer chaque mesure sur le noyau au lieu de la lire dans le moteur du programme (recettes de chaque instrument à

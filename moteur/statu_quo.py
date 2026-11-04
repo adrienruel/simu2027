@@ -139,6 +139,9 @@ def dette_fin_2028(p: Parametres) -> float:
 
 # --- Retraites ----------------------------------------------------------------------------------------------
 
+GENERATION_REPERE = 1980
+
+
 def retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     """Pensions de toutes les générations (Md€ de 2026) et retraités (millions), par année.
 
@@ -166,18 +169,27 @@ def retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]:
 
     brut = {}
     for t in ANNEES:
-        dep = eff = 0.0
+        dep = eff = dep_j = eff_j = 0.0
         for a in range(50, AGE_MAX + 1):
             n = pop[t][a]
+            jeune = (t - a) >= GENERATION_REPERE
             for b in range(50, a + 1):
                 d = r[b] - r[b - 1]
                 if d > 0:
-                    dep += n * d * niveau(t - a + b)
+                    v = n * d * niveau(t - a + b)
+                    dep += v
                     eff += n * d
-        brut[t] = (dep, eff)
+                    if jeune:
+                        dep_j += v
+                        eff_j += n * d
+        brut[t] = (dep, eff, dep_j, eff_j)
     k = p.val("statu_quo.retraites_part_pib_base") * pib_2026(p) / brut[2029][0]
     kn = p.val("anciennes_pensions.retraites_ancien_2029_millions")[0] / (brut[2029][1] / 1e6)
-    out = {t: {"depenses": d * k, "retraites_millions": n / 1e6 * kn} for t, (d, n) in brut.items()}
+    # « generations_recentes » : générations nées en GENERATION_REPERE ou après (1980 : 49 ans ou moins en 2029), pour
+    # les programmes qui ferment le régime actuel à ces générations
+    out = {t: {"depenses": d * k, "retraites_millions": n / 1e6 * kn,
+               "depenses_generations_recentes": dj * k, "retraites_generations_recentes": nj / 1e6 * kn}
+           for t, (d, n, dj, nj) in brut.items()}
     cache[("sq_retraites", s)] = out
     return out
 
