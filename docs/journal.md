@@ -431,3 +431,8 @@ le capital du fonds rapporte plus (17 Md€ en 2073 au lieu de 14). Prudent sans
 DÉCISIONS d'Adrien : indexation de la RUI, de l'AAH, du socle et des seuils de la contribution des retraités au
 minimum de l'inflation et de la croissance nominale ; départ à 67 ans (quatre trimestres par génération) ; inflation
 modélisée. Détail : docs/inflation_indexation.md. Prudent 2073 sans règle −0,14 → +5,17 % ; dette 105 → 137 %.
+
+## 4 novembre 2026 — Dépenses des ministères par règle
+
+Demande d'Adrien du 30/10 : chaque mission suit sa règle (croissance et public servi, PIB, ou prix). Détail :
+docs/ministeres.md. Mesures de l'ancien système classées en « retraites ». Prudent 2073 sans règle 5,17 → 4,53 %.

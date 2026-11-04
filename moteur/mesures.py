@@ -23,7 +23,7 @@ def registre() -> list[dict]:
 def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float]) -> float:
     if m["mesure"] in p.mesures_desactivees:
         return 0.0
-    if m["mesure"].startswith("Ancien système : âge légal porté de 64 à 65 ans"):
+    if m["mesure"].startswith("Ancien système : âge de départ porté"):
         from .ancien_systeme import economie_age_legal
         e = economie_age_legal(p)
         if e is not None:  # calculée génération par génération (module de population)

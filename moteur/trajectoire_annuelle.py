@@ -118,6 +118,10 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     def reval(t):
         return (idx_reel[t] - 1) if p.val("revalorisation.rui_aah_socle_croissance") else 0.0
 
+    mins = None
+    if p.val("ministeres.par_public") and p.val("demographie.active"):
+        from .depenses.ministeres import trajectoire as _traj_ministeres
+        mins = _traj_ministeres(p)
     L = Lignes()
     for t in ANNEES:
         n = t - 2029
@@ -162,9 +166,20 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "investissement", "subventions_restees", "Subventions d'investissement restées à l'État", "socle", l["subventions_restees"] - soutien_2026)
         L.ajouter(t, "investissement", "renouvelables", "Soutien aux renouvelables (contrats en cours)", "trajectoire", soutien_2029 * max(0, (fin - t) / (fin - 2029)))
         L.ajouter(t, "autres", "autres_socle", "Autres dépenses : point de départ (2029)", "socle", autres_base)
-        L.ajouter(t, "autres", "autres_croissance", "Autres dépenses : croissance tendancielle", "croissance", autres_base * (crois - 1))
-        L.ajouter(t, "autres", "autres_demographie", "Autres dépenses : démographie (population)", "demographie",
-                  autres_base * crois * (d["total"] - 1))
+        if mins:
+            # ministères : chaque groupe de missions selon sa règle (croissance et public servi, PIB ou prix) ;
+            # le quotient familial garde la croissance et la population (ses lignes de ménages font le reste)
+            qf = l["quotient_familial"]
+            L.ajouter(t, "autres", "autres_croissance", "Quotient familial et conjugal : croissance tendancielle", "croissance", qf * (crois - 1))
+            L.ajouter(t, "autres", "autres_demographie", "Quotient familial et conjugal : démographie (population)", "demographie",
+                      qf * crois * (d["total"] - 1))
+            for gr_, v_ in sorted(mins["groupes"].items(), key=lambda kv: -kv[1]["depart"]):
+                L.ajouter(t, "autres", "ministere:" + gr_, f"Ministères — {gr_} : évolution (croissance, public servi, PIB ou prix)",
+                          "croissance", v_["valeurs"][t] - v_["depart"])
+        else:
+            L.ajouter(t, "autres", "autres_croissance", "Autres dépenses : croissance tendancielle", "croissance", autres_base * (crois - 1))
+            L.ajouter(t, "autres", "autres_demographie", "Autres dépenses : démographie (population)", "demographie",
+                      autres_base * crois * (d["total"] - 1))
         L.ajouter(t, "autres", "creches_nouvelles", "Crèches : places créées (fonctionnement et construction)", "mesure",
                   creches[t])
         if menages_idx:
@@ -176,7 +191,9 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "autres", "reformes_emploi", "Réformes de l'emploi : coût", "mesure", (em["g24"] - em["b155"] * (t > em["b154"])) * crois)
         L.ajouter(t, "autres", "ascenseur_depenses", "Ascenseur social : dépenses", "mesure", asc_d[t])
         for nom, v in eco_detail.items():
-            L.ajouter(t, "autres", "economie:" + nom[:60], nom, "mesure", -v[t])
+            # mesures sur les pensions de l'ancien système : poste « retraites » (v235 : « autres »)
+            poste_ = "retraites" if (nom.startswith("Ancien système") and p.val("ministeres.par_public")) else "autres"
+            L.ajouter(t, poste_, "economie:" + nom[:60], nom, "mesure", -v[t])
     # Bases des lignes démographiques, pour recalculer l'effet dans les autres scénarios (macro)
     L.bases_demographie = {t: {"recettes": rec_emp * (1 + g) ** (t - 2029),
                                "recettes_population": rec_pop * (1 + g) ** (t - 2029),
@@ -185,7 +202,9 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
                                "salaries_rui": -rui_sal * (1 + reval(t)),
                                "adultes": -(l["rui_aah"] - rui_enf - rui_sal) * (1 + reval(t)),
                                "enfants": -rui_enf * (1 + reval(t)),
-                               "total": -autres_base * (1 + g) ** (t - 2029)} for t in ANNEES}
+                               "total": -((l["quotient_familial"] + mins["part_total"]) if mins else autres_base) * (1 + g) ** (t - 2029),
+                               **({"enfants": -rui_enf * (1 + reval(t)) - mins["part_enfants"] * (1 + g) ** (t - 2029)} if mins else {})}
+                          for t in ANNEES}
     p.__dict__.setdefault("_cache", {})[("lignes", scenario_retenu)] = L
     return L.postes()
 

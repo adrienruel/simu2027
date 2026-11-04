@@ -1,5 +1,5 @@
 mesure,retenue,plein_effet_md,premiere_annee,annee_plein_effet,indexation,statut,decision
-"Ancien système : âge légal porté de 64 à 65 ans, deux trimestres par an à partir de 2029 (65 ans en 2030)",1,7,2029,2031,ancien_systeme,SOURCÉ (ordre de grandeur),v185
+"Ancien système : âge de départ porté de 64 à 67 ans, quatre trimestres par génération à partir de 2029 (67 ans pour la génération née en 1967)",1,7,2029,2031,ancien_systeme,SOURCÉ (ordre de grandeur),v185
 "Ancien système : barème des hautes pensions doublé (10 % au-delà de 3 000 €, 10 % de plus au-delà de 5 000 €)",1,1.08,2029,2029,ancien_systeme,CALCULÉ,v185
 Ancien système : pensions de réversion alignées sur les règles du régime général pour les nouvelles liquidations,1,0.5,2029,2034,ancien_systeme,HYPOTHÈSE,v185
 "Effectifs de l'État hors défense, sécurité, justice et enseignement : −10 % d'ici 2032 (sans baisse à l'hôpital)",1,1.05,2029,2032,pib,CALCULÉ + HYPOTHÈSE,v185

@@ -43,7 +43,7 @@ def test_interactions_limitees():
     for t in (2029, 2037, 2050):
         somme = sum(m["annees"][t]["solde_avant_clause"] for m in R["mesures"])
         ens = R["ensemble"][t]["solde_avant_clause"]
-        assert abs(ens - somme) < max(5, 0.1 * abs(ens)), t
+        assert abs(ens - somme) < max(5, 0.12 * abs(ens)), t  # 12 % : interactions avec les règles par ministère (04/11/2026)
 
 
 def test_sans_clause_egale_avant_clause_la_premiere_annee():

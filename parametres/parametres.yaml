@@ -1458,3 +1458,13 @@ inflation:
     unite: taux
     statut: HYPOTHESE
     note: "Taxes carbone (55 Md€ en 2029 : accises des ménages et des collectivités 41,6 Md€, des entreprises 13,3 Md€, moteur/carbone.recette_statique) rapportées à la consommation des ménages toutes taxes comprises (environ 1 500 Md€). Baisse avec les émissions (carbone.baisse_tendancielle_emissions)."
+
+
+# --- Dépenses des ministères année par année (moteur/depenses/ministeres.py, 04/11/2026) -------------------
+ministeres:
+  par_public: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : les dépenses des ministères augmentent avec le temps ; indexation laissée au choix le plus cohérent. Chaque mission suit la croissance (salaires publics alignés sur ceux du privé) et le public qu'elle sert (population, élèves, étudiants, enfants, personnes en emploi), ou le PIB (défense, Union européenne, aide au développement, économie, écologie, agriculture, moitié de la recherche), ou les prix seulement (engagements financiers, monde combattant). v235 : croissance et population totale pour tout."}
+  elasticite_eleves_etudiants:
+    valeur: 0.5
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Baisse des moyens de l'enseignement pour 1 % d'élèves (après 2035) ou d'étudiants en moins. Prudent : la moitié (les moyens par élève ont augmenté quand les effectifs baissaient ; c'est aussi la règle « un départ sur deux » de la v235). La baisse d'ici 2035 est déjà dans les mesures (enseignants ajustés aux élèves)."
