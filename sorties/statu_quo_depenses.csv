@@ -8,7 +8,7 @@ annee,bloc,md,part_pib
 2029,AAH et invalidité,23.54,0.775
 2029,Investissement public,133.64,4.4
 2029,Missions de l'État,210.42,6.928
-2029,Défense et UE,87.51,2.881
+2029,Défense et UE,101.47,3.341
 2029,Collectivités,230.25,7.581
 2029,Sécurité sociale et opérateurs (reste),106.42,3.504
 2030,Retraites,433.29,14.162
@@ -20,7 +20,7 @@ annee,bloc,md,part_pib
 2030,AAH et invalidité,23.72,0.775
 2030,Investissement public,134.61,4.4
 2030,Missions de l'État,211.69,6.919
-2030,Défense et UE,88.15,2.881
+2030,Défense et UE,102.21,3.341
 2030,Collectivités,232.25,7.591
 2030,Sécurité sociale et opérateurs (reste),107.35,3.509
 2031,Retraites,438.5,14.227
@@ -32,7 +32,7 @@ annee,bloc,md,part_pib
 2031,AAH et invalidité,23.9,0.776
 2031,Investissement public,135.61,4.4
 2031,Missions de l'État,212.91,6.908
-2031,Défense et UE,88.8,2.881
+2031,Défense et UE,102.96,3.341
 2031,Collectivités,234.25,7.6
 2031,Sécurité sociale et opérateurs (reste),108.27,3.513
 2032,Retraites,443.4,14.277
@@ -44,7 +44,7 @@ annee,bloc,md,part_pib
 2032,AAH et invalidité,24.09,0.776
 2032,Investissement public,136.64,4.4
 2032,Missions de l'État,214.07,6.893
-2032,Défense et UE,89.48,2.881
+2032,Défense et UE,103.75,3.341
 2032,Collectivités,236.23,7.607
 2032,Sécurité sociale et opérateurs (reste),109.19,3.516
 2033,Retraites,448.08,14.318
@@ -56,7 +56,7 @@ annee,bloc,md,part_pib
 2033,AAH et invalidité,24.29,0.776
 2033,Investissement public,137.7,4.4
 2033,Missions de l'État,215.24,6.878
-2033,Défense et UE,90.17,2.881
+2033,Défense et UE,104.55,3.341
 2033,Collectivités,238.2,7.611
 2033,Sécurité sociale et opérateurs (reste),110.1,3.518
 2034,Retraites,452.6,14.348
@@ -68,7 +68,7 @@ annee,bloc,md,part_pib
 2034,AAH et invalidité,24.47,0.776
 2034,Investissement public,138.79,4.4
 2034,Missions de l'État,216.4,6.86
-2034,Défense et UE,90.89,2.881
+2034,Défense et UE,105.38,3.341
 2034,Collectivités,240.16,7.613
 2034,Sécurité sociale et opérateurs (reste),111.0,3.519
 2035,Retraites,456.94,14.369
@@ -80,7 +80,7 @@ annee,bloc,md,part_pib
 2035,AAH et invalidité,24.65,0.775
 2035,Investissement public,139.93,4.4
 2035,Missions de l'État,217.6,6.842
-2035,Défense et UE,91.63,2.881
+2035,Défense et UE,106.24,3.341
 2035,Collectivités,242.1,7.613
 2035,Sécurité sociale et opérateurs (reste),111.9,3.519
 2036,Retraites,461.1,14.377
@@ -92,7 +92,7 @@ annee,bloc,md,part_pib
 2036,AAH et invalidité,24.81,0.774
 2036,Investissement public,141.12,4.4
 2036,Missions de l'État,218.8,6.822
-2036,Défense et UE,92.41,2.881
+2036,Défense et UE,107.14,3.341
 2036,Collectivités,244.02,7.609
 2036,Sécurité sociale et opérateurs (reste),112.79,3.517
 2037,Retraites,465.0,14.38
@@ -104,7 +104,7 @@ annee,bloc,md,part_pib
 2037,AAH et invalidité,24.96,0.772
 2037,Investissement public,142.28,4.4
 2037,Missions de l'État,220.01,6.804
-2037,Défense et UE,93.17,2.881
+2037,Défense et UE,108.03,3.341
 2037,Collectivités,245.93,7.605
 2037,Sécurité sociale et opérateurs (reste),113.67,3.515
 2038,Retraites,468.44,14.371
@@ -116,7 +116,7 @@ annee,bloc,md,part_pib
 2038,AAH et invalidité,25.1,0.77
 2038,Investissement public,143.42,4.4
 2038,Missions de l'État,221.21,6.786
-2038,Défense et UE,93.92,2.881
+2038,Défense et UE,108.89,3.341
 2038,Collectivités,247.82,7.603
 2038,Sécurité sociale et opérateurs (reste),114.54,3.514
 2039,Retraites,471.26,14.354
@@ -128,7 +128,7 @@ annee,bloc,md,part_pib
 2039,AAH et invalidité,25.24,0.769
 2039,Investissement public,144.46,4.4
 2039,Missions de l'État,222.28,6.77
-2039,Défense et UE,94.6,2.881
+2039,Défense et UE,109.68,3.341
 2039,Collectivités,249.51,7.599
 2039,Sécurité sociale et opérateurs (reste),115.32,3.512
 2040,Retraites,473.47,14.314
@@ -140,7 +140,7 @@ annee,bloc,md,part_pib
 2040,AAH et invalidité,25.4,0.768
 2040,Investissement public,145.54,4.4
 2040,Missions de l'État,223.34,6.752
-2040,Défense et UE,95.31,2.881
+2040,Défense et UE,110.5,3.341
 2040,Collectivités,251.17,7.593
 2040,Sécurité sociale et opérateurs (reste),116.09,3.51
 2041,Retraites,475.26,14.272
@@ -152,7 +152,7 @@ annee,bloc,md,part_pib
 2041,AAH et invalidité,25.57,0.768
 2041,Investissement public,146.52,4.4
 2041,Missions de l'État,224.41,6.739
-2041,Défense et UE,95.95,2.881
+2041,Défense et UE,111.24,3.341
 2041,Collectivités,252.82,7.592
 2041,Sécurité sociale et opérateurs (reste),116.85,3.509
 2042,Retraites,476.98,14.235
@@ -164,7 +164,7 @@ annee,bloc,md,part_pib
 2042,AAH et invalidité,25.73,0.768
 2042,Investissement public,147.44,4.4
 2042,Missions de l'État,225.54,6.731
-2042,Défense et UE,96.55,2.881
+2042,Défense et UE,111.94,3.341
 2042,Collectivités,254.44,7.593
 2042,Sécurité sociale et opérateurs (reste),117.6,3.51
 2043,Retraites,478.56,14.203
@@ -176,7 +176,7 @@ annee,bloc,md,part_pib
 2043,AAH et invalidité,25.87,0.768
 2043,Investissement public,148.26,4.4
 2043,Missions de l'État,226.66,6.727
-2043,Défense et UE,97.08,2.881
+2043,Défense et UE,112.56,3.341
 2043,Collectivités,256.04,7.599
 2043,Sécurité sociale et opérateurs (reste),118.34,3.512
 2044,Retraites,480.19,14.169
@@ -188,7 +188,7 @@ annee,bloc,md,part_pib
 2044,AAH et invalidité,25.99,0.767
 2044,Investissement public,149.12,4.4
 2044,Missions de l'État,227.83,6.722
-2044,Défense et UE,97.65,2.881
+2044,Défense et UE,113.22,3.341
 2044,Collectivités,257.62,7.601
 2044,Sécurité sociale et opérateurs (reste),119.07,3.513
 2045,Retraites,482.31,14.154
@@ -200,7 +200,7 @@ annee,bloc,md,part_pib
 2045,AAH et invalidité,26.1,0.766
 2045,Investissement public,149.93,4.4
 2045,Missions de l'État,228.98,6.72
-2045,Défense et UE,98.18,2.881
+2045,Défense et UE,113.84,3.341
 2045,Collectivités,259.18,7.606
 2045,Sécurité sociale et opérateurs (reste),119.79,3.515
 2046,Retraites,484.35,14.152
@@ -212,7 +212,7 @@ annee,bloc,md,part_pib
 2046,AAH et invalidité,26.17,0.765
 2046,Investissement public,150.58,4.4
 2046,Missions de l'État,230.12,6.724
-2046,Défense et UE,98.61,2.881
+2046,Défense et UE,114.33,3.341
 2046,Collectivités,260.73,7.618
 2046,Sécurité sociale et opérateurs (reste),120.51,3.521
 2047,Retraites,486.49,14.152
@@ -224,7 +224,7 @@ annee,bloc,md,part_pib
 2047,AAH et invalidité,26.23,0.763
 2047,Investissement public,151.25,4.4
 2047,Missions de l'État,231.26,6.727
-2047,Défense et UE,99.05,2.881
+2047,Défense et UE,114.84,3.341
 2047,Collectivités,262.27,7.629
 2047,Sécurité sociale et opérateurs (reste),121.22,3.526
 2048,Retraites,488.4,14.15
@@ -236,7 +236,7 @@ annee,bloc,md,part_pib
 2048,AAH et invalidité,26.29,0.762
 2048,Investissement public,151.87,4.4
 2048,Missions de l'État,232.41,6.734
-2048,Défense et UE,99.45,2.881
+2048,Défense et UE,115.3,3.341
 2048,Collectivités,263.79,7.643
 2048,Sécurité sociale et opérateurs (reste),121.92,3.533
 2049,Retraites,490.49,14.158
@@ -248,7 +248,7 @@ annee,bloc,md,part_pib
 2049,AAH et invalidité,26.38,0.761
 2049,Investissement public,152.44,4.4
 2049,Missions de l'État,233.6,6.743
-2049,Défense et UE,99.82,2.881
+2049,Défense et UE,115.74,3.341
 2049,Collectivités,265.31,7.658
 2049,Sécurité sociale et opérateurs (reste),122.63,3.54
 2050,Retraites,492.78,14.177
@@ -260,7 +260,7 @@ annee,bloc,md,part_pib
 2050,AAH et invalidité,26.46,0.761
 2050,Investissement public,152.95,4.4
 2050,Missions de l'État,234.77,6.754
-2050,Défense et UE,100.15,2.881
+2050,Défense et UE,116.12,3.341
 2050,Collectivités,266.81,7.676
 2050,Sécurité sociale et opérateurs (reste),123.32,3.548
 2051,Retraites,495.21,14.209
@@ -272,7 +272,7 @@ annee,bloc,md,part_pib
 2051,AAH et invalidité,26.53,0.761
 2051,Investissement public,153.35,4.4
 2051,Missions de l'État,235.91,6.769
-2051,Défense et UE,100.42,2.881
+2051,Défense et UE,116.43,3.341
 2051,Collectivités,268.3,7.698
 2051,Sécurité sociale et opérateurs (reste),124.01,3.558
 2052,Retraites,497.71,14.244
@@ -284,7 +284,7 @@ annee,bloc,md,part_pib
 2052,AAH et invalidité,26.6,0.761
 2052,Investissement public,153.74,4.4
 2052,Missions de l'État,237.05,6.784
-2052,Défense et UE,100.68,2.881
+2052,Défense et UE,116.73,3.341
 2052,Collectivités,269.78,7.721
 2052,Sécurité sociale et opérateurs (reste),124.69,3.569
 2053,Retraites,500.36,14.286
@@ -296,7 +296,7 @@ annee,bloc,md,part_pib
 2053,AAH et invalidité,26.67,0.761
 2053,Investissement public,154.11,4.4
 2053,Missions de l'État,238.17,6.8
-2053,Défense et UE,100.92,2.881
+2053,Défense et UE,117.0,3.341
 2053,Collectivités,271.23,7.744
 2053,Sécurité sociale et opérateurs (reste),125.36,3.579
 2054,Retraites,502.99,14.326
@@ -308,7 +308,7 @@ annee,bloc,md,part_pib
 2054,AAH et invalidité,26.74,0.762
 2054,Investissement public,154.48,4.4
 2054,Missions de l'État,239.31,6.816
-2054,Défense et UE,101.16,2.881
+2054,Défense et UE,117.29,3.341
 2054,Collectivités,272.66,7.766
 2054,Sécurité sociale et opérateurs (reste),126.02,3.589
 2055,Retraites,505.74,14.369
@@ -320,7 +320,7 @@ annee,bloc,md,part_pib
 2055,AAH et invalidité,26.81,0.762
 2055,Investissement public,154.86,4.4
 2055,Missions de l'État,240.41,6.831
-2055,Défense et UE,101.41,2.881
+2055,Défense et UE,117.58,3.341
 2055,Collectivités,274.06,7.787
 2055,Sécurité sociale et opérateurs (reste),126.67,3.599
 2056,Retraites,508.39,14.416
@@ -332,7 +332,7 @@ annee,bloc,md,part_pib
 2056,AAH et invalidité,26.87,0.762
 2056,Investissement public,155.17,4.4
 2056,Missions de l'État,241.45,6.846
-2056,Défense et UE,101.61,2.881
+2056,Défense et UE,117.81,3.341
 2056,Collectivités,275.43,7.81
 2056,Sécurité sociale et opérateurs (reste),127.31,3.61
 2057,Retraites,511.08,14.461
@@ -344,7 +344,7 @@ annee,bloc,md,part_pib
 2057,AAH et invalidité,26.95,0.762
 2057,Investissement public,155.51,4.4
 2057,Missions de l'État,242.47,6.86
-2057,Défense et UE,101.83,2.881
+2057,Défense et UE,118.07,3.341
 2057,Collectivités,276.78,7.831
 2057,Sécurité sociale et opérateurs (reste),127.93,3.62
 2058,Retraites,513.6,14.499
@@ -356,7 +356,7 @@ annee,bloc,md,part_pib
 2058,AAH et invalidité,27.02,0.763
 2058,Investissement public,155.86,4.4
 2058,Missions de l'État,243.45,6.873
-2058,Défense et UE,102.06,2.881
+2058,Défense et UE,118.34,3.341
 2058,Collectivités,278.1,7.851
 2058,Sécurité sociale et opérateurs (reste),128.54,3.629
 2059,Retraites,516.2,14.538
@@ -368,7 +368,7 @@ annee,bloc,md,part_pib
 2059,AAH et invalidité,27.12,0.764
 2059,Investissement public,156.23,4.4
 2059,Missions de l'État,244.4,6.883
-2059,Défense et UE,102.31,2.881
+2059,Défense et UE,118.62,3.341
 2059,Collectivités,279.39,7.868
 2059,Sécurité sociale et opérateurs (reste),129.13,3.637
 2060,Retraites,519.04,14.583
@@ -380,7 +380,7 @@ annee,bloc,md,part_pib
 2060,AAH et invalidité,27.22,0.765
 2060,Investissement public,156.61,4.4
 2060,Missions de l'État,245.32,6.892
-2060,Défense et UE,102.55,2.881
+2060,Défense et UE,118.9,3.341
 2060,Collectivités,280.65,7.885
 2060,Sécurité sociale et opérateurs (reste),129.72,3.645
 2061,Retraites,522.04,14.642
@@ -392,7 +392,7 @@ annee,bloc,md,part_pib
 2061,AAH et invalidité,27.3,0.766
 2061,Investissement public,156.88,4.4
 2061,Missions de l'État,246.16,6.904
-2061,Défense et UE,102.73,2.881
+2061,Défense et UE,119.11,3.341
 2061,Collectivités,281.9,7.906
 2061,Sécurité sociale et opérateurs (reste),130.29,3.654
 2062,Retraites,525.11,14.7
@@ -404,7 +404,7 @@ annee,bloc,md,part_pib
 2062,AAH et invalidité,27.37,0.766
 2062,Investissement public,157.18,4.4
 2062,Missions de l'État,246.97,6.914
-2062,Défense et UE,102.93,2.881
+2062,Défense et UE,119.33,3.341
 2062,Collectivités,283.12,7.926
 2062,Sécurité sociale et opérateurs (reste),130.86,3.663
 2063,Retraites,528.44,14.761
@@ -416,7 +416,7 @@ annee,bloc,md,part_pib
 2063,AAH et invalidité,27.45,0.767
 2063,Investissement public,157.52,4.4
 2063,Missions de l'État,247.77,6.921
-2063,Défense et UE,103.15,2.881
+2063,Défense et UE,119.59,3.341
 2063,Collectivités,284.32,7.942
 2063,Sécurité sociale et opérateurs (reste),131.41,3.671
 2064,Retraites,531.83,14.824
@@ -428,7 +428,7 @@ annee,bloc,md,part_pib
 2064,AAH et invalidité,27.51,0.767
 2064,Investissement public,157.86,4.4
 2064,Missions de l'État,248.55,6.928
-2064,Défense et UE,103.37,2.881
+2064,Défense et UE,119.85,3.341
 2064,Collectivités,285.52,7.958
 2064,Sécurité sociale et opérateurs (reste),131.97,3.678
 2065,Retraites,535.58,14.898
@@ -440,7 +440,7 @@ annee,bloc,md,part_pib
 2065,AAH et invalidité,27.57,0.767
 2065,Investissement public,158.18,4.4
 2065,Missions de l'État,249.29,6.934
-2065,Défense et UE,103.58,2.881
+2065,Défense et UE,120.1,3.341
 2065,Collectivités,286.7,7.975
 2065,Sécurité sociale et opérateurs (reste),132.51,3.686
 2066,Retraites,539.26,14.979
@@ -452,7 +452,7 @@ annee,bloc,md,part_pib
 2066,AAH et invalidité,27.61,0.767
 2066,Investissement public,158.41,4.4
 2066,Missions de l'État,249.97,6.943
-2066,Défense et UE,103.73,2.881
+2066,Défense et UE,120.27,3.341
 2066,Collectivités,287.87,7.996
 2066,Sécurité sociale et opérateurs (reste),133.05,3.696
 2067,Retraites,542.85,15.059
@@ -464,7 +464,7 @@ annee,bloc,md,part_pib
 2067,AAH et invalidité,27.66,0.767
 2067,Investissement public,158.61,4.4
 2067,Missions de l'État,250.64,6.953
-2067,Défense et UE,103.87,2.881
+2067,Défense et UE,120.43,3.341
 2067,Collectivités,289.04,8.018
 2067,Sécurité sociale et opérateurs (reste),133.6,3.706
 2068,Retraites,546.42,15.136
@@ -476,7 +476,7 @@ annee,bloc,md,part_pib
 2068,AAH et invalidité,27.71,0.768
 2068,Investissement public,158.85,4.4
 2068,Missions de l'État,251.3,6.961
-2068,Défense et UE,104.02,2.881
+2068,Défense et UE,120.6,3.341
 2068,Collectivités,290.22,8.039
 2068,Sécurité sociale et opérateurs (reste),134.14,3.716
 2069,Retraites,550.12,15.22
@@ -488,7 +488,7 @@ annee,bloc,md,part_pib
 2069,AAH et invalidité,27.77,0.768
 2069,Investissement public,159.04,4.4
 2069,Missions de l'État,251.95,6.97
-2069,Défense et UE,104.14,2.881
+2069,Défense et UE,120.75,3.341
 2069,Collectivités,291.39,8.062
 2069,Sécurité sociale et opérateurs (reste),134.68,3.726
 2070,Retraites,553.89,15.309
@@ -500,7 +500,7 @@ annee,bloc,md,part_pib
 2070,AAH et invalidité,27.83,0.769
 2070,Investissement public,159.19,4.4
 2070,Missions de l'État,252.58,6.981
-2070,Défense et UE,104.25,2.881
+2070,Défense et UE,120.87,3.341
 2070,Collectivités,292.57,8.086
 2070,Sécurité sociale et opérateurs (reste),135.23,3.738
 2071,Retraites,557.8,15.393
@@ -512,7 +512,7 @@ annee,bloc,md,part_pib
 2071,AAH et invalidité,27.89,0.77
 2071,Investissement public,159.44,4.4
 2071,Missions de l'État,253.3,6.99
-2071,Défense et UE,104.41,2.881
+2071,Défense et UE,121.05,3.341
 2071,Collectivités,293.85,8.109
 2071,Sécurité sociale et opérateurs (reste),135.82,3.748
 2072,Retraites,561.78,15.478
@@ -524,7 +524,7 @@ annee,bloc,md,part_pib
 2072,AAH et invalidité,27.95,0.77
 2072,Investissement public,159.7,4.4
 2072,Missions de l'État,254.03,6.999
-2072,Défense et UE,104.58,2.881
+2072,Défense et UE,121.25,3.341
 2072,Collectivités,295.17,8.132
 2072,Sécurité sociale et opérateurs (reste),136.43,3.759
 2073,Retraites,565.83,15.563
@@ -536,6 +536,6 @@ annee,bloc,md,part_pib
 2073,AAH et invalidité,28.01,0.77
 2073,Investissement public,159.97,4.4
 2073,Missions de l'État,254.79,7.008
-2073,Défense et UE,104.76,2.881
+2073,Défense et UE,121.46,3.341
 2073,Collectivités,296.52,8.156
 2073,Sécurité sociale et opérateurs (reste),137.05,3.77

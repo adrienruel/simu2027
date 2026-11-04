@@ -352,6 +352,14 @@ def collectivites_depart(p: Parametres, blocs_: dict) -> float:
     return p.val("statu_quo.apul_depenses_2026") - rsa_departements - autonomie - inv
 
 
+def hausse_defense(p: Parametres) -> float:
+    """Hausse de la défense sur 2026 selon la loi de programmation militaire actualisée (Md€ de 2026) : niveau de 2030
+    (budget_etat.lpm_2030_courants, ramené en euros de 2026) moins le niveau de 2026 ; 0 si la trajectoire est « 2026 »."""
+    if p.val("statu_quo.defense_trajectoire") != "lpm":
+        return 0.0
+    return p.val("budget_etat.lpm_2030_courants") / (1 + p.val("budget_etat.inflation_2026_2030")) - p.val("statu_quo.defense_2026")
+
+
 def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     """Dépense primaire par bloc, chaque année (Md€ de 2026)."""
     d = depart(p)["blocs"]
@@ -363,6 +371,7 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     pa = {t: 1.0 for t in ANNEES} if salaires_ else prime_activite_relative(p, s)
     mis = missions_etat(p)
     el = p.val("ministeres.elasticite_eleves_etudiants")
+    hausse_def = hausse_defense(p)
 
     def i(cle, t):
         return e[t][cle] / e[2029][cle]
@@ -381,7 +390,7 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
             "aah_invalidite": d["aah_invalidite"] * i("adultes", t) * kp,
             "investissement": d["investissement"] * y[t] / y0,
             "etat_missions": sum(x["cout"] * indice_mission(x["regle"], x["public"], t, e, w, y, el) for x in mis),
-            "defense_ue": d["defense_ue"] * y[t] / y0,
+            "defense_ue": (d["defense_ue"] + hausse_def) * y[t] / y0,
             "collectivites": d["collectivites"] * wt * i("total", t),
             "autres": d["autres"] * wt * i("total", t),
         }

@@ -549,3 +549,16 @@ Retraites : gel de l'ancien système (−87 Md€ en 2050), fermeture aux nés �
 générations (pas d'erreur). Revenu universel : −15 Md€ contre les prestations remplacées, revalorisation sur les prix
 isolée (−41 Md€ en 2073, décision d'Adrien), RUI étudiant, naissances. Statu quo des pensions par génération
 (`depenses_generations_recentes`). Déficit inchangé.
+
+## 4 novembre 2026 — Quatrième passe : santé et autres dépenses mesure par mesure
+
+- `mesures_sante` : santé du programme contre santé + invalidité du statu quo (même périmètre) ; les deux pentes
+  concordent à 2 Md€ près ; gestion de l'assurance maladie en classement ; vraies mesures −8 Md€ (2029) à −19 (2073).
+- `mesures_autres` : missions ministère par ministère (alignement du coût des agents à part, investissement de l'État
+  comparé dans les ministères), défense et UE, collectivités (besoin laissé au budget), investissement (local, État,
+  fonds), reste. `decomposition_collectivites` : 230 contre 304 Md€ en 2029, poste par poste.
+- Corrections : invalidité comptée deux fois dans l'écart du RUI (9 Md€) ; défense du statu quo au niveau de la loi de
+  programmation actualisée (76,3 Md€ en 2030, `statu_quo.defense_trajectoire`, DÉCISION « loi actuelle ») : déficit
+  du statu quo 6,1 % en 2029 (au lieu de 5,6).
+- Point ouvert : le fonds finance ~63 Md€ par an d'investissement hors budget ; s'il est classé administration
+  publique, ~2 points de PIB reviennent au déficit de Maastricht.

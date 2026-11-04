@@ -183,6 +183,12 @@ statu_quo:
     statut: SOURCE
     source: "Classeur v235, Contrôle système actuel : mission Défense 66,7 Md€ en 2026 pensions comprises (loi de programmation) ; contribution au CAS Pensions 9,58 Md€ (missions_etat_2026.csv)"
     note: "Hors pensions (66,7 − 9,6), les pensions des militaires étant dans le bloc retraites. Suit le PIB, comme la contribution à l'UE (budget_etat.contribution_ue_courants)."
+  defense_trajectoire:
+    valeur: lpm
+    unite: sans_unite
+    statut: DECISION
+    source: "Loi actuelle (règle d'Adrien, 04/11/2026) : actualisation de la loi de programmation militaire 2024-2030 (CMP du 23 juin 2026), 76,3 Md€ hors pensions en 2030 (budget_etat.lpm_2030_courants), soit 2,5 % du PIB"
+    note: "lpm : la défense atteint dès 2029 le niveau de 2030 de la loi de programmation (en euros de 2026, comme le programme), puis suit le PIB ; la hausse sur 2026 s'ajoute à la dépense de départ (comme la dérive de la santé). 2026 : reste au niveau de 2026."
   aides_logement_etat:
     valeur: 15.0
     unite: md_eur

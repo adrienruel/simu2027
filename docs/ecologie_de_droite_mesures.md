@@ -190,19 +190,80 @@ contre 465 Md€ en 2037, 28 contre 29 en 2073) : deux calculs indépendants qui
 
 | Mesure | 2029 | 2037 | 2050 | 2073 |
 |---|---|---|---|---|
-| RUI et AAH (revalorisés sur les salaires) contre les prestations remplacées | −15 | −16 | −16 | −16 |
+| RUI et AAH (revalorisés sur les salaires) contre les prestations remplacées (hors invalidité, comparée à la santé) | −7 | −6 | −6 | −5 |
 | RUI revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée) | 0 | −9 | −22 | −41 |
 | RUI étudiant sous condition de ressources | −21 | −16 | −16 | −16 |
 | Effet du programme sur les naissances (compléments des enfants) | 0 | 0 | −1 | −3 |
 
-Le RUI et l'AAH coûtent 130 Md€ en 2029, contre 146 Md€ de prestations remplacées (assurance chômage 47, famille 35,
-RSA et prime d'activité 24, AAH et invalidité 24, logement 17).
+Le RUI et l'AAH coûtent 130 Md€ en 2029, contre 137 Md€ de prestations remplacées (assurance chômage 47, famille 35,
+RSA et prime d'activité 24, AAH 15, logement 17). Correction de la quatrième passe : les pensions d'invalidité (9 Md€),
+que le programme compte en santé, étaient retirées ici ; l'écart de −15 Md€ de la troisième passe en comptait 9 de trop.
+
+## Quatrième passe (4/11/2026) : santé et autres dépenses
+
+**Santé** (`mesures_sante`), contre la santé + l'invalidité du statu quo (prudent, Md€ de 2026) :
+
+| Mesure | 2029 | 2037 | 2050 | 2073 |
+|---|---|---|---|---|
+| Même périmètre sur la pente du programme (écart de méthode) | 0 | −1 | −1 | +2 |
+| Gestion de l'assurance maladie comptée en santé (classement ; le statu quo la met dans « autres ») | +12 | +13 | +15 | +20 |
+| Coût des agents hospitaliers aligné sur le privé | −7 | −8 | −9 | −12 |
+| Autonomie nette des heures déjà payées par le RUI | −1 | −1 | −1 | −2 |
+| Économies à terme (fraude, arrêts, transports, cures, imagerie), en montée de charge | 0 | −2 | −3 | −4 |
+| IA dans l'administration des hôpitaux | 0 | −1 | −1 | −1 |
+| Forfait des généralistes (prudent : économie perdue) | 0 | 0 | 0 | 0 |
+
+Les deux calculs de la santé (statu quo : salaires × pentes communes ; programme : pentes de l'assurance maladie)
+concordent à 2 Md€ près jusqu'en 2073 : pas d'erreur. Les vraies mesures santé font −8 Md€ en 2029, −19 en 2073.
+
+**Missions de l'État** (`mesures_autres`), ministère par ministère, chaque côté avec sa part d'investissement :
+
+| Mesure | 2029 | 2037 | 2050 | 2073 |
+|---|---|---|---|---|
+| Agents payés au coût employeur du privé (contrepartie : impôt unique des agents, en recettes) | +18 | +19 | +20 | +21 |
+| Aide sociale à l'enfance reprise des départements (classement) | +11 | +11 | +11 | +12 |
+| Missions financées par le fonds (transports, énergie, France 2030) | −20 | −21 | −23 | −25 |
+| Ministères — Autres (travail et emploi, solidarité : remplacés en partie par le RUI) | −19 | −20 | −20 | −20 |
+| Missions supprimées (cohésion des territoires) | −8 | −8 | −9 | −10 |
+| Éducation (apprentissage, élèves du privé revenus au public, moins le reste) | +2 | +5 | +4 | +3 |
+| Recherche | −3 | −3 | −3 | −4 |
+| Défense : loi de programmation, comme le statu quo désormais | 0 | −1 | −1 | −2 |
+| Autres ministères | ≈ 0 | ≈ 0 | −1 | −3 |
+
+**Collectivités** (2029, `decomposition_collectivites`) : 230 Md€ dans le programme contre 304 dans le statu quo
+(bloc collectivités + investissement local) : aide sociale à l'enfance reprise par l'État −11, investissements repris
+par le fonds −10, « même doctrine » −27 (dont investissements rentables −10), réorganisation et fonctionnement −17,
+coût des agents aligné −6, IA −6, hébergement d'urgence +3. Seul le besoin de financement (16 Md€) reste au déficit
+du programme ; le reste est financé par l'impôt local unique (périmètre).
+
+**Investissement** : programme 17 Md€ (subventions restées, renouvelables) contre 134 dans le statu quo : investissement
+local −74 (laissé aux collectivités), part de l'État −27 (comparée avec ses ministères), opérateurs, hôpitaux et sécurité
+sociale −33 (financés par le fonds).
+
+**Reste** : sécurité sociale hors santé 17, quotient familial et conjugal (crédit d'impôt) 27, réformes de l'emploi 13,
+économies datées contre le reste du statu quo (106, dont la gestion de l'assurance maladie, 12, comptée en santé).
+
+### Ce que la passe a trouvé
+
+- **Défense, erreur du statu quo corrigée** : le statu quo gardait la défense au niveau de 2026 (57 Md€) alors que la
+  loi de programmation actualisée (CMP du 23 juin 2026) la porte à 76,3 Md€ en 2030. Corrigé (« loi actuelle ») :
+  +14 Md€, le déficit du statu quo passe de 5,6 à 6,1 % en 2029. Le programme ne dépense donc pas plus pour la défense
+  que la loi actuelle : l'écart restant est l'alignement du coût des militaires.
+- **Invalidité** comptée deux fois dans l'écart du RUI (9 Md€) : corrigé.
+- **Investissement de l'État** : le statu quo le retire des missions, le programme le laisse dans les ministères ; les
+  « surcoûts » de l'Intérieur, des Finances, de la Culture… (1 à 3 Md€) n'étaient que ça. Ils tombent à zéro une fois
+  comparés au même périmètre.
+- **Le fonds, point à trancher** : environ 63 Md€ par an d'investissement (missions financées par le fonds 20,
+  opérateurs, hôpitaux et sécurité sociale 33, investissements repris aux collectivités 10) passent hors budget. Si le
+  fonds est une administration publique au sens d'Eurostat (contrôlé par l'État, sans activité marchande), ces
+  dépenses restent dans le déficit de Maastricht : environ 2 points de PIB. Décision actuelle d'Adrien : hors budget.
+- **Besoin de financement des collectivités** constant en euros de 2026 (16 Md€) alors que leurs dépenses suivent les
+  salaires et la population : écart de méthode faible (moins de 1 Md€ en 2073).
 
 ## Reste à faire (passes suivantes)
 
 - Recalculer chaque mesure sur le noyau au lieu de la lire dans le moteur du programme (recettes de chaque instrument à
   partir des cellules communes, dépenses à partir des blocs du statu quo), en commençant par les plus grosses : impôt
   unique, TVA, retraites, revenu universel.
-- Isoler la mesure « revenu universel revalorisé sur les prix » (décision du 4/11/2026).
 - Effets macroéconomiques par instrument (coût du travail, taux marginal, taux effectif de l'IS) au lieu des canaux
   propres au programme.

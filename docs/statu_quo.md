@@ -36,7 +36,7 @@ Dépense publique 56,9 % du PIB, intérêts 2,9 %, déficit 5,0 % (PLF 2027, avi
 | AAH et invalidité | 24 | adultes, prix | PLF 2026 ; hors ONDAM 2024 |
 | Investissement | 134 | PIB | Insee, 2025 : 4,4 % |
 | Missions de l'État (crédits 2026 hors pensions, hors blocs déjà comptés) | 210 | chacune selon sa règle : salaires × public servi (population, élèves, étudiants, enfants, emploi), PIB ou prix | budget 2026 |
-| Défense et contribution à l'UE | 88 | PIB | loi de programmation ; PLF 2027 |
+| Défense et contribution à l'UE | 88 + 14 | PIB | défense au niveau de 2030 de la loi de programmation actualisée (76,3 Md€ hors pensions, CMP du 23/6/2026) ; UE : PLF 2027 |
 | Collectivités (hors RSA, autonomie, investissement) | 230 | salaires × population | Insee 2025 |
 | Reste (Sécurité sociale hors blocs, opérateurs) | 106 | salaires × population | dépense primaire − blocs |
 
@@ -112,10 +112,14 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,6 / 129 | 6,8 / 139 | 8,7 / 163 | 12,8 / 218 | 19,3 / 280 | 73 / 631 |
-| **Prudent** | **5,6 / 129** | **7,0 / 138** | **9,2 / 161** | **13,4 / 216** | **19,3 / 273** | **58 / 552** |
-| Médian | 5,5 / 128 | 6,7 / 135 | 8,1 / 151 | 9,8 / 185 | 12,2 / 215 | 23 / 326 |
-| Optimiste | 5,4 / 128 | 6,5 / 133 | 7,8 / 147 | 9,5 / 178 | 11,5 / 205 | 18,2 / 287 |
+| Crise | 6,1 / 129 | 7,3 / 141 | 9,4 / 168 | 14,3 / 230 | 22,0 / 301 | 92 / 729 |
+| **Prudent** | **6,1 / 129** | **7,5 / 140** | **9,9 / 166** | **14,8 / 227** | **21,7 / 293** | **70 / 625** |
+| Médian | 6,0 / 129 | 7,2 / 137 | 8,8 / 156 | 10,9 / 195 | 13,8 / 230 | 27 / 361 |
+| Optimiste | 5,9 / 128 | 7,0 / 135 | 8,5 / 151 | 10,4 / 187 | 12,8 / 218 | 20,9 / 315 |
+
+Depuis le 4/11/2026 (quatrième passe) : la défense suit la loi de programmation militaire actualisée (+14 Md€, +0,46
+point de dépense dès 2029 ; DÉCISION « loi actuelle », `statu_quo.defense_trajectoire`, « 2026 » pour revenir au niveau
+de 2026). La dette passe 200 % du PIB en 2042 dans le prudent.
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse

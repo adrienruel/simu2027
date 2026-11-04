@@ -47,11 +47,13 @@ def test_depart_cale_sur_le_plf_2027(p, res):
     baisse_cvae = 3.0 * (1 - 0.0009 / 0.0028) / sq.pib_2026(p) * 100
     assert x["recettes_pib"] == pytest.approx(51.9 - baisse_cvae, abs=0.01)
     assert x["retraites_pib"] == pytest.approx(14.1, abs=0.01)
-    # dépense primaire de 2027 (54,0 %) + deux années de dérive de la santé (régulation de 2027-2029)
-    assert 54.0 < x["depenses_primaires_pib"] < 54.3
+    # dépense primaire de 2027 (54,0 %) + deux années de dérive de la santé (régulation de 2027-2029) + la hausse de
+    # la défense jusqu'au niveau de 2030 de la loi de programmation (13,9 Md€, 0,46 point)
+    hausse = sq.hausse_defense(p) / sq.pib_2026(p) * 100
+    assert 54.0 + hausse < x["depenses_primaires_pib"] < 54.3 + hausse
     assert sq.depart(p)["blocs"]["autres"] > 0
-    # 2029 : déficit de 2027 + intérêts recalculés sur la dette de fin 2028
-    assert 5.0 < x["deficit"] < 6.0
+    # 2029 : déficit de 2027 + intérêts recalculés sur la dette de fin 2028 + la hausse de la défense
+    assert 5.0 + hausse < x["deficit"] < 6.0 + hausse
 
 
 def test_chomage_de_depart(p):

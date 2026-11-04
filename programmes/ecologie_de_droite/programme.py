@@ -70,6 +70,37 @@ def collectivites_hors_budget(p: Parametres) -> dict[str, float]:
     return {"depenses": depenses, "besoin_financement": bf, "ressources": depenses - bf}
 
 
+def decomposition_collectivites(p: Parametres) -> dict[str, float]:
+    """Dépenses des collectivités en 2029 (Md€ de 2026) : programme (collectivites_hors_budget) contre statu quo (bloc
+    collectivités + investissement local), poste par poste. Les postes reclassés (RSA, autonomie) sont dans les deux."""
+    from moteur import statu_quo as sq
+    from moteur.unites import facteur
+    d = sq.depart(p)["blocs"]
+    inv_loc = p.val("statu_quo.investissement_parts")["collectivites"] * d["investissement"]
+    cf = p.val("collectivites_detail.charges_fixes")
+    ms = p.val("collectivites_detail.masse_salariale_agents")
+    t_ = p.val("alignement.charges_patronales_prive")
+    v = p.val("alignement.versants")["territoriale"]
+    baisse_terr = (1 + t_) / (1 + v["charges_actuelles"]) - 1
+    ia = p.val("ia.plafond_taches_automatisables") * (1 - p.val("ia.cout_services_ia"))
+    hu = p.val("collectivites_detail.hebergement_urgence")
+    out = {"statu quo (collectivités + investissement local)": d["collectivites"] + inv_loc,
+           "RSA : écart de périmètre (11,5 retirés contre 11,8 dans le statu quo)":
+               sum(cf["rsa"].values()) + (p.val("statu_quo.rsa") - 1.7)}
+    for k, x in cf.items():
+        if k != "rsa":
+            out[k.replace("_", " ")] = x["communes"] + x["regions"]
+    out["aide sociale à l'enfance (reprise par l'État)"] = -p.val("collectivites_detail.aide_sociale_enfance")
+    out["coût des agents aligné sur le privé"] = sum(ms[k] * baisse_terr for k in ("communes", "regions"))
+    out["IA (agents de gestion)"] = -sum(ms[k] * p.val("collectivites_detail.part_agents_gestion") * ia for k in ("communes", "regions"))
+    for k, x in p.val("collectivites_detail.meme_doctrine").items():
+        out[f"même doctrine : {k.replace('_', ' ')}"] = -x["gain"]
+    out["hébergement d'urgence à leur charge"] = hu["montant"] * (1 - hu["part_etat"])
+    out["programme"] = collectivites_hors_budget(p)["depenses"]
+    out["contrôle (doit être nul)"] = out["programme"] - sum(v for k, v in out.items() if k != "programme")
+    return out
+
+
 # recettes du programme, instrument par instrument, contre les impôts actuels qu'elles remplacent (statu quo)
 INSTRUMENTS = [
     ("iu_prive", "Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)", ("salaires_prive",)),
@@ -208,6 +239,221 @@ def mesures_retraites(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: d
     return out
 
 
+def invalidite_statu_quo(p: Parametres, bl_sq: dict) -> dict[int, float]:
+    """Pensions d'invalidité dans le bloc « AAH et invalidité » du statu quo (le programme les compte en santé)."""
+    from moteur.unites import facteur
+    inv = p.val("sante.pensions_invalidite_2024") * facteur(p, 2024, "recettes")
+    part = inv / (p.val("statu_quo.aah") + inv)
+    return {t: bl_sq[t]["aah_invalidite"] * part for t in ANNEES}
+
+
+def mesures_sante(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
+    """Santé mesure par mesure contre le statu quo (quatrième passe, 4/11/2026).
+
+    Le programme compte en santé l'ONDAM, l'aide sociale à l'autonomie reprise par l'État, les pensions d'invalidité
+    et la gestion de l'assurance maladie ; le statu quo met l'invalidité avec l'AAH et la gestion dans son reste
+    (« autres »). La santé du programme est donc comparée à la santé + l'invalidité du statu quo (la mesure du revenu
+    universel, elle, est comparée aux prestations hors invalidité) ; la gestion est une ligne de classement (le bloc
+    « autres » du statu quo, retiré en entier, la contient).
+    Contrôle : la somme des lignes retrouve la santé du moteur du programme."""
+    from moteur import sante as ms
+    from moteur.depenses.statique import autonomie, economie_hopitaux, securite_sociale
+    from moteur.noyau import Mesure
+    from moteur.unites import facteur
+    k = ms.derive_2029(q)
+    cr = {t: ms._croissance(q, "prudent", t) for t in ANNEES}
+    g = q.val("macro.tendance", "prudent")
+    inv = q.val("sante.pensions_invalidite_2024") * facteur(q, 2024, "recettes")
+    auto_brut = (q.val("sante.aide_sociale_autonomie_2024") * facteur(q, 2024, "recettes")
+                 if q.val("sante.reprise_autonomie_par_etat") else 0.0)
+    gestion = securite_sociale(q)[1]
+    inv_sq = invalidite_statu_quo(p, bl_sq)
+    lig = {x["cle"]: x for x in L.lignes.values() if x["poste"] == "sante"}
+    eco_m = q.val("sante.mesures_a_terme", "prudent")
+    montee = q.val("sante_trajectoire.montee_mesures")
+    options = q.val("sante_trajectoire.options")
+    fg = q.val("sante_trajectoire.forfait_generalistes")
+
+    def eco(t):  # économies à terme, avec leur montée en charge ; sante_statique les retire déjà en entier
+        n = max(0, t - 2029)
+        return (sum(v * min(1, n / montee[x]) for x, v in eco_m.items())
+                + sum(o["montant"] * o["comptee"] * min(1, n) for o in options.values()))
+    C = {t: k * cr[t] for t in ANNEES}
+    out = [
+        Mesure("Santé : même périmètre (ONDAM, autonomie, invalidité) sur la pente du programme, contre la santé et "
+               "l'invalidité du statu quo", "sante",
+               {t: (q.val("sante.ondam_2026") + inv + auto_brut) * C[t] - bl_sq[t]["sante"] - inv_sq[t] for t in ANNEES},
+               "methode", note="Écart de méthode : pentes de l'assurance maladie (programme) contre salaires et âge (statu quo)."),
+        Mesure("Santé : gestion de l'assurance maladie, comptée en santé (classement ; le statu quo la met dans « autres »)",
+               "sante", {t: gestion * C[t] for t in ANNEES}, "classement"),
+        Mesure("Santé : coût des agents hospitaliers aligné sur le privé", "sante",
+               {t: -economie_hopitaux(q) * C[t] for t in ANNEES}, "budget"),
+        Mesure("Santé : aide à l'autonomie, nette des heures déjà payées par le revenu universel", "sante",
+               {t: (autonomie(q) - auto_brut) * C[t] for t in ANNEES}, "budget"),
+        Mesure("Santé : économies à terme (fraude, arrêts de travail, transports, cures, imagerie…), en montée de charge",
+               "sante", {t: -eco(t) * cr[t] for t in ANNEES}, "budget"),
+        Mesure("Santé : IA dans les fonctions administratives des hôpitaux", "sante",
+               {t: -ms.economie_hopitaux_ia(q, t) for t in ANNEES}, "budget"),
+        Mesure("Santé : forfait des généralistes (revalorisé avec la croissance au lieu de la pente)", "sante",
+               {t: -fg["revalorise_croissance"] * fg["depense_am_2024"] * k * (cr[t] - (1 + g) ** (t - 2029))
+                * (1 - fg["part_perdue"]["prudent"]) for t in ANNEES}, "budget"),
+    ]
+    for cle, x in lig.items():
+        if cle != "sante_trajectoire":
+            out.append(Mesure(x['libelle'] if x['libelle'].startswith("Santé") else f"Santé : {x['libelle']}", "sante", dict(x["valeurs"]), "budget"))
+    reste = {t: r[t]["sante"] - bl_sq[t]["sante"] - inv_sq[t] - sum(mm.valeurs[t] for mm in out) for t in ANNEES}
+    out.append(Mesure("Santé : écart non réparti (contrôle, doit être nul)", "sante", reste, "controle"))
+    # l'invalidité du statu quo, comparée ici, sort du bloc « AAH et invalidité » (rendu à la mesure du revenu universel)
+    out.append(Mesure("(invalidité du statu quo, comparée à la santé du programme)", "sante", dict(inv_sq), "detail"))
+    out.append(Mesure("(invalidité du statu quo : retirée du bloc AAH et invalidité)", "aah_invalidite",
+                      {t: -inv_sq[t] for t in ANNEES}, "detail"))
+    return out
+
+
+def alignement_par_groupe(q: Parametres) -> dict[str, float]:
+    """Hausse du coût des agents de l'État payés au coût employeur du privé (brut + charges patronales du privé, au
+    lieu du titre 2 hors CAS Pensions), par ligne du modèle (Md€ de 2026, 2029) : part conservée × (coût aligné − titre 2
+    hors CAS). Sa contrepartie est l'impôt unique des agents (recettes)."""
+    from moteur.depenses import budget_etat as be
+    t_ = q.val("alignement.charges_patronales_prive")
+    ms = be._missions()
+    cas_s = sum(float(m["cas_pensions"]) for m in ms if m["cas_source"] == "s")
+    t2r = sum(float(m["titre2"]) for m in ms if m["cas_source"] == "r")
+    reste = q.val("budget_etat.cas_pensions_2026") - cas_s
+    hc = {}
+    for m in ms:
+        cas = reste * float(m["titre2"]) / t2r if m["cas_pensions"] == "calcul" else float(m["cas_pensions"])
+        hc[m["mission"]] = float(m["titre2"]) - cas
+    bpe = q.val("alignement.remunerations_activite_etat_2026") / sum(hc.values())
+    out: dict[str, float] = {}
+    couts = {x["mission"]: x["cout"] for x in be.couts_par_mission(q)}
+    for m in be.couts_par_mission(q):
+        mm = next(x for x in ms if x["mission"] == m["mission"])
+        credits = float(mm["credits"]) if mm["credits"] != "calcul" else None
+        aligne = hc[m["mission"]] * bpe * (1 + t_)
+        if credits is None:  # défense : crédits de la loi de programmation
+            credits = q.val("budget_etat.lpm_2030_courants") / (1 + q.val("budget_etat.inflation_2026_2030"))
+        hors_sal = credits - (hc[m["mission"]] if m["mission"] == "Défense" else float(mm["titre2"]))
+        part = couts[m["mission"]] / (hors_sal + aligne) if hors_sal + aligne else 0.0
+        out[m["ligne"]] = out.get(m["ligne"], 0.0) + part * (aligne - hc[m["mission"]])
+    return out
+
+
+def mesures_autres(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
+    """Autres dépenses (missions de l'État, défense et UE, collectivités, reste) contre les blocs du statu quo
+    (quatrième passe, 4/11/2026), au lieu d'un bloc unique.
+
+    - Missions de l'État, ministère par ministère : le coût du programme (alignement des rémunérations, parts
+      conservées, évolution selon la règle du ministère) contre les mêmes missions dans le statu quo (hors CAS
+      Pensions, hors part d'investissement) ; les missions financées par le fonds ou supprimées (remplacées par le
+      revenu universel) retirées ; l'aide sociale à l'enfance, reprise des départements, en classement.
+    - Défense (loi de programmation) et contribution à l'UE contre le bloc « défense et UE ».
+    - Collectivités : le besoin de financement laissé au budget (la dépense financée par leurs ressources propres est
+      au périmètre) contre le bloc du statu quo ; l'investissement local, que le statu quo compte dans son bloc
+      investissement et que le programme laisse aux collectivités, en classement.
+    - Le reste (sécurité sociale hors santé, quotient familial, mesures datées) contre le reste du statu quo.
+    Contrôle : la somme retrouve les autres dépenses et l'investissement du moteur du programme."""
+    from moteur import statu_quo as sq
+    from moteur.depenses import budget_etat as be
+    from moteur.depenses.ministeres import _regle
+    from moteur.depenses.statique import depenses as dep_statiques
+    from moteur.noyau import Mesure
+    e, w, y = sq.effectifs(p, s), sq.salaires(p, s), sq.pib(p, s)
+    el = p.val("ministeres.elasticite_eleves_etudiants")
+    groupe = {m["mission"]: m["ligne_modele"] for m in be._missions()}
+    sq_gr: dict[str, dict[int, float]] = {}
+    for x in sq.missions_etat(p):
+        g = groupe[x["mission"]]
+        d = sq_gr.setdefault(g, {t: 0.0 for t in ANNEES})
+        for t in ANNEES:
+            d[t] += x["cout"] * sq.indice_mission(x["regle"], x["public"], t, e, w, y, el)
+    # le statu quo retire des missions, au prorata, la part de l'État dans l'investissement public (son bloc
+    # investissement) ; le programme la laisse dans les ministères : les missions du statu quo sont comparées avec elle
+    inv_etat = p.val("statu_quo.investissement_parts")["etat"] * p.val("statu_quo.investissement_part_pib") * sq.pib_2026(p)
+    tot = sum(x["cout"] for x in sq.missions_etat(p))
+    k_inv = (tot + inv_etat) / tot
+    inv_missions = {t: sum(d[t] for d in sq_gr.values()) * (k_inv - 1) for t in ANNEES}
+    sq_gr = {g: {t: v * k_inv for t, v in d.items()} for g, d in sq_gr.items()}
+    b = be.lignes_modele(q)
+    dl = dep_statiques(q)["lignes"]
+    b["Autres"] = dl["autres_missions"]  # avec le concours aux outre-mer
+    ase = next(m for m in be.couts_par_mission(q) if m["mission"].startswith("Aide sociale à l’enfance"))["cout"]
+    lig = [x for x in L.lignes.values() if x["poste"] == "autres" and x["cle"] != "autres_socle"]
+    evol = {x["cle"].split(":", 1)[1]: x for x in lig if x["cle"].startswith("ministere:")}
+    y0 = sq.pib_2026(p)
+    d0 = sq.depart(p)["blocs"]
+    defense0 = p.val("statu_quo.defense_2026") + sq.hausse_defense(p)
+    ue0 = d0["defense_ue"] - p.val("statu_quo.defense_2026")
+    al = alignement_par_groupe(q)
+    out = [Mesure("Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique "
+                  "des agents)", "etat_missions", {t: 0.0 for t in ANNEES}, "budget")]
+    for g in sorted(set(b) | set(sq_gr), key=lambda g: -b.get(g, 0.0)):
+        if g in ("Retraites",):
+            continue
+        prog = {t: b.get(g, 0.0) + (evol[g]["valeurs"][t] if g in evol else 0.0) for t in ANNEES}
+        if al.get(g) and b.get(g):  # l'alignement, à part (même évolution que le ministère)
+            for t in ANNEES:
+                a = al[g] * prog[t] / b[g]
+                out[0].valeurs[t] += a
+                prog[t] -= a
+        if g in ("Armées", "Contribution UE"):
+            base_sq = defense0 if g == "Armées" else ue0
+            ref = {t: base_sq * y[t] / y0 for t in ANNEES}
+            nom = ("Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné" if g == "Armées"
+                   else "Contribution à l'Union européenne")
+            out.append(Mesure(f"{nom}, contre le statu quo", "defense_ue", {t: prog[t] - ref[t] for t in ANNEES}, "budget"))
+            continue
+        ref = sq_gr.get(g, {t: 0.0 for t in ANNEES})
+        if g == "Fonds":
+            out.append(Mesure("Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",
+                              "etat_missions", {t: -ref[t] for t in ANNEES}, "budget"))
+            continue
+        if g == "Supprimé":
+            out.append(Mesure("Missions supprimées (cohésion des territoires, hors aides au logement déjà au revenu universel)",
+                              "etat_missions", {t: -ref[t] for t in ANNEES}, "budget"))
+            continue
+        if g == "Justice":  # l'aide sociale à l'enfance, comptée par le statu quo chez les départements
+            k_ase = {t: (prog[t] / b[g]) for t in ANNEES}
+            out.append(Mesure("Aide sociale à l'enfance reprise par l'État (classement : le statu quo la compte chez les départements, "
+                              "dans le bloc collectivités retiré plus bas)",
+                              "etat_missions", {t: ase * k_ase[t] for t in ANNEES}, "classement"))
+            prog = {t: prog[t] - ase * k_ase[t] for t in ANNEES}
+        out.append(Mesure(f"Ministères — {g} : coût du programme contre le statu quo", "etat_missions",
+                          {t: prog[t] - ref[t] for t in ANNEES}, "budget",
+                          note=f"2029 : {prog[2029]:.1f} contre {ref[2029]:.1f} Md€"))
+    # collectivités
+    inv_loc = {t: p.val("statu_quo.investissement_parts")["collectivites"] * bl_sq[t]["investissement"] for t in ANNEES}
+    out.append(Mesure("Collectivités : besoin de financement laissé au budget (le reste de leurs dépenses est au périmètre)",
+                      "collectivites", {t: dl["collectivites"] for t in ANNEES}, "budget"))
+    out.append(Mesure("Remplacé : collectivités (statu quo)", "collectivites", {t: -bl_sq[t]["collectivites"] for t in ANNEES}, "budget"))
+    out.append(Mesure("Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des "
+                      "collectivités, au périmètre)", "investissement", {t: -inv_loc[t] for t in ANNEES}, "budget"))
+    # investissement du programme contre le reste du bloc du statu quo (État, opérateurs, sécurité sociale)
+    for x in L.lignes.values():
+        if x["poste"] == "investissement":
+            out.append(Mesure(f"Investissement — {x['libelle']}", "investissement", dict(x["valeurs"]), "budget"))
+    out.append(Mesure("Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors "
+                      "budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)", "investissement",
+                      {t: -(bl_sq[t]["investissement"] - inv_loc[t] - inv_missions[t]) for t in ANNEES}, "budget"))
+    # reste : sécurité sociale hors santé, quotient familial, économies du budget statique, mesures datées
+    statiques = [("securite_sociale_hors_sante", "Sécurité sociale hors santé : gestion des caisses et France Travail conservés"),
+                 ("quotient_familial", "Quotient familial et conjugal (crédit d'impôt du programme)"),
+                 ("economies_missions", "Économies sur les missions (budget statique)"),
+                 ("economies_supplementaires", "Économies supplémentaires (budget statique)")]
+    for k, nom in statiques:
+        out.append(Mesure(nom, "autres", {t: dl[k] for t in ANNEES}, "budget"))
+    for x in lig:
+        if not x["cle"].startswith("ministere:"):
+            out.append(Mesure(x["libelle"], "autres", dict(x["valeurs"]), "budget"))
+    out.append(Mesure("Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par "
+                      "des ventes et tarifs…)", "autres", {t: -bl_sq[t]["autres"] for t in ANNEES}, "budget"))
+    reste = {t: r[t]["autres"] + r[t]["investissement"]
+             - sum(bl_sq[t][k] for k in ("etat_missions", "defense_ue", "collectivites", "autres", "investissement"))
+             - sum(mm.valeurs[t] for mm in out) for t in ANNEES}
+    out.append(Mesure("Autres dépenses : écart non réparti (contrôle, doit être nul)", "autres", reste, "controle"))
+    return out
+
+
 def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
     """Revenu universel et AAH mesure par mesure contre le statu quo (troisième passe, 4/11/2026).
 
@@ -233,21 +479,23 @@ def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, b
     base = {t: lig["rui_aah_socle"]["valeurs"][t] + lig0["rui_aah_demographie"]["valeurs"][t] / (1 + reval[t]) for t in ANNEES}
     nat = {t: (lig["rui_aah_demographie"]["valeurs"][t] - lig0["rui_aah_demographie"]["valeurs"][t]) for t in ANNEES}
     blocs = CORRESPONDANCE["rui_aah"]
+    inv = invalidite_statu_quo(p, bl_sq)  # comparée à la santé du programme (mesures_sante)
     out = [
         Mesure("Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces "
-               "prestations (chômage, famille, logement, RSA et prime d'activité, AAH)", "nouveau:rui_aah",
-               {t: base[t] * w[t] / w[2029] - sum(bl_sq[t][b] for b in blocs) for t in ANNEES}, "budget"),
+               "prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)", "nouveau:rui_aah",
+               {t: base[t] * w[t] / w[2029] - sum(bl_sq[t][b] for b in blocs) + inv[t] for t in ANNEES}, "budget"),
         Mesure("Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée)",
                "nouveau:rui_aah", {t: base[t] * ((1 + reval[t]) - w[t] / w[2029]) for t in ANNEES}, "budget"),
         Mesure("Effet du programme sur les naissances : compléments de revenu universel des enfants", "nouveau:rui_aah",
                nat, "budget"),
         Mesure("Revenu universel : " + lig["rui_etudiants"]["libelle"], "nouveau:rui_aah", dict(lig["rui_etudiants"]["valeurs"]), "budget"),
     ]
-    for b in blocs:  # les prestations remplacées sont déjà retirées dans la première mesure
+    for b in blocs:  # les prestations remplacées sont déjà retirées dans la première mesure (invalidité : en santé)
+        v = {t: bl_sq[t][b] - (inv[t] if b == "aah_invalidite" else 0.0) for t in ANNEES}
         out.append(Mesure(f"(prestation remplacée, comptée dans la mesure du revenu universel) : {b}", b,
-                          {t: -bl_sq[t][b] for t in ANNEES}, "detail"))
-        out.append(Mesure(f"(contrepartie) : {b}", "nouveau:rui_aah", {t: bl_sq[t][b] for t in ANNEES}, "detail"))
-    reste = {t: r[t]["rui_aah"] - sum(bl_sq[t][b] for b in blocs) - sum(mm.valeurs.get(t, 0.0) for mm in out if mm.nature == "budget")
+                          {t: -v[t] for t in ANNEES}, "detail"))
+        out.append(Mesure(f"(contrepartie) : {b}", "nouveau:rui_aah", v, "detail"))
+    reste = {t: r[t]["rui_aah"] - sum(bl_sq[t][b] for b in blocs) + inv[t] - sum(mm.valeurs.get(t, 0.0) for mm in out if mm.nature == "budget")
              for t in ANNEES}
     out.append(Mesure("Revenu universel : écart non réparti (contrôle, doit être nul)", "nouveau:rui_aah", reste, "controle"))
     return out
@@ -324,6 +572,14 @@ class EcologieDeDroite:
                     continue
                 if poste == "rui_aah":
                     m.extend(mesures_revenu_universel(p, q, s, L, r, bl_sq))
+                    continue
+                if poste == "sante":
+                    m.extend(mesures_sante(p, q, s, L, r, bl_sq))
+                    continue
+                if poste == "autres":
+                    m.extend(mesures_autres(p, q, s, L, r, bl_sq))
+                    continue
+                if poste == "investissement":  # avec les autres dépenses (investissement local)
                     continue
                 lignes_p = [x for x in L.lignes.values() if x["poste"] == poste]
                 for x in lignes_p:
