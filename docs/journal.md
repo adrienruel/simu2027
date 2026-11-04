@@ -535,3 +535,9 @@ salaire comme moteur/cohortes.py, prélèvements et TVA par OpenFisca. Effet fai
 Recettes instrument par instrument contre les impôts actuels, dépenses ligne par ligne, périmètre complété (ventes et
 tarifs de l'État, des opérateurs et des hôpitaux), effets macro par canal. Résultats inchangés (lisibilité). Constats :
 docs/ecologie_de_droite_mesures.md (TVA et accises −82 Md€, impôt unique −66 et −68, santé : classement).
+
+## 4 novembre 2026 — Deuxième passe : salariés recalculés sur le noyau
+
+Impôt unique (privé, public) et TVA des salariés recalculés sur les cellules communes : moteur du programme retrouvé
+(pas d'erreur), effet sur les naissances isolé (−16 Md€ en 2073), point de méthode sur l'IA (à unifier avec les
+dépenses). Déficit inchangé à 0,1 point près.

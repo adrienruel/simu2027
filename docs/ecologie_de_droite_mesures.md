@@ -153,6 +153,22 @@ Les lignes « Remplacé par … (statu quo) » sont les dépenses actuelles que 
 5. **Revenu universel** : 130 Md€ de RUI et AAH en 2029, contre 145 Md€ de prestations actuelles remplacées ; le RUI
    étudiant sous condition rapporte 21 Md€.
 
+## Deuxième passe (4 novembre 2026) : impôt unique et TVA des salariés recalculés sur le noyau
+
+- Recalcul sur les cellules du statu quo (`statu_quo.agreger_cellules` : même population, mêmes âges et salaires,
+  barème du programme appliqué à chaque cellule), au niveau des distributions de 2026. **Pas d'erreur trouvée** : sans
+  son effet sur les naissances, le moteur du programme est retrouvé à 0,3 Md€ près en 2073 ; le déficit change de
+  moins de 0,1 point.
+- **Effet du programme sur les naissances** isolé en mesure à part (il était dans chaque ligne) : sur l'impôt unique
+  et la TVA des salariés, −0,4 Md€ en 2050, −4,9 en 2060, −16,2 en 2073 (moins d'enfants nés à partir de 2030, donc
+  moins d'actifs ensuite).
+- **Point de méthode trouvé : l'IA.** Mettre l'IA dans les salaires (comme le statu quo) ferait monter les recettes
+  du programme sans faire monter ses dépenses, que son moteur fait suivre la tendance sans l'IA : un avantage d'un
+  seul côté (jusqu'à −0,9 point de déficit en 2073). Le recalcul garde donc l'IA hors des salaires ; le moteur du
+  programme la compte dans son canal macro (10 % du PIB en plus passe au solde). À unifier quand les dépenses du
+  programme seront recalculées sur le noyau : l'IA dans les salaires des deux côtés.
+- `programme(recalcul_noyau=False)` garde le pont exact (test de reproduction).
+
 ## Reste à faire (passes suivantes)
 
 - Recalculer chaque mesure sur le noyau au lieu de la lire dans le moteur du programme (recettes de chaque instrument à

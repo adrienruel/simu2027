@@ -44,8 +44,11 @@ def ed(p):
     return prog, noyau.simuler(p, prog), prog.resultats_moteur(p)
 
 
-def test_ecologie_de_droite_reproduite_par_le_noyau(ed):
-    _, r, ref = ed
+def test_ecologie_de_droite_reproduite_par_le_noyau(p):
+    """Pont exact (tout lu dans le moteur du programme) : mêmes résultats à 1e-9 près."""
+    from programmes.ecologie_de_droite.programme import programme
+    prog = programme(recalcul_noyau=False)
+    r, ref = noyau.simuler(p, prog), prog.resultats_moteur(p)
     for s in sq.SCENARIOS:
         for t in ANNEES:
             assert r[s][t]["deficit"] == pytest.approx(ref[s][t]["deficit"], abs=1e-9)
@@ -82,3 +85,11 @@ def test_perimetre_aligne_sans_effet_sur_le_solde(ed, p):
     for m in prog.mesures(p)["prudent"]:
         if m.nature == "controle":
             assert max(abs(v) for v in m.valeurs.values()) < 1e-6
+
+
+def test_recalcul_noyau_des_salaries(ed):
+    """Deuxième passe : impôt unique et TVA des salariés recalculés sur les cellules du noyau, l'effet du programme sur
+    les naissances isolé. Les cellules du noyau retrouvent celles du programme : écart de déficit sous 0,1 point."""
+    _, r, ref = ed
+    for t in (2029, 2037, 2050, 2073):
+        assert abs(r["prudent"][t]["deficit"] - ref["prudent"][t]["deficit"]) < 0.1

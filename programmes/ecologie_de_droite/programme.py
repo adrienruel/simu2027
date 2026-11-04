@@ -132,11 +132,54 @@ def recettes_par_instrument(q: Parametres) -> dict[int, dict[str, float]]:
     return out
 
 
+def recalcul_noyau_salaries(p: Parametres, q: Parametres, s_cellules: str) -> dict:
+    """Deuxième passe : impôt unique des salariés (privé, public aligné) et TVA des salariés recalculés sur les
+    cellules communes du statu quo (statu_quo.agreger_cellules : même population, mêmes âges et salaires), au niveau
+    du budget statique du programme (distributions de 2026) et avec l'évolution des cellules (salaires, hors IA,
+    que le moteur du programme compte dans son canal macro).
+
+    Rend aussi ces mêmes postes dans le moteur du programme, avec et sans son effet sur les naissances, pour isoler
+    cet effet en mesure à part. Contrôle (4/11/2026) : sans l'effet sur les naissances et sans l'IA, le noyau retrouve
+    le moteur du programme à 0,1 % près jusqu'en 2073."""
+    from moteur import statu_quo as sq
+    from moteur.demographie import indices
+    from moteur.epargne import part_rui_salarie
+    from moteur.impot_unique import impot
+    from moteur.recettes import tva_menages as tm
+    from moteur.recettes.impot_salaires import facteur_alignement_public, impot_prive, impot_public
+    a = facteur_alignement_public(q)
+    fns = {"iu_prive": lambda c, pub: 0.0 if pub else impot(c, q),
+           "iu_public": lambda c, pub: impot(c * a, q) if pub else 0.0,
+           "tva_sal": lambda c, pub: tm.tva_actif(c * a, q, "prudent", tm.part_rui_agent(c)) if pub
+           else tm.tva_actif(c, q, "prudent", part_rui_salarie(c, q))}
+    # sans l'IA dans les salaires : le moteur du programme compte l'IA dans son canal macro (part du PIB en plus qui
+    # passe au solde) et ses dépenses n'en suivent pas la hausse ; l'ajouter ici la compterait d'un seul côté
+    q_sans_ia = q.avec({"macro.ia_productivite": 0.0})
+    q_sans_ia.colonne_prudent, q_sans_ia._surcharges = q.colonne_prudent, q._surcharges
+    ag = sq.agreger_cellules(q_sans_ia, s_cellules, fns)
+    statique = {"iu_prive": impot_prive(q) / 1e9, "iu_public": impot_public(q) / 1e9,
+                "tva_sal": (tm.tva_prive(q) + tm.tva_public(q)) / 1e9}
+    noyau = {t: {k: statique[k] * ag[t][k] / ag[2029][k] for k in fns} for t in ANNEES}
+    g = q.val("macro.tendance", "prudent")
+
+    def moteur(qq):
+        d = indices(qq, "prudent")
+        return {t: {"iu_prive": statique["iu_prive"] * (1 + g) ** (t - 2029) * d[t]["c_impot"],
+                    "iu_public": statique["iu_public"] * (1 + g) ** (t - 2029) * d[t]["c_impot"],
+                    "tva_sal": statique["tva_sal"] * (1 + g) ** (t - 2029) * d[t]["c_tva"]} for t in ANNEES}
+    sans_nat = q.avec({"demographie.natalite_semi_elasticite": 0.0, "demographie.creches_effet": 0.0})
+    sans_nat.colonne_prudent, sans_nat._surcharges = q.colonne_prudent, q._surcharges
+    return {"noyau": noyau, "moteur": moteur(q), "moteur_sans_naissances": moteur(sans_nat)}
+
+
 class EcologieDeDroite:
     nom = "ecologie_de_droite"
 
-    def __init__(self):
+    def __init__(self, recalcul_noyau: bool = True):
+        """recalcul_noyau : impôt unique et TVA des salariés recalculés sur le noyau (deuxième passe) ; False : tout
+        est lu dans le moteur du programme (reproduction exacte, sert de test du pont)."""
         self._cache = {}
+        self.recalcul_noyau = recalcul_noyau
 
     def _calcul(self, p: Parametres) -> dict:
         cle = id(p)
@@ -160,6 +203,18 @@ class EcologieDeDroite:
             from moteur.trajectoire_annuelle import lignes as lignes_traj
             ri = recettes_par_instrument(q)
             imp_sq = sq.recettes_par_impot(p, s)
+            # deuxième passe : impôt unique et TVA des salariés recalculés sur les cellules du noyau ; l'effet du
+            # programme sur les naissances, que le moteur du programme mettait dans chaque ligne, devient une mesure
+            rn = recalcul_noyau_salaries(p, q, "crise" if s == "crise" else "prudent")
+            if not self.recalcul_noyau:  # pont exact : le noyau prend les valeurs du moteur
+                rn["noyau"] = rn["moteur_sans_naissances"]
+            for t in ANNEES:
+                for k in ("iu_prive", "iu_public"):
+                    ri[t][k] += rn["noyau"][t][k] - rn["moteur"][t][k]
+                ri[t]["tva"] += rn["noyau"][t]["tva_sal"] - rn["moteur"][t]["tva_sal"]
+            m.append(Mesure("Effet du programme sur les naissances : impôt unique et TVA des salariés", "recettes",
+                            {t: sum(rn["moteur"][t][k] - rn["moteur_sans_naissances"][t][k] for k in rn["moteur"][t])
+                             for t in ANNEES}, "budget"))
             for cle, libelle, remplace in INSTRUMENTS:
                 m.append(Mesure(libelle, "recettes", {t: ri[t].get(cle, 0.0) - sum(imp_sq[t][i] for i in remplace)
                                                        for t in ANNEES}, "budget"))
@@ -169,9 +224,15 @@ class EcologieDeDroite:
             for x in autres_rec:
                 m.append(Mesure(x["libelle"], "recettes", dict(x["valeurs"]), "budget"))
             # contrôle : tout ce qui reste entre les recettes du programme et la somme des instruments et des mesures
-            somme = {t: sum(ri[t].values()) + sum(x["valeurs"].get(t, 0.0) for x in autres_rec) for t in ANNEES}
+            # contrôle : les recettes du moteur du programme = instruments (valeurs du moteur) + mesures datées
+            remplace_ = {t: sum(rn["noyau"][t][k] - rn["moteur"][t][k] for k in rn["noyau"][t]) for t in ANNEES}
+            ecart_noyau = {t: sum(rn["noyau"][t][k] - rn["moteur_sans_naissances"][t][k] for k in rn["noyau"][t]) for t in ANNEES}
+            somme = {t: sum(ri[t].values()) - remplace_[t] + sum(x["valeurs"].get(t, 0.0) for x in autres_rec) for t in ANNEES}
             m.append(Mesure("Recettes : écart non réparti (contrôle, doit être nul)", "recettes",
                             {t: r[t]["recettes"] - r[t]["effet_macro"] - somme[t] for t in ANNEES}, "controle"))
+            m.append(Mesure("Recalcul sur le noyau : impôt unique et TVA des salariés (contrôle)",
+                            "recettes", {t: 0.0 for t in ANNEES}, "controle",
+                            note=f"écart au moteur du programme hors naissances, 2073 : {ecart_noyau[2073]:+.1f} Md€"))
             m.append(Mesure("Fin des dotations versées aux collectivités (solde)", "recettes",
                             {t: -r[t]["transferts_collectivites"] for t in ANNEES}, "budget"))
             # dépenses : chaque ligne du registre du programme dans un bloc nouveau de son poste, et les blocs du statu
@@ -240,8 +301,8 @@ class EcologieDeDroite:
         return self._calcul(p)["resultats"]
 
 
-def programme() -> EcologieDeDroite:
-    return EcologieDeDroite()
+def programme(recalcul_noyau: bool = True) -> EcologieDeDroite:
+    return EcologieDeDroite(recalcul_noyau)
 
 
 def ecart_de_depart(p: Parametres | None = None, s: str = "prudent", annee: int = 2029, detail: bool = False) -> dict[str, float]:

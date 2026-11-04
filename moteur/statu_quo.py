@@ -687,6 +687,58 @@ def cellules_salaries(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     return out
 
 
+def agreger_cellules(p: Parametres, s: str, fonctions: dict) -> dict[int, dict[str, float]]:
+    """Somme, chaque année, de fonctions calculées sur les cellules de salariés du statu quo (même construction que
+    cellules_salaries) : fonctions = {nom: f(cout_employeur, public) → € par an}. Rend des Md€ de 2026 de l'année
+    (barèmes qui suivent les salaires : chaque montant est multiplié par l'indice des salaires), effet du salaire
+    moyen par âge retiré comme dans cellules_salaries. Sert aux programmes pour recalculer un impôt sur les mêmes
+    salariés que le statu quo."""
+    from .demographie import _tranche
+    from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
+    dp, dg = effectifs_prive_2026(p), effectifs_public_2026(p)
+    tr = ([(c, n, False) for c, n in zip(dp.milieux, dp.effectifs)] + [(c, n, True) for c, n in zip(dg.milieux, dg.effectifs)])
+    total_n = sum(n for _, n, _ in tr)
+    profil = {a: v for k, v in p.val("cohortes.profil_salaire_age").items() for a in _tranche(k)}
+    taux = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    pop = population(p, s)
+    ages = range(18, 70)
+    emploi26 = {a: pop[2026][a] * taux.get(a, 0.0) for a in ages}
+    k = sum(emploi26.values()) / sum(emploi26[a] * profil.get(a, 1.0) for a in ages)
+    part_sal = total_n / sum(emploi26.values())
+    noms = list(fonctions) + ["_masse"]
+    par_m = {}
+    for m in sorted(set(profil.get(a, 1.0) for a in ages)):
+        agr = {nom: 0.0 for nom in noms}
+        for c0, n, public in tr:
+            c = c0 * m * k
+            for nom, fn in fonctions.items():
+                agr[nom] += n / total_n * fn(c, public)
+            agr["_masse"] += n / total_n * c
+        par_m[m] = agr
+    brut = {}
+    for t in range(2026, 2074):
+        tot = {nom: 0.0 for nom in noms}
+        sal = 0.0
+        for a in ages:
+            nn = pop[t][a] * taux.get(a, 0.0) * part_sal
+            sal += nn
+            for nom in noms:
+                tot[nom] += nn * par_m[profil.get(a, 1.0)][nom]
+        brut[t] = (tot, sal)
+    w = salaires(p, s)
+    wc = _v(p, "cohortes.effet_composition_salaires", s)
+    m29, s29 = brut[2029][0]["_masse"], brut[2029][1]
+    # convention du modèle : l'économie de 2026 est placée en 2029 ; niveau de 2029 = cellules de 2026, puis
+    # évolution des cellules à partir de 2029
+    out = {}
+    for t in ANNEES:
+        tot, sal = brut[t]
+        comp = ((tot["_masse"] / m29) / (sal / s29)) ** (1 - wc)
+        out[t] = {nom: (brut[2026][0][nom] * tot[nom] / brut[2029][0][nom] / comp if brut[2029][0][nom] else 0.0) * w[t] / 1e9
+                  for nom in fonctions}
+    return out
+
+
 def recettes(p: Parametres, s: str) -> dict[int, float]:
     """Recettes publiques totales (Md€ de 2026), somme des impôts et des recettes non fiscales."""
     return {t: sum(x.values()) for t, x in recettes_par_impot(p, s).items()}
