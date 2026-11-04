@@ -106,6 +106,13 @@ statu_quo:
     source: "Loi de finances pour 2025, art. 62 (BOI-CVAE-LIQ-10-20251119) : taux maximal 0,28 % en 2026 et 2027, 0,19 % en 2028, 0,09 % en 2029, suppression en 2030 ; trajectoire maintenue par la loi de finances pour 2026"
     note: "Législation en vigueur appliquée par le statu quo : la recette de CVAE du point de départ (2027) baisse avec le taux (statu_quo.recettes_par_impot). La contribution exceptionnelle sur les bénéfices des grandes entreprises (exercices 2025 et 2026, loi de finances pour 2026, art. 12 ; ≈ 6 Md€ attendus pour 2026) est versée surtout en 2026 (acompte de 98 %) : elle pèse peu dans les comptes de 2027 et n'existe plus après."
 
+  recettes_production_hors_apul_part_pib:
+    valeur: 0.0267
+    unite: taux
+    statut: SOURCE
+    source: "Insee, Le compte des administrations publiques en 2025 (Insee Première n° 2106) : recettes de production des administrations centrales 53,0 Md€ et de sécurité sociale 26,7 Md€ (ventes, tarifs, hôpitaux), soit 79,7 Md€ pour un PIB d'environ 2 990 Md€"
+    note: "Ventes et tarifs de l'État, des opérateurs et des hôpitaux, comptés en brut par le statu quo (recettes non fiscales et dépenses) ; un programme qui chiffre ses dépenses nettes de ces ventes les remet des deux côtés pour être au même périmètre (programmes/<nom>/programme.py)."
+
   apul_depenses_2026:
     valeur: 336.5
     unite: md_eur

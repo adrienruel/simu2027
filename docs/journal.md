@@ -529,3 +529,9 @@ Question d'Adrien : le statu quo suit-il la méthode des cohortes ? Retraités :
 salariés : non jusqu'ici (nombre × salaire moyen). `statu_quo.cellules_salaries` : cellules par âge et tranche de
 salaire comme moteur/cohortes.py, prélèvements et TVA par OpenFisca. Effet faible (prudent 2050 : 19,4 %, inchangé à
 0,1 point ; optimiste +0,2 point), mais méthode identique des deux côtés.
+
+## 4 novembre 2026 — Écologie de droite mesure par mesure (première passe)
+
+Recettes instrument par instrument contre les impôts actuels, dépenses ligne par ligne, périmètre complété (ventes et
+tarifs de l'État, des opérateurs et des hôpitaux), effets macro par canal. Résultats inchangés (lisibilité). Constats :
+docs/ecologie_de_droite_mesures.md (TVA et accises −82 Md€, impôt unique −66 et −68, santé : classement).

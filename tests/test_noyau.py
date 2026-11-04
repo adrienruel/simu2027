@@ -69,11 +69,16 @@ def test_perimetre_aligne_sans_effet_sur_le_solde(ed, p):
     """Les collectivités remises au budget du programme : autant de ressources que de dépenses."""
     prog, _, _ = ed
     per = [m for m in prog.mesures(p)["prudent"] if m.nature == "perimetre"]
-    assert len(per) == 2
+    assert len(per) >= 2
     for t in (2029, 2073):
-        assert per[0].valeurs[t] == pytest.approx(per[1].valeurs[t])
+        assert sum(m.valeurs[t] for m in per if m.poste == "recettes") == pytest.approx(
+            sum(m.valeurs[t] for m in per if m.poste != "recettes"))
     from programmes.ecologie_de_droite.programme import collectivites_hors_budget, ecart_de_depart
     c = collectivites_hors_budget(p)
     assert 200 < c["depenses"] < 260 and c["ressources"] == pytest.approx(c["depenses"] - c["besoin_financement"])
     e = ecart_de_depart(p)
-    assert abs(e["Recettes du programme (hors effets macro) contre recettes actuelles"]) < 250
+    assert abs(e["Recettes"]) < 250
+    # contrôles : rien de non réparti entre les recettes du programme et ses instruments
+    for m in prog.mesures(p)["prudent"]:
+        if m.nature == "controle":
+            assert max(abs(v) for v in m.valeurs.values()) < 1e-6
