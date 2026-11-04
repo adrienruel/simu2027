@@ -14,6 +14,10 @@ qui chiffrent son budget ligne par ligne) et il est traduit en mesures contre le
 - son contexte : PIB, inflation (récession de 2029, carbone), baisse de l'écart de taux, chômage, dette de fin 2028
   (mesures de 2028), participations remises au fonds.
 
+Mesure à isoler quand le programme sera codé mesure par mesure (DÉCISION d'Adrien du 04/11/2026) : le revenu
+universel revalorisé sur les prix, alors que le statu quo garde le niveau des prestations par rapport aux salaires ;
+c'est un objectif assumé du programme (baisse relative de ces prestations dans le temps), pas une convention.
+
 Le noyau recalcule alors les intérêts, la dette et le déficit : il doit retrouver exactement les résultats du moteur
 du programme (tests/test_noyau.py). L'écart de 2029 entre le budget du programme et le statu quo, poste par poste,
 mêle les mesures et les différences de méthode (budget ligne par ligne contre agrégats du PLF 2027) : il est montré

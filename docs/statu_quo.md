@@ -190,9 +190,11 @@ revalorise sur les prix ; appliquée pendant 45 ans, elle leur ferait perdre env
 (variante « prix » : environ 0,9 point de PIB de dépense en moins en 2060). Solde primaire du prudent : −2,3 % du PIB en
 2029, −2,5 % en 2037, −3,2 % en 2050, −5,1 % en 2060 (sur les prix : −2,3 ; −2,3 ; −2,6 ; −4,3).
 
-Point de neutralité : le programme indexe son revenu universel au minimum de l'inflation et de la croissance nominale,
-donc en pratique sur les prix. Avec des prestations du statu quo qui suivent les salaires, l'écart entre les deux
-compte désormais le décrochage du revenu universel par rapport aux salaires comme une économie du programme.
+Différence assumée avec le programme (DÉCISION d'Adrien, 4/11/2026) : « Écologie de droite » revalorise son revenu
+universel au minimum de l'inflation et de la croissance nominale, donc en pratique sur les prix ; il diminue ainsi,
+dans le temps, le niveau de ces prestations par rapport aux salaires. C'est un objectif du programme, pas une
+convention : l'écart avec le statu quo le compte comme une économie, et il doit être présenté comme une mesure à part
+entière (« revenu universel revalorisé sur les prix ») quand le programme sera codé mesure par mesure.
 
 ## Validation (4 novembre 2026)
 

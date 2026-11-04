@@ -518,3 +518,7 @@ démographie plus ancienne, contre 15,3 %), le HCFP (dette fin 2028 125 %, inté
 DÉCISION d'Adrien (4 novembre 2026) : les prestations du statu quo (famille, logement, RSA, prime d'activité, AAH)
 suivent les salaires, pas les prix. Prudent : solde primaire −5,1 % du PIB en 2060 (−4,3 sur les prix), déficit 19,4 %
 en 2050 (18,1). Point de neutralité avec le programme (revenu universel sur les prix) signalé dans docs/statu_quo.md.
+
+DÉCISION d'Adrien (4 novembre 2026) : la différence d'indexation est gardée et assumée. Le statu quo garde le niveau
+relatif des prestations (salaires) ; le programme revalorise le revenu universel sur les prix, ce qui le fait baisser
+par rapport aux salaires dans le temps : c'est un objectif du programme, à présenter comme une mesure à part entière.
