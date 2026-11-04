@@ -93,3 +93,10 @@ def test_recalcul_noyau_des_salaries(ed):
     _, r, ref = ed
     for t in (2029, 2037, 2050, 2073):
         assert abs(r["prudent"][t]["deficit"] - ref["prudent"][t]["deficit"]) < 0.1
+
+
+def test_programmes_disponibles():
+    """Le comparateur prend le statu quo et chaque dossier programmes/<nom>/ qui a un programme.py."""
+    noms = noyau.programmes_disponibles()
+    assert noms[0] == "statu_quo" and "ecologie_de_droite" in noms
+    assert noyau.charger("ecologie_de_droite").libelle == "Écologie de droite"

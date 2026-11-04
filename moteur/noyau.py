@@ -44,12 +44,20 @@ class Mesure:
 @dataclass
 class ProgrammeVide:
     nom: str = "statu_quo"
+    libelle: str = "Statu quo"
 
     def mesures(self, p: Parametres) -> dict[str, list[Mesure]]:
         return {}
 
     def contexte(self, p: Parametres) -> dict[str, dict]:
         return {}
+
+
+def programmes_disponibles() -> list[str]:
+    """Statu quo, puis chaque dossier programmes/<nom>/ qui a un programme.py (ordre alphabétique)."""
+    from .parametres import RACINE
+    noms = sorted(d.name for d in (RACINE / "programmes").iterdir() if (d / "programme.py").exists())
+    return ["statu_quo"] + noms
 
 
 def charger(nom: str):

@@ -503,6 +503,7 @@ def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, b
 
 class EcologieDeDroite:
     nom = "ecologie_de_droite"
+    libelle = "Écologie de droite"
 
     def __init__(self, recalcul_noyau: bool = True):
         """recalcul_noyau : impôt unique et TVA des salariés recalculés sur le noyau (deuxième passe) ; False : tout

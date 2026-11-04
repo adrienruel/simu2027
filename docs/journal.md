@@ -562,3 +562,12 @@ isolée (−41 Md€ en 2073, décision d'Adrien), RUI étudiant, naissances. St
   du statu quo 6,1 % en 2029 (au lieu de 5,6).
 - Point ouvert : le fonds finance ~63 Md€ par an d'investissement hors budget ; s'il est classé administration
   publique, ~2 points de PIB reviennent au déficit de Maastricht.
+
+## 4 novembre 2026 — Comparateur des programmes
+
+- `outils/export_comparaison.py` : trajectoires, écarts au statu quo par grand poste (dont intérêts et effet du PIB
+  sur les ratios, pour que la somme retrouve l'écart de déficit) et mesures, pour tous les programmes de
+  `noyau.programmes_disponibles()` (statu quo + chaque dossier `programmes/<nom>/`). Un nouveau programme n'a qu'à
+  définir `libelle`.
+- Tableau de bord « Comparateur des programmes » (claude.ai) sur ces trois fichiers : relancer l'export et remplacer
+  les fichiers à chaque nouveau chiffrage.
