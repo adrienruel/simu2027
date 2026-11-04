@@ -39,8 +39,28 @@ Dépense publique 56,9 % du PIB, intérêts 2,9 %, déficit 5,0 % (PLF 2027, avi
 | Enseignement | 152 | salaires × élèves et étudiants (élasticité 0,5) | encadré par Eurostat (5,2 %) |
 | Autres (reste) | 346 | salaires × population (loi de Baumol) | dépense primaire − blocs |
 
-Recettes : part du PIB constante (élasticité 1, convention du HCFP et du COR), sauf les 12 % des pensions prélevés
-(CSG, CASA, impôt sur le revenu des retraités), qui suivent les pensions.
+Recettes impôt par impôt : le niveau du PLF 2027 (51,9 % du PIB), dont 6,3 % de recettes non fiscales (Insee 2025),
+réparti entre impôts selon la reconstitution du système actuel de la v235 (colonne « Ancien », à 0,27 % des comptes de
+l'Insee pour 2024). Chaque impôt suit son assiette, barèmes à législation constante (élasticité 1) :
+
+| Impôt (% du PIB en 2029) | 2029 | Assiette |
+|---|---|---|
+| Cotisations, CSG et IR sur les salaires du privé | 17,1 | masse salariale (emploi × salaire) |
+| Idem, agents publics | 6,9 | masse salariale |
+| Idem, indépendants | 1,3 | masse salariale |
+| CSG, CASA et IR des retraités | 1,7 | pensions |
+| TVA | 7,2 | PIB (consommation) |
+| Accises et taxes sur les produits | 3,5 | PIB |
+| IS et impôts de production | 4,9 | PIB (bénéfices) |
+| Capital (dividendes, intérêts, IFI) | 1,3 | PIB |
+| Successions | 0,7 | PIB × décès (Insee) |
+| Droits de mutation | 0,5 | PIB |
+| Taxes locales et affectées | 0,6 | PIB |
+| Recettes non fiscales | 6,3 | PIB |
+
+Avec des taux d'emploi par âge figés, la masse salariale suit le PIB : les recettes restent proches de 51,9 % du PIB ;
+ce qui bouge, ce sont les prélèvements sur les pensions (1,7 → 1,9 %) et les successions (0,7 → 0,8 %). Le détail
+sert surtout de base aux mesures : une mesure d'un programme agit sur un impôt et son assiette.
 
 ## Retraites
 
@@ -63,15 +83,15 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,5 / 129 | 6,5 / 139 | 8,1 / 160 | 11,1 / 207 | 16,2 / 257 | 54 / 527 |
-| **Prudent** | **5,6 / 128** | **6,7 / 138** | **8,6 / 159** | **12,0 / 206** | **16,8 / 255** | **46 / 480** |
-| Médian | 5,5 / 128 | 6,3 / 134 | 7,2 / 147 | 8,1 / 172 | 9,8 / 194 | 17 / 274 |
-| Optimiste | 5,4 / 128 | 6,1 / 133 | 6,9 / 143 | 7,9 / 165 | 9,2 / 184 | 14 / 242 |
+| Crise | 5,5 / 129 | 6,5 / 139 | 8,0 / 160 | 10,8 / 205 | 15,7 / 254 | 52 / 514 |
+| **Prudent** | **5,6 / 128** | **6,7 / 138** | **8,5 / 158** | **11,7 / 204** | **16,4 / 251** | **44 / 469** |
+| Médian | 5,5 / 128 | 6,3 / 134 | 7,1 / 147 | 7,9 / 171 | 9,5 / 192 | 16,7 / 268 |
+| Optimiste | 5,4 / 128 | 6,1 / 132 | 6,8 / 142 | 7,6 / 164 | 9,0 / 182 | 13,2 / 237 |
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse
 des actifs). La dette passe 200 % du PIB vers 2045 dans le prudent (2051 dans le médian). La prime de taux liée à la dette
-accélère l'emballement ; sans elle, prudent : 8,1 % de déficit en 2037, 10,8 % en 2050, dette 221 % en 2050. Au-delà
+accélère l'emballement ; sans elle, prudent : 8,0 % de déficit en 2037, 10,5 % en 2050, dette 219 % en 2050. Au-delà
 de 2050, les chiffres n'ont plus de sens économique (aucun État ne laisserait la dette aller là) : ils disent
 seulement que la trajectoire diverge.
 
@@ -83,9 +103,9 @@ enseignement −0,2.
 
 | | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Solde primaire, sans la règle (points de PIB, + = mieux) | +0,6 | +1,2 | +2,8 | +3,6 | +2,1 | +5,8 |
-| Solde primaire, règle comprise | +2,5 | +3,2 | +3,9 | +3,5 | +3,6 | +6,0 |
-| Déficit : programme sans règle / statu quo | 5,0 / 5,6 | 5,2 / 6,7 | 4,0 / 8,6 | 3,0 / 12,0 | 4,9 / 16,8 | 3,2 / 46 |
+| Solde primaire, sans la règle (points de PIB, + = mieux) | +0,6 | +1,2 | +2,7 | +3,4 | +1,9 | +5,6 |
+| Solde primaire, règle comprise | +2,5 | +3,2 | +3,8 | +3,4 | +3,4 | +5,9 |
+| Déficit : programme sans règle / statu quo | 5,0 / 5,6 | 5,2 / 6,7 | 4,0 / 8,5 | 3,0 / 11,7 | 4,9 / 16,4 | 3,2 / 44 |
 | Chômage : programme / statu quo | 9,3 / 8,3 | 8,5 / 8,4 | 7,4 / 8,3 | 7,3 / 8,2 | 7,4 / 8,1 | 7,2 / 8,1 |
 | PIB (écart, %) | −1,9 | +0,1 | +3,0 | +3,3 | +3,2 | +3,5 |
 
@@ -93,10 +113,29 @@ Lecture : l'écart de solde primaire est la mesure propre aux politiques ; l'éc
 surtout par les intérêts (la dette du statu quo fait boule de neige). En 2029, le programme fait plus de chômage
 (récession de l'effort de bascule) et 1,9 % de PIB en moins ; à partir de 2037, moins de chômage et plus de PIB.
 
-**À lire avec prudence** : le programme chiffre son budget de départ ligne par ligne, le statu quo part des
-agrégats du PLF 2027. Une partie de l'écart de 2029 peut venir de cette différence de méthode, et non des mesures.
-Le test qui le tranchera (« programme vide = statu quo ») suppose l'étape suivante : brancher le programme sur le
-noyau par des mesures.
+**Périmètre aligné (4 novembre 2026)** : le programme sort les collectivités de son budget (financées par l'impôt
+local unique) ; elles y sont remises, dépenses et ressources propres pour le même montant (230 Md€ de dépenses en
+2029, dont 16 Md€ de besoin de financement déjà au budget), solde inchangé. L'écart de départ, hors effets macro,
+se lit alors poste par poste (prudent, Md€, + = améliore le solde) :
+
+| | 2029 | 2037 | 2050 |
+|---|---|---|---|
+| Recettes (impôt unique, TVA écologique, IS à 45 %… contre impôts actuels) | −163 | −215 | −256 |
+| Retraites (socle, transition, ancien système) | +31 | +93 | +100 |
+| Santé | −12 | −8 | −9 |
+| Revenu universel et AAH (contre chômage, famille, logement, pauvreté, AAH) | +68 | +63 | +65 |
+| Investissement et autres dépenses (ministères, collectivités, fonds) | +138 | +168 | +190 |
+| **Total (points de PIB)** | **+2,0** | **+3,1** | **+2,6** |
+
+L'écart de recettes de 2029 retrouve celui que la v235 calculait elle-même entre son nouveau et son ancien système
+(environ −180 Md€ en euros de 2024) : l'écart vient des mesures, pas d'une différence de méthode. Investissement et
+autres dépenses sont regroupés : le programme compte l'investissement dans ses missions et ses collectivités, et sort
+une partie de l'investissement public vers le fonds (transports, énergie, France 2030, investissements locaux
+rentables), le statu quo le compte dans un bloc à part.
+
+**Question ouverte** : le fonds reprend des investissements publics et des participations de l'État. En comptabilité
+nationale, un fonds contrôlé par l'État qui finance des infrastructures publiques pourrait être classé parmi les
+administrations (Eurostat) ; ses dépenses compteraient alors dans le déficit. À trancher.
 
 ## Limites
 
@@ -110,8 +149,9 @@ noyau par des mesures.
 - **Blocs encadrés, pas sourcés** : famille, logement, pauvreté, défense et missions, enseignement (parts de la DREES
   et d'Eurostat, tous financeurs ou années anciennes). Une erreur de répartition entre blocs indexés sur les prix et
   blocs indexés sur les salaires pèse environ 0,2 point de PIB en 2073 par demi-point mal classé.
-- **Recettes à part du PIB constante** : pas d'effet du barème de l'impôt sur le revenu indexé sur les prix
-  (convention), pas de recettes qui baissent avec la part des salaires.
+- **Recettes impôt par impôt, mais à barème constant** : pas d'effet du barème de l'impôt sur le revenu indexé sur
+  les prix (convention), pas de recettes qui baissent avec la part des salaires ; la répartition entre impôts vient
+  de la v235 (2024), à remplacer par OpenFisca et les comptes détaillés de l'Insee.
 - **Pas encore validé contre les projections de long terme de la Commission européenne** (rapport sur le
   vieillissement) ni contre une projection de la Cour des comptes.
 

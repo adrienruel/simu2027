@@ -54,12 +54,12 @@ Le code est encore dans `moteur/`, qui mêle le noyau et le programme. Carte des
    (PIB, inflation, écart de taux, chômage, dette de fin 2028). Tests (`tests/test_noyau.py`) : programme vide =
    statu quo, à l'identique ; « Écologie de droite » (`programmes/ecologie_de_droite/programme.py`) rebranché sur le
    noyau retrouve les résultats de son moteur à 1e-13 près.
-   Reste : le programme est encore traduit en écarts globaux par poste, calculés par son propre moteur. Avant de le
-   découper en mesures une à une, il faut **aligner les périmètres** : le budget du programme compte les collectivités
-   par leur seul besoin de financement, le statu quo compte toutes les recettes et dépenses des administrations
-   (en 2029, −378 Md€ de recettes et environ +370 Md€ d'autres dépenses de part et d'autre, pour un écart total de
-   +2,0 points de PIB hors effets macro). Ensuite : chaque mesure codée sur le noyau, et le moteur propre au
-   programme retiré.
+   Périmètres alignés (même jour) : les collectivités, que le programme sort de son budget, y sont remises (dépenses et
+   ressources propres, solde inchangé) ; l'écart de départ se lit poste par poste (docs/statu_quo.md). Les recettes
+   du statu quo sont détaillées impôt par impôt, chacune avec son assiette.
+   Reste : le programme est encore traduit en écarts globaux par poste, calculés par son propre moteur ; coder chaque
+   mesure sur le noyau, puis retirer ce moteur. Question ouverte : classement du fonds (dans ou hors des
+   administrations publiques).
 3. **Bibliothèque de mesures sur le système actuel** (barèmes, CSG, cotisations, prestations, TVA, IS, retraites,
    missions), avec leurs effets micro (OpenFisca) et leurs réactions par instrument.
 4. **Population représentative** passée dans OpenFisca : distribution par décile.

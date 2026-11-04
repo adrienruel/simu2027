@@ -9,6 +9,8 @@ qui chiffrent son budget ligne par ligne) et il est traduit en mesures contre le
   reste ;
 - ses effets macroéconomiques sont des mesures de recettes, une par canal (emploi, capital du fonds, érosion de
   l'IS…), règle de trajectoire comprise ;
+- le périmètre est aligné sur celui du statu quo (toutes les administrations) : les collectivités, que le programme
+  sort de son budget, y sont remises (dépenses et ressources propres, même montant : solde inchangé) ;
 - son contexte : PIB, inflation (récession de 2029, carbone), baisse de l'écart de taux, chômage, dette de fin 2028
   (mesures de 2028), participations remises au fonds.
 
@@ -37,6 +39,31 @@ LIBELLES = {
     "rui_aah": "Revenu universel et AAH",
     "autres": "Autres dépenses du programme (ministères, collectivités, mesures)",
 }
+
+
+def collectivites_hors_budget(p: Parametres) -> dict[str, float]:
+    """Collectivités dans le nouveau système (Md€ de 2026, 2029) : elles sortent du budget du programme, financées par
+    l'impôt local unique, l'IS local et leurs ressources restantes ; seul leur besoin de financement reste au déficit.
+
+    Dépenses = dépenses actuelles des administrations locales (statu_quo.apul_depenses_2026) + charges reprises par
+    l'État et économies (mêmes postes que moteur/collectivites.besoin : RSA, aide sociale à l'enfance, autonomie,
+    investissements repris par le fonds, alignement du coût des agents, IA, réorganisation…) − gains « même doctrine »
+    + hébergement d'urgence à leur charge. Ressources propres = dépenses − besoin de financement laissé au déficit."""
+    from moteur.unites import facteur
+    charges = sum(x["communes"] + x["regions"] for x in p.val("collectivites_detail.charges_fixes").values())
+    sante_brut = p.val("sante.aide_sociale_autonomie_2024") * facteur(p, 2024, "recettes") * (1 if p.val("sante.reprise_autonomie_par_etat") else 0)
+    charges += -p.val("collectivites_detail.aide_sociale_enfance") - sante_brut
+    ms = p.val("collectivites_detail.masse_salariale_agents")
+    t_ = p.val("alignement.charges_patronales_prive")
+    v = p.val("alignement.versants")["territoriale"]
+    baisse_terr = (1 + t_) / (1 + v["charges_actuelles"]) - 1
+    ia = p.val("ia.plafond_taches_automatisables") * (1 - p.val("ia.cout_services_ia"))
+    charges += sum(ms[k] * baisse_terr - ms[k] * p.val("collectivites_detail.part_agents_gestion") * ia for k in ("communes", "regions"))
+    gains = sum(x["gain"] for x in p.val("collectivites_detail.meme_doctrine").values())
+    hu = p.val("collectivites_detail.hebergement_urgence")
+    depenses = p.val("statu_quo.apul_depenses_2026") + charges - gains + hu["montant"] * (1 - hu["part_etat"])
+    bf = sum(p.val("collectivites.besoin_financement_2024")) * (1 - p.val("collectivites.part_financee")) * facteur(p, 2024, "recettes")
+    return {"depenses": depenses, "besoin_financement": bf, "ressources": depenses - bf}
 
 
 class EcologieDeDroite:
@@ -74,6 +101,15 @@ class EcologieDeDroite:
                     m.append(Mesure(LIBELLES[poste], f"nouveau:{poste}", {t: r[t][poste] for t in ANNEES}, "budget"))
                     for b in blocs:
                         m.append(Mesure(f"Remplacé par « {LIBELLES[poste]} » : {b}", b, {t: -bl_sq[t][b] for t in ANNEES}, "budget"))
+            # périmètre : les collectivités, hors du budget du programme, y sont remises (dépenses et ressources propres,
+            # même montant ; le besoin de financement est déjà au budget), comme dans le statu quo (toutes les
+            # administrations). Évolution : salaires × population, comme le bloc « autres » du statu quo.
+            col = collectivites_hors_budget(p)
+            idx = {t: bl_sq[t]["autres"] / bl_sq[2029]["autres"] for t in ANNEES}
+            m.append(Mesure("Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)", "recettes",
+                            {t: col["ressources"] * idx[t] for t in ANNEES}, "perimetre"))
+            m.append(Mesure("Périmètre : dépenses des collectivités financées par ces ressources", "autres",
+                            {t: col["ressources"] * idx[t] for t in ANNEES}, "perimetre"))
             # effets macroéconomiques, canal par canal (le reste : épargne rendue et socle supplémentaire de la règle)
             canaux = sorted({k for t in ANNEES for k in r[t]["canaux"]})
             for k in canaux:
@@ -119,20 +155,23 @@ def programme() -> EcologieDeDroite:
 
 def ecart_de_depart(p: Parametres | None = None, s: str = "prudent", annee: int = 2029) -> dict[str, float]:
     """Écart du budget du programme avec le statu quo, poste par poste (Md€ ; + = améliore le solde), hors effets
-    macro : mêle les mesures et les différences de méthode. Seul le total est comparable : le budget du programme
-    est consolidé autrement (les collectivités n'y figurent que par leur besoin de financement, quand le statu quo
-    compte toutes les recettes et dépenses des administrations), d'où de gros écarts de sens contraire entre
-    recettes, investissement et autres dépenses."""
+    macro, au périmètre de toutes les administrations (collectivités remises au budget du programme). Mêle les
+    mesures et les différences de méthode."""
     from moteur import statu_quo as sq
     p = p or Parametres()
     prog = programme()
     out = {}
     for m in prog.mesures(p)[s]:
-        if m.nature != "budget":
+        if m.nature not in ("budget", "perimetre"):
             continue
         cle = m.nom.split(" : ")[0] if m.nom.startswith("Remplacé") else m.nom
         signe = 1 if m.poste == "recettes" else -1
-        cle = next((LIBELLES[k] for k, b in CORRESPONDANCE.items() if m.poste in b or m.poste == f"nouveau:{k}"), cle)
+        cle = next((LIBELLES[k] for k, b in CORRESPONDANCE.items() if m.poste in b or m.poste == f"nouveau:{k}"),
+                   "Recettes du programme (hors effets macro) contre recettes actuelles" if m.poste == "recettes" and m.nature == "perimetre" else cle)
         out[cle] = out.get(cle, 0.0) + signe * m.valeurs[annee]
+    # investissement et autres dépenses regroupés : le programme compte l'investissement de l'État et des
+    # collectivités dans ses missions et dans les dépenses locales, le statu quo dans un bloc à part
+    inv, aut = LIBELLES["investissement"], LIBELLES["autres"]
+    out["Investissement et autres dépenses (ministères, collectivités, mesures)"] = out.pop(inv, 0.0) + out.pop(aut, 0.0)
     out["Total (points de PIB)"] = sum(out.values()) / sq.pib(p, s)[annee] * 100
     return out

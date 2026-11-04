@@ -45,12 +45,38 @@ statu_quo:
     statut: HYPOTHESE
     source: "Calée sur le COR, rapport annuel de juin 2026 (scénario de référence, productivité 0,7 % : 15,3 % du PIB en 2070) ; contrôles : 2045 et les variantes de productivité 0,4 % et 1,0 % (tests/test_statu_quo.py) : 2045 14,15 % (COR 14,2 %) ; productivité 0,4 % : 15,96 % (COR 16,1 %) ; 1,0 % : 14,72 % (COR 14,5 %)"
     note: "Baisse annuelle de la pension liquidée rapportée au salaire décalé, à règles inchangées (rendement des points Agirc-Arrco dont la valeur de service suit les prix, décote et durée requise de la réforme de 2023, carrières plus heurtées). Seul paramètre calé : il porte aussi l'écart d'emploi avec le COR (le COR fait monter l'emploi des seniors et ramène le chômage à 7 % ; ici les taux d'emploi par âge restent ceux de 2025, donc le PIB est plus bas et la part des retraites un peu plus haute à pension égale)."
-  prelevements_sur_pensions:
-    valeur: 0.12
+  # --- Recettes impôt par impôt ---------------------------------------------------------------------------
+  recettes_non_fiscales_part_pib:
+    valeur: 0.063
     unite: taux
-    statut: HYPOTHESE
-    source: "Encadrement : CSG, CRDS et CASA des retraités (taux de 0 à 9,1 %, environ 7 % en moyenne) ; impôt sur le revenu des retraités (environ 6 % des pensions, hypothèse aussi retenue pour la TVA des retraités, docs/sourcage.md)"
-    note: "Part des pensions qui revient aux administrations en prélèvements : cette part des recettes suit les pensions, le reste suit le PIB."
+    statut: SOURCE
+    source: "Insee, Le compte des administrations publiques en 2025 (Insee Première n° 2106) : recettes de production 129,2 Md€, revenus de la propriété 23,0, autres transferts 35,5, soit 187,7 Md€ pour un PIB d'environ 2 990 Md€ (6,3 %)"
+    note: "Recettes hors impôts et cotisations (ventes, tarifs, revenus de la propriété, transferts). Suivent le PIB. Le reste des recettes de départ (51,9 − 6,3 = 45,6 % du PIB) est réparti entre impôts selon statu_quo.structure_impots."
+  structure_impots:
+    valeur:
+      salaires_prive: 506.24
+      salaires_public: 202.88
+      independants: 38.0
+      retraites: 50.0
+      tva: 213.57
+      accises_et_taxes_sur_produits: 103.83
+      is_et_impots_de_production: 145.61
+      capital_dividendes_ifi: 38.13
+      successions: 20.82
+      droits_de_mutation: 14.74
+      taxes_locales_et_affectees: 16.70
+    unite: sans_unite
+    statut: SOURCE
+    source: "Classeur v235, feuille Total, colonne « Ancien » (Md€ de 2024), reconstitution du système actuel impôt par impôt ; feuille « Contrôle système actuel » : 1 318,9 Md€ contre 1 322,5 Md€ d'impôts et cotisations des administrations à l'Insee pour 2024 (−0,27 %)"
+    note: "Sert de clé de répartition (parts), le niveau étant celui du PLF 2027. Salaires du privé et du public, indépendants : cotisations, CSG, CRDS et impôt sur le revenu ; retraités : CSG, CASA et impôt sur le revenu des pensions (12 % des pensions) ; la taxe foncière des ménages est comptée avec leurs revenus. Moteur de chaque impôt : masse salariale (salaires, indépendants), pensions (retraités), PIB (consommation, bénéfices, patrimoine), PIB × décès (successions)."
+
+  apul_depenses_2026:
+    valeur: 336.5
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Insee, comptes des administrations publiques 2025 : dépenses des administrations publiques locales 335,5 Md€ (recettes 319,9, besoin de financement 15,6) ; +0,3 % en 2026 (classeur v235, Contrôle système actuel)"
+    note: "Sert à ramener un programme qui sort les collectivités de son budget au périmètre de toutes les administrations (programmes/<nom>/programme.py)."
 
   # --- Prestations : moteur de chaque bloc ------------------------------------------------------------------
   chomage_indemnisation:

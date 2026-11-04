@@ -21,8 +21,9 @@ La dépense primaire est découpée en blocs, chacun avec ce qui le fait vivre �
 | Enseignement | salaires × (élèves et étudiants de 3 à 24 ans) ^ élasticité |
 | Autres dépenses (reste) | salaires × population (loi de Baumol) |
 
-Recettes : part du PIB constante (prélèvements à législation constante, élasticité 1), sauf la part prélevée sur les
-pensions (CSG, CASA, impôt sur le revenu des retraités), qui suit les pensions. Intérêts : même mécanique que le
+Recettes impôt par impôt (recettes_par_impot) : niveau du PLF 2027, réparti selon la reconstitution du système actuel
+(colonne « Ancien » de la v235, à 0,27 % des comptes de l'Insee) ; chaque impôt suit son assiette (masse salariale,
+pensions, PIB, décès), barèmes à législation constante (élasticité 1). Intérêts : même mécanique que le
 module macro (taux apparent qui rejoint le taux de marché, effet de Fisher, prime de taux liée à la dette), sans
 effet d'un programme sur les taux.
 
@@ -274,14 +275,62 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     return out
 
 
-def recettes(p: Parametres, s: str) -> dict[int, float]:
-    """Recettes publiques (Md€ de 2026) : part du PIB constante, sauf les prélèvements sur les pensions."""
+IMPOTS_SALAIRES = ("salaires_prive", "salaires_public", "independants")
+
+
+def deces(p: Parametres, s: str) -> dict[int, float]:
+    """Décès de chaque année (projections de l'Insee, scénario de fécondité ; prolongés par le dernier niveau)."""
+    import csv
+    from .distribution import DONNEES
+    nom = _v(p, "demographie.scenario_fecondite", s)
+    d: dict[int, float] = {}
+    with (DONNEES / f"deces_insee_2026_{nom}.csv").open(encoding="utf-8") as f:
+        for l in csv.DictReader(f):
+            d[int(l["annee"])] = d.get(int(l["annee"]), 0.0) + float(l["deces"])
+    derniere = max(d)
+    return {t: d.get(t, d[derniere]) for t in ANNEES}
+
+
+def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
+    """Recettes publiques impôt par impôt (Md€ de 2026).
+
+    Niveau de départ : recettes du PLF 2027 (statu_quo.depense_publique_base − deficit_base), dont les recettes non
+    fiscales (statu_quo.recettes_non_fiscales_part_pib) ; le reste réparti entre impôts selon la reconstitution du
+    système actuel (statu_quo.structure_impots). Chaque impôt suit son assiette : masse salariale (personnes en emploi
+    × salaires, comme le PIB), pensions, PIB, PIB × décès pour les successions."""
+    cache = p.__dict__.setdefault("_cache", {})
+    if ("sq_recettes", s) in cache:
+        return cache[("sq_recettes", s)]
     d = depart(p)
-    taux = p.val("statu_quo.prelevements_sur_pensions")
+    y0 = d["pib"]
+    nf = p.val("statu_quo.recettes_non_fiscales_part_pib") * y0
+    struct = p.val("statu_quo.structure_impots")
+    k = (d["recettes"] - nf) / sum(struct.values())
+    base = {i: v * k for i, v in struct.items()}
     ret, y = retraites(p, s), pib(p, s)
-    sur_pensions_0 = taux * ret[2029]["depenses"]
-    part_reste = (d["recettes"] - sur_pensions_0) / d["pib"]  # part du PIB de départ (économie de 2026)
-    return {t: part_reste * y[t] + taux * ret[t]["depenses"] for t in ANNEES}
+    dc = deces(p, s)
+    out = {}
+    for t in ANNEES:
+        masse = y[t] / y0  # personnes en emploi × salaire moyen : comme le PIB (même indice)
+        x = {}
+        for i, v in base.items():
+            if i in IMPOTS_SALAIRES:
+                x[i] = v * masse
+            elif i == "retraites":
+                x[i] = v * ret[t]["depenses"] / ret[2029]["depenses"]
+            elif i == "successions":
+                x[i] = v * y[t] / y0 * dc[t] / dc[2029]
+            else:
+                x[i] = v * y[t] / y0
+        x["non_fiscales"] = nf * y[t] / y0
+        out[t] = x
+    cache[("sq_recettes", s)] = out
+    return out
+
+
+def recettes(p: Parametres, s: str) -> dict[int, float]:
+    """Recettes publiques totales (Md€ de 2026), somme des impôts et des recettes non fiscales."""
+    return {t: sum(x.values()) for t, x in recettes_par_impot(p, s).items()}
 
 
 # --- Trajectoire --------------------------------------------------------------------------------------------

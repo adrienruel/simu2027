@@ -460,3 +460,13 @@ son budget devient des mesures poste par poste contre le statu quo, ses effets m
 contexte (PIB, inflation, baisse de l'écart de taux, chômage, dette de 2028) passe au noyau ; résultats identiques à
 1e-13 près. Constat : périmètres différents (collectivités en net dans le programme, en brut dans le statu quo) ; à
 aligner avant de découper le programme en mesures une à une. Aucun résultat changé.
+
+## 4 novembre 2026 — Recettes du statu quo impôt par impôt ; périmètres alignés
+
+Question d'Adrien : le statu quo refait-il toute la fiscalité actuelle ? Non (un agrégat) : désormais, recettes impôt
+par impôt (niveau du PLF 2027, répartition de la colonne « Ancien » de la v235, à 0,27 % de l'Insee), chacune avec son
+assiette (masse salariale, pensions, PIB, décès). Périmètres alignés (accord d'Adrien) : les collectivités sont
+remises au budget du programme (230 Md€ de dépenses, ressources propres égales moins le besoin de financement déjà
+compté). Écart de départ du programme, hors effets macro, prudent 2029 : recettes −163 Md€, retraites +31, santé −12,
+revenu universel contre prestations +68, investissement et autres dépenses +138 ; total +2,0 points de PIB. Aucun
+résultat du programme changé ; statu quo inchangé à 0,1 point près (recettes sur les pensions).
