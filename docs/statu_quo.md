@@ -35,9 +35,10 @@ Dépense publique 56,9 % du PIB, intérêts 2,9 %, déficit 5,0 % (PLF 2027, avi
 | RSA ; prime d'activité | 24 | chômeurs, prix ; emploi et barème fixe face aux salaires (OpenFisca) | DREES, Sénat (PLF 2025) |
 | AAH et invalidité | 24 | adultes, prix | PLF 2026 ; hors ONDAM 2024 |
 | Investissement | 134 | PIB | Insee, 2025 : 4,4 % |
-| Défense, UE, missions économiques | 106 | PIB | encadré (missions de l'État) |
-| Enseignement | 152 | salaires × élèves et étudiants (élasticité 0,5) | encadré par Eurostat (5,2 %) |
-| Autres (reste, dont action sociale, crèches) | 377 | salaires × population (loi de Baumol) | dépense primaire − blocs |
+| Missions de l'État (crédits 2026 hors pensions, hors blocs déjà comptés) | 210 | chacune selon sa règle : salaires × public servi (population, élèves, étudiants, enfants, emploi), PIB ou prix | budget 2026 |
+| Défense et contribution à l'UE | 88 | PIB | loi de programmation ; PLF 2027 |
+| Collectivités (hors RSA, autonomie, investissement) | 230 | salaires × population | Insee 2025 |
+| Reste (Sécurité sociale hors blocs, opérateurs) | 106 | salaires × population | dépense primaire − blocs |
 
 Recettes impôt par impôt : le niveau du PLF 2027 (51,9 % du PIB), dont 6,3 % de recettes non fiscales (Insee 2025),
 réparti entre impôts selon la reconstitution du système actuel de la v235 (colonne « Ancien », à 0,27 % des comptes de
@@ -111,10 +112,10 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,6 / 129 | 6,7 / 139 | 8,3 / 162 | 11,6 / 211 | 17,1 / 265 | 60 / 558 |
-| **Prudent** | **5,6 / 129** | **6,9 / 138** | **8,8 / 160** | **12,4 / 209** | **17,5 / 260** | **49 / 499** |
-| Médian | 5,5 / 128 | 6,5 / 135 | 7,5 / 149 | 8,6 / 176 | 10,5 / 201 | 18,9 / 290 |
-| Optimiste | 5,4 / 128 | 6,3 / 133 | 7,2 / 144 | 8,3 / 169 | 9,8 / 190 | 14,9 / 254 |
+| Crise | 5,6 / 129 | 6,7 / 139 | 8,5 / 162 | 12,1 / 214 | 18,0 / 270 | 64 / 586 |
+| **Prudent** | **5,6 / 129** | **6,9 / 138** | **8,9 / 160** | **12,7 / 211** | **18,1 / 264** | **51 / 515** |
+| Médian | 5,5 / 128 | 6,5 / 135 | 7,6 / 149 | 8,9 / 178 | 11,0 / 205 | 19,9 / 299 |
+| Optimiste | 5,4 / 128 | 6,3 / 133 | 7,3 / 144 | 8,5 / 170 | 10,1 / 192 | 15,3 / 259 |
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse
@@ -177,8 +178,8 @@ contrôlé par l'État qui finance des infrastructures publiques pourrait être 
 5. Prestations : faites (montants sourcés ; RSA selon les chômeurs ; prime d'activité au barème fixe d'OpenFisca
    face aux salaires qui montent : −52 % par personne en emploi d'ici 2073 ; famille et logement aux prix). Reste :
    prestations familiales par OpenFisca sur des ménages réels.
-6. Dépenses de l'État mission par mission (crédits 2026), collectivités, Sécurité sociale hors santé et retraites,
-   à la place du bloc « autres ».
+6. Dépenses : faites. État mission par mission (210 Md€), défense et UE (88), collectivités (230) ; reste 106 Md€
+   (Sécurité sociale hors blocs, opérateurs), positif comme il se doit (un reste négatif signalerait un double compte).
 7. Validation : comptes de l'Insee par catégorie, Commission européenne (rapport sur le vieillissement), Cour des
    comptes.
 

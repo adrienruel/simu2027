@@ -39,7 +39,7 @@ from .parametres import Parametres
 ANNEES = list(range(2029, 2074))
 SCENARIOS = ("crise", "prudent", "median", "optimiste")
 BLOCS = ("retraites", "sante", "chomage", "famille", "logement", "pauvrete", "aah_invalidite",
-         "investissement", "missions_pib", "education", "autres")
+         "investissement", "etat_missions", "defense_ue", "collectivites", "autres")
 
 
 def _v(p: Parametres, cle: str, s: str):
@@ -76,7 +76,8 @@ def effectifs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
         e = sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1))
         c = sum(v[a] * taux.get(a, 0.0) * u.get(a, 0.0) / (1 - u.get(a, 0.0)) for a in range(18, AGE_MAX + 1))
         brut[t] = {"emploi": e, "chomeurs_bruts": c, "total": sum(v), "enfants": sum(v[0:18]),
-                   "adultes": sum(v[18:65]), "jeunes_3_24": sum(v[3:25]), "seniors": sum(v[65:])}
+                   "adultes": sum(v[18:65]), "jeunes_3_24": sum(v[3:25]), "seniors": sum(v[65:]),
+                   "eleves": sum(v[3:18]), "etudiants": sum(v[18:25])}
     u26 = p.val("chomage.taux_2026")
     k = u26 / (1 - u26) * brut[2026]["emploi"] / brut[2026]["chomeurs_bruts"]
     for x in brut.values():
@@ -238,9 +239,10 @@ def depart(p: Parametres) -> dict[str, float]:
         "pauvrete": sq("rsa") + sq("prime_activite"),
         "aah_invalidite": sq("aah") + p.val("sante.pensions_invalidite_2024") * facteur(p, 2024, "recettes"),
         "investissement": sq("investissement_part_pib") * y,
-        "missions_pib": sq("missions_pib_part_pib") * y,
-        "education": sq("education_part_pib") * y,
     }
+    blocs["etat_missions"] = sum(x["cout"] for x in missions_etat(p))
+    blocs["defense_ue"] = sq("defense_2026") + p.val("budget_etat.contribution_ue_courants") / p.val("budget_etat.deflateur_contribution_ue")
+    blocs["collectivites"] = collectivites_depart(p, blocs)
     blocs["autres"] = primaire - sum(blocs.values())
     if blocs["autres"] <= 0:
         raise ValueError(f"Statu quo : blocs identifiés ({sum(blocs.values()):.0f} Md€) au-dessus de la dépense primaire")
@@ -265,12 +267,86 @@ def prime_activite_relative(p: Parametres, s: str) -> dict[int, float]:
     return {t: total(w[t] / w[2029]) / t0 for t in ANNEES}
 
 
+EXCLUES = ("Aide sociale à l’enfance (reprise", "Régimes sociaux et de retraite", "Relations avec les collectivités", "Défense")
+
+
+def missions_etat(p: Parametres) -> list[dict]:
+    """Missions du budget général de l'État en 2026 (missions_etat_2026.csv, crédits de paiement), hors contribution
+    au CAS Pensions (pensions dans le bloc retraites), chacune avec sa règle d'évolution (moteur/depenses/ministeres.py :
+    salaires × public servi, PIB ou prix).
+
+    Retirés pour ne pas compter deux fois : Régimes sociaux et de retraite (retraites), Relations avec les
+    collectivités (transfert entre administrations), Défense (bloc défense et UE), l'aide sociale à l'enfance reprise
+    par un programme (dépense des départements aujourd'hui) ; dans Solidarité, la prime d'activité et l'AAH (blocs
+    pauvreté et AAH) ; dans Cohésion des territoires, les aides au logement (statu_quo.aides_logement_etat) ; la part
+    de l'État dans l'investissement public (statu_quo.investissement_parts), au prorata des crédits."""
+    cache = p.__dict__.setdefault("_cache", {})
+    if "sq_missions" in cache:
+        return cache["sq_missions"]
+    import csv
+    from .distribution import DONNEES
+    from .depenses.ministeres import _regle
+    with (DONNEES / "missions_etat_2026.csv").open(encoding="utf-8") as f:
+        ms = list(csv.DictReader(f))
+    cas_sources = sum(float(m["cas_pensions"]) for m in ms if m["cas_source"] == "s")
+    t2r = sum(float(m["titre2"]) for m in ms if m["cas_source"] == "r")
+    reste_cas = p.val("budget_etat.cas_pensions_2026") - cas_sources
+    out = []
+    for m in ms:
+        if m["mission"].startswith(EXCLUES):
+            continue
+        cas = reste_cas * float(m["titre2"]) / t2r if m["cas_pensions"] == "calcul" else float(m["cas_pensions"])
+        cout = float(m["credits"]) - cas
+        if m["mission"].startswith("Solidarité"):
+            cout -= p.val("statu_quo.prime_activite") + p.val("statu_quo.aah")
+        if m["mission"].startswith("Cohésion des territoires"):
+            cout -= p.val("statu_quo.aides_logement_etat")
+        regle, public = _regle(m["mission"])
+        out.append({"mission": m["mission"], "cout": cout, "regle": regle, "public": public})
+    inv = p.val("statu_quo.investissement_parts")["etat"] * p.val("statu_quo.investissement_part_pib") * pib_2026(p)
+    total = sum(x["cout"] for x in out)
+    for x in out:
+        x["cout"] -= inv * x["cout"] / total
+    cache["sq_missions"] = out
+    return out
+
+
+def indice_mission(regle: str, public: str | None, t: int, e: dict, w: dict, y: dict, el: float) -> float:
+    """Indice d'une mission (1 en 2029) : prix (constant en euros de 2026), PIB, recherche (moitié PIB, moitié
+    jeunes de 18 à 24 ans), ou salaires × public servi (population, élèves de 3 à 17 ans, jeunes de 18 à 24 ans,
+    enfants, personnes en emploi ; élèves et étudiants à l'élasticité ministeres.elasticite_eleves_etudiants)."""
+    wt = w[t] / w[2029]
+    if regle == "prix":
+        return 1.0
+    if regle == "pib":
+        return y[t] / y[2029]
+
+    def pub(k):
+        r = e[t][k] / e[2029][k]
+        return r ** el if k in ("eleves", "etudiants") else r
+    if regle == "recherche":
+        return 0.5 * y[t] / y[2029] + 0.5 * wt * pub("etudiants")
+    return wt * pub(public or "total")
+
+
+def collectivites_depart(p: Parametres, blocs_: dict) -> float:
+    """Dépenses des collectivités (administrations locales, statu_quo.apul_depenses_2026) hors ce qui est déjà dans
+    un autre bloc : RSA versé par les départements, aide sociale à l'autonomie (bloc santé), part locale de
+    l'investissement public."""
+    from .unites import facteur
+    rsa_departements = p.val("statu_quo.rsa") - 1.7  # RSA recentralisé (État) retiré : voir statu_quo.rsa
+    autonomie = p.val("sante.aide_sociale_autonomie_2024") * facteur(p, 2024, "recettes")
+    inv = p.val("statu_quo.investissement_parts")["collectivites"] * blocs_["investissement"]
+    return p.val("statu_quo.apul_depenses_2026") - rsa_departements - autonomie - inv
+
+
 def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     """Dépense primaire par bloc, chaque année (Md€ de 2026)."""
     d = depart(p)["blocs"]
     e, w, y, y0 = effectifs(p, s), salaires(p, s), pib(p, s), pib_2026(p)
     ret, san = retraites(p, s), sante(p, s)
     pa = prime_activite_relative(p, s)
+    mis = missions_etat(p)
     el = p.val("ministeres.elasticite_eleves_etudiants")
 
     def i(cle, t):
@@ -288,8 +364,9 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
                          + p.val("statu_quo.prime_activite") * i("emploi", t) * pa[t]),
             "aah_invalidite": d["aah_invalidite"] * i("adultes", t),
             "investissement": d["investissement"] * y[t] / y0,
-            "missions_pib": d["missions_pib"] * y[t] / y0,
-            "education": d["education"] * wt * i("jeunes_3_24", t) ** el,
+            "etat_missions": sum(x["cout"] * indice_mission(x["regle"], x["public"], t, e, w, y, el) for x in mis),
+            "defense_ue": d["defense_ue"] * y[t] / y0,
+            "collectivites": d["collectivites"] * wt * i("total", t),
             "autres": d["autres"] * wt * i("total", t),
         }
     return out

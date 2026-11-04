@@ -163,15 +163,23 @@ statu_quo:
     statut: SOURCE
     source: "Insee, Le compte des administrations publiques en 2025 (Insee Première n° 2106, mai 2026) : investissement 132,2 Md€, 4,4 % du PIB"
     note: "Suit le PIB."
-  missions_pib_part_pib:
-    valeur: 0.035
-    unite: taux
+  defense_2026:
+    valeur: 57.1
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Classeur v235, Contrôle système actuel : mission Défense 66,7 Md€ en 2026 pensions comprises (loi de programmation) ; contribution au CAS Pensions 9,58 Md€ (missions_etat_2026.csv)"
+    note: "Hors pensions (66,7 − 9,6), les pensions des militaires étant dans le bloc retraites. Suit le PIB, comme la contribution à l'UE (budget_etat.contribution_ue_courants)."
+  aides_logement_etat:
+    valeur: 15.0
+    unite: md_eur
+    annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : défense (programmation militaire, ≈ 2 % du PIB pensions comprises), contribution à l'UE (30,9 Md€ en 2027, PLF), aide au développement, action extérieure, économie, agriculture, écologie (missions_etat_2026.csv)"
-    note: "Dépenses de fonctionnement qui suivent le PIB (même règle que moteur/depenses/ministeres.py)."
-  education_part_pib:
-    valeur: 0.050
-    unite: taux
+    source: "Encadrement : les aides personnelles au logement (16,7 Md€) sont financées par le Fonds national d'aide au logement, alimenté surtout par la mission Cohésion des territoires depuis la fin du financement par la branche famille (2023)"
+    note: "Part de la mission Cohésion des territoires déjà comptée dans le bloc logement, retirée des missions de l'État."
+  investissement_parts:
+    valeur: {etat: 0.20, collectivites: 0.55}
+    unite: sans_unite
     statut: HYPOTHESE
-    source: "Encadrement : Eurostat, dépenses des administrations par fonction (COFOG) : enseignement ≈ 5,2 % du PIB en France"
-    note: "Suit la croissance et les élèves et étudiants de 3 à 24 ans, avec l'élasticité de ministeres.elasticite_eleves_etudiants."
+    source: "Encadrement : Insee, comptes des administrations publiques : les administrations locales font un peu plus de la moitié de l'investissement public ; l'État (équipements militaires compris) environ un cinquième"
+    note: "Parts de l'investissement public (bloc investissement) déjà comptées dans les crédits de l'État et les dépenses des collectivités, retirées de ces blocs pour ne pas les compter deux fois. Le reste est celui de la Sécurité sociale (hôpitaux) et des opérateurs."

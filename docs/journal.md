@@ -500,3 +500,11 @@ Famille (34,7 Md€, REPSS 2023), aides au logement (16,7, compte du logement 20
 d'activité (10,5, Sénat) remplacent les parts encadrées de la DREES (le reste de ces risques, action sociale et
 crèches, passe dans « autres », qui suit les salaires). Prime d'activité à législation constante : barème OpenFisca
 fixe face aux salaires qui montent (−52 % par personne en emploi en 2073). Statu quo prudent : 8,8 % en 2037.
+
+## 4 novembre 2026 — Statu quo : dépenses de l'État, des collectivités et reste
+
+Le bloc « autres » (377 Md€ en reste) est découpé : missions de l'État 2026 hors CAS Pensions et hors ce que d'autres
+blocs comptent déjà (prime d'activité, AAH, aides au logement, régimes de retraite, transferts aux collectivités, part
+de l'investissement), chacune selon la règle de moteur/depenses/ministeres.py (210 Md€) ; défense hors pensions et
+contribution à l'UE, au PIB (88) ; collectivités hors RSA, autonomie et investissement (230) ; reste 106 Md€. Prudent :
+8,9 % en 2037.

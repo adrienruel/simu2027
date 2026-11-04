@@ -161,3 +161,16 @@ def test_prime_activite_a_bareme_constant(p):
     assert pa[2073] < pa[2050] < pa[2037] < 1.0
     q = p.avec({"macro.tendance": 0.0, "macro.ia_productivite": 0.0})
     assert sq.prime_activite_relative(q, "prudent")[2073] == pytest.approx(1.0)
+
+
+def test_depenses_identifiees_et_reste(p):
+    """État mission par mission, défense et UE, collectivités : le reste (Sécurité sociale hors blocs, opérateurs)
+    est positif et de l'ordre de 100 Md€ (gestion des caisses, action sociale, opérateurs financés par des taxes
+    affectées ≈ 22 Md€) ; un reste négatif signalerait un double compte."""
+    b = sq.depart(p)["blocs"]
+    assert 50 < b["autres"] < 150
+    assert 180 < b["etat_missions"] < 260
+    assert 200 < b["collectivites"] < 260
+    m = {x["mission"]: x for x in sq.missions_etat(p)}
+    assert not any(k.startswith(sq.EXCLUES) for k in m)
+    assert m["Engagements financiers hors charge de la dette"]["regle"] == "prix"

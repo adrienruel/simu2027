@@ -30,7 +30,7 @@ CORRESPONDANCE = {
     "sante": ("sante",),
     "investissement": ("investissement",),
     "rui_aah": ("chomage", "famille", "logement", "pauvrete", "aah_invalidite"),
-    "autres": ("missions_pib", "education", "autres"),
+    "autres": ("etat_missions", "defense_ue", "collectivites", "autres"),
 }
 LIBELLES = {
     "retraites": "Retraites : socle, transition et ancien système",
