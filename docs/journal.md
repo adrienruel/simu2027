@@ -508,3 +508,9 @@ blocs comptent déjà (prime d'activité, AAH, aides au logement, régimes de re
 de l'investissement), chacune selon la règle de moteur/depenses/ministeres.py (210 Md€) ; défense hors pensions et
 contribution à l'UE, au PIB (88) ; collectivités hors RSA, autonomie et investissement (230) ; reste 106 Md€. Prudent :
 8,9 % en 2037.
+
+## 4 novembre 2026 — Statu quo : validation
+
+Contrôles contre le COR (retraites, calage et hors calage), la Commission européenne (retraites 2070 : 13,6 % avec une
+démographie plus ancienne, contre 15,3 %), le HCFP (dette fin 2028 125 %, intérêts 2029 102 Md€), la Cour des comptes
+(déficit primaire et dette qui monte) ; tests ajoutés. Tableau de bord du statu quo publié.

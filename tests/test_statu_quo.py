@@ -174,3 +174,20 @@ def test_depenses_identifiees_et_reste(p):
     m = {x["mission"]: x for x in sq.missions_etat(p)}
     assert not any(k.startswith(sq.EXCLUES) for k in m)
     assert m["Engagements financiers hors charge de la dette"]["regle"] == "prix"
+
+
+def test_validation_hcfp_et_cour_des_comptes(p, res):
+    """Point de départ contre les projections publiques (HCFP, avis n° 2026-5 ; Cour des comptes, juin 2026) :
+    dette d'environ 122 % fin 2027, +2,5 points par an ; intérêts 91 Md€ en 2027, +12 Md€ par an ; un déficit
+    primaire d'environ 2 % fait monter la dette (la Cour : il faudrait un excédent primaire pour la réduire)."""
+    assert 122 < sq.dette_fin_2028(p) / sq.pib_2026(p) * 100 < 128
+    assert 91 < res["prudent"][2029]["charge_dette"] < 115
+    x = res["prudent"]
+    assert x[2029]["solde_primaire"] < 0 and x[2035]["dette_pib"] > x[2029]["dette_pib"]
+
+
+def test_retraites_entre_commission_europeenne_et_cor(res):
+    """Commission européenne (rapport sur le vieillissement 2024, démographie plus ancienne : fécondité plus haute) :
+    13,6 % du PIB en 2070 ; COR 2026 (même démographie que le modèle) : 15,3 %. Le statu quo suit le COR."""
+    r = res["prudent"]
+    assert 13.6 < r[2070]["retraites_pib"] <= 15.4

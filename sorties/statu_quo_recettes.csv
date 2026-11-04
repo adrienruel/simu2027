@@ -1,0 +1,586 @@
+annee,impot,md,part_pib
+2029,"Cotisations, CSG, IR : salariés du privé",519.17,17.093
+2029,"Cotisations, CSG, IR : agents publics",208.06,6.85
+2029,"Cotisations, CSG, IR : indépendants",38.97,1.283
+2029,"CSG, CASA, IR : retraités",51.24,1.687
+2029,TVA,218.99,7.21
+2029,Accises et taxes sur les produits,106.48,3.506
+2029,Impôt sur les sociétés,72.1,2.374
+2029,Impôts de production,75.2,2.476
+2029,"Capital (dividendes, intérêts, IFI)",39.1,1.287
+2029,Successions,21.35,0.703
+2029,Droits de mutation,15.12,0.498
+2029,Taxes locales et affectées,17.13,0.564
+2029,Recettes non fiscales,191.35,6.3
+2030,"Cotisations, CSG, IR : salariés du privé",522.95,17.093
+2030,"Cotisations, CSG, IR : agents publics",209.58,6.85
+2030,"Cotisations, CSG, IR : indépendants",39.25,1.283
+2030,"CSG, CASA, IR : retraités",51.76,1.692
+2030,TVA,220.81,7.217
+2030,Accises et taxes sur les produits,107.26,3.506
+2030,Impôt sur les sociétés,72.62,2.374
+2030,Impôts de production,74.77,2.444
+2030,"Capital (dividendes, intérêts, IFI)",39.39,1.287
+2030,Successions,21.77,0.712
+2030,Droits de mutation,15.23,0.498
+2030,Taxes locales et affectées,17.25,0.564
+2030,Recettes non fiscales,192.74,6.3
+2031,"Cotisations, CSG, IR : salariés du privé",526.82,17.093
+2031,"Cotisations, CSG, IR : agents publics",211.13,6.85
+2031,"Cotisations, CSG, IR : indépendants",39.54,1.283
+2031,"CSG, CASA, IR : retraités",52.26,1.696
+2031,TVA,222.65,7.224
+2031,Accises et taxes sur les produits,108.05,3.506
+2031,Impôt sur les sociétés,73.16,2.374
+2031,Impôts de production,75.33,2.444
+2031,"Capital (dividendes, intérêts, IFI)",39.68,1.287
+2031,Successions,22.2,0.72
+2031,Droits de mutation,15.34,0.498
+2031,Taxes locales et affectées,17.38,0.564
+2031,Recettes non fiscales,194.17,6.3
+2032,"Cotisations, CSG, IR : salariés du privé",530.84,17.093
+2032,"Cotisations, CSG, IR : agents publics",212.74,6.85
+2032,"Cotisations, CSG, IR : indépendants",39.85,1.283
+2032,"CSG, CASA, IR : retraités",52.74,1.698
+2032,TVA,224.51,7.229
+2032,Accises et taxes sur les produits,108.87,3.506
+2032,Impôt sur les sociétés,73.72,2.374
+2032,Impôts de production,75.9,2.444
+2032,"Capital (dividendes, intérêts, IFI)",39.98,1.287
+2032,Successions,22.66,0.73
+2032,Droits de mutation,15.46,0.498
+2032,Taxes locales et affectées,17.51,0.564
+2032,Recettes non fiscales,195.65,6.3
+2033,"Cotisations, CSG, IR : salariés du privé",534.93,17.093
+2033,"Cotisations, CSG, IR : agents publics",214.38,6.85
+2033,"Cotisations, CSG, IR : indépendants",40.15,1.283
+2033,"CSG, CASA, IR : retraités",53.19,1.7
+2033,TVA,226.38,7.234
+2033,Accises et taxes sur les produits,109.71,3.506
+2033,Impôt sur les sociétés,74.28,2.374
+2033,Impôts de production,76.48,2.444
+2033,"Capital (dividendes, intérêts, IFI)",40.29,1.287
+2033,Successions,23.14,0.74
+2033,Droits de mutation,15.58,0.498
+2033,Taxes locales et affectées,17.65,0.564
+2033,Recettes non fiscales,197.16,6.3
+2034,"Cotisations, CSG, IR : salariés du privé",539.19,17.093
+2034,"Cotisations, CSG, IR : agents publics",216.08,6.85
+2034,"Cotisations, CSG, IR : indépendants",40.47,1.283
+2034,"CSG, CASA, IR : retraités",53.63,1.7
+2034,TVA,228.29,7.237
+2034,Accises et taxes sur les produits,110.59,3.506
+2034,Impôt sur les sociétés,74.88,2.374
+2034,Impôts de production,77.09,2.444
+2034,"Capital (dividendes, intérêts, IFI)",40.61,1.287
+2034,Successions,23.65,0.75
+2034,Droits de mutation,15.7,0.498
+2034,Taxes locales et affectées,17.79,0.564
+2034,Recettes non fiscales,198.73,6.3
+2035,"Cotisations, CSG, IR : salariés du privé",543.58,17.093
+2035,"Cotisations, CSG, IR : agents publics",217.85,6.85
+2035,"Cotisations, CSG, IR : indépendants",40.8,1.283
+2035,"CSG, CASA, IR : retraités",54.04,1.699
+2035,TVA,230.21,7.239
+2035,Accises et taxes sur les produits,111.49,3.506
+2035,Impôt sur les sociétés,75.49,2.374
+2035,Impôts de production,77.72,2.444
+2035,"Capital (dividendes, intérêts, IFI)",40.94,1.287
+2035,Successions,24.18,0.76
+2035,Droits de mutation,15.83,0.498
+2035,Taxes locales et affectées,17.93,0.564
+2035,Recettes non fiscales,200.35,6.3
+2036,"Cotisations, CSG, IR : salariés du privé",548.21,17.093
+2036,"Cotisations, CSG, IR : agents publics",219.7,6.85
+2036,"Cotisations, CSG, IR : indépendants",41.15,1.283
+2036,"CSG, CASA, IR : retraités",54.45,1.698
+2036,TVA,232.19,7.24
+2036,Accises et taxes sur les produits,112.44,3.506
+2036,Impôt sur les sociétés,76.13,2.374
+2036,Impôts de production,78.38,2.444
+2036,"Capital (dividendes, intérêts, IFI)",41.29,1.287
+2036,Successions,24.72,0.771
+2036,Droits de mutation,15.96,0.498
+2036,Taxes locales et affectées,18.08,0.564
+2036,Recettes non fiscales,202.05,6.3
+2037,"Cotisations, CSG, IR : salariés du privé",552.73,17.093
+2037,"Cotisations, CSG, IR : agents publics",221.51,6.85
+2037,"Cotisations, CSG, IR : indépendants",41.49,1.283
+2037,"CSG, CASA, IR : retraités",54.81,1.695
+2037,TVA,234.11,7.24
+2037,Accises et taxes sur les produits,113.37,3.506
+2037,Impôt sur les sociétés,76.76,2.374
+2037,Impôts de production,79.03,2.444
+2037,"Capital (dividendes, intérêts, IFI)",41.63,1.287
+2037,Successions,25.28,0.782
+2037,Droits de mutation,16.09,0.498
+2037,Taxes locales et affectées,18.23,0.564
+2037,Recettes non fiscales,203.72,6.3
+2038,"Cotisations, CSG, IR : salariés du privé",557.16,17.093
+2038,"Cotisations, CSG, IR : agents publics",223.29,6.85
+2038,"Cotisations, CSG, IR : indépendants",41.82,1.283
+2038,"CSG, CASA, IR : retraités",55.11,1.691
+2038,TVA,235.95,7.239
+2038,Accises et taxes sur les produits,114.27,3.506
+2038,Impôt sur les sociétés,77.37,2.374
+2038,Impôts de production,79.66,2.444
+2038,"Capital (dividendes, intérêts, IFI)",41.97,1.287
+2038,Successions,25.84,0.793
+2038,Droits de mutation,16.22,0.498
+2038,Taxes locales et affectées,18.38,0.564
+2038,Recettes non fiscales,205.35,6.3
+2039,"Cotisations, CSG, IR : salariés du privé",561.2,17.093
+2039,"Cotisations, CSG, IR : agents publics",224.91,6.85
+2039,"Cotisations, CSG, IR : indépendants",42.13,1.283
+2039,"CSG, CASA, IR : retraités",55.34,1.686
+2039,TVA,237.59,7.237
+2039,Accises et taxes sur les produits,115.1,3.506
+2039,Impôt sur les sociétés,77.93,2.374
+2039,Impôts de production,80.24,2.444
+2039,"Capital (dividendes, intérêts, IFI)",42.27,1.287
+2039,Successions,26.37,0.803
+2039,Droits de mutation,16.34,0.498
+2039,Taxes locales et affectées,18.51,0.564
+2039,Recettes non fiscales,206.84,6.3
+2040,"Cotisations, CSG, IR : salariés du privé",565.4,17.093
+2040,"Cotisations, CSG, IR : agents publics",226.59,6.85
+2040,"Cotisations, CSG, IR : indépendants",42.44,1.283
+2040,"CSG, CASA, IR : retraités",55.51,1.678
+2040,TVA,239.25,7.233
+2040,Accises et taxes sur les produits,115.96,3.506
+2040,Impôt sur les sociétés,78.52,2.374
+2040,Impôts de production,80.84,2.444
+2040,"Capital (dividendes, intérêts, IFI)",42.59,1.287
+2040,Successions,26.89,0.813
+2040,Droits de mutation,16.46,0.498
+2040,Taxes locales et affectées,18.65,0.564
+2040,Recettes non fiscales,208.39,6.3
+2041,"Cotisations, CSG, IR : salariés du privé",569.19,17.093
+2041,"Cotisations, CSG, IR : agents publics",228.11,6.85
+2041,"Cotisations, CSG, IR : indépendants",42.73,1.283
+2041,"CSG, CASA, IR : retraités",55.64,1.671
+2041,TVA,240.73,7.229
+2041,Accises et taxes sur les produits,116.74,3.506
+2041,Impôt sur les sociétés,79.04,2.374
+2041,Impôts de production,81.38,2.444
+2041,"Capital (dividendes, intérêts, IFI)",42.87,1.287
+2041,Successions,27.38,0.822
+2041,Droits de mutation,16.57,0.498
+2041,Taxes locales et affectées,18.78,0.564
+2041,Recettes non fiscales,209.79,6.3
+2042,"Cotisations, CSG, IR : salariés du privé",572.76,17.093
+2042,"Cotisations, CSG, IR : agents publics",229.54,6.85
+2042,"Cotisations, CSG, IR : indépendants",42.99,1.283
+2042,"CSG, CASA, IR : retraités",55.77,1.664
+2042,TVA,242.13,7.226
+2042,Accises et taxes sur les produits,117.47,3.506
+2042,Impôt sur les sociétés,79.54,2.374
+2042,Impôts de production,81.89,2.444
+2042,"Capital (dividendes, intérêts, IFI)",43.14,1.287
+2042,Successions,27.83,0.83
+2042,Droits de mutation,16.68,0.498
+2042,Taxes locales et affectées,18.89,0.564
+2042,Recettes non fiscales,211.1,6.3
+2043,"Cotisations, CSG, IR : salariés du privé",575.95,17.093
+2043,"Cotisations, CSG, IR : agents publics",230.82,6.85
+2043,"Cotisations, CSG, IR : indépendants",43.23,1.283
+2043,"CSG, CASA, IR : retraités",55.89,1.659
+2043,TVA,243.38,7.223
+2043,Accises et taxes sur les produits,118.13,3.506
+2043,Impôt sur les sociétés,79.98,2.374
+2043,Impôts de production,82.35,2.444
+2043,"Capital (dividendes, intérêts, IFI)",43.38,1.287
+2043,Successions,28.21,0.837
+2043,Droits de mutation,16.77,0.498
+2043,Taxes locales et affectées,19.0,0.564
+2043,Recettes non fiscales,212.28,6.3
+2044,"Cotisations, CSG, IR : salariés du privé",579.3,17.093
+2044,"Cotisations, CSG, IR : agents publics",232.16,6.85
+2044,"Cotisations, CSG, IR : indépendants",43.48,1.283
+2044,"CSG, CASA, IR : retraités",56.02,1.653
+2044,TVA,244.68,7.22
+2044,Accises et taxes sur les produits,118.81,3.506
+2044,Impôt sur les sociétés,80.45,2.374
+2044,Impôts de production,82.83,2.444
+2044,"Capital (dividendes, intérêts, IFI)",43.63,1.287
+2044,Successions,28.57,0.843
+2044,Droits de mutation,16.87,0.498
+2044,Taxes locales et affectées,19.11,0.564
+2044,Recettes non fiscales,213.51,6.3
+2045,"Cotisations, CSG, IR : salariés du privé",582.46,17.093
+2045,"Cotisations, CSG, IR : agents publics",233.43,6.85
+2045,"Cotisations, CSG, IR : indépendants",43.72,1.283
+2045,"CSG, CASA, IR : retraités",56.23,1.65
+2045,TVA,245.96,7.218
+2045,Accises et taxes sur les produits,119.46,3.506
+2045,Impôt sur les sociétés,80.88,2.374
+2045,Impôts de production,83.28,2.444
+2045,"Capital (dividendes, intérêts, IFI)",43.87,1.287
+2045,Successions,28.87,0.847
+2045,Droits de mutation,16.96,0.498
+2045,Taxes locales et affectées,19.21,0.564
+2045,Recettes non fiscales,214.68,6.3
+2046,"Cotisations, CSG, IR : salariés du privé",584.99,17.093
+2046,"Cotisations, CSG, IR : agents publics",234.44,6.85
+2046,"Cotisations, CSG, IR : indépendants",43.91,1.283
+2046,"CSG, CASA, IR : retraités",56.43,1.649
+2046,TVA,247.01,7.217
+2046,Accises et taxes sur les produits,119.98,3.506
+2046,Impôt sur les sociétés,81.24,2.374
+2046,Impôts de production,83.64,2.444
+2046,"Capital (dividendes, intérêts, IFI)",44.06,1.287
+2046,Successions,29.09,0.85
+2046,Droits de mutation,17.03,0.498
+2046,Taxes locales et affectées,19.3,0.564
+2046,Recettes non fiscales,215.61,6.3
+2047,"Cotisations, CSG, IR : salariés du privé",587.59,17.093
+2047,"Cotisations, CSG, IR : agents publics",235.48,6.85
+2047,"Cotisations, CSG, IR : indépendants",44.11,1.283
+2047,"CSG, CASA, IR : retraités",56.65,1.648
+2047,TVA,248.08,7.217
+2047,Accises et taxes sur les produits,120.51,3.506
+2047,Impôt sur les sociétés,81.6,2.374
+2047,Impôts de production,84.01,2.444
+2047,"Capital (dividendes, intérêts, IFI)",44.26,1.287
+2047,Successions,29.28,0.852
+2047,Droits de mutation,17.11,0.498
+2047,Taxes locales et affectées,19.38,0.564
+2047,Recettes non fiscales,216.57,6.3
+2048,"Cotisations, CSG, IR : salariés du privé",589.97,17.093
+2048,"Cotisations, CSG, IR : agents publics",236.43,6.85
+2048,"Cotisations, CSG, IR : indépendants",44.28,1.283
+2048,"CSG, CASA, IR : retraités",56.87,1.648
+2048,TVA,249.06,7.216
+2048,Accises et taxes sur les produits,121.0,3.506
+2048,Impôt sur les sociétés,81.93,2.374
+2048,Impôts de production,84.35,2.444
+2048,"Capital (dividendes, intérêts, IFI)",44.44,1.287
+2048,Successions,29.43,0.853
+2048,Droits de mutation,17.18,0.498
+2048,Taxes locales et affectées,19.46,0.564
+2048,Recettes non fiscales,217.44,6.3
+2049,"Cotisations, CSG, IR : salariés du privé",592.18,17.093
+2049,"Cotisations, CSG, IR : agents publics",237.32,6.85
+2049,"Cotisations, CSG, IR : indépendants",44.45,1.283
+2049,"CSG, CASA, IR : retraités",57.12,1.649
+2049,TVA,250.02,7.217
+2049,Accises et taxes sur les produits,121.46,3.506
+2049,Impôt sur les sociétés,82.23,2.374
+2049,Impôts de production,84.67,2.444
+2049,"Capital (dividendes, intérêts, IFI)",44.6,1.287
+2049,Successions,29.55,0.853
+2049,Droits de mutation,17.24,0.498
+2049,Taxes locales et affectées,19.54,0.564
+2049,Recettes non fiscales,218.26,6.3
+2050,"Cotisations, CSG, IR : salariés du privé",594.16,17.093
+2050,"Cotisations, CSG, IR : agents publics",238.11,6.85
+2050,"Cotisations, CSG, IR : indépendants",44.6,1.283
+2050,"CSG, CASA, IR : retraités",57.41,1.652
+2050,TVA,250.91,7.218
+2050,Accises et taxes sur les produits,121.86,3.506
+2050,Impôt sur les sociétés,82.51,2.374
+2050,Impôts de production,84.95,2.444
+2050,"Capital (dividendes, intérêts, IFI)",44.75,1.287
+2050,Successions,29.66,0.853
+2050,Droits de mutation,17.3,0.498
+2050,Taxes locales et affectées,19.6,0.564
+2050,Recettes non fiscales,218.99,6.3
+2051,"Cotisations, CSG, IR : salariés du privé",595.72,17.093
+2051,"Cotisations, CSG, IR : agents publics",238.74,6.85
+2051,"Cotisations, CSG, IR : indépendants",44.72,1.283
+2051,"CSG, CASA, IR : retraités",57.73,1.656
+2051,TVA,251.67,7.221
+2051,Accises et taxes sur les produits,122.18,3.506
+2051,Impôt sur les sociétés,82.73,2.374
+2051,Impôts de production,85.18,2.444
+2051,"Capital (dividendes, intérêts, IFI)",44.87,1.287
+2051,Successions,29.73,0.853
+2051,Droits de mutation,17.35,0.498
+2051,Taxes locales et affectées,19.65,0.564
+2051,Recettes non fiscales,219.56,6.3
+2052,"Cotisations, CSG, IR : salariés du privé",597.27,17.093
+2052,"Cotisations, CSG, IR : agents publics",239.36,6.85
+2052,"Cotisations, CSG, IR : indépendants",44.83,1.283
+2052,"CSG, CASA, IR : retraités",58.07,1.662
+2052,TVA,252.43,7.224
+2052,Accises et taxes sur les produits,122.5,3.506
+2052,Impôt sur les sociétés,82.94,2.374
+2052,Impôts de production,85.4,2.444
+2052,"Capital (dividendes, intérêts, IFI)",44.99,1.287
+2052,Successions,29.81,0.853
+2052,Droits de mutation,17.39,0.498
+2052,Taxes locales et affectées,19.7,0.564
+2052,Recettes non fiscales,220.13,6.3
+2053,"Cotisations, CSG, IR : salariés du privé",598.67,17.093
+2053,"Cotisations, CSG, IR : agents publics",239.92,6.85
+2053,"Cotisations, CSG, IR : indépendants",44.94,1.283
+2053,"CSG, CASA, IR : retraités",58.44,1.668
+2053,TVA,253.15,7.228
+2053,Accises et taxes sur les produits,122.79,3.506
+2053,Impôt sur les sociétés,83.14,2.374
+2053,Impôts de production,85.6,2.444
+2053,"Capital (dividendes, intérêts, IFI)",45.09,1.287
+2053,Successions,29.88,0.853
+2053,Droits de mutation,17.43,0.498
+2053,Taxes locales et affectées,19.75,0.564
+2053,Recettes non fiscales,220.65,6.3
+2054,"Cotisations, CSG, IR : salariés du privé",600.14,17.093
+2054,"Cotisations, CSG, IR : agents publics",240.51,6.85
+2054,"Cotisations, CSG, IR : indépendants",45.05,1.283
+2054,"CSG, CASA, IR : retraités",58.82,1.675
+2054,TVA,253.89,7.231
+2054,Accises et taxes sur les produits,123.09,3.506
+2054,Impôt sur les sociétés,83.34,2.374
+2054,Impôts de production,85.81,2.444
+2054,"Capital (dividendes, intérêts, IFI)",45.2,1.287
+2054,Successions,29.97,0.854
+2054,Droits de mutation,17.47,0.498
+2054,Taxes locales et affectées,19.8,0.564
+2054,Recettes non fiscales,221.19,6.3
+2055,"Cotisations, CSG, IR : salariés du privé",601.6,17.093
+2055,"Cotisations, CSG, IR : agents publics",241.1,6.85
+2055,"Cotisations, CSG, IR : indépendants",45.16,1.283
+2055,"CSG, CASA, IR : retraités",59.22,1.683
+2055,TVA,254.65,7.235
+2055,Accises et taxes sur les produits,123.39,3.506
+2055,Impôt sur les sociétés,83.54,2.374
+2055,Impôts de production,86.02,2.444
+2055,"Capital (dividendes, intérêts, IFI)",45.31,1.287
+2055,Successions,30.06,0.854
+2055,Droits de mutation,17.52,0.498
+2055,Taxes locales et affectées,19.85,0.564
+2055,Recettes non fiscales,221.73,6.3
+2056,"Cotisations, CSG, IR : salariés du privé",602.81,17.093
+2056,"Cotisations, CSG, IR : agents publics",241.58,6.85
+2056,"Cotisations, CSG, IR : indépendants",45.25,1.283
+2056,"CSG, CASA, IR : retraités",59.62,1.691
+2056,TVA,255.3,7.239
+2056,Accises et taxes sur les produits,123.64,3.506
+2056,Impôt sur les sociétés,83.71,2.374
+2056,Impôts de production,86.19,2.444
+2056,"Capital (dividendes, intérêts, IFI)",45.4,1.287
+2056,Successions,30.13,0.854
+2056,Droits de mutation,17.55,0.498
+2056,Taxes locales et affectées,19.89,0.564
+2056,Recettes non fiscales,222.18,6.3
+2057,"Cotisations, CSG, IR : salariés du privé",604.12,17.093
+2057,"Cotisations, CSG, IR : agents publics",242.11,6.85
+2057,"Cotisations, CSG, IR : indépendants",45.35,1.283
+2057,"CSG, CASA, IR : retraités",60.04,1.699
+2057,TVA,256.0,7.243
+2057,Accises et taxes sur les produits,123.91,3.506
+2057,Impôt sur les sociétés,83.89,2.374
+2057,Impôts de production,86.38,2.444
+2057,"Capital (dividendes, intérêts, IFI)",45.5,1.287
+2057,Successions,30.21,0.855
+2057,Droits de mutation,17.59,0.498
+2057,Taxes locales et affectées,19.93,0.564
+2057,Recettes non fiscales,222.66,6.3
+2058,"Cotisations, CSG, IR : salariés du privé",605.48,17.093
+2058,"Cotisations, CSG, IR : agents publics",242.65,6.85
+2058,"Cotisations, CSG, IR : indépendants",45.45,1.283
+2058,"CSG, CASA, IR : retraités",60.45,1.707
+2058,TVA,256.69,7.247
+2058,Accises et taxes sur les produits,124.19,3.506
+2058,Impôt sur les sociétés,84.08,2.374
+2058,Impôts de production,86.57,2.444
+2058,"Capital (dividendes, intérêts, IFI)",45.61,1.287
+2058,Successions,30.29,0.855
+2058,Droits de mutation,17.63,0.498
+2058,Taxes locales et affectées,19.97,0.564
+2058,Recettes non fiscales,223.16,6.3
+2059,"Cotisations, CSG, IR : salariés du privé",606.93,17.093
+2059,"Cotisations, CSG, IR : agents publics",243.23,6.85
+2059,"Cotisations, CSG, IR : indépendants",45.56,1.283
+2059,"CSG, CASA, IR : retraités",60.88,1.715
+2059,TVA,257.43,7.25
+2059,Accises et taxes sur les produits,124.48,3.506
+2059,Impôt sur les sociétés,84.28,2.374
+2059,Impôts de production,86.78,2.444
+2059,"Capital (dividendes, intérêts, IFI)",45.71,1.287
+2059,Successions,30.37,0.855
+2059,Droits de mutation,17.67,0.498
+2059,Taxes locales et affectées,20.02,0.564
+2059,Recettes non fiscales,223.7,6.3
+2060,"Cotisations, CSG, IR : salariés du privé",608.39,17.093
+2060,"Cotisations, CSG, IR : agents publics",243.82,6.85
+2060,"Cotisations, CSG, IR : indépendants",45.67,1.283
+2060,"CSG, CASA, IR : retraités",61.32,1.723
+2060,TVA,258.19,7.254
+2060,Accises et taxes sur les produits,124.78,3.506
+2060,Impôt sur les sociétés,84.48,2.374
+2060,Impôts de production,86.99,2.444
+2060,"Capital (dividendes, intérêts, IFI)",45.82,1.287
+2060,Successions,30.44,0.855
+2060,Droits de mutation,17.71,0.498
+2060,Taxes locales et affectées,20.07,0.564
+2060,Recettes non fiscales,224.23,6.3
+2061,"Cotisations, CSG, IR : salariés du privé",609.44,17.093
+2061,"Cotisations, CSG, IR : agents publics",244.24,6.85
+2061,"Cotisations, CSG, IR : indépendants",45.75,1.283
+2061,"CSG, CASA, IR : retraités",61.78,1.733
+2061,TVA,258.83,7.26
+2061,Accises et taxes sur les produits,125.0,3.506
+2061,Impôt sur les sociétés,84.63,2.374
+2061,Impôts de production,87.14,2.444
+2061,"Capital (dividendes, intérêts, IFI)",45.9,1.287
+2061,Successions,30.48,0.855
+2061,Droits de mutation,17.74,0.498
+2061,Taxes locales et affectées,20.1,0.564
+2061,Recettes non fiscales,224.62,6.3
+2062,"Cotisations, CSG, IR : salariés du privé",610.6,17.093
+2062,"Cotisations, CSG, IR : agents publics",244.7,6.85
+2062,"Cotisations, CSG, IR : indépendants",45.83,1.283
+2062,"CSG, CASA, IR : retraités",62.25,1.743
+2062,TVA,259.51,7.265
+2062,Accises et taxes sur les produits,125.23,3.506
+2062,Impôt sur les sociétés,84.79,2.374
+2062,Impôts de production,87.3,2.444
+2062,"Capital (dividendes, intérêts, IFI)",45.99,1.287
+2062,Successions,30.52,0.854
+2062,Droits de mutation,17.78,0.498
+2062,Taxes locales et affectées,20.14,0.564
+2062,Recettes non fiscales,225.05,6.3
+2063,"Cotisations, CSG, IR : salariés du privé",611.91,17.093
+2063,"Cotisations, CSG, IR : agents publics",245.23,6.85
+2063,"Cotisations, CSG, IR : indépendants",45.93,1.283
+2063,"CSG, CASA, IR : retraités",62.75,1.753
+2063,TVA,260.27,7.27
+2063,Accises et taxes sur les produits,125.5,3.506
+2063,Impôt sur les sociétés,84.97,2.374
+2063,Impôts de production,87.49,2.444
+2063,"Capital (dividendes, intérêts, IFI)",46.09,1.287
+2063,Successions,30.56,0.854
+2063,Droits de mutation,17.82,0.498
+2063,Taxes locales et affectées,20.19,0.564
+2063,Recettes non fiscales,225.53,6.3
+2064,"Cotisations, CSG, IR : salariés du privé",613.24,17.093
+2064,"Cotisations, CSG, IR : agents publics",245.76,6.85
+2064,"Cotisations, CSG, IR : indépendants",46.03,1.283
+2064,"CSG, CASA, IR : retraités",63.27,1.764
+2064,TVA,261.03,7.276
+2064,Accises et taxes sur les produits,125.78,3.506
+2064,Impôt sur les sociétés,85.16,2.374
+2064,Impôts de production,87.68,2.444
+2064,"Capital (dividendes, intérêts, IFI)",46.19,1.287
+2064,Successions,30.59,0.853
+2064,Droits de mutation,17.86,0.498
+2064,Taxes locales et affectées,20.23,0.564
+2064,Recettes non fiscales,226.02,6.3
+2065,"Cotisations, CSG, IR : salariés du privé",614.5,17.093
+2065,"Cotisations, CSG, IR : agents publics",246.27,6.85
+2065,"Cotisations, CSG, IR : indépendants",46.13,1.283
+2065,"CSG, CASA, IR : retraités",63.84,1.776
+2065,TVA,261.8,7.282
+2065,Accises et taxes sur les produits,126.03,3.506
+2065,Impôt sur les sociétés,85.33,2.374
+2065,Impôts de production,87.86,2.444
+2065,"Capital (dividendes, intérêts, IFI)",46.28,1.287
+2065,Successions,30.61,0.852
+2065,Droits de mutation,17.89,0.498
+2065,Taxes locales et affectées,20.27,0.564
+2065,Recettes non fiscales,226.49,6.3
+2066,"Cotisations, CSG, IR : salariés du privé",615.39,17.093
+2066,"Cotisations, CSG, IR : agents publics",246.62,6.85
+2066,"Cotisations, CSG, IR : indépendants",46.19,1.283
+2066,"CSG, CASA, IR : retraités",64.39,1.789
+2066,TVA,262.44,7.29
+2066,Accises et taxes sur les produits,126.22,3.506
+2066,Impôt sur les sociétés,85.46,2.374
+2066,Impôts de production,87.99,2.444
+2066,"Capital (dividendes, intérêts, IFI)",46.35,1.287
+2066,Successions,30.61,0.85
+2066,Droits de mutation,17.92,0.498
+2066,Taxes locales et affectées,20.3,0.564
+2066,Recettes non fiscales,226.81,6.3
+2067,"Cotisations, CSG, IR : salariés du privé",616.18,17.093
+2067,"Cotisations, CSG, IR : agents publics",246.94,6.85
+2067,"Cotisations, CSG, IR : indépendants",46.25,1.283
+2067,"CSG, CASA, IR : retraités",64.94,1.802
+2067,TVA,263.04,7.297
+2067,Accises et taxes sur les produits,126.38,3.506
+2067,Impôt sur les sociétés,85.57,2.374
+2067,Impôts de production,88.1,2.444
+2067,"Capital (dividendes, intérêts, IFI)",46.41,1.287
+2067,Successions,30.6,0.849
+2067,Droits de mutation,17.94,0.498
+2067,Taxes locales et affectées,20.33,0.564
+2067,Recettes non fiscales,227.11,6.3
+2068,"Cotisations, CSG, IR : salariés du privé",617.08,17.093
+2068,"Cotisations, CSG, IR : agents publics",247.3,6.85
+2068,"Cotisations, CSG, IR : indépendants",46.32,1.283
+2068,"CSG, CASA, IR : retraités",65.49,1.814
+2068,TVA,263.68,7.304
+2068,Accises et taxes sur les produits,126.56,3.506
+2068,Impôt sur les sociétés,85.69,2.374
+2068,Impôts de production,88.23,2.444
+2068,"Capital (dividendes, intérêts, IFI)",46.48,1.287
+2068,Successions,30.59,0.847
+2068,Droits de mutation,17.97,0.498
+2068,Taxes locales et affectées,20.36,0.564
+2068,Recettes non fiscales,227.44,6.3
+2069,"Cotisations, CSG, IR : salariés du privé",617.83,17.093
+2069,"Cotisations, CSG, IR : agents publics",247.6,6.85
+2069,"Cotisations, CSG, IR : indépendants",46.38,1.283
+2069,"CSG, CASA, IR : retraités",66.06,1.828
+2069,TVA,264.28,7.312
+2069,Accises et taxes sur les produits,126.72,3.506
+2069,Impôt sur les sociétés,85.8,2.374
+2069,Impôts de production,88.34,2.444
+2069,"Capital (dividendes, intérêts, IFI)",46.53,1.287
+2069,Successions,30.57,0.846
+2069,Droits de mutation,17.99,0.498
+2069,Taxes locales et affectées,20.38,0.564
+2069,Recettes non fiscales,227.71,6.3
+2070,"Cotisations, CSG, IR : salariés du privé",618.43,17.093
+2070,"Cotisations, CSG, IR : agents publics",247.84,6.85
+2070,"Cotisations, CSG, IR : indépendants",46.42,1.283
+2070,"CSG, CASA, IR : retraités",66.67,1.843
+2070,TVA,264.84,7.32
+2070,Accises et taxes sur les produits,126.84,3.506
+2070,Impôt sur les sociétés,85.88,2.374
+2070,Impôts de production,88.42,2.444
+2070,"Capital (dividendes, intérêts, IFI)",46.58,1.287
+2070,Successions,30.54,0.844
+2070,Droits de mutation,18.01,0.498
+2070,Taxes locales et affectées,20.4,0.564
+2070,Recettes non fiscales,227.94,6.3
+2071,"Cotisations, CSG, IR : salariés du privé",619.39,17.093
+2071,"Cotisations, CSG, IR : agents publics",248.22,6.85
+2071,"Cotisations, CSG, IR : indépendants",46.49,1.283
+2071,"CSG, CASA, IR : retraités",67.33,1.858
+2071,TVA,265.53,7.328
+2071,Accises et taxes sur les produits,127.04,3.506
+2071,Impôt sur les sociétés,86.01,2.374
+2071,Impôts de production,88.56,2.444
+2071,"Capital (dividendes, intérêts, IFI)",46.65,1.287
+2071,Successions,30.59,0.844
+2071,Droits de mutation,18.03,0.498
+2071,Taxes locales et affectées,20.43,0.564
+2071,Recettes non fiscales,228.29,6.3
+2072,"Cotisations, CSG, IR : salariés du privé",620.4,17.093
+2072,"Cotisations, CSG, IR : agents publics",248.63,6.85
+2072,"Cotisations, CSG, IR : indépendants",46.57,1.283
+2072,"CSG, CASA, IR : retraités",68.01,1.874
+2072,TVA,266.24,7.335
+2072,Accises et taxes sur les produits,127.24,3.506
+2072,Impôt sur les sociétés,86.15,2.374
+2072,Impôts de production,88.71,2.444
+2072,"Capital (dividendes, intérêts, IFI)",46.73,1.287
+2072,Successions,30.64,0.844
+2072,Droits de mutation,18.06,0.498
+2072,Taxes locales et affectées,20.47,0.564
+2072,Recettes non fiscales,228.66,6.3
+2073,"Cotisations, CSG, IR : salariés du privé",621.47,17.093
+2073,"Cotisations, CSG, IR : agents publics",249.06,6.85
+2073,"Cotisations, CSG, IR : indépendants",46.65,1.283
+2073,"CSG, CASA, IR : retraités",68.69,1.889
+2073,TVA,266.98,7.343
+2073,Accises et taxes sur les produits,127.46,3.506
+2073,Impôt sur les sociétés,86.3,2.374
+2073,Impôts de production,88.86,2.444
+2073,"Capital (dividendes, intérêts, IFI)",46.81,1.287
+2073,Successions,30.69,0.844
+2073,Droits de mutation,18.1,0.498
+2073,Taxes locales et affectées,20.5,0.564
+2073,Recettes non fiscales,229.05,6.3

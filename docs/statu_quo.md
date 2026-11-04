@@ -180,8 +180,25 @@ contrôlé par l'État qui finance des infrastructures publiques pourrait être 
    prestations familiales par OpenFisca sur des ménages réels.
 6. Dépenses : faites. État mission par mission (210 Md€), défense et UE (88), collectivités (230) ; reste 106 Md€
    (Sécurité sociale hors blocs, opérateurs), positif comme il se doit (un reste négatif signalerait un double compte).
-7. Validation : comptes de l'Insee par catégorie, Commission européenne (rapport sur le vieillissement), Cour des
-   comptes.
+7. Validation : faite (section « Validation »).
+
+## Validation (4 novembre 2026)
+
+| Contrôle | Statu quo | Référence | Lecture |
+|---|---|---|---|
+| Retraites 2030 / 2045 / 2070 (% du PIB) | 14,2 / 14,2 / 15,3 | COR 2026 : 14,1 / 14,2 / 15,3 | 2070 calé, le reste hors calage |
+| Retraites 2070, productivité 0,4 % / 1,0 % | 16,0 / 14,7 | COR : 16,1 / 14,5 | hors calage |
+| Retraites 2070 | 15,3 | Commission européenne 2024 : 13,6 | démographie plus ancienne (fécondité plus haute) dans le rapport européen |
+| Dette fin 2028 (% du PIB) | 125 | HCFP : ≈ 122 fin 2027, +2,5 points par an | cohérent |
+| Intérêts 2029 (Md€) | 102 | HCFP : 79 en 2026, 91 en 2027, +12 par an | cohérent |
+| Prélèvements sur les salaires (privé / public, Md€) | 516 / 202 (OpenFisca) | 519 / 208 (répartition calée sur l'Insee) | −0,6 % / −2,8 % |
+| Prélèvements sur les pensions (Md€) | 51,2 (OpenFisca) | 51,2 | −0,1 % |
+| TVA (Md€) | 91 % expliqués par source de revenu | 219 (répartition) | calage 1,10 |
+| Reste des dépenses non identifiées | 106 Md€ (positif) | Sécurité sociale hors blocs, opérateurs | pas de double compte |
+| Trajectoire | déficit primaire ≈ 2 %, dette qui monte | Cour des comptes (juin 2026) : il faut un excédent primaire pour réduire la dette | même diagnostic |
+
+Non validé : dépenses de santé et de dépendance contre le rapport européen (tableau non lu) ; projection de long terme
+de la Cour des comptes (non publiée sans mesures).
 
 ## Limites
 
