@@ -122,6 +122,12 @@ statu_quo:
     statut: SOURCE
     source: "Unédic, prévisions financières d'octobre 2026 : dépenses totales 46,6 Md€ en 2026 (allocations et contribution à France Travail), 2,6 millions d'allocataires indemnisés"
     note: "Suit les chômeurs du scénario (population de l'Insee, taux par âge de 2025) et les salaires (allocations proportionnelles au salaire passé)."
+  indexation_prestations:
+    valeur: salaires
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 04/11/2026 : prestations familiales, aides au logement, RSA, prime d'activité (barème compris), AAH et invalidité revalorisées sur les salaires, pour garder leur niveau par rapport aux revenus d'activité (la loi les revalorise sur les prix ; sur 45 ans elles perdraient environ un quart par rapport aux salaires, ce qui n'arriverait pas sans revalorisations exceptionnelles). Variante « prix » : la loi à la lettre (environ 0,9 point de PIB de dépenses en moins en 2060). Les barèmes des prélèvements sur les pensions restent sur les prix (statu_quo.baremes_retraites)."
+
   prestations_familiales:
     valeur: 34.7
     unite: md_eur

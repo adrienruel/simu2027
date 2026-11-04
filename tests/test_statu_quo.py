@@ -191,3 +191,12 @@ def test_retraites_entre_commission_europeenne_et_cor(res):
     13,6 % du PIB en 2070 ; COR 2026 (même démographie que le modèle) : 15,3 %. Le statu quo suit le COR."""
     r = res["prudent"]
     assert 13.6 < r[2070]["retraites_pib"] <= 15.4
+
+
+def test_indexation_des_prestations(p):
+    """Prestations sur les salaires (décision d'Adrien) : plus de dépense que sur les prix, sans effet en 2029."""
+    sal = sq.blocs(p.avec({"statu_quo.indexation_prestations": "salaires"}), "prudent")
+    prix = sq.blocs(p.avec({"statu_quo.indexation_prestations": "prix"}), "prudent")
+    for b in ("famille", "logement", "pauvrete", "aah_invalidite"):
+        assert sal[2029][b] == pytest.approx(prix[2029][b])
+        assert sal[2060][b] > prix[2060][b]

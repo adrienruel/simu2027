@@ -345,7 +345,10 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     d = depart(p)["blocs"]
     e, w, y, y0 = effectifs(p, s), salaires(p, s), pib(p, s), pib_2026(p)
     ret, san = retraites(p, s), sante(p, s)
-    pa = prime_activite_relative(p, s)
+    salaires_ = p.val("statu_quo.indexation_prestations") == "salaires"
+    # prestations revalorisées sur les salaires : montant par bénéficiaire et barème de la prime d'activité suivent le
+    # salaire moyen ; sur les prix : constants en euros de 2026, barème de la prime d'activité fixe
+    pa = {t: 1.0 for t in ANNEES} if salaires_ else prime_activite_relative(p, s)
     mis = missions_etat(p)
     el = p.val("ministeres.elasticite_eleves_etudiants")
 
@@ -354,15 +357,16 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     out = {}
     for t in ANNEES:
         wt = w[t] / w[2029]
+        kp = wt if salaires_ else 1.0  # revalorisation des prestations
         out[t] = {
             "retraites": ret[t]["depenses"],
             "sante": san[t],
             "chomage": d["chomage"] * i("chomeurs", t) * wt,
-            "famille": d["famille"] * i("enfants", t),
-            "logement": d["logement"] * i("total", t),
+            "famille": d["famille"] * i("enfants", t) * kp,
+            "logement": d["logement"] * i("total", t) * kp,
             "pauvrete": (p.val("statu_quo.rsa") * i("chomeurs", t)
-                         + p.val("statu_quo.prime_activite") * i("emploi", t) * pa[t]),
-            "aah_invalidite": d["aah_invalidite"] * i("adultes", t),
+                         + p.val("statu_quo.prime_activite") * i("emploi", t) * pa[t]) * kp,
+            "aah_invalidite": d["aah_invalidite"] * i("adultes", t) * kp,
             "investissement": d["investissement"] * y[t] / y0,
             "etat_missions": sum(x["cout"] * indice_mission(x["regle"], x["public"], t, e, w, y, el) for x in mis),
             "defense_ue": d["defense_ue"] * y[t] / y0,

@@ -112,10 +112,10 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 5,6 / 129 | 6,7 / 139 | 8,5 / 162 | 12,1 / 214 | 18,0 / 270 | 64 / 586 |
-| **Prudent** | **5,6 / 129** | **6,9 / 138** | **8,9 / 160** | **12,7 / 211** | **18,1 / 264** | **51 / 515** |
-| Médian | 5,5 / 128 | 6,5 / 135 | 7,6 / 149 | 8,9 / 178 | 11,0 / 205 | 19,9 / 299 |
-| Optimiste | 5,4 / 128 | 6,3 / 133 | 7,3 / 144 | 8,5 / 170 | 10,1 / 192 | 15,3 / 259 |
+| Crise | 5,6 / 129 | 6,8 / 139 | 8,7 / 163 | 12,8 / 218 | 19,4 / 280 | 73 / 632 |
+| **Prudent** | **5,6 / 129** | **7,0 / 138** | **9,2 / 161** | **13,4 / 216** | **19,4 / 273** | **58 / 553** |
+| Médian | 5,5 / 128 | 6,6 / 135 | 8,0 / 151 | 9,9 / 185 | 12,5 / 216 | 24 / 332 |
+| Optimiste | 5,4 / 128 | 6,5 / 133 | 7,8 / 146 | 9,5 / 178 | 11,6 / 205 | 18,7 / 290 |
 
 **Le statu quo n'est pas soutenable** : le déficit primaire reste vers 2 % du PIB jusqu'en 2050, alors que le taux
 d'intérêt dépasse la croissance (taux de marché de 4 % contre une croissance en valeur d'environ 2 %, freinée par la baisse
@@ -181,6 +181,18 @@ contrôlé par l'État qui finance des infrastructures publiques pourrait être 
 6. Dépenses : faites. État mission par mission (210 Md€), défense et UE (88), collectivités (230) ; reste 106 Md€
    (Sécurité sociale hors blocs, opérateurs), positif comme il se doit (un reste négatif signalerait un double compte).
 7. Validation : faite (section « Validation »).
+
+## Indexation des prestations (DÉCISION d'Adrien, 4/11/2026)
+
+Prestations familiales, aides au logement, RSA, prime d'activité (barème compris), AAH et invalidité suivent les
+salaires (`statu_quo.indexation_prestations`) : leur niveau par rapport aux revenus d'activité est gardé. La loi les
+revalorise sur les prix ; appliquée pendant 45 ans, elle leur ferait perdre environ un quart par rapport aux salaires
+(variante « prix » : environ 0,9 point de PIB de dépense en moins en 2060). Solde primaire du prudent : −2,3 % du PIB en
+2029, −2,5 % en 2037, −3,2 % en 2050, −5,1 % en 2060 (sur les prix : −2,3 ; −2,3 ; −2,6 ; −4,3).
+
+Point de neutralité : le programme indexe son revenu universel au minimum de l'inflation et de la croissance nominale,
+donc en pratique sur les prix. Avec des prestations du statu quo qui suivent les salaires, l'écart entre les deux
+compte désormais le décrochage du revenu universel par rapport aux salaires comme une économie du programme.
 
 ## Validation (4 novembre 2026)
 

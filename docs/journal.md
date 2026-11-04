@@ -514,3 +514,7 @@ contribution à l'UE, au PIB (88) ; collectivités hors RSA, autonomie et invest
 Contrôles contre le COR (retraites, calage et hors calage), la Commission européenne (retraites 2070 : 13,6 % avec une
 démographie plus ancienne, contre 15,3 %), le HCFP (dette fin 2028 125 %, intérêts 2029 102 Md€), la Cour des comptes
 (déficit primaire et dette qui monte) ; tests ajoutés. Tableau de bord du statu quo publié.
+
+DÉCISION d'Adrien (4 novembre 2026) : les prestations du statu quo (famille, logement, RSA, prime d'activité, AAH)
+suivent les salaires, pas les prix. Prudent : solde primaire −5,1 % du PIB en 2060 (−4,3 sur les prix), déficit 19,4 %
+en 2050 (18,1). Point de neutralité avec le programme (revenu universel sur les prix) signalé dans docs/statu_quo.md.
