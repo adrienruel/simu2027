@@ -136,6 +136,31 @@ def physique(mesures) -> dict[str, dict[int, float]]:
     return out
 
 
+def profil(p: Parametres, s: str, spec: dict) -> dict[int, float]:
+    """Effet physique d'une mesure (Mt CO2e par an ; négatif : évitées), pour un programme qui chiffre ses mesures
+    en tonnes (Mesure.physique) :
+
+        effet(t) = effet à plein (scénario s) × montée linéaire de `debut` à `plein`
+                   × extinction linéaire de `fin_debut` à `fin` (facultatif : le statu quo rattrape la mesure)
+                   × intensité du statu quo rapportée à celle de `debut` (si `suit_intensite`, par défaut)
+
+    Le dernier facteur évite de compter deux fois la décarbonation tendancielle : une tonne évitée par une
+    rénovation en 2040 vaut moins qu'en 2028, puisque le chauffage du statu quo émet déjà moins."""
+    s_r = scenario(p, s)
+    effet = spec["effet_mt"][s_r] if isinstance(spec["effet_mt"], dict) else spec["effet_mt"]
+    debut, plein = int(spec["debut"]), int(spec["plein"])
+    out = {}
+    for t in ANNEES:
+        montee = min(1.0, max(0.0, (t - debut + 1) / (plein - debut + 1)))
+        fin = 1.0
+        if spec.get("fin"):
+            f0, f1 = int(spec["fin_debut"]), int(spec["fin"])
+            fin = min(1.0, max(0.0, (f1 - t) / (f1 - f0)))
+        rel = (_facteur_intensite(p, s_r, t) / _facteur_intensite(p, s_r, debut)) if spec.get("suit_intensite", True) and t >= debut else 1.0
+        out[t] = effet * montee * fin * rel
+    return out
+
+
 def snbc(p: Parametres) -> dict[int, float]:
     """Plafond annuel moyen des budgets carbone (hors UTCATF) : SNBC-3 jusqu'en 2038, puis ligne droite jusqu'à
     l'objectif de 2050, puis stable."""

@@ -222,6 +222,21 @@ class Tondelier:
         return out
 
     # ------------------------------------------------------------------ assemblage
+    def ecologie(self, p: Parametres, s: str) -> list[Mesure]:
+        """Effets physiques des mesures écologiques (groupe tondelier_ecologie) : une mesure sans montant chacune,
+        dont le coût est déjà dans les mesures budgétaires."""
+        from moteur.ecologie import emissions as em
+        out = []
+        for nom, par in self.pt._p.items():
+            if not nom.startswith("tondelier_ecologie."):
+                continue
+            x = par.valeur
+            serie = em.profil(p, s, x)
+            out.append(Mesure(f"{x['id']} — {x['libelle']} (émissions)", "recettes", {}, "physique",
+                              physique={f"emissions_mt:{x['secteur']}": serie},
+                              vert="defavorable" if max(serie.values()) > 0 else "favorable"))
+        return out
+
     def _calcul(self, p: Parametres) -> dict:
         cle = id(p)
         if cle in self._cache:
@@ -322,6 +337,7 @@ class Tondelier:
             avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
             ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant}
+            liste.extend(self.ecologie(p, s))
             mes_s[s] = liste
             details[s] = {"emplois_perdus_smic": emplois, "avant_2029": avant, "dpib": dpib}
         res = {"mesures": mes_s, "contexte": ctx_s, "details": details, "smic": smic, "fp2": fp2, "part_fp": part_fp}

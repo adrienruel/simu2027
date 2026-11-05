@@ -694,3 +694,77 @@ tondelier_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     note: "Économies déclaratives estimées (règle)."
+
+# --- Effets physiques des mesures écologiques (Mt CO2e par an ; négatif : émissions évitées) ---------------------
+# Ajouté le 05/11/2026 (question d'Adrien : « le programme des écolos n'apporte aucune amélioration ? »). Même règle
+# que les économies : une estimation par scénario, avec sa méthode et des sources pour ses bases ; sans source, zéro
+# dans le prudent. Profil (moteur/ecologie/emissions.profil) : montée linéaire de debut à plein, extinction de
+# fin_debut à fin quand le statu quo rattrape la mesure, et effet réduit au rythme de la décarbonation du statu quo
+# (sauf suit_intensite: false). Les tonnes annoncées par le parti ne sont jamais reprises.
+tondelier_ecologie:
+  renovation:
+    valeur: {id: LOG-REN, libelle: "500 000 rénovations performantes par an", secteur: batiments, debut: 2028, plein: 2050,
+             effet_mt: {crise: -2.6, prudent: -3.3, median: -6.2, optimiste: -8.8}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Anah, bilan 2024 : 91 374 rénovations d'ampleur MaPrimeRénov', gain énergétique moyen de 65 % ; Citepa, Secten 2026 : 54,6 Mt pour les bâtiments, dont environ deux tiers dans le résidentiel, pour environ 30 millions de résidences principales"
+    note: "Rénovations en plus du statu quo : 500 000 − 91 000 = 409 000 par an au plus ; capacité de la filière : 200 000 en crise, 250 000 en prudent, 350 000 en médian, 409 000 en optimiste. Émissions évitées par rénovation : 1,2 t par logement en moyenne × 65 % de gain ≈ 0,8 t (médian) ; 0,6 t en crise et en prudent (effet rebond, logements déjà chauffés à l'électricité) ; 1,1 t en optimiste (ciblage des logements au gaz et au fioul). Cumul sur 2028-2050, plafonné à 8 millions de logements."
+  sortie_fioul:
+    valeur: {id: LOG-FIOUL, libelle: "Sortie du fioul en 2032 (300 000 ménages par an)", secteur: batiments, debut: 2028, plein: 2032, fin_debut: 2033, fin: 2045,
+             effet_mt: {crise: -2.6, prudent: -2.6, median: -3.4, optimiste: -3.75}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Interdiction des chaudières au fioul neuves depuis juillet 2022 (décret n° 2022-8) : le statu quo remplace déjà les chaudières en fin de vie"
+    note: "300 000 changements par an, dont environ la moitié se ferait sans la mesure (chaudières en fin de vie, environ 20 ans) : 150 000 en plus par an, 750 000 en 2032. Environ 2 000 litres de fioul par an et par ménage × 2,7 kg = 5,4 t, moins la consommation de la pompe à chaleur : 3,5 t (crise, prudent), 4,5 t (médian), 5 t (optimiste). La mesure avance la sortie du fioul : son effet s'éteint quand le statu quo la rattrape (2045)."
+  leasing_social:
+    valeur: {id: TRA-LEASING, libelle: "Leasing social d'un million de voitures électriques", secteur: transports, debut: 2028, plein: 2032, fin_debut: 2035, fin: 2045,
+             effet_mt: {crise: -0.48, prudent: -0.48, median: -0.72, optimiste: -0.96}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Leasing social 2024 et 2025 : environ 50 000 voitures par édition ; règlement (UE) 2023/851 : fin de la vente des voitures thermiques neuves en 2035"
+    note: "750 000 voitures en plus du rythme du statu quo (50 000 par an). Une voiture thermique remplacée : 12 000 km × 0,135 kg ≈ 1,6 t par an (électricité française peu carbonée). Additionnalité (voiture qui aurait été achetée de toute façon, kilomètres en plus) : 40 % (crise, prudent), 60 % (médian), 80 % (optimiste). Effet éteint de 2035 à 2045, quand le parc du statu quo s'électrifie."
+  ticket_climat:
+    valeur: {id: TRA-TICKET, libelle: "Ticket climat : abonnement unique aux transports en commun", secteur: transports, debut: 2028, plein: 2030,
+             effet_mt: {crise: -0.32, prudent: -0.64, median: -1.28, optimiste: -1.92}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Évaluation du Deutschlandticket (rapport intermédiaire pour le ministère fédéral des transports, relayé par la VDV) : environ 2,5 Mt de CO2 évitées en 2024, soit environ 3 % des émissions des voitures particulières ; Citepa : les voitures particulières font environ la moitié des émissions des transports (≈ 64 Mt)"
+    note: "Part des émissions des voitures évitée : 0,5 % (crise), 1 % (prudent), 2 % (médian), 3 % (optimiste, niveau allemand). Moins qu'en Allemagne : offre de transports en commun plus faible hors des grandes villes, tarif du ticket non précisé."
+  ferroviaire:
+    valeur: {id: TRA-FER, libelle: "Loi de programmation ferroviaire, RER métropolitains, trains de nuit", secteur: transports, debut: 2030, plein: 2040,
+             effet_mt: {crise: 0.0, prudent: 0.0, median: -1.5, optimiste: -3.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    note: "Report de la route vers le rail, une fois les infrastructures construites (2030-2040). Sans chiffrage sourcé du report modal par euro investi : zéro en crise et en prudent. À sourcer : évaluations des RER métropolitains (SGP, Cerema), Conseil d'orientation des infrastructures."
+  aerien:
+    valeur: {id: TRA-AIR, libelle: "Vols courts interdits, kérosène des vols intérieurs taxé, TVA à 20 % sur les vols intérieurs", secteur: transports, debut: 2028, plein: 2029,
+             effet_mt: {crise: -0.3, prudent: -0.3, median: -0.53, optimiste: -0.75}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "DGAC, bilan des émissions du transport aérien 2024 : 1,5 Mt pour les vols entre villes de métropole, 2,6 Mt avec l'outre-mer"
+    note: "Baisse des vols intérieurs en métropole : 20 % (crise, prudent), 35 % (médian), 50 % (optimiste). Les vols vers l'outre-mer, sans alternative, ne sont pas touchés."
+  sortie_nucleaire:
+    valeur: {id: ENE-NUC, libelle: "Sortie du nucléaire en une vingtaine d'années", secteur: energie, debut: 2035, plein: 2047, suit_intensite: false,
+             effet_mt: {crise: 8.0, prudent: 4.0, median: 2.0, optimiste: 0.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "RTE, Futurs énergétiques 2050 (2021) : le scénario M0 (100 % renouvelable en 2050) est neutre en carbone, mais c'est le plus exigeant en rythme de déploiement et en flexibilités"
+    note: "Émissions en plus : centrales au gaz fossile pour la sécurité d'approvisionnement si les renouvelables et les flexibilités ne suivent pas une sortie plus rapide que le scénario M0 de RTE (2047 au lieu de 2050). Prudent : 10 TWh de gaz, soit environ 4 Mt ; crise : le double ; optimiste : aucune (le scénario de RTE tient)."
+  agriculture:
+    valeur: {id: AGR-TRANS, libelle: "Transition agroécologique, plan élevage, 15 % des aides réorientées", secteur: agriculture, debut: 2028, plein: 2037,
+             effet_mt: {crise: 0.0, prudent: 0.0, median: -2.3, optimiste: -3.8}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    note: "Moins d'élevage et d'engrais azotés : 3 % (médian) à 5 % (optimiste) des 76,6 Mt de l'agriculture (Citepa, 2025). Sans chiffrage sourcé : zéro en crise et en prudent. À sourcer : INRAE, scénarios agricoles de la SNBC."
+  niches_climat:
+    valeur: {id: FIS-NICHES, libelle: "Niches défavorables au climat, voitures de fonction, barèmes kilométriques", secteur: transports, debut: 2028, plein: 2030,
+             effet_mt: {crise: 0.0, prudent: 0.0, median: -0.8, optimiste: -1.5}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    note: "Liste des niches supprimées non précisée : zéro en crise et en prudent. À sourcer : rapport sur l'impact environnemental du budget de l'État (budget vert)."
+  renouvelables_pme:
+    valeur: {id: ENE-PTZ, libelle: "PTZ pour les renouvelables, fonds chaleur, décarbonation des PME", secteur: industrie, debut: 2028, plein: 2035,
+             effet_mt: {crise: 0.0, prudent: 0.0, median: -1.5, optimiste: -3.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    note: "Sans montant ni chiffrage sourcé du gain par euro : zéro en crise et en prudent. À sourcer : bilans du fonds chaleur (ADEME), appels à projets de décarbonation de l'industrie."

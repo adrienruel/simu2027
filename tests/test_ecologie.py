@@ -72,3 +72,24 @@ def test_snbc(p):
     assert (b[2024], b[2028], b[2029], b[2034], b[2038]) == (342, 342, 262, 194, 194)
     assert b[2050] == b[2073] == p.val("ecologie.objectif_2050")
     assert b[2044] < b[2039] < 194
+
+
+def test_profil(p):
+    """Montée, extinction et réduction au rythme de la décarbonation du statu quo."""
+    spec = {"effet_mt": {"crise": -1.0, "prudent": -1.0, "median": -1.0, "optimiste": -1.0},
+            "debut": 2028, "plein": 2031, "fin_debut": 2035, "fin": 2045}
+    x = em.profil(p, "prudent", spec)
+    assert x[2027] == 0 and x[2028] == pytest.approx(-0.25) and -1 < x[2031] < -0.9
+    assert x[2045] == 0 and x[2040] > x[2034]
+    y = em.profil(p, "prudent", {**spec, "suit_intensite": False, "fin": None})
+    assert y[2060] == pytest.approx(-1.0)
+
+
+def test_tondelier_chiffre_en_tonnes():
+    """Les mesures écologiques de Tondelier ont un effet physique, nul dans le prudent quand rien ne le source."""
+    pt = Parametres(programme="tondelier")
+    mesures = {k: v.valeur for k, v in pt._p.items() if k.startswith("tondelier_ecologie.")}
+    assert len(mesures) >= 8
+    for k, v in mesures.items():
+        if pt[k].source is None:
+            assert v["effet_mt"]["prudent"] == 0, k
