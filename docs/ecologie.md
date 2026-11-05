@@ -89,3 +89,25 @@ dépassement cumulé depuis 2029, émissions par secteur ; statut « simule ».
   baisse des volumes (`tva.agriculture.baisse_volumes`), non reliée aux émissions.
 - Puits de carbone, sols, énergie importée, air, investissement climat : étapes suivantes (`claude/Ecologie_indicateurs.md`).
 - La population par habitant est celle du statu quo (l'effet d'un programme sur les naissances n'y est pas).
+
+## Investissements du fonds et mesures oubliées (05/11/2026, question d'Adrien)
+
+Les investissements du fonds d'Écologie de droite dans l'énergie et l'industrie verte n'avaient pas d'effet sur les
+émissions. Ajoutés (`ecologie_fonds`), avec une règle commune aux deux programmes : seul l'investissement en plus du
+statu quo réduit les émissions.
+
+- **Décarbonation de l'industrie** (3 Md€ par an contre 1,1 investi en 2024, I4CE) : 0,42 t évitée par an pour
+  1 000 € investis (fonds chaleur, ADEME), part additionnelle 25 % dans le prudent ; −4 Mt en 2048.
+- **Renouvelables et réseaux de chaleur** (3,4 Md€, un quart de l'existant) : le fonds remplace surtout un financement
+  privé ; zéro dans le prudent, −7 Mt en médian.
+- **Régénération ferroviaire** (+1,5 Md€) : même rendement par milliard que la mesure ferroviaire de Tondelier.
+- **EPR2, RTE, Enedis** : prévus dans le statu quo et financés par EDF ou les tarifs ; le fonds change qui paie, pas
+  les émissions. Pas d'effet compté.
+
+Tondelier, mesures qui manquaient : **Fonds vert** renforcé (rénovation des bâtiments publics ; zéro dans le prudent
+faute de tonnes publiées) et **plan vélo** (Cnam et al., 2025 : 250 000 t de potentiel). Non chiffrés faute de
+montant : fonds souverain « livret industrie » et « France Verte 2040 ». Biodiversité (1 Md€) : effet sur les puits de
+carbone, pas encore modélisé.
+
+Recouvrement possible chez Écologie de droite : le prix du carbone et la régénération ferroviaire poussent tous deux
+au report modal ; l'effet du rail est faible au regard du prix (−0,6 contre environ −30 Mt).

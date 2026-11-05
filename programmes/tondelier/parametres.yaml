@@ -802,3 +802,17 @@ tondelier_emploi:
     statut: HYPOTHESE
     source: "Banque de France, Bulletin n° 264 (2026), « Les réformes du marché du travail et la baisse du chômage structurel en France » : les réformes de l'assurance chômage de 2021 et 2023 ont baissé le chômage structurel de 0,6 point (0,2 et 0,4)"
     note: "Hausse du taux de chômage quand ces réformes sont abrogées (PRE-15), montée de 2028 à 2030. Prudent et crise : l'effet entier de la source ; médian : trois quarts ; optimiste : la moitié (les estimations sont ex ante). La réforme de 2025, non évaluée, n'est pas comptée. Chaque chômeur en plus coûte au solde ce que rapporte un emploi au SMIC (même valeur que les emplois perdus du SMIC)."
+  fonds_vert:
+    valeur: {id: MIS-01, libelle: "Fonds vert renforcé (+1,9 Md€) : rénovation des bâtiments publics", secteur: batiments, debut: 2028, plein: 2047,
+             effet_mt: {crise: 0.0, prudent: 0.0, median: -3.0, optimiste: -6.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Bilan du Fonds vert 2023 (ministère, relayé par la Banque des territoires) : 2 Md€ pour 10 689 projets, dont 32 % de rénovation de bâtiments, 23,5 % d'éclairage public, 12,5 % d'adaptation ; aucune émission évitée publiée"
+    note: "Seule la rénovation des bâtiments publics chauffés au gaz ou au fioul réduit les émissions (l'éclairage économise de l'électricité déjà décarbonée). Sans chiffrage publié des tonnes évitées : zéro en crise et en prudent ; 0,15 Mt (médian) et 0,3 Mt (optimiste) de plus chaque année, cumulés sur 20 ans."
+  plan_velo:
+    valeur: {id: MIS-13-VELO, libelle: "Plan vélo et marche (0,5 Md€ par an)", secteur: transports, debut: 2028, plein: 2035,
+             effet_mt: {crise: -0.03, prudent: -0.05, median: -0.12, optimiste: -0.25}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Cnam, Imperial College, IFS et CNRS (2025) : reporter sur le vélo 25 % des trajets en voiture de moins de 5 km éviterait environ 250 000 t de CO2 par an"
+    note: "Part de ce potentiel atteinte grâce au plan : 10 % (crise), 20 % (prudent), 50 % (médian), 100 % (optimiste). La santé (environ 1 € de coûts sociaux évités par km) n'est pas comptée ici."

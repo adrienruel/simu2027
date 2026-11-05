@@ -926,3 +926,34 @@ entreprises_cellules:
     statut: HYPOTHESE
     source: "Fonds propres : Banque de France, Bloc-notes Éco, billet n° 32, Coût des fonds propres et rentabilité des entreprises en France (2017, mis à jour en 2024) : 8,6 % réel pour les grandes entreprises cotées (moyenne longue 9,3 %)"
     note: "Coût réel du financement que le fonds remplace : moitié fonds propres (8,6 %), moitié dette (2 % réel : taux des crédits nouveaux aux entreprises autour de 3,5 %, moins l'inflation ; hypothèse), soit 5,3 %. Avantage = capital du fonds × (5,3 % − rendement du capital du fonds, 3,2 % dans le prudent). Ce n'est pas une dépense publique : ce sont les épargnants qui acceptent un rendement plus bas que le marché."
+
+# --- Effets physiques des investissements du fonds (Mt CO2e par an ; négatif : évitées), 05/11/2026 --------------
+# Question d'Adrien : les investissements du fonds dans l'énergie et l'industrie verte n'apparaissaient pas dans les
+# émissions. Projets de la feuille Fonds (reference/v235/fonds.tsv, lignes 30 à 35). Règle commune avec Tondelier :
+# seul l'investissement en plus du statu quo réduit les émissions ; un financement qui remplace un autre financement
+# (EPR2, RTE, Enedis, prévus dans le statu quo et financés par les tarifs ou EDF) ne change pas les émissions.
+# Ratio commun : fonds chaleur 2024 (ADEME), 1,9 Md€ d'investissements pour environ 806 000 t évitées par an,
+# soit environ 0,42 t par an pour 1 000 € investis. Rail : même rendement par euro que la mesure ferroviaire de
+# Tondelier (tondelier_ecologie.ferroviaire). Profil : moteur/ecologie/emissions.profil.
+ecologie_fonds:
+  decarbonation_industrie:
+    valeur: {id: FONDS-INDUS, libelle: "Fonds : décarbonation de l'industrie (3 Md€ par an)", secteur: industrie, debut: 2029, plein: 2048,
+             effet_mt: {crise: -1.6, prudent: -4.0, median: -8.0, optimiste: -12.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Fonds (v235, ligne 35) : 3 Md€ par an, contre 1,1 Md€ investis en 2024 (I4CE, Panorama 2025) ; ADEME, bilan du fonds chaleur 2024 : environ 0,42 t de CO2 évitée par an pour 1 000 € investis"
+    note: "1,9 Md€ par an en plus du statu quo × 0,42 t = 0,8 Mt de plus chaque année si tout est additionnel. Part additionnelle (projets qui ne se feraient pas sans le fonds) : 10 % (crise), 25 % (prudent), 50 % (médian), 75 % (optimiste). Cumulé sur 20 ans (durée de vie des équipements), réduit au rythme de la décarbonation du statu quo."
+  renouvelables_chaleur:
+    valeur: {id: FONDS-ENR, libelle: "Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)", secteur: industrie, debut: 2029, plein: 2048,
+             effet_mt: {crise: 0.0, prudent: 0.0, median: -7.1, optimiste: -11.4}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Fonds (v235, ligne 34) : le fonds porte un quart des 13,6 Md€ investis en 2024 dans les renouvelables et les réseaux de chaleur (I4CE) ; ADEME, fonds chaleur : environ 0,42 t évitée par an pour 1 000 € investis"
+    note: "Le fonds remplace surtout un financement privé : seul ce que son capital moins cher (3,2 % réel contre environ 5,3 % sur le marché) fait en plus compte. Sans source sur cet effet : zéro en crise et en prudent ; 25 % (médian) et 40 % (optimiste) des 3,4 Md€ en plus. Électricité renouvelable : peu d'effet sur les émissions françaises (électricité déjà décarbonée) ; l'effet vient de la chaleur renouvelable qui remplace le gaz."
+  rail_regeneration:
+    valeur: {id: FONDS-RAIL, libelle: "Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)", secteur: transports, debut: 2030, plein: 2040,
+             effet_mt: {crise: -0.3, prudent: -0.6, median: -1.45, optimiste: -2.35}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Fonds (v235, ligne 33) : 1,5 Md€ de plus par an à partir de 2028 (contrat État-SNCF Réseau) ; rendement par euro de la mesure ferroviaire de Tondelier (SNCF, « Le fer contre le carbone », 2022 ; Citepa)"
+    note: "Même rendement par milliard que les +3 Md€ de Tondelier : la moitié de son effet dans chaque scénario. La régénération évite surtout des fermetures et des ralentissements ; c'est un report modal évité plutôt que gagné, ce qui ne change pas l'écart au statu quo si celui-ci laisse le réseau se dégrader."

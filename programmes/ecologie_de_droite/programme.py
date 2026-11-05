@@ -555,6 +555,20 @@ def mesure_prix_carbone(p: Parametres, q: Parametres, s: str) -> Mesure:
                   physique=phys, vert="favorable")
 
 
+def mesures_physiques_fonds(p: Parametres, q: Parametres, s: str) -> list[Mesure]:
+    """Effets physiques des investissements du fonds (groupe ecologie_fonds), sans montant : leur financement est
+    déjà dans le fonds et ses rendements."""
+    from moteur.ecologie import emissions as em
+    out = []
+    for nom, par in q._p.items():
+        if not nom.startswith("ecologie_fonds."):
+            continue
+        x = par.valeur
+        out.append(Mesure(f"{x['id']} — {x['libelle']} (émissions)", "recettes", {}, "physique",
+                          physique={f"emissions_mt:{x['secteur']}": em.profil(p, s, x)}, vert="favorable"))
+    return out
+
+
 class EcologieDeDroite:
     nom = "ecologie_de_droite"
     libelle = "Écologie de droite"
@@ -669,6 +683,7 @@ class EcologieDeDroite:
             m.append(Mesure("Participations de l'État remises au fonds", "participations",
                             {t: v["participations"] for t, v in cout_transition(q).items()}, "mesure"))
             m.append(mesure_prix_carbone(p, q, s))
+            m.extend(mesures_physiques_fonds(p, q, s))
             mesures[s] = m
             # contexte : ce que le programme change dans l'économie
             infl = serie(q, jeu)
