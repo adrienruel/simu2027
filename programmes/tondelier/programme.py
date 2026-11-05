@@ -222,6 +222,40 @@ class Tondelier:
         return out
 
     # ------------------------------------------------------------------ assemblage
+    def emploi_mesures(self, p: Parametres, s: str, liste: list, e: dict, valeur_emploi: float, ip: dict) -> dict:
+        """Effets sur l'emploi et le chômage des mesures qui en ont (groupe tondelier_emploi), par année :
+        emplois par canal (contre le statu quo), chômeurs en plus (+) ou en moins (−), actifs en plus, et mesures
+        budgétaires de ces effets (effet_macro), au prix d'un emploi au SMIC comme les emplois perdus du SMIC."""
+        w = sq.salaires(p, s)
+        cout = self.v("emploi.cout_poste_public")
+        parts = self.v("emploi.postes")
+        ev = sq._v(p, "emploi_public.eviction_privee", s)
+        postes = {t: 0.0 for t in ANNEES}
+        for m in liste:
+            if m.note in parts:
+                for t in ANNEES:
+                    postes[t] += parts[m.note] * m.valeurs.get(t, 0.0) * 1e9 / (cout * w[t] / w[2029])
+        g = self.v("emploi.garantie_emploi")
+        rec = g["recours"][s]
+        tz = {t: g["eligibles"] * rec * (1 - g["eviction"]) * min(1.0, max(0.0, (t - g["debut"] + 1) / (g["plein"] - g["debut"] + 1)))
+              for t in ANNEES}
+        pts = self.v("emploi.assurance_chomage", s)
+        actifs_sq = {t: e[t]["emploi"] + e[t]["chomeurs"] for t in ANNEES}
+        ac = {t: pts * actifs_sq[t] * min(1.0, max(0.0, (t - 2027) / 3)) for t in ANNEES}
+        canaux = {t: {"Postes publics créés": postes[t], "Éviction d'emplois privés par les postes publics": -ev * postes[t],
+                      "Garantie d'emploi à 55 ans (Territoires zéro chômeur)": tz[t],
+                      "Assurance chômage : réformes abrogées": -ac[t]} for t in ANNEES}
+        net_pub = {t: (1 - ev) * postes[t] for t in ANNEES}
+        chomeurs = {t: -net_pub[t] - g["part_venant_du_chomage"] * tz[t] + ac[t] for t in ANNEES}
+        actifs = {t: (1 - g["part_venant_du_chomage"]) * tz[t] for t in ANNEES}
+        mesures = [
+            Mesure("Emploi : chômeurs en plus quand les réformes de l'assurance chômage sont abrogées", "recettes",
+                   {t: -ac[t] * valeur_emploi / 1e9 * ip[t] for t in ANNEES}, nature="effet_macro"),
+            Mesure("Emploi : emplois privés évincés par les postes publics", "recettes",
+                   {t: -ev * postes[t] * valeur_emploi / 1e9 * ip[t] for t in ANNEES}, nature="effet_macro"),
+        ]
+        return {"canaux": canaux, "chomeurs": chomeurs, "actifs": actifs, "mesures": mesures}
+
     def ecologie(self, p: Parametres, s: str) -> list[Mesure]:
         """Effets physiques des mesures écologiques (groupe tondelier_ecologie) : une mesure sans montant chacune,
         dont le coût est déjà dans les mesures budgétaires."""
@@ -337,14 +371,19 @@ class Tondelier:
             k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
             conj = {t: (dpib[t] if self.v("macro.multiplicateur_actif") else 0.0) / y[t] * k_emp * e[t]["emploi"] for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] + emplois * min(1.0, (t - 2026) / 3) - conj[t]) / (e[t]["emploi"] + e[t]["chomeurs"]) * 100 for t in ANNEES}
+            # emploi : postes publics, garantie d'emploi, assurance chômage (tondelier_emploi)
+            em = self.emploi_mesures(p, s, liste, e, smic["perte_par_emploi"], ip)
+            liste.extend(em["mesures"])
+            chom = {t: chom[t] + em["chomeurs"][t] / (e[t]["emploi"] + e[t]["chomeurs"] + em["actifs"][t]) * 100
+                    for t in ANNEES}
             # dette de fin 2028 : mesures de 2027 et 2028 (recettes et dépenses), effet macro compris
             avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
             perdus = {t: emplois * min(1.0, (t - 2026) / 3) for t in ANNEES}
             ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
-                        "emploi": {t: e[t]["emploi"] - perdus[t] + conj[t] for t in ANNEES},
+                        "emploi": {t: e[t]["emploi"] - perdus[t] + conj[t] + sum(em["canaux"][t].values()) for t in ANNEES},
                         "emplois_canaux": {t: {"SMIC à 2 000 € : emplois perdus": -perdus[t],
-                                               "Conjoncture (impulsion budgétaire)": conj[t]} for t in ANNEES}}
+                                               "Conjoncture (impulsion budgétaire)": conj[t], **em["canaux"][t]} for t in ANNEES}}
             liste.extend(self.ecologie(p, s))
             mes_s[s] = liste
             details[s] = {"emplois_perdus_smic": emplois, "avant_2029": avant, "dpib": dpib}

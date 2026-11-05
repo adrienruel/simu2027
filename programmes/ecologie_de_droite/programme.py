@@ -501,8 +501,18 @@ def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, b
     return out
 
 
-CANAUX_EMPLOI = {"reformes": "Chômeurs repris par les réformes", "population_active": "Venus de l'inactivité (seniors, cumul, inactifs, jeunes)",
+CANAUX_EMPLOI = {"population_active": "Venus de l'inactivité (seniors, cumul, inactifs, jeunes)",
                  "fonds": "Emplois du fonds", "conjoncture": "Conjoncture (ajustement budgétaire)"}
+# chômeurs repris par les réformes, mesure par mesure (moteur/emploi_canaux.emplois_par_mesure)
+REFORMES_EMPLOI = {
+    "allocation_chomage_rui": "Allocation chômage remplacée par le RUI", "france_travail_conseil": "France Travail recentré sur le conseil",
+    "selection_universite_apprentissage": "Sélection à l'université et apprentissage", "droit_a_construire": "Droit à construire",
+    "accompagnement_ia": "Accompagnement par l'IA", "alternance": "Alternance", "contrat_assoupli": "Contrat de travail assoupli",
+    "bas_salaires": "RUI au prorata des bas salaires", "entreprises_cout_travail": "Réforme des entreprises : coût du travail",
+    "entreprises_localisation": "Réforme des entreprises : localisation (IS à 45 %)", "baisse_cout_travail": "Baisse du coût du travail jusqu'à 1,3 SMIC",
+    "commerces": "Horaires des commerces", "smic_croissance": "SMIC revalorisé sur la croissance", "prime_jeunes": "Prime d'embauche des jeunes",
+    "accords_branche": "Accords d'entreprise",
+}
 
 
 def contexte_emploi(p: Parametres, s: str, r: dict) -> dict:
@@ -512,13 +522,20 @@ def contexte_emploi(p: Parametres, s: str, r: dict) -> dict:
     emploi de plus, constant) : prendre ses actifs − chômeurs mélangerait cet écart de calage avec les effets du
     programme. Non compté : l'effet du programme sur les naissances (actifs en moins après 2048)."""
     from moteur import statu_quo as sq
+    from moteur.emploi_canaux import emplois_par_mesure
     e = sq.effectifs(p, s)
+    epm = emplois_par_mesure(p)
+    # parts de chaque réforme dans les chômeurs repris (le prudent mêle les jeux crise et médian)
+    jeux = {"crise": ("crise",), "prudent": ("crise", "median"), "median": ("median",), "optimiste": ("optimiste",)}[s]
+    brut = {k: sum(epm[j][k] for j in jeux) / len(jeux) for k in REFORMES_EMPLOI}
+    tot = sum(brut.values()) or 1.0
     emploi, canaux = {}, {}
     for t in ANNEES:
         d = r[t].get("chomage_detail") or {}
         if not d:
             return {}
-        c = {lib: d[k] for k, lib in CANAUX_EMPLOI.items()}
+        c = {lib: d["reformes"] * brut[k] / tot for k, lib in REFORMES_EMPLOI.items()}
+        c.update({lib: d[k] for k, lib in CANAUX_EMPLOI.items()})
         emploi[t] = e[t]["emploi"] + sum(c.values())
         canaux[t] = c
     return {"emploi": emploi, "emplois_canaux": canaux}

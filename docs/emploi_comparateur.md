@@ -32,3 +32,27 @@ est celui du statu quo). `sorties/comparaison_emploi_canaux.csv` : emplois par c
 
 Limite : le taux d'emploi par âge (seniors 55-64 ans) n'est pas encore ventilé par programme ; seuls les emplois venus
 de l'inactivité, dont les seniors, apparaissent comme canal.
+
+## Mesures de Tondelier sur l'emploi (05/11/2026, question d'Adrien)
+
+Avant ce jour, le coût de la garantie d'emploi, des recrutements publics, des 32 heures et du retour sur les réformes
+de l'assurance chômage était chiffré, mais pas leur effet sur l'emploi et le chômage. Groupe `tondelier_emploi` :
+
+- **Postes publics créés** : montant des mesures qui recrutent (santé scolaire, hôpital, Ehpad, classes, AESH, justice,
+  inspection, voie professionnelle, embauches compensatrices des 32 heures à l'hôpital) ÷ 55 000 € par poste ;
+  environ 340 000 postes à terme.
+- **Éviction d'emplois privés** (commune à tous les programmes, `emploi_public.eviction_privee`) : 1,5 emploi privé
+  pour un emploi public en crise (Algan, Cahuc et Zylberberg, 2002), 1 dans le prudent, 0,5 en médian, 0,25 en
+  optimiste. Les emplois privés perdus coûtent au solde.
+- **Garantie d'emploi à 55 ans** : 150 000 éligibles × 30 % de recours, 10 % d'éviction, moitié venue du chômage.
+- **Assurance chômage** : abroger les réformes de 2021 et 2023 remonte le chômage de 0,6 point dans le prudent (Banque
+  de France, Bulletin n° 264 : ces réformes l'ont baissé de 0,2 et 0,4 point). Chaque chômeur en plus coûte au
+  solde.
+
+Relevé en passant : la source des réformes d'Écologie de droite (`emploi.reformes_directes`) cite « −0,4 et −0,6
+point » pour les réformes de 2021 et 2023, alors que le Bulletin n° 264 donne −0,2 et −0,4 (−0,6 au total). La
+valeur retenue (0,4 point dans le prudent pour l'allocation remplacée par le RUI) reste dans la fourchette ; la note
+est à corriger.
+
+Les emplois des réformes d'Écologie de droite sont ventilés mesure par mesure (`emploi_canaux.emplois_par_mesure`,
+au prorata des emplois à terme).

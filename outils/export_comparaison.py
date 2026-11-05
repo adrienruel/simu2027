@@ -94,7 +94,7 @@ def _ecrire(nom: str, lignes: list[dict]) -> None:
 def main() -> None:
     p = Parametres()
     base = sq.simuler(p)
-    traj, ecarts, mesures, ecologie, emploi_canaux = [], [], [], [], []
+    traj, ecarts, mesures, ecologie, emploi_canaux, ecologie_mesures = [], [], [], [], [], []
     for nom in noyau.programmes_disponibles():
         prog = noyau.charger(nom)
         lib = getattr(prog, "libelle", nom)
@@ -143,12 +143,22 @@ def main() -> None:
                                     "mesure": m.nom, "nature": m.nature, "md": round(val, 2),
                                     "part_pib": round(val / v[t]["pib"] * 100, 3)})
         ecologie.extend(lignes_ecologie(p, lib, None if nom == "statu_quo" else prog))
+        if nom != "statu_quo":
+            for s_, liste in tout.items():
+                for i, m in enumerate(liste):
+                    for k, serie in (m.physique or {}).items():
+                        for t in ANNEES_MESURES:
+                            ecologie_mesures.append({"cle": f"{lib}|{SCENARIOS[s_]}|{t}|{i}|{k}", "programme": lib, "scenario": SCENARIOS[s_],
+                                                     "annee": t, "mesure": m.nom.replace(" (émissions)", ""),
+                                                     "secteur": k.split(":", 1)[-1] if k.startswith("emissions_mt:") else "importations",
+                                                     "mt": round(serie.get(t, 0.0), 3)})
     _ecrire("comparaison_trajectoire.csv", traj)
     _ecrire("comparaison_ecologie.csv", ecologie)
     _ecrire("comparaison_emploi_canaux.csv", emploi_canaux)
+    _ecrire("comparaison_ecologie_mesures.csv", ecologie_mesures)
     _ecrire("comparaison_ecarts.csv", ecarts)
     _ecrire("comparaison_mesures.csv", mesures)
-    print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv, comparaison_ecologie.csv, comparaison_emploi_canaux.csv")
+    print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv, comparaison_ecologie.csv, comparaison_emploi_canaux.csv, comparaison_ecologie_mesures.csv")
 
 
 if __name__ == "__main__":

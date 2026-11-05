@@ -650,3 +650,12 @@ economies:
     source: "Encadrement : la RGPP visait 15 Md€ sur 2009-2013, dont 12,3 attendus fin 2012 ; la direction du budget estimait 11,9 Md€ réalisés (97 %), chiffre de l'administration elle-même, que le rapport des inspections générales (IGA, IGF, IGAS, septembre 2012) juge difficile à vérifier (Sénat, avis n° 154 sur le PLF 2013, mission Gestion des finances publiques)"
     note: "Part d'une économie saisie, même sourcée, qui se réalise vraiment (retards, contournements, dépenses qui réapparaissent ailleurs). Ne s'applique pas aux mesures calculées par le moteur (règles : âge, barèmes). Prudent bien sous l'auto-évaluation de la RGPP. Ajouté le 05/11/2026."
 
+
+# --- Emploi public (05/11/2026) ----------------------------------------------------------------------------------
+emploi_public:
+  eviction_privee:
+    valeur: {crise: 1.5, prudent: 1.0, median: 0.5, optimiste: 0.25}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrée : Algan, Cahuc et Zylberberg (Economic Policy, 2002) : 100 emplois publics créés en éliminent environ 150 dans le privé, surtout quand l'activité publique remplace une activité privée ou paie mieux"
+    note: "Emplois privés perdus pour un poste public créé, commun à tous les programmes. Crise : la source ; prudent : un pour un (aucun emploi net) ; médian et optimiste : éviction partielle, les postes créés étant surtout dans des services peu substituables (école, justice, soins)."

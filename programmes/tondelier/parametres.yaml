@@ -772,3 +772,33 @@ tondelier_ecologie:
     statut: HYPOTHESE
     source: "ADEME, bilan du fonds chaleur 2024 : 701,5 M€ d'aides à l'investissement pour environ 806 000 t de CO2 évitées par an, soit environ 1,15 t par an pour 1 000 € d'aide ; budget de la mesure : 1,5 Md€ par an (tondelier_mesures.energies_renouvelables)"
     note: "Au ratio du fonds chaleur, 1,5 Md€ par an éviteraient 1,7 Mt de plus chaque année. Une partie du budget n'a pas ce rendement (bonification des prêts à taux zéro, communautés énergétiques) et une partie des projets se ferait sans aide : 0,2 Mt de plus par an (crise), 0,4 (prudent), 0,7 (médian), 1 (optimiste). Cumulé sur 20 ans, durée de vie des installations, puis stable (renouvellement) ; réduit au rythme de la décarbonation du statu quo, puisque la chaleur remplacée émet de moins en moins. Classé dans l'industrie (chaleur des entreprises et réseaux de chaleur)."
+
+# --- Effets des mesures sur l'emploi et le chômage (05/11/2026) ------------------------------------------------------
+# Question d'Adrien : « les écolos proposent des choses pour baisser le chômage (garantie d'emploi, réduction du temps
+# de travail) : sont-elles intégrées ? » Leur coût l'était, pas leur effet sur l'emploi. Même règle que le moteur
+# d'Écologie de droite : un emploi n'est compté qu'une fois ; ce qu'il rapporte ou coûte passe au solde.
+tondelier_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrée : masse salariale publique d'environ 390 Md€ de coût employeur pour environ 5,7 millions d'agents (Insee, Refonte_outil_de_simulation), soit environ 68 000 € en moyenne ; les recrutés débutent plus bas"
+    note: "Coût employeur d'un poste créé, pour passer des montants des mesures aux postes."
+  postes:
+    valeur: {sante_scolaire: 0.8, hopital: 1.0, grand_age: 1.0, classes: 1.0, aesh: 0.5, justice: 1.0, autres_postes: 1.0, voie_pro: 0.7, trente_deux_heures: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : aucun poste."
+  garantie_emploi:
+    valeur: {eligibles: 150000, recours: {crise: 0.2, prudent: 0.3, median: 0.3, optimiste: 0.4}, eviction: 0.1, part_venant_du_chomage: 0.5, debut: 2028, plein: 2032}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Paramètres de la mesure PRE-17 (tondelier_mesures.tzcld) : environ 150 000 chômeurs de longue durée de 55 ans et plus, recours de 30 % (évaluation de Territoires zéro chômeur de longue durée, Dares)"
+    note: "Emplois créés = éligibles × recours ; éviction de 10 % (les entreprises à but d'emploi ne doivent pas concurrencer l'emploi existant) ; la moitié des personnes recrutées vient du chômage, l'autre de l'inactivité (halo). Coût déjà net des prestations évitées dans la mesure : pas d'effet budgétaire en plus."
+  assurance_chomage:
+    valeur: {crise: 0.006, prudent: 0.006, median: 0.0045, optimiste: 0.003}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Banque de France, Bulletin n° 264 (2026), « Les réformes du marché du travail et la baisse du chômage structurel en France » : les réformes de l'assurance chômage de 2021 et 2023 ont baissé le chômage structurel de 0,6 point (0,2 et 0,4)"
+    note: "Hausse du taux de chômage quand ces réformes sont abrogées (PRE-15), montée de 2028 à 2030. Prudent et crise : l'effet entier de la source ; médian : trois quarts ; optimiste : la moitié (les estimations sont ex ante). La réforme de 2025, non évaluée, n'est pas comptée. Chaque chômeur en plus coûte au solde ce que rapporte un emploi au SMIC (même valeur que les emplois perdus du SMIC)."
