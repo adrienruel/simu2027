@@ -15,7 +15,11 @@ def test_contribution_de_transition_est_une_recette():
 
 
 def test_socle_plus_bas_reduit_le_deficit_a_long_terme():
-    assert _deficit({"retraites.socle_plein": 1100}, 2073) < _deficit({}, 2073)
+    """Déduction de l'investissement figée : sinon, un socle plus bas fait passer le déficit sous 3 %, ce qui déclenche
+    la hausse conditionnée de la déduction, dont le coût l'emporte en 2073 (constaté le 05/11/2026 avec la recette
+    carbone corrigée : 3,97 % sans le levier, 4,02 % avec, mais 3,00 % avec la déduction figée)."""
+    fixe = {"is_investissement.hausse_part_admise": {"cible": 0.5, "debut": 2029, "fin": 2029, "duree": 1, "seuil_deficit": 0.03}}
+    assert _deficit({**fixe, "retraites.socle_plein": 1100}, 2073) < _deficit(fixe, 2073)
 
 
 def test_prime_de_taux_alourdit_quand_la_dette_monte():
