@@ -349,12 +349,6 @@ macro:
   annees_ia: {valeur: 10, unite: sans_unite, statut: HYPOTHESE}
   premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}
   part_pib_tendanciel_au_solde: {valeur: 0.1, unite: taux, statut: HYPOTHESE, note: "Convention de la v235, sans source : ne sert plus que si macro.dividende_calcule est faux."}
-  dividende_calcule:
-    valeur: true
-    v235: false
-    unite: sans_unite
-    statut: DECISION
-    note: "Relecture du 05/11/2026 (point 1, décision d'Adrien) : la part du PIB en plus (productivité, IA, école) qui passe au solde est calculée sur le programme lui-même, année par année (moteur/macro.dividende_croissance), au lieu des 10 % de la v235."
   ecart_dividende: {valeur: 0.003, unite: taux, statut: HYPOTHESE, note: "Hausse de la tendance de productivité utilisée pour mesurer le dividende de croissance (écart prudent-médian)."}
 
 renouvelables:
@@ -648,12 +642,6 @@ ministeres:
 
 # --- Économies saisies par un programme (décision du 05/11/2026) --------------------------------
 economies:
-  sources_minimum:
-    valeur: 2
-    v235: 0
-    unite: sans_unite
-    statut: DECISION
-    note: "DÉCISION d'Adrien du 05/11/2026 : une économie saisie comme un montant doit être sourcée et recoupée par au moins deux sources indépendantes (Cour des comptes, inspections, COR, DG Trésor, Drees, rapports parlementaires, instituts : IPP, OFCE, Fipeco…), jamais par le programme ou une déclaration de candidat. Sinon elle compte pour zéro (moteur/mesures.motif_ecartee)."
   taux_realisation:
     valeur: {crise: 0.5, prudent: 0.6, median: 0.8, optimiste: 0.95}
     v235: {crise: 1.0, prudent: 1.0, median: 1.0, optimiste: 1.0}

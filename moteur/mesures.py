@@ -40,8 +40,8 @@ def motif_ecartee(m: dict, p: Parametres | None = None) -> str | None:
     méthode et au moins une source pour ses bases ; le taux de réalisation est déjà dans l'estimation, décision
     d'Adrien du 05/11/2026) ; « calcul_moteur » (montant calculé par le moteur)."""
     nature = m.get("nature") or "montant"
-    if nature == "calcul_moteur":
-        return None
+    if nature == "calcul_moteur" or (p is not None and not p.val("economies.estimations")):
+        return None  # v235 : montants saisis, sans règle de sources
     if nature == "estimation":
         src = sources(m)
         if any(any(k in x.lower() for k in MOTS_DECLARATIFS) for x in src):
@@ -78,6 +78,8 @@ def ecartees(p: Parametres) -> list[dict]:
 def plein_effet(m: dict, p: Parametres, scenario: str = "prudent") -> float:
     """Montant à plein effet retenu (Md€ de 2026) : estimation du scénario, ou montant × taux de réalisation."""
     nature = m.get("nature") or "montant"
+    if not p.val("economies.estimations"):  # v235 : montant saisi, réalisé en entier
+        return float(m["plein_effet_md"])
     if nature == "estimation":
         s = p.colonne_prudent if scenario == "prudent" else scenario  # calcul de crise : colonne prudente = crise
         return float(m[f"estimation_{s}"])
@@ -101,6 +103,8 @@ def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float], scenario: st
         index = ancien[t] / ancien[max(2029, plein)]
     if motif_ecartee(m, p):
         return 0.0
+    if not p.val("economies.estimations") and not (m.get("decision") or "v").startswith("v"):
+        return 0.0  # v235 : mesure ajoutée après la v235 (décision datée, pas une version du classeur)
     return float(m["retenue"]) * plein_effet(m, p, scenario) * montee * index
 
 
