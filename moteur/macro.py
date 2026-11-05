@@ -80,9 +80,16 @@ def dividende_croissance(p: Parametres, scenario_retenu: str, traj: dict, pib0: 
     from .trajectoire_annuelle import postes
     d = p.val("macro.ecart_dividende")
     g = p.val("macro.tendance", "prudent")
-    pd = p.avec({"macro.tendance": g + d})  # seule la colonne prudente (de crise dans le calcul de crise) est lue
-    pd.colonne_prudent, pd._surcharges = p.colonne_prudent, p._surcharges
-    pd._calcul_dividende = True
+    # sans l'accise sur les produits nocifs : règle de financement du surplus de santé, plafonnée (non linéaire) ;
+    # la garder rendait le dividende instable d'une variante à l'autre et les effets des mesures non additifs
+    # (relecture des tests, 05/11/2026). Le surplus et sa couverture suivent déjà le PIB par construction.
+    base = {"sante_produits_nocifs.active": False} if p.val("sante_produits_nocifs.active") else {}
+    p0 = p.avec(base) if base else p
+    pd = p.avec({**base, "macro.tendance": g + d})  # seule la colonne prudente (de crise dans le calcul de crise) est lue
+    for q_ in (p0, pd):
+        q_.colonne_prudent, q_._surcharges = p.colonne_prudent, p._surcharges
+        q_._calcul_dividende = True
+    traj = postes(p0, scenario_retenu) if base else traj
     traj_d = postes(pd, scenario_retenu)
     out = {}
     for t in ANNEES:
