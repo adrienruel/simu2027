@@ -662,3 +662,7 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
 - Décisions d'Adrien du 05/11/2026 (après-midi) : correction de la recette carbone validée et fusionnée dans `main` ;
   hypothèse de gaz en secours pendant la sortie du nucléaire de Tondelier validée ; les quatre mesures de Tondelier
   estimées à zéro faute de source (ferroviaire, agriculture, voitures de fonction, renouvelables) sont sourcées.
+- 05/11/2026 (soir) : réponse au prix du carbone corrigée (hausse du prix de l'énergie triplée par erreur, voir
+  docs/ecologie.md). Écologie de droite, prudent : prix du carbone −24 Mt en 2037 (au lieu d'environ −49), mesures
+  −26 Mt en 2037 et −30 Mt en 2050 ; déficit publié 3,01 % en 2037 (3,39 avec l'erreur, 3,01 avant le couplage) et
+  3,23 % en 2050 (3,72 avec l'erreur, 3,08 avant).
