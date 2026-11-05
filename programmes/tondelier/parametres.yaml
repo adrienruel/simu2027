@@ -1,0 +1,696 @@
+# Programme de Marine Tondelier (Les Écologistes) : chiffrage mesure par mesure sur le noyau (5 novembre 2026).
+#
+# Sources du programme : « Pour une prospérité écologique » (juillet 2026, 208 p.) et dossier de presse « Budget 2027 :
+# la grande transmission doit financer la grande transition » (26 août 2026). Fiche des mesures, citations vérifiées :
+# programmes/tondelier/mesures.yaml (id REC-…, PRE-…).
+#
+# Règles (README) : on ne reprend que les mesures, jamais les recettes ni les économies annoncées (15 Md€ sur les
+# successions : comparaison seulement) ; une hypothèse sans source est prise prudente ; le modèle estime crise, prudent,
+# médian, optimiste.
+#
+# Format d'une mesure (groupe tondelier_mesures) : montant en Md€ de 2026 à l'économie de 2029 (économie de 2026
+# placée en 2029), mesure pleinement en place ; + = recette en plus (poste recettes) ou dépense en plus (bloc de
+# dépense). moteur : ce que suit le montant après 2029 (pib, pensions, successions, tva, capital, is, bloc:<nom>,
+# fixe) ; debut et plein : première année et année de pleine montée (linéaire) ; fin : dernière année (facultatif) ;
+# fp : dépense de rémunération publique, dont une part revient en prélèvements (tondelier_fp.part_prelevements).
+#
+# Arbitrages pris par Claude le 05/11/2026 (Adrien : « si le dossier ne règle pas, fais-les toi-même ») : voir
+# docs/tondelier.md, section « Arbitrages ».
+
+tondelier_calendrier:
+  premiere_annee:
+    valeur: 2027
+    unite: sans_unite
+    statut: DECISION
+    note: "Élection en mai 2027 : SMIC relevé dès 2027 (le programme le dit), le reste à partir de la loi de finances 2028. Les montants de 2027 et 2028 s'ajoutent à la dette de fin 2028 (contexte dette_depart)."
+
+tondelier_smic:
+  smic_brut_mensuel_2026:
+    valeur: 1823.03
+    unite: eur_mois
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Revalorisation du 1er janvier 2026 (+1,18 %) : 12,02 € de l'heure, 1 823,03 € par mois pour 35 heures (à vérifier sur le décret)"
+  smic_programme:
+    valeur: 2000
+    unite: eur_mois
+    annee_euros: 2027
+    statut: SOURCE
+    source: "Programme, p. 55 : « Passer le salaire minimum à 2000€ brut par mois dès 2027 »"
+    note: "En euros de 2027 ; ramené en euros de 2026 par l'inflation de 2027 (inflation.base). Les allègements de cotisations sont « nominalisés et désindexés » (p. 67) : ils restent au barème de 2026, donc le coût du travail au SMIC monte de toute la hausse (table OpenFisca de 2026 lue au salaire relevé)."
+  diffusion_jusqu_a:
+    valeur: 1.4
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Dares et Insee (diffusion des hausses du SMIC aux salaires voisins, jusqu'à 1,3 à 1,5 SMIC, en décroissant)"
+    note: "La hausse décroît linéairement de son niveau au SMIC jusqu'à zéro à 1,4 SMIC (coût employeur)."
+  elasticite_emploi:
+    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Kramarz et Philippon (2001) : élasticité de l'emploi au coût du travail au voisinage du SMIC proche de −1,5 ; Crépon et Desplatz (2001), L'Horty (2006) : −0,4 à −1 pour les allègements ciblés"
+    note: "Élasticité de l'emploi au coût employeur, appliquée à la hausse de coût de chaque tranche. Montée en trois ans (2027-2029)."
+  valeur_emploi_chomeur:
+    valeur: 9000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : allocation moyenne d'un chômeur indemnisé ≈ 1 050 € par mois (Unédic), un sur deux indemnisé ; garantie d'autonomie pour une partie des autres"
+    note: "Dépense publique en plus pour un emploi perdu, en plus des prélèvements perdus (OpenFisca 2026, au coût de l'emploi). Suit les salaires."
+  part_marge_absorbee:
+    valeur: 0.5
+    unite: taux
+    statut: HYPOTHESE
+    note: "Part de la hausse du coût du travail prise sur les marges (le reste passe dans les prix) : l'IS perd 25 % de cette part."
+
+tondelier_fp:
+  part_prelevements:
+    valeur: auto
+    unite: sans_unite
+    statut: SOURCE
+    source: "Calculée : prélèvements (cotisations, CSG, CRDS, impôt sur le revenu) sur les rémunérations publiques / coût des agents, OpenFisca 2026 (statu_quo.prelevements_activite) : 57 %"
+    note: "Une hausse de rémunération publique coûte son coût employeur ; 57 % revient en prélèvements (compte des administrations publiques consolidé)."
+  remunerations_publiques:
+    valeur: auto
+    unite: sans_unite
+    statut: SOURCE
+    source: "Coût employeur des agents publics du statu quo (OpenFisca 2026 sur les distributions DGAFP) : 390 Md€"
+  parts_masse:
+    valeur: {categorie_A_enseignants: 0.16, categorie_A_autres: 0.27, categorie_B: 0.19, categorie_C: 0.38}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : DGAFP, Rapport annuel sur l'état de la fonction publique 2025 : catégorie A 38 % des agents (dont enseignants ≈ 15 %), B 18 %, C 44 % ; parts de masse pondérées par le salaire moyen de chaque catégorie"
+  pensions_fonction_publique:
+    valeur: 85.0
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : pensions de l'État (civils et militaires, ≈ 60 Md€) et de la CNRACL (≈ 25 Md€), PLFSS 2026 et compte d'affectation spéciale Pensions"
+    note: "Les pensions des fonctionnaires suivent le traitement de fin de carrière : une hausse de rémunération se retrouve dans les pensions des départs suivants (montée sur 35 ans)."
+
+tondelier_retraites:
+  profil_62_ans:
+    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Profil commun à 64 ans (ancien_systeme.part_retraites_age) ramené de deux ans au-delà de 61 ans, carrières longues gardées ; DREES, fiche 16 (2023, âge légal 62 ans) : 31 % des départs à 62 ans, 94 à 97 % retraités à 67 ans"
+  annee_retour:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+    note: "« Revenir immédiatement à 62 ans » (p. 116) : première loi de financement du quinquennat. Durée d'assurance de la réforme Touraine (43 ans) gardée : le texte ne parle que de l'âge."
+
+tondelier_tabac:
+  accises_tabac:
+    valeur: 13.0
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : droits de consommation sur les tabacs ≈ 13 à 14 Md€ par an (DGDDI, 2024-2025)"
+  premiere_generation:
+    valeur: 2014
+    unite: sans_unite
+    statut: SOURCE
+    source: "Programme, p. 111 : « Interdire la vente de tabac à toute personne née en 2014 et après »"
+    note: "La recette baisse avec la part des adultes nés en 2014 ou après (les jeunes fument autant que les autres : prudent). Les économies de santé ne sont pas comptées faute de chiffrage sourcé (règle : économies sourcées seulement)."
+
+tondelier_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que l'ajustement budgétaire commun (macro.multiplicateur, macro.annees_effet_ajustement) : l'impulsion budgétaire nette des mesures (hausse du solde primaire = ajustement, baisse = relance) agit sur le PIB et s'efface linéairement. Les recettes suivent le PIB (part des recettes dans le PIB du statu quo)."
+
+tondelier_mesures:
+
+  # ---------------------------------------------------------------- recettes : patrimoine et successions
+  zucman:
+    valeur: {id: REC-01, libelle: "Taxe Zucman : impôt plancher de 2 % au-delà de 100 M€", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 3.0, prudent: 5.0, median: 8.0, optimiste: 12.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 20 Md€ en statique (G. Zucman, 2025) ; pertes d'assiette fortes discutées (exil, valorisation des titres non cotés, biens professionnels). Prudent au quart du statique"
+    note: "Impôt plancher différentiel (dossier de presse, p. 5) : l'ISF et l'impôt sur le revenu s'imputent ; l'extension de l'exit tax (REC-02) est comptée comme une réduction de l'exil, sans recette propre."
+  isf_climatique:
+    valeur: {id: REC-03, libelle: "ISF à composante climatique (seuil 1,3 M€) à la place de l'IFI", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ISF 2017 ≈ 4,2 Md€, IFI ≈ 2,2 Md€ (DGFiP) ; barème de l'ISF 2017 (0,5 à 1,5 %, seuil 1,3 M€, dossier de presse p. 5)"
+    note: "Gain net sur l'IFI ; composante climatique neutre en recette (modulation du barème)."
+  successions:
+    valeur: {id: REC-04/05/06/07, libelle: "Successions : +10 % au-delà de 4 M€, +10 % au-delà de 13 M€, Dutreil, assurance-vie, plus-values latentes", poste: recettes, moteur: successions, debut: 2028, plein: 2029,
+             montant: {crise: 3.0, prudent: 4.0, median: 7.0, optimiste: 10.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : flux transmis 476 Md€ en 2026 (dossier de presse, p. 5) ; héritages de plus de 13 M€ taxés ≈ 10 % (idem) ; hypothèse : part des héritages au-delà de 4 M€ ≈ 8 % du flux, au-delà de 13 M€ ≈ 4 %, soit ≈ 6 Md€ en statique pour les deux tranches, plus Dutreil plafonné, fin de l'abattement assurance-vie et du démembrement, plus-values latentes"
+    note: "Recette annoncée par le parti : ≈ 15 Md€ en régime de croisière (dossier de presse, p. 6) : NON SAISIE (règle), comparaison seulement. Prudent : forte optimisation (donations, expatriation, assurance-vie)."
+
+  # ---------------------------------------------------------------- recettes : revenus
+  ir_tranche_60:
+    valeur: {id: REC-10, libelle: "Impôt sur le revenu : tranche à 60 % au-delà de 250 000 € par part", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.8, prudent: 1.2, median: 2.0, optimiste: 2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : contribution exceptionnelle sur les hauts revenus (3 à 4 % au-delà de 250 000 €) ≈ 1,3 Md€ ; 15 points de plus sur la même assiette ≈ 3,5 Md€ en statique ; élasticité du revenu imposable des très hauts revenus 0,5 à 0,8 en prudent"
+  ir_tranches_basses:
+    valeur: {id: REC-11, libelle: "Impôt sur le revenu : tranche à 11 % ramenée à 9 % (arbitrage)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -3.0, prudent: -3.0, median: -3.0, optimiste: -3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Arbitrage (le programme ne donne pas de barème) : 2 points sur la tranche à 11 %, qui rapporte ≈ 15 Md€ (DGFiP, statistiques de l'impôt sur le revenu)"
+  abattement_retraites:
+    valeur: {id: REC-13, libelle: "Fin de l'abattement de 10 % des retraités", poste: recettes, moteur: pensions, debut: 2028, plein: 2028,
+             montant: {crise: 4.0, prudent: 4.0, median: 4.3, optimiste: 4.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 4 à 4,5 Md€ (estimations reprises dans les débats budgétaires 2025-2026, plafond de l'abattement ≈ 4 400 € par foyer)"
+  niches_plafond:
+    valeur: {id: REC-12, libelle: "Plafonnement global des niches ; avantages limités à deux logements", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.4, prudent: 0.5, median: 0.7, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  pensions_alimentaires:
+    valeur: {id: REC-14, libelle: "Pensions alimentaires défiscalisées pour qui les reçoit", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.3, prudent: -0.3, median: -0.3, optimiste: -0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  capital_csg_pfu:
+    valeur: {id: REC-20/21, libelle: "Capital : CSG +3 points et flat tax +3 points (cumulées)", poste: recettes, moteur: capital, debut: 2028, plein: 2028,
+             montant: {crise: 3.0, prudent: 3.5, median: 4.5, optimiste: 5.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : CSG sur les revenus du patrimoine et de placement ≈ 1,5 Md€ par point ; part impôt sur le revenu du PFU sur dividendes et intérêts ≈ 0,6 Md€ par point ; baisse des dividendes versés (réformes de 2013 et 2018, IPP) : prudent ≈ 55 % du statique"
+    note: "Arbitrage : les deux hausses de 3 points s'ajoutent (lecture littérale : deux mesures distinctes, p. 68)."
+  ttf:
+    valeur: {id: REC-23, libelle: "Taxe sur les transactions financières à 0,7 %", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.6, prudent: 0.8, median: 1.2, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : TTF ≈ 2 Md€ au taux de 0,4 % (loi de finances pour 2025) ; baisse des volumes"
+
+  # ---------------------------------------------------------------- recettes : entreprises
+  is_minimal:
+    valeur: {id: REC-30, libelle: "Impôt minimal sur les bénéfices (chiffre d'affaires > 1 Md€, au prorata de l'activité en France)", poste: recettes, moteur: is, debut: 2028, plein: 2029,
+             montant: {crise: 1.0, prudent: 1.5, median: 3.0, optimiste: 5.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
+  tsn:
+    valeur: {id: REC-32, libelle: "Taxe sur les services numériques à 5 %", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.4, prudent: 0.5, median: 0.6, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : TSN ≈ 0,8 Md€ à 3 % ; seuils actuels gardés (arbitrage : le seuil de 5 Md€ du texte serait une hausse)"
+  is_taux_reduit:
+    valeur: {id: REC-33, libelle: "IS : taux réduit des PME de 15 à 10 % (compensation du SMIC)", poste: recettes, moteur: is, debut: 2028, plein: 2028,
+             montant: {crise: -1.0, prudent: -1.0, median: -1.0, optimiste: -1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Arbitrage : 5 points sur les premiers 42 500 € de bénéfice (≈ 500 000 sociétés au taux réduit)"
+  cvae:
+    valeur: {id: REC-35, libelle: "Rétablissement de la CVAE (taux de 0,75 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 6.5, prudent: 7.0, median: 7.5, optimiste: 8.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fipeco (29/10/2025) : CVAE ≈ 8 Md€ par an au taux de 0,75 % (statu_quo.cvae_rendement_2027) ; prudent un peu sous le statique (impôt de production : investissement)"
+    note: "Statu quo : CVAE supprimée en 2030. Versée aux collectivités (fraction de TVA compensatrice gardée par l'État : effet net = recette)."
+  cir:
+    valeur: {id: REC-36, libelle: "Crédit d'impôt recherche recentré sur les PME et ETI", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : CIR ≈ 7,6 Md€, dont ≈ 60 % aux grandes entreprises (MESR) ; la moitié rendue en subventions de projets avec des laboratoires (p. 97)"
+  allegements:
+    valeur: {id: REC-37, libelle: "Exonérations de cotisations au-delà de 1,6 SMIC et sur les heures supplémentaires supprimées", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 14.0, prudent: 16.5, median: 18.0, optimiste: 19.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : rapport Bozio-Wasmer (octobre 2024) : allègements au-delà de 1,6 SMIC ≈ 20 à 25 Md€ (bandeaux maladie et famille), effets sur l'emploi faibles à ces niveaux de salaire ; déduction et exonération des heures supplémentaires ≈ 2 Md€ ; prudent : 75 % du statique (salaires plus bas, emploi)"
+    note: "Allègements restants nominalisés au barème de 2026 (voir tondelier_smic.smic_programme)."
+  cotisation_deplafonnee:
+    valeur: {id: COT-01, libelle: "Cotisation vieillesse +1 point au-dessus du plafond de la Sécurité sociale", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.9, prudent: 1.0, median: 1.1, optimiste: 1.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : salaires du privé au-dessus du plafond ≈ 130 Md€ (distribution des coûts, Insee) ; 80 % gardés"
+  cotisations_vieillesse:
+    valeur: {id: COT-02, libelle: "Cotisations vieillesse +0,2 point par an de 2028 à 2032", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 6.0, prudent: 7.0, median: 8.0, optimiste: 8.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 1 point sur les salaires bruts du privé (≈ 850 Md€) et la part salariale des agents (≈ 150 Md€, la part employeur publique étant interne aux administrations) ≈ 10 Md€ ; 70 % gardés en prudent (coût du travail, salaires nets)"
+  epargne_salariale:
+    valeur: {id: COT-03, libelle: "Cotisations sur l'épargne salariale, l'intéressement, la participation et les actions gratuites", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 2.0, prudent: 3.0, median: 4.0, optimiste: 5.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : participation, intéressement, abondements et actions gratuites ≈ 25 Md€ par an (Dares) ; cotisation vieillesse ≈ 28 % moins le forfait social déjà payé ; distribution réduite en prudent"
+  csg_un_point:
+    valeur: {id: COT-04, libelle: "CSG +1 point sur tous les revenus (assurance maladie)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 12.8, prudent: 13.6, median: 14.4, optimiste: 15.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : CSG ≈ 155 Md€ (LFSS 2026) pour un taux moyen d'environ 9 % : ≈ 16 Md€ par point ; 85 % gardés en prudent"
+    note: "Progressivité de la CSG : barème non donné, neutre en recette (redistribution, à voir dans OpenFisca)."
+
+  # ---------------------------------------------------------------- recettes : consommation, énergie, santé
+  tva_verte:
+    valeur: {id: REC-40, libelle: "TVA écologique : 20 % (aérien domestique, vente à emporter, hôtellerie de luxe, rénovation non énergétique, ultra-transformés), 5,5 % (transports publics, réparation)", poste: recettes, moteur: tva, debut: 2028, plein: 2028,
+             montant: {crise: 3.5, prudent: 3.5, median: 4.5, optimiste: 5.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Taux : dossier de presse, p. 4 (« à 20 % sur les biens et services à fort impact environnemental, comme le trafic aérien ; réduite à 5,5 % sur ceux qui contribuent à la transition, comme le train, le bio ou les services de réparation »). Assiettes (hypothèses, Insee comptes de la consommation) : hausses ≈ 10,4 Md€ en statique (ultra-transformés 40 Md€ de 5,5 à 20 % : +5,8 ; rénovation non énergétique 25 Md€ de 10 à 20 % : +2,5 ; vente à emporter 15 Md€ : +1,5 ; aérien domestique, hôtellerie de luxe : +0,6), baisses ≈ −1,7 (transports publics, réparation)"
+    note: "Hausses gardées à 50 % en prudent (consommation reportée, fraude, frontière floue des ultra-transformés). Baisse sur les « biens de première nécessité » : non définie, non chiffrée (l'alimentation est déjà à 5,5 %). Effet sur les prix non compté."
+  electricite:
+    valeur: {id: REC-41, libelle: "Électricité : TVA de l'abonnement à 5,5 %, accise alignée sur le gaz", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -2.8, prudent: -2.8, median: -2.8, optimiste: -2.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : abonnements d'électricité des ménages ≈ 10 Md€ HT (CRE) : 14,5 points ≈ −1,4 Md€ ; accise de l'électricité des ménages (≈ 150 TWh) ramenée au niveau du gaz : ≈ −1,4 Md€"
+  niches_fossiles:
+    valeur: {id: REC-42, libelle: "Niches fossiles transformées en aides forfaitaires ; gazole des poids lourds au taux normal", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : dépenses fiscales et budgétaires défavorables au climat ≈ 8 Md€ (budget vert, dossier de presse p. 4), dont remboursement de TICPE aux transporteurs ≈ 1,3 Md€ ; aides forfaitaires de compensation"
+  aerien:
+    valeur: {id: REC-43, libelle: "Taxe sur les billets d'avion relevée", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.4, prudent: 0.5, median: 0.6, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
+  malus_poids:
+    valeur: {id: REC-44, libelle: "Malus au poids dès 1 300 kg (thermiques) et 1 600 kg (électriques)", poste: recettes, moteur: pib, debut: 2028, plein: 2028, fin: 2035,
+             montant: {crise: 0.3, prudent: 0.3, median: 0.3, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "S'éteint avec l'électrification et l'allègement du parc (2035 : 100 % de ventes à zéro émission)."
+  fiscalite_sante:
+    valeur: {id: REC-45, libelle: "Fiscalité de santé : alcool selon l'alcool pur, tabac, sucre, produits transformés", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Hausses non chiffrées par le programme ; recette nette de la baisse de consommation. Économies de santé non comptées (pas de chiffrage sourcé)."
+  cannabis:
+    valeur: {id: REC-47, libelle: "Cannabis légalisé : fiscalité propre", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
+             montant: {crise: 0.5, prudent: 0.7, median: 1.5, optimiste: 2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : CAE, note n° 52 (2019) : ≈ 2 Md€ de recettes fiscales selon le prix et le marché noir restant"
+  fraude:
+    valeur: {id: REC-48, libelle: "Lutte contre la fraude et l'évasion fiscales", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 0.3, prudent: 0.5, median: 1.5, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Économie déclarative : estimée par le modèle (règle), pas de chiffre du programme."
+  superprofits:
+    valeur: {id: REC-34, libelle: "Taxe exceptionnelle sur les superprofits pétroliers et maritimes (2028-2029)", poste: recettes, moteur: fixe, debut: 2028, plein: 2028, fin: 2029,
+             montant: {crise: 0.5, prudent: 0.5, median: 1.0, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+
+  # ---------------------------------------------------------------- prestations
+  garantie_autonomie:
+    valeur: {id: PRE-10, libelle: "Garantie d'autonomie à 50 % du SMIC net (remplace le RSA), dès 18 ans, sans contrepartie", poste: pauvrete, moteur: bloc:pauvrete, debut: 2028, plein: 2029,
+             montant: {crise: 7.5, prudent: 6.6, median: 6.0, optimiste: 5.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : RSA personne seule ≈ 660 € en 2027 ; 50 % du SMIC net après la hausse (≈ 1 585 €) ≈ 790 € : +20 % sur le RSA (13,5 Md€, statu_quo.rsa) = 2,7 ; éligibles en plus (seuil de sortie relevé, sans contrepartie) ≈ +15 % = 2,0 ; 18-24 ans fiscalement indépendants ≈ 200 000 allocataires × 790 € × 12 = 1,9"
+    note: "Indexée sur le SMIC, donc sur les salaires (comme le bloc pauvreté du statu quo). Prime d'activité gardée."
+  apl:
+    valeur: {id: PRE-11, libelle: "APL +10 %", poste: logement, moteur: bloc:logement, debut: 2028, plein: 2028,
+             montant: {crise: 1.7, prudent: 1.7, median: 1.7, optimiste: 1.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Programme, p. 119 ; aides personnelles au logement 16,7 Md€ (statu_quo.aides_logement)"
+  allocations_familiales:
+    valeur: {id: PRE-12, libelle: "Allocations familiales dès le premier enfant", poste: famille, moteur: bloc:famille, debut: 2028, plein: 2028,
+             montant: {crise: 2.8, prudent: 2.8, median: 2.8, optimiste: 2.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Arbitrage : chaque enfant reçoit la moitié du montant de deux enfants (≈ 75 € par mois) ; ≈ 3,3 millions de familles d'un seul enfant de moins de 20 ans (Insee) ; modulation selon les revenus gardée (−10 %)"
+  aah:
+    valeur: {id: PRE-13, libelle: "AAH +250 € par mois", poste: aah_invalidite, moteur: bloc:aah_invalidite, debut: 2028, plein: 2028,
+             montant: {crise: 4.4, prudent: 4.4, median: 4.4, optimiste: 4.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "≈ 1,37 million d'allocataires (DREES, 2025) × 250 € × 12 = 4,1 Md€ ; plafond de ressources relevé d'autant : +5 % d'allocataires"
+  conges_naissance:
+    valeur: {id: PRE-14, libelle: "Congé d'accueil de 16 semaines à 100 % pour les deux parents ; congé de naissance à 80 % et 3 mois", poste: famille, moteur: bloc:famille, debut: 2028, plein: 2029,
+             montant: {crise: 5.5, prudent: 5.5, median: 5.5, optimiste: 5.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "≈ 650 000 naissances (Insee) ; second parent en emploi ≈ 80 % : 520 000 × 84 jours en plus × ≈ 90 € d'indemnité journalière = 3,9 Md€ ; mères à 100 % du salaire : +0,3 ; congé supplémentaire de naissance porté à 80 % et 3 mois : +1,3"
+  assurance_chomage:
+    valeur: {id: PRE-15, libelle: "Assurance chômage : réformes de 2019 à 2025 abrogées, allocations indexées sur l'inflation", poste: chomage, moteur: bloc:chomage, debut: 2028, plein: 2029,
+             montant: {crise: 6.5, prudent: 6.5, median: 6.5, optimiste: 6.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : Unédic, effets des réformes de 2019 (salaire journalier de référence), 2023 (modulation de la durée) et 2025 : ≈ 6 à 7 Md€ par an d'économies en régime de croisière"
+    note: "Effet des durées plus longues sur le chômage non compté (prudent : le compter ; à ajouter au bloc emploi)."
+  securite_sociale_pro:
+    valeur: {id: PRE-16, libelle: "Sécurité sociale professionnelle : salaire garanti deux ans dans les secteurs exposés", poste: chomage, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 1.5, prudent: 1.0, median: 0.8, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  tzcld:
+    valeur: {id: PRE-17, libelle: "Garantie d'emploi à 55 ans (Territoires zéro chômeur)", poste: autres, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 1.2, prudent: 1.0, median: 0.8, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 150 000 chômeurs de longue durée de 55 ans et plus, recours 30 % ; coût net ≈ 18 000 € par emploi (Dares, évaluation de TZCLD)"
+  cheque_energie:
+    valeur: {id: PRE-18, libelle: "Chèque énergie remplacé par un crédit d'impôt automatique et élargi", poste: autres, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.5, prudent: 0.5, median: 0.5, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  jeunes:
+    valeur: {id: PRE-19/20, libelle: "Jeunes : bourses, CVEC supprimée, stages et alternants rémunérés, permis ; ADA relevée", poste: autres, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 1.1, prudent: 1.1, median: 1.1, optimiste: 1.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  aidants_apa:
+    valeur: {id: PRE-21, libelle: "Aidants rémunérés, APA à domicile revalorisée", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2029,
+             montant: {crise: 1.0, prudent: 1.0, median: 1.0, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  ase_25_ans:
+    valeur: {id: PRE-22, libelle: "Jeunes sortant de l'aide sociale à l'enfance accompagnés jusqu'à 25 ans", poste: collectivites, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.3, median: 0.3, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  conge_climatique:
+    valeur: {id: PRE-03, libelle: "Congé climatique de 5 jours (moitié Sécurité sociale)", poste: autres, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.1, prudent: 1.1, median: 1.1, optimiste: 1.1}, hausse_2060: 2.0}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Hypothèse : 1 jour pris en moyenne en 2029, 2 en 2060 (réchauffement) ; 20 millions de salariés × ≈ 110 € par jour × 50 % (part de la Sécurité sociale)"
+
+  # ---------------------------------------------------------------- retraites (hors âge, calculé)
+  minimum_vieillesse:
+    valeur: {id: RET-03, libelle: "ASPA et minimum contributif portés au seuil de pauvreté", poste: retraites, moteur: bloc:retraites, debut: 2028, plein: 2032,
+             montant: {crise: 3.5, prudent: 3.5, median: 3.5, optimiste: 3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ASPA ≈ 1 040 € (2026) contre seuil de pauvreté ≈ 1 290 € (Insee, 60 % du niveau de vie médian) : +25 % pour ≈ 730 000 allocataires (≈ 4 Md€) et nouveaux éligibles : +2,0 ; minimum contributif relevé : +1,5"
+  penibilite:
+    valeur: {id: RET-02, libelle: "Quatre critères de pénibilité rétablis, retraite à 60 ans pour les carrières longues et pénibles", poste: retraites, moteur: bloc:retraites, debut: 2028, plein: 2035,
+             montant: {crise: 1.5, prudent: 1.5, median: 1.5, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  sous_indexation:
+    valeur: {id: RET-04, libelle: "Hautes pensions sous-indexées (inflation − 0,5 point au-dessus de 2 000 €, 2028-2032)", poste: retraites, moteur: decroit_4, debut: 2028, plein: 2032,
+             montant: {crise: -3.5, prudent: -3.5, median: -3.5, optimiste: -3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Arbitrage (le programme ne donne ni seuil ni taux) : pensions au-dessus de 2 000 € ≈ 150 Md€ (DREES), 0,5 point par an pendant cinq ans"
+    note: "L'économie s'éteint ensuite au rythme des décès de ces retraités (−4 % par an)."
+  retraites_agricoles:
+    valeur: {id: RET-05, libelle: "Retraites agricoles et droits familiaux améliorés", poste: retraites, moteur: bloc:retraites, debut: 2028, plein: 2030,
+             montant: {crise: 0.5, prudent: 0.5, median: 0.5, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+
+  # ---------------------------------------------------------------- santé
+  franchises:
+    valeur: {id: SAN-01, libelle: "Franchises médicales et participations forfaitaires supprimées", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2028,
+             montant: {crise: 2.5, prudent: 2.5, median: 2.5, optimiste: 2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 2,5 Md€ après le doublement de 2024 (Assurance maladie)"
+  soins_100:
+    valeur: {id: SAN-01, libelle: "Soins essentiels à 100 % (ticket modérateur des soins de ville, arbitrage)", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2030,
+             montant: {crise: 9.0, prudent: 8.8, median: 8.0, optimiste: 7.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ticket modérateur des soins de ville pris en charge par les complémentaires ≈ 8 Md€ (DREES, comptes de la santé) ; volume +10 % en prudent ; gains de gestion en optimiste (HCAAM, 2021)"
+    note: "Les cotisations des complémentaires baissent d'autant pour les ménages : pas d'effet compté sur la consommation (prudent)."
+  depassements:
+    valeur: {id: SAN-02, libelle: "Dépassements limités, spécialités peu valorisées revalorisées", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2029,
+             montant: {crise: 0.5, prudent: 0.5, median: 0.5, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  centres_sante:
+    valeur: {id: SAN-03, libelle: "2 000 centres de santé d'ici 2030", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2030,
+             montant: {crise: 0.8, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Hypothèse : déficit d'exploitation ≈ 0,3 M€ par centre et par an (IGAS, centres de santé) et investissement ≈ 2 Md€ étalé"
+  sante_scolaire:
+    valeur: {id: SAN-04, libelle: "Santé scolaire : 7 500 infirmiers, postes vacants pourvus, +500 € en début de carrière", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 0.6, prudent: 0.6, median: 0.6, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  hopital:
+    valeur: {id: SAN-05, libelle: "Hôpital : recrutements (+0,5 point de masse salariale par an, 2028-2032)", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 2.0, prudent: 2.0, median: 2.0, optimiste: 2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Arbitrage (aucun chiffre) : masse salariale des hôpitaux publics ≈ 80 Md€ (coût employeur) ; les hausses de salaire sont dans FP-02"
+  grand_age:
+    valeur: {id: SAN-06, libelle: "Ehpad : taux d'encadrement relevé (≈ +60 000 postes)", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 2.7, prudent: 2.7, median: 2.7, optimiste: 2.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Hypothèse : +0,1 ETP par résident pour ≈ 600 000 résidents (DREES) × 45 000 € (coût employeur)"
+  prevention:
+    valeur: {id: SAN-07, libelle: "Prévention, santé mentale, activité physique adaptée", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2029,
+             montant: {crise: 0.5, prudent: 0.5, median: 0.5, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  medicaments:
+    valeur: {id: SAN-08, libelle: "Prix des médicaments les plus coûteux renégociés", poste: sante, moteur: bloc:sante, debut: 2028, plein: 2030,
+             montant: {crise: 0.0, prudent: -0.3, median: -1.0, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Économie déclarative estimée par le modèle (règle)."
+  vss:
+    valeur: {id: SAN-09, libelle: "Loi intégrale contre les violences sexistes et sexuelles (3 Md€ par an)", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 3.0, prudent: 3.0, median: 3.0, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Programme, p. 133 (« dotée de 3 milliards d'euros ») ; arbitrage : par an (besoin estimé à 2,6 Md€ par an par la Fondation des femmes)"
+
+  # ---------------------------------------------------------------- fonction publique
+  point_indice:
+    valeur: {id: FP-01, libelle: "Point d'indice indexé sur l'inflation (rattrapage du gel de 2027)", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2028, fp: true,
+             montant: {crise: 2.8, prudent: 2.8, median: 2.8, optimiste: 2.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : traitement indiciaire ≈ 55 % du coût des agents (390 Md€) × inflation de 2027 (1,3 %, inflation.base)"
+    note: "Ensuite, le statu quo fait déjà suivre les salaires (productivité) aux rémunérations publiques : rien de plus compté."
+  remunerations_publiques:
+    valeur: {id: FP-02, libelle: "+10 % pour les catégories B et C et une partie des A, enseignants +15 %, chercheurs +10 %", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2032, fp: true,
+             montant: auto}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : coût des agents (390 Md€) × parts de masse (tondelier_fp.parts_masse) × hausses : C et B +10 %, enseignants +15 %, autres A +10 % pour la moitié (« qui ont perdu ») ; réparti entre l'État, les collectivités et les hôpitaux selon statu_quo.versants_fonction_publique ; pensions des fonctionnaires relevées pour les départs suivants"
+  classes:
+    valeur: {id: FP-03, libelle: "Classes de primaire à 19 élèves et à 12 en éducation prioritaire", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 2.3, prudent: 2.3, median: 2.3, optimiste: 2.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : élèves du primaire −13 % d'ici 2032 (Insee) ; postes gardés au lieu de baisser avec l'élasticité de 0,5 du statu quo : ≈ 6,5 % des ≈ 20 Md€ du primaire public = 1,3 ; 12 élèves étendus du CE2 au CM2 en REP : ≈ 18 000 postes = 1,0"
+  aesh:
+    valeur: {id: FP-04, libelle: "AESH titularisés, personnels éducatifs renforcés", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 1.4, prudent: 1.4, median: 1.4, optimiste: 1.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "144 000 AESH (p. 143) × ≈ 25 000 € ; passage à temps complet pour la moitié : +0,9 ; CPE, AED, assistants sociaux : +0,5"
+  justice:
+    valeur: {id: FP-05, libelle: "Justice : 9 000 magistrats, 10 000 greffiers, 7 000 attachés en dix ans", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2037, fp: true,
+             montant: {crise: 2.1, prudent: 2.1, median: 2.1, optimiste: 2.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "9 000 × 110 000 € + 10 000 × 55 000 € + 7 000 × 55 000 € (coût employeur, hypothèse) + revalorisations des bas salaires 0,2"
+  autres_postes:
+    valeur: {id: FP-06, libelle: "Inspection du travail, DGCCRF, douanes, ONF, ICPE", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 0.3, prudent: 0.3, median: 0.3, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  recherche:
+    valeur: {id: FP-07, libelle: "Recherche : crédits des laboratoires, recrutements, 1 000 chaires", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.6, prudent: 0.6, median: 0.6, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  universites:
+    valeur: {id: FP-08, libelle: "Universités (recrutements) ; 150 000 logements étudiants sur le quinquennat", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.4, prudent: 1.4, median: 1.4, optimiste: 1.4}, apres_2032: 0.5}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "150 000 places × ≈ 100 000 € × 30 % de subvention sur cinq ans = 0,9 par an ; recrutements : 0,5"
+  voie_pro:
+    valeur: {id: FP-09, libelle: "Bac professionnel en 4 ans, EPS renforcée, RASED", poste: etat_missions, moteur: bloc:autres, debut: 2029, plein: 2031, fp: true,
+             montant: {crise: 1.0, prudent: 1.0, median: 1.0, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  trente_deux_heures:
+    valeur: {id: PRE-02, libelle: "32 heures dans les métiers pénibles et de nuit (fonction publique)", poste: sante, moteur: bloc:sante, debut: 2029, plein: 2032, fp: true,
+             montant: {crise: 0.5, prudent: 0.5, median: 0.5, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Dans le privé : incitation par les aides, pas d'obligation : non chiffré."
+
+  # ---------------------------------------------------------------- investissement et missions (paquet 2027 du dossier, puis cibles du programme)
+  adaptation:
+    valeur: {id: MIS-01/07/08, libelle: "Adaptation : Fonds vert, écoles « refuges climatiques », sécurité civile, montée à 7 Md€ en 2032", poste: investissement, moteur: pib, debut: 2028, plein: 2032, depart: 4.16,
+             montant: {crise: 7.0, prudent: 7.0, median: 7.0, optimiste: 7.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Dossier de presse, p. 8 : Fonds vert +1,9 Md€, bâti scolaire 2 Md€ par an dès 2027, sécurité civile 0,26 Md€ (4,16 Md€) ; programme, p. 27 : 7 Md€ par an d'ici 2032"
+  renovation:
+    valeur: {id: MIS-02, libelle: "MaPrimeRénov' : +1,4 Md€ puis 500 000 rénovations performantes par an", poste: investissement, moteur: pib, debut: 2028, plein: 2032, depart: 1.4,
+             montant: {crise: 7.0, prudent: 7.0, median: 6.0, optimiste: 5.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Dossier de presse, p. 8 : +1,4 Md€ pour revenir à 5 Md€ ; hypothèse : 500 000 rénovations performantes × ≈ 20 000 € d'aide ≈ 10 Md€, soit +7 Md€ sur 2026 en 2032 (capacité de la filière)"
+  ferroviaire:
+    valeur: {id: MIS-04, libelle: "Ferroviaire et RER métropolitains : +1,5 Md€, puis loi de programmation", poste: investissement, moteur: pib, debut: 2028, plein: 2032, depart: 1.5,
+             montant: {crise: 3.0, prudent: 3.0, median: 3.0, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Dossier de presse, p. 7 : réseau +1 Md€, RER métropolitains +0,5 Md€ ; hypothèse : +3 Md€ par an en 2032 (Conseil d'orientation des infrastructures, 2023, scénario de planification écologique)"
+  leasing_social:
+    valeur: {id: MIS-03, libelle: "Leasing social : un million de voitures électriques sur le quinquennat", poste: autres, moteur: pib, debut: 2028, plein: 2028, fin: 2032,
+             montant: {crise: 1.0, prudent: 1.0, median: 1.0, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Dossier de presse, p. 7 : +1 Md€"
+  velo_biodiversite_outremer:
+    valeur: {id: MIS-13, libelle: "Plan vélo, plan biodiversité, plan d'urgence outre-mer", poste: autres, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.9, prudent: 1.9, median: 1.9, optimiste: 1.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Dossier de presse, p. 7 : vélo et marche 0,5 (« 0,5M€ » dans le texte, lu 0,5 Md€), biodiversité 1, outre-mer 0,4"
+  outremer_plan:
+    valeur: {id: MIS-13, libelle: "Outre-mer : plan quinquennal d'investissement (écoles, eau, transports)", poste: investissement, moteur: pib, debut: 2028, plein: 2028, fin: 2032,
+             montant: {crise: 0.6, prudent: 0.6, median: 0.6, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  ticket_climat:
+    valeur: {id: MIS-05, libelle: "Ticket climat : abonnement unique aux transports en commun", poste: collectivites, moteur: pib, debut: 2029, plein: 2029,
+             montant: {crise: 1.5, prudent: 1.5, median: 1.5, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : Deutschlandticket ≈ 3 Md€ par an de compensation pour 83 millions d'habitants ; recettes tarifaires des autorités organisatrices perdues en partie"
+  logement_social:
+    valeur: {id: MIS-06, libelle: "Logement social : fin de la RLS, TVA à 5,5 % sur la construction, FNAP abondé", poste: autres, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 2.0, prudent: 2.0, median: 2.0, optimiste: 2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Réduction de loyer de solidarité ≈ 1,3 Md€ ; TVA du logement social de 10 à 5,5 % ≈ 0,4 ; FNAP +0,3"
+  energies_renouvelables:
+    valeur: {id: MIS-10, libelle: "Renouvelables : prêts à taux zéro, fonds chaleur, communautés énergétiques ; aides à l'électrification", poste: autres, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 1.5, prudent: 1.5, median: 1.5, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  agriculture:
+    valeur: {id: MIS-11, libelle: "Agriculture : revenu garanti en transition, aide au maintien bio, transition de l'élevage", poste: autres, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 1.5, prudent: 1.5, median: 1.5, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  services_publics_divers:
+    valeur: {id: MIS-09/12/14/15, libelle: "France Services, cantines, associations, culture, sport, médias, hébergement, indemnisations", poste: autres, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 2.1, prudent: 2.1, median: 2.1, optimiste: 2.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "France Services 0,1 ; cantines et petits-déjeuners 0,3 ; associations, culture, sport, médias 0,8 ; hébergement et logement d'abord 0,8 ; indemnisation des victimes (chlordécone, essais nucléaires, pesticides) 0,2 (Md€)."
+  aide_developpement:
+    valeur: {id: UE-02, libelle: "Aide publique au développement portée à 0,7 % du revenu national en 2032", poste: defense_ue, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 9.1, prudent: 9.1, median: 9.1, optimiste: 9.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Hypothèse : aide de ≈ 0,40 % du revenu national en 2026 après les baisses de 2025-2026 (OCDE, chiffres préliminaires 2025 ≈ 0,4 %) ; +0,30 point × PIB de 3 037 Md€"
+  prive_sous_contrat:
+    valeur: {id: ECO-01, libelle: "Financement public du privé sous contrat ramené à 50 %", poste: etat_missions, moteur: pib, debut: 2029, plein: 2032,
+             montant: {crise: -0.3, prudent: -0.7, median: -1.5, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : financement public du privé sous contrat ≈ 10 à 13 Md€ (Cour des comptes, juin 2023), ≈ 73 % de ses ressources : économie statique ≈ 4 Md€ ; prudent : 30 % des élèves reviennent au public (+3 500 € chacun)"
+  economies_diverses:
+    valeur: {id: ECO-02/04/05, libelle: "Rétention administrative, nouvelles places de prison, achats publics mutualisés", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -0.3, prudent: -0.4, median: -0.9, optimiste: -1.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Économies déclaratives estimées (règle)."

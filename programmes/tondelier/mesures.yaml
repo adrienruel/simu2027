@@ -1,0 +1,1183 @@
+# Programme de Marine Tondelier (Les Écologistes) — mesures à portée budgétaire ou macroéconomique
+#
+# Source principale : « Pour une prospérité écologique — Le nouveau programme des Écologistes », juillet 2026,
+# 208 pages, 557 mesures (vdef-programme-1.pdf). Les numéros de page sont ceux du PDF (identiques à la pagination
+# imprimée). `citation` est un extrait exact du texte, vérifié automatiquement (outils/verifier_citations.py).
+# Sources secondaires (dossiers de presse de la campagne, non lus directement) : `source_secondaire: a_verifier`.
+#
+# Règles appliquées (décisions d'Adrien, novembre 2026) :
+#  - on ne reprend que les mesures, jamais les économies ni les recettes annoncées par le candidat ;
+#  - une économie sans source est estimée en prudent / médian / optimiste (statut economie_declarative) ;
+#  - les montants de dépense inscrits dans le programme (7 Md€ adaptation, 3 Md€ VSS) sont des paramètres de mesure.
+#
+# statut :
+#   chiffrable           paramètres complets dans le texte
+#   hypothese            mesure claire, paramètre(s) manquant(s) : valeur proposée dans `a_fixer`, à valider
+#   economie_declarative économie ou recette affichée sans chiffrage : à estimer par le modèle (3 scénarios)
+#   macro                pas de ligne budgétaire directe : passe par un canal macroéconomique
+#   hors_budget          flux financier ou patrimonial (dette, actifs), hors solde primaire courant
+# poids (indicatif, pour ordonner le codage, à remplacer par le chiffrage du modèle) :
+#   lourd > 5 Md€/an probable ; moyen 1 à 5 ; faible < 1
+# instrument : nom de l'instrument de la bibliothèque de mesures (claude/Multi_programmes.md, point 3).
+
+programme:
+  candidat: Marine Tondelier
+  parti: Les Écologistes
+  document: "Pour une prospérité écologique (juillet 2026)"
+  url: https://lesecologistes.fr/document/3N4JsAEmq6vsx42IITGNZa/vdef-programme-1.pdf
+  date_lecture: 2026-11-05
+  calendrier_general: "pas de calendrier d'ensemble ; « dès 2027 » pour le SMIC, quinquennat 2027-2032 sinon"
+  regle_budgetaire_annoncee: "« pacte fiscal vert » 2027-2032 (LPFP), trajectoire de déficit renégociée, dette « stabilisée » (p. 66, 68)"
+  avertissement: "candidature soumise au référendum interne des adhérents du 10 au 13 décembre 2026"
+
+mesures:
+
+  # ------------------------------------------------------------------ RECETTES : patrimoine et successions
+  - id: REC-01
+    intitule: Taxe Zucman de 2 % sur les patrimoines de plus de 100 M€
+    instrument: isf_ifi
+    parametres: {taux: 0.02, seuil_patrimoine_eur: 100_000_000}
+    calendrier: non précisé (hypothèse 2028, première année fiscale pleine)
+    page: 66
+    citation: "Mettre en place une taxe Zucman de 2 % au-delà de 100 millions d’euros de patrimoine"
+    statut: hypothese
+    poids: moyen
+    a_fixer:
+      - "impôt plancher (2 % de patrimoine moins IR et ISF déjà payés, comme la proposition de loi Zucman) ou impôt additionnel ? proposé : plancher"
+      - "évasion et exil : élasticité de l'assiette (reprendre la fourchette de la littérature, prudent = haut)"
+
+  - id: REC-02
+    intitule: Extension de l'exit tax
+    instrument: isf_ifi
+    parametres: {nature: "extension des conditions, non détaillée"}
+    page: 66
+    citation: "Étendre les conditions de l’exit tax"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["traiter comme réduction de l'élasticité d'exil de REC-01 et REC-03, sans recette propre"]
+
+  - id: REC-03
+    intitule: Rétablissement de l'ISF avec composante climatique (remplace l'IFI)
+    instrument: isf_ifi
+    parametres: {seuil: "non précisé dans le programme", composante_climatique: "modulation selon le caractère vert des actifs"}
+    page: 66
+    citation: "Rétablir l’Impôt sur la Fortune (ISF) en lui ajoutant une composante climatique"
+    statut: hypothese
+    poids: moyen
+    source_secondaire: a_verifier
+    note: "Poligraph (fiche Tondelier) donne un seuil de 1,3 M€, sans doute tiré d'un dossier de campagne"
+    a_fixer:
+      - "barème : proposé = barème de l'ISF 2017 (0,5 % à 1,5 %, seuil 1,3 M€) revalorisé de l'inflation"
+      - "composante climatique : proposé neutre en recette au départ (bonus/malus), effet d'assiette à part"
+      - "cumul avec REC-01 : la taxe Zucman s'impute sur l'ISF (proposé)"
+
+  - id: REC-04
+    intitule: Successions — deux tranches supplémentaires (1 % et 0,1 % les plus riches)
+    instrument: droits_succession
+    parametres: {tranche_1: {seuil_eur: 4_000_000, taux_additionnel: 0.10}, tranche_2: {seuil_eur: 13_000_000, taux_additionnel: 0.10}}
+    page: 66
+    citation: "en ajoutant deux tranches pour les ménages faisant partie du 1 % le plus riche au-delà de 4 millions d’euros et le 0,1 % le plus riche au-delà de 13 millions d’euros"
+    statut: hypothese
+    poids: moyen
+    source_secondaire: a_verifier
+    note: "Taux de +10 % et +10 % donnés par le dossier de presse Budget 2027 (26/08/2026), pas par le programme. Recette annoncée ≈ 15 Md€/an en croisière : NE PAS SAISIR, comparaison seulement."
+    a_fixer:
+      - "assiette : part reçue par héritier (proposé, comme le barème actuel) ou masse successorale"
+      - "le programme dit aussi « barème de taxation progressif unique » : fusion des barèmes par lien de parenté ? proposé : non, tranches ajoutées au barème en ligne directe"
+
+  - id: REC-05
+    intitule: Successions — fin de l'abattement assurance-vie et de la niche Copé
+    instrument: droits_succession
+    parametres: {abattement_assurance_vie: supprimé, niche_cope: supprimée}
+    page: 66
+    citation: "Supprimer l’abattement spécifique aux assurances-vies et la niche Copé sur la plus-value de cession des filiales"
+    statut: chiffrable
+    poids: moyen
+    note: "la niche Copé relève de l'IS (plus-values sur titres de participation) : coder dans is"
+
+  - id: REC-06
+    intitule: Pacte Dutreil plafonné à 50 % au-delà de 50 M€
+    instrument: droits_succession
+    parametres: {abattement_au_dela_50M: 0.50, seuil_eur: 50_000_000}
+    page: 66
+    citation: "Plafonner l’abattement Dutreil à 50 % au-delà de 50 millions d’euros"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["réforme de l'assiette et de la durée de conservation : non détaillée, ignorée"]
+
+  - id: REC-07
+    intitule: Taxation des plus-values latentes à la transmission (fin de la purge)
+    instrument: droits_succession
+    parametres: {perimetre: "héritages au-delà de 4 M€ (dossier de presse)"}
+    page: null
+    source_secondaire: a_verifier
+    note: "absent du programme ; dossier de presse Budget 2027 et Fiscalonline (26/08/2026)"
+    statut: hypothese
+    poids: faible
+
+  - id: REC-08
+    intitule: Une part des droits de succession affectée à la branche autonomie
+    instrument: affectation
+    page: 67
+    citation: "Affecter une partie des droits de succession à la branche autonomie"
+    statut: macro
+    poids: faible
+    note: "transfert interne aux APU, sans effet sur le solde"
+
+  # ------------------------------------------------------------------ RECETTES : impôt sur le revenu
+  - id: REC-10
+    intitule: Tranche d'IR à 60 % au-delà de 250 000 €
+    instrument: ir_bareme
+    parametres: {taux: 0.60, seuil_eur: 250_000}
+    page: 68
+    citation: "Créer une nouvelle tranche à 60 % au-delà de 250 000€ annuels"
+    statut: hypothese
+    poids: moyen
+    a_fixer:
+      - "seuil par part de quotient familial (proposé, comme le barème) ou par foyer"
+      - "articulation avec la CEHR et la contribution différentielle sur les hauts revenus : gardées (proposé)"
+      - "élasticité du revenu imposable des très hauts revenus : prudent = haute"
+
+  - id: REC-11
+    intitule: Baisse de l'IR des tranches les plus basses
+    instrument: ir_bareme
+    page: 68
+    citation: "Diminuer l’impôt sur le revenu pour les plus tranches les plus basses"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["aucun paramètre : proposé = taux de la tranche à 11 % ramené à 9 %, à valider (sinon mesure non chiffrée)"]
+
+  - id: REC-12
+    intitule: Plafonnement global des niches fiscales par foyer ; avantages limités à deux logements
+    instrument: ir_niches
+    page: 68
+    citation: "Plafonner le montant total des niches fiscales par foyer"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["plafond non donné : proposé = plafond actuel (10 000 €) étendu aux niches aujourd'hui hors plafond"]
+
+  - id: REC-13
+    intitule: Suppression de l'abattement de 10 % des retraités
+    instrument: ir_bareme
+    page: 67
+    citation: "Supprimer l’abattement fiscal de 10 % pour les retraités"
+    statut: chiffrable
+    poids: moyen
+
+  - id: REC-14
+    intitule: Défiscalisation des pensions alimentaires pour qui les reçoit (plafond par enfant)
+    instrument: ir_bareme
+    page: 68
+    citation: "Défiscaliser les pensions alimentaires pour les personnes qui les reçoivent"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["plafond par enfant non donné (p. 124) ; symétrie de la déduction chez le payeur : gardée (proposé)"]
+
+  - id: REC-15
+    intitule: Bon public de financement des partis à la place de la réduction d'impôt sur les dons
+    instrument: ir_niches
+    page: 163
+    citation: "Remplacer la déduction fiscale par un bon public"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["montant du bon : proposé = coût actuel de la réduction (neutre)"]
+
+  # ------------------------------------------------------------------ RECETTES : capital
+  - id: REC-20
+    intitule: CSG sur les revenus du capital +3 points (livrets A et LDDS exonérés)
+    instrument: csg
+    parametres: {hausse_points: 3.0, assiette: "revenus du patrimoine et de placement hors livrets réglementés"}
+    page: 68
+    citation: "Augmenter le taux de CSG sur les revenus du capital de 3 points"
+    statut: chiffrable
+    poids: moyen
+
+  - id: REC-21
+    intitule: PFU (flat tax) +3 points
+    instrument: pfu
+    parametres: {hausse_points: 3.0}
+    page: 68
+    citation: "Augmenter la flat tax (Prélèvement Forfaitaire Unique) de 3 points"
+    statut: hypothese
+    poids: moyen
+    a_fixer:
+      - "les 3 points de REC-20 sont-ils les mêmes que ceux-ci (PFU porté par la hausse de CSG) ou s'ajoutent-ils (PFU +6) ? Le texte les présente comme deux mesures : proposé = cumul (part IR du PFU +3, prélèvements sociaux +3)"
+      - "élasticité des dividendes versés (prudent = haute, littérature sur 2013 et 2018)"
+
+  - id: REC-22
+    intitule: Plus-values taxées selon la durée de détention
+    instrument: pfu
+    page: 68
+    citation: "Taxer progressivement les plus-values en fonction de la durée de détention"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["barème non donné : proposé neutre en recette (pas chiffré)"]
+
+  - id: REC-23
+    intitule: Taxe sur les transactions financières portée à 0,7 %, assiette élargie
+    instrument: ttf
+    parametres: {taux: 0.007}
+    page: 68
+    citation: "Augmenter la taxe sur les transactions financières à 0,7 %"
+    statut: hypothese
+    poids: faible
+    a_fixer:
+      - "seuil de capitalisation abaissé (non chiffré) et assiette élargie aux « instruments spéculatifs » : proposé = taux seul"
+      - "élasticité des volumes (prudent = forte baisse des transactions)"
+
+  # ------------------------------------------------------------------ RECETTES : entreprises
+  - id: REC-30
+    intitule: Impôt minimal sur les bénéfices des sociétés de plus de 1 Md€ de chiffre d'affaires, au prorata de l'activité en France
+    instrument: is
+    parametres: {seuil_ca_eur: 1_000_000_000}
+    page: 66
+    citation: "Adopter un impôt minimal sur les bénéfices des sociétés dont le chiffre d’affaires dépasse un milliard d’euros à proportion de l’activité réalisée en France"
+    statut: hypothese
+    poids: moyen
+    a_fixer:
+      - "taux minimal : non donné ; proposé = 25 % effectif (le programme défend un taux minimum de 25 % à l'ONU, p. 67)"
+      - "répartition des bénéfices mondiaux selon l'activité en France : faisabilité juridique (conventions fiscales), prudent = recouvrement partiel"
+
+  - id: REC-31
+    intitule: Taux d'IS modulé selon l'affectation des bénéfices (réinvestissement contre rachats d'actions)
+    instrument: is
+    page: 66
+    citation: "Moduler le taux d’imposition selon l’affectation des bénéfices"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["aucun taux : proposé non chiffré en recette ; canal investissement des entreprises seulement si Adrien fixe un barème"]
+
+  - id: REC-32
+    intitule: Taxe sur les services numériques de 3 à 5 %, étendue au e-commerce et aux data centers
+    instrument: tsn
+    parametres: {taux: 0.05, seuil_ca_eur: 5_000_000_000}
+    page: 66
+    citation: "Relever la taxe sur les services numériques (TSN) de 3 à 5 %"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["le texte « abaisse » le seuil à 5 Md€ de chiffre d'affaires alors que le seuil mondial actuel est plus bas (750 M€) : erreur probable du programme ; proposé = seuils actuels, taux 5 %, assiette élargie non chiffrée"]
+
+  - id: REC-33
+    intitule: Réforme de la surtaxe d'IS et baisse du taux réduit d'IS des PME (compensation du SMIC)
+    instrument: is
+    page: 55
+    citation: "un ajustement à la baisse du taux réduit de l’impôt sur les sociétés et de la taxe sur les salaires"
+    statut: hypothese
+    poids: faible
+    a_fixer:
+      - "taux réduit (15 % aujourd'hui) : nouveau taux non donné ; proposé 10 %"
+      - "surtaxe : « réformer afin d'éviter l'optimisation » (p. 66), pas de prolongation explicite : proposé = statu quo du PLF 2027"
+
+  - id: REC-34
+    intitule: Taxe exceptionnelle sur les superprofits pétrogaziers et du commerce maritime
+    instrument: is
+    page: 66
+    citation: "Adopter une taxe exceptionnelle sur les superprofits de l’industrie pétrogazière et du commerce maritime"
+    statut: economie_declarative
+    poids: faible
+    note: "exceptionnelle : une ou deux années ; assiette (profits au-dessus d'une moyenne) à estimer"
+
+  - id: REC-35
+    intitule: Rétablissement de la CVAE au profit des collectivités
+    instrument: impots_production
+    page: 68
+    citation: "Rétablir la CVAE (Cotisation sur la Valeur Ajoutée des Entreprises)"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "taux : proposé = barème d'avant 2023 (0,75 % maximum) ; la fraction de TVA versée aux collectivités en compensation est-elle reprise ? proposé : oui (effet net sur le solde = recette CVAE)"
+      - "canal coût du capital / investissement (impôt de production)"
+
+  - id: REC-36
+    intitule: Crédit d'impôt recherche recentré sur les PME et ETI
+    instrument: cir
+    page: 67
+    citation: "Recentrer et verdir le Crédit Impôt Recherche sur les PME et ETI"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["proposé = CIR des grandes entreprises supprimé, remplacé à 50 % par des subventions de projets avec laboratoires (p. 97)"]
+
+  - id: REC-37
+    intitule: Exonérations de cotisations au-delà de 1,6 SMIC et sur les heures supplémentaires supprimées ; montants nominalisés et désindexés
+    instrument: allegements_generaux
+    parametres: {plafond_smic: 1.6, heures_sup: "exonération supprimée", indexation: "montants nominaux, non indexés"}
+    page: 67
+    citation: "Supprimer les exonérations de cotisations inutiles car supérieures à 1,6 smic ou concernant les heures supplémentaires"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "interaction avec le SMIC à 2 000 € (PRE-01) : si les allègements sont exprimés en SMIC, ils montent avec lui ; s'ils sont nominalisés au niveau de 2026, le coût du travail au SMIC monte de toute la hausse. Proposé : nominalisés au barème du PLF 2027 en euros"
+      - "réduction d'impôt sur les heures supplémentaires (défiscalisation IR) : gardée ? texte muet, proposé gardée"
+      - "conditionnalité aux hausses de salaires (p. 55, 67-68) : non chiffrée"
+
+  - id: REC-38
+    intitule: Conditionnement des aides aux entreprises (plans de transition, écart de rémunération 1 à 20, contrats de transition)
+    instrument: aides_entreprises
+    page: 67
+    citation: "Subordonner les aides aux entreprises de plus de 250 salarié·es au respect de plans de transition"
+    statut: economie_declarative
+    poids: faible
+    note: "économie = aides non versées faute de respect des conditions ; prudent 0"
+
+  - id: REC-39
+    intitule: Cotisations patronales suspendues sur les premiers salariés des entreprises créées (deux ans, sous un seuil de chiffre d'affaires)
+    instrument: cotisations_employeurs
+    page: 61
+    citation: "Suspendre le paiement des cotisations patronales à l’URSSAF sur les premiers salariés"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["seuil de chiffre d'affaires non donné ; « suspendre » = report ou exonération ? proposé : exonération"]
+
+  # ------------------------------------------------------------------ RECETTES : TVA, énergie, fiscalité écologique et santé
+  - id: REC-40
+    intitule: TVA verte — taux réduits pour la première nécessité et les produits écologiques, taux relevés pour le luxe et les produits nocifs
+    instrument: tva_taux
+    parametres:
+      baisse: [biens de première nécessité, produits biologiques, réparation (électroménager, cycles, chaussures, vêtements), transports publics]
+      hausse: [produits ultra-transformés, restauration à emporter, hôtellerie de luxe, vols domestiques, rénovation non énergétique]
+    page: 67
+    citation: "Adopter une TVA verte différenciée selon l’impact environnemental et sanitaire des produits"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["aucun taux : proposé = baisses à 5,5 % (et transports publics à 5,5 %), hausses à 20 % ; solde à calculer, pas supposé neutre"]
+
+  - id: REC-41
+    intitule: Électricité — accise unifiée avec le gaz, TVA de l'abonnement baissée, tarif progressif
+    instrument: accises_energie
+    page: 16
+    citation: "Diminuer la fiscalité sur l’électricité en unifiant le socle de l’accise pour le gaz et l’électricité en diminuant la TVA sur l’abonnement électrique"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["proposé : TVA de l'abonnement à 5,5 % ; accise électricité et gaz alignées au niveau le plus bas des deux (à valider : le sens de l'unification n'est pas dit)"]
+
+  - id: REC-42
+    intitule: Niches fossiles transformées en aides forfaitaires ; gazole des poids lourds au taux normal ; fin des abattements de TICPE
+    instrument: accises_energie
+    page: 66
+    citation: "Diminuer les niches fiscales fossiles en transformant les taux réduits sur les produits fossiles en aides forfaitaires"
+    statut: hypothese
+    poids: moyen
+    a_fixer:
+      - "gazole routier : « relever progressivement » au taux normal (p. 24) ; proposé sur le quinquennat"
+      - "aides forfaitaires de compensation : part reversée ? proposé 50 % la première année, 0 en 2032"
+
+  - id: REC-43
+    intitule: Fiscalité de l'aérien — TSBA et TVA des billets relevées, kérosène des vols intérieurs, interdiction des vols courts et des jets privés
+    instrument: accises_energie
+    page: 25
+    citation: "Augmenter la fiscalité sur les billets d’avion (Taxe sur les Billets d’Avion ou TSBA et taux de TVA)"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["taux non donnés ; baisse des volumes (vols remplacés par moins de 4 h 30 de train interdits) à déduire de l'assiette"]
+
+  - id: REC-44
+    intitule: Malus au poids dès 1 300 kg (thermiques) et 1 600 kg (électriques), hors familles nombreuses
+    instrument: malus_auto
+    parametres: {seuil_thermique_kg: 1300, seuil_electrique_kg: 1600}
+    page: 66
+    citation: "Déclencher le malus poids à 1300kg pour les véhicules thermiques et"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["barème au kilo : proposé = barème actuel"]
+
+  - id: REC-45
+    intitule: Fiscalité de santé — alcool (taxe selon l'alcool pur), tabac, sucre, produits transformés ; boissons sucrées +1 centime
+    instrument: accises_sante
+    page: 67
+    citation: "en augmentant les taxes sur l’alcool, le tabac, le sucre et les produits transformés"
+    statut: hypothese
+    poids: moyen
+    a_fixer:
+      - "hausses non chiffrées : proposé = alignement des accises sur l'alcool par degré d'alcool pur au niveau des spiritueux, tabac +10 %, taxe soda doublée"
+      - "génération sans tabac (nés en 2014 et après, p. 111) : baisse progressive de l'assiette du tabac"
+      - "canal santé : moindre consommation, dépenses de santé à long terme (comme dans le programme d'Adrien : même méthode, sourcée)"
+
+  - id: REC-46
+    intitule: Taxe sur les bouteilles en plastique ; extension de la TIRUERT au maritime et aux carburants synthétiques ; redevances de dépollution (REP)
+    instrument: fiscalite_environnement
+    page: 67
+    citation: "Créer une taxe sur les bouteilles en plastique"
+    statut: economie_declarative
+    poids: faible
+
+  - id: REC-47
+    intitule: Légalisation du cannabis avec une fiscalité propre
+    instrument: accises_sante
+    page: 184
+    citation: "Assurer la disponibilité, le contrôle qualité et la traçabilité du produit et le doter d’une fiscalité propre"
+    statut: economie_declarative
+    poids: faible
+    note: "recette d'accise et économie de police et de justice : estimer en 3 scénarios (études CAE 2019, Terra Nova)"
+
+  - id: REC-48
+    intitule: Lutte contre la fraude et l'évasion fiscales (moyens de contrôle, DGCCRF +1 000 postes, douanes)
+    instrument: fraude
+    page: 63
+    citation: "Rétablir les 1000 postes d’agents supprimés dans les 15 dernières années"
+    statut: economie_declarative
+    poids: moyen
+    note: "coût des postes = chiffrable (FP) ; recette = à estimer, prudent faible"
+
+  # ------------------------------------------------------------------ COTISATIONS ET CSG
+  - id: COT-01
+    intitule: Cotisation vieillesse +1 point déplafonnée sur la part des salaires au-dessus du plafond
+    instrument: cotisations_vieillesse
+    parametres: {hausse_points: 1.0, assiette: "salaire au-dessus du plafond de la Sécurité sociale"}
+    page: 117
+    citation: "Augmenter d’un point la cotisation retraite déplafonnée pour les salaires supérieurs au plafond de la Sécurité Sociale"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["partage employeur / salarié non dit : proposé 60 / 40 comme la cotisation déplafonnée actuelle"]
+
+  - id: COT-02
+    intitule: Cotisations vieillesse +0,2 point par an pendant le quinquennat
+    instrument: cotisations_vieillesse
+    parametres: {hausse_par_an_points: 0.2, annees: [2028, 2029, 2030, 2031, 2032]}
+    page: 117
+    citation: "Augmenter les cotisations vieillesses de 0,2 point/an pendant le quinquennat"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["+1 point au total en 2032 sur tous les salaires ; partage proposé moitié employeur, moitié salarié ; première hausse 2028 (proposé)"]
+
+  - id: COT-03
+    intitule: Cotisations étendues à l'épargne salariale, l'intéressement, la participation et aux actions gratuites
+    instrument: cotisations_assiette
+    page: 117
+    citation: "Etendre les cotisations à l’épargne salariale, l’intéressement, la participation et l’attribution gratuite d’actions"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["taux : proposé = cotisation vieillesse totale (plafonnée et déplafonnée) ; baisse des versements (élasticité) à fixer"]
+
+  - id: COT-04
+    intitule: CSG +1 point et rendue progressive (équilibre de l'assurance maladie)
+    instrument: csg
+    parametres: {hausse_points: 1.0}
+    page: 67
+    citation: "en rendant progressive la Contribution Sociale Généralisée (CSG) et en l’augmentant d’un point"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "+1 point sur toutes les assiettes (activité, remplacement, capital) en plus des +3 sur le capital (REC-20) ? proposé : oui"
+      - "progressivité : barème non donné ; proposé neutre en recette (redistribution seulement, pour OpenFisca)"
+
+  - id: COT-05
+    intitule: Cotisation des diffuseurs +5 % pour une assurance-chômage des artistes-auteurs
+    instrument: cotisations_employeurs
+    page: 99
+    citation: "financé par une augmentation de 5 % de la cotisation des diffuseurs"
+    statut: hypothese
+    poids: faible
+    note: "mesure autofinancée par construction : coder recette et dépense égales"
+
+  - id: COT-06
+    intitule: Bonus-malus renforcé sur les contrats courts, intérim contributeur au déficit de l'assurance chômage
+    instrument: cotisations_chomage
+    page: 58
+    citation: "renforcement du bonus-malus sur les cotisations chômage"
+    statut: economie_declarative
+    poids: faible
+
+  # ------------------------------------------------------------------ SALAIRES ET TEMPS DE TRAVAIL (effets privés)
+  - id: PRE-01
+    intitule: SMIC à 2 000 € brut par mois dès 2027
+    instrument: smic
+    parametres: {smic_brut_mensuel_eur: 2000, annee: 2027}
+    calendrier: 2027
+    page: 55
+    citation: "Passer le salaire minimum à 2000€ brut par mois dès 2027"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "2 000 € courants de 2027, puis revalorisation légale (proposé)"
+      - "diffusion aux salaires proches du SMIC (proposé : jusqu'à 1,6 SMIC, en décroissant, Insee/Dares)"
+      - "effet sur l'emploi : élasticité de la demande de travail peu qualifié (prudent = haute), avec REC-37 (allègements)"
+      - "effets budgétaires induits : prime d'activité, garantie d'autonomie (PRE-10), AAH, minima indexés"
+
+  - id: PRE-02
+    intitule: 32 heures sans perte de salaire dans les métiers pénibles ou de nuit
+    instrument: temps_travail
+    page: 57
+    citation: "Passer aux 32 heures sans perte de salaire dans les métiers pénibles ou de nuit"
+    statut: hypothese
+    poids: moyen
+    a_fixer:
+      - "« en y conditionnant les aides aux entreprises » : incitation, pas obligation ; proposé = obligation dans la fonction publique (hôpital de nuit), incitation dans le privé"
+      - "effectifs concernés (Dares, Sumer) et embauches compensatrices dans le public"
+
+  - id: PRE-03
+    intitule: Congé climatique de 5 jours par an, financé à parité par les employeurs et la Sécurité sociale
+    instrument: conges
+    parametres: {jours_max: 5, financement: {employeurs: 0.5, securite_sociale: 0.5}}
+    page: 57
+    citation: "Le financement serait assuré à parité par les employeurs et par la Sécurité sociale"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["jours réellement pris (déclenchement par alerte climatique) : proposé 1 jour en moyenne, en hausse avec le réchauffement"]
+
+  - id: PRE-04
+    intitule: Congé de deuil porté à 4 jours (privé et public)
+    instrument: conges
+    page: 130
+    citation: "Passer à 4 jours le nombre de congés de deuil"
+    statut: chiffrable
+    poids: faible
+
+  # ------------------------------------------------------------------ PRESTATIONS
+  - id: PRE-10
+    intitule: Garantie d'autonomie à la place du RSA, à 50 % du SMIC net, indexée sur le SMIC, dès 18 ans pour les personnes fiscalement indépendantes, sans contrepartie d'activité
+    instrument: rsa
+    parametres: {montant: "0,5 × SMIC net mensuel", indexation: smic, age_min: 18, condition_18_24: "indépendance fiscale"}
+    page: 119
+    citation: "Augmenter son montant à 50 % du Smic net et l’indexer sur son évolution"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "montant de base pour une personne seule ; échelle par composition familiale : proposé = celle du RSA"
+      - "SMIC net de référence : celui d'après PRE-01 (proposé)"
+      - "18-24 ans fiscalement indépendants : population éligible et recours (proposé : comme le RSA jeunes actifs, Drees)"
+      - "articulation avec la prime d'activité : gardée (proposé), avec la pente actuelle"
+      - "recentralisation du versement (p. 68) : classement collectivités → État, neutre"
+
+  - id: PRE-11
+    intitule: APL revalorisées de 10 %, ouvertes aux résidents mobiles et à l'habitat léger
+    instrument: aides_logement
+    parametres: {hausse: 0.10}
+    page: 119
+    citation: "Revaloriser les APL de 10 %"
+    statut: chiffrable
+    poids: moyen
+    note: "mécanisme anti-répercussion sur les loyers : supposé efficace en prudent ? proposé : 30 % de répercussion en prudent"
+
+  - id: PRE-12
+    intitule: Allocations familiales d'un même montant dès le premier enfant ; majoration dès 14 ans
+    instrument: allocations_familiales
+    page: 124
+    citation: "Réformer les allocations familiales pour attribuer un même montant dès le premier enfant"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["montant par enfant : proposé = montant actuel du 2e enfant versé pour chaque enfant (la lecture « à budget constant » serait une baisse pour les familles nombreuses ; à trancher)"]
+
+  - id: PRE-13
+    intitule: AAH +250 € par mois, intégrée à la branche autonomie
+    instrument: aah
+    parametres: {hausse_mensuelle_eur: 250}
+    page: 143
+    citation: "Augmenter de 250€ l’Allocation aux Adultes Handicapés (AAH)"
+    statut: chiffrable
+    poids: moyen
+
+  - id: PRE-14
+    intitule: Congé d'accueil de l'enfant de 16 semaines payé à 100 % du salaire, obligatoire pour les deux parents ; congé supplémentaire de naissance à 80 % et 3 mois par parent
+    instrument: conges_parentaux
+    parametres: {semaines_par_parent: 16, remplacement: 1.0, conge_supplementaire: {taux: 0.80, mois_par_parent: 3}}
+    page: 124
+    citation: "16 semaines rémunérées à 100 % du salaire mensuel de base"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["plafond d'indemnisation (aujourd'hui plafond de la Sécurité sociale) : gardé (proposé) ; recours au congé supplémentaire"]
+
+  - id: PRE-15
+    intitule: Assurance chômage — réformes du calcul de l'ARE abrogées, allocations indexées sur l'inflation
+    instrument: assurance_chomage
+    page: 58
+    citation: "Abroger les réformes régressives adoptées lors des deux derniers quinquennats notamment celle sur le calcul de l’Allocation de Retour à l’Emploi"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["périmètre : salaire journalier de référence 2021, contracyclicité 2023, durées 2025 ; proposé = toutes (estimations Unédic des réformes)"]
+
+  - id: PRE-16
+    intitule: Sécurité sociale professionnelle — salaire garanti deux ans en cas de perte d'emploi dans les secteurs exposés à la transition
+    instrument: assurance_chomage
+    page: 55
+    citation: "Garantir un salaire équivalent en cas de perte d’emploi pendant deux ans dans les secteurs les plus exposés"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["effectifs (raffineries, poids lourds, garages…) et rythme de destruction d'emplois de la transition"]
+
+  - id: PRE-17
+    intitule: Garantie d'emploi à 55 ans par l'extension de Territoires zéro chômeur de longue durée
+    instrument: emploi_aide
+    page: 57
+    citation: "Instaurer une garantie d’emploi pour les chômeurs·ses à 55 ans"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["coût net par emploi : à caler sur l'évaluation Dares / comité scientifique de TZCLD, net des prestations évitées", "nombre de chômeurs de 55 ans et plus éligibles et montée en charge"]
+
+  - id: PRE-18
+    intitule: Chèque énergie remplacé par un crédit d'impôt automatique, élargi à toutes les personnes en précarité
+    instrument: cheque_energie
+    page: 119
+    citation: "Remplacer les chèques énergies par un crédit d’impôt ciblé vers l’ensemble des personnes en situation de précarité et versé automatiquement"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["le recours passe à ≈ 100 % : coût proposé = montant actuel × (1 / taux de recours actuel)"]
+
+  - id: PRE-19
+    intitule: Jeunes — bourses revalorisées, CVEC supprimée, stages rémunérés, alternants de plus de deux ans au SMIC, permis payé, emplois jeunes
+    instrument: jeunesse
+    page: 126
+    citation: "Supprimer la Contribution de Vie Étudiante et de Campus (CVEC)"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["revalorisation des bourses non chiffrée : proposé +10 % ; CVEC (≈ 0,15 Md€) : chiffrable"]
+
+  - id: PRE-20
+    intitule: Allocation pour demandeur d'asile augmentée et indexée ; droit au travail dès le dépôt
+    instrument: asile
+    page: 178
+    citation: "Augmenter et indexer sur l’inflation l’Allocation pour Demandeurs d’Asile"
+    statut: hypothese
+    poids: faible
+    a_fixer: ["hausse non chiffrée ; le droit au travail réduit la durée d'ADA (effet inverse)"]
+
+  - id: PRE-21
+    intitule: Aidants — congé de proche aidant rémunéré et revalorisé ; APA à domicile revalorisée
+    instrument: autonomie
+    page: 128
+    citation: "Remplacer l’indemnisation du congé de proche aidant par une rémunération revalorisée"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["niveau de rémunération et revalorisation de l'APA non donnés"]
+
+  - id: PRE-22
+    intitule: Jeunes sortant de l'ASE accompagnés jusqu'à 25 ans
+    instrument: protection_enfance
+    page: 135
+    citation: "Étendre les dispositifs de soutien pour une prise en charge obligatoire des enfants placés jusqu’à 25 ans"
+    statut: hypothese
+    poids: faible
+
+  # ------------------------------------------------------------------ RETRAITES
+  - id: RET-01
+    intitule: Retour immédiat à 62 ans (abrogation de la réforme de 2023)
+    instrument: retraites_age
+    parametres: {age_legal: 62, calendrier: immédiat}
+    page: 116
+    citation: "Abroger l’âge légal de départ à la retraite à 64 ans (réforme Borne) pour revenir immédiatement à un âge minimum à 62 ans"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "durée d'assurance pour le taux plein (43 ans de la réforme Touraine) : gardée (proposé) ; le texte ne parle que de l'âge"
+      - "année d'entrée : 2028 (première loi de financement du quinquennat), proposé"
+      - "statu quo du PLF 2027 : suspension de la réforme jusqu'en 2028 à prendre comme référence"
+
+  - id: RET-02
+    intitule: Retraite à 60 ans pour les carrières longues et pénibles ; quatre critères de pénibilité rétablis et un critère psychosocial
+    instrument: retraites_age
+    page: 117
+    citation: "Réintroduire les 4 critères ouvrant le droit à une retraite anticipée qui ont été supprimés en 2017"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["effectifs exposés (Dares, Sumer 2017) et taux de départ anticipé effectif"]
+
+  - id: RET-03
+    intitule: Minimum contributif et ASPA portés progressivement au seuil de pauvreté
+    instrument: minimum_vieillesse
+    page: 117
+    citation: "Augmenter le minimum contributif (Mico) et l’allocation spécifique aux personnes âgées (ASPA) pour atteindre progressivement le seuil de pauvreté"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["seuil de pauvreté à 60 % du niveau de vie médian (proposé) ; « progressivement » : linéaire sur le quinquennat (proposé)"]
+
+  - id: RET-04
+    intitule: Indexation différenciée des pensions, sous-indexation des plus hautes
+    instrument: retraites_indexation
+    page: 67
+    citation: "Sous-indexer les plus hautes retraites"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["seuil et sous-indexation non donnés : proposé = pensions au-dessus de 2 fois le minimum contributif indexées à l'inflation moins 0,5 point"]
+
+  - id: RET-05
+    intitule: Retraite agricole réformée, droits familiaux et conjugaux unifiés vers le haut
+    instrument: retraites_droits
+    page: 117
+    citation: "Réformer le système de retraite agricole et améliorer les pensions des femmes de ce régime"
+    statut: hypothese
+    poids: faible
+
+  # ------------------------------------------------------------------ SANTÉ
+  - id: SAN-01
+    intitule: Soins essentiels remboursés à 100 %, franchises supprimées, mutuelles cantonnées aux soins optionnels
+    instrument: sante_remboursement
+    page: 111
+    citation: "Garantir un remboursement total des soins essentiels nécessaires au maintien de l’autonomie et de la qualité de vie par la prise en charge à 100 % par l’Assurance maladie"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "franchises et participations forfaitaires : chiffrable (rendement à lire dans le PLFSS 2027)"
+      - "« soins essentiels » : périmètre non défini ; proposé = ticket modérateur supprimé sur les soins de ville hors dépassements (Drees : transfert des complémentaires vers l'assurance maladie)"
+      - "effet volume (moindre reste à charge) : élasticité prudente"
+
+  - id: SAN-02
+    intitule: Dépassements d'honoraires limités à 50 % du tarif et interdits pour la moitié des ménages les moins aisés ; tarifs des spécialités peu valorisées relevés
+    instrument: sante_tarifs
+    page: 111
+    citation: "en limitant les dépassements d’honoraires à 50 % du tarif de la Sécurité Sociale"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["revalorisation des tarifs (psychiatrie, pédiatrie, gynécologie, dermatologie) : montant non donné"]
+
+  - id: SAN-03
+    intitule: 2 000 centres de santé d'ici 2030
+    instrument: sante_offre
+    parametres: {nombre: 2000, horizon: 2030}
+    page: 114
+    citation: "Créer 2 000 nouveaux centres de santé d’ici 2030"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["coût de fonctionnement net d'un centre (déficit d'exploitation moyen, IGAS) et investissement"]
+
+  - id: SAN-04
+    intitule: Santé scolaire et universitaire — 800 médecins et 1 000 psychologues (postes vacants), 7 500 infirmiers, +500 € en début de carrière, un centre de santé par université
+    instrument: fonction_publique_effectifs
+    parametres: {infirmiers: 7500, medecins_postes_vacants: 800, psychologues_postes_vacants: 1000, hausse_debut_carriere_eur: 500}
+    page: 112
+    citation: "Recruter 7500 infirmier·es scolaires"
+    statut: chiffrable
+    poids: faible
+    note: "les postes vacants sont déjà budgétés : coût = rémunération en plus seulement si on suppose qu'ils sont pourvus grâce à la hausse"
+
+  - id: SAN-05
+    intitule: Hôpital — recrutements, salaires, dette transférée à la CADES
+    instrument: sante_hopital
+    page: 114
+    citation: "Alléger les charges des hôpitaux publics en transférant leur dette à la CADES"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "recrutements et hausses de salaires : aucun chiffre ; proposé = trajectoire de la masse salariale hospitalière +1 point par an sur le quinquennat (à valider)"
+      - "dette des hôpitaux (≈ 30 Md€) vers la CADES : hors budget (consolidé APU), mais allongement de la CADES ou CRDS à décider"
+
+  - id: SAN-06
+    intitule: Grand âge — service public de la dépendance, taux d'encadrement des Ehpad, places, revalorisations
+    instrument: autonomie
+    page: 128
+    citation: "Créer un cahier des charges strict pour tous les établissements avec une amélioration du taux d’encadrement et une revalorisation des rémunérations"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["taux d'encadrement cible non donné ; proposé = cible du rapport Libault (2019), à sourcer avant saisie"]
+
+  - id: SAN-07
+    intitule: Prévention, santé mentale, AME garantie, activité physique adaptée remboursée
+    instrument: sante_prevention
+    page: 111
+    citation: "Généraliser la prise en charge de l’activité physique adaptée par la Sécurité Sociale"
+    statut: hypothese
+    poids: moyen
+    note: "AME garantie = statu quo (pas de coût) ; extension à Mayotte (p. 153) : faible"
+
+  - id: SAN-08
+    intitule: Renégociation du prix des médicaments les plus coûteux (anticancéreux), pôle public du médicament
+    instrument: sante_medicament
+    page: 67
+    citation: "Renégocier le prix des médicaments les plus coûteux en particulier les anticancéreux"
+    statut: economie_declarative
+    poids: moyen
+    note: "économie à estimer en 3 scénarios, prudent faible ; pas de reprise d'un chiffre déclaratif"
+
+  - id: SAN-09
+    intitule: Loi intégrale contre les violences sexistes et sexuelles dotée de 3 Md€
+    instrument: missions
+    parametres: {montant_eur: 3_000_000_000}
+    page: 133
+    citation: "Adopter une loi intégrale pour lutter contre les violences sexistes et sexuelles (VSS) dotée de 3 milliards d’euros"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["3 Md€ par an ou sur le quinquennat ? Le texte ne le dit pas ; la Fondation des femmes chiffre le besoin à 2,6 Md€ par an : proposé = par an, en montée sur 3 ans"]
+
+  # ------------------------------------------------------------------ FONCTION PUBLIQUE
+  - id: FP-01
+    intitule: Point d'indice indexé sur l'inflation
+    instrument: point_indice
+    page: 55
+    citation: "l’indexation du point d’indice des fonctionnaires sur l’inflation"
+    statut: chiffrable
+    poids: lourd
+    note: "écart au statu quo du PLF 2027 (gel en 2027) puis à sa trajectoire ; toutes les fonctions publiques"
+
+  - id: FP-02
+    intitule: +10 % pour les catégories C et B et les catégories A ayant perdu du pouvoir d'achat ; enseignants +15 % sur le quinquennat ; chercheurs +10 % dès la première année
+    instrument: remunerations_publiques
+    parametres: {categories_C_B: 0.10, categories_A_concernees: 0.10, enseignants: {hausse: 0.15, sur_annees: 5}, chercheurs: {hausse: 0.10, des: premiere_annee}}
+    page: 55
+    citation: "Augmenter de 10 % la rémunération des catégories C et B et des catégories A qui ont perdu en pouvoir d’achat ces 20 dernières années"
+    statut: hypothese
+    poids: lourd
+    a_fixer:
+      - "calendrier des +10 % : non dit ; proposé = sur le quinquennat, linéaire"
+      - "catégories A « qui ont perdu » : proposé = toutes les A sauf les corps d'encadrement supérieur (à valider)"
+      - "hausse en plus de l'indexation FP-01 (proposé : oui, hausse réelle)"
+      - "hôpitaux et collectivités compris (proposé : oui, les trois versants)"
+
+  - id: FP-03
+    intitule: Classes de primaire à 19 élèves en 2032 et 12 en éducation prioritaire
+    instrument: fonction_publique_effectifs
+    parametres: {eleves_par_classe_2032: 19, eleves_par_classe_rep: 12}
+    page: 90
+    citation: "en réduisant la taille des classes à 19 élèves en 2032 et à 12 élèves dans les établissements en réseau d’éducation prioritaire"
+    statut: chiffrable
+    poids: moyen
+    note: "postes = élèves du primaire projetés (démographie du noyau) / 19, moins les postes actuels ; la baisse du nombre d'élèves en finance une partie"
+
+  - id: FP-04
+    intitule: Titularisation des 144 000 AESH et des contractuels ; personnels éducatifs renforcés
+    instrument: fonction_publique_statut
+    parametres: {aesh: 144000}
+    page: 143
+    citation: "en formant et titularisant les 144 000 AESH"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["temps de travail des AESH titularisés (temps complet ?) : proposé = passage à temps complet pour moitié"]
+
+  - id: FP-05
+    intitule: Justice — 9 000 magistrats sur dix ans, 10 000 greffiers, 7 000 attachés de justice ; salaires les plus bas à la moyenne européenne
+    instrument: fonction_publique_effectifs
+    parametres: {magistrats: {postes: 9000, sur_annees: 10}, greffiers: 10000, attaches: 7000}
+    page: 167
+    citation: "Créer 9000 postes de magistrats sur dix ans ainsi que 10 000 postes de greffiers et 7000 postes attachés de justice"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["greffiers et attachés : même horizon de dix ans (proposé)"]
+
+  - id: FP-06
+    intitule: Autres créations de postes — 200 inspecteurs du travail, 1 000 à la DGCCRF, douanes, ONF, ICPE, police de proximité, travail social
+    instrument: fonction_publique_effectifs
+    parametres: {inspecteurs_travail: 200, dgccrf: 1000}
+    page: 57
+    citation: "Créer 200 postes d’inspecteur·ices du travail"
+    statut: hypothese
+    poids: faible
+    note: "ONF « milliers de postes » (p. 35), police de proximité (p. 164) : non chiffrés"
+
+  - id: FP-07
+    intitule: Recherche — personnels +10 % la première année, budgets des laboratoires en proportion, recrutements de chercheurs, 1 000 chaires
+    instrument: missions
+    page: 96
+    citation: "une augmentation significative des salaires des personnels de recherche (+10 % dès la première année)"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["« augmenter proportionnellement le budget de fonctionnement » : proposé +10 % des crédits de fonctionnement des laboratoires"]
+
+  - id: FP-08
+    intitule: Universités — financement « durable et suffisant », recrutements BIATSS et enseignants-chercheurs ; 150 000 logements étudiants sur le quinquennat
+    instrument: missions
+    parametres: {logements_etudiants: 150000}
+    page: 126
+    citation: "Construire 150 000 places en logements étudiants et foyers de jeunes travailleurs sur le quinquennat"
+    statut: hypothese
+    poids: moyen
+
+  - id: FP-09
+    intitule: Heures d'enseignement en plus — bac professionnel en 4 ans, EPS à 4 h au collège et 3 h au lycée, RASED rétablis
+    instrument: fonction_publique_effectifs
+    page: 91
+    citation: "en rétablissant le baccalauréat professionnel en 4 ans"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["une année de lycée professionnel en plus ≈ un quart des effectifs de la voie pro en élèves, donc en postes ; heures d'EPS en plus converties en postes (proposé)"]
+
+  # ------------------------------------------------------------------ INVESTISSEMENT ET MISSIONS
+  - id: MIS-01
+    intitule: Plan national d'adaptation au changement climatique doté de 7 Md€ par an d'ici 2032
+    instrument: investissement_public
+    parametres: {montant_annuel_eur: 7_000_000_000, atteint_en: 2032}
+    page: 27
+    citation: "Doter de 7 milliards d’euros par an d'ici 2032 le Plan national d’adaptation au changement climatique"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["montée linéaire de 2027 à 2032 (proposé) ; crédits actuels du plan à déduire (montant additionnel = 7 Md€ moins l'existant)"]
+
+  - id: MIS-02
+    intitule: Rénovation — 500 000 rénovations performantes par an via MaPrimeRénov', reste à charge nul pour les modestes ; sortie du fioul en 2032 (300 000 ménages par an)
+    instrument: investissement_public
+    parametres: {renovations_performantes_par_an: 500000, changements_chauffage_par_an: 300000}
+    page: 21
+    citation: "en atteignant 500 000 rénovations performantes par an via MaPrimeRénov’"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["aide moyenne par rénovation performante : à caler sur les données Anah (rénovations d'ampleur), prise en charge à 100 % pour les très modestes ; montée en charge (capacité de la filière)"]
+
+  - id: MIS-03
+    intitule: Leasing social d'un million de voitures électriques sur le quinquennat
+    instrument: subventions
+    parametres: {vehicules: 1_000_000, periode: "2027-2032"}
+    page: 23
+    citation: "Créer une offre de location sociale (leasing social) d’un million de véhicules sur le quinquennat"
+    statut: hypothese
+    poids: moyen
+    source_secondaire: a_verifier
+    note: "Poligraph cite 1 Md€ en 2027 (dossier de campagne)"
+    a_fixer: ["aide par véhicule : à caler sur les éditions 2024 et 2025 du leasing social (part financée par les CEE, hors budget)"]
+
+  - id: MIS-04
+    intitule: Ferroviaire — loi de programmation à 10 ans (90 % de la population à moins de 30 minutes d'une gare desservie), petites lignes, RER métropolitains, trains de nuit
+    instrument: investissement_public
+    page: 25
+    citation: "Adopter une loi de programmation des infrastructures ferroviaires à 10 ans"
+    statut: hypothese
+    poids: lourd
+    source_secondaire: a_verifier
+    note: "Poligraph cite +1 Md€ pour le réseau et +0,5 Md€ pour les RER métropolitains en 2027"
+    a_fixer: ["trajectoire : proposé = besoin de régénération du COI (Conseil d'orientation des infrastructures, 2023), scénario « planification écologique »"]
+
+  - id: MIS-05
+    intitule: Ticket climat — abonnement mensuel unique aux transports en commun (hors TGV), gratuité ciblée jeunes et précaires
+    instrument: subventions
+    page: 24
+    citation: "par un ticket climat mensuel avec un tarif unique"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["tarif non donné (référence : Deutschlandticket) ; coût = recettes tarifaires perdues des autorités organisatrices + compensation"]
+
+  - id: MIS-06
+    intitule: Logement social — fin de la réduction de loyer de solidarité, TVA baissée sur la construction, FNAP abondé
+    instrument: logement
+    page: 20
+    citation: "en supprimant notamment la Réduction Loyer Solidarité (RLS) et en diminuant la TVA sur la construction"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["RLS ≈ 1,3 Md€ : chiffrable ; taux de TVA visé non donné (proposé 5,5 % pour le logement social)"]
+
+  - id: MIS-07
+    intitule: Écoles « refuges climatiques » — 2 Md€ par an de l'État dès 2027
+    instrument: investissement_public
+    parametres: {montant_annuel_eur: 2_000_000_000, debut: 2027}
+    page: null
+    source_secondaire: a_verifier
+    note: "dossier de presse de rentrée (31/08/2026) ; le programme parle seulement du Fonds vert (p. 92)"
+    statut: hypothese
+    poids: moyen
+
+  - id: MIS-08
+    intitule: Sécurité civile — moyens matériels doublés, statut et rémunération des pompiers volontaires
+    instrument: missions
+    page: 28
+    citation: "Doubler les moyens matériels de la sécurité civile"
+    statut: hypothese
+    poids: faible
+
+  - id: MIS-09
+    intitule: Services publics — 500 nouvelles maisons France Services et unités mobiles
+    instrument: missions
+    parametres: {maisons_france_services: 500}
+    page: 150
+    citation: "Créer 500 nouvelles MFS"
+    statut: chiffrable
+    poids: faible
+
+  - id: MIS-10
+    intitule: Énergies renouvelables — PTZ de la Caisse des dépôts à 60 % des devis, fonds chaleur, 10 000 communautés énergétiques ; prêt à taux zéro de long terme pour la décarbonation des PME
+    instrument: subventions
+    page: 17
+    citation: "Proposer un prêt à taux zéro de la Caisse des Dépôts et Consignations pour les nouveaux projets individuels et collectifs à hauteur de 60 % des devis"
+    statut: hypothese
+    poids: moyen
+    note: "coût budgétaire = bonification d'intérêt (taux du marché × encours), pas le prêt lui-même"
+
+  - id: MIS-11
+    intitule: Agriculture — revenu garanti trois ans en contrat de transition, aide au maintien bio, plan de transition de l'élevage (rachat de dettes), dotation nouvel agriculteur ; 15 % des aides réorientées vers les services environnementaux
+    instrument: missions
+    page: 49
+    citation: "Garantir un revenu sur trois ans aux agriculteur·trices s’engageant dans un contrat de transition agroécologique"
+    statut: hypothese
+    poids: moyen
+    note: "le redéploiement de 15 % des aides PAC est neutre pour le budget"
+
+  - id: MIS-12
+    intitule: Cantines — cantine à 1 €, tarification sociale, 100 % bio en restauration collective d'ici 2040 ; petits-déjeuners et goûters en quartiers prioritaires
+    instrument: missions
+    page: 46
+    citation: "Rétablir le dispositif des « cantines à 1 euro »"
+    statut: hypothese
+    poids: faible
+
+  - id: MIS-13
+    intitule: Outre-mer — plan quinquennal d'investissement (écoles, transports, eau, assainissement) ; indemnisation des victimes (chlordécone, essais nucléaires, mercure) ; RSA et SMIC alignés à Mayotte
+    instrument: missions
+    page: 153
+    citation: "la mise en place d’un plan quinquennal d’investissement dans les écoles, les infrastructures de transport, d’eau potable et d’assainissement"
+    statut: hypothese
+    poids: moyen
+
+  - id: MIS-14
+    intitule: Associations, culture, sport, médias — socle de financement des associations, FONJEP, Pass Sport élargi, Pass Culture refondu, fonds pour les médias indépendants
+    instrument: missions
+    page: 156
+    citation: "Instaurer un socle de financement stable pour les associations reconnues d’intérêt général"
+    statut: hypothese
+    poids: faible
+
+  - id: MIS-15
+    intitule: Logement d'abord, places d'hébergement inconditionnel (besoin « 200 000 places certains soirs »)
+    instrument: missions
+    page: 119
+    citation: "Créer des places d’hébergement en accueil inconditionnel"
+    statut: hypothese
+    poids: moyen
+
+  - id: MIS-16
+    intitule: Défense — nouvelle loi de programmation militaire « prenant en compte nos moyens budgétaires »
+    instrument: defense
+    page: 193
+    citation: "Élaborer une nouvelle Loi de programmation militaire (LPM) prenant en compte nos moyens budgétaires"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["aucun montant ; le pacte fiscal vert respecte les « engagements européens – y compris sur les dépenses militaires » (p. 66) : proposé = LPM actualisée du statu quo, comme pour « Écologie de droite »"]
+
+  # ------------------------------------------------------------------ COLLECTIVITÉS
+  - id: COL-01
+    intitule: Suppression du DILICO ; compensation intégrale des transferts ; RSA renationalisé ; régions financées par une fraction de TVA et d'IS ; DMTO modulables ; versement mobilité et TASCOM augmentés
+    instrument: collectivites
+    page: 68
+    citation: "Supprimer le prélèvement sur ressources des collectivités territoriales dit « DILICO »"
+    statut: hypothese
+    poids: moyen
+    a_fixer: ["fin du DILICO = transfert État → collectivités, neutre pour les APU si les collectivités dépensent la même chose ; proposé : collectivités dépensent la ressource (effet sur le solde = −DILICO)"]
+
+  # ------------------------------------------------------------------ EUROPE ET INTERNATIONAL
+  - id: UE-01
+    intitule: Budget de l'Union porté à 2 % du PIB européen en 2035 (5 % en 2050), financé par des ressources propres et un emprunt commun
+    instrument: contribution_ue
+    parametres: {budget_ue_pib: {2035: 0.02, 2050: 0.05}}
+    page: 190
+    citation: "pour atteindre 2 % du PIB européen en 2035 et 5 % du PIB en 2050"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["dépend des 26 autres États : proposé = hors scénario central (contribution du statu quo), variante séparée avec la part française si l'emprunt commun et les ressources propres ne suffisent pas"]
+
+  - id: UE-02
+    intitule: Aide publique à la coopération — retour vers 0,7 % du PNB
+    instrument: aide_developpement
+    parametres: {cible_pnb: 0.007}
+    page: 205
+    citation: "Retrouver une trajectoire correspondant à nos engagements internationaux (0,7 % du PNB)"
+    statut: hypothese
+    poids: lourd
+    a_fixer: ["horizon non donné : proposé 0,7 % en 2032, linéaire depuis le niveau du PLF 2027"]
+
+  - id: UE-03
+    intitule: Soutien à l'Ukraine — fonds bilatéral, Facilité européenne pour la paix, avoirs russes gelés
+    instrument: defense
+    page: 197
+    citation: "Financer le fonds bilatéral de soutien à l’Ukraine"
+    statut: hypothese
+    poids: faible
+    note: "les 140 Md€ d'avoirs russes relèvent de l'UE, hors budget français"
+
+  # ------------------------------------------------------------------ ÉCONOMIES ANNONCÉES SANS CHIFFRAGE
+  - id: ECO-01
+    intitule: Financement public de l'enseignement privé sous contrat ramené à 50 % (révision de la loi Debré), compensé par des frais de scolarité
+    instrument: education
+    page: 92
+    citation: "Réviser la loi Debré de 1959 pour diminuer la part de financement public à 50 %"
+    statut: economie_declarative
+    poids: lourd
+    a_fixer: ["une partie des élèves revient au public (coût) : proposé prudent = 30 % des élèves du privé reviennent, économie nette faible ; calendrier sur le quinquennat"]
+
+  - id: ECO-02
+    intitule: Fin de la rétention administrative et des OQTF non exécutées ; régularisations (recettes de cotisations)
+    instrument: immigration
+    page: 67
+    citation: "Revoir les modalités coûteuses et inutiles de la politique d’immigration (OQTF non exécutées, centres de rétention)"
+    statut: economie_declarative
+    poids: faible
+    note: "régularisations (p. 178) : effet emploi et cotisations dans le canal macro, pas de chiffre déclaratif"
+
+  - id: ECO-03
+    intitule: Niches défavorables au climat, voitures de fonction, barèmes kilométriques réformés
+    instrument: ir_niches
+    page: 67
+    citation: "Réformer les barèmes kilométriques et le régime fiscal des voitures de fonction"
+    statut: economie_declarative
+    poids: faible
+
+  - id: ECO-04
+    intitule: Mutualisation des achats publics, fin du « New Public Management », sous-traitance réduite
+    instrument: missions
+    page: 67
+    citation: "Mutualiser les achats publics"
+    statut: economie_declarative
+    poids: faible
+    note: "la réinternalisation (sous-traitance réduite, titularisation) coûte plutôt qu'elle n'économise : prudent = coût"
+
+  - id: ECO-05
+    intitule: Prisons — numerus clausus et moratoire sur les nouvelles places (hors remplacement)
+    instrument: missions
+    page: 170
+    citation: "Adopter un moratoire sur la construction de nouvelles places de prison"
+    statut: economie_declarative
+    poids: faible
+    note: "économie sur le programme immobilier pénitentiaire du statu quo (à lire dans le PLF 2027)"
+
+  # ------------------------------------------------------------------ CANAUX MACROÉCONOMIQUES
+  - id: MAC-01
+    intitule: Sortie du nucléaire en une vingtaine d'années, fin des EPR2 et SMR ; 44 % d'électricité renouvelable en 2030
+    instrument: energie
+    page: 17
+    citation: "Mettre fin aux nouveaux programmes EPR-2 et SMR extrêmement dispendieux"
+    statut: macro
+    poids: lourd
+    note: "pas dans le budget de l'État directement (EDF hors APU) : prix de l'électricité, dividendes et soutien public d'EDF, investissement, coûts de démantèlement anticipés, importations. Canal à créer ; à défaut, variante qualitative"
+
+  - id: MAC-02
+    intitule: Commerce — accords non ratifiés (Mercosur, CETA…), préférence européenne de 50 à 80 % dans la commande publique, protections aux frontières
+    instrument: commerce
+    page: 63
+    citation: "pour privilégier entre 50 et 80 % de produits européens dans les marchés publics en fonction des filières"
+    statut: macro
+    poids: moyen
+    note: "surcoût de la commande publique (prudent : quelques % sur les achats concernés) et effet prix"
+
+  - id: MAC-03
+    intitule: Prix encadrés (panier de biens essentiels, prix planchers agricoles, blocage en cas d'inflation anormale, panier à prix coûtant)
+    instrument: prix
+    page: 63
+    citation: "Encadrer les prix d’un panier de biens essentiels"
+    statut: macro
+    poids: faible
+
+  - id: MAC-04
+    intitule: Régularisations et droit au travail des demandeurs d'asile
+    instrument: emploi
+    page: 178
+    citation: "Supprimer les Obligations de Quitter le Territoire Français (OQTF) automatiques ou inapplicables"
+    statut: macro
+    poids: faible
+    note: "emploi déclaré, cotisations ; nombre de régularisations non donné (hypothèse)"
+
+  - id: MAC-05
+    intitule: Fonds souverain « livret industrie » (taux du livret A) et fonds « France Verte 2040 » ; bons d'épargne fléchés vers la dette
+    instrument: fonds
+    page: 77
+    citation: "Créer un fonds souverain assis sur un « livret industrie » rémunéré au même taux garanti que le livret A"
+    statut: hors_budget
+    poids: moyen
+    note: "classement APU ou non (même question que le fonds d'Adrien) ; si APU, ses investissements comptent au déficit"
+
+  - id: MAC-06
+    intitule: Renationalisation progressive des autoroutes
+    instrument: actifs_publics
+    page: 25
+    citation: "afin d’investir dans les infrastructures de transport"
+    statut: hors_budget
+    poids: moyen
+    note: "rachat des concessions avant leur fin (2031-2036) : flux de dette ; puis péages en recette, entretien en dépense. Proposé : attendre la fin des contrats (coût de rachat nul)"
+
+  - id: MAC-07
+    intitule: Investissements de transition exclus du calcul du déficit européen ; Pacte de stabilité renégocié
+    instrument: regle_budgetaire
+    page: 64
+    citation: "Exclure immédiatement les investissements liés à la transition écologique"
+    statut: macro
+    poids: faible
+    note: "le modèle publie toujours le déficit au sens de Maastricht actuel ; règle européenne non unilatérale. Effet seulement sur la prime de taux (crédibilité) si Adrien le décide"
+
+  - id: MAC-08
+    intitule: Dette — moins de titres indexés sur l'inflation, plus de créanciers nationaux
+    instrument: dette
+    page: 68
+    citation: "Désindexer les obligations françaises en réduisant la part des titres de dette indexés sur l’inflation"
+    statut: macro
+    poids: faible
+    note: "charge d'intérêts : effet dépendant de l'inflation réalisée ; proposé neutre en central"
