@@ -106,3 +106,7 @@ economies:
     unite: sans_unite
     statut: DECISION
     note: "DÉCISION d'Adrien du 05/11/2026 : les économies du registre sans chiffrage recoupé sont estimées par scénario (colonnes estimation_<scénario> de mesures_economies.csv). Faux (v235) : montant saisi (plein_effet_md), sans règle de sources."
+
+# --- Écologie (moteur/ecologie/) ------------------------------------------------------
+ecologie_options:
+  emissions_activite: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Décision d'Adrien du 05/11/2026 : les émissions suivent l'activité (population, revenu par habitant), le progrès technique et la part importée (moteur/ecologie/emissions.py), au lieu du taux fixe carbone.baisse_tendancielle_emissions. La recette carbone, l'ETS2 et le poids des taxes carbone dans l'inflation suivent ces émissions, et l'assiette répond au prix du carbone par rapport au statu quo (saut de 2029 compris), avec ajustement progressif : la même équation que les émissions."}

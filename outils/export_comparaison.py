@@ -28,7 +28,7 @@ GROUPES = {
     "etat_missions": "État et défense", "defense_ue": "État et défense",
     "collectivites": "Collectivités", "investissement": "Investissement", "autres": "Autres dépenses",
 }
-NATURES_CACHEES = ("detail", "controle")  # sommes nulles : rien à montrer
+NATURES_CACHEES = ("detail", "controle", "physique")  # sommes nulles ou sans montant : rien à montrer
 
 
 def groupe(m: noyau.Mesure) -> str:
@@ -51,6 +51,29 @@ def groupe(m: noyau.Mesure) -> str:
     return GROUPES.get(m.poste, "Autres dépenses")
 
 
+def lignes_ecologie(p: Parametres, lib: str, prog) -> list[dict]:
+    """Émissions et empreinte d'un programme (statu quo si prog est None), par scénario et par année : le statu quo,
+    l'effet de l'activité (publié à part, pas une politique climatique), l'effet des mesures, l'écart cumulé aux
+    budgets carbone. Statut : « simule » pour tout ce que le modèle calcule."""
+    from moteur.ecologie import emissions as em
+    out = []
+    mes = prog.mesures(p) if prog is not None else {}
+    ctx = prog.contexte(p) if prog is not None else {}
+    for s, nom_s in SCENARIOS.items():
+        b = em.bilan(p, s, mes.get(s), ctx.get(s))
+        cumul = em.ecart_snbc_cumule(b)
+        for t in em.ANNEES_MODELE:
+            x = b[t]
+            out.append({"cle": f"{lib}|{nom_s}|{t}", "programme": lib, "scenario": nom_s, "annee": t,
+                        "territoriales_mt": round(x["territoriales"], 2), "territoriales_hab_t": round(x["territoriales_hab"], 3),
+                        "empreinte_mt": round(x["empreinte"], 2), "empreinte_hab_t": round(x["empreinte_hab"], 3),
+                        "importees_mt": round(x["importees"], 2), "statu_quo_mt": round(x["statu_quo"], 2),
+                        "effet_activite_mt": round(x["effet_activite"], 2), "effet_mesures_mt": round(x["effet_mesures"], 2),
+                        "plafond_snbc_mt": round(x["plafond_snbc"], 1), "ecart_snbc_cumule_mt": round(cumul[t], 1),
+                        **{f"secteur_{i}_mt": round(x["secteurs"][i], 2) for i in em.SECTEURS}, "statut": "simule"})
+    return out
+
+
 def _ecrire(nom: str, lignes: list[dict]) -> None:
     with (RACINE / "sorties" / nom).open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(lignes[0]))
@@ -61,7 +84,7 @@ def _ecrire(nom: str, lignes: list[dict]) -> None:
 def main() -> None:
     p = Parametres()
     base = sq.simuler(p)
-    traj, ecarts, mesures = [], [], []
+    traj, ecarts, mesures, ecologie = [], [], [], []
     for nom in noyau.programmes_disponibles():
         prog = noyau.charger(nom)
         lib = getattr(prog, "libelle", nom)
@@ -103,10 +126,12 @@ def main() -> None:
                     mesures.append({"cle": f"{lib}|{SCENARIOS[s]}|{t}|{i}", "programme": lib, "scenario": SCENARIOS[s], "annee": t, "groupe": groupe(m),
                                     "mesure": m.nom, "nature": m.nature, "md": round(val, 2),
                                     "part_pib": round(val / v[t]["pib"] * 100, 3)})
+        ecologie.extend(lignes_ecologie(p, lib, None if nom == "statu_quo" else prog))
     _ecrire("comparaison_trajectoire.csv", traj)
+    _ecrire("comparaison_ecologie.csv", ecologie)
     _ecrire("comparaison_ecarts.csv", ecarts)
     _ecrire("comparaison_mesures.csv", mesures)
-    print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv")
+    print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv, comparaison_ecologie.csv")
 
 
 if __name__ == "__main__":

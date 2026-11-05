@@ -37,8 +37,11 @@ class Mesure:
     nom: str
     poste: str
     valeurs: dict[int, float]
-    nature: str = "mesure"  # mesure, effet_macro, methode (écart de méthode avec le statu quo, à résorber)
+    nature: str = "mesure"  # mesure, effet_macro, methode (écart de méthode avec le statu quo, à résorber), physique
     note: str = ""
+    # effets physiques, sans montant (moteur/ecologie/emissions.py) : {"emissions_mt:<secteur>": {année: Mt}, ...}
+    physique: dict[str, dict[int, float]] = field(default_factory=dict)
+    vert: str = ""  # classement du budget vert : favorable, defavorable, mixte, neutre ("" : non classé)
 
 
 @dataclass
@@ -172,6 +175,8 @@ def bilan_mesures(programme, p: Parametres, s: str = "prudent", annees=(2029, 20
     """Effet de chaque mesure sur le solde (Md€ ; + = améliore le solde), pour la restitution."""
     out = []
     for m in programme.mesures(p).get(s, []):
+        if m.nature == "physique":
+            continue
         signe = 1 if m.poste == "recettes" else (0 if m.poste == "participations" else -1)
         out.append({"nom": m.nom, "poste": m.poste, "nature": m.nature,
                     **{t: signe * m.valeurs.get(t, 0.0) for t in annees}})

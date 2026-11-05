@@ -501,6 +501,20 @@ def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, b
     return out
 
 
+def mesure_prix_carbone(p: Parametres, q: Parametres, s: str) -> Mesure:
+    """Effet physique du prix du carbone (300 € en 2030, puis valeur de l'action pour le climat) sur les émissions
+    des transports et des bâtiments, contre le prix du statu quo : la même réponse que l'assiette de la recette
+    carbone (moteur/carbone.py), sans montant (la recette est déjà dans les instruments et l'effet macro carbone)."""
+    from moteur.carbone import prix
+    from moteur.ecologie import emissions as em
+    rep = em.reponse_prix(q, {t: prix(q, t) for t in em.ANNEES})
+    e = em.territoriales(p, s)
+    phys = {f"emissions_mt:{i}": {t: e[t][i] * (rep[t] - 1) for t in em.ANNEES}
+            for i in p.val("ecologie.secteurs_prix")}
+    return Mesure("Prix du carbone : émissions des transports et des bâtiments", "recettes", {}, "physique",
+                  physique=phys, vert="favorable")
+
+
 class EcologieDeDroite:
     nom = "ecologie_de_droite"
     libelle = "Écologie de droite"
@@ -614,6 +628,7 @@ class EcologieDeDroite:
                             {t: r[t]["effet_macro"] - sum(r[t]["canaux"].values()) for t in ANNEES}, "effet_macro"))
             m.append(Mesure("Participations de l'État remises au fonds", "participations",
                             {t: v["participations"] for t, v in cout_transition(q).items()}, "mesure"))
+            m.append(mesure_prix_carbone(p, q, s))
             mesures[s] = m
             # contexte : ce que le programme change dans l'économie
             infl = serie(q, jeu)

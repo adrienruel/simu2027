@@ -1,0 +1,77 @@
+# Écologie : statu quo physique et hypothèses communes à tous les programmes (moteur/ecologie/).
+# Décision d'Adrien du 05/11/2026 : la baisse des émissions dépend de l'activité économique (population, revenu par
+# habitant), du progrès technique et de la part de l'économie importée, au lieu d'un taux fixe.
+
+ecologie:
+  emissions_2025:
+    valeur: {transports: 123.0, batiments: 54.6, industrie: 58.0, energie: 31.4, agriculture: 76.6, dechets: 15.4}
+    unite: mt_co2e
+    statut: SOURCE
+    source: "Citepa, Secten 2026 (synthèse et messages clés, juin 2026) : 359 Mt CO2e hors UTCATF en 2025 (estimation) ; transports 123, usage des bâtiments 54,6 (climat réel), industrie manufacturière et construction 58, industrie de l'énergie 31,4, agriculture 76,6"
+    note: "Déchets et divers obtenus par différence avec le total de 359 Mt (le Citepa donne les déchets vers 14 Mt ; l'écart tient aux arrondis et aux autres sources). Valeurs provisoires : à remplacer par l'inventaire définitif."
+  emissions_2024_total:
+    valeur: 367
+    unite: mt_co2e
+    statut: SOURCE
+    source: "Citepa, Secten 2026 : 367 Mt CO2e hors UTCATF en 2024"
+  elasticite_revenu:
+    valeur: {transports: 0.5, batiments: 0.2, industrie: 1.0, energie: 0.7, agriculture: 0.0, dechets: 0.3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "À technologie donnée, les émissions d'un secteur suivent la population et le revenu par habitant avec cette élasticité : fret et déplacements professionnels (transports), surfaces tertiaires (bâtiments), production (industrie), demande d'énergie (énergie) ; l'agriculture suit la population. Sert à séparer l'effet de l'activité de l'effet du progrès technique. À sourcer : décomposition de Kaya par secteur (SDES, Citepa)."
+  baisse_intensite:
+    valeur: {crise: -0.018, prudent: -0.022, median: -0.025, optimiste: -0.028}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrée par le rythme observé : −1,8 % en 2024 et −2,2 % en 2025 (Citepa, Secten 2026 ; baromètre d'avril 2026 : −1,5 %), pour une activité en hausse d'environ 0,4 % par an"
+    note: "Baisse annuelle des émissions par unité d'activité (progrès technique, électrification, sobriété), commune à tous les secteurs faute de série sectorielle sourcée. Prudent : le rythme de 2024-2025 continue (−1,8 % par an d'émissions avec la croissance du prudent). Crise : l'investissement se tasse ; médian et optimiste : plus d'investissement et de progrès technique. Avant 2029, valeur du prudent dans tous les scénarios (point de départ commun). Pour mémoire, les budgets de la SNBC-3 demandent environ −5 % par an d'ici 2033."
+  importations_2024:
+    valeur: {importees: 284, domestique: 279, residents: 404}
+    unite: mt_co2e
+    statut: SOURCE
+    source: "SDES, L'empreinte carbone de la France de 1990 à 2024 (octobre 2025) : empreinte 563 Mt (8,2 t par habitant), dont 284 Mt importées, 180 Mt de production intérieure pour la demande intérieure et 99 Mt d'émissions directes des ménages ; émissions des unités résidentes 404 Mt"
+    note: "La part domestique de l'empreinte (180 + 99 = 279 Mt) suit les émissions territoriales du modèle ; le reste des émissions résidentes (≈ 125 Mt) sert les exportations."
+  baisse_intensite_importations:
+    valeur: {crise: -0.01, prudent: -0.01, median: -0.015, optimiste: -0.02}
+    unite: taux
+    statut: HYPOTHESE
+    note: "Baisse annuelle de l'intensité carbone des biens et services importés (décarbonation des pays fournisseurs). Sans source retenue : prise prudente pour l'empreinte (lente). À sourcer : intensité carbone du PIB mondial (Global Carbon Project, AIE)."
+  penetration_importations:
+    valeur: 0.0
+    unite: taux
+    statut: HYPOTHESE
+    note: "Évolution annuelle de la part importée de la demande finale dans le statu quo. Stable par convention : commune à tous les programmes, elle ne change pas leurs écarts. Un programme qui relocalise passe par la clé physique « relocalisation_mt »."
+  intensite_relocalisee:
+    valeur: {crise: 0.7, prudent: 0.7, median: 0.5, optimiste: 0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Émissions en France d'une production relocalisée, rapportées à celles de la même production importée. Électricité peu carbonée, mais écart très variable selon les secteurs (acier, ciment, chimie). Prudent : gain faible. À sourcer (Carbone 4 et SEI, empreinte carbone de la France)."
+  prix_carbone_statu_quo:
+    valeur: {cce: 37.0, ets2: 54.0, debut_ets2: 2028}
+    unite: eur_par_tco2
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Composante carbone des accises : 44,6 € par tonne, gelée depuis 2018 (loi de finances pour 2019), passée en euros de 2026 (≈ +20 % de prix) ; ETS2 : prix de stabilité de 45 € de 2020 (directive 2023/959), début reporté à 2028"
+    note: "Prix payé sur les carburants et le chauffage sans programme, en euros constants de 2026. Gardé constant en réel : le prix de l'ETS2 pourrait monter, ce qui réduirait l'écart avec un programme à prix plus élevé."
+  secteurs_prix:
+    valeur: [transports, batiments]
+    unite: sans_unite
+    statut: DECISION
+    note: "Secteurs dont les émissions répondent au prix du carbone des carburants et du chauffage (périmètre de l'ETS2). L'industrie et l'énergie sont dans l'ETS1 : leur réponse à un prix national n'est pas encore modélisée."
+  reponse_prix:
+    valeur: {part_prix_final: 0.35, elasticite: 0.6, ajustement: 0.35}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrée : Labandeira, Labeaga et López-Otero (2017), méta-analyse des élasticités-prix de l'énergie, environ −0,2 à court terme et −0,6 à long terme"
+    note: "Émissions = statu quo × (1 + part × (prix du programme / prix du statu quo − 1))^(−élasticité) à long terme, atteint par ajustement partiel : chaque année, la part « ajustement » de l'écart au long terme se referme (rapport court terme / long terme de la méta-analyse). Part et élasticité égales à carbone.part_accise_prix_final et carbone_importe.elasticite_prix d'Écologie de droite (un test le vérifie) : une seule équation pour la recette et les émissions."
+  budgets_carbone:
+    valeur: {2024: 342, 2029: 262, 2034: 194}
+    unite: mt_co2e
+    statut: SOURCE
+    source: "Décret n° 2026-636 du 16 juillet 2026 relatif aux budgets carbone nationaux et à la stratégie nationale bas-carbone (SNBC-3) : moyennes annuelles hors UTCATF, 342 (2024-2028), 262 (2029-2033), 194 (2034-2038)"
+  objectif_2050:
+    valeur: 80
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "SNBC-2 : environ 80 Mt d'émissions brutes en 2050 pour la neutralité carbone"
+    note: "Après le cinquième budget (2034-2038), trajectoire droite jusqu'à cette valeur en 2050, puis stable. À remplacer par la valeur de la SNBC-3 si elle en publie une."

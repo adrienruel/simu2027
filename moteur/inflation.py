@@ -64,6 +64,16 @@ def serie(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
     trans = p.val("inflation.transmission_carbone", jeu)
     poids0 = p.val("inflation.poids_taxes_carbone_consommation")
     baisse = p.val("carbone.baisse_tendancielle_emissions", jeu)
+    if p.val("ecologie_options.emissions_activite"):
+        # poids des taxes carbone dans la consommation : assiette (émissions du statu quo × réponse au prix, comme la
+        # recette carbone) rapportée au PIB
+        from . import statu_quo as sq
+        from .ecologie import emissions as em
+        rep = em.reponse_prix(p, {t: prix(p, t) for t in em.ANNEES})
+        ind, y = em.indice(p, jeu), sq.pib(p, em.scenario(p, jeu))
+        evol = {t: ind[t] * rep[t] / rep[2029] / (y[t] / y[2029]) for t in range(2029, 2074)}
+    else:
+        evol = {t: (1 + baisse) ** (t - 2029) for t in range(2029, 2074)}
     out = {}
     for t in ANNEES:
         if t == 2027:
@@ -75,7 +85,7 @@ def serie(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
             base = b["2028"] + (lt - b["2028"]) * k
         carbone = 0.0
         if t >= 2030:
-            poids = poids0 * (1 + baisse) ** (t - 2029)
+            poids = poids0 * evol[t]
             carbone = trans * poids * (prix(p, t) / prix(p, t - 1) - 1)
         phillips = kappa * (ecart_production(p, jeu, t) - (ecart_production(p, jeu, t - 1) if t > 2029 else 0.0)) if t >= 2029 else 0.0
         out[t] = base + carbone + phillips

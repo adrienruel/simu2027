@@ -51,6 +51,15 @@ def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, flo
     g = p.val("macro.tendance", "prudent")
     p0 = prix_carbone(p)
     e2, dom = p.val("carbone.ets2"), p.val("carbone.dom")
+    activite = p.val("ecologie_options.emissions_activite")
+    if activite:
+        # même équation que les émissions (moteur/ecologie/emissions.py) : l'assiette suit les émissions du statu quo
+        # (activité, progrès technique) et répond au prix du programme rapporté au prix du statu quo, saut de 2029
+        # compris, avec ajustement progressif
+        from .ecologie import emissions as em
+        reponse = em.reponse_prix(p, {t: prix(p, t) for t in em.ANNEES})
+        ind = {s: em.indice(p, s) for s in SCENARIOS}
+        ind_ets2 = em.indice(p, "prudent", ("transports", "batiments"))
     # Accise sur le contenu importé : même formule que la ligne 69, prix de l'année
     out = {s: {} for s in SCENARIOS}
     for t in ANNEES:
@@ -58,14 +67,18 @@ def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, flo
         fp = prix(p, t) / p0
         fd = (1 + p.val("carbone.part_accise_prix_final") * (fp - 1)) ** (-p.val("carbone_importe.elasticite_prix"))
         statique = r5 * (1 + g) ** n
-        ets2 = -e2["emissions_mt"] * (1 + p.val("carbone.baisse_tendancielle_emissions", "prudent")) ** n * e2["prix"] * e2["part_fonds_social"] / 1000 + e2["dotation_france"]
+        baisse_ets2 = ind_ets2[t] if activite else (1 + p.val("carbone.baisse_tendancielle_emissions", "prudent")) ** n
+        ets2 = -e2["emissions_mt"] * baisse_ets2 * e2["prix"] * e2["part_fonds_social"] / 1000 + e2["dotation_france"]
         importe = _importe(p, tva_ligne_3_md, t, fp)
         accise_pkm = dom["accise_aller_retour_ref"] / (2 * dom["distance_ref_km"])
         vols = -dom["exonerer_vols"] * dom["passagers_millions"] * dom["part_metropole"] * dom["distance_km"] * accise_pkm / 1000 * fp * fd
         dom_tva = -dom["preserver_fiscalite"] * dom["cout_regime_tva"] * (1 + g) ** n
         ets1 = 0.0  # complément ETS1 désactivé (Carbone!B27 = 0)
         for s in SCENARIOS:
-            reelle = r5 * fp * fd * (1 + p.val("carbone.baisse_tendancielle_emissions", s)) ** n
+            if activite:
+                reelle = r5 * fp * reponse[t] * ind[s][t]
+            else:
+                reelle = r5 * fp * fd * (1 + p.val("carbone.baisse_tendancielle_emissions", s)) ** n
             out[s][t] = reelle - statique + ets2 + importe + ets1 + vols + dom_tva
     return out
 
