@@ -140,3 +140,12 @@ Constat : chez Écologie de droite, les émissions territoriales sont plus basse
 
 L'effet de l'activité sur l'empreinte (via les importations) n'est pas encore séparé de l'effet des mesures dans le
 comparateur ; seul l'effet sur les émissions territoriales l'est.
+
+## Importations : elles suivent la consommation des ménages (05/11/2026, décision d'Adrien)
+
+Les émissions importées suivaient le PIB. Elles suivent désormais la consommation des ménages : écart de PIB avec le
+statu quo, moins ce qui ne va pas à la consommation (contexte `pib_hors_consommation`, commun à tous les programmes).
+Écologie de droite : la valeur ajoutée du capital du fonds (rendement net gardé sur les comptes et usure réinvestie)
+n'est pas consommée ; ses retombées sur le reste de l'économie le sont. Tondelier : son écart de PIB (multiplicateur)
+est compté en entier comme consommation, faute de décomposition ; sa part d'investissement public le surestime un peu.
+Les émissions territoriales, elles, suivent toujours le PIB (la production émet, qu'elle soit consommée ou investie).

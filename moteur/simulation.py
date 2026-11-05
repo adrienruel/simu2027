@@ -31,6 +31,7 @@ def _bloc(m, traj, avec_clause: bool, transferts: float) -> dict:
             "pib": m.detail["pib_reference"][t] + m.pib_effet[t],
             "canaux": dict(m.detail["canaux"][t]),
             "chomage_detail": dict(m.detail.get("chomage_detail", {}).get(t, {})),
+            "pib_epargne_fonds": m.detail.get("pib_epargne_fonds", {}).get(t, 0.0),
         }
         if avec_clause:
             c = m.detail["clause"][t]

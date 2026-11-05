@@ -424,6 +424,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             # Capital du fonds (début d'année)
             # valeur ajoutée brute du capital du fonds : rendement net + usure (+ retombées dans le médian et l'optimiste)
             pib_cap = capital * (m("pib_par_euro_capital", s) + m("usure_capital_fonds", s) + m("externalites_capital_fonds", s))
+            # part qui ne va pas à la consommation des ménages : rendement net gardé sur les comptes et usure
+            # réinvestie (les retombées, elles, passent au reste de l'économie)
+            sc.detail.setdefault("pib_epargne_fonds", {})[t] = capital * (m("pib_par_euro_capital", s) + m("usure_capital_fonds", s))
             # permis rapide : capital privé (début d'année), valeur ajoutée brute au rendement et à l'usure des
             # entreprises ; impôts sur le rendement net ; coût des services instructeurs
             pib_permis = k_permis * (m("pib_par_euro_capital", s) + m("usure_capital", s)) if permis_separe else 0.0

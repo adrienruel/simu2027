@@ -9,8 +9,8 @@ L'intensité baisse au rythme du scénario (ecologie.baisse_intensite). L'activi
 d'un programme (son PIB) : la différence est l'**effet de l'activité**, publié à part et jamais compté comme une
 politique climatique (une récession baisse les émissions).
 
-Empreinte (SDES) = part domestique (suit les émissions territoriales) + émissions importées (suivent la demande, la
-part importée et l'intensité des pays fournisseurs) − ce qu'un programme relocalise, qui revient en émissions
+Empreinte (SDES) = part domestique (suit les émissions territoriales) + émissions importées (suivent la consommation
+des ménages, la part importée et l'intensité des pays fournisseurs) − ce qu'un programme relocalise, qui revient en émissions
 territoriales de l'industrie à une intensité plus faible (ecologie.intensite_relocalisee).
 
 Réponse au prix du carbone (transports et bâtiments) : une seule équation, partagée avec la recette carbone
@@ -194,6 +194,11 @@ def bilan(p: Parametres, s: str, mesures=None, contexte: dict | None = None) -> 
     ratio_reloc = _v(p, "ecologie.intensite_relocalisee", s_r)
     pen = p.val("ecologie.penetration_importations")
     a, a_sq = activite(p, s_r, pib), activite(p, s_r)
+    # importations : elles suivent la consommation des ménages ; l'écart de consommation avec le statu quo est l'écart
+    # de PIB moins ce qui n'y va pas (épargne retenue, investissement : contexte pib_hors_consommation). Décision
+    # d'Adrien du 05/11/2026, commune à tous les programmes.
+    hors = (contexte or {}).get("pib_hors_consommation") or {}
+    a_imp = {t: (pop, y - hors.get(t, 0.0)) for t, (pop, y) in a.items()}
     plafond = snbc(p)
     out = {}
     for t in ANNEES:
@@ -202,7 +207,7 @@ def bilan(p: Parametres, s: str, mesures=None, contexte: dict | None = None) -> 
         secteurs["industrie"] += r * ratio_reloc
         total, total_sq, total_act = sum(secteurs.values()), sum(sq_e[t].values()), sum(act_e[t].values())
         domestique = imp["domestique"] * total / e2024
-        importees = (imp["importees"] * a[t][1] / a_sq[2024][1] * (1 + pen) ** (t - 2024)
+        importees = (imp["importees"] * a_imp[t][1] / a_sq[2024][1] * (1 + pen) ** (t - 2024)
                      * _facteur_intensite(p, s_r, t, "ecologie.baisse_intensite_importations", 2024) - r
                      + ph.get("importees_mt", {}).get(t, 0.0))
         pop = a[t][0]

@@ -27,7 +27,10 @@ from .parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 POSTES = ("recettes", "participations")  # en plus des blocs de dépense du statu quo
-CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart", "emploi", "emplois_canaux")
+CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart", "emploi", "emplois_canaux",
+            "pib_hors_consommation")
+# pib_hors_consommation : {année: Md€} part du PIB du programme qui ne va pas à la consommation des ménages (épargne
+# retenue, investissement), retirée du PIB pour les émissions importées, qui suivent la consommation
 # emploi : personnes en emploi, année par année ; emplois_canaux : {année: {canal: emplois en plus (+) ou en moins (−)
 # par rapport au statu quo}}, pour la restitution (la somme n'a pas à retrouver l'écart d'emploi : le reste est publié)
 

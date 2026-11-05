@@ -721,6 +721,7 @@ class EcologieDeDroite:
                 "chomage": {t: r[t]["chomage"] for t in ANNEES},
                 "dette_depart": dette_fin_2028(q),
                 **contexte_emploi(p, s, r),
+                "pib_hors_consommation": {t: r[t].get("pib_epargne_fonds", 0.0) for t in ANNEES},
             }
         out = {"mesures": mesures, "contexte": contexte, "resultats": res}
         self._cache = {cle: out}
