@@ -13,11 +13,12 @@ La trajectoire de chaque programme porte `emploi` et `emplois_canaux`.
 
 ## Programmes
 
-- **Écologie de droite** : emploi = actifs − chômeurs du module macro (`chomage_detail`, qui publie désormais aussi la
-  conjoncture et les emplois venus de l'inactivité). Canaux : chômeurs repris par les réformes, venus de l'inactivité
-  (seniors, cumul, inactifs, jeunes), emplois du fonds, conjoncture (ajustement budgétaire). Le reste de l'écart au
-  statu quo (effet du programme sur les naissances, calage du module macro) est publié tel quel : « Démographie et
-  reste ».
+- **Écologie de droite** : emploi = statu quo + somme des canaux du module macro (`chomage_detail`, qui publie
+  désormais aussi la conjoncture et les emplois venus de l'inactivité) : chômeurs repris par les réformes, venus de
+  l'inactivité (seniors, cumul, inactifs, jeunes), emplois du fonds, conjoncture (ajustement budgétaire). On ne prend
+  pas actifs − chômeurs du module macro : sa base d'actifs est calée autrement que le statu quo (environ 850 000
+  personnes en emploi de plus, écart constant trouvé le 05/11/2026), ce qui aurait été publié comme un effet du
+  programme. Non compté : l'effet du programme sur les naissances (actifs en moins après 2048).
 - **Tondelier** : emplois perdus du SMIC à 2 000 €, et **conjoncture** : l'impulsion budgétaire change l'emploi selon la
   même règle que le moteur d'Écologie de droite (`macro.emplois_par_point_pib`, loi d'Okun : 0,45 % d'emploi pour 1 %
   de PIB dans le prudent). Avant ce jour, son multiplicateur faisait monter le PIB sans créer d'emplois ni baisser le

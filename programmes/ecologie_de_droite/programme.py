@@ -506,9 +506,11 @@ CANAUX_EMPLOI = {"reformes": "Chômeurs repris par les réformes", "population_a
 
 
 def contexte_emploi(p: Parametres, s: str, r: dict) -> dict:
-    """Personnes en emploi et emplois par canal, lus dans le moteur du programme (chômeurs et actifs du module
-    macro) ; le reste de l'écart au statu quo (démographie : effet du programme sur les naissances, calage) est publié
-    comme tel."""
+    """Emplois par canal, lus dans le module macro du programme ; emploi = statu quo + somme des canaux.
+
+    Le moteur du programme a sa propre base d'actifs, calée autrement que le statu quo (environ 850 000 personnes en
+    emploi de plus, constant) : prendre ses actifs − chômeurs mélangerait cet écart de calage avec les effets du
+    programme. Non compté : l'effet du programme sur les naissances (actifs en moins après 2048)."""
     from moteur import statu_quo as sq
     e = sq.effectifs(p, s)
     emploi, canaux = {}, {}
@@ -516,9 +518,8 @@ def contexte_emploi(p: Parametres, s: str, r: dict) -> dict:
         d = r[t].get("chomage_detail") or {}
         if not d:
             return {}
-        emploi[t] = d["actifs"] - d["chomeurs"]
         c = {lib: d[k] for k, lib in CANAUX_EMPLOI.items()}
-        c["Démographie et reste"] = emploi[t] - e[t]["emploi"] - sum(c.values())
+        emploi[t] = e[t]["emploi"] + sum(c.values())
         canaux[t] = c
     return {"emploi": emploi, "emplois_canaux": canaux}
 
