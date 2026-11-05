@@ -732,10 +732,11 @@ tondelier_ecologie:
     note: "Part des émissions des voitures évitée : 0,5 % (crise), 1 % (prudent), 2 % (médian), 3 % (optimiste, niveau allemand). Moins qu'en Allemagne : offre de transports en commun plus faible hors des grandes villes, tarif du ticket non précisé."
   ferroviaire:
     valeur: {id: TRA-FER, libelle: "Loi de programmation ferroviaire, RER métropolitains, trains de nuit", secteur: transports, debut: 2030, plein: 2040,
-             effet_mt: {crise: 0.0, prudent: 0.0, median: -1.5, optimiste: -3.0}}
+             effet_mt: {crise: -0.6, prudent: -1.2, median: -2.9, optimiste: -4.7}}
     unite: mt_co2e
     statut: HYPOTHESE
-    note: "Report de la route vers le rail, une fois les infrastructures construites (2030-2040). Sans chiffrage sourcé du report modal par euro investi : zéro en crise et en prudent. À sourcer : évaluations des RER métropolitains (SGP, Cerema), Conseil d'orientation des infrastructures."
+    source: "SNCF (J.-P. Farandou, Fondation Jean-Jaurès, « Le fer contre le carbone », 2022) : reporter 10 % du trafic routier sur le rail couvrirait 22 à 33 % de l'objectif de décarbonation des transports ; Citepa : environ 117 Mt pour les transports routiers ; budget de la mesure : +3 Md€ par an en 2032 (tondelier_mesures.ferroviaire, Conseil d'orientation des infrastructures, 2023)"
+    note: "Part des émissions routières reportée sur le rail une fois les infrastructures construites (2030-2040) : 0,5 % (crise), 1 % (prudent), 2,5 % (médian), 4 % (optimiste), contre 10 % pour un doublement de la part du rail. La loi de programmation du programme finance une partie de ce doublement : le prudent n'en retient qu'un dixième."
   aerien:
     valeur: {id: TRA-AIR, libelle: "Vols courts interdits, kérosène des vols intérieurs taxé, TVA à 20 % sur les vols intérieurs", secteur: transports, debut: 2028, plein: 2029,
              effet_mt: {crise: -0.3, prudent: -0.3, median: -0.53, optimiste: -0.75}}
@@ -752,19 +753,22 @@ tondelier_ecologie:
     note: "Émissions en plus : centrales au gaz fossile pour la sécurité d'approvisionnement si les renouvelables et les flexibilités ne suivent pas une sortie plus rapide que le scénario M0 de RTE (2047 au lieu de 2050). Prudent : 10 TWh de gaz, soit environ 4 Mt ; crise : le double ; optimiste : aucune (le scénario de RTE tient)."
   agriculture:
     valeur: {id: AGR-TRANS, libelle: "Transition agroécologique, plan élevage, 15 % des aides réorientées", secteur: agriculture, debut: 2028, plein: 2037,
-             effet_mt: {crise: 0.0, prudent: 0.0, median: -2.3, optimiste: -3.8}}
+             effet_mt: {crise: -0.8, prudent: -1.5, median: -3.8, optimiste: -6.1}}
     unite: mt_co2e
     statut: HYPOTHESE
-    note: "Moins d'élevage et d'engrais azotés : 3 % (médian) à 5 % (optimiste) des 76,6 Mt de l'agriculture (Citepa, 2025). Sans chiffrage sourcé : zéro en crise et en prudent. À sourcer : INRAE, scénarios agricoles de la SNBC."
+    source: "The Shift Project, fiches de décryptage Agriculture (2024) : selon les scénarios, les émissions agricoles baissent de 30 à 60 % d'ici 2050, d'abord par la baisse du cheptel bovin (la digestion des ruminants fait plus de 40 % des émissions) et de l'azote de synthèse (environ 30 %) ; Citepa, Secten 2026 : 76,6 Mt en 2025 ; budget de la mesure : 1,5 Md€ par an (tondelier_mesures.agriculture)"
+    note: "Le programme mobilise une partie de ces leviers (contrats de transition, plan élevage, 15 % des aides réorientées) : 1 % (crise), 2 % (prudent), 5 % (médian), 8 % (optimiste) des émissions agricoles en 2037, en plus de la baisse du statu quo. Les scénarios les plus ambitieux font 30 % en 2050 au minimum."
   niches_climat:
-    valeur: {id: FIS-NICHES, libelle: "Niches défavorables au climat, voitures de fonction, barèmes kilométriques", secteur: transports, debut: 2028, plein: 2030,
-             effet_mt: {crise: 0.0, prudent: 0.0, median: -0.8, optimiste: -1.5}}
+    valeur: {id: FIS-NICHES, libelle: "Voitures de fonction et barèmes kilométriques réformés", secteur: transports, debut: 2028, plein: 2030, fin_debut: 2035, fin: 2045,
+             effet_mt: {crise: -0.19, prudent: -0.39, median: -0.77, optimiste: -1.35}}
     unite: mt_co2e
     statut: HYPOTHESE
-    note: "Liste des niches supprimées non précisée : zéro en crise et en prudent. À sourcer : rapport sur l'impact environnemental du budget de l'État (budget vert)."
+    source: "Transport & Environment et ERM (octobre 2024), « Niche brune sur les voitures de fonction » : 2,1 millions de voitures de société fin 2023, dont 1,1 million thermiques ou hybrides ; avantage fiscal de 3,96 Md€ en 2023 ; usage privé d'environ 65 % des trajets"
+    note: "1,1 million de voitures thermiques × 25 000 km par an (hypothèse : les voitures de société roulent plus) × 0,14 kg = 3,9 Mt. Part du parc électrifiée plus tôt grâce à la réforme : 5 % (crise), 10 % (prudent), 20 % (médian), 35 % (optimiste). Effet éteint de 2035 à 2045, quand les flottes du statu quo s'électrifient. Les autres niches défavorables, non précisées, ne sont pas comptées."
   renouvelables_pme:
-    valeur: {id: ENE-PTZ, libelle: "PTZ pour les renouvelables, fonds chaleur, décarbonation des PME", secteur: industrie, debut: 2028, plein: 2035,
-             effet_mt: {crise: 0.0, prudent: 0.0, median: -1.5, optimiste: -3.0}}
+    valeur: {id: ENE-PTZ, libelle: "PTZ pour les renouvelables, fonds chaleur, décarbonation des PME", secteur: industrie, debut: 2028, plein: 2047,
+             effet_mt: {crise: -4.0, prudent: -8.0, median: -14.0, optimiste: -20.0}}
     unite: mt_co2e
     statut: HYPOTHESE
-    note: "Sans montant ni chiffrage sourcé du gain par euro : zéro en crise et en prudent. À sourcer : bilans du fonds chaleur (ADEME), appels à projets de décarbonation de l'industrie."
+    source: "ADEME, bilan du fonds chaleur 2024 : 701,5 M€ d'aides à l'investissement pour environ 806 000 t de CO2 évitées par an, soit environ 1,15 t par an pour 1 000 € d'aide ; budget de la mesure : 1,5 Md€ par an (tondelier_mesures.energies_renouvelables)"
+    note: "Au ratio du fonds chaleur, 1,5 Md€ par an éviteraient 1,7 Mt de plus chaque année. Une partie du budget n'a pas ce rendement (bonification des prêts à taux zéro, communautés énergétiques) et une partie des projets se ferait sans aide : 0,2 Mt de plus par an (crise), 0,4 (prudent), 0,7 (médian), 1 (optimiste). Cumulé sur 20 ans, durée de vie des installations, puis stable (renouvellement) ; réduit au rythme de la décarbonation du statu quo, puisque la chaleur remplacée émet de moins en moins. Classé dans l'industrie (chaleur des entreprises et réseaux de chaleur)."

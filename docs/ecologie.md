@@ -57,8 +57,23 @@ Réponse au prix (facteur sur les émissions des transports et des bâtiments) :
 2037, 0,54 en 2050. Le coût budgétaire est la contrepartie de l'effet climatique : environ 30 Mt de moins dès 2030
 et 50 Mt à partir de 2037 (prudent), mais une assiette taxée plus étroite.
 
-À trancher : l'élasticité de long terme (0,6) appliquée à des prix huit fois plus élevés que le statu quo en 2060
-est une extrapolation ; la vitesse d'ajustement (0,35) et le prix de l'ETS2 gardé constant pèsent aussi.
+**Correction validée par Adrien le 05/11/2026** et fusionnée dans `main`. Restent des extrapolations à garder en
+tête : l'élasticité de long terme (0,6) appliquée à des prix huit fois plus élevés que le statu quo en 2060, la
+vitesse d'ajustement (0,35), le prix de l'ETS2 gardé constant.
+
+Conséquence relevée par les tests : avec la recette corrigée, le déficit du prudent avant clause ne passe plus sous
+3 %, si bien que la déduction de l'investissement reste à 50 % (la hausse conditionnée ne se déclenche pas). Un
+levier qui fait passer le déficit sous 3 % la déclenche, et son coût peut l'emporter à long terme : l'effet des
+leviers n'est plus monotone (`tests/test_leviers.py`, déduction figée pour isoler un levier).
+
+## Tondelier : effets en tonnes (05/11/2026)
+
+`programmes/tondelier/parametres.yaml`, groupe `tondelier_ecologie` : dix mesures, chacune estimée par scénario avec
+sa méthode et ses sources (Anah, DGAC, évaluation du Deutschlandticket, ADEME pour le fonds chaleur, T&E pour les
+voitures de fonction, SNCF pour le report modal, The Shift Project pour l'agriculture, RTE pour la sortie du
+nucléaire). Profil commun : `moteur/ecologie/emissions.profil` (montée, extinction quand le statu quo rattrape la
+mesure, réduction au rythme de la décarbonation du statu quo). Hypothèse de gaz fossile en secours pendant la sortie
+du nucléaire (+4 Mt dans le prudent vers 2047) validée par Adrien.
 
 ## Comparateur
 

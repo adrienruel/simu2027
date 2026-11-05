@@ -659,3 +659,6 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
   depuis le prix du statu quo n'érodait jamais l'assiette. Recette et émissions partagent désormais la même équation
   (option `ecologie_options.emissions_activite`). Déficit publié du prudent : 2037 3,01 → 3,39 % ; 2050 3,08 → 3,72 %.
 - Comparateur : `sorties/comparaison_ecologie.csv`.
+- Décisions d'Adrien du 05/11/2026 (après-midi) : correction de la recette carbone validée et fusionnée dans `main` ;
+  hypothèse de gaz en secours pendant la sortie du nucléaire de Tondelier validée ; les quatre mesures de Tondelier
+  estimées à zéro faute de source (ferroviaire, agriculture, voitures de fonction, renouvelables) sont sourcées.
