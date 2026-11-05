@@ -102,10 +102,11 @@ def prix_statu_quo(p: Parametres, t: int) -> float:
     return r["cce"] + (r["ets2"] if t >= r["debut_ets2"] else 0.0)
 
 
-def reponse_long_terme(ratio: float, part: float, elasticite: float) -> float:
-    """Facteur de long terme sur les émissions (et l'assiette) quand le prix du carbone est multiplié par ratio : le
-    prix final change de part × (ratio − 1), la demande répond avec l'élasticité. Même formule que la recette."""
-    return (1 + part * (ratio - 1)) ** (-elasticite)
+def reponse_long_terme(ecart_prix: float, contenu_kg_par_euro: float, elasticite: float) -> float:
+    """Facteur de long terme sur les émissions (et l'assiette) quand le prix du carbone dépasse celui du statu quo de
+    ecart_prix €/t : le prix final de l'énergie monte de ecart_prix × contenu / 1 000, la demande répond avec
+    l'élasticité. Même formule pour la recette (moteur/carbone.py)."""
+    return max(0.01, 1 + ecart_prix * contenu_kg_par_euro / 1000) ** (-elasticite)
 
 
 def reponse_prix(p: Parametres, prix: dict[int, float], debut: int = 2029) -> dict[int, float]:
@@ -115,7 +116,7 @@ def reponse_prix(p: Parametres, prix: dict[int, float], debut: int = 2029) -> di
     out, ln_a = {}, 0.0
     for t in ANNEES:
         if t >= debut:
-            cible = math.log(reponse_long_terme(prix[t] / prix_statu_quo(p, t), r["part_prix_final"], r["elasticite"]))
+            cible = math.log(reponse_long_terme(prix[t] - prix_statu_quo(p, t), r["contenu_carbone_kg_par_euro"], r["elasticite"]))
             ln_a += r["ajustement"] * (cible - ln_a)
         out[t] = math.exp(ln_a)
     return out

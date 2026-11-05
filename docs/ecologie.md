@@ -111,3 +111,17 @@ carbone, pas encore modélisé.
 
 Recouvrement possible chez Écologie de droite : le prix du carbone et la régénération ferroviaire poussent tous deux
 au report modal ; l'effet du rail est faible au regard du prix (−0,6 contre environ −30 Mt).
+
+## Correction de la réponse au prix (05/11/2026, question d'Adrien : « les gains du prix carbone paraissent très élevés »)
+
+Erreur trouvée : la réponse au prix appliquait la part de l'accise au prix du programme (35 %, paramètre de
+`carbone.py`, valable pour une hausse à partir du prix de 2029) à l'écart avec le prix du statu quo. La hausse du prix
+de l'essence était ainsi triplée : +86 % au lieu de +28 % en 2030, +277 % au lieu de +90 % en 2060.
+
+Corrigé : hausse du prix final = (prix du programme − prix du statu quo) × contenu carbone de la dépense d'énergie
+(1,3 kg de CO2 par euro : essence et gazole ≈ 2,3 à 2,6 kg par litre à ≈ 1,8 €). Facteur sur les émissions des
+transports et des bâtiments : 0,92 en 2030, 0,83 en 2037, 0,75 en 2050, 0,69 en 2060 (avant : 0,82 ; 0,65 ; 0,54 ;
+0,45). Repère : la taxe carbone suédoise (≈ 120 € par tonne) a baissé les émissions des transports d'environ 11 %
+(Andersson, 2019) ; ici, 225 € d'écart en 2030 donnent −8 % la première année et −14 % à long terme.
+
+La recette carbone suit la même équation : son érosion est moins forte, le déficit s'améliore (voir le journal).

@@ -59,11 +59,11 @@ ecologie:
     statut: DECISION
     note: "Secteurs dont les émissions répondent au prix du carbone des carburants et du chauffage (périmètre de l'ETS2). L'industrie et l'énergie sont dans l'ETS1 : leur réponse à un prix national n'est pas encore modélisée."
   reponse_prix:
-    valeur: {part_prix_final: 0.35, elasticite: 0.6, ajustement: 0.35}
+    valeur: {contenu_carbone_kg_par_euro: 1.3, elasticite: 0.6, ajustement: 0.35}
     unite: sans_unite
     statut: HYPOTHESE
-    source: "Encadrée : Labandeira, Labeaga et López-Otero (2017), méta-analyse des élasticités-prix de l'énergie, environ −0,2 à court terme et −0,6 à long terme"
-    note: "Émissions = statu quo × (1 + part × (prix du programme / prix du statu quo − 1))^(−élasticité) à long terme, atteint par ajustement partiel : chaque année, la part « ajustement » de l'écart au long terme se referme (rapport court terme / long terme de la méta-analyse). Part et élasticité égales à carbone.part_accise_prix_final et carbone_importe.elasticite_prix d'Écologie de droite (un test le vérifie) : une seule équation pour la recette et les émissions."
+    source: "Encadrée : Labandeira, Labeaga et López-Otero (2017), méta-analyse des élasticités-prix de l'énergie, environ −0,2 à court terme et −0,6 à long terme ; contenu carbone : essence et gazole environ 2,3 à 2,6 kg de CO2 par litre pour environ 1,8 € le litre (≈ 1,3 kg par euro), gaz environ 0,2 kg par kWh pour environ 0,12 € (≈ 1,7 kg par euro)"
+    note: "Hausse du prix final = (prix du carbone du programme − prix du statu quo, en €/t) × contenu carbone (kg par euro de dépense d'énergie) / 1 000 ; émissions = statu quo × (1 + hausse)^(−élasticité) à long terme, atteint par ajustement partiel (part de l'écart refermée chaque année). Correction du 05/11/2026 (question d'Adrien) : la version précédente appliquait la part de l'accise au prix du programme (35 %) à l'écart avec le prix du statu quo, ce qui triplait la hausse du prix (+86 % au lieu de +28 % en 2030 pour l'essence). Repère : la taxe carbone suédoise (environ 120 € par tonne) a baissé les émissions des transports d'environ 11 % (Andersson, 2019)."
   budgets_carbone:
     valeur: {2024: 342, 2029: 262, 2034: 194}
     unite: mt_co2e

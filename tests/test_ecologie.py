@@ -60,11 +60,13 @@ def test_reponse_prix_deux_sens(p):
 
 
 def test_une_seule_equation():
-    """La réponse des émissions au prix utilise les mêmes valeurs que la recette carbone d'Écologie de droite."""
+    """La réponse des émissions au prix utilise la même élasticité que la recette carbone d'Écologie de droite, et la
+    hausse du prix de l'essence reste dans le bon ordre de grandeur (correction du 05/11/2026)."""
     q = Parametres(programme="ecologie_de_droite")
     r = q.val("ecologie.reponse_prix")
-    assert r["part_prix_final"] == q.val("carbone.part_accise_prix_final")
     assert r["elasticite"] == q.val("carbone_importe.elasticite_prix")
+    hausse = (315 - em.prix_statu_quo(q, 2030)) * r["contenu_carbone_kg_par_euro"] / 1000
+    assert 0.2 < hausse < 0.4  # essence : (315 − 91) €/t × 2,3 kg / 1,85 € ≈ +28 %
 
 
 def test_snbc(p):
