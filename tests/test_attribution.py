@@ -22,9 +22,14 @@ def test_avec_ne_touche_pas_l_original():
 
 
 def test_chaque_neutralisation_a_un_effet():
+    from moteur.mesures import ecartees
+    from moteur.mesures import registre, plein_effet
+    ecartees_ = {"eco:" + x["mesure"][:50] for x in ecartees(P)}  # économies sans sources : comptées pour zéro (05/11/2026)
+    ecartees_ |= {"eco:" + m["mesure"][:50] for m in registre(P.programme)  # estimées à zéro dans le prudent (AME…)
+                  if (m.get("nature") or "montant") != "calcul_moteur" and plein_effet(m, P) == 0}
     for m in R["mesures"]:
         effet = max(abs(m["annees"][t]["solde_avant_clause"]) for t in m["annees"])
-        if m["id"] in NULLES_DANS_LE_PRUDENT:
+        if m["id"] in NULLES_DANS_LE_PRUDENT or m["id"] in ecartees_:
             assert effet < 1e-9, m["id"]
         else:
             assert effet > 0.01, m["id"]

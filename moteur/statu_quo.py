@@ -62,6 +62,13 @@ def population(p: Parametres, s: str) -> dict[int, tuple[float, ...]]:
     return _projection(_v(p, "demographie.scenario_fecondite", s))
 
 
+def choc_chomage(p: Parametres, s: str, t: int) -> float:
+    """Hausse du taux de chômage propre au scénario (chomage.hausse_crise), en montée sur chomage.annees_montee_crise
+    après 2029 (point de départ commun) ; commune au statu quo et aux programmes (demographie.chomage_tendanciel)."""
+    n = p.val("chomage.annees_montee_crise")
+    return _v(p, "chomage.hausse_crise", s) * max(0.0, min(1.0, (t - 2029) / n))  # 2029 : point de départ commun
+
+
 def effectifs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     """Personnes en emploi (taux par âge de 2025, figés), chômeurs (taux par âge de 2025, calés sur 2026) et
     publics des dépenses, par année (2026-2073). Même méthode que demographie.chomage_tendanciel."""
@@ -80,8 +87,10 @@ def effectifs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
                    "eleves": sum(v[3:18]), "etudiants": sum(v[18:25])}
     u26 = p.val("chomage.taux_2026")
     k = u26 / (1 - u26) * brut[2026]["emploi"] / brut[2026]["chomeurs_bruts"]
-    for x in brut.values():
+    for t, x in brut.items():
         x["chomeurs"] = x.pop("chomeurs_bruts") * k
+        choc = choc_chomage(p, s, t) * (x["emploi"] + x["chomeurs"])  # crise : emplois perdus, chômeurs en plus
+        x["emploi"], x["chomeurs"] = x["emploi"] - choc, x["chomeurs"] + choc
         x["taux_chomage"] = x["chomeurs"] / (x["emploi"] + x["chomeurs"])
     cache[("sq_effectifs", s)] = brut
     return brut

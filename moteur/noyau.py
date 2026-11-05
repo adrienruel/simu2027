@@ -119,6 +119,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     dette_prec = ctx.get("dette_depart") or sq.dette_fin_2028(p)
     fisher = prime = 0.0
     ratio_ref, pib_ref_2029 = ratio_reference(p, s), sq.pib(p, s)[2029]
+    ecart_scen = sq._v(p, "macro.ecart_taux_scenario", s)
     out = {}
     for t in ANNEES:
         bl = dict(bl_sq[t])
@@ -138,7 +139,8 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         prime += (prime_marche(p, s, ratio, ratio_ref) - prime) / mat
         if fisher_actif:
             fisher += ((infl[t] - infl_ref) - fisher) / mat
-        nominal = min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + ecart_taux_borne(p, prime, sup.get(t, 0.0))
+        nominal = (min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + ecart_taux_borne(p, prime, sup.get(t, 0.0))
+                   + ecart_scen * min(1.0, (t - 2029) / n_lt))
         interets_reels = (nominal - infl[t]) * dette_prec
         primaire = sum(bl.values())
         solde = rec - primaire - interets_reels
@@ -187,6 +189,12 @@ if __name__ == "__main__":
     print(f"{nom} contre le statu quo (prudent) — effet de chaque mesure sur le solde (Md€ de 2026, + = mieux)")
     for x in sorted(bilan_mesures(prog, p, annees=annees), key=lambda x: -abs(x[2050])):
         print(f"  {x['nature']:<12}" + "".join(f"{x[t]:9.1f}" for t in annees) + f"  {x['nom']}")
+    from .mesures import ecartees
+    ec = ecartees(p.__class__(programme=nom)) if nom not in ("statu_quo", "vide") else []
+    if ec:
+        print(f"Économies saisies écartées (sources insuffisantes ou déclaratives) : {sum(x['plein_effet_md'] for x in ec):.1f} Md€ à plein effet")
+        for x in ec:
+            print(f"  {x['plein_effet_md']:6.2f}  {x['motif']}  — {x['mesure']}")
     print("Déficit (% du PIB) : programme / statu quo")
     for s in SCENARIOS:
         print(f"  {s:<10}" + "  ".join(f"{t} : {res[s][t]['deficit']:.2f} / {sq[s][t]['deficit']:.2f}" for t in annees[:3]))

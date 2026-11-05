@@ -25,6 +25,12 @@ entreprises:
 # --- Effets macroéconomiques (feuille Effets macro), un jeu par scénario ----------------
 # Crise : valeurs de la feuille « Scénario de crise » de la v235 (anciennes valeurs « prudent ») ; à défaut, celles du prudent.
 macro:
+  dividende_calcule:
+    valeur: true
+    v235: false
+    unite: sans_unite
+    statut: DECISION
+    note: "Relecture du 05/11/2026 (point 1, décision d'Adrien) : la part du PIB en plus (productivité, IA, école) qui passe au solde est calculée sur le programme lui-même, année par année (moteur/macro.dividende_croissance), au lieu des 10 % de la v235."
   depart_commun: {valeur: false, v235: false, unite: sans_unite, statut: DECISION, note: "Option (désactivée le 30/10/2026, DÉCISION d'Adrien : chaque scénario garde son propre départ en 2029 ; le point commun est montré en 2027-2028, avant la bascule). Si activée : en 2029, toutes les hypothèses macro (multiplicateur, montées, réactions, érosion, emplois, productivité, santé, carbone…) prennent leur valeur prudente dans tous les scénarios, crise comprise ; chaque scénario rejoint ensuite ses propres valeurs (macro.convergence_scenarios_annees). Avant : l'optimiste avait 70 Md€ de PIB, 1 point de déficit et 1,4 point de chômage d'avance sur la crise dès 2029."}
   seniors_lies_aux_reportes: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10) : les emplois de seniors de l'ancien système suivent les personnes dont le départ est réellement reporté par l'âge légal à 65 ans, génération par génération (moteur/ancien_systeme.retraites_reportes : 0,2 million en 2029, 0,68 en 2037, plus personne après 2050), au lieu du forfait macro.seniors_court calé sur 1,25 an de report et gardé jusqu'en 2073."}
   permis_rapide_separe: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Correction du 30/10/2026 (point relevé par la relecture du 29/10) : le capital des projets accélérés est privé ; il est suivi à part, s'use comme celui des entreprises (macro.usure_capital, 10 % par an : l'investissement en plus chaque année fait un stock qui plafonne à environ dix fois le flux) et le permis rapide a un coût (services instructeurs). v235 : ajouté au capital du fonds, sans usure (il gonflait aussi la part des comptes placée en capital nouveau) et sans coût."}
@@ -84,3 +90,19 @@ inflation:
 # --- Dépenses des ministères année par année (moteur/depenses/ministeres.py, 04/11/2026) -------------------
 ministeres:
   par_public: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : les dépenses des ministères augmentent avec le temps ; indexation laissée au choix le plus cohérent. Chaque mission suit la croissance (salaires publics alignés sur ceux du privé) et le public qu'elle sert (population, élèves, étudiants, enfants, personnes en emploi), ou le PIB (défense, Union européenne, aide au développement, économie, écologie, agriculture, moitié de la recherche), ou les prix seulement (engagements financiers, monde combattant). v235 : croissance et population totale pour tout."}
+
+# --- Méthode de chiffrage (relecture et décisions du 05/11/2026) ---------------------------------
+
+economies:
+  sources_minimum:
+    valeur: 2
+    v235: 0
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 05/11/2026 : une économie saisie comme un montant doit être sourcée et recoupée par au moins deux sources indépendantes (Cour des comptes, inspections, COR, DG Trésor, Drees, rapports parlementaires, instituts : IPP, OFCE, Fipeco…), jamais par le programme ou une déclaration de candidat. Sinon elle compte pour zéro (moteur/mesures.motif_ecartee)."
+  estimations:
+    valeur: true
+    v235: false
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 05/11/2026 : les économies du registre sans chiffrage recoupé sont estimées par scénario (colonnes estimation_<scénario> de mesures_economies.csv). Faux (v235) : montant saisi (plein_effet_md), sans règle de sources."

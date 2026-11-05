@@ -48,3 +48,21 @@ def test_copie_garde_le_programme():
     p = Parametres()
     assert p.avec({"clause.active": False}).programme == p.programme
     assert p.en_crise().programme == p.programme
+
+
+def test_economies_saisies_sourcees_et_recoupees():
+    """Décision du 05/11/2026 : une économie saisie sans deux sources indépendantes, ou citant le programme d'un
+    candidat, compte pour zéro ; une économie retenue est multipliée par le taux de réalisation du scénario."""
+    from moteur.mesures import motif_ecartee, effet
+    from moteur.parametres import Parametres
+    p = Parametres()
+    m = {"mesure": "x", "retenue": "1", "plein_effet_md": "10", "premiere_annee": "2029", "annee_plein_effet": "2029",
+         "indexation": "pib", "nature": "montant", "sources": ""}
+    assert motif_ecartee(m, p) and effet(m, 2029, p, {}) == 0.0
+    m["sources"] = "Cour des comptes, rapport X ; Programme du candidat Y"
+    assert "déclarative" in motif_ecartee(m, p)
+    m["sources"] = "Cour des comptes, rapport X (2024) ; IGF, revue de dépenses Y (2023)"
+    assert motif_ecartee(m, p) is None
+    assert effet(m, 2029, p, {}) == pytest.approx(10 * p.val("economies.taux_realisation", "prudent"))
+    m["sources"] = "Loi de programmation des finances publiques ; Programme de stabilité 2026"
+    assert motif_ecartee(m, p) is None

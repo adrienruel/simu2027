@@ -598,3 +598,55 @@ Effet (déficit, % du PIB, prudent) : statu quo 2037 9,90 → 9,65, 2050 21,67 �
 Non corrigé, à trancher : `macro.part_pib_tendanciel_au_solde` (10 % du PIB en plus au solde, sans source : C2),
 santé indexée sur le salaire par tête (I2), scénario de crise du statu quo meilleur que le prudent jusqu'en 2045 (I3),
 architecture « mesures seules » pour les autres programmes (C3).
+
+## 5 novembre 2026 — Décisions d'Adrien sur la relecture (points 1 à 4)
+
+- **Santé (point 2) : surplus financé par les produits nocifs.** Le surplus de dépenses de santé au-delà d'une part
+  constante du PIB est couvert, avec un an de décalage, par une accise supplémentaire sur le tabac, l'alcool et les
+  produits sucrés et ultra-transformés (`moteur/sante.accise_produits_nocifs`, `sante_produits_nocifs.*`). La hausse
+  de prix réduit le volume taxé (fuite hors réseau comprise) et la consommation ; la baisse de consommation réduit les
+  soins avec délai. Plafonds de hausse de prix : tabac +100 %, alcool +50 %, sucrés +30 %. Prudent 2073 : surplus
+  102 Md€, recette 47 Md€, soins évités 5 Md€, **50 Md€ non couverts** (les plafonds sont atteints vers 2058) ;
+  médian : 12 Md€ non couverts. Remplace le garde-fou de la v235.
+- **Crise (point 3).** Productivité 0,4 % (bas des variantes du COR), chômage +2 points durables en trois ans
+  (`chomage.hausse_crise`), taux de marché +0,5 point (`macro.ecart_taux_scenario`), pour le statu quo et les
+  programmes. Test : déficit du statu quo rangé crise ≥ prudent ≥ médian ≥ optimiste chaque année.
+- **Économies saisies (point 4).** Règle commune (`moteur/mesures.py`) : une économie saisie en montant n'est retenue
+  qu'avec au moins deux sources indépendantes (colonne `sources`), jamais le programme ou une déclaration de candidat ;
+  sinon elle compte pour zéro et est listée comme écartée. Taux de réalisation par scénario (crise 50 %, prudent 60 %,
+  médian 80 %, optimiste 95 %). Aucune des 16 économies saisies du programme n'a encore ses sources : **22,5 Md€ à
+  plein effet écartés** jusqu'au sourçage. Restent hors de la règle pour l'instant : les coupes de missions
+  (`economies_missions.coupes`) et la décomposition des collectivités.
+- **Dividende de croissance (point 1).** La part d'un euro de PIB en plus qui passe au solde n'est plus 10 % sans
+  source : elle est mesurée sur le programme lui-même (`moteur/macro.dividende_croissance`), en recalculant tous ses
+  postes avec une productivité relevée de 0,3 point. Résultat : 2 % en 2030, 8 % en 2037, 7 % en 2050, 14 % en 2073
+  (le revenu universel revalorisé sur les prix fait monter le dividende avec le temps). Linéarisation autour du
+  prudent : la refonte complète (chaque poste recalculé aux salaires et au PIB de chaque scénario) reste à faire.
+
+Déficit du programme (prudent) : 2037 3,01 → 3,18 % ; 2050 3,49 → 3,46 % ; 2073 3,24 → 3,08 %. Médian 2050 : 0,21 →
+0,88 % ; optimiste 2050 : −1,75 → −0,81 %. Crise 2050 : 4,39 → 8,95 %.
+
+## 5 novembre 2026 — Économies sourcées ou estimées, antidépresseurs
+
+- **Les 16 économies saisies du programme** sont passées en « estimation » (`mesures_economies.csv`, colonnes
+  `sources`, `methode`, `estimation_<scénario>`) : aucune n'avait deux sources indépendantes qui chiffrent la mesure
+  telle qu'écrite ; chacune a maintenant ses sources pour les bases et une estimation propre par scénario (décision
+  d'Adrien : « s'il n'y a pas de source, estimation prudente / médiane / optimiste »). Total à plein effet : crise
+  9,7 Md€, prudent 12,3, médian 17,6, optimiste 22,5, contre 22,5 saisis. Écarts les plus nets : cabinets de conseil
+  (0,05 Md€ en prudent contre 0,5 saisis : l'État y dépense environ 0,1 Md€ par an), aide médicale d'État (0 en
+  prudent, d'après le rapport Évin-Stefanini), collectivités (5 au lieu de 8), effets sur les caisses de sécurité
+  sociale et les achats. Les estimations portent déjà leur taux de réalisation.
+- Les estimations du médian et de l'optimiste passent au solde par l'écart au prudent (`mesures.ecart_scenario`,
+  canal « tendance_et_ecole » du moteur du programme).
+- **Antidépresseurs** (décision d'Adrien) : reste à charge hors dépression modérée à sévère et prescription recentrée
+  sur les recommandations de la HAS (2017). Estimation : crise −0,05 Md€, prudent 0, médian 0,1, optimiste 0,2. Le
+  médicament coûte peu, les complémentaires reprennent une partie du reste à charge, et la baisse de l'usage dans la
+  dépression légère suppose plus de psychothérapie ; un sous-traitement des dépressions modérées coûterait en arrêts de
+  travail. Base de remboursement à sourcer (Medic'AM, classe N06A). Ligne au poste santé.
+- Comparateur des programmes (claude.ai) mis à jour avec l'export du jour.
+
+Déficit du programme (prudent) : 2037 3,01 % ; 2050 3,08 % ; 2073 2,67 %. Médian 2050 0,31 % ; crise 2050 7,65 %.
+
+Corrigé en relançant les tests : le dividende de croissance est mesuré sans l'accise sur les produits nocifs (plafonnée,
+donc non linéaire), qui rendait les effets des mesures non additifs (écart de 26 Md€ en 2050, 5,5 après) ; le choc de
+chômage et de taux de la crise démarre après le point de départ commun de 2029.

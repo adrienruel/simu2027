@@ -66,6 +66,39 @@ def tva_par_point_eviction(p: Parametres, scenario: str = "prudent") -> float:
     return total / 1e9
 
 
+def dividende_croissance(p: Parametres, scenario_retenu: str, traj: dict, pib0: dict) -> dict[int, float] | None:
+    """Part d'un euro de PIB en plus (productivité) qui passe au solde primaire du programme, année par année.
+
+    Calculée sur le programme lui-même (05/11/2026, relecture : remplace macro.part_pib_tendanciel_au_solde, 10 %
+    sans source) : les postes du programme sont recalculés avec une tendance de productivité relevée de
+    macro.ecart_dividende, et le dividende est l'écart de solde primaire rapporté à l'écart de PIB. Chaque poste suit
+    alors sa propre règle (recettes sur l'assiette, revenu universel revalorisé au minimum de l'inflation et de la
+    croissance nominale, santé sur sa pente, salaires publics alignés…), comme le statu quo, qui recalcule tout aux
+    salaires de chaque scénario. None : ancienne convention (v235)."""
+    if not p.val("macro.dividende_calcule") or getattr(p, "_calcul_dividende", False):
+        return None  # pendant la mesure du dividende : calculs emboîtés (déduction de l'IS) sans nouvelle mesure
+    from .trajectoire_annuelle import postes
+    d = p.val("macro.ecart_dividende")
+    g = p.val("macro.tendance", "prudent")
+    # sans l'accise sur les produits nocifs : règle de financement du surplus de santé, plafonnée (non linéaire) ;
+    # la garder rendait le dividende instable d'une variante à l'autre et les effets des mesures non additifs
+    # (relecture des tests, 05/11/2026). Le surplus et sa couverture suivent déjà le PIB par construction.
+    base = {"sante_produits_nocifs.active": False} if p.val("sante_produits_nocifs.active") else {}
+    p0 = p.avec(base) if base else p
+    pd = p.avec({**base, "macro.tendance": g + d})  # seule la colonne prudente (de crise dans le calcul de crise) est lue
+    for q_ in (p0, pd):
+        q_.colonne_prudent, q_._surcharges = p.colonne_prudent, p._surcharges
+        q_._calcul_dividende = True
+    traj = postes(p0, scenario_retenu) if base else traj
+    traj_d = postes(pd, scenario_retenu)
+    out = {}
+    for t in ANNEES:
+        dp = pib0[t] * (((1 + g + d) / (1 + g)) ** (t - 2029) - 1)
+        out[t] = (traj_d[t]["solde_primaire_hors_macro"] - traj[t]["solde_primaire_hors_macro"]) / dp if dp else 0.0
+    out[2029] = out[2030]
+    return out
+
+
 def _montee(t, annees):
     return min(1.0, (t - 2029 + 1) / annees)
 
@@ -118,6 +151,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         taux_va = {t: part_budget for t in ANNEES}
     from .trajectoire_annuelle import postes
     traj = postes(p, scenario_retenu)
+    # économies du registre estimées par scénario : écart au prudent (05/11/2026), compté dans « tendance_et_ecole »
+    from .mesures import ecart_scenario
+    eco_ecart = {s_: ecart_scenario(p, s_) for s_ in ("median", "optimiste")}
+    dividende = dividende_croissance(p, scenario_retenu, traj, pib0)
     from .trajectoire_annuelle import lignes as lignes_traj
     bases_demo = lignes_traj(p, scenario_retenu).bases_demographie
     cle_indice = {"recettes": "emploi", "recettes_population": "total", "salaries_impot": "c_impot",
@@ -157,8 +194,11 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     dep_s = {s_: module_sante.depenses(p, s_) for s_ in SCENARIOS}
     gf_s = module_sante.garde_fou(p, scenario_retenu)
     tv = module_sante.tva_sante(p)
-    sante = {"median": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["median"][t] for t in ANNEES},
-             "optimiste": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["optimiste"][t] for t in ANNEES},
+    # accise sur les produits nocifs (05/11/2026) : chaque scénario a la sienne ; garde-fou de la v235 : prudent seul
+    gf_sc = ({s_: module_sante.garde_fou(p, s_) for s_ in ("median", "optimiste")} if p.val("sante_produits_nocifs.active")
+             else {s_: {t: 0.0 for t in ANNEES} for s_ in ("median", "optimiste")})
+    sante = {"median": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["median"][t] + gf_sc["median"][t] for t in ANNEES},
+             "optimiste": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["optimiste"][t] + gf_sc["optimiste"][t] for t in ANNEES},
              "tva_prudent": tv["prudent"], "tva_median": tv["median"], "tva_optimiste": tv["optimiste"]}
     from .carbone import effet_solde
     from .recettes.total import ligne_3_tva
@@ -176,7 +216,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         # effet de Fisher (30/10/2026) : les taux nominaux suivent l'écart d'inflation à la référence (1,8 %), au
         # rythme du renouvellement de la dette (fisher_app, mis à jour dans la boucle) ; sans lui, une inflation plus
         # basse relèverait mécaniquement le taux réel pendant cinquante ans
-        return nominal + fisher_app[s] - infl_s[s][t]
+        # hausse de taux propre au scénario (crise), au rythme du taux long, comme moteur/noyau.trajectoire
+        return (nominal + fisher_app[s] - infl_s[s][t]
+                + m("ecart_taux_scenario", s) * min(1.0, (t - 2029) / p.val("macro.annees_taux_long_terme")))
 
     def baisse_spread(t, s):
         return m("baisse_spread", s) * min(1.0, max(0, t - 2029) / p.val("macro.annees_baisse_spread"))
@@ -451,7 +493,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             # Totaux
             pib = (pib_demo + (emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_permis + pib_fonds_emploi + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
                    + pib_tend + pib_ecole)
-            q = p.val("macro.part_pib_tendanciel_au_solde")
+            q = dividende[t] if dividende is not None else p.val("macro.part_pib_tendanciel_au_solde")
             # dirigeants de petites sociétés qui se versent un salaire au lieu du bénéfice (IS à 45 %)
             arb = p.val("entreprises_cellules.arbitrage_tpe") if ent_cellules else None
             s_tpe = (-arbitrage_tpe(p, s)["perte"] * min(1.0, (n + 1) / arb["montee"]) * (1 + tend0) ** n) if arb else 0.0
@@ -461,7 +503,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 solde += (tva_s_t + inv_taxe + carb_t
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
             else:
-                solde += (sante_t + tva_s_t + (pib_tend + pib_ecole) * q + inv_taxe + carb_t
+                solde += (sante_t + tva_s_t + (pib_tend + pib_ecole) * q + inv_taxe + carb_t + eco_ecart[s][t]
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
             mesures = 0.0
             if clause_s:
@@ -532,7 +574,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 c_sante, c_tva_sante, c_tend = 0.0, tva_s_t, 0.0
                 c_carbone = carb_t
             else:
-                c_sante, c_tva_sante, c_tend = sante_t, tva_s_t, (pib_tend + pib_ecole) * q
+                c_sante, c_tva_sante, c_tend = sante_t, tva_s_t, (pib_tend + pib_ecole) * q + eco_ecart[s][t]
                 c_carbone = carb_t
             sc.detail.setdefault("canaux", {})[t] = {
                 "emploi": s_emploi, "ajustement_budgetaire": s_aj, "capital_du_fonds": s_cap, "logement": s_log,

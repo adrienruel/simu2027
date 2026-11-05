@@ -267,10 +267,11 @@ macro:
     statut: HYPOTHESE
     note_v235: "HYPOTHÈSE PRUDENTE. La littérature trouve que la réaction des hauts revenus à l’impôt passe surtout par le moment et la forme de déclaration, peu par les heures travaillées (Saez, Slemrod et Giertz, Journal of Economic Literature, 2012). Prudent : la moitié est réelle ; médian : un quart ; optimiste : un dixième. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : un dixième seulement de réaction réelle des hauts revenus, valeur optimiste de la note (avant : 0.175)."
   tendance:
-    valeur: {crise: 0.007, prudent: 0.007, median: 0.01, optimiste: 0.01}
+    valeur: {crise: 0.004, prudent: 0.007, median: 0.01, optimiste: 0.01}
+    v235: {crise: 0.007, prudent: 0.007, median: 0.01, optimiste: 0.01}
     unite: sans_unite
     statut: HYPOTHESE
-    note: "Prudent : 0,7 % (COR, juin 2026) ; médian et optimiste : 1 %."
+    note: "Prudent : 0,7 % (COR, juin 2026) ; médian et optimiste : 1 % ; crise : 0,4 %, le bas des variantes de productivité du COR (05/11/2026, décision d'Adrien après la relecture : la crise était meilleure que le prudent jusqu'en 2045, avec la même productivité)."
   croissance_par_ecart_type:
     source: "Encadrement : Heller-Sahlgren et Jordahl (IFN, 2023) ; Hanushek et Woessmann"
     valeur: {crise: 0, prudent: 0.00305, median: 0.0061, optimiste: 0.0096}
@@ -324,6 +325,13 @@ macro:
   taux_apparent_2029: {valeur: 0.027, unite: taux, statut: SOURCE, source: "Charge d'intérêts des APU ≈ 3,2 % du PIB (Effets macro!B211)"}
   taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
   annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
+  ecart_taux_scenario:
+    valeur: {crise: 0.005, prudent: 0.0, median: 0.0, optimiste: 0.0}
+    v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : l'écart OAT − Bund à 10 ans est passé d'environ 0,3 point (2010) à près de 2 points (novembre 2011) pendant la crise de la zone euro"
+    note: "Hausse du taux de marché propre au scénario de crise, en plus de la prime de dette, pour le statu quo comme pour les programmes (moteur/noyau.trajectoire, moteur/macro.taux_reel). Ajouté le 05/11/2026."
   prime_dette_bornes:
     valeur: [-0.008, 0.04]
     unite: taux
@@ -340,7 +348,8 @@ macro:
   maturite_moyenne_dette: {valeur: 8.5, unite: sans_unite, statut: SOURCE, source: "Agence France Trésor : durée de vie moyenne de la dette négociable de l'État ≈ 8,5 ans (2025)", note: "Le taux apparent rejoint le taux de marché au rythme du renouvellement de la dette (1 / 8,5 par an)."}
   annees_ia: {valeur: 10, unite: sans_unite, statut: HYPOTHESE}
   premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}
-  part_pib_tendanciel_au_solde: {valeur: 0.1, unite: taux, statut: HYPOTHESE}
+  part_pib_tendanciel_au_solde: {valeur: 0.1, unite: taux, statut: HYPOTHESE, note: "Convention de la v235, sans source : ne sert plus que si macro.dividende_calcule est faux."}
+  ecart_dividende: {valeur: 0.003, unite: taux, statut: HYPOTHESE, note: "Hausse de la tendance de productivité utilisée pour mesurer le dividende de croissance (écart prudent-médian)."}
 
 renouvelables:
   soutien_budget_2026: {valeur: 9.06, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149"}
@@ -359,6 +368,14 @@ deces:
   annee_reference: {valeur: 2023, unite: annee, statut: HYPOTHESE, note: "Décès de 2023 (Successions!C5), année des droits de succession de la base."}
 
 chomage:
+  hausse_crise:
+    valeur: {crise: 0.02, prudent: 0.0, median: 0.0, optimiste: 0.0}
+    v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : en France, le chômage est passé de 7,1 % (2008) à 10,5 % (2015) et n'est revenu sous 8 % qu'en 2019 ; persistance du chômage après les récessions dans l'OCDE (Ball, Long-term damage from the Great Recession in OECD countries, NBER WP 20185, 2014)"
+    note: "Hausse durable du taux de chômage dans la crise (points de la population active), atteinte en trois ans après 2029 (point de départ commun), appliquée au statu quo et aux programmes (même tendanciel). Ajouté le 05/11/2026."
+  annees_montee_crise: {valeur: 3, unite: sans_unite, statut: HYPOTHESE}
   taux_2026: {valeur: 0.083, unite: taux, statut: SOURCE, source: "Insee, 2e trimestre 2026 (Mayotte comprise)"}
   taux_par_age:
     valeur: {"15-24": 0.198, "25-49": 0.069, "50+": 0.050}
@@ -622,3 +639,14 @@ ministeres:
     unite: sans_unite
     statut: HYPOTHESE
     note: "Baisse des moyens de l'enseignement pour 1 % d'élèves (après 2035) ou d'étudiants en moins. Prudent : la moitié (les moyens par élève ont augmenté quand les effectifs baissaient ; c'est aussi la règle « un départ sur deux » de la v235). La baisse d'ici 2035 est déjà dans les mesures (enseignants ajustés aux élèves)."
+
+# --- Économies saisies par un programme (décision du 05/11/2026) --------------------------------
+economies:
+  taux_realisation:
+    valeur: {crise: 0.5, prudent: 0.6, median: 0.8, optimiste: 0.95}
+    v235: {crise: 1.0, prudent: 1.0, median: 1.0, optimiste: 1.0}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : la RGPP visait 15 Md€ sur 2009-2013, dont 12,3 attendus fin 2012 ; la direction du budget estimait 11,9 Md€ réalisés (97 %), chiffre de l'administration elle-même, que le rapport des inspections générales (IGA, IGF, IGAS, septembre 2012) juge difficile à vérifier (Sénat, avis n° 154 sur le PLF 2013, mission Gestion des finances publiques)"
+    note: "Part d'une économie saisie, même sourcée, qui se réalise vraiment (retards, contournements, dépenses qui réapparaissent ailleurs). Ne s'applique pas aux mesures calculées par le moteur (règles : âge, barèmes). Prudent bien sous l'auto-évaluation de la RGPP. Ajouté le 05/11/2026."
+

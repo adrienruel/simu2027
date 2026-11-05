@@ -219,3 +219,11 @@ def test_cellules_de_salaries(p):
     assert c["niveaux_2029"]["public"] == pytest.approx(a["public"]["prelevements"], rel=0.01)
     for t in (2050, 2073):
         assert c[t]["prive"] == pytest.approx(c[t]["salaries"], rel=0.01)
+
+
+def test_scenarios_dans_l_ordre_chaque_annee(res):
+    """Relecture du 5 novembre 2026 : la crise était meilleure que le prudent jusqu'en 2045. Le déficit du statu quo
+    doit être rangé crise ≥ prudent ≥ médian ≥ optimiste chaque année après le point de départ commun."""
+    for t in range(2030, 2074):  # 2029 : point de départ commun (seules l'inflation et la fécondité diffèrent)
+        d = [res[s][t]["deficit"] for s in ("crise", "prudent", "median", "optimiste")]
+        assert d == sorted(d, reverse=True), (t, d)
