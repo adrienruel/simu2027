@@ -650,3 +650,12 @@ Déficit du programme (prudent) : 2037 3,01 % ; 2050 3,08 % ; 2073 2,67 %. Médi
 Corrigé en relançant les tests : le dividende de croissance est mesuré sans l'accise sur les produits nocifs (plafonnée,
 donc non linéaire), qui rendait les effets des mesures non additifs (écart de 26 Md€ en 2050, 5,5 après) ; le choc de
 chômage et de taux de la crise démarre après le point de départ commun de 2029.
+
+## 5 novembre 2026 — Émissions et empreinte carbone (branche `ecologie-emissions`)
+
+- Décision d'Adrien : la baisse des émissions suit l'activité, le progrès technique et la part importée
+  (`moteur/ecologie/emissions.py`, `docs/ecologie.md`), au lieu du taux fixe de −1,9 % par an.
+- **Erreur trouvée** : la recette carbone ne faisait répondre l'assiette au prix qu'à partir du prix de 2029 ; le saut
+  depuis le prix du statu quo n'érodait jamais l'assiette. Recette et émissions partagent désormais la même équation
+  (option `ecologie_options.emissions_activite`). Déficit publié du prudent : 2037 3,01 → 3,39 % ; 2050 3,08 → 3,72 %.
+- Comparateur : `sorties/comparaison_ecologie.csv`.
