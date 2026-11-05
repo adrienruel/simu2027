@@ -75,13 +75,16 @@ Effet des mesures sur le solde primaire, contre le statu quo (Md€ de 2026 ; �
 
 | Scénario | Solde primaire 2037 (points de PIB) | Emplois perdus (SMIC) | Déficit 2037 : programme / statu quo |
 |---|---|---|---|
-| Crise | −2,7 | 668 000 | 12,9 / 9,2 % |
+| Crise | −2,7 | 668 000 | 16,4 / 12,3 % (crise redéfinie le 05/11/2026 ; avant : 12,9 / 9,2) |
 | Prudent | −2,1 | 534 000 | 12,6 / 9,6 % |
 | Médian | −1,1 | 401 000 | 10,0 / 8,5 % |
 | Optimiste | −0,2 | 267 000 | 8,4 / 8,2 % |
 
 Le déficit s'écarte plus que le solde primaire : les intérêts de la dette en plus s'accumulent. Le statu quo
 lui-même diverge (docs/statu_quo.md) : il faut lire l'écart, pas le niveau.
+
+Intégré sur le moteur corrigé le 5 novembre 2026 (prime de dette bornée, défense comptée une fois, crise plus dure) :
+prudent inchangé à 0,01 point près ; crise 2050 : 42,9 % contre 31,8 % au statu quo.
 
 ## Limites connues
 

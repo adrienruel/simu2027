@@ -63,9 +63,10 @@ def motif_ecartee(m: dict, p: Parametres | None = None) -> str | None:
 
 def registre(programme: str | None = PROGRAMME_DEFAUT) -> list[dict]:
     """Mesures datées du programme (programmes/<programme>/mesures_economies.csv) ; aucune sans programme."""
-    if programme is None:
+    chemin = dossier_programme(programme) / "mesures_economies.csv" if programme is not None else None
+    if chemin is None or not chemin.exists():  # programme sans registre (ex. tondelier : mesures dans parametres.yaml)
         return []
-    with (dossier_programme(programme) / "mesures_economies.csv").open(encoding="utf-8") as f:
+    with chemin.open(encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 
