@@ -81,9 +81,10 @@ def plein_effet(m: dict, p: Parametres, scenario: str = "prudent") -> float:
     if not p.val("economies.estimations"):  # v235 : montant saisi, réalisé en entier
         return float(m["plein_effet_md"])
     if nature == "estimation":
-        s = p.colonne_prudent if scenario == "prudent" else scenario  # calcul de crise : colonne prudente = crise
+        # calcul de crise : colonne prudente = crise ; « depart » : colonne prudente même dans le calcul de crise
+        s = "prudent" if scenario == "depart" else (p.colonne_prudent if scenario == "prudent" else scenario)
         return float(m[f"estimation_{s}"])
-    realisation = 1.0 if nature == "calcul_moteur" else p.val("economies.taux_realisation", scenario)
+    realisation = 1.0 if nature == "calcul_moteur" else p.val("economies.taux_realisation", scenario)  # « depart » : prudent
     return float(m["plein_effet_md"]) * realisation
 
 
@@ -105,6 +106,8 @@ def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float], scenario: st
         return 0.0
     if not p.val("economies.estimations") and not (m.get("decision") or "v").startswith("v"):
         return 0.0  # v235 : mesure ajoutée après la v235 (décision datée, pas une version du classeur)
+    if t <= 2029 and p.val("macro.depart_commun"):
+        scenario = "depart"  # option du point de départ commun : 2029 aux hypothèses prudentes
     return float(m["retenue"]) * plein_effet(m, p, scenario) * montee * index
 
 
