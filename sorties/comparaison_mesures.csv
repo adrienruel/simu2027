@@ -21,12 +21,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|2,Écologie de droite,Crise,2060,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-70.2,-2.231
 Écologie de droite|Crise|2073|2,Écologie de droite,Crise,2073,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-65.61,-2.301
 Écologie de droite|Crise|2029|3,Écologie de droite,Crise,2029,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.91,-0.198
-Écologie de droite|Crise|2032|3,Écologie de droite,Crise,2032,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.47,-0.179
-Écologie de droite|Crise|2037|3,Écologie de droite,Crise,2037,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.73,-0.18
-Écologie de droite|Crise|2045|3,Écologie de droite,Crise,2045,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.92,-0.18
-Écologie de droite|Crise|2050|3,Écologie de droite,Crise,2050,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.99,-0.182
-Écologie de droite|Crise|2060|3,Écologie de droite,Crise,2060,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-6.35,-0.202
-Écologie de droite|Crise|2073|3,Écologie de droite,Crise,2073,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-7.23,-0.254
+Écologie de droite|Crise|2032|3,Écologie de droite,Crise,2032,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.19,-0.17
+Écologie de droite|Crise|2037|3,Écologie de droite,Crise,2037,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.44,-0.171
+Écologie de droite|Crise|2045|3,Écologie de droite,Crise,2045,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.62,-0.171
+Écologie de droite|Crise|2050|3,Écologie de droite,Crise,2050,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.69,-0.173
+Écologie de droite|Crise|2060|3,Écologie de droite,Crise,2060,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-6.06,-0.192
+Écologie de droite|Crise|2073|3,Écologie de droite,Crise,2073,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-6.96,-0.244
 Écologie de droite|Crise|2029|4,Écologie de droite,Crise,2029,Recettes,"Impôt unique des retraités du nouveau système (remplace CSG, CASA, IR des pensions)",budget,-32.51,-1.09
 Écologie de droite|Crise|2032|4,Écologie de droite,Crise,2032,Recettes,"Impôt unique des retraités du nouveau système (remplace CSG, CASA, IR des pensions)",budget,-33.78,-1.107
 Écologie de droite|Crise|2037|4,Écologie de droite,Crise,2037,Recettes,"Impôt unique des retraités du nouveau système (remplace CSG, CASA, IR des pensions)",budget,-35.47,-1.112
@@ -35,33 +35,33 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|4,Écologie de droite,Crise,2060,Recettes,"Impôt unique des retraités du nouveau système (remplace CSG, CASA, IR des pensions)",budget,-37.92,-1.205
 Écologie de droite|Crise|2073|4,Écologie de droite,Crise,2073,Recettes,"Impôt unique des retraités du nouveau système (remplace CSG, CASA, IR des pensions)",budget,-40.2,-1.41
 Écologie de droite|Crise|2029|5,Écologie de droite,Crise,2029,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-81.56,-2.735
-Écologie de droite|Crise|2032|5,Écologie de droite,Crise,2032,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-81.32,-2.666
-Écologie de droite|Crise|2037|5,Écologie de droite,Crise,2037,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-85.73,-2.687
-Écologie de droite|Crise|2045|5,Écologie de droite,Crise,2045,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-88.79,-2.698
-Écologie de droite|Crise|2050|5,Écologie de droite,Crise,2050,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-88.28,-2.682
-Écologie de droite|Crise|2060|5,Écologie de droite,Crise,2060,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-83.76,-2.661
-Écologie de droite|Crise|2073|5,Écologie de droite,Crise,2073,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-76.39,-2.68
+Écologie de droite|Crise|2032|5,Écologie de droite,Crise,2032,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-79.92,-2.62
+Écologie de droite|Crise|2037|5,Écologie de droite,Crise,2037,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-84.29,-2.642
+Écologie de droite|Crise|2045|5,Écologie de droite,Crise,2045,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-87.31,-2.653
+Écologie de droite|Crise|2050|5,Écologie de droite,Crise,2050,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-86.8,-2.637
+Écologie de droite|Crise|2060|5,Écologie de droite,Crise,2060,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-82.32,-2.616
+Écologie de droite|Crise|2073|5,Écologie de droite,Crise,2073,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-75.04,-2.633
 Écologie de droite|Crise|2029|6,Écologie de droite,Crise,2029,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,32.5,1.09
-Écologie de droite|Crise|2032|6,Écologie de droite,Crise,2032,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,35.75,1.172
-Écologie de droite|Crise|2037|6,Écologie de droite,Crise,2037,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,36.02,1.129
-Écologie de droite|Crise|2045|6,Écologie de droite,Crise,2045,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,36.91,1.122
-Écologie de droite|Crise|2050|6,Écologie de droite,Crise,2050,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,36.6,1.112
-Écologie de droite|Crise|2060|6,Écologie de droite,Crise,2060,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,32.45,1.031
-Écologie de droite|Crise|2073|6,Écologie de droite,Crise,2073,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,23.48,0.824
+Écologie de droite|Crise|2032|6,Écologie de droite,Crise,2032,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,36.81,1.207
+Écologie de droite|Crise|2037|6,Écologie de droite,Crise,2037,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,37.11,1.163
+Écologie de droite|Crise|2045|6,Écologie de droite,Crise,2045,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,38.03,1.156
+Écologie de droite|Crise|2050|6,Écologie de droite,Crise,2050,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,37.72,1.146
+Écologie de droite|Crise|2060|6,Écologie de droite,Crise,2060,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,33.54,1.066
+Écologie de droite|Crise|2073|6,Écologie de droite,Crise,2073,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,24.5,0.86
 Écologie de droite|Crise|2029|7,Écologie de droite,Crise,2029,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.84,-0.229
-Écologie de droite|Crise|2032|7,Écologie de droite,Crise,2032,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.41,-0.21
-Écologie de droite|Crise|2037|7,Écologie de droite,Crise,2037,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.69,-0.21
-Écologie de droite|Crise|2045|7,Écologie de droite,Crise,2045,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.91,-0.21
-Écologie de droite|Crise|2050|7,Écologie de droite,Crise,2050,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.97,-0.212
-Écologie de droite|Crise|2060|7,Écologie de droite,Crise,2060,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-7.29,-0.232
-Écologie de droite|Crise|2073|7,Écologie de droite,Crise,2073,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-8.08,-0.283
+Écologie de droite|Crise|2032|7,Écologie de droite,Crise,2032,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.13,-0.201
+Écologie de droite|Crise|2037|7,Écologie de droite,Crise,2037,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.4,-0.201
+Écologie de droite|Crise|2045|7,Écologie de droite,Crise,2045,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.61,-0.201
+Écologie de droite|Crise|2050|7,Écologie de droite,Crise,2050,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.67,-0.203
+Écologie de droite|Crise|2060|7,Écologie de droite,Crise,2060,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-7.0,-0.222
+Écologie de droite|Crise|2073|7,Écologie de droite,Crise,2073,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-7.81,-0.274
 Écologie de droite|Crise|2029|8,Écologie de droite,Crise,2029,Recettes,Successions (transmissions d'entreprises exonérées),budget,-5.65,-0.19
-Écologie de droite|Crise|2032|8,Écologie de droite,Crise,2032,Recettes,Successions (transmissions d'entreprises exonérées),budget,-6.25,-0.205
-Écologie de droite|Crise|2037|8,Écologie de droite,Crise,2037,Recettes,Successions (transmissions d'entreprises exonérées),budget,-8.09,-0.253
-Écologie de droite|Crise|2045|8,Écologie de droite,Crise,2045,Recettes,Successions (transmissions d'entreprises exonérées),budget,-10.42,-0.317
-Écologie de droite|Crise|2050|8,Écologie de droite,Crise,2050,Recettes,Successions (transmissions d'entreprises exonérées),budget,-10.65,-0.323
-Écologie de droite|Crise|2060|8,Écologie de droite,Crise,2060,Recettes,Successions (transmissions d'entreprises exonérées),budget,-10.62,-0.338
-Écologie de droite|Crise|2073|8,Écologie de droite,Crise,2073,Recettes,Successions (transmissions d'entreprises exonérées),budget,-10.23,-0.359
+Écologie de droite|Crise|2032|8,Écologie de droite,Crise,2032,Recettes,Successions (transmissions d'entreprises exonérées),budget,-6.09,-0.2
+Écologie de droite|Crise|2037|8,Écologie de droite,Crise,2037,Recettes,Successions (transmissions d'entreprises exonérées),budget,-7.91,-0.248
+Écologie de droite|Crise|2045|8,Écologie de droite,Crise,2045,Recettes,Successions (transmissions d'entreprises exonérées),budget,-10.22,-0.311
+Écologie de droite|Crise|2050|8,Écologie de droite,Crise,2050,Recettes,Successions (transmissions d'entreprises exonérées),budget,-10.45,-0.317
+Écologie de droite|Crise|2060|8,Écologie de droite,Crise,2060,Recettes,Successions (transmissions d'entreprises exonérées),budget,-10.43,-0.331
+Écologie de droite|Crise|2073|8,Écologie de droite,Crise,2073,Recettes,Successions (transmissions d'entreprises exonérées),budget,-10.06,-0.353
 Écologie de droite|Crise|2029|9,Écologie de droite,Crise,2029,Recettes,Contribution d'épargne retraite et recettes non fiscales gardées au budget,budget,29.0,0.973
 Écologie de droite|Crise|2032|9,Écologie de droite,Crise,2032,Recettes,Contribution d'épargne retraite et recettes non fiscales gardées au budget,budget,29.34,0.962
 Écologie de droite|Crise|2037|9,Écologie de droite,Crise,2037,Recettes,Contribution d'épargne retraite et recettes non fiscales gardées au budget,budget,29.99,0.94
@@ -70,19 +70,19 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|9,Écologie de droite,Crise,2060,Recettes,Contribution d'épargne retraite et recettes non fiscales gardées au budget,budget,29.33,0.932
 Écologie de droite|Crise|2073|9,Écologie de droite,Crise,2073,Recettes,Contribution d'épargne retraite et recettes non fiscales gardées au budget,budget,26.38,0.926
 Écologie de droite|Crise|2029|10,Écologie de droite,Crise,2029,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-32.24,-1.081
-Écologie de droite|Crise|2032|10,Écologie de droite,Crise,2032,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-32.19,-1.055
-Écologie de droite|Crise|2037|10,Écologie de droite,Crise,2037,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-33.03,-1.035
-Écologie de droite|Crise|2045|10,Écologie de droite,Crise,2045,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-33.97,-1.032
-Écologie de droite|Crise|2050|10,Écologie de droite,Crise,2050,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-33.99,-1.033
-Écologie de droite|Crise|2060|10,Écologie de droite,Crise,2060,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-32.91,-1.046
-Écologie de droite|Crise|2073|10,Écologie de droite,Crise,2073,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-30.86,-1.083
+Écologie de droite|Crise|2032|10,Écologie de droite,Crise,2032,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-31.96,-1.048
+Écologie de droite|Crise|2037|10,Écologie de droite,Crise,2037,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-32.79,-1.028
+Écologie de droite|Crise|2045|10,Écologie de droite,Crise,2045,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-33.72,-1.025
+Écologie de droite|Crise|2050|10,Écologie de droite,Crise,2050,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-33.75,-1.025
+Écologie de droite|Crise|2060|10,Écologie de droite,Crise,2060,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-32.67,-1.038
+Écologie de droite|Crise|2073|10,Écologie de droite,Crise,2073,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-30.64,-1.075
 Écologie de droite|Crise|2029|11,Écologie de droite,Crise,2029,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-191.35,-6.417
-Écologie de droite|Crise|2032|11,Écologie de droite,Crise,2032,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-191.06,-6.263
-Écologie de droite|Crise|2037|11,Écologie de droite,Crise,2037,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-196.0,-6.145
-Écologie de droite|Crise|2045|11,Écologie de droite,Crise,2045,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-201.61,-6.127
-Écologie de droite|Crise|2050|11,Écologie de droite,Crise,2050,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-201.74,-6.129
-Écologie de droite|Crise|2060|11,Écologie de droite,Crise,2060,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-195.31,-6.206
-Écologie de droite|Crise|2073|11,Écologie de droite,Crise,2073,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-183.16,-6.425
+Écologie de droite|Crise|2032|11,Écologie de droite,Crise,2032,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-189.68,-6.218
+Écologie de droite|Crise|2037|11,Écologie de droite,Crise,2037,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-194.58,-6.1
+Écologie de droite|Crise|2045|11,Écologie de droite,Crise,2045,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-200.14,-6.083
+Écologie de droite|Crise|2050|11,Écologie de droite,Crise,2050,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-200.27,-6.085
+Écologie de droite|Crise|2060|11,Écologie de droite,Crise,2060,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-193.89,-6.161
+Écologie de droite|Crise|2073|11,Écologie de droite,Crise,2073,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-181.83,-6.379
 Écologie de droite|Crise|2029|12,Écologie de droite,Crise,2029,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
 Écologie de droite|Crise|2032|12,Écologie de droite,Crise,2032,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
 Écologie de droite|Crise|2037|12,Écologie de droite,Crise,2037,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
@@ -280,12 +280,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|39,Écologie de droite,Crise,2060,Santé,"Santé : antidépresseurs moins remboursés hors dépression modérée à sévère, et prescription recentrée sur les recommandations de la HAS (psychothérapie d'abord dans la dépression légère)",budget,-0.06,-0.002
 Écologie de droite|Crise|2073|39,Écologie de droite,Crise,2073,Santé,"Santé : antidépresseurs moins remboursés hors dépression modérée à sévère, et prescription recentrée sur les recommandations de la HAS (psychothérapie d'abord dans la dépression légère)",budget,-0.06,-0.002
 Écologie de droite|Crise|2029|40,Écologie de droite,Crise,2029,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,6.49,0.218
-Écologie de droite|Crise|2032|40,Écologie de droite,Crise,2032,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,14.94,0.49
-Écologie de droite|Crise|2037|40,Écologie de droite,Crise,2037,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,14.39,0.451
-Écologie de droite|Crise|2045|40,Écologie de droite,Crise,2045,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,13.13,0.399
-Écologie de droite|Crise|2050|40,Écologie de droite,Crise,2050,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,12.85,0.39
-Écologie de droite|Crise|2060|40,Écologie de droite,Crise,2060,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,12.32,0.391
-Écologie de droite|Crise|2073|40,Écologie de droite,Crise,2073,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,10.66,0.374
+Écologie de droite|Crise|2032|40,Écologie de droite,Crise,2032,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,20.47,0.671
+Écologie de droite|Crise|2037|40,Écologie de droite,Crise,2037,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,20.04,0.628
+Écologie de droite|Crise|2045|40,Écologie de droite,Crise,2045,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,18.85,0.573
+Écologie de droite|Crise|2050|40,Écologie de droite,Crise,2050,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,18.46,0.561
+Écologie de droite|Crise|2060|40,Écologie de droite,Crise,2060,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,17.7,0.562
+Écologie de droite|Crise|2073|40,Écologie de droite,Crise,2073,Prestations et revenu universel,"Revenu universel et AAH, revalorisés sur les salaires comme les prestations actuelles, contre ces prestations (chômage, famille, logement, RSA et prime d'activité, AAH ; l'invalidité est comparée à la santé)",budget,15.68,0.55
 Écologie de droite|Crise|2029|41,Écologie de droite,Crise,2029,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,-0.0,-0.0
 Écologie de droite|Crise|2032|41,Écologie de droite,Crise,2032,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,4.3,0.141
 Écologie de droite|Crise|2037|41,Écologie de droite,Crise,2037,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,7.21,0.226
@@ -322,26 +322,26 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|45,Écologie de droite,Crise,2060,État et défense,Ministères — Éducation : coût du programme contre le statu quo,budget,-1.41,-0.045
 Écologie de droite|Crise|2073|45,Écologie de droite,Crise,2073,État et défense,Ministères — Éducation : coût du programme contre le statu quo,budget,1.57,0.055
 Écologie de droite|Crise|2029|46,Écologie de droite,Crise,2029,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,0.05,0.002
-Écologie de droite|Crise|2032|46,Écologie de droite,Crise,2032,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,-0.87,-0.029
-Écologie de droite|Crise|2037|46,Écologie de droite,Crise,2037,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,-0.64,-0.02
-Écologie de droite|Crise|2045|46,Écologie de droite,Crise,2045,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,-0.6,-0.018
-Écologie de droite|Crise|2050|46,Écologie de droite,Crise,2050,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,-0.47,-0.014
-Écologie de droite|Crise|2060|46,Écologie de droite,Crise,2060,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,0.73,0.023
-Écologie de droite|Crise|2073|46,Écologie de droite,Crise,2073,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,3.43,0.12
+Écologie de droite|Crise|2032|46,Écologie de droite,Crise,2032,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,-1.39,-0.046
+Écologie de droite|Crise|2037|46,Écologie de droite,Crise,2037,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,-1.17,-0.037
+Écologie de droite|Crise|2045|46,Écologie de droite,Crise,2045,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,-1.14,-0.035
+Écologie de droite|Crise|2050|46,Écologie de droite,Crise,2050,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,-1.01,-0.031
+Écologie de droite|Crise|2060|46,Écologie de droite,Crise,2060,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,0.2,0.006
+Écologie de droite|Crise|2073|46,Écologie de droite,Crise,2073,État et défense,"Défense : loi de programmation militaire (niveau de 2030, comme le statu quo), coût des militaires aligné, contre le statu quo",budget,2.93,0.103
 Écologie de droite|Crise|2029|47,Écologie de droite,Crise,2029,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,0.02,0.001
-Écologie de droite|Crise|2032|47,Écologie de droite,Crise,2032,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,-0.37,-0.012
-Écologie de droite|Crise|2037|47,Écologie de droite,Crise,2037,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,-0.27,-0.009
-Écologie de droite|Crise|2045|47,Écologie de droite,Crise,2045,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,-0.26,-0.008
-Écologie de droite|Crise|2050|47,Écologie de droite,Crise,2050,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,-0.2,-0.006
-Écologie de droite|Crise|2060|47,Écologie de droite,Crise,2060,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,0.31,0.01
-Écologie de droite|Crise|2073|47,Écologie de droite,Crise,2073,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,1.46,0.051
+Écologie de droite|Crise|2032|47,Écologie de droite,Crise,2032,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,-0.59,-0.019
+Écologie de droite|Crise|2037|47,Écologie de droite,Crise,2037,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,-0.5,-0.016
+Écologie de droite|Crise|2045|47,Écologie de droite,Crise,2045,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,-0.49,-0.015
+Écologie de droite|Crise|2050|47,Écologie de droite,Crise,2050,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,-0.43,-0.013
+Écologie de droite|Crise|2060|47,Écologie de droite,Crise,2060,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,0.08,0.003
+Écologie de droite|Crise|2073|47,Écologie de droite,Crise,2073,État et défense,"Contribution à l'Union européenne, contre le statu quo",budget,1.25,0.044
 Écologie de droite|Crise|2029|48,Écologie de droite,Crise,2029,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.47,0.083
-Écologie de droite|Crise|2032|48,Écologie de droite,Crise,2032,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.34,0.077
-Écologie de droite|Crise|2037|48,Écologie de droite,Crise,2037,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.48,0.078
-Écologie de droite|Crise|2045|48,Écologie de droite,Crise,2045,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.49,0.076
-Écologie de droite|Crise|2050|48,Écologie de droite,Crise,2050,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.65,0.081
-Écologie de droite|Crise|2060|48,Écologie de droite,Crise,2060,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,3.54,0.113
-Écologie de droite|Crise|2073|48,Écologie de droite,Crise,2073,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,4.13,0.145
+Écologie de droite|Crise|2032|48,Écologie de droite,Crise,2032,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.23,0.073
+Écologie de droite|Crise|2037|48,Écologie de droite,Crise,2037,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.36,0.074
+Écologie de droite|Crise|2045|48,Écologie de droite,Crise,2045,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.37,0.072
+Écologie de droite|Crise|2050|48,Écologie de droite,Crise,2050,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,2.53,0.077
+Écologie de droite|Crise|2060|48,Écologie de droite,Crise,2060,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,3.43,0.109
+Écologie de droite|Crise|2073|48,Écologie de droite,Crise,2073,État et défense,Ministères — Recherche : coût du programme contre le statu quo,budget,4.02,0.141
 Écologie de droite|Crise|2029|49,Écologie de droite,Crise,2029,État et défense,Ministères — Intérieur : coût du programme contre le statu quo,budget,0.0,0.0
 Écologie de droite|Crise|2032|49,Écologie de droite,Crise,2032,État et défense,Ministères — Intérieur : coût du programme contre le statu quo,budget,0.1,0.003
 Écologie de droite|Crise|2037|49,Écologie de droite,Crise,2037,État et défense,Ministères — Intérieur : coût du programme contre le statu quo,budget,0.32,0.01
@@ -364,19 +364,19 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|51,Écologie de droite,Crise,2060,État et défense,Ministères — Justice : coût du programme contre le statu quo,budget,2.29,0.073
 Écologie de droite|Crise|2073|51,Écologie de droite,Crise,2073,État et défense,Ministères — Justice : coût du programme contre le statu quo,budget,3.29,0.115
 Écologie de droite|Crise|2029|52,Écologie de droite,Crise,2029,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,-0.0,-0.0
-Écologie de droite|Crise|2032|52,Écologie de droite,Crise,2032,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.03,0.001
-Écologie de droite|Crise|2037|52,Écologie de droite,Crise,2037,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.12,0.004
-Écologie de droite|Crise|2045|52,Écologie de droite,Crise,2045,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.22,0.007
-Écologie de droite|Crise|2050|52,Écologie de droite,Crise,2050,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.28,0.008
-Écologie de droite|Crise|2060|52,Écologie de droite,Crise,2060,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.46,0.014
-Écologie de droite|Crise|2073|52,Écologie de droite,Crise,2073,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.83,0.029
+Écologie de droite|Crise|2032|52,Écologie de droite,Crise,2032,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.0,0.0
+Écologie de droite|Crise|2037|52,Écologie de droite,Crise,2037,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.1,0.003
+Écologie de droite|Crise|2045|52,Écologie de droite,Crise,2045,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.19,0.006
+Écologie de droite|Crise|2050|52,Écologie de droite,Crise,2050,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.25,0.008
+Écologie de droite|Crise|2060|52,Écologie de droite,Crise,2060,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.43,0.014
+Écologie de droite|Crise|2073|52,Écologie de droite,Crise,2073,État et défense,Ministères — Finances : coût du programme contre le statu quo,budget,0.81,0.028
 Écologie de droite|Crise|2029|53,Écologie de droite,Crise,2029,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.33,0.648
-Écologie de droite|Crise|2032|53,Écologie de droite,Crise,2032,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.2,0.629
-Écologie de droite|Crise|2037|53,Écologie de droite,Crise,2037,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.63,0.615
-Écologie de droite|Crise|2045|53,Écologie de droite,Crise,2045,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,20.14,0.612
-Écologie de droite|Crise|2050|53,Écologie de droite,Crise,2050,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,20.22,0.614
-Écologie de droite|Crise|2060|53,Écologie de droite,Crise,2060,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.98,0.635
-Écologie de droite|Crise|2073|53,Écologie de droite,Crise,2073,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.85,0.696
+Écologie de droite|Crise|2032|53,Écologie de droite,Crise,2032,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.04,0.624
+Écologie de droite|Crise|2037|53,Écologie de droite,Crise,2037,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.47,0.61
+Écologie de droite|Crise|2045|53,Écologie de droite,Crise,2045,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.98,0.607
+Écologie de droite|Crise|2050|53,Écologie de droite,Crise,2050,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,20.05,0.609
+Écologie de droite|Crise|2060|53,Écologie de droite,Crise,2060,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.82,0.63
+Écologie de droite|Crise|2073|53,Écologie de droite,Crise,2073,État et défense,Ministères — Autres : coût du programme contre le statu quo,budget,19.69,0.691
 Écologie de droite|Crise|2029|54,Écologie de droite,Crise,2029,État et défense,Ministères — Culture : coût du programme contre le statu quo,budget,-0.0,-0.0
 Écologie de droite|Crise|2032|54,Écologie de droite,Crise,2032,État et défense,Ministères — Culture : coût du programme contre le statu quo,budget,0.03,0.001
 Écologie de droite|Crise|2037|54,Écologie de droite,Crise,2037,État et défense,Ministères — Culture : coût du programme contre le statu quo,budget,0.11,0.003
@@ -385,26 +385,26 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|54,Écologie de droite,Crise,2060,État et défense,Ministères — Culture : coût du programme contre le statu quo,budget,0.35,0.011
 Écologie de droite|Crise|2073|54,Écologie de droite,Crise,2073,État et défense,Ministères — Culture : coût du programme contre le statu quo,budget,0.58,0.02
 Écologie de droite|Crise|2029|55,Écologie de droite,Crise,2029,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,0.0,0.0
-Écologie de droite|Crise|2032|55,Écologie de droite,Crise,2032,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,-0.09,-0.003
-Écologie de droite|Crise|2037|55,Écologie de droite,Crise,2037,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,-0.07,-0.002
-Écologie de droite|Crise|2045|55,Écologie de droite,Crise,2045,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,-0.06,-0.002
-Écologie de droite|Crise|2050|55,Écologie de droite,Crise,2050,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,-0.05,-0.002
-Écologie de droite|Crise|2060|55,Écologie de droite,Crise,2060,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,0.06,0.002
-Écologie de droite|Crise|2073|55,Écologie de droite,Crise,2073,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,0.32,0.011
+Écologie de droite|Crise|2032|55,Écologie de droite,Crise,2032,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,-0.14,-0.005
+Écologie de droite|Crise|2037|55,Écologie de droite,Crise,2037,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,-0.12,-0.004
+Écologie de droite|Crise|2045|55,Écologie de droite,Crise,2045,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,-0.11,-0.003
+Écologie de droite|Crise|2050|55,Écologie de droite,Crise,2050,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,-0.1,-0.003
+Écologie de droite|Crise|2060|55,Écologie de droite,Crise,2060,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,0.01,0.0
+Écologie de droite|Crise|2073|55,Écologie de droite,Crise,2073,État et défense,Ministères — Écologie : coût du programme contre le statu quo,budget,0.28,0.01
 Écologie de droite|Crise|2029|56,Écologie de droite,Crise,2029,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,0.0,0.0
-Écologie de droite|Crise|2032|56,Écologie de droite,Crise,2032,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,-0.09,-0.003
-Écologie de droite|Crise|2037|56,Écologie de droite,Crise,2037,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,-0.07,-0.002
-Écologie de droite|Crise|2045|56,Écologie de droite,Crise,2045,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,-0.06,-0.002
-Écologie de droite|Crise|2050|56,Écologie de droite,Crise,2050,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,-0.05,-0.001
-Écologie de droite|Crise|2060|56,Écologie de droite,Crise,2060,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,0.06,0.002
-Écologie de droite|Crise|2073|56,Écologie de droite,Crise,2073,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,0.32,0.011
+Écologie de droite|Crise|2032|56,Écologie de droite,Crise,2032,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,-0.14,-0.004
+Écologie de droite|Crise|2037|56,Écologie de droite,Crise,2037,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,-0.12,-0.004
+Écologie de droite|Crise|2045|56,Écologie de droite,Crise,2045,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,-0.11,-0.003
+Écologie de droite|Crise|2050|56,Écologie de droite,Crise,2050,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,-0.1,-0.003
+Écologie de droite|Crise|2060|56,Écologie de droite,Crise,2060,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,0.01,0.0
+Écologie de droite|Crise|2073|56,Écologie de droite,Crise,2073,État et défense,Ministères — Affaires étrangères : coût du programme contre le statu quo,budget,0.27,0.01
 Écologie de droite|Crise|2029|57,Écologie de droite,Crise,2029,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,0.0,0.0
-Écologie de droite|Crise|2032|57,Écologie de droite,Crise,2032,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,-0.05,-0.002
-Écologie de droite|Crise|2037|57,Écologie de droite,Crise,2037,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,-0.04,-0.001
-Écologie de droite|Crise|2045|57,Écologie de droite,Crise,2045,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,-0.04,-0.001
-Écologie de droite|Crise|2050|57,Écologie de droite,Crise,2050,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,-0.03,-0.001
-Écologie de droite|Crise|2060|57,Écologie de droite,Crise,2060,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,0.04,0.001
-Écologie de droite|Crise|2073|57,Écologie de droite,Crise,2073,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,0.19,0.007
+Écologie de droite|Crise|2032|57,Écologie de droite,Crise,2032,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,-0.08,-0.003
+Écologie de droite|Crise|2037|57,Écologie de droite,Crise,2037,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,-0.07,-0.002
+Écologie de droite|Crise|2045|57,Écologie de droite,Crise,2045,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,-0.07,-0.002
+Écologie de droite|Crise|2050|57,Écologie de droite,Crise,2050,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,-0.06,-0.002
+Écologie de droite|Crise|2060|57,Écologie de droite,Crise,2060,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,0.01,0.0
+Écologie de droite|Crise|2073|57,Écologie de droite,Crise,2073,État et défense,Ministères — Agriculture : coût du programme contre le statu quo,budget,0.16,0.006
 Écologie de droite|Crise|2029|58,Écologie de droite,Crise,2029,État et défense,Ministères — Administration : coût du programme contre le statu quo,budget,0.0,0.0
 Écologie de droite|Crise|2032|58,Écologie de droite,Crise,2032,État et défense,Ministères — Administration : coût du programme contre le statu quo,budget,0.02,0.001
 Écologie de droite|Crise|2037|58,Écologie de droite,Crise,2037,État et défense,Ministères — Administration : coût du programme contre le statu quo,budget,0.05,0.002
@@ -440,7 +440,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2050|62,Écologie de droite,Crise,2050,Collectivités,Collectivités : besoin de financement laissé au budget (le reste de leurs dépenses est au périmètre),budget,-15.91,-0.483
 Écologie de droite|Crise|2060|62,Écologie de droite,Crise,2060,Collectivités,Collectivités : besoin de financement laissé au budget (le reste de leurs dépenses est au périmètre),budget,-15.91,-0.506
 Écologie de droite|Crise|2073|62,Écologie de droite,Crise,2073,Collectivités,Collectivités : besoin de financement laissé au budget (le reste de leurs dépenses est au périmètre),budget,-15.91,-0.558
-Écologie de droite|Crise|2029|63,Écologie de droite,Crise,2029,Collectivités,Remplacé : collectivités (statu quo),budget,230.25,7.721
+Écologie de droite|Crise|2029|63,Écologie de droite,Crise,2029,Collectivités,Remplacé : collectivités (statu quo),budget,230.25,7.722
 Écologie de droite|Crise|2032|63,Écologie de droite,Crise,2032,Collectivités,Remplacé : collectivités (statu quo),budget,233.18,7.644
 Écologie de droite|Crise|2037|63,Écologie de droite,Crise,2037,Collectivités,Remplacé : collectivités (statu quo),budget,237.37,7.441
 Écologie de droite|Crise|2045|63,Écologie de droite,Crise,2045,Collectivités,Remplacé : collectivités (statu quo),budget,241.28,7.333
@@ -448,12 +448,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|63,Écologie de droite,Crise,2060,Collectivités,Remplacé : collectivités (statu quo),budget,243.77,7.745
 Écologie de droite|Crise|2073|63,Écologie de droite,Crise,2073,Collectivités,Remplacé : collectivités (statu quo),budget,240.97,8.453
 Écologie de droite|Crise|2029|64,Écologie de droite,Crise,2029,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,73.5,2.465
-Écologie de droite|Crise|2032|64,Écologie de droite,Crise,2032,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,73.39,2.406
-Écologie de droite|Crise|2037|64,Écologie de droite,Crise,2037,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,75.29,2.36
-Écologie de droite|Crise|2045|64,Écologie de droite,Crise,2045,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,77.44,2.354
-Écologie de droite|Crise|2050|64,Écologie de droite,Crise,2050,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,77.49,2.354
-Écologie de droite|Crise|2060|64,Écologie de droite,Crise,2060,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,75.03,2.384
-Écologie de droite|Crise|2073|64,Écologie de droite,Crise,2073,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,70.36,2.468
+Écologie de droite|Crise|2032|64,Écologie de droite,Crise,2032,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,72.86,2.388
+Écologie de droite|Crise|2037|64,Écologie de droite,Crise,2037,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,74.74,2.343
+Écologie de droite|Crise|2045|64,Écologie de droite,Crise,2045,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,76.88,2.336
+Écologie de droite|Crise|2050|64,Écologie de droite,Crise,2050,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,76.93,2.337
+Écologie de droite|Crise|2060|64,Écologie de droite,Crise,2060,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,74.48,2.366
+Écologie de droite|Crise|2073|64,Écologie de droite,Crise,2073,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,69.85,2.45
 Écologie de droite|Crise|2029|65,Écologie de droite,Crise,2029,Investissement,Investissement — Subventions d'investissement restées à l'État,budget,-6.15,-0.206
 Écologie de droite|Crise|2032|65,Écologie de droite,Crise,2032,Investissement,Investissement — Subventions d'investissement restées à l'État,budget,-6.15,-0.202
 Écologie de droite|Crise|2037|65,Écologie de droite,Crise,2037,Investissement,Investissement — Subventions d'investissement restées à l'État,budget,-6.15,-0.193
@@ -469,12 +469,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|66,Écologie de droite,Crise,2060,Investissement,Investissement — Soutien aux renouvelables (contrats en cours),budget,-0.0,-0.0
 Écologie de droite|Crise|2073|66,Écologie de droite,Crise,2073,Investissement,Investissement — Soutien aux renouvelables (contrats en cours),budget,-0.0,-0.0
 Écologie de droite|Crise|2029|67,Écologie de droite,Crise,2029,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,33.43,1.121
-Écologie de droite|Crise|2032|67,Écologie de droite,Crise,2032,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,33.29,1.091
-Écologie de droite|Crise|2037|67,Écologie de droite,Crise,2037,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,34.76,1.09
-Écologie de droite|Crise|2045|67,Écologie de droite,Crise,2045,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,36.56,1.111
-Écologie de droite|Crise|2050|67,Écologie de droite,Crise,2050,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,36.58,1.111
-Écologie de droite|Crise|2060|67,Écologie de droite,Crise,2060,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,34.64,1.101
-Écologie de droite|Crise|2073|67,Écologie de droite,Crise,2073,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,31.66,1.111
+Écologie de droite|Crise|2032|67,Écologie de droite,Crise,2032,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,32.9,1.078
+Écologie de droite|Crise|2037|67,Écologie de droite,Crise,2037,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,34.36,1.077
+Écologie de droite|Crise|2045|67,Écologie de droite,Crise,2045,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,36.15,1.099
+Écologie de droite|Crise|2050|67,Écologie de droite,Crise,2050,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,36.17,1.099
+Écologie de droite|Crise|2060|67,Écologie de droite,Crise,2060,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,34.24,1.088
+Écologie de droite|Crise|2073|67,Écologie de droite,Crise,2073,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,31.29,1.098
 Écologie de droite|Crise|2029|68,Écologie de droite,Crise,2029,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.575
 Écologie de droite|Crise|2032|68,Écologie de droite,Crise,2032,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.562
 Écologie de droite|Crise|2037|68,Écologie de droite,Crise,2037,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.538
@@ -672,19 +672,19 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|95,Écologie de droite,Crise,2060,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-226.9,-7.209
 Écologie de droite|Crise|2073|95,Écologie de droite,Crise,2073,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-224.29,-7.868
 Écologie de droite|Crise|2029|96,Écologie de droite,Crise,2029,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,81.1,2.72
-Écologie de droite|Crise|2032|96,Écologie de droite,Crise,2032,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,80.98,2.654
-Écologie de droite|Crise|2037|96,Écologie de droite,Crise,2037,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,83.07,2.604
-Écologie de droite|Crise|2045|96,Écologie de droite,Crise,2045,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,85.44,2.597
-Écologie de droite|Crise|2050|96,Écologie de droite,Crise,2050,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,85.5,2.598
-Écologie de droite|Crise|2060|96,Écologie de droite,Crise,2060,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,82.78,2.63
-Écologie de droite|Crise|2073|96,Écologie de droite,Crise,2073,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,77.63,2.723
+Écologie de droite|Crise|2032|96,Écologie de droite,Crise,2032,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,80.39,2.635
+Écologie de droite|Crise|2037|96,Écologie de droite,Crise,2037,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,82.46,2.585
+Écologie de droite|Crise|2045|96,Écologie de droite,Crise,2045,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,84.82,2.578
+Écologie de droite|Crise|2050|96,Écologie de droite,Crise,2050,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,84.88,2.579
+Écologie de droite|Crise|2060|96,Écologie de droite,Crise,2060,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,82.17,2.611
+Écologie de droite|Crise|2073|96,Écologie de droite,Crise,2073,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,77.06,2.703
 Écologie de droite|Crise|2029|97,Écologie de droite,Crise,2029,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-81.1,-2.72
-Écologie de droite|Crise|2032|97,Écologie de droite,Crise,2032,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-80.98,-2.654
-Écologie de droite|Crise|2037|97,Écologie de droite,Crise,2037,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-83.07,-2.604
-Écologie de droite|Crise|2045|97,Écologie de droite,Crise,2045,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-85.44,-2.597
-Écologie de droite|Crise|2050|97,Écologie de droite,Crise,2050,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-85.5,-2.598
-Écologie de droite|Crise|2060|97,Écologie de droite,Crise,2060,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-82.78,-2.63
-Écologie de droite|Crise|2073|97,Écologie de droite,Crise,2073,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-77.63,-2.723
+Écologie de droite|Crise|2032|97,Écologie de droite,Crise,2032,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-80.39,-2.635
+Écologie de droite|Crise|2037|97,Écologie de droite,Crise,2037,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-82.46,-2.585
+Écologie de droite|Crise|2045|97,Écologie de droite,Crise,2045,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-84.82,-2.578
+Écologie de droite|Crise|2050|97,Écologie de droite,Crise,2050,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-84.88,-2.579
+Écologie de droite|Crise|2060|97,Écologie de droite,Crise,2060,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-82.17,-2.611
+Écologie de droite|Crise|2073|97,Écologie de droite,Crise,2073,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-77.06,-2.703
 Écologie de droite|Crise|2029|98,Écologie de droite,Crise,2029,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,-25.9,-0.869
 Écologie de droite|Crise|2032|98,Écologie de droite,Crise,2032,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,-18.3,-0.6
 Écologie de droite|Crise|2037|98,Écologie de droite,Crise,2037,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,0.02,0.001
@@ -720,7 +720,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2050|102,Écologie de droite,Crise,2050,Effets économiques,Effet macro : demographie,effet_macro,0.0,0.0
 Écologie de droite|Crise|2060|102,Écologie de droite,Crise,2060,Effets économiques,Effet macro : demographie,effet_macro,0.0,0.0
 Écologie de droite|Crise|2073|102,Écologie de droite,Crise,2073,Effets économiques,Effet macro : demographie,effet_macro,0.0,0.0
-Écologie de droite|Crise|2029|103,Écologie de droite,Crise,2029,Effets économiques,Effet macro : emploi,effet_macro,-0.89,-0.03
+Écologie de droite|Crise|2029|103,Écologie de droite,Crise,2029,Effets économiques,Effet macro : emploi,effet_macro,-0.83,-0.028
 Écologie de droite|Crise|2032|103,Écologie de droite,Crise,2032,Effets économiques,Effet macro : emploi,effet_macro,-1.22,-0.04
 Écologie de droite|Crise|2037|103,Écologie de droite,Crise,2037,Effets économiques,Effet macro : emploi,effet_macro,-1.54,-0.048
 Écologie de droite|Crise|2045|103,Écologie de droite,Crise,2045,Effets économiques,Effet macro : emploi,effet_macro,-1.89,-0.058
@@ -764,11 +764,11 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2073|108,Écologie de droite,Crise,2073,Effets économiques,Effet macro : fraude_tva,effet_macro,1.5,0.053
 Écologie de droite|Crise|2029|109,Écologie de droite,Crise,2029,Effets économiques,Effet macro : ia,effet_macro,0.03,0.001
 Écologie de droite|Crise|2032|109,Écologie de droite,Crise,2032,Effets économiques,Effet macro : ia,effet_macro,0.53,0.017
-Écologie de droite|Crise|2037|109,Écologie de droite,Crise,2037,Effets économiques,Effet macro : ia,effet_macro,1.67,0.052
-Écologie de droite|Crise|2045|109,Écologie de droite,Crise,2045,Effets économiques,Effet macro : ia,effet_macro,2.37,0.072
-Écologie de droite|Crise|2050|109,Écologie de droite,Crise,2050,Effets économiques,Effet macro : ia,effet_macro,2.72,0.083
-Écologie de droite|Crise|2060|109,Écologie de droite,Crise,2060,Effets économiques,Effet macro : ia,effet_macro,2.87,0.091
-Écologie de droite|Crise|2073|109,Écologie de droite,Crise,2073,Effets économiques,Effet macro : ia,effet_macro,2.46,0.086
+Écologie de droite|Crise|2037|109,Écologie de droite,Crise,2037,Effets économiques,Effet macro : ia,effet_macro,1.63,0.051
+Écologie de droite|Crise|2045|109,Écologie de droite,Crise,2045,Effets économiques,Effet macro : ia,effet_macro,2.23,0.068
+Écologie de droite|Crise|2050|109,Écologie de droite,Crise,2050,Effets économiques,Effet macro : ia,effet_macro,2.51,0.076
+Écologie de droite|Crise|2060|109,Écologie de droite,Crise,2060,Effets économiques,Effet macro : ia,effet_macro,2.57,0.082
+Écologie de droite|Crise|2073|109,Écologie de droite,Crise,2073,Effets économiques,Effet macro : ia,effet_macro,2.14,0.075
 Écologie de droite|Crise|2029|110,Écologie de droite,Crise,2029,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.04,-0.001
 Écologie de droite|Crise|2032|110,Écologie de droite,Crise,2032,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.23,-0.008
 Écologie de droite|Crise|2037|110,Écologie de droite,Crise,2037,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.34,-0.011
@@ -791,12 +791,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Crise|2060|112,Écologie de droite,Crise,2060,Effets économiques,Effet macro : permis_rapide,effet_macro,-0.02,-0.001
 Écologie de droite|Crise|2073|112,Écologie de droite,Crise,2073,Effets économiques,Effet macro : permis_rapide,effet_macro,-0.02,-0.001
 Écologie de droite|Crise|2029|113,Écologie de droite,Crise,2029,Effets économiques,Effet macro : productivite,effet_macro,0.0,0.0
-Écologie de droite|Crise|2032|113,Écologie de droite,Crise,2032,Effets économiques,Effet macro : productivite,effet_macro,0.57,0.019
-Écologie de droite|Crise|2037|113,Écologie de droite,Crise,2037,Effets économiques,Effet macro : productivite,effet_macro,2.12,0.066
-Écologie de droite|Crise|2045|113,Écologie de droite,Crise,2045,Effets économiques,Effet macro : productivite,effet_macro,3.39,0.103
-Écologie de droite|Crise|2050|113,Écologie de droite,Crise,2050,Effets économiques,Effet macro : productivite,effet_macro,3.89,0.118
-Écologie de droite|Crise|2060|113,Écologie de droite,Crise,2060,Effets économiques,Effet macro : productivite,effet_macro,4.1,0.13
-Écologie de droite|Crise|2073|113,Écologie de droite,Crise,2073,Effets économiques,Effet macro : productivite,effet_macro,3.52,0.124
+Écologie de droite|Crise|2032|113,Écologie de droite,Crise,2032,Effets économiques,Effet macro : productivite,effet_macro,0.56,0.019
+Écologie de droite|Crise|2037|113,Écologie de droite,Crise,2037,Effets économiques,Effet macro : productivite,effet_macro,2.07,0.065
+Écologie de droite|Crise|2045|113,Écologie de droite,Crise,2045,Effets économiques,Effet macro : productivite,effet_macro,3.2,0.097
+Écologie de droite|Crise|2050|113,Écologie de droite,Crise,2050,Effets économiques,Effet macro : productivite,effet_macro,3.6,0.109
+Écologie de droite|Crise|2060|113,Écologie de droite,Crise,2060,Effets économiques,Effet macro : productivite,effet_macro,3.68,0.117
+Écologie de droite|Crise|2073|113,Écologie de droite,Crise,2073,Effets économiques,Effet macro : productivite,effet_macro,3.06,0.107
 Écologie de droite|Crise|2029|114,Écologie de droite,Crise,2029,Effets économiques,Effet macro : reactions_impot,effet_macro,-8.63,-0.29
 Écologie de droite|Crise|2032|114,Écologie de droite,Crise,2032,Effets économiques,Effet macro : reactions_impot,effet_macro,-26.22,-0.859
 Écologie de droite|Crise|2037|114,Écologie de droite,Crise,2037,Effets économiques,Effet macro : reactions_impot,effet_macro,-26.74,-0.838
@@ -838,20 +838,20 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2045|0,Écologie de droite,Prudent,2045,Recettes,Effet du programme sur les naissances : impôt unique et TVA des salariés,budget,0.0,0.0
 Écologie de droite|Prudent|2050|0,Écologie de droite,Prudent,2050,Recettes,Effet du programme sur les naissances : impôt unique et TVA des salariés,budget,-0.45,-0.012
 Écologie de droite|Prudent|2060|0,Écologie de droite,Prudent,2060,Recettes,Effet du programme sur les naissances : impôt unique et TVA des salariés,budget,-4.93,-0.134
-Écologie de droite|Prudent|2073|0,Écologie de droite,Prudent,2073,Recettes,Effet du programme sur les naissances : impôt unique et TVA des salariés,budget,-16.15,-0.43
+Écologie de droite|Prudent|2073|0,Écologie de droite,Prudent,2073,Recettes,Effet du programme sur les naissances : impôt unique et TVA des salariés,budget,-16.15,-0.431
 Écologie de droite|Prudent|2029|1,Écologie de droite,Prudent,2029,Recettes,"Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)",budget,-66.34,-2.226
 Écologie de droite|Prudent|2032|1,Écologie de droite,Prudent,2032,Recettes,"Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)",budget,-68.86,-2.215
 Écologie de droite|Prudent|2037|1,Écologie de droite,Prudent,2037,Recettes,"Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)",budget,-73.41,-2.209
 Écologie de droite|Prudent|2045|1,Écologie de droite,Prudent,2045,Recettes,"Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)",budget,-77.38,-2.198
 Écologie de droite|Prudent|2050|1,Écologie de droite,Prudent,2050,Recettes,"Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)",budget,-78.56,-2.19
-Écologie de droite|Prudent|2060|1,Écologie de droite,Prudent,2060,Recettes,"Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)",budget,-79.76,-2.162
+Écologie de droite|Prudent|2060|1,Écologie de droite,Prudent,2060,Recettes,"Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)",budget,-79.76,-2.163
 Écologie de droite|Prudent|2073|1,Écologie de droite,Prudent,2073,Recettes,"Impôt unique sur les salaires du privé (remplace cotisations, CSG, IR des salariés)",budget,-81.36,-2.168
 Écologie de droite|Prudent|2029|2,Écologie de droite,Prudent,2029,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-67.98,-2.282
 Écologie de droite|Prudent|2032|2,Écologie de droite,Prudent,2032,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-69.86,-2.247
 Écologie de droite|Prudent|2037|2,Écologie de droite,Prudent,2037,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-73.26,-2.204
 Écologie de droite|Prudent|2045|2,Écologie de droite,Prudent,2045,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-77.05,-2.189
 Écologie de droite|Prudent|2050|2,Écologie de droite,Prudent,2050,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-78.34,-2.184
-Écologie de droite|Prudent|2060|2,Écologie de droite,Prudent,2060,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-79.83,-2.164
+Écologie de droite|Prudent|2060|2,Écologie de droite,Prudent,2060,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-79.83,-2.165
 Écologie de droite|Prudent|2073|2,Écologie de droite,Prudent,2073,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-81.51,-2.172
 Écologie de droite|Prudent|2029|3,Écologie de droite,Prudent,2029,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.91,-0.198
 Écologie de droite|Prudent|2032|3,Écologie de droite,Prudent,2032,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-6.1,-0.196
@@ -872,15 +872,15 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2037|5,Écologie de droite,Prudent,2037,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-90.15,-2.712
 Écologie de droite|Prudent|2045|5,Écologie de droite,Prudent,2045,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-94.76,-2.692
 Écologie de droite|Prudent|2050|5,Écologie de droite,Prudent,2050,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-95.69,-2.668
-Écologie de droite|Prudent|2060|5,Écologie de droite,Prudent,2060,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-95.77,-2.596
-Écologie de droite|Prudent|2073|5,Écologie de droite,Prudent,2073,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-95.16,-2.535
+Écologie de droite|Prudent|2060|5,Écologie de droite,Prudent,2060,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-95.77,-2.597
+Écologie de droite|Prudent|2073|5,Écologie de droite,Prudent,2073,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-95.16,-2.536
 Écologie de droite|Prudent|2029|6,Écologie de droite,Prudent,2029,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,33.69,1.13
 Écologie de droite|Prudent|2032|6,Écologie de droite,Prudent,2032,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,35.1,1.129
 Écologie de droite|Prudent|2037|6,Écologie de droite,Prudent,2037,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,35.88,1.079
 Écologie de droite|Prudent|2045|6,Écologie de droite,Prudent,2045,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,37.67,1.07
 Écologie de droite|Prudent|2050|6,Écologie de droite,Prudent,2050,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,38.29,1.068
 Écologie de droite|Prudent|2060|6,Écologie de droite,Prudent,2060,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,37.95,1.029
-Écologie de droite|Prudent|2073|6,Écologie de droite,Prudent,2073,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,35.78,0.953
+Écologie de droite|Prudent|2073|6,Écologie de droite,Prudent,2073,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,35.78,0.954
 Écologie de droite|Prudent|2029|7,Écologie de droite,Prudent,2029,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-6.84,-0.229
 Écologie de droite|Prudent|2032|7,Écologie de droite,Prudent,2032,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-7.05,-0.227
 Écologie de droite|Prudent|2037|7,Écologie de droite,Prudent,2037,Recettes,"Flat tax sur les dividendes, revenus du capital, bailleurs ; fin de l'IFI",budget,-7.46,-0.224
@@ -907,15 +907,15 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2037|10,Écologie de droite,Prudent,2037,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-34.33,-1.033
 Écologie de droite|Prudent|2045|10,Écologie de droite,Prudent,2045,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-36.17,-1.028
 Écologie de droite|Prudent|2050|10,Écologie de droite,Prudent,2050,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-36.9,-1.029
-Écologie de droite|Prudent|2060|10,Écologie de droite,Prudent,2060,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-37.78,-1.024
-Écologie de droite|Prudent|2073|10,Écologie de droite,Prudent,2073,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-38.6,-1.028
+Écologie de droite|Prudent|2060|10,Écologie de droite,Prudent,2060,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-37.78,-1.025
+Écologie de droite|Prudent|2073|10,Écologie de droite,Prudent,2073,Recettes,"Fin des droits de mutation, des taxes locales et affectées (remplacés par l'impôt local)",budget,-38.6,-1.029
 Écologie de droite|Prudent|2029|11,Écologie de droite,Prudent,2029,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-191.35,-6.422
 Écologie de droite|Prudent|2032|11,Écologie de droite,Prudent,2032,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-195.65,-6.294
-Écologie de droite|Prudent|2037|11,Écologie de droite,Prudent,2037,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-203.72,-6.129
+Écologie de droite|Prudent|2037|11,Écologie de droite,Prudent,2037,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-203.72,-6.13
 Écologie de droite|Prudent|2045|11,Écologie de droite,Prudent,2045,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-214.68,-6.099
 Écologie de droite|Prudent|2050|11,Écologie de droite,Prudent,2050,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-218.99,-6.106
-Écologie de droite|Prudent|2060|11,Écologie de droite,Prudent,2060,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-224.23,-6.077
-Écologie de droite|Prudent|2073|11,Écologie de droite,Prudent,2073,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-229.05,-6.102
+Écologie de droite|Prudent|2060|11,Écologie de droite,Prudent,2060,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-224.23,-6.08
+Écologie de droite|Prudent|2073|11,Écologie de droite,Prudent,2073,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-229.05,-6.105
 Écologie de droite|Prudent|2029|12,Écologie de droite,Prudent,2029,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
 Écologie de droite|Prudent|2032|12,Écologie de droite,Prudent,2032,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
 Écologie de droite|Prudent|2037|12,Écologie de droite,Prudent,2037,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
@@ -929,7 +929,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2045|13,Écologie de droite,Prudent,2045,Recettes,Successions : supplément,budget,4.68,0.133
 Écologie de droite|Prudent|2050|13,Écologie de droite,Prudent,2050,Recettes,Successions : supplément,budget,5.5,0.153
 Écologie de droite|Prudent|2060|13,Écologie de droite,Prudent,2060,Recettes,Successions : supplément,budget,5.9,0.16
-Écologie de droite|Prudent|2073|13,Écologie de droite,Prudent,2073,Recettes,Successions : supplément,budget,5.8,0.154
+Écologie de droite|Prudent|2073|13,Écologie de droite,Prudent,2073,Recettes,Successions : supplément,budget,5.8,0.155
 Écologie de droite|Prudent|2029|14,Écologie de droite,Prudent,2029,Recettes,TVA de 2028 maintenue,budget,0.0,0.0
 Écologie de droite|Prudent|2032|14,Écologie de droite,Prudent,2032,Recettes,TVA de 2028 maintenue,budget,0.0,0.0
 Écologie de droite|Prudent|2037|14,Écologie de droite,Prudent,2037,Recettes,TVA de 2028 maintenue,budget,0.0,0.0
@@ -963,7 +963,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2037|18,Écologie de droite,Prudent,2037,Recettes,IS : déduction de l'investissement,budget,-14.68,-0.442
 Écologie de droite|Prudent|2045|18,Écologie de droite,Prudent,2045,Recettes,IS : déduction de l'investissement,budget,-14.0,-0.398
 Écologie de droite|Prudent|2050|18,Écologie de droite,Prudent,2050,Recettes,IS : déduction de l'investissement,budget,-10.24,-0.286
-Écologie de droite|Prudent|2060|18,Écologie de droite,Prudent,2060,Recettes,IS : déduction de l'investissement,budget,-18.36,-0.497
+Écologie de droite|Prudent|2060|18,Écologie de droite,Prudent,2060,Recettes,IS : déduction de l'investissement,budget,-18.36,-0.498
 Écologie de droite|Prudent|2073|18,Écologie de droite,Prudent,2073,Recettes,IS : déduction de l'investissement,budget,-8.26,-0.22
 Écologie de droite|Prudent|2029|19,Écologie de droite,Prudent,2029,Recettes,Fin des dotations versées aux collectivités (solde),budget,0,0.0
 Écologie de droite|Prudent|2032|19,Écologie de droite,Prudent,2032,Recettes,Fin des dotations versées aux collectivités (solde),budget,0,0.0
@@ -977,15 +977,15 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2037|20,Écologie de droite,Prudent,2037,Retraites,Retraites : gel des pensions de l'ancien système (générations nées en 1979 ou avant),budget,52.33,1.575
 Écologie de droite|Prudent|2045|20,Écologie de droite,Prudent,2045,Retraites,Retraites : gel des pensions de l'ancien système (générations nées en 1979 ou avant),budget,83.96,2.385
 Écologie de droite|Prudent|2050|20,Écologie de droite,Prudent,2050,Retraites,Retraites : gel des pensions de l'ancien système (générations nées en 1979 ou avant),budget,87.19,2.431
-Écologie de droite|Prudent|2060|20,Écologie de droite,Prudent,2060,Retraites,Retraites : gel des pensions de l'ancien système (générations nées en 1979 ou avant),budget,63.07,1.709
+Écologie de droite|Prudent|2060|20,Écologie de droite,Prudent,2060,Retraites,Retraites : gel des pensions de l'ancien système (générations nées en 1979 ou avant),budget,63.07,1.71
 Écologie de droite|Prudent|2073|20,Écologie de droite,Prudent,2073,Retraites,Retraites : gel des pensions de l'ancien système (générations nées en 1979 ou avant),budget,13.32,0.355
 Écologie de droite|Prudent|2029|21,Écologie de droite,Prudent,2029,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,-0.0,-0.0
 Écologie de droite|Prudent|2032|21,Écologie de droite,Prudent,2032,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,-0.0,-0.0
 Écologie de droite|Prudent|2037|21,Écologie de droite,Prudent,2037,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,-0.0,-0.0
-Écologie de droite|Prudent|2045|21,Écologie de droite,Prudent,2045,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,48.81,1.387
+Écologie de droite|Prudent|2045|21,Écologie de droite,Prudent,2045,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,48.81,1.386
 Écologie de droite|Prudent|2050|21,Écologie de droite,Prudent,2050,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,24.43,0.681
-Écologie de droite|Prudent|2060|21,Écologie de droite,Prudent,2060,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,167.23,4.532
-Écologie de droite|Prudent|2073|21,Écologie de droite,Prudent,2073,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,306.9,8.176
+Écologie de droite|Prudent|2060|21,Écologie de droite,Prudent,2060,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,167.23,4.535
+Écologie de droite|Prudent|2073|21,Écologie de droite,Prudent,2073,Retraites,"Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",budget,306.9,8.179
 Écologie de droite|Prudent|2029|22,Écologie de droite,Prudent,2029,Retraites,Retraites : baisse des hautes pensions,budget,1.08,0.036
 Écologie de droite|Prudent|2032|22,Écologie de droite,Prudent,2032,Retraites,Retraites : baisse des hautes pensions,budget,1.06,0.034
 Écologie de droite|Prudent|2037|22,Écologie de droite,Prudent,2037,Retraites,Retraites : baisse des hautes pensions,budget,1.04,0.031
@@ -1026,7 +1026,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2037|27,Écologie de droite,Prudent,2037,Retraites,Retraites : Entre l'âge légal et 67 ans : RUI ou socle selon les annuités,budget,-18.88,-0.568
 Écologie de droite|Prudent|2045|27,Écologie de droite,Prudent,2045,Retraites,Retraites : Entre l'âge légal et 67 ans : RUI ou socle selon les annuités,budget,-16.72,-0.475
 Écologie de droite|Prudent|2050|27,Écologie de droite,Prudent,2050,Retraites,Retraites : Entre l'âge légal et 67 ans : RUI ou socle selon les annuités,budget,-14.34,-0.4
-Écologie de droite|Prudent|2060|27,Écologie de droite,Prudent,2060,Retraites,Retraites : Entre l'âge légal et 67 ans : RUI ou socle selon les annuités,budget,-13.93,-0.377
+Écologie de droite|Prudent|2060|27,Écologie de droite,Prudent,2060,Retraites,Retraites : Entre l'âge légal et 67 ans : RUI ou socle selon les annuités,budget,-13.93,-0.378
 Écologie de droite|Prudent|2073|27,Écologie de droite,Prudent,2073,Retraites,Retraites : Entre l'âge légal et 67 ans : RUI ou socle selon les annuités,budget,-14.19,-0.378
 Écologie de droite|Prudent|2029|28,Écologie de droite,Prudent,2029,Retraites,"Retraites : Ancien système : âge de départ porté de 64 à 67 ans, quatre trimestres par génération à partir de 2029 (67 ans pour la génération née en 1967)",budget,8.62,0.289
 Écologie de droite|Prudent|2032|28,Écologie de droite,Prudent,2032,Retraites,"Retraites : Ancien système : âge de départ porté de 64 à 67 ans, quatre trimestres par génération à partir de 2029 (67 ans pour la génération née en 1967)",budget,22.29,0.717
@@ -1062,13 +1062,13 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2045|32,Écologie de droite,Prudent,2045,Santé,"Santé : gestion de l'assurance maladie, comptée en santé (classement ; le statu quo la met dans « autres »)",classement,-13.84,-0.393
 Écologie de droite|Prudent|2050|32,Écologie de droite,Prudent,2050,Santé,"Santé : gestion de l'assurance maladie, comptée en santé (classement ; le statu quo la met dans « autres »)",classement,-14.72,-0.41
 Écologie de droite|Prudent|2060|32,Écologie de droite,Prudent,2060,Santé,"Santé : gestion de l'assurance maladie, comptée en santé (classement ; le statu quo la met dans « autres »)",classement,-16.63,-0.451
-Écologie de droite|Prudent|2073|32,Écologie de droite,Prudent,2073,Santé,"Santé : gestion de l'assurance maladie, comptée en santé (classement ; le statu quo la met dans « autres »)",classement,-19.5,-0.519
+Écologie de droite|Prudent|2073|32,Écologie de droite,Prudent,2073,Santé,"Santé : gestion de l'assurance maladie, comptée en santé (classement ; le statu quo la met dans « autres »)",classement,-19.5,-0.52
 Écologie de droite|Prudent|2029|33,Écologie de droite,Prudent,2029,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,7.23,0.243
 Écologie de droite|Prudent|2032|33,Écologie de droite,Prudent,2032,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,7.44,0.239
 Écologie de droite|Prudent|2037|33,Écologie de droite,Prudent,2037,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,7.84,0.236
-Écologie de droite|Prudent|2045|33,Écologie de droite,Prudent,2045,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,8.64,0.246
+Écologie de droite|Prudent|2045|33,Écologie de droite,Prudent,2045,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,8.64,0.245
 Écologie de droite|Prudent|2050|33,Écologie de droite,Prudent,2050,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,9.19,0.256
-Écologie de droite|Prudent|2060|33,Écologie de droite,Prudent,2060,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,10.38,0.281
+Écologie de droite|Prudent|2060|33,Écologie de droite,Prudent,2060,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,10.38,0.282
 Écologie de droite|Prudent|2073|33,Écologie de droite,Prudent,2073,Santé,Santé : coût des agents hospitaliers aligné sur le privé,budget,12.17,0.324
 Écologie de droite|Prudent|2029|34,Écologie de droite,Prudent,2029,Santé,"Santé : aide à l'autonomie, nette des heures déjà payées par le revenu universel",budget,0.92,0.031
 Écologie de droite|Prudent|2032|34,Écologie de droite,Prudent,2032,Santé,"Santé : aide à l'autonomie, nette des heures déjà payées par le revenu universel",budget,0.94,0.03
@@ -1103,8 +1103,8 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2037|38,Écologie de droite,Prudent,2037,Santé,Santé : accise sur les produits nocifs (surplus au-delà du PIB) et soins évités,budget,6.37,0.192
 Écologie de droite|Prudent|2045|38,Écologie de droite,Prudent,2045,Santé,Santé : accise sur les produits nocifs (surplus au-delà du PIB) et soins évités,budget,22.08,0.627
 Écologie de droite|Prudent|2050|38,Écologie de droite,Prudent,2050,Santé,Santé : accise sur les produits nocifs (surplus au-delà du PIB) et soins évités,budget,33.16,0.925
-Écologie de droite|Prudent|2060|38,Écologie de droite,Prudent,2060,Santé,Santé : accise sur les produits nocifs (surplus au-delà du PIB) et soins évités,budget,46.16,1.251
-Écologie de droite|Prudent|2073|38,Écologie de droite,Prudent,2073,Santé,Santé : accise sur les produits nocifs (surplus au-delà du PIB) et soins évités,budget,52.12,1.388
+Écologie de droite|Prudent|2060|38,Écologie de droite,Prudent,2060,Santé,Santé : accise sur les produits nocifs (surplus au-delà du PIB) et soins évités,budget,46.16,1.252
+Écologie de droite|Prudent|2073|38,Écologie de droite,Prudent,2073,Santé,Santé : accise sur les produits nocifs (surplus au-delà du PIB) et soins évités,budget,52.12,1.389
 Écologie de droite|Prudent|2029|39,Écologie de droite,Prudent,2029,Santé,"Santé : antidépresseurs moins remboursés hors dépression modérée à sévère, et prescription recentrée sur les recommandations de la HAS (psychothérapie d'abord dans la dépression légère)",budget,-0.0,-0.0
 Écologie de droite|Prudent|2032|39,Écologie de droite,Prudent,2032,Santé,"Santé : antidépresseurs moins remboursés hors dépression modérée à sévère, et prescription recentrée sur les recommandations de la HAS (psychothérapie d'abord dans la dépression légère)",budget,-0.0,-0.0
 Écologie de droite|Prudent|2037|39,Écologie de droite,Prudent,2037,Santé,"Santé : antidépresseurs moins remboursés hors dépression modérée à sévère, et prescription recentrée sur les recommandations de la HAS (psychothérapie d'abord dans la dépression légère)",budget,-0.0,-0.0
@@ -1124,8 +1124,8 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2037|41,Écologie de droite,Prudent,2037,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,9.43,0.284
 Écologie de droite|Prudent|2045|41,Écologie de droite,Prudent,2045,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,16.94,0.481
 Écologie de droite|Prudent|2050|41,Écologie de droite,Prudent,2050,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,21.53,0.6
-Écologie de droite|Prudent|2060|41,Écologie de droite,Prudent,2060,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,30.45,0.825
-Écologie de droite|Prudent|2073|41,Écologie de droite,Prudent,2073,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,41.11,1.095
+Écologie de droite|Prudent|2060|41,Écologie de droite,Prudent,2060,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,30.45,0.826
+Écologie de droite|Prudent|2073|41,Écologie de droite,Prudent,2073,Prestations et revenu universel,Revenu universel revalorisé sur les prix plutôt que sur les salaires (baisse relative assumée),budget,41.11,1.096
 Écologie de droite|Prudent|2029|42,Écologie de droite,Prudent,2029,Prestations et revenu universel,Effet du programme sur les naissances : compléments de revenu universel des enfants,budget,-0.0,-0.0
 Écologie de droite|Prudent|2032|42,Écologie de droite,Prudent,2032,Prestations et revenu universel,Effet du programme sur les naissances : compléments de revenu universel des enfants,budget,0.11,0.003
 Écologie de droite|Prudent|2037|42,Écologie de droite,Prudent,2037,Prestations et revenu universel,Effet du programme sur les naissances : compléments de revenu universel des enfants,budget,0.38,0.011
@@ -1139,13 +1139,13 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2045|43,Écologie de droite,Prudent,2045,Prestations et revenu universel,Revenu universel : RUI étudiant sous condition de ressources,budget,15.48,0.44
 Écologie de droite|Prudent|2050|43,Écologie de droite,Prudent,2050,Prestations et revenu universel,Revenu universel : RUI étudiant sous condition de ressources,budget,15.48,0.432
 Écologie de droite|Prudent|2060|43,Écologie de droite,Prudent,2060,Prestations et revenu universel,Revenu universel : RUI étudiant sous condition de ressources,budget,15.48,0.42
-Écologie de droite|Prudent|2073|43,Écologie de droite,Prudent,2073,Prestations et revenu universel,Revenu universel : RUI étudiant sous condition de ressources,budget,15.48,0.412
+Écologie de droite|Prudent|2073|43,Écologie de droite,Prudent,2073,Prestations et revenu universel,Revenu universel : RUI étudiant sous condition de ressources,budget,15.48,0.413
 Écologie de droite|Prudent|2029|44,Écologie de droite,Prudent,2029,État et défense,Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique des agents),budget,-18.32,-0.615
 Écologie de droite|Prudent|2032|44,Écologie de droite,Prudent,2032,État et défense,Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique des agents),budget,-18.68,-0.601
 Écologie de droite|Prudent|2037|44,Écologie de droite,Prudent,2037,État et défense,Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique des agents),budget,-19.15,-0.576
 Écologie de droite|Prudent|2045|44,Écologie de droite,Prudent,2045,État et défense,Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique des agents),budget,-19.68,-0.559
 Écologie de droite|Prudent|2050|44,Écologie de droite,Prudent,2050,État et défense,Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique des agents),budget,-20.21,-0.563
-Écologie de droite|Prudent|2060|44,Écologie de droite,Prudent,2060,État et défense,Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique des agents),budget,-21.04,-0.57
+Écologie de droite|Prudent|2060|44,Écologie de droite,Prudent,2060,État et défense,Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique des agents),budget,-21.04,-0.571
 Écologie de droite|Prudent|2073|44,Écologie de droite,Prudent,2073,État et défense,Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique des agents),budget,-21.39,-0.57
 Écologie de droite|Prudent|2029|45,Écologie de droite,Prudent,2029,État et défense,Ministères — Éducation : coût du programme contre le statu quo,budget,-2.13,-0.071
 Écologie de droite|Prudent|2032|45,Écologie de droite,Prudent,2032,État et défense,Ministères — Éducation : coût du programme contre le statu quo,budget,-3.71,-0.119
@@ -1255,10 +1255,10 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2029|60,Écologie de droite,Prudent,2029,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,19.72,0.662
 Écologie de droite|Prudent|2032|60,Écologie de droite,Prudent,2032,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,20.23,0.651
 Écologie de droite|Prudent|2037|60,Écologie de droite,Prudent,2037,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,21.06,0.634
-Écologie de droite|Prudent|2045|60,Écologie de droite,Prudent,2045,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,22.19,0.631
+Écologie de droite|Prudent|2045|60,Écologie de droite,Prudent,2045,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,22.19,0.63
 Écologie de droite|Prudent|2050|60,Écologie de droite,Prudent,2050,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,22.85,0.637
-Écologie de droite|Prudent|2060|60,Écologie de droite,Prudent,2060,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,24.03,0.651
-Écologie de droite|Prudent|2073|60,Écologie de droite,Prudent,2073,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,25.39,0.676
+Écologie de droite|Prudent|2060|60,Écologie de droite,Prudent,2060,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,24.03,0.652
+Écologie de droite|Prudent|2073|60,Écologie de droite,Prudent,2073,État et défense,"Missions financées par le fonds (transports, énergie, France 2030) : retirées du budget",budget,25.39,0.677
 Écologie de droite|Prudent|2029|61,Écologie de droite,Prudent,2029,État et défense,"Missions supprimées (cohésion des territoires, hors aides au logement déjà au revenu universel)",budget,7.57,0.254
 Écologie de droite|Prudent|2032|61,Écologie de droite,Prudent,2032,État et défense,"Missions supprimées (cohésion des territoires, hors aides au logement déjà au revenu universel)",budget,7.77,0.25
 Écologie de droite|Prudent|2037|61,Écologie de droite,Prudent,2037,État et défense,"Missions supprimées (cohésion des territoires, hors aides au logement déjà au revenu universel)",budget,8.09,0.243
@@ -1275,18 +1275,18 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2073|62,Écologie de droite,Prudent,2073,Collectivités,Collectivités : besoin de financement laissé au budget (le reste de leurs dépenses est au périmètre),budget,-15.91,-0.424
 Écologie de droite|Prudent|2029|63,Écologie de droite,Prudent,2029,Collectivités,Remplacé : collectivités (statu quo),budget,230.25,7.727
 Écologie de droite|Prudent|2032|63,Écologie de droite,Prudent,2032,Collectivités,Remplacé : collectivités (statu quo),budget,236.23,7.6
-Écologie de droite|Prudent|2037|63,Écologie de droite,Prudent,2037,Collectivités,Remplacé : collectivités (statu quo),budget,245.93,7.399
-Écologie de droite|Prudent|2045|63,Écologie de droite,Prudent,2045,Collectivités,Remplacé : collectivités (statu quo),budget,259.18,7.364
+Écologie de droite|Prudent|2037|63,Écologie de droite,Prudent,2037,Collectivités,Remplacé : collectivités (statu quo),budget,245.93,7.4
+Écologie de droite|Prudent|2045|63,Écologie de droite,Prudent,2045,Collectivités,Remplacé : collectivités (statu quo),budget,259.18,7.363
 Écologie de droite|Prudent|2050|63,Écologie de droite,Prudent,2050,Collectivités,Remplacé : collectivités (statu quo),budget,266.81,7.439
-Écologie de droite|Prudent|2060|63,Écologie de droite,Prudent,2060,Collectivités,Remplacé : collectivités (statu quo),budget,280.65,7.606
-Écologie de droite|Prudent|2073|63,Écologie de droite,Prudent,2073,Collectivités,Remplacé : collectivités (statu quo),budget,296.52,7.9
+Écologie de droite|Prudent|2060|63,Écologie de droite,Prudent,2060,Collectivités,Remplacé : collectivités (statu quo),budget,280.65,7.61
+Écologie de droite|Prudent|2073|63,Écologie de droite,Prudent,2073,Collectivités,Remplacé : collectivités (statu quo),budget,296.52,7.903
 Écologie de droite|Prudent|2029|64,Écologie de droite,Prudent,2029,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,73.5,2.467
 Écologie de droite|Prudent|2032|64,Écologie de droite,Prudent,2032,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,75.15,2.418
-Écologie de droite|Prudent|2037|64,Écologie de droite,Prudent,2037,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,78.25,2.354
+Écologie de droite|Prudent|2037|64,Écologie de droite,Prudent,2037,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,78.25,2.355
 Écologie de droite|Prudent|2045|64,Écologie de droite,Prudent,2045,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,82.46,2.343
 Écologie de droite|Prudent|2050|64,Écologie de droite,Prudent,2050,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,84.12,2.345
-Écologie de droite|Prudent|2060|64,Écologie de droite,Prudent,2060,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,86.13,2.334
-Écologie de droite|Prudent|2073|64,Écologie de droite,Prudent,2073,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,87.99,2.344
+Écologie de droite|Prudent|2060|64,Écologie de droite,Prudent,2060,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,86.13,2.336
+Écologie de droite|Prudent|2073|64,Écologie de droite,Prudent,2073,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,87.99,2.345
 Écologie de droite|Prudent|2029|65,Écologie de droite,Prudent,2029,Investissement,Investissement — Subventions d'investissement restées à l'État,budget,-6.15,-0.206
 Écologie de droite|Prudent|2032|65,Écologie de droite,Prudent,2032,Investissement,Investissement — Subventions d'investissement restées à l'État,budget,-6.15,-0.198
 Écologie de droite|Prudent|2037|65,Écologie de droite,Prudent,2037,Investissement,Investissement — Subventions d'investissement restées à l'État,budget,-6.15,-0.185
@@ -1306,12 +1306,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2037|67,Écologie de droite,Prudent,2037,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,36.1,1.086
 Écologie de droite|Prudent|2045|67,Écologie de droite,Prudent,2045,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,38.4,1.091
 Écologie de droite|Prudent|2050|67,Écologie de droite,Prudent,2050,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,39.02,1.088
-Écologie de droite|Prudent|2060|67,Écologie de droite,Prudent,2060,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,39.33,1.066
-Écologie de droite|Prudent|2073|67,Écologie de droite,Prudent,2073,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,39.65,1.056
+Écologie de droite|Prudent|2060|67,Écologie de droite,Prudent,2060,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,39.33,1.067
+Écologie de droite|Prudent|2073|67,Écologie de droite,Prudent,2073,Investissement,"Investissement des opérateurs, des hôpitaux et de la sécurité sociale : financé par le fonds, hors budget (statu quo retiré ; celui de l'État est comparé avec ses ministères)",budget,39.65,1.057
 Écologie de droite|Prudent|2029|68,Écologie de droite,Prudent,2029,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.576
 Écologie de droite|Prudent|2032|68,Écologie de droite,Prudent,2032,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.552
 Écologie de droite|Prudent|2037|68,Écologie de droite,Prudent,2037,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.516
-Écologie de droite|Prudent|2045|68,Écologie de droite,Prudent,2045,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.488
+Écologie de droite|Prudent|2045|68,Écologie de droite,Prudent,2045,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.487
 Écologie de droite|Prudent|2050|68,Écologie de droite,Prudent,2050,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.478
 Écologie de droite|Prudent|2060|68,Écologie de droite,Prudent,2060,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.465
 Écologie de droite|Prudent|2073|68,Écologie de droite,Prudent,2073,Autres dépenses,Sécurité sociale hors santé : gestion des caisses et France Travail conservés,budget,-17.16,-0.457
@@ -1486,41 +1486,41 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2029|93,Écologie de droite,Prudent,2029,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,101.24,3.398
 Écologie de droite|Prudent|2032|93,Écologie de droite,Prudent,2032,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,103.87,3.342
 Écologie de droite|Prudent|2037|93,Écologie de droite,Prudent,2037,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,108.14,3.254
-Écologie de droite|Prudent|2045|93,Écologie de droite,Prudent,2045,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,113.96,3.238
+Écologie de droite|Prudent|2045|93,Écologie de droite,Prudent,2045,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,113.96,3.237
 Écologie de droite|Prudent|2050|93,Écologie de droite,Prudent,2050,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,117.32,3.271
-Écologie de droite|Prudent|2060|93,Écologie de droite,Prudent,2060,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,123.41,3.345
-Écologie de droite|Prudent|2073|93,Écologie de droite,Prudent,2073,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,130.38,3.474
+Écologie de droite|Prudent|2060|93,Écologie de droite,Prudent,2060,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,123.41,3.346
+Écologie de droite|Prudent|2073|93,Écologie de droite,Prudent,2073,Autres dépenses,"Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par des ventes et tarifs…)",budget,130.38,3.475
 Écologie de droite|Prudent|2029|94,Écologie de droite,Prudent,2029,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,214.31,7.192
 Écologie de droite|Prudent|2032|94,Écologie de droite,Prudent,2032,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,219.88,7.074
 Écologie de droite|Prudent|2037|94,Écologie de droite,Prudent,2037,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,228.91,6.887
-Écologie de droite|Prudent|2045|94,Écologie de droite,Prudent,2045,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,241.24,6.854
+Écologie de droite|Prudent|2045|94,Écologie de droite,Prudent,2045,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,241.24,6.853
 Écologie de droite|Prudent|2050|94,Écologie de droite,Prudent,2050,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,248.34,6.924
-Écologie de droite|Prudent|2060|94,Écologie de droite,Prudent,2060,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,261.23,7.08
-Écologie de droite|Prudent|2073|94,Écologie de droite,Prudent,2073,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,276.0,7.353
+Écologie de droite|Prudent|2060|94,Écologie de droite,Prudent,2060,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,261.23,7.084
+Écologie de droite|Prudent|2073|94,Écologie de droite,Prudent,2073,Recettes,"Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)",perimetre,276.0,7.356
 Écologie de droite|Prudent|2029|95,Écologie de droite,Prudent,2029,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-214.31,-7.192
 Écologie de droite|Prudent|2032|95,Écologie de droite,Prudent,2032,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-219.88,-7.074
 Écologie de droite|Prudent|2037|95,Écologie de droite,Prudent,2037,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-228.91,-6.887
-Écologie de droite|Prudent|2045|95,Écologie de droite,Prudent,2045,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-241.24,-6.854
+Écologie de droite|Prudent|2045|95,Écologie de droite,Prudent,2045,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-241.24,-6.853
 Écologie de droite|Prudent|2050|95,Écologie de droite,Prudent,2050,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-248.34,-6.924
-Écologie de droite|Prudent|2060|95,Écologie de droite,Prudent,2060,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-261.23,-7.08
-Écologie de droite|Prudent|2073|95,Écologie de droite,Prudent,2073,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-276.0,-7.353
+Écologie de droite|Prudent|2060|95,Écologie de droite,Prudent,2060,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-261.23,-7.084
+Écologie de droite|Prudent|2073|95,Écologie de droite,Prudent,2073,Collectivités,Périmètre : dépenses des collectivités financées par ces ressources,perimetre,-276.0,-7.356
 Écologie de droite|Prudent|2029|96,Écologie de droite,Prudent,2029,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,81.1,2.722
 Écologie de droite|Prudent|2032|96,Écologie de droite,Prudent,2032,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,82.92,2.668
 Écologie de droite|Prudent|2037|96,Écologie de droite,Prudent,2037,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,86.34,2.598
 Écologie de droite|Prudent|2045|96,Écologie de droite,Prudent,2045,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,90.98,2.585
 Écologie de droite|Prudent|2050|96,Écologie de droite,Prudent,2050,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,92.81,2.588
-Écologie de droite|Prudent|2060|96,Écologie de droite,Prudent,2060,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,95.03,2.576
-Écologie de droite|Prudent|2073|96,Écologie de droite,Prudent,2073,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,97.08,2.586
+Écologie de droite|Prudent|2060|96,Écologie de droite,Prudent,2060,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,95.03,2.577
+Écologie de droite|Prudent|2073|96,Écologie de droite,Prudent,2073,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,97.08,2.587
 Écologie de droite|Prudent|2029|97,Écologie de droite,Prudent,2029,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-81.1,-2.722
 Écologie de droite|Prudent|2032|97,Écologie de droite,Prudent,2032,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-82.92,-2.668
 Écologie de droite|Prudent|2037|97,Écologie de droite,Prudent,2037,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-86.34,-2.598
 Écologie de droite|Prudent|2045|97,Écologie de droite,Prudent,2045,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-90.98,-2.585
 Écologie de droite|Prudent|2050|97,Écologie de droite,Prudent,2050,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-92.81,-2.588
-Écologie de droite|Prudent|2060|97,Écologie de droite,Prudent,2060,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-95.03,-2.576
-Écologie de droite|Prudent|2073|97,Écologie de droite,Prudent,2073,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-97.08,-2.586
+Écologie de droite|Prudent|2060|97,Écologie de droite,Prudent,2060,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-95.03,-2.577
+Écologie de droite|Prudent|2073|97,Écologie de droite,Prudent,2073,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-97.08,-2.587
 Écologie de droite|Prudent|2029|98,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,-29.46,-0.989
 Écologie de droite|Prudent|2032|98,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,-15.89,-0.511
-Écologie de droite|Prudent|2037|98,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,3.19,0.096
+Écologie de droite|Prudent|2037|98,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,3.13,0.094
 Écologie de droite|Prudent|2045|98,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,0.0,0.0
 Écologie de droite|Prudent|2050|98,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,-5.77,-0.161
 Écologie de droite|Prudent|2060|98,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,0.0,0.0
@@ -1528,22 +1528,22 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2029|99,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : capital_du_fonds,effet_macro,0.0,0.0
 Écologie de droite|Prudent|2032|99,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : capital_du_fonds,effet_macro,0.27,0.009
 Écologie de droite|Prudent|2037|99,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : capital_du_fonds,effet_macro,0.77,0.023
-Écologie de droite|Prudent|2045|99,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : capital_du_fonds,effet_macro,3.2,0.091
-Écologie de droite|Prudent|2050|99,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : capital_du_fonds,effet_macro,4.73,0.132
-Écologie de droite|Prudent|2060|99,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : capital_du_fonds,effet_macro,9.36,0.254
-Écologie de droite|Prudent|2073|99,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : capital_du_fonds,effet_macro,16.78,0.447
+Écologie de droite|Prudent|2045|99,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : capital_du_fonds,effet_macro,3.29,0.093
+Écologie de droite|Prudent|2050|99,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : capital_du_fonds,effet_macro,4.75,0.132
+Écologie de droite|Prudent|2060|99,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : capital_du_fonds,effet_macro,8.99,0.244
+Écologie de droite|Prudent|2073|99,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : capital_du_fonds,effet_macro,16.53,0.441
 Écologie de droite|Prudent|2029|100,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : carbone,effet_macro,7.94,0.267
 Écologie de droite|Prudent|2032|100,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : carbone,effet_macro,16.51,0.531
 Écologie de droite|Prudent|2037|100,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : carbone,effet_macro,18.95,0.57
 Écologie de droite|Prudent|2045|100,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : carbone,effet_macro,23.57,0.67
 Écologie de droite|Prudent|2050|100,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : carbone,effet_macro,27.08,0.755
-Écologie de droite|Prudent|2060|100,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : carbone,effet_macro,36.17,0.98
+Écologie de droite|Prudent|2060|100,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : carbone,effet_macro,36.17,0.981
 Écologie de droite|Prudent|2073|100,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : carbone,effet_macro,19.1,0.509
 Écologie de droite|Prudent|2029|101,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : clause,effet_macro,56.48,1.896
 Écologie de droite|Prudent|2032|101,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : clause,effet_macro,62.3,2.004
-Écologie de droite|Prudent|2037|101,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : clause,effet_macro,48.27,1.452
-Écologie de droite|Prudent|2045|101,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : clause,effet_macro,0.74,0.021
-Écologie de droite|Prudent|2050|101,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : clause,effet_macro,52.16,1.454
+Écologie de droite|Prudent|2037|101,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : clause,effet_macro,48.46,1.458
+Écologie de droite|Prudent|2045|101,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : clause,effet_macro,3.45,0.098
+Écologie de droite|Prudent|2050|101,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : clause,effet_macro,53.95,1.504
 Écologie de droite|Prudent|2060|101,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : clause,effet_macro,-1.2,-0.033
 Écologie de droite|Prudent|2073|101,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : clause,effet_macro,0.0,0.0
 Écologie de droite|Prudent|2029|102,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : demographie,effet_macro,0.0,0.0
@@ -1563,10 +1563,10 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2029|104,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : emplois_fonds,effet_macro,0.0,0.0
 Écologie de droite|Prudent|2032|104,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : emplois_fonds,effet_macro,0.04,0.001
 Écologie de droite|Prudent|2037|104,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : emplois_fonds,effet_macro,0.14,0.004
-Écologie de droite|Prudent|2045|104,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : emplois_fonds,effet_macro,0.69,0.02
+Écologie de droite|Prudent|2045|104,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : emplois_fonds,effet_macro,0.7,0.02
 Écologie de droite|Prudent|2050|104,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : emplois_fonds,effet_macro,0.89,0.025
-Écologie de droite|Prudent|2060|104,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : emplois_fonds,effet_macro,1.31,0.035
-Écologie de droite|Prudent|2073|104,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : emplois_fonds,effet_macro,1.67,0.044
+Écologie de droite|Prudent|2060|104,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : emplois_fonds,effet_macro,1.29,0.035
+Écologie de droite|Prudent|2073|104,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : emplois_fonds,effet_macro,1.65,0.044
 Écologie de droite|Prudent|2029|105,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : erosion_is,effet_macro,-8.32,-0.279
 Écologie de droite|Prudent|2032|105,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : erosion_is,effet_macro,-25.5,-0.82
 Écologie de droite|Prudent|2037|105,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : erosion_is,effet_macro,-26.4,-0.794
@@ -1596,12 +1596,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2060|108,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : fraude_tva,effet_macro,2.25,0.061
 Écologie de droite|Prudent|2073|108,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : fraude_tva,effet_macro,2.25,0.06
 Écologie de droite|Prudent|2029|109,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : ia,effet_macro,0.03,0.001
-Écologie de droite|Prudent|2032|109,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : ia,effet_macro,0.57,0.018
-Écologie de droite|Prudent|2037|109,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : ia,effet_macro,1.8,0.054
-Écologie de droite|Prudent|2045|109,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : ia,effet_macro,1.61,0.046
-Écologie de droite|Prudent|2050|109,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : ia,effet_macro,2.57,0.072
-Écologie de droite|Prudent|2060|109,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : ia,effet_macro,3.82,0.104
-Écologie de droite|Prudent|2073|109,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : ia,effet_macro,3.48,0.093
+Écologie de droite|Prudent|2032|109,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : ia,effet_macro,0.56,0.018
+Écologie de droite|Prudent|2037|109,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : ia,effet_macro,1.76,0.053
+Écologie de droite|Prudent|2045|109,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : ia,effet_macro,0.84,0.024
+Écologie de droite|Prudent|2050|109,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : ia,effet_macro,1.67,0.047
+Écologie de droite|Prudent|2060|109,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : ia,effet_macro,1.11,0.03
+Écologie de droite|Prudent|2073|109,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : ia,effet_macro,2.39,0.064
 Écologie de droite|Prudent|2029|110,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.04,-0.001
 Écologie de droite|Prudent|2032|110,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.28,-0.009
 Écologie de droite|Prudent|2037|110,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.38,-0.011
@@ -1624,17 +1624,17 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2060|112,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : permis_rapide,effet_macro,0.15,0.004
 Écologie de droite|Prudent|2073|112,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : permis_rapide,effet_macro,0.15,0.004
 Écologie de droite|Prudent|2029|113,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : productivite,effet_macro,0.0,0.0
-Écologie de droite|Prudent|2032|113,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : productivite,effet_macro,1.16,0.037
-Écologie de droite|Prudent|2037|113,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : productivite,effet_macro,4.36,0.131
-Écologie de droite|Prudent|2045|113,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : productivite,effet_macro,4.4,0.125
-Écologie de droite|Prudent|2050|113,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : productivite,effet_macro,7.04,0.196
-Écologie de droite|Prudent|2060|113,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : productivite,effet_macro,10.46,0.283
-Écologie de droite|Prudent|2073|113,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : productivite,effet_macro,9.53,0.254
+Écologie de droite|Prudent|2032|113,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : productivite,effet_macro,1.15,0.037
+Écologie de droite|Prudent|2037|113,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : productivite,effet_macro,4.27,0.129
+Écologie de droite|Prudent|2045|113,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : productivite,effet_macro,2.29,0.065
+Écologie de droite|Prudent|2050|113,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : productivite,effet_macro,4.58,0.128
+Écologie de droite|Prudent|2060|113,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : productivite,effet_macro,3.03,0.082
+Écologie de droite|Prudent|2073|113,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : productivite,effet_macro,6.54,0.174
 Écologie de droite|Prudent|2029|114,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : reactions_impot,effet_macro,-7.83,-0.263
 Écologie de droite|Prudent|2032|114,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : reactions_impot,effet_macro,-23.99,-0.772
 Écologie de droite|Prudent|2037|114,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : reactions_impot,effet_macro,-24.85,-0.748
 Écologie de droite|Prudent|2045|114,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : reactions_impot,effet_macro,-26.27,-0.746
-Écologie de droite|Prudent|2050|114,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : reactions_impot,effet_macro,-27.2,-0.759
+Écologie de droite|Prudent|2050|114,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : reactions_impot,effet_macro,-27.2,-0.758
 Écologie de droite|Prudent|2060|114,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : reactions_impot,effet_macro,-29.17,-0.791
 Écologie de droite|Prudent|2073|114,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : reactions_impot,effet_macro,-31.94,-0.851
 Écologie de droite|Prudent|2029|115,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : salaires_dirigeants,effet_macro,-0.45,-0.015
@@ -1661,10 +1661,10 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Prudent|2029|118,Écologie de droite,Prudent,2029,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-0.0,-0.0
 Écologie de droite|Prudent|2032|118,Écologie de droite,Prudent,2032,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-0.74,-0.024
 Écologie de droite|Prudent|2037|118,Écologie de droite,Prudent,2037,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-3.83,-0.115
-Écologie de droite|Prudent|2045|118,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-10.77,-0.306
-Écologie de droite|Prudent|2050|118,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-15.56,-0.434
-Écologie de droite|Prudent|2060|118,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-24.62,-0.667
-Écologie de droite|Prudent|2073|118,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-28.11,-0.749
+Écologie de droite|Prudent|2045|118,Écologie de droite,Prudent,2045,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-10.72,-0.304
+Écologie de droite|Prudent|2050|118,Écologie de droite,Prudent,2050,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-15.48,-0.432
+Écologie de droite|Prudent|2060|118,Écologie de droite,Prudent,2060,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-25.02,-0.678
+Écologie de droite|Prudent|2073|118,Écologie de droite,Prudent,2073,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-29.59,-0.789
 Écologie de droite|Médian|2029|0,Écologie de droite,Médian,2029,Recettes,Effet du programme sur les naissances : impôt unique et TVA des salariés,budget,0.0,0.0
 Écologie de droite|Médian|2032|0,Écologie de droite,Médian,2032,Recettes,Effet du programme sur les naissances : impôt unique et TVA des salariés,budget,0.0,0.0
 Écologie de droite|Médian|2037|0,Écologie de droite,Médian,2037,Recettes,Effet du programme sur les naissances : impôt unique et TVA des salariés,budget,0.0,0.0
@@ -1684,7 +1684,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2037|2,Écologie de droite,Médian,2037,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-82.49,-2.326
 Écologie de droite|Médian|2045|2,Écologie de droite,Médian,2045,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-94.17,-2.428
 Écologie de droite|Médian|2050|2,Écologie de droite,Médian,2050,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-100.72,-2.499
-Écologie de droite|Médian|2060|2,Écologie de droite,Médian,2060,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-112.64,-2.641
+Écologie de droite|Médian|2060|2,Écologie de droite,Médian,2060,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-112.64,-2.64
 Écologie de droite|Médian|2073|2,Écologie de droite,Médian,2073,Recettes,"Impôt unique sur les rémunérations publiques (remplace cotisations, CSG, IR des agents)",budget,-126.43,-2.806
 Écologie de droite|Médian|2029|3,Écologie de droite,Médian,2029,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-5.99,-0.199
 Écologie de droite|Médian|2032|3,Écologie de droite,Médian,2032,Recettes,"Indépendants en société : impôt unique ou IS (remplace cotisations, CSG, IR)",budget,-6.78,-0.21
@@ -1706,7 +1706,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2045|5,Écologie de droite,Médian,2045,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-118.08,-3.045
 Écologie de droite|Médian|2050|5,Écologie de droite,Médian,2050,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-125.43,-3.112
 Écologie de droite|Médian|2060|5,Écologie de droite,Médian,2060,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-139.03,-3.259
-Écologie de droite|Médian|2073|5,Écologie de droite,Médian,2073,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-156.67,-3.478
+Écologie de droite|Médian|2073|5,Écologie de droite,Médian,2073,Recettes,"TVA écologique et santé, accises (remplace TVA et accises actuelles)",budget,-156.67,-3.477
 Écologie de droite|Médian|2029|6,Écologie de droite,Médian,2029,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,33.39,1.11
 Écologie de droite|Médian|2032|6,Écologie de droite,Médian,2032,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,32.55,1.007
 Écologie de droite|Médian|2037|6,Écologie de droite,Médian,2037,Recettes,"IS à 45 %, fin des impôts de production, accises carbone des entreprises",budget,29.23,0.824
@@ -1747,7 +1747,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2037|11,Écologie de droite,Médian,2037,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-212.41,-5.988
 Écologie de droite|Médian|2045|11,Écologie de droite,Médian,2045,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-229.68,-5.922
 Écologie de droite|Médian|2050|11,Écologie de droite,Médian,2050,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-237.81,-5.9
-Écologie de droite|Médian|2060|11,Écologie de droite,Médian,2060,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-250.85,-5.881
+Écologie de droite|Médian|2060|11,Écologie de droite,Médian,2060,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-250.85,-5.88
 Écologie de droite|Médian|2073|11,Écologie de droite,Médian,2073,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-266.35,-5.912
 Écologie de droite|Médian|2029|12,Écologie de droite,Médian,2029,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
 Écologie de droite|Médian|2032|12,Écologie de droite,Médian,2032,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
@@ -2341,16 +2341,16 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2032|96,Écologie de droite,Médian,2032,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,84.33,2.608
 Écologie de droite|Médian|2037|96,Écologie de droite,Médian,2037,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,90.02,2.538
 Écologie de droite|Médian|2045|96,Écologie de droite,Médian,2045,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,97.34,2.51
-Écologie de droite|Médian|2050|96,Écologie de droite,Médian,2050,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,100.78,2.5
+Écologie de droite|Médian|2050|96,Écologie de droite,Médian,2050,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,100.78,2.501
 Écologie de droite|Médian|2060|96,Écologie de droite,Médian,2060,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,106.31,2.492
-Écologie de droite|Médian|2073|96,Écologie de droite,Médian,2073,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,112.88,2.506
+Écologie de droite|Médian|2073|96,Écologie de droite,Médian,2073,Recettes,"Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux",perimetre,112.88,2.505
 Écologie de droite|Médian|2029|97,Écologie de droite,Médian,2029,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-81.26,-2.702
 Écologie de droite|Médian|2032|97,Écologie de droite,Médian,2032,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-84.33,-2.608
 Écologie de droite|Médian|2037|97,Écologie de droite,Médian,2037,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-90.02,-2.538
 Écologie de droite|Médian|2045|97,Écologie de droite,Médian,2045,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-97.34,-2.51
-Écologie de droite|Médian|2050|97,Écologie de droite,Médian,2050,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-100.78,-2.5
+Écologie de droite|Médian|2050|97,Écologie de droite,Médian,2050,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-100.78,-2.501
 Écologie de droite|Médian|2060|97,Écologie de droite,Médian,2060,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-106.31,-2.492
-Écologie de droite|Médian|2073|97,Écologie de droite,Médian,2073,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-112.88,-2.506
+Écologie de droite|Médian|2073|97,Écologie de droite,Médian,2073,Autres dépenses,Périmètre : dépenses financées par ces ventes et tarifs,perimetre,-112.88,-2.505
 Écologie de droite|Médian|2029|98,Écologie de droite,Médian,2029,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,-27.57,-0.917
 Écologie de droite|Médian|2032|98,Écologie de droite,Médian,2032,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,-3.22,-0.1
 Écologie de droite|Médian|2037|98,Écologie de droite,Médian,2037,Effets économiques,Effet macro : ajustement_budgetaire,effet_macro,0.0,0.0
@@ -2361,10 +2361,10 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2029|99,Écologie de droite,Médian,2029,Effets économiques,Effet macro : capital_du_fonds,effet_macro,0.0,0.0
 Écologie de droite|Médian|2032|99,Écologie de droite,Médian,2032,Effets économiques,Effet macro : capital_du_fonds,effet_macro,0.46,0.014
 Écologie de droite|Médian|2037|99,Écologie de droite,Médian,2037,Effets économiques,Effet macro : capital_du_fonds,effet_macro,3.77,0.106
-Écologie de droite|Médian|2045|99,Écologie de droite,Médian,2045,Effets économiques,Effet macro : capital_du_fonds,effet_macro,10.15,0.262
+Écologie de droite|Médian|2045|99,Écologie de droite,Médian,2045,Effets économiques,Effet macro : capital_du_fonds,effet_macro,10.14,0.262
 Écologie de droite|Médian|2050|99,Écologie de droite,Médian,2050,Effets économiques,Effet macro : capital_du_fonds,effet_macro,14.28,0.354
-Écologie de droite|Médian|2060|99,Écologie de droite,Médian,2060,Effets économiques,Effet macro : capital_du_fonds,effet_macro,22.0,0.516
-Écologie de droite|Médian|2073|99,Écologie de droite,Médian,2073,Effets économiques,Effet macro : capital_du_fonds,effet_macro,29.97,0.665
+Écologie de droite|Médian|2060|99,Écologie de droite,Médian,2060,Effets économiques,Effet macro : capital_du_fonds,effet_macro,22.03,0.517
+Écologie de droite|Médian|2073|99,Écologie de droite,Médian,2073,Effets économiques,Effet macro : capital_du_fonds,effet_macro,30.0,0.666
 Écologie de droite|Médian|2029|100,Écologie de droite,Médian,2029,Effets économiques,Effet macro : carbone,effet_macro,7.94,0.264
 Écologie de droite|Médian|2032|100,Écologie de droite,Médian,2032,Effets économiques,Effet macro : carbone,effet_macro,16.7,0.516
 Écologie de droite|Médian|2037|100,Écologie de droite,Médian,2037,Effets économiques,Effet macro : carbone,effet_macro,19.46,0.549
@@ -2373,7 +2373,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2060|100,Écologie de droite,Médian,2060,Effets économiques,Effet macro : carbone,effet_macro,38.29,0.898
 Écologie de droite|Médian|2073|100,Écologie de droite,Médian,2073,Effets économiques,Effet macro : carbone,effet_macro,21.45,0.476
 Écologie de droite|Médian|2029|101,Écologie de droite,Médian,2029,Effets économiques,Effet macro : clause,effet_macro,50.46,1.678
-Écologie de droite|Médian|2032|101,Écologie de droite,Médian,2032,Effets économiques,Effet macro : clause,effet_macro,23.93,0.74
+Écologie de droite|Médian|2032|101,Écologie de droite,Médian,2032,Effets économiques,Effet macro : clause,effet_macro,23.97,0.741
 Écologie de droite|Médian|2037|101,Écologie de droite,Médian,2037,Effets économiques,Effet macro : clause,effet_macro,8.53,0.24
 Écologie de droite|Médian|2045|101,Écologie de droite,Médian,2045,Effets économiques,Effet macro : clause,effet_macro,-6.03,-0.155
 Écologie de droite|Médian|2050|101,Écologie de droite,Médian,2050,Effets économiques,Effet macro : clause,effet_macro,-2.41,-0.06
@@ -2429,12 +2429,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2060|108,Écologie de droite,Médian,2060,Effets économiques,Effet macro : fraude_tva,effet_macro,3.0,0.07
 Écologie de droite|Médian|2073|108,Écologie de droite,Médian,2073,Effets économiques,Effet macro : fraude_tva,effet_macro,3.0,0.067
 Écologie de droite|Médian|2029|109,Écologie de droite,Médian,2029,Effets économiques,Effet macro : ia,effet_macro,0.14,0.005
-Écologie de droite|Médian|2032|109,Écologie de droite,Médian,2032,Effets économiques,Effet macro : ia,effet_macro,2.33,0.072
-Écologie de droite|Médian|2037|109,Écologie de droite,Médian,2037,Effets économiques,Effet macro : ia,effet_macro,7.53,0.212
-Écologie de droite|Médian|2045|109,Écologie de droite,Médian,2045,Effets économiques,Effet macro : ia,effet_macro,6.91,0.178
-Écologie de droite|Médian|2050|109,Écologie de droite,Médian,2050,Effets économiques,Effet macro : ia,effet_macro,11.22,0.278
-Écologie de droite|Médian|2060|109,Écologie de droite,Médian,2060,Effets économiques,Effet macro : ia,effet_macro,17.16,0.402
-Écologie de droite|Médian|2073|109,Écologie de droite,Médian,2073,Effets économiques,Effet macro : ia,effet_macro,16.25,0.361
+Écologie de droite|Médian|2032|109,Écologie de droite,Médian,2032,Effets économiques,Effet macro : ia,effet_macro,2.31,0.072
+Écologie de droite|Médian|2037|109,Écologie de droite,Médian,2037,Effets économiques,Effet macro : ia,effet_macro,7.37,0.208
+Écologie de droite|Médian|2045|109,Écologie de droite,Médian,2045,Effets économiques,Effet macro : ia,effet_macro,3.6,0.093
+Écologie de droite|Médian|2050|109,Écologie de droite,Médian,2050,Effets économiques,Effet macro : ia,effet_macro,7.3,0.181
+Écologie de droite|Médian|2060|109,Écologie de droite,Médian,2060,Effets économiques,Effet macro : ia,effet_macro,4.96,0.116
+Écologie de droite|Médian|2073|109,Écologie de droite,Médian,2073,Effets économiques,Effet macro : ia,effet_macro,11.16,0.248
 Écologie de droite|Médian|2029|110,Écologie de droite,Médian,2029,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.04,-0.001
 Écologie de droite|Médian|2032|110,Écologie de droite,Médian,2032,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.26,-0.008
 Écologie de droite|Médian|2037|110,Écologie de droite,Médian,2037,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.23,-0.007
@@ -2457,12 +2457,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2060|112,Écologie de droite,Médian,2060,Effets économiques,Effet macro : permis_rapide,effet_macro,0.42,0.01
 Écologie de droite|Médian|2073|112,Écologie de droite,Médian,2073,Effets économiques,Effet macro : permis_rapide,effet_macro,0.43,0.009
 Écologie de droite|Médian|2029|113,Écologie de droite,Médian,2029,Effets économiques,Effet macro : productivite,effet_macro,0.0,0.0
-Écologie de droite|Médian|2032|113,Écologie de droite,Médian,2032,Effets économiques,Effet macro : productivite,effet_macro,1.74,0.054
-Écologie de droite|Médian|2037|113,Écologie de droite,Médian,2037,Effets économiques,Effet macro : productivite,effet_macro,6.57,0.185
-Écologie de droite|Médian|2045|113,Écologie de droite,Médian,2045,Effets économiques,Effet macro : productivite,effet_macro,6.63,0.171
-Écologie de droite|Médian|2050|113,Écologie de droite,Médian,2050,Effets économiques,Effet macro : productivite,effet_macro,10.61,0.263
-Écologie de droite|Médian|2060|113,Écologie de droite,Médian,2060,Effets économiques,Effet macro : productivite,effet_macro,15.76,0.369
-Écologie de droite|Médian|2073|113,Écologie de droite,Médian,2073,Effets économiques,Effet macro : productivite,effet_macro,14.35,0.319
+Écologie de droite|Médian|2032|113,Écologie de droite,Médian,2032,Effets économiques,Effet macro : productivite,effet_macro,1.73,0.053
+Écologie de droite|Médian|2037|113,Écologie de droite,Médian,2037,Effets économiques,Effet macro : productivite,effet_macro,6.43,0.181
+Écologie de droite|Médian|2045|113,Écologie de droite,Médian,2045,Effets économiques,Effet macro : productivite,effet_macro,3.46,0.089
+Écologie de droite|Médian|2050|113,Écologie de droite,Médian,2050,Effets économiques,Effet macro : productivite,effet_macro,6.9,0.171
+Écologie de droite|Médian|2060|113,Écologie de droite,Médian,2060,Effets économiques,Effet macro : productivite,effet_macro,4.56,0.107
+Écologie de droite|Médian|2073|113,Écologie de droite,Médian,2073,Effets économiques,Effet macro : productivite,effet_macro,9.86,0.219
 Écologie de droite|Médian|2029|114,Écologie de droite,Médian,2029,Effets économiques,Effet macro : reactions_impot,effet_macro,-3.83,-0.127
 Écologie de droite|Médian|2032|114,Écologie de droite,Médian,2032,Effets économiques,Effet macro : reactions_impot,effet_macro,-11.73,-0.363
 Écologie de droite|Médian|2037|114,Écologie de droite,Médian,2037,Effets économiques,Effet macro : reactions_impot,effet_macro,-12.15,-0.343
@@ -2485,12 +2485,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Médian|2060|116,Écologie de droite,Médian,2060,Effets économiques,Effet macro : sante,effet_macro,11.87,0.278
 Écologie de droite|Médian|2073|116,Écologie de droite,Médian,2073,Effets économiques,Effet macro : sante,effet_macro,36.01,0.799
 Écologie de droite|Médian|2029|117,Écologie de droite,Médian,2029,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,1.69,0.056
-Écologie de droite|Médian|2032|117,Écologie de droite,Médian,2032,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,7.15,0.221
-Écologie de droite|Médian|2037|117,Écologie de droite,Médian,2037,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,12.94,0.365
-Écologie de droite|Médian|2045|117,Écologie de droite,Médian,2045,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,17.18,0.443
-Écologie de droite|Médian|2050|117,Écologie de droite,Médian,2050,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,29.61,0.735
-Écologie de droite|Médian|2060|117,Écologie de droite,Médian,2060,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,58.1,1.362
-Écologie de droite|Médian|2073|117,Écologie de droite,Médian,2073,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,74.49,1.653
+Écologie de droite|Médian|2032|117,Écologie de droite,Médian,2032,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,7.14,0.221
+Écologie de droite|Médian|2037|117,Écologie de droite,Médian,2037,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,12.79,0.361
+Écologie de droite|Médian|2045|117,Écologie de droite,Médian,2045,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,11.76,0.303
+Écologie de droite|Médian|2050|117,Écologie de droite,Médian,2050,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,21.36,0.53
+Écologie de droite|Médian|2060|117,Écologie de droite,Médian,2060,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,21.32,0.5
+Écologie de droite|Médian|2073|117,Écologie de droite,Médian,2073,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,53.31,1.183
 Écologie de droite|Médian|2029|118,Écologie de droite,Médian,2029,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,0.0,0.0
 Écologie de droite|Médian|2032|118,Écologie de droite,Médian,2032,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-0.74,-0.023
 Écologie de droite|Médian|2037|118,Écologie de droite,Médian,2037,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-2.25,-0.063
@@ -2579,7 +2579,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Optimiste|2032|11,Écologie de droite,Optimiste,2032,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-200.62,-5.997
 Écologie de droite|Optimiste|2037|11,Écologie de droite,Optimiste,2037,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-216.35,-5.762
 Écologie de droite|Optimiste|2045|11,Écologie de droite,Optimiste,2045,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-234.54,-5.668
-Écologie de droite|Optimiste|2050|11,Écologie de droite,Optimiste,2050,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-244.13,-5.637
+Écologie de droite|Optimiste|2050|11,Écologie de droite,Optimiste,2050,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-244.13,-5.638
 Écologie de droite|Optimiste|2060|11,Écologie de droite,Optimiste,2060,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-264.55,-5.606
 Écologie de droite|Optimiste|2073|11,Écologie de droite,Optimiste,2073,Recettes,Recettes non fiscales actuelles (versées au fonds ; part locale remise par le périmètre),budget,-293.38,-5.619
 Écologie de droite|Optimiste|2029|12,Écologie de droite,Optimiste,2029,Recettes,Épargne obligatoire versée à l'État (contribution de transition),budget,0.0,0.0
@@ -2945,7 +2945,7 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Optimiste|2045|63,Écologie de droite,Optimiste,2045,Collectivités,Remplacé : collectivités (statu quo),budget,288.56,6.973
 Écologie de droite|Optimiste|2050|63,Écologie de droite,Optimiste,2050,Collectivités,Remplacé : collectivités (statu quo),budget,303.76,7.014
 Écologie de droite|Optimiste|2060|63,Écologie de droite,Optimiste,2060,Collectivités,Remplacé : collectivités (statu quo),budget,334.64,7.091
-Écologie de droite|Optimiste|2073|63,Écologie de droite,Optimiste,2073,Collectivités,Remplacé : collectivités (statu quo),budget,378.43,7.247
+Écologie de droite|Optimiste|2073|63,Écologie de droite,Optimiste,2073,Collectivités,Remplacé : collectivités (statu quo),budget,378.43,7.248
 Écologie de droite|Optimiste|2029|64,Écologie de droite,Optimiste,2029,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,73.8,2.417
 Écologie de droite|Optimiste|2032|64,Écologie de droite,Optimiste,2032,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,77.06,2.304
 Écologie de droite|Optimiste|2037|64,Écologie de droite,Optimiste,2037,Collectivités,"Remplacé : investissement local du statu quo (le programme le laisse dans les dépenses des collectivités, au périmètre)",budget,83.11,2.213
@@ -3195,9 +3195,9 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Optimiste|2032|99,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : capital_du_fonds,effet_macro,2.61,0.078
 Écologie de droite|Optimiste|2037|99,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : capital_du_fonds,effet_macro,8.57,0.228
 Écologie de droite|Optimiste|2045|99,Écologie de droite,Optimiste,2045,Effets économiques,Effet macro : capital_du_fonds,effet_macro,18.77,0.454
-Écologie de droite|Optimiste|2050|99,Écologie de droite,Optimiste,2050,Effets économiques,Effet macro : capital_du_fonds,effet_macro,25.08,0.579
-Écologie de droite|Optimiste|2060|99,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : capital_du_fonds,effet_macro,37.19,0.788
-Écologie de droite|Optimiste|2073|99,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : capital_du_fonds,effet_macro,50.46,0.966
+Écologie de droite|Optimiste|2050|99,Écologie de droite,Optimiste,2050,Effets économiques,Effet macro : capital_du_fonds,effet_macro,25.07,0.579
+Écologie de droite|Optimiste|2060|99,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : capital_du_fonds,effet_macro,37.18,0.788
+Écologie de droite|Optimiste|2073|99,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : capital_du_fonds,effet_macro,50.45,0.966
 Écologie de droite|Optimiste|2029|100,Écologie de droite,Optimiste,2029,Effets économiques,Effet macro : carbone,effet_macro,7.94,0.26
 Écologie de droite|Optimiste|2032|100,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : carbone,effet_macro,16.98,0.508
 Écologie de droite|Optimiste|2037|100,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : carbone,effet_macro,20.24,0.539
@@ -3262,12 +3262,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Optimiste|2060|108,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : fraude_tva,effet_macro,5.0,0.106
 Écologie de droite|Optimiste|2073|108,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : fraude_tva,effet_macro,5.0,0.096
 Écologie de droite|Optimiste|2029|109,Écologie de droite,Optimiste,2029,Effets économiques,Effet macro : ia,effet_macro,0.32,0.01
-Écologie de droite|Optimiste|2032|109,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : ia,effet_macro,5.36,0.16
-Écologie de droite|Optimiste|2037|109,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : ia,effet_macro,17.52,0.467
-Écologie de droite|Optimiste|2045|109,Écologie de droite,Optimiste,2045,Effets économiques,Effet macro : ia,effet_macro,16.12,0.389
-Écologie de droite|Optimiste|2050|109,Écologie de droite,Optimiste,2050,Effets économiques,Effet macro : ia,effet_macro,26.17,0.604
-Écologie de droite|Optimiste|2060|109,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : ia,effet_macro,40.03,0.848
-Écologie de droite|Optimiste|2073|109,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : ia,effet_macro,37.9,0.726
+Écologie de droite|Optimiste|2032|109,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : ia,effet_macro,5.34,0.16
+Écologie de droite|Optimiste|2037|109,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : ia,effet_macro,17.16,0.457
+Écologie de droite|Optimiste|2045|109,Écologie de droite,Optimiste,2045,Effets économiques,Effet macro : ia,effet_macro,8.4,0.203
+Écologie de droite|Optimiste|2050|109,Écologie de droite,Optimiste,2050,Effets économiques,Effet macro : ia,effet_macro,17.02,0.393
+Écologie de droite|Optimiste|2060|109,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : ia,effet_macro,11.58,0.245
+Écologie de droite|Optimiste|2073|109,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : ia,effet_macro,26.03,0.498
 Écologie de droite|Optimiste|2029|110,Écologie de droite,Optimiste,2029,Effets économiques,Effet macro : investissement_entreprises,effet_macro,-0.0,-0.0
 Écologie de droite|Optimiste|2032|110,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : investissement_entreprises,effet_macro,0.16,0.005
 Écologie de droite|Optimiste|2037|110,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : investissement_entreprises,effet_macro,0.9,0.024
@@ -3290,12 +3290,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Optimiste|2060|112,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : permis_rapide,effet_macro,1.23,0.026
 Écologie de droite|Optimiste|2073|112,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : permis_rapide,effet_macro,1.25,0.024
 Écologie de droite|Optimiste|2029|113,Écologie de droite,Optimiste,2029,Effets économiques,Effet macro : productivite,effet_macro,0.0,0.0
-Écologie de droite|Optimiste|2032|113,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : productivite,effet_macro,2.32,0.069
-Écologie de droite|Optimiste|2037|113,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : productivite,effet_macro,8.79,0.234
-Écologie de droite|Optimiste|2045|113,Écologie de droite,Optimiste,2045,Effets économiques,Effet macro : productivite,effet_macro,8.88,0.215
-Écologie de droite|Optimiste|2050|113,Écologie de droite,Optimiste,2050,Effets économiques,Effet macro : productivite,effet_macro,14.21,0.328
-Écologie de droite|Optimiste|2060|113,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : productivite,effet_macro,21.11,0.447
-Écologie de droite|Optimiste|2073|113,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : productivite,effet_macro,19.22,0.368
+Écologie de droite|Optimiste|2032|113,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : productivite,effet_macro,2.31,0.069
+Écologie de droite|Optimiste|2037|113,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : productivite,effet_macro,8.61,0.229
+Écologie de droite|Optimiste|2045|113,Écologie de droite,Optimiste,2045,Effets économiques,Effet macro : productivite,effet_macro,4.63,0.112
+Écologie de droite|Optimiste|2050|113,Écologie de droite,Optimiste,2050,Effets économiques,Effet macro : productivite,effet_macro,9.24,0.213
+Écologie de droite|Optimiste|2060|113,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : productivite,effet_macro,6.11,0.129
+Écologie de droite|Optimiste|2073|113,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : productivite,effet_macro,13.2,0.253
 Écologie de droite|Optimiste|2029|114,Écologie de droite,Optimiste,2029,Effets économiques,Effet macro : reactions_impot,effet_macro,-1.86,-0.061
 Écologie de droite|Optimiste|2032|114,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : reactions_impot,effet_macro,-5.69,-0.17
 Écologie de droite|Optimiste|2037|114,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : reactions_impot,effet_macro,-5.89,-0.157
@@ -3318,12 +3318,12 @@ cle,programme,scenario,annee,groupe,mesure,nature,md,part_pib
 Écologie de droite|Optimiste|2060|116,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : sante,effet_macro,13.03,0.276
 Écologie de droite|Optimiste|2073|116,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : sante,effet_macro,48.04,0.92
 Écologie de droite|Optimiste|2029|117,Écologie de droite,Optimiste,2029,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,3.25,0.107
-Écologie de droite|Optimiste|2032|117,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,11.72,0.35
-Écologie de droite|Optimiste|2037|117,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,18.14,0.483
-Écologie de droite|Optimiste|2045|117,Écologie de droite,Optimiste,2045,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,22.66,0.548
-Écologie de droite|Optimiste|2050|117,Écologie de droite,Optimiste,2050,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,35.46,0.819
-Écologie de droite|Optimiste|2060|117,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,66.0,1.399
-Écologie de droite|Optimiste|2073|117,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,86.74,1.661
+Écologie de droite|Optimiste|2032|117,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,11.71,0.35
+Écologie de droite|Optimiste|2037|117,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,17.99,0.479
+Écologie de droite|Optimiste|2045|117,Écologie de droite,Optimiste,2045,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,17.25,0.417
+Écologie de droite|Optimiste|2050|117,Écologie de droite,Optimiste,2050,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,27.14,0.627
+Écologie de droite|Optimiste|2060|117,Écologie de droite,Optimiste,2060,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,27.89,0.591
+Écologie de droite|Optimiste|2073|117,Écologie de droite,Optimiste,2073,Effets économiques,Effet macro : tendance_et_ecole,effet_macro,63.79,1.222
 Écologie de droite|Optimiste|2029|118,Écologie de droite,Optimiste,2029,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,0.0,0.0
 Écologie de droite|Optimiste|2032|118,Écologie de droite,Optimiste,2032,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-0.37,-0.011
 Écologie de droite|Optimiste|2037|118,Écologie de droite,Optimiste,2037,Effets économiques,Effet macro : épargne rendue et socle supplémentaire (règle),effet_macro,-0.77,-0.02

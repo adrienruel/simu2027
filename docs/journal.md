@@ -645,4 +645,8 @@ Déficit du programme (prudent) : 2037 3,01 → 3,18 % ; 2050 3,49 → 3,46 % ; 
   travail. Base de remboursement à sourcer (Medic'AM, classe N06A). Ligne au poste santé.
 - Comparateur des programmes (claude.ai) mis à jour avec l'export du jour.
 
-Déficit du programme (prudent) : 2037 3,01 % ; 2050 3,02 % ; 2073 2,21 %. Médian 2050 −0,14 % ; crise 2050 7,78 %.
+Déficit du programme (prudent) : 2037 3,01 % ; 2050 3,08 % ; 2073 2,67 %. Médian 2050 0,31 % ; crise 2050 7,65 %.
+
+Corrigé en relançant les tests : le dividende de croissance est mesuré sans l'accise sur les produits nocifs (plafonnée,
+donc non linéaire), qui rendait les effets des mesures non additifs (écart de 26 Md€ en 2050, 5,5 après) ; le choc de
+chômage et de taux de la crise démarre après le point de départ commun de 2029.
