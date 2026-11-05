@@ -293,6 +293,11 @@ carbone_importe:
   abattement_preuve: {valeur: 0.2, unite: taux, statut: HYPOTHESE}
   elasticite_prix: {valeur: 0.6, unite: sans_unite, statut: HYPOTHESE}
   passage_prix_vente: {valeur: 1.15, unite: sans_unite, statut: HYPOTHESE, note: "Coefficient de 1,15 signalé par l'audit comme à étayer."}
+  part_empreinte_couverte:
+    valeur: 0.6
+    unite: taux
+    statut: HYPOTHESE
+    note: "Part des émissions importées de l'empreinte (284 Mt en 2024, SDES) liée aux biens manufacturés et aux véhicules, assiette de l'accise sur le contenu importé. Les énergies importées sont comptées à leur combustion en France (émissions territoriales) ; le reste est surtout des biens intermédiaires et des services. Ajouté le 05/11/2026 (question d'Adrien : empreinte par habitant plus haute malgré des émissions plus basses) : l'effet physique de l'accise manquait. À sourcer : décomposition de l'empreinte importée par produit (SDES)."
 
 # --- Budget de l'État 2026 (feuille Budget État 2026) ----------------------------
 budget_etat:

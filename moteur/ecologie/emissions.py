@@ -18,7 +18,9 @@ Réponse au prix du carbone (transports et bâtiments) : une seule équation, pa
 
 Un programme passe ses effets physiques par Mesure.physique (moteur/noyau.py) :
 - « emissions_mt:<secteur> » : Mt CO2e en plus (négatif : évitées) dans un secteur, année par année ;
-- « relocalisation_mt » : Mt d'émissions importées remplacées par une production en France.
+- « relocalisation_mt » : Mt d'émissions importées remplacées par une production en France ;
+- « importees_mt » : Mt d'émissions importées en plus (négatif : en moins), par exemple sous l'effet d'une taxe sur
+  le contenu carbone des importations.
 """
 from __future__ import annotations
 
@@ -129,7 +131,7 @@ def physique(mesures) -> dict[str, dict[int, float]]:
     out: dict[str, dict[int, float]] = {}
     for m in mesures or []:
         for k, v in (getattr(m, "physique", None) or {}).items():
-            if k != "relocalisation_mt" and not (k.startswith("emissions_mt:") and k.split(":", 1)[1] in SECTEURS):
+            if k not in ("relocalisation_mt", "importees_mt") and not (k.startswith("emissions_mt:") and k.split(":", 1)[1] in SECTEURS):
                 raise ValueError(f"Mesure « {m.nom} » : effet physique inconnu {k}")
             d = out.setdefault(k, {})
             for t, x in v.items():
@@ -201,7 +203,8 @@ def bilan(p: Parametres, s: str, mesures=None, contexte: dict | None = None) -> 
         total, total_sq, total_act = sum(secteurs.values()), sum(sq_e[t].values()), sum(act_e[t].values())
         domestique = imp["domestique"] * total / e2024
         importees = (imp["importees"] * a[t][1] / a_sq[2024][1] * (1 + pen) ** (t - 2024)
-                     * _facteur_intensite(p, s_r, t, "ecologie.baisse_intensite_importations", 2024) - r)
+                     * _facteur_intensite(p, s_r, t, "ecologie.baisse_intensite_importations", 2024) - r
+                     + ph.get("importees_mt", {}).get(t, 0.0))
         pop = a[t][0]
         out[t] = {
             "secteurs": secteurs, "territoriales": total, "statu_quo": total_sq,

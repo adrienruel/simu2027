@@ -125,3 +125,18 @@ transports et des bâtiments : 0,92 en 2030, 0,83 en 2037, 0,75 en 2050, 0,69 en
 (Andersson, 2019) ; ici, 225 € d'écart en 2030 donnent −8 % la première année et −14 % à long terme.
 
 La recette carbone suit la même équation : son érosion est moins forte, le déficit s'améliore (voir le journal).
+
+## Empreinte : accise sur le contenu carbone des importations (05/11/2026, question d'Adrien)
+
+Constat : chez Écologie de droite, les émissions territoriales sont plus basses, mais l'empreinte par habitant pouvait
+être plus haute que chez Tondelier ou le statu quo (médian, optimiste). Deux raisons :
+
+1. le PIB est plus élevé (+3 % en 2050 dans le prudent) : plus de consommation, donc plus d'importations ; les
+   émissions importées suivent le PIB. Effet réel, qui joue contre le programme ;
+2. l'accise sur le contenu carbone des importations était comptée en recette (`carbone._importe`) mais pas en
+   émissions. Ajouté (`mesure_carbone_importe`, clé physique `importees_mt`) avec la même réponse que la recette,
+   appliquée à 60 % des émissions importées (biens manufacturés et véhicules, hypothèse) : −5,5 Mt en 2030, −6,7 en
+   2037, −9,2 en 2050 dans le prudent. La substitution vers des biens français ou européens n'est pas comptée.
+
+L'effet de l'activité sur l'empreinte (via les importations) n'est pas encore séparé de l'effet des mesures dans le
+comparateur ; seul l'effet sur les émissions territoriales l'est.

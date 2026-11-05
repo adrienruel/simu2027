@@ -555,6 +555,29 @@ def mesure_prix_carbone(p: Parametres, q: Parametres, s: str) -> Mesure:
                   physique=phys, vert="favorable")
 
 
+def mesure_carbone_importe(p: Parametres, q: Parametres, s: str) -> Mesure:
+    """Effet physique de l'accise sur le contenu carbone des importations : la même réponse que sa recette
+    (moteur/carbone._importe) — le prix moyen des biens manufacturés monte de x / passage_prix_vente, la demande
+    baisse avec l'élasticité — appliquée aux émissions importées liées à ces biens. La substitution vers des biens
+    français ou européens n'est pas comptée (prudent)."""
+    from moteur.carbone import prix
+    from moteur.ecologie import emissions as em
+    b = em.bilan(p, s)
+    c = {k: q.val(f"carbone_importe.{k}") for k in ("intensite_kg_par_euro", "part_importee", "part_hors_ue",
+                                                   "abattement_preuve", "elasticite_prix", "passage_prix_vente",
+                                                   "part_empreinte_couverte")}
+    serie = {}
+    for t in em.ANNEES:
+        if t < 2029:
+            serie[t] = 0.0
+            continue
+        x = prix(q, t) / 1000 * c["intensite_kg_par_euro"] * c["part_importee"] * c["part_hors_ue"] * (1 - c["abattement_preuve"])
+        facteur = (1 + x / c["passage_prix_vente"]) ** (-c["elasticite_prix"])
+        serie[t] = b[t]["importees"] * c["part_empreinte_couverte"] * (facteur - 1)
+    return Mesure("Accise sur le contenu carbone des importations", "recettes", {}, "physique",
+                  physique={"importees_mt": serie}, vert="favorable")
+
+
 def mesures_physiques_fonds(p: Parametres, q: Parametres, s: str) -> list[Mesure]:
     """Effets physiques des investissements du fonds (groupe ecologie_fonds), sans montant : leur financement est
     déjà dans le fonds et ses rendements."""
@@ -683,6 +706,7 @@ class EcologieDeDroite:
             m.append(Mesure("Participations de l'État remises au fonds", "participations",
                             {t: v["participations"] for t, v in cout_transition(q).items()}, "mesure"))
             m.append(mesure_prix_carbone(p, q, s))
+            m.append(mesure_carbone_importe(p, q, s))
             m.extend(mesures_physiques_fonds(p, q, s))
             mesures[s] = m
             # contexte : ce que le programme change dans l'économie
