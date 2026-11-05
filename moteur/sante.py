@@ -68,8 +68,87 @@ def depenses(p: Parametres, s: str) -> dict[int, float]:
     return out
 
 
+PRODUITS_NOCIFS = {"tabac": "Tabac", "alcool": "Alcool", "sucres": "Produits sucrés et ultra-transformés"}
+
+
+def surplus_pib(p: Parametres, s: str) -> dict[int, float]:
+    """Surplus de dépenses de santé au-delà d'une part constante du PIB (Md€) : dérive de la pente sur la base de
+    2029, avant les mesures (même base que le garde-fou)."""
+    base = (sante_statique(p) + economies_sante_a_terme(p, "prudent")) * derive_2029(p)
+    g = p.val("macro.tendance", "prudent")
+    return {t: max(0.0, base * (_croissance(p, s, t) - (1 + g) ** (t - 2029))) for t in ANNEES}
+
+
+def bases_produits_nocifs(p: Parametres) -> dict[str, float]:
+    """Dépense des ménages par produit nocif (Md€ de 2026) : part du panier médian (tva_produits.csv) × dépense de
+    consommation des ménages (Insee 2025), portée en 2026 par la croissance en valeur."""
+    import csv
+    from .distribution import DONNEES
+    parts = {l["categorie"]: float(l["part_median"]) for l in csv.DictReader((DONNEES / "tva_produits.csv").open(encoding="utf-8"))}
+    conso = p.val("sante_produits_nocifs.consommation_menages_2025") * (1 + p.val("unites.pib_volume_2026")) * (1 + p.val("unites.deflateur_2026"))
+    return {k: parts[cat] * conso for k, cat in PRODUITS_NOCIFS.items()}
+
+
+def accise_produits_nocifs(p: Parametres, s: str) -> dict[int, dict]:
+    """Surplus de dépenses de santé (au-delà d'une part constante du PIB) financé par une accise supplémentaire sur le
+    tabac, l'alcool et les produits sucrés et ultra-transformés (décision d'Adrien, 05/11/2026).
+
+    Chaque année, l'accise est relevée (hausse de prix commune, plafonnée par produit) pour couvrir le surplus de
+    l'année précédente, net des soins déjà évités. La hausse de prix réduit le volume taxé (élasticité qui compte
+    aussi les achats transfrontaliers et la contrebande) et la consommation (élasticité de consommation) ; la baisse
+    de consommation réduit les soins avec un délai (moyenne des baisses des « annees_plein_effet » dernières années,
+    les maladies évitées n'apparaissant que progressivement). Ce qui dépasse les plafonds reste en dépense
+    (non_couvert). Montants en Md€ de 2026 ; recette et soins évités améliorent le solde."""
+    q = p.val
+    eps_taxe, eps_conso = q("sante_produits_nocifs.elasticite_volume_taxe", s), q("sante_produits_nocifs.elasticite_consommation", s)
+    plafond = q("sante_produits_nocifs.hausse_prix_maximale")
+    pp = q("tva_sante_long_terme.produits")
+    couts = {"tabac": pp["tabac"]["cout_soins"], "alcool": q("tva.alcool")["cout_soins_md"], "sucres": pp["sucres"]["cout_soins"]}
+    delai = q("tva_sante_long_terme.annees_plein_effet", s)
+    g = q("macro.tendance", "prudent")
+    base0 = bases_produits_nocifs(p)
+    surplus = surplus_pib(p, s)
+
+    def effets(x: float, crois: float) -> tuple[dict, float]:
+        """Hausse de prix x (commune, plafonnée) : hausse par produit et recette supplémentaire."""
+        h = {k: min(x, plafond[k]) for k in base0}
+        rec = sum(h[k] * base0[k] * crois * (1 + h[k]) ** eps_taxe[k] for k in base0)
+        return h, rec
+
+    out, baisses = {}, []
+    evites_prec = 0.0
+    for t in ANNEES:
+        crois = (1 + g) ** (t - 2029)
+        besoin = max(0.0, (surplus[t - 1] if t > 2029 else 0.0) - evites_prec)
+        h_max, rec_max = effets(max(plafond.values()), crois)
+        if besoin <= 0:
+            h, rec = {k: 0.0 for k in base0}, 0.0
+        elif rec_max <= besoin:
+            h, rec = h_max, rec_max
+        else:  # recette croissante en x jusqu'aux plafonds (élasticités > −1) : dichotomie
+            lo, hi = 0.0, max(plafond.values())
+            for _ in range(60):
+                mid = (lo + hi) / 2
+                lo, hi = (mid, hi) if effets(mid, crois)[1] < besoin else (lo, mid)
+            h, rec = effets(hi, crois)
+        baisses.append({k: 1 - (1 + h[k]) ** eps_conso[k] for k in base0})
+        fen = baisses[-delai:]
+        evites = sum(couts[k] * crois * sum(b[k] for b in fen) / delai for k in base0)
+        out[t] = {"surplus": surplus[t], "recette": rec, "soins_evites": evites,
+                  "non_couvert": max(0.0, surplus[t] - rec - evites), "hausse_prix": h}
+        evites_prec = evites
+    return out
+
+
 def garde_fou(p: Parametres, s: str = "prudent") -> dict[int, float]:
-    """Recette du garde-fou : dépassement de la pente d'engagement, repris l'année suivante par l'accise santé."""
+    """Effet sur le solde (Md€, + = mieux) du financement du surplus de santé.
+
+    sante_produits_nocifs.active (décision du 05/11/2026) : accise sur les produits nocifs (accise_produits_nocifs),
+    recette et soins évités. Sinon (v235) : dépassement de la pente d'engagement, repris l'année suivante par
+    l'accise santé, sans effet sur la consommation."""
+    if p.val("sante_produits_nocifs.active"):
+        a = accise_produits_nocifs(p, s)
+        return {t: a[t]["recette"] + a[t]["soins_evites"] for t in ANNEES}
     base = sante_statique(p) + economies_sante_a_terme(p, "prudent")
     k = derive_2029(p)
     d = p.val("sante_trajectoire.derniere_annee_phase_1")

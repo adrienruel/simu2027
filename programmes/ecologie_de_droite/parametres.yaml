@@ -662,6 +662,48 @@ tva_sante_long_terme:
   vraie_baisse_consommation: {valeur: {crise: {tabac: 0.7, alcool: 0.9, sucres: 1}, prudent: {tabac: 0.7, alcool: 0.9, sucres: 1}, median: {tabac: 0.85, alcool: 0.95, sucres: 1}, optimiste: {tabac: 1, alcool: 1, sucres: 1}}, unite: sans_unite, statut: HYPOTHESE}
   annees_plein_effet: {valeur: {crise: 20, prudent: 20, median: 15, optimiste: 10}, unite: sans_unite, statut: HYPOTHESE}
 
+# --- Surplus de santé financé par les produits nocifs (décision du 05/11/2026) --------------
+sante_produits_nocifs:
+  active:
+    valeur: true
+    v235: false
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 05/11/2026 : le surplus de dépenses de santé au-delà d'une part constante du PIB est financé par une accise sur les produits nocifs (tabac, alcool, produits sucrés et ultra-transformés), qui réduit la consommation et donc, avec délai, les dépenses de santé. Remplace le garde-fou de la v235 (dépassement de la pente d'engagement, sans effet sur la consommation). Ce qui dépasse les plafonds de prix reste en dépense et est publié (moteur/sante.accise_produits_nocifs)."
+  consommation_menages_2025:
+    valeur: 1545.9
+    unite: md_eur
+    annee_euros: 2025
+    statut: SOURCE
+    source: "Insee, consommation des ménages par fonction, 2025 : 1 545,9 Md€ (dont boissons alcoolisées, tabac et stupéfiants 49,9 Md€)"
+    note: "Les bases par produit sont les parts du panier médian de tva_produits.csv : tabac 28 Md€, alcool 23 Md€ (51 Md€ contre 46 Md€ hors stupéfiants dans la comptabilité nationale : base un peu haute, à recaler sur le détail de l'Insee), produits sucrés et ultra-transformés 40 Md€."
+  elasticite_volume_taxe:
+    valeur:
+      crise: {tabac: -0.9, alcool: -0.6, sucres: -0.9}
+      prudent: {tabac: -0.9, alcool: -0.6, sucres: -0.9}
+      median: {tabac: -0.75, alcool: -0.55, sucres: -0.85}
+      optimiste: {tabac: -0.6, alcool: -0.5, sucres: -0.8}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : tabac, élasticité-prix de la consommation −0,25 à −0,5 dans les pays riches (CIRC, Handbook of Cancer Prevention vol. 14, 2011), à laquelle s'ajoutent les achats hors du réseau des buralistes (environ un tiers des cigarettes consommées en France, études d'emballages vides) ; alcool −0,51 (méta-analyse de Wagenaar, Salois et Komro, Addiction, 2009 ; vin −0,69, spiritueux −0,80) ; boissons sucrées −0,79 (Andreyeva, Long et Brownell, AJPH, 2010)"
+    note: "Baisse du volume TAXÉ (consommation + fuite hors réseau) pour une hausse de prix. Prudent : fuite forte, donc assiette qui fond vite. Supérieures à −1 : la recette monte avec la hausse jusqu'au plafond."
+  elasticite_consommation:
+    valeur:
+      crise: {tabac: -0.25, alcool: -0.4, sucres: -0.9}
+      prudent: {tabac: -0.25, alcool: -0.4, sucres: -0.9}
+      median: {tabac: -0.4, alcool: -0.5, sucres: -0.85}
+      optimiste: {tabac: -0.5, alcool: -0.6, sucres: -0.8}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Mêmes sources que sante_produits_nocifs.elasticite_volume_taxe"
+    note: "Baisse de la consommation réelle (celle qui évite des soins). Prudent : bas de fourchette. Produits sucrés : sans coût de soins attribué (tva_sante_long_terme.produits), donc sans soins évités."
+  hausse_prix_maximale:
+    valeur: {tabac: 1.0, alcool: 0.5, sucres: 0.3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : le prix du paquet de cigarettes est passé d'environ 7 € (2016) à 12,5 € (2024), +75 %, avec une hausse des achats hors réseau"
+    note: "Hausse de prix supplémentaire maximale par rapport à 2029 (cumulée sur toute la période). Au-delà, la fuite hors réseau et l'acceptabilité rendent la hausse illusoire ; le surplus non couvert reste en dépense."
+
 # --- Emploi : quatorze réformes (feuille Emploi) -------------------------------------
 # Colonnes de la v235 : crise (« ancien prudent »), médian, optimiste. Le prudent des effets macro
 # prend le milieu de la crise et du médian pour les emplois créés (Effets macro!B8), mais la valeur

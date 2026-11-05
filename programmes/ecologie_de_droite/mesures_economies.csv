@@ -1,18 +1,18 @@
-mesure,retenue,plein_effet_md,premiere_annee,annee_plein_effet,indexation,statut,decision
-"Ancien système : âge de départ porté de 64 à 67 ans, quatre trimestres par génération à partir de 2029 (67 ans pour la génération née en 1967)",1,7,2029,2031,ancien_systeme,SOURCÉ (ordre de grandeur),v185
-"Ancien système : barème des hautes pensions doublé (10 % au-delà de 3 000 €, 10 % de plus au-delà de 5 000 €)",1,1.08,2029,2029,ancien_systeme,CALCULÉ,v185
-Ancien système : pensions de réversion alignées sur les règles du régime général pour les nouvelles liquidations,1,0.5,2029,2034,ancien_systeme,HYPOTHÈSE,v185
-"Effectifs de l'État hors défense, sécurité, justice et enseignement : −10 % d'ici 2032 (sans baisse à l'hôpital)",1,1.05,2029,2032,pib,CALCULÉ + HYPOTHÈSE,v185
-Éducation : effectifs ajustés un pour un à la baisse du nombre d'élèves (au lieu d'un départ sur deux),1,1.6,2029,2035,pib,CALCULÉ,v185
-France 2030 : pas de nouveau plan après 2030 (subventions),1,2.2,2031,2031,pib,SOURCÉ,v185
-Aide médicale de l'État remplacée par une aide médicale d'urgence,1,0.5,2029,2030,pib,HYPOTHÈSE,v185
-"Collectivités : besoin de financement divisé par deux d'ici 2032 (emprunt limité aux investissements rentables, le reste par le fonds ou l'impôt local)",1,8,2029,2030,pib,CALCULÉ,v185
-"Universités : droits d'inscription relevés pour les étudiants non boursiers (≈ 1 000 € en licence, 1 500 € en master)",1,0.9,2029,2031,pib,CALCULÉ,v185
-Prime d'embauche des jeunes arrêtée en 2032 au lieu de 2038,0,1.02,2033,2033,pib,CALCULÉ,v185
-Achats et fonctionnement courant de l'État hors défense : −10 %,1,1.5,2029,2031,pib,HYPOTHÈSE,v221
-"Gestion des caisses de sécurité sociale : −30 % au total avec l'IA (maladie, accidents du travail, retraite et famille)",1,1.68,2029,2032,pib,CALCULÉ,v221
-"Finances publiques : moins d'impôts à gérer (IR, CSG, cotisations, IFI, droits de mutation, TICPE fusionnés ou supprimés), −15 % sur la mission Gestion des finances publiques",1,1.5,2029,2033,pib,HYPOTHÈSE,v230
-"Administration territoriale : fin des départements en 2034, préfectures regroupées à l'échelon régional, −15 %",1,0.7,2034,2036,pib,HYPOTHÈSE,v230
-"Services de l'État qui doublonnent les compétences confiées aux régions (agriculture, forêts, biodiversité, formation)",1,0.4,2030,2034,pib,HYPOTHÈSE,v230
-Temps de travail à 1 607 h dans la fonction publique d'État,1,0.4,2029,2032,pib,SOURCÉ en partie,v230
-Cabinets de conseil de l'État divisés par deux,1,0.5,2029,2030,pib,À CONFIRMER,v230
+mesure,retenue,plein_effet_md,premiere_annee,annee_plein_effet,indexation,statut,decision,nature,sources
+"Ancien système : âge de départ porté de 64 à 67 ans, quatre trimestres par génération à partir de 2029 (67 ans pour la génération née en 1967)",1,7,2029,2031,ancien_systeme,SOURCÉ (ordre de grandeur),v185,calcul_moteur,
+"Ancien système : barème des hautes pensions doublé (10 % au-delà de 3 000 €, 10 % de plus au-delà de 5 000 €)",1,1.08,2029,2029,ancien_systeme,CALCULÉ,v185,montant,
+Ancien système : pensions de réversion alignées sur les règles du régime général pour les nouvelles liquidations,1,0.5,2029,2034,ancien_systeme,HYPOTHÈSE,v185,montant,
+"Effectifs de l'État hors défense, sécurité, justice et enseignement : −10 % d'ici 2032 (sans baisse à l'hôpital)",1,1.05,2029,2032,pib,CALCULÉ + HYPOTHÈSE,v185,montant,
+Éducation : effectifs ajustés un pour un à la baisse du nombre d'élèves (au lieu d'un départ sur deux),1,1.6,2029,2035,pib,CALCULÉ,v185,montant,
+France 2030 : pas de nouveau plan après 2030 (subventions),1,2.2,2031,2031,pib,SOURCÉ,v185,montant,
+Aide médicale de l'État remplacée par une aide médicale d'urgence,1,0.5,2029,2030,pib,HYPOTHÈSE,v185,montant,
+"Collectivités : besoin de financement divisé par deux d'ici 2032 (emprunt limité aux investissements rentables, le reste par le fonds ou l'impôt local)",1,8,2029,2030,pib,CALCULÉ,v185,montant,
+"Universités : droits d'inscription relevés pour les étudiants non boursiers (≈ 1 000 € en licence, 1 500 € en master)",1,0.9,2029,2031,pib,CALCULÉ,v185,montant,
+Prime d'embauche des jeunes arrêtée en 2032 au lieu de 2038,0,1.02,2033,2033,pib,CALCULÉ,v185,montant,
+Achats et fonctionnement courant de l'État hors défense : −10 %,1,1.5,2029,2031,pib,HYPOTHÈSE,v221,montant,
+"Gestion des caisses de sécurité sociale : −30 % au total avec l'IA (maladie, accidents du travail, retraite et famille)",1,1.68,2029,2032,pib,CALCULÉ,v221,montant,
+"Finances publiques : moins d'impôts à gérer (IR, CSG, cotisations, IFI, droits de mutation, TICPE fusionnés ou supprimés), −15 % sur la mission Gestion des finances publiques",1,1.5,2029,2033,pib,HYPOTHÈSE,v230,montant,
+"Administration territoriale : fin des départements en 2034, préfectures regroupées à l'échelon régional, −15 %",1,0.7,2034,2036,pib,HYPOTHÈSE,v230,montant,
+"Services de l'État qui doublonnent les compétences confiées aux régions (agriculture, forêts, biodiversité, formation)",1,0.4,2030,2034,pib,HYPOTHÈSE,v230,montant,
+Temps de travail à 1 607 h dans la fonction publique d'État,1,0.4,2029,2032,pib,SOURCÉ en partie,v230,montant,
+Cabinets de conseil de l'État divisés par deux,1,0.5,2029,2030,pib,À CONFIRMER,v230,montant,

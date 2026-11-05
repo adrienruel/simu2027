@@ -189,6 +189,11 @@ def chomage_tendanciel(p: Parametres, jeu: str = "prudent") -> dict[int, dict[st
     e26, c26 = brut[2026]
     u26 = p.val("chomage.taux_2026")
     k = u26 / (1 - u26) * e26 / c26  # chômeurs calés : taux de 2026 = chomage.taux_2026
-    out = {t: {"emploi": e, "chomeurs": c * k, "actifs": e + c * k, "taux": c * k / (e + c * k)} for t, (e, c) in brut.items()}
+    from .statu_quo import choc_chomage
+    s_choc = "crise" if p.colonne_prudent == "crise" and jeu == "prudent" else jeu  # calcul de crise : colonne prudente = crise
+    out = {}
+    for t, (e, c) in brut.items():
+        choc = choc_chomage(p, s_choc, t) * (e + c * k)
+        out[t] = {"emploi": e - choc, "chomeurs": c * k + choc, "actifs": e + c * k, "taux": (c * k + choc) / (e + c * k)}
     cache[cle] = out
     return out

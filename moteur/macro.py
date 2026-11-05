@@ -66,6 +66,32 @@ def tva_par_point_eviction(p: Parametres, scenario: str = "prudent") -> float:
     return total / 1e9
 
 
+def dividende_croissance(p: Parametres, scenario_retenu: str, traj: dict, pib0: dict) -> dict[int, float] | None:
+    """Part d'un euro de PIB en plus (productivité) qui passe au solde primaire du programme, année par année.
+
+    Calculée sur le programme lui-même (05/11/2026, relecture : remplace macro.part_pib_tendanciel_au_solde, 10 %
+    sans source) : les postes du programme sont recalculés avec une tendance de productivité relevée de
+    macro.ecart_dividende, et le dividende est l'écart de solde primaire rapporté à l'écart de PIB. Chaque poste suit
+    alors sa propre règle (recettes sur l'assiette, revenu universel revalorisé au minimum de l'inflation et de la
+    croissance nominale, santé sur sa pente, salaires publics alignés…), comme le statu quo, qui recalcule tout aux
+    salaires de chaque scénario. None : ancienne convention (v235)."""
+    if not p.val("macro.dividende_calcule") or getattr(p, "_calcul_dividende", False):
+        return None  # pendant la mesure du dividende : calculs emboîtés (déduction de l'IS) sans nouvelle mesure
+    from .trajectoire_annuelle import postes
+    d = p.val("macro.ecart_dividende")
+    g = p.val("macro.tendance", "prudent")
+    pd = p.avec({"macro.tendance": g + d})  # seule la colonne prudente (de crise dans le calcul de crise) est lue
+    pd.colonne_prudent, pd._surcharges = p.colonne_prudent, p._surcharges
+    pd._calcul_dividende = True
+    traj_d = postes(pd, scenario_retenu)
+    out = {}
+    for t in ANNEES:
+        dp = pib0[t] * (((1 + g + d) / (1 + g)) ** (t - 2029) - 1)
+        out[t] = (traj_d[t]["solde_primaire_hors_macro"] - traj[t]["solde_primaire_hors_macro"]) / dp if dp else 0.0
+    out[2029] = out[2030]
+    return out
+
+
 def _montee(t, annees):
     return min(1.0, (t - 2029 + 1) / annees)
 
@@ -118,6 +144,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         taux_va = {t: part_budget for t in ANNEES}
     from .trajectoire_annuelle import postes
     traj = postes(p, scenario_retenu)
+    dividende = dividende_croissance(p, scenario_retenu, traj, pib0)
     from .trajectoire_annuelle import lignes as lignes_traj
     bases_demo = lignes_traj(p, scenario_retenu).bases_demographie
     cle_indice = {"recettes": "emploi", "recettes_population": "total", "salaries_impot": "c_impot",
@@ -157,8 +184,11 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
     dep_s = {s_: module_sante.depenses(p, s_) for s_ in SCENARIOS}
     gf_s = module_sante.garde_fou(p, scenario_retenu)
     tv = module_sante.tva_sante(p)
-    sante = {"median": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["median"][t] for t in ANNEES},
-             "optimiste": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["optimiste"][t] for t in ANNEES},
+    # accise sur les produits nocifs (05/11/2026) : chaque scénario a la sienne ; garde-fou de la v235 : prudent seul
+    gf_sc = ({s_: module_sante.garde_fou(p, s_) for s_ in ("median", "optimiste")} if p.val("sante_produits_nocifs.active")
+             else {s_: {t: 0.0 for t in ANNEES} for s_ in ("median", "optimiste")})
+    sante = {"median": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["median"][t] + gf_sc["median"][t] for t in ANNEES},
+             "optimiste": {t: dep_s["prudent"][t] - gf_s[t] - dep_s["optimiste"][t] + gf_sc["optimiste"][t] for t in ANNEES},
              "tva_prudent": tv["prudent"], "tva_median": tv["median"], "tva_optimiste": tv["optimiste"]}
     from .carbone import effet_solde
     from .recettes.total import ligne_3_tva
@@ -176,7 +206,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         # effet de Fisher (30/10/2026) : les taux nominaux suivent l'écart d'inflation à la référence (1,8 %), au
         # rythme du renouvellement de la dette (fisher_app, mis à jour dans la boucle) ; sans lui, une inflation plus
         # basse relèverait mécaniquement le taux réel pendant cinquante ans
-        return nominal + fisher_app[s] - infl_s[s][t]
+        # hausse de taux propre au scénario (crise), au rythme du taux long, comme moteur/noyau.trajectoire
+        return (nominal + fisher_app[s] - infl_s[s][t]
+                + m("ecart_taux_scenario", s) * min(1.0, (t - 2028) / p.val("macro.annees_taux_long_terme")))
 
     def baisse_spread(t, s):
         return m("baisse_spread", s) * min(1.0, max(0, t - 2029) / p.val("macro.annees_baisse_spread"))
@@ -451,7 +483,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             # Totaux
             pib = (pib_demo + (emp_ref + emp_sen) * va / 1e9 + pib_aj + pib_cap + pib_permis + pib_fonds_emploi + pib_log + pib_prod + pib_hr + pib_ia + pib_adopt + pib_inv
                    + pib_tend + pib_ecole)
-            q = p.val("macro.part_pib_tendanciel_au_solde")
+            q = dividende[t] if dividende is not None else p.val("macro.part_pib_tendanciel_au_solde")
             # dirigeants de petites sociétés qui se versent un salaire au lieu du bénéfice (IS à 45 %)
             arb = p.val("entreprises_cellules.arbitrage_tpe") if ent_cellules else None
             s_tpe = (-arbitrage_tpe(p, s)["perte"] * min(1.0, (n + 1) / arb["montee"]) * (1 + tend0) ** n) if arb else 0.0

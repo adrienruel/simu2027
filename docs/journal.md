@@ -598,3 +598,30 @@ Effet (déficit, % du PIB, prudent) : statu quo 2037 9,90 → 9,65, 2050 21,67 �
 Non corrigé, à trancher : `macro.part_pib_tendanciel_au_solde` (10 % du PIB en plus au solde, sans source : C2),
 santé indexée sur le salaire par tête (I2), scénario de crise du statu quo meilleur que le prudent jusqu'en 2045 (I3),
 architecture « mesures seules » pour les autres programmes (C3).
+
+## 5 novembre 2026 — Décisions d'Adrien sur la relecture (points 1 à 4)
+
+- **Santé (point 2) : surplus financé par les produits nocifs.** Le surplus de dépenses de santé au-delà d'une part
+  constante du PIB est couvert, avec un an de décalage, par une accise supplémentaire sur le tabac, l'alcool et les
+  produits sucrés et ultra-transformés (`moteur/sante.accise_produits_nocifs`, `sante_produits_nocifs.*`). La hausse
+  de prix réduit le volume taxé (fuite hors réseau comprise) et la consommation ; la baisse de consommation réduit les
+  soins avec délai. Plafonds de hausse de prix : tabac +100 %, alcool +50 %, sucrés +30 %. Prudent 2073 : surplus
+  102 Md€, recette 47 Md€, soins évités 5 Md€, **50 Md€ non couverts** (les plafonds sont atteints vers 2058) ;
+  médian : 12 Md€ non couverts. Remplace le garde-fou de la v235.
+- **Crise (point 3).** Productivité 0,4 % (bas des variantes du COR), chômage +2 points durables en trois ans
+  (`chomage.hausse_crise`), taux de marché +0,5 point (`macro.ecart_taux_scenario`), pour le statu quo et les
+  programmes. Test : déficit du statu quo rangé crise ≥ prudent ≥ médian ≥ optimiste chaque année.
+- **Économies saisies (point 4).** Règle commune (`moteur/mesures.py`) : une économie saisie en montant n'est retenue
+  qu'avec au moins deux sources indépendantes (colonne `sources`), jamais le programme ou une déclaration de candidat ;
+  sinon elle compte pour zéro et est listée comme écartée. Taux de réalisation par scénario (crise 50 %, prudent 60 %,
+  médian 80 %, optimiste 95 %). Aucune des 16 économies saisies du programme n'a encore ses sources : **22,5 Md€ à
+  plein effet écartés** jusqu'au sourçage. Restent hors de la règle pour l'instant : les coupes de missions
+  (`economies_missions.coupes`) et la décomposition des collectivités.
+- **Dividende de croissance (point 1).** La part d'un euro de PIB en plus qui passe au solde n'est plus 10 % sans
+  source : elle est mesurée sur le programme lui-même (`moteur/macro.dividende_croissance`), en recalculant tous ses
+  postes avec une productivité relevée de 0,3 point. Résultat : 2 % en 2030, 8 % en 2037, 7 % en 2050, 14 % en 2073
+  (le revenu universel revalorisé sur les prix fait monter le dividende avec le temps). Linéarisation autour du
+  prudent : la refonte complète (chaque poste recalculé aux salaires et au PIB de chaque scénario) reste à faire.
+
+Déficit du programme (prudent) : 2037 3,01 → 3,18 % ; 2050 3,49 → 3,46 % ; 2073 3,24 → 3,08 %. Médian 2050 : 0,21 →
+0,88 % ; optimiste 2050 : −1,75 → −0,81 %. Crise 2050 : 4,39 → 8,95 %.

@@ -147,7 +147,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "recettes", "is_investissement", "IS : déduction de l'investissement", "mesure", -is_inv[t])
         # Dépenses (montants positifs = dépense)
         L.ajouter(t, "sante", "sante_trajectoire", "Santé : trajectoire des dépenses", "trajectoire", sante[t])
-        L.ajouter(t, "sante", "sante_garde_fou", "Santé : garde-fou", "mesure", -gf[t])
+        L.ajouter(t, "sante", "sante_garde_fou", "Santé : accise sur les produits nocifs (surplus au-delà du PIB) et soins évités"
+                  if p.val("sante_produits_nocifs.active") else "Santé : garde-fou", "mesure", -gf[t])
         L.ajouter(t, "retraites", "retraites_socle", "Retraites : socle, point de départ (2029)", "socle", l["retraites_socle"])
         L.ajouter(t, "retraites", "transition_retraites", "Transition des retraites : coût net", "trajectoire", ct[t]["net"])
         L.ajouter(t, "retraites", "contribution_anciens_retraites", "Contribution de solidarité des retraités de l'ancien système (5 à 10 %)",
