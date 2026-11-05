@@ -332,11 +332,19 @@ class Tondelier:
             pib_emplois = {t: -emplois * min(1.0, (t - 2026) / 3) * smic["cout_moyen_emploi_perdu"] * 1.25 / 1e9 * ip[t] for t in ANNEES}
             pib = {t: y[t] + (dpib[t] if self.v("macro.multiplicateur_actif") else 0.0) + pib_emplois[t] for t in ANNEES}
             e = sq.effectifs(p, s)
-            chom = {t: (e[t]["chomeurs"] + emplois * min(1.0, (t - 2026) / 3)) / (e[t]["emploi"] + e[t]["chomeurs"]) * 100 for t in ANNEES}
+            # conjoncture : l'impulsion budgétaire change l'emploi comme l'ajustement du modèle (même règle que le moteur
+            # d'Écologie de droite : macro.emplois_par_point_pib emplois pour 1 % de PIB)
+            k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
+            conj = {t: (dpib[t] if self.v("macro.multiplicateur_actif") else 0.0) / y[t] * k_emp * e[t]["emploi"] for t in ANNEES}
+            chom = {t: (e[t]["chomeurs"] + emplois * min(1.0, (t - 2026) / 3) - conj[t]) / (e[t]["emploi"] + e[t]["chomeurs"]) * 100 for t in ANNEES}
             # dette de fin 2028 : mesures de 2027 et 2028 (recettes et dépenses), effet macro compris
             avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
-            ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant}
+            perdus = {t: emplois * min(1.0, (t - 2026) / 3) for t in ANNEES}
+            ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
+                        "emploi": {t: e[t]["emploi"] - perdus[t] + conj[t] for t in ANNEES},
+                        "emplois_canaux": {t: {"SMIC à 2 000 € : emplois perdus": -perdus[t],
+                                               "Conjoncture (impulsion budgétaire)": conj[t]} for t in ANNEES}}
             liste.extend(self.ecologie(p, s))
             mes_s[s] = liste
             details[s] = {"emplois_perdus_smic": emplois, "avant_2029": avant, "dpib": dpib}

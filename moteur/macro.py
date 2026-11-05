@@ -607,12 +607,14 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 ch_sen = p.val("chomage.seniors_chomeurs_par_emploi") * sen_source
                 from .carrieres import emplois_entree_plus_tot
                 jeunes = sum(emplois_entree_plus_tot(p, s, t).values())
-                chomeurs = (ct[t]["chomeurs"] * k_pa - emp_ref - emp_fonds - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * emp_t + ch_sen)
+                conjoncture = pib_aj / pib0[t] * m("emplois_par_point_pib", s) * emp_t
+                chomeurs = (ct[t]["chomeurs"] * k_pa - emp_ref - emp_fonds - conjoncture + ch_sen)
                 actifs = ct[t]["actifs"] * k_pa + emp_sen + jeunes + ch_sen
                 sc.detail.setdefault("chomage", {})[t] = max(0.0, chomeurs) / actifs
                 sc.detail.setdefault("chomage_detail", {})[t] = {"tendanciel": ct[t]["taux"], "chomeurs": chomeurs, "actifs": actifs,
                                                                  "seniors": ch_sen, "reformes": emp_ref, "k_reformes": k_ch,
-                                                                 "fonds": emp_fonds}
+                                                                 "fonds": emp_fonds, "conjoncture": conjoncture,
+                                                                 "population_active": emp_sen + jeunes}
             else:
                 sc.detail.setdefault("chomage", {})[t] = (p.val("inactifs.chomeurs_bit") - emp_ref
                                                             - pib_aj / pib0[t] * m("emplois_par_point_pib", s) * personnes_en_emploi) / pa

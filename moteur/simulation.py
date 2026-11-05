@@ -30,6 +30,7 @@ def _bloc(m, traj, avec_clause: bool, transferts: float) -> dict:
             "chomage": m.detail["chomage"][t] * 100,
             "pib": m.detail["pib_reference"][t] + m.pib_effet[t],
             "canaux": dict(m.detail["canaux"][t]),
+            "chomage_detail": dict(m.detail.get("chomage_detail", {}).get(t, {})),
         }
         if avec_clause:
             c = m.detail["clause"][t]

@@ -51,6 +51,16 @@ def groupe(m: noyau.Mesure) -> str:
     return GROUPES.get(m.poste, "Autres dépenses")
 
 
+def taux_emploi_18_66(p: Parametres, s: str, t: int, emploi: float) -> float:
+    """Personnes en emploi de 18 à 66 ans / population de 18 à 66 ans (%). Tranche qui contient le report de l'âge de
+    départ à 67 ans ; l'emploi après 67 ans est celui du statu quo (taux de 2025 par âge), retiré de l'emploi."""
+    from moteur.demographie import _tranche
+    pop = sq.population(p, s)[t]
+    taux = {a: x for k, x in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    apres = sum(pop[a] * taux.get(a, 0.0) for a in range(67, len(pop)))
+    return (emploi - apres) / sum(pop[18:67]) * 100
+
+
 def lignes_ecologie(p: Parametres, lib: str, prog) -> list[dict]:
     """Émissions et empreinte d'un programme (statu quo si prog est None), par scénario et par année : le statu quo,
     l'effet de l'activité (publié à part, pas une politique climatique), l'effet des mesures, l'écart cumulé aux
@@ -84,7 +94,7 @@ def _ecrire(nom: str, lignes: list[dict]) -> None:
 def main() -> None:
     p = Parametres()
     base = sq.simuler(p)
-    traj, ecarts, mesures, ecologie = [], [], [], []
+    traj, ecarts, mesures, ecologie, emploi_canaux = [], [], [], [], []
     for nom in noyau.programmes_disponibles():
         prog = noyau.charger(nom)
         lib = getattr(prog, "libelle", nom)
@@ -99,7 +109,13 @@ def main() -> None:
                              "recettes_pib": round(x["recettes_pib"], 3),
                              "depenses_primaires_pib": round(x["depenses_primaires_pib"], 3),
                              "retraites_pib": round(x["retraites_pib"], 3), "chomage": round(x["chomage"], 3),
-                             "pib_md": round(x["pib"], 1)})
+                             "pib_md": round(x["pib"], 1),
+                             "emploi_millions": round(x["emploi"] / 1e6, 4),
+                             "ecart_emploi_milliers": round((x["emploi"] - base[s][t]["emploi"]) / 1e3, 1),
+                             "taux_emploi_18_66": round(taux_emploi_18_66(p, s, t, x["emploi"]), 3)})
+                for canal, n in x["emplois_canaux"].items():
+                    emploi_canaux.append({"cle": f"{lib}|{SCENARIOS[s]}|{t}|{canal}", "programme": lib, "scenario": SCENARIOS[s],
+                                          "annee": t, "canal": canal, "emplois_milliers": round(n / 1e3, 1)})
             if nom == "statu_quo":
                 continue
             ms = [m for m in tout.get(s, []) if m.nature not in NATURES_CACHEES]
@@ -129,9 +145,10 @@ def main() -> None:
         ecologie.extend(lignes_ecologie(p, lib, None if nom == "statu_quo" else prog))
     _ecrire("comparaison_trajectoire.csv", traj)
     _ecrire("comparaison_ecologie.csv", ecologie)
+    _ecrire("comparaison_emploi_canaux.csv", emploi_canaux)
     _ecrire("comparaison_ecarts.csv", ecarts)
     _ecrire("comparaison_mesures.csv", mesures)
-    print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv, comparaison_ecologie.csv")
+    print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv, comparaison_ecologie.csv, comparaison_emploi_canaux.csv")
 
 
 if __name__ == "__main__":

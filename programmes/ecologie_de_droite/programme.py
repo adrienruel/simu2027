@@ -501,6 +501,28 @@ def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, b
     return out
 
 
+CANAUX_EMPLOI = {"reformes": "Chômeurs repris par les réformes", "population_active": "Venus de l'inactivité (seniors, cumul, inactifs, jeunes)",
+                 "fonds": "Emplois du fonds", "conjoncture": "Conjoncture (ajustement budgétaire)"}
+
+
+def contexte_emploi(p: Parametres, s: str, r: dict) -> dict:
+    """Personnes en emploi et emplois par canal, lus dans le moteur du programme (chômeurs et actifs du module
+    macro) ; le reste de l'écart au statu quo (démographie : effet du programme sur les naissances, calage) est publié
+    comme tel."""
+    from moteur import statu_quo as sq
+    e = sq.effectifs(p, s)
+    emploi, canaux = {}, {}
+    for t in ANNEES:
+        d = r[t].get("chomage_detail") or {}
+        if not d:
+            return {}
+        emploi[t] = d["actifs"] - d["chomeurs"]
+        c = {lib: d[k] for k, lib in CANAUX_EMPLOI.items()}
+        c["Démographie et reste"] = emploi[t] - e[t]["emploi"] - sum(c.values())
+        canaux[t] = c
+    return {"emploi": emploi, "emplois_canaux": canaux}
+
+
 def mesure_prix_carbone(p: Parametres, q: Parametres, s: str) -> Mesure:
     """Effet physique du prix du carbone (300 € en 2030, puis valeur de l'action pour le climat) sur les émissions
     des transports et des bâtiments, contre le prix du statu quo : la même réponse que l'assiette de la recette
@@ -641,6 +663,7 @@ class EcologieDeDroite:
                 "taux_supplementaire": {t: -spread * min(1.0, max(0, t - 2029) / n_sp) for t in ANNEES},
                 "chomage": {t: r[t]["chomage"] for t in ANNEES},
                 "dette_depart": dette_fin_2028(q),
+                **contexte_emploi(p, s, r),
             }
         out = {"mesures": mesures, "contexte": contexte, "resultats": res}
         self._cache = {cle: out}

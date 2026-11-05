@@ -27,7 +27,9 @@ from .parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 POSTES = ("recettes", "participations")  # en plus des blocs de dépense du statu quo
-CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart")
+CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart", "emploi", "emplois_canaux")
+# emploi : personnes en emploi, année par année ; emplois_canaux : {année: {canal: emplois en plus (+) ou en moins (−)
+# par rapport au statu quo}}, pour la restitution (la somme n'a pas à retrouver l'écart d'emploi : le reste est publié)
 
 
 @dataclass
@@ -115,6 +117,8 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     rec_sq, bl_sq = sq.recettes(p, s), sq.blocs(p, s)
     e = sq.effectifs(p, s)
     chom = ctx.get("chomage") or {t: e[t]["taux_chomage"] * 100 for t in ANNEES}
+    emploi = ctx.get("emploi") or {t: e[t]["emploi"] for t in ANNEES}
+    canaux = ctx.get("emplois_canaux") or {}
     infl_ref = p.val("calendrier.inflation")
     app0, lt = p.val("macro.taux_apparent_2029"), p.val("macro.taux_long_terme")
     n_lt, mat = p.val("macro.annees_taux_long_terme"), p.val("macro.maturite_moyenne_dette")
@@ -154,7 +158,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "interets_reels": interets_reels, "charge_dette": interets_reels + infl[t] * dette_prec,
             "taux_apparent": nominal, "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
             "participations": part, "deficit": -maastricht * 100, "dette_pib": dette / y[t] * 100,
-            "chomage": chom[t], "inflation": infl[t] * 100,
+            "chomage": chom[t], "inflation": infl[t] * 100, "emploi": emploi[t], "emplois_canaux": dict(canaux.get(t, {})),
             "retraites_pib": bl["retraites"] / y[t] * 100, "sante_pib": bl["sante"] / y[t] * 100,
             "recettes_pib": rec / y[t] * 100, "depenses_primaires_pib": primaire / y[t] * 100,
         }
