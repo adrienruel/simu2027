@@ -8,7 +8,7 @@ Pour chaque génération et chaque année :
 - survivants : population par âge des projections de l'Insee de juin 2026 (mortalité centrale ; les générations
   nées avant 1979 ne dépendent pas de la fécondité future) ;
 - part déjà partie à la retraite à chaque âge (paramètre ancien_systeme.part_retraites_age, âge légal de 64 ans,
-  la loi actuelle) ; l'âge légal à 65 ans du programme est une mesure, calculée en décalant ce profil d'un an
+  la loi actuelle) ; le report de l'âge légal du programme (ancien_systeme.age_legal, 67 ans) est une mesure, calculée en décalant ce profil d'un an
   (deux trimestres par génération) : economie_age_legal ;
 - pension : la même pour tous en 2029 (les nouveaux retraités touchent un peu moins que la moyenne, DREES), puis
   gelée en euros courants dès 2029 ou dès le départ s'il est plus tardif (désindexation) : elle perd l'inflation
@@ -42,7 +42,7 @@ def _part_age(p: Parametres) -> dict[int, float]:
 
 
 def _report(p: Parametres, g: int) -> float:
-    """Années de report de l'âge légal pour la génération g (mesure du programme : 64 → 65 ans)."""
+    """Années de report de l'âge légal pour la génération g (mesure du programme : de 64 ans à ancien_systeme.age_legal["programme"])."""
     a = p.val("ancien_systeme.age_legal")
     annees = a["programme"] - a["actuel"]
     # deux trimestres de plus par génération : la génération qui a 64 ans en 2029 part à 64 ans et demi
@@ -88,7 +88,7 @@ def _brut(p: Parametres, avec_report: bool) -> dict[int, dict[str, float]]:
 
 
 def par_generation(p: Parametres, avec_report: bool = False) -> dict[int, dict[str, float]]:
-    """Série calée sur 2029 ; avec_report : âge légal porté à 65 ans (mesure du programme)."""
+    """Série calée sur 2029 ; avec_report : âge légal reporté (mesure du programme, ancien_systeme.age_legal)."""
     cache = p.__dict__.setdefault("_cache", {})
     if ("ancien_brut", False) not in cache:
         cache[("ancien_brut", False)] = _brut(p, False)
@@ -103,7 +103,7 @@ def par_generation(p: Parametres, avec_report: bool = False) -> dict[int, dict[s
 
 
 def economie_age_legal(p: Parametres) -> dict[int, float] | None:
-    """Économie de la mesure « âge légal à 65 ans » sur les pensions (Md€), ou None hors module par génération."""
+    """Économie du report de l'âge légal sur les pensions (Md€), ou None hors module par génération."""
     if not (p.val("ancien_systeme.par_generation") and p.val("demographie.active")):
         return None
     sans, avec = par_generation(p), par_generation(p, avec_report=True)
@@ -131,7 +131,7 @@ def depenses(p: Parametres) -> dict[int, float]:
 
 
 def retraites_reportes(p: Parametres) -> dict[int, float]:
-    """Personnes dont le départ dans l'ancien système est reporté par l'âge légal à 65 ans (millions)."""
+    """Personnes dont le départ dans l'ancien système est reporté par le report de l'âge légal (millions)."""
     if not (p.val("ancien_systeme.par_generation") and p.val("demographie.active")):
         return {t: 0.0 for t in ANNEES}
     sans, avec = par_generation(p), par_generation(p, avec_report=True)

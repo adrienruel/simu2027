@@ -382,8 +382,8 @@ def mesures_autres(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict
     evol = {x["cle"].split(":", 1)[1]: x for x in lig if x["cle"].startswith("ministere:")}
     y0 = sq.pib_2026(p)
     d0 = sq.depart(p)["blocs"]
-    defense0 = p.val("statu_quo.defense_2026") + sq.hausse_defense(p)
-    ue0 = d0["defense_ue"] - p.val("statu_quo.defense_2026")
+    defense0 = sq.defense_depart(p) + sq.hausse_defense(p)
+    ue0 = d0["defense_ue"] - sq.defense_depart(p)
     al = alignement_par_groupe(q)
     out = [Mesure("Agents de l'État payés au coût employeur du privé (brut + charges du privé ; contrepartie : impôt unique "
                   "des agents)", "etat_missions", {t: 0.0 for t in ANNEES}, "budget")]
@@ -620,11 +620,8 @@ class EcologieDeDroite:
             spread = q.val("macro.baisse_spread", jeu)
             n_sp = q.val("macro.annees_baisse_spread")
             pib = {t: r[t]["pib"] for t in ANNEES}
-            ref = {t: r[t]["pib"] - r[t]["effet_pib"] for t in ANNEES}
             contexte[s] = {
                 "pib": pib,
-                # module macro : ratio de la prime de dette sur le PIB de référence + effets de l'année précédente
-                "pib_prime": {t: ref[t] + (r[t - 1]["effet_pib"] if t > 2029 else 0.0) for t in ANNEES},
                 "inflation": {t: infl[t] for t in ANNEES},
                 "taux_supplementaire": {t: -spread * min(1.0, max(0, t - 2029) / n_sp) for t in ANNEES},
                 "chomage": {t: r[t]["chomage"] for t in ANNEES},

@@ -80,11 +80,16 @@ def test_retraites_controles_hors_calage(p):
     assert _part_retraites(p, 2070, 0.004) > _part_retraites(p, 2070, 0.007) > _part_retraites(p, 2070, 0.010)
 
 
-def test_prestations_indexees_sur_les_prix_perdent_du_poids(res):
-    """À législation constante, les prestations revalorisées sur les prix baissent en part du PIB quand la
-    productivité monte ; les dépenses qui suivent le PIB gardent leur part."""
+def test_prestations_indexees_sur_les_prix_perdent_du_poids(p, res):
+    """Les prestations revalorisées sur les prix perdent du poids face à celles revalorisées sur les salaires (même
+    nombre d'enfants : la comparaison isole l'indexation) ; les dépenses qui suivent le PIB gardent leur part.
+    Corrigé le 05/11/2026 : le test passait par la baisse du nombre d'enfants alors que le réglage est « salaires »."""
+    assert p.val("statu_quo.indexation_prestations") == "salaires"
+    prix = sq.blocs(p.avec({"statu_quo.indexation_prestations": "prix"}), "prudent")
+    sal = sq.blocs(p, "prudent")
+    assert prix[2073]["famille"] < 0.9 * sal[2073]["famille"]
+    assert prix[2029]["famille"] == pytest.approx(sal[2029]["famille"])
     a, b = res["prudent"][2029], res["prudent"][2073]
-    assert b["blocs"]["famille"] / b["pib"] < a["blocs"]["famille"] / a["pib"]
     assert b["blocs"]["investissement"] / b["pib"] == pytest.approx(a["blocs"]["investissement"] / a["pib"])
 
 

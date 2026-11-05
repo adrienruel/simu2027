@@ -11,7 +11,7 @@ Points d'entrée d'un programme :
   pas, comme un revenu universel), ou « participations » (flux de dette hors solde, par exemple des
   participations de l'État remises à un fonds) ;
 - **contexte** : ce que le programme change dans l'économie : PIB, inflation, taux d'intérêt en plus ou en moins
-  (points), chômage, dette au 31 décembre 2028 (mesures de 2027-2028), PIB servant au ratio de la prime de dette.
+  (points), chômage, dette au 31 décembre 2028 (mesures de 2027-2028). La prime de dette est calculée par le noyau seul.
 
 Un programme vide (aucune mesure, aucun contexte) donne exactement le statu quo : c'est le même calcul.
 
@@ -27,7 +27,7 @@ from .parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 POSTES = ("recettes", "participations")  # en plus des blocs de dépense du statu quo
-CONTEXTE = ("pib", "pib_prime", "inflation", "taux_supplementaire", "chomage", "dette_depart")
+CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart")
 
 
 @dataclass
@@ -74,6 +74,29 @@ def _valider(m: Mesure) -> None:
         raise ValueError(f"Mesure « {m.nom} » : poste inconnu {m.poste}")
 
 
+def prime_marche(p: Parametres, s: str, ratio: float, ratio_ref: float) -> float:
+    """Prime de taux de marché liée à la dette (taux) : prime_dette par point de dette/PIB au-dessus ou au-dessous
+    de la référence, bornée (macro.prime_dette_bornes). Une dette négative compte pour zéro : l'État qui détient des
+    actifs ne prête pas au taux de sa propre signature diminué d'une prime."""
+    from .statu_quo import _v
+    bas, haut = p.val("macro.prime_dette_bornes")
+    brute = _v(p, "macro.prime_dette", s) * (max(ratio, 0.0) - ratio_ref)
+    return max(bas, min(haut, brute))
+
+
+def ecart_taux_borne(p: Parametres, prime: float, supplement: float) -> float:
+    """Prime de dette + écart de taux propre à un programme, dont la baisse totale ne peut dépasser l'écart de
+    l'OAT au Bund (borne basse de macro.prime_dette_bornes) : la crédibilité ne fait pas passer sous le taux
+    allemand, et la prime de dette et une baisse d'écart décidée par un programme ne se cumulent pas au-delà."""
+    return max(p.val("macro.prime_dette_bornes")[0], prime + supplement)
+
+
+def ratio_reference(p: Parametres, s: str) -> float:
+    """Dette/PIB de référence de la prime : celle du statu quo en 2029, commune à tous les programmes."""
+    from . import statu_quo as sq
+    return sq.dette_fin_2028(p) / sq.pib(p, s)[2029]
+
+
 def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, contexte: dict | None = None) -> dict[int, dict]:
     """Comptes de chaque année d'un scénario : statu quo + mesures, dans le contexte du programme."""
     from . import statu_quo as sq
@@ -84,7 +107,6 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         if k not in CONTEXTE:
             raise ValueError(f"Contexte inconnu : {k}")
     y = ctx.get("pib") or sq.pib(p, s)
-    y_prime = ctx.get("pib_prime") or y
     infl = ctx.get("inflation") or sq.inflation(p, s)
     sup = ctx.get("taux_supplementaire") or {}
     rec_sq, bl_sq = sq.recettes(p, s), sq.blocs(p, s)
@@ -93,11 +115,10 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     infl_ref = p.val("calendrier.inflation")
     app0, lt = p.val("macro.taux_apparent_2029"), p.val("macro.taux_long_terme")
     n_lt, mat = p.val("macro.annees_taux_long_terme"), p.val("macro.maturite_moyenne_dette")
-    prime_par_point = sq._v(p, "macro.prime_dette", s)
     fisher_actif = p.val("inflation.active") and p.val("inflation.effet_fisher")
     dette_prec = ctx.get("dette_depart") or sq.dette_fin_2028(p)
     fisher = prime = 0.0
-    ratio_ref = None
+    ratio_ref, pib_ref_2029 = ratio_reference(p, s), sq.pib(p, s)[2029]
     out = {}
     for t in ANNEES:
         bl = dict(bl_sq[t])
@@ -111,12 +132,13 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
                 part += v
             else:
                 bl[m.poste] = bl.get(m.poste, 0.0) + v
-        ratio = dette_prec / y_prime[t]
-        ratio_ref = ratio if ratio_ref is None else ratio_ref
-        prime += (prime_par_point * (ratio - ratio_ref) - prime) / mat
+        # dette de fin d'année précédente sur le PIB de cette année-là (dette/PIB publiée) ; pour 2029, PIB du statu
+        # quo, comme la référence
+        ratio = dette_prec / (y[t - 1] if t > 2029 else pib_ref_2029)
+        prime += (prime_marche(p, s, ratio, ratio_ref) - prime) / mat
         if fisher_actif:
             fisher += ((infl[t] - infl_ref) - fisher) / mat
-        nominal = min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + prime + sup.get(t, 0.0)
+        nominal = min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + ecart_taux_borne(p, prime, sup.get(t, 0.0))
         interets_reels = (nominal - infl[t]) * dette_prec
         primaire = sum(bl.values())
         solde = rec - primaire - interets_reels

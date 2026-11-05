@@ -571,3 +571,30 @@ isolée (−41 Md€ en 2073, décision d'Adrien), RUI étudiant, naissances. St
   définir `libelle`.
 - Tableau de bord « Comparateur des programmes » (claude.ai) sur ces trois fichiers : relancer l'export et remplacer
   les fichiers à chaque nouveau chiffrage.
+
+## 5 novembre 2026 — Relecture indépendante n° 3 (corrections)
+
+Relecture par un agent sans historique du projet (constats complets : `docs/relecture.md`, section du 5 novembre).
+Corrigé :
+- **Prime de taux liée à la dette bornée et commune** (C1, I4). Sans borne, le statu quo atteignait 79 % de taux
+  apparent et 14 000 % de dette/PIB en 2073 (prudent), et les programmes qui se désendettent obtenaient des taux réels
+  négatifs. Désormais : prime bornée dans [−0,8 ; +4] points (`macro.prime_dette_bornes`) ; référence = dette/PIB du
+  statu quo en 2029, commune à tous ; ratio = dette/PIB publiée de l'année précédente, calculé par le noyau seul (le
+  contexte `pib_prime` fourni par le programme est supprimé) ; une dette négative compte pour zéro ; la baisse totale
+  (prime + `baisse_spread` du programme) ne dépasse pas l'écart OAT − Bund. Même définition dans `macro.py` : le pont
+  noyau = moteur du programme reste exact (test_noyau).
+- **Défense comptée deux fois de 2026 à 2027** (I1) : le bloc part du PLF 2027 (63,4 Md€ hors pensions,
+  `statu_quo.defense_2027_courants`) et non de 2026 ; la hausse vers la loi de programmation part de ce niveau
+  (8,8 Md€ au lieu de 13,9). Le statu quo perd environ 5 Md€ de dépense fictive, que le programme comptait comme une
+  économie en retirant « autres ».
+- **TVA des transferts du statu quo** revalorisée comme les prestations (salaires) au lieu des prix.
+- Textes périmés (README, `ancien_systeme.py`, en-tête de `statu_quo.py`, notes du RUI) alignés sur les décisions
+  (67 ans ; minimum de l'inflation et de la croissance nominale ; prestations du statu quo sur les salaires) ; test des
+  prestations « sur les prix » qui passait pour une mauvaise raison ; code mort retiré.
+
+Effet (déficit, % du PIB, prudent) : statu quo 2037 9,90 → 9,65, 2050 21,67 → 20,75 ; programme 2050 3,42 → 3,49,
+2073 3,11 → 3,24 (la clause absorbe l'essentiel jusqu'en 2037).
+
+Non corrigé, à trancher : `macro.part_pib_tendanciel_au_solde` (10 % du PIB en plus au solde, sans source : C2),
+santé indexée sur le salaire par tête (I2), scénario de crise du statu quo meilleur que le prudent jusqu'en 2045 (I3),
+architecture « mesures seules » pour les autres programmes (C3).

@@ -34,7 +34,7 @@ rui:
     unite: eur_mois
     annee_euros: 2026
     statut: DECISION
-    note: DÉCISION du 22 octobre 2026 (v220). Revalorisé de la croissance, jamais de l'inflation.
+    note: "DÉCISION du 22 octobre 2026 (v220). Revalorisation : revalorisation.regle (minimum de l'inflation et de la croissance nominale, décision du 30/10/2026)."
   plancher_rsa_2026:
     valeur: 651.69
     unite: eur_mois
@@ -582,7 +582,7 @@ clause:
 revalorisation:
   pensions_sous_minimum_vieillesse: {valeur: true, unite: sans_unite, statut: DECISION}
   part_pensions_sous_seuil: {valeur: 0.12, unite: taux, statut: HYPOTHESE}
-  rui_aah_socle_croissance: {valeur: true, unite: sans_unite, statut: DECISION, note: "Revalorisés du taux de croissance, sans l'inflation (règle d'Adrien)."}
+  rui_aah_socle_croissance: {valeur: true, unite: sans_unite, statut: DECISION, note: "Interrupteur de la revalorisation ; la règle est revalorisation.regle (minimum de l'inflation et de la croissance nominale, décision du 30/10/2026)."}
   regle:
     valeur: min_inflation_croissance_nominale
     v235: croissance_sans_inflation

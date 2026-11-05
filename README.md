@@ -52,7 +52,7 @@ Relecture indépendante : `docs/relecture.md`.
 | `outils/` | Extraction de la référence ; `recalcul.py` recalcule la v235 dans LibreOffice avec des cellules modifiées |
 | `tests/` | Tests automatiques |
 | `moteur/demographie.py` | Population année par année (Insee 2026), emploi par âge, effet du programme sur la natalité, crèches |
-| `moteur/ancien_systeme.py` | Pensions de l'ancien système génération par génération, âge légal à 65 ans |
+| `moteur/ancien_systeme.py` | Pensions de l'ancien système génération par génération, report de l'âge légal (67 ans dans le programme) |
 | `moteur/taux_effectifs.py` | Taux effectif moyen d'imposition (Devereux et Griffith) pour la localisation |
 | `moteur/emploi_canaux.py` | Bloc emploi unifié : canaux, rendements décroissants, gain par emploi |
 | `docs/sourcage.md` | Paramètres sourcés, corrigés, et décisions sur les hypothèses |
@@ -63,7 +63,8 @@ Relecture indépendante : `docs/relecture.md`.
 
 - Une hypothèse sans source est prise prudente ; le prudent est publié.
 - Prudent toujours affiché avant et après la clause de trajectoire.
-- Aucune indexation sur l'inflation (RUI, socle, SMIC suivent la croissance).
+- RUI, AAH et socle revalorisés du minimum de l'inflation et de la croissance nominale (valeur réelle garantie) ; barèmes qui suivent la croissance.
+- Programmes des autres candidats : on ne reprend que leurs mesures, jamais les économies qu'ils annoncent ; le modèle les estime lui-même en prudent, médian et optimiste.
 - Euros constants de 2026 ; économie de 2026 placée en 2029 ; une seule conversion.
 - Chaque changement de résultat est commité avec sa raison.
 

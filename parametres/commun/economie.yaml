@@ -324,13 +324,19 @@ macro:
   taux_apparent_2029: {valeur: 0.027, unite: taux, statut: SOURCE, source: "Charge d'intérêts des APU ≈ 3,2 % du PIB (Effets macro!B211)"}
   taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
   annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
+  prime_dette_bornes:
+    valeur: [-0.008, 0.04]
+    unite: taux
+    statut: HYPOTHESE
+    source: "Borne basse : écart OAT − Bund à 10 ans ≈ 0,8 point le 24 juillet 2026 (4,01 % contre 3,22 %, Banque de France). Borne haute : écart Italie − Allemagne au plus fort de la crise de la zone euro ≈ 5,5 points (novembre 2011), hors cas grec ; 4 points retenus comme seuil au-delà duquel la trajectoire est de toute façon intenable."
+    note: "Ajouté le 05/11/2026 (relecture indépendante). Bornes de la prime de taux liée à la dette, et de la baisse totale du taux (prime + écart propre à un programme, comme macro.baisse_spread) : la crédibilité ne fait pas passer sous le taux allemand et ne se compte pas deux fois ; au-delà de +4 points, la trajectoire n'a plus de sens économique (un ajustement serait forcé) et l'outil le signale par le déficit, sans faire exploser les intérêts à l'infini. Sans borne, le statu quo atteignait 79 % de taux apparent et 14 000 % de dette/PIB en 2073 (prudent)."
   prime_dette:
     valeur: {crise: 0.035, prudent: 0.03, median: 0.02, optimiste: 0.015}
     v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
     unite: sans_unite
     statut: HYPOTHESE
     source: "CBO, Working Paper 2019-01 (Debt and Interest Rates) : 2 à 3 points de base de taux long par point de dette/PIB (1,9 à 2,9 selon l'échantillon) ; Laubach (2009) : 2,1 à 3,5 points de base selon l'éviction compensée"
-    note: "Hausse du taux long (en points de pourcentage) par point de dette/PIB au-dessus du niveau de 2029 (symétrique : baisse quand la dette baisse). Prudent : 3 points de base (haut de la fourchette du CBO) ; crise : 3,5 (Laubach sans compensation) ; médian 2 ; optimiste 1,5. Ajouté le 29/10/2026 (canal manquant)."
+    note: "Hausse du taux long (en points de pourcentage) par point de dette/PIB au-dessus du niveau du statu quo en 2029, commun à tous les programmes (symétrique : baisse quand la dette baisse ; bornée par macro.prime_dette_bornes ; une dette négative compte pour zéro). Prudent : 3 points de base (haut de la fourchette du CBO) ; crise : 3,5 (Laubach sans compensation) ; médian 2 ; optimiste 1,5. Ajouté le 29/10/2026 (canal manquant)."
   maturite_moyenne_dette: {valeur: 8.5, unite: sans_unite, statut: SOURCE, source: "Agence France Trésor : durée de vie moyenne de la dette négociable de l'État ≈ 8,5 ans (2025)", note: "Le taux apparent rejoint le taux de marché au rythme du renouvellement de la dette (1 / 8,5 par an)."}
   annees_ia: {valeur: 10, unite: sans_unite, statut: HYPOTHESE}
   premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}

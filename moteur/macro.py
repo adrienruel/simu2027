@@ -176,7 +176,10 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         # effet de Fisher (30/10/2026) : les taux nominaux suivent l'écart d'inflation à la référence (1,8 %), au
         # rythme du renouvellement de la dette (fisher_app, mis à jour dans la boucle) ; sans lui, une inflation plus
         # basse relèverait mécaniquement le taux réel pendant cinquante ans
-        return nominal + fisher_app[s] - infl_s[s][t] - m("baisse_spread", s) * min(1.0, max(0, t - 2029) / p.val("macro.annees_baisse_spread"))
+        return nominal + fisher_app[s] - infl_s[s][t]
+
+    def baisse_spread(t, s):
+        return m("baisse_spread", s) * min(1.0, max(0, t - 2029) / p.val("macro.annees_baisse_spread"))
 
     from .depenses.statique import rui_aah
     flux_epargne = flux_epargne_obligatoire(p) / 1e9
@@ -207,9 +210,6 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         if not p.val("revalorisation.rui_aah_socle_croissance"):
             return 0.0
         return _idx_reel[t] - 1
-        n_ = t - 2029
-        prod_ = (1 + m("productivite", "prudent")) ** max(0, min(m("annees_productivite", "prudent"), t - p.val("macro.premiere_annee_productivite") + 1))
-        return ((1 + tend0) / (1 + infl)) ** n_ * prod_ - 1
     commun = p.val("macro.depart_commun")
     n_conv = p.val("macro.convergence_scenarios_annees")
 
@@ -310,7 +310,11 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         creances = {}  # épargne prise par la règle, due à chaque génération (année de naissance → Md€ de 2026)
         paiement = 0.0
         prime_app = 0.0  # prime de taux liée à la dette, sur le taux apparent
-        ratio_ref = None
+        from .noyau import ecart_taux_borne
+        from .noyau import ratio_reference
+        from .statu_quo import pib as _pib_sq
+        # calcul de crise : p.en_crise() lit les valeurs de crise dans la colonne prudente, comme le statu quo de crise
+        ratio_ref, pib_ref_2029 = ratio_reference(p, s), _pib_sq(p, s)[2029]
         r_ecole = r_ia = r_adopt = 0.0
         eff_s = eff
         for t in ANNEES:
@@ -331,9 +335,11 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
             c_contrib = 0.0
             # Prime de taux liée à la dette : taux de marché selon l'écart de dette/PIB à 2029, transmise au taux
             # apparent au rythme du renouvellement de la dette
-            ratio_prec = dette_prec / (pib0[t] + (sc.pib_effet[t - 1] if t > 2029 else 0.0))
-            ratio_ref = ratio_ref if ratio_ref is not None else ratio_prec
-            prime_marche = m("prime_dette", s) / 100 * (ratio_prec - ratio_ref) * 100
+            # même définition que moteur/noyau.trajectoire : dette/PIB publiée de l'année précédente, référence commune
+            # (statu quo en 2029)
+            ratio_prec = dette_prec / (pib0[t - 1] + sc.pib_effet[t - 1] if t > 2029 else pib_ref_2029)
+            bas, haut = p.val("macro.prime_dette_bornes")  # bornes et dette négative : moteur/noyau.prime_marche
+            prime_marche = max(bas, min(haut, m("prime_dette", s) * (max(ratio_prec, 0.0) - ratio_ref)))
             prime_app += (prime_marche - prime_app) / p.val("macro.maturite_moyenne_dette")
             if fisher_actif:
                 fisher_app[s] += ((infl_s[s][t] - p.val("calendrier.inflation")) - fisher_app[s]) / p.val("macro.maturite_moyenne_dette")
@@ -470,7 +476,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 elif corr:  # socle en plus des générations dont l'épargne a été prise par la clause les années passées
                     solde -= socle_supplementaire(p, part_prelevee, t) * (1 + reval_socle(t))
                 # Clause de trajectoire : ramène le prudent sur le déficit du médian (ou sous un seuil fixe)
-                interets_t = (taux_reel(t, s) + prime_app) * dette_prec
+                interets_t = (taux_reel(t, s) + ecart_taux_borne(p, prime_app, -baisse_spread(t, s))) * dette_prec
                 pib_t = pib0[t] + pib
                 avant = -(sp_hors[t] + solde - transferts[t] - interets_t - infl_s[s][t] * dette_prec) / pib_t
                 cible = p.val("clause.cible")
@@ -484,8 +490,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 actif = t <= p.val("clause.derniere_annee")
                 cap_point = flux_epargne / 10 * (1 + tend0) ** n * (ds["c_epargne"] if corr else 1.0)
                 cap_rui = rui_total / p.val("rui.montant") * 10 * (1 + tend0) ** n
-                if corr:  # marge jusqu'au plancher, sur le RUI réel de l'année (non indexé sur l'inflation)
-                    prod_t = (1 + m("productivite", s)) ** max(0, min(m("annees_productivite", s), t - p.val("macro.premiere_annee_productivite") + 1))
+                if corr:  # marge jusqu'au plancher, sur le RUI réel de l'année (revalorisation.regle)
                     reval_t = _idx_reel[t] if p.val("revalorisation.rui_aah_socle_croissance") else 1.0
                     rui_t = p.val("rui.montant") * reval_t
                     base_rui = rui_total * reval_t * demo[s][t]["adultes"]
@@ -538,7 +543,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 "eviction_epargne": (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n,
                 "clause": mesures, "demographie": s_demo, "permis_rapide": s_permis, "salaires_dirigeants": s_tpe, "emplois_fonds": s_fonds_emploi,
             }
-            interets = (taux_reel(t, s) + prime_app) * dette_prec
+            interets = (taux_reel(t, s) + ecart_taux_borne(p, prime_app, -baisse_spread(t, s))) * dette_prec
             solde_public = sp_hors[t] + solde_total - transferts[t] - interets
             dette = dette_prec - solde_public - participations[t]
             pib_total = pib0[t] + pib

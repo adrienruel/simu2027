@@ -137,3 +137,25 @@ crédité dans le gain de chaque emploi (moteur/emploi_canaux.gain_au_cout) : ri
 | Crise après | 4,96 / 3,26 | 4,37 / 3,29 | 5,71 / 4,58 | 155 % |
 
 Effet de chaque correction seule sur le prudent de 2073 : seniors +0,35 point, permis +0,10, rendement +0,42.
+
+## Relecture indépendante du 5 novembre 2026
+
+Agent sans historique du projet ; consigne : chercher les erreurs, lire les relectures précédentes seulement à la fin.
+Statut de chaque constat après vérification dans le code.
+
+| Constat | Gravité | Statut |
+|---|---|---|
+| C1. Prime de dette sans borne (statu quo à 14 000 % de dette/PIB ; taux réels négatifs des programmes qui se désendettent ; cumul avec `baisse_spread`) | critique | **corrigé** (bornes, référence commune, dette négative à zéro, baisse totale ≤ écart au Bund) |
+| C2. Programme chiffré à la croissance du prudent ; surplus de PIB des scénarios au solde par `part_pib_tendanciel_au_solde = 0,1` sans source (+1,6 point de déficit médian en 2050 si q = 0) | critique | **ouvert** : refonte (postes du programme aux salaires et au PIB de chaque scénario) |
+| C3. Architecture : économies saisies en Md€ par le programme, effets de comportement dans son dossier, pas de bloc macro commun | critique | **ouvert** : plan dans `docs/architecture.md` à écrire |
+| I1. Hausse de la défense 2026-2027 comptée deux fois | important | **corrigé** |
+| I2. Santé indexée sur le salaire par tête (la pente est une part du PIB) : +64 Md€ en 2073 | important | **à trancher** (décision : trajectoire de santé gardée) |
+| I3. Crise du statu quo meilleure que le prudent jusqu'en 2045 ; `elasticite_invest` non monotone | important | **à trancher** (définition de la crise) |
+| I4. Dénominateur de la prime choisi par le programme (`pib_prime`) | important | **corrigé** (avec C1) |
+| I5. Fonds hors APU : flux non bouclés (~63 Md€ d'investissement hors budget) | important | ouvert (décision : hors APU ; compte du fonds à ajouter) |
+| I6. Artefact de méthode santé médian (−14 Md€ en 2073) ; IA retirée des recettes mais pas des blocs remplacés | important | ouvert |
+| I7. Économies sans taux de réalisation ni contrôle de recouvrement (IA, effectifs, Bercy) | important | ouvert (lié à C3) |
+| I8. Unités contournables (`sans_unite` pour des Md€) ; 187 paramètres sur 482 sans source | important | ouvert |
+| I9. Taux d'emploi par âge figés ; 15-24 ans appliqué aux 18-24 ans (~0,6 million d'emplois) | important | ouvert |
+| Textes périmés (README, 65 ans, prestations « sur les prix »), test mal ciblé, TVA des transferts, code mort | mineur | **corrigé** |
+| Constantes en dur (PIB 2024, 900 000 retraités à l'étranger…), clé `charge_dette` ambiguë, exception avalée dans `outils/openfisca_menages.py` | mineur | ouvert |

@@ -14,10 +14,10 @@ La dépense primaire est découpée en blocs, chacun avec ce qui le fait vivre �
 | Retraites | toutes les générations : population de l'Insee × part partie à chaque âge (âge légal de 64 ans) × pension liquidée (salaire de quinze ans plus tôt, érosion relative calée sur le COR), puis revalorisée sur les prix |
 | Santé | pentes communes (Assurance maladie jusqu'en 2035, puis PROMEDE), dérive de 2027 à 2029 comprise |
 | Assurance chômage | chômeurs du scénario × salaires |
-| Famille | enfants, prix |
-| Logement | population, prix |
-| RSA ; prime d'activité | chômeurs, prix ; personnes en emploi et barème fixe (OpenFisca) face aux salaires qui montent |
-| AAH et invalidité | adultes de 18 à 64 ans, prix |
+| Famille | enfants, salaires (statu_quo.indexation_prestations ; « prix » : la loi à la lettre) |
+| Logement | population, salaires (idem) |
+| RSA ; prime d'activité | chômeurs, salaires (idem) ; personnes en emploi et barème qui suit les salaires |
+| AAH et invalidité | adultes de 18 à 64 ans, salaires (idem) |
 | Investissement ; défense, UE et missions économiques | PIB |
 | Enseignement | salaires × (élèves et étudiants de 3 à 24 ans) ^ élasticité |
 | Autres dépenses (reste) | salaires × population (loi de Baumol) |
@@ -253,7 +253,7 @@ def depart(p: Parametres) -> dict[str, float]:
         "investissement": sq("investissement_part_pib") * y,
     }
     blocs["etat_missions"] = sum(x["cout"] for x in missions_etat(p))
-    blocs["defense_ue"] = sq("defense_2026") + p.val("budget_etat.contribution_ue_courants") / p.val("budget_etat.deflateur_contribution_ue")
+    blocs["defense_ue"] = defense_depart(p) + p.val("budget_etat.contribution_ue_courants") / p.val("budget_etat.deflateur_contribution_ue")
     blocs["collectivites"] = collectivites_depart(p, blocs)
     blocs["autres"] = primaire - sum(blocs.values())
     if blocs["autres"] <= 0:
@@ -352,12 +352,22 @@ def collectivites_depart(p: Parametres, blocs_: dict) -> float:
     return p.val("statu_quo.apul_depenses_2026") - rsa_departements - autonomie - inv
 
 
+def defense_depart(p: Parametres) -> float:
+    """Défense hors pensions du PLF 2027 (Md€ de 2026), comme la dépense primaire de départ (PLF 2027) : la marche
+    2026-2027 est déjà dans cette dépense, et ne doit pas tomber dans le résidu « autres »."""
+    return p.val("statu_quo.defense_2027_courants") / p.val("budget_etat.deflateur_contribution_ue")
+
+
 def hausse_defense(p: Parametres) -> float:
-    """Hausse de la défense sur 2026 selon la loi de programmation militaire actualisée (Md€ de 2026) : niveau de 2030
-    (budget_etat.lpm_2030_courants, ramené en euros de 2026) moins le niveau de 2026 ; 0 si la trajectoire est « 2026 »."""
+    """Hausse de la défense après le PLF 2027 selon la loi de programmation militaire actualisée (Md€ de 2026) :
+    niveau de 2030 (budget_etat.lpm_2030_courants, ramené en euros de 2026) moins le niveau du PLF 2027 ; 0 si la
+    trajectoire est « 2026 » (la défense reste au niveau du PLF 2027).
+
+    Corrigé le 05/11/2026 (relecture indépendante) : la hausse partait du niveau de 2026 alors que la dépense de
+    départ est celle du PLF 2027, d'où la marche 2026-2027 (≈ 6 Md€) comptée deux fois."""
     if p.val("statu_quo.defense_trajectoire") != "lpm":
         return 0.0
-    return p.val("budget_etat.lpm_2030_courants") / (1 + p.val("budget_etat.inflation_2026_2030")) - p.val("statu_quo.defense_2026")
+    return p.val("budget_etat.lpm_2030_courants") / (1 + p.val("budget_etat.inflation_2026_2030")) - defense_depart(p)
 
 
 def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
@@ -610,13 +620,16 @@ def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
             v += n / len(dec) * wr * c((12 * pm - prel) / wr)
         brut[t] = v / 1e9
     parts0 = {"actifs": actifs, "retraites": brut[2029], "transferts": transferts, "non_deductible": non_ded}
+    idx_sal = p.val("statu_quo.indexation_prestations") == "salaires"
     cible = recettes_par_impot_depart(p)["tva"]
     k = cible / sum(parts0.values())
     out = {}
     for t in ANNEES:
         out[t] = {"actifs": k * actifs * cel[t]["tva"] * w[t],
                   "retraites": k * brut[t],
-                  "transferts": k * transferts * e[t]["adultes"] / e[2029]["adultes"],
+                  # transferts revalorisés comme les prestations (statu_quo.indexation_prestations ; corrigé le
+                  # 05/11/2026 : ils restaient sur les prix quand les prestations suivent les salaires)
+                  "transferts": k * transferts * e[t]["adultes"] / e[2029]["adultes"] * (w[t] / w[2029] if idx_sal else 1.0),
                   "non_deductible": k * non_ded * y[t] / y0}
         out[t]["total"] = sum(out[t].values())
     out["calage"] = k
