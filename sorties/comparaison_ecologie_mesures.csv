@@ -13,27 +13,34 @@ cle,programme,scenario,annee,mesure,secteur,mt
 Écologie de droite|Crise|2050|138|emissions_mt:batiments,Écologie de droite,Crise,2050,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.364
 Écologie de droite|Crise|2060|138|emissions_mt:batiments,Écologie de droite,Crise,2060,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.541
 Écologie de droite|Crise|2073|138|emissions_mt:batiments,Écologie de droite,Crise,2073,Prix du carbone : émissions des transports et des bâtiments,batiments,-6.58
-Écologie de droite|Crise|2029|139|emissions_mt:industrie,Écologie de droite,Crise,2029,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.08
-Écologie de droite|Crise|2032|139|emissions_mt:industrie,Écologie de droite,Crise,2032,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.303
-Écologie de droite|Crise|2037|139|emissions_mt:industrie,Écologie de droite,Crise,2037,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.623
-Écologie de droite|Crise|2045|139|emissions_mt:industrie,Écologie de droite,Crise,2045,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.017
-Écologie de droite|Crise|2050|139|emissions_mt:industrie,Écologie de droite,Crise,2050,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.093
-Écologie de droite|Crise|2060|139|emissions_mt:industrie,Écologie de droite,Crise,2060,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.911
-Écologie de droite|Crise|2073|139|emissions_mt:industrie,Écologie de droite,Crise,2073,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.719
-Écologie de droite|Crise|2029|140|emissions_mt:industrie,Écologie de droite,Crise,2029,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Crise|2032|140|emissions_mt:industrie,Écologie de droite,Crise,2032,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Crise|2037|140|emissions_mt:industrie,Écologie de droite,Crise,2037,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Crise|2045|140|emissions_mt:industrie,Écologie de droite,Crise,2045,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Crise|2050|140|emissions_mt:industrie,Écologie de droite,Crise,2050,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Crise|2060|140|emissions_mt:industrie,Écologie de droite,Crise,2060,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Crise|2073|140|emissions_mt:industrie,Écologie de droite,Crise,2073,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Crise|2029|141|emissions_mt:transports,Écologie de droite,Crise,2029,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.0
-Écologie de droite|Crise|2032|141|emissions_mt:transports,Écologie de droite,Crise,2032,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.079
-Écologie de droite|Crise|2037|141|emissions_mt:transports,Écologie de droite,Crise,2037,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.192
-Écologie de droite|Crise|2045|141|emissions_mt:transports,Écologie de droite,Crise,2045,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.228
-Écologie de droite|Crise|2050|141|emissions_mt:transports,Écologie de droite,Crise,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.209
-Écologie de droite|Crise|2060|141|emissions_mt:transports,Écologie de droite,Crise,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.174
-Écologie de droite|Crise|2073|141|emissions_mt:transports,Écologie de droite,Crise,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.137
+Écologie de droite|Crise|2029|139|importees_mt,Écologie de droite,Crise,2029,Accise sur le contenu carbone des importations,importations,-4.727
+Écologie de droite|Crise|2032|139|importees_mt,Écologie de droite,Crise,2032,Accise sur le contenu carbone des importations,importations,-5.622
+Écologie de droite|Crise|2037|139|importees_mt,Écologie de droite,Crise,2037,Accise sur le contenu carbone des importations,importations,-6.37
+Écologie de droite|Crise|2045|139|importees_mt,Écologie de droite,Crise,2045,Accise sur le contenu carbone des importations,importations,-7.662
+Écologie de droite|Crise|2050|139|importees_mt,Écologie de droite,Crise,2050,Accise sur le contenu carbone des importations,importations,-8.437
+Écologie de droite|Crise|2060|139|importees_mt,Écologie de droite,Crise,2060,Accise sur le contenu carbone des importations,importations,-9.839
+Écologie de droite|Crise|2073|139|importees_mt,Écologie de droite,Crise,2073,Accise sur le contenu carbone des importations,importations,-8.097
+Écologie de droite|Crise|2029|140|emissions_mt:industrie,Écologie de droite,Crise,2029,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.08
+Écologie de droite|Crise|2032|140|emissions_mt:industrie,Écologie de droite,Crise,2032,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.303
+Écologie de droite|Crise|2037|140|emissions_mt:industrie,Écologie de droite,Crise,2037,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.623
+Écologie de droite|Crise|2045|140|emissions_mt:industrie,Écologie de droite,Crise,2045,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.017
+Écologie de droite|Crise|2050|140|emissions_mt:industrie,Écologie de droite,Crise,2050,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.093
+Écologie de droite|Crise|2060|140|emissions_mt:industrie,Écologie de droite,Crise,2060,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.911
+Écologie de droite|Crise|2073|140|emissions_mt:industrie,Écologie de droite,Crise,2073,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.719
+Écologie de droite|Crise|2029|141|emissions_mt:industrie,Écologie de droite,Crise,2029,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Crise|2032|141|emissions_mt:industrie,Écologie de droite,Crise,2032,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Crise|2037|141|emissions_mt:industrie,Écologie de droite,Crise,2037,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Crise|2045|141|emissions_mt:industrie,Écologie de droite,Crise,2045,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Crise|2050|141|emissions_mt:industrie,Écologie de droite,Crise,2050,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Crise|2060|141|emissions_mt:industrie,Écologie de droite,Crise,2060,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Crise|2073|141|emissions_mt:industrie,Écologie de droite,Crise,2073,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Crise|2029|142|emissions_mt:transports,Écologie de droite,Crise,2029,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.0
+Écologie de droite|Crise|2032|142|emissions_mt:transports,Écologie de droite,Crise,2032,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.079
+Écologie de droite|Crise|2037|142|emissions_mt:transports,Écologie de droite,Crise,2037,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.192
+Écologie de droite|Crise|2045|142|emissions_mt:transports,Écologie de droite,Crise,2045,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.228
+Écologie de droite|Crise|2050|142|emissions_mt:transports,Écologie de droite,Crise,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.209
+Écologie de droite|Crise|2060|142|emissions_mt:transports,Écologie de droite,Crise,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.174
+Écologie de droite|Crise|2073|142|emissions_mt:transports,Écologie de droite,Crise,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.137
 Écologie de droite|Prudent|2029|138|emissions_mt:transports,Écologie de droite,Prudent,2029,Prix du carbone : émissions des transports et des bâtiments,transports,-4.894
 Écologie de droite|Prudent|2032|138|emissions_mt:transports,Écologie de droite,Prudent,2032,Prix du carbone : émissions des transports et des bâtiments,transports,-13.116
 Écologie de droite|Prudent|2037|138|emissions_mt:transports,Écologie de droite,Prudent,2037,Prix du carbone : émissions des transports et des bâtiments,transports,-16.598
@@ -48,27 +55,34 @@ cle,programme,scenario,annee,mesure,secteur,mt
 Écologie de droite|Prudent|2050|138|emissions_mt:batiments,Écologie de droite,Prudent,2050,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.025
 Écologie de droite|Prudent|2060|138|emissions_mt:batiments,Écologie de droite,Prudent,2060,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.063
 Écologie de droite|Prudent|2073|138|emissions_mt:batiments,Écologie de droite,Prudent,2073,Prix du carbone : émissions des transports et des bâtiments,batiments,-6.127
-Écologie de droite|Prudent|2029|139|emissions_mt:industrie,Écologie de droite,Prudent,2029,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.2
-Écologie de droite|Prudent|2032|139|emissions_mt:industrie,Écologie de droite,Prudent,2032,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.748
-Écologie de droite|Prudent|2037|139|emissions_mt:industrie,Écologie de droite,Prudent,2037,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.507
-Écologie de droite|Prudent|2045|139|emissions_mt:industrie,Écologie de droite,Prudent,2045,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.382
-Écologie de droite|Prudent|2050|139|emissions_mt:industrie,Écologie de droite,Prudent,2050,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.507
-Écologie de droite|Prudent|2060|139|emissions_mt:industrie,Écologie de droite,Prudent,2060,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.007
-Écologie de droite|Prudent|2073|139|emissions_mt:industrie,Écologie de droite,Prudent,2073,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.503
-Écologie de droite|Prudent|2029|140|emissions_mt:industrie,Écologie de droite,Prudent,2029,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Prudent|2032|140|emissions_mt:industrie,Écologie de droite,Prudent,2032,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Prudent|2037|140|emissions_mt:industrie,Écologie de droite,Prudent,2037,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Prudent|2045|140|emissions_mt:industrie,Écologie de droite,Prudent,2045,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Prudent|2050|140|emissions_mt:industrie,Écologie de droite,Prudent,2050,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Prudent|2060|140|emissions_mt:industrie,Écologie de droite,Prudent,2060,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Prudent|2073|140|emissions_mt:industrie,Écologie de droite,Prudent,2073,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
-Écologie de droite|Prudent|2029|141|emissions_mt:transports,Écologie de droite,Prudent,2029,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.0
-Écologie de droite|Prudent|2032|141|emissions_mt:transports,Écologie de droite,Prudent,2032,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.157
-Écologie de droite|Prudent|2037|141|emissions_mt:transports,Écologie de droite,Prudent,2037,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.373
-Écologie de droite|Prudent|2045|141|emissions_mt:transports,Écologie de droite,Prudent,2045,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.43
-Écologie de droite|Prudent|2050|141|emissions_mt:transports,Écologie de droite,Prudent,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.385
-Écologie de droite|Prudent|2060|141|emissions_mt:transports,Écologie de droite,Prudent,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.308
-Écologie de droite|Prudent|2073|141|emissions_mt:transports,Écologie de droite,Prudent,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.231
+Écologie de droite|Prudent|2029|139|importees_mt,Écologie de droite,Prudent,2029,Accise sur le contenu carbone des importations,importations,-4.727
+Écologie de droite|Prudent|2032|139|importees_mt,Écologie de droite,Prudent,2032,Accise sur le contenu carbone des importations,importations,-5.799
+Écologie de droite|Prudent|2037|139|importees_mt,Écologie de droite,Prudent,2037,Accise sur le contenu carbone des importations,importations,-6.669
+Écologie de droite|Prudent|2045|139|importees_mt,Écologie de droite,Prudent,2045,Accise sur le contenu carbone des importations,importations,-8.218
+Écologie de droite|Prudent|2050|139|importees_mt,Écologie de droite,Prudent,2050,Accise sur le contenu carbone des importations,importations,-9.226
+Écologie de droite|Prudent|2060|139|importees_mt,Écologie de droite,Prudent,2060,Accise sur le contenu carbone des importations,importations,-11.378
+Écologie de droite|Prudent|2073|139|importees_mt,Écologie de droite,Prudent,2073,Accise sur le contenu carbone des importations,importations,-10.199
+Écologie de droite|Prudent|2029|140|emissions_mt:industrie,Écologie de droite,Prudent,2029,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.2
+Écologie de droite|Prudent|2032|140|emissions_mt:industrie,Écologie de droite,Prudent,2032,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.748
+Écologie de droite|Prudent|2037|140|emissions_mt:industrie,Écologie de droite,Prudent,2037,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.507
+Écologie de droite|Prudent|2045|140|emissions_mt:industrie,Écologie de droite,Prudent,2045,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.382
+Écologie de droite|Prudent|2050|140|emissions_mt:industrie,Écologie de droite,Prudent,2050,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.507
+Écologie de droite|Prudent|2060|140|emissions_mt:industrie,Écologie de droite,Prudent,2060,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.007
+Écologie de droite|Prudent|2073|140|emissions_mt:industrie,Écologie de droite,Prudent,2073,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.503
+Écologie de droite|Prudent|2029|141|emissions_mt:industrie,Écologie de droite,Prudent,2029,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Prudent|2032|141|emissions_mt:industrie,Écologie de droite,Prudent,2032,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Prudent|2037|141|emissions_mt:industrie,Écologie de droite,Prudent,2037,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Prudent|2045|141|emissions_mt:industrie,Écologie de droite,Prudent,2045,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Prudent|2050|141|emissions_mt:industrie,Écologie de droite,Prudent,2050,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Prudent|2060|141|emissions_mt:industrie,Écologie de droite,Prudent,2060,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Prudent|2073|141|emissions_mt:industrie,Écologie de droite,Prudent,2073,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,0.0
+Écologie de droite|Prudent|2029|142|emissions_mt:transports,Écologie de droite,Prudent,2029,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.0
+Écologie de droite|Prudent|2032|142|emissions_mt:transports,Écologie de droite,Prudent,2032,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.157
+Écologie de droite|Prudent|2037|142|emissions_mt:transports,Écologie de droite,Prudent,2037,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.373
+Écologie de droite|Prudent|2045|142|emissions_mt:transports,Écologie de droite,Prudent,2045,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.43
+Écologie de droite|Prudent|2050|142|emissions_mt:transports,Écologie de droite,Prudent,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.385
+Écologie de droite|Prudent|2060|142|emissions_mt:transports,Écologie de droite,Prudent,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.308
+Écologie de droite|Prudent|2073|142|emissions_mt:transports,Écologie de droite,Prudent,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.231
 Écologie de droite|Médian|2029|138|emissions_mt:transports,Écologie de droite,Médian,2029,Prix du carbone : émissions des transports et des bâtiments,transports,-4.894
 Écologie de droite|Médian|2032|138|emissions_mt:transports,Écologie de droite,Médian,2032,Prix du carbone : émissions des transports et des bâtiments,transports,-13.093
 Écologie de droite|Médian|2037|138|emissions_mt:transports,Écologie de droite,Médian,2037,Prix du carbone : émissions des transports et des bâtiments,transports,-16.52
@@ -83,27 +97,34 @@ cle,programme,scenario,annee,mesure,secteur,mt
 Écologie de droite|Médian|2050|138|emissions_mt:batiments,Écologie de droite,Médian,2050,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.646
 Écologie de droite|Médian|2060|138|emissions_mt:batiments,Écologie de droite,Médian,2060,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.494
 Écologie de droite|Médian|2073|138|emissions_mt:batiments,Écologie de droite,Médian,2073,Prix du carbone : émissions des transports et des bâtiments,batiments,-5.514
-Écologie de droite|Médian|2029|139|emissions_mt:industrie,Écologie de droite,Médian,2029,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.4
-Écologie de droite|Médian|2032|139|emissions_mt:industrie,Écologie de droite,Médian,2032,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.483
-Écologie de droite|Médian|2037|139|emissions_mt:industrie,Écologie de droite,Médian,2037,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.94
-Écologie de droite|Médian|2045|139|emissions_mt:industrie,Écologie de droite,Médian,2045,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-4.535
-Écologie de droite|Médian|2050|139|emissions_mt:industrie,Écologie de droite,Médian,2050,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-4.701
-Écologie de droite|Médian|2060|139|emissions_mt:industrie,Écologie de droite,Médian,2060,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-3.649
-Écologie de droite|Médian|2073|139|emissions_mt:industrie,Écologie de droite,Médian,2073,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.626
-Écologie de droite|Médian|2029|140|emissions_mt:industrie,Écologie de droite,Médian,2029,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-0.355
-Écologie de droite|Médian|2032|140|emissions_mt:industrie,Écologie de droite,Médian,2032,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-1.316
-Écologie de droite|Médian|2037|140|emissions_mt:industrie,Écologie de droite,Médian,2037,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-2.609
-Écologie de droite|Médian|2045|140|emissions_mt:industrie,Écologie de droite,Médian,2045,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-4.025
-Écologie de droite|Médian|2050|140|emissions_mt:industrie,Écologie de droite,Médian,2050,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-4.172
-Écologie de droite|Médian|2060|140|emissions_mt:industrie,Écologie de droite,Médian,2060,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-3.239
-Écologie de droite|Médian|2073|140|emissions_mt:industrie,Écologie de droite,Médian,2073,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-2.331
-Écologie de droite|Médian|2029|141|emissions_mt:transports,Écologie de droite,Médian,2029,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.0
-Écologie de droite|Médian|2032|141|emissions_mt:transports,Écologie de droite,Médian,2032,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.376
-Écologie de droite|Médian|2037|141|emissions_mt:transports,Écologie de droite,Médian,2037,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.883
-Écologie de droite|Médian|2045|141|emissions_mt:transports,Écologie de droite,Médian,2045,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.992
-Écologie de droite|Médian|2050|141|emissions_mt:transports,Écologie de droite,Médian,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.874
-Écologie de droite|Médian|2060|141|emissions_mt:transports,Écologie de droite,Médian,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.678
-Écologie de droite|Médian|2073|141|emissions_mt:transports,Écologie de droite,Médian,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.488
+Écologie de droite|Médian|2029|139|importees_mt,Écologie de droite,Médian,2029,Accise sur le contenu carbone des importations,importations,-4.727
+Écologie de droite|Médian|2032|139|importees_mt,Écologie de droite,Médian,2032,Accise sur le contenu carbone des importations,importations,-5.797
+Écologie de droite|Médian|2037|139|importees_mt,Écologie de droite,Médian,2037,Accise sur le contenu carbone des importations,importations,-6.665
+Écologie de droite|Médian|2045|139|importees_mt,Écologie de droite,Médian,2045,Accise sur le contenu carbone des importations,importations,-8.092
+Écologie de droite|Médian|2050|139|importees_mt,Écologie de droite,Médian,2050,Accise sur le contenu carbone des importations,importations,-8.99
+Écologie de droite|Médian|2060|139|importees_mt,Écologie de droite,Médian,2060,Accise sur le contenu carbone des importations,importations,-10.858
+Écologie de droite|Médian|2073|139|importees_mt,Écologie de droite,Médian,2073,Accise sur le contenu carbone des importations,importations,-9.473
+Écologie de droite|Médian|2029|140|emissions_mt:industrie,Écologie de droite,Médian,2029,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.4
+Écologie de droite|Médian|2032|140|emissions_mt:industrie,Écologie de droite,Médian,2032,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-1.483
+Écologie de droite|Médian|2037|140|emissions_mt:industrie,Écologie de droite,Médian,2037,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.94
+Écologie de droite|Médian|2045|140|emissions_mt:industrie,Écologie de droite,Médian,2045,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-4.535
+Écologie de droite|Médian|2050|140|emissions_mt:industrie,Écologie de droite,Médian,2050,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-4.701
+Écologie de droite|Médian|2060|140|emissions_mt:industrie,Écologie de droite,Médian,2060,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-3.649
+Écologie de droite|Médian|2073|140|emissions_mt:industrie,Écologie de droite,Médian,2073,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.626
+Écologie de droite|Médian|2029|141|emissions_mt:industrie,Écologie de droite,Médian,2029,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-0.355
+Écologie de droite|Médian|2032|141|emissions_mt:industrie,Écologie de droite,Médian,2032,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-1.316
+Écologie de droite|Médian|2037|141|emissions_mt:industrie,Écologie de droite,Médian,2037,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-2.609
+Écologie de droite|Médian|2045|141|emissions_mt:industrie,Écologie de droite,Médian,2045,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-4.025
+Écologie de droite|Médian|2050|141|emissions_mt:industrie,Écologie de droite,Médian,2050,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-4.172
+Écologie de droite|Médian|2060|141|emissions_mt:industrie,Écologie de droite,Médian,2060,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-3.239
+Écologie de droite|Médian|2073|141|emissions_mt:industrie,Écologie de droite,Médian,2073,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-2.331
+Écologie de droite|Médian|2029|142|emissions_mt:transports,Écologie de droite,Médian,2029,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.0
+Écologie de droite|Médian|2032|142|emissions_mt:transports,Écologie de droite,Médian,2032,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.376
+Écologie de droite|Médian|2037|142|emissions_mt:transports,Écologie de droite,Médian,2037,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.883
+Écologie de droite|Médian|2045|142|emissions_mt:transports,Écologie de droite,Médian,2045,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.992
+Écologie de droite|Médian|2050|142|emissions_mt:transports,Écologie de droite,Médian,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.874
+Écologie de droite|Médian|2060|142|emissions_mt:transports,Écologie de droite,Médian,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.678
+Écologie de droite|Médian|2073|142|emissions_mt:transports,Écologie de droite,Médian,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.488
 Écologie de droite|Optimiste|2029|138|emissions_mt:transports,Écologie de droite,Optimiste,2029,Prix du carbone : émissions des transports et des bâtiments,transports,-4.9
 Écologie de droite|Optimiste|2032|138|emissions_mt:transports,Écologie de droite,Optimiste,2032,Prix du carbone : émissions des transports et des bâtiments,transports,-13.057
 Écologie de droite|Optimiste|2037|138|emissions_mt:transports,Écologie de droite,Optimiste,2037,Prix du carbone : émissions des transports et des bâtiments,transports,-16.366
@@ -118,27 +139,34 @@ cle,programme,scenario,annee,mesure,secteur,mt
 Écologie de droite|Optimiste|2050|138|emissions_mt:batiments,Écologie de droite,Optimiste,2050,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.396
 Écologie de droite|Optimiste|2060|138|emissions_mt:batiments,Écologie de droite,Optimiste,2060,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.161
 Écologie de droite|Optimiste|2073|138|emissions_mt:batiments,Écologie de droite,Optimiste,2073,Prix du carbone : émissions des transports et des bâtiments,batiments,-5.228
-Écologie de droite|Optimiste|2029|139|emissions_mt:industrie,Écologie de droite,Optimiste,2029,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.6
-Écologie de droite|Optimiste|2032|139|emissions_mt:industrie,Écologie de droite,Optimiste,2032,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.204
-Écologie de droite|Optimiste|2037|139|emissions_mt:industrie,Écologie de droite,Optimiste,2037,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-4.303
-Écologie de droite|Optimiste|2045|139|emissions_mt:industrie,Écologie de droite,Optimiste,2045,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-6.475
-Écologie de droite|Optimiste|2050|139|emissions_mt:industrie,Écologie de droite,Optimiste,2050,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-6.61
-Écologie de droite|Optimiste|2060|139|emissions_mt:industrie,Écologie de droite,Optimiste,2060,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-4.975
-Écologie de droite|Optimiste|2073|139|emissions_mt:industrie,Écologie de droite,Optimiste,2073,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-3.44
-Écologie de droite|Optimiste|2029|140|emissions_mt:industrie,Écologie de droite,Optimiste,2029,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-0.57
-Écologie de droite|Optimiste|2032|140|emissions_mt:industrie,Écologie de droite,Optimiste,2032,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-2.094
-Écologie de droite|Optimiste|2037|140|emissions_mt:industrie,Écologie de droite,Optimiste,2037,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-4.087
-Écologie de droite|Optimiste|2045|140|emissions_mt:industrie,Écologie de droite,Optimiste,2045,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-6.152
-Écologie de droite|Optimiste|2050|140|emissions_mt:industrie,Écologie de droite,Optimiste,2050,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-6.279
-Écologie de droite|Optimiste|2060|140|emissions_mt:industrie,Écologie de droite,Optimiste,2060,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-4.727
-Écologie de droite|Optimiste|2073|140|emissions_mt:industrie,Écologie de droite,Optimiste,2073,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-3.268
-Écologie de droite|Optimiste|2029|141|emissions_mt:transports,Écologie de droite,Optimiste,2029,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.0
-Écologie de droite|Optimiste|2032|141|emissions_mt:transports,Écologie de droite,Optimiste,2032,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.606
-Écologie de droite|Optimiste|2037|141|emissions_mt:transports,Écologie de droite,Optimiste,2037,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-1.401
-Écologie de droite|Optimiste|2045|141|emissions_mt:transports,Écologie de droite,Optimiste,2045,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-1.535
-Écologie de droite|Optimiste|2050|141|emissions_mt:transports,Écologie de droite,Optimiste,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-1.332
-Écologie de droite|Optimiste|2060|141|emissions_mt:transports,Écologie de droite,Optimiste,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-1.002
-Écologie de droite|Optimiste|2073|141|emissions_mt:transports,Écologie de droite,Optimiste,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.693
+Écologie de droite|Optimiste|2029|139|importees_mt,Écologie de droite,Optimiste,2029,Accise sur le contenu carbone des importations,importations,-4.727
+Écologie de droite|Optimiste|2032|139|importees_mt,Écologie de droite,Optimiste,2032,Accise sur le contenu carbone des importations,importations,-5.745
+Écologie de droite|Optimiste|2037|139|importees_mt,Écologie de droite,Optimiste,2037,Accise sur le contenu carbone des importations,importations,-6.504
+Écologie de droite|Optimiste|2045|139|importees_mt,Écologie de droite,Optimiste,2045,Accise sur le contenu carbone des importations,importations,-7.601
+Écologie de droite|Optimiste|2050|139|importees_mt,Écologie de droite,Optimiste,2050,Accise sur le contenu carbone des importations,importations,-8.277
+Écologie de droite|Optimiste|2060|139|importees_mt,Écologie de droite,Optimiste,2060,Accise sur le contenu carbone des importations,importations,-9.76
+Écologie de droite|Optimiste|2073|139|importees_mt,Écologie de droite,Optimiste,2073,Accise sur le contenu carbone des importations,importations,-8.324
+Écologie de droite|Optimiste|2029|140|emissions_mt:industrie,Écologie de droite,Optimiste,2029,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-0.6
+Écologie de droite|Optimiste|2032|140|emissions_mt:industrie,Écologie de droite,Optimiste,2032,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-2.204
+Écologie de droite|Optimiste|2037|140|emissions_mt:industrie,Écologie de droite,Optimiste,2037,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-4.303
+Écologie de droite|Optimiste|2045|140|emissions_mt:industrie,Écologie de droite,Optimiste,2045,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-6.475
+Écologie de droite|Optimiste|2050|140|emissions_mt:industrie,Écologie de droite,Optimiste,2050,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-6.61
+Écologie de droite|Optimiste|2060|140|emissions_mt:industrie,Écologie de droite,Optimiste,2060,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-4.975
+Écologie de droite|Optimiste|2073|140|emissions_mt:industrie,Écologie de droite,Optimiste,2073,FONDS-INDUS — Fonds : décarbonation de l'industrie (3 Md€ par an),industrie,-3.44
+Écologie de droite|Optimiste|2029|141|emissions_mt:industrie,Écologie de droite,Optimiste,2029,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-0.57
+Écologie de droite|Optimiste|2032|141|emissions_mt:industrie,Écologie de droite,Optimiste,2032,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-2.094
+Écologie de droite|Optimiste|2037|141|emissions_mt:industrie,Écologie de droite,Optimiste,2037,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-4.087
+Écologie de droite|Optimiste|2045|141|emissions_mt:industrie,Écologie de droite,Optimiste,2045,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-6.152
+Écologie de droite|Optimiste|2050|141|emissions_mt:industrie,Écologie de droite,Optimiste,2050,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-6.279
+Écologie de droite|Optimiste|2060|141|emissions_mt:industrie,Écologie de droite,Optimiste,2060,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-4.727
+Écologie de droite|Optimiste|2073|141|emissions_mt:industrie,Écologie de droite,Optimiste,2073,"FONDS-ENR — Fonds : renouvelables et réseaux de chaleur (3,4 Md€ par an)",industrie,-3.268
+Écologie de droite|Optimiste|2029|142|emissions_mt:transports,Écologie de droite,Optimiste,2029,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.0
+Écologie de droite|Optimiste|2032|142|emissions_mt:transports,Écologie de droite,Optimiste,2032,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.606
+Écologie de droite|Optimiste|2037|142|emissions_mt:transports,Écologie de droite,Optimiste,2037,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-1.401
+Écologie de droite|Optimiste|2045|142|emissions_mt:transports,Écologie de droite,Optimiste,2045,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-1.535
+Écologie de droite|Optimiste|2050|142|emissions_mt:transports,Écologie de droite,Optimiste,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-1.332
+Écologie de droite|Optimiste|2060|142|emissions_mt:transports,Écologie de droite,Optimiste,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-1.002
+Écologie de droite|Optimiste|2073|142|emissions_mt:transports,Écologie de droite,Optimiste,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.693
 Tondelier (Les Écologistes)|Crise|2029|107|emissions_mt:batiments,Tondelier (Les Écologistes),Crise,2029,LOG-REN — 500 000 rénovations performantes par an,batiments,-0.221
 Tondelier (Les Écologistes)|Crise|2032|107|emissions_mt:batiments,Tondelier (Les Écologistes),Crise,2032,LOG-REN — 500 000 rénovations performantes par an,batiments,-0.523
 Tondelier (Les Écologistes)|Crise|2037|107|emissions_mt:batiments,Tondelier (Les Écologistes),Crise,2037,LOG-REN — 500 000 rénovations performantes par an,batiments,-0.956
