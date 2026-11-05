@@ -64,9 +64,9 @@ def population(p: Parametres, s: str) -> dict[int, tuple[float, ...]]:
 
 def choc_chomage(p: Parametres, s: str, t: int) -> float:
     """Hausse du taux de chômage propre au scénario (chomage.hausse_crise), en montée sur chomage.annees_montee_crise
-    à partir de 2029 ; commune au statu quo et aux programmes (demographie.chomage_tendanciel)."""
+    après 2029 (point de départ commun) ; commune au statu quo et aux programmes (demographie.chomage_tendanciel)."""
     n = p.val("chomage.annees_montee_crise")
-    return _v(p, "chomage.hausse_crise", s) * max(0.0, min(1.0, (t - 2028) / n))
+    return _v(p, "chomage.hausse_crise", s) * max(0.0, min(1.0, (t - 2029) / n))  # 2029 : point de départ commun
 
 
 def effectifs(p: Parametres, s: str) -> dict[int, dict[str, float]]:

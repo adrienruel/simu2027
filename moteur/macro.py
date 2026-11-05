@@ -211,7 +211,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         # basse relèverait mécaniquement le taux réel pendant cinquante ans
         # hausse de taux propre au scénario (crise), au rythme du taux long, comme moteur/noyau.trajectoire
         return (nominal + fisher_app[s] - infl_s[s][t]
-                + m("ecart_taux_scenario", s) * min(1.0, (t - 2028) / p.val("macro.annees_taux_long_terme")))
+                + m("ecart_taux_scenario", s) * min(1.0, (t - 2029) / p.val("macro.annees_taux_long_terme")))
 
     def baisse_spread(t, s):
         return m("baisse_spread", s) * min(1.0, max(0, t - 2029) / p.val("macro.annees_baisse_spread"))

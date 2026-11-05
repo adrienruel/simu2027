@@ -374,7 +374,7 @@ chomage:
     unite: taux
     statut: HYPOTHESE
     source: "Encadrement : en France, le chômage est passé de 7,1 % (2008) à 10,5 % (2015) et n'est revenu sous 8 % qu'en 2019 ; persistance du chômage après les récessions dans l'OCDE (Ball, Long-term damage from the Great Recession in OECD countries, NBER WP 20185, 2014)"
-    note: "Hausse durable du taux de chômage dans la crise (points de la population active), atteinte en trois ans à partir de 2029, appliquée au statu quo et aux programmes (même tendanciel). Ajouté le 05/11/2026."
+    note: "Hausse durable du taux de chômage dans la crise (points de la population active), atteinte en trois ans après 2029 (point de départ commun), appliquée au statu quo et aux programmes (même tendanciel). Ajouté le 05/11/2026."
   annees_montee_crise: {valeur: 3, unite: sans_unite, statut: HYPOTHESE}
   taux_2026: {valeur: 0.083, unite: taux, statut: SOURCE, source: "Insee, 2e trimestre 2026 (Mayotte comprise)"}
   taux_par_age:

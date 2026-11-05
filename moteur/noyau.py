@@ -140,7 +140,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         if fisher_actif:
             fisher += ((infl[t] - infl_ref) - fisher) / mat
         nominal = (min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + ecart_taux_borne(p, prime, sup.get(t, 0.0))
-                   + ecart_scen * min(1.0, (t - 2028) / n_lt))
+                   + ecart_scen * min(1.0, (t - 2029) / n_lt))
         interets_reels = (nominal - infl[t]) * dette_prec
         primaire = sum(bl.values())
         solde = rec - primaire - interets_reels
