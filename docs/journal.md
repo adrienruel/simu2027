@@ -625,3 +625,24 @@ architecture « mesures seules » pour les autres programmes (C3).
 
 Déficit du programme (prudent) : 2037 3,01 → 3,18 % ; 2050 3,49 → 3,46 % ; 2073 3,24 → 3,08 %. Médian 2050 : 0,21 →
 0,88 % ; optimiste 2050 : −1,75 → −0,81 %. Crise 2050 : 4,39 → 8,95 %.
+
+## 5 novembre 2026 — Économies sourcées ou estimées, antidépresseurs
+
+- **Les 16 économies saisies du programme** sont passées en « estimation » (`mesures_economies.csv`, colonnes
+  `sources`, `methode`, `estimation_<scénario>`) : aucune n'avait deux sources indépendantes qui chiffrent la mesure
+  telle qu'écrite ; chacune a maintenant ses sources pour les bases et une estimation propre par scénario (décision
+  d'Adrien : « s'il n'y a pas de source, estimation prudente / médiane / optimiste »). Total à plein effet : crise
+  9,7 Md€, prudent 12,3, médian 17,6, optimiste 22,5, contre 22,5 saisis. Écarts les plus nets : cabinets de conseil
+  (0,05 Md€ en prudent contre 0,5 saisis : l'État y dépense environ 0,1 Md€ par an), aide médicale d'État (0 en
+  prudent, d'après le rapport Évin-Stefanini), collectivités (5 au lieu de 8), effets sur les caisses de sécurité
+  sociale et les achats. Les estimations portent déjà leur taux de réalisation.
+- Les estimations du médian et de l'optimiste passent au solde par l'écart au prudent (`mesures.ecart_scenario`,
+  canal « tendance_et_ecole » du moteur du programme).
+- **Antidépresseurs** (décision d'Adrien) : reste à charge hors dépression modérée à sévère et prescription recentrée
+  sur les recommandations de la HAS (2017). Estimation : crise −0,05 Md€, prudent 0, médian 0,1, optimiste 0,2. Le
+  médicament coûte peu, les complémentaires reprennent une partie du reste à charge, et la baisse de l'usage dans la
+  dépression légère suppose plus de psychothérapie ; un sous-traitement des dépressions modérées coûterait en arrêts de
+  travail. Base de remboursement à sourcer (Medic'AM, classe N06A). Ligne au poste santé.
+- Comparateur des programmes (claude.ai) mis à jour avec l'export du jour.
+
+Déficit du programme (prudent) : 2037 3,01 % ; 2050 3,02 % ; 2073 2,21 %. Médian 2050 −0,14 % ; crise 2050 7,78 %.

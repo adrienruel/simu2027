@@ -144,6 +144,9 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
         taux_va = {t: part_budget for t in ANNEES}
     from .trajectoire_annuelle import postes
     traj = postes(p, scenario_retenu)
+    # économies du registre estimées par scénario : écart au prudent (05/11/2026), compté dans « tendance_et_ecole »
+    from .mesures import ecart_scenario
+    eco_ecart = {s_: ecart_scenario(p, s_) for s_ in ("median", "optimiste")}
     dividende = dividende_croissance(p, scenario_retenu, traj, pib0)
     from .trajectoire_annuelle import lignes as lignes_traj
     bases_demo = lignes_traj(p, scenario_retenu).bases_demographie
@@ -493,7 +496,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 solde += (tva_s_t + inv_taxe + carb_t
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
             else:
-                solde += (sante_t + tva_s_t + (pib_tend + pib_ecole) * q + inv_taxe + carb_t
+                solde += (sante_t + tva_s_t + (pib_tend + pib_ecole) * q + inv_taxe + carb_t + eco_ecart[s][t]
                           + (m("eviction", s) - m("eviction", scenario_retenu)) * tva_point * (1 + tend0) ** n)
             mesures = 0.0
             if clause_s:
@@ -564,7 +567,7 @@ def calculer(p: Parametres, scenario_retenu: str = "prudent") -> dict[str, Scena
                 c_sante, c_tva_sante, c_tend = 0.0, tva_s_t, 0.0
                 c_carbone = carb_t
             else:
-                c_sante, c_tva_sante, c_tend = sante_t, tva_s_t, (pib_tend + pib_ecole) * q
+                c_sante, c_tva_sante, c_tend = sante_t, tva_s_t, (pib_tend + pib_ecole) * q + eco_ecart[s][t]
                 c_carbone = carb_t
             sc.detail.setdefault("canaux", {})[t] = {
                 "emploi": s_emploi, "ajustement_budgetaire": s_aj, "capital_du_fonds": s_cap, "logement": s_log,

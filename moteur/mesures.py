@@ -33,8 +33,23 @@ def sources(m: dict) -> list[str]:
 
 
 def motif_ecartee(m: dict, p: Parametres | None = None) -> str | None:
-    """Raison pour laquelle une économie saisie n'est pas retenue (None si elle l'est)."""
-    if (m.get("nature") or "montant") == "calcul_moteur":
+    """Raison pour laquelle une économie saisie n'est pas retenue (None si elle l'est).
+
+    Natures : « montant » (montant unique recoupé par economies.sources_minimum sources, × taux de réalisation) ;
+    « estimation » (pas de chiffrage recoupé : estimation propre par scénario, colonnes estimation_<scénario>, avec sa
+    méthode et au moins une source pour ses bases ; le taux de réalisation est déjà dans l'estimation, décision
+    d'Adrien du 05/11/2026) ; « calcul_moteur » (montant calculé par le moteur)."""
+    nature = m.get("nature") or "montant"
+    if nature == "calcul_moteur":
+        return None
+    if nature == "estimation":
+        src = sources(m)
+        if any(any(k in x.lower() for k in MOTS_DECLARATIFS) for x in src):
+            return "source déclarative (programme ou candidat)"
+        if not src or not (m.get("methode") or "").strip():
+            return "estimation sans méthode ou sans source pour ses bases"
+        if any((m.get(f"estimation_{s}") or "").strip() == "" for s in ("crise", "prudent", "median", "optimiste")):
+            return "estimation incomplète (une valeur par scénario)"
         return None
     minimum = p.val("economies.sources_minimum") if p is not None else 2
     src = sources(m)
@@ -60,7 +75,17 @@ def ecartees(p: Parametres) -> list[dict]:
             for m in registre(p.programme) if float(m["retenue"] or 0) and motif_ecartee(m, p)]
 
 
-def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float]) -> float:
+def plein_effet(m: dict, p: Parametres, scenario: str = "prudent") -> float:
+    """Montant à plein effet retenu (Md€ de 2026) : estimation du scénario, ou montant × taux de réalisation."""
+    nature = m.get("nature") or "montant"
+    if nature == "estimation":
+        s = p.colonne_prudent if scenario == "prudent" else scenario  # calcul de crise : colonne prudente = crise
+        return float(m[f"estimation_{s}"])
+    realisation = 1.0 if nature == "calcul_moteur" else p.val("economies.taux_realisation", scenario)
+    return float(m["plein_effet_md"]) * realisation
+
+
+def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float], scenario: str = "prudent") -> float:
     if m["mesure"] in p.mesures_desactivees:
         return 0.0
     if m["mesure"].startswith("Ancien système : âge de départ porté"):
@@ -76,8 +101,16 @@ def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float]) -> float:
         index = ancien[t] / ancien[max(2029, plein)]
     if motif_ecartee(m, p):
         return 0.0
-    realisation = 1.0 if (m.get("nature") or "montant") == "calcul_moteur" else p.val("economies.taux_realisation", "prudent")
-    return float(m["retenue"]) * float(m["plein_effet_md"]) * montee * index * realisation
+    return float(m["retenue"]) * plein_effet(m, p, scenario) * montee * index
+
+
+def ecart_scenario(p: Parametres, s: str) -> dict[int, float]:
+    """Économies du registre dans le scénario s moins celles du prudent (Md€, + = plus d'économies) : le moteur du
+    programme calcule ses lignes au prudent, cet écart passe au solde du médian et de l'optimiste (moteur/macro.py)."""
+    from .ancien_systeme import depenses as depenses_ancien
+    anc = depenses_ancien(p)
+    reg = registre(p.programme)
+    return {t: sum(effet(m, t, p, anc, s) - effet(m, t, p, anc) for m in reg) for t in ANNEES}
 
 
 def economies(p: Parametres) -> dict[int, float]:

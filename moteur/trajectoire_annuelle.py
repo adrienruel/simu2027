@@ -193,7 +193,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         L.ajouter(t, "autres", "ascenseur_depenses", "Ascenseur social : dépenses", "mesure", asc_d[t])
         for nom, v in eco_detail.items():
             # mesures sur les pensions de l'ancien système : poste « retraites » (v235 : « autres »)
-            poste_ = "retraites" if (nom.startswith("Ancien système") and p.val("ministeres.par_public")) else "autres"
+            poste_ = ("retraites" if (nom.startswith("Ancien système") and p.val("ministeres.par_public"))
+                      else "sante" if nom.startswith("Santé") else "autres")
             L.ajouter(t, poste_, "economie:" + nom[:60], nom, "mesure", -v[t])
     # Bases des lignes démographiques, pour recalculer l'effet dans les autres scénarios (macro)
     L.bases_demographie = {t: {"recettes": rec_emp * (1 + g) ** (t - 2029),
