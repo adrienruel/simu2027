@@ -332,6 +332,12 @@ class Tondelier:
             taux_prel_ret = sq.recettes_par_impot(p, s)[2029]["retraites"] / sq.retraites(p, s)[2029]["depenses"]
             liste.append(Mesure("RET-01 — prélèvements sur les pensions en plus", "recettes",
                                 {t: taux_prel_ret * v for t, v in serie.items()}))
+            # COT-04 : la CSG +1 point sur les salaires fait monter la prime d'activité et les aides (OpenFisca)
+            st = offre.statique_openfisca(p, "csg_activite_plus1")
+            x = dict(self.pt.val("tondelier_mesures.csg_un_point"))
+            x["_montant"] = st["prestations_en_plus"]
+            liste.append(Mesure("COT-04 — prime d'activité, RSA et aides au logement en plus (salaire net plus bas)",
+                                "pauvrete", self._serie(x, idx)))
             # REC-45 bis : génération sans tabac
             tb = self.tabac(p, s)
             acc = self.v("tabac.accises_tabac")

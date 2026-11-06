@@ -19,9 +19,13 @@ administrations), capitalisation (financement non décrit).
 from __future__ import annotations
 
 from moteur import bibliotheque as bib
+from moteur import offre
 from moteur import statu_quo as sq
 from moteur.noyau import ANNEES, Mesure
 from moteur.programme_simple import ANNEES_AVANT, ProgrammeSimple
+
+
+INC_CSG = "openfisca:csg_activite_supprimee"  # gain à travailler calculé par OpenFisca (outils/openfisca_offre.py)
 
 
 class Zemmour(ProgrammeSimple):
@@ -41,16 +45,20 @@ class Zemmour(ProgrammeSimple):
         ind = self.v("csg.independants", s)
         out += [
             Mesure("ZEM-FIS-01 — CSG supprimée sur les salaires du privé", "recettes",
-                   serie(-c["csg_prive"], "recette:salaires_prive"), instrument="travail"),
+                   serie(-c["csg_prive"], "recette:salaires_prive"), instrument="travail", incidence=INC_CSG),
             Mesure("ZEM-FIS-01 — CSG supprimée sur les rémunérations des agents publics", "recettes",
-                   serie(-c["csg_public"], "recette:salaires_public"), instrument="travail"),
+                   serie(-c["csg_public"], "recette:salaires_public"), instrument="travail", incidence=INC_CSG),
             Mesure("ZEM-FIS-01 — CSG supprimée sur les revenus des indépendants", "recettes",
-                   serie(-ind, "recette:independants"), instrument="travail"),
+                   serie(-ind, "recette:independants"), instrument="travail", incidence=INC_CSG),
             Mesure("ZEM-FIS-01 — impôt sur le revenu en plus (CSG déductible qui disparaît)", "recettes",
-                   serie(k * c["ir_prive"], "recette:salaires_prive"), instrument="travail", incidence="ir"),
+                   serie(k * c["ir_prive"], "recette:salaires_prive"), instrument="travail", incidence=INC_CSG),
             Mesure("ZEM-FIS-01 — impôt sur le revenu en plus (agents publics, indépendants)", "recettes",
-                   serie(k * c["ir_public"] + 0.1 * ind, "recette:salaires_public"), instrument="travail", incidence="ir"),
+                   serie(k * c["ir_public"] + 0.1 * ind, "recette:salaires_public"), instrument="travail", incidence=INC_CSG),
         ]
+        # prime d'activité, RSA et aides au logement en moins quand le salaire net monte (OpenFisca, personne seule)
+        st = offre.statique_openfisca(p, "csg_activite_supprimee")
+        out.append(Mesure("ZEM-FIS-01 — prime d'activité, RSA et aides au logement en moins (salaire net plus élevé)",
+                          "pauvrete", serie(st["prestations_en_plus"], "recette:salaires_prive")))
         # droits de succession
         rec = sq.recettes_par_impot(p, s)
         part = self.v("successions.part_supprimee")

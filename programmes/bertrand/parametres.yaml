@@ -86,7 +86,7 @@ bertrand_mesures:
 
   # ---------------------------------------------------------------- fiscalité
   ir_tranches_basses:
-    valeur: {id: BER-FIS-01, instrument: travail, incidence: bas, libelle: "Impôt sur le revenu : baisse des premières tranches (tranche à 11 % ramenée à 9 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: BER-FIS-01, instrument: travail, incidence: "openfisca:ir_tranche_11_a_9", libelle: "Impôt sur le revenu : baisse des premières tranches (tranche à 11 % ramenée à 9 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -3.0, prudent: -3.0, median: -3.0, optimiste: -3.0}}
     unite: md_eur
     annee_euros: 2026

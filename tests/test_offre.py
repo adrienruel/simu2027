@@ -58,19 +58,28 @@ def test_demande_par_instrument(p):
 def test_seniors(p):
     """Âge reculé : une part en emploi, une au chômage, le reste inactif ; âge abaissé : scénario miroir."""
     nr = {t: 100000.0 for t in ANNEES}
+    k = p.val("seniors.part_concernee")
     r = offre.seniors(p, "prudent", nr)
     pe, pc = p.val("seniors.devenir", "prudent")
-    assert r["emplois"][2040] == pytest.approx(pe * 1e5) and r["actifs"][2040] == pytest.approx((pe + pc) * 1e5)
+    assert r["emplois"][2040] == pytest.approx(k * pe * 1e5) and r["actifs"][2040] == pytest.approx(k * (pe + pc) * 1e5)
     b = offre.seniors(p, "prudent", {t: -v for t, v in nr.items()}, baisse_age=True)
     pe_m, _ = sq._v(p, "seniors.devenir", "median")
-    assert b["emplois"][2040] == pytest.approx(-pe_m * 1e5)
+    assert b["emplois"][2040] == pytest.approx(-k * pe_m * 1e5)
+
+
+def test_seniors_cales_sur_l_etude_d_impact_de_2023(p):
+    """Deux ans d'âge (retour à 62 ans) : 200 000 à 400 000 emplois, autour des 300 000 de l'étude d'impact de 2023."""
+    t = noyau.charger("tondelier")
+    for s in ("prudent", "optimiste"):
+        c = t.contexte(p)[s]["emplois_canaux"][2040]
+        assert 200000 < -c["Seniors : emploi (âge de la retraite)"] < 400000, s
 
 
 def test_seniors_dans_les_programmes(p):
     """65 ans (Bertrand, Zemmour) : emplois de seniors en plus ; 62 ans (Tondelier) : en moins."""
     for nom, signe in (("bertrand", 1), ("zemmour", 1), ("tondelier", -1)):
         c = noyau.charger(nom).contexte(p)["prudent"]["emplois_canaux"][2040]
-        assert signe * c["Seniors : emploi (âge de la retraite)"] > 50000, nom
+        assert signe * c["Seniors : emploi (âge de la retraite)"] > 30000, nom
 
 
 def test_montee_comme_mesange(p):
@@ -126,3 +135,19 @@ def test_ecologie_de_droite_hors_du_canal(p):
     """Son moteur a ses propres canaux d'offre : aucune de ses mesures ne porte d'instrument."""
     e = noyau.charger("ecologie_de_droite")
     assert all(not m.instrument for m in e.mesures(p)["prudent"])
+
+
+def test_tables_openfisca_recoupent_la_bibliotheque(p):
+    """Deux calculs indépendants d'OpenFisca (personne seule) : la CSG supprimée moins l'impôt sur le revenu en plus de
+    la bibliothèque (tables du système actuel) et les impôts en moins de la table de réforme (outils/openfisca_offre.py)."""
+    from moteur import bibliotheque as bib
+    c = bib.csg_activite(p)
+    net = c["csg_prive"] + c["csg_public"] - c["ir_prive"] - c["ir_public"]
+    assert offre.statique_openfisca(p, "csg_activite_supprimee")["impots_en_moins"] == pytest.approx(net, rel=0.05)
+
+
+def test_reformes_openfisca_dans_la_fourchette_macro(p):
+    """Suppression de la CSG sur le travail, pour 1 point de PIB : effet de long terme dans la fourchette de la
+    littérature (≈ 0,3 à 1 % de PIB)."""
+    e = {s: offre.travail_par_point(p, s, "openfisca:csg_activite_supprimee")["pib_pct"] for s in sq.SCENARIOS}
+    assert 0.2 < e["crise"] < e["prudent"] < e["median"] < e["optimiste"] < 1.3

@@ -151,14 +151,14 @@ tondelier_mesures:
 
   # ---------------------------------------------------------------- recettes : revenus
   ir_tranche_60:
-    valeur: {id: REC-10, instrument: travail, incidence: haut, libelle: "Impôt sur le revenu : tranche à 60 % au-delà de 250 000 € par part", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-10, instrument: travail, incidence: "openfisca:ir_tranche_60", libelle: "Impôt sur le revenu : tranche à 60 % au-delà de 250 000 € par part", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.8, prudent: 1.2, median: 2.0, optimiste: 2.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : contribution exceptionnelle sur les hauts revenus (3 à 4 % au-delà de 250 000 €) ≈ 1,3 Md€ ; 15 points de plus sur la même assiette ≈ 3,5 Md€ en statique ; élasticité du revenu imposable des très hauts revenus 0,5 à 0,8 en prudent"
   ir_tranches_basses:
-    valeur: {id: REC-11, instrument: travail, incidence: bas, libelle: "Impôt sur le revenu : tranche à 11 % ramenée à 9 % (arbitrage)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-11, instrument: travail, incidence: "openfisca:ir_tranche_11_a_9", libelle: "Impôt sur le revenu : tranche à 11 % ramenée à 9 % (arbitrage)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -3.0, prudent: -3.0, median: -3.0, optimiste: -3.0}}
     unite: md_eur
     annee_euros: 2026
@@ -266,7 +266,7 @@ tondelier_mesures:
     statut: HYPOTHESE
     source: "Encadrement : participation, intéressement, abondements et actions gratuites ≈ 25 Md€ par an (Dares) ; cotisation vieillesse ≈ 28 % moins le forfait social déjà payé ; distribution réduite en prudent"
   csg_un_point:
-    valeur: {id: COT-04, instrument: travail, libelle: "CSG +1 point sur tous les revenus (assurance maladie)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: COT-04, instrument: travail, incidence: "openfisca:csg_activite_plus1", libelle: "CSG +1 point sur tous les revenus (assurance maladie)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 12.8, prudent: 13.6, median: 14.4, optimiste: 15.2}}
     unite: md_eur
     annee_euros: 2026

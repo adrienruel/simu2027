@@ -111,9 +111,64 @@ def _cellules(p: Parametres) -> list[dict]:
     return out
 
 
+def _table_offre(nom: str) -> dict:
+    """Table d'OpenFisca pour l'offre de travail (outils/openfisca_offre.py) : brut, coût, revenu disponible d'une
+    personne seule et d'un couple (second apporteur)."""
+    import csv
+    from .distribution import DONNEES
+    with (DONNEES / f"openfisca_offre_{nom}_2026.csv").open(encoding="utf-8") as f:
+        lignes = sorted(({k: float(v) for k, v in l.items()} for l in csv.DictReader(f)), key=lambda l: l["brut"])
+    return {k: [l[k] for l in lignes] for k in lignes[0]}
+
+
+def _reactions_openfisca(nom: str, brut: float) -> dict:
+    """Pour une réforme calculée par OpenFisca, au salaire brut donné : revenu disponible en plus (personne seule),
+    variation relative du gain à travailler (participation) et du taux de revenu net marginal (heures), pour une
+    personne seule et un second apporteur en couple."""
+    from .systeme_actuel import _interp
+    a, r = _table_offre("actuel"), _table_offre(nom)
+    out = {}
+    for cas in ("seul", "couple"):
+        col = f"disponible_{cas}"
+
+        def disp(T, b):
+            return _interp(b, T["brut"], T[col])
+        g0 = disp(a, brut) - disp(a, 0.0)
+        g1 = disp(r, brut) - disp(r, 0.0)
+        h = max(1000.0, 0.02 * brut)
+        dc = _interp(brut + h, a["brut"], a["cout_du_travail"]) - _interp(brut, a["brut"], a["cout_du_travail"])
+        m0 = (disp(a, brut + h) - disp(a, brut)) / dc
+        m1 = (disp(r, brut + h) - disp(r, brut)) / dc
+        out[cas] = {"participation": (g1 - g0) / g0 if g0 > 0 else 0.0,
+                    "heures": (m1 - m0) / m0 if m0 > 0 else 0.0,
+                    "disponible": disp(r, brut) - disp(a, brut)}
+    # impôts en moins (salaire net après impôt sur le revenu), et prestations en plus (disponible − impôts)
+    di = _interp(brut, r["brut"], r["net_apres_ir_seul"]) - _interp(brut, a["brut"], a["net_apres_ir_seul"])
+    out["impots_en_moins"] = di
+    out["prestations_en_plus"] = out["seul"]["disponible"] - di
+    return out
+
+
+def statique_openfisca(p: Parametres, nom: str) -> dict:
+    """Coût statique d'une réforme du travail calculée par OpenFisca, sur les cellules de salariés de 2026 (Md€,
+    économie de 2026 placée en 2029) : impôts en moins et prestations en plus (prime d'activité, RSA, aides au
+    logement), cas d'une personne seule comme le statu quo."""
+    cache = p.__dict__.setdefault("_cache", {})
+    if ("offre_statique", nom) not in cache:
+        imp = pre = 0.0
+        for x in _cellules(p):
+            r = _reactions_openfisca(nom, x["brut"])
+            imp += x["n"] * r["impots_en_moins"]
+            pre += x["n"] * r["prestations_en_plus"]
+        cache[("offre_statique", nom)] = {"impots_en_moins": imp / 1e9, "prestations_en_plus": pre / 1e9}
+    return cache[("offre_statique", nom)]
+
+
 def travail_par_point(p: Parametres, s: str, incidence: str = "proportionnel") -> dict:
     """Effet de long terme d'1 point de PIB (de 2029) de prélèvement sur le travail en moins, réparti selon
     l'incidence : % de PIB et emplois (personnes) en plus."""
+    if incidence.startswith("openfisca:"):
+        return _travail_openfisca(p, s, incidence.split(":", 1)[1])
     if incidence not in INCIDENCES:
         raise ValueError(f"incidence inconnue {incidence}")
     cel = _cellules(p)
@@ -148,6 +203,34 @@ def travail_par_point(p: Parametres, s: str, incidence: str = "proportionnel") -
         travail += x["n"] * (e + hrs) * r * x["cout"]
     pct = sq._v(p, "offre.travail_part_pib", s) * travail / masse * 100
     return {"pib_pct": pct, "emplois": emplois}
+
+
+def _travail_openfisca(p: Parametres, s: str, nom: str) -> dict:
+    """Effet de long terme d'une réforme du travail calculée par OpenFisca, ramené à 1 point de PIB de son coût
+    statique (revenu disponible en plus, cellule par cellule) : chaque cellule réagit au gain à travailler
+    (participation, élasticité de sa tranche) et au taux de revenu net marginal (heures) ; une part des salariés est
+    en couple (second apporteur, élasticité relative offre.travail_couples)."""
+    cel = _cellules(p)
+    y29 = sq.pib(p, s)[2029]
+    ext = sq._v(p, "offre.travail_participation", s)
+    hrs = sq._v(p, "offre.travail_heures", s)
+    pc, kc = sq._v(p, "offre.travail_couples", s)
+    masse = sum(x["n"] * x["cout"] for x in cel)
+    travail = emplois = 0.0
+    cout = statique_openfisca(p, nom)["impots_en_moins"] * 1e9  # rapporté aux impôts en moins, comme les mesures
+    for x in cel:
+        r = _reactions_openfisca(nom, x["brut"])
+        b = x["brut"] / SMIC_BRUT_2026
+        e = ext[0] if b <= 1.3 else (ext[1] if b <= 2.5 else ext[2])
+        part = (1 - pc) * e * r["seul"]["participation"] + pc * kc * e * r["couple"]["participation"]
+        heures = hrs * ((1 - pc) * r["seul"]["heures"] + pc * r["couple"]["heures"])
+        emplois += x["n"] * part
+        travail += x["n"] * (part + heures) * x["cout"]
+    if abs(cout) < 1e3:
+        return {"pib_pct": 0.0, "emplois": 0.0}
+    points = cout / (0.01 * y29 * 1e9)  # coût statique de la réforme, en points de PIB
+    pct = sq._v(p, "offre.travail_part_pib", s) * travail / masse * 100
+    return {"pib_pct": pct / points, "emplois": emplois / points, "impots_en_moins_md": cout / 1e9}
 
 
 def capital_entreprises_par_point(p: Parametres, s: str) -> float:
@@ -236,6 +319,8 @@ def seniors(p: Parametres, s: str, non_retraites: dict[int, float], baisse_age: 
     actifs en plus, les mesures budgétaires (prélèvements, allocations, autres prestations) et la valeur ajoutée (Md€)."""
     sc = MIROIR[s] if baisse_age else s
     pe, pc = sq._v(p, "seniors.devenir", sc)
+    k_c = p.val("seniors.part_concernee")  # calé sur l'étude d'impact de la réforme de 2023
+    non_retraites = {t: k_c * v for t, v in non_retraites.items()}
     w = sq.salaires(p, s)
     k = {t: w[t] / w[2029] for t in ANNEES}
     em = {t: pe * non_retraites[t] for t in ANNEES}

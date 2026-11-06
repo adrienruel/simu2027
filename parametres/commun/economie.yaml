@@ -702,18 +702,24 @@ offre:
     statut: HYPOTHESE
     note: "Interrupteur du canal d'offre (false : seul le multiplicateur de demande, comme avant le 06/11/2026). Écologie de droite n'y passe pas : son moteur a ses propres canaux d'offre (participation des inactifs, coût du travail, cohortes d'entreprises, localisation), plus détaillés."
   travail_participation:
-    valeur: {crise: [0.1, 0.05, 0.02], prudent: [0.15, 0.08, 0.03], median: [0.25, 0.12, 0.05], optimiste: [0.4, 0.2, 0.08]}
+    valeur: {crise: [0.08, 0.04, 0.02], prudent: [0.12, 0.06, 0.03], median: [0.15, 0.075, 0.035], optimiste: [0.19, 0.095, 0.04]}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : élasticités de participation au revenu net plus fortes en bas de l'échelle des salaires (Immervoll, Kleven, Kreiner et Saez, Economic Journal, 2007 : 0,1 à 0,4 en Europe ; Bargain, Orsini et Peichl, Journal of Human Resources, 2014, pour la France) ; Chetty, Guren, Manoli et Weber (2011) : ≈ 0,25 en moyenne macroéconomique (borne optimiste)"
-    note: "Trois tranches de salaire brut (en multiples du SMIC de 2026) : jusqu'à 1,3 ; de 1,3 à 2,5 ; au-delà. Appliquées cellule par cellule aux distributions de salaires de 2026 (privé : Insee ; public : DGAFP), au revenu net calculé par OpenFisca (moteur/offre.py). Emplois venus de l'inactivité."
+    note: "Élasticités au gain à travailler (revenu disponible en emploi moins sans emploi), comme Immervoll et al. Calées pour que la suppression de la CSG sur le travail (calculée par OpenFisca) donne, pour 1 point de PIB, un effet sur le PIB dans la fourchette de la littérature macroéconomique : ≈ 0,3 % en crise, 0,4 % en prudent, jusqu'à ≈ 1 % en optimiste (Bassanini et Scarpetta, OCDE, 2001 : 0,3 effet direct, 0,6 à 0,7 avec l'investissement). Trois tranches de salaire brut (en multiples du SMIC de 2026) : jusqu'à 1,3 ; de 1,3 à 2,5 ; au-delà. Appliquées cellule par cellule aux distributions de salaires de 2026 (privé : Insee ; public : DGAFP), au revenu net calculé par OpenFisca (moteur/offre.py). Emplois venus de l'inactivité."
   travail_heures:
-    valeur: {crise: 0.03, prudent: 0.05, median: 0.1, optimiste: 0.2}
+    valeur: {crise: 0.03, prudent: 0.05, median: 0.07, optimiste: 0.1}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : élasticité des heures au salaire net faible en France, 0 à 0,2 (Bargain, Orsini et Peichl, 2014 ; Chetty, 2012 : ≈ 0,3 au plus pour l'élasticité hicksienne)"
+  travail_couples:
+    valeur: {crise: [0.6, 1.0], prudent: [0.6, 1.2], median: [0.6, 1.3], optimiste: [0.6, 1.5]}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Part des salariés qui vivent en couple ≈ 60 % (Insee, enquête Emploi) ; les seconds apporteurs (surtout des femmes) réagissent davantage au gain à travailler du ménage : élasticités de participation des femmes en couple ≈ 1,5 à 2 fois celles des personnes seules (Bargain, Orsini et Peichl, Journal of Human Resources, 2014)"
+    note: "[part des salariés en couple, élasticité relative des couples]. Pour les réformes calculées par OpenFisca (incidence openfisca:<réforme>), le gain à travailler d'une part des salariés est celui d'un second apporteur en couple (outils/openfisca_offre.py), avec cette élasticité relative ; le reste, celui d'une personne seule."
   travail_part_pib:
-    valeur: {crise: 0.65, prudent: 0.65, median: 0.8, optimiste: 1.0}
+    valeur: {crise: 0.65, prudent: 0.65, median: 0.75, optimiste: 0.85}
     unite: taux
     statut: HYPOTHESE
     source: "Part du travail dans la valeur ajoutée ≈ 0,65 (Insee) : effet du travail en plus sur le PIB à capital inchangé (prudent) ; à long terme, le capital suit le travail et l'effet est entier (optimiste ; Bassanini et Scarpetta, OCDE, 2001, effet avec l'investissement)"
@@ -777,6 +783,12 @@ seniors:
     statut: HYPOTHESE
     source: "Réforme de 2010, personnes dont le départ est retardé : 64 % en emploi, 28 % au chômage, 8 % inactifs (Koubi et Dubois, Insee, cité par Trésor-Éco n° 302, février 2022 ; borne optimiste) ; IPP, rapport n° 61 (novembre 2025) : environ la moitié en emploi, un quart au chômage indemnisé ; Rabaté et Rochut (Journal of Pension Economics and Finance, 2020) : 21 points d'emploi pour 48 points de retraités en moins (44 %, borne crise)"
     note: "[part en emploi, part au chômage] ; le reste est inactif (maladie, invalidité, minima sociaux). Pour un report, le scénario ; pour un âge abaissé, le scénario miroir (moins d'emplois perdus n'est pas prudent)."
+  part_concernee:
+    valeur: 0.4
+    unite: taux
+    statut: HYPOTHESE
+    source: "Calé sur l'étude d'impact de la réforme de 2023 (deux ans d'âge légal en plus) : +300 000 personnes en emploi sur sept à huit ans, avec +84 000 allocataires de l'assurance chômage et +60 000 de minima sociaux (DARES, notes au COR de janvier 2022 ; chiffres repris par Public Sénat, 2023) ; soit ≈ 470 000 personnes concernées avec la répartition de l'Insee (64 % en emploi)"
+    note: "Part des personnes que le profil de départ décalé fait rester non retraitées qui le sont vraiment : les carrières longues, l'invalidité, l'inaptitude et les départs au taux plein à 67 ans gardent leur âge. Pour deux ans d'écart, le profil du modèle donne 1,27 million de personnes ; 0,4 en garde ≈ 510 000, soit ≈ 255 000 emplois en prudent et ≈ 325 000 en optimiste, autour des 300 000 de l'étude d'impact. Les pensions, elles, restent calées sur le COR (statu_quo.retraites)."
   valeur_emploi:
     valeur: 27000
     unite: eur_an
