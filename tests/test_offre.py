@@ -23,10 +23,54 @@ def test_baisse_et_hausse_symetriques_au_miroir_pres(p):
     bas = offre.effets(p, "prudent", [_baisse("travail", -30.0)])
     haut = offre.effets(p, "prudent", [_baisse("travail", +30.0)])
     pts = 30.0 / y[2073] * 100
-    assert bas["detail"]["travail"]["effet_pib_pct"][2073] == pytest.approx(
-        p.val("offre.elasticite_travail", "prudent") * pts, rel=0.02)
-    assert haut["detail"]["travail"]["effet_pib_pct"][2073] == pytest.approx(
-        -sq._v(p, "offre.elasticite_travail", "median") * pts, rel=0.02)
+    assert bas["detail"]["travail:proportionnel"]["effet_pib_pct"][2073] == pytest.approx(
+        offre.travail_par_point(p, "prudent")["pib_pct"] * pts, rel=0.02)
+    assert haut["detail"]["travail:proportionnel"]["effet_pib_pct"][2073] == pytest.approx(
+        -offre.travail_par_point(p, "median")["pib_pct"] * pts, rel=0.02)
+
+
+def test_travail_par_cellule(p):
+    """Par cellule de salaire (OpenFisca) : 1 point de PIB de prélèvements en moins ≈ +0,2 à +1 % de PIB à long terme ;
+    réparti sur les bas salaires (incidence « bas »), il fait plus d'emplois que sur les hauts revenus (« haut »)."""
+    x = offre.travail_par_point(p, "prudent")
+    assert 0.2 < x["pib_pct"] < 1.0
+    assert offre.travail_par_point(p, "prudent", "bas")["emplois"] > offre.travail_par_point(p, "prudent", "haut")["emplois"]
+    assert offre.travail_par_point(p, "optimiste")["pib_pct"] > x["pib_pct"]
+
+
+def test_entreprises_calees_sur_les_cohortes(p):
+    """Même élasticité de l'investissement que les cohortes d'entreprises : l'effet suit macro.elasticite_invest."""
+    a = offre.capital_entreprises_par_point(p, "prudent")
+    q = p.avec({"macro.elasticite_invest": 2 * p.val("macro.elasticite_invest", "prudent")})
+    assert 0.1 < a < 1.0
+    assert offre.capital_entreprises_par_point(q, "prudent") == pytest.approx(2 * a, rel=0.01)
+
+
+def test_demande_par_instrument(p):
+    """Une baisse de CSG relance moins qu'une dépense publique du même montant (Kilponen et al., 2015)."""
+    dep = Mesure("d", "etat_missions", {2029: 10.0})
+    csg = Mesure("c", "recettes", {2029: -10.0}, instrument="travail")
+    ent = Mesure("e", "recettes", {2029: -10.0}, instrument="capital_entreprises")
+    i = {m.nom: offre.impulsion(p, [m], (2029,))[2029] for m in (dep, csg, ent)}
+    assert i["d"] == pytest.approx(10.0) and 0 < i["e"] < i["c"] < i["d"]
+
+
+def test_seniors(p):
+    """Âge reculé : une part en emploi, une au chômage, le reste inactif ; âge abaissé : scénario miroir."""
+    nr = {t: 100000.0 for t in ANNEES}
+    r = offre.seniors(p, "prudent", nr)
+    pe, pc = p.val("seniors.devenir", "prudent")
+    assert r["emplois"][2040] == pytest.approx(pe * 1e5) and r["actifs"][2040] == pytest.approx((pe + pc) * 1e5)
+    b = offre.seniors(p, "prudent", {t: -v for t, v in nr.items()}, baisse_age=True)
+    pe_m, _ = sq._v(p, "seniors.devenir", "median")
+    assert b["emplois"][2040] == pytest.approx(-pe_m * 1e5)
+
+
+def test_seniors_dans_les_programmes(p):
+    """65 ans (Bertrand, Zemmour) : emplois de seniors en plus ; 62 ans (Tondelier) : en moins."""
+    for nom, signe in (("bertrand", 1), ("zemmour", 1), ("tondelier", -1)):
+        c = noyau.charger(nom).contexte(p)["prudent"]["emplois_canaux"][2040]
+        assert signe * c["Seniors : emploi (âge de la retraite)"] > 50000, nom
 
 
 def test_montee_comme_mesange(p):

@@ -50,6 +50,8 @@ class Mesure:
     # instrument du canal d'offre commun (moteur/offre.py) : travail, cout_travail, capital_entreprises,
     # capital_menages, successions, consommation, transferts_actifs ("" : pas d'effet d'offre)
     instrument: str = ""
+    # incidence d'une mesure sur le travail (instrument « travail ») : proportionnel, ir, bas, haut (moteur/offre.py)
+    incidence: str = ""
 
 
 @dataclass

@@ -700,25 +700,35 @@ offre:
     valeur: true
     unite: sans_unite
     statut: HYPOTHESE
-    note: "Interrupteur du canal d'offre (false : seul le multiplicateur de demande, comme avant le 06/11/2026). Écologie de droite n'y passe pas : son moteur a ses propres canaux d'offre (participation des inactifs, coût du travail, localisation), plus détaillés."
-  elasticite_travail:
-    valeur: {crise: 0.2, prudent: 0.3, median: 0.5, optimiste: 0.9}
+    note: "Interrupteur du canal d'offre (false : seul le multiplicateur de demande, comme avant le 06/11/2026). Écologie de droite n'y passe pas : son moteur a ses propres canaux d'offre (participation des inactifs, coût du travail, cohortes d'entreprises, localisation), plus détaillés."
+  travail_participation:
+    valeur: {crise: [0.1, 0.05, 0.02], prudent: [0.15, 0.08, 0.03], median: [0.25, 0.12, 0.05], optimiste: [0.4, 0.2, 0.08]}
     unite: sans_unite
     statut: HYPOTHESE
-    source: "Encadrement : élasticité de la participation au salaire net ≈ 0,1 à 0,25 (Chetty, Guren, Manoli et Weber, 2011 ; pour la France, Laroque et Salanié, et les évaluations de la prime d'activité), heures ≈ 0,1 : 1 point de PIB de prélèvement sur le travail en moins ≈ +2,5 % de revenu net ≈ +0,3 à 0,5 % de PIB ; Bassanini et Scarpetta (OCDE, 2001) : 1 point de pression fiscale en moins ≈ +0,3 % de PIB par habitant (effet direct), jusqu'à 0,6 à 0,7 avec l'investissement (borne optimiste)"
-    note: "CSG, cotisations salariales, impôt sur le revenu des actifs. Les emplois en plus viennent surtout de l'inactivité (offre de travail) : le chômage n'en bouge pas."
+    source: "Encadrement : élasticités de participation au revenu net plus fortes en bas de l'échelle des salaires (Immervoll, Kleven, Kreiner et Saez, Economic Journal, 2007 : 0,1 à 0,4 en Europe ; Bargain, Orsini et Peichl, Journal of Human Resources, 2014, pour la France) ; Chetty, Guren, Manoli et Weber (2011) : ≈ 0,25 en moyenne macroéconomique (borne optimiste)"
+    note: "Trois tranches de salaire brut (en multiples du SMIC de 2026) : jusqu'à 1,3 ; de 1,3 à 2,5 ; au-delà. Appliquées cellule par cellule aux distributions de salaires de 2026 (privé : Insee ; public : DGAFP), au revenu net calculé par OpenFisca (moteur/offre.py). Emplois venus de l'inactivité."
+  travail_heures:
+    valeur: {crise: 0.03, prudent: 0.05, median: 0.1, optimiste: 0.2}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : élasticité des heures au salaire net faible en France, 0 à 0,2 (Bargain, Orsini et Peichl, 2014 ; Chetty, 2012 : ≈ 0,3 au plus pour l'élasticité hicksienne)"
+  travail_part_pib:
+    valeur: {crise: 0.65, prudent: 0.65, median: 0.8, optimiste: 1.0}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Part du travail dans la valeur ajoutée ≈ 0,65 (Insee) : effet du travail en plus sur le PIB à capital inchangé (prudent) ; à long terme, le capital suit le travail et l'effet est entier (optimiste ; Bassanini et Scarpetta, OCDE, 2001, effet avec l'investissement)"
   elasticite_cout_travail:
     valeur: {crise: 0.8, prudent: 1.0, median: 1.5, optimiste: 2.1}
     unite: sans_unite
     statut: HYPOTHESE
     source: "DG Trésor, Le modèle Mésange : réestimation et nouveautés (séminaire Fourgeaud, 15 mars 2017) : baisse uniforme des cotisations employeurs de 1 point de PIB, +2,12 % de PIB et +504 000 emplois à long terme (borne optimiste) ; Kramarz et Philippon, Crépon et Desplatz : effets concentrés sur les bas salaires, plus faibles au-dessus de 1,6 SMIC (prudent)"
     note: "Cotisations employeurs et allègements sur les bas et moyens salaires. Emplois pris sur le chômage (demande de travail). Les allègements au-dessus de 1,6 SMIC passent par l'élasticité du travail : leurs effets sur l'emploi sont faibles (rapport Bozio-Wasmer, octobre 2024), le coût étant surtout reporté sur les salaires."
-  elasticite_capital_entreprises:
-    valeur: {crise: 0.3, prudent: 0.5, median: 1.0, optimiste: 2.0}
-    unite: sans_unite
+  part_capital:
+    valeur: 0.35
+    unite: taux
     statut: HYPOTHESE
-    source: "Encadrement : Arnold (OCDE, Working Paper n° 643, 2008) : l'impôt sur les sociétés est le plus nuisible à la croissance (coefficient −2,01 contre −1,13 pour l'impôt sur le revenu, part des recettes) ; DG Trésor, Trésor-Éco n° 290 (2021, CIR, Mésange et QUEST) : baisse du coût du capital et de la recherche ≈ +0,5 à +0,8 % de PIB à long terme pour ≈ 0,2 point de PIB"
-    note: "IS, impôts de production, crédits d'impôt des entreprises. Emplois : 30 % de l'effet sur le PIB, pris sur le chômage."
+    source: "Part du capital dans la valeur ajoutée ≈ 0,33 à 0,35 (Insee, partage de la valeur ajoutée des sociétés non financières)"
+    note: "Fiscalité des entreprises : même élasticité de l'investissement au coût du capital que les cohortes d'entreprises d'Écologie de droite (macro.elasticite_invest, Mésange et OFCE) ; coût du capital (1 − τz)/(1 − τ) au taux d'IS de 25 %, valeur actuelle des amortissements is_investissement.valeur_actuelle_amortissements ; 1 point de PIB d'IS ≈ taux × IS / PIB du statu quo ; capital à long terme en proportion de l'investissement ; effet sur le PIB = part du capital × capital en plus (moteur/offre.py). Emplois : 30 % de l'effet, pris sur le chômage."
   elasticite_capital_menages:
     valeur: {crise: 0.0, prudent: 0.1, median: 0.3, optimiste: 0.6}
     unite: sans_unite
@@ -748,3 +758,46 @@ offre:
     statut: HYPOTHESE
     source: "DG Trésor, Mésange (2017) : baisse des cotisations employeurs, 11 % de l'effet de long terme au bout d'un an, 40 % au bout de cinq ans, 60 % au bout de dix ans, soit un ajustement d'environ 10 % par an"
     note: "Part de l'écart à l'effet de long terme comblée chaque année (ajustement partiel), à partir de 2027."
+
+# Demande par instrument (6 novembre 2026) : le multiplicateur commun (macro.multiplicateur) vaut pour la dépense
+# publique ; chaque mesure y entre avec un poids selon ce qu'elle est (moteur/offre.poids_demande).
+demande:
+  poids:
+    valeur: {depense: 1.0, transferts_cibles: 0.8, retraites: 0.6, travail: 0.4, cout_travail: 0.4, consommation: 0.55, capital_entreprises: 0.3, capital_menages: 0.2, successions: 0.1, autre_recette: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Kilponen, Pisani, Schmidt et al., Comparing fiscal multipliers across models and countries in Europe (Banque nationale de Belgique, WP n° 278, 2015), multiplicateurs de première année dans les modèles de la zone euro : consommation publique 0,5 à 0,98 ; impôt sur le travail 0,04 à 0,51 ; impôt sur le capital 0,02 à 0,65 ; impôt sur la consommation 0,14 à 0,72. Coenen et al., Effects of Fiscal Stimulus in Structural Models (AEJ Macroeconomics, 2012) : transferts ciblés sur les ménages contraints proches de la dépense, transferts généraux plus faibles. Gechert (2015, méta-analyse) : multiplicateurs de dépense supérieurs à ceux des impôts"
+    note: "Poids relatifs à la dépense (milieu des fourchettes rapporté au milieu de la consommation publique). transferts_cibles : famille, logement, pauvreté, chômage, AAH ; retraites : pensions ; autre_recette : prélèvements sans instrument (ceux des rémunérations publiques, des pensions, du SMIC), qui suivent la dépense dont ils sont la contrepartie."
+
+# Emploi des seniors quand l'âge de la retraite change (6 novembre 2026)
+seniors:
+  devenir:
+    valeur: {crise: [0.45, 0.3], prudent: [0.5, 0.25], median: [0.55, 0.25], optimiste: [0.64, 0.28]}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Réforme de 2010, personnes dont le départ est retardé : 64 % en emploi, 28 % au chômage, 8 % inactifs (Koubi et Dubois, Insee, cité par Trésor-Éco n° 302, février 2022 ; borne optimiste) ; IPP, rapport n° 61 (novembre 2025) : environ la moitié en emploi, un quart au chômage indemnisé ; Rabaté et Rochut (Journal of Pension Economics and Finance, 2020) : 21 points d'emploi pour 48 points de retraités en moins (44 %, borne crise)"
+    note: "[part en emploi, part au chômage] ; le reste est inactif (maladie, invalidité, minima sociaux). Pour un report, le scénario ; pour un âge abaissé, le scénario miroir (moins d'emplois perdus n'est pas prudent)."
+  valeur_emploi:
+    valeur: 27000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : coût du travail moyen d'un salarié de 60 à 64 ans ≈ 60 000 € (Insee, profil des salaires par âge) ; prélèvements ≈ 45 % du coût (OpenFisca 2026, statu_quo.prelevements_activite)"
+  allocation_chomage:
+    valeur: 16000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : allocation moyenne d'un chômeur indemnisé de 60 ans et plus ≈ 1 350 € par mois (Unédic) ; IPP, rapport n° 61 (2025) : le surcoût pour l'assurance chômage dépasse les cotisations en plus"
+  cout_inactif:
+    valeur: 9000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : pension d'invalidité moyenne ≈ 1 000 € par mois, RSA ou ASS pour d'autres, aucun revenu public pour une partie ; Trésor-Éco n° 302 : +150 000 pensions d'invalidité de 2010 à 2017 après la réforme de 2010"
+  valeur_ajoutee_emploi:
+    valeur: 75000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : PIB par emploi ≈ 95 000 € (Insee 2025) ; seniors en fin de carrière, un peu moins productifs que la moyenne de leur coût"

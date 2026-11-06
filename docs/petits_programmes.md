@@ -9,9 +9,9 @@ python -m moteur.noyau bertrand      # (zemmour, arthaud)
 python -m pytest tests/test_petits_programmes.py
 ```
 
-> **Mise à jour du 6 novembre 2026 (soir)** : un canal d'offre commun (effet durable des impôts et des transferts sur
-> le PIB) est ajouté à tous les programmes du noyau : résultats et méthode dans `docs/offre.md`. Les tableaux
-> ci-dessous sont ceux d'avant ce canal.
+> **Mise à jour du 6 novembre 2026 (soir)** : demande par instrument, offre durable et emploi des seniors (effets sur
+> le PIB) sont ajoutés à tous les programmes du noyau : résultats et méthode dans `docs/offre.md`. Les tableaux
+> ci-dessous sont ceux d'avant ces effets.
 
 ## Ce qui est nouveau dans le code
 

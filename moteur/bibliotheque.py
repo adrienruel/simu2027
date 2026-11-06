@@ -23,13 +23,21 @@ from .parametres import Parametres
 # ---------------------------------------------------------------------------------------------------- retraites
 def report_age_legal(p: Parametres, s: str, age_cible: float, premiere_generation: int,
                      pas_par_generation: float) -> dict[int, float]:
-    """Pensions en moins (Md€ de 2026, > 0 = économie) quand l'âge légal passe de 64 ans à age_cible.
+    """Pensions en moins (Md€ de 2026, > 0 = économie) quand l'âge légal passe de 64 ans à age_cible (voir
+    report_age_legal_detail)."""
+    return report_age_legal_detail(p, s, age_cible, premiere_generation, pas_par_generation)["pensions"]
+
+
+def report_age_legal_detail(p: Parametres, s: str, age_cible: float, premiere_generation: int,
+                            pas_par_generation: float) -> dict:
+    """Pensions en moins (Md€ de 2026, > 0 = économie) et personnes pas encore retraitées en plus, quand l'âge légal
+    passe de 64 ans à age_cible.
 
     Génération g : report = min(age_cible − 64, (g − premiere_generation + 1) × pas_par_generation) ; la part partie à
     chaque âge suit le profil commun décalé de ce report au-delà de 64 ans (ancien_systeme._part). Même calcul que
     statu_quo.retraites (survivants de l'Insee, pension liquidée sur le salaire de quinze ans plus tôt, érosion), même
-    coefficient de calage. Ce qu'un départ repoussé change à l'emploi des seniors n'est pas compté (taux d'emploi par
-    âge figés, limite commune au statu quo et aux programmes) : l'économie est prudente côté recettes."""
+    coefficient de calage. Les personnes pas encore retraitées sont réparties entre emploi, chômage et inactivité par
+    offre.seniors."""
     from .ancien_systeme import _part, _part_age
     from .demographie import AGE_MAX
     r = _part_age(p)
@@ -49,22 +57,23 @@ def report_age_legal(p: Parametres, s: str, age_cible: float, premiere_generatio
     def report(g: int) -> float:
         return min(ecart, max(0.0, (g - premiere_generation + 1) * pas_par_generation))
 
-    def brut(avec: bool) -> dict[int, float]:
-        out = {}
+    def brut(avec: bool) -> tuple[dict[int, float], dict[int, float]]:
+        dep_t, ret_t = {}, {}
         for t in ANNEES:
-            dep = 0.0
+            dep = ret = 0.0
             for a in range(50, AGE_MAX + 1):
                 n, g = pop[t][a], t - a
                 rep = report(g) if avec else 0.0
+                ret += n * _part(r, a, rep, actuel)
                 for b in range(50, a + 1):
                     d = _part(r, b, rep, actuel) - _part(r, b - 1, rep, actuel)
                     if d > 0:
                         dep += n * d * niveau(g + b)
-            out[t] = dep
-        return out
-    b0, b1 = brut(False), brut(True)
+            dep_t[t], ret_t[t] = dep, ret
+        return dep_t, ret_t
+    (b0, n0), (b1, n1) = brut(False), brut(True)
     k = sq.retraites(p, s)[2029]["depenses"] / b0[2029]
-    return {t: k * (b0[t] - b1[t]) for t in ANNEES}
+    return {"pensions": {t: k * (b0[t] - b1[t]) for t in ANNEES}, "non_retraites": {t: n0[t] - n1[t] for t in ANNEES}}
 
 
 # ---------------------------------------------------------------------------------------------------- salaires

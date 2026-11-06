@@ -142,6 +142,17 @@ class Tondelier:
         b64, b62 = brut(False), brut(True)
         ref = sq.retraites(p, s)
         k = ref[2029]["depenses"] / b64[2029]
+        # retraités en plus (personnes pas encore retraitées en moins), pour l'emploi des seniors (offre.seniors) :
+        # part partie à chaque âge, cumulée sur la carrière de la génération, comme dans brut()
+        def retraites_age(avec_62: bool, t: int, a: int) -> float:
+            g = t - a
+            def R(bb):
+                return r62[bb] if (avec_62 and g + bb >= retour) else r64[bb]
+            return sum(max(0.0, R(b) - R(b - 1)) for b in range(50, a + 1))
+        self._non_retraites = getattr(self, "_non_retraites", {})
+        self._non_retraites[(id(p), s)] = {
+            t: sum(pop[t][a] * (retraites_age(False, t, a) - retraites_age(True, t, a)) for a in range(50, AGE_MAX + 1))
+            for t in ANNEES}
         return {t: k * (b62[t] - b64[t]) for t in ANNEES}
 
     def smic(self, p: Parametres) -> dict[str, float]:
@@ -293,7 +304,7 @@ class Tondelier:
                 x["_montant"] = x["montant"][s]
                 serie = self._serie(x, idx)
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=nom.split(".")[1],
-                                    instrument=x.get("instrument", "")))
+                                    instrument=x.get("instrument", ""), incidence=x.get("incidence", "")))
                 if x.get("fp"):
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
                                         {t: part_fp * v for t, v in serie.items()}, nature="mesure", note=nom.split(".")[1]))
@@ -345,11 +356,8 @@ class Tondelier:
             liste.append(Mesure(f"PRE-01 — SMIC à 2 000 € : emplois perdus ({emplois/1e3:.0f} 000)", "recettes", pe, nature="effet_macro"))
             # effet macroéconomique : impulsion budgétaire nette
             annees = (*ANNEES_AVANT, *ANNEES)
-            cout_net = {t: 0.0 for t in annees}
-            for m in liste:
-                for t in annees:
-                    v = m.valeurs.get(t, 0.0)
-                    cout_net[t] += -v if m.poste == "recettes" else (0.0 if m.poste == "participations" else v)
+            # chaque mesure pondérée selon ce qu'elle est (demande par instrument, moteur/offre.poids_demande)
+            cout_net = offre.impulsion(p, liste, annees)
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
             mult, duree = sq._v(p, "macro.multiplicateur", s), sq._v(p, "macro.annees_effet_ajustement", s)
@@ -394,16 +402,25 @@ class Tondelier:
                 details_offre = of["detail"]
             else:
                 details_offre = {}
+            # emploi des seniors : retour à 62 ans, moins de personnes en emploi et au chômage (offre.seniors, scénario
+            # miroir : un âge abaissé fait perdre des emplois)
+            sen = offre.seniors(p, s, self._non_retraites[(id(p), s)], baisse_age=True)
+            liste.extend(sen["mesures"])
+            for t in ANNEES:
+                pib[t] += sen["pib"][t]
+                act = e[t]["emploi"] + e[t]["chomeurs"] + em["actifs"][t] + actifs_offre[t]
+                chom[t] = (chom[t] / 100 * act + sen["chomeurs"][t]) / (act + sen["actifs"][t]) * 100
             # dette de fin 2028 : mesures de 2027 et 2028 (recettes et dépenses), effet macro compris
             avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
             perdus = {t: emplois * min(1.0, (t - 2026) / 3) for t in ANNEES}
             ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
                         "emploi": {t: e[t]["emploi"] - perdus[t] + conj[t] + sum(em["canaux"][t].values())
-                                   + sum(v[t] for v in canaux_offre.values()) for t in ANNEES},
+                                   + sum(v[t] for v in canaux_offre.values()) + sen["emplois"][t] for t in ANNEES},
                         "emplois_canaux": {t: {"SMIC à 2 000 € : emplois perdus": -perdus[t],
                                                "Conjoncture (impulsion budgétaire)": conj[t], **em["canaux"][t],
-                                               **{c: v[t] for c, v in canaux_offre.items()}} for t in ANNEES}}
+                                               **{c: v[t] for c, v in canaux_offre.items()},
+                                               "Seniors : emploi (âge de la retraite)": sen["emplois"][t]} for t in ANNEES}}
             liste.extend(self.ecologie(p, s))
             mes_s[s] = liste
             details[s] = {"emplois_perdus_smic": emplois, "avant_2029": avant, "dpib": dpib, "offre": details_offre}

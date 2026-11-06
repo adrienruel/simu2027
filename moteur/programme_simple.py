@@ -84,7 +84,9 @@ class ProgrammeSimple:
     def mesures_calculees(self, p: Parametres, s: str, idx: dict) -> tuple[list[Mesure], dict[str, dict[int, float]]]:
         """Mesures de la bibliothèque (montants) et emplois qu'elles changent ({canal: {année: emplois}}), hors
         effets budgétaires de ces emplois, ajoutés par la classe au prix emploi.valeur_emploi (sauf canal dont le nom
-        commence par « * » : effet budgétaire déjà compté par la mesure)."""
+        commence par « * » : effet budgétaire déjà compté par la mesure). Un programme qui change l'âge de la retraite
+        range les personnes pas encore retraitées en plus dans self.non_retraites[(id(p), s)] = {"serie": {année:
+        personnes}, "baisse": bool} : la classe en tire l'emploi des seniors (offre.seniors)."""
         return [], {}
 
     # ------------------------------------------------------------------ assemblage
@@ -110,7 +112,7 @@ class ProgrammeSimple:
                 serie = self.serie(x, idx)
                 court = nom.split(".")[1]
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
-                                    instrument=x.get("instrument", "")))
+                                    instrument=x.get("instrument", ""), incidence=x.get("incidence", "")))
                 if x.get("fp"):
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
                                         {t: part_fp * v for t, v in serie.items()}, note=court))
@@ -142,12 +144,9 @@ class ProgrammeSimple:
                 if not canal.startswith("*"):
                     liste.append(Mesure(f"Emploi : {canal}", "recettes",
                                         {t: serie.get(t, 0.0) * valeur * idx["pib"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
-            # effet macroéconomique : impulsion budgétaire nette
-            cout_net = {t: 0.0 for t in TOUTES}
-            for m in liste:
-                for t in TOUTES:
-                    v = m.valeurs.get(t, 0.0)
-                    cout_net[t] += -v if m.poste == "recettes" else (0.0 if m.poste == "participations" else v)
+            # effet macroéconomique : impulsion budgétaire nette, chaque mesure pondérée selon ce qu'elle est (demande
+            # par instrument, moteur/offre.poids_demande : 1 pour la dépense publique)
+            cout_net = offre.impulsion(p, liste, TOUTES)
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
             mult, duree = sq._v(p, "macro.multiplicateur", s), sq._v(p, "macro.annees_effet_ajustement", s)
@@ -181,13 +180,23 @@ class ProgrammeSimple:
                 details_offre = of["detail"]
             else:
                 details_offre = {}
+            # emploi des seniors quand l'âge de la retraite change (offre.seniors) : emplois, chômeurs, inactifs
+            d_seniors = {t: 0.0 for t in ANNEES}
+            nr = getattr(self, "non_retraites", {}).get((id(p), s))
+            if nr is not None:
+                sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"])
+                liste.extend(sen["mesures"])
+                d_seniors = sen["pib"]
+                for t in ANNEES:
+                    canaux[t]["Seniors : emploi (âge de la retraite)"] = sen["emplois"][t]
+                    actifs[t] += sen["actifs"][t]
             # PIB : multiplicateur, offre, et valeur ajoutée des emplois en plus ou en moins hors conjoncture et offre
             # (les postes publics sont déjà dans le PIB par leur dépense et le multiplicateur)
             va = self.v("emploi.valeur_ajoutee_emploi")
             hors_conj = {t: sum(v for c, v in canaux[t].items()
-                                if not c.startswith(("Conjoncture", "Postes publics", "Offre")))
+                                if not c.startswith(("Conjoncture", "Postes publics", "Offre", "Seniors")))
                          for t in ANNEES}
-            pib = {t: y[t] + dpib[t] + d_offre[t] + hors_conj[t] * va * idx["pib"][t] / 1e9 for t in ANNEES}
+            pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + hors_conj[t] * va * idx["pib"][t] / 1e9 for t in ANNEES}
             demploi = {t: sum(canaux[t].values()) for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
                     for t in ANNEES}
