@@ -2,7 +2,7 @@
 #
 # Programme partiel : tract « L'avenir est à nous » (octobre 2026), tracts thématiques, pétitions, entretiens. Fiche :
 # programmes/zemmour/mesures.yaml. Règle : aucune économie ni recette annoncée n'est saisie (plan de 80 Md€, baisse de
-# 100 Md€ par an, 140 Md€ de budget2027.fr : comparaison seulement) ; chaque ligne identifiée est estimée en quatre
+# 100 Md€ par an, 140 Md€ du plan Knafo de budget2027.fr : comparaison seulement) ; chaque ligne est estimée en quatre
 # scénarios. Format des mesures : moteur/programme_simple.py.
 
 zemmour_emploi:
@@ -151,12 +151,12 @@ zemmour_mesures:
     note: "Économie annoncée par le parti : 8 Md€, NON SAISIE. Effet sur les émissions et sur le prix de l'électricité non chiffré dans cette passe."
   subventions:
     valeur: {id: ZEM-ECO-02, libelle: "Subventions aux syndicats, à la presse et à des associations supprimées", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
-             montant: {crise: -0.5, prudent: -0.8, median: -1.5, optimiste: -2.5}}
+             montant: {crise: -0.4, prudent: -0.6, median: -1.0, optimiste: -1.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : aides à la presse ≈ 0,3 Md€ (directes), financement des organisations syndicales (AGFPN) ≈ 0,15 Md€, subventions de l'État aux associations ≈ 7 Md€ (jaune budgétaire), dont la part « politisée » n'est pas définie"
-    note: "Économie annoncée par le parti : 16 Md€, NON SAISIE."
+    source: "Encadrement : aides à la presse ≈ 0,2 à 0,3 Md€ (directes), financement des organisations syndicales (AGFPN) ≈ 0,15 Md€, subventions de l'État aux associations ≈ 7 Md€ (jaune budgétaire), dont la part « politisée » n'est pas définie"
+    note: "Annonces NON SAISIES : 16 Md€ (tract de novembre 2025) ; plan Knafo (ZEM-KNA-22 à 24) : associations 1 à 2 Md€, presse 0,2, syndicats 0,1."
   politique_ville:
     valeur: {id: ZEM-SP-02, libelle: "Fin du soutien public à la politique de la Ville", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -0.7, prudent: -1.0, median: -1.5, optimiste: -2.5}}
@@ -165,14 +165,6 @@ zemmour_mesures:
     statut: HYPOTHESE
     source: "Encadrement : programme 147 Politique de la ville ≈ 0,6 Md€, État dans l'ANRU ≈ 0,3 Md€ ; le document de politique transversale (≈ 10 Md€) compte des dépenses de droit commun (écoles, police) qui ne disparaissent pas"
     note: "Économie annoncée par le parti : 8 Md€, NON SAISIE."
-  agences:
-    valeur: {id: ZEM-SP-01, libelle: "Suppression des ARS, de l'Ademe, de l'ANAH, du CESE, de l'Arcom et de France Travail", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
-             montant: {crise: -0.5, prudent: -1.0, median: -2.0, optimiste: -3.5}}
-    unite: md_eur
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Encadrement : fonctionnement de ces organismes ≈ 9 Md€ (France Travail ≈ 6, ARS ≈ 1, Ademe et ANAH ≈ 1, CESE et Arcom ≈ 0,1) ; leurs missions (indemnisation, placement, contrôle sanitaire, aides à la rénovation) passent à d'autres services : économie de fonctionnement 10 à 20 % (fusions passées, Cour des comptes)"
-    note: "Économie annoncée par le parti : 8 à 12 Md€, NON SAISIE. Les aides versées (MaPrimeRénov', fonds chaleur) sont supposées gardées."
   audiovisuel:
     valeur: {id: ZEM-CUL-01, libelle: "Privatisation de l'audiovisuel public", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
              montant: {crise: -2.0, prudent: -2.5, median: -3.0, optimiste: -3.5}}
@@ -181,6 +173,130 @@ zemmour_mesures:
     statut: HYPOTHESE
     source: "Encadrement : dotations à l'audiovisuel public ≈ 3,8 Md€ (LFI 2026) ; Arte (traité franco-allemand) et l'audiovisuel extérieur restent ; coûts de transition (plans sociaux)"
     note: "Économie annoncée par le parti : 4 Md€, NON SAISIE. Produit de cession (une fois, hors solde) non compté."
+
+  # ---------------------------------------------------------------- plan de Sarah Knafo (budget2027.fr, 24 mesures, « 140 Md€ par an au minimum »)
+  # Chaque mesure est reprise avec ses paramètres (nombre de postes, durée du RSA…) ; aucun montant annoncé n'est saisi
+  # (le plan ne cite qu'une source, pour l'IA). Les lignes déjà au programme (préférence nationale, renouvelables,
+  # politique de la Ville, aide au développement, AME, audiovisuel, subventions) sont gardées plus haut.
+  non_remplacement_etat:
+    valeur: {id: ZEM-KNA-01, libelle: "Départs administratifs non remplacés (État)", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -8.25, prudent: -11.0, median: -15.1, optimiste: -19.25}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo (budget2027.fr) : 800 000 des 2,3 millions de départs du quinquennat non remplacés (40 Md€ annoncés, NON SAISIS). Encadrement de la réalisation : RGPP 2007-2012 ≈ 150 000 postes de l'État en cinq ans (Cour des comptes, 2012) ; l'État ne décide pas des effectifs des collectivités ni des hôpitaux. Réalisé : 300 000 (crise), 400 000 (prudent), 550 000 (médian), 700 000 (optimiste) postes, au coût d'un recrutement évité (55 000 €), moitié État"
+    note: "Les trois lignes ZEM-KNA-01 portent la même mesure, partagée entre versants : État 50 %, collectivités 40 % (par la baisse des dotations, hypothèse), hôpitaux 10 % (administratifs seulement, les 40 000 soignants de ZEM-SAN-02 sont recrutés à part). 57 % de la masse revient en prélèvements (fp). Qualité du service non modélisée."
+  non_remplacement_collectivites:
+    valeur: {id: ZEM-KNA-01, libelle: "Départs administratifs non remplacés (collectivités)", poste: collectivites, moteur: "bloc:collectivites", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -6.6, prudent: -8.8, median: -12.1, optimiste: -15.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Voir non_remplacement_etat"
+  non_remplacement_hopitaux:
+    valeur: {id: ZEM-KNA-01, libelle: "Départs administratifs non remplacés (hôpitaux)", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -1.65, prudent: -2.2, median: -3.0, optimiste: -3.85}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Voir non_remplacement_etat"
+  ia_administration:
+    valeur: {id: ZEM-KNA-02, libelle: "Gains de productivité de l'IA dans les administrations", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2029, plein: 2032,
+             montant: {crise: 0.0, prudent: 0.0, median: -1.0, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 5 Md€, d'après un rapport IGF-IGAS de 2025 (une seule source : règle du 05/11/2026, une économie doit être recoupée)"
+    note: "Prudent à zéro : l'IA est le moyen du non-remplacement (ZEM-KNA-01), compter les deux ferait un double compte ; médian et optimiste : gains en plus sur les dépenses de fonctionnement."
+  rsa_trois_ans:
+    valeur: {id: ZEM-KNA-04, libelle: "RSA limité à trois ans pour les bénéficiaires aptes au travail", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2031,
+             montant: {crise: -1.0, prudent: -1.5, median: -2.2, optimiste: -3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 4,8 Md€ annoncés, NON SAISIS. Encadrement : allocation du RSA ≈ 12 Md€ ; ≈ 45 % des allocataires au RSA depuis plus de trois ans, dont ≈ 60 % sans frein reconnu (DREES, minima sociaux 2024) : ≈ 3 Md€ en statique, avant les étrangers déjà exclus (ZEM-IMM-04) ; exigence constitutionnelle de moyens convenables d'existence (Préambule de 1946, al. 11)"
+    note: "Montée sur trois ans (les premières sorties en 2031). Retours à l'emploi non comptés (prudent) ; report d'une partie des sortants vers l'hébergement et l'aide sociale des départements non compté non plus."
+  fraude:
+    valeur: {id: ZEM-KNA-05, libelle: "Lutte contre la fraude sociale, aides retirées aux condamnés", poste: autres, moteur: "bloc:autres", debut: 2028, plein: 2030,
+             montant: {crise: -0.3, prudent: -0.5, median: -1.0, optimiste: -1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 2 à 3 Md€ annoncés, NON SAISIS. Encadrement : fraude sociale détectée ≈ 2,9 Md€ en 2024 (CNAF, CNAM, CNAV, Urssaf), dont une partie seulement recouvrée ; plans de lutte successifs ≈ 0,3 à 0,5 Md€ de rendement en plus (Cour des comptes)"
+  anah:
+    valeur: {id: ZEM-KNA-08, libelle: "Suppression de l'Anah et de ses aides (MaPrimeRénov')", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -2.5, prudent: -3.0, median: -3.5, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 6 Md€ annoncés, NON SAISIS. Encadrement : paiements de l'Anah ≈ 3,5 à 4 Md€ par an (MaPrimeRénov', Habiter mieux, copropriétés ; LFI 2026, budget en baisse) ; dossiers engagés à payer"
+    note: "Remplace la suppression de l'agence comptée en frais de fonctionnement : le plan supprime aussi les aides. Effet sur les émissions des bâtiments non chiffré dans cette passe."
+  ademe:
+    valeur: {id: ZEM-KNA-09, libelle: "Suppression de l'Ademe (hors soutien aux renouvelables)", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -1.0, prudent: -1.5, median: -2.0, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 3,4 Md€ annoncés, NON SAISIS. Encadrement : budget de l'Ademe ≈ 4 Md€ (fonds chaleur ≈ 0,8, déjà dans ZEM-ENE-02 ; économie circulaire, décarbonation de l'industrie, études) ; engagements pluriannuels à honorer"
+  france_travail:
+    valeur: {id: ZEM-KNA-10, libelle: "Fin de la mise en relation de l'offre et de la demande d'emploi par France Travail", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -1.5, prudent: -2.0, median: -2.5, optimiste: -3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 4 Md€ annoncés, NON SAISIS. Encadrement : France Travail ≈ 7 Md€ (≈ 54 000 agents), financé par l'État et l'Unédic ; l'indemnisation, le contrôle et le RSA rénové restent"
+    note: "Effet sur le chômage (accompagnement en moins) non compté : les évaluations de l'accompagnement renforcé trouvent des effets faibles et de court terme (Dares)."
+  ars:
+    valeur: {id: ZEM-KNA-11, libelle: "Suppression des agences régionales de santé (missions reprises par l'État)", poste: sante, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -0.2, prudent: -0.3, median: -0.5, optimiste: -0.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 1 Md€ annoncé, NON SAISI. Encadrement : fonctionnement des ARS ≈ 1 Md€ (≈ 8 700 agents) ; contrôle sanitaire, autorisations et veille repris par les préfectures : 20 à 70 % d'économie"
+  autres_agences:
+    valeur: {id: ZEM-KNA-12, libelle: "Suppression d'agences (Arcom, Conseil national du bruit, Haut Conseil à l'égalité…) et du CESE", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.25, prudent: -0.35, median: -0.55, optimiste: -0.75}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 1 Md€ (agences) et 0,066 Md€ (CESE et Ceser) annoncés, NON SAISIS. Encadrement : Arcom ≈ 0,05 Md€, CESE ≈ 0,045 Md€ ; la liste « et d'autres » n'est pas close"
+  budget_ue:
+    valeur: {id: ZEM-KNA-15, libelle: "Contribution au budget européen ramenée au niveau d'avant le Covid", poste: defense_ue, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.0, prudent: -1.0, median: -2.0, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 14 Md€ annoncés, NON SAISIS. Encadrement : contribution française ≈ 23 Md€ (PLF 2027), ≈ 21 Md€ en 2019 ; le cadre financier 2028-2034 se décide à l'unanimité et le remboursement du plan de relance commence en 2028 : une baisse unilatérale serait contraire aux traités"
+    note: "Économie qui dépend de 26 autres États : zéro en crise, faible en prudent."
+  etudiants_etrangers:
+    valeur: {id: ZEM-KNA-16, libelle: "Fin de la gratuité des études pour les étudiants étrangers", poste: etat_missions, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: -0.5, prudent: -0.8, median: -1.2, optimiste: -1.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 4 Md€ annoncés, NON SAISIS. Encadrement : ≈ 430 000 étudiants étrangers, dont ≈ 30 % européens (égalité de traitement du droit de l'Union) ; coût moyen d'un étudiant ≈ 11 500 € (MESR) ; droits différenciés déjà en place depuis 2019 avec de nombreuses exonérations ; baisse forte des inscriptions"
+    note: "Recettes de droits ou étudiants en moins : compté comme dépense en moins. Effets sur l'emploi qualifié futur non comptés."
+  visas:
+    valeur: {id: ZEM-KNA-18, libelle: "Hausse du coût des visas et des titres de séjour", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.05, prudent: 0.1, median: 0.2, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 0,7 Md€ annoncés, NON SAISIS. Encadrement : le prix du visa Schengen est fixé par le règlement européen (90 €) ; la marge nationale porte sur les taxes des titres de séjour (≈ 0,2 à 0,3 Md€ aujourd'hui) ; moins d'entrées avec ZEM-IMM-01"
+  hebergement_urgence:
+    valeur: {id: ZEM-KNA-19, libelle: "Hébergement d'urgence fermé aux étrangers en situation irrégulière", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.3, prudent: -0.4, median: -0.6, optimiste: -0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 0,7 Md€ annoncés, NON SAISIS. Encadrement : programme 177 ≈ 3 Md€ ; personnes sans titre de séjour : jusqu'à la moitié des places en Île-de-France (Samusocial, Fondation pour le logement) ; principe d'inconditionnalité de l'accueil (CASF, art. L. 345-2-2) à modifier, contentieux"
+  aide_juridictionnelle:
+    valeur: {id: ZEM-KNA-20, libelle: "Aide juridictionnelle réservée aux Français", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.03, prudent: -0.05, median: -0.08, optimiste: -0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Plan Knafo : 0,1 Md€ annoncé, NON SAISI. Encadrement : aide juridictionnelle ≈ 0,7 Md€ ; le droit à un recours effectif (CEDH, art. 6 et 13) limite l'exclusion"
 
   # ---------------------------------------------------------------- dépenses nouvelles
   medecins:

@@ -11,6 +11,7 @@ programme:
   url: https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf
   liste: https://programmes-2027.fr/candidats/zemmour/
   date_lecture: 2026-11-06
+  plan_knafo: "Plan de Sarah Knafo, « 140 Md€ d'économies par an au minimum », 24 mesures (https://www.budget2027.fr/, lu le 06/11/2026), présenté par Reconquête comme la matière première du programme : une seule source de chiffrage citée (IA, rapport IGF-IGAS 2025)"
   annonces_non_saisies: "baisse de 100 Md€ par an des dépenses de l'État (CNews, 19/05/2026) ; plan de 80 Md€ d'économies urgentes (tract, 13/11/2025) ; 140 Md€ par an (budget2027.fr, S. Knafo, 24/09/2026) ; montants par ligne (15 Md€ APD, 8 Md€ renouvelables, 16 Md€ subventions, 8 Md€ politique de la Ville, 8 à 12 Md€ agences, 4 Md€ audiovisuel, 15 à 20 Md€ préférence nationale)"
 
 mesures:
@@ -53,6 +54,33 @@ mesures:
   - {id: ZEM-NUM-02, intitule: "Former à l'IA dès l'école", source: "https://www.cnews.fr/france/2026-09-13/presidentielle-2027-remigration-intelligence-artificielle-ce-quil-faut-retenir-du", date: 2026-09-13, traitement: estime, cle: ia}
   - {id: ZEM-NUM-03, intitule: "Robotisation pour réduire l'immigration de travail", source: "https://www.cnews.fr/france/2026-09-18/des-robots-la-place-des-immigres-la-proposition-choc-deric-zemmour-pour-reduire", date: 2026-09-18, traitement: non_chiffre}
   - {id: ZEM-CUL-01, intitule: "Privatiser l'audiovisuel public", source: "https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf#page=2", date: 2026-10-06, traitement: estime, cle: audiovisuel}
-  - {id: ZEM-SP-01, intitule: "Supprimer ARS, Ademe, ANAH, CESE, Arcom, France Travail", source: "https://assets.ericzemmour.fr/ressources/tracts/verite-pouvoir-achat.pdf#page=2", date: 2025-11-13, traitement: estime, cle: agences}
+  - {id: ZEM-SP-01, intitule: "Supprimer ARS, Ademe, ANAH, CESE, Arcom, France Travail", source: "https://assets.ericzemmour.fr/ressources/tracts/verite-pouvoir-achat.pdf#page=2", date: 2025-11-13, traitement: estime, cle: "ars, ademe, anah, france_travail, autres_agences (détail du plan Knafo, ZEM-KNA-08 à 13)"}
   - {id: ZEM-SP-02, intitule: "Supprimer le soutien à la politique de la Ville", source: "https://assets.ericzemmour.fr/ressources/tracts/verite-pouvoir-achat.pdf#page=2", date: 2025-11-13, traitement: estime, cle: politique_ville}
   - {id: ZEM-FAM-01, intitule: "Interdire le voile dans l'espace public", source: "https://www.lejdd.fr/politique/interdiction-du-voile-dans-lespace-public-eric-zemmour-abonde-dans-le-sens-du-rn-182307", date: 2026-09-01, traitement: sans_effet}
+
+  # ------------------------------------------------------------------ plan de Sarah Knafo (budget2027.fr), 24 mesures
+  # Montant annoncé entre crochets, NON SAISI. Les mesures qui recoupent une ligne déjà au programme y renvoient.
+  - {id: ZEM-KNA-01, intitule: "800 000 départs administratifs non remplacés sur le quinquennat [40 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "non_remplacement_etat, non_remplacement_collectivites, non_remplacement_hopitaux", note: "300 000 à 700 000 postes réalisés selon le scénario (400 000 en prudent)."}
+  - {id: ZEM-KNA-02, intitule: "Gains de productivité de l'IA dans les administrations [5 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: ia_administration}
+  - {id: ZEM-KNA-03, intitule: "Prestations non contributives réservées aux Français [15 à 20 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "preference_famille, preference_logement, preference_pauvrete (ZEM-IMM-04)"}
+  - {id: ZEM-KNA-04, intitule: "RSA limité à trois ans pour les aptes au travail [4,8 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: rsa_trois_ans}
+  - {id: ZEM-KNA-05, intitule: "Fraude sociale, aides retirées aux délinquants et criminels [2 à 3 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: fraude}
+  - {id: ZEM-KNA-06, intitule: "Fin du soutien aux renouvelables intermittents [8 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "energies_renouvelables (ZEM-ENE-02)"}
+  - {id: ZEM-KNA-07, intitule: "Fin de la politique de la Ville [8 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "politique_ville (ZEM-SP-02)"}
+  - {id: ZEM-KNA-08, intitule: "Suppression de l'Anah [6 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: anah}
+  - {id: ZEM-KNA-09, intitule: "Suppression de l'Ademe hors renouvelables [3,4 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: ademe}
+  - {id: ZEM-KNA-10, intitule: "Fin de la mise en relation offre/demande de France Travail [4 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: france_travail}
+  - {id: ZEM-KNA-11, intitule: "Suppression des ARS [1 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: ars}
+  - {id: ZEM-KNA-12, intitule: "Suppression d'autres agences (Arcom, Conseil national du bruit, Haut Conseil à l'égalité…) [1 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: autres_agences}
+  - {id: ZEM-KNA-13, intitule: "Suppression du CESE et des Ceser [0,066 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: autres_agences}
+  - {id: ZEM-KNA-14, intitule: "Suppression de l'aide publique au développement et de l'AFD [14 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "aide_developpement (ZEM-INT-02)", note: "Les prêts de l'AFD sont hors solde."}
+  - {id: ZEM-KNA-15, intitule: "Budget européen ramené au niveau d'avant le Covid [14 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: budget_ue}
+  - {id: ZEM-KNA-16, intitule: "Fin de la gratuité des études pour les étudiants étrangers [4 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: etudiants_etrangers}
+  - {id: ZEM-KNA-17, intitule: "Fin de l'aide médicale d'État [1,3 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "ame (ZEM-IMM-04)"}
+  - {id: ZEM-KNA-18, intitule: "Hausse du coût des visas [0,7 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: visas}
+  - {id: ZEM-KNA-19, intitule: "Hébergement d'urgence fermé aux étrangers en situation irrégulière [0,7 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: hebergement_urgence}
+  - {id: ZEM-KNA-20, intitule: "Aide juridictionnelle réservée aux Français [0,1 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: aide_juridictionnelle}
+  - {id: ZEM-KNA-21, intitule: "Privatisation de l'audiovisuel public [4 Md€ et cessions]", source: "https://www.budget2027.fr/", traitement: estime, cle: "audiovisuel (ZEM-CUL-01)", note: "Cessions : une fois, hors solde."}
+  - {id: ZEM-KNA-22, intitule: "Subventions aux associations « politisées » supprimées [1 à 2 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "subventions (ZEM-ECO-02)"}
+  - {id: ZEM-KNA-23, intitule: "Subventions à la presse supprimées [0,2 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "subventions (ZEM-ECO-02)"}
+  - {id: ZEM-KNA-24, intitule: "Subventions aux syndicats supprimées [0,1 Md€]", source: "https://www.budget2027.fr/", traitement: estime, cle: "subventions (ZEM-ECO-02)"}

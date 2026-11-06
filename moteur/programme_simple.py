@@ -98,7 +98,8 @@ class ProgrammeSimple:
             idx = self.indices(p, s)
             w = sq.salaires(p, s)
             liste: list[Mesure] = []
-            postes = {t: 0.0 for t in ANNEES}
+            crees = {t: 0.0 for t in ANNEES}
+            supprimes = {t: 0.0 for t in ANNEES}
             cout_poste = self.v("emploi.cout_poste_public")
             for nom, par in self.pt._p.items():
                 if not nom.startswith(prefixe):
@@ -112,24 +113,27 @@ class ProgrammeSimple:
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
                                         {t: part_fp * v for t, v in serie.items()}, note=court))
                 if x.get("postes"):
+                    cible = crees if x["_montant"] >= 0 else supprimes
                     for t in ANNEES:
-                        postes[t] += serie[t] * 1e9 / (x.get("cout_poste", cout_poste) * w[t] / w[2029])
+                        cible[t] += serie[t] * 1e9 / (x.get("cout_poste", cout_poste) * w[t] / w[2029])
             calc, canaux_calc = self.mesures_calculees(p, s, idx)
             liste.extend(calc)
             # emplois : postes publics, éviction, canaux des mesures calculées
-            # éviction : prise au scénario du même côté de la prudence. Créer des postes publics : l'éviction forte est
-            # prudente ; en supprimer : c'est la reprise faible par le privé qui l'est (scénario miroir)
+            # éviction : prise au scénario du même côté de la prudence, pour chaque sens. Créer des postes publics :
+            # l'éviction forte est prudente ; en supprimer : c'est la reprise faible par le privé qui l'est (scénario miroir)
             miroir = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
-            net_postes = sum(postes.values())
-            ev = sq._v(p, "emploi_public.eviction_privee", s if net_postes >= 0 else miroir[s])
+            ev_c = sq._v(p, "emploi_public.eviction_privee", s)
+            ev_s = sq._v(p, "emploi_public.eviction_privee", miroir[s])
             valeur = self.v("emploi.valeur_emploi")
             canaux = {t: {} for t in ANNEES}
+            postes = {t: crees[t] + supprimes[t] for t in ANNEES}
+            evince = {t: -(ev_c * crees[t] + ev_s * supprimes[t]) for t in ANNEES}
             if any(postes.values()):
                 for t in ANNEES:
                     canaux[t]["Postes publics créés ou supprimés"] = postes[t]
-                    canaux[t]["Éviction d'emplois privés par les postes publics"] = -ev * postes[t]
+                    canaux[t]["Éviction d'emplois privés par les postes publics"] = evince[t]
                 liste.append(Mesure("Emploi : emplois privés évincés (ou libérés) par les postes publics", "recettes",
-                                    {t: -ev * postes[t] * valeur * idx["pib"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
+                                    {t: evince[t] * valeur * idx["pib"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
             for canal, serie in canaux_calc.items():
                 for t in ANNEES:
                     canaux[t][canal.lstrip("*")] = serie.get(t, 0.0)

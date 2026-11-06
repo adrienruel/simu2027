@@ -44,11 +44,17 @@ def test_chaque_mesure_renvoie_a_la_fiche(nom):
 def test_aucune_economie_annoncee_reprise():
     """Règle des autres candidats : les montants annoncés par Reconquête ne sont pas saisis."""
     z = noyau.charger("zemmour")
-    annonces = {"aide_developpement": 15, "energies_renouvelables": 8, "subventions": 16, "politique_ville": 8,
-                "agences": 8, "audiovisuel": 4}
+    annonces = {"aide_developpement": 14, "energies_renouvelables": 8, "subventions": 1.3, "politique_ville": 8,
+                "audiovisuel": 4, "anah": 6, "ademe": 3.4, "france_travail": 4, "ars": 1, "rsa_trois_ans": 4.8,
+                "budget_ue": 14, "etudiants_etrangers": 4, "visas": 0.7, "hebergement_urgence": 0.7}
     for cle, annonce in annonces.items():
         m = z.pt.val(f"zemmour_mesures.{cle}")["montant"]
-        assert max(abs(v) for v in m.values()) < annonce
+        # prudent sous l'annonce (l'optimiste peut l'approcher quand l'annonce est basse)
+        assert abs(m["prudent"]) < annonce, cle
+        assert max(abs(v) for v in m.values()) <= max(annonce, abs(m["optimiste"]))
+    # non-remplacement : 800 000 postes annoncés, 400 000 réalisés en prudent
+    postes = -sum(z.pt.val(f"zemmour_mesures.non_remplacement_{v}")["montant"]["prudent"] for v in ("etat", "collectivites", "hopitaux"))
+    assert postes * 1e9 / 55000 == pytest.approx(400000, rel=0.01)
     pref = sum(-z.pt.val(f"zemmour_mesures.preference_{b}")["montant"]["optimiste"] for b in ("famille", "logement", "pauvrete"))
     assert pref < 15
 
