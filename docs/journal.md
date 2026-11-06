@@ -666,3 +666,13 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
   docs/ecologie.md). Écologie de droite, prudent : prix du carbone −24 Mt en 2037 (au lieu d'environ −49), mesures
   −26 Mt en 2037 et −30 Mt en 2050 ; déficit publié 3,01 % en 2037 (3,39 avec l'erreur, 3,01 avant le couplage) et
   3,23 % en 2050 (3,72 avec l'erreur, 3,08 avant).
+
+## 6 novembre 2026 (soir) — Programme Mélenchon (L'Avenir en commun, 5e édition)
+
+- Livre de 224 pages transmis par Adrien et lu en entier ; fiche de 215 mesures, citations vérifiées page par page
+  (`programmes/melenchon/mesures.yaml`, 0 erreur) ; chiffrage dans `parametres.yaml`, méthode et arbitrages dans
+  `docs/melenchon.md`. Le livre ne chiffre rien : chaque montant est estimé par le modèle.
+- Nouvelle brique `bibliotheque.baisse_age_legal_detail` : baisse de l'âge légal selon un calendrier de profils de
+  départ (retrouve à l'euro près le retour à 62 ans de Tondelier, test).
+- Résultat (prudent) : −4,7 points de PIB de solde en 2029, −9,7 en 2032, −11,6 en 2037 ; déficit 2037 28,1 % contre
+  9,7 % au statu quo (optimiste : 18,9 contre 8,2).

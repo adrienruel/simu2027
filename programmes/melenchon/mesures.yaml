@@ -1,0 +1,272 @@
+# Programme de Jean-Luc Mélenchon (La France insoumise) — mesures à portée budgétaire ou macroéconomique
+#
+# Source : « L'Avenir en commun. Le programme de la Nouvelle France », 5e édition, avec une introduction de Jean-Luc
+# Mélenchon (La Dispute, ISBN 978-2-84303-368-1, dépôt légal novembre 2026, 224 p.), PDF transmis par Adrien le
+# 06/11/2026 et lu en entier. Numéros de page : pagination imprimée du livre (folio). `citation` est un extrait exact,
+# vérifié par outils/verifier_citations.py sur le texte de chaque page (pdftotext, une page par fichier p<folio>.txt) :
+#
+#     python -I outils/verifier_citations.py programmes/melenchon/mesures.yaml <dossier des pages>
+#
+# Le livre ne donne aucun chiffrage. Les « plans thématiques » annoncés sur melenchon2027.fr ne sont pas encore parus
+# (6 novembre 2026) : à relire quand ils sortiront.
+#
+# traitement :
+#   chiffre      paramètres donnés par le texte, calcul du modèle
+#   estime       mesure claire, paramètre(s) manquant(s) : arbitrage ou fourchette par scénario (parametres.yaml)
+#   declaratif   recette ou économie sans chiffrage, estimée par le modèle en quatre scénarios (règle)
+#   macro        passe par un canal économique (emploi, PIB) plutôt que par une ligne budgétaire
+#   hors_budget  flux financier ou patrimonial (achat d'actifs, dette)
+#   non_chiffre  effet possible mais non modélisé (raison en note)
+#   sans_effet   réglementaire ou institutionnel, ou à la charge du privé
+# cle : clé de parametres.yaml (groupe melenchon_mesures sauf indication) ou mesure calculée de programme.py.
+
+programme:
+  candidat: Jean-Luc Mélenchon
+  parti: La France insoumise
+  document: "L'Avenir en commun. Le programme de la Nouvelle France (5e édition, novembre 2026)"
+  editeur: La Dispute
+  url: https://melenchon2027.fr/programme/
+  date_lecture: 2026-11-06
+  calendrier_general: "« immédiatement » pour le SMIC (p. 60), « état d'urgence sociale » pour le point d'indice et les APL (p. 57) ; quinquennat 2027-2032 sinon"
+  regle_budgetaire_annoncee: "aucune ; suspension des règles budgétaires européennes demandée (p. 193), désobéissance aux « règles bloquantes » (p. 194)"
+
+mesures:
+
+  # ================================================================ salaires et fonction publique
+  - {id: LFI-SAL-01, intitule: "SMIC à 1 700 € net par mois, immédiatement", page: 60, citation: "Porter immédiatement le SMIC mensuel à 1 700 euros net", traitement: chiffre, cle: "melenchon_smic (bibliotheque.smic)"}
+  - {id: LFI-SAL-02, intitule: "Salaires indexés sur l'inflation dans le privé et la fonction publique", page: 60, citation: "indexer les salaires sur l’inflation dans le privé comme dans la fonction publique", traitement: non_chiffre, note: "Les salaires du statu quo progressent déjà plus vite que les prix ; en crise, l'indexation pèserait sur l'emploi (non modélisé)."}
+  - {id: LFI-FP-01, intitule: "Point d'indice +10 %, compensé aux collectivités", page: 57, citation: "Revaloriser la valeur du point d’indice des fonctionnaires de 10 %", traitement: chiffre, cle: "melenchon_fp (programme.py), pensions_fp"}
+  - {id: LFI-FP-02, intitule: "Dégel du point inscrit dans la loi", page: 57, citation: "inscrire son dégel dans la loi", traitement: estime, cle: point_2027}
+  - {id: LFI-EDU-01, intitule: "Rattrapage du gel du point depuis 2010 dans l'Éducation nationale, grilles revalorisées", page: 120, citation: "Rattraper le gel du point d’indice depuis 2010 et revaloriser les grilles salariales", traitement: estime, cle: rattrapage_education}
+  - {id: LFI-FP-03, intitule: "Titularisation des précaires des trois fonctions publiques", page: 73, citation: "Titulariser les précaires des trois fonctions publiques", traitement: estime, cle: titularisations}
+  - {id: LFI-SAL-03, intitule: "Salaire maximal (écart de 1 à 20)", page: 61, citation: "Fixer un salaire maximal autorisé pour limiter l’écart de 1 à 20", traitement: non_chiffre, note: "Hauts salaires plus bas, revenus redistribués dans l'entreprise : effet sur l'impôt sur le revenu faible et de signe incertain."}
+  - {id: LFI-EMP-05, intitule: "Rémunération des apprentis et alternants revalorisée", page: 60, citation: "Revaloriser la rémunération des apprentis et des alternants", traitement: estime, cle: apprentis}
+
+  # ================================================================ fiscalité
+  - {id: LFI-REC-01, intitule: "Impôt sur le revenu à 14 tranches", page: 58, citation: "Rendre l’impôt sur le revenu plus progressif avec un barème à 14 tranches contre 5 aujourd’hui", traitement: estime, cle: "ir_hauts_revenus, ir_bas_revenus", note: "Barème non donné : hausse au-delà de 100 000 € par part, baisse en bas (arbitrage)."}
+  - {id: LFI-REC-11, intitule: "IS progressif, modulé selon l'usage des bénéfices", page: 58, citation: "instaurer un barème progressif et moduler l’impôt selon l’usage des bénéfices", traitement: estime, cle: is_progressif}
+  - {id: LFI-REC-05, intitule: "ISF rétabli et renforcé, volet climatique", page: 58, citation: "Rétablir et renforcer l’impôt de solidarité sur la fortune (ISF)", traitement: estime, cle: isf}
+  - {id: LFI-REC-06, intitule: "Taxe Zucman (2 % sur les centimillionnaires), exit tax renforcée", page: 58, citation: "Introduire une garantie d’impôt de 2 % sur le patrimoine des centimillionaires", traitement: estime, cle: zucman}
+  - {id: LFI-REC-04, intitule: "Flat tax supprimée", page: 58, citation: "Supprimer la flat tax et imposer les revenus du capital comme ceux du travail", traitement: estime, cle: flat_tax}
+  - {id: LFI-REC-07, intitule: "Successions : cumul sur la vie, héritage maximal de 12 M€", page: 58, citation: "créer un héritage maximal de 12 millions d’euros", traitement: estime, cle: successions}
+  - {id: LFI-REC-07b, intitule: "Héritages de moins de 150 000 € exonérés", page: 58, citation: "Exonérer de droits de succession les héritages inférieurs à 150 000 euros", traitement: estime, cle: successions}
+  - {id: LFI-REC-08, intitule: "« TVA grand luxe »", page: 59, citation: "Instaurer une « TVA grand luxe »", traitement: estime, cle: tva_luxe}
+  - {id: LFI-REC-09, intitule: "Niches fiscales passées au crible ; réductions transformées en crédits d'impôt", page: 59, citation: "transformer les réductions d’impôt en crédits d’impôt", traitement: declaratif, cle: "niches_suppression, niches_credits"}
+  - {id: LFI-REC-10, intitule: "Impôt universel sur les entreprises et les particuliers", page: 59, citation: "Instaurer un impôt universel sur les entreprises", traitement: estime, cle: impot_universel}
+  - {id: LFI-REC-12, intitule: "Taxe sur les superprofits en période de crise", page: 59, citation: "Établir une taxe sur les superprofits de toutes les grandes entreprises", traitement: estime, cle: superprofits}
+  - {id: LFI-REC-02, intitule: "Fin du quotient conjugal", page: 59, citation: "Mettre fin au quotient conjugal", traitement: estime, cle: quotient_conjugal}
+  - {id: LFI-REC-03, intitule: "Crédit d'impôt par enfant", page: 59, citation: "Créer un crédit d’impôt par enfant pour toutes les familles", traitement: estime, cle: credit_impot_enfant, note: "Arbitrage : à la place du quotient familial, à budget presque constant."}
+  - {id: LFI-REC-13, intitule: "Fraude et évasion fiscales : moyens du contrôle, fin de la CJIP, arbitrage de dividendes", page: 59, citation: "Faire de la lutte contre la fraude et l’évasion fiscales une priorité", traitement: declaratif, cle: fraude}
+  - {id: LFI-REC-13b, intitule: "Fin des pratiques d'arbitrage de dividendes", page: 59, citation: "Mettre fin aux pratiques frauduleuses d’arbitrage de dividendes", traitement: declaratif, cle: fraude}
+  - {id: LFI-REC-16, intitule: "CVAE remplacée par un impôt progressif selon le chiffre d'affaires et l'empreinte écologique", page: 60, citation: "remplaçant la cotisation sur la valeur ajoutée des entreprises (CVAE) par un nouvel impôt sur les entreprises", traitement: estime, cle: cvae_remplacee}
+  - {id: LFI-REC-14, intitule: "Taxe réelle sur les transactions financières", page: 63, citation: "Instaurer une taxe réelle sur les transactions financières", traitement: estime, cle: ttf}
+  - {id: LFI-REC-14b, intitule: "Rachats d'actions taxés", page: 63, citation: "taxer les rachats d’action", traitement: estime, cle: ttf}
+  - {id: LFI-REC-14c, intitule: "Avantages fiscaux des LBO supprimés", page: 64, citation: "supprimant les avantages fiscaux desdits LBO", traitement: estime, cle: ttf}
+  - {id: LFI-REC-19, intitule: "Avantages fiscaux de la retraite par capitalisation supprimés", page: 78, citation: "Supprimer les avantages fiscaux de la retraite par capitalisation", traitement: estime, cle: capitalisation_retraite}
+  - {id: LFI-REC-20, intitule: "Heures supplémentaires majorées « cotisations incluses »", page: 74, citation: "en majorant les heures supplémentaires, cotisations incluses, à 25 % pour les quatre premières et 50 % au-delà", traitement: estime, cle: heures_sup, note: "Lu comme la fin de l'exonération de cotisations des heures supplémentaires."}
+  - {id: LFI-REC-21, intitule: "Privilèges fiscaux du mécénat culturel abolis", page: 130, citation: "Abolir tous les privilèges fiscaux liés au mécénat culturel", traitement: estime, cle: mecenat_culturel}
+  - {id: LFI-REC-22, intitule: "Avantages fiscaux de l'épargne investie à l'étranger supprimés", page: 35, citation: "Supprimer les avantages fiscaux sur l’épargne française investie à l’étranger", traitement: estime, cle: epargne_etranger}
+  - {id: LFI-REC-23, intitule: "Niches du kérosène supprimées", page: 35, citation: "Mettre fin aux niches fiscales sur le kérosène", traitement: estime, cle: kerosene_fossiles}
+  - {id: LFI-REC-23b, intitule: "Subventions aux énergies fossiles arrêtées", page: 42, citation: "Arrêter les subventions aux énergies fossiles", traitement: estime, cle: kerosene_fossiles}
+  - {id: LFI-REC-24, intitule: "Taxe kilométrique aux frontières, droits de douane écologiques", page: 35, citation: "Instaurer une taxe kilométrique aux frontières de la France", traitement: estime, cle: taxe_kilometrique}
+  - {id: LFI-REC-24b, intitule: "Droits de douane sur critères écologiques", page: 34, citation: "Instaurer des droits de douane sur des critères écologiques", traitement: estime, cle: taxe_kilometrique}
+  - {id: LFI-REC-17, intitule: "Taxe d'habitation progressive rétablie (80 % exonérés)", page: 180, citation: "rétablissant une taxe d’habitation calculée selon un barème progressif", traitement: estime, cle: "taxe_habitation, depenses_communes_th"}
+  - {id: LFI-COL-02, intitule: "Moyens rendus aux communes par la taxe d'habitation", page: 180, citation: "Redonner des moyens aux communes", traitement: estime, cle: depenses_communes_th}
+  - {id: LFI-REC-18, intitule: "Taxe unique et progressive sur les logements vacants", page: 184, citation: "une taxe unique sur les logements vacants", traitement: estime, cle: logements_vacants}
+  - {id: LFI-REC-18b, intitule: "Meublés de tourisme limités, niche fiscale supprimée", page: 184, citation: "supprimer leur niche fiscale", traitement: estime, cle: logements_vacants}
+  - {id: LFI-REC-28, intitule: "Taxe foncière progressive selon le patrimoine total", page: 185, citation: "Refonder la taxe foncière pour la rendre progressive", traitement: non_chiffre, note: "Redistribution entre propriétaires, rendement non donné : neutre en recette."}
+  - {id: LFI-REC-25, intitule: "Cannabis légalisé sous monopole d'État", page: 142, citation: "Légaliser et encadrer par un monopole d’État la consommation, la production et la vente de cannabis", traitement: estime, cle: "cannabis, sante_prevention_addictions"}
+  - {id: LFI-REC-26, intitule: "Taxes sur les retransmissions sportives et les transferts", page: 132, citation: "en augmentant la taxation sur les retransmissions sportives à la télévision et en créant une taxe sur les transferts", traitement: estime, cle: "sport_taxes, sport"}
+  - {id: LFI-REC-29, intitule: "Cotisation sociale universelle fusionnant cotisations et CSG", page: 79, citation: "Créer une cotisation sociale universelle pour financer la Sécurité sociale", traitement: non_chiffre, note: "Taux et assiette non donnés : neutre en recette (la part progressive n'a pas de barème)."}
+  - {id: LFI-REC-30, intitule: "Contribution audiovisuelle universelle et progressive", page: 169, citation: "en instaurant une contribution audiovisuelle dédiée, universelle et progressive", traitement: sans_effet, note: "Remplace la fraction de TVA affectée à l'audiovisuel public : neutre."}
+
+  # ================================================================ prestations, pauvreté
+  - {id: LFI-PRE-01, intitule: "Garantie d'autonomie : revenu au seuil de pauvreté", page: 71, citation: "le revenu mensuel de chaque personne atteindra le seuil de pauvreté (1 337 euros pour une personne seule)", traitement: estime, cle: garantie_autonomie, note: "Arbitrage : niveau de vie du ménage (définition de l'Insee)."}
+  - {id: LFI-PRE-01b, intitule: "Minima sociaux augmentés immédiatement", page: 57, citation: "Augmenter immédiatement le SMIC à 1 700 € net mensuel et les minima sociaux", traitement: estime, cle: garantie_autonomie, note: "Compris dans la garantie d'autonomie (2028)."}
+  - {id: LFI-PRE-02, intitule: "Garantie d'autonomie des jeunes détachés du foyer fiscal parental", page: 86, citation: "Financer l’autonomie des jeunes détachés du foyer fiscal parental grâce à la garantie d’autonomie", traitement: estime, cle: garantie_jeunes}
+  - {id: LFI-PRE-12, intitule: "Individualisation et automatisation des prestations", page: 72, citation: "Garantir l’individualisation des droits et proposer l’automatisation des prestations sociales", traitement: estime, cle: garantie_autonomie, note: "Le recours plus élevé est compté dans la garantie d'autonomie ; l'individualisation complète (seuil par personne) n'est pas retenue (arbitrage)."}
+  - {id: LFI-PRE-03, intitule: "AAH au niveau du SMIC", page: 89, citation: "revalorisant l’allocation aux adultes handicapés (AAH) à hauteur du SMIC", traitement: estime, cle: aah_smic}
+  - {id: LFI-PRE-04, intitule: "APL +10 %", page: 57, citation: "Revaloriser les aides pour le logement (APL) de 10 %", traitement: chiffre, cle: apl}
+  - {id: LFI-PRE-08, intitule: "Première tranche gratuite d'électricité, de chaleur, d'eau, de gaz", page: 72, citation: "Instaurer une première tranche gratuite de consommation d’électricité, de chaleur, d’eau, de gaz", traitement: estime, cle: premiere_tranche_gratuite}
+  - {id: LFI-PRE-08b, intitule: "Tarifs réglementés de l'énergie calculés sur les coûts de production", page: 43, citation: "Remettre en place des tarifs réglementés de l’énergie, calculés à partir des coûts de production", traitement: estime, cle: premiere_tranche_gratuite}
+  - {id: LFI-PRE-08c, intitule: "Eau : mètres cubes indispensables gratuits, abonnement supprimé", page: 111, citation: "gratuité des mètres cubes indispensables à une vie digne", traitement: estime, cle: premiere_tranche_gratuite}
+  - {id: LFI-PRE-09, intitule: "Protections périodiques gratuites", page: 72, citation: "Assurer la gratuité des protections périodiques pour toutes et tous", traitement: estime, cle: protections_periodiques}
+  - {id: LFI-PRE-10, intitule: "Prix des produits de première nécessité bloqués", page: 57, citation: "Bloquer et encadrer les prix des produits de première nécessité", traitement: estime, cle: blocage_prix, note: "Ligne budgétaire seulement en crise (compensations)."}
+  - {id: LFI-PRE-06, intitule: "Congé d'accueil de 20 semaines par parent", page: 96, citation: "un congé d’accueil de l’enfant, identique et obligatoire pour les deux parents, d’une durée de 20 semaines par parent", traitement: estime, cle: conge_accueil}
+  - {id: LFI-PRE-07, intitule: "ASF déconjugalisée et revalorisée, pensions alimentaires défiscalisées", page: 92, citation: "déconjugaliser et revaloriser l’allocation de soutien familial", traitement: estime, cle: "famille_monoparentale, pensions_alimentaires"}
+  - {id: LFI-PRE-07b, intitule: "Congé de 7 jours pour le décès d'un proche", page: 92, citation: "Ouvrir un congé de 7 jours consécutifs pour le décès d’un proche", traitement: estime, cle: famille_monoparentale}
+  - {id: LFI-PRE-11, intitule: "Prime de vie chère étendue (outre-mer)", page: 186, citation: "Étendre la prime de vie chère aux bénéficiaires des minima sociaux", traitement: estime, cle: outre_mer_prestations}
+  - {id: LFI-PRE-11b, intitule: "Prestations sociales de Mayotte alignées", page: 186, citation: "Aligner les prestations sociales et le droit du travail à Mayotte sur l’Hexagone", traitement: estime, cle: outre_mer_prestations}
+
+  # ================================================================ emploi, chômage, temps de travail
+  - {id: LFI-EMP-01, intitule: "Garantie d'emploi pour les chômeurs de longue durée", page: 72, citation: "Créer une garantie d’emploi : tout chômeur de longue durée pourra se voir proposer d’être embauché au moins au SMIC revalorisé", traitement: estime, cle: "garantie_emploi, garantie_emploi_allocations, melenchon_emplois_aides"}
+  - {id: LFI-EMP-02, intitule: "« Emploi spécifique jeune » de cinq ans", page: 87, citation: "Instaurer un « emploi spécifique jeune » d’une durée de cinq ans", traitement: estime, cle: "emploi_jeune, melenchon_emplois_aides"}
+  - {id: LFI-EMP-08, intitule: "Quota maximal de contrats précaires (10 % PME, 5 % grandes entreprises)", page: 73, citation: "Instaurer un quota maximal de contrats précaires dans les entreprises", traitement: non_chiffre, note: "Effet sur l'emploi de signe incertain (moins d'embauches courtes, plus de CDI) ; économies possibles de l'assurance chômage non comptées."}
+  - {id: LFI-EMP-09, intitule: "Intérim démarchandisé", page: 73, citation: "Démarchandiser le travail temporaire", traitement: non_chiffre}
+  - {id: LFI-EMP-10, intitule: "35 heures rétablies, 32 heures dans les métiers pénibles ou de nuit", page: 74, citation: "passer aux 32 heures dans les métiers pénibles ou de nuit", traitement: estime, cle: fonction_publique_temps, note: "Fonction publique seulement ; dans le privé « par la négociation collective » : non chiffré."}
+  - {id: LFI-EMP-07, intitule: "Sixième semaine de congés payés", page: 74, citation: "Généraliser une sixième semaine de congés payés pour tous les salariés", traitement: macro, cle: "melenchon_temps_travail (programme.py), fonction_publique_temps"}
+  - {id: LFI-EMP-07b, intitule: "4 février jour férié", page: 103, citation: "Instaurer le 4 février comme jour férié national", traitement: macro, cle: "melenchon_temps_travail (programme.py)"}
+  - {id: LFI-PRE-05, intitule: "Réformes Macron de l'assurance chômage annulées", page: 75, citation: "Annuler les réformes Macron sur l’éligibilité et les méthodes de calcul du montant et de la durée de l’allocation", traitement: estime, cle: "assurance_chomage, melenchon_chomage"}
+  - {id: LFI-PRE-05b, intitule: "Indemnisation dès le premier jour", page: 75, citation: "Indemniser les chômeurs dès le premier jour de la fin de contrat", traitement: estime, cle: assurance_chomage}
+  - {id: LFI-PRE-05c, intitule: "Régime spécifique des intermittents de l'emploi et intérimaires", page: 76, citation: "Rétablir un régime d’assurance chômage spécifique pour les intermittents de l’emploi et les intérimaires", traitement: estime, cle: assurance_chomage}
+  - {id: LFI-EMP-11, intitule: "Inspection du travail doublée", page: 77, citation: "Doubler les effectifs de l’inspection du travail", traitement: estime, cle: agences_inspections}
+  - {id: LFI-EMP-06, intitule: "Burn-out reconnu en maladie professionnelle ; cancérogènes du CIRC", page: 76, citation: "Reconnaître le burn-out comme maladie professionnelle", traitement: estime, cle: travail_sante}
+  - {id: LFI-EMP-03, intitule: "Sécurité sociale professionnelle : 36 heures de formation par an", page: 81, citation: "Donner à chaque salarié le droit à 36 heures de formation par an", traitement: estime, cle: securite_sociale_professionnelle}
+  - {id: LFI-EMP-03b, intitule: "Revenu maintenu en reconversion ou formation", page: 81, citation: "Garantir le maintien du revenu en cas de reconversion ou de formation", traitement: estime, cle: securite_sociale_professionnelle}
+
+  # ================================================================ retraites
+  - {id: LFI-RET-01, intitule: "Réforme de 2023 abrogée, puis retraite à 60 ans à taux plein pour 40 annuités", page: 78, citation: "puis abaisser l’âge de départ jusqu’à restaurer le droit à la retraite à 60 ans à taux plein pour 40 annuités de cotisations", traitement: chiffre, cle: "melenchon_retraites (bibliotheque.baisse_age_legal_detail), duree_decote"}
+  - {id: LFI-RET-02, intitule: "Décote supprimée", page: 79, citation: "Supprimer la décote", traitement: estime, cle: duree_decote}
+  - {id: LFI-RET-03, intitule: "Pensions des carrières complètes au moins au SMIC revalorisé", page: 78, citation: "Porter, a minima, toutes les pensions pour une carrière complète (salarié, indépendant, agriculteur) au niveau du SMIC revalorisé", traitement: estime, cle: minimum_smic}
+  - {id: LFI-RET-04, intitule: "Minimum vieillesse au seuil de pauvreté", page: 78, citation: "le minimum vieillesse au niveau du seuil de pauvreté", traitement: estime, cle: minimum_vieillesse}
+  - {id: LFI-RET-05, intitule: "RSA validant des trimestres", page: 78, citation: "Comptabiliser le RSA pour valider des trimestres", traitement: estime, cle: rsa_trimestres}
+  - {id: LFI-RET-06, intitule: "Facteurs de pénibilité réinstaurés", page: 95, citation: "en réinstaurant les facteurs de risques supprimés par Macron en 2017", traitement: estime, cle: penibilite_agricoles}
+  - {id: LFI-RET-06b, intitule: "Retraite agricole digne", page: 48, citation: "Garantir aux agricultrices et agriculteurs le droit à une retraite digne", traitement: estime, cle: penibilite_agricoles}
+  - {id: LFI-RET-07, intitule: "Pensions des fonctionnaires relevées par le point d'indice et le rattrapage (départs suivants)", page: 57, citation: "Revaloriser la valeur du point d’indice des fonctionnaires de 10 %", traitement: estime, cle: pensions_fp}
+  - {id: LFI-RET-08, intitule: "Non-compensation des exonérations de cotisations abandonnée", page: 78, citation: "Revenir sur la non-compensation des exonérations de cotisations", traitement: sans_effet, note: "Transfert de l'État vers la Sécurité sociale : neutre pour les administrations publiques consolidées."}
+
+  # ================================================================ santé, autonomie, handicap
+  - {id: LFI-SAN-01, intitule: "« 100 % Sécu », complémentaires intégrées", page: 79, citation: "Instaurer le « 100 % Sécu » en remboursant à 100 % les soins de santé prescrits", traitement: estime, cle: cent_pour_cent_secu}
+  - {id: LFI-SAN-02, intitule: "Franchises et participations forfaitaires supprimées", page: 80, citation: "en supprimant les franchises médicales, les participations forfaitaires et les frais annexes", traitement: estime, cle: franchises}
+  - {id: LFI-SAN-03, intitule: "Fin des dépassements d'honoraires dans le secteur conventionné", page: 80, citation: "Mettre fin aux dépassements d’honoraires dans le secteur conventionné", traitement: estime, cle: depassements}
+  - {id: LFI-SAN-04, intitule: "Arrêts maladie à 100 %, jours de carence supprimés", page: 80, citation: "par l’indemnisation à 100 % du salaire, la suppression des jours de carence", traitement: estime, cle: arrets_maladie}
+  - {id: LFI-SAN-05, intitule: "AME intégrée au régime général", page: 80, citation: "Intégrer l’aide médicale d’État (AME) au régime général", traitement: estime, cle: ame_sante_divers}
+  - {id: LFI-SAN-05b, intitule: "Psychologues conventionnés au-delà de 12 séances, à 100 %", page: 141, citation: "au-delà de 12 séances par an et avec un remboursement à 100 %", traitement: estime, cle: ame_sante_divers}
+  - {id: LFI-SAN-05c, intitule: "Psychothérapie remboursée pour les moins de 26 ans", page: 87, citation: "Rembourser les séances de psychothérapie pour les moins de 26 ans", traitement: estime, cle: ame_sante_divers}
+  - {id: LFI-SAN-05d, intitule: "Dispositifs médicaux de la vie quotidienne pris en charge", page: 90, citation: "Assurer la prise en charge par la Sécurité sociale de l’ensemble des dispositifs médicaux nécessaires à la vie quotidienne", traitement: estime, cle: ame_sante_divers}
+  - {id: LFI-SAN-06, intitule: "Sécurité sociale funéraire", page: 80, citation: "Instaurer une Sécurité sociale funéraire qui prenne en charge les obsèques", traitement: estime, cle: securite_sociale_funeraire}
+  - {id: LFI-SAN-06b, intitule: "Sécurité sociale de l'alimentation expérimentée", page: 80, citation: "Mettre en place une Sécurité sociale de l’alimentation en expérimentant", traitement: estime, cle: securite_sociale_funeraire}
+  - {id: LFI-SAN-07, intitule: "Service public hospitalier reconstruit, recrutements", page: 140, citation: "Engager un plan pluriannuel de recrutement des professionnels du soin et du médico-social", traitement: estime, cle: hopital_recrutements}
+  - {id: LFI-SAN-07b, intitule: "Urgences, maternités et Ehpad publics rouverts à moins de 30 minutes", page: 140, citation: "Réouvrir progressivement des services d’urgence, des maternités", traitement: estime, cle: hopital_recrutements}
+  - {id: LFI-SAN-08, intitule: "Métiers et salaires du soin revalorisés", page: 140, citation: "Revaloriser les métiers et les salaires dans le domaine du soin", traitement: estime, cle: hopital_salaires}
+  - {id: LFI-SAN-09, intitule: "Déserts médicaux : centres de santé publics, médecins publics", page: 140, citation: "Mailler le territoire de centres de santé publics en exercice salarié", traitement: estime, cle: psychiatrie_deserts}
+  - {id: LFI-SAN-09b, intitule: "Lits de psychiatrie publics rouverts", page: 141, citation: "Réouvrir des lits de psychiatrie publics", traitement: estime, cle: psychiatrie_deserts}
+  - {id: LFI-SAN-09c, intitule: "Pôle public du médicament", page: 137, citation: "Construire un pôle public du médicament", traitement: estime, cle: psychiatrie_deserts}
+  - {id: LFI-SAN-10, intitule: "Plan d'éradication des maladies chroniques liées aux pollutions ; VIH ; recherche environnement-santé", page: 136, citation: "Doubler le budget du programme national de recherche « environnement - santé - travail »", traitement: estime, cle: sante_prevention_addictions}
+  - {id: LFI-SAN-15, intitule: "ONDAM remplacé par un objectif national des besoins", page: 139, citation: "Remplacer l’objectif national des dépenses d’assurance maladie (ONDAM)", traitement: non_chiffre, note: "Le statu quo garde sa trajectoire de dépenses de santé (décision d'Adrien) ; les mesures de santé sont comptées une par une."}
+  - {id: LFI-SAN-11, intitule: "10 000 places d'Ehpad publics par an pendant cinq ans", page: 88, citation: "Créer 10 000 places par an en établissement d’hébergement", traitement: chiffre, cle: "ehpad_places, ehpad_investissement"}
+  - {id: LFI-SAN-12, intitule: "Ratio minimal d'encadrement « au chevet »", page: 88, citation: "pour respecter un ratio minimal d’encadrement « au chevet » des résidents", traitement: estime, cle: ehpad_encadrement}
+  - {id: LFI-SAN-13, intitule: "Service public de la dépendance, métiers du grand âge revalorisés, maintien à domicile", page: 88, citation: "Revaloriser les métiers et revenus de l’ensemble des professionnelles du grand âge", traitement: estime, cle: grand_age_domicile}
+  - {id: LFI-SAN-13b, intitule: "Statut d'aidant familial rémunéré", page: 88, citation: "Créer un véritable statut d’aidant familial, avec une rémunération réelle", traitement: estime, cle: grand_age_domicile}
+  - {id: LFI-PAR-03, intitule: "Ehpad privés lucratifs collectivisés", page: 88, citation: "Collectiviser les EHPAD privés à but lucratif", traitement: hors_budget, cle: nationalisations}
+  - {id: LFI-SAN-14, intitule: "Statut de salarié pour les travailleurs des ESAT", page: 90, citation: "Accorder le statut de salarié aux travailleuses et travailleurs", traitement: estime, cle: handicap_divers}
+  - {id: LFI-SAN-14b, intitule: "Moyens des MDPH", page: 89, citation: "Augmenter les moyens des maisons départementales des personnes handicapées", traitement: estime, cle: handicap_divers}
+
+  # ================================================================ éducation, recherche, jeunesse
+  - {id: LFI-EDU-04, intitule: "Gratuité réelle de l'école publique", page: 118, citation: "Assurer la gratuité réelle de l’éducation publique, y compris de la cantine, du transport, des activités périscolaires, des manuels et des fournitures", traitement: estime, cle: gratuite_ecole}
+  - {id: LFI-EDU-04b, intitule: "Restauration collective 100 % bio et locale", page: 139, citation: "Porter l’alimentation dans la restauration collective et scolaire à 100 % biologique et locale", traitement: estime, cle: gratuite_ecole}
+  - {id: LFI-EDU-03, intitule: "Effectifs par classe sous la moyenne européenne de 19 élèves", page: 118, citation: "faire mieux que la moyenne européenne de 19 élèves par classe", traitement: estime, cle: effectifs_classes}
+  - {id: LFI-EDU-03b, intitule: "Viviers de remplaçants reconstitués", page: 118, citation: "Reconstituer les viviers de professeurs remplaçants", traitement: estime, cle: effectifs_classes}
+  - {id: LFI-EDU-03c, intitule: "Scolarité obligatoire jusqu'à 18 ans", page: 118, citation: "Étendre la scolarité obligatoire à 18 ans", traitement: estime, cle: effectifs_classes}
+  - {id: LFI-EDU-03d, intitule: "Quatre heures d'EPS par semaine", page: 133, citation: "en garantissant quatre heures hebdomadaires d’éducation physique et sportive (EPS)", traitement: estime, cle: effectifs_classes}
+  - {id: LFI-EDU-05, intitule: "Service public national du périscolaire avec des titulaires", page: 119, citation: "Construire un service public national du périscolaire", traitement: estime, cle: periscolaire}
+  - {id: LFI-EDU-05b, intitule: "Association sportive et culturelle dans toutes les écoles", page: 133, citation: "Créer une association sportive et culturelle dans tous les établissements scolaires du premier degré", traitement: estime, cle: periscolaire}
+  - {id: LFI-EDU-02, intitule: "Corps de fonctionnaires pour les AESH", page: 90, citation: "Créer un corps de fonctionnaires pour les personnels d’accompagnement des élèves en situation de handicap (AESH)", traitement: estime, cle: aesh}
+  - {id: LFI-EDU-11, intitule: "Contractuels de l'Éducation nationale titularisés ; plan pluriannuel de recrutement", page: 121, citation: "Titulariser l’ensemble des personnels contractuels de l’Éducation nationale", traitement: estime, cle: titularisations}
+  - {id: LFI-EDU-12, intitule: "Vie scolaire et personnels sociaux et de santé renforcés", page: 120, citation: "Renforcer partout les effectifs de la vie scolaire", traitement: estime, cle: effectifs_classes}
+  - {id: LFI-EDU-06, intitule: "Plus de classes et de lycées professionnels et agricoles publics, bac pro en 4 ans", page: 122, citation: "Augmenter le nombre de classes et de lycées professionnels et agricoles publics", traitement: estime, cle: voie_pro_formation}
+  - {id: LFI-EDU-06b, intitule: "Bac professionnel en quatre ans", page: 123, citation: "Rétablir le baccalauréat professionnel en quatre ans", traitement: estime, cle: voie_pro_formation}
+  - {id: LFI-EDU-07, intitule: "Bâti scolaire rénové et adapté", page: 122, citation: "Rénover le bâti scolaire", traitement: estime, cle: bati_scolaire}
+  - {id: LFI-EDU-07b, intitule: "Grand plan pour l'immobilier universitaire", page: 126, citation: "Lancer un grand plan pour l’immobilier universitaire", traitement: estime, cle: bati_scolaire}
+  - {id: LFI-EDU-13, intitule: "Privé sous contrat : malus, loi Carle abrogée, subventions facultatives interdites", page: 120, citation: "Appliquer un malus au financement public des établissements privés sous contrat", traitement: non_chiffre, note: "Économie faible et non chiffrée (prudent : zéro)."}
+  - {id: LFI-EDU-08, intitule: "Investissement public dans la recherche relevé", page: 124, citation: "Rehausser le niveau d’investissement public dans la recherche", traitement: estime, cle: recherche_dotations}
+  - {id: LFI-REC-15, intitule: "Crédit d'impôt recherche supprimé au profit de dotations récurrentes", page: 124, citation: "Supprimer le crédit impôt recherche au profit de dotations récurrentes", traitement: estime, cle: "cir, recherche_dotations"}
+  - {id: LFI-EDU-09, intitule: "Enseignement supérieur gratuit", page: 125, citation: "Instaurer la gratuité de l’enseignement supérieur, de la licence au doctorat", traitement: estime, cle: enseignement_superieur}
+  - {id: LFI-EDU-09b, intitule: "CVEC supprimée, Crous financés", page: 125, citation: "Supprimer la contribution de vie étudiante et de campus", traitement: estime, cle: enseignement_superieur}
+  - {id: LFI-EDU-09c, intitule: "Budget des universités augmenté", page: 125, citation: "en augmentant le budget des universités", traitement: estime, cle: enseignement_superieur}
+  - {id: LFI-EDU-09d, intitule: "Repas à un euro pour tous les étudiants", page: 86, citation: "Instaurer réellement le repas à un euro", traitement: estime, cle: enseignement_superieur}
+  - {id: LFI-EDU-09e, intitule: "Aides au logement pour tous les étudiants, y compris étrangers", page: 125, citation: "Rétablir l’égalité d’accès aux aides au logement pour l’ensemble des étudiants", traitement: estime, cle: enseignement_superieur}
+  - {id: LFI-EDU-10, intitule: "Conscription citoyenne écologique de neuf mois au SMIC revalorisé", page: 127, citation: "un service citoyen obligatoire avant l’âge de 25 ans, rémunéré au SMIC revalorisé pendant neuf mois", traitement: estime, cle: service_citoyen}
+  - {id: LFI-EDU-10b, intitule: "Permis de conduire gratuit dans la conscription", page: 127, citation: "une formation gratuite à la conduite et le passage de l’examen du permis de conduire", traitement: estime, cle: service_citoyen}
+  - {id: LFI-EDU-14, intitule: "Illettrisme éradiqué d'ici 2032 : service public, formation gratuite", page: 117, citation: "Créer un service public de lutte contre l’illettrisme", traitement: estime, cle: voie_pro_formation}
+
+  # ================================================================ petite enfance, enfance, femmes, discriminations
+  - {id: LFI-COL-05, intitule: "500 000 places d'accueil des jeunes enfants", page: 98, citation: "Planifier l’ouverture progressive de 500 000 places pour l’accueil des jeunes enfants", traitement: chiffre, cle: "petite_enfance_places, petite_enfance_investissement"}
+  - {id: LFI-COL-05b, intitule: "Crèches publiques gratuites", page: 98, citation: "Garantir la gratuité des crèches publiques", traitement: estime, cle: petite_enfance_qualite}
+  - {id: LFI-COL-05c, intitule: "Un adulte pour cinq enfants", page: 99, citation: "vers un ratio moyen d’encadrement de 5 enfants d’âges mélangés par adulte", traitement: estime, cle: petite_enfance_qualite}
+  - {id: LFI-COL-04, intitule: "Protection de l'enfance recentralisée, moyens augmentés", page: 85, citation: "Recentraliser la protection de l’enfance en augmentant significativement ses moyens financiers et humains", traitement: estime, cle: enfance}
+  - {id: LFI-COL-04b, intitule: "Jeunes sortant de l'ASE accompagnés jusqu'à 25 ans", page: 85, citation: "Accompagner socialement et financièrement jusqu’à 25 ans les jeunes sortant de l’aide sociale à l’enfance (ASE)", traitement: estime, cle: enfance}
+  - {id: LFI-COL-08, intitule: "Loi contre les violences sexistes et sexuelles, 3 Md€", page: 96, citation: "allouer les 3 milliards de budget demandés par les associations", traitement: chiffre, cle: vss}
+  - {id: LFI-COL-09, intitule: "Plan contre le racisme, 1 Md€", page: 101, citation: "y allouer le milliard de budget nécessaire", traitement: chiffre, cle: racisme}
+
+  # ================================================================ logement
+  - {id: LFI-LOG-01, intitule: "200 000 logements publics par an et 30 000 logements jeunes pendant cinq ans", page: 183, citation: "Produire 200 000 logements publics par an et 30 000 logements jeunes pendant 5 ans", traitement: chiffre, cle: logements_publics}
+  - {id: LFI-LOG-02, intitule: "Aides aux HLM rétablies", page: 184, citation: "Rétablir les aides publiques pour les habitations à loyer modéré", traitement: estime, cle: aides_hlm}
+  - {id: LFI-LOG-03, intitule: "Zéro sans-abri, hébergement d'urgence inconditionnel", page: 183, citation: "atteindre l’objectif de « zéro sans-abri » à l’issue du quinquennat", traitement: estime, cle: sans_abri}
+  - {id: LFI-LOG-04, intitule: "Garantie universelle des loyers", page: 183, citation: "Mettre en place une garantie universelle des loyers", traitement: estime, cle: garantie_loyers}
+  - {id: LFI-LOG-07, intitule: "Loyers gelés puis encadrés", page: 183, citation: "Geler les loyers le temps de déployer un encadrement des loyers", traitement: non_chiffre, note: "Effet sur les APL et sur l'offre locative non chiffré."}
+  - {id: LFI-LOG-05, intitule: "Isolation d'au moins 700 000 logements par an", page: 43, citation: "Refaire l’isolation d’au moins 700 000 logements par an", traitement: chiffre, cle: renovation}
+  - {id: LFI-LOG-05b, intitule: "Chauffages au fioul et au gaz remplacés", page: 44, citation: "Remplacer progressivement tous les chauffages au fioul et au gaz fossile", traitement: estime, cle: renovation}
+  - {id: LFI-LOG-06, intitule: "Fonds d'aide à la relocalisation des constructions menacées", page: 185, citation: "créer un Fonds d’aide à la relocalisation des constructions menacées par les inondations", traitement: estime, cle: logement_divers}
+  - {id: LFI-LOG-08, intitule: "Plafond de 5 logements transmissibles par héritage", page: 184, citation: "instaurant un plafond de 5 logements transmissibles par héritage", traitement: non_chiffre, note: "Réquisition au-delà : expropriation, contentieux constitutionnel ; effet sur les droits de succession non chiffré."}
+
+  # ================================================================ planification écologique, investissement
+  - {id: LFI-INV-01, intitule: "Plan global de rénovation des infrastructures pour l'adaptation", page: 37, citation: "Engager un plan global de rénovation de nos infrastructures pour les adapter au changement climatique", traitement: estime, cle: adaptation}
+  - {id: LFI-INV-01b, intitule: "Réseaux d'eau et d'assainissement rénovés", page: 37, citation: "Rénover l’intégralité des réseaux d’eau et d’assainissement", traitement: estime, cle: adaptation}
+  - {id: LFI-INV-01c, intitule: "Accès à l'eau potable en outre-mer « quoi qu'il en coûte »", page: 39, citation: "Garantir, quoi qu’il en coûte, l’accès à l’eau courante potable", traitement: estime, cle: adaptation}
+  - {id: LFI-INV-11, intitule: "Grand plan d'investissements écologiquement et socialement utiles", page: 33, citation: "Lancer un grand plan d’investissements écologiquement et socialement utiles", traitement: estime, cle: "adaptation, ferroviaire, renovation, logements_publics, industrie, energie_renouvelable", note: "Aucun montant : le plan est la somme des lignes d'investissement chiffrées une par une."}
+  - {id: LFI-INV-02, intitule: "Voies ferrées rénovées, lignes et gares rouvertes", page: 38, citation: "Lancer des grands travaux de rénovation des voies ferrées et de réouverture des lignes et gares fermées", traitement: estime, cle: ferroviaire}
+  - {id: LFI-INV-02b, intitule: "Prix des billets de train réduits", page: 40, citation: "Réduire le prix des billets de train", traitement: estime, cle: ferroviaire}
+  - {id: LFI-INV-02c, intitule: "Fret ferroviaire développé massivement", page: 40, citation: "Développer massivement le fret ferroviaire", traitement: estime, cle: ferroviaire}
+  - {id: LFI-INV-03, intitule: "Plan vélo rétabli ; leasing social", page: 41, citation: "Rétablir le plan Vélo supprimé par la Macronie", traitement: estime, cle: transports_quotidien}
+  - {id: LFI-INV-03b, intitule: "Transports publics interconnectés partout", page: 40, citation: "Mailler tout le pays de transports publics interconnectés", traitement: estime, cle: transports_quotidien}
+  - {id: LFI-INV-04, intitule: "100 % renouvelable au plus tard en 2060", page: 42, citation: "Atteindre le 100 % d’énergies renouvelables au plus tard en 2060", traitement: estime, cle: energie_renouvelable}
+  - {id: LFI-INV-12, intitule: "Fermeture des centrales nucléaires à 60 ans, EPR2 arrêté", page: 42, citation: "Planifier la fermeture progressive des centrales nucléaires existantes en ne prolongeant pas au-delà de 60 ans leur durée de vie", traitement: non_chiffre, note: "EDF hors des administrations publiques ; prix de l'électricité, émissions (gaz de secours) et dépréciation d'actifs à chiffrer dans le module écologie, comme pour Tondelier."}
+  - {id: LFI-INV-04b, intitule: "Éolien en mer : au moins 45 GW en 2050", page: 147, citation: "pour atteindre au moins 45 gigawatts de puissance installée en 2050", traitement: estime, cle: energie_renouvelable, note: "Proche de la programmation du statu quo."}
+  - {id: LFI-INV-05, intitule: "Relocaliser les productions essentielles ; plan de reconstruction industrielle", page: 32, citation: "Engager un plan de reconstruction industrielle", traitement: estime, cle: industrie}
+  - {id: LFI-INV-05b, intitule: "80 principes actifs relocalisés en cinq ans", page: 33, citation: "Relocaliser 80 principes actifs nécessaires pour des médicaments stratégiques en 5 ans", traitement: estime, cle: industrie}
+  - {id: LFI-INV-05c, intitule: "Réserve stratégique nationale d'acier et de minerai", page: 33, citation: "Constituer une réserve stratégique nationale d’acier et de minerai", traitement: estime, cle: industrie}
+  - {id: LFI-INV-06, intitule: "500 000 emplois agricoles", page: 48, citation: "créer 500 000 emplois agricoles", traitement: estime, cle: agriculture}
+  - {id: LFI-INV-06b, intitule: "Caisse de défaisance des dettes des exploitants convertis au bio", page: 48, citation: "créer une caisse de défaisance pour reprendre les dettes agricoles des exploitants", traitement: estime, cle: agriculture}
+  - {id: LFI-INV-06c, intitule: "Contrats de transition agroécologique", page: 33, citation: "Proposer des contrats de transition agroécologique sur plusieurs années aux agriculteurs", traitement: estime, cle: agriculture}
+  - {id: LFI-INV-07, intitule: "Moyens humains et financiers de l'État et de ses opérateurs", page: 28, citation: "Donner les moyens humains et financiers à l’État et ses opérateurs publics", traitement: estime, cle: agences_inspections}
+  - {id: LFI-INV-07b, intitule: "Police de l'eau et inspecteurs de l'environnement triplés", page: 111, citation: "Multiplier au moins par trois les effectifs de la police de l’eau", traitement: estime, cle: agences_inspections}
+  - {id: LFI-INV-08, intitule: "Service public du réemploi", page: 46, citation: "Structurer un service public du réemploi", traitement: estime, cle: ecologie_divers}
+  - {id: LFI-INV-08b, intitule: "Effectifs et moyens de la sécurité civile", page: 38, citation: "Augmenter les effectifs et les moyens des forces de sécurité civile", traitement: estime, cle: ecologie_divers}
+  - {id: LFI-INV-08c, intitule: "Stocks tampons de matières premières alimentaires", page: 57, citation: "Mettre en place des stocks tampons de matières premières alimentaires", traitement: estime, cle: ecologie_divers}
+  - {id: LFI-INV-08d, intitule: "Fonds d'indemnisation des victimes du chlordécone", page: 136, citation: "Créer un fonds d’indemnisation spécifique des victimes", traitement: estime, cle: ecologie_divers}
+  - {id: LFI-INV-09, intitule: "Accès minimal gratuit à Internet, fibre partout", page: 155, citation: "Garantir le droit à un accès minimal gratuit à Internet", traitement: estime, cle: numerique_spatial_mer}
+  - {id: LFI-INV-09b, intitule: "Fonderie de microprocesseurs", page: 158, citation: "la création d’une fonderie de microprocesseurs sur le territoire français", traitement: estime, cle: numerique_spatial_mer}
+  - {id: LFI-INV-09c, intitule: "Avion spatial souverain", page: 152, citation: "Doter la France d’un avion spatial souverain", traitement: estime, cle: numerique_spatial_mer}
+  - {id: LFI-INV-09d, intitule: "Moyens du CNES", page: 152, citation: "Renforcer les moyens du Centre national d’études spatiales (CNES)", traitement: estime, cle: numerique_spatial_mer}
+  - {id: LFI-INV-10, intitule: "Plan pluriannuel d'investissement et de services publics en outre-mer", page: 185, citation: "Engager un plan pluriannuel d’investissement et de développement des services publics", traitement: estime, cle: outre_mer_investissement}
+
+  # ================================================================ collectivités, services publics, culture, justice, police, international
+  - {id: LFI-COL-01, intitule: "DGF rééquilibrée et indexée sur l'inflation", page: 180, citation: "Rééquilibrer la dotation globale de fonctionnement versée aux communes pour lutter contre les inégalités territoriales et l’indexer sur l’inflation", traitement: estime, cle: dotations_communes}
+  - {id: LFI-COL-01b, intitule: "Fonds de soutien communal pour les communes rurales", page: 180, citation: "par la création d’un fonds de soutien communal", traitement: estime, cle: dotations_communes}
+  - {id: LFI-COL-03, intitule: "Services publics essentiels à 15-30 minutes", page: 182, citation: "afin de garantir une distance maximale (de 15 à 30 minutes en voiture ou en transport collectif)", traitement: estime, cle: services_publics}
+  - {id: LFI-COL-03b, intitule: "Moratoire sur les fermetures de services publics de proximité", page: 183, citation: "Instaurer un moratoire sur les fermetures d’écoles, de maternités, de bureaux de poste, de gares", traitement: estime, cle: services_publics}
+  - {id: LFI-COL-14, intitule: "Éco-régions à la place des régions", page: 181, citation: "Créer des éco-régions pour remplacer les régions actuelles", traitement: estime, cle: communes_eco_regions}
+  - {id: LFI-COL-10, intitule: "Dépense publique culturelle à 1 % du PIB", page: 129, citation: "Porter la dépense publique consacrée à l’art, à la culture et à la création à 1 % du produit intérieur brut (PIB) par an", traitement: estime, cle: culture, note: "Base de la dépense culturelle publique : arbitrage à 0,7 % du PIB."}
+  - {id: LFI-COL-10b, intitule: "Gratuité de tous les musées et bibliothèques", page: 130, citation: "Étendre la gratuité à tous les musées et les bibliothèques", traitement: estime, cle: culture}
+  - {id: LFI-COL-11, intitule: "Plan d'urgence pour les équipements sportifs", page: 132, citation: "Mettre en place un plan national d’urgence pour la construction et la rénovation des équipements sportifs", traitement: estime, cle: sport}
+  - {id: LFI-COL-06, intitule: "Justice : recrutements, aide juridictionnelle, tribunaux de proximité", page: 177, citation: "Planifier des moyens pour la justice et recruter davantage de fonctionnaires", traitement: estime, cle: justice}
+  - {id: LFI-COL-06b, intitule: "Aide juridictionnelle augmentée", page: 176, citation: "en augmentant notamment l’aide juridictionnelle", traitement: estime, cle: justice}
+  - {id: LFI-COL-06c, intitule: "Effectifs contre les infractions financières doublés", page: 175, citation: "doubler les effectifs des services qui luttent contre les infractions financières", traitement: estime, cle: justice}
+  - {id: LFI-COL-07, intitule: "Formation des gardiens de la paix portée à deux ans", page: 173, citation: "Porter à deux ans la formation des élèves gardiens de la paix", traitement: estime, cle: police}
+  - {id: LFI-COL-07b, intitule: "Moyens de la police scientifique doublés", page: 174, citation: "Doubler les moyens de la police scientifique", traitement: estime, cle: police}
+  - {id: LFI-COL-12, intitule: "Aide publique au développement à 0,7 % du RNB", page: 209, citation: "Consacrer 0,7 % du revenu national brut à une aide publique au développement", traitement: chiffre, cle: aide_developpement}
+  - {id: LFI-COL-13, intitule: "Retrait du commandement intégré de l'OTAN, puis de l'organisation", page: 195, citation: "Se retirer immédiatement du commandement intégré de l’OTAN", traitement: estime, cle: otan}
+  - {id: LFI-DEF-01, intitule: "Refus des 5 % du PIB pour la défense ; priorité aux « encapacitants »", page: 196, citation: "Rejeter le tribut, exigé par les États-Unis, de 5 % du PIB consacré aux dépenses de défense", traitement: sans_effet, note: "Loi de programmation militaire du statu quo gardée : elle n'atteint pas 5 % du PIB."}
+  - {id: LFI-DEF-02, intitule: "Exportations d'armement vers les guerres illégales stoppées", page: 197, citation: "en stoppant toutes les exportations d’armement et de biens à double usage", traitement: non_chiffre, note: "Effet sur l'industrie de défense et l'emploi non chiffré."}
+  - {id: LFI-MIG-01, intitule: "Régularisation des travailleurs, étudiants et parents sans papiers", page: 207, citation: "Régulariser les travailleurs, étudiants, parents d’enfants scolarisés sans papiers", traitement: estime, cle: regularisations}
+  - {id: LFI-MIG-02, intitule: "Structures d'accueil des migrants en nombre suffisant", page: 207, citation: "grâce à des structures d’accueil et d’hébergement en nombre suffisant", traitement: estime, cle: sans_abri}
+  - {id: LFI-MIG-03, intitule: "Centres de rétention fermés", page: 207, citation: "Fermer les centres de rétention administrative (CRA)", traitement: non_chiffre, note: "Économie faible, remplacée par l'hébergement ouvert et l'accompagnement juridique : neutre."}
+  - {id: LFI-INS-01, intitule: "Indépendance de la Kanaky-Nouvelle-Calédonie au 1er janvier 2028", page: 164, citation: "Organiser l’accession de la Kanaky-Nouvelle-Calédonie à l’indépendance au 1er janvier 2028", traitement: non_chiffre, note: "Dépenses de l'État en Nouvelle-Calédonie ≈ 1,5 Md€ par an ; un « plan de réparation » est aussi prévu (p. 186) : effet net non chiffré."}
+
+  # ================================================================ finance, dette, nationalisations
+  - {id: LFI-PAR-01, intitule: "Retour sur les privatisations (aéroports, autoroutes, Française des jeux)", page: 53, citation: "Revenir sur les privatisations (aéroports, autoroutes, Française des jeux, etc.)", traitement: hors_budget, cle: "nationalisations, revenus_actifs"}
+  - {id: LFI-PAR-02, intitule: "Revenus des entreprises nationalisées, péages ramenés en arrière", page: 41, citation: "Renationaliser les autoroutes en revenant sur les hausses de prix passées", traitement: estime, cle: revenus_actifs}
+  - {id: LFI-PAR-01b, intitule: "ArcelorMittal France nationalisé", page: 33, citation: "notamment en nationalisant ArcelorMittal France", traitement: hors_budget, cle: nationalisations}
+  - {id: LFI-PAR-01c, intitule: "Engie renationalisé", page: 43, citation: "en renationalisant Engie", traitement: hors_budget, cle: nationalisations}
+  - {id: LFI-PAR-01d, intitule: "Autoroutes renationalisées en revenant sur les hausses de prix", page: 41, citation: "Renationaliser les autoroutes en revenant sur les hausses de prix passées", traitement: hors_budget, cle: "nationalisations, revenus_actifs"}
+  - {id: LFI-PAR-01e, intitule: "ArianeGroup nationalisé", page: 152, citation: "Nationaliser ArianeGroup", traitement: hors_budget, cle: nationalisations}
+  - {id: LFI-PAR-01f, intitule: "Éolien maritime : nationalisations si nécessaire (GE Vernova)", page: 147, citation: "si nécessaire par des nationalisations, par exemple des activités de GE Vernova", traitement: hors_budget, cle: nationalisations}
+  - {id: LFI-PAR-04, intitule: "Pôle public bancaire, banques de détail socialisées", page: 64, citation: "Socialiser certaines banques de détail", traitement: non_chiffre, note: "Aucune cible : non compté dans les participations."}
+  - {id: LFI-PAR-05, intitule: "Moratoire sur les PPP", page: 53, citation: "Décréter un moratoire sur les partenariats public-privé (PPP)", traitement: sans_effet}
+  - {id: LFI-DET-01, intitule: "Dette détenue par la BCE annulée ou rendue perpétuelle à taux nul", page: 66, citation: "en annulant ou en transformant en dettes perpétuelles à taux nul la part de dette des États qu’elle possède", traitement: non_chiffre, note: "Exige l'accord de l'Union (« Exiger de l'UE ») : hors scénario. Variante à construire (dette détenue par l'Eurosystème ≈ 20 % de la dette française)."}
+  - {id: LFI-DET-02, intitule: "Circuit du Trésor réinstauré", page: 67, citation: "Réinstaurer un circuit du Trésor", traitement: non_chiffre, note: "Effet sur les taux : incertain (règle commune : les taux varient selon les scénarios)."}
+  - {id: LFI-DET-03, intitule: "Fin des émissions d'OATi", page: 67, citation: "Mettre fin à l’émission de titres de dette souveraine indexés sur l’inflation", traitement: non_chiffre, note: "Neutre en espérance (inflation anticipée dans les taux nominaux)."}
+  - {id: LFI-DET-04, intitule: "CADES réformée", page: 67, citation: "Réformer la Caisse d’amortissement de la dette sociale", traitement: sans_effet, note: "Financement des dépenses nouvelles de la Sécurité sociale (déjà comptées) : pas de ligne en plus."}
+  - {id: LFI-EUR-01, intitule: "Désobéissance aux règles européennes bloquantes ; contribution au budget européen conditionnée", page: 192, citation: "conditionnement de la contribution française au budget européen", traitement: non_chiffre, note: "Contribution du statu quo gardée."}
+  - {id: LFI-ECO-01, intitule: "Dividendes limités aux bénéfices de l'année ; licenciements boursiers interdits", page: 66, citation: "Interdire aux entreprises de distribuer un montant de dividendes supérieur à leurs bénéfices de l’année", traitement: non_chiffre}
