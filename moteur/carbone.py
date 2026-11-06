@@ -45,6 +45,57 @@ def recette_statique(p: Parametres) -> float:
     return cache["recette_carbone"]
 
 
+def prix_finaux(p: Parametres) -> dict[str, dict[int, float]]:
+    """Prix final TTC de chaque énergie dans le programme, rapporté au statu quo, année par année (correction du
+    05/11/2026, remarque d'Adrien : l'essence et l'électricité baissent, le gaz monte).
+
+    Le programme remplace les taxes actuelles sur l'énergie (accises, dont la composante carbone, et TVA) par la TVA
+    et l'accise écologique du barème (parametres/donnees/tva_produits.csv) : carburants à 20 % de TVA plus le prix du
+    carbone (contre 110 % du prix hors taxe aujourd'hui), gaz et fioul à 5,5 % plus le prix du carbone (40 %),
+    électricité à 5,5 % sans accise (37 %). Le statu quo ajoute l'ETS2 à partir de 2028 ; le prix du carbone du
+    programme est supposé le comprendre. Prix hors taxe constants en euros de 2026."""
+    import csv as _csv
+    from .distribution import DONNEES
+    from .ecologie import emissions as em
+    rows = {l["categorie"]: l for l in _csv.DictReader((DONNEES / "tva_produits.csv").open(encoding="utf-8"))}
+    c, g = p.val("tva.carburants"), p.val("tva.gaz_fioul")
+    k_carb = (c["co2_essence"] * (1 - c["part_gazole"]) + c["co2_gazole"] * c["part_gazole"]) / c["prix_ht"]
+    k_gaz = g["co2_gaz_kwh"] / g["prix_gaz_kwh"] * g["part_gaz"] + c["co2_gazole"] / g["prix_fioul_litre"] * (1 - g["part_gaz"])
+    tv = {k: float(rows[k]["tva"]) for k in ("Carburants", "Gaz et fioul", "Électricité")}
+    an = {k: float(rows[k]["ancien_taux"]) for k in ("Carburants", "Gaz et fioul", "Électricité")}
+    ets = p.val("ecologie.prix_carbone_statu_quo")
+    out = {"transports": {}, "batiments": {}, "electricite": {}}
+    for t in em.ANNEES:
+        pc = prix(p, t) / 1000 if t >= 2029 else 0.0
+        e2 = ets["ets2"] / 1000 if t >= ets["debut_ets2"] else 0.0
+        if t < 2029:
+            out["transports"][t] = out["batiments"][t] = out["electricite"][t] = 1.0
+            continue
+        out["transports"][t] = (1 + tv["Carburants"] + pc * k_carb) / (1 + an["Carburants"] + e2 * k_carb * 1.2)
+        out["batiments"][t] = (1 + tv["Gaz et fioul"] + pc * k_gaz) / (1 + an["Gaz et fioul"] + e2 * k_gaz * 1.2)
+        out["electricite"][t] = (1 + tv["Électricité"]) / (1 + an["Électricité"])
+    return out
+
+
+def reponse_energie(p: Parametres, s: str = "prudent") -> dict[str, dict[int, float]]:
+    """Facteur sur les émissions (et l'assiette taxée) des transports et des bâtiments : prix finaux du programme
+    contre le statu quo, plus l'effet croisé de l'électricité moins chère. Une seule équation pour la recette, les
+    émissions et l'inflation."""
+    from .ecologie import emissions as em
+    pf = prix_finaux(p)
+    return {i: em.reponse_ratio(p, pf[i], s, pf["electricite"]) for i in ("transports", "batiments")}
+
+
+def reponse_moyenne(p: Parametres, s: str = "prudent") -> dict[int, float]:
+    """Facteur moyen sur l'assiette carbone des ménages et des entreprises, pondéré par les émissions du statu quo
+    de 2029 (transports et bâtiments)."""
+    from .ecologie import emissions as em
+    r = reponse_energie(p, s)
+    e = em.territoriales(p, s)[2029]
+    w = {i: e[i] for i in r}
+    return {t: sum(w[i] * r[i][t] for i in r) / sum(w.values()) for t in em.ANNEES}
+
+
 def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, float]]:
     """Effet sur le solde par scénario (Md€), lignes 72 à 74."""
     r5 = recette_statique(p)
@@ -57,7 +108,7 @@ def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, flo
         # (activité, progrès technique) et répond au prix du programme rapporté au prix du statu quo, saut de 2029
         # compris, avec ajustement progressif
         from .ecologie import emissions as em
-        reponse = em.reponse_prix(p, {t: prix(p, t) for t in em.ANNEES})
+        reponse = {s: reponse_moyenne(p, s) for s in SCENARIOS}
         ind = {s: em.indice(p, s) for s in SCENARIOS}
         ind_ets2 = em.indice(p, "prudent", ("transports", "batiments"))
     # Accise sur le contenu importé : même formule que la ligne 69, prix de l'année
@@ -76,7 +127,7 @@ def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, flo
         ets1 = 0.0  # complément ETS1 désactivé (Carbone!B27 = 0)
         for s in SCENARIOS:
             if activite:
-                reelle = r5 * fp * reponse[t] * ind[s][t]
+                reelle = r5 * fp * reponse[s][t] * ind[s][t]
             else:
                 reelle = r5 * fp * fd * (1 + p.val("carbone.baisse_tendancielle_emissions", s)) ** n
             out[s][t] = reelle - statique + ets2 + importe + ets1 + vols + dom_tva

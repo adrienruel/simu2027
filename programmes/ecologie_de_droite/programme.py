@@ -545,14 +545,13 @@ def mesure_prix_carbone(p: Parametres, q: Parametres, s: str) -> Mesure:
     """Effet physique du prix du carbone (300 € en 2030, puis valeur de l'action pour le climat) sur les émissions
     des transports et des bâtiments, contre le prix du statu quo : la même réponse que l'assiette de la recette
     carbone (moteur/carbone.py), sans montant (la recette est déjà dans les instruments et l'effet macro carbone)."""
-    from moteur.carbone import prix
+    from moteur.carbone import reponse_energie
     from moteur.ecologie import emissions as em
-    rep = em.reponse_prix(q, {t: prix(q, t) for t in em.ANNEES})
+    rep = reponse_energie(q, s)
     e = em.territoriales(p, s)
-    phys = {f"emissions_mt:{i}": {t: e[t][i] * (rep[t] - 1) for t in em.ANNEES}
-            for i in p.val("ecologie.secteurs_prix")}
-    return Mesure("Prix du carbone : émissions des transports et des bâtiments", "recettes", {}, "physique",
-                  physique=phys, vert="favorable")
+    phys = {f"emissions_mt:{i}": {t: e[t][i] * (rep[i][t] - 1) for t in em.ANNEES} for i in rep}
+    return Mesure("Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments",
+                  "recettes", {}, "physique", physique=phys, vert="favorable")
 
 
 def mesure_carbone_importe(p: Parametres, q: Parametres, s: str) -> Mesure:

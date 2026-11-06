@@ -95,3 +95,14 @@ def test_tondelier_chiffre_en_tonnes():
     for k, v in mesures.items():
         if pt[k].source is None:
             assert v["effet_mt"]["prudent"] == 0, k
+
+
+def test_prix_finaux_ecologie_de_droite():
+    """Le programme remplace les taxes actuelles sur l'énergie : essence et électricité moins chères au départ, gaz
+    et fioul plus chers (remarque d'Adrien du 06/11/2026)."""
+    from moteur.carbone import prix_finaux
+    pf = prix_finaux(Parametres(programme="ecologie_de_droite"))
+    assert pf["transports"][2029] < 0.9 and pf["transports"][2050] > 1.1
+    assert pf["electricite"][2029] < 0.8
+    assert pf["batiments"][2029] > 1.0
+    assert pf["transports"][2028] == 1.0

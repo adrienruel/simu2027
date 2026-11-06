@@ -69,7 +69,8 @@ def serie(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
         # recette carbone) rapportée au PIB
         from . import statu_quo as sq
         from .ecologie import emissions as em
-        rep = em.reponse_prix(p, {t: prix(p, t) for t in em.ANNEES})
+        from .carbone import reponse_moyenne
+        rep = reponse_moyenne(p, jeu)
         ind, y = em.indice(p, jeu), sq.pib(p, em.scenario(p, jeu))
         evol = {t: ind[t] * rep[t] / rep[2029] / (y[t] / y[2029]) for t in range(2029, 2074)}
     else:

@@ -111,17 +111,35 @@ def reponse_long_terme(ecart_prix: float, contenu_kg_par_euro: float, elasticite
     return max(0.01, 1 + ecart_prix * contenu_kg_par_euro / 1000) ** (-elasticite)
 
 
-def reponse_prix(p: Parametres, prix: dict[int, float], debut: int = 2029) -> dict[int, float]:
-    """Facteur sur les émissions des secteurs ecologie.secteurs_prix, année par année, quand un programme fixe le
-    prix du carbone `prix` (€ de 2026 par tonne) à partir de `debut` : ajustement partiel vers le long terme."""
+def reponse_ratio(p: Parametres, ratio: dict[int, float], s: str = "prudent", ratio_electricite: dict[int, float] | None = None,
+                  debut: int = 2029) -> dict[int, float]:
+    """Facteur sur les émissions (et la consommation) d'une énergie fossile, année par année, quand son prix final
+    TTC est multiplié par ratio[t] par rapport au statu quo, à partir de `debut` :
+
+        long terme = ratio^(−élasticité) × ratio_électricité^(élasticité croisée)
+
+    atteint par ajustement partiel (part de l'écart refermée chaque année). L'électricité moins chère fait passer une
+    partie du chauffage et des voitures à l'électricité (ecologie.elasticite_croisee_electricite, par scénario)."""
     r = p.val("ecologie.reponse_prix")
+    ec = _v(p, "ecologie.elasticite_croisee_electricite", scenario(p, s)) if ratio_electricite else 0.0
     out, ln_a = {}, 0.0
     for t in ANNEES:
         if t >= debut:
-            cible = math.log(reponse_long_terme(prix[t] - prix_statu_quo(p, t), r["contenu_carbone_kg_par_euro"], r["elasticite"]))
+            cible = -r["elasticite"] * math.log(max(0.01, ratio[t]))
+            if ratio_electricite:
+                cible += ec * math.log(max(0.01, ratio_electricite[t]))
             ln_a += r["ajustement"] * (cible - ln_a)
         out[t] = math.exp(ln_a)
     return out
+
+
+def reponse_prix(p: Parametres, prix: dict[int, float], debut: int = 2029) -> dict[int, float]:
+    """Cas d'un programme qui AJOUTE un prix du carbone aux taxes actuelles sur l'énergie : le prix final monte de
+    (prix − prix du statu quo) × contenu carbone de la dépense d'énergie. Un programme qui remplace les taxes
+    actuelles passe par reponse_ratio avec ses prix finaux (Écologie de droite : moteur/carbone.prix_finaux)."""
+    r = p.val("ecologie.reponse_prix")
+    ratio = {t: max(0.01, 1 + (prix[t] - prix_statu_quo(p, t)) * r["contenu_carbone_kg_par_euro"] / 1000) for t in ANNEES}
+    return reponse_ratio(p, ratio, debut=debut)
 
 
 # --- Programmes ------------------------------------------------------------------------------------------------

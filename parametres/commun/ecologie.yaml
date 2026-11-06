@@ -64,6 +64,12 @@ ecologie:
     statut: HYPOTHESE
     source: "Encadrée : Labandeira, Labeaga et López-Otero (2017), méta-analyse des élasticités-prix de l'énergie, environ −0,2 à court terme et −0,6 à long terme ; contenu carbone : essence et gazole environ 2,3 à 2,6 kg de CO2 par litre pour environ 1,8 € le litre (≈ 1,3 kg par euro), gaz environ 0,2 kg par kWh pour environ 0,12 € (≈ 1,7 kg par euro)"
     note: "Hausse du prix final = (prix du carbone du programme − prix du statu quo, en €/t) × contenu carbone (kg par euro de dépense d'énergie) / 1 000 ; émissions = statu quo × (1 + hausse)^(−élasticité) à long terme, atteint par ajustement partiel (part de l'écart refermée chaque année). Correction du 05/11/2026 (question d'Adrien) : la version précédente appliquait la part de l'accise au prix du programme (35 %) à l'écart avec le prix du statu quo, ce qui triplait la hausse du prix (+86 % au lieu de +28 % en 2030 pour l'essence). Repère : la taxe carbone suédoise (environ 120 € par tonne) a baissé les émissions des transports d'environ 11 % (Andersson, 2019)."
+  elasticite_croisee_electricite:
+    valeur: {crise: 0.0, prudent: 0.0, median: 0.1, optimiste: 0.2}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Labandeira, Labeaga et López-Otero (2017) : la plupart des études ne peuvent pas estimer les effets croisés, dont le potentiel de substitution vers des énergies moins polluantes est jugé réel mais non chiffré"
+    note: "Baisse des émissions fossiles (chauffage, voitures) quand l'électricité devient moins chère : électrification plus rapide. Sans valeur sourcée : zéro en crise et en prudent, 0,1 en médian, 0,2 en optimiste (pour −23 % sur l'électricité, −2,6 % et −5,1 % à long terme)."
   budgets_carbone:
     valeur: {2024: 342, 2029: 262, 2034: 194}
     unite: mt_co2e

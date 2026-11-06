@@ -149,3 +149,21 @@ statu quo, moins ce qui ne va pas à la consommation (contexte `pib_hors_consomm
 n'est pas consommée ; ses retombées sur le reste de l'économie le sont. Tondelier : son écart de PIB (multiplicateur)
 est compté en entier comme consommation, faute de décomposition ; sa part d'investissement public le surestime un peu.
 Les émissions territoriales, elles, suivent toujours le PIB (la production émet, qu'elle soit consommée ou investie).
+
+## Prix finaux de l'énergie (06/11/2026, remarque d'Adrien : « l'essence et l'électricité baissent »)
+
+Erreur trouvée : la réponse au prix comparait le prix du carbone du programme à celui du statu quo comme s'il
+s'ajoutait aux taxes actuelles. Or le programme remplace les taxes actuelles sur l'énergie (accises et TVA) par la
+TVA et l'accise écologique de son barème. `carbone.prix_finaux` compare désormais les prix TTC, énergie par énergie
+(prix hors taxe constants, ETS2 dans le statu quo à partir de 2028) :
+
+| Prix final, programme / statu quo | 2029 | 2030 | 2037 | 2050 | 2060 |
+|---|---|---|---|---|---|
+| Carburants | 0,87 | 0,92 | 1,02 | 1,27 | 1,55 |
+| Gaz et fioul | 1,09 | 1,16 | 1,28 | 1,59 | 1,93 |
+| Électricité | 0,77 | 0,77 | 0,77 | 0,77 | 0,77 |
+
+L'essence est moins chère que sans réforme jusque vers 2036 (les émissions des transports montent d'abord d'environ
+3 %), puis plus chère. Le chauffage au gaz et au fioul est plus cher dès 2029. L'électricité moins chère accélère
+l'électrification (élasticité croisée : zéro dans le prudent faute de source, 0,1 en médian, 0,2 en optimiste).
+La recette carbone et l'inflation suivent la même réponse (`carbone.reponse_energie`).
