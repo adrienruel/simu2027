@@ -14,7 +14,9 @@ s'efface :
   net d'OpenFisca : la mesure est répartie entre cellules selon son incidence (Mesure.incidence : « proportionnel »
   aux prélèvements, « ir » à l'impôt sur le revenu, « bas » : montant égal par contribuable de l'impôt sur le revenu
   jusqu'à 2,5 SMIC, « haut » : impôt sur le revenu au-delà de 4 SMIC, « milieu » : prélèvements entre 1,6 et 3,5 SMIC
-  (allègements), « plafond » : salaire au-delà du plafond de la Sécurité sociale) ; chaque cellule réagit au revenu net en plus
+  (allègements), « plafond » : salaire au-delà du plafond de la Sécurité sociale, ou « openfisca:<réforme> » : réforme
+  calculée par OpenFisca, offre (gain à travailler, personnes seules et neuf cas de couples) et demande (coût du
+  travail) cellule par cellule ; « …@0,62 » : seule cette part du montant porte sur les revenus du travail) ; chaque cellule réagit au revenu net en plus
   avec l'élasticité de participation de sa tranche (plus forte en bas) et celle des heures ; effet sur le PIB = travail
   en plus pondéré par le coût × part du travail ;
 - **entreprises** : même élasticité de l'investissement au coût du capital que les cohortes d'entreprises
@@ -38,16 +40,17 @@ from .noyau import ANNEES, Mesure
 from .parametres import Parametres
 
 INSTRUMENTS = ("travail", "cout_travail", "capital_entreprises", "capital_menages", "successions", "consommation",
-               "transferts_actifs")
+               "transferts_actifs", "investissement_public")
 INCIDENCES = ("proportionnel", "ir", "bas", "haut", "milieu", "plafond")
 LIBELLES = {"travail": "prélèvements sur le travail", "cout_travail": "coût du travail",
             "capital_entreprises": "fiscalité des entreprises", "capital_menages": "fiscalité du capital des ménages",
-            "successions": "successions", "consommation": "TVA et accises", "transferts_actifs": "transferts aux actifs"}
+            "successions": "successions", "consommation": "TVA et accises", "transferts_actifs": "transferts aux actifs",
+            "investissement_public": "investissement public"}
 # part de l'effet sur le PIB qui est de l'emploi (hors travail, calculé par cellule), et part de ces emplois qui vient
 # de l'inactivité (le reste : chômage)
 EMPLOI = {"travail": (None, 1.0), "cout_travail": (1.0, 0.0), "capital_entreprises": (0.3, 0.0),
           "capital_menages": (0.0, 0.0), "successions": (0.0, 0.0), "consommation": (0.5, 0.0),
-          "transferts_actifs": (1.0, 1.0)}
+          "transferts_actifs": (1.0, 1.0), "investissement_public": (0.5, 0.0)}
 MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
 TRANSFERTS_CIBLES = ("famille", "logement", "pauvrete", "chomage", "aah_invalidite")
 SMIC_BRUT_2026 = 1823.03 * 12
@@ -121,47 +124,82 @@ def _table_offre(nom: str) -> dict:
     return {k: [l[k] for l in lignes] for k in lignes[0]}
 
 
-def _reactions_openfisca(nom: str, brut: float) -> dict:
-    """Pour une réforme calculée par OpenFisca, au salaire brut donné : revenu disponible en plus (personne seule),
-    variation relative du gain à travailler (participation) et du taux de revenu net marginal (heures), pour une
-    personne seule et un second apporteur en couple."""
+def _cas_couples(p: Parametres) -> list[tuple[str, float]]:
+    """Colonnes des neuf cas de couples des tables d'OpenFisca et leur poids (offre.couples_cas)."""
+    from outils.openfisca_offre import CONJOINTS, ENFANTS, colonne_couple
+    w = p.val("offre.couples_cas")
+    return [(colonne_couple(c, e), wc * we) for c, wc in zip(CONJOINTS, w["conjoints"]) for e, we in zip(ENFANTS, w["enfants"])]
+
+
+def _reactions_openfisca(nom: str, brut: float, cas_couples: list[tuple[str, float]]) -> dict:
+    """Pour une réforme calculée par OpenFisca, au salaire brut donné : variations relatives du gain à travailler
+    (participation) et du taux de revenu net marginal (heures), pour une personne seule et en moyenne sur les couples
+    (second apporteur) ; prélèvements en moins (salaire net après impôt sur le revenu en plus, moins coût du travail en
+    plus), prestations en plus, coût du travail en plus (relatif)."""
     from .systeme_actuel import _interp
     a, r = _table_offre("actuel"), _table_offre(nom)
-    out = {}
-    for cas in ("seul", "couple"):
-        col = f"disponible_{cas}"
+    h = max(1000.0, 0.02 * brut)
+    dc = _interp(brut + h, a["brut"], a["cout_du_travail"]) - _interp(brut, a["brut"], a["cout_du_travail"])
 
+    def reaction(col):
         def disp(T, b):
             return _interp(b, T["brut"], T[col])
-        g0 = disp(a, brut) - disp(a, 0.0)
-        g1 = disp(r, brut) - disp(r, 0.0)
-        h = max(1000.0, 0.02 * brut)
-        dc = _interp(brut + h, a["brut"], a["cout_du_travail"]) - _interp(brut, a["brut"], a["cout_du_travail"])
+        g0, g1 = disp(a, brut) - disp(a, 0.0), disp(r, brut) - disp(r, 0.0)
         m0 = (disp(a, brut + h) - disp(a, brut)) / dc
         m1 = (disp(r, brut + h) - disp(r, brut)) / dc
-        out[cas] = {"participation": (g1 - g0) / g0 if g0 > 0 else 0.0,
-                    "heures": (m1 - m0) / m0 if m0 > 0 else 0.0,
-                    "disponible": disp(r, brut) - disp(a, brut)}
-    # impôts en moins (salaire net après impôt sur le revenu), et prestations en plus (disponible − impôts)
+        return {"participation": (g1 - g0) / g0 if g0 > 0 else 0.0, "heures": (m1 - m0) / m0 if m0 > 0 else 0.0,
+                "disponible": disp(r, brut) - disp(a, brut)}
+    out = {"seul": reaction("disponible_seul")}
+    cp = {"participation": 0.0, "heures": 0.0}
+    for col, w in cas_couples:
+        x = reaction(f"disponible_{col}")
+        cp["participation"] += w * x["participation"]
+        cp["heures"] += w * x["heures"]
+    out["couple"] = cp
+    c0, c1 = _interp(brut, a["brut"], a["cout_du_travail"]), _interp(brut, r["brut"], r["cout_du_travail"])
     di = _interp(brut, r["brut"], r["net_apres_ir_seul"]) - _interp(brut, a["brut"], a["net_apres_ir_seul"])
-    out["impots_en_moins"] = di
+    out["prelevements_en_moins"] = di - (c1 - c0)
     out["prestations_en_plus"] = out["seul"]["disponible"] - di
+    out["cout_relatif"] = (c1 - c0) / c0 if c0 > 0 else 0.0
     return out
 
 
 def statique_openfisca(p: Parametres, nom: str) -> dict:
     """Coût statique d'une réforme du travail calculée par OpenFisca, sur les cellules de salariés de 2026 (Md€,
-    économie de 2026 placée en 2029) : impôts en moins et prestations en plus (prime d'activité, RSA, aides au
-    logement), cas d'une personne seule comme le statu quo."""
+    économie de 2026 placée en 2029) : prélèvements en moins (impôts et cotisations des salariés, cotisations
+    patronales) et prestations en plus (prime d'activité, RSA, aides au logement), cas d'une personne seule comme le
+    statu quo."""
     cache = p.__dict__.setdefault("_cache", {})
     if ("offre_statique", nom) not in cache:
-        imp = pre = 0.0
+        cc = _cas_couples(p)
+        prl = pre = 0.0
         for x in _cellules(p):
-            r = _reactions_openfisca(nom, x["brut"])
-            imp += x["n"] * r["impots_en_moins"]
+            r = _reactions_openfisca(nom, x["brut"], cc)
+            prl += x["n"] * r["prelevements_en_moins"]
             pre += x["n"] * r["prestations_en_plus"]
-        cache[("offre_statique", nom)] = {"impots_en_moins": imp / 1e9, "prestations_en_plus": pre / 1e9}
+        cache[("offre_statique", nom)] = {"prelevements_en_moins": prl / 1e9, "prestations_en_plus": pre / 1e9,
+                                          "impots_en_moins": prl / 1e9}
     return cache[("offre_statique", nom)]
+
+
+def ir_salaries_menages(p: Parametres, nom: str = "actuel") -> dict:
+    """Impôt sur le revenu des salariés (Md€) calculé sur les cellules de 2026 : en personnes seules, et avec la part
+    des salariés en couple (impôt du couple attribué au prorata des salaires, moyenne des neuf cas). Sert à caler les
+    mesures d'impôt sur le revenu (OpenFisca en personne seule le surestime)."""
+    from .systeme_actuel import _interp
+    from outils.openfisca_offre import CONJOINTS, ENFANTS, colonne_couple
+    T = _table_offre(nom)
+    pc, _ = p.val("offre.travail_couples", "prudent")
+    w = p.val("offre.couples_cas")
+    seul = mix = 0.0
+    for x in _cellules(p):
+        b = x["brut"]
+        i_s = _interp(b, T["brut"], T["ir_seul"])
+        i_c = sum(wc * we * _interp(b, T["brut"], T[f"ir_{colonne_couple(c, e)}"]) * b / (b + c)
+                  for c, wc in zip(CONJOINTS, w["conjoints"]) for e, we in zip(ENFANTS, w["enfants"]))
+        seul += x["n"] * i_s
+        mix += x["n"] * ((1 - pc) * i_s + pc * i_c)
+    return {"seuls": seul / 1e9, "menages": mix / 1e9}
 
 
 def travail_par_point(p: Parametres, s: str, incidence: str = "proportionnel") -> dict:
@@ -206,31 +244,35 @@ def travail_par_point(p: Parametres, s: str, incidence: str = "proportionnel") -
 
 
 def _travail_openfisca(p: Parametres, s: str, nom: str) -> dict:
-    """Effet de long terme d'une réforme du travail calculée par OpenFisca, ramené à 1 point de PIB de son coût
-    statique (revenu disponible en plus, cellule par cellule) : chaque cellule réagit au gain à travailler
-    (participation, élasticité de sa tranche) et au taux de revenu net marginal (heures) ; une part des salariés est
-    en couple (second apporteur, élasticité relative offre.travail_couples)."""
+    """Effet de long terme d'une réforme du travail calculée par OpenFisca, ramené à 1 point de PIB de prélèvements en
+    moins (statique) : offre (gain à travailler et taux marginal, personnes seules et couples) et demande (coût du
+    travail, élasticité de sa tranche), cellule par cellule."""
     cel = _cellules(p)
+    cc = _cas_couples(p)
     y29 = sq.pib(p, s)[2029]
     ext = sq._v(p, "offre.travail_participation", s)
     hrs = sq._v(p, "offre.travail_heures", s)
+    dem = sq._v(p, "offre.demande_travail", s)
     pc, kc = sq._v(p, "offre.travail_couples", s)
     masse = sum(x["n"] * x["cout"] for x in cel)
-    travail = emplois = 0.0
-    cout = statique_openfisca(p, nom)["impots_en_moins"] * 1e9  # rapporté aux impôts en moins, comme les mesures
+    travail = emplois_offre = emplois_demande = 0.0
     for x in cel:
-        r = _reactions_openfisca(nom, x["brut"])
+        r = _reactions_openfisca(nom, x["brut"], cc)
         b = x["brut"] / SMIC_BRUT_2026
-        e = ext[0] if b <= 1.3 else (ext[1] if b <= 2.5 else ext[2])
-        part = (1 - pc) * e * r["seul"]["participation"] + pc * kc * e * r["couple"]["participation"]
+        i = 0 if b <= 1.3 else (1 if b <= 2.5 else 2)
+        part = (1 - pc) * ext[i] * r["seul"]["participation"] + pc * kc * ext[i] * r["couple"]["participation"]
         heures = hrs * ((1 - pc) * r["seul"]["heures"] + pc * r["couple"]["heures"])
-        emplois += x["n"] * part
-        travail += x["n"] * (part + heures) * x["cout"]
-    if abs(cout) < 1e3:
-        return {"pib_pct": 0.0, "emplois": 0.0}
-    points = cout / (0.01 * y29 * 1e9)  # coût statique de la réforme, en points de PIB
+        demande = -dem[i] * r["cout_relatif"]
+        emplois_offre += x["n"] * part
+        emplois_demande += x["n"] * demande
+        travail += x["n"] * (part + heures + demande) * x["cout"]
+    prl = statique_openfisca(p, nom)["prelevements_en_moins"]
+    if abs(prl) < 1e-3:
+        return {"pib_pct": 0.0, "emplois": 0.0, "emplois_demande": 0.0}
+    points = prl * 1e9 / (0.01 * y29 * 1e9)
     pct = sq._v(p, "offre.travail_part_pib", s) * travail / masse * 100
-    return {"pib_pct": pct / points, "emplois": emplois / points, "impots_en_moins_md": cout / 1e9}
+    return {"pib_pct": pct / points, "emplois": emplois_offre / points, "emplois_demande": emplois_demande / points,
+            "prelevements_en_moins_md": prl}
 
 
 def capital_entreprises_par_point(p: Parametres, s: str) -> float:
@@ -258,42 +300,56 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
     annees = (*annees_avant, *ANNEES)
     cles = {}
     for m in mesures:
-        if not m.instrument:
+        instrument = m.instrument or ("investissement_public" if (m.poste == "investissement" and m.nature == "mesure") else "")
+        if not instrument:
             continue
-        if m.instrument not in INSTRUMENTS:
-            raise ValueError(f"Mesure « {m.nom} » : instrument inconnu {m.instrument}")
-        inc = (m.incidence or "proportionnel") if m.instrument == "travail" else ""
-        cle = (m.instrument, inc)
+        if instrument not in INSTRUMENTS:
+            raise ValueError(f"Mesure « {m.nom} » : instrument inconnu {instrument}")
+        inc = (m.incidence or "proportionnel") if instrument == "travail" else ""
+        part = 1.0
+        if "@" in inc:  # « réforme@part » : seule cette part du montant porte sur les revenus du travail
+            inc, x = inc.split("@", 1)
+            part = float(x)
+        cle = (instrument, inc)
         cles.setdefault(cle, {t: 0.0 for t in annees})
-        for t in annees:  # recette en plus ou transfert en plus : contre l'offre (points < 0)
-            cles[cle][t] -= m.valeurs.get(t, 0.0) / y[max(t, 2029)] * 100
+        # recette en plus ou transfert en plus : contre l'offre (points < 0) ; investissement public en plus : pour
+        signe = 1.0 if instrument == "investissement_public" else -1.0
+        for t in annees:
+            cles[cle][t] += signe * part * m.valeurs.get(t, 0.0) / y[max(t, 2029)] * 100
     vit = sq._v(p, "offre.vitesse", s)
     out = {"dpib": {t: 0.0 for t in annees}, "emplois": {}, "actifs": {t: 0.0 for t in ANNEES}, "detail": {}}
     for (i, inc), pts in cles.items():
         if not any(pts.values()):
             continue
+        el = {}
 
         def elasticite(sc):
             if i == "travail":
                 x = travail_par_point(p, sc, inc)
-                return x["pib_pct"], x["emplois"]
+                return x["pib_pct"], x["emplois"], x.get("emplois_demande", 0.0)
             if i == "capital_entreprises":
                 return capital_entreprises_par_point(p, sc), None
             return sq._v(p, f"offre.elasticite_{i}", sc), None
         el = {sc: elasticite(sc) for sc in {s, MIROIR[s]}}
-        effet, emp, cumul, cumul_e = {}, {}, 0.0, 0.0
+        effet, emp, emp_d, cumul, cumul_e, cumul_d = {}, {}, {}, 0.0, 0.0, 0.0
         for t in annees:
             sc = s if pts[t] >= 0 else MIROIR[s]
             cumul += vit * (el[sc][0] * pts[t] - cumul)
             effet[t] = cumul
             if i == "travail":
                 cumul_e += vit * (el[sc][1] * pts[t] - cumul_e)
-                emp[t] = cumul_e
+                cumul_d += vit * (el[sc][2] * pts[t] - cumul_d)
+                emp[t], emp_d[t] = cumul_e, cumul_d
         for t in annees:
             out["dpib"][t] += effet[t] / 100 * y[max(t, 2029)]
         part_emploi, part_inactifs = EMPLOI[i]
         if i == "travail":
             serie = {t: emp[t] * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
+            dem = {t: emp_d[t] * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
+            if any(abs(v) > 1 for v in dem.values()):
+                canal = f"Offre : coût du travail ({inc.split(':', 1)[-1]})"
+                prec = out["emplois"].get(canal, {t: 0.0 for t in ANNEES})
+                out["emplois"][canal] = {t: prec[t] + dem[t] for t in ANNEES}  # pris sur le chômage
         elif part_emploi:
             serie = {t: part_emploi * effet[t] / 100 * e[t]["emploi"] for t in ANNEES}
         else:

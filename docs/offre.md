@@ -28,40 +28,56 @@ les comparaisons de modèles de la zone euro (Kilponen et al., BNB WP 278, 2015 
 
 ## Offre : effet durable, instrument par instrument
 
-### Travail : OpenFisca, personnes seules et couples
+### Travail : OpenFisca, personnes seules et couples, offre et demande
 
 `outils/openfisca_offre.py` calcule avec OpenFisca-France (législation 2026), sur toute la grille de salaires, le
-revenu disponible d'une personne seule et d'un ménage en couple (marié, un enfant, conjoint à 30 000 € brut ; le salaire
-de la grille est celui du second apporteur), dans le système actuel et pour chaque réforme du travail des programmes :
+revenu disponible, l'impôt sur le revenu et le coût du travail d'une personne seule et de **neuf cas de couples**
+(conjoint à 18 000, 30 000 ou 55 000 € brut × zéro, un ou deux enfants ; le salaire de la grille est celui du second
+apporteur), pondérés (offre.couples_cas : tiers de salaires ; 35 % sans enfant, 25 % un, 40 % deux ou plus, Insee),
+dans le système actuel et pour chaque réforme du travail des programmes :
 
-| Réforme OpenFisca | Programmes | Impôts en moins (Md€, statique) | Prestations en plus (Md€) |
+| Réforme OpenFisca | Programmes | Prélèvements en moins (Md€, statique) | Prestations en plus (Md€) |
 |---|---|---|---|
 | CSG supprimée sur les revenus d'activité | Zemmour | 83,3 | −7,5 |
-| CSG déductible +1 point sur les revenus d'activité | Tondelier (COT-04) | −8,4 | +1,0 |
+| CSG déductible +1 point sur les revenus d'activité | Tondelier (COT-04, 62 % du montant) | −8,4 | +1,0 |
 | Tranche à 11 % de l'impôt sur le revenu ramenée à 9 % | Bertrand, Tondelier | 7,9 | 0 |
 | Tranche à 60 % au-delà de 250 000 € par part | Tondelier | −0,7 | 0 |
+| Allègements arrêtés à 1,6 SMIC au lieu de 3 | Tondelier (REC-37) | −26,0 | 0 |
+| Cotisation vieillesse salariale +1 point au-delà du plafond | Tondelier (COT-01) | −1,2 | 0 |
+| Cotisations vieillesse +0,5 point salarié et employeur | Tondelier (COT-02) | −9,9 | +0,4 |
 
-Pour chaque cellule de salaire (distributions de 2026, privé et public) : variation du **gain à travailler** (revenu
-disponible en emploi moins sans emploi : participation) et du **taux de revenu net marginal** (heures), pour une
-personne seule et pour un second apporteur en couple (60 % des salariés, élasticité 1 à 1,5 fois plus forte : Bargain,
-Orsini et Peichl, 2014). Élasticités de participation au gain à travailler par tranche de salaire (plus fortes en bas,
-Immervoll et al., 2007), calées pour que la suppression de la CSG donne, par point de PIB, 0,26 % de PIB en crise,
-0,44 % en prudent, 0,69 % en médian et 1,1 % en optimiste (Bassanini et Scarpetta, OCDE, 2001 : 0,3 effet direct,
-0,6 à 0,7 avec l'investissement). L'effet est rapporté aux impôts en moins, comme les montants des mesures.
+Cellule par cellule (distributions de salaires de 2026) :
+- **offre** : variation du gain à travailler (participation) et du taux de revenu net marginal (heures), personnes
+  seules et couples (60 % des salariés, élasticité 1 à 1,5 fois plus forte) ; emplois venus de l'inactivité ;
+- **demande** : variation du coût du travail (cotisations patronales, allègements), avec une élasticité par tranche
+  (offre.demande_travail : forte près du SMIC, Kramarz et Philippon ; faible au-delà de 1,6 SMIC, Bozio et Wasmer) ;
+  emplois pris sur le chômage.
 
-Les autres mesures du travail (cotisations, allègements, épargne salariale, niches) gardent une incidence simple
-(proportionnelle aux prélèvements, entre 1,6 et 3,5 SMIC, au-dessus du plafond de la Sécurité sociale…).
+Effet rapporté aux prélèvements en moins (cotisations patronales comprises), comme les montants des mesures.
+Calage : la suppression de la CSG donne, par point de PIB, 0,3 % de PIB en crise, 0,5 % en prudent, 0,8 % en médian,
+≈ 1,1 % en optimiste (Bassanini et Scarpetta, OCDE, 2001 : 0,3 direct, 0,6 à 0,7 avec l'investissement).
+
+**Montants des mesures d'impôt sur le revenu** : OpenFisca surestime l'impôt sur le revenu (89 Md€ sur les salaires en
+personnes seules, 71 avec les couples, contre ≈ 60 réels : décote, réductions et crédits, autres revenus). Il ne sert
+qu'à répartir l'effet entre cellules ; les montants restent sourcés à part. Recalages faits :
+- tranche à 11 % ramenée à 9 % (Bertrand, Tondelier) : 4,5 Md€ en prudent et en crise, 3,3 en médian et en optimiste,
+  d'après la réforme de 2020 (14 → 11 %, ≈ 5 Md€ pour 3 points avec un mécanisme limitant le gain des tranches
+  supérieures ; OpenFisca : 7,5 Md€) — avant : 3 Md€ partout ;
+- impôt sur le revenu en plus quand la CSG disparaît (Zemmour) : 72 % du calcul en personne seule en médian (couples
+  et impôt réel), 65 % en prudent — avant : 65 % en médian, 60 % en prudent.
 
 **Correction trouvée en passant** : supprimer la CSG fait baisser la prime d'activité, le RSA et les aides au logement
-(le salaire net monte) : ≈ 7,5 Md€ d'économie que le chiffrage de Zemmour ne comptait pas ; symétriquement, la hausse
-de CSG de Tondelier les fait monter (≈ 1 Md€). Les deux sont désormais des mesures.
+(≈ 7,5 Md€ d'économie que le chiffrage de Zemmour ne comptait pas) ; la hausse de CSG de Tondelier les fait monter
+(≈ 1 Md€).
 
 ### Entreprises et autres instruments
 
 - Entreprises : élasticité de l'investissement au coût du capital des cohortes, coût du capital (1 − τz)/(1 − τ),
   part du capital 0,35 : ≈ +0,45 % de PIB pour 1 point de PIB d'IS en moins.
-- Coût du travail (Mésange), capital des ménages, successions, TVA, transferts aux actifs : élasticités sourcées dans
-  economie.yaml.
+- Investissement public (dépense au poste investissement) : +0,2 % de PIB à long terme pour 1 point de PIB en prudent,
+  0,33 en médian (Mésange), 0,5 en optimiste (Bom et Ligthart, 2014) ; emplois à moitié, pris sur le chômage.
+- Coût du travail (autres mesures, Mésange), capital des ménages, successions, TVA, transferts aux actifs : élasticités
+  sourcées dans economie.yaml.
 - Baisse : élasticité du scénario ; hausse : scénario miroir (prudent ↔ médian, crise ↔ optimiste). Montée de
   Mésange (≈ 10 % de l'écart par an).
 
@@ -89,32 +105,31 @@ seniors ; PIB qu'il faudrait encore en plus pour rejoindre le solde primaire du 
 
 | Programme | Scénario | Solde 2029 | Solde 2037 | PIB | Chômage : programme / statu quo | Emplois | dont seniors | PIB encore nécessaire | Déficit : programme / statu quo |
 |---|---|---|---|---|---|---|---|---|---|
-| Zemmour (avec Knafo) | crise | −3,0 | −2,8 | +0,7 % | 11,2 / 10,3 | −9 | +109 | +5,3 % | 17,4 / 12,3 |
-| | prudent | −2,8 | −2,0 | +1,5 % | 9,0 / 8,3 | +172 | +121 | +3,9 % | 13,1 / 9,7 |
-| | médian | −2,5 | −0,9 | +2,8 % | 8,3 / 8,3 | +487 | +133 | +1,8 % | 10,1 / 8,5 |
-| | optimiste | −1,9 | +0,6 | +5,2 % | 7,1 / 8,3 | +1 064 | +155 | −1,2 % | 7,4 / 8,2 |
-| Tondelier | crise | −0,9 | −4,0 | −2,3 % | 13,3 / 10,3 | −1 421 | −324 | +7,7 % | 18,5 / 12,3 |
-| | prudent | −0,7 | −3,0 | −1,8 % | 10,3 / 8,3 | −1 042 | −278 | +5,8 % | 14,0 / 9,7 |
-| | médian | +0,0 | −1,7 | −1,4 % | 9,2 / 8,3 | −646 | −253 | +3,3 % | 10,8 / 8,5 |
-| | optimiste | +0,4 | −0,6 | −1,2 % | 8,2 / 8,3 | −327 | −228 | +1,2 % | 8,9 / 8,2 |
-| Bertrand | prudent | −0,0 | +0,2 | +0,2 % | 8,5 / 8,3 | +67 | +79 | aucun | 9,3 / 9,7 |
-| | optimiste | +0,1 | +0,6 | +0,7 % | 8,3 / 8,3 | +202 | +132 | aucun | 7,3 / 8,2 |
+| Zemmour (avec Knafo) | crise | −3,0 | −2,7 | +0,8 % | 11,2 / 10,3 | −16 | +109 | +5,1 % | 17,3 / 12,3 |
+| | prudent | −2,8 | −1,9 | +1,6 % | 9,0 / 8,3 | +158 | +121 | +3,7 % | 13,0 / 9,7 |
+| | médian | −2,4 | −0,8 | +3,0 % | 8,3 / 8,3 | +466 | +133 | +1,6 % | 9,9 / 8,5 |
+| | optimiste | −1,8 | +0,8 | +5,4 % | 7,1 / 8,3 | +1 030 | +155 | −1,5 % | 7,2 / 8,2 |
+| Tondelier | crise | −0,9 | −4,1 | −2,4 % | 13,5 / 10,3 | −1 448 | −324 | +7,9 % | 18,6 / 12,3 |
+| | prudent | −0,8 | −3,1 | −1,9 % | 10,5 / 8,3 | −1 064 | −278 | +5,9 % | 14,1 / 9,7 |
+| | médian | +0,0 | −1,7 | −1,4 % | 9,3 / 8,3 | −654 | −253 | +3,3 % | 10,8 / 8,5 |
+| | optimiste | +0,4 | −0,5 | −1,0 % | 8,3 / 8,3 | −314 | −228 | +1,0 % | 8,9 / 8,2 |
+| Bertrand | prudent | −0,1 | +0,2 | +0,3 % | 8,5 / 8,3 | +71 | +79 | aucun | 9,4 / 9,7 |
+| | optimiste | +0,1 | +0,6 | +0,7 % | 8,3 / 8,3 | +200 | +132 | aucun | 7,4 / 8,2 |
 | Arthaud (partiel) | prudent | −0,9 | −1,8 | −2,2 % | 13,4 / 8,3 | −1 623 | 0 | +3,4 % | 12,7 / 9,7 |
 
 Lecture :
 - Zemmour : la suppression de la CSG, calculée par OpenFisca, rapporte durablement environ 1 % de PIB en prudent ;
-  avec les seniors et la prime d'activité en moins, il lui faudrait encore 3,9 % de PIB pour ne pas creuser le solde
+  avec les seniors et la prime d'activité en moins, il lui faudrait encore 3,7 % de PIB pour ne pas creuser le solde
   par rapport au statu quo ; il ne s'autofinance que dans l'optimiste.
-- Tondelier : le retour à 62 ans coûte ≈ 280 000 emplois de seniors en prudent ; avec le SMIC et les hausses de
-  prélèvements, le PIB est 1,8 % sous le statu quo.
+- Tondelier : le retour à 62 ans coûte ≈ 280 000 emplois de seniors en prudent ; avec le SMIC, la fin des
+  allègements au-dessus de 1,6 SMIC et les hausses de prélèvements, le PIB est 1,9 % sous le statu quo.
 
 ## Limites restantes
 
-1. Quatre réformes du travail sont calculées par OpenFisca (les plus lourdes) ; les autres mesures du travail gardent
-   une incidence simple.
-2. Couples : un seul cas type de second apporteur (conjoint au salaire médian, un enfant) ; pas encore la distribution
-   des ménages réels.
-3. Les montants des mesures restent ceux des programmes (barème de l'impôt sur le revenu calé sur la DGFiP) ;
-   OpenFisca, en personne seule, surestime l'impôt sur le revenu (tranche à 11 % ramenée à 9 % : 7,9 Md€ contre 3 Md€
-   retenus) : il ne sert qu'à répartir l'effet entre cellules.
-4. Pas d'effet des dépenses publiques sur l'offre (éducation, investissement public) au-delà du multiplicateur.
+1. Les mesures du travail encore en incidence simple pèsent peu (Tondelier : épargne salariale, plafonnement des
+   niches) ; toutes les grosses passent par OpenFisca.
+2. Couples : neuf cas types pondérés, pas encore l'échantillon des ménages réels (enquête Revenus fiscaux et sociaux,
+   accès sécurisé) ; familles monoparentales absentes.
+3. OpenFisca surestime l'impôt sur le revenu (décote, réductions, autres revenus absents) : il répartit les effets,
+   les montants restent calés sur des chiffrages publics.
+4. Pas d'effet d'offre de l'éducation ni de la recherche (horizons trop longs) ; investissement public seulement.

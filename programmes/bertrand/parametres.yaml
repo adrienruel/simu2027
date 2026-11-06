@@ -87,11 +87,12 @@ bertrand_mesures:
   # ---------------------------------------------------------------- fiscalité
   ir_tranches_basses:
     valeur: {id: BER-FIS-01, instrument: travail, incidence: "openfisca:ir_tranche_11_a_9", libelle: "Impôt sur le revenu : baisse des premières tranches (tranche à 11 % ramenée à 9 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
-             montant: {crise: -3.0, prudent: -3.0, median: -3.0, optimiste: -3.0}}
+             montant: {crise: -4.5, prudent: -4.5, median: -3.3, optimiste: -3.3}}
     unite: md_eur
     annee_euros: 2026
-    statut: DECISION
-    source: "Même arbitrage que le programme Tondelier (REC-11), pour comparer : 2 points sur la tranche à 11 %, qui rapporte ≈ 15 Md€ (DGFiP)"
+    statut: HYPOTHESE
+    source: "Réforme de 2020 : première tranche de 14 à 11 % (3 points), coût ≈ 5 Md€ avec un mécanisme limitant le gain des tranches supérieures (Public Sénat, juillet 2019, d’après Bercy) : 2 points ≈ 3,3 Md€ avec ce mécanisme (médian, optimiste), ≈ 4,5 Md€ sans (prudent, crise, une baisse d’impôt coûte plus en prudent). OpenFisca (personnes seules et couples, salariés seuls) donne 7,5 Md€ : il ignore la décote, les réductions et crédits d’impôt et les autres revenus, et ne sert qu’à répartir l’effet entre cellules (outils/openfisca_offre.py)"
+    note: "Lecture du programme (arbitrage) : la tranche à 11 % ramenée à 9 %, même lecture pour Bertrand et Tondelier."
   flat_tax:
     valeur: {id: BER-FIS-02, instrument: capital_menages, libelle: "Relèvement du prélèvement forfaitaire unique de 2 points", poste: recettes, moteur: "recette:capital_dividendes_ifi", debut: 2028, plein: 2028,
              montant: {crise: 0.6, prudent: 0.7, median: 0.9, optimiste: 1.1}}

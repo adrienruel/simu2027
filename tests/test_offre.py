@@ -151,3 +151,38 @@ def test_reformes_openfisca_dans_la_fourchette_macro(p):
     littérature (≈ 0,3 à 1 % de PIB)."""
     e = {s: offre.travail_par_point(p, s, "openfisca:csg_activite_supprimee")["pib_pct"] for s in sq.SCENARIOS}
     assert 0.2 < e["crise"] < e["prudent"] < e["median"] < e["optimiste"] < 1.3
+
+
+def test_couples_ponderes_et_impot_des_menages(p):
+    """Neuf cas de couples pondérés à 1 ; l'impôt sur le revenu des salariés est plus faible avec les couples qu'en
+    personnes seules (quotient conjugal et familial)."""
+    cas = offre._cas_couples(p)
+    assert len(cas) == 9 and sum(w for _, w in cas) == pytest.approx(1.0)
+    ir = offre.ir_salaries_menages(p)
+    assert ir["menages"] < ir["seuls"]
+
+
+def test_allegements_par_le_cout_du_travail(p):
+    """Allègements arrêtés à 1,6 SMIC (Tondelier) : effet par le coût du travail (emplois pris sur le chômage),
+    pas par le revenu des salariés."""
+    x = offre.travail_par_point(p, "prudent", "openfisca:allegements_1_6_smic")
+    assert x["emplois"] == pytest.approx(0.0, abs=1) and x["emplois_demande"] > 0
+    st = offre.statique_openfisca(p, "allegements_1_6_smic")
+    assert 15 < -st["prelevements_en_moins"] < 40  # hausse de cotisations patronales (Md€)
+
+
+def test_investissement_public(p):
+    m = Mesure("i", "investissement", {t: 10.0 for t in (2027, 2028, *ANNEES)})
+    d = offre.effets(p, "prudent", [m])
+    assert d["dpib"][2050] > 0
+    m2 = Mesure("i", "investissement", {t: -10.0 for t in (2027, 2028, *ANNEES)})
+    assert offre.effets(p, "prudent", [m2])["dpib"][2050] < -d["dpib"][2050]  # baisse : scénario miroir
+
+
+def test_part_travail_d_une_mesure(p):
+    """« réforme@part » : seule cette part du montant joue sur l'offre de travail."""
+    a = Mesure("a", "recettes", {t: 10.0 for t in (2027, 2028, *ANNEES)}, instrument="travail",
+               incidence="openfisca:csg_activite_plus1")
+    b = Mesure("b", "recettes", {t: 10.0 for t in (2027, 2028, *ANNEES)}, instrument="travail",
+               incidence="openfisca:csg_activite_plus1@0.5")
+    assert offre.effets(p, "prudent", [b])["dpib"][2050] == pytest.approx(0.5 * offre.effets(p, "prudent", [a])["dpib"][2050])

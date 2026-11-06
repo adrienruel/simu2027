@@ -49,10 +49,10 @@ zemmour_retraites:
 
 zemmour_csg:
   part_ir_retrouvee:
-    valeur: {crise: 0.55, prudent: 0.6, median: 0.65, optimiste: 0.7}
+    valeur: {crise: 0.6, prudent: 0.65, median: 0.72, optimiste: 0.8}
     unite: taux
     statut: HYPOTHESE
-    source: "Calculé : impôt sur le revenu des salariés par OpenFisca (cas type d'une personne seule) ≈ 91 Md€, contre ≈ 60 Md€ d'impôt réel sur les salaires (IR net ≈ 94 Md€, dont ≈ 22 sur les pensions et ≈ 12 sur les autres revenus) : le quotient conjugal et familial ramène l'impôt en plus aux deux tiers ; prudent un peu en dessous"
+    source: "Calculé (offre.ir_salaries_menages, OpenFisca 2026) : l'impôt sur le revenu en plus quand la CSG disparaît vaut 15,2 Md€ avec les couples (17,1 en personnes seules) ; ramené à l'impôt réel sur les salaires (≈ 60 Md€ contre 71 calculés avec les couples : décote, réductions, autres revenus) : ≈ 12,8 Md€, soit 72 % de l'impôt en plus de la bibliothèque (personne seule, 17,9 Md€) ; prudent un peu en dessous (une baisse d'impôt moins compensée)"
     note: "La CSG déductible (6,8 points) qui disparaît entre dans le revenu imposable : l'impôt sur le revenu monte un peu."
   independants:
     valeur: {crise: 6.5, prudent: 6.5, median: 6.0, optimiste: 6.0}
