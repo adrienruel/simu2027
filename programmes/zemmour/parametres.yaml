@@ -1,0 +1,226 @@
+# Programme d'Éric Zemmour (Reconquête) : chiffrage sur le noyau (6 novembre 2026).
+#
+# Programme partiel : tract « L'avenir est à nous » (octobre 2026), tracts thématiques, pétitions, entretiens. Fiche :
+# programmes/zemmour/mesures.yaml. Règle : aucune économie ni recette annoncée n'est saisie (plan de 80 Md€, baisse de
+# 100 Md€ par an, 140 Md€ de budget2027.fr : comparaison seulement) ; chaque ligne identifiée est estimée en quatre
+# scénarios. Format des mesures : moteur/programme_simple.py.
+
+zemmour_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes non remplacés ou créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 60000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : PIB par emploi ≈ 95 000 € (Insee 2025) ; emplois concernés plutôt moins productifs que la moyenne"
+
+zemmour_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+zemmour_retraites:
+  age_cible:
+    valeur: 65
+    unite: sans_unite
+    statut: DECISION
+    note: "Arbitrage : « report de l'âge de départ », sans âge cible dans la source. Même arbitrage que pour Xavier Bertrand (65 ans, un trimestre par génération), pour comparer."
+  premiere_generation:
+    valeur: 1966
+    unite: sans_unite
+    statut: DECISION
+  pas_par_generation:
+    valeur: 0.25
+    unite: sans_unite
+    statut: DECISION
+
+zemmour_csg:
+  part_ir_retrouvee:
+    valeur: {crise: 0.55, prudent: 0.6, median: 0.65, optimiste: 0.7}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Calculé : impôt sur le revenu des salariés par OpenFisca (cas type d'une personne seule) ≈ 91 Md€, contre ≈ 60 Md€ d'impôt réel sur les salaires (IR net ≈ 94 Md€, dont ≈ 22 sur les pensions et ≈ 12 sur les autres revenus) : le quotient conjugal et familial ramène l'impôt en plus aux deux tiers ; prudent un peu en dessous"
+    note: "La CSG déductible (6,8 points) qui disparaît entre dans le revenu imposable : l'impôt sur le revenu monte un peu."
+  independants:
+    valeur: {crise: 6.5, prudent: 6.5, median: 6.0, optimiste: 6.0}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : CSG des travailleurs indépendants ≈ 6 à 7 Md€ (Urssaf, 2024 : revenus d'activité non salariés ≈ 70 Md€ × 9,2 %)"
+    note: "« Revenus du travail » : salariés, agents publics et indépendants. Impôt sur le revenu en plus : 10 % de cette CSG."
+  premiere_annee:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+    note: "Première loi de financement du quinquennat ; pas de montée progressive annoncée (prudent)."
+
+zemmour_successions:
+  part_supprimee:
+    valeur: 1.0
+    unite: taux
+    statut: DECISION
+    note: "« Suppression des droits de succession » : toute la recette des successions et donations du statu quo (≈ 21 Md€ en 2029), à partir de 2028. Pas d'effet de comportement retenu (l'impôt disparaît)."
+
+zemmour_mesures:
+
+  # ---------------------------------------------------------------- fiscalité
+  accise_carburants:
+    valeur: {id: ZEM-FIS-01b, libelle: "Accise sur les carburants baissée d'un tiers", poste: recettes, moteur: "recette:accises_et_taxes_sur_produits", debut: 2028, plein: 2028,
+             montant: {crise: -12.0, prudent: -11.8, median: -11.5, optimiste: -11.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : accise sur les carburants routiers ≈ 30 Md€ (État et régions, DGDDI 2024) ; un tiers ≈ 10 Md€, plus la TVA sur l'accise (20 %) ≈ 2 Md€, moins un peu de volume en plus (élasticité-prix ≈ −0,3)"
+    note: "Le modèle n'a pas de canal des prix : pas d'effet sur l'inflation ni sur les émissions dans cette passe."
+
+  # ---------------------------------------------------------------- préférence nationale et immigration
+  preference_famille:
+    valeur: {id: ZEM-IMM-04, libelle: "Préférence nationale : allocations familiales réservées aux Français", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
+             montant: {crise: -1.35, prudent: -2.0, median: -2.9, optimiste: -3.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : étrangers ≈ 8 % de la population, ≈ 12 % des familles allocataires (CNAF) ; ressortissants européens ≈ 30 % des étrangers, protégés par le droit de l'Union (égalité de traitement) : ≈ 8 % du bloc famille en statique ≈ 2,9 Md€"
+    note: "Économie annoncée par le parti (15 à 20 Md€ pour toutes les prestations non contributives) : NON SAISIE. Prudent : risque constitutionnel et conventionnel (Conseil constitutionnel, décision 2023-863 DC ; Cour européenne des droits de l'homme), naturalisations ; la mesure suppose un référendum."
+  preference_logement:
+    valeur: {id: ZEM-IMM-04, libelle: "Préférence nationale : aides au logement réservées aux Français", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2029,
+             montant: {crise: -0.75, prudent: -1.1, median: -1.6, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : étrangers ≈ 17 % des ménages allocataires des aides au logement (CNAF) ; hors ressortissants européens ≈ 12 % du bloc ≈ 2 Md€ en statique"
+  preference_pauvrete:
+    valeur: {id: ZEM-IMM-04, libelle: "Préférence nationale : RSA et prime d'activité réservés aux Français", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,
+             montant: {crise: -0.9, prudent: -1.4, median: -2.0, optimiste: -2.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : étrangers ≈ 17 % des allocataires du RSA, ≈ 9 % de la prime d'activité (DREES, CNAF) ; hors ressortissants européens ≈ 10 % du bloc ≈ 2,4 Md€ en statique"
+  ame:
+    valeur: {id: ZEM-IMM-04, libelle: "Suppression de l'aide médicale d'État", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.5, prudent: -0.6, median: -0.8, optimiste: -1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : AME ≈ 1,3 Md€ (PLF 2026) ; une partie des soins revient aux urgences et aux soins urgents (rapport Évin-Stefanini, 2023) : prudent ≈ la moitié"
+  asile:
+    valeur: {id: ZEM-IMM-01, libelle: "Arrêt de l'immigration légale : dépenses d'asile en moins", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -0.3, prudent: -0.5, median: -0.8, optimiste: -1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : mission Immigration, asile et intégration ≈ 2,2 Md€ (LFI 2026), dont allocation des demandeurs d'asile et hébergement ≈ 1,5 Md€ ; l'asile relève de la Constitution et de la convention de Genève : prudent ≈ un tiers"
+    note: "Les effets de l'arrêt de l'immigration sur la population active, le PIB et les comptes (OCDE, 2021 : contribution nette des immigrés proche de zéro) ne sont pas encore modélisés : variante démographique à construire (solde migratoire de l'Insee)."
+  eloignements:
+    valeur: {id: ZEM-IMM-02, libelle: "« Remigration » : éloignements forcés en plus", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : coût d'un éloignement forcé ≈ 14 000 € (Sénat, rapport sur le PLF 2020, rétention, escorte, transport) ; 50 000 à 70 000 éloignements de plus par an, centres de rétention en plus"
+
+  # ---------------------------------------------------------------- économies identifiées (la liste de 80 Md€ n'est pas reprise)
+  aide_developpement:
+    valeur: {id: ZEM-INT-02, libelle: "Suppression de l'aide publique au développement (mission budgétaire)", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -2.5, prudent: -3.0, median: -3.5, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : mission Aide publique au développement ≈ 3,8 Md€ (LFI 2026) ; le reste des 15 Md€ d'APD déclarée à l'OCDE (contribution européenne, frais d'écolage et d'accueil des réfugiés, annulations de dette) n'est pas une dépense que l'on peut supprimer ; engagements multilatéraux en cours"
+    note: "Économie annoncée par le parti : 15 Md€, NON SAISIE."
+  energies_renouvelables:
+    valeur: {id: ZEM-ENE-02, libelle: "Fin des soutiens publics aux renouvelables (nouveaux contrats)", poste: etat_missions, moteur: pib, debut: 2028, plein: 2035,
+             depart: -0.3, montant: {crise: -1.5, prudent: -2.0, median: -3.0, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : charges de service public de l'énergie pour les renouvelables ≈ 5 à 8 Md€ selon les prix de marché (CRE, délibérations 2025-2026) ; les contrats signés (obligation d'achat, complément de rémunération) courent 15 à 20 ans : l'économie vient des contrats non signés, et monte lentement"
+    note: "Économie annoncée par le parti : 8 Md€, NON SAISIE. Effet sur les émissions et sur le prix de l'électricité non chiffré dans cette passe."
+  subventions:
+    valeur: {id: ZEM-ECO-02, libelle: "Subventions aux syndicats, à la presse et à des associations supprimées", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.5, prudent: -0.8, median: -1.5, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : aides à la presse ≈ 0,3 Md€ (directes), financement des organisations syndicales (AGFPN) ≈ 0,15 Md€, subventions de l'État aux associations ≈ 7 Md€ (jaune budgétaire), dont la part « politisée » n'est pas définie"
+    note: "Économie annoncée par le parti : 16 Md€, NON SAISIE."
+  politique_ville:
+    valeur: {id: ZEM-SP-02, libelle: "Fin du soutien public à la politique de la Ville", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.7, prudent: -1.0, median: -1.5, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : programme 147 Politique de la ville ≈ 0,6 Md€, État dans l'ANRU ≈ 0,3 Md€ ; le document de politique transversale (≈ 10 Md€) compte des dépenses de droit commun (écoles, police) qui ne disparaissent pas"
+    note: "Économie annoncée par le parti : 8 Md€, NON SAISIE."
+  agences:
+    valeur: {id: ZEM-SP-01, libelle: "Suppression des ARS, de l'Ademe, de l'ANAH, du CESE, de l'Arcom et de France Travail", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -0.5, prudent: -1.0, median: -2.0, optimiste: -3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : fonctionnement de ces organismes ≈ 9 Md€ (France Travail ≈ 6, ARS ≈ 1, Ademe et ANAH ≈ 1, CESE et Arcom ≈ 0,1) ; leurs missions (indemnisation, placement, contrôle sanitaire, aides à la rénovation) passent à d'autres services : économie de fonctionnement 10 à 20 % (fusions passées, Cour des comptes)"
+    note: "Économie annoncée par le parti : 8 à 12 Md€, NON SAISIE. Les aides versées (MaPrimeRénov', fonds chaleur) sont supposées gardées."
+  audiovisuel:
+    valeur: {id: ZEM-CUL-01, libelle: "Privatisation de l'audiovisuel public", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -2.0, prudent: -2.5, median: -3.0, optimiste: -3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : dotations à l'audiovisuel public ≈ 3,8 Md€ (LFI 2026) ; Arte (traité franco-allemand) et l'audiovisuel extérieur restent ; coûts de transition (plans sociaux)"
+    note: "Économie annoncée par le parti : 4 Md€, NON SAISIE. Produit de cession (une fois, hors solde) non compté."
+
+  # ---------------------------------------------------------------- dépenses nouvelles
+  medecins:
+    valeur: {id: ZEM-SAN-01, libelle: "1 000 médecins salariés par l'État dans les déserts médicaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2030, fp: true, postes: true, cout_poste: 150000,
+             montant: {crise: 0.15, prudent: 0.15, median: 0.15, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : coût employeur d'un médecin salarié ≈ 150 000 € (centres de santé)"
+  hospitaliers:
+    valeur: {id: ZEM-SAN-02, libelle: "40 000 personnels hospitaliers recrutés", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: 2.2, prudent: 2.2, median: 2.2, optimiste: 2.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Tract « Urgence nationale : notre système de santé » (Reconquête, 3 juin 2025) : 40 000 personnels ; coût de 55 000 € (zemmour_emploi.cout_poste_public)"
+  services_proximite:
+    valeur: {id: ZEM-SAN-01, libelle: "Réouverture de maternités, urgences et soins palliatifs de proximité", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2031,
+             montant: {crise: 0.5, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+  medicaments:
+    valeur: {id: ZEM-SAN-03, libelle: "Relocalisation des médicaments essentiels", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.4, prudent: 0.3, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : plan de relocalisation de 2023 (France 2030) ≈ 0,16 Md€ par an ; doublement"
+  justice:
+    valeur: {id: ZEM-SEC-01/02, libelle: "Fin de l'excuse de minorité, peines planchers, fin du juge de l'application des peines : détenus en plus", poste: etat_missions, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 40 000 € par détenu et par an (ministère de la Justice) ; 10 000 à 15 000 détenus en plus (aménagements de peine supprimés), places de prison à construire comptées à part (investissement non chiffré)"
+  ia:
+    valeur: {id: ZEM-NUM-01/02, libelle: "Investissements dans l'intelligence artificielle, formation à l'école", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 1.1, prudent: 1.1, median: 1.1, optimiste: 1.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "« Investissements massifs », surtout par l'épargne privée : 1 Md€ public par an en plus de France 2030 (hypothèse) et 0,1 Md€ de formation."

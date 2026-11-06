@@ -1,0 +1,58 @@
+# Programme de Xavier Bertrand (Nous France) — les 33 mesures recensées et leur traitement dans le chiffrage
+#
+# Source de la liste : programmes-2027.fr (fiche du candidat, données du 6 novembre 2026), qui renvoie pour chaque
+# mesure à un entretien ou une tribune reproduit sur nousfrance.fr. Les sources primaires n'ont pas été relues une à une
+# (statut de la fiche : source_secondaire) : à vérifier avant publication.
+#
+# traitement :
+#   chiffre        ligne de bertrand_mesures ou mesure calculée (cle)
+#   estime         économie ou dépense sans montant : estimée en quatre scénarios (cle)
+#   non_chiffre    effet budgétaire ou macroéconomique possible, pas de paramètre (raison)
+#   sans_effet     pas d'effet sur les comptes publics, ou déjà dans le statu quo
+
+programme:
+  candidat: Xavier Bertrand
+  parti: Nous France
+  document: "Pas de programme publié au 16/10/2026 ; entretiens et tribunes 2025-2026 (nousfrance.fr)"
+  liste: https://programmes-2027.fr/candidats/bertrand/
+  date_lecture: 2026-11-06
+  annonce_non_saisie: "20 Md€ d'économies par an pendant cinq ans (L'Opinion, 19/08/2026)"
+
+mesures:
+  - {id: BER-ECO-01, intitule: "Réduire les dépenses publiques de 20 Md€ par an pendant cinq ans", source: "https://www.nousfrance.fr/2026/08/presidentielle-2027-xavier-bertrand-un-non-candidat-en-campagne-lopinion/", date: 2026-08-19,
+     traitement: estime, cle: "retraites (BER-RET-01), assurance_chomage, fonctionnaires", note: "Le total annoncé n'est pas saisi ; seules les trois lignes citées (retraites, assurance chômage, fonctionnaires) sont chiffrées. Santé exclue des économies, comme le dit le candidat."}
+  - {id: BER-ECO-02, intitule: "Redistribuer les recettes des hausses de carburant aux actifs contraints", source: "https://www.nousfrance.fr/2026/04/hausse-du-carburant-la-proposition-de-xavier-bertrand/", date: 2026-04-15, traitement: estime, cle: carburants}
+  - {id: BER-ECO-03, intitule: "Règle d'or budgétaire soumise à référendum", source: "https://www.nousfrance.fr/2025/10/avant-la-presidentielle-xavier-bertrand-se-pose-en-opposant-dinteret-general-liberation/", date: 2025-10-25,
+     traitement: non_chiffre, note: "Règle sans contenu chiffré ; le noyau publie toujours le résultat sans règle."}
+  - {id: BER-FIS-01, intitule: "Baisser l'impôt sur le revenu des premières tranches", source: "https://www.nousfrance.fr/2025/10/xavier-bertrand-se-presente-comme-le-candidat-des-classes-moyennes-contre-les-extremes-afp/", date: 2025-10-25, traitement: chiffre, cle: ir_tranches_basses, note: "Arbitrage commun avec Tondelier (−3 Md€)."}
+  - {id: BER-FIS-02, intitule: "Rejeter la taxe Zucman, relever la flat tax", source: "https://www.nousfrance.fr/2025/10/que-letat-arrete-de-nous-faire-les-poches-a-saint-quentin-xavier-bertrand-sechauffe-pour-la-presidentielle-le-point/", date: 2025-10-26, traitement: chiffre, cle: flat_tax, note: "Taxe Zucman : absente du statu quo, rien à compter."}
+  - {id: BER-FIS-03, intitule: "Pas de taxation des voitures électriques", source: "https://www.nousfrance.fr/2026/08/presidentielle-2027-xavier-bertrand-un-non-candidat-en-campagne-lopinion/", date: 2026-08-19, traitement: sans_effet}
+  - {id: BER-EMP-01, intitule: "Mieux partager la valeur dans l'entreprise", source: "https://www.nousfrance.fr/2025/11/presidentielle-2027-xavier-bertrand-veut-retenter-sa-chance/", date: 2025-11-08, traitement: non_chiffre, note: "Instrument non précisé (participation, intéressement)."}
+  - {id: BER-EMP-02, intitule: "Supprimer l'écart de jours de carence entre public et privé", source: "https://www.nousfrance.fr/2025/10/que-letat-arrete-de-nous-faire-les-poches-a-saint-quentin-xavier-bertrand-sechauffe-pour-la-presidentielle-le-point/", date: 2025-10-26, traitement: estime, cle: carence}
+  - {id: BER-RET-01, intitule: "Repousser l'âge légal, départ anticipé avec décote, décote annulée plus tôt pour les femmes, pas de désindexation", source: "https://www.nousfrance.fr/2026/08/presidentielle-2027-xavier-bertrand-un-non-candidat-en-campagne-lopinion/", date: 2026-08-19,
+     traitement: chiffre, cle: "bertrand_retraites (bibliotheque.report_age_legal)", note: "Arbitrage : 65 ans, un trimestre par génération dès la génération 1966 ; part de l'économie gardée de 60 à 85 %."}
+  - {id: BER-RET-02, intitule: "Étage obligatoire de retraite par capitalisation ; régime de base géré par les partenaires sociaux", source: "https://www.nousfrance.fr/2026/08/presidentielle-2027-xavier-bertrand-un-non-candidat-en-campagne-lopinion/", date: 2026-08-19,
+     traitement: non_chiffre, note: "Financement non décrit. Lu comme une cotisation en plus versée à des fonds hors administrations : sans effet sur le solde. Si l'étage était pris sur les cotisations actuelles, le coût de transition serait de plusieurs dizaines de Md€ par an (variante à faire)."}
+  - {id: BER-ECO-04, intitule: "Protection civile adaptée aux risques d'incendie", source: "https://www.nousfrance.fr/2026/08/je-my-prepare-pas-encore-officiellement-candidat-xavier-bertrand-pose-les-bases-de-son-projet-pour-la-presidentielle-avec-la-culture-en-toile-de-fond-var-matin/", date: 2026-08-03, traitement: estime, cle: protection_civile}
+  - {id: BER-AGR-01, intitule: "Saisir la CJUE contre l'accord UE-Mercosur", source: "https://www.nousfrance.fr/2026/01/saisir-la-cjue-le-dernier-recours-contre-le-mercosur-par-julien-dive-et-xavier-bertrand-la-tribune/", date: 2026-01-08, traitement: sans_effet}
+  - {id: BER-AGR-02, intitule: "Alimentation régalienne, fin des surtranspositions", source: "https://www.nousfrance.fr/2026/01/xavier-bertrand-on-ne-dirige-pas-un-pays-par-la-peur-le-parisien/", date: 2026-01-10, traitement: non_chiffre}
+  - {id: BER-LOG-01, intitule: "Faire du logement une priorité", source: "https://www.nousfrance.fr/2026/08/je-nai-pas-le-profil-dune-prise-de-guerre-je-trace-ma-route-le-pari-de-xavier-bertrand-pour-simposer-comme-candidat-de-la-droite-et-du-centre-le-figaro/", date: 2026-08-04, traitement: non_chiffre, note: "Pas de mesure précise."}
+  - {id: BER-SAN-01, intitule: "Loi pluriannuelle de santé, système conventionnel maintenu", source: "https://www.nousfrance.fr/2026/01/xavier-bertrand-on-ne-dirige-pas-un-pays-par-la-peur-le-parisien/", date: 2026-01-10, traitement: sans_effet, note: "Trajectoire de santé du statu quo gardée."}
+  - {id: BER-SAN-02, intitule: "Pas d'économies sur la santé", source: "https://www.nousfrance.fr/2026/08/presidentielle-2027-xavier-bertrand-un-non-candidat-en-campagne-lopinion/", date: 2026-08-19, traitement: sans_effet}
+  - {id: BER-EDU-01, intitule: "Réformer les bourses pour les classes moyennes", source: "https://www.nousfrance.fr/2025/10/xavier-bertrand-se-presente-comme-le-candidat-des-classes-moyennes-contre-les-extremes-afp/", date: 2025-10-25, traitement: estime, cle: bourses}
+  - {id: BER-EDU-02, intitule: "Une œuvre ou un spectacle pour chaque élève", source: "https://www.nousfrance.fr/2026/08/je-my-prepare-pas-encore-officiellement-candidat-xavier-bertrand-pose-les-bases-de-son-projet-pour-la-presidentielle-avec-la-culture-en-toile-de-fond-var-matin/", date: 2026-08-03, traitement: estime, cle: culture_eleves}
+  - {id: BER-SEC-01, intitule: "Peines planchers, par référendum", source: "https://www.nousfrance.fr/2025/10/avant-la-presidentielle-xavier-bertrand-se-pose-en-opposant-dinteret-general-liberation/", date: 2025-10-25, traitement: estime, cle: peines_planchers}
+  - {id: BER-SEC-02, intitule: "Peines renforcées pour les agressions contre les élus", source: "https://www.nousfrance.fr/2026/03/lettre-aux-maires-de-xavier-bertrand/", date: 2026-03-30, traitement: sans_effet}
+  - {id: BER-IMM-01, intitule: "Quotas migratoires (référendum)", source: "https://www.nousfrance.fr/2025/10/xavier-bertrand-se-presente-comme-le-candidat-des-classes-moyennes-contre-les-extremes-afp/", date: 2025-10-25, traitement: non_chiffre, note: "Niveau des quotas non donné : pas d'effet sur la population active."}
+  - {id: BER-IMM-02, intitule: "Dénoncer les accords du Touquet", source: "https://www.nousfrance.fr/2026/05/lcp-la-manche-est-en-train-de-devenir-un-cimetiere-marin-a-ciel-ouvert-denonce-xavier-bertrand/", date: 2026-05-08, traitement: non_chiffre, note: "Contributions britanniques au contrôle de la frontière (≈ 0,2 Md€ par an) perdues, contrôles moins coûteux : effet net faible."}
+  - {id: BER-INS-01, intitule: "Mandat présidentiel unique", source: "https://www.nousfrance.fr/2026/08/je-nai-pas-le-profil-dune-prise-de-guerre-je-trace-ma-route-le-pari-de-xavier-bertrand-pour-simposer-comme-candidat-de-la-droite-et-du-centre-le-figaro/", date: 2026-08-04, traitement: sans_effet}
+  - {id: BER-INS-02, intitule: "Conseiller territorial fusionnant élus régionaux et départementaux", source: "https://www.nousfrance.fr/2025/10/avant-la-presidentielle-xavier-bertrand-se-pose-en-opposant-dinteret-general-liberation/", date: 2025-10-25, traitement: non_chiffre, note: "Indemnités d'élus en moins : quelques dizaines de M€."}
+  - {id: BER-INS-03, intitule: "Autonomie législative de la Corse", source: "https://www.nousfrance.fr/2026/05/xavier-bertrand-paris-na-pas-envie-de-depenser-un-euro-de-plus-pour-la-corse-corse-matin/", date: 2026-05-01, traitement: sans_effet}
+  - {id: BER-EUR-01, intitule: "L'Europe comme puissance ; partenariat UE-Danemark-Groenland", source: "https://www.nousfrance.fr/2026/01/xavier-bertrand-on-ne-dirige-pas-un-pays-par-la-peur-le-parisien/", date: 2026-01-10, traitement: sans_effet}
+  - {id: BER-INT-01, intitule: "Sommet de l'OTAN sur le Groenland", source: "https://www.nousfrance.fr/2026/01/xavier-bertrand-on-ne-dirige-pas-un-pays-par-la-peur-le-parisien/", date: 2026-01-10, traitement: sans_effet}
+  - {id: BER-CUL-01, intitule: "1 % du budget de l'État pour la culture en 2032", source: "https://www.nousfrance.fr/2026/08/je-my-prepare-pas-encore-officiellement-candidat-xavier-bertrand-pose-les-bases-de-son-projet-pour-la-presidentielle-avec-la-culture-en-toile-de-fond-var-matin/", date: 2026-08-03, traitement: estime, cle: culture_1_pct}
+  - {id: BER-CUL-02, intitule: "Audiovisuel public défendu et réformé, coûts réduits", source: "https://www.nousfrance.fr/2026/01/xavier-bertrand-la-commission-denquete-parlementaire-sur-laudiovisuel-public-est-instrumentalisee-par-son-rapporteur-a-des-fins-ideologiques-le-monde/", date: 2026-01-06, traitement: estime, cle: audiovisuel}
+  - {id: BER-CUL-03, intitule: "Essor des langues régionales", source: "https://www.nousfrance.fr/2026/05/xavier-bertrand-paris-na-pas-envie-de-depenser-un-euro-de-plus-pour-la-corse-corse-matin/", date: 2026-05-01, traitement: sans_effet}
+  - {id: BER-SP-01, intitule: "République des territoires : État recentré sur le régalien", source: "https://www.nousfrance.fr/2026/07/rencontres-economiques-daix-il-faut-une-republique-des-territoires-et-un-mandat-unique-pour-xavier-bertrand-la-provence/", date: 2026-07-05, traitement: sans_effet, note: "Transferts de compétences supposés neutres (ressources transférées avec)."}
+  - {id: BER-SP-02, intitule: "Adapter les lois selon les territoires", source: "https://www.nousfrance.fr/2026/05/xavier-bertrand-paris-na-pas-envie-de-depenser-un-euro-de-plus-pour-la-corse-corse-matin/", date: 2026-05-01, traitement: sans_effet}
+  - {id: BER-SP-03, intitule: "Logement et santé confiés aux régions", source: "https://www.nousfrance.fr/2025/10/xavier-bertrand-sebastien-lecornu-subira-le-meme-sort-que-michel-barnier-et-francois-bayrou-paris-match/", date: 2025-10-30, traitement: sans_effet, note: "Transfert de compétences, neutre par hypothèse."}

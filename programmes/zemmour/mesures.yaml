@@ -1,0 +1,58 @@
+# Programme d'Éric Zemmour (Reconquête) — les 36 mesures recensées et leur traitement dans le chiffrage
+#
+# Source de la liste : programmes-2027.fr (fiche du candidat, données du 26 octobre 2026), qui renvoie à chaque source
+# (tracts de Reconquête, pétitions, presse). Sources primaires non relues une à une : à vérifier avant publication.
+# Traitement : voir programmes/bertrand/mesures.yaml.
+
+programme:
+  candidat: Éric Zemmour
+  parti: Reconquête
+  document: "Programme partiel : tract « L'avenir est à nous » (6 octobre 2026), tracts thématiques, pétitions, entretiens"
+  url: https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf
+  liste: https://programmes-2027.fr/candidats/zemmour/
+  date_lecture: 2026-11-06
+  annonces_non_saisies: "baisse de 100 Md€ par an des dépenses de l'État (CNews, 19/05/2026) ; plan de 80 Md€ d'économies urgentes (tract, 13/11/2025) ; 140 Md€ par an (budget2027.fr, S. Knafo, 24/09/2026) ; montants par ligne (15 Md€ APD, 8 Md€ renouvelables, 16 Md€ subventions, 8 Md€ politique de la Ville, 8 à 12 Md€ agences, 4 Md€ audiovisuel, 15 à 20 Md€ préférence nationale)"
+
+mesures:
+  - {id: ZEM-ECO-01, intitule: "Baisser les dépenses de l'État de 100 Md€ par an", source: "https://www.cnews.fr/france/2026-05-19/immigration-negative-erreur-de-la-binationalite-rassemblement-national-ce-quil", date: 2026-05-19, traitement: estime, cle: "lignes identifiées ci-dessous", note: "Total non saisi."}
+  - {id: ZEM-ECO-02, intitule: "Plan de 80 Md€ d'économies « urgentes »", source: "https://assets.ericzemmour.fr/ressources/tracts/verite-pouvoir-achat.pdf#page=2", date: 2025-11-13, traitement: estime, cle: "subventions, aide_developpement, preference_* (chaque ligne estimée)"}
+  - {id: ZEM-FIS-01, intitule: "Supprimer la CSG sur les revenus du travail", source: "https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf#page=2", date: 2026-10-06, traitement: chiffre, cle: "zemmour_csg (bibliotheque.csg_activite)", note: "≈ 101 Md€ sur les salaires (OpenFisca 2026) et ≈ 6,5 Md€ sur les indépendants, moins l'impôt sur le revenu en plus."}
+  - {id: ZEM-FIS-01b, intitule: "Baisser d'un tiers l'accise sur les carburants", source: "https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf#page=2", date: 2026-10-06, traitement: chiffre, cle: accise_carburants}
+  - {id: ZEM-FIS-02, intitule: "Supprimer les droits de succession", source: "https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf#page=2", date: 2026-10-06, traitement: chiffre, cle: zemmour_successions}
+  - {id: ZEM-RET-01, intitule: "Reporter l'âge de départ, introduire une part de capitalisation", source: "https://www.cnews.fr/france/2026-05-19/immigration-negative-erreur-de-la-binationalite-rassemblement-national-ce-quil", date: 2026-05-19,
+     traitement: chiffre, cle: "zemmour_retraites (bibliotheque.report_age_legal)", note: "Âge non précisé : 65 ans (même arbitrage que Bertrand). Capitalisation : financement non décrit, non chiffrée (voir BER-RET-02)."}
+  - {id: ZEM-ENE-01, intitule: "Six EPR d'ici 2035, quatorze d'ici 2045", source: "https://www.europe1.fr/politique/presidentielle-2027-eric-zemmour-appelle-a-un-vote-du-sursaut-lors-de-son-discours-de-rentree-1075178", date: 2026-09-13,
+     traitement: non_chiffre, note: "Six EPR2 déjà décidés (statu quo) ; huit de plus financés par EDF, hors administrations ; prêt de l'État et garanties : hors solde."}
+  - {id: ZEM-ENE-02, intitule: "Supprimer tous les soutiens publics aux renouvelables", source: "https://assets.ericzemmour.fr/ressources/tracts/verite-pouvoir-achat.pdf#page=2", date: 2025-11-13, traitement: estime, cle: energies_renouvelables}
+  - {id: ZEM-ECL-01, intitule: "Abroger le SEQE 2 ; baisser l'accise ; supprimer les CEE", source: "https://www.stop-hausse-carburant.fr/", traitement: sans_effet,
+     note: "Le statu quo ne compte pas de recette du SEQE 2 ; les certificats d'économies d'énergie sont une obligation des fournisseurs, hors budget. Effets sur les prix et les émissions non chiffrés."}
+  - {id: ZEM-AGR-01, intitule: "Rejeter l'accord UE-Mercosur, fin des surtranspositions", source: "https://assets.ericzemmour.fr/ressources/tracts/mercosur.pdf#page=2", date: 2025-02-17, traitement: sans_effet}
+  - {id: ZEM-LOG-01, intitule: "Logement social réservé aux Français", source: "https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf#page=2", date: 2026-10-06, traitement: sans_effet, note: "Attribution des logements, pas de dépense."}
+  - {id: ZEM-SAN-01, intitule: "1 000 médecins salariés par l'État ; réouverture de services de proximité", source: "https://assets.ericzemmour.fr/ressources/tracts/sante.pdf#page=2", date: 2025-06-03, traitement: chiffre, cle: "medecins, services_proximite"}
+  - {id: ZEM-SAN-02, intitule: "40 000 personnels hospitaliers, T2A modifiée", source: "https://assets.ericzemmour.fr/ressources/tracts/sante.pdf#page=2", date: 2025-06-03, traitement: chiffre, cle: hospitaliers}
+  - {id: ZEM-SAN-03, intitule: "Relocaliser les médicaments essentiels", source: "https://assets.ericzemmour.fr/ressources/tracts/sante.pdf#page=2", date: 2025-06-03, traitement: estime, cle: medicaments}
+  - {id: ZEM-EDU-01, intitule: "Examens d'entrée en sixième et en seconde", source: "https://www.cnews.fr/france/2026-10-13/niveau-scolaire-francais-que-propose-eric-zemmour-pour-retablir-la-meilleure", date: 2026-10-13, traitement: sans_effet}
+  - {id: ZEM-EDU-02, intitule: "Plus d'heures de français et de mathématiques", source: "https://www.cnews.fr/france/2026-10-13/niveau-scolaire-francais-que-propose-eric-zemmour-pour-retablir-la-meilleure", date: 2026-10-13, traitement: sans_effet, note: "Supposé à horaire total constant."}
+  - {id: ZEM-EDU-03, intitule: "Orientation vers le CAP dès la quatrième", source: "https://www.cnews.fr/france/2026-10-13/niveau-scolaire-francais-que-propose-eric-zemmour-pour-retablir-la-meilleure", date: 2026-10-13, traitement: non_chiffre}
+  - {id: ZEM-EDU-04, intitule: "Autonomie des chefs d'établissement", source: "https://www.cnews.fr/france/2026-10-13/niveau-scolaire-francais-que-propose-eric-zemmour-pour-retablir-la-meilleure", date: 2026-10-13, traitement: sans_effet}
+  - {id: ZEM-EDU-05, intitule: "Rompre les accords Lang-Cloupet", source: "https://www.youtube.com/watch?v=DhtIKLvqZqE", date: 2026-10-14, traitement: non_chiffre, note: "Élèves passant du public au privé sous contrat : coût public par élève plus bas dans le privé, mais nouveaux contrats ; effet net incertain, faible."}
+  - {id: ZEM-SEC-01, intitule: "Fin de l'excuse de minorité et du code de la justice pénale des mineurs", source: "https://www.lejdd.fr/politique/emeutes-lyceennes-il-faut-en-finir-avec-lexcuse-de-minorite-martele-eric-zemmour-185988", date: 2026-10-13, traitement: estime, cle: justice}
+  - {id: ZEM-SEC-02, intitule: "Fin du juge de l'application des peines, peines planchers", source: "https://www.lejdd.fr/politique/emeutes-lyceennes-il-faut-en-finir-avec-lexcuse-de-minorite-martele-eric-zemmour-185988", date: 2026-10-13, traitement: estime, cle: justice}
+  - {id: ZEM-SEC-03, intitule: "Parents payant les dégâts de leurs enfants", source: "https://www.lejdd.fr/politique/emeutes-lyceennes-il-faut-en-finir-avec-lexcuse-de-minorite-martele-eric-zemmour-185988", date: 2026-10-13, traitement: sans_effet}
+  - {id: ZEM-SEC-04, intitule: "Déchéance de nationalité des binationaux condamnés", source: "https://www.cnews.fr/france/2026-05-19/immigration-negative-erreur-de-la-binationalite-rassemblement-national-ce-quil", date: 2026-05-19, traitement: sans_effet}
+  - {id: ZEM-IMM-01, intitule: "Arrêter l'immigration légale", source: "https://www.cnews.fr/france/2026-05-19/immigration-negative-erreur-de-la-binationalite-rassemblement-national-ce-quil", date: 2026-05-19,
+     traitement: estime, cle: asile, note: "Dépenses d'asile seulement. L'effet sur la population active, le PIB et les comptes n'est pas chiffré : variante démographique à construire (solde migratoire de l'Insee), limite principale de ce chiffrage."}
+  - {id: ZEM-IMM-02, intitule: "« Remigration » : expulsions, y compris d'étrangers au chômage depuis un an", source: "https://www.publicsenat.fr/actualites/politique/eric-zemmour-officialise-sa-candidature-a-la-presidentielle-2027", date: 2026-09-18, traitement: estime, cle: eloignements, note: "Coût des éloignements ; effets démographiques non chiffrés (voir ZEM-IMM-01)."}
+  - {id: ZEM-IMM-03, intitule: "Référendum sur l'immigration", source: "https://www.europe1.fr/politique/presidentielle-2027-pour-eric-zemmour-sa-candidature-a-lelysee-na-jamais-fait-lobjet-du-moindre-doute-1054310", date: 2026-09-04, traitement: sans_effet}
+  - {id: ZEM-IMM-04, intitule: "Prestations non contributives et allocations familiales réservées aux Français ; AME supprimée", source: "https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf#page=2", date: 2026-10-06,
+     traitement: estime, cle: "preference_famille, preference_logement, preference_pauvrete, ame", note: "Annonce : 15 à 20 Md€ et 1 Md€, non saisie. Ressortissants européens exclus (droit de l'Union) ; risque constitutionnel dans le prudent."}
+  - {id: ZEM-EUR-01, intitule: "Europe « zone commerciale » protégée par des barrières tarifaires", source: "https://www.cnews.fr/france/2025-08-31/finances-publiques-crise-democratique-municipales-2026-ce-quil-faut-retenir-du", date: 2025-08-31, traitement: non_chiffre, note: "Effets sur les prix et le commerce : hors du modèle (pas de canal des prix)."}
+  - {id: ZEM-INT-01, intitule: "Couper tous les visas pour l'Algérie", source: "https://www.lejdd.fr/politique/nunez-va-se-coucher-zemmour-exhorte-le-gouvernement-a-traiter-lalgerie-comme-un-pays-ennemi-163623", date: 2025-11-02, traitement: sans_effet}
+  - {id: ZEM-INT-02, intitule: "Supprimer l'aide publique au développement", source: "https://assets.ericzemmour.fr/ressources/tracts/verite-pouvoir-achat.pdf#page=2", date: 2025-11-13, traitement: estime, cle: aide_developpement}
+  - {id: ZEM-NUM-01, intitule: "La France troisième puissance mondiale de l'IA", source: "https://www.europe1.fr/politique/presidentielle-2027-eric-zemmour-appelle-a-un-vote-du-sursaut-lors-de-son-discours-de-rentree-1075178", date: 2026-09-13, traitement: estime, cle: ia}
+  - {id: ZEM-NUM-02, intitule: "Former à l'IA dès l'école", source: "https://www.cnews.fr/france/2026-09-13/presidentielle-2027-remigration-intelligence-artificielle-ce-quil-faut-retenir-du", date: 2026-09-13, traitement: estime, cle: ia}
+  - {id: ZEM-NUM-03, intitule: "Robotisation pour réduire l'immigration de travail", source: "https://www.cnews.fr/france/2026-09-18/des-robots-la-place-des-immigres-la-proposition-choc-deric-zemmour-pour-reduire", date: 2026-09-18, traitement: non_chiffre}
+  - {id: ZEM-CUL-01, intitule: "Privatiser l'audiovisuel public", source: "https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf#page=2", date: 2026-10-06, traitement: estime, cle: audiovisuel}
+  - {id: ZEM-SP-01, intitule: "Supprimer ARS, Ademe, ANAH, CESE, Arcom, France Travail", source: "https://assets.ericzemmour.fr/ressources/tracts/verite-pouvoir-achat.pdf#page=2", date: 2025-11-13, traitement: estime, cle: agences}
+  - {id: ZEM-SP-02, intitule: "Supprimer le soutien à la politique de la Ville", source: "https://assets.ericzemmour.fr/ressources/tracts/verite-pouvoir-achat.pdf#page=2", date: 2025-11-13, traitement: estime, cle: politique_ville}
+  - {id: ZEM-FAM-01, intitule: "Interdire le voile dans l'espace public", source: "https://www.lejdd.fr/politique/interdiction-du-voile-dans-lespace-public-eric-zemmour-abonde-dans-le-sens-du-rn-182307", date: 2026-09-01, traitement: sans_effet}

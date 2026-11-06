@@ -1,0 +1,152 @@
+# Programme de Nathalie Arthaud (Lutte ouvrière) : chiffrage PARTIEL sur le noyau (6 novembre 2026).
+#
+# Brochure « Présidentielle 2027 » (juin 2026), discours de meeting, éditoriaux. Lutte ouvrière présente un « programme
+# révolutionnaire à imposer par les luttes, pas un programme électoral » : le cœur du programme (expropriation sans
+# indemnité des grands groupes, interdiction des licenciements, répartition du travail sans perte de salaire,
+# planification) change l'économie entière et sort du champ du modèle. Sont chiffrées les mesures qui ont une ligne
+# budgétaire. Fiche : programmes/arthaud/mesures.yaml.
+
+arthaud_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes non remplacés ou créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculé : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € (bibliotheque.smic, OpenFisca 2026) × 1,25, même règle que Tondelier"
+    note: "Les emplois perdus sont surtout au voisinage du SMIC : valeur ajoutée plus basse que la moyenne."
+
+arthaud_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+arthaud_smic:
+  smic_net_programme:
+    valeur: 2200
+    unite: eur_mois
+    annee_euros: 2027
+    statut: SOURCE
+    source: "Meeting du 26 septembre 2026 (discours de Nathalie Arthaud) : SMIC à 2 200 € net par mois"
+    note: "En euros de 2027, ramené en euros de 2026 par l'inflation de 2027 (inflation.base), puis en brut par le barème OpenFisca de 2026 (≈ 2 740 € brut, +50 %). Allègements : voir allegements_suivent_smic."
+  allegements_suivent_smic:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Le programme ne dit rien des allègements : lecture de la loi actuelle, qui les définit en multiples du SMIC (ils suivent le nouveau SMIC). Le coût au SMIC monte alors comme le brut (+50 %). Variante « nominalisés » (lecture Tondelier) : coût au SMIC +88 %, emplois perdus bien plus nombreux."
+  diffusion_jusqu_a:
+    valeur: 1.4
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.diffusion_jusqu_a (Dares, Insee : diffusion jusqu'à 1,3 à 1,5 SMIC)"
+    note: "Avec un SMIC relevé de moitié, 1,4 nouveau SMIC ≈ 2,1 SMIC actuels : la moitié des salariés du privé sont touchés. La « hausse générale des salaires » n'a pas de montant : elle n'est pas comptée au-delà."
+  elasticite_emploi:
+    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Mêmes valeurs que tondelier_smic.elasticite_emploi (Kramarz et Philippon, 2001 ; Crépon et Desplatz, 2001 ; L'Horty, 2006)"
+    note: "Appliquées à élasticité constante (emplois × (1 − rapport des coûts^élasticité)), ce qui garde le résultat borné ; ces élasticités sont estimées pour des hausses de quelques pour cent : appliquées à une hausse de moitié, elles sortent de leur domaine de validité (résultat à lire comme un ordre de grandeur). L'interdiction des licenciements n'est pas modélisée comme un frein à ces pertes : elle ne s'applique pas aux embauches non faites, ni aux faillites."
+  part_marge_absorbee:
+    valeur: 0.5
+    unite: taux
+    statut: HYPOTHESE
+    note: "Même valeur que Tondelier."
+  valeur_emploi_chomeur:
+    valeur: 9000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur"
+  valeur_ajoutee_emploi_perdu:
+    valeur: 1.25
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Valeur ajoutée d'un emploi perdu = coût du travail × 1,25 (même règle que Tondelier)."
+
+arthaud_defense:
+  niveau_2026:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "« Pas un euro de plus pour l'armée » : la défense reste au niveau du PLF 2027 au lieu de suivre la loi de programmation militaire actualisée du statu quo (moteur/bibliotheque.defense_sans_lpm, statu_quo.defense_trajectoire = 2026)."
+
+arthaud_mesures:
+
+  # ---------------------------------------------------------------- recettes
+  confiscation:
+    valeur: {id: ART-FIS-01, libelle: "Confiscation des bénéfices des groupes pétroliers et de l'armement", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.0, prudent: 2.0, median: 3.0, optimiste: 4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : bénéfices imposables en France du raffinage, de la distribution de carburants et des industriels de l'armement ≈ 6 à 8 Md€ (IS ≈ 1,5 à 2 Md€ déjà perçu) ; les bénéfices de TotalEnergies sont surtout faits hors de France ; contentieux constitutionnels (droit de propriété) et baisse des bénéfices déclarés"
+    note: "Recette nette de l'IS déjà perçu, prudent bas. L'expropriation sans indemnité qui suivrait (programme) n'est pas chiffrée : hors du champ d'un modèle budgétaire."
+
+  # ---------------------------------------------------------------- annulation de mesures du budget 2027 (le statu quo les suppose votées)
+  pensions_indexees:
+    valeur: {id: ART-RET-01, libelle: "Pensions revalorisées sur l'inflation en 2027 (pas de sous-indexation)", poste: retraites, moteur: pensions, debut: 2027, plein: 2027,
+             montant: {crise: 5.5, prudent: 5.5, median: 5.0, optimiste: 5.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "PLFSS 2027 : sous-indexation des pensions au-delà de 85 % du SMIC, « plus de 5 Md€ » demandés aux retraités (MoneyVox, octobre 2026, d'après le projet de loi)"
+    note: "Le statu quo suppose voté le budget 2027 (déficit de 5 %) : annuler une économie de ce budget coûte cette économie, pour toujours (niveau des pensions)."
+  prestations_degelees:
+    valeur: {id: ART-FAM-01, libelle: "Allocations familiales, prime d'activité et aides au logement revalorisées en 2027", poste: famille, moteur: "bloc:famille", debut: 2027, plein: 2027,
+             montant: {crise: 0.6, prudent: 0.6, median: 0.5, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "PLFSS 2027 : gel des allocations familiales et de la prime d'activité en 2027, APL non revalorisées au 1er octobre 2027, allocation de rentrée « recentrée » (MoneyVox, octobre 2026). Encadrement : ≈ 1,2 % d'inflation sur ≈ 13 Md€ d'allocations familiales, ≈ 10 Md€ de prime d'activité et ≈ 16 Md€ d'APL"
+    note: "Saisi en entier sur le bloc famille (aucun montant officiel par prestation)."
+  deremboursements:
+    valeur: {id: ART-SAN-01, libelle: "Refus des déremboursements du budget 2027", poste: sante, moteur: "bloc:sante", debut: 2027, plein: 2027,
+             montant: {crise: 1.4, prudent: 1.4, median: 1.4, optimiste: 1.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "PLFSS 2027 : soins dentaires et transports sanitaires transférés aux complémentaires (1,2 Md€), cures thermales (0,2 Md€) (MoneyVox, octobre 2026)"
+
+  # ---------------------------------------------------------------- services publics
+  embauches_sante:
+    valeur: {id: ART-SP-01, libelle: "Embauches dans les hôpitaux et les Ehpad", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: 8.25, prudent: 8.25, median: 8.25, optimiste: 8.25}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Brochure Présidentielle 2027 (Lutte ouvrière, juin 2026, p. 12) : embauches « estimées à des centaines de milliers d'emplois » dans les hôpitaux, les Ehpad, l'éducation et les transports publics"
+    note: "Arbitrage : 300 000 postes en cinq ans au coût de 55 000 €, soit 16,5 Md€ ; moitié hôpitaux et Ehpad, 35 % éducation, 15 % transports publics (collectivités)."
+  embauches_education:
+    valeur: {id: ART-SP-01, libelle: "Embauches dans l'éducation (enseignants, AESH, infirmières)", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: 5.8, prudent: 5.8, median: 5.8, optimiste: 5.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    note: "Voir embauches_sante."
+  embauches_transports:
+    valeur: {id: ART-SP-01, libelle: "Embauches dans les transports publics", poste: collectivites, moteur: "bloc:collectivites", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: 2.45, prudent: 2.45, median: 2.45, optimiste: 2.45}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    note: "Voir embauches_sante."
+  pompiers:
+    valeur: {id: ART-SP-03, libelle: "Moyens supplémentaires pour les pompiers", poste: collectivites, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.3, median: 0.3, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : SDIS ≈ 5 Md€ par an (DGSCGC) ; +6 %"

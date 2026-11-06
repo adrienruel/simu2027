@@ -1,0 +1,156 @@
+# Programme de Xavier Bertrand (Nous France) : chiffrage sur le noyau (6 novembre 2026).
+#
+# Pas de programme publié (au 16/10/2026) : mesures recensées par programmes-2027.fr dans les entretiens et tribunes de
+# 2025-2026 reproduits sur nousfrance.fr. Fiche : programmes/bertrand/mesures.yaml.
+#
+# Règles (README) : on ne reprend que les mesures, jamais les économies annoncées (20 Md€ par an pendant cinq ans :
+# comparaison seulement) ; une économie sans source est estimée en crise / prudent / médian / optimiste ; une hypothèse
+# sans source est prise prudente. Format des mesures : celui de tondelier_mesures (moteur/programme_simple.py).
+
+bertrand_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes non remplacés ou créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 60000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : PIB par emploi ≈ 95 000 € (Insee 2025) ; emplois concernés plutôt moins productifs que la moyenne"
+
+bertrand_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+bertrand_retraites:
+  age_cible:
+    valeur: 65
+    unite: sans_unite
+    statut: DECISION
+    note: "Arbitrage : « report de l'âge légal en lien avec l'allongement de l'espérance de vie (curseur non précisé) ». Un an de plus que la loi actuelle (64 ans), le rythme de la réforme de 2023 ; à revoir dès que le candidat donne un âge."
+  premiere_generation:
+    valeur: 1966
+    unite: sans_unite
+    statut: DECISION
+    note: "Génération qui atteint 64 ans en 2030 : première loi de financement du quinquennat (2028) pour les départs de 2030."
+  pas_par_generation:
+    valeur: 0.25
+    unite: sans_unite
+    statut: DECISION
+    note: "Un trimestre par génération, comme la réforme de 2023 : 65 ans pour la génération 1969 (départs de 2034)."
+  part_economie_gardee:
+    valeur: {crise: 0.6, prudent: 0.65, median: 0.75, optimiste: 0.85}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : un départ anticipé avec décote rend une partie de l'économie (décote de 1,25 % par trimestre, proche de la neutralité actuarielle : Conseil d'orientation des retraites, 2022) ; l'âge d'annulation de la décote abaissé pour les femmes coûte en plus (non chiffré par le candidat). Prudent : un tiers de l'économie rendue"
+    note: "Le candidat refuse la désindexation des pensions : c'est déjà le statu quo (pensions sur les prix), rien à compter."
+
+bertrand_mesures:
+
+  # ---------------------------------------------------------------- économies : seules les lignes identifiées
+  assurance_chomage:
+    valeur: {id: BER-ECO-01, libelle: "Économies sur l'assurance chômage (non détaillées)", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
+             montant: {crise: -1.0, prudent: -1.5, median: -2.5, optimiste: -3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : réformes de 2019, 2021 et 2023 ≈ 2 à 4 Md€ d'économies chacune (Unédic, études d'impact) ; économie déclarative non détaillée, estimée en trois scénarios"
+    note: "La baisse du chômage structurel que de telles réformes peuvent apporter (Banque de France, 2026) n'est pas comptée : la réforme n'est pas décrite."
+  fonctionnaires:
+    valeur: {id: BER-ECO-01, libelle: "Baisse du nombre de fonctionnaires (non chiffrée par le candidat)", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -1.4, prudent: -2.2, median: -3.3, optimiste: -4.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : RGPP 2007-2012 ≈ 150 000 postes de l'État supprimés en cinq ans (Cour des comptes, 2012) ; ici 25 000 (crise) à 80 000 (optimiste) postes, 40 000 en prudent, au coût de 55 000 €"
+    note: "Économie déclarative, estimée. 57 % de la masse revient en prélèvements (fp) : l'économie nette est plus faible que la masse."
+  carburants:
+    valeur: {id: BER-ECO-02, libelle: "Recettes des hausses de carburant redistribuées aux actifs contraints", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.0, prudent: 0.5, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "À prix constants (convention du modèle), la mesure ne coûte rien ; le coût moyen tient aux épisodes de hausse (TVA en plus reversée). Crise : prix de l'énergie plus volatils."
+
+  # ---------------------------------------------------------------- fiscalité
+  ir_tranches_basses:
+    valeur: {id: BER-FIS-01, libelle: "Impôt sur le revenu : baisse des premières tranches (tranche à 11 % ramenée à 9 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -3.0, prudent: -3.0, median: -3.0, optimiste: -3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Même arbitrage que le programme Tondelier (REC-11), pour comparer : 2 points sur la tranche à 11 %, qui rapporte ≈ 15 Md€ (DGFiP)"
+  flat_tax:
+    valeur: {id: BER-FIS-02, libelle: "Relèvement du prélèvement forfaitaire unique de 2 points", poste: recettes, moteur: "recette:capital_dividendes_ifi", debut: 2028, plein: 2028,
+             montant: {crise: 0.6, prudent: 0.7, median: 0.9, optimiste: 1.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : part impôt sur le revenu du PFU sur dividendes et intérêts ≈ 0,6 Md€ par point (même base que tondelier_mesures.capital_csg_pfu) ; baisse des dividendes versés (IPP) : prudent ≈ 60 % du statique"
+    note: "Arbitrage : 2 points (le candidat dit « relever » sans chiffre)."
+
+  # ---------------------------------------------------------------- emploi, fonction publique
+  carence:
+    valeur: {id: BER-EMP-02, libelle: "Jours de carence alignés : trois jours dans le public comme dans le privé", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2028,
+             montant: {crise: -0.2, prudent: -0.3, median: -0.5, optimiste: -0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : passage d'un à trois jours dans les trois versants ≈ 0,3 à 0,6 Md€ (étude d'impact du PLF 2025, Sénat) ; prudent en bas"
+    note: "Arbitrage : alignement du public sur le privé (lecture la plus vraisemblable). Économie répartie entre versants, saisie sur l'État."
+
+  # ---------------------------------------------------------------- dépenses nouvelles
+  protection_civile:
+    valeur: {id: BER-ECO-03, libelle: "Protection civile contre les incendies (débroussaillage, drones, détection)", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.4, prudent: 0.3, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : pacte capacitaire de la sécurité civile ≈ 0,15 Md€ par an (2023-2027) ; mise à niveau du double"
+  culture_1_pct:
+    valeur: {id: BER-CUL-01, libelle: "Culture : 1 % du budget de l'État en 2032", poste: etat_missions, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 1.2, prudent: 1.2, median: 1.0, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : mission Culture ≈ 3,8 Md€ pour un budget général ≈ 480 Md€ de dépenses nettes (LFI 2026), soit 0,8 % ; 1 % ≈ 4,8 Md€, écart ≈ 1 Md€ selon le périmètre retenu"
+  audiovisuel:
+    valeur: {id: BER-CUL-02, libelle: "Audiovisuel public réformé, coûts réduits", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.0, prudent: -0.2, median: -0.3, optimiste: -0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Économie déclarative (dotation ≈ 3,8 Md€), estimée en trois scénarios."
+  bourses:
+    valeur: {id: BER-EDU-01, libelle: "Bourses réformées en faveur des classes moyennes", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2029,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : bourses sur critères sociaux du supérieur ≈ 2,3 Md€ (MESR) ; extension aux échelons des classes moyennes ≈ 20 %"
+  culture_eleves:
+    valeur: {id: BER-EDU-02, libelle: "Une œuvre ou un spectacle pour chaque élève", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2029,
+             montant: {crise: 0.1, prudent: 0.1, median: 0.1, optimiste: 0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : part collective du pass Culture ≈ 0,06 Md€ ; doublement et transport des classes"
+  peines_planchers:
+    valeur: {id: BER-SEC-01, libelle: "Peines planchers (par référendum) : détenus en plus", poste: etat_missions, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : coût d'une journée de détention ≈ 110 € (40 000 € par an, ministère de la Justice) ; 5 000 à 7 000 détenus en plus (peines planchers de 2007-2014 : effet mesuré faible, Inspection générale de la justice)"

@@ -1,0 +1,58 @@
+# Programme de Nathalie Arthaud (Lutte ouvrière) — les 37 mesures recensées et leur traitement (chiffrage partiel)
+#
+# Source de la liste : programmes-2027.fr (fiche du candidat, données du 4 novembre 2026), qui renvoie à la brochure
+# « Présidentielle 2027 » (juin 2026), aux discours de meeting et aux éditoriaux signés par la candidate. Sources
+# primaires non relues une à une : à vérifier avant publication. Traitement : voir programmes/bertrand/mesures.yaml.
+#
+# Avertissement : Lutte ouvrière présente un « programme révolutionnaire à imposer par les luttes, pas un programme
+# électoral ». Les mesures centrales (expropriation, interdiction des licenciements, répartition du travail sans perte
+# de salaire, planification) transforment l'économie entière : un modèle budgétaire à économie inchangée ne les
+# représente pas. Le chiffrage ne couvre que les mesures qui ont une ligne budgétaire.
+
+programme:
+  candidat: Nathalie Arthaud
+  parti: Lutte ouvrière
+  document: "Brochure « Nathalie Arthaud – Présidentielle 2027 » (juin 2026, 32 p.), meeting du 26 septembre 2026, éditoriaux"
+  url: https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf
+  liste: https://programmes-2027.fr/candidats/arthaud/
+  date_lecture: 2026-11-06
+
+mesures:
+  - {id: ART-ECO-01, intitule: "SMIC à 2 200 € net par mois", source: "https://www.lutte-ouvriere.org/portail/brochures/meeting-26-septembre-2026-discours-nathalie-arthaud-197446.html", date: 2026-09-29, traitement: chiffre, cle: "arthaud_smic (bibliotheque.smic)"}
+  - {id: ART-ECO-02, intitule: "Hausse générale des salaires, pensions et allocations, indexées sur les prix", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=11", date: 2026-06-26,
+     traitement: non_chiffre, note: "Sans montant au-delà du SMIC (diffusion jusqu'à 1,4 SMIC comptée). Indexation sur les prix : déjà le statu quo pour les pensions ; les prestations du statu quo suivent les salaires."}
+  - {id: ART-ECO-03, intitule: "Publication des comptes des grandes entreprises", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=14", date: 2026-06-26, traitement: sans_effet}
+  - {id: ART-ECO-04, intitule: "Expropriation sans indemnité des grands groupes (pétrole, armement d'abord)", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=14", date: 2026-06-26, traitement: non_chiffre, note: "Hors du champ du modèle."}
+  - {id: ART-FIS-01, intitule: "Confiscation des bénéfices des groupes pétroliers et de l'armement", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=14", date: 2026-06-26, traitement: estime, cle: confiscation}
+  - {id: ART-FIS-02, intitule: "Prélever sur les profits pétroliers plutôt que baisser les taxes sur les carburants", source: "https://lutte-ouvriere.org/portail/editoriaux/carburants-prix-budget-stop-racket-197249.html", date: 2026-09-21, traitement: estime, cle: confiscation, note: "Même assiette que ART-FIS-01, comptée une fois."}
+  - {id: ART-EMP-01, intitule: "Interdiction des licenciements sous peine de réquisition", source: "https://lutte-ouvriere.org/portail/editoriaux/interdiction-licenciements-sous-peine-requisition-184019.html", date: 2025-05-05, traitement: non_chiffre, note: "Hors du champ du modèle ; ne compense pas les emplois non créés ni les faillites dus au SMIC."}
+  - {id: ART-EMP-02, intitule: "Répartition du travail entre tous sans perte de salaire", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=12", date: 2026-06-26, traitement: non_chiffre, note: "Pas de durée cible : hausse du coût horaire non chiffrable."}
+  - {id: ART-EMP-03, intitule: "Maintien des salaires en cas de fermeture, payé par les actionnaires", source: "https://lutte-ouvriere.org/portail/editoriaux/faut-mettre-leconomie-sous-controle-travailleurs-189196.html", date: 2025-12-15, traitement: sans_effet, note: "Charge privée."}
+  - {id: ART-RET-01, intitule: "Pensions indexées sur l'inflation, refus de leur gel", source: "https://lutte-ouvriere.org/portail/editoriaux/29-septembre-apres-faisons-eclater-colere-197439.html", date: 2026-09-28, traitement: chiffre, cle: pensions_indexees, note: "Annulation de la sous-indexation du PLFSS 2027 (statu quo)."}
+  - {id: ART-RET-02, intitule: "Opposition à un nouveau recul de l'âge de départ", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=7", date: 2026-06-26, traitement: sans_effet, note: "64 ans dans le statu quo."}
+  - {id: ART-ENE-01, intitule: "Réquisition des surprofits pétroliers pour baisser les prix à la pompe", source: "https://lutte-ouvriere.org/portail/editoriaux/29-septembre-apres-faisons-eclater-colere-197439.html", date: 2026-09-28, traitement: estime, cle: confiscation}
+  - {id: ART-ENE-02, intitule: "Carburant vendu à prix coûtant", source: "https://www.lutte-ouvriere.org/portail/brochures/meeting-26-septembre-2026-discours-nathalie-arthaud-197446.html", date: 2026-09-29, traitement: non_chiffre, note: "Effet sur les prix et les marges : pas de canal des prix."}
+  - {id: ART-ENE-03, intitule: "Nucléaire : critique de sa gestion capitaliste", source: "https://www.lutte-ouvriere.org/portail/qui-sommes-nous/qui-sommes-nous-ecologie", traitement: sans_effet}
+  - {id: ART-ECL-01, intitule: "Planification mondiale de la production", source: "https://lutte-ouvriere.org/portail/editoriaux/catastrophes-lete-capitalistes-probleme-travailleurs-solutions-196254.html", date: 2026-08-10, traitement: non_chiffre}
+  - {id: ART-ECL-02, intitule: "Dégâts climatiques financés sur les profits", source: "https://lutte-ouvriere.org/portail/editoriaux/desastre-climatique-responsables-capitalistes-payer-196394.html", date: 2026-08-17, traitement: estime, cle: confiscation}
+  - {id: ART-AGR-01, intitule: "Opposition à la loi d'urgence agricole et aux méga-bassines", source: "https://lutte-ouvriere.org/portail/editoriaux/politique-ecologique-consequente-cest-renverser-capitalisme-195906.html", date: 2026-07-20, traitement: sans_effet}
+  - {id: ART-LOG-01, intitule: "Réquisition des logements vacants", source: "https://lutte-ouvriere.org/portail/breves/logement-toit-toutes-195933.html", date: 2026-07-21, traitement: non_chiffre, note: "Indemnité éventuelle aux propriétaires non décrite."}
+  - {id: ART-LOG-02, intitule: "Refus du gel des APL et de leur restriction pour les étrangers", source: "https://lutte-ouvriere.org/portail/editoriaux/carburants-prix-budget-stop-racket-197249.html", date: 2026-09-21, traitement: chiffre, cle: prestations_degelees}
+  - {id: ART-SAN-01, intitule: "Refus des déremboursements de médicaments", source: "https://lutte-ouvriere.org/portail/editoriaux/vive-mobilisation-lyceenne-faisons-naitre-travailleurs-mardi-6-octobre-mobilises-197642.html", date: 2026-10-04, traitement: chiffre, cle: deremboursements}
+  - {id: ART-SAN-02, intitule: "Sortir la santé du marché", source: "https://lutte-ouvriere.org/portail/editoriaux/interdiction-licenciements-sous-peine-requisition-184019.html", date: 2025-05-05, traitement: non_chiffre}
+  - {id: ART-EDU-01, intitule: "Plus de moyens pour l'éducation", source: "https://lutte-ouvriere.org/portail/editoriaux/vive-mobilisation-lyceenne-faisons-naitre-travailleurs-mardi-6-octobre-mobilises-197642.html", date: 2026-10-04, traitement: chiffre, cle: embauches_education}
+  - {id: ART-IMM-01, intitule: "Régularisation de tous les sans-papiers", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=16", date: 2026-06-26, traitement: non_chiffre, note: "Comme pour Tondelier : effet sur l'emploi déclaré et l'AME non chiffré."}
+  - {id: ART-IMM-02, intitule: "Liberté de circulation et d'installation", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=16", date: 2026-06-26, traitement: non_chiffre, note: "Effet démographique : variante à construire."}
+  - {id: ART-IMM-03, intitule: "Opposition à la préférence nationale", source: "https://lutte-ouvriere.org/portail/editoriaux/non-guerre-entre-travailleurs-197063.html", date: 2026-09-14, traitement: sans_effet}
+  - {id: ART-INS-01, intitule: "Contrôle de l'économie par les travailleurs", source: "https://lutte-ouvriere.org/portail/editoriaux/faut-mettre-leconomie-sous-controle-travailleurs-189196.html", date: 2025-12-15, traitement: non_chiffre}
+  - {id: ART-EUR-01, intitule: "Refus de la sortie de l'UE", source: "https://lutte-ouvriere.org/portail/qui-sommes-nous/qui-sommes-nous-europe", traitement: sans_effet}
+  - {id: ART-INT-01, intitule: "Opposition à la hausse du budget militaire", source: "https://lutte-ouvriere.org/portail/editoriaux/euro-larmee-homme-guerre-182538.html", date: 2025-03-10, traitement: chiffre, cle: "arthaud_defense (bibliotheque.defense_sans_lpm)"}
+  - {id: ART-INT-02, intitule: "Opposition au service militaire", source: "https://lutte-ouvriere.org/portail/editoriaux/galonnes-cherchent-chair-canon-188858.html", date: 2025-12-01, traitement: non_chiffre, note: "Coût du service volontaire dans le statu quo non isolé ; compris dans la défense ramenée au PLF 2027."}
+  - {id: ART-INT-03, intitule: "Retrait des troupes du Moyen-Orient", source: "https://lutte-ouvriere.org/portail/editoriaux/troupes-francaises-hors-moyen-orient-bas-guerre-imperialiste-192972.html", date: 2026-03-23, traitement: non_chiffre, note: "Surcoûts des opérations extérieures (≈ 1 Md€ en tout) : faible."}
+  - {id: ART-INT-04, intitule: "Opposition au protectionnisme", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=18", date: 2026-06-26, traitement: sans_effet}
+  - {id: ART-NUM-01, intitule: "IA : réduire les horaires plutôt que licencier", source: "https://www.lutte-ouvriere.org/portail/brochures/meeting-26-septembre-2026-discours-nathalie-arthaud-197446.html", date: 2026-09-29, traitement: non_chiffre}
+  - {id: ART-SP-01, intitule: "Embauches massives dans les services publics", source: "https://www.lutte-ouvriere.org/medias/document/fichiers/2026/06/brochure-ete-2026.pdf#page=12", date: 2026-06-26, traitement: chiffre, cle: "embauches_sante, embauches_education, embauches_transports", note: "Arbitrage : 300 000 postes."}
+  - {id: ART-SP-02, intitule: "Électricité, transports et logement hors du marché", source: "https://lutte-ouvriere.org/portail/editoriaux/interdiction-licenciements-sous-peine-requisition-184019.html", date: 2025-05-05, traitement: non_chiffre}
+  - {id: ART-SP-03, intitule: "Salaires des fonctionnaires, moyens des pompiers", source: "https://lutte-ouvriere.org/portail/editoriaux/29-septembre-apres-faisons-eclater-colere-197439.html", date: 2026-09-28, traitement: chiffre, cle: "pompiers ; salaires publics par le SMIC (ART-ECO-01)", note: "Le statu quo fait déjà suivre les salaires publics aux salaires du privé (pas de gel durable)."}
+  - {id: ART-FAM-01, intitule: "Maintien des allocations familiales et de la prime de rentrée", source: "https://lutte-ouvriere.org/portail/editoriaux/vive-mobilisation-lyceenne-faisons-naitre-travailleurs-mardi-6-octobre-mobilises-197642.html", date: 2026-10-04, traitement: chiffre, cle: prestations_degelees}
+  - {id: ART-FAM-02, intitule: "Égalité salariale entre femmes et hommes", source: "https://lutte-ouvriere.org/portail/qui-sommes-nous/qui-sommes-nous-feminisme", traitement: non_chiffre}
