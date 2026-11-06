@@ -77,6 +77,51 @@ def prix_finaux(p: Parametres) -> dict[str, dict[int, float]]:
     return out
 
 
+def couts_energie_entreprises(p: Parametres, s: str = "prudent") -> dict[int, dict[str, float]]:
+    """Taxes sur l'énergie payées par les entreprises (Md€ de 2026), statu quo et programme, et indice de prix de
+    leur énergie (programme / statu quo), année par année. La TVA est récupérée par les entreprises : seules les
+    accises comptent.
+
+    Statu quo : accises actuelles (carburants : 110 % du prix hors taxe TVA comprise, soit 75 % hors TVA, moins les
+    remboursements ; gaz et fioul : 40 %, soit 17 % ; électricité : energie_entreprises.electricite) + ETS2 à partir
+    de 2028. Programme : accise écologique au prix du carbone de l'année (carburants, gaz et fioul, aérien), pas
+    d'accise sur l'électricité. Volumes : ceux du statu quo (émissions des transports et des bâtiments), puis la
+    réponse au prix (reponse_energie) dans le programme."""
+    from .ecologie import emissions as em
+    from .recettes.autres import accises_entreprises_brutes  # noqa: F401  (même assiette)
+    from .tva import accises_calculees
+    a = p.val("accises_entreprises.achats_ht")
+    el = p.val("energie_entreprises.electricite")
+    remb = p.val("energie_entreprises.remboursements_carburants")
+    c, g = p.val("tva.carburants"), p.val("tva.gaz_fioul")
+    k_carb = (c["co2_essence"] * (1 - c["part_gazole"]) + c["co2_gazole"] * c["part_gazole"]) / c["prix_ht"]
+    k_gaz = g["co2_gaz_kwh"] / g["prix_gaz_kwh"] * g["part_gaz"] + c["co2_gazole"] / g["prix_fioul_litre"] * (1 - g["part_gaz"])
+    ca = accises_calculees(p)
+    p0 = prix_carbone(p)
+    ets = p.val("ecologie.prix_carbone_statu_quo")
+    ind = {i: em.indice(p, s, (i,)) for i in ("transports", "batiments")}
+    rep = reponse_energie(p, s)
+    out = {}
+    for t in em.ANNEES:
+        if t < 2029:
+            continue
+        e2 = ets["ets2"] / 1000 if t >= ets["debut_ets2"] else 0.0
+        vc, vg = ind["transports"][t], ind["batiments"][t]
+        sq_carb = (a["carburants"] * (0.75 + e2 * k_carb) - remb) * vc
+        sq_gaz = a["gaz_fioul"] * (0.1667 + e2 * k_gaz) * vg
+        pc = prix(p, t) / 1000
+        pr_carb = a["carburants"] * pc * k_carb * vc * rep["transports"][t]
+        pr_gaz = a["gaz_fioul"] * pc * k_gaz * vg * rep["batiments"][t]
+        pr_air = a["aerien"] * ca["aerien"] * prix(p, t) / p0
+        # indice de prix unitaire (hors aérien, qui est un voyage d'affaires et non une énergie de production)
+        base = a["carburants"] + a["gaz_fioul"] + el["achats_ht"]
+        avant = base + a["carburants"] * (0.75 + e2 * k_carb) - remb + a["gaz_fioul"] * (0.1667 + e2 * k_gaz) + el["accise_actuelle"]
+        apres = base + a["carburants"] * pc * k_carb + a["gaz_fioul"] * pc * k_gaz
+        out[t] = {"statu_quo": sq_carb + sq_gaz + el["accise_actuelle"], "programme": pr_carb + pr_gaz + pr_air,
+                  "programme_hors_aerien": pr_carb + pr_gaz, "indice_prix": apres / avant}
+    return out
+
+
 def reponse_energie(p: Parametres, s: str = "prudent") -> dict[str, dict[int, float]]:
     """Facteur sur les émissions (et l'assiette taxée) des transports et des bâtiments : prix finaux du programme
     contre le statu quo, plus l'effet croisé de l'électricité moins chère. Une seule équation pour la recette, les

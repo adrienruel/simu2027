@@ -167,3 +167,28 @@ L'essence est moins chère que sans réforme jusque vers 2036 (les émissions de
 3 %), puis plus chère. Le chauffage au gaz et au fioul est plus cher dès 2029. L'électricité moins chère accélère
 l'électrification (élasticité croisée : zéro dans le prudent faute de source, 0,1 en médian, 0,2 en optimiste).
 La recette carbone et l'inflation suivent la même réponse (`carbone.reponse_energie`).
+
+## Énergie des entreprises : marges, impôt sur les bénéfices, emploi (06/11/2026, remarque d'Adrien)
+
+`carbone.couts_energie_entreprises` (commun) et `energie_entreprises` (Écologie de droite). Les entreprises récupèrent
+la TVA : seules les accises comptent.
+
+| Md€ de 2026, prudent | 2029 | 2030 | 2037 | 2050 | 2060 |
+|---|---|---|---|---|---|
+| Taxes sur l'énergie des entreprises, statu quo (accises actuelles et ETS2) | 18,0 | 17,7 | 15,9 | 12,9 | 11,0 |
+| Programme, hors voyages d'affaires en avion | 17,1 | 19,6 | 20,4 | 20,8 | 20,3 |
+| Programme, avec l'aérien | 21,6 | 24,9 | 27,0 | 30,8 | 34,0 |
+| Indice de prix de l'énergie des entreprises (programme / statu quo) | 0,98 | 1,02 | 1,09 | 1,27 | 1,46 |
+
+L'électricité des entreprises est moins chère (accise supprimée), les carburants à peine moins chers en 2029, le gaz
+et le fioul plus chers ; dès 2030, le prix du carbone qui monte l'emporte.
+
+1. **Impôt sur les bénéfices (correction)** : les nouvelles accises étaient déjà nettes de l'IS (ligne 15), mais les
+   taxes actuelles supprimées n'étaient pas réintégrées dans l'assiette de l'IS (contrairement aux impôts de
+   production). Ajouté : taux moyen de l'IS × taxes actuelles, +7,2 Md€ en 2029, +5,2 en 2050.
+2. **Emploi industriel** : élasticité de Marin et Vona (2021), la moitié dans le prudent ; +2 000 emplois en 2029,
+   puis −28 000 en 2037, −85 000 en 2050, −139 000 en 2060. Emploi gagné au gain du coût du travail, emploi perdu au
+   coût de la localisation, comme le bloc emploi ; passent par le chômage et le PIB.
+
+Hors canal : la règle de trajectoire du moteur du programme ne réagit pas à ces effets (ajoutés au noyau, comme les
+effets des mesures de Tondelier) ; les rendements décroissants du chômage ne leur sont pas appliqués (effet faible).

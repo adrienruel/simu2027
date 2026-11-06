@@ -541,6 +541,59 @@ def contexte_emploi(p: Parametres, s: str, r: dict) -> dict:
     return {"emploi": emploi, "emplois_canaux": canaux}
 
 
+def energie_entreprises(p: Parametres, q: Parametres, s: str, ctx: dict) -> dict:
+    """Canal de l'énergie des entreprises (remarque d'Adrien du 06/11/2026) : moins de taxes sur l'énergie, plus de
+    marges, plus d'impôt sur les bénéfices, plus d'emplois — et l'inverse quand le prix du carbone dépasse les taxes
+    actuelles.
+
+    1. Impôt sur les bénéfices : les nouvelles accises des entreprises sont déjà nettes de l'IS (recettes, ligne 15),
+       mais les taxes actuelles supprimées ne sont pas réintégrées dans l'assiette de l'IS (contrairement aux impôts
+       de production) : + taux moyen de l'IS × taxes actuelles supprimées.
+    2. Emploi industriel : − élasticité × écart de l'indice de prix de l'énergie des entreprises, ajustement
+       progressif ; un emploi gagné rapporte comme un emploi du coût du travail (au SMIC), un emploi perdu coûte
+       comme un emploi perdu par localisation (coût moyen du privé), comme dans le bloc emploi ; les emplois passent
+       par le chômage (même règle que le coût du travail) et ajoutent leur valeur ajoutée au PIB."""
+    import math
+    from moteur import statu_quo as sq
+    from moteur.carbone import couts_energie_entreprises
+    from moteur.emploi_canaux import gains_par_canal
+    from moteur.is_bareme import taux_moyen
+    from moteur.ecologie import emissions as em
+    jeu = em.scenario(q, s)
+    ce = couts_energie_entreprises(q, s)
+    t_is = taux_moyen(q, s)
+    gains = gains_par_canal(q, s)
+    eps = sq._v(q, "energie_entreprises.elasticite_emploi_prix", jeu)
+    n_ind = q.val("energie_entreprises.emploi_industrie")
+    ajust = q.val("ecologie.reponse_prix")["ajustement"]
+    e = sq.effectifs(p, s)
+    is_sup, emplois, budget = {}, {}, {}
+    ln_a = 0.0
+    for t in ANNEES:
+        if t not in ce:
+            is_sup[t] = emplois[t] = budget[t] = 0.0
+            continue
+        is_sup[t] = t_is * ce[t]["statu_quo"]
+        ln_a += ajust * (-eps * math.log(ce[t]["indice_prix"]) - ln_a)
+        emplois[t] = n_ind * (math.exp(ln_a) - 1)
+        g = gains["cout_travail"] if emplois[t] >= 0 else gains["localisation"]
+        budget[t] = emplois[t] * g / 1e9
+    mesures = [
+        Mesure("Effet macro : impôt sur les bénéfices des taxes sur l'énergie supprimées (marges des entreprises)", "recettes",
+               is_sup, nature="effet_macro"),
+        Mesure("Effet macro : emploi industriel selon le prix de l'énergie des entreprises", "recettes", budget, nature="effet_macro"),
+    ]
+    va = {t: ctx["pib"][t] / e[t]["emploi"] for t in ANNEES}
+    actifs = {t: e[t]["emploi"] + e[t]["chomeurs"] for t in ANNEES}
+    nouveau = dict(ctx)
+    nouveau["chomage"] = {t: ctx["chomage"][t] - emplois[t] / actifs[t] * 100 for t in ANNEES}
+    if "emploi" in ctx:
+        nouveau["emploi"] = {t: ctx["emploi"][t] + emplois[t] for t in ANNEES}
+        nouveau["emplois_canaux"] = {t: {**ctx["emplois_canaux"][t], "Prix de l'énergie des entreprises": emplois[t]} for t in ANNEES}
+    nouveau["pib"] = {t: ctx["pib"][t] + emplois[t] * va[t] for t in ANNEES}
+    return {"mesures": mesures, "contexte": nouveau, "couts": ce, "emplois": emplois}
+
+
 def mesure_prix_carbone(p: Parametres, q: Parametres, s: str) -> Mesure:
     """Effet physique du prix du carbone (300 € en 2030, puis valeur de l'action pour le climat) sur les émissions
     des transports et des bâtiments, contre le prix du statu quo : la même réponse que l'assiette de la recette
@@ -722,6 +775,9 @@ class EcologieDeDroite:
                 **contexte_emploi(p, s, r),
                 "pib_hors_consommation": {t: r[t].get("pib_epargne_fonds", 0.0) for t in ANNEES},
             }
+            en = energie_entreprises(p, q, s, contexte[s])
+            contexte[s] = en["contexte"]
+            mesures[s].extend(en["mesures"])
         out = {"mesures": mesures, "contexte": contexte, "resultats": res}
         self._cache = {cle: out}
         return out

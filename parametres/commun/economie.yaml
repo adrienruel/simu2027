@@ -659,3 +659,33 @@ emploi_public:
     statut: HYPOTHESE
     source: "Encadrée : Algan, Cahuc et Zylberberg (Economic Policy, 2002) : 100 emplois publics créés en éliminent environ 150 dans le privé, surtout quand l'activité publique remplace une activité privée ou paie mieux"
     note: "Emplois privés perdus pour un poste public créé, commun à tous les programmes. Crise : la source ; prudent : un pour un (aucun emploi net) ; médian et optimiste : éviction partielle, les postes créés étant surtout dans des services peu substituables (école, justice, soins)."
+
+# --- Énergie des entreprises (06/11/2026) ----------------------------------------------------------------------
+# Remarque d'Adrien : une énergie moins chère pour les entreprises fait plus de marges, donc plus d'impôt sur les
+# bénéfices, plus d'activité et plus d'embauches. Canal commun : moteur/carbone.couts_energie_entreprises, utilisé par
+# tout programme qui change les taxes sur l'énergie des entreprises.
+energie_entreprises:
+  electricite:
+    valeur: {achats_ht: 30.0, accise_actuelle: 3.0}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrée : CRE, l'accise sur l'électricité a rapporté 8,2 Md€ en 2025 ; les ménages (environ 150 TWh au tarif plein d'environ 33 €/MWh) en paient environ 5,2 ; reste environ 3 Md€ pour les entreprises (tarifs réduits pour l'industrie)"
+    note: "Achats d'électricité hors taxe des entreprises hors ETS1 : environ 250 TWh à environ 0,12 €/kWh. À sourcer : SDES, bilan énergétique, dépenses d'énergie par secteur."
+  remboursements_carburants:
+    valeur: 1.0
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    note: "Remboursements partiels d'accise sur le gazole (transport routier, taxis, agriculture) retirés des taxes actuelles sur les carburants des entreprises : ordre de grandeur, à sourcer (PLF, évaluation des voies et moyens, tome II). Retirer ce montant réduit le gain du programme (prudent)."
+  elasticite_emploi_prix:
+    valeur: {crise: 0.26, prudent: 0.13, median: 0.13, optimiste: 0.13}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrée : Marin et Vona (2021, établissements manufacturiers français, 1997-2010) : +10 % de prix de l'énergie, −2,6 % d'emploi, surtout dans les industries intensives en énergie et exposées au commerce ; effet moindre dans les entreprises à plusieurs établissements (les salariés passent d'un établissement à l'autre)"
+    note: "Appliquée à l'emploi industriel, pour un indice de prix de l'énergie des entreprises (carburants, gaz et fioul, électricité, pondérés par les achats). Crise : la valeur de l'étude ; autres scénarios : la moitié, l'estimation par établissement comptant des emplois qui changent seulement d'établissement. Ajustement progressif (ecologie.reponse_prix.ajustement)."
+  emploi_industrie:
+    valeur: 3100000
+    unite: personnes
+    statut: HYPOTHESE
+    source: "Encadrée : Insee, environ 3,2 millions d'emplois salariés dans l'industrie (énergie comprise)"

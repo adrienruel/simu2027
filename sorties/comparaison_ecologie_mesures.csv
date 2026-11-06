@@ -1,18 +1,18 @@
 cle,programme,scenario,annee,mesure,secteur,mt
-Écologie de droite|Crise|2029|138|emissions_mt:transports,Écologie de droite,Crise,2029,Prix du carbone : émissions des transports et des bâtiments,transports,-4.89
-Écologie de droite|Crise|2032|138|emissions_mt:transports,Écologie de droite,Crise,2032,Prix du carbone : émissions des transports et des bâtiments,transports,-13.038
-Écologie de droite|Crise|2037|138|emissions_mt:transports,Écologie de droite,Crise,2037,Prix du carbone : émissions des transports et des bâtiments,transports,-16.651
-Écologie de droite|Crise|2045|138|emissions_mt:transports,Écologie de droite,Crise,2045,Prix du carbone : émissions des transports et des bâtiments,transports,-18.728
-Écologie de droite|Crise|2050|138|emissions_mt:transports,Écologie de droite,Crise,2050,Prix du carbone : émissions des transports et des bâtiments,transports,-19.454
-Écologie de droite|Crise|2060|138|emissions_mt:transports,Écologie de droite,Crise,2060,Prix du carbone : émissions des transports et des bâtiments,transports,-19.887
-Écologie de droite|Crise|2073|138|emissions_mt:transports,Écologie de droite,Crise,2073,Prix du carbone : émissions des transports et des bâtiments,transports,-15.317
-Écologie de droite|Crise|2029|138|emissions_mt:batiments,Écologie de droite,Crise,2029,Prix du carbone : émissions des transports et des bâtiments,batiments,-2.155
-Écologie de droite|Crise|2032|138|emissions_mt:batiments,Écologie de droite,Crise,2032,Prix du carbone : émissions des transports et des bâtiments,batiments,-5.759
-Écologie de droite|Crise|2037|138|emissions_mt:batiments,Écologie de droite,Crise,2037,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.286
-Écologie de droite|Crise|2045|138|emissions_mt:batiments,Écologie de droite,Crise,2045,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.087
-Écologie de droite|Crise|2050|138|emissions_mt:batiments,Écologie de droite,Crise,2050,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.364
-Écologie de droite|Crise|2060|138|emissions_mt:batiments,Écologie de droite,Crise,2060,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.541
-Écologie de droite|Crise|2073|138|emissions_mt:batiments,Écologie de droite,Crise,2073,Prix du carbone : émissions des transports et des bâtiments,batiments,-6.58
+Écologie de droite|Crise|2029|138|emissions_mt:transports,Écologie de droite,Crise,2029,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,3.549
+Écologie de droite|Crise|2032|138|emissions_mt:transports,Écologie de droite,Crise,2032,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,3.905
+Écologie de droite|Crise|2037|138|emissions_mt:transports,Écologie de droite,Crise,2037,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,0.254
+Écologie de droite|Crise|2045|138|emissions_mt:transports,Écologie de droite,Crise,2045,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-6.027
+Écologie de droite|Crise|2050|138|emissions_mt:transports,Écologie de droite,Crise,2050,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-9.186
+Écologie de droite|Crise|2060|138|emissions_mt:transports,Écologie de droite,Crise,2060,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-13.488
+Écologie de droite|Crise|2073|138|emissions_mt:transports,Écologie de droite,Crise,2073,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-10.812
+Écologie de droite|Crise|2029|138|emissions_mt:batiments,Écologie de droite,Crise,2029,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-0.927
+Écologie de droite|Crise|2032|138|emissions_mt:batiments,Écologie de droite,Crise,2032,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-3.591
+Écologie de droite|Crise|2037|138|emissions_mt:batiments,Écologie de droite,Crise,2037,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-5.382
+Écologie de droite|Crise|2045|138|emissions_mt:batiments,Écologie de droite,Crise,2045,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-6.994
+Écologie de droite|Crise|2050|138|emissions_mt:batiments,Écologie de droite,Crise,2050,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.68
+Écologie de droite|Crise|2060|138|emissions_mt:batiments,Écologie de droite,Crise,2060,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-8.418
+Écologie de droite|Crise|2073|138|emissions_mt:batiments,Écologie de droite,Crise,2073,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-6.541
 Écologie de droite|Crise|2029|139|importees_mt,Écologie de droite,Crise,2029,Accise sur le contenu carbone des importations,importations,-4.727
 Écologie de droite|Crise|2032|139|importees_mt,Écologie de droite,Crise,2032,Accise sur le contenu carbone des importations,importations,-5.622
 Écologie de droite|Crise|2037|139|importees_mt,Écologie de droite,Crise,2037,Accise sur le contenu carbone des importations,importations,-6.37
@@ -41,20 +41,20 @@ cle,programme,scenario,annee,mesure,secteur,mt
 Écologie de droite|Crise|2050|142|emissions_mt:transports,Écologie de droite,Crise,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.209
 Écologie de droite|Crise|2060|142|emissions_mt:transports,Écologie de droite,Crise,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.174
 Écologie de droite|Crise|2073|142|emissions_mt:transports,Écologie de droite,Crise,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.137
-Écologie de droite|Prudent|2029|138|emissions_mt:transports,Écologie de droite,Prudent,2029,Prix du carbone : émissions des transports et des bâtiments,transports,-4.894
-Écologie de droite|Prudent|2032|138|emissions_mt:transports,Écologie de droite,Prudent,2032,Prix du carbone : émissions des transports et des bâtiments,transports,-13.116
-Écologie de droite|Prudent|2037|138|emissions_mt:transports,Écologie de droite,Prudent,2037,Prix du carbone : émissions des transports et des bâtiments,transports,-16.598
-Écologie de droite|Prudent|2045|138|emissions_mt:transports,Écologie de droite,Prudent,2045,Prix du carbone : émissions des transports et des bâtiments,transports,-18.401
-Écologie de droite|Prudent|2050|138|emissions_mt:transports,Écologie de droite,Prudent,2050,Prix du carbone : émissions des transports et des bâtiments,transports,-18.983
-Écologie de droite|Prudent|2060|138|emissions_mt:transports,Écologie de droite,Prudent,2060,Prix du carbone : émissions des transports et des bâtiments,transports,-19.32
-Écologie de droite|Prudent|2073|138|emissions_mt:transports,Écologie de droite,Prudent,2073,Prix du carbone : émissions des transports et des bâtiments,transports,-14.934
-Écologie de droite|Prudent|2029|138|emissions_mt:batiments,Écologie de droite,Prudent,2029,Prix du carbone : émissions des transports et des bâtiments,batiments,-2.158
-Écologie de droite|Prudent|2032|138|emissions_mt:batiments,Écologie de droite,Prudent,2032,Prix du carbone : émissions des transports et des bâtiments,batiments,-5.749
-Écologie de droite|Prudent|2037|138|emissions_mt:batiments,Écologie de droite,Prudent,2037,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.192
-Écologie de droite|Prudent|2045|138|emissions_mt:batiments,Écologie de droite,Prudent,2045,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.839
-Écologie de droite|Prudent|2050|138|emissions_mt:batiments,Écologie de droite,Prudent,2050,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.025
-Écologie de droite|Prudent|2060|138|emissions_mt:batiments,Écologie de droite,Prudent,2060,Prix du carbone : émissions des transports et des bâtiments,batiments,-8.063
-Écologie de droite|Prudent|2073|138|emissions_mt:batiments,Écologie de droite,Prudent,2073,Prix du carbone : émissions des transports et des bâtiments,batiments,-6.127
+Écologie de droite|Prudent|2029|138|emissions_mt:transports,Écologie de droite,Prudent,2029,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,3.552
+Écologie de droite|Prudent|2032|138|emissions_mt:transports,Écologie de droite,Prudent,2032,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,3.928
+Écologie de droite|Prudent|2037|138|emissions_mt:transports,Écologie de droite,Prudent,2037,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,0.254
+Écologie de droite|Prudent|2045|138|emissions_mt:transports,Écologie de droite,Prudent,2045,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-5.921
+Écologie de droite|Prudent|2050|138|emissions_mt:transports,Écologie de droite,Prudent,2050,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-8.963
+Écologie de droite|Prudent|2060|138|emissions_mt:transports,Écologie de droite,Prudent,2060,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-13.103
+Écologie de droite|Prudent|2073|138|emissions_mt:transports,Écologie de droite,Prudent,2073,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-10.542
+Écologie de droite|Prudent|2029|138|emissions_mt:batiments,Écologie de droite,Prudent,2029,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-0.928
+Écologie de droite|Prudent|2032|138|emissions_mt:batiments,Écologie de droite,Prudent,2032,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-3.585
+Écologie de droite|Prudent|2037|138|emissions_mt:batiments,Écologie de droite,Prudent,2037,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-5.312
+Écologie de droite|Prudent|2045|138|emissions_mt:batiments,Écologie de droite,Prudent,2045,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-6.78
+Écologie de droite|Prudent|2050|138|emissions_mt:batiments,Écologie de droite,Prudent,2050,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.369
+Écologie de droite|Prudent|2060|138|emissions_mt:batiments,Écologie de droite,Prudent,2060,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.947
+Écologie de droite|Prudent|2073|138|emissions_mt:batiments,Écologie de droite,Prudent,2073,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-6.09
 Écologie de droite|Prudent|2029|139|importees_mt,Écologie de droite,Prudent,2029,Accise sur le contenu carbone des importations,importations,-4.727
 Écologie de droite|Prudent|2032|139|importees_mt,Écologie de droite,Prudent,2032,Accise sur le contenu carbone des importations,importations,-5.799
 Écologie de droite|Prudent|2037|139|importees_mt,Écologie de droite,Prudent,2037,Accise sur le contenu carbone des importations,importations,-6.669
@@ -83,20 +83,20 @@ cle,programme,scenario,annee,mesure,secteur,mt
 Écologie de droite|Prudent|2050|142|emissions_mt:transports,Écologie de droite,Prudent,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.385
 Écologie de droite|Prudent|2060|142|emissions_mt:transports,Écologie de droite,Prudent,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.308
 Écologie de droite|Prudent|2073|142|emissions_mt:transports,Écologie de droite,Prudent,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.231
-Écologie de droite|Médian|2029|138|emissions_mt:transports,Écologie de droite,Médian,2029,Prix du carbone : émissions des transports et des bâtiments,transports,-4.894
-Écologie de droite|Médian|2032|138|emissions_mt:transports,Écologie de droite,Médian,2032,Prix du carbone : émissions des transports et des bâtiments,transports,-13.093
-Écologie de droite|Médian|2037|138|emissions_mt:transports,Écologie de droite,Médian,2037,Prix du carbone : émissions des transports et des bâtiments,transports,-16.52
-Écologie de droite|Médian|2045|138|emissions_mt:transports,Écologie de droite,Médian,2045,Prix du carbone : émissions des transports et des bâtiments,transports,-18.102
-Écologie de droite|Médian|2050|138|emissions_mt:transports,Écologie de droite,Médian,2050,Prix du carbone : émissions des transports et des bâtiments,transports,-18.527
-Écologie de droite|Médian|2060|138|emissions_mt:transports,Écologie de droite,Médian,2060,Prix du carbone : émissions des transports et des bâtiments,transports,-18.56
-Écologie de droite|Médian|2073|138|emissions_mt:transports,Écologie de droite,Médian,2073,Prix du carbone : émissions des transports et des bâtiments,transports,-14.054
-Écologie de droite|Médian|2029|138|emissions_mt:batiments,Écologie de droite,Médian,2029,Prix du carbone : émissions des transports et des bâtiments,batiments,-2.158
-Écologie de droite|Médian|2032|138|emissions_mt:batiments,Écologie de droite,Médian,2032,Prix du carbone : émissions des transports et des bâtiments,batiments,-5.714
-Écologie de droite|Médian|2037|138|emissions_mt:batiments,Écologie de droite,Médian,2037,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.073
-Écologie de droite|Médian|2045|138|emissions_mt:batiments,Écologie de droite,Médian,2045,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.562
-Écologie de droite|Médian|2050|138|emissions_mt:batiments,Écologie de droite,Médian,2050,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.646
-Écologie de droite|Médian|2060|138|emissions_mt:batiments,Écologie de droite,Médian,2060,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.494
-Écologie de droite|Médian|2073|138|emissions_mt:batiments,Écologie de droite,Médian,2073,Prix du carbone : émissions des transports et des bâtiments,batiments,-5.514
+Écologie de droite|Médian|2029|138|emissions_mt:transports,Écologie de droite,Médian,2029,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,2.478
+Écologie de droite|Médian|2032|138|emissions_mt:transports,Écologie de droite,Médian,2032,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,1.541
+Écologie de droite|Médian|2037|138|emissions_mt:transports,Écologie de droite,Médian,2037,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-2.244
+Écologie de droite|Médian|2045|138|emissions_mt:transports,Écologie de droite,Médian,2045,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-7.828
+Écologie de droite|Médian|2050|138|emissions_mt:transports,Écologie de droite,Médian,2050,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-10.448
+Écologie de droite|Médian|2060|138|emissions_mt:transports,Écologie de droite,Médian,2060,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-13.784
+Écologie de droite|Médian|2073|138|emissions_mt:transports,Écologie de droite,Médian,2073,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-10.773
+Écologie de droite|Médian|2029|138|emissions_mt:batiments,Écologie de droite,Médian,2029,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-1.379
+Écologie de droite|Médian|2032|138|emissions_mt:batiments,Écologie de droite,Médian,2032,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-4.49
+Écologie de droite|Médian|2037|138|emissions_mt:batiments,Écologie de droite,Médian,2037,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-6.158
+Écologie de droite|Médian|2045|138|emissions_mt:batiments,Écologie de droite,Médian,2045,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.271
+Écologie de droite|Médian|2050|138|emissions_mt:batiments,Écologie de droite,Médian,2050,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.634
+Écologie de droite|Médian|2060|138|emissions_mt:batiments,Écologie de droite,Médian,2060,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.81
+Écologie de droite|Médian|2073|138|emissions_mt:batiments,Écologie de droite,Médian,2073,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-5.774
 Écologie de droite|Médian|2029|139|importees_mt,Écologie de droite,Médian,2029,Accise sur le contenu carbone des importations,importations,-4.727
 Écologie de droite|Médian|2032|139|importees_mt,Écologie de droite,Médian,2032,Accise sur le contenu carbone des importations,importations,-5.797
 Écologie de droite|Médian|2037|139|importees_mt,Écologie de droite,Médian,2037,Accise sur le contenu carbone des importations,importations,-6.665
@@ -125,20 +125,20 @@ cle,programme,scenario,annee,mesure,secteur,mt
 Écologie de droite|Médian|2050|142|emissions_mt:transports,Écologie de droite,Médian,2050,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.874
 Écologie de droite|Médian|2060|142|emissions_mt:transports,Écologie de droite,Médian,2060,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.678
 Écologie de droite|Médian|2073|142|emissions_mt:transports,Écologie de droite,Médian,2073,"FONDS-RAIL — Fonds : régénération du réseau ferroviaire (+1,5 Md€ par an)",transports,-0.488
-Écologie de droite|Optimiste|2029|138|emissions_mt:transports,Écologie de droite,Optimiste,2029,Prix du carbone : émissions des transports et des bâtiments,transports,-4.9
-Écologie de droite|Optimiste|2032|138|emissions_mt:transports,Écologie de droite,Optimiste,2032,Prix du carbone : émissions des transports et des bâtiments,transports,-13.057
-Écologie de droite|Optimiste|2037|138|emissions_mt:transports,Écologie de droite,Optimiste,2037,Prix du carbone : émissions des transports et des bâtiments,transports,-16.366
-Écologie de droite|Optimiste|2045|138|emissions_mt:transports,Écologie de droite,Optimiste,2045,Prix du carbone : émissions des transports et des bâtiments,transports,-17.622
-Écologie de droite|Optimiste|2050|138|emissions_mt:transports,Écologie de droite,Optimiste,2050,Prix du carbone : émissions des transports et des bâtiments,transports,-17.874
-Écologie de droite|Optimiste|2060|138|emissions_mt:transports,Écologie de droite,Optimiste,2060,Prix du carbone : émissions des transports et des bâtiments,transports,-17.743
-Écologie de droite|Optimiste|2073|138|emissions_mt:transports,Écologie de droite,Optimiste,2073,Prix du carbone : émissions des transports et des bâtiments,transports,-13.386
-Écologie de droite|Optimiste|2029|138|emissions_mt:batiments,Écologie de droite,Optimiste,2029,Prix du carbone : émissions des transports et des bâtiments,batiments,-2.162
-Écologie de droite|Optimiste|2032|138|emissions_mt:batiments,Écologie de droite,Optimiste,2032,Prix du carbone : émissions des transports et des bâtiments,batiments,-5.699
-Écologie de droite|Optimiste|2037|138|emissions_mt:batiments,Écologie de droite,Optimiste,2037,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.002
-Écologie de droite|Optimiste|2045|138|emissions_mt:batiments,Écologie de droite,Optimiste,2045,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.377
-Écologie de droite|Optimiste|2050|138|emissions_mt:batiments,Écologie de droite,Optimiste,2050,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.396
-Écologie de droite|Optimiste|2060|138|emissions_mt:batiments,Écologie de droite,Optimiste,2060,Prix du carbone : émissions des transports et des bâtiments,batiments,-7.161
-Écologie de droite|Optimiste|2073|138|emissions_mt:batiments,Écologie de droite,Optimiste,2073,Prix du carbone : émissions des transports et des bâtiments,batiments,-5.228
+Écologie de droite|Optimiste|2029|138|emissions_mt:transports,Écologie de droite,Optimiste,2029,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,1.416
+Écologie de droite|Optimiste|2032|138|emissions_mt:transports,Écologie de droite,Optimiste,2032,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-0.787
+Écologie de droite|Optimiste|2037|138|emissions_mt:transports,Écologie de droite,Optimiste,2037,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-4.634
+Écologie de droite|Optimiste|2045|138|emissions_mt:transports,Écologie de droite,Optimiste,2045,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-9.52
+Écologie de droite|Optimiste|2050|138|emissions_mt:transports,Écologie de droite,Optimiste,2050,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-11.678
+Écologie de droite|Optimiste|2060|138|emissions_mt:transports,Écologie de droite,Optimiste,2060,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-14.291
+Écologie de droite|Optimiste|2073|138|emissions_mt:transports,Écologie de droite,Optimiste,2073,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,transports,-11.051
+Écologie de droite|Optimiste|2029|138|emissions_mt:batiments,Écologie de droite,Optimiste,2029,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-1.829
+Écologie de droite|Optimiste|2032|138|emissions_mt:batiments,Écologie de droite,Optimiste,2032,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-5.383
+Écologie de droite|Optimiste|2037|138|emissions_mt:batiments,Écologie de droite,Optimiste,2037,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-6.998
+Écologie de droite|Optimiste|2045|138|emissions_mt:batiments,Écologie de droite,Optimiste,2045,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.787
+Écologie de droite|Optimiste|2050|138|emissions_mt:batiments,Écologie de droite,Optimiste,2050,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.963
+Écologie de droite|Optimiste|2060|138|emissions_mt:batiments,Écologie de droite,Optimiste,2060,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-7.858
+Écologie de droite|Optimiste|2073|138|emissions_mt:batiments,Écologie de droite,Optimiste,2073,Fiscalité de l'énergie (prix du carbone à la place des taxes actuelles) : transports et bâtiments,batiments,-5.746
 Écologie de droite|Optimiste|2029|139|importees_mt,Écologie de droite,Optimiste,2029,Accise sur le contenu carbone des importations,importations,-4.727
 Écologie de droite|Optimiste|2032|139|importees_mt,Écologie de droite,Optimiste,2032,Accise sur le contenu carbone des importations,importations,-5.745
 Écologie de droite|Optimiste|2037|139|importees_mt,Écologie de droite,Optimiste,2037,Accise sur le contenu carbone des importations,importations,-6.504
