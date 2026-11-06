@@ -47,7 +47,7 @@ def ed(p):
 def test_ecologie_de_droite_reproduite_par_le_noyau(p):
     """Pont exact (tout lu dans le moteur du programme) : mêmes résultats à 1e-9 près."""
     from programmes.ecologie_de_droite.programme import programme
-    prog = programme(recalcul_noyau=False)
+    prog = programme(recalcul_noyau=False, energie=False)  # le canal de l'énergie des entreprises n'est pas dans le moteur
     r, ref = noyau.simuler(p, prog), prog.resultats_moteur(p)
     for s in sq.SCENARIOS:
         for t in ANNEES:
@@ -87,10 +87,13 @@ def test_perimetre_aligne_sans_effet_sur_le_solde(ed, p):
             assert max(abs(v) for v in m.valeurs.values()) < 1e-6
 
 
-def test_recalcul_noyau_des_salaries(ed):
+def test_recalcul_noyau_des_salaries(p):
     """Deuxième passe : impôt unique et TVA des salariés recalculés sur les cellules du noyau, l'effet du programme sur
-    les naissances isolé. Les cellules du noyau retrouvent celles du programme : écart de déficit sous 0,1 point."""
-    _, r, ref = ed
+    les naissances isolé. Les cellules du noyau retrouvent celles du programme : écart de déficit sous 0,1 point (hors
+    canal de l'énergie des entreprises, absent du moteur)."""
+    from programmes.ecologie_de_droite.programme import programme
+    prog = programme(energie=False)
+    r, ref = noyau.simuler(p, prog), prog.resultats_moteur(p)
     for t in (2029, 2037, 2050, 2073):
         assert abs(r["prudent"][t]["deficit"] - ref["prudent"][t]["deficit"]) < 0.1
 

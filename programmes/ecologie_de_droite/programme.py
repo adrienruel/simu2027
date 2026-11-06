@@ -648,11 +648,14 @@ class EcologieDeDroite:
     nom = "ecologie_de_droite"
     libelle = "Écologie de droite"
 
-    def __init__(self, recalcul_noyau: bool = True):
+    def __init__(self, recalcul_noyau: bool = True, energie: bool = True):
         """recalcul_noyau : impôt unique et TVA des salariés recalculés sur le noyau (deuxième passe) ; False : tout
-        est lu dans le moteur du programme (reproduction exacte, sert de test du pont)."""
+        est lu dans le moteur du programme (reproduction exacte, sert de test du pont).
+        energie : canal de l'énergie des entreprises (IS des taxes supprimées, emploi industriel), ajouté par le
+        noyau après le moteur ; False pour comparer le noyau au moteur seul."""
         self._cache = {}
         self.recalcul_noyau = recalcul_noyau
+        self.energie = energie
 
     def _calcul(self, p: Parametres) -> dict:
         cle = id(p)
@@ -775,9 +778,10 @@ class EcologieDeDroite:
                 **contexte_emploi(p, s, r),
                 "pib_hors_consommation": {t: r[t].get("pib_epargne_fonds", 0.0) for t in ANNEES},
             }
-            en = energie_entreprises(p, q, s, contexte[s])
-            contexte[s] = en["contexte"]
-            mesures[s].extend(en["mesures"])
+            if self.energie:
+                en = energie_entreprises(p, q, s, contexte[s])
+                contexte[s] = en["contexte"]
+                mesures[s].extend(en["mesures"])
         out = {"mesures": mesures, "contexte": contexte, "resultats": res}
         self._cache = {cle: out}
         return out
@@ -793,8 +797,8 @@ class EcologieDeDroite:
         return self._calcul(p)["resultats"]
 
 
-def programme(recalcul_noyau: bool = True) -> EcologieDeDroite:
-    return EcologieDeDroite(recalcul_noyau)
+def programme(recalcul_noyau: bool = True, energie: bool = True) -> EcologieDeDroite:
+    return EcologieDeDroite(recalcul_noyau, energie)
 
 
 def ecart_de_depart(p: Parametres | None = None, s: str = "prudent", annee: int = 2029, detail: bool = False) -> dict[str, float]:
