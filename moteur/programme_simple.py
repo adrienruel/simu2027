@@ -22,6 +22,7 @@ Règle des autres candidats : on ne reprend que les mesures ; aucune recette ni 
 """
 from __future__ import annotations
 
+from . import offre
 from . import statu_quo as sq
 from .noyau import ANNEES, Mesure
 from .parametres import Parametres
@@ -108,7 +109,8 @@ class ProgrammeSimple:
                 x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
                 serie = self.serie(x, idx)
                 court = nom.split(".")[1]
-                liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court))
+                liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
+                                    instrument=x.get("instrument", "")))
                 if x.get("fp"):
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
                                         {t: part_fp * v for t, v in serie.items()}, note=court))
@@ -165,20 +167,37 @@ class ProgrammeSimple:
             conj = {t: dpib[t] / y[t] * k_emp * e[t]["emploi"] for t in ANNEES}
             for t in ANNEES:
                 canaux[t]["Conjoncture (impulsion budgétaire)"] = conj[t]
-            # PIB : multiplicateur, et valeur ajoutée des emplois en plus ou en moins hors conjoncture
-            va = self.v("emploi.valeur_ajoutee_emploi")
+            # canal d'offre commun (moteur/offre.py) : effet durable des impôts et des transferts
+            actifs = {t: 0.0 for t in ANNEES}
+            d_offre = {t: 0.0 for t in TOUTES}
+            if offre.actif(p):
+                of = offre.effets(p, s, liste)
+                liste.append(of["mesure"])
+                d_offre = of["dpib"]
+                actifs = of["actifs"]
+                for canal, serie in of["emplois"].items():
+                    for t in ANNEES:
+                        canaux[t][canal] = serie[t]
+                details_offre = of["detail"]
+            else:
+                details_offre = {}
+            # PIB : multiplicateur, offre, et valeur ajoutée des emplois en plus ou en moins hors conjoncture et offre
             # (les postes publics sont déjà dans le PIB par leur dépense et le multiplicateur)
-            hors_conj = {t: sum(v for c, v in canaux[t].items() if not c.startswith(("Conjoncture", "Postes publics")))
+            va = self.v("emploi.valeur_ajoutee_emploi")
+            hors_conj = {t: sum(v for c, v in canaux[t].items()
+                                if not c.startswith(("Conjoncture", "Postes publics", "Offre")))
                          for t in ANNEES}
-            pib = {t: y[t] + dpib[t] + hors_conj[t] * va * idx["pib"][t] / 1e9 for t in ANNEES}
+            pib = {t: y[t] + dpib[t] + d_offre[t] + hors_conj[t] * va * idx["pib"][t] / 1e9 for t in ANNEES}
             demploi = {t: sum(canaux[t].values()) for t in ANNEES}
-            chom = {t: (e[t]["chomeurs"] - demploi[t]) / (e[t]["emploi"] + e[t]["chomeurs"]) * 100 for t in ANNEES}
+            chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
+                    for t in ANNEES}
             avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
             ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
                         "emploi": {t: e[t]["emploi"] + demploi[t] for t in ANNEES}, "emplois_canaux": canaux}
             mes_s[s] = liste
-            details[s] = {"avant_2029": avant, "dpib": dpib, "emplois": demploi}
+            details[s] = {"avant_2029": avant, "dpib": dpib, "emplois": demploi, "offre": details_offre,
+                          "dpib_offre": d_offre}
         res = {"mesures": mes_s, "contexte": ctx_s, "details": details}
         self._cache[cle] = res
         return res

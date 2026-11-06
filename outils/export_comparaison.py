@@ -112,7 +112,12 @@ def main() -> None:
                              "pib_md": round(x["pib"], 1),
                              "emploi_millions": round(x["emploi"] / 1e6, 4),
                              "ecart_emploi_milliers": round((x["emploi"] - base[s][t]["emploi"]) / 1e3, 1),
-                             "taux_emploi_18_66": round(taux_emploi_18_66(p, s, t, x["emploi"]), 3)})
+                             "taux_emploi_18_66": round(taux_emploi_18_66(p, s, t, x["emploi"]), 3),
+                             # PIB en plus (%) qu'il faudrait pour que le solde primaire rejoigne celui du statu quo,
+                             # au taux de prélèvement du statu quo (négatif : le programme a de la marge)
+                             "pib_pour_equilibrer_pct": round(0.0 if nom == "statu_quo" else
+                                                              -(x["solde_primaire"] - base[s][t]["solde_primaire"]) / x["pib"] * 100
+                                                              / (base[s][t]["recettes"] / base[s][t]["pib"]), 3)})
                 for canal, n in x["emplois_canaux"].items():
                     emploi_canaux.append({"cle": f"{lib}|{SCENARIOS[s]}|{t}|{canal}", "programme": lib, "scenario": SCENARIOS[s],
                                           "annee": t, "canal": canal, "emplois_milliers": round(n / 1e3, 1)})

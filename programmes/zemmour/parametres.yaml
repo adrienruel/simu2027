@@ -78,7 +78,7 @@ zemmour_mesures:
 
   # ---------------------------------------------------------------- fiscalité
   accise_carburants:
-    valeur: {id: ZEM-FIS-01b, libelle: "Accise sur les carburants baissée d'un tiers", poste: recettes, moteur: "recette:accises_et_taxes_sur_produits", debut: 2028, plein: 2028,
+    valeur: {id: ZEM-FIS-01b, instrument: consommation, libelle: "Accise sur les carburants baissée d'un tiers", poste: recettes, moteur: "recette:accises_et_taxes_sur_produits", debut: 2028, plein: 2028,
              montant: {crise: -12.0, prudent: -11.8, median: -11.5, optimiste: -11.2}}
     unite: md_eur
     annee_euros: 2026
@@ -88,7 +88,7 @@ zemmour_mesures:
 
   # ---------------------------------------------------------------- préférence nationale et immigration
   preference_famille:
-    valeur: {id: ZEM-IMM-04, libelle: "Préférence nationale : allocations familiales réservées aux Français", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
+    valeur: {id: ZEM-IMM-04, instrument: transferts_actifs, libelle: "Préférence nationale : allocations familiales réservées aux Français", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
              montant: {crise: -1.35, prudent: -2.0, median: -2.9, optimiste: -3.6}}
     unite: md_eur
     annee_euros: 2026
@@ -96,14 +96,14 @@ zemmour_mesures:
     source: "Encadrement : étrangers ≈ 8 % de la population, ≈ 12 % des familles allocataires (CNAF) ; ressortissants européens ≈ 30 % des étrangers, protégés par le droit de l'Union (égalité de traitement) : ≈ 8 % du bloc famille en statique ≈ 2,9 Md€"
     note: "Économie annoncée par le parti (15 à 20 Md€ pour toutes les prestations non contributives) : NON SAISIE. Prudent : risque constitutionnel et conventionnel (Conseil constitutionnel, décision 2023-863 DC ; Cour européenne des droits de l'homme), naturalisations ; la mesure suppose un référendum."
   preference_logement:
-    valeur: {id: ZEM-IMM-04, libelle: "Préférence nationale : aides au logement réservées aux Français", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2029,
+    valeur: {id: ZEM-IMM-04, instrument: transferts_actifs, libelle: "Préférence nationale : aides au logement réservées aux Français", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2029,
              montant: {crise: -0.75, prudent: -1.1, median: -1.6, optimiste: -2.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : étrangers ≈ 17 % des ménages allocataires des aides au logement (CNAF) ; hors ressortissants européens ≈ 12 % du bloc ≈ 2 Md€ en statique"
   preference_pauvrete:
-    valeur: {id: ZEM-IMM-04, libelle: "Préférence nationale : RSA et prime d'activité réservés aux Français", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,
+    valeur: {id: ZEM-IMM-04, instrument: transferts_actifs, libelle: "Préférence nationale : RSA et prime d'activité réservés aux Français", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,
              montant: {crise: -0.9, prudent: -1.4, median: -2.0, optimiste: -2.4}}
     unite: md_eur
     annee_euros: 2026
@@ -209,7 +209,7 @@ zemmour_mesures:
     source: "Plan Knafo : 5 Md€, d'après un rapport IGF-IGAS de 2025 (une seule source : règle du 05/11/2026, une économie doit être recoupée)"
     note: "Prudent à zéro : l'IA est le moyen du non-remplacement (ZEM-KNA-01), compter les deux ferait un double compte ; médian et optimiste : gains en plus sur les dépenses de fonctionnement."
   rsa_trois_ans:
-    valeur: {id: ZEM-KNA-04, libelle: "RSA limité à trois ans pour les bénéficiaires aptes au travail", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2031,
+    valeur: {id: ZEM-KNA-04, instrument: transferts_actifs, libelle: "RSA limité à trois ans pour les bénéficiaires aptes au travail", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2031,
              montant: {crise: -1.0, prudent: -1.5, median: -2.2, optimiste: -3.0}}
     unite: md_eur
     annee_euros: 2026
@@ -277,7 +277,7 @@ zemmour_mesures:
     source: "Plan Knafo : 4 Md€ annoncés, NON SAISIS. Encadrement : ≈ 430 000 étudiants étrangers, dont ≈ 30 % européens (égalité de traitement du droit de l'Union) ; coût moyen d'un étudiant ≈ 11 500 € (MESR) ; droits différenciés déjà en place depuis 2019 avec de nombreuses exonérations ; baisse forte des inscriptions"
     note: "Recettes de droits ou étudiants en moins : compté comme dépense en moins. Effets sur l'emploi qualifié futur non comptés."
   visas:
-    valeur: {id: ZEM-KNA-18, libelle: "Hausse du coût des visas et des titres de séjour", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: ZEM-KNA-18, instrument: consommation, libelle: "Hausse du coût des visas et des titres de séjour", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.05, prudent: 0.1, median: 0.2, optimiste: 0.3}}
     unite: md_eur
     annee_euros: 2026

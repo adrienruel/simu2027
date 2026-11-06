@@ -41,22 +41,22 @@ class Zemmour(ProgrammeSimple):
         ind = self.v("csg.independants", s)
         out += [
             Mesure("ZEM-FIS-01 — CSG supprimée sur les salaires du privé", "recettes",
-                   serie(-c["csg_prive"], "recette:salaires_prive")),
+                   serie(-c["csg_prive"], "recette:salaires_prive"), instrument="travail"),
             Mesure("ZEM-FIS-01 — CSG supprimée sur les rémunérations des agents publics", "recettes",
-                   serie(-c["csg_public"], "recette:salaires_public")),
+                   serie(-c["csg_public"], "recette:salaires_public"), instrument="travail"),
             Mesure("ZEM-FIS-01 — CSG supprimée sur les revenus des indépendants", "recettes",
-                   serie(-ind, "recette:independants")),
+                   serie(-ind, "recette:independants"), instrument="travail"),
             Mesure("ZEM-FIS-01 — impôt sur le revenu en plus (CSG déductible qui disparaît)", "recettes",
-                   serie(k * c["ir_prive"], "recette:salaires_prive")),
+                   serie(k * c["ir_prive"], "recette:salaires_prive"), instrument="travail"),
             Mesure("ZEM-FIS-01 — impôt sur le revenu en plus (agents publics, indépendants)", "recettes",
-                   serie(k * c["ir_public"] + 0.1 * ind, "recette:salaires_public")),
+                   serie(k * c["ir_public"] + 0.1 * ind, "recette:salaires_public"), instrument="travail"),
         ]
         # droits de succession
         rec = sq.recettes_par_impot(p, s)
         part = self.v("successions.part_supprimee")
         out.append(Mesure("ZEM-FIS-02 — droits de succession supprimés", "recettes",
                           {**{t: (-part * rec[2029]["successions"] if t >= debut else 0.0) for t in ANNEES_AVANT},
-                           **{t: -part * rec[t]["successions"] for t in ANNEES}}))
+                           **{t: -part * rec[t]["successions"] for t in ANNEES}}, instrument="successions"))
         # retraites
         eco = bib.report_age_legal(p, s, self.v("retraites.age_cible"), self.v("retraites.premiere_generation"),
                                    self.v("retraites.pas_par_generation"))

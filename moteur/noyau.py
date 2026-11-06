@@ -47,6 +47,9 @@ class Mesure:
     # effets physiques, sans montant (moteur/ecologie/emissions.py) : {"emissions_mt:<secteur>": {année: Mt}, ...}
     physique: dict[str, dict[int, float]] = field(default_factory=dict)
     vert: str = ""  # classement du budget vert : favorable, defavorable, mixte, neutre ("" : non classé)
+    # instrument du canal d'offre commun (moteur/offre.py) : travail, cout_travail, capital_entreprises,
+    # capital_menages, successions, consommation, transferts_actifs ("" : pas d'effet d'offre)
+    instrument: str = ""
 
 
 @dataclass

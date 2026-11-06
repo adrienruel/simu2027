@@ -20,6 +20,7 @@ saisie (15 Md€ sur les successions : comparaison seulement). Fiche des mesures
 """
 from __future__ import annotations
 
+from moteur import offre
 from moteur import statu_quo as sq
 from moteur.noyau import ANNEES, Mesure
 from moteur.parametres import Parametres
@@ -291,7 +292,8 @@ class Tondelier:
                     continue
                 x["_montant"] = x["montant"][s]
                 serie = self._serie(x, idx)
-                liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=nom.split(".")[1]))
+                liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=nom.split(".")[1],
+                                    instrument=x.get("instrument", "")))
                 if x.get("fp"):
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
                                         {t: part_fp * v for t, v in serie.items()}, nature="mesure", note=nom.split(".")[1]))
@@ -376,17 +378,35 @@ class Tondelier:
             liste.extend(em["mesures"])
             chom = {t: chom[t] + em["chomeurs"][t] / (e[t]["emploi"] + e[t]["chomeurs"] + em["actifs"][t]) * 100
                     for t in ANNEES}
+            # canal d'offre commun (moteur/offre.py) : effet durable des impôts et des transferts
+            canaux_offre, actifs_offre = {}, {t: 0.0 for t in ANNEES}
+            if offre.actif(p):
+                of = offre.effets(p, s, liste)
+                liste.append(of["mesure"])
+                for t in ANNEES:
+                    pib[t] += of["dpib"][t]
+                canaux_offre, actifs_offre = of["emplois"], of["actifs"]
+                for t in ANNEES:
+                    d = sum(v[t] for v in canaux_offre.values())
+                    act = e[t]["emploi"] + e[t]["chomeurs"] + em["actifs"][t]
+                    chom_t = chom[t] / 100 * act - (d - actifs_offre[t])
+                    chom[t] = chom_t / (act + actifs_offre[t]) * 100
+                details_offre = of["detail"]
+            else:
+                details_offre = {}
             # dette de fin 2028 : mesures de 2027 et 2028 (recettes et dépenses), effet macro compris
             avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
             perdus = {t: emplois * min(1.0, (t - 2026) / 3) for t in ANNEES}
             ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
-                        "emploi": {t: e[t]["emploi"] - perdus[t] + conj[t] + sum(em["canaux"][t].values()) for t in ANNEES},
+                        "emploi": {t: e[t]["emploi"] - perdus[t] + conj[t] + sum(em["canaux"][t].values())
+                                   + sum(v[t] for v in canaux_offre.values()) for t in ANNEES},
                         "emplois_canaux": {t: {"SMIC à 2 000 € : emplois perdus": -perdus[t],
-                                               "Conjoncture (impulsion budgétaire)": conj[t], **em["canaux"][t]} for t in ANNEES}}
+                                               "Conjoncture (impulsion budgétaire)": conj[t], **em["canaux"][t],
+                                               **{c: v[t] for c, v in canaux_offre.items()}} for t in ANNEES}}
             liste.extend(self.ecologie(p, s))
             mes_s[s] = liste
-            details[s] = {"emplois_perdus_smic": emplois, "avant_2029": avant, "dpib": dpib}
+            details[s] = {"emplois_perdus_smic": emplois, "avant_2029": avant, "dpib": dpib, "offre": details_offre}
         res = {"mesures": mes_s, "contexte": ctx_s, "details": details, "smic": smic, "fp2": fp2, "part_fp": part_fp}
         self._cache[cle] = res
         return res

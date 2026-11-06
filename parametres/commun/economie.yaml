@@ -689,3 +689,62 @@ energie_entreprises:
     unite: personnes
     statut: HYPOTHESE
     source: "Encadrée : Insee, environ 3,2 millions d'emplois salariés dans l'industrie (énergie comprise)"
+
+# Canal d'offre commun (6 novembre 2026) : effet de long terme d'un changement de prélèvement ou de transfert sur le
+# PIB, par instrument, appliqué à tous les programmes chiffrés sur le noyau (moteur/offre.py). Valeurs en % de PIB à
+# long terme pour 1 point de PIB de prélèvement en moins (ou de transfert aux actifs en moins). Le scénario donne
+# l'élasticité quand la mesure joue pour le programme (baisse d'impôt) ; quand elle joue contre lui (hausse), on prend
+# le scénario miroir (crise ↔ optimiste, prudent ↔ médian), pour que le prudent reste prudent dans les deux sens.
+offre:
+  actif:
+    valeur: true
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Interrupteur du canal d'offre (false : seul le multiplicateur de demande, comme avant le 06/11/2026). Écologie de droite n'y passe pas : son moteur a ses propres canaux d'offre (participation des inactifs, coût du travail, localisation), plus détaillés."
+  elasticite_travail:
+    valeur: {crise: 0.2, prudent: 0.3, median: 0.5, optimiste: 0.9}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : élasticité de la participation au salaire net ≈ 0,1 à 0,25 (Chetty, Guren, Manoli et Weber, 2011 ; pour la France, Laroque et Salanié, et les évaluations de la prime d'activité), heures ≈ 0,1 : 1 point de PIB de prélèvement sur le travail en moins ≈ +2,5 % de revenu net ≈ +0,3 à 0,5 % de PIB ; Bassanini et Scarpetta (OCDE, 2001) : 1 point de pression fiscale en moins ≈ +0,3 % de PIB par habitant (effet direct), jusqu'à 0,6 à 0,7 avec l'investissement (borne optimiste)"
+    note: "CSG, cotisations salariales, impôt sur le revenu des actifs. Les emplois en plus viennent surtout de l'inactivité (offre de travail) : le chômage n'en bouge pas."
+  elasticite_cout_travail:
+    valeur: {crise: 0.8, prudent: 1.0, median: 1.5, optimiste: 2.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "DG Trésor, Le modèle Mésange : réestimation et nouveautés (séminaire Fourgeaud, 15 mars 2017) : baisse uniforme des cotisations employeurs de 1 point de PIB, +2,12 % de PIB et +504 000 emplois à long terme (borne optimiste) ; Kramarz et Philippon, Crépon et Desplatz : effets concentrés sur les bas salaires, plus faibles au-dessus de 1,6 SMIC (prudent)"
+    note: "Cotisations employeurs et allègements sur les bas et moyens salaires. Emplois pris sur le chômage (demande de travail). Les allègements au-dessus de 1,6 SMIC passent par l'élasticité du travail : leurs effets sur l'emploi sont faibles (rapport Bozio-Wasmer, octobre 2024), le coût étant surtout reporté sur les salaires."
+  elasticite_capital_entreprises:
+    valeur: {crise: 0.3, prudent: 0.5, median: 1.0, optimiste: 2.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Arnold (OCDE, Working Paper n° 643, 2008) : l'impôt sur les sociétés est le plus nuisible à la croissance (coefficient −2,01 contre −1,13 pour l'impôt sur le revenu, part des recettes) ; DG Trésor, Trésor-Éco n° 290 (2021, CIR, Mésange et QUEST) : baisse du coût du capital et de la recherche ≈ +0,5 à +0,8 % de PIB à long terme pour ≈ 0,2 point de PIB"
+    note: "IS, impôts de production, crédits d'impôt des entreprises. Emplois : 30 % de l'effet sur le PIB, pris sur le chômage."
+  elasticite_capital_menages:
+    valeur: {crise: 0.0, prudent: 0.1, median: 0.3, optimiste: 0.6}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : évaluations du prélèvement forfaitaire unique et de la fin de l'ISF (France Stratégie, comité d'évaluation des réformes de la fiscalité du capital, 2019-2023) : hausse des dividendes versés, pas d'effet décelable sur l'investissement ; Arnold (2008) : les impôts sur le patrimoine (hors immobilier) n'ont pas d'effet significatif"
+    note: "Dividendes, intérêts, ISF, IFI, taxe Zucman, taxe sur les transactions financières. Pas d'effet sur l'emploi."
+  elasticite_successions:
+    valeur: {crise: 0.0, prudent: 0.0, median: 0.1, optimiste: 0.3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : peu d'effet mesuré des droits de succession sur l'investissement (Conseil d'analyse économique, Note n° 69, 2021) ; un héritage reçu baisse l'offre de travail des héritiers (effet Carnegie : Holtz-Eakin, Joulfaian et Rosen, 1993 ; Elinder, Erixson et Ohlsson, 2012), qui compense une partie de l'effet sur les entreprises familiales (borne optimiste)"
+  elasticite_consommation:
+    valeur: {crise: 0.05, prudent: 0.1, median: 0.2, optimiste: 0.3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Arnold (2008) : les impôts sur la consommation sont parmi les moins nuisibles à la croissance (coefficient ≈ +0,7 contre les impôts sur le revenu) ; ils pèsent sur le salaire réel, donc un peu sur l'offre de travail"
+    note: "TVA, accises. Emplois : 50 % de l'effet, pris sur le chômage."
+  elasticite_transferts_actifs:
+    valeur: {crise: 0.05, prudent: 0.1, median: 0.2, optimiste: 0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : effets faibles des minima sociaux et des aides au logement sur la reprise d'emploi en France (Dares, évaluations du RSA, 2011) ; plus forts pour la durée d'indemnisation du chômage (Banque de France, Bulletin n° 264, 2026), comptée à part par les programmes qui la changent"
+    note: "RSA, prime d'activité, aides au logement, allocations familiales : moins de transferts aux actifs = un peu plus de travail. Emplois venus de l'inactivité. L'assurance chômage n'y passe pas quand le programme a déjà son propre canal (Tondelier, PRE-15)."
+  vitesse:
+    valeur: {crise: 0.08, prudent: 0.1, median: 0.1, optimiste: 0.12}
+    unite: taux
+    statut: HYPOTHESE
+    source: "DG Trésor, Mésange (2017) : baisse des cotisations employeurs, 11 % de l'effet de long terme au bout d'un an, 40 % au bout de cinq ans, 60 % au bout de dix ans, soit un ajustement d'environ 10 % par an"
+    note: "Part de l'écart à l'effet de long terme comblée chaque année (ajustement partiel), à partir de 2027."

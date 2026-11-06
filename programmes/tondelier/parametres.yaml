@@ -125,7 +125,7 @@ tondelier_mesures:
 
   # ---------------------------------------------------------------- recettes : patrimoine et successions
   zucman:
-    valeur: {id: REC-01, libelle: "Taxe Zucman : impôt plancher de 2 % au-delà de 100 M€", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-01, instrument: capital_menages, libelle: "Taxe Zucman : impôt plancher de 2 % au-delà de 100 M€", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 3.0, prudent: 5.0, median: 8.0, optimiste: 12.0}}
     unite: md_eur
     annee_euros: 2026
@@ -133,7 +133,7 @@ tondelier_mesures:
     source: "Encadrement : ≈ 20 Md€ en statique (G. Zucman, 2025) ; pertes d'assiette fortes discutées (exil, valorisation des titres non cotés, biens professionnels). Prudent au quart du statique"
     note: "Impôt plancher différentiel (dossier de presse, p. 5) : l'ISF et l'impôt sur le revenu s'imputent ; l'extension de l'exit tax (REC-02) est comptée comme une réduction de l'exil, sans recette propre."
   isf_climatique:
-    valeur: {id: REC-03, libelle: "ISF à composante climatique (seuil 1,3 M€) à la place de l'IFI", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-03, instrument: capital_menages, libelle: "ISF à composante climatique (seuil 1,3 M€) à la place de l'IFI", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
     unite: md_eur
     annee_euros: 2026
@@ -141,7 +141,7 @@ tondelier_mesures:
     source: "Encadrement : ISF 2017 ≈ 4,2 Md€, IFI ≈ 2,2 Md€ (DGFiP) ; barème de l'ISF 2017 (0,5 à 1,5 %, seuil 1,3 M€, dossier de presse p. 5)"
     note: "Gain net sur l'IFI ; composante climatique neutre en recette (modulation du barème)."
   successions:
-    valeur: {id: REC-04/05/06/07, libelle: "Successions : +10 % au-delà de 4 M€, +10 % au-delà de 13 M€, Dutreil, assurance-vie, plus-values latentes", poste: recettes, moteur: successions, debut: 2028, plein: 2029,
+    valeur: {id: REC-04/05/06/07, instrument: successions, libelle: "Successions : +10 % au-delà de 4 M€, +10 % au-delà de 13 M€, Dutreil, assurance-vie, plus-values latentes", poste: recettes, moteur: successions, debut: 2028, plein: 2029,
              montant: {crise: 3.0, prudent: 4.0, median: 7.0, optimiste: 10.0}}
     unite: md_eur
     annee_euros: 2026
@@ -151,14 +151,14 @@ tondelier_mesures:
 
   # ---------------------------------------------------------------- recettes : revenus
   ir_tranche_60:
-    valeur: {id: REC-10, libelle: "Impôt sur le revenu : tranche à 60 % au-delà de 250 000 € par part", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-10, instrument: travail, libelle: "Impôt sur le revenu : tranche à 60 % au-delà de 250 000 € par part", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.8, prudent: 1.2, median: 2.0, optimiste: 2.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : contribution exceptionnelle sur les hauts revenus (3 à 4 % au-delà de 250 000 €) ≈ 1,3 Md€ ; 15 points de plus sur la même assiette ≈ 3,5 Md€ en statique ; élasticité du revenu imposable des très hauts revenus 0,5 à 0,8 en prudent"
   ir_tranches_basses:
-    valeur: {id: REC-11, libelle: "Impôt sur le revenu : tranche à 11 % ramenée à 9 % (arbitrage)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-11, instrument: travail, libelle: "Impôt sur le revenu : tranche à 11 % ramenée à 9 % (arbitrage)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -3.0, prudent: -3.0, median: -3.0, optimiste: -3.0}}
     unite: md_eur
     annee_euros: 2026
@@ -172,7 +172,7 @@ tondelier_mesures:
     statut: HYPOTHESE
     source: "Encadrement : ≈ 4 à 4,5 Md€ (estimations reprises dans les débats budgétaires 2025-2026, plafond de l'abattement ≈ 4 400 € par foyer)"
   niches_plafond:
-    valeur: {id: REC-12, libelle: "Plafonnement global des niches ; avantages limités à deux logements", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-12, instrument: travail, libelle: "Plafonnement global des niches ; avantages limités à deux logements", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.4, prudent: 0.5, median: 0.7, optimiste: 1.0}}
     unite: md_eur
     annee_euros: 2026
@@ -184,7 +184,7 @@ tondelier_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
   capital_csg_pfu:
-    valeur: {id: REC-20/21, libelle: "Capital : CSG +3 points et flat tax +3 points (cumulées)", poste: recettes, moteur: capital, debut: 2028, plein: 2028,
+    valeur: {id: REC-20/21, instrument: capital_menages, libelle: "Capital : CSG +3 points et flat tax +3 points (cumulées)", poste: recettes, moteur: capital, debut: 2028, plein: 2028,
              montant: {crise: 3.0, prudent: 3.5, median: 4.5, optimiste: 5.5}}
     unite: md_eur
     annee_euros: 2026
@@ -192,7 +192,7 @@ tondelier_mesures:
     source: "Encadrement : CSG sur les revenus du patrimoine et de placement ≈ 1,5 Md€ par point ; part impôt sur le revenu du PFU sur dividendes et intérêts ≈ 0,6 Md€ par point ; baisse des dividendes versés (réformes de 2013 et 2018, IPP) : prudent ≈ 55 % du statique"
     note: "Arbitrage : les deux hausses de 3 points s'ajoutent (lecture littérale : deux mesures distinctes, p. 68)."
   ttf:
-    valeur: {id: REC-23, libelle: "Taxe sur les transactions financières à 0,7 %", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-23, instrument: capital_menages, libelle: "Taxe sur les transactions financières à 0,7 %", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.6, prudent: 0.8, median: 1.2, optimiste: 1.5}}
     unite: md_eur
     annee_euros: 2026
@@ -201,28 +201,28 @@ tondelier_mesures:
 
   # ---------------------------------------------------------------- recettes : entreprises
   is_minimal:
-    valeur: {id: REC-30, libelle: "Impôt minimal sur les bénéfices (chiffre d'affaires > 1 Md€, au prorata de l'activité en France)", poste: recettes, moteur: is, debut: 2028, plein: 2029,
+    valeur: {id: REC-30, instrument: capital_entreprises, libelle: "Impôt minimal sur les bénéfices (chiffre d'affaires > 1 Md€, au prorata de l'activité en France)", poste: recettes, moteur: is, debut: 2028, plein: 2029,
              montant: {crise: 1.0, prudent: 1.5, median: 3.0, optimiste: 5.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     note: "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
   tsn:
-    valeur: {id: REC-32, libelle: "Taxe sur les services numériques à 5 %", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-32, instrument: capital_entreprises, libelle: "Taxe sur les services numériques à 5 %", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.4, prudent: 0.5, median: 0.6, optimiste: 0.8}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : TSN ≈ 0,8 Md€ à 3 % ; seuils actuels gardés (arbitrage : le seuil de 5 Md€ du texte serait une hausse)"
   is_taux_reduit:
-    valeur: {id: REC-33, libelle: "IS : taux réduit des PME de 15 à 10 % (compensation du SMIC)", poste: recettes, moteur: is, debut: 2028, plein: 2028,
+    valeur: {id: REC-33, instrument: capital_entreprises, libelle: "IS : taux réduit des PME de 15 à 10 % (compensation du SMIC)", poste: recettes, moteur: is, debut: 2028, plein: 2028,
              montant: {crise: -1.0, prudent: -1.0, median: -1.0, optimiste: -1.0}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
     source: "Arbitrage : 5 points sur les premiers 42 500 € de bénéfice (≈ 500 000 sociétés au taux réduit)"
   cvae:
-    valeur: {id: REC-35, libelle: "Rétablissement de la CVAE (taux de 0,75 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-35, instrument: capital_entreprises, libelle: "Rétablissement de la CVAE (taux de 0,75 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 6.5, prudent: 7.0, median: 7.5, optimiste: 8.0}}
     unite: md_eur
     annee_euros: 2026
@@ -230,14 +230,14 @@ tondelier_mesures:
     source: "Fipeco (29/10/2025) : CVAE ≈ 8 Md€ par an au taux de 0,75 % (statu_quo.cvae_rendement_2027) ; prudent un peu sous le statique (impôt de production : investissement)"
     note: "Statu quo : CVAE supprimée en 2030. Versée aux collectivités (fraction de TVA compensatrice gardée par l'État : effet net = recette)."
   cir:
-    valeur: {id: REC-36, libelle: "Crédit d'impôt recherche recentré sur les PME et ETI", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-36, instrument: capital_entreprises, libelle: "Crédit d'impôt recherche recentré sur les PME et ETI", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : CIR ≈ 7,6 Md€, dont ≈ 60 % aux grandes entreprises (MESR) ; la moitié rendue en subventions de projets avec des laboratoires (p. 97)"
   allegements:
-    valeur: {id: REC-37, libelle: "Exonérations de cotisations au-delà de 1,6 SMIC et sur les heures supplémentaires supprimées", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-37, instrument: travail, libelle: "Exonérations de cotisations au-delà de 1,6 SMIC et sur les heures supplémentaires supprimées", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 14.0, prudent: 16.5, median: 18.0, optimiste: 19.5}}
     unite: md_eur
     annee_euros: 2026
@@ -245,28 +245,28 @@ tondelier_mesures:
     source: "Encadrement : rapport Bozio-Wasmer (octobre 2024) : allègements au-delà de 1,6 SMIC ≈ 20 à 25 Md€ (bandeaux maladie et famille), effets sur l'emploi faibles à ces niveaux de salaire ; déduction et exonération des heures supplémentaires ≈ 2 Md€ ; prudent : 75 % du statique (salaires plus bas, emploi)"
     note: "Allègements restants nominalisés au barème de 2026 (voir tondelier_smic.smic_programme)."
   cotisation_deplafonnee:
-    valeur: {id: COT-01, libelle: "Cotisation vieillesse +1 point au-dessus du plafond de la Sécurité sociale", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: COT-01, instrument: travail, libelle: "Cotisation vieillesse +1 point au-dessus du plafond de la Sécurité sociale", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.9, prudent: 1.0, median: 1.1, optimiste: 1.2}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : salaires du privé au-dessus du plafond ≈ 130 Md€ (distribution des coûts, Insee) ; 80 % gardés"
   cotisations_vieillesse:
-    valeur: {id: COT-02, libelle: "Cotisations vieillesse +0,2 point par an de 2028 à 2032", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+    valeur: {id: COT-02, instrument: travail, libelle: "Cotisations vieillesse +0,2 point par an de 2028 à 2032", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: 6.0, prudent: 7.0, median: 8.0, optimiste: 8.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : 1 point sur les salaires bruts du privé (≈ 850 Md€) et la part salariale des agents (≈ 150 Md€, la part employeur publique étant interne aux administrations) ≈ 10 Md€ ; 70 % gardés en prudent (coût du travail, salaires nets)"
   epargne_salariale:
-    valeur: {id: COT-03, libelle: "Cotisations sur l'épargne salariale, l'intéressement, la participation et les actions gratuites", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: COT-03, instrument: travail, libelle: "Cotisations sur l'épargne salariale, l'intéressement, la participation et les actions gratuites", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 2.0, prudent: 3.0, median: 4.0, optimiste: 5.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : participation, intéressement, abondements et actions gratuites ≈ 25 Md€ par an (Dares) ; cotisation vieillesse ≈ 28 % moins le forfait social déjà payé ; distribution réduite en prudent"
   csg_un_point:
-    valeur: {id: COT-04, libelle: "CSG +1 point sur tous les revenus (assurance maladie)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: COT-04, instrument: travail, libelle: "CSG +1 point sur tous les revenus (assurance maladie)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 12.8, prudent: 13.6, median: 14.4, optimiste: 15.2}}
     unite: md_eur
     annee_euros: 2026
@@ -276,7 +276,7 @@ tondelier_mesures:
 
   # ---------------------------------------------------------------- recettes : consommation, énergie, santé
   tva_verte:
-    valeur: {id: REC-40, libelle: "TVA écologique : 20 % (aérien domestique, vente à emporter, hôtellerie de luxe, rénovation non énergétique, ultra-transformés), 5,5 % (transports publics, réparation)", poste: recettes, moteur: tva, debut: 2028, plein: 2028,
+    valeur: {id: REC-40, instrument: consommation, libelle: "TVA écologique : 20 % (aérien domestique, vente à emporter, hôtellerie de luxe, rénovation non énergétique, ultra-transformés), 5,5 % (transports publics, réparation)", poste: recettes, moteur: tva, debut: 2028, plein: 2028,
              montant: {crise: 3.5, prudent: 3.5, median: 4.5, optimiste: 5.6}}
     unite: md_eur
     annee_euros: 2026
@@ -284,42 +284,42 @@ tondelier_mesures:
     source: "Taux : dossier de presse, p. 4 (« à 20 % sur les biens et services à fort impact environnemental, comme le trafic aérien ; réduite à 5,5 % sur ceux qui contribuent à la transition, comme le train, le bio ou les services de réparation »). Assiettes (hypothèses, Insee comptes de la consommation) : hausses ≈ 10,4 Md€ en statique (ultra-transformés 40 Md€ de 5,5 à 20 % : +5,8 ; rénovation non énergétique 25 Md€ de 10 à 20 % : +2,5 ; vente à emporter 15 Md€ : +1,5 ; aérien domestique, hôtellerie de luxe : +0,6), baisses ≈ −1,7 (transports publics, réparation)"
     note: "Hausses gardées à 50 % en prudent (consommation reportée, fraude, frontière floue des ultra-transformés). Baisse sur les « biens de première nécessité » : non définie, non chiffrée (l'alimentation est déjà à 5,5 %). Effet sur les prix non compté."
   electricite:
-    valeur: {id: REC-41, libelle: "Électricité : TVA de l'abonnement à 5,5 %, accise alignée sur le gaz", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-41, instrument: consommation, libelle: "Électricité : TVA de l'abonnement à 5,5 %, accise alignée sur le gaz", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -2.8, prudent: -2.8, median: -2.8, optimiste: -2.8}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : abonnements d'électricité des ménages ≈ 10 Md€ HT (CRE) : 14,5 points ≈ −1,4 Md€ ; accise de l'électricité des ménages (≈ 150 TWh) ramenée au niveau du gaz : ≈ −1,4 Md€"
   niches_fossiles:
-    valeur: {id: REC-42, libelle: "Niches fossiles transformées en aides forfaitaires ; gazole des poids lourds au taux normal", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+    valeur: {id: REC-42, instrument: consommation, libelle: "Niches fossiles transformées en aides forfaitaires ; gazole des poids lourds au taux normal", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : dépenses fiscales et budgétaires défavorables au climat ≈ 8 Md€ (budget vert, dossier de presse p. 4), dont remboursement de TICPE aux transporteurs ≈ 1,3 Md€ ; aides forfaitaires de compensation"
   aerien:
-    valeur: {id: REC-43, libelle: "Taxe sur les billets d'avion relevée", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-43, instrument: consommation, libelle: "Taxe sur les billets d'avion relevée", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.4, prudent: 0.5, median: 0.6, optimiste: 0.8}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     note: "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
   malus_poids:
-    valeur: {id: REC-44, libelle: "Malus au poids dès 1 300 kg (thermiques) et 1 600 kg (électriques)", poste: recettes, moteur: pib, debut: 2028, plein: 2028, fin: 2035,
+    valeur: {id: REC-44, instrument: consommation, libelle: "Malus au poids dès 1 300 kg (thermiques) et 1 600 kg (électriques)", poste: recettes, moteur: pib, debut: 2028, plein: 2028, fin: 2035,
              montant: {crise: 0.3, prudent: 0.3, median: 0.3, optimiste: 0.3}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     note: "S'éteint avec l'électrification et l'allègement du parc (2035 : 100 % de ventes à zéro émission)."
   fiscalite_sante:
-    valeur: {id: REC-45, libelle: "Fiscalité de santé : alcool selon l'alcool pur, tabac, sucre, produits transformés", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: REC-45, instrument: consommation, libelle: "Fiscalité de santé : alcool selon l'alcool pur, tabac, sucre, produits transformés", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     note: "Hausses non chiffrées par le programme ; recette nette de la baisse de consommation. Économies de santé non comptées (pas de chiffrage sourcé)."
   cannabis:
-    valeur: {id: REC-47, libelle: "Cannabis légalisé : fiscalité propre", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
+    valeur: {id: REC-47, instrument: consommation, libelle: "Cannabis légalisé : fiscalité propre", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
              montant: {crise: 0.5, prudent: 0.7, median: 1.5, optimiste: 2.0}}
     unite: md_eur
     annee_euros: 2026
@@ -333,7 +333,7 @@ tondelier_mesures:
     statut: HYPOTHESE
     note: "Économie déclarative : estimée par le modèle (règle), pas de chiffre du programme."
   superprofits:
-    valeur: {id: REC-34, libelle: "Taxe exceptionnelle sur les superprofits pétroliers et maritimes (2028-2029)", poste: recettes, moteur: fixe, debut: 2028, plein: 2028, fin: 2029,
+    valeur: {id: REC-34, instrument: capital_entreprises, libelle: "Taxe exceptionnelle sur les superprofits pétroliers et maritimes (2028-2029)", poste: recettes, moteur: fixe, debut: 2028, plein: 2028, fin: 2029,
              montant: {crise: 0.5, prudent: 0.5, median: 1.0, optimiste: 1.5}}
     unite: md_eur
     annee_euros: 2026
@@ -341,7 +341,7 @@ tondelier_mesures:
 
   # ---------------------------------------------------------------- prestations
   garantie_autonomie:
-    valeur: {id: PRE-10, libelle: "Garantie d'autonomie à 50 % du SMIC net (remplace le RSA), dès 18 ans, sans contrepartie", poste: pauvrete, moteur: bloc:pauvrete, debut: 2028, plein: 2029,
+    valeur: {id: PRE-10, instrument: transferts_actifs, libelle: "Garantie d'autonomie à 50 % du SMIC net (remplace le RSA), dès 18 ans, sans contrepartie", poste: pauvrete, moteur: bloc:pauvrete, debut: 2028, plein: 2029,
              montant: {crise: 7.5, prudent: 6.6, median: 6.0, optimiste: 5.5}}
     unite: md_eur
     annee_euros: 2026
@@ -349,14 +349,14 @@ tondelier_mesures:
     source: "Calcul : RSA personne seule ≈ 660 € en 2027 ; 50 % du SMIC net après la hausse (≈ 1 585 €) ≈ 790 € : +20 % sur le RSA (13,5 Md€, statu_quo.rsa) = 2,7 ; éligibles en plus (seuil de sortie relevé, sans contrepartie) ≈ +15 % = 2,0 ; 18-24 ans fiscalement indépendants ≈ 200 000 allocataires × 790 € × 12 = 1,9"
     note: "Indexée sur le SMIC, donc sur les salaires (comme le bloc pauvreté du statu quo). Prime d'activité gardée."
   apl:
-    valeur: {id: PRE-11, libelle: "APL +10 %", poste: logement, moteur: bloc:logement, debut: 2028, plein: 2028,
+    valeur: {id: PRE-11, instrument: transferts_actifs, libelle: "APL +10 %", poste: logement, moteur: bloc:logement, debut: 2028, plein: 2028,
              montant: {crise: 1.7, prudent: 1.7, median: 1.7, optimiste: 1.7}}
     unite: md_eur
     annee_euros: 2026
     statut: SOURCE
     source: "Programme, p. 119 ; aides personnelles au logement 16,7 Md€ (statu_quo.aides_logement)"
   allocations_familiales:
-    valeur: {id: PRE-12, libelle: "Allocations familiales dès le premier enfant", poste: famille, moteur: bloc:famille, debut: 2028, plein: 2028,
+    valeur: {id: PRE-12, instrument: transferts_actifs, libelle: "Allocations familiales dès le premier enfant", poste: famille, moteur: bloc:famille, debut: 2028, plein: 2028,
              montant: {crise: 2.8, prudent: 2.8, median: 2.8, optimiste: 2.8}}
     unite: md_eur
     annee_euros: 2026

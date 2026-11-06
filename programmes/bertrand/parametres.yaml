@@ -61,7 +61,7 @@ bertrand_mesures:
 
   # ---------------------------------------------------------------- économies : seules les lignes identifiées
   assurance_chomage:
-    valeur: {id: BER-ECO-01, libelle: "Économies sur l'assurance chômage (non détaillées)", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
+    valeur: {id: BER-ECO-01, instrument: transferts_actifs, libelle: "Économies sur l'assurance chômage (non détaillées)", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
              montant: {crise: -1.0, prudent: -1.5, median: -2.5, optimiste: -3.5}}
     unite: md_eur
     annee_euros: 2026
@@ -86,14 +86,14 @@ bertrand_mesures:
 
   # ---------------------------------------------------------------- fiscalité
   ir_tranches_basses:
-    valeur: {id: BER-FIS-01, libelle: "Impôt sur le revenu : baisse des premières tranches (tranche à 11 % ramenée à 9 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: BER-FIS-01, instrument: travail, libelle: "Impôt sur le revenu : baisse des premières tranches (tranche à 11 % ramenée à 9 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -3.0, prudent: -3.0, median: -3.0, optimiste: -3.0}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
     source: "Même arbitrage que le programme Tondelier (REC-11), pour comparer : 2 points sur la tranche à 11 %, qui rapporte ≈ 15 Md€ (DGFiP)"
   flat_tax:
-    valeur: {id: BER-FIS-02, libelle: "Relèvement du prélèvement forfaitaire unique de 2 points", poste: recettes, moteur: "recette:capital_dividendes_ifi", debut: 2028, plein: 2028,
+    valeur: {id: BER-FIS-02, instrument: capital_menages, libelle: "Relèvement du prélèvement forfaitaire unique de 2 points", poste: recettes, moteur: "recette:capital_dividendes_ifi", debut: 2028, plein: 2028,
              montant: {crise: 0.6, prudent: 0.7, median: 0.9, optimiste: 1.1}}
     unite: md_eur
     annee_euros: 2026

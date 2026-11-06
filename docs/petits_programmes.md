@@ -9,6 +9,10 @@ python -m moteur.noyau bertrand      # (zemmour, arthaud)
 python -m pytest tests/test_petits_programmes.py
 ```
 
+> **Mise à jour du 6 novembre 2026 (soir)** : un canal d'offre commun (effet durable des impôts et des transferts sur
+> le PIB) est ajouté à tous les programmes du noyau : résultats et méthode dans `docs/offre.md`. Les tableaux
+> ci-dessous sont ceux d'avant ce canal.
+
 ## Ce qui est nouveau dans le code
 
 - `moteur/bibliotheque.py` : premières briques de la bibliothèque de mesures (point 3 de la feuille de route) :

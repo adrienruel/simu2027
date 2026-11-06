@@ -87,7 +87,7 @@ arthaud_mesures:
 
   # ---------------------------------------------------------------- recettes
   confiscation:
-    valeur: {id: ART-FIS-01, libelle: "Confiscation des bénéfices des groupes pétroliers et de l'armement", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: ART-FIS-01, instrument: capital_entreprises, libelle: "Confiscation des bénéfices des groupes pétroliers et de l'armement", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 1.0, prudent: 2.0, median: 3.0, optimiste: 4.0}}
     unite: md_eur
     annee_euros: 2026
@@ -105,7 +105,7 @@ arthaud_mesures:
     source: "PLFSS 2027 : sous-indexation des pensions au-delà de 85 % du SMIC, « plus de 5 Md€ » demandés aux retraités (MoneyVox, octobre 2026, d'après le projet de loi)"
     note: "Le statu quo suppose voté le budget 2027 (déficit de 5 %) : annuler une économie de ce budget coûte cette économie, pour toujours (niveau des pensions)."
   prestations_degelees:
-    valeur: {id: ART-FAM-01, libelle: "Allocations familiales, prime d'activité et aides au logement revalorisées en 2027", poste: famille, moteur: "bloc:famille", debut: 2027, plein: 2027,
+    valeur: {id: ART-FAM-01, instrument: transferts_actifs, libelle: "Allocations familiales, prime d'activité et aides au logement revalorisées en 2027", poste: famille, moteur: "bloc:famille", debut: 2027, plein: 2027,
              montant: {crise: 0.6, prudent: 0.6, median: 0.5, optimiste: 0.5}}
     unite: md_eur
     annee_euros: 2026
