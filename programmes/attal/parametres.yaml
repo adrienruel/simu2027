@@ -1,0 +1,312 @@
+# Programme de Gabriel Attal (Renaissance) : chiffrage sur le noyau (7 novembre 2026).
+#
+# Pas de programme complet publié au 6/11/2026 : site attalpresident.fr, « Lettre aux Français sur les finances
+# publiques » (15/10/2026), entretiens et discours de 2026 ; 106 mesures recensées par programmes-2027.fr (fiche :
+# programmes/attal/mesures.yaml). Les mesures tirées seulement des conventions ou des pétitions de Renaissance (2025)
+# sont des propositions du parti : elles ne sont pas chiffrées.
+#
+# Règles (README, décisions d'Adrien) : on ne reprend que les mesures, jamais les économies annoncées (frein d'urgence de
+# 20 Md€, 150 Md€ sur le quinquennat, 5 Md€ de l'assurance chômage : non saisis ; seules les mesures nommées sont
+# estimées) ; chaque ligne sans source est estimée en crise / prudent / médian / optimiste ; dépense : crise ≥ prudent ≥
+# médian ≥ optimiste ; recette : l'inverse. Calendrier : tout à partir de la loi de finances 2028.
+
+attal_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
+
+attal_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+attal_droit_au_brut:
+  baisse:
+    valeur: {crise: 50.0, prudent: 46.0, median: 42.0, optimiste: 40.0}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site du candidat (« Droit au brut ») : +250 € net par mois au salaire médian (2 200 € net), dès 2027, cotisations « qui pèsent sur le travail » supprimées, sans précision. Calcul : 250 € de plus pour les salariés au-dessus du médian et un gain proportionnel en dessous ≈ 215 € par mois en moyenne pour ≈ 20 millions de salariés ≈ 52 Md€ ; ≈ 40 Md€ cités par la presse (La Dépêche, octobre 2026), qui est pris pour l'optimiste"
+    note: "Cotisations salariales en moins sur les revenus d'activité, privé et public dans la proportion de la CSG ; forme d'incidence : celle de la suppression de la CSG calculée par OpenFisca (proportionnelle au salaire). Les cotisations salariales sont entièrement déductibles : l'impôt sur le revenu monte (attal_droit_au_brut.part_ir_retrouvee) ; la prime d'activité baisse. Le financement annoncé (« à l'euro près » par des économies sur l'assurance chômage et les arrêts maladie) n'est pas repris : ces deux réformes sont chiffrées à part. Les droits à retraite des salariés ne baissent pas (hypothèse : l'État compense la caisse)."
+  premiere_annee:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+    note: "Annoncé « dès le début 2027 » ; arbitrage : première loi de finances et de financement après l'élection (2028), comme les autres programmes."
+  part_ir_retrouvee:
+    valeur: {crise: 0.6, prudent: 0.65, median: 0.72, optimiste: 0.8}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que zemmour_csg.part_ir_retrouvee (OpenFisca 2026, couples, ramené à l'impôt réel)"
+
+attal_annee_blanche:
+  part_pensions_protegee:
+    valeur: {crise: 0.35, prudent: 0.3, median: 0.25, optimiste: 0.2}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : « petites retraites protégées » (site, Le Parisien, 03/07/2026) ; pensions sous ≈ 1 400 € par mois ≈ 20 à 35 % de la masse (DREES, Les retraités et les retraites 2025) ; projet d'année blanche de 2025 : 5 à 7 Md€ avec les pensions"
+  prestations_indexees:
+    valeur: 90.0
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : prestations revalorisées chaque année hors retraites (famille, RSA, prime d'activité, AAH, aides au logement, ASPA, invalidité) ≈ 90 Md€ (PLFSS 2026, annexe 9 ; DREES, Minima sociaux 2025)"
+  duree_pensions:
+    valeur: 18
+    unite: annees
+    statut: HYPOTHESE
+    source: "Espérance de vie à 65 ans ≈ 21 ans (Insee) ; durée moyenne restante des pensions en cours ≈ 18 ans : l'économie sur les pensions s'éteint avec les retraités de 2028"
+
+attal_chomage:
+  baisse_taux:
+    valeur: {crise: 0.001, prudent: 0.002, median: 0.003, optimiste: 0.0035}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : projet de 2024 : ≈ 90 000 emplois selon le gouvernement (≈ 0,3 point) ; Banque de France (Bulletin n° 264, 2026) : réformes de 2021 et 2023 = 0,6 point de chômage structurel ; 100 000 emplois annoncés par le candidat, non repris tels quels"
+    note: "Baisse du taux de chômage, montée de 2028 à 2030 ; chaque emploi rapporte la valeur d'un emploi (attal_emploi.valeur_emploi)."
+
+attal_mesures:
+  cvae:
+    valeur: {id: ATT-FIS-06, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 (au lieu de 2030)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028, fin: 2028,
+             montant: {crise: -2.1, prudent: -2.0, median: -2.0, optimiste: -1.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : CVAE ≈ 8 Md€ au taux de 0,75 % (statu_quo.cvae_rendement_2027, Fipeco) ; taux légal de 0,19 % en 2028 (≈ 2 Md€), 0,09 % en 2029 (≈ 1 Md€) ; supprimée en 2030 au statu quo"
+    note: "Montant moyen de 2028 ; 2029 : la moitié (ligne cvae_2029)."
+  cvae_2029:
+    valeur: {id: ATT-FIS-06, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 : année 2029", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2029, plein: 2029, fin: 2029,
+             montant: {crise: -1.0, prudent: -1.0, median: -0.95, optimiste: -0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même calcul : taux légal de 0,09 % en 2029"
+  taxes_2024:
+    valeur: {id: ATT-FIS-02, instrument: capital_menages, libelle: "Retour sur plusieurs taxes votées depuis 2024", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -1.5, prudent: -1.2, median: -0.9, optimiste: -0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : taxes nommées par la presse (taxe sur les holdings patrimoniales de la loi de finances pour 2026 ≈ 0,1 à 1 Md€ ; contribution différentielle sur les hauts revenus ≈ 1,5 Md€ si elle était prolongée au statu quo) ; liste non publiée"
+  donations:
+    valeur: {id: ATT-FIS-04, instrument: successions, libelle: "Donations du vivant facilitées (petits-enfants, petits-neveux et petites-nièces)", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028,
+             montant: {crise: -0.5, prudent: -0.4, median: -0.3, optimiste: -0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : abattement de 31 865 € par petit-enfant (CGI art. 790 B) ; élargissement et hausse : ≈ 0,2 à 0,5 Md€ par an (droits de donation ≈ 3 Md€)"
+  credit_ia:
+    valeur: {id: ATT-NUM-05, instrument: capital_entreprises, libelle: "Crédit d'impôt productivité pour l'adoption de l'IA dans les PME et ETI", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2029,
+             montant: {crise: -1.2, prudent: -1.0, median: -0.8, optimiste: -0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : crédit d'impôt innovation des PME ≈ 0,3 Md€ ; suramortissement numérique de 2019-2020 ≈ 0,5 Md€ par an ; crédit élargi aux ETI"
+  auto_tpe:
+    valeur: {id: ATT-ECO-04, instrument: cout_travail, libelle: "Statut « Auto-TPE » pour le premier salarié, intéressement des petites entreprises", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.4, prudent: -0.3, median: -0.2, optimiste: -0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : exonération « zéro charges » du premier salarié de 2015-2016 ≈ 0,3 Md€ par an (DARES) ; statut non détaillé"
+  carburant:
+    valeur: {id: ATT-ECO-02, instrument: travail, incidence: ir, libelle: "Carburant : barème kilométrique, prime carburant employeur portée à 1 000 €", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.5, prudent: -0.4, median: -0.3, optimiste: -0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : prime transport exonérée (≈ 0,1 Md€ à 300 €) ; barème kilométrique relevé ≈ 0,2 Md€ d'impôt sur le revenu"
+  bailleur_prive:
+    valeur: {id: ATT-LOG-03, instrument: capital_menages, libelle: "Statut du bailleur privé (amortissement fiscal des logements loués)", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -0.6, prudent: -0.5, median: -0.4, optimiste: -0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : statut du bailleur privé de la loi de finances pour 2026 (amortissement de 3,5 à 5,5 %), coût ≈ 0,1 à 0,2 Md€ au départ ; élargissement : ≈ 0,3 à 0,6 Md€ à terme"
+  transmission_agricole:
+    valeur: {id: ATT-AGR-05, instrument: successions, libelle: "Transmission agricole : incitations fiscales, portage du foncier", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028,
+             montant: {crise: -0.2, prudent: -0.15, median: -0.1, optimiste: -0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : abattements sur les biens ruraux loués à long terme (≈ 0,1 Md€)"
+  postes_etat:
+    valeur: {id: ATT-TER-01, libelle: "100 000 postes supprimés : part de l'État (hors Éducation, Armées, Justice, Intérieur)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -1.4, prudent: -1.9, median: -2.2, optimiste: -2.75}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 100 000 postes annoncés ; moitié à l'État hors ministères sanctuarisés (≈ 450 000 agents restants), moitié dans les collectivités ; réalisés : 50 % (crise), 70 % (prudent), 80 % (médian), 100 % (optimiste) ; 55 000 € par poste (attal_emploi.cout_poste_public)"
+  postes_collectivites:
+    valeur: {id: ATT-TER-01, libelle: "100 000 postes supprimés : part des collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -1.4, prudent: -1.9, median: -2.2, optimiste: -2.75}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement ; l'État ne décide pas des effectifs des collectivités : seulement par les dotations et le non-remplacement"
+  echelon:
+    valeur: {id: ATT-TER-02, libelle: "Un échelon de collectivités supprimé, doublons administratifs", poste: collectivites, moteur: pib, debut: 2030, plein: 2034,
+             montant: {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : économies de la fusion des régions de 2015 quasi nulles (Cour des comptes, 2019) ; suppression d'un échelon : 1 à 3 Md€ à terme selon les études (Institut Montaigne, IFRAP, 2017) ; réforme constitutionnelle, pas avant 2030"
+  ij_maladie:
+    valeur: {id: ATT-FIS-03, libelle: "Réforme des arrêts maladie (indemnités journalières)", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
+             montant: {crise: -1.0, prudent: -1.5, median: -2.0, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : indemnités journalières maladie ≈ 11 Md€ (Cnam, 2025) ; jour de carence d'ordre public et plafond abaissé ≈ 1 à 1,5 Md€ (rapport IGF-IGAS, 2024) ; contrôles renforcés"
+  assurance_chomage:
+    valeur: {id: ATT-EMP-01, instrument: transferts_actifs, libelle: "Réforme de l'assurance chômage de 2024 reprise (durée et affiliation)", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
+             montant: {crise: -2.0, prudent: -2.8, median: -3.6, optimiste: -4.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : projet de 2024 (durée de 18 à 15 mois, affiliation de 6 à 8 mois sur 20) : 3,6 Md€ par an selon le gouvernement, moins selon l'Unédic ; 5 Md€ annoncés par le candidat, non repris"
+    note: "Effet sur l'emploi : attal_chomage.baisse_taux."
+  enseignants:
+    valeur: {id: ATT-EDU-01, libelle: "Enseignants revalorisés de 200 € net par mois, jusqu'à 500 € en milieu de carrière", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 5.5, prudent: 5.0, median: 4.5, optimiste: 4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : ≈ 850 000 enseignants ; ≈ 300 € net par mois en moyenne ; coût employeur ≈ 1,6 fois le net (cotisations employeur et salariales) : ≈ 4,9 Md€"
+  aesh:
+    valeur: {id: ATT-EDU-07, libelle: "Corps professionnel des AESH", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 140 000 AESH, ≈ 3 Md€ ; temps de travail porté vers le temps plein et grille de carrière : +10 à 20 %"
+  ia_ecole:
+    valeur: {id: ATT-EDU-06, libelle: "Assistant IA souverain pour chaque élève, enseignants formés à l'IA", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : licences et calcul ≈ 20 € par élève pour 12 millions d'élèves ; formation continue"
+  medecins:
+    valeur: {id: ATT-SAN-01, libelle: "20 000 médecins formés par an", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2034, fp: true,
+             montant: {crise: 0.7, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 11 000 étudiants admis en deuxième année en 2025 ; +9 000 par an × six ans × ≈ 12 000 € par étudiant et par an (enseignement, stages)"
+  ia_sante:
+    valeur: {id: ATT-SAN-02, libelle: "Assistant médical fondé sur l'IA, commandé par l'État", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : commande publique de services numériques en santé (Ségur numérique ≈ 2 Md€ sur cinq ans)"
+  palliatifs:
+    valeur: {id: ATT-SAN-04, libelle: "Investissement massif dans les soins palliatifs", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2030,
+             montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : stratégie décennale 2024-2034 (1,1 Md€ sur dix ans) déjà au statu quo ; ≈ doublement"
+  per_naissance:
+    valeur: {id: ATT-RET-02, libelle: "Plan d'épargne retraite de 1 000 € versé par l'État à chaque naissance", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2028,
+             montant: {crise: 0.68, prudent: 0.66, median: 0.66, optimiste: 0.64}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Site du candidat (Assises de l'AFER, 29/09/2026) : 1 000 € par naissance ; ≈ 660 000 naissances par an (Insee, 2025)"
+    note: "Incitation fiscale à l'abondement non chiffrée (faible au départ)."
+  justice:
+    valeur: {id: ATT-SEC-02, libelle: "3 000 magistrats et greffiers recrutés, places de prison construites", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.45, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 3 000 postes × 80 000 € ≈ 0,24 Md€ ; places de prison : programme de 15 000 places au statu quo ; loi d'exception : +0,2 à 0,3 Md€ par an"
+  securite_civile:
+    valeur: {id: ATT-SEC-06, libelle: "Sécurité civile : hélicoptères et avions bombardiers d'eau", poste: investissement, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : un Canadair ≈ 50 M€ ; flotte de 12 appareils, commande européenne de 2024 ; +2 à 4 appareils par an"
+  france_2040:
+    valeur: {id: ATT-NUM-01, libelle: "Plan « France 2040 » : 200 Md€ pour l'IA et l'innovation en dix ans, moitié publique", poste: investissement, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 8.0, prudent: 7.0, median: 6.0, optimiste: 5.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site du candidat (Les Échos, 17/06/2026) : 200 Md€ sur dix ans, à parts égales entre public et privé, soit 10 Md€ publics par an ; moins la suite de France 2030 déjà au statu quo (≈ 3 à 5 Md€ par an)"
+  geothermie:
+    valeur: {id: ATT-ENE-04, libelle: "Fonds chaleur pour la géothermie doublé (160 M€ par an)", poste: investissement, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.08, prudent: 0.08, median: 0.08, optimiste: 0.08}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Site du candidat (canicules, 25/06/2026) : fonds de subvention doublé à 160 M€ par an, soit +80 M€"
+  vehicules:
+    valeur: {id: ATT-ENE-05, libelle: "Bonus électrique étendu à l'occasion, leasing électrique des travailleurs de première ligne, aide au boîtier E85", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.8, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : leasing social 2024 ≈ 0,65 Md€ pour 50 000 voitures (13 000 € par voiture) ; bonus occasion ≈ 0,1 Md€ ; boîtier E85 ≈ 0,05 Md€"
+  plan_eau:
+    valeur: {id: ATT-CLI-02, libelle: "Plan eau : fuites des 500 réseaux les plus vétustes réparées, réutilisation des eaux usées", poste: investissement, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.4, prudent: 0.3, median: 0.25, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : plan eau de 2023 ≈ 0,5 Md€ par an des agences de l'eau déjà au statu quo ; 500 réseaux × ≈ 2 M€ sur cinq ans"
+  logement_garantie:
+    valeur: {id: ATT-LOG-02, libelle: "Garantie universelle des loyers, résidences universitaires", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2030,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : garantie universelle des loyers de la loi Alur estimée à 0,4 à 0,7 Md€ (2013) ; Visale ≈ 0,1 Md€ ; résidences du Crous ≈ 0,1 à 0,2 Md€ par an"
+  renovation:
+    valeur: {id: ATT-LOG-01, libelle: "Loi de programmation du logement et de la rénovation énergétique", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : stabilisation des crédits de MaPrimeRénov' (≈ 2,3 Md€ en 2026) avec une légère hausse ; RGE simplifié sans coût"
+  engagement:
+    valeur: {id: ATT-SOC-04, libelle: "Un mois d'engagement civique obligatoire avant 25 ans", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2031,
+             montant: {crise: 3.0, prudent: 2.5, median: 2.0, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : SNU généralisé (12 jours en internat) : 3,5 à 5 Md€ par an (Cour des comptes, 2024) ; un mois en mission locale, sans internat obligatoire : ≈ 2 000 à 4 000 € par jeune pour 800 000 jeunes"
+  monoparentales:
+    valeur: {id: ATT-SOC-01, instrument: transferts_actifs, libelle: "Familles monoparentales : pensions alimentaires défiscalisées, versement automatique, carte famille", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2028,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : pensions alimentaires reçues ≈ 4 Md€, imposées au barème (≈ 0,3 Md€ d'impôt) ; intermédiation de l'Aripa ≈ 0,05 Md€"
+  lycee_pro:
+    valeur: {id: ATT-EMP-05, libelle: "Contrat entre chaque lycéen professionnel et une entreprise", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : aide à l'embauche d'alternants (≈ 6 000 € par contrat) pour une partie des 600 000 lycéens professionnels"

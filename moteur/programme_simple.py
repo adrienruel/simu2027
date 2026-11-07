@@ -219,6 +219,10 @@ class ProgrammeSimple:
                 for t in ANNEES:
                     canaux[t]["Seniors : emploi (âge de la retraite)"] = sen["emplois"][t]
                     actifs[t] += sen["actifs"][t]
+            # personnes retirées de la population active par une mesure calculée (ex. service civique obligatoire) :
+            # leurs emplois perdus ne font pas de chômeurs
+            for t, v in getattr(self, "actifs_en_plus", {}).get((id(p), s), {}).items():
+                actifs[t] += v
             # PIB : multiplicateur, offre, et valeur ajoutée des emplois en plus ou en moins hors conjoncture et offre
             # (les postes publics sont déjà dans le PIB par leur dépense et le multiplicateur)
             va = self.v("emploi.valeur_ajoutee_emploi")

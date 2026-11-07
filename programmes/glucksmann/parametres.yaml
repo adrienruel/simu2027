@@ -1,0 +1,526 @@
+# Programme de Raphaël Glucksmann (Place publique) : chiffrage sur le noyau (7 novembre 2026).
+#
+# Pas de programme présidentiel publié au 6/11/2026 : « Notre vision pour la France. Acte I » (Place publique, 23 juin
+# 2025, présenté comme une vision, pas un catalogue de mesures), lettre du 25 août 2026, tract de la primaire, débats de
+# septembre et octobre 2026. 112 mesures recensées par programmes-2027.fr ; fiche : programmes/glucksmann/mesures.yaml.
+#
+# Règles (README, décisions d'Adrien) : on ne reprend que les mesures, jamais les recettes annoncées (≈ 15 Md€ attendus
+# des grosses successions : non saisis) ; chaque ligne sans source est estimée en crise / prudent / médian / optimiste ;
+# dépense : crise ≥ prudent ≥ médian ≥ optimiste ; recette : l'inverse. Format des mesures : moteur/programme_simple.py.
+#
+# Calendrier (arbitrage) : élection en mai 2027 ; tout à partir de la loi de finances 2028, SMIC en deux ans.
+
+glucksmann_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
+
+glucksmann_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+glucksmann_smic:
+  smic_net_programme:
+    valeur: 1600
+    unite: eur_mois
+    annee_euros: 2027
+    statut: SOURCE
+    source: "Place publique, « Notre vision pour la France. Acte I » (23 juin 2025) : SMIC porté à 1 600 € net dans les deux ans suivant l'élection"
+    note: "En euros de 2027, ramené en euros de 2026 par l'inflation de 2027, puis en brut par le barème OpenFisca de 2026. Montée : moitié en 2028, entier en 2029 (« dans les deux ans »)."
+  allegements_suivent_smic:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Le texte ne dit rien des allègements : lecture de la loi actuelle (allègements définis en multiples du SMIC), comme pour Arthaud. Variante « nominalisés » (lecture Tondelier) : coût au SMIC plus élevé, plus d'emplois perdus."
+  diffusion_jusqu_a:
+    valeur: 1.4
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.diffusion_jusqu_a (Dares, Insee : diffusion jusqu'à 1,3 à 1,5 SMIC)"
+    note: "Les conférences salariales par branche ne sont pas chiffrées."
+  elasticite_emploi:
+    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Mêmes valeurs que tondelier_smic.elasticite_emploi (Kramarz et Philippon, 2001 ; Crépon et Desplatz, 2001 ; L'Horty, 2006)"
+    note: "Élasticité constante (emplois × (1 − rapport des coûts^élasticité)), montée en trois ans (2028-2030)."
+  part_marge_absorbee:
+    valeur: 0.5
+    unite: taux
+    statut: HYPOTHESE
+    note: "Même valeur que Tondelier et Arthaud."
+  valeur_emploi_chomeur:
+    valeur: 9000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur"
+
+glucksmann_retraites:
+  profil_62_ans:
+    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même profil que tondelier_retraites.profil_62_ans et melenchon_retraites.profil_62_ans (DREES, fiche 16, 2023, âge légal 62 ans)"
+  annee:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+    note: "Abrogation de la réforme de 2023 et retour à 62 ans (débat du 5 octobre 2026, LCP), en écartant 60 ans : 62 ans pour les départs de 2028 (première loi de financement du quinquennat). Durée d'assurance de la réforme Touraine gardée (le candidat n'en parle pas)."
+
+glucksmann_emplois_aides:
+  territoires_zero_chomeur:
+    valeur: {emplois: 60000, eviction: {crise: 0.2, prudent: 0.15, median: 0.1, optimiste: 0.05}, debut: 2028, plein: 2032}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Territoires zéro chômeur, ≈ 3 300 salariés dans 80 territoires en 2025 ; généralisation progressive à ≈ 1 000 territoires de 60 emplois ; éviction faible (activités non concurrentes, évaluation de 2021 du comité scientifique : 10 %)"
+    note: "Emplois venus du chômage de longue durée ; coût dans glucksmann_mesures.tzcld."
+
+glucksmann_chomage:
+  hausse_taux:
+    valeur: {crise: 0.006, prudent: 0.006, median: 0.0045, optimiste: 0.003}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.assurance_chomage (Banque de France, Bulletin n° 264, 2026 : les réformes de 2021 et 2023 ont baissé le chômage structurel de 0,6 point)"
+    note: "Hausse du taux de chômage quand ces réformes sont annulées (GLU-EMP-02), montée de 2028 à 2030 ; chaque chômeur en plus coûte la valeur d'un emploi au SMIC."
+
+glucksmann_csg:
+  baisse:
+    valeur: 15.0
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Débat LCP du 5/10/2026 : taxer davantage les très gros héritages « pour baisser la CSG sur les salaires » ; taille de la baisse : ≈ 15 Md€, le montant que le candidat associe à la mesure (paramètre de la mesure, comme les 3 Md€ du plan VSS de Tondelier)"
+    note: "Baisse uniforme du taux de CSG sur les revenus d'activité (salariés du privé et du public) : part 15 / (CSG du travail) de la suppression totale calculée pour Zemmour, avec l'impôt sur le revenu en plus (zemmour_csg.part_ir_retrouvee) et la prime d'activité en moins. Recettes des successions : glucksmann_mesures.grosses_successions (estimées à part)."
+  premiere_annee:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+  part_ir_retrouvee:
+    valeur: {crise: 0.6, prudent: 0.65, median: 0.72, optimiste: 0.8}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que zemmour_csg.part_ir_retrouvee (OpenFisca 2026, couples, ramené à l'impôt réel sur les salaires)"
+
+glucksmann_service_civique:
+  jeunes:
+    valeur: 800000
+    unite: personnes
+    statut: HYPOTHESE
+    source: "Insee : ≈ 800 000 jeunes par génération de 18 ans (2025)"
+  part_en_emploi:
+    valeur: {crise: 0.25, prudent: 0.2, median: 0.15, optimiste: 0.1}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : taux d'emploi des 18-19 ans ≈ 25 % dont la moitié en apprentissage (Insee, Enquête emploi 2024) ; service placé surtout entre le lycée et les études (optimiste) ou pris sur l'emploi et l'apprentissage (crise)"
+    note: "Ces jeunes quittent l'emploi pendant dix mois sans devenir chômeurs (inactifs au sens du BIT pour le calcul du chômage) ; la valeur ajoutée perdue est comptée, l'indemnité est dans glucksmann_mesures.service_civique."
+
+glucksmann_mesures:
+  grosses_successions:
+    valeur: {id: GLU-FIS-01, instrument: successions, libelle: "Successions : taxation accrue des très gros héritages (au-delà de ≈ 2 M€ reçus)", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2029,
+             montant: {crise: 3, prudent: 4, median: 6, optimiste: 8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : droits de succession ≈ 16 Md€ (2024, DGFiP) ; héritages de plus de 2 M€ ≈ 0,5 % des successions mais ≈ 15 % de la masse transmise (CAE, note n° 69, 2021) ; barème non donné ; évitement fort (assurance vie, démembrement, expatriation) : prudent au quart des 15 Md€ annoncés"
+    note: "Le candidat attend ≈ 15 Md€ (débat LCP du 5/10/2026) : montant non repris (règle : on ne reprend jamais les recettes annoncées)."
+  dutreil:
+    valeur: {id: GLU-FIS-02, instrument: successions, libelle: "Pacte Dutreil réformé (abattement de 75 % recentré sur les entreprises réellement familiales et productives)", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028,
+             montant: {crise: 0.3, prudent: 0.5, median: 0.8, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : coût du pacte Dutreil ≈ 4 Md€ par an (Cour des comptes, 2025) ; réforme non détaillée : on retient qu'un huitième à un quart du coût est récupéré"
+  tres_hauts_patrimoines:
+    valeur: {id: GLU-FIS-03, instrument: capital_menages, libelle: "Effort fiscal sur les très hauts patrimoines (forme non précisée : impôt plancher type Zucman en version réduite)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1, prudent: 2, median: 3, optimiste: 4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : taxe Zucman de 2 % au-delà de 100 M€ ≈ 5 Md€ en prudent (tondelier_mesures.zucman) ; forme et taux non donnés (Acte I, p. 85) : moitié moins en prudent"
+  superprofits:
+    valeur: {id: GLU-FIS-03b, instrument: capital_entreprises, libelle: "Taxation automatique des superprofits", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028,
+             montant: {crise: 0, prudent: 0.5, median: 1, optimiste: 2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : contribution sur la rente inframarginale de l'électricité ≈ 0,6 Md€ en 2023 (CRE) ; contribution exceptionnelle des grandes entreprises 2025 ≈ 8 Md€ (une fois) ; « automatique » : seulement les années de profits exceptionnels, d'où 0 en crise"
+  niches_inefficaces:
+    valeur: {id: GLU-FIS-06, libelle: "Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.5, prudent: 1, median: 1.5, optimiste: 2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 467 dépenses fiscales ≈ 85 Md€ (PLF 2026, Voies et moyens II) ; niches non nommées (Acte I, p. 40) ; économie limitée faute de liste"
+  cir:
+    valeur: {id: GLU-FIS-04, instrument: capital_entreprises, libelle: "Crédit d'impôt recherche plafonné pour les grands groupes", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028,
+             montant: {crise: 1, prudent: 1.5, median: 2, optimiste: 2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : CIR ≈ 7,6 Md€ (2024), dont ≈ 30 % aux entreprises de plus de 5 000 salariés (MESR, 2024) ; plafond de 100 M€ par groupe : ≈ 1,5 à 2,5 Md€ (Sénat, rapport sur le CIR, 2021 ; Cour des comptes, 2023)"
+  niches_transports:
+    valeur: {id: GLU-FIS-05, instrument: consommation, libelle: "Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)", poste: recettes, moteur: "recette:tva", debut: 2028, plein: 2030,
+             montant: {crise: 0.5, prudent: 0.8, median: 1.2, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : remboursement partiel de TICPE au transport routier ≈ 1,3 Md€, exonération du kérosène des vols intérieurs ≈ 0,4 Md€ (Voies et moyens II, PLF 2026) ; montée par paliers"
+  taxe_amazon:
+    valeur: {id: GLU-ECO-06, instrument: consommation, libelle: "« Taxe Amazon » sur les livraisons du commerce en ligne, pour le commerce de proximité", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.1, prudent: 0.2, median: 0.3, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : propositions de taxe sur les livraisons (Sénat, 2020-2024) : 0,1 à 0,5 Md€ selon le taux"
+  boissons_sucrees:
+    valeur: {id: GLU-SAN-06, instrument: consommation, libelle: "Taxation accrue des boissons sucrées", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.1, prudent: 0.2, median: 0.3, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : taxe soda ≈ 0,45 Md€ après sa hausse de 2025 (Voies et moyens I) ; doublement des taux : +0,2 à 0,3 Md€ (baisse des volumes)"
+  vacance:
+    valeur: {id: GLU-LOG-05, libelle: "Taxe sur les logements vacants alourdie (vacance longue)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.05, prudent: 0.1, median: 0.15, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : taxe sur les logements vacants ≈ 0,15 Md€ (DGFiP) ; doublement du taux, recettes en partie aux collectivités"
+  gafam:
+    valeur: {id: GLU-NUM-03, instrument: capital_entreprises, libelle: "Sortir de la dépendance aux GAFAM : taxe sur les services numériques renforcée", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.2, prudent: 0.4, median: 0.6, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : taxe sur les services numériques ≈ 0,8 Md€ (2025) ; doublement du taux (3 → 6 %) débattu au PLF 2026 : +0,4 à 0,8 Md€ ; risque de représailles américaines en crise"
+  regularisation:
+    valeur: {id: GLU-IMM-02, libelle: "Régularisation des travailleurs sans papiers ; droit au travail des demandeurs d'asile dès l'enregistrement", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0, prudent: 0.2, median: 0.4, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 250 000 à 400 000 travailleurs sans titre (estimations parlementaires, 2023) ; cotisations et impôts en plus quand l'emploi devient déclaré ≈ 3 000 € par personne et par an (une partie déjà employée au noir) ; prestations ouvertes ensuite déduites"
+  taxe_electricite:
+    valeur: {id: GLU-ENE-03, instrument: consommation, libelle: "Hausse de l'accise sur l'électricité de 2024 annulée ; part de la facture indexée sur le coût de production", poste: recettes, moteur: "recette:tva", debut: 2028, plein: 2028,
+             montant: {crise: -3.8, prudent: -3.6, median: -3.4, optimiste: -3.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : accise sur l'électricité remontée en 2024-2025 vers ≈ 26 €/MWh (ménages) ; retour au niveau d'avant la hausse ≈ 3 à 4 Md€ par an (Voies et moyens I, PLF 2026) ; indexation sur le coût de production : pas de coût budgétaire (régulation)"
+  cheque_energie:
+    valeur: {id: GLU-ECO-03, libelle: "Chèque énergie triplé pour les ménages dépendant de la voiture", poste: pauvrete, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 2.5, prudent: 2.2, median: 2.0, optimiste: 1.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : chèque énergie ≈ 0,8 Md€ pour 5,6 millions de ménages (PLF 2026) ; triplé pour les ménages qui dépendent de la voiture (≈ 50 à 80 % des bénéficiaires, hors grandes villes) : +0,8 à 1,3 Md€ par tranche de 0,8 Md€ triplée, soit ≈ 1,6 à 2,5 Md€"
+  maprimerenov:
+    valeur: {id: GLU-ENE-05, libelle: "MaPrimeRénov' relancée et simplifiée", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 1.5, prudent: 1.5, median: 1.2, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : crédits de MaPrimeRénov' ramenés de 3,4 Md€ (2024) à ≈ 2,3 Md€ (2025-2026) ; retour au niveau de 2024 : +1 à 1,5 Md€"
+  renouvelables:
+    valeur: {id: GLU-ENE-02, libelle: "Plan pluriannuel d'investissement dans les renouvelables ; nouvelles unités nucléaires confortées", poste: investissement, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : soutien public aux renouvelables (CSPE, fonds chaleur ≈ 0,8 Md€) déjà au statu quo ; part publique en plus (fonds chaleur doublé, réseaux) ; le nucléaire neuf (EPR2) est déjà au statu quo, financé par EDF et un prêt de l'État hors solde"
+  prevention:
+    valeur: {id: GLU-SAN-03, libelle: "Prévention sortie de l'Ondam annuel, fonds territorial de prévention", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2030,
+             montant: {crise: 1.0, prudent: 1.0, median: 0.8, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : dépenses de prévention ≈ 6 Md€ (DREES, 2024) ; fonds territorial : +10 à 15 %"
+  sante_mentale:
+    valeur: {id: GLU-SAN-04, libelle: "Santé mentale des jeunes priorité nationale", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 0.5, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : assises de la santé mentale 2021 (≈ 2 Md€ sur cinq ans) ; psychologues scolaires et centres médico-psychologiques : +0,3 à 0,5 Md€"
+  soins_proximite:
+    valeur: {id: GLU-SAN-02, libelle: "Centres de petites urgences, maisons de santé, permanences mobiles ; financement global de l'hôpital", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2031,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.7, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : aides aux maisons de santé ≈ 0,2 Md€ ; 300 centres de soins non programmés ≈ 0,5 Md€ ; la fin de la tarification à l'acte est neutre à enveloppe constante"
+  ecole_salaires:
+    valeur: {id: GLU-EDU-01, libelle: "Loi de programmation de l'école sur cinq ans : revalorisation des enseignants", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 5, prudent: 5, median: 4, optimiste: 3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : masse salariale des enseignants ≈ 50 Md€ ; revalorisation de 8 à 10 % sur cinq ans (ordre des lois de programmation proposées par les syndicats et la gauche) ; non chiffrée par le candidat"
+  ecole_classes:
+    valeur: {id: GLU-EDU-01b, libelle: "Loi de programmation de l'école : effectifs par classe réduits, remplaçants", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
+             montant: {crise: 1.2, prudent: 1.0, median: 0.8, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 15 000 à 20 000 postes (baisse démographique déjà au statu quo, qui supprime des postes) ; coût 60 000 € par poste"
+  ecole_batiments:
+    valeur: {id: GLU-EDU-06, libelle: "Plan de rénovation des écoles, fermetures d'écoles rurales freinées", poste: investissement, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 1.0, prudent: 1.0, median: 0.8, optimiste: 0.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : besoin de rénovation énergétique du bâti scolaire ≈ 40 Md€ en vingt ans (Banque des territoires, 2023) ; part de l'État ≈ 1 Md€ par an"
+  ecoles_rurales:
+    valeur: {id: GLU-EDU-06b, libelle: "Écoles rurales maintenues (postes gardés malgré la baisse des effectifs)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true, postes: true, cout_poste: 60000,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 600 fermetures de classes rurales par an ; postes maintenus ≈ 5 000 à 8 000 à 60 000 €"
+  sejour_collectif:
+    valeur: {id: GLU-EDU-03, libelle: "Séjour collectif garanti pour chaque enfant", poste: collectivites, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : classe de découverte ≈ 500 € par élève ; une génération de 750 000 élèves par an, aides existantes déduites"
+  formation:
+    valeur: {id: GLU-EDU-05, instrument: transferts_actifs, libelle: "Parcoursup repensé, chantier du capital formation universel", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2031,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : « chantier » seulement (Acte I, p. 25) ; abondement des comptes de formation des jeunes sans diplôme ≈ 0,4 à 1 Md€"
+  police_proximite:
+    valeur: {id: GLU-SEC-01, libelle: "Police de proximité recréée ; moyens d'enquête contre le narcotrafic", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true, postes: true, cout_poste: 65000,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : police de proximité de 1998-2003 ≈ 10 000 agents redéployés ; ici ≈ 5 000 à 8 000 postes en plus à 65 000 €"
+  justice:
+    valeur: {id: GLU-SEC-04, libelle: "Maisons de la justice et du droit doublées, surpopulation carcérale combattue", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 0.4, prudent: 0.3, median: 0.25, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 150 maisons de la justice et du droit ; places de prison et alternatives (ministère de la Justice, 2025)"
+  aide_developpement:
+    valeur: {id: GLU-INT-03, libelle: "Aide publique au développement portée à 0,7 % du revenu national", poste: defense_ue, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 9.1, prudent: 9.1, median: 9.1, optimiste: 9.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même chiffrage que tondelier_mesures.aide_developpement (aide ≈ 0,40 % du revenu national en 2026 ; +0,30 point)"
+  reserve:
+    valeur: {id: GLU-INT-04, libelle: "Réserve opérationnelle fortement accrue", poste: defense_ue, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : objectif de 80 000 réservistes de la LPM déjà au statu quo ; doubler au-delà (≈ 100 000 de plus à 3 000 € par an)"
+  cyber:
+    valeur: {id: GLU-INT-05, libelle: "Programme « cyber sentinelle » ; drones et production d'armement accélérée", poste: defense_ue, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.2, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : l'accélération de l'armement suit la LPM (statu quo) ; cyber : ≈ 0,2 Md€ en plus"
+  logement_abord:
+    valeur: {id: GLU-LOG-04, libelle: "Programme « Logement d'abord » amplifié", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2030,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : plan Logement d'abord 2023-2027 ≈ 0,3 Md€ par an ; doublement"
+  fonds_foncier:
+    valeur: {id: GLU-LOG-02, libelle: "Fonds foncier pour les collectivités, objectifs de logements sociaux rehaussés", poste: investissement, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : aides à la pierre (FNAP) ≈ 0,3 Md€ ; fonds foncier national ≈ 0,5 à 1 Md€ par an"
+  plan_rail:
+    valeur: {id: GLU-TER-01, libelle: "Plan Rail avec les régions", poste: investissement, moteur: pib, debut: 2029, plein: 2032,
+             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : besoin de régénération et de modernisation du réseau ≈ 1,5 Md€ par an en plus (Conseil d'orientation des infrastructures, 2023 ; conférence Ambition France Transports, 2025)"
+  ticket_climat:
+    valeur: {id: GLU-TER-01b, libelle: "« Ticket climat » : titre unique des transports en commun", poste: collectivites, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : Deutschlandticket ≈ 3 Md€ par an de compensation publique pour 80 millions d'habitants (2024) ; à l'échelle de la France ≈ 1 à 1,5 Md€ (tondelier_mesures.ticket_climat)"
+  transport_rural:
+    valeur: {id: GLU-TER-04, libelle: "Service public de transport rural", poste: collectivites, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.3, prudent: 0.3, median: 0.2, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : transport à la demande dans les communautés de communes rurales ≈ 0,2 à 0,3 Md€"
+  services_publics_proximite:
+    valeur: {id: GLU-TER-02, libelle: "Accès de proximité aux services publics (France services renforcées)", poste: collectivites, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : réseau France services ≈ 0,1 Md€ de l'État ; doublement des agents par maison"
+  point_indice:
+    valeur: {id: GLU-TER-03, libelle: "Point d'indice des fonctionnaires indexé sur l'inflation (rattrapage du gel de 2027)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2028, fp: true,
+             montant: {crise: 2.8, prudent: 2.8, median: 2.8, optimiste: 2.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même chiffrage que tondelier_mesures.point_indice (traitement indiciaire ≈ 55 % de 390 Md€ × inflation de 2027)"
+    note: "Ensuite, le statu quo fait déjà suivre les rémunérations publiques : rien de plus compté."
+  vss:
+    valeur: {id: GLU-SOC-03, libelle: "Plan contre les violences sexistes et sexuelles doté d'un milliard d'euros", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 1.0, prudent: 1.0, median: 1.0, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Acte I, p. 78 : plan « doté d'un milliard d'euros » ; arbitrage : par an"
+  garde_enfant:
+    valeur: {id: GLU-SOC-04, libelle: "Droit opposable à la garde d'enfant", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2032,
+             montant: {crise: 3, prudent: 2.5, median: 2, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : service public de la petite enfance, 200 000 places manquantes (HCFEA, 2023) ; ≈ 12 000 € de fonctionnement public par place, montée en cinq ans ; investissement des collectivités en partie au statu quo"
+  aidants:
+    valeur: {id: GLU-SOC-05, instrument: transferts_actifs, libelle: "Indemnité et droit au répit des proches aidants", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : allocation journalière du proche aidant ≈ 0,1 Md€ ; 9 millions d'aidants dont ≈ 500 000 réduisant leur activité ; indemnité élargie et répit ≈ 0,5 à 1 Md€"
+  parents_seuls:
+    valeur: {id: GLU-SOC-01, instrument: transferts_actifs, libelle: "Statut des parents seuls (ASF revalorisée, aides de garde)", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2028,
+             montant: {crise: 0.8, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ASF ≈ 2 Md€ pour 800 000 familles (CNAF) ; +25 % ≈ 0,5 Md€ (déjà +50 % en 2022)"
+  service_civique:
+    valeur: {id: GLU-SOC-02, libelle: "Service civique obligatoire de dix mois", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2032,
+             montant: {crise: 9, prudent: 8, median: 7, optimiste: 6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : service civique 2025 ≈ 0,5 Md€ pour ≈ 150 000 jeunes (≈ 3 300 € par jeune et par an de mission) ; une génération ≈ 800 000 jeunes, dix mois, indemnité ≈ 650 € par mois, encadrement, hébergement et transports ≈ 350 € par mois ; SNU ≈ 2 à 3 Md€ par génération pour 12 jours seulement (Cour des comptes, 2024)"
+    note: "Jeunes retirés du marché du travail pendant dix mois : glucksmann_service_civique."
+  retraite_penibilite:
+    valeur: {id: GLU-RET-02, libelle: "Âge de départ modulé selon la pénibilité et l'espérance de vie en bonne santé", poste: retraites, moteur: "bloc:retraites", debut: 2028, plein: 2032,
+             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : facteurs de pénibilité retirés en 2017 rétablis (C2P élargi) ≈ 0,5 à 1 Md€ (Cour des comptes, 2022) ; départs anticipés pour espérance de vie en bonne santé plus courte : plus"
+  tzcld:
+    valeur: {id: GLU-EMP-01, libelle: "Territoires zéro chômeur de longue durée généralisés, CDI d'insertion", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032,
+             montant: {crise: 1.4, prudent: 1.3, median: 1.1, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 20 000 € de contribution publique par emploi (DARES, 2021, ≈ 18 000 € ; montée en charge) pour 60 000 emplois ; moins les minima sociaux économisés (≈ 0,2 Md€ en médian)"
+    note: "Emplois : glucksmann_emplois_aides.territoires_zero_chomeur."
+  assurance_chomage:
+    valeur: {id: GLU-EMP-02, instrument: transferts_actifs, libelle: "Réforme de l'assurance chômage abrogée", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
+             montant: {crise: 6.5, prudent: 6.0, median: 5.5, optimiste: 5.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : Unédic, effets des réformes de 2019 à 2025 ≈ 6 à 7 Md€ par an en régime de croisière (tondelier_mesures.assurance_chomage, 6,5)"
+    note: "Effet sur le chômage : glucksmann_chomage.hausse_taux."
+  ess:
+    valeur: {id: GLU-EMP-06, libelle: "Agence de financement de l'économie sociale et solidaire", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.2, optimiste: 0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : dotation d'une agence publique de garantie et de prêts ≈ 0,1 à 0,3 Md€ par an (le reste en prêts, hors solde)"
+  revenu_transition:
+    valeur: {id: GLU-AGR-03, libelle: "Revenu de transition écologique pour les agriculteurs et les pêcheurs", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.8, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : mesures agroenvironnementales ≈ 0,3 Md€ de part nationale ; revenu de transition ≈ 10 000 € par an pour 40 000 à 60 000 exploitations en conversion"
+  cantines:
+    valeur: {id: GLU-AGR-04, libelle: "Cantines bio et locales, expérimentations de sécurité sociale de l'alimentation", poste: collectivites, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.3, prudent: 0.3, median: 0.2, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : surcoût d'une restauration scolaire à 50 % bio ≈ 0,3 € par repas, ≈ 1 milliard de repas ; expérimentations locales"
+  assurance_climat:
+    valeur: {id: GLU-CLI-05, libelle: "Garantie universelle d'assurance climatique", poste: etat_missions, moteur: pib, debut: 2029, plein: 2030,
+             montant: {crise: 0.5, prudent: 0.3, median: 0.2, optimiste: 0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : régime des catastrophes naturelles déficitaire (≈ 1 Md€ de sinistralité de plus que les primes en 2022-2023, CCR) ; garantie publique : surprime et réassurance de l'État, coût net faible hors années de crise"
+  eau:
+    valeur: {id: GLU-CLI-06, libelle: "Tarification sociale de l'eau ; plan « Eau » pour les outre-mer", poste: collectivites, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.4, prudent: 0.35, median: 0.3, optimiste: 0.25}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : plan eau-DOM ≈ 0,1 Md€ par an ; tarification sociale financée en partie par les usagers"
+  outre_mer:
+    valeur: {id: GLU-OM-01, libelle: "Outre-mer : prix de première nécessité plafonnés, télécoms et livres alignés sur l'Hexagone", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.2, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : bouclier qualité-prix (accords de prix, compensations) ; compensation des opérateurs ≈ 0,1 à 0,3 Md€"
+  culture:
+    valeur: {id: GLU-CUL-02, libelle: "Pacte d'aménagement culturel du territoire ; part individuelle du pass Culture supprimée", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.1, prudent: 0.0, median: 0.0, optimiste: -0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : part individuelle du pass Culture ≈ 0,15 Md€ en 2025 (après sa baisse) ; réaffectée au pacte d'aménagement culturel"
+  numerique_ia:
+    valeur: {id: GLU-NUM-02, libelle: "Agence industrielle du numérique et de l'IA, campus international de l'IA", poste: investissement, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : France 2030, volet IA ≈ 2,5 Md€ sur cinq ans déjà engagés (statu quo) ; agence industrielle : +0,3 à 0,6 Md€ par an"
+  democratie:
+    valeur: {id: GLU-INS-06, libelle: "« Bon pour la démocratie » (financement des partis), conventions citoyennes", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.15, prudent: 0.1, median: 0.1, optimiste: 0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : aide publique aux partis ≈ 0,07 Md€ ; bon de 5 € par électeur (≈ 0,25 Md€ en remplacement partiel)"
+  fabrique_france:
+    valeur: {id: GLU-ECO-04, libelle: "Fonds régionaux pour le « Fabriqué en France »", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : dotations publiques des fonds régionaux d'investissement ≈ 0,2 à 0,5 Md€ ; la commande publique orientée ne coûte que le surcoût, non chiffré"

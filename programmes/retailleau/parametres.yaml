@@ -1,0 +1,377 @@
+# Programme de Bruno Retailleau (Les Républicains) : chiffrage sur le noyau (7 novembre 2026).
+#
+# Pas de programme présidentiel consolidé au 6/11/2026 : livrets thématiques « Nos propositions pour la France » (LR,
+# janvier à septembre 2026), entretiens et communiqués ; 93 mesures recensées par programmes-2027.fr (fiche :
+# programmes/retailleau/mesures.yaml).
+#
+# Règles : on ne reprend que les mesures, jamais les économies annoncées (plan de 197 Md€, 8 Md€ de l'assurance chômage,
+# 4 Md€ des arrêts maladie, 25 Md€ des fonctionnaires : non saisis ; chaque mesure nommée est estimée) ; les montants des
+# mesures donnés par le candidat (restitution de 30 Md€, 700 M€ du congé de naissance, défense à 100 Md€) sont des
+# paramètres ; dépense : crise ≥ prudent ≥ médian ≥ optimiste ; recette : l'inverse. Calendrier : loi de finances 2028.
+
+retailleau_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
+
+retailleau_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+retailleau_retraites:
+  age_cible:
+    valeur: 65
+    unite: sans_unite
+    statut: DECISION
+    note: "LCP (23/09/2026) : âge minimal de 63 ans, taux plein automatique à 65 ans, décote de 7 % par année d'anticipation (carrières longues complètes : taux plein à 63 ans). Lecture : âge du taux plein porté à 65 ans, départs dès 63 ans avec décote, comme Bertrand (départs anticipés avec décote)."
+  premiere_generation:
+    valeur: 1966
+    unite: sans_unite
+    statut: DECISION
+    note: "Même rythme que Bertrand, Zemmour et Philippe : un trimestre par génération, 65 ans pour la génération 1969 (départs de 2034)."
+  pas_par_generation:
+    valeur: 0.25
+    unite: sans_unite
+    statut: DECISION
+  part_economie_gardee:
+    valeur: {crise: 0.6, prudent: 0.65, median: 0.75, optimiste: 0.85}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que bertrand_retraites.part_economie_gardee (décote de 7 % par an, proche de la neutralité actuarielle : une partie de l'économie est rendue par les départs à 63 et 64 ans)"
+
+retailleau_restitution:
+  baisse_salaries:
+    valeur: 13.0
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Le travail gagnant (09/01/2026), p. 36 : au moins 30 Md€ par an restitués, moitié aux salariés (≈ 500 € par an au salaire médian), moitié aux entreprises ; arbitrage : moitié salariés = 15 Md€, dont ≈ 2 Md€ par le « zéro cotisation » au-delà de 1 623 heures (retailleau_mesures.zero_cotisation) ; le reste (13 Md€) en cotisations salariales en moins ; moitié entreprises = impôts de production (retailleau_mesures.impots_production)"
+    note: "Montant de la mesure (paramètre), pas une recette annoncée. Même calcul que le « droit au brut » d'Attal : cotisations entièrement déductibles, impôt sur le revenu en plus, prestations en moins, effet d'offre par OpenFisca."
+  part_ir_retrouvee:
+    valeur: {crise: 0.6, prudent: 0.65, median: 0.72, optimiste: 0.8}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que zemmour_csg.part_ir_retrouvee"
+  premiere_annee:
+    valeur: 2029
+    unite: sans_unite
+    statut: DECISION
+    note: "Restitution financée par le plan d'économies, montée à partir de 2029 (arbitrage)."
+
+retailleau_chomage:
+  baisse_taux:
+    valeur: {crise: 0.0015, prudent: 0.003, median: 0.004, optimiste: 0.005}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : réformes de 2021 et 2023 = 0,6 point de chômage structurel (Banque de France, Bulletin n° 264, 2026) ; règles de juin 2024 ≈ 0,3 point selon le gouvernement ; ruptures conventionnelles et dégressivité en plus"
+
+retailleau_mesures:
+  impots_production:
+    valeur: {id: RET-FIS-01, instrument: capital_entreprises, libelle: "C3S supprimée, part industrielle de la CFE exonérée", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2029,
+             montant: {crise: -6.5, prudent: -6.0, median: -6.0, optimiste: -5.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Produire plus pour vivre mieux (19/02/2026), p. 20 : quatre impôts de production (≈ 15 Md€) supprimés ou réduits : C3S, CVAE, part industrielle de la CFE ; calcul : C3S ≈ 4,5 Md€ (2025), CFE industrielle ≈ 1,5 Md€ ; la CVAE est déjà supprimée en 2030 au statu quo (lignes cvae)"
+    note: "Les ≈ 15 Md€ du livret comptent la CVAE entière : au statu quo elle ne rapporte plus que ≈ 2 Md€ en 2028 et 1 Md€ en 2029."
+  cvae:
+    valeur: {id: RET-FIS-01, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 (au lieu de 2030)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028, fin: 2028,
+             montant: {crise: -2.1, prudent: -2.0, median: -2.0, optimiste: -1.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : taux légal de 0,19 % en 2028 sur 0,75 % pour ≈ 8 Md€ (statu_quo.cvae_rendement_2027)"
+  cvae_2029:
+    valeur: {id: RET-FIS-01, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 : année 2029", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2029, plein: 2029, fin: 2029,
+             montant: {crise: -1.0, prudent: -1.0, median: -0.95, optimiste: -0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : taux légal de 0,09 % en 2029"
+  zero_cotisation:
+    valeur: {id: RET-ECO-02, instrument: cout_travail, libelle: "« Zéro cotisation » au-delà de 1 623 heures par an (cotisations salariales et patronales)", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -2.5, prudent: -2.0, median: -1.6, optimiste: -1.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le travail gagnant (09/01/2026), p. 20 ; encadrement : ≈ 900 millions d'heures supplémentaires par an (DARES), réduction de cotisations salariales et déduction patronale déjà au statu quo ; ≈ 1,2 à 2,5 Md€ (même chiffrage que philippe_mesures.heures_sup)"
+    note: "Compté dans la moitié « salariés » de la restitution de 30 Md€."
+  successions:
+    valeur: {id: RET-FIS-02, instrument: successions, libelle: "Droits de succession abaissés", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028,
+             montant: {crise: -1.5, prudent: -1.2, median: -1.0, optimiste: -0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Entretien à L'Opinion (26/08/2026) : baisse sans barème ; encadrement : droits de succession ≈ 16 Md€ ; abattement en ligne directe relevé (de 100 000 à 150 000 €) ≈ 1 Md€"
+  donations:
+    valeur: {id: RET-FIS-02b, instrument: successions, libelle: "« Choc de transmission » : 150 000 € par parent et par enfant de moins de 30 ans sans droits pendant trois ans", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028, fin: 2030,
+             montant: {crise: -2.0, prudent: -1.5, median: -1.2, optimiste: -1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même source ; encadrement : dons familiaux de 100 000 € exonérés de 2025 (logement) ≈ 0,3 Md€ ; abattement bien plus large et temporaire (effet d'aubaine, successions futures avancées)"
+  transmission_entreprise:
+    valeur: {id: RET-FIS-03, instrument: successions, libelle: "Droits de transmission d'entreprise payés seulement à la cession", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028,
+             montant: {crise: -0.5, prudent: -0.4, median: -0.3, optimiste: -0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Produire plus pour vivre mieux (19/02/2026), p. 34 ; encadrement : droits sur les transmissions d'entreprises après pacte Dutreil ≈ 0,5 à 1 Md€ ; report jusqu'à la cession"
+  actionnariat:
+    valeur: {id: RET-FIS-04, instrument: capital_entreprises, libelle: "Contribution patronale sur l'actionnariat salarié supprimée", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.3, prudent: -0.25, median: -0.2, optimiste: -0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "L'IA au service des Français (07/07/2026), p. 15 ; encadrement : contribution de 20 % sur les attributions gratuites d'actions ≈ 0,3 Md€"
+  interets_emprunt:
+    valeur: {id: RET-LOG-03, instrument: capital_menages, libelle: "Intérêts d'emprunt de la résidence principale déductibles (50 % un enfant, 75 % deux, 100 % trois)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: -2.5, prudent: -2.0, median: -1.6, optimiste: -1.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Se loger mieux et moins cher (28/05/2026), p. 8 ; encadrement : crédit d'impôt sur les intérêts de la loi TEPA (2007) ≈ 1,9 Md€ à maturité (Cour des comptes, 2011) ; ici réservé aux familles, mais en déduction (plus forte pour les hauts revenus)"
+  bailleur_prive:
+    valeur: {id: RET-LOG-06, instrument: capital_menages, libelle: "Statut du bailleur privé (amortissement de 4 % par an, option au PFU de 30 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Se loger mieux et moins cher (28/05/2026), p. 33 ; encadrement : revenus fonciers ≈ 40 Md€ ; statut de la loi de finances pour 2026 au statu quo (≈ 0,1 à 0,2 Md€) ; option au PFU et amortissement élargi"
+  credit_famille:
+    valeur: {id: RET-SOC-03, instrument: capital_entreprises, libelle: "Garde d'enfants : crédit d'impôt famille déplafonné, exonération relevée à 7 000 €", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.85, prudent: -0.8, median: -0.8, optimiste: -0.75}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Famille (04/05/2026), p. 21 : coût ≈ 800 M€"
+  talents_tech:
+    valeur: {id: RET-NUM-05, libelle: "« Retour au pays » : cinq ans sans impôt sur le revenu pour les talents de la tech", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -0.15, prudent: -0.1, median: -0.08, optimiste: -0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "L'IA au service des Français (07/07/2026), p. 14 ; encadrement : régime des impatriés ≈ 0,4 Md€"
+  solaire_tva:
+    valeur: {id: RET-ENE-02b, instrument: consommation, libelle: "TVA au taux normal pour le solaire", poste: recettes, moteur: "recette:tva", debut: 2028, plein: 2028,
+             montant: {crise: 0.05, prudent: 0.1, median: 0.1, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Électricité (07/05/2026), p. 21 ; encadrement : taux réduit des petites installations ≈ 0,1 Md€"
+  ria:
+    valeur: {id: RET-EMP-01, instrument: transferts_actifs, libelle: "Revenu d'incitation à l'activité (300 € + 250 € avec activité) à la place du RSA, de la prime d'activité et de l'ASS", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2029, plein: 2030,
+             montant: {crise: -1.0, prudent: -3.0, median: -5.0, optimiste: -7.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le travail gagnant (09/01/2026), p. 23 ; encadrement : RSA ≈ 16 Md€, prime d'activité ≈ 10,5 Md€, ASS ≈ 1,5 Md€ ; montants du RIA inférieurs au RSA de base (≈ 650 € pour une personne seule) pour qui n'a pas d'activité, plus forts avec activité ; transition et non-recours en baisse : économie nette incertaine"
+    note: "La hausse de la pauvreté n'est pas mesurée ici."
+  plafond_aides:
+    valeur: {id: RET-EMP-02, instrument: transferts_actifs, libelle: "Aides sociales plafonnées à 70 % du SMIC net (compte social unique)", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2029, plein: 2030,
+             montant: {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le travail gagnant (09/01/2026), p. 29 ; encadrement : ménages sans activité dont les aides cumulées dépassent ≈ 1 000 € : quelques centaines de milliers (familles nombreuses, aides au logement)"
+  assurance_chomage:
+    valeur: {id: RET-EMP-03, instrument: transferts_actifs, libelle: "Assurance chômage resserrée (ruptures conventionnelles, dégressivité au-dessus de 3 000 €, fin au troisième refus) et règles de juin 2024", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
+             montant: {crise: -3.0, prudent: -4.5, median: -6.0, optimiste: -7.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le travail gagnant (09/01/2026), p. 32 ; encadrement : 8 Md€ plus 4 à 5 Md€ annoncés (non repris) ; règles de juin 2024 : 3,6 Md€ selon le gouvernement ; dégressivité de 2021 ≈ 0,4 Md€ ; ruptures conventionnelles ≈ 25 % des entrées (Unédic)"
+    note: "Effet sur l'emploi : retailleau_chomage.baisse_taux."
+  ij_maladie:
+    valeur: {id: RET-SAN-01, libelle: "Arrêts maladie : jour de carence d'ordre public, réforme des indemnités journalières", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
+             montant: {crise: -1.0, prudent: -1.5, median: -2.0, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Public Sénat (12/10/2026) : 4 Md€ annoncés (non repris) ; encadrement : indemnités journalières maladie ≈ 11 Md€ ; jour de carence d'ordre public et plafond abaissé ≈ 1 à 1,5 Md€ (IGF-IGAS, 2024)"
+  postes_etat:
+    valeur: {id: RET-TER-01, libelle: "400 000 départs de fonctionnaires non remplacés d'ici 2032 : État", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -5.0, prudent: -6.9, median: -7.9, optimiste: -9.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Public Sénat (12/10/2026) : 400 000 postes (25 Md€ annoncés, non repris) ; réalisés : 50 % (crise), 70 % (prudent), 80 % (médian), 100 % (optimiste) ; 55 000 € par poste ; 45 % à l'État, 35 % dans les collectivités, 20 % dans les hôpitaux"
+  postes_collectivites:
+    valeur: {id: RET-TER-01, libelle: "400 000 départs non remplacés : collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -3.85, prudent: -5.4, median: -6.2, optimiste: -7.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement (35 %)"
+  postes_hopitaux:
+    valeur: {id: RET-TER-01, libelle: "400 000 départs non remplacés : hôpitaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -2.2, prudent: -3.1, median: -3.5, optimiste: -4.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement (20 %)"
+  agences:
+    valeur: {id: RET-TER-01b, libelle: "La plupart des agences et opérateurs supprimés", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030,
+             montant: {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : opérateurs ≈ 80 Md€ de dépenses, missions gardées en grande partie ; suppressions de 2025-2026 ≈ 0,5 Md€ (Cour des comptes)"
+  carence_fp:
+    valeur: {id: RET-TER-02, libelle: "Fonctionnaires : 1 623 heures par an, trois jours de carence", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2028,
+             montant: {crise: -0.4, prudent: -0.5, median: -0.6, optimiste: -0.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Acteurs publics (12/10/2026) ; encadrement : jour de carence des agents ≈ 0,2 à 0,3 Md€ (DGAFP) ; heures en plus comptées dans le non-remplacement"
+  prestations_residence:
+    valeur: {id: RET-IMM-03, instrument: transferts_actifs, libelle: "Cinq ans de résidence légale et d'activité pour les prestations non contributives", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,
+             montant: {crise: -1.0, prudent: -2.0, median: -3.0, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Tribune (02/05/2026) ; encadrement : étude d'impact de la loi immigration de 2024 (condition de cinq ans, censurée) ≈ 1 à 2 Md€ ; étendu aux dispositifs familiaux (revenu familial)"
+  hebergement:
+    valeur: {id: RET-IMM-04, libelle: "Hébergement d'urgence réservé aux personnes en séjour régulier, plafonné à 18 mois", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2029,
+             montant: {crise: -0.3, prudent: -0.5, median: -0.7, optimiste: -0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Se loger mieux et moins cher (28/05/2026), p. 44 ; encadrement : hébergement d'urgence ≈ 3 Md€ (programme 177), dont ≈ 30 à 40 % de personnes sans titre (Cour des comptes, 2024)"
+  maprimerenov:
+    valeur: {id: RET-CUL-01, libelle: "MaPrimeRénov' supprimée", poste: investissement, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -1.5, prudent: -2.0, median: -2.2, optimiste: -2.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Public Sénat (12/10/2026) : dans un ensemble de 23 Md€ ; crédits ≈ 2,3 Md€ en 2026 (PLF 2026) ; dossiers déjà engagés payés en 2028"
+  snu_culture:
+    valeur: {id: RET-CUL-01b, libelle: "Fin du SNU, économies sur la culture et l'audiovisuel public", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.6, prudent: -0.9, median: -1.1, optimiste: -1.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même source ; encadrement : SNU ≈ 0,1 Md€ ; audiovisuel public ≈ 4 Md€ ; culture ≈ 4 Md€ : 10 à 25 % de moins sur l'audiovisuel"
+  ofb:
+    valeur: {id: RET-AGR-02, libelle: "Office français de la biodiversité supprimé", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.2, prudent: -0.3, median: -0.4, optimiste: -0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Réarmer notre agriculture (03/03/2026), p. 9 ; encadrement : OFB ≈ 0,6 Md€ (financé surtout par les agences de l'eau) ; une partie des missions gardée"
+  renouvelables:
+    valeur: {id: RET-ENE-02, libelle: "Fin du soutien public aux nouvelles capacités éoliennes et solaires", poste: etat_missions, moteur: pib, debut: 2029, plein: 2035,
+             montant: {crise: -0.3, prudent: -0.6, median: -1.0, optimiste: -1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Électricité (07/05/2026), p. 21 ; encadrement : charges de service public des nouveaux contrats (CRE, délibération de 2025) : économie qui monte avec les capacités non engagées ; dépend des prix de marché"
+  defense:
+    valeur: {id: RET-INT-01, libelle: "Budget de la défense à 100 Md€ en fin de quinquennat", poste: defense_ue, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 17.0, prudent: 16.0, median: 15.5, optimiste: 15.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Tribune (14/07/2026) : 100 Md€ en 2032 ; calcul : ≈ 89 Md€ de 2026 (inflation de 2027 à 2032) contre ≈ 73 Md€ au statu quo (LPM actualisée, 76,3 Md€ courants en 2030, puis le PIB)"
+  enseignants:
+    valeur: {id: RET-EDU-01, libelle: "Professeurs : +135 € net par mois en début de carrière, ≈ +300 € en milieu", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 4.0, prudent: 3.6, median: 3.2, optimiste: 2.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Éducation (03/09/2026), p. 10 ; calcul : ≈ 850 000 enseignants, ≈ 220 € net en moyenne, coût employeur ≈ 1,6 fois le net : ≈ 3,6 Md€"
+  ecoles_normales:
+    valeur: {id: RET-EDU-04, libelle: "Une École normale du professorat par académie, formation sur cinq ans", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2031, fp: true,
+             montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Éducation, p. 11 ; encadrement : élèves professeurs rémunérés en dernière année (≈ 25 000 × 20 000 €), moins les INSPE"
+  etablissements:
+    valeur: {id: RET-EDU-03, libelle: "1 000 établissements publics innovants d'ici 2032", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032,
+             montant: {crise: 0.15, prudent: 0.1, median: 0.08, optimiste: 0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Éducation, p. 7 ; encadrement : 100 000 € par établissement"
+  securite:
+    valeur: {id: RET-SEC-02, libelle: "« État d'urgence anti-trafics » (50 à 60 quartiers), peines minimales (places de prison)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2031, fp: true,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : peines minimales : +5 000 à 10 000 détenus × ≈ 40 000 € ; forces mobiles dans 50 à 60 quartiers ≈ 0,2 Md€"
+  france_production:
+    valeur: {id: RET-ECO-05, libelle: "Fonds France Production (600 M€ par an, cofinancé)", poste: investissement, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.35, prudent: 0.3, median: 0.25, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Produire plus pour vivre mieux (19/02/2026), p. 26 : 600 M€ par an, cofinancé par l'État, les régions et les fonds européens ; part de l'État ≈ la moitié"
+  tva_communes:
+    valeur: {id: RET-TER-03, libelle: "9 000 € de TVA versés à la commune par logement neuf", poste: collectivites, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 3.6, prudent: 3.4, median: 3.2, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Se loger mieux et moins cher (28/05/2026), p. 15 ; calcul : 9 000 € × ≈ 350 000 à 400 000 logements neufs par an (objectif de 450 000)"
+  conge_naissance:
+    valeur: {id: RET-SOC-02, instrument: transferts_actifs, libelle: "Congé de naissance jusqu'aux six mois de l'enfant", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
+             montant: {crise: 0.75, prudent: 0.7, median: 0.7, optimiste: 0.65}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Famille (04/05/2026), p. 18 : coût ≈ 700 M€ par an"
+  marianne:
+    valeur: {id: RET-NUM-01, libelle: "Assistant administratif « Marianne » (≈ 1 Md€ sur le quinquennat)", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.22, prudent: 0.2, median: 0.2, optimiste: 0.18}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "L'IA au service des Français (07/07/2026), p. 28 : ≈ 1 Md€ sur le quinquennat"
+  cyber:
+    valeur: {id: RET-NUM-04, libelle: "Plan « Vauban numérique » (ANSSI), VIGINUM triplé ; IA de défense ×5", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "L'IA au service des Français (07/07/2026), p. 35 ; encadrement : ANSSI ≈ 0,1 Md€, VIGINUM ≈ 0,02 Md€ ; IA de défense dans la hausse du budget de la défense"
+  securite_civile:
+    valeur: {id: RET-CLI-05, libelle: "Prévention des incendies, avions bombardiers d'eau français", poste: investissement, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: 0.4, prudent: 0.3, median: 0.25, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Communiqué (24/07/2026) ; encadrement : un Canadair ≈ 50 M€"
+  taux_plein_65:
+    valeur: {id: RET-RET-01b, libelle: "Taux plein automatique à 65 ans (au lieu de 67 sans carrière complète)", poste: retraites, moteur: "bloc:retraites", debut: 2030, plein: 2035,
+             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "LCP (23/09/2026) ; encadrement : ≈ 50 000 départs par an au taux plein à 67 ans faute de trimestres ; décote annulée deux ans plus tôt ≈ 1 Md€ à terme (COR, 2023)"
+  seniors:
+    valeur: {id: RET-RET-03, instrument: cout_travail, libelle: "Cotisations exonérées pour les seniors ayant tous leurs trimestres", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
+             montant: {crise: -0.5, prudent: -0.4, median: -0.3, optimiste: -0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le travail gagnant (09/01/2026), p. 25 ; encadrement : ≈ 100 000 à 200 000 salariés concernés avant l'âge légal"

@@ -1,0 +1,281 @@
+# Programme de David Lisnard (Nouvelle Énergie) : chiffrage sur le noyau (7 novembre 2026).
+#
+# Pas de document programmatique complet au 6/11/2026 : pages thématiques, carnets, Le livre noir, discours de Bayeux,
+# fiches « Questions », entretiens ; 91 mesures recensées par programmes-2027.fr (fiche : programmes/lisnard/mesures.yaml).
+#
+# Règles : on ne reprend que les mesures, jamais les économies annoncées (80 Md€ la première année, 200 Md€ ensuite, dépense
+# à 45 % du PIB : non saisis ; chaque mesure nommée est estimée) ; les montants des mesures (120 Md€ rendus aux actifs,
+# 40 Md€ d'impôts de production, 20 000 places de prison) sont des paramètres ; dépense : crise ≥ prudent ≥ médian ≥
+# optimiste ; recette : l'inverse. Retraites : statu quo (les fiches d'octobre 2026 écartent une nouvelle borne d'âge).
+
+lisnard_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
+
+lisnard_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+lisnard_actifs:
+  baisse_totale:
+    valeur: 120.0
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Fiche « Questions » (03/10/2026) : 120 Md€ rendus aux actifs par la baisse des cotisations (≈ 400 € net par mois) ; CNEWS (28/10/2026) : CSG sur les revenus d'activité de 9,2 % à 6,6 %"
+    note: "Montant de la mesure (paramètre), pas une recette annoncée. Arbitrage : la baisse de CSG (2,6 points, ≈ 28 Md€) fait partie des 120 Md€ ; le reste en cotisations salariales. Calcul : moteur/bibliotheque.baisse_prelevements_salaries (impôt sur le revenu en plus, prestations en moins, effet d'offre par OpenFisca)."
+  csg_points:
+    valeur: 2.6
+    unite: points
+    statut: SOURCE
+    source: "CNEWS (28/10/2026) : de 9,2 % à 6,6 %"
+  montee:
+    valeur: {2028: 0.25, 2029: 0.5, 2030: 0.75, 2031: 1.0}
+    unite: taux
+    statut: DECISION
+    note: "Arbitrage : le candidat finance la baisse par 80 Md€ d'économies la première année puis 200 Md€ ; montée en quatre ans à partir de la loi de finances 2028."
+  part_ir_retrouvee:
+    valeur: {crise: 0.6, prudent: 0.65, median: 0.72, optimiste: 0.8}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que zemmour_csg.part_ir_retrouvee"
+
+lisnard_chomage:
+  baisse_taux:
+    valeur: {crise: 0.0005, prudent: 0.001, median: 0.0015, optimiste: 0.002}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : dégressivité de 2021 : effet faible sur le retour à l'emploi des cadres (Unédic, 2024) ; généralisée : 0,05 à 0,2 point"
+
+lisnard_mesures:
+  impots_production_travail:
+    valeur: {id: LIS-FIS-01, instrument: cout_travail, libelle: "Impôts de production −40 Md€ : part assise sur la masse salariale", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: -16, prudent: -16, median: -16, optimiste: -16}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Fiche « Questions » (03/10/2026) : 40 Md€ d'impôts de production en moins, en commençant par la C3S ; arbitrage : 40 % sur la taxe sur les salaires et le versement mobilité, montée sur le quinquennat (même répartition que philippe_mesures)"
+    note: "Montant de la mesure (paramètre)."
+  impots_production_capital:
+    valeur: {id: LIS-FIS-01, instrument: capital_entreprises, libelle: "Impôts de production −40 Md€ : C3S, CFE, taxe foncière des entreprises", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
+             montant: {crise: -24, prudent: -24, median: -24, optimiste: -24}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Même source ; 60 % sur la C3S (≈ 4,5 Md€), la CFE, la taxe foncière des entreprises et les autres impôts de production (impôts de production agricoles compris, LIS-AGR-02)"
+  subventions:
+    valeur: {id: LIS-ECO-05, instrument: capital_entreprises, libelle: "Subventions aux entreprises destinées à compenser leurs charges supprimées", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2030,
+             montant: {crise: 2, prudent: 4, median: 6, optimiste: 8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (16/10/2026) ; encadrement : aides aux entreprises ≈ 210 Md€ (Sénat, 2025) ; « compensations de charges » non listées : 2 à 8 Md€ (la baisse des impôts de production les rend en partie inutiles)"
+  is_20:
+    valeur: {id: LIS-FIS-03, instrument: capital_entreprises, libelle: "Impôt sur les sociétés à 20 %, part variable de 0 à 5 % laissée aux collectivités", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2030,
+             montant: {crise: -12, prudent: -10, median: -8, optimiste: -6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (16/10/2026) ; calcul : IS ≈ 60 Md€ au taux de 25 % ; 5 points de moins ≈ −12 Md€ en statique ; part locale levée en moyenne à 0 (crise) à 2,5 points (optimiste)"
+  ifi:
+    valeur: {id: LIS-FIS-02, instrument: capital_menages, libelle: "IFI supprimé, remplacé par une fiscalité foncière sur valeurs vénales", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -1.5, prudent: -1.0, median: -0.5, optimiste: 0.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le livre noir (22/04/2026), p. 7 ; encadrement : IFI ≈ 2,2 Md€ ; taxe foncière révisée sur valeurs vénales : rendement de remplacement non précisé"
+  successions:
+    valeur: {id: LIS-FIS-04, instrument: successions, libelle: "Transmission d'entreprise exonérée, taux marginal des successions de 45 à 20 %, abattements unifiés", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028,
+             montant: {crise: -3.5, prudent: -3.0, median: -2.5, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (16/10/2026) ; encadrement : droits de succession ≈ 16 Md€, dont ≈ 30 % payés dans les tranches au-delà de 20 % en ligne directe (CAE, 2021) ; transmission d'entreprise déjà exonérée à 75 % (pacte Dutreil)"
+  quotient_familial:
+    valeur: {id: LIS-SOC-01, instrument: travail, incidence: haut, libelle: "Quotient familial déplafonné", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -4.0, prudent: -3.5, median: -3.0, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Page programme (non datée) ; encadrement : plafonnement du quotient familial ≈ 3 à 4 Md€ d'impôt (Voies et moyens, dépense fiscale négative ; baisse du plafond de 2013-2014 ≈ 1,5 Md€)"
+  creation_entreprise:
+    valeur: {id: LIS-ECO-04, instrument: cout_travail, libelle: "Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le livre noir (22/04/2026), p. 7 ; encadrement : ACRE ≈ 0,4 Md€ (créateurs) ; ≈ 50 000 créations d'entreprises employeuses par an (Insee)"
+  embauche_rsa:
+    valeur: {id: LIS-EMP-05, instrument: cout_travail, libelle: "Charges négatives à l'embauche d'un allocataire du RSA depuis plus de deux ans, emploi à domicile au SMIC sans charges", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.8, prudent: -0.6, median: -0.5, optimiste: -0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Page programme (non datée) ; encadrement : exonérations de l'emploi à domicile ≈ 1 Md€ (déjà au statu quo, en partie) ; embauches aidées de longue durée ≈ 30 000 à 60 000 par an"
+  epargne_aleas:
+    valeur: {id: LIS-AGR-02b, instrument: capital_entreprises, libelle: "Compte épargne aléas dans chaque exploitation (déduction fiscale)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.15, prudent: -0.1, median: -0.08, optimiste: -0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Carnets Agriculture (08/06/2026), p. 9 ; encadrement : déduction pour épargne de précaution ≈ 0,1 Md€"
+  postes_etat:
+    valeur: {id: LIS-TER-07, libelle: "Effectifs publics −12 % (plus de 400 000 suppressions) : État", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -5.0, prudent: -6.9, median: -7.9, optimiste: -9.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "CNEWS (28/10/2026) : plus de 400 000 suppressions, 200 000 à 300 000 redéploiements ; réalisés : 50 % (crise), 70 % (prudent), 80 % (médian), 100 % (optimiste) ; 55 000 € par poste ; 45 % État, 35 % collectivités, 20 % hôpitaux (même ventilation que retailleau_mesures)"
+  postes_collectivites:
+    valeur: {id: LIS-TER-07, libelle: "Effectifs publics −12 % : collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -3.85, prudent: -5.4, median: -6.2, optimiste: -7.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement (35 %)"
+  postes_hopitaux:
+    valeur: {id: LIS-TER-07, libelle: "Effectifs publics −12 % : hôpitaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -2.2, prudent: -3.1, median: -3.5, optimiste: -4.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement (20 %)"
+  agences:
+    valeur: {id: LIS-TER-02, libelle: "La moitié des 1 200 agences et opérateurs supprimés par ordonnances (dont ARS et DREAL)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030,
+             montant: {crise: -1.0, prudent: -2.0, median: -3.0, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le livre noir (22/04/2026), p. 24 ; encadrement : opérateurs ≈ 80 Md€ de dépenses (personnels comptés dans les suppressions de postes) ; fonctionnement hors personnel ; suppressions de 2025-2026 ≈ 0,5 Md€ (Cour des comptes)"
+  provinces:
+    valeur: {id: LIS-TER-01, libelle: "Départements et régions fusionnés en une cinquantaine de provinces", poste: collectivites, moteur: pib, debut: 2031, plein: 2034,
+             montant: {crise: 0.0, prudent: -0.5, median: -1.0, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Discours de Bayeux (17/06/2026), p. 11 ; encadrement : fusion des régions de 2015 sans économie nette (Cour des comptes, 2019) ; référendum, pas avant 2031"
+  allocation_unique:
+    valeur: {id: LIS-ECO-03, instrument: transferts_actifs, libelle: "Aides sociales fusionnées en une allocation unique plafonnée, 500 € d'écart entre le SMIC et l'assistance", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2029, plein: 2030,
+             montant: {crise: -1.0, prudent: -2.0, median: -3.0, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (03/10/2026) et Fiche « Questions » (16/10/2026) ; encadrement : RSA, prime d'activité, aides au logement ≈ 43 Md€ ; plafond en pourcentage du SMIC : ménages au-dessus du plafond (familles nombreuses, aides au logement en zone chère) ; non-recours réduit en sens inverse"
+  prestations_etranger:
+    valeur: {id: LIS-ECO-03b, instrument: transferts_actifs, libelle: "Prestations non contributives réservées aux résidents depuis cinq ans, plus versées à l'étranger", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,
+             montant: {crise: -1.1, prudent: -2.2, median: -3.3, optimiste: -4.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : condition de cinq ans de la loi immigration de 2024 (censurée) ≈ 1 à 2 Md€ ; même chiffrage que retailleau_mesures.prestations_residence, plus ≈ 0,1 à 0,4 Md€ de prestations exportées"
+  ame:
+    valeur: {id: LIS-IMM-03, libelle: "AME remplacée par une aide médicale d'urgence", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
+             montant: {crise: -0.2, prudent: -0.4, median: -0.6, optimiste: -0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Le livre noir (22/04/2026), p. 9 : 600 à 900 M€ annoncés (non repris) ; encadrement : AME ≈ 1,3 Md€ (2026) ; rapport Évin-Stefanini (2023) : soins urgents reportés vers l'hôpital, économie nette bien plus faible"
+  chomage:
+    valeur: {id: LIS-EMP-04, instrument: transferts_actifs, libelle: "Allocations chômage dégressives, associées à la formation", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
+             montant: {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (16/10/2026) ; encadrement : dégressivité de 2021 au-dessus de ≈ 4 500 € brut ≈ 0,4 Md€ ; généralisée : 1 à 2 Md€"
+    note: "Effet sur l'emploi : lisnard_chomage.baisse_taux."
+  ars:
+    valeur: {id: LIS-SAN-03, libelle: "ARS supprimées, moyens répartis par les préfets", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
+             montant: {crise: -0.1, prudent: -0.2, median: -0.3, optimiste: -0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Carnets Santé (05/05/2026), p. 9 ; encadrement : fonctionnement des ARS ≈ 1,2 Md€ dont ≈ 9 000 agents (comptés dans les postes) ; missions transférées aux préfectures"
+  convergence_tarifaire:
+    valeur: {id: LIS-SAN-06, libelle: "Convergence tarifaire public-privé, loi de programmation de santé", poste: sante, moteur: "bloc:sante", debut: 2029, plein: 2032,
+             montant: {crise: -0.3, prudent: -0.6, median: -0.9, optimiste: -1.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Carnets Santé, p. 10 ; encadrement : écart de tarifs public-privé ≈ 20 % sur les séjours comparables (ATIH) ; convergence partielle, abandonnée en 2012"
+  audiovisuel:
+    valeur: {id: LIS-CUL-02, libelle: "Audiovisuel public recentré, France 2 privatisée", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -0.4, prudent: -0.6, median: -0.8, optimiste: -1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (16/10/2026) ; encadrement : France Télévisions ≈ 2,5 Md€ de financement public ; France 2 ≈ 40 % ; produit de cession hors solde"
+  renouvelables:
+    valeur: {id: LIS-ENE-02, libelle: "Renouvelables au droit commun, sans régime de soutien", poste: etat_missions, moteur: pib, debut: 2029, plein: 2035,
+             montant: {crise: -0.3, prudent: -0.6, median: -1.0, optimiste: -1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même chiffrage que retailleau_mesures.renouvelables"
+  enseignants:
+    valeur: {id: LIS-EDU-03, libelle: "Rémunérations des enseignants +20 % en cinq ans, sous conditions", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 6.0, prudent: 5.0, median: 4.0, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Page programme (non datée) ; même calcul que philippe_mesures.enseignants (+20 % nominal, part réelle en plus du statu quo), un peu moins pour les conditions"
+  excellence:
+    valeur: {id: LIS-EDU-04, libelle: "Classes d'excellence, établissements d'excellence avec internats par ancien canton, établissements disciplinaires", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Entretien JDNews (15/10/2026) ; encadrement : internats d'excellence ≈ 15 000 € par place et par an ; ≈ 2 000 cantons anciens, montée progressive"
+  medecine:
+    valeur: {id: LIS-SAN-02, libelle: "Étudiants en médecine formés doublés d'ici 2030", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2034, fp: true,
+             montant: {crise: 0.9, prudent: 0.8, median: 0.7, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Carnets Santé, p. 4 ; encadrement : ≈ 11 000 admis en deuxième année ; +11 000 par an × six ans × ≈ 12 000 €"
+  acces_direct:
+    valeur: {id: LIS-SAN-05, libelle: "Accès direct remboursé aux spécialistes, IPA et kinésithérapeutes ; exonérations dans les zones sous-denses", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
+             montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Carnets Santé, p. 8 ; encadrement : majoration hors parcours de soins ≈ 0,3 Md€ ; exonérations de CFE et de prélèvements des médecins en zone sous-dense ≈ 0,1 à 0,2 Md€"
+  prisons_invest:
+    valeur: {id: LIS-SEC-03, libelle: "20 000 places de prison en plus (construction)", poste: investissement, moteur: pib, debut: 2028, plein: 2029, fin: 2032,
+             montant: {crise: 0.9, prudent: 0.8, median: 0.7, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (03/10/2026) : 20 000 places ; encadrement : ≈ 200 000 € par place (programme 15 000 places) : ≈ 4 Md€ sur cinq ans"
+  prisons_fonctionnement:
+    valeur: {id: LIS-SEC-03b, libelle: "20 000 places de prison : fonctionnement ; peines planchers, effectifs correctionnels doublés", poste: etat_missions, moteur: "bloc:autres", debut: 2030, plein: 2033, fp: true,
+             montant: {crise: 1.2, prudent: 1.0, median: 0.9, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 40 000 € par détenu et par an (surveillants compris) ; magistrats et greffiers des audiences correctionnelles"
+  defense:
+    valeur: {id: LIS-INT-02, libelle: "Hausse « incontournable » du budget de la défense, munitions pour l'Ukraine", poste: defense_ue, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 2.0, prudent: 1.5, median: 1.0, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (16/10/2026) : sans montant ; encadrement : au-delà de la LPM actualisée (statu quo), commandes de munitions ≈ 1 Md€ par an"

@@ -1,0 +1,370 @@
+# Programme d'Édouard Philippe (Horizons) : fiche des mesures (7 novembre 2026)
+
+programme:
+  candidat: Édouard Philippe
+  parti: Horizons
+  document: site de campagne (quatre pages de priorités), interviews et discours de 2025-2026
+  recensement: https://programmes-2027.fr/candidats/philippe/ (87 mesures)
+  date_lecture: '2026-11-07'
+  avertissement: programme partiel ; programme complet annoncé
+mesures:
+- id: PHI-ECO-01
+  intitule: Déficit ramené de plus de 5 % à 2 % du PIB (50 % social, 25 % État et collectivités, 25 % croissance)
+  source: Site (« Pour une France plus prospère »)
+  traitement: 'non repris : objectif d''économies'
+- id: PHI-ECO-02
+  intitule: 'Moratoire : ni nouvelle norme ni nouvel impôt'
+  source: Site (« Pour une France plus prospère »)
+  traitement: 'non chiffré : engagement'
+- id: PHI-ECO-03
+  intitule: Code de la commande publique supprimé au profit du règlement européen
+  source: Site (« Pour une France plus prospère »)
+  traitement: non chiffré
+- id: PHI-ECO-04
+  intitule: Ordonnance de simplification administrative
+  source: Discours de Reims, 10/05/2026
+  traitement: non chiffré
+- id: PHI-ECO-05
+  intitule: « Livret capital France »
+  source: Site (« … plus conquérante »)
+  traitement: 'neutre : épargne réorientée'
+- id: PHI-FIS-01
+  intitule: Impôts de production −50 Md€, compensés par 50 Md€ d'aides aux entreprises en moins
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.impots_production_* (montant de la mesure) et aides_entreprises_* (part réalisable)
+- id: PHI-FIS-01b
+  intitule: … compensés par 50 Md€ d'aides aux entreprises en moins
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.aides_entreprises_* (part réalisable)
+- id: PHI-FIS-02
+  intitule: Pas d'impôt sur le revenu trois ans après une naissance (≈ 3 Md€ par an)
+  source: L'Heure de vérité, 08/10/2026
+  traitement: philippe_mesures.ir_naissance
+- id: PHI-FIS-03
+  intitule: Pacte de stabilité fiscale de cinq ans, pacte Dutreil maintenu
+  source: Tribune, 05/11/2025
+  traitement: 'neutre : statu quo'
+- id: PHI-FIS-04
+  intitule: Plafonds de donation fortement relevés pendant trois ans
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: philippe_mesures.donations
+- id: PHI-EMP-01
+  intitule: Durée du travail par accord au-delà de 35 h, heures sup exonérées, aucune cotisation patronale au-delà de 37 h
+  source: L'Heure de vérité, 08/10/2026
+  traitement: philippe_mesures.heures_sup
+- id: PHI-EMP-02
+  intitule: Indemnisation chômage de 18 à 12 mois pour les moins de 50 ans
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.chomage_12_mois et philippe_chomage
+- id: PHI-EMP-03
+  intitule: Trois jours de carence dans le public et le privé ; délai avant rupture conventionnelle
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.carence
+- id: PHI-EMP-04
+  intitule: Retraite progressive, cumul emploi-retraite, emploi des plus de 50 ans
+  source: Site (« Pour une France plus prospère »)
+  traitement: non chiffré (effet dans le calcul des seniors)
+- id: PHI-RET-01
+  intitule: Âge de départ à 65 ans et 45 ans de cotisation en moins de dix ans
+  source: Site (« Pour une France plus prospère »)
+  traitement: 'calculé : philippe_retraites ; durée : philippe_mesures.retraite_45_ans'
+- id: PHI-RET-01b
+  intitule: Durée de cotisation à 45 ans
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.retraite_45_ans
+- id: PHI-RET-02
+  intitule: Départs anticipés maintenus (handicap, incapacité, invalidité, carrières longues)
+  source: Site (« Pour une France plus prospère »)
+  traitement: 'neutre : statu quo des départs anticipés'
+- id: PHI-RET-03
+  intitule: Capitalisation collective, PER abondé de 500 € dès le premier emploi
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.per_premier_emploi
+- id: PHI-RET-04
+  intitule: Contribution accrue des retraités ; niches fiscales supprimées avant toute hausse sur le travail
+  source: Adidas Arena, 05/07/2026
+  traitement: philippe_mesures.retraites_contribution
+- id: PHI-ENE-01
+  intitule: 8 EPR de plus que les 6 prévus, renouvelables
+  source: Site (« … plus conquérante »)
+  traitement: 'hors solde : financement par EDF'
+- id: PHI-ENE-02
+  intitule: Fonds chaleur étendu aux réseaux de froid
+  source: Site (« … plus conquérante »)
+  traitement: dans philippe_mesures.fonds_adaptation (faible)
+- id: PHI-CLI-01
+  intitule: Fonds unique d'adaptation de 2 Md€ par an, « DATAR 2.0 »
+  source: Site (« … plus conquérante »)
+  traitement: philippe_mesures.fonds_adaptation
+- id: PHI-CLI-02
+  intitule: Prix du carbone aux frontières de l'UE
+  source: Site (« … plus conquérante »)
+  traitement: hors budget national
+- id: PHI-CLI-03
+  intitule: Mêmes aides pour un véhicule électrique d'occasion que neuf
+  source: Site (« … plus conquérante »)
+  traitement: philippe_mesures.vehicules_occasion
+- id: PHI-CLI-04
+  intitule: Climatisation des lieux accueillant des personnes fragiles, arbres, urbanisme
+  source: Site (« … plus conquérante »)
+  traitement: 'non chiffré : réglementation, budgets existants'
+- id: PHI-CLI-05
+  intitule: Plan national baignade
+  source: Site (« … plus conquérante »)
+  traitement: philippe_mesures.baignade_fret
+- id: PHI-CLI-06
+  intitule: Grand plan de fret ferroviaire
+  source: Adidas Arena, 05/07/2026
+  traitement: dans philippe_mesures.baignade_fret
+- id: PHI-CLI-07
+  intitule: Assurance du risque climatique réformée
+  source: Site (« … plus conquérante »)
+  traitement: philippe_mesures.assurance_climat
+- id: PHI-CLI-08
+  intitule: Investissement massif dans la capture du carbone
+  source: Site (« … plus conquérante »)
+  traitement: philippe_mesures.capture_carbone
+- id: PHI-AGR-01
+  intitule: Pas de surtransposition, développement agricole dans la Charte de l'environnement
+  source: Site (« Pour une France plus prospère »)
+  traitement: non chiffré
+- id: PHI-AGR-02
+  intitule: 100 territoires de souveraineté alimentaire, transmission des exploitations
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.agriculture
+- id: PHI-AGR-03
+  intitule: Stockage d'eau agricole, 10 % d'eaux usées réutilisées
+  source: Site (« … plus conquérante »)
+  traitement: dans philippe_mesures.agriculture
+- id: PHI-AGR-04
+  intitule: « Choc de compétitivité agricole »
+  source: Les Terres de Jim, 12/09/2026
+  traitement: 'non chiffré : contenu non détaillé'
+- id: PHI-LOG-01
+  intitule: Prêt à taux zéro à chaque naissance
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: philippe_mesures.ptz_naissance
+- id: PHI-LOG-02
+  intitule: Droits des bailleurs renforcés, pression fiscale réduite, pas d'encadrement des loyers
+  source: Congrès de la FNAIM, 10/12/2025
+  traitement: philippe_mesures.bailleurs
+- id: PHI-SAN-01
+  intitule: Dépenses de santé stabilisées par la prévention et la technologie
+  source: Site (« Pour une France plus prospère »)
+  traitement: 'non repris : objectif d''économies'
+- id: PHI-SAN-02
+  intitule: Formation des médecins, prévention, IA en santé
+  source: Discours de Reims, 10/05/2026
+  traitement: philippe_mesures.medecins_ia
+- id: PHI-SAN-03
+  intitule: Hôpitaux hors CHU modernisés
+  source: Adidas Arena, 05/07/2026
+  traitement: dans philippe_mesures.medecins_ia
+- id: PHI-SAN-04
+  intitule: Santé mentale à l'école
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: philippe_mesures.sante_mentale
+- id: PHI-EDU-01
+  intitule: Rémunération moyenne des enseignants +20 % sur le quinquennat, écoles normales
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: philippe_mesures.enseignants
+- id: PHI-EDU-02
+  intitule: Autonomie des chefs d'établissement
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: non chiffré
+- id: PHI-EDU-03
+  intitule: 'Soutien scolaire universel : assistant IA et bénévoles'
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: philippe_mesures.soutien_scolaire
+- id: PHI-EDU-04
+  intitule: Téléphones interdits à l'école et au collège
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: non chiffré
+- id: PHI-EDU-05
+  intitule: Primaire recentré sur les fondamentaux, effectifs réduits
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: philippe_mesures.effectifs_primaire
+- id: PHI-EDU-06
+  intitule: Rentrée avancée pour les établissements volontaires
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: non chiffré
+- id: PHI-EDU-07
+  intitule: Amende de responsabilisation des parents
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: 'non chiffré : recette faible'
+- id: PHI-EDU-08
+  intitule: Évaluations des établissements publiées
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: non chiffré
+- id: PHI-EDU-09
+  intitule: Orientation et carrière des enseignants, formation à l'IA
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: dans philippe_mesures.enseignants
+- id: PHI-EDU-10
+  intitule: Apprentissages le matin, vacances réduites (réflexion)
+  source: franceinfo, 16/10/2026
+  traitement: non chiffré
+- id: PHI-SEC-01
+  intitule: Courtes peines dès la première infraction, peines planchers
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.justice
+- id: PHI-SEC-02
+  intitule: Juge d'application des peines supprimé, garde des Sceaux renforcé sur le parquet
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-SEC-03
+  intitule: « État d'urgence narco »
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-SEC-04
+  intitule: Pouvoir de sanction pénale des maires
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-SEC-05
+  intitule: Magistrats issus d'autres métiers du droit, réforme du CSM
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-SEC-06
+  intitule: « Fiche S financière », amendes recouvrées sur les prestations, opérations « place nette »
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.amendes
+- id: PHI-SEC-07
+  intitule: Plan anticorruption, DGSI sur le narcotrafic
+  source: Site (« … plus sûre »)
+  traitement: 'non chiffré : moyens existants'
+- id: PHI-SEC-08
+  intitule: Canadairs construits en France, réserves communales, premiers secours
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.canadairs
+- id: PHI-SEC-09
+  intitule: Juges de paix recréés
+  source: Congrès d'Horizons, 17/05/2025
+  traitement: dans philippe_mesures.justice
+- id: PHI-IMM-01
+  intitule: Immigration divisée par deux, quotas économiques
+  source: L'Heure de vérité, 08/10/2026
+  traitement: 'non chiffré : effet budgétaire incertain'
+- id: PHI-IMM-02
+  intitule: Accord franco-algérien de 1968 dénoncé
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-IMM-03
+  intitule: Regroupement familial suspendu
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-IMM-04
+  intitule: Liste des pays sûrs votée, expulsion des délinquants étrangers
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-IMM-05
+  intitule: Aides sociales aux étrangers alignées sur la moyenne européenne
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.aides_etrangers
+- id: PHI-IMM-06
+  intitule: « Verrou Schengen »
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-IMM-07
+  intitule: Centres de retour, ressources des étudiants, droits d'inscription appliqués
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.droits_etudiants
+- id: PHI-INS-01
+  intitule: Dissolution et une vingtaine d'ordonnances dès juillet 2027
+  source: CNews, 08/10/2026
+  traitement: non chiffré
+- id: PHI-INS-02
+  intitule: Règle d'or budgétaire par référendum
+  source: Site (« Pour une France plus prospère »)
+  traitement: 'non chiffré : règle de pilotage'
+- id: PHI-UE-01
+  intitule: Marché unique achevé
+  source: Site (« Pour une France plus prospère »)
+  traitement: non chiffré
+- id: PHI-UE-02
+  intitule: Union des marchés de capitaux
+  source: Site (« Pour une France plus prospère »)
+  traitement: non chiffré
+- id: PHI-UE-03
+  intitule: Exigences envers les acteurs chinois dans les secteurs stratégiques
+  source: Site (« Pour une France plus prospère »)
+  traitement: non chiffré
+- id: PHI-UE-04
+  intitule: Liste noire européenne des pays de la drogue
+  source: Plan narcotrafic d'Horizons, 21/05/2026
+  traitement: non chiffré
+- id: PHI-INT-01
+  intitule: Troupes européennes en Ukraine après la paix, adhésion à l'OTAN
+  source: Europe 1, 26/05/2026
+  traitement: 'non chiffré : coût d''un déploiement selon l''accord de paix'
+- id: PHI-INT-02
+  intitule: Réservistes de 45 000 à 250 000, service militaire volontaire de 3 000 à 50 000 places, nouvelle LPM
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.reservistes et service_militaire
+- id: PHI-INT-02b
+  intitule: Service militaire volontaire de 3 000 à 50 000 places
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.service_militaire
+- id: PHI-INT-03
+  intitule: Plus de 100 000 obus par an, drones tactiques
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.munitions
+- id: PHI-NUM-01
+  intitule: Infrastructure d'IA souveraine, calcul doublé en cinq ans
+  source: Site (« … plus conquérante »)
+  traitement: philippe_mesures.ia_calcul
+- id: PHI-NUM-02
+  intitule: « Buy European Tech Act », achats groupés
+  source: Site (« … plus conquérante »)
+  traitement: non chiffré
+- id: PHI-NUM-03
+  intitule: 100 000 ingénieurs par an, droit à la reconversion
+  source: Site (« … plus conquérante »)
+  traitement: philippe_mesures.ingenieurs
+- id: PHI-OM-01
+  intitule: Asile suspendu à Mayotte et en Guyane
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-OM-02
+  intitule: Droit du sol suspendu à Mayotte
+  source: Site (« … plus sûre »)
+  traitement: non chiffré
+- id: PHI-OM-03
+  intitule: Navires de la Marine aux Antilles doublés
+  source: Site (« … plus sûre »)
+  traitement: philippe_mesures.marine_antilles
+- id: PHI-OM-04
+  intitule: Opérations Harpie élargies
+  source: Plan narcotrafic d'Horizons, 21/05/2026
+  traitement: dans philippe_mesures.marine_antilles
+- id: PHI-TER-01
+  intitule: Un départ en retraite sur trois non remplacé (250 000 postes)
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.postes_*
+- id: PHI-TER-02
+  intitule: Agences et opérateurs fusionnés, privatisés ou supprimés
+  source: Site (« Pour une France plus prospère »)
+  traitement: philippe_mesures.agences
+- id: PHI-TER-03
+  intitule: État recentré sur le régalien, climat décentralisé, IA dans les décisions
+  source: Adidas Arena, 05/07/2026
+  traitement: non chiffré
+- id: PHI-SOC-01
+  intitule: Allocation familiale unique dès le premier enfant (350 € pour les modestes), à coût constant
+  source: L'Heure de vérité, 08/10/2026
+  traitement: 'neutre : à coût constant (redistribution entre familles)'
+- id: PHI-SOC-02
+  intitule: Temps partiel parental à 80 % payé 100 % pendant deux mois
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: philippe_mesures.temps_partiel_parental
+- id: PHI-SOC-03
+  intitule: Inspection nationale de l'enfance
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: philippe_mesures.inspection_enfance
+- id: PHI-SOC-04
+  intitule: Principe de précaution pénal, imprescriptibilité des crimes sur mineurs
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: non chiffré
+- id: PHI-SOC-05
+  intitule: 'Périscolaire : honorabilité, responsable formé'
+  source: Site (« … plus attentive à ses enfants »)
+  traitement: non chiffré

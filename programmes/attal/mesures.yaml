@@ -1,0 +1,441 @@
+# Programme de Gabriel Attal (Renaissance) : fiche des mesures (7 novembre 2026)
+#
+# Les 106 mesures recensées par programmes-2027.fr, leur source et leur traitement dans le chiffrage.
+
+programme:
+  candidat: Gabriel Attal
+  parti: Renaissance
+  document: site attalpresident.fr, Lettre aux Français sur les finances publiques (15/10/2026), entretiens et discours de
+    2026
+  recensement: https://programmes-2027.fr/candidats/attal/ (106 mesures)
+  date_lecture: '2026-11-07'
+  avertissement: pas de programme complet au 6/11/2026 ; les mesures tirées seulement des conventions et pétitions de Renaissance
+    (2025) sont des propositions du parti, non chiffrées
+mesures:
+- id: ATT-ECO-01
+  intitule: 'Droit au brut : +250 € net par mois au salaire médian (cotisations salariales supprimées)'
+  source: Site du candidat, Le Télégramme, 22/07/2026
+  traitement: 'calculé : attal_droit_au_brut'
+- id: ATT-ECO-02
+  intitule: 'Carburant : barème kilométrique, bonus électrique d''occasion, boîtier E85, prime carburant à 1 000 €'
+  source: Site du candidat, « Messmer II », 23/09/2026
+  traitement: attal_mesures.carburant ; bonus et E85 dans attal_mesures.vehicules
+- id: ATT-ECO-03
+  intitule: Taxes sur les produits chinois vendus à perte, contrôle des investissements chinois
+  source: Site du candidat, chantier « Frontières »
+  traitement: 'non chiffré : droits de douane européens'
+- id: ATT-ECO-04
+  intitule: Statut « Auto-TPE » pour le premier salarié, intéressement des petites entreprises, « test PME »
+  source: Site du candidat, Bretagne, 24/07/2026
+  traitement: attal_mesures.auto_tpe
+- id: ATT-FIS-01
+  intitule: Frein d'urgence de 20 Md€, 150 Md€ d'économies, Sécurité sociale à l'équilibre en trois ans, déficit sous 3 %
+    avant 2032
+  source: Lettre aux Français sur les finances publiques, p. 1, 15/10/2026
+  traitement: 'non repris : objectifs d''économies sans mesures (règle : on ne reprend que les mesures nommées)'
+- id: ATT-FIS-02
+  intitule: Pas de hausse d'impôts, retour sur plusieurs taxes votées depuis 2024, baisse des impôts de production poursuivie,
+    loi de programmation fiscale
+  source: Site du candidat, Le Parisien, 03/07/2026
+  traitement: 'attal_mesures.taxes_2024 (impôts de production : attal_mesures.cvae)'
+- id: ATT-FIS-03
+  intitule: « Année blanche » de 2028 (petites retraites protégées), réformes de l'assurance chômage, des retraites et des
+    arrêts maladie
+  source: Site du candidat, Le Parisien, 03/07/2026
+  traitement: 'calculé : attal_annee_blanche ; attal_mesures.ij_maladie ; assurance chômage : ATT-EMP-01'
+- id: ATT-FIS-04
+  intitule: Pas de hausse des droits de succession, donations du vivant facilitées
+  source: Site du candidat, Assises de l'AFER, 29/09/2026
+  traitement: attal_mesures.donations
+- id: ATT-FIS-05
+  intitule: Règle d'or constitutionnelle, dépenses courantes sous les dépenses d'avenir
+  source: Lettre aux Français, p. 2, 15/10/2026
+  traitement: 'non chiffré : règle de pilotage'
+- id: ATT-FIS-06
+  intitule: CVAE supprimée ; loi de stabilité fiscale (CIR et pacte Dutreil garantis)
+  source: Site du candidat, REF, 27/08/2026
+  traitement: 'attal_mesures.cvae et cvae_2029 (CIR et Dutreil : statu quo)'
+- id: ATT-EMP-01
+  intitule: Réforme de l'assurance chômage de 2024 reprise (100 000 emplois et 5 Md€ annoncés)
+  source: Site du candidat, Le Parisien, 03/07/2026
+  traitement: attal_mesures.assurance_chomage et attal_chomage (annonces non reprises)
+- id: ATT-EMP-02
+  intitule: Code du travail réécrit autour de principes fondamentaux
+  source: Site du candidat, chantier « Travail & salaires »
+  traitement: 'non chiffré : droit du travail'
+- id: ATT-EMP-03
+  intitule: Contingent d'heures supplémentaires supprimé, semaine de quatre jours
+  source: Site du candidat, chantier « Travail & salaires »
+  traitement: 'non chiffré : effet faible (contingent rarement contraignant)'
+- id: ATT-EMP-04
+  intitule: Testing, fourchettes de salaire dans les offres, audits des algorithmes de recrutement
+  source: Site du candidat, Lyon, 11/10/2026
+  traitement: 'non chiffré : réglementation'
+- id: ATT-EMP-05
+  intitule: Contrat entre chaque lycéen professionnel et une entreprise
+  source: Site du candidat, Lyon, 11/10/2026
+  traitement: attal_mesures.lycee_pro
+- id: ATT-RET-01
+  intitule: Système universel en trois régimes sans âge légal, durée fixée par les partenaires sociaux
+  source: Site du candidat, Blois et Bourges, 05/10/2026
+  traitement: 'neutre : paramètres non fixés, pilotage par les partenaires sociaux ; statu quo des âges gardé'
+- id: ATT-RET-02
+  intitule: Plan d'épargne retraite de 1 000 € versé par l'État à chaque naissance
+  source: Site du candidat, AFER, 29/09/2026
+  traitement: attal_mesures.per_naissance
+- id: ATT-RET-03
+  intitule: Moitié de l'intéressement et de la participation vers l'épargne retraite
+  source: Site du candidat, AFER, 29/09/2026
+  traitement: 'non chiffré : fléchage d''une épargne déjà exonérée'
+- id: ATT-RET-04
+  intitule: Compte individuel, fonds de capitalisation, crédit d'impôt pour les foyers modestes
+  source: Pétition de Renaissance (2025)
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-ENE-01
+  intitule: 'Plan « Messmer II » : fossiles de 60 % à 40 %, puis sous 30 % en 2035'
+  source: Site du candidat, 23/09/2026
+  traitement: 'non chiffré : objectif ; effets d''émissions à sourcer'
+- id: ATT-ENE-02
+  intitule: 14 EPR, un réacteur par an, renouvelables accélérés
+  source: Site du candidat, 23/09/2026
+  traitement: 'hors solde : financement par EDF et prêt de l''État'
+- id: ATT-ENE-03
+  intitule: Électricité à ≈ 75 €/MWh, contrats sous 50 €/MWh pour l'industrie exposée
+  source: Site du candidat, 23/09/2026
+  traitement: 'hors solde : régulation et contrats d''EDF'
+- id: ATT-ENE-04
+  intitule: 'Géothermie : capacités ×5 d''ici 2035, fonds doublé à 160 M€ par an'
+  source: Site du candidat, 25/06/2026
+  traitement: attal_mesures.geothermie
+- id: ATT-ENE-05
+  intitule: Voiture électrique française à 10 000 €, leasing pour les travailleurs de première ligne, bornes
+  source: Site du candidat, Lyon, 11/10/2026
+  traitement: attal_mesures.vehicules
+- id: ATT-CLI-01
+  intitule: Émissions divisées par deux en dix ans
+  source: Site du candidat, Paris, 31/05/2026
+  traitement: 'non chiffré : objectif'
+- id: ATT-CLI-02
+  intitule: 'Plan eau : 500 réseaux réparés, réutilisation des eaux usées, ministère de l''Eau'
+  source: Site du candidat, Argelès-sur-Mer, 10/08/2026
+  traitement: attal_mesures.plan_eau
+- id: ATT-CLI-03
+  intitule: Relance minière, 30 % de recyclage, recherche sur la fusion
+  source: Site du candidat, 23/09/2026
+  traitement: 'non chiffré : surtout privé'
+- id: ATT-CLI-04
+  intitule: « Droit à la climatisation »
+  source: Site du candidat, 25/06/2026
+  traitement: 'non chiffré : réglementation'
+- id: ATT-CLI-05
+  intitule: Dépistage des PFAS, pollueur-payeur, sanctions sécheresse
+  source: Site du candidat, 10/08/2026
+  traitement: 'non chiffré : réglementation'
+- id: ATT-CLI-06
+  intitule: Zones à faibles émissions pour les villes volontaires, leasing social d'occasion
+  source: Convention de Renaissance « Nouvelle donne », p. 65, 21/07/2025
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-AGR-01
+  intitule: Interdiction de vendre sous les coûts de production
+  source: Site du candidat, 05/10/2026
+  traitement: 'non chiffré : réglementation'
+- id: ATT-AGR-02
+  intitule: Normes agricoles alignées sur l'Europe, PTZ d'adaptation
+  source: Site du candidat, 05/10/2026
+  traitement: 'non chiffré : prêts, effet budgétaire faible'
+- id: ATT-AGR-03
+  intitule: Prix planchers et contrats de 3 à 5 ans
+  source: Site du candidat, Jeunes Agriculteurs, 04/06/2026
+  traitement: 'non chiffré : réglementation'
+- id: ATT-AGR-04
+  intitule: Opposition au Mercosur, clauses miroirs
+  source: Site du candidat, 04/06/2026
+  traitement: non chiffré
+- id: ATT-AGR-05
+  intitule: 'Renouvellement des générations : transmission, portage du foncier'
+  source: Site du candidat, 04/06/2026
+  traitement: attal_mesures.transmission_agricole
+- id: ATT-LOG-01
+  intitule: Loi de programmation du logement et de la rénovation énergétique
+  source: Site du candidat, 29/09/2026
+  traitement: attal_mesures.renovation
+- id: ATT-LOG-02
+  intitule: Garantie universelle des loyers, résidences universitaires
+  source: Site du candidat, 05/10/2026
+  traitement: attal_mesures.logement_garantie
+- id: ATT-LOG-03
+  intitule: Statut du bailleur privé, construction simplifiée, accession des locataires HLM
+  source: Site du candidat, REF, 27/08/2026
+  traitement: attal_mesures.bailleur_prive
+- id: ATT-LOG-04
+  intitule: 'Surélévation et division de parcelles : jusqu''à 500 000 logements'
+  source: Convention de Renaissance « Nouvelle donne », p. 79
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-SAN-01
+  intitule: 20 000 médecins formés, compétences des autres professions élargies
+  source: Site du candidat, 05/10/2026
+  traitement: attal_mesures.medecins
+- id: ATT-SAN-02
+  intitule: Assistant médical fondé sur l'IA commandé par l'État
+  source: Site du candidat, POLITICO, 24/09/2026
+  traitement: attal_mesures.ia_sante
+- id: ATT-SAN-03
+  intitule: Deux bilans de santé mentale par enfant
+  source: Convention de Renaissance régalienne, p. 14, 26/05/2025
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-SAN-04
+  intitule: Aide à mourir encadrée, investissement massif dans les soins palliatifs
+  source: Site du candidat, 15/07/2026
+  traitement: attal_mesures.palliatifs
+- id: ATT-EDU-01
+  intitule: Enseignants +200 € net par mois, jusqu'à +500 € en milieu de carrière
+  source: Site du candidat, Le Monde, 25/08/2026
+  traitement: attal_mesures.enseignants
+- id: ATT-EDU-02
+  intitule: Moins de 20 élèves par classe en primaire, financé par la baisse démographique
+  source: Site du candidat, chantier « École »
+  traitement: 'neutre : postes gardés pris sur les suppressions de la baisse démographique (le statu quo garde le taux d''encadrement)'
+- id: ATT-EDU-03
+  intitule: Certificat d'études à l'entrée en 6e, brevet obligatoire pour la seconde
+  source: Site du candidat, 25/08/2026
+  traitement: 'non chiffré : année passerelle à moyens constants'
+- id: ATT-EDU-04
+  intitule: 100 collèges les plus en difficulté fermés, groupes de niveau
+  source: Site du candidat, 25/08/2026
+  traitement: neutre
+- id: ATT-EDU-05
+  intitule: Loi de programmation pour l'École dès 2027
+  source: Site du candidat, 25/08/2026
+  traitement: dans attal_mesures.enseignants
+- id: ATT-EDU-06
+  intitule: Assistant IA pour chaque élève, enseignants formés à l'IA, « plan Voltaire »
+  source: Site du candidat, 25/08/2026
+  traitement: attal_mesures.ia_ecole
+- id: ATT-EDU-07
+  intitule: Corps professionnel des AESH
+  source: Site du candidat, France 2, 01/09/2026
+  traitement: attal_mesures.aesh
+- id: ATT-EDU-08
+  intitule: Licences et masters évalués tous les trois ans, Parcoursup réformé
+  source: Site du candidat, France Info, 15/10/2026
+  traitement: non chiffré
+- id: ATT-EDU-09
+  intitule: Conseil de discipline dès le primaire
+  source: Site du candidat, RTL, 01/06/2026
+  traitement: non chiffré
+- id: ATT-EDU-10
+  intitule: Redoublement redevenu ordinaire
+  source: Site du candidat, 23/05/2026
+  traitement: 'non chiffré : coût d''une année en plus faible au départ'
+- id: ATT-EDU-11
+  intitule: Méthode de Singapour généralisée
+  source: Site du candidat, 23/05/2026
+  traitement: non chiffré
+- id: ATT-EDU-12
+  intitule: Remplacement des absents par les établissements, remplaçants recréés grâce à la baisse des effectifs
+  source: Site du candidat, 01/09/2026
+  traitement: neutre
+- id: ATT-SEC-01
+  intitule: Juge de l'application des peines supprimé, loi d'exception pour les places de prison
+  source: Site du candidat, Le Figaro, 12/06/2026
+  traitement: dans attal_mesures.justice
+- id: ATT-SEC-02
+  intitule: Parquet national contre la pédocriminalité, 3 000 magistrats et greffiers
+  source: Site du candidat, Le Figaro, 12/06/2026
+  traitement: attal_mesures.justice
+- id: ATT-SEC-03
+  intitule: Comparution immédiate des mineurs, excuse de minorité atténuée
+  source: Site du candidat, BFM TV, 10/06/2026
+  traitement: non chiffré
+- id: ATT-SEC-04
+  intitule: 'Gens du voyage : registre, saisie des véhicules, délit de maintien illicite'
+  source: Site du candidat, Vendée, 04/08/2026
+  traitement: non chiffré
+- id: ATT-SEC-05
+  intitule: Police municipale obligatoire au-delà de 10 000 habitants
+  source: Convention de Renaissance régalienne, p. 20
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-SEC-06
+  intitule: 'Sécurité civile : hélicoptères et avions bombardiers d''eau'
+  source: Site du candidat, La Grande-Motte, 13/08/2026
+  traitement: attal_mesures.securite_civile
+- id: ATT-SEC-07
+  intitule: Seconde loi contre l'entrisme islamiste
+  source: Convention de Renaissance régalienne, p. 63
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-IMM-01
+  intitule: Quotas par métier, origine et nationalité votés tous les deux ans
+  source: Site du candidat, LCI, 25/08/2026
+  traitement: non chiffré
+- id: ATT-IMM-02
+  intitule: « Préférence travail » dans la Constitution, moins d'immigration familiale et étudiante
+  source: Site du candidat, LCI, 25/08/2026
+  traitement: 'non chiffré : effet budgétaire incertain'
+- id: ATT-IMM-03
+  intitule: Immigration à points
+  source: Site du candidat, chantier « Frontières »
+  traitement: non chiffré
+- id: ATT-IMM-04
+  intitule: 'Regroupement familial : 24 mois de présence'
+  source: Convention de Renaissance régalienne, p. 53
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-IMM-05
+  intitule: Fin des prestations à l'expiration du titre, 3 000 places de rétention
+  source: Convention de Renaissance régalienne, p. 53
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-IMM-06
+  intitule: Droit du sol maintenu
+  source: Convention de Renaissance régalienne, p. 51
+  traitement: 'proposition du parti : neutre'
+- id: ATT-INS-01
+  intitule: Réforme institutionnelle par référendum (projets, recours, maires)
+  source: Site du candidat, JDD, 02/08/2026
+  traitement: non chiffré
+- id: ATT-INS-02
+  intitule: Journée référendaire annuelle
+  source: Site du candidat, JDD, 02/08/2026
+  traitement: 'non chiffré : coût faible'
+- id: ATT-INS-03
+  intitule: Règle d'or par référendum, démission du gouvernement après trois années de dérive
+  source: Site du candidat, Le Parisien, 03/07/2026
+  traitement: 'non chiffré : règle de pilotage'
+- id: ATT-INS-04
+  intitule: « Spoils system » à la française
+  source: Site du candidat, JDD, 02/08/2026
+  traitement: non chiffré
+- id: ATT-INS-05
+  intitule: Inéligibilité des parlementaires ayant voté des budgets très endettants
+  source: Site du candidat, Le Parisien, 03/07/2026
+  traitement: non chiffré
+- id: ATT-INS-06
+  intitule: Convention de 150 jeunes tirés au sort
+  source: Site du candidat, Lyon, 10/10/2026
+  traitement: 'non chiffré : coût faible'
+- id: ATT-UE-01
+  intitule: « États-Unis d'Europe » avec un noyau de pays volontaires
+  source: Discours de Reims, p. 18, 17/09/2026
+  traitement: hors budget national
+- id: ATT-UE-02
+  intitule: Union bancaire et des marchés de capitaux, dette commune pour le climat
+  source: Discours de Reims, p. 15
+  traitement: hors solde national (emprunt européen)
+- id: ATT-UE-03
+  intitule: Politique commune de l'IA financée par un endettement commun
+  source: Site du candidat, Les Échos, 17/06/2026
+  traitement: hors solde national
+- id: ATT-UE-04
+  intitule: Référendum européen
+  source: Discours de Reims, p. 20
+  traitement: non chiffré
+- id: ATT-UE-05
+  intitule: Arme de dissuasion commerciale, Trésor européen, convergence fiscale
+  source: Discours de Reims, p. 16
+  traitement: hors budget national
+- id: ATT-UE-06
+  intitule: Nouvelle relation avec le Royaume-Uni, Europe des coalitions
+  source: Site du candidat, Le Figaro, 24/06/2026
+  traitement: non chiffré
+- id: ATT-UE-07
+  intitule: Douze grands projets européens
+  source: Discours de Reims, p. 13
+  traitement: hors budget national
+- id: ATT-INT-01
+  intitule: Avoirs russes saisis pour l'Ukraine, défense sol-air européenne
+  source: Site du candidat, POLITICO, 24/09/2026
+  traitement: hors solde
+- id: ATT-INT-02
+  intitule: Livre blanc de la défense, drones et IA, DARPA européenne
+  source: Site du candidat, Aix-en-Provence, 03/07/2026
+  traitement: 'dans la LPM (statu quo) : pas d''enveloppe en plus annoncée'
+- id: ATT-INT-03
+  intitule: Dépendance extra-européenne des armées divisée par deux, « dôme de fer » européen
+  source: Site du candidat, Eurosatory, 16/06/2026
+  traitement: dans la LPM (statu quo)
+- id: ATT-INT-04
+  intitule: Fonds en fonds propres pour les PME de défense, SCAF préservé
+  source: Site du candidat, 03/07/2026
+  traitement: 'hors solde : prises de participation'
+- id: ATT-INT-05
+  intitule: Sanctions contre l'Iran maintenues
+  source: Site du candidat, France Info, 18/06/2026
+  traitement: non chiffré
+- id: ATT-INT-06
+  intitule: Frappes en profondeur de l'Ukraine avec les armes livrées
+  source: Site du candidat, LCI, 25/08/2026
+  traitement: non chiffré
+- id: ATT-INT-07
+  intitule: Part européenne des achats de défense dès le premier budget
+  source: Site du candidat, 17/09/2026
+  traitement: 'neutre : à enveloppe constante'
+- id: ATT-NUM-01
+  intitule: 'Plan « France 2040 » : 200 Md€ pour l''IA et l''innovation, moitié public'
+  source: Site du candidat, Les Échos, 17/06/2026
+  traitement: attal_mesures.france_2040
+- id: ATT-NUM-02
+  intitule: 20 millions de salariés formés à l'IA, financés par les entreprises, le CPF et France Travail
+  source: Site du candidat, 05/10/2026
+  traitement: 'neutre : budgets existants'
+- id: ATT-NUM-03
+  intitule: Référendum sur l'interdiction des réseaux sociaux avant 15 ans
+  source: Site du candidat, La Tribune Dimanche, 16/08/2026
+  traitement: non chiffré
+- id: ATT-NUM-04
+  intitule: Couvre-feu numérique, « addict-score », 2 % des revenus des plateformes
+  source: Pétition de Renaissance « Régulation des écrans »
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-NUM-05
+  intitule: Crédit d'impôt productivité IA pour les PME et ETI, électricité stable cinq ans
+  source: Site du candidat, Les Échos, 17/06/2026
+  traitement: attal_mesures.credit_ia
+- id: ATT-NUM-06
+  intitule: Régulation internationale de l'IA
+  source: Site du candidat, POLITICO, 24/09/2026
+  traitement: non chiffré
+- id: ATT-NUM-07
+  intitule: Transparence des algorithmes des plateformes
+  source: Site du candidat, LCI, 25/08/2026
+  traitement: non chiffré
+- id: ATT-TER-01
+  intitule: 100 000 postes supprimés dans l'État et les collectivités (Éducation, Armées, Justice, Intérieur sanctuarisés)
+  source: Site du candidat, Le Parisien, 03/07/2026
+  traitement: attal_mesures.postes_etat et postes_collectivites
+- id: ATT-TER-02
+  intitule: Un échelon de collectivités supprimé, doublons administratifs
+  source: Site du candidat, POLITICO, 24/09/2026
+  traitement: attal_mesures.echelon
+- id: ATT-TER-03
+  intitule: Assistant public Albert ouvert à tous, guichet « France entreprises »
+  source: Convention de Renaissance « Nouvelle donne », p. 21
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-TER-04
+  intitule: Permanences de gendarmerie en mairie, brigades mobiles
+  source: Convention de Renaissance régalienne, p. 26
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-SOC-01
+  intitule: 'Familles monoparentales : pensions alimentaires défiscalisées, versement automatique, carte famille'
+  source: Site du candidat, Université d'été, 28/08/2026
+  traitement: attal_mesures.monoparentales
+- id: ATT-SOC-02
+  intitule: Livret d'épargne pour financer des crèches, 200 000 professionnels formés d'ici 2030
+  source: Site du candidat, chantier « Travail & salaires »
+  traitement: 'non chiffré : épargne réglementée, formation sur budgets existants'
+- id: ATT-SOC-03
+  intitule: Attestation d'honorabilité généralisée
+  source: Site du candidat, BFM TV, 10/06/2026
+  traitement: non chiffré
+- id: ATT-SOC-04
+  intitule: Un mois d'engagement civique obligatoire avant 25 ans
+  source: Site du candidat, Lyon, 11/10/2026
+  traitement: attal_mesures.engagement
+- id: ATT-SOC-05
+  intitule: Protection animale
+  source: Site du candidat, SPA de Plaisir, 31/07/2026
+  traitement: non chiffré
+- id: ATT-SOC-06
+  intitule: Voile interdit aux enfants dans l'espace public
+  source: Convention de Renaissance régalienne, p. 61
+  traitement: 'proposition du parti : non chiffrée'
+- id: ATT-SOC-07
+  intitule: Droit opposable à la garde d'enfant, congé de naissance de six mois à 70 % du plafond
+  source: Convention de Renaissance « Nouvelle donne », p. 29
+  traitement: 'proposition du parti : non chiffrée (coût élevé, ≈ 5 à 10 Md€ ; à ajouter si le candidat la reprend)'

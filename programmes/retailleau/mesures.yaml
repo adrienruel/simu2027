@@ -1,0 +1,402 @@
+# Programme de Bruno Retailleau (Les Républicains) : fiche des mesures (7 novembre 2026)
+
+programme:
+  candidat: Bruno Retailleau
+  parti: Les Républicains
+  document: livrets « Nos propositions pour la France » (LR, 2026), entretiens et communiqués
+  recensement: https://programmes-2027.fr/candidats/retailleau/ (93 mesures)
+  date_lecture: '2026-11-07'
+  avertissement: pas de programme présidentiel consolidé au 6/11/2026
+mesures:
+- id: RET-ECO-01
+  intitule: Plan d'économies de 197 Md€ d'ici 2032, déficit sous 3 % en 2031
+  source: Public Sénat, 12/10/2026
+  traitement: 'non repris : objectif d''économies ; seules les mesures nommées sont chiffrées'
+- id: RET-ECO-02
+  intitule: « Zéro cotisation » au-delà de 1 623 heures par an
+  source: Le travail gagnant (09/01/2026), p. 20
+  traitement: retailleau_mesures.zero_cotisation
+- id: RET-ECO-03
+  intitule: 50 normes supprimées, seuils sociaux relevés
+  source: Produire plus pour vivre mieux (19/02/2026), p. 10
+  traitement: non chiffré
+- id: RET-ECO-04
+  intitule: Règle du « un pour un »
+  source: Produire plus pour vivre mieux (19/02/2026), p. 14
+  traitement: non chiffré
+- id: RET-ECO-05
+  intitule: Fonds France Production de 600 M€ par an
+  source: Produire plus pour vivre mieux (19/02/2026), p. 26
+  traitement: retailleau_mesures.france_production
+- id: RET-ECO-06
+  intitule: Au moins 30 Md€ par an restitués, moitié aux salariés, moitié aux entreprises
+  source: Le travail gagnant (09/01/2026), p. 36
+  traitement: 'calculé : retailleau_restitution (salariés) ; entreprises : retailleau_mesures.impots_production'
+- id: RET-FIS-01
+  intitule: Quatre impôts de production supprimés ou réduits (C3S, CVAE, CFE industrielle, ≈ 15 Md€)
+  source: Produire plus pour vivre mieux (19/02/2026), p. 20
+  traitement: retailleau_mesures.impots_production et cvae
+- id: RET-FIS-02
+  intitule: Droits de succession abaissés
+  source: L'Opinion, 26/08/2026
+  traitement: retailleau_mesures.successions
+- id: RET-FIS-02b
+  intitule: '« Choc de transmission » : 150 000 € par parent et par enfant sans droits pendant trois ans'
+  source: L'Opinion, 26/08/2026
+  traitement: retailleau_mesures.donations
+- id: RET-FIS-03
+  intitule: Droits de transmission d'entreprise payés à la cession
+  source: Produire plus pour vivre mieux (19/02/2026), p. 34
+  traitement: retailleau_mesures.transmission_entreprise
+- id: RET-FIS-04
+  intitule: Contribution patronale sur l'actionnariat salarié supprimée
+  source: L'IA au service des Français (07/07/2026), p. 15
+  traitement: retailleau_mesures.actionnariat
+- id: RET-EMP-01
+  intitule: Revenu d'incitation à l'activité à la place du RSA, de la prime d'activité et de l'ASS
+  source: Le travail gagnant (09/01/2026), p. 23
+  traitement: retailleau_mesures.ria
+- id: RET-EMP-02
+  intitule: Aides sociales plafonnées à 70 % du SMIC net
+  source: Le travail gagnant (09/01/2026), p. 29
+  traitement: retailleau_mesures.plafond_aides
+- id: RET-EMP-03
+  intitule: Assurance chômage resserrée (≈ 8 Md€ annoncés, plus 4 à 5 Md€ des règles de 2024)
+  source: Le travail gagnant (09/01/2026), p. 32
+  traitement: retailleau_mesures.assurance_chomage et retailleau_chomage (annonces non reprises)
+- id: RET-EMP-04
+  intitule: Code du travail refondé sur 50 principes
+  source: Produire plus pour vivre mieux (19/02/2026), p. 12
+  traitement: non chiffré
+- id: RET-EMP-05
+  intitule: Minimum de 24 heures du temps partiel supprimé
+  source: Le travail gagnant (09/01/2026), p. 24
+  traitement: non chiffré
+- id: RET-EMP-06
+  intitule: Statut de « co-entrepreneur » au-delà de 100 000 €
+  source: L'IA au service des Français (07/07/2026), p. 24
+  traitement: 'non chiffré : assurance privée'
+- id: RET-RET-01
+  intitule: Âge minimal de 63 ans, taux plein automatique à 65 ans, décote de 7 % par an
+  source: LCP, 23/09/2026
+  traitement: 'calculé : retailleau_retraites ; taux plein : retailleau_mesures.taux_plein_65'
+- id: RET-RET-01b
+  intitule: Taux plein automatique à 65 ans
+  source: LCP, 23/09/2026
+  traitement: retailleau_mesures.taux_plein_65
+- id: RET-RET-02
+  intitule: Part de capitalisation (1 % du salaire brut)
+  source: LCP, 23/09/2026
+  traitement: 'hors solde : épargne obligatoire hors régimes publics (coût du travail en plus non chiffré)'
+- id: RET-RET-03
+  intitule: Cotisations exonérées pour les seniors ayant tous leurs trimestres
+  source: Le travail gagnant (09/01/2026), p. 25
+  traitement: retailleau_mesures.seniors
+- id: RET-ENE-01
+  intitule: Relance du nucléaire, 8 EPR2 de plus
+  source: Électricité (07/05/2026), p. 14
+  traitement: 'hors solde : financement par EDF'
+- id: RET-ENE-02
+  intitule: Fin du soutien aux nouvelles capacités éoliennes et solaires, TVA normale sur le solaire
+  source: Électricité (07/05/2026), p. 21
+  traitement: retailleau_mesures.renouvelables et solaire_tva
+- id: RET-ENE-02b
+  intitule: TVA normale sur le solaire
+  source: Électricité (07/05/2026), p. 21
+  traitement: retailleau_mesures.solaire_tva
+- id: RET-ENE-03
+  intitule: Électricité sortie des CEE (factures −5 %)
+  source: Électricité (07/05/2026), p. 29
+  traitement: 'hors budget : obligation des fournisseurs'
+- id: RET-ENE-04
+  intitule: Parc nucléaire exploité 80 ans
+  source: Électricité (07/05/2026), p. 11
+  traitement: hors solde
+- id: RET-ENE-05
+  intitule: Réacteurs à neutrons rapides en 2045
+  source: Électricité (07/05/2026), p. 31
+  traitement: 'non chiffré : après l''horizon du quinquennat'
+- id: RET-ENE-06
+  intitule: Pas d'arrêt forcé d'un réacteur pour demande insuffisante
+  source: Électricité (07/05/2026), p. 24
+  traitement: non chiffré
+- id: RET-CLI-01
+  intitule: Principe de précaution retiré de la Charte de l'environnement
+  source: Réarmer notre agriculture (03/03/2026), p. 12
+  traitement: non chiffré
+- id: RET-CLI-02
+  intitule: Stockage de l'eau, réutilisation des eaux usées
+  source: Tribune, 09/08/2026
+  traitement: 'non chiffré : agences de l''eau'
+- id: RET-CLI-03
+  intitule: Ajustement carbone aux frontières étendu
+  source: Produire plus pour vivre mieux (19/02/2026), p. 25
+  traitement: hors budget national
+- id: RET-CLI-04
+  intitule: Moratoire de dix ans sur la RE2020
+  source: Se loger mieux et moins cher (28/05/2026), p. 16
+  traitement: non chiffré
+- id: RET-CLI-05
+  intitule: Prévention des incendies, avions bombardiers d'eau français
+  source: Communiqué, 24/07/2026
+  traitement: retailleau_mesures.securite_civile
+- id: RET-AGR-01
+  intitule: Agriculture intérêt fondamental de la Nation
+  source: Réarmer notre agriculture (03/03/2026), p. 11
+  traitement: non chiffré
+- id: RET-AGR-02
+  intitule: OFB supprimé, autorisations phytosanitaires reconnues
+  source: Réarmer notre agriculture (03/03/2026), p. 9
+  traitement: retailleau_mesures.ofb
+- id: RET-AGR-03
+  intitule: Néonicotinoïdes réautorisés, Écophyto abandonné
+  source: Réarmer notre agriculture (03/03/2026), p. 17
+  traitement: non chiffré
+- id: RET-AGR-04
+  intitule: PTGE supprimés
+  source: Réarmer notre agriculture (03/03/2026), p. 19
+  traitement: non chiffré
+- id: RET-AGR-05
+  intitule: Forfait « petit agriculteur » de la PAC porté à 3 000 €
+  source: Réarmer notre agriculture (03/03/2026), p. 32
+  traitement: 'neutre : enveloppe européenne redistribuée'
+- id: RET-AGR-06
+  intitule: Étiquetage de l'origine, « Rémunéra-score »
+  source: Réarmer notre agriculture (03/03/2026), p. 27
+  traitement: non chiffré
+- id: RET-LOG-01
+  intitule: ZAN supprimé, 450 000 logements par an
+  source: Se loger mieux et moins cher (28/05/2026), p. 8
+  traitement: 'non chiffré (versement aux communes : retailleau_mesures.tva_communes)'
+- id: RET-LOG-02
+  intitule: Fin des interdictions de louer liées au DPE et de l'encadrement des loyers
+  source: Se loger mieux et moins cher (28/05/2026), p. 8
+  traitement: non chiffré
+- id: RET-LOG-03
+  intitule: Intérêts d'emprunt de la résidence principale déductibles selon le nombre d'enfants
+  source: Se loger mieux et moins cher (28/05/2026), p. 8
+  traitement: retailleau_mesures.interets_emprunt
+- id: RET-LOG-04
+  intitule: Quotas SRU remplacés par des contrats territoriaux
+  source: Se loger mieux et moins cher (28/05/2026), p. 39
+  traitement: non chiffré
+- id: RET-LOG-05
+  intitule: Logement social recentré sur les actifs et les familles
+  source: Se loger mieux et moins cher (28/05/2026), p. 41
+  traitement: non chiffré
+- id: RET-LOG-06
+  intitule: Statut du bailleur privé (amortissement de 4 %, PFU)
+  source: Se loger mieux et moins cher (28/05/2026), p. 33
+  traitement: retailleau_mesures.bailleur_prive
+- id: RET-SAN-01
+  intitule: Jour de carence d'ordre public dans le privé (4 Md€ d'économies sur les arrêts maladie annoncés)
+  source: Public Sénat, 12/10/2026
+  traitement: retailleau_mesures.ij_maladie (annonce non reprise)
+- id: RET-SAN-02
+  intitule: IA médicales entraînées sur les données nationales
+  source: L'IA au service des Français (07/07/2026), p. 4
+  traitement: non chiffré
+- id: RET-EDU-01
+  intitule: 'Professeurs : +135 € net en début de carrière, ≈ +300 € en milieu'
+  source: Éducation (03/09/2026), p. 10
+  traitement: retailleau_mesures.enseignants
+- id: RET-EDU-02
+  intitule: Examen d'entrée en sixième, groupes de niveau, note chiffrée
+  source: Éducation (03/09/2026), p. 15
+  traitement: non chiffré
+- id: RET-EDU-03
+  intitule: 1 000 établissements innovants, apprentissage dès 14 ans
+  source: Éducation (03/09/2026), p. 7
+  traitement: retailleau_mesures.etablissements
+- id: RET-EDU-04
+  intitule: Une École normale du professorat par académie
+  source: Éducation (03/09/2026), p. 11
+  traitement: retailleau_mesures.ecoles_normales
+- id: RET-EDU-05
+  intitule: Vacances réduites de seize à quatorze semaines
+  source: Éducation (03/09/2026), p. 16
+  traitement: non chiffré
+- id: RET-EDU-06
+  intitule: Zéro écran au primaire, téléphone interdit jusqu'au lycée
+  source: Éducation (03/09/2026), p. 33
+  traitement: non chiffré
+- id: RET-SEC-01
+  intitule: Peines minimales obligatoires (Charte de l'ordre républicain)
+  source: Entretien au Figaro (02/09/2026)
+  traitement: dans retailleau_mesures.securite
+- id: RET-SEC-02
+  intitule: « État d'urgence anti-trafics » dans 50 à 60 quartiers
+  source: Defense-92, 24/04/2026
+  traitement: retailleau_mesures.securite
+- id: RET-SEC-03
+  intitule: Cour disciplinaire des magistrats
+  source: Entretien, 06/06/2026
+  traitement: non chiffré
+- id: RET-SEC-04
+  intitule: Expulsion des squatteurs sous dix jours
+  source: Se loger mieux et moins cher (28/05/2026), p. 36
+  traitement: 'non chiffré : indemnisation par l''État faible'
+- id: RET-SEC-05
+  intitule: Contrôle des adultes au contact d'enfants
+  source: Éducation (03/09/2026), p. 34
+  traitement: non chiffré
+- id: RET-SEC-06
+  intitule: Vision par ordinateur pour la sécurité
+  source: L'IA au service des Français (07/07/2026), p. 37
+  traitement: non chiffré
+- id: RET-IMM-01
+  intitule: Référendum pour réduire fortement l'immigration
+  source: Déclaration de candidature, 12/02/2026
+  traitement: non chiffré
+- id: RET-IMM-02
+  intitule: Droit du sol aboli, fin des naturalisations automatiques
+  source: Entretien au Figaro (02/09/2026)
+  traitement: non chiffré
+- id: RET-IMM-03
+  intitule: Cinq ans de résidence et d'activité pour les prestations non contributives
+  source: Tribune, 02/05/2026
+  traitement: retailleau_mesures.prestations_residence
+- id: RET-IMM-04
+  intitule: Hébergement d'urgence réservé au séjour régulier, 18 mois au plus
+  source: Se loger mieux et moins cher (28/05/2026), p. 44
+  traitement: retailleau_mesures.hebergement
+- id: RET-IMM-05
+  intitule: Contrôles à la frontière espagnole, centres de retour
+  source: Communiqué, 31/07/2026
+  traitement: non chiffré
+- id: RET-INS-01
+  intitule: Référendum sur un pacte constitutionnel dès 2027
+  source: Entretien au Figaro (02/09/2026)
+  traitement: non chiffré
+- id: RET-INS-02
+  intitule: « Censurer la censure »
+  source: Entretien au Figaro (02/09/2026)
+  traitement: non chiffré
+- id: RET-UE-01
+  intitule: Primauté du droit européen conditionnée
+  source: Entretien au Figaro (02/09/2026)
+  traitement: non chiffré
+- id: RET-UE-02
+  intitule: Schengen réservé aux Européens
+  source: Entretien au JDD, 02/08/2026
+  traitement: non chiffré
+- id: RET-UE-03
+  intitule: Surtransposition interdite
+  source: Réarmer notre agriculture (03/03/2026), p. 16
+  traitement: non chiffré
+- id: RET-UE-04
+  intitule: Réciprocité commerciale, 50 % des contrôles sur les importations
+  source: Produire plus pour vivre mieux (19/02/2026), p. 24
+  traitement: non chiffré
+- id: RET-UE-05
+  intitule: Opposition à l'Ukraine dans le marché agricole européen
+  source: Réarmer notre agriculture (03/03/2026), p. 36
+  traitement: non chiffré
+- id: RET-UE-06
+  intitule: Opposition au European Grid Package
+  source: Électricité (07/05/2026), p. 33
+  traitement: non chiffré
+- id: RET-INT-01
+  intitule: Défense à 100 Md€ en fin de quinquennat, Livre blanc, réserve territorialisée
+  source: Tribune, 14/07/2026
+  traitement: retailleau_mesures.defense
+- id: RET-INT-02
+  intitule: Dissuasion strictement nationale
+  source: Tribune au JDD, 01/03/2026
+  traitement: neutre
+- id: RET-INT-03
+  intitule: Moyens de l'IA de défense ×5
+  source: L'IA au service des Français (07/07/2026), p. 34
+  traitement: dans retailleau_mesures.defense
+- id: RET-NUM-01
+  intitule: Assistant « Marianne » (≈ 1 Md€), 125 000 agents redéployés
+  source: L'IA au service des Français (07/07/2026), p. 28
+  traitement: retailleau_mesures.marianne (départs non remplacés dans retailleau_mesures.postes_*)
+- id: RET-NUM-02
+  intitule: Dérogation de trois ans au RGPD et à l'AI Act
+  source: L'IA au service des Français (07/07/2026), p. 17
+  traitement: non chiffré
+- id: RET-NUM-03
+  intitule: Data centers souverains (BPI, Caisse des dépôts)
+  source: L'IA au service des Français (07/07/2026), p. 19
+  traitement: 'hors solde : co-investissement'
+- id: RET-NUM-04
+  intitule: « Vauban numérique », VIGINUM triplé
+  source: L'IA au service des Français (07/07/2026), p. 35
+  traitement: retailleau_mesures.cyber
+- id: RET-NUM-05
+  intitule: '« Retour au pays » : cinq ans sans impôt sur le revenu pour les talents de la tech'
+  source: L'IA au service des Français (07/07/2026), p. 14
+  traitement: retailleau_mesures.talents_tech
+- id: RET-NUM-06
+  intitule: « Buy European First » dans le numérique public
+  source: L'IA au service des Français (07/07/2026), p. 31
+  traitement: non chiffré
+- id: RET-CUL-01
+  intitule: Économies sur la culture et l'audiovisuel, fin du SNU et de MaPrimeRénov' (ensemble de 23 Md€)
+  source: Public Sénat, 12/10/2026
+  traitement: retailleau_mesures.maprimerenov et snu_culture (ensemble annoncé non repris)
+- id: RET-CUL-01b
+  intitule: Fin du SNU, économies sur la culture et l'audiovisuel
+  source: Public Sénat, 12/10/2026
+  traitement: retailleau_mesures.snu_culture
+- id: RET-CUL-02
+  intitule: Racines judéo-chrétiennes dans la Charte constitutionnelle
+  source: Entretien au Figaro (02/09/2026)
+  traitement: non chiffré
+- id: RET-CUL-03
+  intitule: « Classe Culture » dans chaque établissement
+  source: Éducation (03/09/2026), p. 15
+  traitement: 'non chiffré : à moyens constants'
+- id: RET-OM-01
+  intitule: Aides aux entreprises ultramarines sanctuarisées
+  source: Produire plus pour vivre mieux (19/02/2026), p. 21
+  traitement: neutre
+- id: RET-OM-02
+  intitule: Batteries et micro-STEP dans les outre-mer
+  source: Électricité (07/05/2026), p. 17
+  traitement: 'non chiffré : réduit la CSPE à terme'
+- id: RET-TER-01
+  intitule: 400 000 fonctionnaires non remplacés d'ici 2032 (25 Md€ annoncés), agences supprimées
+  source: Public Sénat, 12/10/2026
+  traitement: retailleau_mesures.postes_* (annonce non reprise)
+- id: RET-TER-01b
+  intitule: La plupart des agences et opérateurs supprimés
+  source: Public Sénat, 12/10/2026
+  traitement: retailleau_mesures.agences
+- id: RET-TER-02
+  intitule: Fonctionnaires à 1 623 heures, trois jours de carence
+  source: Acteurs publics, 12/10/2026
+  traitement: retailleau_mesures.carence_fp
+- id: RET-TER-03
+  intitule: 9 000 € de TVA à la commune par logement neuf
+  source: Se loger mieux et moins cher (28/05/2026), p. 15
+  traitement: retailleau_mesures.tva_communes
+- id: RET-TER-04
+  intitule: Pas de fermeture de classe rurale sans le conseil municipal
+  source: Éducation (03/09/2026), p. 24
+  traitement: non chiffré
+- id: RET-TER-05
+  intitule: Ministère de l'IA et CTO de l'État
+  source: L'IA au service des Français (07/07/2026), p. 28
+  traitement: non chiffré
+- id: RET-SOC-01
+  intitule: Revenu familial de 240 € par enfant (40,3 Md€) à la place de 12 dispositifs (41 Md€)
+  source: Famille (04/05/2026), p. 11
+  traitement: 'neutre : coût annoncé couvert par les dispositifs supprimés ; condition de résidence dans retailleau_mesures.prestations_residence'
+- id: RET-SOC-02
+  intitule: Congé de naissance jusqu'aux six mois de l'enfant (≈ 700 M€)
+  source: Famille (04/05/2026), p. 18
+  traitement: retailleau_mesures.conge_naissance
+- id: RET-SOC-03
+  intitule: 'Garde d''enfants : crédit d''impôt famille déplafonné (≈ 800 M€)'
+  source: Famille (04/05/2026), p. 21
+  traitement: retailleau_mesures.credit_famille
+- id: RET-SOC-04
+  intitule: Prêts immobiliers transférables
+  source: Famille (04/05/2026), p. 17
+  traitement: non chiffré
+- id: RET-SOC-05
+  intitule: Parents d'élèves violents ou absentéistes responsabilisés
+  source: Éducation (03/09/2026), p. 33
+  traitement: non chiffré

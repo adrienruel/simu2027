@@ -1,0 +1,359 @@
+# Programme d'Édouard Philippe (Horizons) : chiffrage sur le noyau (7 novembre 2026).
+#
+# Pas de programme complet au 6/11/2026 : quatre pages de « priorités » du site de campagne, interviews, discours et
+# publications d'Horizons ; 87 mesures recensées par programmes-2027.fr (fiche : programmes/philippe/mesures.yaml).
+#
+# Règles : on ne reprend que les mesures, jamais les économies annoncées (déficit à 2 %, « 50 % de l'effort sur le
+# social », 50 Md€ d'aides aux entreprises : seule la part réalisable est retenue) ; les montants des mesures (50 Md€
+# d'impôts de production en moins, 3 Md€ d'impôt sur le revenu après une naissance) sont des paramètres ; dépense :
+# crise ≥ prudent ≥ médian ≥ optimiste ; recette : l'inverse. Calendrier : à partir de la loi de finances 2028.
+
+philippe_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
+
+philippe_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+philippe_retraites:
+  age_cible:
+    valeur: 65
+    unite: sans_unite
+    statut: SOURCE
+    source: "Site du candidat (« Pour une France plus prospère ») : âge de départ à 65 ans et durée de cotisation à 45 ans, relevés en moins de dix ans, départs anticipés maintenus"
+  premiere_generation:
+    valeur: 1966
+    unite: sans_unite
+    statut: DECISION
+    note: "Même rythme que Bertrand et Zemmour : un trimestre par génération à partir de la génération 1966 (départs de 2030), 65 ans pour la génération 1969 (départs de 2034), moins de dix ans après l'élection."
+  pas_par_generation:
+    valeur: 0.25
+    unite: sans_unite
+    statut: DECISION
+
+philippe_chomage:
+  baisse_taux:
+    valeur: {crise: 0.001, prudent: 0.002, median: 0.003, optimiste: 0.004}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Encadrement : réformes de 2021 et 2023 = 0,6 point de chômage structurel (Banque de France, Bulletin n° 264, 2026) ; durée ramenée de 18 à 12 mois pour les moins de 50 ans : 0,1 à 0,4 point"
+    note: "Baisse du taux de chômage, montée de 2028 à 2030."
+
+philippe_mesures:
+  impots_production_travail:
+    valeur: {id: PHI-FIS-01, instrument: cout_travail, libelle: "Impôts de production −50 Md€ : part assise sur la masse salariale (taxe sur les salaires, versement mobilité)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: -20, prudent: -20, median: -20, optimiste: -20}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Site du candidat (« Pour une France plus prospère ») : baisse de 50 Md€ des impôts de production, compensée par 50 Md€ d'aides aux entreprises en moins ; arbitrage : 40 % sur les impôts assis sur les salaires (taxe sur les salaires ≈ 15 Md€, versement mobilité ≈ 11 Md€), montée sur le quinquennat"
+    note: "Montant de la mesure (paramètre), pas une recette annoncée."
+  impots_production_capital:
+    valeur: {id: PHI-FIS-01, instrument: capital_entreprises, libelle: "Impôts de production −50 Md€ : part assise sur le capital et le chiffre d'affaires (CFE, taxe foncière des entreprises, C3S)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
+             montant: {crise: -30, prudent: -30, median: -30, optimiste: -30}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: DECISION
+    source: "Même source ; 60 % sur la CFE (≈ 7 Md€), la taxe foncière des entreprises (≈ 12 Md€), la C3S (≈ 4 Md€) et les autres impôts de production (≈ 10 Md€) ; compensation des collectivités par l'État incluse"
+  aides_entreprises_travail:
+    valeur: {id: PHI-FIS-01b, instrument: cout_travail, libelle: "Aides publiques aux entreprises supprimées : allègements et exonérations de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 10, prudent: 14, median: 17, optimiste: 20}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : aides aux entreprises ≈ 210 Md€ en 2023 (commission d'enquête du Sénat, rapport n° 808, 2025), dont allègements de cotisations ≈ 80 Md€ ; 50 Md€ annoncés : réalisés 50 % (crise), 70 % (prudent), 85 % (médian), 100 % (optimiste) ; 40 % pris sur les allègements"
+    note: "Les 50 Md€ sont une économie annoncée : seule la part réalisable est retenue."
+  aides_entreprises_capital:
+    valeur: {id: PHI-FIS-01b, instrument: capital_entreprises, libelle: "Aides publiques aux entreprises supprimées : niches fiscales et subventions", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
+             montant: {crise: 15, prudent: 21, median: 25.5, optimiste: 30}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement : 60 % sur les dépenses fiscales des entreprises (≈ 40 Md€ : CIR, taux réduits, suramortissements) et les subventions"
+  ir_naissance:
+    valeur: {id: PHI-FIS-02, instrument: travail, incidence: ir, libelle: "Exonération d'impôt sur le revenu trois ans après une naissance (moins de 3 000 € d'impôt), 3 000 € par an pour les autres", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -3.3, prudent: -3.0, median: -3.0, optimiste: -2.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Site du candidat (« L'Heure de vérité », 08/10/2026) : coût ≈ 3 Md€ par an ; montée sur trois ans (trois générations de naissances)"
+  donations:
+    valeur: {id: PHI-FIS-04, instrument: successions, libelle: "Plafonds de donation aux enfants et petits-enfants fortement relevés pendant trois ans", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028, fin: 2030,
+             montant: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : droits de donation ≈ 3 Md€ ; dons familiaux exonérés de 100 000 € de 2025 (loi de finances pour 2025, logement) ≈ 0,3 Md€ ; « hausse massive » : 0,4 à 1 Md€ par an, en partie avancée sur les successions futures"
+  heures_sup:
+    valeur: {id: PHI-EMP-01, instrument: cout_travail, libelle: "Aucune cotisation patronale au-delà de 37 heures ; heures supplémentaires exonérées d'impôt et de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -2.5, prudent: -2.0, median: -1.6, optimiste: -1.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : exonération d'impôt et réduction de cotisations salariales déjà au statu quo (≈ 3 Md€) ; déduction patronale forfaitaire de 1,50 € par heure limitée aux entreprises de moins de 250 salariés ; ≈ 900 millions d'heures supplémentaires par an (DARES) ; exonération totale au-delà de 37 h : ≈ 1,2 à 2,5 Md€"
+  retraites_contribution:
+    valeur: {id: PHI-RET-04, libelle: "Contribution accrue des retraités au financement du système social", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.0, prudent: 1.5, median: 2.5, optimiste: 3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : abattement de 10 % sur les pensions plafonné à ≈ 4 400 € ≈ 4,5 Md€ (Cour des comptes, 2025, piste d'un forfait : ≈ 2 Md€) ; CSG des retraités au taux des actifs ≈ 4 à 5 Md€ ; forme non précisée"
+  bailleurs:
+    valeur: {id: PHI-LOG-02, instrument: capital_menages, libelle: "Pression fiscale sur les bailleurs réduite", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.6, prudent: -0.5, median: -0.4, optimiste: -0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : statut du bailleur privé de la loi de finances pour 2026 au statu quo ; abattement des revenus fonciers relevé : ≈ 0,3 à 0,6 Md€"
+  droits_etudiants:
+    valeur: {id: PHI-IMM-07, libelle: "Droits d'inscription plus élevés des étudiants étrangers réellement appliqués", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.1, prudent: 0.2, median: 0.3, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 110 000 étudiants extra-européens ; écart de droits ≈ 2 600 € (licence) à 3 600 € (master) ; exonérations accordées par les universités : ≈ 80 %"
+  amendes:
+    valeur: {id: PHI-SEC-06, libelle: "Amendes recouvrées sur les prestations sociales des condamnés", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.05, prudent: 0.1, median: 0.15, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : amendes pénales non recouvrées ≈ 1 Md€ par an (Cour des comptes, 2023)"
+  chomage_12_mois:
+    valeur: {id: PHI-EMP-02, instrument: transferts_actifs, libelle: "Indemnisation chômage ramenée de 18 à 12 mois pour les moins de 50 ans", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
+             montant: {crise: -2.5, prudent: -3.0, median: -3.5, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : la baisse de 25 % des durées de 2023 rapporte ≈ 4,5 Md€ en régime de croisière (Unédic, 2024) ; de 18 à 12 mois (−33 %) pour les moins de 50 ans (≈ 60 % des allocataires) : ≈ 3 à 4 Md€"
+    note: "Effet sur l'emploi : philippe_chomage.baisse_taux."
+  carence:
+    valeur: {id: PHI-EMP-03, libelle: "Trois jours de carence dans le public comme dans le privé", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2028,
+             montant: {crise: -0.4, prudent: -0.5, median: -0.6, optimiste: -0.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : jour de carence des agents publics rétabli en 2018 : ≈ 0,2 à 0,3 Md€ par an (DGAFP) ; deux jours de plus et indemnisation des salariés du privé par les employeurs interdite (économie surtout privée)"
+  postes_etat:
+    valeur: {id: PHI-TER-01, libelle: "Un départ en retraite sur trois non remplacé : État", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -3.1, prudent: -4.3, median: -4.95, optimiste: -6.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : 250 000 postes annoncés sur le quinquennat (≈ 50 000 par an, un tiers des ≈ 150 000 départs) ; réalisés : 50 % (crise), 70 % (prudent), 80 % (médian), 100 % (optimiste) ; 55 000 € par poste ; 45 % à l'État, 35 % dans les collectivités, 20 % dans les hôpitaux"
+  postes_collectivites:
+    valeur: {id: PHI-TER-01, libelle: "Un départ en retraite sur trois non remplacé : collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -2.4, prudent: -3.4, median: -3.85, optimiste: -4.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement (35 %)"
+  postes_hopitaux:
+    valeur: {id: PHI-TER-01, libelle: "Un départ en retraite sur trois non remplacé : hôpitaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -1.4, prudent: -1.9, median: -2.2, optimiste: -2.75}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement (20 %)"
+  agences:
+    valeur: {id: PHI-TER-02, libelle: "Dizaines d'agences, d'opérateurs et de comités fusionnés, privatisés ou supprimés", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030,
+             montant: {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : opérateurs de l'État ≈ 80 Md€ de dépenses, mais les suppressions de 2025-2026 n'ont rapporté que ≈ 0,5 Md€ (Cour des comptes) ; missions gardées en grande partie"
+  aides_etrangers:
+    valeur: {id: PHI-IMM-05, libelle: "Aides sociales aux étrangers alignées sur la moyenne européenne", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,
+             montant: {crise: -0.3, prudent: -0.7, median: -1.0, optimiste: -1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : condition de résidence de cinq ans pour certaines prestations (étude d'impact de la loi immigration de 2024, censurée : ≈ 1 Md€) ; moyenne européenne mal définie"
+  retraite_45_ans:
+    valeur: {id: PHI-RET-01b, libelle: "Durée de cotisation portée à 45 ans", poste: retraites, moteur: "bloc:retraites", debut: 2030, plein: 2040,
+             montant: {crise: -1.0, prudent: -2.0, median: -3.0, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : un an de durée en plus ≈ 0,1 point de PIB d'économie à terme (Conseil d'orientation des retraites, rapport de 2023, variantes) ; 45 ans contre 43 au statu quo, mais l'âge de 65 ans rend déjà la plupart des carrières complètes"
+  per_premier_emploi:
+    valeur: {id: PHI-RET-03, libelle: "Plan d'épargne retraite abondé de 500 € par l'État dès le premier emploi", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.4, prudent: 0.35, median: 0.35, optimiste: 0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site du candidat : 500 € par l'État ; ≈ 700 000 premiers emplois par an (Insee, entrées dans la vie active)"
+  enseignants:
+    valeur: {id: PHI-EDU-01, libelle: "Rémunération moyenne des enseignants +20 % sur le quinquennat, écoles normales recréées", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 7.0, prudent: 6.0, median: 5.0, optimiste: 4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calcul : traitements et primes des enseignants ≈ 35 Md€ brut ; +20 % en nominal, dont ≈ 5 % suivent déjà au statu quo (salaires réels) et ≈ 8 % d'inflation sur cinq ans : ≈ 8 à 15 % en réel × coût employeur ≈ 1,4 : 4 à 7 Md€"
+  soutien_scolaire:
+    valeur: {id: PHI-EDU-03, libelle: "Service public du soutien scolaire : assistant IA et brigades de bénévoles", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : licences et calcul ≈ 20 € par élève ; bénévoles encadrés"
+  effectifs_primaire:
+    valeur: {id: PHI-EDU-05, libelle: "Effectifs réduits en maternelle et en primaire", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.1, optimiste: 0.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : baisse de 500 000 élèves du primaire d'ici 2032 (DEPP) : postes gardés en partie ; reste à financer faible"
+  medecins_ia:
+    valeur: {id: PHI-SAN-02, libelle: "Formation des médecins, prévention, IA en santé ; hôpitaux hors CHU modernisés", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2031,
+             montant: {crise: 0.8, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : non chiffré par le candidat ; universitarisation d'hôpitaux généraux, formation (≈ 12 000 € par étudiant et par an)"
+  sante_mentale:
+    valeur: {id: PHI-SAN-04, libelle: "Santé mentale à l'école : tiers de confiance, détection", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
+             montant: {crise: 0.15, prudent: 0.1, median: 0.1, optimiste: 0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : psychologues de l'Éducation nationale ≈ 7 000 ; +1 000 à 2 000"
+  fonds_adaptation:
+    valeur: {id: PHI-CLI-01, libelle: "Fonds unique d'adaptation de 2 Md€ par an (fonds Barnier et Fonds vert fusionnés)", poste: collectivites, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.6, prudent: 0.55, median: 0.55, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site du candidat (14/10/2026) : 2 Md€ par an ; Fonds vert ≈ 1,15 Md€ et fonds Barnier ≈ 0,3 Md€ au statu quo (PLF 2026) : +0,55 Md€"
+  vehicules_occasion:
+    valeur: {id: PHI-CLI-03, libelle: "Mêmes aides pour un véhicule électrique d'occasion que pour un neuf", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : bonus d'occasion supprimé en 2024 ; ≈ 50 000 à 100 000 véhicules × 2 000 à 3 000 €"
+  baignade_fret:
+    valeur: {id: PHI-CLI-05, libelle: "Plan baignade (rivières, piscines) et grand plan de fret ferroviaire", poste: investissement, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : stratégie fret 2023 (4 Md€ sur dix ans, dont l'État ≈ 0,2 Md€ par an au statu quo) ; rénovation des piscines ≈ 0,1 à 0,2 Md€ par an"
+  capture_carbone:
+    valeur: {id: PHI-CLI-08, libelle: "Investissement massif dans la capture du carbone", poste: investissement, moteur: pib, debut: 2029, plein: 2031,
+             montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : appels à projets CCS de 2025 (contrats carbone pour différence ≈ 0,1 à 0,3 Md€ par an au démarrage)"
+  assurance_climat:
+    valeur: {id: PHI-CLI-07, libelle: "Assurance du risque climatique réformée (zones inassurables, argiles, littoral)", poste: etat_missions, moteur: pib, debut: 2029, plein: 2030,
+             montant: {crise: 0.3, prudent: 0.2, median: 0.1, optimiste: 0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : régime des catastrophes naturelles déficitaire ≈ 1 Md€ en 2022-2023 (CCR) ; surprime relevée en 2025 : coût net faible"
+  agriculture:
+    valeur: {id: PHI-AGR-02, libelle: "100 territoires de souveraineté alimentaire, transmission, stockage de l'eau et réutilisation des eaux usées", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : fonds de souveraineté alimentaire (loi d'orientation agricole de 2025) ; retenues d'eau co-financées par les agences de l'eau"
+  ptz_naissance:
+    valeur: {id: PHI-LOG-01, libelle: "Prêt à taux zéro ouvert à chaque naissance", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2030,
+             montant: {crise: 0.4, prudent: 0.3, median: 0.25, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : PTZ ≈ 0,6 Md€ de crédit d'impôt aux banques (2025), élargi en 2025 ; un ménage sur dix avec un nouveau-né qui achète : ≈ +0,2 à 0,4 Md€"
+  justice:
+    valeur: {id: PHI-SEC-01, libelle: "Courtes peines, peines planchers (places de prison), juges de paix recréés", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : courtes peines appliquées : +5 000 à 10 000 détenus × ≈ 40 000 € par an ; juges de paix ≈ 1 000 postes"
+  canadairs:
+    valeur: {id: PHI-SEC-08, libelle: "Canadairs construits en France, réserves communales, formation aux premiers secours", poste: investissement, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: 0.4, prudent: 0.3, median: 0.25, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : un Canadair ≈ 50 M€ ; chaîne de production nationale (étude de 2024)"
+  reservistes:
+    valeur: {id: PHI-INT-02, libelle: "Réservistes portés de 45 000 à 250 000", poste: defense_ue, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 1.0, prudent: 0.9, median: 0.8, optimiste: 0.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site du candidat : 45 000 → 250 000 ; ≈ 4 000 € par réserviste et par an (solde, équipement, encadrement)"
+  service_militaire:
+    valeur: {id: PHI-INT-02b, libelle: "Service militaire volontaire de 3 000 à 50 000 places par an", poste: defense_ue, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: 1.4, prudent: 1.2, median: 1.0, optimiste: 0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site du candidat : 3 000 → 50 000 places ; ≈ 25 000 € par volontaire (solde, hébergement, encadrement)"
+  munitions:
+    valeur: {id: PHI-INT-03, libelle: "Munitions au-delà de 100 000 obus par an, drones tactiques ; nouvelle loi de programmation", poste: defense_ue, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : obus de 155 mm ≈ 4 000 € ; drones tactiques ; LPM 2024-2030 actualisée au statu quo : surcroît ≈ 1 Md€ par an"
+  marine_antilles:
+    valeur: {id: PHI-OM-03, libelle: "Navires de la Marine stationnés aux Antilles doublés ; opérations Harpie élargies", poste: defense_ue, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.15, prudent: 0.12, median: 0.1, optimiste: 0.08}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : patrouilleurs Outre-mer ≈ 50 M€ pièce, fonctionnement"
+  ia_calcul:
+    valeur: {id: PHI-NUM-01, libelle: "Infrastructure d'IA souveraine, capacité de calcul doublée en cinq ans", poste: investissement, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : supercalculateurs publics (Jean Zay, Alice Recoque ≈ 0,5 Md€) ; investissement surtout privé et européen"
+  ingenieurs:
+    valeur: {id: PHI-NUM-03, libelle: "100 000 ingénieurs formés par an (contre 40 000) en cinq ans", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : coût d'un élève ingénieur ≈ 10 000 à 15 000 € par an (MESR) ; +60 000 diplômés par an sur trois à cinq ans d'études, en partie privé"
+  temps_partiel_parental:
+    valeur: {id: PHI-SOC-02, instrument: transferts_actifs, libelle: "Temps partiel parental à 80 % payé 100 % pendant deux mois", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
+             montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 200 000 parents × 20 % d'un salaire moyen × deux mois"
+  inspection_enfance:
+    valeur: {id: PHI-SOC-03, libelle: "Inspection nationale de l'enfance (contrôle tous les trois ans)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029, fp: true,
+             montant: {crise: 0.08, prudent: 0.06, median: 0.05, optimiste: 0.04}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 500 inspecteurs à 90 000 €"

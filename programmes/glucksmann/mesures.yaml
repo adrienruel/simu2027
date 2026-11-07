@@ -1,0 +1,484 @@
+# Programme de Raphaël Glucksmann (Place publique) : fiche des mesures (7 novembre 2026)
+#
+# Les 112 mesures recensées par programmes-2027.fr, avec leur source et leur traitement dans le chiffrage
+# (paramètre de programmes/glucksmann/parametres.yaml, ou raison pour laquelle la mesure n'est pas chiffrée).
+# Les identifiants suffixés « b » détaillent une mesure en deux lignes chiffrées.
+
+programme:
+  candidat: Raphaël Glucksmann
+  parti: Place publique
+  document: Notre vision pour la France. Acte I (23 juin 2025), débats et entretiens de 2026
+  url: https://place-publique.eu/document/3Ari5O0s5O1L4iK1uyUhI0/pp-acte-un.pdf
+  recensement: https://programmes-2027.fr/candidats/glucksmann/ (112 mesures)
+  date_lecture: '2026-11-07'
+  avertissement: pas de programme présidentiel publié au 6/11/2026 ; « Acte I » est présenté comme une vision ; chiffrage
+    partiel par nature
+mesures:
+- id: GLU-ECO-01
+  intitule: Porter le SMIC à 1 600 € net en deux ans
+  source: Acte I (Place publique, 23/06/2025), p. 40
+  traitement: 'calculé : glucksmann_smic (bibliotheque.smic)'
+- id: GLU-ECO-02
+  intitule: Conférences salariales dans toutes les branches
+  source: Acte I (Place publique, 23/06/2025), p. 40
+  traitement: 'non chiffré : négociation, pas de ligne budgétaire (diffusion du SMIC seulement)'
+- id: GLU-ECO-03
+  intitule: Tripler le chèque énergie pour les ménages dépendant de la voiture
+  source: LCP, 23/09/2026
+  traitement: glucksmann_mesures.cheque_energie
+- id: GLU-ECO-04
+  intitule: Commande publique vers le « Fabriqué en France », fonds régionaux
+  source: Acte I (Place publique, 23/06/2025), p. 14
+  traitement: glucksmann_mesures.fabrique_france (fonds) ; surcoût de la commande publique non chiffré
+- id: GLU-ECO-05
+  intitule: Limiter les écarts de salaires dans une entreprise
+  source: Acte I (Place publique, 23/06/2025), p. 40
+  traitement: 'non chiffré : réglementation, effet budgétaire faible'
+- id: GLU-ECO-06
+  intitule: « Taxe Amazon » pour le commerce de proximité
+  source: Acte I (Place publique, 23/06/2025), p. 41
+  traitement: glucksmann_mesures.taxe_amazon
+- id: GLU-FIS-01
+  intitule: Taxer davantage les très gros héritages
+  source: LCP, 05/10/2026
+  traitement: glucksmann_mesures.grosses_successions (recette estimée ; les 15 Md€ annoncés ne sont pas repris)
+- id: GLU-FIS-01b
+  intitule: … pour baisser la CSG sur les salaires
+  source: LCP, 05/10/2026
+  traitement: 'calculé : glucksmann_csg (baisse de 15 Md€, OpenFisca)'
+- id: GLU-FIS-02
+  intitule: Réformer le pacte Dutreil
+  source: LCP, 23/09/2026
+  traitement: glucksmann_mesures.dutreil
+- id: GLU-FIS-03
+  intitule: Effort fiscal sur les très hauts patrimoines
+  source: Acte I (Place publique, 23/06/2025), p. 85
+  traitement: glucksmann_mesures.tres_hauts_patrimoines
+- id: GLU-FIS-03b
+  intitule: Taxation automatique des superprofits
+  source: Acte I (Place publique, 23/06/2025), p. 85
+  traitement: glucksmann_mesures.superprofits
+- id: GLU-FIS-04
+  intitule: Plafonner le crédit d'impôt recherche des grands groupes
+  source: Acte I (Place publique, 23/06/2025), p. 24
+  traitement: glucksmann_mesures.cir
+- id: GLU-FIS-05
+  intitule: Supprimer les exonérations fiscales des transports polluants
+  source: Acte I (Place publique, 23/06/2025), p. 29
+  traitement: glucksmann_mesures.niches_transports
+- id: GLU-FIS-06
+  intitule: Rééquilibrer la taxation entre travail, capital, héritage et retraites
+  source: Acte I (Place publique, 23/06/2025), p. 40
+  traitement: glucksmann_mesures.niches_inefficaces
+- id: GLU-EMP-01
+  intitule: Généraliser Territoires zéro chômeur, CDI d'insertion
+  source: Acte I (Place publique, 23/06/2025), p. 42
+  traitement: glucksmann_mesures.tzcld et glucksmann_emplois_aides
+- id: GLU-EMP-02
+  intitule: Abroger la réforme de l'assurance chômage
+  source: Acte I (Place publique, 23/06/2025), p. 53
+  traitement: glucksmann_mesures.assurance_chomage et glucksmann_chomage
+- id: GLU-EMP-03
+  intitule: Administrateurs salariés dès 100 salariés, « chèque syndical »
+  source: Acte I (Place publique, 23/06/2025), p. 41
+  traitement: 'non chiffré : gouvernance ; chèque syndical financé par les employeurs'
+- id: GLU-EMP-04
+  intitule: Priorité aux accords de branche
+  source: Acte I (Place publique, 23/06/2025), p. 41
+  traitement: 'non chiffré : droit du travail'
+- id: GLU-EMP-05
+  intitule: Stratégie « Zéro mort au travail »
+  source: Acte I (Place publique, 23/06/2025), p. 41
+  traitement: 'non chiffré : inspection du travail à moyens constants'
+- id: GLU-EMP-06
+  intitule: Agence de financement de l'économie sociale et solidaire
+  source: Acte I (Place publique, 23/06/2025), p. 41
+  traitement: glucksmann_mesures.ess
+- id: GLU-RET-01
+  intitule: Abroger la réforme de 2023, retour à 62 ans
+  source: LCP, 05/10/2026
+  traitement: 'calculé : glucksmann_retraites (bibliotheque.baisse_age_legal_detail), seniors'
+- id: GLU-RET-02
+  intitule: Âge modulé selon la pénibilité et l'espérance de vie en bonne santé
+  source: Public Sénat, 24/08/2026
+  traitement: glucksmann_mesures.retraite_penibilite
+- id: GLU-RET-03
+  intitule: Haut Conseil du pilotage des retraites
+  source: Acte I (Place publique, 23/06/2025), p. 43
+  traitement: 'non chiffré : gouvernance'
+- id: GLU-RET-04
+  intitule: Accroître le nombre de cotisants
+  source: Acte I (Place publique, 23/06/2025), p. 43
+  traitement: 'non chiffré : objectif sans mesure propre'
+- id: GLU-ENE-01
+  intitule: Conforter le nucléaire, nouvelles unités
+  source: Acte I (Place publique, 23/06/2025), p. 17
+  traitement: 'neutre : EPR2 déjà au statu quo'
+- id: GLU-ENE-02
+  intitule: Plan pluriannuel d'investissement dans les renouvelables
+  source: Acte I (Place publique, 23/06/2025), p. 17
+  traitement: glucksmann_mesures.renouvelables
+- id: GLU-ENE-03
+  intitule: Facture indexée sur le coût de production, hausse de taxe de 2024 annulée
+  source: Acte I (Place publique, 23/06/2025), p. 17
+  traitement: glucksmann_mesures.taxe_electricite
+- id: GLU-ENE-04
+  intitule: Interdire les importations de gaz russe
+  source: Acte I (Place publique, 23/06/2025), p. 17
+  traitement: 'non chiffré : effet sur les prix faible (≈ 15 % du GNL importé)'
+- id: GLU-ENE-05
+  intitule: Relancer et simplifier MaPrimeRénov'
+  source: Acte I (Place publique, 23/06/2025), p. 17
+  traitement: glucksmann_mesures.maprimerenov
+- id: GLU-CLI-01
+  intitule: Sortie du gaz et du pétrole, priorité des cent jours
+  source: L'Info Durable, 12/10/2026
+  traitement: 'non chiffré : moyens non précisés ; effets d''émissions à sourcer'
+- id: GLU-CLI-02
+  intitule: 'Loi Climat : −90 % en 2040, neutralité en 2050'
+  source: Acte I (Place publique, 23/06/2025), p. 28
+  traitement: 'non chiffré : objectif'
+- id: GLU-CLI-03
+  intitule: Interdire glyphosate, néonicotinoïdes, PFAS
+  source: Acte I (Place publique, 23/06/2025), p. 35
+  traitement: 'non chiffré : réglementation'
+- id: GLU-CLI-04
+  intitule: Loi anti-fast-fashion, score carbone, fin du plastique jetable
+  source: Acte I (Place publique, 23/06/2025), p. 28
+  traitement: 'non chiffré : réglementation'
+- id: GLU-CLI-05
+  intitule: Garantie universelle d'assurance climatique
+  source: Acte I (Place publique, 23/06/2025), p. 28
+  traitement: glucksmann_mesures.assurance_climat
+- id: GLU-CLI-06
+  intitule: Refuser les méga-bassines, tarification sociale de l'eau
+  source: Acte I (Place publique, 23/06/2025), p. 35
+  traitement: glucksmann_mesures.eau
+- id: GLU-AGR-01
+  intitule: Réformer la PAC en plafonnant les aides
+  source: Acte I (Place publique, 23/06/2025), p. 34
+  traitement: 'neutre : enveloppe européenne redistribuée'
+- id: GLU-AGR-02
+  intitule: Prix planchers, EGALIM, mesures miroirs, opposition au Mercosur
+  source: Acte I (Place publique, 23/06/2025), p. 34
+  traitement: 'non chiffré : réglementation'
+- id: GLU-AGR-03
+  intitule: Revenu de transition écologique pour agriculteurs et pêcheurs
+  source: Acte I (Place publique, 23/06/2025), p. 34
+  traitement: glucksmann_mesures.revenu_transition
+- id: GLU-AGR-04
+  intitule: Cantines bio et locales, sécurité sociale de l'alimentation (expérimentations)
+  source: Acte I (Place publique, 23/06/2025), p. 34
+  traitement: glucksmann_mesures.cantines
+- id: GLU-AGR-05
+  intitule: Exclure les méga-chalutiers des eaux côtières
+  source: Acte I (Place publique, 23/06/2025), p. 34
+  traitement: 'non chiffré : réglementation'
+- id: GLU-AGR-06
+  intitule: Fin de l'élevage en cage (niveau européen)
+  source: Acte I (Place publique, 23/06/2025), p. 30
+  traitement: 'non chiffré : réglementation européenne'
+- id: GLU-LOG-01
+  intitule: Encadrer les loyers en zones tendues, réguler les meublés touristiques
+  source: Acte I (Place publique, 23/06/2025), p. 64
+  traitement: 'non chiffré : réglementation'
+- id: GLU-LOG-02
+  intitule: Fonds foncier, objectifs de logements sociaux rehaussés
+  source: Acte I (Place publique, 23/06/2025), p. 64
+  traitement: glucksmann_mesures.fonds_foncier
+- id: GLU-LOG-03
+  intitule: Abroger la loi Kasbarian, étendre Visale
+  source: Acte I (Place publique, 23/06/2025), p. 64
+  traitement: 'non chiffré : Visale financé par Action Logement'
+- id: GLU-LOG-04
+  intitule: Programme « Logement d'abord »
+  source: Acte I (Place publique, 23/06/2025), p. 64
+  traitement: glucksmann_mesures.logement_abord
+- id: GLU-LOG-05
+  intitule: Taxer plus fortement la vacance longue
+  source: Acte I (Place publique, 23/06/2025), p. 64
+  traitement: glucksmann_mesures.vacance
+- id: GLU-SAN-01
+  intitule: Financement global de l'hôpital au lieu de la tarification à l'acte
+  source: Acte I (Place publique, 23/06/2025), p. 50
+  traitement: neutre à enveloppe constante (dans glucksmann_mesures.soins_proximite)
+- id: GLU-SAN-02
+  intitule: Centres de petites urgences, maisons de santé, permanences mobiles
+  source: Acte I (Place publique, 23/06/2025), p. 50
+  traitement: glucksmann_mesures.soins_proximite
+- id: GLU-SAN-03
+  intitule: Prévention hors Ondam annuel, fonds territorial
+  source: Acte I (Place publique, 23/06/2025), p. 52
+  traitement: glucksmann_mesures.prevention
+- id: GLU-SAN-04
+  intitule: Santé mentale des jeunes priorité nationale
+  source: Acte I (Place publique, 23/06/2025), p. 52
+  traitement: glucksmann_mesures.sante_mentale
+- id: GLU-SAN-05
+  intitule: Chantier d'une Sécurité sociale unique
+  source: Acte I (Place publique, 23/06/2025), p. 53
+  traitement: 'non chiffré : chantier'
+- id: GLU-SAN-06
+  intitule: Nutri-Score obligatoire, boissons sucrées plus taxées
+  source: Acte I (Place publique, 23/06/2025), p. 34
+  traitement: glucksmann_mesures.boissons_sucrees
+- id: GLU-EDU-01
+  intitule: Loi de programmation de l'école sur cinq ans (revalorisation)
+  source: LCP, 05/10/2026
+  traitement: glucksmann_mesures.ecole_salaires
+- id: GLU-EDU-01b
+  intitule: Loi de programmation de l'école (effectifs, remplaçants)
+  source: LCP, 05/10/2026
+  traitement: glucksmann_mesures.ecole_classes
+- id: GLU-EDU-02
+  intitule: Privé sous contrat dans la carte scolaire
+  source: Acte I (Place publique, 23/06/2025), p. 68
+  traitement: 'non chiffré : réglementation'
+- id: GLU-EDU-03
+  intitule: Séjour collectif garanti pour chaque enfant
+  source: Public Sénat, 24/08/2026
+  traitement: glucksmann_mesures.sejour_collectif
+- id: GLU-EDU-04
+  intitule: Module lycée « Médias et Influence »
+  source: Acte I (Place publique, 23/06/2025), p. 69
+  traitement: 'non chiffré : à moyens constants'
+- id: GLU-EDU-05
+  intitule: Parcoursup repensé, capital formation universel (chantier)
+  source: Acte I (Place publique, 23/06/2025), p. 25
+  traitement: glucksmann_mesures.formation
+- id: GLU-EDU-06
+  intitule: Plan de rénovation des écoles
+  source: Acte I (Place publique, 23/06/2025), p. 68
+  traitement: glucksmann_mesures.ecole_batiments
+- id: GLU-EDU-06b
+  intitule: Freiner les fermetures d'écoles rurales
+  source: Acte I (Place publique, 23/06/2025), p. 68
+  traitement: glucksmann_mesures.ecoles_rurales
+- id: GLU-SEC-01
+  intitule: Police de proximité
+  source: Acte I (Place publique, 23/06/2025), p. 60
+  traitement: glucksmann_mesures.police_proximite
+- id: GLU-SEC-02
+  intitule: Moyens d'enquête contre le narcotrafic
+  source: Acte I (Place publique, 23/06/2025), p. 60
+  traitement: dans glucksmann_mesures.police_proximite
+- id: GLU-SEC-03
+  intitule: Convention citoyenne sur les drogues (dont légalisation du cannabis)
+  source: Acte I (Place publique, 23/06/2025), p. 60
+  traitement: 'non chiffré : convention, issue incertaine'
+- id: GLU-SEC-04
+  intitule: Doubler les Maisons de la justice et du droit
+  source: Acte I (Place publique, 23/06/2025), p. 61
+  traitement: glucksmann_mesures.justice
+- id: GLU-SEC-05
+  intitule: Lutter contre la surpopulation carcérale
+  source: Acte I (Place publique, 23/06/2025), p. 61
+  traitement: dans glucksmann_mesures.justice
+- id: GLU-SEC-06
+  intitule: Récépissés de contrôle d'identité
+  source: Acte I (Place publique, 23/06/2025), p. 80
+  traitement: non chiffré
+- id: GLU-IMM-01
+  intitule: Convention citoyenne sur l'immigration
+  source: Public Sénat, 24/08/2026
+  traitement: non chiffré
+- id: GLU-IMM-02
+  intitule: Régulariser les travailleurs sans papiers
+  source: LCP, 05/10/2026
+  traitement: glucksmann_mesures.regularisation
+- id: GLU-IMM-03
+  intitule: Abroger la loi immigration de 2024
+  source: Acte I (Place publique, 23/06/2025), p. 82
+  traitement: non chiffré
+- id: GLU-IMM-04
+  intitule: Droit au travail dès l'enregistrement de la demande d'asile
+  source: Acte I (Place publique, 23/06/2025), p. 82
+  traitement: dans glucksmann_mesures.regularisation
+- id: GLU-IMM-05
+  intitule: Force européenne de sauvetage en mer
+  source: Acte I (Place publique, 23/06/2025), p. 82
+  traitement: hors budget national (UE)
+- id: GLU-IMM-06
+  intitule: Remplacer Dublin par une répartition européenne
+  source: Acte I (Place publique, 23/06/2025), p. 82
+  traitement: hors budget national (UE)
+- id: GLU-INS-01
+  intitule: Proportionnelle aux législatives
+  source: Acte I (Place publique, 23/06/2025), p. 46
+  traitement: 'non chiffré : institutions'
+- id: GLU-INS-02
+  intitule: Investiture du Premier ministre, censure constructive, fin du 49.3
+  source: Acte I (Place publique, 23/06/2025), p. 46
+  traitement: 'non chiffré : institutions'
+- id: GLU-INS-03
+  intitule: Vote à 16 ans, vote des étrangers aux élections locales
+  source: Acte I (Place publique, 23/06/2025), p. 47
+  traitement: 'non chiffré : institutions'
+- id: GLU-INS-04
+  intitule: Convention citoyenne vers une constituante, fin de l'article 40
+  source: Acte I (Place publique, 23/06/2025), p. 46
+  traitement: 'non chiffré : institutions'
+- id: GLU-INS-05
+  intitule: Droit d'initiative citoyenne
+  source: Acte I (Place publique, 23/06/2025), p. 47
+  traitement: 'non chiffré : institutions'
+- id: GLU-INS-06
+  intitule: « Bon pour la démocratie »
+  source: Acte I (Place publique, 23/06/2025), p. 47
+  traitement: glucksmann_mesures.democratie
+- id: GLU-UE-01
+  intitule: Traité de refondation, fin de l'unanimité, budget renforcé
+  source: Acte I (Place publique, 23/06/2025), p. 12
+  traitement: hors budget national ; contribution française plus forte non chiffrée (traité non négocié)
+- id: GLU-UE-02
+  intitule: Fonds européen de défense de 500 Md€ par emprunt commun
+  source: Acte I (Place publique, 23/06/2025), p. 11
+  traitement: hors solde national (emprunt européen ; remboursement après 2035 non chiffré)
+- id: GLU-UE-03
+  intitule: « Buy European Act »
+  source: Acte I (Place publique, 23/06/2025), p. 14
+  traitement: 'non chiffré : réglementation européenne'
+- id: GLU-UE-04
+  intitule: Doubler Horizon Europe
+  source: Acte I (Place publique, 23/06/2025), p. 24
+  traitement: hors budget national (dans UE-01)
+- id: GLU-UE-05
+  intitule: « Pacte girondin » de répartition des compétences
+  source: Acte I (Place publique, 23/06/2025), p. 12
+  traitement: non chiffré
+- id: GLU-INT-01
+  intitule: Aide à l'Ukraine financée par les avoirs russes
+  source: LCP, 05/10/2026
+  traitement: 'hors solde : financement par les avoirs russes immobilisés'
+- id: GLU-INT-02
+  intitule: Dissuasion nucléaire étendue aux pays de l'UE
+  source: Acte I (Place publique, 23/06/2025), p. 11
+  traitement: 'non chiffré : doctrine'
+- id: GLU-INT-03
+  intitule: Aide publique au développement à 0,7 % du RNB
+  source: Acte I (Place publique, 23/06/2025), p. 83
+  traitement: glucksmann_mesures.aide_developpement
+- id: GLU-INT-04
+  intitule: Réserve opérationnelle fortement accrue
+  source: Acte I (Place publique, 23/06/2025), p. 10
+  traitement: glucksmann_mesures.reserve
+- id: GLU-INT-05
+  intitule: Programme « cyber sentinelle »
+  source: Acte I (Place publique, 23/06/2025), p. 10
+  traitement: glucksmann_mesures.cyber
+- id: GLU-INT-06
+  intitule: Production d'armement accélérée, programme de drones
+  source: Acte I (Place publique, 23/06/2025), p. 10
+  traitement: dans la LPM (statu quo) ; drones dans glucksmann_mesures.cyber
+- id: GLU-NUM-01
+  intitule: Réseaux sociaux interdits aux moins de 15 ans, TikTok banni
+  source: Acte I (Place publique, 23/06/2025), p. 21
+  traitement: 'non chiffré : réglementation'
+- id: GLU-NUM-02
+  intitule: Agence industrielle du numérique et de l'IA
+  source: Acte I (Place publique, 23/06/2025), p. 20
+  traitement: glucksmann_mesures.numerique_ia
+- id: GLU-NUM-03
+  intitule: Sortir de la dépendance aux GAFAM en cinq ans
+  source: Acte I (Place publique, 23/06/2025), p. 21
+  traitement: glucksmann_mesures.gafam
+- id: GLU-NUM-04
+  intitule: Traité international sur l'IA
+  source: Acte I (Place publique, 23/06/2025), p. 20
+  traitement: 'non chiffré : diplomatie'
+- id: GLU-NUM-05
+  intitule: Campus international de l'IA, IA dans les services publics
+  source: Acte I (Place publique, 23/06/2025), p. 20
+  traitement: dans glucksmann_mesures.numerique_ia
+- id: GLU-CUL-01
+  intitule: Concentration des médias limitée, délit de désinformation organisée
+  source: Acte I (Place publique, 23/06/2025), p. 47
+  traitement: 'non chiffré : réglementation'
+- id: GLU-CUL-02
+  intitule: Part individuelle du pass Culture supprimée
+  source: Acte I (Place publique, 23/06/2025), p. 72
+  traitement: glucksmann_mesures.culture
+- id: GLU-CUL-03
+  intitule: Pacte d'aménagement culturel du territoire
+  source: Acte I (Place publique, 23/06/2025), p. 72
+  traitement: dans glucksmann_mesures.culture (part du pass Culture réaffectée)
+- id: GLU-CUL-04
+  intitule: Doubler Europe Créative, culture hors des accords de libre-échange
+  source: Acte I (Place publique, 23/06/2025), p. 72
+  traitement: hors budget national (UE)
+- id: GLU-CUL-05
+  intitule: Agence publique unique de la diplomatie culturelle
+  source: Acte I (Place publique, 23/06/2025), p. 72
+  traitement: 'neutre : fusion d''opérateurs'
+- id: GLU-OM-01
+  intitule: Démanteler les conglomérats, prix de première nécessité plafonnés
+  source: Acte I (Place publique, 23/06/2025), p. 65
+  traitement: glucksmann_mesures.outre_mer
+- id: GLU-OM-02
+  intitule: Accords de Nouméa en Nouvelle-Calédonie
+  source: Acte I (Place publique, 23/06/2025), p. 65
+  traitement: non chiffré
+- id: GLU-OM-03
+  intitule: Part de l'octroi de mer fléchée vers l'investissement local
+  source: Acte I (Place publique, 23/06/2025), p. 65
+  traitement: 'neutre : recette des collectivités réaffectée'
+- id: GLU-OM-04
+  intitule: Plan « Eau » pour les Outre-mer
+  source: Acte I (Place publique, 23/06/2025), p. 65
+  traitement: dans glucksmann_mesures.eau
+- id: GLU-OM-05
+  intitule: Tarifs des télécoms et des livres alignés sur l'Hexagone
+  source: Acte I (Place publique, 23/06/2025), p. 65
+  traitement: dans glucksmann_mesures.outre_mer
+- id: GLU-TER-01
+  intitule: Plan Rail avec les régions
+  source: Acte I (Place publique, 23/06/2025), p. 29
+  traitement: glucksmann_mesures.plan_rail
+- id: GLU-TER-01b
+  intitule: Titre de transport unique « Ticket climat »
+  source: Acte I (Place publique, 23/06/2025), p. 29
+  traitement: glucksmann_mesures.ticket_climat
+- id: GLU-TER-02
+  intitule: Services publics de proximité, cabinets de conseil encadrés
+  source: Acte I (Place publique, 23/06/2025), p. 48
+  traitement: glucksmann_mesures.services_publics_proximite (économie sur les cabinets non comptée)
+- id: GLU-TER-03
+  intitule: Point d'indice indexé sur l'inflation
+  source: Acte I (Place publique, 23/06/2025), p. 40
+  traitement: glucksmann_mesures.point_indice
+- id: GLU-TER-04
+  intitule: Service public de transport rural
+  source: Acte I (Place publique, 23/06/2025), p. 29
+  traitement: glucksmann_mesures.transport_rural
+- id: GLU-TER-05
+  intitule: Loi de décentralisation, loi pluriannuelle des finances locales
+  source: Acte I (Place publique, 23/06/2025), p. 47
+  traitement: 'non chiffré : cadre'
+- id: GLU-TER-06
+  intitule: Pantouflage combattu, observatoire de l'intégrité publique
+  source: Acte I (Place publique, 23/06/2025), p. 48
+  traitement: non chiffré
+- id: GLU-SOC-01
+  intitule: Statut des parents seuls
+  source: LCP, 05/10/2026
+  traitement: glucksmann_mesures.parents_seuls
+- id: GLU-SOC-02
+  intitule: Service civique obligatoire de dix mois
+  source: Public Sénat, 24/08/2026
+  traitement: glucksmann_mesures.service_civique et glucksmann_service_civique
+- id: GLU-SOC-03
+  intitule: Plan contre les violences sexistes et sexuelles doté d'un milliard
+  source: Acte I (Place publique, 23/06/2025), p. 78
+  traitement: glucksmann_mesures.vss
+- id: GLU-SOC-04
+  intitule: Droit opposable à la garde d'enfant
+  source: Acte I (Place publique, 23/06/2025), p. 78
+  traitement: glucksmann_mesures.garde_enfant
+- id: GLU-SOC-05
+  intitule: Indemnité et droit au répit des proches aidants
+  source: Acte I (Place publique, 23/06/2025), p. 56
+  traitement: glucksmann_mesures.aidants
+- id: GLU-SOC-06
+  intitule: Protection de l'enfance et crèches hors de la logique de profit
+  source: Acte I (Place publique, 23/06/2025), p. 57
+  traitement: 'non chiffré : réglementation (reprise en régie non précisée)'

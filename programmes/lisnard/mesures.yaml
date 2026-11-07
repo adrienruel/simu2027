@@ -1,0 +1,387 @@
+# Programme de David Lisnard (Nouvelle Énergie) : fiche des mesures (7 novembre 2026)
+
+programme:
+  candidat: David Lisnard
+  parti: Nouvelle Énergie
+  document: pages thématiques, carnets, Le livre noir, discours de Bayeux, fiches « Questions », entretiens (2026)
+  recensement: https://programmes-2027.fr/candidats/lisnard/ (91 mesures)
+  date_lecture: '2026-11-07'
+  avertissement: pas de document programmatique complet ; site de campagne pas encore ouvert
+mesures:
+- id: LIS-ECO-01
+  intitule: Dépense publique −80 Md€ la première année, puis au moins −200 Md€
+  source: Fiche « Questions », 03/10/2026
+  traitement: 'non repris : objectif d''économies'
+- id: LIS-ECO-02
+  intitule: 120 Md€ rendus aux actifs par la baisse des cotisations (≈ 400 € net par mois), 40 Md€ aux impôts de production,
+    40 Md€ à la dette
+  source: Fiche « Questions », 03/10/2026
+  traitement: 'calculé : lisnard_actifs ; impôts de production : LIS-FIS-01'
+- id: LIS-ECO-03
+  intitule: Allocation unique plafonnée ; plus de prestations non contributives versées à l'étranger
+  source: Fiche « Questions », 03/10/2026
+  traitement: lisnard_mesures.allocation_unique et prestations_etranger
+- id: LIS-ECO-03b
+  intitule: Prestations non contributives après cinq ans de résidence, plus versées à l'étranger
+  source: Fiche « Questions », 03/10/2026
+  traitement: lisnard_mesures.prestations_etranger
+- id: LIS-ECO-04
+  intitule: Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois
+  source: Le livre noir, 22/04/2026, p. 7
+  traitement: lisnard_mesures.creation_entreprise
+- id: LIS-ECO-05
+  intitule: Subventions compensant les charges des entreprises supprimées
+  source: Fiche « Questions », 16/10/2026
+  traitement: lisnard_mesures.subventions
+- id: LIS-ECO-06
+  intitule: Dépense publique à 45 % du PIB en dix ans
+  source: JDNews, 15/10/2026
+  traitement: 'non repris : objectif'
+- id: LIS-ECO-07
+  intitule: CSG sur les revenus d'activité de 9,2 % à 6,6 %
+  source: CNEWS, 28/10/2026
+  traitement: 'calculé : lisnard_actifs (dans les 120 Md€)'
+- id: LIS-ECO-08
+  intitule: Moratoire sur les normes, surtranspositions suspendues
+  source: CNEWS, 28/10/2026
+  traitement: non chiffré
+- id: LIS-FIS-01
+  intitule: Impôts de production −40 Md€, en commençant par la C3S
+  source: Fiche « Questions », 03/10/2026
+  traitement: lisnard_mesures.impots_production_*
+- id: LIS-FIS-02
+  intitule: IFI supprimé, fiscalité foncière sur valeurs vénales
+  source: Le livre noir, 22/04/2026, p. 7
+  traitement: lisnard_mesures.ifi
+- id: LIS-FIS-03
+  intitule: Impôt sur les sociétés à 20 %, part de 0 à 5 % aux collectivités
+  source: Fiche « Questions », 16/10/2026
+  traitement: lisnard_mesures.is_20
+- id: LIS-FIS-04
+  intitule: Transmission d'entreprise exonérée, taux marginal des successions à 20 %
+  source: Fiche « Questions », 16/10/2026
+  traitement: lisnard_mesures.successions
+- id: LIS-FIS-05
+  intitule: Taxe sur les livraisons affectée aux commerces, facturation électronique suspendue
+  source: Fiche « Questions », 16/10/2026
+  traitement: 'neutre : recette affectée à un abattement local'
+- id: LIS-EMP-01
+  intitule: Contrat de travail unique
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-EMP-02
+  intitule: Durée du travail par accord, heures sup majorées de 10 % sans surcoût patronal
+  source: Le livre noir, 22/04/2026, p. 6
+  traitement: non chiffré
+- id: LIS-EMP-03
+  intitule: 500 € d'écart entre le plus bas salaire et l'assistance
+  source: Fiche « Questions », 16/10/2026
+  traitement: dans lisnard_mesures.allocation_unique
+- id: LIS-EMP-04
+  intitule: Allocations chômage dégressives
+  source: Fiche « Questions », 16/10/2026
+  traitement: lisnard_mesures.chomage et lisnard_chomage
+- id: LIS-EMP-05
+  intitule: Charges négatives à l'embauche d'allocataires du RSA, emploi à domicile au SMIC sans charges, apprentissage
+  source: Page programme (non datée)
+  traitement: lisnard_mesures.embauche_rsa
+- id: LIS-RET-01
+  intitule: Capitalisation obligatoire amorcée par la désindexation des pensions au-delà de ≈ 2 000 €
+  source: Fiche « Questions », 03/10/2026
+  traitement: 'neutre : l''économie sur les pensions alimente les fonds (hors solde)'
+- id: LIS-RET-02
+  intitule: Réforme de 2023 gardée (une page non datée évoque 65 ans)
+  source: Fiche « Questions », 03/10/2026
+  traitement: 'statu quo (arbitrage : fiches d''octobre 2026)'
+- id: LIS-RET-03
+  intitule: Socle par répartition, minimum vieillesse à 1 000 €, agence unique
+  source: Page programme (non datée)
+  traitement: 'neutre : ASPA déjà au-dessus de 1 000 €'
+- id: LIS-RET-04
+  intitule: Convergence public-privé vers une retraite individualisée
+  source: JDNews, 15/10/2026
+  traitement: non chiffré
+- id: LIS-ENE-01
+  intitule: Nucléaire prolongé à 60 ans, six EPR, petits réacteurs, 4e génération
+  source: Fiche « Questions », 03/10/2026
+  traitement: 'hors solde : EDF'
+- id: LIS-ENE-02
+  intitule: Renouvelables au droit commun
+  source: Page programme (non datée)
+  traitement: lisnard_mesures.renouvelables
+- id: LIS-ENE-03
+  intitule: CEE sur les carburants suspendus six mois, pas de chèque carburant
+  source: Fiche « Questions », 16/10/2026
+  traitement: 'hors budget : obligation des fournisseurs'
+- id: LIS-CLI-01
+  intitule: Principe de précaution remplacé par un « principe de responsabilité »
+  source: Discours de Bayeux, 17/06/2026, p. 9
+  traitement: non chiffré
+- id: LIS-CLI-02
+  intitule: ZFE supprimées par la loi
+  source: Fiche « Questions », 16/10/2026
+  traitement: non chiffré
+- id: LIS-CLI-03
+  intitule: Fiscalité carbone à prélèvements constants
+  source: Page programme (non datée)
+  traitement: neutre
+- id: LIS-CLI-04
+  intitule: Ouvrages hydrauliques présumés utiles
+  source: Le livre noir, 22/04/2026, p. 8
+  traitement: non chiffré
+- id: LIS-CLI-05
+  intitule: Neutralité technologique des transports, neutralité carbone conditionnée
+  source: Grand entretien de l'écologie, 27/10/2026
+  traitement: non chiffré
+- id: LIS-AGR-01
+  intitule: NBT autorisées, PAC réorientée, INRAE recentré
+  source: Carnets Agriculture, 08/06/2026, p. 8
+  traitement: non chiffré
+- id: LIS-AGR-02
+  intitule: Impôts de production agricoles supprimés
+  source: Carnets Agriculture, 08/06/2026, p. 9
+  traitement: dans lisnard_mesures.impots_production_capital
+- id: LIS-AGR-02b
+  intitule: Compte épargne aléas dans chaque exploitation
+  source: Carnets Agriculture, 08/06/2026, p. 9
+  traitement: lisnard_mesures.epargne_aleas
+- id: LIS-AGR-03
+  intitule: Loi sur l'eau réformée, retenues d'intérêt général majeur
+  source: Le livre noir, 22/04/2026, p. 8
+  traitement: non chiffré
+- id: LIS-AGR-04
+  intitule: Statut unique d'entreprise rurale
+  source: Carnets Agriculture, 08/06/2026, p. 9
+  traitement: non chiffré
+- id: LIS-AGR-05
+  intitule: Filière d'engrais azotés décarbonés
+  source: Carnets Agriculture, 08/06/2026, p. 8
+  traitement: 'non chiffré : investissement privé'
+- id: LIS-AGR-06
+  intitule: Réciprocité des normes, clauses de sauvegarde
+  source: Carnets Agriculture, 08/06/2026, p. 10
+  traitement: non chiffré
+- id: LIS-LOG-01
+  intitule: Article 55 de la loi SRU supprimé
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-LOG-02
+  intitule: ZAN confié aux intercommunalités, zones commerciales mobilisées
+  source: Le livre noir, 22/04/2026, p. 7
+  traitement: non chiffré
+- id: LIS-LOG-03
+  intitule: Bonus-malus à la place des interdictions de louer liées au DPE
+  source: Le livre noir, 22/04/2026, p. 7
+  traitement: non chiffré
+- id: LIS-LOG-04
+  intitule: Avis simple de l'ABF
+  source: Le livre noir, 22/04/2026, p. 7
+  traitement: non chiffré
+- id: LIS-SAN-01
+  intitule: Liberté d'installation, exonérations en zone sous-dense
+  source: Carnets Santé, 05/05/2026, p. 8
+  traitement: dans lisnard_mesures.acces_direct
+- id: LIS-SAN-02
+  intitule: Étudiants en médecine doublés d'ici 2030
+  source: Carnets Santé, 05/05/2026, p. 4
+  traitement: lisnard_mesures.medecine
+- id: LIS-SAN-03
+  intitule: ARS supprimées
+  source: Carnets Santé, 05/05/2026, p. 9
+  traitement: lisnard_mesures.ars
+- id: LIS-SAN-04
+  intitule: Assurance maladie en concurrence (modèle néerlandais)
+  source: Fiche « Questions », 16/10/2026
+  traitement: 'non chiffré : effet incertain'
+- id: LIS-SAN-05
+  intitule: Accès direct remboursé aux spécialistes, IPA, kinésithérapeutes
+  source: Carnets Santé, 05/05/2026, p. 8
+  traitement: lisnard_mesures.acces_direct
+- id: LIS-SAN-06
+  intitule: Loi de programmation de santé, convergence tarifaire public-privé, DMP obligatoire
+  source: Carnets Santé, 05/05/2026, p. 10
+  traitement: lisnard_mesures.convergence_tarifaire
+- id: LIS-EDU-01
+  intitule: Carte scolaire abrogée, chèque-éducation progressif
+  source: Page programme (non datée)
+  traitement: 'non chiffré : neutre à moyens constants'
+- id: LIS-EDU-02
+  intitule: Certificat de fin de primaire
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-EDU-03
+  intitule: Rémunérations des enseignants +20 % en cinq ans, sous conditions
+  source: Page programme (non datée)
+  traitement: lisnard_mesures.enseignants
+- id: LIS-EDU-04
+  intitule: Classes d'excellence, latin, grec et philosophie dès le primaire
+  source: Page programme (non datée)
+  traitement: lisnard_mesures.excellence
+- id: LIS-EDU-05
+  intitule: Corps unique d'enseignants contractuels, éveil des 1-6 ans aux communes
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-EDU-06
+  intitule: Parcoursup remplacé par une affectation sur résultats
+  source: Le livre noir, 22/04/2026, p. 9
+  traitement: non chiffré
+- id: LIS-EDU-07
+  intitule: Établissements d'excellence avec internats par ancien canton, établissements disciplinaires
+  source: JDNews, 15/10/2026
+  traitement: dans lisnard_mesures.excellence
+- id: LIS-EDU-08
+  intitule: Recrutement direct des enseignants, fin du collège unique
+  source: CNEWS, 28/10/2026
+  traitement: non chiffré
+- id: LIS-SEC-01
+  intitule: Majorité pénale à 16 ans, excuse de minorité inversée
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-SEC-02
+  intitule: Peines planchers, fin des réductions automatiques, effectifs correctionnels doublés
+  source: Page programme (non datée)
+  traitement: dans lisnard_mesures.prisons_fonctionnement
+- id: LIS-SEC-03
+  intitule: 20 000 places de prison en plus
+  source: Fiche « Questions », 03/10/2026
+  traitement: lisnard_mesures.prisons_invest et prisons_fonctionnement
+- id: LIS-SEC-03b
+  intitule: '20 000 places de prison : fonctionnement'
+  source: Fiche « Questions », 03/10/2026
+  traitement: lisnard_mesures.prisons_fonctionnement
+- id: LIS-SEC-04
+  intitule: Frères musulmans interdits, voile interdit à l'université
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-SEC-05
+  intitule: Exécution intégrale des peines, perpétuité réelle
+  source: Fiche « Questions », 16/10/2026
+  traitement: dans lisnard_mesures.prisons_fonctionnement
+- id: LIS-SEC-06
+  intitule: Responsabilité des magistrats
+  source: Fiche « Questions », 16/10/2026
+  traitement: non chiffré
+- id: LIS-IMM-01
+  intitule: Titres de séjour divisés par huit, rétention de 24 mois
+  source: Page programme (non datée)
+  traitement: 'non chiffré : effet budgétaire et sur l''emploi incertain'
+- id: LIS-IMM-02
+  intitule: Fin du droit du sol automatique
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-IMM-03
+  intitule: AME remplacée par une aide médicale d'urgence (600 à 900 M€ annoncés)
+  source: Le livre noir, 22/04/2026, p. 9
+  traitement: lisnard_mesures.ame (annonce non reprise)
+- id: LIS-IMM-04
+  intitule: Référendum sur l'immigration
+  source: Fiche « Questions », 03/10/2026
+  traitement: non chiffré
+- id: LIS-IMM-05
+  intitule: Expulsions systématiques, prestations non contributives après cinq ans de résidence
+  source: Page programme (non datée)
+  traitement: dans lisnard_mesures.prestations_etranger
+- id: LIS-IMM-06
+  intitule: Primauté du droit national, sortie de la CEDH en dernier recours
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-IMM-07
+  intitule: 80 000 entrées légales par an
+  source: CNEWS, 28/10/2026
+  traitement: non chiffré
+- id: LIS-INS-01
+  intitule: Septennat
+  source: Discours de Bayeux, 17/06/2026, p. 8
+  traitement: non chiffré
+- id: LIS-INS-02
+  intitule: Article 11 élargi, révision par référendum
+  source: Discours de Bayeux, 17/06/2026, p. 9
+  traitement: non chiffré
+- id: LIS-INS-03
+  intitule: Contrôle de constitutionnalité limité à la lettre
+  source: Discours de Bayeux, 17/06/2026, p. 9
+  traitement: non chiffré
+- id: LIS-INS-04
+  intitule: Loi limitée aux principes
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-UE-01
+  intitule: Article 55 révisé (CEDH)
+  source: Discours de Bayeux, 17/06/2026, p. 10
+  traitement: non chiffré
+- id: LIS-UE-02
+  intitule: Dérogation aux règles européennes d'asile
+  source: Discours de Bayeux, 17/06/2026, p. 10
+  traitement: non chiffré
+- id: LIS-UE-03
+  intitule: Traité de démocratisation de l'Europe
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-INT-01
+  intitule: Accord franco-algérien révisé, pressions sur les pays non coopérants
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-INT-02
+  intitule: Hausse « incontournable » de la défense, combat aérien bâti sur le Rafale
+  source: Fiche « Questions », 16/10/2026
+  traitement: lisnard_mesures.defense
+- id: LIS-INT-03
+  intitule: Armes et munitions pour l'Ukraine
+  source: Fiche « Questions », 16/10/2026
+  traitement: dans lisnard_mesures.defense
+- id: LIS-NUM-01
+  intitule: IA souveraine dans l'action publique
+  source: Discours de Bayeux, 17/06/2026, p. 12
+  traitement: non chiffré
+- id: LIS-CUL-01
+  intitule: Répertoire national de grandes œuvres
+  source: Page programme (non datée)
+  traitement: non chiffré
+- id: LIS-CUL-02
+  intitule: Audiovisuel public recentré, France 2 privatisée
+  source: Fiche « Questions », 16/10/2026
+  traitement: lisnard_mesures.audiovisuel
+- id: LIS-OM-01
+  intitule: Mêmes libertés locales pour tous les territoires
+  source: Discours de Bayeux, 17/06/2026, p. 11
+  traitement: non chiffré
+- id: LIS-OM-02
+  intitule: Task forces anti-narcotrafic outre-mer
+  source: Page programme (non datée)
+  traitement: 'non chiffré : moyens existants'
+- id: LIS-TER-01
+  intitule: Départements et régions fusionnés en une cinquantaine de provinces
+  source: Discours de Bayeux, 17/06/2026, p. 11
+  traitement: lisnard_mesures.provinces
+- id: LIS-TER-02
+  intitule: Moitié des 1 200 agences supprimées, gouvernement de douze ministres
+  source: Le livre noir, 22/04/2026, p. 24
+  traitement: lisnard_mesures.agences
+- id: LIS-TER-03
+  intitule: Non-remplacement d'une partie des départs
+  source: Fiche « Questions », 03/10/2026
+  traitement: dans lisnard_mesures.postes_*
+- id: LIS-TER-04
+  intitule: « Silence vaut accord » généralisé
+  source: Le livre noir, 22/04/2026, p. 16
+  traitement: non chiffré
+- id: LIS-TER-05
+  intitule: Statut des fonctionnaires aligné sur le privé hors régalien
+  source: Fiche « Questions », 16/10/2026
+  traitement: non chiffré
+- id: LIS-TER-06
+  intitule: INSP supprimé, DRH de l'État
+  source: Le livre noir, 22/04/2026, p. 24
+  traitement: non chiffré
+- id: LIS-TER-07
+  intitule: Effectifs publics −12 % (plus de 400 000 suppressions)
+  source: CNEWS, 28/10/2026
+  traitement: lisnard_mesures.postes_*
+- id: LIS-SOC-01
+  intitule: Quotient familial déplafonné
+  source: Page programme (non datée)
+  traitement: lisnard_mesures.quotient_familial
+- id: LIS-SOC-02
+  intitule: Parents de mineurs délinquants responsables
+  source: Fiche « Questions », 03/10/2026
+  traitement: non chiffré

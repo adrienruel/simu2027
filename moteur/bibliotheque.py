@@ -16,7 +16,7 @@ Le programme Tondelier garde pour l'instant son propre calcul du SMIC et du reto
 from __future__ import annotations
 
 from . import statu_quo as sq
-from .noyau import ANNEES
+from .noyau import ANNEES, Mesure
 from .parametres import Parametres
 
 
@@ -288,3 +288,33 @@ def defense_sans_lpm(p: Parametres, s: str) -> dict[int, float]:
     a = sq.blocs(p, s)
     b = sq.blocs(p.avec({"statu_quo.defense_trajectoire": "2026"}), s)
     return {t: a[t]["defense_ue"] - b[t]["defense_ue"] for t in ANNEES}
+
+
+def baisse_prelevements_salaries(p: Parametres, idx: dict, montant: float, part_ir: float, debut: int, nom: str,
+                                 deductible: float = 1.0) -> list:
+    """Baisse uniforme de prélèvements salariaux (Md€ de 2026, > 0) sur les revenus d'activité, répartie entre privé et
+    agents publics comme la CSG (csg_activite), avec l'impôt sur le revenu en plus (part déductible des prélèvements
+    supprimés, rapportée aux 6,8 points déductibles de la CSG sur 9,2, × part_ir : part retrouvée dans l'impôt réel) et
+    la prime d'activité, le RSA et les aides au logement en moins (OpenFisca, à proportion de la suppression de la CSG).
+    Forme d'incidence : celle de la suppression de la CSG (OpenFisca). Utilisée par Attal (« droit au brut ») et
+    Retailleau (restitution aux salariés). Cotisations salariales : deductible = 1 ; CSG : deductible = 6,8 / 9,2."""
+    from . import offre
+    inc = "openfisca:csg_activite_supprimee"
+    c = csg_activite(p)
+    f = montant / (c["csg_prive"] + c["csg_public"])
+    k_ded = deductible * 9.2 / 6.8
+    st = offre.statique_openfisca(p, "csg_activite_supprimee")
+
+    def ser(v, indice):
+        return {**{t: (v if t >= debut else 0.0) for t in (2027, 2028)}, **{t: v * idx[indice][t] for t in ANNEES}}
+    return [
+        Mesure(f"{nom} (privé)", "recettes", ser(-f * c["csg_prive"], "recette:salaires_prive"),
+               instrument="travail", incidence=inc),
+        Mesure(f"{nom} (agents publics)", "recettes", ser(-f * c["csg_public"], "recette:salaires_public"),
+               instrument="travail", incidence=inc),
+        Mesure(f"{nom} : impôt sur le revenu en plus (prélèvements déductibles en moins)", "recettes",
+               ser(f * part_ir * k_ded * (c["ir_prive"] + c["ir_public"]), "recette:salaires_prive"),
+               instrument="travail", incidence=inc),
+        Mesure(f"{nom} : prime d'activité, RSA et aides au logement en moins", "pauvrete",
+               ser(f * st["prestations_en_plus"], "recette:salaires_prive")),
+    ]
