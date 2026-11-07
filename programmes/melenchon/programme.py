@@ -128,7 +128,23 @@ class Melenchon(ProgrammeSimple):
         perdus = n_prive * (1 - k ** el_t)
         canaux["Sixième semaine de congés et 4 février férié : emplois perdus"] = {
             t: -perdus * min(1.0, (t - 2027) / 2) * (e[t]["emploi"] / e[2029]["emploi"]) for t in ANNEES}
+        out.extend(self.ecologie(p, s))
         return out, canaux
+
+    def ecologie(self, p, s) -> list:
+        """Effets physiques des mesures écologiques (groupe melenchon_ecologie), comme Tondelier : une mesure sans
+        montant chacune, dont le coût est déjà dans les mesures budgétaires."""
+        from moteur.ecologie import emissions as em
+        out = []
+        for nom, par in self.pt._p.items():
+            if not nom.startswith("melenchon_ecologie."):
+                continue
+            x = par.valeur
+            serie = em.profil(p, s, x)
+            out.append(Mesure(f"{x['id']} — {x['libelle']} (émissions)", "recettes", {}, "physique",
+                              physique={f"emissions_mt:{x['secteur']}": serie},
+                              vert="defavorable" if max(serie.values()) > 0 else "favorable"))
+        return out
 
 
 def programme() -> Melenchon:

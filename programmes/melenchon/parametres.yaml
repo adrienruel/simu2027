@@ -1015,3 +1015,95 @@ melenchon_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : ≈ 90 Md€ d'actifs × 2 à 3 % de rendement versé, moins la baisse des péages (« revenant sur les hausses de prix passées ») et des tarifs (Engie, Ehpad)"
+
+# --- Effets en tonnes des mesures écologiques (07/11/2026) ----------------------------------------------------------
+# Même méthode que tondelier_ecologie (docs/ecologie.md) : effet à plein par scénario (Mt CO2e par an, négatif =
+# évité), montée linéaire, extinction quand le statu quo rattrape la mesure, réduit au rythme de la décarbonation du
+# statu quo (moteur/ecologie/emissions.profil). Le coût de chaque mesure est déjà dans melenchon_mesures. L'objectif de
+# −65 % en 2033 (p. 27) et la « règle verte » sont des objectifs : seules les mesures qui les servent sont comptées.
+melenchon_ecologie:
+  renovation:
+    valeur: {id: LFI-LOG-05, libelle: "Isolation d'au moins 700 000 logements par an", secteur: batiments, debut: 2028, plein: 2050,
+             effet_mt: {crise: -1.7, prudent: -2.8, median: -4.5, optimiste: -6.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Mêmes bases que tondelier_ecologie.renovation (Anah, bilan 2024 ; Citepa, Secten 2026 : 1,2 t par logement en moyenne dans le résidentiel)"
+    note: "Isolations, en partie complètes : gain énergétique moyen ≈ 35 % (contre 65 % pour une rénovation d'ampleur), soit 0,3 t (crise), 0,35 t (prudent), 0,45 t (médian), 0,6 t (optimiste) par logement. Isolations en plus du statu quo réellement faites (capacité de la filière, plus facile que pour des rénovations complètes) : 250 000 (crise), 350 000 (prudent), 450 000 (médian), 600 000 (optimiste) par an ; cumul sur 2028-2050 plafonné à 10 millions de logements."
+  chauffages_fossiles:
+    valeur: {id: LFI-LOG-05b, libelle: "Chauffages au fioul et au gaz remplacés progressivement", secteur: batiments, debut: 2028, plein: 2045,
+             effet_mt: {crise: -1.9, prudent: -3.0, median: -5.3, optimiste: -7.1}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Budget : +1 Md€ par an d'aides aux pompes à chaleur (melenchon_mesures.renovation) ; Citepa : ≈ 20 Mt pour le chauffage au gaz et au fioul des logements ; même méthode que tondelier_ecologie.sortie_fioul"
+    note: "≈ 4 000 € d'aide par pompe à chaleur : 250 000 aidées en plus par an, dont une partie se ferait sans aide : 50 000 (crise), 80 000 (prudent), 125 000 (médian), 150 000 (optimiste) changements en plus par an × 2,2 à 2,8 t évitées (gaz surtout, un peu de fioul), cumulés sur 17 ans. Aucune date de fin des chaudières au gaz : pas d'interdiction comptée. Recoupe en partie l'isolation (même logement) : effets additionnés sans correction en médian et optimiste, la prudence est dans les effectifs."
+  ferroviaire:
+    valeur: {id: LFI-INV-02, libelle: "Voies rénovées, lignes rouvertes, fret relancé, billets moins chers", secteur: transports, debut: 2030, plein: 2040,
+             effet_mt: {crise: -0.8, prudent: -1.6, median: -3.9, optimiste: -6.3}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.ferroviaire (SNCF, « Le fer contre le carbone », 2022 ; Citepa : ≈ 117 Mt pour la route), à proportion du budget : 4 Md€ par an contre 3"
+  transports_publics:
+    valeur: {id: LFI-INV-03b, libelle: "Transports publics interconnectés et à la demande", secteur: transports, debut: 2028, plein: 2031,
+             effet_mt: {crise: -0.16, prudent: -0.32, median: -0.64, optimiste: -0.96}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Moitié de tondelier_ecologie.ticket_climat (évaluation du Deutschlandticket) : offre en plus, sans abonnement unique"
+  leasing_social:
+    valeur: {id: LFI-INV-03, libelle: "Leasing social", secteur: transports, debut: 2028, plein: 2032, fin_debut: 2035, fin: 2045,
+             effet_mt: {crise: -0.48, prudent: -0.48, median: -0.72, optimiste: -0.96}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même budget (1 Md€ par an) et même effet que tondelier_ecologie.leasing_social"
+  plan_velo:
+    valeur: {id: LFI-INV-03, libelle: "Plan vélo rétabli", secteur: transports, debut: 2028, plein: 2035,
+             effet_mt: {crise: -0.03, prudent: -0.05, median: -0.12, optimiste: -0.25}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même chiffrage que tondelier_ecologie.plan_velo (Cnam, Imperial College, IFS et CNRS, 2025)"
+  aerien:
+    valeur: {id: LFI-ECO-02, libelle: "Lignes aériennes intérieures supprimées quand le train fait moins de quatre heures ; kérosène taxé", secteur: transports, debut: 2028, plein: 2029,
+             effet_mt: {crise: -0.45, prudent: -0.6, median: -0.75, optimiste: -0.9}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "DGAC, bilan des émissions du transport aérien 2024 : 1,5 Mt pour les vols entre villes de métropole"
+    note: "Plus fort que l'interdiction actuelle (2 h 30 et trois lignes) : 30 % (crise), 40 % (prudent), 50 % (médian), 60 % (optimiste) des émissions des vols métropolitains (la Corse et les liaisons de plus de quatre heures en train restent)."
+  niches_fossiles:
+    valeur: {id: LFI-REC-23b, libelle: "Subventions aux énergies fossiles arrêtées (gazole des transporteurs, gazole non routier agricole)", secteur: transports, debut: 2028, plein: 2032,
+             effet_mt: {crise: -0.4, prudent: -0.6, median: -1.0, optimiste: -1.4}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Encadrement : poids lourds ≈ 30 Mt (Citepa) ; fin du remboursement partiel de TICPE ≈ +15 c par litre (+8 %) ; élasticité de long terme du transport routier de marchandises au prix du carburant −0,2 à −0,4 (Labandeira et al., 2017) ; engins agricoles ≈ 5 Mt, gazole non routier +40 % environ, élasticité −0,1 à −0,2"
+    note: "Classé dans les transports (l'essentiel) ; la part agricole (≈ 0,2 à 0,4 Mt) y est incluse."
+  agriculture:
+    valeur: {id: LFI-INV-06c, libelle: "Bifurcation agroécologique : contrats de transition, installation, engrais et pesticides réduits", secteur: agriculture, debut: 2028, plein: 2037,
+             effet_mt: {crise: -1.2, prudent: -2.3, median: -5.7, optimiste: -9.1}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.agriculture (The Shift Project, 2024 ; Citepa : 76,6 Mt en 2025), à proportion des moyens : 3,5 Md€ par an contre 1,5, et réduction planifiée des engrais (p. 110)"
+    note: "1,5 % (crise), 3 % (prudent), 7,5 % (médian), 12 % (optimiste) des émissions agricoles en 2037. Pas de baisse du cheptel annoncée : le gros levier des scénarios ambitieux n'est pas mobilisé."
+  chaleur_renouvelable:
+    valeur: {id: LFI-INV-04, libelle: "Renouvelables et sobriété : chaleur renouvelable et efficacité énergétique (part du soutien public)", secteur: industrie, debut: 2028, plein: 2047,
+             effet_mt: {crise: -2.0, prudent: -4.0, median: -7.0, optimiste: -10.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Ratio du fonds chaleur (ADEME, bilan 2024 : ≈ 1,15 t par an pour 1 000 € d'aide), comme tondelier_ecologie.renouvelables_pme, pour la moitié du budget (melenchon_mesures.energie_renouvelable, 2 Md€ en 2032) : l'électricité renouvelable remplace surtout du nucléaire, sans gain de carbone"
+  sortie_nucleaire:
+    valeur: {id: LFI-INV-12, libelle: "Réacteurs fermés à 60 ans, EPR2 arrêté : gaz de secours", secteur: energie, debut: 2040, plein: 2055, suit_intensite: false,
+             effet_mt: {crise: 5.0, prudent: 2.0, median: 1.0, optimiste: 0.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "RTE, Futurs énergétiques 2050 (2021), scénario M0 ; parc mis en service de 1979 à 1999 : fermetures à 60 ans de 2039 à 2059 ; même logique que tondelier_ecologie.sortie_nucleaire (gaz de secours si les renouvelables et les flexibilités ne suivent pas)"
+    note: "Sortie plus lente que chez Tondelier (100 % renouvelable en 2060, contre 2047), donc moins de risque : 5 TWh de gaz (≈ 2 Mt) en prudent, le double et demi en crise, aucun en optimiste."
+  reemploi:
+    valeur: {id: LFI-INV-08, libelle: "Service public du réemploi, consigne, zéro déchet", secteur: dechets, debut: 2028, plein: 2035,
+             effet_mt: {crise: -0.1, prudent: -0.2, median: -0.4, optimiste: -0.6}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Citepa : ≈ 14 Mt pour les déchets (méthane des décharges surtout) ; ADEME : le réemploi et la consigne réduisent surtout les émissions de production (importées en partie)"
+    note: "Effet territorial faible (1 à 4 % du secteur) ; l'essentiel du gain est dans l'empreinte, non compté ici."
+  batiments_publics:
+    valeur: {id: LFI-EDU-07, libelle: "Bâti scolaire et universitaire rénové", secteur: batiments, debut: 2028, plein: 2047,
+             effet_mt: {crise: 0.0, prudent: 0.0, median: -1.5, optimiste: -3.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.fonds_vert (aucune émission évitée publiée) ; budget comparable (≈ 2,5 Md€ par an, dont une partie d'adaptation à la chaleur)"

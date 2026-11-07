@@ -111,5 +111,54 @@ risque bornée du modèle). Comme pour les autres, il faut lire l'écart au stat
    européenne, protectionnisme (droits de douane, réaction des partenaires), quotas de contrats précaires, interdiction
    des licenciements boursiers, indépendance de la Kanaky-Nouvelle-Calédonie, plafond de 5 logements transmissibles,
    32 heures dans le privé par la négociation.
-5. **Émissions** : les tonnes évitées des mesures écologiques (rénovation, ferroviaire, agriculture, sortie des
-   énergies fossiles) ne sont pas encore estimées (module écologie).
+5. **Empreinte** : le réemploi, la relocalisation et les droits de douane écologiques réduisent surtout les émissions
+   importées : non comptés.
+
+## Écologie : émissions évitées (7 novembre 2026)
+
+Groupe `melenchon_ecologie` (treize mesures, même méthode et mêmes sources que Tondelier, `docs/ecologie.md`) :
+isolation de 700 000 logements par an, chauffages au fioul et au gaz remplacés, ferroviaire, transports publics,
+leasing social, vélo, lignes aériennes intérieures supprimées quand le train fait moins de quatre heures, fin des
+subventions aux énergies fossiles, bifurcation agroécologique, chaleur renouvelable, réemploi, bâtiments scolaires ;
+en sens inverse, le gaz de secours si les renouvelables ne suivent pas la fermeture des réacteurs à 60 ans.
+
+| Émissions territoriales (Mt CO2e) | 2032 | 2037 | 2050 |
+|---|---|---|---|
+| Statu quo (prudent) | 315,5 | 287,7 | 221,4 |
+| Mélenchon, prudent : effet des mesures | −5,7 | −8,6 | −8,2 |
+| Mélenchon, médian : effet des mesures | −10,9 | −17,0 | −17,1 |
+| Tondelier, prudent / médian (rappel) | −7,5 / −13,7 | −8,3 / −17,6 | −5,2 / −16,4 |
+
+Les deux programmes sont du même ordre : Mélenchon gagne plus tard (agriculture et rail plus dotés, sortie du
+nucléaire plus lente), Tondelier plus tôt (rénovations complètes, sortie du fioul datée). Aucun n'approche l'objectif
+de −65 % en 2033 (≈ 190 Mt) avec les mesures chiffrables : il manque des mesures datées sur les voitures, les
+chaudières au gaz et le cheptel.
+
+## Sensibilités (7 novembre 2026)
+
+Effet sur le solde primaire de 2037, contre le statu quo (points de PIB) :
+
+| Variante | Prudent | Autres |
+|---|---|---|
+| Référence | −11,9 | crise −14,4 ; médian −9,5 ; optimiste −7,4 |
+| Lectures les moins chères (culture +6, AAH et pensions au SMIC actuel, arrêts maladie 4,5) | −11,2 | médian −8,9 ; optimiste −6,9 |
+| Garantie d'autonomie par personne (coût doublé, hypothèse) | −12,9 | |
+| Culture sur la base du seul ministère (+25 Md€) | −12,5 | |
+| Arrêts maladie entièrement payés par la Sécurité sociale | −12,3 | |
+| Éviction des postes publics à 0,5 au lieu de 1 | −11,8 | chômage 2037 : 8,3 % au lieu de 9,0 |
+| Effet de la demande sur 8 ans au lieu de 4,5 | −11,4 | chômage 2032 : 6,3 % au lieu de 7,5 |
+| Multiplicateur en miroir pour une relance (voir ci-dessous) | | crise −14,5 ; optimiste −7,3 |
+
+Les lectures ambiguës et les hypothèses communes bougent le solde de 2037 d'un point au plus sur douze : le résultat
+tient à la taille du programme. Elles comptent davantage pour le chômage (de 6,3 à 9 % selon la persistance de la
+relance et l'éviction).
+
+**Incohérence trouvée dans les règles communes** (à valider par Adrien, touche tous les programmes) : le
+multiplicateur et sa durée ne passent pas au scénario miroir quand l'impulsion est une relance, alors que l'éviction
+et le canal d'offre le font. L'optimiste garde 0,5 (valeur choisie pour qu'un ajustement budgétaire coûte peu) et
+donne donc moins de relance à un programme qui dépense ; la crise garde 1,3 et lui en donne plus. En miroir :
+déficit 2032 de 24,3 % en crise (au lieu de 19,5) et de 12,1 % en optimiste (au lieu de 14,8) ; peu d'effet en 2037.
+
+**Piste écartée** : un effet durable des crèches sur l'emploi des mères. L'Insee (P. Pora, Insee Analyses n° 55,
+2020) ne trouve pas d'effet significatif d'une place en plus sur l'emploi salarié des mères (−1,7 point, intervalle
+de −8,7 à +5,3) : rien à ajouter au modèle.

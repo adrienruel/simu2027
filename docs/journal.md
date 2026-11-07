@@ -676,3 +676,12 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
   départ (retrouve à l'euro près le retour à 62 ans de Tondelier, test).
 - Résultat (prudent) : −4,7 points de PIB de solde en 2029, −9,7 en 2032, −11,6 en 2037 ; déficit 2037 28,1 % contre
   9,7 % au statu quo (optimiste : 18,9 contre 8,2).
+
+## 7 novembre 2026 — Mélenchon : émissions et sensibilités
+
+- Remarque d'Adrien : le résumé du comparateur était partisan et oubliait l'écologie. Résumé réécrit ; treize mesures
+  écologiques chiffrées en tonnes (`melenchon_ecologie`) : −8,6 Mt en 2037 dans le prudent, −17 dans le médian, du
+  même ordre que Tondelier.
+- Sensibilités (`docs/melenchon.md`) : lectures ambiguës et hypothèses communes bougent le solde de 2037 d'un point
+  au plus sur douze. Incohérence trouvée, à valider : le multiplicateur ne passe pas au scénario miroir pour une
+  relance (l'éviction et l'offre le font). Piste des crèches écartée (Insee Analyses n° 55, 2020).
