@@ -49,7 +49,20 @@ def multiplicateur(p, s: str, cout_net: dict, annees) -> dict:
         prec = cout_net[t]
         impulsions.append((t, i, par[MIROIR[s]] if i > 0 else par[s]))
         dpib[t] = sum(m * i * max(0.0, 1 - (t - k) / d) for k, i, (m, d) in impulsions)
-    return dpib
+    return contrainte_capacite(p, s, dpib)
+
+
+def contrainte_capacite(p, s: str, dpib: dict) -> dict:
+    """Relance qui bute sur l'offre (décision d'Adrien du 07/11/2026) : au-delà de capacite.seuil_pib points de PIB,
+    seule la part capacite.effet_au_dela du PIB en plus dû au multiplicateur passe dans le PIB (le reste fuit vers les
+    prix et les importations). Ne touche pas un PIB en moins (resserrement)."""
+    y = sq.pib(p, s)
+    seuil, k = sq._v(p, "capacite.seuil_pib", s), sq._v(p, "capacite.effet_au_dela", s)
+    out = {}
+    for t, v in dpib.items():
+        lim = seuil / 100 * y[max(t, 2029)]
+        out[t] = v if v <= lim else lim + k * (v - lim)
+    return out
 
 
 class ProgrammeSimple:

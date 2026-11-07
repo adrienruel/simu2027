@@ -831,3 +831,18 @@ seniors:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : PIB par emploi ≈ 95 000 € (Insee 2025) ; seniors en fin de carrière, un peu moins productifs que la moyenne de leur coût"
+
+# Contrainte de capacité sur la relance (7 novembre 2026, décision d'Adrien)
+capacite:
+  seuil_pib:
+    valeur: {crise: 3.0, prudent: 2.0, median: 2.0, optimiste: 2.5}
+    unite: pct_pib
+    statut: HYPOTHESE
+    source: "Écart de production de la France ≈ −1 à −1,5 % du PIB en 2026 (Commission européenne, prévisions d'automne 2025 ; OFCE) : une relance absorbe d'abord ces capacités inemployées ; au-delà, elle bute sur l'offre (recrutements, capacités de production, importations). En crise, plus de capacités libres"
+    note: "PIB en plus dû au multiplicateur (relance seulement), en % du PIB du statu quo, au-delà duquel l'effet est réduit."
+  effet_au_dela:
+    valeur: {crise: 0.2, prudent: 0.3, median: 0.45, optimiste: 0.6}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Auerbach et Gorodnichenko (AEJ Policy, 2012) : multiplicateur de la dépense ≈ 0 à 0,5 en période d'expansion contre 1 à 1,5 en récession ; Ramey et Zubairy (JPE, 2018) : ≈ 0,6 à 0,8 quel que soit l'état de l'économie (borne optimiste) ; une partie de la demande en plus fuit vers les importations et les prix (canal absent du modèle)"
+    note: "Part de l'effet de relance au-delà du seuil qui passe dans le PIB. Ne joue pas sur un resserrement (consolidation), ni sur les effets d'offre."

@@ -186,3 +186,15 @@ def test_part_travail_d_une_mesure(p):
     b = Mesure("b", "recettes", {t: 10.0 for t in (2027, 2028, *ANNEES)}, instrument="travail",
                incidence="openfisca:csg_activite_plus1@0.5")
     assert offre.effets(p, "prudent", [b])["dpib"][2050] == pytest.approx(0.5 * offre.effets(p, "prudent", [a])["dpib"][2050])
+
+
+def test_contrainte_de_capacite(p):
+    """Relance au-delà du seuil : seule une part passe dans le PIB ; un resserrement n'est pas touché."""
+    from moteur.programme_simple import contrainte_capacite
+    y = sq.pib(p, "prudent")
+    seuil, k = sq._v(p, "capacite.seuil_pib", "prudent"), sq._v(p, "capacite.effet_au_dela", "prudent")
+    brut = {2029: 0.06 * y[2029], 2030: -0.06 * y[2030], 2031: 0.01 * y[2031]}
+    c = contrainte_capacite(p, "prudent", brut)
+    lim = seuil / 100 * y[2029]
+    assert c[2029] == pytest.approx(lim + k * (brut[2029] - lim))
+    assert c[2030] == brut[2030] and c[2031] == brut[2031]
