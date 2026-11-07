@@ -84,3 +84,18 @@ def test_mesures_de_2027_2028_dans_la_dette_de_depart(p, prog):
     assert avant > 0
     assert ctx["dette_depart"] == pytest.approx(sq.dette_fin_2028(p) + avant)
     assert all(t in ctx["chomage"] for t in ANNEES)
+
+
+def test_multiplicateur_en_miroir_pour_une_relance(p):
+    """Décision du 07/11/2026 : une relance prend le multiplicateur du scénario miroir, un resserrement le sien."""
+    from moteur.programme_simple import multiplicateur
+    an = list(range(2028, 2040))
+    relance = {t: 10.0 for t in an}
+    resserrement = {t: -10.0 for t in an}
+    m = {sc: sq._v(p, "macro.multiplicateur", sc) for sc in sq.SCENARIOS}
+    assert multiplicateur(p, "optimiste", relance, an)[2028] == pytest.approx(10 * m["crise"])
+    assert multiplicateur(p, "crise", relance, an)[2028] == pytest.approx(10 * m["optimiste"])
+    assert multiplicateur(p, "crise", resserrement, an)[2028] == pytest.approx(-10 * m["crise"])
+    # relance de même taille : l'optimiste donne au moins autant de PIB que le prudent, la crise au plus autant
+    d = {sc: multiplicateur(p, sc, relance, an)[2030] for sc in sq.SCENARIOS}
+    assert d["optimiste"] >= d["prudent"] >= d["crise"]

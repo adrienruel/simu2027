@@ -59,6 +59,8 @@ maximal de 12 M€). Les « plans thématiques » annoncés ne sont pas encore p
 
 ## Résultats (6 novembre 2026)
 
+*Chiffres du 6 novembre, avant le multiplicateur en miroir du 7 novembre (voir Sensibilités) : déficit 2037 désormais 28,4 % en prudent, 37,6 en crise, 22,0 en médian, 17,8 en optimiste.*
+
 Effet des mesures sur le solde, contre le statu quo (prudent, Md€ de 2026 ; − = dégrade) :
 
 | Prudent | 2029 | 2032 | 2037 | 2050 |
@@ -147,17 +149,32 @@ Effet sur le solde primaire de 2037, contre le statu quo (points de PIB) :
 | Arrêts maladie entièrement payés par la Sécurité sociale | −12,3 | |
 | Éviction des postes publics à 0,5 au lieu de 1 | −11,8 | chômage 2037 : 8,3 % au lieu de 9,0 |
 | Effet de la demande sur 8 ans au lieu de 4,5 | −11,4 | chômage 2032 : 6,3 % au lieu de 7,5 |
-| Multiplicateur en miroir pour une relance (voir ci-dessous) | | crise −14,5 ; optimiste −7,3 |
+| Multiplicateur en miroir pour une relance (appliqué depuis, voir ci-dessous) | −12,0 | crise −14,5 ; optimiste −7,3 |
 
 Les lectures ambiguës et les hypothèses communes bougent le solde de 2037 d'un point au plus sur douze : le résultat
 tient à la taille du programme. Elles comptent davantage pour le chômage (de 6,3 à 9 % selon la persistance de la
 relance et l'éviction).
 
-**Incohérence trouvée dans les règles communes** (à valider par Adrien, touche tous les programmes) : le
-multiplicateur et sa durée ne passent pas au scénario miroir quand l'impulsion est une relance, alors que l'éviction
-et le canal d'offre le font. L'optimiste garde 0,5 (valeur choisie pour qu'un ajustement budgétaire coûte peu) et
-donne donc moins de relance à un programme qui dépense ; la crise garde 1,3 et lui en donne plus. En miroir :
-déficit 2032 de 24,3 % en crise (au lieu de 19,5) et de 12,1 % en optimiste (au lieu de 14,8) ; peu d'effet en 2037.
+**Multiplicateur en miroir pour une relance** (incohérence trouvée, corrigée le 07/11/2026 avec l'accord d'Adrien,
+pour tous les programmes : `programme_simple.multiplicateur`, repris par Tondelier) : le multiplicateur et sa durée
+ne passaient pas au scénario miroir quand l'impulsion est une relance, alors que l'éviction et le canal d'offre le
+font. L'optimiste gardait 0,5 (valeur choisie pour qu'un ajustement budgétaire coûte peu) et donnait donc moins de
+relance à un programme qui dépense ou baisse les impôts. Désormais, chaque impulsion annuelle prend son scénario si
+c'est un resserrement, le scénario miroir si c'est une relance. Écologie de droite (moteur propre, ajustement) ne
+change pas.
+
+| Déficit (% du PIB), avant → après | 2029 | 2032 | 2037 |
+|---|---|---|---|
+| Mélenchon, crise | 9,7 → 13,4 | 19,5 → 24,3 | 35,0 → 37,6 |
+| Mélenchon, prudent | 10,2 → 10,3 | 17,8 → 18,4 | 28,1 → 28,4 |
+| Mélenchon, optimiste | 9,4 → 7,1 | 14,8 → 12,1 | 18,9 → 17,8 |
+| Tondelier, crise / optimiste (2032) | | 11,6 → 12,9 / 7,2 → 6,5 | |
+| Arthaud, crise / optimiste (2032) | | 10,8 → 11,4 / 8,1 → 7,9 | |
+| Zemmour, crise / optimiste (2032) | | 12,2 → 12,5 / 6,9 → 6,8 | |
+
+Prudent et médian bougent peu (même multiplicateur de 1 ; seule la durée change, et seulement les années où
+l'impulsion change de sens). Bertrand : inchangé en prudent et médian. Chômage de Mélenchon en optimiste : 5,4 % en
+2032 au lieu de 6,4 %.
 
 **Piste écartée** : un effet durable des crèches sur l'emploi des mères. L'Insee (P. Pora, Insee Analyses n° 55,
 2020) ne trouve pas d'effet significatif d'une place en plus sur l'emploi salarié des mères (−1,7 point, intervalle

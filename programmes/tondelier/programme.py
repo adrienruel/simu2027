@@ -24,6 +24,7 @@ from moteur import offre
 from moteur import statu_quo as sq
 from moteur.noyau import ANNEES, Mesure
 from moteur.parametres import Parametres
+from moteur.programme_simple import multiplicateur
 
 ANNEES_AVANT = (2027, 2028)
 VERSANTS = {"etat_civils": "etat_missions", "etat_militaires": "etat_missions", "territoriale": "collectivites",
@@ -366,13 +367,7 @@ class Tondelier:
             cout_net = offre.impulsion(p, liste, annees)
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
-            mult, duree = sq._v(p, "macro.multiplicateur", s), sq._v(p, "macro.annees_effet_ajustement", s)
-            dpib, prec = {}, 0.0
-            impulsions = []
-            for t in annees:
-                impulsions.append((t, cout_net[t] - prec))
-                prec = cout_net[t]
-                dpib[t] = mult * sum(i * max(0.0, 1 - (t - k) / duree) for k, i in impulsions)
+            dpib = multiplicateur(p, s, cout_net, annees)
             part_rec = {t: rec_sq[t] / y[t] for t in ANNEES}
             part_rec.update({t: part_rec[2029] for t in ANNEES_AVANT})
             if self.v("macro.multiplicateur_actif"):

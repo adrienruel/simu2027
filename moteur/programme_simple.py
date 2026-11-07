@@ -31,6 +31,27 @@ ANNEES_AVANT = (2027, 2028)
 TOUTES = (*ANNEES_AVANT, *ANNEES)
 
 
+MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
+
+
+def multiplicateur(p, s: str, cout_net: dict, annees) -> dict:
+    """PIB en plus (Md€) dû à l'impulsion budgétaire nette (cout_net : coût net cumulé des mesures, + = relance).
+
+    Chaque impulsion annuelle agit avec le multiplicateur commun (macro.multiplicateur) et s'efface linéairement en
+    macro.annees_effet_ajustement années. Comme l'éviction et le canal d'offre, le sens compte (décision d'Adrien du
+    07/11/2026) : un resserrement prend les valeurs de son scénario, une relance celles du scénario miroir (crise ↔
+    optimiste, prudent ↔ médian), pour que chaque scénario reste du même côté de la prudence quel que soit le sens."""
+    par = {sc: (sq._v(p, "macro.multiplicateur", sc), sq._v(p, "macro.annees_effet_ajustement", sc))
+           for sc in (s, MIROIR[s])}
+    dpib, prec, impulsions = {}, 0.0, []
+    for t in annees:
+        i = cout_net[t] - prec
+        prec = cout_net[t]
+        impulsions.append((t, i, par[MIROIR[s]] if i > 0 else par[s]))
+        dpib[t] = sum(m * i * max(0.0, 1 - (t - k) / d) for k, i, (m, d) in impulsions)
+    return dpib
+
+
 class ProgrammeSimple:
     nom = ""
     libelle = ""
@@ -125,7 +146,7 @@ class ProgrammeSimple:
             # emplois : postes publics, éviction, canaux des mesures calculées
             # éviction : prise au scénario du même côté de la prudence, pour chaque sens. Créer des postes publics :
             # l'éviction forte est prudente ; en supprimer : c'est la reprise faible par le privé qui l'est (scénario miroir)
-            miroir = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
+            miroir = MIROIR
             ev_c = sq._v(p, "emploi_public.eviction_privee", s)
             ev_s = sq._v(p, "emploi_public.eviction_privee", miroir[s])
             valeur = self.v("emploi.valeur_emploi")
@@ -149,13 +170,8 @@ class ProgrammeSimple:
             cout_net = offre.impulsion(p, liste, TOUTES)
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
-            mult, duree = sq._v(p, "macro.multiplicateur", s), sq._v(p, "macro.annees_effet_ajustement", s)
             actif = self.v("macro.multiplicateur_actif")
-            dpib, prec, impulsions = {}, 0.0, []
-            for t in TOUTES:
-                impulsions.append((t, cout_net[t] - prec))
-                prec = cout_net[t]
-                dpib[t] = (mult * sum(i * max(0.0, 1 - (t - k) / duree) for k, i in impulsions)) if actif else 0.0
+            dpib = multiplicateur(p, s, cout_net, TOUTES) if actif else {t: 0.0 for t in TOUTES}
             part_rec = {t: rec_sq[t] / y[t] for t in ANNEES}
             part_rec.update({t: part_rec[2029] for t in ANNEES_AVANT})
             if actif:

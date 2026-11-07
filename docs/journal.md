@@ -685,3 +685,6 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
 - Sensibilités (`docs/melenchon.md`) : lectures ambiguës et hypothèses communes bougent le solde de 2037 d'un point
   au plus sur douze. Incohérence trouvée, à valider : le multiplicateur ne passe pas au scénario miroir pour une
   relance (l'éviction et l'offre le font). Piste des crèches écartée (Insee Analyses n° 55, 2020).
+- Décision d'Adrien du 07/11/2026 : multiplicateur en miroir pour une relance, pour tous les programmes
+  (`programme_simple.multiplicateur`, Tondelier compris) ; test `test_multiplicateur_en_miroir_pour_une_relance`.
+  Effets surtout en crise et en optimiste (tableau dans `docs/melenchon.md`).
