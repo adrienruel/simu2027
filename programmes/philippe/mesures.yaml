@@ -83,7 +83,11 @@ mesures:
 - id: PHI-RET-04
   intitule: Contribution accrue des retraités ; niches fiscales supprimées avant toute hausse sur le travail
   source: Adidas Arena, 05/07/2026
-  traitement: philippe_mesures.retraites_contribution
+  traitement: 'philippe_mesures.retraites_contribution ; niches : philippe_mesures.niches_fiscales'
+- id: PHI-RET-04b
+  intitule: Niches fiscales supprimées avant toute hausse d'impôt sur le travail
+  source: Adidas Arena, 05/07/2026
+  traitement: philippe_mesures.niches_fiscales (économie estimée)
 - id: PHI-ENE-01
   intitule: 8 EPR de plus que les 6 prévus, renouvelables
   source: Site (« … plus conquérante »)
@@ -151,7 +155,7 @@ mesures:
 - id: PHI-SAN-01
   intitule: Dépenses de santé stabilisées par la prévention et la technologie
   source: Site (« Pour une France plus prospère »)
-  traitement: 'non repris : objectif d''économies'
+  traitement: philippe_mesures.sante_stabilisation (économie estimée)
 - id: PHI-SAN-02
   intitule: Formation des médecins, prévention, IA en santé
   source: Discours de Reims, 10/05/2026

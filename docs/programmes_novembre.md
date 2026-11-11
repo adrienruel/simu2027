@@ -35,6 +35,7 @@ Le nombre de mesures recensées est le suivant :
   - Glucksmann : 15 Md€ de CSG.
 - **Suppressions de postes annoncées.** Elles sont réalisées à 50 % (crise), 70 % (prudent), 80 % (médian) et 100 % (optimiste), à 55 000 € par poste, avec la même règle d'éviction que les autres programmes.
 - **Attal.** Les mesures tirées seulement des conventions ou pétitions de Renaissance (2025) ne sont pas chiffrées, car ce sont des propositions du parti.
+- **Économie nommée mais non chiffrée par le candidat : estimée, jamais mise à 0** (rappel d'Adrien du 07/11/2026). Ajouts : santé stabilisée et niches fiscales (Philippe), cabinets de conseil (Glucksmann), désindexation des pensions au-delà de 2 000 € (Lisnard). Les objectifs d'ensemble chiffrés par le candidat sans mesure (150, 197, 200 Md€, déficit à 2 %) restent écartés.
 - **Sens des scénarios.** Dépense : crise ≥ prudent ≥ médian ≥ optimiste. Recette : l'inverse. C'est vérifié par un test pour chaque programme.
 
 ## Nouveau dans le moteur
@@ -55,7 +56,7 @@ Le nombre de mesures recensées est le suivant :
 | Attal | « Droit au brut » (≈ 46 Md€ en prudent ; 40 cités par la presse, 52 calculés), année blanche de 2028, assurance chômage | baisse_prelevements_salaries ; pensions gelées une année, l'économie s'éteint avec les retraités de 2028 |
 | Philippe | Retraite à 65 ans en moins de dix ans, indemnisation chômage ramenée à 12 mois | report_age_legal_detail (rythme de Bertrand) |
 | Retailleau | Taux plein à 65 ans et départs dès 63 ans avec décote, restitution de 13 Md€ aux salariés, assurance chômage | report_age_legal_detail avec part gardée (comme Bertrand), baisse_prelevements_salaries |
-| Lisnard | CSG de 9,2 à 6,6 % et cotisations salariales (120 Md€, montée en quatre ans), dégressivité du chômage | baisse_prelevements_salaries |
+| Lisnard | CSG de 9,2 à 6,6 % et cotisations salariales (120 Md€, montée en quatre ans), retraite à 65 ans (décision d'Adrien du 07/11/2026), pensions au-delà de 2 000 € gelées pendant le quinquennat, dégressivité du chômage | baisse_prelevements_salaries, report_age_legal_detail |
 
 ## Limites
 
@@ -75,12 +76,12 @@ Solde primaire contre le statu quo, en points de PIB.
 | | optimiste | −0,8 | −2,0 | −0,4 % | 8,3 / 8,3 | −335 | −228 | +3,9 % | 10,9 / 8,2 |
 | Attal | prudent | −1,0 | −1,1 | +0,6 % | 8,2 / 8,3 | +135 | 0 | +2,2 % | 11,4 / 9,7 |
 | | optimiste | −0,5 | −0,1 | +1,4 % | 7,7 / 8,3 | +344 | 0 | +0,3 % | 8,4 / 8,2 |
-| Philippe | prudent | −0,2 | +0,0 | +0,7 % | 8,4 / 8,3 | +147 | +121 | aucun | 9,7 / 9,7 |
-| | optimiste | +0,3 | +1,2 | +1,1 % | 7,6 / 8,3 | +438 | +155 | aucun | 6,6 / 8,2 |
+| Philippe | prudent | −0,2 | +0,1 | +0,7 % | 8,4 / 8,3 | +146 | +121 | aucun | 9,6 / 9,7 |
+| | optimiste | +0,4 | +1,3 | +1,1 % | 7,6 / 8,3 | +437 | +155 | aucun | 6,4 / 8,2 |
 | Retailleau | prudent | −0,5 | −0,2 | +0,7 % | 8,5 / 8,3 | +80 | +79 | +0,4 % | 10,0 / 9,7 |
 | | optimiste | +0,1 | +1,2 | +1,8 % | 7,2 / 8,3 | +615 | +132 | aucun | 6,5 / 8,2 |
-| Lisnard | prudent | −1,8 | −3,5 | +1,8 % | 8,2 / 8,3 | +242 | 0 | +6,8 % | 14,8 / 9,7 |
-| | optimiste | −1,1 | −1,0 | +4,5 % | 6,6 / 8,3 | +972 | 0 | +2,0 % | 9,5 / 8,2 |
+| Lisnard | prudent | −1,7 | −2,8 | +2,1 % | 8,4 / 8,3 | +360 | +121 | +5,5 % | 13,9 / 9,7 |
+| | optimiste | −0,9 | −0,2 | +4,8 % | 6,8 / 8,3 | +1 127 | +155 | +0,6 % | 8,5 / 8,2 |
 
 Lecture :
 - **Philippe et Retailleau** : les baisses d'impôts sont compensées, en partie seulement, par les mesures nommées (âge de 65 ans, non-remplacement, aides aux entreprises, assurance chômage). Le solde est proche du statu quo en prudent et meilleur en médian et en optimiste.

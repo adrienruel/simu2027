@@ -6,7 +6,7 @@
 # Règles : on ne reprend que les mesures, jamais les économies annoncées (80 Md€ la première année, 200 Md€ ensuite, dépense
 # à 45 % du PIB : non saisis ; chaque mesure nommée est estimée) ; les montants des mesures (120 Md€ rendus aux actifs,
 # 40 Md€ d'impôts de production, 20 000 places de prison) sont des paramètres ; dépense : crise ≥ prudent ≥ médian ≥
-# optimiste ; recette : l'inverse. Retraites : statu quo (les fiches d'octobre 2026 écartent une nouvelle borne d'âge).
+# optimiste ; recette : l'inverse. Retraites : 65 ans (décision d'Adrien, 07/11/2026).
 
 lisnard_emploi:
   cout_poste_public:
@@ -58,6 +58,33 @@ lisnard_actifs:
     unite: taux
     statut: HYPOTHESE
     source: "Même valeur que zemmour_csg.part_ir_retrouvee"
+
+lisnard_retraites:
+  age_cible:
+    valeur: 65
+    unite: sans_unite
+    statut: DECISION
+    source: "Page programme non datée : âge légal de 65 ans ; les fiches d'octobre 2026 écartent une nouvelle borne d'âge"
+    note: "Décision d'Adrien (07/11/2026) : 65 ans, même rythme que Bertrand, Zemmour et Philippe (un trimestre par génération à partir de la génération 1966, 65 ans pour la génération 1969)."
+  premiere_generation:
+    valeur: 1966
+    unite: sans_unite
+    statut: DECISION
+  pas_par_generation:
+    valeur: 0.25
+    unite: sans_unite
+    statut: DECISION
+  desindexation_part:
+    valeur: {crise: 0.3, prudent: 0.35, median: 0.4, optimiste: 0.45}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Fiche « Questions » (03/10/2026) : amorçage de la capitalisation par la désindexation des pensions au-delà d'environ 2 000 € par mois ; encadrement : pensions de droit propre au-dessus de 2 000 € brut ≈ 35 à 45 % de la masse des pensions (DREES, Les retraités et les retraites, 2025)"
+    note: "Économie non chiffrée par le candidat : estimée. Lecture : les pensions de plus de 2 000 € ne sont pas revalorisées de 2028 à 2032 (le quinquennat), puis le sont de nouveau ; la perte de niveau s'éteint avec les retraités concernés (durée moyenne ≈ 18 ans). Le fonds de capitalisation amorcé est public (comme le Fonds de réserve pour les retraites) : l'économie reste dans les comptes publics."
+  desindexation_annees:
+    valeur: 5
+    unite: annees
+    statut: HYPOTHESE
+    note: "Amorçage sur le quinquennat (arbitrage)."
 
 lisnard_chomage:
   baisse_taux:

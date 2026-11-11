@@ -441,7 +441,11 @@ mesures:
 - id: GLU-TER-02
   intitule: Services publics de proximité, cabinets de conseil encadrés
   source: Acte I (Place publique, 23/06/2025), p. 48
-  traitement: glucksmann_mesures.services_publics_proximite (économie sur les cabinets non comptée)
+  traitement: 'glucksmann_mesures.services_publics_proximite ; cabinets : glucksmann_mesures.cabinets_conseil (économie estimée)'
+- id: GLU-TER-02b
+  intitule: Encadrement des cabinets de conseil
+  source: Acte I (Place publique, 23/06/2025), p. 48
+  traitement: glucksmann_mesures.cabinets_conseil (économie estimée)
 - id: GLU-TER-03
   intitule: Point d'indice indexé sur l'inflation
   source: Acte I (Place publique, 23/06/2025), p. 40

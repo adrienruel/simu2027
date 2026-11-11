@@ -357,3 +357,19 @@ philippe_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : ≈ 500 inspecteurs à 90 000 €"
+  sante_stabilisation:
+    valeur: {id: PHI-SAN-01, libelle: "Dépenses de santé stabilisées par la prévention et la technologie", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032,
+             montant: {crise: -0.5, prudent: -1.5, median: -2.5, optimiste: -4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : économies de l'Ondam des LFSS 2024-2026 ≈ 3 à 5 Md€ par an, en grande partie déjà au statu quo ; prévention : rendement budgétaire lent (Cour des comptes, 2024) ; achats hospitaliers groupés ≈ 1 Md€ en cinq ans (programme Phare, 2016-2020)"
+    note: "Économie non chiffrée par le candidat : estimée, en plus de la dérive de la santé du statu quo."
+  niches_fiscales:
+    valeur: {id: PHI-RET-04b, libelle: "Niches fiscales supprimées avant toute hausse d'impôt sur le travail", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.5, prudent: 1.0, median: 1.5, optimiste: 2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : dépenses fiscales ≈ 85 Md€ (PLF 2026, Voies et moyens II) ; niches non nommées ; rabot de 2012-2013 ≈ 1 à 2 Md€"
+    note: "Économie non chiffrée : estimée."

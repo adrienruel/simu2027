@@ -524,3 +524,11 @@ glucksmann_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : dotations publiques des fonds régionaux d'investissement ≈ 0,2 à 0,5 Md€ ; la commande publique orientée ne coûte que le surcoût, non chiffré"
+  cabinets_conseil:
+    valeur: {id: GLU-TER-02b, libelle: "Recours aux cabinets de conseil encadré", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.05, prudent: -0.1, median: -0.15, optimiste: -0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : dépenses de conseil de l'État ≈ 0,9 Md€ en 2021 (commission d'enquête du Sénat, 2022), déjà réduites depuis ; 10 à 20 % de moins"
+    note: "Économie non chiffrée par le candidat : estimée."

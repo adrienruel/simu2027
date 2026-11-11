@@ -88,7 +88,7 @@ mesures:
 - id: LIS-RET-01
   intitule: Capitalisation obligatoire amorcée par la désindexation des pensions au-delà de ≈ 2 000 €
   source: Fiche « Questions », 03/10/2026
-  traitement: 'neutre : l''économie sur les pensions alimente les fonds (hors solde)'
+  traitement: 'calculé : lisnard_retraites.desindexation_* (économie estimée ; fonds de capitalisation public)'
 - id: LIS-RET-02
   intitule: Réforme de 2023 gardée (une page non datée évoque 65 ans)
   source: Fiche « Questions », 03/10/2026

@@ -59,3 +59,12 @@ def test_120_md_rendus_aux_actifs(p, prog):
          and ("(privé)" in x.nom or "(agents publics)" in x.nom)]
     assert sum(x.valeurs[2031] for x in m) / prog.indices(p, "prudent")["pib"][2031] == pytest.approx(-120, rel=0.12)
     assert sum(x.valeurs[2029] for x in m) == pytest.approx(0.5 * sum(x.valeurs[2031] for x in m), rel=0.1)
+
+
+def test_retraite_a_65_ans_et_desindexation(p, prog):
+    """65 ans (décision du 07/11/2026) : seniors en emploi ; pensions au-delà de 2 000 € gelées cinq ans, économie
+    estimée (non chiffrée par le candidat), qui s'éteint ensuite."""
+    c = prog.contexte(p)["prudent"]["emplois_canaux"][2040]
+    assert c["Seniors : emploi (âge de la retraite)"] > 30000
+    d = next(x for x in prog.mesures(p)["prudent"] if x.nom.startswith("LIS-RET-01 — pensions"))
+    assert -15 < d.valeurs[2032] < -5 and abs(d.valeurs[2060]) < 0.3 * abs(d.valeurs[2032])

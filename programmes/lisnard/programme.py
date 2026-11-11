@@ -8,16 +8,19 @@ pas reprises : seules les mesures nommées sont estimées.
   −12 %, agences, allocation unique, prisons… ;
 - **mesures calculées** : 120 Md€ rendus aux actifs (CSG de 9,2 à 6,6 % et cotisations salariales), montée en quatre ans,
   moteur/bibliotheque.baisse_prelevements_salaries ; chômage un peu plus bas (dégressivité).
-- Retraites : statu quo (réforme de 2023 gardée, pas de nouvel âge ; la capitalisation amorcée par la désindexation des
-  pensions au-delà de 2 000 € est comptée neutre : l'économie sur les pensions va aux fonds).
+- retraites : âge porté à 65 ans (moteur/bibliotheque.report_age_legal_detail, même rythme que Bertrand), emploi des
+  seniors ; pensions au-delà de 2 000 € non revalorisées pendant le quinquennat (amorçage de la capitalisation, fonds
+  public : l'économie reste dans les comptes publics).
 
     python -m moteur.noyau lisnard
 """
 from __future__ import annotations
 
+import math
+
 from moteur import bibliotheque as bib
 from moteur import statu_quo as sq
-from moteur.noyau import ANNEES
+from moteur.noyau import ANNEES, Mesure
 from moteur.programme_simple import ProgrammeSimple
 
 
@@ -40,6 +43,28 @@ class Lisnard(ProgrammeSimple):
             return 0.0 if t < min(mont) else mont.get(t, 1.0)
         for m in out:
             m.valeurs = {t: v * f(t) for t, v in m.valeurs.items()}
+        # LIS-RET-02 : 65 ans
+        det = bib.report_age_legal_detail(p, s, self.v("retraites.age_cible"), self.v("retraites.premiere_generation"),
+                                          self.v("retraites.pas_par_generation"))
+        self.non_retraites = getattr(self, "non_retraites", {})
+        self.non_retraites[(id(p), s)] = {"serie": det["non_retraites"], "baisse": False}
+        serie = {2027: 0.0, 2028: 0.0, **{t: -det["pensions"][t] for t in ANNEES}}
+        pens = sq.retraites(p, s)[2029]["depenses"]
+        taux_prel = sq.recettes_par_impot(p, s)[2029]["retraites"] / pens
+        out += [Mesure(f"LIS-RET-02 — âge de départ porté à {self.v('retraites.age_cible')} ans", "retraites", serie),
+                Mesure("LIS-RET-02 — prélèvements sur les pensions en moins", "recettes",
+                       {t: taux_prel * v for t, v in serie.items()})]
+        # LIS-RET-01 : pensions au-delà de 2 000 € non revalorisées pendant le quinquennat
+        infl = p.val("inflation.base")
+        pi = infl["2028"]
+        k_d = self.v("retraites.desindexation_part", s)
+        n = int(self.v("retraites.desindexation_annees"))
+        def eco(t):  # perte de niveau cumulée, qui s'éteint avec les retraités concernés (≈ 18 ans)
+            return sum(pens * k_d * pi * math.exp(-(t - a) / 18) for a in range(2028, 2028 + n) if a <= t)
+        ser_d = {2027: 0.0, 2028: -eco(2028), **{t: -eco(t) * idx["pib"][t] for t in ANNEES}}
+        out += [Mesure("LIS-RET-01 — pensions au-delà de 2 000 € non revalorisées pendant le quinquennat", "retraites", ser_d),
+                Mesure("LIS-RET-01 — prélèvements sur les pensions en moins (désindexation)", "recettes",
+                       {t: taux_prel * v for t, v in ser_d.items()})]
         e = sq.effectifs(p, s)
         h = self.v("chomage.baisse_taux", s)
         canaux["Allocations chômage dégressives : emplois en plus"] = {
