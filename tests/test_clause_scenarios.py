@@ -46,9 +46,13 @@ def test_ordre_des_scenarios_sans_regle():
 
 
 def test_les_comptes_se_publient_avec_et_sans_la_regle():
-    """Le noyau publie le déficit avec et sans la règle ; la règle ne le fait jamais monter."""
+    """Le noyau publie le déficit avec et sans la règle. La règle ne le fait monter que si son gain net est négatif :
+    restitution des contributions du fonds et effet récessif décalé des baisses du RUI passées l'emportent sur les
+    leviers de l'année (même comportement que l'ancien moteur : médian 2040-2045, prudent 2044)."""
     for s in R:
-        assert all(R[s][t]["deficit"] <= R[s][t]["deficit_sans_regle"] + 1e-9 for t in R[s])
+        for t in R[s]:
+            if R[s][t]["deficit"] > R[s][t]["deficit_sans_regle"] + 1e-9:
+                assert R[s][t]["regle"]["gain"] < 0
 
 
 def test_v235_prudent_seul():
