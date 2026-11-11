@@ -757,6 +757,15 @@ class EcologieDeDroite:
                 for t in ANNEES:
                     canaux[t]["Seniors : emploi (report de l'âge légal)"] = sen["emplois"][t]
                     actifs[t] += sen["actifs"][t]
+            # chômeurs des seniors à long terme (0,41 par emploi gardé, au niveau de la source : colonne médiane dans tous
+            # les scénarios) : comptés comme dans l'ancien moteur, en plus des chômeurs du report d'âge (canal commun)
+            ratio = q.val("chomage.seniors_chomeurs_par_emploi")
+            long_med = q.val("macro.seniors_long", "median")
+            chomeurs_seniors_long = {t: ratio * (E.ds[t]["adultes"] if E.corr else 1.0) * long_med
+                                     * max(0, min(1, (t - E.m("annee_seniors_long") + 1) / E.m("montee_seniors_long")))
+                                     for t in ANNEES}
+            for t in ANNEES:
+                actifs[t] += chomeurs_seniors_long[t]
             k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
             for t in ANNEES:
                 canaux[t]["Jeunes entrés plus tôt dans l'emploi"] = jeunes[t]
@@ -785,7 +794,9 @@ class EcologieDeDroite:
                 mu, d = par[s] if delta > 0 else par[MIROIR[s]]
                 return mu * delta * max(0.0, 1 - (t - k - 1) / d)
             res[s] = {"mesures": m, "contexte": ctx, "effets": E, "denominateur": denominateur, "part_rec": part_rec,
-                      "mult_clause": mult_clause, "dpib": dpib}
+                      "mult_clause": mult_clause, "dpib": dpib,
+                      "chomeurs_seniors": {t: chomeurs_seniors_long[t] + (sen["chomeurs"][t] if E.reportes is not None else 0.0)
+                                           for t in ANNEES}}
         return {s: x for s, x in res.items() if scenarios is None or s in scenarios}
 
     def entrees(self, p: Parametres, scenarios=None) -> dict:
@@ -842,7 +853,7 @@ class EcologieDeDroite:
         out["Fonds : capital, rendements, créances rendues, effet récessif de la règle"] = {
             t: res[t]["dynamiques"]["fonds"]["solde"] for t in ANNEES}
         if "regle" in res[ANNEES[0]]:
-            out["Règle de trajectoire"] = {t: res[t]["regle"]["gain"] for t in ANNEES}
+            out["Règle de trajectoire"] = {t: res[t].get("regle", {}).get("gain", 0.0) for t in ANNEES}
         return out
 
 
