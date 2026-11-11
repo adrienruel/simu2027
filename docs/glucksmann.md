@@ -25,7 +25,7 @@ Seul le plan contre les violences sexistes et sexuelles est chiffré par le cand
 |---|---|---|
 | SMIC à 1 600 € net en deux ans | bibliotheque.smic, mêmes paramètres que Mélenchon | ≈ −7 Md€ net, 171 000 emplois perdus |
 | CSG sur les salaires −15 Md€ | fraction de la suppression OpenFisca de Zemmour, impôt sur le revenu et prestations en sens inverse | ≈ −13 Md€ net, +32 000 emplois (offre) |
-| Retour à 62 ans en 2028 | baisse_age_legal_detail, même profil que Tondelier | −31 Md€, −278 000 emplois de seniors |
+| Retour à 62 ans en 2028 | baisse_age_legal_detail, même profil que Tondelier (âge légal réel des générations depuis la relecture neutre) | ≈ −23 Md€, −264 000 emplois de seniors |
 | Assurance chômage abrogée | 6 Md€ (bloc chômage) et +0,6 point de chômage (Banque de France) | −190 000 emplois |
 | Territoires zéro chômeur généralisés | 60 000 emplois aidés, éviction de 15 % | +51 000 emplois nets |
 | Service civique obligatoire de dix mois | 8 Md€ ; une génération de 800 000 jeunes, 20 % pris sur l'emploi | −133 000 emplois, sans chômeurs en plus |
@@ -50,5 +50,8 @@ Lecture : les recettes nouvelles (≈ 12 Md€ en prudent) sont plus qu'absorbé
 
 1. Les émissions ne sont pas encore chiffrées (rénovation, rail, Ticket climat, sortie des fossiles) : à faire sur le modèle de Tondelier.
 2. Le niveau européen est hors du solde national, en particulier le remboursement de l'emprunt de 500 Md€ (après 2035).
-3. Le coût de la retraite à 62 ans est le même que pour Tondelier (31 Md€ en 2029). Il est au-dessus des chiffrages publics de la réforme de 2023 (≈ 18 Md€ nets en 2030), à revoir lors de la relecture neutre.
+3. Retraite à 62 ans : recalée le 11/11/2026 (relecture neutre) sur l'âge légal réel de chaque génération, soit 15 Md€ en 2029 et ≈ 23 à 25 Md€ à plein effet ; chiffrages publics : 10 à 20 Md€.
 4. Il n'y a pas de document de programme : à refaire quand le programme présidentiel sortira.
+
+
+Résultats après la relecture neutre du 11/11/2026 : voir docs/programmes_novembre.md.
