@@ -269,14 +269,14 @@ glucksmann_mesures:
     statut: HYPOTHESE
     source: "Encadrement : aides aux maisons de santé ≈ 0,2 Md€ ; 300 centres de soins non programmés ≈ 0,5 Md€ ; la fin de la tarification à l'acte est neutre à enveloppe constante"
   ecole_salaires:
-    valeur: {id: GLU-EDU-01, libelle: "Loi de programmation de l'école sur cinq ans : revalorisation des enseignants", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+    valeur: {id: GLU-EDU-01, instrument: education, libelle: "Loi de programmation de l'école sur cinq ans : revalorisation des enseignants", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
              montant: {crise: 6.7, prudent: 6.0, median: 5.3, optimiste: 4.6}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : traitements et primes des enseignants ≈ 35 Md€ brut (même assiette que philippe_mesures.enseignants) ; revalorisation réelle de 7 à 10 % sur cinq ans en plus du statu quo (ordre des lois de programmation proposées par les syndicats et la gauche) × coût employeur ≈ 1,9 fois le brut (CAS Pensions compris, relecture neutre du 11/11/2026, au lieu d'une masse de 50 Md€ sans coefficient) : 4,6 à 6,7 Md€ ; non chiffrée par le candidat"
   ecole_classes:
-    valeur: {id: GLU-EDU-01b, libelle: "Loi de programmation de l'école : effectifs par classe réduits, remplaçants", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
+    valeur: {id: GLU-EDU-01b, instrument: education, libelle: "Loi de programmation de l'école : effectifs par classe réduits, remplaçants", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
              montant: {crise: 1.2, prudent: 1.0, median: 0.8, optimiste: 0.6}}
     unite: md_eur
     annee_euros: 2026
@@ -290,7 +290,7 @@ glucksmann_mesures:
     statut: HYPOTHESE
     source: "Encadrement : besoin de rénovation énergétique du bâti scolaire ≈ 40 Md€ en vingt ans (Banque des territoires, 2023) ; part de l'État ≈ 1 Md€ par an"
   ecoles_rurales:
-    valeur: {id: GLU-EDU-06b, libelle: "Écoles rurales maintenues (postes gardés malgré la baisse des effectifs)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true, postes: true, cout_poste: 60000,
+    valeur: {id: GLU-EDU-06b, instrument: education, libelle: "Écoles rurales maintenues (postes gardés malgré la baisse des effectifs)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true, postes: true, cout_poste: 60000,
              montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
     unite: md_eur
     annee_euros: 2026
@@ -532,3 +532,50 @@ glucksmann_mesures:
     statut: HYPOTHESE
     source: "Encadrement : dépenses de conseil de l'État ≈ 0,9 Md€ en 2021 (commission d'enquête du Sénat, 2022), déjà réduites depuis ; 10 à 20 % de moins"
     note: "Économie non chiffrée par le candidat : estimée."
+
+# ---------------------------------------------------------------- effets en tonnes (phase 2, 11/11/2026)
+# Même méthode que tondelier_ecologie (moteur/ecologie/emissions.profil, lu par ProgrammeSimple.mesures_ecologie).
+# Négatif : émissions évitées. Prudence : dans le prudent, l'effet favorable au climat est le plus faible.
+glucksmann_ecologie:
+  maprimerenov:
+    valeur: {id: "GLU-ENE-05", libelle: "MaPrimeRénov' relancée et simplifiée", secteur: "batiments", debut: 2028, plein: 2050, effet_mt: {crise: -0.33, prudent: -0.4, median: -0.71, optimiste: -1.22}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.renovation : Anah, bilan 2024 (≈ 91 000 rénovations d'ampleur pour ≈ 2,3 à 3,4 Md€ de MaPrimeRénov', gain énergétique moyen de 65 %) ; Citepa, Secten 2026 (54,6 Mt pour les bâtiments)"
+    note: "≈ +1,2 Md€ par an (glucksmann_mesures.maprimerenov) ≈ 48 000 rénovations d'ampleur de plus par an (≈ 25 000 € d'aide chacune), ≈ 1,1 million en 2050. Émissions évitées par rénovation (Tondelier) : 0,6 t (crise, prudent), 0,8 t (médian), 1,1 t (optimiste) ; part additionnelle (travaux qui ne se feraient pas sans l'aide) : 50 %, 60 %, 80 %, 100 %."
+  ecole_batiments:
+    valeur: {id: "GLU-EDU-06", libelle: "Plan de rénovation des écoles", secteur: "batiments", debut: 2028, plein: 2047, effet_mt: {crise: -0.25, prudent: -0.3, median: -0.5, optimiste: -0.7}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Banque des territoires (2023) : ≈ 40 Md€ en vingt ans pour la rénovation énergétique du bâti scolaire ; Citepa : tertiaire ≈ 17 Mt, dont l'enseignement ≈ 20 % (≈ 3,4 Mt)"
+    note: "Le plan complet baisserait d'environ 60 % les émissions du bâti scolaire (≈ 2 Mt) ; l'État en finance la moitié (1 Md€ par an sur 2) : ≈ 1 Mt. Part additionnelle face au décret tertiaire, qui oblige déjà à −40 % en 2030 : 25 % (crise), 30 % (prudent), 50 % (médian), 70 % (optimiste)."
+  ticket_climat:
+    valeur: {id: "GLU-TER-01b", libelle: "Ticket climat : titre unique des transports en commun", secteur: "transports", debut: 2028, plein: 2030, effet_mt: {crise: -0.26, prudent: -0.51, median: -1.02, optimiste: -1.54}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.ticket_climat (évaluation du Deutschlandticket : ≈ 3 % des émissions des voitures particulières)"
+    note: "Effet de Tondelier (0,5 / 1 / 2 / 3 % des émissions des voitures) réduit au budget de la mesure : 1,2 Md€ en prudent contre 1,5 Md€ chez Tondelier (× 0,8)."
+  transport_rural:
+    valeur: {id: "GLU-TER-04", libelle: "Service public de transport rural", secteur: "transports", debut: 2028, plein: 2030, effet_mt: {crise: -0.02, prudent: -0.05, median: -0.1, optimiste: -0.15}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Encadrement : transport à la demande rural, taux de remplissage faible (Cerema, évaluations de services de transport à la demande) ; budget ≈ 0,2 à 0,3 Md€"
+    note: "Report de quelques dizaines de millions de trajets en voiture, en partie par des véhicules peu remplis : 0,02 à 0,15 Mt."
+  niches_transports:
+    valeur: {id: "GLU-FIS-05", libelle: "Exonérations fiscales des transports polluants supprimées", secteur: "transports", debut: 2028, plein: 2030, effet_mt: {crise: -0.15, prudent: -0.3, median: -0.6, optimiste: -0.9}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Voies et moyens II (PLF 2026) : remboursement partiel de TICPE au transport routier ≈ 1,3 Md€ (≈ 15,7 c par litre de gazole), kérosène des vols intérieurs ≈ 0,4 Md€ ; Citepa : poids lourds ≈ 30 Mt, vols intérieurs de métropole 1,5 Mt (DGAC 2024)"
+    note: "Gazole des poids lourds ≈ +10 % hors TVA, à moitié supprimé en prudent (glucksmann_mesures.niches_transports : 0,8 Md€ sur 1,7) ; élasticité de long terme du fret routier −0,1 (crise, prudent) à −0,3 (optimiste) : 0,15 à 0,9 Mt ; kérosène des vols intérieurs (+30 % de coût du carburant, élasticité −0,2 à −0,5) : 0,1 à 0,2 Mt."
+  renouvelables:
+    valeur: {id: "GLU-ENE-02", libelle: "Fonds chaleur doublé, réseaux de chaleur (part publique du plan renouvelables)", secteur: "industrie", debut: 2028, plein: 2047, effet_mt: {crise: -0.6, prudent: -1.5, median: -2.9, optimiste: -4.4}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même règle que ecologie_fonds.decarbonation_industrie : ADEME, bilan du fonds chaleur 2024 : ≈ 0,42 t de CO2 évitée par an pour 1 000 € ; glucksmann_mesures.renouvelables : 0,5 à 1 Md€ par an"
+    note: "0,7 Md€ par an × 0,42 t = 0,29 Mt de plus chaque année si tout est additionnel, cumulé sur 20 ans (durée de vie des équipements) ; part additionnelle 10 % (crise), 25 % (prudent), 50 % (médian), 75 % (optimiste). L'électricité renouvelable n'est pas comptée : le système électrique est déjà décarboné à ≈ 95 %."
+  agriculture:
+    valeur: {id: "GLU-AGR-03", libelle: "Revenu de transition écologique des agriculteurs et des pêcheurs", secteur: "agriculture", debut: 2028, plein: 2037, effet_mt: {crise: -0.32, prudent: -0.6, median: -1.52, optimiste: -2.44}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.agriculture (The Shift Project, 2024 ; Citepa : 76,6 Mt en 2025)"
+    note: "Effet de Tondelier (1,5 Md€ par an : 1 / 2 / 5 / 8 % des émissions agricoles) au prorata du budget : 0,6 Md€ en prudent, soit × 0,4."

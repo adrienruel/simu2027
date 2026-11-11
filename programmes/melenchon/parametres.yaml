@@ -647,7 +647,7 @@ melenchon_mesures:
     source: "Même calcul que tondelier_mesures.point_indice : traitement indiciaire ≈ 55 % du coût des agents × inflation de 2027"
     note: "Ensuite, le statu quo fait déjà suivre les rémunérations publiques aux salaires : l'indexation sur l'inflation (p. 60) ne coûte rien de plus."
   rattrapage_education:
-    valeur: {id: LFI-EDU-01, libelle: "Éducation nationale : rattrapage du gel du point depuis 2010 (en plus des 10 %) et grilles revalorisées", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+    valeur: {id: LFI-EDU-01, instrument: education, libelle: "Éducation nationale : rattrapage du gel du point depuis 2010 (en plus des 10 %) et grilles revalorisées", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
              montant: {crise: 6.5, prudent: 6.5, median: 5.5, optimiste: 4.5}}
     unite: md_eur
     annee_euros: 2026
@@ -661,7 +661,7 @@ melenchon_mesures:
     statut: HYPOTHESE
     source: "Encadrement : ≈ 1,2 million de contractuels (DGAFP, 2024) ; titularisation de ceux qui occupent des emplois permanents, gain de rémunération ≈ 5 % (primes, avancement) sur ≈ 30 Md€ de masse"
   aesh:
-    valeur: {id: LFI-EDU-02, libelle: "Corps de fonctionnaires pour les AESH, recrutements, fin de la mutualisation", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true, postes: true, cout_poste: 77000,
+    valeur: {id: LFI-EDU-02, instrument: education, libelle: "Corps de fonctionnaires pour les AESH, recrutements, fin de la mutualisation", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true, postes: true, cout_poste: 77000,
              montant: {crise: 2.3, prudent: 2.3, median: 2.3, optimiste: 2.3}}
     unite: md_eur
     annee_euros: 2026
@@ -669,7 +669,7 @@ melenchon_mesures:
     source: "Encadrement : ≈ 144 000 AESH × ≈ 25 000 € ; temps complet pour la moitié ≈ +0,9 ; 30 000 recrutements × 30 000 € ≈ +0,9 ; corps ≈ +0,5 (même base que tondelier_mesures.aesh)"
     note: "Coût par poste fixé à 77 000 € pour que la mesure crée 30 000 postes (le reste : temps de travail et statut des AESH en poste)."
   effectifs_classes:
-    valeur: {id: LFI-EDU-03, libelle: "Classes à moins de 19 élèves (priorité maternelle et éducation prioritaire), remplaçants, scolarité obligatoire à 18 ans", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
+    valeur: {id: LFI-EDU-03, instrument: education, libelle: "Classes à moins de 19 élèves (priorité maternelle et éducation prioritaire), remplaçants, scolarité obligatoire à 18 ans", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
              montant: {crise: 4.6, prudent: 4.6, median: 4.3, optimiste: 4.0}}
     unite: md_eur
     annee_euros: 2026
@@ -692,7 +692,7 @@ melenchon_mesures:
     statut: HYPOTHESE
     note: "Titularisation et temps de travail des animateurs (≈ 150 000, souvent à temps partiel) ≈ 1,0 ; associations sportives et culturelles encadrées par des professionnels ≈ 0,5 (Md€)."
   voie_pro_formation:
-    valeur: {id: LFI-EDU-06, libelle: "Lycées professionnels et agricoles publics (bac pro en 4 ans, plus de classes), pré-recrutement et formation des enseignants, orientation, Greta", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2031, fp: true, postes: true, cout_poste: 60000,
+    valeur: {id: LFI-EDU-06, instrument: education, libelle: "Lycées professionnels et agricoles publics (bac pro en 4 ans, plus de classes), pré-recrutement et formation des enseignants, orientation, Greta", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2031, fp: true, postes: true, cout_poste: 60000,
              montant: {crise: 1.5, prudent: 1.5, median: 1.3, optimiste: 1.1}}
     unite: md_eur
     annee_euros: 2026
@@ -706,14 +706,14 @@ melenchon_mesures:
     statut: HYPOTHESE
     note: "Écoles, collèges et lycées ≈ 1,5 (même ordre que les 2 Md€ des écoles « refuges climatiques » de Tondelier) ; immobilier universitaire ≈ 1,0 (Md€)."
   recherche_dotations:
-    valeur: {id: LFI-EDU-08, libelle: "Recherche : dotations récurrentes à la place du CIR, investissement public relevé, recrutements sur statut", poste: etat_missions, moteur: pib, debut: 2028, plein: 2031, fp: true,
+    valeur: {id: LFI-EDU-08, instrument: recherche, libelle: "Recherche : dotations récurrentes à la place du CIR, investissement public relevé, recrutements sur statut", poste: etat_missions, moteur: pib, debut: 2028, plein: 2031, fp: true,
              montant: {crise: 9.1, prudent: 9.1, median: 8.6, optimiste: 8.1}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
     source: "Arbitrage : le CIR supprimé (7,6 Md€) est rendu en dotations aux universités et aux instituts (« au profit de dotations récurrentes à hauteur des besoins », p. 124), plus 1,5 Md€ pour « rehausser le niveau d'investissement public dans la recherche » (montant non donné)"
   enseignement_superieur:
-    valeur: {id: LFI-EDU-09, libelle: "Enseignement supérieur gratuit (CVEC supprimée), sans sélection, budget des universités relevé, Crous et repas à 1 €, santé étudiante, APL des étudiants étrangers", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030, fp: true,
+    valeur: {id: LFI-EDU-09, instrument: education, libelle: "Enseignement supérieur gratuit (CVEC supprimée), sans sélection, budget des universités relevé, Crous et repas à 1 €, santé étudiante, APL des étudiants étrangers", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030, fp: true,
              montant: {crise: 3.2, prudent: 3.0, median: 2.7, optimiste: 2.4}}
     unite: md_eur
     annee_euros: 2026
@@ -1113,7 +1113,8 @@ melenchon_ecologie:
     note: "Effet territorial faible (1 à 4 % du secteur) ; l'essentiel du gain est dans l'empreinte, non compté ici."
   batiments_publics:
     valeur: {id: LFI-EDU-07, libelle: "Bâti scolaire et universitaire rénové", secteur: batiments, debut: 2028, plein: 2047,
-             effet_mt: {crise: 0.0, prudent: 0.0, median: -1.5, optimiste: -3.0}}
+             effet_mt: {crise: -0.44, prudent: -0.53, median: -0.88, optimiste: -1.23}}
     unite: mt_co2e
     statut: HYPOTHESE
-    source: "Même méthode que tondelier_ecologie.fonds_vert (aucune émission évitée publiée) ; budget comparable (≈ 2,5 Md€ par an, dont une partie d'adaptation à la chaleur)"
+    source: "Règle commune des bâtiments publics (11/11/2026, phase 2) : Banque des territoires (2023) : ≈ 40 Md€ en vingt ans pour rénover le bâti scolaire, soit ≈ 60 % de ses ≈ 3,4 Mt (Citepa : tertiaire ≈ 17 Mt, dont l'enseignement ≈ 20 %) : ≈ 0,05 t évitée par an pour 1 000 € de rénovation (ADEME, rénovations globales du tertiaire public à ≈ 300-400 € le m² : ≈ 0,02 à 0,05 t), contre 0,42 t pour le fonds chaleur ; part additionnelle face au décret tertiaire (−40 % en 2030 déjà obligatoire) : 25 % (crise), 30 % (prudent), 50 % (médian), 70 % (optimiste) ; même règle que glucksmann_ecologie.ecole_batiments"
+    note: "≈ 2,5 Md€ par an, dont ≈ 70 % de rénovation énergétique (le reste : adaptation à la chaleur) : 35 Md€ en vingt ans × 0,05 t = 1,75 Mt (sous le plafond de ≈ 2,6 Mt du bâti scolaire et universitaire), × la part additionnelle. Sourcé le 11/11/2026 : avant, zéro en crise et en prudent, 1,5 à 3 Mt en médian et en optimiste."

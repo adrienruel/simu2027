@@ -169,6 +169,24 @@ class ProgrammeSimple:
                                    **{t: w * mont(t) * y[t] / y[d1] for t in ANNEES}}, note="enveloppe"))
         return out
 
+    # ------------------------------------------------------------------ émissions
+    def mesures_ecologie(self, p: Parametres, s: str) -> list[Mesure]:
+        """Effets physiques des mesures (groupe <nom>_ecologie, Mt CO2e par an, négatif = évitées), même méthode que
+        Tondelier (moteur/ecologie/emissions.profil) : une mesure sans montant chacune, dont le coût est déjà dans les
+        mesures budgétaires. Commun à tous les programmes simples depuis le 11/11/2026 (phase 2 de la roadmap)."""
+        from .ecologie import emissions as em
+        out = []
+        prefixe = f"{self.nom}_ecologie."
+        for nom, par in self.pt._p.items():
+            if not nom.startswith(prefixe):
+                continue
+            x = par.valeur
+            serie = em.profil(p, s, x)
+            out.append(Mesure(f"{x['id']} — {x['libelle']} (émissions)", "recettes", {}, "physique",
+                              physique={f"emissions_mt:{x['secteur']}": serie},
+                              vert="defavorable" if max(serie.values()) > 0 else "favorable"))
+        return out
+
     # ------------------------------------------------------------------ à compléter par chaque programme
     def mesures_calculees(self, p: Parametres, s: str, idx: dict) -> tuple[list[Mesure], dict[str, dict[int, float]]]:
         """Mesures de la bibliothèque (montants) et emplois qu'elles changent ({canal: {année: emplois}}), hors
@@ -214,6 +232,7 @@ class ProgrammeSimple:
                         cible[t] += serie[t] * 1e9 / (x.get("cout_poste", cout_poste) * w[t] / w[2029])
             calc, canaux_calc = self.mesures_calculees(p, s, idx)
             liste.extend(calc)
+            liste.extend(self.mesures_ecologie(p, s))
             liste.extend(self.enveloppe_economies(p, s, idx, liste))
             # emplois : postes publics, éviction, canaux des mesures calculées
             # éviction : prise au scénario du même côté de la prudence, pour chaque sens. Créer des postes publics :

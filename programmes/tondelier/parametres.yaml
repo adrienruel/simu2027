@@ -140,6 +140,14 @@ tondelier_mesures:
     statut: HYPOTHESE
     source: "Encadrement : frais réels et barème kilométrique ≈ 2 Md€ de dépense fiscale ; avantage en nature des voitures de fonction (hors REC-42, qui porte les niches fossiles)"
     note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
+  taxe_plastique:
+    valeur: {id: REC-46, instrument: consommation, libelle: "Taxe sur les bouteilles en plastique ; TIRUERT étendue au maritime et aux carburants de synthèse", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.1, prudent: 0.15, median: 0.25, optimiste: 0.35}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Programme, p. 67 (taux non donné) ; ADEME (2025) : 58 % des bouteilles en plastique collectées en 2024 ; Reloop (2024) : plus de 8 milliards de bouteilles et canettes non collectées par an, soit ≈ 15 milliards de bouteilles en plastique mises sur le marché (≈ 27 g chacune, ≈ 0,4 Mt) ; contribution plastique de l'UE (0,80 € par kg d'emballage non recyclé) ≈ 1,5 Md€ payée par le budget de l'État en 2023"
+    note: "Phase 2 (11/11/2026), vérification de l'autofinancement. Taxe estimée au taux de la contribution européenne (0,80 € par kg, ≈ 2 c par bouteille) : ≈ 0,3 Md€ avant réaction ; volumes −5 à −15 % (eau du robinet, gourdes) et plus de collecte (consigne de la loi AGEC) : 0,1 à 0,3 Md€ ; TIRUERT étendue : taxe incitative, presque rien en recette (0 à 0,05). Redevances de dépollution (REP) : versées aux éco-organismes, hors des administrations publiques : 0. Autofinancement : la mesure est une recette sans dépense affectée dans le programme, donc pas de coût à financer ; son seul risque est un rendement plus faible si la consigne réussit, d'où le prudent bas. Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien)."
   bonus_malus:
     valeur: {id: COT-06, instrument: cout_travail, libelle: "Bonus-malus renforcé sur les contrats courts, intérim contributeur", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: 0.0, prudent: 0.1, median: 0.2, optimiste: 0.4}}
@@ -573,14 +581,14 @@ tondelier_mesures:
     statut: HYPOTHESE
     source: "Calcul : coût des agents (390 Md€) × parts de masse (tondelier_fp.parts_masse) × hausses : C et B +10 %, enseignants +15 %, autres A +10 % pour la moitié (« qui ont perdu ») ; réparti entre l'État, les collectivités et les hôpitaux selon statu_quo.versants_fonction_publique ; pensions des fonctionnaires relevées pour les départs suivants"
   classes:
-    valeur: {id: FP-03, libelle: "Classes de primaire à 19 élèves et à 12 en éducation prioritaire", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2032, fp: true,
+    valeur: {id: FP-03, instrument: education, libelle: "Classes de primaire à 19 élèves et à 12 en éducation prioritaire", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2032, fp: true,
              montant: {crise: 2.3, prudent: 2.3, median: 2.3, optimiste: 2.3}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Calcul : élèves du primaire −13 % d'ici 2032 (Insee) ; postes gardés au lieu de baisser avec l'élasticité de 0,5 du statu quo : ≈ 6,5 % des ≈ 20 Md€ du primaire public = 1,3 ; 12 élèves étendus du CE2 au CM2 en REP : ≈ 18 000 postes = 1,0"
   aesh:
-    valeur: {id: FP-04, libelle: "AESH titularisés, personnels éducatifs renforcés", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2030, fp: true, fp_taux: 0.39,
+    valeur: {id: FP-04, instrument: education, libelle: "AESH titularisés, personnels éducatifs renforcés", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2030, fp: true, fp_taux: 0.39,
              montant: {crise: 1.4, prudent: 1.4, median: 1.4, optimiste: 1.4}}
     unite: md_eur
     annee_euros: 2026
@@ -600,7 +608,7 @@ tondelier_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
   recherche:
-    valeur: {id: FP-07, libelle: "Recherche : crédits des laboratoires, recrutements, 1 000 chaires", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+    valeur: {id: FP-07, instrument: recherche, libelle: "Recherche : crédits des laboratoires, recrutements, 1 000 chaires", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
              montant: {crise: 0.6, prudent: 0.6, median: 0.6, optimiste: 0.6}}
     unite: md_eur
     annee_euros: 2026
@@ -802,11 +810,11 @@ tondelier_ecologie:
     note: "Au ratio du fonds chaleur, 1,5 Md€ par an éviteraient 1,7 Mt de plus chaque année. Une partie du budget n'a pas ce rendement (bonification des prêts à taux zéro, communautés énergétiques) et une partie des projets se ferait sans aide : 0,2 Mt de plus par an (crise), 0,4 (prudent), 0,7 (médian), 1 (optimiste). Cumulé sur 20 ans, durée de vie des installations, puis stable (renouvellement) ; réduit au rythme de la décarbonation du statu quo, puisque la chaleur remplacée émet de moins en moins. Classé dans l'industrie (chaleur des entreprises et réseaux de chaleur)."
   fonds_vert:
     valeur: {id: MIS-01, libelle: "Fonds vert renforcé (+1,9 Md€) : rénovation des bâtiments publics", secteur: batiments, debut: 2028, plein: 2047,
-             effet_mt: {crise: 0.0, prudent: 0.0, median: -3.0, optimiste: -6.0}}
+             effet_mt: {crise: -0.15, prudent: -0.18, median: -0.30, optimiste: -0.42}}
     unite: mt_co2e
     statut: HYPOTHESE
-    source: "Bilan du Fonds vert 2023 (ministère, relayé par la Banque des territoires) : 2 Md€ pour 10 689 projets, dont 32 % de rénovation de bâtiments, 23,5 % d'éclairage public, 12,5 % d'adaptation ; aucune émission évitée publiée"
-    note: "Seule la rénovation des bâtiments publics chauffés au gaz ou au fioul réduit les émissions (l'éclairage économise de l'électricité déjà décarbonée). Sans chiffrage publié des tonnes évitées : zéro en crise et en prudent ; 0,15 Mt (médian) et 0,3 Mt (optimiste) de plus chaque année, cumulés sur 20 ans."
+    source: "Bilan du Fonds vert 2023 (ministère, relayé par la Banque des territoires) : 2 Md€ pour 10 689 projets, dont 32 % de rénovation de bâtiments, 23,5 % d'éclairage public, 12,5 % d'adaptation ; aucune émission évitée publiée. Règle commune des bâtiments publics (11/11/2026, phase 2) : Banque des territoires (2023) : ≈ 40 Md€ en vingt ans pour rénover le bâti scolaire, soit ≈ 60 % de ses ≈ 3,4 Mt (Citepa : tertiaire ≈ 17 Mt, dont l'enseignement ≈ 20 %) : ≈ 0,05 t évitée par an pour 1 000 € de rénovation (ADEME, rénovations globales du tertiaire public à ≈ 300-400 € le m² : ≈ 0,02 à 0,05 t), contre 0,42 t pour le fonds chaleur ; part additionnelle face au décret tertiaire (−40 % en 2030 déjà obligatoire) : 25 % (crise), 30 % (prudent), 50 % (médian), 70 % (optimiste) ; même règle que glucksmann_ecologie.ecole_batiments"
+    note: "Seule la rénovation des bâtiments publics chauffés au gaz ou au fioul réduit les émissions (l'éclairage économise de l'électricité déjà décarbonée) : 32 % de 1,9 Md€ ≈ 0,6 Md€ par an, 12 Md€ en vingt ans × 0,05 t = 0,6 Mt, × la part additionnelle. Sourcé le 11/11/2026 : avant, zéro en crise et en prudent faute de source, et 3 à 6 Mt en médian et en optimiste au rendement du fonds chaleur, huit fois trop élevé pour de la rénovation de bâtiments."
   plan_velo:
     valeur: {id: MIS-13-VELO, libelle: "Plan vélo et marche (0,5 Md€ par an)", secteur: transports, debut: 2028, plein: 2035,
              effet_mt: {crise: -0.03, prudent: -0.05, median: -0.12, optimiste: -0.25}}

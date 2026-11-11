@@ -132,4 +132,23 @@ Lecture :
    accès sécurisé) ; familles monoparentales absentes.
 3. OpenFisca surestime l'impôt sur le revenu (décote, réductions, autres revenus absents) : il répartit les effets,
    les montants restent calés sur des chiffrages publics.
-4. Pas d'effet d'offre de l'éducation ni de la recherche (horizons trop longs) ; investissement public seulement.
+4. Éducation et recherche : canal ajouté le 11/11/2026 (section suivante), aux preuves plus fragiles que les autres.
+
+## Éducation et recherche : effets de très long terme (11/11/2026, phase 2)
+
+Deux instruments en plus, `education` et `recherche` (`moteur/offre.education`, `moteur/offre.recherche`), sans
+emploi direct, avec le poids de la dépense dans la demande. Une baisse prend le scénario miroir.
+
+- **Éducation** : une génération gagne 0,25 / 0,5 / 1 / 2 % de salaire (crise à optimiste) pour 10 % de dépense par
+  élève en plus sur sa scolarité (6 à 18 ans), en moyenne sur ses années d'école ; effet sur le PIB = 60 % (part du
+  travail) × gain moyen des actifs de 20 à 64 ans. Dépense de référence : 155 Md€ (État et collectivités, DEPP).
+  Sources : Jackson et Mackevicius (2024), Jackson, Johnson et Persico (2016), Chetty, Friedman et Rockoff (2014).
+- **Recherche publique** : stock de connaissances amorti de 15 % par an, rendement de 5 / 10 / 25 / 50 % par an après
+  quatre ans. Sources : Hall, Mairesse et Mohnen (2010), Fieldhouse et Mertens (2023, 140 à 210 %), Griliches (1979).
+- Mesures concernées : salaires et postes d'enseignants, classes, AESH, universités, recherche (Glucksmann, Attal,
+  Philippe, Retailleau, Lisnard, Mélenchon, Tondelier, Arthaud). Hors champ : bâtiments, cantine, bourses,
+  périscolaire, logement étudiant, hausses générales du point d'indice.
+
+Ordres de grandeur (prudent) : Glucksmann +0,04 % de PIB en 2050 et +0,12 % en 2073 ; Mélenchon, éducation +0,10 et
++0,28 %, recherche +0,18 et +0,20 %. L'effet de l'éducation est presque nul avant 2040 : les générations concernées
+entrent à peine sur le marché du travail.

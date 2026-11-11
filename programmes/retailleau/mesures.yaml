@@ -87,7 +87,7 @@ mesures:
 - id: RET-RET-02
   intitule: Part de capitalisation (1 % du salaire brut)
   source: LCP, 23/09/2026
-  traitement: 'hors solde : épargne obligatoire hors régimes publics (coût du travail en plus non chiffré)'
+  traitement: 'calculé : programme.capitalisation (fonds hors administrations publiques ; part des employeurs publics au budget, emplois perdus par le canal d''offre)'
 - id: RET-RET-03
   intitule: Cotisations exonérées pour les seniors ayant tous leurs trimestres
   source: Le travail gagnant (09/01/2026), p. 25

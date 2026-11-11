@@ -40,17 +40,19 @@ from .noyau import ANNEES, Mesure
 from .parametres import Parametres
 
 INSTRUMENTS = ("travail", "cout_travail", "capital_entreprises", "capital_menages", "successions", "consommation",
-               "transferts_actifs", "investissement_public")
+               "transferts_actifs", "investissement_public", "education", "recherche")
 INCIDENCES = ("proportionnel", "ir", "bas", "haut", "milieu", "plafond")
 LIBELLES = {"travail": "prélèvements sur le travail", "cout_travail": "coût du travail",
             "capital_entreprises": "fiscalité des entreprises", "capital_menages": "fiscalité du capital des ménages",
             "successions": "successions", "consommation": "TVA et accises", "transferts_actifs": "transferts aux actifs",
-            "investissement_public": "investissement public"}
+            "investissement_public": "investissement public", "education": "éducation (capital humain)",
+            "recherche": "recherche publique"}
 # part de l'effet sur le PIB qui est de l'emploi (hors travail, calculé par cellule), et part de ces emplois qui vient
 # de l'inactivité (le reste : chômage)
 EMPLOI = {"travail": (None, 1.0), "cout_travail": (1.0, 0.0), "capital_entreprises": (0.3, 0.0),
           "capital_menages": (0.0, 0.0), "successions": (0.0, 0.0), "consommation": (0.5, 0.0),
-          "transferts_actifs": (1.0, 1.0), "investissement_public": (0.5, 0.0)}
+          "transferts_actifs": (1.0, 1.0), "investissement_public": (0.5, 0.0), "education": (0.0, 0.0),
+          "recherche": (0.0, 0.0)}
 MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
 TRANSFERTS_CIBLES = ("famille", "logement", "pauvrete", "chomage", "aah_invalidite")
 SMIC_BRUT_2026 = 1823.03 * 12
@@ -313,7 +315,7 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
         cle = (instrument, inc)
         cles.setdefault(cle, {t: 0.0 for t in annees})
         # recette en plus ou transfert en plus : contre l'offre (points < 0) ; investissement public en plus : pour
-        signe = 1.0 if instrument == "investissement_public" else -1.0
+        signe = 1.0 if instrument in ("investissement_public", "education", "recherche") else -1.0
         for t in annees:
             cles[cle][t] += signe * part * m.valeurs.get(t, 0.0) / y[max(t, 2029)] * 100
     vit = sq._v(p, "offre.vitesse", s)
@@ -330,8 +332,15 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
             if i == "capital_entreprises":
                 return capital_entreprises_par_point(p, sc), None
             return sq._v(p, f"offre.elasticite_{i}", sc), None
-        el = {sc: elasticite(sc) for sc in {s, MIROIR[s]}}
         effet, emp, emp_d, cumul, cumul_e, cumul_d = {}, {}, {}, 0.0, 0.0, 0.0
+        if i in ("education", "recherche"):
+            # dépense publique d'éducation ou de recherche en plus : effet durable de long terme, sans emploi direct
+            effet = (education if i == "education" else recherche)(p, s, pts, annees)
+            for t in annees:
+                out["dpib"][t] += effet[t] / 100 * y[max(t, 2029)]
+            out["detail"][i] = {"points_pib": pts, "effet_pib_pct": effet}
+            continue
+        el = {sc: elasticite(sc) for sc in {s, MIROIR[s]}}
         for t in annees:
             sc = s if pts[t] >= 0 else MIROIR[s]
             cumul += vit * (el[sc][0] * pts[t] - cumul)
@@ -365,6 +374,47 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
     part_rec = {t: rec[max(t, 2029)] / y[max(t, 2029)] for t in annees}
     out["mesure"] = Mesure("Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)", "recettes",
                            {t: out["dpib"][t] * part_rec[t] for t in annees}, nature="effet_macro")
+    return out
+
+
+# ------------------------------------------------------------------------------------------------ long terme
+def recherche(p: Parametres, s: str, pts: dict[int, float], annees) -> dict[int, float]:
+    """Effet durable de la recherche publique en plus (% du PIB, phase 2 du 11/11/2026) : la dépense en plus forme
+    un stock de connaissances (amorti de `depreciation` par an) qui rapporte, après `delai` ans, `rendement` par an
+    de PIB. Une baisse prend le scénario miroir. pts : dépense en points de PIB du statu quo."""
+    c = p.val("offre.recherche")
+    y = sq.pib(p, s)
+    d, k = c["depreciation"], int(c["delai"])
+    stock, out = 0.0, {}
+    for t in annees:
+        v = pts.get(t - k, 0.0)
+        stock = (1 - d) * stock + v / 100 * y[max(t - k, 2029)]
+        sc = s if stock >= 0 else MIROIR[s]
+        out[t] = c["rendement"][sc] * stock / y[max(t, 2029)] * 100
+    return out
+
+
+def education(p: Parametres, s: str, pts: dict[int, float], annees) -> dict[int, float]:
+    """Effet durable de la dépense d'éducation en plus (% du PIB, phase 2 du 11/11/2026), par le capital humain des
+    générations scolarisées pendant la hausse : `gain_par_10pct` de salaire pour 10 % de dépense par élève en plus,
+    en moyenne sur les années d'école (Jackson et Mackevicius, 2021 ; Jackson, Johnson et Persico, 2016). Effet sur le
+    PIB = part du travail × gain moyen des actifs, à mesure que ces générations entrent sur le marché du travail.
+    Une baisse prend le scénario miroir."""
+    c = p.val("offre.education")
+    y = sq.pib(p, s)
+    a0, a1 = c["age_scolaire"]
+    b0, b1 = c["age_actif"]
+    # part de dépense en plus par élève : dépense en plus / dépense publique d'éducation (qui suit le PIB)
+    sigma = {t: pts.get(t, 0.0) / 100 * y[2029] / c["base_md"] for t in annees}
+    out = {}
+    for t in annees:
+        tot = 0.0
+        for a in range(b0, b1 + 1):
+            ecole = [sigma.get(t - a + x, 0.0) for x in range(a0, a1 + 1)]
+            m = sum(ecole) / len(ecole)
+            sc = s if m >= 0 else MIROIR[s]
+            tot += c["gain_par_10pct"][sc] / 100 * m / 0.10
+        out[t] = c["part_travail"] * tot / (b1 - b0 + 1) * 100
     return out
 
 

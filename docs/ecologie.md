@@ -192,3 +192,28 @@ et le fioul plus chers ; dès 2030, le prix du carbone qui monte l'emporte.
 
 Hors canal : la règle de trajectoire du moteur du programme ne réagit pas à ces effets (ajoutés au noyau, comme les
 effets des mesures de Tondelier) ; les rendements décroissants du chômage ne leur sont pas appliqués (effet faible).
+
+## Phase 2 : les cinq derniers programmes (11/11/2026)
+
+Même méthode que Tondelier (`emissions.profil`), lue pour tous les programmes simples par
+`ProgrammeSimple.mesures_ecologie` (groupe `<nom>_ecologie` ; Mélenchon y passe aussi). Règle de prudence : dans le
+prudent, l'effet favorable au climat est le plus faible et l'effet défavorable le plus fort.
+
+| Programme | Mesures en tonnes | Effet des mesures, 2037 (prudent / médian, Mt) |
+|---|---|---|
+| Glucksmann | MaPrimeRénov' (+1,2 Md€), écoles, Ticket climat, transport rural, niches des transports, fonds chaleur, agriculture | −2,1 / −4,2 |
+| Philippe | Électrique d'occasion, fret ferroviaire, capture du carbone | −1,2 / −1,9 |
+| Attal | Rénovation, leasing et E85, aides au carburant (+) | −0,1 / −0,2 |
+| Retailleau | MaPrimeRénov' supprimée, passoires de nouveau louables, fin du soutien aux renouvelables | +2,2 / +1,3 |
+| Lisnard | Fin du soutien aux renouvelables, ZFE supprimées, bonus-malus au lieu des interdictions de louer | +1,7 / +0,9 |
+
+Les nouveaux réacteurs (Attal, Philippe, Retailleau, Lisnard, Glucksmann) n'ont pas d'effet compté avant 2050 : ils
+arrivent tard et l'électricité est déjà décarbonée à ≈ 95 % ; leur effet passe par l'électrification, que le modèle
+ne relie pas encore à l'offre électrique. Les objectifs sans moyens (loi Climat de Glucksmann, plan « Messmer II »
+d'Attal, sortie du gaz et du pétrole) ne sont pas comptés.
+
+**Tonnes laissées à zéro, sourcées** : rénovation des bâtiments publics (Fonds vert de Tondelier, bâti scolaire de
+Mélenchon) sur une règle commune, ≈ 0,05 t évitée par an pour 1 000 € (Banque des territoires, ADEME), au lieu de zéro
+en prudent et du rendement du fonds chaleur (0,42 t) en médian : Tondelier −0,18 Mt en prudent (au lieu de 0) et
+−0,3 en médian (au lieu de −3) ; Mélenchon −0,53 et −0,88 (au lieu de 0 et −1,5). Restent à zéro en prudent, dans
+Écologie de droite (phase 4) : les renouvelables du fonds et l'élasticité croisée de l'électrification.

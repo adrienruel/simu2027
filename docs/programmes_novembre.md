@@ -60,10 +60,10 @@ Le nombre de mesures recensées est le suivant :
 
 ## Limites
 
-1. Les émissions ne sont pas encore chiffrées pour ces cinq programmes.
+1. Émissions chiffrées le 11/11/2026 (phase 2, `<nom>_ecologie`, même méthode que Tondelier) : voir docs/ecologie.md.
 2. Les grandes baisses de prélèvements salariaux (Attal, Lisnard) prennent la forme d'incidence de la suppression de la CSG (proportionnelle au salaire). Le gain forfaitaire d'Attal (250 € au médian) pèse davantage sur les bas salaires.
 3. La forme des aides aux entreprises supprimées (Philippe, Lisnard) n'est pas connue. La répartition entre coût du travail (40 %) et capital (60 %) est un arbitrage.
-4. Les cotisations salariales supprimées (Attal, Lisnard) ne réduisent pas les droits à retraite : on suppose que l'État compense les caisses.
+4. Les cotisations salariales supprimées (Attal, Lisnard) ne réduisent pas les droits à retraite : l'État compense les caisses. Vérifié le 11/11/2026 (phase 2) : les caisses sont toutes dans les administrations publiques, la compensation n'ajoute rien au solde ; la variante sans compensation (points Agirc-Arrco sur les seules cotisations payées) n'est pas retenue faute d'annonce (notes de `attal_droit_au_brut` et `lisnard_actifs`).
 5. Ces programmes sont partiels : le chiffrage est à refaire à la publication des programmes complets.
 
 ## Résultats (2037, sauf 2029) — après la relecture neutre du 11/11/2026 (docs/relecture_neutre.md)

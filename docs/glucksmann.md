@@ -48,7 +48,7 @@ Lecture : les recettes nouvelles (≈ 12 Md€ en prudent) sont plus qu'absorbé
 
 ## Limites
 
-1. Les émissions ne sont pas encore chiffrées (rénovation, rail, Ticket climat, sortie des fossiles) : à faire sur le modèle de Tondelier.
+1. Émissions chiffrées le 11/11/2026 (`glucksmann_ecologie`) : MaPrimeRénov', écoles, Ticket climat, transport rural, niches des transports, fonds chaleur, agriculture. La sortie du gaz et du pétrole reste sans effet compté : moyens non précisés.
 2. Le niveau européen est hors du solde national, en particulier le remboursement de l'emprunt de 500 Md€ (après 2035).
 3. Retraite à 62 ans : recalée le 11/11/2026 (relecture neutre) sur l'âge légal réel de chaque génération, soit 15 Md€ en 2029 et ≈ 23 à 25 Md€ à plein effet ; chiffrages publics : 10 à 20 Md€.
 4. Il n'y a pas de document de programme : à refaire quand le programme présidentiel sortira.

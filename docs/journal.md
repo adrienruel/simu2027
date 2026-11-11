@@ -706,3 +706,20 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
   plafonnés aux 250 000 annoncés) ; enseignants de Glucksmann sur la même assiette que Philippe (35 Md€ bruts,
   coefficient 1,9 : 4,6 à 6,7 Md€ au lieu de 3,5 à 5) ; embauches d'Arthaud avec un `fp_taux` par versant (0,47
   hôpitaux et transports, CNRACL ; 0,50 éducation) au lieu de 0,57.
+
+## 11 novembre 2026 — Phase 2 de la roadmap : combler les trous de chiffrage
+
+- **Émissions des cinq derniers programmes** (Glucksmann, Attal, Philippe, Retailleau, Lisnard) : groupes
+  `<nom>_ecologie`, lus par `ProgrammeSimple.mesures_ecologie` (Mélenchon y passe aussi, résultats inchangés).
+  Tableau dans docs/ecologie.md.
+- **Tonnes à zéro sourcées** : bâtiments publics de Tondelier et de Mélenchon, règle commune de 0,05 t par an pour
+  1 000 € de rénovation.
+- **Retailleau, capitalisation obligatoire** (RET-RET-02) : 1 % du brut des entrants depuis 2028, moitié salarié,
+  moitié employeur, plafond de 40 € par mois ; fonds hors des administrations publiques ; au budget, la part des
+  employeurs publics (0,2 Md€ en 2037) ; emplois perdus par le canal d'offre (≈ 5 600 en 2037, 20 000 en 2050).
+- **Attal et Lisnard, caisses de retraite** : la lecture à droits inchangés, caisses compensées par l'État, est
+  vérifiée et écrite ; la compensation est interne aux administrations publiques.
+- **Tondelier, taxe sur les bouteilles en plastique** (REC-46), absente des paramètres : estimée à 0,1 / 0,15 /
+  0,25 / 0,35 Md€ ; recette sans dépense affectée, donc sans coût à financer.
+- **Éducation et recherche** : canal d'offre de long terme (docs/offre.md), instruments `education` et `recherche`
+  sur les mesures concernées de huit programmes.

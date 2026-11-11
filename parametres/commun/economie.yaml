@@ -800,6 +800,19 @@ offre:
     statut: HYPOTHESE
     source: "DG Trésor, Mésange (2017) : hausse permanente de l'investissement public de 1 point de PIB, +0,33 % de PIB à long terme (médian) ; Bom et Ligthart (Journal of Economic Surveys, 2014, méta-analyse) : élasticité de la production au capital public ≈ 0,08 à 0,12, plus forte pour les infrastructures de base (optimiste)"
     note: "Dépense des mesures au poste investissement (sans autre instrument) : effet durable en plus du multiplicateur ; une baisse prend le scénario miroir. Emplois : 50 % de l'effet, pris sur le chômage. L'éducation n'a pas d'effet d'offre compté (effets trop lointains pour l'horizon des chiffrages)."
+  education:
+    valeur: {base_md: 155, age_scolaire: [6, 18], age_actif: [20, 64], part_travail: 0.6,
+             gain_par_10pct: {crise: 0.25, prudent: 0.5, median: 1.0, optimiste: 2.0}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Jackson et Mackevicius (méta-analyse, AEJ Applied, 2024) : 1 000 $ par élève et par an pendant quatre ans (≈ +8 % de dépense) : +0,035 écart-type aux tests et +2,8 points d'accès au supérieur ; Jackson, Johnson et Persico (QJE, 2016) : +10 % de dépense par élève sur toute la scolarité : +7 % de salaire adulte pour les enfants pauvres, effet plus faible pour les autres ; Chetty, Friedman et Rockoff (AER, 2014) : un écart-type de résultats ≈ 10 à 13 % de salaire ; DEPP, Repères et références statistiques : dépense intérieure d'éducation ≈ 194 Md€, dont ≈ 155 Md€ financés par l'État et les collectivités"
+    note: "Phase 2 de la roadmap (11/11/2026) : effet d'offre de l'éducation, absent jusqu'ici. Salaire en plus pour 10 % de dépense par élève en plus sur toute la scolarité (6 à 18 ans) : 0,25 % (crise), 0,5 % (prudent), 1 % (médian), 2 % (optimiste), sous les 7 % de Jackson, Johnson et Persico, qui valent pour les enfants pauvres. Les générations entrent dans l'emploi à 20 ans : l'effet commence vers 2030 et n'atteint son plein qu'après 2070. Mesures concernées : instrument « education » (salaires et postes d'enseignants, classes, AESH, universités) ; pas les bâtiments, la cantine, les bourses ni le périscolaire. La revalorisation des enseignants compte comme une dépense par élève, comme dans ces études ; son effet propre est moins établi."
+  recherche:
+    valeur: {depreciation: 0.15, delai: 4, rendement: {crise: 0.05, prudent: 0.1, median: 0.25, optimiste: 0.5}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Hall, Mairesse et Mohnen (Handbook of the Economics of Innovation, 2010) : rendements privés de la R&D ≈ 20 à 30 %, rendements sociaux plus élevés, preuves plus fragiles pour la recherche publique ; Fieldhouse et Mertens (Fed de Boston, 2023) : R&D publique non militaire aux États-Unis, rendement de 140 à 210 %, effet au bout de cinq ans environ ; Griliches (1979) : amortissement du stock de connaissances ≈ 15 % par an"
+    note: "Phase 2 de la roadmap (11/11/2026). Dépense de recherche publique en plus (instrument « recherche ») accumulée en stock, amorti de 15 % par an ; ce stock rapporte du PIB après quatre ans : 5 % (crise), 10 % (prudent), 25 % (médian), 50 % (optimiste) par an, bien sous les 140 à 210 % de Fieldhouse et Mertens, pour tenir compte de la fragilité des preuves. Le crédit d'impôt recherche reste dans la fiscalité des entreprises (capital_entreprises)."
   vitesse:
     valeur: {crise: 0.08, prudent: 0.1, median: 0.1, optimiste: 0.12}
     unite: taux
@@ -811,7 +824,7 @@ offre:
 # publique ; chaque mesure y entre avec un poids selon ce qu'elle est (moteur/offre.poids_demande).
 demande:
   poids:
-    valeur: {depense: 1.0, transferts_cibles: 0.8, retraites: 0.6, travail: 0.4, cout_travail: 0.4, consommation: 0.55, capital_entreprises: 0.3, capital_menages: 0.2, successions: 0.1, autre_recette: 1.0}
+    valeur: {depense: 1.0, transferts_cibles: 0.8, retraites: 0.6, travail: 0.4, cout_travail: 0.4, consommation: 0.55, capital_entreprises: 0.3, capital_menages: 0.2, successions: 0.1, autre_recette: 1.0, education: 1.0, recherche: 1.0}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Kilponen, Pisani, Schmidt et al., Comparing fiscal multipliers across models and countries in Europe (Banque nationale de Belgique, WP n° 278, 2015), multiplicateurs de première année dans les modèles de la zone euro : consommation publique 0,5 à 0,98 ; impôt sur le travail 0,04 à 0,51 ; impôt sur le capital 0,02 à 0,65 ; impôt sur la consommation 0,14 à 0,72. Coenen et al., Effects of Fiscal Stimulus in Structural Models (AEJ Macroeconomics, 2012) : transferts ciblés sur les ménages contraints proches de la dépense, transferts généraux plus faibles. Gechert (2015, méta-analyse) : multiplicateurs de dépense supérieurs à ceux des impôts"

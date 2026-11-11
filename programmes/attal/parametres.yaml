@@ -44,7 +44,7 @@ attal_droit_au_brut:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Site du candidat (« Droit au brut ») : +250 € net par mois au salaire médian (2 200 € net), dès 2027, cotisations « qui pèsent sur le travail » supprimées, sans précision. Calcul : 250 € de plus pour les salariés au-dessus du médian et un gain proportionnel en dessous ≈ 215 € par mois en moyenne pour ≈ 20 millions de salariés ≈ 52 Md€ ; ≈ 40 Md€ cités par la presse (La Dépêche, octobre 2026), qui est pris pour l'optimiste ; relecture neutre (11/11/2026) : le prudent ne peut pas être sous le calcul (52) ; agents publics compris, plutôt au-delà (crise 58)"
-    note: "Cotisations salariales en moins sur les revenus d'activité, privé et public dans la proportion de la CSG ; forme d'incidence : celle de la suppression de la CSG calculée par OpenFisca (proportionnelle au salaire). Les cotisations salariales sont entièrement déductibles : l'impôt sur le revenu monte (attal_droit_au_brut.part_ir_retrouvee) ; la prime d'activité baisse. Le financement annoncé (« à l'euro près » par des économies sur l'assurance chômage et les arrêts maladie) n'est pas repris : ces deux réformes sont chiffrées à part. Les droits à retraite des salariés ne baissent pas (hypothèse : l'État compense la caisse)."
+    note: "Cotisations salariales en moins sur les revenus d'activité, privé et public dans la proportion de la CSG ; forme d'incidence : celle de la suppression de la CSG calculée par OpenFisca (proportionnelle au salaire). Les cotisations salariales sont entièrement déductibles : l'impôt sur le revenu monte (attal_droit_au_brut.part_ir_retrouvee) ; la prime d'activité baisse. Le financement annoncé (« à l'euro près » par des économies sur l'assurance chômage et les arrêts maladie) n'est pas repris : ces deux réformes sont chiffrées à part. Les droits à retraite des salariés ne baissent pas (hypothèse : l'État compense la caisse). Caisses et droits à retraite (phase 2, 11/11/2026) : les cotisations salariales sont surtout des cotisations vieillesse (régime général ≈ 7,3 % du brut, Agirc-Arrco ≈ 4 %, retenue pour pension des fonctionnaires 11,1 %), soit ≈ 100 Md€ en tout. Le modèle lit la mesure à règles de droits inchangées : les trimestres et les points restent acquis sur le salaire brut, les pensions ne baissent pas, et les caisses (régimes de base, Agirc-Arrco, CAS Pensions, CNRACL, toutes dans les administrations publiques) sont compensées par l'État. La compensation est interne aux administrations publiques : elle n'ajoute rien au solde, déjà dégradé du montant de la mesure. Variante non retenue, faute d'annonce : des points Agirc-Arrco acquis sur les seules cotisations payées feraient baisser les pensions futures (≈ 40 % des droits complémentaires nouveaux), une économie de long terme pour le solde mais une perte de droits."
   premiere_annee:
     valeur: 2028
     unite: sans_unite
@@ -184,21 +184,21 @@ attal_mesures:
     source: "Encadrement : projet de 2024 (durée de 18 à 15 mois, affiliation de 6 à 8 mois sur 20) : 3,6 Md€ par an selon le gouvernement, moins selon l'Unédic ; 5 Md€ annoncés par le candidat, non repris"
     note: "Effet sur l'emploi : attal_chomage.baisse_taux."
   enseignants:
-    valeur: {id: ATT-EDU-01, libelle: "Enseignants revalorisés de 200 € net par mois, jusqu'à 500 € en milieu de carrière", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
+    valeur: {id: ATT-EDU-01, instrument: education, libelle: "Enseignants revalorisés de 200 € net par mois, jusqu'à 500 € en milieu de carrière", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
              montant: {crise: 7.0, prudent: 6.5, median: 6.0, optimiste: 5.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Calcul : ≈ 850 000 enseignants ; ≈ 300 € net par mois en moyenne ; coût employeur ≈ 2,2 fois le net pour un fonctionnaire de l'État (CAS Pensions compris ; relecture neutre du 11/11/2026, cohérent avec les 57 % de prélèvements récupérés) : ≈ 6,7 Md€ bruts"
   aesh:
-    valeur: {id: ATT-EDU-07, libelle: "Corps professionnel des AESH", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
+    valeur: {id: ATT-EDU-07, instrument: education, libelle: "Corps professionnel des AESH", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
              montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : 140 000 AESH, ≈ 3 Md€ ; temps de travail porté vers le temps plein et grille de carrière : +10 à 20 %"
   ia_ecole:
-    valeur: {id: ATT-EDU-06, libelle: "Assistant IA souverain pour chaque élève, enseignants formés à l'IA", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
+    valeur: {id: ATT-EDU-06, instrument: education, libelle: "Assistant IA souverain pour chaque élève, enseignants formés à l'IA", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
              montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
     unite: md_eur
     annee_euros: 2026
@@ -333,3 +333,26 @@ attal_enveloppe:
     valeur: 2032
     unite: sans_unite
     statut: DECISION
+
+# ---------------------------------------------------------------- effets en tonnes (phase 2, 11/11/2026)
+# Même méthode que tondelier_ecologie (moteur/ecologie/emissions.profil, lu par ProgrammeSimple.mesures_ecologie).
+# Négatif : émissions évitées. Prudence : dans le prudent, l'effet favorable au climat est le plus faible.
+attal_ecologie:
+  renovation:
+    valeur: {id: "ATT-LOG-01", libelle: "Loi de programmation du logement et de la rénovation énergétique", secteur: "batiments", debut: 2028, plein: 2050, effet_mt: {crise: -0.1, prudent: -0.12, median: -0.21, optimiste: -0.35}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.renovation : Anah, bilan 2024 (≈ 91 000 rénovations d'ampleur pour ≈ 2,3 à 3,4 Md€ de MaPrimeRénov', gain énergétique moyen de 65 %) ; Citepa, Secten 2026 (54,6 Mt pour les bâtiments)"
+    note: "≈ +0,35 Md€ par an (attal_mesures.renovation) ≈ 14 000 rénovations d'ampleur de plus par an, ≈ 320 000 en 2050 ; même tonne par rénovation et même part additionnelle que glucksmann_ecologie.maprimerenov."
+  vehicules:
+    valeur: {id: "ATT-ENE-05", libelle: "Leasing électrique des travailleurs de première ligne, bonus d'occasion, boîtier E85", secteur: "transports", debut: 2028, plein: 2032, fin_debut: 2035, fin: 2045, effet_mt: {crise: -0.15, prudent: -0.15, median: -0.22, optimiste: -0.3}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.leasing_social (1,6 t par voiture thermique remplacée et par an ; additionnalité 40 / 40 / 60 / 80 %) ; attal_mesures.vehicules : 0,4 à 0,8 Md€"
+    note: "≈ 35 000 voitures en leasing par an de 2028 à 2032 (13 000 € chacune), soit ≈ 175 000 : 0,11 à 0,22 Mt ; ≈ 50 000 boîtiers E85 : ≈ 0,05 Mt (le carburant bio n'est pas compté dans les émissions des transports, convention du Citepa). Effet éteint de 2035 à 2045, quand le parc du statu quo s'électrifie."
+  carburant:
+    valeur: {id: "ATT-ECO-02", libelle: "Barème kilométrique relevé, prime carburant à 1 000 €", secteur: "transports", debut: 2028, plein: 2028, fin_debut: 2035, fin: 2045, effet_mt: {crise: 0.1, prudent: 0.08, median: 0.05, optimiste: 0.03}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "attal_mesures.carburant : ≈ 0,2 à 0,5 Md€ par an d'aide aux trajets en voiture ; élasticité de la consommation de carburant au prix ≈ −0,3 à long terme (Labandeira et al., 2017)"
+    note: "Une aide liée aux kilomètres baisse le coût des trajets : ≈ 0,4 Md€ sur ≈ 40 Md€ de dépense de carburant des ménages, soit ≈ −1 % de coût et +0,3 % de consommation pour une partie des conducteurs : 0,03 à 0,1 Mt de plus."

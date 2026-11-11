@@ -36,6 +36,14 @@ retailleau_macro:
     statut: DECISION
     note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
 
+retailleau_capitalisation:
+  cotisation:
+    valeur: {taux: 0.01, part_employeur: 0.5, plafond_mensuel: 40, brut_moyen_mensuel: 2600, entrants_par_an: 750000, taux_emploi: 0.85, part_public: 0.2, debut: 2028}
+    unite: sans_unite
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "LCP (23/09/2026) : part de capitalisation « pour les jeunes », cotisation de 1 % du salaire brut répartie entre le salarié et l'employeur ; Public Sénat (2026) : 0,5 % par le salarié et 0,5 % par l'employeur, fléchés sur une partie des baisses de cotisations ; 24matins (2026) : public et privé, plafond de 40 € par mois ; Insee : ≈ 700 000 à 750 000 entrées dans la vie active par an"
+    note: "Phase 2 de la roadmap (11/11/2026). Le fonds est hors des administrations publiques : la cotisation n'entre pas au budget, sauf la part employeur des agents publics (≈ 20 % des entrants), payée par les employeurs publics. Effet compté : moins d'emploi par le coût du travail (part employeur du privé) et par le salaire net (part salariale), avec les élasticités du canal d'offre commun (moteur/offre.effets). Qu'elle soit financée par une partie de la restitution ou en plus, l'effet est le même : la baisse du coût du travail et du salaire net est plus petite d'autant. Entrants depuis 2028, 750 000 par an × 85 % en emploi ; brut moyen 2 600 € par mois (jeunes), sous le plafond (1 % × 2 600 = 26 €) ; salaires du statu quo ensuite."
 retailleau_retraites:
   solde_reforme:
     valeur: {crise: 0.0, prudent: 1.0, median: 2.5, optimiste: 4.0}
@@ -288,21 +296,21 @@ retailleau_mesures:
     statut: HYPOTHESE
     source: "Tribune (14/07/2026) : 100 Md€ en 2032 ; calcul : ≈ 89 Md€ de 2026 (inflation de 2027 à 2032) contre ≈ 73 Md€ au statu quo (LPM actualisée, 76,3 Md€ courants en 2030, puis le PIB)"
   enseignants:
-    valeur: {id: RET-EDU-01, libelle: "Professeurs : +135 € net par mois en début de carrière, ≈ +300 € en milieu", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
+    valeur: {id: RET-EDU-01, instrument: education, libelle: "Professeurs : +135 € net par mois en début de carrière, ≈ +300 € en milieu", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
              montant: {crise: 5.2, prudent: 4.8, median: 4.4, optimiste: 4.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Éducation (03/09/2026), p. 10 ; calcul : ≈ 850 000 enseignants, ≈ 220 € net en moyenne, coût employeur ≈ 2,2 fois le net (CAS Pensions compris ; relecture neutre du 11/11/2026) : ≈ 4,9 Md€ bruts"
   ecoles_normales:
-    valeur: {id: RET-EDU-04, libelle: "Une École normale du professorat par académie, formation sur cinq ans", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2031, fp: true,
+    valeur: {id: RET-EDU-04, instrument: education, libelle: "Une École normale du professorat par académie, formation sur cinq ans", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2031, fp: true,
              montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Éducation, p. 11 ; encadrement : élèves professeurs rémunérés en dernière année (≈ 25 000 × 20 000 €), moins les INSPE"
   etablissements:
-    valeur: {id: RET-EDU-03, libelle: "1 000 établissements publics innovants d'ici 2032", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032,
+    valeur: {id: RET-EDU-03, instrument: education, libelle: "1 000 établissements publics innovants d'ici 2032", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032,
              montant: {crise: 0.15, prudent: 0.1, median: 0.08, optimiste: 0.05}}
     unite: md_eur
     annee_euros: 2026
@@ -387,3 +395,26 @@ retailleau_enveloppe:
     valeur: 2032
     unite: sans_unite
     statut: DECISION
+
+# ---------------------------------------------------------------- effets en tonnes (phase 2, 11/11/2026)
+# Même méthode que tondelier_ecologie (moteur/ecologie/emissions.profil, lu par ProgrammeSimple.mesures_ecologie).
+# Négatif : émissions évitées. Prudence : dans le prudent, l'effet favorable au climat est le plus faible.
+retailleau_ecologie:
+  maprimerenov:
+    valeur: {id: "RET-CUL-01", libelle: "MaPrimeRénov' supprimée", secteur: "batiments", debut: 2028, plein: 2050, effet_mt: {crise: 1.52, prudent: 1.19, median: 0.85, optimiste: 0.68}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.renovation : Anah, bilan 2024 (≈ 91 000 rénovations d'ampleur pour ≈ 2,3 à 3,4 Md€ de MaPrimeRénov', gain énergétique moyen de 65 %) ; Citepa, Secten 2026 (54,6 Mt pour les bâtiments)"
+    note: "≈ 2,3 Md€ de crédits en 2026 (retailleau_mesures.maprimerenov) ≈ 92 000 rénovations d'ampleur par an en moins, ≈ 2,1 millions en 2050 × 0,8 t. Part qui ne se ferait pas sans l'aide : 90 % (crise), 70 % (prudent), 50 % (médian), 40 % (optimiste) : la suppression d'une aide existante est jugée avec la prudence inverse d'une aide nouvelle (plus de tonnes perdues en prudent)."
+  dpe:
+    valeur: {id: "RET-LOG-02", libelle: "Fin des interdictions de louer les passoires énergétiques", secteur: "batiments", debut: 2028, plein: 2034, effet_mt: {crise: 0.4, prudent: 0.3, median: 0.2, optimiste: 0.1}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Loi Climat et résilience (2021) : logements G interdits à la location depuis 2025, F en 2028, E en 2034 ; ONRE (2024) : ≈ 1,6 million de logements F et G dans le parc locatif privé"
+    note: "Rénovations que l'interdiction aurait provoquées d'ici 2034 (le reste sort de la location ou est vendu) : 600 000 (crise), 500 000 (prudent), 300 000 (médian), 200 000 (optimiste) × 0,6 t (beaucoup de petites surfaces chauffées à l'électricité)."
+  renouvelables:
+    valeur: {id: "RET-ENE-02", libelle: "Fin du soutien aux nouvelles capacités éoliennes et solaires, TVA normale sur le solaire", secteur: "energie", debut: 2029, plein: 2035, suit_intensite: false, effet_mt: {crise: 2.5, prudent: 1.5, median: 0.8, optimiste: 0.3}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "CRE (charges de service public des nouveaux contrats, 2025) ; RTE, Bilan prévisionnel 2023-2035 : système électrique décarboné à ≈ 95 %, les renouvelables en plus servent l'électrification et les exportations ; PPE3 : éolien et solaire en hausse au statu quo"
+    note: "Moins de renouvelables que la PPE3 : surtout moins d'exportations (émissions évitées à l'étranger, non comptées ici) ; en France, plus de centrales au gaz en pointe et une électrification des usages plus lente si l'offre manque : +0,3 à +2,5 Mt vers 2035."

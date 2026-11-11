@@ -204,21 +204,21 @@ philippe_mesures:
     statut: HYPOTHESE
     source: "Site du candidat : 500 € par l'État ; ≈ 700 000 premiers emplois par an (Insee, entrées dans la vie active)"
   enseignants:
-    valeur: {id: PHI-EDU-01, libelle: "Rémunération moyenne des enseignants +20 % sur le quinquennat, écoles normales recréées", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+    valeur: {id: PHI-EDU-01, instrument: education, libelle: "Rémunération moyenne des enseignants +20 % sur le quinquennat, écoles normales recréées", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
              montant: {crise: 9.5, prudent: 8.1, median: 6.8, optimiste: 5.4}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Calcul : traitements et primes des enseignants ≈ 35 Md€ brut ; +20 % en nominal, dont ≈ 5 % suivent déjà au statu quo (salaires réels) et ≈ 8 % d'inflation sur cinq ans : ≈ 8 à 15 % en réel × coût employeur ≈ 1,9 fois le brut (CAS Pensions compris ; relecture neutre du 11/11/2026, au lieu de 1,4) : 5,4 à 9,5 Md€"
   soutien_scolaire:
-    valeur: {id: PHI-EDU-03, libelle: "Service public du soutien scolaire : assistant IA et brigades de bénévoles", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
+    valeur: {id: PHI-EDU-03, instrument: education, libelle: "Service public du soutien scolaire : assistant IA et brigades de bénévoles", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
              montant: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : licences et calcul ≈ 20 € par élève ; bénévoles encadrés"
   effectifs_primaire:
-    valeur: {id: PHI-EDU-05, libelle: "Effectifs réduits en maternelle et en primaire", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
+    valeur: {id: PHI-EDU-05, instrument: education, libelle: "Effectifs réduits en maternelle et en primaire", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
              montant: {crise: 0.3, prudent: 0.2, median: 0.1, optimiste: 0.0}}
     unite: md_eur
     annee_euros: 2026
@@ -396,3 +396,26 @@ philippe_enveloppe:
     valeur: 2032
     unite: sans_unite
     statut: DECISION
+
+# ---------------------------------------------------------------- effets en tonnes (phase 2, 11/11/2026)
+# Même méthode que tondelier_ecologie (moteur/ecologie/emissions.profil, lu par ProgrammeSimple.mesures_ecologie).
+# Négatif : émissions évitées. Prudence : dans le prudent, l'effet favorable au climat est le plus faible.
+philippe_ecologie:
+  vehicules_occasion:
+    valeur: {id: "PHI-CLI-03", libelle: "Mêmes aides pour un véhicule électrique d'occasion que neuf", secteur: "transports", debut: 2028, plein: 2032, fin_debut: 2035, fin: 2045, effet_mt: {crise: -0.08, prudent: -0.11, median: -0.17, optimiste: -0.22}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.leasing_social (1,6 t par voiture thermique remplacée et par an) ; philippe_mesures.vehicules_occasion : 50 000 à 100 000 véhicules par an"
+    note: "≈ 70 000 aides par an de 2028 à 2032, soit ≈ 350 000 ; additionnalité plus faible que pour le neuf (la voiture d'occasion change de main) : 15 % (crise), 20 % (prudent), 30 % (médian), 40 % (optimiste). Effet éteint de 2035 à 2045."
+  fret:
+    valeur: {id: "PHI-CLI-06", libelle: "Grand plan de fret ferroviaire", secteur: "transports", debut: 2029, plein: 2035, effet_mt: {crise: -0.16, prudent: -0.32, median: -0.64, optimiste: -0.96}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Stratégie nationale du fret ferroviaire (2023) : part du rail de 9 % à 18 % en 2030 avec 4 Md€ ; ADEME, Base Empreinte : poids lourd ≈ 85 g par t-km, fret ferroviaire ≈ 5 g"
+    note: "≈ 0,08 Mt évitées par milliard de t-km reporté ; report en plus du statu quo : 2 (crise), 4 (prudent), 8 (médian), 12 (optimiste) milliards de t-km, sur ≈ 300 milliards transportés par la route."
+  capture_carbone:
+    valeur: {id: "PHI-CLI-08", libelle: "Investissement massif dans la capture du carbone", secteur: "industrie", debut: 2029, plein: 2035, effet_mt: {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Stratégie CCUS (2023-2025) : 4 à 8,5 Mt captées par an vers 2030, 15 à 20 Mt vers 2040, déjà prévues en partie ; contrats carbone pour différence de 2025 ; coût de la tonne évitée ≈ 150 à 250 € au démarrage"
+    note: "0,2 à 0,5 Md€ par an (philippe_mesures.capture_carbone) / ≈ 200 € par tonne ≈ 1,5 à 2,5 Mt soutenues ; part en plus de la stratégie du statu quo : ≈ 1/3 à 4/5 ; projets en service vers 2035 (cimenteries, chimie)."

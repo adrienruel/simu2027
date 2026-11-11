@@ -398,6 +398,7 @@ mesures:
     page: 67
     citation: "Créer une taxe sur les bouteilles en plastique"
     statut: economie_declarative
+    traitement: tondelier_mesures.taxe_plastique (estimée le 11/11/2026, phase 2)
     poids: faible
 
   - id: REC-47

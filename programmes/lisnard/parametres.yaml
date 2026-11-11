@@ -42,7 +42,7 @@ lisnard_actifs:
     annee_euros: 2026
     statut: DECISION
     source: "Fiche « Questions » (03/10/2026) : 120 Md€ rendus aux actifs par la baisse des cotisations (≈ 400 € net par mois) ; CNEWS (28/10/2026) : CSG sur les revenus d'activité de 9,2 % à 6,6 %"
-    note: "Montant de la mesure (paramètre), pas une recette annoncée. Arbitrage : la baisse de CSG (2,6 points, ≈ 28 Md€) fait partie des 120 Md€ ; le reste en cotisations salariales. Calcul : moteur/bibliotheque.baisse_prelevements_salaries (impôt sur le revenu en plus, prestations en moins, effet d'offre par OpenFisca)."
+    note: "Montant de la mesure (paramètre), pas une recette annoncée. Arbitrage : la baisse de CSG (2,6 points, ≈ 28 Md€) fait partie des 120 Md€ ; le reste en cotisations salariales. Calcul : moteur/bibliotheque.baisse_prelevements_salaries (impôt sur le revenu en plus, prestations en moins, effet d'offre par OpenFisca). Caisses et droits à retraite (phase 2, 11/11/2026) : les cotisations salariales sont surtout des cotisations vieillesse (régime général ≈ 7,3 % du brut, Agirc-Arrco ≈ 4 %, retenue pour pension des fonctionnaires 11,1 %), soit ≈ 100 Md€ en tout. Le modèle lit la mesure à règles de droits inchangées : les trimestres et les points restent acquis sur le salaire brut, les pensions ne baissent pas, et les caisses (régimes de base, Agirc-Arrco, CAS Pensions, CNRACL, toutes dans les administrations publiques) sont compensées par l'État. La compensation est interne aux administrations publiques : elle n'ajoute rien au solde, déjà dégradé du montant de la mesure. Variante non retenue, faute d'annonce : des points Agirc-Arrco acquis sur les seules cotisations payées feraient baisser les pensions futures (≈ 40 % des droits complémentaires nouveaux), une économie de long terme pour le solde mais une perte de droits."
   csg_points:
     valeur: 2.6
     unite: points
@@ -266,14 +266,14 @@ lisnard_mesures:
     statut: HYPOTHESE
     source: "Même chiffrage que retailleau_mesures.renouvelables"
   enseignants:
-    valeur: {id: LIS-EDU-03, libelle: "Rémunérations des enseignants +20 % en cinq ans, sous conditions", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+    valeur: {id: LIS-EDU-03, instrument: education, libelle: "Rémunérations des enseignants +20 % en cinq ans, sous conditions", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
              montant: {crise: 8.1, prudent: 6.8, median: 5.4, optimiste: 4.1}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Page programme (non datée) ; même calcul que philippe_mesures.enseignants (+20 % nominal, part réelle en plus du statu quo), un peu moins pour les conditions ; coût employeur ≈ 1,9 fois le brut (relecture neutre du 11/11/2026)"
   excellence:
-    valeur: {id: LIS-EDU-04, libelle: "Classes d'excellence, établissements d'excellence avec internats par ancien canton, établissements disciplinaires", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+    valeur: {id: LIS-EDU-04, instrument: education, libelle: "Classes d'excellence, établissements d'excellence avec internats par ancien canton, établissements disciplinaires", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
              montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
     unite: md_eur
     annee_euros: 2026
@@ -337,3 +337,26 @@ lisnard_enveloppe:
     valeur: 2032
     unite: sans_unite
     statut: DECISION
+
+# ---------------------------------------------------------------- effets en tonnes (phase 2, 11/11/2026)
+# Même méthode que tondelier_ecologie (moteur/ecologie/emissions.profil, lu par ProgrammeSimple.mesures_ecologie).
+# Négatif : émissions évitées. Prudence : dans le prudent, l'effet favorable au climat est le plus faible.
+lisnard_ecologie:
+  renouvelables:
+    valeur: {id: "LIS-ENE-02", libelle: "Renouvelables au droit commun, sans régime de soutien", secteur: "energie", debut: 2029, plein: 2035, suit_intensite: false, effet_mt: {crise: 2.5, prudent: 1.5, median: 0.8, optimiste: 0.3}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "CRE (charges de service public des nouveaux contrats, 2025) ; RTE, Bilan prévisionnel 2023-2035 : système électrique décarboné à ≈ 95 %, les renouvelables en plus servent l'électrification et les exportations ; PPE3 : éolien et solaire en hausse au statu quo"
+    note: "Même chiffrage que retailleau_ecologie.renouvelables."
+  zfe:
+    valeur: {id: "LIS-CLI-02", libelle: "Zones à faibles émissions supprimées", secteur: "transports", debut: 2028, plein: 2030, fin_debut: 2035, fin: 2045, effet_mt: {crise: 0.2, prudent: 0.15, median: 0.1, optimiste: 0.05}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Cerema et ADEME (évaluations des ZFE, 2023-2024) : effet surtout sur la qualité de l'air ; restrictions réelles seulement à Paris, Lyon et quelques métropoles"
+    note: "Renouvellement du parc avancé dans les métropoles : 0,05 à 0,2 Mt de CO2. Effet éteint de 2035 à 2045, quand le parc du statu quo s'électrifie."
+  dpe:
+    valeur: {id: "LIS-LOG-03", libelle: "Bonus-malus à la place des interdictions de louer les passoires énergétiques", secteur: "batiments", debut: 2028, plein: 2034, effet_mt: {crise: 0.2, prudent: 0.15, median: 0.1, optimiste: 0.05}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même encadrement que retailleau_ecologie.dpe"
+    note: "Le bonus-malus garde une incitation : moitié de l'effet de la suppression des interdictions (retailleau_ecologie.dpe)."
