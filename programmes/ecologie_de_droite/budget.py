@@ -1,19 +1,49 @@
-"""Trajectoire 2029-2073 : du budget statique aux comptes de chaque année (feuille Trajectoire, lignes 17 à 22 et 43).
+"""Budget du programme « Écologie de droite », ligne par ligne, 2029-2073 (12 novembre 2026).
 
-Chaque poste part de son niveau statique (feuille Total) et évolue avec la croissance tendancielle,
-les mesures datées (feuille Objectifs, coût de transition, renouvelables, IA) et les feuilles annexes.
-Le solde primaire hors effets macro qui en résulte alimente le module macro.
+Registre des lignes datées de chaque poste (recettes, santé, retraites, revenu universel, investissement, autres) :
+ce que le programme dépense et prélève avant tout effet économique. Déplacé de l'ancien moteur (trajectoire_annuelle.py, supprimé le 12/11/2026) :
+c'est la description du budget du programme, pas du moteur. Chaque ligne devient une mesure contre le statu quo
+(programme.py) ; le noyau commun (moteur/noyau.py) tient les comptes.
 """
 from __future__ import annotations
 
+from moteur.epargne import epargne_annuelle, part_rui_salarie
+from moteur.recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
+from moteur.recettes.tva_menages import part_rui_agent
 
-from .parametres import Parametres
-from .recettes.total import recettes_nouveau_systeme
-from .depenses.statique import depenses
-from .depenses import ia_administration
-from .retraites_transition import cout_transition, cout_socle
+
+from moteur.parametres import Parametres
+from moteur.recettes.total import recettes_nouveau_systeme
+from moteur.depenses.statique import depenses
+from moteur.depenses import ia_administration
+from moteur.retraites_transition import cout_transition, cout_socle
 
 ANNEES = list(range(2029, 2074))
+
+
+def flux_epargne_obligatoire(p: Parametres, scenario: str = "prudent") -> float:
+    """Total!B63 : épargne obligatoire annuelle des salariés et des agents (€)."""
+    d = effectifs_prive_2026(p)
+    total = sum(n * epargne_annuelle(c, p, scenario, part_rui_salarie(c, p), contribution=False) for c, n in zip(d.milieux, d.effectifs))
+    d, a = effectifs_public_2026(p), facteur_alignement_public(p)
+    total += sum(n * epargne_annuelle(c * a, p, scenario, part_rui_agent(c), contribution=False) for c, n in zip(d.milieux, d.effectifs))
+    return total
+
+
+def tva_par_point_eviction(p: Parametres, scenario: str = "prudent") -> float:
+    """Total!B70 : TVA en plus si toute l'épargne obligatoire évinçait l'épargne volontaire (Md€)."""
+    from moteur.recettes.tva_menages import budget_actif
+    total = 0.0
+    d = effectifs_prive_2026(p)
+    for c, n in zip(d.milieux, d.effectifs):
+        b = budget_actif(c, p, scenario, part_rui_salarie(c, p))
+        total += n * (b["oblig"] * b["taux"] / (1 + b["taux"]) if b["volontaire"] > 0 else 0.0)
+    d, a = effectifs_public_2026(p), facteur_alignement_public(p)
+    for c, n in zip(d.milieux, d.effectifs):
+        b = budget_actif(c * a, p, scenario, part_rui_agent(c))
+        total += n * (b["oblig"] * b["taux"] / (1 + b["taux"]) if b["volontaire"] > 0 else 0.0)
+    return total / 1e9
+
 
 
 def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
@@ -28,8 +58,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     #   démographique ; on retire la part déjà dans la TVA des retraités (même part que dans la ligne 3).
     # Le reste suit les personnes en emploi.
     if p.val("macro.corrections_relecture"):
-        from .recettes import tva_menages
-        from .carbone import recette_statique as recette_carbone
+        from moteur.recettes import tva_menages
+        from moteur.carbone import recette_statique as recette_carbone
         tva_ret = tva_menages.tva_retraites(p)
         part_ret = tva_ret / _rns["lignes"][3]
         rec_ret = (_rns["lignes"][5] + tva_ret) / 1e9 + recette_carbone(p) * (1 - part_ret)
@@ -37,8 +67,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
         rec_ret = 0.0
     rec_pop = 0.0
     # impôt unique et TVA des salariés (privé et public) : suivent les cellules de salariés (âge, salaire)
-    from .recettes import tva_menages as _tm
-    from .recettes.impot_salaires import impot_prive as _ip, impot_public as _ipu
+    from moteur.recettes import tva_menages as _tm
+    from moteur.recettes.impot_salaires import impot_prive as _ip, impot_public as _ipu
     rec_sal_impot = (_ip(p) + _ipu(p)) / 1e9
     rec_sal_tva = (_tm.tva_prive(p) + _tm.tva_public(p)) / 1e9
     rec_emp = rec - rec_ret - rec_pop - rec_sal_impot - rec_sal_tva
@@ -46,33 +76,33 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     l = dep["lignes"]
     ct = cout_transition(p)
     socle = cout_socle(p)
-    from .ancien_systeme import contribution_solidarite
+    from moteur.ancien_systeme import contribution_solidarite
     contrib_anciens = contribution_solidarite(p)
-    from .retraites_transition import attente_rui_et_socle
+    from moteur.retraites_transition import attente_rui_et_socle
     attente = attente_rui_et_socle(p)
     ia = ia_administration.economie_nette(p)
-    from .ancien_systeme import depenses as depenses_ancien
+    from moteur.ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
-    from .recettes import successions, autres
+    from moteur.recettes import successions, autres
     succ = successions.supplement(p, autres.ligne_8_successions(p) / 1e9)
-    from .ascenseur_social import annuel as ascenseur
+    from moteur.ascenseur_social import annuel as ascenseur
     asc = ascenseur(p, autres.ligne_8_successions(p) / 1e9, p.val("successions.exoneration_entreprises"))
     asc_r, asc_d = {t: v["recettes"] for t, v in asc.items()}, {t: v["depenses"] for t, v in asc.items()}
-    from .mesures import economies_par_mesure
+    from moteur.mesures import economies_par_mesure
     eco_detail = economies_par_mesure(p)
-    from . import sante as module_sante
+    from moteur import sante as module_sante
     sante, gf = module_sante.depenses(p, scenario_retenu), module_sante.garde_fou(p, scenario_retenu)
-    from . import objectifs
-    from .anciennes_pensions import recette_nette
+    from moteur import objectifs
+    from moteur.anciennes_pensions import recette_nette
     anc_p = recette_nette(p)
     etu = objectifs.rui_etudiants(p)
     tva2028 = {t: objectifs.surcroit_tva_2028(p, t)[0] for t in ANNEES}
     rendu = {t: objectifs.surcroit_tva_2028(p, t)[1] for t in ANNEES}
     gel = {t: objectifs.fin_gel(p, t) for t in ANNEES}
-    from .emploi import cout_reformes, cout_prime_jeunes
+    from moteur.emploi import cout_reformes, cout_prime_jeunes
     em = {"g24": cout_reformes(p), "b155": cout_prime_jeunes(p) * p.val("emploi.retenues_calculees")["prime_jeunes"],
           "b154": p.val("emploi.prime_jeunes")["derniere_annee"]}
-    from .is_investissement import cout_net_etat
+    from moteur.is_investissement import cout_net_etat
     is_inv = cout_net_etat(p)
     # Renouvelables (Budget État 2026, lignes 136 à 144)
     soutien_2026, soutien_2029 = p.val("renouvelables.soutien_budget_2026"), p.val("renouvelables.soutien_2029")
@@ -84,15 +114,15 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
                    - l["charge_dette"] - l["subventions_restees"])
     # Total!B44 + B72 : le total compte l'IA en déduction ; on la rajoute puis on la retranche année par année
     autres_base += -l["ia_administration"]
-    from .demographie import indices
-    from .depenses.statique import rui_enfants
+    from moteur.demographie import indices
+    from moteur.depenses.statique import rui_enfants
     demo = indices(p, "prudent")
     # quotient familial et conjugal, RUI du conjoint : suivent les enfants et les couples (cellules de ménages)
     # au lieu de la population totale, comme le reste des autres dépenses
     menages_idx = None
     if p.val("cohortes.active") and p.val("demographie.active"):
-        from .cohortes import menages
-        from .depenses import quotient as _quotient
+        from moteur.cohortes import menages
+        from moteur.depenses import quotient as _quotient
         qc = _quotient.cout(p)
         qcj = p.val("quotient.conjugal")
         g_conj = qc["conjugal"] - qcj["retraites_forfait"]
@@ -105,14 +135,13 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
                            "i_conj": conj[t] / conj[2029], "i_sans": mn[t]["sans_emploi_en_couple"] / mn[2029]["sans_emploi_en_couple"]}
                        for t in ANNEES}
     rui_enf = rui_enfants(p)
-    from .depenses.statique import rui_salaries as _rui_salaries
+    from moteur.depenses.statique import rui_salaries as _rui_salaries
     rui_sal = _rui_salaries(p)
-    from .demographie import creches_nouvelles
+    from moteur.demographie import creches_nouvelles
     creches = creches_nouvelles(p)
-    from .macro import flux_epargne_obligatoire
     contrib = p.val("epargne.contribution_transition") * flux_epargne_obligatoire(p) / 1e9 if p.val("epargne.contribution_transition") else 0.0
     # revalorisation de la RUI, de l'AAH et du socle (moteur/inflation.indice_reel : règle d'indexation)
-    from .inflation import indice_reel
+    from moteur.inflation import indice_reel
     idx_reel = indice_reel(p, scenario_retenu)
 
     def reval(t):
@@ -120,7 +149,7 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
 
     mins = None
     if p.val("ministeres.par_public") and p.val("demographie.active"):
-        from .depenses.ministeres import trajectoire as _traj_ministeres
+        from moteur.depenses.ministeres import trajectoire as _traj_ministeres
         mins = _traj_ministeres(p)
     L = Lignes()
     for t in ANNEES:

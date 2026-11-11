@@ -16,7 +16,7 @@ from moteur.emploi_canaux import emplois_par_mesure
 from moteur.entreprises_cellules import arbitrage_tpe, bilan
 from moteur.parametres import Parametres
 from moteur.recettes.entreprises import is_beneficiaires
-from moteur.simulation import simuler
+from moteur import noyau
 
 RACINE = Path(__file__).resolve().parent.parent
 ANS = (2029, 2037, 2050, 2073)
@@ -48,23 +48,27 @@ def caler(tranches, seuil) -> float:
 
 
 def mesurer(nom: str, p: Parametres, taux_haut: float | None = None) -> dict:
-    r = simuler(p)
+    prog = noyau.charger(p.programme)
+    r = noyau.simuler(p, prog)
     pr, me = r["prudent"], r["median"]
+    can = prog.canaux_courts(p, "prudent")
     e = emplois_par_mesure(p)
     loc = {j: e[j].get("entreprises_localisation", 0.0) for j in e}
     return {"bareme": nom, "taux_haut_etat": taux_haut,
             "is_etat_statique": round(is_beneficiaires(p) / 1e9, 1),
-            "deficit_sans_regle": {t: round(pr[t]["deficit_avant_clause"], 2) for t in ANS},
+            "deficit_sans_regle": {t: round(pr[t]["deficit_sans_regle"], 2) for t in ANS},
             "deficit_publie": {t: round(pr[t]["deficit"], 2) for t in ANS},
             "dette_2073": round(pr[2073]["dette_pib"]),
             "chomage": {t: round(pr[t]["chomage"], 2) for t in ANS},
-            "median_sans_regle": {t: round(me[t]["deficit_avant_clause"], 2) for t in ANS},
+            "median_sans_regle": {t: round(me[t]["deficit_sans_regle"], 2) for t in ANS},
             "median_chomage": {t: round(me[t]["chomage"], 2) for t in ANS},
             "crise_publie_2073": round(r["crise"][2073]["deficit"], 2),
             "emplois_localisation": {j: round(v) for j, v in loc.items()},
             "salaires_dirigeants_perte": round(arbitrage_tpe(p)["perte"], 2),
             "ecart_par_taille": {x["taille"]: round(x["ecart"], 1) for x in bilan(p)},
-            "canaux_2050": {k: round(pr[2050]["canaux"][k], 2) for k in ("investissement_entreprises", "erosion_is", "emploi", "salaires_dirigeants", "emplois_fonds")}}
+            "canaux_2050": {**{k: round(can[c][2050], 2) for k, c in (("investissement_entreprises", "investissement"), ("erosion_is", "erosion_is"),
+                                                               ("emploi", "emploi"), ("salaires_dirigeants", "dirigeants"))},
+                            "emplois_fonds": round(pr[2050]["dynamiques"]["fonds"]["solde"], 2)}}
 
 
 # barèmes non neutres (le haut reste à 40 % ou baisse) et taux uniques plus bas, pour situer

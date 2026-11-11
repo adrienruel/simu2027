@@ -1,7 +1,7 @@
 """Entreprises par taille (TPE, PME, ETI, GE) : impôts actuels et nouveaux, coût du capital et investissement.
 
 Ce que le module ajoute au budget statique, qui traite les entreprises en 16 classes de bénéfice (moteur/recettes/
-entreprises.py) et leur comportement en agrégats (moteur/macro.py) :
+entreprises.py) et leur comportement en agrégats (programmes/ecologie_de_droite/effets.py) :
 
 1. Impôts de production des entreprises déficitaires. Le budget statique ajoutait tous les impôts de production
    supprimés (75 Md€ hors secteur non marchand) au bénéfice imposable des entreprises bénéficiaires. Une part est
@@ -196,8 +196,9 @@ def bilan_annees(p: Parametres, annees=(2032, 2037, 2050, 2073)) -> dict:
     base = bilan(p)
     # capital nouveau du fonds (prudent) : réparti entre les tailles ; avantage de financement = capital × (coût du
     # financement de marché − rendement du capital du fonds), équivalent d'une aide à l'appareil productif
-    from .macro import calculer
-    fonds = calculer(p)["prudent"].detail.get("fonds", {})
+    from . import noyau
+    comptes = noyau.resultats(p, ("prudent",))["prudent"]
+    fonds = {t: {"capital": c["dynamiques"].get("fonds", {}).get("capital_fin", 0.0)} for t, c in comptes.items()}
     marche = p.val("entreprises_cellules.cout_financement_marche")
     cout_marche = marche["part_fonds_propres"] * marche["fonds_propres"] + (1 - marche["part_fonds_propres"]) * marche["dette"]
     ecart_taux = max(0.0, cout_marche - p.val("macro.pib_par_euro_capital", "prudent"))

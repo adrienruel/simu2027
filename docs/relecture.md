@@ -10,7 +10,7 @@ clause de trajectoire.
 ```
 pip install pyyaml pytest openpyxl openfisca-france
 python -m pytest                     # 193 tests, ~2 min
-python -m moteur.simulation          # déficits des quatre scénarios
+python -m moteur.noyau                # déficits des quatre scénarios (noyau commun)
 python -m outils.tableau_de_bord     # sorties/tableau_de_bord.html
 python -m outils.leviers             # variantes (~20 min)
 ```

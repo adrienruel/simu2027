@@ -27,10 +27,13 @@ def annees_sous_seuil(p: Parametres, t: int) -> int:
     cache = p.__dict__.setdefault("_cache", {})
     cle = ("deficit_sans_hausse_deduction", p.colonne_prudent)
     if cle not in cache:
-        from .macro import calculer
+        # déficit du prudent avant règle de trajectoire, sans la hausse, lu dans les comptes du noyau (12/11/2026 :
+        # ancien moteur supprimé). Dans le calcul de crise, la colonne prudente est celle de crise.
+        from . import noyau
         sans = p.avec({"is_investissement.hausse_part_admise/debut": 9999, "is_investissement.hausse_part_admise/fin": 9999})
         sans.colonne_prudent, sans._surcharges, sans.taux_local_copie = p.colonne_prudent, p._surcharges, p.taux_local_copie
-        cache[cle] = {u: c["avant"] for u, c in calculer(sans)["prudent"].detail["clause"].items()}
+        res = noyau.simuler(sans, noyau.charger(p.programme), scenarios=("prudent",))["prudent"]
+        cache[cle] = {u: c["deficit_sans_regle"] / 100 for u, c in res.items()}
     seuil = p.val("is_investissement.hausse_part_admise")["seuil_deficit"]
     return sum(1 for u, d in cache[cle].items() if u < t and d < seuil)
 

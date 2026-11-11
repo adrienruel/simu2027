@@ -1,12 +1,12 @@
 """Leviers : chaque levier d'économie améliore bien le solde (sens des effets)."""
+from moteur import noyau
 from moteur.parametres import Parametres
-from moteur.simulation import simuler
 
 P = Parametres()
 
 
 def _deficit(modifs, t=2037):
-    return simuler(P.avec(modifs))["prudent"][t]["deficit_avant_clause"]
+    return noyau.resultats(P.avec(modifs), ("prudent",))["prudent"][t]["deficit_sans_regle"]
 
 
 def test_contribution_de_transition_est_une_recette():
@@ -24,10 +24,9 @@ def test_socle_plus_bas_reduit_le_deficit_a_long_terme():
 
 def test_prime_de_taux_alourdit_quand_la_dette_monte():
     """Prime de taux liée à la dette : la crise (dette qui monte) paie plus d'intérêts avec la prime que sans."""
-    from moteur.macro import calculer
-    avec = calculer(P.en_crise())["prudent"]
-    sans = calculer(P.en_crise().avec({"macro.prime_dette": 0.0}))["prudent"]
-    assert avec.charge_dette[2035] > sans.charge_dette[2035]  # dette au-dessus de son niveau de départ
+    avec = noyau.resultats(P, ("crise",))["crise"]
+    sans = noyau.resultats(P.avec({"macro.prime_dette": 0.0}), ("crise",))["crise"]
+    assert avec[2035]["charge_dette"] > sans[2035]["charge_dette"]  # dette au-dessus de son niveau de départ
 
 
 def test_participation_des_inactifs():
@@ -51,37 +50,37 @@ def test_hausse_de_la_deduction_conditionnee_au_deficit():
 
 def test_usure_du_fonds_dans_le_pib_pas_dans_les_impots():
     """Relecture du 29/10/2026 : l'usure du capital du fonds compte dans le PIB, mais n'est pas taxée."""
-    from moteur.macro import calculer
-    avec, sans = calculer(P)["prudent"], calculer(P.avec({"macro.usure_capital_fonds": 0.0}))["prudent"]
-    assert avec.pib_effet[2050] > sans.pib_effet[2050]
+    avec = noyau.resultats(P, ("prudent",))["prudent"]
+    sans = noyau.resultats(P.avec({"macro.usure_capital_fonds": 0.0}), ("prudent",))["prudent"]
+    assert avec[2050]["pib"] > sans[2050]["pib"]
     # la recette ne bouge qu'à la marge (le capital lui-même dépend un peu de la dette, via la part placée à l'étranger)
     import pytest
-    assert avec.detail["canaux"][2050]["capital_du_fonds"] == pytest.approx(sans.detail["canaux"][2050]["capital_du_fonds"], rel=0.05)
+    assert avec[2050]["dynamiques"]["fonds"]["solde"] == pytest.approx(sans[2050]["dynamiques"]["fonds"]["solde"], rel=0.05)
 
 
 def test_baisse_du_rui_par_la_clause_respecte_le_plancher():
     """La baisse du RUI décidée par la clause ne descend pas sous le plancher, sur le RUI réel de l'année."""
-    from moteur.macro import calculer
-    sc = calculer(P)["prudent"]
-    plancher, infl, g = P.val("clause.plancher_rui"), P.val("calendrier.inflation"), P.val("macro.tendance")
-    for t, c in sc.detail["clause"].items():
-        if c["rui"] > 0:
+    sc = noyau.resultats(P, ("prudent",))["prudent"]
+    plancher = P.val("clause.plancher_rui")
+    for t, c in sc.items():
+        r = c["regle"]
+        if r["leviers"]["Baisse du revenu universel"] > 0:
             # RUI réel de l'année (règle d'indexation, moteur/inflation.indice_reel)
             from moteur.inflation import indice_reel
             rui_t = P.val("rui.montant") * indice_reel(P)[t]
-            assert c["rui_euros"] <= rui_t - plancher + 60, t
+            assert r["details"]["Baisse du revenu universel"]["euros"] <= rui_t - plancher + 60, t
 
 
 def test_regle_automatique_vise_3_pour_cent():
     """Règle permanente : quand ses instruments suffisent, le déficit publié du prudent ne dépasse pas 3 % ;
     sinon, ils sont au maximum (5 points d'épargne, RUI au plancher)."""
-    from moteur.macro import calculer
-    sc = calculer(P)["prudent"]
-    for t, c in sc.detail["clause"].items():
-        if c["non_couvert"] <= 1e-6:
-            assert -sc.maastricht[t] <= 0.03 + 1e-6, t
+    sc = noyau.resultats(P, ("prudent",))["prudent"]
+    for t, c in sc.items():
+        r = c["regle"]
+        if r["reste_a_couvrir"] <= 1e-6:
+            assert c["deficit"] <= 3.0 + 1e-4, t
         else:
-            assert c["points"] >= P.val("clause.points_contribution_max") - 1e-6, t
+            assert r["details"]["Contribution d'épargne retraite"]["points"] >= P.val("clause.points_contribution_max") - 1e-6, t
 
 
 def test_socle_supplementaire_quand_l_epargne_est_prise():
@@ -92,12 +91,11 @@ def test_socle_supplementaire_quand_l_epargne_est_prise():
 
 def test_restitution_rend_l_epargne_prise():
     """Restitution : ce qui est rendu plus ce qui reste dû correspond à ce qui a été pris, avec le rendement."""
-    from moteur.macro import calculer
-    d = calculer(P)["prudent"].detail
-    paye = sum(x["paiement"] for x in d["restitution"].values())
-    assert paye > 0 and d["restitution"][2073]["creances"] > 0
-    sans = calculer(P.avec({"clause.restitution/active": False}))["prudent"].detail
-    assert "restitution" not in sans or all(x["paiement"] == 0 for x in sans["restitution"].values())
+    d = noyau.resultats(P, ("prudent",))["prudent"]
+    paye = sum(x["dynamiques"]["fonds"]["paiement"] for x in d.values())
+    assert paye > 0 and d[2073]["dynamiques"]["fonds"]["creances"] > 0
+    sans = noyau.resultats(P.avec({"clause.restitution/active": False}), ("prudent",))["prudent"]
+    assert all(x["dynamiques"]["fonds"]["paiement"] == 0 for x in sans.values())
 
 
 def test_contribution_des_anciens_retraites():

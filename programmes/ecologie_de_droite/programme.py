@@ -1,32 +1,37 @@
-"""« Écologie de droite » branché sur le noyau commun (moteur/noyau.py), 4 novembre 2026.
+"""« Écologie de droite » sur le noyau commun (moteur/noyau.py), sans moteur propre (12 novembre 2026).
 
-Première étape du rebranchement : le programme garde son propre moteur (moteur/macro.py, moteur/trajectoire_annuelle.py,
-qui chiffrent son budget ligne par ligne) et il est traduit en mesures contre le statu quo :
+Le programme ne contient que ses mesures et l'interprétation de son texte ; tout le calcul agrégé est celui du noyau :
 
-- chaque poste de son budget remplace les blocs correspondants du statu quo (écart = budget du programme − statu
-  quo) : retraites, santé, investissement un pour un ; le revenu universel et l'AAH remplacent l'assurance chômage,
-  la famille, le logement, la pauvreté et l'AAH ; les autres dépenses remplacent les missions, l'enseignement et le
-  reste ;
-- ses effets macroéconomiques sont des mesures de recettes, une par canal (emploi, capital du fonds, érosion de
-  l'IS…), règle de trajectoire comprise ;
+- le budget (budget.py : registre ligne par ligne) remplace, poste par poste, les blocs correspondants du statu quo
+  (écart = budget du programme − statu quo) : retraites, santé, investissement un pour un ; le revenu universel et
+  l'AAH remplacent l'assurance chômage, la famille, le logement, la pauvreté et l'AAH ; les autres dépenses
+  remplacent les missions, l'enseignement et le reste ;
+- ses effets économiques propres sont des mesures (effets.py : emploi des réformes, seniors long, érosion de l'IS,
+  fraude à la TVA, logement, productivité, IA, école, réactions des hauts revenus, investissement des entreprises…),
+  calculées avec les mêmes paramètres ; le multiplicateur, l'offre (seniors), les taux, le chômage et la conjoncture
+  viennent du pipeline commun du noyau ;
+- le fonds d'épargne obligatoire est une dynamique du noyau (état par scénario) ; la clause de trajectoire est la
+  règle générique du noyau (cible de déficit, leviers ordonnés avec capacités) : les comptes sont publiés avec et
+  sans règle ;
 - le périmètre est aligné sur celui du statu quo (toutes les administrations) : les collectivités, que le programme
   sort de son budget, y sont remises (dépenses et ressources propres, même montant : solde inchangé) ;
 - son contexte : PIB, inflation (récession de 2029, carbone), baisse de l'écart de taux, chômage, dette de fin 2028
   (mesures de 2028), participations remises au fonds.
 
-Mesure à isoler quand le programme sera codé mesure par mesure (DÉCISION d'Adrien du 04/11/2026) : le revenu
-universel revalorisé sur les prix, alors que le statu quo garde le niveau des prestations par rapport aux salaires ;
-c'est un objectif assumé du programme (baisse relative de ces prestations dans le temps), pas une convention.
+Mesure à isoler (DÉCISION d'Adrien du 04/11/2026) : le revenu universel revalorisé sur les prix, alors que le statu
+quo garde le niveau des prestations par rapport aux salaires ; c'est un objectif assumé du programme (baisse
+relative de ces prestations dans le temps), pas une convention.
 
-Le noyau recalcule alors les intérêts, la dette et le déficit : il doit retrouver exactement les résultats du moteur
-du programme (tests/test_noyau.py). L'écart de 2029 entre le budget du programme et le statu quo, poste par poste,
-mêle les mesures et les différences de méthode (budget ligne par ligne contre agrégats du PLF 2027) : il est montré
-par `ecart_de_depart`. Étapes suivantes : remplacer ces écarts globaux par des mesures codées une à une sur le noyau.
+L'écart de 2029 entre le budget du programme et le statu quo, poste par poste, mêle les mesures et les différences de
+méthode (budget ligne par ligne contre agrégats du PLF 2027) : il est montré par `ecart_de_depart`.
 """
 from __future__ import annotations
 
 from moteur.noyau import ANNEES, Mesure
 from moteur.parametres import Parametres
+
+from .budget import lignes as lignes_traj
+from .effets import Effets
 
 # poste du programme → blocs du statu quo qu'il remplace
 CORRESPONDANCE = {
@@ -120,7 +125,7 @@ INSTRUMENTS = [
 
 def recettes_par_instrument(q: Parametres) -> dict[int, dict[str, float]]:
     """Recettes du programme hors mesures datées (Md€ de 2026), instrument par instrument, chaque année : lignes du
-    budget statique (recettes/total.py) et la même évolution que moteur/trajectoire_annuelle.postes (croissance ;
+    budget statique (recettes/total.py) et la même évolution que budget.postes (croissance ;
     impôt unique des salariés selon les cellules ; TVA des salariés selon les cellules ; retraités et part carbone
     hors TVA des retraités : indice 1 ; le reste selon les personnes en emploi). La somme est exactement celle des
     trois lignes « point de départ », « croissance » et « démographie » du registre du programme."""
@@ -203,7 +208,7 @@ def recalcul_noyau_salaries(p: Parametres, q: Parametres, s_cellules: str) -> di
     return {"noyau": noyau, "moteur": moteur(q), "moteur_sans_naissances": moteur(sans_nat)}
 
 
-def mesures_retraites(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
+def mesures_retraites(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> list:
     """Retraites mesure par mesure contre le statu quo (troisième passe, 4/11/2026).
 
     Le statu quo paie les pensions de toutes les générations au système actuel (statu_quo.retraites) ; le programme :
@@ -233,9 +238,6 @@ def mesures_retraites(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: d
     lignes_r = [x for x in L.lignes.values() if x["poste"] == "retraites" and x["cle"] not in statiques]
     for x in lignes_r:
         out.append(Mesure(f"Retraites : {x['libelle']}", "retraites", dict(x["valeurs"]), "budget"))
-    # contrôle : statu quo + mesures = retraites du moteur du programme
-    reste = {t: r[t]["retraites"] - bl_sq[t]["retraites"] - sum(mm.valeurs.get(t, 0.0) for mm in out) for t in ANNEES}
-    out.append(Mesure("Retraites : écart non réparti (contrôle, doit être nul)", "retraites", reste, "controle"))
     return out
 
 
@@ -247,7 +249,7 @@ def invalidite_statu_quo(p: Parametres, bl_sq: dict) -> dict[int, float]:
     return {t: bl_sq[t]["aah_invalidite"] * part for t in ANNEES}
 
 
-def mesures_sante(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
+def mesures_sante(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> list:
     """Santé mesure par mesure contre le statu quo (quatrième passe, 4/11/2026).
 
     Le programme compte en santé l'ONDAM, l'aide sociale à l'autonomie reprise par l'État, les pensions d'invalidité
@@ -301,8 +303,6 @@ def mesures_sante(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict)
     for cle, x in lig.items():
         if cle != "sante_trajectoire":
             out.append(Mesure(x['libelle'] if x['libelle'].startswith("Santé") else f"Santé : {x['libelle']}", "sante", dict(x["valeurs"]), "budget"))
-    reste = {t: r[t]["sante"] - bl_sq[t]["sante"] - inv_sq[t] - sum(mm.valeurs[t] for mm in out) for t in ANNEES}
-    out.append(Mesure("Santé : écart non réparti (contrôle, doit être nul)", "sante", reste, "controle"))
     # l'invalidité du statu quo, comparée ici, sort du bloc « AAH et invalidité » (rendu à la mesure du revenu universel)
     out.append(Mesure("(invalidité du statu quo, comparée à la santé du programme)", "sante", dict(inv_sq), "detail"))
     out.append(Mesure("(invalidité du statu quo : retirée du bloc AAH et invalidité)", "aah_invalidite",
@@ -339,7 +339,7 @@ def alignement_par_groupe(q: Parametres) -> dict[str, float]:
     return out
 
 
-def mesures_autres(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
+def mesures_autres(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> list:
     """Autres dépenses (missions de l'État, défense et UE, collectivités, reste) contre les blocs du statu quo
     (quatrième passe, 4/11/2026), au lieu d'un bloc unique.
 
@@ -447,14 +447,10 @@ def mesures_autres(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict
             out.append(Mesure(x["libelle"], "autres", dict(x["valeurs"]), "budget"))
     out.append(Mesure("Remplacé : reste du statu quo (gestion de la sécurité sociale, opérateurs, dépenses financées par "
                       "des ventes et tarifs…)", "autres", {t: -bl_sq[t]["autres"] for t in ANNEES}, "budget"))
-    reste = {t: r[t]["autres"] + r[t]["investissement"]
-             - sum(bl_sq[t][k] for k in ("etat_missions", "defense_ue", "collectivites", "autres", "investissement"))
-             - sum(mm.valeurs[t] for mm in out) for t in ANNEES}
-    out.append(Mesure("Autres dépenses : écart non réparti (contrôle, doit être nul)", "autres", reste, "controle"))
     return out
 
 
-def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, bl_sq: dict) -> list:
+def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> list:
     """Revenu universel et AAH mesure par mesure contre le statu quo (troisième passe, 4/11/2026).
 
     - « RUI et AAH revalorisés comme les prestations du statu quo (salaires) » : le RUI de 2029 et sa démographie
@@ -468,7 +464,7 @@ def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, b
     from moteur import statu_quo as sq
     from moteur.inflation import indice_reel
     from moteur.noyau import Mesure
-    from moteur.trajectoire_annuelle import lignes as lignes_traj
+    from .budget import lignes as lignes_traj
     s_cel = "crise" if s == "crise" else "prudent"
     w = sq.salaires(p, s_cel)
     lig = {x["cle"]: x for x in L.lignes.values() if x["poste"] == "rui_aah"}
@@ -495,14 +491,9 @@ def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, r: dict, b
         out.append(Mesure(f"(prestation remplacée, comptée dans la mesure du revenu universel) : {b}", b,
                           {t: -v[t] for t in ANNEES}, "detail"))
         out.append(Mesure(f"(contrepartie) : {b}", "nouveau:rui_aah", v, "detail"))
-    reste = {t: r[t]["rui_aah"] - sum(bl_sq[t][b] for b in blocs) + inv[t] - sum(mm.valeurs.get(t, 0.0) for mm in out if mm.nature == "budget")
-             for t in ANNEES}
-    out.append(Mesure("Revenu universel : écart non réparti (contrôle, doit être nul)", "nouveau:rui_aah", reste, "controle"))
     return out
 
 
-CANAUX_EMPLOI = {"population_active": "Venus de l'inactivité (seniors, cumul, inactifs, jeunes)",
-                 "fonds": "Emplois du fonds", "conjoncture": "Conjoncture (ajustement budgétaire)"}
 # chômeurs repris par les réformes, mesure par mesure (moteur/emploi_canaux.emplois_par_mesure)
 REFORMES_EMPLOI = {
     "allocation_chomage_rui": "Allocation chômage remplacée par le RUI", "france_travail_conseil": "France Travail recentré sur le conseil",
@@ -513,32 +504,25 @@ REFORMES_EMPLOI = {
     "commerces": "Horaires des commerces", "smic_croissance": "SMIC revalorisé sur la croissance", "prime_jeunes": "Prime d'embauche des jeunes",
     "accords_branche": "Accords d'entreprise",
 }
+CANAUX_AUTRES = {"seniors_long": "Seniors : retraite plus tardive à long terme", "cumul": "Cumul emploi-retraite avec le socle",
+                 "inactifs": "Inactifs qui reprennent un emploi (revenu universel)"}
 
 
-def contexte_emploi(p: Parametres, s: str, r: dict) -> dict:
-    """Emplois par canal, lus dans le module macro du programme ; emploi = statu quo + somme des canaux.
-
-    Le moteur du programme a sa propre base d'actifs, calée autrement que le statu quo (environ 850 000 personnes en
-    emploi de plus, constant) : prendre ses actifs − chômeurs mélangerait cet écart de calage avec les effets du
-    programme. Non compté : l'effet du programme sur les naissances (actifs en moins après 2048)."""
-    from moteur import statu_quo as sq
+def canaux_emploi(p: Parametres, s: str, E) -> dict:
+    """Emplois en plus (+) ou en moins (−) par canal, année par année : les 14 réformes (chômeurs repris, parts de
+    moteur/emploi_canaux.emplois_par_mesure ; le prudent mêle les jeux crise et médian), puis les emplois venus de
+    l'inactivité. Les emplois du fonds, de la conjoncture et des seniors du report d'âge sont ajoutés par l'appelant."""
     from moteur.emploi_canaux import emplois_par_mesure
-    e = sq.effectifs(p, s)
     epm = emplois_par_mesure(p)
-    # parts de chaque réforme dans les chômeurs repris (le prudent mêle les jeux crise et médian)
     jeux = {"crise": ("crise",), "prudent": ("crise", "median"), "median": ("median",), "optimiste": ("optimiste",)}[s]
     brut = {k: sum(epm[j][k] for j in jeux) / len(jeux) for k in REFORMES_EMPLOI}
     tot = sum(brut.values()) or 1.0
-    emploi, canaux = {}, {}
+    out = {}
     for t in ANNEES:
-        d = r[t].get("chomage_detail") or {}
-        if not d:
-            return {}
-        c = {lib: d["reformes"] * brut[k] / tot for k, lib in REFORMES_EMPLOI.items()}
-        c.update({lib: d[k] for k, lib in CANAUX_EMPLOI.items()})
-        emploi[t] = e[t]["emploi"] + sum(c.values())
-        canaux[t] = c
-    return {"emploi": emploi, "emplois_canaux": canaux}
+        c = {lib: E.emplois["reformes"][t] * brut[k] / tot for k, lib in REFORMES_EMPLOI.items()}
+        c.update({lib: E.emplois[k][t] for k, lib in CANAUX_AUTRES.items()})
+        out[t] = c
+    return out
 
 
 def energie_entreprises(p: Parametres, q: Parametres, s: str, ctx: dict) -> dict:
@@ -648,157 +632,222 @@ class EcologieDeDroite:
     nom = "ecologie_de_droite"
     libelle = "Écologie de droite"
 
-    def __init__(self, recalcul_noyau: bool = True, energie: bool = True):
-        """recalcul_noyau : impôt unique et TVA des salariés recalculés sur le noyau (deuxième passe) ; False : tout
-        est lu dans le moteur du programme (reproduction exacte, sert de test du pont).
-        energie : canal de l'énergie des entreprises (IS des taxes supprimées, emploi industriel), ajouté par le
-        noyau après le moteur ; False pour comparer le noyau au moteur seul."""
-        self._cache = {}
-        self.recalcul_noyau = recalcul_noyau
+    def __init__(self, energie: bool = True):
+        """energie : canal de l'énergie des entreprises (IS des taxes supprimées, emploi industriel)."""
         self.energie = energie
 
-    def _calcul(self, p: Parametres) -> dict:
-        cle = id(p)
-        if cle in self._cache:
-            return self._cache[cle]
+    # Mémoire partagée entre instances (noyau.charger en crée une à chaque appel) : les paramètres p y sont gardés
+    # (référence forte, pas d'identifiant recyclé), les derniers seulement pour borner la mémoire (incertitude : 300 tirages).
+    _partage: dict = {}
+    _MAX_PARTAGE = 6
+
+    @property
+    def _cache(self) -> dict:
+        return EcologieDeDroite._partage.setdefault(self.energie, {})
+
+    def _purger(self) -> None:
+        c = self._cache
+        while len(c) > self._MAX_PARTAGE:
+            c.pop(next(iter(c)))
+
+    # --------------------------------------------------------------------------------------- budget
+    def _budget(self, p: Parametres, q: Parametres, s: str) -> list:
+        """Budget du programme contre le statu quo, mesure par mesure : recettes, puis chaque poste contre les blocs
+        qu'il remplace (registre budget.py), périmètre, participations, effets physiques."""
         from moteur import statu_quo as sq
+        from moteur.calendrier import transferts_collectivites
+        from moteur.retraites_transition import cout_transition
+        bl_sq = sq.blocs(p, s)
+        m = []
+        # recettes : chaque instrument du programme contre les impôts actuels qu'il remplace
+        ri = recettes_par_instrument(q)
+        imp_sq = sq.recettes_par_impot(p, s)
+        # impôt unique et TVA des salariés recalculés sur les cellules du noyau ; l'effet du programme sur les
+        # naissances, que le registre mettait dans chaque ligne, devient une mesure
+        rn = recalcul_noyau_salaries(p, q, "crise" if s == "crise" else "prudent")
+        for t in ANNEES:
+            for k in ("iu_prive", "iu_public"):
+                ri[t][k] += rn["noyau"][t][k] - rn["moteur"][t][k]
+            ri[t]["tva"] += rn["noyau"][t]["tva_sal"] - rn["moteur"][t]["tva_sal"]
+        m.append(Mesure("Effet du programme sur les naissances : impôt unique et TVA des salariés", "recettes",
+                        {t: sum(rn["moteur"][t][k] - rn["moteur_sans_naissances"][t][k] for k in rn["moteur"][t])
+                         for t in ANNEES}, "budget"))
+        for cle, libelle, remplace in INSTRUMENTS:
+            m.append(Mesure(libelle, "recettes", {t: ri[t].get(cle, 0.0) - sum(imp_sq[t][i] for i in remplace)
+                                                   for t in ANNEES}, "budget"))
+        L = lignes_traj(q, "prudent")
+        statiques = ("recettes_nouveau_systeme", "recettes_croissance", "recettes_demographie")
+        for x in [x for x in L.lignes.values() if x["poste"] == "recettes" and x["cle"] not in statiques]:
+            m.append(Mesure(x["libelle"], "recettes", dict(x["valeurs"]), "budget"))
+        dot = transferts_collectivites(q)
+        m.append(Mesure("Fin des dotations versées aux collectivités (solde)", "recettes", {t: -dot for t in ANNEES}, "budget"))
+        # dépenses : chaque ligne du registre dans un bloc nouveau de son poste, et les blocs du statu quo remplacés
+        for poste, blocs in CORRESPONDANCE.items():
+            if poste == "retraites":
+                m.extend(mesures_retraites(p, q, s, L, bl_sq))
+            elif poste == "rui_aah":
+                m.extend(mesures_revenu_universel(p, q, s, L, bl_sq))
+            elif poste == "sante":
+                m.extend(mesures_sante(p, q, s, L, bl_sq))
+            elif poste == "autres":
+                m.extend(mesures_autres(p, q, s, L, bl_sq))
+            elif poste == "investissement":  # avec les autres dépenses (investissement local)
+                continue
+        # périmètre : les collectivités, hors du budget du programme, y sont remises (dépenses et ressources propres,
+        # même montant ; le besoin de financement est déjà au budget), comme dans le statu quo (toutes les
+        # administrations). Évolution : salaires × population, comme le bloc « autres » du statu quo.
+        col = collectivites_hors_budget(p)
+        idx = {t: bl_sq[t]["autres"] / bl_sq[2029]["autres"] for t in ANNEES}
+        m.append(Mesure("Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)", "recettes",
+                        {t: col["ressources"] * idx[t] for t in ANNEES}, "perimetre"))
+        m.append(Mesure("Périmètre : dépenses des collectivités financées par ces ressources", "autres",
+                        {t: col["ressources"] * idx[t] for t in ANNEES}, "perimetre"))
+        # périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux (le statu quo les compte en brut)
+        y_sq = sq.pib(p, s)
+        ventes = {t: p.val("statu_quo.recettes_production_hors_apul_part_pib") * y_sq[t] for t in ANNEES}
+        m.append(Mesure("Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux", "recettes", ventes, "perimetre"))
+        m.append(Mesure("Périmètre : dépenses financées par ces ventes et tarifs", "autres", dict(ventes), "perimetre"))
+        m.append(Mesure("Participations de l'État remises au fonds", "participations",
+                        {t: v["participations"] for t, v in cout_transition(q).items()}, "mesure"))
+        m.append(mesure_prix_carbone(p, q, s))
+        m.append(mesure_carbone_importe(p, q, s))
+        m.extend(mesures_physiques_fonds(p, q, s))
+        return m
+
+    # --------------------------------------------------------------------------------------- entrées du noyau
+    def _statique(self, p: Parametres, scenarios=None) -> dict:
+        """Mesures et contexte de chaque scénario, hors ce qui dépend des comptes (fonds, règle de trajectoire).
+        `scenarios` : seulement ceux-là (le reste est calculé à la demande)."""
+        cle = id(p)
+        if cle in self._cache and self._cache[cle][0] is p:
+            res = self._cache[cle][1]
+        else:
+            res = {}
+            self._cache[cle] = (p, res)
+            self._purger()
+        from moteur import offre, statu_quo as sq
         from moteur.calendrier import dette_fin_2028
         from moteur.inflation import serie
-        from moteur.retraites_transition import cout_transition
-        from moteur.simulation import simuler
-        res = simuler(p)
+        from moteur.programme_simple import MIROIR, TOUTES, multiplicateur
         pc = p.en_crise()
         jeux = {"crise": (pc, "prudent"), "prudent": (p, "prudent"), "median": (p, "median"), "optimiste": (p, "optimiste")}
-        mesures, contexte = {}, {}
         for s, (q, jeu) in jeux.items():
-            r = res[s]
-            rec_sq, bl_sq = sq.recettes(p, s), sq.blocs(p, s)
-            m = []
-            # budget hors effets macro : recettes, puis chaque poste contre les blocs qu'il remplace
-            # recettes : chaque instrument du programme contre les impôts actuels qu'il remplace
-            from moteur.trajectoire_annuelle import lignes as lignes_traj
-            ri = recettes_par_instrument(q)
-            imp_sq = sq.recettes_par_impot(p, s)
-            # deuxième passe : impôt unique et TVA des salariés recalculés sur les cellules du noyau ; l'effet du
-            # programme sur les naissances, que le moteur du programme mettait dans chaque ligne, devient une mesure
-            rn = recalcul_noyau_salaries(p, q, "crise" if s == "crise" else "prudent")
-            if not self.recalcul_noyau:  # pont exact : le noyau prend les valeurs du moteur
-                rn["noyau"] = rn["moteur_sans_naissances"]
+            if s in res or (scenarios is not None and s not in scenarios):
+                continue
+            m = self._budget(p, q, s)
+            E = Effets(p, q, s, jeu)
+            y_sq, e, rec_sq = sq.pib(p, s), sq.effectifs(p, s), sq.recettes(p, s)
+            # impulsion budgétaire des mesures du programme (budget et mesures datées, pas les écarts de méthode ni
+            # les effets) : multiplicateur commun
+            cout_net = offre.impulsion(p, [x for x in m if x.nature in ("budget", "mesure")], TOUTES)
+            dpib = multiplicateur(p, s, cout_net, TOUTES)
+            part_rec = {t: rec_sq[t] / y_sq[t] for t in ANNEES}
+            m.extend(E.mesures())
+            m.append(Mesure("Effet macro : multiplicateur sur l'impulsion budgétaire des mesures", "recettes",
+                            {t: dpib[t] * part_rec[t] for t in ANNEES}, "effet_macro"))
+            # seniors dont le départ est reporté par l'âge légal (canal commun, moteur/offre.seniors)
+            canaux = canaux_emploi(p, s, E)
+            actifs = {t: E.emplois["seniors_long"][t] + E.emplois["cumul"][t] + E.emplois["inactifs"][t] for t in ANNEES}
+            jeunes = E.jeunes()
+            d_seniors = {t: 0.0 for t in ANNEES}
+            if E.reportes is not None:
+                sen = offre.seniors(p, s, E.reportes)
+                m.extend(sen["mesures"])
+                d_seniors = sen["pib"]
+                for t in ANNEES:
+                    canaux[t]["Seniors : emploi (report de l'âge légal)"] = sen["emplois"][t]
+                    actifs[t] += sen["actifs"][t]
+            k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
             for t in ANNEES:
-                for k in ("iu_prive", "iu_public"):
-                    ri[t][k] += rn["noyau"][t][k] - rn["moteur"][t][k]
-                ri[t]["tva"] += rn["noyau"][t]["tva_sal"] - rn["moteur"][t]["tva_sal"]
-            m.append(Mesure("Effet du programme sur les naissances : impôt unique et TVA des salariés", "recettes",
-                            {t: sum(rn["moteur"][t][k] - rn["moteur_sans_naissances"][t][k] for k in rn["moteur"][t])
-                             for t in ANNEES}, "budget"))
-            for cle, libelle, remplace in INSTRUMENTS:
-                m.append(Mesure(libelle, "recettes", {t: ri[t].get(cle, 0.0) - sum(imp_sq[t][i] for i in remplace)
-                                                       for t in ANNEES}, "budget"))
-            L = lignes_traj(q, "prudent")
-            statiques = ("recettes_nouveau_systeme", "recettes_croissance", "recettes_demographie")
-            autres_rec = [x for x in L.lignes.values() if x["poste"] == "recettes" and x["cle"] not in statiques]
-            for x in autres_rec:
-                m.append(Mesure(x["libelle"], "recettes", dict(x["valeurs"]), "budget"))
-            # contrôle : tout ce qui reste entre les recettes du programme et la somme des instruments et des mesures
-            # contrôle : les recettes du moteur du programme = instruments (valeurs du moteur) + mesures datées
-            remplace_ = {t: sum(rn["noyau"][t][k] - rn["moteur"][t][k] for k in rn["noyau"][t]) for t in ANNEES}
-            ecart_noyau = {t: sum(rn["noyau"][t][k] - rn["moteur_sans_naissances"][t][k] for k in rn["noyau"][t]) for t in ANNEES}
-            somme = {t: sum(ri[t].values()) - remplace_[t] + sum(x["valeurs"].get(t, 0.0) for x in autres_rec) for t in ANNEES}
-            m.append(Mesure("Recettes : écart non réparti (contrôle, doit être nul)", "recettes",
-                            {t: r[t]["recettes"] - r[t]["effet_macro"] - somme[t] for t in ANNEES}, "controle"))
-            m.append(Mesure("Recalcul sur le noyau : impôt unique et TVA des salariés (contrôle)",
-                            "recettes", {t: 0.0 for t in ANNEES}, "controle",
-                            note=f"écart au moteur du programme hors naissances, 2073 : {ecart_noyau[2073]:+.1f} Md€"))
-            m.append(Mesure("Fin des dotations versées aux collectivités (solde)", "recettes",
-                            {t: -r[t]["transferts_collectivites"] for t in ANNEES}, "budget"))
-            # dépenses : chaque ligne du registre du programme dans un bloc nouveau de son poste, et les blocs du statu
-            # quo que ce poste remplace retirés
-            for poste, blocs in CORRESPONDANCE.items():
-                if poste == "retraites":
-                    m.extend(mesures_retraites(p, q, s, L, r, bl_sq))
-                    continue
-                if poste == "rui_aah":
-                    m.extend(mesures_revenu_universel(p, q, s, L, r, bl_sq))
-                    continue
-                if poste == "sante":
-                    m.extend(mesures_sante(p, q, s, L, r, bl_sq))
-                    continue
-                if poste == "autres":
-                    m.extend(mesures_autres(p, q, s, L, r, bl_sq))
-                    continue
-                if poste == "investissement":  # avec les autres dépenses (investissement local)
-                    continue
-                lignes_p = [x for x in L.lignes.values() if x["poste"] == poste]
-                for x in lignes_p:
-                    m.append(Mesure(f"{LIBELLES[poste]} — {x['libelle']}", f"nouveau:{poste}", dict(x["valeurs"]), "budget"))
-                reste = {t: r[t][poste] - sum(x["valeurs"].get(t, 0.0) for x in lignes_p) for t in ANNEES}
-                if any(abs(v) > 1e-9 for v in reste.values()):
-                    m.append(Mesure(f"{LIBELLES[poste]} — écart non réparti (contrôle, doit être nul)", f"nouveau:{poste}", reste, "controle"))
-                for b in blocs:
-                    m.append(Mesure(f"Remplacé par « {LIBELLES[poste]} » : {b} (statu quo)", b, {t: -bl_sq[t][b] for t in ANNEES}, "budget"))
-            # périmètre : les collectivités, hors du budget du programme, y sont remises (dépenses et ressources propres,
-            # même montant ; le besoin de financement est déjà au budget), comme dans le statu quo (toutes les
-            # administrations). Évolution : salaires × population, comme le bloc « autres » du statu quo.
-            col = collectivites_hors_budget(p)
-            idx = {t: bl_sq[t]["autres"] / bl_sq[2029]["autres"] for t in ANNEES}
-            m.append(Mesure("Périmètre : ressources propres des collectivités (impôt local unique, IS local, autres)", "recettes",
-                            {t: col["ressources"] * idx[t] for t in ANNEES}, "perimetre"))
-            m.append(Mesure("Périmètre : dépenses des collectivités financées par ces ressources", "autres",
-                            {t: col["ressources"] * idx[t] for t in ANNEES}, "perimetre"))
-            # périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux. Le statu quo les compte en brut
-            # (recettes non fiscales et dépenses) ; le programme chiffre ses dépenses nettes (missions, ONDAM) : ils sont
-            # remis des deux côtés, au PIB comme dans le statu quo.
-            y_sq = sq.pib(p, s)
-            ventes = {t: p.val("statu_quo.recettes_production_hors_apul_part_pib") * y_sq[t] for t in ANNEES}
-            m.append(Mesure("Périmètre : ventes et tarifs de l'État, des opérateurs et des hôpitaux", "recettes", ventes, "perimetre"))
-            m.append(Mesure("Périmètre : dépenses financées par ces ventes et tarifs", "autres", dict(ventes), "perimetre"))
-            # effets macroéconomiques, canal par canal (le reste : épargne rendue et socle supplémentaire de la règle)
-            canaux = sorted({k for t in ANNEES for k in r[t]["canaux"]})
-            for k in canaux:
-                m.append(Mesure(f"Effet macro : {k}", "recettes", {t: r[t]["canaux"].get(k, 0.0) for t in ANNEES}, "effet_macro"))
-            m.append(Mesure("Effet macro : épargne rendue et socle supplémentaire (règle)", "recettes",
-                            {t: r[t]["effet_macro"] - sum(r[t]["canaux"].values()) for t in ANNEES}, "effet_macro"))
-            m.append(Mesure("Participations de l'État remises au fonds", "participations",
-                            {t: v["participations"] for t, v in cout_transition(q).items()}, "mesure"))
-            m.append(mesure_prix_carbone(p, q, s))
-            m.append(mesure_carbone_importe(p, q, s))
-            m.extend(mesures_physiques_fonds(p, q, s))
-            mesures[s] = m
-            # contexte : ce que le programme change dans l'économie
-            infl = serie(q, jeu)
-            spread = q.val("macro.baisse_spread", jeu)
-            n_sp = q.val("macro.annees_baisse_spread")
-            pib = {t: r[t]["pib"] for t in ANNEES}
-            contexte[s] = {
-                "pib": pib,
-                "inflation": {t: infl[t] for t in ANNEES},
-                "taux_supplementaire": {t: -spread * min(1.0, max(0, t - 2029) / n_sp) for t in ANNEES},
-                "chomage": {t: r[t]["chomage"] for t in ANNEES},
-                "dette_depart": dette_fin_2028(q),
-                **contexte_emploi(p, s, r),
-                "pib_hors_consommation": {t: r[t].get("pib_epargne_fonds", 0.0) for t in ANNEES},
-            }
+                canaux[t]["Jeunes entrés plus tôt dans l'emploi"] = jeunes[t]
+                canaux[t]["Conjoncture (impulsion budgétaire)"] = dpib[t] / y_sq[t] * k_emp * e[t]["emploi"]
+                actifs[t] += jeunes[t]
+            direct = E.pib_direct()
+            pib = {t: y_sq[t] + dpib[t] + direct[t] + d_seniors[t] for t in ANNEES}
+            demploi = {t: sum(canaux[t].values()) for t in ANNEES}
+            chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
+                    for t in ANNEES}
+            ctx = {"pib": pib, "inflation": {t: v for t, v in serie(q, jeu).items() if t in ANNEES},
+                   "taux_supplementaire": {t: -q.val("macro.baisse_spread", jeu) * min(1.0, max(0, t - 2029) / q.val("macro.annees_baisse_spread"))
+                                           for t in ANNEES},
+                   "chomage": chom, "dette_depart": dette_fin_2028(q),
+                   "emploi": {t: e[t]["emploi"] + demploi[t] for t in ANNEES}, "emplois_canaux": canaux}
             if self.energie:
-                en = energie_entreprises(p, q, s, contexte[s])
-                contexte[s] = en["contexte"]
-                mesures[s].extend(en["mesures"])
-        out = {"mesures": mesures, "contexte": contexte, "resultats": res}
-        self._cache = {cle: out}
+                en = energie_entreprises(p, q, s, ctx)
+                ctx = en["contexte"]
+                m.extend(en["mesures"])
+            denominateur = {t: e[t]["emploi"] + e[t]["chomeurs"] + actifs[t] for t in ANNEES}
+            par = {sc: (sq._v(p, "macro.multiplicateur", sc), sq._v(p, "macro.annees_effet_ajustement", sc)) for sc in (s, MIROIR[s])}
+
+            def mult_clause(k, t, delta, s=s, par=par):
+                """PIB perdu à l'année t pour une hausse `delta` de la baisse du revenu universel décidée l'année k : même
+                multiplicateur et même dissipation que l'impulsion budgétaire, à partir de l'année suivante."""
+                mu, d = par[s] if delta > 0 else par[MIROIR[s]]
+                return mu * delta * max(0.0, 1 - (t - k - 1) / d)
+            res[s] = {"mesures": m, "contexte": ctx, "effets": E, "denominateur": denominateur, "part_rec": part_rec,
+                      "mult_clause": mult_clause, "dpib": dpib}
+        return {s: x for s, x in res.items() if scenarios is None or s in scenarios}
+
+    def entrees(self, p: Parametres, scenarios=None) -> dict:
+        """Entrées du noyau : mesures, contexte, et (état neuf à chaque appel) le fonds et la règle de trajectoire."""
+        from moteur.noyau import Entree
+        st = self._statique(p, scenarios)
+        out = {}
+        for s, x in st.items():
+            f = x["effets"].fonds(x["denominateur"], x["part_rec"], x["mult_clause"])
+            out[s] = Entree(x["mesures"], x["contexte"], [f], f.regle())
         return out
 
     def mesures(self, p: Parametres) -> dict[str, list[Mesure]]:
-        return self._calcul(p)["mesures"]
+        return {s: x["mesures"] for s, x in self._statique(p).items()}
 
     def contexte(self, p: Parametres) -> dict[str, dict]:
-        return self._calcul(p)["contexte"]
+        """Contexte tel que le noyau le publie (PIB, emploi et chômage avec le fonds et la règle compris)."""
+        cle = ("contexte", id(p))
+        if cle not in self._cache or self._cache[cle][0] is not p:
+            from moteur import noyau
+            res = noyau.simuler(p, self)
+            out = {}
+            for s, x in self._statique(p).items():
+                c = dict(x["contexte"])
+                c["pib"] = {t: res[s][t]["pib"] for t in ANNEES}
+                c["chomage"] = {t: res[s][t]["chomage"] for t in ANNEES}
+                c["emploi"] = {t: res[s][t]["emploi"] for t in ANNEES}
+                c["pib_hors_consommation"] = {t: res[s][t]["dynamiques"]["pib_hors_consommation"] for t in ANNEES}
+                out[s] = c
+            self._cache[cle] = (p, out)
+            self._purger()
+        return self._cache[cle][1]
 
-    def resultats_moteur(self, p: Parametres) -> dict:
-        """Résultats du moteur propre au programme (moteur/simulation.simuler), pour la reproduction."""
-        return self._calcul(p)["resultats"]
+
+    # --------------------------------------------------------------------------------------- publication
+    def canaux_courts(self, p: Parametres, s: str) -> dict[str, dict[int, float]]:
+        """Effet sur le solde (Md€) de chaque canal d'effets propre au programme (clés de Effets.solde)."""
+        return self._statique(p, (s,))[s]["effets"].solde
+
+    def postes_publies(self, c: dict) -> dict[str, float]:
+        """Dépenses d'une année par grand poste du programme (blocs du statu quo et blocs nouveaux regroupés)."""
+        bl = c["blocs"]
+        out = {poste: sum(bl.get(b, 0.0) for b in blocs) + bl.get(f"nouveau:{poste}", 0.0) for poste, blocs in CORRESPONDANCE.items()}
+        out["recettes"], out["charge_dette"], out["solde"] = c["recettes"], c["charge_dette"], c["solde"]
+        return out
+
+    def canaux_publies(self, p: Parametres, s: str, res: dict) -> dict[str, dict[int, float]]:
+        """Effet sur le solde (Md€) de chaque canal économique : effets et écarts de méthode (mesures), fonds, règle."""
+        from moteur import statu_quo as sq
+        out: dict[str, dict[int, float]] = {}
+        for m in self._statique(p, (s,))[s]["mesures"]:
+            if m.nature in ("effet_macro", "methode"):
+                out[m.nom] = {t: m.valeurs.get(t, 0.0) for t in ANNEES}
+        out["Fonds : capital, rendements, créances rendues, effet récessif de la règle"] = {
+            t: res[t]["dynamiques"]["fonds"]["solde"] for t in ANNEES}
+        if "regle" in res[ANNEES[0]]:
+            out["Règle de trajectoire"] = {t: res[t]["regle"]["gain"] for t in ANNEES}
+        return out
 
 
-def programme(recalcul_noyau: bool = True, energie: bool = True) -> EcologieDeDroite:
-    return EcologieDeDroite(recalcul_noyau, energie)
+def programme(energie: bool = True) -> EcologieDeDroite:
+    return EcologieDeDroite(energie)
 
 
 def ecart_de_depart(p: Parametres | None = None, s: str = "prudent", annee: int = 2029, detail: bool = False) -> dict[str, float]:

@@ -15,6 +15,16 @@ Points d'entrée d'un programme :
 
 Un programme vide (aucune mesure, aucun contexte) donne exactement le statu quo : c'est le même calcul.
 
+Deux mécanismes génériques servent aux programmes dont des flux dépendent du déficit lui-même (12 novembre 2026) :
+- **dynamiques** : objets à état, un par scénario, appelés chaque année (`debut(t, etat)` rend des flux en plus du
+  statu quo : PIB, recettes, blocs de dépense, participations, emplois, chômage ; `fin(t, etat)` les met à jour une
+  fois les comptes de l'année connus). Exemple : un fonds dont le capital grossit avec l'épargne et rapporte au PIB ;
+- **règle de trajectoire** (`Regle`) : cible de déficit (points de PIB) atteinte par des leviers ordonnés, chacun avec
+  sa capacité du moment et son rendement au solde. Le noyau fait l'arithmétique (écart à la cible, remplissage des
+  leviers dans l'ordre, écritures budgétaires) ; ce que chaque levier fait ensuite (effet récessif, créances) est
+  dans le levier. Le noyau publie les comptes avec et sans la règle.
+Un programme qui en a besoin fournit `entrees(p)` → {scénario: Entree} au lieu de `mesures` et `contexte` seuls.
+
 Un programme est un objet avec un attribut `nom` et deux méthodes, `mesures(p)` → {scénario: [Mesure]} et
 `contexte(p)` → {scénario: {clé: valeur}} (clés de CONTEXTE). Voir programmes/ecologie_de_droite/programme.py.
 """
@@ -22,6 +32,7 @@ from __future__ import annotations
 
 import importlib
 from dataclasses import dataclass, field
+from typing import Callable
 
 from .parametres import Parametres
 
@@ -52,6 +63,46 @@ class Mesure:
     instrument: str = ""
     # incidence d'une mesure sur le travail (instrument « travail ») : proportionnel, ir, bas, haut (moteur/offre.py)
     incidence: str = ""
+
+
+@dataclass
+class Levier:
+    """Un levier de la règle de trajectoire.
+
+    capacite(t, etat) : quantité maximale utilisable cette année (unités du levier : Md€) ;
+    rendement : solde gagné par unité utilisée (1 pour une recette, moins de 1 si l'unité fait perdre de la TVA) ;
+    ecritures(t, x) : [(poste, montant)] écrits dans les comptes pour x unités, mêmes conventions que les mesures
+    (défaut : x × rendement de recettes) ;
+    appliquer(t, x, etat) : suite propre au levier (historique, créances, retrait du capital d'un fonds…) ;
+    detail(t, x, etat) : grandeurs à publier avec le levier (points de contribution, euros de revenu universel…)."""
+    nom: str
+    capacite: Callable
+    rendement: float = 1.0
+    ecritures: Callable | None = None
+    appliquer: Callable | None = None
+    detail: Callable | None = None
+
+
+@dataclass
+class Regle:
+    """Règle de trajectoire : ramène le déficit au sens de Maastricht à `cible` (points de PIB) en remplissant les
+    leviers dans l'ordre, jusqu'en `derniere_annee`. `automatiques` : fonctions (t, etat, declenchee) → solde (Md€,
+    écrit en recettes) qui jouent d'elles-mêmes dès que la règle est déclenchée (déficit au-dessus de la cible la
+    première année) et que les leviers déduisent de ce qu'ils ont à couvrir."""
+    cible: float
+    leviers: list
+    derniere_annee: int = 2073
+    automatiques: list = field(default_factory=list)
+    declenchee: float | None = None
+
+
+@dataclass
+class Entree:
+    """Ce qu'un programme donne au noyau pour un scénario."""
+    mesures: list
+    contexte: dict = field(default_factory=dict)
+    dynamiques: list = field(default_factory=list)
+    regle: Regle | None = None
 
 
 @dataclass
@@ -110,8 +161,13 @@ def ratio_reference(p: Parametres, s: str) -> float:
     return sq.dette_fin_2028(p) / sq.pib(p, s)[2029]
 
 
-def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, contexte: dict | None = None) -> dict[int, dict]:
-    """Comptes de chaque année d'un scénario : statu quo + mesures, dans le contexte du programme."""
+def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, contexte: dict | None = None,
+                dynamiques=(), regle: Regle | None = None) -> dict[int, dict]:
+    """Comptes de chaque année d'un scénario : statu quo + mesures, dans le contexte du programme.
+
+    Chaque année : flux des dynamiques → PIB, recettes et blocs → mesures → intérêts → règle de trajectoire (si le
+    programme en a une) → dette et déficit → mise à jour des dynamiques. Les comptes publiés contiennent ce que la
+    règle a fait (`regle`) et le déficit qu'on aurait eu sans elle (`deficit_sans_regle`)."""
     from . import statu_quo as sq
     mesures, ctx = mesures or [], contexte or {}
     for m in mesures:
@@ -119,7 +175,8 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     for k in ctx:
         if k not in CONTEXTE:
             raise ValueError(f"Contexte inconnu : {k}")
-    y = ctx.get("pib") or sq.pib(p, s)
+    y_base = ctx.get("pib") or sq.pib(p, s)
+    y = dict(y_base)
     infl = ctx.get("inflation") or sq.inflation(p, s)
     sup = ctx.get("taux_supplementaire") or {}
     rec_sq, bl_sq = sq.recettes(p, s), sq.blocs(p, s)
@@ -137,9 +194,23 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     ecart_scen = sq._v(p, "macro.ecart_taux_scenario", s)
     out = {}
     for t in ANNEES:
+        etat = {"s": s, "t": t, "dette_prec": dette_prec, "pib": y, "publie": out}
+        flux = {"pib": 0.0, "recettes": 0.0, "blocs": {}, "participations": 0.0, "emploi": 0.0, "chomage": 0.0, "detail": {}}
+        for d in dynamiques:
+            for k, v in (d.debut(t, etat) or {}).items():
+                if k == "blocs":
+                    for b, x in v.items():
+                        flux["blocs"][b] = flux["blocs"].get(b, 0.0) + x
+                elif k == "detail":
+                    flux["detail"].update(v)
+                else:
+                    flux[k] += v
+        y[t] = y_base[t] + flux["pib"]
         bl = dict(bl_sq[t])
-        rec = rec_sq[t]
-        part = 0.0
+        for b, x in flux["blocs"].items():
+            bl[b] = bl.get(b, 0.0) + x
+        rec = rec_sq[t] + flux["recettes"]
+        part = flux["participations"]
         for m in mesures:
             v = m.valeurs.get(t, 0.0)
             if m.poste == "recettes":
@@ -157,6 +228,13 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         nominal = (min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + ecart_taux_borne(p, prime, sup.get(t, 0.0))
                    + ecart_scen * min(1.0, (t - 2029) / n_lt))
         interets_reels = (nominal - infl[t]) * dette_prec
+        detail_regle = None
+        sans_regle = None
+        if regle is not None:
+            solde_av = rec - sum(bl.values()) - interets_reels
+            sans_regle = -(solde_av - infl[t] * dette_prec) / y[t] * 100
+            detail_regle = _appliquer_regle(regle, t, etat, sans_regle / 100, y[t], rec, bl)
+            rec, bl = detail_regle.pop("rec"), detail_regle.pop("bl")
         primaire = sum(bl.values())
         solde = rec - primaire - interets_reels
         dette = dette_prec - solde - part
@@ -166,21 +244,71 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "interets_reels": interets_reels, "charge_dette": interets_reels + infl[t] * dette_prec,
             "taux_apparent": nominal, "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
             "participations": part, "deficit": -maastricht * 100, "dette_pib": dette / y[t] * 100,
-            "chomage": chom[t], "inflation": infl[t] * 100, "emploi": emploi[t], "emplois_canaux": dict(canaux.get(t, {})),
+            "chomage": chom[t] + flux["chomage"], "inflation": infl[t] * 100, "emploi": emploi[t] + flux["emploi"],
+            "emplois_canaux": dict(canaux.get(t, {})),
             "retraites_pib": bl["retraites"] / y[t] * 100, "sante_pib": bl["sante"] / y[t] * 100,
             "recettes_pib": rec / y[t] * 100, "depenses_primaires_pib": primaire / y[t] * 100,
+            "dynamiques": flux["detail"],
         }
+        if regle is not None:
+            out[t]["deficit_sans_regle"] = sans_regle
+            out[t]["regle"] = detail_regle
+        etat.update({"maastricht": maastricht, "dette": dette, "pib_t": y[t], "compte": out[t]})
+        for d in dynamiques:
+            d.fin(t, etat)
         dette_prec = dette
     return out
 
 
-def simuler(p: Parametres | None = None, programme=None) -> dict[str, dict[int, dict]]:
-    """Les quatre scénarios d'un programme (statu quo si programme est None)."""
+def _appliquer_regle(regle: Regle, t: int, etat: dict, avant: float, pib_t: float, rec: float, bl: dict) -> dict:
+    """Une année de la règle : déficit `avant` (fraction du PIB, + = déficit) ramené vers la cible."""
+    ecart = max(0.0, avant - regle.cible)
+    if regle.declenchee is None:
+        regle.declenchee = 1.0 if ecart > 0 else 0.0
+    auto = sum(a(t, etat, regle.declenchee) for a in regle.automatiques)
+    actif = t <= regle.derniere_annee
+    # quand le déficit sans règle est sous la cible, la marge absorbe d'abord le coût éventuel des automatiques
+    reste = max(0.0, (avant - regle.cible) * pib_t - auto) if actif else 0.0
+    bl = dict(bl)
+    rec += auto
+    utilise, gain, capacites, details = {}, auto, {}, {}
+    for lv in regle.leviers:
+        cap = lv.capacite(t, etat)
+        capacites[lv.nom] = cap
+        x = max(0.0, min(reste / lv.rendement, cap)) if actif else 0.0
+        reste -= x * lv.rendement
+        gain += x * lv.rendement
+        utilise[lv.nom] = x
+        for poste, v in (lv.ecritures(t, x) if lv.ecritures else [("recettes", x * lv.rendement)]):
+            if poste == "recettes":
+                rec += v
+            else:
+                bl[poste] = bl.get(poste, 0.0) + v
+        if lv.appliquer:
+            lv.appliquer(t, x, etat)
+        if lv.detail:
+            details[lv.nom] = lv.detail(t, x, etat)
+    return {"avant": avant * 100, "automatiques": auto, "leviers": utilise, "capacites": capacites, "details": details, "gain": gain,
+            "reste_a_couvrir": reste, "ecart_cible": ecart * pib_t, "rec": rec, "bl": bl}
+
+
+def simuler(p: Parametres | None = None, programme=None, scenarios=None) -> dict[str, dict[int, dict]]:
+    """Les quatre scénarios d'un programme (statu quo si programme est None) ; `scenarios` : seulement ceux-là."""
     from .statu_quo import SCENARIOS
     p = p or Parametres()
     programme = programme or ProgrammeVide()
+    noms = [s for s in SCENARIOS if scenarios is None or s in scenarios]
+    if hasattr(programme, "entrees"):
+        ent = programme.entrees(p, scenarios)
+        return {s: trajectoire(p, s, ent[s].mesures, ent[s].contexte, ent[s].dynamiques, ent[s].regle) for s in noms}
     mes, ctx = programme.mesures(p), programme.contexte(p)
-    return {s: trajectoire(p, s, mes.get(s), ctx.get(s)) for s in SCENARIOS}
+    return {s: trajectoire(p, s, mes.get(s), ctx.get(s)) for s in noms}
+
+
+def resultats(p: Parametres | None = None, scenarios=None) -> dict[str, dict[int, dict]]:
+    """Scénarios du programme de p.programme (dossier programmes/<nom>/) sur le noyau commun."""
+    p = p or Parametres()
+    return simuler(p, charger(p.programme), scenarios)
 
 
 def bilan_mesures(programme, p: Parametres, s: str = "prudent", annees=(2029, 2037, 2050, 2073)) -> list[dict]:

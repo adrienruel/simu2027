@@ -85,8 +85,8 @@ def test_strategie_emploi_du_fonds():
 
 
 def test_emplois_du_capital_du_fonds():
-    from moteur.macro import calculer
-    d = calculer(P)["prudent"].detail["chomage_detail"]
-    assert d[2073]["fonds"] > d[2037]["fonds"] > 0
-    sans = calculer(Parametres().avec({"entreprises_cellules.capital_chomage_elasticite": 0.0}))["prudent"].detail["chomage_detail"]
-    assert sans[2073]["fonds"] == 0.0
+    from moteur import noyau
+    d = noyau.resultats(P, ("prudent",))["prudent"]
+    assert d[2073]["dynamiques"]["fonds"]["emplois_fonds"] > d[2037]["dynamiques"]["fonds"]["emplois_fonds"] > 0
+    sans = noyau.resultats(Parametres().avec({"entreprises_cellules.capital_chomage_elasticite": 0.0}), ("prudent",))["prudent"]
+    assert sans[2073]["dynamiques"]["fonds"]["emplois_fonds"] == 0.0

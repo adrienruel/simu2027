@@ -12,7 +12,7 @@ from pathlib import Path
 
 from moteur.demographie import effet_naissances
 from moteur.parametres import Parametres
-from moteur.simulation import simuler
+from moteur import noyau
 
 RACINE = Path(__file__).resolve().parent.parent
 ANS = (2029, 2037, 2050, 2060, 2073)
@@ -50,9 +50,9 @@ VARIANTES = [
 
 def mesurer(nom: str, modifs: dict) -> dict:
     p = Parametres().avec(modifs)
-    r = simuler(p)["prudent"]
+    r = noyau.resultats(p, ("prudent",))["prudent"]
     return {"variante": nom, "modifs": {k: v for k, v in modifs.items()},
-            "deficit_sans_clause": {t: round(r[t]["deficit_avant_clause"], 2) for t in ANS},
+            "deficit_sans_clause": {t: round(r[t]["deficit_sans_regle"], 2) for t in ANS},
             "deficit_publie_2037": round(r[2037]["deficit"], 2), "dette_2073": round(r[2073]["dette_pib"]),
             "naissances": round(100 * effet_naissances(p), 1)}
 

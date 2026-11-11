@@ -1,12 +1,13 @@
-"""Chômage modélisé jusqu'en 2073 (moteur/demographie.chomage_tendanciel, moteur/macro.py)."""
+"""Chômage modélisé jusqu'en 2073 (moteur/demographie.chomage_tendanciel, noyau commun)."""
 import pytest
 
 from moteur.demographie import chomage_tendanciel
-from moteur.macro import ANNEES, calculer
+from moteur import noyau
+from moteur.noyau import ANNEES
 from moteur.parametres import Parametres
 
 P = Parametres()
-R = calculer(P)
+R = noyau.resultats(P)
 
 
 def test_tendanciel_cale_sur_2026():
@@ -21,29 +22,27 @@ def test_tendanciel_suit_la_composition_par_age():
 
 def test_chomage_calcule_chaque_annee():
     for s in ("prudent", "median", "optimiste"):
-        c = R[s].detail["chomage"]
-        assert set(ANNEES) <= set(c)
+        c = {t: R[s][t]["chomage"] / 100 for t in ANNEES}
         assert all(P.val("emploi.chomage_incompressible") < c[t] < 0.12 for t in ANNEES)
 
 
 def test_ordre_des_scenarios():
     for t in (2037, 2050, 2073):
-        assert R["prudent"].detail["chomage"][t] > R["median"].detail["chomage"][t] > R["optimiste"].detail["chomage"][t]
+        assert R["prudent"][t]["chomage"] > R["median"][t]["chomage"] > R["optimiste"][t]["chomage"]
 
 
 def test_chomeurs_seniors_ajoutes():
     """Chômeurs seniors en plus avec l'âge à 67 ans : présents dès la montée en charge, puis à peu près stables
     (11/11/2026 : avec l'âge légal réel des générations au statu quo, le niveau de 2073 est celui de 2037 à 1 % près ;
     l'ancienne hausse continue venait du calendrier à 64 ans pour toutes les générations)."""
-    d = R["prudent"].detail["chomage_detail"]
-    assert d[2037]["seniors"] > d[2032]["seniors"] > 0
-    assert d[2073]["seniors"] == pytest.approx(d[2037]["seniors"], rel=0.15)
+    c = {t: R["prudent"][t]["emplois_canaux"]["Seniors : emploi (report de l'âge légal)"] for t in (2032, 2037, 2073)}
+    assert c[2037] > c[2032] > 0
+    assert c[2073] == pytest.approx(c[2037], rel=0.15)
 
 
 def test_v235_inchangee():
     v = Parametres(reference="v235")
     assert v.val("chomage.dynamique") is False
-    assert "chomage_detail" not in calculer(v)["prudent"].detail
 
 
 def test_attente_couvre_les_generations_apres_2007():

@@ -40,7 +40,7 @@ Le code est encore dans `moteur/`, qui mêle le noyau et le programme. Carte des
 
 | Noyau (commun) | Programme « Écologie de droite » | Mêlé : à scinder |
 |---|---|---|
-| `parametres`, `unites`, `trajectoire`, `demographie` (sauf l'effet sur la natalité), `inflation` (sauf l'indexation du RUI), `taux_effectifs`, `distribution`, `systeme_actuel`, `sante` (trajectoire), `incertitude`, `sensibilite`, `attribution`, `restitution`, `calendrier` (2027-2028), `recettes/successions` | `impot_unique`, `epargne`, `retraites_transition`, `ancien_systeme` (bascule), `anciennes_pensions`, `tva` (TVA écologique), `carbone`, `ascenseur_social`, `carrieres`, `objectifs`, `is_investissement`, `is_bareme`, `collectivites` (impôt local unique), `logement`, `recettes/*` (nouveau système), `depenses/quotient`, `depenses/ia_administration`, `depenses/economies_missions` | `macro` (comportements communs et clause, fonds, RUI), `trajectoire_annuelle`, `emploi` et `emploi_canaux` (canaux communs, réformes du programme), `cohortes` (cellules communes, impôt unique et comptes), `entreprises_cellules` (données communes, IS à 45 % et fonds), `hauts_revenus`, `menages_types`, `mesures`, `depenses/budget_etat`, `depenses/ministeres`, `depenses/statique`, `simulation` |
+| `parametres`, `unites`, `trajectoire`, `demographie` (sauf l'effet sur la natalité), `inflation` (sauf l'indexation du RUI), `taux_effectifs`, `distribution`, `systeme_actuel`, `sante` (trajectoire), `incertitude`, `sensibilite`, `attribution`, `restitution`, `calendrier` (2027-2028), `recettes/successions` | `impot_unique`, `epargne`, `retraites_transition`, `ancien_systeme` (bascule), `anciennes_pensions`, `tva` (TVA écologique), `carbone`, `ascenseur_social`, `carrieres`, `objectifs`, `is_investissement`, `is_bareme`, `collectivites` (impôt local unique), `logement`, `recettes/*` (nouveau système), `depenses/quotient`, `depenses/ia_administration`, `depenses/economies_missions` | `emploi` et `emploi_canaux` (canaux communs, réformes du programme), `cohortes` (cellules communes, impôt unique et comptes), `entreprises_cellules` (données communes, IS à 45 % et fonds), `hauts_revenus`, `menages_types`, `mesures`, `depenses/budget_etat`, `depenses/ministeres`, `depenses/statique` |
 
 ## Étapes suivantes
 
@@ -57,9 +57,18 @@ Le code est encore dans `moteur/`, qui mêle le noyau et le programme. Carte des
    Périmètres alignés (même jour) : les collectivités, que le programme sort de son budget, y sont remises (dépenses et
    ressources propres, solde inchangé) ; l'écart de départ se lit poste par poste (docs/statu_quo.md). Les recettes
    du statu quo sont détaillées impôt par impôt, chacune avec son assiette.
-   Reste : le programme est encore traduit en écarts globaux par poste, calculés par son propre moteur ; coder chaque
-   mesure sur le noyau, puis retirer ce moteur. Question ouverte : classement du fonds (dans ou hors des
-   administrations publiques).
+   **Plus de moteur propre (12 novembre 2026).** `moteur/macro.py`, `moteur/trajectoire_annuelle.py` et
+   `moteur/simulation.py` sont supprimés. Le programme « Écologie de droite » passe entièrement par le noyau :
+   son budget (`programmes/ecologie_de_droite/budget.py`) et ses effets économiques
+   (`programmes/ecologie_de_droite/effets.py`) sont des mesures ; le multiplicateur, l'offre (seniors), les taux, le
+   chômage et la conjoncture viennent du pipeline commun. Deux mécanismes génériques sont ajoutés au noyau :
+   les **dynamiques** (objets à état par scénario, comme le fonds d'épargne, qui donnent chaque année PIB, recettes,
+   blocs, emploi et chômage) et la **règle de trajectoire** (`Regle` : cible de déficit, leviers ordonnés avec leur
+   capacité et leur rendement, mesures automatiques). Les comptes sont publiés avec et sans règle
+   (`deficit_sans_regle`, `regle`, `dynamiques`). Détail des écarts avec l'ancien moteur : docs/journal.md.
+   Reste : les mesures « méthode » (pont entre le registre du programme, bâti sur la tendance et la population
+   prudentes, et chaque scénario) à retirer en bâtissant le registre par scénario. Question ouverte : classement du
+   fonds (dans ou hors des administrations publiques).
 3. **Bibliothèque de mesures sur le système actuel** (barèmes, CSG, cotisations, prestations, TVA, IS, retraites,
    missions), avec leurs effets micro (OpenFisca) et leurs réactions par instrument.
 4. **Population représentative** passée dans OpenFisca : distribution par décile.

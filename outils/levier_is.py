@@ -11,10 +11,9 @@ from pathlib import Path
 
 from moteur.emploi_canaux import tableau
 from moteur.is_investissement import cout_net_etat
-from moteur.macro import calculer
+from moteur import noyau
 from moteur.parametres import Parametres
 from moteur.recettes.total import recettes_nouveau_systeme
-from moteur.simulation import simuler
 from moteur.taux_effectifs import eatr_nouveau
 
 TAUX_ETAT = (0.40, 0.35, 0.30, 0.25, 0.20)
@@ -23,22 +22,23 @@ DEDUCTION = (1.0, 0.5, 0.0)
 
 def mesurer(p: Parametres) -> dict:
     sans = p.avec({"clause.active": False})
-    sc = calculer(sans)["prudent"]
-    pub = simuler(p, crise=False)["prudent"]
+    prog = noyau.charger(p.programme)
+    sc = noyau.simuler(sans, prog, ("prudent",))["prudent"]
+    pub = noyau.simuler(p, noyau.charger(p.programme), ("prudent",))["prudent"]
     loc = next(x for x in tableau(p) if x["mesure"] == "entreprises_localisation")
-    c = sc.detail["canaux"]
+    c = prog.canaux_courts(sans, "prudent")
     return {
         "taux_legal": p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions"),
         "eatr_prudent": eatr_nouveau(p, "prudent"),
         "recettes_statiques_md": recettes_nouveau_systeme(p)["total"] / 1e9,
         "cout_deduction_2037": cout_net_etat(p)[2037],
-        "erosion_is_2037": c[2037]["erosion_is"],
-        "investissement_2037": c[2037]["investissement_entreprises"],
-        "investissement_2050": c[2050]["investissement_entreprises"],
+        "erosion_is_2037": c["erosion_is"][2037],
+        "investissement_2037": c["investissement"][2037],
+        "investissement_2050": c["investissement"][2050],
         "emplois_localisation": loc["emplois_prudent"],
-        "deficit_sans_clause": {t: -sc.maastricht[t] * 100 for t in (2029, 2032, 2037, 2050)},
+        "deficit_sans_clause": {t: sc[t]["deficit"] for t in (2029, 2032, 2037, 2050)},
         "deficit_publie": {t: pub[t]["deficit"] for t in (2029, 2032, 2037, 2050)},
-        "dette_2050_sans_clause": sc.dette_pib[2050] * 100,
+        "dette_2050_sans_clause": sc[2050]["dette_pib"],
     }
 
 
