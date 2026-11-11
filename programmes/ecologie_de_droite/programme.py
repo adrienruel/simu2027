@@ -572,7 +572,7 @@ def energie_entreprises(p: Parametres, q: Parametres, s: str, ctx: dict) -> dict
         budget[t] = emplois[t] * g / 1e9
     mesures = [
         Mesure("Effet macro : impôt sur les bénéfices des taxes sur l'énergie supprimées (marges des entreprises)", "recettes",
-               is_sup, nature="effet_macro", instrument="capital_entreprises"),  # prélèvement : dans l'impulsion
+               is_sup, nature="effet_macro"),
         Mesure("Effet macro : emploi industriel selon le prix de l'énergie des entreprises", "recettes", budget, nature="effet_macro"),
     ]
     va = {t: ctx["pib"][t] / e[t]["emploi"] for t in ANNEES}
@@ -750,11 +750,10 @@ class EcologieDeDroite:
             # effet (recette carbone du scénario, IS sur les taxes d'énergie supprimées) ; pas les écarts de méthode ni
             # les autres effets. Multiplicateur commun (relecture indépendante du 11/11/2026).
             m_effets = E.mesures()
-            cout_net = offre.impulsion(p, [x for x in m if x.nature in ("budget", "mesure", "classement")
-                                           or (x.nature == "effet_macro" and x.instrument)]
-                                       + [x for x in m_effets if x.instrument]
-                                       + ([Mesure("IS des taxes sur l'énergie supprimées", "recettes", is_taxes_energie_supprimees(q, s),
-                                                  "effet_macro", instrument="capital_entreprises")] if self.energie else []), TOUTES)
+            impulsion = ([x for x in m if x.nature in ("budget", "mesure", "classement")] + E.prelevements_pour_impulsion()
+                         + ([Mesure("IS des taxes sur l'énergie supprimées", "recettes", is_taxes_energie_supprimees(q, s),
+                                                  "effet_macro", instrument="capital_entreprises")] if self.energie else []))
+            cout_net = offre.impulsion(p, impulsion, TOUTES)
             dpib = multiplicateur(p, s, cout_net, TOUTES)
             part_rec = {t: rec_sq[t] / y_sq[t] for t in ANNEES}
             m.extend(m_effets)
@@ -809,7 +808,7 @@ class EcologieDeDroite:
                 mu, d = par[s] if delta > 0 else par[MIROIR[s]]
                 return mu * delta * max(0.0, 1 - (t - k - 1) / d)
             res[s] = {"mesures": m, "contexte": ctx, "effets": E, "denominateur": denominateur, "part_rec": part_rec,
-                      "mult_clause": mult_clause, "dpib": dpib,
+                      "mult_clause": mult_clause, "dpib": dpib, "impulsion": cout_net,
                       "chomeurs_seniors": {t: chomeurs_seniors_long[t] + (sen["chomeurs"][t] if E.reportes is not None else 0.0)
                                            for t in ANNEES}}
         return {s: x for s, x in res.items() if scenarios is None or s in scenarios}

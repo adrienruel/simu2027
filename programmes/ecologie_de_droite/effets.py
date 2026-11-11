@@ -328,13 +328,17 @@ class Effets:
         "sante": "Écart de méthode : santé du scénario (budget du programme calculé au prudent)",
     }
 
+    def prelevements_pour_impulsion(self) -> list[Mesure]:
+        """Prélèvements portés par un effet, à compter dans l'impulsion budgétaire avec leur poids de demande : la
+        recette carbone du scénario pèse sur la consommation (relecture du 11/11/2026). Copies réservées au calcul de
+        l'impulsion : les mesures publiées ne portent pas d'instrument (le canal d'offre commun ne s'y applique pas)."""
+        return [Mesure("Carbone : recette du scénario", "recettes", dict(self.solde["carbone"]), "effet_macro",
+                       instrument="consommation")]
+
     def mesures(self) -> list[Mesure]:
         out = []
         for c, lib in self.LIBELLES.items():
-            # la recette carbone du scénario est un prélèvement sur la consommation : elle entre dans l'impulsion
-            # budgétaire (poids de demande de la consommation), comme les recettes du budget (relecture du 11/11/2026)
-            out.append(Mesure(f"Effet macro : {lib}", "recettes", dict(self.solde[c]), "effet_macro",
-                              instrument="consommation" if c == "carbone" else ""))
+            out.append(Mesure(f"Effet macro : {lib}", "recettes", dict(self.solde[c]), "effet_macro"))
         for c, lib in self.METHODE.items():
             out.append(Mesure(lib, "recettes", dict(self.solde[c]), "methode"))
         return out
