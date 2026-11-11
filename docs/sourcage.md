@@ -107,7 +107,7 @@ Avec la TVA des retraités recalculée, le modèle reconstitue une TVA actuelle 
 | rui_complements.part_enfant_rang3 / enfants_rang3 | DÉCISION / SOURCE | 25 % / 1 696 600 | Adrien ; Insee RP 2023 |
 | rui_complements.part_enfant_rang2 / enfants_rang2 | DÉCISION / SOURCE | 15 % (variante 25 %) / 4 303 600 | Insee RP 2023 |
 | ancien_systeme.part_retraites_age | HYPOTHÈSE encadrée | profil de 2023 décalé à 64 ans | DREES, fiche 16 |
-| ancien_systeme.pension_nouveaux_relative | SOURCE | 0,935 | DREES, fiches 5 et 7 |
+| ancien_systeme.pension_nouveaux_relative | HYPOTHESE | 1,0 (0,935 avant le 11/11/2026) | DREES, fiches 5 et 7 ; noria quasi nulle |
 | ancien_systeme.droits_geles_des_2029 | DÉCISION | non (calculée au départ, puis gelée) | Adrien |
 | ancien_systeme.age_legal | DÉCISION | 64 → 65 ans, deux trimestres par génération | programme |
 | is_investissement.part_admise / hausse_part_admise | DÉCISION | 50 %, puis +5 points par année suivant un déficit < 3 % | Adrien |

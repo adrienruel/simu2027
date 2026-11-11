@@ -688,3 +688,21 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
 - Décision d'Adrien du 07/11/2026 : multiplicateur en miroir pour une relance, pour tous les programmes
   (`programme_simple.multiplicateur`, Tondelier compris) ; test `test_multiplicateur_en_miroir_pour_une_relance`.
   Effets surtout en crise et en optimiste (tableau dans `docs/melenchon.md`).
+
+## 11 novembre 2026 — Phase 1 de la roadmap : fiabiliser
+
+- **Régression complète** : 380 tests passent ; le seul échec (`test_chomeurs_seniors_ajoutes`, moteur d'Écologie
+  de droite) est antérieur à ces corrections et corrigé dans le commit deec27a (chômeurs seniors stables après la
+  montée en charge, avec l'âge légal réel des générations).
+- **Contrôle COR 2045 : cause trouvée.** `ancien_systeme.pension_nouveaux_relative` = 0,935 (nouveaux retraités
+  rapportés à la moyenne de tous les retraités, DREES) appliqué contre un stock de pensions uniforme : la pension
+  moyenne baissait mécaniquement de 6,5 % pendant le remplacement du stock (2029-2050). Avec 1,0 (noria quasi nulle
+  depuis 2017, DREES) et l'érosion recalée sur 2070 (0,36 → 0,595 %) : 2030 14,09 %, 2045 14,24 %, variantes de
+  productivité inchangées, sans calage sur 2045. Tolérance du test ramenée de 0,4 à 0,15 point.
+- **Seniors** : `seniors.part_concernee` 0,4 → 0,42, recalé sur le nouveau calcul (retour de 64 à 62 ans :
+  ≈ 1,11 million de non-retraités à plein effet ; 0,42 en garde ≈ 470 000, comme l'étude d'impact de 2023). La
+  proposition de la relecture (0,9 à 1) supposait des pensions recalées sur 0,47 million de retraités : non retenue.
+- **Points du rapport appliqués** : postes de Philippe sur la règle commune (120 000 / 200 000 / 250 000 / 250 000,
+  plafonnés aux 250 000 annoncés) ; enseignants de Glucksmann sur la même assiette que Philippe (35 Md€ bruts,
+  coefficient 1,9 : 4,6 à 6,7 Md€ au lieu de 3,5 à 5) ; embauches d'Arthaud avec un `fp_taux` par versant (0,47
+  hôpitaux et transports, CNRACL ; 0,50 éducation) au lieu de 0,57.

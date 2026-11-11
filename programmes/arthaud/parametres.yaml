@@ -122,22 +122,22 @@ arthaud_mesures:
 
   # ---------------------------------------------------------------- services publics
   embauches_sante:
-    valeur: {id: ART-SP-01, libelle: "Embauches dans les hôpitaux et les Ehpad", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
+    valeur: {id: ART-SP-01, libelle: "Embauches dans les hôpitaux et les Ehpad", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, fp_taux: 0.47, postes: true,
              montant: {crise: 8.25, prudent: 8.25, median: 8.25, optimiste: 8.25}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
     source: "Brochure Présidentielle 2027 (Lutte ouvrière, juin 2026, p. 12) : embauches « estimées à des centaines de milliers d'emplois » dans les hôpitaux, les Ehpad, l'éducation et les transports publics"
-    note: "Arbitrage : 300 000 postes en cinq ans au coût de 55 000 €, soit 16,5 Md€ ; moitié hôpitaux et Ehpad, 35 % éducation, 15 % transports publics (collectivités)."
+    note: "Arbitrage : 300 000 postes en cinq ans au coût de 55 000 €, soit 16,5 Md€ ; moitié hôpitaux et Ehpad, 35 % éducation, 15 % transports publics (collectivités). Prélèvements récupérés (relecture neutre du 11/11/2026, `fp_taux`) : le taux moyen de 57 % suppose la cotisation au CAS Pensions de l'État (74 %). Hôpitaux, Ehpad et transports cotisent à la CNRACL (≈ 31 %) ou au régime général : ≈ 47 % du coût employeur (cotisations employeur et salarié, CSG, CRDS, impôt sur le revenu, pour un brut ≈ 38 000 €) ; éducation, mélange d'enseignants (≈ 59 %) et d'AESH ou contractuels proches du SMIC (≈ 39 %) : ≈ 50 %."
   embauches_education:
-    valeur: {id: ART-SP-01, libelle: "Embauches dans l'éducation (enseignants, AESH, infirmières)", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2032, fp: true, postes: true,
+    valeur: {id: ART-SP-01, libelle: "Embauches dans l'éducation (enseignants, AESH, infirmières)", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2032, fp: true, fp_taux: 0.50, postes: true,
              montant: {crise: 5.8, prudent: 5.8, median: 5.8, optimiste: 5.8}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
     note: "Voir embauches_sante."
   embauches_transports:
-    valeur: {id: ART-SP-01, libelle: "Embauches dans les transports publics", poste: collectivites, moteur: "bloc:collectivites", debut: 2028, plein: 2032, fp: true, postes: true,
+    valeur: {id: ART-SP-01, libelle: "Embauches dans les transports publics", poste: collectivites, moteur: "bloc:collectivites", debut: 2028, plein: 2032, fp: true, fp_taux: 0.47, postes: true,
              montant: {crise: 2.45, prudent: 2.45, median: 2.45, optimiste: 2.45}}
     unite: md_eur
     annee_euros: 2026

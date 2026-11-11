@@ -270,11 +270,11 @@ glucksmann_mesures:
     source: "Encadrement : aides aux maisons de santé ≈ 0,2 Md€ ; 300 centres de soins non programmés ≈ 0,5 Md€ ; la fin de la tarification à l'acte est neutre à enveloppe constante"
   ecole_salaires:
     valeur: {id: GLU-EDU-01, libelle: "Loi de programmation de l'école sur cinq ans : revalorisation des enseignants", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
-             montant: {crise: 5, prudent: 5, median: 4, optimiste: 3.5}}
+             montant: {crise: 6.7, prudent: 6.0, median: 5.3, optimiste: 4.6}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : masse salariale des enseignants ≈ 50 Md€ ; revalorisation de 8 à 10 % sur cinq ans (ordre des lois de programmation proposées par les syndicats et la gauche) ; non chiffrée par le candidat"
+    source: "Encadrement : traitements et primes des enseignants ≈ 35 Md€ brut (même assiette que philippe_mesures.enseignants) ; revalorisation réelle de 7 à 10 % sur cinq ans en plus du statu quo (ordre des lois de programmation proposées par les syndicats et la gauche) × coût employeur ≈ 1,9 fois le brut (CAS Pensions compris, relecture neutre du 11/11/2026, au lieu d'une masse de 50 Md€ sans coefficient) : 4,6 à 6,7 Md€ ; non chiffrée par le candidat"
   ecole_classes:
     valeur: {id: GLU-EDU-01b, libelle: "Loi de programmation de l'école : effectifs par classe réduits, remplaçants", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
              montant: {crise: 1.2, prudent: 1.0, median: 0.8, optimiste: 0.6}}

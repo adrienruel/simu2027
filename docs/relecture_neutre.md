@@ -20,5 +20,7 @@ Un agent indépendant, en lecture seule sur le dépôt, a relu tous les programm
 Ce qui n'a pas été appliqué :
 - Les objectifs d'ensemble chiffrés par les candidats sans mesures (150, 197, 200 Md€, déficit à 2 %) restent écartés. Les estimer compterait deux fois les mesures déjà chiffrées.
 - Les mesures tirées des seules conventions de Renaissance ne sont pas chiffrées.
-- Philippe garde son propre rythme de non-remplacement (un départ sur trois, 175 000 postes en prudent), compatible avec la règle commune.
-- Le calage de `seniors.part_concernee` est inchangé : avec le nouveau calcul, deux ans d'âge donnent ≈ 1,1 million de non-retraités à plein effet. Le contrôle sur l'étude d'impact de 2023 (200 000 à 400 000 emplois) passe toujours.
+- Philippe gardait son propre rythme de non-remplacement (175 000 postes en prudent) : aligné le 11/11/2026 sur la règle commune, plafonnée aux 250 000 annoncés (120 000 / 200 000 / 250 000 / 250 000).
+- `seniors.part_concernee` : la proposition du rapport (0,9 à 1) n'est pas retenue, car les pensions restent calculées sur le profil par génération (≈ 1,1 million de non-retraités pour deux ans d'âge). Recalé le 11/11/2026 de 0,4 à 0,42 pour retrouver les ≈ 470 000 personnes concernées de l'étude d'impact de 2023.
+
+Appliqué ensuite (11/11/2026, phase 1 de la roadmap) : enseignants de Glucksmann (35 Md€ bruts × 1,9) et prélèvements récupérés sur les embauches d'Arthaud (`fp_taux` 0,47 à 0,50) ; voir docs/journal.md.

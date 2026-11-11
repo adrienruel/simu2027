@@ -156,21 +156,21 @@ philippe_mesures:
     source: "Encadrement : jour de carence des agents publics rétabli en 2018 : ≈ 0,2 à 0,3 Md€ par an (DGAFP) ; deux jours de plus et indemnisation des salariés du privé par les employeurs interdite (économie surtout privée)"
   postes_etat:
     valeur: {id: PHI-TER-01, libelle: "Un départ en retraite sur trois non remplacé : État", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -3.1, prudent: -4.3, median: -4.95, optimiste: -6.2}}
+             montant: {crise: -2.97, prudent: -4.95, median: -6.19, optimiste: -6.19}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : 250 000 postes annoncés sur le quinquennat (≈ 50 000 par an, un tiers des ≈ 150 000 départs) ; réalisés : 50 % (crise), 70 % (prudent), 80 % (médian), 100 % (optimiste) ; 55 000 € par poste ; 45 % à l'État, 35 % dans les collectivités, 20 % dans les hôpitaux"
+    source: "Encadrement : 250 000 postes annoncés sur le quinquennat (≈ 50 000 par an, un tiers des ≈ 150 000 départs) ; réalisés (règle commune depuis la relecture neutre : précédent de la RGPP, plafonnée à l'annonce) : 120 000 (crise), 200 000 (prudent), 250 000 (médian et optimiste, plafond de l'annonce) ; 55 000 € par poste ; 45 % à l'État, 35 % dans les collectivités, 20 % dans les hôpitaux"
   postes_collectivites:
     valeur: {id: PHI-TER-01, libelle: "Un départ en retraite sur trois non remplacé : collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -2.4, prudent: -3.4, median: -3.85, optimiste: -4.8}}
+             montant: {crise: -2.31, prudent: -3.85, median: -4.81, optimiste: -4.81}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Même encadrement (35 %)"
   postes_hopitaux:
     valeur: {id: PHI-TER-01, libelle: "Un départ en retraite sur trois non remplacé : hôpitaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -1.4, prudent: -1.9, median: -2.2, optimiste: -2.75}}
+             montant: {crise: -1.32, prudent: -2.2, median: -2.75, optimiste: -2.75}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE

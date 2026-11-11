@@ -59,8 +59,8 @@ l'alourdit (moins d'actifs).
 
 `moteur/ancien_systeme.py`. Générations nées en 1979 ou avant (les plus jeunes sont remboursées et relèvent du
 nouveau système). Survivants : population de l'Insee ; part partie à la retraite à chaque âge (âge légal de 64
-ans, profil DREES 2023 décalé, hypothèse encadrée) ; pension identique en 2029, 0,935 de la moyenne pour les
-départs suivants (DREES : nouveaux retraités 1 557 €, ensemble 1 666 €), gelée en euros courants. Calée sur
+ans, profil DREES 2023 décalé, hypothèse encadrée) ; pension identique en 2029, égale à celle du stock pour les
+départs suivants (noria quasi nulle, DREES ; 0,935 avant le 11/11/2026, voir statu_quo.md), gelée en euros courants. Calée sur
 428 Md€ et 19,15 millions de retraités en 2029.
 
 | | 2029 | 2037 | 2050 | 2060 | 2073 |

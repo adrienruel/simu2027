@@ -94,17 +94,24 @@ sert surtout de base aux mesures : une mesure d'un programme agit sur un impôt 
 ## Retraites
 
 Génération par génération, comme l'ancien système du programme, mais pour toutes les générations : survivants
-(Insee), part partie à chaque âge (âge légal de 64 ans), pension liquidée = salaire moyen de quinze ans plus tôt
-(droits revalorisés sur les prix) × érosion relative de 0,46 % par an, puis revalorisée sur les prix.
+(Insee), part partie à chaque âge (âge légal réel de chaque génération), pension liquidée = salaire moyen de quinze
+ans plus tôt (droits revalorisés sur les prix) × érosion relative de 0,595 % par an, puis revalorisée sur les prix.
+Les nouveaux retraités ont la même pension que le stock de 2029 (noria nulle) : jusqu'au 11/11/2026, ils partaient
+à 0,935 de la moyenne (rapport DREES des nouveaux retraités à l'ensemble), ce qui, contre un stock uniforme, faisait
+baisser la pension moyenne de 6,5 % pendant le remplacement du stock et creusait 2045 (13,86 % contre 14,2 %).
 
 L'érosion est le seul paramètre calé : sur le COR (15,3 % du PIB en 2070, productivité 0,7 %). Contrôles non calés :
 
 | Dépenses de retraite (% du PIB) | Moteur | COR, juin 2026 |
 |---|---|---|
-| 2030 | 14,2 | 14,1 |
-| 2045 | 14,2 | 14,2 |
-| 2070, productivité 0,4 % | 15,96 | 16,1 |
-| 2070, productivité 1,0 % | 14,72 | 14,5 |
+| 2030 | 14,09 | 14,1 |
+| 2045 | 14,24 | 14,2 |
+| 2070, productivité 0,4 % | 15,97 | 16,1 |
+| 2070, productivité 1,0 % | 14,71 | 14,5 |
+
+Décomposition (taux annuels réels, 2030-2045) : retraités +0,75 % (COR +0,8 %) ; la pension relative au salaire
+baissait de 0,87 % par an avant la correction, contre 0,46 % au COR ; de 2045 à 2070, le modèle suivait déjà le COR
+(pension +0,2 %, retraités +0,4 %).
 
 La sensibilité à la productivité vient du décalage de quinze ans : elle est retrouvée sans calage.
 
