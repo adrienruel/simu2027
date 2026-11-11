@@ -131,3 +131,27 @@ def test_programmes_disponibles():
     noms = noyau.programmes_disponibles()
     assert noms[0] == "statu_quo" and "ecologie_de_droite" in noms
     assert noyau.charger("ecologie_de_droite").libelle == "Écologie de droite"
+
+
+def test_impulsion_budgetaire_d_ecologie_de_droite(p):
+    """Ce qui entre dans le multiplicateur (relecture indépendante du 11/11/2026) : natures connues ; reclassements
+    et détails sans effet net ; revenu universel pondéré comme un transfert ; l'impulsion calculée de 2029 retrouve
+    l'effort que le programme déclare (macro.effort_2029 − assouplissement + prélèvement sur les anciennes pensions)."""
+    from moteur import offre
+    from moteur.programme_simple import TOUTES
+    m = noyau.charger("ecologie_de_droite").mesures(p)["prudent"]
+    assert {x.nature for x in m} <= {"budget", "classement", "detail", "effet_macro", "mesure", "methode", "perimetre", "physique"}
+    for nature in ("detail", "perimetre"):
+        for t in (2029, 2050):
+            net = sum((-1 if x.poste == "recettes" else 1) * x.valeurs.get(t, 0.0) for x in m if x.nature == nature)
+            assert net == pytest.approx(0.0, abs=1e-6), (nature, t)
+    w = p.val("demande.poids")
+    rui = next(x for x in m if x.poste == "nouveau:rui_aah")
+    assert offre.poids_demande(p, rui) == w["transferts_cibles"]
+    carbone = next(x for x in m if "Carbone : recette" in x.nom)
+    assert offre.poids_demande(p, carbone) == w["consommation"]
+    sel = [x for x in m if x.nature in ("budget", "mesure", "classement") or (x.nature == "effet_macro" and x.instrument)]
+    imp = offre.impulsion(p, sel, TOUTES)
+    anc = next(x for x in m if x.nom.startswith("Anciennes pensions : prélèvement net")).valeurs[2029]
+    declare = (p.val("macro.effort_2029") - p.val("macro.assouplissement_2029")) * sq.pib(p, "prudent")[2029] + anc
+    assert -imp[2029] == pytest.approx(declare, rel=0.15)

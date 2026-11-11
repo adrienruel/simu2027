@@ -525,6 +525,14 @@ def canaux_emploi(p: Parametres, s: str, E) -> dict:
     return out
 
 
+def is_taxes_energie_supprimees(q: Parametres, s: str) -> dict[int, float]:
+    """Impôt sur les bénéfices en plus : taux moyen de l'IS × taxes actuelles sur l'énergie supprimées (Md€)."""
+    from moteur.carbone import couts_energie_entreprises
+    from moteur.is_bareme import taux_moyen
+    ce, t_is = couts_energie_entreprises(q, s), taux_moyen(q, s)
+    return {t: t_is * ce[t]["statu_quo"] if t in ce else 0.0 for t in ANNEES}
+
+
 def energie_entreprises(p: Parametres, q: Parametres, s: str, ctx: dict) -> dict:
     """Canal de l'énergie des entreprises (remarque d'Adrien du 06/11/2026) : moins de taxes sur l'énergie, plus de
     marges, plus d'impôt sur les bénéfices, plus d'emplois — et l'inverse quand le prix du carbone dépasse les taxes
@@ -564,7 +572,7 @@ def energie_entreprises(p: Parametres, q: Parametres, s: str, ctx: dict) -> dict
         budget[t] = emplois[t] * g / 1e9
     mesures = [
         Mesure("Effet macro : impôt sur les bénéfices des taxes sur l'énergie supprimées (marges des entreprises)", "recettes",
-               is_sup, nature="effet_macro"),
+               is_sup, nature="effet_macro", instrument="capital_entreprises"),  # prélèvement : dans l'impulsion
         Mesure("Effet macro : emploi industriel selon le prix de l'énergie des entreprises", "recettes", budget, nature="effet_macro"),
     ]
     va = {t: ctx["pib"][t] / e[t]["emploi"] for t in ANNEES}
@@ -737,12 +745,19 @@ class EcologieDeDroite:
             m = self._budget(p, q, s)
             E = Effets(p, q, s, jeu)
             y_sq, e, rec_sq = sq.pib(p, s), sq.effectifs(p, s), sq.recettes(p, s)
-            # impulsion budgétaire des mesures du programme (budget et mesures datées, pas les écarts de méthode ni
-            # les effets) : multiplicateur commun
-            cout_net = offre.impulsion(p, [x for x in m if x.nature in ("budget", "mesure")], TOUTES)
+            # impulsion budgétaire des mesures du programme : budget, mesures datées, reclassements (leur contrepartie
+            # est dans le budget : les oublier comptait 22 Md€ de resserrement de trop) et prélèvements portés par un
+            # effet (recette carbone du scénario, IS sur les taxes d'énergie supprimées) ; pas les écarts de méthode ni
+            # les autres effets. Multiplicateur commun (relecture indépendante du 11/11/2026).
+            m_effets = E.mesures()
+            cout_net = offre.impulsion(p, [x for x in m if x.nature in ("budget", "mesure", "classement")
+                                           or (x.nature == "effet_macro" and x.instrument)]
+                                       + [x for x in m_effets if x.instrument]
+                                       + ([Mesure("IS des taxes sur l'énergie supprimées", "recettes", is_taxes_energie_supprimees(q, s),
+                                                  "effet_macro", instrument="capital_entreprises")] if self.energie else []), TOUTES)
             dpib = multiplicateur(p, s, cout_net, TOUTES)
             part_rec = {t: rec_sq[t] / y_sq[t] for t in ANNEES}
-            m.extend(E.mesures())
+            m.extend(m_effets)
             m.append(Mesure("Effet macro : multiplicateur sur l'impulsion budgétaire des mesures", "recettes",
                             {t: dpib[t] * part_rec[t] for t in ANNEES}, "effet_macro"))
             # seniors dont le départ est reporté par l'âge légal (canal commun, moteur/offre.seniors)

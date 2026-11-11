@@ -331,7 +331,10 @@ class Effets:
     def mesures(self) -> list[Mesure]:
         out = []
         for c, lib in self.LIBELLES.items():
-            out.append(Mesure(f"Effet macro : {lib}", "recettes", dict(self.solde[c]), "effet_macro"))
+            # la recette carbone du scénario est un prélèvement sur la consommation : elle entre dans l'impulsion
+            # budgétaire (poids de demande de la consommation), comme les recettes du budget (relecture du 11/11/2026)
+            out.append(Mesure(f"Effet macro : {lib}", "recettes", dict(self.solde[c]), "effet_macro",
+                              instrument="consommation" if c == "carbone" else ""))
         for c, lib in self.METHODE.items():
             out.append(Mesure(lib, "recettes", dict(self.solde[c]), "methode"))
         return out

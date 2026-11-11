@@ -54,7 +54,8 @@ EMPLOI = {"travail": (None, 1.0), "cout_travail": (1.0, 0.0), "capital_entrepris
           "transferts_actifs": (1.0, 1.0), "investissement_public": (0.5, 0.0), "education": (0.0, 0.0),
           "recherche": (0.0, 0.0)}
 MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
-TRANSFERTS_CIBLES = ("famille", "logement", "pauvrete", "chomage", "aah_invalidite")
+# « nouveau:rui_aah » : revenu universel d'Écologie de droite, qui remplace ces prestations (même poids de demande)
+TRANSFERTS_CIBLES = ("famille", "logement", "pauvrete", "chomage", "aah_invalidite", "nouveau:rui_aah")
 SMIC_BRUT_2026 = 1823.03 * 12
 PLAFOND_SS_2026 = 48060.0  # plafond annuel de la Sécurité sociale 2026
 
