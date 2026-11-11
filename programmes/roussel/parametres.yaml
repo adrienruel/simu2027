@@ -1,0 +1,412 @@
+# Programme de Fabien Roussel (Parti communiste français) : chiffrage sur le noyau (11 novembre 2026).
+#
+# Pas de programme présidentiel 2027 publié : discours de l'université d'été (22/08/2026), Fête de l'Humanité (2025 et
+# 12/09/2026), « Pacte pour l'avenir de la France » (2025), pages thématiques de pcf.fr, recensés par
+# programme-candidat.fr, quivoter2027.com et swipetonvote.fr. Fiche : programmes/roussel/mesures.yaml.
+#
+# Règles (décisions d'Adrien) : on ne reprend que les mesures, jamais les recettes annoncées ; les montants des
+# mesures donnés par le candidat (15 Md€ pour le rail, 10 Md€ pour les transports gratuits, 1 Md€ pour les droits des
+# femmes) sont des paramètres ; les mesures communes avec L'Avenir en commun reprennent les estimations de Mélenchon.
+# Dépense : crise ≥ prudent ≥ médian ≥ optimiste ; recette : l'inverse. Calendrier : loi de finances 2028.
+
+roussel_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
+
+roussel_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+roussel_smic:
+  smic_net_programme:
+    valeur: 1700
+    unite: eur_mois
+    annee_euros: 2027
+    statut: SOURCE
+    source: "Université d'été du PCF (22/08/2026, pcf.fr, repris par quivoter2027.com) : SMIC à 1 700 € net, hausse de 5 % de tous les salaires, échelle mobile ; 2 000 € brut (≈ 1 560 € net) à la Fête de l'Humanité 2025"
+    note: "En euros de 2027, ramené en euros de 2026 par l'inflation de 2027 (inflation.base), puis en brut par le barème OpenFisca de 2026. À partir de 2028. La hausse de 5 % des autres salaires du privé et l'échelle mobile ne sont pas des mesures budgétaires (négociation) : non comptées."
+  allegements_suivent_smic:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Le livre ne dit rien des allègements : lecture de la loi actuelle (allègements définis en multiples du SMIC), comme pour Arthaud. Variante « nominalisés » (lecture Tondelier) : coût au SMIC plus élevé, plus d'emplois perdus."
+  diffusion_jusqu_a:
+    valeur: 1.4
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.diffusion_jusqu_a (Dares, Insee : diffusion jusqu'à 1,3 à 1,5 SMIC)"
+    note: "L'échelle mobile des salaires n'est pas chiffrée : les salaires du statu quo progressent déjà plus vite que les prix."
+  elasticite_emploi:
+    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Mêmes valeurs que tondelier_smic.elasticite_emploi (Kramarz et Philippon, 2001 ; Crépon et Desplatz, 2001 ; L'Horty, 2006)"
+    note: "Élasticité constante (emplois × (1 − rapport des coûts^élasticité)), montée en trois ans (2027-2029)."
+  part_marge_absorbee:
+    valeur: 0.5
+    unite: taux
+    statut: HYPOTHESE
+    note: "Même valeur que Tondelier et Arthaud."
+  valeur_emploi_chomeur:
+    valeur: 9000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur"
+
+roussel_fp:
+  part_indiciaire:
+    valeur: 0.55
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_mesures.point_indice : traitement indiciaire ≈ 55 % du coût employeur des agents (390 Md€, OpenFisca 2026 sur les distributions DGAFP)"
+  hausse_point:
+    valeur: 0.05
+    unite: taux
+    statut: SOURCE
+    source: "Université d'été (22/08/2026) : hausse de 5 % de tous les salaires, appliquée au point d'indice ; +10 % à la Fête de l'Humanité 2025 (non repris en 2026)"
+    note: "À partir de 2028. Compensation intégrale aux collectivités : transfert interne aux administrations publiques, sans effet sur le solde consolidé."
+
+roussel_retraites:
+  profil_62_ans:
+    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même profil que tondelier_retraites.profil_62_ans (DREES, fiche 16, 2023, âge légal 62 ans)"
+    note: "Abrogation de la réforme de 2023 : 62 ans pour les départs de 2028."
+  profil_60_ans:
+    valeur: {58: 0.03, 59: 0.05, 60: 0.65, 61: 0.74, 62: 0.81, 63: 0.86, 64: 0.90, 65: 0.96, 66: 0.97, 67: 0.98, 68: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : DREES et CNAV, départs des années 2000 (âge légal 60 ans, 40 annuités, décote) : environ 55 % des départs du régime général à 60 ans, âge moyen de départ ≈ 61 ans ; ici à taux plein, sans décote : plus de départs à 60 ans (65 % partis à 60 ans)"
+    note: "Carrières longues avant 60 ans gardées comme dans le profil commun (pas de départ avant 60 ans en plus)."
+  calendrier:
+    valeur: {abrogation: 2028, soixante_ans: 2032}
+    unite: sans_unite
+    statut: DECISION
+    note: "Même calendrier que Mélenchon (comparabilité) : « Une loi rétablira la retraite à 60 ans, à taux plein » (votons-2027.fr, mesure phare) ; abrogation de la réforme de 2023 (swipetonvote.fr, 07/11/2026) : 62 ans pour les départs de 2028, puis six mois de moins par an jusqu'à 60 ans pour les départs de 2032 (mélange linéaire des deux profils par année de départ). Durée de 40 annuités et fin de la décote : mesure à part (duree_decote)."
+  anciennete_moyenne:
+    valeur: 12
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Fête de l'Humanité 2025 (pcf.fr, repris par programme-candidat.fr) : retraites indexées sur le salaire moyen ; DREES : âge moyen des retraités ≈ 75 ans, âge moyen de départ ≈ 63 ans"
+    note: "Chaque pension gagne, depuis sa liquidation (ou 2029), la croissance réelle des salaires au lieu des prix ; écart moyen calculé sur 12 ans d'ancienneté. Montée progressive : ≈ +0,7 à +1 % des pensions par an la première décennie."
+
+roussel_chomage:
+  hausse_taux:
+    valeur: {crise: 0.006, prudent: 0.006, median: 0.0045, optimiste: 0.003}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.assurance_chomage (Banque de France, Bulletin n° 264, 2026 : les réformes de 2021 et 2023 ont baissé le chômage structurel de 0,6 point)"
+    note: "Hausse du taux de chômage quand ces réformes sont annulées (programme du Nouveau Front populaire, 14/06/2024, signé par le PCF), montée de 2028 à 2030 ; chaque chômeur en plus coûte la valeur d'un emploi au SMIC."
+
+roussel_emplois_aides:
+  securite_emploi:
+    valeur: {emplois: 240000, eviction: {crise: 0.2, prudent: 0.15, median: 0.1, optimiste: 0.05}, debut: 2028, plein: 2032}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même échelle que melenchon_emplois_aides.garantie_emploi (≈ 600 000 chômeurs de longue durée × 40 %) ; objectif d'éradiquer le chômage de longue durée en cinq ans (Le Parti pris du travail, 2025)"
+    note: "Emplois venus du chômage ; coût dans roussel_mesures.securite_emploi_cout."
+
+roussel_temps_travail:
+  elasticite_emploi:
+    valeur: {crise: -0.5, prudent: -0.3, median: -0.2, optimiste: -0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même valeur que melenchon_temps_travail.elasticite_emploi (Mésange, DG Trésor ; L'Horty, 2006)"
+  trente_deux_heures:
+    valeur: {heures_actuelles: 35, heures_cible: 32, debut: 2028, plein: 2032, emplois_prive: 20300000, part_marchande: 0.75,
+             gain_productivite: {crise: 0.2, prudent: 0.3, median: 0.35, optimiste: 0.4},
+             part_embauches: {crise: 0.25, prudent: 0.3, median: 0.35, optimiste: 0.4},
+             part_compensee_fp: {crise: 0.7, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "« La semaine de travail passera à 32 heures, sans diminution de salaires » (votons-2027.fr, mesure phare ; france-vote.fr, 2026). Précédent des 35 heures : ≈ 350 000 emplois créés de 1998 à 2002 (Dares, 2005), avec des allègements de cotisations et une modération salariale ; Askenazy (2008) : gains de productivité horaire importants"
+    note: "Baisse de 8,6 % des heures par salarié, au même salaire : coût horaire +9,4 %, réduit des gains de productivité (crise 20 %, prudent 30 %, médian 35 %, optimiste 40 % de la baisse d'heures) ; une autre part des heures est rendue par des embauches (25 à 40 %, ≈ 350 000 en 2002 pour une baisse de 10 % sur 60 % des salariés, soit ≈ 35 %). Le reste est de la production en moins (part marchande du PIB ≈ 75 %). Emplois perdus par le coût horaire : élasticité de melenchon_temps_travail. Sans allègements de cotisations (le programme n'en prévoit pas). Fonction publique : embauches pour garder le service, 40 à 70 % des heures perdues. Montée de 2028 à 2032 (négociation)."
+
+roussel_mesures:
+  isf:
+    valeur: {id: PCF-FIS-01, instrument: capital_menages, libelle: "ISF rétabli, assiette élargie aux actifs financiers (à la place de l'IFI)", poste: recettes, moteur: "recette:capital_dividendes_ifi", debut: 2028, plein: 2028,
+             montant: {crise: 1.5, prudent: 2.5, median: 3.5, optimiste: 4.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Discours de la Fête de l'Humanité (12/09/2026, pcf.fr) : ISF rétabli, sans barème"
+    note: "Même estimation que melenchon_mesures.isf (ISF 2017 ≈ 4,2 Md€, IFI ≈ 2,2 Md€)."
+  zucman:
+    valeur: {id: PCF-FIS-02, instrument: capital_menages, libelle: "Impôt minimal de 2 % sur les patrimoines de plus de 100 M€", poste: recettes, moteur: "pib", debut: 2028, plein: 2029,
+             montant: {crise: 3.0, prudent: 5.0, median: 8.0, optimiste: 12.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "programme-candidat.fr (positions de 2026)"
+    note: "Même estimation que melenchon_mesures.zucman et tondelier_mesures.zucman (≈ 20 Md€ en statique, G. Zucman 2025 ; prudent au quart)."
+  ir_hauts:
+    valeur: {id: PCF-FIS-03, instrument: travail, incidence: haut, libelle: "Impôt sur le revenu à neuf tranches : tranches du haut relevées", poste: recettes, moteur: "recette:salaires_prive", debut: 2028, plein: 2028,
+             montant: {crise: 1.0, prudent: 1.5, median: 2.0, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, « 10 propositions » : impôt sur le revenu à neuf tranches (barème non donné)"
+    note: "Moins de tranches que L'Avenir en commun (14) : un peu moins que melenchon_mesures.ir_hauts_revenus."
+  ir_bas:
+    valeur: {id: PCF-FIS-03, instrument: travail, incidence: bas, libelle: "Impôt sur le revenu à neuf tranches : tranches du bas abaissées", poste: recettes, moteur: "recette:salaires_prive", debut: 2028, plein: 2028,
+             montant: {crise: -3.5, prudent: -3.5, median: -2.5, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même source"
+    note: "Un peu moins que melenchon_mesures.ir_bas_revenus (−4,5 / −3,3)."
+  revenus_financiers:
+    valeur: {id: PCF-FIS-04, instrument: capital_entreprises, libelle: "Cotisations sur les revenus financiers et les dividendes ; contribution sur les revenus financiers des banques et assurances", poste: recettes, moteur: "pib", debut: 2028, plein: 2029,
+             montant: {crise: 1.0, prudent: 3.0, median: 6.0, optimiste: 10.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fête de l'Humanité (12/09/2026) : cotiser sur les revenus financiers et les dividendes ; pcf.fr, « 10 propositions » : contribution de 10 % sur les revenus financiers des banques et assurances, 60 Md€ annoncés (non repris)"
+    note: "Assiette non définie. Encadrement : dividendes versés par les sociétés non financières ≈ 80 à 100 Md€ (Insee) ; une cotisation de quelques points, avec évitement (report des distributions, rachats d'actions) et effet sur l'IS et les dividendes taxés à l'impôt sur le revenu : 1 à 10 Md€."
+  successions:
+    valeur: {id: PCF-FIS-05, instrument: successions, libelle: "Héritages de moins de 200 000 € exonérés, gros héritages taxés davantage", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028,
+             montant: {crise: -2.5, prudent: -1.5, median: 0.0, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fête de l'Humanité (12/09/2026) : exonération des héritages sous 200 000 € ; taxation des plus gros, sans barème"
+    note: "Même ordre que melenchon_mesures.successions : l'exonération coûte sûrement (la plupart des successions taxées ont moins de 200 000 € par héritier), la hausse en haut rapporte selon le barème."
+  tva_produits:
+    valeur: {id: PCF-FIS-06, instrument: consommation, libelle: "TVA supprimée sur les produits de première nécessité", poste: recettes, moteur: "recette:tva", debut: 2028, plein: 2028,
+             montant: {crise: -3.0, prudent: -2.5, median: -2.0, optimiste: -1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, « 10 propositions »"
+    note: "Même estimation que le_pen_mesures.tva_produits (liste non publiée)."
+  carburants:
+    valeur: {id: PCF-FIS-07, instrument: consommation, libelle: "Prix des carburants bloqué à 1,50 € le litre, maîtrise publique de TotalEnergies", poste: recettes, moteur: "recette:accises_et_taxes_sur_produits", debut: 2028, plein: 2028,
+             montant: {crise: -14.0, prudent: -12.0, median: -8.0, optimiste: -5.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Entretien du 23/05/2026 (po.pcf.fr, repris par programme-candidat.fr)"
+    note: "Écart avec un prix de ≈ 1,75 € le litre : ≈ 0,25 € × ≈ 50 milliards de litres ≈ 12,5 Md€ si l'État le paie par la fiscalité (accise et TVA) ; moins si une partie est prise sur les marges du raffinage et de la distribution (maîtrise publique de TotalEnergies). Le coût monte avec le prix du pétrole : prudent à 12 Md€."
+  csg_retraites:
+    valeur: {id: PCF-RET-03, libelle: "CSG sur les retraites supprimée", poste: recettes, moteur: "recette:retraites", debut: 2028, plein: 2028,
+             montant: {crise: -23.0, prudent: -22.0, median: -21.0, optimiste: -20.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Discours de la Fête de l'Humanité 2025 (pcf.fr, repris par programme-candidat.fr), à confirmer pour 2027"
+    note: "CSG sur les pensions de retraite ≈ 22 Md€ (Commission des comptes de la Sécurité sociale, 2025 ; taux de 3,8 à 8,3 %). La CSG déductible est remplacée par un peu plus d'impôt sur le revenu : déjà compté dans le bas de la fourchette."
+  demi_part_veuves:
+    valeur: {id: PCF-RET-04, libelle: "Demi-part fiscale des veuves et veufs rétablie", poste: recettes, moteur: "recette:retraites", debut: 2028, plein: 2028,
+             montant: {crise: -1.7, prudent: -1.5, median: -1.3, optimiste: -1.1}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même source"
+    note: "Suppression progressive de 2009 à 2014 : ≈ 1,5 Md€ par an de recettes (rapports parlementaires, 2014)."
+  fraude:
+    valeur: {id: PCF-FIS-08, libelle: "Lutte contre la fraude fiscale : 20 000 postes rétablis ou créés dans les douanes et les finances publiques", poste: recettes, moteur: "pib", debut: 2028, plein: 2032,
+             montant: {crise: 0.3, prudent: 0.5, median: 1.5, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, « Beauvau de la sécurité »"
+    note: "Même estimation que tondelier_mesures.fraude et melenchon_mesures.fraude ; coût des postes : fisc_douanes."
+  revenus_nationalisees:
+    valeur: {id: PCF-PAR-02, libelle: "Revenus des entreprises nationalisées (dividendes de BNP Paribas, Société générale, AXA, Engie ; péages)", poste: recettes, moteur: "pib", debut: 2029, plein: 2030,
+             montant: {crise: 6.0, prudent: 8.0, median: 10.0, optimiste: 12.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Dividendes versés en 2025 : BNP Paribas ≈ 5,5 Md€, AXA ≈ 4,5 Md€, Société générale ≈ 1,5 Md€, Engie ≈ 3 Md€ (dont ≈ 0,7 déjà à l'État) ; dividendes des sociétés d'autoroutes ≈ 4 Md€ (pcf.fr)"
+    note: "Le fonds public de 500 Md€ prête à taux zéro par les banques nationalisées : leurs bénéfices, donc leurs dividendes, baissent (prudent). Les prix de l'électricité baissés hors du marché européen réduisent aussi les bénéfices d'EDF et d'Engie (non chiffré à part)."
+  nationalisations:
+    valeur: {id: PCF-PAR-01, libelle: "Nationalisations : BNP Paribas, Société générale, AXA, Engie, sociétés d'autoroutes", poste: participations, moteur: "fixe", debut: 2028, plein: 2029,
+             montant: {crise: -280.0, prudent: -250.0, median: -200.0, optimiste: -150.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr (Pacte pour l'avenir de la France, 2025 ; autoroutes) ; L'Usine nouvelle"
+    note: "Valeurs de marché fin 2025 ≈ BNP Paribas 85 Md€, AXA 80, Société générale 30, Engie (part non détenue) 35, concessions d'autoroutes ≈ 40 à 50 (indemnisation) ; prime de rachat comprise en prudent. Opération financière : elle ne touche pas le déficit mais la dette (règle du noyau pour les participations)."
+  aspa:
+    valeur: {id: PCF-RET-05, libelle: "Minimum vieillesse (ASPA) porté à 1 400 € par mois", poste: retraites, moteur: "pib", debut: 2028, plein: 2029,
+             montant: {crise: 10.0, prudent: 8.5, median: 7.0, optimiste: 5.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fête de l'Humanité 2025 (pcf.fr) : ASPA à 1 400 €"
+    note: "ASPA ≈ 1 034 € (2025) pour ≈ 700 000 allocataires : +366 € × 12 ≈ 3,1 Md€ ; plafond relevé : ≈ 2 à 3 millions de retraités de plus deviennent éligibles (pensions entre 1 034 et 1 400 €), écart moyen ≈ 200 €, non-recours ≈ 50 % (récupération sur succession) : 2,5 à 7 Md€."
+  cent_pour_cent:
+    valeur: {id: PCF-SAN-01, libelle: "Soins prescrits remboursés à 100 % par la Sécurité sociale", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2030,
+             montant: {crise: 30.0, prudent: 28.0, median: 25.0, optimiste: 22.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "programme-candidat.fr (santé) ; programme de 2022"
+    note: "Même estimation que melenchon_mesures.cent_pour_cent_secu."
+  hopital:
+    valeur: {id: PCF-SAN-02, libelle: "100 000 recrutements dans les hôpitaux publics, centres de santé municipaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: 5.5, prudent: 5.5, median: 5.0, optimiste: 4.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, programme des municipales 2026 (« recruter massivement ») ; 100 000 dans le programme de 2022"
+    note: "100 000 postes × 55 000 € ; centres de santé : surtout collectivités, peu de coût net."
+  enseignants:
+    valeur: {id: PCF-EDU-01, instrument: education, libelle: "90 000 enseignants recrutés, pré-recrutement rémunéré, classes de 20 élèves au plus en primaire", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true, cout_poste: 60000,
+             montant: {crise: 5.6, prudent: 5.4, median: 5.0, optimiste: 4.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, « Besoin de plus d'école » ; swipetonvote.fr (mesures phares, 07/11/2026)"
+    note: "90 000 × 60 000 € ; le budget de l'Éducation nationale « augmenté de 45 % » n'est pas repris (objectif, sans détail)."
+  gratuite_ecole:
+    valeur: {id: PCF-EDU-02, libelle: "Gratuité des fournitures, de la restauration et des transports scolaires", poste: collectivites, moteur: "bloc:collectivites", debut: 2028, plein: 2029,
+             montant: {crise: 4.5, prudent: 4.0, median: 3.6, optimiste: 3.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, programme des municipales 2026"
+    note: "Sous melenchon_mesures.gratuite_ecole (6 Md€ avec le périscolaire et les manuels)."
+  superieur:
+    valeur: {id: PCF-EDU-03, instrument: education, libelle: "300 000 places de plus dans l'enseignement supérieur", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032,
+             montant: {crise: 3.3, prudent: 3.0, median: 2.7, optimiste: 2.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "swipetonvote.fr (mesures phares, 07/11/2026)"
+    note: "≈ 10 000 € par étudiant et par an (coût moyen à l'université, MESR)."
+  police:
+    valeur: {id: PCF-SEC-01, libelle: "Police nationale de proximité : 30 000 postes", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: 1.7, prudent: 1.65, median: 1.6, optimiste: 1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, « Beauvau de la sécurité »"
+    note: "30 000 × 55 000 €."
+  fisc_douanes:
+    valeur: {id: PCF-FIS-08, libelle: "Douanes et finances publiques : 20 000 postes", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: 1.1, prudent: 1.1, median: 1.05, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, « Beauvau de la sécurité »"
+    note: "20 000 × 55 000 €."
+  logement:
+    valeur: {id: PCF-LOG-01, libelle: "200 000 logements sociaux par an, APL revalorisées", poste: investissement, moteur: "pib", debut: 2028, plein: 2030,
+             montant: {crise: 6.0, prudent: 5.0, median: 4.5, optimiste: 4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, programme des municipales 2026"
+    note: "Même estimation que melenchon_mesures.logements_publics (aides publiques par logement)."
+  apl:
+    valeur: {id: PCF-LOG-02, libelle: "APL revalorisées", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2028,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, lutte contre la pauvreté"
+    note: "Revalorisation non chiffrée : ≈ 5 % des ≈ 16 Md€ d'aides au logement."
+  rsa_jeunes:
+    valeur: {id: PCF-PRE-01, libelle: "RSA ouvert aux moins de 25 ans (en attendant la sécurité d'emploi ou de formation)", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2028, fin: 2032,
+             montant: {crise: 2.2, prudent: 2.0, median: 1.6, optimiste: 1.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, lutte contre la pauvreté"
+    note: "≈ 300 000 à 400 000 jeunes éligibles × ≈ 6 500 € par an, non-recours ≈ 30 %."
+  securite_emploi_cout:
+    valeur: {id: PCF-EMP-02, libelle: "Sécurité d'emploi ou de formation : emplois ou formations payés au SMIC", poste: autres, moteur: "pib", debut: 2028, plein: 2032, fp: true, fp_taux: 0.39,
+             montant: {crise: 8.6, prudent: 8.6, median: 8.6, optimiste: 8.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fabien Roussel, Le Parti pris du travail (avril 2025) ; CNews (20/02/2025)"
+    note: "Même échelle que melenchon_mesures.garantie_emploi : 240 000 emplois × ≈ 36 000 € (SMIC de 1 700 € net) ; emplois créés et éviction : roussel_emplois_aides."
+  securite_emploi_rsa:
+    valeur: {id: PCF-EMP-02, libelle: "Sécurité d'emploi ou de formation : RSA et allocations évités", poste: chomage, moteur: "pib", debut: 2028, plein: 2032,
+             montant: {crise: -1.1, prudent: -1.3, median: -1.5, optimiste: -1.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même calcul que melenchon_mesures.garantie_emploi_allocations"
+  ferroviaire:
+    valeur: {id: PCF-TRA-01, libelle: "Ferroviaire : 15 Md€ de plus par an, petites lignes rouvertes, fret doublé, billets 30 % moins chers", poste: investissement, moteur: "pib", debut: 2028, plein: 2030,
+             montant: {crise: 15.0, prudent: 15.0, median: 14.0, optimiste: 13.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, discours sur l'Union européenne (2025) : +15 Md€ par an ; « Le droit à la mobilité »"
+    note: "Montant de la mesure (paramètre). Capacité de la filière à dépenser autant : non bornée ici."
+  transports_gratuits:
+    valeur: {id: PCF-TRA-02, libelle: "Transports en commun gratuits dans toutes les agglomérations", poste: collectivites, moteur: "bloc:collectivites", debut: 2028, plein: 2030,
+             montant: {crise: 10.0, prudent: 10.0, median: 9.0, optimiste: 8.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, « Le droit à la mobilité » : 10 Md€ de plus par an"
+    note: "Recettes tarifaires des réseaux urbains ≈ 5 à 6 Md€ (GART), plus le surcroît de fréquentation ; montant de la mesure."
+  vehicules:
+    valeur: {id: PCF-TRA-03, libelle: "Aide de 10 000 € pour les véhicules peu polluants", poste: autres, moteur: "pib", debut: 2028, plein: 2029, fin: 2034,
+             montant: {crise: 1.2, prudent: 1.0, median: 0.8, optimiste: 0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "pcf.fr, « Le droit à la mobilité »"
+    note: "Volume non donné : ≈ 100 000 aides par an (prudent)."
+  femmes:
+    valeur: {id: PCF-SOC-01, libelle: "Ministère des Droits des femmes doté d'un milliard d'euros, loi-cadre contre les violences", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2028,
+             montant: {crise: 1.0, prudent: 1.0, median: 1.0, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Fête de l'Humanité 2025 ; swipetonvote.fr"
+
+# ---------------------------------------------------------------- effets en tonnes (même méthode que tondelier_ecologie)
+# Négatif : émissions évitées. Prudence : dans le prudent, l'effet favorable au climat est le plus faible.
+roussel_ecologie:
+  ferroviaire:
+    valeur: {id: PCF-TRA-01, libelle: "Ferroviaire : +15 Md€ par an, fret doublé", secteur: transports, debut: 2030, plein: 2040, effet_mt: {crise: -1.5, prudent: -3.0, median: -6.0, optimiste: -9.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.ferroviaire (SNCF, 2022 : reporter 10 % du trafic routier sur le rail ; Citepa : ≈ 117 Mt pour la route)"
+    note: "Cinq fois le budget de Tondelier (3 Md€) : part des émissions routières reportée 1,3 % (crise), 2,5 % (prudent), 5 % (médian), 7,5 % (optimiste), rendement décroissant (capacité du réseau)."
+  transports_gratuits:
+    valeur: {id: PCF-TRA-02, libelle: "Transports en commun gratuits", secteur: transports, debut: 2028, plein: 2030, effet_mt: {crise: -0.5, prudent: -1.0, median: -2.0, optimiste: -3.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.ticket_climat ; retours d'expérience de Dunkerque et Montpellier : fréquentation +60 à +85 %, mais une partie vient de la marche et du vélo (Agence d'urbanisme Flandre-Dunkerque, 2020)"
+    note: "Une fois et demie l'effet du Ticket climat de Tondelier : 0,8 à 4,7 % des émissions des voitures, selon le report réel depuis la voiture."
+  vehicules:
+    valeur: {id: PCF-TRA-03, libelle: "Aide de 10 000 € pour les véhicules peu polluants", secteur: transports, debut: 2028, plein: 2032, fin_debut: 2035, fin: 2045, effet_mt: {crise: -0.32, prudent: -0.32, median: -0.48, optimiste: -0.64}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que tondelier_ecologie.leasing_social (1,6 t par voiture thermique remplacée et par an)"
+    note: "≈ 100 000 aides par an, ≈ 500 000 véhicules en 2032 ; additionnalité 40 / 40 / 60 / 80 %."
+  carburants:
+    valeur: {id: PCF-FIS-07, libelle: "Carburant bloqué à 1,50 € le litre", secteur: transports, debut: 2028, plein: 2032, effet_mt: {crise: 3.0, prudent: 2.5, median: 1.8, optimiste: 1.2}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Labandeira et al. (2017) : élasticité-prix de long terme ≈ −0,3 à −0,6 ; Citepa : voitures et véhicules utilitaires ≈ 90 Mt"
+    note: "Prix ≈ −15 % pour les ménages et les entreprises : +1,3 à +3,3 % de consommation de carburant."

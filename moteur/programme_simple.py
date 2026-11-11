@@ -307,7 +307,11 @@ class ProgrammeSimple:
             hors_conj = {t: sum(v for c, v in canaux[t].items()
                                 if not c.startswith(("Conjoncture", "Postes publics", "Offre", "Seniors")))
                          for t in ANNEES}
-            pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + hors_conj[t] * va * idx["pib"][t] / 1e9 for t in ANNEES}
+            # PIB en plus ou en moins hors emploi (ex. heures travaillées en moins par salarié, 32 heures) : rangé par une
+            # mesure calculée dans self.pib_en_plus[(id(p), s)] = {année: Md€}, avec sa mesure de recettes (11/11/2026)
+            d_autre = getattr(self, "pib_en_plus", {}).get((id(p), s), {})
+            pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + d_autre.get(t, 0.0)
+                   + hors_conj[t] * va * idx["pib"][t] / 1e9 for t in ANNEES}
             demploi = {t: sum(canaux[t].values()) for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
                     for t in ANNEES}

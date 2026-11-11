@@ -7,7 +7,7 @@ programmes-2027.fr n'était pas accessible depuis l'outil. Statut du programme s
 |---|---|---|---|
 | Marine Le Pen | Rassemblement national | disponible | oui, partiel (11/11/2026) |
 | Karim Bouamrane | Parti socialiste | disponible | non |
-| Fabien Roussel | Parti communiste français | disponible | non |
+| Fabien Roussel | Parti communiste français | disponible | oui (11/11/2026) |
 | Bernard Cazeneuve | La Convention | disponible | non |
 | Dominique de Villepin | La France humaniste | disponible | non |
 | Nicolas Dupont-Aignan | Debout la France | disponible | non |

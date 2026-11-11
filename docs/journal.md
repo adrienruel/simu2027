@@ -732,3 +732,6 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
   sources de seconde main. Aucune économie annoncée reprise ; obstacles juridiques documentés (Union européenne,
   priorité nationale). Prudent 2037 : déficit 13,0 % (statu quo 9,5 %), émissions +8 Mt.
 - Comparateur : données de l'artifact non modifiables par l'outil tant qu'il est public ; fichiers téléversés.
+- **Roussel (PCF)** : `programmes/roussel/`, docs/roussel.md. Programme 2027 non publié : discours de 2025-2026.
+  Nouveau dans le noyau : PIB hors emploi (`pib_en_plus`) pour les heures perdues des 32 heures. Prudent 2037 :
+  déficit 29,6 % (statu quo 9,5 %), solde primaire −9,1 points, PIB −4,5 %.

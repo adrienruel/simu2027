@@ -1,0 +1,186 @@
+# Programme de Fabien Roussel (Parti communiste français) : fiche des mesures (11 novembre 2026)
+
+programme:
+  candidat: Fabien Roussel
+  parti: Parti communiste français
+  document: pas de programme 2027 arrêté ; discours (université d'été 22/08/2026, Fête de l'Humanité 2025 et 12/09/2026), Pacte pour l'avenir de la France (2025), pages de pcf.fr
+  recensement: programme-candidat.fr, quivoter2027.com, swipetonvote.fr, votons-2027.fr (encore sur le programme de 2022), france-vote.fr
+  date_lecture: '2026-11-11'
+  avertissement: programme non publié ; plusieurs mesures datent de 2025 ; à refaire à la publication
+mesures:
+- id: PCF-SAL-01
+  intitule: "SMIC à 1 700 € net, hausse de 5 % de tous les salaires, échelle mobile"
+  source: "Université d'été du PCF, 22/08/2026 (quivoter2027.com) ; 2 000 € brut à la Fête de l'Humanité 2025"
+  traitement: "calculé : programme.smic (bib.smic) ; hausse de 5 % du privé et échelle mobile : non comptées (négociation)"
+- id: PCF-SAL-02
+  intitule: "Point d'indice relevé (+5 %, comme tous les salaires ; +10 % en 2025)"
+  source: "Université d'été, 22/08/2026 ; Fête de l'Humanité 2025"
+  traitement: "calculé : point d'indice +5 % (roussel_fp)"
+- id: PCF-RET-01
+  intitule: "Retraite à 60 ans à taux plein, réforme de 2023 abrogée"
+  source: "votons-2027.fr (mesure phare) ; swipetonvote.fr, 07/11/2026"
+  traitement: "calculé : 62 ans en 2028 puis 60 ans en 2032 (même calendrier que Mélenchon), emploi des seniors"
+- id: PCF-RET-02
+  intitule: "Pensions indexées sur le salaire moyen"
+  source: "Fête de l'Humanité 2025 (programme-candidat.fr)"
+  traitement: "calculé : roussel_retraites.anciennete_moyenne"
+- id: PCF-RET-03
+  intitule: "CSG sur les retraites supprimée"
+  source: "Fête de l'Humanité 2025"
+  traitement: "roussel_mesures.csg_retraites (à confirmer pour 2027)"
+- id: PCF-RET-04
+  intitule: "Demi-part des veuves rétablie"
+  source: "Fête de l'Humanité 2025"
+  traitement: "roussel_mesures.demi_part_veuves"
+- id: PCF-RET-05
+  intitule: "ASPA à 1 400 € par mois"
+  source: "Fête de l'Humanité 2025"
+  traitement: "roussel_mesures.aspa"
+- id: PCF-RET-06
+  intitule: "Financement des retraites par une hausse des cotisations patronales"
+  source: "Fête de l'Humanité 2025"
+  traitement: "non chiffré : taux non donné"
+- id: PCF-EMP-01
+  intitule: "32 heures sans diminution de salaire"
+  source: "votons-2027.fr (mesure phare) ; france-vote.fr, 2026"
+  traitement: "calculé : coût horaire, embauches de partage, heures perdues, embauches publiques (roussel_temps_travail)"
+- id: PCF-EMP-02
+  intitule: "Sécurité d'emploi ou de formation à la place du RSA : emploi ou formation au SMIC, fin du chômage de longue durée en cinq ans"
+  source: "Le Parti pris du travail (2025) ; CNews, 20/02/2025"
+  traitement: "calculé : roussel_emplois_aides ; coût : roussel_mesures.securite_emploi_cout et securite_emploi_rsa"
+- id: PCF-EMP-03
+  intitule: "Réformes de l'assurance chômage annulées"
+  source: "Programme du Nouveau Front populaire, 14/06/2024"
+  traitement: "calculé : roussel_chomage"
+- id: PCF-FIS-01
+  intitule: "ISF rétabli, assiette élargie aux actifs financiers"
+  source: "Fête de l'Humanité, 12/09/2026"
+  traitement: "roussel_mesures.isf"
+- id: PCF-FIS-02
+  intitule: "Impôt minimal de 2 % sur les patrimoines de plus de 100 M€"
+  source: "programme-candidat.fr"
+  traitement: "roussel_mesures.zucman"
+- id: PCF-FIS-03
+  intitule: "Impôt sur le revenu à neuf tranches"
+  source: "pcf.fr, « 10 propositions »"
+  traitement: "roussel_mesures.ir_hauts et ir_bas"
+- id: PCF-FIS-04
+  intitule: "Cotisations sur les revenus financiers et les dividendes ; 10 % sur les revenus financiers des banques et assurances (60 Md€ annoncés)"
+  source: "Fête de l'Humanité, 12/09/2026 ; « 10 propositions »"
+  traitement: "roussel_mesures.revenus_financiers (estimation propre, annonce non reprise)"
+- id: PCF-FIS-05
+  intitule: "Héritages de moins de 200 000 € exonérés, gros héritages taxés"
+  source: "Fête de l'Humanité, 12/09/2026"
+  traitement: "roussel_mesures.successions"
+- id: PCF-FIS-06
+  intitule: "TVA supprimée sur les produits de première nécessité"
+  source: "« 10 propositions »"
+  traitement: "roussel_mesures.tva_produits"
+- id: PCF-FIS-07
+  intitule: "Carburant bloqué à 1,50 € le litre, maîtrise publique de TotalEnergies"
+  source: "Entretien du 23/05/2026"
+  traitement: "roussel_mesures.carburants ; tonnes : roussel_ecologie.carburants"
+- id: PCF-FIS-08
+  intitule: "Douanes et finances publiques : 10 000 postes rétablis et 10 000 créés"
+  source: "pcf.fr, « Beauvau de la sécurité »"
+  traitement: "roussel_mesures.fisc_douanes et fraude"
+- id: PCF-FIS-09
+  intitule: "211 Md€ d'aides aux grandes entreprises réorientées, prêts à taux zéro"
+  source: "Pacte pour l'avenir de la France, 2025"
+  traitement: "non chiffré : réorientation sans suppression nommée"
+- id: PCF-PAR-01
+  intitule: "Nationalisation de BNP Paribas, de la Société générale, d'AXA, d'EDF et d'Engie (pôle public de l'énergie), des autoroutes, de la pharmacie et des transports"
+  source: "Pacte pour l'avenir (2025) ; L'Usine nouvelle ; pcf.fr"
+  traitement: "roussel_mesures.nationalisations et revenus_nationalisees (EDF déjà publique ; pharmacie et transports : non chiffrés, entreprises non nommées)"
+- id: PCF-PAR-02
+  intitule: "Fonds public de 500 Md€ sur cinq ans, dont 100 Md€ par an pour la transition"
+  source: "Pacte pour l'avenir (2025) ; swipetonvote.fr"
+  traitement: "hors solde : prêts des banques nationalisées (le moindre bénéfice passe par revenus_nationalisees)"
+- id: PCF-ENE-01
+  intitule: "Nucléaire public : jusqu'à 20 EPR2 et 12 SMR d'ici 2050, parc prolongé"
+  source: "pcf.fr (discours sur le nucléaire) ; swipetonvote.fr"
+  traitement: "hors solde : EDF ; pas d'effet en tonnes avant 2050"
+- id: PCF-ENE-02
+  intitule: "Sortie du marché européen de l'électricité, prix baissés de 30 à 50 %"
+  source: "pcf.fr, discours sur l'Union européenne (2025)"
+  traitement: "non chiffré : bénéfices d'EDF et d'Engie en moins (voir revenus_nationalisees), recettes de TVA en moins non comptées"
+- id: PCF-ENE-03
+  intitule: "Plus de nouveaux forages, sortie des fossiles en quinze ans"
+  source: "Fête de l'Humanité, septembre 2026"
+  traitement: "non chiffré : moyens non précisés"
+- id: PCF-SAN-01
+  intitule: "Soins prescrits remboursés à 100 %"
+  source: "programme-candidat.fr"
+  traitement: "roussel_mesures.cent_pour_cent"
+- id: PCF-SAN-02
+  intitule: "Recrutements massifs dans les hôpitaux publics, centres de santé municipaux"
+  source: "pcf.fr, municipales 2026"
+  traitement: "roussel_mesures.hopital"
+- id: PCF-EDU-01
+  intitule: "90 000 enseignants, classes de 20 élèves en primaire, pré-recrutement"
+  source: "pcf.fr, « Besoin de plus d'école »"
+  traitement: "roussel_mesures.enseignants"
+- id: PCF-EDU-02
+  intitule: "Fournitures, cantine et transports scolaires gratuits"
+  source: "pcf.fr, municipales 2026"
+  traitement: "roussel_mesures.gratuite_ecole"
+- id: PCF-EDU-03
+  intitule: "300 000 places de plus dans le supérieur"
+  source: "swipetonvote.fr"
+  traitement: "roussel_mesures.superieur"
+- id: PCF-EDU-04
+  intitule: "Budget de l'Éducation nationale +45 %, temps scolaire allongé"
+  source: "pcf.fr, « Besoin de plus d'école »"
+  traitement: "non chiffré : objectif d'ensemble (les mesures nommées sont chiffrées)"
+- id: PCF-SEC-01
+  intitule: "Police nationale de proximité : 30 000 postes"
+  source: "pcf.fr"
+  traitement: "roussel_mesures.police"
+- id: PCF-LOG-01
+  intitule: "200 000 logements sociaux par an, loyers encadrés"
+  source: "pcf.fr, municipales 2026"
+  traitement: "roussel_mesures.logement"
+- id: PCF-LOG-02
+  intitule: "APL revalorisées"
+  source: "pcf.fr"
+  traitement: "roussel_mesures.apl"
+- id: PCF-PRE-01
+  intitule: "RSA ouvert aux moins de 25 ans (transitoire)"
+  source: "pcf.fr"
+  traitement: "roussel_mesures.rsa_jeunes (jusqu'en 2032, puis la sécurité d'emploi)"
+- id: PCF-TRA-01
+  intitule: "Ferroviaire : +15 Md€ par an, petites lignes, fret doublé, billets −30 %, SNCF renationalisée"
+  source: "pcf.fr, discours UE 2025 ; « Le droit à la mobilité »"
+  traitement: "roussel_mesures.ferroviaire ; tonnes : roussel_ecologie.ferroviaire"
+- id: PCF-TRA-02
+  intitule: "Transports en commun gratuits partout (10 Md€ par an)"
+  source: "pcf.fr, « Le droit à la mobilité »"
+  traitement: "roussel_mesures.transports_gratuits ; tonnes"
+- id: PCF-TRA-03
+  intitule: "Aide de 10 000 € pour les véhicules peu polluants, 100 000 km de pistes cyclables"
+  source: "pcf.fr"
+  traitement: "roussel_mesures.vehicules ; pistes cyclables : non chiffrées"
+- id: PCF-SOC-01
+  intitule: "Ministère des Droits des femmes doté d'1 Md€, loi-cadre contre les violences"
+  source: "Fête de l'Humanité 2025"
+  traitement: "roussel_mesures.femmes"
+- id: PCF-COL-01
+  intitule: "DGF indexée sur l'inflation, clause de compétence générale rétablie"
+  source: "pcf.fr"
+  traitement: "non chiffré : transfert interne aux administrations publiques"
+- id: PCF-UE-01
+  intitule: "Rupture avec les traités, euro et BCE transformés, sortie du commandement intégré de l'OTAN"
+  source: "swipetonvote.fr"
+  traitement: "non chiffré"
+- id: PCF-DEF-01
+  intitule: "Critique des dépenses d'armement, pas de calendrier"
+  source: "Fête de l'Humanité, 12/09/2026"
+  traitement: "neutre : loi de programmation militaire du statu quo"
+- id: PCF-MIG-01
+  intitule: "Régularisation des travailleurs sans papiers"
+  source: "publicsenat.fr ; swipetonvote.fr"
+  traitement: "non chiffré (Mélenchon : +0,4 Md€ en prudent ; effet faible)"
+- id: PCF-INS-01
+  intitule: "Nouvelle République, proportionnelle, RIC"
+  source: "pcf.fr"
+  traitement: "non chiffré"
