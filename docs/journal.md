@@ -723,3 +723,12 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
   0,25 / 0,35 Md€ ; recette sans dépense affectée, donc sans coût à financer.
 - **Éducation et recherche** : canal d'offre de long terme (docs/offre.md), instruments `education` et `recherche`
   sur les mesures concernées de huit programmes.
+
+## 11 novembre 2026 — Phase 3 : candidats manquants, Rassemblement national
+
+- Liste des candidats absents du comparateur : docs/candidats_manquants.md (votons-2027.fr ; programmes-2027.fr
+  inaccessible depuis l'outil).
+- **Le Pen (RN), chiffrage partiel** : `programmes/le_pen/`, docs/le_pen.md. Contre-budget du 6/10/2026 non publié :
+  sources de seconde main. Aucune économie annoncée reprise ; obstacles juridiques documentés (Union européenne,
+  priorité nationale). Prudent 2037 : déficit 13,0 % (statu quo 9,5 %), émissions +8 Mt.
+- Comparateur : données de l'artifact non modifiables par l'outil tant qu'il est public ; fichiers téléversés.

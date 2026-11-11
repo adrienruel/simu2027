@@ -1,0 +1,326 @@
+# Programme de Marine Le Pen (Rassemblement national) : chiffrage sur le noyau (11 novembre 2026, phase 3).
+#
+# Programme partiel : le contre-budget du 6 octobre 2026 n'est pas publié en ligne ; sources : comptes rendus (Public
+# Sénat, Acteurs publics, AFP, LCP), mesures recensées par votons-2027.fr d'après rassemblementnational.fr,
+# FranceBudget (scénario RN 2027), Institut Montaigne (chiffrages de 2022 et de 2024). Fiche : mesures.yaml.
+#
+# Règles (décisions d'Adrien) : on ne reprend que les mesures, jamais les économies annoncées (140 Md€ nets en 2032 ;
+# immigration 15 puis 29 Md€, État 20,7, Union européenne 9, collectivités 8,2 puis 18, agences 3,4 puis 10, retraites
+# 15 à 20) ; une économie nommée est estimée (jamais mise à 0, sauf obstacle juridique documenté) ; le reste passe par
+# l'enveloppe déduite du programme domaine par domaine. Dépense : crise ≥ prudent ≥ médian ≥ optimiste ; recette :
+# l'inverse. Calendrier : tout à partir de la loi de finances 2028.
+
+le_pen_emploi:
+  cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
+  valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
+
+le_pen_macro:
+  multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+
+le_pen_retraites:
+  profil_62_ans:
+    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même profil que glucksmann_retraites.profil_62_ans (DREES, fiche 16, 2023, âge légal 62 ans, carrières longues de la loi d'avant 2023 : départ à 60 ans pour les carrières commencées avant 20 ans)"
+  annee:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+    note: "Débat du Medef (27/08/2026, France 24) : départ à 60 ans pour les entrées avant 20 ans, puis 42 annuités et âge légal de 62 ans ; c'est la loi d'avant 2023 (réforme Touraine gardée). Départs de 2028 (première loi de financement du quinquennat). Les « 15 à 20 Md€ d'économies à terme » par des « corrections de mesures injustes » (06/10/2026) et le « pilier de capitalisation » ne sont pas détaillés : non repris (retraites hors enveloppe, règle commune)."
+
+le_pen_enveloppe:
+  annonce:
+    valeur: 140
+    unite: md_eur
+    annee_euros: 2027
+    statut: SOURCE
+    source: "Contre-budget du 6 octobre 2026 (Public Sénat, AFP) : 140 Md€ d'économies nettes en 2032 par rapport à 2026"
+    note: "Sert seulement de plafond : l'effort retenu est déduit du programme domaine par domaine (enveloppe_economies.domaines × intensite, moins les économies déjà nommées), sans dépasser l'annonce."
+  intensite:
+    valeur: {etat: 1.0, operateurs: 1.0, collectivites: 1.0, sante: 0.0, prestations: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Contre-budget du 6/10/2026 : « la mère des réformes est la réorganisation de l'État » (État : cible principale, 20,7 Md€ annoncés), suppression de la quasi-totalité des agences (opérateurs : cible principale), collectivités 8,2 Md€ en 2027 puis 18 (cible principale) ; santé protégée (fin des fermetures de lits, soignants revalorisés) ; prestations : « priorité nationale » chiffrée à part (le_pen_mesures.priorite_nationale), corrections sociales citées."
+    note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
+  debut:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+  plein:
+    valeur: 2032
+    unite: sans_unite
+    statut: DECISION
+
+le_pen_mesures:
+  # ---------------------------------------------------------------- fiscalité et pouvoir d'achat
+  tva_energie:
+    valeur: {id: RN-FIS-01, instrument: consommation, libelle: "TVA de 20 % à 5,5 % sur les carburants, le fioul, le gaz et l'électricité", poste: recettes, moteur: "recette:tva", debut: 2028, plein: 2028,
+             montant: {crise: -14.0, prudent: -13.0, median: -12.0, optimiste: -11.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "rassemblementnational.fr (votons-2027.fr) ; chiffrages : 12,2 Md€ selon le parti, 17,4 Md€ calculés par FranceBudget (électricité et gaz seulement, carburants hors assiette, d'après sa page), ≈ 14 Md€ avec la TVA des produits essentiels (Public Sénat, contre-budget 2026)"
+    note: "Calcul : dépense des ménages TTC ≈ 50 Md€ de carburants, 40 Md€ d'électricité (TVA à 20 % sur tout depuis 2025), 12 Md€ de gaz, 3 Md€ de fioul ; 14,5 points de TVA sur la base hors taxe ≈ 6,0 + 4,8 + 1,45 + 0,4 ≈ 12,7 Md€ ; un peu plus avec les acheteurs qui ne déduisent pas la TVA (administrations, banques, santé), un peu moins si une partie de la baisse est captée par les marges. Recette : la perte la plus forte en crise."
+  tva_produits:
+    valeur: {id: RN-FIS-02, instrument: consommation, libelle: "TVA à 0 % sur une centaine de produits de première nécessité", poste: recettes, moteur: "recette:tva", debut: 2028, plein: 2028,
+             montant: {crise: -3.0, prudent: -2.5, median: -2.0, optimiste: -1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "rassemblementnational.fr ; contre-budget 2026 (taux zéro sur une liste de produits essentiels) ; liste non publiée"
+    note: "Encadrement : une centaine de produits alimentaires de base (≈ 25 Md€ de dépense à 5,5 %) et d'hygiène (≈ 5 Md€ à 20 %) : ≈ 1,3 + 0,8 Md€, plus si la liste est large. Exige une modification de la directive TVA (taux zéro limité) : comptée comme appliquée."
+  ir_jeunes:
+    valeur: {id: RN-FIS-03, instrument: travail, incidence: ir, libelle: "Impôt sur le revenu supprimé pour les moins de 30 ans (jusqu'à quatre SMIC)", poste: recettes, moteur: "recette:salaires_prive", debut: 2028, plein: 2028,
+             montant: {crise: -4.0, prudent: -3.7, median: -3.4, optimiste: -3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Institut Montaigne (2022, repris en 2024) : 3,65 à 3,7 Md€ par an ; LCP (06/10/2026) : plafond de quatre SMIC, 2 Md€ selon le parti"
+    note: "Montaigne 2022 revalorisé de l'inflation et des salaires (≈ +12 %) : ≈ 4,1 Md€ sans plafond ; le plafond de quatre SMIC retire les plus hauts revenus : 3 à 4 Md€. Risque constitutionnel (égalité devant l'impôt, Montaigne) : compté comme appliqué."
+  impots_production:
+    valeur: {id: RN-FIS-04, instrument: capital_entreprises, libelle: "CFE et C3S supprimées (CVAE déjà supprimée en 2030 au statu quo)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2030,
+             montant: {crise: -13.5, prudent: -13.0, median: -12.5, optimiste: -12.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "FranceBudget : CFE, CVAE et C3S, 17 Md€ ; contre-budget 2026 : 16,2 Md€ ; CFE ≈ 7,5 Md€ (collectivités, compensées par l'État), C3S ≈ 5,5 Md€ (Sécurité sociale) ; CVAE : suppression en 2030 déjà votée (statu_quo.cvae_taux_legaux)"
+    note: "Seules la CFE et la C3S comptent en plus du statu quo ; l'accélération de la fin de la CVAE (taux de 0,19 % en 2028 et 0,09 % en 2029) est à part (cvae_avancee)."
+  cvae_avancee:
+    valeur: {id: RN-FIS-04b, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 au lieu de 2030", poste: recettes, moteur: pib, debut: 2028, plein: 2028, fin: 2029,
+             montant: {crise: -1.7, prudent: -1.5, median: -1.4, optimiste: -1.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "statu_quo.cvae_rendement_2027 et cvae_taux_legaux : ≈ 8 Md€ au taux de 0,75 %, soit ≈ 2 Md€ en 2028 (0,19 %) et ≈ 1 Md€ en 2029 (0,09 %)"
+  ifi_iff:
+    valeur: {id: RN-FIS-05, instrument: capital_menages, libelle: "IFI remplacé par un impôt sur la fortune financière", poste: recettes, moteur: "recette:capital_dividendes_ifi", debut: 2028, plein: 2028,
+             montant: {crise: -1.0, prudent: -0.5, median: 0.0, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "swipetonvote.fr (programme RN) : impôt sur la fortune financière à la place de l'IFI, sans barème ; IFI ≈ 2,3 Md€ (Voies et moyens, PLF 2026)"
+    note: "Barème non donné. L'immobilier sort de l'assiette, les placements financiers y entrent (assiette plus mobile, biens professionnels sans doute exonérés) : rendement incertain, entre la perte de l'IFI et un léger gain."
+  successions:
+    valeur: {id: RN-FIS-06, instrument: successions, libelle: "Successions directes des familles modestes exonérées, donations de 100 000 € par enfant tous les dix ans, pacte Dutreil renforcé", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028,
+             montant: {crise: -2.2, prudent: -1.7, median: -1.3, optimiste: -0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Institut Montaigne, législatives 2024 : supprimer les impôts sur l'héritage pour les classes populaires et moyennes, 1 Md€ ; transmission des TPE, PME et ETI exonérée sous engagement de dix ans, 5,3 Md€ ; FranceBudget : « pacte Dutreil renforcé » (2026)"
+    note: "Classes modestes et donations ≈ 1 Md€ ; pacte Dutreil renforcé (et non la suppression totale de 2024) : 0,3 à 1 Md€ selon son contenu."
+  hausses_salaires:
+    valeur: {id: RN-EMP-01, instrument: cout_travail, libelle: "Hausses de salaire de 10 % jusqu'à trois SMIC exonérées de cotisations patronales pendant cinq ans", poste: recettes, moteur: pib, debut: 2028, plein: 2029, fin: 2033,
+             montant: {crise: -6.0, prudent: -5.0, median: -3.5, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Programmes de 2022 et de 2024, mesure constante (swipetonvote.fr) ; Institut Montaigne (2022) : 10,5 Md€ par an si toutes les entreprises l'appliquent"
+    note: "Mesure facultative pour les employeurs : une partie des hausses se ferait sans elle (effet d'aubaine, coût sans effet), une autre n'aura pas lieu. Part de Montaigne : 60 % (crise), 50 % (prudent), 35 % (médian), 20 % (optimiste). Exonération de cinq ans : fin en 2033."
+  primes_heures_sup:
+    valeur: {id: RN-EMP-02, instrument: travail, libelle: "Prime de pouvoir d'achat exonérée, heures supplémentaires défiscalisées davantage", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.6, prudent: -0.5, median: -0.4, optimiste: -0.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "candidats-presidentielle-2027.fr (programme RN) ; heures supplémentaires déjà exonérées d'impôt jusqu'à 7 500 € et de cotisations salariales (statu quo)"
+    note: "Extension au-delà du dispositif actuel, sans précision : quelques centaines de millions."
+  carbone_2017:
+    valeur: {id: RN-ENE-03, instrument: consommation, libelle: "Composante carbone ramenée à son niveau de 2017", poste: recettes, moteur: "recette:accises_et_taxes_sur_produits", debut: 2028, plein: 2028,
+             montant: {crise: -2.8, prudent: -2.6, median: -2.4, optimiste: -2.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "FranceBudget (scénario RN 2027) : composante carbone ramenée à son niveau de 2017 ; composante de 30,5 € par tonne en 2017 contre 44,6 € depuis 2018 ; recette de la composante carbone ≈ 8 à 9 Md€"
+    note: "−14 € par tonne sur 44,6 ≈ −31 % de la composante carbone : ≈ 2,5 Md€ ; un peu moins si les volumes montent (effet en tonnes : le_pen_ecologie.carbone_2017)."
+  # ---------------------------------------------------------------- retraites et social
+  petites_retraites:
+    valeur: {id: RN-RET-02, libelle: "Petites retraites revalorisées (minimum vieillesse à 1 000 € déjà atteint)", poste: retraites, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "rassemblementnational.fr : minimum vieillesse à 1 000 € par mois et petites retraites augmentées ; ASPA ≈ 1 034 € par mois pour une personne seule en 2025 (déjà au-dessus) ; réindexation des pensions sur l'inflation : déjà la règle du statu quo"
+    note: "Le minimum vieillesse et la réindexation ne coûtent rien contre le statu quo du modèle. Petites retraites, montant non précisé : 0,4 à 1 Md€ (≈ +20 € par mois pour 2 à 4 millions de retraités)."
+  meres_isolees:
+    valeur: {id: RN-FAM-01, libelle: "Soutien aux mères isolées doublé, contrôles renforcés", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2028,
+             montant: {crise: 1.5, prudent: 1.3, median: 1.1, optimiste: 0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "rassemblementnational.fr (votons-2027.fr, économie) : « doubler le soutien aux mères isolées » ; allocation de soutien familial ≈ 1,6 Md€ (Cnaf, après la hausse de 50 % de 2022)"
+    note: "Doublement de l'allocation de soutien familial, moins un peu de fraude évitée."
+  permis:
+    valeur: {id: RN-JEU-01, libelle: "Permis de conduire gratuit pour les jeunes", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 1.5, prudent: 1.3, median: 1.1, optimiste: 0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "LCP (06/10/2026) : permis de conduire gratuit ; ≈ 1 million de permis B par an (Sécurité routière), dont ≈ 700 000 à 800 000 jeunes, coût moyen ≈ 1 800 €"
+    note: "Prise en charge du coût de la formation pour les jeunes, moins les aides existantes (permis à 1 € par jour, apprentis, CPF) : 0,9 à 1,5 Md€."
+  priorite_nationale:
+    valeur: {id: RN-IMM-01, libelle: "« Priorité nationale » : prestations non contributives réservées aux Français ou conditionnées à des années de cotisation", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2029, plein: 2030,
+             montant: {crise: 0.0, prudent: -2.0, median: -4.0, optimiste: -6.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Contre-budget du 6/10/2026 : immigration 15 Md€ en 2027 et 29 Md€ en année pleine (non repris) ; candidats-presidentielle-2027.fr : prestations conditionnées à des années de cotisation ; référendum prévu sur l'immigration et la priorité nationale"
+    note: "Estimation propre : étrangers hors UE ≈ 10 à 15 % des allocataires du RSA, des aides au logement et des prestations familiales (Drees, Cnaf) ; une condition de durée de résidence ou de cotisation en exclut une partie. Crise : zéro (la mesure contrevient au principe d'égalité et au droit de l'UE ; elle suppose une révision constitutionnelle par référendum, incertaine) ; 2 à 6 Md€ sinon. Les effets sur l'emploi et les recettes d'une immigration plus faible ne sont pas comptés."
+  ame:
+    valeur: {id: RN-IMM-02, libelle: "AME remplacée par une aide médicale d'urgence", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
+             montant: {crise: -0.3, prudent: -0.4, median: -0.6, optimiste: -0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "AME ≈ 1,3 Md€ (PLF 2026) ; rapport Évin et Stefanini (2023) : une partie des soins se reporte sur les urgences hospitalières"
+    note: "Économie nette des soins reportés vers l'hôpital (soins urgents gardés) : 25 à 60 % de la dépense."
+  # ---------------------------------------------------------------- État, collectivités, agences (économies nommées, estimées)
+  postes:
+    valeur: {id: RN-ETA-01, libelle: "Agents non remplacés lors des départs en retraite (agences et collectivités)", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -3.3, prudent: -5.5, median: -5.5, optimiste: -5.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "FranceBudget (dossier du contre-budget) : 201 000 postes non renouvelés en 2032 (agences et collectivités) ; règle commune depuis la relecture neutre : 120 000 (crise), 200 000 (prudent), 300 000 (médian), 400 000 (optimiste), plafonnés à l'annonce ; 55 000 € par poste"
+    note: "120 000, puis 200 000 postes plafonnés aux 201 000 annoncés. Moitié dans l'État et ses opérateurs (ici), moitié dans les collectivités (postes_collectivites)."
+  postes_collectivites:
+    valeur: {id: RN-ETA-01, libelle: "Agents non remplacés : collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: -3.3, prudent: -5.5, median: -5.5, optimiste: -5.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement (moitié) ; Acteurs publics (06/10/2026) : ajustement des effectifs des collectivités 3,75 Md€ d'ici 2031 (annonce, non reprise)"
+  agences:
+    valeur: {id: RN-ETA-02, libelle: "Suppression de la quasi-totalité des agences de l'État, fusion de l'Urssaf et de la DGFiP", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2031,
+             montant: {crise: -0.5, prudent: -1.0, median: -1.8, optimiste: -2.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Contre-budget : 3,4 Md€ en 2027, plus de 10 Md€ en 2031, fusion Urssaf-DGFiP 1,72 Md€ en 2031 (annonces, non reprises) ; commission d'enquête du Sénat (2025) : ≈ 0,5 Md€ sans supprimer de politiques publiques ; Cour des comptes : suppressions de 2025-2026 ≈ 0,5 Md€"
+    note: "Même encadrement que philippe_mesures.agences (0,5 à 2 Md€), plus la fusion Urssaf-DGFiP (0 à 0,7 Md€ : coûts de transition, gains de recouvrement incertains). Les missions des agences supprimées (Ademe, Anah, ANR) sont reprises en partie par l'État."
+  temps_travail_fpt:
+    valeur: {id: RN-COL-01, libelle: "35 heures appliquées dans la fonction publique territoriale", poste: collectivites, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: -0.3, prudent: -0.6, median: -0.9, optimiste: -1.3}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Acteurs publics (06/10/2026) : 1,3 Md€ en fin de quinquennat (annonce) ; Cour des comptes (2016, 2021) : durée du travail sous 1 607 heures dans de nombreuses collectivités, loi de transformation de la fonction publique de 2019 déjà appliquée en partie"
+    note: "Gain en postes non remplacés à service égal, en partie déjà obtenu depuis la loi de 2019 : 25 à 100 % de l'annonce."
+  competences_intercos:
+    valeur: {id: RN-COL-02, libelle: "Intercommunalités et métropoles supprimées, compétences appliquées strictement", poste: collectivites, moteur: pib, debut: 2029, plein: 2032,
+             montant: {crise: 0.2, prudent: -0.3, median: -0.8, optimiste: -1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Acteurs publics (06/10/2026) : intercommunalités et métropoles supprimées, 1,25 Md€ d'ici 2031 après 25 M€ de coût la première année ; compétences strictes 2,1 Md€ (annonces) ; Cour des comptes (2023) : les intercommunalités n'ont pas produit d'économies d'échelle nettes"
+    note: "Réorganisation coûteuse au début (transferts de personnels et de biens) ; gain incertain : un léger coût en crise, jusqu'à 1,5 Md€ en optimiste."
+  union_europeenne:
+    valeur: {id: RN-UE-01, libelle: "Contribution au budget de l'Union européenne réduite", poste: defense_ue, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.0, prudent: 0.0, median: -1.0, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Contre-budget : 9 Md€ (contribution nette ramenée à ≈ 5 Md€, annonce non reprise) ; décision relative aux ressources propres : contribution fixée à l'unanimité pour 2028-2034 (cadre financier pluriannuel), une baisse unilatérale serait une infraction"
+    note: "Obstacle juridique documenté : zéro en crise et en prudent ; une baisse négociée (rabais) de 1 à 2 Md€ en médian et en optimiste."
+  fraude_fiscale:
+    valeur: {id: RN-FIS-07, libelle: "Lutte contre la fraude fiscale, douanes et DGCCRF renforcées", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 0.3, prudent: 0.5, median: 1.5, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "FranceBudget : 4 Md€ annoncés pour 2027 (non repris) ; même estimation que tondelier_mesures.fraude et melenchon (fraude et évasion fiscales)"
+  # ---------------------------------------------------------------- dépenses nouvelles
+  recherche:
+    valeur: {id: RN-REC-01, instrument: recherche, libelle: "Recherche publique : crédits relevés", poste: etat_missions, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 9.0, prudent: 9.0, median: 8.0, optimiste: 7.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "FranceBudget (scénario RN 2027, d'après le contre-budget) : +9 Md€ de recherche publique ; montant de la mesure, à vérifier dans le document du contre-budget"
+  renovation:
+    valeur: {id: RN-LOG-01, libelle: "« 100 % Rénov' » : rénovation des logements", poste: logement, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 3.8, prudent: 3.8, median: 3.5, optimiste: 3.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "FranceBudget (scénario RN 2027) : « 100 % Rénov' », +3,8 Md€ ; contenu non détaillé (aides à la rénovation, sans doute à la place d'une partie de MaPrimeRénov')"
+  securite:
+    valeur: {id: RN-SEC-01, libelle: "Policiers et gendarmes recrutés par dizaines de milliers", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
+             montant: {crise: 1.4, prudent: 1.1, median: 0.9, optimiste: 0.7}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "candidats-presidentielle-2027.fr : « dizaines de milliers » de policiers et de gendarmes (nombre non précisé)"
+    note: "≈ 20 000 postes en plus du statu quo × 55 000 € ≈ 1,1 Md€ ; 13 000 à 25 000 selon le scénario."
+  prisons:
+    valeur: {id: RN-SEC-02, libelle: "85 000 places de prison", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.8, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "rassemblementnational.fr (votons-2027.fr, sécurité) : 85 000 places en 2027 ; programme « 15 000 places » du statu quo (≈ 75 000 places visées) ; coût d'une place ≈ 150 000 à 200 000 € (Cour des comptes)"
+    note: "≈ 10 000 places de plus que le statu quo sur cinq ans (≈ 0,35 Md€ d'investissement par an) plus leur fonctionnement (≈ 40 000 € par détenu et par an, montée progressive)."
+  sante:
+    valeur: {id: RN-SAN-01, libelle: "Fin des fermetures de lits et de maternités, soignants revalorisés, maisons médicales de garde", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2030,
+             montant: {crise: 2.0, prudent: 1.5, median: 1.2, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "candidats-presidentielle-2027.fr (programme RN, santé) ; montants non précisés"
+    note: "Revalorisation ciblée et lits maintenus : 0,8 à 2 Md€ par an au-delà de l'Ondam du statu quo."
+  education:
+    valeur: {id: RN-EDU-01, instrument: education, libelle: "Soutien scolaire gratuit, métier d'enseignant revalorisé", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
+             montant: {crise: 2.0, prudent: 1.5, median: 1.2, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "candidats-presidentielle-2027.fr (programme RN, éducation) ; montants non précisés"
+    note: "Revalorisation non chiffrée : la moitié environ de celles d'Attal et de Retailleau (4,8 à 6,5 Md€), plus le soutien scolaire (≈ 0,3 Md€)."
+
+# ---------------------------------------------------------------- effets en tonnes (phase 3, 11/11/2026)
+# Même méthode que tondelier_ecologie (moteur/ecologie/emissions.profil, lu par ProgrammeSimple.mesures_ecologie).
+# Négatif : émissions évitées. Prudence : dans le prudent, l'effet favorable au climat est le plus faible.
+le_pen_ecologie:
+  tva_energie:
+    valeur: {id: RN-FIS-01, libelle: "TVA à 5,5 % sur l'énergie : carburants, gaz et fioul moins chers", secteur: transports, debut: 2028, plein: 2032, effet_mt: {crise: 6.0, prudent: 5.0, median: 3.5, optimiste: 2.5}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Labandeira et al. (Energy Policy, 2017, méta-analyse) : élasticité-prix de long terme de l'énergie ≈ −0,3 à −0,6 (−0,6 dans ecologie.reponse_prix) ; Citepa, Secten 2026 : voitures particulières ≈ 64 Mt, chauffage au gaz et au fioul des logements ≈ 35 Mt"
+    note: "Prix TTC −12 % pour les ménages (la TVA des entreprises est déductible). Voitures : +3,6 à +7 % de consommation, soit +2,3 à +4,5 Mt ; logements : +1,3 à +2,5 Mt. Total ≈ +3,5 à +7 Mt : 6 (crise), 5 (prudent), 3,5 (médian), 2,5 (optimiste). Classé dans les transports (majorité de l'effet)."
+  carbone_2017:
+    valeur: {id: RN-ENE-03, libelle: "Composante carbone ramenée à son niveau de 2017", secteur: transports, debut: 2028, plein: 2032, effet_mt: {crise: 0.8, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même élasticité que tva_energie ; −14 € par tonne ≈ −3,5 c par litre de carburant (≈ −2 %)"
+  eolien:
+    valeur: {id: RN-ENE-02, libelle: "Moratoire sur l'éolien terrestre et démontage progressif des parcs", secteur: energie, debut: 2029, plein: 2037, suit_intensite: false, effet_mt: {crise: 6.0, prudent: 4.0, median: 2.0, optimiste: 1.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "RTE, Bilan prévisionnel 2023-2035 : éolien terrestre ≈ 50 TWh en 2025, ≈ 90 TWh visés en 2035 par la PPE3 ; nouveaux réacteurs pas avant la fin des années 2030"
+    note: "Production perdue (parcs démontés et non construits) : ≈ 60 à 90 TWh vers 2035, compensée surtout par moins d'exportations (émissions évitées à l'étranger, non comptées) et par du gaz en France en pointe : 1 à 6 Mt vers 2037, jusqu'à l'arrivée des réacteurs neufs (non modélisée : effet gardé constant). Plus fort que la seule fin du soutien aux renouvelables de Retailleau et Lisnard (0,3 à 2,5 Mt)."
+  renovation:
+    valeur: {id: RN-LOG-01, libelle: "« 100 % Rénov' »", secteur: batiments, debut: 2028, plein: 2050, effet_mt: {crise: -1.05, prudent: -1.26, median: -2.24, optimiste: -3.85}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que glucksmann_ecologie.maprimerenov (Anah 2024, ≈ 25 000 € d'aide par rénovation d'ampleur)"
+    note: "3,8 Md€ par an ≈ 150 000 rénovations de plus par an, ≈ 3,5 millions en 2050 × 0,3 / 0,36 / 0,64 / 1,1 t (tonne par rénovation × part additionnelle)."

@@ -1,0 +1,202 @@
+# Programme de Marine Le Pen (Rassemblement national) : fiche des mesures (11 novembre 2026, phase 3)
+
+programme:
+  candidat: Marine Le Pen
+  parti: Rassemblement national
+  document: contre-budget et trajectoire financière du quinquennat (06/10/2026, non publié en ligne), site rassemblementnational.fr
+  recensement: votons-2027.fr (programmes-2027.fr inaccessible depuis l'outil le 11/11/2026), candidats-presidentielle-2027.fr (illustratif), swipetonvote.fr, FranceBudget
+  date_lecture: '2026-11-11'
+  avertissement: programme partiel ; à refaire à la publication du programme complet et du document du contre-budget
+mesures:
+- id: RN-ECO-00
+  intitule: "140 Md€ d'économies nettes en 2032 par rapport à 2026 (dont 30 Md€ de baisses d'impôts et 15 Md€ de droits nouveaux)"
+  source: "Contre-budget, 06/10/2026 (Public Sénat, AFP)"
+  traitement: "déduit du programme domaine par domaine (le_pen_enveloppe ; le chiffre du candidat sert seulement de plafond)"
+- id: RN-ECO-01
+  intitule: "Règle d'or adoptée par référendum (déficit plafonné au niveau qui stabilise la dette)"
+  source: "LCP, 02/10/2026"
+  traitement: "non chiffré : règle de pilotage"
+- id: RN-FIS-01
+  intitule: "TVA de 20 % à 5,5 % sur les carburants, le fioul, le gaz et l'électricité"
+  source: "rassemblementnational.fr"
+  traitement: "le_pen_mesures.tva_energie ; tonnes : le_pen_ecologie.tva_energie"
+- id: RN-FIS-02
+  intitule: "TVA à 0 % sur une centaine de produits de première nécessité"
+  source: "rassemblementnational.fr ; contre-budget 2026"
+  traitement: "le_pen_mesures.tva_produits"
+- id: RN-FIS-03
+  intitule: "Impôt sur le revenu supprimé pour les moins de 30 ans (jusqu'à quatre SMIC)"
+  source: "rassemblementnational.fr ; LCP, 06/10/2026"
+  traitement: "le_pen_mesures.ir_jeunes"
+- id: RN-FIS-04
+  intitule: "CFE, CVAE et C3S supprimées"
+  source: "FranceBudget ; contre-budget 2026"
+  traitement: "le_pen_mesures.impots_production et cvae_avancee (CVAE déjà supprimée en 2030 au statu quo)"
+- id: RN-FIS-05
+  intitule: "IFI remplacé par un impôt sur la fortune financière"
+  source: "swipetonvote.fr (programme RN)"
+  traitement: "le_pen_mesures.ifi_iff"
+- id: RN-FIS-06
+  intitule: "Successions des familles modestes exonérées, donations de 100 000 € tous les dix ans, pacte Dutreil renforcé"
+  source: "swipetonvote.fr ; FranceBudget"
+  traitement: "le_pen_mesures.successions"
+- id: RN-FIS-07
+  intitule: "Lutte contre la fraude fiscale (4 Md€ annoncés en 2027)"
+  source: "FranceBudget"
+  traitement: "le_pen_mesures.fraude_fiscale (estimation commune, annonce non reprise)"
+- id: RN-FIS-08
+  intitule: "Suppression de plus de 120 « petites taxes »"
+  source: "Acteurs publics, 06/10/2026"
+  traitement: "non chiffré : liste non publiée"
+- id: RN-FIS-09
+  intitule: "Flat tax à 30 %, suramortissement"
+  source: "FranceBudget"
+  traitement: "non chiffré : contenu non précisé (prélèvement forfaitaire déjà à 30 % au statu quo)"
+- id: RN-FIS-10
+  intitule: "Taxe sur les superprofits"
+  source: "FranceBudget"
+  traitement: "non chiffré : absente du contre-budget du 06/10/2026"
+- id: RN-EMP-01
+  intitule: "Hausses de salaire de 10 % jusqu'à trois SMIC exonérées de cotisations patronales (trois à cinq ans)"
+  source: "programmes de 2022 et de 2024"
+  traitement: "le_pen_mesures.hausses_salaires"
+- id: RN-EMP-02
+  intitule: "Prime de pouvoir d'achat exonérée, heures supplémentaires défiscalisées"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "le_pen_mesures.primes_heures_sup"
+- id: RN-EMP-03
+  intitule: "Annulation de la réforme de l'assurance chômage de juillet 2024"
+  source: "programme des législatives 2024"
+  traitement: "neutre : réforme jamais appliquée (décret suspendu en 2024)"
+- id: RN-EMP-04
+  intitule: "Priorité nationale à l'embauche dans les entreprises aidées"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "non chiffré"
+- id: RN-RET-01
+  intitule: "Réforme de 2023 abrogée : 62 ans et 42 annuités, 60 ans pour les carrières commencées avant 20 ans"
+  source: "débat du Medef, 27/08/2026"
+  traitement: "calculé : programme.retraites (bib.baisse_age_legal_detail), emploi des seniors"
+- id: RN-RET-02
+  intitule: "Minimum vieillesse à 1 000 €, petites retraites augmentées, pensions réindexées sur l'inflation"
+  source: "rassemblementnational.fr"
+  traitement: "le_pen_mesures.petites_retraites (minimum vieillesse et réindexation déjà au statu quo)"
+- id: RN-RET-03
+  intitule: "15 à 20 Md€ d'économies sur les retraites par des « corrections de mesures injustes », pilier de capitalisation"
+  source: "contre-budget, 06/10/2026"
+  traitement: "non chiffré : non détaillé (retraites hors enveloppe, règle commune)"
+- id: RN-FAM-01
+  intitule: "Soutien aux mères isolées doublé, contrôles renforcés"
+  source: "rassemblementnational.fr"
+  traitement: "le_pen_mesures.meres_isolees"
+- id: RN-FAM-02
+  intitule: "Soutien aux familles"
+  source: "FranceBudget"
+  traitement: "non chiffré : contenu non précisé"
+- id: RN-JEU-01
+  intitule: "Permis de conduire gratuit"
+  source: "LCP, 06/10/2026"
+  traitement: "le_pen_mesures.permis"
+- id: RN-IMM-01
+  intitule: "Référendum sur l'immigration, priorité nationale sur les prestations (prestations conditionnées à des années de cotisation)"
+  source: "contre-budget (15 Md€ en 2027, 29 en année pleine) ; candidats-presidentielle-2027.fr"
+  traitement: "le_pen_mesures.priorite_nationale (estimation propre, annonce non reprise)"
+- id: RN-IMM-02
+  intitule: "AME remplacée par une aide médicale d'urgence"
+  source: "FranceBudget ; candidats-presidentielle-2027.fr"
+  traitement: "le_pen_mesures.ame"
+- id: RN-IMM-03
+  intitule: "Regroupement familial supprimé, droit du sol remis en cause, expulsions"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "non chiffré : effets sur l'emploi et les recettes non comptés"
+- id: RN-ETA-01
+  intitule: "Agents non remplacés (≈ 201 000 postes en 2032, agences et collectivités)"
+  source: "FranceBudget (dossier du contre-budget)"
+  traitement: "le_pen_mesures.postes et postes_collectivites (règle commune plafonnée à l'annonce)"
+- id: RN-ETA-02
+  intitule: "Quasi-totalité des agences supprimées (3,4 Md€ en 2027, 10 en 2031), fusion Urssaf-DGFiP (1,72 Md€)"
+  source: "Acteurs publics ; Public Sénat"
+  traitement: "le_pen_mesures.agences (estimation propre)"
+- id: RN-ETA-03
+  intitule: "Réorganisation de l'État (20,7 Md€ dès 2027) : TVA centralisée, fin de la reconduction automatique des crédits"
+  source: "Public Sénat, 06/10/2026"
+  traitement: "enveloppe (domaine État, cible principale)"
+- id: RN-COL-01
+  intitule: "Collectivités : 8,2 Md€ en 2027, 18 en fin de quinquennat ; 35 heures dans la territoriale (1,3 Md€)"
+  source: "Public Sénat ; Acteurs publics"
+  traitement: "le_pen_mesures.temps_travail_fpt ; le reste : enveloppe (collectivités, cible principale)"
+- id: RN-COL-02
+  intitule: "Intercommunalités et métropoles supprimées, compétences strictes"
+  source: "Acteurs publics"
+  traitement: "le_pen_mesures.competences_intercos"
+- id: RN-UE-01
+  intitule: "Contribution au budget de l'Union européenne réduite de 9 Md€"
+  source: "contre-budget"
+  traitement: "le_pen_mesures.union_europeenne (obstacle juridique : zéro en prudent)"
+- id: RN-UE-02
+  intitule: "Primauté du droit national, suspension de Schengen, priorité nationale dans les marchés publics"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "non chiffré"
+- id: RN-DEF-01
+  intitule: "Défense à 55 Md€ en 2027"
+  source: "rassemblementnational.fr"
+  traitement: "neutre : niveau de la loi de programmation militaire du statu quo"
+- id: RN-DEF-02
+  intitule: "Sortie du commandement intégré de l'OTAN"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "non chiffré"
+- id: RN-SEC-01
+  intitule: "Policiers et gendarmes recrutés par dizaines de milliers"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "le_pen_mesures.securite"
+- id: RN-SEC-02
+  intitule: "85 000 places de prison"
+  source: "rassemblementnational.fr"
+  traitement: "le_pen_mesures.prisons"
+- id: RN-SEC-03
+  intitule: "Peines planchers, fin des remises de peine automatiques, légitime défense"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "non chiffré : coût en places de prison compris dans RN-SEC-02"
+- id: RN-ENE-01
+  intitule: "Nucléaire relancé : 6 à 14 réacteurs"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "hors solde : financement par EDF ; pas d'effet en tonnes avant 2050"
+- id: RN-ENE-02
+  intitule: "Moratoire sur l'éolien terrestre et démontage des parcs"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "tonnes : le_pen_ecologie.eolien ; budget : pas d'effet compté (soutien public des parcs existants déjà engagé)"
+- id: RN-ENE-03
+  intitule: "Composante carbone ramenée au niveau de 2017"
+  source: "FranceBudget"
+  traitement: "le_pen_mesures.carbone_2017 ; tonnes : le_pen_ecologie.carbone_2017"
+- id: RN-LOG-01
+  intitule: "« 100 % Rénov' »"
+  source: "FranceBudget"
+  traitement: "le_pen_mesures.renovation ; tonnes : le_pen_ecologie.renovation"
+- id: RN-REC-01
+  intitule: "Recherche publique relevée (+9 Md€)"
+  source: "FranceBudget"
+  traitement: "le_pen_mesures.recherche (instrument recherche)"
+- id: RN-SAN-01
+  intitule: "Fin des fermetures de lits et de maternités, soignants revalorisés, maisons médicales de garde"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "le_pen_mesures.sante"
+- id: RN-SAN-02
+  intitule: "Médicaments stratégiques relocalisés"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "non chiffré"
+- id: RN-EDU-01
+  intitule: "Soutien scolaire gratuit, métier d'enseignant revalorisé, uniforme, méthode syllabique"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "le_pen_mesures.education (instrument education) ; uniforme : non chiffré"
+- id: RN-INS-01
+  intitule: "RIC, proportionnelle intégrale, révision constitutionnelle"
+  source: "candidats-presidentielle-2027.fr"
+  traitement: "non chiffré"
+- id: RN-ECO-02
+  intitule: "Protectionnisme ciblé, moratoire sur les accords de libre-échange, taxe carbone aux frontières"
+  source: "swipetonvote.fr"
+  traitement: "non chiffré"
+- id: RN-ECO-03
+  intitule: "Concessions autoroutières reprises, audiovisuel public privatisé en partie"
+  source: "FranceBudget"
+  traitement: "non chiffré : modalités non précisées (rachat ou fin des concessions, recettes de cession)"
