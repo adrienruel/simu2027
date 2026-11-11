@@ -116,34 +116,57 @@ class ProgrammeSimple:
 
     # ------------------------------------------------------------------ économies annoncées sans mesures
     def enveloppe_economies(self, p: Parametres, s: str, idx: dict, liste: list[Mesure]) -> list[Mesure]:
-        """Économies annoncées mais non détaillées (groupe <nom>_enveloppe), chiffrées par une règle commune et jamais
-        par le chiffre du candidat (décision d'Adrien du 11/11/2026) : effort en points de PIB du scénario
-        (enveloppe_economies.points_pib, précédents français), plafonné par ce qui reste de l'annonce une fois déduites
-        les économies de dépense déjà nommées et chiffrées (pas de double compte). Réparti entre postes selon ce que dit
-        le candidat (repartition), montée de debut à plein."""
-        cle = f"{self.nom}_enveloppe.annonce"
-        if cle not in self.pt._p:
+        """Économies annoncées mais non détaillées, déduites du programme domaine par domaine (décision d'Adrien du
+        11/11/2026), jamais du chiffre du candidat.
+
+        Pour chaque domaine de dépense (enveloppe_economies.domaines : État, opérateurs, collectivités, santé,
+        prestations), capacité d'économie en fin de quinquennat tirée des précédents (Md€ de 2026, par scénario) ×
+        intensité que le programme lui donne (<nom>_enveloppe.intensite : 0 si le domaine n'est pas visé ou est
+        protégé, 0,5 s'il est cité, 1 s'il est une cible principale), moins les économies déjà nommées et chiffrées
+        dans ce domaine (pas de double compte, plancher à 0). Le total ne dépasse pas l'annonce du candidat
+        (<nom>_enveloppe.annonce), qui ne sert que de plafond. Montée de debut à plein."""
+        if f"{self.nom}_enveloppe.intensite" not in self.pt._p:
             return []
+        dom = p.val("enveloppe_economies.domaines")
+        inten = self.v("enveloppe.intensite")
         annonce = self.v("enveloppe.annonce")
-        rep = self.v("enveloppe.repartition")
         d0, d1 = int(self.v("enveloppe.debut")), int(self.v("enveloppe.plein"))
         y = sq.pib(p, s)
-        nommees = -sum(min(0.0, m.valeurs.get(d1, 0.0)) for m in liste
-                       if m.poste != "recettes" and m.nature != "effet_macro")
-        reste = max(0.0, annonce - nommees)
-        effort = min(sq._v(p, "enveloppe_economies.points_pib", s) / 100 * y[d1], reste)
+        # économies déjà nommées par poste (dépenses en moins à l'année pleine, hors effets économiques)
+        nommees: dict[str, float] = {}
+        for m in liste:
+            if m.poste != "recettes" and m.nature != "effet_macro":
+                nommees[m.poste] = nommees.get(m.poste, 0.0) - min(0.0, m.valeurs.get(d1, 0.0))
+        # domaines regroupés par ensemble de postes (État et opérateurs partagent le poste etat_missions)
+        groupes: dict[tuple, list[str]] = {}
+        for nom_d, d in dom.items():
+            groupes.setdefault(tuple(sorted(d["postes"])), []).append(nom_d)
+        retenu, detail = {}, {}
+        for postes, noms in groupes.items():
+            cap = {n: dom[n]["capacite"][s] * inten.get(n, 0.0) for n in noms}
+            deja = sum(nommees.get(x, 0.0) for x in postes)
+            reste = max(0.0, sum(cap.values()) - deja)
+            for n in noms:
+                retenu[n] = reste * cap[n] / sum(cap.values()) if sum(cap.values()) > 0 else 0.0
+            detail[" + ".join(noms)] = {"capacite": sum(cap.values()), "deja_nommees": deja, "retenu": reste}
+        total = sum(retenu.values())
+        k = min(1.0, max(0.0, annonce - sum(nommees.values())) / total) if total > 0 else 0.0
         self.enveloppe_detail = getattr(self, "enveloppe_detail", {})
-        self.enveloppe_detail[(id(p), s)] = {"annonce": annonce, "nommees": nommees, "reste": reste, "retenu": effort}
+        self.enveloppe_detail[(id(p), s)] = {"domaines": detail, "nommees": sum(nommees.values()),
+                                              "retenu": total * k, "plafond_annonce": total > 0 and k < 1.0}
 
         def mont(t):
             return min(1.0, max(0.0, (t - d0 + 1) / (d1 - d0 + 1)))
-        tot = sum(rep.values())
         out = []
-        for poste, part in rep.items():
-            v = -effort * part / tot
-            out.append(Mesure(f"Économies annoncées non détaillées ({poste}) : règle commune, pas le chiffre du candidat",
-                              poste, {**{t: v * mont(t) for t in ANNEES_AVANT},
-                                      **{t: v * mont(t) * y[t] / y[d1] for t in ANNEES}}, note="enveloppe"))
+        for n, v in retenu.items():
+            if v * k <= 0:
+                continue
+            postes = dom[n]["postes"]
+            for poste, part in postes.items():
+                w = -v * k * part
+                out.append(Mesure(f"Économies annoncées non détaillées : {dom[n]['libelle']} ({poste})", poste,
+                                  {**{t: w * mont(t) for t in ANNEES_AVANT},
+                                   **{t: w * mont(t) * y[t] / y[d1] for t in ANNEES}}, note="enveloppe"))
         return out
 
     # ------------------------------------------------------------------ à compléter par chaque programme

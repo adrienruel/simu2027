@@ -873,9 +873,30 @@ capacite:
 
 # --- Économies annoncées sans mesures (11 novembre 2026) ---------------------------------------------------
 enveloppe_economies:
-  points_pib:
-    valeur: {crise: 0.0, prudent: 0.3, median: 0.6, optimiste: 1.0}
-    unite: points_de_pib
+  domaines:
+    valeur:
+      etat:
+        libelle: "fonctionnement et interventions de l'État hors régalien"
+        postes: {etat_missions: 1.0}
+        capacite: {crise: 2.0, prudent: 5.0, median: 9.0, optimiste: 14.0}
+      operateurs:
+        libelle: "agences et opérateurs"
+        postes: {etat_missions: 1.0}
+        capacite: {crise: 0.3, prudent: 1.0, median: 2.0, optimiste: 4.0}
+      collectivites:
+        libelle: "collectivités (dotations, normes)"
+        postes: {collectivites: 1.0}
+        capacite: {crise: 1.0, prudent: 3.0, median: 5.0, optimiste: 8.0}
+      sante:
+        libelle: "santé (Ondam au-delà de la régulation du statu quo)"
+        postes: {sante: 1.0}
+        capacite: {crise: 1.0, prudent: 3.0, median: 6.0, optimiste: 9.0}
+      prestations:
+        libelle: "prestations sociales hors retraites (ciblage, revalorisations)"
+        postes: {pauvrete: 0.5, famille: 0.25, logement: 0.25}
+        capacite: {crise: 1.0, prudent: 3.0, median: 6.0, optimiste: 10.0}
+    unite: md_eur
+    annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement par les précédents français : RGPP 2007-2012 ≈ 0,4 point de PIB d'économies sur l'État en cinq ans (Cour des comptes, 2012) ; plan de 50 Md€ 2015-2017 : économies réelles par rapport à l'évolution tendancielle ≈ 1 point de PIB, dont une partie due à l'inflation basse et aux taux (Cour des comptes, situation et perspectives des finances publiques 2016 et 2017) ; le non-détaillé se réalise peu (FMI, Fiscal Monitor 2023 : plans de consolidation sans mesures identifiées)"
-    note: "Décision d'Adrien du 11/11/2026 : une économie annoncée et non détaillée est estimée, jamais par le chiffre du candidat. Effort en plus des mesures nommées, en points de PIB atteints en fin de quinquennat (année « plein » du programme), plafonné par ce qui reste de l'annonce une fois les économies nommées déduites. Même règle pour tous les candidats ; crise : rien de plus que les mesures nommées."
+    source: "Capacité d'économie en fin de quinquennat, au-delà du statu quo, par domaine (toutes économies, nommées ou non), d'après les précédents français : État : RGPP 2007-2012 ≈ 7 à 10 Md€ (Cour des comptes, 2012), plan de 50 Md€ 2015-2017, volet État et agences 18 Md€ annoncés, réalisés en partie (Cour des comptes, 2017) ; opérateurs : ≈ 80 Md€ de dépenses, rationalisation de 2025-2026 ≈ 0,5 Md€ ; collectivités : baisse de la DGF de 2014-2017 ≈ 11 Md€, absorbée surtout par l'investissement ; santé : Ondam tenu à 1,75-2 % en 2015-2017, ≈ 3 à 4 Md€ d'économies par an déjà comptées par le statu quo (régulation) ; prestations : sous-revalorisation de 2019-2020 ≈ 3 à 5 Md€ (hors retraites)"
+    note: "Décision d'Adrien du 11/11/2026 : les économies non détaillées sont déduites du programme (domaines qu'il vise : <nom>_enveloppe.intensite), domaine par domaine, moins ce que le programme chiffre déjà dans ce domaine ; jamais le chiffre du candidat, qui ne sert que de plafond. Retraites et assurance chômage hors enveloppe : leurs réformes sont des mesures nommées."

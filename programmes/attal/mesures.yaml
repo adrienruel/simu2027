@@ -32,7 +32,7 @@ mesures:
   intitule: Frein d'urgence de 20 Md€, 150 Md€ d'économies, Sécurité sociale à l'équilibre en trois ans, déficit sous 3 %
     avant 2032
   source: Lettre aux Français sur les finances publiques, p. 1, 15/10/2026
-  traitement: 'estimé par la règle commune des économies non détaillées (attal_enveloppe, enveloppe_economies : 0 / 0,3 / 0,6 / 1 point de PIB, plafonné par le reste de l''annonce ; le chiffre du candidat n''est pas repris)'
+  traitement: 'déduit du programme domaine par domaine (attal_enveloppe.intensite × enveloppe_economies.domaines, moins les économies déjà nommées ; le chiffre du candidat sert seulement de plafond)'
 - id: ATT-FIS-02
   intitule: Pas de hausse d'impôts, retour sur plusieurs taxes votées depuis 2024, baisse des impôts de production poursuivie,
     loi de programmation fiscale

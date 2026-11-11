@@ -173,12 +173,13 @@ bertrand_enveloppe:
     annee_euros: 2027
     statut: SOURCE
     source: "L'Opinion (19/08/2026) : 20 Md€ d'économies par an pendant cinq ans"
-    note: "Sert seulement de plafond (règle commune enveloppe_economies, décision d'Adrien du 11/11/2026) : l'effort retenu est celui des précédents, en points de PIB, sans dépasser ce qui reste de l'annonce une fois les économies nommées déduites."
-  repartition:
-    valeur: {etat_missions: 0.4, collectivites: 0.2, pauvrete: 0.2, famille: 0.1, logement: 0.1}
+    note: "Sert seulement de plafond : l'effort retenu est déduit du programme domaine par domaine (enveloppe_economies.domaines × intensite, moins les économies déjà nommées), sans dépasser l'annonce."
+  intensite:
+    valeur: {etat: 0.5, operateurs: 0.5, collectivites: 0.5, sante: 0.0, prestations: 0.5}
     unite: sans_unite
     statut: HYPOTHESE
-    note: "Santé exclue, comme le dit le candidat ; le reste réparti entre l'État, les collectivités et les prestations."
+    source: "L'Opinion (19/08/2026) : 20 Md€ par an sans répartition ; santé exclue par le candidat ; les autres domaines comptés comme cités, sans cible principale."
+    note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
   debut:
     valeur: 2028
     unite: sans_unite

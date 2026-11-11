@@ -11,7 +11,7 @@ mesures:
 - id: PHI-ECO-01
   intitule: Déficit ramené de plus de 5 % à 2 % du PIB (50 % social, 25 % État et collectivités, 25 % croissance)
   source: Site (« Pour une France plus prospère »)
-  traitement: 'estimé par la règle commune des économies non détaillées (philippe_enveloppe, enveloppe_economies : 0 / 0,3 / 0,6 / 1 point de PIB, plafonné par le reste de l''annonce ; le chiffre du candidat n''est pas repris)'
+  traitement: 'déduit du programme domaine par domaine (philippe_enveloppe.intensite × enveloppe_economies.domaines, moins les économies déjà nommées ; le chiffre du candidat sert seulement de plafond)'
 - id: PHI-ECO-02
   intitule: 'Moratoire : ni nouvelle norme ni nouvel impôt'
   source: Site (« Pour une France plus prospère »)

@@ -318,12 +318,13 @@ attal_enveloppe:
     annee_euros: 2027
     statut: SOURCE
     source: "Lettre aux Français sur les finances publiques (15/10/2026) : 150 Md€ d'économies sur le quinquennat, dont 20 Md€ de « frein d'urgence » dès l'élection"
-    note: "Sert seulement de plafond (règle commune enveloppe_economies, décision d'Adrien du 11/11/2026) : l'effort retenu est celui des précédents, en points de PIB, sans dépasser ce qui reste de l'annonce une fois les économies nommées déduites."
-  repartition:
-    valeur: {sante: 0.25, pauvrete: 0.15, famille: 0.05, logement: 0.05, etat_missions: 0.3, collectivites: 0.2}
+    note: "Sert seulement de plafond : l'effort retenu est déduit du programme domaine par domaine (enveloppe_economies.domaines × intensite, moins les économies déjà nommées), sans dépasser l'annonce."
+  intensite:
+    valeur: {etat: 1.0, operateurs: 0.5, collectivites: 0.5, sante: 1.0, prestations: 0.5}
     unite: sans_unite
     statut: HYPOTHESE
-    note: "Répartition non publiée : moitié sur la protection sociale (hors retraites, réformées à part), moitié sur l'État et les collectivités."
+    source: "Lettre du 15/10/2026 et site : Sécurité sociale à l'équilibre en trois ans (santé : cible principale), frein d'urgence sur la dépense de l'État (État : cible principale), un échelon de collectivités et des doublons supprimés (collectivités : cité), année blanche des prestations (prestations : cité, déjà en partie chiffré), opérateurs non nommés à part (cité au titre des doublons)."
+    note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
   debut:
     valeur: 2028
     unite: sans_unite

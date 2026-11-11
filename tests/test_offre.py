@@ -200,17 +200,22 @@ def test_contrainte_de_capacite(p):
     assert c[2030] == brut[2030] and c[2031] == brut[2031]
 
 
-def test_economies_non_detaillees_regle_commune(p):
-    """Décision du 11/11/2026 : économies annoncées non détaillées estimées par une règle commune (points de PIB du
-    scénario), jamais par le chiffre du candidat, plafonnées par le reste de l'annonce ; rien en crise."""
+def test_economies_non_detaillees_deduites_du_programme(p):
+    """Décision du 11/11/2026 : économies annoncées non détaillées déduites du programme, domaine par domaine
+    (capacité des précédents × intensité que le programme donne au domaine, moins les économies déjà nommées dans ce
+    domaine), jamais par le chiffre du candidat ; plus d'économies dans les scénarios favorables ; un domaine protégé
+    par le candidat (santé chez Bertrand) n'en reçoit pas."""
     for nom in ("attal", "philippe", "retailleau", "lisnard", "bertrand"):
         g = noyau.charger(nom)
         g.mesures(p)
         d = {s: g.enveloppe_detail[(id(p), s)] for s in sq.SCENARIOS}
-        assert d["crise"]["retenu"] == 0
-        assert d["prudent"]["retenu"] <= d["median"]["retenu"] <= d["optimiste"]["retenu"] <= d["optimiste"]["reste"]
-        y = sq.pib(p, "prudent")[int(g.v("enveloppe.plein"))]
-        assert d["prudent"]["retenu"] == pytest.approx(min(0.003 * y, d["prudent"]["reste"]), rel=1e-6)
+        assert d["crise"]["retenu"] <= d["prudent"]["retenu"] <= d["median"]["retenu"] <= d["optimiste"]["retenu"], nom
+        assert d["optimiste"]["retenu"] <= g.v("enveloppe.annonce"), nom
+        for s, x in d.items():
+            for dom, v in x["domaines"].items():
+                assert v["retenu"] == pytest.approx(max(0.0, v["capacite"] - v["deja_nommees"])), (nom, s, dom)
+    b = noyau.charger("bertrand")
+    assert not [m for m in b.mesures(p)["prudent"] if m.note == "enveloppe" and m.poste == "sante"]
     # sans enveloppe : rien (Zemmour : plan Knafo détaillé ligne à ligne)
     z = noyau.charger("zemmour")
     assert not [m for m in z.mesures(p)["prudent"] if m.note == "enveloppe"]

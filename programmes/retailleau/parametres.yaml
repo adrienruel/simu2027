@@ -372,12 +372,13 @@ retailleau_enveloppe:
     annee_euros: 2027
     statut: SOURCE
     source: "Public Sénat (12/10/2026) : plan de 197 Md€ d'ici 2032 : 96 Md€ sur l'État, 91 sur la sphère sociale, 10 sur les collectivités"
-    note: "Sert seulement de plafond (règle commune enveloppe_economies, décision d'Adrien du 11/11/2026) : l'effort retenu est celui des précédents, en points de PIB, sans dépasser ce qui reste de l'annonce une fois les économies nommées déduites."
-  repartition:
-    valeur: {etat_missions: 0.49, sante: 0.2, pauvrete: 0.15, famille: 0.06, logement: 0.05, collectivites: 0.05}
+    note: "Sert seulement de plafond : l'effort retenu est déduit du programme domaine par domaine (enveloppe_economies.domaines × intensite, moins les économies déjà nommées), sans dépasser l'annonce."
+  intensite:
+    valeur: {etat: 1.0, operateurs: 1.0, collectivites: 0.5, sante: 0.5, prestations: 1.0}
     unite: sans_unite
     statut: HYPOTHESE
-    note: "Répartition du candidat : État 49 %, social 46 %, collectivités 5 %."
+    source: "Public Sénat (12/10/2026) : 96 Md€ sur l'État (cible principale), la plupart des agences supprimées (cible principale), 91 Md€ sur la sphère sociale, surtout les prestations (revenu d'incitation, plafond des aides, cinq ans de résidence : cible principale) et les arrêts maladie (santé : citée), 10 Md€ sur les collectivités (citées)."
+    note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
   debut:
     valeur: 2028
     unite: sans_unite

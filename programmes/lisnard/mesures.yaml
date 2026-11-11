@@ -11,7 +11,7 @@ mesures:
 - id: LIS-ECO-01
   intitule: Dépense publique −80 Md€ la première année, puis au moins −200 Md€
   source: Fiche « Questions », 03/10/2026
-  traitement: 'estimé par la règle commune des économies non détaillées (lisnard_enveloppe, enveloppe_economies : 0 / 0,3 / 0,6 / 1 point de PIB, plafonné par le reste de l''annonce ; le chiffre du candidat n''est pas repris)'
+  traitement: 'déduit du programme domaine par domaine (lisnard_enveloppe.intensite × enveloppe_economies.domaines, moins les économies déjà nommées ; le chiffre du candidat sert seulement de plafond)'
 - id: LIS-ECO-02
   intitule: 120 Md€ rendus aux actifs par la baisse des cotisations (≈ 400 € net par mois), 40 Md€ aux impôts de production,
     40 Md€ à la dette

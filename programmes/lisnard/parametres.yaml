@@ -322,12 +322,13 @@ lisnard_enveloppe:
     annee_euros: 2027
     statut: SOURCE
     source: "Fiche « Questions » (03/10/2026) : 80 Md€ de dépense en moins la première année, puis au moins 200 Md€ (agences, bureaucratie, dépense sociale)"
-    note: "Sert seulement de plafond (règle commune enveloppe_economies, décision d'Adrien du 11/11/2026) : l'effort retenu est celui des précédents, en points de PIB, sans dépasser ce qui reste de l'annonce une fois les économies nommées déduites."
-  repartition:
-    valeur: {etat_missions: 0.35, collectivites: 0.15, sante: 0.2, pauvrete: 0.15, famille: 0.08, logement: 0.07}
+    note: "Sert seulement de plafond : l'effort retenu est déduit du programme domaine par domaine (enveloppe_economies.domaines × intensite, moins les économies déjà nommées), sans dépasser l'annonce."
+  intensite:
+    valeur: {etat: 1.0, operateurs: 1.0, collectivites: 0.5, sante: 0.5, prestations: 1.0}
     unite: sans_unite
     statut: HYPOTHESE
-    note: "Moitié sur l'État et les collectivités (agences, bureaucratie), moitié sur la dépense sociale."
+    source: "Fiches « Questions » et Le livre noir : agences (moitié des 1 200 supprimées) et bureaucratie (cibles principales), dépense sociale (allocation unique plafonnée : prestations, cible principale ; ARS et convergence tarifaire : santé, citée), provinces (collectivités, citées) ; dépense publique ramenée à 45 % du PIB en dix ans."
+    note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
   debut:
     valeur: 2028
     unite: sans_unite
