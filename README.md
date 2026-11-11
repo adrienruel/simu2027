@@ -17,7 +17,7 @@ Menu : résumé rapide, tableau de bord (recalculé puis ouvert dans le navigate
 pip install pyyaml pytest openpyxl
 pip install openfisca-france   # seulement pour régénérer les tables du système actuel
 python -m pytest
-python -m moteur.simulation   # déficits des quatre scénarios, avant et après la clause
+python -m moteur.noyau          # « Écologie de droite » sur le noyau : mesures, déficits avec et sans la règle de trajectoire
 python -m outils.cibles_crise  # (LibreOffice) recalcule la crise de la v235 en pleine précision
 python -m outils.openfisca_actuel   # tables OpenFisca du système actuel (privé, public)
 python -m outils.openfisca_menages  # ménages types, système actuel

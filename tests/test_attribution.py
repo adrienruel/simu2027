@@ -2,7 +2,7 @@
 import pytest
 
 from moteur.attribution import attribuer, mesures, variante
-from moteur.macro import calculer
+from moteur import noyau
 from moteur.parametres import ErreurParametre, Parametres
 
 P = Parametres()
@@ -52,10 +52,10 @@ def test_interactions_limitees():
 
 
 def test_sans_clause_egale_avant_clause_la_premiere_annee():
-    avec = calculer(P)["prudent"]
-    sans = calculer(P.avec({"clause.active": False}))["prudent"]
-    assert -sans.maastricht[2029] == pytest.approx(avec.detail["clause"][2029]["avant"], abs=1e-12)
-    assert all(sans.clause[t] == 0 for t in sans.clause)
+    avec = noyau.resultats(P, ("prudent",))["prudent"]
+    sans = noyau.resultats(P.avec({"clause.active": False}), ("prudent",))["prudent"]
+    assert sans[2029]["deficit"] == pytest.approx(avec[2029]["deficit_sans_regle"], abs=1e-9)
+    assert all("regle" not in sans[t] for t in sans)
 
 
 def test_registre_identifiants_uniques():

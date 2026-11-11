@@ -818,8 +818,8 @@ def ecart(programme: dict, statu_quo: dict, avant_regle: bool = False) -> dict[s
         out[s] = {}
         for t, x in statu_quo[s].items():
             pr = programme[s][t]
-            d_pr = pr["deficit_avant_clause"] if (avant_regle and "deficit_avant_clause" in pr) else pr["deficit"]
-            # solde primaire : solde + intérêts réels (moteur du programme : charge_dette ; noyau : interets_reels)
+            d_pr = pr["deficit_sans_regle"] if (avant_regle and "deficit_sans_regle" in pr) else pr["deficit"]
+            # solde primaire : solde + intérêts réels (noyau : interets_reels)
             sp_pr = (pr["solde"] + pr.get("interets_reels", pr["charge_dette"])) / pr["pib"] * 100
             out[s][t] = {"deficit": d_pr - x["deficit"], "solde_primaire": sp_pr - x["solde_primaire"] / x["pib"] * 100,
                          "dette_pib": pr["dette_pib"] - x["dette_pib"],
@@ -856,9 +856,10 @@ if __name__ == "__main__":
     (RACINE / "sorties" / "statu_quo.json").write_text(
         json.dumps({s: {str(t): x for t, x in v.items()} for s, v in sq.items()}, ensure_ascii=False, indent=1), encoding="utf-8")
     if "--ecart" in sys.argv:
-        from .simulation import simuler as simuler_programme
-        e = ecart(simuler_programme(p), sq)
-        ea = ecart(simuler_programme(p), sq, avant_regle=True)
+        from . import noyau
+        res_prog = noyau.resultats(p)
+        e = ecart(res_prog, sq)
+        ea = ecart(res_prog, sq, avant_regle=True)
         print("\nÉcart programme − statu quo : solde primaire (points de PIB, + = meilleur) ; déficit sans règle ; chômage (points)")
         for s in e:
             print(f"  {s:<10}" + "  ".join(f"{t} : {e[s][t]['solde_primaire']:+.2f} ; {ea[s][t]['deficit']:+.2f} ; {e[s][t]['chomage']:+.1f}"

@@ -18,7 +18,7 @@ import json
 import random
 from pathlib import Path
 
-from .macro import calculer
+from . import noyau
 from .parametres import Parametres
 
 ANNEES_CLES = (2029, 2032, 2037, 2050)
@@ -52,10 +52,10 @@ def tirage(p: Parametres, rng: random.Random, cles: list[str]) -> tuple[Parametr
     return c, tire
 
 
-def _mesure(p: Parametres) -> dict:
-    sc = calculer(p)["prudent"]
-    return {t: {"deficit": -sc.maastricht[t] * 100, "dette_pib": sc.dette_pib[t] * 100,
-                "chomage": sc.detail["chomage"][t] * 100} for t in ANNEES_CLES}
+def _mesure(p: Parametres, scenario: str = "prudent") -> dict:
+    """Déficit, dette et chômage d'un scénario du programme sur le noyau commun (12/11/2026)."""
+    res = noyau.simuler(p, noyau.charger(p.programme), scenarios=(scenario,))[scenario]
+    return {t: {"deficit": res[t]["deficit"], "dette_pib": res[t]["dette_pib"], "chomage": res[t]["chomage"]} for t in ANNEES_CLES}
 
 
 def _quantile(xs: list[float], q: float) -> float:
@@ -74,7 +74,7 @@ def simuler(n: int = 300, graine: int = 2029, p: Parametres | None = None) -> di
         c, tire = tirage(p, rng, cles)
         tirages.append({"tirage": tire, "resultat": _mesure(c)})
     prudent = _mesure(p)
-    crise = _mesure(p.en_crise())
+    crise = _mesure(p, "crise")
     resume = {}
     for t in ANNEES_CLES:
         for g in ("deficit", "dette_pib", "chomage"):

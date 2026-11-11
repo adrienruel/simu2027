@@ -18,10 +18,10 @@ from pathlib import Path
 
 import yaml
 
-from .macro import ANNEES, calculer
+from . import noyau
 from .mesures import registre as registre_economies
+from .noyau import ANNEES
 from .parametres import PROGRAMME_DEFAUT, Parametres, dossier_programme
-from .trajectoire_annuelle import lignes
 
 def mesures(programme: str = PROGRAMME_DEFAUT) -> list[dict]:
     """Le registre complet du programme : entrées de registre_lois.yaml, puis une entrée par économie datée."""
@@ -43,18 +43,29 @@ def variante(p: Parametres, m: dict) -> Parametres:
 
 
 def _etat(p: Parametres, scenario: str = "prudent") -> dict:
-    sc = calculer(p)[scenario]
-    reg = lignes(p)
+    """Comptes d'un scénario du programme sur le noyau, sans règle de trajectoire (p porte clause.active = False).
+
+    statique : mesures budgétaires (lignes du budget, périmètre) ; économie : effets sur l'activité, mesure par
+    mesure (effets et écarts de méthode) et dynamiques du noyau (fonds)."""
+    prog = noyau.charger(p.programme)
+    res = noyau.simuler(p, prog, scenarios=(scenario,))[scenario]
+    mes = prog.mesures(p)[scenario]
     out = {}
     for t in ANNEES:
-        statique = sum(reg.effet_sur_solde(k, t) for k in reg.lignes)
-        canaux = {k: v for k, v in sc.detail["canaux"][t].items() if k != "clause"}
-        clause = sc.clause[t]
-        pib = sc.detail["pib_reference"][t] + sc.pib_effet[t]
+        statique, canaux = 0.0, {}
+        for m in mes:
+            if m.nature == "physique" or m.poste == "participations":
+                continue
+            v = (1 if m.poste == "recettes" else -1) * m.valeurs.get(t, 0.0)
+            if m.nature in ("budget", "perimetre", "mesure", "classement", "detail"):
+                statique += v
+            else:
+                canaux[m.nom] = canaux.get(m.nom, 0.0) + v
+        canaux["Fonds : capital, rendements, créances"] = res[t]["dynamiques"]["fonds"]["solde"]
         out[t] = {"statique": statique, "economie": sum(canaux.values()), "canaux": canaux,
-                  "dette_interets": -sc.charge_dette[t], "solde_avant_clause": sc.solde_public[t] - clause,
-                  "deficit_avant_clause": (sc.detail["clause"][t]["avant"] if "clause" in sc.detail else -sc.maastricht[t]) * 100,
-                  "pib": pib, "chomage": sc.detail["chomage"][t] * 100, "emplois": sc.emplois[t]}
+                  "dette_interets": -res[t]["charge_dette"], "solde_avant_clause": res[t]["solde"],
+                  "deficit_avant_clause": res[t]["deficit"],
+                  "pib": res[t]["pib"], "chomage": res[t]["chomage"], "emplois": res[t]["emploi"]}
     return out
 
 

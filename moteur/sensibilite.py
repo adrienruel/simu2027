@@ -12,7 +12,7 @@ from __future__ import annotations
 import copy
 import dataclasses
 
-from .macro import calculer
+from . import noyau
 from .parametres import Parametres
 
 ANNEES_CLES = (2029, 2032, 2037, 2050)
@@ -70,8 +70,9 @@ def _cibles(x) -> list[tuple]:
 
 
 def _mesure(p: Parametres) -> dict:
-    sc = calculer(p)["prudent"]
-    return {t: (sc.solde_public[t], -sc.maastricht[t] * 100) for t in ANNEES_CLES}
+    """Solde (Md€) et déficit (points de PIB) du prudent du programme sur le noyau commun (12/11/2026)."""
+    res = noyau.simuler(p, noyau.charger(p.programme), scenarios=("prudent",))["prudent"]
+    return {t: (res[t]["solde"], res[t]["deficit"]) for t in ANNEES_CLES}
 
 
 def sensibilites(p: Parametres | None = None, statuts=("HYPOTHESE",), k: float = 1.1) -> list[dict]:

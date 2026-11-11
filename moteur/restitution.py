@@ -10,37 +10,18 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
+from . import noyau
+from .noyau import ANNEES
 from .parametres import Parametres
-from .simulation import ORDRE, simuler
+
+ORDRE = ("crise", "prudent", "median", "optimiste")
 
 RACINE = Path(__file__).resolve().parent.parent
-
-LIBELLES_CANAUX = {
-    "emploi": "Emplois créés (RUI économisé, impôt, TVA)",
-    "ajustement_budgetaire": "Ajustement budgétaire (multiplicateur)",
-    "capital_du_fonds": "Capital du fonds souverain",
-    "logement": "Logement",
-    "erosion_is": "Érosion de l'assiette de l'IS",
-    "fraude_tva": "Fraude à la TVA récupérée",
-    "fin_aides_construction": "Fin des aides à la construction",
-    "productivite": "Productivité",
-    "reactions_impot": "Réactions à l'impôt",
-    "ia": "Intelligence artificielle",
-    "tendance_et_ecole": "Croissance tendancielle et école",
-    "investissement_entreprises": "Investissement des entreprises",
-    "sante": "Santé (écart au prudent, TVA santé)",
-    "carbone": "Carbone",
-    "eviction_epargne": "Éviction de l'épargne volontaire",
-    "clause": "Clause de trajectoire",
-    "demographie": "Démographie (écart au prudent)",
-    "permis_rapide": "Permis rapide (capital privé, coût des services)",
-    "salaires_dirigeants": "Dirigeants de petites sociétés payés en salaire",
-    "emplois_fonds": "Emplois du capital du fonds (chômage d'équilibre)",
-}
 
 POSTES = [("recettes", "Recettes"), ("sante", "Santé"), ("retraites", "Retraites"), ("rui_aah", "RUI et AAH"),
           ("investissement", "Investissement"), ("autres", "Autres dépenses"), ("charge_dette", "Charge de la dette (réelle)"),
           ("solde", "Solde public")]
+# libellés des canaux économiques : ce sont les noms des mesures d'effet du programme (publiés tels quels)
 
 
 def _version() -> str:
@@ -57,25 +38,38 @@ def _r(x: float, n: int = 4) -> float:
 
 def donnees(p: Parametres | None = None) -> dict:
     p = p or Parametres()
-    res = simuler(p)
+    prog = noyau.charger(p.programme)
+    res = noyau.simuler(p, prog)
+    from . import statu_quo as sq
     annees = sorted(res["prudent"])
     scen = [s for s in ORDRE if s in res]
-    series = {}
+    series, libelles_canaux = {}, {}
     for s in scen:
         b = res[s]
+        emploi_sq = sq.effectifs(p, s)
+        canaux = prog.canaux_publies(p, s, b)
+        libelles_canaux.update({k: k for k in canaux})
+        pp = {t: prog.postes_publies(b[t]) for t in annees}
         series[s] = {
             "deficit": [_r(b[t]["deficit"]) for t in annees],
             "dette_pib": [_r(b[t]["dette_pib"], 3) for t in annees],
             "chomage": [_r(b[t]["chomage"]) for t in annees],
             "pib": [_r(b[t]["pib"], 2) for t in annees],
-            "emplois": [round(b[t]["emplois_supplementaires"]) for t in annees],
-            "postes": {k: [_r(b[t][k], 3) for t in annees] for k, _ in POSTES},
-            "canaux": {k: [_r(b[t]["canaux"][k], 3) for t in annees] for k in LIBELLES_CANAUX},
+            "emplois": [round(b[t]["emploi"] - emploi_sq[t]["emploi"]) for t in annees],
+            "postes": {k: [_r(pp[t][k], 3) for t in annees] for k, _ in POSTES},
+            "canaux": {k: [_r(v[t], 3) for t in annees] for k, v in canaux.items()},
         }
-        if "deficit_avant_clause" in b[annees[0]]:
-            series[s]["deficit_avant_clause"] = [_r(b[t]["deficit_avant_clause"]) for t in annees]
-            series[s]["clause"] = {k: [_r(b[t]["clause_detail"][k], 3) for t in annees]
-                                   for k in ("etalement", "contribution", "points", "rui", "rui_euros", "reste")}
+        if "regle" in b[annees[0]]:
+            series[s]["deficit_avant_clause"] = [_r(b[t]["deficit_sans_regle"]) for t in annees]
+            r = {t: b[t]["regle"] for t in annees}
+            ct, ru = "Contribution d'épargne retraite", "Baisse du revenu universel"
+            series[s]["clause"] = {
+                "etalement": [_r(r[t]["automatiques"], 3) for t in annees],
+                "contribution": [_r(r[t]["leviers"][ct], 3) for t in annees],
+                "points": [_r(r[t]["details"][ct]["points"], 3) for t in annees],
+                "rui": [_r(r[t]["leviers"][ru], 3) for t in annees],
+                "rui_euros": [_r(r[t]["details"][ru]["euros"], 3) for t in annees],
+                "reste": [_r(r[t]["reste_a_couvrir"], 3) for t in annees]}
     # 2027-2028, avant la bascule : communes à tous les scénarios (moteur/calendrier.py ; chômage sans le programme)
     from .calendrier import annees_2027_2028
     avant_ = annees_2027_2028(p)
@@ -87,14 +81,16 @@ def donnees(p: Parametres | None = None) -> dict:
                      "deficit": [_r(avant_[t]["deficit"]) for t in (2027, 2028)],
                      "dette_pib": [_r(avant_[t]["dette_pib"] * 100, 3) for t in (2027, 2028)],
                      "chomage": [_r((ch_[t]["taux"] if ch_ else p.val("chomage.taux_2026")) * 100) for t in (2027, 2028)]}
-    from .trajectoire_annuelle import lignes as lignes_traj
+    import importlib
+    lignes_traj = importlib.import_module(f"programmes.{p.programme}.budget").lignes
     registres = {"prudent": lignes_traj(p), "crise": lignes_traj(p.en_crise())}
     for s in scen:
         reg = registres["crise" if s == "crise" else "prudent"]
         series[s]["lignes"] = [{"cle": x["cle"], "libelle": x["libelle"], "poste": x["poste"], "nature": x["nature"],
                                 "valeurs": [_r(x["valeurs"].get(t, 0.0), 3) for t in annees]}
                                for x in reg.lignes.values() if any(abs(v) > 1e-6 for v in x["valeurs"].values())]
-        series[s]["postes"]["transferts_collectivites"] = [_r(res[s][t]["transferts_collectivites"], 3) for t in annees]
+        from .calendrier import transferts_collectivites
+        series[s]["postes"]["transferts_collectivites"] = [_r(transferts_collectivites(p), 3) for t in annees]
     from .attribution import attribuer
     att = attribuer(p)
     cles = ("solde_avant_clause", "statique", "economie", "dette_interets", "deficit_avant_clause", "chomage")
@@ -172,10 +168,8 @@ def donnees(p: Parametres | None = None) -> dict:
                                    "depenses_ancien": [round(sa[t]["depenses_md"]) for t in jalons],
                                    "nouveau": [round(rn[t] / 1e6, 2) for t in jalons],
                                    "socle": [round(cs[t]) for t in jalons]}
-        from .macro import calculer as _calc
-        _f = _calc(p)["prudent"].detail.get("fonds")
-        if _f:
-            population["fonds"] = {k: [round(_f[t][k]) for t in jalons] for k in ("encours_comptes", "capital", "rentes")}
+        _f = {t: res["prudent"][t]["dynamiques"]["fonds"] for t in jalons}
+        population["fonds"] = {k: [round(_f[t].get(k, 0.0)) for t in jalons] for k in ("encours_comptes", "capital", "rentes")}
         from .carrieres import actif as _car_actif, resume as _car_resume
         if _car_actif(p):
             population["carrieres"] = {j: {k: [_car_resume(p, j, jalons)[t][k] for t in jalons]
@@ -202,7 +196,7 @@ def donnees(p: Parametres | None = None) -> dict:
         "annees": annees,
         "scenarios": scen,
         "series": series,
-        "libelles_canaux": LIBELLES_CANAUX,
+        "libelles_canaux": libelles_canaux,
         "postes": POSTES,
         "attribution": attribution,
         "incertitude": incertitude,

@@ -76,7 +76,7 @@ if "%CHOIX%"=="0" exit /b 0
 goto menu
 
 :resume
-"%VPY%" -m moteur.simulation
+"%VPY%" -m moteur.noyau
 goto fin
 
 :tableau

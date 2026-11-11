@@ -1,5 +1,5 @@
-"""Noyau commun (moteur/noyau.py) : programme vide = statu quo ; « Écologie de droite » rebranché sur le noyau
-retrouve exactement les résultats de son propre moteur."""
+"""Noyau commun (moteur/noyau.py) : programme vide = statu quo ; « Écologie de droite » tourne sur le même noyau que
+les autres programmes (plus de moteur propre depuis le 12/11/2026) ; règle de trajectoire et dynamiques génériques."""
 
 import pytest
 
@@ -38,22 +38,48 @@ def test_poste_et_contexte_inconnus(p):
     noyau.trajectoire(p, "prudent", [Mesure("essai", "nouveau:revenu", {2030: 1.0})])  # bloc nouveau admis
 
 
+def test_regle_generique_du_noyau(p):
+    """Règle et dynamique génériques : un levier de 5 Md€ de capacité, une cible de 3 % ; les comptes publient le
+    déficit avec et sans règle, et un levier plus grand que l'écart s'arrête à la cible."""
+    from moteur.noyau import Levier, Regle
+
+    class Rien:
+        def debut(self, t, etat):
+            return {"pib": 0.0}
+
+        def fin(self, t, etat):
+            pass
+    base = noyau.trajectoire(p, "prudent")
+    cible = 0.03
+    petit = Regle(cible, [Levier("petit", lambda t, e: 5.0)])
+    grand = Regle(cible, [Levier("grand", lambda t, e: 1e6)])
+    r1 = noyau.trajectoire(p, "prudent", regle=petit, dynamiques=[Rien()])
+    r2 = noyau.trajectoire(p, "prudent", regle=Regle(cible, grand.leviers), dynamiques=[Rien()])
+    assert r1[2029]["deficit_sans_regle"] == pytest.approx(base[2029]["deficit"])
+    if base[2029]["deficit"] > 3.0 + 5.0 / base[2029]["pib"] * 100:
+        assert r1[2029]["regle"]["leviers"]["petit"] == pytest.approx(5.0)
+        assert r1[2029]["deficit"] == pytest.approx(base[2029]["deficit"] - 5.0 / base[2029]["pib"] * 100)
+    assert r2[2029]["deficit"] == pytest.approx(min(base[2029]["deficit"], 3.0), abs=1e-6)
+    assert all(r2[t]["deficit"] <= r2[t]["deficit_sans_regle"] + 1e-9 for t in ANNEES)
+
+
+def test_ecologie_de_droite_sur_le_noyau_sans_moteur_propre(p):
+    """Le programme n'appelle plus aucun moteur : le noyau l'exécute avec ses mesures, un fonds (dynamique) et la
+    règle de trajectoire. Chaque scénario publie les deux déficits ; la règle ramène à 3 % ou s'épuise."""
+    import importlib
+    for mod in ("moteur.macro", "moteur.simulation", "moteur.trajectoire_annuelle"):
+        with pytest.raises(ModuleNotFoundError):
+            importlib.import_module(mod)
+    r = noyau.resultats(p)
+    for s in sq.SCENARIOS:
+        assert "deficit_sans_regle" in r[s][2029] and "fonds" in r[s][2037]["dynamiques"]
+        assert r[s][2037]["deficit"] <= 3.0 + 1e-3 or r[s][2037]["regle"]["reste_a_couvrir"] > 0
+
+
 @pytest.fixture(scope="module")
 def ed(p):
     prog = noyau.charger("ecologie_de_droite")
-    return prog, noyau.simuler(p, prog), prog.resultats_moteur(p)
-
-
-def test_ecologie_de_droite_reproduite_par_le_noyau(p):
-    """Pont exact (tout lu dans le moteur du programme) : mêmes résultats à 1e-9 près."""
-    from programmes.ecologie_de_droite.programme import programme
-    prog = programme(recalcul_noyau=False, energie=False)  # le canal de l'énergie des entreprises n'est pas dans le moteur
-    r, ref = noyau.simuler(p, prog), prog.resultats_moteur(p)
-    for s in sq.SCENARIOS:
-        for t in ANNEES:
-            assert r[s][t]["deficit"] == pytest.approx(ref[s][t]["deficit"], abs=1e-9)
-            assert r[s][t]["dette_pib"] == pytest.approx(ref[s][t]["dette_pib"], abs=1e-9)
-            assert r[s][t]["interets_reels"] == pytest.approx(ref[s][t]["charge_dette"], abs=1e-6)
+    return prog, noyau.simuler(p, prog), None
 
 
 def test_bilan_des_mesures(ed, p):
@@ -61,10 +87,11 @@ def test_bilan_des_mesures(ed, p):
     b = noyau.bilan_mesures(prog, p)
     natures = {x["nature"] for x in b}
     assert {"budget", "effet_macro"} <= natures
-    # le budget du programme et ses effets macro expliquent tout l'écart de solde primaire avec le statu quo
+    # le budget du programme, ses effets, le fonds et la règle expliquent tout l'écart de solde primaire avec le statu quo
     base = sq.simuler(p)["prudent"]
     for t in (2029, 2050):
-        effet = sum(x[t] for x in b)
+        effet = sum(x[t] for x in b) + r["prudent"][t]["dynamiques"]["fonds"]["solde"]
+        effet += r["prudent"][t]["regle"]["gain"]
         assert effet == pytest.approx(r["prudent"][t]["solde_primaire"] - base[t]["solde_primaire"], abs=1e-6)
 
 
@@ -81,21 +108,6 @@ def test_perimetre_aligne_sans_effet_sur_le_solde(ed, p):
     assert 200 < c["depenses"] < 260 and c["ressources"] == pytest.approx(c["depenses"] - c["besoin_financement"])
     e = ecart_de_depart(p)
     assert abs(e["Recettes"]) < 250
-    # contrôles : rien de non réparti entre les recettes du programme et ses instruments
-    for m in prog.mesures(p)["prudent"]:
-        if m.nature == "controle":
-            assert max(abs(v) for v in m.valeurs.values()) < 1e-6
-
-
-def test_recalcul_noyau_des_salaries(p):
-    """Deuxième passe : impôt unique et TVA des salariés recalculés sur les cellules du noyau, l'effet du programme sur
-    les naissances isolé. Les cellules du noyau retrouvent celles du programme : écart de déficit sous 0,1 point (hors
-    canal de l'énergie des entreprises, absent du moteur)."""
-    from programmes.ecologie_de_droite.programme import programme
-    prog = programme(energie=False)
-    r, ref = noyau.simuler(p, prog), prog.resultats_moteur(p)
-    for t in (2029, 2037, 2050, 2073):
-        assert abs(r["prudent"][t]["deficit"] - ref["prudent"][t]["deficit"]) < 0.1
 
 
 def test_programmes_disponibles():

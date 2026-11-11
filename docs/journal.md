@@ -735,3 +735,61 @@ chômage et de taux de la crise démarre après le point de départ commun de 20
 - **Roussel (PCF)** : `programmes/roussel/`, docs/roussel.md. Programme 2027 non publié : discours de 2025-2026.
   Nouveau dans le noyau : PIB hors emploi (`pib_en_plus`) pour les heures perdues des 32 heures. Prudent 2037 :
   déficit 29,6 % (statu quo 9,5 %), solde primaire −9,1 points, PIB −4,5 %.
+
+## 12 novembre 2026 — « Écologie de droite » sur le noyau commun, plus aucun moteur propre
+
+DÉCISION d'Adrien : « change mon programme pour qu'il tourne sur le même moteur, je ne veux aucun moteur ». Trois
+choix : effets propres recodés en mesures ; clause de trajectoire en règle générique du noyau (publiée avec et sans
+règle) ; ancien moteur supprimé tout de suite, avec ses tests de reproduction de la v235.
+
+**Ce qui change dans le code**
+- Supprimés : `moteur/macro.py`, `moteur/trajectoire_annuelle.py`, `moteur/simulation.py`, `tests/test_macro_v235.py`,
+  `tests/test_crise_v235.py`, `tests/test_trajectoire_annuelle_v235.py`. `python -m moteur.noyau` remplace
+  `python -m moteur.simulation` (README, lanceur, docs/relecture.md).
+- Noyau : deux mécanismes génériques. **Dynamiques** (objets à état par scénario : `debut(t, etat)` renvoie PIB,
+  recettes, blocs, participations, emploi, chômage ; `fin(t, etat)` met à jour l'état). **Règle de trajectoire**
+  (`Regle`, `Levier` : cible de déficit, leviers ordonnés avec capacité et rendement, mesures automatiques ; levier
+  utilisé = min(reste à couvrir / rendement, capacité)). Publiés chaque année : `deficit_sans_regle`, `regle`,
+  `dynamiques`.
+- Programme : `budget.py` (registre du budget, ex-`trajectoire_annuelle`), `effets.py` (canaux recodés en mesures,
+  fonds d'épargne obligatoire comme dynamique, clause comme règle), `programme.py` (assemble). Le multiplicateur,
+  l'offre (seniors), les taux, le chômage (formule commune) et la conjoncture (Okun) viennent du pipeline commun.
+- Boucle de l'IS d'investissement (`annees_sous_seuil`) : calculée sur un passage du noyau de la variante sans hausse.
+- Outils et modules portés sur le noyau : `is_investissement`, `entreprises_cellules`, `attribution`, `restitution`,
+  `sensibilite`, `incertitude`, `statu_quo`, `outils/leviers`, `levier_is`, `is_progressif`.
+
+**Vérifié avant suppression** (scénario de crise, comparaison avec l'ancien moteur) : le fonds et la règle redonnent
+exactement le capital (6,0 / 53,6 / 211,0 / 743,8 Md€ en 2030 / 2037 / 2050 / 2073), la contribution (35,1 / 36,2 /
+37,3 / 32,1), la baisse du RUI (19,1 / 19,1 / 18,2 / 14,4) et le PIB d'épargne du fonds. Les canaux érosion de l'IS,
+réactions, fraude TVA, logement, productivité, IA, carbone, TVA santé, permis, dirigeants et aides à la construction
+s'écartent de moins de 0,1 Md€.
+
+**Déficits (% du PIB), avant (pont sur l'ancien moteur) → après**
+
+| Scénario | 2029 | 2037 | 2050 | 2073 |
+|---|---|---|---|---|
+| prudent | 2,92 → 3,32 | 2,75 → 3,00 | 2,83 → 3,29 | 2,02 → 3,00 |
+| crise | 2,93 → 3,86 | 4,37 → 5,26 | 7,10 → 10,41 | 40,3 → 57,3 |
+| médian | 2,76 → 3,00 | 1,84 → 1,96 | 0,39 → 0,26 | −6,99 → −6,63 |
+| optimiste | 2,77 → 3,00 | 0,35 → 0,29 | −1,14 → −1,70 | −10,98 → −10,95 |
+
+**Pourquoi les résultats bougent** (chaque écart vient d'un choix de méthode commun, pas d'un paramètre changé)
+1. **Multiplicateur sur l'impulsion des mesures** (commun à tous les programmes) à la place du canal « ajustement
+   budgétaire » de l'ancien moteur, qui l'appliquait au solde. En 2029 au prudent : −78,8 Md€ de PIB contre −29,5. C'est
+   la cause probable de l'écart de 2029 (à vérifier par attribution) : la règle atteint ses plafonds (5 points
+   d'épargne, RUI au plancher) et le déficit reste à 3,3 %, alors que le pont donnait 2,9 %.
+2. **Seniors** : l'offre commune (`offre.seniors`, avec reports) remplace le canal de court terme de l'ancien moteur.
+3. **Démographie et tendance** : ne sont plus des effets sur le PIB. Le registre du budget est bâti sur la tendance et la
+   population prudentes ; l'écart avec chaque scénario reste donc codé en mesures « méthode » (ia, tendance,
+   démographie, économies du registre, santé). Dette technique : bâtir le registre par scénario.
+4. **Rétroaction dette → prime → intérêts** : le noyau l'applique à tout l'écart, pas seulement au statu quo ; elle compose
+   les écarts de la crise (déficit de 2050 : 10,4 contre 7,1 dans le pont). Écarts à décomposer au prudent et au médian.
+5. **Effet récessif de la baisse du RUI** (année + 1) : multiplicateur lu selon le sens de la baisse, sans contrainte de
+   capacité sur l'effet de la clause.
+6. **Option `macro.depart_commun`** : supprimée avec l'ancien moteur (paramètre conservé, désactivé). La convergence
+   des scénarios vers un point de départ commun n'existe plus ; chaque scénario part de son statu quo.
+7. **Tests de reproduction de la v235 supprimés** (décision d'Adrien) ; `reference="v235"` ne sert plus qu'à lire les
+   paramètres de l'époque.
+
+**À faire** : retirer les mesures « méthode » (registre par scénario) ; l'indexation `(1+tend0)^n` est conservée ;
+le canal d'emploi du fonds n'est pas dans `emplois_canaux`.

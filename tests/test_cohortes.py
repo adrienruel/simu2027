@@ -2,7 +2,7 @@
 import pytest
 
 from moteur.cohortes import agregats, indices, socle_par_cellule
-from moteur.macro import flux_epargne_obligatoire
+from programmes.ecologie_de_droite.budget import flux_epargne_obligatoire
 from moteur.parametres import Parametres
 from moteur.recettes import tva_menages
 from moteur.recettes.impot_salaires import impot_prive, impot_public

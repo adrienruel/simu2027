@@ -1,7 +1,7 @@
 """Tests de cohérence du levier IS : taux légal et déduction de l'investissement."""
 
 from moteur.is_investissement import cout_net_etat
-from moteur.macro import calculer
+from moteur import noyau
 from moteur.parametres import Parametres
 from moteur.recettes.total import recettes_nouveau_systeme
 from moteur.taux_effectifs import eatr_nouveau
@@ -12,6 +12,10 @@ P = Parametres()
 
 def _v(te, d):
     return P.avec({"entreprises.taux_is_etat": te, "is_investissement.part_admise": d, "is_investissement.hausse_part_admise/cible": d, "clause.active": False})
+
+
+def _canal(p, canal, t=2037):
+    return noyau.charger(p.programme).canaux_courts(p, "prudent")[canal][t]
 
 
 def _loc(p):
@@ -34,12 +38,12 @@ def test_localisation_moins_de_pertes_avec_un_taux_plus_bas_ou_plus_de_deduction
 
 
 def test_erosion_croissante_avec_le_taux():
-    e = [calculer(_v(te, 1.0))["prudent"].detail["canaux"][2037]["erosion_is"] for te in (0.20, 0.30, 0.40)]
+    e = [_canal(_v(te, 1.0), "erosion_is") for te in (0.20, 0.30, 0.40)]
     assert e[0] > e[1] > e[2]
 
 
 def test_investissement_croit_avec_la_deduction():
-    i = [calculer(_v(0.40, d))["prudent"].detail["canaux"][2037]["investissement_entreprises"] for d in (0.0, 0.5, 1.0)]
+    i = [_canal(_v(0.40, d), "investissement") for d in (0.0, 0.5, 1.0)]
     assert i[0] < i[1] < i[2]
 
 

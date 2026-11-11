@@ -109,8 +109,8 @@ def test_ordre_des_scenarios(res):
 
 
 def test_ecart_avec_un_programme(p, res):
-    from moteur.simulation import simuler
-    e = sq.ecart(simuler(p), res)
+    from moteur import noyau
+    e = sq.ecart(noyau.resultats(p), res)
     assert set(e) == set(sq.SCENARIOS)
     assert set(e["prudent"][2037]) == {"deficit", "solde_primaire", "dette_pib", "chomage", "pib"}
 
