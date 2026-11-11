@@ -11,7 +11,7 @@ mesures:
 - id: RET-ECO-01
   intitule: Plan d'économies de 197 Md€ d'ici 2032, déficit sous 3 % en 2031
   source: Public Sénat, 12/10/2026
-  traitement: 'non repris : objectif d''économies ; seules les mesures nommées sont chiffrées'
+  traitement: 'estimé par la règle commune des économies non détaillées (retailleau_enveloppe, enveloppe_economies : 0 / 0,3 / 0,6 / 1 point de PIB, plafonné par le reste de l''annonce ; le chiffre du candidat n''est pas repris)'
 - id: RET-ECO-02
   intitule: « Zéro cotisation » au-delà de 1 623 heures par an
   source: Le travail gagnant (09/01/2026), p. 20

@@ -60,10 +60,11 @@ def test_aucune_economie_annoncee_reprise():
 
 
 def test_economies_de_bertrand_bien_en_dessous_de_l_annonce(p):
-    """Les lignes identifiées de Bertrand n'approchent pas les 100 Md€ annoncés."""
+    """Les lignes identifiées de Bertrand, plus la règle commune des économies non détaillées (1 point de PIB en
+    optimiste, 11/11/2026), n'approchent pas les 100 Md€ annoncés."""
     b = noyau.charger("bertrand")
     economies = sum(x[2037] for x in noyau.bilan_mesures(b, p, "optimiste", annees=(2037,)) if x[2037] > 0)
-    assert economies < 40
+    assert economies < 70
 
 
 def test_smic_de_la_bibliotheque_retrouve_tondelier(p):

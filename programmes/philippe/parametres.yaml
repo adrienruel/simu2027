@@ -373,3 +373,25 @@ philippe_mesures:
     statut: HYPOTHESE
     source: "Encadrement : dépenses fiscales ≈ 85 Md€ (PLF 2026, Voies et moyens II) ; niches non nommées ; rabot de 2012-2013 ≈ 1 à 2 Md€"
     note: "Économie non chiffrée : estimée."
+
+philippe_enveloppe:
+  annonce:
+    valeur: 72
+    unite: md_eur
+    annee_euros: 2027
+    statut: SOURCE
+    source: "Site (« Pour une France plus prospère ») : déficit ramené de plus de 5 % à 2 % du PIB, effort à 50 % sur les dépenses sociales, 25 % sur l'État et les collectivités, 25 % par la croissance ; soit ≈ 2,25 points de PIB d'économies (≈ 72 Md€)"
+    note: "Sert seulement de plafond (règle commune enveloppe_economies, décision d'Adrien du 11/11/2026) : l'effort retenu est celui des précédents, en points de PIB, sans dépasser ce qui reste de l'annonce une fois les économies nommées déduites."
+  repartition:
+    valeur: {sante: 0.3, pauvrete: 0.2, famille: 0.1, logement: 0.07, etat_missions: 0.2, collectivites: 0.13}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Deux tiers sur les dépenses sociales, un tiers sur l'État et les collectivités, comme le dit le candidat."
+  debut:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+  plein:
+    valeur: 2032
+    unite: sans_unite
+    statut: DECISION

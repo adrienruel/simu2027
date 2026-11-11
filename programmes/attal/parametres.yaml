@@ -310,3 +310,25 @@ attal_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : aide à l'embauche d'alternants (≈ 6 000 € par contrat) pour une partie des 600 000 lycéens professionnels"
+
+attal_enveloppe:
+  annonce:
+    valeur: 150
+    unite: md_eur
+    annee_euros: 2027
+    statut: SOURCE
+    source: "Lettre aux Français sur les finances publiques (15/10/2026) : 150 Md€ d'économies sur le quinquennat, dont 20 Md€ de « frein d'urgence » dès l'élection"
+    note: "Sert seulement de plafond (règle commune enveloppe_economies, décision d'Adrien du 11/11/2026) : l'effort retenu est celui des précédents, en points de PIB, sans dépasser ce qui reste de l'annonce une fois les économies nommées déduites."
+  repartition:
+    valeur: {sante: 0.25, pauvrete: 0.15, famille: 0.05, logement: 0.05, etat_missions: 0.3, collectivites: 0.2}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Répartition non publiée : moitié sur la protection sociale (hors retraites, réformées à part), moitié sur l'État et les collectivités."
+  debut:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+  plein:
+    valeur: 2032
+    unite: sans_unite
+    statut: DECISION

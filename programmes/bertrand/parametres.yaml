@@ -165,3 +165,25 @@ bertrand_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : coût d'une journée de détention ≈ 110 € (40 000 € par an, ministère de la Justice) ; 5 000 à 7 000 détenus en plus (peines planchers de 2007-2014 : effet mesuré faible, Inspection générale de la justice)"
+
+bertrand_enveloppe:
+  annonce:
+    valeur: 100
+    unite: md_eur
+    annee_euros: 2027
+    statut: SOURCE
+    source: "L'Opinion (19/08/2026) : 20 Md€ d'économies par an pendant cinq ans"
+    note: "Sert seulement de plafond (règle commune enveloppe_economies, décision d'Adrien du 11/11/2026) : l'effort retenu est celui des précédents, en points de PIB, sans dépasser ce qui reste de l'annonce une fois les économies nommées déduites."
+  repartition:
+    valeur: {etat_missions: 0.4, collectivites: 0.2, pauvrete: 0.2, famille: 0.1, logement: 0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Santé exclue, comme le dit le candidat ; le reste réparti entre l'État, les collectivités et les prestations."
+  debut:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+  plein:
+    valeur: 2032
+    unite: sans_unite
+    statut: DECISION

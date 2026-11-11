@@ -314,3 +314,25 @@ lisnard_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Fiche « Questions » (16/10/2026) : sans montant ; encadrement : au-delà de la LPM actualisée (statu quo), commandes de munitions ≈ 1 Md€ par an"
+
+lisnard_enveloppe:
+  annonce:
+    valeur: 200
+    unite: md_eur
+    annee_euros: 2027
+    statut: SOURCE
+    source: "Fiche « Questions » (03/10/2026) : 80 Md€ de dépense en moins la première année, puis au moins 200 Md€ (agences, bureaucratie, dépense sociale)"
+    note: "Sert seulement de plafond (règle commune enveloppe_economies, décision d'Adrien du 11/11/2026) : l'effort retenu est celui des précédents, en points de PIB, sans dépasser ce qui reste de l'annonce une fois les économies nommées déduites."
+  repartition:
+    valeur: {etat_missions: 0.35, collectivites: 0.15, sante: 0.2, pauvrete: 0.15, famille: 0.08, logement: 0.07}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Moitié sur l'État et les collectivités (agences, bureaucratie), moitié sur la dépense sociale."
+  debut:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+  plein:
+    valeur: 2032
+    unite: sans_unite
+    statut: DECISION

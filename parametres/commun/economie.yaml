@@ -870,3 +870,12 @@ capacite:
     statut: HYPOTHESE
     source: "Auerbach et Gorodnichenko (AEJ Policy, 2012) : multiplicateur de la dépense ≈ 0 à 0,5 en période d'expansion contre 1 à 1,5 en récession ; Ramey et Zubairy (JPE, 2018) : ≈ 0,6 à 0,8 quel que soit l'état de l'économie (borne optimiste) ; une partie de la demande en plus fuit vers les importations et les prix (canal absent du modèle)"
     note: "Part de l'effet de relance au-delà du seuil qui passe dans le PIB. Ne joue pas sur un resserrement (consolidation), ni sur les effets d'offre."
+
+# --- Économies annoncées sans mesures (11 novembre 2026) ---------------------------------------------------
+enveloppe_economies:
+  points_pib:
+    valeur: {crise: 0.0, prudent: 0.3, median: 0.6, optimiste: 1.0}
+    unite: points_de_pib
+    statut: HYPOTHESE
+    source: "Encadrement par les précédents français : RGPP 2007-2012 ≈ 0,4 point de PIB d'économies sur l'État en cinq ans (Cour des comptes, 2012) ; plan de 50 Md€ 2015-2017 : économies réelles par rapport à l'évolution tendancielle ≈ 1 point de PIB, dont une partie due à l'inflation basse et aux taux (Cour des comptes, situation et perspectives des finances publiques 2016 et 2017) ; le non-détaillé se réalise peu (FMI, Fiscal Monitor 2023 : plans de consolidation sans mesures identifiées)"
+    note: "Décision d'Adrien du 11/11/2026 : une économie annoncée et non détaillée est estimée, jamais par le chiffre du candidat. Effort en plus des mesures nommées, en points de PIB atteints en fin de quinquennat (année « plein » du programme), plafonné par ce qui reste de l'annonce une fois les économies nommées déduites. Même règle pour tous les candidats ; crise : rien de plus que les mesures nommées."

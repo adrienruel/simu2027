@@ -114,6 +114,38 @@ class ProgrammeSimple:
         a = sq.prelevements_activite(p)["public"]
         return (a["prelevements"] + a["impot_revenu"]) / a["cout"]
 
+    # ------------------------------------------------------------------ économies annoncées sans mesures
+    def enveloppe_economies(self, p: Parametres, s: str, idx: dict, liste: list[Mesure]) -> list[Mesure]:
+        """Économies annoncées mais non détaillées (groupe <nom>_enveloppe), chiffrées par une règle commune et jamais
+        par le chiffre du candidat (décision d'Adrien du 11/11/2026) : effort en points de PIB du scénario
+        (enveloppe_economies.points_pib, précédents français), plafonné par ce qui reste de l'annonce une fois déduites
+        les économies de dépense déjà nommées et chiffrées (pas de double compte). Réparti entre postes selon ce que dit
+        le candidat (repartition), montée de debut à plein."""
+        cle = f"{self.nom}_enveloppe.annonce"
+        if cle not in self.pt._p:
+            return []
+        annonce = self.v("enveloppe.annonce")
+        rep = self.v("enveloppe.repartition")
+        d0, d1 = int(self.v("enveloppe.debut")), int(self.v("enveloppe.plein"))
+        y = sq.pib(p, s)
+        nommees = -sum(min(0.0, m.valeurs.get(d1, 0.0)) for m in liste
+                       if m.poste != "recettes" and m.nature != "effet_macro")
+        reste = max(0.0, annonce - nommees)
+        effort = min(sq._v(p, "enveloppe_economies.points_pib", s) / 100 * y[d1], reste)
+        self.enveloppe_detail = getattr(self, "enveloppe_detail", {})
+        self.enveloppe_detail[(id(p), s)] = {"annonce": annonce, "nommees": nommees, "reste": reste, "retenu": effort}
+
+        def mont(t):
+            return min(1.0, max(0.0, (t - d0 + 1) / (d1 - d0 + 1)))
+        tot = sum(rep.values())
+        out = []
+        for poste, part in rep.items():
+            v = -effort * part / tot
+            out.append(Mesure(f"Économies annoncées non détaillées ({poste}) : règle commune, pas le chiffre du candidat",
+                              poste, {**{t: v * mont(t) for t in ANNEES_AVANT},
+                                      **{t: v * mont(t) * y[t] / y[d1] for t in ANNEES}}, note="enveloppe"))
+        return out
+
     # ------------------------------------------------------------------ à compléter par chaque programme
     def mesures_calculees(self, p: Parametres, s: str, idx: dict) -> tuple[list[Mesure], dict[str, dict[int, float]]]:
         """Mesures de la bibliothèque (montants) et emplois qu'elles changent ({canal: {année: emplois}}), hors
@@ -159,6 +191,7 @@ class ProgrammeSimple:
                         cible[t] += serie[t] * 1e9 / (x.get("cout_poste", cout_poste) * w[t] / w[2029])
             calc, canaux_calc = self.mesures_calculees(p, s, idx)
             liste.extend(calc)
+            liste.extend(self.enveloppe_economies(p, s, idx, liste))
             # emplois : postes publics, éviction, canaux des mesures calculées
             # éviction : prise au scénario du même côté de la prudence, pour chaque sens. Créer des postes publics :
             # l'éviction forte est prudente ; en supprimer : c'est la reprise faible par le privé qui l'est (scénario miroir)

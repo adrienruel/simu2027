@@ -20,7 +20,7 @@ programme:
 
 mesures:
   - {id: BER-ECO-01, intitule: "Réduire les dépenses publiques de 20 Md€ par an pendant cinq ans", source: "https://www.nousfrance.fr/2026/08/presidentielle-2027-xavier-bertrand-un-non-candidat-en-campagne-lopinion/", date: 2026-08-19,
-     traitement: estime, cle: "retraites (BER-RET-01), assurance_chomage, fonctionnaires", note: "Le total annoncé n'est pas saisi ; seules les trois lignes citées (retraites, assurance chômage, fonctionnaires) sont chiffrées. Santé exclue des économies, comme le dit le candidat."}
+     traitement: estime, cle: "retraites (BER-RET-01), assurance_chomage, fonctionnaires", note: "Le total annoncé n'est pas saisi : les trois lignes citées (retraites, assurance chômage, fonctionnaires) sont chiffrées, et le reste par la règle commune des économies non détaillées (bertrand_enveloppe, 11/11/2026). Santé exclue des économies, comme le dit le candidat."}
   - {id: BER-ECO-02, intitule: "Redistribuer les recettes des hausses de carburant aux actifs contraints", source: "https://www.nousfrance.fr/2026/04/hausse-du-carburant-la-proposition-de-xavier-bertrand/", date: 2026-04-15, traitement: estime, cle: carburants}
   - {id: BER-ECO-03, intitule: "Règle d'or budgétaire soumise à référendum", source: "https://www.nousfrance.fr/2025/10/avant-la-presidentielle-xavier-bertrand-se-pose-en-opposant-dinteret-general-liberation/", date: 2025-10-25,
      traitement: non_chiffre, note: "Règle sans contenu chiffré ; le noyau publie toujours le résultat sans règle."}

@@ -198,3 +198,19 @@ def test_contrainte_de_capacite(p):
     lim = seuil / 100 * y[2029]
     assert c[2029] == pytest.approx(lim + k * (brut[2029] - lim))
     assert c[2030] == brut[2030] and c[2031] == brut[2031]
+
+
+def test_economies_non_detaillees_regle_commune(p):
+    """Décision du 11/11/2026 : économies annoncées non détaillées estimées par une règle commune (points de PIB du
+    scénario), jamais par le chiffre du candidat, plafonnées par le reste de l'annonce ; rien en crise."""
+    for nom in ("attal", "philippe", "retailleau", "lisnard", "bertrand"):
+        g = noyau.charger(nom)
+        g.mesures(p)
+        d = {s: g.enveloppe_detail[(id(p), s)] for s in sq.SCENARIOS}
+        assert d["crise"]["retenu"] == 0
+        assert d["prudent"]["retenu"] <= d["median"]["retenu"] <= d["optimiste"]["retenu"] <= d["optimiste"]["reste"]
+        y = sq.pib(p, "prudent")[int(g.v("enveloppe.plein"))]
+        assert d["prudent"]["retenu"] == pytest.approx(min(0.003 * y, d["prudent"]["reste"]), rel=1e-6)
+    # sans enveloppe : rien (Zemmour : plan Knafo détaillé ligne à ligne)
+    z = noyau.charger("zemmour")
+    assert not [m for m in z.mesures(p)["prudent"] if m.note == "enveloppe"]
