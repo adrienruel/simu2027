@@ -32,12 +32,14 @@ def test_ordre_des_scenarios():
 
 
 def test_chomeurs_seniors_ajoutes():
-    """Chômeurs seniors en plus avec l'âge à 67 ans : présents dès la montée en charge, puis à peu près stables
-    (11/11/2026 : avec l'âge légal réel des générations au statu quo, le niveau de 2073 est celui de 2037 à 1 % près ;
-    l'ancienne hausse continue venait du calendrier à 64 ans pour toutes les générations)."""
+    """Chômeurs seniors en plus avec l'âge à 67 ans : présents dès la montée en charge, au plus haut pendant la
+    transition (personnes dont le départ est reporté, canal commun offre.seniors : plus personne après 2050), puis
+    stables à leur niveau de long terme. 12/11/2026 : l'ancien moteur donnait un niveau de 2073 égal à celui de 2037
+    à 1 % près, avec ses propres parts d'emploi des reportés ; le canal commun donne un pic de transition plus haut."""
     c = noyau.charger("ecologie_de_droite")._statique(P, ("prudent",))["prudent"]["chomeurs_seniors"]
     assert c[2037] > c[2032] > 0
-    assert c[2073] == pytest.approx(c[2037], rel=0.15)
+    assert c[2037] > c[2073] > 0.5 * c[2037]
+    assert c[2073] == pytest.approx(c[2060], rel=0.10)
 
 
 def test_v235_inchangee():
