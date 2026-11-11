@@ -214,9 +214,7 @@ class ProgrammeSimple:
         canaux[f"*{prefixe} : embauches de partage du travail"] = {t: embauches * m(t) * r[t] for t in ANNEES}
         d = {t: -y[t] * c["part_marchande"] * part * baisse * (1 - gp - ge) * m(t) for t in ANNEES}
         d28 = -y[2029] * c["part_marchande"] * part * baisse * (1 - gp - ge) * m(2028)
-        self.pib_en_plus = getattr(self, "pib_en_plus", {})
-        prec = self.pib_en_plus.get((id(p), s), {})
-        self.pib_en_plus[(id(p), s)] = {t: prec.get(t, 0.0) + d[t] for t in ANNEES}
+        self.ajouter_pib(p, s, d)
         part_rec = {t: rec[t] / y[t] for t in ANNEES}
         valeur = self.v("emploi.valeur_emploi")
         return [
@@ -227,6 +225,40 @@ class ProgrammeSimple:
                    {2027: 0.0, 2028: embauches * m(2028) * valeur / 1e9,
                     **{t: embauches * m(t) * valeur * ip[t] / 1e9 for t in ANNEES}}, nature="effet_macro"),
         ]
+
+    def heures_fonction_publique(self, p: Parametres, s: str, idx: dict, c: dict, prefixe: str,
+                                 canaux: dict) -> list[Mesure]:
+        """Même baisse d'heures dans la fonction publique (11/11/2026, repris de Roussel) : embauches pour garder le
+        service, c["part_compensee_fp"] des heures perdues, avec leurs prélèvements et la même éviction que les autres
+        postes publics créés (emploi_public.eviction_privee)."""
+        versant_poste = {"etat_civils": "etat_missions", "etat_militaires": "defense_ue", "territoriale": "collectivites",
+                         "hospitaliere": "sante"}
+        ip = idx["pib"]
+        versants = p.val("statu_quo.versants_fonction_publique")
+        tot = sum(versants.values())
+        cout_public = sq.prelevements_activite(p)["public"]["cout"]
+        part_fp = self.part_prelevements_fp(p)
+
+        def m(t):
+            return min(1.0, max(0.0, (t - c["debut"] + 1) / (c["plein"] - c["debut"] + 1)))
+        hausse = cout_public * (c["heures_actuelles"] / c["heures_cible"] - 1) * c["part_compensee_fp"][s]
+        out = [Mesure(f"{prefixe} dans la fonction publique : embauches ({versant_poste[v]})", versant_poste[v],
+                      {2027: 0.0, 2028: hausse * part / tot * m(2028),
+                       **{t: hausse * part / tot * m(t) * ip[t] for t in ANNEES}}) for v, part in versants.items()]
+        out.append(Mesure(f"{prefixe} dans la fonction publique : prélèvements sur ces embauches", "recettes",
+                          {2027: 0.0, 2028: part_fp * hausse * m(2028),
+                           **{t: part_fp * hausse * m(t) * ip[t] for t in ANNEES}}))
+        n_fp = hausse * 1e9 / self.v("emploi.cout_poste_public")
+        canaux[f"*Postes publics : {prefixe} dans la fonction publique"] = {t: n_fp * m(t) for t in ANNEES}
+        ev = sq._v(p, "emploi_public.eviction_privee", s)
+        canaux[f"{prefixe} : emplois privés évincés par les embauches publiques"] = {t: -ev * n_fp * m(t) for t in ANNEES}
+        return out
+
+    def ajouter_pib(self, p: Parametres, s: str, d: dict) -> None:
+        """Production en plus ou en moins hors des canaux d'emploi (Md€ par année), lue dans le calcul du PIB."""
+        self.pib_en_plus = getattr(self, "pib_en_plus", {})
+        prec = self.pib_en_plus.get((id(p), s), {})
+        self.pib_en_plus[(id(p), s)] = {t: prec.get(t, 0.0) + d.get(t, 0.0) for t in ANNEES}
 
     # ------------------------------------------------------------------ à compléter par chaque programme
     def mesures_calculees(self, p: Parametres, s: str, idx: dict) -> tuple[list[Mesure], dict[str, dict[int, float]]]:

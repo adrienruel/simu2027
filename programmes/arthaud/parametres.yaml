@@ -5,6 +5,9 @@
 # indemnité des grands groupes, interdiction des licenciements, répartition du travail sans perte de salaire,
 # planification) change l'économie entière et sort du champ du modèle. Sont chiffrées les mesures qui ont une ligne
 # budgétaire. Fiche : programmes/arthaud/mesures.yaml.
+# Ajout du 11/11/2026 (décision d'Adrien) : répartition du travail, interdiction des licenciements, carburant à prix
+# coûtant et égalité salariale sont chiffrés ; l'expropriation, le contrôle ouvrier et la planification restent hors
+# du modèle (le chiffrage reste partiel).
 
 arthaud_emploi:
   cout_poste_public:
@@ -120,6 +123,15 @@ arthaud_mesures:
     statut: SOURCE
     source: "PLFSS 2027 : soins dentaires et transports sanitaires transférés aux complémentaires (1,2 Md€), cures thermales (0,2 Md€) (MoneyVox, octobre 2026)"
 
+  carburant_prix_coutant:
+    valeur: {id: ART-ENE-02, instrument: consommation, libelle: "Carburant vendu à prix coûtant : TVA et bénéfices confisqués en moins", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -2.0, prudent: -1.5, median: -1.2, optimiste: -0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Marges brutes de raffinage et de distribution ≈ 0,15 à 0,20 € par litre (Énergies et Mobilités, ex-UFIP, 2025) ; carburants des ménages ≈ 50 Md€ TTC, ≈ 27 milliards de litres"
+    note: "TVA perdue sur les achats des ménages (≈ 0,9 Md€) et bénéfices de distribution qui ne sont plus confisqués (arthaud_mesures.confiscation). Perte la plus forte en crise."
+
   # ---------------------------------------------------------------- services publics
   embauches_sante:
     valeur: {id: ART-SP-01, libelle: "Embauches dans les hôpitaux et les Ehpad", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, fp_taux: 0.47, postes: true,
@@ -150,3 +162,49 @@ arthaud_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : SDIS ≈ 5 Md€ par an (DGSCGC) ; +6 %"
+
+# ---------------------------------------------------------------- travail (11/11/2026)
+arthaud_temps_travail:
+  repartition:
+    valeur: {heures_actuelles: 35, debut: 2028, plein: 2030, emplois_prive: 20300000, part_marchande: 0.75,
+             gain_productivite: {crise: 0.2, prudent: 0.3, median: 0.35, optimiste: 0.4},
+             part_embauches: {crise: 0.25, prudent: 0.3, median: 0.35, optimiste: 0.4},
+             part_compensee_fp: {crise: 0.7, prudent: 0.6, median: 0.5, optimiste: 0.4}}
+    unite: sans_unite
+    statut: DECISION
+    source: "« Répartir le travail entre tous, sans perte de salaire » (brochure Présidentielle 2027, Lutte ouvrière, juin 2026, p. 12) ; aucune durée cible"
+    note: "Lecture retenue (Adrien, 11/11/2026) : la durée baisse jusqu'à ce que les heures libérées égalent le chômage du statu quo en 2029 (chômeurs / emplois ≈ 9 %), soit ≈ 31,8 heures, calculée par le programme. Même mécanisme et mêmes parts de productivité, d'embauches et de compensation publique que roussel_temps_travail.trente_deux_heures (ProgrammeSimple.trente_deux_heures et heures_fonction_publique). Interaction avec la hausse du SMIC non comptée (effets additionnés)."
+  elasticite_emploi:
+    valeur: {crise: -0.5, prudent: -0.3, median: -0.2, optimiste: -0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même valeur que melenchon_temps_travail.elasticite_emploi (Mésange, DG Trésor ; L'Horty, 2006)"
+
+arthaud_licenciements:
+  interdiction:
+    valeur: {debut: 2028, plein: 2028, emplois_menaces_an: 250000,
+             part_maintenue: {crise: 0.7, prudent: 0.6, median: 0.5, optimiste: 0.4},
+             sortie_an: 0.25,
+             cout_net_emploi: {crise: 30000, prudent: 25000, median: 20000, optimiste: 15000},
+             productivite_relative: 0.5,
+             embauches_en_moins: {crise: 0.01, prudent: 0.006, median: 0.003, optimiste: 0.0}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "« Interdiction des licenciements sous peine de réquisition » (Lutte ouvrière, 05/05/2025). Emplois menacés par les défaillances d'entreprises ≈ 250 000 par an (BPCE L'Observatoire, 2024-2025, ≈ 65 000 défaillances). Protection de l'emploi : effet sur le niveau d'emploi faible et incertain, mais moins d'embauches et de créations (OCDE, Perspectives de l'emploi 2004 et 2013 ; Blanchard et Portugal, 2001 ; Bassanini, Nunziata et Venn, 2009)"
+    note: "Emplois des entreprises défaillantes réquisitionnées et maintenus : part_maintenue des emplois menacés chaque année, dont 25 % retrouvent chaque année une activité viable ou sont reconvertis (stock ≈ 4 fois le flux). Chaque emploi maintenu coûte à l'État cost_net_emploi (salaire moins production vendue, net des prélèvements) et produit moitié moins qu'un emploi moyen. Embauches en moins : part de l'emploi privé, montée de 2028 à 2031. Dépense : la plus forte en crise."
+
+arthaud_egalite:
+  salariale:
+    valeur: {debut: 2028, plein: 2030, part_femmes_cout: 0.38, ecart: 0.04, emplois_femmes: 9500000, part_is: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Insee Focus n° 320 (2024) : écart de salaire femmes-hommes à poste comparable ≈ 4 % dans le privé, 14 % à temps de travail égal ; salariées du privé ≈ 9,5 millions ; part des femmes dans la masse salariale du privé ≈ 38 % (Insee, DADS-DSN)"
+    note: "Les salaires des femmes du privé montent de l'écart inexpliqué (4 %) : coût du travail en plus, prélèvements au taux moyen du privé (≈ 52 %), TVA sur le revenu net en plus, IS sur la moitié de la hausse prise sur les marges, emplois perdus avec l'élasticité de temps_travail. Fonction publique (grilles) non comptée."
+
+arthaud_ecologie:
+  carburant:
+    valeur: {id: ART-ENE-02, libelle: "Carburant à prix coûtant : consommation en hausse", secteur: transports, debut: 2028, plein: 2032, effet_mt: {crise: 5.5, prudent: 4.5, median: 3.0, optimiste: 2.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même élasticité que le_pen_ecologie.tva_energie (Labandeira et al., 2017 : −0,3 à −0,6 à long terme) ; Citepa, Secten 2026 : transport routier ≈ 110 Mt"
+    note: "Prix −9 % environ : +2,7 à +5,4 % de consommation routière, soit +3 à +6 Mt. Prudent : effet défavorable au climat élevé."

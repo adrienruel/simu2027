@@ -148,23 +148,8 @@ class Roussel(ProgrammeSimple):
         out += self.trente_deux_heures(p, s, idx, c, self.v("temps_travail.elasticite_emploi", s),
                                        "PCF-EMP-01 — 32 heures", canaux)
 
-        def m32(t):
-            return min(1.0, max(0.0, (t - c["debut"] + 1) / (c["plein"] - c["debut"] + 1)))
-        # fonction publique : 32 heures, embauches pour garder le service
-        hausse_fp = cout_public * (c["heures_actuelles"] / c["heures_cible"] - 1) * c["part_compensee_fp"][s]
-        for v, part in versants.items():
-            out.append(Mesure(f"PCF-EMP-01 — 32 heures dans la fonction publique : embauches ({POSTE_VERSANT[v]})",
-                              POSTE_VERSANT[v], {2027: 0.0, 2028: hausse_fp * part / tot * m32(2028),
-                                                 **{t: hausse_fp * part / tot * m32(t) * ip[t] for t in ANNEES}}))
-        out.append(Mesure("PCF-EMP-01 — 32 heures dans la fonction publique : prélèvements sur ces embauches", "recettes",
-                          {2027: 0.0, 2028: part_fp * hausse_fp * m32(2028),
-                           **{t: part_fp * hausse_fp * m32(t) * ip[t] for t in ANNEES}}))
-        n_fp = hausse_fp * 1e9 / self.v("emploi.cout_poste_public")
-        canaux["*Postes publics : 32 heures dans la fonction publique"] = {t: n_fp * m32(t) for t in ANNEES}
-        # même éviction que les autres postes publics créés (règle commune, emploi_public.eviction_privee)
-        ev_fp = sq._v(p, "emploi_public.eviction_privee", s)
-        canaux["32 heures : emplois privés évincés par les embauches publiques"] = {
-            t: -ev_fp * n_fp * m32(t) for t in ANNEES}
+        # fonction publique : 32 heures, embauches pour garder le service (méthode commune)
+        out += self.heures_fonction_publique(p, s, idx, c, "PCF-EMP-01 — 32 heures", canaux)
         return out, canaux
 
 
