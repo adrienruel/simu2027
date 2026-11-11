@@ -46,7 +46,8 @@ def _etat(p: Parametres, scenario: str = "prudent") -> dict:
     """Comptes d'un scénario du programme sur le noyau, sans règle de trajectoire (p porte clause.active = False).
 
     statique : mesures budgétaires (lignes du budget, périmètre) ; économie : effets sur l'activité, mesure par
-    mesure (effets et écarts de méthode) et dynamiques du noyau (fonds)."""
+    mesure (effets et écarts de méthode) et dynamiques du noyau (fonds) ; dette_interets : intérêts réels, ceux du
+    solde du noyau (solde = recettes − dépenses primaires − intérêts réels)."""
     prog = noyau.charger(p.programme)
     res = noyau.simuler(p, prog, scenarios=(scenario,))[scenario]
     mes = prog.mesures(p)[scenario]
@@ -63,7 +64,7 @@ def _etat(p: Parametres, scenario: str = "prudent") -> dict:
                 canaux[m.nom] = canaux.get(m.nom, 0.0) + v
         canaux["Fonds : capital, rendements, créances"] = res[t]["dynamiques"]["fonds"]["solde"]
         out[t] = {"statique": statique, "economie": sum(canaux.values()), "canaux": canaux,
-                  "dette_interets": -res[t]["charge_dette"], "solde_avant_clause": res[t]["solde"],
+                  "dette_interets": -res[t]["interets_reels"], "solde_avant_clause": res[t]["solde"],
                   "deficit_avant_clause": res[t]["deficit"],
                   "pib": res[t]["pib"], "chomage": res[t]["chomage"], "emplois": res[t]["emploi"]}
     return out

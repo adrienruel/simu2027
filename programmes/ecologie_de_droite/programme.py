@@ -830,6 +830,34 @@ class EcologieDeDroite:
         clause.active = False."""
         return self.entrees(p.avec({"clause.active": False}), scenarios)
 
+    FONDS_HORS_BUDGET = ("Missions financées par le fonds", "Investissement des opérateurs, des hôpitaux et de la sécurité sociale")
+
+    def variante_fonds_apu(self, p: Parametres, scenarios=None) -> dict:
+        """Variante de classement (relecture I5, point ouvert) : le fonds compté parmi les administrations publiques.
+
+        Les investissements que le programme fait financer par le fonds (missions transports, énergie et France 2030 ;
+        opérateurs, hôpitaux et sécurité sociale ; investissements locaux repris) restent alors des dépenses publiques,
+        donc dans le déficit de Maastricht. Rien ne change dans l'économie (les mêmes investissements sont faits) : seuls
+        le déficit et la dette bougent, et la règle de trajectoire réagit à ce déficit plus haut. Convention haute :
+        l'épargne obligatoire versée au fonds n'est pas comptée en recette publique (elle reste due aux épargnants)."""
+        from moteur import noyau
+        ent = self.entrees(p, scenarios)
+        st = self._statique(p, scenarios)
+        out = {}
+        for s, e in ent.items():
+            E = st[s]["effets"]
+            plus = [Mesure(f"Fonds dans les administrations publiques : {m.nom.split(' : ')[0].split(' (')[0]}", m.poste,
+                           {t: -v for t, v in m.valeurs.items()}, "perimetre")
+                    for m in e.mesures if m.nom.startswith(self.FONDS_HORS_BUDGET)]
+            assert len(plus) == len(self.FONDS_HORS_BUDGET), [m.nom for m in plus]
+            loc = E.q.val("fonds_reprises.investissements_locaux_rentables")
+            plus.append(Mesure("Fonds dans les administrations publiques : investissements locaux repris par le fonds",
+                               "investissement", {t: loc * E.croiss[t] for t in ANNEES}, "perimetre"))
+            out[s] = noyau.trajectoire(p, s, e.mesures + plus, e.contexte, e.dynamiques, e.regle)
+            for t in ANNEES:
+                out[s][t]["investissements_du_fonds"] = sum(m.valeurs[t] for m in plus)
+        return out
+
     def mesures(self, p: Parametres) -> dict[str, list[Mesure]]:
         return {s: x["mesures"] for s, x in self._statique(p).items()}
 

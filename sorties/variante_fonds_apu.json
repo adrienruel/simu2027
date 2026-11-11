@@ -1,0 +1,138 @@
+{
+ "crise": {
+  "2029": {
+   "deficit_publie": 3.35,
+   "deficit_fonds_apu": 5.82,
+   "deficit_fonds_apu_avant_regle": 7.73,
+   "dette_pib_publiee": 131.1,
+   "dette_pib_fonds_apu": 133.6,
+   "investissements_du_fonds_md": 73.1
+  },
+  "2037": {
+   "deficit_publie": 5.17,
+   "deficit_fonds_apu": 9.1,
+   "deficit_fonds_apu_avant_regle": 11.05,
+   "dette_pib_publiee": 147.7,
+   "dette_pib_fonds_apu": 173.2,
+   "investissements_du_fonds_md": 75.3
+  },
+  "2050": {
+   "deficit_publie": 10.1,
+   "deficit_fonds_apu": 22.89,
+   "deficit_fonds_apu_avant_regle": 24.48,
+   "dette_pib_publiee": 198.5,
+   "dette_pib_fonds_apu": 313.9,
+   "investissements_du_fonds_md": 78.7
+  },
+  "2073": {
+   "deficit_publie": 55.35,
+   "deficit_fonds_apu": 116.33,
+   "deficit_fonds_apu_avant_regle": 117.85,
+   "dette_pib_publiee": 733.1,
+   "dette_pib_fonds_apu": 1499.6,
+   "investissements_du_fonds_md": 75.8
+  }
+ },
+ "prudent": {
+  "2029": {
+   "deficit_publie": 3.0,
+   "deficit_fonds_apu": 5.39,
+   "deficit_fonds_apu_avant_regle": 7.29,
+   "dette_pib_publiee": 129.3,
+   "dette_pib_fonds_apu": 131.7,
+   "investissements_du_fonds_md": 73.1
+  },
+  "2037": {
+   "deficit_publie": 3.0,
+   "deficit_fonds_apu": 6.09,
+   "deficit_fonds_apu_avant_regle": 7.98,
+   "dette_pib_publiee": 122.6,
+   "dette_pib_fonds_apu": 145.4,
+   "investissements_du_fonds_md": 78.3
+  },
+  "2050": {
+   "deficit_publie": 3.26,
+   "deficit_fonds_apu": 10.07,
+   "deficit_fonds_apu_avant_regle": 11.58,
+   "dette_pib_publiee": 123.0,
+   "dette_pib_fonds_apu": 189.6,
+   "investissements_du_fonds_md": 85.0
+  },
+  "2073": {
+   "deficit_publie": 3.0,
+   "deficit_fonds_apu": 37.45,
+   "deficit_fonds_apu_avant_regle": 38.92,
+   "dette_pib_publiee": 131.6,
+   "dette_pib_fonds_apu": 517.7,
+   "investissements_du_fonds_md": 92.2
+  }
+ },
+ "median": {
+  "2029": {
+   "deficit_publie": 3.0,
+   "deficit_fonds_apu": 5.03,
+   "deficit_fonds_apu_avant_regle": 6.91,
+   "dette_pib_publiee": 128.4,
+   "dette_pib_fonds_apu": 130.5,
+   "investissements_du_fonds_md": 73.3
+  },
+  "2037": {
+   "deficit_publie": 1.95,
+   "deficit_fonds_apu": 3.4,
+   "deficit_fonds_apu_avant_regle": 5.17,
+   "dette_pib_publiee": 110.6,
+   "dette_pib_fonds_apu": 122.8,
+   "investissements_du_fonds_md": 80.8
+  },
+  "2050": {
+   "deficit_publie": 0.4,
+   "deficit_fonds_apu": 3.69,
+   "deficit_fonds_apu_avant_regle": 5.06,
+   "dette_pib_publiee": 81.4,
+   "dette_pib_fonds_apu": 119.9,
+   "investissements_du_fonds_md": 90.4
+  },
+  "2073": {
+   "deficit_publie": -6.67,
+   "deficit_fonds_apu": 1.07,
+   "deficit_fonds_apu_avant_regle": 1.07,
+   "dette_pib_publiee": -23.1,
+   "dette_pib_fonds_apu": 108.4,
+   "investissements_du_fonds_md": 102.9
+  }
+ },
+ "optimiste": {
+  "2029": {
+   "deficit_publie": 3.0,
+   "deficit_fonds_apu": 4.22,
+   "deficit_fonds_apu_avant_regle": 6.07,
+   "dette_pib_publiee": 126.1,
+   "dette_pib_fonds_apu": 127.3,
+   "investissements_du_fonds_md": 73.4
+  },
+  "2037": {
+   "deficit_publie": 0.26,
+   "deficit_fonds_apu": 2.97,
+   "deficit_fonds_apu_avant_regle": 3.19,
+   "dette_pib_publiee": 95.3,
+   "dette_pib_fonds_apu": 108.3,
+   "investissements_du_fonds_md": 81.8
+  },
+  "2050": {
+   "deficit_publie": -1.54,
+   "deficit_fonds_apu": 2.41,
+   "deficit_fonds_apu_avant_regle": 2.35,
+   "dette_pib_publiee": 49.6,
+   "dette_pib_fonds_apu": 95.8,
+   "investissements_du_fonds_md": 91.8
+  },
+  "2073": {
+   "deficit_publie": -10.97,
+   "deficit_fonds_apu": -5.18,
+   "deficit_fonds_apu_avant_regle": -5.18,
+   "dette_pib_publiee": -93.6,
+   "dette_pib_fonds_apu": 14.7,
+   "investissements_du_fonds_md": 110.2
+  }
+ }
+}

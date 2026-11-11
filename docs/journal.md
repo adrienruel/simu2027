@@ -842,3 +842,49 @@ créances à rendre. Le seuil de cette hausse lit toujours le déficit avant cla
 propres au programme absents des autres (fraude TVA, productivité, IA, école, écart de taux) ; comparateur qui montre
 ce programme après règle et les autres sans ; mesures « méthode » ; variante « fonds dans les APU » ; inflation
 d'Écologie de droite encore tirée de `macro.effort_2029` et non de l'impulsion calculée.
+
+## 12 novembre 2026 (suite) — Relecture indépendante, points 2 et 4 : impulsion du multiplicateur, fonds dans les APU
+
+DÉCISION d'Adrien : traiter les points 2 et 4 de la relecture.
+
+**Point 2 — ce qui alimente le multiplicateur d'Écologie de droite.** Quatre corrections :
+1. les reclassements (nature « classement » : gestion de l'assurance maladie comptée en santé, aide sociale à
+   l'enfance, +22,3 Md€) entrent dans l'impulsion : leur contrepartie y était déjà, donc 22 Md€ de resserrement étaient
+   comptés en trop ;
+2. le revenu universel est pondéré comme les transferts qu'il remplace (poids 0,8 au lieu de 1) ;
+3. la recette carbone du scénario (prélèvement sur la consommation, poids 0,55) et l'IS sur les taxes d'énergie
+   supprimées (poids 0,3) entrent dans l'impulsion : ces recettes échappaient au multiplicateur ;
+4. pas de retrait forfaitaire d'« écarts de méthode » en 2029 : une fois ces corrections faites, l'impulsion calculée
+   de 2029 (−57,9 Md€ au prudent, −55,2 au médian) retrouve l'effort que le programme déclare (macro.effort_2029 −
+   assouplissement + prélèvement sur les anciennes pensions : −54,4 et −51,3 Md€). L'écart restant (3 à 4 Md€) est la
+   borne de ce que les écarts de méthode pèsent dans l'impulsion. Test : écart inférieur à 15 %.
+
+Effet (déficit publié, % du PIB) : prudent 2029 3,32 → 3,00 (la règle n'est plus au maximum) ; crise 2029 3,86 → 3,35,
+2073 57,3 → 55,4 ; médian et optimiste presque inchangés. Vrai scénario sans règle, prudent : 4,83 / 5,07 / 5,56 / 7,63
+(2029 / 2037 / 2050 / 2073).
+
+**Point 4a — variante « fonds dans les administrations publiques ».** `EcologieDeDroite.variante_fonds_apu` et
+`python -m outils.variante_fonds_apu` (sorties/variante_fonds_apu.json) : les investissements financés par le fonds
+(missions transports, énergie, France 2030 ; opérateurs, hôpitaux, sécurité sociale ; investissements locaux repris :
+73 Md€ en 2029) comptés en dépense publique. Même économie, seul le classement change ; convention haute (l'épargne
+obligatoire n'est pas comptée en recette publique). Déficit prudent : 5,4 % en 2029, 6,1 % en 2037, 10,1 % en 2050
+(dette 190 % du PIB contre 123 %) ; médian : 5,0 / 3,4 / 3,7 %. La règle de trajectoire ne suffit plus au prudent.
+
+**Point 4b — registre du budget par scénario : mesuré, pas encore adopté.** Essai : registre recalculé avec la colonne
+du scénario à la place de la colonne prudente (comme le calcul de crise), comparé aux mesures « méthode » :
+
+| Écart de solde primaire avec le registre prudent (Md€) | 2037 | 2050 | 2073 |
+|---|---|---|---|
+| médian : registre par scénario | 15,2 | 25,8 | 141,7 |
+| médian : mesures « méthode » actuelles | 19,6 | 33,9 | 118,6 |
+| optimiste : registre par scénario | −0,5 | 28,5 | 211,9 |
+| optimiste : mesures « méthode » actuelles | 25,3 | 29,5 | 202,9 |
+
+Même ordre de grandeur, mais des écarts de 5 à 25 Md€ selon l'année. L'essai n'est pas adopté tel quel : plusieurs
+modules rendent des valeurs indexées par nom de scénario (emploi : le prudent est la moyenne des jeux crise et médian ;
+réactions des hauts revenus, inactifs, choc de chômage) et ne suivent pas la colonne ; l'IA n'est pas dans le registre.
+Reste à faire : une copie de paramètres par scénario (`en_scenario`), l'audit de ces modules, puis le retrait des
+mesures « méthode ».
+
+**Correction au passage.** `moteur/attribution.py` : la décomposition lisait la charge de la dette nominale alors que
+le solde du noyau porte les intérêts réels (écart de 0,003 Md€, test `test_decomposition` en échec depuis la migration).

@@ -155,3 +155,16 @@ def test_impulsion_budgetaire_d_ecologie_de_droite(p):
     anc = next(x for x in m if x.nom.startswith("Anciennes pensions : prélèvement net")).valeurs[2029]
     declare = (p.val("macro.effort_2029") - p.val("macro.assouplissement_2029")) * sq.pib(p, "prudent")[2029] + anc
     assert -imp[2029] == pytest.approx(declare, rel=0.15)
+
+
+def test_variante_fonds_dans_les_administrations_publiques(p):
+    """Variante de classement (relecture I5) : les investissements financés par le fonds comptés en dépense publique.
+    Même économie (PIB inchangé la première année), déficit avant règle plus haut du montant de ces investissements."""
+    prog = noyau.charger("ecologie_de_droite")
+    base = noyau.simuler(p, prog, scenarios=("prudent",), contrefactuel=False)["prudent"]
+    var = prog.variante_fonds_apu(p, ("prudent",))["prudent"]
+    inv = var[2029]["investissements_du_fonds"]
+    assert 50 < inv < 100
+    assert var[2029]["pib"] == pytest.approx(base[2029]["pib"])
+    assert var[2029]["deficit_avant_regle"] - base[2029]["deficit_avant_regle"] == pytest.approx(inv / base[2029]["pib"] * 100, abs=1e-6)
+    assert all(var[t]["dette_pib"] > base[t]["dette_pib"] for t in (2029, 2037, 2050, 2073))
