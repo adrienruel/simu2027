@@ -100,3 +100,11 @@ def test_multiplicateur_en_miroir_pour_une_relance(p):
     # relance de même taille : l'optimiste donne au moins autant de PIB que le prudent, la crise au plus autant
     d = {sc: multiplicateur(p, sc, relance, an)[2030] for sc in sq.SCENARIOS}
     assert d["optimiste"] >= d["prudent"] >= d["crise"]
+
+
+def test_trente_deux_heures_penibles(p, prog):
+    """LFI-EMP-10 : 32 heures dans les métiers pénibles ou de nuit du privé (11/11/2026)."""
+    ctx = prog.contexte(p)
+    cle = "LFI-EMP-10 — 32 heures (métiers pénibles ou de nuit) : emplois perdus par le coût horaire"
+    pr, op = ctx["prudent"]["emplois_canaux"][2035][cle], ctx["optimiste"]["emplois_canaux"][2035][cle]
+    assert pr < op < 0

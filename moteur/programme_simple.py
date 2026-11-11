@@ -187,6 +187,47 @@ class ProgrammeSimple:
                               vert="defavorable" if max(serie.values()) > 0 else "favorable"))
         return out
 
+    # ------------------------------------------------------------------ 32 heures (privé)
+    def trente_deux_heures(self, p: Parametres, s: str, idx: dict, c: dict, el_t: float, prefixe: str,
+                           canaux: dict) -> list[Mesure]:
+        """Passage aux 32 heures sans perte de salaire pour c["emplois_concernes"] salariés du privé (11/11/2026).
+
+        Heures par salarié −(1 − 32/35) ; coût horaire + (35/32 − 1) × (1 − gain de productivité) : emplois perdus
+        (élasticité el_t) ; une part des heures est rendue par des embauches de partage du travail ; le reste est de la
+        production marchande en moins (self.pib_en_plus), avec ses recettes. Montée de c["debut"] à c["plein"]."""
+        e = sq.effectifs(p, s)
+        y = sq.pib(p, s)
+        rec = sq.recettes(p, s)
+        ip = idx["pib"]
+        baisse = 1 - c["heures_cible"] / c["heures_actuelles"]
+        gp, ge = c["gain_productivite"][s], c["part_embauches"][s]
+        n = c["emplois_concernes"]
+        part = n / c["emplois_prive"]
+
+        def m(t):
+            return min(1.0, max(0.0, (t - c["debut"] + 1) / (c["plein"] - c["debut"] + 1)))
+        k = 1 + (c["heures_actuelles"] / c["heures_cible"] - 1) * (1 - gp)
+        perdus = n * (1 - k ** el_t)
+        embauches = n * baisse * ge
+        r = {t: e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
+        canaux[f"{prefixe} : emplois perdus par le coût horaire"] = {t: -perdus * m(t) * r[t] for t in ANNEES}
+        canaux[f"*{prefixe} : embauches de partage du travail"] = {t: embauches * m(t) * r[t] for t in ANNEES}
+        d = {t: -y[t] * c["part_marchande"] * part * baisse * (1 - gp - ge) * m(t) for t in ANNEES}
+        d28 = -y[2029] * c["part_marchande"] * part * baisse * (1 - gp - ge) * m(2028)
+        self.pib_en_plus = getattr(self, "pib_en_plus", {})
+        prec = self.pib_en_plus.get((id(p), s), {})
+        self.pib_en_plus[(id(p), s)] = {t: prec.get(t, 0.0) + d[t] for t in ANNEES}
+        part_rec = {t: rec[t] / y[t] for t in ANNEES}
+        valeur = self.v("emploi.valeur_emploi")
+        return [
+            Mesure(f"{prefixe} : production et recettes en moins (heures non compensées)", "recettes",
+                   {2027: 0.0, 2028: d28 * part_rec[2029], **{t: d[t] * part_rec[t] for t in ANNEES}},
+                   nature="effet_macro"),
+            Mesure(f"{prefixe} : prélèvements des embauches de partage du travail", "recettes",
+                   {2027: 0.0, 2028: embauches * m(2028) * valeur / 1e9,
+                    **{t: embauches * m(t) * valeur * ip[t] / 1e9 for t in ANNEES}}, nature="effet_macro"),
+        ]
+
     # ------------------------------------------------------------------ à compléter par chaque programme
     def mesures_calculees(self, p: Parametres, s: str, idx: dict) -> tuple[list[Mesure], dict[str, dict[int, float]]]:
         """Mesures de la bibliothèque (montants) et emplois qu'elles changent ({canal: {année: emplois}}), hors

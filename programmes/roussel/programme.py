@@ -142,36 +142,14 @@ class Roussel(ProgrammeSimple):
         canaux["Sécurité d'emploi ou de formation : emplois privés évincés"] = {
             t: -ev * g["emplois"] * mont(t) for t in ANNEES}
 
-        # PCF-EMP-01 : 32 heures sans perte de salaire
-        c = self.v("temps_travail.trente_deux_heures")
-        baisse = 1 - c["heures_cible"] / c["heures_actuelles"]  # heures par salarié en moins
-        gp, ge = c["gain_productivite"][s], c["part_embauches"][s]
+        # PCF-EMP-01 : 32 heures sans perte de salaire (privé : méthode commune ProgrammeSimple.trente_deux_heures)
+        c = dict(self.v("temps_travail.trente_deux_heures"))
+        c["emplois_concernes"] = c["emplois_prive"]
+        out += self.trente_deux_heures(p, s, idx, c, self.v("temps_travail.elasticite_emploi", s),
+                                       "PCF-EMP-01 — 32 heures", canaux)
 
         def m32(t):
             return min(1.0, max(0.0, (t - c["debut"] + 1) / (c["plein"] - c["debut"] + 1)))
-        k = 1 + (c["heures_actuelles"] / c["heures_cible"] - 1) * (1 - gp)
-        el_t = self.v("temps_travail.elasticite_emploi", s)
-        n_prive = c["emplois_prive"]
-        perdus = n_prive * (1 - k ** el_t)
-        embauches = n_prive * baisse * ge
-        canaux["32 heures : emplois perdus par le coût horaire"] = {
-            t: -perdus * m32(t) * (e[t]["emploi"] / e[2029]["emploi"]) for t in ANNEES}
-        canaux["*32 heures : embauches de partage du travail"] = {
-            t: embauches * m32(t) * (e[t]["emploi"] / e[2029]["emploi"]) for t in ANNEES}
-        # heures perdues non compensées (ni productivité ni embauches) : production marchande en moins. Les embauches de
-        # partage du travail ont leur valeur ajoutée par le canal d'emploi (compteur « * » : prélèvements ajoutés ici)
-        d_heures = {t: -y[t] * c["part_marchande"] * baisse * (1 - gp - ge) * m32(t) for t in ANNEES}
-        d28 = -y[2029] * c["part_marchande"] * baisse * (1 - gp - ge) * m32(2028)
-        self.pib_en_plus = getattr(self, "pib_en_plus", {})
-        self.pib_en_plus[(id(p), s)] = d_heures
-        part_rec = {t: rec[t] / y[t] for t in ANNEES}
-        out.append(Mesure("PCF-EMP-01 — 32 heures : production et recettes en moins (heures non compensées)", "recettes",
-                          {2027: 0.0, 2028: d28 * part_rec[2029], **{t: d_heures[t] * part_rec[t] for t in ANNEES}},
-                          nature="effet_macro"))
-        valeur = self.v("emploi.valeur_emploi")
-        out.append(Mesure("PCF-EMP-01 — 32 heures : prélèvements des embauches de partage du travail", "recettes",
-                          {2027: 0.0, 2028: embauches * m32(2028) * valeur / 1e9,
-                           **{t: embauches * m32(t) * valeur * ip[t] / 1e9 for t in ANNEES}}, nature="effet_macro"))
         # fonction publique : 32 heures, embauches pour garder le service
         hausse_fp = cout_public * (c["heures_actuelles"] / c["heures_cible"] - 1) * c["part_compensee_fp"][s]
         for v, part in versants.items():

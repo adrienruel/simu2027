@@ -53,7 +53,7 @@ def test_trente_deux_heures(p, prog):
     """32 heures : moins de production (heures non compensées), embauches de partage et embauches publiques."""
     ctx = prog.contexte(p)["prudent"]
     c = ctx["emplois_canaux"][2035]
-    assert c["32 heures : embauches de partage du travail"] > 0 > c["32 heures : emplois perdus par le coût horaire"]
+    assert c["PCF-EMP-01 — 32 heures : embauches de partage du travail"] > 0 > c["PCF-EMP-01 — 32 heures : emplois perdus par le coût horaire"]
     assert prog.pib_en_plus[(id(p), "prudent")][2035] < 0
 
 

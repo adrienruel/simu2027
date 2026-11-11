@@ -128,6 +128,12 @@ class Melenchon(ProgrammeSimple):
         perdus = n_prive * (1 - k ** el_t)
         canaux["Sixième semaine de congés et 4 février férié : emplois perdus"] = {
             t: -perdus * min(1.0, (t - 2027) / 2) * (e[t]["emploi"] / e[2029]["emploi"]) for t in ANNEES}
+        # LFI-EMP-10 : 32 heures dans les métiers pénibles ou de nuit, privé compris (méthode commune, 11/11/2026)
+        c = dict(self.v("temps_travail.trente_deux_heures"))
+        c["emplois_concernes"] = c["emplois_concernes"][s]
+        c["emplois_prive"] = n_prive
+        out += self.trente_deux_heures(p, s, idx, c, el_t, "LFI-EMP-10 — 32 heures (métiers pénibles ou de nuit)",
+                                       canaux)
         # effets en tonnes (groupe melenchon_ecologie) : ProgrammeSimple.mesures_ecologie, commun depuis le 11/11/2026
         return out, canaux
 

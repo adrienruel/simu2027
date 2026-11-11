@@ -135,7 +135,7 @@ melenchon_temps_travail:
     unite: taux
     statut: HYPOTHESE
     source: "Calcul : sixième semaine de congés payés (5 jours) et 4 février férié (1 jour) sur ≈ 220 jours travaillés par an : −2,7 % d'heures payées au même salaire, soit +2,7 % de coût horaire du travail dans le privé"
-    note: "Les 32 heures dans les métiers pénibles et de nuit « favorisées par la négociation » (p. 74) ne sont pas comptées dans le privé."
+    note: "Les 32 heures des métiers pénibles ou de nuit sont dans trente_deux_heures ; leur généralisation « par la négociation collective » n'est pas comptée."
   elasticite_emploi:
     valeur: {crise: -0.5, prudent: -0.3, median: -0.2, optimiste: -0.1}
     unite: sans_unite
@@ -146,6 +146,16 @@ melenchon_temps_travail:
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : salariés du privé ≈ 20 millions (Insee, 2025)"
+
+  trente_deux_heures:
+    valeur: {heures_actuelles: 35, heures_cible: 32, debut: 2028, plein: 2029, part_marchande: 0.75,
+             emplois_concernes: {crise: 3000000, prudent: 2500000, median: 2000000, optimiste: 1300000},
+             gain_productivite: {crise: 0.2, prudent: 0.3, median: 0.35, optimiste: 0.4},
+             part_embauches: {crise: 0.25, prudent: 0.3, median: 0.35, optimiste: 0.4}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "« Passer aux 32 heures dans les métiers pénibles ou de nuit, et favoriser leur généralisation par la négociation collective » (melenchon2027.fr, p. 74) ; amendement LFI n° 12 du 22/06/2026 : « passage immédiat aux 32 heures dans les métiers pénibles ou de nuit ». Effectifs : 1,3 million de titulaires du compte professionnel de prévention, privé seulement, travail de nuit compris (Sumer 2017) ; 2,9 millions de salariés exposés à un facteur du C2P (Sumer 2017) ; 3,5 millions de salariés travaillant la nuit, dont une part dans le public (Dares, 2012)"
+    note: "Salariés du privé concernés : 1,3 million (optimiste, titulaires du C2P) à 3 millions (crise, tous les exposés et travailleurs de nuit occasionnels). Même mécanisme et mêmes parts de productivité et d'embauches que roussel_temps_travail.trente_deux_heures ; mise en place rapide (2028-2029). La fonction publique est dans melenchon_mesures.fonction_publique_temps."
 
 melenchon_emplois_aides:
   garantie_emploi:
