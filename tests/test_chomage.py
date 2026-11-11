@@ -32,8 +32,12 @@ def test_ordre_des_scenarios():
 
 
 def test_chomeurs_seniors_ajoutes():
+    """Chômeurs seniors en plus avec l'âge à 67 ans : présents dès la montée en charge, puis à peu près stables
+    (11/11/2026 : avec l'âge légal réel des générations au statu quo, le niveau de 2073 est celui de 2037 à 1 % près ;
+    l'ancienne hausse continue venait du calendrier à 64 ans pour toutes les générations)."""
     d = R["prudent"].detail["chomage_detail"]
-    assert d[2073]["seniors"] > d[2037]["seniors"] > 0
+    assert d[2037]["seniors"] > d[2032]["seniors"] > 0
+    assert d[2073]["seniors"] == pytest.approx(d[2037]["seniors"], rel=0.15)
 
 
 def test_v235_inchangee():
