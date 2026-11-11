@@ -4,7 +4,7 @@ import pytest
 from moteur import canaux_declares, noyau
 from moteur.noyau import ANNEES
 from moteur.parametres import Parametres
-from programmes.le_pen.programme import LePen
+from programmes.bertrand.programme import Bertrand as LePen  # un programme sans canal déclaré
 
 P = Parametres()
 PAR = {"crise": 0.0, "prudent": 0.001, "median": 0.002, "optimiste": 0.003}
@@ -14,7 +14,7 @@ def _programme(canaux: dict) -> LePen:
     """Un programme existant auquel on déclare des canaux (sans toucher à son fichier de paramètres)."""
     prog = LePen()
     for nom, valeur in canaux.items():
-        cle = f"le_pen_canaux.{nom}"
+        cle = f"{prog.nom}_canaux.{nom}"
         prog.pt._p[cle] = prog.pt._valider(cle, {"valeur": valeur, "unite": "sans_unite", "statut": "HYPOTHESE"})
     return prog
 
@@ -72,3 +72,27 @@ def test_regle_de_trajectoire_declaree():
         assert r[t]["deficit_sans_regle"] == pytest.approx(BASE[t]["deficit"], abs=1e-9)
         assert r[t]["sans_regle"]["dette_pib"] == pytest.approx(BASE[t]["dette_pib"], abs=1e-9)
     assert r[2073]["dette_pib"] < BASE[2073]["dette_pib"]
+
+
+def test_canaux_declares_par_les_programmes():
+    """Barème commun du 12/11/2026 : adoption de l'IA et école déclarées par les programmes qui ont une mesure sur le
+    même objet, aux valeurs d'Écologie de droite ; rien dans le scénario de crise ; l'école seulement à l'optimiste."""
+    q = Parametres()
+    ia = q.val("macro.adoption_ia", "optimiste")
+    avec_ia, avec_ecole = set(), set()
+    for nom in noyau.programmes_disponibles():
+        if nom in ("statu_quo", "ecologie_de_droite"):
+            continue
+        prog = noyau.charger(nom)
+        d = canaux_declares.declares(prog)
+        if "adoption_ia" in d:
+            avec_ia.add(nom)
+            assert d["adoption_ia"]["part"] == {s: q.val("macro.adoption_ia", s) for s in ("crise", "prudent", "median", "optimiste")}
+        if "ecole" in d:
+            avec_ecole.add(nom)
+            assert d["ecole"]["niveau_eleves"] == {s: q.val("macro.niveau_eleves", s) for s in ("crise", "prudent", "median", "optimiste")}
+        m = prog.mesures(P)
+        assert all(abs(v) < 1e-9 for x in m["crise"] if x.nom.startswith("Canal déclaré") for v in x.valeurs.values())
+    assert ia > 0 and avec_ia == {"attal", "glucksmann", "philippe", "zemmour", "retailleau", "lisnard"}
+    assert avec_ecole == {"arthaud", "attal", "glucksmann", "le_pen", "lisnard", "melenchon", "philippe", "retailleau", "roussel",
+                          "tondelier"}

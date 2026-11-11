@@ -410,3 +410,11 @@ roussel_ecologie:
     statut: HYPOTHESE
     source: "Labandeira et al. (2017) : élasticité-prix de long terme ≈ −0,3 à −0,6 ; Citepa : voitures et véhicules utilitaires ≈ 90 Mt"
     note: "Prix ≈ −15 % pour les ménages et les entreprises : +1,3 à +3,3 % de consommation de carburant."
+
+# --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
+roussel_canaux:
+  ecole:
+    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : PCF-EDU-01 (90 000 enseignants, classes de 20 élèves en primaire). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

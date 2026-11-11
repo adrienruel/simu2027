@@ -909,3 +909,30 @@ de ces canaux, ouverture à tous) : **ouvrir à tous**.
   ces canaux pour chacun reste à faire, programme par programme, avec ses sources.
 - Tests : `tests/test_canaux_declares.py` (sans canal rien ne change, canal inconnu refusé, chaque canal, règle
   déclarée avec scénario sans règle égal au programme sans la règle).
+
+## 12 novembre 2026 (suite) — Canaux déclarés pour les autres programmes : barème commun (IA, école)
+
+DÉCISION d'Adrien : ajouter les canaux pour tous les programmes. Règle appliquée, mécanique pour rester neutre : un
+programme reçoit un canal dès qu'une de ses mesures porte sur le même objet, **à la valeur d'Écologie de droite**,
+quelle que soit l'ampleur de la mesure (statut HYPOTHÈSE, mesure citée dans la note du paramètre).
+
+| Canal | Valeur (crise / prudent / médian / optimiste) | Programmes |
+|---|---|---|
+| Adoption de l'IA | 0 / 5 % / 10 % / 43 % du gain de l'IA | Attal, Glucksmann, Lisnard, Philippe, Retailleau, Zemmour |
+| École (niveau des élèves) | 0 / 0 / 0 / 0,1 écart-type, à partir de 2045 | Arthaud, Attal, Glucksmann, Le Pen, Lisnard, Mélenchon, Philippe, Retailleau, Roussel, Tondelier |
+
+Recettes en plus en 2050 : 0,6 Md€ au prudent, 5,3 au médian, 42,7 à l'optimiste (IA et école) ; école seule : 1,0 Md€
+à l'optimiste en 2050, 25,5 en 2073. Rien dans le scénario de crise.
+
+**Non déclarés, et pourquoi** :
+- fraude : Le Pen, Mélenchon, Roussel, Tondelier et Zemmour ont déjà leur mesure de lutte contre la fraude, à
+  l'estimation commune ; ajouter le canal la compterait deux fois. Les autres programmes n'ont pas de mesure ;
+- productivité : celle d'Écologie de droite repose sur l'ensemble de ses réformes (OCDE 2014) ; dire quels autres
+  programmes y ont droit est un jugement programme par programme — à décider par Adrien ;
+- baisse de l'écart de taux : annoncer une règle d'or (Attal, Bertrand, Le Pen, Philippe, Retailleau) ne suffit pas à
+  la justifier quand le déficit simulé du programme reste au-dessus du statu quo ; il faut un critère sur le résultat,
+  à décider ;
+- règle de trajectoire : ces mêmes programmes annoncent une cible, mais pas les leviers (quel impôt, quelle dépense) ;
+  les inventer reviendrait à saisir une économie annoncée, ce que la règle commune interdit.
+
+Limite du barème : il ne distingue pas un plan de 200 Md€ d'une mesure non chiffrée. À affiner mesure par mesure.

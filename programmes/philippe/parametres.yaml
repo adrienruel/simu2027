@@ -419,3 +419,16 @@ philippe_ecologie:
     statut: HYPOTHESE
     source: "Stratégie CCUS (2023-2025) : 4 à 8,5 Mt captées par an vers 2030, 15 à 20 Mt vers 2040, déjà prévues en partie ; contrats carbone pour différence de 2025 ; coût de la tonne évitée ≈ 150 à 250 € au démarrage"
     note: "0,2 à 0,5 Md€ par an (philippe_mesures.capture_carbone) / ≈ 200 € par tonne ≈ 1,5 à 2,5 Mt soutenues ; part en plus de la stratégie du statu quo : ≈ 1/3 à 4/5 ; projets en service vers 2035 (cimenteries, chimie)."
+
+# --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
+philippe_canaux:
+  adoption_ia:
+    valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : PHI-NUM-01 (infrastructure d'IA souveraine, calcul doublé en cinq ans). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."
+  ecole:
+    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : PHI-EDU-01 (enseignants +20 %, écoles normales), PHI-EDU-03 (soutien scolaire universel). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

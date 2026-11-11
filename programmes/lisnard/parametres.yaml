@@ -360,3 +360,16 @@ lisnard_ecologie:
     statut: HYPOTHESE
     source: "Même encadrement que retailleau_ecologie.dpe"
     note: "Le bonus-malus garde une incitation : moitié de l'effet de la suppression des interdictions (retailleau_ecologie.dpe)."
+
+# --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
+lisnard_canaux:
+  adoption_ia:
+    valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : LIS-NUM-01 (IA souveraine dans l'action publique). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."
+  ecole:
+    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : LIS-EDU-03 (rémunérations des enseignants +20 %), LIS-EDU-01 (chèque-éducation). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

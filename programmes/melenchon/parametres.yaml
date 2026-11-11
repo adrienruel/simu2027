@@ -1128,3 +1128,11 @@ melenchon_ecologie:
     statut: HYPOTHESE
     source: "Règle commune des bâtiments publics (11/11/2026, phase 2) : Banque des territoires (2023) : ≈ 40 Md€ en vingt ans pour rénover le bâti scolaire, soit ≈ 60 % de ses ≈ 3,4 Mt (Citepa : tertiaire ≈ 17 Mt, dont l'enseignement ≈ 20 %) : ≈ 0,05 t évitée par an pour 1 000 € de rénovation (ADEME, rénovations globales du tertiaire public à ≈ 300-400 € le m² : ≈ 0,02 à 0,05 t), contre 0,42 t pour le fonds chaleur ; part additionnelle face au décret tertiaire (−40 % en 2030 déjà obligatoire) : 25 % (crise), 30 % (prudent), 50 % (médian), 70 % (optimiste) ; même règle que glucksmann_ecologie.ecole_batiments"
     note: "≈ 2,5 Md€ par an, dont ≈ 70 % de rénovation énergétique (le reste : adaptation à la chaleur) : 35 Md€ en vingt ans × 0,05 t = 1,75 Mt (sous le plafond de ≈ 2,6 Mt du bâti scolaire et universitaire), × la part additionnelle. Sourcé le 11/11/2026 : avant, zéro en crise et en prudent, 1,5 à 3 Mt en médian et en optimiste."
+
+# --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
+melenchon_canaux:
+  ecole:
+    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : LFI-EDU-03 (effectifs par classe sous 19 élèves). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

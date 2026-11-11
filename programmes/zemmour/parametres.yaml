@@ -340,3 +340,11 @@ zemmour_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     note: "« Investissements massifs », surtout par l'épargne privée : 1 Md€ public par an en plus de France 2030 (hypothèse) et 0,1 Md€ de formation."
+
+# --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
+zemmour_canaux:
+  adoption_ia:
+    valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : ZEM-NUM-01 (la France troisième puissance mondiale de l'IA). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

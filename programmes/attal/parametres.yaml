@@ -356,3 +356,16 @@ attal_ecologie:
     statut: HYPOTHESE
     source: "attal_mesures.carburant : ≈ 0,2 à 0,5 Md€ par an d'aide aux trajets en voiture ; élasticité de la consommation de carburant au prix ≈ −0,3 à long terme (Labandeira et al., 2017)"
     note: "Une aide liée aux kilomètres baisse le coût des trajets : ≈ 0,4 Md€ sur ≈ 40 Md€ de dépense de carburant des ménages, soit ≈ −1 % de coût et +0,3 % de consommation pour une partie des conducteurs : 0,03 à 0,1 Mt de plus."
+
+# --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
+attal_canaux:
+  adoption_ia:
+    valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : ATT-NUM-01 (plan « France 2040 », 200 Md€ pour l'IA et l'innovation). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."
+  ecole:
+    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : ATT-EDU-01 (enseignants revalorisés), ATT-EDU-02 (moins de 20 élèves par classe en primaire). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

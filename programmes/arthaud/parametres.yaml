@@ -208,3 +208,11 @@ arthaud_ecologie:
     statut: HYPOTHESE
     source: "Même élasticité que le_pen_ecologie.tva_energie (Labandeira et al., 2017 : −0,3 à −0,6 à long terme) ; Citepa, Secten 2026 : transport routier ≈ 110 Mt"
     note: "Prix −9 % environ : +2,7 à +5,4 % de consommation routière, soit +3 à +6 Mt. Prudent : effet défavorable au climat élevé."
+
+# --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
+arthaud_canaux:
+  ecole:
+    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : ART-EDU-01 (plus de moyens pour l'éducation). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."
