@@ -253,6 +253,8 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         if regle is not None:
             out[t]["deficit_sans_regle"] = sans_regle
             out[t]["regle"] = detail_regle
+        else:
+            out[t]["deficit_sans_regle"] = out[t]["deficit"]  # pas de règle : les deux déficits sont les mêmes
         etat.update({"maastricht": maastricht, "dette": dette, "pib_t": y[t], "compte": out[t]})
         for d in dynamiques:
             d.fin(t, etat)
