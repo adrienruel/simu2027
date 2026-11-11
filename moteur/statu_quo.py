@@ -809,8 +809,8 @@ def simuler(p: Parametres | None = None) -> dict[str, dict[int, dict]]:
 def ecart(programme: dict, statu_quo: dict, avant_regle: bool = False) -> dict[str, dict[int, dict[str, float]]]:
     """Écart programme − statu quo par scénario et par année : déficit (points de PIB), solde primaire (points de
     PIB, hors intérêts : l'écart propre aux politiques, sans l'effet boule de neige de la dette), dette (points de
-    PIB), chômage (points), PIB (%). avant_regle : déficit du programme sans sa règle de trajectoire (le solde
-    primaire, lui, est toujours celui du déficit publié)."""
+    PIB), chômage (points), PIB (%). avant_regle : déficit et dette du scénario complet sans la règle de trajectoire
+    (le solde primaire, lui, est toujours celui du déficit publié)."""
     out = {}
     for s in statu_quo:
         if s not in programme:
@@ -818,11 +818,12 @@ def ecart(programme: dict, statu_quo: dict, avant_regle: bool = False) -> dict[s
         out[s] = {}
         for t, x in statu_quo[s].items():
             pr = programme[s][t]
-            d_pr = pr["deficit_sans_regle"] if (avant_regle and "deficit_sans_regle" in pr) else pr["deficit"]
+            sr = pr.get("sans_regle") if avant_regle else None  # scénario complet sans la règle de trajectoire
+            d_pr = sr["deficit"] if sr else pr["deficit"]
             # solde primaire : solde + intérêts réels (noyau : interets_reels)
             sp_pr = (pr["solde"] + pr.get("interets_reels", pr["charge_dette"])) / pr["pib"] * 100
             out[s][t] = {"deficit": d_pr - x["deficit"], "solde_primaire": sp_pr - x["solde_primaire"] / x["pib"] * 100,
-                         "dette_pib": pr["dette_pib"] - x["dette_pib"],
+                         "dette_pib": (sr["dette_pib"] if sr else pr["dette_pib"]) - x["dette_pib"],
                          "chomage": pr["chomage"] - x["chomage"], "pib": (pr["pib"] / x["pib"] - 1) * 100}
     return out
 

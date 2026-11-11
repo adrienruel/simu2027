@@ -793,3 +793,52 @@ s'écartent de moins de 0,1 Md€.
 
 **À faire** : retirer les mesures « méthode » (registre par scénario) ; l'indexation `(1+tend0)^n` est conservée ;
 le canal d'emploi du fonds n'est pas dans `emplois_canaux`.
+
+## 12 novembre 2026 (suite) — Relecture indépendante : vrai scénario sans règle, créances de la règle, performance
+
+Une relecture par un agent indépendant (11/11/2026) a relevé, entre autres, deux défauts de publication de la règle de
+trajectoire et une lenteur. DÉCISION d'Adrien : corriger ses points 1 et 5 ; les points 2 à 4 (impulsion du
+multiplicateur, équité des canaux entre programmes, registre par scénario) attendent ses arbitrages.
+
+**1. Vrai scénario sans règle.** Le « déficit sans règle » publié était celui de l'année avant les leviers, avec la dette
+et le PIB déjà modifiés par la règle des années précédentes : ce n'était pas un scénario sans règle. Désormais :
+- `deficit_avant_regle` : l'ancien chiffre (année par année, avant les leviers ; sert à la règle elle-même et au
+  seuil de la hausse conditionnelle de la déduction de l'IS, convention de l'ancien moteur inchangée) ;
+- `sans_regle` (déficit, dette, PIB, chômage…) et `deficit_sans_regle` : le scénario complet recalculé sans la règle,
+  par `noyau.simuler`. Pour Écologie de droite, tout est recalculé avec `clause.active = False`
+  (`entrees_sans_regle`) : la clause pèse aussi hors de ses leviers, par la hausse conditionnelle de la déduction de
+  l'IS, qui suit le déficit avant clause. Testé : identique à un passage avec la clause désactivée.
+
+**2. Créances de la règle.** La contribution prise par la règle est rendue aux ménages à 67 ans avec le rendement du
+fonds : c'est un emprunt, hors dette de Maastricht. Une dynamique peut maintenant déclarer une `quasi_dette()` ; le
+noyau publie `quasi_dette` (Md€) et `dette_et_quasi_dette_pib`. L'export du comparateur et la restitution ont les
+colonnes `deficit_sans_regle`, `dette_pib_sans_regle`, `dette_et_quasi_dette_pib`.
+
+| Prudent | Publié | Sans règle (nouveau) | Ancien « sans règle » | Dette publiée | Dette sans règle | Créances | Dette + créances |
+|---|---|---|---|---|---|---|---|
+| 2037 | 3,00 | 5,12 | 4,32 | 123 % | 140 % | 332 Md€ | 133 % |
+| 2050 | 3,29 | 5,69 | 4,80 | 124 % | 153 % | 625 Md€ | 141 % |
+| 2073 | 3,00 | 8,45 | 3,47 | 132 % | 209 % | 561 Md€ | 147 % |
+
+Crise 2073 : 57,3 publié, 85,8 sans règle, créances 1 135 Md€. Au médian et à l'optimiste, le scénario sans règle finit
+un peu mieux que le publié (médian 2073 : −8,4 contre −6,6) : sans la clause, le déficit reste plus longtemps au-dessus
+du seuil de la hausse conditionnelle de la déduction de l'IS (moins de déduction, plus d'IS), et il n'y a pas de
+créances à rendre. Le seuil de cette hausse lit toujours le déficit avant clause année par année : à confirmer.
+
+**3. Performance et nettoyage (point 5).**
+- `tva.taux_effectifs` (relisait le CSV des produits à chaque appel, ~227 000 fois par passage) et
+  `inflation.facteur_prix` (~750 000 appels) gardés dans le cache des paramètres : le prudent d'Écologie de droite
+  passe de 49 s à 25 s ; les quatre scénarios, avec en plus le scénario sans règle, en ~50 s (contre ~116 s).
+  Résultats publiés inchangés.
+- Caches indexés par `id(p)` (programme_simple et plusieurs programmes) : les instances de `Parametres` restent en vie
+  jusqu'à la fin du processus (`parametres._VIVANTES`), donc un id ne peut plus être réattribué à une autre instance.
+- Supprimés : `moteur/trajectoire.py` (second bloc comptable, utilisé seulement par son test de reproduction v235) et
+  `tests/test_trajectoire_v235.py` ; imports morts d'effets.py ; références à `moteur/macro.py` dans les textes.
+- Tests rendus non conditionnels (règle générique du noyau ; règle d'Écologie de droite en 2037) ; nouveau test du
+  scénario sans règle.
+
+**Restent ouverts** (relecture, points 2 à 4) : impulsion du multiplicateur d'Écologie de droite (natures
+« classement », écarts de méthode de 2029, recettes carbone et énergie hors multiplicateur, poids du RUI) ; canaux
+propres au programme absents des autres (fraude TVA, productivité, IA, école, écart de taux) ; comparateur qui montre
+ce programme après règle et les autres sans ; mesures « méthode » ; variante « fonds dans les APU » ; inflation
+d'Écologie de droite encore tirée de `macro.effort_2029` et non de l'impulsion calculée.

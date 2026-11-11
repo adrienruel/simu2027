@@ -67,7 +67,16 @@ def produits(p: Parametres) -> list[Produit]:
 
 
 def taux_effectifs(p: Parametres) -> dict[str, tuple[float, float]]:
-    """Par profil : (accise santé, TVA légale + accise écologie), en % de la consommation HT."""
+    """Par profil : (accise santé, TVA légale + accise écologie), en % de la consommation HT.
+
+    Gardé dans le cache de p (appelé des centaines de milliers de fois par passage : relecture du CSV évitée)."""
+    cache = p.__dict__.setdefault("_cache", {})
+    if "tva.taux_effectifs" not in cache:
+        cache["tva.taux_effectifs"] = _taux_effectifs(p)
+    return dict(cache["tva.taux_effectifs"])
+
+
+def _taux_effectifs(p: Parametres) -> dict[str, tuple[float, float]]:
     out = {}
     pr_ = produits(p)
     for pr in PROFILS:

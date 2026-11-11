@@ -71,6 +71,12 @@ class Parametre:
         return self.valeur
 
 
+# Toute instance reste en vie jusqu'à la fin du processus : plusieurs programmes mettent leurs résultats en cache
+# sous id(p) ; une instance libérée laisserait Python réattribuer son id à une autre, qui lirait alors des résultats
+# périmés (relecture indépendante du 11/11/2026). Le coût : quelques centaines d'instances au plus par processus.
+_VIVANTES: list = []
+
+
 class Parametres:
     def __init__(self, chemin: Path | str | None = None, reference: str | None = None,
                  programme: str = PROGRAMME_DEFAUT):
@@ -99,6 +105,7 @@ class Parametres:
                         raise ErreurParametre(f"{cle} défini deux fois : {self.origine[cle]} et {f}")
                     self._p[cle] = self._valider(cle, champs)
                     self.origine[cle] = f
+        _VIVANTES.append(self)
 
     def _valider(self, cle: str, c: dict) -> Parametre:
         if getattr(self, "reference", None) == "v235" and "v235" in c:
@@ -157,6 +164,7 @@ class Parametres:
         c._surcharges = {"transition.decote_participations": self.val("crise.decote_participations")}
         if comme_v235:
             c.taux_local_copie = self.val("impot_local.taux_point_fixe")
+        _VIVANTES.append(c)
         return c
 
     def __iter__(self):
@@ -191,4 +199,5 @@ class Parametres:
                     cible[chemin[-1]] = v
             c._p[cle] = dataclasses.replace(par, valeur=nouvelle)
         c.mesures_desactivees = frozenset(self.mesures_desactivees) | frozenset(mesures_desactivees)
+        _VIVANTES.append(c)
         return c

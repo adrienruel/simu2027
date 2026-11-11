@@ -43,7 +43,7 @@ macro:
   impots_par_revenu: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 (recalculer l'impôt au lieu d'une moyenne) : les revenus créés ou perdus par les effets macro sont imposés selon leur nature. Salaires : impôt unique, impôt local et TVA des cellules de salariés de l'année, 53 % du coût employeur (barème qui suit la croissance, DÉCISION d'Adrien du 30/10) ; bénéfices (capital du fonds, investissement des entreprises, permis rapide) : IS de 45 % ; valeur ajoutée mêlée (ajustement budgétaire, retombées) : 63 % de salaires (1 − taux de marge des SNF, 32,2 %, − impôts de production, 5 %), 37 % de bénéfices, soit 50 %. v235 : part des recettes dans le PIB (38 %) pour tout."}
 
 chomage:
-  dynamique: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : chômage modélisé jusqu'en 2073 (v235 : jusqu'en 2040, population active figée en 2026). Population active de chaque année (population de l'Insee × taux d'emploi et de chômage par âge), effet des réformes proportionnel à l'écart au chômage incompressible, chômeurs seniors du report de l'âge de départ (moteur/macro.py)."}
+  dynamique: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Demande d'Adrien du 30/10/2026 : chômage modélisé jusqu'en 2073 (v235 : jusqu'en 2040, population active figée en 2026). Population active de chaque année (population de l'Insee × taux d'emploi et de chômage par âge), effet des réformes proportionnel à l'écart au chômage incompressible, chômeurs seniors du report de l'âge de départ (moteur/offre.seniors)."}
 
 # --- Santé année par année (feuille Santé) ------------------------------------------
 sante_trajectoire:

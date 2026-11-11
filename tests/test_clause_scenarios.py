@@ -29,7 +29,7 @@ def test_sortie_plus_tot_que_le_prudent(s):
     fin = max(t for t in R[s] if utilise(R[s][t]) > 0.01)
     fin_p = max(t for t in R["prudent"] if utilise(R["prudent"][t]) > 0.01)
     assert fin < fin_p
-    assert all(R[s][t]["regle"]["leviers"][CONTRIBUTION] < 0.01 for t in R[s] if R[s][t]["deficit_sans_regle"] <= 3.0)
+    assert all(R[s][t]["regle"]["leviers"][CONTRIBUTION] < 0.01 for t in R[s] if R[s][t]["deficit_avant_regle"] <= 3.0)
 
 
 def test_option_point_de_depart_commun():
@@ -46,12 +46,12 @@ def test_ordre_des_scenarios_sans_regle():
 
 
 def test_les_comptes_se_publient_avec_et_sans_la_regle():
-    """Le noyau publie le déficit avec et sans la règle. La règle ne le fait monter que si son gain net est négatif :
+    """Le noyau publie le déficit de l'année avant et après les leviers de la règle. La règle ne le fait monter que si son gain net est négatif :
     restitution des contributions du fonds et effet récessif décalé des baisses du RUI passées l'emportent sur les
     leviers de l'année (même comportement que l'ancien moteur : médian 2040-2045, prudent 2044)."""
     for s in R:
         for t in R[s]:
-            if R[s][t]["deficit"] > R[s][t]["deficit_sans_regle"] + 1e-9:
+            if R[s][t]["deficit"] > R[s][t]["deficit_avant_regle"] + 1e-9:
                 assert R[s][t]["regle"]["gain"] < 0
 
 

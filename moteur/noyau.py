@@ -167,7 +167,10 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
 
     Chaque année : flux des dynamiques → PIB, recettes et blocs → mesures → intérêts → règle de trajectoire (si le
     programme en a une) → dette et déficit → mise à jour des dynamiques. Les comptes publiés contiennent ce que la
-    règle a fait (`regle`) et le déficit qu'on aurait eu sans elle (`deficit_sans_regle`)."""
+    règle a fait (`regle`) et le déficit de l'année avant ses leviers (`deficit_avant_regle` : même dette et même PIB
+    que le publié, donc PAS le scénario sans règle, que seul `simuler` calcule, en `sans_regle`). Une dynamique peut
+    avoir une méthode `quasi_dette()` (Md€ dus en fin d'année hors dette publique, par exemple des créances rendues
+    plus tard aux ménages) : publiée en `quasi_dette` et `dette_et_quasi_dette_pib`."""
     from . import statu_quo as sq
     mesures, ctx = mesures or [], contexte or {}
     for m in mesures:
@@ -250,14 +253,16 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "recettes_pib": rec / y[t] * 100, "depenses_primaires_pib": primaire / y[t] * 100,
             "dynamiques": flux["detail"],
         }
+        out[t]["deficit_avant_regle"] = sans_regle if regle is not None else out[t]["deficit"]
+        out[t]["deficit_sans_regle"] = out[t]["deficit"]  # remplacé par le vrai scénario sans règle dans simuler
         if regle is not None:
-            out[t]["deficit_sans_regle"] = sans_regle
             out[t]["regle"] = detail_regle
-        else:
-            out[t]["deficit_sans_regle"] = out[t]["deficit"]  # pas de règle : les deux déficits sont les mêmes
         etat.update({"maastricht": maastricht, "dette": dette, "pib_t": y[t], "compte": out[t]})
         for d in dynamiques:
             d.fin(t, etat)
+        quasi = sum(d.quasi_dette() for d in dynamiques if hasattr(d, "quasi_dette"))
+        out[t]["quasi_dette"] = quasi
+        out[t]["dette_et_quasi_dette_pib"] = (dette + quasi) / y[t] * 100
         dette_prec = dette
     return out
 
@@ -294,15 +299,41 @@ def _appliquer_regle(regle: Regle, t: int, etat: dict, avant: float, pib_t: floa
             "reste_a_couvrir": reste, "ecart_cible": ecart * pib_t, "rec": rec, "bl": bl}
 
 
-def simuler(p: Parametres | None = None, programme=None, scenarios=None) -> dict[str, dict[int, dict]]:
-    """Les quatre scénarios d'un programme (statu quo si programme est None) ; `scenarios` : seulement ceux-là."""
+CLES_SANS_REGLE = ("deficit", "dette", "dette_pib", "pib", "solde", "solde_primaire", "chomage", "quasi_dette",
+                   "dette_et_quasi_dette_pib")
+
+
+def simuler(p: Parametres | None = None, programme=None, scenarios=None, contrefactuel: bool = True) -> dict[str, dict[int, dict]]:
+    """Les quatre scénarios d'un programme (statu quo si programme est None) ; `scenarios` : seulement ceux-là.
+
+    Programme avec une règle de trajectoire : le scénario sans règle est recalculé en entier (mêmes mesures et même
+    contexte, dynamiques neuves, aucune règle ; ou `programme.entrees_sans_regle` s'il existe), publié en `sans_regle` ; `deficit_sans_regle` est
+    son déficit (relecture indépendante du 11/11/2026 : l'ancien « sans règle » gardait la dette et le PIB déjà
+    modifiés par la règle des années précédentes). contrefactuel=False : pas de second passage (deficit_sans_regle
+    vaut alors None pour ces programmes)."""
     from .statu_quo import SCENARIOS
     p = p or Parametres()
     programme = programme or ProgrammeVide()
     noms = [s for s in SCENARIOS if scenarios is None or s in scenarios]
     if hasattr(programme, "entrees"):
         ent = programme.entrees(p, scenarios)
-        return {s: trajectoire(p, s, ent[s].mesures, ent[s].contexte, ent[s].dynamiques, ent[s].regle) for s in noms}
+        out = {s: trajectoire(p, s, ent[s].mesures, ent[s].contexte, ent[s].dynamiques, ent[s].regle) for s in noms}
+        avec_regle = [s for s in noms if ent[s].regle is not None]
+        if avec_regle:
+            # le programme peut fournir ses entrées sans règle (ce qui dépend de la règle ailleurs que dans ses leviers
+            # change aussi) ; sinon : mêmes entrées, dynamiques neuves, règle ignorée
+            if not contrefactuel:
+                neuf = {}
+            elif hasattr(programme, "entrees_sans_regle"):
+                neuf = programme.entrees_sans_regle(p, scenarios)
+            else:
+                neuf = programme.entrees(p, scenarios)
+            for s in avec_regle:
+                sans = trajectoire(p, s, neuf[s].mesures, neuf[s].contexte, neuf[s].dynamiques) if contrefactuel else None
+                for t, c in out[s].items():
+                    c["sans_regle"] = {k: sans[t][k] for k in CLES_SANS_REGLE} if sans else None
+                    c["deficit_sans_regle"] = sans[t]["deficit"] if sans else None
+        return out
     mes, ctx = programme.mesures(p), programme.contexte(p)
     return {s: trajectoire(p, s, mes.get(s), ctx.get(s)) for s in noms}
 

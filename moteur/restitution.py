@@ -60,7 +60,11 @@ def donnees(p: Parametres | None = None) -> dict:
             "canaux": {k: [_r(v[t], 3) for t in annees] for k, v in canaux.items()},
         }
         if "regle" in b[annees[0]]:
-            series[s]["deficit_avant_clause"] = [_r(b[t]["deficit_sans_regle"]) for t in annees]
+            series[s]["deficit_avant_clause"] = [_r(b[t]["deficit_avant_regle"]) for t in annees]  # année par année
+            if b[annees[0]].get("sans_regle"):  # scénario complet sans la règle, et dette avec les créances de la règle
+                series[s]["deficit_sans_regle"] = [_r(b[t]["sans_regle"]["deficit"]) for t in annees]
+                series[s]["dette_pib_sans_regle"] = [_r(b[t]["sans_regle"]["dette_pib"], 3) for t in annees]
+                series[s]["dette_et_quasi_dette_pib"] = [_r(b[t]["dette_et_quasi_dette_pib"], 3) for t in annees]
             r = {t: b[t]["regle"] for t in annees}
             ct, ru = "Contribution d'épargne retraite", "Baisse du revenu universel"
             series[s]["clause"] = {

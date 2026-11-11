@@ -104,6 +104,11 @@ def main() -> None:
             for t, x in v.items():
                 traj.append({"programme": lib, "scenario": SCENARIOS[s], "annee": t,
                              "deficit": round(x["deficit"], 3), "dette_pib": round(x["dette_pib"], 2),
+                             # programme avec une règle de trajectoire : scénario complet sans la règle, et dette
+                             # augmentée des créances que la règle crée envers les ménages (relecture du 11/11/2026)
+                             "deficit_sans_regle": round((x.get("sans_regle") or x)["deficit"], 3),
+                             "dette_pib_sans_regle": round((x.get("sans_regle") or x)["dette_pib"], 2),
+                             "dette_et_quasi_dette_pib": round(x.get("dette_et_quasi_dette_pib", x["dette_pib"]), 2),
                              "solde_primaire_pib": round(x["solde_primaire"] / x["pib"] * 100, 3),
                              "interets_pib": round(x["charge_dette"] / x["pib"] * 100, 3),
                              "recettes_pib": round(x["recettes_pib"], 3),

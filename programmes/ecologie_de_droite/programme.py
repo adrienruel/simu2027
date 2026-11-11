@@ -809,6 +809,12 @@ class EcologieDeDroite:
             out[s] = Entree(x["mesures"], x["contexte"], [f], f.regle())
         return out
 
+    def entrees_sans_regle(self, p: Parametres, scenarios=None) -> dict:
+        """Scénario complet sans la clause : la clause pèse aussi hors de ses leviers (la hausse conditionnelle de la
+        déduction de l'IS suit le déficit avant clause, qui dépend des clauses passées), donc tout est recalculé avec
+        clause.active = False."""
+        return self.entrees(p.avec({"clause.active": False}), scenarios)
+
     def mesures(self, p: Parametres) -> dict[str, list[Mesure]]:
         return {s: x["mesures"] for s, x in self._statique(p).items()}
 

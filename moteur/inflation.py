@@ -33,7 +33,7 @@ def ecart_production(p: Parametres, jeu: str, t: int) -> float:
     from .anciennes_pensions import recette_nette
     from .unites import facteur
     pib = 2920 * facteur(p, 2024, "recettes")
-    # même effort que le module macro : effort de 2029 + prélèvement net sur les anciennes pensions − assouplissement
+    # même effort que l'ancien module macro (supprimé le 12/11/2026 ; à remplacer par l'impulsion calculée) : effort de 2029 + prélèvement net sur les anciennes pensions − assouplissement
     # prélèvement net de 2029 sur les anciennes pensions : il ne dépend pas de l'inflation (pensions calées en 2029) ;
     # calculé sans le module d'inflation pour éviter la boucle (l'érosion des pensions gelées dépend de l'inflation)
     cache = p.__dict__.setdefault("_cache", {})
@@ -95,12 +95,17 @@ def serie(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
 
 
 def facteur_prix(p: Parametres, depuis: int, jusqu_a: int, jeu: str = "prudent") -> float:
-    """Hausse cumulée des prix de la fin de l'année « depuis » à la fin de « jusqu_a »."""
-    s = serie(p, jeu)
-    f = 1.0
-    for t in range(depuis + 1, jusqu_a + 1):
-        f *= 1 + s.get(t, p.val("calendrier.inflation"))
-    return f
+    """Hausse cumulée des prix de la fin de l'année « depuis » à la fin de « jusqu_a » (gardée dans le cache de p :
+    plusieurs centaines de milliers d'appels par passage)."""
+    cache = p.__dict__.setdefault("_cache", {}).setdefault(("facteur_prix", jeu, p.colonne_prudent), {})
+    cle = (depuis, jusqu_a)
+    if cle not in cache:
+        s = serie(p, jeu)
+        f = 1.0
+        for t in range(depuis + 1, jusqu_a + 1):
+            f *= 1 + s.get(t, p.val("calendrier.inflation"))
+        cache[cle] = f
+    return cache[cle]
 
 
 def indice_reel(p: Parametres, jeu: str = "prudent") -> dict[int, float]:

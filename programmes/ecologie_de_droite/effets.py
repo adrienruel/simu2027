@@ -89,7 +89,6 @@ class Effets:
         from moteur.unites import facteur
         from moteur.logement import reprise_amortissements
         from moteur.mesures import ecart_scenario
-        from moteur.anciennes_pensions import recette_nette  # noqa: F401  (compat. des paramètres)
         self.tend0 = tend0 = q.val("macro.tendance", "prudent")
         self.corr = corr = q.val("macro.corrections_relecture")
         pv = entrees_macro(q)
@@ -204,7 +203,6 @@ class Effets:
         règle, avec les emplois."""
         p, q, jeu, m, tend0, corr = self.p, self.q, self.jeu, self.m, self.tend0, self.corr
         from moteur.taux_effectifs import ecart_localisation
-        from moteur.recettes.entreprises import is_beneficiaires  # noqa: F401
         pv, pvb = self.pv, self.pv_brut
         pib, solde, emplois = {}, {}, {}
         for c in ("emploi_reformes", "seniors_long", "inactifs", "logement", "productivite", "hauts_revenus",
@@ -216,7 +214,6 @@ class Effets:
             solde[c] = {}
         for c in ("reformes", "seniors_long", "cumul", "inactifs"):
             emplois[c] = {}
-        from moteur.epargne import epargne_annuelle  # noqa: F401
         tva_point = budget.tva_par_point_eviction(q)
         jeu_eff = "crise" if (jeu == "prudent" and q.colonne_prudent == "crise") else jeu
         r_ecole = r_ia = r_adopt = 0.0
@@ -484,6 +481,11 @@ class Fonds:
             ratio = etat["dette"] / etat["pib_t"]
             self.part_etr = max(self.part_etr, min(etr["plafond"], etr["depart"] + (etr["plafond"] - etr["depart"])
                                                    * max(0, (etr["dette_debut"] - ratio) / (etr["dette_debut"] - etr["dette_plafond"]))))
+
+    def quasi_dette(self) -> float:
+        """Créances des contributions prises par la règle, dues aux ménages à 67 ans avec le rendement du fonds (Md€,
+        fin d'année) : un emprunt aux ménages, hors dette publique au sens de Maastricht (relecture du 11/11/2026)."""
+        return sum(self.creances.values())
 
     # --------------------------------------------------------------------------------- règle de trajectoire
     def regle(self) -> Regle | None:

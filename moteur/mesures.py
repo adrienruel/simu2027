@@ -108,13 +108,13 @@ def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float], scenario: st
     if not p.val("economies.estimations") and not (m.get("decision") or "v").startswith("v"):
         return 0.0  # v235 : mesure ajoutée après la v235 (décision datée, pas une version du classeur)
     if t <= 2029 and p.val("macro.depart_commun"):
-        scenario = "depart"  # option du point de départ commun : 2029 aux hypothèses prudentes
+        scenario = "depart"  # option du point de départ commun (désactivée depuis la suppression de l'ancien moteur)
     return float(m["retenue"]) * plein_effet(m, p, scenario) * montee * index
 
 
 def ecart_scenario(p: Parametres, s: str) -> dict[int, float]:
     """Économies du registre dans le scénario s moins celles du prudent (Md€, + = plus d'économies) : le moteur du
-    programme calcule ses lignes au prudent, cet écart passe au solde du médian et de l'optimiste (moteur/macro.py)."""
+    programme calcule ses lignes au prudent, cet écart passe au solde du médian et de l'optimiste (mesure « méthode » du programme, effets.py)."""
     from .ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
     reg = registre(p.programme)

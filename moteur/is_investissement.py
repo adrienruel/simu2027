@@ -32,8 +32,10 @@ def annees_sous_seuil(p: Parametres, t: int) -> int:
         from . import noyau
         sans = p.avec({"is_investissement.hausse_part_admise/debut": 9999, "is_investissement.hausse_part_admise/fin": 9999})
         sans.colonne_prudent, sans._surcharges, sans.taux_local_copie = p.colonne_prudent, p._surcharges, p.taux_local_copie
-        res = noyau.simuler(sans, noyau.charger(p.programme), scenarios=("prudent",))["prudent"]
-        cache[cle] = {u: c["deficit_sans_regle"] / 100 for u, c in res.items()}
+        # déficit de l'année avant les leviers de la règle (même convention que l'ancien moteur) ; le scénario sans
+        # règle complet n'est pas utilisé ici (choix à confirmer par Adrien : il donnerait moins d'années sous le seuil)
+        res = noyau.simuler(sans, noyau.charger(p.programme), scenarios=("prudent",), contrefactuel=False)["prudent"]
+        cache[cle] = {u: c["deficit_avant_regle"] / 100 for u, c in res.items()}
     seuil = p.val("is_investissement.hausse_part_admise")["seuil_deficit"]
     return sum(1 for u, d in cache[cle].items() if u < t and d < seuil)
 

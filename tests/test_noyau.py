@@ -39,8 +39,9 @@ def test_poste_et_contexte_inconnus(p):
 
 
 def test_regle_generique_du_noyau(p):
-    """Règle et dynamique génériques : un levier de 5 Md€ de capacité, une cible de 3 % ; les comptes publient le
-    déficit avec et sans règle, et un levier plus grand que l'écart s'arrête à la cible."""
+    """Règle et dynamique génériques : un levier de 5 Md€ de capacité, toujours entièrement utilisé avec une cible de
+    0 % (le statu quo est en déficit) ; un levier sans limite ramène exactement à la cible de 3 %. Les comptes
+    publient le déficit avec et sans règle."""
     from moteur.noyau import Levier, Regle
 
     class Rien:
@@ -50,17 +51,15 @@ def test_regle_generique_du_noyau(p):
         def fin(self, t, etat):
             pass
     base = noyau.trajectoire(p, "prudent")
-    cible = 0.03
-    petit = Regle(cible, [Levier("petit", lambda t, e: 5.0)])
-    grand = Regle(cible, [Levier("grand", lambda t, e: 1e6)])
-    r1 = noyau.trajectoire(p, "prudent", regle=petit, dynamiques=[Rien()])
-    r2 = noyau.trajectoire(p, "prudent", regle=Regle(cible, grand.leviers), dynamiques=[Rien()])
-    assert r1[2029]["deficit_sans_regle"] == pytest.approx(base[2029]["deficit"])
-    if base[2029]["deficit"] > 3.0 + 5.0 / base[2029]["pib"] * 100:
-        assert r1[2029]["regle"]["leviers"]["petit"] == pytest.approx(5.0)
-        assert r1[2029]["deficit"] == pytest.approx(base[2029]["deficit"] - 5.0 / base[2029]["pib"] * 100)
-    assert r2[2029]["deficit"] == pytest.approx(min(base[2029]["deficit"], 3.0), abs=1e-6)
-    assert all(r2[t]["deficit"] <= r2[t]["deficit_sans_regle"] + 1e-9 for t in ANNEES)
+    assert base[2029]["deficit"] > 3.5  # le cas testé suppose un statu quo au-dessus de la cible
+    r1 = noyau.trajectoire(p, "prudent", regle=Regle(0.0, [Levier("petit", lambda t, e: 5.0)]), dynamiques=[Rien()])
+    r2 = noyau.trajectoire(p, "prudent", regle=Regle(0.03, [Levier("grand", lambda t, e: 1e6)]), dynamiques=[Rien()])
+    assert r1[2029]["deficit_avant_regle"] == pytest.approx(base[2029]["deficit"])
+    assert r1[2029]["regle"]["leviers"]["petit"] == pytest.approx(5.0)
+    assert r1[2029]["deficit"] == pytest.approx(base[2029]["deficit"] - 5.0 / base[2029]["pib"] * 100)
+    assert r1[2029]["regle"]["reste_a_couvrir"] > 0
+    assert all(r2[t]["deficit"] == pytest.approx(3.0, abs=1e-6) for t in ANNEES if r2[t]["deficit_avant_regle"] > 3.0)
+    assert all(r2[t]["deficit"] <= r2[t]["deficit_avant_regle"] + 1e-9 for t in ANNEES)
 
 
 def test_ecologie_de_droite_sur_le_noyau_sans_moteur_propre(p):
@@ -72,8 +71,25 @@ def test_ecologie_de_droite_sur_le_noyau_sans_moteur_propre(p):
             importlib.import_module(mod)
     r = noyau.resultats(p)
     for s in sq.SCENARIOS:
-        assert "deficit_sans_regle" in r[s][2029] and "fonds" in r[s][2037]["dynamiques"]
-        assert r[s][2037]["deficit"] <= 3.0 + 1e-3 or r[s][2037]["regle"]["reste_a_couvrir"] > 0
+        assert "fonds" in r[s][2037]["dynamiques"]
+        # 2037 : avant la dernière année de la règle ; soit la cible est atteinte, soit les leviers sont au maximum
+        regle = r[s][2037]["regle"]
+        if regle["reste_a_couvrir"] > 1e-6:
+            assert all(regle["leviers"][k] == pytest.approx(regle["capacites"][k]) for k in regle["leviers"])
+        else:
+            assert r[s][2037]["deficit"] == pytest.approx(3.0, abs=0.01) or r[s][2037]["deficit_avant_regle"] <= 3.0
+
+
+def test_scenario_sans_regle_est_un_vrai_contrefactuel(p):
+    """Le « sans règle » publié est le scénario complet sans la règle : identique à un passage avec la clause
+    désactivée (même dette et même PIB, années suivantes comprises) ; les créances de la règle sont publiées."""
+    avec = noyau.resultats(p, ("prudent",))["prudent"]
+    coupee = noyau.resultats(p.avec({"clause.active": False}), ("prudent",))["prudent"]
+    for t in (2029, 2037, 2050, 2073):
+        assert avec[t]["deficit_sans_regle"] == pytest.approx(coupee[t]["deficit"], abs=1e-6)
+        assert avec[t]["sans_regle"]["dette_pib"] == pytest.approx(coupee[t]["dette_pib"], abs=1e-6)
+    assert avec[2050]["quasi_dette"] > 0 and coupee[2050]["quasi_dette"] == 0
+    assert avec[2050]["dette_et_quasi_dette_pib"] > avec[2050]["dette_pib"]
 
 
 @pytest.fixture(scope="module")
