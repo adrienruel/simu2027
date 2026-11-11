@@ -66,7 +66,8 @@ def test_baisse_age_retrouve_le_retour_a_62_ans_de_tondelier(p):
 def test_soixante_ans_coute_plus_que_62_ans(p, prog):
     d60 = prog.retraites(p, "prudent")["pensions"]
     d62 = bib.baisse_age_legal_detail(p, "prudent", {2028: prog.v("retraites.profil_62_ans")})["pensions"]
-    assert d60[2029] == pytest.approx(d62[2029], rel=0.35)  # 2029 : encore près de 62 ans
+    # 2029 : passage de 62 à 60 ans déjà entamé (mélange des profils de 2028 à 2032)
+    assert d62[2029] < d60[2029] < 1.6 * d62[2029]
     assert d60[2037] > 1.5 * d62[2037]
 
 

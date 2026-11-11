@@ -49,7 +49,8 @@ def test_smic(prog, p):
 
 def test_retour_a_62_ans_coute_et_se_stabilise(prog, p):
     c = prog.pensions_62(p, "prudent")
-    assert 20 < c[2029] < 45
+    # relecture neutre du 11/11/2026 (âge légal réel des générations) : ≈ 15 Md€ en 2029, chiffrages publics 10 à 20
+    assert 10 < c[2029] < 25
     assert c[2050] > 0
 
 

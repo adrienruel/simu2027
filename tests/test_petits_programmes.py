@@ -52,9 +52,9 @@ def test_aucune_economie_annoncee_reprise():
         # prudent sous l'annonce (l'optimiste peut l'approcher quand l'annonce est basse)
         assert abs(m["prudent"]) < annonce, cle
         assert max(abs(v) for v in m.values()) <= max(annonce, abs(m["optimiste"]))
-    # non-remplacement : 800 000 postes annoncés, 400 000 réalisés en prudent
+    # non-remplacement : 800 000 postes annoncés, 200 000 réalisés en prudent (règle commune, relecture neutre)
     postes = -sum(z.pt.val(f"zemmour_mesures.non_remplacement_{v}")["montant"]["prudent"] for v in ("etat", "collectivites", "hopitaux"))
-    assert postes * 1e9 / 55000 == pytest.approx(400000, rel=0.01)
+    assert postes * 1e9 / 55000 == pytest.approx(200000, rel=0.01)
     pref = sum(-z.pt.val(f"zemmour_mesures.preference_{b}")["montant"]["optimiste"] for b in ("famille", "logement", "pauvrete"))
     assert pref < 15
 
@@ -100,11 +100,13 @@ def test_emplois_a_elasticite_constante_bornes(p):
 
 def test_report_de_l_age_legal(p):
     eco = bib.report_age_legal(p, "prudent", 65, 1966, 0.25)
-    assert eco[2029] == pytest.approx(0.0, abs=1e-6)
-    assert eco[2030] > 0
-    # un an de plus : entre 0,3 et 0,6 point de PIB d'économie de pensions à terme
+    # la génération 1966 (63 ans 3 mois au statu quo, suspension de la LFSS 2026) part à 63 ans et demi : effet faible
+    # dès 2029
+    assert 0 <= eco[2029] < 1 and eco[2030] > eco[2029]
+    # un an de plus : entre 0,2 et 0,45 point de PIB d'économie de pensions à terme (Cour des comptes, 2025 :
+    # 65 ans ≈ 9,2 Md€ de 2026 ; relecture neutre du 11/11/2026)
     y = sq.pib(p, "prudent")
-    assert 0.3 < eco[2040] / y[2040] * 100 < 0.6
+    assert 0.2 < eco[2040] / y[2040] * 100 < 0.45
     # plus de report, plus d'économie
     assert bib.report_age_legal(p, "prudent", 66, 1966, 0.25)[2045] > eco[2045]
 
