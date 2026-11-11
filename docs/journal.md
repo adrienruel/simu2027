@@ -888,3 +888,24 @@ mesures « méthode ».
 
 **Correction au passage.** `moteur/attribution.py` : la décomposition lisait la charge de la dette nominale alors que
 le solde du noyau porte les intérêts réels (écart de 0,003 Md€, test `test_decomposition` en échec depuis la migration).
+
+## 12 novembre 2026 (suite) — Canaux déclarés, ouverts à tous les programmes
+
+Critique : Écologie de droite était seul à compter des effets propres hors du tronc commun (fraude à la TVA,
+productivité, adoption de l'IA, niveau des élèves, baisse de l'écart de taux) et une règle de trajectoire.
+DÉCISION d'Adrien (trois options proposées : version « règles communes » du programme dans le comparateur, suppression
+de ces canaux, ouverture à tous) : **ouvrir à tous**.
+
+- `moteur/canaux_declares.py` : tout programme peut déclarer ces cinq canaux et une règle de trajectoire dans le
+  groupe `<nom>_canaux` de son parametres.yaml, avec les formules d'Écologie de droite. Canal absent : zéro. Nom de
+  canal inconnu : erreur. Chaque valeur porte statut et source, comme tout paramètre.
+- Le PIB en plus rapporte la part des recettes dans le PIB du statu quo (règle du canal d'offre commun) ; Écologie de
+  droite garde son dividende de croissance calculé sur son propre budget (écart de convention à garder en tête).
+- Règle de trajectoire déclarée : cible, dernière année, scénarios, leviers (capacité en part du PIB, sur les recettes
+  ou sur un bloc de dépenses) ; c'est la règle du noyau. `ProgrammeSimple.entrees` et `Tondelier.entrees` la passent au
+  noyau, qui publie alors le programme avec et sans règle, comme Écologie de droite.
+- Ces effets sont publiés sous le nom « Canal déclaré : … » (nature « effet_macro »), hors multiplicateur.
+- Aucun programme ne déclare de canal à ce jour : les résultats des autres candidats sont inchangés (testé). Chiffrer
+  ces canaux pour chacun reste à faire, programme par programme, avec ses sources.
+- Tests : `tests/test_canaux_declares.py` (sans canal rien ne change, canal inconnu refusé, chaque canal, règle
+  déclarée avec scénario sans règle égal au programme sans la règle).

@@ -384,11 +384,27 @@ class Tondelier:
                                                **{c: v[t] for c, v in canaux_offre.items()},
                                                "Seniors : emploi (âge de la retraite)": sen["emplois"][t]} for t in ANNEES}}
             liste.extend(self.ecologie(p, s))
+            # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
+            from moteur import canaux_declares
+            decl = canaux_declares.effets(self, p, s)
+            liste.extend(decl["mesures"])
+            for t in ANNEES:
+                ctx_s[s]["pib"][t] += decl["pib"][t]
+            if decl["taux_supplementaire"]:
+                ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
             mes_s[s] = liste
             details[s] = {"emplois_perdus_smic": emplois, "avant_2029": avant, "dpib": dpib, "offre": details_offre}
         res = {"mesures": mes_s, "contexte": ctx_s, "details": details, "smic": smic, "fp2": fp2, "part_fp": part_fp}
         self._cache[cle] = res
         return res
+
+    def entrees(self, p: Parametres, scenarios=None) -> dict:
+        """Entrées du noyau, avec la règle de trajectoire si le programme en déclare une (canaux déclarés)."""
+        from moteur import canaux_declares
+        from moteur.noyau import Entree
+        c = self._calcul(p)
+        return {s: Entree(c["mesures"][s], c["contexte"][s], [], canaux_declares.regle(self, p, s))
+                for s in sq.SCENARIOS if scenarios is None or s in scenarios}
 
     def mesures(self, p: Parametres) -> dict[str, list[Mesure]]:
         return self._calcul(p)["mesures"]

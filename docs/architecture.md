@@ -66,6 +66,11 @@ Le code est encore dans `moteur/`, qui mêle le noyau et le programme. Carte des
    blocs, emploi et chômage) et la **règle de trajectoire** (`Regle` : cible de déficit, leviers ordonnés avec leur
    capacité et leur rendement, mesures automatiques). Les comptes sont publiés avec et sans règle
    (`deficit_sans_regle`, `regle`, `dynamiques`). Détail des écarts avec l'ancien moteur : docs/journal.md.
+   **Canaux déclarés (12 novembre 2026).** Les effets propres qu'Écologie de droite était seul à compter (fraude à
+   la TVA, productivité, adoption de l'IA, niveau des élèves, baisse de l'écart de taux) et la règle de trajectoire
+   sont ouverts à tous : un programme les déclare dans le groupe `<nom>_canaux` de ses paramètres
+   (`moteur/canaux_declares.py`). Le noyau publie tout programme à règle avec et sans la règle (`sans_regle`), et la
+   quasi-dette qu'une dynamique déclare (`quasi_dette`).
    Reste : les mesures « méthode » (pont entre le registre du programme, bâti sur la tendance et la population
    prudentes, et chaque scénario) à retirer en bâtissant le registre par scénario. Question ouverte : classement du
    fonds (dans ou hors des administrations publiques).

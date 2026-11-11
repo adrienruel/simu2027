@@ -19,6 +19,11 @@ Ce que fait la classe, comme le programme Tondelier :
 - **2027 et 2028** : ce que les mesures coûtent ou rapportent ces années s'ajoute à la dette de fin 2028.
 
 Règle des autres candidats : on ne reprend que les mesures ; aucune recette ni économie annoncée n'est saisie.
+
+Canaux déclarés (12 novembre 2026, moteur/canaux_declares.py) : tout programme peut déclarer, dans le groupe
+`<nom>_canaux` de ses paramètres, les effets propres qu'Écologie de droite était seul à compter (fraude à la TVA,
+productivité, adoption de l'IA, niveau des élèves, baisse de l'écart de taux) et une règle de trajectoire, avec les
+mêmes formules. Absent : zéro. Chaque valeur est sourcée et datée comme tout paramètre.
 """
 from __future__ import annotations
 
@@ -383,7 +388,11 @@ class ProgrammeSimple:
             # PIB en plus ou en moins hors emploi (ex. heures travaillées en moins par salarié, 32 heures) : rangé par une
             # mesure calculée dans self.pib_en_plus[(id(p), s)] = {année: Md€}, avec sa mesure de recettes (11/11/2026)
             d_autre = getattr(self, "pib_en_plus", {}).get((id(p), s), {})
-            pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + d_autre.get(t, 0.0)
+            # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
+            from . import canaux_declares
+            decl = canaux_declares.effets(self, p, s)
+            liste.extend(decl["mesures"])
+            pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + d_autre.get(t, 0.0) + decl["pib"][t]
                    + hors_conj[t] * va * idx["pib"][t] / 1e9 for t in ANNEES}
             demploi = {t: sum(canaux[t].values()) for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
@@ -392,12 +401,23 @@ class ProgrammeSimple:
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
             ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
                         "emploi": {t: e[t]["emploi"] + demploi[t] for t in ANNEES}, "emplois_canaux": canaux}
+            if decl["taux_supplementaire"]:
+                ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
             mes_s[s] = liste
             details[s] = {"avant_2029": avant, "dpib": dpib, "emplois": demploi, "offre": details_offre,
                           "dpib_offre": d_offre}
         res = {"mesures": mes_s, "contexte": ctx_s, "details": details}
         self._cache[cle] = res
         return res
+
+    def entrees(self, p: Parametres, scenarios=None) -> dict:
+        """Entrées du noyau : mesures, contexte et, si le programme en déclare une, sa règle de trajectoire (objet
+        neuf à chaque appel)."""
+        from . import canaux_declares
+        from .noyau import Entree
+        c = self._calcul(p)
+        return {s: Entree(c["mesures"][s], c["contexte"][s], [], canaux_declares.regle(self, p, s))
+                for s in sq.SCENARIOS if scenarios is None or s in scenarios}
 
     def mesures(self, p: Parametres) -> dict[str, list[Mesure]]:
         return self._calcul(p)["mesures"]
