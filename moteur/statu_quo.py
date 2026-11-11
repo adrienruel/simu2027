@@ -154,8 +154,8 @@ GENERATION_REPERE = 1980
 def retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     """Pensions de toutes les générations (Md€ de 2026) et retraités (millions), par année.
 
-    Pour chaque génération : survivants (Insee), part partie à chaque âge (ancien_systeme.part_retraites_age, âge
-    légal de 64 ans), pension liquidée = 1 avant 2029 (stock calé), sinon pension des nouveaux retraités
+    Pour chaque génération : survivants (Insee), part partie à chaque âge (ancien_systeme.profil_generation : âge
+    légal de la génération, loi de 2023 et suspension de la LFSS 2026), pension liquidée = 1 avant 2029 (stock calé), sinon pension des nouveaux retraités
     (ancien_systeme.pension_nouveaux_relative) × salaire de statu_quo.retraites_decalage_carriere ans plus tôt
     × (1 − érosion relative) par année depuis 2029 ; revalorisée sur les prix ensuite (constante en euros de
     2026). Niveau calé sur statu_quo.retraites_part_pib_base en 2029 ; effectif calé sur les retraités du COR."""
@@ -163,9 +163,9 @@ def retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     if ("sq_retraites", s) in cache:
         return cache[("sq_retraites", s)]
     from .demographie import AGE_MAX
-    from .ancien_systeme import _part_age
+    from .ancien_systeme import profil_generation
     pop = population(p, s)
-    r = _part_age(p)
+    part, _ = profil_generation(p)
     w = salaires(p, s)
     lag = int(p.val("statu_quo.retraites_decalage_carriere"))
     e = p.val("statu_quo.retraites_erosion_relative")
@@ -182,6 +182,7 @@ def retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]:
         for a in range(50, AGE_MAX + 1):
             n = pop[t][a]
             jeune = (t - a) >= GENERATION_REPERE
+            r = part.profil(t - a)
             for b in range(50, a + 1):
                 d = r[b] - r[b - 1]
                 if d > 0:

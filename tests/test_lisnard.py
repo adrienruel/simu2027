@@ -49,7 +49,7 @@ def test_annonces_non_reprises(prog):
                if cle.startswith("lisnard_mesures.") and par.valeur["poste"] != "recettes")
     assert eco < 60
     postes = -sum(prog.v(f"mesures.postes_{k}")["montant"]["prudent"] for k in ("etat", "collectivites", "hopitaux"))
-    assert postes * 1e9 / 55000 == pytest.approx(280000, rel=0.01)
+    assert postes * 1e9 / 55000 == pytest.approx(200000, rel=0.01)
 
 
 

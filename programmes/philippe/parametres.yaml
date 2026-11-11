@@ -62,11 +62,11 @@ philippe_chomage:
 philippe_mesures:
   impots_production_travail:
     valeur: {id: PHI-FIS-01, instrument: cout_travail, libelle: "Impôts de production −50 Md€ : part assise sur la masse salariale (taxe sur les salaires, versement mobilité)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
-             montant: {crise: -20, prudent: -20, median: -20, optimiste: -20}}
+             montant: {crise: -18, prudent: -17, median: -16.5, optimiste: -16}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
-    source: "Site du candidat (« Pour une France plus prospère ») : baisse de 50 Md€ des impôts de production, compensée par 50 Md€ d'aides aux entreprises en moins ; arbitrage : 40 % sur les impôts assis sur les salaires (taxe sur les salaires ≈ 15 Md€, versement mobilité ≈ 11 Md€), montée sur le quinquennat"
+    source: "Site du candidat (« Pour une France plus prospère ») : baisse de 50 Md€ des impôts de production, compensée par 50 Md€ d'aides aux entreprises en moins ; arbitrage : 40 % sur les impôts assis sur les salaires (taxe sur les salaires ≈ 15 Md€, versement mobilité ≈ 11 Md€), montée sur le quinquennat ; relecture neutre (11/11/2026) : une partie est payée par les administrations elles-mêmes (taxe sur les salaires des hôpitaux publics, versement mobilité des employeurs publics), ≈ 2 à 4 Md€ sur 20, sans effet sur le solde consolidé : retirée du montant"
     note: "Montant de la mesure (paramètre), pas une recette annoncée."
   impots_production_capital:
     valeur: {id: PHI-FIS-01, instrument: capital_entreprises, libelle: "Impôts de production −50 Md€ : part assise sur le capital et le chiffre d'affaires (CFE, taxe foncière des entreprises, C3S)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
@@ -77,15 +77,15 @@ philippe_mesures:
     source: "Même source ; 60 % sur la CFE (≈ 7 Md€), la taxe foncière des entreprises (≈ 12 Md€), la C3S (≈ 4 Md€) et les autres impôts de production (≈ 10 Md€) ; compensation des collectivités par l'État incluse"
   aides_entreprises_travail:
     valeur: {id: PHI-FIS-01b, instrument: cout_travail, libelle: "Aides publiques aux entreprises supprimées : allègements et exonérations de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
-             montant: {crise: 10, prudent: 14, median: 17, optimiste: 20}}
+             montant: {crise: 4.8, prudent: 8.0, median: 11.2, optimiste: 14.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : aides aux entreprises ≈ 210 Md€ en 2023 (commission d'enquête du Sénat, rapport n° 808, 2025), dont allègements de cotisations ≈ 80 Md€ ; 50 Md€ annoncés : réalisés 50 % (crise), 70 % (prudent), 85 % (médian), 100 % (optimiste) ; 40 % pris sur les allègements"
-    note: "Les 50 Md€ sont une économie annoncée : seule la part réalisable est retenue."
+    source: "Encadrement : aides aux entreprises ≈ 210 Md€ en 2023 (commission d'enquête du Sénat, rapport n° 808, 2025), dont allègements de cotisations ≈ 80 Md€ ; estimation indépendante de l'annonce (relecture neutre du 11/11/2026), sur les leviers identifiables : crédit d'impôt recherche des grands groupes, taux réduits, subventions sectorielles, allègements au-delà de 2 SMIC ; total 12 (crise), 20 (prudent), 28 (médian), 35 (optimiste) Md€ ; précédents : LFSS 2025, 4 Md€ d'allègements visés, ≈ 1,6 retenus ; rapport Bozio-Wasmer (2024) : redéploiement de quelques Md€ ; 40 % pris sur les allègements"
+    note: "Les 50 Md€ annoncés ne sont pas repris : estimation propre."
   aides_entreprises_capital:
     valeur: {id: PHI-FIS-01b, instrument: capital_entreprises, libelle: "Aides publiques aux entreprises supprimées : niches fiscales et subventions", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
-             montant: {crise: 15, prudent: 21, median: 25.5, optimiste: 30}}
+             montant: {crise: 7.2, prudent: 12.0, median: 16.8, optimiste: 21.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
@@ -205,11 +205,11 @@ philippe_mesures:
     source: "Site du candidat : 500 € par l'État ; ≈ 700 000 premiers emplois par an (Insee, entrées dans la vie active)"
   enseignants:
     valeur: {id: PHI-EDU-01, libelle: "Rémunération moyenne des enseignants +20 % sur le quinquennat, écoles normales recréées", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
-             montant: {crise: 7.0, prudent: 6.0, median: 5.0, optimiste: 4.0}}
+             montant: {crise: 9.5, prudent: 8.1, median: 6.8, optimiste: 5.4}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Calcul : traitements et primes des enseignants ≈ 35 Md€ brut ; +20 % en nominal, dont ≈ 5 % suivent déjà au statu quo (salaires réels) et ≈ 8 % d'inflation sur cinq ans : ≈ 8 à 15 % en réel × coût employeur ≈ 1,4 : 4 à 7 Md€"
+    source: "Calcul : traitements et primes des enseignants ≈ 35 Md€ brut ; +20 % en nominal, dont ≈ 5 % suivent déjà au statu quo (salaires réels) et ≈ 8 % d'inflation sur cinq ans : ≈ 8 à 15 % en réel × coût employeur ≈ 1,9 fois le brut (CAS Pensions compris ; relecture neutre du 11/11/2026, au lieu de 1,4) : 5,4 à 9,5 Md€"
   soutien_scolaire:
     valeur: {id: PHI-EDU-03, libelle: "Service public du soutien scolaire : assistant IA et brigades de bénévoles", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2029,
              montant: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}}

@@ -40,10 +40,11 @@ statu_quo:
     source: "Encadrement : salaires portés au compte du régime général (25 meilleures années) revalorisés sur les prix ; points Agirc-Arrco acquis sur toute la carrière"
     note: "Années de retard entre les salaires d'une carrière et le départ : la pension liquidée suit le salaire moyen de quinze ans plus tôt (centre de gravité des droits, revalorisés sur les prix). C'est ce retard qui fait qu'une productivité plus forte baisse le poids des retraites (mécanisme du COR)."
   retraites_erosion_relative:
-    valeur: 0.0046
+    valeur: 0.0036
     unite: taux
     statut: HYPOTHESE
-    source: "Calée sur le COR, rapport annuel de juin 2026 (scénario de référence, productivité 0,7 % : 15,3 % du PIB en 2070) ; contrôles : 2045 et les variantes de productivité 0,4 % et 1,0 % (tests/test_statu_quo.py) : 2045 14,15 % (COR 14,2 %) ; productivité 0,4 % : 15,96 % (COR 16,1 %) ; 1,0 % : 14,72 % (COR 14,5 %)"
+    source: "Calée sur le COR, rapport annuel de juin 2026 (scénario de référence, productivité 0,7 % : 15,3 % du PIB en 2070) ; contrôles : 2045 et les variantes de productivité 0,4 % et 1,0 % (tests/test_statu_quo.py) : 2030 14,06 % (COR 14,1 %) ; 2045 13,86 % (COR 14,2 %) ; productivité 0,4 % : 15,96 % (COR 16,1 %) ; 1,0 % : 14,72 % (COR 14,5 %)"
+    recalage: "11/11/2026 (relecture neutre) : âge légal réel des générations 1961 à 1968 (loi de 2023 et suspension de la LFSS 2026) au lieu de 64 ans pour toutes ; le modèle compte davantage de retraités en 2029 (calage sur le COR de 1,08 au lieu de 1,11, plus proche de 1), la pension par tête calée est plus basse et l'érosion recalée passe de 0,46 à 0,36 % ; 2045 descend à 13,86 % (−0,34 point contre le COR : l'écart venait auparavant de l'erreur de calendrier)"
     note: "Baisse annuelle de la pension liquidée rapportée au salaire décalé, à règles inchangées (rendement des points Agirc-Arrco dont la valeur de service suit les prix, décote et durée requise de la réforme de 2023, carrières plus heurtées). Seul paramètre calé : il porte aussi l'écart d'emploi avec le COR (le COR fait monter l'emploi des seniors et ramène le chômage à 7 % ; ici les taux d'emploi par âge restent ceux de 2025, donc le PIB est plus bas et la part des retraites un peu plus haute à pension égale)."
   # --- Recettes impôt par impôt ---------------------------------------------------------------------------
   recettes_non_fiscales_part_pib:

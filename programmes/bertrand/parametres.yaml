@@ -59,6 +59,16 @@ bertrand_retraites:
 
 bertrand_mesures:
 
+  conseiller_territorial:
+    valeur: {id: BER-INS-02, libelle: "Conseiller territorial : élus régionaux et départementaux fusionnés", poste: collectivites, moteur: pib, debut: 2029, plein: 2029,
+             montant: {crise: -0.02, prudent: -0.03, median: -0.05, optimiste: -0.07}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 6 000 conseillers départementaux et régionaux, indemnités ≈ 0,2 Md€ ; réforme de 2010 (jamais appliquée) : réduction d'environ moitié des élus"
+    note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
+
+
   # ---------------------------------------------------------------- économies : seules les lignes identifiées
   assurance_chomage:
     valeur: {id: BER-ECO-01, instrument: transferts_actifs, libelle: "Économies sur l'assurance chômage (non détaillées)", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,

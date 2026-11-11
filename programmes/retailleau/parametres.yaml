@@ -37,25 +37,21 @@ retailleau_macro:
     note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
 
 retailleau_retraites:
-  age_cible:
-    valeur: 65
-    unite: sans_unite
-    statut: DECISION
-    note: "LCP (23/09/2026) : âge minimal de 63 ans, taux plein automatique à 65 ans, décote de 7 % par année d'anticipation (carrières longues complètes : taux plein à 63 ans). Lecture : âge du taux plein porté à 65 ans, départs dès 63 ans avec décote, comme Bertrand (départs anticipés avec décote)."
-  premiere_generation:
-    valeur: 1966
-    unite: sans_unite
-    statut: DECISION
-    note: "Même rythme que Bertrand, Zemmour et Philippe : un trimestre par génération, 65 ans pour la génération 1969 (départs de 2034)."
-  pas_par_generation:
-    valeur: 0.25
-    unite: sans_unite
-    statut: DECISION
-  part_economie_gardee:
-    valeur: {crise: 0.6, prudent: 0.65, median: 0.75, optimiste: 0.85}
-    unite: taux
+  solde_reforme:
+    valeur: {crise: 0.0, prudent: 1.0, median: 2.5, optimiste: 4.0}
+    unite: md_eur
+    annee_euros: 2026
     statut: HYPOTHESE
-    source: "Même valeur que bertrand_retraites.part_economie_gardee (décote de 7 % par an, proche de la neutralité actuarielle : une partie de l'économie est rendue par les départs à 63 et 64 ans)"
+    source: "LCP (23/09/2026) : âge minimal de 63 ans avec une décote de 7 % par année d'anticipation (taux plein à 63 ans pour les carrières longues complètes), taux plein automatique ramené de 67 à 65 ans. Relecture neutre (11/11/2026) : ce n'est pas un report de l'âge à 65 ans. Effets : départs à 63-64 ans avec décote proches de la neutralité actuarielle ; décote à 64 ans pour ceux qui ont leur durée, d'où des départs plus tardifs (économie) ; taux plein dès 65 ans au lieu de 67 (coût : ≈ 7 % d'une génération part à 67 ans pour le taux plein, DREES fiche 16 ; 0,07 × 0,8 million × 2 ans × ≈ 14 000 € ≈ 1,6 Md€, plus ≈ 0,5 Md€ de décote annulée à 65-66 ans)"
+    note: "Solde net de la réforme à plein effet (économie, Md€ par an), montée de 2030 à 2036 ; emploi des seniors non compté (effets de sens contraires). Remplace le report à 65 ans et la ligne taux_plein_65 du chiffrage du 07/11/2026."
+  debut:
+    valeur: 2030
+    unite: sans_unite
+    statut: DECISION
+  plein:
+    valeur: 2036
+    unite: sans_unite
+    statut: DECISION
 
 retailleau_restitution:
   baisse_salaries:
@@ -209,21 +205,21 @@ retailleau_mesures:
     source: "Public Sénat (12/10/2026) : 4 Md€ annoncés (non repris) ; encadrement : indemnités journalières maladie ≈ 11 Md€ ; jour de carence d'ordre public et plafond abaissé ≈ 1 à 1,5 Md€ (IGF-IGAS, 2024)"
   postes_etat:
     valeur: {id: RET-TER-01, libelle: "400 000 départs de fonctionnaires non remplacés d'ici 2032 : État", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -5.0, prudent: -6.9, median: -7.9, optimiste: -9.9}}
+             montant: {crise: -2.97, prudent: -4.95, median: -7.43, optimiste: -9.9}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Public Sénat (12/10/2026) : 400 000 postes (25 Md€ annoncés, non repris) ; réalisés : 50 % (crise), 70 % (prudent), 80 % (médian), 100 % (optimiste) ; 55 000 € par poste ; 45 % à l'État, 35 % dans les collectivités, 20 % dans les hôpitaux"
+    source: "Public Sénat (12/10/2026) : 400 000 postes (25 Md€ annoncés, non repris) ; réalisés (règle commune depuis la relecture neutre du 11/11/2026 : précédent de la RGPP, ≈ 150 000 postes de l'État en cinq ans, Cour des comptes 2012) : 120 000 (crise), 200 000 (prudent), 300 000 (médian), 400 000 (optimiste) ; 55 000 € par poste ; 45 % à l'État, 35 % dans les collectivités, 20 % dans les hôpitaux"
   postes_collectivites:
     valeur: {id: RET-TER-01, libelle: "400 000 départs non remplacés : collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -3.85, prudent: -5.4, median: -6.2, optimiste: -7.7}}
+             montant: {crise: -2.31, prudent: -3.85, median: -5.78, optimiste: -7.7}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Même encadrement (35 %)"
   postes_hopitaux:
     valeur: {id: RET-TER-01, libelle: "400 000 départs non remplacés : hôpitaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -2.2, prudent: -3.1, median: -3.5, optimiste: -4.4}}
+             montant: {crise: -1.32, prudent: -2.2, median: -3.3, optimiste: -4.4}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
@@ -293,11 +289,11 @@ retailleau_mesures:
     source: "Tribune (14/07/2026) : 100 Md€ en 2032 ; calcul : ≈ 89 Md€ de 2026 (inflation de 2027 à 2032) contre ≈ 73 Md€ au statu quo (LPM actualisée, 76,3 Md€ courants en 2030, puis le PIB)"
   enseignants:
     valeur: {id: RET-EDU-01, libelle: "Professeurs : +135 € net par mois en début de carrière, ≈ +300 € en milieu", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
-             montant: {crise: 4.0, prudent: 3.6, median: 3.2, optimiste: 2.8}}
+             montant: {crise: 5.2, prudent: 4.8, median: 4.4, optimiste: 4.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Éducation (03/09/2026), p. 10 ; calcul : ≈ 850 000 enseignants, ≈ 220 € net en moyenne, coût employeur ≈ 1,6 fois le net : ≈ 3,6 Md€"
+    source: "Éducation (03/09/2026), p. 10 ; calcul : ≈ 850 000 enseignants, ≈ 220 € net en moyenne, coût employeur ≈ 2,2 fois le net (CAS Pensions compris ; relecture neutre du 11/11/2026) : ≈ 4,9 Md€ bruts"
   ecoles_normales:
     valeur: {id: RET-EDU-04, libelle: "Une École normale du professorat par académie, formation sur cinq ans", poste: etat_missions, moteur: "bloc:autres", debut: 2029, plein: 2031, fp: true,
              montant: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
@@ -361,13 +357,6 @@ retailleau_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Communiqué (24/07/2026) ; encadrement : un Canadair ≈ 50 M€"
-  taux_plein_65:
-    valeur: {id: RET-RET-01b, libelle: "Taux plein automatique à 65 ans (au lieu de 67 sans carrière complète)", poste: retraites, moteur: "bloc:retraites", debut: 2030, plein: 2035,
-             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
-    unite: md_eur
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "LCP (23/09/2026) ; encadrement : ≈ 50 000 départs par an au taux plein à 67 ans faute de trimestres ; décote annulée deux ans plus tôt ≈ 1 Md€ à terme (COR, 2023)"
   seniors:
     valeur: {id: RET-RET-03, instrument: cout_travail, libelle: "Cotisations exonérées pour les seniors ayant tous leurs trimestres", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
              montant: {crise: -0.5, prudent: -0.4, median: -0.3, optimiste: -0.2}}

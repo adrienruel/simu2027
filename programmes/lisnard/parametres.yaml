@@ -94,13 +94,21 @@ lisnard_chomage:
     source: "Encadrement : dégressivité de 2021 : effet faible sur le retour à l'emploi des cadres (Unédic, 2024) ; généralisée : 0,05 à 0,2 point"
 
 lisnard_mesures:
+  insp:
+    valeur: {id: LIS-TER-06, libelle: "INSP supprimé, recrutement direct des cadres de l'État", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.02, prudent: -0.03, median: -0.04, optimiste: -0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : budget de l'INSP ≈ 0,04 Md€ (hors rémunération des élèves) ; recrutement direct à organiser"
+    note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
   impots_production_travail:
     valeur: {id: LIS-FIS-01, instrument: cout_travail, libelle: "Impôts de production −40 Md€ : part assise sur la masse salariale", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
-             montant: {crise: -16, prudent: -16, median: -16, optimiste: -16}}
+             montant: {crise: -14.4, prudent: -13.6, median: -13.2, optimiste: -12.8}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
-    source: "Fiche « Questions » (03/10/2026) : 40 Md€ d'impôts de production en moins, en commençant par la C3S ; arbitrage : 40 % sur la taxe sur les salaires et le versement mobilité, montée sur le quinquennat (même répartition que philippe_mesures)"
+    source: "Fiche « Questions » (03/10/2026) : 40 Md€ d'impôts de production en moins, en commençant par la C3S ; arbitrage : 40 % sur la taxe sur les salaires et le versement mobilité, montée sur le quinquennat (même répartition que philippe_mesures) ; part payée par les administrations elles-mêmes retirée, comme pour Philippe (relecture neutre du 11/11/2026)"
     note: "Montant de la mesure (paramètre)."
   impots_production_capital:
     valeur: {id: LIS-FIS-01, instrument: capital_entreprises, libelle: "Impôts de production −40 Md€ : C3S, CFE, taxe foncière des entreprises", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
@@ -167,21 +175,21 @@ lisnard_mesures:
     source: "Carnets Agriculture (08/06/2026), p. 9 ; encadrement : déduction pour épargne de précaution ≈ 0,1 Md€"
   postes_etat:
     valeur: {id: LIS-TER-07, libelle: "Effectifs publics −12 % (plus de 400 000 suppressions) : État", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -5.0, prudent: -6.9, median: -7.9, optimiste: -9.9}}
+             montant: {crise: -2.97, prudent: -4.95, median: -7.43, optimiste: -9.9}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "CNEWS (28/10/2026) : plus de 400 000 suppressions, 200 000 à 300 000 redéploiements ; réalisés : 50 % (crise), 70 % (prudent), 80 % (médian), 100 % (optimiste) ; 55 000 € par poste ; 45 % État, 35 % collectivités, 20 % hôpitaux (même ventilation que retailleau_mesures)"
+    source: "CNEWS (28/10/2026) : plus de 400 000 suppressions, 200 000 à 300 000 redéploiements ; réalisés (règle commune depuis la relecture neutre du 11/11/2026 : précédent de la RGPP) : 120 000 (crise), 200 000 (prudent), 300 000 (médian), 400 000 (optimiste) ; 55 000 € par poste ; 45 % État, 35 % collectivités, 20 % hôpitaux (même ventilation que retailleau_mesures)"
   postes_collectivites:
     valeur: {id: LIS-TER-07, libelle: "Effectifs publics −12 % : collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -3.85, prudent: -5.4, median: -6.2, optimiste: -7.7}}
+             montant: {crise: -2.31, prudent: -3.85, median: -5.78, optimiste: -7.7}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Même encadrement (35 %)"
   postes_hopitaux:
     valeur: {id: LIS-TER-07, libelle: "Effectifs publics −12 % : hôpitaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -2.2, prudent: -3.1, median: -3.5, optimiste: -4.4}}
+             montant: {crise: -1.32, prudent: -2.2, median: -3.3, optimiste: -4.4}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
@@ -259,11 +267,11 @@ lisnard_mesures:
     source: "Même chiffrage que retailleau_mesures.renouvelables"
   enseignants:
     valeur: {id: LIS-EDU-03, libelle: "Rémunérations des enseignants +20 % en cinq ans, sous conditions", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
-             montant: {crise: 6.0, prudent: 5.0, median: 4.0, optimiste: 3.0}}
+             montant: {crise: 8.1, prudent: 6.8, median: 5.4, optimiste: 4.1}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Page programme (non datée) ; même calcul que philippe_mesures.enseignants (+20 % nominal, part réelle en plus du statu quo), un peu moins pour les conditions"
+    source: "Page programme (non datée) ; même calcul que philippe_mesures.enseignants (+20 % nominal, part réelle en plus du statu quo), un peu moins pour les conditions ; coût employeur ≈ 1,9 fois le brut (relecture neutre du 11/11/2026)"
   excellence:
     valeur: {id: LIS-EDU-04, libelle: "Classes d'excellence, établissements d'excellence avec internats par ancien canton, établissements disciplinaires", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
              montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}

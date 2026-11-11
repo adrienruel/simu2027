@@ -180,22 +180,22 @@ zemmour_mesures:
   # politique de la Ville, aide au développement, AME, audiovisuel, subventions) sont gardées plus haut.
   non_remplacement_etat:
     valeur: {id: ZEM-KNA-01, libelle: "Départs administratifs non remplacés (État)", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -8.25, prudent: -11.0, median: -15.1, optimiste: -19.25}}
+             montant: {crise: -3.3, prudent: -5.5, median: -8.25, optimiste: -11.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Plan Knafo (budget2027.fr) : 800 000 des 2,3 millions de départs du quinquennat non remplacés (40 Md€ annoncés, NON SAISIS). Encadrement de la réalisation : RGPP 2007-2012 ≈ 150 000 postes de l'État en cinq ans (Cour des comptes, 2012) ; l'État ne décide pas des effectifs des collectivités ni des hôpitaux. Réalisé : 300 000 (crise), 400 000 (prudent), 550 000 (médian), 700 000 (optimiste) postes, au coût d'un recrutement évité (55 000 €), moitié État"
+    source: "Plan Knafo (budget2027.fr) : 800 000 des 2,3 millions de départs du quinquennat non remplacés (40 Md€ annoncés, NON SAISIS). Encadrement de la réalisation : RGPP 2007-2012 ≈ 150 000 postes de l'État en cinq ans (Cour des comptes, 2012) ; l'État ne décide pas des effectifs des collectivités ni des hôpitaux. Réalisé (règle commune depuis la relecture neutre du 11/11/2026, plafonnée à l'annonce) : 120 000 (crise), 200 000 (prudent), 300 000 (médian), 400 000 (optimiste) postes, au coût d'un recrutement évité (55 000 €), moitié État"
     note: "Les trois lignes ZEM-KNA-01 portent la même mesure, partagée entre versants : État 50 %, collectivités 40 % (par la baisse des dotations, hypothèse), hôpitaux 10 % (administratifs seulement, les 40 000 soignants de ZEM-SAN-02 sont recrutés à part). 57 % de la masse revient en prélèvements (fp). Qualité du service non modélisée."
   non_remplacement_collectivites:
     valeur: {id: ZEM-KNA-01, libelle: "Départs administratifs non remplacés (collectivités)", poste: collectivites, moteur: "bloc:collectivites", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -6.6, prudent: -8.8, median: -12.1, optimiste: -15.4}}
+             montant: {crise: -2.64, prudent: -4.4, median: -6.6, optimiste: -8.8}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Voir non_remplacement_etat"
   non_remplacement_hopitaux:
     valeur: {id: ZEM-KNA-01, libelle: "Départs administratifs non remplacés (hôpitaux)", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2032, fp: true, postes: true,
-             montant: {crise: -1.65, prudent: -2.2, median: -3.0, optimiste: -3.85}}
+             montant: {crise: -0.66, prudent: -1.1, median: -1.65, optimiste: -2.2}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE

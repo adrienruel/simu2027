@@ -79,11 +79,11 @@ mesures:
 - id: RET-RET-01
   intitule: Âge minimal de 63 ans, taux plein automatique à 65 ans, décote de 7 % par an
   source: LCP, 23/09/2026
-  traitement: 'calculé : retailleau_retraites ; taux plein : retailleau_mesures.taux_plein_65'
+  traitement: 'calculé : retailleau_retraites.solde_reforme (solde net estimé, taux plein à 65 ans compris)'
 - id: RET-RET-01b
   intitule: Taux plein automatique à 65 ans
   source: LCP, 23/09/2026
-  traitement: retailleau_mesures.taux_plein_65
+  traitement: dans retailleau_retraites.solde_reforme
 - id: RET-RET-02
   intitule: Part de capitalisation (1 % du salaire brut)
   source: LCP, 23/09/2026

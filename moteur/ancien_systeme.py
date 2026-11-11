@@ -41,6 +41,37 @@ def _part_age(p: Parametres) -> dict[int, float]:
     return {a: (t[a] if a in t else (1.0 if a > a_max else 0.0)) for a in range(0, 106)}
 
 
+def _complet(t: dict) -> dict[int, float]:
+    t = {int(a): v for a, v in t.items()}
+    return {a: (t[a] if a in t else (1.0 if a > max(t) else 0.0)) for a in range(0, 106)}
+
+
+def profil_generation(p: Parametres):
+    """Part de la génération g partie à la retraite à l'âge b, au statu quo (loi de 2023 et suspension de la LFSS 2026) :
+    profil à 62 ans (part_retraites_62) jusqu'à la génération 1960, profil à 64 ans (part_retraites_age) à partir de
+    1969, mélange des deux selon l'âge légal de la génération entre les deux (age_legal_generation). Renvoie
+    (part(g, b), age_legal(g))."""
+    r64 = _part_age(p)
+    r62 = _complet(p.val("ancien_systeme.part_retraites_62"))
+    cal = {int(g): v for g, v in p.val("ancien_systeme.age_legal_generation").items()}
+    g0, g1 = min(cal), max(cal)
+    cache = {}
+
+    def age_legal(g: int) -> float:
+        return cal[min(max(g, g0), g1)]
+
+    def profil(g: int) -> dict[int, float]:
+        lam = (age_legal(g) - 62.0) / 2.0
+        if lam not in cache:
+            cache[lam] = {b: (1 - lam) * r62[b] + lam * r64[b] for b in r64}
+        return cache[lam]
+
+    def part(g: int, b: int) -> float:
+        return profil(g)[b]
+    part.profil = profil
+    return part, age_legal
+
+
 def _report(p: Parametres, g: int) -> float:
     """Années de report de l'âge légal pour la génération g (mesure du programme : de 64 ans à ancien_systeme.age_legal["programme"])."""
     a = p.val("ancien_systeme.age_legal")

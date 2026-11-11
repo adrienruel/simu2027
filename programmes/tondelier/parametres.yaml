@@ -123,6 +123,33 @@ tondelier_macro:
 
 tondelier_mesures:
 
+  # ---------------------------------------------------------------- économies nommées non chiffrées (relecture neutre, 11/11/2026)
+  moratoire_prisons:
+    valeur: {id: ECO-05, libelle: "Moratoire sur les nouvelles places de prison (hors remplacement)", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -0.1, prudent: -0.2, median: -0.4, optimiste: -0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : programme « 15 000 places » du statu quo, ≈ 0,5 à 0,7 Md€ d'investissement par an ; places déjà engagées payées"
+    note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
+  niches_climat:
+    valeur: {id: ECO-03, instrument: travail, libelle: "Niches défavorables au climat, voitures de fonction, barèmes kilométriques réformés", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.1, prudent: 0.3, median: 0.6, optimiste: 1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : frais réels et barème kilométrique ≈ 2 Md€ de dépense fiscale ; avantage en nature des voitures de fonction (hors REC-42, qui porte les niches fossiles)"
+    note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
+  bonus_malus:
+    valeur: {id: COT-06, instrument: cout_travail, libelle: "Bonus-malus renforcé sur les contrats courts, intérim contributeur", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.0, prudent: 0.1, median: 0.2, optimiste: 0.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : bonus-malus actuel quasi neutre en recette (Unédic, 2024) ; renforcement : quelques centaines de M€ au plus"
+    note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
+
+
   # ---------------------------------------------------------------- recettes : patrimoine et successions
   zucman:
     valeur: {id: REC-01, instrument: capital_menages, libelle: "Taxe Zucman : impôt plancher de 2 % au-delà de 100 M€", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
@@ -553,7 +580,7 @@ tondelier_mesures:
     statut: HYPOTHESE
     source: "Calcul : élèves du primaire −13 % d'ici 2032 (Insee) ; postes gardés au lieu de baisser avec l'élasticité de 0,5 du statu quo : ≈ 6,5 % des ≈ 20 Md€ du primaire public = 1,3 ; 12 élèves étendus du CE2 au CM2 en REP : ≈ 18 000 postes = 1,0"
   aesh:
-    valeur: {id: FP-04, libelle: "AESH titularisés, personnels éducatifs renforcés", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2030, fp: true,
+    valeur: {id: FP-04, libelle: "AESH titularisés, personnels éducatifs renforcés", poste: etat_missions, moteur: bloc:autres, debut: 2028, plein: 2030, fp: true, fp_taux: 0.39,
              montant: {crise: 1.4, prudent: 1.4, median: 1.4, optimiste: 1.4}}
     unite: md_eur
     annee_euros: 2026

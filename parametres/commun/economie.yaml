@@ -530,11 +530,35 @@ demographie:
 # --- Ancien système : pensions génération par génération (29 octobre 2026) ---------------
 ancien_systeme:
   part_retraites_age:
-    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.24, 63: 0.30, 64: 0.72, 65: 0.80, 66: 0.86, 67: 0.95, 68: 0.97, 69: 0.98, 70: 1.0}
+    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.24, 63: 0.30, 64: 0.72, 65: 0.80, 66: 0.86, 67: 0.98, 68: 1.0}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : DREES, Les retraités et les retraites 2025, fiche 16 : en 2023 (âge légal 62 ans), 4 à 5 % des 59 ans sont retraités, 94 à 97 % des 67 ans ; 10 % partent à 60 ans (carrières longues), 31 % à 62 ans, 7 % à 67 ans"
-    note: "Part d'une génération partie à la retraite à chaque âge, pour l'âge légal de 64 ans (réforme de 2023, générations 1968 et suivantes) : profil de 2023 décalé de deux ans au-delà de 60 ans, carrières longues gardées. Le passage à 65 ans du programme est compté dans sa propre mesure."
+    note: "Part d'une génération partie à la retraite à chaque âge, pour l'âge légal de 64 ans (réforme de 2023, générations 1968 et suivantes) : profil de 2023 décalé de deux ans au-delà de 60 ans, carrières longues gardées ; à partir de 67 ans, même part que le profil à 62 ans (taux plein automatique à 67 ans inchangé, relecture neutre du 07/11/2026). Le passage à 65 ans du programme est compté dans sa propre mesure."
+  part_retraites_62:
+    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "DREES, Les retraités et les retraites 2025, fiche 16 : profil de départ de 2023 (âge légal 62 ans) ; même profil que tondelier_retraites.profil_62_ans"
+    note: "Profil de référence des générations nées jusqu'en 1960 ; les générations 1961 à 1968 suivent un mélange de ce profil et du profil à 64 ans selon leur âge légal (age_legal_generation)."
+  age_legal_generation:
+    valeur: {1960: 62.0, 1961: 62.25, 1962: 62.5, 1963: 62.75, 1964: 62.75, 1965: 63.0, 1966: 63.25, 1967: 63.5, 1968: 63.75, 1969: 64.0}
+    unite: annees
+    statut: SOURCE
+    source: "Loi du 14 avril 2023 et LFSS 2026 (suspension du relèvement jusqu'au 1er janvier 2028, départs à partir du 1er septembre 2026) : 1964 : 62 ans 9 mois ; 1965 : 63 ans (62 ans 9 mois au 1er trimestre) ; 1966 : 63 ans 3 mois ; 1967 : 63 ans 6 mois ; 1968 : 63 ans 9 mois ; 1969 et après : 64 ans (Groupama, d'après Service public, 27/02/2026 ; CMS Francis Lefebvre, lettre rectificative du PLFSS 2026)"
+    note: "Relecture neutre du 07/11/2026 : le modèle appliquait 64 ans à toutes les générations, ce qui faisait partir d'un coup 1,3 million de personnes au retour à 62 ans. Avant 1960 : 62 ans ; après 1969 : 64 ans."
+  part_droit_direct:
+    valeur: 0.88
+    unite: taux
+    statut: SOURCE
+    source: "DREES, Les retraités et les retraites 2025 : pensions de droit direct ≈ 88 % de la masse des pensions (réversion et minimum vieillesse ≈ 12 %)"
+    note: "Une mesure d'âge déplace des pensions de droit direct : l'écart calculé sur les générations est calé sur la masse de droit direct, pas sur toutes les dépenses de retraite (relecture neutre, 07/11/2026)."
+  age_taux_plein:
+    valeur: 67
+    unite: annees
+    statut: SOURCE
+    source: "Code de la sécurité sociale, art. L. 351-8 : taux plein automatique à 67 ans, inchangé par la réforme de 2023"
+    note: "Un report de l'âge légal ne décale pas les départs à partir de cet âge (relecture neutre, 07/11/2026)."
   pension_nouveaux_relative: {valeur: 0.935, unite: sans_unite, statut: SOURCE, source: "DREES, Les retraités et les retraites 2025, fiches 5 et 7 : pension brute de droit direct des nouveaux retraités fin 2023, 1 557 € par mois, contre 1 666 € pour l'ensemble des retraités", note: "Pension des départs de 2029 et après, rapportée à la pension moyenne de 2029 (1 557 / 1 666). Les générations n'ont pas de pension plus élevée que leurs aînées (effet noria faible depuis 2017)."}
 
 # --- Cellules de ménages (moteur/cohortes.py, 29 octobre 2026) -----------------------------

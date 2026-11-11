@@ -6,8 +6,8 @@ reprises : seules les mesures nommées sont estimées.
 
 - **mesures simples** (groupe retailleau_mesures) ;
 - **mesures calculées** :
-  - retraite : taux plein à 65 ans, départs dès 63 ans avec décote (moteur/bibliotheque.report_age_legal_detail, même
-    lecture que Bertrand), emploi des seniors ;
+  - retraite : âge minimal de 63 ans avec décote et taux plein automatique ramené à 65 ans : solde net estimé
+    (relecture neutre du 11/11/2026 : ce n'est pas un report de l'âge à 65 ans) ;
   - restitution aux salariés (13 Md€ de cotisations salariales en moins, plus le « zéro cotisation » des mesures
     simples) : moteur/bibliotheque.baisse_prelevements_salaries ;
   - chômage plus bas avec l'assurance chômage resserrée.
@@ -28,18 +28,14 @@ class Retailleau(ProgrammeSimple):
 
     def mesures_calculees(self, p, s, idx):
         canaux = {}
-        det = bib.report_age_legal_detail(p, s, self.v("retraites.age_cible"), self.v("retraites.premiere_generation"),
-                                          self.v("retraites.pas_par_generation"))
-        k = self.v("retraites.part_economie_gardee", s)
-        self.non_retraites = getattr(self, "non_retraites", {})
-        self.non_retraites[(id(p), s)] = {"serie": {t: k * v for t, v in det["non_retraites"].items()}, "baisse": False}
-        serie = {2027: 0.0, 2028: 0.0, **{t: -k * det["pensions"][t] for t in ANNEES}}
-        taux_prel = sq.recettes_par_impot(p, s)[2029]["retraites"] / sq.retraites(p, s)[2029]["depenses"]
-        out = [
-            Mesure("RET-RET-01 — taux plein à 65 ans, départs dès 63 ans avec décote", "retraites", serie),
-            Mesure("RET-RET-01 — prélèvements sur les pensions en moins", "recettes",
-                   {t: taux_prel * v for t, v in serie.items()}),
-        ]
+        # RET-RET-01 : âge minimal de 63 ans avec décote, taux plein à 65 ans (au lieu de 67) : solde net estimé
+        sol = self.v("retraites.solde_reforme", s)
+        d0, d1 = self.v("retraites.debut"), self.v("retraites.plein")
+
+        def mont(t):
+            return min(1.0, max(0.0, (t - d0 + 1) / (d1 - d0 + 1)))
+        out = [Mesure("RET-RET-01 — âge minimal de 63 ans avec décote, taux plein automatique à 65 ans (solde net)",
+                      "retraites", {2027: 0.0, 2028: 0.0, **{t: -sol * mont(t) * idx["pib"][t] for t in ANNEES}})]
         out += bib.baisse_prelevements_salaries(
             p, idx, self.v("restitution.baisse_salaries"), self.v("restitution.part_ir_retrouvee", s),
             self.v("restitution.premiere_annee"), "RET-ECO-06 — restitution aux salariés : cotisations salariales en moins")

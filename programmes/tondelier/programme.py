@@ -106,55 +106,15 @@ class Tondelier:
                 "versants": p.val("statu_quo.versants_fonction_publique")}
 
     def pensions_62(self, p: Parametres, s: str) -> dict[int, float]:
-        """Pensions en plus avec le retour à 62 ans (Md€ de 2026) : même calcul que statu_quo.retraites, profil de
-        départ à 62 ans pour les départs à partir de l'année du retour (part cumulée par génération), niveau calé
-        comme le statu quo (même coefficient)."""
-        from moteur.demographie import AGE_MAX
-        from moteur.ancien_systeme import _part_age
-        r64 = _part_age(p)
-        t62 = {int(a): v for a, v in self.v("retraites.profil_62_ans").items()}
-        r62 = {a: (t62[a] if a in t62 else (1.0 if a > max(t62) else 0.0)) for a in range(0, 106)}
-        retour = self.v("retraites.annee_retour")
-        pop = sq.population(p, s)
-        w = sq.salaires(p, s)
-        lag = int(p.val("statu_quo.retraites_decalage_carriere"))
-        e = p.val("statu_quo.retraites_erosion_relative")
-        nouveau = p.val("ancien_systeme.pension_nouveaux_relative")
-
-        def niveau(depart: int) -> float:
-            if depart < 2029:
-                return 1.0
-            return nouveau * w[depart - lag] / w[2029 - lag] * (1 - e) ** (depart - 2029)
-
-        def brut(avec_62: bool) -> dict[int, float]:
-            out = {}
-            for t in ANNEES:
-                dep = 0.0
-                for a in range(50, AGE_MAX + 1):
-                    n, g = pop[t][a], t - a
-                    for b in range(50, a + 1):
-                        def R(bb):
-                            return r62[bb] if (avec_62 and g + bb >= retour) else r64[bb]
-                        d = R(b) - R(b - 1)
-                        if d > 0:
-                            dep += n * d * niveau(g + b)
-                out[t] = dep
-            return out
-        b64, b62 = brut(False), brut(True)
-        ref = sq.retraites(p, s)
-        k = ref[2029]["depenses"] / b64[2029]
-        # retraités en plus (personnes pas encore retraitées en moins), pour l'emploi des seniors (offre.seniors) :
-        # part partie à chaque âge, cumulée sur la carrière de la génération, comme dans brut()
-        def retraites_age(avec_62: bool, t: int, a: int) -> float:
-            g = t - a
-            def R(bb):
-                return r62[bb] if (avec_62 and g + bb >= retour) else r64[bb]
-            return sum(max(0.0, R(b) - R(b - 1)) for b in range(50, a + 1))
+        """Pensions en plus avec le retour à 62 ans (Md€ de 2026) : moteur/bibliotheque.baisse_age_legal_detail (même
+        calcul que Glucksmann et Mélenchon depuis la relecture neutre du 11/11/2026 : âge légal réel des générations au
+        statu quo, suspension de la LFSS 2026 comprise, calage sur la masse de droit direct)."""
+        from moteur import bibliotheque as bib
+        det = bib.baisse_age_legal_detail(p, s, {self.v("retraites.annee_retour"): self.v("retraites.profil_62_ans")})
+        # personnes pas encore retraitées en moins, pour l'emploi des seniors (offre.seniors)
         self._non_retraites = getattr(self, "_non_retraites", {})
-        self._non_retraites[(id(p), s)] = {
-            t: sum(pop[t][a] * (retraites_age(False, t, a) - retraites_age(True, t, a)) for a in range(50, AGE_MAX + 1))
-            for t in ANNEES}
-        return {t: k * (b62[t] - b64[t]) for t in ANNEES}
+        self._non_retraites[(id(p), s)] = {t: -v for t, v in det["retraites_en_plus"].items()}
+        return det["pensions"]
 
     def smic(self, p: Parametres) -> dict[str, float]:
         """SMIC à 2 000 € brut (Md€ de 2026 à l'économie de 2029, effet plein) et emplois perdus, scénario par
@@ -308,7 +268,8 @@ class Tondelier:
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", "")))
                 if x.get("fp"):
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
-                                        {t: part_fp * v for t, v in serie.items()}, nature="mesure", note=nom.split(".")[1]))
+                                        {t: x.get("fp_taux", part_fp) * v for t, v in serie.items()}, nature="mesure",
+                                        note=nom.split(".")[1]))
             # FP-02 : rémunérations publiques, par versant, et pensions des fonctionnaires
             ia = idx["bloc:autres"]
             x = {"debut": 2028, "plein": 2032, "_montant": fp2["montant"], "moteur": "bloc:autres"}

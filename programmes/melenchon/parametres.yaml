@@ -162,6 +162,16 @@ melenchon_emplois_aides:
 
 melenchon_mesures:
 
+  nouvelle_caledonie:
+    valeur: {id: LFI-INS-01, libelle: "Indépendance de la Kanaky-Nouvelle-Calédonie : dépenses de l'État sur place en moins, plan de réparation déduit", poste: etat_missions, moteur: pib, debut: 2029, plein: 2032,
+             montant: {crise: 0.0, prudent: -0.3, median: -0.7, optimiste: -1.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : dépenses de l'État en Nouvelle-Calédonie ≈ 1,5 Md€ par an (fiche LFI-INS-01) ; coopération et « plan de réparation » (p. 186) après l'indépendance déduits"
+    note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
+
+
   # ================================================================ RECETTES : revenus et patrimoine
   ir_hauts_revenus:
     valeur: {id: LFI-REC-01, instrument: travail, incidence: haut, libelle: "Impôt sur le revenu à 14 tranches : tranches du haut relevées", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
@@ -710,7 +720,7 @@ melenchon_mesures:
     statut: HYPOTHESE
     note: "Frais d'inscription et CVEC ≈ 0,6 ; budget des universités +10 % ≈ 1,5 ; Crous et repas à 1 € pour tous ≈ 0,3 ; psychologues et soins gratuits ≈ 0,2 ; titularisation et recrutements ≈ 0,3 ; APL des étudiants étrangers ≈ 0,1 (Md€)."
   service_citoyen:
-    valeur: {id: LFI-EDU-10, libelle: "Conscription citoyenne écologique obligatoire de neuf mois, payée au SMIC revalorisé, avec bilan de santé et permis de conduire", poste: etat_missions, moteur: pib, debut: 2029, plein: 2032, fp: true,
+    valeur: {id: LFI-EDU-10, libelle: "Conscription citoyenne écologique obligatoire de neuf mois, payée au SMIC revalorisé, avec bilan de santé et permis de conduire", poste: etat_missions, moteur: pib, debut: 2029, plein: 2032, fp: true, fp_taux: 0.39,
              montant: {crise: 24.0, prudent: 23.0, median: 21.0, optimiste: 19.0}}
     unite: md_eur
     annee_euros: 2026
@@ -720,7 +730,7 @@ melenchon_mesures:
 
   # ================================================================ EMPLOI
   garantie_emploi:
-    valeur: {id: LFI-EMP-01, libelle: "Garantie d'emploi : chômeurs de longue durée embauchés au SMIC revalorisé dans un secteur d'urgence (volontariat)", poste: autres, moteur: pib, debut: 2028, plein: 2031, fp: true,
+    valeur: {id: LFI-EMP-01, libelle: "Garantie d'emploi : chômeurs de longue durée embauchés au SMIC revalorisé dans un secteur d'urgence (volontariat)", poste: autres, moteur: pib, debut: 2028, plein: 2031, fp: true, fp_taux: 0.39,
              montant: {crise: 8.6, prudent: 8.6, median: 8.6, optimiste: 8.6}}
     unite: md_eur
     annee_euros: 2026
@@ -735,7 +745,7 @@ melenchon_mesures:
     statut: HYPOTHESE
     source: "Calcul : 240 000 × ≈ 9 000 € d'allocation (tondelier_smic.valeur_emploi_chomeur) × 50 à 80 % venus du chômage indemnisé ou du RSA"
   emploi_jeune:
-    valeur: {id: LFI-EMP-02, libelle: "« Emploi spécifique jeune » de cinq ans dans le secteur non marchand et public", poste: autres, moteur: pib, debut: 2028, plein: 2031, fp: true,
+    valeur: {id: LFI-EMP-02, libelle: "« Emploi spécifique jeune » de cinq ans dans le secteur non marchand et public", poste: autres, moteur: pib, debut: 2028, plein: 2031, fp: true, fp_taux: 0.39,
              montant: {crise: 4.8, prudent: 4.8, median: 4.8, optimiste: 4.8}}
     unite: md_eur
     annee_euros: 2026

@@ -372,7 +372,7 @@ mesures:
 - id: LIS-TER-06
   intitule: INSP supprimé, DRH de l'État
   source: Le livre noir, 22/04/2026, p. 24
-  traitement: non chiffré
+  traitement: lisnard_mesures.insp (économie estimée)
 - id: LIS-TER-07
   intitule: Effectifs publics −12 % (plus de 400 000 suppressions)
   source: CNEWS, 28/10/2026

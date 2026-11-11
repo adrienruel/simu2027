@@ -148,8 +148,11 @@ class ProgrammeSimple:
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", "")))
                 if x.get("fp"):
+                    # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS
+                    # pensions ni impôt sur le revenu, ≈ 0,39 ; relecture neutre du 11/11/2026)
+                    taux = x.get("fp_taux", part_fp)
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
-                                        {t: part_fp * v for t, v in serie.items()}, note=court))
+                                        {t: taux * v for t, v in serie.items()}, note=court))
                 if x.get("postes"):
                     cible = crees if x["_montant"] >= 0 else supprimes
                     for t in ANNEES:

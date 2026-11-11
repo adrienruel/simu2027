@@ -39,11 +39,11 @@ attal_macro:
 
 attal_droit_au_brut:
   baisse:
-    valeur: {crise: 50.0, prudent: 46.0, median: 42.0, optimiste: 40.0}
+    valeur: {crise: 58.0, prudent: 52.0, median: 46.0, optimiste: 40.0}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Site du candidat (« Droit au brut ») : +250 € net par mois au salaire médian (2 200 € net), dès 2027, cotisations « qui pèsent sur le travail » supprimées, sans précision. Calcul : 250 € de plus pour les salariés au-dessus du médian et un gain proportionnel en dessous ≈ 215 € par mois en moyenne pour ≈ 20 millions de salariés ≈ 52 Md€ ; ≈ 40 Md€ cités par la presse (La Dépêche, octobre 2026), qui est pris pour l'optimiste"
+    source: "Site du candidat (« Droit au brut ») : +250 € net par mois au salaire médian (2 200 € net), dès 2027, cotisations « qui pèsent sur le travail » supprimées, sans précision. Calcul : 250 € de plus pour les salariés au-dessus du médian et un gain proportionnel en dessous ≈ 215 € par mois en moyenne pour ≈ 20 millions de salariés ≈ 52 Md€ ; ≈ 40 Md€ cités par la presse (La Dépêche, octobre 2026), qui est pris pour l'optimiste ; relecture neutre (11/11/2026) : le prudent ne peut pas être sous le calcul (52) ; agents publics compris, plutôt au-delà (crise 58)"
     note: "Cotisations salariales en moins sur les revenus d'activité, privé et public dans la proportion de la CSG ; forme d'incidence : celle de la suppression de la CSG calculée par OpenFisca (proportionnelle au salaire). Les cotisations salariales sont entièrement déductibles : l'impôt sur le revenu monte (attal_droit_au_brut.part_ir_retrouvee) ; la prime d'activité baisse. Le financement annoncé (« à l'euro près » par des économies sur l'assurance chômage et les arrêts maladie) n'est pas repris : ces deux réformes sont chiffrées à part. Les droits à retraite des salariés ne baissent pas (hypothèse : l'État compense la caisse)."
   premiere_annee:
     valeur: 2028
@@ -185,11 +185,11 @@ attal_mesures:
     note: "Effet sur l'emploi : attal_chomage.baisse_taux."
   enseignants:
     valeur: {id: ATT-EDU-01, libelle: "Enseignants revalorisés de 200 € net par mois, jusqu'à 500 € en milieu de carrière", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
-             montant: {crise: 5.5, prudent: 5.0, median: 4.5, optimiste: 4.0}}
+             montant: {crise: 7.0, prudent: 6.5, median: 6.0, optimiste: 5.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Calcul : ≈ 850 000 enseignants ; ≈ 300 € net par mois en moyenne ; coût employeur ≈ 1,6 fois le net (cotisations employeur et salariales) : ≈ 4,9 Md€"
+    source: "Calcul : ≈ 850 000 enseignants ; ≈ 300 € net par mois en moyenne ; coût employeur ≈ 2,2 fois le net pour un fonctionnaire de l'État (CAS Pensions compris ; relecture neutre du 11/11/2026, cohérent avec les 57 % de prélèvements récupérés) : ≈ 6,7 Md€ bruts"
   aesh:
     valeur: {id: ATT-EDU-07, libelle: "Corps professionnel des AESH", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
              montant: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}

@@ -1108,7 +1108,7 @@ mesures:
     citation: "Adopter un moratoire sur la construction de nouvelles places de prison"
     statut: economie_declarative
     poids: faible
-    note: "économie sur le programme immobilier pénitentiaire du statu quo (à lire dans le PLF 2027)"
+    note: "économie sur le programme immobilier pénitentiaire du statu quo : tondelier_mesures.moratoire_prisons (estimée, 11/11/2026)"
 
   # ------------------------------------------------------------------ CANAUX MACROÉCONOMIQUES
   - id: MAC-01

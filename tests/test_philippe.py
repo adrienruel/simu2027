@@ -44,10 +44,11 @@ def test_sens_des_scenarios(prog):
 
 
 def test_aides_aux_entreprises_sous_l_annonce(prog):
-    """50 Md€ d'aides supprimées annoncés : 70 % en prudent ; la baisse d'impôts de production est la mesure, entière."""
+    """50 Md€ d'aides supprimées annoncés : estimation propre (20 Md€ en prudent, relecture neutre) ; la baisse d'impôts
+    de production est la mesure, entière (part payée par les administrations retirée)."""
     a = sum(prog.v(f"mesures.aides_entreprises_{k}")["montant"]["prudent"] for k in ("travail", "capital"))
     b = sum(prog.v(f"mesures.impots_production_{k}")["montant"]["prudent"] for k in ("travail", "capital"))
-    assert a == pytest.approx(35) and b == pytest.approx(-50)
+    assert a == pytest.approx(20) and -50 < b < -45
 
 
 def test_retraite_a_65_ans_fait_des_seniors_en_emploi(p, prog):

@@ -28,21 +28,7 @@ def report_age_legal(p: Parametres, s: str, age_cible: float, premiere_generatio
     return report_age_legal_detail(p, s, age_cible, premiere_generation, pas_par_generation)["pensions"]
 
 
-def report_age_legal_detail(p: Parametres, s: str, age_cible: float, premiere_generation: int,
-                            pas_par_generation: float) -> dict:
-    """Pensions en moins (Md€ de 2026, > 0 = économie) et personnes pas encore retraitées en plus, quand l'âge légal
-    passe de 64 ans à age_cible.
-
-    Génération g : report = min(age_cible − 64, (g − premiere_generation + 1) × pas_par_generation) ; la part partie à
-    chaque âge suit le profil commun décalé de ce report au-delà de 64 ans (ancien_systeme._part). Même calcul que
-    statu_quo.retraites (survivants de l'Insee, pension liquidée sur le salaire de quinze ans plus tôt, érosion), même
-    coefficient de calage. Les personnes pas encore retraitées sont réparties entre emploi, chômage et inactivité par
-    offre.seniors."""
-    from .ancien_systeme import _part, _part_age
-    from .demographie import AGE_MAX
-    r = _part_age(p)
-    actuel = p.val("ancien_systeme.age_legal")["actuel"]
-    ecart = age_cible - actuel
+def _cadre_pensions(p: Parametres, s: str):
     pop = sq.population(p, s)
     w = sq.salaires(p, s)
     lag = int(p.val("statu_quo.retraites_decalage_carriere"))
@@ -53,93 +39,114 @@ def report_age_legal_detail(p: Parametres, s: str, age_cible: float, premiere_ge
         if depart < 2029:
             return 1.0
         return nouveau * w[depart - lag] / w[2029 - lag] * (1 - e) ** (depart - 2029)
+    return pop, niveau
+
+
+def _pensions_et_retraites(p: Parametres, s: str, part) -> tuple[dict[int, float], dict[int, float]]:
+    """Pensions brutes (non calées) et retraités, part(g, b) = part de la génération g partie à l'âge b."""
+    from .demographie import AGE_MAX
+    pop, niveau = _cadre_pensions(p, s)
+    dep_t, ret_t = {}, {}
+    for t in ANNEES:
+        dep = ret = 0.0
+        for a in range(50, AGE_MAX + 1):
+            n, g = pop[t][a], t - a
+            cumul = 0.0
+            prec = part(g, 49)
+            for b in range(50, a + 1):
+                cur = part(g, b)
+                d = cur - prec
+                prec = cur
+                if d > 0:
+                    dep += n * d * niveau(g + b)
+                    cumul += d
+            ret += n * min(1.0, cumul)
+        dep_t[t], ret_t[t] = dep, ret
+    return dep_t, ret_t
+
+
+def _calage(p: Parametres, s: str, b0: dict[int, float]) -> float:
+    """Coefficient de calage d'un écart de pensions de droit direct : masse du statu quo en 2029 × part de droit
+    direct, rapportée au calcul par génération (relecture neutre du 07/11/2026 : la réversion et le minimum
+    vieillesse ne bougent pas avec l'âge de départ)."""
+    return sq.retraites(p, s)[2029]["depenses"] * p.val("ancien_systeme.part_droit_direct") / b0[2029]
+
+
+def report_age_legal_detail(p: Parametres, s: str, age_cible: float, premiere_generation: int,
+                            pas_par_generation: float) -> dict:
+    """Pensions en moins (Md€ de 2026, > 0 = économie) et personnes pas encore retraitées en plus, quand l'âge légal
+    passe à age_cible.
+
+    Référence : profil de départ de chaque génération au statu quo (ancien_systeme.profil_generation : loi de 2023 et
+    suspension de la LFSS 2026). Génération g : report = min(age_cible − 64, (g − premiere_generation + 1) ×
+    pas_par_generation), ajouté à l'âge légal de la génération ; le profil est décalé de ce report à partir de l'âge
+    légal, mais pas au-delà de l'âge du taux plein automatique (67 ans, inchangé) : à partir de cet âge, la part
+    partie est celle du statu quo. Même calcul des pensions que statu_quo.retraites, calage sur la masse de droit
+    direct. Les personnes pas encore retraitées sont réparties entre emploi, chômage et inactivité par offre.seniors."""
+    from .ancien_systeme import _part, profil_generation
+    base, age_legal = profil_generation(p)
+    ecart = age_cible - p.val("ancien_systeme.age_legal")["actuel"]
+    a_tp = int(p.val("ancien_systeme.age_taux_plein"))
 
     def report(g: int) -> float:
         return min(ecart, max(0.0, (g - premiere_generation + 1) * pas_par_generation))
+    cache = {}
 
-    def brut(avec: bool) -> tuple[dict[int, float], dict[int, float]]:
-        dep_t, ret_t = {}, {}
-        for t in ANNEES:
-            dep = ret = 0.0
-            for a in range(50, AGE_MAX + 1):
-                n, g = pop[t][a], t - a
-                rep = report(g) if avec else 0.0
-                ret += n * _part(r, a, rep, actuel)
-                for b in range(50, a + 1):
-                    d = _part(r, b, rep, actuel) - _part(r, b - 1, rep, actuel)
-                    if d > 0:
-                        dep += n * d * niveau(g + b)
-            dep_t[t], ret_t[t] = dep, ret
-        return dep_t, ret_t
-    (b0, n0), (b1, n1) = brut(False), brut(True)
-    k = sq.retraites(p, s)[2029]["depenses"] / b0[2029]
+    def avec(g: int, b: int) -> float:
+        if g not in cache:
+            r, rep, al = base.profil(g), report(g), int(age_legal(g))
+            cache[g] = {bb: (r[bb] if bb >= a_tp else min(r[bb], _part(r, bb, rep, al))) for bb in r}
+        return cache[g][b]
+    (b0, n0), (b1, n1) = _pensions_et_retraites(p, s, base), _pensions_et_retraites(p, s, avec)
+    k = _calage(p, s, b0)
     return {"pensions": {t: k * (b0[t] - b1[t]) for t in ANNEES}, "non_retraites": {t: n0[t] - n1[t] for t in ANNEES}}
 
 
 def baisse_age_legal_detail(p: Parametres, s: str, etapes: dict[int, dict]) -> dict:
     """Pensions en plus (Md€ de 2026, > 0 = dépense) et personnes retraitées en plus quand l'âge légal baisse, profil
-    de départ par année de départ (même calcul et même calage que statu_quo.retraites et le retour à 62 ans du
-    programme Tondelier, généralisé à un calendrier).
+    de départ par année de départ.
 
-    etapes : {année de départ: profil {âge: part de la génération partie}} ; avant la première étape, profil commun à
-    64 ans (ancien_systeme.part_retraites_age) ; entre deux étapes, mélange linéaire des deux profils selon l'année de
-    départ ; après la dernière, le dernier profil. Exemple : {2028: profil à 62 ans, 2032: profil à 60 ans}."""
-    from .ancien_systeme import _part_age
-    from .demographie import AGE_MAX
-    r64 = _part_age(p)
-
-    def complet(t: dict) -> dict[int, float]:
-        t = {int(a): v for a, v in t.items()}
-        return {a: (t[a] if a in t else (1.0 if a > max(t) else 0.0)) for a in range(0, 106)}
+    Référence : profil de chaque génération au statu quo (ancien_systeme.profil_generation : loi de 2023 et
+    suspension de la LFSS 2026). etapes : {année de départ: profil {âge: part de la génération partie}} ; les départs
+    d'avant la première étape suivent le statu quo ; entre deux étapes, mélange linéaire des deux profils selon
+    l'année de départ ; après la dernière, le dernier profil. Une génération dont l'âge légal au statu quo est déjà
+    plus bas que celui du programme garde le statu quo (part = max des deux). Même calcul des pensions que
+    statu_quo.retraites, calage sur la masse de droit direct. Exemple : {2028: profil à 62 ans, 2032: profil à 60 ans}."""
+    from .ancien_systeme import _complet, profil_generation
+    base, _ = profil_generation(p)
     ans = sorted(etapes)
-    prof = {a: complet(etapes[a]) for a in ans}
+    prof = {a: _complet(etapes[a]) for a in ans}
+    cache_a = {}
 
-    def profil(annee: int) -> dict[int, float]:
-        if annee < ans[0]:
-            return r64
-        if annee >= ans[-1]:
-            return prof[ans[-1]]
-        i = max(k for k in range(len(ans)) if ans[k] <= annee)
-        a0, a1 = ans[i], ans[i + 1]
-        lam = (annee - a0) / (a1 - a0)
-        return {b: (1 - lam) * prof[a0][b] + lam * prof[a1][b] for b in prof[a0]}
+    def profil_annee(annee: int):
+        if annee not in cache_a:
+            if annee < ans[0]:
+                cache_a[annee] = None
+            elif annee >= ans[-1]:
+                cache_a[annee] = prof[ans[-1]]
+            else:
+                i = max(k for k in range(len(ans)) if ans[k] <= annee)
+                a0, a1 = ans[i], ans[i + 1]
+                lam = (annee - a0) / (a1 - a0)
+                cache_a[annee] = {b: (1 - lam) * prof[a0][b] + lam * prof[a1][b] for b in prof[a0]}
+        return cache_a[annee]
     cache = {}
 
-    def R(annee: int, b: int) -> float:
-        if annee not in cache:
-            cache[annee] = profil(annee)
-        return cache[annee][b]
-    pop = sq.population(p, s)
-    w = sq.salaires(p, s)
-    lag = int(p.val("statu_quo.retraites_decalage_carriere"))
-    e = p.val("statu_quo.retraites_erosion_relative")
-    nouveau = p.val("ancien_systeme.pension_nouveaux_relative")
-
-    def niveau(depart: int) -> float:
-        if depart < 2029:
-            return 1.0
-        return nouveau * w[depart - lag] / w[2029 - lag] * (1 - e) ** (depart - 2029)
-
-    def brut(avec: bool) -> tuple[dict[int, float], dict[int, float]]:
-        dep_t, ret_t = {}, {}
-        for t in ANNEES:
-            dep = ret = 0.0
-            for a in range(50, AGE_MAX + 1):
-                n, g = pop[t][a], t - a
-                cumul = 0.0
-                for b in range(50, a + 1):
-                    if avec:
-                        d = R(g + b, b) - R(g + b - 1, b - 1)
-                    else:
-                        d = r64[b] - r64[b - 1]
-                    if d > 0:
-                        dep += n * d * niveau(g + b)
-                        cumul += d
-                ret += n * min(1.0, cumul)
-            dep_t[t], ret_t[t] = dep, ret
-        return dep_t, ret_t
-    (b0, n0), (b1, n1) = brut(False), brut(True)
-    k = sq.retraites(p, s)[2029]["depenses"] / b0[2029]
+    def avec(g: int, b: int) -> float:
+        # part cumulée : pour chaque âge, la part partie selon le profil en vigueur l'année de cet âge, jamais en
+        # dessous de la part déjà partie (cumul croissant), ni en dessous du statu quo de la génération
+        if g not in cache:
+            r = base.profil(g)
+            out, prec = {}, 0.0
+            for bb in range(0, 106):
+                pa = profil_annee(g + bb)
+                v = r[bb] if pa is None else max(r[bb], pa[bb])
+                prec = max(prec, v)
+                out[bb] = prec
+            cache[g] = out
+        return cache[g][b]
+    (b0, n0), (b1, n1) = _pensions_et_retraites(p, s, base), _pensions_et_retraites(p, s, avec)
+    k = _calage(p, s, b0)
     return {"pensions": {t: k * (b1[t] - b0[t]) for t in ANNEES}, "retraites_en_plus": {t: n1[t] - n0[t] for t in ANNEES}}
 
 
