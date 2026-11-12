@@ -1063,3 +1063,53 @@ calculée seulement par l'export) : l'écart entre l'annonce et le retenu est aj
 par le multiplicateur, l'offre et les intérêts. Prudent, 2032 : environ trois quarts de l'écart brut améliorent
 vraiment le déficit pour les économies ; un peu plus que l'écart pour les recettes sur le patrimoine (multiplicateur
 faible, intérêts en moins). Les autres sorties sont inchangées.
+
+## 12 novembre 2026 (soir) — Phase A de la roadmap : cohérence comptable
+
+Branche `phase-a` : `main` + `arbitrages-equite` (seconde relecture neutre, fusionnée ici), puis les chantiers A1 à A6
+et A8 de la roadmap « vers le meilleur moteur possible ». Décisions d'Adrien du 12/11 au soir : A2 (valeur de l'emploi
+modulée selon la mesure, emplois des 32 heures au voisinage du SMIC, « le moteur doit simuler des cohortes »), A3
+(postes publics au coût des facteurs), A5 (dette en baisse), A6 (rendement du fonds).
+
+- **A1, productivité au noyau** (`statu_quo.dividende_programme`). Le dividende d'un gain de productivité n'est plus
+  la moyenne d'un profil type : le noyau relève la productivité du statu quo du profil du programme (réformes, IA,
+  école réunies), recalcule recettes et dépenses indexées, et rend (Δ recettes − Δ dépenses) / Δ PIB année par année.
+  Canaux déclarés, part productivité du canal d'offre, Écologie de droite. Sur le profil type, on retrouve exactement
+  l'ancien dividende (test).
+- **A2, 32 heures** (`ProgrammeSimple.trente_deux_heures`). Les embauches de partage du travail ne rapportent plus que
+  l'allocation de chômage évitée (`emploi.allocation_chomeur_evitee`, 9 000 €) : leur production est celle des heures
+  rendues, déjà gardée dans le PIB avec ses recettes ; elles n'ajoutent plus de valeur ajoutée au PIB (canal « ** »).
+  Les emplois perdus par le coût horaire valent la cellule OpenFisca de leur niveau de salaire
+  (`ProgrammeSimple.valeur_emploi_cellule` : prélèvements, TVA, allocation), paramètre `cout_emplois_perdus` de la
+  mesure, par défaut 1,3 SMIC (`emploi.cout_emploi_cree_smic`, emplois au voisinage du SMIC) : 20 650 €, la valeur
+  d'un emploi des autres canaux (20 000 €). Le SMIC exact (16 200 €) aurait rendu les emplois perdus moins coûteux
+  que partout ailleurs dans le modèle. Cohortes : la valeur d'un emploi suit désormais le salaire par emploi
+  (`idx["salaire"]`) et non le PIB, qui comptait une seconde fois l'évolution du nombre d'emplois (tous les canaux
+  d'emploi des programmes simples, emplois perdus du SMIC d'Arthaud, Glucksmann, Mélenchon, Roussel et Tondelier).
+- **A3, postes publics dans le PIB** (`programme_simple.production_non_marchande`). La dépense des postes créés (ou
+  supprimés) entre au PIB à son coût au rythme où le multiplicateur s'éteint (même durée, scénario miroir pour une
+  hausse) : à long terme le PIB garde le coût des postes, comme en comptabilité nationale. Postes des mesures
+  (`postes`), 32 heures dans la fonction publique, et Tondelier (qui ne retirait pas non plus du PIB les emplois privés
+  évincés : corrigé avec la même valeur ajoutée que ses emplois perdus).
+- **A4, `macro.elasticite_invest`** : 0,24 / 0,30 / 0,335 / 0,37 (crise → optimiste), ordonnée pour une baisse
+  d'impôt ; une hausse prend le scénario miroir, dans le canal d'offre comme dans les cohortes d'entreprises
+  d'Écologie de droite (tranche par tranche).
+- **A5, baisse de l'écart de taux** (`noyau.baisse_ecart_taux`) : une année compte quand le ratio de dette baisse, une
+  année où il remonte en fait perdre une. Effet : au médian, Bertrand, Philippe, Retailleau et Tondelier perdent la
+  baisse qu'ils gagnaient sous le statu quo qui diverge ; Écologie de droite la garde.
+- **A6, emprunt aux ménages** : le noyau compte en intérêts l'écart entre le rendement servi sur les créances
+  (`epargne.rendement_fonds`, 1,76 % réel) et le taux réel de la dette de marché, sur le stock de début d'année
+  (`interets_menages`). Le rendement servi est sous le taux réel de l'OAT (≈ 2,2 %) : la correction allège la charge
+  d'Écologie de droite (−1,7 Md€ en 2037 au prudent).
+- **A8, unités de l'enveloppe** : l'annonce est convertie en points de PIB de 2029 en un seul endroit
+  (`unites.annonce_en_points_pib`), euros de 2027 ramenés en 2026, forme « niveau » ou « cumul » (Attal, Bertrand :
+  `forme_annonce: cumul`). Plafond seulement : aucun chiffre ne change.
+- **Pas fait : A7** (registre par scénario d'Écologie de droite, plus aucune ligne « méthode » dans le bilan). Chantier
+  à part : il faut recalculer le budget du programme dans chaque scénario au lieu du prudent corrigé.
+
+Déficit 2037 (prudent, avant → après la phase A, sorties de `arbitrages-equite` puis de `phase-a`) : Roussel 30,51 →
+30,78 ; Arthaud 18,05 → 18,45 ; Mélenchon 29,63 → 29,55 (PIB relevé par les postes) ; Tondelier 13,91 → 13,97 ;
+Philippe 10,87 (après sa mise à jour du 12/11) ; Écologie de droite 4,27 → 4,21 ; les autres à moins de 0,1 point.
+Médian : Bertrand 7,32 → 7,67, Philippe 8,33, Retailleau 7,92 → 8,16 (baisse de l'écart de taux perdue).
+
+Tests : `tests/test_coherence_phase_a.py` (un test par chantier) ; test de l'écart de taux adapté au critère absolu.

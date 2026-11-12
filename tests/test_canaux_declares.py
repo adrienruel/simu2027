@@ -57,7 +57,7 @@ def test_ecole_et_ia():
 def test_baisse_de_l_ecart_de_taux_gagnee_par_le_resultat():
     """Règle commune (critère absolu, phase A5 du 12/11/2026) : la baisse suit les années où le ratio de dette baisse,
     une année où il remonte en fait perdre une ; nulle en crise et au prudent (barème), nulle pour le statu quo ;
-    Écologie de droite la gagne dès 2030 au médian. Être sous le déficit du statu quo ne suffit plus."""
+    Écologie de droite la gagne dès 2031 au médian (dette en baisse dès 2030). Être sous le déficit du statu quo ne suffit plus."""
     from moteur import statu_quo as sq
     ref = {t: {"deficit": 9.0, "dette_pib": 100.0 + 5 * (t - 2029)} for t in ANNEES}
     mieux = {t: {"deficit": 4.0, "dette_pib": 120.0 - (t - 2032) if t >= 2032 else 120.0} for t in ANNEES}
@@ -76,7 +76,8 @@ def test_baisse_de_l_ecart_de_taux_gagnee_par_le_resultat():
     assert all("baisse_ecart_taux" not in vide[t] for t in ANNEES)
     assert all(vide[t]["deficit"] == sq.simuler(P)["median"][t]["deficit"] for t in ANNEES)
     edd = noyau.resultats(P, ("median",))["median"]
-    assert edd[2029]["baisse_ecart_taux"] == 0 and edd[2030]["baisse_ecart_taux"] == pytest.approx(bareme / duree)
+    # dette en baisse dès 2030 (premier écart mesurable avec 2029) : baisse effective en 2031
+    assert edd[2030]["baisse_ecart_taux"] == 0 and edd[2031]["baisse_ecart_taux"] == pytest.approx(bareme / duree)
     assert edd[2040]["baisse_ecart_taux"] == pytest.approx(bareme)
 
 
