@@ -374,6 +374,22 @@ philippe_mesures:
     source: "Encadrement : dépenses fiscales ≈ 85 Md€ (PLF 2026, Voies et moyens II) ; niches non nommées ; rabot de 2012-2013 ≈ 1 à 2 Md€"
     note: "Économie non chiffrée : estimée."
 
+  capitalisation_collective:
+    valeur: {id: PHI-RET-05, instrument: capital_menages, libelle: "Capitalisation collective généralisée à tous les salariés, sur le modèle de la retraite additionnelle des fonctionnaires, versée par l'État", poste: etat_missions, moteur: pib, debut: 2030, plein: 2034,
+             montant: {crise: 10.0, prudent: 8.0, median: 6.0, optimiste: 4.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (page Retraites, 12/11/2026) : capitalisation collective pour tous les salariés « sur le modèle existant pour les fonctionnaires », sans hausse des cotisations retraite ; Europe 1 : « 15 % » de capitalisation ; le candidat la dit compensée par le travail plus long (décision d'Adrien du 12/11/2026 : on la chiffre donc en dépense de l'État, au rythme du report de l'âge, sans reprendre la compensation annoncée). Encadrement : RAFP ≈ 2,1 Md€ de cotisations par an pour ≈ 4,5 millions de fonctionnaires (meilleurtaux, 2025 ; COR, fiche RAFP) ; ≈ 21 millions de salariés du privé : 4 à 10 Md€ par an"
+    note: "Fonds hors administrations publiques, comme le fonds du programme d'Adrien (même règle pour tous). Les 65 ans et les 45 annuités restent comptés à part : le solde montre si le travail plus long compense."
+  allocation_unique:
+    valeur: {id: PHI-SOC-01, instrument: transferts_actifs, libelle: "Allocation familiale unique de 350 € par mois dès le premier enfant, dégressive avec le revenu", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
+             montant: {crise: 9.0, prudent: 7.0, median: 5.0, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (page Famille, 12/11/2026) : 350 € par mois dès le premier enfant, pour les plus modestes, dégressive avec le revenu, en remplacement d'aides « trop éparpillées » non nommées ; aucun coût ni coût constant (décision d'Adrien du 12/11/2026 : suivre la page). Encadrement : allocations familiales ≈ 13,4 Md€ en 2024, versées à partir du deuxième enfant (Cnaf, Analyses statistiques n° 7, 2026) ; ≈ 8 millions de familles avec un enfant mineur, dont 45 % avec un seul enfant (Cnaf, 2022) ; lecture par famille : ≈ 3,6 millions de familles à un enfant × 70 à 170 € par mois en moyenne (dégressivité), moins les pertes des familles nombreuses aisées"
+    note: "Lecture par famille, la moins coûteuse ; par enfant, le coût dépasserait 15 Md€."
   # ---- Ajouts du 12/11/2026 : programme mis à jour sur le site (15 pages thématiques) ----
   heures_sup_csg:
     valeur: {id: PHI-EMP-06, instrument: travail, libelle: "Heures au-delà de 35 h exonérées de tous impôts et cotisations du salarié (CSG-CRDS et plafond de 7 500 € compris)", poste: recettes, moteur: pib, debut: 2028, plein: 2029,

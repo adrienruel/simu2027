@@ -123,9 +123,15 @@ plateformes, vidéoprotection, Frères musulmans, octroi de mer…).
 optimiste 4,49 / 8,06 (4,42) ; crise 13,98 / 12,12 (13,69). L'enveloppe d'économies déduite domaine par domaine
 absorbe en partie l'économie du RSA (prestations déjà visées).
 
-**Points ouverts pour Adrien** :
-1. Capitalisation collective « pour tous les salariés, sur le modèle des fonctionnaires » sans hausse des cotisations :
-   financement inconnu, non chiffrée.
-2. Seuil d'exonération salariale : 35 h ou 37 h selon les passages du site ; la lecture CSG comprise est retenue.
-3. Allocation familiale unique : comptée à coût constant d'après l'interview du 08/10/2026 ; la page Famille ne le dit
-   pas (350 € dès le premier enfant, dégressive).
+**Décisions d'Adrien (12/11/2026, soir)** :
+1. Capitalisation collective : le candidat la dit compensée par le travail plus long. Elle est chiffrée en dépense de
+   l'État (PHI-RET-05, fonds hors administrations, au rythme du report de l'âge) : 4 / 6 / 8 / 10 Md€ à plein effet
+   (optimiste → crise), sur le modèle de la RAFP (≈ 2,1 Md€ par an pour ≈ 4,5 millions de fonctionnaires). La
+   compensation annoncée n'est pas reprise : les 65 ans et les 45 annuités restent comptés à part (≈ +11 Md€ en
+   prudent en 2037, contre −8,5 pour la capitalisation), le solde montre ce qu'il en reste.
+2. Heures supplémentaires : lecture CSG comprise, confirmée.
+3. Allocation familiale unique : comme la page, sans coût constant (PHI-SOC-01) : 3 / 5 / 7 / 9 Md€, lecture par
+   famille (≈ 3,6 millions de familles à un enfant, dégressivité) ; par enfant, plus de 15 Md€.
+
+**Effet après ces décisions** (déficit 2037, programme / statu quo) : crise 14,98 / 12,12 ; prudent 10,75 / 9,50 ;
+médian 8,02 / 8,37 ; optimiste 4,79 / 8,06.

@@ -963,3 +963,5 @@ Réponses d'Adrien aux huit questions ouvertes :
 Lecture des 15 pages thématiques du site (mise à jour du 12/11/2026) : 32 mesures ajoutées à programmes/philippe/
 mesures.yaml (123), 7 nouveaux paramètres et 5 paramètres précisés dans parametres.yaml. Détail, effet et points
 ouverts : docs/programmes_novembre.md, section « Philippe : programme mis à jour le 12 novembre 2026 ».
+Décisions d'Adrien du soir : capitalisation collective chiffrée en dépense (compensation annoncée non reprise), lecture
+CSG des heures sup confirmée, allocation familiale unique chiffrée sans coût constant (même section).

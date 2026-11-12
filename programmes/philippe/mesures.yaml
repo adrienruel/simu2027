@@ -353,9 +353,9 @@ mesures:
   source: Adidas Arena, 05/07/2026
   traitement: non chiffré
 - id: PHI-SOC-01
-  intitule: Allocation familiale unique dès le premier enfant (350 € pour les modestes), à coût constant
+  intitule: Allocation familiale unique de 350 € par mois dès le premier enfant, dégressive avec le revenu
   source: L'Heure de vérité, 08/10/2026
-  traitement: 'neutre : à coût constant (redistribution entre familles)'
+  traitement: 'philippe_mesures.allocation_unique (décision d''Adrien du 12/11/2026 : comme la page, sans coût constant)'
 - id: PHI-SOC-02
   intitule: Temps partiel parental à 80 % payé 100 % pendant deux mois
   source: Site (« … plus attentive à ses enfants »)
@@ -427,7 +427,7 @@ mesures:
 - id: PHI-RET-05
   intitule: Capitalisation collective généralisée à tous les salariés, sur le modèle des fonctionnaires
   source: Site, page Retraites, mise à jour du 12/11/2026
-  traitement: 'non chiffré : taux, cotisations et financement non précisés, alors que le site exclut toute hausse des cotisations retraite (point ouvert)'
+  traitement: philippe_mesures.capitalisation_collective (dépense de l'État, compensation par le travail plus long non reprise)
 - id: PHI-RET-06
   intitule: Gestion confiée aux partenaires sociaux après le retour à l'équilibre ; critères de pénibilité négociés
   source: Site, page Retraites, mise à jour du 12/11/2026
