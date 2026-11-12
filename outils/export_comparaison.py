@@ -17,6 +17,7 @@ import csv
 
 import yaml
 
+from moteur import annonces as annonces_mod
 from moteur import noyau
 from moteur import statu_quo as sq
 from moteur.parametres import RACINE, Parametres
@@ -32,7 +33,6 @@ GROUPES = {
     "etat_missions": "État et défense", "defense_ue": "État et défense",
     "collectivites": "Collectivités", "investissement": "Investissement", "autres": "Autres dépenses",
 }
-ANNEE_ANNONCES = 2032  # fin du quinquennat : horizon des annonces
 NATURES_CACHEES = ("detail", "controle", "physique")  # sommes nulles ou sans montant : rien à montrer
 
 
@@ -100,12 +100,17 @@ def main() -> None:
     p = Parametres()
     base = sq.simuler(p)
     traj, ecarts, mesures, ecologie, emploi_canaux, ecologie_mesures, annonces = [], [], [], [], [], [], []
+    variantes = {}
     liste_annonces = yaml.safe_load((RACINE / "programmes" / "annonces.yaml").read_text(encoding="utf-8"))["annonces"]
     for nom in noyau.programmes_disponibles():
         prog = noyau.charger(nom)
         lib = getattr(prog, "libelle", nom)
         res = base if nom == "statu_quo" else noyau.simuler(p, prog)
         tout = prog.mesures(p)
+        if nom != "statu_quo" and any(x["programme"] == nom for x in liste_annonces):
+            var = noyau.charger(nom)
+            var.variante_annonces = True
+            variantes[nom] = noyau.simuler(p, var)
         for s, v in res.items():
             for t, x in v.items():
                 traj.append({"programme": lib, "scenario": SCENARIOS[s], "annee": t,
@@ -152,22 +157,26 @@ def main() -> None:
                 for g, val in par.items():
                     ecarts.append({"cle": f"{lib}|{SCENARIOS[s]}|{t}|{g}", "programme": lib, "scenario": SCENARIOS[s], "annee": t, "groupe": g,
                                    "md": round(val, 2), "part_pib": round(val / y * 100, 3)})
-            # annonces des candidats contre ce que retient le modèle (comparaison seulement)
-            t_a = ANNEE_ANNONCES
+            # annonces des candidats contre ce que retient le modèle (comparaison seulement) ; « si tenue » :
+            # variante complète du programme avec l'écart ajouté en mesures (moteur/annonces.py), effets économiques
+            # compris (multiplicateur, offre, intérêts)
+            t_a = annonces_mod.ANNEE
             for k, a in enumerate(x for x in liste_annonces if x["programme"] == nom):
-                if a["type"] == "economies":
-                    det = getattr(prog, "enveloppe_detail", {}).get((id(p), s), {})
-                    modele = det.get("nommees", 0.0) + det.get("retenu", 0.0)
-                else:
-                    modele = sum(signe(m) * m.valeurs.get(t_a, 0.0) for m in ms
-                                 if m.nature != "effet_macro" and any(m.nom.startswith(pr) for pr in a["prefixes"]))
+                det = getattr(prog, "enveloppe_detail", {}).get((id(p), s))
+                modele = annonces_mod.retenu(a, ms, det)
                 y = v[t_a]["pib"]
+                vt = variantes[nom][s][t_a]
                 annonces.append({"cle": f"{lib}|{SCENARIOS[s]}|{k}", "programme": lib, "scenario": SCENARIOS[s],
                                  "annee": t_a, "annonce": a["libelle"], "type": a["type"],
                                  "annonce_md": round(float(a["montant"]), 1), "modele_md": round(modele, 1),
                                  "ecart_md": round(float(a["montant"]) - modele, 1),
                                  "ecart_pib": round((float(a["montant"]) - modele) / y * 100, 3),
-                                 "deficit": round(v[t_a]["deficit"], 3), "source": a["source"]})
+                                 "deficit": round(v[t_a]["deficit"], 3),
+                                 "deficit_si_tenue": round(vt["deficit"], 3),
+                                 "effet_net_pib": round(v[t_a]["deficit"] - vt["deficit"], 3),
+                                 "deficit_2037": round(v[2037]["deficit"], 3),
+                                 "deficit_2037_si_tenue": round(variantes[nom][s][2037]["deficit"], 3),
+                                 "source": a["source"]})
             for i, m in enumerate(ms):
                 if signe(m) == 0:
                     continue

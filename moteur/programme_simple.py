@@ -312,6 +312,14 @@ class ProgrammeSimple:
             liste.extend(calc)
             liste.extend(self.mesures_ecologie(p, s))
             liste.extend(self.enveloppe_economies(p, s, idx, liste))
+            if getattr(self, "variante_annonces", False):
+                # variante « annonce tenue » (moteur/annonces.py) : jamais dans le chiffrage publié
+                from . import annonces as ann
+                env = f"{self.nom}_enveloppe.intensite" in self.pt._p
+                liste.extend(ann.mesures_tenues(
+                    self.nom, p, s, liste, getattr(self, "enveloppe_detail", {}).get((id(p), s)),
+                    self.v("enveloppe.intensite") if env else None,
+                    int(self.v("enveloppe.debut")) if env else 2028, int(self.v("enveloppe.plein")) if env else 2032))
             # emplois : postes publics, éviction, canaux des mesures calculées
             # éviction : prise au scénario du même côté de la prudence, pour chaque sens. Créer des postes publics :
             # l'éviction forte est prudente ; en supprimer : c'est la reprise faible par le privé qui l'est (scénario miroir)

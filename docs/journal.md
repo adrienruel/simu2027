@@ -975,3 +975,10 @@ précises), lu seulement par outils/export_comparaison.py : sorties/comparaison_
 par scénario, l'annonce et ce que retient le modèle (économies nommées plus enveloppe, ou somme des lignes de la mesure),
 l'écart en points de PIB et le déficit si l'annonce était tenue (statique). Aucun résultat du modèle ne change.
 Comparateur : phrase de méthode dans l'en-tête et tableau « Ce qu'annoncent les candidats, ce que retient le modèle ».
+Remarque d'Adrien : la colonne « déficit si l'annonce était tenue » était statique, sans les effets d'une dépense en
+moins sur l'activité (TVA…). Remplacée par une variante complète (moteur/annonces.py, `variante_annonces = True`,
+calculée seulement par l'export) : l'écart entre l'annonce et le retenu est ajouté comme des mesures ordinaires
+(postes de l'enveloppe pour les économies d'ensemble, profil et instrument de la mesure pour les recettes), qui passent
+par le multiplicateur, l'offre et les intérêts. Prudent, 2032 : environ trois quarts de l'écart brut améliorent
+vraiment le déficit pour les économies ; un peu plus que l'écart pour les recettes sur le patrimoine (multiplicateur
+faible, intérêts en moins). Les autres sorties sont inchangées.

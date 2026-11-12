@@ -325,6 +325,10 @@ class Tondelier:
             # effet macroéconomique : impulsion budgétaire nette
             annees = (*ANNEES_AVANT, *ANNEES)
             # chaque mesure pondérée selon ce qu'elle est (demande par instrument, moteur/offre.poids_demande)
+            if getattr(self, "variante_annonces", False):
+                # variante « annonce tenue » (moteur/annonces.py) : jamais dans le chiffrage publié
+                from moteur import annonces as ann
+                liste.extend(ann.mesures_tenues("tondelier", p, s, liste, None))
             cout_net = offre.impulsion(p, liste, annees)
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
