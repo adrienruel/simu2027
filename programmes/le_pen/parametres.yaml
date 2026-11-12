@@ -327,12 +327,18 @@ le_pen_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 le_pen_canaux:
+  solde_migratoire:
+    valeur: {titres_en_moins: 137400, debut: 2028, montee: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Premiers titres de séjour de 2025 (DGEF, 27/01/2026) ; conversion commune demographie.titres_vers_solde"
+    note: "Variante migratoire commune (phase B2, DÉCISION d'Adrien du 12/11/2026, soir : canal emploi pour tous les programmes qui changent le solde migratoire). Lecture : RN-IMM-01 référendum sur l'immigration, sans chiffre : lu comme la fin de l'immigration familiale (91 100 titres en 2025) et la moitié des titres humanitaires (46 300). Montée de 2028 à 2030. À valider par Adrien."
   reformes_structurelles:
     valeur: {pmr: -0.5, epl: 0, debut: 2028}
     unite: sans_unite
-    statut: HYPOTHESE
+    statut: DECISION
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
-    note: "Marchés de produits : moratoire sur l'éolien terrestre et démontage des parcs (RN-ENE-02, entrée interdite sur un segment de la production d'électricité, −0,5) ; les concessions autoroutières reprises, l'audiovisuel et la priorité nationale dans les marchés publics sont hors champ. Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2."
+    note: "Marchés de produits : moratoire sur l'éolien terrestre et démontage des parcs (RN-ENE-02, entrée interdite sur un segment de la production d'électricité, −0,5) ; les concessions autoroutières reprises, l'audiovisuel et la priorité nationale dans les marchés publics sont hors champ. Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2. DÉCISION d'Adrien du 12/11/2026 (soir, roadmap B1) : lectures confirmées."
   ecole:
     valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
     unite: sans_unite

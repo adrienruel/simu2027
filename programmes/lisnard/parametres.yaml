@@ -363,6 +363,12 @@ lisnard_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 lisnard_canaux:
+  solde_migratoire:
+    valeur: {titres_en_moins: 336200, debut: 2028, montee: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Premiers titres de séjour de 2025 (DGEF, 27/01/2026) ; conversion commune demographie.titres_vers_solde"
+    note: "Variante migratoire commune (phase B2, DÉCISION d'Adrien du 12/11/2026, soir : canal emploi pour tous les programmes qui changent le solde migratoire). Lecture : LIS-IMM-01 « titres de séjour divisés par huit » : 7/8 des 384 230 premiers titres de 2025. Montée de 2028 à 2030. À valider par Adrien."
   reformes_structurelles:
     valeur: {pmr: 0, epl: 1, debut: 2028}
     unite: sans_unite

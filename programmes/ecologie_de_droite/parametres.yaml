@@ -512,9 +512,9 @@ macro:
   reformes_programme:
     valeur: {pmr: 0.5, epl: 0.5, debut: 2029}
     unite: sans_unite
-    statut: HYPOTHESE
+    statut: DECISION
     source: "Barème commun (macro.reformes_structurelles, Égert et Gal, OCDE, 2017)"
-    note: "Remplace macro.productivite le 12/11/2026. Barème restreint au champ de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md), même grille que tous les programmes. Marchés de produits : permis rapide pour la production d'énergie (entrée facilitée sur un segment de l'électricité, 0,5) ; les horaires des commerces (commerce de détail) et le permis rapide des usines sont hors champ (1 avant le 12/11/2026) ; le droit à construire relève du logement, hors champ. Protection de l'emploi : contrat de travail assoupli (0,5, comme les refontes du code du travail d'Attal et de Retailleau). macro.productivite et macro.annees_productivite ne sont plus lus."
+    note: "Remplace macro.productivite le 12/11/2026. Barème restreint au champ de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md), même grille que tous les programmes. Marchés de produits : permis rapide pour la production d'énergie (entrée facilitée sur un segment de l'électricité, 0,5) ; les horaires des commerces (commerce de détail) et le permis rapide des usines sont hors champ (1 avant le 12/11/2026) ; le droit à construire relève du logement, hors champ. Protection de l'emploi : contrat de travail assoupli (0,5, comme les refontes du code du travail d'Attal et de Retailleau). macro.productivite et macro.annees_productivite ne sont plus lus. DÉCISION d'Adrien du 12/11/2026 (soir, roadmap B1) : lectures confirmées."
   annees_productivite:
     valeur: {crise: 10, prudent: 10, median: 10, optimiste: 10}
     unite: sans_unite

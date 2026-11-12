@@ -57,9 +57,24 @@ def pib_2026(p: Parametres) -> float:
 # --- Démographie sans programme ----------------------------------------------------------------------------
 
 def population(p: Parametres, s: str) -> dict[int, tuple[float, ...]]:
-    """Projection de l'Insee du scénario de fécondité, sans effet d'un programme sur les naissances."""
+    """Projection de l'Insee du scénario de fécondité, sans effet d'un programme sur les naissances. Copie de calcul
+    de la variante migratoire (phase B2, moteur/migrations.py) : p._choc_population = {année: écart par âge}."""
     from .demographie import _projection
-    return _projection(_v(p, "demographie.scenario_fecondite", s))
+    base = _projection(_v(p, "demographie.scenario_fecondite", s))
+    choc = p.__dict__.get("_choc_population")
+    if not choc:
+        return base
+    return {t: tuple(v[a] + choc[t][a] for a in range(len(v))) if t in choc else v for t, v in base.items()}
+
+
+def _emploi_en_moins_migrants(p: Parametres, t: int, taux: dict) -> float:
+    """Variante migratoire : les personnes en plus ou en moins ont un taux d'emploi relatif
+    (demographie.migrations.emploi_relatif, Insee) ; rend l'emploi à retirer du calcul aux taux moyens."""
+    choc = p.__dict__.get("_choc_population")
+    if not choc or t not in choc:
+        return 0.0
+    k = p.val("demographie.migrations")["emploi_relatif"]
+    return (1 - k) * sum(choc[t][a] * taux.get(a, 0.0) for a in range(18, len(choc[t])))
 
 
 def choc_chomage(p: Parametres, s: str, t: int) -> float:
@@ -80,7 +95,7 @@ def effectifs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     u = {a: x for k, x in p.val("chomage.taux_par_age").items() for a in _tranche(k)}
     brut = {}
     for t, v in population(p, s).items():
-        e = sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1))
+        e = sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1)) - _emploi_en_moins_migrants(p, t, taux)
         c = sum(v[a] * taux.get(a, 0.0) * u.get(a, 0.0) / (1 - u.get(a, 0.0)) for a in range(18, AGE_MAX + 1))
         brut[t] = {"emploi": e, "chomeurs_bruts": c, "total": sum(v), "enfants": sum(v[0:18]),
                    "adultes": sum(v[18:65]), "jeunes_3_24": sum(v[3:25]), "seniors": sum(v[65:]),
@@ -774,8 +789,10 @@ def cellules_salaries(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     brut = {}
     for t in range(2026, 2074):
         tot = {"prive": 0.0, "public": 0.0, "tva": 0.0, "masse": 0.0, "salaries": 0.0}
+        choc = p.__dict__.get("_choc_population")
+        k_mig = 1 - p.val("demographie.migrations")["emploi_relatif"] if choc and t in choc else 0.0
         for a in ages:
-            n = pop[t][a] * taux.get(a, 0.0) * part_sal
+            n = (pop[t][a] - (k_mig * choc[t][a] if k_mig else 0.0)) * taux.get(a, 0.0) * part_sal
             tot["salaries"] += n
             for key in ("prive", "public", "tva", "masse"):
                 tot[key] += n * par_m[profil.get(a, 1.0)][key]

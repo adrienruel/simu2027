@@ -39,7 +39,8 @@ from . import statu_quo as sq
 from .noyau import ANNEES, Levier, Mesure, Regle
 from .parametres import Parametres
 
-CANAUX = ("fraude_tva", "productivite", "reformes_structurelles", "adoption_ia", "ecole", "regle_trajectoire")
+CANAUX = ("fraude_tva", "productivite", "reformes_structurelles", "adoption_ia", "ecole", "regle_trajectoire",
+          "solde_migratoire")
 
 
 def declares(prog) -> dict:
@@ -102,12 +103,32 @@ def effets(prog, p: Parametres, s: str) -> dict:
             r = (1 + r) * (1 + x["niveau_eleves"][s] * k * _montee(t, x["debut"], x["annees"])) - 1
             serie[t] = y[t] * r
         ajouter("école (niveau des élèves)", serie)
+    emplois, actifs = {t: 0.0 for t in ANNEES}, {t: 0.0 for t in ANNEES}
+    if "solde_migratoire" in d:
+        # variante migratoire commune (phase B2, moteur/migrations.py) : écarts au statu quo recalculé avec la
+        # population du programme ; PIB, emploi et actifs dans le contexte, recettes et dépenses en mesures
+        from . import migrations
+        mg = migrations.effets(p, s, d["solde_migratoire"])
+        lib = f"solde migratoire ({mg['variation_solde'] / 1e3:+.0f} 000 par an)"
+        mesures.append(Mesure(f"Démographie : {lib}, recettes", "recettes", dict(mg["recettes"]), "effet_macro"))
+        for b in mg["blocs"][ANNEES[-1]]:
+            serie = {t: mg["blocs"][t].get(b, 0.0) for t in ANNEES}
+            if any(abs(v) > 1e-6 for v in serie.values()):
+                mesures.append(Mesure(f"Démographie : {lib}, dépenses ({b})", b, serie, "effet_macro"))
+        for t in ANNEES:
+            emplois[t], actifs[t] = mg["emploi"][t], mg["actifs"][t]
+        pib_m = mg["pib"]
+    else:
+        pib_m = None
     if series:
         dividende = sq.dividende_programme(p, s, pib)
         for nom, serie_pib in series:
             mesures.append(Mesure(f"Canal déclaré : {nom}", "recettes", {t: serie_pib[t] * dividende[t] for t in ANNEES},
                                   "effet_macro"))
-    return {"mesures": mesures, "pib": pib, "taux_supplementaire": None}
+    if pib_m is not None:  # ajouté après le dividende : ce PIB-là n'est pas un gain de productivité
+        for t in ANNEES:
+            pib[t] += pib_m[t]
+    return {"mesures": mesures, "pib": pib, "taux_supplementaire": None, "emplois": emplois, "actifs": actifs}
 
 
 def regle(prog, p: Parametres, s: str) -> Regle | None:

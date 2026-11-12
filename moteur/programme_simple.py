@@ -491,6 +491,11 @@ class ProgrammeSimple:
             details_npm = d_npm
             pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + d_autre.get(t, 0.0) + decl["pib"][t] + d_npm[t]
                    + hors_conj[t] * va * idx["salaire"][t] / 1e9 for t in ANNEES}
+            # variante migratoire (phase B2) : personnes en emploi en plus ou en moins, hors du chômage (actifs)
+            if any(decl.get("emplois", {}).values()):
+                for t in ANNEES:
+                    canaux[t]["Démographie : solde migratoire"] = decl["emplois"][t]
+                    actifs[t] += decl["actifs"][t]
             demploi = {t: sum(canaux[t].values()) for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
                     for t in ANNEES}

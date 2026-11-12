@@ -42,7 +42,7 @@ ne compter que ce que mesurent les deux indicateurs de l'article, avec la même 
 | Lisnard | 0 | 1,75 | 1 | 1 | contrat de travail unique |
 | Écologie de droite | 0,5 | 1 | 0,5 | 0,5 | permis rapide pour la production d'énergie ; contrat de travail assoupli |
 
-## Lectures à confirmer par Adrien
+## Lectures confirmées par Adrien (12/11/2026, soir, roadmap B1)
 
 - Arthaud : l'interdiction des licenciements vaut 1, comme dans la grille (−2 auparavant, hors grille).
 - Attal : « électricité à 75 €/MWh » lu comme un prix réglementé (−0,5), comme la facture de Glucksmann et les tarifs

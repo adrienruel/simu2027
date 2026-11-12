@@ -528,6 +528,26 @@ demographie:
     statut: DECISION
     source: "Insee, projections de population 2026-2070 (Insee Résultats et Insee Première n° 2108, 8 juin 2026) : central 1,45 enfant par femme dès 2028, solde migratoire +150 000 par an ; fécondité basse 1,20 ; haute 1,70"
     note: "Correspondance proposée le 29/10/2026 et validée par Adrien (« Go »)."
+  migrations:
+    valeur: {profil: {"0-17": 0.369, "18-29": 0.359, "30-44": 0.263, "45-64": 0.030}, emploi_relatif: 0.87, solde_central: 150000, solde_bas: 70000, solde_haut: 230000}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Profil par âge : solde migratoire des immigrés en 2017 (+73 000 de moins de 18 ans, +71 000 de 18 à 29 ans, +52 000 de 30 à 44 ans, +6 000 de 45 à 64 ans, −3 000 de 65 ans ou plus, sur +198 000 ; Insee Première n° 1849, avril 2021, figure 3a). Emploi relatif : taux d'emploi des 15-64 ans de 62,4 % pour les immigrés contre 71,4 % pour les personnes sans ascendance migratoire directe en 2024 (Insee, enquête Emploi 2024), soit 0,87. Soldes : central +150 000, bas +70 000, haut +230 000 par an (Insee Première n° 2108, juin 2026)"
+    note: "Variante migratoire commune (phase B2, DÉCISION d'Adrien du 12/11/2026, soir : canal emploi pour tous les programmes qui changent le solde migratoire), moteur/migrations.py. Le profil des immigrés (et non celui du solde total, où les départs de jeunes non-immigrés pèsent) parce que les programmes agissent sur l'immigration. Le solde des 65 ans ou plus (−3 000, des retours) n'est pas repris : une baisse des entrées ne le change pas ; les quatre tranches sont renormalisées."
+  titres_vers_solde:
+    valeur: {titres_2025: {total: 384230, etudiants: 117970, familial: 91100, humanitaire: 92600, economique: 51190, divers: 31370},
+             part_au_solde: {crise: 0.8, prudent: 0.7, median: 0.6, optimiste: 0.5},
+             realisation: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.4}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Premiers titres de séjour de 2025 : 384 230, dont 117 970 étudiants, 91 100 familiaux, ≈ 92 600 humanitaires, 51 190 économiques (DGEF, chiffres du 27/01/2026, repris par vie-publique.fr et l'AFP). Part au solde : le solde migratoire des immigrés (+198 000 en 2017, Insee Première n° 1849) rapporté aux premiers titres de la même année (≈ 260 000, DGEF) vaut ≈ 0,75, mais il compte les immigrés de l'Union, sans titre ; une partie des étudiants repart"
+    note: "Phase B2 (12/11/2026, soir). Un programme déclare des titres en moins par an (<nom>_canaux.solde_migratoire.titres_en_moins, sa lecture des mesures) ; variation du solde = − titres × part au solde × réalisation. Une baisse de l'immigration dégrade le solde public dans le modèle (moins d'actifs, dépenses en partie seulement en baisse) : le prudent prend la baisse la plus forte (part et réalisation hautes), l'optimiste la plus faible ; une hausse prend le scénario miroir. Réalisation : obstacles juridiques (Constitution, droit européen, CEDH) pour les mesures qui passent par un référendum ou une renégociation."
+  sante_relative_age:
+    valeur: {"0-4": 0.6, "5-19": 0.35, "20-29": 0.45, "30-39": 0.6, "40-49": 0.8, "50-59": 1.1, "60-69": 1.6, "70-79": 2.4, "80-89": 3.2, "90+": 3.6}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : consommation de soins par tranche d'âge, DREES, Études et Résultats n° 1025 (2017), graphique 1 (forte hausse avec l'âge, minimum vers 10-20 ans) ; dépense moyenne de plus de 8 000 € pour les plus âgés contre 2 900 € en moyenne par patient (DREES, application dépenses de santé et restes à charge, 2021). Valeurs relatives à la moyenne lues en ordre de grandeur : à remplacer par la table de la DREES"
+    note: "Sert seulement à la variante migratoire (moteur/migrations.py) : la santé du statu quo suit les salaires et les pentes communes, sans la population (décision d'Adrien) ; l'écart de population d'un programme change la dépense de santé dans le rapport des populations pondérées par ce profil."
   fecondite_variantes: {valeur: {fec_basse: 1.20, central: 1.45, fec_haute: 1.70}, unite: sans_unite, statut: SOURCE, source: "Insee, projections de population 2026 (Insee Première n° 2108)"}
   taux_emploi_age:
     valeur: {"15-24": 0.345, "25-49": 0.828, "50-54": 0.844, "55-59": 0.788, "60-64": 0.444, "65-69": 0.11, "70+": 0.0}

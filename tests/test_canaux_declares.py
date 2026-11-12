@@ -13,17 +13,19 @@ PAR = {"crise": 0.0, "prudent": 0.001, "median": 0.002, "optimiste": 0.003}
 def _programme(canaux: dict) -> LePen:
     """Un programme existant auquel on déclare des canaux (sans toucher à son fichier de paramètres)."""
     prog = LePen()
+    for cle in [c for c in prog.pt._p if c.startswith(f"{prog.nom}_canaux.")]:
+        del prog.pt._p[cle]  # aucun canal propre (Bertrand déclare un solde migratoire depuis la phase B2)
     for nom, valeur in canaux.items():
         cle = f"{prog.nom}_canaux.{nom}"
         prog.pt._p[cle] = prog.pt._valider(cle, {"valeur": valeur, "unite": "sans_unite", "statut": "HYPOTHESE"})
     return prog
 
 
-BASE = noyau.simuler(P, LePen(), scenarios=("prudent",))["prudent"]
+BASE = noyau.simuler(P, _programme({}), scenarios=("prudent",))["prudent"]
 
 
 def test_sans_canal_declare_rien_ne_change():
-    assert canaux_declares.declares(LePen()) == {}
+    assert canaux_declares.declares(_programme({})) == {}
     r = noyau.simuler(P, _programme({}), scenarios=("prudent",))["prudent"]
     assert all(r[t]["deficit"] == BASE[t]["deficit"] and r[t]["deficit_sans_regle"] == r[t]["deficit"] for t in ANNEES)
 

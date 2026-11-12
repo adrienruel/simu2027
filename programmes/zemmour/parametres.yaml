@@ -341,8 +341,43 @@ zemmour_mesures:
     statut: HYPOTHESE
     note: "« Investissements massifs », surtout par l'épargne privée : 1 Md€ public par an en plus de France 2030 (hypothèse) et 0,1 Md€ de formation."
 
+# --- Émissions (moteur/ecologie/emissions.profil), phase B3 de la roadmap (12/11/2026, soir) ----------------------
+# Mêmes règles que Le Pen (TVA sur l'énergie), Arthaud (carburant à prix coûtant) et Retailleau (MaPrimeRénov',
+# renouvelables) : relecture neutre n° 2, point 8 (Zemmour comptait zéro).
+zemmour_ecologie:
+  accise_carburants:
+    valeur: {id: ZEM-FIS-01b, libelle: "Accise sur les carburants baissée d'un tiers : consommation en hausse", secteur: transports, debut: 2028, plein: 2032, effet_mt: {crise: 7.2, prudent: 6.0, median: 4.2, optimiste: 3.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même élasticité que le_pen_ecologie.tva_energie (Labandeira et al., Energy Policy, 2017 : −0,3 à −0,6 à long terme) ; Citepa, Secten 2026 : transport routier ≈ 110 Mt"
+    note: "Accise ≈ 0,60 € par litre, un tiers en moins avec la TVA sur l'accise ≈ −0,24 €, soit ≈ −13 % du prix TTC, pour les ménages et les entreprises (tout le transport routier, pas seulement les voitures comme la TVA du RN). Élasticité implicite du chiffrage du RN (≈ 0,42 au prudent) : 110 × 13 % × 0,42 ≈ 6 Mt ; crise × 1,2, médian 0,29, optimiste 0,21."
+  anah:
+    valeur: {id: ZEM-KNA-08, libelle: "Anah et MaPrimeRénov' supprimées", secteur: batiments, debut: 2028, plein: 2050, effet_mt: {crise: 1.52, prudent: 1.19, median: 0.85, optimiste: 0.68}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même chiffrage que retailleau_ecologie.maprimerenov (Anah, bilan 2024 ; Citepa, Secten 2026)"
+    note: "Même mesure que la suppression de MaPrimeRénov' de Retailleau : mêmes tonnes."
+  renouvelables:
+    valeur: {id: ZEM-ENE-02, libelle: "Fin de tous les soutiens publics aux renouvelables", secteur: energie, debut: 2029, plein: 2035, suit_intensite: false, effet_mt: {crise: 2.5, prudent: 1.5, median: 0.8, optimiste: 0.3}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même chiffrage que retailleau_ecologie.renouvelables et lisnard_ecologie.renouvelables (CRE 2025 ; RTE, Bilan prévisionnel 2023-2035)"
+    note: "Les six EPR de 2035 (ZEM-ENE-01) ne sont pas comptés, comme les réacteurs neufs des autres programmes (règle de la phase 2)."
+  ademe:
+    valeur: {id: ZEM-KNA-09, libelle: "Ademe supprimée (décarbonation de l'industrie, économie circulaire)", secteur: industrie, debut: 2028, plein: 2032, effet_mt: {crise: 1.0, prudent: 0.7, median: 0.4, optimiste: 0.2}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Estimation sans source directe : budget de l'Ademe hors renouvelables ≈ 3 Md€ (zemmour_mesures.ademe), dont la moitié environ pour la décarbonation de l'industrie et l'économie circulaire"
+    note: "Ordre de grandeur, à sourcer (bilans des appels à projets de décarbonation de l'industrie) : 0,2 à 1 Mt de projets non faits en 2032. La suppression d'une aide existante prend l'effet défavorable le plus fort au prudent."
+
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 zemmour_canaux:
+  solde_migratoire:
+    valeur: {titres_en_moins: 266260, debut: 2028, montee: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Premiers titres de séjour de 2025 (DGEF, 27/01/2026) ; conversion commune demographie.titres_vers_solde"
+    note: "Variante migratoire commune (phase B2, DÉCISION d'Adrien du 12/11/2026, soir : canal emploi pour tous les programmes qui changent le solde migratoire). Lecture : ZEM-IMM-01 « arrêter l'immigration légale » : tous les premiers titres sauf étudiants (familial 91 100, humanitaire 92 600, économique 51 190, divers 31 370 en 2025). La « remigration » (ZEM-IMM-02) n'a pas de nombre : non comptée. Montée de 2028 à 2030. À valider par Adrien."
   reformes_structurelles:
     valeur: {pmr: 0, epl: 0, debut: 2028}
     unite: sans_unite

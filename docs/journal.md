@@ -1113,3 +1113,41 @@ Philippe 10,87 (après sa mise à jour du 12/11) ; Écologie de droite 4,27 → 
 Médian : Bertrand 7,32 → 7,67, Philippe 8,33, Retailleau 7,92 → 8,16 (baisse de l'écart de taux perdue).
 
 Tests : `tests/test_coherence_phase_a.py` (un test par chantier) ; test de l'écart de taux adapté au critère absolu.
+
+## 12 novembre 2026 (nuit) — Phase B de la roadmap : B1, B2, B3 (et B8)
+
+Décisions d'Adrien (12/11, 22 h 17) : B1 et B2 validés.
+
+- **B1, barème des réformes de structure** : les quatre lectures (Arthaud EPL, Attal électricité, Tondelier, Le Pen et
+  Écologie de droite) passent en DÉCISION ; tableau des compteurs dans `docs/reformes_structurelles.md`. Aucun
+  chiffre ne change.
+- **B8, licenciements d'Arthaud** : déjà réglé par B1 (interdiction des licenciements = 1 cran de protection de
+  l'emploi, comme la grille).
+- **B2, variante migratoire commune** (`moteur/migrations.py`, canal déclaré `solde_migratoire`). Un programme déclare
+  des premiers titres de séjour en moins par an ; variation du solde = titres × part au solde (0,8 / 0,7 / 0,6 / 0,5)
+  × réalisation (1 / 0,8 / 0,6 / 0,4), du prudent au plus fort. L'écart de population par âge (profil des immigrés,
+  Insee Première n° 1849) passe dans le statu quo (`statu_quo.population`, `_choc_population`), qui recalcule emploi
+  (taux d'emploi relatif des immigrés 0,87, Insee 2024), PIB, recettes par cellules et dépenses qui suivent la
+  population ; la santé, qui ne dépend pas de la population dans le statu quo, suit ici un profil de dépense par âge
+  (`demographie.sante_relative_age`, ordres de grandeur DREES, à remplacer par la table). Ces personnes sortent de la
+  population active : elles ne font pas de chômeurs. Sens du résultat : 100 000 entrées nettes de moins par an coûtent
+  ≈ 5,8 Md€ au solde en 2037 et 25 Md€ en 2050 au prudent (moins d'actifs ; les dépenses ne baissent qu'en partie,
+  les pensions de ces personnes seraient venues après 2060). D'où l'ordre des scénarios (le prudent prend la baisse la
+  plus forte).
+  Lectures (titres en moins par an, sur 384 230 premiers titres en 2025, DGEF) : Zemmour 266 260 (tout sauf les
+  étudiants), Lisnard 336 200 (titres divisés par huit), Philippe 192 100 (divisée par deux), Le Pen 137 400 (familial
+  et moitié de l'humanitaire), Retailleau 128 100 (un tiers), Attal 52 300 (un quart du familial et de l'étudiant),
+  Bertrand 38 400 (un dixième : niveau des quotas inconnu). À valider par Adrien. Les régularisations (gauche) ne
+  changent pas la population : inchangées.
+  Limites : enfants des personnes en plus ou en moins non comptés ; salaires au niveau moyen de leur âge (seul
+  l'emploi est corrigé, ce qui grossit l'effet) ; défense et investissement suivent le PIB comme dans le statu quo.
+- **B3, émissions de Zemmour** (`zemmour_ecologie`), mêmes règles que Le Pen, Arthaud et Retailleau : accise sur les
+  carburants (6 Mt à plein effet au prudent), Anah, renouvelables, Ademe (estimation à sourcer) : +7,4 Mt en 2037 au
+  prudent.
+
+Déficit 2037 au prudent (après la phase A → après B) : Lisnard 14,00 → 14,77 ; Zemmour 13,36 → 13,96 ; Philippe
+10,87 → 11,26 ; Le Pen 13,38 → 13,69 ; Retailleau 10,33 → 10,59 ; Attal 11,50 → 11,61 ; Bertrand 9,21 → 9,28 ; les
+autres inchangés. Comparateur : l'écart d'emploi de ces programmes compte des personnes absentes, pas des chômeurs.
+
+Restent dans la phase B : B4 (canal logement commun), B5 (fraude), B6 (IA et école proportionnelles à la mesure), B7
+(grille commune des plafonds d'économies).

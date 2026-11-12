@@ -107,3 +107,20 @@ def test_a8_annonce_en_points_de_pib():
     assert annonce_en_points_pib(P, 150, 2026, "cumul", y, m) == pytest.approx(30 / y * 100)
     assert annonce_en_points_pib(P, 150, 2026, "niveau", y, m) == pytest.approx(150 / y * 100)
     assert annonce_en_points_pib(P, 101.9, 2027, "niveau", y) == pytest.approx(100 / y * 100)
+
+
+def test_b2_variante_migratoire():
+    """Phase B2 : une baisse du solde migratoire retire des personnes surtout jeunes, de l'emploi au taux relatif des
+    immigrés, du PIB et des recettes ; les dépenses qui suivent la population baissent ; un programme sans
+    déclaration n'a aucun effet ; l'ordre des scénarios est tenu (prudent : baisse la plus forte)."""
+    from moteur import migrations as mg
+    d = {"titres_en_moins": 100000, "debut": 2028, "montee": 3}
+    v = {s: mg.variation(P, s, d) for s in sq.SCENARIOS}
+    assert v["crise"] <= v["prudent"] <= v["median"] <= v["optimiste"] < 0
+    r = mg.effets(P, "prudent", d)
+    assert r["population"][2037] < 0 and r["emploi"][2037] < 0 and r["pib"][2037] < 0 and r["recettes"][2037] < 0
+    assert sum(r["blocs"][2037].values()) < 0 and r["blocs"][2037]["sante"] < 0
+    # l'emploi perdu est celui de personnes au taux relatif des immigrés : moins que la population de 18 ans ou plus
+    pop = mg.ecart_population(P, "prudent", d)[2037]
+    assert abs(r["emploi"][2037]) < abs(sum(pop[18:65]))
+    assert all(x <= 0 for x in pop)  # une baisse des entrées ne crée personne (pas de retours de personnes âgées)

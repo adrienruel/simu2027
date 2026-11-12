@@ -193,3 +193,12 @@ bertrand_enveloppe:
     valeur: 2032
     unite: sans_unite
     statut: DECISION
+
+# --- Canaux déclarés (moteur/canaux_declares.py) ---
+bertrand_canaux:
+  solde_migratoire:
+    valeur: {titres_en_moins: 38400, debut: 2028, montee: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Premiers titres de séjour de 2025 (DGEF, 27/01/2026) ; conversion commune demographie.titres_vers_solde"
+    note: "Variante migratoire commune (phase B2, DÉCISION d'Adrien du 12/11/2026, soir : canal emploi pour tous les programmes qui changent le solde migratoire). Lecture : BER-IMM-01 quotas migratoires par référendum, niveau non donné : lu comme un dixième des premiers titres de 2025 (sens d'une baisse, ampleur inconnue). Montée de 2028 à 2030. À valider par Adrien."
