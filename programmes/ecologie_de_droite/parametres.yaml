@@ -467,6 +467,18 @@ macro:
     valeur: {crise: 1.5, prudent: 2.25, median: 3, optimiste: 5}
     unite: sans_unite
     statut: HYPOTHESE
+    note: "Plus lu depuis la phase B5 (12/11/2026, nuit) : remplacé par macro.fraude_controle et le barème commun (moteur/fraude.py). La v235 y comptait la fraude « récupérée par la facturation électronique et l'IA » : la facturation électronique est déjà dans la loi, donc dans le statu quo."
+  adoption_ia_budget:
+    valeur: non_chiffre
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Phase B6 (12/11/2026, nuit) : le rattrapage de l'adoption de l'IA est proportionnel au budget engagé (adoption_ia.budget). Le programme finance l'IA souveraine et le cloud par le fonds, sans montant identifiable : mesure nommée sans montant (0,25 Md€), comme Zemmour, Lisnard et Retailleau."
+  fraude_controle:
+    valeur: {agents: non_chiffre, debut: 2029, plein: 2032}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun fraude.bareme (DGFiP 2024 ; commission des finances, 2026)"
+    note: "Phase B5 (12/11/2026, nuit), relecture neutre n° 2, point 5 : la lutte contre la fraude (IA dans le contrôle) n'a pas d'effectifs : renforcement non chiffré, comme Le Pen (2 000 agents ou leur équivalent), coût ajouté."
   montee_fraude:
     valeur: {crise: 4, prudent: 4, median: 4, optimiste: 4}
     unite: sans_unite

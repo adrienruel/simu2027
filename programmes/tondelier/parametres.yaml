@@ -361,13 +361,6 @@ tondelier_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : CAE, note n° 52 (2019) : ≈ 2 Md€ de recettes fiscales selon le prix et le marché noir restant"
-  fraude:
-    valeur: {id: REC-48, libelle: "Lutte contre la fraude et l'évasion fiscales", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
-             montant: {crise: 0.3, prudent: 0.5, median: 1.5, optimiste: 3.0}}
-    unite: md_eur
-    annee_euros: 2026
-    statut: HYPOTHESE
-    note: "Économie déclarative : estimée par le modèle (règle), pas de chiffre du programme."
   superprofits:
     valeur: {id: REC-34, instrument: capital_entreprises, libelle: "Taxe exceptionnelle sur les superprofits pétroliers et maritimes (2028-2029)", poste: recettes, moteur: fixe, debut: 2028, plein: 2028, fin: 2029,
              montant: {crise: 0.5, prudent: 0.5, median: 1.0, optimiste: 1.5}}
@@ -855,14 +848,15 @@ tondelier_emploi:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 tondelier_canaux:
+  fraude:
+    valeur: {agents: 1000, debut: 2028, plein: 2032, cout_deja_compte: true}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun fraude.bareme (DGFiP 2024 ; commission des finances, 2026) ; programme, p. 63 : « Rétablir les 1000 postes d'agents supprimés dans les 15 dernières années »"
+    note: "Phase B5 (12/11/2026, nuit) : REC-48, 1 000 agents (DGCCRF, douanes et contrôle) ; coût déjà dans tondelier_mesures FP-06 (inspection du travail, DGCCRF, douanes). Remplace la mesure à montant fixe (0,3 / 0,5 / 1,5 / 3 Md€)."
   reformes_structurelles:
     valeur: {pmr: -1, epl: 0, debut: 2028}
     unite: sans_unite
     statut: DECISION
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : tarif progressif de l'électricité (REC-41, prix réglementés, −0,5), vols intérieurs courts interdits (REC-43, entrée interdite sur un segment de l'aérien, −0,5) ; la préférence européenne dans la commande publique et la renationalisation des autoroutes sont hors champ. Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2. DÉCISION d'Adrien du 12/11/2026 (soir, roadmap B1) : lectures confirmées."
-  ecole:
-    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : FP-03 (classes de primaire à 19 élèves en 2032, 12 en éducation prioritaire). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

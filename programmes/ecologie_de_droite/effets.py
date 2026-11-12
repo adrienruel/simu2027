@@ -129,6 +129,10 @@ class Effets:
         self.dividende = dividende_croissance(q, self.pib0)
         self.q_div = self.dividende if self.dividende is not None else {t: q.val("macro.part_pib_tendanciel_au_solde") for t in ANNEES}
         self.div_sq = sq.dividende_productivite(p, s)
+        from moteur.canaux_declares import facteur_ia
+        self.k_ia = facteur_ia(p, s, q.val("macro.adoption_ia_budget"))
+        from moteur import fraude as fr
+        self.fraude = fr.effets(p, s, q.val("macro.fraude_controle"))
         self.bases_demo = budget.lignes(q, "prudent").bases_demographie
         self.cle_indice = {"recettes": "emploi", "recettes_population": "total", "salaries_impot": "c_impot",
                            "salaries_tva": "c_tva", "salaries_rui": "c_rui", "adultes": "adultes", "enfants": "enfants",
@@ -259,7 +263,8 @@ class Effets:
                 taux = ((self.s17_ge - m("taux_reference_is")) * m("semi_elasticite_transfert") * m("part_grandes_entreprises")
                         + ecart_eff / 100 * m("reaction_reelle"))
             solde["erosion_is"][t] = -self.j20 * self.croiss[t] * taux * montee(t, m("montee_erosion_is"))
-            solde["fraude_tva"][t] = m("fraude_tva") * montee(t, m("montee_fraude"))
+            # barème commun de la fraude (phase B5, moteur/fraude.py) : recettes moins coût des agents
+            solde["fraude_tva"][t] = self.fraude["recettes"][t] - self.fraude["cout"][t]
             # productivité (réforme du programme), sur le PIB du statu quo du scénario
             y = self.y_sq[t]
             # barème commun des réformes de structure (12/11/2026, moteur/reformes_structurelles.py)
@@ -275,7 +280,7 @@ class Effets:
             g_ia = m("ia_productivite") * (q.val("macro.premiere_annee_ia") <= t < q.val("macro.premiere_annee_ia") + q.val("macro.annees_ia"))
             r_ia = (1 + r_ia) * (1 + g_ia) - 1
             pib_ia = base * r_ia
-            r_adopt = (1 + r_adopt) * (1 + g_ia * m("adoption_ia")) - 1
+            r_adopt = (1 + r_adopt) * (1 + g_ia * m("adoption_ia") * self.k_ia) - 1  # proportionnel au budget (B6)
             pib["ia_adoption"][t] = (y) * r_adopt  # l'IA du statu quo est déjà dans y
             solde["ia"][t] = pib_ia * self.q_div[t]  # écart de méthode : l'IA du statu quo, absente du budget
             solde["ia_adoption"][t] = (base + pib_ia) * r_adopt * self.div_sq[t]  # canal du programme
@@ -326,7 +331,7 @@ class Effets:
         "logement": "Logement : constructions en plus (TVA, impôts) et reprise des amortissements",
         "aides_construction": "Logement : fin des aides à la construction",
         "erosion_is": "Entreprises : érosion de l'IS (localisation des bénéfices)",
-        "fraude_tva": "Fraude à la TVA",
+        "fraude_tva": "Lutte contre la fraude (barème commun, net du coût des agents)",
         "productivite": "Productivité (réformes de structure, barème commun)",
         "reactions": "Réactions des hauts revenus à l'impôt",
         "investissement": "Investissement des entreprises (déduction immédiate, IS)",

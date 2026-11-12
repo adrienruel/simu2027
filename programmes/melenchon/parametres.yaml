@@ -286,13 +286,13 @@ melenchon_mesures:
     statut: HYPOTHESE
     note: "Ne joue qu'en crise (hausse soudaine des bénéfices) : 1 Md€ par an dans le scénario de crise, zéro sinon."
   fraude:
-    valeur: {id: LFI-REC-13, libelle: "Lutte contre la fraude et l'évasion fiscales (moyens du contrôle, arbitrage de dividendes, fin de la CJIP)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
-             montant: {crise: 0.3, prudent: 0.6, median: 2.0, optimiste: 3.5}}
+    valeur: {id: LFI-REC-13, libelle: "Fraude à l'arbitrage de dividendes fermée, fin de la CJIP (les moyens du contrôle passent par le canal commun de la fraude)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 0.0, prudent: 0.1, median: 0.5, optimiste: 0.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : fraude à l'arbitrage de dividendes (« CumCum ») ≈ 1 à 3 Md€ par an (commission des finances du Sénat, 2023), loi de finances 2025 qui en ferme déjà une partie ; CJIP ≈ 0,3 à 1 Md€ par an d'amendes ponctuelles perdues"
-    note: "Économie déclarative : estimée par le modèle (règle), même ordre que Tondelier plus l'arbitrage de dividendes, moins les CJIP supprimées. Coût des agents : dans agences_inspections."
+    note: "Économie déclarative : estimée par le modèle (règle). Phase B5 (12/11/2026, nuit) : la part « moyens du contrôle » (0,3 / 0,5 / 1,5 / 3 Md€) passe par le canal commun (melenchon_canaux.fraude, 5 000 agents) ; reste l'arbitrage de dividendes, en partie déjà fermé par la loi de finances 2025, moins les amendes des CJIP perdues."
   ttf:
     valeur: {id: LFI-REC-14, instrument: capital_menages, libelle: "Taxe réelle sur les transactions financières ; rachats d'actions taxés ; avantages fiscaux des LBO supprimés", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.6, prudent: 1.0, median: 2.0, optimiste: 3.0}}
@@ -1131,14 +1131,21 @@ melenchon_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 melenchon_canaux:
+  logement:
+    valeur: {intensite: -0.5, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun logement_offre.bareme (Greenaway-McGrevy, 2025 ; SDES 2026)"
+    note: "Phase B4 (12/11/2026, nuit) : LFI-LOG-07 loyers gelés puis encadrés partout : mesure ciblée qui réglemente (−0,5). Les logements construits par la dépense publique (logements sociaux) passent par leur dépense et le multiplicateur, pas par ce canal. À valider par Adrien."
+  fraude:
+    valeur: {agents: 5000, debut: 2028, plein: 2032, cout_deja_compte: true}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun fraude.bareme (DGFiP 2024 ; commission des finances, 2026)"
+    note: "Phase B5 (12/11/2026, nuit) : LFI-REC-13 : ≈ 5 000 agents de contrôle fiscal en plus (melenchon_mesures.agences_inspections, coût déjà compté). L'arbitrage de dividendes et la fin des CJIP restent dans melenchon_mesures.fraude."
   reformes_structurelles:
     valeur: {pmr: -1, epl: -0.5, debut: 2028}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : Engie renationalisé (LFI-PAR-01c, 0,5), tarifs réglementés de l'énergie calculés sur les coûts de production (LFI-PRE-08b, 0,5) ; les aéroports, autoroutes, la FDJ, le pôle public bancaire, ArcelorMittal, ArianeGroup, les Ehpad et le médicament sont hors champ (−2 avant le 12/11/2026). Protection de l'emploi : licenciements boursiers interdits (LFI-ECO-01, −0,5). Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2."
-  ecole:
-    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : LFI-EDU-03 (effectifs par classe sous 19 élèves). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

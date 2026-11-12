@@ -224,14 +224,6 @@ roussel_mesures:
     statut: HYPOTHESE
     source: "Même source"
     note: "Suppression progressive de 2009 à 2014 : ≈ 1,5 Md€ par an de recettes (rapports parlementaires, 2014)."
-  fraude:
-    valeur: {id: PCF-FIS-08, libelle: "Lutte contre la fraude fiscale : 20 000 postes rétablis ou créés dans les douanes et les finances publiques", poste: recettes, moteur: "pib", debut: 2028, plein: 2032,
-             montant: {crise: 0.3, prudent: 0.5, median: 1.5, optimiste: 3.0}}
-    unite: md_eur
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "pcf.fr, « Beauvau de la sécurité »"
-    note: "Même estimation que tondelier_mesures.fraude et melenchon_mesures.fraude ; coût des postes : fisc_douanes."
   revenus_nationalisees:
     valeur: {id: PCF-PAR-02, libelle: "Revenus des entreprises nationalisées (dividendes de BNP Paribas, Société générale, AXA, Engie ; péages)", poste: recettes, moteur: "pib", debut: 2029, plein: 2030,
              montant: {crise: 6.0, prudent: 8.0, median: 10.0, optimiste: 12.0}}
@@ -413,14 +405,21 @@ roussel_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 roussel_canaux:
+  logement:
+    valeur: {intensite: -0.5, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun logement_offre.bareme (Greenaway-McGrevy, 2025 ; SDES 2026)"
+    note: "Phase B4 (12/11/2026, nuit) : PCF loyers encadrés : mesure ciblée qui réglemente (−0,5). Les logements construits par la dépense publique (logements sociaux) passent par leur dépense et le multiplicateur, pas par ce canal. À valider par Adrien."
+  fraude:
+    valeur: {agents: 8000, debut: 2028, plein: 2032, cout_deja_compte: true}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun fraude.bareme (DGFiP 2024 ; commission des finances, 2026)"
+    note: "Phase B5 (12/11/2026, nuit) : PCF-FIS-08 : 20 000 postes dans les douanes et les finances publiques, dont 40 % lus comme du contrôle (8 000) ; le reste sert l'accueil et la gestion. Coût déjà dans roussel_mesures.fisc_douanes. Remplace la mesure à montant fixe."
   reformes_structurelles:
     valeur: {pmr: -1.5, epl: 0, debut: 2028}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : Engie nationalisé dans un pôle public de l'énergie (PCF-PAR-01, 0,5), transports nationalisés (PCF-PAR-01, 0,5), sortie du marché européen de l'électricité avec prix baissés (PCF-ENE-02, prix réglementés, 0,5) ; banques, AXA, autoroutes, pharmacie et carburant bloqué sont hors champ (−2 avant le 12/11/2026). Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2."
-  ecole:
-    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : PCF-EDU-01 (90 000 enseignants, classes de 20 élèves en primaire). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

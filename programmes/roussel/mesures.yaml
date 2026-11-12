@@ -83,7 +83,7 @@ mesures:
 - id: PCF-FIS-08
   intitule: "Douanes et finances publiques : 10 000 postes rétablis et 10 000 créés"
   source: "pcf.fr, « Beauvau de la sécurité »"
-  traitement: "roussel_mesures.fisc_douanes et fraude"
+  traitement: "roussel_mesures.fisc_douanes (coût) et roussel_canaux.fraude (barème commun)"
 - id: PCF-FIS-09
   intitule: "211 Md€ d'aides aux grandes entreprises réorientées, prêts à taux zéro"
   source: "Pacte pour l'avenir de la France, 2025"

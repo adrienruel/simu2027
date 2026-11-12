@@ -11,9 +11,10 @@ annuel (personnes par an, par scénario ; négatif = moins d'entrées nettes), s
    salariés, dépenses qui suivent la population (prestations, santé, collectivités, école, pensions par génération) ;
 3. rend les écarts au statu quo : recettes, dépenses par bloc, PIB, emploi et population active, pour le programme.
 
-Limites écrites : les enfants nés en France des personnes en plus ou en moins ne sont pas comptés (fécondité de la
-projection inchangée) ; les salaires des personnes concernées sont ceux de la moyenne de leur âge (seul l'emploi est
-corrigé) ; les dépenses propres à l'immigration (asile, AME, rétention) restent dans les mesures des programmes.
+Compté depuis le 12/11/2026 (nuit, limites levées) : les enfants nés en France des personnes en plus ou en moins
+(fécondité relative des immigrées), leur salaire relatif (PIB et prélèvements), la santé par âge ; la défense ne
+suit pas la population. Les écarts commencent en 2030 (le statu quo rapporte ses indices à 2029). Les dépenses
+propres à l'immigration (asile, AME, rétention) restent dans les mesures des programmes.
 """
 from __future__ import annotations
 
@@ -61,6 +62,16 @@ def ecart_population(p: Parametres, s: str, decl: dict) -> dict[int, list[float]
     prof = _profil(p)
     v = variation(p, s, decl)
     debut, montee = int(decl.get("debut", 2028)), max(1, int(decl.get("montee", 1)))
+    # naissances des personnes en plus ou en moins : ICF du scénario × fécondité relative des immigrées, réparti par
+    # âge de la mère (calendrier), une femme sur deux
+    from .demographie import _tranche
+    par = p.val("demographie.migrations")
+    icf = p.val("demographie.fecondite_variantes")[sq._v(p, "demographie.scenario_fecondite", s)] * par["fecondite_relative"]
+    taux_nais = [0.0] * (AGE_MAX + 1)
+    for nom, part in par["calendrier_fecondite"].items():
+        ages = list(_tranche(nom))
+        for a in ages:
+            taux_nais[a] = 0.5 * icf * part / len(ages)
     d = [0.0] * (AGE_MAX + 1)
     out = {}
     for t in range(2026, ANNEES[-1] + 1):
@@ -70,11 +81,17 @@ def ecart_population(p: Parametres, s: str, decl: dict) -> dict[int, list[float]
                 surv = (min(1.0, c[t][a + 1] / c[t - 1][a]) if a >= 60 and c[t - 1][a] > 0 else 0.999)
                 nd[a + 1] += d[a] * surv
             nd[AGE_MAX] += d[AGE_MAX] * 0.6
+            nd[0] += sum(d[a] * taux_nais[a] for a in range(AGE_MAX + 1))
             d = nd
         k = min(1.0, max(0.0, (t - debut + 1) / montee))
         for a in range(AGE_MAX + 1):
             d[a] += v * k * prof[a]
         out[t] = list(d)
+    # le statu quo rapporte emploi, PIB et recettes à 2029 : un écart présent dès 2029 entrerait dans la base. Les
+    # personnes en plus ou en moins avant 2030 sont donc comptées à partir de 2030 (2029 sans écart)
+    for t in out:
+        if t <= 2029:
+            out[t] = [0.0] * (AGE_MAX + 1)
     return out
 
 
@@ -100,6 +117,9 @@ def effets(p: Parametres, s: str, decl: dict) -> dict:
             poids[a] = w
     pop0, san = sq.population(p, s), sq.sante(p, s)
     blocs = {t: {b: b1[t][b] - b0[t].get(b, 0.0) for b in b1[t]} for t in ANNEES}
+    # la défense suit le PIB dans le statu quo, mais ne dépend pas de la population : pas d'écart
+    for t in ANNEES:
+        blocs[t]["defense_ue"] = 0.0
     for t in ANNEES:
         ref = sum(pop0[t][a] * poids[a] for a in range(AGE_MAX + 1))
         blocs[t]["sante"] = blocs[t].get("sante", 0.0) + san[t] * sum(q._choc_population[t][a] * poids[a]

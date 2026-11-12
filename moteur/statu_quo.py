@@ -67,6 +67,18 @@ def population(p: Parametres, s: str) -> dict[int, tuple[float, ...]]:
     return {t: tuple(v[a] + choc[t][a] for a in range(len(v))) if t in choc else v for t, v in base.items()}
 
 
+def _emploi_migrants_productif(p: Parametres, t: int) -> float:
+    """Variante migratoire : emploi à retirer en plus pour le PIB, (1 − salaire relatif) × emploi des personnes en
+    plus ou en moins (taux d'emploi relatif compris)."""
+    choc = p.__dict__.get("_choc_population")
+    if not choc or t not in choc:
+        return 0.0
+    from .demographie import _tranche
+    taux = {a: x for k, x in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    m = p.val("demographie.migrations")
+    return (1 - m["salaire_relatif"]) * m["emploi_relatif"] * sum(choc[t][a] * taux.get(a, 0.0) for a in range(18, len(choc[t])))
+
+
 def _emploi_en_moins_migrants(p: Parametres, t: int, taux: dict) -> float:
     """Variante migratoire : les personnes en plus ou en moins ont un taux d'emploi relatif
     (demographie.migrations.emploi_relatif, Insee) ; rend l'emploi à retirer du calcul aux taux moyens."""
@@ -107,6 +119,8 @@ def effectifs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
         choc = choc_chomage(p, s, t) * (x["emploi"] + x["chomeurs"])  # crise : emplois perdus, chômeurs en plus
         x["emploi"], x["chomeurs"] = x["emploi"] - choc, x["chomeurs"] + choc
         x["taux_chomage"] = x["chomeurs"] / (x["emploi"] + x["chomeurs"])
+        # variante migratoire : emploi en équivalent productif (salaire relatif des immigrés), pour le PIB
+        x["emploi_productif"] = x["emploi"] - _emploi_migrants_productif(p, t)
     cache[("sq_effectifs", s)] = brut
     return brut
 
@@ -195,7 +209,7 @@ def dividende_programme(p: Parametres, s: str, dpib: dict[int, float]) -> dict[i
 def pib(p: Parametres, s: str) -> dict[int, float]:
     """PIB (Md€ de 2026) : économie de 2026 placée en 2029 × productivité × personnes en emploi."""
     e, w, base = effectifs(p, s), salaires(p, s), pib_2026(p)
-    return {t: base * w[t] * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
+    return {t: base * w[t] * e[t].get("emploi_productif", e[t]["emploi"]) / e[2029]["emploi"] for t in ANNEES}
 
 
 def inflation(p: Parametres, s: str) -> dict[int, float]:
@@ -786,13 +800,37 @@ def cellules_salaries(p: Parametres, s: str) -> dict[int, dict[str, float]]:
             agr["tva"] += x["n"] / total_n * tv_
             agr["masse"] += x["n"] / total_n * c
         par_m[m] = agr
+    par_m_mig_cache: dict = {}
+
+    def par_m_mig(m: float) -> dict:
+        """Cellules d'un âge au coût réduit du salaire relatif des immigrés (variante migratoire)."""
+        if m not in par_m_mig_cache:
+            k_s = p.val("demographie.migrations")["salaire_relatif"]
+            agr = {"prive": 0.0, "public": 0.0, "tva": 0.0, "masse": 0.0}
+            for x in tr:
+                c = x["cout"] * m * k * k_s
+                pr_, tv_ = cellule(c, x["public"])
+                agr["public" if x["public"] else "prive"] += x["n"] / total_n * pr_
+                agr["tva"] += x["n"] / total_n * tv_
+                agr["masse"] += x["n"] / total_n * c
+            par_m_mig_cache[m] = agr
+        return par_m_mig_cache[m]
     brut = {}
     for t in range(2026, 2074):
         tot = {"prive": 0.0, "public": 0.0, "tva": 0.0, "masse": 0.0, "salaries": 0.0}
         choc = p.__dict__.get("_choc_population")
-        k_mig = 1 - p.val("demographie.migrations")["emploi_relatif"] if choc and t in choc else 0.0
+        mig = p.val("demographie.migrations") if choc and t in choc else None
         for a in ages:
-            n = (pop[t][a] - (k_mig * choc[t][a] if k_mig else 0.0)) * taux.get(a, 0.0) * part_sal
+            if mig:
+                # personnes en plus ou en moins : taux d'emploi relatif, salaire relatif (cellules au coût réduit)
+                n0 = (pop[t][a] - choc[t][a]) * taux.get(a, 0.0) * part_sal
+                nm = choc[t][a] * mig["emploi_relatif"] * taux.get(a, 0.0) * part_sal
+                tot["salaries"] += n0 + nm
+                mm = profil.get(a, 1.0)
+                for key in ("prive", "public", "tva", "masse"):
+                    tot[key] += n0 * par_m[mm][key] + nm * par_m_mig(mm)[key]
+                continue
+            n = pop[t][a] * taux.get(a, 0.0) * part_sal
             tot["salaries"] += n
             for key in ("prive", "public", "tva", "masse"):
                 tot[key] += n * par_m[profil.get(a, 1.0)][key]

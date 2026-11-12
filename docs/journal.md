@@ -1151,3 +1151,42 @@ autres inchangés. Comparateur : l'écart d'emploi de ces programmes compte des 
 
 Restent dans la phase B : B4 (canal logement commun), B5 (fraude), B6 (IA et école proportionnelles à la mesure), B7
 (grille commune des plafonds d'économies).
+
+## 12 novembre 2026 (nuit, suite) — Limites de B2 levées ; B4, B5, B6
+
+Demande d'Adrien (22 h 53) : régler les limites de B2, puis les chantiers sans décision.
+
+- **B2, limites levées** (`moteur/migrations.py`, `statu_quo`) :
+  - naissances des personnes en plus ou en moins : ICF du scénario × 1,26 (ICF des femmes nées à l'étranger 2,3
+    contre 1,83, Insee Références 2023, fiche 1.8), calendrier par âge de la mère ;
+  - salaire relatif 0,91 (salaire médian à temps complet des immigrés de 25 à 49 ans inférieur de 9 %, Insee
+    Références 2023, fiche 4.4) : PIB (emploi en équivalent productif) et prélèvements (cellules au coût réduit) ;
+  - santé par âge recalée sur la DREES (1 420 € entre 21 et 30 ans, 8 529 € au-delà de 80 ans, pour 2 903 € en
+    moyenne) ; statut SOURCE ;
+  - la défense ne suit plus la population ;
+  - **défaut corrigé** : le statu quo rapporte emploi, PIB et recettes à 2029 ; un écart présent dès 2029 entrait
+    dans la base et effaçait l'effet de 2028-2029. Les écarts commencent désormais en 2030.
+  Effet de 100 000 entrées nettes de moins par an (prudent) : −5,4 Md€ en 2037, −18,7 Md€ en 2050 (−5,8 et −25
+  avant : les enfants en moins coûtent aussi moins).
+- **B5, fraude** (`moteur/fraude.py`, canal `fraude`, `fraude.bareme`) : agents de contrôle en plus × 1,1 M€ recouvré
+  par agent (11,4 Md€ pour 10 377 ETPT en 2024) × rendement marginal 0,15 / 0,25 / 0,4 / 0,6, plafond 40 % des
+  montants de 2024 ; coût des agents ajouté sauf s'il est déjà compté ; renforcement sans chiffre = 2 000 agents
+  (rapport Feld, 2026). Tondelier 1 000 agents (programme, p. 63), Mélenchon 5 000, Roussel 8 000 (40 % des 20 000
+  postes), Le Pen et Écologie de droite sans chiffre. Écologie de droite : 2,25 Md€ sans source → ≈ 0,5 Md€ net au
+  prudent ; sa « facturation électronique » est déjà dans la loi, donc dans le statu quo.
+- **B6, IA et école** : l'adoption de l'IA est proportionnelle au budget engagé (`adoption_ia.budget` : barème entier
+  pour 1 Md€ par an en plus, 0,25 Md€ pour une mesure sans montant) : Attal 1, Glucksmann 0,5, Philippe 0,4, Zemmour,
+  Lisnard, Retailleau et Écologie de droite 0,25. Canal « école » retiré des dix programmes dont les mesures sont
+  budgétaires : elles passent déjà par le canal d'offre de l'éducation, proportionnel à la dépense par élève (double
+  compte). Gardé pour Écologie de droite et Zemmour (réformes d'organisation sans budget).
+- **B4, logement** (canal `logement`, `logement_offre.bareme`, mêmes logements que la croisière d'Écologie de
+  droite) : intensité × 25 000 / 37 500 / 50 000 / 100 000 logements par an, PIB des chantiers et recettes. Lectures :
+  Retailleau +1, Lisnard +0,5, Attal +0,5, Philippe +0,25, Glucksmann −0,25, Mélenchon −0,5, Roussel −0,5. À valider.
+- **Pas fait** :
+  - A7 (registre par scénario d'Écologie de droite) : le budget du programme est figé au prudent à une vingtaine
+    d'endroits ; chantier à part ;
+  - B7 (plafonds communs des économies nommées) : demande un arbitrage (relecture n° 2, point 11 : capacité
+    trop basse ou lignes trop hautes).
+
+Déficit 2037 au prudent (avant → après) : Retailleau 10,59 → 10,46 ; Attal 11,61 → 11,54 ; Glucksmann 14,39 →
+14,44 ; Mélenchon 29,55 → 29,63 ; Écologie de droite 4,21 → 4,29 ; les autres à moins de 0,05 point.

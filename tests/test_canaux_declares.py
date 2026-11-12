@@ -118,12 +118,14 @@ def test_canaux_declares_par_les_programmes():
             avec_ecole.add(nom)
             assert d["ecole"]["niveau_eleves"] == {s: q.val("macro.niveau_eleves", s) for s in ("crise", "prudent", "median", "optimiste")}
         m = prog.mesures(P)
-        assert all(abs(v) < 1e-9 for x in m["crise"] if x.nom.startswith("Canal déclaré")
-                   and "réformes de structure" not in x.nom for v in x.valeurs.values())  # miroir : réglementer coûte en crise
+        # IA et école : rien en crise (la fraude, le logement et le solde migratoire jouent dans tous les scénarios)
+        assert all(abs(v) < 1e-9 for x in m["crise"]
+                   if x.nom.startswith(("Canal déclaré : adoption de l'IA", "Canal déclaré : école")) for v in x.valeurs.values())
     assert ia > 0 and avec_ia == {"attal", "glucksmann", "philippe", "zemmour", "retailleau", "lisnard"}
-    assert avec_ecole == {"arthaud", "attal", "glucksmann", "le_pen", "lisnard", "melenchon", "philippe", "retailleau", "roussel",
-                          "tondelier", "zemmour"}
-    assert avec_ia <= avec_ecole  # qui parle de l'IA parle aussi de l'école (vérifié le 12/11/2026)
+    # phase B6 : l'école déclarée seulement pour des réformes d'organisation sans budget (les mesures budgétaires passent
+    # par le canal d'offre de l'éducation)
+    assert avec_ecole == {"zemmour"}
+
 
 
 def test_reformes_structurelles_bareme():

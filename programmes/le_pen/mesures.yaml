@@ -43,7 +43,7 @@ mesures:
 - id: RN-FIS-07
   intitule: "Lutte contre la fraude fiscale (4 Md€ annoncés en 2027)"
   source: "FranceBudget"
-  traitement: "le_pen_mesures.fraude_fiscale (estimation commune, annonce non reprise)"
+  traitement: "le_pen_canaux.fraude (barème commun de la fraude, annonce non reprise)"
 - id: RN-FIS-08
   intitule: "Suppression de plus de 120 « petites taxes »"
   source: "Acteurs publics, 06/10/2026"

@@ -242,14 +242,6 @@ le_pen_mesures:
     statut: HYPOTHESE
     source: "Contre-budget : 9 Md€ (contribution nette ramenée à ≈ 5 Md€, annonce non reprise) ; décision relative aux ressources propres : contribution fixée à l'unanimité pour 2028-2034 (cadre financier pluriannuel), une baisse unilatérale serait une infraction"
     note: "Obstacle juridique documenté : zéro en crise et en prudent ; une baisse négociée (rabais) de 1 à 2 Md€ en médian et en optimiste."
-  fraude_fiscale:
-    valeur: {id: RN-FIS-07, libelle: "Lutte contre la fraude fiscale, douanes et DGCCRF renforcées", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
-             montant: {crise: 0.3, prudent: 0.5, median: 1.5, optimiste: 3.0}}
-    unite: md_eur
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "FranceBudget : 4 Md€ annoncés pour 2027 (non repris) ; même estimation que tondelier_mesures.fraude et melenchon (fraude et évasion fiscales)"
-  # ---------------------------------------------------------------- dépenses nouvelles
   recherche:
     valeur: {id: RN-REC-01, instrument: recherche, libelle: "Recherche publique : crédits relevés", poste: etat_missions, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: 9.0, prudent: 9.0, median: 8.0, optimiste: 7.0}}
@@ -327,6 +319,12 @@ le_pen_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 le_pen_canaux:
+  fraude:
+    valeur: {agents: non_chiffre, debut: 2028, plein: 2032}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun fraude.bareme (DGFiP 2024 ; commission des finances, 2026)"
+    note: "Phase B5 (12/11/2026, nuit) : RN-FIS-07 « douanes et DGCCRF renforcées », sans effectifs : renforcement non chiffré (2 000 agents), coût ajouté. Remplace la mesure à montant fixe (0,3 / 0,5 / 1,5 / 3 Md€)."
   solde_migratoire:
     valeur: {titres_en_moins: 137400, debut: 2028, montee: 3}
     unite: sans_unite
@@ -339,8 +337,3 @@ le_pen_canaux:
     statut: DECISION
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : moratoire sur l'éolien terrestre et démontage des parcs (RN-ENE-02, entrée interdite sur un segment de la production d'électricité, −0,5) ; les concessions autoroutières reprises, l'audiovisuel et la priorité nationale dans les marchés publics sont hors champ. Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2. DÉCISION d'Adrien du 12/11/2026 (soir, roadmap B1) : lectures confirmées."
-  ecole:
-    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : RN-EDU-01 (soutien scolaire gratuit, métier d'enseignant revalorisé). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."

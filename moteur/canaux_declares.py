@@ -39,8 +39,8 @@ from . import statu_quo as sq
 from .noyau import ANNEES, Levier, Mesure, Regle
 from .parametres import Parametres
 
-CANAUX = ("fraude_tva", "productivite", "reformes_structurelles", "adoption_ia", "ecole", "regle_trajectoire",
-          "solde_migratoire")
+CANAUX = ("fraude", "fraude_tva", "productivite", "reformes_structurelles", "adoption_ia", "ecole", "regle_trajectoire",
+          "solde_migratoire", "logement")
 
 
 def declares(prog) -> dict:
@@ -54,6 +54,14 @@ def declares(prog) -> dict:
                 raise ValueError(f"Canal déclaré inconnu : {cle} (canaux : {', '.join(CANAUX)})")
             out[nom] = par.valeur
     return out
+
+
+def facteur_ia(p: Parametres, s: str, budget) -> float:
+    """Part du barème d'adoption de l'IA obtenue pour un budget annuel en plus (phase B6) : min(1, budget / référence)."""
+    c = p.val("adoption_ia.budget")
+    b = budget[s] if isinstance(budget, dict) else budget
+    b = c["non_chiffre_md"] if b in (None, "non_chiffre") else float(b)
+    return min(1.0, max(0.0, b / c["reference_md"]))
 
 
 def _montee(t: int, debut: int, annees: float) -> float:
@@ -77,6 +85,29 @@ def effets(prog, p: Parametres, s: str) -> dict:
             pib[t] += serie_pib[t]
         series.append((nom, serie_pib))
 
+    if "logement" in d:
+        # offre de logements, canal commun (phase B4) : PIB des chantiers en plus, recettes au taux du statu quo
+        x, c = d["logement"], p.val("logement_offre.bareme")
+        k = float(x["intensite"])
+        sc = s if k >= 0 else {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}[s]
+        rec_sq = sq.recettes(p, s)
+        n = k * c["logements"][sc]
+        debut = int(x.get("debut", 2028))
+        dpib = {t: n * min(1.0, max(0.0, (t - debut + 1) / c["montee"])) * c["prix_moyen_ht"] * c["part_additionnelle"]
+                / 1e9 * y[t] / y[2029] for t in ANNEES}
+        for t in ANNEES:
+            pib[t] += dpib[t]
+        mesures.append(Mesure(f"Canal déclaré : offre de logements ({n:+,.0f} par an)".replace(",", " "), "recettes",
+                              {t: dpib[t] * rec_sq[t] / y[t] for t in ANNEES}, "effet_macro"))
+    if "fraude" in d:
+        # barème commun de la lutte contre la fraude (phase B5, moteur/fraude.py)
+        from . import fraude as fr
+        x = fr.effets(p, s, d["fraude"])
+        n = fr.agents(p, d["fraude"])
+        mesures.append(Mesure(f"Canal déclaré : lutte contre la fraude ({n:,.0f} agents de contrôle en plus)".replace(",", " "),
+                              "recettes", x["recettes"], "effet_macro"))
+        if any(x["cout"].values()):
+            mesures.append(Mesure("Canal déclaré : lutte contre la fraude, coût des agents", "etat_missions", x["cout"]))
     if "fraude_tva" in d:
         x = d["fraude_tva"]
         mesures.append(Mesure("Canal déclaré : fraude à la TVA", "recettes",
@@ -89,10 +120,11 @@ def effets(prog, p: Parametres, s: str) -> dict:
         x = d["reformes_structurelles"]
         ajouter("réformes de structure (productivité)", {t: y[t] * gain(p, x, s, t) for t in ANNEES})
     if "adoption_ia" in d:
+        k_ia = facteur_ia(p, s, d["adoption_ia"].get("budget_md", "non_chiffre"))
         g, debut, duree = sq._v(p, "macro.ia_productivite", s), p.val("macro.premiere_annee_ia"), p.val("macro.annees_ia")
         r, serie = 0.0, {}
         for t in ANNEES:
-            r = (1 + r) * (1 + g * (debut <= t < debut + duree) * d["adoption_ia"]["part"][s]) - 1
+            r = (1 + r) * (1 + g * (debut <= t < debut + duree) * d["adoption_ia"]["part"][s] * k_ia) - 1
             serie[t] = y[t] * r
         ajouter("adoption de l'IA", serie)
     if "ecole" in d:

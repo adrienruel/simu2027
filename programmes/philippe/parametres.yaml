@@ -514,6 +514,12 @@ philippe_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 philippe_canaux:
+  logement:
+    valeur: {intensite: 0.25, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun logement_offre.bareme (Greenaway-McGrevy, 2025 ; SDES 2026)"
+    note: "Phase B4 (12/11/2026, nuit) : PHI droits des bailleurs renforcés, pas d'encadrement des loyers : demi-cran ciblé (0,25). Les logements construits par la dépense publique (logements sociaux) passent par leur dépense et le multiplicateur, pas par ce canal. À valider par Adrien."
   solde_migratoire:
     valeur: {titres_en_moins: 192100, debut: 2028, montee: 3}
     unite: sans_unite
@@ -527,12 +533,7 @@ philippe_canaux:
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Aucune mesure dans le champ : moratoire sur les normes, simplification administrative et commande publique sont hors champ (+1,25 avant le 12/11/2026). Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2."
   adoption_ia:
-    valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}}
+    valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}, budget_md: {crise: 0.5, prudent: 0.4, median: 0.3, optimiste: 0.2}}
     unite: sans_unite
     statut: HYPOTHESE
-    note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : PHI-NUM-01 (infrastructure d'IA souveraine, calcul doublé en cinq ans). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."
-  ecole:
-    valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
-    unite: sans_unite
-    statut: HYPOTHESE
-    note: "Niveau des élèves (écart-type ; 0,1 ≈ 10 points PISA), compté dans le seul scénario optimiste. Mesure du programme : PHI-EDU-01 (enseignants +20 %, écoles normales), PHI-EDU-03 (soutien scolaire universel). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure."
+    note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : PHI-NUM-01 (infrastructure d'IA souveraine, calcul doublé en cinq ans). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure. Phase B6 (12/11/2026, nuit) : effet proportionnel au budget engagé (adoption_ia.budget) ; budget lu : PHI-NUM-01, infrastructure d'IA souveraine (philippe_mesures, investissement)."
