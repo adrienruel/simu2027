@@ -958,6 +958,87 @@ Réponses d'Adrien aux huit questions ouvertes :
 7. **Statu quo après 2050** : laissé en l'état.
 8. **Sorties du comparateur** : régénérées.
 
+## 12 novembre 2026 (suite) — Gains de productivité : barème commun des réformes de structure
+
+Demande d'Adrien : la productivité propre à Écologie de droite (arbitrage 1) le dérange ; évaluer les gains de
+productivité « de la manière la plus juste », pour tous.
+
+- Source unique : Égert et Gal (2017), OCDE, document de travail n° 1354 (cadre de quantification des réformes) :
+  effet d'une réforme typique observée sur le PIB par habitant. Marchés de produits (ETCR −0,31) : +0,72 % à 5 ans,
+  +1,02 % à 10 ans, +2,09 % à long terme. Protection de l'emploi (EPL −0,30) : +0,22 %, +0,57 %, +1,83 % (trois
+  quarts retenus : part hors emploi). Les autres domaines du cadre passent déjà ailleurs (canal d'offre commun,
+  mesures d'emploi, IS, retraites, SMIC, recherche, éducation). Ouverture commerciale (compétence européenne) et
+  logement (absent du cadre) : non comptés.
+- `moteur/reformes_structurelles.py` et `macro.reformes_structurelles` (paramètres communs) ; canal déclaré
+  `reformes_structurelles` ({pmr, epl, debut}) ; grille 1 / 0,5 / 0,25, signe négatif pour réglementer ou nationaliser,
+  plafond ±2. Scénarios : crise 0, prudent moitié de l'effet à 10 ans, médian effet à 10 ans puis moitié du chemin vers
+  le long terme (atteint à 25 ans), optimiste complet ; scénario miroir pour une réglementation.
+- Écologie de droite : `macro.productivite` remplacé par `macro.reformes_programme` (pmr 1, epl 0,5, début 2029), lu
+  aussi par le budget et par la règle d'indexation « croissance sans inflation ». Copie de crise prise en compte.
+- Compteurs (pmr / epl) : Lisnard 1,75 / 1 ; Philippe 1,25 / 0 ; Attal 1 / 0,5 ; Écologie de droite 1 / 0,5 ;
+  Zemmour 0,75 / 0 ; Retailleau 0,5 / 0,75 ; Bertrand 0 ; Le Pen −0,25 / 0 ; Glucksmann −0,5 / 0 ; Tondelier −1 / 0 ;
+  Mélenchon −2 / −0,5 ; Roussel −2 / 0 ; Arthaud −2 / −2. Mesures citées dans la note de chaque paramètre.
+- Point 4 (liste des canaux) : remarque d'Adrien vérifiée, Zemmour parle de l'école (ZEM-EDU-01, 02, 04) : canal école
+  ajouté. Tous les programmes qui ont le canal IA ont maintenant le canal école.
+- Test : `tests/test_canaux_declares.py::test_reformes_structurelles_bareme`.
+
+## 12 novembre 2026 (suite) — Seconde relecture neutre : trois corrections
+
+Rapport : docs/relecture_neutre_2_rapport.md. DÉCISIONS d'Adrien : appliquer la même règle à tous les programmes pour
+les gains de productivité (point 1) ; restreindre le barème des réformes de structure au champ de l'OCDE (point 2) ;
+pour Écologie de droite, publier le déficit au sens de Maastricht, la contribution de la règle étant un emprunt aux
+ménages, règle inchangée (point 3). Les autres points du rapport attendent ses arbitrages.
+
+**1. Dividende de productivité commun** (`statu_quo.dividende_productivite`). Un PIB en plus dû à la productivité
+rapportait la part des recettes dans le PIB (52 %), alors que dans le statu quo les dépenses indexées sur les salaires
+montent avec lui. Calcul : productivité du statu quo relevée de 1 % en dix ans, écart de solde primaire rapporté à
+l'écart de PIB : ≈ 25 % en 2030, 12,5 % en 2037, 10 % en 2050, presque rien en 2073 (même chose dans les quatre
+scénarios). Appliqué à tous : canaux déclarés (réformes de structure, IA, école), part hors emploi des instruments de
+productivité du canal d'offre (capital des entreprises et des ménages, successions, investissement public, éducation,
+recherche), et Écologie de droite (réformes, école, adoption de l'IA). Le dividende propre au budget d'Écologie de
+droite (`q_div`) ne sert plus qu'aux écarts de méthode (tendance, IA du statu quo). Inchangés : les gains d'emploi et
+d'heures, le multiplicateur. Limite : un seul profil de gain pour tous.
+
+**2. Barème restreint au champ de l'OCDE** (docs/reformes_structurelles.md). Marchés de produits : électricité, gaz,
+télécommunications, poste, rail, aérien, fret routier ; protection de l'emploi : licenciement des contrats réguliers.
+Normes, simplification, commande publique, banques, autoroutes, aéroports, audiovisuel, santé, logement, commerce :
+hors champ pour tous. Compteurs (pmr / epl) : Arthaud −2 / −1 ; Roussel −1,5 / 0 ; Mélenchon −1 / −0,5 ; Tondelier
+−1 / 0 ; Glucksmann, Le Pen −0,5 / 0 ; Attal −0,5 / 0,5 ; Bertrand, Philippe, Zemmour 0 / 0 ; Retailleau 0 / 0,5 ;
+Lisnard 0 / 1 ; Écologie de droite 0,5 / 0,5. Lectures à confirmer par Adrien : listées dans la note.
+
+**3. Écologie de droite : contribution de la règle en emprunt** (`clause.contribution_en_emprunt`). La contribution
+n'entre plus dans les recettes : le déficit publié la compte et la dette de Maastricht comprend ce que l'État doit aux
+ménages ; le remboursement à 67 ans est hors solde ; `dette_et_quasi_dette_pib` ne compte plus les créances deux fois
+(`quasi_dette_dans_dette`). La règle ne change pas (mêmes leviers, mêmes montants) : elle vise 3 % comme si la
+contribution était une recette. Les intérêts de cet emprunt sont ceux de la dette du noyau (taux de marché et prime de
+dette), un peu au-dessus du rendement du fonds rendu aux ménages.
+
+**Déficit 2037 (% du PIB), avant → après**
+
+| Programme | Prudent | Médian | Prudent 2050 |
+|---|---|---|---|
+| Statu quo | 9,50 | 8,37 | 20,57 |
+| Écologie de droite | 3,00 → 4,27 | 2,10 → 2,23 | 3,17 → 5,29 |
+| Bertrand | 9,20 → 9,20 | 7,33 → 7,32 | 19,69 → 19,68 |
+| Philippe | 9,34 → 9,93 | 6,26 → 7,44 | 19,73 → 21,61 |
+| Retailleau | 9,94 → 10,29 | 7,14 → 7,92 | 21,73 → 22,79 |
+| Attal | 10,76 → 11,45 | 7,81 → 9,01 | 24,05 → 26,16 |
+| Le Pen | 13,23 → 13,28 | 10,73 → 10,82 | 30,94 → 31,15 |
+| Zemmour | 12,96 → 13,31 | 9,63 → 10,37 | 30,10 → 31,06 |
+| Lisnard | 12,95 → 13,93 | 9,16 → 10,90 | 29,52 → 32,23 |
+| Tondelier | 14,51 → 13,91 | 10,60 → 10,26 | 35,60 → 33,69 |
+| Glucksmann | 14,62 → 14,35 | 11,85 → 11,83 | 34,78 → 33,94 |
+| Arthaud | 19,92 → 18,06 | 14,05 → 13,21 | 50,66 → 44,53 |
+| Mélenchon | 31,52 → 29,63 | 23,05 → 22,30 | 76,87 → 71,37 |
+| Roussel | 31,99 → 30,51 | 23,40 → 22,72 | 88,02 → 83,60 |
+
+Écologie de droite, prudent : 4,17 % en 2029, 4,65 % en 2032, 4,27 % en 2037, 5,29 % en 2050, 5,74 % en 2073 ; dette
+130 % en 2029, 135 % en 2037, 147 % en 2050, 178 % en 2073 (sans règle : 5,25 % et 141 % en 2037). L'ordre des
+scénarios est respecté pour tous les programmes, chaque année.
+
+**À faire** : les résumés « En bref » du comparateur citent encore les anciens chiffres (barème « de l'OCDE », 3 % pour
+Écologie de droite, écarts de PIB) : à réécrire avec les nouvelles sorties.
+
 ## 12 novembre 2026 (suite) — Philippe : programme mis à jour sur son site
 
 Lecture des 15 pages thématiques du site (mise à jour du 12/11/2026) : 32 mesures ajoutées à programmes/philippe/

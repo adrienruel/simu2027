@@ -108,7 +108,25 @@ def test_canaux_declares_par_les_programmes():
             avec_ecole.add(nom)
             assert d["ecole"]["niveau_eleves"] == {s: q.val("macro.niveau_eleves", s) for s in ("crise", "prudent", "median", "optimiste")}
         m = prog.mesures(P)
-        assert all(abs(v) < 1e-9 for x in m["crise"] if x.nom.startswith("Canal déclaré") for v in x.valeurs.values())
+        assert all(abs(v) < 1e-9 for x in m["crise"] if x.nom.startswith("Canal déclaré")
+                   and "réformes de structure" not in x.nom for v in x.valeurs.values())  # miroir : réglementer coûte en crise
     assert ia > 0 and avec_ia == {"attal", "glucksmann", "philippe", "zemmour", "retailleau", "lisnard"}
     assert avec_ecole == {"arthaud", "attal", "glucksmann", "le_pen", "lisnard", "melenchon", "philippe", "retailleau", "roussel",
-                          "tondelier"}
+                          "tondelier", "zemmour"}
+    assert avec_ia <= avec_ecole  # qui parle de l'IA parle aussi de l'école (vérifié le 12/11/2026)
+
+
+def test_reformes_structurelles_bareme():
+    """Barème commun des réformes de structure (12/11/2026) : sens des scénarios, miroir, plafond."""
+    from moteur.parametres import Parametres
+    from moteur.reformes_structurelles import gain
+    p = Parametres()
+    lib, reg = {"pmr": 1, "debut": 2028}, {"pmr": -1, "debut": 2028}
+    g = {s: gain(p, lib, s, 2045) for s in ("crise", "prudent", "median", "optimiste")}
+    assert g["crise"] == 0 < g["prudent"] < g["median"] < g["optimiste"]
+    r = {s: gain(p, reg, s, 2045) for s in ("crise", "prudent", "median", "optimiste")}
+    assert r["crise"] < r["prudent"] < r["median"] < r["optimiste"] == 0
+    assert abs(r["prudent"] + g["median"]) < 1e-12  # miroir
+    assert gain(p, {"pmr": 5}, "median", 2045) == gain(p, {"pmr": 2}, "median", 2045)  # plafond
+    # effet à 10 ans de l'OCDE au médian
+    assert abs(gain(p, lib, "median", 2037) - 0.0102) < 1e-12
