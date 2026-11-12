@@ -59,7 +59,7 @@ mesures:
 - id: PHI-EMP-03
   intitule: Trois jours de carence dans le public et le privé ; délai avant rupture conventionnelle
   source: Site (« Pour une France plus prospère »)
-  traitement: philippe_mesures.carence
+  traitement: 'philippe_mesures.carence_etat, carence_collectivites, carence_hopitaux (IGF-Igas, 289 M€) et carence_prive ; délai avant rupture conventionnelle : non chiffré'
 - id: PHI-EMP-04
   intitule: Retraite progressive, cumul emploi-retraite, emploi des plus de 50 ans
   source: Site (« Pour une France plus prospère »)

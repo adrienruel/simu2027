@@ -147,13 +147,36 @@ philippe_mesures:
     statut: HYPOTHESE
     source: "Encadrement : la baisse de 25 % des durées de 2023 rapporte ≈ 4,5 Md€ en régime de croisière (Unédic, 2024) ; de 18 à 12 mois (−33 %) pour les moins de 50 ans (≈ 60 % des allocataires) : ≈ 3 à 4 Md€"
     note: "Effet sur l'emploi : philippe_chomage.baisse_taux."
-  carence:
-    valeur: {id: PHI-EMP-03, libelle: "Trois jours de carence dans le public comme dans le privé", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2028,
-             montant: {crise: -0.4, prudent: -0.5, median: -0.6, optimiste: -0.7}}
+  carence_etat:
+    valeur: {id: PHI-EMP-03, libelle: "Trois jours de carence dans la fonction publique (au lieu d'un) : État", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2028,
+             montant: {crise: -0.08, prudent: -0.11, median: -0.14, optimiste: -0.16}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Revue de dépenses IGF-Igas relative à la réduction des absences dans la fonction publique (juillet 2024) : passage de un à trois jours de carence ≈ 289 M€ pour toute la fonction publique, dont 112 M€ pour l'État ; reste réparti selon les effectifs (territoriale ≈ 62 %, hospitalière ≈ 38 %) ; crise : moins d'effet sur les comportements, médian et optimiste : arrêts courts en moins (précédent du jour de carence de 2018)"
+    note: "Corrigé le 12/11/2026 : l'ancien paramètre (−0,4 à −0,7 Md€, tout sur l'État) dépassait le chiffrage des inspections."
+  carence_collectivites:
+    valeur: {id: PHI-EMP-03, libelle: "Trois jours de carence dans la fonction publique (au lieu d'un) : collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -0.08, prudent: -0.11, median: -0.13, optimiste: -0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Même source ; la territoriale a le plus fort écart d'absences avec le privé (13,3 jours en 2024 contre 10,6)"
+  carence_hopitaux:
+    valeur: {id: PHI-EMP-03, libelle: "Trois jours de carence dans la fonction publique (au lieu d'un) : hôpitaux", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2028,
+             montant: {crise: -0.04, prudent: -0.07, median: -0.08, optimiste: -0.09}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Même source"
+  carence_prive:
+    valeur: {id: PHI-EMP-03, libelle: "Trois jours de carence « pour tout le monde » dans le privé : indemnités journalières des arrêts évités", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
+             montant: {crise: 0.0, prudent: -0.05, median: -0.1, optimiste: -0.2}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : jour de carence des agents publics rétabli en 2018 : ≈ 0,2 à 0,3 Md€ par an (DGAFP) ; deux jours de plus et indemnisation des salariés du privé par les employeurs interdite (économie surtout privée)"
+    source: "Site (page Travail, 12/11/2026) : trois jours de carence pour tous, pour mettre fin à « l'open bar » des arrêts maladie ; au statu quo, le code de la sécurité sociale prévoit déjà trois jours dans le privé, souvent payés par l'employeur : lecture retenue, des jours non compensables (d'ordre public) ; l'économie de l'employeur n'est pas publique, seule compte celle de l'Assurance maladie sur les arrêts qui ne sont plus pris ; indemnités journalières maladie ≈ 12 Md€ en 2024 (DREES) ; durée des arrêts déjà limitée par la LFSS 2026 (statu quo)"
+    note: "Crise à zéro : les arrêts évités sont surtout courts, donc sous les trois jours déjà non indemnisés."
   postes_etat:
     valeur: {id: PHI-TER-01, libelle: "Un départ en retraite sur trois non remplacé : État", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true, postes: true,
              montant: {crise: -2.97, prudent: -4.95, median: -6.19, optimiste: -6.19}}

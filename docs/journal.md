@@ -965,3 +965,4 @@ mesures.yaml (123), 7 nouveaux paramètres et 5 paramètres précisés dans para
 ouverts : docs/programmes_novembre.md, section « Philippe : programme mis à jour le 12 novembre 2026 ».
 Décisions d'Adrien du soir : capitalisation collective chiffrée en dépense (compensation annoncée non reprise), lecture
 CSG des heures sup confirmée, allocation familiale unique chiffrée sans coût constant (même section).
+Philippe, jours de carence : recalés sur la revue de dépenses IGF-Igas (juillet 2024, 289 M€ pour toute la fonction publique, 112 M€ pour l'État), répartis entre État, collectivités et hôpitaux, plus les arrêts évités dans le privé ; l'ancien paramètre (0,5 Md€ sur l'État seul) était trop haut.
