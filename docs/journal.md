@@ -957,3 +957,27 @@ Réponses d'Adrien aux huit questions ouvertes :
 6. **Registre par scénario** : plus tard.
 7. **Statu quo après 2050** : laissé en l'état.
 8. **Sorties du comparateur** : régénérées.
+
+## 12 novembre 2026 (suite) — Gains de productivité : barème commun des réformes de structure
+
+Demande d'Adrien : la productivité propre à Écologie de droite (arbitrage 1) le dérange ; évaluer les gains de
+productivité « de la manière la plus juste », pour tous.
+
+- Source unique : Égert et Gal (2017), OCDE, document de travail n° 1354 (cadre de quantification des réformes) :
+  effet d'une réforme typique observée sur le PIB par habitant. Marchés de produits (ETCR −0,31) : +0,72 % à 5 ans,
+  +1,02 % à 10 ans, +2,09 % à long terme. Protection de l'emploi (EPL −0,30) : +0,22 %, +0,57 %, +1,83 % (trois
+  quarts retenus : part hors emploi). Les autres domaines du cadre passent déjà ailleurs (canal d'offre commun,
+  mesures d'emploi, IS, retraites, SMIC, recherche, éducation). Ouverture commerciale (compétence européenne) et
+  logement (absent du cadre) : non comptés.
+- `moteur/reformes_structurelles.py` et `macro.reformes_structurelles` (paramètres communs) ; canal déclaré
+  `reformes_structurelles` ({pmr, epl, debut}) ; grille 1 / 0,5 / 0,25, signe négatif pour réglementer ou nationaliser,
+  plafond ±2. Scénarios : crise 0, prudent moitié de l'effet à 10 ans, médian effet à 10 ans puis moitié du chemin vers
+  le long terme (atteint à 25 ans), optimiste complet ; scénario miroir pour une réglementation.
+- Écologie de droite : `macro.productivite` remplacé par `macro.reformes_programme` (pmr 1, epl 0,5, début 2029), lu
+  aussi par le budget et par la règle d'indexation « croissance sans inflation ». Copie de crise prise en compte.
+- Compteurs (pmr / epl) : Lisnard 1,75 / 1 ; Philippe 1,25 / 0 ; Attal 1 / 0,5 ; Écologie de droite 1 / 0,5 ;
+  Zemmour 0,75 / 0 ; Retailleau 0,5 / 0,75 ; Bertrand 0 ; Le Pen −0,25 / 0 ; Glucksmann −0,5 / 0 ; Tondelier −1 / 0 ;
+  Mélenchon −2 / −0,5 ; Roussel −2 / 0 ; Arthaud −2 / −2. Mesures citées dans la note de chaque paramètre.
+- Point 4 (liste des canaux) : remarque d'Adrien vérifiée, Zemmour parle de l'école (ZEM-EDU-01, 02, 04) : canal école
+  ajouté. Tous les programmes qui ont le canal IA ont maintenant le canal école.
+- Test : `tests/test_canaux_declares.py::test_reformes_structurelles_bareme`.

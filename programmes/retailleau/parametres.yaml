@@ -421,6 +421,12 @@ retailleau_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 retailleau_canaux:
+  reformes_structurelles:
+    valeur: {pmr: 0.5, epl: 0.75, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
+    note: "Marchés de produits : 50 normes supprimées (RET-ECO-03, 0,5). Protection de l'emploi : code du travail refondé sur 50 principes (RET-EMP-04, 0,5), seuils sociaux relevés (0,25). La fin des interdictions de louer liées au DPE relève du logement : non comptée. Barème commun des réformes de structure (macro.reformes_structurelles : Égert et Gal, OCDE, 2017 ; 12/11/2026, demande d'Adrien : gains de productivité évalués de la même façon pour tous). Grille : 1 = refonte d'un domaine, 0,5 = mesure ciblée, 0,25 = une entreprise ou un média ; positif = libéralise, négatif = réglemente ou nationalise ; plafond ±2."
   adoption_ia:
     valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}}
     unite: sans_unite

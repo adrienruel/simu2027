@@ -129,9 +129,8 @@ def indice_reel(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
             out[t] = idx
     elif regle == "croissance_sans_inflation":
         infl = serie(p, jeu)
-        prod = {t: (1 + p.val("macro.productivite", jeu)) ** max(0, min(p.val("macro.annees_productivite", jeu),
-                                                                        t - p.val("macro.premiere_annee_productivite") + 1))
-                for t in range(2029, 2074)}
+        from .reformes_structurelles import gain as gain_reformes
+        prod = {t: 1 + gain_reformes(p, p.val("macro.reformes_programme"), jeu, t) for t in range(2029, 2074)}
         f = 1.0
         for t in range(2029, 2074):
             if t > 2029:

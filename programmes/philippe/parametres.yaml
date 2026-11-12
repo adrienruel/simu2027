@@ -422,6 +422,12 @@ philippe_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 philippe_canaux:
+  reformes_structurelles:
+    valeur: {pmr: 1.25, epl: 0, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
+    note: "Marchés de produits : moratoire, ni nouvelle norme ni nouvel impôt (0,5), ordonnance de simplification administrative (0,5), code de la commande publique remplacé par le règlement européen (0,25). Barème commun des réformes de structure (macro.reformes_structurelles : Égert et Gal, OCDE, 2017 ; 12/11/2026, demande d'Adrien : gains de productivité évalués de la même façon pour tous). Grille : 1 = refonte d'un domaine, 0,5 = mesure ciblée, 0,25 = une entreprise ou un média ; positif = libéralise, négatif = réglemente ou nationalise ; plafond ±2."
   adoption_ia:
     valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}}
     unite: sans_unite

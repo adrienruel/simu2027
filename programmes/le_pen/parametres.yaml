@@ -327,6 +327,12 @@ le_pen_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 le_pen_canaux:
+  reformes_structurelles:
+    valeur: {pmr: -0.25, epl: 0, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
+    note: "Marchés de produits : concessions autoroutières reprises (−0,5), audiovisuel public privatisé en partie (+0,25). Le protectionnisme ciblé et le moratoire sur les accords de libre-échange relèvent de la politique commerciale européenne : non comptés. Barème commun des réformes de structure (macro.reformes_structurelles : Égert et Gal, OCDE, 2017 ; 12/11/2026, demande d'Adrien : gains de productivité évalués de la même façon pour tous). Grille : 1 = refonte d'un domaine, 0,5 = mesure ciblée, 0,25 = une entreprise ou un média ; positif = libéralise, négatif = réglemente ou nationalise ; plafond ±2."
   ecole:
     valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
     unite: sans_unite

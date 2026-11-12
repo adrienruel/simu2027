@@ -9,6 +9,7 @@ porte un statut et une source comme tout paramètre.
     <nom>_canaux:
       fraude_tva:        {valeur: {montant: {crise: 0, prudent: 1, median: 2, optimiste: 3}, debut: 2029, montee: 5}, ...}
       productivite:      {valeur: {taux: {par scénario : gain annuel}, debut: 2030, annees: 10}, ...}
+      reformes_structurelles: {valeur: {pmr: 1.0, epl: 0.5, debut: 2028}, ...}   (barème commun, 12/11/2026)
       adoption_ia:       {valeur: {part: {par scénario : part du gain de l'IA en plus du statu quo}}, ...}
       ecole:             {valeur: {niveau_eleves: {par scénario : écart-type}, debut: 2045, annees: 40}, ...}
       regle_trajectoire: {valeur: {cible: 0.03, derniere_annee: 2073, scenarios: [crise, prudent, median, optimiste],
@@ -17,6 +18,9 @@ porte un statut et une source comme tout paramètre.
 Formules (celles d'Écologie de droite, programmes/ecologie_de_droite/effets.py) :
 - fraude à la TVA : recette en Md€ de 2026, montée linéaire ;
 - productivité : PIB du statu quo × ((1 + taux)^années écoulées − 1), années plafonnées ;
+- réformes de structure : barème commun de l'OCDE (moteur/reformes_structurelles.py), nombre de réformes typiques
+  déclarées par domaine (marchés de produits, protection de l'emploi) ; c'est la façon commune de compter les gains de
+  productivité des réformes (le canal « productivite » libre n'est plus utilisé par aucun programme) ;
 - adoption de l'IA : gain de productivité de l'IA du statu quo (macro.ia_productivite) × part, cumulé ;
 - école : niveau des élèves × macro.croissance_par_ecart_type, monté linéairement, cumulé ;
 - le PIB en plus rapporte la part des recettes dans le PIB du statu quo (règle du canal d'offre commun) ;
@@ -34,7 +38,7 @@ from . import statu_quo as sq
 from .noyau import ANNEES, Levier, Mesure, Regle
 from .parametres import Parametres
 
-CANAUX = ("fraude_tva", "productivite", "adoption_ia", "ecole", "regle_trajectoire")
+CANAUX = ("fraude_tva", "productivite", "reformes_structurelles", "adoption_ia", "ecole", "regle_trajectoire")
 
 
 def declares(prog) -> dict:
@@ -74,6 +78,10 @@ def effets(prog, p: Parametres, s: str) -> dict:
     if "productivite" in d:
         x = d["productivite"]
         ajouter("productivité", {t: y[t] * ((1 + x["taux"][s]) ** max(0, min(x["annees"], t - x["debut"] + 1)) - 1) for t in ANNEES})
+    if "reformes_structurelles" in d:
+        from .reformes_structurelles import gain
+        x = d["reformes_structurelles"]
+        ajouter("réformes de structure (productivité)", {t: y[t] * gain(p, x, s, t) for t in ANNEES})
     if "adoption_ia" in d:
         g, debut, duree = sq._v(p, "macro.ia_productivite", s), p.val("macro.premiere_annee_ia"), p.val("macro.annees_ia")
         r, serie = 0.0, {}

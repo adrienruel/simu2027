@@ -1131,6 +1131,12 @@ melenchon_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 melenchon_canaux:
+  reformes_structurelles:
+    valeur: {pmr: -2, epl: -0.5, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
+    note: "Marchés de produits : Engie renationalisé (LFI-PAR-01c, 0,5), retour sur les privatisations des aéroports, autoroutes et de la FDJ (LFI-PAR-01, 0,5), pôle public bancaire (LFI-PAR-04, 0,5), tarifs réglementés de l'énergie (LFI-PRE-08b, 0,5), ArcelorMittal (LFI-PAR-01b) et ArianeGroup (LFI-PAR-01e) nationalisés, Ehpad lucratifs collectivisés (LFI-PAR-03), pôle public du médicament (LFI-SAN-09c), 0,25 chacun : au-delà du plafond, −2. Protection de l'emploi : licenciements boursiers interdits (LFI-ECO-01, −0,5). Le gel des loyers relève du logement : non compté. Barème commun des réformes de structure (macro.reformes_structurelles : Égert et Gal, OCDE, 2017 ; 12/11/2026, demande d'Adrien : gains de productivité évalués de la même façon pour tous). Grille : 1 = refonte d'un domaine, 0,5 = mesure ciblée, 0,25 = une entreprise ou un média ; positif = libéralise, négatif = réglemente ou nationalise ; plafond ±2."
   ecole:
     valeur: {niveau_eleves: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}, debut: 2045, annees: 40}
     unite: sans_unite

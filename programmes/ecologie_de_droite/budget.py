@@ -107,9 +107,8 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     # Renouvelables (Budget État 2026, lignes 136 à 144)
     soutien_2026, soutien_2029 = p.val("renouvelables.soutien_budget_2026"), p.val("renouvelables.soutien_2029")
     fin = p.val("renouvelables.derniere_signature") + p.val("renouvelables.duree_contrats")
-    prod = {t: (1 + p.val("macro.productivite", scenario_retenu)) ** max(0, min(p.val("macro.annees_productivite", scenario_retenu),
-                                                                            t - p.val("macro.premiere_annee_productivite") + 1)) - 1
-            for t in ANNEES}
+    from moteur.reformes_structurelles import gain as gain_reformes
+    prod = {t: gain_reformes(p, p.val("macro.reformes_programme"), scenario_retenu, t) for t in ANNEES}
     autres_base = (dep["total"] - l["sante"] - l["retraites_socle"] - l["rui_aah"] - l["cout_transition_moyen"]
                    - l["charge_dette"] - l["subventions_restees"])
     # Total!B44 + B72 : le total compte l'IA en déduction ; on la rajoute puis on la retranche année par année

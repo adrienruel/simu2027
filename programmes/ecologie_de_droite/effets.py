@@ -26,6 +26,8 @@ méthode tant que le registre budgétaire (budget.py) est calculé sur la tendan
 """
 from __future__ import annotations
 
+from moteur.reformes_structurelles import gain as gain_reformes
+
 import math
 
 from moteur import statu_quo as sq
@@ -259,7 +261,8 @@ class Effets:
             solde["fraude_tva"][t] = m("fraude_tva") * montee(t, m("montee_fraude"))
             # productivité (réforme du programme), sur le PIB du statu quo du scénario
             y = self.y_sq[t]
-            pib["productivite"][t] = y * ((1 + m("productivite")) ** max(0, min(m("annees_productivite"), t - q.val("macro.premiere_annee_productivite") + 1)) - 1)
+            # barème commun des réformes de structure (12/11/2026, moteur/reformes_structurelles.py)
+            pib["productivite"][t] = y * gain_reformes(q, q.val("macro.reformes_programme"), jeu, t)
             solde["productivite"][t] = pib["productivite"][t] * self.q_div[t]
             # tendance et IA : le statu quo du scénario les porte déjà dans son PIB ; le budget du programme (calculé sur
             # la tendance du prudent, sans IA) en est écarté, d'où une mesure de recettes d'écart de méthode
@@ -310,7 +313,7 @@ class Effets:
         "aides_construction": "Logement : fin des aides à la construction",
         "erosion_is": "Entreprises : érosion de l'IS (localisation des bénéfices)",
         "fraude_tva": "Fraude à la TVA",
-        "productivite": "Productivité (réforme du programme)",
+        "productivite": "Productivité (réformes de structure, barème commun)",
         "reactions": "Réactions des hauts revenus à l'impôt",
         "investissement": "Investissement des entreprises (déduction immédiate, IS)",
         "permis": "Permis de construire rapide",

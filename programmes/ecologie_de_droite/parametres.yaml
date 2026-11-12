@@ -509,6 +509,12 @@ macro:
     unite: sans_unite
     statut: HYPOTHESE
     note_v235: "OCDE, 17 octobre 2014 : les réformes françaises de l’époque (concurrence, marché du travail, fiscalité des entreprises, énergie, professions réglementées) pouvaient relever le PIB de 3,7 % en dix ans, soit ≈ 0,4 point par an. OCDE, 2024 : l’IA pourrait ajouter 0,25 à 0,6 point de productivité par an sur dix ans. Médian : un peu sous l’estimation de 2014, les taux marginaux élevés du barème jouant en sens inverse. Prudent : un quart de cette estimation (CHOIX à confirmer : mettre 0 pour ne rien compter). Optimiste : avec une part de l’effet de l’IA."
+  reformes_programme:
+    valeur: {pmr: 1.0, epl: 0.5, debut: 2029}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun (macro.reformes_structurelles, Égert et Gal, OCDE, 2017)"
+    note: "Remplace macro.productivite le 12/11/2026 (demande d'Adrien : gains de productivité évalués de la même façon pour tous). Marchés de produits : horaires des commerces libres (0,5), permis rapide pour les usines et l'énergie (0,5) ; le droit à construire opposable relève du logement, absent du cadre de l'OCDE, et n'est pas compté (même règle que pour Retailleau). Protection de l'emploi : contrat de travail assoupli (0,5, mesure ciblée comme les refontes du code du travail d'Attal et de Retailleau). Les accords d'entreprise dérogatoires (négociation salariale) passent déjà par les effets d'emploi du programme. macro.productivite et macro.annees_productivite ne sont plus lus."
   annees_productivite:
     valeur: {crise: 10, prudent: 10, median: 10, optimiste: 10}
     unite: sans_unite
