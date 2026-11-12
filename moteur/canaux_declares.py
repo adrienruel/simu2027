@@ -11,7 +11,6 @@ porte un statut et une source comme tout paramètre.
       productivite:      {valeur: {taux: {par scénario : gain annuel}, debut: 2030, annees: 10}, ...}
       adoption_ia:       {valeur: {part: {par scénario : part du gain de l'IA en plus du statu quo}}, ...}
       ecole:             {valeur: {niveau_eleves: {par scénario : écart-type}, debut: 2045, annees: 40}, ...}
-      baisse_ecart_taux: {valeur: {baisse: {par scénario : points de taux, en fraction}, annees: 8}, ...}
       regle_trajectoire: {valeur: {cible: 0.03, derniere_annee: 2073, scenarios: [crise, prudent, median, optimiste],
                                    leviers: [{nom: "…", poste: recettes, capacite_pib: 0.01}]}, ...}
 
@@ -21,7 +20,8 @@ Formules (celles d'Écologie de droite, programmes/ecologie_de_droite/effets.py)
 - adoption de l'IA : gain de productivité de l'IA du statu quo (macro.ia_productivite) × part, cumulé ;
 - école : niveau des élèves × macro.croissance_par_ecart_type, monté linéairement, cumulé ;
 - le PIB en plus rapporte la part des recettes dans le PIB du statu quo (règle du canal d'offre commun) ;
-- baisse de l'écart de taux : retirée du taux de la dette, montée linéaire ;
+- baisse de l'écart de taux : plus un canal déclaré ; règle commune du noyau, gagnée par le résultat (chaque année de
+  déficit sous le statu quo compte : noyau.baisse_ecart_taux) ;
 - règle de trajectoire : celle du noyau (moteur/noyau.Regle) ; chaque levier a une capacité en part du PIB et porte
   sur les recettes (hausse) ou sur un bloc de dépenses (baisse). Les comptes sont publiés avec et sans la règle.
 
@@ -34,7 +34,7 @@ from . import statu_quo as sq
 from .noyau import ANNEES, Levier, Mesure, Regle
 from .parametres import Parametres
 
-CANAUX = ("fraude_tva", "productivite", "adoption_ia", "ecole", "baisse_ecart_taux", "regle_trajectoire")
+CANAUX = ("fraude_tva", "productivite", "adoption_ia", "ecole", "regle_trajectoire")
 
 
 def declares(prog) -> dict:
@@ -89,11 +89,7 @@ def effets(prog, p: Parametres, s: str) -> dict:
             r = (1 + r) * (1 + x["niveau_eleves"][s] * k * _montee(t, x["debut"], x["annees"])) - 1
             serie[t] = y[t] * r
         ajouter("école (niveau des élèves)", serie)
-    taux = None
-    if "baisse_ecart_taux" in d:
-        x = d["baisse_ecart_taux"]
-        taux = {t: -x["baisse"][s] * min(1.0, max(0, t - 2029) / x["annees"]) for t in ANNEES}
-    return {"mesures": mesures, "pib": pib, "taux_supplementaire": taux}
+    return {"mesures": mesures, "pib": pib, "taux_supplementaire": None}
 
 
 def regle(prog, p: Parametres, s: str) -> Regle | None:

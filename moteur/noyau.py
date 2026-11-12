@@ -299,6 +299,38 @@ def _appliquer_regle(regle: Regle, t: int, etat: dict, avant: float, pib_t: floa
             "reste_a_couvrir": reste, "ecart_cible": ecart * pib_t, "rec": rec, "bl": bl}
 
 
+def baisse_ecart_taux(p: Parametres, s: str, res: dict[int, dict], ref: dict[int, dict]) -> dict[int, float] | None:
+    """Baisse de l'écart de taux gagnée par le résultat, pour tout programme (DÉCISION d'Adrien du 12/11/2026).
+
+    Chaque année où le déficit du programme est sous celui du statu quo compte pour une année de crédibilité ; la
+    baisse du taux de la dette (macro.baisse_spread, par scénario : nulle en crise et au prudent) monte avec ces
+    années, entière au bout de macro.annees_baisse_spread. L'année t ne voit que les années passées. None : aucune
+    baisse (barème nul ou déficit jamais sous le statu quo)."""
+    bareme, duree = p.val("macro.baisse_spread", s), p.val("macro.annees_baisse_spread")
+    if not bareme:
+        return None
+    acquises, out = 0, {}
+    for t in ANNEES:
+        out[t] = -bareme * min(1.0, acquises / duree)
+        acquises += res[t]["deficit"] < ref[t]["deficit"] - 1e-9
+    return out if acquises else None
+
+
+def _deux_passes(p: Parametres, s: str, fabrique, ref: dict[int, dict]) -> dict[int, dict]:
+    """Trajectoire d'un scénario, puis une seconde avec la baisse de l'écart de taux que son déficit a gagnée.
+    fabrique() rend (mesures, contexte, dynamiques, règle), dynamiques et règle neuves à chaque appel."""
+    res = trajectoire(p, s, *fabrique())
+    sup = baisse_ecart_taux(p, s, res, ref)
+    if sup is None:
+        return res
+    mes, ctx, dyn, regle = fabrique()
+    deja = (ctx or {}).get("taux_supplementaire") or {}
+    res = trajectoire(p, s, mes, {**(ctx or {}), "taux_supplementaire": {t: deja.get(t, 0.0) + sup[t] for t in ANNEES}}, dyn, regle)
+    for t in ANNEES:
+        res[t]["baisse_ecart_taux"] = -sup[t]
+    return res
+
+
 CLES_SANS_REGLE = ("deficit", "dette", "dette_pib", "pib", "solde", "solde_primaire", "chomage", "quasi_dette",
                    "dette_et_quasi_dette_pib")
 
@@ -307,35 +339,37 @@ def simuler(p: Parametres | None = None, programme=None, scenarios=None, contref
     """Les quatre scénarios d'un programme (statu quo si programme est None) ; `scenarios` : seulement ceux-là.
 
     Programme avec une règle de trajectoire : le scénario sans règle est recalculé en entier (mêmes mesures et même
-    contexte, dynamiques neuves, aucune règle ; ou `programme.entrees_sans_regle` s'il existe), publié en `sans_regle` ; `deficit_sans_regle` est
-    son déficit (relecture indépendante du 11/11/2026 : l'ancien « sans règle » gardait la dette et le PIB déjà
-    modifiés par la règle des années précédentes). contrefactuel=False : pas de second passage (deficit_sans_regle
-    vaut alors None pour ces programmes)."""
+    contexte, dynamiques neuves, aucune règle ; ou `programme.entrees_sans_regle` s'il existe), publié en
+    `sans_regle` ; `deficit_sans_regle` est son déficit (relecture indépendante du 11/11/2026 : l'ancien « sans
+    règle » gardait la dette et le PIB déjà modifiés par la règle des années précédentes). contrefactuel=False : pas
+    de second passage (deficit_sans_regle vaut alors None pour ces programmes).
+
+    Tout programme : baisse de l'écart de taux gagnée par le résultat (`baisse_ecart_taux`)."""
     from .statu_quo import SCENARIOS
     p = p or Parametres()
     programme = programme or ProgrammeVide()
     noms = [s for s in SCENARIOS if scenarios is None or s in scenarios]
+    ref = {s: trajectoire(p, s) for s in noms}  # statu quo : repère de la baisse de l'écart de taux
     if hasattr(programme, "entrees"):
-        ent = programme.entrees(p, scenarios)
-        out = {s: trajectoire(p, s, ent[s].mesures, ent[s].contexte, ent[s].dynamiques, ent[s].regle) for s in noms}
-        avec_regle = [s for s in noms if ent[s].regle is not None]
-        if avec_regle:
-            # le programme peut fournir ses entrées sans règle (ce qui dépend de la règle ailleurs que dans ses leviers
-            # change aussi) ; sinon : mêmes entrées, dynamiques neuves, règle ignorée
-            if not contrefactuel:
-                neuf = {}
-            elif hasattr(programme, "entrees_sans_regle"):
-                neuf = programme.entrees_sans_regle(p, scenarios)
-            else:
-                neuf = programme.entrees(p, scenarios)
-            for s in avec_regle:
-                sans = trajectoire(p, s, neuf[s].mesures, neuf[s].contexte, neuf[s].dynamiques) if contrefactuel else None
+        def fabrique(s, source, avec_regle=True):
+            def f():
+                e = source(p, (s,))[s]
+                return e.mesures, e.contexte, e.dynamiques, (e.regle if avec_regle else None)
+            return f
+        avec_regle = {s for s in noms if programme.entrees(p, (s,))[s].regle is not None}
+        out = {s: _deux_passes(p, s, fabrique(s, programme.entrees), ref[s]) for s in noms}
+        # le programme peut fournir ses entrées sans règle (ce qui dépend de la règle ailleurs que dans ses leviers
+        # change aussi) ; sinon : mêmes entrées, dynamiques neuves, règle ignorée
+        source = getattr(programme, "entrees_sans_regle", programme.entrees)
+        for s in noms:
+            if s in avec_regle:
+                sans = _deux_passes(p, s, fabrique(s, source, avec_regle=False), ref[s]) if contrefactuel else None
                 for t, c in out[s].items():
                     c["sans_regle"] = {k: sans[t][k] for k in CLES_SANS_REGLE} if sans else None
                     c["deficit_sans_regle"] = sans[t]["deficit"] if sans else None
         return out
     mes, ctx = programme.mesures(p), programme.contexte(p)
-    return {s: trajectoire(p, s, mes.get(s), ctx.get(s)) for s in noms}
+    return {s: _deux_passes(p, s, lambda s=s: (mes.get(s), ctx.get(s), (), None), ref[s]) for s in noms}
 
 
 def resultats(p: Parametres | None = None, scenarios=None) -> dict[str, dict[int, dict]]:

@@ -47,14 +47,30 @@ def test_fraude_tva_et_productivite():
     assert r[2050]["deficit"] < BASE[2050]["deficit"]
 
 
-def test_ecole_ia_et_ecart_de_taux():
+def test_ecole_et_ia():
     prog = _programme({"ecole": {"niveau_eleves": {s: 0.2 for s in PAR}, "debut": 2035, "annees": 20},
-                       "adoption_ia": {"part": {s: 0.1 for s in PAR}},
-                       "baisse_ecart_taux": {"baisse": {"crise": 0, "prudent": 0.002, "median": 0.002, "optimiste": 0.004}, "annees": 8}})
+                       "adoption_ia": {"part": {s: 0.1 for s in PAR}}})
     r = noyau.simuler(P, prog, scenarios=("prudent",))["prudent"]
     assert r[2034]["pib"] > BASE[2034]["pib"] and r[2060]["pib"] > r[2034]["pib"] / BASE[2034]["pib"] * BASE[2060]["pib"]
-    assert r[2029]["taux_apparent"] == pytest.approx(BASE[2029]["taux_apparent"])
-    assert r[2040]["taux_apparent"] < BASE[2040]["taux_apparent"]
+
+
+def test_baisse_de_l_ecart_de_taux_gagnee_par_le_resultat():
+    """Règle commune : la baisse suit les années où le déficit du programme est sous celui du statu quo ; nulle en
+    crise et au prudent (barème), nulle pour le statu quo ; Écologie de droite la gagne dès 2030 au médian."""
+    from moteur import statu_quo as sq
+    ref = {t: {"deficit": 5.0} for t in ANNEES}
+    mieux = {t: {"deficit": 4.0 if t >= 2033 else 6.0} for t in ANNEES}
+    b = noyau.baisse_ecart_taux(P, "median", mieux, ref)
+    bareme, duree = P.val("macro.baisse_spread", "median"), P.val("macro.annees_baisse_spread")
+    assert b[2033] == 0 and b[2034] == pytest.approx(-bareme / duree) and b[2073] == pytest.approx(-bareme)
+    assert noyau.baisse_ecart_taux(P, "median", ref, ref) is None
+    assert noyau.baisse_ecart_taux(P, "prudent", mieux, ref) is None
+    vide = noyau.simuler(P, scenarios=("median",))["median"]
+    assert all("baisse_ecart_taux" not in vide[t] for t in ANNEES)
+    assert all(vide[t]["deficit"] == sq.simuler(P)["median"][t]["deficit"] for t in ANNEES)
+    edd = noyau.resultats(P, ("median",))["median"]
+    assert edd[2029]["baisse_ecart_taux"] == 0 and edd[2030]["baisse_ecart_taux"] == pytest.approx(bareme / duree)
+    assert edd[2040]["baisse_ecart_taux"] == pytest.approx(bareme)
 
 
 def test_regle_de_trajectoire_declaree():

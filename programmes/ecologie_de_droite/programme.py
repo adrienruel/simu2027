@@ -790,9 +790,8 @@ class EcologieDeDroite:
             demploi = {t: sum(canaux[t].values()) for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
                     for t in ANNEES}
+            # baisse de l'écart de taux : plus ici ; règle commune du noyau, gagnée par le résultat (12/11/2026)
             ctx = {"pib": pib, "inflation": {t: v for t, v in serie(q, jeu).items() if t in ANNEES},
-                   "taux_supplementaire": {t: -q.val("macro.baisse_spread", jeu) * min(1.0, max(0, t - 2029) / q.val("macro.annees_baisse_spread"))
-                                           for t in ANNEES},
                    "chomage": chom, "dette_depart": dette_fin_2028(q),
                    "emploi": {t: e[t]["emploi"] + demploi[t] for t in ANNEES}, "emplois_canaux": canaux}
             if self.energie:

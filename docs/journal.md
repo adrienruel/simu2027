@@ -936,3 +936,24 @@ Recettes en plus en 2050 : 0,6 Md€ au prudent, 5,3 au médian, 42,7 à l'optim
   les inventer reviendrait à saisir une économie annoncée, ce que la règle commune interdit.
 
 Limite du barème : il ne distingue pas un plan de 200 Md€ d'une mesure non chiffrée. À affiner mesure par mesure.
+
+## 12 novembre 2026 (suite) — Arbitrages d'Adrien sur l'équité entre programmes
+
+Réponses d'Adrien aux huit questions ouvertes :
+1. **Productivité** (arbitrage laissé à Claude) : aucun autre programme pour l'instant. Elle reste propre à Écologie de
+   droite et signalée comme telle : dire quels programmes ont un ensemble de réformes structurelles qui la justifie
+   est un jugement politique, sans critère mécanique. Le canal reste ouvert (`<nom>_canaux.productivite`).
+2. **Baisse de l'écart de taux : sur le résultat, pour tous**, Écologie de droite comprise. Ce n'est plus un canal
+   déclaré ni un élément du contexte d'Écologie de droite : `noyau.baisse_ecart_taux`. Chaque année où le déficit du
+   programme est sous celui du statu quo compte pour une année de crédibilité ; la baisse (macro.baisse_spread :
+   0 en crise et au prudent, 20 points de base au médian, 40 à l'optimiste) est entière au bout de 8 années acquises.
+   Deux passages par scénario (le premier donne les années acquises). Une année acquise ne se perd pas (limite).
+   Résultat : Écologie de droite inchangé (son déficit est sous le statu quo chaque année). Au médian, 2073 :
+   Bertrand, Philippe, Retailleau 20 pb, Tondelier 5 pb ; à l'optimiste : Attal, Bertrand, Lisnard, Philippe,
+   Retailleau, Tondelier, Zemmour 40 pb. Aucune baisse : Arthaud, Glucksmann, Le Pen, Mélenchon, Roussel.
+3. **Règle de trajectoire** : pas de règle pour un programme tant qu'il ne nomme pas ses leviers.
+4. **Liste des programmes par canal** (IA, école) : Adrien donnera ses corrections.
+5. **Seuil de la hausse de la déduction de l'IS** : inchangé (déficit de l'année avant les leviers de la règle).
+6. **Registre par scénario** : plus tard.
+7. **Statu quo après 2050** : laissé en l'état.
+8. **Sorties du comparateur** : régénérées.
