@@ -1,0 +1,70 @@
+# Montants annoncés par les candidats, et jamais repris dans le chiffrage (règle d'Adrien) : comparaison seulement.
+#
+# Lu par outils/export_comparaison.py (sorties/comparaison_annonces.csv), jamais par le moteur : ce fichier ne change
+# aucun résultat. Pour chaque annonce, le comparateur met en regard ce que le modèle retient en 2032 (fin du
+# quinquennat), dans chaque scénario :
+# - type « economies » : économies de dépense d'ensemble annoncées ; le modèle retient les économies de dépense
+#   nommées et chiffrées, plus l'enveloppe des économies non détaillées déduite domaine par domaine
+#   (<nom>_enveloppe dans les paramètres du programme) ;
+# - type « mesures » : recette ou économie annoncée pour des mesures précises ; le modèle retient la somme des lignes
+#   dont l'identifiant commence par l'un des préfixes donnés (effets de bord compris, comme les prélèvements sur les
+#   rémunérations publiques).
+# Montants en Md€ par an, signe + : améliore le solde. Les annonces sont en euros courants de leur date (≈ 2026-2027),
+# le modèle en euros de 2026 : écart de quelques pour cent, négligé.
+# Un programme absent de ce fichier n'a pas annoncé de montant d'ensemble (Mélenchon, Arthaud, Écologie de droite).
+
+annonces:
+- programme: philippe
+  libelle: "Économies pour ramener le déficit à 2 % du PIB"
+  type: economies
+  montant: 72
+  source: "Site (« Pour une France plus prospère ») : déficit de plus de 5 % à 2 % du PIB, ≈ 2,25 points de PIB"
+- programme: attal
+  libelle: "150 Md€ d'économies sur le quinquennat"
+  type: economies
+  montant: 150
+  source: "Lettre aux Français sur les finances publiques (15/10/2026)"
+- programme: retailleau
+  libelle: "Plan de 197 Md€ d'économies d'ici 2032"
+  type: economies
+  montant: 197
+  source: "Public Sénat (12/10/2026) : 96 Md€ sur l'État, 91 sur la sphère sociale, 10 sur les collectivités"
+- programme: lisnard
+  libelle: "Au moins 200 Md€ de dépense en moins"
+  type: economies
+  montant: 200
+  source: "Fiche « Questions » (03/10/2026) : 80 Md€ la première année, puis au moins 200 Md€"
+- programme: le_pen
+  libelle: "140 Md€ d'économies nettes en 2032"
+  type: economies
+  montant: 140
+  source: "Contre-budget du 6 octobre 2026 (Public Sénat, AFP)"
+- programme: bertrand
+  libelle: "20 Md€ d'économies par an pendant cinq ans"
+  type: economies
+  montant: 100
+  source: "L'Opinion (19/08/2026)"
+- programme: zemmour
+  libelle: "Plan de Sarah Knafo : « 140 Md€ par an au minimum »"
+  type: mesures
+  prefixes: ["ZEM-KNA-"]
+  montant: 140
+  source: "budget2027.fr (24 mesures)"
+- programme: tondelier
+  libelle: "Successions : ≈ 15 Md€ de recettes en régime de croisière"
+  type: mesures
+  prefixes: ["REC-04/05/06/07 "]
+  montant: 15
+  source: "Dossier de presse des Écologistes, p. 6"
+- programme: glucksmann
+  libelle: "Très gros héritages : ≈ 15 Md€ de recettes"
+  type: mesures
+  prefixes: ["GLU-FIS-01 "]
+  montant: 15
+  source: "Débat LCP du 05/10/2026"
+- programme: roussel
+  libelle: "Revenus financiers des banques et assurances : 60 Md€"
+  type: mesures
+  prefixes: ["PCF-FIS-04 "]
+  montant: 60
+  source: "pcf.fr, « 10 propositions »"

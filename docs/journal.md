@@ -966,3 +966,12 @@ ouverts : docs/programmes_novembre.md, section « Philippe : programme mis à jo
 Décisions d'Adrien du soir : capitalisation collective chiffrée en dépense (compensation annoncée non reprise), lecture
 CSG des heures sup confirmée, allocation familiale unique chiffrée sans coût constant (même section).
 Philippe, jours de carence : recalés sur la revue de dépenses IGF-Igas (juillet 2024, 289 M€ pour toute la fonction publique, 112 M€ pour l'État), répartis entre État, collectivités et hôpitaux, plus les arrêts évités dans le privé ; l'ancien paramètre (0,5 Md€ sur l'État seul) était trop haut.
+
+## 12 novembre 2026 (suite) — Annonces des candidats contre le chiffrage retenu
+
+Demande d'Adrien : rendre visible que la règle (on ne reprend jamais les montants annoncés) mesure ce qui est démontré,
+pas ce qui est impossible. programmes/annonces.yaml liste les annonces (économies d'ensemble ou recettes de mesures
+précises), lu seulement par outils/export_comparaison.py : sorties/comparaison_annonces.csv met en regard, en 2032 et
+par scénario, l'annonce et ce que retient le modèle (économies nommées plus enveloppe, ou somme des lignes de la mesure),
+l'écart en points de PIB et le déficit si l'annonce était tenue (statique). Aucun résultat du modèle ne change.
+Comparateur : phrase de méthode dans l'en-tête et tableau « Ce qu'annoncent les candidats, ce que retient le modèle ».

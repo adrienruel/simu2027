@@ -7,11 +7,15 @@ ici.
 - comparaison_trajectoire.csv : déficit, dette, solde primaire, intérêts, recettes, dépenses primaires… par
   programme, scénario et année ;
 - comparaison_ecarts.csv : écart avec le statu quo par grand poste (+ = améliore le solde), Md€ de 2026 et % du PIB ;
-- comparaison_mesures.csv : chaque mesure, à quelques années (même signe).
+- comparaison_mesures.csv : chaque mesure, à quelques années (même signe) ;
+- comparaison_annonces.csv : montants annoncés par les candidats (programmes/annonces.yaml, jamais repris) et ce que
+  le modèle retient en 2032, par scénario.
 """
 from __future__ import annotations
 
 import csv
+
+import yaml
 
 from moteur import noyau
 from moteur import statu_quo as sq
@@ -28,6 +32,7 @@ GROUPES = {
     "etat_missions": "État et défense", "defense_ue": "État et défense",
     "collectivites": "Collectivités", "investissement": "Investissement", "autres": "Autres dépenses",
 }
+ANNEE_ANNONCES = 2032  # fin du quinquennat : horizon des annonces
 NATURES_CACHEES = ("detail", "controle", "physique")  # sommes nulles ou sans montant : rien à montrer
 
 
@@ -94,7 +99,8 @@ def _ecrire(nom: str, lignes: list[dict]) -> None:
 def main() -> None:
     p = Parametres()
     base = sq.simuler(p)
-    traj, ecarts, mesures, ecologie, emploi_canaux, ecologie_mesures = [], [], [], [], [], []
+    traj, ecarts, mesures, ecologie, emploi_canaux, ecologie_mesures, annonces = [], [], [], [], [], [], []
+    liste_annonces = yaml.safe_load((RACINE / "programmes" / "annonces.yaml").read_text(encoding="utf-8"))["annonces"]
     for nom in noyau.programmes_disponibles():
         prog = noyau.charger(nom)
         lib = getattr(prog, "libelle", nom)
@@ -146,6 +152,22 @@ def main() -> None:
                 for g, val in par.items():
                     ecarts.append({"cle": f"{lib}|{SCENARIOS[s]}|{t}|{g}", "programme": lib, "scenario": SCENARIOS[s], "annee": t, "groupe": g,
                                    "md": round(val, 2), "part_pib": round(val / y * 100, 3)})
+            # annonces des candidats contre ce que retient le modèle (comparaison seulement)
+            t_a = ANNEE_ANNONCES
+            for k, a in enumerate(x for x in liste_annonces if x["programme"] == nom):
+                if a["type"] == "economies":
+                    det = getattr(prog, "enveloppe_detail", {}).get((id(p), s), {})
+                    modele = det.get("nommees", 0.0) + det.get("retenu", 0.0)
+                else:
+                    modele = sum(signe(m) * m.valeurs.get(t_a, 0.0) for m in ms
+                                 if m.nature != "effet_macro" and any(m.nom.startswith(pr) for pr in a["prefixes"]))
+                y = v[t_a]["pib"]
+                annonces.append({"cle": f"{lib}|{SCENARIOS[s]}|{k}", "programme": lib, "scenario": SCENARIOS[s],
+                                 "annee": t_a, "annonce": a["libelle"], "type": a["type"],
+                                 "annonce_md": round(float(a["montant"]), 1), "modele_md": round(modele, 1),
+                                 "ecart_md": round(float(a["montant"]) - modele, 1),
+                                 "ecart_pib": round((float(a["montant"]) - modele) / y * 100, 3),
+                                 "deficit": round(v[t_a]["deficit"], 3), "source": a["source"]})
             for i, m in enumerate(ms):
                 if signe(m) == 0:
                     continue
@@ -170,7 +192,8 @@ def main() -> None:
     _ecrire("comparaison_ecologie_mesures.csv", ecologie_mesures)
     _ecrire("comparaison_ecarts.csv", ecarts)
     _ecrire("comparaison_mesures.csv", mesures)
-    print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv, comparaison_ecologie.csv, comparaison_emploi_canaux.csv, comparaison_ecologie_mesures.csv")
+    _ecrire("comparaison_annonces.csv", annonces)
+    print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv, comparaison_ecologie.csv, comparaison_emploi_canaux.csv, comparaison_ecologie_mesures.csv, comparaison_annonces.csv")
 
 
 if __name__ == "__main__":
