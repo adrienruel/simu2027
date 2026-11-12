@@ -384,7 +384,7 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
                 out["actifs"][t] += part_inactifs * serie[t]
         out["detail"][f"{i}:{inc}" if inc else i] = {"points_pib": pts, "effet_pib_pct": effet}
     part_rec = {t: rec[max(t, 2029)] / y[max(t, 2029)] for t in annees}
-    div = sq.dividende_productivite(p, s)
+    div = sq.dividende_programme(p, s, {t: dpib_productivite[t] for t in ANNEES})  # profil du programme (A1)
     out["mesure"] = Mesure("Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)", "recettes",
                            {t: (out["dpib"][t] - dpib_productivite[t]) * part_rec[t]
                             + dpib_productivite[t] * div[max(t, 2029)] for t in annees}, nature="effet_macro")

@@ -231,6 +231,13 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         nominal = (min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + ecart_taux_borne(p, prime, sup.get(t, 0.0))
                    + ecart_scen * min(1.0, (t - 2029) / n_lt))
         interets_reels = (nominal - infl[t]) * dette_prec
+        # emprunt aux ménages déjà dans la dette (phase A6, DÉCISION d'Adrien du 12/11/2026) : ce que l'État leur doit
+        # porte le rendement servi (taux_quasi_dette, réel), pas le taux de la dette de marché. Écart compté en intérêts
+        interets_menages = 0.0
+        for d in dynamiques:
+            if getattr(d, "quasi_dette_dans_dette", False) and hasattr(d, "taux_quasi_dette"):
+                interets_menages += (d.taux_quasi_dette() - (nominal - infl[t])) * getattr(d, "quasi_dette_debut", 0.0)
+        interets_reels += interets_menages
         detail_regle = None
         sans_regle = None
         if regle is not None:
@@ -245,6 +252,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         out[t] = {
             "pib": y[t], "recettes": rec, "depenses_primaires": primaire, "blocs": bl,
             "interets_reels": interets_reels, "charge_dette": interets_reels + infl[t] * dette_prec,
+            "interets_menages": interets_menages,
             "taux_apparent": nominal, "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
             "participations": part, "deficit": -maastricht * 100, "dette_pib": dette / y[t] * 100,
             "chomage": chom[t] + flux["chomage"], "inflation": infl[t] * 100, "emploi": emploi[t] + flux["emploi"],
@@ -309,18 +317,28 @@ def _appliquer_regle(regle: Regle, t: int, etat: dict, avant: float, pib_t: floa
 def baisse_ecart_taux(p: Parametres, s: str, res: dict[int, dict], ref: dict[int, dict]) -> dict[int, float] | None:
     """Baisse de l'écart de taux gagnée par le résultat, pour tout programme (DÉCISION d'Adrien du 12/11/2026).
 
-    Chaque année où le déficit du programme est sous celui du statu quo compte pour une année de crédibilité ; la
-    baisse du taux de la dette (macro.baisse_spread, par scénario : nulle en crise et au prudent) monte avec ces
-    années, entière au bout de macro.annees_baisse_spread. L'année t ne voit que les années passées. None : aucune
-    baisse (barème nul ou déficit jamais sous le statu quo)."""
+    Critère absolu (phase A5, relecture neutre n° 2, point 6 ; DÉCISION d'Adrien du 12/11/2026, soir) : une année
+    compte quand le ratio de dette publique baisse (dette / PIB sous celui de l'année d'avant), c'est-à-dire quand le
+    solde dépasse celui qui stabilise la dette avec la croissance du scénario. Une année où la dette remonte en fait
+    perdre une. Avant : il suffisait d'être sous le déficit du statu quo, qui diverge (une dette à 459 % du PIB
+    gardait sa prime de crédibilité). La baisse du taux de la dette (macro.baisse_spread, par scénario : nulle en
+    crise et au prudent) monte avec les années acquises, entière au bout de macro.annees_baisse_spread. L'année t ne
+    voit que les années passées. `ref` (statu quo) n'est plus lu ; gardé pour l'appel. None : aucune baisse (barème
+    nul ou dette jamais en baisse)."""
     bareme, duree = p.val("macro.baisse_spread", s), p.val("macro.annees_baisse_spread")
     if not bareme:
         return None
-    acquises, out = 0, {}
+    acquises, jamais, out, prec = 0, True, {}, None
     for t in ANNEES:
         out[t] = -bareme * min(1.0, acquises / duree)
-        acquises += res[t]["deficit"] < ref[t]["deficit"] - 1e-9
-    return out if acquises else None
+        r = res[t]["dette_pib"]
+        if prec is not None:
+            if r < prec - 1e-9:
+                acquises, jamais = min(duree, acquises + 1), False
+            else:
+                acquises = max(0, acquises - 1)
+        prec = r
+    return None if jamais else out
 
 
 def _deux_passes(p: Parametres, s: str, fabrique, ref: dict[int, dict]) -> dict[int, dict]:

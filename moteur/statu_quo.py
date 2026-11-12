@@ -147,6 +147,36 @@ def dividende_productivite(p: Parametres, s: str) -> dict[int, float]:
     return out
 
 
+def dividende_programme(p: Parametres, s: str, dpib: dict[int, float]) -> dict[int, float]:
+    """Part au solde primaire d'un PIB en plus dû à la productivité, calculée sur le profil propre au programme (phase
+    A1 du 12/11/2026) : le noyau relève la productivité du statu quo de dpib / PIB chaque année (statu_quo.salaires),
+    recalcule recettes et dépenses indexées (santé, prestations, collectivités, missions, pensions avec le décalage
+    des carrières…) et rend (Δ recettes − Δ dépenses) / Δ PIB, année par année. Remplace la moyenne commune
+    (dividende_productivite), calculée sur un profil type (+1 % en dix ans à partir de 2029) : le dividende dépend de
+    l'âge du gain (les dépenses indexées et les pensions le rattrapent avec retard). Années sans gain : dividende
+    commun (sans effet)."""
+    y0 = pib(p, s)
+    choc = {t: dpib.get(t, 0.0) / y0[t] for t in ANNEES}
+    if not any(abs(v) > 1e-12 for v in choc.values()):
+        return dividende_productivite(p, s)
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("sq_dividende_prog", s, tuple(round(choc[t], 12) for t in ANNEES))
+    if cle in cache:
+        return cache[cle]
+    q = p.avec({})
+    q._choc_productivite = choc
+    r0, b0 = recettes(p, s), blocs(p, s)
+    y1, r1, b1 = pib(q, s), recettes(q, s), blocs(q, s)
+    commun = dividende_productivite(p, s)
+    out = {}
+    for t in ANNEES:
+        dy = y1[t] - y0[t]
+        out[t] = (((r1[t] - r0[t]) - (sum(b1[t].values()) - sum(b0[t].values()))) / dy
+                  if abs(dy) > 1e-6 else commun[t])
+    cache[cle] = out
+    return out
+
+
 def pib(p: Parametres, s: str) -> dict[int, float]:
     """PIB (Md€ de 2026) : économie de 2026 placée en 2029 × productivité × personnes en emploi."""
     e, w, base = effectifs(p, s), salaires(p, s), pib_2026(p)

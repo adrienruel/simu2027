@@ -116,7 +116,10 @@ def flux_investissement(p: Parametres, s: str, m, t_coef: float, par_taille: boo
         ta = x["taux_marginal_is_actuel"]
         cc = (((1 - tn * z) / (1 - tn)) / ((1 - ta * z) / (1 - ta)) - 1
               - m("reduction_cout_capital_autres", s) * x["production_relative"])
-        f_ = -m("elasticite_invest", s) * x["elasticite_normee"] * (cc - t_coef) * x["part_investissement"] * inv
+        # phase A4 : coût du capital en hausse (investissement en moins) → scénario miroir, comme le canal d'offre
+        s_el = s if (cc - t_coef) <= 0 else {"crise": "optimiste", "prudent": "median", "median": "prudent",
+                                              "optimiste": "crise"}.get(s, s)
+        f_ = -m("elasticite_invest", s_el) * x["elasticite_normee"] * (cc - t_coef) * x["part_investissement"] * inv
         total += f_
         detail[x["taille"]] = f_
     return detail if par_taille else total

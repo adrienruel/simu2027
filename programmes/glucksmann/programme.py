@@ -82,7 +82,7 @@ class Glucksmann(ProgrammeSimple):
             return min(1.0, max(0.0, (t - 2027) / 3))
         out.append(Mesure(f"{nom} : emplois perdus ({emplois / 1e3:.0f} 000)", "recettes",
                           {**{t: -perte * m3(t) for t in ANNEES_AVANT},
-                           **{t: -perte * m3(t) * ip[t] for t in ANNEES}}, nature="effet_macro"))
+                           **{t: -perte * m3(t) * idx["salaire"][t] for t in ANNEES}}, nature="effet_macro"))
         canaux["*SMIC à 1 600 € net : emplois perdus"] = {t: -emplois * m3(t) for t in ANNEES}
 
         # GLU-FIS-01b : CSG sur les salaires abaissée de 15 Md€ (fraction de la suppression totale)

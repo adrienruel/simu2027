@@ -204,8 +204,11 @@ class Tondelier:
         parts = self.v("emploi.postes")
         ev = sq._v(p, "emploi_public.eviction_privee", s)
         postes = {t: 0.0 for t in ANNEES}
+        cout_postes = {t: 0.0 for t in (2027, 2028, *ANNEES)}  # dépense des postes (Md€), PIB non marchand (A3)
         for m in liste:
             if m.note in parts:
+                for t in cout_postes:
+                    cout_postes[t] += parts[m.note] * m.valeurs.get(t, 0.0)
                 for t in ANNEES:
                     postes[t] += parts[m.note] * m.valeurs.get(t, 0.0) * 1e9 / (cout * w[t] / w[2029])
         g = self.v("emploi.garantie_emploi")
@@ -227,7 +230,8 @@ class Tondelier:
             Mesure("Emploi : emplois privés évincés par les postes publics", "recettes",
                    {t: -ev * postes[t] * valeur_emploi / 1e9 * ip[t] for t in ANNEES}, nature="effet_macro"),
         ]
-        return {"canaux": canaux, "chomeurs": chomeurs, "actifs": actifs, "mesures": mesures}
+        return {"canaux": canaux, "chomeurs": chomeurs, "actifs": actifs, "mesures": mesures, "cout_postes": cout_postes,
+                "evinces": {t: ev * postes[t] for t in ANNEES}}
 
     def ecologie(self, p: Parametres, s: str) -> list[Mesure]:
         """Effets physiques des mesures écologiques (groupe tondelier_ecologie) : une mesure sans montant chacune,
@@ -308,6 +312,8 @@ class Tondelier:
             # PRE-01 : SMIC à 2 000 €
             montee = {2027: 0.5, 2028: 1.0}
             ip = idx["pib"]
+            w_ = sq.salaires(p, s)
+            ws = {t: w_[t] / w_[2029] for t in ANNEES}  # valeur d'un emploi : salaire par emploi (phase A2)
 
             def ser(v, montee_=montee):
                 return {**{t: v * montee_[t] for t in ANNEES_AVANT}, **{t: v * ip[t] for t in ANNEES}}
@@ -320,7 +326,7 @@ class Tondelier:
             montee_emploi = {2027: 1 / 3, 2028: 2 / 3}
             perte = emplois * smic["perte_par_emploi"] / 1e9
             pe = {**{t: -perte * montee_emploi[t] for t in ANNEES_AVANT},
-                  **{t: -perte * min(1.0, (t - 2026) / 3) * ip[t] for t in ANNEES}}
+                  **{t: -perte * min(1.0, (t - 2026) / 3) * ws[t] for t in ANNEES}}
             liste.append(Mesure(f"PRE-01 — SMIC à 2 000 € : emplois perdus ({emplois/1e3:.0f} 000)", "recettes", pe, nature="effet_macro"))
             # effet macroéconomique : impulsion budgétaire nette
             annees = (*ANNEES_AVANT, *ANNEES)
@@ -339,7 +345,8 @@ class Tondelier:
                 liste.append(Mesure("Effet macro : multiplicateur sur l'impulsion budgétaire des mesures", "recettes",
                                     {t: dpib[t] * part_rec[t] for t in annees}, nature="effet_macro"))
             # PIB : multiplicateur et emplois perdus (valeur ajoutée ≈ coût de l'emploi × 1,25)
-            pib_emplois = {t: -emplois * min(1.0, (t - 2026) / 3) * smic["cout_moyen_emploi_perdu"] * 1.25 / 1e9 * ip[t] for t in ANNEES}
+            va_emploi = smic["cout_moyen_emploi_perdu"] * 1.25
+            pib_emplois = {t: -emplois * min(1.0, (t - 2026) / 3) * va_emploi / 1e9 * ws[t] for t in ANNEES}
             pib = {t: y[t] + (dpib[t] if self.v("macro.multiplicateur_actif") else 0.0) + pib_emplois[t] for t in ANNEES}
             e = sq.effectifs(p, s)
             # conjoncture : l'impulsion budgétaire change l'emploi comme l'ajustement du modèle (même règle que le moteur
@@ -348,8 +355,15 @@ class Tondelier:
             conj = {t: (dpib[t] if self.v("macro.multiplicateur_actif") else 0.0) / y[t] * k_emp * e[t]["emploi"] for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] + emplois * min(1.0, (t - 2026) / 3) - conj[t]) / (e[t]["emploi"] + e[t]["chomeurs"]) * 100 for t in ANNEES}
             # emploi : postes publics, garantie d'emploi, assurance chômage (tondelier_emploi)
-            em = self.emploi_mesures(p, s, liste, e, smic["perte_par_emploi"], ip)
+            em = self.emploi_mesures(p, s, liste, e, smic["perte_par_emploi"], ws)
             liste.extend(em["mesures"])
+            # phase A3 (12/11/2026), même règle que ProgrammeSimple : les postes publics entrent au PIB à leur coût une
+            # fois le multiplicateur éteint ; les emplois privés évincés en sortent à leur valeur ajoutée
+            from moteur.programme_simple import production_non_marchande
+            npm = (production_non_marchande(p, s, em["cout_postes"], annees) if self.v("macro.multiplicateur_actif")
+                   else em["cout_postes"])
+            for t in ANNEES:
+                pib[t] += npm[t] - em["evinces"][t] * va_emploi / 1e9 * ws[t]
             chom = {t: chom[t] + em["chomeurs"][t] / (e[t]["emploi"] + e[t]["chomeurs"] + em["actifs"][t]) * 100
                     for t in ANNEES}
             # canal d'offre commun (moteur/offre.py) : effet durable des impôts et des transferts

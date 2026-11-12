@@ -309,6 +309,15 @@ class Effets:
             # démographie : budget calculé sur la population du prudent
             dp, ds = self.dp[t], self.ds[t]
             solde["demographie"][t] = sum(b * (ds[self.cle_indice[k]] - dp[self.cle_indice[k]]) for k, b in self.bases_demo[t].items())
+        # phase A1 (12/11/2026) : dividende recalculé par le noyau sur le profil de gain du programme (réformes, IA,
+        # école réunies), comme pour les autres programmes (statu_quo.dividende_programme)
+        dpib_prod = {t: pib["productivite"][t] + pib["ia_adoption"][t] + pib["ecole"][t] for t in ANNEES}
+        div_prog = sq.dividende_programme(self.p, self.s, dpib_prod)
+        for c in ("productivite", "ia_adoption", "ecole"):
+            for t in ANNEES:
+                if self.div_sq[t]:
+                    solde[c][t] *= div_prog[t] / self.div_sq[t]
+        self.div_programme = div_prog
         self.pib, self.solde, self.emplois = pib, solde, emplois
 
     # ------------------------------------------------------------------------------------------ mesures
@@ -447,6 +456,7 @@ class Fonds:
         sortie = 0.0
         self.paiement = 0.0
         if self.restit["active"]:
+            self.quasi_dette_debut = sum(self.creances.values())  # stock dû en début d'année (intérêts, noyau)
             for g in list(self.creances):
                 self.creances[g] *= 1 + q.val("epargne.rendement_fonds")
             if t >= self.restit["debut"]:
@@ -502,6 +512,11 @@ class Fonds:
             ratio = etat["dette"] / etat["pib_t"]
             self.part_etr = max(self.part_etr, min(etr["plafond"], etr["depart"] + (etr["plafond"] - etr["depart"])
                                                    * max(0, (etr["dette_debut"] - ratio) / (etr["dette_debut"] - etr["dette_plafond"]))))
+
+    def taux_quasi_dette(self) -> float:
+        """Rendement réel servi sur les créances des ménages (epargne.rendement_fonds) : le noyau compte en intérêts
+        l'écart avec le taux réel de la dette de marché sur le stock de début d'année (phase A6 du 12/11/2026)."""
+        return self.E.q.val("epargne.rendement_fonds")
 
     def quasi_dette(self) -> float:
         """Créances des contributions prises par la règle, dues aux ménages à 67 ans avec le rendement du fonds (Md€,

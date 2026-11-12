@@ -23,7 +23,7 @@ Formules (celles d'Écologie de droite, programmes/ecologie_de_droite/effets.py)
   productivité des réformes (le canal « productivite » libre n'est plus utilisé par aucun programme) ;
 - adoption de l'IA : gain de productivité de l'IA du statu quo (macro.ia_productivite) × part, cumulé ;
 - école : niveau des élèves × macro.croissance_par_ecart_type, monté linéairement, cumulé ;
-- le PIB en plus rapporte au solde le dividende de productivité du statu quo (statu_quo.dividende_productivite :
+- le PIB en plus rapporte au solde le dividende de productivité du statu quo (statu_quo.dividende_programme, sur le profil du programme depuis la phase A1 ; avant, statu_quo.dividende_productivite :
   recettes en plus moins dépenses indexées en plus, ≈ 12 % après dix ans), comme pour tous les gains de productivité ;
 - baisse de l'écart de taux : plus un canal déclaré ; règle commune du noyau, gagnée par le résultat (chaque année de
   déficit sous le statu quo compte : noyau.baisse_ecart_taux) ;
@@ -65,14 +65,16 @@ def effets(prog, p: Parametres, s: str) -> dict:
     y = sq.pib(p, s)
     # gains de productivité : ce qui reste au solde quand la productivité monte, dépenses indexées comprises
     # (statu_quo.dividende_productivite ; relecture neutre n° 2, point 1, décision d'Adrien du 12/11/2026)
-    dividende = sq.dividende_productivite(p, s)
+    # phase A1 : le dividende est recalculé par le noyau sur le profil de gain du programme (dividende_programme),
+    # une fois tous les canaux réunis ; chaque canal en reçoit sa part
     pib = {t: 0.0 for t in ANNEES}
     mesures: list[Mesure] = []
+    series: list[tuple[str, dict[int, float]]] = []
 
     def ajouter(nom: str, serie_pib: dict[int, float]) -> None:
         for t in ANNEES:
             pib[t] += serie_pib[t]
-        mesures.append(Mesure(f"Canal déclaré : {nom}", "recettes", {t: serie_pib[t] * dividende[t] for t in ANNEES}, "effet_macro"))
+        series.append((nom, serie_pib))
 
     if "fraude_tva" in d:
         x = d["fraude_tva"]
@@ -100,6 +102,11 @@ def effets(prog, p: Parametres, s: str) -> dict:
             r = (1 + r) * (1 + x["niveau_eleves"][s] * k * _montee(t, x["debut"], x["annees"])) - 1
             serie[t] = y[t] * r
         ajouter("école (niveau des élèves)", serie)
+    if series:
+        dividende = sq.dividende_programme(p, s, pib)
+        for nom, serie_pib in series:
+            mesures.append(Mesure(f"Canal déclaré : {nom}", "recettes", {t: serie_pib[t] * dividende[t] for t in ANNEES},
+                                  "effet_macro"))
     return {"mesures": mesures, "pib": pib, "taux_supplementaire": None}
 
 

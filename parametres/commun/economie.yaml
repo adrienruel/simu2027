@@ -301,9 +301,11 @@ macro:
     note_v235: "SOURCÉ : Acemoglu (2024) ≈ 0,07 point par an sur dix ans (prudent) ; Aghion et Bunel (2024) : 0,27 à 0,4 point selon les gains mesurés tâche par tâche (médian : 0,27), médiane de leur fourchette 0,68 point (optimiste), fourchette 0,07 à 1,24. Repères de la Commission de l’IA (2024) : électricité en Europe +1,3 point pendant dix ans, numérique aux États-Unis +0,8 point de 1995 à 2006. Le COR (0,7 %) ne compte pas cet effet à part. | v209 (22 octobre 2026), DEMANDE d’Adrien : compter la hausse de la demande d’IA due à la baisse des coûts. SOURCÉ : le coût d’une requête de niveau GPT-3.5 a été divisé par 280 entre novembre 2022 et octobre 2024 (Stanford, AI Index 2025) ; l’usage de l’IA par les entreprises françaises a triplé de 2023 à 2025 (Insee). L’estimation basse d’Acemoglu (0,07 point) suppose que seuls 23 % des tâches exposées sont rentables à automatiser au coût actuel (Svanberg et al., MIT, 2024). Ces auteurs montrent que si le coût des systèmes baisse de 50 % par an, la moitié des tâches devient rentable en trois ans ; s’il baisse de 10 % par an, moins de la moitié en 2042. Crise : baisse de 10 % par an, part rentable portée à ≈ un tiers en moyenne sur la décennie, soit 0,07 × 33 / 23 ≈ 0,10 point. Prudent : milieu entre crise et médian, 0,185 point (avant : 0,17). Médian et optimiste inchangés : Aghion et Bunel comptent déjà une diffusion large."
   elasticite_invest:
     source: "Encadrement : France, long terme : −0,24 (OFCE, 2026) à −0,37 (Mésange, 2017)"
-    valeur: {crise: 0.37, prudent: 0.335, median: 0.3, optimiste: 0.37}
+    valeur: {crise: 0.24, prudent: 0.3, median: 0.335, optimiste: 0.37}
+    v_avant_a4: {crise: 0.37, prudent: 0.335, median: 0.3, optimiste: 0.37}
     unite: sans_unite
     statut: HYPOTHESE
+    note: "Phase A4 (12/11/2026, relecture neutre n° 2, point 9) : série croissante, ordonnée pour une baisse d'impôt (la crise gagne le moins : bas de la fourchette de l'OFCE) ; une hausse prend le scénario miroir, dans le canal d'offre commun (moteur/offre.py) comme dans les cohortes d'entreprises d'Écologie de droite (moteur/entreprises_cellules.py, tranche par tranche selon le sens du coût du capital). Avant : 0,37 / 0,335 / 0,30 / 0,37, réglé pour la seule hausse d'IS d'Écologie de droite, qui rendait la crise aussi favorable que l'optimiste pour une baisse."
     note_v235: "SOURCÉ (v176) pour la France, long terme : −0,24 (OFCE, Daudignon, avril 2026, 1993-2023), −0,22 à −0,28 (Heyer, 2023), −0,3 (Ducoudré, Plane et Villemot, 2015), −0,37 (Bardaji et al., modèle Mésange, 2017). Prudent et optimiste : 0,37, le haut de la fourchette (le pire si le coût monte, le meilleur s’il baisse) ; médian : 0,3. Avant : 0,5 sans source, trop élevé. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : 0,37, haut de la fourchette sourcée (Mésange), le plus favorable quand le coût du capital baisse (avant : 0.335)."
   usure_capital:
     valeur: {crise: 0.1, prudent: 0.1, median: 0.1, optimiste: 0.1}
@@ -439,6 +441,13 @@ emploi:
     unite: sans_unite
     statut: HYPOTHESE
     note: "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rapportent moins) ; le coût moyen pour les emplois perdus par localisation (activités mobiles et rentables) ; le salaire médian pour les seniors. Règles : docs/bloc_emploi.md."
+  allocation_chomeur_evitee:
+    valeur: 9000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur : allocation moyenne d'un chômeur indemnisé ≈ 1 050 € par mois (Unédic), un sur deux indemnisé ; garantie d'autonomie pour une partie des autres"
+    note: "Dépense publique évitée quand un chômeur prend un emploi (ou en plus quand un salarié perd le sien), commune à tous les programmes depuis la phase A2 (12/11/2026, ProgrammeSimple.valeur_emploi_cellule). Suit le salaire moyen par emploi."
   emplois_par_milliard: {valeur: {prudent: null, crise: 12500, median: 18750, optimiste: 25000}, unite: sans_unite, statut: SOURCE, source: "Mésange 12 500 ; jusqu'à 25 000 au voisinage du SMIC (CAE n° 51)"}
   taux_marge_snf: {valeur: 0.322, unite: taux, statut: SOURCE, source: "Insee Première n° 2105 (comptes de la Nation 2025)"}
   impots_production_va: {valeur: 0.05, unite: taux, statut: HYPOTHESE}

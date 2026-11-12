@@ -55,15 +55,22 @@ def test_ecole_et_ia():
 
 
 def test_baisse_de_l_ecart_de_taux_gagnee_par_le_resultat():
-    """Règle commune : la baisse suit les années où le déficit du programme est sous celui du statu quo ; nulle en
-    crise et au prudent (barème), nulle pour le statu quo ; Écologie de droite la gagne dès 2030 au médian."""
+    """Règle commune (critère absolu, phase A5 du 12/11/2026) : la baisse suit les années où le ratio de dette baisse,
+    une année où il remonte en fait perdre une ; nulle en crise et au prudent (barème), nulle pour le statu quo ;
+    Écologie de droite la gagne dès 2030 au médian. Être sous le déficit du statu quo ne suffit plus."""
     from moteur import statu_quo as sq
-    ref = {t: {"deficit": 5.0} for t in ANNEES}
-    mieux = {t: {"deficit": 4.0 if t >= 2033 else 6.0} for t in ANNEES}
+    ref = {t: {"deficit": 9.0, "dette_pib": 100.0 + 5 * (t - 2029)} for t in ANNEES}
+    mieux = {t: {"deficit": 4.0, "dette_pib": 120.0 - (t - 2032) if t >= 2032 else 120.0} for t in ANNEES}
     b = noyau.baisse_ecart_taux(P, "median", mieux, ref)
     bareme, duree = P.val("macro.baisse_spread", "median"), P.val("macro.annees_baisse_spread")
     assert b[2033] == 0 and b[2034] == pytest.approx(-bareme / duree) and b[2073] == pytest.approx(-bareme)
-    assert noyau.baisse_ecart_taux(P, "median", ref, ref) is None
+    # sous le déficit du statu quo, mais dette qui monte : aucune baisse
+    diverge = {t: {"deficit": 8.0, "dette_pib": 100.0 + 4 * (t - 2029)} for t in ANNEES}
+    assert noyau.baisse_ecart_taux(P, "median", diverge, ref) is None
+    # dette en baisse puis en hausse : les années acquises se perdent
+    aller_retour = {t: {"deficit": 3.0, "dette_pib": 100.0 - min(t - 2029, 10) + 2 * max(0, t - 2039)} for t in ANNEES}
+    c = noyau.baisse_ecart_taux(P, "median", aller_retour, ref)
+    assert c[2040] == pytest.approx(-bareme * min(1.0, 10 / duree)) and c[2073] == 0
     assert noyau.baisse_ecart_taux(P, "prudent", mieux, ref) is None
     vide = noyau.simuler(P, scenarios=("median",))["median"]
     assert all("baisse_ecart_taux" not in vide[t] for t in ANNEES)

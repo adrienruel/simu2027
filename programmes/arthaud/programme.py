@@ -70,7 +70,7 @@ class Arthaud(ProgrammeSimple):
         m3 = {2027: 1 / 3, 2028: 2 / 3}
         out.append(Mesure(f"ART-ECO-01 — SMIC à 2 200 € net : emplois perdus ({emplois / 1e3:.0f} 000)", "recettes",
                           {**{t: -perte * m3[t] for t in ANNEES_AVANT},
-                           **{t: -perte * min(1.0, (t - 2026) / 3) * ip[t] for t in ANNEES}}, nature="effet_macro"))
+                           **{t: -perte * min(1.0, (t - 2026) / 3) * idx["salaire"][t] for t in ANNEES}}, nature="effet_macro"))
         perdus = {t: -emplois * min(1.0, (t - 2026) / 3) for t in ANNEES}
         # défense
         if self.v("defense.niveau_2026"):

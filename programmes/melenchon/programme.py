@@ -79,7 +79,7 @@ class Melenchon(ProgrammeSimple):
         m3 = {2027: 1 / 6, 2028: 1 / 2}  # montée en trois ans à partir de juillet 2027
         out.append(Mesure(f"{nom} : emplois perdus ({emplois / 1e3:.0f} 000)", "recettes",
                           {**{t: -perte * m3[t] for t in ANNEES_AVANT},
-                           **{t: -perte * min(1.0, (t - 2026.5) / 3) * ip[t] for t in ANNEES}}, nature="effet_macro"))
+                           **{t: -perte * min(1.0, (t - 2026.5) / 3) * idx["salaire"][t] for t in ANNEES}}, nature="effet_macro"))
         canaux["*SMIC à 1 700 € net : emplois perdus"] = {t: -emplois * min(1.0, (t - 2026.5) / 3) for t in ANNEES}
 
         # LFI-FP-01 : point d'indice +10 %

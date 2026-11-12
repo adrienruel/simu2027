@@ -60,3 +60,24 @@ def en_euros_2026(m: Montant, p: Parametres, nature: str) -> Montant:
         raise DoubleConversion(f"Montant déjà converti : {m}")
     return Montant(m.valeur * facteur(p, m.annee_euros, nature),
                    p.val("unites.annee_modele"), converti=True)
+
+
+def annonce_en_points_pib(p: Parametres, valeur_md: float, annee_euros: int, forme: str, pib_2029: float,
+                          montee: dict[int, float] | None = None) -> float:
+    """Annonce d'économies d'un candidat en points de PIB de 2029, rythme annuel à plein effet — en un seul endroit
+    (phase A8 du 12/11/2026, relecture neutre n° 2, point 11). forme : « niveau » (économie annuelle atteinte en fin
+    de quinquennat) ou « cumul » (somme des économies sur le quinquennat, comme Attal ou Bertrand) : le cumul est
+    ramené au niveau annuel par la somme de la montée (montee : {année: part du plein}, 2028 à 2032). Euros de 2027
+    ramenés à ceux de 2026 par l'inflation de 2027 (inflation.base). Ne sert que de plafond (jamais de chiffre retenu)."""
+    if forme not in ("niveau", "cumul"):
+        raise ValueError(f"Forme d'annonce inconnue : {forme}")
+    cible = p.val("unites.annee_modele")
+    v = valeur_md
+    if annee_euros == cible + 1:
+        v /= 1 + p.val("inflation.base")[str(annee_euros)]
+    elif annee_euros != cible:
+        raise NotImplementedError(f"Annonce en euros de {annee_euros}")
+    if forme == "cumul":
+        poids = sum((montee or {}).get(t, 0.0) for t in range(2028, 2033)) or 5.0
+        v /= poids
+    return v / pib_2029 * 100

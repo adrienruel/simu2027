@@ -85,7 +85,7 @@ class Roussel(ProgrammeSimple):
         def m3(t):  # montée en trois ans à partir de 2028
             return min(1.0, max(0.0, (t - 2027) / 3))
         out.append(Mesure(f"{nom} : emplois perdus ({emplois / 1e3:.0f} 000)", "recettes",
-                          {2027: 0.0, 2028: -perte * m3(2028), **{t: -perte * m3(t) * ip[t] for t in ANNEES}},
+                          {2027: 0.0, 2028: -perte * m3(2028), **{t: -perte * m3(t) * idx["salaire"][t] for t in ANNEES}},
                           nature="effet_macro"))
         canaux["*SMIC à 1 700 € net : emplois perdus"] = {t: -emplois * m3(t) for t in ANNEES}
 

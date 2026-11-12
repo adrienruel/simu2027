@@ -312,6 +312,11 @@ attal_mesures:
     source: "Encadrement : aide à l'embauche d'alternants (≈ 6 000 € par contrat) pour une partie des 600 000 lycéens professionnels"
 
 attal_enveloppe:
+  forme_annonce:
+    valeur: cumul
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Phase A8 (12/11/2026, relecture neutre n° 2, point 11) : l'annonce est lue comme un cumul sur le quinquennat (« 150 Md€ d'économies sur le quinquennat »), ramenée au rythme annuel par moteur/unites.annonce_en_points_pib. Les autres programmes annoncent un niveau atteint en 2032 (forme par défaut : niveau). Plafond seulement."
   annonce:
     valeur: 150
     unite: md_eur
