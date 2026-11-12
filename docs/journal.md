@@ -957,3 +957,9 @@ Réponses d'Adrien aux huit questions ouvertes :
 6. **Registre par scénario** : plus tard.
 7. **Statu quo après 2050** : laissé en l'état.
 8. **Sorties du comparateur** : régénérées.
+
+## 12 novembre 2026 (suite) — Philippe : programme mis à jour sur son site
+
+Lecture des 15 pages thématiques du site (mise à jour du 12/11/2026) : 32 mesures ajoutées à programmes/philippe/
+mesures.yaml (123), 7 nouveaux paramètres et 5 paramètres précisés dans parametres.yaml. Détail, effet et points
+ouverts : docs/programmes_novembre.md, section « Philippe : programme mis à jour le 12 novembre 2026 ».

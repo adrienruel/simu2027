@@ -96,14 +96,14 @@ philippe_mesures:
     unite: md_eur
     annee_euros: 2026
     statut: SOURCE
-    source: "Site du candidat (« L'Heure de vérité », 08/10/2026) : coût ≈ 3 Md€ par an ; montée sur trois ans (trois générations de naissances)"
+    source: "Site du candidat (« L'Heure de vérité », 08/10/2026) : coût ≈ 3 Md€ par an ; montée sur trois ans (trois générations de naissances) ; site du 12/11/2026 : exonération pour les ménages du 4e au 6e décile et le début du 7e, réduction de 3 000 € par an pour les familles plus aisées qui travaillent (même périmètre que le chiffrage de 3 Md€)"
   donations:
-    valeur: {id: PHI-FIS-04, instrument: successions, libelle: "Plafonds de donation aux enfants et petits-enfants fortement relevés pendant trois ans", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028, fin: 2030,
-             montant: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}}
+    valeur: {id: PHI-FIS-04, instrument: successions, libelle: "Plafonds de donation aux enfants et petits-enfants doublés pendant les trois premières années du quinquennat", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028, fin: 2030,
+             montant: {crise: -1.2, prudent: -1.0, median: -0.7, optimiste: -0.4}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : droits de donation ≈ 3 Md€ ; dons familiaux exonérés de 100 000 € de 2025 (loi de finances pour 2025, logement) ≈ 0,3 Md€ ; « hausse massive » : 0,4 à 1 Md€ par an, en partie avancée sur les successions futures"
+    source: "Encadrement : droits de donation ≈ 3 Md€ ; dons familiaux exonérés de 100 000 € de 2025 (loi de finances pour 2025, logement) ≈ 0,3 Md€ ; « hausse massive » : 0,4 à 1 Md€ par an, en partie avancée sur les successions futures ; site du 12/11/2026 : plafonds doublés (abattement de 100 000 € par parent et par enfant, 31 865 € par petit-enfant) pendant trois ans : effet d'aubaine concentré sur les patrimoines élevés, d'où un prudent relevé à 1 Md€ par an"
   heures_sup:
     valeur: {id: PHI-EMP-01, instrument: cout_travail, libelle: "Aucune cotisation patronale au-delà de 37 heures ; heures supplémentaires exonérées d'impôt et de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -2.5, prudent: -2.0, median: -1.6, optimiste: -1.2}}
@@ -181,7 +181,7 @@ philippe_mesures:
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : opérateurs de l'État ≈ 80 Md€ de dépenses, mais les suppressions de 2025-2026 n'ont rapporté que ≈ 0,5 Md€ (Cour des comptes) ; missions gardées en grande partie"
+    source: "Encadrement : opérateurs de l'État ≈ 80 Md€ de dépenses, mais les suppressions de 2025-2026 n'ont rapporté que ≈ 0,5 Md€ (Cour des comptes) ; missions gardées en grande partie ; comprend l'opérateur unique d'appui aux territoires qui fusionne quatre agences (site, adaptation, 12/11/2026)"
   aides_etrangers:
     valeur: {id: PHI-IMM-05, libelle: "Aides sociales aux étrangers alignées sur la moyenne européenne", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,
              montant: {crise: -0.3, prudent: -0.7, median: -1.0, optimiste: -1.5}}
@@ -289,11 +289,11 @@ philippe_mesures:
     source: "Encadrement : PTZ ≈ 0,6 Md€ de crédit d'impôt aux banques (2025), élargi en 2025 ; un ménage sur dix avec un nouveau-né qui achète : ≈ +0,2 à 0,4 Md€"
   justice:
     valeur: {id: PHI-SEC-01, libelle: "Courtes peines, peines planchers (places de prison), juges de paix recréés", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
-             montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
+             montant: {crise: 1.1, prudent: 0.9, median: 0.7, optimiste: 0.55}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : courtes peines appliquées : +5 000 à 10 000 détenus × ≈ 40 000 € par an ; juges de paix ≈ 1 000 postes"
+    source: "Encadrement : courtes peines appliquées : +5 000 à 10 000 détenus × ≈ 40 000 € par an ; juges de paix ≈ 1 000 postes ; site du 12/11/2026 : établissements de réinsertion et de soin pour mineurs condamnés, ≈ 20 à 30 de plus × 2 à 4 M€ par an (centre éducatif fermé ≈ 3 M€, loi de programmation pour Mayotte : 14 M€ d'investissement) : +0,05 à 0,1 Md€"
   canadairs:
     valeur: {id: PHI-SEC-08, libelle: "Canadairs construits en France, réserves communales, formation aux premiers secours", poste: investissement, moteur: pib, debut: 2028, plein: 2031,
              montant: {crise: 0.4, prudent: 0.3, median: 0.25, optimiste: 0.2}}
@@ -317,11 +317,11 @@ philippe_mesures:
     source: "Site du candidat : 3 000 → 50 000 places ; ≈ 25 000 € par volontaire (solde, hébergement, encadrement)"
   munitions:
     valeur: {id: PHI-INT-03, libelle: "Munitions au-delà de 100 000 obus par an, drones tactiques ; nouvelle loi de programmation", poste: defense_ue, moteur: pib, debut: 2028, plein: 2030,
-             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
+             montant: {crise: 2.5, prudent: 2.0, median: 1.5, optimiste: 1.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : obus de 155 mm ≈ 4 000 € ; drones tactiques ; LPM 2024-2030 actualisée au statu quo : surcroît ≈ 1 Md€ par an"
+    source: "Encadrement : obus de 155 mm ≈ 4 000 € ; drones tactiques ; LPM 2024-2030 actualisée au statu quo ; site du 12/11/2026 : aller au-delà de l'objectif de 100 000 obus par an, vers l'échelle allemande (≈ 700 000) ; cible française non chiffrée : +200 000 (optimiste) à +500 000 (crise) obus par an × ≈ 4 000 €, plus drones ≈ 0,2 à 0,5 Md€"
   marine_antilles:
     valeur: {id: PHI-OM-03, libelle: "Navires de la Marine stationnés aux Antilles doublés ; opérations Harpie élargies", poste: defense_ue, moteur: pib, debut: 2028, plein: 2030,
              montant: {crise: 0.15, prudent: 0.12, median: 0.1, optimiste: 0.08}}
@@ -373,6 +373,59 @@ philippe_mesures:
     statut: HYPOTHESE
     source: "Encadrement : dépenses fiscales ≈ 85 Md€ (PLF 2026, Voies et moyens II) ; niches non nommées ; rabot de 2012-2013 ≈ 1 à 2 Md€"
     note: "Économie non chiffrée : estimée."
+
+  # ---- Ajouts du 12/11/2026 : programme mis à jour sur le site (15 pages thématiques) ----
+  heures_sup_csg:
+    valeur: {id: PHI-EMP-06, instrument: travail, libelle: "Heures au-delà de 35 h exonérées de tous impôts et cotisations du salarié (CSG-CRDS et plafond de 7 500 € compris)", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -2.2, prudent: -1.8, median: -1.5, optimiste: -1.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (page Travail, 12/11/2026) : heures au-delà de 35 h exonérées de cotisations et d'impôt sur le revenu (37 h dans d'autres réponses de la même page) ; au statu quo, seules l'IR (plafond de 7 500 €) et une partie des cotisations salariales sont exonérées ; ≈ 900 millions d'heures supplémentaires par an (DARES) × ≈ 20 € bruts ≈ 18 Md€ d'assiette × CSG-CRDS 9,7 % ≈ 1,7 Md€, plus le plafond levé ; hausse des heures déclarées par les accords d'entreprise en crise"
+    note: "Lecture retenue : « contributions sociales et impôts » comprend la CSG-CRDS. Si le site ne vise que les cotisations, la mesure tombe à ≈ 0 (déjà au statu quo)."
+  reconversion_ia:
+    valeur: {id: PHI-NUM-04, libelle: "Droit à la reconversion pour les salariés des métiers menacés par l'IA", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.6, prudent: 0.4, median: 0.3, optimiste: 0.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (pages Travail et IA, 12/11/2026), sans montant ; encadrement : projets de transition professionnelle ≈ 0,5 Md€ par an (France compétences), Transitions collectives de 2021 peu utilisées ; +20 000 à 50 000 reconversions × 10 000 à 15 000 €"
+  rsa_duree:
+    valeur: {id: PHI-SOC-06, instrument: transferts_actifs, libelle: "Durée du RSA limitée", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2029, plein: 2031,
+             montant: {crise: 0.0, prudent: -0.4, median: -0.8, optimiste: -1.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (page Comptes publics, 12/11/2026) : durée du RSA limitée, sans autre précision ; encadrement : RSA ≈ 12 Md€ pour ≈ 1,8 million de foyers (DREES, Minima sociaux, édition 2025), une large part y restant plusieurs années ; exceptions attendues (handicap, parents isolés, plus de 60 ans) ; l'alinéa 11 du Préambule de 1946 (droit à des moyens convenables d'existence) borne la mesure"
+    note: "Même traitement que la condition de résidence de Le Pen : crise à zéro (mesure censurée ou vidée par les exceptions) ; 3 à 10 % du RSA sinon. Les sortants vers l'emploi ne sont pas comptés en emplois en plus."
+  garde_enfants:
+    valeur: {id: PHI-SOC-07, libelle: "« Plan Marshall » pour la garde d'enfants", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2032,
+             montant: {crise: 1.2, prudent: 0.9, median: 0.7, optimiste: 0.45}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (page Famille, 12/11/2026), sans chiffre ; encadrement : place de crèche (PSU) ≈ 19 450 € par an (Onape, édition 2025), dont ≈ 75 % public (Cnaf et communes) ; +30 000 à 60 000 places au-delà du service public de la petite enfance du statu quo, plus l'investissement"
+  dutreil_agricole:
+    valeur: {id: PHI-FIS-05, instrument: successions, libelle: "« Super Dutreil agricole » : exonération renforcée des transmissions d'exploitations", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2029,
+             montant: {crise: -0.2, prudent: -0.15, median: -0.1, optimiste: -0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (page Adaptation, 12/11/2026), sans taux ; encadrement : transmissions agricoles déjà exonérées en grande partie (baux ruraux à long terme et GFA, 75 % au-delà d'un seuil relevé en 2025) ; ≈ 20 000 installations par an"
+  tutorat:
+    valeur: {id: PHI-EDU-11, instrument: education, libelle: "Tutorat d'orientation : un tuteur pour chaque élève", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 0.45, prudent: 0.35, median: 0.25, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (page École, 12/11/2026), sans effectif ni budget ; encadrement : ≈ 5,6 millions de collégiens et lycéens (DEPP), un enseignant tuteur pour 15 à 20 élèves, indemnité pour mission particulière de 300 à 600 € par an × coût employeur ≈ 1,9"
+  outre_mer_transports:
+    valeur: {id: PHI-OM-08, libelle: "Train à La Réunion et en Guyane ; retenues collinaires à La Réunion", poste: investissement, moteur: pib, debut: 2029, plein: 2031,
+             montant: {crise: 0.2, prudent: 0.15, median: 0.1, optimiste: 0.05}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Site (page Outre-mer, 12/11/2026), sans financement arrêté ; encadrement : projet régional de train à La Réunion ≈ 1,5 à 2 Md€ (région et fonds européens) ; part de l'État ≈ 0,05 à 0,2 Md€ par an"
 
 philippe_enveloppe:
   annonce:

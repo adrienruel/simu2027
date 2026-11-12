@@ -28,7 +28,7 @@ def test_programme_disponible_et_chiffre(p, prog):
 def test_fiche_complete_et_mesures_renvoyees(prog):
     fiche = yaml.safe_load((RACINE / "programmes" / "philippe" / "mesures.yaml").read_text(encoding="utf-8"))
     ids = {m["id"] for m in fiche["mesures"]}
-    assert len(ids) == 91 and all(m["traitement"] for m in fiche["mesures"])
+    assert len(ids) == 123 and all(m["traitement"] for m in fiche["mesures"])
     for cle, par in prog.pt._p.items():
         if cle.startswith("philippe_mesures."):
             assert par.valeur["id"] in ids, cle

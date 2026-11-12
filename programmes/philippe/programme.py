@@ -1,7 +1,7 @@
 """Programme d'Édouard Philippe (Horizons), chiffré mesure par mesure sur le noyau (7 novembre 2026).
 
-Sources : site de campagne (quatre pages de priorités), interviews, discours et publications d'Horizons de 2025-2026,
-recensés par programmes-2027.fr (87 mesures) ; fiche : mesures.yaml. Les économies annoncées ne sont pas reprises :
+Sources : site de campagne (15 pages thématiques, mises à jour le 12/11/2026), interviews, discours et publications
+d'Horizons de 2025-2026, recensés par programmes-2027.fr (87 mesures) ; fiche : mesures.yaml (123 mesures). Les économies annoncées ne sont pas reprises :
 seules les mesures nommées sont estimées, en trois scénarios quand elles n'ont pas de source.
 
 - **mesures simples** (groupe philippe_mesures) : impôts de production −50 Md€ et aides aux entreprises supprimées,

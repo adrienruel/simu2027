@@ -88,3 +88,44 @@ Lecture :
 - **Lisnard** : les 120 Md€ rendus aux actifs et les 40 Md€ d'impôts de production font le plus fort effet d'offre des programmes chiffrés (+1,8 % de PIB en prudent, +4,5 % en optimiste). Les économies nommées n'en couvrent qu'une partie.
 - **Attal** : le « droit au brut » (≈ 52 Md€) n'est couvert qu'en partie par les mesures nommées.
 - **Glucksmann** : voir docs/glucksmann.md.
+
+## Philippe : programme mis à jour le 12 novembre 2026
+
+Le site (https://www.edouardphilippe.fr/programme) présente désormais 15 pages thématiques, datées du 12/11/2026. Lues
+une à une : 32 mesures ajoutées à la fiche (123 au lieu de 91), 9 précisées. Peu de chiffres nouveaux : chaque montant
+ajouté est une estimation en quatre scénarios (règle commune), jamais un chiffre du candidat.
+
+**Mesures chiffrées ajoutées** (prudent, Md€ par an à plein effet ; signe du solde) :
+
+| Id | Mesure | Prudent | Base |
+|---|---|---|---|
+| PHI-EMP-06 | Heures au-delà de 35 h exonérées de tout impôt du salarié (CSG-CRDS, plafond de l'IR) | −1,8 | ≈ 18 Md€ d'heures sup × CSG-CRDS 9,7 % |
+| PHI-SOC-07 | « Plan Marshall » de la garde d'enfants | −0,9 | +30 000 à 60 000 places (Onape) |
+| PHI-NUM-04 | Droit à la reconversion (métiers menacés par l'IA) | −0,4 | projets de transition professionnelle |
+| PHI-EDU-11 | Tutorat d'orientation, un tuteur par élève | −0,35 | indemnités de 300 à 600 € |
+| PHI-SOC-06 | Durée du RSA limitée | +0,4 | 3 à 10 % du RSA ; 0 en crise (Préambule de 1946) |
+| PHI-FIS-05 | « Super Dutreil agricole » | −0,15 | transmissions déjà en grande partie exonérées |
+| PHI-OM-08 | Train à La Réunion et en Guyane, retenues collinaires | −0,15 | part de l'État |
+
+**Mesures précisées** : donations doublées (prudent −1,0 au lieu de −0,8 pendant trois ans) ; munitions « vers
+l'échelle allemande » de 700 000 obus (prudent 2,0 au lieu de 1,2) ; établissements pour mineurs ajoutés à la justice
+(+0,1) ; déciles de l'impôt sur le revenu après une naissance (même coût) ; téléphone interdit aussi au lycée ; règle
+d'or à 3 % ; opérateur unique de l'adaptation dans les agences.
+
+**Neutres** : convergence du SMIC et des retraites de Mayotte, second hôpital de Combani, piste longue et eau de
+Mayotte (déjà programmés par la loi n° 2025-797 de programmation pour la refondation de Mayotte) ; surrémunération
+outre-mer inchangée ; « pas de hausse des cotisations ni de baisse générale des pensions » (engagement).
+
+**Non chiffrées** : réglementation, institutions ou niveau européen (asile, double peine, passeurs, zones IA,
+plateformes, vidéoprotection, Frères musulmans, octroi de mer…).
+
+**Effet** (déficit 2037, programme / statu quo) : prudent 10,06 / 9,50 (9,86 avant) ; médian 7,42 / 8,37 (7,24) ;
+optimiste 4,49 / 8,06 (4,42) ; crise 13,98 / 12,12 (13,69). L'enveloppe d'économies déduite domaine par domaine
+absorbe en partie l'économie du RSA (prestations déjà visées).
+
+**Points ouverts pour Adrien** :
+1. Capitalisation collective « pour tous les salariés, sur le modèle des fonctionnaires » sans hausse des cotisations :
+   financement inconnu, non chiffrée.
+2. Seuil d'exonération salariale : 35 h ou 37 h selon les passages du site ; la lecture CSG comprise est retenue.
+3. Allocation familiale unique : comptée à coût constant d'après l'interview du 08/10/2026 ; la page Famille ne le dit
+   pas (350 € dès le premier enfant, dégressive).

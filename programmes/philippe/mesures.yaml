@@ -1,12 +1,12 @@
-# Programme d'Édouard Philippe (Horizons) : fiche des mesures (7 novembre 2026)
+# Programme d'Édouard Philippe (Horizons) : fiche des mesures (7 novembre 2026, mise à jour le 12 novembre 2026)
 
 programme:
   candidat: Édouard Philippe
   parti: Horizons
-  document: site de campagne (quatre pages de priorités), interviews et discours de 2025-2026
-  recensement: https://programmes-2027.fr/candidats/philippe/ (87 mesures)
-  date_lecture: '2026-11-07'
-  avertissement: programme partiel ; programme complet annoncé
+  document: site de campagne (https://www.edouardphilippe.fr/programme, 15 pages thématiques mises à jour le 12/11/2026), interviews et discours de 2025-2026
+  recensement: https://programmes-2027.fr/candidats/philippe/ (87 mesures), complété par la lecture des 15 pages du site le 12/11/2026
+  date_lecture: '2026-11-12'
+  avertissement: programme présenté par thème, peu chiffré (le site « s'enrichit au fil de la campagne »)
 mesures:
 - id: PHI-ECO-01
   intitule: Déficit ramené de plus de 5 % à 2 % du PIB (50 % social, 25 % État et collectivités, 25 % croissance)
@@ -37,7 +37,7 @@ mesures:
   source: Site (« Pour une France plus prospère »)
   traitement: philippe_mesures.aides_entreprises_* (part réalisable)
 - id: PHI-FIS-02
-  intitule: Pas d'impôt sur le revenu trois ans après une naissance (≈ 3 Md€ par an)
+  intitule: Pas d'impôt sur le revenu trois ans après une naissance (4e au 6e décile et début du 7e), réduction de 3 000 € par an au-dessus (≈ 3 Md€ par an)
   source: L'Heure de vérité, 08/10/2026
   traitement: philippe_mesures.ir_naissance
 - id: PHI-FIS-03
@@ -45,11 +45,11 @@ mesures:
   source: Tribune, 05/11/2025
   traitement: 'neutre : statu quo'
 - id: PHI-FIS-04
-  intitule: Plafonds de donation fortement relevés pendant trois ans
+  intitule: Plafonds de donation aux enfants et petits-enfants doublés pendant les trois premières années
   source: Site (« … plus attentive à ses enfants »)
   traitement: philippe_mesures.donations
 - id: PHI-EMP-01
-  intitule: Durée du travail par accord au-delà de 35 h, heures sup exonérées, aucune cotisation patronale au-delà de 37 h
+  intitule: 'Durée du travail par accord au-delà de 35 h, heures sup exonérées, aucune cotisation patronale au-delà de 37 h (seuil salarié : 35 ou 37 h selon les passages du site)'
   source: L'Heure de vérité, 08/10/2026
   traitement: philippe_mesures.heures_sup
 - id: PHI-EMP-02
@@ -181,7 +181,7 @@ mesures:
   source: Site (« … plus attentive à ses enfants »)
   traitement: philippe_mesures.soutien_scolaire
 - id: PHI-EDU-04
-  intitule: Téléphones interdits à l'école et au collège
+  intitule: Téléphones interdits à l'école, au collège et au lycée, avec confiscation
   source: Site (« … plus attentive à ses enfants »)
   traitement: non chiffré
 - id: PHI-EDU-05
@@ -209,7 +209,7 @@ mesures:
   source: franceinfo, 16/10/2026
   traitement: non chiffré
 - id: PHI-SEC-01
-  intitule: Courtes peines dès la première infraction, peines planchers
+  intitule: Courtes peines dès la première infraction, peines planchers, loi pour accélérer la construction de prisons
   source: Site (« … plus sûre »)
   traitement: philippe_mesures.justice
 - id: PHI-SEC-02
@@ -277,7 +277,7 @@ mesures:
   source: CNews, 08/10/2026
   traitement: non chiffré
 - id: PHI-INS-02
-  intitule: Règle d'or budgétaire par référendum
+  intitule: 'Règle d''or par référendum en début de quinquennat : interdiction de voter un déficit au-delà de 3 %'
   source: Site (« Pour une France plus prospère »)
   traitement: 'non chiffré : règle de pilotage'
 - id: PHI-UE-01
@@ -309,7 +309,7 @@ mesures:
   source: Site (« … plus sûre »)
   traitement: philippe_mesures.service_militaire
 - id: PHI-INT-03
-  intitule: Plus de 100 000 obus par an, drones tactiques
+  intitule: Au-delà de 100 000 obus par an, vers l'échelle allemande (≈ 700 000), drones tactiques
   source: Site (« … plus sûre »)
   traitement: philippe_mesures.munitions
 - id: PHI-NUM-01
@@ -321,7 +321,7 @@ mesures:
   source: Site (« … plus conquérante »)
   traitement: non chiffré
 - id: PHI-NUM-03
-  intitule: 100 000 ingénieurs par an, droit à la reconversion
+  intitule: 100 000 ingénieurs par an (contre 40 000), en cinq ans
   source: Site (« … plus conquérante »)
   traitement: philippe_mesures.ingenieurs
 - id: PHI-OM-01
@@ -372,3 +372,131 @@ mesures:
   intitule: 'Périscolaire : honorabilité, responsable formé'
   source: Site (« … plus attentive à ses enfants »)
   traitement: non chiffré
+- id: PHI-EMP-05
+  intitule: Protection sociale financée autrement que par le travail pour relever le net ; baisse du coût du travail
+  source: Site, page Travail et Entreprises, mise à jour du 12/11/2026
+  traitement: 'non chiffré : ni montant ni assiette ; avec le moratoire fiscal (aucun nouvel impôt), pas de recette de remplacement identifiable'
+- id: PHI-EMP-06
+  intitule: Heures au-delà de 35 h exonérées de tous impôts et cotisations du salarié
+  source: Site, page Travail, mise à jour du 12/11/2026
+  traitement: philippe_mesures.heures_sup_csg (CSG-CRDS et plafond de l'IR ; le reste est au statu quo ou dans heures_sup)
+- id: PHI-NUM-04
+  intitule: Droit à la reconversion pour les métiers menacés par l'IA
+  source: Site, page Travail et IA, mise à jour du 12/11/2026
+  traitement: philippe_mesures.reconversion_ia
+- id: PHI-NUM-05
+  intitule: Zones d'accélération de l'IA (raccordements, permis, accès préférentiel à l'énergie décarbonée)
+  source: Site, page IA et Énergie, mise à jour du 12/11/2026
+  traitement: 'non chiffré : réglementation (raccordements payés par les opérateurs)'
+- id: PHI-NUM-06
+  intitule: Responsabilité pénale des plateformes, amendes accrues, régulation européenne de l'IA pour les enfants
+  source: Site, page IA et Protection de l'enfance, mise à jour du 12/11/2026
+  traitement: 'non chiffré : réglementation'
+- id: PHI-ENE-03
+  intitule: Électrification massive en remplacement du pétrole et du gaz
+  source: Site, page Énergie, mise à jour du 12/11/2026
+  traitement: 'non chiffré : sans objectif ni instrument'
+- id: PHI-FIS-05
+  intitule: '« Super Dutreil agricole » pour les transmissions d''exploitations'
+  source: Site, page Adaptation climatique, mise à jour du 12/11/2026
+  traitement: philippe_mesures.dutreil_agricole
+- id: PHI-SOC-06
+  intitule: Durée du RSA limitée
+  source: Site, page Comptes publics, mise à jour du 12/11/2026
+  traitement: philippe_mesures.rsa_duree (économie estimée, nulle en crise)
+- id: PHI-SOC-07
+  intitule: '« Plan Marshall » pour la garde d''enfants'
+  source: Site, page Famille, mise à jour du 12/11/2026
+  traitement: philippe_mesures.garde_enfants
+- id: PHI-SOC-08
+  intitule: '« Droit de savoir » sur les antécédents, protection immédiate dès une plainte, fermeture des sites de proxénétisme de mineurs'
+  source: Site, page Protection de l'enfance, mise à jour du 12/11/2026
+  traitement: non chiffré
+- id: PHI-EDU-11
+  intitule: 'Tutorat d''orientation : un tuteur par élève'
+  source: Site, page École, mise à jour du 12/11/2026
+  traitement: philippe_mesures.tutorat
+- id: PHI-EDU-12
+  intitule: 2 500 mots à l'entrée au CP, notes de juin dans le bulletin suivant, uniforme et horaires laissés aux établissements
+  source: Site, page École, mise à jour du 12/11/2026
+  traitement: non chiffré
+- id: PHI-EDU-13
+  intitule: Aucune IA avant le collège, puis progression par paliers
+  source: Site, page École et IA, mise à jour du 12/11/2026
+  traitement: non chiffré
+- id: PHI-RET-05
+  intitule: Capitalisation collective généralisée à tous les salariés, sur le modèle des fonctionnaires
+  source: Site, page Retraites, mise à jour du 12/11/2026
+  traitement: 'non chiffré : taux, cotisations et financement non précisés, alors que le site exclut toute hausse des cotisations retraite (point ouvert)'
+- id: PHI-RET-06
+  intitule: Gestion confiée aux partenaires sociaux après le retour à l'équilibre ; critères de pénibilité négociés
+  source: Site, page Retraites, mise à jour du 12/11/2026
+  traitement: 'non chiffré : institutions, contenu à négocier'
+- id: PHI-RET-07
+  intitule: Pas de hausse des cotisations retraite, pas de baisse générale des pensions
+  source: Site, page Retraites, mise à jour du 12/11/2026
+  traitement: 'neutre : engagement (la contribution accrue des retraités, PHI-RET-04, reste comptée : elle ne baisse pas les pensions brutes)'
+- id: PHI-SEC-10
+  intitule: Vidéoprotection avec IA, reconnaissance faciale ciblée (état d'urgence narco, émeutes), criblage des fonctions sensibles
+  source: Site, page Sécurité, mise à jour du 12/11/2026
+  traitement: 'non chiffré : moyens existants, coût faible'
+- id: PHI-SEC-11
+  intitule: Excuse de minorité levée pour le trafic, comparution immédiate des mineurs, établissements de réinsertion et de soin
+  source: Site, page Justice et Sécurité, mise à jour du 12/11/2026
+  traitement: dans philippe_mesures.justice (relevée de 0,05 à 0,1 Md€)
+- id: PHI-SEC-12
+  intitule: Peines des grands trafiquants alignées sur le terrorisme, amendes plus fortes pour les consommateurs, signalement à l'employeur des agents publics poursuivis pour usage de stupéfiants
+  source: Site, page Sécurité, mise à jour du 12/11/2026
+  traitement: 'non chiffré : recette faible'
+- id: PHI-SEC-13
+  intitule: Dissolution des Frères musulmans et des organisations affiliées
+  source: Site, page Sécurité et Immigration, mise à jour du 12/11/2026
+  traitement: non chiffré
+- id: PHI-IMM-08
+  intitule: 'Double peine rétablie : expulsion et perte des prestations des étrangers délinquants'
+  source: Site, page Immigration, mise à jour du 12/11/2026
+  traitement: 'non chiffré : effet budgétaire faible'
+- id: PHI-IMM-09
+  intitule: Asile à vie supprimé ; mécanisme européen d'urgence suspendant les nouvelles demandes
+  source: Site, page Immigration, mise à jour du 12/11/2026
+  traitement: 'non chiffré : réglementation, niveau européen'
+- id: PHI-IMM-10
+  intitule: Régime européen de sanctions contre les passeurs (gel des avoirs, interdiction de territoire)
+  source: Site, page Immigration et Sécurité, mise à jour du 12/11/2026
+  traitement: 'non chiffré : niveau européen'
+- id: PHI-INT-04
+  intitule: Au moins 1 % du PIB des pays européens de l'OTAN en équipements européens ; dissuasion modernisée
+  source: Site, page Défense, mise à jour du 12/11/2026
+  traitement: 'non chiffré : préférence d''achat au niveau européen ; dissuasion au statu quo de la LPM'
+- id: PHI-INT-05
+  intitule: Volet environnemental du futur service national ; journée nationale d'alerte
+  source: Site, page Défense et Adaptation, mise à jour du 12/11/2026
+  traitement: dans philippe_mesures.service_militaire et canadairs
+- id: PHI-CLI-09
+  intitule: Opérateur public unique fusionnant quatre agences d'appui aux territoires
+  source: Site, page Adaptation climatique, mise à jour du 12/11/2026
+  traitement: dans philippe_mesures.agences
+- id: PHI-OM-05
+  intitule: SMIC de Mayotte (87,5 % du national) et retraites alignés sur l'Hexagone, sans échéance
+  source: Site, page Outre-mer, mise à jour du 12/11/2026
+  traitement: 'neutre : convergence sociale déjà prévue à l''horizon 2031 par la loi n° 2025-797 de programmation pour la refondation de Mayotte (statu quo)'
+- id: PHI-OM-06
+  intitule: Second hôpital à Combani, piste longue sur Grande-Terre, eau de Mayotte financée jusqu'en 2032
+  source: Site, page Outre-mer, mise à jour du 12/11/2026
+  traitement: 'neutre : déjà programmés par la loi n° 2025-797 (hôpitaux 407 M€, piste longue 1,2 Md€, eau 730 M€)'
+- id: PHI-OM-07
+  intitule: Octroi de mer modernisé, transports et fret ouverts à la concurrence
+  source: Site, page Outre-mer, mise à jour du 12/11/2026
+  traitement: 'non chiffré : réforme sans paramètres (recette des collectivités)'
+- id: PHI-OM-08
+  intitule: Train à La Réunion et en Guyane, retenues collinaires à La Réunion
+  source: Site, page Outre-mer, mise à jour du 12/11/2026
+  traitement: philippe_mesures.outre_mer_transports
+- id: PHI-OM-09
+  intitule: Moratoire total sur l'immigration à Mayotte, y compris familiale ; centre de retour en Afrique de l'Est
+  source: Site, page Outre-mer, mise à jour du 12/11/2026
+  traitement: non chiffré
+- id: PHI-OM-10
+  intitule: Surrémunération des fonctionnaires d'outre-mer exclue de toute réforme pendant le quinquennat
+  source: Site, page Outre-mer, mise à jour du 12/11/2026
+  traitement: 'neutre : statu quo'
