@@ -109,6 +109,8 @@ def main() -> None:
                              "deficit_sans_regle": round((x.get("sans_regle") or x)["deficit"], 3),
                              "dette_pib_sans_regle": round((x.get("sans_regle") or x)["dette_pib"], 2),
                              "dette_et_quasi_dette_pib": round(x.get("dette_et_quasi_dette_pib", x["dette_pib"]), 2),
+                             # baisse de l'écart de taux gagnée par le résultat (points de base ; règle commune)
+                             "baisse_ecart_taux_pb": round(x.get("baisse_ecart_taux", 0.0) * 1e4, 1),
                              "solde_primaire_pib": round(x["solde_primaire"] / x["pib"] * 100, 3),
                              "interets_pib": round(x["charge_dette"] / x["pib"] * 100, 3),
                              "recettes_pib": round(x["recettes_pib"], 3),
