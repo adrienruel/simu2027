@@ -128,6 +128,7 @@ class Effets:
         self.traj = budget.postes(q, "prudent")
         self.dividende = dividende_croissance(q, self.pib0)
         self.q_div = self.dividende if self.dividende is not None else {t: q.val("macro.part_pib_tendanciel_au_solde") for t in ANNEES}
+        self.div_sq = sq.dividende_productivite(p, s)
         self.bases_demo = budget.lignes(q, "prudent").bases_demographie
         self.cle_indice = {"recettes": "emploi", "recettes_population": "total", "salaries_impot": "c_impot",
                            "salaries_tva": "c_tva", "salaries_rui": "c_rui", "adultes": "adultes", "enfants": "enfants",
@@ -211,7 +212,7 @@ class Effets:
                   "ia_adoption", "ecole", "investissement", "permis"):
             pib[c] = {}
         for c in ("emploi", "logement", "aides_construction", "erosion_is", "fraude_tva", "productivite", "reactions",
-                  "investissement", "permis", "dirigeants", "ia", "ecole", "sante", "tva_sante", "carbone", "eviction",
+                  "investissement", "permis", "dirigeants", "ia", "ia_adoption", "ecole", "sante", "tva_sante", "carbone", "eviction",
                   "demographie", "tendance", "economies_registre"):
             solde[c] = {}
         for c in ("reformes", "seniors_long", "cumul", "inactifs"):
@@ -263,7 +264,10 @@ class Effets:
             y = self.y_sq[t]
             # barème commun des réformes de structure (12/11/2026, moteur/reformes_structurelles.py)
             pib["productivite"][t] = y * gain_reformes(q, q.val("macro.reformes_programme"), jeu, t)
-            solde["productivite"][t] = pib["productivite"][t] * self.q_div[t]
+            # gains de productivité : dividende de productivité du statu quo, la même règle que pour tous les programmes
+            # (relecture neutre n° 2, point 1, décision d'Adrien du 12/11/2026) ; q_div (dividende du budget du
+            # programme) ne sert plus qu'aux écarts de méthode (tendance, IA du statu quo)
+            solde["productivite"][t] = pib["productivite"][t] * self.div_sq[t]
             # tendance et IA : le statu quo du scénario les porte déjà dans son PIB ; le budget du programme (calculé sur
             # la tendance du prudent, sans IA) en est écarté, d'où une mesure de recettes d'écart de méthode
             pib_tend = self.pib0[t] * (((1 + m("tendance")) / (1 + tend0)) ** n - 1) if jeu != "prudent" else 0.0
@@ -273,11 +277,12 @@ class Effets:
             pib_ia = base * r_ia
             r_adopt = (1 + r_adopt) * (1 + g_ia * m("adoption_ia")) - 1
             pib["ia_adoption"][t] = (y) * r_adopt  # l'IA du statu quo est déjà dans y
-            solde["ia"][t] = (pib_ia + (base + pib_ia) * r_adopt) * self.q_div[t]
+            solde["ia"][t] = pib_ia * self.q_div[t]  # écart de méthode : l'IA du statu quo, absente du budget
+            solde["ia_adoption"][t] = (base + pib_ia) * r_adopt * self.div_sq[t]  # canal du programme
             g_ecole = m("niveau_eleves") * m("croissance_par_ecart_type") * min(1, max(0, (t - q.val("macro.premiere_annee_ecole") + 1) / q.val("macro.annees_ecole")))
             r_ecole = (1 + r_ecole) * (1 + g_ecole) - 1
             pib["ecole"][t] = y * r_ecole
-            solde["ecole"][t] = pib["ecole"][t] * self.q_div[t]
+            solde["ecole"][t] = pib["ecole"][t] * self.div_sq[t]
             solde["tendance"][t] = pib_tend * self.q_div[t]
             solde["economies_registre"][t] = self.eco_ecart[t]
             # réactions à l'impôt, hauts revenus
@@ -319,12 +324,13 @@ class Effets:
         "permis": "Permis de construire rapide",
         "dirigeants": "Dirigeants de petites sociétés qui se versent un salaire",
         "ecole": "École (niveau des élèves)",
+        "ia_adoption": "Adoption de l'IA (en plus du statu quo)",
         "tva_sante": "Santé : TVA sur les dépenses de santé du scénario",
         "carbone": "Carbone : recette du scénario",
         "eviction": "Épargne obligatoire qui évince l'épargne volontaire (TVA), écart au prudent",
     }
     METHODE = {
-        "ia": "Écart de méthode : IA et adoption de l'IA (le budget du programme est calculé sans l'IA du statu quo)",
+        "ia": "Écart de méthode : IA du statu quo (le budget du programme est calculé sans l'IA du statu quo)",
         "tendance": "Écart de méthode : tendance du scénario (le budget du programme est calculé sur la tendance du prudent)",
         "demographie": "Écart de méthode : démographie du scénario (le budget du programme est calculé sur la population du prudent)",
         "economies_registre": "Écart de méthode : économies datées du registre, estimées par scénario",
@@ -384,6 +390,10 @@ class Fonds:
         self.paiements: dict[int, float] = {}
         self.historique: dict[int, dict] = {}
         self.restit = q.val("clause.restitution")
+        # contribution de la règle comptée en emprunt aux ménages (décision d'Adrien du 12/11/2026) : hors recettes,
+        # dans la dette ; le remboursement à 67 ans est hors solde ; les créances sont déjà dans la dette publiée
+        self.emprunt = bool(q.val("clause.contribution_en_emprunt"))
+        self.quasi_dette_dans_dette = self.emprunt
         self.acces_socle = int(q.val("epargne.age_acces_socle"))
         from moteur.tva import taux_effectifs as taux_eff
         self.fuite_rui = (1 + sum(taux_eff(q)["modeste"])) if E.corr else 1.0
@@ -443,7 +453,8 @@ class Fonds:
                 self.paiement = sum(v for g, v in self.creances.items() if g + self.acces_socle <= t)
                 for g in [g for g in self.creances if g + self.acces_socle <= t]:
                     del self.creances[g]
-            sortie += self.paiement
+            if not self.emprunt:  # emprunt : rembourser la dette n'est pas une dépense
+                sortie += self.paiement
         elif E.corr:
             from moteur.retraites_transition import socle_supplementaire
             reval = (self.idx_reel[t] - 1) if q.val("revalorisation.rui_aah_socle_croissance") else 0.0
@@ -494,7 +505,8 @@ class Fonds:
 
     def quasi_dette(self) -> float:
         """Créances des contributions prises par la règle, dues aux ménages à 67 ans avec le rendement du fonds (Md€,
-        fin d'année) : un emprunt aux ménages, hors dette publique au sens de Maastricht (relecture du 11/11/2026)."""
+        fin d'année) : un emprunt aux ménages. Avec clause.contribution_en_emprunt (12/11/2026), il est déjà dans la
+        dette publiée (quasi_dette_dans_dette) ; sinon il est hors dette et publié à part (relecture du 11/11/2026)."""
         return sum(self.creances.values())
 
     # --------------------------------------------------------------------------------- règle de trajectoire
@@ -545,8 +557,11 @@ class Fonds:
             base = self.rui_total * reval(t) * E.ds[t]["adultes"]
             return {"euros": x * q.val("rui.montant") * reval(t) / base if base else 0.0}  # € par mois
 
+        # emprunt : la règle compte la contribution comme si elle couvrait le déficit (règle inchangée), mais rien
+        # n'est écrit en recettes ; le déficit publié et la dette la comptent
+        ecritures_contribution = (lambda t, x: []) if self.emprunt else None
         leviers = {
-            "contribution": Levier("Contribution d'épargne retraite", cap_contribution, 1.0, None, appliquer_contribution, detail_contribution),
+            "contribution": Levier("Contribution d'épargne retraite", cap_contribution, 1.0, ecritures_contribution, appliquer_contribution, detail_contribution),
             "rui": Levier("Baisse du revenu universel", cap_rui, 1 / fuite, ecritures_rui, appliquer_rui, detail_rui),
         }
         ordre = [leviers[i] for i in q.val("clause.ordre")]

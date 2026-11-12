@@ -26,7 +26,9 @@ s'efface :
 - quand l'instrument joue pour le programme (baisse), l'élasticité du scénario ; quand il joue contre (hausse),
   celle du scénario miroir (crise ↔ optimiste, prudent ↔ médian) ;
 - montée par ajustement partiel (offre.vitesse, ≈ 10 % de l'écart par an, profil de Mésange), à partir de 2027 ;
-- recettes : le PIB en plus rapporte la part des recettes dans le PIB du statu quo ;
+- recettes : le PIB en plus qui vient de l'emploi rapporte la part des recettes dans le PIB du statu quo ; celui qui
+  vient de la productivité (PRODUCTIVITE, hors part d'emploi) rapporte le dividende de productivité du statu quo
+  (statu_quo.dividende_productivite : les dépenses indexées sur les salaires montent aussi ; 12/11/2026) ;
 - emplois : offre de travail et transferts : venus de l'inactivité (le chômage ne bouge pas) ; coût du travail,
   entreprises, consommation : pris sur le chômage.
 
@@ -54,6 +56,9 @@ EMPLOI = {"travail": (None, 1.0), "cout_travail": (1.0, 0.0), "capital_entrepris
           "transferts_actifs": (1.0, 1.0), "investissement_public": (0.5, 0.0), "education": (0.0, 0.0),
           "recherche": (0.0, 0.0)}
 MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
+# instruments dont l'effet sur le PIB (hors part d'emploi, EMPLOI) passe par la productivité : le salaire moyen monte,
+# et avec lui les dépenses indexées ; le solde n'en garde que le dividende de productivité du statu quo
+PRODUCTIVITE = ("capital_entreprises", "capital_menages", "successions", "investissement_public", "education", "recherche")
 # « nouveau:rui_aah » : revenu universel d'Écologie de droite, qui remplace ces prestations (même poids de demande)
 TRANSFERTS_CIBLES = ("famille", "logement", "pauvrete", "chomage", "aah_invalidite", "nouveau:rui_aah")
 SMIC_BRUT_2026 = 1823.03 * 12
@@ -321,6 +326,9 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
             cles[cle][t] += signe * part * m.valeurs.get(t, 0.0) / y[max(t, 2029)] * 100
     vit = sq._v(p, "offre.vitesse", s)
     out = {"dpib": {t: 0.0 for t in annees}, "emplois": {}, "actifs": {t: 0.0 for t in ANNEES}, "detail": {}}
+    # PIB en plus qui vient de la productivité (capital, éducation, recherche ; hors part d'emploi) : il rapporte au
+    # solde le dividende de productivité du statu quo, pas la part des recettes (relecture neutre n° 2, point 1)
+    dpib_productivite = {t: 0.0 for t in annees}
     for (i, inc), pts in cles.items():
         if not any(pts.values()):
             continue
@@ -339,6 +347,7 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
             effet = (education if i == "education" else recherche)(p, s, pts, annees)
             for t in annees:
                 out["dpib"][t] += effet[t] / 100 * y[max(t, 2029)]
+                dpib_productivite[t] += effet[t] / 100 * y[max(t, 2029)]
             out["detail"][i] = {"points_pib": pts, "effet_pib_pct": effet}
             continue
         el = {sc: elasticite(sc) for sc in {s, MIROIR[s]}}
@@ -350,9 +359,11 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
                 cumul_e += vit * (el[sc][1] * pts[t] - cumul_e)
                 cumul_d += vit * (el[sc][2] * pts[t] - cumul_d)
                 emp[t], emp_d[t] = cumul_e, cumul_d
+        part_emploi, part_inactifs = EMPLOI[i]
         for t in annees:
             out["dpib"][t] += effet[t] / 100 * y[max(t, 2029)]
-        part_emploi, part_inactifs = EMPLOI[i]
+            if i in PRODUCTIVITE:
+                dpib_productivite[t] += (1 - (part_emploi or 0.0)) * effet[t] / 100 * y[max(t, 2029)]
         if i == "travail":
             serie = {t: emp[t] * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
             dem = {t: emp_d[t] * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
@@ -373,8 +384,10 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
                 out["actifs"][t] += part_inactifs * serie[t]
         out["detail"][f"{i}:{inc}" if inc else i] = {"points_pib": pts, "effet_pib_pct": effet}
     part_rec = {t: rec[max(t, 2029)] / y[max(t, 2029)] for t in annees}
+    div = sq.dividende_productivite(p, s)
     out["mesure"] = Mesure("Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)", "recettes",
-                           {t: out["dpib"][t] * part_rec[t] for t in annees}, nature="effet_macro")
+                           {t: (out["dpib"][t] - dpib_productivite[t]) * part_rec[t]
+                            + dpib_productivite[t] * div[max(t, 2029)] for t in annees}, nature="effet_macro")
     return out
 
 

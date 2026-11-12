@@ -114,6 +114,36 @@ def salaires(p: Parametres, s: str) -> dict[int, float]:
         if debut <= t < debut + duree:
             w *= 1 + ia
         out[t] = w
+    choc = p.__dict__.get("_choc_productivite")  # copie de calcul de dividende_productivite seulement
+    if choc:
+        out = {t: v * (1 + choc.get(t, 0.0)) for t, v in out.items()}
+    return out
+
+
+def dividende_productivite(p: Parametres, s: str) -> dict[int, float]:
+    """Part d'un euro de PIB en plus dû à la productivité qui reste au solde primaire, dans le statu quo lui-même
+    (relecture neutre n° 2, point 1 ; DÉCISION d'Adrien du 12/11/2026 : la même règle pour tous les programmes).
+
+    Quand la productivité monte, les recettes montent (≈ 50 % du PIB gagné), mais aussi les dépenses qui suivent les
+    salaires ou le PIB à législation constante (santé, prestations, collectivités, missions, investissement, défense),
+    et les pensions, avec le décalage des carrières : il reste ≈ 25 % au solde la première année, ≈ 12 % après dix ans
+    et presque rien à très long terme. Calcul : la productivité du statu quo est relevée de 1 % en dix ans à partir de
+    2029, puis gardée à ce niveau ; dividende = écart de solde primaire / écart de PIB, année par année. Limite : le
+    profil du gain compte (un gain qui commence tard, comme celui de l'école, garde un peu plus longtemps un dividende
+    plus élevé) ; un seul profil est retenu pour tous."""
+    cache = p.__dict__.setdefault("_cache", {})
+    if ("sq_dividende", s) in cache:
+        return cache[("sq_dividende", s)]
+    q = p.avec({})
+    q._choc_productivite = {t: 0.01 * min(1.0, max(0.0, (t - 2028) / 10)) for t in range(1990, 2074)}
+    y0, r0, b0 = pib(p, s), recettes(p, s), blocs(p, s)
+    y1, r1, b1 = pib(q, s), recettes(q, s), blocs(q, s)
+    out = {}
+    for t in ANNEES:
+        dy = y1[t] - y0[t]
+        out[t] = ((r1[t] - r0[t]) - (sum(b1[t].values()) - sum(b0[t].values()))) / dy if dy else 0.0
+    out[2029] = out[2030]  # le choc vaut 0,1 % en 2029 : même valeur que l'année suivante, pour éviter le bruit
+    cache[("sq_dividende", s)] = out
     return out
 
 

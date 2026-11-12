@@ -261,8 +261,10 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         for d in dynamiques:
             d.fin(t, etat)
         quasi = sum(d.quasi_dette() for d in dynamiques if hasattr(d, "quasi_dette"))
+        # une dynamique dont la quasi-dette est déjà comptée dans la dette (emprunt aux ménages) ne l'ajoute pas deux fois
+        hors = sum(d.quasi_dette() for d in dynamiques if hasattr(d, "quasi_dette") and not getattr(d, "quasi_dette_dans_dette", False))
         out[t]["quasi_dette"] = quasi
-        out[t]["dette_et_quasi_dette_pib"] = (dette + quasi) / y[t] * 100
+        out[t]["dette_et_quasi_dette_pib"] = (dette + hors) / y[t] * 100
         dette_prec = dette
     return out
 
@@ -279,6 +281,9 @@ def _appliquer_regle(regle: Regle, t: int, etat: dict, avant: float, pib_t: floa
     bl = dict(bl)
     rec += auto
     utilise, gain, capacites, details = {}, auto, {}, {}
+    # gain inscrit dans les comptes (recettes en plus, dépenses en moins) : diffère de `gain` quand un levier compte
+    # pour la règle sans être écrit en solde (contribution empruntée aux ménages, 12/11/2026)
+    gain_comptes = auto
     for lv in regle.leviers:
         cap = lv.capacite(t, etat)
         capacites[lv.nom] = cap
@@ -289,13 +294,15 @@ def _appliquer_regle(regle: Regle, t: int, etat: dict, avant: float, pib_t: floa
         for poste, v in (lv.ecritures(t, x) if lv.ecritures else [("recettes", x * lv.rendement)]):
             if poste == "recettes":
                 rec += v
+                gain_comptes += v
             else:
                 bl[poste] = bl.get(poste, 0.0) + v
+                gain_comptes -= v
         if lv.appliquer:
             lv.appliquer(t, x, etat)
         if lv.detail:
             details[lv.nom] = lv.detail(t, x, etat)
-    return {"avant": avant * 100, "automatiques": auto, "leviers": utilise, "capacites": capacites, "details": details, "gain": gain,
+    return {"avant": avant * 100, "automatiques": auto, "leviers": utilise, "capacites": capacites, "details": details, "gain": gain, "gain_comptes": gain_comptes,
             "reste_a_couvrir": reste, "ecart_cible": ecart * pib_t, "rec": rec, "bl": bl}
 
 

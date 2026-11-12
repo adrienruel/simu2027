@@ -12,12 +12,16 @@ CONTRIBUTION, RUI = "Contribution d'épargne retraite", "Baisse du revenu univer
 
 @pytest.mark.parametrize("s", ["crise", "prudent", "median", "optimiste"])
 def test_meme_point_de_depart(s):
-    """3 % en 2029, sauf si les instruments de la règle sont au maximum (5 points d'épargne, RUI au plancher)."""
+    """La règle vise 3 % en 2029, sauf si ses instruments sont au maximum (5 points d'épargne, RUI au plancher).
+    Depuis le 12/11/2026 (clause.contribution_en_emprunt), la contribution est un emprunt aux ménages : la règle la
+    compte pour atteindre 3 %, mais le déficit publié, au sens de Maastricht, la comprend."""
     r = R[s][2029]["regle"]
+    contribution = r["leviers"][CONTRIBUTION] / R[s][2029]["pib"] * 100
     if r["reste_a_couvrir"] > 1e-6:
-        assert r["details"][CONTRIBUTION]["points"] == pytest.approx(5.0) and R[s][2029]["deficit"] < 4.0  # règle au maximum
+        assert r["details"][CONTRIBUTION]["points"] == pytest.approx(5.0)  # règle au maximum
+        assert R[s][2029]["deficit"] - contribution < 4.0
     else:
-        assert R[s][2029]["deficit"] == pytest.approx(3.0, abs=0.01)
+        assert R[s][2029]["deficit"] == pytest.approx(3.0 + contribution, abs=0.01)
     assert R[s][2029]["deficit_sans_regle"] > 3.0
 
 
@@ -52,7 +56,8 @@ def test_les_comptes_se_publient_avec_et_sans_la_regle():
     for s in R:
         for t in R[s]:
             if R[s][t]["deficit"] > R[s][t]["deficit_avant_regle"] + 1e-9:
-                assert R[s][t]["regle"]["gain"] < 0
+                # la contribution, emprunt aux ménages, n'améliore pas le déficit publié (12/11/2026)
+                assert R[s][t]["regle"]["gain_comptes"] < 0
 
 
 def test_v235_prudent_seul():

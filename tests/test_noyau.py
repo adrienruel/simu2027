@@ -77,7 +77,10 @@ def test_ecologie_de_droite_sur_le_noyau_sans_moteur_propre(p):
         if regle["reste_a_couvrir"] > 1e-6:
             assert all(regle["leviers"][k] == pytest.approx(regle["capacites"][k]) for k in regle["leviers"])
         else:
-            assert r[s][2037]["deficit"] == pytest.approx(3.0, abs=0.01) or r[s][2037]["deficit_avant_regle"] <= 3.0
+            # la contribution est un emprunt aux ménages (12/11/2026) : la règle la compte, le déficit publié aussi
+            contribution = regle["leviers"]["Contribution d'épargne retraite"] / r[s][2037]["pib"] * 100
+            assert (r[s][2037]["deficit"] == pytest.approx(3.0 + contribution, abs=0.01)
+                    or r[s][2037]["deficit_avant_regle"] <= 3.0)
 
 
 def test_scenario_sans_regle_est_un_vrai_contrefactuel(p):
@@ -89,7 +92,10 @@ def test_scenario_sans_regle_est_un_vrai_contrefactuel(p):
         assert avec[t]["deficit_sans_regle"] == pytest.approx(coupee[t]["deficit"], abs=1e-6)
         assert avec[t]["sans_regle"]["dette_pib"] == pytest.approx(coupee[t]["dette_pib"], abs=1e-6)
     assert avec[2050]["quasi_dette"] > 0 and coupee[2050]["quasi_dette"] == 0
-    assert avec[2050]["dette_et_quasi_dette_pib"] > avec[2050]["dette_pib"]
+    # contribution en emprunt (12/11/2026) : les créances sont déjà dans la dette publiée, sans double compte
+    assert avec[2050]["dette_et_quasi_dette_pib"] == pytest.approx(avec[2050]["dette_pib"])
+    ancienne = noyau.resultats(p.avec({"clause.contribution_en_emprunt": False}), ("prudent",))["prudent"]
+    assert ancienne[2050]["dette_et_quasi_dette_pib"] > ancienne[2050]["dette_pib"]
 
 
 @pytest.fixture(scope="module")
@@ -107,7 +113,7 @@ def test_bilan_des_mesures(ed, p):
     base = sq.simuler(p)["prudent"]
     for t in (2029, 2050):
         effet = sum(x[t] for x in b) + r["prudent"][t]["dynamiques"]["fonds"]["solde"]
-        effet += r["prudent"][t]["regle"]["gain"]
+        effet += r["prudent"][t]["regle"]["gain_comptes"]  # ce que la règle a inscrit au solde
         assert effet == pytest.approx(r["prudent"][t]["solde_primaire"] - base[t]["solde_primaire"], abs=1e-6)
 
 

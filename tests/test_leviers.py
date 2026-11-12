@@ -78,7 +78,9 @@ def test_regle_automatique_vise_3_pour_cent():
     for t, c in sc.items():
         r = c["regle"]
         if r["reste_a_couvrir"] <= 1e-6:
-            assert c["deficit"] <= 3.0 + 1e-4, t
+            # contribution en emprunt aux ménages (12/11/2026) : comptée par la règle, pas par le déficit publié
+            contribution = r["leviers"]["Contribution d'épargne retraite"] / c["pib"] * 100
+            assert c["deficit"] - contribution <= 3.0 + 1e-4, t
         else:
             assert r["details"]["Contribution d'épargne retraite"]["points"] >= P.val("clause.points_contribution_max") - 1e-6, t
 

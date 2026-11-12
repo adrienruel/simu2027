@@ -23,7 +23,8 @@ Formules (celles d'Écologie de droite, programmes/ecologie_de_droite/effets.py)
   productivité des réformes (le canal « productivite » libre n'est plus utilisé par aucun programme) ;
 - adoption de l'IA : gain de productivité de l'IA du statu quo (macro.ia_productivite) × part, cumulé ;
 - école : niveau des élèves × macro.croissance_par_ecart_type, monté linéairement, cumulé ;
-- le PIB en plus rapporte la part des recettes dans le PIB du statu quo (règle du canal d'offre commun) ;
+- le PIB en plus rapporte au solde le dividende de productivité du statu quo (statu_quo.dividende_productivite :
+  recettes en plus moins dépenses indexées en plus, ≈ 12 % après dix ans), comme pour tous les gains de productivité ;
 - baisse de l'écart de taux : plus un canal déclaré ; règle commune du noyau, gagnée par le résultat (chaque année de
   déficit sous le statu quo compte : noyau.baisse_ecart_taux) ;
 - règle de trajectoire : celle du noyau (moteur/noyau.Regle) ; chaque levier a une capacité en part du PIB et porte
@@ -61,15 +62,17 @@ def _montee(t: int, debut: int, annees: float) -> float:
 def effets(prog, p: Parametres, s: str) -> dict:
     """Mesures de recettes, PIB en plus (Md€) et écart de taux des canaux déclarés, dans le scénario s."""
     d = declares(prog)
-    y, rec = sq.pib(p, s), sq.recettes(p, s)
-    part_rec = {t: rec[t] / y[t] for t in ANNEES}
+    y = sq.pib(p, s)
+    # gains de productivité : ce qui reste au solde quand la productivité monte, dépenses indexées comprises
+    # (statu_quo.dividende_productivite ; relecture neutre n° 2, point 1, décision d'Adrien du 12/11/2026)
+    dividende = sq.dividende_productivite(p, s)
     pib = {t: 0.0 for t in ANNEES}
     mesures: list[Mesure] = []
 
     def ajouter(nom: str, serie_pib: dict[int, float]) -> None:
         for t in ANNEES:
             pib[t] += serie_pib[t]
-        mesures.append(Mesure(f"Canal déclaré : {nom}", "recettes", {t: serie_pib[t] * part_rec[t] for t in ANNEES}, "effet_macro"))
+        mesures.append(Mesure(f"Canal déclaré : {nom}", "recettes", {t: serie_pib[t] * dividende[t] for t in ANNEES}, "effet_macro"))
 
     if "fraude_tva" in d:
         x = d["fraude_tva"]
