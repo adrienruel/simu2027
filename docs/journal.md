@@ -1308,3 +1308,15 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   trancher ; une douzaine de constructions du modèle à écrire en décisions.
 - Tondelier, Mélenchon : chiffrages de mesures documentés, aucun au-dessus de 0,03 point pour 10 %.
 - Aucune valeur changée : les résultats sont inchangés.
+
+## 13/11/2026 (soir) — C1 : décisions d'Adrien appliquées
+
+- Quatorze hypothèses sans source passent en DECISION, motif en tête de note (liste dans `docs/sources_c1.md`).
+- Besoin de financement des collectivités : toutes les administrations publiques locales (17,8 Md€ en 2024, Insee),
+  au prorata des deux blocs du classeur ; apprentissage : 8 Md€ encadrés par le budget de l'alternance de France
+  compétences (8,2 Md€ en 2026).
+- Écologie de droite, déficit 2037 au prudent : 4,14 → 4,15 % avec la règle, 5,01 → 5,13 % sans ; 2050 : 4,58 → 4,72 %.
+- **Anomalie trouvée** : `tests/test_chomage.py::test_chomage_calcule_chaque_annee` échoue, et échouait déjà au
+  commit d547442. En optimiste, le chômage d'Écologie de droite passe sous le plancher incompressible (3,5 %) de 2044
+  à la fin (2,6 % en 2047) : les emplois du coût du travail passés le 13/11 par le canal d'offre commun n'ont plus de
+  rendements décroissants vers le plancher, que l'ancien bloc propre appliquait. À corriger.

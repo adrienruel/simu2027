@@ -110,7 +110,8 @@ epargne:
   taux_emploi_carriere:
     valeur: 0.75
     unite: taux
-    statut: HYPOTHESE
+    statut: DECISION
+    note: "DÉCISION du 13/11/2026 (C1) : ordre de grandeur du taux d'emploi aux âges actifs, sans source plus fine pour une carrière entière."
   part_rente_viagere:
     valeur: 0.5
     unite: taux
@@ -212,8 +213,8 @@ tva:
     valeur: [0, 20000, 32000, 50000]
     unite: eur_an
     annee_euros: 2026
-    statut: HYPOTHESE
-    note: Revenu net annuel à partir duquel s'applique chaque profil (modeste, médian, aisé, très aisé).
+    statut: DECISION
+    note: "DÉCISION du 13/11/2026 (C1) : choix du programme : seuils des profils de TVA. Revenu net annuel à partir duquel s'applique chaque profil (modeste, médian, aisé, très aisé)."
 
 # --- Impôt local unique -------------------------------------------------------
 impot_local:
@@ -235,8 +236,8 @@ inactifs:
     valeur: 2000
     unite: eur_mois
     annee_euros: 2026
-    statut: HYPOTHESE
-    note: Le RUI d'un inactif baisse linéairement avec son autre revenu, nul à 2 000 €/mois (Inactifs!P14).
+    statut: DECISION
+    note: "DÉCISION du 13/11/2026 (C1) : choix du programme : barème du RUI des inactifs. Le RUI d'un inactif baisse linéairement avec son autre revenu, nul à 2 000 €/mois (Inactifs!P14)."
   part_chomeurs_deja_comptee:
     valeur: 0.2
     unite: taux
@@ -245,7 +246,8 @@ inactifs:
   rui_moyen_chomeurs:
     valeur: 1.0
     unite: taux
-    statut: HYPOTHESE
+    statut: DECISION
+    note: "DÉCISION du 13/11/2026 (C1) : choix du programme : un chômeur reçoit le RUI plein."
 
 # --- Entreprises ----------------------------------------------------------------
 entreprises:
@@ -259,7 +261,7 @@ entreprises:
 
 # --- Indépendants (feuille Indépendants, v193) ------------------------------------
 independants:
-  correction_couples: {valeur: 0.894, unite: sans_unite, statut: HYPOTHESE, note: "Imposition commune des couples d'indépendants (Anciennes pensions!B21). Depuis le 29/10/2026, ne sert plus qu'aux indépendants : les retraités ont un calcul propre (anciennes_pensions.couples). Reste un forfait, gardé à la valeur la plus favorable aux couples (prudent pour les recettes)."}
+  correction_couples: {valeur: 0.894, unite: sans_unite, statut: DECISION, note: "DÉCISION du 13/11/2026 (C1) : forfait faute de données individuelles sur les couples d'indépendants, gardé à la valeur la plus favorable aux couples (prudente pour les recettes). Imposition commune des couples d'indépendants (Anciennes pensions!B21). Depuis le 29/10/2026, ne sert plus qu'aux indépendants : les retraités ont un calcul propre (anciennes_pensions.couples). Reste un forfait, gardé à la valeur la plus favorable aux couples (prudent pour les recettes)."}
   salaire_pivot:
     valeur: 45000
     unite: eur_an
@@ -279,7 +281,7 @@ revenus_capital:
   plafond: {valeur: 0.40, unite: taux, statut: DECISION}
 
 logement:
-  amortissement_loyers: {valeur: 0.85, unite: taux, statut: HYPOTHESE}
+  amortissement_loyers: {valeur: 0.85, unite: taux, statut: DECISION, note: "DÉCISION du 13/11/2026 (C1) : part des loyers couverte par l'amortissement et les charges, ordre de grandeur repris du classeur."}
   part_plus_values_bailleurs: {valeur: 0.5, unite: taux, statut: HYPOTHESE}
   is_bailleurs_sociaux: {valeur: 6.48, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, note: "Loyers supplémentaires des bailleurs sociaux (Logement!B52), à porter avec la feuille Logement."}
 
@@ -288,8 +290,8 @@ fonds:
   part_versee_au_fonds: {valeur: 1.0, unite: taux, statut: DECISION}
 
 carbone_importe:
-  intensite_kg_par_euro: {valeur: 0.543, unite: sans_unite, statut: HYPOTHESE}
-  part_importee: {valeur: 0.64, unite: taux, statut: HYPOTHESE}
+  intensite_kg_par_euro: {valeur: 0.543, unite: sans_unite, statut: DECISION, note: "DÉCISION du 13/11/2026 (C1) : assiette de l'accise carbone aux frontières reprise du classeur ; à confronter à l'empreinte carbone du SDES si l'accise est retravaillée."}
+  part_importee: {valeur: 0.64, unite: taux, statut: DECISION, note: "DÉCISION du 13/11/2026 (C1) : assiette de l'accise carbone aux frontières reprise du classeur ; à confronter à l'empreinte carbone du SDES si l'accise est retravaillée."}
   part_hors_ue: {valeur: 0.75, unite: taux, statut: HYPOTHESE, source: "Encadrement : l'UE27 est à l'origine de près d'un quart des émissions importées (SDES-Insee, empreinte carbone 1990-2023)"}
   abattement_preuve: {valeur: 0.2, unite: taux, statut: HYPOTHESE}
   elasticite_prix: {valeur: 0.6, unite: sans_unite, statut: HYPOTHESE}
@@ -302,7 +304,7 @@ carbone_importe:
 
 # --- Budget de l'État 2026 (feuille Budget État 2026) ----------------------------
 budget_etat:
-  apprentissage: {valeur: 8.0, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, source: "Encadrement : dépense publique totale pour l'apprentissage 20,5 Md€ en 2026 (OFCE, Policy brief 157) ; aides aux employeurs 2,0 Md€ en 2027 (PAP Travail et emploi, PLF 2027)", note: "Ordre de grandeur (Total!B77)."}
+  apprentissage: {valeur: 8.0, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, source: "Encadrement : budget de l'alternance de France compétences 8,2 Md€ en 2026, dont 6,9 Md€ pour les contrats d'apprentissage (budget initial) ; 7,3 Md€ pour l'apprentissage au budget rectificatif d'avril 2026 (France compétences)", note: "Ordre de grandeur (Total!B77). Coût de la formation des apprentis reprise par l'Éducation nationale (mesure « sélection à l'université, apprentissage repris par l'Éducation nationale ») : c'est le financement des contrats par France compétences et les Opco, pas les aides à l'embauche (2,0 Md€ en 2027) ni la rémunération des apprentis."}
   part_eleves_retour_public: {valeur: 0.2, unite: taux, statut: HYPOTHESE}
 
 # --- Dépenses statiques (feuille Total, lignes 23 à 44) -----------------------------
@@ -332,14 +334,14 @@ securite_sociale:
       france_travail_unedic: {montant: 5.2, part: calcul}
       operateurs_taxes_affectees: {montant: 21.68, part: 0}
     unite: sans_unite
-    statut: HYPOTHESE
-    note: Md€ (Sécurité sociale 2026, lignes 13 à 23).
+    statut: DECISION
+    note: "DÉCISION du 13/11/2026 (C1) : montants repris du tableau Sécurité sociale 2026 du classeur ; parts : choix de modélisation. Md€ (Sécurité sociale 2026, lignes 13 à 23)."
   gestion_total_hors_at_maladie: {valeur: 14.63, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Écrit dans la formule B15 (14,63 − B13 − B14)."}
   agents_france_travail: {valeur: 48632, unite: sans_unite, statut: HYPOTHESE, note: "Écrit dans la formule C22."}
   aides_france_travail_supprimees: {valeur: 0.2, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE}
 
 ia:
-  plafond_taches_automatisables: {valeur: 0.4, unite: taux, statut: HYPOTHESE}
+  plafond_taches_automatisables: {valeur: 0.4, unite: taux, statut: DECISION, note: "DÉCISION du 13/11/2026 (C1) : hypothèse de comportement sans estimation publiée pour l'administration française, choisie prudente."}
   cout_services_ia: {valeur: 0.25, unite: taux, statut: HYPOTHESE, note: "Part des salaires économisés (restée sans source)."}
   effectifs_etat:
     valeur: {education_nationale: 1060503, interieur: 304040, armees: 270554, economie_finances: 126000, justice: 94698, ecologie_territoires: 36000, agriculture: 30000, affaires_etrangeres: 13600, travail_sante_solidarites: 13000, premier_ministre: 10000, culture: 9000}
@@ -374,7 +376,7 @@ rui_complements:
   aide_poste_entreprises_adaptees: {valeur: 0.4278, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Mission Travail et emploi 2026"}
 
 collectivites:
-  besoin_financement_2024: {valeur: [5.608, 9.7], unite: sans_unite, statut: HYPOTHESE, note: "Md€ de 2024, Collectivités!B25:C25."}
+  besoin_financement_2024: {valeur: [6.521, 11.279], v235: [5.608, 9.7], unite: sans_unite, statut: SOURCE, source: "Insee, comptes des administrations publiques 2025 (Insee Première n° 2106, 2026) : besoin de financement des administrations publiques locales de 17,8 Md€ en 2024", note: "Md€ de 2024. DÉCISION du 13/11/2026 (C1) : périmètre de toutes les administrations publiques locales (syndicats et organismes locaux compris), celui du déficit au sens de Maastricht ; réparti entre les deux blocs au prorata du classeur (Collectivités!B25:C25 : 5,608 et 9,7, soit 15,3 Md€)."}
   part_financee: {valeur: 0, unite: taux, statut: HYPOTHESE}
 
 budget_statique:
@@ -445,7 +447,8 @@ macro:
   part_capital_nouveau:
     valeur: {crise: 0.75, prudent: 0.75, median: 0.75, optimiste: 0.85}
     unite: sans_unite
-    statut: HYPOTHESE
+    statut: DECISION
+    note: "DÉCISION du 13/11/2026 (C1) : hypothèse de comportement sans estimation publiée, choisie prudente (0,85 en optimiste)."
   logement_canal:
     valeur: {intensite: 1, debut: 2029}
     unite: sans_unite
@@ -881,14 +884,14 @@ education:
 quotient:
   parts_par_enfant: {valeur: 0.5, unite: sans_unite, statut: DECISION}
   plafond_demi_part: {valeur: 1000, unite: eur_an, annee_euros: 2026, statut: DECISION}
-  part_enfants_parent_imposable: {valeur: 0.85, unite: taux, statut: HYPOTHESE}
+  part_enfants_parent_imposable: {valeur: 0.85, unite: taux, statut: DECISION, note: "DÉCISION du 13/11/2026 (C1) : ordre de grandeur repris du classeur, sans source publiée."}
   familial_applique: {valeur: 1, unite: sans_unite, statut: DECISION}
   conjugal:
     valeur: {couples: 7000000, part_un_revenu: 0.25, correlation: 0.4, retraites_forfait: 1, applique: 1}
     v235: {couples: 7000000, part_un_revenu: 0.25, gain_un_revenu: 8510, gain_deux_revenus: 580, retraites_forfait: 1, applique: 1}
     unite: sans_unite
-    statut: HYPOTHESE
-    note: "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Restent des hypothèses : nombre de couples, part à un seul revenu, corrélation des revenus."
+    statut: DECISION
+    note: "DÉCISION du 13/11/2026 (C1) : données d'entrée du calcul des gains de l'imposition commune (couples, part à un revenu, corrélation), ordres de grandeur repris du classeur. Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Restent des hypothèses : nombre de couples, part à un seul revenu, corrélation des revenus."
   rui_conjoint: {valeur: {inactifs_en_couple: 1300000, inactifs_feuille_rui: 3800000, part_supprimee: 0.75, part_nette_tva: 0.86}, unite: sans_unite, statut: HYPOTHESE, note: "Règle confirmée par Adrien le 29/10/2026 : le RUI du conjoint sans revenu baisse avec le revenu net du couple et s'éteint quand il atteint deux RUI par personne (moteur/menages_types.py, réforme OpenFisca). La part supprimée (0,75) reste une hypothèse de chiffrage global."}
 
 # --- Scénario de crise : ce qui change hors des paramètres par scénario ---------------

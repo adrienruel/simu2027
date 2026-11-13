@@ -705,8 +705,8 @@ ministeres:
   elasticite_eleves_etudiants:
     valeur: 0.5
     unite: sans_unite
-    statut: HYPOTHESE
-    note: "Baisse des moyens de l'enseignement pour 1 % d'élèves (après 2035) ou d'étudiants en moins. Prudent : la moitié (les moyens par élève ont augmenté quand les effectifs baissaient ; c'est aussi la règle « un départ sur deux » de la v235). La baisse d'ici 2035 est déjà dans les mesures (enseignants ajustés aux élèves)."
+    statut: DECISION
+    note: "DÉCISION du 13/11/2026 (C1) : aucune estimation publiée ; la moitié, comme la règle « un départ sur deux » de la v235. Baisse des moyens de l'enseignement pour 1 % d'élèves (après 2035) ou d'étudiants en moins. Prudent : la moitié (les moyens par élève ont augmenté quand les effectifs baissaient ; c'est aussi la règle « un départ sur deux » de la v235). La baisse d'ici 2035 est déjà dans les mesures (enseignants ajustés aux élèves)."
 
 # --- Économies saisies par un programme (décision du 05/11/2026) --------------------------------
 economies:

@@ -70,8 +70,19 @@ déficit de plus de 0,03 point pour 10 % : Tondelier, 3 au-dessus de 0,01 point 
 absorbée par la hausse du SMIC, +0,01 / +0,03) ; Mélenchon, 10 au-dessus de 0,01 point (le plus lourd, le grand âge,
 +0,02 / +0,05). Rien à ajouter : c'est de l'estimation documentée, pas une hypothèse cachée.
 
-## Ce qui reste
+## Suite donnée (13/11/2026, soir, décisions d'Adrien)
 
-1. Décisions d'Adrien sur la liste « à écrire en décisions » (statut DECISION et une phrase de motif chacun).
-2. Périmètre du besoin de financement des collectivités (Maastricht : APUL entières ou collectivités seules).
-3. Périmètre des 8 Md€ d'apprentissage.
+- Les quatorze paramètres « à écrire en décisions » (le commun et les treize d'Écologie de droite) passent au statut
+  DECISION, le motif en tête de leur note (« DÉCISION du 13/11/2026 (C1) : … »).
+- Collectivités : périmètre de toutes les administrations publiques locales, celui du déficit au sens de Maastricht.
+  17,8 Md€ en 2024 (Insee Première n° 2106), répartis entre les deux blocs au prorata du classeur : 6,521 et 11,279
+  (statut SOURCE ; la v235 garde 5,608 et 9,7).
+- Apprentissage : les 8 Md€ sont le coût de la formation des apprentis, repris par l'Éducation nationale dans le
+  programme. Le bon repère est donc le budget de l'alternance de France compétences : 8,2 Md€ en 2026 (budget
+  initial), dont 6,9 Md€ pour les contrats d'apprentissage ; 7,3 Md€ pour l'apprentissage au budget rectificatif.
+  La valeur reste à 8 Md€, avec cet encadrement. Les aides à l'embauche (2,0 Md€ en 2027) et la rémunération des
+  apprentis n'en font pas partie.
+- Effet : déficit d'Écologie de droite sans règle en 2037 au prudent 5,01 → 5,13 % ; avec la règle 4,14 → 4,15 %
+  (médian 2,57 → 2,68, optimiste 0,83 → 0,93, crise 6,60 → 6,72) ; 2050 au prudent 4,58 → 4,72 %.
+
+Il ne reste dans Écologie de droite que des hypothèses sans source de poids inférieur à 0,03 point pour 10 %.
