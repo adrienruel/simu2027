@@ -49,7 +49,32 @@ def economie_hopitaux_ia(p: Parametres, t: int) -> float:
     return baisse * masse * (1 - p.val("ia.cout_services_ia"))
 
 
+def trajectoire_statu_quo(p: Parametres, s: str) -> dict:
+    """Santé du statu quo (ONDAM + autonomie, prévisions communes : dérive 2027-2029, assurance maladie puis PROMEDE,
+    sur les salaires) et invalidité du statu quo (bloc « AAH et invalidité »), avec le facteur de croissance de la
+    santé (rapport à la base de 2026) et celui des salaires depuis 2029. Sert de base quand
+    sante_trajectoire.base_statu_quo est vrai (décision d'Adrien du 13/11/2026)."""
+    import copy
+    from . import statu_quo as sq
+    from .unites import facteur
+    if s == "prudent" and p.colonne_prudent != "prudent":
+        # copie en_crise / en_scenario : le statu quo se calcule sur le vrai scénario, comme sq.blocs(p, s) du noyau
+        s = p.colonne_prudent
+        p = copy.copy(p)
+        p.__dict__.pop("_cache", None)
+        p.colonne_prudent = "prudent"
+    san, blo, w = sq.sante(p, s), sq.blocs(p, s), sq.salaires(p, s)
+    auto = p.val("sante.aide_sociale_autonomie_2024") * facteur(p, 2024, "recettes")
+    inv = p.val("sante.pensions_invalidite_2024") * facteur(p, 2024, "recettes")
+    part = inv / (p.val("statu_quo.aah") + inv)
+    base = p.val("sante.ondam_2026") + auto
+    return {"sante": san, "invalidite": {t: blo[t]["aah_invalidite"] * part for t in ANNEES},
+            "C": {t: san[t] / base for t in ANNEES}, "wt": {t: w[t] / w[2029] for t in ANNEES}, "autonomie": auto}
+
+
 def depenses(p: Parametres, s: str) -> dict[int, float]:
+    if p.val("sante_trajectoire.base_statu_quo"):
+        return _depenses_sur_statu_quo(p, s)
     base = sante_statique(p) + economies_sante_a_terme(p, "prudent")  # Santé!B5
     k = derive_2029(p)
     mesures = p.val("sante.mesures_a_terme", s)
@@ -65,6 +90,31 @@ def depenses(p: Parametres, s: str) -> dict[int, float]:
         cr = _croissance(p, s, t)
         forfait = fg["revalorise_croissance"] * fg["depense_am_2024"] * k * (cr - (1 + g) ** (t - 2029)) * (1 - fg["part_perdue"][s])
         out[t] = (base * k - eco) * cr - economie_hopitaux_ia(p, t) - forfait
+    return out
+
+
+def _depenses_sur_statu_quo(p: Parametres, s: str) -> dict[int, float]:
+    """Santé du programme = santé + invalidité du statu quo (mêmes prévisions), moins les mesures du programme. Le
+    périmètre propre au programme (gestion de l'assurance maladie, autonomie nette du revenu universel, coût des
+    agents hospitaliers) suit la croissance de la santé du statu quo."""
+    from .depenses.statique import autonomie, economie_hopitaux, securite_sociale
+    T = trajectoire_statu_quo(p, s)
+    C, wt = T["C"], T["wt"]
+    k = derive_2029(p)
+    auto_brut = T["autonomie"] if p.val("sante.reprise_autonomie_par_etat") else 0.0
+    propre = securite_sociale(p)[1] + autonomie(p) - auto_brut - economie_hopitaux(p) - (T["autonomie"] - auto_brut)
+    mesures = p.val("sante.mesures_a_terme", s)
+    montee = p.val("sante_trajectoire.montee_mesures")
+    options = p.val("sante_trajectoire.options")
+    fg = p.val("sante_trajectoire.forfait_generalistes")
+    out = {}
+    for t in ANNEES:
+        n = max(0, t - 2029)
+        eco = sum(v * min(1, n / montee[m]) for m, v in mesures.items())
+        eco += sum(o["montant"] * o["comptee"] * min(1, n) for o in options.values())
+        forfait = fg["revalorise_croissance"] * fg["depense_am_2024"] * (C[t] - k * wt[t]) * (1 - fg["part_perdue"][s])
+        out[t] = (T["sante"][t] + T["invalidite"][t] + propre * C[t] - eco * C[t] / k
+                  - economie_hopitaux_ia(p, t) - forfait)
     return out
 
 

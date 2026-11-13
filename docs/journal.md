@@ -1190,3 +1190,25 @@ Demande d'Adrien (22 h 53) : régler les limites de B2, puis les chantiers sans 
 
 Déficit 2037 au prudent (avant → après) : Retailleau 10,59 → 10,46 ; Attal 11,61 → 11,54 ; Glucksmann 14,39 →
 14,44 ; Mélenchon 29,55 → 29,63 ; Écologie de droite 4,21 → 4,29 ; les autres à moins de 0,05 point.
+
+## 13/11/2026 — Phase A7 (registre d'Écologie de droite par scénario), santé sur le statu quo, B7
+
+- **A7, registre par scénario** (`macro.registre_par_scenario`, DÉCISION) : le budget d'Écologie de droite était figé
+  au prudent ; il se calcule désormais dans chaque scénario avec `Parametres.en_scenario` (copie dont la colonne
+  prudente lit le médian ou l'optimiste, comme `en_crise` pour la crise). Les lignes de méthode « tendance »,
+  « démographie » et « économies du registre » disparaissent. L'effet de l'IA du statu quo est recalculé dans le
+  budget du programme (registre avec la tendance + l'IA du scénario), au lieu d'une ligne de méthode.
+- **Santé sur le statu quo** (`sante_trajectoire.base_statu_quo`, DÉCISION d'Adrien du 13/11/2026 : « le modèle du
+  statu quo augmente les dépenses selon les forecasts, et les programmes diminuent cette augmentation en fonction des
+  mesures ») : la santé du programme part de la santé + l'invalidité du statu quo (dérive 2027-2029, scénarios de
+  l'assurance maladie puis PROMEDE, sur les salaires) ; ses mesures (gestion, autonomie, agents hospitaliers,
+  économies à terme, IA des hôpitaux, forfait des généralistes, produits nocifs, antidépresseurs) suivent la même
+  croissance. La ligne de méthode « même périmètre sur la pente du programme » est nulle par construction et
+  disparaît (elle valait −1,4 / −7,0 / −12,8 Md€ en 2037 au prudent / médian / optimiste).
+- **B7, plafonds communs des économies nommées** : DÉCISION d'Adrien du 13/11/2026 : ne rien plafonner. Les
+  économies nommées des programmes restent à leur chiffrage (relecture n° 2, point 11, clos).
+
+Écologie de droite, déficit (avant → après, avec la règle) : 2037 crise 6,94 → 6,99, prudent 4,29 → 4,34, médian
+2,38 → 3,13, optimiste 0,78 → 1,67 ; 2050 médian 0,06 → 3,29, optimiste −1,89 → 0,82. L'écart entre scénarios
+venait en partie des lignes de méthode : le budget figé au prudent comptait au médian et à l'optimiste une santé et
+des économies qui n'étaient pas celles du programme. Les autres programmes ne changent pas.

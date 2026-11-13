@@ -280,12 +280,22 @@ def mesures_sante(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> list:
         n = max(0, t - 2029)
         return (sum(v * min(1, n / montee[x]) for x, v in eco_m.items())
                 + sum(o["montant"] * o["comptee"] * min(1, n) for o in options.values()))
-    C = {t: k * cr[t] for t in ANNEES}
-    out = [
+    sur_sq = q.val("sante_trajectoire.base_statu_quo")
+    if sur_sq:  # décision du 13/11/2026 : santé du statu quo (mêmes prévisions) moins les mesures du programme
+        T = ms.trajectoire_statu_quo(q, "prudent")
+        C, kw = T["C"], {t: k * T["wt"][t] for t in ANNEES}
+        cr = {t: C[t] / k for t in ANNEES}
+    else:
+        C, kw = {t: k * cr[t] for t in ANNEES}, {t: k * (1 + g) ** (t - 2029) for t in ANNEES}
+    base_prog = ({t: T["sante"][t] + T["invalidite"][t] for t in ANNEES} if sur_sq
+                 else {t: (q.val("sante.ondam_2026") + inv + auto_brut) * C[t] for t in ANNEES})
+    out = [] if sur_sq else [  # sur le statu quo, la ligne est nulle par construction
         Mesure("Santé : même périmètre (ONDAM, autonomie, invalidité) sur la pente du programme, contre la santé et "
                "l'invalidité du statu quo", "sante",
-               {t: (q.val("sante.ondam_2026") + inv + auto_brut) * C[t] - bl_sq[t]["sante"] - inv_sq[t] for t in ANNEES},
+               {t: base_prog[t] - bl_sq[t]["sante"] - inv_sq[t] for t in ANNEES},
                "methode", note="Écart de méthode : pentes de l'assurance maladie (programme) contre salaires et âge (statu quo)."),
+    ]
+    out += [
         Mesure("Santé : gestion de l'assurance maladie, comptée en santé (classement ; le statu quo la met dans « autres »)",
                "sante", {t: gestion * C[t] for t in ANNEES}, "classement"),
         Mesure("Santé : coût des agents hospitaliers aligné sur le privé", "sante",
@@ -297,7 +307,7 @@ def mesures_sante(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> list:
         Mesure("Santé : IA dans les fonctions administratives des hôpitaux", "sante",
                {t: -ms.economie_hopitaux_ia(q, t) for t in ANNEES}, "budget"),
         Mesure("Santé : forfait des généralistes (revalorisé avec la croissance au lieu de la pente)", "sante",
-               {t: -fg["revalorise_croissance"] * fg["depense_am_2024"] * k * (cr[t] - (1 + g) ** (t - 2029))
+               {t: -fg["revalorise_croissance"] * fg["depense_am_2024"] * (C[t] - kw[t])
                 * (1 - fg["part_perdue"]["prudent"]) for t in ANNEES}, "budget"),
     ]
     for cle, x in lig.items():
@@ -738,7 +748,16 @@ class EcologieDeDroite:
         from moteur.inflation import serie
         from moteur.programme_simple import MIROIR, TOUTES, multiplicateur
         pc = p.en_crise()
-        jeux = {"crise": (pc, "prudent"), "prudent": (p, "prudent"), "median": (p, "median"), "optimiste": (p, "optimiste")}
+        if p.val("macro.registre_par_scenario"):
+            # phase A7 (13/11/2026) : chaque scénario est calculé comme la crise, par un jeu dont la colonne prudente
+            # lit ce scénario ; le budget du programme suit alors la tendance, l'IA, la démographie, la santé et les
+            # économies datées du scénario, et les lignes « méthode » (écarts au prudent) sont nulles
+            # le jeu garde le nom du scénario : les tableaux indexés par scénario (emploi, hauts revenus…) rendent son
+            # entrée, pas les règles propres au prudent (moyenne des jeux crise et médian, etc.)
+            jeux = {"crise": (pc, "prudent"), "prudent": (p, "prudent"), "median": (p.en_scenario("median"), "median"),
+                    "optimiste": (p.en_scenario("optimiste"), "optimiste")}
+        else:
+            jeux = {"crise": (pc, "prudent"), "prudent": (p, "prudent"), "median": (p, "median"), "optimiste": (p, "optimiste")}
         for s, (q, jeu) in jeux.items():
             if s in res or (scenarios is not None and s not in scenarios):
                 continue

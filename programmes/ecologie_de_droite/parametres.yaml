@@ -406,6 +406,11 @@ penibilite:
 # --- Effets macroéconomiques (feuille Effets macro), un jeu par scénario ----------------
 # Crise : valeurs de la feuille « Scénario de crise » de la v235 (anciennes valeurs « prudent ») ; à défaut, celles du prudent.
 macro:
+  registre_par_scenario:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Phase A7 de la roadmap (13/11/2026, décision d'Adrien : « A7 d'abord ») : chaque scénario est calculé comme la crise, par un jeu de paramètres dont la colonne prudente lit ce scénario (Parametres.en_scenario) : le budget du programme suit la tendance, l'IA du statu quo, la démographie, la santé et les économies datées du scénario. Les lignes « méthode » (IA du statu quo, tendance, démographie, économies du registre, santé du scénario), qui approchaient ces écarts à partir du prudent, sont nulles. false : ancienne convention, pour comparer."
   seniors_part_emploi_reportes:
     valeur: {crise: 0.085, prudent: 0.1275, median: 0.17, optimiste: 0.17}
     unite: taux
@@ -668,6 +673,7 @@ objectifs:
 
 # --- Santé année par année (feuille Santé) ------------------------------------------
 sante_trajectoire:
+  base_statu_quo: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 13/11/2026 : le statu quo augmente la santé selon les prévisions (assurance maladie puis PROMEDE, sur les salaires), le programme ne diminue cette hausse que par ses mesures. Supprime la ligne de méthode « même périmètre sur la pente du programme »."}
   montee_mesures: {valeur: {fraude: 4, carence: 1, transports: 2, cures: 1, imagerie: 5, conge_naissance: 1}, unite: sans_unite, statut: HYPOTHESE}
   options: {valeur: {carence_supplement: {montant: 0.45, comptee: 1}, franchises: {montant: 2.3, comptee: 0}, ald_non_exonerantes: {montant: 0.1, comptee: 0}}, unite: sans_unite, statut: SOURCE, source: "Options sourcées de la feuille Santé (lignes 59 à 61)"}
   hopitaux_administratifs: {valeur: {postes: 108602, cout_aligne: 42000}, unite: sans_unite, statut: HYPOTHESE}

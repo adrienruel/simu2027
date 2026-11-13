@@ -126,6 +126,28 @@ class Effets:
             self.taux_va = {t: part_budget for t in ANNEES}
         self.par_revenu = par_revenu
         self.traj = budget.postes(q, "prudent")
+        # phase A7 (13/11/2026) : l'IA du statu quo, absente du registre, est comptée par le registre lui-même, recalculé
+        # avec la tendance relevée du rythme de l'IA (grand pas, stable), puis ramené chaque année au niveau de l'IA
+        # atteint (k_t) ; remplace le dividende à petit pas (q_div), instable d'une année à l'autre
+        self.ia_registre = None
+        if q.val("macro.registre_par_scenario") and not getattr(q, "_calcul_dividende", False):
+            # (pas dans les copies de calcul : la déduction de l'investissement y relance une simulation complète)
+            ia = q.val("macro.ia_productivite", jeu)
+            if ia:
+                qi = q.avec({"macro.tendance": tend0 + ia})
+                qi.colonne_prudent, qi._surcharges, qi._calcul_dividende = q.colonne_prudent, q._surcharges, True
+                ti, t0 = budget.postes(qi, "prudent"), self.traj
+                d0, d1 = q.val("macro.premiere_annee_ia"), q.val("macro.annees_ia")
+                self.ia_registre = {}
+                r = 0.0
+                for t in ANNEES:
+                    r = (1 + r) * (1 + ia * (d0 <= t < d0 + d1)) - 1
+                    bump = ((1 + tend0 + ia) / (1 + tend0)) ** (t - 2029) - 1  # niveau du registre relevé (0 en 2029)
+                    if bump:
+                        self.ia_registre[t] = r / bump * (ti[t]["solde_primaire_hors_macro"] - t0[t]["solde_primaire_hors_macro"])
+                # 2029 : registre relevé égal au registre de base ; même rapport que 2030, au niveau de l'IA de 2029
+                r30 = (1 + ia) ** 2 - 1
+                self.ia_registre[2029] = self.ia_registre[2030] * ia / r30
         self.dividende = dividende_croissance(q, self.pib0)
         self.q_div = self.dividende if self.dividende is not None else {t: q.val("macro.part_pib_tendanciel_au_solde") for t in ANNEES}
         self.div_sq = sq.dividende_productivite(p, s)
@@ -154,7 +176,7 @@ class Effets:
         gf_s = module_sante.garde_fou(q, "prudent")
         gf_sc = ({x: module_sante.garde_fou(q, x) for x in ("median", "optimiste")} if q.val("sante_produits_nocifs.active")
                  else {x: {t: 0.0 for t in ANNEES} for x in ("median", "optimiste")})
-        self.sante = ({t: 0.0 for t in ANNEES} if jeu == "prudent"
+        self.sante = ({t: 0.0 for t in ANNEES} if (jeu == "prudent" or q.colonne_prudent == jeu)
                       else {t: dep_s["prudent"][t] - gf_s[t] - dep_s[jeu][t] + gf_sc[jeu][t] for t in ANNEES})
         self.tva_sante = tv[jeu]
         self.carbone = effet_solde(q, ligne_3_tva(q) / 1e9)[jeu]
@@ -282,7 +304,8 @@ class Effets:
             pib_ia = base * r_ia
             r_adopt = (1 + r_adopt) * (1 + g_ia * m("adoption_ia") * self.k_ia) - 1  # proportionnel au budget (B6)
             pib["ia_adoption"][t] = (y) * r_adopt  # l'IA du statu quo est déjà dans y
-            solde["ia"][t] = pib_ia * self.q_div[t]  # écart de méthode : l'IA du statu quo, absente du budget
+            solde["ia"][t] = (self.ia_registre[t] if self.ia_registre is not None
+                              else pib_ia * self.q_div[t])  # écart de méthode : l'IA du statu quo, absente du budget
             solde["ia_adoption"][t] = (base + pib_ia) * r_adopt * self.div_sq[t]  # canal du programme
             g_ecole = m("niveau_eleves") * m("croissance_par_ecart_type") * min(1, max(0, (t - q.val("macro.premiere_annee_ecole") + 1) / q.val("macro.annees_ecole")))
             r_ecole = (1 + r_ecole) * (1 + g_ecole) - 1
@@ -363,6 +386,12 @@ class Effets:
         for c, lib in self.LIBELLES.items():
             out.append(Mesure(f"Effet macro : {lib}", "recettes", dict(self.solde[c]), "effet_macro"))
         for c, lib in self.METHODE.items():
+            if self.ia_registre is not None and c in ("tendance", "demographie", "economies_registre", "sante"):
+                continue  # phase A7 : le registre du scénario les compte (lignes nulles)
+            if self.ia_registre is not None and c == "ia":
+                out.append(Mesure("Effet macro : IA du statu quo dans le budget du programme (registre recalculé avec l'IA du "
+                                  "scénario)", "recettes", dict(self.solde[c]), "effet_macro"))
+                continue
             out.append(Mesure(lib, "recettes", dict(self.solde[c]), "methode"))
         return out
 

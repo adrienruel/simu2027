@@ -167,6 +167,22 @@ class Parametres:
         _VIVANTES.append(c)
         return c
 
+    def en_scenario(self, scenario: str) -> "Parametres":
+        """Copie dont la colonne prudente lit le scénario donné (médian ou optimiste), comme en_crise pour la crise :
+        un moteur écrit pour le prudent calcule alors tout ce scénario (phase A7 de la roadmap, 13/11/2026, registre
+        d'Écologie de droite par scénario). La colonne « depart » reste le prudent."""
+        if scenario == "prudent":
+            return self
+        if scenario == "crise":
+            return self.en_crise()
+        c = copy.copy(self)
+        c.__dict__.pop("_cache", None)
+        c.__dict__.pop("_taux_local_force", None)
+        c.colonne_prudent = scenario
+        c._surcharges = dict(self._surcharges)
+        _VIVANTES.append(c)
+        return c
+
     def __iter__(self):
         return iter(self._p.values())
 
