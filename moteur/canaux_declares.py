@@ -68,9 +68,10 @@ def _montee(t: int, debut: int, annees: float) -> float:
     return max(0.0, min(1.0, (t - debut + 1) / annees)) if annees else float(t >= debut)
 
 
-def effets(prog, p: Parametres, s: str) -> dict:
-    """Mesures de recettes, PIB en plus (Md€) et écart de taux des canaux déclarés, dans le scénario s."""
-    d = declares(prog)
+def effets(prog, p: Parametres, s: str, d: dict | None = None) -> dict:
+    """Mesures de recettes, PIB en plus (Md€) et écart de taux des canaux déclarés, dans le scénario s.
+    d : canaux déjà réunis (Écologie de droite les tire de ses paramètres), sinon ceux que déclare le programme."""
+    d = declares(prog) if d is None else d
     y = sq.pib(p, s)
     # gains de productivité : ce qui reste au solde quand la productivité monte, dépenses indexées comprises
     # (statu_quo.dividende_productivite ; relecture neutre n° 2, point 1, décision d'Adrien du 12/11/2026)

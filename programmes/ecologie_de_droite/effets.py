@@ -109,7 +109,10 @@ class Effets:
         self.pib0 = {t: pib_2026 * (1 + tend0) ** (t - 2029) * self.dp[t]["emploi"] for t in ANNEES}
         self.y_sq = sq.pib(p, s)
         self.n = {t: t - 2029 for t in ANNEES}
-        self.croiss = {t: (1 + tend0) ** (t - 2029) for t in ANNEES}
+        # croissance par tête : salaires du statu quo du scénario (tendance, IA et scénario compris), comme le noyau ;
+        # remplace la tendance du prudent (14/11/2026, plus rien de propre au programme hors ses mesures)
+        w_sq = sq.salaires(p, s)
+        self.croiss = {t: w_sq[t] / w_sq[2029] for t in ANNEES}
         rec = recettes_nouveau_systeme(q)["total"] / 1e9
         self.part_budget = part_budget = rec / pib_2026
         par_revenu = q.val("macro.impots_par_revenu") and q.val("cohortes.active") and q.val("demographie.active")
@@ -148,13 +151,25 @@ class Effets:
                 # 2029 : registre relevé égal au registre de base ; même rapport que 2030, au niveau de l'IA de 2029
                 r30 = (1 + ia) ** 2 - 1
                 self.ia_registre[2029] = self.ia_registre[2030] * ia / r30
-        self.dividende = dividende_croissance(q, self.pib0)
+        # dividende de croissance du budget : ne sert qu'aux lignes de méthode, absentes avec le registre par scénario
+        self.dividende = None if self.ia_registre is not None else dividende_croissance(q, self.pib0)
         self.q_div = self.dividende if self.dividende is not None else {t: q.val("macro.part_pib_tendanciel_au_solde") for t in ANNEES}
         self.div_sq = sq.dividende_productivite(p, s)
         from moteur.canaux_declares import facteur_ia
         self.k_ia = facteur_ia(p, s, q.val("macro.adoption_ia_budget"))
-        from moteur import fraude as fr
-        self.fraude = fr.effets(p, s, q.val("macro.fraude_controle"))
+        # canaux communs (14/11/2026, décision d'Adrien : plus rien de propre au programme hors ses mesures) :
+        # réformes de structure, adoption de l'IA, fraude, école et logement passent par moteur/canaux_declares.py,
+        # avec les lectures du programme (paramètres macro.*), comme les autres programmes
+        from moteur import canaux_declares
+        SC = ("crise", "prudent", "median", "optimiste")
+        decl = {"reformes_structurelles": p.val("macro.reformes_programme"),
+                "adoption_ia": {"part": {x: p.val("macro.adoption_ia", x) for x in SC},
+                                "budget_md": p.val("macro.adoption_ia_budget")},
+                "fraude": p.val("macro.fraude_controle"),
+                "ecole": {"niveau_eleves": {x: p.val("macro.niveau_eleves", x) for x in SC},
+                          "debut": p.val("macro.premiere_annee_ecole"), "annees": p.val("macro.annees_ecole")},
+                "logement": p.val("macro.logement_canal")}
+        self.decl = canaux_declares.effets(None, p, s, decl)
         self.bases_demo = budget.lignes(q, "prudent").bases_demographie
         self.cle_indice = {"recettes": "emploi", "recettes_population": "total", "salaries_impot": "c_impot",
                            "salaries_tva": "c_tva", "salaries_rui": "c_rui", "adultes": "adultes", "enfants": "enfants",
@@ -234,11 +249,10 @@ class Effets:
         from moteur.taux_effectifs import ecart_localisation
         pv, pvb = self.pv, self.pv_brut
         pib, solde, emplois = {}, {}, {}
-        for c in ("emploi_reformes", "seniors_long", "inactifs", "logement", "productivite", "hauts_revenus",
-                  "ia_adoption", "ecole", "investissement", "permis"):
+        for c in ("emploi_reformes", "seniors_long", "inactifs", "hauts_revenus", "investissement", "permis"):
             pib[c] = {}
-        for c in ("emploi", "logement", "aides_construction", "erosion_is", "fraude_tva", "productivite", "reactions",
-                  "investissement", "permis", "dirigeants", "ia", "ia_adoption", "ecole", "sante", "tva_sante", "carbone", "eviction",
+        for c in ("emploi", "logement", "aides_construction", "erosion_is", "reactions",
+                  "investissement", "permis", "dirigeants", "ia", "sante", "tva_sante", "carbone", "eviction",
                   "demographie", "tendance", "economies_registre"):
             solde[c] = {}
         for c in ("reformes", "seniors_long", "cumul", "inactifs"):
@@ -269,13 +283,8 @@ class Effets:
             pib["emploi_reformes"][t] = emp_ref * self.va_emploi / 1e9
             pib["seniors_long"][t] = (sen_long + cumul) * self.va_emploi / 1e9
             pib["inactifs"][t] = inactifs * self.va_emploi / 1e9
-            # logement
-            if n < m("duree_initiale"):
-                logements = m("logements_initial") * (1 - m("extinction_aides_construction") * max(0, 1 - (n + 1) / 3))
-            else:
-                logements = m("logements_croisiere")
-            pib["logement"][t] = logements * q.val("logement_dynamique.prix_moyen_ht_neuf") * m("part_additionnelle_logement") / 1e9
-            solde["logement"][t] = pib["logement"][t] * self.part_budget + self.logement104[t]
+            # logement : constructions en plus par le canal commun (self.decl) ; restent les mesures du programme
+            solde["logement"][t] = self.logement104[t]
             solde["aides_construction"][t] = -m("extinction_aides_construction") * m("aides_construction") * max(0, 1 - (n + 1) / 3)
             # érosion de l'IS (localisation) et fraude à la TVA
             ecart_eff = ecart_localisation(q, jeu_eff, t)
@@ -285,16 +294,7 @@ class Effets:
                 taux = ((self.s17_ge - m("taux_reference_is")) * m("semi_elasticite_transfert") * m("part_grandes_entreprises")
                         + ecart_eff / 100 * m("reaction_reelle"))
             solde["erosion_is"][t] = -self.j20 * self.croiss[t] * taux * montee(t, m("montee_erosion_is"))
-            # barème commun de la fraude (phase B5, moteur/fraude.py) : recettes moins coût des agents
-            solde["fraude_tva"][t] = self.fraude["recettes"][t] - self.fraude["cout"][t]
-            # productivité (réforme du programme), sur le PIB du statu quo du scénario
             y = self.y_sq[t]
-            # barème commun des réformes de structure (12/11/2026, moteur/reformes_structurelles.py)
-            pib["productivite"][t] = y * gain_reformes(q, q.val("macro.reformes_programme"), jeu, t)
-            # gains de productivité : dividende de productivité du statu quo, la même règle que pour tous les programmes
-            # (relecture neutre n° 2, point 1, décision d'Adrien du 12/11/2026) ; q_div (dividende du budget du
-            # programme) ne sert plus qu'aux écarts de méthode (tendance, IA du statu quo)
-            solde["productivite"][t] = pib["productivite"][t] * self.div_sq[t]
             # tendance et IA : le statu quo du scénario les porte déjà dans son PIB ; le budget du programme (calculé sur
             # la tendance du prudent, sans IA) en est écarté, d'où une mesure de recettes d'écart de méthode
             pib_tend = self.pib0[t] * (((1 + m("tendance")) / (1 + tend0)) ** n - 1) if jeu != "prudent" else 0.0
@@ -302,15 +302,8 @@ class Effets:
             g_ia = m("ia_productivite") * (q.val("macro.premiere_annee_ia") <= t < q.val("macro.premiere_annee_ia") + q.val("macro.annees_ia"))
             r_ia = (1 + r_ia) * (1 + g_ia) - 1
             pib_ia = base * r_ia
-            r_adopt = (1 + r_adopt) * (1 + g_ia * m("adoption_ia") * self.k_ia) - 1  # proportionnel au budget (B6)
-            pib["ia_adoption"][t] = (y) * r_adopt  # l'IA du statu quo est déjà dans y
             solde["ia"][t] = (self.ia_registre[t] if self.ia_registre is not None
                               else pib_ia * self.q_div[t])  # écart de méthode : l'IA du statu quo, absente du budget
-            solde["ia_adoption"][t] = (base + pib_ia) * r_adopt * self.div_sq[t]  # canal du programme
-            g_ecole = m("niveau_eleves") * m("croissance_par_ecart_type") * min(1, max(0, (t - q.val("macro.premiere_annee_ecole") + 1) / q.val("macro.annees_ecole")))
-            r_ecole = (1 + r_ecole) * (1 + g_ecole) - 1
-            pib["ecole"][t] = y * r_ecole
-            solde["ecole"][t] = pib["ecole"][t] * self.div_sq[t]
             solde["tendance"][t] = pib_tend * self.q_div[t]
             solde["economies_registre"][t] = self.eco_ecart[t]
             # réactions à l'impôt, hauts revenus
@@ -337,31 +330,18 @@ class Effets:
             # démographie : budget calculé sur la population du prudent
             dp, ds = self.dp[t], self.ds[t]
             solde["demographie"][t] = sum(b * (ds[self.cle_indice[k]] - dp[self.cle_indice[k]]) for k, b in self.bases_demo[t].items())
-        # phase A1 (12/11/2026) : dividende recalculé par le noyau sur le profil de gain du programme (réformes, IA,
-        # école réunies), comme pour les autres programmes (statu_quo.dividende_programme)
-        dpib_prod = {t: pib["productivite"][t] + pib["ia_adoption"][t] + pib["ecole"][t] for t in ANNEES}
-        div_prog = sq.dividende_programme(self.p, self.s, dpib_prod)
-        for c in ("productivite", "ia_adoption", "ecole"):
-            for t in ANNEES:
-                if self.div_sq[t]:
-                    solde[c][t] *= div_prog[t] / self.div_sq[t]
-        self.div_programme = div_prog
         self.pib, self.solde, self.emplois = pib, solde, emplois
 
     # ------------------------------------------------------------------------------------------ mesures
     LIBELLES = {
         "emploi": "Emploi : réformes, seniors à long terme, cumul emploi-retraite, inactifs",
-        "logement": "Logement : constructions en plus (TVA, impôts) et reprise des amortissements",
+        "logement": "Logement : reprise des amortissements",
         "aides_construction": "Logement : fin des aides à la construction",
         "erosion_is": "Entreprises : érosion de l'IS (localisation des bénéfices)",
-        "fraude_tva": "Lutte contre la fraude (barème commun, net du coût des agents)",
-        "productivite": "Productivité (réformes de structure, barème commun)",
         "reactions": "Réactions des hauts revenus à l'impôt",
         "investissement": "Investissement des entreprises (déduction immédiate, IS)",
         "permis": "Permis de construire rapide",
         "dirigeants": "Dirigeants de petites sociétés qui se versent un salaire",
-        "ecole": "École (niveau des élèves)",
-        "ia_adoption": "Adoption de l'IA (en plus du statu quo)",
         "tva_sante": "Santé : TVA sur les dépenses de santé du scénario",
         "carbone": "Carbone : recette du scénario",
         "eviction": "Épargne obligatoire qui évince l'épargne volontaire (TVA), écart au prudent",
@@ -382,7 +362,7 @@ class Effets:
                        instrument="consommation")]
 
     def mesures(self) -> list[Mesure]:
-        out = []
+        out = list(self.decl["mesures"])  # canaux communs
         for c, lib in self.LIBELLES.items():
             out.append(Mesure(f"Effet macro : {lib}", "recettes", dict(self.solde[c]), "effet_macro"))
         for c, lib in self.METHODE.items():
@@ -397,7 +377,7 @@ class Effets:
 
     def pib_direct(self) -> dict[int, float]:
         """PIB en plus du statu quo hors multiplicateur, seniors et fonds (Md€)."""
-        return {t: sum(v[t] for v in self.pib.values()) for t in ANNEES}
+        return {t: sum(v[t] for v in self.pib.values()) + self.decl["pib"][t] for t in ANNEES}
 
     def emplois_canaux(self, noms: dict) -> dict[int, dict]:
         return {t: {noms[c]: self.emplois[c][t] for c in self.emplois} for t in ANNEES}
@@ -474,15 +454,15 @@ class Fonds:
         pib_epargne = cap * (m("pib_par_euro_capital") + m("usure_capital_fonds"))
         emp_fonds = 0.0
         if self.pa_ent:
-            k_eff = E.ec.capital_efficace(q, cap / (1 + E.tend0) ** n) if cap > 0 else 0.0
+            k_eff = E.ec.capital_efficace(q, cap / E.croiss[t]) if cap > 0 else 0.0
             k_eff += sum(v * E.intensite[k] for k, v in E.k_inv_tailles[t].items())
-            y_add = (pib_cap + E.k_inv[t] * (m("pib_par_euro_capital") + m("usure_capital")) * (1 + E.tend0) ** n) / E.pib0[t]
+            y_add = (pib_cap + E.k_inv[t] * (m("pib_par_euro_capital") + m("usure_capital")) * E.croiss[t]) / E.y_sq[t]
             x_k = math.log(max(1e-9, 1 + k_eff / E.k_productif)) - math.log(max(1e-9, 1 + y_add))
             du = q.val("entreprises_cellules.capital_chomage_elasticite", E.jeu) * E.ct[t]["taux"] * x_k
             du = min(du, max(0.0, E.ct[t]["taux"] - E.u_inc))
             emp_fonds = du * E.ct[t]["actifs"] * E.k_pa
-        pib_emp = emp_fonds * E.cout_smic / 1e9 * (1 + E.tend0) ** n
-        s_emp = emp_fonds * E.pv["gains_canaux"]["offre"] / 1e9 * (1 + E.tend0) ** n if "gains_canaux" in E.pv else 0.0
+        pib_emp = emp_fonds * E.cout_smic / 1e9 * E.croiss[t]
+        s_emp = emp_fonds * E.pv["gains_canaux"]["offre"] / 1e9 * E.croiss[t] if "gains_canaux" in E.pv else 0.0
         s_cap = ((cap * (m("pib_par_euro_capital") * E.taux_benefices + m("externalites_capital_fonds") * E.taux_va[t])
                   if E.par_revenu else cap * (m("pib_par_euro_capital") + m("externalites_capital_fonds")) * E.part_budget)
                  if E.corr else pib_cap * E.part_budget)

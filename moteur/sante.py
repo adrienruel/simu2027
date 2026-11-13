@@ -63,13 +63,14 @@ def trajectoire_statu_quo(p: Parametres, s: str) -> dict:
         p = copy.copy(p)
         p.__dict__.pop("_cache", None)
         p.colonne_prudent = "prudent"
-    san, blo, w = sq.sante(p, s), sq.blocs(p, s), sq.salaires(p, s)
+    san, blo, w, y = sq.sante(p, s), sq.blocs(p, s), sq.salaires(p, s), sq.pib(p, s)
     auto = p.val("sante.aide_sociale_autonomie_2024") * facteur(p, 2024, "recettes")
     inv = p.val("sante.pensions_invalidite_2024") * facteur(p, 2024, "recettes")
     part = inv / (p.val("statu_quo.aah") + inv)
     base = p.val("sante.ondam_2026") + auto
     return {"sante": san, "invalidite": {t: blo[t]["aah_invalidite"] * part for t in ANNEES},
-            "C": {t: san[t] / base for t in ANNEES}, "wt": {t: w[t] / w[2029] for t in ANNEES}, "autonomie": auto}
+            "C": {t: san[t] / base for t in ANNEES}, "wt": {t: w[t] / w[2029] for t in ANNEES},
+            "yt": {t: y[t] / y[2029] for t in ANNEES}, "autonomie": auto}
 
 
 def depenses(p: Parametres, s: str) -> dict[int, float]:
@@ -97,12 +98,10 @@ def _depenses_sur_statu_quo(p: Parametres, s: str) -> dict[int, float]:
     """Santé du programme = santé + invalidité du statu quo (mêmes prévisions), moins les mesures du programme. Le
     périmètre propre au programme (gestion de l'assurance maladie, autonomie nette du revenu universel, coût des
     agents hospitaliers) suit la croissance de la santé du statu quo."""
-    from .depenses.statique import autonomie, economie_hopitaux, securite_sociale
     T = trajectoire_statu_quo(p, s)
     C, wt = T["C"], T["wt"]
     k = derive_2029(p)
-    auto_brut = T["autonomie"] if p.val("sante.reprise_autonomie_par_etat") else 0.0
-    propre = securite_sociale(p)[1] + autonomie(p) - auto_brut - economie_hopitaux(p) - (T["autonomie"] - auto_brut)
+    propre = _perimetre_propre(p, T)
     mesures = p.val("sante.mesures_a_terme", s)
     montee = p.val("sante_trajectoire.montee_mesures")
     options = p.val("sante_trajectoire.options")
@@ -124,9 +123,28 @@ PRODUITS_NOCIFS = {"tabac": "Tabac", "alcool": "Alcool", "sucres": "Produits suc
 def surplus_pib(p: Parametres, s: str) -> dict[int, float]:
     """Surplus de dépenses de santé au-delà d'une part constante du PIB (Md€) : dérive de la pente sur la base de
     2029, avant les mesures (même base que le garde-fou)."""
+    if p.val("sante_trajectoire.base_statu_quo"):  # 14/11/2026 : santé du statu quo contre le PIB du statu quo
+        T = trajectoire_statu_quo(p, s)
+        tot = {t: T["sante"][t] + T["invalidite"][t] + _perimetre_propre(p, T) * T["C"][t] for t in ANNEES}
+        return {t: max(0.0, tot[t] - tot[2029] * T["yt"][t]) for t in ANNEES}
     base = (sante_statique(p) + economies_sante_a_terme(p, "prudent")) * derive_2029(p)
     g = p.val("macro.tendance", "prudent")
     return {t: max(0.0, base * (_croissance(p, s, t) - (1 + g) ** (t - 2029))) for t in ANNEES}
+
+
+def _perimetre_propre(p: Parametres, T: dict) -> float:
+    """Périmètre santé propre au programme, hors statu quo (Md€ de 2026) : gestion de l'assurance maladie, autonomie
+    nette du revenu universel, moins le coût des agents hospitaliers aligné sur le privé."""
+    from .depenses.statique import autonomie, economie_hopitaux, securite_sociale
+    return securite_sociale(p)[1] + autonomie(p) - economie_hopitaux(p) - T["autonomie"]
+
+
+def _croissance_conso(p: Parametres, s: str) -> dict[int, float]:
+    """Croissance des assiettes de consommation depuis 2029 : PIB du statu quo (base_statu_quo) ou tendance du prudent."""
+    if p.val("sante_trajectoire.base_statu_quo"):
+        return trajectoire_statu_quo(p, s)["yt"]
+    g = p.val("macro.tendance", "prudent")
+    return {t: (1 + g) ** (t - 2029) for t in ANNEES}
 
 
 def bases_produits_nocifs(p: Parametres) -> dict[str, float]:
@@ -158,6 +176,7 @@ def accise_produits_nocifs(p: Parametres, s: str) -> dict[int, dict]:
     g = q("macro.tendance", "prudent")
     base0 = bases_produits_nocifs(p)
     surplus = surplus_pib(p, s)
+    cr_conso = _croissance_conso(p, s)
 
     def effets(x: float, crois: float) -> tuple[dict, float]:
         """Hausse de prix x (commune, plafonnée) : hausse par produit et recette supplémentaire."""
@@ -168,7 +187,7 @@ def accise_produits_nocifs(p: Parametres, s: str) -> dict[int, dict]:
     out, baisses = {}, []
     evites_prec = 0.0
     for t in ANNEES:
-        crois = (1 + g) ** (t - 2029)
+        crois = cr_conso[t]
         besoin = max(0.0, (surplus[t - 1] if t > 2029 else 0.0) - evites_prec)
         h_max, rec_max = effets(max(plafond.values()), crois)
         if besoin <= 0:
@@ -229,13 +248,18 @@ def tva_sante(p: Parametres) -> dict[str, dict[int, float]]:
     perte = sum(recettes[k] * baisse[k] for k in recettes)
     g = p.val("macro.tendance", "prudent")
     out = {"perte": {}, **{s: {} for s in SCENARIOS}}
+    sur_sq = p.val("sante_trajectoire.base_statu_quo")
     for s in SCENARIOS:
         vb = p.val("tva_sante_long_terme.vraie_baisse_consommation", s)
         a_terme = -sum(couts[k] * baisse[k] * vb[k] for k in couts)
         annees = p.val("tva_sante_long_terme.annees_plein_effet", s)
+        cr = _croissance_conso(p, s) if sur_sq else {t: (1 + g) ** (t - 2029) for t in ANNEES}
         for t in ANNEES:
-            pt = perte * (1 + g) ** (t - 2029)
-            evites = a_terme * min(1, max(0, t - 2028) / annees) * (1 + g) ** (t - 2029)
-            out["perte"][t] = pt
-            out[s][t] = pt + evites if s == "prudent" else pt  # médian et optimiste : perte seule (leur pente compte la prévention)
+            pt = perte * cr[t]
+            evites = a_terme * min(1, max(0, t - 2028) / annees) * cr[t]
+            if s == "prudent":
+                out["perte"][t] = pt
+            # sur le statu quo (14/11/2026), les soins évités comptent dans tous les scénarios : la pente commune ne
+            # compte pas la prévention du programme ; avant, médian et optimiste : perte seule (leur pente la comptait)
+            out[s][t] = pt + evites if (s == "prudent" or sur_sq) else pt
     return out

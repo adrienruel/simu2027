@@ -445,6 +445,12 @@ macro:
     valeur: {crise: 0.75, prudent: 0.75, median: 0.75, optimiste: 0.85}
     unite: sans_unite
     statut: HYPOTHESE
+  logement_canal:
+    valeur: {intensite: 1, debut: 2029}
+    unite: sans_unite
+    statut: DECISION
+    source: "Barème commun logement_offre.bareme (Greenaway-McGrevy, 2025 ; SDES 2026)"
+    note: "14/11/2026, DÉCISION d'Adrien (plus rien de propre au programme hors ses mesures) : le droit à construire passe par le canal logement commun, intensité 1 (réforme d'ensemble du foncier, comme Retailleau), au lieu de la croisière propre (mêmes logements par an) et de la phase initiale négative (fin des aides à la pierre), qui passe désormais par la dépense en moins et le multiplicateur."
   logements_initial:
     valeur: {crise: -40000, prudent: -30000, median: -20000, optimiste: 0}
     unite: sans_unite
