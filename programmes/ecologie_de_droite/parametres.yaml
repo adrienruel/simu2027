@@ -745,6 +745,12 @@ sante_produits_nocifs:
 # prend le milieu de la crise et du médian pour les emplois créés (Effets macro!B8), mais la valeur
 # de crise pour les emplois perdus (fin des subventions, prime d'embauche).
 emploi:
+  canal_offre_commun:
+    valeur: true
+    v235: false
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 14/11/2026 (plus rien de propre au programme hors ses mesures) : l'emploi de l'impôt unique et du revenu universel passe par le canal d'offre commun, cellule par cellule (table outils/table_offre_ecologie_de_droite.py, au format d'OpenFisca, offre.reforme_travail) ; l'assurance chômage remplacée par le revenu universel et la baisse relative du SMIC par les instruments communs (transferts aux actifs, coût du travail) ; les seniors du socle à 67 ans par offre.seniors. Restent au bloc emploi les réformes du marché du travail sans équivalent fiscal."
   reformes_directes:
     source: "Encadrement, par réforme (v235, feuille Emploi, colonne Justification) : allocation chômage : réformes de 2021 et 2023, −0,4 et −0,6 point (Banque de France, Bulletin n° 264, 2026), Hartz IV −1,4 (Krebs et Scheffel) ; France Travail : quart du paquet 2017 de la Banque de France (−0,4) ; apprentissage : −0,1 point (Banque de France) ; logement : Insee Analyses n° 37 (2018) ; accompagnement : Cour des comptes (2026), Crépon et al. (2013) ; alternance : Banque de France, CAE note n° 91 ; contrat de travail : France Stratégie (Cahuc et al., 2024 ; note n° 151, 2025), moitié du paquet 2017-2018"
     valeur:

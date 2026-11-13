@@ -283,6 +283,62 @@ def _travail_openfisca(p: Parametres, s: str, nom: str) -> dict:
             "prelevements_en_moins_md": prl}
 
 
+def travail_reforme(p: Parametres, s: str, nom: str) -> dict:
+    """Effet de long terme d'une réforme d'ensemble du système (impôts et transferts du travail remplacés à la fois),
+    prise en entier et non par point de PIB de prélèvements : même calcul que _travail_openfisca, cellule par cellule
+    (gain à travailler, taux marginal, coût du travail), avec la table de la réforme (openfisca_offre_<nom>_2026.csv).
+    Une réforme d'ensemble peut être neutre en recettes et changer beaucoup les incitations : la ramener à un point de
+    PIB n'aurait pas de sens. Chaque cellule prend l'élasticité du scénario si la réforme y pousse l'emploi, celle
+    du scénario miroir sinon (prudent dans les deux sens, comme pour les autres mesures). Écologie de droite
+    (14/11/2026, plus rien de propre au programme hors ses mesures)."""
+    cel = _cellules(p)
+    cc = _cas_couples(p)
+    par = {sc: (sq._v(p, "offre.travail_participation", sc), sq._v(p, "offre.travail_heures", sc),
+                sq._v(p, "offre.demande_travail", sc), sq._v(p, "offre.travail_couples", sc)) for sc in {s, MIROIR[s]}}
+    masse = sum(x["n"] * x["cout"] for x in cel)
+    travail = emplois_offre = emplois_demande = 0.0
+    for x in cel:
+        r = _reactions_openfisca(nom, x["brut"], cc)
+        b = x["brut"] / SMIC_BRUT_2026
+        i = 0 if b <= 1.3 else (1 if b <= 2.5 else 2)
+
+        def effets(sc):
+            ext, hrs, dem, (pc, kc) = par[sc]
+            part = (1 - pc) * ext[i] * r["seul"]["participation"] + pc * kc * ext[i] * r["couple"]["participation"]
+            heures = hrs * ((1 - pc) * r["seul"]["heures"] + pc * r["couple"]["heures"])
+            return part, heures, -dem[i] * r["cout_relatif"]
+        part, heures, demande = effets(s)
+        if part + heures + demande < 0:
+            part, heures, demande = effets(MIROIR[s])
+        emplois_offre += x["n"] * part
+        emplois_demande += x["n"] * demande
+        travail += x["n"] * (part + heures + demande) * x["cout"]
+    pct = sq._v(p, "offre.travail_part_pib", s) * travail / masse * 100
+    return {"pib_pct": pct, "emplois": emplois_offre, "emplois_demande": emplois_demande}
+
+
+def reforme_travail(p: Parametres, s: str, nom: str, profil: dict[int, float], libelle: str) -> dict:
+    """PIB (Md€), emplois et recettes d'une réforme d'ensemble du travail (travail_reforme), montée selon `profil`
+    (part de la réforme en place, 0 à 1) et à la vitesse commune (offre.vitesse) ; recettes au taux de prélèvement du
+    statu quo, comme le canal d'offre commun (effets)."""
+    y, rec, e = sq.pib(p, s), sq.recettes(p, s), sq.effectifs(p, s)
+    cible = travail_reforme(p, s, nom)
+    vit = sq._v(p, "offre.vitesse", s)
+    c_pib = c_emp = c_dem = 0.0
+    dpib, offre_, demande = {}, {}, {}
+    for t in ANNEES:
+        k = profil.get(t, 0.0)
+        c_pib += vit * (cible["pib_pct"] * k - c_pib)
+        c_emp += vit * (cible["emplois"] * k - c_emp)
+        c_dem += vit * (cible["emplois_demande"] * k - c_dem)
+        dpib[t] = c_pib / 100 * y[t]
+        offre_[t] = c_emp * e[t]["emploi"] / e[2029]["emploi"]
+        demande[t] = c_dem * e[t]["emploi"] / e[2029]["emploi"]
+    mesure = Mesure(f"Effet d'offre : {libelle} (canal commun, réforme d'ensemble)", "recettes",
+                    {t: dpib[t] * rec[t] / y[t] for t in ANNEES}, nature="effet_macro")
+    return {"dpib": dpib, "emplois_offre": offre_, "emplois_demande": demande, "mesure": mesure, "cible": cible}
+
+
 def capital_entreprises_par_point(p: Parametres, s: str) -> float:
     """Effet de long terme sur le PIB (%) d'1 point de PIB d'impôt sur les entreprises en moins, avec l'élasticité de
     l'investissement au coût du capital des cohortes d'entreprises (macro.elasticite_invest)."""

@@ -103,8 +103,18 @@ def points_par_mesure(p: Parametres) -> dict[str, dict[str, float]]:
         x["smic_croissance"] = r["smic_croissance"] * baisse_cout_smic * epm / pa
         x["prime_jeunes"] = r["prime_jeunes"] * pj["primes_par_an"] * pj[j]["embauche"] * pj[j]["annees"] / pa
         x["accords_branche"] = r["accords_branche"] * sum(d.effectifs) * ab["baisse_emploi_portugal"] * ab[j] / pa
+        if p.val("emploi.canal_offre_commun"):
+            # 14/11/2026 : les mesures fiscales et de transferts (impôt unique, revenu universel, baisse du coût du
+            # travail, impôts de production, SMIC, assurance chômage) passent par le canal d'offre commun ; restent
+            # ici les réformes du marché du travail sans équivalent fiscal (France Travail, apprentissage, contrat…)
+            for k in COMMUNS:
+                x[k] = 0.0
         out[j] = x
     return out
+
+
+# mesures dont l'emploi passe par le canal d'offre commun (moteur/offre.py) quand emploi.canal_offre_commun est vrai
+COMMUNS = ("allocation_chomage_rui", "bas_salaires", "entreprises_cout_travail", "baisse_cout_travail", "smic_croissance")
 
 
 def emplois_par_mesure(p: Parametres) -> dict[str, dict[str, float]]:

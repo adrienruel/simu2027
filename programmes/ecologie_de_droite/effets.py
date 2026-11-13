@@ -100,6 +100,21 @@ class Effets:
         self.baisse_declares = baisse_revenus_declares(q)[jeu]
         pi = participation_inactifs(q)
         self.inactifs_terme = pi["crise"] if (jeu == "prudent" and q.colonne_prudent == "crise") else pi[jeu]
+        # canal d'offre commun (14/11/2026) : l'impôt unique et le revenu universel passent par les cellules de salaire
+        # (offre.reforme_travail), qui comptent aussi les inactifs qui reprennent un emploi et la réponse des hauts
+        # revenus ; les seniors du socle à 67 ans passent par offre.seniors, comme les reports d'âge des autres
+        self.offre_commune = bool(q.val("emploi.canal_offre_commun"))
+        if self.offre_commune:
+            self.inactifs_terme = 0.0
+            # réactions des contribuables, sans ce que le canal commun compte déjà : les heures des classes moyennes et
+            # la part réelle (travail en moins) de la réaction des hauts revenus ; restent l'optimisation (revenus
+            # déclarés ailleurs, sociétés), l'effet croisé du capital et la localisation des emplois
+            from moteur import hauts_revenus as hr
+            js = "prudent" if jeu == "crise" else jeu
+            js = js if js in hr.SCENARIOS else "prudent"
+            self.ri = {"montant": (hr.perte_hauts_revenus(q, js) * (1 - m("part_reelle_hauts_revenus"))
+                                   + hr.perte_croisee_capital(q, js) + hr.perte_localisation(q, js)),
+                       "montee": self.ri["montee"]}
         pib_2026 = 2920 * facteur(q, 2024, "recettes")
         demo = {x: indices_demo(q, x) for x in ("prudent", "median", "optimiste")}
         self.demo = demo
@@ -209,6 +224,13 @@ class Effets:
         from moteur.ancien_systeme import retraites_reportes
         self.lien_reportes = q.val("macro.seniors_lies_aux_reportes") and q.val("ancien_systeme.par_generation") and q.val("demographie.active")
         self.reportes = {t: v * 1e6 for t, v in retraites_reportes(q).items()} if self.lien_reportes else None
+        if self.offre_commune and self.reportes is not None:
+            # socle à 67 ans (générations nées à partir de 1979) : personnes dont le départ est reporté, déduites des
+            # emplois de la transposition de la réforme de 2010 (macro.seniors_long / part en emploi de la source, 17 %)
+            pers = m("seniors_long") / q.val("macro.seniors_part_emploi_reportes", "median")
+            for t in ANNEES:
+                k = max(0, min(1, (t - m("annee_seniors_long") + 1) / m("montee_seniors_long")))
+                self.reportes[t] = self.reportes.get(t, 0.0) + pers * k * self.ds[t]["adultes"]
         # entreprises par taille
         from moteur import entreprises_cellules as ec
         self.ec = ec
@@ -269,7 +291,8 @@ class Effets:
             fa = self.ds[t]["adultes"] if corr else 1.0
             perdus = fa * (pv["emplois_perdus_subventions"] + pv["emplois_perdus_tardifs"] * (t > pvb["emplois_perdus_tardifs"]["annee"]))
             emp_ref = fa * pv["emplois_terme"] * k_ch * montee(t, m("annees_montee_emploi")) - perdus
-            sen_long = fa * m("seniors_long") * max(0, min(1, (t - m("annee_seniors_long") + 1) / m("montee_seniors_long")))
+            sen_long = (0.0 if self.offre_commune else
+                        fa * m("seniors_long") * max(0, min(1, (t - m("annee_seniors_long") + 1) / m("montee_seniors_long"))))
             cumul = fa * m("cumul_emploi_socle") * max(0, min(1, (t - m("annee_cumul") + 1) / m("montee_cumul")))
             inactifs = self.inactifs_terme * montee(t, m("annees_montee_emploi")) * self.ds[t]["adultes"]
             emplois["reformes"][t], emplois["seniors_long"][t], emplois["cumul"][t], emplois["inactifs"][t] = emp_ref, sen_long, cumul, inactifs
@@ -309,7 +332,7 @@ class Effets:
             # réactions à l'impôt, hauts revenus
             ri = self.ri
             solde["reactions"][t] = -ri["montant"] * min(1, (n + 1) / ri["montee"]) * self.croiss[t]
-            pib["hauts_revenus"][t] = -self.baisse_declares * m("part_reelle_hauts_revenus") * min(1, (n + 1) / ri["montee"]) * self.croiss[t]
+            pib["hauts_revenus"][t] = 0.0 if self.offre_commune else -self.baisse_declares * m("part_reelle_hauts_revenus") * min(1, (n + 1) / ri["montee"]) * self.croiss[t]
             # investissement des entreprises
             k_inv = self.k_inv[t]
             pib["investissement"][t] = k_inv * (m("pib_par_euro_capital") + m("usure_capital"))

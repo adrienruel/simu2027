@@ -535,6 +535,47 @@ def canaux_emploi(p: Parametres, s: str, E) -> dict:
     return out
 
 
+def offre_commune(p: Parametres, q: Parametres, s: str, jeu: str) -> dict:
+    """Emploi et PIB des mesures fiscales et de transferts du programme par le canal d'offre commun (14/11/2026).
+
+    - impôt unique et revenu universel : réforme d'ensemble, table d'offre du programme (outils/
+      table_offre_ecologie_de_droite.py) lue par offre.reforme_travail, en place dès 2029 ;
+    - assurance chômage remplacée par le revenu universel : allocations en moins pour les chômeurs (bloc chômage du
+      statu quo moins le revenu universel des chômeurs), instrument commun « transferts aux actifs » ;
+    - SMIC revalorisé de la seule croissance : coût du travail en moins au bas de l'échelle (montant du bloc emploi),
+      instrument commun « coût du travail ».
+    Les deux dernières entrent dans offre.effets comme des mesures ordinaires, pour le seul calcul de l'offre (leur
+    effet budgétaire est déjà au registre)."""
+    from moteur import offre, statu_quo as sq
+    from moteur.emploi_canaux import points_par_mesure  # noqa: F401 (documentation des montants)
+    bl, e = sq.blocs(p, s), sq.effectifs(p, s)
+    rui = q.val("rui.montant") * 12
+    debut = 2029
+    are = Mesure("Assurance chômage remplacée par le revenu universel (offre)", "chomage",
+                 {t: -(bl[t]["chomage"] - e[t]["chomeurs"] * rui / 1e9) if t >= debut else 0.0 for t in ANNEES},
+                 "detail", instrument="transferts_actifs")
+    g, infl = q.val("macro.tendance", "prudent"), q.val("calendrier.inflation")
+    n_obj = q.val("emploi.annee_objectif") - 2029
+    from moteur.recettes.impot_salaires import effectifs_prive_2026
+    d = effectifs_prive_2026(q)
+    masse = sum(c * n for c, n in zip(d.milieux, d.effectifs)) / 1e9
+    smic = {}
+    for t in ANNEES:
+        k = min(max(0, t - 2029), n_obj)
+        baisse = 1 - ((1 + g) / (1 + infl)) ** k
+        smic[t] = -baisse * q.val("emploi.smic_effet_salaire_moyen") * masse
+    m_smic = Mesure("SMIC revalorisé de la seule croissance (offre)", "recettes", smic, "detail", instrument="cout_travail")
+    ef = offre.effets(p, s, [are, m_smic])
+    ref = offre.reforme_travail(p, s, "ecologie_de_droite", {t: 1.0 for t in ANNEES}, "impôt unique et revenu universel")
+    emplois = dict(ef["emplois"])
+    emplois["Offre : impôt unique et revenu universel (gain à travailler, heures)"] = ref["emplois_offre"]
+    emplois["Offre : impôt unique et revenu universel (coût du travail)"] = ref["emplois_demande"]
+    mes = [ref["mesure"], Mesure("Effet d'offre : assurance chômage remplacée et SMIC relatif (canal commun)", "recettes",
+                                 {t: ef["mesure"].valeurs.get(t, 0.0) for t in ANNEES}, "effet_macro")]
+    return {"mesures": mes, "pib": {t: ref["dpib"][t] + ef["dpib"][t] for t in ANNEES}, "emplois": emplois,
+            "actifs": {t: ef["actifs"][t] + ref["emplois_offre"][t] for t in ANNEES}}
+
+
 def is_taxes_energie_supprimees(q: Parametres, s: str) -> dict[int, float]:
     """Impôt sur les bénéfices en plus : taux moyen de l'IS × taxes actuelles sur l'énergie supprimées (Md€)."""
     from moteur.carbone import couts_energie_entreprises
@@ -794,19 +835,30 @@ class EcologieDeDroite:
             # chômeurs des seniors à long terme (0,41 par emploi gardé, au niveau de la source : colonne médiane dans tous
             # les scénarios) : comptés comme dans l'ancien moteur, en plus des chômeurs du report d'âge (canal commun)
             ratio = q.val("chomage.seniors_chomeurs_par_emploi")
-            long_med = q.val("macro.seniors_long", "median")
+            long_med = 0.0 if E.offre_commune else q.val("macro.seniors_long", "median")
             chomeurs_seniors_long = {t: ratio * (E.ds[t]["adultes"] if E.corr else 1.0) * long_med
                                      * max(0, min(1, (t - E.m("annee_seniors_long") + 1) / E.m("montee_seniors_long")))
                                      for t in ANNEES}
             for t in ANNEES:
                 actifs[t] += chomeurs_seniors_long[t]
+            d_offre = {t: 0.0 for t in ANNEES}
+            if E.offre_commune:
+                # canal d'offre commun (14/11/2026) : réforme d'ensemble (impôt unique et revenu universel) cellule
+                # par cellule, et instruments communs pour l'assurance chômage remplacée et le SMIC relatif
+                of = offre_commune(p, q, s, jeu)
+                m.extend(of["mesures"])
+                for t in ANNEES:
+                    d_offre[t] = of["pib"][t]
+                    for canal, serie_e in of["emplois"].items():
+                        canaux[t][canal] = canaux[t].get(canal, 0.0) + serie_e[t]
+                    actifs[t] += of["actifs"][t]
             k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
             for t in ANNEES:
                 canaux[t]["Jeunes entrés plus tôt dans l'emploi"] = jeunes[t]
                 canaux[t]["Conjoncture (impulsion budgétaire)"] = dpib[t] / y_sq[t] * k_emp * e[t]["emploi"]
                 actifs[t] += jeunes[t]
             direct = E.pib_direct()
-            pib = {t: y_sq[t] + dpib[t] + direct[t] + d_seniors[t] for t in ANNEES}
+            pib = {t: y_sq[t] + dpib[t] + direct[t] + d_seniors[t] + d_offre[t] for t in ANNEES}
             demploi = {t: sum(canaux[t].values()) for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
                     for t in ANNEES}
