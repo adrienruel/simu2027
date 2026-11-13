@@ -1249,3 +1249,34 @@ Restent propres au programme, à trancher : le canal de l'énergie des entrepris
 emploi industriel), les emplois perdus par la localisation des bénéfices (IS), le cumul emploi-socle, l'éviction de
 l'épargne volontaire, et les réformes du marché du travail sans équivalent fiscal (France Travail, apprentissage,
 alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus tôt des jeunes).
+
+## 13/11/2026 (fin d'après-midi) — Phase G (performance), phase C3 (recoupements du statu quo)
+
+- **Caches** : tables d'OpenFisca, tables d'offre, fichiers de l'ancien système et de la transition lus une fois par
+  processus ; barème de l'impôt unique en cache par jeu de paramètres (1,2 million d'appels) ; probabilités des paires
+  de déciles (copule) en cache. Résultats identiques au centième de milliardième.
+- **Registre relevé de l'IA** : il reprend les années sous le seuil de la hausse de la déduction de l'IS du registre
+  de base. Sa simulation imbriquée comptait l'IA deux fois (tendance relevée et registre de l'IA recalculé dedans).
+- **Hausse conditionnelle de la déduction de l'IS au fil de la trajectoire** (`is_investissement.hausse_au_fil`,
+  DÉCISION d'Adrien du 13/11/2026) : dynamique du noyau (`HausseDeduction`, `HausseDeductionProgramme`) ; chaque année,
+  la part déduite monte d'un pas par année passée sous 3 % de déficit avant règle ; l'IS en moins, l'investissement des
+  entreprises (cohortes) et l'érosion de l'IS (taux effectif) suivent. Plus de simulation imbriquée.
+  **Constat** : l'ancienne règle décidait sur le déficit du prudent (« déficit du prudent, avant clause ») et, en
+  pratique, la hausse ne se déclenchait jamais (le prudent ne passe pas sous 3 %) ; depuis le registre par scénario,
+  la simulation imbriquée mêlait même le statu quo du prudent et la colonne du scénario. Désormais chaque scénario
+  décide sur son propre déficit : la hausse se déclenche dès 2032 en optimiste (part de 0,5 à 1 en 2041, 22 Md€ d'IS
+  en moins en 2037) et plus tard en médian. Optimiste 2037 : 1,67 → 2,33 % ; médian 2050 : 3,70 → 4,05 %.
+- **Temps** : Écologie de droite, quatre scénarios avec et sans règle, 170 s → 27 s. Un scénario : 61 s → 9 s environ.
+  Une piste plus générale (cache entre copies de paramètres, avec les paramètres lus) a été essayée et abandonnée :
+  exacte mais plus lente, faute de savoir ce qu'ont lu les résultats déjà en cache.
+- **C3** : `docs/recoupements.md` : retraites conformes au COR de juin 2026 (≤ 0,1 point), déficit conforme au FMI
+  (≈ 6 % à moyen terme), dette 4,7 points au-dessus du FMI (point de départ plus récent), dans la fourchette de l'IGF.
+- **Correction (même jour)** : en passant l'emploi d'Écologie de droite au canal commun, l'effet du coût du travail
+  (baisse ciblée jusqu'à 1,3 SMIC, impôts de production assis sur les salaires supprimés, 52 Md€ de 2024) avait été
+  retiré du bloc emploi sans être remis ailleurs. Il passe désormais par l'instrument commun « coût du travail »
+  (comme le SMIC relatif), neutralisable mesure par mesure (attribution) ; la table d'offre garde le coût employeur
+  actuel. Effet : ≈ 370 000 emplois au prudent en 2037 (le bloc propre en comptait ≈ 300 000). Déficit 2037 au prudent
+  4,78 → 4,14 % ; médian 3,79 → 2,57 ; optimiste 2,33 → 0,83.
+- Attribution : la fraude se neutralise par le barème commun (`macro.fraude_controle/agents`), le logement par
+  l'intensité du canal commun ; le permis rapide sort du registre ; libellés numérotés tolérés.
+- **Tests** : la suite complète passe, `test_attribution` compris, en 11 min 24 s (objectif de la phase G : 15 min).

@@ -80,7 +80,9 @@ def attribuer(p: Parametres | None = None, selection: list[str] | None = None) -
         v = _etat(variante(p, m))
         d = {t: {k: base[t][k] - v[t][k] for k in ("statique", "economie", "dette_interets", "solde_avant_clause",
                                                    "deficit_avant_clause", "chomage", "emplois")} for t in ANNEES}
-        canaux = {t: {k: base[t]["canaux"][k] - v[t]["canaux"][k] for k in base[t]["canaux"]} for t in ANNEES}
+        # libellés qui portent un nombre (agents de contrôle, logements par an) : ils changent avec la variante
+        canaux = {t: {k: base[t]["canaux"].get(k, 0.0) - v[t]["canaux"].get(k, 0.0)
+                      for k in {*base[t]["canaux"], *v[t]["canaux"]}} for t in ANNEES}
         sans_ligne = all(abs(d[t]["statique"]) < 1e-6 for t in ANNEES)
         resultats.append({**{k: m[k] for k in ("id", "libelle", "domaine", "debut")}, "annees": d, "canaux": canaux,
                           "sans_ligne_budgetaire": sans_ligne})

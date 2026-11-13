@@ -119,17 +119,12 @@ mesures:
     libelle: "Facturation électronique et IA contre la fraude à la TVA"
     domaine: recettes
     debut: 2029
-    neutraliser: {"macro.fraude_tva": 0}
-  - id: permis_rapide
-    libelle: "Permis rapide pour les usines et l'énergie"
-    domaine: croissance
-    debut: 2029
-    neutraliser: {"macro.permis_rapide": 0}
+    neutraliser: {"macro.fraude_controle/agents": 0}  # barème commun de la fraude (phase B5)
   - id: choc_logement
     libelle: "Choc d'offre de logement"
     domaine: logement
     debut: 2029
-    neutraliser: {"macro.logements_initial": 0, "macro.logements_croisiere": 0}
+    neutraliser: {"macro.logement_canal/intensite": 0}  # canal logement commun (13/11/2026)
   - id: ecole
     libelle: "École : hausse du niveau des élèves"
     domaine: education

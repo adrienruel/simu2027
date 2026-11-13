@@ -6,8 +6,8 @@ OpenFisca ne sait pas calculer le système du programme (impôt unique sur le co
 individuel qui remplace le RSA, la prime d'activité, les aides au logement et les allocations familiales) : la table
 est calculée par le moteur du programme (moteur/menages_types.nouveau), sur la même grille de salaires bruts et les
 mêmes cas types que la table du système actuel :
-- le coût employeur d'un salaire brut est celui d'aujourd'hui (table actuelle), moins la baisse ciblée du coût du
-  travail du programme (emploi.baisse_cout_travail, plafonnée à l'impôt dû) ;
+- le coût employeur d'un salaire brut est celui d'aujourd'hui (table actuelle) ; la baisse ciblée du coût du travail
+  passe par l'instrument commun « coût du travail » (programme.offre_commune) ;
 - personne seule sans enfant ; couples : second apporteur au salaire de la grille, conjoint à 18 000, 30 000 ou
   55 000 € brut, zéro, un ou deux enfants (8 et 11 ans) ;
 - revenu disponible hors épargne obligatoire (un patrimoine bloqué jusqu'à la retraite, comme dans les ménages
@@ -25,7 +25,12 @@ DONNEES = RACINE / "parametres" / "donnees"
 
 
 def cout_programme(cout_actuel: float, p) -> float:
-    """Coût employeur dans le programme pour un salaire brut donné : coût actuel moins la baisse ciblée."""
+    """Coût employeur dans le programme pour un salaire brut donné. Depuis le 13/11/2026, le coût actuel : la baisse
+    ciblée du coût du travail passe par l'instrument commun « coût du travail » (neutralisable mesure par mesure)."""
+    return cout_actuel
+
+
+def _ancien_cout_programme(cout_actuel: float, p) -> float:
     from moteur.emploi import cout_smic_annuel
     from moteur.impot_unique import impot
     b = p.val("emploi.baisse_cout_travail")

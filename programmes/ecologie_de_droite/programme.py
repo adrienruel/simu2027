@@ -554,9 +554,10 @@ def offre_commune(p: Parametres, q: Parametres, s: str, jeu: str) -> dict:
     bl, e = sq.blocs(p, s), sq.effectifs(p, s)
     rui = q.val("rui.montant") * 12
     debut = 2029
+    rd, rc = q.val("emploi.reformes_directes"), q.val("emploi.retenues_calculees")
     are = Mesure("Assurance chômage remplacée par le revenu universel (offre)", "chomage",
-                 {t: -(bl[t]["chomage"] - e[t]["chomeurs"] * rui / 1e9) if t >= debut else 0.0 for t in ANNEES},
-                 "detail", instrument="transferts_actifs")
+                 {t: -rd["allocation_chomage_rui"]["retenue"] * (bl[t]["chomage"] - e[t]["chomeurs"] * rui / 1e9)
+                  if t >= debut else 0.0 for t in ANNEES}, "detail", instrument="transferts_actifs")
     g, infl = q.val("macro.tendance", "prudent"), q.val("calendrier.inflation")
     n_obj = q.val("emploi.annee_objectif") - 2029
     from moteur.recettes.impot_salaires import effectifs_prive_2026
@@ -567,13 +568,22 @@ def offre_commune(p: Parametres, q: Parametres, s: str, jeu: str) -> dict:
         k = min(max(0, t - 2029), n_obj)
         baisse = 1 - ((1 + g) / (1 + infl)) ** k
         smic[t] = -baisse * q.val("emploi.smic_effet_salaire_moyen") * masse
-    m_smic = Mesure("SMIC revalorisé de la seule croissance (offre)", "recettes", smic, "detail", instrument="cout_travail")
-    ef = offre.effets(p, s, [are, m_smic])
+    m_smic = Mesure("SMIC revalorisé de la seule croissance (offre)", "recettes",
+                    {t: v * rc["smic_croissance"] for t, v in smic.items()}, "detail", instrument="cout_travail")
+    # baisse ciblée du coût du travail (jusqu'à 1,3 SMIC) et impôts de production assis sur les salaires supprimés :
+    # coût du travail en moins, instrument commun (montants du programme, croissance du statu quo)
+    from moteur.emploi import baisse_cout_travail
+    from moteur.unites import facteur
+    w = sq.salaires(p, s)
+    m_cout = Mesure("Coût du travail : baisse ciblée et impôts de production sur les salaires (offre)", "recettes",
+                    {t: -(rc["baisse_cout_travail"] * baisse_cout_travail(q) + rc["entreprises"] * q.val("emploi.impots_production_salaires") * facteur(q, 2024, "recettes"))
+                     * w[t] / w[2029] if t >= debut else 0.0 for t in ANNEES}, "detail", instrument="cout_travail")
+    ef = offre.effets(p, s, [are, m_smic, m_cout])
     ref = offre.reforme_travail(p, s, "ecologie_de_droite", {t: 1.0 for t in ANNEES}, "impôt unique et revenu universel")
     emplois = dict(ef["emplois"])
     emplois["Offre : impôt unique et revenu universel (gain à travailler, heures)"] = ref["emplois_offre"]
     emplois["Offre : impôt unique et revenu universel (coût du travail)"] = ref["emplois_demande"]
-    mes = [ref["mesure"], Mesure("Effet d'offre : assurance chômage remplacée et SMIC relatif (canal commun)", "recettes",
+    mes = [ref["mesure"], Mesure("Effet d'offre : assurance chômage remplacée, SMIC relatif et coût du travail (canal commun)", "recettes",
                                  {t: ef["mesure"].valeurs.get(t, 0.0) for t in ANNEES}, "effet_macro")]
     return {"mesures": mes, "pib": {t: ref["dpib"][t] + ef["dpib"][t] for t in ANNEES}, "emplois": emplois,
             "actifs": {t: ef["actifs"][t] + ref["emplois_offre"][t] for t in ANNEES}}
@@ -894,7 +904,13 @@ class EcologieDeDroite:
         out = {}
         for s, x in st.items():
             f = x["effets"].fonds(x["denominateur"], x["part_rec"], x["mult_clause"])
-            out[s] = Entree(x["mesures"], x["contexte"], [f], f.regle())
+            dyn = [f]
+            q = x["effets"].q
+            if (q.val("is_investissement.hausse_au_fil") and q.val("is_investissement.active")
+                    and dict(q.val("is_investissement.hausse_part_admise"))["debut"] == "conditionnel"):
+                from .effets import HausseDeductionProgramme
+                dyn.append(HausseDeductionProgramme(x["effets"]))
+            out[s] = Entree(x["mesures"], x["contexte"], dyn, f.regle())
         return out
 
     def entrees_sans_regle(self, p: Parametres, scenarios=None) -> dict:

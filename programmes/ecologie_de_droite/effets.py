@@ -632,3 +632,46 @@ class Fonds:
         ordre = [leviers[i] for i in q.val("clause.ordre")]
         etal = lambda t, etat, declenchee: declenchee * self.gain_etalement[t]
         return Regle(q.val("clause.cible"), ordre, int(q.val("clause.derniere_annee")), [etal])
+
+
+from moteur.is_investissement import HausseDeduction as _HausseDeduction
+
+
+class HausseDeductionProgramme(_HausseDeduction):
+    """Hausse au fil de la trajectoire (moteur/is_investissement.HausseDeduction), avec ses effets sur les deux
+    canaux du programme qui dépendent de la part déduite, comme dans le registre statique : investissement des
+    entreprises (cohortes, coût du capital) et érosion de l'IS (taux effectif de la localisation)."""
+
+    def __init__(self, E: "Effets") -> None:
+        super().__init__(E.q)
+        self.E = E
+        self.tailles: dict = {}
+        self.k_base = E.k_inv
+
+    def debut(self, t: int, etat: dict) -> dict:
+        out = super().debut(t, etat)
+        E, q, m = self.E, self.E.q, self.E.m
+        from moteur.is_investissement import part_deduite
+        l25 = part_deduite(q, t, parts=self.parts)
+        if E.ent_cellules:
+            fl = E.ec.flux_investissement(q, E.jeu, lambda cle, _s: m(cle), E.isv["b4"] * E.b20 * E.isv["b21"] * l25,
+                                          par_taille=True)
+            for k_, v_ in fl.items():
+                self.tailles[k_] = self.tailles.get(k_, 0.0) * (1 - m("usure_capital")) + v_ * montee(t, m("montee_invest"))
+            dk = sum(self.tailles.values()) - self.k_base[t]
+        else:
+            dk = 0.0
+        dpib = dk * (m("pib_par_euro_capital") + m("usure_capital"))
+        dsolde = (dk * m("pib_par_euro_capital") * E.taux_benefices if (E.corr and E.par_revenu)
+                  else (dk * m("pib_par_euro_capital") if E.corr else dpib) * E.part_budget)
+        # érosion de l'IS : taux effectif de l'année avec la part déduite du chemin
+        from moteur.taux_effectifs import ecart_localisation
+        jeu_eff = "crise" if (E.jeu == "prudent" and q.colonne_prudent == "crise") else E.jeu
+        e0, e1 = ecart_localisation(q, jeu_eff, t), ecart_localisation(q, jeu_eff, t, self.parts)
+        derosion = (0.0 if e0 is None else
+                    -E.j20 * E.croiss[t] * (e1 - e0) / 100 * m("reaction_reelle") * montee(t, m("montee_erosion_is")))
+        self.historique[t].update({"investissement_en_plus": dk, "pib": dpib, "solde_investissement": dsolde,
+                                   "erosion_is": derosion})
+        out["recettes"] += dsolde + derosion
+        out["pib"] = dpib
+        return out

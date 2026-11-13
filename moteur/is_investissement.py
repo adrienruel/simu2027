@@ -12,6 +12,8 @@ def part_admise(p: Parametres, t: int | None = None) -> float:
     if t is None:
         return depart
     h = dict(p.val("is_investissement.hausse_part_admise"))
+    if h["debut"] == "conditionnel" and p.val("is_investissement.hausse_au_fil"):
+        return depart  # la hausse est ajoutée au fil de la trajectoire (HausseDeduction)
     if h["debut"] == "conditionnel":
         pas = annees_sous_seuil(p, t)
         return depart + (max(depart, h["cible"]) - depart) * min(1.0, pas / h["duree"])
@@ -40,17 +42,17 @@ def annees_sous_seuil(p: Parametres, t: int) -> int:
     return sum(1 for u, d in cache[cle].items() if u < t and d < seuil)
 
 
-def part_deduite(p: Parametres, t: int, montee: int | None = None) -> float:
+def part_deduite(p: Parametres, t: int, montee: int | None = None, parts: dict | None = None) -> float:
     montee = montee or p.val("is_investissement.montee_annees")
-    return min(1, (t - 2029 + 1) / montee) * part_admise(p, t)
+    return min(1, (t - 2029 + 1) / montee) * (parts[t] if parts is not None else part_admise(p, t))
 
 
-def _deduction_en_plus(p: Parametres, montee: int) -> dict[int, float]:
+def _deduction_en_plus(p: Parametres, montee: int, parts: dict | None = None) -> dict[int, float]:
     g, infl = p.val("macro.tendance", "prudent"), p.val("calendrier.inflation")
     inv = p.val("is_investissement.investissement_snf_2025")
     out = {t: 0.0 for t in ANNEES}
     for cat in p.val("is_investissement.categories").values():
-        immediat = {t: part_deduite(p, t, montee) * inv * cat["part"] * (1 + g) ** (t - 2029) for t in ANNEES}
+        immediat = {t: part_deduite(p, t, montee, parts) * inv * cat["part"] * (1 + g) ** (t - 2029) for t in ANNEES}
         stock = 0.0
         for t in ANNEES:
             n = t - 2029
@@ -70,11 +72,11 @@ def interets_non_deduits(p: Parametres, taux: float) -> dict[int, float]:
             for t in ANNEES}
 
 
-def cout_net_etat(p: Parametres, etale: bool = False) -> dict[int, float]:
+def cout_net_etat(p: Parametres, etale: bool = False, parts: dict | None = None) -> dict[int, float]:
     """Coût net (Md€) : déduction en plus × IS, moins les intérêts non déduits (lignes 41 et 78) ; IS de l'État et,
     depuis le 30/10/2026, IS local (même assiette)."""
     montee = p.val("is_investissement.montee_etalee_annees") if etale else p.val("is_investissement.montee_annees")
-    ded = _deduction_en_plus(p, montee)
+    ded = _deduction_en_plus(p, montee, parts)
     from .is_bareme import taux_investissement
     t_is = taux_investissement(p)  # taux unique, ou marginal pondéré par l'investissement (IS progressif)
     if p.val("is_investissement.assiette_locale"):
@@ -103,3 +105,36 @@ def entrees_macro(p: Parametres) -> dict:
             "b20": {s: p.val("is_investissement.part_investissement_concernee", s) for s in ("prudent", "median", "optimiste")},
             "b21": baisse_cout_capital(p),
             "ligne25": [part_deduite(p, t) for t in ANNEES]}
+
+
+class HausseDeduction:
+    """Hausse conditionnelle de la part déduite décidée au fil de la trajectoire (DÉCISION d'Adrien du 13/11/2026,
+    phase G : une seule simulation au lieu d'une simulation de plus sans la hausse). Dynamique du noyau : chaque année
+    t, la part déduite monte d'un pas pour chaque année passée où le déficit avant règle a été sous le seuil ; le
+    coût de la déduction en plus, au-delà de la part de départ (déjà au registre), est retiré des recettes. Le
+    déficit qui déclenche la hausse la contient (plus prudent que l'ancienne règle). La hausse ne change pas les
+    autres canaux (investissement, localisation), qui gardent la part de départ : plus prudent aussi."""
+
+    def __init__(self, p: Parametres) -> None:
+        self.p = p
+        h = dict(p.val("is_investissement.hausse_part_admise"))
+        self.depart, self.cible, self.duree = p.val("is_investissement.part_admise"), max(p.val("is_investissement.part_admise"), h["cible"]), h["duree"]
+        self.seuil = h["seuil_deficit"]
+        self.base = cout_net_etat(p)
+        self.deficits: dict[int, float] = {}
+        self.parts = {t: self.depart for t in ANNEES}
+        self.historique: dict[int, dict] = {}
+
+    def debut(self, t: int, etat: dict) -> dict:
+        pas = sum(1 for u, d in self.deficits.items() if u < t and d < self.seuil)
+        self.parts[t] = self.depart + (self.cible - self.depart) * min(1.0, pas / self.duree)
+        for u in ANNEES:  # années futures : part de l'année, en attendant (sans effet sur les années passées)
+            if u > t:
+                self.parts[u] = self.parts[t]
+        cout = cout_net_etat(self.p, parts=self.parts)[t] if self.parts[t] != self.depart or pas else self.base[t]
+        en_plus = cout - self.base[t]
+        self.historique[t] = {"part_admise": self.parts[t], "cout_en_plus": en_plus}
+        return {"recettes": -en_plus, "detail": {"hausse_deduction_is": self.historique[t]}}
+
+    def fin(self, t: int, etat: dict) -> None:
+        self.deficits[t] = etat["compte"]["deficit_avant_regle"] / 100

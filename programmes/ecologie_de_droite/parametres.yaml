@@ -804,6 +804,7 @@ carbone:
 
 # --- Déduction intégrale de l'investissement (feuille IS investissement, v210-v221) -------
 is_investissement:
+  hausse_au_fil: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 13/11/2026 (phase G, performance) : la hausse conditionnelle de la part déduite est décidée au fil de la trajectoire, sur le déficit avant règle déjà calculé des années passées (hausse comprise), au lieu d'une simulation de plus sans la hausse (moteur/is_investissement.HausseDeduction). La hausse ne joue que sur l'IS (les canaux d'investissement et de localisation gardent la part de départ) : plus prudent."}
   active: {valeur: 1, unite: sans_unite, statut: DECISION, note: "DÉCISION du 22 octobre 2026 (v211)."}
   montee_annees: {valeur: 8, unite: sans_unite, statut: DECISION}
   montee_etalee_annees: {valeur: 16, unite: sans_unite, statut: DECISION, note: "Étalement de la clause de trajectoire (v221)."}

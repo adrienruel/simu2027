@@ -48,7 +48,7 @@ def eatr_actuel(p: Parametres) -> float:
                                     c["taux_reel"], c["depreciation"])
 
 
-def eatr_nouveau(p: Parametres, jeu: str = "prudent", annee: int | None = None) -> float:
+def eatr_nouveau(p: Parametres, jeu: str = "prudent", annee: int | None = None, parts: dict | None = None) -> float:
     """IS du nouveau système (État et local), déduction immédiate pour la part de l'investissement concernée,
     sans impôts de production."""
     c = p.val("entreprises.taux_effectifs")
@@ -57,12 +57,12 @@ def eatr_nouveau(p: Parametres, jeu: str = "prudent", annee: int | None = None) 
             + p.val("impot_local_entreprises.taux_regions"))  # activités mobiles : taux des grandes entreprises
     z0 = p.val("is_investissement.valeur_actuelle_amortissements")
     part = (p.val("is_investissement.part_investissement_concernee", jeu) * p.val("is_investissement.active")
-            * part_admise(p, annee))
+            * (parts[annee] if (parts is not None and annee is not None) else part_admise(p, annee)))
     z = part * 1.0 + (1 - part) * z0
     return eatr(taux, z, c["rentabilite"], c["taux_reel"], c["depreciation"])
 
 
-def ecart_localisation(p: Parametres, jeu: str = "prudent", annee: int | None = None) -> float | None:
+def ecart_localisation(p: Parametres, jeu: str = "prudent", annee: int | None = None, parts: dict | None = None) -> float | None:
     """Hausse du taux effectif moyen (points) qui pilote la localisation des activités ; None si le moteur
     garde la méthode de la v235 (taux légal du nouveau système contre taux effectif actuel).
 
@@ -70,4 +70,4 @@ def ecart_localisation(p: Parametres, jeu: str = "prudent", annee: int | None = 
     (emplois de la localisation, qui se décident pendant la montée en charge : prudent)."""
     if not p.val("entreprises.localisation_taux_effectif"):
         return None
-    return (eatr_nouveau(p, jeu, annee) - eatr_actuel(p)) * 100
+    return (eatr_nouveau(p, jeu, annee, parts) - eatr_actuel(p)) * 100
