@@ -15,10 +15,12 @@ def test_programme_par_defaut_charge_les_trois_fichiers():
 
 def test_hypotheses_communes_sans_mesure_du_programme():
     """Les fichiers communs ne contiennent que des sources, des hypothèses et des options de modèle :
-    aucune décision de programme (les trois décisions admises sont des choix entre sources)."""
+    aucune décision de programme (les décisions admises sont des choix entre sources ou de modèle ; l'élasticité des
+    moyens de l'enseignement aux effectifs, sans source, est devenue une décision de modèle en C1, le 13/11/2026)."""
     p = Parametres()
     decisions = sorted(x.cle for x in p if x.statut == "DECISION" and p.origine[x.cle].name == "economie.yaml")
-    assert decisions == ["calendrier.inflation", "demographie.scenario_fecondite", "sante_trajectoire.pente_phase_1"]
+    assert decisions == ["calendrier.inflation", "demographie.scenario_fecondite", "ministeres.elasticite_eleves_etudiants",
+                         "sante_trajectoire.pente_phase_1"]
 
 
 def _programme_temporaire(tmp_path, monkeypatch, texte_en_plus: str) -> str:

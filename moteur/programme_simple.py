@@ -448,9 +448,11 @@ class ProgrammeSimple:
             # canal d'offre commun (moteur/offre.py) : effet durable des impôts et des transferts
             actifs = {t: 0.0 for t in ANNEES}
             d_offre = {t: 0.0 for t in TOUTES}
+            m_offre = None
             if offre.actif(p):
                 of = offre.effets(p, s, liste)
-                liste.append(of["mesure"])
+                m_offre = of["mesure"]
+                liste.append(m_offre)
                 d_offre = of["dpib"]
                 actifs = of["actifs"]
                 for canal, serie in of["emplois"].items():
@@ -503,6 +505,15 @@ class ProgrammeSimple:
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
             ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
                         "emploi": {t: e[t]["emploi"] + demploi[t] for t in ANNEES}, "emplois_canaux": canaux}
+            # plancher du chômage (13/11/2026) : rendements décroissants des emplois en plus près du chômage
+            # incompressible ; les recettes de l'effet d'offre suivent les emplois retenus
+            from .emploi_canaux import plancher_chomage
+            k_pl = plancher_chomage(p, ctx_s[s], {t: va * idx["salaire"][t] / 1e9 for t in ANNEES})
+            if m_offre is not None:
+                for t, k in k_pl.items():
+                    if k < 1 and t in m_offre.valeurs:
+                        m_offre.valeurs[t] *= k
+            demploi = {t: ctx_s[s]["emploi"][t] - e[t]["emploi"] for t in ANNEES}
             if decl["taux_supplementaire"]:
                 ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
             mes_s[s] = liste

@@ -497,6 +497,16 @@ class Fonds:
             du = q.val("entreprises_cellules.capital_chomage_elasticite", E.jeu) * E.ct[t]["taux"] * x_k
             du = min(du, max(0.0, E.ct[t]["taux"] - E.u_inc))
             emp_fonds = du * E.ct[t]["actifs"] * E.k_pa
+        u0 = getattr(self, "chomage_contexte", {}).get(t)
+        if emp_fonds > 0 and u0 is not None:
+            # plancher du chômage commun (13/11/2026, moteur/emploi_canaux.plancher_chomage) : mêmes rendements
+            # décroissants pour les emplois du fonds, ajoutés au chômage du contexte
+            u_inc, b = q.val("emploi.chomage_incompressible") * 100, q.val("emploi.marge_plancher") * 100
+            u = u0 - emp_fonds / self.denominateur[t] * 100
+            if u < u_inc + b:
+                u_star = u_inc + b * math.exp((u - u_inc - b) / b) if u0 >= u_inc + b else \
+                    u0 - (u0 - u_inc) * (1 - math.exp(-(u0 - u) / max(1e-9, u0 - u_inc)))
+                emp_fonds = max(0.0, (u0 - u_star) / 100 * self.denominateur[t])
         pib_emp = emp_fonds * E.cout_smic / 1e9 * E.croiss[t]
         s_emp = emp_fonds * E.pv["gains_canaux"]["offre"] / 1e9 * E.croiss[t] if "gains_canaux" in E.pv else 0.0
         s_cap = ((cap * (m("pib_par_euro_capital") * E.taux_benefices + m("externalites_capital_fonds") * E.taux_va[t])

@@ -855,11 +855,13 @@ class EcologieDeDroite:
             for t in ANNEES:
                 actifs[t] += chomeurs_seniors_long[t]
             d_offre = {t: 0.0 for t in ANNEES}
+            mes_offre = []
             if E.offre_commune:
                 # canal d'offre commun (14/11/2026) : réforme d'ensemble (impôt unique et revenu universel) cellule
                 # par cellule, et instruments communs pour l'assurance chômage remplacée et le SMIC relatif
                 of = offre_commune(p, q, s, jeu)
                 m.extend(of["mesures"])
+                mes_offre = of["mesures"]
                 for t in ANNEES:
                     d_offre[t] = of["pib"][t]
                     for canal, serie_e in of["emplois"].items():
@@ -883,6 +885,14 @@ class EcologieDeDroite:
                 en = energie_entreprises(p, q, s, ctx)
                 ctx = en["contexte"]
                 m.extend(en["mesures"])
+            # plancher du chômage commun (13/11/2026) : rendements décroissants près du chômage incompressible ; les
+            # recettes des effets d'offre suivent les emplois retenus
+            from moteur.emploi_canaux import plancher_chomage
+            k_pl = plancher_chomage(q, ctx, {t: E.cout_smic / 1e9 * E.croiss[t] for t in ANNEES})
+            for mo in mes_offre:
+                for t, k in k_pl.items():
+                    if k < 1 and t in mo.valeurs:
+                        mo.valeurs[t] *= k
             denominateur = {t: e[t]["emploi"] + e[t]["chomeurs"] + actifs[t] for t in ANNEES}
             par = {sc: (sq._v(p, "macro.multiplicateur", sc), sq._v(p, "macro.annees_effet_ajustement", sc)) for sc in (s, MIROIR[s])}
 
@@ -904,6 +914,7 @@ class EcologieDeDroite:
         out = {}
         for s, x in st.items():
             f = x["effets"].fonds(x["denominateur"], x["part_rec"], x["mult_clause"])
+            f.chomage_contexte = x["contexte"]["chomage"]  # plancher du chômage pour les emplois du fonds
             dyn = [f]
             q = x["effets"].q
             if (q.val("is_investissement.hausse_au_fil") and q.val("is_investissement.active")

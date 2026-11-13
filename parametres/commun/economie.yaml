@@ -431,6 +431,7 @@ sante_trajectoire:
 # de crise pour les emplois perdus (fin des subventions, prime d'embauche).
 emploi:
   chomage_incompressible: {valeur: 0.035, unite: taux, statut: SOURCE, source: "Taux les plus bas tenus durablement en Europe de l'Ouest (Allemagne, Pays-Bas)"}
+  marge_plancher: {valeur: 0.01, unite: taux, statut: HYPOTHESE, note: "13/11/2026 : à moins de cette marge au-dessus du chômage incompressible, les emplois en plus des programmes ont des rendements décroissants (moteur/emploi_canaux.plancher_chomage) : le chômage tend vers le plancher sans le franchir, raccord sans cassure au-dessus. Un point : l'écart entre le plus bas allemand récent (≈ 3 %) et les 4 % souvent cités comme plein emploi."}
   participation_inactifs:
     valeur: {crise: 0.0, prudent: 0.1, median: 0.2, optimiste: 0.3, base: 1926000}
     v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0, base: 1926000}

@@ -1320,3 +1320,17 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   commit d547442. En optimiste, le chômage d'Écologie de droite passe sous le plancher incompressible (3,5 %) de 2044
   à la fin (2,6 % en 2047) : les emplois du coût du travail passés le 13/11 par le canal d'offre commun n'ont plus de
   rendements décroissants vers le plancher, que l'ancien bloc propre appliquait. À corriger.
+
+## 13/11/2026 (soir) — Plancher du chômage commun
+
+- `moteur/emploi_canaux.plancher_chomage` : à moins d'un point au-dessus du chômage incompressible (3,5 %), les
+  emplois en plus d'un programme ont des rendements décroissants, u* = plancher + marge × exp((u − plancher − marge)
+  / marge) : même valeur et même pente au raccord, jamais sous le plancher. Les emplois manquants sont retirés des
+  canaux positifs au prorata (sauf démographie), de l'emploi et du PIB ; les recettes des effets d'offre suivent.
+  Appliqué aux programmes simples et à Écologie de droite (contexte, puis emplois du fonds dans la dynamique).
+  Nouveau paramètre `emploi.marge_plancher` (1 point, hypothèse).
+- Seul Écologie de droite est touché : chômage optimiste de 2050 2,9 → 3,6 %, déficit optimiste 2050 +0,1 point
+  environ (le reste de l'écart au précédent export vient des collectivités, C1). Aucun autre programme ne bouge de plus
+  de 0,005 point de déficit.
+- `test_chomage_calcule_chaque_annee` repasse ; `test_hypotheses_communes_sans_mesure_du_programme` admet l'élasticité
+  des moyens de l'enseignement (décision de modèle de C1). Suite complète : 366 tests, 10 min 16 s.
