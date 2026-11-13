@@ -1,0 +1,704 @@
+[
+ {
+  "cle": "tondelier_smic.part_marge_absorbee",
+  "deficit_2037": 0.010958357471993807,
+  "deficit_2050": 0.02877728691400705,
+  "note": "Part de la hausse du coût du travail prise sur les marges (le reste passe dans les prix) : l'IS perd 25 % de cette part."
+ },
+ {
+  "cle": "tondelier_mesures.services_publics_divers/montant/prudent",
+  "deficit_2037": 0.010560062507531498,
+  "deficit_2050": 0.027644924232077983,
+  "note": "France Services 0,1 ; cantines et petits-déjeuners 0,3 ; associations, culture, sport, médias 0,8 ; hébergement et logement d'abord 0,8 ; indemnisation des victimes (chlordécone, essais nucléaires, pesticides) 0,2 (Md€)."
+ },
+ {
+  "cle": "tondelier_mesures.fiscalite_sante/montant/prudent",
+  "deficit_2037": -0.009748654597325768,
+  "deficit_2050": -0.02504330210121708,
+  "note": "Hausses non chiffrées par le programme ; recette nette de la baisse de consommation. Économies de santé non comptées (pas de chiffrage sourcé)."
+ },
+ {
+  "cle": "tondelier_mesures.energies_renouvelables/montant/prudent",
+  "deficit_2037": 0.007542835171310713,
+  "deficit_2050": 0.019745603825398916,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.agriculture/montant/prudent",
+  "deficit_2037": 0.007316263199717454,
+  "deficit_2050": 0.019110405255013063,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.is_minimal/montant/prudent",
+  "deficit_2037": -0.007242757516305431,
+  "deficit_2050": -0.018466331713170803,
+  "note": "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
+ },
+ {
+  "cle": "tondelier_emploi.postes/grand_age",
+  "deficit_2037": 0.006869791540154324,
+  "deficit_2050": 0.017959531182832222,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_mesures.penibilite/montant/prudent",
+  "deficit_2037": 0.006456199065958401,
+  "deficit_2050": 0.017121487281400505,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_emploi.postes/classes",
+  "deficit_2037": 0.005746219372275263,
+  "deficit_2050": 0.014590883567528579,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_mesures.jeunes/montant/prudent",
+  "deficit_2037": 0.005531379889401222,
+  "deficit_2050": 0.014479732740284135,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.aidants_apa/montant/prudent",
+  "deficit_2037": 0.00509456714466161,
+  "deficit_2050": 0.013730147535056858,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_emploi.postes/hopital",
+  "deficit_2037": 0.005088779648517061,
+  "deficit_2050": 0.013303291165911446,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_emploi.postes/justice",
+  "deficit_2037": 0.004980016247616348,
+  "deficit_2050": 0.01137899940719933,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_mesures.securite_sociale_pro/montant/prudent",
+  "deficit_2037": 0.0049749879243812245,
+  "deficit_2050": 0.01299704129092305,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.voie_pro/montant/prudent",
+  "deficit_2037": 0.0037407088400644994,
+  "deficit_2050": 0.009630194112780543,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.recherche/montant/prudent",
+  "deficit_2037": 0.002736676603710464,
+  "deficit_2050": 0.006847003127788298,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.cheque_energie/montant/prudent",
+  "deficit_2037": 0.002595672839074581,
+  "deficit_2050": 0.006806164337746168,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.retraites_agricoles/montant/prudent",
+  "deficit_2037": 0.0025568191884772773,
+  "deficit_2050": 0.006689299852347119,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.depassements/montant/prudent",
+  "deficit_2037": 0.0025472653547584656,
+  "deficit_2050": 0.00686485643561241,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.prevention/montant/prudent",
+  "deficit_2037": 0.0025472653547584656,
+  "deficit_2050": 0.00686485643561241,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.sante_scolaire/montant/prudent",
+  "deficit_2037": 0.00251538071912627,
+  "deficit_2050": 0.006512039198433683,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.aerien/montant/prudent",
+  "deficit_2037": -0.0025096804511370863,
+  "deficit_2050": -0.006468685363742566,
+  "note": "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
+ },
+ {
+  "cle": "tondelier_mesures.niches_plafond/montant/prudent",
+  "deficit_2037": -0.002368772990967827,
+  "deficit_2050": -0.005997408781674096,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.trente_deux_heures/montant/prudent",
+  "deficit_2037": 0.002219654627579004,
+  "deficit_2050": 0.005853420544234211,
+  "note": "Dans le privé : incitation par les aides, pas d'obligation : non chiffré."
+ },
+ {
+  "cle": "tondelier_mesures.economies_diverses/montant/prudent",
+  "deficit_2037": -0.001950958870017061,
+  "deficit_2050": -0.005095531993653424,
+  "note": "Économies déclaratives estimées (règle)."
+ },
+ {
+  "cle": "tondelier_emploi.postes/voie_pro",
+  "deficit_2037": 0.0017715550246943934,
+  "deficit_2050": 0.004506937009558953,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_emploi.postes/aesh",
+  "deficit_2037": 0.001622043096277892,
+  "deficit_2050": 0.004157507099407098,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_mesures.pensions_alimentaires/montant/prudent",
+  "deficit_2037": 0.0015573981513750113,
+  "deficit_2050": 0.004083640511922226,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.ase_25_ans/montant/prudent",
+  "deficit_2037": 0.0015085403865082725,
+  "deficit_2050": 0.003948812542411417,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.medicaments/montant/prudent",
+  "deficit_2037": -0.0014830355778983062,
+  "deficit_2050": -0.003991718625854901,
+  "note": "Économie déclarative estimée par le modèle (règle)."
+ },
+ {
+  "cle": "tondelier_mesures.autres_postes/montant/prudent",
+  "deficit_2037": 0.0014148917596337185,
+  "deficit_2050": 0.003658912716602458,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_emploi.postes/sante_scolaire",
+  "deficit_2037": 0.0012576012139398074,
+  "deficit_2050": 0.0032233845004441264,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_emploi.postes/trente_deux_heures",
+  "deficit_2037": 0.0012532627487669146,
+  "deficit_2050": 0.0032655709889723994,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_mesures.outremer_plan/montant/prudent",
+  "deficit_2037": 0.0008920105699061764,
+  "deficit_2050": 0.002253024588362962,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_emploi.postes/autres_postes",
+  "deficit_2037": 0.0007860023405470429,
+  "deficit_2050": 0.0020146106916101303,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_mesures.malus_poids/montant/prudent",
+  "deficit_2037": -0.0007626028309193345,
+  "deficit_2050": -0.0016516422510406414,
+  "note": "S'éteint avec l'électrification et l'allègement du parc (2035 : 100 % de ventes à zéro émission)."
+ },
+ {
+  "cle": "tondelier_mesures.superprofits/montant/prudent",
+  "deficit_2037": -0.00021801715901936802,
+  "deficit_2050": -0.0006587514492935043,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.niches_plafond/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.niches_plafond/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.niches_plafond/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.pensions_alimentaires/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.pensions_alimentaires/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.pensions_alimentaires/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.is_minimal/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
+ },
+ {
+  "cle": "tondelier_mesures.is_minimal/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
+ },
+ {
+  "cle": "tondelier_mesures.is_minimal/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
+ },
+ {
+  "cle": "tondelier_mesures.aerien/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
+ },
+ {
+  "cle": "tondelier_mesures.aerien/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
+ },
+ {
+  "cle": "tondelier_mesures.aerien/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
+ },
+ {
+  "cle": "tondelier_mesures.malus_poids/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "S'éteint avec l'électrification et l'allègement du parc (2035 : 100 % de ventes à zéro émission)."
+ },
+ {
+  "cle": "tondelier_mesures.malus_poids/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "S'éteint avec l'électrification et l'allègement du parc (2035 : 100 % de ventes à zéro émission)."
+ },
+ {
+  "cle": "tondelier_mesures.malus_poids/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "S'éteint avec l'électrification et l'allègement du parc (2035 : 100 % de ventes à zéro émission)."
+ },
+ {
+  "cle": "tondelier_mesures.fiscalite_sante/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Hausses non chiffrées par le programme ; recette nette de la baisse de consommation. Économies de santé non comptées (pas de chiffrage sourcé)."
+ },
+ {
+  "cle": "tondelier_mesures.fiscalite_sante/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Hausses non chiffrées par le programme ; recette nette de la baisse de consommation. Économies de santé non comptées (pas de chiffrage sourcé)."
+ },
+ {
+  "cle": "tondelier_mesures.fiscalite_sante/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Hausses non chiffrées par le programme ; recette nette de la baisse de consommation. Économies de santé non comptées (pas de chiffrage sourcé)."
+ },
+ {
+  "cle": "tondelier_mesures.superprofits/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.superprofits/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.superprofits/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.securite_sociale_pro/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.securite_sociale_pro/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.securite_sociale_pro/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.cheque_energie/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.cheque_energie/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.cheque_energie/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.jeunes/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.jeunes/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.jeunes/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.aidants_apa/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.aidants_apa/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.aidants_apa/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.ase_25_ans/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.ase_25_ans/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.ase_25_ans/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.penibilite/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.penibilite/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.penibilite/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.retraites_agricoles/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.retraites_agricoles/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.retraites_agricoles/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.depassements/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.depassements/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.depassements/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.sante_scolaire/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.sante_scolaire/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.sante_scolaire/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.prevention/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.prevention/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.prevention/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.medicaments/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Économie déclarative estimée par le modèle (règle)."
+ },
+ {
+  "cle": "tondelier_mesures.medicaments/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Économie déclarative estimée par le modèle (règle)."
+ },
+ {
+  "cle": "tondelier_mesures.autres_postes/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.autres_postes/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.autres_postes/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.recherche/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.recherche/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.recherche/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.voie_pro/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.voie_pro/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.voie_pro/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.trente_deux_heures/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Dans le privé : incitation par les aides, pas d'obligation : non chiffré."
+ },
+ {
+  "cle": "tondelier_mesures.trente_deux_heures/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Dans le privé : incitation par les aides, pas d'obligation : non chiffré."
+ },
+ {
+  "cle": "tondelier_mesures.trente_deux_heures/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Dans le privé : incitation par les aides, pas d'obligation : non chiffré."
+ },
+ {
+  "cle": "tondelier_mesures.outremer_plan/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.outremer_plan/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.outremer_plan/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.energies_renouvelables/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.energies_renouvelables/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.energies_renouvelables/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.agriculture/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.agriculture/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.agriculture/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tondelier_mesures.services_publics_divers/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "France Services 0,1 ; cantines et petits-déjeuners 0,3 ; associations, culture, sport, médias 0,8 ; hébergement et logement d'abord 0,8 ; indemnisation des victimes (chlordécone, essais nucléaires, pesticides) 0,2 (Md€)."
+ },
+ {
+  "cle": "tondelier_mesures.services_publics_divers/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "France Services 0,1 ; cantines et petits-déjeuners 0,3 ; associations, culture, sport, médias 0,8 ; hébergement et logement d'abord 0,8 ; indemnisation des victimes (chlordécone, essais nucléaires, pesticides) 0,2 (Md€)."
+ },
+ {
+  "cle": "tondelier_mesures.services_publics_divers/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "France Services 0,1 ; cantines et petits-déjeuners 0,3 ; associations, culture, sport, médias 0,8 ; hébergement et logement d'abord 0,8 ; indemnisation des victimes (chlordécone, essais nucléaires, pesticides) 0,2 (Md€)."
+ },
+ {
+  "cle": "tondelier_mesures.economies_diverses/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Économies déclaratives estimées (règle)."
+ },
+ {
+  "cle": "tondelier_mesures.economies_diverses/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Économies déclaratives estimées (règle)."
+ },
+ {
+  "cle": "tondelier_mesures.economies_diverses/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Économies déclaratives estimées (règle)."
+ }
+]

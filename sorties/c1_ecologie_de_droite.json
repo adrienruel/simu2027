@@ -1,0 +1,1752 @@
+[
+ {
+  "cle": "independants.correction_couples",
+  "deficit_2037": -0.14808003988317608,
+  "deficit_2050": -0.31992393426837307,
+  "note": "Imposition commune des couples d'indépendants (Anciennes pensions!B21). Depuis le 29/10/2026, ne sert plus qu'aux indépendants : les retraités ont un calcul propre (anciennes_pensions.couples). Reste un forfait, gardé à la valeur la plus favorable aux couples (prudent pour les recettes)."
+ },
+ {
+  "cle": "quotient.conjugal/couples",
+  "deficit_2037": 0.08839807228768493,
+  "deficit_2050": 0.19293857424239746,
+  "note": "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Rest"
+ },
+ {
+  "cle": "quotient.conjugal/applique",
+  "deficit_2037": 0.0883530151420775,
+  "deficit_2050": 0.19353574202983648,
+  "note": "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Rest"
+ },
+ {
+  "cle": "inactifs.rui_moyen_chomeurs",
+  "deficit_2037": 0.08199794157155527,
+  "deficit_2050": 0.16942469549767303,
+  "note": ""
+ },
+ {
+  "cle": "quotient.conjugal/part_un_revenu",
+  "deficit_2037": 0.07297480713168447,
+  "deficit_2050": 0.1590631086833607,
+  "note": "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Rest"
+ },
+ {
+  "cle": "collectivites.besoin_financement_2024",
+  "deficit_2037": 0.07080114993499809,
+  "deficit_2050": 0.154418028806802,
+  "note": "Md€ de 2024, Collectivités!B25:C25."
+ },
+ {
+  "cle": "is_investissement.categories/construction/part",
+  "deficit_2037": 0.05188614243083389,
+  "deficit_2050": 0.09226844739680917,
+  "note": ""
+ },
+ {
+  "cle": "inactifs.revenu_annulant_rui",
+  "deficit_2037": 0.0485993874547086,
+  "deficit_2050": 0.09906488602706887,
+  "note": "Le RUI d'un inactif baisse linéairement avec son autre revenu, nul à 2 000 €/mois (Inactifs!P14)."
+ },
+ {
+  "cle": "quotient.part_enfants_parent_imposable",
+  "deficit_2037": 0.04580939611467194,
+  "deficit_2050": 0.09481974324327336,
+  "note": ""
+ },
+ {
+  "cle": "logement.amortissement_loyers",
+  "deficit_2037": 0.04490046259682856,
+  "deficit_2050": 0.0934946697567014,
+  "note": ""
+ },
+ {
+  "cle": "carbone_importe.intensite_kg_par_euro",
+  "deficit_2037": -0.04111642926191639,
+  "deficit_2050": -0.1227320400904377,
+  "note": ""
+ },
+ {
+  "cle": "carbone_importe.part_importee",
+  "deficit_2037": -0.04111642926191639,
+  "deficit_2050": -0.1227320400904377,
+  "note": ""
+ },
+ {
+  "cle": "carbone_importe.part_hors_ue",
+  "deficit_2037": -0.04111642926191639,
+  "deficit_2050": -0.1227320400904377,
+  "note": ""
+ },
+ {
+  "cle": "budget_etat.apprentissage",
+  "deficit_2037": 0.03530581579150027,
+  "deficit_2050": 0.07499712228542244,
+  "note": "Ordre de grandeur (Total!B77)."
+ },
+ {
+  "cle": "epargne.gompertz_b",
+  "deficit_2037": 0.032432145902729026,
+  "deficit_2050": -0.004161464513181556,
+  "note": ""
+ },
+ {
+  "cle": "tva.seuils_profils",
+  "deficit_2037": 0.03116114537325032,
+  "deficit_2050": 0.05270364355954715,
+  "note": "Revenu net annuel à partir duquel s'applique chaque profil (modeste, médian, aisé, très aisé)."
+ },
+ {
+  "cle": "is_investissement.categories/equipements/part",
+  "deficit_2037": 0.0309119498376198,
+  "deficit_2050": 0.03546690970388422,
+  "note": ""
+ },
+ {
+  "cle": "securite_sociale.postes_absents/rentes_at/montant",
+  "deficit_2037": 0.030179107134349792,
+  "deficit_2050": 0.06598938921938036,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/rentes_at/part",
+  "deficit_2037": 0.030179107134349792,
+  "deficit_2050": 0.06598938921938036,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/france_travail_unedic/montant",
+  "deficit_2037": 0.028807997910415217,
+  "deficit_2050": 0.0627231913888533,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "tva.agriculture/emissions_mt",
+  "deficit_2037": -0.02681106561197577,
+  "deficit_2050": -0.05274162450528763,
+  "note": ""
+ },
+ {
+  "cle": "tva.agriculture/part_hors_energie",
+  "deficit_2037": -0.02681106561197577,
+  "deficit_2050": -0.05274162450528763,
+  "note": ""
+ },
+ {
+  "cle": "tva_sante_long_terme.hausse_prix_tabac/prix_avant",
+  "deficit_2037": -0.026666359789941474,
+  "deficit_2050": -0.04406991589991627,
+  "note": "Écrit dans la formule Santé!B69."
+ },
+ {
+  "cle": "tva_sante_long_terme.hausse_prix_tabac/prix_apres",
+  "deficit_2037": 0.025433117389382254,
+  "deficit_2050": 0.04214435114816251,
+  "note": "Écrit dans la formule Santé!B69."
+ },
+ {
+  "cle": "quotient.rui_conjoint/inactifs_en_couple",
+  "deficit_2037": -0.02272839943093441,
+  "deficit_2050": -0.04912169849834047,
+  "note": "Règle confirmée par Adrien le 29/10/2026 : le RUI du conjoint sans revenu baisse avec le revenu net du couple et s'éteint quand il atteint deux RUI par personne (moteur/menages_types.py, réforme OpenFisca). La part supprimée (0,75) reste une hypothèse de chiffrage global."
+ },
+ {
+  "cle": "quotient.rui_conjoint/part_supprimee",
+  "deficit_2037": -0.02272839943093441,
+  "deficit_2050": -0.04912169849834047,
+  "note": "Règle confirmée par Adrien le 29/10/2026 : le RUI du conjoint sans revenu baisse avec le revenu net du couple et s'éteint quand il atteint deux RUI par personne (moteur/menages_types.py, réforme OpenFisca). La part supprimée (0,75) reste une hypothèse de chiffrage global."
+ },
+ {
+  "cle": "quotient.rui_conjoint/part_nette_tva",
+  "deficit_2037": -0.02272839943093441,
+  "deficit_2050": -0.04912169849834047,
+  "note": "Règle confirmée par Adrien le 29/10/2026 : le RUI du conjoint sans revenu baisse avec le revenu net du couple et s'éteint quand il atteint deux RUI par personne (moteur/menages_types.py, réforme OpenFisca). La part supprimée (0,75) reste une hypothèse de chiffrage global."
+ },
+ {
+  "cle": "quotient.rui_conjoint/inactifs_feuille_rui",
+  "deficit_2037": 0.020664463692590118,
+  "deficit_2050": 0.04473989599289663,
+  "note": "Règle confirmée par Adrien le 29/10/2026 : le RUI du conjoint sans revenu baisse avec le revenu net du couple et s'éteint quand il atteint deux RUI par personne (moteur/menages_types.py, réforme OpenFisca). La part supprimée (0,75) reste une hypothèse de chiffrage global."
+ },
+ {
+  "cle": "inactifs.part_chomeurs_deja_comptee",
+  "deficit_2037": -0.020492754318779838,
+  "deficit_2050": -0.04215740449356353,
+  "note": "Allocataires du RSA parmi les inactifs, étudiants (RUI!B24)."
+ },
+ {
+  "cle": "tva.agriculture/assiette_transformes_md",
+  "deficit_2037": 0.0195389423191763,
+  "deficit_2050": 0.03850456279725201,
+  "note": ""
+ },
+ {
+  "cle": "rui_complements.micro_en_complement",
+  "deficit_2037": -0.019530182820265196,
+  "deficit_2050": -0.04042982630073588,
+  "note": "Part des micro-entrepreneurs exerçant en complément d'un emploi ou d'une retraite (RUI!J14)."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/gestion_maladie/montant",
+  "deficit_2037": 0.019019083204096177,
+  "deficit_2050": 0.041393441394079744,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "epargne.annees_carriere",
+  "deficit_2037": 0.018984742624708062,
+  "deficit_2050": 0.04082892274263106,
+  "note": ""
+ },
+ {
+  "cle": "ia.departs_retraite_annuels",
+  "deficit_2037": -0.0180371110736397,
+  "deficit_2050": -0.016756664965988932,
+  "note": ""
+ },
+ {
+  "cle": "securite_sociale.postes_absents/ij_maternite/montant",
+  "deficit_2037": 0.017350899380978113,
+  "deficit_2050": 0.03776021391500706,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/ij_maternite/part",
+  "deficit_2037": 0.017350899380978113,
+  "deficit_2050": 0.03776021391500706,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "macro.part_capital_nouveau",
+  "deficit_2037": -0.01730491835537773,
+  "deficit_2050": -0.06820056805839947,
+  "note": ""
+ },
+ {
+  "cle": "securite_sociale.gestion_total_hors_at_maladie",
+  "deficit_2037": 0.01627198534141172,
+  "deficit_2050": 0.035410651616260225,
+  "note": "Écrit dans la formule B15 (14,63 − B13 − B14)."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/css/montant",
+  "deficit_2037": 0.015979305597212168,
+  "deficit_2050": 0.034919991979745824,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/css/part",
+  "deficit_2037": 0.015979305597212168,
+  "deficit_2050": 0.034919991979745824,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "ia.plafond_taches_automatisables",
+  "deficit_2037": -0.015629988037515474,
+  "deficit_2050": -0.06846406658576498,
+  "note": ""
+ },
+ {
+  "cle": "budget_etat.part_eleves_retour_public",
+  "deficit_2037": 0.013238906152343688,
+  "deficit_2050": 0.028097002648952873,
+  "note": ""
+ },
+ {
+  "cle": "is_investissement.categories/immateriel/part",
+  "deficit_2037": 0.013037493582181092,
+  "deficit_2050": 0.01622264901508519,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.assurance_vie/recette",
+  "deficit_2037": -0.012689738331260969,
+  "deficit_2050": -0.027713894406111272,
+  "note": ""
+ },
+ {
+  "cle": "revalorisation.part_pensions_sous_seuil",
+  "deficit_2037": 0.012322053024752755,
+  "deficit_2050": 0.03689815735653923,
+  "note": ""
+ },
+ {
+  "cle": "etudiants_rui.juste_au_dessus_demi_rui",
+  "deficit_2037": 0.012189818288227627,
+  "deficit_2050": 0.025590048164317203,
+  "note": "Autant que de boursiers (Objectifs!B45 = B44)."
+ },
+ {
+  "cle": "logement.is_bailleurs_sociaux",
+  "deficit_2037": -0.011972178917424081,
+  "deficit_2050": -0.02603927777381454,
+  "note": "Loyers supplémentaires des bailleurs sociaux (Logement!B52), à porter avec la feuille Logement."
+ },
+ {
+  "cle": "tva.agriculture/baisse_volumes",
+  "deficit_2037": 0.01161298495935803,
+  "deficit_2050": 0.022878636212717574,
+  "note": ""
+ },
+ {
+  "cle": "ia.cout_services_ia",
+  "deficit_2037": 0.011224367833246873,
+  "deficit_2050": 0.02930688786620017,
+  "note": "Part des salaires économisés (restée sans source)."
+ },
+ {
+  "cle": "is_investissement.part_investissement_concernee",
+  "deficit_2037": -0.01111586901420658,
+  "deficit_2050": -0.026204466844337304,
+  "note": ""
+ },
+ {
+  "cle": "tva.carburants/prix_ht",
+  "deficit_2037": -0.011085505877511892,
+  "deficit_2050": -0.04780046761807544,
+  "note": ""
+ },
+ {
+  "cle": "epargne.taux_emploi_carriere",
+  "deficit_2037": 0.010924884868098061,
+  "deficit_2050": 0.25731821864999826,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/rsa/regions",
+  "deficit_2037": -0.010704436791630023,
+  "deficit_2050": -0.023386239281055765,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "securite_sociale.agents_france_travail",
+  "deficit_2037": -0.010525492280182291,
+  "deficit_2050": -0.02288030856652057,
+  "note": "Écrit dans la formule C22."
+ },
+ {
+  "cle": "carbone_importe.abattement_preuve",
+  "deficit_2037": 0.010337414656303778,
+  "deficit_2050": 0.030964274149602566,
+  "note": ""
+ },
+ {
+  "cle": "macro.montee_erosion_is",
+  "deficit_2037": -0.009615142574986635,
+  "deficit_2050": -0.021587461199612967,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/investissements_rentables/gain",
+  "deficit_2037": -0.009310536651451429,
+  "deficit_2050": -0.02034206709237374,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "independants.salaire_pivot",
+  "deficit_2037": -0.00926211378622721,
+  "deficit_2050": -0.02012560986429701,
+  "note": "Salaire au-delà duquel le reste passe par la société (Total!B91, ancien seuil du taux de 66 %). Depuis la v227 le taux de 66 % commence à 32 000 € : voir le journal."
+ },
+ {
+  "cle": "ia.effectifs_etat/education_nationale",
+  "deficit_2037": 0.009040341838995936,
+  "deficit_2050": 0.02273088353224484,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "macro.effort_2029",
+  "deficit_2037": -0.008742822914515003,
+  "deficit_2050": -0.018908087638133786,
+  "note": ""
+ },
+ {
+  "cle": "hauts_revenus.part_par_societe",
+  "deficit_2037": -0.008632536457121809,
+  "deficit_2050": -0.01887546073027746,
+  "note": ""
+ },
+ {
+  "cle": "alignement.charges_patronales_prive",
+  "deficit_2037": -0.008543576403950759,
+  "deficit_2050": -0.030366537428917262,
+  "note": "Moyenne pour des salaires de 1,5 à 3 SMIC, après allègements (feuille Alignement public-privé, B4)."
+ },
+ {
+  "cle": "tva.carburants/co2_gazole",
+  "deficit_2037": 0.008328079904329933,
+  "deficit_2050": 0.03502501875855035,
+  "note": ""
+ },
+ {
+  "cle": "economies_missions.education_demographie_part",
+  "deficit_2037": -0.008272844455762929,
+  "deficit_2050": -0.017985153859700453,
+  "note": ""
+ },
+ {
+  "cle": "education.baisse_enseignants",
+  "deficit_2037": -0.008272844455762929,
+  "deficit_2050": -0.017985153859700453,
+  "note": "Élèves −15 % d'ici 2035, enseignants −7,5 %."
+ },
+ {
+  "cle": "education.cout_enseignant_aligne",
+  "deficit_2037": -0.008272844455762929,
+  "deficit_2050": -0.017985153859700453,
+  "note": ""
+ },
+ {
+  "cle": "fonds_reprises.investissements_locaux_rentables",
+  "deficit_2037": 0.007985814719867257,
+  "deficit_2050": 0.030206999195513617,
+  "note": "10 Md€ d'origine + 10 Md€ « même doctrine » (Collectivités D17, C64)."
+ },
+ {
+  "cle": "education.universite/etudiants",
+  "deficit_2037": -0.007497310067439145,
+  "deficit_2050": -0.016323164617708663,
+  "note": ""
+ },
+ {
+  "cle": "sante.mesures_a_terme",
+  "deficit_2037": -0.007380418700179803,
+  "deficit_2050": -0.016779562186572505,
+  "note": "Md€/an (Santé B32:D37) ; crise = paramètres de la feuille Scénario de crise. Le budget statique prend la colonne prudente (Total!B80)."
+ },
+ {
+  "cle": "tva.aerien/g_co2_par_pkm",
+  "deficit_2037": -0.007257595026397112,
+  "deficit_2050": -0.013575870472540608,
+  "note": ""
+ },
+ {
+  "cle": "tva.aerien/effets_hors_co2",
+  "deficit_2037": -0.007257595026397112,
+  "deficit_2050": -0.013575870472540608,
+  "note": ""
+ },
+ {
+  "cle": "quotient.conjugal/correlation",
+  "deficit_2037": -0.0071748059029506095,
+  "deficit_2050": -0.01567228618390093,
+  "note": "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Rest"
+ },
+ {
+  "cle": "securite_sociale.postes_absents/aeeh/montant",
+  "deficit_2037": 0.007118135077893939,
+  "deficit_2050": 0.015484518827292959,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/aeeh/part",
+  "deficit_2037": 0.007118135077893939,
+  "deficit_2050": 0.015484518827292959,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "education.universite/cout_etudiant",
+  "deficit_2037": -0.0069755258741919235,
+  "deficit_2050": -0.015165585989986852,
+  "note": ""
+ },
+ {
+  "cle": "tva.aerien/recette_centimes_pkm",
+  "deficit_2037": 0.006884305221190878,
+  "deficit_2050": 0.012889253137329248,
+  "note": ""
+ },
+ {
+  "cle": "tva.agriculture/abattement_modulation",
+  "deficit_2037": 0.006765217032350002,
+  "deficit_2050": 0.013325590509705165,
+  "note": ""
+ },
+ {
+  "cle": "tva_sante_long_terme.elasticite_prix",
+  "deficit_2037": 0.006618755108235064,
+  "deficit_2050": 0.010759860879828942,
+  "note": ""
+ },
+ {
+  "cle": "etudiants_rui.duree_etudes",
+  "deficit_2037": -0.006483984794824593,
+  "deficit_2050": -0.00892293940948452,
+  "note": ""
+ },
+ {
+  "cle": "securite_sociale.postes_absents/gestion_autres_branches/part",
+  "deficit_2037": 0.00647304361705725,
+  "deficit_2050": 0.014080841641137987,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "calendrier.mesures_2028/fin_impots_production_is",
+  "deficit_2037": 0.006325839439743852,
+  "deficit_2050": 0.013485626906394543,
+  "note": "Md€ (Calendrier B8:B12). La fin des impôts de production (−24) est un « écart du modèle » saisi, à recalculer depuis les recettes."
+ },
+ {
+  "cle": "tva_sante_long_terme.produits/tabac/recette",
+  "deficit_2037": 0.006094146061749406,
+  "deficit_2050": 0.013199488072031862,
+  "note": ""
+ },
+ {
+  "cle": "securite_sociale.postes_absents/gestion_at/part",
+  "deficit_2037": 0.005661096949988398,
+  "deficit_2050": 0.012366137764585616,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "tva.carburants/co2_essence",
+  "deficit_2037": 0.005505959072917399,
+  "deficit_2050": 0.022086973981217284,
+  "note": ""
+ },
+ {
+  "cle": "hauts_revenus.montee",
+  "deficit_2037": -0.00543936549687718,
+  "deficit_2050": -0.012216439091087494,
+  "note": ""
+ },
+ {
+  "cle": "carrieres.entree_plus_tot/debut",
+  "deficit_2037": 0.005217732266127761,
+  "deficit_2050": 0.011584653139331103,
+  "note": "Les années d'études en plus supprimées (education.universite : 3 % × 1,6 million = 48 000 années par an, économie déjà au budget) réparties également de 19 à 23 ans ; montée en trois ans (les redoublements de L1 disparaissent avec les premières générations sélectionnées)."
+ },
+ {
+  "cle": "tva.agriculture/assiette_brute_md",
+  "deficit_2037": 0.0051863668074894065,
+  "deficit_2050": 0.01021581454394127,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.part_agents_gestion",
+  "deficit_2037": -0.00510472288256647,
+  "deficit_2050": -0.011154865896638277,
+  "note": ""
+ },
+ {
+  "cle": "tva.alcool/depense_ttc_md",
+  "deficit_2037": 0.004705271140807099,
+  "deficit_2050": 0.012468345845357831,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/investissements_repris_fonds/communes",
+  "deficit_2037": -0.004659156484647653,
+  "deficit_2050": -0.010181390337741014,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/investissements_repris_fonds/regions",
+  "deficit_2037": -0.004659156484647653,
+  "deficit_2050": -0.010181390337741014,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/effectifs/gain",
+  "deficit_2037": -0.004659156484647653,
+  "deficit_2050": -0.010181390337741014,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/gestion_at/montant",
+  "deficit_2037": 0.004281949005446428,
+  "deficit_2050": 0.009365642809401109,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "emploi.prime_jeunes/part_rui",
+  "deficit_2037": 0.004263328967338609,
+  "deficit_2050": 0.009324381644383095,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "emploi.prime_jeunes/duree_mois",
+  "deficit_2037": 0.004263328967338609,
+  "deficit_2050": 0.009324381644383095,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "ascenseur.prepas/premiere_annee",
+  "deficit_2037": 0.004240695078947532,
+  "deficit_2050": 0.04100314278739692,
+  "note": "Part remboursée de 55 % ; le texte de la feuille (ligne 62) parle de 60 %."
+ },
+ {
+  "cle": "ascenseur.assurance_vie/part_perdue",
+  "deficit_2037": 0.004230034206201161,
+  "deficit_2050": 0.009244245356610392,
+  "note": ""
+ },
+ {
+  "cle": "ia.part_gestion/education_nationale",
+  "deficit_2037": -0.004140644979009345,
+  "deficit_2050": -0.012470287377881029,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/reorganisation_territoriale/regions",
+  "deficit_2037": -0.0037279478230773933,
+  "deficit_2050": -0.00814677113860185,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "emploi.prime_jeunes/primes_par_an",
+  "deficit_2037": 0.0036943123073767126,
+  "deficit_2050": 0.00819988614964462,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "ia.part_gestion/economie_finances",
+  "deficit_2037": -0.0036896697558645997,
+  "deficit_2050": -0.011112298067007309,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "epargne.gompertz_a",
+  "deficit_2037": 0.003622542946705387,
+  "deficit_2050": 0.0006394028599876478,
+  "note": "Mortalité de Gompertz, paramètre A (Socle actuariel!B12)."
+ },
+ {
+  "cle": "tva.alcool/cout_soins_md",
+  "deficit_2037": -0.003575009323245837,
+  "deficit_2050": -0.012377950632803447,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/subventions/gain",
+  "deficit_2037": -0.0034485245496060912,
+  "deficit_2050": -0.007536223746487103,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "logement_dynamique.part_amortissements_repris",
+  "deficit_2037": -0.0034082928817449343,
+  "deficit_2050": -0.01181204556516846,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.plafond_exoneration_entreprises/part_recuperee",
+  "deficit_2037": -0.0033306623348137165,
+  "deficit_2050": -0.007282290252299539,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.hopitaux_administratifs/postes",
+  "deficit_2037": -0.003205608603619403,
+  "deficit_2050": -0.009145529714177592,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.hopitaux_administratifs/cout_aligne",
+  "deficit_2037": -0.003205608603619403,
+  "deficit_2050": -0.009145529714177592,
+  "note": ""
+ },
+ {
+  "cle": "education.universite/part_annees_supplementaires",
+  "deficit_2037": -0.003137645821797541,
+  "deficit_2050": -0.006846172120393845,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/achats/gain",
+  "deficit_2037": -0.003075916612806928,
+  "deficit_2050": -0.006722044477843525,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "logement_dynamique.part_parc_vendue_par_an",
+  "deficit_2037": -0.0030734019869642637,
+  "deficit_2050": -0.009400701910720066,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.classes_12/eleves_dedoublee",
+  "deficit_2037": -0.002888321109666414,
+  "deficit_2050": -0.00631248731029288,
+  "note": "Coût enseignant = Éducation!C15 (coût employeur aligné)."
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/reorganisation_territoriale/communes",
+  "deficit_2037": -0.0027964279765138045,
+  "deficit_2050": -0.006111322951356968,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/transports/gain",
+  "deficit_2037": -0.0027964279765138045,
+  "deficit_2050": -0.006111322951364961,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "emploi.gain_par_emploi",
+  "deficit_2037": 0.0026816454733928907,
+  "deficit_2050": 0.005351534977289241,
+  "note": "Part des nouveaux emplois occupés par des personnes au RUI plein (Emploi!B238)."
+ },
+ {
+  "cle": "independants.seuil_retention",
+  "deficit_2037": -0.0026381302210110036,
+  "deficit_2050": -0.0057523046151555235,
+  "note": "Bénéfice gardé dans la société au-delà de ce revenu (Total!B89)."
+ },
+ {
+  "cle": "tva_sante_long_terme.vraie_baisse_consommation",
+  "deficit_2037": -0.0025510058598205987,
+  "deficit_2050": -0.009259802562539221,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/achats_fonctionnement/communes",
+  "deficit_2037": -0.002330551317404783,
+  "deficit_2050": -0.005093287847903305,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/tarifs/gain",
+  "deficit_2037": -0.002237366644603611,
+  "deficit_2050": -0.004889655939251725,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "ia.part_gestion/interieur",
+  "deficit_2037": -0.0022258011636626662,
+  "deficit_2050": -0.0067039143468416995,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "ia.effectifs_etat/armees",
+  "deficit_2037": 0.0021371962299010505,
+  "deficit_2050": 0.005242312706532637,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "hauts_revenus.regle_nordique",
+  "deficit_2037": -0.002059226932376923,
+  "deficit_2050": -0.004503741676677109,
+  "note": "Part de ce qui passe par une société ramenée au barème (règle du dirigeant-actionnaire)."
+ },
+ {
+  "cle": "ia.effectifs_etat/economie_finances",
+  "deficit_2037": -0.0020525683154213326,
+  "deficit_2050": -0.006743090913274408,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "tva.agriculture/part_transformes",
+  "deficit_2037": 0.0019229249706294027,
+  "deficit_2050": 0.0037910267810925546,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/achats_fonctionnement/regions",
+  "deficit_2037": -0.001864596812313657,
+  "deficit_2050": -0.004075045330142579,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "calendrier.mesures_2028/retraites_actuels",
+  "deficit_2037": -0.0018442568330252485,
+  "deficit_2050": -0.003929153715686695,
+  "note": "Md€ (Calendrier B8:B12). La fin des impôts de production (−24) est un « écart du modèle » saisi, à recalculer depuis les recettes."
+ },
+ {
+  "cle": "environnement.chaleur/logements_millions",
+  "deficit_2037": 0.0018388272218290425,
+  "deficit_2050": 0.003999254563617605,
+  "note": "Perte d'IS comptée chaque année, sans fin après les 15 ans d'amortissement."
+ },
+ {
+  "cle": "environnement.chaleur/part_sans_protection",
+  "deficit_2037": 0.0018388272218290425,
+  "deficit_2050": 0.003999254563617605,
+  "note": "Perte d'IS comptée chaque année, sans fin après les 15 ans d'amortissement."
+ },
+ {
+  "cle": "environnement.chaleur/cout_logement",
+  "deficit_2037": 0.0018388272218290425,
+  "deficit_2050": 0.003999254563617605,
+  "note": "Perte d'IS comptée chaque année, sans fin après les 15 ans d'amortissement."
+ },
+ {
+  "cle": "environnement.chaleur/part_recours",
+  "deficit_2037": 0.0018388272218290425,
+  "deficit_2050": 0.003999254563617605,
+  "note": "Perte d'IS comptée chaque année, sans fin après les 15 ans d'amortissement."
+ },
+ {
+  "cle": "carbone_importe.passage_prix_vente",
+  "deficit_2037": -0.00177938735502714,
+  "deficit_2050": -0.00699343200699154,
+  "note": "Coefficient de 1,15 signalé par l'audit comme à étayer."
+ },
+ {
+  "cle": "carbone_importe.elasticite_prix",
+  "deficit_2037": 0.001704529901791041,
+  "deficit_2050": 0.006627705046696519,
+  "note": ""
+ },
+ {
+  "cle": "environnement.chaleur/duree_amortissement",
+  "deficit_2037": -0.0016716463969714823,
+  "deficit_2050": -0.003635134281597452,
+  "note": "Perte d'IS comptée chaque année, sans fin après les 15 ans d'amortissement."
+ },
+ {
+  "cle": "ia.effectifs_etat/interieur",
+  "deficit_2037": 0.0016670506136780006,
+  "deficit_2050": 0.0036801996655162483,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "tva_sante_long_terme.produits/tabac/cout_soins",
+  "deficit_2037": -0.0016087763280285827,
+  "deficit_2050": -0.006066051620484458,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.classes_12/eleves_ordinaire",
+  "deficit_2037": 0.0015754600087500847,
+  "deficit_2050": 0.0034437940920035714,
+  "note": "Coût enseignant = Éducation!C15 (coût employeur aligné)."
+ },
+ {
+  "cle": "logement.part_plus_values_bailleurs",
+  "deficit_2037": -0.0015550981148608756,
+  "deficit_2050": -0.003385989043177773,
+  "note": ""
+ },
+ {
+  "cle": "education.chefs_etablissement/personnes",
+  "deficit_2037": 0.0015118706389891656,
+  "deficit_2050": 0.003288114826406563,
+  "note": "1,6 et 300 € écrits dans la formule Éducation!D6."
+ },
+ {
+  "cle": "education.chefs_etablissement/hausse_nette_mensuelle",
+  "deficit_2037": 0.0015118706389891656,
+  "deficit_2050": 0.003288114826406563,
+  "note": "1,6 et 300 € écrits dans la formule Éducation!D6."
+ },
+ {
+  "cle": "education.chefs_etablissement/coefficient_charge",
+  "deficit_2037": 0.0015118706389891656,
+  "deficit_2050": 0.003288114826406563,
+  "note": "1,6 et 300 € écrits dans la formule Éducation!D6."
+ },
+ {
+  "cle": "ascenseur.classes_12/eleves_par_niveau",
+  "deficit_2037": 0.0014441713476305296,
+  "deficit_2050": 0.003156794555438047,
+  "note": "Coût enseignant = Éducation!C15 (coût employeur aligné)."
+ },
+ {
+  "cle": "ascenseur.classes_12/part_supplementaire",
+  "deficit_2037": 0.0014441713476305296,
+  "deficit_2050": 0.003156794555438047,
+  "note": "Coût enseignant = Éducation!C15 (coût employeur aligné)."
+ },
+ {
+  "cle": "ascenseur.classes_12/niveaux",
+  "deficit_2037": 0.0014441713476305296,
+  "deficit_2050": 0.003156794555438047,
+  "note": "Coût enseignant = Éducation!C15 (coût employeur aligné)."
+ },
+ {
+  "cle": "ascenseur.classes_12/cout_enseignant",
+  "deficit_2037": 0.0014441713476305296,
+  "deficit_2050": 0.003156794555438047,
+  "note": "Coût enseignant = Éducation!C15 (coût employeur aligné)."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/debut_autres",
+  "deficit_2037": 0.0014398500140391235,
+  "deficit_2050": 0.008624645213051174,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/satellites_subventions/communes",
+  "deficit_2037": -0.0013985644446226075,
+  "deficit_2050": -0.0030565953422811987,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/satellites_subventions/regions",
+  "deficit_2037": -0.0013985644446226075,
+  "deficit_2050": -0.0030565953422811987,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "retraites.part_imposable_rente",
+  "deficit_2037": -0.0013747071162697466,
+  "deficit_2050": -0.010692568614286913,
+  "note": "Gains seulement ; les versements sont déjà imposés."
+ },
+ {
+  "cle": "education.plateforme_ia",
+  "deficit_2037": 0.0013346309737896078,
+  "deficit_2050": 0.0029026214985083953,
+  "note": ""
+ },
+ {
+  "cle": "ia.part_gestion/armees",
+  "deficit_2037": -0.0013204365153356434,
+  "deficit_2050": -0.0039771824661398725,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "tva.carburants/part_gazole",
+  "deficit_2037": 0.0012764869416885816,
+  "deficit_2050": 0.005196152827173783,
+  "note": ""
+ },
+ {
+  "cle": "tva_sante_long_terme.produits/sucres/recette",
+  "deficit_2037": 0.0011893474286415184,
+  "deficit_2050": 0.002575490518797352,
+  "note": ""
+ },
+ {
+  "cle": "tva.alcool/part_vin",
+  "deficit_2037": 0.0011246559239648235,
+  "deficit_2050": 0.0033254410685508162,
+  "note": ""
+ },
+ {
+  "cle": "tva.alcool/abattement_vin",
+  "deficit_2037": 0.0011246559239648235,
+  "deficit_2050": 0.0033254410685508162,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.succession_cumul/gain",
+  "deficit_2037": -0.0011101446477939092,
+  "deficit_2050": -0.0033474955678061136,
+  "note": ""
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/temps_de_travail/communes",
+  "deficit_2037": -0.0009324541977626666,
+  "deficit_2050": -0.00203793782856021,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "collectivites_detail.charges_fixes/temps_de_travail/regions",
+  "deficit_2037": -0.0009324541977626666,
+  "deficit_2050": -0.00203793782856021,
+  "note": "Md€ (Collectivités, lignes 15 à 23) ; RSA sourcé (Drees)."
+ },
+ {
+  "cle": "ia.part_gestion/justice",
+  "deficit_2037": -0.0009243448213807071,
+  "deficit_2050": -0.002784190570689127,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "education.tenue_commune/eleves",
+  "deficit_2037": 0.000889752990060444,
+  "deficit_2050": 0.0019350437848979496,
+  "note": ""
+ },
+ {
+  "cle": "education.tenue_commune/prix_kit",
+  "deficit_2037": 0.000889752990060444,
+  "deficit_2050": 0.0019350437848979496,
+  "note": ""
+ },
+ {
+  "cle": "education.tenue_commune/part_etat",
+  "deficit_2037": 0.000889752990060444,
+  "deficit_2050": 0.0019350437848979496,
+  "note": ""
+ },
+ {
+  "cle": "securite_sociale.aides_france_travail_supprimees",
+  "deficit_2037": -0.0008897490201444924,
+  "deficit_2050": -0.0019348949362294476,
+  "note": ""
+ },
+ {
+  "cle": "ia.part_gestion/ecologie_territoires",
+  "deficit_2037": -0.000878487676733819,
+  "deficit_2050": -0.002646070583878668,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "ascenseur.assurance_vie/annees_plein_effet",
+  "deficit_2037": 0.0008284900623776181,
+  "deficit_2050": 0.0013171588358922293,
+  "note": ""
+ },
+ {
+  "cle": "education.tenue_commune/annees_kit",
+  "deficit_2037": -0.0008088629096389965,
+  "deficit_2050": -0.0017590015470947407,
+  "note": ""
+ },
+ {
+  "cle": "tva.textile/accise_max",
+  "deficit_2037": -0.0007926437034484479,
+  "deficit_2050": -0.0015837877939945955,
+  "note": ""
+ },
+ {
+  "cle": "tva.textile/part_ultra_ephemere",
+  "deficit_2037": -0.0007926437034484479,
+  "deficit_2050": -0.0015837877939945955,
+  "note": ""
+ },
+ {
+  "cle": "macro.extinction_aides_construction",
+  "deficit_2037": 0.0007335949967348654,
+  "deficit_2050": 0.001589686397400314,
+  "note": ""
+ },
+ {
+  "cle": "macro.aides_construction",
+  "deficit_2037": 0.0007335949967348654,
+  "deficit_2050": 0.001589686397400314,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.assurance_vie/part_premiere_annee",
+  "deficit_2037": -0.0006327283714222531,
+  "deficit_2050": -0.0014052006320994792,
+  "note": ""
+ },
+ {
+  "cle": "ia.part_gestion/agriculture",
+  "deficit_2037": -0.0005856580954475277,
+  "deficit_2050": -0.0017640668716483177,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "emploi.prime_jeunes/median/embauche",
+  "deficit_2037": -0.0005689360194809367,
+  "deficit_2050": -0.001123895786519391,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "emploi.prime_jeunes/median/annees",
+  "deficit_2037": -0.0005689360194809367,
+  "deficit_2050": -0.001123895786519391,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "sante_trajectoire.forfait_generalistes/part_perdue/prudent",
+  "deficit_2037": 0.0005572852635085113,
+  "deficit_2050": 0.003942619004909886,
+  "note": ""
+ },
+ {
+  "cle": "environnement.ecosystemes_transferes_regions_m/espaces_proteges",
+  "deficit_2037": -0.0005101886813099199,
+  "deficit_2050": -0.001108023281101822,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.montee_mesures/fraude",
+  "deficit_2037": 0.0005051626839094325,
+  "deficit_2050": 0.0005813213000864792,
+  "note": ""
+ },
+ {
+  "cle": "etudiants_rui.part_chez_parents",
+  "deficit_2037": -0.00047901668816408005,
+  "deficit_2050": -0.0023906710065588754,
+  "note": "Demi-RUI pour l'étudiant logé chez ses parents (Budget État!C110)."
+ },
+ {
+  "cle": "ascenseur.succession_cumul/annees_plein_effet",
+  "deficit_2037": 0.0004605656167466776,
+  "deficit_2050": 0.0007590595222541907,
+  "note": ""
+ },
+ {
+  "cle": "education.formation_ia",
+  "deficit_2037": 0.00044487599878983985,
+  "deficit_2050": 0.000967503285792759,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.prepas/etudiants_public",
+  "deficit_2037": -0.00042409600525150637,
+  "deficit_2050": -0.004099312700530433,
+  "note": "Part remboursée de 55 % ; le texte de la feuille (ligne 62) parle de 60 %."
+ },
+ {
+  "cle": "ascenseur.prepas/cout_annuel",
+  "deficit_2037": -0.00042409600525150637,
+  "deficit_2050": -0.004099312700530433,
+  "note": "Part remboursée de 55 % ; le texte de la feuille (ligne 62) parle de 60 %."
+ },
+ {
+  "cle": "ascenseur.prepas/part_facturee",
+  "deficit_2037": -0.00042409600525150637,
+  "deficit_2050": -0.004099312700530433,
+  "note": "Part remboursée de 55 % ; le texte de la feuille (ligne 62) parle de 60 %."
+ },
+ {
+  "cle": "ascenseur.prepas/part_remboursee",
+  "deficit_2037": -0.00042409600525150637,
+  "deficit_2050": -0.004099312700530433,
+  "note": "Part remboursée de 55 % ; le texte de la feuille (ligne 62) parle de 60 %."
+ },
+ {
+  "cle": "ia.effectifs_etat/ecologie_territoires",
+  "deficit_2037": -0.0004137462594622221,
+  "deficit_2050": -0.0014072567974805494,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "ascenseur.succession_cumul/part_immediate",
+  "deficit_2037": -0.00038639590336497776,
+  "deficit_2050": -0.00045063040344306415,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.prepas/montee",
+  "deficit_2037": 0.0003855376420958123,
+  "deficit_2050": 0.0010582505398915032,
+  "note": "Part remboursée de 55 % ; le texte de la feuille (ligne 62) parle de 60 %."
+ },
+ {
+  "cle": "ia.part_gestion/travail_sante_solidarites",
+  "deficit_2037": -0.0003806776001908929,
+  "deficit_2050": -0.001146652482803212,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "entreprises_cellules.plafond_part_capital",
+  "deficit_2037": -0.00037940836357019947,
+  "deficit_2050": -0.0037392006694005886,
+  "note": "Part au plus du capital productif d'une taille d'entreprises que le fonds peut financer (capacité d'absorption : projets rentables, gouvernance). Sans source. Capital productif : immobilisations corporelles par ETP × ETP (Insee, Ésane 2021), en euros de 2026 (+14,5 % de prix de 2021 à 2026)."
+ },
+ {
+  "cle": "tva.gaz_fioul/co2_gaz_kwh",
+  "deficit_2037": 0.00032057408441676927,
+  "deficit_2050": 0.00832734560415016,
+  "note": ""
+ },
+ {
+  "cle": "ia.effectifs_etat/justice",
+  "deficit_2037": 0.00029474708821730644,
+  "deficit_2050": 0.00046558015499176264,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "carbone.part_accise_prix_final",
+  "deficit_2037": -0.0002892336858595357,
+  "deficit_2050": -0.0011811391255625026,
+  "note": ""
+ },
+ {
+  "cle": "environnement.bombardiers/appareils",
+  "deficit_2037": 0.0002846233247444374,
+  "deficit_2050": 0.0006189864268870693,
+  "note": ""
+ },
+ {
+  "cle": "environnement.bombardiers/prix_unitaire_m",
+  "deficit_2037": 0.0002846233247444374,
+  "deficit_2050": 0.0006189864268870693,
+  "note": ""
+ },
+ {
+  "cle": "ia.part_gestion/affaires_etrangeres",
+  "deficit_2037": -0.00026549816029941553,
+  "deficit_2050": -0.0007997201368290519,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "ia.part_gestion/premier_ministre",
+  "deficit_2037": -0.00024402403351864166,
+  "deficit_2050": -0.0007350374959518291,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "tva.pesticides/accise_pleine",
+  "deficit_2037": -0.00022110813848197353,
+  "deficit_2050": -0.0005886366379668218,
+  "note": ""
+ },
+ {
+  "cle": "ia.effectifs_etat/travail_sante_solidarites",
+  "deficit_2037": -0.00021298715801787438,
+  "deficit_2050": -0.0006997573507208088,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "ia.effectifs_etat/agriculture",
+  "deficit_2037": -0.0001987017649716094,
+  "deficit_2050": -0.0007327286898508589,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "calendrier.mesures_2028/ia_education",
+  "deficit_2037": 0.00018444504737757939,
+  "deficit_2050": 0.0003930185060756486,
+  "note": "Md€ (Calendrier B8:B12). La fin des impôts de production (−24) est un « écart du modèle » saisi, à recalculer depuis les recettes."
+ },
+ {
+  "cle": "ia.part_gestion/culture",
+  "deficit_2037": -0.0001756972792321676,
+  "deficit_2050": -0.0005292283842042167,
+  "note": "Part des effectifs en gestion et support (IA ministères C11:C21)."
+ },
+ {
+  "cle": "environnement.bombardiers/duree_location",
+  "deficit_2037": -0.00015972689448950916,
+  "deficit_2050": -0.0003473608173640841,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.montee_mesures/carence",
+  "deficit_2037": 0.00015087093961430043,
+  "deficit_2050": 0.00033609736021755765,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/inscrits",
+  "deficit_2037": -0.0001475860415807162,
+  "deficit_2050": -0.0009061481872674193,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/depense_par_eleve",
+  "deficit_2037": -0.00014398631215772895,
+  "deficit_2050": -0.0008840466753365916,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/rembourse_autres",
+  "deficit_2037": -0.00014398631215772895,
+  "deficit_2050": -0.0008624279906230825,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/part_prepa",
+  "deficit_2037": 0.00014398607383370177,
+  "deficit_2050": 0.0008408166472548828,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "ascenseur.classes_12/montee",
+  "deficit_2037": -0.00013844495069559315,
+  "deficit_2050": -0.00031107288680409795,
+  "note": "Coût enseignant = Éducation!C15 (coût employeur aligné)."
+ },
+ {
+  "cle": "carrieres.entree_plus_tot/montee",
+  "deficit_2037": 0.00013688193136651705,
+  "deficit_2050": 0.0003005324301499357,
+  "note": "Les années d'études en plus supprimées (education.universite : 3 % × 1,6 million = 48 000 années par an, économie déjà au budget) réparties également de 19 à 23 ans ; montée en trois ans (les redoublements de L1 disparaissent avec les premières générations sélectionnées)."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/montee_autres",
+  "deficit_2037": 0.00013089644061459182,
+  "deficit_2050": 0.0007840312096227819,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "ia.effectifs_etat/premier_ministre",
+  "deficit_2037": -0.0001150811920132,
+  "deficit_2050": -0.00039142535798575295,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "environnement.bombardiers/rendement_fonds",
+  "deficit_2037": 0.00011147567729352659,
+  "deficit_2050": 0.00024243074498286887,
+  "note": ""
+ },
+ {
+  "cle": "ia.effectifs_etat/affaires_etrangeres",
+  "deficit_2037": -9.015312103510809e-05,
+  "deficit_2050": -0.00033244836767387653,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "ascenseur.bac_tout_age/candidats",
+  "deficit_2037": 8.082476403892258e-05,
+  "deficit_2050": 0.00017674288496483115,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.bac_tout_age/cout_2010",
+  "deficit_2037": 8.082476403892258e-05,
+  "deficit_2050": 0.00017674288496483115,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.bac_tout_age/inflation_2010_2026",
+  "deficit_2037": 8.082476403892258e-05,
+  "deficit_2050": 0.00017674288496483115,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.montee_mesures/transports",
+  "deficit_2037": 7.8662622374992e-05,
+  "deficit_2050": 0.00017769102068410092,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.montee_mesures/imagerie",
+  "deficit_2037": 7.863337198443787e-05,
+  "deficit_2050": 7.946890539312079e-05,
+  "note": ""
+ },
+ {
+  "cle": "ia.effectifs_etat/culture",
+  "deficit_2037": -5.9674087428795985e-05,
+  "deficit_2050": -0.00022005425832816172,
+  "note": "ETPT par ministère (IA ministères B11:B21) ; PLF 2024 pour les cinq premiers, ordres de grandeur « à vérifier » ensuite."
+ },
+ {
+  "cle": "tva.pesticides/part_bio",
+  "deficit_2037": 5.895598413019343e-05,
+  "deficit_2050": 0.0001569104035166191,
+  "note": ""
+ },
+ {
+  "cle": "quotient.conjugal/retraites_forfait",
+  "deficit_2037": -4.4950226705253726e-05,
+  "deficit_2050": 0.0005980397901899082,
+  "note": "Les gains moyens de l'imposition commune sont désormais calculés par le moteur avec le barème en vigueur (depenses/quotient.gains_conjugaux) : 9 900 € pour un couple à un revenu, 500 € à deux revenus. La v235 gardait les résultats d'une simulation faite avec un ancien barème (8 510 € et 580 €). Rest"
+ },
+ {
+  "cle": "education.connaissance_religions/professeurs",
+  "deficit_2037": 3.736954572008955e-05,
+  "deficit_2050": 8.126884437054116e-05,
+  "note": ""
+ },
+ {
+  "cle": "education.connaissance_religions/jours_formation",
+  "deficit_2037": 3.736954572008955e-05,
+  "deficit_2050": 8.126884437054116e-05,
+  "note": ""
+ },
+ {
+  "cle": "education.connaissance_religions/cout_jour",
+  "deficit_2037": 3.736954572008955e-05,
+  "deficit_2050": 8.126884437054116e-05,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/part_apprentissage",
+  "deficit_2037": 3.68964712631481e-05,
+  "deficit_2050": 0.00022653801962491116,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "environnement.ecosystemes_transferes_regions_m/sites_paysages",
+  "deficit_2037": -3.375497462432264e-05,
+  "deficit_2050": -7.33101992107521e-05,
+  "note": ""
+ },
+ {
+  "cle": "tva.gaz_fioul/prix_fioul_litre",
+  "deficit_2037": -3.0604880386420064e-05,
+  "deficit_2050": -0.002115826582182123,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.montee_mesures/cures",
+  "deficit_2037": 3.0005937257548965e-05,
+  "deficit_2050": 6.684404430590263e-05,
+  "note": ""
+ },
+ {
+  "cle": "education.connaissance_religions/annees_amortissement",
+  "deficit_2037": -2.911912167480324e-05,
+  "deficit_2050": -6.332619020721353e-05,
+  "note": ""
+ },
+ {
+  "cle": "tva.gaz_fioul/part_gaz",
+  "deficit_2037": -1.9109034051112417e-05,
+  "deficit_2050": -0.0011283020294561297,
+  "note": ""
+ },
+ {
+  "cle": "education.connaissance_religions/eleves_4e",
+  "deficit_2037": 7.473908582689148e-06,
+  "deficit_2050": 1.6253747872063684e-05,
+  "note": ""
+ },
+ {
+  "cle": "education.connaissance_religions/prix_manuel",
+  "deficit_2037": 7.473908582689148e-06,
+  "deficit_2050": 1.6253747872063684e-05,
+  "note": ""
+ },
+ {
+  "cle": "education.connaissance_religions/renouvellement_manuel",
+  "deficit_2037": -6.794462099612986e-06,
+  "deficit_2050": -1.4776125298432419e-05,
+  "note": ""
+ },
+ {
+  "cle": "education.connaissance_religions/renouvellement_formation",
+  "deficit_2037": -4.8531872449686375e-06,
+  "deficit_2050": -1.0554376101090668e-05,
+  "note": ""
+ },
+ {
+  "cle": "tva.gaz_fioul/prix_gaz_kwh",
+  "deficit_2037": -3.7250844719949328e-06,
+  "deficit_2050": -0.007362606922320047,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/duree",
+  "deficit_2037": 3.5997233176487953e-06,
+  "deficit_2050": 2.210166380045564e-05,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/eleves_fonctionnaires",
+  "deficit_2037": 3.5997233176487953e-06,
+  "deficit_2050": 2.210166380045564e-05,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "impot_local.taux_point_fixe",
+  "deficit_2037": -7.105427357601002e-15,
+  "deficit_2050": 5.329070518200751e-15,
+  "note": "Valeur de départ de l'itération (copie manuelle de Collectivités!B32 dans la v235) ; le moteur calcule le point fixe (moteur/collectivites.py)."
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/achats/part_communes",
+  "deficit_2037": -7.105427357601002e-15,
+  "deficit_2050": 5.329070518200751e-15,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/subventions/part_communes",
+  "deficit_2037": -7.105427357601002e-15,
+  "deficit_2050": 5.329070518200751e-15,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/tarifs/part_communes",
+  "deficit_2037": -7.105427357601002e-15,
+  "deficit_2050": 5.329070518200751e-15,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "penibilite.hausse_socle_mensuelle",
+  "deficit_2037": 5.329070518200751e-15,
+  "deficit_2050": 0.00018737095664800307,
+  "note": ""
+ },
+ {
+  "cle": "transition.salaires_quintiles",
+  "deficit_2037": -1.7763568394002505e-15,
+  "deficit_2050": -0.004046841188077188,
+  "note": "Socle actuariel E6:I6, nature (net ou coût) à préciser."
+ },
+ {
+  "cle": "carbone_importe.part_empreinte_couverte",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des émissions importées de l'empreinte (284 Mt en 2024, SDES) liée aux biens manufacturés et aux véhicules, assiette de l'accise sur le contenu importé. Les énergies importées sont comptées à leur combustion en France (émissions territoriales) ; le reste est surtout des biens intermédiaires et "
+ },
+ {
+  "cle": "securite_sociale.postes_absents/mode_de_garde/montant",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "securite_sociale.postes_absents/operateurs_taxes_affectees/montant",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Md€ (Sécurité sociale 2026, lignes 13 à 23)."
+ },
+ {
+  "cle": "budget_statique.retraites_socle",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Hypothèse fixe signalée par l'audit, à côté du calcul actuariel du socle."
+ },
+ {
+  "cle": "budget_statique.charge_dette_statique",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "transition.age_debut_carriere",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0004260315767341538,
+  "note": ""
+ },
+ {
+  "cle": "transition.taux_implicite_fichier_source",
+  "deficit_2037": 0.0,
+  "deficit_2050": -0.19378881107987933,
+  "note": "Taux du fichier de cohortes d'origine ; les remboursements par actif sont ramenés à 35 % par ce rapport."
+ },
+ {
+  "cle": "transition.decote_participations",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0016194032309906348,
+  "note": "Prudent, v214."
+ },
+ {
+  "cle": "transition.rendement_dividendes_perdu",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.00768562933672623,
+  "note": ""
+ },
+ {
+  "cle": "penibilite.part_concernes",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.007658728464966735,
+  "note": ""
+ },
+ {
+  "cle": "macro.montee_seniors_court",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.annee_seniors_long",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.22256586611075324,
+  "note": ""
+ },
+ {
+  "cle": "macro.montee_seniors_long",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0200873313219585,
+  "note": ""
+ },
+ {
+  "cle": "macro.logements_initial",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Note de la v235 : La fin des aides à la pierre et des dispositifs fiscaux agit tout de suite ; le droit à construire met plusieurs années à produire. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : les promoteurs anticipent le droit à construire : pas"
+ },
+ {
+  "cle": "macro.duree_initiale",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.part_additionnelle_logement",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.fraude_tva",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Plus lu depuis la phase B5 (12/11/2026, nuit) : remplacé par macro.fraude_controle et le barème commun (moteur/fraude.py). La v235 y comptait la fraude « récupérée par la facturation électronique et l'IA » : la facturation électronique est déjà dans la loi, donc dans le statu quo."
+ },
+ {
+  "cle": "macro.montee_fraude",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.permis_rapide_cout",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Coût annuel des services qui instruisent plus vite les autorisations (préfectures, DREAL) : environ 1 500 agents × 70 000 € de coût employeur ≈ 0,1 Md€. Sans source : ordre de grandeur, à remplacer par le chiffrage d'une loi d'accélération (loi Industrie verte de 2023, objectif de délais divisés par"
+ },
+ {
+  "cle": "macro.permis_rapide",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Note de la v235 : HYPOTHÈSE à étayer. Aucun coût budgétaire. S’ajoute au capital productif. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : les industriels saisissent le permis rapide, ancien optimiste (avant : 4.5)."
+ },
+ {
+  "cle": "macro.cumul_emploi_socle",
+  "deficit_2037": 0.0,
+  "deficit_2050": -0.0008799355982933577,
+  "note": "Note de la v235 : HYPOTHÈSE à étayer. Le socle ne baisse pas avec les revenus du travail. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : les seniors cumulent massivement emploi et socle, ancien optimiste (avant : 90000)."
+ },
+ {
+  "cle": "macro.annee_cumul",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.008802019348507883,
+  "note": ""
+ },
+ {
+  "cle": "macro.montee_cumul",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0007999834642351544,
+  "note": ""
+ },
+ {
+  "cle": "macro.annees_productivite",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.part_reinvestie",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Note de la v235 : HYPOTHÈSE PRUDENTE. Les comptes réinvestissent tout jusqu’à la retraite ; à la retraite, la moitié du capital part en rente et l’autre reste placée. Prudent : la moitié des rendements est réinvestie. Ces rendements naissent d’un capital qui n’existerait pas sans le fonds (ligne 28)"
+ },
+ {
+  "cle": "macro.niveau_eleves",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Note de la v235 : HYPOTHÈSE. 0,05 écart-type ≈ 5 points PISA, 0,1 ≈ 10 points (la France a perdu 21 points en mathématiques entre 2018 et 2022). Prudent : zéro, aucun effet durable compté. Mesures concernées : semaine de cinq jours, classes de 12, bac sur épreuves, sélection, ascenseur social. | v19"
+ },
+ {
+  "cle": "macro.annees_baisse_spread",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.annees_ecole",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "ascenseur.prepas/etudiants",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part remboursée de 55 % ; le texte de la feuille (ligne 62) parle de 60 %."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/rembourse_prepa",
+  "deficit_2037": 0.0,
+  "deficit_2050": -2.1618334979933707e-05,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/debut_prepa",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.00021618244649257434,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "ascenseur.ecoles_ingenieurs/montee_prepa",
+  "deficit_2037": 0.0,
+  "deficit_2050": 1.9653017541365614e-05,
+  "note": "Dépense par élève = 13 000 × 0,6, écrit dans la formule B95."
+ },
+ {
+  "cle": "sante_trajectoire.montee_mesures/conge_naissance",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.forfait_generalistes/depense_am_2024",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.forfait_generalistes/revalorise_croissance",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.forfait_generalistes/part_perdue/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "sante_trajectoire.forfait_generalistes/part_perdue/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "tva_sante_long_terme.annees_plein_effet",
+  "erreur": "slice indices must be integers or None or have an __index__ method"
+ },
+ {
+  "cle": "emploi.prime_jeunes/crise/annees",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "emploi.prime_jeunes/optimiste/embauche",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "emploi.prime_jeunes/optimiste/annees",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "emploi.prime_jeunes/derniere_annee",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Primes par an sans source ; effet d'embauche sourcé (aide de 2020)."
+ },
+ {
+  "cle": "logement_dynamique.prix_moyen_ht_neuf",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Logement!B72 ; sert à l'effet du choc d'offre sur le PIB (Effets macro, ligne 34)."
+ },
+ {
+  "cle": "is_investissement.categories/construction/duree",
+  "erreur": "2029.5"
+ },
+ {
+  "cle": "is_investissement.categories/equipements/duree",
+  "erreur": "2029.3"
+ },
+ {
+  "cle": "is_investissement.categories/immateriel/duree",
+  "erreur": "2029.7"
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/investissements_rentables/part_communes",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/effectifs/part_communes",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "collectivites_detail.meme_doctrine/transports/part_communes",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "DÉCISION du 8 octobre (même doctrine que l'État) ; gains = ordres de grandeur."
+ },
+ {
+  "cle": "crise.effort_2029_saisi",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "En crise, Effets macro!B19 est saisi (1,2 point) au lieu d'être calculé."
+ },
+ {
+  "cle": "crise.decote_participations",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Coût transition!I76 en crise."
+ }
+]

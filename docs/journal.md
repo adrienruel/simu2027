@@ -1294,3 +1294,17 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   dans l'évaluation micro) ; âge légal cohérent mais calé ; restent les 35 heures et le PFU.
 - **C4** : aucun chiffrage d'ensemble publié pour 2027 (l'Institut Montaigne l'annonce pour le premier trimestre
   2027 ; l'IFRAP publie un comparateur des propositions, sans chiffrage) : en attente.
+
+## 13/11/2026 (nuit) — Phase C1 : hypothèses sans source classées par poids
+
+- `outils/c1_inventaire.py` : +10 % sur chaque hypothèse sans source, écart de déficit 2037 et 2050 au prudent ;
+  les programmes qui lisent leurs paramètres à part (Tondelier, programmes simples) sont perturbés par leur `pt` ;
+  les années sont écartées. Résultats dans `docs/sources_c1.md`.
+- Communs : quatre paramètres pèsent (productivité, durée de la dette, inflation 2026-2030, élasticité des moyens de
+  l'enseignement) ; les trois premiers et le déflateur 2026 sont encadrés (COR, AFT, PLF 2027), le quatrième devient
+  une décision à écrire.
+- Écologie de droite : six paramètres encadrés (Citepa, SDES, DNF, Insee, Banque de France, OFCE) ; le besoin de
+  financement des collectivités (15,3 Md€) est entre la Cour des comptes (11,4) et l'Insee (17,8) : périmètre à
+  trancher ; une douzaine de constructions du modèle à écrire en décisions.
+- Tondelier, Mélenchon : chiffrages de mesures documentés, aucun au-dessus de 0,03 point pour 10 %.
+- Aucune valeur changée : les résultats sont inchangés.

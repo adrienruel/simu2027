@@ -200,6 +200,7 @@ tva:
     valeur: {emissions_mt: 77.5, part_hors_energie: 0.87, baisse_volumes: 0.3, abattement_modulation: 0.2, part_transformes: 0.8, assiette_transformes_md: 81.6, assiette_brute_md: 60.6}
     unite: sans_unite
     statut: HYPOTHESE
+    source: "Encadrement des émissions : agriculture 76 à 78 Mt CO2e en 2024 (Citepa, Secten 2026)"
   aerien: {valeur: {g_co2_par_pkm: 75.2, recette_centimes_pkm: 8, effets_hors_co2: 1.8}, unite: sans_unite, statut: HYPOTHESE}
   textile: {valeur: {accise_max: 0.5, part_ultra_ephemere: 0.02, part_autres_faible_durabilite: 0}, unite: sans_unite, statut: HYPOTHESE}
   pesticides: {valeur: {accise_pleine: 0.0324, part_bio: 0.21}, unite: sans_unite, statut: HYPOTHESE}
@@ -289,7 +290,7 @@ fonds:
 carbone_importe:
   intensite_kg_par_euro: {valeur: 0.543, unite: sans_unite, statut: HYPOTHESE}
   part_importee: {valeur: 0.64, unite: taux, statut: HYPOTHESE}
-  part_hors_ue: {valeur: 0.75, unite: taux, statut: HYPOTHESE}
+  part_hors_ue: {valeur: 0.75, unite: taux, statut: HYPOTHESE, source: "Encadrement : l'UE27 est à l'origine de près d'un quart des émissions importées (SDES-Insee, empreinte carbone 1990-2023)"}
   abattement_preuve: {valeur: 0.2, unite: taux, statut: HYPOTHESE}
   elasticite_prix: {valeur: 0.6, unite: sans_unite, statut: HYPOTHESE}
   passage_prix_vente: {valeur: 1.15, unite: sans_unite, statut: HYPOTHESE, note: "Coefficient de 1,15 signalé par l'audit comme à étayer."}
@@ -301,7 +302,7 @@ carbone_importe:
 
 # --- Budget de l'État 2026 (feuille Budget État 2026) ----------------------------
 budget_etat:
-  apprentissage: {valeur: 8.0, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "Ordre de grandeur (Total!B77)."}
+  apprentissage: {valeur: 8.0, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, source: "Encadrement : dépense publique totale pour l'apprentissage 20,5 Md€ en 2026 (OFCE, Policy brief 157) ; aides aux employeurs 2,0 Md€ en 2027 (PAP Travail et emploi, PLF 2027)", note: "Ordre de grandeur (Total!B77)."}
   part_eleves_retour_public: {valeur: 0.2, unite: taux, statut: HYPOTHESE}
 
 # --- Dépenses statiques (feuille Total, lignes 23 à 44) -----------------------------
@@ -368,7 +369,7 @@ rui_complements:
     statut: SOURCE
     source: "Insee, Familles selon le nombre d'enfants mineurs, RP 2023 : 956 200 familles de 3 enfants, 308 400 de 4 ou plus ; 13 882 000 enfants mineurs en famille (Insee Première n° 2032), d'où 4,40 enfants en moyenne dans les familles de 4 ou plus"
     note: "Enfants de rang 3 ou plus : 956 200 + 308 400 × 2,40 = 1 696 600. Tous comptés au taux des couples (prudent : les familles monoparentales gardent 30 % mais la ventilation n'est pas publiée)."
-  micro_en_complement: {valeur: 0.4, unite: taux, statut: HYPOTHESE, note: "Part des micro-entrepreneurs exerçant en complément d'un emploi ou d'une retraite (RUI!J14)."}
+  micro_en_complement: {valeur: 0.4, unite: taux, statut: HYPOTHESE, source: "Encadrement : 40 % des micro-entrepreneurs immatriculés en 2018 l'ont fait en activité de complément (Insee Première n° 2118, 2026) ; 29 % cumulent avec un emploi salarié en fin d'année (Insee, Emploi et revenus des indépendants 2020)", note: "Part des micro-entrepreneurs exerçant en complément d'un emploi ou d'une retraite (RUI!J14)."}
   aah: {valeur: 14.6, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "PLF 2026 : 14,6 Md€ pour l'AAH, +1,7 % sur 2025 (Sénat, rapport sur la mission Solidarité, insertion et égalité des chances)", note: "Écrit dans la formule RUI!B17 (14,6 + aide au poste des entreprises adaptées)."}
   aide_poste_entreprises_adaptees: {valeur: 0.4278, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "Mission Travail et emploi 2026"}
 
@@ -694,7 +695,7 @@ tva_sante_long_terme:
       sucres: {recette: 3.9, hausse_prix: calcul_sucres, cout_soins: 0}
     unite: sans_unite
     statut: HYPOTHESE
-  hausse_prix_tabac: {valeur: {prix_apres: 14.7, prix_avant: 12.54}, unite: sans_unite, statut: HYPOTHESE, note: "Écrit dans la formule Santé!B69."}
+  hausse_prix_tabac: {valeur: {prix_apres: 14.7, prix_avant: 12.54}, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement du prix avant : prix moyen pondéré du paquet de 20 à 12,47 € au 1er juin 2026 (DNF, d'après les arrêtés de prix)", note: "Écrit dans la formule Santé!B69."}
   elasticite_prix: {valeur: -0.5, unite: sans_unite, statut: HYPOTHESE}
   vraie_baisse_consommation: {valeur: {crise: {tabac: 0.7, alcool: 0.9, sucres: 1}, prudent: {tabac: 0.7, alcool: 0.9, sucres: 1}, median: {tabac: 0.85, alcool: 0.95, sucres: 1}, optimiste: {tabac: 1, alcool: 1, sucres: 1}}, unite: sans_unite, statut: HYPOTHESE}
   annees_plein_effet: {valeur: {crise: 20, prudent: 20, median: 15, optimiste: 10}, unite: sans_unite, statut: HYPOTHESE}
@@ -810,7 +811,7 @@ is_investissement:
   montee_etalee_annees: {valeur: 16, unite: sans_unite, statut: DECISION, note: "Étalement de la clause de trajectoire (v221)."}
   part_admise: {valeur: 0.5, v235: 1, unite: taux, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : déduction immédiate de 50 % de l'investissement au départ (atteinte en 2036 avec la montée de 8 ans), puis progressivement 100 % (hausse_part_admise). v235 : 100 %."}
   hausse_part_admise: {valeur: {cible: 1.0, debut: conditionnel, fin: conditionnel, duree: 10, seuil_deficit: 0.03}, v235: {cible: 1.0, debut: 2029, fin: 2029, duree: 1, seuil_deficit: 0.03}, unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 29/10/2026 : hausse conditionnée au déficit. De 50 % à 100 % par pas de 5 points : un pas chaque année qui suit une année où le déficit du prudent, avant clause, est sous 3 % du PIB (calculé sans la hausse) ; pause sinon. Une année chiffrée à la place de « conditionnel » fixe un calendrier (début, fin)."}
-  categories: {valeur: {construction: {part: 0.28, duree: 25}, equipements: {part: 0.32, duree: 7}, immateriel: {part: 0.4, duree: 3}}, unite: sans_unite, statut: HYPOTHESE}
+  categories: {valeur: {construction: {part: 0.28, duree: 25}, equipements: {part: 0.32, duree: 7}, immateriel: {part: 0.4, duree: 3}}, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement des parts : FBCF des SNF, construction stable, droits de propriété intellectuelle passés de 20 % à 34 % (Banque de France, Bloc-notes Éco, d'après l'Insee)"}
   part_investissement_concernee: {valeur: {crise: 0.6, prudent: 0.6, median: 0.75, optimiste: 0.9}, unite: sans_unite, statut: HYPOTHESE}
 
 # --- Collectivités : besoin de recettes locales, impôt local unique (feuille Collectivités) ---

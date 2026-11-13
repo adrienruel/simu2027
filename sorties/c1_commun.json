@@ -1,0 +1,464 @@
+[
+ {
+  "cle": "macro.tendance",
+  "deficit_2037": -0.11417338982270309,
+  "deficit_2050": -0.6901139451909692,
+  "note": "Prudent : 0,7 % (COR, juin 2026) ; médian et optimiste : 1 % ; crise : 0,4 %, le bas des variantes de productivité du COR (05/11/2026, décision d'Adrien après la relecture : la crise était meilleure que le prudent jusqu'en 2045, avec la même productivité)."
+ },
+ {
+  "cle": "macro.annees_taux_long_terme",
+  "deficit_2037": -0.036555912297462356,
+  "deficit_2050": -0.1399686081999576,
+  "note": "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."
+ },
+ {
+  "cle": "budget_etat.inflation_2026_2030",
+  "deficit_2037": -0.024672048575848038,
+  "deficit_2050": -0.07582798944761748,
+  "note": "Total!B79."
+ },
+ {
+  "cle": "ministeres.elasticite_eleves_etudiants",
+  "deficit_2037": -0.014419393378700462,
+  "deficit_2050": -0.06144070075435337,
+  "note": "Baisse des moyens de l'enseignement pour 1 % d'élèves (après 2035) ou d'étudiants en moins. Prudent : la moitié (les moyens par élève ont augmenté quand les effectifs baissaient ; c'est aussi la règle « un départ sur deux » de la v235). La baisse d'ici 2035 est déjà dans les mesures (enseignants aju"
+ },
+ {
+  "cle": "unites.deflateur_2026",
+  "deficit_2037": -0.0009022791759143445,
+  "deficit_2050": -0.005422786400991697,
+  "note": "Prudente, sous l'inflation prévue de 2,1 %."
+ },
+ {
+  "cle": "budget_etat.cas_pensions_2026",
+  "deficit_2037": 0.0008017833743529934,
+  "deficit_2050": 0.003929731788002044,
+  "note": "45,5 Md€ en 2024 + 4 points de taux (B6)."
+ },
+ {
+  "cle": "systeme_actuel.taxe_fonciere/exposant",
+  "deficit_2037": -0.00037946288345303003,
+  "deficit_2050": -0.0014112681705746866,
+  "note": "Taxe foncière et locale estimée = coefficient × net^exposant."
+ },
+ {
+  "cle": "inactifs.etudiants",
+  "deficit_2037": 0.00012678782391439825,
+  "deficit_2050": 0.000672273088138553,
+  "note": "RUI!A5, à sourcer."
+ },
+ {
+  "cle": "systeme_actuel.apl/montant_plein",
+  "deficit_2037": 5.366119828487115e-05,
+  "deficit_2050": 0.00028452978962789643,
+  "note": ""
+ },
+ {
+  "cle": "systeme_actuel.taxe_fonciere/coef_prive",
+  "deficit_2037": -3.2448507846893904e-05,
+  "deficit_2050": -0.00011461284731240085,
+  "note": "Taxe foncière et locale estimée = coefficient × net^exposant."
+ },
+ {
+  "cle": "systeme_actuel.exoneration_taxe_fonciere_prive",
+  "deficit_2037": 3.1992303931360766e-05,
+  "deficit_2050": 0.0002625416010246795,
+  "note": "Dans la v235, la taxe foncière des sept premières classes du privé (net avant aides jusqu'à 17 956 €) est saisie à 0 au lieu d'être calculée. Seuil reconstitué entre 17 956 et 18 978 €. Rien d'équivalent pour les agents publics."
+ },
+ {
+  "cle": "anciennes_pensions.couples/part_en_couple",
+  "deficit_2037": 2.245738861539337e-05,
+  "deficit_2050": -0.00013490229201096327,
+  "note": "Imposition commune des couples de retraités de l'ancien système, calculée par le moteur année par année (le gain grandit quand les pensions gelées baissent en euros constants). Hypothèses prises prudentes faute de source (elles maximisent le gain des couples, donc la perte de recette) : 60 % des ret"
+ },
+ {
+  "cle": "systeme_actuel.taxe_fonciere/coef_public",
+  "deficit_2037": -1.0167554830076142e-05,
+  "deficit_2050": -5.074318859144e-05,
+  "note": "Taxe foncière et locale estimée = coefficient × net^exposant."
+ },
+ {
+  "cle": "systeme_actuel.apl/revenu_extinction",
+  "deficit_2037": 2.043124338158009e-06,
+  "deficit_2050": 1.083332089990563e-05,
+  "note": ""
+ },
+ {
+  "cle": "systeme_actuel.apl/revenu_plein",
+  "deficit_2037": 1.302254638346767e-06,
+  "deficit_2050": 6.904984623190558e-06,
+  "note": ""
+ },
+ {
+  "cle": "systeme_actuel.prime_activite_agents/revenu_max",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Barème simplifié propre aux agents (Fonctionnaires B71-B73), différent de celui du privé."
+ },
+ {
+  "cle": "systeme_actuel.prime_activite_agents/montant_max",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Barème simplifié propre aux agents (Fonctionnaires B71-B73), différent de celui du privé."
+ },
+ {
+  "cle": "systeme_actuel.prime_activite_agents/revenu_extinction",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Barème simplifié propre aux agents (Fonctionnaires B71-B73), différent de celui du privé."
+ },
+ {
+  "cle": "entreprises.profil_import_marge/import_bas",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part importée et marge captée par les entreprises françaises sur la consommation en plus (Salariés du privé B61-B65)."
+ },
+ {
+  "cle": "entreprises.profil_import_marge/import_hausse",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part importée et marge captée par les entreprises françaises sur la consommation en plus (Salariés du privé B61-B65)."
+ },
+ {
+  "cle": "entreprises.profil_import_marge/marge_bas",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part importée et marge captée par les entreprises françaises sur la consommation en plus (Salariés du privé B61-B65)."
+ },
+ {
+  "cle": "entreprises.profil_import_marge/marge_hausse",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part importée et marge captée par les entreprises françaises sur la consommation en plus (Salariés du privé B61-B65)."
+ },
+ {
+  "cle": "entreprises.profil_import_marge/plafond_revenu",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part importée et marge captée par les entreprises françaises sur la consommation en plus (Salariés du privé B61-B65)."
+ },
+ {
+  "cle": "independants.micro_actifs",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Micro-entrepreneurs économiquement actifs (RUI!J13)."
+ },
+ {
+  "cle": "revenus_capital.loyers",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "revenus_capital.interets",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "revenus_capital.plus_values_immobilieres",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "revenus_capital.plus_values_actions",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "accises_entreprises.achats_ht/carburants",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Achats HT des entreprises soumis aux accises (Md€, Barème TVA B44-B47)."
+ },
+ {
+  "cle": "accises_entreprises.achats_ht/gaz_fioul",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Achats HT des entreprises soumis aux accises (Md€, Barème TVA B44-B47)."
+ },
+ {
+  "cle": "accises_entreprises.achats_ht/aerien",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Achats HT des entreprises soumis aux accises (Md€, Barème TVA B44-B47)."
+ },
+ {
+  "cle": "budget_etat.part_salariale_recherche",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "budget_etat.eleves_prive",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "budget_etat.cout_eleve_public",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "sante.heures_apa_millions/montant_md",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Santé!B105 = 4,29 / 25,18 × 1000, écrit dans la formule."
+ },
+ {
+  "cle": "sante.heures_apa_millions/cout_horaire",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Santé!B105 = 4,29 / 25,18 × 1000, écrit dans la formule."
+ },
+ {
+  "cle": "sante.etp_aide_autonomie/emploi_direct",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "sante.etp_aide_autonomie/prestataires",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.convergence_scenarios_annees",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Années pour que chaque scénario atteigne ses propres hypothèses à partir de la valeur prudente de 2029 (poids 0 en 2029, 1/3 en 2030, 2/3 en 2031, 1 en 2032). Sans montée, le passage brutal de 2029 à 2030 ferait baisser le chômage de l'optimiste de près de 2 points en un an. Hypothèse : l'informatio"
+ },
+ {
+  "cle": "macro.annees_effet_ajustement",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Note de la v235 : L’effet décroît linéairement. | v198, DÉCISION d'Adrien du 21 octobre : optimiste = « tout le monde joue le jeu ». Optimiste : effet récessif dissipé en trois ans, ancien optimiste (avant : 3.5)."
+ },
+ {
+  "cle": "macro.usure_capital",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.montee_invest",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "macro.reaction_reelle",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Note de la v235 : HYPOTHÈSE (ligne 38). Crise : 0,4."
+ },
+ {
+  "cle": "macro.annees_ia",
+  "deficit_2037": 0.0,
+  "deficit_2050": -0.04016146548237032,
+  "note": ""
+ },
+ {
+  "cle": "macro.part_pib_tendanciel_au_solde",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Convention de la v235, sans source : ne sert plus que si macro.dividende_calcule est faux."
+ },
+ {
+  "cle": "macro.ecart_dividende",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Hausse de la tendance de productivité utilisée pour mesurer le dividende de croissance (écart prudent-médian)."
+ },
+ {
+  "cle": "calendrier.dotations_collectivites",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "≈ 54 Md€ de concours et ≈ 40 Md€ de fractions de TVA."
+ },
+ {
+  "cle": "chomage.annees_montee_crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "emploi.cout_par_canal/offre",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rap"
+ },
+ {
+  "cle": "emploi.cout_par_canal/appariement",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rap"
+ },
+ {
+  "cle": "emploi.cout_par_canal/cout_travail",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rap"
+ },
+ {
+  "cle": "emploi.cout_par_canal/perdus",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rap"
+ },
+ {
+  "cle": "emploi.cout_par_canal/inactifs",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Coût employeur d'un emploi de chaque canal, en multiple du SMIC (ou « moyen » : coût moyen des salariés du privé ; « median » : salaire médian). Faute de source sur le salaire des emplois créés, le bas (SMIC) pour les emplois gagnés par l'offre, l'appariement et le coût du travail (prudent : ils rap"
+ },
+ {
+  "cle": "emploi.impots_production_va",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "emploi.cout_emploi_cree_smic",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "emploi.localisation",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Ljungqvist et Smolyansky (NBER w20753), Giroud et Rauh (JPE 2019) sourcés ; mobilité internationale = hypothèse à étayer."
+ },
+ {
+  "cle": "hauts_revenus.classes_moyennes_bornes",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "carbone.baisse_tendancielle_emissions",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "is_investissement.part_payeurs_is",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "anciennes_pensions.couples/correlation",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Imposition commune des couples de retraités de l'ancien système, calculée par le moteur année par année (le gain grandit quand les pensions gelées baissent en euros constants). Hypothèses prises prudentes faute de source (elles maximisent le gain des couples, donc la perte de recette) : 60 % des ret"
+ },
+ {
+  "cle": "anciennes_pensions.deciles_avec_reversion",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "v215 : les 6 premiers déciles reçoivent la réversion ; cela rend la distribution non monotone (décile 7 sous le décile 6)."
+ },
+ {
+  "cle": "demographie.natalite_montee",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Années pour que l'effet sur les naissances soit plein, à partir de 2030 (premières naissances conçues sous le nouveau système)."
+ },
+ {
+  "cle": "cohortes.effet_composition_salaires",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part retenue de l'effet de composition : des actifs plus âgés gagnent plus en moyenne (profil de l'Insee en coupe). La croissance tendancielle de la productivité (COR, 0,7 %) est une moyenne par actif qui contient déjà une partie de cet effet : le compter en entier risque un double compte. Prudent e"
+ },
+ {
+  "cle": "entreprises_cellules.part_production_deficitaires",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des impôts de production payée par les entreprises déficitaires. Leur suppression réduit leurs pertes mais n'entre pas dans le bénéfice imposable de l'année (v235 : tout était ajouté au bénéfice des entreprises bénéficiaires). Sans source directe : 36 % des entreprises à l'IS sont déficitaires "
+ },
+ {
+  "cle": "entreprises_cellules.production_va_micro",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Impôts de production d'origine fiscale rapportés à la valeur ajoutée des microentreprises : « très faible » selon la DGFiP (Statistiques n° 35, 2025, qui donne 1,9 % pour les PME, 2,9 % pour les ETI, 3,4 % pour les GE) ; 1 % retenu."
+ },
+ {
+  "cle": "entreprises_cellules.arbitrage_tpe_part_distribuee",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part du bénéfice gardé qui serait distribuée en dividendes (flat tax de 33 %). Plus elle est haute, plus le salaire est intéressant (impôt de 63 % sur le bénéfice distribué, contre 57 % au plus jusqu'à 32 000 € de salaire)."
+ },
+ {
+  "cle": "entreprises_cellules.arbitrage_tpe_recours",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des dirigeants qui font l'arbitrage (conseillés par leur expert-comptable). Sans source : prudent 75 %."
+ },
+ {
+  "cle": "inflation.pente_phillips",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Baisse de l'inflation (points) pour un point de PIB d'écart de production en moins. La courbe de Phillips est plate en zone euro depuis 2010 (Banque de France, billet « Où se situe l'inflation en zone euro dans le cône de Phillips ? ») ; ordre de grandeur des estimations de la BCE : 0,1 à 0,3. Sans "
+ },
+ {
+  "cle": "inflation.poids_taxes_carbone_consommation",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Taxes carbone (55 Md€ en 2029 : accises des ménages et des collectivités 41,6 Md€, des entreprises 13,3 Md€, moteur/carbone.recette_statique) rapportées à la consommation des ménages toutes taxes comprises (environ 1 500 Md€). Baisse avec les émissions (carbone.baisse_tendancielle_emissions)."
+ },
+ {
+  "cle": "energie_entreprises.remboursements_carburants",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Remboursements partiels d'accise sur le gazole (transport routier, taxis, agriculture) retirés des taxes actuelles sur les carburants des entreprises : ordre de grandeur, à sourcer (PLF, évaluation des voies et moyens, tome II). Retirer ce montant réduit le gain du programme (prudent)."
+ },
+ {
+  "cle": "ecologie.elasticite_revenu/transports",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "À technologie donnée, les émissions d'un secteur suivent la population et le revenu par habitant avec cette élasticité : fret et déplacements professionnels (transports), surfaces tertiaires (bâtiments), production (industrie), demande d'énergie (énergie) ; l'agriculture suit la population. Sert à s"
+ },
+ {
+  "cle": "ecologie.elasticite_revenu/batiments",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "À technologie donnée, les émissions d'un secteur suivent la population et le revenu par habitant avec cette élasticité : fret et déplacements professionnels (transports), surfaces tertiaires (bâtiments), production (industrie), demande d'énergie (énergie) ; l'agriculture suit la population. Sert à s"
+ },
+ {
+  "cle": "ecologie.elasticite_revenu/industrie",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "À technologie donnée, les émissions d'un secteur suivent la population et le revenu par habitant avec cette élasticité : fret et déplacements professionnels (transports), surfaces tertiaires (bâtiments), production (industrie), demande d'énergie (énergie) ; l'agriculture suit la population. Sert à s"
+ },
+ {
+  "cle": "ecologie.elasticite_revenu/energie",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "À technologie donnée, les émissions d'un secteur suivent la population et le revenu par habitant avec cette élasticité : fret et déplacements professionnels (transports), surfaces tertiaires (bâtiments), production (industrie), demande d'énergie (énergie) ; l'agriculture suit la population. Sert à s"
+ },
+ {
+  "cle": "ecologie.elasticite_revenu/dechets",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "À technologie donnée, les émissions d'un secteur suivent la population et le revenu par habitant avec cette élasticité : fret et déplacements professionnels (transports), surfaces tertiaires (bâtiments), production (industrie), demande d'énergie (énergie) ; l'agriculture suit la population. Sert à s"
+ },
+ {
+  "cle": "ecologie.baisse_intensite_importations",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Baisse annuelle de l'intensité carbone des biens et services importés (décarbonation des pays fournisseurs). Sans source retenue : prise prudente pour l'empreinte (lente). À sourcer : intensité carbone du PIB mondial (Global Carbon Project, AIE)."
+ },
+ {
+  "cle": "ecologie.intensite_relocalisee",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Émissions en France d'une production relocalisée, rapportées à celles de la même production importée. Électricité peu carbonée, mais écart très variable selon les secteurs (acier, ciment, chimie). Prudent : gain faible. À sourcer (Carbone 4 et SEI, empreinte carbone de la France)."
+ }
+]

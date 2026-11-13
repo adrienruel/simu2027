@@ -25,6 +25,7 @@ unites:
     valeur: 0.015
     unite: taux
     statut: HYPOTHESE
+    source: "Encadrement : déflateur du PIB de 2026 prévu à 1,5 % (gouvernement, prévisions de septembre 2026 pour le PLF 2027) ; prix à la consommation 2,1 %"
     note: Prudente, sous l'inflation prévue de 2,1 %.
   salaire_prive_2025:
     valeur: 0.020
@@ -203,7 +204,7 @@ accises_entreprises:
 budget_etat:
   cas_pensions_2026: {valeur: 50.4, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "45,5 Md€ en 2024 + 4 points de taux (B6)."}
   lpm_2030_courants: {valeur: 76.3, unite: md_eur, annee_euros: 2030, statut: SOURCE, source: "Actualisation de la LPM : 76,3 Md€ en 2030 hors pensions (Total!B78)"}
-  inflation_2026_2030: {valeur: 0.074, unite: taux, statut: HYPOTHESE, note: "Total!B79."}
+  inflation_2026_2030: {valeur: 0.074, unite: taux, statut: HYPOTHESE, source: "Encadrement : inflation prévue à 1,8 % en 2027 (PLF 2027, 01/10/2026) ; 1,018^4 = 1,074 de 2026 à 2030", note: "Total!B79."}
   contribution_ue_courants: {valeur: 30.9, unite: md_eur, annee_euros: 2027, statut: SOURCE, source: "Prélèvement sur recettes au profit de l'UE (PLF), v222"}
   deflateur_contribution_ue: {valeur: 1.018, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : inflation 2027 prévue à 1,9 % (IPCH, Banque de France, septembre 2026)", note: "Passage de la contribution de 2027 en euros de 2026 (B66 : 30,9/1,018). La contribution de 30,9 Md€ est confirmée par le PLF 2027 (rapport de Nicole Le Peih, Banque des territoires, 15/10/2026 ; 28,4 Md€ en LFI 2026)."}
   part_salariale_recherche: {valeur: 0.4, unite: taux, statut: HYPOTHESE}
@@ -271,6 +272,7 @@ macro:
     v235: {crise: 0.007, prudent: 0.007, median: 0.01, optimiste: 0.01}
     unite: sans_unite
     statut: HYPOTHESE
+    source: "Encadrement : COR, rapport annuel de juin 2026, productivité horaire de long terme 0,4 % / 0,7 % (référence) / 1,0 % (cibles atteintes en 2040)"
     note: "Prudent : 0,7 % (COR, juin 2026) ; médian et optimiste : 1 % ; crise : 0,4 %, le bas des variantes de productivité du COR (05/11/2026, décision d'Adrien après la relecture : la crise était meilleure que le prudent jusqu'en 2045, avec la même productivité)."
   croissance_par_ecart_type:
     source: "Encadrement : Heller-Sahlgren et Jordahl (IFN, 2023) ; Hanushek et Woessmann"
@@ -339,7 +341,7 @@ macro:
     source: "Taux normal de l'IS, article 219 du code général des impôts (25 % depuis 2022)"
   taux_apparent_2029: {valeur: 0.027, unite: taux, statut: SOURCE, source: "Charge d'intérêts des APU ≈ 3,2 % du PIB (Effets macro!B211)"}
   taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
-  annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
+  annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : durée de vie moyenne de la dette négociable de l'État de 8 ans et 184 jours au 31/12/2025 (AFT, bulletin mensuel de juillet 2026)", note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
   ecart_taux_scenario:
     valeur: {crise: 0.005, prudent: 0.0, median: 0.0, optimiste: 0.0}
     v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}

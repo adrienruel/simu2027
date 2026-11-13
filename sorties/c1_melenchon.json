@@ -1,0 +1,770 @@
+[
+ {
+  "cle": "melenchon_mesures.grand_age_domicile/montant/prudent",
+  "deficit_2037": 0.021458557577918924,
+  "deficit_2050": 0.0504626256669809,
+  "note": "Revalorisation des aides à domicile (+10 % sur ≈ 12 Md€ de masse) ≈ 1,2 ; aménagements et équipements du maintien à domicile ≈ 1,0 ; aidants rémunérés ≈ 1,0 ; tarifs d'hébergement publics abaissés ≈ 0,8 (Md€). EHPAD privés lucratifs collectivisés : achat d'actifs (participations)."
+ },
+ {
+  "cle": "melenchon_mesures.industrie/montant/prudent",
+  "deficit_2037": 0.019280425295452375,
+  "deficit_2050": 0.04377368997280939,
+  "note": "Aucun montant : arbitrage de 3,5 Md€ par an (France 2030 ≈ 6 Md€ par an, dont une partie déjà au statu quo). Nationalisations : participations."
+ },
+ {
+  "cle": "melenchon_mesures.agriculture/montant/prudent",
+  "deficit_2037": 0.019280425295452375,
+  "deficit_2050": 0.04377368997280939,
+  "note": "Contrats de transition ≈ 1,5 (tondelier_mesures.agriculture) ; installation ≈ 1,0 ; dettes reprises par la caisse de défaisance (perte en capital) ≈ 1,0 par an pendant cinq ans ; maltraitance animale et normes d'élevage ≈ 0,3 (Md€). Prix planchers payés par l'aval (pas de ligne)."
+ },
+ {
+  "cle": "melenchon_mesures.numerique_spatial_mer/montant/prudent",
+  "deficit_2037": 0.015509042430220887,
+  "deficit_2050": 0.03447158127337957,
+  "note": "Numérique ≈ 2,0 (dont fonderie de microprocesseurs ≈ 1,0 par an) ; espace et mer ≈ 1,0 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.psychiatrie_deserts/montant/prudent",
+  "deficit_2037": 0.013933490898057954,
+  "deficit_2050": 0.03262265608398707,
+  "note": "Psychiatrie ≈ 1,0 ; centres de santé et médecins publics ≈ 0,8 ; pôle public du médicament et réserve stratégique ≈ 0,5 ; formation ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.transports_quotidien/montant/prudent",
+  "deficit_2037": 0.01377156623670217,
+  "deficit_2050": 0.03126655875266238,
+  "note": "Transports publics ≈ 1,0 ; plan vélo ≈ 0,5 ; leasing social ≈ 1,0 (tondelier_mesures.leasing_social) (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.bati_scolaire/montant/prudent",
+  "deficit_2037": 0.012924155323698727,
+  "deficit_2050": 0.028726245971256503,
+  "note": "Écoles, collèges et lycées ≈ 1,5 (même ordre que les 2 Md€ des écoles « refuges climatiques » de Tondelier) ; immobilier universitaire ≈ 1,0 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.ecologie_divers/montant/prudent",
+  "deficit_2037": 0.012118934433541284,
+  "deficit_2050": 0.027514475962021834,
+  "note": "Service public du réemploi et consigne ≈ 0,5 ; forêts (préemption, ONF) ≈ 0,3 ; sécurité civile et feux de forêt ≈ 0,8 ; dépollution et indemnisations ≈ 0,4 ; stocks tampons ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.energie_renouvelable/montant/prudent",
+  "deficit_2037": 0.010177951952343278,
+  "deficit_2050": 0.023267929819951405,
+  "note": "Soutien public en plus du statu quo (programmation pluriannuelle de l'énergie) ; sortie du nucléaire au-delà de 60 ans et arrêt de l'EPR2 : EDF hors des administrations publiques, effets sur les prix et les émissions non comptés ici."
+ },
+ {
+  "cle": "melenchon_mesures.ame_sante_divers/montant/prudent",
+  "deficit_2037": 0.009246765555541714,
+  "deficit_2050": 0.021559994109907166,
+  "note": "AME : restrictions de 2026 levées et couverture renforcée ≈ 0,3 ; psychologues conventionnés à 100 % et au-delà de 12 séances ≈ 0,6 ; dispositifs médicaux de la vie quotidienne ≈ 0,5 ; le reste ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.outre_mer_investissement/montant/prudent",
+  "deficit_2037": 0.008025230885937873,
+  "deficit_2050": 0.01781022172517055,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.handicap_divers/montant/prudent",
+  "deficit_2037": 0.007780619668661615,
+  "deficit_2050": 0.017638766274913564,
+  "note": "ESAT : ≈ 120 000 travailleurs payés entre 55 et 110 % du SMIC, aide au poste de l'État relevée ≈ 0,6 ; adaptation des logements anciens ≈ 0,3 ; MDPH et accessibilité ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.enseignement_superieur/montant/prudent",
+  "deficit_2037": 0.006956512421233185,
+  "deficit_2050": 0.014455251003255398,
+  "note": "Frais d'inscription et CVEC ≈ 0,6 ; budget des universités +10 % ≈ 1,5 ; Crous et repas à 1 € pour tous ≈ 0,3 ; psychologues et soins gratuits ≈ 0,2 ; titularisation et recrutements ≈ 0,3 ; APL des étudiants étrangers ≈ 0,1 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.petite_enfance_qualite/montant/prudent",
+  "deficit_2037": 0.006268860494017758,
+  "deficit_2050": 0.01427004603706905,
+  "note": "Gratuité ≈ 1,0 ; salaires +10 % ≈ 0,5 ; encadrement +20 % ≈ 1,0 ; PMI ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.services_publics/montant/prudent",
+  "deficit_2037": 0.005899165514971827,
+  "deficit_2050": 0.013393300674508168,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.justice/montant/prudent",
+  "deficit_2037": 0.005561965020749682,
+  "deficit_2050": 0.012621079852692674,
+  "note": "Aucun effectif donné : ≈ 1,5 de recrutements (moins que Tondelier : 2,1 pour 26 000 postes) ; aide juridictionnelle et gratuité ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.sante_prevention_addictions/montant/prudent",
+  "deficit_2037": 0.00550852682526326,
+  "deficit_2050": 0.012506405911679508,
+  "note": "Recettes du cannabis affectées (≈ 0,7 en prudent) ; recherche environnement-santé, Institut national du cancer, VIH et Fonds mondial ≈ 0,3. Économies de santé de la prévention non comptées (règle)."
+ },
+ {
+  "cle": "melenchon_mesures.sport/montant/prudent",
+  "deficit_2037": 0.00550852682526326,
+  "deficit_2050": 0.012506405911679508,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.penibilite_agricoles/montant/prudent",
+  "deficit_2037": 0.005246827098840612,
+  "deficit_2050": 0.011976092702170149,
+  "note": "Moins que chez Tondelier (1,5 et 0,5) : avec la retraite à 60 ans pour tous, les départs anticipés pour pénibilité gagnent moins d'années."
+ },
+ {
+  "cle": "melenchon_mesures.voie_pro_formation/montant/prudent",
+  "deficit_2037": 0.005157998715802137,
+  "deficit_2050": 0.011066152990778733,
+  "note": "Bac professionnel en 4 ans (≈ +200 000 élèves-année) et classes en plus ≈ 1,0 (tondelier_mesures.voie_pro) ; pré-recrutement et écoles des métiers de l'éducation ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.niches_suppression/montant/prudent",
+  "deficit_2037": -0.0049686624705032045,
+  "deficit_2050": -0.01059606811776348,
+  "note": "Économie déclarative (aucune niche nommée, p. 59) : estimée par le modèle (règle). Les niches nommées ailleurs sont comptées à part (retraite par capitalisation, mécénat culturel, kérosène, assurance-vie, LBO, meublés de tourisme)."
+ },
+ {
+  "cle": "melenchon_mesures.apprentis/montant/prudent",
+  "deficit_2037": 0.0047357807941210694,
+  "deficit_2050": 0.010684435055836161,
+  "note": "Arbitrage : +10 points de SMIC pour ≈ 900 000 apprentis, aide de l'État relevée pour moitié (le reste à la charge des employeurs)."
+ },
+ {
+  "cle": "melenchon_mesures.agences_inspections/montant/prudent",
+  "deficit_2037": 0.004732948766420719,
+  "deficit_2050": 0.010702498808470295,
+  "note": "Inspection du travail ≈ +2 000 agents ; police de l'eau ≈ +3 000 ; opérateurs ≈ +5 000 ; contrôle fiscal ≈ +5 000 ; ≈ 15 000 postes × 55 000 € ≈ 0,8 et fonctionnement 0,4 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.travail_sante/montant/prudent",
+  "deficit_2037": 0.0038559548240435504,
+  "deficit_2050": 0.008754453676075968,
+  "note": "Transfert de la branche maladie vers la branche accidents du travail (neutre) sauf indemnisation plus généreuse ≈ 0,5 ; visites médicales des chômeurs ≈ 0,1 ; services de prévention intégrés au service public à financement constant."
+ },
+ {
+  "cle": "melenchon_mesures.justice/cout_poste",
+  "deficit_2037": -0.003414434373635089,
+  "deficit_2050": -0.007815760418580453,
+  "note": "Aucun effectif donné : ≈ 1,5 de recrutements (moins que Tondelier : 2,1 pour 26 000 postes) ; aide juridictionnelle et gratuité ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.voie_pro_formation/cout_poste",
+  "deficit_2037": -0.003365423054781047,
+  "deficit_2050": -0.007692625794888386,
+  "note": "Bac professionnel en 4 ans (≈ +200 000 élèves-année) et classes en plus ≈ 1,0 (tondelier_mesures.voie_pro) ; pré-recrutement et écoles des métiers de l'éducation ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.periscolaire/montant/prudent",
+  "deficit_2037": 0.0032727696780838755,
+  "deficit_2050": 0.007483182201923455,
+  "note": "Titularisation et temps de travail des animateurs (≈ 150 000, souvent à temps partiel) ≈ 1,0 ; associations sportives et culturelles encadrées par des professionnels ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.police/montant/prudent",
+  "deficit_2037": 0.00284095071370416,
+  "deficit_2050": 0.006453209963368067,
+  "note": "Une année de formation en plus pour ≈ 10 000 élèves par an ≈ 0,3 ; police scientifique et financière ≈ 0,5 ; prévention ≈ 0,3 ; victimes ≈ 0,1 (Md€). Polices municipales intégrées : transfert interne."
+ },
+ {
+  "cle": "melenchon_mesures.communes_eco_regions/montant/prudent",
+  "deficit_2037": 0.002651447174432775,
+  "deficit_2050": 0.006040881326740077,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_smic.part_marge_absorbee",
+  "deficit_2037": 0.00258724219036921,
+  "deficit_2050": 0.005826089112119348,
+  "note": "Même valeur que Tondelier et Arthaud."
+ },
+ {
+  "cle": "melenchon_mesures.logement_divers/montant/prudent",
+  "deficit_2037": 0.00228574272401616,
+  "deficit_2050": 0.005172934596998857,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.epargne_etranger/montant/prudent",
+  "deficit_2037": -0.0011350480213287995,
+  "deficit_2050": -0.0025023863078104114,
+  "note": "Assiette mal connue (unités de compte et fonds investis hors de France) ; prudent bas."
+ },
+ {
+  "cle": "melenchon_mesures.rsa_trimestres/montant/prudent",
+  "deficit_2037": 0.0007477276247804809,
+  "deficit_2050": 0.003516201912049155,
+  "note": "Effet lent (validations nouvelles, pensions liquidées des décennies plus tard) ; en grande partie couvert par le minimum au SMIC pour les carrières devenues complètes."
+ },
+ {
+  "cle": "melenchon_mesures.sport_taxes/montant/prudent",
+  "deficit_2037": -0.0005535976168324908,
+  "deficit_2050": -0.0012151411971075277,
+  "note": "Affectée au sport amateur : contrepartie dans sport."
+ },
+ {
+  "cle": "melenchon_mesures.niches_suppression/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Économie déclarative (aucune niche nommée, p. 59) : estimée par le modèle (règle). Les niches nommées ailleurs sont comptées à part (retraite par capitalisation, mécénat culturel, kérosène, assurance-vie, LBO, meublés de tourisme)."
+ },
+ {
+  "cle": "melenchon_mesures.niches_suppression/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Économie déclarative (aucune niche nommée, p. 59) : estimée par le modèle (règle). Les niches nommées ailleurs sont comptées à part (retraite par capitalisation, mécénat culturel, kérosène, assurance-vie, LBO, meublés de tourisme)."
+ },
+ {
+  "cle": "melenchon_mesures.niches_suppression/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Économie déclarative (aucune niche nommée, p. 59) : estimée par le modèle (règle). Les niches nommées ailleurs sont comptées à part (retraite par capitalisation, mécénat culturel, kérosène, assurance-vie, LBO, meublés de tourisme)."
+ },
+ {
+  "cle": "melenchon_mesures.superprofits/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Ne joue qu'en crise (hausse soudaine des bénéfices) : 1 Md€ par an dans le scénario de crise, zéro sinon."
+ },
+ {
+  "cle": "melenchon_mesures.epargne_etranger/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Assiette mal connue (unités de compte et fonds investis hors de France) ; prudent bas."
+ },
+ {
+  "cle": "melenchon_mesures.epargne_etranger/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Assiette mal connue (unités de compte et fonds investis hors de France) ; prudent bas."
+ },
+ {
+  "cle": "melenchon_mesures.epargne_etranger/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Assiette mal connue (unités de compte et fonds investis hors de France) ; prudent bas."
+ },
+ {
+  "cle": "melenchon_mesures.sport_taxes/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Affectée au sport amateur : contrepartie dans sport."
+ },
+ {
+  "cle": "melenchon_mesures.sport_taxes/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Affectée au sport amateur : contrepartie dans sport."
+ },
+ {
+  "cle": "melenchon_mesures.sport_taxes/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Affectée au sport amateur : contrepartie dans sport."
+ },
+ {
+  "cle": "melenchon_mesures.rsa_trimestres/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Effet lent (validations nouvelles, pensions liquidées des décennies plus tard) ; en grande partie couvert par le minimum au SMIC pour les carrières devenues complètes."
+ },
+ {
+  "cle": "melenchon_mesures.rsa_trimestres/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Effet lent (validations nouvelles, pensions liquidées des décennies plus tard) ; en grande partie couvert par le minimum au SMIC pour les carrières devenues complètes."
+ },
+ {
+  "cle": "melenchon_mesures.rsa_trimestres/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Effet lent (validations nouvelles, pensions liquidées des décennies plus tard) ; en grande partie couvert par le minimum au SMIC pour les carrières devenues complètes."
+ },
+ {
+  "cle": "melenchon_mesures.penibilite_agricoles/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Moins que chez Tondelier (1,5 et 0,5) : avec la retraite à 60 ans pour tous, les départs anticipés pour pénibilité gagnent moins d'années."
+ },
+ {
+  "cle": "melenchon_mesures.penibilite_agricoles/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Moins que chez Tondelier (1,5 et 0,5) : avec la retraite à 60 ans pour tous, les départs anticipés pour pénibilité gagnent moins d'années."
+ },
+ {
+  "cle": "melenchon_mesures.penibilite_agricoles/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Moins que chez Tondelier (1,5 et 0,5) : avec la retraite à 60 ans pour tous, les départs anticipés pour pénibilité gagnent moins d'années."
+ },
+ {
+  "cle": "melenchon_mesures.ame_sante_divers/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "AME : restrictions de 2026 levées et couverture renforcée ≈ 0,3 ; psychologues conventionnés à 100 % et au-delà de 12 séances ≈ 0,6 ; dispositifs médicaux de la vie quotidienne ≈ 0,5 ; le reste ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.ame_sante_divers/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "AME : restrictions de 2026 levées et couverture renforcée ≈ 0,3 ; psychologues conventionnés à 100 % et au-delà de 12 séances ≈ 0,6 ; dispositifs médicaux de la vie quotidienne ≈ 0,5 ; le reste ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.ame_sante_divers/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "AME : restrictions de 2026 levées et couverture renforcée ≈ 0,3 ; psychologues conventionnés à 100 % et au-delà de 12 séances ≈ 0,6 ; dispositifs médicaux de la vie quotidienne ≈ 0,5 ; le reste ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.psychiatrie_deserts/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Psychiatrie ≈ 1,0 ; centres de santé et médecins publics ≈ 0,8 ; pôle public du médicament et réserve stratégique ≈ 0,5 ; formation ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.psychiatrie_deserts/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Psychiatrie ≈ 1,0 ; centres de santé et médecins publics ≈ 0,8 ; pôle public du médicament et réserve stratégique ≈ 0,5 ; formation ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.psychiatrie_deserts/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Psychiatrie ≈ 1,0 ; centres de santé et médecins publics ≈ 0,8 ; pôle public du médicament et réserve stratégique ≈ 0,5 ; formation ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.sante_prevention_addictions/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Recettes du cannabis affectées (≈ 0,7 en prudent) ; recherche environnement-santé, Institut national du cancer, VIH et Fonds mondial ≈ 0,3. Économies de santé de la prévention non comptées (règle)."
+ },
+ {
+  "cle": "melenchon_mesures.sante_prevention_addictions/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Recettes du cannabis affectées (≈ 0,7 en prudent) ; recherche environnement-santé, Institut national du cancer, VIH et Fonds mondial ≈ 0,3. Économies de santé de la prévention non comptées (règle)."
+ },
+ {
+  "cle": "melenchon_mesures.sante_prevention_addictions/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Recettes du cannabis affectées (≈ 0,7 en prudent) ; recherche environnement-santé, Institut national du cancer, VIH et Fonds mondial ≈ 0,3. Économies de santé de la prévention non comptées (règle)."
+ },
+ {
+  "cle": "melenchon_mesures.grand_age_domicile/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Revalorisation des aides à domicile (+10 % sur ≈ 12 Md€ de masse) ≈ 1,2 ; aménagements et équipements du maintien à domicile ≈ 1,0 ; aidants rémunérés ≈ 1,0 ; tarifs d'hébergement publics abaissés ≈ 0,8 (Md€). EHPAD privés lucratifs collectivisés : achat d'actifs (participations)."
+ },
+ {
+  "cle": "melenchon_mesures.grand_age_domicile/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Revalorisation des aides à domicile (+10 % sur ≈ 12 Md€ de masse) ≈ 1,2 ; aménagements et équipements du maintien à domicile ≈ 1,0 ; aidants rémunérés ≈ 1,0 ; tarifs d'hébergement publics abaissés ≈ 0,8 (Md€). EHPAD privés lucratifs collectivisés : achat d'actifs (participations)."
+ },
+ {
+  "cle": "melenchon_mesures.grand_age_domicile/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Revalorisation des aides à domicile (+10 % sur ≈ 12 Md€ de masse) ≈ 1,2 ; aménagements et équipements du maintien à domicile ≈ 1,0 ; aidants rémunérés ≈ 1,0 ; tarifs d'hébergement publics abaissés ≈ 0,8 (Md€). EHPAD privés lucratifs collectivisés : achat d'actifs (participations)."
+ },
+ {
+  "cle": "melenchon_mesures.handicap_divers/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "ESAT : ≈ 120 000 travailleurs payés entre 55 et 110 % du SMIC, aide au poste de l'État relevée ≈ 0,6 ; adaptation des logements anciens ≈ 0,3 ; MDPH et accessibilité ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.handicap_divers/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "ESAT : ≈ 120 000 travailleurs payés entre 55 et 110 % du SMIC, aide au poste de l'État relevée ≈ 0,6 ; adaptation des logements anciens ≈ 0,3 ; MDPH et accessibilité ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.handicap_divers/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "ESAT : ≈ 120 000 travailleurs payés entre 55 et 110 % du SMIC, aide au poste de l'État relevée ≈ 0,6 ; adaptation des logements anciens ≈ 0,3 ; MDPH et accessibilité ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.periscolaire/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Titularisation et temps de travail des animateurs (≈ 150 000, souvent à temps partiel) ≈ 1,0 ; associations sportives et culturelles encadrées par des professionnels ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.periscolaire/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Titularisation et temps de travail des animateurs (≈ 150 000, souvent à temps partiel) ≈ 1,0 ; associations sportives et culturelles encadrées par des professionnels ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.periscolaire/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Titularisation et temps de travail des animateurs (≈ 150 000, souvent à temps partiel) ≈ 1,0 ; associations sportives et culturelles encadrées par des professionnels ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.voie_pro_formation/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Bac professionnel en 4 ans (≈ +200 000 élèves-année) et classes en plus ≈ 1,0 (tondelier_mesures.voie_pro) ; pré-recrutement et écoles des métiers de l'éducation ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.voie_pro_formation/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Bac professionnel en 4 ans (≈ +200 000 élèves-année) et classes en plus ≈ 1,0 (tondelier_mesures.voie_pro) ; pré-recrutement et écoles des métiers de l'éducation ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.voie_pro_formation/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Bac professionnel en 4 ans (≈ +200 000 élèves-année) et classes en plus ≈ 1,0 (tondelier_mesures.voie_pro) ; pré-recrutement et écoles des métiers de l'éducation ≈ 0,5 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.bati_scolaire/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Écoles, collèges et lycées ≈ 1,5 (même ordre que les 2 Md€ des écoles « refuges climatiques » de Tondelier) ; immobilier universitaire ≈ 1,0 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.bati_scolaire/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Écoles, collèges et lycées ≈ 1,5 (même ordre que les 2 Md€ des écoles « refuges climatiques » de Tondelier) ; immobilier universitaire ≈ 1,0 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.bati_scolaire/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Écoles, collèges et lycées ≈ 1,5 (même ordre que les 2 Md€ des écoles « refuges climatiques » de Tondelier) ; immobilier universitaire ≈ 1,0 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.enseignement_superieur/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Frais d'inscription et CVEC ≈ 0,6 ; budget des universités +10 % ≈ 1,5 ; Crous et repas à 1 € pour tous ≈ 0,3 ; psychologues et soins gratuits ≈ 0,2 ; titularisation et recrutements ≈ 0,3 ; APL des étudiants étrangers ≈ 0,1 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.enseignement_superieur/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Frais d'inscription et CVEC ≈ 0,6 ; budget des universités +10 % ≈ 1,5 ; Crous et repas à 1 € pour tous ≈ 0,3 ; psychologues et soins gratuits ≈ 0,2 ; titularisation et recrutements ≈ 0,3 ; APL des étudiants étrangers ≈ 0,1 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.enseignement_superieur/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Frais d'inscription et CVEC ≈ 0,6 ; budget des universités +10 % ≈ 1,5 ; Crous et repas à 1 € pour tous ≈ 0,3 ; psychologues et soins gratuits ≈ 0,2 ; titularisation et recrutements ≈ 0,3 ; APL des étudiants étrangers ≈ 0,1 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.apprentis/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Arbitrage : +10 points de SMIC pour ≈ 900 000 apprentis, aide de l'État relevée pour moitié (le reste à la charge des employeurs)."
+ },
+ {
+  "cle": "melenchon_mesures.apprentis/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Arbitrage : +10 points de SMIC pour ≈ 900 000 apprentis, aide de l'État relevée pour moitié (le reste à la charge des employeurs)."
+ },
+ {
+  "cle": "melenchon_mesures.apprentis/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Arbitrage : +10 points de SMIC pour ≈ 900 000 apprentis, aide de l'État relevée pour moitié (le reste à la charge des employeurs)."
+ },
+ {
+  "cle": "melenchon_mesures.travail_sante/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Transfert de la branche maladie vers la branche accidents du travail (neutre) sauf indemnisation plus généreuse ≈ 0,5 ; visites médicales des chômeurs ≈ 0,1 ; services de prévention intégrés au service public à financement constant."
+ },
+ {
+  "cle": "melenchon_mesures.travail_sante/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Transfert de la branche maladie vers la branche accidents du travail (neutre) sauf indemnisation plus généreuse ≈ 0,5 ; visites médicales des chômeurs ≈ 0,1 ; services de prévention intégrés au service public à financement constant."
+ },
+ {
+  "cle": "melenchon_mesures.travail_sante/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Transfert de la branche maladie vers la branche accidents du travail (neutre) sauf indemnisation plus généreuse ≈ 0,5 ; visites médicales des chômeurs ≈ 0,1 ; services de prévention intégrés au service public à financement constant."
+ },
+ {
+  "cle": "melenchon_mesures.logement_divers/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.logement_divers/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.logement_divers/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.transports_quotidien/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Transports publics ≈ 1,0 ; plan vélo ≈ 0,5 ; leasing social ≈ 1,0 (tondelier_mesures.leasing_social) (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.transports_quotidien/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Transports publics ≈ 1,0 ; plan vélo ≈ 0,5 ; leasing social ≈ 1,0 (tondelier_mesures.leasing_social) (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.transports_quotidien/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Transports publics ≈ 1,0 ; plan vélo ≈ 0,5 ; leasing social ≈ 1,0 (tondelier_mesures.leasing_social) (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.energie_renouvelable/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Soutien public en plus du statu quo (programmation pluriannuelle de l'énergie) ; sortie du nucléaire au-delà de 60 ans et arrêt de l'EPR2 : EDF hors des administrations publiques, effets sur les prix et les émissions non comptés ici."
+ },
+ {
+  "cle": "melenchon_mesures.energie_renouvelable/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Soutien public en plus du statu quo (programmation pluriannuelle de l'énergie) ; sortie du nucléaire au-delà de 60 ans et arrêt de l'EPR2 : EDF hors des administrations publiques, effets sur les prix et les émissions non comptés ici."
+ },
+ {
+  "cle": "melenchon_mesures.energie_renouvelable/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Soutien public en plus du statu quo (programmation pluriannuelle de l'énergie) ; sortie du nucléaire au-delà de 60 ans et arrêt de l'EPR2 : EDF hors des administrations publiques, effets sur les prix et les émissions non comptés ici."
+ },
+ {
+  "cle": "melenchon_mesures.industrie/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Aucun montant : arbitrage de 3,5 Md€ par an (France 2030 ≈ 6 Md€ par an, dont une partie déjà au statu quo). Nationalisations : participations."
+ },
+ {
+  "cle": "melenchon_mesures.industrie/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Aucun montant : arbitrage de 3,5 Md€ par an (France 2030 ≈ 6 Md€ par an, dont une partie déjà au statu quo). Nationalisations : participations."
+ },
+ {
+  "cle": "melenchon_mesures.industrie/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Aucun montant : arbitrage de 3,5 Md€ par an (France 2030 ≈ 6 Md€ par an, dont une partie déjà au statu quo). Nationalisations : participations."
+ },
+ {
+  "cle": "melenchon_mesures.agriculture/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Contrats de transition ≈ 1,5 (tondelier_mesures.agriculture) ; installation ≈ 1,0 ; dettes reprises par la caisse de défaisance (perte en capital) ≈ 1,0 par an pendant cinq ans ; maltraitance animale et normes d'élevage ≈ 0,3 (Md€). Prix planchers payés par l'aval (pas de ligne)."
+ },
+ {
+  "cle": "melenchon_mesures.agriculture/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Contrats de transition ≈ 1,5 (tondelier_mesures.agriculture) ; installation ≈ 1,0 ; dettes reprises par la caisse de défaisance (perte en capital) ≈ 1,0 par an pendant cinq ans ; maltraitance animale et normes d'élevage ≈ 0,3 (Md€). Prix planchers payés par l'aval (pas de ligne)."
+ },
+ {
+  "cle": "melenchon_mesures.agriculture/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Contrats de transition ≈ 1,5 (tondelier_mesures.agriculture) ; installation ≈ 1,0 ; dettes reprises par la caisse de défaisance (perte en capital) ≈ 1,0 par an pendant cinq ans ; maltraitance animale et normes d'élevage ≈ 0,3 (Md€). Prix planchers payés par l'aval (pas de ligne)."
+ },
+ {
+  "cle": "melenchon_mesures.agences_inspections/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Inspection du travail ≈ +2 000 agents ; police de l'eau ≈ +3 000 ; opérateurs ≈ +5 000 ; contrôle fiscal ≈ +5 000 ; ≈ 15 000 postes × 55 000 € ≈ 0,8 et fonctionnement 0,4 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.agences_inspections/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Inspection du travail ≈ +2 000 agents ; police de l'eau ≈ +3 000 ; opérateurs ≈ +5 000 ; contrôle fiscal ≈ +5 000 ; ≈ 15 000 postes × 55 000 € ≈ 0,8 et fonctionnement 0,4 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.agences_inspections/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Inspection du travail ≈ +2 000 agents ; police de l'eau ≈ +3 000 ; opérateurs ≈ +5 000 ; contrôle fiscal ≈ +5 000 ; ≈ 15 000 postes × 55 000 € ≈ 0,8 et fonctionnement 0,4 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.ecologie_divers/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Service public du réemploi et consigne ≈ 0,5 ; forêts (préemption, ONF) ≈ 0,3 ; sécurité civile et feux de forêt ≈ 0,8 ; dépollution et indemnisations ≈ 0,4 ; stocks tampons ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.ecologie_divers/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Service public du réemploi et consigne ≈ 0,5 ; forêts (préemption, ONF) ≈ 0,3 ; sécurité civile et feux de forêt ≈ 0,8 ; dépollution et indemnisations ≈ 0,4 ; stocks tampons ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.ecologie_divers/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Service public du réemploi et consigne ≈ 0,5 ; forêts (préemption, ONF) ≈ 0,3 ; sécurité civile et feux de forêt ≈ 0,8 ; dépollution et indemnisations ≈ 0,4 ; stocks tampons ≈ 0,2 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.numerique_spatial_mer/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Numérique ≈ 2,0 (dont fonderie de microprocesseurs ≈ 1,0 par an) ; espace et mer ≈ 1,0 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.numerique_spatial_mer/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Numérique ≈ 2,0 (dont fonderie de microprocesseurs ≈ 1,0 par an) ; espace et mer ≈ 1,0 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.numerique_spatial_mer/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Numérique ≈ 2,0 (dont fonderie de microprocesseurs ≈ 1,0 par an) ; espace et mer ≈ 1,0 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.outre_mer_investissement/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.outre_mer_investissement/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.outre_mer_investissement/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.services_publics/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.services_publics/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.services_publics/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.petite_enfance_qualite/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Gratuité ≈ 1,0 ; salaires +10 % ≈ 0,5 ; encadrement +20 % ≈ 1,0 ; PMI ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.petite_enfance_qualite/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Gratuité ≈ 1,0 ; salaires +10 % ≈ 0,5 ; encadrement +20 % ≈ 1,0 ; PMI ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.petite_enfance_qualite/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Gratuité ≈ 1,0 ; salaires +10 % ≈ 0,5 ; encadrement +20 % ≈ 1,0 ; PMI ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.justice/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Aucun effectif donné : ≈ 1,5 de recrutements (moins que Tondelier : 2,1 pour 26 000 postes) ; aide juridictionnelle et gratuité ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.justice/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Aucun effectif donné : ≈ 1,5 de recrutements (moins que Tondelier : 2,1 pour 26 000 postes) ; aide juridictionnelle et gratuité ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.justice/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Aucun effectif donné : ≈ 1,5 de recrutements (moins que Tondelier : 2,1 pour 26 000 postes) ; aide juridictionnelle et gratuité ≈ 0,3 (Md€)."
+ },
+ {
+  "cle": "melenchon_mesures.police/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Une année de formation en plus pour ≈ 10 000 élèves par an ≈ 0,3 ; police scientifique et financière ≈ 0,5 ; prévention ≈ 0,3 ; victimes ≈ 0,1 (Md€). Polices municipales intégrées : transfert interne."
+ },
+ {
+  "cle": "melenchon_mesures.police/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Une année de formation en plus pour ≈ 10 000 élèves par an ≈ 0,3 ; police scientifique et financière ≈ 0,5 ; prévention ≈ 0,3 ; victimes ≈ 0,1 (Md€). Polices municipales intégrées : transfert interne."
+ },
+ {
+  "cle": "melenchon_mesures.police/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Une année de formation en plus pour ≈ 10 000 élèves par an ≈ 0,3 ; police scientifique et financière ≈ 0,5 ; prévention ≈ 0,3 ; victimes ≈ 0,1 (Md€). Polices municipales intégrées : transfert interne."
+ },
+ {
+  "cle": "melenchon_mesures.sport/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.sport/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.sport/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.communes_eco_regions/montant/crise",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.communes_eco_regions/montant/median",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
+  "cle": "melenchon_mesures.communes_eco_regions/montant/optimiste",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ }
+]
