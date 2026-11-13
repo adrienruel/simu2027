@@ -58,3 +58,20 @@ ne compter que ce que mesurent les deux indicateurs de l'article, avec la même 
 Le PIB en plus rapporte au solde le dividende de productivité du statu quo (`statu_quo.dividende_productivite`) :
 ≈ 25 % la première année, 12 % après dix ans, presque rien à très long terme, parce que les dépenses indexées sur les
 salaires montent avec la productivité. Même règle pour l'IA, l'école et la part productivité du canal d'offre.
+
+## Vérification sur le texte (phase C2, 13/11/2026)
+
+Texte lu : version de travail présentée à l'atelier « structural reforms » (Égert et Gal, ECO/WKP(2016)78,
+https://www.structural-reforms.eu/workshops/session2/Egert-Gal-structural-reforms.pdf), mêmes résultats que le
+document de travail n° 1354 de l'OCDE (2017), dont le PDF n'est pas lisible depuis cet environnement.
+
+- Tableau 4 (effet total sur le PIB par habitant) : réglementation des marchés de produits (ETCR, réforme typique
+  −0,31 point) +0,72 % à 5 ans, +1,02 % à 10 ans, +2,09 % à long terme ; protection de l'emploi des contrats
+  réguliers (EPL, réforme typique −0,30 point) +0,22 %, +0,57 %, +1,83 %. **Les six valeurs du barème sont exactes.**
+- Tableau 3 (5 ans, par composante) : ETCR = productivité globale des facteurs 0,53 %, capital 0,07 %, emploi 0,10 ;
+  pour l'EPL, l'extraction du tableau ne permet pas de lire sûrement les colonnes (0,24 % et 0,07). L'EPL n'est pas
+  parmi les déterminants de la productivité globale (tableau 1) : son effet passe par le capital et l'emploi.
+- **Décote de l'EPL** (`part_hors_emploi_epl` = 0,75) : toujours sans source. D'après le tableau 3, l'effet de l'EPL
+  à 5 ans passerait surtout par le capital, donc hors emploi : la part hors emploi serait proche de 1, et 0,75 est
+  plus prudent que le texte. À confirmer sur le PDF de l'OCDE (tableaux 3, A6.3 et A6.4) ; en attendant, la valeur
+  reste une décision.
