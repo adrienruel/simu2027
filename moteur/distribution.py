@@ -23,14 +23,21 @@ class Distribution:
     effectifs: list[float]
 
 
+_LUES: dict[str, Distribution] = {}
+
+
 def lire(nom: str) -> Distribution:
-    with (DONNEES / nom).open(encoding="utf-8") as f:
-        lignes = list(csv.DictReader(f))
-    return Distribution(
-        [l["classe"] for l in lignes],
-        [float(l["cout_employeur_milieu"]) for l in lignes],
-        [float(l["effectif_origine"]) for l in lignes],
-    )
+    """Distribution d'un fichier de données (lue une fois par processus ; copie rendue à chaque appel)."""
+    if nom not in _LUES:
+        with (DONNEES / nom).open(encoding="utf-8") as f:
+            lignes = list(csv.DictReader(f))
+        _LUES[nom] = Distribution(
+            [l["classe"] for l in lignes],
+            [float(l["cout_employeur_milieu"]) for l in lignes],
+            [float(l["effectif_origine"]) for l in lignes],
+        )
+    d = _LUES[nom]
+    return Distribution(list(d.classes), list(d.milieux), list(d.effectifs))
 
 
 def repartir(salaire: float, milieux: list[float]) -> list[float]:

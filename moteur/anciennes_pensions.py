@@ -1,13 +1,25 @@
 """Impôt au barème sur les pensions de l'ancien système, année par année (feuille Anciennes pensions, lignes 30 à 85)."""
 from __future__ import annotations
 
+import functools
+
 from .impot_unique import impot
 from .parametres import Parametres
 from .retraites_transition import ANNEES, retraites_nouveau_systeme
 from .tva import consommation_ht, taux_pour_revenu
 
 
+@functools.lru_cache(maxsize=None)
+def _probabilites_paires(rho: float, n: int) -> tuple[tuple[float, ...], ...]:
+    return tuple(tuple(l) for l in _calcul_paires(rho, n))
+
+
 def probabilites_paires(rho: float, n: int = 400) -> list[list[float]]:
+    """Probabilité qu'un couple réunisse le décile i et le décile j (copule gaussienne de corrélation rho), en cache."""
+    return [list(l) for l in _probabilites_paires(rho, n)]
+
+
+def _calcul_paires(rho: float, n: int = 400) -> list[list[float]]:
     """Probabilité qu'un couple réunisse le décile i et le décile j (copule gaussienne de corrélation rho)."""
     import math
     from statistics import NormalDist

@@ -58,6 +58,17 @@ def consommation_actuelle_ht(net: float, p: Parametres) -> float:
 
 
 def _table_openfisca(annee: int = 2026, versant: str | None = None) -> dict:
+    """Table d'OpenFisca (lue une fois par processus : ne pas la modifier)."""
+    cle = (annee, versant)
+    if cle not in _TABLES:
+        _TABLES[cle] = _lire_table_openfisca(annee, versant)
+    return _TABLES[cle]
+
+
+_TABLES: dict = {}
+
+
+def _lire_table_openfisca(annee: int, versant: str | None) -> dict:
     import csv
     from .distribution import DONNEES
     nom = f"openfisca_prive_{annee}.csv" if versant is None else f"openfisca_public_{versant}_{annee}.csv"

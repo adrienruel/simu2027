@@ -9,6 +9,14 @@ from .parametres import Parametres
 
 
 def bareme(p: Parametres, scenario: str = "prudent") -> tuple[list[float], list[float]]:
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("bareme_impot_unique", scenario)
+    if cle not in cache:
+        cache[cle] = _bareme(p, scenario)
+    return cache[cle]
+
+
+def _bareme(p: Parametres, scenario: str) -> tuple[list[float], list[float]]:
     seuils = list(p.val("impot_unique.seuils", scenario))
     taux = list(p.val("impot_unique.taux", scenario))
     if len(taux) != len(seuils) + 1:

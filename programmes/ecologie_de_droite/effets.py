@@ -154,6 +154,11 @@ class Effets:
             if ia:
                 qi = q.avec({"macro.tendance": tend0 + ia})
                 qi.colonne_prudent, qi._surcharges, qi._calcul_dividende = q.colonne_prudent, q._surcharges, True
+                # le registre relevé garde la hausse conditionnelle de la déduction de l'IS du registre de base (mêmes
+                # années sous le seuil) : sinon une simulation complète de plus, pour un écart de second ordre
+                for k_, v_ in q.__dict__.get("_cache", {}).items():
+                    if isinstance(k_, tuple) and k_ and k_[0] == "deficit_sans_hausse_deduction":
+                        qi.__dict__.setdefault("_cache", {})[k_] = v_
                 ti, t0 = budget.postes(qi, "prudent"), self.traj
                 d0, d1 = q.val("macro.premiere_annee_ia"), q.val("macro.annees_ia")
                 self.ia_registre = {}

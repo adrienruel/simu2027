@@ -30,9 +30,14 @@ ANNEES = list(range(2029, 2074))
 DERNIERE_GENERATION = 1979  # 50 ans en 2029 ; les générations du nouveau système ont 22 à 49 ans en 2029 (cohortes_2029.csv)
 
 
+_V235: dict = {}
+
+
 def _csv_v235() -> dict[int, dict]:
-    with (DONNEES / "ancien_systeme_retraites.csv").open(encoding="utf-8") as f:
-        return {int(l["annee"]): {k: float(v) for k, v in l.items()} for l in csv.DictReader(f)}
+    if not _V235:
+        with (DONNEES / "ancien_systeme_retraites.csv").open(encoding="utf-8") as f:
+            _V235.update({int(l["annee"]): {k: float(v) for k, v in l.items()} for l in csv.DictReader(f)})
+    return {a: dict(l) for a, l in _V235.items()}
 
 
 def _part_age(p: Parametres) -> dict[int, float]:

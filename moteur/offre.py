@@ -122,9 +122,18 @@ def _cellules(p: Parametres) -> list[dict]:
     return out
 
 
+_TABLES_OFFRE: dict = {}
+
+
 def _table_offre(nom: str) -> dict:
     """Table d'OpenFisca pour l'offre de travail (outils/openfisca_offre.py) : brut, coût, revenu disponible d'une
-    personne seule et d'un couple (second apporteur)."""
+    personne seule et d'un couple (second apporteur). Lue une fois par processus : ne pas la modifier."""
+    if nom not in _TABLES_OFFRE:
+        _TABLES_OFFRE[nom] = _lire_table_offre(nom)
+    return _TABLES_OFFRE[nom]
+
+
+def _lire_table_offre(nom: str) -> dict:
     import csv
     from .distribution import DONNEES
     with (DONNEES / f"openfisca_offre_{nom}_2026.csv").open(encoding="utf-8") as f:

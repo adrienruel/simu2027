@@ -17,9 +17,14 @@ from .parametres import Parametres
 ANNEES = list(range(2029, 2074))
 
 
+_CSV: dict = {}
+
+
 def _csv(nom):
-    with (DONNEES / nom).open(encoding="utf-8") as f:
-        return [{k: float(v) for k, v in l.items()} for l in csv.DictReader(f)]
+    if nom not in _CSV:
+        with (DONNEES / nom).open(encoding="utf-8") as f:
+            _CSV[nom] = [{k: float(v) for k, v in l.items()} for l in csv.DictReader(f)]
+    return [dict(l) for l in _CSV[nom]]
 
 
 def survie(p: Parametres, age_depart: float, age: float) -> float:
