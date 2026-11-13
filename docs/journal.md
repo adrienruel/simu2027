@@ -1280,3 +1280,17 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - Attribution : la fraude se neutralise par le barème commun (`macro.fraude_controle/agents`), le logement par
   l'intensité du canal commun ; le permis rapide sort du registre ; libellés numérotés tolérés.
 - **Tests** : la suite complète passe, `test_attribution` compris, en 11 min 24 s (objectif de la phase G : 15 min).
+
+## 13/11/2026 (soir) — Phase C : C3 fini, C2, C5 commencé, C4 en attente
+
+- **C3** (`docs/recoupements.md`) : retraites (COR 2026 ; Ageing Report 2024, écart expliqué par la fécondité),
+  déficit (FMI), dette (FMI, IGF), charge de la dette (Cour des comptes : ≈ 100 Md€ et 3 % du PIB en 2029 ; moteur
+  3,35 %), chômage (Banque de France : 8,0 % en 2028 ; moteur 8,3 %), santé (sous la moyenne de l'OCDE jusqu'en 2045,
+  au-dessus de l'Ageing Report à long terme ; chiffre santé de la fiche France non trouvé).
+- **C2** (`docs/reformes_structurelles.md`) : les six valeurs du barème des réformes de structure sont celles du
+  tableau 4 d'Égert et Gal ; la décote de l'EPL (0,75) reste sans source, le texte suggérant plutôt une part hors
+  emploi proche de 1.
+- **C5** (`docs/backtests.md`, `outils/backtests.py`) : CICE retrouvé (89 000 emplois à 3 ans au médian, 100 000
+  dans l'évaluation micro) ; âge légal cohérent mais calé ; restent les 35 heures et le PFU.
+- **C4** : aucun chiffrage d'ensemble publié pour 2027 (l'Institut Montaigne l'annonce pour le premier trimestre
+  2027 ; l'IFRAP publie un comparateur des propositions, sans chiffrage) : en attente.
