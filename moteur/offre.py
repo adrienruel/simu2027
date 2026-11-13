@@ -73,6 +73,8 @@ def actif(p: Parametres) -> bool:
 def poids_demande(p: Parametres, m: Mesure) -> float:
     """Poids d'une mesure dans l'impulsion budgétaire (1 : dépense publique)."""
     w = p.val("demande.poids")
+    if m.demande:
+        return w[m.demande]
     if m.instrument:
         return w[m.instrument] if m.instrument != "transferts_actifs" else w["transferts_cibles"]
     if m.poste == "recettes":

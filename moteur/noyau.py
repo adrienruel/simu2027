@@ -63,6 +63,9 @@ class Mesure:
     instrument: str = ""
     # incidence d'une mesure sur le travail (instrument « travail ») : proportionnel, ir, bas, haut (moteur/offre.py)
     incidence: str = ""
+    # poids dans l'impulsion de demande (clé de demande.poids) quand il diffère de celui du poste et qu'il n'y a pas
+    # d'instrument : ex. un capital versé aux ménages sur le poste retraites (« capital_menages », 13/11/2026)
+    demande: str = ""
 
 
 @dataclass

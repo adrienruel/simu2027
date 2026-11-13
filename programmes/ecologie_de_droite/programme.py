@@ -229,9 +229,13 @@ def mesures_retraites(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> l
     out = [
         Mesure("Retraites : gel des pensions de l'ancien système (générations nées en 1979 ou avant)", "retraites",
                {t: anc[t] - (ret_sq[t]["depenses"] - ret_sq[t]["depenses_generations_recentes"]) for t in ANNEES}, "budget"),
-        Mesure("Retraites : générations nées à partir de 1980, socle et remboursement de 35 % au lieu des pensions actuelles",
-               "retraites", {t: socle[t] + remb[t]["maastricht"] + ct[t]["penibilite"] - ret_sq[t]["depenses_generations_recentes"]
+        Mesure("Retraites : générations nées à partir de 1980, socle au lieu des pensions actuelles",
+               "retraites", {t: socle[t] + ct[t]["penibilite"] - ret_sq[t]["depenses_generations_recentes"]
                              for t in ANNEES}, "budget"),
+        # 13/11/2026 : le remboursement de 35 % des cotisations est un capital versé à 67 ans, pas une pension : son
+        # poids dans la demande est celui du capital des ménages (demande.poids), pas celui des pensions
+        Mesure("Retraites : remboursement de 35 % des cotisations à 67 ans (générations nées à partir de 1980)",
+               "retraites", {t: remb[t]["maastricht"] for t in ANNEES}, "budget", demande="capital_menages"),
         Mesure("Retraites : baisse des hautes pensions", "retraites", {t: -ct[t]["hautes_pensions"] for t in ANNEES}, "budget"),
     ]
     statiques = ("retraites_socle", "transition_retraites")

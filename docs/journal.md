@@ -1334,3 +1334,17 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   de 0,005 point de déficit.
 - `test_chomage_calcule_chaque_annee` repasse ; `test_hypotheses_communes_sans_mesure_du_programme` admet l'élasticité
   des moyens de l'enseignement (décision de modèle de C1). Suite complète : 366 tests, 10 min 16 s.
+
+## 13/11/2026 (nuit) — Creux du chômage de 2047, C5 fini
+
+- **Creux de 2047** (Écologie de droite, tous scénarios : prudent 7,38 → 6,73 → 7,13 % de 2046 à 2048) : la
+  génération 1980, la première sortie du régime, atteint 67 ans en 2047 ; le remboursement de 35 % des cotisations
+  (≈ 89 Md€ par an, une génération par an) commence d'un coup, après des années où le programme ne verse rien entre
+  l'âge légal du statu quo et 67 ans. Ce capital entrait dans l'impulsion de demande avec le poids des pensions
+  (0,6) : +143 000 emplois de conjoncture en 2047. Il prend désormais le poids du capital des ménages (0,2) : nouveau
+  champ `Mesure.demande` (clé de `demande.poids`), commun, sans effet d'offre. Le creux devient un léger fléchissement
+  (7,38 → 7,15 → 7,44 %). Déficit au prudent : 2047 +0,58 point, 2050 4,72 → 4,89 % (le soutien de demande des
+  remboursements était surestimé) ; 2037 inchangé.
+- **C5 fini** (`docs/backtests.md`) : 35 heures rejouées avec la mécanique commune des 32 heures (2,0 % de l'emploi
+  privé au médian contre 2,2 % pour les 350 000 emplois de la Dares ; prudent 1,0 %, crise négatif ; partiellement
+  indépendant) ; PFU : effet sur le PIB négligeable (≤ 0,02 %), comme les évaluations de France Stratégie.

@@ -53,8 +53,58 @@ def age_plus_deux(p: Parametres) -> dict:
     return out
 
 
+def trente_cinq_heures(p: Parametres) -> dict:
+    """35 heures (lois Aubry, 1998-2002) rejouées avec la mécanique commune des 32 heures et ses paramètres (ceux de
+    Roussel) : 39 → 35 heures, sans perte de salaire, pour 60 % des salariés du privé, montée en quatre ans ; plus
+    les allègements propres aux 35 heures (≈ 10 Md€ de 2002 : 16 Md€ à maturité, dont 6 pour la ristourne Juppé,
+    qui existait déjà), portés en euros de 2026 par le PIB nominal (× 1,95), instrument « coût du travail ».
+    Pas de modération salariale (prudent). NB : la part des heures rendues par des embauches (≈ 35 %) a été choisie
+    pour les 32 heures d'après ce précédent : le backtest n'est que partiellement indépendant."""
+    from moteur import noyau
+    rou = noyau.charger("roussel")
+    c0 = rou.v("temps_travail.trente_deux_heures")
+    out = {}
+    for s in SCENARIOS:
+        c = {**c0, "heures_actuelles": 39, "heures_cible": 35, "debut": 2029, "plein": 2032,
+             "emplois_concernes": 0.6 * c0["emplois_prive"],
+             "gain_productivite": c0["gain_productivite"], "part_embauches": c0["part_embauches"]}
+        canaux: dict = {}
+        rou.trente_deux_heures(p, s, rou.indices(p, s), c, rou.v("temps_travail.elasticite_emploi", s), "35 h", canaux)
+        w = sq.salaires(p, s)
+        m = Mesure("Allègements des 35 heures (backtest)", "recettes", {t: -10.0 * 1.95 * w[t] / w[2029] for t in ANNEES},
+                   "detail", instrument="cout_travail")
+        ef = offre.effets(p, s, [m], annees_avant=())
+        t = 2035
+        rtt = sum(v[t] for v in canaux.values())
+        all_ = sum(v.get(t, 0.0) for v in ef["emplois"].values())
+        out[s] = {"emplois_rtt": rtt, "emplois_allegements": all_, "emplois_total": rtt + all_,
+                  "part_emploi_prive_pct": (rtt + all_) / c0["emplois_prive"] * 100}
+    return out
+
+
+def pfu(p: Parametres) -> dict:
+    """PFU (2018) : baisse de la fiscalité des revenus du capital des ménages, coût ex ante ≈ 1,5 Md€ de 2018 (≈ 1,9
+    Md€ de 2026 par le PIB nominal), instrument « fiscalité du capital des ménages ». Évaluations : aucun effet
+    identifié sur l'investissement (France Stratégie, 3e rapport, 2021 ; rapport final, 2023) ; dividendes versés aux
+    ménages +60 % en 2018, qui réduisent fortement le coût budgétaire. Le moteur doit donner un effet sur le PIB
+    faible ; la réponse des dividendes n'est pas dans le canal commun (elle l'est dans les réactions des programmes)."""
+    out = {}
+    for s in SCENARIOS:
+        w = sq.salaires(p, s)
+        m = Mesure("PFU (backtest)", "recettes", {t: -1.9 * w[t] / w[2029] for t in ANNEES}, "detail",
+                   instrument="capital_menages")
+        ef = offre.effets(p, s, [m], annees_avant=())
+        y = sq.pib(p, s)
+        out[s] = {"pib_5_ans_pct": ef["dpib"][2034] / y[2034] * 100, "pib_5_ans_md": ef["dpib"][2034],
+                  "emplois_5_ans": sum(v.get(2034, 0.0) for v in ef["emplois"].values())}
+    return out
+
+
 if __name__ == "__main__":
     p = Parametres()
     print("CICE :", {s: {k: round(v / 1e3) if "emplois" in k else round(v, 2) for k, v in x.items()} for s, x in cice(p).items()})
     print("Âge +2 ans :", {s: {k: (round(v / 1e3) if "emplois" in k else round(v, 2)) for k, v in x.items()}
                            for s, x in age_plus_deux(p).items()})
+    print("35 heures :", {s: {k: (round(v / 1e3) if "emplois" in k else round(v, 2)) for k, v in x.items()}
+                          for s, x in trente_cinq_heures(p).items()})
+    print("PFU :", {s: {k: (round(v / 1e3) if "emplois" in k else round(v, 3)) for k, v in x.items()} for s, x in pfu(p).items()})
