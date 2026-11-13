@@ -160,6 +160,8 @@ def test_impulsion_budgetaire_d_ecologie_de_droite(p):
     imp = st["impulsion"]
     anc = next(x for x in m if x.nom.startswith("Anciennes pensions : prélèvement net")).valeurs[2029]
     declare = (p.val("macro.effort_2029") - p.val("macro.assouplissement_2029")) * sq.pib(p, "prudent")[2029] + anc
+    # depuis le 14/11/2026, les recettes sont nettes des réactions des contribuables, comme chez les autres programmes
+    declare += sum(x.valeurs[2029] for x in st["effets"].mesures_nettes())
     assert -imp[2029] == pytest.approx(declare, rel=0.15)
 
 

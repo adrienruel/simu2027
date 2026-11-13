@@ -282,6 +282,7 @@ class Effets:
         tva_point = budget.tva_par_point_eviction(q)
         jeu_eff = "crise" if (jeu == "prudent" and q.colonne_prudent == "crise") else jeu
         r_ecole = r_ia = r_adopt = 0.0
+        self.facteur_reformes, self.perdus = {}, {}
         arb = q.val("entreprises_cellules.arbitrage_tpe") if self.ent_cellules else None
         from moteur.entreprises_cellules import arbitrage_tpe
         for t in ANNEES:
@@ -291,6 +292,8 @@ class Effets:
             fa = self.ds[t]["adultes"] if corr else 1.0
             perdus = fa * (pv["emplois_perdus_subventions"] + pv["emplois_perdus_tardifs"] * (t > pvb["emplois_perdus_tardifs"]["annee"]))
             emp_ref = fa * pv["emplois_terme"] * k_ch * montee(t, m("annees_montee_emploi")) - perdus
+            # pour la répartition par mesure (canaux_emploi) : part des emplois à terme atteinte, emplois perdus
+            self.facteur_reformes[t], self.perdus[t] = fa * k_ch * montee(t, m("annees_montee_emploi")), perdus
             sen_long = (0.0 if self.offre_commune else
                         fa * m("seniors_long") * max(0, min(1, (t - m("annee_seniors_long") + 1) / m("montee_seniors_long"))))
             cumul = fa * m("cumul_emploi_socle") * max(0, min(1, (t - m("annee_cumul") + 1) / m("montee_cumul")))

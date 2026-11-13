@@ -526,10 +526,13 @@ def canaux_emploi(p: Parametres, s: str, E) -> dict:
     epm = emplois_par_mesure(p)
     jeux = {"crise": ("crise",), "prudent": ("crise", "median"), "median": ("median",), "optimiste": ("optimiste",)}[s]
     brut = {k: sum(epm[j][k] for j in jeux) / len(jeux) for k in REFORMES_EMPLOI}
-    tot = sum(brut.values()) or 1.0
     out = {}
     for t in ANNEES:
-        c = {lib: E.emplois["reformes"][t] * brut[k] / tot for k, lib in REFORMES_EMPLOI.items()}
+        # chaque mesure à sa part atteinte des emplois à terme ; les emplois subventionnés supprimés à part (avant le
+        # 14/11/2026, répartis au prorata du total, qui peut être proche de zéro une fois les mesures fiscales passées
+        # au canal d'offre commun)
+        c = {lib: E.facteur_reformes[t] * brut[k] for k, lib in REFORMES_EMPLOI.items() if brut[k]}
+        c["Emplois subventionnés supprimés (insertion, contrats aidés, prime jeunes)"] = -E.perdus[t]
         c.update({lib: E.emplois[k][t] for k, lib in CANAUX_AUTRES.items()})
         out[t] = c
     return out

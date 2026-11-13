@@ -1212,3 +1212,40 @@ Déficit 2037 au prudent (avant → après) : Retailleau 10,59 → 10,46 ; Attal
 2,38 → 3,13, optimiste 0,78 → 1,67 ; 2050 médian 0,06 → 3,29, optimiste −1,89 → 0,82. L'écart entre scénarios
 venait en partie des lignes de méthode : le budget figé au prudent comptait au médian et à l'optimiste une santé et
 des économies qui n'étaient pas celles du programme. Les autres programmes ne changent pas.
+
+## 13/11/2026 (après-midi) — Écologie de droite sans rien de propre hors ses mesures
+
+DÉCISION d'Adrien du 13/11/2026 : « virer tout ce qui est spécifique au projet de base, à part les mesures ».
+Réponses : tout passe sur les canaux communs, OpenFisca compris ; fonds et règle gardés comme des mesures.
+
+- **Échelle** : la croissance par tête des canaux du programme suit les salaires du statu quo du scénario (tendance,
+  IA, scénario), plus la tendance du prudent ; le dividende de croissance du budget n'est plus calculé (il ne
+  servait qu'aux lignes de méthode).
+- **Santé** : l'accise sur les produits nocifs finance le surplus de la santé du statu quo au-delà d'une part constante
+  du PIB du statu quo ; la TVA santé compte les soins évités dans tous les scénarios (la pente commune ne compte pas
+  la prévention du programme).
+- **Canaux communs** (`moteur/canaux_declares.py`, appelé avec les lectures du programme) : réformes de structure,
+  adoption de l'IA, fraude, école, logement (intensité 1, `macro.logement_canal`). La phase initiale négative du
+  logement (fin des aides à la pierre) passe par la dépense en moins et le multiplicateur.
+- **Réactions des contribuables** : chiffrées avec les mesures (nature « budget », dans l'impulsion), comme les
+  autres programmes, dont les montants sont nets des réactions (Tondelier, tranche à 60 % : 3,5 Md€ en statique,
+  1,2 retenus ; Lisnard, IS à 20 % : −12 et −10). Un canal commun en plus les aurait comptées deux fois. Sans les
+  heures des classes moyennes ni la part réelle des hauts revenus, que compte le canal d'offre commun.
+- **Permis rapide** : retiré (double emploi avec le canal logement, intensité 1 = réforme d'ensemble du foncier).
+- **Emploi** (`emploi.canal_offre_commun`) : l'impôt unique et le revenu universel passent par le canal d'offre
+  commun, cellule par cellule, comme réforme d'ensemble (`offre.travail_reforme`, `offre.reforme_travail`) ; table
+  du programme au format d'OpenFisca (`outils/table_offre_ecologie_de_droite.py`, depuis `menages_types.nouveau`,
+  épargne obligatoire hors revenu disponible comme les cotisations retraite aujourd'hui). L'assurance chômage
+  remplacée (bloc chômage moins le revenu universel des chômeurs) et le SMIC revalorisé de la seule croissance
+  passent par les instruments communs (transferts aux actifs, coût du travail). Les seniors du socle à 67 ans passent
+  par `offre.seniors`. Retirés du bloc emploi propre : allocation chômage, bas salaires, coût du travail des
+  entreprises, baisse ciblée du coût du travail, SMIC, inactifs, seniors à long terme. Le canal commun trouve que le
+  système du programme réduit les heures : le taux marginal sur le coût employeur passe d'environ 60 % à 73 % entre
+  1,3 et 4 SMIC (impôt unique à 66 % au-delà de 32 000 € de coût, impôt local 7,2 %), et à 67 % sous le SMIC (sortie
+  du revenu universel).
+- **Fonds** : externalités du capital ramenées à zéro (le capital du fonds rapporte comme celui des entreprises).
+
+Restent propres au programme, à trancher : le canal de l'énergie des entreprises (IS des taxes d'énergie supprimées,
+emploi industriel), les emplois perdus par la localisation des bénéfices (IS), le cumul emploi-socle, l'éviction de
+l'épargne volontaire, et les réformes du marché du travail sans équivalent fiscal (France Travail, apprentissage,
+alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus tôt des jeunes).

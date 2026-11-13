@@ -78,9 +78,14 @@ def test_baisse_de_l_ecart_de_taux_gagnee_par_le_resultat():
     assert all("baisse_ecart_taux" not in vide[t] for t in ANNEES)
     assert all(vide[t]["deficit"] == sq.simuler(P)["median"][t]["deficit"] for t in ANNEES)
     edd = noyau.resultats(P, ("median",))["median"]
-    # dette en baisse dès 2030 (premier écart mesurable avec 2029) : baisse effective en 2031
-    assert edd[2030]["baisse_ecart_taux"] == 0 and edd[2031]["baisse_ecart_taux"] == pytest.approx(bareme / duree)
-    assert edd[2040]["baisse_ecart_taux"] == pytest.approx(bareme)
+    # dette en baisse dès les premières années : la baisse s'acquiert un huitième par an (2031 avant le 14/11/2026 ;
+    # 2032 depuis que l'emploi du programme passe par le canal d'offre commun)
+    debut = min(t for t in ANNEES if edd[t]["baisse_ecart_taux"] > 0)
+    assert debut <= 2032 and edd[debut - 1]["baisse_ecart_taux"] == 0
+    assert edd[debut]["baisse_ecart_taux"] == pytest.approx(bareme / duree)
+    # depuis le 14/11/2026, la dette du médian est presque stable (elle remonte certaines années) : la baisse reste
+    # positive ou nulle et ne dépasse jamais le barème
+    assert all(0 <= edd[t]["baisse_ecart_taux"] <= bareme + 1e-12 for t in ANNEES if t >= debut)
 
 
 def test_regle_de_trajectoire_declaree():

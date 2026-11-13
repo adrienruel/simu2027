@@ -16,17 +16,28 @@ def test_rendement_fonds_sous_le_rendement_net_d_impot():
 
 
 def test_seniors_suivent_les_reports():
-    """Les emplois de seniors de l'ancien système s'éteignent quand plus personne n'est reporté."""
+    """Les emplois de seniors de l'ancien système s'éteignent quand plus personne n'est reporté ; depuis le 14/11/2026,
+    le socle à 67 ans (générations nées à partir de 1979) passe aussi par offre.seniors : seuls ses seniors restent."""
     rep = retraites_reportes(P)
     assert rep[2060] == 0
     sans = noyau.resultats(P.avec({"macro.seniors_lies_aux_reportes": False}), ("prudent",))["prudent"]
     # en 2060, seul le forfait de la v235 garde des emplois de seniors de l'ancien système
     cle = "Seniors : emploi (report de l'âge légal)"
-    assert R[2060]["emplois_canaux"].get(cle, 0.0) == 0.0 and cle not in sans[2060]["emplois_canaux"]
+    assert cle not in sans[2060]["emplois_canaux"]
+    if P.val("emploi.canal_offre_commun"):
+        socle = P.val("macro.seniors_long") / P.val("macro.seniors_part_emploi_reportes", "median")
+        assert 0 < R[2060]["emplois_canaux"][cle] < socle  # une part des reportés du socle en emploi
+    else:
+        assert R[2060]["emplois_canaux"].get(cle, 0.0) == 0.0
     assert R[2037]["emplois_canaux"][cle] > 0
 
 
-def test_permis_rapide_capital_a_part_avec_usure_et_cout():
+def test_permis_rapide_retire():
+    """Permis rapide retiré le 14/11/2026 : double emploi avec le canal logement commun (intensité 1)."""
+    assert all(v == 0.0 for v in PROG.canaux_courts(P, "prudent")["permis"].values())
+
+
+def _ancien_test_permis_rapide_capital_a_part_avec_usure_et_cout():
     c = {t: {"permis_rapide": v} for t, v in PROG.canaux_courts(P, "prudent")["permis"].items()}
     assert c[2029]["permis_rapide"] < 0  # coût des services, pas encore de capital
     flux, usure = P.val("macro.permis_rapide"), P.val("macro.usure_capital")
