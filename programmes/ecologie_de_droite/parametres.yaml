@@ -583,11 +583,12 @@ macro:
     source: "Encadrement : usure du capital des sociétés non financières ≈ 10 % par an (Banque de France, Sicsic, 2018) ; actifs régulés à longue durée de vie (réseaux, nucléaire, logement) : 2,5 à 4 % (durées d'amortissement de 25 à 40 ans) ; le capital nouveau du fonds est pour moitié régulé, pour moitié industrie et IA (feuille Fonds)"
     note: "Correction du 29/10/2026 : le capital du fonds produit une valeur ajoutée brute = rendement net + usure (la part qui paie le renouvellement du capital fait partie du PIB), comme le canal de l'investissement des entreprises (pib_par_euro_capital + usure_capital). La v235 ne comptait que le rendement net. Prudent : 4 % (proche des actifs régulés, bas de la fourchette) ; médian : 5,5 % ; optimiste : 6,5 % ; crise : 3,5 %."
   externalites_capital_fonds:
-    valeur: {crise: 0.0, prudent: 0.0, median: 0.01, optimiste: 0.02}
+    valeur: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
     v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
     unite: taux
-    statut: HYPOTHESE
+    statut: DECISION
     source: "Encadrement : méta-analyse de Bom et Ligthart (Journal of Economic Surveys, 2014) : élasticité de la production au capital public ≈ 0,08 à court terme, ≈ 0,12 à long terme pour les infrastructures de base, soit un rendement social bien au-dessus du rendement financier"
+    note_14_11: "DÉCISION d'Adrien du 14/11/2026 (plus rien de propre au programme hors ses mesures) : externalités ramenées à zéro dans tous les scénarios ; le capital du fonds rapporte au PIB comme le capital des entreprises (rendement + usure), sans effet d'entraînement propre."
     note: "Canal ajouté le 29/10/2026 : PIB en plus par euro de capital du fonds, au-delà de son rendement (réseaux, énergie, IA : effets d'entraînement sur le reste de l'économie). Prudent et crise : zéro ; médian 1 % ; optimiste 2 % par an. Le médian sert de cible à la clause : ce canal rend la clause plus exigeante pour le prudent publié."
   premiere_annee_productivite: {valeur: 2030, unite: annee, statut: HYPOTHESE}
   premiere_annee_ecole: {valeur: 2045, unite: annee, statut: HYPOTHESE}
