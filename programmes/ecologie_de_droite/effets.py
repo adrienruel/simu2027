@@ -315,12 +315,9 @@ class Effets:
             pib["investissement"][t] = k_inv * (m("pib_par_euro_capital") + m("usure_capital"))
             solde["investissement"][t] = (k_inv * m("pib_par_euro_capital") * self.taux_benefices if (corr and self.par_revenu)
                                           else (k_inv * m("pib_par_euro_capital") if corr else pib["investissement"][t]) * self.part_budget)
-            # permis rapide : capital privé à part
-            sep = q.val("macro.permis_rapide_separe")
-            kp = self.k_permis[t]
-            pib["permis"][t] = kp * (m("pib_par_euro_capital") + m("usure_capital")) if sep else 0.0
-            solde["permis"][t] = ((kp * m("pib_par_euro_capital") * self.taux_benefices - q.val("macro.permis_rapide_cout") * self.croiss[t])
-                                  if sep else 0.0)
+            # permis rapide : retiré le 14/11/2026 (double emploi avec le canal logement commun, intensité 1 =
+            # réforme d'ensemble du foncier et de l'urbanisme)
+            pib["permis"][t] = solde["permis"][t] = 0.0
             solde["dirigeants"][t] = (-arbitrage_tpe(q, jeu)["perte"] * min(1.0, (n + 1) / arb["montee"]) * self.croiss[t]) if arb else 0.0
             # santé, TVA santé, carbone, éviction de l'épargne volontaire : écarts de scénario du registre
             solde["sante"][t] = self.sante[t]
@@ -337,11 +334,7 @@ class Effets:
         "emploi": "Emploi : réformes, seniors à long terme, cumul emploi-retraite, inactifs",
         "logement": "Logement : reprise des amortissements",
         "aides_construction": "Logement : fin des aides à la construction",
-        "erosion_is": "Entreprises : érosion de l'IS (localisation des bénéfices)",
-        "reactions": "Réactions des hauts revenus à l'impôt",
         "investissement": "Investissement des entreprises (déduction immédiate, IS)",
-        "permis": "Permis de construire rapide",
-        "dirigeants": "Dirigeants de petites sociétés qui se versent un salaire",
         "tva_sante": "Santé : TVA sur les dépenses de santé du scénario",
         "carbone": "Carbone : recette du scénario",
         "eviction": "Épargne obligatoire qui évince l'épargne volontaire (TVA), écart au prudent",
@@ -360,6 +353,18 @@ class Effets:
         l'impulsion : les mesures publiées ne portent pas d'instrument (le canal d'offre commun ne s'y applique pas)."""
         return [Mesure("Carbone : recette du scénario", "recettes", dict(self.solde["carbone"]), "effet_macro",
                        instrument="consommation")]
+
+    # réactions chiffrées avec la mesure, comme pour les autres programmes (14/11/2026) : leurs recettes sont nettes
+    # des réactions (Tondelier, tranche à 60 % : 3,5 Md€ en statique, 1,2 retenus ; Lisnard, IS à 20 % : −12 et −10)
+    NETTES = {
+        "reactions": "Impôt unique : réactions des revenus déclarés (hauts revenus, revenus du capital, localisation des emplois)",
+        "erosion_is": "Impôt sur les bénéfices : localisation des bénéfices (érosion de l'assiette)",
+        "dirigeants": "Impôt sur les bénéfices : dirigeants de petites sociétés qui se versent un salaire",
+    }
+
+    def mesures_nettes(self) -> list[Mesure]:
+        """Part des recettes des mesures perdue par les réactions des contribuables (nature « budget »)."""
+        return [Mesure(lib, "recettes", dict(self.solde[c]), "budget") for c, lib in self.NETTES.items()]
 
     def mesures(self) -> list[Mesure]:
         out = list(self.decl["mesures"])  # canaux communs
@@ -515,10 +520,10 @@ class Fonds:
             rend_net = (cpt["rendements"] - cpt["paiements"]) / 1e9 * self.cal
             apport = (self.flux_brut * E.ds[t]["c_epargne"] - self.repris_net) * k
             part_k = min(1.0, self.capital / (cpt["encours"] / 1e9 * self.cal)) if cpt["encours"] > 0 else 0.0
-            self.capital = (self.capital + apport + rend_net * part_k + (0.0 if sep else m("permis_rapide")) - c * k + self.paiement * k)
+            self.capital = (self.capital + apport + rend_net * part_k + 0.0 - c * k + self.paiement * k)
         else:
             accumulation = q.val("epargne.rendement_fonds") * m("part_reinvestie") * m("part_capital_nouveau")
-            self.capital = (self.capital + self.b24 * E.ds[t]["c_epargne"] * k + (0.0 if sep else m("permis_rapide"))
+            self.capital = (self.capital + self.b24 * E.ds[t]["c_epargne"] * k + 0.0
                             + self.capital * accumulation - c * k + self.paiement * k)
         self.historique[t]["capital_fin"] = self.capital  # fin d'année, après l'épargne et les rendements de l'année
         etr = self.etr

@@ -763,6 +763,7 @@ class EcologieDeDroite:
                 continue
             m = self._budget(p, q, s)
             E = Effets(p, q, s, jeu)
+            m.extend(E.mesures_nettes())  # recettes nettes des réactions, dans l'impulsion comme les autres mesures
             y_sq, e, rec_sq = sq.pib(p, s), sq.effectifs(p, s), sq.recettes(p, s)
             # impulsion budgétaire des mesures du programme : budget, mesures datées, reclassements (leur contrepartie
             # est dans le budget : les oublier comptait 22 Md€ de resserrement de trop) et prélèvements portés par un
