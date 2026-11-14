@@ -135,3 +135,33 @@ def effets(p: Parametres, s: str, decl: dict) -> dict:
     }
     cache[cle] = out
     return out
+
+
+def population_programme(prog, p: Parametres, s: str) -> dict[int, tuple[float, ...]]:
+    """Population du programme année par année (personnes par âge) : projection de l'Insee du scénario, effet du
+    programme sur les naissances (demographie.population avec ses paramètres) et écart migratoire déclaré
+    (ecart_population). Sert de dénominateur aux taux d'emploi et d'activité publiés (14/11/2026, remarque
+    d'Adrien : le taux d'emploi d'un programme qui réduit l'immigration était rapporté à la population du statu quo)."""
+    from . import canaux_declares
+    from .demographie import population as population_naissances
+    base = sq.population(p, s)
+    pt = getattr(prog, "pt", None)
+    try:  # effet sur les naissances : seulement les programmes qui déclarent une politique familiale chiffrée
+        nais = population_naissances(pt, s) if pt is not None and pt.val("demographie.active") else None
+    except KeyError:
+        nais = None
+    sans = sq.population(pt, s) if nais is not None else None
+    try:
+        d = canaux_declares.declares(prog) if pt is not None else {}
+    except (AttributeError, ValueError):
+        d = {}
+    mig = ecart_population(p, s, d["solde_migratoire"]) if "solde_migratoire" in d else None
+    out = {}
+    for t, v in base.items():
+        w = list(v)
+        if nais is not None:
+            w = [x + nais[t][a] - sans[t][a] for a, x in enumerate(w)]
+        if mig is not None and t in mig:
+            w = [x + mig[t][a] for a, x in enumerate(w)]
+        out[t] = tuple(w)
+    return out

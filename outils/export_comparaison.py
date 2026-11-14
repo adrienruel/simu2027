@@ -18,7 +18,7 @@ import csv
 import yaml
 
 from moteur import annonces as annonces_mod
-from moteur import noyau
+from moteur import migrations, noyau
 from moteur import statu_quo as sq
 from moteur.parametres import RACINE, Parametres
 
@@ -56,14 +56,19 @@ def groupe(m: noyau.Mesure) -> str:
     return GROUPES.get(m.poste, "Autres dépenses")
 
 
-def taux_emploi_18_66(p: Parametres, s: str, t: int, emploi: float) -> float:
+def taux_emploi_18_66(p: Parametres, s: str, t: int, emploi: float, pop=None, chomage: float | None = None) -> float:
     """Personnes en emploi de 18 à 66 ans / population de 18 à 66 ans (%). Tranche qui contient le report de l'âge de
-    départ à 67 ans ; l'emploi après 67 ans est celui du statu quo (taux de 2025 par âge), retiré de l'emploi."""
+    départ à 67 ans ; l'emploi après 67 ans est celui du statu quo (taux de 2025 par âge), retiré de l'emploi.
+    pop : population du programme cette année (migrations.population_programme), sinon celle du statu quo.
+    chomage (%) : rend alors le taux d'activité (emploi et chômeurs de 18 à 66 ans / population)."""
     from moteur.demographie import _tranche
-    pop = sq.population(p, s)[t]
+    pop = pop if pop is not None else sq.population(p, s)[t]
     taux = {a: x for k, x in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
     apres = sum(pop[a] * taux.get(a, 0.0) for a in range(67, len(pop)))
-    return (emploi - apres) / sum(pop[18:67]) * 100
+    e = emploi - apres
+    if chomage is not None:
+        e = e / (1 - chomage / 100)
+    return e / sum(pop[18:67]) * 100
 
 
 def lignes_ecologie(p: Parametres, lib: str, prog) -> list[dict]:
@@ -111,6 +116,7 @@ def main() -> None:
             var = noyau.charger(nom)
             var.variante_annonces = True
             variantes[nom] = noyau.simuler(p, var)
+        pop_prog = {s: migrations.population_programme(prog, p, s) for s in res}
         for s, v in res.items():
             for t, x in v.items():
                 traj.append({"programme": lib, "scenario": SCENARIOS[s], "annee": t,
@@ -130,7 +136,9 @@ def main() -> None:
                              "pib_md": round(x["pib"], 1),
                              "emploi_millions": round(x["emploi"] / 1e6, 4),
                              "ecart_emploi_milliers": round((x["emploi"] - base[s][t]["emploi"]) / 1e3, 1),
-                             "taux_emploi_18_66": round(taux_emploi_18_66(p, s, t, x["emploi"]), 3),
+                             "population_millions": round(sum(pop_prog[s][t]) / 1e6, 3),
+                             "taux_emploi_18_66": round(taux_emploi_18_66(p, s, t, x["emploi"], pop_prog[s][t]), 3),
+                             "taux_activite_18_66": round(taux_emploi_18_66(p, s, t, x["emploi"], pop_prog[s][t], x["chomage"]), 3),
                              # PIB en plus (%) qu'il faudrait pour que le solde primaire rejoigne celui du statu quo,
                              # au taux de prélèvement du statu quo (négatif : le programme a de la marge)
                              "pib_pour_equilibrer_pct": round(0.0 if nom == "statu_quo" else

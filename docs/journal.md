@@ -1438,3 +1438,14 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   − 11 %, aides au logement − 21 %, RSA − 44 %, AAH + 9 %. Critère de sortie atteint pour l'IR seulement ; diagnostic
   et pistes (calage sur les effectifs de bénéficiaires) dans `docs/microsimulation.md`.
 - `tests/test_microsimulation.py` (5 tests, 37 s).
+
+## 14/11/2026 (soir) — Taux d'emploi rapporté à la population du programme
+
+- Remarque d'Adrien : Lisnard affichait un chômage bas (7,2 % en 2050) mais un taux d'emploi bas (66,3 %, statu quo
+  70,1 %). Cause : le taux d'emploi publié (`taux_emploi_18_66`) divisait l'emploi du programme, qui perd les
+  immigrés en moins, par la population du statu quo. Le cœur du moteur était cohérent (la variante migratoire
+  recalcule déjà le statu quo année par année avec la population du programme) ; seul l'indicateur publié ne l'était pas.
+- `migrations.population_programme` : population du programme année par année (projection, naissances, écart
+  migratoire). Taux d'emploi et nouveau taux d'activité des 18-66 ans rapportés à elle ; colonne `population_millions`.
+  Lisnard 2050 au prudent : taux d'emploi 72,5 %, activité 78,2 % (statu quo 70,1 et 76,3) ; Zemmour 71,9 ;
+  Philippe 70,9 ; Le Pen 69,5.
