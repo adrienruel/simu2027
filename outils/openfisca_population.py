@@ -113,11 +113,37 @@ def structure(lignes: list[dict]) -> dict:
             "n_foyers": nf, "n_familles": nfa, "n_menages": len(menages), "menages": menages}
 
 
-def simulation(lignes: list[dict], annee: int = 2026, tbs=None):
-    """Simulation OpenFisca de la population (système de base, ou tbs réformé)."""
-    from openfisca_core.simulation_builder import SimulationBuilder
+def systeme(tbs=None):
+    """OpenFisca-France corrigé. revenus_non_salarie_nets (version 177) additionne avec sum() de Python les
+    revenus de micro-entreprise de toute la population et les donne à chaque personne : le revenu disponible de
+    chaque ménage en était gonflé du total (constat du 14/11/2026). Correction : le montant de son propre foyer,
+    porté par le déclarant principal."""
+    from openfisca_core.model_api import YEAR, Reform, Variable
     from openfisca_france import FranceTaxBenefitSystem
+    from openfisca_france.entities import FoyerFiscal, Individu
     tbs = tbs or FranceTaxBenefitSystem()
+
+    class revenus_non_salarie_nets(Variable):
+        value_type = float
+        entity = Individu
+        definition_period = YEAR
+        label = "Revenus non salariés nets (corrigé : micro-entreprise du foyer seulement)"
+
+        def formula(individu, period):
+            micro = individu.foyer_fiscal("microentreprise", period) * individu.has_role(FoyerFiscal.DECLARANT_PRINCIPAL)
+            return (individu("rpns_imposables", period) + individu("csg_imposable_non_salarie", period)
+                    + individu("crds_non_salarie", period) + micro)
+
+    class Correction(Reform):
+        def apply(self):
+            self.update_variable(revenus_non_salarie_nets)
+    return Correction(tbs)
+
+
+def simulation(lignes: list[dict], annee: int = 2026, tbs=None):
+    """Simulation OpenFisca de la population (système de base corrigé, ou tbs réformé, à passer par systeme())."""
+    from openfisca_core.simulation_builder import SimulationBuilder
+    tbs = tbs or systeme()
     s = structure(lignes)
     n = len(lignes)
     sb = SimulationBuilder()

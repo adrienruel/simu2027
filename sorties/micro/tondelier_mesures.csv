@@ -1,0 +1,10 @@
+programme,mesure,openfisca_md,moteur_md,ecart_pct,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,note
+tondelier,REC-10,0.97,1.2,-19,-0.0,0.21,0.0,0.01,0.0,0.0,1.21,
+tondelier,REC-11,-9.31,-4.5,107,-0.0,0.21,0.0,0.01,0.0,0.0,-9.07,
+tondelier,REC-13,5.82,4.0,46,-0.0,0.21,0.0,-0.13,0.0,0.0,4.82,
+tondelier,COT-04,7.4,13.6,-46,0.0,0.55,0.0,0.11,0.03,0.02,-1.86,"CSG d'activité +1 point (déductible). Les autres revenus (+1 point sur tous les revenus) : pensions et capital non changés ici, faute de lecture sûre de la mesure sur eux ; écart attendu."
+tondelier,REC-20/21,1.33,3.5,-62,-0.0,0.21,0.0,0.01,0.0,0.0,1.59,
+tondelier,PRE-11,-1.66,-1.7,-2,-0.03,0.18,0.0,1.49,0.0,0.0,-0.0,
+tondelier,PRE-12,-3.46,-2.8,24,-0.0,0.21,0.0,0.01,3.23,0.0,-0.0,"Lecture du chiffrage du programme : la moitié du montant pour deux enfants (32 % de la base mensuelle), modulée selon les revenus comme les allocations familiales."
+tondelier,PRE-13,-4.11,-4.4,-7,-0.0,0.13,0.0,0.01,0.0,3.96,-0.0,
+tondelier,PRE-10,-5.8,-6.6,-12,5.65,-0.12,0.0,0.09,0.0,0.0,-0.0,"Garantie d'autonomie à 50 % du SMIC net (≈ 790 € contre ≈ 660 € : + 20 %) à la place du RSA, dès 18 ans. Recours : celui du RSA (le programme dit « sans contrepartie », le recours pourrait être plus haut)."

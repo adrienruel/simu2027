@@ -1471,3 +1471,13 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   prestations d'entretien − 8 %, aides au logement − 11 %, RSA − 15 % (cible corrigée : 12,4 Md€ d'allocations, Cnaf),
   prime d'activité + 13 %, AAH + 7 %.
 - Recours : forme en puissance 0,2 du montant (écart nombre / montant du non-recours au RSA, Drees).
+
+## 14/11/2026 (soir) — Phase F2-F3 : premier lot de mesures dans OpenFisca
+
+- `programmes/micro_mesures.yaml` et `outils/openfisca_mesures.py` : 23 mesures de 8 programmes codées (impôt sur le
+  revenu, CSG, quotient familial, APL, AF, ASF, AAH, RSA, garantie d'autonomie) ; effet statique sur la population
+  contre le chiffrage du moteur, et variation du niveau de vie par décile (`sorties/micro_*.csv`).
+- Écarts qui mettent en cause le moteur : tranche à 11 % ramenée à 9 % (− 9,3 contre − 4,5), ASF (base de 1,6 Md€
+  contre 3,1 à la Cnaf), fin de l'abattement des retraités (+ 5,8 contre + 4,0). Écarts qui mettent en cause la micro :
+  garantie au seuil de pauvreté (bas de distribution trop pauvre), capital (pas d'intérêts ni de plus-values).
+- Bogue d'OpenFisca 177 trouvé et corrigé localement (`revenus_non_salarie_nets`).
