@@ -95,6 +95,10 @@ philippe,PHI-FIS-02,crise,2496,0.024,-1.474
 philippe,PHI-FIS-02,prudent,3804,0.037,-1.474
 philippe,PHI-FIS-02,median,9707,0.092,-1.474
 philippe,PHI-FIS-02,optimiste,18326,0.172,-1.474
+philippe,PHI-SOC-01,crise,-77440,-1.868,-8.093
+philippe,PHI-SOC-01,prudent,-40599,-0.987,-8.093
+philippe,PHI-SOC-01,median,-14481,-0.372,-8.093
+philippe,PHI-SOC-01,optimiste,-7415,-0.221,-8.093
 philippe,PHI-SOC-06,crise,28922,0.316,2.426
 philippe,PHI-SOC-06,prudent,43391,0.474,2.426
 philippe,PHI-SOC-06,median,110062,1.201,2.426

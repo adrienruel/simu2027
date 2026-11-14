@@ -1504,3 +1504,9 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - `microsimulation.nationalite` ; règles `condition_nationalite` et `rsa_duree` ; Zemmour (2 mesures), Le Pen,
   Retailleau, Lisnard, Philippe codés. Emplois entrés au prorata du montant du moteur (risque juridique compris).
 - Déficit 2037 au prudent : Mélenchon 28,07 → 27,91 (emplois de la garantie au prorata : 28 / 37), autres ≤ 0,03.
+
+## 14/11/2026 (soir) — Allocation unique de Philippe ; bilan de la micro
+
+- `allocation_unique` : 350 € par mois et par famille, pleine jusqu'au 3e décile, nulle à la médiane, à la place des
+  prestations familiales, sans perdant : − 8,1 Md€ (moteur − 7). Sans garantie : + 4,3 Md€. Lecture à valider.
+- Part des arrivés récents (30 %) documentée (premiers titres de la DGEF). Bilan : `docs/microsimulation.md`.

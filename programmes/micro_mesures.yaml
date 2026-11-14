@@ -98,6 +98,9 @@ philippe:
   PHI-FIS-02:
     operations: [{formule: {nom: ir_naissance, age_enfant_max: 2, plafond: 3000}}]
     note: "Foyer avec un enfant de moins de 3 ans : impôt sur le revenu annulé jusqu'à 3 000 € (réduction de 3 000 € au-delà), comme le site du 12/11/2026."
+  PHI-SOC-01:
+    operations: [{formule: {nom: allocation_unique, mensuel: 350, remplace: [af, cf, ars, asf, paje_base], sans_perdant: true}}]
+    note: "Lecture proposée (le site ne donne pas de barème) : 350 € par mois et par famille avec enfants, pleine jusqu'au 3e décile de niveau de vie, nulle à la médiane, à la place des allocations familiales, du complément familial, de l'allocation de rentrée scolaire, de l'ASF et de l'allocation de base de la Paje (les « aides trop éparpillées »), sans perdant (chaque famille garde au moins ce qu'elle avait) : − 8,1 Md€, proche du chiffrage du moteur (− 7). Lecture sans garantie (les familles au-dessus de la médiane perdent ces prestations) : + 4,3 Md€. À valider."
   PHI-SOC-06:
     operations: [{formule: {nom: rsa_duree, part: 0.45}}]
     note: "Durée du RSA limitée, sans durée donnée : même lecture que Zemmour (trois ans), mêmes exceptions."

@@ -178,7 +178,8 @@ def construire(operations: list[dict]):
 
 # --- Calcul --------------------------------------------------------------------------------------------------
 
-POST = ("garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree")  # règles appliquées après le calcul d'OpenFisca
+POST = ("garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
+        "allocation_unique")  # règles appliquées après le calcul d'OpenFisca
 EMPLOI = ("salarie_prive", "agent_public", "independant")
 AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
 
@@ -244,7 +245,15 @@ class Base:
             if r in ("demandeur", "conjoint") and (l["handicap"] or l["age"] >= 60):
                 exc[fa] = True
         self.exceptions_rsa = exc | (~couple & enf)
+        self.fam_enf = enf
         self.nationalite()
+        # bornes de niveau de vie du système actuel (personnes) : 3e décile et médiane, pour les barèmes dégressifs
+        rd0 = self.sim.calculate("revenu_disponible", "2026")
+        nv0 = rd0 / np.maximum(self.sim.calculate("unites_consommation", "2026"), 1e-9)
+        w0 = self.wm * self.pers_m
+        o = np.argsort(nv0)
+        cw = np.cumsum(w0[o]) / w0.sum()
+        self.bornes_nv = {"d3": float(nv0[o][np.searchsorted(cw, 0.3)]), "mediane": float(nv0[o][np.searchsorted(cw, 0.5)])}
         self.etat0 = self.etat(self.sim, [])
         self.emploi = emploi
         if emploi:
@@ -335,6 +344,19 @@ class Base:
                 perd = (self._u_duree < x["part"]) & ~exc
                 ajust_f = ajust_f - perd * percu["rsa"]
                 percu["rsa"] = percu["rsa"] * ~perd
+            if x["nom"] == "allocation_unique":
+                # allocation par famille avec enfants, pleine jusqu'au 3e décile de niveau de vie (avant l'allocation),
+                # nulle à la médiane, à la place des prestations familiales qu'elle remplace
+                nv_m = (rd + np.bincount(self.fam_men, weights=ajust_f, minlength=s["n_menages"])) / np.maximum(uc, 1e-9)
+                d3, med = self.bornes_nv["d3"], self.bornes_nv["mediane"]
+                taux = np.clip((med - nv_m) / (med - d3), 0.0, 1.0)[self.fam_men]
+                ancien = sum(percu[k] for k in x["remplace"])
+                nouveau = self.fam_enf * taux * x["mensuel"] * 12
+                if x.get("sans_perdant"):
+                    nouveau = np.maximum(nouveau, ancien)  # chaque famille garde au moins ce qu'elle avait
+                for k in x["remplace"]:
+                    percu[k] = 0 * percu[k]
+                ajust_f = ajust_f - ancien + nouveau
         rd = rd + np.bincount(self.fam_men, weights=ajust_f, minlength=s["n_menages"])
         for x in post:
             if x["nom"] == "garantie_niveau_vie":
