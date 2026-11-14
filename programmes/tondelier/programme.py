@@ -268,6 +268,9 @@ class Tondelier:
                     continue
                 x["_montant"] = x["montant"][s]
                 serie = self._serie(x, idx)
+                # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
+                from moteur import micro as _micro
+                serie = {t: v * _micro.indice(p, self.nom, x["id"], t) for t, v in serie.items()}
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=nom.split(".")[1],
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
                                     enfants=x.get("enfants")))

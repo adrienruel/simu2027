@@ -147,10 +147,11 @@ lisnard_mesures:
     source: "Fiche « Questions » (16/10/2026) ; encadrement : droits de succession ≈ 16 Md€, dont ≈ 30 % payés dans les tranches au-delà de 20 % en ligne directe (CAE, 2021) ; transmission d'entreprise déjà exonérée à 75 % (pacte Dutreil)"
   quotient_familial:
     valeur: {id: LIS-SOC-01, enfants: true, instrument: travail, incidence: haut, libelle: "Quotient familial déplafonné", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
-             montant: {crise: -4.0, prudent: -3.5, median: -3.0, optimiste: -2.5}}
+             montant: {crise: -5.0, prudent: -4.4, median: -3.8, optimiste: -3.1}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique au prudent, même écart entre scénarios qu'avant ; outils/openfisca_mesures.py, DÉCISION d'Adrien). Ancien montant : {crise: -4.0, prudent: -3.5, median: -3.0, optimiste: -2.5}."
     source: "Page programme (non datée) ; encadrement : plafonnement du quotient familial ≈ 3 à 4 Md€ d'impôt (Voies et moyens, dépense fiscale négative ; baisse du plafond de 2013-2014 ≈ 1,5 Md€)"
   creation_entreprise:
     valeur: {id: LIS-ECO-04, instrument: cout_travail, libelle: "Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois", poste: recettes, moteur: pib, debut: 2028, plein: 2028,

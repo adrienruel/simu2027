@@ -210,12 +210,12 @@ roussel_mesures:
     note: "Écart avec un prix de ≈ 1,75 € le litre : ≈ 0,25 € × ≈ 50 milliards de litres ≈ 12,5 Md€ si l'État le paie par la fiscalité (accise et TVA) ; moins si une partie est prise sur les marges du raffinage et de la distribution (maîtrise publique de TotalEnergies). Le coût monte avec le prix du pétrole : prudent à 12 Md€."
   csg_retraites:
     valeur: {id: PCF-RET-03, libelle: "CSG sur les retraites supprimée", poste: recettes, moteur: "recette:retraites", debut: 2028, plein: 2028,
-             montant: {crise: -23.0, prudent: -22.0, median: -21.0, optimiste: -20.0}}
+             montant: {crise: -24.1, prudent: -23.1, median: -22.1, optimiste: -21.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Discours de la Fête de l'Humanité 2025 (pcf.fr, repris par programme-candidat.fr), à confirmer pour 2027"
-    note: "CSG sur les pensions de retraite ≈ 22 Md€ (Commission des comptes de la Sécurité sociale, 2025 ; taux de 3,8 à 8,3 %). La CSG déductible est remplacée par un peu plus d'impôt sur le revenu : déjà compté dans le bas de la fourchette."
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique au prudent, même écart entre scénarios qu'avant ; outils/openfisca_mesures.py, DÉCISION d'Adrien). Ancien montant : {crise: -23.0, prudent: -22.0, median: -21.0, optimiste: -20.0}. CSG sur les pensions de retraite ≈ 22 Md€ (Commission des comptes de la Sécurité sociale, 2025 ; taux de 3,8 à 8,3 %). La CSG déductible est remplacée par un peu plus d'impôt sur le revenu : déjà compté dans le bas de la fourchette."
   demi_part_veuves:
     valeur: {id: PCF-RET-04, libelle: "Demi-part fiscale des veuves et veufs rétablie", poste: recettes, moteur: "recette:retraites", debut: 2028, plein: 2028,
              montant: {crise: -1.7, prudent: -1.5, median: -1.3, optimiste: -1.1}}

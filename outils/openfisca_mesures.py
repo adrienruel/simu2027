@@ -369,6 +369,7 @@ class Base:
         foy = np.zeros(s["n_foyers"])
         foy[s["foyer"]] = self.pp
         comp["impot_revenu"] = -float((foy * sim.calculate("impot_revenu_restant_a_payer", an)).sum()) / 1e9
+        comp["csg"] = -float((self.pp * sim.calculate("csg", an)).sum()) / 1e9
         cout_m = np.bincount(s["menage"], weights=cout_i, minlength=s["n_menages"])
         return {"rd": rd, "uc": uc, "cout_m": cout_m, "cout": float((self.wm * cout_m).sum()) / 1e9,
                 "rd_total": float((self.wm * rd).sum()) / 1e9, "comp": comp}

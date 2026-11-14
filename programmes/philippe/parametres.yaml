@@ -92,10 +92,11 @@ philippe_mesures:
     source: "Même encadrement : 60 % sur les dépenses fiscales des entreprises (≈ 40 Md€ : CIR, taux réduits, suramortissements) et les subventions"
   ir_naissance:
     valeur: {id: PHI-FIS-02, enfants: true, instrument: travail, incidence: ir, libelle: "Exonération d'impôt sur le revenu trois ans après une naissance (moins de 3 000 € d'impôt), 3 000 € par an pour les autres", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
-             montant: {crise: -3.3, prudent: -3.0, median: -3.0, optimiste: -2.8}}
+             montant: {crise: -1.6, prudent: -1.5, median: -1.5, optimiste: -1.4}}
     unite: md_eur
     annee_euros: 2026
     statut: SOURCE
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique au prudent, même écart entre scénarios qu'avant ; outils/openfisca_mesures.py, DÉCISION d'Adrien). Ancien montant : {crise: -3.3, prudent: -3.0, median: -3.0, optimiste: -2.8}."
     source: "Site du candidat (« L'Heure de vérité », 08/10/2026) : coût ≈ 3 Md€ par an ; montée sur trois ans (trois générations de naissances) ; site du 12/11/2026 : exonération pour les ménages du 4e au 6e décile et le début du 7e, réduction de 3 000 € par an pour les familles plus aisées qui travaillent (même périmètre que le chiffrage de 3 Md€)"
   donations:
     valeur: {id: PHI-FIS-04, instrument: successions, libelle: "Plafonds de donation aux enfants et petits-enfants doublés pendant les trois premières années du quinquennat", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028, fin: 2030,

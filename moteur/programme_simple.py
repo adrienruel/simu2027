@@ -388,6 +388,9 @@ class ProgrammeSimple:
                 x = dict(par.valeur)
                 x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
                 serie = self.serie(x, idx)
+                # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
+                from moteur import micro as _micro
+                serie = {t: v * _micro.indice(p, self.nom, x["id"], t) for t, v in serie.items()}
                 court = nom.split(".")[1]
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),

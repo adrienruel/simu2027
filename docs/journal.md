@@ -1510,3 +1510,10 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - `allocation_unique` : 350 € par mois et par famille, pleine jusqu'au 3e décile, nulle à la médiane, à la place des
   prestations familiales, sans perdant : − 8,1 Md€ (moteur − 7). Sans garantie : + 4,3 Md€. Lecture à valider.
 - Part des arrivés récents (30 %) documentée (premiers titres de la DGEF). Bilan : `docs/microsimulation.md`.
+
+## 14/11/2026 (nuit) — Vieillissement statique ; recettes d'IR et de CSG de la micro dans le moteur
+
+- `outils/vieillissement.py` (un processus par programme, ou par année : mémoire) ; `moteur/micro.py` et option
+  `microsimulation.recettes_vieillies` ; trois montants recalés (LIS-SOC-01, PCF-RET-03, PHI-FIS-02).
+- Pauvreté par programme et par année dans `sorties/micro_vieillissement.csv`. Déficit 2037 au prudent : Philippe
+  − 0,07 ; Roussel + 0,06 ; Lisnard + 0,03.

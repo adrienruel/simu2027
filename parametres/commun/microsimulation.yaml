@@ -184,3 +184,8 @@ microsimulation:
     statut: HYPOTHESE
     source: "Insee Première n° 2076 (octobre 2025) : 6,03 millions d'étrangers en 2024 (8,8 % de la population) ; ministère de l'Intérieur (recensement 2022) : environ un quart des étrangers originaires de l'Union européenne ; iFRAP d'après la Cnaf : les étrangers reçoivent 13 % des prestations versées par les Caf ; Insee : 313 000 à 347 000 entrées d'immigrés par an (2023-2024)"
     note: "Étrangers en millions de personnes. Nationalité tirée par ménage (tous ses membres), avec une probabilité qui croît quand le niveau de vie baisse, calée pour que les ménages étrangers reçoivent 13 % des prestations des Caf. Ressortissants de l'UE : un quart des ménages étrangers, au hasard (protégés par le droit de l'Union : jamais exclus par les mesures de nationalité). Arrivés depuis moins de cinq ans : 30 % des ménages étrangers hors UE, au hasard. Ordre de grandeur : ≈ 1,5 à 1,7 million de premiers titres de séjour en cinq ans (384 230 en 2025, DGEF, demographie.titres_vers_solde), dont environ un tiers d'étudiants souvent repartis : ≈ 1,2 million d'adultes encore présents, sur ≈ 3,6 millions d'adultes étrangers hors UE (Insee) : 30 à 35 % ; 30 % retenu (bas de la fourchette). DÉCISION faute d'enquête : pas de profil propre par nationalité au-delà du niveau de vie."
+  recettes_vieillies:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Phase F4, DÉCISION d'Adrien du 14/11/2026 : les mesures d'impôt sur le revenu et de CSG codées dans OpenFisca suivent, année après année, l'indice de la population vieillie du programme (moteur/micro.py, parametres/donnees/micro_recettes_annees.csv). Faux : montant de 2026 qui suit seulement les salaires."

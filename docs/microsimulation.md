@@ -218,3 +218,26 @@ Effet sur le déficit 2037 au prudent : Mélenchon + 0,57 point, Tondelier + 0,2
 Les montants du moteur gardent le risque juridique (crise à zéro ou presque) : la micro donne l'effet d'une
 application complète. Les emplois entrent dans les trajectoires au prorata du montant du moteur (montant du moteur /
 effet statique de la micro), pour toutes les mesures où la micro donne les emplois.
+
+## Vieillissement statique et recettes de la micro dans le moteur (14/11/2026, nuit, décision d'Adrien)
+
+`outils/vieillissement.py` recale les poids de 2026, pour 2029, 2032, 2037 et 2050 et pour chaque programme, sur :
+la population du programme par âge (naissances et immigration comprises), l'emploi et le chômage de sa trajectoire
+(prudent), les retraités du COR, le nombre de ménages ; les pensions suivent la pension moyenne du moteur rapportée
+aux salaires (− 14 % en 2050 : pensions sur les prix, salaires sur la productivité). Revenus et législation de 2026 en
+unités de salaire, comme le statu quo du moteur (barèmes qui suivent les salaires).
+
+Statu quo, en unités de salaire : impôt sur le revenu − 4 % de 2029 à 2050, CSG − 2 % (moteur : prélèvements sur les
+salaires − 1,6 %, sur les pensions + 1 %) ; pauvreté 15,0 % → 14,2 %.
+
+Pauvreté (statique, mesures codées seulement) en 2032 : statu quo 14,9 % ; Philippe 13,8 ; Tondelier 14,3 ; Le Pen
+14,8 ; Lisnard 15,1 ; Zemmour 15,3 ; Retailleau 15,4 ; Roussel 15,4 (seuil relatif : la médiane monte avec la CSG des
+retraités) ; Mélenchon 0 (la garantie porte chaque ménage au-dessus de 60 % de la médiane). `sorties/micro_vieillissement*.csv`.
+
+**Recettes de la micro dans le moteur** (`microsimulation.recettes_vieillies`, `moteur/micro.py`) : neuf mesures d'IR
+et de CSG suivent l'indice de la population vieillie de leur programme (effet statique l'année t / en 2026) ; trois
+montants de plus recalés sur OpenFisca (quotient familial de Lisnard − 4,4 ; CSG des retraités de Roussel − 23,1 ;
+IR après une naissance de Philippe − 1,5, le chiffre du candidat n'est plus repris). Indices en 2050 : quotient
+familial 0,80 (moins de familles), IR des jeunes 0,85, CSG des retraités 0,94 (pensions plus basses par rapport aux
+salaires), tranche à 9 % 0,95-0,99. Déficit 2037 au prudent : Philippe 11,33 → 11,26, Roussel + 0,06, Lisnard
++ 0,03, autres ≤ 0,01.
