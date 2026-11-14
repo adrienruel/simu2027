@@ -85,7 +85,8 @@ def _ranger(valeurs, score):
     return out
 
 
-def generer(p: Parametres | None = None, n_menages: int | None = None, graine: int = GRAINE) -> list[dict]:
+def generer(p: Parametres | None = None, n_menages: int | None = None, graine: int = GRAINE,
+            caler_beneficiaires: bool | None = None) -> list[dict]:
     p = p or Parametres()
     v = lambda c: p.val("microsimulation." + c)  # noqa: E731
     rng = np.random.default_rng(graine)
@@ -402,6 +403,24 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
             "logement": "locataire_prive" if et else logement[i],
             "loyer_mensuel": round(float(loyer_et[k_et[j]] if et else loyer[i]), 2), "zone": zone_et[k_et[j]] if et else zone[i],
         })
+    # --- Second calage : effectifs de bénéficiaires publiés (OpenFisca dans la boucle) ------------------------
+    if caler_beneficiaires is None:
+        caler_beneficiaires = bool(v("calage_beneficiaires"))
+    if caler_beneficiaires:
+        from outils import openfisca_population as op
+        ind = op.indicateurs(lignes)
+        ben = v("beneficiaires")
+        hand_u = np.bincount(men, weights=handicap.astype(float), minlength=n)  # garde l'effectif tiré
+        A2 = np.vstack([A] + [ind[k][None, :] for k in ben] + [hand_u[None, :]])
+        c2 = np.concatenate([cibles, [ben[k] * 1e6 for k in ben], [hand["adultes"] * 1e6]])
+        w = _raking(A2, c2, w0)
+        ECARTS_CALAGE[:] = list((A2 @ w) / c2 - 1)
+        k_div = cap["dividendes"] * 1e9 / (w * div).sum()
+        k_fon = cap["revenus_fonciers"] * 1e9 / (w * fon).sum()
+        for l in lignes:
+            l["poids"] = round(float(w[l["unite"]]), 3)
+            l["dividendes"] = round(l["dividendes"] * k_div, 2)
+            l["revenus_fonciers"] = round(l["revenus_fonciers"] * k_fon, 2)
     return lignes
 
 

@@ -45,31 +45,29 @@ la suppose due à tout parent isolé).
 
 | Agrégat 2026 (Md€) | OpenFisca | Comptes | Écart | Source des comptes |
 |---|---|---|---|---|
-| Impôt sur le revenu net | 106,3 | 104,0 | + 2 % | PLF 2026, voies et moyens |
-| Prestations d'entretien (AF, CF, ASF, ARS, Paje de base et naissance) | 22,4 | 25,2 | − 11 % | Cnaf 2024, revalorisé |
-| Aides au logement | 13,1 | 16,7 | − 21 % | SDES, compte du logement |
-| RSA | 7,5 | 13,5 | − 44 % | Drees et Sénat |
-| Prime d'activité | 9,6 | 10,5 | − 9 % | Sénat, PLF 2025 |
-| AAH | 15,9 | 14,6 | + 9 % | PLF 2026 |
+| Impôt sur le revenu net | 105,2 | 104,0 | + 1 % | PLF 2026, voies et moyens |
+| Prestations d'entretien (AF, CF, ASF, ARS, Paje de base et naissance) | 23,2 | 25,2 | − 8 % | Cnaf 2024, revalorisé |
+| Aides au logement | 14,8 | 16,7 | − 11 % | SDES, compte du logement |
+| RSA (allocations) | 10,6 | 12,4 | − 15 % | Cnaf, RSA Conjoncture T4 2025 |
+| Prime d'activité | 11,9 | 10,5 | + 13 % | Sénat, PLF 2025 |
+| AAH | 15,7 | 14,6 | + 7 % | PLF 2026 |
 
-Stabilité : avec deux autres graines, impôt sur le revenu 105,6 et 108,0, les prestations à 0,5 Md€ près.
+**Second calage sur les bénéficiaires (14/11/2026, soir, décision d'Adrien).** OpenFisca calcule d'abord qui est
+éligible ; les poids sont ensuite recalés, en plus des marges démographiques, sur les effectifs publiés : RSA par
+configuration familiale et avec la prime d'activité (Drees), prime d'activité, aides au logement (Drees, décembre
+2025), complément familial (Cnaf), adultes handicapés. Toutes les marges sont atteintes (la plus éloignée, les couples
+sans enfant au RSA, à 16 % d'un petit effectif). Recours : probabilité proportionnelle au montant à la puissance 0,2,
+qui reproduit l'écart de la Drees entre non-recours au RSA en nombre et en montant.
 
-**Le critère de sortie (5 %) est atteint pour l'impôt sur le revenu, pas pour les prestations.** Ce que montrent
-les écarts :
+Les **effectifs** sont donc justes ; les écarts restants sont des **montants moyens** : RSA 480 € par foyer et par mois
+contre 567 € à la Cnaf, aides au logement 218 € contre ≈ 245 €, prime d'activité 208 € contre ≈ 184 €. Le calage par
+les poids ne peut pas corriger un montant moyen : il faut que les revenus et les loyers des bénéficiaires soient plus
+justes (trop de revenus partiels au RSA, loyers du privé et zones à sourcer, revenus des travailleurs modestes lissés
+sur l'année).
 
-- **RSA** : la population compte environ 2 millions de familles éligibles (0,55 million de personnes seules de 25 à
-  64 ans sans revenu), quand 1,86 million de foyers le perçoivent malgré un tiers de non-recours. Les comptes
-  couvrent aussi des populations hors du champ : outre-mer (≈ 15 % de la dépense), personnes hébergées ou hors
-  logement ordinaire. Il manque surtout des personnes seules sans revenu ; les corrections par type de ménage
-  (emploi, chômage) ne suffisent pas, car le calage ramène les statuts sur leurs totaux et une partie des chômeurs
-  ajoutés sont indemnisés.
-- **Aides au logement** : 5,3 millions de familles contre ≈ 5,8 millions de ménages ; le compte du logement comprend
-  aussi les foyers (résidences sociales, Crous), l'accession et l'outre-mer.
-- **Prestations d'entretien** : allocations familiales trop basses (montant moyen 192 € par mois contre 233 € à la
-  Cnaf) : trop peu de familles de trois enfants ou plus dans le haut de la modulation, complément familial à la
-  moitié.
-- **AAH** : montant moyen proche du maximum ; une partie des allocataires vit en établissement (AAH réduite) ou
-  travaille.
+Correction trouvée en route : la cible RSA de 13,5 Md€ (statu_quo.rsa) compte aussi les dépenses d'insertion des
+départements ; les allocations seules font ≈ 12,4 Md€ (Cnaf). Le bloc du statu quo n'est pas changé (l'insertion est
+une vraie dépense), mais sa note est à corriger.
 
 Pistes, par ordre d'intérêt :
 

@@ -199,27 +199,72 @@ def totaux(lignes: list[dict], annee: int = 2026, tbs=None) -> dict:
                 y = y * recourt(y, poids[ent], asf * 1e6 / float((poids[ent] * (y > 0)).sum()), graine=7, forme="uniforme")
             x = x + y
         if nom in recours:
-            x = x * recourt(x, poids[ent], recours[nom], graine=zlib.crc32(nom.encode()) % 1000)
+            x = x * recourt(x, poids[ent], recours[nom], graine=zlib.crc32(nom.encode()) % 1000, gamma=recours["forme"])
         res[nom] = signe * float((x * poids[ent]).sum()) / 1e9
     return res
 
 
-def recourt(montant, poids, part, graine=0, forme="racine"):
-    """Tirage du recours : probabilité min(1, c·√montant), c calé pour que la part pondérée des éligibles qui
-    perçoivent soit « part » (microsimulation.recours)."""
+def recourt(montant, poids, part, graine=0, forme="racine", gamma=0.5):
+    """Tirage du recours : probabilité min(1, c·montant^gamma) (forme « racine ») ou uniforme, c calé pour que la
+    part pondérée attendue des éligibles qui perçoivent soit « part » (microsimulation.recours)."""
     rng = np.random.default_rng(graine)
     u = rng.random(len(montant))
     elig = montant > 0
-    r = np.sqrt(np.maximum(montant, 0)) if forme == "racine" else elig.astype(float)
-    lo, hi = 0.0, 10.0
-    for _ in range(60):
+    if forme == "uniforme":
+        return (elig & (u < part)).astype(float)
+    return (u < proba_recours(montant, poids, part, gamma)).astype(float)
+
+
+def indicateurs(lignes: list[dict], annee: int = 2026) -> dict[str, np.ndarray]:
+    """Nombre attendu de familles bénéficiaires par unité de tirage, pour le calage sur les effectifs publiés
+    (microsimulation.beneficiaires) : RSA et prime d'activité après recours (probabilité attendue, comme le
+    tirage de `recourt`), aides au logement et complément familial (recours complet)."""
+    sim, s = simulation(lignes, annee)
+    an = str(annee)
+    poids_p = np.array([l["poids"] for l in lignes])
+    unite_p = np.array([l["unite"] for l in lignes])
+    n_u = int(unite_p.max()) + 1
+    fam_unite = np.zeros(s["n_familles"], int)
+    fam_unite[s["famille"]] = unite_p
+    wf = np.zeros(s["n_familles"])
+    wf[s["famille"]] = poids_p
+    recours = Parametres().val("microsimulation.recours")
+    out, ind = {}, {}
+    for nom, var in (("rsa", "rsa"), ("prime_activite", "ppa"), ("aides_logement", "aide_logement"), ("complement_familial", "cf")):
+        x = sim.calculate_add(var, an)
+        ind[nom] = (proba_recours(x, wf, recours[nom], recours["forme"]) if nom in recours else (x > 0).astype(float))
+        ind[nom + "_montant"] = x
+    # RSA : avec ou sans prime d'activité (Drees : 23 % des allocataires du RSA perçoivent aussi la prime)
+    ind["rsa_avec_prime"] = ind["rsa"] * (ind["prime_activite_montant"] > 0)
+    # RSA par configuration familiale (Drees, fiche 23)
+    couple = np.zeros(s["n_familles"], bool)
+    enf = np.zeros(s["n_familles"], bool)
+    for j, r in enumerate(s["role_famille"]):
+        couple[s["famille"][j]] |= r == "conjoint"
+        enf[s["famille"][j]] |= r == "enfant"
+    for cle, m in (("rsa_seul", ~couple & ~enf), ("rsa_monoparentale", ~couple & enf), ("rsa_couple_sans_enfant", couple & ~enf),
+                   ("rsa_couple_avec_enfants", couple & enf)):
+        ind[cle] = ind["rsa"] * m
+    for nom in ("rsa_avec_prime", "rsa_seul", "rsa_monoparentale", "rsa_couple_sans_enfant", "rsa_couple_avec_enfants",
+                "prime_activite", "aides_logement", "complement_familial"):
+        out[nom] = np.bincount(fam_unite, weights=ind[nom], minlength=n_u)
+    return out
+
+
+def proba_recours(montant, poids, part, gamma=0.5):
+    """Probabilité de recours min(1, c·montant^gamma) des familles éligibles, c calé pour que la part pondérée
+    attendue soit « part »."""
+    elig = montant > 0
+    r = np.where(elig, np.maximum(montant, 1e-9) ** gamma, 0.0)
+    lo, hi = 0.0, 1e3
+    for _ in range(80):
         c = (lo + hi) / 2
-        pris = elig & (u < np.minimum(1, c * r))
-        if (poids * pris).sum() / (poids * elig).sum() < part:
+        pr = np.where(elig, np.minimum(1, c * r), 0.0)
+        if (poids * pr).sum() / (poids * elig).sum() < part:
             lo = c
         else:
             hi = c
-    return pris.astype(float)
+    return pr
 
 
 if __name__ == "__main__":

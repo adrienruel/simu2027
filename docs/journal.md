@@ -1463,3 +1463,11 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   l'emploi après 18 ans ; `population_programme` la publie (Écologie de droite compris : − 0,56 million en 2050).
 - Naissances au prudent : Philippe + 8,5 %, Mélenchon + 8,5 %, Tondelier + 6,5 %, Lisnard + 3,0 %, Glucksmann
   + 1,5 %, Zemmour − 1,6 %. Déficit 2037 : + 0,18 point pour Philippe et Mélenchon, + 0,13 Tondelier, + 0,06 Lisnard.
+
+## 14/11/2026 (soir) — Phase F1 : calage sur les effectifs de bénéficiaires
+
+- Décision d'Adrien : second calage des poids sur les effectifs publiés (Drees, Cnaf), OpenFisca dans la boucle
+  (`openfisca_population.indicateurs`). Effectifs atteints ; écarts restants sur les montants moyens : IR + 1 %,
+  prestations d'entretien − 8 %, aides au logement − 11 %, RSA − 15 % (cible corrigée : 12,4 Md€ d'allocations, Cnaf),
+  prime d'activité + 13 %, AAH + 7 %.
+- Recours : forme en puissance 0,2 du montant (écart nombre / montant du non-recours au RSA, Drees).

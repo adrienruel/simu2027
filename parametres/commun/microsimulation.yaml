@@ -99,17 +99,17 @@ microsimulation:
     source: "dividendes.revenus_capitaux_mobiliers_2023 (53 Md€) ; revenus_capital.loyers (30 Md€)"
     note: "En Md€. Répartis sur les ménages selon le rang de leur revenu avec une loi de Pareto (paramètre 1,3 : le dernier centile reçoit environ la moitié des dividendes, Insee-DGFiP) ; dividendes au prélèvement forfaitaire (12,8 % d'IR), loyers au barème après abattement."
   cibles_2026:
-    valeur: {impot_revenu: 104.0, prestations_entretien: 25.2, aides_logement: 16.7, rsa: 13.5, prime_activite: 10.5, aah: 14.6}
+    valeur: {impot_revenu: 104.0, prestations_entretien: 25.2, aides_logement: 16.7, rsa: 12.4, prime_activite: 10.5, aah: 14.6}
     unite: sans_unite
     statut: SOURCE
     source: "PLF 2026, évaluation des voies et moyens : impôt net sur le revenu 104,0 Md€ ; Cnaf, Analyses statistiques n° 7 : prestations d'entretien (allocations familiales, complément familial, allocation de soutien familial, allocation de rentrée scolaire, allocation de base et prime à la naissance de la Paje) 24,5 Md€ en 2024 ; autres prestations : statu_quo.aides_logement, rsa, prime_activite, aah"
-    note: "En Md€. Critère de sortie de la phase F : impôt sur le revenu et prestations à 5 % près. Prestations d'entretien : 24,5 × 1,009 × 1,021 (inflation 2025 et 2026, comme statu_quo.prestations_familiales) ≈ 25,2 ; le complément de mode de garde, la PreParE et l'AEEH (≈ 9,5 Md€ des 34,7 de statu_quo.prestations_familiales) dépendent de choix de garde que la population n'a pas : ils restent au moteur agrégé. L'IR net de l'État comprend le prélèvement forfaitaire sur les revenus du capital et la contribution sur les hauts revenus."
+    note: "En Md€. Critère de sortie de la phase F : impôt sur le revenu et prestations à 5 % près. Prestations d'entretien : 24,5 × 1,009 × 1,021 (inflation 2025 et 2026, comme statu_quo.prestations_familiales) ≈ 25,2 ; le complément de mode de garde, la PreParE et l'AEEH (≈ 9,5 Md€ des 34,7 de statu_quo.prestations_familiales) dépendent de choix de garde que la population n'a pas : ils restent au moteur agrégé. L'IR net de l'État comprend le prélèvement forfaitaire sur les revenus du capital et la contribution sur les hauts revenus. RSA : allocations seules, 3,07 × 4 × 1,01 ≈ 12,4 ; statu_quo.rsa (13,5) compte aussi les dépenses d'insertion des départements (les 11,5 Md€ bruts de la Drees pour 2024 sont « allocations et insertion »)."
   recours:
-    valeur: {rsa: 0.65, prime_activite: 0.50}
+    valeur: {rsa: 0.65, prime_activite: 0.50, forme: 0.2}
     unite: taux
     statut: SOURCE
     source: "Drees, Études et Résultats n° 1370 (mai 2026) : non-recours au RSA entre 33 % et 37 % des foyers éligibles fin 2021 (29 à 32 % des montants) ; n° 1379 (juillet 2026) : non-recours à la prime d'activité entre 48 % et 52 % des foyers éligibles, souvent pour de petits montants ou une éligibilité passagère"
-    note: "Part des familles éligibles qui perçoivent la prestation. Tirage au hasard (graine fixe), avec une probabilité qui croît comme la racine du montant dû, calée pour donner cette part en nombre de familles : la part en montant est donc plus forte, comme le constate la Drees. Aides au logement, AAH et prestations familiales : recours complet (non-recours faible, non mesuré)."
+    note: "Part des familles éligibles qui perçoivent la prestation. Tirage au hasard (graine fixe), avec une probabilité proportionnelle au montant dû à la puissance « forme », calée pour donner cette part en nombre de familles. Forme 0,2 : reproduit l'écart de la Drees pour le RSA entre non-recours en nombre (33 à 37 %) et en montant (29 à 32 %), soit une part en montant de 0,70 pour 0,65 en nombre ; même forme pour la prime d'activité, faute de mesure. Aides au logement, AAH et prestations familiales : recours complet (non-recours faible, non mesuré)."
   mois_travailles:
     valeur: {taux_mensuel_min: 0.5, taux_mensuel_max: 1.0}
     unite: sans_unite
@@ -167,3 +167,14 @@ microsimulation:
     unite: taux
     statut: HYPOTHESE
     note: "Part des adultes handicapés tirés parmi les salariés à bas salaire (temps partiel, établissements et services d'aide par le travail) plutôt que parmi les inactifs : l'AAH y est différentielle. Ordre de grandeur, à sourcer (Drees, minima sociaux)."
+  calage_beneficiaires:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 14/11/2026 : second calage des poids sur les effectifs de bénéficiaires publiés, OpenFisca dans la boucle (il calcule qui est éligible ; le calage ne change que les poids). Les montants versés restent un contrôle. Faux : calage sur les seules marges démographiques et d'activité."
+  beneficiaires:
+    valeur: {rsa_avec_prime: 0.42, rsa_seul: 1.03, rsa_monoparentale: 0.61, rsa_couple_sans_enfant: 0.037, rsa_couple_avec_enfants: 0.166, prime_activite: 4.76, aides_logement: 5.66, complement_familial: 0.844}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Drees, Minima sociaux et prestations de solidarité, édition 2025, fiche 23 : 23 % des allocataires du RSA perçoivent aussi la prime d'activité ; fin 2023, 56 % de personnes seules sans enfant, 33 % de familles monoparentales, 2 % de couples sans enfant, 9 % de couples avec enfants ; Drees, suivi mensuel des prestations de solidarité (février 2026) : fin décembre 2025, 1,84 million de foyers au RSA, 4,76 millions à la prime d'activité, 5,66 millions d'allocataires des aides au logement ; Cnaf, Analyses statistiques n° 7 : 844 000 familles au complément familial en 2024 (régime général)"
+    note: "En millions de familles. RSA : 1,84 million, dont 23 % avec la prime d'activité (0,42), réparti selon la configuration familiale de la Drees (1,03 ; 0,61 ; 0,037 ; 0,166). RSA et prime d'activité : bénéficiaires après recours (probabilité attendue du tirage). Aides au logement : y compris les foyers et résidences hors du champ de la population, qui sont donc représentés par des ménages ordinaires semblables (limite). Complément familial : Caf seules (sans la MSA)."
