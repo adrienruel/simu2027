@@ -1427,3 +1427,14 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   (`bouclage.emplois_mesange`) au lieu de la loi d'Okun : retour à l'équilibre pour la dépense.
 - `test_offre.test_interrupteur` passé sans les profils. Suite complète : verte. Récapitulatif et effet sur les
   14 trajectoires : `docs/bouclage.md` (réécrit).
+
+## 14/11/2026 (soir) — Phase F1 : population synthétique et premier calage d'OpenFisca
+
+- Décision d'Adrien : base micro = population synthétique calée sur des tableaux publics (remplaçable par l'ERFS).
+  `outils/population_synthetique.py` : 20 000 ménages (≈ 43 000 personnes), 50 marges de calage atteintes à 1,3 %
+  près ; paramètres dans `parametres/commun/microsimulation.yaml` (nouveau fichier commun).
+- `outils/openfisca_population.py` : législation 2026, recours au RSA et à la prime d'activité (Drees 2026).
+  Impôt sur le revenu 106,3 Md€ contre 104,0 au PLF (+ 2 %) ; prime d'activité − 9 %, prestations d'entretien
+  − 11 %, aides au logement − 21 %, RSA − 44 %, AAH + 9 %. Critère de sortie atteint pour l'IR seulement ; diagnostic
+  et pistes (calage sur les effectifs de bénéficiaires) dans `docs/microsimulation.md`.
+- `tests/test_microsimulation.py` (5 tests, 37 s).
