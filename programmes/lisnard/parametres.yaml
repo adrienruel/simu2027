@@ -146,7 +146,7 @@ lisnard_mesures:
     statut: HYPOTHESE
     source: "Fiche « Questions » (16/10/2026) ; encadrement : droits de succession ≈ 16 Md€, dont ≈ 30 % payés dans les tranches au-delà de 20 % en ligne directe (CAE, 2021) ; transmission d'entreprise déjà exonérée à 75 % (pacte Dutreil)"
   quotient_familial:
-    valeur: {id: LIS-SOC-01, instrument: travail, incidence: haut, libelle: "Quotient familial déplafonné", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: LIS-SOC-01, enfants: true, instrument: travail, incidence: haut, libelle: "Quotient familial déplafonné", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -4.0, prudent: -3.5, median: -3.0, optimiste: -2.5}}
     unite: md_eur
     annee_euros: 2026

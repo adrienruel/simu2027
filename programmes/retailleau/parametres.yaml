@@ -161,7 +161,7 @@ retailleau_mesures:
     statut: HYPOTHESE
     source: "Se loger mieux et moins cher (28/05/2026), p. 33 ; encadrement : revenus fonciers ≈ 40 Md€ ; statut de la loi de finances pour 2026 au statu quo (≈ 0,1 à 0,2 Md€) ; option au PFU et amortissement élargi"
   credit_famille:
-    valeur: {id: RET-SOC-03, instrument: capital_entreprises, libelle: "Garde d'enfants : crédit d'impôt famille déplafonné, exonération relevée à 7 000 €", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: RET-SOC-03, enfants: garde, instrument: capital_entreprises, libelle: "Garde d'enfants : crédit d'impôt famille déplafonné, exonération relevée à 7 000 €", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -0.85, prudent: -0.8, median: -0.8, optimiste: -0.75}}
     unite: md_eur
     annee_euros: 2026

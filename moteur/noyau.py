@@ -73,6 +73,9 @@ class Mesure:
     # poids dans l'impulsion de demande (clé de demande.poids) quand il diffère de celui du poste et qu'il n'y a pas
     # d'instrument : ex. un capital versé aux ménages sur le poste retraites (« capital_menages », 13/11/2026)
     demande: str = ""
+    # soutien aux enfants (canal commun des naissances, moteur/naissances.py) : None = selon le poste (famille : oui),
+    # True / False, ou "garde" (accueil du jeune enfant : effet des places, demographie.creches_effet)
+    enfants: bool | str | None = None
 
 
 @dataclass

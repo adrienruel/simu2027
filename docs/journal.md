@@ -1449,3 +1449,17 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   migratoire). Taux d'emploi et nouveau taux d'activité des 18-66 ans rapportés à elle ; colonne `population_millions`.
   Lisnard 2050 au prudent : taux d'emploi 72,5 %, activité 78,2 % (statu quo 70,1 et 76,3) ; Zemmour 71,9 ;
   Philippe 70,9 ; Le Pen 69,5.
+
+## 14/11/2026 (soir) — Naissances : canal commun à tous les programmes
+
+- Décision d'Adrien : l'effet des mesures sur les naissances s'applique à tous (`moteur/naissances.py`, option
+  `demographie.naissances_communes`). Avant, seul Écologie de droite l'avait (ses ménages types et ses crèches).
+- Soutien monétaire moyen par enfant mineur (mesures du poste famille, ou `enfants: true` pour l'impôt : quotient
+  familial déplafonné de Lisnard, crédit d'impôt par enfant de Mélenchon, exonération après une naissance et prêt à
+  taux zéro de Philippe) × semi-élasticité commune (1 % pour 100 € par an en prudent) ; mesures d'accueil du jeune
+  enfant (`enfants: garde` : Mélenchon, Glucksmann, Philippe, Retailleau) par les places (coût Onape) et l'effet des
+  crèches. Aidants de Glucksmann et construction des places de Mélenchon exclus (`enfants: false`).
+- La population recalculée (migrations.effets, avec la variante migratoire) porte prestations, école, santé, puis
+  l'emploi après 18 ans ; `population_programme` la publie (Écologie de droite compris : − 0,56 million en 2050).
+- Naissances au prudent : Philippe + 8,5 %, Mélenchon + 8,5 %, Tondelier + 6,5 %, Lisnard + 3,0 %, Glucksmann
+  + 1,5 %, Zemmour − 1,6 %. Déficit 2037 : + 0,18 point pour Philippe et Mélenchon, + 0,13 Tondelier, + 0,06 Lisnard.

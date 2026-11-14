@@ -403,14 +403,14 @@ glucksmann_mesures:
     statut: SOURCE
     source: "Acte I, p. 78 : plan « doté d'un milliard d'euros » ; arbitrage : par an"
   garde_enfant:
-    valeur: {id: GLU-SOC-04, libelle: "Droit opposable à la garde d'enfant", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2032,
+    valeur: {id: GLU-SOC-04, enfants: garde, libelle: "Droit opposable à la garde d'enfant", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2032,
              montant: {crise: 3, prudent: 2.5, median: 2, optimiste: 1.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : service public de la petite enfance, 200 000 places manquantes (HCFEA, 2023) ; ≈ 12 000 € de fonctionnement public par place, montée en cinq ans ; investissement des collectivités en partie au statu quo"
   aidants:
-    valeur: {id: GLU-SOC-05, instrument: transferts_actifs, libelle: "Indemnité et droit au répit des proches aidants", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
+    valeur: {id: GLU-SOC-05, enfants: false, instrument: transferts_actifs, libelle: "Indemnité et droit au répit des proches aidants", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
              montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.5}}
     unite: md_eur
     annee_euros: 2026

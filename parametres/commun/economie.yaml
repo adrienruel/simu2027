@@ -565,6 +565,7 @@ demographie:
     source: "Encadrement : allocation de naissance de 2 500 € en Espagne (2007-2010) : +3 % de naissances (González et Trommlerová, 2023), soit ≈ 2 % par 100 € par an d'enfance ; Israël, baisse de l'allocation de 150 shekels par mois (≈ 400 € par an) en 2003 : −7,5 % de fécondité (Cohen, Dehejia et Romanov, 2013) ; une grande part de ces effets est de calendrier (revue CFFP, Université de Sherbrooke, 2026)."
     note: "Variation relative des naissances pour 100 € par an de soutien en plus par enfant. Crise : borne haute (l'effet le plus défavorable si le soutien baisse) ; prudent et médian : la moitié, effets de calendrier retirés ; optimiste : le quart."
   natalite_montee: {valeur: 3, unite: sans_unite, statut: HYPOTHESE, note: "Années pour que l'effet sur les naissances soit plein, à partir de 2030 (premières naissances conçues sous le nouveau système)."}
+  cout_place_accueil: {valeur: 19450, unite: eur_an, annee_euros: 2026, statut: SOURCE, source: "Onape, édition 2025 : prix de revient d'une place en crèche PSU", note: "Canal commun des naissances (moteur/naissances.py) : places d'accueil = dépense de fonctionnement des mesures « garde » / ce coût. Même valeur que famille.cout_place_fonctionnement d'Écologie de droite."}
   creches_effet:
     valeur: {crise: 0.0, prudent: 0.014, median: 0.028, optimiste: 0.028}
     unite: sans_unite

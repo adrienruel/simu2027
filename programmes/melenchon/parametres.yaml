@@ -206,7 +206,7 @@ melenchon_mesures:
     statut: HYPOTHESE
     source: "Encadrement : avantage du quotient conjugal ≈ 8 à 10 Md€ (Conseil des prélèvements obligatoires ; Allègre, Périvier et Pucci, OFCE, 2023, ≈ 9 Md€ pour une individualisation pure) ; prudent ≈ 65 % (choix de déclaration, abattements de transition)"
   credit_impot_enfant:
-    valeur: {id: LFI-REC-03, instrument: travail, incidence: ir, libelle: "Crédit d'impôt par enfant pour toutes les familles (à la place du quotient familial)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: LFI-REC-03, enfants: true, instrument: travail, incidence: ir, libelle: "Crédit d'impôt par enfant pour toutes les familles (à la place du quotient familial)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -1.5, prudent: -1.0, median: 0.0, optimiste: 0.0}}
     unite: md_eur
     annee_euros: 2026
@@ -934,7 +934,7 @@ melenchon_mesures:
     statut: HYPOTHESE
     source: "Encadrement : aide sociale à l'enfance ≈ 10 Md€ (DREES) : +10 % ≈ 1,0 ; jeunes majeurs jusqu'à 25 ans ≈ 0,3 (tondelier_mesures.ase_25_ans) ; PJJ et plan CIIVISE ≈ 0,3"
   petite_enfance_places:
-    valeur: {id: LFI-COL-05, libelle: "Service public de la petite enfance : 500 000 places d'accueil ouvertes progressivement (fonctionnement)", poste: famille, moteur: pib, debut: 2028, plein: 2037,
+    valeur: {id: LFI-COL-05, enfants: garde, libelle: "Service public de la petite enfance : 500 000 places d'accueil ouvertes progressivement (fonctionnement)", poste: famille, moteur: pib, debut: 2028, plein: 2037,
              montant: {crise: 5.0, prudent: 4.5, median: 4.0, optimiste: 3.5}}
     unite: md_eur
     annee_euros: 2026
@@ -942,14 +942,14 @@ melenchon_mesures:
     source: "Encadrement : place de crèche ≈ 17 000 € par an de fonctionnement, dont ≈ 70 % publics (CNAF, Observatoire de l'accueil du jeune enfant) ; mélange avec les assistantes maternelles et jardins d'enfants : ≈ 9 000 € publics par place en moyenne × 500 000"
     note: "Arbitrage : ouverture sur dix ans (2028-2037). Emploi des mères en plus : non compté (optimiste)."
   petite_enfance_qualite:
-    valeur: {id: LFI-COL-05, libelle: "Crèches publiques gratuites, salaires relevés, un adulte pour cinq enfants, PMI renforcées", poste: famille, moteur: pib, debut: 2028, plein: 2032, fp: true,
+    valeur: {id: LFI-COL-05, enfants: garde, libelle: "Crèches publiques gratuites, salaires relevés, un adulte pour cinq enfants, PMI renforcées", poste: famille, moteur: pib, debut: 2028, plein: 2032, fp: true,
              montant: {crise: 2.8, prudent: 2.8, median: 2.5, optimiste: 2.2}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     note: "Gratuité ≈ 1,0 ; salaires +10 % ≈ 0,5 ; encadrement +20 % ≈ 1,0 ; PMI ≈ 0,3 (Md€)."
   petite_enfance_investissement:
-    valeur: {id: LFI-COL-05, libelle: "500 000 places d'accueil de la petite enfance (construction)", poste: investissement, moteur: fixe, debut: 2028, plein: 2028, fin: 2037,
+    valeur: {id: LFI-COL-05, enfants: false, libelle: "500 000 places d'accueil de la petite enfance (construction)", poste: investissement, moteur: fixe, debut: 2028, plein: 2028, fin: 2037,
              montant: {crise: 1.25, prudent: 1.25, median: 1.25, optimiste: 1.25}}
     unite: md_eur
     annee_euros: 2026
