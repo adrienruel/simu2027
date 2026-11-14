@@ -79,7 +79,8 @@ def recette_nette(p: Parametres) -> dict[int, float]:
             seul = [index * impot(12 * x / index, p) for x in pensions]
             ensemble = [sum(paires[i][j] * index * impot(6 * (pensions[i] + pensions[j]) / index, p) for j in range(10)) * 10
                         for i in range(10)]
-            k_couples = ((1 - cc["part_en_couple"]) * sum(seul) + cc["part_en_couple"] * sum(ensemble)) / sum(seul)
+            k_couples = (((1 - cc["part_en_couple"]) * sum(seul) + cc["part_en_couple"] * sum(ensemble)) / sum(seul)
+                         if sum(seul) > 0 else 1.0)  # aucun impôt des personnes seules (tirage extrême) : pas d'écart
         for i, d in enumerate(deciles, start=1):
             pension = pensions[i - 1]
             imp = index * impot(12 * pension / index, p)

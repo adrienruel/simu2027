@@ -991,3 +991,8 @@ enveloppe_economies:
     statut: HYPOTHESE
     source: "Capacité d'économie en fin de quinquennat, au-delà du statu quo, par domaine (toutes économies, nommées ou non), d'après les précédents français : État : RGPP 2007-2012 ≈ 7 à 10 Md€ (Cour des comptes, 2012), plan de 50 Md€ 2015-2017, volet État et agences 18 Md€ annoncés, réalisés en partie (Cour des comptes, 2017) ; opérateurs : ≈ 80 Md€ de dépenses, rationalisation de 2025-2026 ≈ 0,5 Md€ ; collectivités : baisse de la DGF de 2014-2017 ≈ 11 Md€, absorbée surtout par l'investissement ; santé : Ondam tenu à 1,75-2 % en 2015-2017, ≈ 3 à 4 Md€ d'économies par an déjà comptées par le statu quo (régulation) ; prestations : sous-revalorisation de 2019-2020 ≈ 3 à 5 Md€ (hors retraites)"
     note: "Décision d'Adrien du 11/11/2026 : les économies non détaillées sont déduites du programme (domaines qu'il vise : <nom>_enveloppe.intensite), domaine par domaine, moins ce que le programme chiffre déjà dans ce domaine ; jamais le chiffre du candidat, qui ne sert que de plafond. Retraites et assurance chômage hors enveloppe : leurs réformes sont des mesures nommées."
+
+# --- Incertitude chiffrée (phase D, 13/11/2026 ; moteur/incertitude.py) -----------------------------------------
+incertitude:
+  correlation: {valeur: 0.5, unite: sans_unite, statut: HYPOTHESE, note: "Part commune des tirages (z = √ρ Z + √(1 − ρ) ε) : les hypothèses de comportement, de productivité et de multiplicateur ont tendance à être bonnes ou mauvaises ensemble (cycle, confiance, politique de la BCE). ρ = 1 redonne les scénarios ; ρ = 0 suppose l'indépendance. 0,5 : milieu, à lire avec les variantes ρ = 0 et ρ = 1 publiées à côté."}
+

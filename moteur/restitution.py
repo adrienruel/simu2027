@@ -119,10 +119,15 @@ def donnees(p: Parametres | None = None) -> dict:
                     "deficit_2037": _r(r["deficit_2037"], 3), "deficit_2050": _r(r["deficit_2050"], 3)} for r in sens]
     fichier_inc = RACINE / "sorties" / "incertitude.json"
     incertitude = json.loads(fichier_inc.read_text(encoding="utf-8")) if fichier_inc.exists() else None
-    if incertitude:
-        incertitude = {"n": incertitude["n"], "resume": incertitude["resume"],
-                       "influence": [[k, round(v, 3)] for k, v in list(incertitude["influence_deficit_2037"].items())[:10]],
-                       "notes": {k: (p[k].note or "")[:160] for k in list(incertitude["influence_deficit_2037"])[:10] if k in p._p}}
+    if incertitude and "programmes" in incertitude:  # format de la phase D (13/11/2026) : Écologie de droite
+        x = incertitude["programmes"].get("ecologie_de_droite", {})
+        cles = [k.split("/")[0] for k, _ in x.get("sensibilite_deficit_2037", [])]
+        incertitude = {"n": incertitude["n"], "rho": incertitude["rho"],
+                       "resume": {k: v for k, v in x.items() if k.split("_")[0] in ("deficit", "dette", "chomage", "pib")},
+                       "influence": [[k, round(v, 3)] for k, v in x.get("sensibilite_deficit_2037", [])],
+                       "notes": {k: (p[k].note or "")[:160] for k in cles if k in p._p}}
+    else:
+        incertitude = None
     from .menages_types import comparer
     menages = [{"libelle": x["libelle"], "actuel": round(x["actuel"]["revenu_disponible"]),
                 "nouveau": round(x["nouveau"]["revenu_disponible"]), "epargne": round(x["nouveau"]["epargne_obligatoire"]),
