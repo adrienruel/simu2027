@@ -114,7 +114,7 @@ Effet **statique** sur le solde (Md€ de 2026, + = l'améliore) contre le chiff
 | Mélenchon | AAH à 1 700 € | − 10,8 | − 11,5 | Proche |
 | Mélenchon | Garantie d'autonomie au seuil de pauvreté | − 48,1 | − 28,0 | Le bas de la distribution est trop pauvre dans la population (1er décile : 8 600 € par an et par unité de consommation) : **la micro surestime** ; à recaler sur le taux et l'intensité de la pauvreté de l'Insee |
 | Le Pen | IR nul avant 30 ans (jusqu'à 4 SMIC) | − 6,5 | − 3,7 | Montaigne : 3,7 à 4,1 ; jeunes trop imposés dans la population ? à vérifier |
-| Le Pen | ASF doublée | − 4,2 | − 1,3 | Le moteur prend l'ASF à 1,6 Md€, la Cnaf donne 3,1 Md€ en 2024 : **le moteur sous-estime** ; la population la surestime un peu (4,2 / 2 = 2,1 de base… à revoir avec le montant moyen) |
+| Le Pen | ASF doublée | − 4,2 | − 1,3 | Le moteur prend l'ASF à 1,6 Md€, la Cnaf donne 3,1 Md€ en 2024 : **le moteur sous-estime** ; la population la surestime (4,2 Md€ d'ASF, montant moyen trop haut) ; le bon ordre de grandeur est ≈ − 3,1 |
 | Philippe | IR allégé trois ans après une naissance | − 1,5 | − 3,0 | Le candidat annonce 3 Md€ ; ici 1,5 |
 | Arthaud | Revalorisation de 1,2 % (AF, prime d'activité, APL) | − 0,7 | − 0,6 | Proche |
 
