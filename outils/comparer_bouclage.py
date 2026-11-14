@@ -12,9 +12,12 @@ from moteur.parametres import Parametres
 ANNEES = (2029, 2032, 2037, 2050)
 
 
+VARIANTE = {}  # options de la comparaison « avant » (par défaut : sans macro bouclée)
+
+
 def calcul(args):
-    nom, boucle, scen = args
-    p = Parametres().avec({"macro.bouclage": boucle})
+    nom, boucle, scen, var = args
+    p = Parametres().avec({"macro.bouclage": True, **var} if not boucle and var else {"macro.bouclage": boucle})
     res = noyau.simuler(p, noyau.charger(nom), scenarios=scen, contrefactuel=False)
     return nom, boucle, {s: {t: {k: res[s][t][k] for k in ("deficit", "dette_pib", "pib", "inflation", "taux_apparent", "chomage")}
                              for t in ANNEES} for s in res}
@@ -22,12 +25,15 @@ def calcul(args):
 
 def main():
     argv = sys.argv[1:]
+    if "--e5" in argv:  # avant = phase E sans le stock de capital commun
+        VARIANTE["macro.capital_commun"] = False
+        argv.remove("--e5")
     if "--scenario" in argv:
         i = argv.index("--scenario"); del argv[i:i + 2]
     arg = [a for a in argv if not a.startswith("--")]
     scen = [sys.argv[sys.argv.index("--scenario") + 1]] if "--scenario" in sys.argv else None
     noms = arg or noyau.programmes_disponibles()
-    taches = [(n, b, scen) for n in noms for b in (False, True)]
+    taches = [(n, b, scen, dict(VARIANTE)) for n in noms for b in (False, True)]
     with ProcessPoolExecutor(2) as ex:
         out = list(ex.map(calcul, taches))
     r = {}

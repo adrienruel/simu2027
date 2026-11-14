@@ -1406,3 +1406,12 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   passe désormais ses effets physiques au bouclage (ils étaient ajoutés après).
 - Banc : choc pétrolier à 30 % près à partir de la deuxième année. Suite : 384 tests, 7 min 41 s. Effet sur les
   déficits ≤ 0,02 point.
+
+## 14/11/2026 (après-midi) — Phase E5 : stock de capital commun
+
+- `moteur/capital.py` : la fiscalité des entreprises du canal d'offre commun passe par un stock de capital avec usure,
+  dont chaque euro produit rendement net + usure (mécanique des cohortes d'Écologie de droite). L'ancien calcul (PIB ×
+  part du capital × capital en plus) comptait 2,2 fois plus (part du capital appliquée à tout le PIB au lieu de la
+  valeur ajoutée des SNF). Baisse d'IS d'un point de PIB : +0,18 % de PIB à long terme (0,41 avant).
+- Déficit 2037 au prudent : Lisnard +0,08, Philippe +0,04, Le Pen +0,04 ; Mélenchon −0,06, Tondelier −0,04. Option
+  `macro.capital_commun`. Suite : 388 tests, 7 min 38 s.

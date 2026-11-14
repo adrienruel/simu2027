@@ -417,6 +417,22 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
                 dpib_productivite[t] += effet[t] / 100 * y[max(t, 2029)]
             out["detail"][i] = {"points_pib": pts, "effet_pib_pct": effet}
             continue
+        if i == "capital_entreprises" and p.val("macro.capital_commun"):
+            # phase E5 (14/11/2026) : stock de capital commun (moteur/capital.py), usure et valeur d'un euro de capital
+            # comme les cohortes d'entreprises d'Écologie de droite, au lieu de part du capital × PIB
+            from . import capital
+            r = capital.effet_fiscal(p, s, pts, annees)
+            effet = r["effet_pib_pct"]
+            part_emploi, _ = EMPLOI[i]
+            for t in annees:
+                out["dpib"][t] += r["pib"][t]
+                dpib_productivite[t] += (1 - part_emploi) * r["pib"][t]
+            serie = {t: part_emploi * effet[t] / 100 * e[t]["emploi"] for t in ANNEES}
+            canal = f"Offre : {LIBELLES[i]}"
+            prec = out["emplois"].get(canal, {t: 0.0 for t in ANNEES})
+            out["emplois"][canal] = {t: prec[t] + serie[t] for t in ANNEES}
+            out["detail"][i] = {"points_pib": pts, "effet_pib_pct": effet, "capital_md": r["capital"]}
+            continue
         el = {sc: elasticite(sc) for sc in {s, MIROIR[s]}}
         for t in annees:
             sc = s if pts[t] >= 0 else MIROIR[s]

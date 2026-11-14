@@ -106,6 +106,28 @@ Décisions d'Adrien (14/11, 11 h 28) : les cinq propositions validées telles qu
   0,83 point de PIB par point de facture, vitesse 0,35) : −0,13 / −0,19 / −0,21 / −0,22 / −0,21 contre −0,10 / −0,24 /
   −0,18 / −0,21 / −0,22 dans Mésange ; 30 % près à partir de la deuxième année (première : −34 %).
 
+## E5 : stock de capital commun (14/11, après-midi)
+
+`moteur/capital.py`, option `macro.capital_commun`, tests `tests/test_capital.py`.
+
+Constat : deux mécaniques chiffraient le même effet (impôt sur les entreprises → investissement → PIB). Le canal
+d'offre commun faisait PIB × part du capital (0,35) × capital en plus ; les cohortes d'entreprises d'Écologie de droite,
+un stock de capital avec usure (10 %), dont chaque euro produit son rendement net plus son usure (0,132 en prudent).
+Pour le même capital en plus, le premier comptait 2,2 fois plus : la part du capital s'applique à la valeur ajoutée
+des sociétés (1 545 Md€), pas à tout le PIB. Contrôle sur les comptes : taux de marge des SNF (32,2 %) × valeur
+ajoutée / capital des SNF (365 / 0,10 ≈ 3 650 Md€) ≈ 0,14 par euro, comme la mécanique d'Écologie de droite.
+
+Désormais commun : investissement en plus = − élasticité au coût du capital × variation du coût (montée en
+`macro.montee_invest` ans) × investissement des SNF ; capital accumulé avec usure ; PIB = capital × (rendement net +
+usure). Une baisse d'IS d'un point de PIB donne +0,18 % de PIB à long terme (+0,41 % avant). Contrôle : la baisse
+de l'IS de 33,3 à 25 % (coût du capital −3,8 %, élasticité de Mésange) donne ≈ +0,25 % de PIB. Écologie de droite
+garde ses cohortes par taille, qui suivent déjà cette mécanique. Les taux d'intérêt ne passent pas par ce module :
+leur effet, capital compris, est dans la variante de taux de Mésange (rétroaction du noyau).
+
+Effet sur le déficit 2037 au prudent : Lisnard +0,08 point, Philippe +0,04, Le Pen +0,04, Retailleau +0,02 (leurs
+baisses d'impôt sur les entreprises rapportent moins) ; Mélenchon −0,06, Tondelier −0,04 (leurs hausses coûtent
+moins) ; Écologie de droite inchangée.
+
 ## Effet sur les programmes (déficit, % du PIB, prudent : main au commit 7c511dc → phase E complète)
 
 | Programme | 2032 | 2037 | 2050 |
@@ -113,17 +135,17 @@ Décisions d'Adrien (14/11, 11 h 28) : les cinq propositions validées telles qu
 | Statu quo | 7,16 → 7,16 | 9,50 → 9,50 | 20,57 → 20,57 |
 | Écologie de droite | 4,16 → 4,54 | 4,15 → 4,61 | 4,89 → 5,64 |
 | Bertrand | 7,09 → 7,09 | 9,28 → 9,33 | 20,24 → 20,37 |
-| Retailleau | 7,73 → 7,70 | 10,46 → 10,39 | 24,29 → 24,18 |
-| Philippe | 8,34 → 8,28 | 11,25 → 11,22 | 26,92 → 26,98 |
-| Attal | 8,66 → 8,43 | 11,54 → 11,37 | 26,82 → 26,33 |
-| Tondelier | 9,63 → 9,02 | 13,98 → 12,80 | 33,85 → 30,73 |
-| Le Pen | 9,99 → 9,59 | 13,71 → 13,27 | 33,47 → 32,34 |
-| Glucksmann | 10,23 → 9,56 | 14,44 → 13,40 | 34,18 → 31,56 |
+| Retailleau | 7,73 → 7,72 | 10,46 → 10,41 | 24,29 → 24,27 |
+| Philippe | 8,34 → 8,30 | 11,25 → 11,26 | 26,92 → 27,13 |
+| Attal | 8,66 → 8,43 | 11,54 → 11,37 | 26,82 → 26,35 |
+| Tondelier | 9,63 → 9,00 | 13,98 → 12,76 | 33,85 → 30,61 |
+| Le Pen | 9,99 → 9,62 | 13,71 → 13,33 | 33,47 → 32,50 |
+| Glucksmann | 10,23 → 9,55 | 14,44 → 13,38 | 34,18 → 31,53 |
 | Zemmour | 10,52 → 10,26 | 13,99 → 14,00 | 35,11 → 34,94 |
-| Lisnard | 10,90 → 10,68 | 14,73 → 14,53 | 37,23 → 36,64 |
-| Arthaud | 12,56 → 11,89 | 18,44 → 16,95 | 45,43 → 41,55 |
-| Mélenchon | 19,40 → 18,65 | 29,63 → 27,33 | 71,35 → 65,51 |
-| Roussel | 17,50 → 17,20 | 30,82 → 29,86 | 84,22 → 79,92 |
+| Lisnard | 10,90 → 10,71 | 14,73 → 14,61 | 37,23 → 36,91 |
+| Arthaud | 12,56 → 11,89 | 18,44 → 16,95 | 45,43 → 41,53 |
+| Mélenchon | 19,40 → 18,62 | 29,63 → 27,27 | 71,35 → 65,33 |
+| Roussel | 17,50 → 17,19 | 30,82 → 29,85 | 84,22 → 79,88 |
 
 Lecture : l'effet d'une impulsion dure plus longtemps (Mésange : encore 0,53 au bout de dix ans, contre zéro après
 4,5 ans dans l'ancienne forme). Les relances y gagnent, la consolidation d'Écologie de droite y perd (+0,5 point en
@@ -139,7 +161,7 @@ de long terme φ = 0 : Écologie de droite 4,59 au lieu de 4,68.
 - E2 : TVA et accises comme chocs de prix ; boucle prix-salaires explicite.
 - E4 : contenu en importations par instrument (investissement public, manqué
   de 35 % la première année) ; balance courante (revenus versés aux non-résidents).
-- E5 : accumulation du capital (aujourd'hui par canal).
+- E5 : capital public (investissement public, fonds d'Écologie de droite) sur le même stock.
 - E6 : appariement, chômage d'équilibre, participation par âge.
 
 ## Sources
