@@ -26,6 +26,11 @@ import yaml
 from moteur.parametres import Parametres
 from outils import openfisca_population as op
 
+
+def ps_smic() -> float:
+    from outils.population_synthetique import smic_mensuel_brut
+    return smic_mensuel_brut()
+
 RACINE = Path(__file__).resolve().parent.parent
 SPECS = RACINE / "programmes" / "micro_mesures.yaml"
 DEBUT = "2020-01-01"
@@ -143,7 +148,7 @@ def construire(operations: list[dict]):
     for o in operations:
         if "variable" in o:
             var_ops.append(_formules("variable_facteur", o["variable"]))
-        elif "formule" in o and o["formule"]["nom"] != "garantie_niveau_vie":
+        elif "formule" in o and o["formule"]["nom"] not in POST:
             var_ops.append(_formules(o["formule"]["nom"], o["formule"]))
 
     def modifier(params):
@@ -173,76 +178,178 @@ def construire(operations: list[dict]):
 
 # --- Calcul --------------------------------------------------------------------------------------------------
 
-class Base:
-    """Population et simulation du système actuel, tirages de recours fixés."""
+POST = ("garantie_niveau_vie", "plafond_aides", "revenu_incitation")  # règles appliquées après le calcul d'OpenFisca
+EMPLOI = ("salarie_prive", "agent_public", "independant")
+AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
 
-    def __init__(self, lignes=None):
+
+def _post(operations):
+    return [o["formule"] for o in operations if "formule" in o and o["formule"]["nom"] in POST]
+
+
+class Base:
+    """Population et simulations du système actuel (avec les deux contrefactuels « sans travail »), tirages de
+    recours fixés.
+
+    Contrefactuels : les revenus d'activité des personnes de référence en emploi (puis ceux des autres adultes en
+    emploi) sont mis à zéro, le reste du ménage inchangé. Le gain à travailler d'une personne est la différence de
+    revenu disponible de son ménage entre la situation réelle et son contrefactuel ; sa valeur pour les finances
+    publiques, la différence de coût du travail moins ce gain."""
+
+    def __init__(self, lignes=None, emploi: bool = True):
         self.lignes = lignes or op.lire()
         self.sim, self.s = op.simulation(self.lignes)
         self.rec = Parametres().val("microsimulation.recours")
-        n_f = self.s["n_familles"]
+        s = self.s
+        n_f = s["n_familles"]
         self.u = {k: np.random.default_rng(i + 11).random(n_f) for i, k in enumerate(("rsa", "ppa", "asf"))}
-        pp = np.array([l["poids"] for l in self.lignes])
+        self.pp = np.array([l["poids"] for l in self.lignes])
         self.wf = np.zeros(n_f)
-        self.wf[self.s["famille"]] = pp
-        self.wm = np.zeros(self.s["n_menages"])
-        self.wm[self.s["menage"]] = pp
-        self.pers_m = np.bincount(self.s["menage"], minlength=self.s["n_menages"])
+        self.wf[s["famille"]] = self.pp
+        self.wm = np.zeros(s["n_menages"])
+        self.wm[s["menage"]] = self.pp
+        self.pers_m = np.bincount(s["menage"], minlength=s["n_menages"])
+        self.fam_men = np.zeros(n_f, int)
+        self.fam_men[s["famille"]] = s["menage"]
+        etud = np.zeros(s["n_menages"], bool)
+        for j, l in enumerate(self.lignes):
+            if l["role"] == "ref" and l["statut"] == "etudiant":
+                etud[s["menage"][j]] = True
+        self.menage_etudiant = etud
         # constantes de recours calées sur le système actuel
         self.c = {}
         for k, part in (("rsa", self.rec["rsa"]), ("ppa", self.rec["prime_activite"])):
             x = self.sim.calculate_add(k, "2026")
             pr = op.proba_recours(x, self.wf, part, self.rec["forme"])
             r = np.where(x > 0, np.maximum(x, 1e-9) ** self.rec["forme"], 0.0)
-            self.c[k] = float(np.median(pr[(pr > 0) & (pr < 1)] / r[(pr > 0) & (pr < 1)])) if ((pr > 0) & (pr < 1)).any() else 1.0
+            m = (pr > 0) & (pr < 1)
+            self.c[k] = float(np.median(pr[m] / r[m])) if m.any() else 1.0
         asf = self.sim.calculate_add("asf", "2026")
         self.c["asf"] = Parametres().val("microsimulation.allocation_soutien_familial") * 1e6 / float((self.wf * (asf > 0)).sum())
-        self.etat0 = self.etat(self.sim)
+        # travailleurs : en emploi, de 18 à 64 ans, avec un revenu d'activité
+        self.travaille = np.array([l["statut"] in EMPLOI and 18 <= l["age"] <= 64
+                                   and l["salaire_brut"] + max(l["revenu_independant"], 0) > 0 for l in self.lignes])
+        self.est_ref = np.array([l["role"] == "ref" for l in self.lignes])
+        smic_an = ps_smic() * 12
+        self.bande = np.array([0 if l["salaire_brut"] + max(l["revenu_independant"], 0) <= 1.3 * smic_an else
+                               (1 if l["salaire_brut"] + max(l["revenu_independant"], 0) <= 2.5 * smic_an else 2)
+                               for l in self.lignes])
+        self.etat0 = self.etat(self.sim, [])
+        self.emploi = emploi
+        if emploi:
+            self.cf0 = self.contrefactuels(None, [])
 
-    def etat(self, sim, garantie: float | None = None) -> dict:
-        """Revenu disponible des ménages après recours, coût du travail, composantes (Md€)."""
+    # -- un état : revenu disponible des ménages après recours et règles ajoutées
+    def etat(self, sim, post: list[dict]) -> dict:
         s, an = self.s, "2026"
         rd = sim.calculate("revenu_disponible", an)
-        non_percu = np.zeros(s["n_familles"])
-        comp = {}
+        montants = {k: sim.calculate_add(k, an) for k in AIDES}
+        pris = {}
         for k in ("rsa", "ppa", "asf"):
-            x = sim.calculate_add(k, an)
-            if k == "asf":
-                pris = self.u[k] < self.c[k]
-            else:
-                pris = self.u[k] < np.minimum(1, self.c[k] * np.maximum(x, 1e-9) ** self.rec["forme"])
-            non_percu += x * ~pris
-            comp[k] = float((self.wf * x * pris).sum()) / 1e9
-        # famille → ménage (par la personne demandeuse)
-        fam_men = np.zeros(s["n_familles"], int)
-        fam_men[s["famille"]] = s["menage"]
-        rd = rd - np.bincount(fam_men, weights=non_percu, minlength=s["n_menages"])
+            x = montants[k]
+            pris[k] = (self.u[k] < self.c[k]) if k == "asf" else \
+                (self.u[k] < np.minimum(1, self.c[k] * np.maximum(x, 1e-9) ** self.rec["forme"]))
+        percu = {k: montants[k] * pris.get(k, True) for k in AIDES}
+        ajust_f = sum(percu[k] - montants[k] for k in ("rsa", "ppa", "asf"))
         uc = sim.calculate("unites_consommation", an)
-        if garantie:
-            rd = rd + np.maximum(0.0, garantie * 12 * uc - rd)
-        cout = sim.calculate_add("cout_du_travail", an)
-        for k in ("aide_logement", "af", "aah"):
-            w = self.wf if k != "aah" else np.array([l["poids"] for l in self.lignes])
-            comp[k] = float((w * sim.calculate_add(k, an)).sum()) / 1e9
+        for x in post:
+            if x["nom"] == "revenu_incitation":
+                # RSA et prime d'activité remplacés : base pour les éligibles à l'un des deux, majoration avec activité
+                act = sim.calculate_add("salaire_net", an) + np.maximum(sim.calculate("rpns_imposables", an), 0)
+                act_f = np.bincount(s["famille"], weights=act, minlength=s["n_familles"])
+                # lecture retenue : les familles éligibles au RSA reçoivent le revenu d'incitation à la place du RSA et
+                # de la prime d'activité ; les autres gardent la prime d'activité (lecture littérale « RSA ou prime » :
+                # − 14 Md€, à l'opposé de l'économie annoncée)
+                elig = montants["rsa"] > 0
+                ria = elig * 12 * (x["base"] + x["avec_activite"] * (act_f > 0))
+                pris_ria = elig & pris["rsa"]
+                ajust_f = ajust_f - percu["rsa"] - percu["ppa"] * elig + ria * pris_ria
+                percu["rsa"], percu["ppa"] = ria * pris_ria, percu["ppa"] * ~elig
+            if x["nom"] == "plafond_aides":
+                tot = sum(percu[k] for k in AIDES)
+                cap = x["plafond_mensuel"] * 12
+                if x.get("sans_activite_seulement"):
+                    act = sim.calculate_add("salaire_net", an) + np.maximum(sim.calculate("rpns_imposables", an), 0)
+                    sans = np.bincount(s["famille"], weights=act, minlength=s["n_familles"]) <= 0
+                else:
+                    sans = np.ones(s["n_familles"], bool)
+                ajust_f = ajust_f - sans * np.maximum(0.0, tot - cap)
+        rd = rd + np.bincount(self.fam_men, weights=ajust_f, minlength=s["n_menages"])
+        for x in post:
+            if x["nom"] == "garantie_niveau_vie":
+                # niveau de vie porté au seuil, ménages dont la personne de référence n'est pas étudiante (champ de
+                # l'Insee ; les jeunes ont leur propre mesure)
+                rd = rd + ~self.menage_etudiant * np.maximum(0.0, x["seuil_mensuel"] * 12 * uc - rd)
+        cout_i = sim.calculate_add("cout_du_travail", an)
+        comp = {k: float((self.wf * percu[k]).sum()) / 1e9 for k in ("rsa", "ppa", "asf", "aide_logement", "af")}
+        comp["aah"] = float((self.pp * sim.calculate_add("aah", an)).sum()) / 1e9
         foy = np.zeros(s["n_foyers"])
-        foy[s["foyer"]] = [l["poids"] for l in self.lignes]
+        foy[s["foyer"]] = self.pp
         comp["impot_revenu"] = -float((foy * sim.calculate("impot_revenu_restant_a_payer", an)).sum()) / 1e9
-        return {"rd": rd, "uc": uc, "cout": float((np.array([l["poids"] for l in self.lignes]) * cout).sum()) / 1e9,
+        cout_m = np.bincount(s["menage"], weights=cout_i, minlength=s["n_menages"])
+        return {"rd": rd, "uc": uc, "cout_m": cout_m, "cout": float((self.wm * cout_m).sum()) / 1e9,
                 "rd_total": float((self.wm * rd).sum()) / 1e9, "comp": comp}
+
+    def _simuler(self, tbs, lignes=None):
+        return op.simulation(lignes or self.lignes, tbs=tbs)[0]
+
+    def contrefactuels(self, tbs, post) -> dict:
+        """Revenu disponible et coût du travail des ménages quand les personnes de référence (puis les autres
+        adultes) en emploi ne travaillent pas."""
+        out = {}
+        for nom, choix in (("ref", self.travaille & self.est_ref), ("autres", self.travaille & ~self.est_ref)):
+            lg = [dict(l, salaire_brut=0.0, cout_employeur=0.0, revenu_independant=0.0, statut="inactif") if c else l
+                  for l, c in zip(self.lignes, choix)]
+            sim = self._simuler(tbs, lg)
+            e = self.etat(sim, post)
+            out[nom] = {"rd": e["rd"], "cout_m": e["cout_m"]}
+            del sim
+            import gc
+            gc.collect()
+        return out
+
+    def participation(self, e, cf, s: str = "prudent") -> dict:
+        """Gain à travailler et valeur publique de chaque travailleur, dans un état et ses contrefactuels."""
+        m = self.s["menage"]
+        g = np.zeros(len(self.lignes))
+        v = np.zeros(len(self.lignes))
+        for nom, choix in (("ref", self.travaille & self.est_ref), ("autres", self.travaille & ~self.est_ref)):
+            g[choix] = (e["rd"] - cf[nom]["rd"])[m[choix]]
+            v[choix] = (e["cout_m"] - cf[nom]["cout_m"])[m[choix]] - g[choix]
+        return {"gain": g, "valeur": v}
+
+    def emploi_effet(self, e1, cf1, s: str = "prudent") -> dict:
+        """Emplois en plus (personnes) et effet sur le solde (Md€) de la variation du gain à travailler : élasticité
+        de participation de la tranche de salaire (offre.travail_participation ; scénario miroir quand le gain
+        baisse), appliquée aux personnes en emploi (Immervoll et al., 2007)."""
+        from moteur.offre import MIROIR
+        p = Parametres()
+        eta = {sc: np.array(p.val("offre.travail_participation", sc)) for sc in (s, MIROIR[s])}
+        a = self.participation(self.etat0, self.cf0)
+        b = self.participation(e1, cf1)
+        t = self.travaille & (a["gain"] > 0)
+        rel = np.zeros(len(self.lignes))
+        rel[t] = np.clip((b["gain"][t] - a["gain"][t]) / np.maximum(a["gain"][t], 1.0), -1, 1)
+        el = np.where(rel >= 0, eta[s][self.bande], eta[MIROIR[s]][self.bande])
+        d = self.pp * el * rel * t
+        return {"emplois": float(d.sum()), "budget": float((d * b["valeur"]).sum()) / 1e9}
 
     def reforme(self, operations: list[dict]) -> dict:
         tbs = construire(operations)
-        garantie = next((o["formule"]["seuil_mensuel"] for o in operations
-                         if "formule" in o and o["formule"]["nom"] == "garantie_niveau_vie"), None)
-        sim = self.sim if tbs is None else op.simulation(self.lignes, tbs=tbs)[0]
-        e1 = self.etat(sim, garantie)
+        post = _post(operations)
+        sim = self.sim if tbs is None else self._simuler(tbs)
+        e1 = self.etat(sim, post)
         if sim is not self.sim:
             del sim
             import gc
             gc.collect()
         e0 = self.etat0
-        return {"budget": (e1["cout"] - e0["cout"]) - (e1["rd_total"] - e0["rd_total"]), "etat": e1,
-                "composantes": {k: e1["comp"][k] - e0["comp"][k] for k in e0["comp"]}}
+        out = {"budget": (e1["cout"] - e0["cout"]) - (e1["rd_total"] - e0["rd_total"]), "etat": e1,
+               "composantes": {k: e1["comp"][k] - e0["comp"][k] for k in e0["comp"]}}
+        if self.emploi:
+            cf1 = self.cf0 if (tbs is None and not post) else self.contrefactuels(tbs, post)
+            out["emploi"] = self.emploi_effet(e1, cf1)
+        return out
 
     def deciles(self, e1: dict) -> list[dict]:
         """Variation du niveau de vie par décile de niveau de vie initial (personnes pondérées)."""
@@ -301,12 +408,19 @@ def main(programmes=None):
             lignes_m.append({"programme": nom, "mesure": ident, "openfisca_md": round(r["budget"], 2),
                              "moteur_md": round(mot, 2),
                              "ecart_pct": round((r["budget"] / mot - 1) * 100) if abs(mot) > 0.05 else "",
+                             "emplois_milliers": round(r["emploi"]["emplois"] / 1e3, 1) if "emploi" in r else "",
+                             "budget_emploi_md": round(r["emploi"]["budget"], 2) if "emploi" in r else "",
                              **{f"d_{k}": round(v, 2) for k, v in r["composantes"].items()},
                              "note": spec.get("note", "")})
-            print(f"{nom:10s} {ident:11s} OpenFisca {r['budget']:+6.2f}  moteur {mot:+6.2f}", flush=True)
+            em = r.get("emploi", {"emplois": 0.0, "budget": 0.0})
+            print(f"{nom:10s} {ident:11s} OpenFisca {r['budget']:+6.2f}  moteur {mot:+6.2f}  emplois {em['emplois'] / 1e3:+7.1f} k"
+                  f"  ({em['budget']:+5.2f} Md€)", flush=True)
         r = base.reforme(toutes)
+        em = r.get("emploi", {"emplois": 0.0, "budget": 0.0})
         for d in base.deciles(r["etat"]):
             lignes_d.append({"programme": nom, "budget_ensemble_md": round(r["budget"], 2),
+                             "emplois_ensemble_milliers": round(em["emplois"] / 1e3, 1),
+                             "budget_emploi_ensemble_md": round(em["budget"], 2),
                              **{k: round(v, 2) if isinstance(v, float) else v for k, v in d.items()}})
         print(f"{nom:10s} ensemble OpenFisca {r['budget']:+6.2f}", flush=True)
         for suffixe, lignes in (("mesures", lignes_m), ("deciles", lignes_d)):

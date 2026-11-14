@@ -112,7 +112,7 @@ Effet **statique** sur le solde (Md€ de 2026, + = l'améliore) contre le chiff
 | Roussel | RSA dès 18 ans | − 1,5 | − 2,0 | |
 | Mélenchon | APL + 10 % | − 1,7 | − 1,7 | Égal |
 | Mélenchon | AAH à 1 700 € | − 10,8 | − 11,5 | Proche |
-| Mélenchon | Garantie d'autonomie au seuil de pauvreté | − 48,1 | − 28,0 | Le bas de la distribution est trop pauvre dans la population (1er décile : 8 600 € par an et par unité de consommation) : **la micro surestime** ; à recaler sur le taux et l'intensité de la pauvreté de l'Insee |
+| Mélenchon | Garantie d'autonomie au seuil de pauvreté | − 37,2 | − 28,0 | Ménages d'étudiants exclus (champ de l'Insee, les jeunes ont leur propre mesure) ; la distribution relative est juste (voir plus bas), les niveaux de vie sont ≈ 12 % trop bas, d'où plus de ménages sous un seuil fixé en euros |
 | Le Pen | IR nul avant 30 ans (jusqu'à 4 SMIC) | − 6,5 | − 3,7 | Montaigne : 3,7 à 4,1 ; jeunes trop imposés dans la population ? à vérifier |
 | Le Pen | ASF doublée | − 4,2 | − 1,3 | Le moteur prend l'ASF à 1,6 Md€, la Cnaf donne 3,1 Md€ en 2024 : **le moteur sous-estime** ; la population la surestime (4,2 Md€ d'ASF, montant moyen trop haut) ; le bon ordre de grandeur est ≈ − 3,1 |
 | Philippe | IR allégé trois ans après une naissance | − 1,5 | − 3,0 | Le candidat annonce 3 Md€ ; ici 1,5 |
@@ -133,3 +133,47 @@ codées du programme ensemble, effet statique. Exemples : Mélenchon + 87 % pour
 Tondelier + 10,8 % pour le 1er décile et − 1,0 % pour le 10e, Roussel + 1,3 à + 2,5 % partout (CSG des retraités),
 Bertrand jusqu'à + 1 % aux 7e et 8e déciles. Un programme n'a que ses mesures codées : ce ne sont pas encore des
 bilans complets.
+
+| Lisnard | Aides plafonnées à SMIC − 500 € sans activité | + 2,6 | + 2,0 | |
+| Retailleau | Revenu d'incitation (300 € ; 550 € avec activité) | + 4,2 | + 3,0 | Lecture retenue : à la place du RSA et de la prime pour les familles éligibles au RSA ; la lecture littérale coûte 14 Md€ |
+| Retailleau | Aides plafonnées à 70 % du SMIC net | + 3,5 | + 1,0 | |
+
+## Distribution des niveaux de vie : la population contre l'Insee
+
+| 2026 (population) contre 2023 (Insee) | Population | Insee |
+|---|---|---|
+| Taux de pauvreté (60 % de la médiane) | 15,4 % | 15,4 % |
+| Intensité de la pauvreté | 20,2 % | 19,2 % |
+| Rapport D9 / D1 | 3,53 | 3,5 |
+| Médiane (€ par an) | 24 240 (€ de 2026) | 25 760 (€ de 2023) |
+
+La forme de la distribution est la bonne ; le niveau est ≈ 12 % trop bas (médiane de l'Insee ≈ 27 700 € en euros de
+2026) : il manque surtout des revenus du patrimoine (intérêts, assurance-vie, plus-values). Pas de recalage du bas
+de distribution, donc : il est juste en relatif.
+
+## Emploi : gain à travailler calculé par OpenFisca (14/11/2026, soir, demande d'Adrien)
+
+Moins d'aides pour qui ne travaille pas = plus de gain à travailler = plus d'emploi et de recettes. Pour chaque
+personne en emploi de 18 à 64 ans, OpenFisca calcule le revenu disponible de son ménage si elle ne travaillait pas
+(deux simulations : personnes de référence, puis autres adultes), avant et après la réforme. La variation relative du
+gain à travailler × l'élasticité de participation de sa tranche de salaire (offre.travail_participation, 0,12 / 0,06 /
+0,03 au prudent ; scénario miroir quand le gain baisse) donne les emplois en plus ; chaque emploi rapporte son coût
+du travail moins le gain du ménage (prélèvements payés et aides évitées). Effet de long terme, sans montée. Bruit
+de l'ordre de ± 10 000 emplois (mesures sans effet attendu).
+
+| Programme (mesures codées) | Emplois (milliers) | Effet sur le solde (Md€) | Moteur, canal « transferts aux actifs » (2037) |
+|---|---|---|---|
+| Retailleau (revenu d'incitation, plafond des aides) | + 251 | + 3,0 | + 6 |
+| Lisnard (plafond des aides sans activité, quotient familial) | + 89 | + 1,3 | + 3 |
+| Bertrand (tranche à 9 %, PFU) | + 30 | + 0,6 | |
+| Le Pen (IR des jeunes, ASF) | + 22 | + 0,5 | |
+| Roussel (RSA dès 18 ans surtout) | − 59 | − 1,7 | |
+| Tondelier (garantie d'autonomie surtout : − 210) | − 240 | − 5,6 | − 13 |
+| Mélenchon (garantie au seuil de pauvreté : − 1 081) | − 1 053 | − 26,1 | − 84 |
+
+Le canal agrégé du moteur (élasticité de 0,1 au prudent sur les montants) donne des effets 10 à 40 fois plus petits.
+La micro mesure le changement de gain à travailler là où il se produit : un plafond d'aides ou un RSA plus bas
+augmente beaucoup le gain de ceux qui en dépendent ; une garantie de revenu au seuil de pauvreté le supprime
+(taux marginal de 100 % sous le seuil). À discuter avant d'entrer dans les trajectoires (F4) : les évaluations
+françaises du RSA trouvent des effets plutôt faibles (Dares, 2011), les élasticités de participation au gain
+(Immervoll et al., 2007 ; Bargain et al., 2014) des effets nets.

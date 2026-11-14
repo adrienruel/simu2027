@@ -1481,3 +1481,12 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   contre 3,1 à la Cnaf), fin de l'abattement des retraités (+ 5,8 contre + 4,0). Écarts qui mettent en cause la micro :
   garantie au seuil de pauvreté (bas de distribution trop pauvre), capital (pas d'intérêts ni de plus-values).
 - Bogue d'OpenFisca 177 trouvé et corrigé localement (`revenus_non_salarie_nets`).
+
+## 14/11/2026 (soir) — Emploi par le gain à travailler (micro) ; Lisnard et Retailleau codés
+
+- `openfisca_mesures` : contrefactuels « sans travail » et élasticités de participation par tranche de salaire ;
+  emplois et effet sur le solde par mesure et par programme. Retailleau + 251 000 emplois (+ 3,0 Md€), Lisnard
+  + 89 000, Tondelier − 240 000, Mélenchon − 1,05 million (garantie au seuil de pauvreté, taux marginal de 100 %).
+  Le canal agrégé du moteur donne 10 à 40 fois moins. Pas encore dans les trajectoires (F4, à décider).
+- Distribution de la population : pauvreté 15,4 % (Insee 15,4 %), D9/D1 3,53 (3,5) ; niveaux ≈ 12 % trop bas.
+- Garantie de Mélenchon : ménages d'étudiants exclus (− 37 Md€ statique contre − 28 au moteur).

@@ -1,4 +1,4 @@
-programme,mesure,openfisca_md,moteur_md,ecart_pct,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,note
-melenchon,LFI-PRE-04,-1.66,-1.7,-2,-0.03,0.18,0.0,1.49,0.0,0.0,-0.0,
-melenchon,LFI-PRE-03,-10.81,-11.5,-6,-0.0,0.09,0.0,0.01,0.0,10.71,-0.0,AAH portée à 1 700 € (SMIC net revalorisé du programme) ; plafond de ressources relevé d'autant par la formule d'OpenFisca.
-melenchon,LFI-PRE-01,-48.08,-28.0,72,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Complément qui porte le niveau de vie du ménage (revenu disponible par unité de consommation, après les autres mesures de la même simulation) à 1 337 € par mois ; recours complet (prestation automatique, p. 72)."
+programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,note
+melenchon,LFI-PRE-04,-1.66,-1.7,-2,-11.0,-0.35,-0.03,0.18,0.0,1.49,0.0,0.0,-0.0,
+melenchon,LFI-PRE-03,-10.81,-11.5,-6,7.6,-0.0,-0.0,0.09,0.0,0.01,0.0,10.71,-0.0,AAH portée à 1 700 € (SMIC net revalorisé du programme) ; plafond de ressources relevé d'autant par la formule d'OpenFisca.
+melenchon,LFI-PRE-01,-37.15,-28.0,33,-1080.7,-26.77,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Complément qui porte le niveau de vie du ménage (revenu disponible par unité de consommation, après les autres mesures de la même simulation) à 1 337 € par mois ; recours complet (prestation automatique, p. 72)."

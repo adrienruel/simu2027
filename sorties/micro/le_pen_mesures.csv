@@ -1,3 +1,3 @@
-programme,mesure,openfisca_md,moteur_md,ecart_pct,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,note
-le_pen,RN-FIS-03,-6.49,-3.7,75,-0.0,0.21,0.0,0.01,0.0,0.0,-6.25,Foyer dont le déclarant principal a moins de 30 ans et dont le revenu brut global est sous quatre SMIC bruts annuels : impôt sur le revenu nul.
-le_pen,RN-FAM-01,-4.21,-1.3,224,-0.0,0.21,4.01,0.01,0.0,0.0,-0.0,
+programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,note
+le_pen,RN-FIS-03,-6.49,-3.7,75,24.2,0.51,-0.0,0.21,0.0,0.01,0.0,0.0,-6.25,Foyer dont le déclarant principal a moins de 30 ans et dont le revenu brut global est sous quatre SMIC bruts annuels : impôt sur le revenu nul.
+le_pen,RN-FAM-01,-4.21,-1.3,224,6.4,-0.01,-0.0,0.21,4.01,0.01,0.0,0.0,-0.0,
