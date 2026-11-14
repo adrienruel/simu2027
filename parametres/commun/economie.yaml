@@ -885,6 +885,12 @@ bouclage:
     statut: SOURCE
     source: "Mésange 2017 (Bardaji et al., Insee G2017/04, p. 102 à 107), balance commerciale en points de PIB : dépense publique +1 point −0,30 / −0,50 / −0,54 / −0,62 / −0,71 / −0,79 ; investissement public −0,52 / −0,69 / −0,72 / −0,78 / −0,86 / −0,93 ; cotisations employeurs −1 point −0,04 / −0,10 / −0,08 / 0,00 / 0,03 / 0,14 (1, 2, 3, 5, 10 ans, long terme)"
     note: "Phase E4 (14/11/2026) : balance commerciale en écart au statu quo (points de PIB) = −alpha × écart de PIB (%) − beta × écart du niveau des prix (%). alpha (importations de la demande) et beta (exportations perdues par les prix) calés sur la dépense publique à 1 et 10 ans ; retrouvent les trois variantes à 0,08 point près (écart le plus grand : cotisations la première année). Publiée seulement : l'effet de la compétitivité sur le PIB est déjà dans bouclage.forme (c)."
+  energie_importee:
+    valeur: {md_par_mt: 0.213, poids_demande: 0.46, offre_long_terme: 0.83, vitesse_offre: 0.35}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Facture : énergies fossiles importées ≈ 57 Md€ par an (SDES, Bilan énergétique de la France : 2024, pétrole et biocarburants 43,7 Md€, gaz 17,4, charbon et bois 1,7 ; 2025, facture totale 45,8 Md€ dont −5,5 d'électricité exportée), pour 267 Mt CO2e émises par les transports, les bâtiments, l'industrie et l'énergie en 2025 (Citepa, Secten 2026) : 0,213 Md€ par Mt. Réponse : Mésange 2017 (Bardaji et al., Insee G2017/04, p. 123), hausse de 10 $ du baril, facture +0,2 point de PIB : PIB −0,10 / −0,24 / −0,18 / −0,21 / −0,22 / −0,17 à 1, 2, 3, 5, 10 ans et long terme"
+    note: "Phase E4 (14/11/2026) : les tonnes de CO2 fossile en plus ou en moins que les mesures déclarent (Mesure.physique, secteurs énergétiques) changent les importations de pétrole et de gaz, à 0,213 Md€ par Mt (prix de 2024-2025, constants en euros de 2026). Revenu payé à l'étranger : impulsion de demande négative au poids poids_demande (calé sur la variante pétrole de Mésange avec offre_long_terme et vitesse_offre). La perte d'offre (énergie plus chère pour les entreprises) ne sert qu'au banc : un volume économisé par rénovation ou par le rail ne renchérit pas l'énergie. La réponse des émissions au prix du carbone n'y entre pas (elle passe par la taxe, dont l'impulsion compte déjà les importations en moins). Facture en plus aussi dans la balance commerciale."
   prime_demande:
     valeur: {crise: 0.5, prudent: 0.35, median: 0.25, optimiste: 0.15}
     unite: sans_unite

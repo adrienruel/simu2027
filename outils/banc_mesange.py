@@ -20,11 +20,14 @@ MESANGE = {
     "depense": (0.78, 1.06, 1.03, 0.86, 0.53),
     "investissement_public": (1.31, 1.38, 1.22, 0.93, 0.57),
     "cotisations_employeurs": (0.20, 0.55, 0.76, 0.97, 1.29),
+    # hausse de 10 $ du baril, facture énergétique +0,2 point de PIB (p. 123)
+    "petrole": (-0.10, -0.24, -0.18, -0.21, -0.22),
 }
 PRIX_MESANGE = {
     "depense": (0.20, 0.58, 0.94, 1.42, 1.88),
     "investissement_public": (0.31, 0.92, 1.37, 1.86, 2.25),
     "cotisations_employeurs": (-0.36, -0.70, -0.87, -1.09, -1.32),
+    "petrole": (0.33, 0.40, 0.40, 0.37, 0.24),
 }
 
 
@@ -35,6 +38,16 @@ def variante(p, nom: str, s: str = "median") -> dict:
         m = [Mesure("Dépense publique", "etat_missions", un)]
     elif nom == "investissement_public":
         m = [Mesure("Investissement public", "investissement", un)]
+    elif nom == "petrole":
+        # facture payée à l'étranger (revenu perdu, poids de demande) + énergie plus chère pour les entreprises (offre)
+        e = p.val("bouclage.energie_importee")
+        rep = bouclage.reponse(p, s, {t: -e["poids_demande"] * 0.002 * y[max(t, 2029)] for t in TOUTES}, TOUTES)
+        out = {}
+        for k, t in enumerate(TOUTES[:10], start=1):
+            offre_k = -e["offre_long_terme"] * 0.2 * (1 - (1 - e["vitesse_offre"]) ** k)
+            out[k] = {"demande": rep["dpib"][t] / y[max(t, 2029)] * 100, "offre": offre_k, "prix": float("nan")}
+            out[k]["pib"] = out[k]["demande"] + offre_k
+        return out
     elif nom == "cotisations_employeurs":
         m = [Mesure("Cotisations employeurs", "recettes", {t: -v for t, v in un.items()}, instrument="cout_travail")]
     else:

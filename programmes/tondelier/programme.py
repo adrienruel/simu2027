@@ -339,7 +339,7 @@ class Tondelier:
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
             from moteur import bouclage
-            rep = bouclage.reponse(p, s, cout_net, annees, liste) if bouclage.actif(p) and self.v("macro.multiplicateur_actif") else None
+            rep = bouclage.reponse(p, s, cout_net, annees, liste, liste + self.ecologie(p, s)) if bouclage.actif(p) and self.v("macro.multiplicateur_actif") else None
             dpib = rep["dpib"] if rep else multiplicateur(p, s, cout_net, annees)
             part_rec = {t: rec_sq[t] / y[t] for t in ANNEES}
             part_rec.update({t: part_rec[2029] for t in ANNEES_AVANT})

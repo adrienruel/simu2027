@@ -39,7 +39,8 @@ from .parametres import Parametres
 ANNEES = list(range(2029, 2074))
 POSTES = ("recettes", "participations")  # en plus des blocs de dépense du statu quo
 CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart", "emploi", "emplois_canaux",
-            "pib_hors_consommation", "inflation_taux", "taux_marche", "inflation_bouclage", "prix_bouclage")
+            "pib_hors_consommation", "inflation_taux", "taux_marche", "inflation_bouclage", "prix_bouclage", "facture_energie")
+# facture_energie : {année: Md€} importations de pétrole et de gaz en plus dues aux mesures (bouclage.facture_energie)
 # prix_bouclage : {année: fraction} niveau des prix en plus du statu quo dû au programme, pour la balance commerciale
 # inflation_bouclage : {année: points} inflation due au programme (moteur/bouclage.py) ; les pensions, revalorisées
 # au 1er janvier sur l'inflation passée, perdent cette année-là autant de pouvoir d'achat (phase E2)
@@ -304,7 +305,9 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "interets_reels": interets_reels, "charge_dette": interets_reels + infl[t] * dette_prec,
             "interets_menages": interets_menages,
             "taux_apparent": nominal, "taux_bce": bce, "ecart_marche": marche_t, "pib_taux": dy_r, "erosion_pensions": erosion,
-            "balance_commerciale": _balance(p, s, y[t], ctx.get("prix_bouclage", {}).get(t, 0.0), t), "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
+            "balance_commerciale": _balance(p, s, y[t], ctx.get("prix_bouclage", {}).get(t, 0.0), t)
+                                   - ctx.get("facture_energie", {}).get(t, 0.0) / y[t] * 100,
+            "facture_energie": ctx.get("facture_energie", {}).get(t, 0.0), "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
             "participations": part, "deficit": -maastricht * 100, "dette_pib": dette / y[t] * 100,
             "chomage": chom[t] + flux["chomage"] - (_okun(p, s, dy_r, y[t], e[t]) if retro else 0.0), "inflation": infl[t] * 100, "emploi": emploi[t] + flux["emploi"],
             "emplois_canaux": dict(canaux.get(t, {})),

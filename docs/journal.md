@@ -1398,3 +1398,11 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - Attribution : deux canaux de plus (taux et demande, pensions). Tests de mécanique isolés de la rétroaction
   (`test_canaux_declares`, `test_leviers`), comptes exacts mis à jour (`test_noyau`). Suite : 382 tests, 7 min 19 s.
 - Déficit 2037 au prudent : Écologie de droite 4,63, Mélenchon 27,34, Tondelier 12,81 ; détail : `docs/bouclage.md`.
+
+## 14/11/2026 (après-midi) — Phase E4 : facture énergétique, choc pétrolier
+
+- `bouclage.facture_energie` : tonnes de CO2 fossile déclarées par les mesures (secteurs énergétiques) × 0,213 Md€ par
+  Mt (SDES, Citepa) ; impulsion de demande au poids 0,46 (variante pétrole de Mésange) ; balance commerciale. Tondelier
+  passe désormais ses effets physiques au bouclage (ils étaient ajoutés après).
+- Banc : choc pétrolier à 30 % près à partir de la deuxième année. Suite : 384 tests, 7 min 41 s. Effet sur les
+  déficits ≤ 0,02 point.

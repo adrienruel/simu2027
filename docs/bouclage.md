@@ -66,7 +66,7 @@ Mésange. Écart relatif au PIB de Mésange :
 | Dépense publique +1 point de PIB | +5 % | −6 % | −6 % | −7 % | −7 % |
 | Investissement public +1 point | **−35 %** | −23 % | −13 % | 0 % | +25 % |
 | Cotisations employeurs −1 point | +28 % | −25 % | −30 % | −26 % | −19 % |
-| Choc pétrolier | non fait (demande E4 : termes de l'échange) | | | | |
+| Choc pétrolier (+10 $ le baril) | −34 % | +22 % | −17 % | −5 % | +5 % |
 
 - Dépense : retrouvée à 7 % près.
 - Investissement public : manqué la première année (0,86 contre 1,31). Dans Mésange, l'investissement a un effet
@@ -95,26 +95,34 @@ Décisions d'Adrien (14/11, 11 h 28) : les cinq propositions validées telles qu
 - **E4, balance commerciale** publiée (`balance_commerciale`, points de PIB, écart au statu quo) : −0,31 × écart de PIB
   (%) − 0,29 × écart de prix (%), calée sur Mésange ; retrouve ses trois variantes à 0,08 point près. Exemple 2037 au
   prudent : Mélenchon −4,7 points, Tondelier −0,9, Écologie de droite +0,5.
-- **Choc pétrolier** : essayé comme un prélèvement payé à l'étranger, il ne passe pas (−0,10 à 10 ans contre −0,22 dans
-  Mésange) : il faut un canal de termes de l'échange avec une perte d'offre durable. Laissé dans le reste de E4.
+- **E4, facture énergétique** (suite, 14/11 après-midi) : les tonnes de CO2 fossile que les mesures déclarent
+  (`Mesure.physique`, transports, bâtiments, industrie, énergie) changent les importations de pétrole et de gaz, à
+  0,213 Md€ par Mt (57 Md€ de facture fossile, SDES, pour 267 Mt, Citepa). Ce revenu payé à l'étranger (ou gardé)
+  entre dans la demande au poids 0,46, calé sur la variante pétrole de Mésange, et dans la balance commerciale. La
+  réponse au prix du carbone n'y entre pas (déjà dans l'impulsion de la taxe). 2037 au prudent : Écologie de droite
+  −1,5 Md€ de facture, Tondelier −1,5, Mélenchon −1,5, Zemmour +1,6 ; effet sur le déficit ≤ 0,02 point. Publié :
+  `facture_energie`.
+- **Choc pétrolier au banc** : revenu perdu (poids 0,46) + énergie plus chère pour les entreprises (perte d'offre de
+  0,83 point de PIB par point de facture, vitesse 0,35) : −0,13 / −0,19 / −0,21 / −0,22 / −0,21 contre −0,10 / −0,24 /
+  −0,18 / −0,21 / −0,22 dans Mésange ; 30 % près à partir de la deuxième année (première : −34 %).
 
 ## Effet sur les programmes (déficit, % du PIB, prudent : main au commit 7c511dc → phase E complète)
 
 | Programme | 2032 | 2037 | 2050 |
 |---|---|---|---|
 | Statu quo | 7,16 → 7,16 | 9,50 → 9,50 | 20,57 → 20,57 |
-| Écologie de droite | 4,16 → 4,54 | 4,15 → 4,63 | 4,89 → 5,67 |
+| Écologie de droite | 4,16 → 4,54 | 4,15 → 4,61 | 4,89 → 5,64 |
 | Bertrand | 7,09 → 7,09 | 9,28 → 9,33 | 20,24 → 20,37 |
 | Retailleau | 7,73 → 7,70 | 10,46 → 10,39 | 24,29 → 24,18 |
 | Philippe | 8,34 → 8,28 | 11,25 → 11,22 | 26,92 → 26,98 |
 | Attal | 8,66 → 8,43 | 11,54 → 11,37 | 26,82 → 26,33 |
-| Tondelier | 9,63 → 9,02 | 13,98 → 12,81 | 33,85 → 30,75 |
+| Tondelier | 9,63 → 9,02 | 13,98 → 12,80 | 33,85 → 30,73 |
 | Le Pen | 9,99 → 9,59 | 13,71 → 13,27 | 33,47 → 32,34 |
 | Glucksmann | 10,23 → 9,56 | 14,44 → 13,40 | 34,18 → 31,56 |
-| Zemmour | 10,52 → 10,25 | 13,99 → 13,99 | 35,11 → 34,91 |
+| Zemmour | 10,52 → 10,26 | 13,99 → 14,00 | 35,11 → 34,94 |
 | Lisnard | 10,90 → 10,68 | 14,73 → 14,53 | 37,23 → 36,64 |
 | Arthaud | 12,56 → 11,89 | 18,44 → 16,95 | 45,43 → 41,55 |
-| Mélenchon | 19,40 → 18,65 | 29,63 → 27,34 | 71,35 → 65,52 |
+| Mélenchon | 19,40 → 18,65 | 29,63 → 27,33 | 71,35 → 65,51 |
 | Roussel | 17,50 → 17,20 | 30,82 → 29,86 | 84,22 → 79,92 |
 
 Lecture : l'effet d'une impulsion dure plus longtemps (Mésange : encore 0,53 au bout de dix ans, contre zéro après
@@ -129,7 +137,7 @@ de long terme φ = 0 : Écologie de droite 4,59 au lieu de 4,68.
 ## Reste de la phase E
 
 - E2 : TVA et accises comme chocs de prix ; boucle prix-salaires explicite.
-- E4 : termes de l'échange (choc pétrolier) ; contenu en importations par instrument (investissement public, manqué
+- E4 : contenu en importations par instrument (investissement public, manqué
   de 35 % la première année) ; balance courante (revenus versés aux non-résidents).
 - E5 : accumulation du capital (aujourd'hui par canal).
 - E6 : appariement, chômage d'équilibre, participation par âge.

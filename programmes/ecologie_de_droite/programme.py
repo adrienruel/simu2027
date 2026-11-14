@@ -833,7 +833,7 @@ class EcologieDeDroite:
                                                   "effet_macro", instrument="capital_entreprises")] if self.energie else []))
             cout_net = offre.impulsion(p, impulsion, TOUTES)
             from moteur import bouclage
-            rep = bouclage.reponse(p, s, cout_net, TOUTES, impulsion) if bouclage.actif(p) else None
+            rep = bouclage.reponse(p, s, cout_net, TOUTES, impulsion, m) if bouclage.actif(p) else None
             dpib = rep["dpib"] if rep else multiplicateur(p, s, cout_net, TOUTES)
             part_rec = {t: rec_sq[t] / y_sq[t] for t in ANNEES}
             m.extend(m_effets)

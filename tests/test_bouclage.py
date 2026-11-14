@@ -121,3 +121,20 @@ def test_balance_commerciale_mesange():
             assert abs(-e["alpha"] * y - e["beta"] * pr - b) <= 0.085
     base = noyau.simuler(Parametres(), None, scenarios=["prudent"])["prudent"]
     assert base[2037]["balance_commerciale"] == 0.0
+
+
+def test_critere_sortie_petrole(resultats_banc):
+    """Hausse de 10 $ du baril (facture +0,2 point de PIB) : 30 % près à partir de la deuxième année (première année :
+    effet d'impact trop fort, +36 %, la forme de demande commune montant plus vite que celle du pétrole dans Mésange)."""
+    for a, c in zip(ANS[1:], MESANGE["petrole"][1:]):
+        assert abs(resultats_banc["petrole"][a]["pib"] - c) <= 0.30 * abs(c)
+
+
+def test_facture_energie_suit_les_tonnes(p):
+    """E4 : une tonne de CO2 fossile évitée par une mesure allège la facture d'importation ; agriculture hors champ."""
+    from moteur.noyau import Mesure
+    k = p.val("bouclage.energie_importee")["md_par_mt"]
+    m = [Mesure("rail", "recettes", {}, "physique", physique={"emissions_mt:transports": {2035: -10.0}}),
+         Mesure("élevage", "recettes", {}, "physique", physique={"emissions_mt:agriculture": {2035: -10.0}})]
+    fe = bouclage.facture_energie(p, m, noyau.ANNEES)
+    assert fe[2035] == pytest.approx(-10 * k) and fe[2034] == 0.0

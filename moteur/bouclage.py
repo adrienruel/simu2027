@@ -104,7 +104,21 @@ def prix_offre(p, mesures, annees) -> dict:
     return out
 
 
-def reponse(p, s: str, cout_net: dict, annees, mesures=None) -> dict:
+def facture_energie(p, mesures, annees) -> dict:
+    """Importations de pétrole et de gaz en plus (Md€ de 2026, + = facture plus lourde) dues aux tonnes de CO2 fossile
+    que les mesures déclarent dans les secteurs énergétiques (bouclage.energie_importee, phase E4)."""
+    from .ecologie.emissions import ENERGIE
+    k = p.val("bouclage.energie_importee")["md_par_mt"]
+    out = {t: 0.0 for t in annees}
+    for m in mesures or []:
+        for cle, serie in (getattr(m, "physique", None) or {}).items():
+            if cle.startswith("emissions_mt:") and cle.split(":", 1)[1] in ENERGIE:
+                for t in annees:
+                    out[t] += k * serie.get(t, 0.0)
+    return out
+
+
+def reponse(p, s: str, cout_net: dict, annees, mesures=None, physiques=None) -> dict:
     """Réponse de l'économie à l'impulsion budgétaire nette (cout_net : coût net cumulé des mesures, Md€, + = relance),
     année par année. Chaque variation d'impulsion prend le multiplicateur de son scénario (resserrement) ou du
     scénario miroir (relance). Rend dpib (Md€, après contrainte de capacité), et en écart au statu quo : prix (niveau,
@@ -112,6 +126,10 @@ def reponse(p, s: str, cout_net: dict, annees, mesures=None) -> dict:
     from .programme_simple import contrainte_capacite
     u = reponses_unitaires(p)
     m = {sc: sq._v(p, "macro.multiplicateur", sc) for sc in (s, MIROIR[s])}
+    # facture énergétique (E4) : revenu payé à l'étranger, impulsion de demande négative
+    fe = facture_energie(p, physiques if physiques is not None else mesures, annees)
+    w_fe = p.val("bouclage.energie_importee")["poids_demande"]
+    cout_net = {t: cout_net[t] - w_fe * fe[t] for t in annees}
     y = sq.pib(p, s)
     annees = list(annees)
     # g : impulsion en fraction du PIB ; les réponses unitaires sont en % pour 1 % de PIB, donc m × g × h est une
@@ -138,6 +156,7 @@ def reponse(p, s: str, cout_net: dict, annees, mesures=None) -> dict:
         infl[t] += d
         infl_t[t] += w * d
     return {"dpib": contrainte_capacite(p, s, dpib), "dpib_avant_capacite": dpib, "prix": prix, "inflation": infl,
+            "facture_energie": fe,
             "inflation_taux": infl_t, "taux_marche": taux}
 
 
@@ -151,7 +170,8 @@ def contexte(p, s: str, rep: dict | None, inflation_programme: dict | None = Non
             "inflation_taux": {t: base[t] + rep["inflation_taux"].get(t, 0.0) for t in ANNEES},
             "taux_marche": {t: rep["taux_marche"].get(t, 0.0) for t in ANNEES},
             "inflation_bouclage": {t: rep["inflation"].get(t, 0.0) for t in ANNEES},
-            "prix_bouclage": {t: rep["prix"].get(t, 0.0) for t in ANNEES}}
+            "prix_bouclage": {t: rep["prix"].get(t, 0.0) for t in ANNEES},
+            "facture_energie": {t: rep.get("facture_energie", {}).get(t, 0.0) for t in ANNEES}}
 
 
 def forme_production_non_marchande(p, tau: int) -> float:
