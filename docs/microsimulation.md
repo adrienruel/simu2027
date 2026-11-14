@@ -177,3 +177,23 @@ augmente beaucoup le gain de ceux qui en dépendent ; une garantie de revenu au 
 (taux marginal de 100 % sous le seuil). À discuter avant d'entrer dans les trajectoires (F4) : les évaluations
 françaises du RSA trouvent des effets plutôt faibles (Dares, 2011), les élasticités de participation au gain
 (Immervoll et al., 2007 ; Bargain et al., 2014) des effets nets.
+
+## F4 (premier pas) : l'emploi de la micro dans les trajectoires (14/11/2026, soir, décision d'Adrien)
+
+- Trois niveaux pour l'effet du gain à travailler quand il change par les aides (`offre.participation_transferts`) :
+  bas (crise, prudent : un tiers des élasticités de participation, évaluations françaises du RSA), central (médian :
+  deux tiers, Bargain et Doorley 2011), haut (optimiste : les élasticités entières, Immervoll et al. 2007). Une baisse
+  d'emploi prend le scénario miroir.
+- `outils/openfisca_mesures.py` écrit les emplois et leur valeur pour le solde, par mesure et par scénario
+  (`parametres/donnees/micro_emploi_2026.csv`). Le moteur (`offre.effets`, option `offre.micro_emploi`) les prend pour
+  les transferts codés, à la place de l'élasticité agrégée : montée au profil de la mesure, emplois venus de
+  l'inactivité, prélèvements et aides évitées calculés par la micro, PIB à 35 000 € par emploi.
+- Montants recalés sur la micro : tranche à 9 % (Bertrand, Tondelier : − 9,3), ASF doublée (Le Pen : 3,2 au prudent),
+  fin de l'abattement des retraités (Tondelier : + 5,5 / 5,8), revenu d'incitation (Retailleau : 4,2, lecture retenue),
+  plafond des aides (Retailleau : 3,5 ; Lisnard : 2,6). Crise : 75 % des économies.
+
+Emplois par le gain à travailler au prudent (milliers) : Retailleau + 95, Lisnard + 23, Mélenchon − 724 (garantie),
+Tondelier − 146 (garantie d'autonomie), Roussel − 40 (RSA dès 18 ans).
+
+Effet sur le déficit 2037 au prudent : Mélenchon + 0,57 point, Tondelier + 0,23, Bertrand + 0,17 (IR), Le Pen + 0,10
+(ASF), Retailleau − 0,17, Lisnard − 0,03.

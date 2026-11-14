@@ -164,12 +164,12 @@ le_pen_mesures:
     note: "Le minimum vieillesse et la réindexation ne coûtent rien contre le statu quo du modèle. Petites retraites, montant non précisé : 0,4 à 1 Md€ (≈ +20 € par mois pour 2 à 4 millions de retraités)."
   meres_isolees:
     valeur: {id: RN-FAM-01, libelle: "Soutien aux mères isolées doublé, contrôles renforcés", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2028,
-             montant: {crise: 1.5, prudent: 1.3, median: 1.1, optimiste: 0.9}}
+             montant: {crise: 3.7, prudent: 3.2, median: 2.7, optimiste: 2.2}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "rassemblementnational.fr (votons-2027.fr, économie) : « doubler le soutien aux mères isolées » ; allocation de soutien familial ≈ 1,6 Md€ (Cnaf, après la hausse de 50 % de 2022)"
-    note: "Doublement de l'allocation de soutien familial, moins un peu de fraude évitée."
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique, outils/openfisca_mesures.py, DÉCISION d'Adrien) ; crise : 75 % pour les économies (transition, contentieux). Emplois : par le gain à travailler (micro, offre.micro_emploi) pour les transferts. Ancien montant : {crise: 1.5, prudent: 1.3, median: 1.1, optimiste: 0.9}. Doublement de l'allocation de soutien familial, moins un peu de fraude évitée."
   permis:
     valeur: {id: RN-JEU-01, libelle: "Permis de conduire gratuit pour les jeunes", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: 1.5, prudent: 1.3, median: 1.1, optimiste: 0.9}}

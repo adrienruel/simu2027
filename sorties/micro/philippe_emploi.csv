@@ -1,0 +1,5 @@
+programme,mesure,scenario,emplois,budget_md,statique_md
+philippe,PHI-FIS-02,crise,2496,0.024,-1.474
+philippe,PHI-FIS-02,prudent,3804,0.037,-1.474
+philippe,PHI-FIS-02,median,9707,0.092,-1.474
+philippe,PHI-FIS-02,optimiste,18326,0.172,-1.474

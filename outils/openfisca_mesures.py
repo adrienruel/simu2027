@@ -320,19 +320,25 @@ class Base:
 
     def emploi_effet(self, e1, cf1, s: str = "prudent") -> dict:
         """Emplois en plus (personnes) et effet sur le solde (Md€) de la variation du gain à travailler : élasticité
-        de participation de la tranche de salaire (offre.travail_participation ; scénario miroir quand le gain
-        baisse), appliquée aux personnes en emploi (Immervoll et al., 2007)."""
+        de participation de la tranche de salaire (offre.travail_participation) × facteur propre aux transferts
+        (offre.participation_transferts), appliquée aux personnes en emploi (Immervoll et al., 2007) ; scénario miroir
+        quand le gain baisse. Rend le scénario s et le détail des quatre scénarios."""
         from moteur.offre import MIROIR
+        from moteur.statu_quo import SCENARIOS
         p = Parametres()
-        eta = {sc: np.array(p.val("offre.travail_participation", sc)) for sc in (s, MIROIR[s])}
+        eta = {sc: np.array(p.val("offre.travail_participation", sc)) * p.val("offre.participation_transferts", sc)
+               for sc in SCENARIOS}
         a = self.participation(self.etat0, self.cf0)
         b = self.participation(e1, cf1)
         t = self.travaille & (a["gain"] > 0)
         rel = np.zeros(len(self.lignes))
         rel[t] = np.clip((b["gain"][t] - a["gain"][t]) / np.maximum(a["gain"][t], 1.0), -1, 1)
-        el = np.where(rel >= 0, eta[s][self.bande], eta[MIROIR[s]][self.bande])
-        d = self.pp * el * rel * t
-        return {"emplois": float(d.sum()), "budget": float((d * b["valeur"]).sum()) / 1e9}
+        par = {}
+        for sc in SCENARIOS:
+            el = np.where(rel >= 0, eta[sc][self.bande], eta[MIROIR[sc]][self.bande])
+            d = self.pp * el * rel * t
+            par[sc] = {"emplois": float(d.sum()), "budget": float((d * b["valeur"]).sum()) / 1e9}
+        return {**par[s], "scenarios": par}
 
     def reforme(self, operations: list[dict]) -> dict:
         tbs = construire(operations)
@@ -399,7 +405,7 @@ def main(programmes=None):
         if programmes and nom not in programmes:
             continue
         base = base or Base()
-        lignes_m, lignes_d = [], []
+        lignes_m, lignes_d, lignes_e = [], [], []
         toutes = []
         for ident, spec in mesures.items():
             r = base.reforme(spec["operations"])
@@ -412,6 +418,9 @@ def main(programmes=None):
                              "budget_emploi_md": round(r["emploi"]["budget"], 2) if "emploi" in r else "",
                              **{f"d_{k}": round(v, 2) for k, v in r["composantes"].items()},
                              "note": spec.get("note", "")})
+            for sc, x in r["emploi"]["scenarios"].items():
+                lignes_e.append({"programme": nom, "mesure": ident, "scenario": sc, "emplois": round(x["emplois"]),
+                                 "budget_md": round(x["budget"], 3), "statique_md": round(r["budget"], 3)})
             em = r.get("emploi", {"emplois": 0.0, "budget": 0.0})
             print(f"{nom:10s} {ident:11s} OpenFisca {r['budget']:+6.2f}  moteur {mot:+6.2f}  emplois {em['emplois'] / 1e3:+7.1f} k"
                   f"  ({em['budget']:+5.2f} Md€)", flush=True)
@@ -423,7 +432,7 @@ def main(programmes=None):
                              "budget_emploi_ensemble_md": round(em["budget"], 2),
                              **{k: round(v, 2) if isinstance(v, float) else v for k, v in d.items()}})
         print(f"{nom:10s} ensemble OpenFisca {r['budget']:+6.2f}", flush=True)
-        for suffixe, lignes in (("mesures", lignes_m), ("deciles", lignes_d)):
+        for suffixe, lignes in (("mesures", lignes_m), ("deciles", lignes_d), ("emploi", lignes_e)):
             _ecrire(dossier / f"{nom}_{suffixe}.csv", lignes)
     reunir()
 
@@ -437,7 +446,7 @@ def _ecrire(chemin, lignes):
 
 def reunir():
     dossier = RACINE / "sorties" / "micro"
-    for suffixe in ("mesures", "deciles"):
+    for suffixe in ("mesures", "deciles", "emploi"):
         lignes = []
         for nom in specs():
             f = dossier / f"{nom}_{suffixe}.csv"
@@ -445,7 +454,10 @@ def reunir():
                 with f.open(encoding="utf-8") as g:
                     lignes += list(csv.DictReader(g))
         if lignes:
-            _ecrire(RACINE / "sorties" / f"micro_{suffixe}.csv", lignes)
+            # emplois par mesure et par scénario : lus par le moteur (moteur/offre.py, phase F4)
+            cible = (RACINE / "parametres" / "donnees" / "micro_emploi_2026.csv") if suffixe == "emploi" else \
+                (RACINE / "sorties" / f"micro_{suffixe}.csv")
+            _ecrire(cible, lignes)
 
 
 if __name__ == "__main__":

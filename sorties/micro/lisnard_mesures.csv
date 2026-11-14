@@ -1,3 +1,3 @@
 programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,note
-lisnard,LIS-SOC-01,-4.39,-3.5,25,19.2,0.46,-0.0,0.21,0.0,0.01,0.0,0.0,-4.15,
-lisnard,LIS-ECO-03,2.61,2.0,30,70.6,0.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"« 500 € d'écart entre le SMIC et l'assistance » : aides sociales (RSA, prime d'activité, aides au logement, prestations familiales) d'une famille sans revenu d'activité plafonnées à SMIC net − 500 € (1 443 − 500 = 943 € par mois, SMIC de 2026 d'OpenFisca). Fusion en une allocation unique : pas de barème publié, seul le plafond est codé."
+lisnard,LIS-SOC-01,-4.39,-3.5,25,6.3,0.15,-0.0,0.21,0.0,0.01,0.0,0.0,-4.15,
+lisnard,LIS-ECO-03,2.61,2.6,0,23.2,0.27,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"« 500 € d'écart entre le SMIC et l'assistance » : aides sociales (RSA, prime d'activité, aides au logement, prestations familiales) d'une famille sans revenu d'activité plafonnées à SMIC net − 500 € (1 443 − 500 = 943 € par mois, SMIC de 2026 d'OpenFisca). Fusion en une allocation unique : pas de barème publié, seul le plafond est codé."

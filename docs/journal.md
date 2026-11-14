@@ -1490,3 +1490,11 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   Le canal agrégé du moteur donne 10 à 40 fois moins. Pas encore dans les trajectoires (F4, à décider).
 - Distribution de la population : pauvreté 15,4 % (Insee 15,4 %), D9/D1 3,53 (3,5) ; niveaux ≈ 12 % trop bas.
 - Garantie de Mélenchon : ménages d'étudiants exclus (− 37 Md€ statique contre − 28 au moteur).
+
+## 14/11/2026 (soir) — Phase F4 (premier pas) : emplois de la micro dans les trajectoires ; montants recalés
+
+- Décision d'Adrien (« envoie tout ») : trois niveaux d'élasticité pour les transferts (`offre.participation_transferts`),
+  emplois de la micro à la place du canal agrégé pour les transferts codés (`offre.micro_emploi`), sept montants
+  recalés sur OpenFisca (tranche à 9 %, ASF, abattement des retraités, revenu d'incitation et plafonds d'aides).
+- Déficit 2037 au prudent : Mélenchon 27,50 → 28,07 ; Tondelier 13,00 → 13,23 ; Bertrand 9,32 → 9,49 ; Le Pen
+  13,18 → 13,28 ; Retailleau 10,39 → 10,22 ; Lisnard 14,24 → 14,21.

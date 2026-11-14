@@ -1,26 +1,26 @@
 programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,note
-bertrand,BER-FIS-01,-9.31,-4.5,107,30.3,0.59,-0.0,0.21,0.0,0.01,0.0,0.0,-9.07,
-bertrand,BER-FIS-02,0.8,0.7,15,8.2,0.03,-0.0,0.21,0.0,0.01,0.0,0.0,1.06,"Part impôt sur le revenu du prélèvement forfaitaire unique : 12,8 % → 14,8 %."
-tondelier,REC-10,0.97,1.2,-19,8.0,-0.05,-0.0,0.21,0.0,0.01,0.0,0.0,1.21,
-tondelier,REC-11,-9.31,-4.5,107,30.3,0.59,-0.0,0.21,0.0,0.01,0.0,0.0,-9.07,
-tondelier,REC-13,5.82,4.0,46,7.9,0.02,-0.0,0.21,0.0,-0.13,0.0,0.0,4.82,
-tondelier,COT-04,7.4,13.6,-46,-26.6,-0.82,0.0,0.55,0.0,0.11,0.03,0.02,-1.86,"CSG d'activité +1 point (déductible). Les autres revenus (+1 point sur tous les revenus) : pensions et capital non changés ici, faute de lecture sûre de la mesure sur eux ; écart attendu."
-tondelier,REC-20/21,1.33,3.5,-62,8.3,0.03,-0.0,0.21,0.0,0.01,0.0,0.0,1.59,
-tondelier,PRE-11,-1.66,-1.7,-2,-11.0,-0.35,-0.03,0.18,0.0,1.49,0.0,0.0,-0.0,
-tondelier,PRE-12,-3.46,-2.8,24,6.8,-0.03,-0.0,0.21,0.0,0.01,3.23,0.0,-0.0,"Lecture du chiffrage du programme : la moitié du montant pour deux enfants (32 % de la base mensuelle), modulée selon les revenus comme les allocations familiales."
-tondelier,PRE-13,-4.11,-4.4,-7,6.9,0.0,-0.0,0.13,0.0,0.01,0.0,3.96,-0.0,
-tondelier,PRE-10,-5.8,-6.6,-12,-209.9,-4.88,5.65,-0.12,0.0,0.09,0.0,0.0,-0.0,"Garantie d'autonomie à 50 % du SMIC net (≈ 790 € contre ≈ 660 € : + 20 %) à la place du RSA, dès 18 ans. Recours : celui du RSA (le programme dit « sans contrepartie », le recours pourrait être plus haut)."
-lisnard,LIS-SOC-01,-4.39,-3.5,25,19.2,0.46,-0.0,0.21,0.0,0.01,0.0,0.0,-4.15,
-lisnard,LIS-ECO-03,2.61,2.0,30,70.6,0.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"« 500 € d'écart entre le SMIC et l'assistance » : aides sociales (RSA, prime d'activité, aides au logement, prestations familiales) d'une famille sans revenu d'activité plafonnées à SMIC net − 500 € (1 443 − 500 = 943 € par mois, SMIC de 2026 d'OpenFisca). Fusion en une allocation unique : pas de barème publié, seul le plafond est codé."
-roussel,PCF-RET-03,-23.09,-22.0,5,9.4,0.05,-0.0,0.21,0.0,0.01,0.0,0.0,3.98,
-roussel,PCF-LOG-02,-0.94,-0.8,18,-1.8,-0.15,-0.03,0.19,0.0,0.75,0.0,0.0,-0.0,"Revalorisation non chiffrée par le programme : 5 %, comme le chiffrage du moteur."
-roussel,PCF-PRE-01,-1.48,-2.0,-26,-49.7,-1.52,1.45,-0.12,0.0,0.03,0.0,0.0,-0.0,
-melenchon,LFI-PRE-04,-1.66,-1.7,-2,-11.0,-0.35,-0.03,0.18,0.0,1.49,0.0,0.0,-0.0,
-melenchon,LFI-PRE-03,-10.81,-11.5,-6,7.6,-0.0,-0.0,0.09,0.0,0.01,0.0,10.71,-0.0,AAH portée à 1 700 € (SMIC net revalorisé du programme) ; plafond de ressources relevé d'autant par la formule d'OpenFisca.
-melenchon,LFI-PRE-01,-37.15,-28.0,33,-1080.7,-26.77,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Complément qui porte le niveau de vie du ménage (revenu disponible par unité de consommation, après les autres mesures de la même simulation) à 1 337 € par mois ; recours complet (prestation automatique, p. 72)."
-le_pen,RN-FIS-03,-6.49,-3.7,75,24.2,0.51,-0.0,0.21,0.0,0.01,0.0,0.0,-6.25,Foyer dont le déclarant principal a moins de 30 ans et dont le revenu brut global est sous quatre SMIC bruts annuels : impôt sur le revenu nul.
-le_pen,RN-FAM-01,-4.21,-1.3,224,6.4,-0.01,-0.0,0.21,4.01,0.01,0.0,0.0,-0.0,
-philippe,PHI-FIS-02,-1.47,-3.0,-51,11.6,0.11,-0.0,0.21,0.0,0.01,0.0,0.0,-1.23,"Foyer avec un enfant de moins de 3 ans : impôt sur le revenu annulé jusqu'à 3 000 € (réduction de 3 000 € au-delà), comme le site du 12/11/2026."
-arthaud,ART-FAM-01,-0.72,-0.6,20,5.1,-0.02,-0.0,0.37,0.0,0.19,0.14,0.0,-0.0,"Revalorisation de 1,2 % (inflation) des allocations familiales, de la prime d'activité et des aides au logement gelées en 2027."
-retailleau,RET-EMP-01,4.23,3.0,41,217.9,2.63,-2.99,-1.24,0.0,0.0,0.0,0.0,0.0,"Revenu d'incitation à l'activité à la place du RSA et de la prime d'activité : une famille éligible au RSA reçoit 300 € par mois, 550 € avec une activité, à la place du RSA et de la prime d'activité ; les autres familles gardent la prime d'activité. Lecture à arbitrer : la lecture littérale (toute famille éligible au RSA ou à la prime) coûte 14 Md€, à l'opposé de l'économie annoncée. L'ASS n'est pas dans la population."
-retailleau,RET-EMP-02,3.51,1.0,251,87.4,1.08,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Aides sociales d'une famille (RSA, prime d'activité, aides au logement, prestations familiales) plafonnées à 70 % du SMIC net (0,7 × 1 443 ≈ 1 010 € par mois)."
+bertrand,BER-FIS-01,-9.31,-9.3,0,9.9,0.19,-0.0,0.21,0.0,0.01,0.0,0.0,-9.07,
+bertrand,BER-FIS-02,0.8,0.7,15,2.7,0.01,-0.0,0.21,0.0,0.01,0.0,0.0,1.06,"Part impôt sur le revenu du prélèvement forfaitaire unique : 12,8 % → 14,8 %."
+tondelier,REC-10,0.97,1.2,-19,2.6,-0.04,-0.0,0.21,0.0,0.01,0.0,0.0,1.21,
+tondelier,REC-11,-9.31,-9.3,0,9.9,0.19,-0.0,0.21,0.0,0.01,0.0,0.0,-9.07,
+tondelier,REC-13,5.82,5.5,6,2.4,0.0,-0.0,0.21,0.0,-0.13,0.0,0.0,4.82,
+tondelier,COT-04,7.4,13.6,-46,-20.7,-0.56,0.0,0.55,0.0,0.11,0.03,0.02,-1.86,"CSG d'activité +1 point (déductible). Les autres revenus (+1 point sur tous les revenus) : pensions et capital non changés ici, faute de lecture sûre de la mesure sur eux ; écart attendu."
+tondelier,REC-20/21,1.33,3.5,-62,2.7,0.01,-0.0,0.21,0.0,0.01,0.0,0.0,1.59,
+tondelier,PRE-11,-1.66,-1.7,-2,-9.6,-0.23,-0.03,0.18,0.0,1.49,0.0,0.0,-0.0,
+tondelier,PRE-12,-3.46,-2.8,24,1.4,-0.04,-0.0,0.21,0.0,0.01,3.23,0.0,-0.0,"Lecture du chiffrage du programme : la moitié du montant pour deux enfants (32 % de la base mensuelle), modulée selon les revenus comme les allocations familiales."
+tondelier,PRE-13,-4.11,-4.4,-7,1.6,-0.01,-0.0,0.13,0.0,0.01,0.0,3.96,-0.0,
+tondelier,PRE-10,-5.8,-6.6,-12,-145.7,-3.29,5.65,-0.12,0.0,0.09,0.0,0.0,-0.0,"Garantie d'autonomie à 50 % du SMIC net (≈ 790 € contre ≈ 660 € : + 20 %) à la place du RSA, dès 18 ans. Recours : celui du RSA (le programme dit « sans contrepartie », le recours pourrait être plus haut)."
+lisnard,LIS-SOC-01,-4.39,-3.5,25,6.3,0.15,-0.0,0.21,0.0,0.01,0.0,0.0,-4.15,
+lisnard,LIS-ECO-03,2.61,2.6,0,23.2,0.27,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"« 500 € d'écart entre le SMIC et l'assistance » : aides sociales (RSA, prime d'activité, aides au logement, prestations familiales) d'une famille sans revenu d'activité plafonnées à SMIC net − 500 € (1 443 − 500 = 943 € par mois, SMIC de 2026 d'OpenFisca). Fusion en une allocation unique : pas de barème publié, seul le plafond est codé."
+roussel,PCF-RET-03,-23.09,-22.0,5,3.1,0.01,-0.0,0.21,0.0,0.01,0.0,0.0,3.98,
+roussel,PCF-LOG-02,-0.94,-0.8,18,-3.5,-0.11,-0.03,0.19,0.0,0.75,0.0,0.0,-0.0,"Revalorisation non chiffrée par le programme : 5 %, comme le chiffrage du moteur."
+roussel,PCF-PRE-01,-1.48,-2.0,-26,-40.1,-1.07,1.45,-0.12,0.0,0.03,0.0,0.0,-0.0,
+melenchon,LFI-PRE-04,-1.66,-1.7,-2,-9.6,-0.23,-0.03,0.18,0.0,1.49,0.0,0.0,-0.0,
+melenchon,LFI-PRE-03,-10.81,-11.5,-6,1.7,-0.01,-0.0,0.09,0.0,0.01,0.0,10.71,-0.0,AAH portée à 1 700 € (SMIC net revalorisé du programme) ; plafond de ressources relevé d'autant par la formule d'OpenFisca.
+melenchon,LFI-PRE-01,-37.15,-28.0,33,-724.1,-17.94,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Complément qui porte le niveau de vie du ménage (revenu disponible par unité de consommation, après les autres mesures de la même simulation) à 1 337 € par mois ; recours complet (prestation automatique, p. 72)."
+le_pen,RN-FIS-03,-6.49,-3.7,75,7.8,0.16,-0.0,0.21,0.0,0.01,0.0,0.0,-6.25,Foyer dont le déclarant principal a moins de 30 ans et dont le revenu brut global est sous quatre SMIC bruts annuels : impôt sur le revenu nul.
+le_pen,RN-FAM-01,-4.21,-3.2,32,1.5,-0.02,-0.0,0.21,4.01,0.01,0.0,0.0,-0.0,
+philippe,PHI-FIS-02,-1.47,-3.0,-51,3.8,0.04,-0.0,0.21,0.0,0.01,0.0,0.0,-1.23,"Foyer avec un enfant de moins de 3 ans : impôt sur le revenu annulé jusqu'à 3 000 € (réduction de 3 000 € au-delà), comme le site du 12/11/2026."
+arthaud,ART-FAM-01,-0.72,-0.6,20,0.2,-0.03,-0.0,0.37,0.0,0.19,0.14,0.0,-0.0,"Revalorisation de 1,2 % (inflation) des allocations familiales, de la prime d'activité et des aides au logement gelées en 2027."
+retailleau,RET-EMP-01,4.23,4.2,1,66.8,0.81,-2.99,-1.24,0.0,0.0,0.0,0.0,0.0,"Revenu d'incitation à l'activité à la place du RSA et de la prime d'activité : une famille éligible au RSA reçoit 300 € par mois, 550 € avec une activité, à la place du RSA et de la prime d'activité ; les autres familles gardent la prime d'activité. Lecture à arbitrer : la lecture littérale (toute famille éligible au RSA ou à la prime) coûte 14 Md€, à l'opposé de l'économie annoncée. L'ASS n'est pas dans la population."
+retailleau,RET-EMP-02,3.51,3.5,0,28.4,0.36,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Aides sociales d'une famille (RSA, prime d'activité, aides au logement, prestations familiales) plafonnées à 70 % du SMIC net (0,7 × 1 443 ≈ 1 010 € par mois)."

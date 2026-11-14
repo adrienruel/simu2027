@@ -21,7 +21,7 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     p = Parametres()
     decisions = sorted(x.cle for x in p if x.statut == "DECISION" and p.origine[x.cle].name == "economie.yaml")
     assert decisions == ["calendrier.inflation", "demographie.scenario_fecondite", "incertitude.correlation",
-                         "ministeres.elasticite_eleves_etudiants", "sante_trajectoire.pente_phase_1"]
+                         "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi", "sante_trajectoire.pente_phase_1"]
 
 
 def _programme_temporaire(tmp_path, monkeypatch, texte_en_plus: str) -> str:

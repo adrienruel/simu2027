@@ -1,0 +1,9 @@
+programme,mesure,scenario,emplois,budget_md,statique_md
+retailleau,RET-EMP-01,crise,32300,0.415,4.23
+retailleau,RET-EMP-01,prudent,66826,0.814,4.23
+retailleau,RET-EMP-01,median,190997,2.286,4.23
+retailleau,RET-EMP-01,optimiste,365700,4.366,4.23
+retailleau,RET-EMP-02,crise,17956,0.24,3.514
+retailleau,RET-EMP-02,prudent,28438,0.357,3.514
+retailleau,RET-EMP-02,median,73904,0.9,3.514
+retailleau,RET-EMP-02,optimiste,140046,1.698,3.514

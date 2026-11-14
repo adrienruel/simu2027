@@ -1,0 +1,13 @@
+programme,mesure,scenario,emplois,budget_md,statique_md
+melenchon,LFI-PRE-04,crise,-20740,-0.443,-1.662
+melenchon,LFI-PRE-04,prudent,-9582,-0.235,-1.662
+melenchon,LFI-PRE-04,median,843,-0.094,-1.662
+melenchon,LFI-PRE-04,optimiste,7254,-0.065,-1.662
+melenchon,LFI-PRE-03,crise,-896,-0.043,-10.81
+melenchon,LFI-PRE-03,prudent,1685,-0.015,-10.81
+melenchon,LFI-PRE-03,median,7815,0.02,-10.81
+melenchon,LFI-PRE-03,optimiste,15568,0.051,-10.81
+melenchon,LFI-PRE-01,crise,-1367394,-33.831,-37.148
+melenchon,LFI-PRE-01,prudent,-724074,-17.937,-37.148
+melenchon,LFI-PRE-01,median,-285535,-7.08,-37.148
+melenchon,LFI-PRE-01,optimiste,-190357,-4.72,-37.148
