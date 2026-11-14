@@ -178,7 +178,7 @@ def construire(operations: list[dict]):
 
 # --- Calcul --------------------------------------------------------------------------------------------------
 
-POST = ("garantie_niveau_vie", "plafond_aides", "revenu_incitation")  # règles appliquées après le calcul d'OpenFisca
+POST = ("garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree")  # règles appliquées après le calcul d'OpenFisca
 EMPLOI = ("salarie_prive", "agent_public", "independant")
 AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
 
@@ -234,10 +234,56 @@ class Base:
         self.bande = np.array([0 if l["salaire_brut"] + max(l["revenu_independant"], 0) <= 1.3 * smic_an else
                                (1 if l["salaire_brut"] + max(l["revenu_independant"], 0) <= 2.5 * smic_an else 2)
                                for l in self.lignes])
+        exc = np.zeros(n_f, bool)
+        couple = np.zeros(n_f, bool)
+        enf = np.zeros(n_f, bool)
+        for j, l in enumerate(self.lignes):
+            fa, r = s["famille"][j], s["role_famille"][j]
+            couple[fa] |= r == "conjoint"
+            enf[fa] |= r == "enfant"
+            if r in ("demandeur", "conjoint") and (l["handicap"] or l["age"] >= 60):
+                exc[fa] = True
+        self.exceptions_rsa = exc | (~couple & enf)
+        self.nationalite()
         self.etat0 = self.etat(self.sim, [])
         self.emploi = emploi
         if emploi:
             self.cf0 = self.contrefactuels(None, [])
+
+    def nationalite(self):
+        """Ménages étrangers (microsimulation.nationalite) : probabilité logistique croissante quand le niveau de vie
+        baisse, calée sur le nombre d'étrangers et sur leur part des prestations des Caf ; ressortissants de l'UE et
+        arrivés depuis moins de cinq ans tirés au hasard parmi eux."""
+        s, an = self.s, "2026"
+        x = Parametres().val("microsimulation.nationalite")
+        rd = self.sim.calculate("revenu_disponible", an)
+        uc = self.sim.calculate("unites_consommation", an)
+        nv = rd / np.maximum(uc, 1e-9)
+        z = -(np.log(np.maximum(nv, 1000)) - np.log(np.median(nv)))
+        caf = sum(self.sim.calculate_add(k, an) for k in AIDES)
+        caf_m = np.bincount(self.fam_men, weights=caf, minlength=s["n_menages"])
+        pers = self.wm * self.pers_m
+        rng = np.random.default_rng(2076)
+        u = rng.random(s["n_menages"])
+        cible = x["etrangers"] * 1e6
+        meilleur = None
+        for b in np.linspace(0, 4, 41):
+            lo, hi = -15.0, 5.0
+            for _ in range(50):
+                a = (lo + hi) / 2
+                pr = 1 / (1 + np.exp(-(a + b * z)))
+                lo, hi = (a, hi) if (pers * pr).sum() < cible else (lo, a)
+            etr = u < pr
+            part = (self.wm * caf_m * etr).sum() / (self.wm * caf_m).sum()
+            if meilleur is None or abs(part - x["part_paiements_cnaf"]) < abs(meilleur[0] - x["part_paiements_cnaf"]):
+                meilleur = (part, etr, b)
+        self.part_caf_etrangers, etr, self.b_nationalite = meilleur
+        v = rng.random(s["n_menages"])
+        ue = etr & (v < x["part_ue"])
+        hors_ue = etr & ~ue
+        recents = hors_ue & (rng.random(s["n_menages"]) < x["part_recents_hors_ue"])
+        self.groupes = {"hors_ue": hors_ue[self.fam_men], "hors_ue_recents": recents[self.fam_men],
+                        "etrangers": etr[self.fam_men]}  # par famille
 
     # -- un état : revenu disponible des ménages après recours et règles ajoutées
     def etat(self, sim, post: list[dict]) -> dict:
@@ -274,6 +320,21 @@ class Base:
                 else:
                     sans = np.ones(s["n_familles"], bool)
                 ajust_f = ajust_f - sans * np.maximum(0.0, tot - cap)
+            if x["nom"] == "condition_nationalite":
+                # prestations retirées aux familles du groupe (hors UE, ou hors UE arrivées depuis moins de cinq ans)
+                g = self.groupes[x["groupe"]]
+                for k in x["prestations"]:
+                    ajust_f = ajust_f - g * percu[k]
+                    percu[k] = percu[k] * ~g
+            if x["nom"] == "rsa_duree":
+                # RSA limité dans le temps : une part des familles au RSA le perd (ancienneté tirée au hasard), sauf
+                # handicap, parent isolé et 60 ans ou plus
+                if not hasattr(self, "_u_duree"):
+                    self._u_duree = np.random.default_rng(45).random(s["n_familles"])
+                exc = self.exceptions_rsa
+                perd = (self._u_duree < x["part"]) & ~exc
+                ajust_f = ajust_f - perd * percu["rsa"]
+                percu["rsa"] = percu["rsa"] * ~perd
         rd = rd + np.bincount(self.fam_men, weights=ajust_f, minlength=s["n_menages"])
         for x in post:
             if x["nom"] == "garantie_niveau_vie":

@@ -54,6 +54,9 @@ lisnard:
   LIS-ECO-03:
     operations: [{formule: {nom: plafond_aides, plafond_mensuel: 943, sans_activite_seulement: true}}]
     note: "« 500 € d'écart entre le SMIC et l'assistance » : aides sociales (RSA, prime d'activité, aides au logement, prestations familiales) d'une famille sans revenu d'activité plafonnées à SMIC net − 500 € (1 443 − 500 = 943 € par mois, SMIC de 2026 d'OpenFisca). Fusion en une allocation unique : pas de barème publié, seul le plafond est codé."
+  LIS-ECO-03b:
+    operations: [{formule: {nom: condition_nationalite, groupe: hors_ue_recents, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
+    note: "Prestations non contributives réservées aux résidents depuis cinq ans : familles étrangères hors UE arrivées depuis moins de cinq ans (le versement à l'étranger n'est pas dans la population)."
 
 roussel:
   PCF-RET-03:
@@ -87,11 +90,17 @@ le_pen:
     note: "Foyer dont le déclarant principal a moins de 30 ans et dont le revenu brut global est sous quatre SMIC bruts annuels : impôt sur le revenu nul."
   RN-FAM-01:
     operations: [{variable: {nom: asf, facteur: 2.0}}]
+  RN-IMM-01:
+    operations: [{formule: {nom: condition_nationalite, groupe: hors_ue_recents, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
+    note: "« Priorité nationale » : prestations non contributives retirées aux familles étrangères hors UE présentes depuis moins de cinq ans (lecture de la condition d'années de résidence ou d'activité)."
 
 philippe:
   PHI-FIS-02:
     operations: [{formule: {nom: ir_naissance, age_enfant_max: 2, plafond: 3000}}]
     note: "Foyer avec un enfant de moins de 3 ans : impôt sur le revenu annulé jusqu'à 3 000 € (réduction de 3 000 € au-delà), comme le site du 12/11/2026."
+  PHI-SOC-06:
+    operations: [{formule: {nom: rsa_duree, part: 0.45}}]
+    note: "Durée du RSA limitée, sans durée donnée : même lecture que Zemmour (trois ans), mêmes exceptions."
 
 arthaud:
   ART-FAM-01:
@@ -108,3 +117,14 @@ retailleau:
   RET-EMP-02:
     operations: [{formule: {nom: plafond_aides, plafond_mensuel: 1010}}]
     note: "Aides sociales d'une famille (RSA, prime d'activité, aides au logement, prestations familiales) plafonnées à 70 % du SMIC net (0,7 × 1 443 ≈ 1 010 € par mois)."
+  RET-IMM-03:
+    operations: [{formule: {nom: condition_nationalite, groupe: hors_ue_recents, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
+    note: "Cinq ans de résidence légale pour les prestations non contributives : familles étrangères hors UE arrivées depuis moins de cinq ans."
+
+zemmour:
+  ZEM-IMM-04:
+    operations: [{formule: {nom: condition_nationalite, groupe: hors_ue, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
+    note: "« Préférence nationale » : prestations familiales, aides au logement, RSA et prime d'activité retirés aux familles étrangères hors UE (les ressortissants de l'UE sont protégés par le droit de l'Union). Application complète : le risque juridique reste dans les scénarios du moteur."
+  ZEM-KNA-04:
+    operations: [{formule: {nom: rsa_duree, part: 0.45}}]
+    note: "RSA limité à trois ans : 45 % des allocataires y sont depuis plus de trois ans (Drees, minima sociaux 2024), tirés au hasard ; exceptions : handicap, parent isolé, 60 ans ou plus (« aptes au travail »)."

@@ -1498,3 +1498,9 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   recalés sur OpenFisca (tranche à 9 %, ASF, abattement des retraités, revenu d'incitation et plafonds d'aides).
 - Déficit 2037 au prudent : Mélenchon 27,50 → 28,07 ; Tondelier 13,00 → 13,23 ; Bertrand 9,32 → 9,49 ; Le Pen
   13,18 → 13,28 ; Retailleau 10,39 → 10,22 ; Lisnard 14,24 → 14,21.
+
+## 14/11/2026 (soir) — Nationalité dans la population ; conditions de nationalité et RSA limité dans le temps
+
+- `microsimulation.nationalite` ; règles `condition_nationalite` et `rsa_duree` ; Zemmour (2 mesures), Le Pen,
+  Retailleau, Lisnard, Philippe codés. Emplois entrés au prorata du montant du moteur (risque juridique compris).
+- Déficit 2037 au prudent : Mélenchon 28,07 → 27,91 (emplois de la garantie au prorata : 28 / 37), autres ≤ 0,03.

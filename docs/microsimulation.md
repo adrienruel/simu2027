@@ -197,3 +197,24 @@ Tondelier − 146 (garantie d'autonomie), Roussel − 40 (RSA dès 18 ans).
 
 Effet sur le déficit 2037 au prudent : Mélenchon + 0,57 point, Tondelier + 0,23, Bertrand + 0,17 (IR), Le Pen + 0,10
 (ASF), Retailleau − 0,17, Lisnard − 0,03.
+
+## Aides sous condition de nationalité ou de durée (14/11/2026, soir)
+
+- Nationalité dans la population (`microsimulation.nationalite`) : 6,03 millions d'étrangers (Insee 2024), ménage par
+  ménage, plus souvent dans le bas de la distribution, calés pour recevoir 13 % des prestations des Caf (Cnaf, d'après
+  l'iFRAP : 13,2 % obtenus) ; un quart ressortissants de l'UE, 30 % des autres arrivés depuis moins de cinq ans.
+- Règles nouvelles : `condition_nationalite` (prestations retirées à un groupe de familles), `rsa_duree` (une part
+  des allocataires du RSA le perd, sauf handicap, parent isolé, 60 ans ou plus).
+
+| Programme | Mesure | OpenFisca (statique) | Moteur (prudent) | Emplois (prudent, application complète) |
+|---|---|---|---|---|
+| Zemmour | Prestations familiales, logement, RSA, prime réservés aux Français (hors UE exclus) | + 5,9 | + 5,1 | + 12 500 |
+| Zemmour | RSA limité à trois ans | + 2,4 | + 1,5 | + 43 000 |
+| Le Pen | Priorité nationale (moins de cinq ans, hors UE) | + 1,7 | + 2,0 | + 3 000 |
+| Retailleau | Cinq ans de résidence | + 1,7 | + 2,0 | + 3 000 |
+| Lisnard | Cinq ans de résidence | + 1,7 | + 2,2 | + 3 000 |
+| Philippe | Durée du RSA limitée (lecture : trois ans) | + 2,4 | + 0,4 | + 43 000 |
+
+Les montants du moteur gardent le risque juridique (crise à zéro ou presque) : la micro donne l'effet d'une
+application complète. Les emplois entrent dans les trajectoires au prorata du montant du moteur (montant du moteur /
+effet statique de la micro), pour toutes les mesures où la micro donne les emplois.

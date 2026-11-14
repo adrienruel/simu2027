@@ -1,2 +1,3 @@
 programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,note
 philippe,PHI-FIS-02,-1.47,-3.0,-51,3.8,0.04,-0.0,0.21,0.0,0.01,0.0,0.0,-1.23,"Foyer avec un enfant de moins de 3 ans : impôt sur le revenu annulé jusqu'à 3 000 € (réduction de 3 000 € au-delà), comme le site du 12/11/2026."
+philippe,PHI-SOC-06,2.43,0.4,506,43.4,0.47,-2.43,0.0,0.0,0.0,0.0,0.0,0.0,"Durée du RSA limitée, sans durée donnée : même lecture que Zemmour (trois ans), mêmes exceptions."

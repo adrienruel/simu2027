@@ -380,7 +380,8 @@ def micro_emploi() -> dict:
         if f.exists():
             with f.open(encoding="utf-8") as g:
                 for l in csv.DictReader(g):
-                    _MICRO.setdefault(l["mesure"], {})[l["scenario"]] = (float(l["emplois"]), float(l["budget_md"]))
+                    _MICRO.setdefault(l["mesure"], {})[l["scenario"]] = (float(l["emplois"]), float(l["budget_md"]),
+                                                                          float(l["statique_md"]))
     return _MICRO
 
 
@@ -395,14 +396,19 @@ def _micro(p: Parametres, s: str, groupes: dict, annees, vit: float) -> dict:
     emplois = {t: 0.0 for t in annees}
     budget = {t: 0.0 for t in annees}
     for ident, ms in groupes.items():
-        e_s, b_s = table[ident][s]
+        e_s, b_s, statique = table[ident][s]
         tot = {t: sum(m.valeurs.get(t, 0.0) for m in ms) for t in annees}
         plein = sum(tot.get(t, 0.0) for t in range(2032, 2037)) / 5
         if abs(plein) < 1e-9:
             continue
+        # part de la mesure appliquée dans ce scénario : montant du moteur (risque juridique, transition compris) /
+        # effet statique de la micro (mesure appliquée en entier) ; 1 si la micro ne donne pas d'effet statique
+        budget_moteur = sum((m.valeurs.get(t, 0.0) if m.poste == "recettes" else -m.valeurs.get(t, 0.0))
+                            for m in ms for t in range(2032, 2037)) / 5
+        k = max(0.0, min(1.5, budget_moteur / statique)) if abs(statique) > 0.05 else 1.0
         cumul = 0.0
         for t in annees:
-            cumul += vit * (e_s * max(0.0, min(1.5, tot[t] / plein)) - cumul)
+            cumul += vit * (k * e_s * max(0.0, min(1.5, tot[t] / plein)) - cumul)
             emplois[t] += cumul
             budget[t] += (b_s / e_s * cumul if abs(e_s) > 100 else 0.0) * w[max(t, 2029)] / w[2029]
     return {"emplois": emplois, "budget": budget,
