@@ -83,3 +83,41 @@ def test_inflation_allege_dette_nominale(p):
     choc = {t: infl[t] + (0.01 if t == 2030 else 0.0) for t in noyau.ANNEES}
     r = noyau.trajectoire(p, "prudent", contexte={"inflation": choc, "inflation_taux": infl})
     assert r[2031]["dette"] < base[2031]["dette"]
+
+
+def test_prime_de_dette_pese_sur_le_pib(p):
+    """E1 : un programme dont le taux de marché dépasse celui du statu quo perd du PIB ; le statu quo n'en perd pas."""
+    base = noyau.simuler(p, None, scenarios=["prudent"])["prudent"]
+    assert all(base[t]["pib_taux"] == 0.0 for t in noyau.ANNEES)
+    r = noyau.simuler(p, noyau.charger("melenchon"), scenarios=["prudent"], contrefactuel=False)["prudent"]
+    assert r[2035]["ecart_marche"] > base[2035]["ecart_marche"]
+    assert r[2035]["pib_taux"] < 0
+    q = p.avec({"macro.bouclage_prime_demande": False})
+    r0 = noyau.simuler(q, noyau.charger("melenchon"), scenarios=["prudent"], contrefactuel=False)["prudent"]
+    assert r0[2035]["pib_taux"] == 0.0 and r0[2037]["deficit"] < r[2037]["deficit"]
+
+
+def test_pensions_en_retard_sur_les_prix(p):
+    """E2 : l'inflation due au programme fait perdre aux pensions ce pouvoir d'achat l'année même."""
+    infl = sq.inflation(p, "prudent")
+    choc = {t: (0.01 if t == 2031 else 0.0) for t in noyau.ANNEES}
+    r = noyau.trajectoire(p, "prudent", contexte={"inflation": {t: infl[t] + choc[t] for t in noyau.ANNEES},
+                                                  "inflation_taux": infl, "inflation_bouclage": choc})
+    bl = sq.blocs(p, "prudent")
+    assert r[2031]["erosion_pensions"] == pytest.approx(0.01 * bl[2031]["retraites"])
+    assert r[2032]["erosion_pensions"] == 0.0
+
+
+def test_balance_commerciale_mesange():
+    """E4 : la relation publiée retrouve la balance commerciale des variantes de Mésange à 0,08 point près."""
+    e = Parametres().val("bouclage.exterieur")
+    cas = {  # (PIB %, prix %, balance Mésange) à 1, 5 et 10 ans
+        "depense": [(0.78, 0.20, -0.30), (0.86, 1.42, -0.62), (0.53, 1.88, -0.71)],
+        "investissement": [(1.31, 0.31, -0.52), (0.93, 1.86, -0.78), (0.57, 2.25, -0.86)],
+        "cotisations": [(0.20, -0.36, -0.04), (0.97, -1.09, 0.00), (1.29, -1.32, 0.03)],
+    }
+    for lignes in cas.values():
+        for y, pr, b in lignes:
+            assert abs(-e["alpha"] * y - e["beta"] * pr - b) <= 0.085
+    base = noyau.simuler(Parametres(), None, scenarios=["prudent"])["prudent"]
+    assert base[2037]["balance_commerciale"] == 0.0

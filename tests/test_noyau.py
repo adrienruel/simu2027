@@ -79,8 +79,12 @@ def test_ecologie_de_droite_sur_le_noyau_sans_moteur_propre(p):
         else:
             # la contribution est un emprunt aux ménages (12/11/2026) : la règle la compte, le déficit publié aussi
             contribution = regle["leviers"]["Contribution d'épargne retraite"] / r[s][2037]["pib"] * 100
+            # ou les mesures automatiques, une fois la règle déclenchée, couvrent plus que l'écart à la cible
+            auto = regle["automatiques"] / r[s][2037]["pib"] * 100
             assert (r[s][2037]["deficit"] == pytest.approx(3.0 + contribution, abs=0.01)
-                    or r[s][2037]["deficit_avant_regle"] <= 3.0)
+                    or r[s][2037]["deficit_avant_regle"] <= 3.0
+                    or (auto * r[s][2037]["pib"] / 100 > regle["ecart_cible"]
+                        and r[s][2037]["deficit"] == pytest.approx(r[s][2037]["deficit_avant_regle"] - auto, abs=0.01)))
 
 
 def test_scenario_sans_regle_est_un_vrai_contrefactuel(p):
@@ -114,6 +118,9 @@ def test_bilan_des_mesures(ed, p):
     for t in (2029, 2050):
         effet = sum(x[t] for x in b) + r["prudent"][t]["dynamiques"]["fonds"]["solde"]
         effet += r["prudent"][t]["regle"]["gain_comptes"]  # ce que la règle a inscrit au solde
+        # phase E (noyau) : recettes du PIB perdu ou gagné par les taux, pensions érodées par l'inflation du programme
+        y_sq, rec_sq = sq.pib(p, "prudent"), sq.recettes(p, "prudent")
+        effet += r["prudent"][t]["pib_taux"] * rec_sq[t] / y_sq[t] + r["prudent"][t]["erosion_pensions"]
         assert effet == pytest.approx(r["prudent"][t]["solde_primaire"] - base[t]["solde_primaire"], abs=1e-6)
 
 

@@ -1,7 +1,7 @@
 # Phase E : macro bouclée (14 novembre 2026)
 
 `moteur/bouclage.py`, paramètres `bouclage.*` (`parametres/commun/economie.yaml`), option `macro.bouclage`
-(`parametres/commun/options.yaml`, vrai sur la branche `phase-e`, **à valider par Adrien**). Tests :
+(`parametres/commun/options.yaml`, vrai ; décisions d'Adrien du 14/11/2026). Tests :
 `tests/test_bouclage.py`. Outils : `outils/calibrer_bouclage.py` (calage), `outils/banc_mesange.py` (critère de
 sortie), `outils/comparer_bouclage.py` (effet sur les 14 trajectoires).
 
@@ -78,53 +78,59 @@ Mésange. Écart relatif au PIB de Mésange :
   / −0,55 / −0,71 / −0,91 / −1,09, contre −0,36 / −0,70 / −0,87 / −1,09 / −1,32 dans Mésange (même signe ; avant : en
   hausse, par la demande seule).
 
-## Effet sur les programmes (déficit, % du PIB, prudent : main au commit 7c511dc → phase E)
+## Suite du 14/11 (après « go ») : décisions appliquées, trois canaux de plus
+
+Décisions d'Adrien (14/11, 11 h 28) : les cinq propositions validées telles quelles (bouclage actif, multiplicateur
+= effet maximal, poids du coût du travail 0,13, BCE active, part de long terme de Mésange).
+
+- **E1, prime de dette → demande** (`moteur/noyau.trajectoire`) : l'écart du taux de marché de l'État au statu quo
+  (prime de dette, écart propre au programme, BCE) passe aux taux des crédits (`bouclage.prime_demande` : crise 0,5,
+  prudent 0,35, médian 0,25, optimiste 0,15 ; miroir quand le taux est plus bas), puis au PIB par la variante de taux
+  de Mésange ; recettes au taux du statu quo, chômage par la loi d'Okun, plancher du chômage commun. Le statu quo est
+  le repère (son propre emballement ne pèse pas sur son PIB). Publié : `pib_taux`, `ecart_marche`. Option
+  `macro.bouclage_prime_demande`.
+- **E2, pensions en retard sur les prix** : revalorisées en janvier sur l'inflation passée, les pensions perdent
+  l'inflation due au programme l'année où elle survient (−dπ_t × bloc retraites). Commun à tous les programmes, dans le
+  noyau. Publié : `erosion_pensions`.
+- **E4, balance commerciale** publiée (`balance_commerciale`, points de PIB, écart au statu quo) : −0,31 × écart de PIB
+  (%) − 0,29 × écart de prix (%), calée sur Mésange ; retrouve ses trois variantes à 0,08 point près. Exemple 2037 au
+  prudent : Mélenchon −4,7 points, Tondelier −0,9, Écologie de droite +0,5.
+- **Choc pétrolier** : essayé comme un prélèvement payé à l'étranger, il ne passe pas (−0,10 à 10 ans contre −0,22 dans
+  Mésange) : il faut un canal de termes de l'échange avec une perte d'offre durable. Laissé dans le reste de E4.
+
+## Effet sur les programmes (déficit, % du PIB, prudent : main au commit 7c511dc → phase E complète)
 
 | Programme | 2032 | 2037 | 2050 |
 |---|---|---|---|
 | Statu quo | 7,16 → 7,16 | 9,50 → 9,50 | 20,57 → 20,57 |
-| Écologie de droite | 4,16 → 4,54 | 4,15 → 4,68 | 4,89 → 6,12 |
+| Écologie de droite | 4,16 → 4,54 | 4,15 → 4,63 | 4,89 → 5,67 |
 | Bertrand | 7,09 → 7,09 | 9,28 → 9,33 | 20,24 → 20,37 |
-| Retailleau | 7,73 → 7,70 | 10,46 → 10,36 | 24,29 → 24,03 |
-| Philippe | 8,34 → 8,27 | 11,25 → 11,16 | 26,92 → 26,74 |
-| Attal | 8,66 → 8,42 | 11,54 → 11,31 | 26,82 → 26,13 |
-| Tondelier | 9,63 → 9,08 | 13,98 → 12,79 | 33,85 → 30,63 |
-| Le Pen | 9,99 → 9,58 | 13,71 → 13,16 | 33,47 → 32,06 |
-| Glucksmann | 10,23 → 9,59 | 14,44 → 13,33 | 34,18 → 31,38 |
-| Zemmour | 10,52 → 10,20 | 13,99 → 13,80 | 35,11 → 34,57 |
-| Lisnard | 10,90 → 10,66 | 14,73 → 14,36 | 37,23 → 36,31 |
-| Arthaud | 12,56 → 11,88 | 18,44 → 16,70 | 45,43 → 41,35 |
-| Mélenchon | 19,40 → 18,77 | 29,63 → 26,90 | 71,35 → 65,73 |
-| Roussel | 17,50 → 17,18 | 30,82 → 28,94 | 84,22 → 80,09 |
+| Retailleau | 7,73 → 7,70 | 10,46 → 10,39 | 24,29 → 24,18 |
+| Philippe | 8,34 → 8,28 | 11,25 → 11,22 | 26,92 → 26,98 |
+| Attal | 8,66 → 8,43 | 11,54 → 11,37 | 26,82 → 26,33 |
+| Tondelier | 9,63 → 9,02 | 13,98 → 12,81 | 33,85 → 30,75 |
+| Le Pen | 9,99 → 9,59 | 13,71 → 13,27 | 33,47 → 32,34 |
+| Glucksmann | 10,23 → 9,56 | 14,44 → 13,40 | 34,18 → 31,56 |
+| Zemmour | 10,52 → 10,25 | 13,99 → 13,99 | 35,11 → 34,91 |
+| Lisnard | 10,90 → 10,68 | 14,73 → 14,53 | 37,23 → 36,64 |
+| Arthaud | 12,56 → 11,89 | 18,44 → 16,95 | 45,43 → 41,55 |
+| Mélenchon | 19,40 → 18,65 | 29,63 → 27,34 | 71,35 → 65,52 |
+| Roussel | 17,50 → 17,20 | 30,82 → 29,86 | 84,22 → 79,92 |
 
 Lecture : l'effet d'une impulsion dure plus longtemps (Mésange : encore 0,53 au bout de dix ans, contre zéro après
-4,5 ans dans l'ancienne forme). Les relances y gagnent (de 1 à 3 points de déficit en 2037), la consolidation
-d'Écologie de droite y perd (+0,5 point en 2037, +1,2 en 2050). Le classement de 2037 bouge peu : Tondelier passe
-devant Le Pen, Glucksmann devant Zemmour.
+4,5 ans dans l'ancienne forme). Les relances y gagnent, la consolidation d'Écologie de droite y perd (+0,5 point en
+2037). La prime de dette en reprend une partie aux programmes très endettés (Mélenchon 2037 : 26,90 → 27,82 avec ce
+canal), et rend un peu à ceux dont la dette baisse ; les pensions en retard sur les prix allègent les relances
+(Mélenchon : 27,82 → 27,34). Classement de 2037 : Tondelier passe devant Le Pen, Glucksmann devant Zemmour.
 
-Décomposition (prudent, 2037) :
-- **Persistance de la demande** : l'essentiel.
-- **Prix** : allège la dette des relances (Mélenchon : 269 → 247 % du PIB en 2037, à déficit presque égal).
-- **BCE** : resserre un peu les taux quand la France relance ; sur une dette de 250 % du PIB, c'est beaucoup
-  (Mélenchon : 24,1 % sans la BCE, 26,9 % avec).
-- **Part gardée à long terme** (φ, Mésange 0,16) : peu d'effet ; à φ = 0, Écologie de droite 4,59 au lieu de 4,68 en
-  2037, Mélenchon 26,80 au lieu de 26,90.
-
-## Décisions à prendre par Adrien
-
-1. Activer le bouclage (`macro.bouclage`) dans le chiffrage publié.
-2. `macro.multiplicateur` lu comme l'effet maximal (deuxième année) plutôt que comme l'effet de la première année.
-3. Poids de demande du coût du travail 0,4 → 0,13 (calé sur Mésange).
-4. Règle de la BCE active (par défaut) ou taux réels constants comme Mésange.
-5. Part gardée à long terme : celle de Mésange (φ = 0,19) ou zéro (modèle d'offre pur à long terme).
+Sensibilités (avant les trois canaux de la suite, prudent 2037) : sans la BCE, Mélenchon 24,1 au lieu de 26,9 ; part
+de long terme φ = 0 : Écologie de droite 4,59 au lieu de 4,68.
 
 ## Reste de la phase E
 
-- E1 : la prime de dette ne pèse pas encore sur la demande (elle est calculée dans le noyau, après le multiplicateur).
-- E2 : revalorisation des pensions en retard sur les prix (érosion d'un an) ; TVA et accises comme chocs de prix ;
-  boucle prix-salaires explicite (salaires indexés sur les prix avec retard).
-- E4 : balance courante publiée ; contenu en importations par instrument (investissement public) ; termes de
-  l'échange (choc pétrolier de Mésange : −0,10 / −0,24 / −0,18 / −0,21 / −0,22 % de PIB pour +10 $ le baril).
+- E2 : TVA et accises comme chocs de prix ; boucle prix-salaires explicite.
+- E4 : termes de l'échange (choc pétrolier) ; contenu en importations par instrument (investissement public, manqué
+  de 35 % la première année) ; balance courante (revenus versés aux non-résidents).
 - E5 : accumulation du capital (aujourd'hui par canal).
 - E6 : appariement, chômage d'équilibre, participation par âge.
 

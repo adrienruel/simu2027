@@ -21,7 +21,10 @@ def calcul(args):
 
 
 def main():
-    arg = [a for a in sys.argv[1:] if not a.startswith("--")]
+    argv = sys.argv[1:]
+    if "--scenario" in argv:
+        i = argv.index("--scenario"); del argv[i:i + 2]
+    arg = [a for a in argv if not a.startswith("--")]
     scen = [sys.argv[sys.argv.index("--scenario") + 1]] if "--scenario" in sys.argv else None
     noms = arg or noyau.programmes_disponibles()
     taches = [(n, b, scen) for n in noms for b in (False, True)]

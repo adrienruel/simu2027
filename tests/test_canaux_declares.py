@@ -38,14 +38,19 @@ def test_canal_inconnu_refuse():
 def test_fraude_tva_et_productivite():
     prog = _programme({"fraude_tva": {"montant": {"crise": 0, "prudent": 2.0, "median": 3, "optimiste": 5}, "debut": 2029, "montee": 4},
                        "productivite": {"taux": PAR, "debut": 2030, "annees": 10}})
-    r = noyau.simuler(P, prog, scenarios=("prudent",))["prudent"]
+    # mécanique du canal seule : sans la rétroaction des taux sur le PIB (phase E, tests/test_bouclage.py)
+    q = P.avec({"macro.bouclage_prime_demande": False})
+    r = noyau.simuler(q, prog, scenarios=("prudent",))["prudent"]
     noms = {m.nom for m in prog.mesures(P)["prudent"]}
     assert {"Canal déclaré : fraude à la TVA", "Canal déclaré : productivité"} <= noms
     # 2029 : un quart de la fraude, pas encore de productivité
-    assert BASE[2029]["solde_primaire"] + 0.5 == pytest.approx(r[2029]["solde_primaire"], abs=1e-6)
-    assert r[2029]["pib"] == pytest.approx(BASE[2029]["pib"])
+    # à 0,02 Md€ près : effets bouclés de second ordre (prix, pensions en retard sur les prix) des mesures du programme
+    assert BASE[2029]["solde_primaire"] + 0.5 == pytest.approx(r[2029]["solde_primaire"], abs=0.02)
+    assert r[2029]["pib"] == pytest.approx(BASE[2029]["pib"], abs=0.05)
     from moteur import statu_quo as sq  # dix ans de gain sur le PIB du statu quo, puis palier
-    assert r[2045]["pib"] - BASE[2045]["pib"] == pytest.approx(sq.pib(P, "prudent")[2045] * (1.001 ** 10 - 1), rel=1e-9)
+    # repère : le même programme sans canal (les effets bouclés de ses propres mesures durent jusqu'en 2045)
+    r0 = noyau.simuler(q, _programme({}), scenarios=("prudent",))["prudent"]
+    assert r[2045]["pib"] - r0[2045]["pib"] == pytest.approx(sq.pib(P, "prudent")[2045] * (1.001 ** 10 - 1), rel=1e-2)
     assert r[2050]["deficit"] < BASE[2050]["deficit"]
 
 

@@ -879,6 +879,18 @@ bouclage:
     statut: HYPOTHESE
     source: "Poids de la France : PIB de 2024, 2 918 Md€ sur 15 044 Md€ pour la zone euro (Insee, Eurostat, repris par BNP Paribas, Petit atlas de l'économie française, mars 2025). Coefficients de la règle de Taylor (1993) : 1,5 sur l'inflation, 0,5 sur l'écart de production. Mésange ne modélise pas de réaction de la politique monétaire (Bardaji et al., 2017, conclusion)."
     note: "La BCE réagit à l'inflation et à l'écart de production de la zone, où la France pèse w. Taux réel de la zone en plus : w × ((1,5 − 1) × inflation + 0,5 × écart) ; l'effet qu'aurait une inflation propre à la France sur son taux réel (critique de Walters) n'est pas compté. Taux de marché : la France suit l'inflation de la zone (w × inflation française), pas la sienne."
+  exterieur:
+    valeur: {alpha: 0.31, beta: 0.29}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Mésange 2017 (Bardaji et al., Insee G2017/04, p. 102 à 107), balance commerciale en points de PIB : dépense publique +1 point −0,30 / −0,50 / −0,54 / −0,62 / −0,71 / −0,79 ; investissement public −0,52 / −0,69 / −0,72 / −0,78 / −0,86 / −0,93 ; cotisations employeurs −1 point −0,04 / −0,10 / −0,08 / 0,00 / 0,03 / 0,14 (1, 2, 3, 5, 10 ans, long terme)"
+    note: "Phase E4 (14/11/2026) : balance commerciale en écart au statu quo (points de PIB) = −alpha × écart de PIB (%) − beta × écart du niveau des prix (%). alpha (importations de la demande) et beta (exportations perdues par les prix) calés sur la dépense publique à 1 et 10 ans ; retrouvent les trois variantes à 0,08 point près (écart le plus grand : cotisations la première année). Publiée seulement : l'effet de la compétitivité sur le PIB est déjà dans bouclage.forme (c)."
+  prime_demande:
+    valeur: {crise: 0.5, prudent: 0.35, median: 0.25, optimiste: 0.15}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Neri (Banque d'Italie, Questioni di Economia e Finanza n° 170, 2013) : sans les tensions sur les dettes souveraines, les taux des crédits des pays périphériques auraient été plus bas de 130 et 60 points de base fin 2011, pour des écarts souverains de plusieurs centaines de points ; borne haute : transmission des taux directeurs aux crédits aux entreprises ≈ 64 points de base pour 100 (Herbst, Lang et Rusnák, BCE, WP n° 3057, 2025)"
+    note: "Phase E1 (14/11/2026) : part de l'écart de taux de marché de l'État au statu quo (prime de dette, écart propre au programme, BCE) qui passe aux taux réels des ménages et des entreprises ; l'effet sur le PIB suit la variante de taux de Mésange (bouclage.forme : sigma, mu). Taux plus haut que le statu quo : valeur du scénario ; plus bas (crédibilité gagnée) : scénario miroir. Le statu quo est le repère : son propre emballement de dette ne pèse pas sur son PIB (le scénario sans réforme reste celui de la législation constante)."
   prix_offre:
     valeur: {cout_travail: {long_terme: -1.4, vitesse: 0.25}}
     unite: sans_unite
@@ -895,7 +907,7 @@ demande:
     statut: HYPOTHESE
     source: "Kilponen, Pisani, Schmidt et al., Comparing fiscal multipliers across models and countries in Europe (Banque nationale de Belgique, WP n° 278, 2015), multiplicateurs de première année dans les modèles de la zone euro : consommation publique 0,5 à 0,98 ; impôt sur le travail 0,04 à 0,51 ; impôt sur le capital 0,02 à 0,65 ; impôt sur la consommation 0,14 à 0,72. Coenen et al., Effects of Fiscal Stimulus in Structural Models (AEJ Macroeconomics, 2012) : transferts ciblés sur les ménages contraints proches de la dépense, transferts généraux plus faibles. Gechert (2015, méta-analyse) : multiplicateurs de dépense supérieurs à ceux des impôts"
     v_avant_e: {cout_travail: 0.4}
-    note: "Phase E (14/11/2026, À VALIDER PAR ADRIEN) : cout_travail 0,4 → 0,13, calé sur Mésange (outils/banc_mesange.py) : avec le canal d'offre commun, qui porte déjà l'effet de compétitivité, une baisse de cotisations employeurs d'un point de PIB donnait 0,48 % de PIB la première année contre 0,20 dans Mésange (les entreprises gardent d'abord la baisse en marge) ; 0,13 est dans la fourchette de Kilponen et al. (0,04 à 0,51) et met les cinq horizons à moins de 30 %. Poids relatifs à la dépense (milieu des fourchettes rapporté au milieu de la consommation publique). transferts_cibles : famille, logement, pauvreté, chômage, AAH ; retraites : pensions ; autre_recette : prélèvements sans instrument (ceux des rémunérations publiques, des pensions, du SMIC), qui suivent la dépense dont ils sont la contrepartie."
+    note: "Phase E, DÉCISION d'Adrien du 14/11/2026 : cout_travail 0,4 → 0,13, calé sur Mésange (outils/banc_mesange.py) : avec le canal d'offre commun, qui porte déjà l'effet de compétitivité, une baisse de cotisations employeurs d'un point de PIB donnait 0,48 % de PIB la première année contre 0,20 dans Mésange (les entreprises gardent d'abord la baisse en marge) ; 0,13 est dans la fourchette de Kilponen et al. (0,04 à 0,51) et met les cinq horizons à moins de 30 %. Poids relatifs à la dépense (milieu des fourchettes rapporté au milieu de la consommation publique). transferts_cibles : famille, logement, pauvreté, chômage, AAH ; retraites : pensions ; autre_recette : prélèvements sans instrument (ceux des rémunérations publiques, des pensions, du SMIC), qui suivent la dépense dont ils sont la contrepartie."
 
 # Emploi des seniors quand l'âge de la retraite change (6 novembre 2026)
 seniors:

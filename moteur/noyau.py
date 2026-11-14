@@ -39,7 +39,10 @@ from .parametres import Parametres
 ANNEES = list(range(2029, 2074))
 POSTES = ("recettes", "participations")  # en plus des blocs de dépense du statu quo
 CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart", "emploi", "emplois_canaux",
-            "pib_hors_consommation", "inflation_taux", "taux_marche")
+            "pib_hors_consommation", "inflation_taux", "taux_marche", "inflation_bouclage", "prix_bouclage")
+# prix_bouclage : {année: fraction} niveau des prix en plus du statu quo dû au programme, pour la balance commerciale
+# inflation_bouclage : {année: points} inflation due au programme (moteur/bouclage.py) ; les pensions, revalorisées
+# au 1er janvier sur l'inflation passée, perdent cette année-là autant de pouvoir d'achat (phase E2)
 # inflation_taux : inflation que suivent les taux de marché (effet de Fisher), par défaut l'inflation du programme ;
 # en union monétaire, celle de la zone (moteur/bouclage.py, phase E). taux_marche : {année: points} hausse du taux de
 # marché au-delà de Fisher (réaction de la BCE), rejointe par le taux apparent au rythme du renouvellement de la dette
@@ -203,6 +206,15 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     fisher = prime = bce = 0.0
     ratio_ref, pib_ref_2029 = ratio_reference(p, s), sq.pib(p, s)[2029]
     ecart_scen = sq._v(p, "macro.ecart_taux_scenario", s)
+    # phase E1 (14/11/2026) : la hausse du taux de marché par rapport au statu quo (prime de dette, écart propre au
+    # programme, BCE) pèse sur la demande, par les taux des crédits (moteur/bouclage.py) ; le statu quo est le repère
+    retro = _retroaction_active(p) and bool(mesures or ctx or dynamiques)
+    if retro:
+        m_sq = _marche_statu_quo(p, s)
+        f_b = p.val("bouclage.forme")
+        tr = {sc: sq._v(p, "bouclage.prime_demande", sc) for sc in (s, _MIROIR[s])}
+        y_sq = sq.pib(p, s)
+    zr = xr = qr = 0.0
     out = {}
     for t in ANNEES:
         etat = {"s": s, "t": t, "dette_prec": dette_prec, "pib": y, "publie": out}
@@ -216,11 +228,34 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
                     flux["detail"].update(v)
                 else:
                     flux[k] += v
-        y[t] = y_base[t] + flux["pib"]
+        ratio0 = dette_prec / (y[t - 1] if t > 2029 else pib_ref_2029)
+        marche_t = ecart_taux_borne(p, prime_marche(p, s, ratio0, ratio_ref), sup.get(t, 0.0)) + marche.get(t, 0.0)
+        dy_r = 0.0
+        if retro:
+            dm = marche_t - m_sq[t]
+            # taux plus haut que le statu quo : transmission du scénario ; plus bas : celle du scénario miroir
+            k = tr[s] if dm >= 0 else tr[_MIROIR[s]]
+            zr = f_b["mu"] * zr + f_b["sigma"] * k * dm * 100
+            xr = f_b["b"] * xr - f_b["c"] * qr - zr
+            qr += f_b["kappa"] * xr
+            dy_r = xr / 100 * y_sq[t]
+            # plancher du chômage commun (emploi_canaux.plancher_chomage) : près du chômage incompressible, le PIB en
+            # plus par les taux bute sur l'emploi disponible (même raccord exponentiel)
+            if dy_r > 0:
+                import math
+                u0 = chom[t] + flux["chomage"]
+                u1 = u0 - _okun(p, s, dy_r, y_base[t] + flux["pib"] + dy_r, e[t])
+                u_inc, b_pl = p.val("emploi.chomage_incompressible") * 100, p.val("emploi.marge_plancher") * 100
+                if u1 < u_inc + b_pl and u0 > u1:
+                    u_star = max(u1, u_inc + b_pl * math.exp((u1 - u_inc - b_pl) / b_pl)) if u0 >= u_inc + b_pl else u0
+                    k_pl = max(0.0, min(1.0, (u0 - u_star) / (u0 - u1)))
+                    xr *= k_pl
+                    dy_r *= k_pl
+        y[t] = y_base[t] + flux["pib"] + dy_r
         bl = dict(bl_sq[t])
         for b, x in flux["blocs"].items():
             bl[b] = bl.get(b, 0.0) + x
-        rec = rec_sq[t] + flux["recettes"]
+        rec = rec_sq[t] + flux["recettes"] + (dy_r * rec_sq[t] / y_sq[t] if retro else 0.0)
         part = flux["participations"]
         for m in mesures:
             v = m.valeurs.get(t, 0.0)
@@ -230,6 +265,12 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
                 part += v
             else:
                 bl[m.poste] = bl.get(m.poste, 0.0) + v
+        # phase E2 : revalorisation en retard sur les prix. Niveau réel d'une pension revalorisée en janvier sur
+        # l'inflation de l'année passée : R_t / R_(t-1) = (1 + π_(t-1)) / (1 + π_t), soit un écart au statu quo de −dπ_t
+        erosion = 0.0
+        if ctx.get("inflation_bouclage") and "retraites" in bl:
+            erosion = ctx["inflation_bouclage"].get(t, 0.0) * bl["retraites"]
+            bl["retraites"] -= erosion
         # dette de fin d'année précédente sur le PIB de cette année-là (dette/PIB publiée) ; pour 2029, PIB du statu
         # quo, comme la référence
         ratio = dette_prec / (y[t - 1] if t > 2029 else pib_ref_2029)
@@ -262,9 +303,10 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "pib": y[t], "recettes": rec, "depenses_primaires": primaire, "blocs": bl,
             "interets_reels": interets_reels, "charge_dette": interets_reels + infl[t] * dette_prec,
             "interets_menages": interets_menages,
-            "taux_apparent": nominal, "taux_bce": bce, "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
+            "taux_apparent": nominal, "taux_bce": bce, "ecart_marche": marche_t, "pib_taux": dy_r, "erosion_pensions": erosion,
+            "balance_commerciale": _balance(p, s, y[t], ctx.get("prix_bouclage", {}).get(t, 0.0), t), "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
             "participations": part, "deficit": -maastricht * 100, "dette_pib": dette / y[t] * 100,
-            "chomage": chom[t] + flux["chomage"], "inflation": infl[t] * 100, "emploi": emploi[t] + flux["emploi"],
+            "chomage": chom[t] + flux["chomage"] - (_okun(p, s, dy_r, y[t], e[t]) if retro else 0.0), "inflation": infl[t] * 100, "emploi": emploi[t] + flux["emploi"],
             "emplois_canaux": dict(canaux.get(t, {})),
             "retraites_pib": bl["retraites"] / y[t] * 100, "sante_pib": bl["sante"] / y[t] * 100,
             "recettes_pib": rec / y[t] * 100, "depenses_primaires_pib": primaire / y[t] * 100,
@@ -284,6 +326,40 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         out[t]["dette_et_quasi_dette_pib"] = (dette + hors) / y[t] * 100
         dette_prec = dette
     return out
+
+
+_MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
+
+
+def _retroaction_active(p: Parametres) -> bool:
+    return bool(p.val("macro.bouclage")) and "bouclage.prime_demande" in p._p and p.val("macro.bouclage_prime_demande")
+
+
+def _marche_statu_quo(p: Parametres, s: str) -> dict[int, float]:
+    """Écart de taux de marché du statu quo (prime de dette, écart du scénario exclu), repère de la rétroaction."""
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("marche_statu_quo", s)
+    if cle not in cache:
+        r = trajectoire(p, s)
+        cache[cle] = {t: r[t]["ecart_marche"] for t in ANNEES}
+    return cache[cle]
+
+
+def _balance(p: Parametres, s: str, y_t: float, prix: float, t: int) -> float:
+    """Balance commerciale en écart au statu quo (points de PIB, phase E4) : −alpha × écart de PIB (%) − beta × écart
+    du niveau des prix (%), calés sur Mésange (bouclage.exterieur). Zéro pour le statu quo."""
+    if "bouclage.exterieur" not in p._p or not p.val("macro.bouclage"):
+        return 0.0
+    from .statu_quo import pib
+    e = p.val("bouclage.exterieur")
+    return -e["alpha"] * (y_t / pib(p, s)[t] - 1) * 100 - e["beta"] * prix * 100
+
+
+def _okun(p: Parametres, s: str, dy: float, y_t: float, e_t: dict) -> float:
+    """Points de chômage en moins pour un PIB en plus de dy (même loi d'Okun que la conjoncture des programmes)."""
+    from .statu_quo import _v
+    emplois = dy / y_t * _v(p, "macro.emplois_par_point_pib", s) * e_t["emploi"]
+    return emplois / (e_t["emploi"] + e_t["chomeurs"]) * 100
 
 
 def _appliquer_regle(regle: Regle, t: int, etat: dict, avant: float, pib_t: float, rec: float, bl: dict) -> dict:

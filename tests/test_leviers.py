@@ -50,8 +50,11 @@ def test_hausse_de_la_deduction_conditionnee_au_deficit():
 
 def test_usure_du_fonds_dans_le_pib_pas_dans_les_impots():
     """Relecture du 29/10/2026 : l'usure du capital du fonds compte dans le PIB, mais n'est pas taxée."""
-    avec = noyau.resultats(P, ("prudent",))["prudent"]
-    sans = noyau.resultats(P.avec({"macro.usure_capital_fonds": 0.0}), ("prudent",))["prudent"]
+    # mécanique du fonds seule : sans la rétroaction des taux sur le PIB (phase E), qui fait bouger la dette, donc la
+    # part du capital placée à l'étranger
+    q = P.avec({"macro.bouclage_prime_demande": False})
+    avec = noyau.resultats(q, ("prudent",))["prudent"]
+    sans = noyau.resultats(q.avec({"macro.usure_capital_fonds": 0.0}), ("prudent",))["prudent"]
     assert avec[2050]["pib"] > sans[2050]["pib"]
     # la recette ne bouge qu'à la marge (le capital lui-même dépend un peu de la dette, via la part placée à l'étranger)
     import pytest

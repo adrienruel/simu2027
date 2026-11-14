@@ -30,8 +30,10 @@ Une inflation française plus haute que celle de la zone allège donc la dette r
 c'est l'effet du niveau des prix sur une dette nominale, que l'ancien calcul (inflation du statu quo pour tous les
 programmes sauf Écologie de droite) ignorait.
 
-Non bouclé ici (reste de la phase E) : prime de dette → demande ; revalorisation des pensions en retard sur les prix ;
-balance courante publiée (E4) ; accumulation du capital (E5) ; marché du travail (E6).
+Dans le noyau (moteur/noyau.trajectoire) : l'écart de taux de marché au statu quo pèse sur le PIB
+(bouclage.prime_demande, E1) ; les pensions perdent l'inflation due au programme l'année où elle survient (E2).
+Balance commerciale publiée par le noyau (bouclage.exterieur, E4). Reste de la phase E : termes de l'échange (choc
+pétrolier), contenu en importations par instrument (E4) ; accumulation du capital (E5) ; marché du travail (E6).
 """
 from __future__ import annotations
 
@@ -147,7 +149,9 @@ def contexte(p, s: str, rep: dict | None, inflation_programme: dict | None = Non
     base = inflation_programme or sq.inflation(p, s)
     return {"inflation": {t: base[t] + rep["inflation"].get(t, 0.0) for t in ANNEES},
             "inflation_taux": {t: base[t] + rep["inflation_taux"].get(t, 0.0) for t in ANNEES},
-            "taux_marche": {t: rep["taux_marche"].get(t, 0.0) for t in ANNEES}}
+            "taux_marche": {t: rep["taux_marche"].get(t, 0.0) for t in ANNEES},
+            "inflation_bouclage": {t: rep["inflation"].get(t, 0.0) for t in ANNEES},
+            "prix_bouclage": {t: rep["prix"].get(t, 0.0) for t in ANNEES}}
 
 
 def forme_production_non_marchande(p, tau: int) -> float:

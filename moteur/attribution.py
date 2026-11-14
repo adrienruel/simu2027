@@ -63,6 +63,11 @@ def _etat(p: Parametres, scenario: str = "prudent") -> dict:
             else:
                 canaux[m.nom] = canaux.get(m.nom, 0.0) + v
         canaux["Fonds : capital, rendements, créances"] = res[t]["dynamiques"]["fonds"]["solde"]
+        # phase E (noyau) : PIB perdu ou gagné par l'écart de taux au statu quo, pensions en retard sur les prix
+        from . import statu_quo as sq
+        canaux["Macro bouclée : taux de marché et demande"] = (res[t].get("pib_taux", 0.0) * sq.recettes(p, scenario)[t]
+                                                             / sq.pib(p, scenario)[t])
+        canaux["Macro bouclée : pensions en retard sur les prix"] = res[t].get("erosion_pensions", 0.0)
         out[t] = {"statique": statique, "economie": sum(canaux.values()), "canaux": canaux,
                   "dette_interets": -res[t]["interets_reels"], "solde_avant_clause": res[t]["solde"],
                   "deficit_avant_clause": res[t]["deficit"],

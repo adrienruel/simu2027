@@ -30,7 +30,8 @@ macro:
     v_avant_e: false
     unite: sans_unite
     statut: DECISION
-    note: "Phase E de la roadmap (14/11/2026), À VALIDER PAR ADRIEN : multiplicateur, prix et taux bouclés par une forme réduite calée sur Mésange 2017 (moteur/bouclage.py) au lieu d'un effet entier l'année de l'impulsion éteint en macro.annees_effet_ajustement ans. Faux : ancien calcul, à l'identique."
+    note: "Phase E de la roadmap, DÉCISION d'Adrien du 14/11/2026 : multiplicateur, prix et taux bouclés par une forme réduite calée sur Mésange 2017 (moteur/bouclage.py) au lieu d'un effet entier l'année de l'impulsion éteint en macro.annees_effet_ajustement ans. Faux : ancien calcul, à l'identique."
+  bouclage_prime_demande: {valeur: true, unite: sans_unite, statut: DECISION, note: "Phase E1 (14/11/2026) : l'écart de taux de marché au statu quo pèse sur le PIB (bouclage.prime_demande). Faux : seulement sur les intérêts, comme avant."}
   dividende_calcule:
     valeur: true
     v235: false

@@ -1388,3 +1388,13 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - Déficit 2037 au prudent : relances améliorées (Mélenchon 29,63 → 26,90, Tondelier 13,98 → 12,79), Écologie de
   droite 4,15 → 4,68. Statu quo inchangé. Détail et décisions à prendre : `docs/bouclage.md`. Option
   `macro.bouclage` (faux : ancien calcul à l'identique).
+
+## 14/11/2026 (fin de matinée) — Phase E : décisions d'Adrien, prime de dette, pensions, balance commerciale
+
+- Décisions d'Adrien (« go », 11 h 28) : les cinq propositions de la phase E validées telles quelles.
+- E1 : l'écart de taux de marché au statu quo pèse sur le PIB (`bouclage.prime_demande`, variante de taux de Mésange),
+  avec le plancher du chômage commun ; E2 : pensions revalorisées en retard sur les prix ; E4 : balance commerciale
+  publiée (calée sur Mésange à 0,08 point près). Choc pétrolier : pas encore (termes de l'échange).
+- Attribution : deux canaux de plus (taux et demande, pensions). Tests de mécanique isolés de la rétroaction
+  (`test_canaux_declares`, `test_leviers`), comptes exacts mis à jour (`test_noyau`). Suite : 382 tests, 7 min 19 s.
+- Déficit 2037 au prudent : Écologie de droite 4,63, Mélenchon 27,34, Tondelier 12,81 ; détail : `docs/bouclage.md`.
