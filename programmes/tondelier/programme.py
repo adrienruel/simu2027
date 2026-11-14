@@ -338,7 +338,9 @@ class Tondelier:
             cout_net = offre.impulsion(p, liste, annees)
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
-            dpib = multiplicateur(p, s, cout_net, annees)
+            from moteur import bouclage
+            rep = bouclage.reponse(p, s, cout_net, annees, liste) if bouclage.actif(p) and self.v("macro.multiplicateur_actif") else None
+            dpib = rep["dpib"] if rep else multiplicateur(p, s, cout_net, annees)
             part_rec = {t: rec_sq[t] / y[t] for t in ANNEES}
             part_rec.update({t: part_rec[2029] for t in ANNEES_AVANT})
             if self.v("macro.multiplicateur_actif"):
@@ -410,6 +412,7 @@ class Tondelier:
                 ctx_s[s]["pib"][t] += decl["pib"][t]
             if decl["taux_supplementaire"]:
                 ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
+            ctx_s[s].update(bouclage.contexte(p, s, rep))  # phase E : inflation et taux bouclés
             mes_s[s] = liste
             details[s] = {"emplois_perdus_smic": emplois, "avant_2029": avant, "dpib": dpib, "offre": details_offre}
         res = {"mesures": mes_s, "contexte": ctx_s, "details": details, "smic": smic, "fp2": fp2, "part_fp": part_fp}

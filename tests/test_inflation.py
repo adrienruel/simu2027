@@ -15,7 +15,10 @@ def test_base_banque_de_france_puis_long_terme():
 
 
 def test_recession_de_2029_baisse_l_inflation():
-    assert serie(P)[2029] < 0.016
+    """Courbe de Phillips propre à l'effort de 2029 d'Écologie de droite : seulement sans le bouclage de la phase E,
+    qui la remplace par la courbe commune (moteur/bouclage.py, ajoutée au contexte du noyau)."""
+    assert serie(P.avec({"macro.bouclage": False}))[2029] < 0.016
+    assert serie(P)[2029] == pytest.approx(0.0165)
 
 
 def test_indexation_min_inflation_croissance():

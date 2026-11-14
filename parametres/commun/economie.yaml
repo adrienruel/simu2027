@@ -865,15 +865,37 @@ offre:
     source: "DG Trésor, Mésange (2017) : baisse des cotisations employeurs, 11 % de l'effet de long terme au bout d'un an, 40 % au bout de cinq ans, 60 % au bout de dix ans, soit un ajustement d'environ 10 % par an"
     note: "Part de l'écart à l'effet de long terme comblée chaque année (ajustement partiel), à partir de 2027."
 
+# Macro bouclée (phase E de la roadmap, 14/11/2026) : moteur/bouclage.py
+bouclage:
+  forme:
+    valeur: {a: 0.8599, b: 0.2908, c: 0.2735, kappa: 0.3516, phi: 0.1876, sigma: 0.2689, mu: 0.8434}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Calage par moindres carrés (outils/calibrer_bouclage.py) sur les variantes de Mésange 2017 (Bardaji et al., Insee, document de travail G2017/04), à taux réels et change nominal constants. Dépense publique générique de 1 point de PIB (p. 105) : PIB 0,78 / 1,06 / 1,03 / 0,86 / 0,53 / 0,16 à 1, 2, 3, 5, 10 ans et long terme ; prix de consommation 0,20 / 0,58 / 0,94 / 1,42 / 1,88 / 2,69. Hausse de 100 points de base des taux réels (p. 134) : PIB −0,17 / −0,60 / −0,78 / −1,00 à 1, 2, 3, 5 ans."
+    note: "Forme retrouvée : PIB 0,86 / 1,05 / 1,02 / 0,83 / 0,48 / 0,19 (écart ≤ 10 % jusqu'à 10 ans, 19 % à long terme) ; prix 0,24 / 0,54 / 0,83 / 1,32 / 2,05 / 2,65 ; taux −0,27 / −0,55 / −0,77 / −1,01. a : effet d'impact ; b : persistance de la demande (accélérateur, consommation retardée) ; c : effet de la compétitivité-prix sur le PIB ; kappa : pente de la courbe de Phillips ; phi : part de l'impulsion gardée à long terme ; sigma et mu : effet retardé du taux réel. Le multiplicateur du scénario (macro.multiplicateur) met cette forme à l'échelle de son effet maximal."
+  bce:
+    valeur: {active: true, poids_france: 0.194, phi_pi: 1.5, phi_y: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Poids de la France : PIB de 2024, 2 918 Md€ sur 15 044 Md€ pour la zone euro (Insee, Eurostat, repris par BNP Paribas, Petit atlas de l'économie française, mars 2025). Coefficients de la règle de Taylor (1993) : 1,5 sur l'inflation, 0,5 sur l'écart de production. Mésange ne modélise pas de réaction de la politique monétaire (Bardaji et al., 2017, conclusion)."
+    note: "La BCE réagit à l'inflation et à l'écart de production de la zone, où la France pèse w. Taux réel de la zone en plus : w × ((1,5 − 1) × inflation + 0,5 × écart) ; l'effet qu'aurait une inflation propre à la France sur son taux réel (critique de Walters) n'est pas compté. Taux de marché : la France suit l'inflation de la zone (w × inflation française), pas la sienne."
+  prix_offre:
+    valeur: {cout_travail: {long_terme: -1.4, vitesse: 0.25}}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Mésange 2017 (Bardaji et al., Insee G2017/04, p. 107), baisse des cotisations employeurs de 1 point de PIB : prix de consommation −0,36 / −0,70 / −0,87 / −1,09 / −1,32 / −2,27 à 1, 2, 3, 5, 10 ans et long terme"
+    note: "Effet d'un instrument sur les prix par les coûts (en % pour un point de PIB de baisse ; une hausse donne l'inverse) : niveau long_terme × (1 − (1 − vitesse)^(années + 1)), soit −0,35 / −0,61 / −0,81 / −1,07 / −1,33. Il change l'inflation (donc la dette réelle et les taux), pas le PIB : l'effet de la compétitivité sur le PIB est déjà dans le canal d'offre (offre.elasticite_cout_travail, calé sur Mésange)."
+
 # Demande par instrument (6 novembre 2026) : le multiplicateur commun (macro.multiplicateur) vaut pour la dépense
 # publique ; chaque mesure y entre avec un poids selon ce qu'elle est (moteur/offre.poids_demande).
 demande:
   poids:
-    valeur: {depense: 1.0, transferts_cibles: 0.8, retraites: 0.6, travail: 0.4, cout_travail: 0.4, consommation: 0.55, capital_entreprises: 0.3, capital_menages: 0.2, successions: 0.1, autre_recette: 1.0, education: 1.0, recherche: 1.0}
+    valeur: {depense: 1.0, transferts_cibles: 0.8, retraites: 0.6, travail: 0.4, cout_travail: 0.13, consommation: 0.55, capital_entreprises: 0.3, capital_menages: 0.2, successions: 0.1, autre_recette: 1.0, education: 1.0, recherche: 1.0}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Kilponen, Pisani, Schmidt et al., Comparing fiscal multipliers across models and countries in Europe (Banque nationale de Belgique, WP n° 278, 2015), multiplicateurs de première année dans les modèles de la zone euro : consommation publique 0,5 à 0,98 ; impôt sur le travail 0,04 à 0,51 ; impôt sur le capital 0,02 à 0,65 ; impôt sur la consommation 0,14 à 0,72. Coenen et al., Effects of Fiscal Stimulus in Structural Models (AEJ Macroeconomics, 2012) : transferts ciblés sur les ménages contraints proches de la dépense, transferts généraux plus faibles. Gechert (2015, méta-analyse) : multiplicateurs de dépense supérieurs à ceux des impôts"
-    note: "Poids relatifs à la dépense (milieu des fourchettes rapporté au milieu de la consommation publique). transferts_cibles : famille, logement, pauvreté, chômage, AAH ; retraites : pensions ; autre_recette : prélèvements sans instrument (ceux des rémunérations publiques, des pensions, du SMIC), qui suivent la dépense dont ils sont la contrepartie."
+    v_avant_e: {cout_travail: 0.4}
+    note: "Phase E (14/11/2026, À VALIDER PAR ADRIEN) : cout_travail 0,4 → 0,13, calé sur Mésange (outils/banc_mesange.py) : avec le canal d'offre commun, qui porte déjà l'effet de compétitivité, une baisse de cotisations employeurs d'un point de PIB donnait 0,48 % de PIB la première année contre 0,20 dans Mésange (les entreprises gardent d'abord la baisse en marge) ; 0,13 est dans la fourchette de Kilponen et al. (0,04 à 0,51) et met les cinq horizons à moins de 30 %. Poids relatifs à la dépense (milieu des fourchettes rapporté au milieu de la consommation publique). transferts_cibles : famille, logement, pauvreté, chômage, AAH ; retraites : pensions ; autre_recette : prélèvements sans instrument (ceux des rémunérations publiques, des pensions, du SMIC), qui suivent la dépense dont ils sont la contrepartie."
 
 # Emploi des seniors quand l'âge de la retraite change (6 novembre 2026)
 seniors:

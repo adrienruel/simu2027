@@ -39,7 +39,10 @@ from .parametres import Parametres
 ANNEES = list(range(2029, 2074))
 POSTES = ("recettes", "participations")  # en plus des blocs de dépense du statu quo
 CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart", "emploi", "emplois_canaux",
-            "pib_hors_consommation")
+            "pib_hors_consommation", "inflation_taux", "taux_marche")
+# inflation_taux : inflation que suivent les taux de marché (effet de Fisher), par défaut l'inflation du programme ;
+# en union monétaire, celle de la zone (moteur/bouclage.py, phase E). taux_marche : {année: points} hausse du taux de
+# marché au-delà de Fisher (réaction de la BCE), rejointe par le taux apparent au rythme du renouvellement de la dette
 # pib_hors_consommation : {année: Md€} part du PIB du programme qui ne va pas à la consommation des ménages (épargne
 # retenue, investissement), retirée du PIB pour les émissions importées, qui suivent la consommation
 # emploi : personnes en emploi, année par année ; emplois_canaux : {année: {canal: emplois en plus (+) ou en moins (−)
@@ -184,6 +187,8 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     y_base = ctx.get("pib") or sq.pib(p, s)
     y = dict(y_base)
     infl = ctx.get("inflation") or sq.inflation(p, s)
+    infl_taux = ctx.get("inflation_taux") or infl
+    marche = ctx.get("taux_marche") or {}
     sup = ctx.get("taux_supplementaire") or {}
     rec_sq, bl_sq = sq.recettes(p, s), sq.blocs(p, s)
     e = sq.effectifs(p, s)
@@ -195,7 +200,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     n_lt, mat = p.val("macro.annees_taux_long_terme"), p.val("macro.maturite_moyenne_dette")
     fisher_actif = p.val("inflation.active") and p.val("inflation.effet_fisher")
     dette_prec = ctx.get("dette_depart") or sq.dette_fin_2028(p)
-    fisher = prime = 0.0
+    fisher = prime = bce = 0.0
     ratio_ref, pib_ref_2029 = ratio_reference(p, s), sq.pib(p, s)[2029]
     ecart_scen = sq._v(p, "macro.ecart_taux_scenario", s)
     out = {}
@@ -230,8 +235,9 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         ratio = dette_prec / (y[t - 1] if t > 2029 else pib_ref_2029)
         prime += (prime_marche(p, s, ratio, ratio_ref) - prime) / mat
         if fisher_actif:
-            fisher += ((infl[t] - infl_ref) - fisher) / mat
-        nominal = (min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + ecart_taux_borne(p, prime, sup.get(t, 0.0))
+            fisher += ((infl_taux[t] - infl_ref) - fisher) / mat
+        bce += (marche.get(t, 0.0) - bce) / mat
+        nominal = (min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + bce + ecart_taux_borne(p, prime, sup.get(t, 0.0))
                    + ecart_scen * min(1.0, (t - 2029) / n_lt))
         interets_reels = (nominal - infl[t]) * dette_prec
         # emprunt aux ménages déjà dans la dette (phase A6, DÉCISION d'Adrien du 12/11/2026) : ce que l'État leur doit
@@ -256,7 +262,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "pib": y[t], "recettes": rec, "depenses_primaires": primaire, "blocs": bl,
             "interets_reels": interets_reels, "charge_dette": interets_reels + infl[t] * dette_prec,
             "interets_menages": interets_menages,
-            "taux_apparent": nominal, "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
+            "taux_apparent": nominal, "taux_bce": bce, "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
             "participations": part, "deficit": -maastricht * 100, "dette_pib": dette / y[t] * 100,
             "chomage": chom[t] + flux["chomage"], "inflation": infl[t] * 100, "emploi": emploi[t] + flux["emploi"],
             "emplois_canaux": dict(canaux.get(t, {})),

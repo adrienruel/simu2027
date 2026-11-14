@@ -88,8 +88,10 @@ def test_mesures_de_2027_2028_dans_la_dette_de_depart(p, prog):
 
 
 def test_multiplicateur_en_miroir_pour_une_relance(p):
-    """Décision du 07/11/2026 : une relance prend le multiplicateur du scénario miroir, un resserrement le sien."""
+    """Décision du 07/11/2026 : une relance prend le multiplicateur du scénario miroir, un resserrement le sien (forme
+    linéaire d'avant la phase E ; la forme bouclée : tests/test_bouclage.py)."""
     from moteur.programme_simple import multiplicateur
+    p = p.avec({"macro.bouclage": False})
     an = list(range(2028, 2040))
     relance = {t: 10.0 for t in an}
     resserrement = {t: -10.0 for t in an}

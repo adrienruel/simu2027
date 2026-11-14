@@ -45,7 +45,13 @@ def multiplicateur(p, s: str, cout_net: dict, annees) -> dict:
     Chaque impulsion annuelle agit avec le multiplicateur commun (macro.multiplicateur) et s'efface linéairement en
     macro.annees_effet_ajustement années. Comme l'éviction et le canal d'offre, le sens compte (décision d'Adrien du
     07/11/2026) : un resserrement prend les valeurs de son scénario, une relance celles du scénario miroir (crise ↔
-    optimiste, prudent ↔ médian), pour que chaque scénario reste du même côté de la prudence quel que soit le sens."""
+    optimiste, prudent ↔ médian), pour que chaque scénario reste du même côté de la prudence quel que soit le sens.
+
+    Phase E (14/11/2026) : avec macro.bouclage, forme bouclée calée sur Mésange (moteur/bouclage.reponse), où le
+    multiplicateur du scénario est l'effet maximal."""
+    from . import bouclage
+    if bouclage.actif(p):
+        return bouclage.reponse(p, s, cout_net, annees)["dpib"]
     par = {sc: (sq._v(p, "macro.multiplicateur", sc), sq._v(p, "macro.annees_effet_ajustement", sc))
            for sc in (s, MIROIR[s])}
     dpib, prec, impulsions = {}, 0.0, []
@@ -64,6 +70,16 @@ def production_non_marchande(p, s: str, cout: dict, annees) -> dict:
     d'abord par le multiplicateur (multiplicateur(), qui s'efface en macro.annees_effet_ajustement ans) ; la part qui
     en est sortie entre au PIB à son coût : Σ ΔS_k × min(1, (t − k) / d), même durée d que le multiplicateur (scénario
     miroir pour une hausse, comme lui). À long terme, le PIB garde le coût des postes, ni plus ni moins."""
+    from . import bouclage
+    if bouclage.actif(p):
+        # forme bouclée : la part sortie du multiplicateur après son effet maximal (bouclage.forme_production_non_marchande)
+        out, prec, chocs = {}, 0.0, []
+        for i_t, t in enumerate(annees):
+            i = cout.get(t, 0.0) - prec
+            prec = cout.get(t, 0.0)
+            chocs.append((i_t, i))
+            out[t] = sum(i * bouclage.forme_production_non_marchande(p, i_t - j) for j, i in chocs)
+        return out
     d = {sc: sq._v(p, "macro.annees_effet_ajustement", sc) for sc in (s, MIROIR[s])}
     out, prec, chocs = {}, 0.0, []
     for t in annees:
@@ -434,7 +450,9 @@ class ProgrammeSimple:
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
             actif = self.v("macro.multiplicateur_actif")
-            dpib = multiplicateur(p, s, cout_net, TOUTES) if actif else {t: 0.0 for t in TOUTES}
+            from . import bouclage
+            rep = bouclage.reponse(p, s, cout_net, TOUTES, liste) if actif and bouclage.actif(p) else None
+            dpib = (rep["dpib"] if rep else multiplicateur(p, s, cout_net, TOUTES)) if actif else {t: 0.0 for t in TOUTES}
             part_rec = {t: rec_sq[t] / y[t] for t in ANNEES}
             part_rec.update({t: part_rec[2029] for t in ANNEES_AVANT})
             if actif:
@@ -516,10 +534,12 @@ class ProgrammeSimple:
             demploi = {t: ctx_s[s]["emploi"][t] - e[t]["emploi"] for t in ANNEES}
             if decl["taux_supplementaire"]:
                 ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
+            # phase E : inflation et taux bouclés (moteur/bouclage.py)
+            ctx_s[s].update(bouclage.contexte(p, s, rep))
             mes_s[s] = liste
             details[s] = {"avant_2029": avant, "dpib": dpib, "emplois": demploi, "offre": details_offre,
                           "pib_non_marchand": details_npm,
-                          "dpib_offre": d_offre}
+                          "dpib_offre": d_offre, "bouclage": rep}
         res = {"mesures": mes_s, "contexte": ctx_s, "details": details}
         self._cache[cle] = res
         return res

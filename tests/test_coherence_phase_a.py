@@ -58,14 +58,28 @@ def test_a2_trente_deux_heures_sans_double_compte():
 
 
 def test_a3_postes_publics_au_cout_des_facteurs():
-    """Une dépense de postes constante entre au PIB à son coût une fois le multiplicateur éteint, ni plus ni moins."""
-    d = sq._v(P, "macro.annees_effet_ajustement", "median")  # hausse : scénario miroir du prudent
+    """Une dépense de postes constante entre au PIB à son coût une fois le multiplicateur éteint, ni plus ni moins
+    (forme linéaire d'avant la phase E : macro.bouclage faux)."""
+    q = P.avec({"macro.bouclage": False})
+    d = sq._v(q, "macro.annees_effet_ajustement", "median")  # hausse : scénario miroir du prudent
     cout = {t: (10.0 if t >= 2030 else 0.0) for t in ANNEES}
-    npm = production_non_marchande(P, "prudent", cout, ANNEES)
+    npm = production_non_marchande(q, "prudent", cout, ANNEES)
     assert npm[2029] == 0 and npm[2030] == 0
     assert npm[2030 + int(d)] == pytest.approx(10.0) and npm[2073] == pytest.approx(10.0)
-    baisse = production_non_marchande(P, "prudent", {t: -v for t, v in cout.items()}, ANNEES)
+    baisse = production_non_marchande(q, "prudent", {t: -v for t, v in cout.items()}, ANNEES)
     assert baisse[2073] == pytest.approx(-10.0)
+
+
+def test_a3_postes_publics_forme_bouclee():
+    """Phase E : au multiplicateur de 1 (prudent, miroir médian), effet de demande restant + production non marchande
+    = coût des postes à long terme ; rien n'entre avant l'effet maximal."""
+    from moteur import bouclage
+    from moteur.programme_simple import multiplicateur
+    cout = {t: (10.0 if t >= 2030 else 0.0) for t in ANNEES}
+    npm = production_non_marchande(P, "prudent", cout, ANNEES)
+    assert npm[2030] == 0 and npm[2031] == 0
+    dem = bouclage.reponse(P, "prudent", cout, ANNEES)["dpib_avant_capacite"]
+    assert dem[2073] + npm[2073] == pytest.approx(10.0, rel=0.02)
 
 
 def test_a5_dette_qui_diverge_ne_gagne_rien():

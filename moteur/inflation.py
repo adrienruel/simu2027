@@ -88,7 +88,12 @@ def serie(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
         if t >= 2030:
             poids = poids0 * evol[t]
             carbone = trans * poids * (prix(p, t) / prix(p, t - 1) - 1)
-        phillips = kappa * (ecart_production(p, jeu, t) - (ecart_production(p, jeu, t - 1) if t > 2029 else 0.0)) if t >= 2029 else 0.0
+        # phase E (14/11/2026) : avec macro.bouclage, l'inflation due à la demande vient du bouclage commun
+        # (moteur/bouclage.py, ajoutée au contexte du noyau) ; cette courbe propre à l'effort de 2029 d'Écologie de
+        # droite n'est plus comptée (double compte)
+        boucle = p.val("macro.bouclage") if "macro.bouclage" in p._p else False
+        phillips = (kappa * (ecart_production(p, jeu, t) - (ecart_production(p, jeu, t - 1) if t > 2029 else 0.0))
+                    if t >= 2029 and not boucle else 0.0)
         out[t] = base + carbone + phillips
     cache[cle] = out
     return out

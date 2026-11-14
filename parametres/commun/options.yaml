@@ -25,6 +25,12 @@ entreprises:
 # --- Effets macroéconomiques (feuille Effets macro), un jeu par scénario ----------------
 # Crise : valeurs de la feuille « Scénario de crise » de la v235 (anciennes valeurs « prudent ») ; à défaut, celles du prudent.
 macro:
+  bouclage:
+    valeur: true
+    v_avant_e: false
+    unite: sans_unite
+    statut: DECISION
+    note: "Phase E de la roadmap (14/11/2026), À VALIDER PAR ADRIEN : multiplicateur, prix et taux bouclés par une forme réduite calée sur Mésange 2017 (moteur/bouclage.py) au lieu d'un effet entier l'année de l'impulsion éteint en macro.annees_effet_ajustement ans. Faux : ancien calcul, à l'identique."
   dividende_calcule:
     valeur: true
     v235: false

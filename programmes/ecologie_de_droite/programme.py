@@ -832,7 +832,9 @@ class EcologieDeDroite:
                          + ([Mesure("IS des taxes sur l'énergie supprimées", "recettes", is_taxes_energie_supprimees(q, s),
                                                   "effet_macro", instrument="capital_entreprises")] if self.energie else []))
             cout_net = offre.impulsion(p, impulsion, TOUTES)
-            dpib = multiplicateur(p, s, cout_net, TOUTES)
+            from moteur import bouclage
+            rep = bouclage.reponse(p, s, cout_net, TOUTES, impulsion) if bouclage.actif(p) else None
+            dpib = rep["dpib"] if rep else multiplicateur(p, s, cout_net, TOUTES)
             part_rec = {t: rec_sq[t] / y_sq[t] for t in ANNEES}
             m.extend(m_effets)
             m.append(Mesure("Effet macro : multiplicateur sur l'impulsion budgétaire des mesures", "recettes",
@@ -885,6 +887,8 @@ class EcologieDeDroite:
             ctx = {"pib": pib, "inflation": {t: v for t, v in serie(q, jeu).items() if t in ANNEES},
                    "chomage": chom, "dette_depart": dette_fin_2028(q),
                    "emploi": {t: e[t]["emploi"] + demploi[t] for t in ANNEES}, "emplois_canaux": canaux}
+            # phase E : inflation et taux bouclés, en plus de l'inflation propre au programme (carbone)
+            ctx.update(bouclage.contexte(p, s, rep, ctx["inflation"]))
             if self.energie:
                 en = energie_entreprises(p, q, s, ctx)
                 ctx = en["contexte"]
@@ -904,6 +908,8 @@ class EcologieDeDroite:
                 """PIB perdu à l'année t pour une hausse `delta` de la baisse du revenu universel décidée l'année k : même
                 multiplicateur et même dissipation que l'impulsion budgétaire, à partir de l'année suivante."""
                 mu, d = par[s] if delta > 0 else par[MIROIR[s]]
+                if bouclage.actif(p):  # phase E : même forme bouclée que l'impulsion budgétaire
+                    return mu * delta * bouclage.forme_clause(p, t - k - 1) if t - k - 1 >= 0 else 0.0
                 return mu * delta * max(0.0, 1 - (t - k - 1) / d)
             res[s] = {"mesures": m, "contexte": ctx, "effets": E, "denominateur": denominateur, "part_rec": part_rec,
                       "mult_clause": mult_clause, "dpib": dpib, "impulsion": cout_net,

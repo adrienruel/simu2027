@@ -1371,3 +1371,20 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   rendement de la recherche (anomalie du calcul à ρ = 0,5) disparaît.
 - Comparateur : section dédiée « Incertitude : la fourchette de chaque programme » (graphique des deux bornes par
   programme, tableau, année et grandeur au choix), sans toucher aux graphiques existants.
+
+## 14/11/2026 — Phase E commencée : macro bouclée (E1 à E3, E4 partiel), branche `phase-e`
+
+- `moteur/bouclage.py` : forme réduite annuelle commune (demande, courbe de Phillips, compétitivité-prix, règle de
+  Taylor de la BCE au poids de la France dans la zone), calée sur les variantes de Mésange 2017
+  (`outils/calibrer_bouclage.py`). `macro.multiplicateur` devient l'effet maximal (deuxième année). Remplace la forme
+  linéaire du multiplicateur (`programme_simple.multiplicateur`), de la production des postes publics (A3) et de la
+  clause d'Écologie de droite ; la courbe de Phillips propre à l'effort de 2029 d'Écologie de droite n'est plus comptée.
+- Noyau : contextes `inflation_taux` (inflation suivie par les taux : statu quo + w·π) et `taux_marche` (BCE au-delà de
+  Fisher, lissé au renouvellement de la dette) ; `taux_bce` publié.
+- Prix par les coûts (`bouclage.prix_offre`) : une baisse de cotisations employeurs fait baisser les prix (Mésange).
+  Poids de demande du coût du travail 0,4 → 0,13 (banc Mésange).
+- Critère de sortie (`outils/banc_mesange.py`, `tests/test_bouclage.py`) : dépense publique à 7 % près ; cotisations
+  employeurs à 30 % près ; investissement public manqué la première année (−35 %) ; choc pétrolier à faire (E4).
+- Déficit 2037 au prudent : relances améliorées (Mélenchon 29,63 → 26,90, Tondelier 13,98 → 12,79), Écologie de
+  droite 4,15 → 4,68. Statu quo inchangé. Détail et décisions à prendre : `docs/bouclage.md`. Option
+  `macro.bouclage` (faux : ancien calcul à l'identique).
