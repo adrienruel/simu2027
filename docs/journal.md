@@ -1348,3 +1348,17 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - **C5 fini** (`docs/backtests.md`) : 35 heures rejouées avec la mécanique commune des 32 heures (2,0 % de l'emploi
   privé au médian contre 2,2 % pour les 350 000 emplois de la Dares ; prudent 1,0 %, crise négatif ; partiellement
   indépendant) ; PFU : effet sur le PIB négligeable (≤ 0,02 %), comme les évaluations de France Stratégie.
+
+## 14/11/2026 — Phase D : incertitude chiffrée
+
+- `moteur/incertitude.py` réécrit : loi de chaque hypothèse (prudent = 10e centile, médian, optimiste = 90e centile,
+  queues bornées par la crise et un pas de plus que l'optimiste), 642 jeux de scénarios tirés (communs et propres aux
+  programmes, montants des mesures compris), corrélation par un facteur commun (`incertitude.correlation`, 0,5),
+  tirages communs à tous les programmes (z fonction de la graine, du tirage et du nom), calcul dans le scénario
+  médian avec règle de trajectoire, deux processus recyclés tous les 10 tirages, tirages écrits au fil de l'eau
+  (reprise). Contrôle ρ = 1 au 10e centile : retrouve le prudent à quelques dixièmes.
+- 1 000 tirages à ρ = 0,5, 200 à ρ = 0 et à ρ = 1 ; `docs/incertitude.md`, `sorties/comparaison_incertitude.csv`
+  (`outils/export_incertitude.py`). Écologie de droite et Bertrand font mieux que le statu quo dans presque tous les
+  tirages ; Retailleau dans 70 %, Philippe 49 %, Attal 30 % ; les autres presque jamais.
+- Robustesse : `anciennes_pensions.recette_nette` ne divise plus par zéro quand aucune personne seule ne paie d'impôt
+  (tirage extrême) ; `restitution` lit le nouveau format.
