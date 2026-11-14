@@ -27,13 +27,18 @@ def libelles() -> dict:
 def main() -> None:
     lib = libelles()
     lignes = []
-    for suffixe, rho_lib in (("", None), ("_rho0", "0"), ("_rho1", "1")):
+    for suffixe, rho_lib in (("_rho0", "0"), ("_rho1", "1")):
         f = RACINE / "sorties" / f"incertitude{suffixe}.json"
         if not f.exists():
             continue
         r = json.loads(f.read_text(encoding="utf-8"))
         for nom, x in r["programmes"].items():
-            sens = "; ".join(f"{k} ({v:+.2f})" for k, v in x.get("sensibilite_deficit_2037", [])[:5])
+            # hypothèses qui pèsent : lues dans les tirages indépendants (rho 0), où chaque hypothèse bouge seule ;
+            # on ne garde que les corrélations au-delà de 3 écarts types du hasard (3 / racine de n)
+            seuil = 3 / r["n"] ** 0.5
+            fr = lambda v: ("+" if v > 0 else "−") + f"{abs(v):.2f}".replace(".", ",")
+            sens = ("; ".join(f"{k} ({fr(v)})" for k, v in x.get("sensibilite_deficit_2037", []) if abs(v) >= seuil)
+                    if rho_lib == "0" else "")
             for cle, v in x.items():
                 if not isinstance(v, dict) or "p10" not in v:
                     continue
@@ -44,6 +49,11 @@ def main() -> None:
                                "proba_mieux_que_statu_quo": (round(x[f"proba_mieux_que_statu_quo_{annee}"], 3)
                                                              if grandeur == "deficit" and f"proba_mieux_que_statu_quo_{annee}" in x else ""),
                                "hypotheses_deficit_2037": sens if (grandeur == "deficit" and annee == "2037") else ""})
+    # la page lit les hypothèses sur la ligne rho 1 : on y recopie celles des tirages indépendants
+    h0 = {l["dossier"]: l["hypotheses_deficit_2037"] for l in lignes if l["rho"] == "0" and l["hypotheses_deficit_2037"]}
+    for l in lignes:
+        if l["rho"] == "1" and l["grandeur"] == "deficit" and l["annee"] == "2037":
+            l["hypotheses_deficit_2037"] = h0.get(l["dossier"], "")
     out = RACINE / "sorties" / "comparaison_incertitude.csv"
     with out.open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(lignes[0]))

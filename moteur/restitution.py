@@ -117,7 +117,7 @@ def donnees(p: Parametres | None = None) -> dict:
             and p[r.get("parametre", r["cle"])].statut == "HYPOTHESE"][:15]
     sensibilite = [{"cle": r["cle"], "note": (p[r.get("parametre", r["cle"])].note or "")[:200], "encadree": bool(p[r.get("parametre", r["cle"])].source),
                     "deficit_2037": _r(r["deficit_2037"], 3), "deficit_2050": _r(r["deficit_2050"], 3)} for r in sens]
-    fichier_inc = RACINE / "sorties" / "incertitude.json"
+    fichier_inc = RACINE / "sorties" / "incertitude_rho1.json"  # borne haute de la fourchette (14/11/2026)
     incertitude = json.loads(fichier_inc.read_text(encoding="utf-8")) if fichier_inc.exists() else None
     if incertitude and "programmes" in incertitude:  # format de la phase D (13/11/2026) : Écologie de droite
         x = incertitude["programmes"].get("ecologie_de_droite", {})

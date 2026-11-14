@@ -994,5 +994,5 @@ enveloppe_economies:
 
 # --- Incertitude chiffrée (phase D, 13/11/2026 ; moteur/incertitude.py) -----------------------------------------
 incertitude:
-  correlation: {valeur: 0.5, unite: sans_unite, statut: HYPOTHESE, note: "Part commune des tirages (z = √ρ Z + √(1 − ρ) ε) : les hypothèses de comportement, de productivité et de multiplicateur ont tendance à être bonnes ou mauvaises ensemble (cycle, confiance, politique de la BCE). ρ = 1 redonne les scénarios ; ρ = 0 suppose l'indépendance. 0,5 : milieu, à lire avec les variantes ρ = 0 et ρ = 1 publiées à côté."}
+  correlation: {valeur: [0.0, 1.0], unite: sans_unite, statut: DECISION, note: "DÉCISION d'Adrien du 14/11/2026 : pas de source pour la part commune des tirages (z = √ρ Z + √(1 − ρ) ε) ; on publie la fourchette entre ses deux bornes. ρ = 0 : hypothèses indépendantes (intervalles étroits, les cas où tout va bien ou mal ensemble presque impossibles) ; ρ = 1 : toutes ensemble (redonne l'écart entre l'optimiste et le prudent)."}
 

@@ -1362,3 +1362,12 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   tirages ; Retailleau dans 70 %, Philippe 49 %, Attal 30 % ; les autres presque jamais.
 - Robustesse : `anciennes_pensions.recette_nette` ne divise plus par zéro quand aucune personne seule ne paie d'impôt
   (tirage extrême) ; `restitution` lit le nouveau format.
+
+## 14/11/2026 (matin) — Phase D : fourchette, section du comparateur
+
+- Décision d'Adrien : la corrélation entre hypothèses n'a pas de source, on publie la fourchette entre ρ = 0 et ρ = 1
+  (`incertitude.correlation` : [0, 1], DECISION) ; plus de calcul à ρ = 0,5. 600 tirages à chaque borne.
+- Hypothèses qui pèsent : lues dans les tirages indépendants (ρ = 0), au-delà de 3 écarts types du hasard ; le
+  rendement de la recherche (anomalie du calcul à ρ = 0,5) disparaît.
+- Comparateur : section dédiée « Incertitude : la fourchette de chaque programme » (graphique des deux bornes par
+  programme, tableau, année et grandeur au choix), sans toucher aux graphiques existants.

@@ -12,7 +12,8 @@ d'emploi), le prudent est le milieu de la crise et du médian, comme dans le mot
 Corrélation : z = √ρ × Z + √(1 − ρ) × ε, Z commun au tirage (le « climat » : productivité, comportements et
 multiplicateurs ont tendance à être bons ou mauvais ensemble), ε propre au paramètre. ρ = 1 redonne les scénarios
 (chaque centile de la loi est le même point pour tous les paramètres) ; ρ = 0 suppose l'indépendance, qui rend les cas
-où tout va bien ou tout va mal très rares. ρ : incertitude.correlation.
+où tout va bien ou tout va mal très rares. Faute de source, on publie la fourchette entre les deux bornes
+(incertitude.correlation, décision du 14/11/2026).
 
 Tirages communs (D2) : le z d'un paramètre ne dépend que de la graine, du numéro du tirage et du nom du paramètre :
 deux programmes qui partagent une hypothèse la voient tirée au même point, et les écarts entre programmes se lisent
@@ -20,7 +21,7 @@ tirage par tirage. Chaque tirage remplace la colonne médiane et se calcule dans
 prudente reste celle du scénario prudent : c'est elle que le moteur lit pour les effets en sens inverse, comme dans le
 scénario médian publié).
 
-    python -m moteur.incertitude [n] [rho]     # écrit sorties/incertitude.json
+    python -m moteur.incertitude [n] [rho]     # écrit sorties/incertitude_rho0.json et incertitude_rho1.json
 """
 from __future__ import annotations
 
@@ -264,7 +265,8 @@ def simuler(n: int = 200, graine: int = 2029, rho: float | None = None, noms: li
             journal=None, processus: int = 1) -> dict:
     noms = noms if noms is not None else programmes()
     base, propres, listes = _preparer(noms)
-    rho = base.val("incertitude.correlation") if rho is None else rho
+    if rho is None:
+        raise ValueError("rho : une des bornes de incertitude.correlation (0 ou 1), ou une valeur d'essai")
     # tirages écrits au fil de l'eau (reprise possible après une interruption) : une ligne JSON par tirage
     fichier = fichier_tirages(rho, graine)
     faits = {}
@@ -311,10 +313,11 @@ def _cles_int(d: dict) -> dict:
 
 
 if __name__ == "__main__":
-    n = int(sys.argv[1]) if len(sys.argv) > 1 else 200
-    rho = float(sys.argv[2]) if len(sys.argv) > 2 else None
-    r = simuler(n, rho=rho, journal=lambda m: print(m, flush=True), processus=2)
-    f = SORTIE if rho is None else SORTIE.with_name(f"incertitude_rho{rho:g}.json")
-    f.parent.mkdir(exist_ok=True)
-    f.write_text(json.dumps(r, ensure_ascii=False), encoding="utf-8")
-    print(f"Écrit : {f}")
+    n = int(sys.argv[1]) if len(sys.argv) > 1 else 600
+    bornes = [float(sys.argv[2])] if len(sys.argv) > 2 else Parametres().val("incertitude.correlation")
+    for rho in bornes:
+        r = simuler(n, rho=rho, journal=lambda m: print(m, flush=True), processus=2)
+        f = SORTIE.with_name(f"incertitude_rho{rho:g}.json")
+        f.parent.mkdir(exist_ok=True)
+        f.write_text(json.dumps(r, ensure_ascii=False), encoding="utf-8")
+        print(f"Écrit : {f}")
