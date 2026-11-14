@@ -114,7 +114,10 @@ def test_instrument_inconnu(p):
 
 
 def test_interrupteur(p):
-    """Canal coupé : pas de mesure d'offre, PIB du programme sans effet d'offre."""
+    """Canal coupé : pas de mesure d'offre, PIB du programme sans effet d'offre. Sans les profils de Mésange par
+    instrument (phase E) : avec eux, la demande de ces instruments reprend le profil total de Mésange quand l'offre est
+    coupée (tests/test_bouclage.py)."""
+    p = p.avec({"macro.bouclage_profils": False})
     z = noyau.charger("zemmour")
     avec = z.contexte(p)["prudent"]["pib"][2050]
     q = p.avec({"offre.actif": False})

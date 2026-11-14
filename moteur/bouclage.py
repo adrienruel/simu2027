@@ -81,6 +81,71 @@ def _h(serie: list, tau: int) -> float:
     return serie[tau] if 0 <= tau < len(serie) else serie[-1]
 
 
+# ------------------------------------------------------------------ profils de Mésange par instrument
+POINTS = (0, 1, 2, 4, 9, 24)  # 1, 2, 3, 5, 10 ans et long terme (atteint en 25 ans)
+
+
+def profils_actifs(p) -> bool:
+    return "macro.bouclage_profils" in p._p and bool(p.val("macro.bouclage_profils"))
+
+
+def cle_profil(m) -> str | None:
+    """Profil de Mésange d'une mesure (bouclage.profils_mesange), ou None (demande générique)."""
+    if m.instrument == "consommation":
+        return "consommation"
+    if m.instrument == "cout_travail":
+        return "cout_travail"
+    if m.instrument == "travail":
+        inc = (m.incidence or "proportionnel").split("@")[0]
+        return "travail_ir" if inc in ("ir", "haut", "bas") else "travail"
+    return None
+
+
+def _interp(vals: list, tau: int) -> float:
+    if tau >= POINTS[-1]:
+        return vals[-1]
+    for (a, va), (b, vb) in zip(zip(POINTS, vals), zip(POINTS[1:], vals[1:])):
+        if a <= tau <= b:
+            return va + (vb - va) * (tau - a) / (b - a)
+    return vals[0]
+
+
+def profil_demande(p, cle: str, incidence: str = "") -> dict:
+    """Réponse de la demande (PIB, %) et des prix (%) à une BAISSE d'un point de PIB de l'instrument, au multiplicateur
+    médian : profil de Mésange moins l'effet du canal d'offre commun au médian pour le même choc (phase E)."""
+    cache = p.__dict__.setdefault("_cache", {})
+    k = ("profil_demande", cle, incidence)
+    if k in cache:
+        return cache[k]
+    from . import offre
+    from .noyau import Mesure
+    from .programme_simple import TOUTES
+    pr = p.val("bouclage.profils_mesange")[cle]
+    y = sq.pib(p, "median")
+    instrument = {"consommation": "consommation", "cout_travail": "cout_travail"}.get(cle, "travail")
+    m = Mesure("profil", "recettes", {t: -0.01 * y[max(t, 2029)] for t in TOUTES}, instrument=instrument,
+               incidence=incidence if instrument == "travail" else "")
+    of = offre.effets(p, "median", [m]) if offre.actif(p) else {"dpib": {t: 0.0 for t in TOUTES}}
+    offre_pct = [of["dpib"][t] / y[max(t, 2029)] * 100 for t in TOUTES]
+    n = HORIZON
+    pib = [_interp(pr["pib"], i) - (offre_pct[i] if i < len(offre_pct) else offre_pct[-1]) for i in range(n)]
+    prix = [_interp(pr["prix"], i) for i in range(n)]
+    # emploi de conjoncture (E6) : profil de Mésange (milliers, salariés du marchand) moins les emplois du canal d'offre
+    # au médian pour le même choc (ramenés à l'emploi de 2029)
+    e = sq.effectifs(p, "median")
+    offre_emp = {t: sum(serie.get(t, 0.0) for serie in of.get("emplois", {}).values()) * e[2029]["emploi"] / e[t]["emploi"]
+                 for t in e if t >= 2029} if "emplois" in of else {}
+    em = p.val("bouclage.emplois_mesange")[cle]
+    emplois = [_interp(em, i) * 1000 - offre_emp.get(2027 + i, offre_emp.get(2073, 0.0) if i > 46 else 0.0) for i in range(n)]
+    cache[k] = {"pib": pib, "prix": prix, "emplois": emplois}
+    return cache[k]
+
+
+def _emplois_generiques(p, cle: str) -> list:
+    """Emploi de conjoncture d'un point de PIB de demande (personnes, emploi de 2029), profil de Mésange (E6)."""
+    return [_interp(p.val("bouclage.emplois_mesange")[cle], i) * 1000 for i in range(HORIZON)]
+
+
 def prix_offre(p, mesures, annees) -> dict:
     """Prix par les coûts (E2) : une baisse du coût du travail fait baisser les prix (bouclage.prix_offre, Mésange),
     sans toucher au PIB (déjà dans le canal d'offre). Rend {année: fraction du niveau des prix}."""
@@ -89,7 +154,7 @@ def prix_offre(p, mesures, annees) -> dict:
     y = sq.pib(p, "prudent")
     out = {t: 0.0 for t in annees}
     for m in mesures or []:
-        if m.instrument not in par:
+        if m.instrument not in par or (profils_actifs(p) and cle_profil(m)):
             continue
         lt, v = par[m.instrument]["long_terme"], par[m.instrument]["vitesse"]
         # points de PIB de baisse : une recette en moins (montant < 0) est une baisse
@@ -127,7 +192,23 @@ def reponse(p, s: str, cout_net: dict, annees, mesures=None, physiques=None) -> 
     u = reponses_unitaires(p)
     m = {sc: sq._v(p, "macro.multiplicateur", sc) for sc in (s, MIROIR[s])}
     # facture énergétique (E4) : revenu payé à l'étranger, impulsion de demande négative
-    fe = facture_energie(p, physiques if physiques is not None else mesures, annees)
+    # instruments à profil de Mésange : retirés de l'impulsion générique, réponse par leur profil (plus bas)
+    profils = {}
+    cout_net = dict(cout_net)
+    if profils_actifs(p):
+        from .offre import poids_demande
+        for m_ in mesures or []:
+            c = cle_profil(m_)
+            if not c or m_.poste == "participations" or m_.nature == "physique":
+                continue
+            w_ = poids_demande(p, m_)
+            inc = (m_.incidence or "proportionnel").split("@")[0] if c.startswith("travail") else ""
+            ser = profils.setdefault((c, inc), {t: 0.0 for t in annees})
+            for t in annees:
+                relance = -m_.valeurs.get(t, 0.0) if m_.poste == "recettes" else m_.valeurs.get(t, 0.0)
+                cout_net[t] -= w_ * relance  # retiré de l'impulsion générique
+                ser[t] += relance
+    fe =facture_energie(p, physiques if physiques is not None else mesures, annees)
     w_fe = p.val("bouclage.energie_importee")["poids_demande"]
     cout_net = {t: cout_net[t] - w_fe * fe[t] for t in annees}
     y = sq.pib(p, s)
@@ -136,12 +217,32 @@ def reponse(p, s: str, cout_net: dict, annees, mesures=None, physiques=None) -> 
     # fraction (prix) ou une fraction par an (inflation, taux)
     chocs, prec = [], 0.0
     dpib, prix, infl, infl_t, taux = {}, {}, {}, {}, {}
+    # investissement public : effet d'impact en plus (accélérateur, Mésange), a × persistance^τ par variation
+    ii = p.val("bouclage.investissement_impact")
+    inv = {t: sum(m_.valeurs.get(t, 0.0) for m_ in (mesures or [])
+                  if m_.poste == "investissement" and m_.nature == "mesure" and not m_.instrument) for t in annees}
+    chocs_inv, prec_inv = [], 0.0
+    emplois = {}
+    m_med = sq._v(p, "macro.multiplicateur", "median")
+    e_dep, e_inv = _emplois_generiques(p, "depense"), _emplois_generiques(p, "investissement")
+    eff = sq.effectifs(p, s)
+    e_ = {t: eff[max(t, 2029)]["emploi"] for t in annees}
     for i_t, t in enumerate(annees):
         i = cout_net[t] - prec
         prec = cout_net[t]
         mk = m[MIROIR[s]] if i > 0 else m[s]
         chocs.append((i_t, i, mk, i / y[max(t, 2029)]))
-        dpib[t] = sum(mk * x * _h(u["pib"], i_t - j) for j, x, mk, _ in chocs)
+        di = inv[t] - prec_inv
+        prec_inv = inv[t]
+        if di:
+            chocs_inv.append((i_t, di, m[MIROIR[s]] if di > 0 else m[s]))
+        dpib[t] = (sum(mk * x * _h(u["pib"], i_t - j) for j, x, mk, _ in chocs)
+                   + sum(mk * x * ii["a"] * ii["persistance"] ** (i_t - j) for j, x, mk in chocs_inv))
+        # E6 : emploi de conjoncture, profil de Mésange par point de PIB, au multiplicateur rapporté au médian
+        echelle = e_[t] / e_[2029]
+        emplois[t] = echelle * (sum(mk / m_med * g * 100 * _h(e_dep, i_t - j) for j, _, mk, g in chocs)
+                                + sum(mk / m_med * x / y[max(t, 2029)] * 100 * _h(e_inv, i_t - j)
+                                      for j, x, mk in chocs_inv))
         prix[t] = sum(mk * g * _h(u["prix"], i_t - j) for j, _, mk, g in chocs)
         infl[t] = sum(mk * g * _h(u["inflation"], i_t - j) for j, _, mk, g in chocs)
         infl_t[t] = sum(mk * g * _h(u["inflation_taux"], i_t - j) for j, _, mk, g in chocs)
@@ -155,7 +256,48 @@ def reponse(p, s: str, cout_net: dict, annees, mesures=None, physiques=None) -> 
         prix[t] += po[t]
         infl[t] += d
         infl_t[t] += w * d
-    return {"dpib": contrainte_capacite(p, s, dpib), "dpib_avant_capacite": dpib, "prix": prix, "inflation": infl,
+    # instruments à profil de Mésange (TVA, CSG, impôt sur le revenu, cotisations employeurs) : chaque variation suit
+    # le profil de son instrument, au multiplicateur du scénario rapporté au médian (miroir pour une relance) ; la BCE
+    # agit sur leurs taux de marché comme pour la demande générique, et leur taux réel freine la demande (σ, μ)
+    if profils:
+        b_ = p.val("bouclage.bce")
+        fp, fy = (b_["phi_pi"], b_["phi_y"]) if b_["active"] else (0.0, 0.0)
+        f_ = p.val("bouclage.forme")
+        m_med = sq._v(p, "macro.multiplicateur", "median")
+        x_pr = {t: 0.0 for t in annees}
+        p_pr = {t: 0.0 for t in annees}
+        for (c, inc), ser in profils.items():
+            pr = profil_demande(p, c, inc)
+            chocs_p, prec_p = [], 0.0
+            for i_t, t in enumerate(annees):
+                d = ser[t] - prec_p
+                prec_p = ser[t]
+                if d:
+                    chocs_p.append((i_t, d, (m[MIROIR[s]] if d > 0 else m[s]) / m_med, d / y[max(t, 2029)]))
+                # profils en % du PIB pour 1 % de PIB : la réponse en Md€ est k × variation (Md€) × profil
+                x_pr[t] += sum(k * dd * _h(pr["pib"], i_t - j) for j, dd, k, _ in chocs_p)
+                p_pr[t] += sum(k * g * _h(pr["prix"], i_t - j) for j, _, k, g in chocs_p)
+                emplois[t] += e_[t] / e_[2029] * sum(k * g * 100 * _h(pr["emplois"], i_t - j) for j, _, k, g in chocs_p)
+        z = 0.0
+        for i_t, t in enumerate(annees):
+            prec_t = annees[i_t - 1] if i_t else None
+            pi_t = p_pr[t] - (p_pr[prec_t] if prec_t else 0.0)
+            x_frac = x_pr[t] / y[max(t, 2029)]
+            # frein du taux réel de la zone (BCE), sur l'année écoulée, comme dans reponses_unitaires
+            if prec_t:
+                pi_prec = p_pr[prec_t] - (p_pr[annees[i_t - 2]] if i_t > 1 else 0.0)
+                r = w * ((fp - 1) * pi_prec * 100 + fy * x_pr[prec_t] / y[max(prec_t, 2029)] * 100)
+                z = f_["mu"] * z + f_["sigma"] * r
+            dpib[t] += x_pr[t] - z / 100 * y[max(t, 2029)]
+            prix[t] += p_pr[t]
+            infl[t] += pi_t
+            infl_t[t] += w * pi_t
+            taux[t] += w * ((fp - 1) * pi_t + fy * x_frac)
+    apres = contrainte_capacite(p, s, dpib)
+    for t in annees:
+        if dpib[t] > 0 and apres[t] < dpib[t] and emplois[t] > 0:
+            emplois[t] *= apres[t] / dpib[t]
+    return {"dpib": apres, "dpib_avant_capacite": dpib, "prix": prix, "inflation": infl, "emplois": emplois,
             "facture_energie": fe,
             "inflation_taux": infl_t, "taux_marche": taux}
 

@@ -876,7 +876,9 @@ class EcologieDeDroite:
             k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
             for t in ANNEES:
                 canaux[t]["Jeunes entrés plus tôt dans l'emploi"] = jeunes[t]
-                canaux[t]["Conjoncture (impulsion budgétaire)"] = dpib[t] / y_sq[t] * k_emp * e[t]["emploi"]
+                # phase E6 : emploi de conjoncture bouclé (profils de Mésange) ; sinon Okun
+                canaux[t]["Conjoncture (impulsion budgétaire)"] = (rep["emplois"][t] if rep else
+                                                                    dpib[t] / y_sq[t] * k_emp * e[t]["emploi"])
                 actifs[t] += jeunes[t]
             direct = E.pib_direct()
             pib = {t: y_sq[t] + dpib[t] + direct[t] + d_seniors[t] + d_offre[t] for t in ANNEES}

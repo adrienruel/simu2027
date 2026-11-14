@@ -32,6 +32,7 @@ macro:
     statut: DECISION
     note: "Phase E de la roadmap, DÉCISION d'Adrien du 14/11/2026 : multiplicateur, prix et taux bouclés par une forme réduite calée sur Mésange 2017 (moteur/bouclage.py) au lieu d'un effet entier l'année de l'impulsion éteint en macro.annees_effet_ajustement ans. Faux : ancien calcul, à l'identique."
   bouclage_prime_demande: {valeur: true, unite: sans_unite, statut: DECISION, note: "Phase E1 (14/11/2026) : l'écart de taux de marché au statu quo pèse sur le PIB (bouclage.prime_demande). Faux : seulement sur les intérêts, comme avant."}
+  bouclage_profils: {valeur: true, unite: sans_unite, statut: DECISION, note: "Phase E (14/11/2026) : TVA et accises, impôts sur le travail et cotisations employeurs suivent leur profil de Mésange (bouclage.profils_mesange) au lieu du poids de demande fixe et de la forme générique. Faux : forme générique."}
   capital_commun: {valeur: true, v_avant_e5: false, unite: sans_unite, statut: DECISION, note: "Phase E5 (14/11/2026, demande d'Adrien) : la fiscalité des entreprises passe par le stock de capital commun (moteur/capital.py), avec l'usure et la valeur d'un euro de capital des cohortes d'Écologie de droite (rendement net + usure ≈ 0,13 en prudent), au lieu de PIB × part du capital (0,35) × capital en plus, qui comptait environ deux fois plus. Faux : ancien calcul."}
   dividende_calcule:
     valeur: true

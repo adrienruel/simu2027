@@ -22,12 +22,19 @@ MESANGE = {
     "cotisations_employeurs": (0.20, 0.55, 0.76, 0.97, 1.29),
     # hausse de 10 $ du baril, facture énergétique +0,2 point de PIB (p. 123)
     "petrole": (-0.10, -0.24, -0.18, -0.21, -0.22),
+    # TVA en hausse, CSG et impôt sur le revenu en baisse, 1 point de PIB (4.1.5 à 4.1.7)
+    "tva": (-0.32, -0.66, -0.72, -0.81, -0.78),
+    "csg": (0.41, 0.84, 0.90, 0.81, 0.80),
+    "impot_revenu": (0.41, 0.83, 0.88, 0.81, 0.87),
 }
 PRIX_MESANGE = {
     "depense": (0.20, 0.58, 0.94, 1.42, 1.88),
     "investissement_public": (0.31, 0.92, 1.37, 1.86, 2.25),
     "cotisations_employeurs": (-0.36, -0.70, -0.87, -1.09, -1.32),
     "petrole": (0.33, 0.40, 0.40, 0.37, 0.24),
+    "tva": (1.48, 1.58, 1.52, 1.30, 0.89),
+    "csg": (0.05, 0.24, 0.40, 0.50, 0.42),
+    "impot_revenu": (0.04, 0.21, 0.34, 0.35, 0.14),
 }
 
 
@@ -48,6 +55,12 @@ def variante(p, nom: str, s: str = "median") -> dict:
             out[k] = {"demande": rep["dpib"][t] / y[max(t, 2029)] * 100, "offre": offre_k, "prix": float("nan")}
             out[k]["pib"] = out[k]["demande"] + offre_k
         return out
+    elif nom == "tva":
+        m = [Mesure("TVA", "recettes", un, instrument="consommation")]
+    elif nom == "csg":
+        m = [Mesure("CSG", "recettes", {t: -v for t, v in un.items()}, instrument="travail")]
+    elif nom == "impot_revenu":
+        m = [Mesure("IR", "recettes", {t: -v for t, v in un.items()}, instrument="travail", incidence="ir")]
     elif nom == "cotisations_employeurs":
         m = [Mesure("Cotisations employeurs", "recettes", {t: -v for t, v in un.items()}, instrument="cout_travail")]
     else:

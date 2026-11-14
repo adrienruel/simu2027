@@ -81,3 +81,22 @@ def effet_fiscal(p, s: str, pts: dict, annees) -> dict:
     y = sq.pib(p, s)
     r["effet_pib_pct"] = {t: r["pib"][t] / y[max(t, 2029)] * 100 for t in annees}
     return r
+
+
+def capital_public(p, s: str, pts: dict, annees) -> dict:
+    """Capital public en plus (points de PIB) et effet productif sur le PIB (%), pour l'investissement public en plus
+    (pts : points de PIB investis chaque année, + = plus d'investissement) ; phase E5.
+
+    K_t = (1 − usure) × K_(t−1) + pts_t ; effet_t = θ × K_t, θ = effet_long_terme × usure, pour qu'un point de PIB
+    investi chaque année donne effet_long_terme à long terme. effet_long_terme ne compte que l'effet productif EN PLUS
+    de la demande : la demande bouclée (moteur/bouclage.py) garde déjà ≈ 0,19 à long terme pour toute dépense. Une
+    baisse prend la valeur du scénario miroir. Le capital reste après la fin de l'investissement et s'use."""
+    c = p.val("capital_public.parametres")
+    us = c["usure"]
+    lt = {sc: c["effet_long_terme"][sc] for sc in (s, MIROIR[s])}
+    k, out_k, out_e = 0.0, {}, {}
+    for t in annees:
+        k = (1 - us) * k + pts.get(t, 0.0)
+        out_k[t] = k
+        out_e[t] = (lt[s] if k >= 0 else lt[MIROIR[s]]) * us * k
+    return {"capital_pts": out_k, "effet_pib_pct": out_e}

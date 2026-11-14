@@ -37,15 +37,33 @@ def test_critere_sortie_cotisations(resultats_banc):
     """Baisse des cotisations employeurs d'un point de PIB (demande bouclée + canal d'offre) : 30 % près ; prix en
     baisse, comme Mésange."""
     for a, c in zip(ANS, MESANGE["cotisations_employeurs"]):
-        assert abs(resultats_banc["cotisations_employeurs"][a]["pib"] - c) <= 0.305 * c
+        assert abs(resultats_banc["cotisations_employeurs"][a]["pib"] - c) <= 0.10 * c
         assert resultats_banc["cotisations_employeurs"][a]["prix"] < 0
 
 
 def test_critere_sortie_investissement_public(resultats_banc):
-    """Investissement public : 30 % près à partir de la deuxième année. Écart connu la première année (−35 %) : le
-    contenu en importations plus faible de l'investissement n'est pas représenté (reste de E4)."""
-    for a, c in zip(ANS[1:], MESANGE["investissement_public"][1:]):
-        assert abs(resultats_banc["investissement_public"][a]["pib"] - c) <= 0.30 * c
+    """Investissement public : 10 % près sur tous les horizons (effet d'impact de l'accélérateur,
+    bouclage.investissement_impact ; capital public en plus de la demande, capital.capital_public)."""
+    for a, c in zip(ANS, MESANGE["investissement_public"]):
+        assert abs(resultats_banc["investissement_public"][a]["pib"] - c) <= 0.10 * c
+
+
+@pytest.mark.parametrize("nom", ["tva", "csg", "impot_revenu", "cotisations_employeurs"])
+def test_profils_mesange(resultats_banc, nom):
+    """Impôts à profil de Mésange (demande + canal d'offre) : 10 % près ; prix du même signe que Mésange."""
+    from outils.banc_mesange import PRIX_MESANGE
+    for a, c, pr in zip(ANS, MESANGE[nom], PRIX_MESANGE[nom]):
+        assert abs(resultats_banc[nom][a]["pib"] - c) <= 0.10 * abs(c)
+        assert resultats_banc[nom][a]["prix"] * pr > 0
+
+
+def test_balance_courante(p):
+    """E4 : la balance courante retire de la balance commerciale les intérêts en plus versés aux non-résidents."""
+    r = noyau.simuler(p, noyau.charger("melenchon"), scenarios=["prudent"], contrefactuel=False)["prudent"]
+    base = noyau.simuler(p, None, scenarios=["prudent"])["prudent"]
+    t = 2037
+    d = (r[t]["charge_dette"] - base[t]["charge_dette"]) / r[t]["pib"] * 100
+    assert r[t]["balance_courante"] == pytest.approx(r[t]["balance_commerciale"] - 0.56 * d)
 
 
 def test_sans_bouclage_ancien_calcul():
@@ -138,3 +156,24 @@ def test_facture_energie_suit_les_tonnes(p):
          Mesure("élevage", "recettes", {}, "physique", physique={"emissions_mt:agriculture": {2035: -10.0}})]
     fe = bouclage.facture_energie(p, m, noyau.ANNEES)
     assert fe[2035] == pytest.approx(-10 * k) and fe[2034] == 0.0
+
+
+def test_emploi_de_conjoncture_revient_a_l_equilibre(p):
+    """E6 : une dépense permanente crée des emplois qui disparaissent en une dizaine d'années (Mésange : 107 000 à
+    3 ans, −8 000 à 10 ans), alors que le PIB reste plus haut ; les baisses d'impôt sur le travail gardent leurs
+    emplois (salaires)."""
+    from outils.banc_mesange import variante
+    q = p.avec({"bouclage.bce/active": False})
+    q.__dict__.pop("_cache", None)
+    y = sq.pib(q, "median")
+    un = {t: 0.01 * y[max(t, 2029)] for t in TOUTES}
+    from moteur.noyau import Mesure
+    from moteur import offre
+    dep = bouclage.reponse(q, "median", offre.impulsion(q, [Mesure("d", "etat_missions", un)], TOUTES), TOUTES)
+    assert 90_000 < dep["emplois"][2029] < 120_000 and abs(dep["emplois"][2036]) < 15_000
+    assert dep["dpib"][2036] > 0.4 / 100 * y[2036]
+    m = [Mesure("CSG", "recettes", {t: -v for t, v in un.items()}, instrument="travail")]
+    csg = bouclage.reponse(q, "median", offre.impulsion(q, m, TOUTES), TOUTES, m)
+    of = offre.effets(q, "median", m)
+    total = csg["emplois"][2036] + sum(s.get(2036, 0.0) for s in of["emplois"].values())
+    assert total == pytest.approx(151_000 * sq.effectifs(q, "median")[2036]["emploi"] / sq.effectifs(q, "median")[2029]["emploi"], rel=0.10)

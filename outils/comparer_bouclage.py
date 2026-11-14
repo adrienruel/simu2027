@@ -25,6 +25,9 @@ def calcul(args):
 
 def main():
     argv = sys.argv[1:]
+    if "--profils" in argv:  # avant = phase E sans les profils de Mésange par instrument
+        VARIANTE["macro.bouclage_profils"] = False
+        argv.remove("--profils")
     if "--e5" in argv:  # avant = phase E sans le stock de capital commun
         VARIANTE["macro.capital_commun"] = False
         argv.remove("--e5")

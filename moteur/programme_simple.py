@@ -460,7 +460,9 @@ class ProgrammeSimple:
                                     {t: dpib[t] * part_rec[t] for t in TOUTES}, nature="effet_macro"))
             e = sq.effectifs(p, s)
             k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
-            conj = {t: dpib[t] / y[t] * k_emp * e[t]["emploi"] for t in ANNEES}
+            # phase E6 : emploi de conjoncture bouclé (profils de Mésange, retour au chômage d'équilibre) ; sinon Okun
+            conj = ({t: rep["emplois"][t] for t in ANNEES} if rep else
+                    {t: dpib[t] / y[t] * k_emp * e[t]["emploi"] for t in ANNEES})
             for t in ANNEES:
                 canaux[t]["Conjoncture (impulsion budgétaire)"] = conj[t]
             # canal d'offre commun (moteur/offre.py) : effet durable des impôts et des transferts

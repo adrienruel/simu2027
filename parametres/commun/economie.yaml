@@ -865,6 +865,15 @@ offre:
     source: "DG Trésor, Mésange (2017) : baisse des cotisations employeurs, 11 % de l'effet de long terme au bout d'un an, 40 % au bout de cinq ans, 60 % au bout de dix ans, soit un ajustement d'environ 10 % par an"
     note: "Part de l'écart à l'effet de long terme comblée chaque année (ajustement partiel), à partir de 2027."
 
+# Capital public (phase E5, 14/11/2026) : moteur/capital.capital_public
+capital_public:
+  parametres:
+    valeur: {usure: 0.04, effet_long_terme: {crise: 0.0, prudent: 0.03, median: 0.06, optimiste: 0.3}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Mésange 2017 (Bardaji et al., Insee G2017/04, p. 102 et 105) : à long terme, +0,22 % de PIB pour un point de PIB d'investissement public en plus, contre +0,16 % pour une dépense publique quelconque, soit 0,06 d'effet propre au capital public (médian) ; Bom et Ligthart (Journal of Economic Surveys, 2014, méta-analyse) : élasticité de la production au capital public ≈ 0,08 à 0,12, plus forte pour les infrastructures de base (optimiste). Usure : durée de vie des infrastructures et bâtiments publics de 25 à 50 ans (hypothèse)."
+    note: "Effet productif EN PLUS de la demande bouclée, qui garde déjà ≈ 0,19 à long terme pour toute dépense. Avant (offre.elasticite_investissement_public, 0,1 / 0,2 / 0,33 / 0,5, présentés comme l'effet total de long terme, avec un 0,33 de Mésange d'une version antérieure) : ajouté à la demande bouclée, un point de PIB investi donnait ≈ 0,52 % de PIB à long terme en médian contre 0,22 dans Mésange."
+
 # Macro bouclée (phase E de la roadmap, 14/11/2026) : moteur/bouclage.py
 bouclage:
   forme:
@@ -891,12 +900,46 @@ bouclage:
     statut: SOURCE
     source: "Facture : énergies fossiles importées ≈ 57 Md€ par an (SDES, Bilan énergétique de la France : 2024, pétrole et biocarburants 43,7 Md€, gaz 17,4, charbon et bois 1,7 ; 2025, facture totale 45,8 Md€ dont −5,5 d'électricité exportée), pour 267 Mt CO2e émises par les transports, les bâtiments, l'industrie et l'énergie en 2025 (Citepa, Secten 2026) : 0,213 Md€ par Mt. Réponse : Mésange 2017 (Bardaji et al., Insee G2017/04, p. 123), hausse de 10 $ du baril, facture +0,2 point de PIB : PIB −0,10 / −0,24 / −0,18 / −0,21 / −0,22 / −0,17 à 1, 2, 3, 5, 10 ans et long terme"
     note: "Phase E4 (14/11/2026) : les tonnes de CO2 fossile en plus ou en moins que les mesures déclarent (Mesure.physique, secteurs énergétiques) changent les importations de pétrole et de gaz, à 0,213 Md€ par Mt (prix de 2024-2025, constants en euros de 2026). Revenu payé à l'étranger : impulsion de demande négative au poids poids_demande (calé sur la variante pétrole de Mésange avec offre_long_terme et vitesse_offre). La perte d'offre (énergie plus chère pour les entreprises) ne sert qu'au banc : un volume économisé par rénovation ou par le rail ne renchérit pas l'énergie. La réponse des émissions au prix du carbone n'y entre pas (elle passe par la taxe, dont l'impulsion compte déjà les importations en moins). Facture en plus aussi dans la balance commerciale."
+  non_residents:
+    valeur: 0.56
+    unite: taux
+    statut: SOURCE
+    source: "Agence France Trésor, d'après la Banque de France : 56,0 % de l'encours des titres de dette négociable de l'État détenus par des non-résidents au quatrième trimestre 2025 (repris dans l'exposé de l'amendement CF9 au projet de loi n° 2694, Assemblée nationale, juin 2026)"
+    note: "Phase E4 (14/11/2026) : part des intérêts en plus (ou en moins) par rapport au statu quo versée aux non-résidents, retirée de la balance commerciale pour la balance courante. Part de la dette négociable de l'État, appliquée à toute la dette publique (approximation)."
   prime_demande:
     valeur: {crise: 0.5, prudent: 0.35, median: 0.25, optimiste: 0.15}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : Neri (Banque d'Italie, Questioni di Economia e Finanza n° 170, 2013) : sans les tensions sur les dettes souveraines, les taux des crédits des pays périphériques auraient été plus bas de 130 et 60 points de base fin 2011, pour des écarts souverains de plusieurs centaines de points ; borne haute : transmission des taux directeurs aux crédits aux entreprises ≈ 64 points de base pour 100 (Herbst, Lang et Rusnák, BCE, WP n° 3057, 2025)"
     note: "Phase E1 (14/11/2026) : part de l'écart de taux de marché de l'État au statu quo (prime de dette, écart propre au programme, BCE) qui passe aux taux réels des ménages et des entreprises ; l'effet sur le PIB suit la variante de taux de Mésange (bouclage.forme : sigma, mu). Taux plus haut que le statu quo : valeur du scénario ; plus bas (crédibilité gagnée) : scénario miroir. Le statu quo est le repère : son propre emballement de dette ne pèse pas sur son PIB (le scénario sans réforme reste celui de la législation constante)."
+  profils_mesange:
+    valeur:
+      consommation: {pib: [0.32, 0.66, 0.72, 0.81, 0.78, 0.70], prix: [-1.48, -1.58, -1.52, -1.30, -0.89, -0.76]}
+      travail: {pib: [0.41, 0.84, 0.90, 0.81, 0.80, 0.88], prix: [0.05, 0.24, 0.40, 0.50, 0.42, 0.28]}
+      travail_ir: {pib: [0.41, 0.83, 0.88, 0.81, 0.87, 1.05], prix: [0.04, 0.21, 0.34, 0.35, 0.14, -0.18]}
+      cout_travail: {pib: [0.20, 0.55, 0.76, 0.97, 1.29, 1.73], prix: [-0.36, -0.70, -0.87, -1.09, -1.32, -2.27]}
+    unite: pct
+    statut: SOURCE
+    source: "Mésange 2017 (Bardaji et al., Insee G2017/04, variantes analytiques à taux réels et change constants, choc de 1 % du PIB ex ante) : TVA (4.1.5, signe inversé : baisse), CSG (4.1.6, baisse), impôt sur le revenu (4.1.7, baisse), cotisations employeurs (4.1.3, baisse) ; PIB en volume et prix de consommation, écart en % à 1, 2, 3, 5, 10 ans et long terme"
+    note: "Phase E (14/11/2026) : pour ces instruments, la demande bouclée prend le profil de Mésange (une BAISSE d'un point de PIB), moins ce que le canal d'offre commun compte déjà au médian pour le même choc ; mise à l'échelle par le multiplicateur du scénario (miroir pour une relance), comme la demande générique. Le canal d'offre reste structurel (offre de travail par cellule, capital). travail : incidences proportionnelles (CSG, cotisations salariés, réformes d'ensemble) ; travail_ir : incidences « ir », « haut », « bas ». Long terme atteint en 25 ans (interpolation linéaire). Remplace le poids de demande fixe de ces instruments et les prix par les coûts (bouclage.prix_offre). Cause : la forme unique sous-estimait de 40 à 50 % à moyen terme l'effet des impôts des ménages (la TVA et la CSG jouent aussi sur les salaires et la compétitivité)."
+  emplois_mesange:
+    valeur:
+      depense: [33, 94, 107, 44, -8, -42]
+      investissement: [59, 104, 94, 47, 53, 56]
+      consommation: [32, 118, 153, 113, 69, 64]
+      travail: [23, 105, 166, 167, 151, 161]
+      travail_ir: [24, 109, 174, 184, 181, 200]
+      cout_travail: [83, 210, 290, 316, 318, 362]
+    unite: milliers
+    statut: SOURCE
+    source: "Mésange 2017 (Bardaji et al., Insee G2017/04), emploi salarié marchand en milliers, écart au compte central à 1, 2, 3, 5, 10 ans et long terme, choc de 1 % du PIB : dépense publique (p. 105) ; investissement public (p. 102 : 92 / 198 / 201 / 91 / 45 / 14, ici l'écart à la dépense) ; TVA (4.1.5, signe inversé : baisse) ; CSG (4.1.6) ; impôt sur le revenu (4.1.7) ; cotisations employeurs (4.1.3)"
+    note: "Phase E6 (14/11/2026) : emploi de conjoncture bouclé. Remplace la loi d'Okun fixe (macro.emplois_par_point_pib × PIB en plus) pour la demande : la dépense ramène l'emploi à son niveau d'équilibre en une dizaine d'années (le PIB reste plus haut par le capital et la productivité), les impôts des ménages et du travail le changent durablement (salaires). Pour les instruments du canal d'offre (travail, coût du travail, consommation), on retire les emplois que ce canal compte déjà au médian. Mis à l'échelle par le multiplicateur du scénario (miroir pour une relance) et par l'emploi de l'année ; emplois pris sur le chômage. La loi d'Okun reste pour la rétroaction des taux (noyau) et les programmes sans macro bouclée."
+  investissement_impact:
+    valeur: {a: 0.53, persistance: 0.6}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Mésange 2017 (Bardaji et al., Insee G2017/04, p. 102 et 105) : écart de PIB entre un point de PIB d'investissement public et un point de dépense quelconque, 0,53 / 0,32 / 0,19 / 0,07 / 0,04 à 1, 2, 3, 5 et 10 ans ; investissement des SNF +3,06 % la première année contre +1,28 % (accélérateur)"
+    note: "Phase E (14/11/2026) : effet d'impact propre à l'investissement public, a × persistance^années pour chaque variation, au multiplicateur du scénario (comme la demande). Retrouve l'écart de Mésange à 0,02 point près."
   prix_offre:
     valeur: {cout_travail: {long_terme: -1.4, vitesse: 0.25}}
     unite: sans_unite

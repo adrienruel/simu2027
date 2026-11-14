@@ -433,6 +433,20 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
             out["emplois"][canal] = {t: prec[t] + serie[t] for t in ANNEES}
             out["detail"][i] = {"points_pib": pts, "effet_pib_pct": effet, "capital_md": r["capital"]}
             continue
+        if i == "investissement_public" and p.val("macro.capital_commun") and p.val("macro.bouclage"):
+            # phase E5 : stock de capital public, effet productif en plus de la demande bouclée (moteur/capital.py)
+            from . import capital
+            effet = capital.capital_public(p, s, pts, annees)["effet_pib_pct"]
+            part_emploi, _ = EMPLOI[i]
+            for t in annees:
+                out["dpib"][t] += effet[t] / 100 * y[max(t, 2029)]
+                dpib_productivite[t] += (1 - part_emploi) * effet[t] / 100 * y[max(t, 2029)]
+            serie = {t: part_emploi * effet[t] / 100 * e[t]["emploi"] for t in ANNEES}
+            canal = f"Offre : {LIBELLES[i]}"
+            prec = out["emplois"].get(canal, {t: 0.0 for t in ANNEES})
+            out["emplois"][canal] = {t: prec[t] + serie[t] for t in ANNEES}
+            out["detail"][i] = {"points_pib": pts, "effet_pib_pct": effet}
+            continue
         el = {sc: elasticite(sc) for sc in {s, MIROIR[s]}}
         for t in annees:
             sc = s if pts[t] >= 0 else MIROIR[s]

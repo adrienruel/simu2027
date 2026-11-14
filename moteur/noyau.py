@@ -315,6 +315,12 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "recettes_pib": rec / y[t] * 100, "depenses_primaires_pib": primaire / y[t] * 100,
             "dynamiques": flux["detail"],
         }
+        # balance courante (phase E4) : balance commerciale moins les intérêts en plus versés aux non-résidents
+        if "bouclage.non_residents" in p._p and p.val("macro.bouclage") and (mesures or ctx or dynamiques):
+            dch = out[t]["charge_dette"] - _charge_statu_quo(p, s)[t]
+            out[t]["balance_courante"] = out[t]["balance_commerciale"] - p.val("bouclage.non_residents") * dch / y[t] * 100
+        else:
+            out[t]["balance_courante"] = out[t]["balance_commerciale"]
         out[t]["deficit_avant_regle"] = sans_regle if regle is not None else out[t]["deficit"]
         out[t]["deficit_sans_regle"] = out[t]["deficit"]  # remplacé par le vrai scénario sans règle dans simuler
         if regle is not None:
@@ -345,7 +351,13 @@ def _marche_statu_quo(p: Parametres, s: str) -> dict[int, float]:
     if cle not in cache:
         r = trajectoire(p, s)
         cache[cle] = {t: r[t]["ecart_marche"] for t in ANNEES}
+        cache[("charge_statu_quo", s)] = {t: r[t]["charge_dette"] for t in ANNEES}
     return cache[cle]
+
+
+def _charge_statu_quo(p: Parametres, s: str) -> dict[int, float]:
+    _marche_statu_quo(p, s)
+    return p.__dict__["_cache"][("charge_statu_quo", s)]
 
 
 def _balance(p: Parametres, s: str, y_t: float, prix: float, t: int) -> float:

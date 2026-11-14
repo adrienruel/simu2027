@@ -1415,3 +1415,15 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   valeur ajoutée des SNF). Baisse d'IS d'un point de PIB : +0,18 % de PIB à long terme (0,41 avant).
 - Déficit 2037 au prudent : Lisnard +0,08, Philippe +0,04, Le Pen +0,04 ; Mélenchon −0,06, Tondelier −0,04. Option
   `macro.capital_commun`. Suite : 388 tests, 7 min 38 s.
+
+## 14/11/2026 (après-midi) — Phase E finie : capital public, profils de Mésange, balance courante, emploi (E6)
+
+- Capital public (`capital.capital_public`) : stock avec usure (4 %), effet productif en plus de la demande seulement
+  (médian 0,06, Mésange) ; l'ancien canal (0,33 en médian) s'ajoutait à la demande bouclée (double compte).
+  Investissement public : effet d'impact de l'accélérateur (`bouclage.investissement_impact`), banc à 6 % près.
+- Profils de Mésange par instrument (`bouclage.profils_mesange`) : TVA, CSG, impôt sur le revenu, cotisations
+  employeurs ; la forme unique sous-estimait de 40 à 50 % à moyen terme l'effet des impôts des ménages.
+- Balance courante (`bouclage.non_residents`, 56 %). Emploi de conjoncture par les profils de Mésange
+  (`bouclage.emplois_mesange`) au lieu de la loi d'Okun : retour à l'équilibre pour la dépense.
+- `test_offre.test_interrupteur` passé sans les profils. Suite complète : verte. Récapitulatif et effet sur les
+  14 trajectoires : `docs/bouclage.md` (réécrit).
