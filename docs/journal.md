@@ -1584,3 +1584,23 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - PCF-RET-05 (Aspa à 1 400 €) recalé sur la micro : 8,5 → 4,7 Md€ au prudent (cohérent avec Mélenchon, 3,7 à 1 337 €).
 - Déficit 2037 au prudent : Mélenchon 28,14 → 28,04 ; Roussel 30,28 → 30,06. Pauvreté du statu quo en 2037 : 15,9 %
   (pensions indexées sur les prix, moins compensées par l'Aspa).
+
+## 15/11/2026 (soir) — Variante « fonds dans les APU » commune à tous
+
+- Règle d'Adrien : la variante du fonds s'applique à tous les programmes qui proposent une retraite par capitalisation
+  avec un fonds, pas seulement à Écologie de droite. Module commun `moteur/fonds_apu.py`, champ `Mesure.fonds`.
+- Conventions identiques pour tous :
+  - ce que le fonds paie à la place de l'État redevient une dépense publique ;
+  - l'argent public versé au fonds est consolidé (`fonds: versement`) ;
+  - l'épargne obligatoire n'est pas une recette publique ;
+  - publié et variante sont calculés de la même façon (deux passes, règle comprise).
+- Fonds codés :
+  - Écologie de droite (investissements repris) ;
+  - Philippe (PHI-RET-05, abondement de l'État) ;
+  - Retailleau (RET-RET-02, part des employeurs publics).
+- Lisnard : fonds déjà public, donc rien à changer.
+- Bertrand, Zemmour, Le Pen et Attal : capitalisation non chiffrée, financement non décrit (décision ouverte).
+- Déficit 2037, prudent, publié → fonds dans les APU :
+  - Écologie de droite 4,66 → 8,34 ;
+  - Philippe 11,15 → 10,79 ;
+  - Retailleau 10,20 → 10,19.

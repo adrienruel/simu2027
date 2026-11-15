@@ -1,0 +1,49 @@
+programme,scenario,annee,deficit_publie,deficit_fonds_apu,dette_pib_publiee,dette_pib_fonds_apu,deplace_md
+Écologie de droite,crise,2029,4.17,6.42,129.4,131.6,73.1
+Écologie de droite,crise,2037,8.07,12.35,170.2,197.9,75.5
+Écologie de droite,crise,2050,19.02,30.73,296.8,420.5,78.8
+Écologie de droite,crise,2073,94.22,151.31,1320.8,2081.4,75.9
+Écologie de droite,prudent,2029,4.16,6.09,128.8,130.7,73.1
+Écologie de droite,prudent,2037,4.66,8.34,137.7,161.8,78.4
+Écologie de droite,prudent,2050,5.66,15.17,157.5,249.7,85.2
+Écologie de droite,prudent,2073,11.33,56.46,248.7,816.4,92.4
+Écologie de droite,median,2029,3.95,5.77,128.0,129.9,73.3
+Écologie de droite,median,2037,2.89,6.17,120.1,141.7,81.8
+Écologie de droite,median,2050,2.38,7.58,106.1,168.1,92.5
+Écologie de droite,median,2073,-2.45,12.86,42.4,267.5,107.5
+Écologie de droite,optimiste,2029,3.17,4.97,125.6,127.4,73.4
+Écologie de droite,optimiste,2037,0.89,3.02,98.7,115.1,83.1
+Écologie de droite,optimiste,2050,-1.27,2.92,54.9,103.8,94.4
+Écologie de droite,optimiste,2073,-7.98,-2.21,-69.8,42.0,115.4
+Philippe (Horizons),crise,2029,6.83,6.83,130.0,130.0,0.0
+Philippe (Horizons),crise,2037,15.92,15.43,208.1,205.8,-10.2
+Philippe (Horizons),crise,2050,44.59,43.34,529.2,516.8,-10.5
+Philippe (Horizons),crise,2073,249.86,243.42,3118.1,3037.6,-9.5
+Philippe (Horizons),prudent,2029,6.39,6.39,129.2,129.2,0.0
+Philippe (Horizons),prudent,2037,11.15,10.79,174.1,172.3,-8.5
+Philippe (Horizons),prudent,2050,27.23,26.23,344.5,335.2,-9.2
+Philippe (Horizons),prudent,2073,127.86,123.76,1587.1,1536.2,-9.6
+Philippe (Horizons),median,2029,5.98,5.98,128.7,128.7,0.0
+Philippe (Horizons),median,2037,8.55,8.3,156.1,154.8,-6.6
+Philippe (Horizons),median,2050,14.3,13.69,236.0,230.4,-7.4
+Philippe (Horizons),median,2073,65.7,62.87,815.9,781.8,-8.3
+Philippe (Horizons),optimiste,2029,5.38,5.38,127.5,127.5,0.0
+Philippe (Horizons),optimiste,2037,6.56,6.39,140.3,139.5,-4.5
+Philippe (Horizons),optimiste,2050,9.3,8.98,183.0,179.8,-5.1
+Philippe (Horizons),optimiste,2073,29.38,27.51,407.7,389.8,-6.1
+Retailleau (Les Républicains),crise,2029,6.68,6.68,129.9,129.9,-0.0
+Retailleau (Les Républicains),crise,2037,14.05,14.05,197.6,197.6,-0.2
+Retailleau (Les Républicains),crise,2050,38.31,38.27,468.1,467.7,-0.5
+Retailleau (Les Républicains),crise,2073,230.2,229.94,2857.7,2854.7,-0.9
+Retailleau (Les Républicains),prudent,2029,6.37,6.37,129.4,129.4,-0.0
+Retailleau (Les Républicains),prudent,2037,10.2,10.19,168.1,168.1,-0.2
+Retailleau (Les Républicains),prudent,2050,23.74,23.7,312.0,311.7,-0.5
+Retailleau (Les Républicains),prudent,2073,114.94,114.74,1421.9,1419.6,-1.1
+Retailleau (Les Républicains),median,2029,6.05,6.05,128.8,128.8,-0.0
+Retailleau (Les Républicains),median,2037,8.12,8.11,152.7,152.7,-0.2
+Retailleau (Les Républicains),median,2050,12.77,12.74,221.3,221.1,-0.6
+Retailleau (Les Républicains),median,2073,58.94,58.75,731.5,729.4,-1.3
+Retailleau (Les Républicains),optimiste,2029,5.43,5.43,127.2,127.2,-0.0
+Retailleau (Les Républicains),optimiste,2037,6.29,6.28,137.5,137.4,-0.2
+Retailleau (Les Républicains),optimiste,2050,8.45,8.43,173.5,173.3,-0.6
+Retailleau (Les Républicains),optimiste,2073,24.27,24.09,357.3,355.6,-1.4

@@ -73,7 +73,7 @@ class Retailleau(ProgrammeSimple):
         rc = p.val("entreprises.retour_is_charges")
         r_is = rc["taux_is_effectif"] * rc["part_marge"] * rc["part_employeurs_is"]
         out = [Mesure("RET-RET-02 — part de capitalisation : cotisation des employeurs publics (1 % du brut, moitié)",
-                      "etat_missions", {2027: 0.0, 2028: 0.0, **{t: pe * pp * total[t] for t in ANNEES}}),
+                      "etat_missions", {2027: 0.0, 2028: 0.0, **{t: pe * pp * total[t] for t in ANNEES}}, fonds="versement"),
                # charge déductible des employeurs privés : IS en moins (règle commune, entreprises.retour_is_charges)
                Mesure("RET-RET-02 — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
                       {t: -r_is * pe * (1 - pp) * total[t] for t in ANNEES})]

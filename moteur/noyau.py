@@ -76,6 +76,9 @@ class Mesure:
     # soutien aux enfants (canal commun des naissances, moteur/naissances.py) : None = selon le poste (famille : oui),
     # True / False, ou "garde" (accueil du jeune enfant : effet des places, demographie.creches_effet)
     enfants: bool | str | None = None
+    # fonds de capitalisation hors des administrations publiques (variante de classement, moteur/fonds_apu.py) :
+    # "versement" = argent public versé au fonds, consolidé (retiré) si le fonds est compté dans les APU
+    fonds: str = ""
 
 
 @dataclass
