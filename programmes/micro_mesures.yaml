@@ -52,6 +52,17 @@ tondelier:
     operations: [{population: {smic_brut_2026: 2000, diffusion: 1.4}}]
     note: "SMIC à 2 000 € brut, même règle que le moteur."
 
+  RET-03:
+    operations:
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.montant_maximum_annuel.personnes_seules, facteur: 1.2361}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.montant_maximum_annuel.couples, facteur: 1.2361}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.plafond_ressources.personnes_seules, facteur: 1.2361}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.plafond_ressources.couples, facteur: 1.2361}}
+    note: "ASPA au seuil de pauvreté (≈ 1 290 € par mois d'après la source du moteur) ; minimum contributif non codé (carrières inconnues)."
+  RET-04:
+    operations: [{population: {pensions: {seuil_mensuel: 2000, facteur: 0.975, fin: 2032}}}]
+    note: "Pensions de plus de 2 000 € brut revalorisées 0,5 point sous l'inflation de 2028 à 2032 : − 2,5 % de niveau, qui s'éteint ensuite avec ces retraités."
+
 lisnard:
   LIS-SOC-01:
     operations: [{parametre: {chemin: impot_revenu.calcul_impot_revenu.plaf_qf.plafond_avantages_procures_par_demi_part.general, valeur: 1000000000.0}}]
@@ -61,6 +72,10 @@ lisnard:
   LIS-ECO-03b:
     operations: [{formule: {nom: condition_nationalite, groupe: hors_ue_recents, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
     note: "Prestations non contributives réservées aux résidents depuis cinq ans : familles étrangères hors UE arrivées depuis moins de cinq ans (le versement à l'étranger n'est pas dans la population)."
+
+  LIS-RET-01:
+    operations: [{population: {pensions: {seuil_mensuel: 2000, facteur: 0.924, fin: 2032}}}]
+    note: "Pensions de plus de 2 000 € brut non revalorisées de 2028 à 2032 : (1 / 1,016)^5 = 0,924 de niveau (inflation de 2028 du moteur), qui s'éteint ensuite avec ces retraités."
 
 roussel:
   PCF-RET-03:
@@ -88,6 +103,17 @@ roussel:
     operations: [{population: {smic_net_2027: 1700, diffusion: 1.4}}]
     note: "SMIC à 1 700 € net, même lecture que Mélenchon."
 
+  PCF-RET-05:
+    operations:
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.montant_maximum_annuel.personnes_seules, facteur: 1.3415}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.montant_maximum_annuel.couples, facteur: 1.3415}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.plafond_ressources.personnes_seules, facteur: 1.3415}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.plafond_ressources.couples, facteur: 1.3415}}
+    note: "ASPA à 1 400 € par mois (1 043,6 € en 2026), plafond relevé d'autant ; recours complet."
+  PCF-RET-02:
+    operations: [{population: {pensions: {indexation_salaires: true}}}]
+    note: "Pensions revalorisées comme le salaire moyen depuis 2029 : sans effet en 2026, visible dans le vieillissement (même calcul que le moteur)."
+
 melenchon:
   LFI-PRE-04:
     operations: [{variable: {nom: aide_logement, facteur: 1.10}}]
@@ -114,6 +140,14 @@ melenchon:
   LFI-SAL-01:
     operations: [{population: {smic_net_2027: 1700, diffusion: 1.4}}]
     note: "SMIC à 1 700 € net (euros de 2027) : salaires relevés comme dans le moteur (bibliotheque.smic, diffusion jusqu'à 1,4 nouveau SMIC, privé et public) ; les emplois perdus ne sont pas retirés de la population (canal du moteur)."
+
+  LFI-RET-04:
+    operations:
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.montant_maximum_annuel.personnes_seules, facteur: 1.2811}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.montant_maximum_annuel.couples, facteur: 1.2811}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.plafond_ressources.personnes_seules, facteur: 1.2811}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.plafond_ressources.couples, facteur: 1.2811}}
+    note: "ASPA portée au seuil de pauvreté retenu par le programme (1 337 € par mois, contre 1 043,6 € en 2026), plafond de ressources relevé d'autant, couples dans la même proportion ; recours complet (le non-recours à l'ASPA, ≈ 50 %, n'est pas modélisé)."
 
 le_pen:
   RN-FIS-03:

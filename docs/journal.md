@@ -1575,3 +1575,9 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - Erreur : tranche à 9 % de Mélenchon et Roussel encore à − 4,5 / − 3,5 au lieu de − 9,3 : recalée.
 - Déficit 2037 au prudent : Mélenchon 27,92 → 28,14 ; Roussel 29,96 → 30,28 (tranche à 9 % recalée).
 - D10 en 2037 : Mélenchon − 460 € par an, Tondelier − 483, Zemmour + 3 034, Attal + 2 115.
+
+## 15/11/2026 (après-midi) — Retraites dans la micro ; recours à l'Aspa
+
+- Pensions (gel, sous-indexation, indexation sur les salaires) et Aspa codés pour Mélenchon, Roussel, Tondelier, Lisnard.
+- Erreur : 14,7 Md€ d'Aspa versés dans la population (DREES : 754 460 allocataires, 4,1 Md€) ; recours calé sur la DREES
+  (4,6 Md€). Micro entièrement recalculée.

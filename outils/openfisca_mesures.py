@@ -20,6 +20,8 @@ import re
 import sys
 from pathlib import Path
 
+import math
+
 import numpy as np
 import yaml
 
@@ -203,7 +205,7 @@ class Base:
         self.rec = Parametres().val("microsimulation.recours")
         s = self.s
         n_f = s["n_familles"]
-        self.u = {k: np.random.default_rng(i + 11).random(n_f) for i, k in enumerate(("rsa", "ppa", "asf"))}
+        self.u = {k: np.random.default_rng(i + 11).random(n_f) for i, k in enumerate(("rsa", "ppa", "asf", "aspa"))}
         self.pp = np.array([l["poids"] for l in self.lignes])
         self.public = np.array([l["statut"] == "agent_public" for l in self.lignes])
         self.wf = np.zeros(n_f)
@@ -226,6 +228,16 @@ class Base:
             r = np.where(x > 0, np.maximum(x, 1e-9) ** self.rec["forme"], 0.0)
             m = (pr > 0) & (pr < 1)
             self.c[k] = float(np.median(pr[m] / r[m])) if m.any() else 1.0
+        # Aspa : recours calé sur le nombre d'allocataires de la DREES (personnes de 65 ans ou plus des familles)
+        aspa = self.sim.calculate_add("aspa", "2026")
+        n65 = np.bincount(s["famille"], weights=np.array([l["age"] >= 65 for l in self.lignes], float), minlength=n_f)
+        cible = Parametres().val("microsimulation.recours_aspa")["allocataires"]
+        poids_a = self.wf * np.maximum(n65, 1)
+        part = min(1.0, cible / float((poids_a * (aspa > 0)).sum()))
+        pr = op.proba_recours(aspa, poids_a, part, self.rec["forme"])
+        r = np.where(aspa > 0, np.maximum(aspa, 1e-9) ** self.rec["forme"], 0.0)
+        m = (pr > 0) & (pr < 1)
+        self.c["aspa"] = float(np.median(pr[m] / r[m])) if m.any() else 1.0
         asf = self.sim.calculate_add("asf", "2026")
         self.c["asf"] = Parametres().val("microsimulation.allocation_soutien_familial") * 1e6 / float((self.wf * (asf > 0)).sum())
         # travailleurs : en emploi, de 18 à 64 ans, avec un revenu d'activité
@@ -301,13 +313,14 @@ class Base:
         sf = foyers or s  # foyers fiscaux de la simulation (l'individualisation de l'impôt les change)
         rd = sim.calculate("revenu_disponible", an)
         montants = {k: sim.calculate_add(k, an) for k in AIDES}
+        montants["aspa"] = sim.calculate_add("aspa", an)
         pris = {}
-        for k in ("rsa", "ppa", "asf"):
+        for k in ("rsa", "ppa", "asf", "aspa"):
             x = montants[k]
             pris[k] = (self.u[k] < self.c[k]) if k == "asf" else \
                 (self.u[k] < np.minimum(1, self.c[k] * np.maximum(x, 1e-9) ** self.rec["forme"]))
-        percu = {k: montants[k] * pris.get(k, True) for k in AIDES}
-        ajust_f = sum(percu[k] - montants[k] for k in ("rsa", "ppa", "asf"))
+        percu = {k: montants[k] * pris.get(k, True) for k in (*AIDES, "aspa")}
+        ajust_f = sum(percu[k] - montants[k] for k in ("rsa", "ppa", "asf", "aspa"))
         uc = sim.calculate("unites_consommation", an)
         for x in post:
             if x["nom"] == "revenu_incitation":
@@ -367,7 +380,7 @@ class Base:
                 champ = self.menage_etudiant if x.get("champ") == "etudiants" else ~self.menage_etudiant
                 rd = rd + champ * np.maximum(0.0, x["seuil_mensuel"] * 12 * uc - rd)
         cout_i = sim.calculate_add("cout_du_travail", an)
-        comp = {k: float((self.wf * percu[k]).sum()) / 1e9 for k in ("rsa", "ppa", "asf", "aide_logement", "af")}
+        comp = {k: float((self.wf * percu[k]).sum()) / 1e9 for k in ("rsa", "ppa", "asf", "aide_logement", "af", "aspa")}
         comp["aah"] = float((self.pp * sim.calculate_add("aah", an)).sum()) / 1e9
         foy = np.zeros(sf["n_foyers"])
         foy[sf["foyer"]] = self.pp
@@ -465,6 +478,26 @@ class Base:
                     else:
                         continue
                     l["salaire_brut"] = b2 * mois
+            if "pensions" in x:
+                y = x["pensions"]
+                annee = getattr(self, "annee", 2026)
+                if y.get("indexation_salaires"):
+                    # pensions revalorisées comme le salaire moyen depuis 2029 (ou leur liquidation, ancienneté moyenne
+                    # de 12 ans) au lieu des prix : gain relatif w(t) / w(max(2029, t - 12)), même calcul que le moteur
+                    from moteur import statu_quo as sq
+                    w = sq.salaires(Parametres(), "prudent")
+                    fac = w[annee] / w[max(2029, annee - 12)] if annee > 2029 else 1.0
+                    for l in lg:
+                        l["pension_brute"] *= fac
+                    continue
+                # pensions au-delà d'un seuil mensuel brut multipliées par un facteur (gel, sous-indexation), perte qui
+                # s'éteint avec les retraités concernés après la dernière année (≈ 18 ans, comme le moteur)
+                fin = y.get("fin", 2032)
+                k = 1 - (1 - y["facteur"]) * (math.exp(-(annee - fin) / 18) if annee > fin else 1.0)
+                seuil = 12 * y.get("seuil_mensuel", 0.0)
+                for l in lg:
+                    if l["pension_brute"] > seuil:
+                        l["pension_brute"] *= k
         return lg
 
     def reforme(self, operations: list[dict]) -> dict:

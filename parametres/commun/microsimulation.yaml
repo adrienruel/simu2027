@@ -110,6 +110,12 @@ microsimulation:
     statut: SOURCE
     source: "Drees, Études et Résultats n° 1370 (mai 2026) : non-recours au RSA entre 33 % et 37 % des foyers éligibles fin 2021 (29 à 32 % des montants) ; n° 1379 (juillet 2026) : non-recours à la prime d'activité entre 48 % et 52 % des foyers éligibles, souvent pour de petits montants ou une éligibilité passagère"
     note: "Part des familles éligibles qui perçoivent la prestation. Tirage au hasard (graine fixe), avec une probabilité proportionnelle au montant dû à la puissance « forme », calée pour donner cette part en nombre de familles. Forme 0,2 : reproduit l'écart de la Drees pour le RSA entre non-recours en nombre (33 à 37 %) et en montant (29 à 32 %), soit une part en montant de 0,70 pour 0,65 en nombre ; même forme pour la prime d'activité, faute de mesure. Aides au logement, AAH et prestations familiales : recours complet (non-recours faible, non mesuré)."
+  recours_aspa:
+    valeur: {allocataires: 754460}
+    unite: sans_unite
+    statut: SOURCE
+    source: "DREES, Minimum vieillesse : données 2024 (décembre 2025) : 754 460 allocataires de l'ASV ou de l'Aspa fin 2024 ; DREES, Les retraités et les retraites 2025, fiche 27 : une personne seule sur deux éligible n'y aurait pas recours ; dépense du minimum vieillesse 4,1 Md€ en 2023 (Minima sociaux 2025, fiche 7)"
+    note: "Constat du 15/11/2026 : sans recours partiel, OpenFisca versait 14,7 Md€ d'Aspa à 2,2 millions de familles de la population (pensions basses sans les revenus du patrimoine, qui comptent dans les ressources de l'Aspa, et recours complet). Recours tiré comme pour le RSA (probabilité croissante avec le montant dû, forme de microsimulation.recours), calé pour que le nombre d'allocataires de 65 ans ou plus des familles qui la perçoivent soit celui de la DREES."
   profil_revenu_salarial_age:
     valeur: {"18-24": 10170, "25-39": 23480, "40-49": 29110, "50-54": 31010, "55+": 29310}
     unite: eur
