@@ -1537,4 +1537,4 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - `outils/entreprises_mesures.py`, `programmes/micro_entreprises.yaml` (7 mesures), CA et capital par entreprise.
 - Retour d'IS des impôts de production (règle commune, 0,25, mesures `deductible_is`). REC-33 recalé (− 1,0 → − 1,45).
 - Déficit 2037 au prudent : Philippe 11,26 → 10,89 ; Lisnard 14,25 → 13,96 ; Le Pen 13,28 → 13,16 ; Retailleau
-  10,23 → 10,17 ; Tondelier 13,21 → 13,28 (CVAE rétablie : moins d'IS) ; Mélenchon 27,90 → 27,97.
+  10,23 → 10,17 ; Tondelier 13,21 → 13,30 (CVAE rétablie : moins d'IS ; taux réduit recalé) ; Mélenchon 27,90 → 27,97.
