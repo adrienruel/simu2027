@@ -397,8 +397,10 @@ class ProgrammeSimple:
                                     enfants=x.get("enfants")))
                 if x.get("deductible_is"):
                     # impôts de production déductibles du bénéfice : l'IS bouge en sens inverse (règle commune)
-                    r_is = p.val("entreprises.retour_is_impots_production")
-                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : impôts de production déductibles", "recettes",
+                    rc = p.val("entreprises.retour_is_charges")
+                    part = 1.0 if x["deductible_is"] is True else float(x["deductible_is"])
+                    r_is = rc["taux_is_effectif"] * rc["part_marge"] * part
+                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
                                         {t: -r_is * v for t, v in serie.items()}, note=court))
                 if x.get("fp"):
                     # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS

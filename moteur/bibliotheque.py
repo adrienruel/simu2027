@@ -201,6 +201,7 @@ def smic(p: Parametres, brut_cible_2026: float, diffusion_jusqu_a: float, part_m
     b_smic, b_new = smic_brut_mensuel_2026 * 12, brut_cible_2026 * 12
     plafond = diffusion_jusqu_a * b_new
     taux_tva = p.val("systeme_actuel.taux_tva_moyen")
+    taux_is = p.val("entreprises.retour_is_charges")["taux_is_effectif"]  # même taux que les autres charges
 
     def calcul(d, tables: dict[str, float], prive: bool) -> dict:
         out = {"prelevements": 0.0, "aides": 0.0, "tva": 0.0, "is": 0.0, "hausse_cout": 0.0,
@@ -263,7 +264,7 @@ def smic(p: Parametres, brut_cible_2026: float, diffusion_jusqu_a: float, part_m
                 out["tva"] += n * taux_tva * ((net(c2, b2) + aides(c2)) - (net(c) + aides(c)))
                 out["hausse_cout"] += n * dc
                 if prive:
-                    out["is"] += -n * 0.25 * part_marge * dc
+                    out["is"] += -n * taux_is * part_marge * dc
                     out["emplois_ponderes"] += n * dc / c
                     out["chocs"].append((n, c2 / c))
                     pertes.append((n * dc / c, lev(c2, b2) + taux_tva * net(c2, b2) + valeur_emploi_chomeur, c2))

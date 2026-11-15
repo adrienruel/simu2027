@@ -177,6 +177,7 @@ glucksmann_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : CIR ≈ 7,6 Md€ (2024), dont ≈ 30 % aux entreprises de plus de 5 000 salariés (MESR, 2024) ; plafond de 100 M€ par groupe : ≈ 1,5 à 2,5 Md€ (Sénat, rapport sur le CIR, 2021 ; Cour des comptes, 2023)"
+    note: "Recoupement (15/11/2026, MESR-DGRI, CIR en 2023) : les 33 bénéficiaires d'au moins 100 M€ de dépenses (après intégration fiscale) ont 25 % de la créance recherche (≈ 1,8 Md€) ; au taux de 30 % sur leurs premiers 100 M€ (≈ 1,0 Md€), la part au taux de 5 % au-delà vaut ≈ 0,8 Md€ : supprimer cette tranche ne rapporte que cela. Le reste de la fourchette du Sénat suppose de consolider le plafond au niveau du groupe entier (filiales hors intégration fiscale), que les données publiées ne permettent pas de vérifier : à trancher."
   niches_transports:
     valeur: {id: GLU-FIS-05, instrument: consommation, libelle: "Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)", poste: recettes, moteur: "recette:tva", debut: 2028, plein: 2030,
              montant: {crise: 0.5, prudent: 0.8, median: 1.2, optimiste: 1.5}}

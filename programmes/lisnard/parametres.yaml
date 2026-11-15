@@ -154,14 +154,14 @@ lisnard_mesures:
     note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique au prudent, même écart entre scénarios qu'avant ; outils/openfisca_mesures.py, DÉCISION d'Adrien). Ancien montant : {crise: -4.0, prudent: -3.5, median: -3.0, optimiste: -2.5}."
     source: "Page programme (non datée) ; encadrement : plafonnement du quotient familial ≈ 3 à 4 Md€ d'impôt (Voies et moyens, dépense fiscale négative ; baisse du plafond de 2013-2014 ≈ 1,5 Md€)"
   creation_entreprise:
-    valeur: {id: LIS-ECO-04, instrument: cout_travail, libelle: "Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: LIS-ECO-04, deductible_is: true, instrument: cout_travail, libelle: "Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Le livre noir (22/04/2026), p. 7 ; encadrement : ACRE ≈ 0,4 Md€ (créateurs) ; ≈ 50 000 créations d'entreprises employeuses par an (Insee)"
   embauche_rsa:
-    valeur: {id: LIS-EMP-05, instrument: cout_travail, libelle: "Charges négatives à l'embauche d'un allocataire du RSA depuis plus de deux ans, emploi à domicile au SMIC sans charges", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: LIS-EMP-05, deductible_is: 0.5, instrument: cout_travail, libelle: "Charges négatives à l'embauche d'un allocataire du RSA depuis plus de deux ans, emploi à domicile au SMIC sans charges", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -0.8, prudent: -0.6, median: -0.5, optimiste: -0.4}}
     unite: md_eur
     annee_euros: 2026

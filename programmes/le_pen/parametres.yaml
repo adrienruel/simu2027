@@ -130,7 +130,7 @@ le_pen_mesures:
     source: "Institut Montaigne, législatives 2024 : supprimer les impôts sur l'héritage pour les classes populaires et moyennes, 1 Md€ ; transmission des TPE, PME et ETI exonérée sous engagement de dix ans, 5,3 Md€ ; FranceBudget : « pacte Dutreil renforcé » (2026)"
     note: "Classes modestes et donations ≈ 1 Md€ ; pacte Dutreil renforcé (et non la suppression totale de 2024) : 0,3 à 1 Md€ selon son contenu."
   hausses_salaires:
-    valeur: {id: RN-EMP-01, instrument: cout_travail, libelle: "Hausses de salaire de 10 % jusqu'à trois SMIC exonérées de cotisations patronales pendant cinq ans", poste: recettes, moteur: pib, debut: 2028, plein: 2029, fin: 2033,
+    valeur: {id: RN-EMP-01, deductible_is: true, instrument: cout_travail, libelle: "Hausses de salaire de 10 % jusqu'à trois SMIC exonérées de cotisations patronales pendant cinq ans", poste: recettes, moteur: pib, debut: 2028, plein: 2029, fin: 2033,
              montant: {crise: -6.0, prudent: -5.0, median: -3.5, optimiste: -2.0}}
     unite: md_eur
     annee_euros: 2026

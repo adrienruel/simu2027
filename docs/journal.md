@@ -1538,3 +1538,12 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - Retour d'IS des impôts de production (règle commune, 0,25, mesures `deductible_is`). REC-33 recalé (− 1,0 → − 1,45).
 - Déficit 2037 au prudent : Philippe 11,26 → 10,89 ; Lisnard 14,25 → 13,96 ; Le Pen 13,28 → 13,16 ; Retailleau
   10,23 → 10,17 ; Tondelier 13,21 → 13,30 (CVAE rétablie : moins d'IS ; taux réduit recalé) ; Mélenchon 27,90 → 27,97.
+
+## 15/11/2026 (midi) — Retour d'IS étendu aux cotisations patronales ; taux corrigé ; CIR
+
+- `entreprises.retour_is_charges` remplace `retour_is_impots_production` : 0,25 × 0,5 (part des marges, comme le SMIC)
+  = 12,5 % au lieu de 25 % (le matin, la part passée dans les prix était oubliée). Étendu aux cotisations et
+  exonérations patronales (9 mesures) et à la capitalisation de Retailleau ; le SMIC lit le même taux.
+- REC-36 recalé sur le MESR (2,0 → 1,5) ; GLU-FIS-04 : recoupement noté, à trancher.
+- Déficit 2037 au prudent (contre le 14/11) : Philippe 11,26 → 11,10 ; Lisnard 14,25 → 14,10 ; Le Pen 13,28 → 13,21 ;
+  Retailleau 10,23 → 10,20 ; Tondelier 13,21 → 13,38 ; Mélenchon 27,90 → 27,93.

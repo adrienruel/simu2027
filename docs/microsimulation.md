@@ -304,9 +304,21 @@ Résultats (Md€, statique ; « brut » : sans le retour d'IS ; moteur au prude
 | RET-FIS-01 : C3S et CFE industrielle | − 5,3 | − 7,1 | − 6,0 |
 | LIS-FIS-01, PHI-FIS-01 : C3S, CFE et taxe foncière | − 20,8 | − 27,6 | − 24 ; − 30 (avec d'autres impôts) |
 
-Constat : les impôts de production sont déductibles du bénéfice, et le moteur ne comptait pas l'IS qui revient quand
-ils baissent (un quart de la baisse dans la micro). Règle commune ajoutée : `entreprises.retour_is_impots_production`
-(0,25) sur les mesures marquées `deductible_is` (Attal, Lisnard, Philippe, Le Pen, Retailleau, Mélenchon, Tondelier).
-Question ouverte : le même raisonnement vaut pour les cotisations patronales et les subventions aux entreprises
-(charges et produits du compte de résultat), à court terme du moins ; à long terme, l'incidence des cotisations porte
-sur les salaires.
+Constat : les impôts de production et les cotisations patronales sont des charges déductibles, et le moteur ne comptait
+l'IS qui revient quand elles changent que pour les hausses du SMIC (25 % de la part prise sur les marges, la moitié).
+Règle commune (`entreprises.retour_is_charges`) : retour = taux effectif de la micro (0,25 de la variation du bénéfice)
+× part prise sur les marges (0,5, la valeur déjà utilisée pour le SMIC), soit 12,5 % de la variation. Elle s'applique aux
+mesures marquées `deductible_is` (`true`, ou la part de la mesure qui porte sur des charges des entreprises, 0,5 quand
+une mesure mêle cotisations salariales et patronales ou des particuliers employeurs) : impôts de production (Attal,
+Lisnard, Philippe, Le Pen, Retailleau, Mélenchon, Tondelier), cotisations et exonérations (Attal, Le Pen, Lisnard,
+Retailleau, Philippe, Tondelier : fin des allègements au-delà de 1,6 SMIC), part employeur de la capitalisation de
+Retailleau, et au SMIC, dont le taux d'IS vient maintenant du même paramètre. Écologie de droite, qui refond tout le
+système, garde son calcul propre. À long terme, une partie des cotisations passe dans les salaires : non modélisé.
+
+## Crédit d'impôt recherche (15/11/2026)
+
+MESR-DGRI, CIR en 2023 (provisoire) : 7,85 Md€ ; CIR-recherche des grandes entreprises 2 979 M€ (41 %), ETI 2 099,
+PME 2 241. REC-36 (Tondelier, CIR réservé aux PME et ETI, moitié rendue en subventions) : 2,0 → 1,5 Md€ au prudent (le
+moteur prenait 60 % pour les GE). GLU-FIS-04 (plafond de 100 M€ par groupe) : la tranche à 5 % au-delà de 100 M€ ne
+vaut qu'environ 0,8 Md€ ; la fourchette de 1,5 à 2,5 Md€ (Sénat) suppose une consolidation au niveau du groupe entier,
+non vérifiable avec les données publiées : à trancher. LFI-REC-15 (suppression) : 7,0 au prudent, cohérent.

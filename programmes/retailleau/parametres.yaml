@@ -111,7 +111,7 @@ retailleau_mesures:
     statut: HYPOTHESE
     source: "Calcul : taux légal de 0,09 % en 2029"
   zero_cotisation:
-    valeur: {id: RET-ECO-02, instrument: cout_travail, libelle: "« Zéro cotisation » au-delà de 1 623 heures par an (cotisations salariales et patronales)", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: RET-ECO-02, deductible_is: 0.5, instrument: cout_travail, libelle: "« Zéro cotisation » au-delà de 1 623 heures par an (cotisations salariales et patronales)", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -2.5, prudent: -2.0, median: -1.6, optimiste: -1.2}}
     unite: md_eur
     annee_euros: 2026
@@ -367,7 +367,7 @@ retailleau_mesures:
     statut: HYPOTHESE
     source: "Communiqué (24/07/2026) ; encadrement : un Canadair ≈ 50 M€"
   seniors:
-    valeur: {id: RET-RET-03, instrument: cout_travail, libelle: "Cotisations exonérées pour les seniors ayant tous leurs trimestres", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
+    valeur: {id: RET-RET-03, deductible_is: 0.5, instrument: cout_travail, libelle: "Cotisations exonérées pour les seniors ayant tous leurs trimestres", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
              montant: {crise: -0.5, prudent: -0.4, median: -0.3, optimiste: -0.2}}
     unite: md_eur
     annee_euros: 2026
