@@ -307,7 +307,8 @@ Résultats (Md€, statique ; « brut » : sans le retour d'IS ; moteur au prude
 Constat : les impôts de production et les cotisations patronales sont des charges déductibles, et le moteur ne comptait
 l'IS qui revient quand elles changent que pour les hausses du SMIC (25 % de la part prise sur les marges, la moitié).
 Règle commune (`entreprises.retour_is_charges`) : retour = taux effectif de la micro (0,25 de la variation du bénéfice)
-× part prise sur les marges (0,5, la valeur déjà utilisée pour le SMIC), soit 12,5 % de la variation. Elle s'applique aux
+× part prise sur les marges (0,5, la valeur déjà utilisée pour le SMIC), soit 10 % de la variation (taux effectif
+0,20 depuis le calage des pertes sur la DGFiP 2025, voir plus bas). Elle s'applique aux
 mesures marquées `deductible_is` (`true`, ou la part de la mesure qui porte sur des charges des entreprises, 0,5 quand
 une mesure mêle cotisations salariales et patronales ou des particuliers employeurs) : impôts de production (Attal,
 Lisnard, Philippe, Le Pen, Retailleau, Mélenchon, Tondelier), cotisations et exonérations (Attal, Le Pen, Lisnard,
@@ -322,3 +323,18 @@ PME 2 241. REC-36 (Tondelier, CIR réservé aux PME et ETI, moitié rendue en su
 moteur prenait 60 % pour les GE). GLU-FIS-04 (plafond de 100 M€ par groupe) : la tranche à 5 % au-delà de 100 M€ ne
 vaut qu'environ 0,8 Md€ ; la fourchette de 1,5 à 2,5 Md€ (Sénat) suppose une consolidation au niveau du groupe entier,
 non vérifiable avec les données publiées : à trancher. LFI-REC-15 (suppression) : 7,0 au prudent, cohérent.
+
+## Calage sur l'IS de 2025 (DGFiP Statistiques n° 51, fichier fourni par Adrien, 15/11/2026)
+
+`parametres/sources/dgfip_stat_51_is_2025.xlsx`. En 2025 : 2,83 millions d'entreprises à l'IS, dont 1 788 000
+bénéficiaires et 1 046 000 déficitaires ; 111,3 Md€ de déficits de l'année ; bénéfice imposable à 15 % 30,6 Md€, à 25 %
+256,8 ; IS brut 70,5 Md€ (TPE 14,5, PME 18,9, ETI 16,8, GE 20,2) ; CIR utilisé 7,7 Md€.
+
+- Pertes : la population mettait environ 5 000 € de perte par entreprise déficitaire (seules les petites classes de
+  pertes étaient connues) ; la perte moyenne réelle est d'environ 106 000 €. Les pertes sont maintenant
+  proportionnelles à la VA (puissance 0,8, bruit log-normal), ramenées à 111,3 Md€. Une entreprise déficitaire franchit
+  plus rarement le zéro quand ses charges baissent : le taux effectif du retour d'IS passe de 0,25 à 0,20.
+- Nombre de TPE à l'IS (2,60 millions), nombre de bénéficiaires, base du taux réduit (30,6 Md€ au seuil de 42 500 €,
+  part éligible 64 %) et niveau de l'IS (70,5 Md€) pris sur 2025. REC-33 : − 1,5 Md€.
+- Toujours non modélisés : le stock de déficits reportables en avant et le plafond d'imputation (1 M€ + 50 % du bénéfice
+  au-delà) ; la publication ne les donne pas.

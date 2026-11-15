@@ -12,7 +12,7 @@ def base():
 
 def test_niveaux_nationaux(base):
     t = base.totaux(em.ACTUELLE)
-    assert t["is"] == pytest.approx(70.3, rel=1e-3)
+    assert t["is"] == pytest.approx(70.47, rel=1e-3)
     assert t["c3s"] == pytest.approx(4.8, rel=1e-6)
     assert t["cvae"] == 0.0
 

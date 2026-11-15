@@ -1551,3 +1551,11 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   2037 de Glucksmann au prudent 13,37 → 13,41.
 - Déficits reportables : non modélisés, faute de données lisibles (stock de déficits et part des entreprises au
   plafond de 1 M€ + 50 % : tableaux Excel de la DGFiP, non lus ici).
+
+## 15/11/2026 (après-midi) — Calage des entreprises sur l'IS de 2025 (DGFiP Statistiques n° 51)
+
+- Pertes de l'année calées sur 111,3 Md€ (perte moyenne ≈ 106 000 €, contre ≈ 5 000 € avant) : taux effectif du retour
+  d'IS 0,25 → 0,20 (retour sur le solde : 10 % de la variation d'une charge) ; le SMIC lit le même taux.
+- Base du taux réduit 2025 (30,6 Md€), TPE à l'IS, bénéficiaires, IS 70,5 Md€ ; REC-33 − 1,45 → − 1,5.
+- Déficit 2037 au prudent (contre le 14/11) : Philippe 11,13 ; Lisnard 14,13 ; Le Pen 13,22 ; Retailleau 10,20 ;
+  Tondelier 13,34 ; Arthaud 16,95 → 16,88 (SMIC) ; Glucksmann 13,41 ; Mélenchon 27,92.

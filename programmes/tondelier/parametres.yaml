@@ -253,11 +253,11 @@ tondelier_mesures:
     source: "Encadrement : TSN ≈ 0,8 Md€ à 3 % ; seuils actuels gardés (arbitrage : le seuil de 5 Md€ du texte serait une hausse)"
   is_taux_reduit:
     valeur: {id: REC-33, instrument: capital_entreprises, libelle: "IS : taux réduit des PME de 15 à 10 % (compensation du SMIC)", poste: recettes, moteur: is, debut: 2028, plein: 2028,
-             montant: {crise: -1.45, prudent: -1.45, median: -1.45, optimiste: -1.45}}
+             montant: {crise: -1.5, prudent: -1.5, median: -1.5, optimiste: -1.5}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
-    source: "Population d'entreprises (outils/entreprises_mesures.py, 15/11/2026) : 5 points sur les premiers 42 500 € de bénéfice des sociétés au chiffre d'affaires sous 10 M€, base au taux réduit calée sur les 27,0 Md€ de 2022 (Insee Analyses, d'après la DGFiP) et IS ramené à 70,3 Md€ : −1,45 Md€ (l'ancien arbitrage, −1,0 sur ≈ 500 000 sociétés, sous-estimait la base)"
+    source: "Population d'entreprises (outils/entreprises_mesures.py, 15/11/2026) : 5 points sur les premiers 42 500 € de bénéfice des sociétés au chiffre d'affaires sous 10 M€, base au taux réduit calée sur les 30,6 Md€ de 2025 (DGFiP Statistiques n° 51) et IS ramené à 70,5 Md€ : −1,5 Md€ (l'ancien arbitrage, −1,0 sur ≈ 500 000 sociétés, sous-estimait la base)"
   cvae:
     valeur: {id: REC-35, deductible_is: true, instrument: capital_entreprises, libelle: "Rétablissement de la CVAE (taux de 0,75 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 6.5, prudent: 7.0, median: 7.5, optimiste: 8.0}}

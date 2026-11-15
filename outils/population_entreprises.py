@@ -124,13 +124,14 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
                            "investissement": inv[i]})
     # part à l'IS
     mic_insee = sum(c["entreprises"] for c in cellules if c["taille"] == "MIC")
-    part_is = {"MIC": min(1.0, tailles["TPE"]["entreprises_is"] / mic_insee), "PME": 1.0, "GE_ETI": 1.0}
+    d25 = p_.val("microsimulation.entreprises_is_2025")
+    part_is = {"MIC": min(1.0, d25["tpe_is"] / mic_insee), "PME": 1.0, "GE_ETI": 1.0}
     for e in sortie:
         e["part_is"] = part_is[e["taille"]]
     # résultat fiscal par rang (entreprises à l'IS, pondérées par poids × part_is)
     ent = _lire("entreprises.csv")
     defi = _lire("entreprises_deficitaires.csv")
-    n_benef = sum(e["entreprises_beneficiaires"] for e in ent)
+    n_benef = d25["beneficiaires"]
     n_is = sum(e["poids"] * e["part_is"] for e in sortie)
     part_benef = min(1.0, n_benef / n_is)
     bruit = rng.normal(0, bruit_rentabilite, len(sortie))
@@ -139,7 +140,9 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
     taille = np.array([e["taille"] for e in sortie])
     etp = np.array([e["etp"] for e in sortie])
     p, b = _quantiles_benefices(n_benef)
-    perte_moy = sum(d["effectif"] * d["perte_mediane"] for d in defi) / sum(d["effectif"] for d in defi)
+    # pertes de l'année : proportionnelles à VA^0,8 avec un bruit, ramenées au total de la DGFiP (2025)
+    va = np.array([e["va"] for e in sortie])
+    echelle = np.maximum(va, 1.0) ** 0.8 * rng.lognormal(-0.5, 1.0, len(sortie))
     seuil = 1 - part_benef
     tailles_dg = {t["taille"]: t for t in tailles.values()}
     cible = {"MIC": tailles_dg["TPE"]["benefices_md"], "PME": tailles_dg["PME"]["benefices_md"]}
@@ -151,7 +154,10 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
         rang = np.empty(len(score))
         rang[ordre] = cum - poids[ordre] / poids.sum() / 2
         u = np.clip((rang - seuil) / (1 - seuil), 0, 1)
-        res = np.where(rang < seuil, -perte_moy * 2 * (1 - rang / seuil), _benefice(u, p, b))
+        perte = rang < seuil
+        brute = echelle * (1.5 - rang / seuil)  # les plus mauvais rangs perdent davantage
+        k = d25["deficit_md"] * 1e9 / (poids[perte] @ brute[perte])
+        res = np.where(perte, -k * brute, _benefice(u, p, b))
         return res
 
     decal = {"MIC": 0.0, "PME": 0.0}
