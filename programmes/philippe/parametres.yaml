@@ -61,7 +61,7 @@ philippe_chomage:
 
 philippe_mesures:
   impots_production_travail:
-    valeur: {id: PHI-FIS-01, instrument: cout_travail, libelle: "Impôts de production −50 Md€ : part assise sur la masse salariale (taxe sur les salaires, versement mobilité)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+    valeur: {id: PHI-FIS-01, deductible_is: true, instrument: cout_travail, libelle: "Impôts de production −50 Md€ : part assise sur la masse salariale (taxe sur les salaires, versement mobilité)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: -18, prudent: -17, median: -16.5, optimiste: -16}}
     unite: md_eur
     annee_euros: 2026
@@ -69,7 +69,7 @@ philippe_mesures:
     source: "Site du candidat (« Pour une France plus prospère ») : baisse de 50 Md€ des impôts de production, compensée par 50 Md€ d'aides aux entreprises en moins ; arbitrage : 40 % sur les impôts assis sur les salaires (taxe sur les salaires ≈ 15 Md€, versement mobilité ≈ 11 Md€), montée sur le quinquennat ; relecture neutre (11/11/2026) : une partie est payée par les administrations elles-mêmes (taxe sur les salaires des hôpitaux publics, versement mobilité des employeurs publics), ≈ 2 à 4 Md€ sur 20, sans effet sur le solde consolidé : retirée du montant"
     note: "Montant de la mesure (paramètre), pas une recette annoncée."
   impots_production_capital:
-    valeur: {id: PHI-FIS-01, instrument: capital_entreprises, libelle: "Impôts de production −50 Md€ : part assise sur le capital et le chiffre d'affaires (CFE, taxe foncière des entreprises, C3S)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
+    valeur: {id: PHI-FIS-01, deductible_is: true, instrument: capital_entreprises, libelle: "Impôts de production −50 Md€ : part assise sur le capital et le chiffre d'affaires (CFE, taxe foncière des entreprises, C3S)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
              montant: {crise: -30, prudent: -30, median: -30, optimiste: -30}}
     unite: md_eur
     annee_euros: 2026

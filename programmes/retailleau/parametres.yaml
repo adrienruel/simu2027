@@ -89,7 +89,7 @@ retailleau_chomage:
 
 retailleau_mesures:
   impots_production:
-    valeur: {id: RET-FIS-01, instrument: capital_entreprises, libelle: "C3S supprimée, part industrielle de la CFE exonérée", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2029,
+    valeur: {id: RET-FIS-01, deductible_is: true, instrument: capital_entreprises, libelle: "C3S supprimée, part industrielle de la CFE exonérée", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2029,
              montant: {crise: -6.5, prudent: -6.0, median: -6.0, optimiste: -5.5}}
     unite: md_eur
     annee_euros: 2026
@@ -97,14 +97,14 @@ retailleau_mesures:
     source: "Produire plus pour vivre mieux (19/02/2026), p. 20 : quatre impôts de production (≈ 15 Md€) supprimés ou réduits : C3S, CVAE, part industrielle de la CFE ; calcul : C3S ≈ 4,5 Md€ (2025), CFE industrielle ≈ 1,5 Md€ ; la CVAE est déjà supprimée en 2030 au statu quo (lignes cvae)"
     note: "Les ≈ 15 Md€ du livret comptent la CVAE entière : au statu quo elle ne rapporte plus que ≈ 2 Md€ en 2028 et 1 Md€ en 2029."
   cvae:
-    valeur: {id: RET-FIS-01, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 (au lieu de 2030)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028, fin: 2028,
+    valeur: {id: RET-FIS-01, deductible_is: true, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 (au lieu de 2030)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028, fin: 2028,
              montant: {crise: -2.1, prudent: -2.0, median: -2.0, optimiste: -1.9}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Calcul : taux légal de 0,19 % en 2028 sur 0,75 % pour ≈ 8 Md€ (statu_quo.cvae_rendement_2027)"
   cvae_2029:
-    valeur: {id: RET-FIS-01, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 : année 2029", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2029, plein: 2029, fin: 2029,
+    valeur: {id: RET-FIS-01, deductible_is: true, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 : année 2029", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2029, plein: 2029, fin: 2029,
              montant: {crise: -1.0, prudent: -1.0, median: -0.95, optimiste: -0.9}}
     unite: md_eur
     annee_euros: 2026

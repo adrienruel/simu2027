@@ -196,3 +196,26 @@ microsimulation:
     unite: sans_unite
     statut: DECISION
     note: "Phase F4, DÉCISION d'Adrien du 14/11/2026 : les mesures d'impôt sur le revenu et de CSG codées dans OpenFisca suivent, année après année, l'indice de la population vieillie du programme (moteur/micro.py, parametres/donnees/micro_recettes_annees.csv). Faux : montant de 2026 qui suit seulement les salaires."
+  entreprises_impots:
+    valeur: {is: 70.3, cfe: 8.2, taxe_fonciere: 17.3, c3s: 4.8, cvae_taux_075: 8.0, part_financier_capital: 0.108}
+    unite: sans_unite
+    statut: SOURCE
+    source: "IS : statu_quo.structure_impots (70,3 Md€, 2024) ; CFE 8,2, taxe foncière des entreprises (dont Teom) 17,3, C3S 4,8 Md€ : DGFiP Statistiques n° 35 (mai 2025), impôts de production en 2023, tableau 1 ; CVAE au taux de 0,75 % : 8 Md€ (Fipeco, 29/10/2025, statu_quo.cvae_rendement_2027) ; part du secteur financier dans les impôts de production : 10,0 / 92,7 (même publication, tableau 2)"
+    note: "Niveaux nationaux (Md€ de l'année de la source, tous secteurs) sur lesquels la population d'entreprises est ramenée : la population donne la répartition entre entreprises, les comptes donnent le niveau. La population ne couvre que le champ marchand non financier : l'IS et la C3S sont ramenés au total (le secteur financier est supposé réagir comme les autres) ; la CFE et la taxe foncière, réparties selon le capital, sont ramenées au total hors secteur financier (part_financier_capital, DÉCISION : sa part de l'ensemble des impôts de production)."
+  entreprises_base_taux_reduit:
+    valeur: {benefice_md: 27.0, seuil: 38120, annee: 2022}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee Analyses (insee.fr/fr/statistiques/8630968), d'après la DGFiP : en 2022, sur 278,0 Md€ de bénéfices (hors plus-values et brevets), 27,0 Md€ sont taxés au taux de 15 % (seuil de 38 120 € cette année-là)"
+    note: "La part des bénéficiaires éligibles au taux réduit (condition de détention du capital par des personnes physiques, non modélisée) est calée pour que la base au taux réduit, au seuil de 2022, rejoigne 27,0 Md€ (ramenée au niveau de l'IS national comme le reste)."
+  entreprises_dispersion:
+    valeur: {MIC: 1.0, PME: 0.8, GE_ETI: 1.3, bruit_rentabilite: 0.8}
+    unite: sans_unite
+    statut: DECISION
+    note: "Écart-type du logarithme de l'emploi dans chaque cellule secteur × taille, et bruit du rang de rentabilité (outils/population_entreprises.py). À remplacer par la dispersion d'Ésane si elle est publiée."
+  entreprises_capital_par_etp:
+    valeur: {MIC: 119.7, PME: 99.7, GE_ETI: 296.8}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, Caractéristiques des entreprises par catégorie 2023 (insee.fr/fr/statistiques/2016091) : immobilisations corporelles par salarié en EQTP, en milliers d'euros : MIC 119,7, PME 99,7, ETI 221,8, GE 366,1 ; GE et ETI réunies pondérées par leurs EQTP (4 356 et 4 031 milliers)"
+    note: "Capital de chaque taille ; réparti entre secteurs au prorata de l'investissement de la cellule (Ésane), puis entre entreprises au prorata de leur investissement."

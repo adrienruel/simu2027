@@ -81,9 +81,17 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
             dispersion: dict | None = None, bruit_rentabilite: float = 0.8, caler: bool = True) -> list[dict]:
     """Une liste d'entreprises synthétiques (dict par entreprise). caler : décale le rang des MIC et des PME
     pour que les bénéfices par taille rejoignent ceux de la DGFiP (les GE et ETI servent de référence)."""
+    from moteur.parametres import Parametres
+    p_ = Parametres()
     rng = np.random.default_rng(graine)
     n_par_cellule = n_par_cellule or {"MIC": 1500, "PME": 1000, "GE_ETI": 400}
-    dispersion = dispersion or {"MIC": 1.0, "PME": 0.8, "GE_ETI": 1.3}
+    d_ = p_.val("microsimulation.entreprises_dispersion")
+    dispersion = dispersion or {t: d_[t] for t in ("MIC", "PME", "GE_ETI")}
+    capital_etp = p_.val("microsimulation.entreprises_capital_par_etp")
+    inv_taille = {t: sum(c["investissement_m"] for c in _lire("entreprises_secteurs_tailles.csv") if c["taille"] == t)
+                  for t in ("MIC", "PME", "GE_ETI")}
+    etp_taille = {t: sum(c["etp"] for c in _lire("entreprises_secteurs_tailles.csv") if c["taille"] == t)
+                  for t in ("MIC", "PME", "GE_ETI")}
     cellules = _lire("entreprises_secteurs_tailles.csv")
     tailles = {t["taille"]: t for t in _lire("entreprises_tailles.csv")}
     sortie = []
@@ -100,15 +108,19 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
             v = etp * rng.lognormal(-bruit * bruit / 2, bruit, n)
             return v / (w @ v) * total * 1e6
         va = suit(c["va_m"], 0.35)
+        ca = va * rng.lognormal(-0.18, 0.6, n)
+        ca = ca / (w @ ca) * c["ca_m"] * 1e6
+        # capital : capital par EQTP de la taille (Insee), réparti entre secteurs selon l'investissement
         fp = suit(c["frais_personnel_m"], 0.2)
         inv = suit(c["investissement_m"], 0.9)
+        capital = inv / (w @ inv) * capital_etp[t] * 1e3 * etp_taille[t] * c["investissement_m"] / inv_taille[t]
         ebe_brut = va - fp
         # EBE : recalé sur Ésane (l'écart VA - FP - EBE = impôts de production nets des subventions)
         ip = (w @ ebe_brut - c["ebe_m"] * 1e6) / (w @ va) * va
         ebe = ebe_brut - ip
         for i in range(n):
             sortie.append({"secteur": c["secteur"], "taille": t, "poids": w[i], "etp": etp[i], "va": va[i],
-                           "frais_personnel": fp[i], "impots_production_nets": ip[i], "ebe": ebe[i],
+                           "frais_personnel": fp[i], "ca": ca[i], "capital": capital[i], "impots_production_nets": ip[i], "ebe": ebe[i],
                            "investissement": inv[i]})
     # part à l'IS
     mic_insee = sum(c["entreprises"] for c in cellules if c["taille"] == "MIC")

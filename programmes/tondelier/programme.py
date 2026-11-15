@@ -274,6 +274,10 @@ class Tondelier:
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=nom.split(".")[1],
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
                                     enfants=x.get("enfants")))
+                if x.get("deductible_is"):
+                    r_is = p.val("entreprises.retour_is_impots_production")
+                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : impôts de production déductibles", "recettes",
+                                        {t: -r_is * v for t, v in serie.items()}, note=nom.split(".")[1]))
                 if x.get("fp"):
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
                                         {t: x.get("fp_taux", part_fp) * v for t, v in serie.items()}, nature="mesure",

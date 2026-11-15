@@ -103,7 +103,7 @@ lisnard_mesures:
     source: "Encadrement : budget de l'INSP ≈ 0,04 Md€ (hors rémunération des élèves) ; recrutement direct à organiser"
     note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
   impots_production_travail:
-    valeur: {id: LIS-FIS-01, instrument: cout_travail, libelle: "Impôts de production −40 Md€ : part assise sur la masse salariale", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+    valeur: {id: LIS-FIS-01, deductible_is: true, instrument: cout_travail, libelle: "Impôts de production −40 Md€ : part assise sur la masse salariale", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: -14.4, prudent: -13.6, median: -13.2, optimiste: -12.8}}
     unite: md_eur
     annee_euros: 2026
@@ -111,7 +111,7 @@ lisnard_mesures:
     source: "Fiche « Questions » (03/10/2026) : 40 Md€ d'impôts de production en moins, en commençant par la C3S ; arbitrage : 40 % sur la taxe sur les salaires et le versement mobilité, montée sur le quinquennat (même répartition que philippe_mesures) ; part payée par les administrations elles-mêmes retirée, comme pour Philippe (relecture neutre du 11/11/2026)"
     note: "Montant de la mesure (paramètre)."
   impots_production_capital:
-    valeur: {id: LIS-FIS-01, instrument: capital_entreprises, libelle: "Impôts de production −40 Md€ : C3S, CFE, taxe foncière des entreprises", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
+    valeur: {id: LIS-FIS-01, deductible_is: true, instrument: capital_entreprises, libelle: "Impôts de production −40 Md€ : C3S, CFE, taxe foncière des entreprises", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
              montant: {crise: -24, prudent: -24, median: -24, optimiste: -24}}
     unite: md_eur
     annee_euros: 2026

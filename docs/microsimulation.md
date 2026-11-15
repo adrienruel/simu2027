@@ -282,3 +282,31 @@ Suite : impôts de production par impôt (CVAE, CFE, C3S, taxe foncière) entrep
 programmes (taux, seuil du taux réduit, IS progressif) appliqués à chaque entreprise ; crédit d'impôt recherche ;
 réactions (investissement par taille, déjà dans `moteur/entreprises_cellules.py`, emploi, prix) ; puis passage des
 choix des entreprises aux revenus des ménages (salaires, dividendes), comme dans l'architecture voulue.
+
+## Impôts des entreprises sur la population d'entreprises (phase G, premier lot, 15/11/2026)
+
+`outils/entreprises_mesures.py` et `programmes/micro_entreprises.yaml`. Chaque entreprise a un chiffre d'affaires
+(total Ésane de sa cellule) et un capital (immobilisations corporelles par EQTP de sa taille, Insee, réparties selon
+l'investissement). Impôts calculés entreprise par entreprise : IS (taux réduit de 15 % jusqu'à 42 500 € si le CA est
+sous 10 M€), C3S (0,16 % du CA au-delà de 19 M€), CVAE (barème légal par CA), CFE et taxe foncière (au prorata du
+capital). Chaque impôt est ramené à son total national (IS 70,3 ; C3S 4,8 ; CFE 8,2 et taxe foncière 17,3 hors part du
+secteur financier ; CVAE 8 Md€ au taux de 0,75 %). La part des sociétés éligibles au taux réduit (condition de
+détention du capital, non modélisée) est calée sur la base de 27,0 Md€ taxée à 15 % en 2022 (Insee, DGFiP) : 61 %.
+
+Résultats (Md€, statique ; « brut » : sans le retour d'IS ; moteur au prudent) :
+
+| Mesure | Micro net | Micro brut | Moteur |
+|---|---|---|---|
+| LIS-FIS-03 : IS à 20 % | − 13,2 | − 13,2 | − 10,0 (part locale levée en partie) |
+| REC-33 : taux réduit à 10 % | − 1,45 | − 1,45 | − 1,0 → − 1,45 (recalé) |
+| REC-35 : CVAE à 0,75 % | + 6,2 | + 8,0 | + 7,0 |
+| RN-FIS-04 : CFE et C3S supprimées | − 9,1 | − 12,1 | − 13,0 |
+| RET-FIS-01 : C3S et CFE industrielle | − 5,3 | − 7,1 | − 6,0 |
+| LIS-FIS-01, PHI-FIS-01 : C3S, CFE et taxe foncière | − 20,8 | − 27,6 | − 24 ; − 30 (avec d'autres impôts) |
+
+Constat : les impôts de production sont déductibles du bénéfice, et le moteur ne comptait pas l'IS qui revient quand
+ils baissent (un quart de la baisse dans la micro). Règle commune ajoutée : `entreprises.retour_is_impots_production`
+(0,25) sur les mesures marquées `deductible_is` (Attal, Lisnard, Philippe, Le Pen, Retailleau, Mélenchon, Tondelier).
+Question ouverte : le même raisonnement vaut pour les cotisations patronales et les subventions aux entreprises
+(charges et produits du compte de résultat), à court terme du moins ; à long terme, l'incidence des cotisations porte
+sur les salaires.

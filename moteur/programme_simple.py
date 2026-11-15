@@ -395,6 +395,11 @@ class ProgrammeSimple:
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
                                     enfants=x.get("enfants")))
+                if x.get("deductible_is"):
+                    # impôts de production déductibles du bénéfice : l'IS bouge en sens inverse (règle commune)
+                    r_is = p.val("entreprises.retour_is_impots_production")
+                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : impôts de production déductibles", "recettes",
+                                        {t: -r_is * v for t, v in serie.items()}, note=court))
                 if x.get("fp"):
                     # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS
                     # pensions ni impôt sur le revenu, ≈ 0,39 ; relecture neutre du 11/11/2026)

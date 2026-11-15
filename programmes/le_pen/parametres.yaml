@@ -99,7 +99,7 @@ le_pen_mesures:
     source: "Institut Montaigne (2022, repris en 2024) : 3,65 à 3,7 Md€ par an ; LCP (06/10/2026) : plafond de quatre SMIC, 2 Md€ selon le parti"
     note: "Montaigne 2022 revalorisé de l'inflation et des salaires (≈ +12 %) : ≈ 4,1 Md€ sans plafond ; le plafond de quatre SMIC retire les plus hauts revenus : 3 à 4 Md€. Risque constitutionnel (égalité devant l'impôt, Montaigne) : compté comme appliqué."
   impots_production:
-    valeur: {id: RN-FIS-04, instrument: capital_entreprises, libelle: "CFE et C3S supprimées (CVAE déjà supprimée en 2030 au statu quo)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2030,
+    valeur: {id: RN-FIS-04, deductible_is: true, instrument: capital_entreprises, libelle: "CFE et C3S supprimées (CVAE déjà supprimée en 2030 au statu quo)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2030,
              montant: {crise: -13.5, prudent: -13.0, median: -12.5, optimiste: -12.0}}
     unite: md_eur
     annee_euros: 2026
@@ -107,7 +107,7 @@ le_pen_mesures:
     source: "FranceBudget : CFE, CVAE et C3S, 17 Md€ ; contre-budget 2026 : 16,2 Md€ ; CFE ≈ 7,5 Md€ (collectivités, compensées par l'État), C3S ≈ 5,5 Md€ (Sécurité sociale) ; CVAE : suppression en 2030 déjà votée (statu_quo.cvae_taux_legaux)"
     note: "Seules la CFE et la C3S comptent en plus du statu quo ; l'accélération de la fin de la CVAE (taux de 0,19 % en 2028 et 0,09 % en 2029) est à part (cvae_avancee)."
   cvae_avancee:
-    valeur: {id: RN-FIS-04b, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 au lieu de 2030", poste: recettes, moteur: pib, debut: 2028, plein: 2028, fin: 2029,
+    valeur: {id: RN-FIS-04b, deductible_is: true, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 au lieu de 2030", poste: recettes, moteur: pib, debut: 2028, plein: 2028, fin: 2029,
              montant: {crise: -1.7, prudent: -1.5, median: -1.4, optimiste: -1.3}}
     unite: md_eur
     annee_euros: 2026
