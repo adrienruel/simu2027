@@ -309,7 +309,7 @@ melenchon_mesures:
     source: "Encadrement : CIR ≈ 7,6 Md€ (MESR, PLF 2026) ; prudent : un peu moins (recherche privée réduite, assiette de l'IS)"
     note: "Remplacé par des dotations aux universités et aux instituts (LFI-EDU-08, comptées en dépense)."
   cvae_remplacee:
-    valeur: {id: LFI-REC-16, instrument: capital_entreprises, libelle: "Nouvel impôt sur les entreprises (chiffre d'affaires, empreinte écologique) pour les éco-régions, à la place de la CVAE", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
+    valeur: {id: LFI-REC-16, deductible_is: true, instrument: capital_entreprises, libelle: "Nouvel impôt sur les entreprises (chiffre d'affaires, empreinte écologique) pour les éco-régions, à la place de la CVAE", poste: recettes, moteur: pib, debut: 2029, plein: 2030,
              montant: {crise: 5.0, prudent: 6.0, median: 7.0, optimiste: 8.0}}
     unite: md_eur
     annee_euros: 2026

@@ -282,3 +282,73 @@ Suite : impôts de production par impôt (CVAE, CFE, C3S, taxe foncière) entrep
 programmes (taux, seuil du taux réduit, IS progressif) appliqués à chaque entreprise ; crédit d'impôt recherche ;
 réactions (investissement par taille, déjà dans `moteur/entreprises_cellules.py`, emploi, prix) ; puis passage des
 choix des entreprises aux revenus des ménages (salaires, dividendes), comme dans l'architecture voulue.
+
+## Impôts des entreprises sur la population d'entreprises (phase G, premier lot, 15/11/2026)
+
+`outils/entreprises_mesures.py` et `programmes/micro_entreprises.yaml`. Chaque entreprise a un chiffre d'affaires
+(total Ésane de sa cellule) et un capital (immobilisations corporelles par EQTP de sa taille, Insee, réparties selon
+l'investissement). Impôts calculés entreprise par entreprise : IS (taux réduit de 15 % jusqu'à 42 500 € si le CA est
+sous 10 M€), C3S (0,16 % du CA au-delà de 19 M€), CVAE (barème légal par CA), CFE et taxe foncière (au prorata du
+capital). Chaque impôt est ramené à son total national (IS 70,3 ; C3S 4,8 ; CFE 8,2 et taxe foncière 17,3 hors part du
+secteur financier ; CVAE 8 Md€ au taux de 0,75 %). La part des sociétés éligibles au taux réduit (condition de
+détention du capital, non modélisée) est calée sur la base de 27,0 Md€ taxée à 15 % en 2022 (Insee, DGFiP) : 61 %.
+
+Résultats (Md€, statique ; « brut » : sans le retour d'IS ; moteur au prudent) :
+
+| Mesure | Micro net | Micro brut | Moteur |
+|---|---|---|---|
+| LIS-FIS-03 : IS à 20 % | − 13,2 | − 13,2 | − 10,0 (part locale levée en partie) |
+| REC-33 : taux réduit à 10 % | − 1,45 | − 1,45 | − 1,0 → − 1,45 (recalé) |
+| REC-35 : CVAE à 0,75 % | + 6,2 | + 8,0 | + 7,0 |
+| RN-FIS-04 : CFE et C3S supprimées | − 9,1 | − 12,1 | − 13,0 |
+| RET-FIS-01 : C3S et CFE industrielle | − 5,3 | − 7,1 | − 6,0 |
+| LIS-FIS-01, PHI-FIS-01 : C3S, CFE et taxe foncière | − 20,8 | − 27,6 | − 24 ; − 30 (avec d'autres impôts) |
+
+Constat : les impôts de production et les cotisations patronales sont des charges déductibles, et le moteur ne comptait
+l'IS qui revient quand elles changent que pour les hausses du SMIC (25 % de la part prise sur les marges, la moitié).
+Règle commune (`entreprises.retour_is_charges`) : retour = taux effectif de la micro (0,25 de la variation du bénéfice)
+× part prise sur les marges (0,5, la valeur déjà utilisée pour le SMIC), soit 10 % de la variation (taux effectif
+0,20 depuis le calage des pertes sur la DGFiP 2025, voir plus bas). Elle s'applique aux
+mesures marquées `deductible_is` (`true`, ou la part de la mesure qui porte sur des charges des entreprises, 0,5 quand
+une mesure mêle cotisations salariales et patronales ou des particuliers employeurs) : impôts de production (Attal,
+Lisnard, Philippe, Le Pen, Retailleau, Mélenchon, Tondelier), cotisations et exonérations (Attal, Le Pen, Lisnard,
+Retailleau, Philippe, Tondelier : fin des allègements au-delà de 1,6 SMIC), part employeur de la capitalisation de
+Retailleau, et au SMIC, dont le taux d'IS vient maintenant du même paramètre. Écologie de droite, qui refond tout le
+système, garde son calcul propre. À long terme, une partie des cotisations passe dans les salaires : non modélisé.
+
+## Crédit d'impôt recherche (15/11/2026)
+
+MESR-DGRI, CIR en 2023 (provisoire) : 7,85 Md€ ; CIR-recherche des grandes entreprises 2 979 M€ (41 %), ETI 2 099,
+PME 2 241. REC-36 (Tondelier, CIR réservé aux PME et ETI, moitié rendue en subventions) : 2,0 → 1,5 Md€ au prudent (le
+moteur prenait 60 % pour les GE). GLU-FIS-04 (plafond de 100 M€ par groupe) : la tranche à 5 % au-delà de 100 M€ ne
+vaut qu'environ 0,8 Md€ ; la fourchette de 1,5 à 2,5 Md€ (Sénat) suppose une consolidation au niveau du groupe entier,
+non vérifiable avec les données publiées : à trancher. LFI-REC-15 (suppression) : 7,0 au prudent, cohérent.
+
+## Calage sur l'IS de 2025 (DGFiP Statistiques n° 51, fichier fourni par Adrien, 15/11/2026)
+
+`parametres/sources/dgfip_stat_51_is_2025.xlsx`. En 2025 : 2,83 millions d'entreprises à l'IS, dont 1 788 000
+bénéficiaires et 1 046 000 déficitaires ; 111,3 Md€ de déficits de l'année ; bénéfice imposable à 15 % 30,6 Md€, à 25 %
+256,8 ; IS brut 70,5 Md€ (TPE 14,5, PME 18,9, ETI 16,8, GE 20,2) ; CIR utilisé 7,7 Md€.
+
+- Pertes : la population mettait environ 5 000 € de perte par entreprise déficitaire (seules les petites classes de
+  pertes étaient connues) ; la perte moyenne réelle est d'environ 106 000 €. Les pertes sont maintenant
+  proportionnelles à la VA (puissance 0,8, bruit log-normal), ramenées à 111,3 Md€. Une entreprise déficitaire franchit
+  plus rarement le zéro quand ses charges baissent : le taux effectif du retour d'IS passe de 0,25 à 0,20.
+- Nombre de TPE à l'IS (2,60 millions), nombre de bénéficiaires, base du taux réduit (30,6 Md€ au seuil de 42 500 €,
+  part éligible 64 %) et niveau de l'IS (70,5 Md€) pris sur 2025. REC-33 : − 1,5 Md€.
+- Toujours non modélisés : le stock de déficits reportables en avant et le plafond d'imputation (1 M€ + 50 % du bénéfice
+  au-delà) ; la publication ne les donne pas.
+
+## Impôts sur les salaires et employeurs sans IS (15/11/2026)
+
+La taxe sur les salaires et le versement mobilité sont payés en partie par des employeurs qui ne paient pas l'IS
+(associations, cliniques non lucratives, professions libérales) ; la population d'entreprises ne les couvre pas (elle
+exclut la finance et les associations). Part des employeurs à l'IS, dans `entreprises.retour_is_charges` et les mesures
+`deductible_is` (DÉCISION, sourcée) :
+- cotisations patronales et SMIC : 0,9 (associations : 9,0 % de l'emploi privé en 2022, Urssaf) ; 0,45 pour les mesures
+  qui mêlent cotisations salariales et patronales ou des particuliers employeurs ;
+- versement mobilité 0,9, taxe sur les salaires 0,5 (produit venant largement des banques et assurances ; environ la
+  moitié après retrait des employeurs publics, d'après les impôts de production par secteur de la DGFiP) : lignes
+  « masse salariale » de Lisnard et de Philippe 0,67 = (15 × 0,5 + 11 × 0,9) / 26 ;
+- impôts de production assis sur le capital et le chiffre d'affaires : taux de la micro, qui compte déjà les
+  entreprises individuelles à l'IR (les associations sont exonérées de CFE en général).

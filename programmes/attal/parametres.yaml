@@ -84,7 +84,7 @@ attal_chomage:
 
 attal_mesures:
   cvae:
-    valeur: {id: ATT-FIS-06, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 (au lieu de 2030)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028, fin: 2028,
+    valeur: {id: ATT-FIS-06, deductible_is: true, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 (au lieu de 2030)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028, fin: 2028,
              montant: {crise: -2.1, prudent: -2.0, median: -2.0, optimiste: -1.9}}
     unite: md_eur
     annee_euros: 2026
@@ -92,7 +92,7 @@ attal_mesures:
     source: "Calcul : CVAE ≈ 8 Md€ au taux de 0,75 % (statu_quo.cvae_rendement_2027, Fipeco) ; taux légal de 0,19 % en 2028 (≈ 2 Md€), 0,09 % en 2029 (≈ 1 Md€) ; supprimée en 2030 au statu quo"
     note: "Montant moyen de 2028 ; 2029 : la moitié (ligne cvae_2029)."
   cvae_2029:
-    valeur: {id: ATT-FIS-06, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 : année 2029", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2029, plein: 2029, fin: 2029,
+    valeur: {id: ATT-FIS-06, deductible_is: true, instrument: capital_entreprises, libelle: "CVAE supprimée dès 2028 : année 2029", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2029, plein: 2029, fin: 2029,
              montant: {crise: -1.0, prudent: -1.0, median: -0.95, optimiste: -0.9}}
     unite: md_eur
     annee_euros: 2026
@@ -120,7 +120,7 @@ attal_mesures:
     statut: HYPOTHESE
     source: "Encadrement : crédit d'impôt innovation des PME ≈ 0,3 Md€ ; suramortissement numérique de 2019-2020 ≈ 0,5 Md€ par an ; crédit élargi aux ETI"
   auto_tpe:
-    valeur: {id: ATT-ECO-04, instrument: cout_travail, libelle: "Statut « Auto-TPE » pour le premier salarié, intéressement des petites entreprises", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: ATT-ECO-04, deductible_is: 0.9, instrument: cout_travail, libelle: "Statut « Auto-TPE » pour le premier salarié, intéressement des petites entreprises", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -0.4, prudent: -0.3, median: -0.2, optimiste: -0.1}}
     unite: md_eur
     annee_euros: 2026

@@ -70,8 +70,13 @@ class Retailleau(ProgrammeSimple):
                            {t: (1 - pe) * total[t] for t in ANNEES}, instrument="travail")
         of = offre.effets(p, s, [employeur_prive, salariale], annees_avant=())
         emplois = {t: sum(serie.get(t, 0.0) for serie in of["emplois"].values()) for t in ANNEES}
+        rc = p.val("entreprises.retour_is_charges")
+        r_is = rc["taux_is_effectif"] * rc["part_marge"] * rc["part_employeurs_is"]
         out = [Mesure("RET-RET-02 — part de capitalisation : cotisation des employeurs publics (1 % du brut, moitié)",
-                      "etat_missions", {2027: 0.0, 2028: 0.0, **{t: pe * pp * total[t] for t in ANNEES}})]
+                      "etat_missions", {2027: 0.0, 2028: 0.0, **{t: pe * pp * total[t] for t in ANNEES}}),
+               # charge déductible des employeurs privés : IS en moins (règle commune, entreprises.retour_is_charges)
+               Mesure("RET-RET-02 — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
+                      {t: -r_is * pe * (1 - pp) * total[t] for t in ANNEES})]
         return out, emplois
 
 

@@ -1531,3 +1531,38 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - `export_comparaison.redistribution()` : `sorties/comparaison_redistribution*.csv` (noms du comparateur) ; section
   « Pauvreté et inégalités » du comparateur (tableau par programme, barres par décile).
 - `outils/population_entreprises.py` et `entreprises_secteurs_tailles.csv` (Ésane 2023) : voir `docs/microsimulation.md`.
+
+## 15/11/2026 (matin) — Impôts des entreprises sur la population d'entreprises ; retour d'IS des impôts de production
+
+- `outils/entreprises_mesures.py`, `programmes/micro_entreprises.yaml` (7 mesures), CA et capital par entreprise.
+- Retour d'IS des impôts de production (règle commune, 0,25, mesures `deductible_is`). REC-33 recalé (− 1,0 → − 1,45).
+- Déficit 2037 au prudent : Philippe 11,26 → 10,89 ; Lisnard 14,25 → 13,96 ; Le Pen 13,28 → 13,16 ; Retailleau
+  10,23 → 10,17 ; Tondelier 13,21 → 13,30 (CVAE rétablie : moins d'IS ; taux réduit recalé) ; Mélenchon 27,90 → 27,97.
+
+## 15/11/2026 (midi) — Retour d'IS étendu aux cotisations patronales ; taux corrigé ; CIR
+
+- `entreprises.retour_is_charges` remplace `retour_is_impots_production` : 0,25 × 0,5 (part des marges, comme le SMIC)
+  = 12,5 % au lieu de 25 % (le matin, la part passée dans les prix était oubliée). Étendu aux cotisations et
+  exonérations patronales (9 mesures) et à la capitalisation de Retailleau ; le SMIC lit le même taux.
+- REC-36 recalé sur le MESR (2,0 → 1,5) ; GLU-FIS-04 : recoupement noté, à trancher.
+- Déficit 2037 au prudent (contre le 14/11) : Philippe 11,26 → 11,10 ; Lisnard 14,25 → 14,10 ; Le Pen 13,28 → 13,21 ;
+  Retailleau 10,23 → 10,20 ; Tondelier 13,21 → 13,38 ; Mélenchon 27,90 → 27,93.
+- GLU-FIS-04 : prudent 1,5 → 0,8 Md€ (ce qui se vérifie avec le MESR), crise 0,6, médian 1,5, optimiste 2,0 ; déficit
+  2037 de Glucksmann au prudent 13,37 → 13,41.
+- Déficits reportables : non modélisés, faute de données lisibles (stock de déficits et part des entreprises au
+  plafond de 1 M€ + 50 % : tableaux Excel de la DGFiP, non lus ici).
+
+## 15/11/2026 (après-midi) — Calage des entreprises sur l'IS de 2025 (DGFiP Statistiques n° 51)
+
+- Pertes de l'année calées sur 111,3 Md€ (perte moyenne ≈ 106 000 €, contre ≈ 5 000 € avant) : taux effectif du retour
+  d'IS 0,25 → 0,20 (retour sur le solde : 10 % de la variation d'une charge) ; le SMIC lit le même taux.
+- Base du taux réduit 2025 (30,6 Md€), TPE à l'IS, bénéficiaires, IS 70,5 Md€ ; REC-33 − 1,45 → − 1,5.
+- Déficit 2037 au prudent (contre le 14/11) : Philippe 11,13 ; Lisnard 14,13 ; Le Pen 13,22 ; Retailleau 10,20 ;
+  Tondelier 13,34 ; Arthaud 16,95 → 16,88 (SMIC) ; Glucksmann 13,41 ; Mélenchon 27,92.
+
+## 15/11/2026 (après-midi) — Employeurs sans IS ; impôts sur les salaires
+
+- `retour_is_charges.part_employeurs_is` (0,9) : cotisations, SMIC, capitalisation de Retailleau ; lignes « masse
+  salariale » de Lisnard et Philippe à 0,67 (taxe sur les salaires surtout hors IS, sauf banques et assurances).
+- Déficit 2037 au prudent (contre le 14/11) : Philippe 11,15 ; Lisnard 14,14 ; Tondelier 13,32 ; Arthaud 16,85 ;
+  Le Pen 13,22 ; Retailleau 10,20 ; Glucksmann 13,41 ; Mélenchon 27,92 ; Roussel 29,96.

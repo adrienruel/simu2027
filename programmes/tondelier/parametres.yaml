@@ -149,7 +149,7 @@ tondelier_mesures:
     source: "Programme, p. 67 (taux non donné) ; ADEME (2025) : 58 % des bouteilles en plastique collectées en 2024 ; Reloop (2024) : plus de 8 milliards de bouteilles et canettes non collectées par an, soit ≈ 15 milliards de bouteilles en plastique mises sur le marché (≈ 27 g chacune, ≈ 0,4 Mt) ; contribution plastique de l'UE (0,80 € par kg d'emballage non recyclé) ≈ 1,5 Md€ payée par le budget de l'État en 2023"
     note: "Phase 2 (11/11/2026), vérification de l'autofinancement. Taxe estimée au taux de la contribution européenne (0,80 € par kg, ≈ 2 c par bouteille) : ≈ 0,3 Md€ avant réaction ; volumes −5 à −15 % (eau du robinet, gourdes) et plus de collecte (consigne de la loi AGEC) : 0,1 à 0,3 Md€ ; TIRUERT étendue : taxe incitative, presque rien en recette (0 à 0,05). Redevances de dépollution (REP) : versées aux éco-organismes, hors des administrations publiques : 0. Autofinancement : la mesure est une recette sans dépense affectée dans le programme, donc pas de coût à financer ; son seul risque est un rendement plus faible si la consigne réussit, d'où le prudent bas. Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien)."
   bonus_malus:
-    valeur: {id: COT-06, instrument: cout_travail, libelle: "Bonus-malus renforcé sur les contrats courts, intérim contributeur", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: COT-06, deductible_is: 0.9, instrument: cout_travail, libelle: "Bonus-malus renforcé sur les contrats courts, intérim contributeur", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: 0.0, prudent: 0.1, median: 0.2, optimiste: 0.4}}
     unite: md_eur
     annee_euros: 2026
@@ -253,13 +253,13 @@ tondelier_mesures:
     source: "Encadrement : TSN ≈ 0,8 Md€ à 3 % ; seuils actuels gardés (arbitrage : le seuil de 5 Md€ du texte serait une hausse)"
   is_taux_reduit:
     valeur: {id: REC-33, instrument: capital_entreprises, libelle: "IS : taux réduit des PME de 15 à 10 % (compensation du SMIC)", poste: recettes, moteur: is, debut: 2028, plein: 2028,
-             montant: {crise: -1.0, prudent: -1.0, median: -1.0, optimiste: -1.0}}
+             montant: {crise: -1.5, prudent: -1.5, median: -1.5, optimiste: -1.5}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
-    source: "Arbitrage : 5 points sur les premiers 42 500 € de bénéfice (≈ 500 000 sociétés au taux réduit)"
+    source: "Population d'entreprises (outils/entreprises_mesures.py, 15/11/2026) : 5 points sur les premiers 42 500 € de bénéfice des sociétés au chiffre d'affaires sous 10 M€, base au taux réduit calée sur les 30,6 Md€ de 2025 (DGFiP Statistiques n° 51) et IS ramené à 70,5 Md€ : −1,5 Md€ (l'ancien arbitrage, −1,0 sur ≈ 500 000 sociétés, sous-estimait la base)"
   cvae:
-    valeur: {id: REC-35, instrument: capital_entreprises, libelle: "Rétablissement de la CVAE (taux de 0,75 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-35, deductible_is: true, instrument: capital_entreprises, libelle: "Rétablissement de la CVAE (taux de 0,75 %)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 6.5, prudent: 7.0, median: 7.5, optimiste: 8.0}}
     unite: md_eur
     annee_euros: 2026
@@ -268,13 +268,13 @@ tondelier_mesures:
     note: "Statu quo : CVAE supprimée en 2030. Versée aux collectivités (fraction de TVA compensatrice gardée par l'État : effet net = recette)."
   cir:
     valeur: {id: REC-36, instrument: capital_entreprises, libelle: "Crédit d'impôt recherche recentré sur les PME et ETI", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
-             montant: {crise: 1.5, prudent: 2.0, median: 2.5, optimiste: 3.0}}
+             montant: {crise: 1.2, prudent: 1.5, median: 1.8, optimiste: 2.1}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : CIR ≈ 7,6 Md€, dont ≈ 60 % aux grandes entreprises (MESR) ; la moitié rendue en subventions de projets avec des laboratoires (p. 97)"
+    source: "MESR-DGRI, Le crédit d'impôt recherche en 2023 (provisoire, novembre 2025) : CIR 7,85 Md€, dont CIR-recherche des grandes entreprises 2 979 M€ (41 %), ETI 2 099 M€, PME 2 241 M€ ; la moitié rendue en subventions de projets avec des laboratoires (p. 97) : ≈ 1,5 Md€ ; crise 40 %, médian 60 %, optimiste 70 % de la créance des GE (même écart qu'avant)"
   allegements:
-    valeur: {id: REC-37, instrument: travail, incidence: "openfisca:allegements_1_6_smic", libelle: "Exonérations de cotisations au-delà de 1,6 SMIC et sur les heures supplémentaires supprimées", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: REC-37, deductible_is: 0.9, instrument: travail, incidence: "openfisca:allegements_1_6_smic", libelle: "Exonérations de cotisations au-delà de 1,6 SMIC et sur les heures supplémentaires supprimées", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 14.0, prudent: 16.5, median: 18.0, optimiste: 19.5}}
     unite: md_eur
     annee_euros: 2026

@@ -103,7 +103,7 @@ lisnard_mesures:
     source: "Encadrement : budget de l'INSP ≈ 0,04 Md€ (hors rémunération des élèves) ; recrutement direct à organiser"
     note: "Économie nommée mais non chiffrée par le candidat : estimée, pas mise à 0 (règle d'Adrien, relecture neutre du 11/11/2026)."
   impots_production_travail:
-    valeur: {id: LIS-FIS-01, instrument: cout_travail, libelle: "Impôts de production −40 Md€ : part assise sur la masse salariale", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+    valeur: {id: LIS-FIS-01, deductible_is: 0.67, instrument: cout_travail, libelle: "Impôts de production −40 Md€ : part assise sur la masse salariale", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: -14.4, prudent: -13.6, median: -13.2, optimiste: -12.8}}
     unite: md_eur
     annee_euros: 2026
@@ -111,7 +111,7 @@ lisnard_mesures:
     source: "Fiche « Questions » (03/10/2026) : 40 Md€ d'impôts de production en moins, en commençant par la C3S ; arbitrage : 40 % sur la taxe sur les salaires et le versement mobilité, montée sur le quinquennat (même répartition que philippe_mesures) ; part payée par les administrations elles-mêmes retirée, comme pour Philippe (relecture neutre du 11/11/2026)"
     note: "Montant de la mesure (paramètre)."
   impots_production_capital:
-    valeur: {id: LIS-FIS-01, instrument: capital_entreprises, libelle: "Impôts de production −40 Md€ : C3S, CFE, taxe foncière des entreprises", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
+    valeur: {id: LIS-FIS-01, deductible_is: true, instrument: capital_entreprises, libelle: "Impôts de production −40 Md€ : C3S, CFE, taxe foncière des entreprises", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
              montant: {crise: -24, prudent: -24, median: -24, optimiste: -24}}
     unite: md_eur
     annee_euros: 2026
@@ -154,14 +154,14 @@ lisnard_mesures:
     note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique au prudent, même écart entre scénarios qu'avant ; outils/openfisca_mesures.py, DÉCISION d'Adrien). Ancien montant : {crise: -4.0, prudent: -3.5, median: -3.0, optimiste: -2.5}."
     source: "Page programme (non datée) ; encadrement : plafonnement du quotient familial ≈ 3 à 4 Md€ d'impôt (Voies et moyens, dépense fiscale négative ; baisse du plafond de 2013-2014 ≈ 1,5 Md€)"
   creation_entreprise:
-    valeur: {id: LIS-ECO-04, instrument: cout_travail, libelle: "Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: LIS-ECO-04, deductible_is: 0.9, instrument: cout_travail, libelle: "Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Le livre noir (22/04/2026), p. 7 ; encadrement : ACRE ≈ 0,4 Md€ (créateurs) ; ≈ 50 000 créations d'entreprises employeuses par an (Insee)"
   embauche_rsa:
-    valeur: {id: LIS-EMP-05, instrument: cout_travail, libelle: "Charges négatives à l'embauche d'un allocataire du RSA depuis plus de deux ans, emploi à domicile au SMIC sans charges", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: LIS-EMP-05, deductible_is: 0.45, instrument: cout_travail, libelle: "Charges négatives à l'embauche d'un allocataire du RSA depuis plus de deux ans, emploi à domicile au SMIC sans charges", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -0.8, prudent: -0.6, median: -0.5, optimiste: -0.4}}
     unite: md_eur
     annee_euros: 2026

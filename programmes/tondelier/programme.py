@@ -169,7 +169,7 @@ class Tondelier:
             out["prelevements"] += n * (lev(c2) - lev(c))
             out["aides"] += n * (aides(c2) - aides(c))
             out["tva"] += n * taux_tva * ((net(c2) + aides(c2)) - (net(c) + aides(c)))
-            out["is"] += -n * 0.25 * part_marge * dc
+            out["is"] += -n * p.val("entreprises.retour_is_charges")["taux_is_effectif"] * p.val("entreprises.retour_is_charges")["part_employeurs_is"] * part_marge * dc
             out["hausse_cout"] += n * dc
             out["emplois_ponderes"] += n * dc / c  # × élasticité = emplois perdus
             pertes.append((n * dc / c, lev(c2) + taux_tva * net(c2) + self.v("smic.valeur_emploi_chomeur"), c2))
@@ -274,6 +274,12 @@ class Tondelier:
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=nom.split(".")[1],
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
                                     enfants=x.get("enfants")))
+                if x.get("deductible_is"):
+                    rc = p.val("entreprises.retour_is_charges")
+                    part = 1.0 if x["deductible_is"] is True else float(x["deductible_is"])
+                    r_is = rc["taux_is_effectif"] * rc["part_marge"] * part
+                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
+                                        {t: -r_is * v for t, v in serie.items()}, note=nom.split(".")[1]))
                 if x.get("fp"):
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
                                         {t: x.get("fp_taux", part_fp) * v for t, v in serie.items()}, nature="mesure",

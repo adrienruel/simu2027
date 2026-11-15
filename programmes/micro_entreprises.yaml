@@ -1,0 +1,33 @@
+# Mesures d'impôts des entreprises appliquées à la population synthétique d'entreprises (outils/entreprises_mesures.py).
+# changements : clés de la législation (entreprises_mesures.ACTUELLE) modifiées par la mesure.
+# moteur_filtre : ne compare qu'aux lignes du moteur dont le libellé contient ce texte (identifiant partagé).
+lisnard:
+  LIS-FIS-03:
+    changements: {is_normal: 0.20}
+    note: "Taux normal de 25 à 20 % ; taux réduit des PME inchangé ; part locale variable (0 à 5 points) non comptée."
+  LIS-FIS-01:
+    changements: {c3s_taux: 0.0, cfe: 0.0, cfe_industrie: 0.0, taxe_fonciere: 0.0, taxe_fonciere_industrie: 0.0}
+    moteur_filtre: "C3S, CFE"
+    note: "Lecture haute : C3S, CFE et taxe foncière des entreprises supprimées en entier (le moteur retient 60 % de 40 Md€)."
+tondelier:
+  REC-33:
+    changements: {is_reduit: 0.10}
+    note: "Taux réduit des PME de 15 à 10 % sur les premiers 42 500 € de bénéfice (chiffre d'affaires sous 10 M€)."
+  REC-35:
+    changements: {cvae_taux_max: 0.0075}
+    note: "CVAE rétablie au taux maximal de 0,75 % (contre une CVAE supprimée en 2030 au statu quo)."
+le_pen:
+  RN-FIS-04:
+    changements: {c3s_taux: 0.0, cfe: 0.0, cfe_industrie: 0.0}
+    moteur_filtre: "CFE et C3S"
+    note: "CFE et C3S supprimées."
+retailleau:
+  RET-FIS-01:
+    changements: {c3s_taux: 0.0, cfe_industrie: 0.0}
+    moteur_filtre: "C3S supprimée"
+    note: "C3S supprimée et part industrielle de la CFE exonérée (CFE des entreprises de l'industrie)."
+philippe:
+  PHI-FIS-01:
+    changements: {c3s_taux: 0.0, cfe: 0.0, cfe_industrie: 0.0, taxe_fonciere: 0.0, taxe_fonciere_industrie: 0.0}
+    moteur_filtre: "capital et le chiffre"
+    note: "Part assise sur le capital et le chiffre d'affaires : CFE, taxe foncière et C3S supprimées (le moteur compte aussi ≈ 10 Md€ d'autres impôts de production)."
