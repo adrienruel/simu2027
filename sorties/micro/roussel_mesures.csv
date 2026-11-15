@@ -1,6 +1,8 @@
-programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,d_csg,note
-roussel,PCF-RET-03,-23.18,-23.1,0,2.7,0.02,-0.0,0.21,0.0,0.01,0.0,0.0,3.97,-26.91,
-roussel,PCF-LOG-02,-0.96,-0.8,20,-3.7,-0.1,-0.0,0.19,0.0,0.75,0.0,0.0,-0.0,0.02,"Revalorisation non chiffrée par le programme : 5 %, comme le chiffrage du moteur."
-roussel,PCF-PRE-01,-1.55,-2.0,-23,-45.4,-1.07,1.52,-0.12,0.0,0.02,0.0,0.0,-0.0,0.02,
-roussel,PCF-FIS-03,-8.68,-2.0,334,9.7,0.16,-0.0,0.22,0.0,0.01,0.0,0.0,-8.44,0.02,"Barème non donné ; lecture : 2 points de moins en bas, 50 % au-delà de 181 917 € et 55 % au-delà de 300 000 € par part (moins de tranches hautes que Mélenchon, comme dans le moteur)."
-roussel,PCF-SAL-01,33.06,0.0,,51.5,0.91,-0.03,-2.08,-0.02,-0.6,-0.07,-0.32,2.4,2.77,"SMIC à 1 700 € net, même lecture que Mélenchon."
+programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aspa,d_aah,d_impot_revenu,d_csg,note
+roussel,PCF-RET-03,-23.18,-23.1,0,2.7,0.02,-0.0,0.21,0.0,0.01,0.0,0.01,0.0,3.97,-26.91,
+roussel,PCF-LOG-02,-0.95,-0.8,19,-3.7,-0.1,-0.0,0.19,0.0,0.75,0.0,0.01,0.0,-0.0,0.02,"Revalorisation non chiffrée par le programme : 5 %, comme le chiffrage du moteur."
+roussel,PCF-PRE-01,-1.54,-2.0,-23,-45.4,-1.07,1.52,-0.12,0.0,0.02,0.0,0.01,0.0,-0.0,0.02,
+roussel,PCF-FIS-03,-8.67,-7.8,11,9.7,0.16,-0.0,0.22,0.0,0.01,0.0,0.01,0.0,-8.44,0.02,"Barème non donné ; lecture : 2 points de moins en bas, 50 % au-delà de 181 917 € et 55 % au-delà de 300 000 € par part (moins de tranches hautes que Mélenchon, comme dans le moteur)."
+roussel,PCF-SAL-01,24.06,0.0,,51.4,0.9,-0.03,-2.08,-0.02,-0.6,-0.07,-0.01,-0.32,2.4,2.77,"SMIC à 1 700 € net, même lecture que Mélenchon."
+roussel,PCF-RET-05,-4.66,-8.5,-45,1.3,-0.02,-0.0,0.2,0.0,0.02,0.0,4.43,0.0,-0.0,0.02,"ASPA à 1 400 € par mois (1 043,6 € en 2026), plafond relevé d'autant ; recours complet."
+roussel,PCF-RET-02,-0.23,0.0,,2.4,0.01,-0.0,0.22,0.0,0.01,0.0,0.01,0.0,-0.0,0.02,"Pensions revalorisées comme le salaire moyen depuis 2029 : sans effet en 2026, visible dans le vieillissement (même calcul que le moteur)."

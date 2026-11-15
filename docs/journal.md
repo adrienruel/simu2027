@@ -1581,3 +1581,6 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - Pensions (gel, sous-indexation, indexation sur les salaires) et Aspa codés pour Mélenchon, Roussel, Tondelier, Lisnard.
 - Erreur : 14,7 Md€ d'Aspa versés dans la population (DREES : 754 460 allocataires, 4,1 Md€) ; recours calé sur la DREES
   (4,6 Md€). Micro entièrement recalculée.
+- PCF-RET-05 (Aspa à 1 400 €) recalé sur la micro : 8,5 → 4,7 Md€ au prudent (cohérent avec Mélenchon, 3,7 à 1 337 €).
+- Déficit 2037 au prudent : Mélenchon 28,14 → 28,04 ; Roussel 30,28 → 30,06. Pauvreté du statu quo en 2037 : 15,9 %
+  (pensions indexées sur les prix, moins compensées par l'Aspa).

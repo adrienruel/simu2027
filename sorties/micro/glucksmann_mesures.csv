@@ -1,3 +1,3 @@
-programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,d_csg,note
-glucksmann,GLU-FIS-01b,-7.95,0.0,,11.1,0.23,0.01,-0.15,-0.01,-0.08,-0.03,-0.03,1.87,-10.14,"CSG sur les revenus d'activité abaissée de 15 Md€ : 15 / 100,7 Md€ de CSG d'activité (bibliotheque.csg_activite) × 9,2 points = 1,37 point, réparti entre parts déductible et non déductible dans leur proportion (6,8 / 9,2)."
-glucksmann,GLU-ECO-01,16.37,0.0,,28.5,0.45,-0.01,-0.92,-0.01,-0.34,-0.03,-0.18,1.12,1.41,"SMIC à 1 600 € net (euros de 2027), même règle que le moteur."
+programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aspa,d_aah,d_impot_revenu,d_csg,note
+glucksmann,GLU-FIS-01b,-7.94,0.0,,11.1,0.22,0.01,-0.15,-0.01,-0.08,-0.03,0.01,-0.03,1.87,-10.14,"CSG sur les revenus d'activité abaissée de 15 Md€ : 15 / 100,7 Md€ de CSG d'activité (bibliotheque.csg_activite) × 9,2 points = 1,37 point, réparti entre parts déductible et non déductible dans leur proportion (6,8 / 9,2)."
+glucksmann,GLU-ECO-01,12.1,0.0,,28.5,0.45,-0.01,-0.92,-0.01,-0.34,-0.03,0.0,-0.18,1.12,1.41,"SMIC à 1 600 € net (euros de 2027), même règle que le moteur."
