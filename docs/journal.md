@@ -1547,3 +1547,7 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - REC-36 recalé sur le MESR (2,0 → 1,5) ; GLU-FIS-04 : recoupement noté, à trancher.
 - Déficit 2037 au prudent (contre le 14/11) : Philippe 11,26 → 11,10 ; Lisnard 14,25 → 14,10 ; Le Pen 13,28 → 13,21 ;
   Retailleau 10,23 → 10,20 ; Tondelier 13,21 → 13,38 ; Mélenchon 27,90 → 27,93.
+- GLU-FIS-04 : prudent 1,5 → 0,8 Md€ (ce qui se vérifie avec le MESR), crise 0,6, médian 1,5, optimiste 2,0 ; déficit
+  2037 de Glucksmann au prudent 13,37 → 13,41.
+- Déficits reportables : non modélisés, faute de données lisibles (stock de déficits et part des entreprises au
+  plafond de 1 M€ + 50 % : tableaux Excel de la DGFiP, non lus ici).

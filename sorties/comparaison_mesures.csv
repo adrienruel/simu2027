@@ -8070,13 +8070,13 @@ Glucksmann (Place publique)|Crise|2045|4,Glucksmann (Place publique),Crise,2045,
 Glucksmann (Place publique)|Crise|2050|4,Glucksmann (Place publique),Crise,2050,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,0.52,0.017
 Glucksmann (Place publique)|Crise|2060|4,Glucksmann (Place publique),Crise,2060,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,0.51,0.017
 Glucksmann (Place publique)|Crise|2073|4,Glucksmann (Place publique),Crise,2073,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,0.48,0.017
-Glucksmann (Place publique)|Crise|2029|5,Glucksmann (Place publique),Crise,2029,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.0,0.033
-Glucksmann (Place publique)|Crise|2032|5,Glucksmann (Place publique),Crise,2032,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.99,0.033
-Glucksmann (Place publique)|Crise|2037|5,Glucksmann (Place publique),Crise,2037,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.02,0.034
-Glucksmann (Place publique)|Crise|2045|5,Glucksmann (Place publique),Crise,2045,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.05,0.034
-Glucksmann (Place publique)|Crise|2050|5,Glucksmann (Place publique),Crise,2050,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.05,0.034
-Glucksmann (Place publique)|Crise|2060|5,Glucksmann (Place publique),Crise,2060,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.01,0.034
-Glucksmann (Place publique)|Crise|2073|5,Glucksmann (Place publique),Crise,2073,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.95,0.034
+Glucksmann (Place publique)|Crise|2029|5,Glucksmann (Place publique),Crise,2029,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.6,0.02
+Glucksmann (Place publique)|Crise|2032|5,Glucksmann (Place publique),Crise,2032,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.59,0.02
+Glucksmann (Place publique)|Crise|2037|5,Glucksmann (Place publique),Crise,2037,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.61,0.02
+Glucksmann (Place publique)|Crise|2045|5,Glucksmann (Place publique),Crise,2045,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.63,0.02
+Glucksmann (Place publique)|Crise|2050|5,Glucksmann (Place publique),Crise,2050,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.63,0.02
+Glucksmann (Place publique)|Crise|2060|5,Glucksmann (Place publique),Crise,2060,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.61,0.02
+Glucksmann (Place publique)|Crise|2073|5,Glucksmann (Place publique),Crise,2073,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.57,0.02
 Glucksmann (Place publique)|Crise|2029|6,Glucksmann (Place publique),Crise,2029,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,0.33,0.011
 Glucksmann (Place publique)|Crise|2032|6,Glucksmann (Place publique),Crise,2032,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,0.5,0.017
 Glucksmann (Place publique)|Crise|2037|6,Glucksmann (Place publique),Crise,2037,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,0.52,0.017
@@ -8623,20 +8623,20 @@ Glucksmann (Place publique)|Crise|2045|83,Glucksmann (Place publique),Crise,2045
 Glucksmann (Place publique)|Crise|2050|83,Glucksmann (Place publique),Crise,2050,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-3.49,-0.112
 Glucksmann (Place publique)|Crise|2060|83,Glucksmann (Place publique),Crise,2060,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-3.38,-0.112
 Glucksmann (Place publique)|Crise|2073|83,Glucksmann (Place publique),Crise,2073,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-3.17,-0.112
-Glucksmann (Place publique)|Crise|2029|84,Glucksmann (Place publique),Crise,2029,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,14.88,0.49
-Glucksmann (Place publique)|Crise|2032|84,Glucksmann (Place publique),Crise,2032,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,20.26,0.678
-Glucksmann (Place publique)|Crise|2037|84,Glucksmann (Place publique),Crise,2037,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,12.06,0.398
-Glucksmann (Place publique)|Crise|2045|84,Glucksmann (Place publique),Crise,2045,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,7.73,0.248
-Glucksmann (Place publique)|Crise|2050|84,Glucksmann (Place publique),Crise,2050,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,6.63,0.213
-Glucksmann (Place publique)|Crise|2060|84,Glucksmann (Place publique),Crise,2060,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,4.75,0.157
-Glucksmann (Place publique)|Crise|2073|84,Glucksmann (Place publique),Crise,2073,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,3.37,0.119
-Glucksmann (Place publique)|Crise|2029|85,Glucksmann (Place publique),Crise,2029,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,0.01,0.0
-Glucksmann (Place publique)|Crise|2032|85,Glucksmann (Place publique),Crise,2032,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.06,-0.002
-Glucksmann (Place publique)|Crise|2037|85,Glucksmann (Place publique),Crise,2037,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.17,-0.005
-Glucksmann (Place publique)|Crise|2045|85,Glucksmann (Place publique),Crise,2045,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.22,-0.007
-Glucksmann (Place publique)|Crise|2050|85,Glucksmann (Place publique),Crise,2050,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.19,-0.006
-Glucksmann (Place publique)|Crise|2060|85,Glucksmann (Place publique),Crise,2060,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.09,-0.003
-Glucksmann (Place publique)|Crise|2073|85,Glucksmann (Place publique),Crise,2073,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,0.01,0.0
+Glucksmann (Place publique)|Crise|2029|84,Glucksmann (Place publique),Crise,2029,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,14.91,0.491
+Glucksmann (Place publique)|Crise|2032|84,Glucksmann (Place publique),Crise,2032,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,20.28,0.679
+Glucksmann (Place publique)|Crise|2037|84,Glucksmann (Place publique),Crise,2037,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,12.07,0.398
+Glucksmann (Place publique)|Crise|2045|84,Glucksmann (Place publique),Crise,2045,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,7.74,0.248
+Glucksmann (Place publique)|Crise|2050|84,Glucksmann (Place publique),Crise,2050,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,6.64,0.213
+Glucksmann (Place publique)|Crise|2060|84,Glucksmann (Place publique),Crise,2060,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,4.75,0.158
+Glucksmann (Place publique)|Crise|2073|84,Glucksmann (Place publique),Crise,2073,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,3.38,0.119
+Glucksmann (Place publique)|Crise|2029|85,Glucksmann (Place publique),Crise,2029,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,0.02,0.001
+Glucksmann (Place publique)|Crise|2032|85,Glucksmann (Place publique),Crise,2032,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.05,-0.002
+Glucksmann (Place publique)|Crise|2037|85,Glucksmann (Place publique),Crise,2037,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.15,-0.005
+Glucksmann (Place publique)|Crise|2045|85,Glucksmann (Place publique),Crise,2045,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.2,-0.006
+Glucksmann (Place publique)|Crise|2050|85,Glucksmann (Place publique),Crise,2050,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.17,-0.005
+Glucksmann (Place publique)|Crise|2060|85,Glucksmann (Place publique),Crise,2060,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,-0.07,-0.002
+Glucksmann (Place publique)|Crise|2073|85,Glucksmann (Place publique),Crise,2073,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,0.02,0.001
 Glucksmann (Place publique)|Crise|2029|86,Glucksmann (Place publique),Crise,2029,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-5.33,-0.176
 Glucksmann (Place publique)|Crise|2032|86,Glucksmann (Place publique),Crise,2032,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-8.13,-0.272
 Glucksmann (Place publique)|Crise|2037|86,Glucksmann (Place publique),Crise,2037,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-9.04,-0.298
@@ -8791,13 +8791,13 @@ Glucksmann (Place publique)|Prudent|2045|4,Glucksmann (Place publique),Prudent,2
 Glucksmann (Place publique)|Prudent|2050|4,Glucksmann (Place publique),Prudent,2050,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,1.14,0.033
 Glucksmann (Place publique)|Prudent|2060|4,Glucksmann (Place publique),Prudent,2060,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,1.17,0.033
 Glucksmann (Place publique)|Prudent|2073|4,Glucksmann (Place publique),Prudent,2073,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,1.2,0.033
-Glucksmann (Place publique)|Prudent|2029|5,Glucksmann (Place publique),Prudent,2029,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.5,0.049
-Glucksmann (Place publique)|Prudent|2032|5,Glucksmann (Place publique),Prudent,2032,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.53,0.049
-Glucksmann (Place publique)|Prudent|2037|5,Glucksmann (Place publique),Prudent,2037,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.6,0.05
-Glucksmann (Place publique)|Prudent|2045|5,Glucksmann (Place publique),Prudent,2045,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.68,0.05
-Glucksmann (Place publique)|Prudent|2050|5,Glucksmann (Place publique),Prudent,2050,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.72,0.05
-Glucksmann (Place publique)|Prudent|2060|5,Glucksmann (Place publique),Prudent,2060,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.76,0.05
-Glucksmann (Place publique)|Prudent|2073|5,Glucksmann (Place publique),Prudent,2073,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.8,0.05
+Glucksmann (Place publique)|Prudent|2029|5,Glucksmann (Place publique),Prudent,2029,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.8,0.026
+Glucksmann (Place publique)|Prudent|2032|5,Glucksmann (Place publique),Prudent,2032,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.82,0.026
+Glucksmann (Place publique)|Prudent|2037|5,Glucksmann (Place publique),Prudent,2037,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.85,0.026
+Glucksmann (Place publique)|Prudent|2045|5,Glucksmann (Place publique),Prudent,2045,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.9,0.027
+Glucksmann (Place publique)|Prudent|2050|5,Glucksmann (Place publique),Prudent,2050,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.92,0.027
+Glucksmann (Place publique)|Prudent|2060|5,Glucksmann (Place publique),Prudent,2060,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.94,0.027
+Glucksmann (Place publique)|Prudent|2073|5,Glucksmann (Place publique),Prudent,2073,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,0.96,0.026
 Glucksmann (Place publique)|Prudent|2029|6,Glucksmann (Place publique),Prudent,2029,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,0.53,0.017
 Glucksmann (Place publique)|Prudent|2032|6,Glucksmann (Place publique),Prudent,2032,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,0.82,0.026
 Glucksmann (Place publique)|Prudent|2037|6,Glucksmann (Place publique),Prudent,2037,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,0.86,0.027
@@ -9344,20 +9344,20 @@ Glucksmann (Place publique)|Prudent|2045|83,Glucksmann (Place publique),Prudent,
 Glucksmann (Place publique)|Prudent|2050|83,Glucksmann (Place publique),Prudent,2050,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-3.05,-0.089
 Glucksmann (Place publique)|Prudent|2060|83,Glucksmann (Place publique),Prudent,2060,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-3.12,-0.088
 Glucksmann (Place publique)|Prudent|2073|83,Glucksmann (Place publique),Prudent,2073,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-3.19,-0.088
-Glucksmann (Place publique)|Prudent|2029|84,Glucksmann (Place publique),Prudent,2029,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,26.8,0.875
-Glucksmann (Place publique)|Prudent|2032|84,Glucksmann (Place publique),Prudent,2032,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,33.37,1.07
-Glucksmann (Place publique)|Prudent|2037|84,Glucksmann (Place publique),Prudent,2037,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,22.15,0.689
-Glucksmann (Place publique)|Prudent|2045|84,Glucksmann (Place publique),Prudent,2045,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,15.08,0.448
-Glucksmann (Place publique)|Prudent|2050|84,Glucksmann (Place publique),Prudent,2050,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,13.44,0.391
-Glucksmann (Place publique)|Prudent|2060|84,Glucksmann (Place publique),Prudent,2060,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,11.72,0.332
-Glucksmann (Place publique)|Prudent|2073|84,Glucksmann (Place publique),Prudent,2073,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,11.16,0.309
-Glucksmann (Place publique)|Prudent|2029|85,Glucksmann (Place publique),Prudent,2029,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,0.45,0.015
-Glucksmann (Place publique)|Prudent|2032|85,Glucksmann (Place publique),Prudent,2032,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,0.99,0.032
-Glucksmann (Place publique)|Prudent|2037|85,Glucksmann (Place publique),Prudent,2037,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,1.67,0.052
-Glucksmann (Place publique)|Prudent|2045|85,Glucksmann (Place publique),Prudent,2045,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,2.37,0.071
-Glucksmann (Place publique)|Prudent|2050|85,Glucksmann (Place publique),Prudent,2050,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,2.66,0.077
-Glucksmann (Place publique)|Prudent|2060|85,Glucksmann (Place publique),Prudent,2060,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,3.02,0.085
-Glucksmann (Place publique)|Prudent|2073|85,Glucksmann (Place publique),Prudent,2073,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,3.2,0.088
+Glucksmann (Place publique)|Prudent|2029|84,Glucksmann (Place publique),Prudent,2029,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,26.91,0.879
+Glucksmann (Place publique)|Prudent|2032|84,Glucksmann (Place publique),Prudent,2032,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,33.39,1.07
+Glucksmann (Place publique)|Prudent|2037|84,Glucksmann (Place publique),Prudent,2037,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,22.2,0.69
+Glucksmann (Place publique)|Prudent|2045|84,Glucksmann (Place publique),Prudent,2045,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,15.12,0.449
+Glucksmann (Place publique)|Prudent|2050|84,Glucksmann (Place publique),Prudent,2050,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,13.48,0.392
+Glucksmann (Place publique)|Prudent|2060|84,Glucksmann (Place publique),Prudent,2060,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,11.75,0.333
+Glucksmann (Place publique)|Prudent|2073|84,Glucksmann (Place publique),Prudent,2073,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,11.19,0.309
+Glucksmann (Place publique)|Prudent|2029|85,Glucksmann (Place publique),Prudent,2029,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,0.46,0.015
+Glucksmann (Place publique)|Prudent|2032|85,Glucksmann (Place publique),Prudent,2032,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,1.01,0.032
+Glucksmann (Place publique)|Prudent|2037|85,Glucksmann (Place publique),Prudent,2037,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,1.69,0.053
+Glucksmann (Place publique)|Prudent|2045|85,Glucksmann (Place publique),Prudent,2045,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,2.4,0.071
+Glucksmann (Place publique)|Prudent|2050|85,Glucksmann (Place publique),Prudent,2050,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,2.7,0.078
+Glucksmann (Place publique)|Prudent|2060|85,Glucksmann (Place publique),Prudent,2060,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,3.05,0.086
+Glucksmann (Place publique)|Prudent|2073|85,Glucksmann (Place publique),Prudent,2073,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,3.23,0.089
 Glucksmann (Place publique)|Prudent|2029|86,Glucksmann (Place publique),Prudent,2029,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-4.58,-0.15
 Glucksmann (Place publique)|Prudent|2032|86,Glucksmann (Place publique),Prudent,2032,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-7.05,-0.226
 Glucksmann (Place publique)|Prudent|2037|86,Glucksmann (Place publique),Prudent,2037,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-7.95,-0.247
@@ -9512,13 +9512,13 @@ Glucksmann (Place publique)|Médian|2045|4,Glucksmann (Place publique),Médian,2
 Glucksmann (Place publique)|Médian|2050|4,Glucksmann (Place publique),Médian,2050,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,1.86,0.049
 Glucksmann (Place publique)|Médian|2060|4,Glucksmann (Place publique),Médian,2060,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,1.96,0.049
 Glucksmann (Place publique)|Médian|2073|4,Glucksmann (Place publique),Médian,2073,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,2.08,0.049
-Glucksmann (Place publique)|Médian|2029|5,Glucksmann (Place publique),Médian,2029,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.0,0.065
-Glucksmann (Place publique)|Médian|2032|5,Glucksmann (Place publique),Médian,2032,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.08,0.065
-Glucksmann (Place publique)|Médian|2037|5,Glucksmann (Place publique),Médian,2037,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.22,0.066
-Glucksmann (Place publique)|Médian|2045|5,Glucksmann (Place publique),Médian,2045,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.4,0.066
-Glucksmann (Place publique)|Médian|2050|5,Glucksmann (Place publique),Médian,2050,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.48,0.066
-Glucksmann (Place publique)|Médian|2060|5,Glucksmann (Place publique),Médian,2060,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.62,0.066
-Glucksmann (Place publique)|Médian|2073|5,Glucksmann (Place publique),Médian,2073,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.78,0.065
+Glucksmann (Place publique)|Médian|2029|5,Glucksmann (Place publique),Médian,2029,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.5,0.049
+Glucksmann (Place publique)|Médian|2032|5,Glucksmann (Place publique),Médian,2032,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.56,0.049
+Glucksmann (Place publique)|Médian|2037|5,Glucksmann (Place publique),Médian,2037,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.66,0.049
+Glucksmann (Place publique)|Médian|2045|5,Glucksmann (Place publique),Médian,2045,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.8,0.049
+Glucksmann (Place publique)|Médian|2050|5,Glucksmann (Place publique),Médian,2050,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.86,0.049
+Glucksmann (Place publique)|Médian|2060|5,Glucksmann (Place publique),Médian,2060,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,1.96,0.049
+Glucksmann (Place publique)|Médian|2073|5,Glucksmann (Place publique),Médian,2073,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.08,0.049
 Glucksmann (Place publique)|Médian|2029|6,Glucksmann (Place publique),Médian,2029,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,0.8,0.026
 Glucksmann (Place publique)|Médian|2032|6,Glucksmann (Place publique),Médian,2032,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,1.24,0.039
 Glucksmann (Place publique)|Médian|2037|6,Glucksmann (Place publique),Médian,2037,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,1.33,0.039
@@ -9772,7 +9772,7 @@ Glucksmann (Place publique)|Médian|2050|41,Glucksmann (Place publique),Médian,
 Glucksmann (Place publique)|Médian|2060|41,Glucksmann (Place publique),Médian,2060,Collectivités,GLU-TER-02 — Accès de proximité aux services publics (France services renforcées),mesure,-0.26,-0.007
 Glucksmann (Place publique)|Médian|2073|41,Glucksmann (Place publique),Médian,2073,Collectivités,GLU-TER-02 — Accès de proximité aux services publics (France services renforcées),mesure,-0.28,-0.007
 Glucksmann (Place publique)|Médian|2029|42,Glucksmann (Place publique),Médian,2029,État et défense,GLU-TER-03 — Point d'indice des fonctionnaires indexé sur l'inflation (rattrapage du gel de 2027),mesure,-2.8,-0.091
-Glucksmann (Place publique)|Médian|2032|42,Glucksmann (Place publique),Médian,2032,État et défense,GLU-TER-03 — Point d'indice des fonctionnaires indexé sur l'inflation (rattrapage du gel de 2027),mesure,-2.92,-0.092
+Glucksmann (Place publique)|Médian|2032|42,Glucksmann (Place publique),Médian,2032,État et défense,GLU-TER-03 — Point d'indice des fonctionnaires indexé sur l'inflation (rattrapage du gel de 2027),mesure,-2.92,-0.091
 Glucksmann (Place publique)|Médian|2037|42,Glucksmann (Place publique),Médian,2037,État et défense,GLU-TER-03 — Point d'indice des fonctionnaires indexé sur l'inflation (rattrapage du gel de 2027),mesure,-3.11,-0.092
 Glucksmann (Place publique)|Médian|2045|42,Glucksmann (Place publique),Médian,2045,État et défense,GLU-TER-03 — Point d'indice des fonctionnaires indexé sur l'inflation (rattrapage du gel de 2027),mesure,-3.37,-0.093
 Glucksmann (Place publique)|Médian|2050|42,Glucksmann (Place publique),Médian,2050,État et défense,GLU-TER-03 — Point d'indice des fonctionnaires indexé sur l'inflation (rattrapage du gel de 2027),mesure,-3.52,-0.093
@@ -9815,7 +9815,7 @@ Glucksmann (Place publique)|Médian|2060|47,Glucksmann (Place publique),Médian,
 Glucksmann (Place publique)|Médian|2073|47,Glucksmann (Place publique),Médian,2073,Prestations et revenu universel,"GLU-SOC-01 — Statut des parents seuls (ASF revalorisée, aides de garde)",mesure,-0.55,-0.013
 Glucksmann (Place publique)|Médian|2029|48,Glucksmann (Place publique),Médian,2029,État et défense,GLU-SOC-02 — Service civique obligatoire de dix mois,mesure,-1.75,-0.057
 Glucksmann (Place publique)|Médian|2032|48,Glucksmann (Place publique),Médian,2032,État et défense,GLU-SOC-02 — Service civique obligatoire de dix mois,mesure,-7.29,-0.229
-Glucksmann (Place publique)|Médian|2037|48,Glucksmann (Place publique),Médian,2037,État et défense,GLU-SOC-02 — Service civique obligatoire de dix mois,mesure,-7.78,-0.231
+Glucksmann (Place publique)|Médian|2037|48,Glucksmann (Place publique),Médian,2037,État et défense,GLU-SOC-02 — Service civique obligatoire de dix mois,mesure,-7.78,-0.23
 Glucksmann (Place publique)|Médian|2045|48,Glucksmann (Place publique),Médian,2045,État et défense,GLU-SOC-02 — Service civique obligatoire de dix mois,mesure,-8.41,-0.231
 Glucksmann (Place publique)|Médian|2050|48,Glucksmann (Place publique),Médian,2050,État et défense,GLU-SOC-02 — Service civique obligatoire de dix mois,mesure,-8.79,-0.234
 Glucksmann (Place publique)|Médian|2060|48,Glucksmann (Place publique),Médian,2060,État et défense,GLU-SOC-02 — Service civique obligatoire de dix mois,mesure,-9.53,-0.239
@@ -10065,20 +10065,20 @@ Glucksmann (Place publique)|Médian|2045|83,Glucksmann (Place publique),Médian,
 Glucksmann (Place publique)|Médian|2050|83,Glucksmann (Place publique),Médian,2050,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-2.48,-0.066
 Glucksmann (Place publique)|Médian|2060|83,Glucksmann (Place publique),Médian,2060,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-2.62,-0.066
 Glucksmann (Place publique)|Médian|2073|83,Glucksmann (Place publique),Médian,2073,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-2.78,-0.065
-Glucksmann (Place publique)|Médian|2029|84,Glucksmann (Place publique),Médian,2029,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,23.5,0.766
-Glucksmann (Place publique)|Médian|2032|84,Glucksmann (Place publique),Médian,2032,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,31.84,0.999
-Glucksmann (Place publique)|Médian|2037|84,Glucksmann (Place publique),Médian,2037,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,20.24,0.6
-Glucksmann (Place publique)|Médian|2045|84,Glucksmann (Place publique),Médian,2045,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,14.25,0.392
-Glucksmann (Place publique)|Médian|2050|84,Glucksmann (Place publique),Médian,2050,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,12.99,0.345
-Glucksmann (Place publique)|Médian|2060|84,Glucksmann (Place publique),Médian,2060,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,11.83,0.297
-Glucksmann (Place publique)|Médian|2073|84,Glucksmann (Place publique),Médian,2073,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,11.85,0.278
+Glucksmann (Place publique)|Médian|2029|84,Glucksmann (Place publique),Médian,2029,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,23.58,0.768
+Glucksmann (Place publique)|Médian|2032|84,Glucksmann (Place publique),Médian,2032,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,31.9,1.001
+Glucksmann (Place publique)|Médian|2037|84,Glucksmann (Place publique),Médian,2037,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,20.27,0.601
+Glucksmann (Place publique)|Médian|2045|84,Glucksmann (Place publique),Médian,2045,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,14.28,0.393
+Glucksmann (Place publique)|Médian|2050|84,Glucksmann (Place publique),Médian,2050,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,13.02,0.346
+Glucksmann (Place publique)|Médian|2060|84,Glucksmann (Place publique),Médian,2060,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,11.86,0.297
+Glucksmann (Place publique)|Médian|2073|84,Glucksmann (Place publique),Médian,2073,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,11.88,0.279
 Glucksmann (Place publique)|Médian|2029|85,Glucksmann (Place publique),Médian,2029,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,0.92,0.03
-Glucksmann (Place publique)|Médian|2032|85,Glucksmann (Place publique),Médian,2032,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,2.04,0.064
-Glucksmann (Place publique)|Médian|2037|85,Glucksmann (Place publique),Médian,2037,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,3.48,0.103
-Glucksmann (Place publique)|Médian|2045|85,Glucksmann (Place publique),Médian,2045,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,5.05,0.139
-Glucksmann (Place publique)|Médian|2050|85,Glucksmann (Place publique),Médian,2050,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,5.73,0.152
-Glucksmann (Place publique)|Médian|2060|85,Glucksmann (Place publique),Médian,2060,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,6.65,0.167
-Glucksmann (Place publique)|Médian|2073|85,Glucksmann (Place publique),Médian,2073,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,7.28,0.171
+Glucksmann (Place publique)|Médian|2032|85,Glucksmann (Place publique),Médian,2032,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,2.05,0.064
+Glucksmann (Place publique)|Médian|2037|85,Glucksmann (Place publique),Médian,2037,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,3.5,0.104
+Glucksmann (Place publique)|Médian|2045|85,Glucksmann (Place publique),Médian,2045,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,5.07,0.139
+Glucksmann (Place publique)|Médian|2050|85,Glucksmann (Place publique),Médian,2050,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,5.75,0.153
+Glucksmann (Place publique)|Médian|2060|85,Glucksmann (Place publique),Médian,2060,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,6.67,0.167
+Glucksmann (Place publique)|Médian|2073|85,Glucksmann (Place publique),Médian,2073,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,7.31,0.171
 Glucksmann (Place publique)|Médian|2029|86,Glucksmann (Place publique),Médian,2029,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-4.17,-0.136
 Glucksmann (Place publique)|Médian|2032|86,Glucksmann (Place publique),Médian,2032,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-6.51,-0.204
 Glucksmann (Place publique)|Médian|2037|86,Glucksmann (Place publique),Médian,2037,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-7.52,-0.223
@@ -10233,13 +10233,13 @@ Glucksmann (Place publique)|Optimiste|2045|4,Glucksmann (Place publique),Optimis
 Glucksmann (Place publique)|Optimiste|2050|4,Glucksmann (Place publique),Optimiste,2050,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,2.54,0.065
 Glucksmann (Place publique)|Optimiste|2060|4,Glucksmann (Place publique),Optimiste,2060,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,2.75,0.065
 Glucksmann (Place publique)|Optimiste|2073|4,Glucksmann (Place publique),Optimiste,2073,Recettes,"GLU-FIS-06 — Rééquilibrage de la taxation (travail, capital, héritage, retraites) : niches jugées inefficaces réduites",mesure,3.05,0.064
-Glucksmann (Place publique)|Optimiste|2029|5,Glucksmann (Place publique),Optimiste,2029,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.5,0.081
-Glucksmann (Place publique)|Optimiste|2032|5,Glucksmann (Place publique),Optimiste,2032,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.61,0.08
-Glucksmann (Place publique)|Optimiste|2037|5,Glucksmann (Place publique),Optimiste,2037,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.82,0.081
-Glucksmann (Place publique)|Optimiste|2045|5,Glucksmann (Place publique),Optimiste,2045,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,3.05,0.081
-Glucksmann (Place publique)|Optimiste|2050|5,Glucksmann (Place publique),Optimiste,2050,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,3.18,0.081
-Glucksmann (Place publique)|Optimiste|2060|5,Glucksmann (Place publique),Optimiste,2060,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,3.44,0.081
-Glucksmann (Place publique)|Optimiste|2073|5,Glucksmann (Place publique),Optimiste,2073,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,3.82,0.08
+Glucksmann (Place publique)|Optimiste|2029|5,Glucksmann (Place publique),Optimiste,2029,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.0,0.065
+Glucksmann (Place publique)|Optimiste|2032|5,Glucksmann (Place publique),Optimiste,2032,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.09,0.064
+Glucksmann (Place publique)|Optimiste|2037|5,Glucksmann (Place publique),Optimiste,2037,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.25,0.065
+Glucksmann (Place publique)|Optimiste|2045|5,Glucksmann (Place publique),Optimiste,2045,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.44,0.065
+Glucksmann (Place publique)|Optimiste|2050|5,Glucksmann (Place publique),Optimiste,2050,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.54,0.065
+Glucksmann (Place publique)|Optimiste|2060|5,Glucksmann (Place publique),Optimiste,2060,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,2.75,0.065
+Glucksmann (Place publique)|Optimiste|2073|5,Glucksmann (Place publique),Optimiste,2073,Recettes,GLU-FIS-04 — Crédit d'impôt recherche plafonné pour les grands groupes,mesure,3.05,0.064
 Glucksmann (Place publique)|Optimiste|2029|6,Glucksmann (Place publique),Optimiste,2029,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,1.0,0.032
 Glucksmann (Place publique)|Optimiste|2032|6,Glucksmann (Place publique),Optimiste,2032,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,1.56,0.048
 Glucksmann (Place publique)|Optimiste|2037|6,Glucksmann (Place publique),Optimiste,2037,Recettes,"GLU-FIS-05 — Exonérations fiscales des transports polluants supprimées (kérosène des vols intérieurs, gazole non routier restant, transport routier)",mesure,1.68,0.048
@@ -10786,20 +10786,20 @@ Glucksmann (Place publique)|Optimiste|2045|83,Glucksmann (Place publique),Optimi
 Glucksmann (Place publique)|Optimiste|2050|83,Glucksmann (Place publique),Optimiste,2050,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-1.69,-0.043
 Glucksmann (Place publique)|Optimiste|2060|83,Glucksmann (Place publique),Optimiste,2060,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-1.84,-0.043
 Glucksmann (Place publique)|Optimiste|2073|83,Glucksmann (Place publique),Optimiste,2073,Effets économiques,Emploi : Service civique obligatoire : jeunes retirés de l'emploi,effet_macro,-2.04,-0.043
-Glucksmann (Place publique)|Optimiste|2029|84,Glucksmann (Place publique),Optimiste,2029,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,26.51,0.858
-Glucksmann (Place publique)|Optimiste|2032|84,Glucksmann (Place publique),Optimiste,2032,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,36.2,1.116
-Glucksmann (Place publique)|Optimiste|2037|84,Glucksmann (Place publique),Optimiste,2037,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,23.48,0.674
-Glucksmann (Place publique)|Optimiste|2045|84,Glucksmann (Place publique),Optimiste,2045,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,16.57,0.44
-Glucksmann (Place publique)|Optimiste|2050|84,Glucksmann (Place publique),Optimiste,2050,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,15.21,0.388
-Glucksmann (Place publique)|Optimiste|2060|84,Glucksmann (Place publique),Optimiste,2060,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,14.36,0.338
-Glucksmann (Place publique)|Optimiste|2073|84,Glucksmann (Place publique),Optimiste,2073,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,15.14,0.319
-Glucksmann (Place publique)|Optimiste|2029|85,Glucksmann (Place publique),Optimiste,2029,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,1.84,0.059
-Glucksmann (Place publique)|Optimiste|2032|85,Glucksmann (Place publique),Optimiste,2032,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,3.97,0.122
-Glucksmann (Place publique)|Optimiste|2037|85,Glucksmann (Place publique),Optimiste,2037,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,6.58,0.189
-Glucksmann (Place publique)|Optimiste|2045|85,Glucksmann (Place publique),Optimiste,2045,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,9.15,0.243
-Glucksmann (Place publique)|Optimiste|2050|85,Glucksmann (Place publique),Optimiste,2050,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,10.22,0.261
-Glucksmann (Place publique)|Optimiste|2060|85,Glucksmann (Place publique),Optimiste,2060,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,11.84,0.278
-Glucksmann (Place publique)|Optimiste|2073|85,Glucksmann (Place publique),Optimiste,2073,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,13.37,0.282
+Glucksmann (Place publique)|Optimiste|2029|84,Glucksmann (Place publique),Optimiste,2029,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,26.61,0.861
+Glucksmann (Place publique)|Optimiste|2032|84,Glucksmann (Place publique),Optimiste,2032,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,36.28,1.118
+Glucksmann (Place publique)|Optimiste|2037|84,Glucksmann (Place publique),Optimiste,2037,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,23.53,0.675
+Glucksmann (Place publique)|Optimiste|2045|84,Glucksmann (Place publique),Optimiste,2045,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,16.61,0.441
+Glucksmann (Place publique)|Optimiste|2050|84,Glucksmann (Place publique),Optimiste,2050,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,15.24,0.389
+Glucksmann (Place publique)|Optimiste|2060|84,Glucksmann (Place publique),Optimiste,2060,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,14.4,0.338
+Glucksmann (Place publique)|Optimiste|2073|84,Glucksmann (Place publique),Optimiste,2073,Effets économiques,Effet macro : multiplicateur sur l'impulsion budgétaire des mesures,effet_macro,15.18,0.32
+Glucksmann (Place publique)|Optimiste|2029|85,Glucksmann (Place publique),Optimiste,2029,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,1.84,0.06
+Glucksmann (Place publique)|Optimiste|2032|85,Glucksmann (Place publique),Optimiste,2032,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,3.98,0.123
+Glucksmann (Place publique)|Optimiste|2037|85,Glucksmann (Place publique),Optimiste,2037,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,6.6,0.189
+Glucksmann (Place publique)|Optimiste|2045|85,Glucksmann (Place publique),Optimiste,2045,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,9.17,0.243
+Glucksmann (Place publique)|Optimiste|2050|85,Glucksmann (Place publique),Optimiste,2050,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,10.24,0.261
+Glucksmann (Place publique)|Optimiste|2060|85,Glucksmann (Place publique),Optimiste,2060,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,11.86,0.279
+Glucksmann (Place publique)|Optimiste|2073|85,Glucksmann (Place publique),Optimiste,2073,Effets économiques,"Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)",effet_macro,13.39,0.282
 Glucksmann (Place publique)|Optimiste|2029|86,Glucksmann (Place publique),Optimiste,2029,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-3.75,-0.121
 Glucksmann (Place publique)|Optimiste|2032|86,Glucksmann (Place publique),Optimiste,2032,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-5.89,-0.182
 Glucksmann (Place publique)|Optimiste|2037|86,Glucksmann (Place publique),Optimiste,2037,Effets économiques,Seniors : prélèvements des emplois en plus (âge de la retraite),effet_macro,-6.88,-0.198
