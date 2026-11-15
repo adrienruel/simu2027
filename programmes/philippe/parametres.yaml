@@ -61,7 +61,7 @@ philippe_chomage:
 
 philippe_mesures:
   impots_production_travail:
-    valeur: {id: PHI-FIS-01, deductible_is: true, instrument: cout_travail, libelle: "Impôts de production −50 Md€ : part assise sur la masse salariale (taxe sur les salaires, versement mobilité)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+    valeur: {id: PHI-FIS-01, deductible_is: 0.67, instrument: cout_travail, libelle: "Impôts de production −50 Md€ : part assise sur la masse salariale (taxe sur les salaires, versement mobilité)", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: -18, prudent: -17, median: -16.5, optimiste: -16}}
     unite: md_eur
     annee_euros: 2026
@@ -76,7 +76,7 @@ philippe_mesures:
     statut: DECISION
     source: "Même source ; 60 % sur la CFE (≈ 7 Md€), la taxe foncière des entreprises (≈ 12 Md€), la C3S (≈ 4 Md€) et les autres impôts de production (≈ 10 Md€) ; compensation des collectivités par l'État incluse"
   aides_entreprises_travail:
-    valeur: {id: PHI-FIS-01b, deductible_is: true, instrument: cout_travail, libelle: "Aides publiques aux entreprises supprimées : allègements et exonérations de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+    valeur: {id: PHI-FIS-01b, deductible_is: 0.9, instrument: cout_travail, libelle: "Aides publiques aux entreprises supprimées : allègements et exonérations de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: 4.8, prudent: 8.0, median: 11.2, optimiste: 14.0}}
     unite: md_eur
     annee_euros: 2026
@@ -106,7 +106,7 @@ philippe_mesures:
     statut: HYPOTHESE
     source: "Encadrement : droits de donation ≈ 3 Md€ ; dons familiaux exonérés de 100 000 € de 2025 (loi de finances pour 2025, logement) ≈ 0,3 Md€ ; « hausse massive » : 0,4 à 1 Md€ par an, en partie avancée sur les successions futures ; site du 12/11/2026 : plafonds doublés (abattement de 100 000 € par parent et par enfant, 31 865 € par petit-enfant) pendant trois ans : effet d'aubaine concentré sur les patrimoines élevés, d'où un prudent relevé à 1 Md€ par an"
   heures_sup:
-    valeur: {id: PHI-EMP-01, deductible_is: 0.5, instrument: cout_travail, libelle: "Aucune cotisation patronale au-delà de 37 heures ; heures supplémentaires exonérées d'impôt et de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: PHI-EMP-01, deductible_is: 0.45, instrument: cout_travail, libelle: "Aucune cotisation patronale au-delà de 37 heures ; heures supplémentaires exonérées d'impôt et de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -2.5, prudent: -2.0, median: -1.6, optimiste: -1.2}}
     unite: md_eur
     annee_euros: 2026

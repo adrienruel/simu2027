@@ -338,3 +338,17 @@ bénéficiaires et 1 046 000 déficitaires ; 111,3 Md€ de déficits de l'anné
   part éligible 64 %) et niveau de l'IS (70,5 Md€) pris sur 2025. REC-33 : − 1,5 Md€.
 - Toujours non modélisés : le stock de déficits reportables en avant et le plafond d'imputation (1 M€ + 50 % du bénéfice
   au-delà) ; la publication ne les donne pas.
+
+## Impôts sur les salaires et employeurs sans IS (15/11/2026)
+
+La taxe sur les salaires et le versement mobilité sont payés en partie par des employeurs qui ne paient pas l'IS
+(associations, cliniques non lucratives, professions libérales) ; la population d'entreprises ne les couvre pas (elle
+exclut la finance et les associations). Part des employeurs à l'IS, dans `entreprises.retour_is_charges` et les mesures
+`deductible_is` (DÉCISION, sourcée) :
+- cotisations patronales et SMIC : 0,9 (associations : 9,0 % de l'emploi privé en 2022, Urssaf) ; 0,45 pour les mesures
+  qui mêlent cotisations salariales et patronales ou des particuliers employeurs ;
+- versement mobilité 0,9, taxe sur les salaires 0,5 (produit venant largement des banques et assurances ; environ la
+  moitié après retrait des employeurs publics, d'après les impôts de production par secteur de la DGFiP) : lignes
+  « masse salariale » de Lisnard et de Philippe 0,67 = (15 × 0,5 + 11 × 0,9) / 26 ;
+- impôts de production assis sur le capital et le chiffre d'affaires : taux de la micro, qui compte déjà les
+  entreprises individuelles à l'IR (les associations sont exonérées de CFE en général).

@@ -1559,3 +1559,10 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - Base du taux réduit 2025 (30,6 Md€), TPE à l'IS, bénéficiaires, IS 70,5 Md€ ; REC-33 − 1,45 → − 1,5.
 - Déficit 2037 au prudent (contre le 14/11) : Philippe 11,13 ; Lisnard 14,13 ; Le Pen 13,22 ; Retailleau 10,20 ;
   Tondelier 13,34 ; Arthaud 16,95 → 16,88 (SMIC) ; Glucksmann 13,41 ; Mélenchon 27,92.
+
+## 15/11/2026 (après-midi) — Employeurs sans IS ; impôts sur les salaires
+
+- `retour_is_charges.part_employeurs_is` (0,9) : cotisations, SMIC, capitalisation de Retailleau ; lignes « masse
+  salariale » de Lisnard et Philippe à 0,67 (taxe sur les salaires surtout hors IS, sauf banques et assurances).
+- Déficit 2037 au prudent (contre le 14/11) : Philippe 11,15 ; Lisnard 14,14 ; Tondelier 13,32 ; Arthaud 16,85 ;
+  Le Pen 13,22 ; Retailleau 10,20 ; Glucksmann 13,41 ; Mélenchon 27,92 ; Roussel 29,96.

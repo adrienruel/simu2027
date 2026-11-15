@@ -169,7 +169,7 @@ class Tondelier:
             out["prelevements"] += n * (lev(c2) - lev(c))
             out["aides"] += n * (aides(c2) - aides(c))
             out["tva"] += n * taux_tva * ((net(c2) + aides(c2)) - (net(c) + aides(c)))
-            out["is"] += -n * p.val("entreprises.retour_is_charges")["taux_is_effectif"] * part_marge * dc
+            out["is"] += -n * p.val("entreprises.retour_is_charges")["taux_is_effectif"] * p.val("entreprises.retour_is_charges")["part_employeurs_is"] * part_marge * dc
             out["hausse_cout"] += n * dc
             out["emplois_ponderes"] += n * dc / c  # × élasticité = emplois perdus
             pertes.append((n * dc / c, lev(c2) + taux_tva * net(c2) + self.v("smic.valeur_emploi_chomeur"), c2))

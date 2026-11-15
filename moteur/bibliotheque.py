@@ -201,7 +201,8 @@ def smic(p: Parametres, brut_cible_2026: float, diffusion_jusqu_a: float, part_m
     b_smic, b_new = smic_brut_mensuel_2026 * 12, brut_cible_2026 * 12
     plafond = diffusion_jusqu_a * b_new
     taux_tva = p.val("systeme_actuel.taux_tva_moyen")
-    taux_is = p.val("entreprises.retour_is_charges")["taux_is_effectif"]  # même taux que les autres charges
+    rc_is = p.val("entreprises.retour_is_charges")  # même règle que les autres charges des employeurs privés
+    taux_is = rc_is["taux_is_effectif"] * rc_is["part_employeurs_is"]
 
     def calcul(d, tables: dict[str, float], prive: bool) -> dict:
         out = {"prelevements": 0.0, "aides": 0.0, "tva": 0.0, "is": 0.0, "hausse_cout": 0.0,

@@ -120,7 +120,7 @@ attal_mesures:
     statut: HYPOTHESE
     source: "Encadrement : crédit d'impôt innovation des PME ≈ 0,3 Md€ ; suramortissement numérique de 2019-2020 ≈ 0,5 Md€ par an ; crédit élargi aux ETI"
   auto_tpe:
-    valeur: {id: ATT-ECO-04, deductible_is: true, instrument: cout_travail, libelle: "Statut « Auto-TPE » pour le premier salarié, intéressement des petites entreprises", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: ATT-ECO-04, deductible_is: 0.9, instrument: cout_travail, libelle: "Statut « Auto-TPE » pour le premier salarié, intéressement des petites entreprises", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -0.4, prudent: -0.3, median: -0.2, optimiste: -0.1}}
     unite: md_eur
     annee_euros: 2026
