@@ -1,9 +1,9 @@
 programme,mesure,scenario,emplois,budget_md,statique_md
-bertrand,BER-FIS-01,crise,6417,0.126,-9.313
-bertrand,BER-FIS-01,prudent,9916,0.193,-9.313
-bertrand,BER-FIS-01,median,25457,0.492,-9.313
-bertrand,BER-FIS-01,optimiste,48073,0.924,-9.313
-bertrand,BER-FIS-02,crise,1716,0.005,0.804
-bertrand,BER-FIS-02,prudent,2688,0.009,0.804
-bertrand,BER-FIS-02,median,6955,0.023,0.804
-bertrand,BER-FIS-02,optimiste,13177,0.045,0.804
+bertrand,BER-FIS-01,crise,6341,0.129,-9.395
+bertrand,BER-FIS-01,prudent,9815,0.198,-9.395
+bertrand,BER-FIS-01,median,25216,0.506,-9.395
+bertrand,BER-FIS-01,optimiste,47619,0.95,-9.395
+bertrand,BER-FIS-02,crise,1504,0.002,0.823
+bertrand,BER-FIS-02,prudent,2379,0.009,0.823
+bertrand,BER-FIS-02,median,6184,0.033,0.823
+bertrand,BER-FIS-02,optimiste,11723,0.064,0.823

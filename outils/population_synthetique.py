@@ -215,9 +215,16 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
     g_pen = rng.normal(size=n)
     rho_s = math.sqrt(corr["salaires"])
     rho_p = math.sqrt(corr["pensions"])
-    prof = p.val("cohortes.profil_salaire_age")
+    # revenu salarial annuel par âge (Insee) : volume de travail compris (constat du 15/11/2026 : avec le salaire en
+    # EQTP, les 18-24 ans gagnaient deux fois le revenu salarial de l'Insee et payaient trop d'impôt sur le revenu)
+    prof = v("profil_revenu_salarial_age")
+    # profil de salaire par âge de l'Insee (cohortes.profil_salaire_age), interpolé entre les milieux des tranches :
+    # une tranche large (25-39 ans) donnait le même salaire à 26 et à 38 ans (constat du 14/11/2026 : les 25-29 ans
+    # gagnaient plus que les 30-34 ans, et l'impôt des moins de 30 ans était surestimé)
+    noeuds = [(21, prof["18-24"]), (32, prof["25-39"]), (44.5, prof["40-49"]), (52, prof["50-54"]), (60, prof["55+"])]
+
     def profil(a):
-        return prof["18-24"] if a < 25 else prof["25-39"] if a < 40 else prof["40-49"] if a < 50 else prof["50-54"] if a < 55 else prof["55+"]
+        return float(np.interp(a, [x for x, _ in noeuds], [y for _, y in noeuds]))
     en_couple = np.isin(role, ["ref", "conjoint"]) & np.isin(typ_p, ["couple_sans_enfant", "couple_avec_enfants", "complexe"])
     eps = rng.normal(size=N)
     z = np.where(en_couple, rho_s * g_men[men] + math.sqrt(1 - rho_s ** 2) * eps, eps)

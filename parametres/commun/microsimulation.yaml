@@ -110,6 +110,13 @@ microsimulation:
     statut: SOURCE
     source: "Drees, Études et Résultats n° 1370 (mai 2026) : non-recours au RSA entre 33 % et 37 % des foyers éligibles fin 2021 (29 à 32 % des montants) ; n° 1379 (juillet 2026) : non-recours à la prime d'activité entre 48 % et 52 % des foyers éligibles, souvent pour de petits montants ou une éligibilité passagère"
     note: "Part des familles éligibles qui perçoivent la prestation. Tirage au hasard (graine fixe), avec une probabilité proportionnelle au montant dû à la puissance « forme », calée pour donner cette part en nombre de familles. Forme 0,2 : reproduit l'écart de la Drees pour le RSA entre non-recours en nombre (33 à 37 %) et en montant (29 à 32 %), soit une part en montant de 0,70 pour 0,65 en nombre ; même forme pour la prime d'activité, faute de mesure. Aides au logement, AAH et prestations familiales : recours complet (non-recours faible, non mesuré)."
+  profil_revenu_salarial_age:
+    valeur: {"18-24": 10170, "25-39": 23480, "40-49": 29110, "50-54": 31010, "55+": 29310}
+    unite: eur
+    annee_euros: 2023
+    statut: SOURCE
+    source: "Insee, Revenu salarial (base Tous salariés 2023, insee.fr/fr/statistiques/8733097) : revenu salarial annuel net moyen, moins de 25 ans 10 170 €, 25-39 ans 23 480 €, 40-49 ans 29 110 €, 50-54 ans 31 010 € ; 55 ans ou plus : rapport aux 50-54 ans de 2022 (28 060 / 29 680, insee.fr/fr/statistiques/2381326)"
+    note: "Profil du rang de salaire par âge dans la population synthétique (seuls les rapports comptent). Revenu annuel et non salaire en équivalent temps plein : l'impôt porte sur le revenu de l'année, et les jeunes travaillent moins d'heures et moins de mois (volume de travail 0,48 contre 0,84 à 40-49 ans). Avec le profil en EQTP (cohortes.profil_salaire_age), les salariés de 18-24 ans gagnaient 23 200 € imposables par an en moyenne dans la population (constat du 15/11/2026)."
   mois_travailles:
     valeur: {taux_mensuel_min: 0.5, taux_mensuel_max: 1.0}
     unite: sans_unite

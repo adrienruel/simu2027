@@ -213,5 +213,43 @@ def main() -> None:
     print("Écrit : sorties/comparaison_trajectoire.csv, comparaison_ecarts.csv, comparaison_mesures.csv, comparaison_ecologie.csv, comparaison_emploi_canaux.csv, comparaison_ecologie_mesures.csv, comparaison_annonces.csv")
 
 
+def redistribution() -> None:
+    """Pauvreté, inégalités et déciles de la microsimulation (vieillissement statique, scénario prudent),
+    avec les noms affichés du comparateur. Ne relance aucun calcul : lit sorties/micro_vieillissement*.csv."""
+    noms = {}
+    for nom in noyau.programmes_disponibles():
+        noms[nom] = getattr(noyau.charger(nom), "libelle", nom)
+    src = RACINE / "sorties"
+    if not (src / "micro_vieillissement.csv").exists():
+        return
+    lignes, deciles = [], []
+    with (src / "micro_vieillissement.csv").open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["programme"] not in noms:
+                continue
+            lib = noms[r["programme"]]
+            x = {"cle": f"{lib}|{r['annee']}", "programme": lib, "annee": int(r["annee"])}
+            # statu quo : ses valeurs sont dans les colonnes _sq ; pour un programme, les colonnes _sq
+            # donnent la législation actuelle sur la population du programme (effet des seules mesures)
+            for k in ("pauvrete_pct", "gini", "d9_d1", "mediane", "budget_mesures_md"):
+                v = r[k] if r[k] != "" else r.get(k + "_sq", "")
+                x[k] = float(v) if v != "" else 0.0
+            for k in ("pauvrete_pct", "gini", "d9_d1", "mediane"):
+                x[k + "_sq"] = float(r[k + "_sq"])
+            lignes.append(x)
+    with (src / "micro_vieillissement_deciles.csv").open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["programme"] not in noms or r["programme"] == "statu_quo":
+                continue
+            lib = noms[r["programme"]]
+            deciles.append({"cle": f"{lib}|{r['annee']}|{r['decile']}", "programme": lib, "annee": int(r["annee"]),
+                            "decile": int(r["decile"]), "niveau_vie_avant": float(r["niveau_vie_avant"]),
+                            "variation_eur_an": float(r["variation_eur_an"]), "variation_pct": float(r["variation_pct"]),
+                            "gagnants_pct": float(r["gagnants_pct"]), "perdants_pct": float(r["perdants_pct"])})
+    _ecrire("comparaison_redistribution.csv", lignes)
+    _ecrire("comparaison_redistribution_deciles.csv", deciles)
+
+
 if __name__ == "__main__":
     main()
+    redistribution()

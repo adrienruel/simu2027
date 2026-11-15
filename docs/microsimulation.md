@@ -241,3 +241,44 @@ IR après une naissance de Philippe − 1,5, le chiffre du candidat n'est plus r
 familial 0,80 (moins de familles), IR des jeunes 0,85, CSG des retraités 0,94 (pensions plus basses par rapport aux
 salaires), tranche à 9 % 0,95-0,99. Déficit 2037 au prudent : Philippe 11,33 → 11,26, Roussel + 0,06, Lisnard
 + 0,03, autres ≤ 0,01.
+
+## Impôt des moins de 30 ans (15/11/2026)
+
+Constat : avec le profil de salaire en équivalent temps plein, les salariés de 18-24 ans de la population gagnaient
+23 200 € imposables par an, contre un revenu salarial de 10 170 € net pour l'Insee (2023). Le rang de salaire suit
+maintenant le revenu salarial annuel par âge (Insee), qui compte le temps partiel et les mois non travaillés :
+19 800 €. L'écart restant tient surtout aux apprentis (environ un million, rémunération exonérée d'IR jusqu'au Smic)
+et aux jobs d'étudiants (exonérés jusqu'à trois Smic mensuels), que la population ne distingue pas encore.
+IR des foyers dont le déclarant a moins de 30 ans et un revenu sous quatre Smic : 4,2 Md€ (5,3 avant), contre 4,1
+pour Montaigne revalorisé sans plafond ; l'estimation reste un peu haute.
+
+## Population d'entreprises (premier jet, 15/11/2026, demande d'Adrien)
+
+`outils/population_entreprises.py` : 17 400 entreprises synthétiques pondérées, 6 secteurs (industrie, construction,
+commerce, transports, services marchands, santé et enseignement marchands) × 3 tailles (microentreprises, PME,
+GE et ETI réunies), champ marchand non agricole et non financier.
+
+- Totaux exacts par cellule : nombre d'entreprises, EQTP, valeur ajoutée, frais de personnel, EBE, investissement
+  (Insee, Ésane 2023 : tableaux par secteur et par taille, `parametres/donnees/entreprises_secteurs_tailles.csv`).
+  Santé et enseignement : reste du total de l'ensemble ; l'EBE des services (absent du tableau de l'Insee) est le
+  reste de l'EBE, partagé entre services marchands et santé au prorata de la VA moins les frais de personnel.
+- Dans chaque cellule, l'emploi suit une loi log-normale (σ : 1,0 pour les MIC, 0,8 pour les PME, 1,3 pour les GE et
+  ETI : DÉCISION, à remplacer par la dispersion d'Ésane si elle est publiée) ; VA, frais de personnel et
+  investissement suivent l'emploi avec un bruit, puis sont recalés. Impôts de production nets des subventions :
+  VA − frais de personnel − EBE, répartis au prorata de la VA.
+- IS : part des MIC à l'IS = TPE à l'IS de la DGFiP (2,49 millions) / MIC d'Ésane, la même dans chaque secteur
+  (DÉCISION) ; PME, ETI et GE toutes à l'IS. Résultat fiscal tiré par rang (EBE plus un bruit de rentabilité) sur
+  la distribution des bénéfices de la DGFiP en 16 classes (exacte par construction) ; le rang des MIC et des PME est
+  décalé pour que les bénéfices par taille rejoignent la DGFiP.
+- Contrôle (bénéfices / IS brut, Md€, modèle contre DGFiP 2024) : MIC 69,3 / 13,2 contre 65,9 / 14,0 ; PME 78,9 /
+  19,2 contre 78,5 / 19,2 ; GE et ETI 131,4 / 32,8 contre 139,5 / 35,8. Total de l'IS : 65,2 contre 69,0 (− 5,5 %).
+  Les MIC ne descendent pas plus bas : il y a plus de MIC à l'IS (2,49 millions) que d'entreprises bénéficiaires
+  (1,72 million), elles occupent forcément une partie des rangs bénéficiaires. Les tailles de la DGFiP (par unité
+  légale) et de l'Insee (par entreprise au sens économique) ne coïncident pas : 221 000 PME contre 172 500.
+- Pertes : ordre de grandeur seulement (perte moyenne des classes connues de la DGFiP) ; les déficits reportables ne
+  sont pas encore modélisés.
+
+Suite : impôts de production par impôt (CVAE, CFE, C3S, taxe foncière) entreprise par entreprise ; barèmes d'IS des
+programmes (taux, seuil du taux réduit, IS progressif) appliqués à chaque entreprise ; crédit d'impôt recherche ;
+réactions (investissement par taille, déjà dans `moteur/entreprises_cellules.py`, emploi, prix) ; puis passage des
+choix des entreprises aux revenus des ménages (salaires, dividendes), comme dans l'architecture voulue.

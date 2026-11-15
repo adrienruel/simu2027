@@ -1517,3 +1517,17 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   `microsimulation.recettes_vieillies` ; trois montants recalés (LIS-SOC-01, PCF-RET-03, PHI-FIS-02).
 - Pauvreté par programme et par année dans `sorties/micro_vieillissement.csv`. Déficit 2037 au prudent : Philippe
   − 0,07 ; Roussel + 0,06 ; Lisnard + 0,03.
+
+## 15/11/2026 (nuit) — Comparateur : pauvreté et déciles ; profil de salaire par âge ; population d'entreprises
+
+- Profil de salaire par âge interpolé (le salaire des 25-29 ans dépassait celui des 30-34 ans) : IR moyen des foyers
+  de 25-29 ans 1 996 → 1 431 €. Seuil du test des marges du calage à 0,35 (RSA des couples sans enfant + 30 %).
+- Vérification de l'impôt des moins de 30 ans : les salariés de 18-24 ans gagnaient 23 200 € imposables par an en
+  moyenne, plus du double du revenu salarial de l'Insee (10 170 € net en 2023). Le rang de salaire suit désormais le
+  revenu salarial annuel par âge (`microsimulation.profil_revenu_salarial_age`, volume de travail compris) au lieu du
+  salaire en EQTP : 19 800 € (reste élevé : apprentis et jobs d'étudiants, exonérés d'IR, ne sont pas distingués).
+  IR des foyers de moins de 30 ans sous quatre Smic (RN-FIS-03) : 5,3 → 4,2 Md€ (Montaigne revalorisé : 4,1 sans
+  plafond). IR total 105,5 → 103,6 Md€ (cible 104).
+- `export_comparaison.redistribution()` : `sorties/comparaison_redistribution*.csv` (noms du comparateur) ; section
+  « Pauvreté et inégalités » du comparateur (tableau par programme, barres par décile).
+- `outils/population_entreprises.py` et `entreprises_secteurs_tailles.csv` (Ésane 2023) : voir `docs/microsimulation.md`.
