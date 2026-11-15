@@ -170,12 +170,12 @@ roussel_mesures:
     note: "Moins de tranches que L'Avenir en commun (14) : un peu moins que melenchon_mesures.ir_hauts_revenus."
   ir_bas:
     valeur: {id: PCF-FIS-03, instrument: travail, incidence: bas, libelle: "Impôt sur le revenu à neuf tranches : tranches du bas abaissées", poste: recettes, moteur: "recette:salaires_prive", debut: 2028, plein: 2028,
-             montant: {crise: -3.5, prudent: -3.5, median: -2.5, optimiste: -2.5}}
+             montant: {crise: -9.3, prudent: -9.3, median: -9.3, optimiste: -9.3}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Même source"
-    note: "Un peu moins que melenchon_mesures.ir_bas_revenus (−4,5 / −3,3)."
+    note: "Même lecture que melenchon_mesures.ir_bas_revenus (11 → 9 %) : − 9,3 Md€ par OpenFisca (recalage du 15/11/2026 ; l'ancien − 3,5 / − 2,5 sous-estimait la mesure)."
   revenus_financiers:
     valeur: {id: PCF-FIS-04, instrument: capital_entreprises, libelle: "Cotisations sur les revenus financiers et les dividendes ; contribution sur les revenus financiers des banques et assurances", poste: recettes, moteur: "pib", debut: 2028, plein: 2029,
              montant: {crise: 1.0, prudent: 3.0, median: 6.0, optimiste: 10.0}}

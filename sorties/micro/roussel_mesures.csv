@@ -2,3 +2,5 @@ programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi
 roussel,PCF-RET-03,-23.18,-23.1,0,2.7,0.02,-0.0,0.21,0.0,0.01,0.0,0.0,3.97,-26.91,
 roussel,PCF-LOG-02,-0.96,-0.8,20,-3.7,-0.1,-0.0,0.19,0.0,0.75,0.0,0.0,-0.0,0.02,"Revalorisation non chiffrée par le programme : 5 %, comme le chiffrage du moteur."
 roussel,PCF-PRE-01,-1.55,-2.0,-23,-45.4,-1.07,1.52,-0.12,0.0,0.02,0.0,0.0,-0.0,0.02,
+roussel,PCF-FIS-03,-8.68,-2.0,334,9.7,0.16,-0.0,0.22,0.0,0.01,0.0,0.0,-8.44,0.02,"Barème non donné ; lecture : 2 points de moins en bas, 50 % au-delà de 181 917 € et 55 % au-delà de 300 000 € par part (moins de tranches hautes que Mélenchon, comme dans le moteur)."
+roussel,PCF-SAL-01,33.06,0.0,,51.5,0.91,-0.03,-2.08,-0.02,-0.6,-0.07,-0.32,2.4,2.77,"SMIC à 1 700 € net, même lecture que Mélenchon."

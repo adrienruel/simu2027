@@ -1566,3 +1566,12 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   salariale » de Lisnard et Philippe à 0,67 (taxe sur les salaires surtout hors IS, sauf banques et assurances).
 - Déficit 2037 au prudent (contre le 14/11) : Philippe 11,15 ; Lisnard 14,14 ; Tondelier 13,32 ; Arthaud 16,85 ;
   Le Pen 13,22 ; Retailleau 10,20 ; Glucksmann 13,41 ; Mélenchon 27,92 ; Roussel 29,96.
+
+## 15/11/2026 (début d'après-midi) — Déciles : impôts, CSG et SMIC codés
+
+- Remarque d'Adrien : le D10 de Mélenchon gagnait (seules ses prestations étaient codées). Ajout du barème, de
+  l'individualisation, de la garantie jeunes et du SMIC (Mélenchon), du barème et du SMIC (Roussel), du SMIC (Arthaud,
+  Tondelier, Glucksmann), de la CSG (Zemmour, Glucksmann) et du « droit au brut » (Attal).
+- Erreur : tranche à 9 % de Mélenchon et Roussel encore à − 4,5 / − 3,5 au lieu de − 9,3 : recalée.
+- Déficit 2037 au prudent : Mélenchon 27,92 → 28,14 ; Roussel 29,96 → 30,28 (tranche à 9 % recalée).
+- D10 en 2037 : Mélenchon − 460 € par an, Tondelier − 483, Zemmour + 3 034, Attal + 2 115.

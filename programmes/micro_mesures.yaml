@@ -48,6 +48,10 @@ tondelier:
       - {parametre: {chemin: prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_cond.age_pac, valeur: 18}}
     note: "Garantie d'autonomie à 50 % du SMIC net (≈ 790 € contre ≈ 660 € : + 20 %) à la place du RSA, dès 18 ans. Recours : celui du RSA (le programme dit « sans contrepartie », le recours pourrait être plus haut)."
 
+  PRE-01:
+    operations: [{population: {smic_brut_2026: 2000, diffusion: 1.4}}]
+    note: "SMIC à 2 000 € brut, même règle que le moteur."
+
 lisnard:
   LIS-SOC-01:
     operations: [{parametre: {chemin: impot_revenu.calcul_impot_revenu.plaf_qf.plafond_avantages_procures_par_demi_part.general, valeur: 1000000000.0}}]
@@ -74,6 +78,16 @@ roussel:
       - {parametre: {chemin: prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_cond.age_minimum_allocataire, valeur: 18}}
       - {parametre: {chemin: prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_cond.age_pac, valeur: 18}}
 
+  PCF-FIS-03:
+    operations:
+      - {parametre: {chemin: "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate", valeur: 0.09}}
+      - {parametre: {chemin: "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[4].rate", valeur: 0.50}}
+      - {tranche: {bareme: impot_revenu.bareme_ir_depuis_1945.bareme, seuil: 300000, taux: 0.55}}
+    note: "Barème non donné ; lecture : 2 points de moins en bas, 50 % au-delà de 181 917 € et 55 % au-delà de 300 000 € par part (moins de tranches hautes que Mélenchon, comme dans le moteur)."
+  PCF-SAL-01:
+    operations: [{population: {smic_net_2027: 1700, diffusion: 1.4}}]
+    note: "SMIC à 1 700 € net, même lecture que Mélenchon."
+
 melenchon:
   LFI-PRE-04:
     operations: [{variable: {nom: aide_logement, facteur: 1.10}}]
@@ -83,6 +97,23 @@ melenchon:
   LFI-PRE-01:
     operations: [{formule: {nom: garantie_niveau_vie, seuil_mensuel: 1337}}]
     note: "Complément qui porte le niveau de vie du ménage (revenu disponible par unité de consommation, après les autres mesures de la même simulation) à 1 337 € par mois ; recours complet (prestation automatique, p. 72)."
+
+  LFI-REC-01:
+    operations:
+      - {parametre: {chemin: "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate", valeur: 0.09}}
+      - {tranche: {bareme: impot_revenu.bareme_ir_depuis_1945.bareme, seuil: 100000, taux: 0.50}}
+      - {parametre: {chemin: "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[4].rate", valeur: 0.55}}
+      - {tranche: {bareme: impot_revenu.bareme_ir_depuis_1945.bareme, seuil: 250000, taux: 0.60}}
+    note: "Barème non donné (p. 58) ; lecture du moteur : 2 points de moins en bas (11 → 9 %, comme Tondelier), 50 % au-delà de 100 000 € par part, 55 % au-delà de 181 917 €, 60 % au-delà de 250 000 € (tranches de 50 à 60 % à partir de ≈ 100 000 € par part, L'Avenir en commun 2022). Statique : sans la réaction des hauts revenus que le moteur compte."
+  LFI-REC-02:
+    operations: [{population: {individualiser: true}}]
+    note: "Impôt individualisé : chaque membre d'un couple marié ou pacsé déclare seul, les enfants à charge de la personne de référence (lecture la plus simple ; le programme ne dit pas à qui vont les parts des enfants)."
+  LFI-PRE-02:
+    operations: [{formule: {nom: garantie_niveau_vie, seuil_mensuel: 1337, champ: etudiants}}]
+    note: "Garantie d'autonomie des jeunes détachés : niveau de vie des ménages d'étudiants porté au même seuil que la garantie des autres ménages (LFI-PRE-01) ; ces étudiants restent à charge du foyer fiscal des parents dans la population (la demi-part perdue n'est pas comptée, comme dans le moteur)."
+  LFI-SAL-01:
+    operations: [{population: {smic_net_2027: 1700, diffusion: 1.4}}]
+    note: "SMIC à 1 700 € net (euros de 2027) : salaires relevés comme dans le moteur (bibliotheque.smic, diffusion jusqu'à 1,4 nouveau SMIC, privé et public) ; les emplois perdus ne sont pas retirés de la population (canal du moteur)."
 
 le_pen:
   RN-FIS-03:
@@ -113,6 +144,10 @@ arthaud:
       - {variable: {nom: aide_logement, facteur: 1.012}}
     note: "Revalorisation de 1,2 % (inflation) des allocations familiales, de la prime d'activité et des aides au logement gelées en 2027."
 
+  ART-ECO-01:
+    operations: [{population: {smic_net_2027: 2200, diffusion: 1.4}}]
+    note: "SMIC à 2 200 € net (euros de 2027), même règle que le moteur ; la répartition du travail et l'égalité salariale ne sont pas codées."
+
 retailleau:
   RET-EMP-01:
     operations: [{formule: {nom: revenu_incitation, base: 300, avec_activite: 250}}]
@@ -131,3 +166,25 @@ zemmour:
   ZEM-KNA-04:
     operations: [{formule: {nom: rsa_duree, part: 0.45}}]
     note: "RSA limité à trois ans : 45 % des allocataires y sont depuis plus de trois ans (Drees, minima sociaux 2024), tirés au hasard ; exceptions : handicap, parent isolé, 60 ans ou plus (« aptes au travail »)."
+  ZEM-FIS-01:
+    operations:
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, valeur: 0.0}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.deductible, valeur: 0.0}}
+    note: "CSG supprimée sur les revenus d'activité (salariés et indépendants)."
+
+glucksmann:
+  GLU-FIS-01b:
+    operations:
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.0137}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.deductible, ajout: -0.0101}}
+    note: "CSG sur les revenus d'activité abaissée de 15 Md€ : 15 / 100,7 Md€ de CSG d'activité (bibliotheque.csg_activite) × 9,2 points = 1,37 point, réparti entre parts déductible et non déductible dans leur proportion (6,8 / 9,2)."
+  GLU-ECO-01:
+    operations: [{population: {smic_net_2027: 1600, diffusion: 1.4}}]
+    note: "SMIC à 1 600 € net (euros de 2027), même règle que le moteur."
+
+attal:
+  ATT-ECO-01:
+    operations:
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.0475}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.deductible, ajout: -0.0475}}
+    note: "« Droit au brut » : 52 Md€ de cotisations salariales en moins, proportionnelles au salaire (lecture du moteur). Codé comme une baisse de 4,75 points de la part déductible de la CSG d'activité (52 / 100,7 × 9,2 points), qui a la même assiette et la même déductibilité que les cotisations salariales ; les droits à retraite ne changent pas."

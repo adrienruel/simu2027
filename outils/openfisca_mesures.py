@@ -205,6 +205,7 @@ class Base:
         n_f = s["n_familles"]
         self.u = {k: np.random.default_rng(i + 11).random(n_f) for i, k in enumerate(("rsa", "ppa", "asf"))}
         self.pp = np.array([l["poids"] for l in self.lignes])
+        self.public = np.array([l["statut"] == "agent_public" for l in self.lignes])
         self.wf = np.zeros(n_f)
         self.wf[s["famille"]] = self.pp
         self.wm = np.zeros(s["n_menages"])
@@ -295,8 +296,9 @@ class Base:
                         "etrangers": etr[self.fam_men]}  # par famille
 
     # -- un état : revenu disponible des ménages après recours et règles ajoutées
-    def etat(self, sim, post: list[dict]) -> dict:
+    def etat(self, sim, post: list[dict], foyers: dict | None = None) -> dict:
         s, an = self.s, "2026"
+        sf = foyers or s  # foyers fiscaux de la simulation (l'individualisation de l'impôt les change)
         rd = sim.calculate("revenu_disponible", an)
         montants = {k: sim.calculate_add(k, an) for k in AIDES}
         pris = {}
@@ -362,30 +364,34 @@ class Base:
             if x["nom"] == "garantie_niveau_vie":
                 # niveau de vie porté au seuil, ménages dont la personne de référence n'est pas étudiante (champ de
                 # l'Insee ; les jeunes ont leur propre mesure)
-                rd = rd + ~self.menage_etudiant * np.maximum(0.0, x["seuil_mensuel"] * 12 * uc - rd)
+                champ = self.menage_etudiant if x.get("champ") == "etudiants" else ~self.menage_etudiant
+                rd = rd + champ * np.maximum(0.0, x["seuil_mensuel"] * 12 * uc - rd)
         cout_i = sim.calculate_add("cout_du_travail", an)
         comp = {k: float((self.wf * percu[k]).sum()) / 1e9 for k in ("rsa", "ppa", "asf", "aide_logement", "af")}
         comp["aah"] = float((self.pp * sim.calculate_add("aah", an)).sum()) / 1e9
-        foy = np.zeros(s["n_foyers"])
-        foy[s["foyer"]] = self.pp
+        foy = np.zeros(sf["n_foyers"])
+        foy[sf["foyer"]] = self.pp
         comp["impot_revenu"] = -float((foy * sim.calculate("impot_revenu_restant_a_payer", an)).sum()) / 1e9
         comp["csg"] = -float((self.pp * sim.calculate("csg", an)).sum()) / 1e9
         cout_m = np.bincount(s["menage"], weights=cout_i, minlength=s["n_menages"])
-        return {"rd": rd, "uc": uc, "cout_m": cout_m, "cout": float((self.wm * cout_m).sum()) / 1e9,
+        # coût des agents publics : payé par les administrations (une hausse est une dépense, pas une recette)
+        cout_pub = float((self.pp * cout_i * self.public).sum()) / 1e9
+        return {"rd": rd, "uc": uc, "cout_m": cout_m, "cout": float((self.wm * cout_m).sum()) / 1e9, "cout_public": cout_pub,
                 "rd_total": float((self.wm * rd).sum()) / 1e9, "comp": comp}
 
     def _simuler(self, tbs, lignes=None):
         return op.simulation(lignes or self.lignes, tbs=tbs)[0]
 
-    def contrefactuels(self, tbs, post) -> dict:
+    def contrefactuels(self, tbs, post, lignes=None) -> dict:
         """Revenu disponible et coût du travail des ménages quand les personnes de référence (puis les autres
         adultes) en emploi ne travaillent pas."""
         out = {}
         for nom, choix in (("ref", self.travaille & self.est_ref), ("autres", self.travaille & ~self.est_ref)):
+            base_l = lignes or self.lignes
             lg = [dict(l, salaire_brut=0.0, cout_employeur=0.0, revenu_independant=0.0, statut="inactif") if c else l
-                  for l, c in zip(self.lignes, choix)]
+                  for l, c in zip(base_l, choix)]
             sim = self._simuler(tbs, lg)
-            e = self.etat(sim, post)
+            e = self.etat(sim, post, op.structure(lg) if lignes is not None else None)
             out[nom] = {"rd": e["rd"], "cout_m": e["cout_m"]}
             del sim
             import gc
@@ -424,20 +430,64 @@ class Base:
             par[sc] = {"emplois": float(d.sum()), "budget": float((d * b["valeur"]).sum()) / 1e9}
         return {**par[s], "scenarios": par}
 
+    def population(self, operations: list[dict]) -> list[dict] | None:
+        """Population modifiée par les opérations « population » (None s'il n'y en a pas) :
+        - individualiser : impôt sur le revenu individuel (couples mariés ou pacsés déclarant séparément, enfants à
+          charge de la personne de référence) ;
+        - smic_net_2027 ou smic_brut_2026, diffusion : salaire mensuel relevé au nouveau SMIC, hausse décroissante
+          jusqu'à zéro à diffusion × le nouveau SMIC (même règle que bibliotheque.smic, privé et public)."""
+        pops = [o["population"] for o in operations if "population" in o]
+        if not pops:
+            return None
+        lg = [dict(l) for l in self.lignes]
+        for x in pops:
+            if x.get("individualiser"):
+                for l in lg:
+                    l["maries"] = 0
+            if "smic_net_2027" in x or "smic_brut_2026" in x:
+                from moteur import bibliotheque as bib
+                if "smic_brut_2026" in x:
+                    cible = float(x["smic_brut_2026"])
+                else:
+                    infl27 = Parametres().val("inflation.base")["2027"]
+                    cible = bib.brut_de_net_mensuel(x["smic_net_2027"] / (1 + infl27))
+                smic0 = 1823.03  # SMIC brut mensuel de 2026 (même valeur que bibliotheque.smic)
+                plafond = x["diffusion"] * cible
+                for l in lg:
+                    if l["statut"] not in ("salarie_prive", "agent_public") or l["salaire_brut"] <= 0:
+                        continue
+                    mois = max(1, int(l.get("mois_travailles", 12) or 12))
+                    b = l["salaire_brut"] / mois
+                    if b <= smic0:
+                        b2 = b * cible / smic0  # temps partiel au SMIC horaire
+                    elif b < plafond:
+                        b2 = max(b + (cible - smic0) * max(0.0, 1 - (b - smic0) / (plafond - smic0)), min(cible, plafond))
+                    else:
+                        continue
+                    l["salaire_brut"] = b2 * mois
+        return lg
+
     def reforme(self, operations: list[dict]) -> dict:
         tbs = construire(operations)
         post = _post(operations)
-        sim = self.sim if tbs is None else self._simuler(tbs)
-        e1 = self.etat(sim, post)
+        lg = self.population(operations)
+        foyers = None
+        if lg is not None:
+            sim = self._simuler(tbs, lg)
+            foyers = op.structure(lg)
+        else:
+            sim = self.sim if tbs is None else self._simuler(tbs)
+        e1 = self.etat(sim, post, foyers)
         if sim is not self.sim:
             del sim
             import gc
             gc.collect()
         e0 = self.etat0
-        out = {"budget": (e1["cout"] - e0["cout"]) - (e1["rd_total"] - e0["rd_total"]), "etat": e1,
+        out = {"budget": (e1["cout"] - e0["cout"]) - (e1["cout_public"] - e0["cout_public"])
+                         - (e1["rd_total"] - e0["rd_total"]), "etat": e1,
                "composantes": {k: e1["comp"][k] - e0["comp"][k] for k in e0["comp"]}}
         if self.emploi:
-            cf1 = self.cf0 if (tbs is None and not post) else self.contrefactuels(tbs, post)
+            cf1 = self.cf0 if (tbs is None and not post and lg is None) else self.contrefactuels(tbs, post, lg)
             out["emploi"] = self.emploi_effet(e1, cf1)
         return out
 

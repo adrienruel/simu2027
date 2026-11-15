@@ -352,3 +352,23 @@ exclut la finance et les associations). Part des employeurs à l'IS, dans `entre
   « masse salariale » de Lisnard et de Philippe 0,67 = (15 × 0,5 + 11 × 0,9) / 26 ;
 - impôts de production assis sur le capital et le chiffre d'affaires : taux de la micro, qui compte déjà les
   entreprises individuelles à l'IR (les associations sont exonérées de CFE en général).
+
+## Déciles : mesures fiscales et SMIC ajoutés (15/11/2026, remarque d'Adrien)
+
+Constat : pour Mélenchon, le décile le plus aisé gagnait (+ 70 € par an), parce que seules ses trois hausses de
+prestations étaient codées, aucune de ses hausses d'impôt. Plus généralement, les déciles ne voyaient pas le SMIC, la
+CSG de Zemmour, de Glucksmann et le « droit au brut » d'Attal. Ajouts dans `programmes/micro_mesures.yaml` :
+- opérations « population » (`Base.population`) : `individualiser` (impôt individuel) et `smic_net_2027` /
+  `smic_brut_2026` (salaires relevés comme dans `bibliotheque.smic`, privé et public) ; garantie de niveau de vie
+  étendue aux ménages d'étudiants (`champ: etudiants`) ;
+- Mélenchon : barème à 14 tranches (lecture du moteur), impôt individualisé (+ 5,97 Md€, moteur + 6,0), garantie
+  d'autonomie des jeunes (− 11,0, moteur − 10,0), SMIC ; Roussel : barème à neuf tranches, SMIC ; Arthaud, Tondelier,
+  Glucksmann : SMIC ; Zemmour : CSG d'activité supprimée ; Glucksmann : CSG − 15 Md€ ; Attal : « droit au brut » codé
+  comme une baisse de la part déductible de la CSG d'activité (même assiette, même déductibilité).
+- Le solde des mesures exclut maintenant la hausse du coût des agents publics (dépense, pas recette).
+
+Erreur trouvée : la baisse de la première tranche de 11 à 9 % était chiffrée − 4,5 (Mélenchon) et − 3,5 (Roussel)
+alors que le même barème vaut − 9,3 Md€ (recalé le 14/11 pour Bertrand et Tondelier, pas pour eux) : recalés.
+
+Toujours hors des déciles : retraites (âge, pensions), assurance chômage, patrimoine et successions, services publics.
+La colonne « Mesures prises en compte » du comparateur le dit programme par programme.

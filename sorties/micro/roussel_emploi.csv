@@ -11,3 +11,11 @@ roussel,PCF-PRE-01,crise,-93034,-2.092,-1.545
 roussel,PCF-PRE-01,prudent,-45409,-1.072,-1.545
 roussel,PCF-PRE-01,median,-5220,-0.301,-1.545
 roussel,PCF-PRE-01,optimiste,14878,-0.025,-1.545
+roussel,PCF-FIS-03,crise,6082,0.067,-8.682
+roussel,PCF-FIS-03,prudent,9670,0.163,-8.682
+roussel,PCF-FIS-03,median,25155,0.491,-8.682
+roussel,PCF-FIS-03,optimiste,47576,0.94,-8.682
+roussel,PCF-SAL-01,crise,30568,0.567,33.059
+roussel,PCF-SAL-01,prudent,51550,0.909,33.059
+roussel,PCF-SAL-01,median,137494,2.376,33.059
+roussel,PCF-SAL-01,optimiste,261416,4.505,33.059
