@@ -68,7 +68,7 @@ def _montee(t: int, debut: int, annees: float) -> float:
     return max(0.0, min(1.0, (t - debut + 1) / annees)) if annees else float(t >= debut)
 
 
-def effets(prog, p: Parametres, s: str, d: dict | None = None) -> dict:
+def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme=None) -> dict:
     """Mesures de recettes, PIB en plus (Md€) et écart de taux des canaux déclarés, dans le scénario s.
     d : canaux déjà réunis (Écologie de droite les tire de ses paramètres), sinon ceux que déclare le programme."""
     d = declares(prog) if d is None else d
@@ -137,12 +137,23 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None) -> dict:
             serie[t] = y[t] * r
         ajouter("école (niveau des élèves)", serie)
     emplois, actifs = {t: 0.0 for t in ANNEES}, {t: 0.0 for t in ANNEES}
-    if "solde_migratoire" in d:
+    # naissances (canal commun, moteur/naissances.py) : mesures de soutien aux enfants du programme
+    from . import naissances
+    eff_n = naissances.effet(p, s, mesures_programme) if mesures_programme is not None else 0.0
+    canal = "Démographie : solde migratoire" if "solde_migratoire" in d else "Démographie : naissances"
+    if "solde_migratoire" in d or abs(eff_n) > 1e-6:
         # variante migratoire commune (phase B2, moteur/migrations.py) : écarts au statu quo recalculé avec la
         # population du programme ; PIB, emploi et actifs dans le contexte, recettes et dépenses en mesures
         from . import migrations
-        mg = migrations.effets(p, s, d["solde_migratoire"])
-        lib = f"solde migratoire ({mg['variation_solde'] / 1e3:+.0f} 000 par an)"
+        mg = migrations.effets(p, s, d.get("solde_migratoire"), eff_n)
+        if mg["ecart_naissances"] is not None:
+            prog.__dict__.setdefault("ecart_naissances", {})[(id(p), s)] = mg["ecart_naissances"]
+        morceaux = []
+        if "solde_migratoire" in d:
+            morceaux.append(f"solde migratoire ({mg['variation_solde'] / 1e3:+.0f} 000 par an)")
+        if abs(eff_n) > 1e-6:
+            morceaux.append(f"naissances ({eff_n * 100:+.1f} %)")
+        lib = ", ".join(morceaux)
         mesures.append(Mesure(f"Démographie : {lib}, recettes", "recettes", dict(mg["recettes"]), "effet_macro"))
         for b in mg["blocs"][ANNEES[-1]]:
             serie = {t: mg["blocs"][t].get(b, 0.0) for t in ANNEES}
@@ -161,7 +172,8 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None) -> dict:
     if pib_m is not None:  # ajouté après le dividende : ce PIB-là n'est pas un gain de productivité
         for t in ANNEES:
             pib[t] += pib_m[t]
-    return {"mesures": mesures, "pib": pib, "taux_supplementaire": None, "emplois": emplois, "actifs": actifs}
+    return {"mesures": mesures, "pib": pib, "taux_supplementaire": None, "emplois": emplois, "actifs": actifs,
+            "canal_demographie": canal}
 
 
 def regle(prog, p: Parametres, s: str) -> Regle | None:

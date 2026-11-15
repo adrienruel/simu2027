@@ -12,7 +12,8 @@ import yaml
 RACINE = Path(__file__).resolve().parent.parent
 FICHIERS_COMMUNS = (RACINE / "parametres" / "commun" / "economie.yaml", RACINE / "parametres" / "commun" / "options.yaml",
                     RACINE / "parametres" / "commun" / "statu_quo.yaml",
-                    RACINE / "parametres" / "commun" / "ecologie.yaml")
+                    RACINE / "parametres" / "commun" / "ecologie.yaml",
+                    RACINE / "parametres" / "commun" / "microsimulation.yaml")
 PROGRAMME_DEFAUT = "ecologie_de_droite"
 
 

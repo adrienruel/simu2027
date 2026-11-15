@@ -75,6 +75,12 @@ is_investissement:
 # programme sur la natalité. Voir moteur/demographie.py et docs/demographie.md.
 demographie:
   active: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Population mise à jour chaque année (Adrien, 29/10/2026). v235 : population figée en 2026, tout suit la tendance de 0,7 %."}
+  naissances_communes:
+    valeur: true
+    v_avant: false
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 14/11/2026 : l'effet des mesures de soutien aux enfants sur les naissances s'applique à tous les programmes (moteur/naissances.py), avec la semi-élasticité commune demographie.natalite_semi_elasticite ; avant, seul Écologie de droite l'avait (ses ménages types et ses crèches, inchangés). Faux : ancien calcul."
 
 # --- Ancien système : pensions génération par génération (29 octobre 2026) ---------------
 ancien_systeme:
@@ -119,3 +125,4 @@ economies:
 # --- Écologie (moteur/ecologie/) ------------------------------------------------------
 ecologie_options:
   emissions_activite: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Décision d'Adrien du 05/11/2026 : les émissions suivent l'activité (population, revenu par habitant), le progrès technique et la part importée (moteur/ecologie/emissions.py), au lieu du taux fixe carbone.baisse_tendancielle_emissions. La recette carbone, l'ETS2 et le poids des taxes carbone dans l'inflation suivent ces émissions, et l'assiette répond au prix du carbone par rapport au statu quo (saut de 2029 compris), avec ajustement progressif : la même équation que les émissions."}
+

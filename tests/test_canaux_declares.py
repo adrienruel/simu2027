@@ -44,9 +44,9 @@ def test_fraude_tva_et_productivite():
     noms = {m.nom for m in prog.mesures(P)["prudent"]}
     assert {"Canal déclaré : fraude à la TVA", "Canal déclaré : productivité"} <= noms
     # 2029 : un quart de la fraude, pas encore de productivité
-    # à 0,02 Md€ près : effets bouclés de second ordre (prix, pensions en retard sur les prix) des mesures du programme
-    assert BASE[2029]["solde_primaire"] + 0.5 == pytest.approx(r[2029]["solde_primaire"], abs=0.02)
-    assert r[2029]["pib"] == pytest.approx(BASE[2029]["pib"], abs=0.05)
+    # à 0,05 Md€ près : effets bouclés de second ordre (prix, pensions en retard sur les prix) des mesures du programme
+    assert BASE[2029]["solde_primaire"] + 0.5 == pytest.approx(r[2029]["solde_primaire"], abs=0.05)  # Bertrand : IR à 9,3 Md€ depuis F4
+    assert r[2029]["pib"] == pytest.approx(BASE[2029]["pib"], abs=0.1)  # effets bouclés de la baisse d'IR de Bertrand (F4)
     from moteur import statu_quo as sq  # dix ans de gain sur le PIB du statu quo, puis palier
     # repère : le même programme sans canal (les effets bouclés de ses propres mesures durent jusqu'en 2045)
     r0 = noyau.simuler(q, _programme({}), scenarios=("prudent",))["prudent"]

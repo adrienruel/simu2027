@@ -146,11 +146,12 @@ lisnard_mesures:
     statut: HYPOTHESE
     source: "Fiche « Questions » (16/10/2026) ; encadrement : droits de succession ≈ 16 Md€, dont ≈ 30 % payés dans les tranches au-delà de 20 % en ligne directe (CAE, 2021) ; transmission d'entreprise déjà exonérée à 75 % (pacte Dutreil)"
   quotient_familial:
-    valeur: {id: LIS-SOC-01, instrument: travail, incidence: haut, libelle: "Quotient familial déplafonné", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
-             montant: {crise: -4.0, prudent: -3.5, median: -3.0, optimiste: -2.5}}
+    valeur: {id: LIS-SOC-01, enfants: true, instrument: travail, incidence: haut, libelle: "Quotient familial déplafonné", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: -5.0, prudent: -4.4, median: -3.8, optimiste: -3.1}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique au prudent, même écart entre scénarios qu'avant ; outils/openfisca_mesures.py, DÉCISION d'Adrien). Ancien montant : {crise: -4.0, prudent: -3.5, median: -3.0, optimiste: -2.5}."
     source: "Page programme (non datée) ; encadrement : plafonnement du quotient familial ≈ 3 à 4 Md€ d'impôt (Voies et moyens, dépense fiscale négative ; baisse du plafond de 2013-2014 ≈ 1,5 Md€)"
   creation_entreprise:
     valeur: {id: LIS-ECO-04, instrument: cout_travail, libelle: "Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
@@ -210,10 +211,11 @@ lisnard_mesures:
     source: "Discours de Bayeux (17/06/2026), p. 11 ; encadrement : fusion des régions de 2015 sans économie nette (Cour des comptes, 2019) ; référendum, pas avant 2031"
   allocation_unique:
     valeur: {id: LIS-ECO-03, instrument: transferts_actifs, libelle: "Aides sociales fusionnées en une allocation unique plafonnée, 500 € d'écart entre le SMIC et l'assistance", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2029, plein: 2030,
-             montant: {crise: -1.0, prudent: -2.0, median: -3.0, optimiste: -4.0}}
+             montant: {crise: -2.0, prudent: -2.6, median: -2.6, optimiste: -2.6}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique, outils/openfisca_mesures.py, DÉCISION d'Adrien) ; crise : 75 % pour les économies (transition, contentieux). Emplois : par le gain à travailler (micro, offre.micro_emploi) pour les transferts. Ancien montant : {crise: -1.0, prudent: -2.0, median: -3.0, optimiste: -4.0}."
     source: "Fiche « Questions » (03/10/2026) et Fiche « Questions » (16/10/2026) ; encadrement : RSA, prime d'activité, aides au logement ≈ 43 Md€ ; plafond en pourcentage du SMIC : ménages au-dessus du plafond (familles nombreuses, aides au logement en zone chère) ; non-recours réduit en sens inverse"
   prestations_etranger:
     valeur: {id: LIS-ECO-03b, instrument: transferts_actifs, libelle: "Prestations non contributives réservées aux résidents depuis cinq ans, plus versées à l'étranger", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,

@@ -161,7 +161,7 @@ retailleau_mesures:
     statut: HYPOTHESE
     source: "Se loger mieux et moins cher (28/05/2026), p. 33 ; encadrement : revenus fonciers ≈ 40 Md€ ; statut de la loi de finances pour 2026 au statu quo (≈ 0,1 à 0,2 Md€) ; option au PFU et amortissement élargi"
   credit_famille:
-    valeur: {id: RET-SOC-03, instrument: capital_entreprises, libelle: "Garde d'enfants : crédit d'impôt famille déplafonné, exonération relevée à 7 000 €", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: RET-SOC-03, enfants: garde, instrument: capital_entreprises, libelle: "Garde d'enfants : crédit d'impôt famille déplafonné, exonération relevée à 7 000 €", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -0.85, prudent: -0.8, median: -0.8, optimiste: -0.75}}
     unite: md_eur
     annee_euros: 2026
@@ -183,18 +183,19 @@ retailleau_mesures:
     source: "Électricité (07/05/2026), p. 21 ; encadrement : taux réduit des petites installations ≈ 0,1 Md€"
   ria:
     valeur: {id: RET-EMP-01, instrument: transferts_actifs, libelle: "Revenu d'incitation à l'activité (300 € + 250 € avec activité) à la place du RSA, de la prime d'activité et de l'ASS", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2029, plein: 2030,
-             montant: {crise: -1.0, prudent: -3.0, median: -5.0, optimiste: -7.0}}
+             montant: {crise: -3.2, prudent: -4.2, median: -4.2, optimiste: -4.2}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Le travail gagnant (09/01/2026), p. 23 ; encadrement : RSA ≈ 16 Md€, prime d'activité ≈ 10,5 Md€, ASS ≈ 1,5 Md€ ; montants du RIA inférieurs au RSA de base (≈ 650 € pour une personne seule) pour qui n'a pas d'activité, plus forts avec activité ; transition et non-recours en baisse : économie nette incertaine"
-    note: "La hausse de la pauvreté n'est pas mesurée ici."
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique, outils/openfisca_mesures.py, DÉCISION d'Adrien) ; crise : 75 % pour les économies (transition, contentieux). Emplois : par le gain à travailler (micro, offre.micro_emploi) pour les transferts. Ancien montant : {crise: -1.0, prudent: -3.0, median: -5.0, optimiste: -7.0}. La hausse de la pauvreté n'est pas mesurée ici."
   plafond_aides:
     valeur: {id: RET-EMP-02, instrument: transferts_actifs, libelle: "Aides sociales plafonnées à 70 % du SMIC net (compte social unique)", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2029, plein: 2030,
-             montant: {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.0}}
+             montant: {crise: -2.6, prudent: -3.5, median: -3.5, optimiste: -3.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique, outils/openfisca_mesures.py, DÉCISION d'Adrien) ; crise : 75 % pour les économies (transition, contentieux). Emplois : par le gain à travailler (micro, offre.micro_emploi) pour les transferts. Ancien montant : {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.0}."
     source: "Le travail gagnant (09/01/2026), p. 29 ; encadrement : ménages sans activité dont les aides cumulées dépassent ≈ 1 000 € : quelques centaines de milliers (familles nombreuses, aides au logement)"
   assurance_chomage:
     valeur: {id: RET-EMP-03, instrument: transferts_actifs, libelle: "Assurance chômage resserrée (ruptures conventionnelles, dégressivité au-dessus de 3 000 €, fin au troisième refus) et règles de juin 2024", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,

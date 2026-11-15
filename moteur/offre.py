@@ -364,6 +364,57 @@ def capital_entreprises_par_point(p: Parametres, s: str) -> float:
 
 
 # ------------------------------------------------------------------------------------------------ offre : ensemble
+_MICRO: dict | None = None
+
+
+def micro_emploi() -> dict:
+    """Emplois et effet sur le solde, par mesure et par scénario, calculés par la microsimulation (gain à travailler
+    de chaque personne en emploi, OpenFisca sur la population synthétique : outils/openfisca_mesures.py) :
+    {identifiant: {scénario: (emplois, budget Md€)}}."""
+    global _MICRO
+    if _MICRO is None:
+        import csv
+        from .parametres import RACINE
+        _MICRO = {}
+        f = RACINE / "parametres" / "donnees" / "micro_emploi_2026.csv"
+        if f.exists():
+            with f.open(encoding="utf-8") as g:
+                for l in csv.DictReader(g):
+                    _MICRO.setdefault(l["mesure"], {})[l["scenario"]] = (float(l["emplois"]), float(l["budget_md"]),
+                                                                          float(l["statique_md"]))
+    return _MICRO
+
+
+def _micro(p: Parametres, s: str, groupes: dict, annees, vit: float) -> dict:
+    """Phase F4 : emplois venus de l'inactivité par le gain à travailler (microsimulation) pour les transferts aux
+    actifs codés dans OpenFisca, à la place de l'élasticité agrégée ; montée comme les autres effets d'offre, au
+    profil de la mesure. Valeur pour le solde : prélèvements payés et aides évitées par emploi (micro), suivant les
+    salaires ; PIB : valeur ajoutée par emploi."""
+    table = micro_emploi()
+    w = sq.salaires(p, s)
+    va = p.val("offre.valeur_ajoutee_emploi_micro")
+    emplois = {t: 0.0 for t in annees}
+    budget = {t: 0.0 for t in annees}
+    for ident, ms in groupes.items():
+        e_s, b_s, statique = table[ident][s]
+        tot = {t: sum(m.valeurs.get(t, 0.0) for m in ms) for t in annees}
+        plein = sum(tot.get(t, 0.0) for t in range(2032, 2037)) / 5
+        if abs(plein) < 1e-9:
+            continue
+        # part de la mesure appliquée dans ce scénario : montant du moteur (risque juridique, transition compris) /
+        # effet statique de la micro (mesure appliquée en entier) ; 1 si la micro ne donne pas d'effet statique
+        budget_moteur = sum((m.valeurs.get(t, 0.0) if m.poste == "recettes" else -m.valeurs.get(t, 0.0))
+                            for m in ms for t in range(2032, 2037)) / 5
+        k = max(0.0, min(1.5, budget_moteur / statique)) if abs(statique) > 0.05 else 1.0
+        cumul = 0.0
+        for t in annees:
+            cumul += vit * (k * e_s * max(0.0, min(1.5, tot[t] / plein)) - cumul)
+            emplois[t] += cumul
+            budget[t] += (b_s / e_s * cumul if abs(e_s) > 100 else 0.0) * w[max(t, 2029)] / w[2029]
+    return {"emplois": emplois, "budget": budget,
+            "pib": {t: emplois[t] * va * w[max(t, 2029)] / w[2029] / 1e9 for t in annees}}
+
+
 def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 2028)) -> dict:
     """Effets d'offre d'une liste de mesures dans le scénario s.
 
@@ -374,8 +425,16 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
     e = sq.effectifs(p, s)
     annees = (*annees_avant, *ANNEES)
     cles = {}
+    groupes_micro = {}
+    table = micro_emploi() if p.val("offre.micro_emploi") else {}
     for m in mesures:
         instrument = m.instrument or ("investissement_public" if (m.poste == "investissement" and m.nature == "mesure") else "")
+        ident = m.nom.split(" — ", 1)[0]
+        # transferts codés dans OpenFisca (avec ou sans instrument déclaré) : emplois par la microsimulation (F4)
+        if ident in table and m.nature == "mesure" and (instrument == "transferts_actifs" or (
+                not instrument and m.poste in ("famille", "pauvrete", "logement", "aah_invalidite"))):
+            groupes_micro.setdefault(ident, []).append(m)
+            continue
         if not instrument:
             continue
         if instrument not in INSTRUMENTS:
@@ -482,9 +541,20 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
         out["detail"][f"{i}:{inc}" if inc else i] = {"points_pib": pts, "effet_pib_pct": effet}
     part_rec = {t: rec[max(t, 2029)] / y[max(t, 2029)] for t in annees}
     div = sq.dividende_programme(p, s, {t: dpib_productivite[t] for t in ANNEES})  # profil du programme (A1)
+    valeurs = {t: (out["dpib"][t] - dpib_productivite[t]) * part_rec[t] + dpib_productivite[t] * div[max(t, 2029)]
+               for t in annees}
+    if groupes_micro:
+        mi = _micro(p, s, groupes_micro, annees, vit)
+        canal = "Offre : gain à travailler (microsimulation)"
+        out["emplois"][canal] = {t: mi["emplois"][t] for t in ANNEES}
+        for t in ANNEES:
+            out["actifs"][t] += mi["emplois"][t]  # venus de l'inactivité
+        for t in annees:
+            out["dpib"][t] += mi["pib"][t]
+            valeurs[t] += mi["budget"][t]  # prélèvements et aides évitées, calculés par la micro (pas la part des recettes)
+        out["detail"]["micro_emploi"] = mi
     out["mesure"] = Mesure("Effet d'offre : impôts et transferts, effet durable sur le PIB (canal commun)", "recettes",
-                           {t: (out["dpib"][t] - dpib_productivite[t]) * part_rec[t]
-                            + dpib_productivite[t] * div[max(t, 2029)] for t in annees}, nature="effet_macro")
+                           valeurs, nature="effet_macro")
     return out
 
 

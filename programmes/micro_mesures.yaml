@@ -1,0 +1,133 @@
+# Phase F2 : mesures des programmes codées dans OpenFisca-France et calculées sur la population synthétique
+# (outils/openfisca_mesures.py). Clé : programme, puis identifiant de la mesure (comme dans parametres.yaml ; une
+# ligne couvre toutes les mesures de même identifiant). Chaque entrée : une liste d'opérations, et une note qui dit la
+# lecture retenue quand le programme ne donne pas tout (DÉCISION, à valider par Adrien).
+#
+# Opérations :
+#   parametre : {chemin, valeur | facteur | ajout}  paramètre d'OpenFisca changé à partir de 2020
+#   tranche   : {bareme, seuil, taux}                tranche ajoutée à un barème
+#   variable  : {nom, facteur}                       variable d'OpenFisca multipliée (prestation revalorisée)
+#   formule   : {nom, ...}                           règle nouvelle écrite dans outils/openfisca_mesures.py
+# Non codées ici (raison dans docs/microsimulation.md) : conditions de nationalité ou de résidence (la population
+# n'a pas cette information), patrimoine (ISF, taxe Zucman, IFI), niches non nommées, mesures sans barème publié.
+
+bertrand:
+  BER-FIS-01:
+    operations: [{parametre: {chemin: "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate", valeur: 0.09}}]
+  BER-FIS-02:
+    operations: [{parametre: {chemin: taxation_capital.prelevement_forfaitaire.partir_2018.taux_prelevement_forfaitaire_rev_capital_eligibles_pfu_interets_dividendes_etc, ajout: 0.02}}]
+    note: "Part impôt sur le revenu du prélèvement forfaitaire unique : 12,8 % → 14,8 %."
+
+tondelier:
+  REC-10:
+    operations: [{tranche: {bareme: impot_revenu.bareme_ir_depuis_1945.bareme, seuil: 250000, taux: 0.60}}]
+  REC-11:
+    operations: [{parametre: {chemin: "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate", valeur: 0.09}}]
+  REC-13:
+    operations: [{parametre: {chemin: impot_revenu.calcul_revenus_imposables.deductions.abatpen.taux, valeur: 0.0}}]
+  COT-04:
+    operations:
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.deductible, ajout: 0.01}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: 0.01}}
+    note: "CSG d'activité +1 point (déductible). Les autres revenus (+1 point sur tous les revenus) : pensions et capital non changés ici, faute de lecture sûre de la mesure sur eux ; écart attendu."
+  REC-20/21:
+    operations:
+      - {parametre: {chemin: taxation_capital.prelevement_forfaitaire.partir_2018.taux_prelevement_forfaitaire_rev_capital_eligibles_pfu_interets_dividendes_etc, ajout: 0.03}}
+      - {parametre: {chemin: taxation_capital.prelevements_sociaux.csg.taux_deductible.revenus_du_patrimoine, ajout: 0.03}}
+  PRE-11:
+    operations: [{variable: {nom: aide_logement, facteur: 1.10}}]
+  PRE-12:
+    operations: [{formule: {nom: af_premier_enfant, part_bmaf: 0.16}}]
+    note: "Lecture du chiffrage du programme : la moitié du montant pour deux enfants (32 % de la base mensuelle), modulée selon les revenus comme les allocations familiales."
+  PRE-13:
+    operations: [{parametre: {chemin: prestations_sociales.prestations_etat_de_sante.invalidite.aah.montant, ajout: 250}}]
+  PRE-10:
+    operations:
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_m.montant_de_base_du_rsa, facteur: 1.20}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_cond.age_minimum_allocataire, valeur: 18}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_cond.age_pac, valeur: 18}}
+    note: "Garantie d'autonomie à 50 % du SMIC net (≈ 790 € contre ≈ 660 € : + 20 %) à la place du RSA, dès 18 ans. Recours : celui du RSA (le programme dit « sans contrepartie », le recours pourrait être plus haut)."
+
+lisnard:
+  LIS-SOC-01:
+    operations: [{parametre: {chemin: impot_revenu.calcul_impot_revenu.plaf_qf.plafond_avantages_procures_par_demi_part.general, valeur: 1000000000.0}}]
+  LIS-ECO-03:
+    operations: [{formule: {nom: plafond_aides, plafond_mensuel: 943, sans_activite_seulement: true}}]
+    note: "« 500 € d'écart entre le SMIC et l'assistance » : aides sociales (RSA, prime d'activité, aides au logement, prestations familiales) d'une famille sans revenu d'activité plafonnées à SMIC net − 500 € (1 443 − 500 = 943 € par mois, SMIC de 2026 d'OpenFisca). Fusion en une allocation unique : pas de barème publié, seul le plafond est codé."
+  LIS-ECO-03b:
+    operations: [{formule: {nom: condition_nationalite, groupe: hors_ue_recents, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
+    note: "Prestations non contributives réservées aux résidents depuis cinq ans : familles étrangères hors UE arrivées depuis moins de cinq ans (le versement à l'étranger n'est pas dans la population)."
+
+roussel:
+  PCF-RET-03:
+    operations:
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.remplacement.pensions_retraite_invalidite.deductible.taux_plein, valeur: 0.0}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.remplacement.pensions_retraite_invalidite.deductible.taux_median, valeur: 0.0}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.remplacement.pensions_retraite_invalidite.deductible.taux_reduit, valeur: 0.0}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.remplacement.pensions_retraite_invalidite.imposable.taux_plein, valeur: 0.0}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.remplacement.pensions_retraite_invalidite.imposable.taux_median, valeur: 0.0}}
+  PCF-LOG-02:
+    operations: [{variable: {nom: aide_logement, facteur: 1.05}}]
+    note: "Revalorisation non chiffrée par le programme : 5 %, comme le chiffrage du moteur."
+  PCF-PRE-01:
+    operations:
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_cond.age_minimum_allocataire, valeur: 18}}
+      - {parametre: {chemin: prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_cond.age_pac, valeur: 18}}
+
+melenchon:
+  LFI-PRE-04:
+    operations: [{variable: {nom: aide_logement, facteur: 1.10}}]
+  LFI-PRE-03:
+    operations: [{parametre: {chemin: prestations_sociales.prestations_etat_de_sante.invalidite.aah.montant, valeur: 1700}}]
+    note: "AAH portée à 1 700 € (SMIC net revalorisé du programme) ; plafond de ressources relevé d'autant par la formule d'OpenFisca."
+  LFI-PRE-01:
+    operations: [{formule: {nom: garantie_niveau_vie, seuil_mensuel: 1337}}]
+    note: "Complément qui porte le niveau de vie du ménage (revenu disponible par unité de consommation, après les autres mesures de la même simulation) à 1 337 € par mois ; recours complet (prestation automatique, p. 72)."
+
+le_pen:
+  RN-FIS-03:
+    operations: [{formule: {nom: ir_jeunes, age_max: 29, plafond_smic: 4}}]
+    note: "Foyer dont le déclarant principal a moins de 30 ans et dont le revenu brut global est sous quatre SMIC bruts annuels : impôt sur le revenu nul."
+  RN-FAM-01:
+    operations: [{variable: {nom: asf, facteur: 2.0}}]
+  RN-IMM-01:
+    operations: [{formule: {nom: condition_nationalite, groupe: hors_ue_recents, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
+    note: "« Priorité nationale » : prestations non contributives retirées aux familles étrangères hors UE présentes depuis moins de cinq ans (lecture de la condition d'années de résidence ou d'activité)."
+
+philippe:
+  PHI-FIS-02:
+    operations: [{formule: {nom: ir_naissance, age_enfant_max: 2, plafond: 3000}}]
+    note: "Foyer avec un enfant de moins de 3 ans : impôt sur le revenu annulé jusqu'à 3 000 € (réduction de 3 000 € au-delà), comme le site du 12/11/2026."
+  PHI-SOC-01:
+    operations: [{formule: {nom: allocation_unique, mensuel: 350, remplace: [af, cf, ars, asf, paje_base], sans_perdant: true}}]
+    note: "Lecture proposée (le site ne donne pas de barème) : 350 € par mois et par famille avec enfants, pleine jusqu'au 3e décile de niveau de vie, nulle à la médiane, à la place des allocations familiales, du complément familial, de l'allocation de rentrée scolaire, de l'ASF et de l'allocation de base de la Paje (les « aides trop éparpillées »), sans perdant (chaque famille garde au moins ce qu'elle avait) : − 8,1 Md€, proche du chiffrage du moteur (− 7). Lecture sans garantie (les familles au-dessus de la médiane perdent ces prestations) : + 4,3 Md€. À valider."
+  PHI-SOC-06:
+    operations: [{formule: {nom: rsa_duree, part: 0.45}}]
+    note: "Durée du RSA limitée, sans durée donnée : même lecture que Zemmour (trois ans), mêmes exceptions."
+
+arthaud:
+  ART-FAM-01:
+    operations:
+      - {variable: {nom: af, facteur: 1.012}}
+      - {variable: {nom: ppa, facteur: 1.012}}
+      - {variable: {nom: aide_logement, facteur: 1.012}}
+    note: "Revalorisation de 1,2 % (inflation) des allocations familiales, de la prime d'activité et des aides au logement gelées en 2027."
+
+retailleau:
+  RET-EMP-01:
+    operations: [{formule: {nom: revenu_incitation, base: 300, avec_activite: 250}}]
+    note: "Revenu d'incitation à l'activité à la place du RSA et de la prime d'activité : une famille éligible au RSA reçoit 300 € par mois, 550 € avec une activité, à la place du RSA et de la prime d'activité ; les autres familles gardent la prime d'activité. Lecture à arbitrer : la lecture littérale (toute famille éligible au RSA ou à la prime) coûte 14 Md€, à l'opposé de l'économie annoncée. L'ASS n'est pas dans la population."
+  RET-EMP-02:
+    operations: [{formule: {nom: plafond_aides, plafond_mensuel: 1010}}]
+    note: "Aides sociales d'une famille (RSA, prime d'activité, aides au logement, prestations familiales) plafonnées à 70 % du SMIC net (0,7 × 1 443 ≈ 1 010 € par mois)."
+  RET-IMM-03:
+    operations: [{formule: {nom: condition_nationalite, groupe: hors_ue_recents, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
+    note: "Cinq ans de résidence légale pour les prestations non contributives : familles étrangères hors UE arrivées depuis moins de cinq ans."
+
+zemmour:
+  ZEM-IMM-04:
+    operations: [{formule: {nom: condition_nationalite, groupe: hors_ue, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
+    note: "« Préférence nationale » : prestations familiales, aides au logement, RSA et prime d'activité retirés aux familles étrangères hors UE (les ressortissants de l'UE sont protégés par le droit de l'Union). Application complète : le risque juridique reste dans les scénarios du moteur."
+  ZEM-KNA-04:
+    operations: [{formule: {nom: rsa_duree, part: 0.45}}]
+    note: "RSA limité à trois ans : 45 % des allocataires y sont depuis plus de trois ans (Drees, minima sociaux 2024), tirés au hasard ; exceptions : handicap, parent isolé, 60 ans ou plus (« aptes au travail »)."

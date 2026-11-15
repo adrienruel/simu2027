@@ -91,11 +91,12 @@ philippe_mesures:
     statut: HYPOTHESE
     source: "Même encadrement : 60 % sur les dépenses fiscales des entreprises (≈ 40 Md€ : CIR, taux réduits, suramortissements) et les subventions"
   ir_naissance:
-    valeur: {id: PHI-FIS-02, instrument: travail, incidence: ir, libelle: "Exonération d'impôt sur le revenu trois ans après une naissance (moins de 3 000 € d'impôt), 3 000 € par an pour les autres", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
-             montant: {crise: -3.3, prudent: -3.0, median: -3.0, optimiste: -2.8}}
+    valeur: {id: PHI-FIS-02, enfants: true, instrument: travail, incidence: ir, libelle: "Exonération d'impôt sur le revenu trois ans après une naissance (moins de 3 000 € d'impôt), 3 000 € par an pour les autres", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: -1.6, prudent: -1.5, median: -1.5, optimiste: -1.4}}
     unite: md_eur
     annee_euros: 2026
     statut: SOURCE
+    note: "Montant recalé le 14/11/2026 sur la microsimulation (OpenFisca sur la population synthétique, effet statique au prudent, même écart entre scénarios qu'avant ; outils/openfisca_mesures.py, DÉCISION d'Adrien). Ancien montant : {crise: -3.3, prudent: -3.0, median: -3.0, optimiste: -2.8}."
     source: "Site du candidat (« L'Heure de vérité », 08/10/2026) : coût ≈ 3 Md€ par an ; montée sur trois ans (trois générations de naissances) ; site du 12/11/2026 : exonération pour les ménages du 4e au 6e décile et le début du 7e, réduction de 3 000 € par an pour les familles plus aisées qui travaillent (même périmètre que le chiffrage de 3 Md€)"
   donations:
     valeur: {id: PHI-FIS-04, instrument: successions, libelle: "Plafonds de donation aux enfants et petits-enfants doublés pendant les trois premières années du quinquennat", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2028, fin: 2030,
@@ -304,7 +305,7 @@ philippe_mesures:
     statut: HYPOTHESE
     source: "Encadrement : fonds de souveraineté alimentaire (loi d'orientation agricole de 2025) ; retenues d'eau co-financées par les agences de l'eau"
   ptz_naissance:
-    valeur: {id: PHI-LOG-01, libelle: "Prêt à taux zéro ouvert à chaque naissance", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2030,
+    valeur: {id: PHI-LOG-01, enfants: true, libelle: "Prêt à taux zéro ouvert à chaque naissance", poste: logement, moteur: "bloc:logement", debut: 2028, plein: 2030,
              montant: {crise: 0.4, prudent: 0.3, median: 0.25, optimiste: 0.2}}
     unite: md_eur
     annee_euros: 2026
@@ -438,7 +439,7 @@ philippe_mesures:
     source: "Site (page Comptes publics, 12/11/2026) : durée du RSA limitée, sans autre précision ; encadrement : RSA ≈ 12 Md€ pour ≈ 1,8 million de foyers (DREES, Minima sociaux, édition 2025), une large part y restant plusieurs années ; exceptions attendues (handicap, parents isolés, plus de 60 ans) ; l'alinéa 11 du Préambule de 1946 (droit à des moyens convenables d'existence) borne la mesure"
     note: "Même traitement que la condition de résidence de Le Pen : crise à zéro (mesure censurée ou vidée par les exceptions) ; 3 à 10 % du RSA sinon. Les sortants vers l'emploi ne sont pas comptés en emplois en plus."
   garde_enfants:
-    valeur: {id: PHI-SOC-07, libelle: "« Plan Marshall » pour la garde d'enfants", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2032,
+    valeur: {id: PHI-SOC-07, enfants: garde, libelle: "« Plan Marshall » pour la garde d'enfants", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2032,
              montant: {crise: 1.2, prudent: 0.9, median: 0.7, optimiste: 0.45}}
     unite: md_eur
     annee_euros: 2026

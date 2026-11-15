@@ -1,0 +1,13 @@
+programme,mesure,scenario,emplois,budget_md,statique_md
+le_pen,RN-FIS-03,crise,4137,0.071,-4.544
+le_pen,RN-FIS-03,prudent,6644,0.127,-4.544
+le_pen,RN-FIS-03,median,17340,0.344,-4.544
+le_pen,RN-FIS-03,optimiste,32782,0.65,-4.544
+le_pen,RN-FAM-01,crise,-826,-0.039,-4.202
+le_pen,RN-FAM-01,prudent,1129,-0.012,-4.202
+le_pen,RN-FAM-01,median,5632,0.023,-4.202
+le_pen,RN-FAM-01,optimiste,11269,0.056,-4.202
+le_pen,RN-IMM-01,crise,2046,0.026,1.897
+le_pen,RN-IMM-01,prudent,3639,0.04,1.897
+le_pen,RN-IMM-01,median,9897,0.102,1.897
+le_pen,RN-IMM-01,optimiste,18848,0.192,1.897

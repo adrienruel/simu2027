@@ -92,19 +92,27 @@ def population(p: Parametres, jeu: str = "prudent") -> dict[int, tuple[float, ..
     out = dict(base)
     effet = effet_naissances(p, jeu)
     if effet:
-        fv = p.val("demographie.fecondite_variantes")
-        d_ind = effet * fv["central"] / (fv["fec_haute"] - fv["central"])  # en fraction de l'écart haute − centrale
-        haute, centrale = _projection("fec_haute"), _projection("central")
-        montee = p.val("demographie.natalite_montee")
-        out = {}
-        for t, v in base.items():
-            w = list(v)
-            for a in range(0, max(0, t - 2030) + 1):
-                naissance = t - a
-                k = min(1.0, (naissance - 2030 + 1) / montee)
-                w[a] += (haute[t][a] - centrale[t][a]) * d_ind * k
-            out[t] = tuple(w)
+        ec = ecart_naissances(p, effet)
+        out = {t: tuple(x + ec[t][a] for a, x in enumerate(v)) for t, v in base.items()}
     cache[cle] = out
+    return out
+
+
+def ecart_naissances(p: Parametres, effet: float) -> dict[int, list[float]]:
+    """Écart de population par âge et par année dû à une variation relative des naissances (effet, à plein effet),
+    en montée sur demographie.natalite_montee années à partir de 2030 : fraction de l'écart entre les projections de
+    fécondité haute et centrale de l'Insee (mêmes naissances supplémentaires, puis même survie)."""
+    fv = p.val("demographie.fecondite_variantes")
+    d_ind = effet * fv["central"] / (fv["fec_haute"] - fv["central"])  # en fraction de l'écart haute − centrale
+    haute, centrale = _projection("fec_haute"), _projection("central")
+    montee = p.val("demographie.natalite_montee")
+    out = {}
+    for t, v in centrale.items():
+        w = [0.0] * len(v)
+        for a in range(0, max(0, t - 2030) + 1):
+            k = min(1.0, (t - a - 2030 + 1) / montee)
+            w[a] = (haute[t][a] - centrale[t][a]) * d_ind * k
+        out[t] = w
     return out
 
 

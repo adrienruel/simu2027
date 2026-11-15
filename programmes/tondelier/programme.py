@@ -268,8 +268,12 @@ class Tondelier:
                     continue
                 x["_montant"] = x["montant"][s]
                 serie = self._serie(x, idx)
+                # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
+                from moteur import micro as _micro
+                serie = {t: v * _micro.indice(p, self.nom, x["id"], t) for t, v in serie.items()}
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=nom.split(".")[1],
-                                    instrument=x.get("instrument", ""), incidence=x.get("incidence", "")))
+                                    instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
+                                    enfants=x.get("enfants")))
                 if x.get("fp"):
                     liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
                                         {t: x.get("fp_taux", part_fp) * v for t, v in serie.items()}, nature="mesure",
@@ -408,10 +412,14 @@ class Tondelier:
             liste.extend(self.ecologie(p, s))
             # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
             from moteur import canaux_declares
-            decl = canaux_declares.effets(self, p, s)
+            decl = canaux_declares.effets(self, p, s, mesures_programme=liste)
             liste.extend(decl["mesures"])
             for t in ANNEES:
                 ctx_s[s]["pib"][t] += decl["pib"][t]
+                # naissances (canal commun) : adultes en plus après 2048, en emploi et au chômage aux taux moyens
+                ctx_s[s]["emploi"][t] += decl["emplois"][t]
+                if decl["emplois"][t]:
+                    ctx_s[s]["emplois_canaux"][t][decl["canal_demographie"]] = decl["emplois"][t]
             if decl["taux_supplementaire"]:
                 ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
             ctx_s[s].update(bouclage.contexte(p, s, rep))  # phase E : inflation et taux bouclés

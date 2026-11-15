@@ -388,9 +388,13 @@ class ProgrammeSimple:
                 x = dict(par.valeur)
                 x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
                 serie = self.serie(x, idx)
+                # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
+                from moteur import micro as _micro
+                serie = {t: v * _micro.indice(p, self.nom, x["id"], t) for t, v in serie.items()}
                 court = nom.split(".")[1]
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
-                                    instrument=x.get("instrument", ""), incidence=x.get("incidence", "")))
+                                    instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
+                                    enfants=x.get("enfants")))
                 if x.get("fp"):
                     # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS
                     # pensions ni impôt sur le revenu, ≈ 0,39 ; relecture neutre du 11/11/2026)
@@ -506,17 +510,17 @@ class ProgrammeSimple:
             d_autre = getattr(self, "pib_en_plus", {}).get((id(p), s), {})
             # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
             from . import canaux_declares
-            decl = canaux_declares.effets(self, p, s)
+            decl = canaux_declares.effets(self, p, s, mesures_programme=liste)
             liste.extend(decl["mesures"])
             # postes publics : leur production entre au PIB à leur coût quand le multiplicateur s'est éteint (A3)
             d_npm = production_non_marchande(p, s, cout_postes, TOUTES) if actif else {t: cout_postes[t] for t in TOUTES}
             details_npm = d_npm
             pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + d_autre.get(t, 0.0) + decl["pib"][t] + d_npm[t]
                    + hors_conj[t] * va * idx["salaire"][t] / 1e9 for t in ANNEES}
-            # variante migratoire (phase B2) : personnes en emploi en plus ou en moins, hors du chômage (actifs)
+            # variante migratoire (phase B2) et naissances : personnes en emploi en plus ou en moins, hors du chômage
             if any(decl.get("emplois", {}).values()):
                 for t in ANNEES:
-                    canaux[t]["Démographie : solde migratoire"] = decl["emplois"][t]
+                    canaux[t][decl.get("canal_demographie", "Démographie : solde migratoire")] = decl["emplois"][t]
                     actifs[t] += decl["actifs"][t]
             demploi = {t: sum(canaux[t].values()) for t in ANNEES}
             chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100

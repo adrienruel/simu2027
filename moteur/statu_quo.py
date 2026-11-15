@@ -61,10 +61,13 @@ def population(p: Parametres, s: str) -> dict[int, tuple[float, ...]]:
     de la variante migratoire (phase B2, moteur/migrations.py) : p._choc_population = {année: écart par âge}."""
     from .demographie import _projection
     base = _projection(_v(p, "demographie.scenario_fecondite", s))
-    choc = p.__dict__.get("_choc_population")
-    if not choc:
-        return base
-    return {t: tuple(v[a] + choc[t][a] for a in range(len(v))) if t in choc else v for t, v in base.items()}
+    out = base
+    # p._choc_naissances : naissances en plus ou en moins d'un programme (moteur/naissances.py), sans les corrections
+    # propres aux immigrés (emploi et salaire relatifs)
+    for choc in (p.__dict__.get("_choc_population"), p.__dict__.get("_choc_naissances")):
+        if choc:
+            out = {t: tuple(v[a] + choc[t][a] for a in range(len(v))) if t in choc else v for t, v in out.items()}
+    return out
 
 
 def _emploi_migrants_productif(p: Parametres, t: int) -> float:

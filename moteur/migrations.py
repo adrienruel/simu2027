@@ -95,15 +95,21 @@ def ecart_population(p: Parametres, s: str, decl: dict) -> dict[int, list[float]
     return out
 
 
-def effets(p: Parametres, s: str, decl: dict) -> dict:
-    """Écarts au statu quo (Md€ de 2026, personnes) : recettes, blocs, PIB, emploi, actifs."""
+def effets(p: Parametres, s: str, decl: dict | None, effet_naissances: float = 0.0) -> dict:
+    """Écarts au statu quo (Md€ de 2026, personnes) : recettes, blocs, PIB, emploi, actifs. decl : variation du
+    solde migratoire (ou None) ; effet_naissances : variation relative des naissances du programme (canal commun,
+    moteur/naissances.py), comptée dans la même population recalculée."""
     cache = p.__dict__.setdefault("_cache", {})
-    v = variation(p, s, decl)
-    cle = ("migrations", s, v, decl.get("debut", 2028), decl.get("montee", 1))
+    v = variation(p, s, decl) if decl else 0.0
+    cle = ("migrations", s, v, (decl or {}).get("debut", 2028), (decl or {}).get("montee", 1), round(effet_naissances, 9))
     if cle in cache:
         return cache[cle]
+    from .demographie import ecart_naissances
     q = p.avec({})
-    q._choc_population = ecart_population(p, s, decl)
+    if decl:
+        q._choc_population = ecart_population(p, s, decl)
+    if effet_naissances:
+        q._choc_naissances = ecart_naissances(p, effet_naissances)
     e0, e1 = sq.effectifs(p, s), sq.effectifs(q, s)
     y0, y1 = sq.pib(p, s), sq.pib(q, s)
     r0, r1 = sq.recettes(p, s), sq.recettes(q, s)
@@ -122,8 +128,9 @@ def effets(p: Parametres, s: str, decl: dict) -> dict:
         blocs[t]["defense_ue"] = 0.0
     for t in ANNEES:
         ref = sum(pop0[t][a] * poids[a] for a in range(AGE_MAX + 1))
-        blocs[t]["sante"] = blocs[t].get("sante", 0.0) + san[t] * sum(q._choc_population[t][a] * poids[a]
-                                                                    for a in range(AGE_MAX + 1)) / ref
+        ecart = [sum(c[t][a] for c in (q.__dict__.get("_choc_population"), q.__dict__.get("_choc_naissances")) if c)
+                 for a in range(AGE_MAX + 1)]
+        blocs[t]["sante"] = blocs[t].get("sante", 0.0) + san[t] * sum(ecart[a] * poids[a] for a in range(AGE_MAX + 1)) / ref
     out = {
         "recettes": {t: r1[t] - r0[t] for t in ANNEES},
         "blocs": blocs,
@@ -132,6 +139,43 @@ def effets(p: Parametres, s: str, decl: dict) -> dict:
         "actifs": {t: (e1[t]["emploi"] + e1[t]["chomeurs"]) - (e0[t]["emploi"] + e0[t]["chomeurs"]) for t in ANNEES},
         "population": {t: e1[t]["total"] - e0[t]["total"] for t in ANNEES},
         "variation_solde": v,
+        "ecart_naissances": q.__dict__.get("_choc_naissances"),
     }
     cache[cle] = out
+    return out
+
+
+def population_programme(prog, p: Parametres, s: str) -> dict[int, tuple[float, ...]]:
+    """Population du programme année par année (personnes par âge) : projection de l'Insee du scénario, effet du
+    programme sur les naissances (demographie.population avec ses paramètres) et écart migratoire déclaré
+    (ecart_population). Sert de dénominateur aux taux d'emploi et d'activité publiés (14/11/2026, remarque
+    d'Adrien : le taux d'emploi d'un programme qui réduit l'immigration était rapporté à la population du statu quo)."""
+    from . import canaux_declares
+    from .demographie import population as population_naissances
+    base = sq.population(p, s)
+    pt = getattr(prog, "pt", None)
+    if pt is None and getattr(prog, "nom", None) == "ecologie_de_droite":  # ses paramètres sont ceux par défaut
+        pt = Parametres(programme="ecologie_de_droite")
+    try:  # effet sur les naissances : seulement les programmes qui déclarent une politique familiale chiffrée
+        nais = population_naissances(pt, s) if pt is not None and pt.val("demographie.active") else None
+    except KeyError:
+        nais = None
+    sans = sq.population(pt, s) if nais is not None else None
+    try:
+        d = canaux_declares.declares(prog) if pt is not None else {}
+    except (AttributeError, ValueError):
+        d = {}
+    mig = ecart_population(p, s, d["solde_migratoire"]) if "solde_migratoire" in d else None
+    # naissances du canal commun (moteur/naissances.py), rangées par canaux_declares.effets pendant la simulation
+    nc = getattr(prog, "ecart_naissances", {}).get((id(p), s))
+    out = {}
+    for t, v in base.items():
+        w = list(v)
+        if nais is not None:
+            w = [x + nais[t][a] - sans[t][a] for a, x in enumerate(w)]
+        if mig is not None and t in mig:
+            w = [x + mig[t][a] for a, x in enumerate(w)]
+        if nc is not None:
+            w = [x + nc[t][a] for a, x in enumerate(w)]
+        out[t] = tuple(w)
     return out

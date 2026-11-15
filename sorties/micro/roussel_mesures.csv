@@ -1,0 +1,4 @@
+programme,mesure,openfisca_md,moteur_md,ecart_pct,emplois_milliers,budget_emploi_md,d_rsa,d_ppa,d_asf,d_aide_logement,d_af,d_aah,d_impot_revenu,d_csg,note
+roussel,PCF-RET-03,-23.18,-23.1,0,2.7,0.02,-0.0,0.21,0.0,0.01,0.0,0.0,3.97,-26.91,
+roussel,PCF-LOG-02,-0.96,-0.8,20,-3.7,-0.1,-0.0,0.19,0.0,0.75,0.0,0.0,-0.0,0.02,"Revalorisation non chiffrée par le programme : 5 %, comme le chiffrage du moteur."
+roussel,PCF-PRE-01,-1.55,-2.0,-23,-45.4,-1.07,1.52,-0.12,0.0,0.02,0.0,0.0,-0.0,0.02,

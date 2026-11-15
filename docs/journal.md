@@ -1427,3 +1427,107 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   (`bouclage.emplois_mesange`) au lieu de la loi d'Okun : retour à l'équilibre pour la dépense.
 - `test_offre.test_interrupteur` passé sans les profils. Suite complète : verte. Récapitulatif et effet sur les
   14 trajectoires : `docs/bouclage.md` (réécrit).
+
+## 14/11/2026 (soir) — Phase F1 : population synthétique et premier calage d'OpenFisca
+
+- Décision d'Adrien : base micro = population synthétique calée sur des tableaux publics (remplaçable par l'ERFS).
+  `outils/population_synthetique.py` : 20 000 ménages (≈ 43 000 personnes), 50 marges de calage atteintes à 1,3 %
+  près ; paramètres dans `parametres/commun/microsimulation.yaml` (nouveau fichier commun).
+- `outils/openfisca_population.py` : législation 2026, recours au RSA et à la prime d'activité (Drees 2026).
+  Impôt sur le revenu 106,3 Md€ contre 104,0 au PLF (+ 2 %) ; prime d'activité − 9 %, prestations d'entretien
+  − 11 %, aides au logement − 21 %, RSA − 44 %, AAH + 9 %. Critère de sortie atteint pour l'IR seulement ; diagnostic
+  et pistes (calage sur les effectifs de bénéficiaires) dans `docs/microsimulation.md`.
+- `tests/test_microsimulation.py` (5 tests, 37 s).
+
+## 14/11/2026 (soir) — Taux d'emploi rapporté à la population du programme
+
+- Remarque d'Adrien : Lisnard affichait un chômage bas (7,2 % en 2050) mais un taux d'emploi bas (66,3 %, statu quo
+  70,1 %). Cause : le taux d'emploi publié (`taux_emploi_18_66`) divisait l'emploi du programme, qui perd les
+  immigrés en moins, par la population du statu quo. Le cœur du moteur était cohérent (la variante migratoire
+  recalcule déjà le statu quo année par année avec la population du programme) ; seul l'indicateur publié ne l'était pas.
+- `migrations.population_programme` : population du programme année par année (projection, naissances, écart
+  migratoire). Taux d'emploi et nouveau taux d'activité des 18-66 ans rapportés à elle ; colonne `population_millions`.
+  Lisnard 2050 au prudent : taux d'emploi 72,5 %, activité 78,2 % (statu quo 70,1 et 76,3) ; Zemmour 71,9 ;
+  Philippe 70,9 ; Le Pen 69,5.
+
+## 14/11/2026 (soir) — Naissances : canal commun à tous les programmes
+
+- Décision d'Adrien : l'effet des mesures sur les naissances s'applique à tous (`moteur/naissances.py`, option
+  `demographie.naissances_communes`). Avant, seul Écologie de droite l'avait (ses ménages types et ses crèches).
+- Soutien monétaire moyen par enfant mineur (mesures du poste famille, ou `enfants: true` pour l'impôt : quotient
+  familial déplafonné de Lisnard, crédit d'impôt par enfant de Mélenchon, exonération après une naissance et prêt à
+  taux zéro de Philippe) × semi-élasticité commune (1 % pour 100 € par an en prudent) ; mesures d'accueil du jeune
+  enfant (`enfants: garde` : Mélenchon, Glucksmann, Philippe, Retailleau) par les places (coût Onape) et l'effet des
+  crèches. Aidants de Glucksmann et construction des places de Mélenchon exclus (`enfants: false`).
+- La population recalculée (migrations.effets, avec la variante migratoire) porte prestations, école, santé, puis
+  l'emploi après 18 ans ; `population_programme` la publie (Écologie de droite compris : − 0,56 million en 2050).
+- Naissances au prudent : Philippe + 8,5 %, Mélenchon + 8,5 %, Tondelier + 6,5 %, Lisnard + 3,0 %, Glucksmann
+  + 1,5 %, Zemmour − 1,6 %. Déficit 2037 : + 0,18 point pour Philippe et Mélenchon, + 0,13 Tondelier, + 0,06 Lisnard.
+
+## 14/11/2026 (soir) — Phase F1 : calage sur les effectifs de bénéficiaires
+
+- Décision d'Adrien : second calage des poids sur les effectifs publiés (Drees, Cnaf), OpenFisca dans la boucle
+  (`openfisca_population.indicateurs`). Effectifs atteints ; écarts restants sur les montants moyens : IR + 1 %,
+  prestations d'entretien − 8 %, aides au logement − 11 %, RSA − 15 % (cible corrigée : 12,4 Md€ d'allocations, Cnaf),
+  prime d'activité + 13 %, AAH + 7 %.
+- Recours : forme en puissance 0,2 du montant (écart nombre / montant du non-recours au RSA, Drees).
+
+## 14/11/2026 (soir) — Phase F2-F3 : premier lot de mesures dans OpenFisca
+
+- `programmes/micro_mesures.yaml` et `outils/openfisca_mesures.py` : 23 mesures de 8 programmes codées (impôt sur le
+  revenu, CSG, quotient familial, APL, AF, ASF, AAH, RSA, garantie d'autonomie) ; effet statique sur la population
+  contre le chiffrage du moteur, et variation du niveau de vie par décile (`sorties/micro_*.csv`).
+- Écarts qui mettent en cause le moteur : tranche à 11 % ramenée à 9 % (− 9,3 contre − 4,5), ASF (base de 1,6 Md€
+  contre 3,1 à la Cnaf), fin de l'abattement des retraités (+ 5,8 contre + 4,0). Écarts qui mettent en cause la micro :
+  garantie au seuil de pauvreté (bas de distribution trop pauvre), capital (pas d'intérêts ni de plus-values).
+- Bogue d'OpenFisca 177 trouvé et corrigé localement (`revenus_non_salarie_nets`).
+
+## 14/11/2026 (soir) — Emploi par le gain à travailler (micro) ; Lisnard et Retailleau codés
+
+- `openfisca_mesures` : contrefactuels « sans travail » et élasticités de participation par tranche de salaire ;
+  emplois et effet sur le solde par mesure et par programme. Retailleau + 251 000 emplois (+ 3,0 Md€), Lisnard
+  + 89 000, Tondelier − 240 000, Mélenchon − 1,05 million (garantie au seuil de pauvreté, taux marginal de 100 %).
+  Le canal agrégé du moteur donne 10 à 40 fois moins. Pas encore dans les trajectoires (F4, à décider).
+- Distribution de la population : pauvreté 15,4 % (Insee 15,4 %), D9/D1 3,53 (3,5) ; niveaux ≈ 12 % trop bas.
+- Garantie de Mélenchon : ménages d'étudiants exclus (− 37 Md€ statique contre − 28 au moteur).
+
+## 14/11/2026 (soir) — Phase F4 (premier pas) : emplois de la micro dans les trajectoires ; montants recalés
+
+- Décision d'Adrien (« envoie tout ») : trois niveaux d'élasticité pour les transferts (`offre.participation_transferts`),
+  emplois de la micro à la place du canal agrégé pour les transferts codés (`offre.micro_emploi`), sept montants
+  recalés sur OpenFisca (tranche à 9 %, ASF, abattement des retraités, revenu d'incitation et plafonds d'aides).
+- Déficit 2037 au prudent : Mélenchon 27,50 → 28,07 ; Tondelier 13,00 → 13,23 ; Bertrand 9,32 → 9,49 ; Le Pen
+  13,18 → 13,28 ; Retailleau 10,39 → 10,22 ; Lisnard 14,24 → 14,21.
+
+## 14/11/2026 (soir) — Nationalité dans la population ; conditions de nationalité et RSA limité dans le temps
+
+- `microsimulation.nationalite` ; règles `condition_nationalite` et `rsa_duree` ; Zemmour (2 mesures), Le Pen,
+  Retailleau, Lisnard, Philippe codés. Emplois entrés au prorata du montant du moteur (risque juridique compris).
+- Déficit 2037 au prudent : Mélenchon 28,07 → 27,91 (emplois de la garantie au prorata : 28 / 37), autres ≤ 0,03.
+
+## 14/11/2026 (soir) — Allocation unique de Philippe ; bilan de la micro
+
+- `allocation_unique` : 350 € par mois et par famille, pleine jusqu'au 3e décile, nulle à la médiane, à la place des
+  prestations familiales, sans perdant : − 8,1 Md€ (moteur − 7). Sans garantie : + 4,3 Md€. Lecture à valider.
+- Part des arrivés récents (30 %) documentée (premiers titres de la DGEF). Bilan : `docs/microsimulation.md`.
+
+## 14/11/2026 (nuit) — Vieillissement statique ; recettes d'IR et de CSG de la micro dans le moteur
+
+- `outils/vieillissement.py` (un processus par programme, ou par année : mémoire) ; `moteur/micro.py` et option
+  `microsimulation.recettes_vieillies` ; trois montants recalés (LIS-SOC-01, PCF-RET-03, PHI-FIS-02).
+- Pauvreté par programme et par année dans `sorties/micro_vieillissement.csv`. Déficit 2037 au prudent : Philippe
+  − 0,07 ; Roussel + 0,06 ; Lisnard + 0,03.
+
+## 15/11/2026 (nuit) — Comparateur : pauvreté et déciles ; profil de salaire par âge ; population d'entreprises
+
+- Profil de salaire par âge interpolé (le salaire des 25-29 ans dépassait celui des 30-34 ans) : IR moyen des foyers
+  de 25-29 ans 1 996 → 1 431 €. Seuil du test des marges du calage à 0,35 (RSA des couples sans enfant + 30 %).
+- Vérification de l'impôt des moins de 30 ans : les salariés de 18-24 ans gagnaient 23 200 € imposables par an en
+  moyenne, plus du double du revenu salarial de l'Insee (10 170 € net en 2023). Le rang de salaire suit désormais le
+  revenu salarial annuel par âge (`microsimulation.profil_revenu_salarial_age`, volume de travail compris) au lieu du
+  salaire en EQTP : 19 800 € (reste élevé : apprentis et jobs d'étudiants, exonérés d'IR, ne sont pas distingués).
+  IR des foyers de moins de 30 ans sous quatre Smic (RN-FIS-03) : 5,3 → 4,2 Md€ (Montaigne revalorisé : 4,1 sans
+  plafond). IR total 105,5 → 103,6 Md€ (cible 104).
+- `export_comparaison.redistribution()` : `sorties/comparaison_redistribution*.csv` (noms du comparateur) ; section
+  « Pauvreté et inégalités » du comparateur (tableau par programme, barres par décile).
+- `outils/population_entreprises.py` et `entreprises_secteurs_tailles.csv` (Ésane 2023) : voir `docs/microsimulation.md`.

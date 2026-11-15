@@ -1,0 +1,198 @@
+# Phase F de la roadmap : base micro (population synthétique de ménages) et calage d'OpenFisca sur les comptes.
+# DÉCISION d'Adrien du 14/11/2026 : population synthétique construite et calée sur des tableaux publics (Insee,
+# DGFiP, Cnaf, Drees), remplaçable plus tard par une vraie enquête (ERFS, EFL) si l'accès est obtenu.
+# Générateur : outils/population_synthetique.py ; calcul : outils/openfisca_population.py ; docs/microsimulation.md.
+
+microsimulation:
+  taille_echantillon:
+    valeur: 20000
+    unite: sans_unite
+    statut: DECISION
+    note: "Nombre de ménages tirés (≈ 45 000 personnes). Assez pour des déciles stables (2 000 ménages par décile) ; OpenFisca les calcule en moins d'une minute. Graine fixe : 2027."
+  menages_2026:
+    valeur: 31.4
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Insee, recensement 2021 : 30,6 millions de ménages (résidences principales) au 1er janvier 2021, 66,2 millions de personnes"
+    note: "En millions. + 0,5 % par an de 2021 à 2026 (rythme des estimations annuelles du parc de logements), soit 30,6 × 1,026."
+  structure_menages:
+    valeur: {seul: 0.38, couple_sans_enfant: 0.25, couple_avec_enfants: 0.24, monoparentale: 0.09, complexe: 0.04}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, Ménages, couples et familles (2021) : 38 % de ménages d'une seule personne, 49 % de couples dont 24 % avec enfants, 9 % de familles monoparentales (recensement 2021)"
+    note: "Ménages complexes (4 %, par différence) : comptés comme des couples sans enfant avec un adulte de plus (enfant majeur ou parent hébergé), DÉCISION faute de détail. Enfants sans limite d'âge, comme au recensement."
+  enfants_par_famille:
+    valeur: {"1": 0.43, "2": 0.36, "3": 0.16, "4": 0.05}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Insee Focus n° 249 (2021) : 21 % de familles nombreuses (trois enfants ou plus) ; Insee, France portrait social 2023 : un quart des familles nombreuses ont quatre enfants ou plus"
+    note: "Partage entre un et deux enfants estimé (≈ 45 / 38 parmi les familles avec mineurs) ; recalé ensuite par le calage sur la population par âge."
+  sortie_menages_ordinaires:
+    valeur: {"75-84": 0.04, "85+": 0.15, autres: 0.006}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Insee : 66,2 millions de personnes en ménages ordinaires sur 67,4 millions d'habitants (2021), soit 1,2 million hors ménages (Ehpad, foyers, internats, casernes)"
+    note: "Part de chaque âge qui vit hors ménage ordinaire (absente de la population synthétique) : surtout les grands âges (Ehpad, ≈ 600 000 résidents)."
+  statut_occupation:
+    valeur: {proprietaire: 0.576, locataire_prive: 0.228, locataire_social: 0.176, loge_gratuitement: 0.020}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee-SDES, estimations annuelles du parc de logements : au 1er janvier 2025, 22,8 % des résidences principales occupées par des locataires de bailleurs privés et 17,6 % par des locataires de bailleurs publics ; Insee Focus n° 309 : 57,2 % de propriétaires en 2023"
+    note: "Logés gratuitement et autres : par différence. Propriétaires plus fréquents avec l'âge, locataires du parc social plus fréquents dans le bas de la distribution des revenus et chez les familles monoparentales (Insee Première n° 2047)."
+  loyer_m2:
+    valeur: {social: 6.8, prive: 13.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "SDES, RPLS : loyer moyen du parc social conventionné 6,52 €/m² au 1er janvier 2024 (+ 3,8 % sur un an) ; Insee : 60 % des locataires dans le secteur libre, 40 % dans le social"
+    note: "€/m² par mois en 2026. Social : 6,52 × 1,04 (deux revalorisations). Privé : hypothèse (moyenne nationale des observatoires des loyers, ≈ 2 fois le social) ; à recaler sur les aides au logement. Surface : 45 m² pour une personne, + 15 m² par personne, plafonnée à 100 m²."
+  zones_apl:
+    valeur: {zone_1: 0.15, zone_2: 0.45, zone_3: 0.40}
+    unite: sans_unite
+    statut: DECISION
+    note: "Zone 1 : Paris et petite couronne ; zone 2 : grandes agglomérations ; zone 3 : le reste. Parts estimées faute de tableau public par zone ; recalées par le calage des aides au logement."
+  pension_brute_moyenne:
+    valeur: 1980
+    unite: eur_mois
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Drees : pension brute moyenne 1 827 € par mois fin 2023, réversion comprise ; revalorisations des pensions de base de 5,3 % (2024), 2,2 % (2025) et 0,9 % (2026, coefficient 1,009) ; Agirc-Arrco + 1,6 % (novembre 2024) puis gelée"
+    note: "1 827 × 1,064 (revalorisations, base et complémentaires pondérées) × 1,02 (renouvellement : les nouveaux retraités ont de plus fortes pensions que les décédés). Les déciles de la Drees (anciennes_pensions.deciles_drees_2020) donnent la forme."
+  retraites_residents_2026:
+    valeur: 16.9
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "retraites_actuels.donnees : 16,3 millions de retraités résidant en France en 2023"
+    note: "En millions, + 1,2 % par an."
+  depart_par_age:
+    valeur: {"55-59": 0.04, "60-61": 0.30, "62": 0.60, "63-64": 0.75, "65-66": 0.92, "67+": 0.99}
+    unite: taux
+    statut: HYPOTHESE
+    note: "Part des personnes sans emploi de chaque âge qui sont retraitées (carrières longues, départs à l'âge légal, taux plein à 67 ans) ; le total est recalé sur retraites_residents_2026."
+  emploi_2026:
+    valeur: {salaries_prives: 21.0, agents_publics: 5.7, independants: 3.7}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Classes de salaires du modèle (parametres/donnees/salaries_prive.csv : 21,0 millions ; fonctionnaires.csv : 5,7 millions) ; Insee, emploi total ≈ 30,4 millions"
+    note: "En millions. Indépendants en activité principale : par différence (les micro-entrepreneurs en activité d'appoint sont comptés comme salariés)."
+  chomeurs_indemnises:
+    valeur: {part: 0.72, allocation_brute_mensuelle: 1310}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Unédic (octobre 2026) : 46,6 Md€ de dépenses en 2026, 2,6 millions d'allocataires indemnisés ; Insee : 2,7 millions de chômeurs au sens du BIT"
+    note: "Allocation : (46,6 − 11 % de contribution à France Travail) / 2,6 millions / 12 ≈ 1 330 € ; prise à 1 310 € bruts. Part des chômeurs du BIT indemnisés : 0,72 (une partie des allocataires travaille en activité réduite et n'est pas chômeur au sens du BIT). Allocation proportionnelle au salaire perdu (57 %), recalée sur la moyenne."
+  handicap:
+    valeur: {adultes: 1.35, taux_incapacite: 0.8}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "PLF 2026 : 14,6 Md€ pour l'AAH (statu_quo.aah) ; Drees : 1,3 à 1,4 million d'allocataires"
+    note: "En millions d'adultes de 20 à 64 ans, tirés parmi les inactifs et les bas salaires ; taux d'incapacité de 80 % (AAH de droit commun)."
+  correlation_conjoints:
+    valeur: {salaires: 0.35, pensions: 0.2}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Homogamie : Insee Première n° 1937 (2023), les diplômés vivent plus souvent en couple entre eux ; pensions : anciennes_pensions.couples"
+    note: "Corrélation des rangs de revenu des conjoints (copule gaussienne)."
+  capital_menages:
+    valeur: {dividendes: 53, revenus_fonciers: 30, concentration: 1.3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "dividendes.revenus_capitaux_mobiliers_2023 (53 Md€) ; revenus_capital.loyers (30 Md€)"
+    note: "En Md€. Répartis sur les ménages selon le rang de leur revenu avec une loi de Pareto (paramètre 1,3 : le dernier centile reçoit environ la moitié des dividendes, Insee-DGFiP) ; dividendes au prélèvement forfaitaire (12,8 % d'IR), loyers au barème après abattement."
+  cibles_2026:
+    valeur: {impot_revenu: 104.0, prestations_entretien: 25.2, aides_logement: 16.7, rsa: 12.4, prime_activite: 10.5, aah: 14.6}
+    unite: sans_unite
+    statut: SOURCE
+    source: "PLF 2026, évaluation des voies et moyens : impôt net sur le revenu 104,0 Md€ ; Cnaf, Analyses statistiques n° 7 : prestations d'entretien (allocations familiales, complément familial, allocation de soutien familial, allocation de rentrée scolaire, allocation de base et prime à la naissance de la Paje) 24,5 Md€ en 2024 ; autres prestations : statu_quo.aides_logement, rsa, prime_activite, aah"
+    note: "En Md€. Critère de sortie de la phase F : impôt sur le revenu et prestations à 5 % près. Prestations d'entretien : 24,5 × 1,009 × 1,021 (inflation 2025 et 2026, comme statu_quo.prestations_familiales) ≈ 25,2 ; le complément de mode de garde, la PreParE et l'AEEH (≈ 9,5 Md€ des 34,7 de statu_quo.prestations_familiales) dépendent de choix de garde que la population n'a pas : ils restent au moteur agrégé. L'IR net de l'État comprend le prélèvement forfaitaire sur les revenus du capital et la contribution sur les hauts revenus. RSA : allocations seules, 3,07 × 4 × 1,01 ≈ 12,4 ; statu_quo.rsa (13,5) compte aussi les dépenses d'insertion des départements (les 11,5 Md€ bruts de la Drees pour 2024 sont « allocations et insertion »)."
+  recours:
+    valeur: {rsa: 0.65, prime_activite: 0.50, forme: 0.2}
+    unite: taux
+    statut: SOURCE
+    source: "Drees, Études et Résultats n° 1370 (mai 2026) : non-recours au RSA entre 33 % et 37 % des foyers éligibles fin 2021 (29 à 32 % des montants) ; n° 1379 (juillet 2026) : non-recours à la prime d'activité entre 48 % et 52 % des foyers éligibles, souvent pour de petits montants ou une éligibilité passagère"
+    note: "Part des familles éligibles qui perçoivent la prestation. Tirage au hasard (graine fixe), avec une probabilité proportionnelle au montant dû à la puissance « forme », calée pour donner cette part en nombre de familles. Forme 0,2 : reproduit l'écart de la Drees pour le RSA entre non-recours en nombre (33 à 37 %) et en montant (29 à 32 %), soit une part en montant de 0,70 pour 0,65 en nombre ; même forme pour la prime d'activité, faute de mesure. Aides au logement, AAH et prestations familiales : recours complet (non-recours faible, non mesuré)."
+  profil_revenu_salarial_age:
+    valeur: {"18-24": 10170, "25-39": 23480, "40-49": 29110, "50-54": 31010, "55+": 29310}
+    unite: eur
+    annee_euros: 2023
+    statut: SOURCE
+    source: "Insee, Revenu salarial (base Tous salariés 2023, insee.fr/fr/statistiques/8733097) : revenu salarial annuel net moyen, moins de 25 ans 10 170 €, 25-39 ans 23 480 €, 40-49 ans 29 110 €, 50-54 ans 31 010 € ; 55 ans ou plus : rapport aux 50-54 ans de 2022 (28 060 / 29 680, insee.fr/fr/statistiques/2381326)"
+    note: "Profil du rang de salaire par âge dans la population synthétique (seuls les rapports comptent). Revenu annuel et non salaire en équivalent temps plein : l'impôt porte sur le revenu de l'année, et les jeunes travaillent moins d'heures et moins de mois (volume de travail 0,48 contre 0,84 à 40-49 ans). Avec le profil en EQTP (cohortes.profil_salaire_age), les salariés de 18-24 ans gagnaient 23 200 € imposables par an en moyenne dans la population (constat du 15/11/2026)."
+  mois_travailles:
+    valeur: {taux_mensuel_min: 0.5, taux_mensuel_max: 1.0}
+    unite: sans_unite
+    statut: DECISION
+    note: "Un salaire annuel faible vient soit d'un temps partiel, soit de quelques mois de travail dans l'année. Le salaire mensuel des mois travaillés est tiré entre 0,5 et 1 Smic (si le salaire annuel moyen est plus bas) ; le nombre de mois en découle, en un bloc de mois consécutifs placé au hasard dans l'année, le même chaque année. Sans cela, OpenFisca verse la prime d'activité tous les mois au lieu du RSA certains mois (écart constaté au premier calage : prime d'activité + 54 %, RSA − 43 %)."
+  couples_maries:
+    valeur: 0.75
+    unite: taux
+    statut: HYPOTHESE
+    source: "Insee (Couples et familles) : environ 72 % des personnes en couple sont mariées et 9 % pacsées, le reste en union libre"
+    note: "Part des couples qui déclarent leurs revenus ensemble (mariés ou pacsés) ; les autres font deux déclarations mais une seule famille pour les prestations."
+  formes_tirage:
+    valeur:
+      seul_par_age: {"18-24": 0.35, "25-34": 0.25, "35-54": 0.15, "55-64": 0.2, "65-74": 0.28, "75-84": 0.42, "85+": 0.6}
+      age_parent: {moyenne: 42, ecart: 9}
+      ecart_age_conjoints: {moyenne: -1, ecart: 4}
+      ecart_age_mere_enfant: [24, 40]
+      proprietaire_par_age: {"<30": 0.15, "30-39": 0.42, "40-49": 0.57, "50-64": 0.66, "65+": 0.75}
+      social_parmi_locataires: {bas: 0.65, milieu: 0.4, haut: 0.15, monoparentale: 0.15}
+    unite: sans_unite
+    statut: DECISION
+    note: "Formes de départ du tirage (part de personnes seules par âge, âge des parents, écart d'âge des conjoints, propriétaires par âge, parc social selon le tiers de revenu). Elles ne fixent pas les totaux : le calage (outils/population_synthetique.py) ramène la population par âge, les types de ménages, les statuts d'activité, les classes de salaires et les statuts d'occupation sur leurs marges sourcées. Ordres de grandeur : Insee, France portrait social 2023 (fiches 1.3 et 6.1)."
+  emploi_par_configuration:
+    valeur: {sans_enfant: 0.958, monoparentale: 0.935, couple_avec_enfants: 1.066, seul: 0.92, chomage_sans_conjoint: 2.0, chomage_en_couple: 0.75}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Insee, Emploi, chômage, revenus du travail, édition 2025, dossier 1 : en 2024, 80,1 % des 15-64 ans hors étudiants et retraités sont en emploi ; écart de − 3,4 points sans enfant, − 5,2 points en famille monoparentale, + 5,3 points en couple avec enfants"
+    note: "Coefficients appliqués à la probabilité d'emploi par âge des adultes de moins de 65 ans selon le type de ménage (76,7 / 80,1 ; 74,9 / 80,1 ; 85,4 / 80,1) ; couples sans enfant : « sans enfant ». Personnes seules (0,92) et chômage selon la vie en couple (× 2 sans conjoint, × 0,75 en couple) : HYPOTHÈSES encadrées par Insee, France portrait social 2012 (hommes sans conjoint : taux de chômage de 13 % contre 5 % en couple, activité plus faible), et choisies après le premier calage, où le RSA manquait de 40 % faute de personnes seules sans revenu : à vérifier sur une source récente (enquête Emploi par type de ménage). Le calage remet ensuite les effectifs totaux sur leurs marges."
+  etudiants_decohabitants:
+    valeur: 0.67
+    unite: taux
+    statut: SOURCE
+    source: "OVE, Conditions de vie des étudiants 2023 : 24,0 % des étudiants vivent chez leurs deux parents, 7,3 % chez leur mère, 1,6 % chez leur père ; 25,6 % louent seuls ; vie-publique.fr : environ 780 000 étudiants perçoivent une aide au logement (2022)"
+    note: "Part des étudiants de 18 à 24 ans qui vivent hors du logement de leurs parents : ils forment un ménage d'une personne locataire du privé (surface 20 m², zone 1 ou 2), restent rattachés au foyer fiscal des parents et partagent leur poids de calage."
+  allocation_soutien_familial:
+    valeur: 0.98
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Cnaf, Analyses statistiques n° 7 : 909 000 familles bénéficiaires de l'ASF en 2024 (+ 3,7 % sur un an), 3,1 Md€"
+    note: "En millions de familles en 2026 (909 000 × 1,037²). OpenFisca suppose l'ASF due à tout parent isolé (il ne sait pas si l'autre parent verse une pension) : ce nombre de familles éligibles, tirées au hasard, la perçoivent."
+  familles_enfants_mineurs:
+    valeur: {total: 7.75, "1": 0.448, "2": 0.387, "3": 0.127, "4": 0.038}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Insee, Tableaux de l'économie française 2020 : 8,03 millions de familles avec enfants mineurs en 2016, dont 44,8 % avec un enfant, 38,7 % avec deux, 12,7 % avec trois, 3,8 % avec quatre ou plus ; Insee, France portrait social 2022 : 8,0 millions en 2020"
+    note: "Total en millions en 2026 : 8,0 en 2020, en baisse avec les naissances (− 0,5 % par an). Marges du calage : ménages par nombre d'enfants mineurs (les familles des ménages complexes sont comptées avec leur ménage)."
+  familles_allocations_familiales:
+    valeur: 4.79
+    unite: sans_unite
+    statut: SOURCE
+    source: "Cnaf, Analyses statistiques n° 7 : 4 786 000 familles bénéficiaires des allocations familiales en 2024"
+    note: "En millions. Marge du calage : familles avec au moins deux enfants de moins de 20 ans."
+  aah_en_emploi:
+    valeur: 0.2
+    unite: taux
+    statut: HYPOTHESE
+    note: "Part des adultes handicapés tirés parmi les salariés à bas salaire (temps partiel, établissements et services d'aide par le travail) plutôt que parmi les inactifs : l'AAH y est différentielle. Ordre de grandeur, à sourcer (Drees, minima sociaux)."
+  calage_beneficiaires:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 14/11/2026 : second calage des poids sur les effectifs de bénéficiaires publiés, OpenFisca dans la boucle (il calcule qui est éligible ; le calage ne change que les poids). Les montants versés restent un contrôle. Faux : calage sur les seules marges démographiques et d'activité."
+  beneficiaires:
+    valeur: {rsa_avec_prime: 0.42, rsa_seul: 1.03, rsa_monoparentale: 0.61, rsa_couple_sans_enfant: 0.037, rsa_couple_avec_enfants: 0.166, prime_activite: 4.76, aides_logement: 5.66, complement_familial: 0.844}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Drees, Minima sociaux et prestations de solidarité, édition 2025, fiche 23 : 23 % des allocataires du RSA perçoivent aussi la prime d'activité ; fin 2023, 56 % de personnes seules sans enfant, 33 % de familles monoparentales, 2 % de couples sans enfant, 9 % de couples avec enfants ; Drees, suivi mensuel des prestations de solidarité (février 2026) : fin décembre 2025, 1,84 million de foyers au RSA, 4,76 millions à la prime d'activité, 5,66 millions d'allocataires des aides au logement ; Cnaf, Analyses statistiques n° 7 : 844 000 familles au complément familial en 2024 (régime général)"
+    note: "En millions de familles. RSA : 1,84 million, dont 23 % avec la prime d'activité (0,42), réparti selon la configuration familiale de la Drees (1,03 ; 0,61 ; 0,037 ; 0,166). RSA et prime d'activité : bénéficiaires après recours (probabilité attendue du tirage). Aides au logement : y compris les foyers et résidences hors du champ de la population, qui sont donc représentés par des ménages ordinaires semblables (limite). Complément familial : Caf seules (sans la MSA)."
+  nationalite:
+    valeur: {etrangers: 6.03, part_ue: 0.25, part_paiements_cnaf: 0.13, part_recents_hors_ue: 0.30}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Insee Première n° 2076 (octobre 2025) : 6,03 millions d'étrangers en 2024 (8,8 % de la population) ; ministère de l'Intérieur (recensement 2022) : environ un quart des étrangers originaires de l'Union européenne ; iFRAP d'après la Cnaf : les étrangers reçoivent 13 % des prestations versées par les Caf ; Insee : 313 000 à 347 000 entrées d'immigrés par an (2023-2024)"
+    note: "Étrangers en millions de personnes. Nationalité tirée par ménage (tous ses membres), avec une probabilité qui croît quand le niveau de vie baisse, calée pour que les ménages étrangers reçoivent 13 % des prestations des Caf. Ressortissants de l'UE : un quart des ménages étrangers, au hasard (protégés par le droit de l'Union : jamais exclus par les mesures de nationalité). Arrivés depuis moins de cinq ans : 30 % des ménages étrangers hors UE, au hasard. Ordre de grandeur : ≈ 1,5 à 1,7 million de premiers titres de séjour en cinq ans (384 230 en 2025, DGEF, demographie.titres_vers_solde), dont environ un tiers d'étudiants souvent repartis : ≈ 1,2 million d'adultes encore présents, sur ≈ 3,6 millions d'adultes étrangers hors UE (Insee) : 30 à 35 % ; 30 % retenu (bas de la fourchette). DÉCISION faute d'enquête : pas de profil propre par nationalité au-delà du niveau de vie."
+  recettes_vieillies:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Phase F4, DÉCISION d'Adrien du 14/11/2026 : les mesures d'impôt sur le revenu et de CSG codées dans OpenFisca suivent, année après année, l'indice de la population vieillie du programme (moteur/micro.py, parametres/donnees/micro_recettes_annees.csv). Faux : montant de 2026 qui suit seulement les salaires."
