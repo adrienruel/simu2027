@@ -1,0 +1,9 @@
+programme,mesure,scenario,emplois,budget_md,statique_md
+glucksmann,GLU-FIS-01b,crise,6221,0.14,-7.944
+glucksmann,GLU-FIS-01b,prudent,11125,0.225,-7.944
+glucksmann,GLU-FIS-01b,median,30264,0.584,-7.944
+glucksmann,GLU-FIS-01b,optimiste,57522,1.097,-7.944
+glucksmann,GLU-ECO-01,crise,16479,0.271,12.098
+glucksmann,GLU-ECO-01,prudent,28494,0.445,12.098
+glucksmann,GLU-ECO-01,median,76728,1.177,12.098
+glucksmann,GLU-ECO-01,optimiste,146038,2.235,12.098

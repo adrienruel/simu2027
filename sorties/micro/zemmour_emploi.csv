@@ -1,9 +1,13 @@
 programme,mesure,scenario,emplois,budget_md,statique_md
-zemmour,ZEM-IMM-04,crise,6386,0.069,6.413
-zemmour,ZEM-IMM-04,prudent,11736,0.109,6.413
-zemmour,ZEM-IMM-04,median,32284,0.283,6.413
-zemmour,ZEM-IMM-04,optimiste,61549,0.535,6.413
+zemmour,ZEM-IMM-04,crise,6388,0.069,6.413
+zemmour,ZEM-IMM-04,prudent,11733,0.109,6.413
+zemmour,ZEM-IMM-04,median,32271,0.282,6.413
+zemmour,ZEM-IMM-04,optimiste,61523,0.534,6.413
 zemmour,ZEM-KNA-04,crise,29467,0.309,2.273
 zemmour,ZEM-KNA-04,prudent,44203,0.464,2.273
 zemmour,ZEM-KNA-04,median,112117,1.175,2.273
 zemmour,ZEM-KNA-04,optimiste,211788,2.216,2.273
+zemmour,ZEM-FIS-01,crise,35502,0.903,-51.969
+zemmour,ZEM-FIS-01,prudent,60043,1.367,-51.969
+zemmour,ZEM-FIS-01,median,159893,3.455,-51.969
+zemmour,ZEM-FIS-01,optimiste,302969,6.462,-51.969

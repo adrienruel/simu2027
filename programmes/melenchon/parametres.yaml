@@ -193,11 +193,11 @@ melenchon_mesures:
     note: "Barème non donné (p. 58). Arbitrage : hausse des taux au-delà de 100 000 € par part, baisse en bas du barème (ir_bas_revenus)."
   ir_bas_revenus:
     valeur: {id: LFI-REC-01, instrument: travail, incidence: ir, libelle: "Impôt sur le revenu à 14 tranches : tranches du bas abaissées", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
-             montant: {crise: -4.5, prudent: -4.5, median: -3.3, optimiste: -3.3}}
+             montant: {crise: -9.3, prudent: -9.3, median: -9.3, optimiste: -9.3}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Même chiffrage que tondelier_mesures.ir_tranches_basses (2 points de moins en bas du barème, 3,3 à 4,5 Md€)"
+    source: "Même chiffrage que tondelier_mesures.ir_tranches_basses : 2 points de moins en bas du barème (11 → 9 %), − 9,3 Md€ calculés par OpenFisca sur la population synthétique (recalage du 14/11/2026, appliqué ici le 15/11/2026 : l'ancien − 4,5 n'avait pas suivi)"
   quotient_conjugal:
     valeur: {id: LFI-REC-02, instrument: travail, incidence: haut, libelle: "Fin du quotient conjugal (impôt individualisé)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 5.0, prudent: 6.0, median: 7.0, optimiste: 8.0}}

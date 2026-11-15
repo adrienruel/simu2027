@@ -133,6 +133,7 @@ def main(noms):
         for annee in annees:
             lg = recaler(lignes0, prog, p, annee, traj, emploi_ref)
             base = om.Base(lg, emploi=False)
+            base.annee = annee  # opérations qui dépendent de l'année (indexation des pensions, gels qui s'éteignent)
             i0 = indicateurs(base, base.etat0)
             ligne = {"programme": nom, "annee": annee, **{f"{k}_sq": round(v, 3) for k, v in i0.items()}}
             if ops:

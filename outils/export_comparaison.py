@@ -222,13 +222,16 @@ def redistribution() -> None:
     src = RACINE / "sorties"
     if not (src / "micro_vieillissement.csv").exists():
         return
+    import yaml
+    specs = yaml.safe_load((RACINE / "programmes" / "micro_mesures.yaml").read_text(encoding="utf-8"))
     lignes, deciles = [], []
     with (src / "micro_vieillissement.csv").open(encoding="utf-8") as f:
         for r in csv.DictReader(f):
             if r["programme"] not in noms:
                 continue
             lib = noms[r["programme"]]
-            x = {"cle": f"{lib}|{r['annee']}", "programme": lib, "annee": int(r["annee"])}
+            x = {"cle": f"{lib}|{r['annee']}", "programme": lib, "annee": int(r["annee"]),
+                 "mesures_codees": ", ".join(specs.get(r["programme"], {}))}
             # statu quo : ses valeurs sont dans les colonnes _sq ; pour un programme, les colonnes _sq
             # donnent la législation actuelle sur la population du programme (effet des seules mesures)
             for k in ("pauvrete_pct", "gini", "d9_d1", "mediane", "budget_mesures_md"):

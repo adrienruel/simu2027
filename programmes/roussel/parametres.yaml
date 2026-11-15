@@ -170,12 +170,12 @@ roussel_mesures:
     note: "Moins de tranches que L'Avenir en commun (14) : un peu moins que melenchon_mesures.ir_hauts_revenus."
   ir_bas:
     valeur: {id: PCF-FIS-03, instrument: travail, incidence: bas, libelle: "Impôt sur le revenu à neuf tranches : tranches du bas abaissées", poste: recettes, moteur: "recette:salaires_prive", debut: 2028, plein: 2028,
-             montant: {crise: -3.5, prudent: -3.5, median: -2.5, optimiste: -2.5}}
+             montant: {crise: -9.3, prudent: -9.3, median: -9.3, optimiste: -9.3}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Même source"
-    note: "Un peu moins que melenchon_mesures.ir_bas_revenus (−4,5 / −3,3)."
+    note: "Même lecture que melenchon_mesures.ir_bas_revenus (11 → 9 %) : − 9,3 Md€ par OpenFisca (recalage du 15/11/2026 ; l'ancien − 3,5 / − 2,5 sous-estimait la mesure)."
   revenus_financiers:
     valeur: {id: PCF-FIS-04, instrument: capital_entreprises, libelle: "Cotisations sur les revenus financiers et les dividendes ; contribution sur les revenus financiers des banques et assurances", poste: recettes, moteur: "pib", debut: 2028, plein: 2029,
              montant: {crise: 1.0, prudent: 3.0, median: 6.0, optimiste: 10.0}}
@@ -242,12 +242,12 @@ roussel_mesures:
     note: "Valeurs de marché fin 2025 ≈ BNP Paribas 85 Md€, AXA 80, Société générale 30, Engie (part non détenue) 35, concessions d'autoroutes ≈ 40 à 50 (indemnisation) ; prime de rachat comprise en prudent. Opération financière : elle ne touche pas le déficit mais la dette (règle du noyau pour les participations)."
   aspa:
     valeur: {id: PCF-RET-05, libelle: "Minimum vieillesse (ASPA) porté à 1 400 € par mois", poste: retraites, moteur: "pib", debut: 2028, plein: 2029,
-             montant: {crise: 10.0, prudent: 8.5, median: 7.0, optimiste: 5.5}}
+             montant: {crise: 4.9, prudent: 4.7, median: 4.5, optimiste: 4.3}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Fête de l'Humanité 2025 (pcf.fr) : ASPA à 1 400 €"
-    note: "ASPA ≈ 1 034 € (2025) pour ≈ 700 000 allocataires : +366 € × 12 ≈ 3,1 Md€ ; plafond relevé : ≈ 2 à 3 millions de retraités de plus deviennent éligibles (pensions entre 1 034 et 1 400 €), écart moyen ≈ 200 €, non-recours ≈ 50 % (récupération sur succession) : 2,5 à 7 Md€."
+    note: "Microsimulation (15/11/2026) : Aspa à 1 400 € et plafond relevé d'autant, recours calé sur les 754 460 allocataires de la DREES (fin 2024), nouveaux éligibles compris : − 4,7 Md€ (Mélenchon, au seuil de 1 337 € : − 3,7). L'ancienne estimation (8,5 au prudent : 2 à 3 millions de nouveaux éligibles) était incohérente avec celle de Mélenchon ; écart de ± 0,2 entre scénarios, comme Mélenchon."
   cent_pour_cent:
     valeur: {id: PCF-SAN-01, libelle: "Soins prescrits remboursés à 100 % par la Sécurité sociale", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2030,
              montant: {crise: 30.0, prudent: 28.0, median: 25.0, optimiste: 22.0}}

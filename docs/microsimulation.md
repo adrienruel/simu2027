@@ -352,3 +352,41 @@ exclut la finance et les associations). Part des employeurs à l'IS, dans `entre
   « masse salariale » de Lisnard et de Philippe 0,67 = (15 × 0,5 + 11 × 0,9) / 26 ;
 - impôts de production assis sur le capital et le chiffre d'affaires : taux de la micro, qui compte déjà les
   entreprises individuelles à l'IR (les associations sont exonérées de CFE en général).
+
+## Déciles : mesures fiscales et SMIC ajoutés (15/11/2026, remarque d'Adrien)
+
+Constat : pour Mélenchon, le décile le plus aisé gagnait (+ 70 € par an), parce que seules ses trois hausses de
+prestations étaient codées, aucune de ses hausses d'impôt. Plus généralement, les déciles ne voyaient pas le SMIC, la
+CSG de Zemmour, de Glucksmann et le « droit au brut » d'Attal. Ajouts dans `programmes/micro_mesures.yaml` :
+- opérations « population » (`Base.population`) : `individualiser` (impôt individuel) et `smic_net_2027` /
+  `smic_brut_2026` (salaires relevés comme dans `bibliotheque.smic`, privé et public) ; garantie de niveau de vie
+  étendue aux ménages d'étudiants (`champ: etudiants`) ;
+- Mélenchon : barème à 14 tranches (lecture du moteur), impôt individualisé (+ 5,97 Md€, moteur + 6,0), garantie
+  d'autonomie des jeunes (− 11,0, moteur − 10,0), SMIC ; Roussel : barème à neuf tranches, SMIC ; Arthaud, Tondelier,
+  Glucksmann : SMIC ; Zemmour : CSG d'activité supprimée ; Glucksmann : CSG − 15 Md€ ; Attal : « droit au brut » codé
+  comme une baisse de la part déductible de la CSG d'activité (même assiette, même déductibilité).
+- Le solde des mesures exclut maintenant la hausse du coût des agents publics (dépense, pas recette).
+
+Erreur trouvée : la baisse de la première tranche de 11 à 9 % était chiffrée − 4,5 (Mélenchon) et − 3,5 (Roussel)
+alors que le même barème vaut − 9,3 Md€ (recalé le 14/11 pour Bertrand et Tondelier, pas pour eux) : recalés.
+
+Toujours hors des déciles : retraites (âge, pensions), assurance chômage, patrimoine et successions, services publics.
+La colonne « Mesures prises en compte » du comparateur le dit programme par programme.
+
+## Retraites dans la micro, et recours à l'Aspa (15/11/2026)
+
+- Opération `population: {pensions: ...}` : pensions au-delà d'un seuil mensuel brut multipliées par un facteur (gel,
+  sous-indexation), avec une perte qui s'éteint après la dernière année (≈ 18 ans, comme le moteur) ; ou
+  `indexation_salaires` (pensions revalorisées comme le salaire moyen depuis 2029, ancienneté moyenne de 12 ans). Le
+  vieillissement donne l'année à la base (`Base.annee`).
+- Codé : Aspa au seuil de pauvreté (Mélenchon, 1 337 € ; Tondelier, ≈ 1 290 €) ou à 1 400 € (Roussel) ; pensions
+  indexées sur les salaires (Roussel) ; pensions de plus de 2 000 € gelées de 2028 à 2032 (Lisnard) ou sous-indexées de
+  0,5 point (Tondelier).
+- Erreur trouvée : OpenFisca versait 14,7 Md€ d'Aspa à 2,2 millions de familles de la population, contre 754 460
+  allocataires fin 2024 et 4,1 Md€ de dépense en 2023 (DREES) : la population n'a pas les revenus du patrimoine (qui
+  comptent dans les ressources de l'Aspa), et le recours était complet alors qu'une personne seule éligible sur deux ne
+  la demande pas. Recours tiré comme pour le RSA, calé sur le nombre d'allocataires (`microsimulation.recours_aspa`) :
+  4,6 Md€ en 2026 ; la pauvreté de départ reste à 15,4 %.
+- Non codés : âge de départ (son effet est dans la population de chaque programme, donc dans la pauvreté comparée au
+  statu quo, mais pas dans les déciles, qui comparent la même population avec et sans les mesures) ; pensions des
+  carrières complètes au SMIC (Mélenchon) et minimum contributif (Tondelier), faute de carrières dans la population.
