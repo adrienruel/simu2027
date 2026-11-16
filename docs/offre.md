@@ -1,8 +1,8 @@
 # Effets économiques communs : demande, offre et seniors (6 novembre 2026)
 
-Pour tous les programmes chiffrés sur le noyau (Bertrand, Zemmour, Arthaud, Tondelier). Écologie de droite garde son
-moteur, qui a déjà ses propres canaux (participation des inactifs, coût du travail par tranche, cohortes d'entreprises,
-localisation des bénéfices).
+Pour tous les programmes chiffrés sur le noyau. (Note du 16/11/2026 : cette note date du 6/11 ; depuis le 13/11, le
+canal d'offre est commun à tous les programmes, et Écologie de droite, programme de test mis de côté le 16/11, n'est
+plus publié.)
 
 ```
 moteur/offre.py ; outils/openfisca_offre.py (tables OpenFisca) ; paramètres : parametres/commun/economie.yaml,

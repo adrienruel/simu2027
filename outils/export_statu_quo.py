@@ -33,6 +33,8 @@ def _ecrire(nom: str, lignes: list[dict]) -> None:
         w = csv.DictWriter(f, fieldnames=list(lignes[0]))
         w.writeheader()
         w.writerows(lignes)
+    from outils import trace
+    trace.enregistrer(nom, script="outils.export_statu_quo")
 
 
 def main() -> None:

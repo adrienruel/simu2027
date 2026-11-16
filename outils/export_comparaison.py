@@ -99,6 +99,8 @@ def _ecrire(nom: str, lignes: list[dict]) -> None:
         w = csv.DictWriter(f, fieldnames=list(lignes[0]))
         w.writeheader()
         w.writerows(lignes)
+    from outils import trace
+    trace.enregistrer(nom, script="outils.export_comparaison")
 
 
 def main() -> None:
@@ -143,7 +145,13 @@ def main() -> None:
                              # au taux de prélèvement du statu quo (négatif : le programme a de la marge)
                              "pib_pour_equilibrer_pct": round(0.0 if nom == "statu_quo" else
                                                               -(x["solde_primaire"] - base[s][t]["solde_primaire"]) / x["pib"] * 100
-                                                              / (base[s][t]["recettes"] / base[s][t]["pib"]), 3)})
+                                                              / (base[s][t]["recettes"] / base[s][t]["pib"]), 3),
+                             # écart de solde primaire au statu quo (points de PIB, + = meilleur) : la mesure robuste,
+                             # qui ne dépend pas de la boule de neige des intérêts (roadmap du comparateur, 1.1)
+                             "ecart_solde_primaire_pib": round((x["solde_primaire"] / x["pib"]
+                                                                - base[s][t]["solde_primaire"] / base[s][t]["pib"]) * 100, 3),
+                             # au-delà de ce ratio de dette, la trajectoire n'a plus valeur de prévision
+                             "hors_plausibilite": int(x["dette_pib"] > p.val("publication.seuil_dette_plausible"))})
                 for canal, n in x["emplois_canaux"].items():
                     emploi_canaux.append({"cle": f"{lib}|{SCENARIOS[s]}|{t}|{canal}", "programme": lib, "scenario": SCENARIOS[s],
                                           "annee": t, "canal": canal, "emplois_milliers": round(n / 1e3, 1)})

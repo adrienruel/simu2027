@@ -11,7 +11,7 @@ La dépense primaire est découpée en blocs, chacun avec ce qui le fait vivre �
 
 | Bloc | Évolution |
 |---|---|
-| Retraites | toutes les générations : population de l'Insee × part partie à chaque âge (âge légal de 64 ans) × pension liquidée (salaire de quinze ans plus tôt, érosion relative calée sur le COR), puis revalorisée sur les prix |
+| Retraites | toutes les générations : population de l'Insee × part partie à chaque âge (âge légal de chaque génération : loi de 2023, suspension de la LFSS 2026) × pension liquidée (salaire de quinze ans plus tôt, érosion relative calée sur le COR), puis revalorisée sur les prix |
 | Santé | pentes communes (Assurance maladie jusqu'en 2035, puis PROMEDE), dérive de 2027 à 2029 comprise |
 | Assurance chômage | chômeurs du scénario × salaires |
 | Famille | enfants, salaires (statu_quo.indexation_prestations ; « prix » : la loi à la lettre) |
@@ -974,9 +974,13 @@ if __name__ == "__main__":
     (RACINE / "sorties").mkdir(exist_ok=True)
     (RACINE / "sorties" / "statu_quo.json").write_text(
         json.dumps({s: {str(t): x for t, x in v.items()} for s, v in sq.items()}, ensure_ascii=False, indent=1), encoding="utf-8")
-    if "--ecart" in sys.argv:
+    from outils import trace
+    trace.enregistrer("statu_quo.json", script="moteur.statu_quo")
+    if "--ecart" in sys.argv:  # python -m moteur.statu_quo --ecart <programme>
         from . import noyau
-        res_prog = noyau.resultats(p)
+        i = sys.argv.index("--ecart")
+        nom = sys.argv[i + 1] if len(sys.argv) > i + 1 else "philippe"
+        res_prog = noyau.simuler(p, noyau.charger(nom))
         e = ecart(res_prog, sq)
         ea = ecart(res_prog, sq, avant_regle=True)
         print("\nÉcart programme − statu quo : solde primaire (points de PIB, + = meilleur) ; déficit sans règle ; chômage (points)")

@@ -41,6 +41,9 @@ def main(noms=PROGRAMMES) -> dict:
             for s, a in v.items():
                 for t, x in a.items():
                     w.writerow([lib, s, t, *x.values()])
+    from outils import trace
+    trace.enregistrer(["variante_fonds_apu.json", "comparaison_variante_fonds.csv"], script="outils.variante_fonds_apu",
+                      note=None if set(noms) == set(PROGRAMMES) else "sous-ensemble : " + ", ".join(noms))
     return out
 
 

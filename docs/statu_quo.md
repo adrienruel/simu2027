@@ -30,10 +30,10 @@ Dépense publique 56,9 % du PIB, intérêts 2,9 %, déficit 5,0 % (PLF 2027, avi
 | Retraites | 428 | toutes les générations (voir plus bas) | COR 2026 : 14,1 % du PIB |
 | Santé (ONDAM, autonomie) | 301 | pentes communes (Assurance maladie jusqu'en 2035, puis PROMEDE) | LFSS 2026, DREES |
 | Assurance chômage | 47 | chômeurs × salaires | Unédic, octobre 2026 |
-| Prestations familiales | 35 | enfants, prix | branche famille 2023 (REPSS) |
-| Aides personnelles au logement | 17 | population, prix | compte du logement 2025 |
-| RSA ; prime d'activité | 24 | chômeurs, prix ; emploi et barème fixe face aux salaires (OpenFisca) | DREES, Sénat (PLF 2025) |
-| AAH et invalidité | 24 | adultes, prix | PLF 2026 ; hors ONDAM 2024 |
+| Prestations familiales | 35 | enfants, salaires | branche famille 2023 (REPSS) |
+| Aides personnelles au logement | 17 | population, salaires | compte du logement 2025 |
+| RSA ; prime d'activité | 24 | chômeurs, salaires ; emploi et barème fixe face aux salaires (OpenFisca) | DREES, Sénat (PLF 2025) |
+| AAH et invalidité | 24 | adultes, salaires | PLF 2026 ; hors ONDAM 2024 |
 | Investissement | 134 | PIB | Insee, 2025 : 4,4 % |
 | Missions de l'État (crédits 2026 hors pensions, hors blocs déjà comptés) | 210 | chacune selon sa règle : salaires × public servi (population, élèves, étudiants, enfants, emploi), PIB ou prix | budget 2026 |
 | Défense et contribution à l'UE | 88 + 14 | PIB | défense au niveau de 2030 de la loi de programmation actualisée (76,3 Md€ hors pensions, CMP du 23/6/2026) ; UE : PLF 2027 |
@@ -117,12 +117,14 @@ La sensibilité à la productivité vient du décalage de quinze ans : elle est 
 
 ## Résultats
 
+Recalculés le 16/11/2026 (phase J1, `sorties/statu_quo_trajectoire.csv`).
+
 | Déficit (% du PIB) / dette (% du PIB) | 2029 | 2032 | 2037 | 2045 | 2050 | 2060 |
 |---|---|---|---|---|---|---|
-| Crise | 6,1 / 129 | 7,3 / 141 | 9,4 / 168 | 14,3 / 230 | 22,0 / 301 | 92 / 729 |
-| **Prudent** | **6,1 / 129** | **7,5 / 140** | **9,9 / 166** | **14,8 / 227** | **21,7 / 293** | **70 / 625** |
-| Médian | 6,0 / 129 | 7,2 / 137 | 8,8 / 156 | 10,9 / 195 | 13,8 / 230 | 27 / 361 |
-| Optimiste | 5,9 / 128 | 7,0 / 135 | 8,5 / 151 | 10,4 / 187 | 12,8 / 218 | 20,9 / 315 |
+| Crise | 5,9 / 129 | 8,4 / 147 | 12,1 / 185 | 21,4 / 287 | 31,6 / 400 | 69 / 837 |
+| **Prudent** | **5,9 / 129** | **7,2 / 139** | **9,5 / 163** | **14,2 / 221** | **20,6 / 283** | **42,1 / 522** |
+| Médian | 5,8 / 128 | 6,8 / 136 | 8,4 / 153 | 10,4 / 190 | 13,1 / 223 | 25,0 / 345 |
+| Optimiste | 5,7 / 128 | 6,7 / 134 | 8,1 / 148 | 10,0 / 182 | 12,2 / 211 | 19,6 / 301 |
 
 Depuis le 4/11/2026 (quatrième passe) : la défense suit la loi de programmation militaire actualisée (+14 Md€, +0,46
 point de dépense dès 2029 ; DÉCISION « loi actuelle », `statu_quo.defense_trajectoire`, « 2026 » pour revenir au niveau

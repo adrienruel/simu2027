@@ -15,8 +15,8 @@ annee,impot,md,part_pib
 2030,"Cotisations, CSG, IR : salariés du privé",522.9,17.092
 2030,"Cotisations, CSG, IR : agents publics",209.57,6.85
 2030,"Cotisations, CSG, IR : indépendants",39.25,1.283
-2030,"CSG, CASA, IR : retraités",51.76,1.692
-2030,TVA,220.82,7.218
+2030,"CSG, CASA, IR : retraités",51.62,1.687
+2030,TVA,220.66,7.213
 2030,Accises et taxes sur les produits,107.26,3.506
 2030,Impôt sur les sociétés,72.62,2.374
 2030,Impôts de production,74.77,2.444
@@ -28,8 +28,8 @@ annee,impot,md,part_pib
 2031,"Cotisations, CSG, IR : salariés du privé",526.74,17.091
 2031,"Cotisations, CSG, IR : agents publics",211.11,6.85
 2031,"Cotisations, CSG, IR : indépendants",39.54,1.283
-2031,"CSG, CASA, IR : retraités",52.26,1.696
-2031,TVA,222.68,7.225
+2031,"CSG, CASA, IR : retraités",51.95,1.685
+2031,TVA,222.33,7.214
 2031,Accises et taxes sur les produits,108.05,3.506
 2031,Impôt sur les sociétés,73.16,2.374
 2031,Impôts de production,75.33,2.444
@@ -41,8 +41,8 @@ annee,impot,md,part_pib
 2032,"Cotisations, CSG, IR : salariés du privé",530.72,17.089
 2032,"Cotisations, CSG, IR : agents publics",212.72,6.85
 2032,"Cotisations, CSG, IR : indépendants",39.85,1.283
-2032,"CSG, CASA, IR : retraités",52.74,1.698
-2032,TVA,224.55,7.23
+2032,"CSG, CASA, IR : retraités",52.39,1.687
+2032,TVA,224.13,7.217
 2032,Accises et taxes sur les produits,108.87,3.506
 2032,Impôt sur les sociétés,73.72,2.374
 2032,Impôts de production,75.9,2.444
@@ -54,8 +54,8 @@ annee,impot,md,part_pib
 2033,"Cotisations, CSG, IR : salariés du privé",534.77,17.088
 2033,"Cotisations, CSG, IR : agents publics",214.35,6.849
 2033,"Cotisations, CSG, IR : indépendants",40.15,1.283
-2033,"CSG, CASA, IR : retraités",53.19,1.7
-2033,TVA,226.43,7.235
+2033,"CSG, CASA, IR : retraités",52.96,1.692
+2033,TVA,226.06,7.224
 2033,Accises et taxes sur les produits,109.71,3.506
 2033,Impôt sur les sociétés,74.28,2.374
 2033,Impôts de production,76.48,2.444
@@ -67,8 +67,8 @@ annee,impot,md,part_pib
 2034,"Cotisations, CSG, IR : salariés du privé",538.98,17.086
 2034,"Cotisations, CSG, IR : agents publics",216.05,6.849
 2034,"Cotisations, CSG, IR : indépendants",40.47,1.283
-2034,"CSG, CASA, IR : retraités",53.63,1.7
-2034,TVA,228.34,7.239
+2034,"CSG, CASA, IR : retraités",53.55,1.698
+2034,TVA,228.06,7.23
 2034,Accises et taxes sur les produits,110.59,3.506
 2034,Impôt sur les sociétés,74.88,2.374
 2034,Impôts de production,77.09,2.444
@@ -80,8 +80,8 @@ annee,impot,md,part_pib
 2035,"Cotisations, CSG, IR : salariés du privé",543.35,17.086
 2035,"Cotisations, CSG, IR : agents publics",217.8,6.849
 2035,"Cotisations, CSG, IR : indépendants",40.8,1.283
-2035,"CSG, CASA, IR : retraités",54.04,1.699
-2035,TVA,230.27,7.241
+2035,"CSG, CASA, IR : retraités",54.16,1.703
+2035,TVA,230.11,7.236
 2035,Accises et taxes sur les produits,111.49,3.506
 2035,Impôt sur les sociétés,75.49,2.374
 2035,Impôts de production,77.72,2.444
@@ -93,8 +93,8 @@ annee,impot,md,part_pib
 2036,"Cotisations, CSG, IR : salariés du privé",548.0,17.086
 2036,"Cotisations, CSG, IR : agents publics",219.66,6.849
 2036,"Cotisations, CSG, IR : indépendants",41.15,1.283
-2036,"CSG, CASA, IR : retraités",54.45,1.698
-2036,TVA,232.24,7.241
+2036,"CSG, CASA, IR : retraités",54.79,1.708
+2036,TVA,232.22,7.241
 2036,Accises et taxes sur les produits,112.44,3.506
 2036,Impôt sur les sociétés,76.13,2.374
 2036,Impôts de production,78.38,2.444
@@ -106,8 +106,8 @@ annee,impot,md,part_pib
 2037,"Cotisations, CSG, IR : salariés du privé",552.56,17.088
 2037,"Cotisations, CSG, IR : agents publics",221.48,6.849
 2037,"Cotisations, CSG, IR : indépendants",41.49,1.283
-2037,"CSG, CASA, IR : retraités",54.81,1.695
-2037,TVA,234.15,7.241
+2037,"CSG, CASA, IR : retraités",55.38,1.713
+2037,TVA,234.26,7.245
 2037,Accises et taxes sur les produits,113.37,3.506
 2037,Impôt sur les sociétés,76.76,2.374
 2037,Impôts de production,79.03,2.444
@@ -119,8 +119,8 @@ annee,impot,md,part_pib
 2038,"Cotisations, CSG, IR : salariés du privé",557.01,17.088
 2038,"Cotisations, CSG, IR : agents publics",223.25,6.849
 2038,"Cotisations, CSG, IR : indépendants",41.82,1.283
-2038,"CSG, CASA, IR : retraités",55.11,1.691
-2038,TVA,235.98,7.239
+2038,"CSG, CASA, IR : retraités",55.92,1.716
+2038,TVA,236.23,7.247
 2038,Accises et taxes sur les produits,114.27,3.506
 2038,Impôt sur les sociétés,77.37,2.374
 2038,Impôts de production,79.66,2.444
@@ -132,8 +132,8 @@ annee,impot,md,part_pib
 2039,"Cotisations, CSG, IR : salariés du privé",561.1,17.09
 2039,"Cotisations, CSG, IR : agents publics",224.88,6.849
 2039,"Cotisations, CSG, IR : indépendants",42.13,1.283
-2039,"CSG, CASA, IR : retraités",55.34,1.686
-2039,TVA,237.61,7.237
+2039,"CSG, CASA, IR : retraités",56.38,1.717
+2039,TVA,238.0,7.249
 2039,Accises et taxes sur les produits,115.1,3.506
 2039,Impôt sur les sociétés,77.93,2.374
 2039,Impôts de production,80.24,2.444
@@ -145,8 +145,8 @@ annee,impot,md,part_pib
 2040,"Cotisations, CSG, IR : salariés du privé",565.35,17.092
 2040,"Cotisations, CSG, IR : agents publics",226.57,6.85
 2040,"Cotisations, CSG, IR : indépendants",42.44,1.283
-2040,"CSG, CASA, IR : retraités",55.51,1.678
-2040,TVA,239.25,7.233
+2040,"CSG, CASA, IR : retraités",56.76,1.716
+2040,TVA,239.77,7.249
 2040,Accises et taxes sur les produits,115.96,3.506
 2040,Impôt sur les sociétés,78.52,2.374
 2040,Impôts de production,80.84,2.444
@@ -158,8 +158,8 @@ annee,impot,md,part_pib
 2041,"Cotisations, CSG, IR : salariés du privé",569.23,17.094
 2041,"Cotisations, CSG, IR : agents publics",228.11,6.85
 2041,"Cotisations, CSG, IR : indépendants",42.73,1.283
-2041,"CSG, CASA, IR : retraités",55.64,1.671
-2041,TVA,240.71,7.229
+2041,"CSG, CASA, IR : retraités",57.09,1.714
+2041,TVA,241.35,7.248
 2041,Accises et taxes sur les produits,116.74,3.506
 2041,Impôt sur les sociétés,79.04,2.374
 2041,Impôts de production,81.38,2.444
@@ -171,8 +171,8 @@ annee,impot,md,part_pib
 2042,"Cotisations, CSG, IR : salariés du privé",572.91,17.098
 2042,"Cotisations, CSG, IR : agents publics",229.55,6.851
 2042,"Cotisations, CSG, IR : indépendants",42.99,1.283
-2042,"CSG, CASA, IR : retraités",55.77,1.664
-2042,TVA,242.08,7.224
+2042,"CSG, CASA, IR : retraités",57.4,1.713
+2042,TVA,242.84,7.247
 2042,Accises et taxes sur les produits,117.47,3.506
 2042,Impôt sur les sociétés,79.54,2.374
 2042,Impôts de production,81.89,2.444
@@ -184,8 +184,8 @@ annee,impot,md,part_pib
 2043,"Cotisations, CSG, IR : salariés du privé",576.19,17.1
 2043,"Cotisations, CSG, IR : agents publics",230.84,6.851
 2043,"Cotisations, CSG, IR : indépendants",43.23,1.283
-2043,"CSG, CASA, IR : retraités",55.89,1.659
-2043,TVA,243.3,7.221
+2043,"CSG, CASA, IR : retraités",57.7,1.712
+2043,TVA,244.18,7.247
 2043,Accises et taxes sur les produits,118.13,3.506
 2043,Impôt sur les sociétés,79.98,2.374
 2043,Impôts de production,82.35,2.444
@@ -197,8 +197,8 @@ annee,impot,md,part_pib
 2044,"Cotisations, CSG, IR : salariés du privé",579.64,17.103
 2044,"Cotisations, CSG, IR : agents publics",232.2,6.852
 2044,"Cotisations, CSG, IR : indépendants",43.48,1.283
-2044,"CSG, CASA, IR : retraités",56.02,1.653
-2044,TVA,244.58,7.217
+2044,"CSG, CASA, IR : retraités",57.99,1.711
+2044,TVA,245.57,7.246
 2044,Accises et taxes sur les produits,118.81,3.506
 2044,Impôt sur les sociétés,80.45,2.374
 2044,Impôts de production,82.83,2.444
@@ -210,8 +210,8 @@ annee,impot,md,part_pib
 2045,"Cotisations, CSG, IR : salariés du privé",582.91,17.106
 2045,"Cotisations, CSG, IR : agents publics",233.49,6.852
 2045,"Cotisations, CSG, IR : indépendants",43.72,1.283
-2045,"CSG, CASA, IR : retraités",56.23,1.65
-2045,TVA,245.82,7.214
+2045,"CSG, CASA, IR : retraités",58.37,1.713
+2045,TVA,246.93,7.247
 2045,Accises et taxes sur les produits,119.46,3.506
 2045,Impôt sur les sociétés,80.88,2.374
 2045,Impôts de production,83.28,2.444
@@ -223,8 +223,8 @@ annee,impot,md,part_pib
 2046,"Cotisations, CSG, IR : salariés du privé",585.54,17.109
 2046,"Cotisations, CSG, IR : agents publics",234.52,6.852
 2046,"Cotisations, CSG, IR : indépendants",43.91,1.283
-2046,"CSG, CASA, IR : retraités",56.43,1.649
-2046,TVA,246.84,7.213
+2046,"CSG, CASA, IR : retraités",58.74,1.716
+2046,TVA,248.06,7.248
 2046,Accises et taxes sur les produits,119.98,3.506
 2046,Impôt sur les sociétés,81.24,2.374
 2046,Impôts de production,83.64,2.444
@@ -236,8 +236,8 @@ annee,impot,md,part_pib
 2047,"Cotisations, CSG, IR : salariés du privé",588.29,17.113
 2047,"Cotisations, CSG, IR : agents publics",235.58,6.853
 2047,"Cotisations, CSG, IR : indépendants",44.11,1.283
-2047,"CSG, CASA, IR : retraités",56.65,1.648
-2047,TVA,247.87,7.211
+2047,"CSG, CASA, IR : retraités",59.11,1.72
+2047,TVA,249.2,7.249
 2047,Accises et taxes sur les produits,120.51,3.506
 2047,Impôt sur les sociétés,81.6,2.374
 2047,Impôts de production,84.01,2.444
@@ -249,8 +249,8 @@ annee,impot,md,part_pib
 2048,"Cotisations, CSG, IR : salariés du privé",590.81,17.117
 2048,"Cotisations, CSG, IR : agents publics",236.56,6.854
 2048,"Cotisations, CSG, IR : indépendants",44.28,1.283
-2048,"CSG, CASA, IR : retraités",56.87,1.648
-2048,TVA,248.82,7.209
+2048,"CSG, CASA, IR : retraités",59.47,1.723
+2048,TVA,250.25,7.251
 2048,Accises et taxes sur les produits,121.0,3.506
 2048,Impôt sur les sociétés,81.93,2.374
 2048,Impôts de production,84.35,2.444
@@ -262,8 +262,8 @@ annee,impot,md,part_pib
 2049,"Cotisations, CSG, IR : salariés du privé",593.18,17.122
 2049,"Cotisations, CSG, IR : agents publics",237.47,6.855
 2049,"Cotisations, CSG, IR : indépendants",44.45,1.283
-2049,"CSG, CASA, IR : retraités",57.12,1.649
-2049,TVA,249.73,7.208
+2049,"CSG, CASA, IR : retraités",59.84,1.727
+2049,TVA,251.27,7.253
 2049,Accises et taxes sur les produits,121.46,3.506
 2049,Impôt sur les sociétés,82.23,2.374
 2049,Impôts de production,84.67,2.444
@@ -275,8 +275,8 @@ annee,impot,md,part_pib
 2050,"Cotisations, CSG, IR : salariés du privé",595.31,17.126
 2050,"Cotisations, CSG, IR : agents publics",238.29,6.855
 2050,"Cotisations, CSG, IR : indépendants",44.6,1.283
-2050,"CSG, CASA, IR : retraités",57.41,1.652
-2050,TVA,250.58,7.209
+2050,"CSG, CASA, IR : retraités",60.23,1.733
+2050,TVA,252.22,7.256
 2050,Accises et taxes sur les produits,121.86,3.506
 2050,Impôt sur les sociétés,82.51,2.374
 2050,Impôts de production,84.95,2.444
@@ -288,8 +288,8 @@ annee,impot,md,part_pib
 2051,"Cotisations, CSG, IR : salariés du privé",597.04,17.131
 2051,"Cotisations, CSG, IR : agents publics",238.95,6.856
 2051,"Cotisations, CSG, IR : indépendants",44.72,1.283
-2051,"CSG, CASA, IR : retraités",57.73,1.656
-2051,TVA,251.3,7.21
+2051,"CSG, CASA, IR : retraités",60.62,1.739
+2051,TVA,253.03,7.26
 2051,Accises et taxes sur les produits,122.18,3.506
 2051,Impôt sur les sociétés,82.73,2.374
 2051,Impôts de production,85.18,2.444
@@ -301,8 +301,8 @@ annee,impot,md,part_pib
 2052,"Cotisations, CSG, IR : salariés du privé",598.74,17.135
 2052,"Cotisations, CSG, IR : agents publics",239.6,6.857
 2052,"Cotisations, CSG, IR : indépendants",44.83,1.283
-2052,"CSG, CASA, IR : retraités",58.07,1.662
-2052,TVA,252.02,7.212
+2052,"CSG, CASA, IR : retraités",61.03,1.747
+2052,TVA,253.83,7.264
 2052,Accises et taxes sur les produits,122.5,3.506
 2052,Impôt sur les sociétés,82.94,2.374
 2052,Impôts de production,85.4,2.444
@@ -314,8 +314,8 @@ annee,impot,md,part_pib
 2053,"Cotisations, CSG, IR : salariés du privé",600.28,17.139
 2053,"Cotisations, CSG, IR : agents publics",240.18,6.858
 2053,"Cotisations, CSG, IR : indépendants",44.94,1.283
-2053,"CSG, CASA, IR : retraités",58.44,1.668
-2053,TVA,252.71,7.215
+2053,"CSG, CASA, IR : retraités",61.45,1.754
+2053,TVA,254.61,7.27
 2053,Accises et taxes sur les produits,122.79,3.506
 2053,Impôt sur les sociétés,83.14,2.374
 2053,Impôts de production,85.6,2.444
@@ -327,8 +327,8 @@ annee,impot,md,part_pib
 2054,"Cotisations, CSG, IR : salariés du privé",601.89,17.143
 2054,"Cotisations, CSG, IR : agents publics",240.8,6.858
 2054,"Cotisations, CSG, IR : indépendants",45.05,1.283
-2054,"CSG, CASA, IR : retraités",58.82,1.675
-2054,TVA,253.42,7.218
+2054,"CSG, CASA, IR : retraités",61.86,1.762
+2054,TVA,255.4,7.274
 2054,Accises et taxes sur les produits,123.09,3.506
 2054,Impôt sur les sociétés,83.34,2.374
 2054,Impôts de production,85.81,2.444
@@ -340,8 +340,8 @@ annee,impot,md,part_pib
 2055,"Cotisations, CSG, IR : salariés du privé",603.5,17.147
 2055,"Cotisations, CSG, IR : agents publics",241.41,6.859
 2055,"Cotisations, CSG, IR : indépendants",45.16,1.283
-2055,"CSG, CASA, IR : retraités",59.22,1.683
-2055,TVA,254.14,7.221
+2055,"CSG, CASA, IR : retraités",62.28,1.77
+2055,TVA,256.19,7.279
 2055,Accises et taxes sur les produits,123.39,3.506
 2055,Impôt sur les sociétés,83.54,2.374
 2055,Impôts de production,86.02,2.444
@@ -353,8 +353,8 @@ annee,impot,md,part_pib
 2056,"Cotisations, CSG, IR : salariés du privé",604.83,17.15
 2056,"Cotisations, CSG, IR : agents publics",241.92,6.86
 2056,"Cotisations, CSG, IR : indépendants",45.25,1.283
-2056,"CSG, CASA, IR : retraités",59.62,1.691
-2056,TVA,254.77,7.224
+2056,"CSG, CASA, IR : retraités",62.68,1.777
+2056,TVA,256.89,7.284
 2056,Accises et taxes sur les produits,123.64,3.506
 2056,Impôt sur les sociétés,83.71,2.374
 2056,Impôts de production,86.19,2.444
@@ -366,8 +366,8 @@ annee,impot,md,part_pib
 2057,"Cotisations, CSG, IR : salariés du privé",606.26,17.153
 2057,"Cotisations, CSG, IR : agents publics",242.47,6.86
 2057,"Cotisations, CSG, IR : indépendants",45.35,1.283
-2057,"CSG, CASA, IR : retraités",60.04,1.699
-2057,TVA,255.43,7.227
+2057,"CSG, CASA, IR : retraités",63.08,1.785
+2057,TVA,257.63,7.289
 2057,Accises et taxes sur les produits,123.91,3.506
 2057,Impôt sur les sociétés,83.89,2.374
 2057,Impôts de production,86.38,2.444
@@ -379,8 +379,8 @@ annee,impot,md,part_pib
 2058,"Cotisations, CSG, IR : salariés du privé",607.72,17.156
 2058,"Cotisations, CSG, IR : agents publics",243.03,6.861
 2058,"Cotisations, CSG, IR : indépendants",45.45,1.283
-2058,"CSG, CASA, IR : retraités",60.45,1.707
-2058,TVA,256.1,7.23
+2058,"CSG, CASA, IR : retraités",63.45,1.791
+2058,TVA,258.36,7.294
 2058,Accises et taxes sur les produits,124.19,3.506
 2058,Impôt sur les sociétés,84.08,2.374
 2058,Impôts de production,86.57,2.444
@@ -392,8 +392,8 @@ annee,impot,md,part_pib
 2059,"Cotisations, CSG, IR : salariés du privé",609.28,17.159
 2059,"Cotisations, CSG, IR : agents publics",243.64,6.862
 2059,"Cotisations, CSG, IR : indépendants",45.56,1.283
-2059,"CSG, CASA, IR : retraités",60.88,1.715
-2059,TVA,256.82,7.233
+2059,"CSG, CASA, IR : retraités",63.82,1.797
+2059,TVA,259.13,7.298
 2059,Accises et taxes sur les produits,124.48,3.506
 2059,Impôt sur les sociétés,84.28,2.374
 2059,Impôts de production,86.78,2.444
@@ -405,8 +405,8 @@ annee,impot,md,part_pib
 2060,"Cotisations, CSG, IR : salariés du privé",610.84,17.162
 2060,"Cotisations, CSG, IR : agents publics",244.24,6.862
 2060,"Cotisations, CSG, IR : indépendants",45.67,1.283
-2060,"CSG, CASA, IR : retraités",61.32,1.723
-2060,TVA,257.55,7.236
+2060,"CSG, CASA, IR : retraités",64.22,1.804
+2060,TVA,259.91,7.302
 2060,Accises et taxes sur les produits,124.78,3.506
 2060,Impôt sur les sociétés,84.48,2.374
 2060,Impôts de production,86.99,2.444
@@ -418,8 +418,8 @@ annee,impot,md,part_pib
 2061,"Cotisations, CSG, IR : salariés du privé",611.98,17.164
 2061,"Cotisations, CSG, IR : agents publics",244.68,6.863
 2061,"Cotisations, CSG, IR : indépendants",45.75,1.283
-2061,"CSG, CASA, IR : retraités",61.78,1.733
-2061,TVA,258.17,7.241
+2061,"CSG, CASA, IR : retraités",64.62,1.813
+2061,TVA,260.58,7.308
 2061,Accises et taxes sur les produits,125.0,3.506
 2061,Impôt sur les sociétés,84.63,2.374
 2061,Impôts de production,87.14,2.444
@@ -431,8 +431,8 @@ annee,impot,md,part_pib
 2062,"Cotisations, CSG, IR : salariés du privé",613.23,17.167
 2062,"Cotisations, CSG, IR : agents publics",245.16,6.863
 2062,"Cotisations, CSG, IR : indépendants",45.83,1.283
-2062,"CSG, CASA, IR : retraités",62.25,1.743
-2062,TVA,258.83,7.246
+2062,"CSG, CASA, IR : retraités",65.04,1.821
+2062,TVA,261.27,7.314
 2062,Accises et taxes sur les produits,125.23,3.506
 2062,Impôt sur les sociétés,84.79,2.374
 2062,Impôts de production,87.3,2.444
@@ -444,8 +444,8 @@ annee,impot,md,part_pib
 2063,"Cotisations, CSG, IR : salariés du privé",614.64,17.169
 2063,"Cotisations, CSG, IR : agents publics",245.7,6.863
 2063,"Cotisations, CSG, IR : indépendants",45.93,1.283
-2063,"CSG, CASA, IR : retraités",62.75,1.753
-2063,TVA,259.57,7.251
+2063,"CSG, CASA, IR : retraités",65.48,1.829
+2063,TVA,262.04,7.32
 2063,Accises et taxes sur les produits,125.5,3.506
 2063,Impôt sur les sociétés,84.97,2.374
 2063,Impôts de production,87.49,2.444
@@ -457,8 +457,8 @@ annee,impot,md,part_pib
 2064,"Cotisations, CSG, IR : salariés du privé",616.01,17.17
 2064,"Cotisations, CSG, IR : agents publics",246.25,6.864
 2064,"Cotisations, CSG, IR : indépendants",46.03,1.283
-2064,"CSG, CASA, IR : retraités",63.27,1.764
-2064,TVA,260.32,7.256
+2064,"CSG, CASA, IR : retraités",65.92,1.837
+2064,TVA,262.82,7.326
 2064,Accises et taxes sur les produits,125.78,3.506
 2064,Impôt sur les sociétés,85.16,2.374
 2064,Impôts de production,87.68,2.444
@@ -470,8 +470,8 @@ annee,impot,md,part_pib
 2065,"Cotisations, CSG, IR : salariés du privé",617.31,17.171
 2065,"Cotisations, CSG, IR : agents publics",246.76,6.864
 2065,"Cotisations, CSG, IR : indépendants",46.13,1.283
-2065,"CSG, CASA, IR : retraités",63.84,1.776
-2065,TVA,261.08,7.262
+2065,"CSG, CASA, IR : retraités",66.41,1.847
+2065,TVA,263.61,7.333
 2065,Accises et taxes sur les produits,126.03,3.506
 2065,Impôt sur les sociétés,85.33,2.374
 2065,Impôts de production,87.86,2.444
@@ -483,8 +483,8 @@ annee,impot,md,part_pib
 2066,"Cotisations, CSG, IR : salariés du privé",618.21,17.172
 2066,"Cotisations, CSG, IR : agents publics",247.12,6.864
 2066,"Cotisations, CSG, IR : indépendants",46.19,1.283
-2066,"CSG, CASA, IR : retraités",64.39,1.789
-2066,TVA,261.71,7.269
+2066,"CSG, CASA, IR : retraités",66.88,1.858
+2066,TVA,264.27,7.34
 2066,Accises et taxes sur les produits,126.22,3.506
 2066,Impôt sur les sociétés,85.46,2.374
 2066,Impôts de production,87.99,2.444
@@ -496,8 +496,8 @@ annee,impot,md,part_pib
 2067,"Cotisations, CSG, IR : salariés du privé",619.0,17.171
 2067,"Cotisations, CSG, IR : agents publics",247.44,6.864
 2067,"Cotisations, CSG, IR : indépendants",46.25,1.283
-2067,"CSG, CASA, IR : retraités",64.94,1.802
-2067,TVA,262.32,7.277
+2067,"CSG, CASA, IR : retraités",67.34,1.868
+2067,TVA,264.89,7.348
 2067,Accises et taxes sur les produits,126.38,3.506
 2067,Impôt sur les sociétés,85.57,2.374
 2067,Impôts de production,88.1,2.444
@@ -509,8 +509,8 @@ annee,impot,md,part_pib
 2068,"Cotisations, CSG, IR : salariés du privé",619.89,17.171
 2068,"Cotisations, CSG, IR : agents publics",247.79,6.864
 2068,"Cotisations, CSG, IR : indépendants",46.32,1.283
-2068,"CSG, CASA, IR : retraités",65.49,1.814
-2068,TVA,262.96,7.284
+2068,"CSG, CASA, IR : retraités",67.79,1.878
+2068,TVA,265.56,7.356
 2068,Accises et taxes sur les produits,126.56,3.506
 2068,Impôt sur les sociétés,85.69,2.374
 2068,Impôts de production,88.23,2.444
@@ -522,8 +522,8 @@ annee,impot,md,part_pib
 2069,"Cotisations, CSG, IR : salariés du privé",620.6,17.17
 2069,"Cotisations, CSG, IR : agents publics",248.09,6.864
 2069,"Cotisations, CSG, IR : indépendants",46.38,1.283
-2069,"CSG, CASA, IR : retraités",66.06,1.828
-2069,TVA,263.57,7.292
+2069,"CSG, CASA, IR : retraités",68.25,1.888
+2069,TVA,266.19,7.364
 2069,Accises et taxes sur les produits,126.72,3.506
 2069,Impôt sur les sociétés,85.8,2.374
 2069,Impôts de production,88.34,2.444
@@ -535,8 +535,8 @@ annee,impot,md,part_pib
 2070,"Cotisations, CSG, IR : salariés du privé",621.17,17.169
 2070,"Cotisations, CSG, IR : agents publics",248.32,6.864
 2070,"Cotisations, CSG, IR : indépendants",46.42,1.283
-2070,"CSG, CASA, IR : retraités",66.67,1.843
-2070,TVA,264.14,7.301
+2070,"CSG, CASA, IR : retraités",68.72,1.9
+2070,TVA,266.77,7.373
 2070,Accises et taxes sur les produits,126.84,3.506
 2070,Impôt sur les sociétés,85.88,2.374
 2070,Impôts de production,88.42,2.444
@@ -548,8 +548,8 @@ annee,impot,md,part_pib
 2071,"Cotisations, CSG, IR : salariés du privé",622.12,17.168
 2071,"Cotisations, CSG, IR : agents publics",248.71,6.863
 2071,"Cotisations, CSG, IR : indépendants",46.49,1.283
-2071,"CSG, CASA, IR : retraités",67.33,1.858
-2071,TVA,264.83,7.308
+2071,"CSG, CASA, IR : retraités",69.23,1.91
+2071,TVA,267.48,7.382
 2071,Accises et taxes sur les produits,127.04,3.506
 2071,Impôt sur les sociétés,86.01,2.374
 2071,Impôts de production,88.56,2.444
@@ -561,8 +561,8 @@ annee,impot,md,part_pib
 2072,"Cotisations, CSG, IR : salariés du privé",623.12,17.168
 2072,"Cotisations, CSG, IR : agents publics",249.11,6.863
 2072,"Cotisations, CSG, IR : indépendants",46.57,1.283
-2072,"CSG, CASA, IR : retraités",68.01,1.874
-2072,TVA,265.54,7.316
+2072,"CSG, CASA, IR : retraités",69.75,1.922
+2072,TVA,268.21,7.39
 2072,Accises et taxes sur les produits,127.24,3.506
 2072,Impôt sur les sociétés,86.15,2.374
 2072,Impôts de production,88.71,2.444
@@ -574,8 +574,8 @@ annee,impot,md,part_pib
 2073,"Cotisations, CSG, IR : salariés du privé",624.18,17.168
 2073,"Cotisations, CSG, IR : agents publics",249.54,6.863
 2073,"Cotisations, CSG, IR : indépendants",46.65,1.283
-2073,"CSG, CASA, IR : retraités",68.69,1.889
-2073,TVA,266.29,7.324
+2073,"CSG, CASA, IR : retraités",70.28,1.933
+2073,TVA,268.97,7.398
 2073,Accises et taxes sur les produits,127.46,3.506
 2073,Impôt sur les sociétés,86.3,2.374
 2073,Impôts de production,88.86,2.444

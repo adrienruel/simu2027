@@ -1654,3 +1654,33 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   - Nouveau `tests/test_independance.py` : tous les programmes publiés sont simulés avec le code et les paramètres d'Écologie de droite rendus inaccessibles, et retrouvent les trajectoires publiées.
 - **Code laissé en place.** 28 modules de `moteur/` ne sont jamais chargés par le comparateur ; ils ne servent qu'à Écologie de droite ou à ses outils (liste dans `docs/architecture.md`). Ils restent en place pour que ce programme tourne encore avec `-m edd`.
 - **Installation :** `numpy` ajouté à `requirements.txt` ; `requirements-micro.txt` fixe OpenFisca-France 177.0.0.
+
+## 16/11/2026 (fin d'après-midi) — Phase J1 : publier honnêtement ce que le modèle sait déjà
+
+- **Écart de solde primaire au statu quo** : nouvelle colonne `ecart_solde_primaire_pib` de `comparaison_trajectoire.csv` (points de PIB, + = meilleur). Le comparateur classe désormais sa synthèse sur cet écart en 2037, et l'affiche aussi pour 2032. C'est la comparaison qui ne dépend pas de la boule de neige des intérêts.
+- **Horizon** :
+  - colonne `hors_plausibilite` (dette au-dessus de `publication.seuil_dette_plausible`, 200 % du PIB, `options.yaml`) ;
+  - les valeurs de ces années sont en italique gris dans la synthèse ;
+  - au prudent, tous les programmes et le statu quo dépassent ce seuil en 2050 ;
+  - l'horizon des courbes (2060) n'a pas changé : décision D2 de la roadmap, ouverte.
+- **Bandeau « À lire avant les chiffres »** en tête du comparateur :
+  - le prudent n'est pas un scénario central ;
+  - l'écart de solde primaire est la mesure robuste, et les niveaux d'après 2037 ne sont pas des prévisions ;
+  - quatre programmes sont partiels ;
+  - les fonds de capitalisation sont hors des administrations publiques ;
+  - les déciles sont partiels.
+- **Sorties tracées** :
+  - `sorties/MANIFESTE.json`, écrit par `outils/trace.py`, appelé par chaque script qui écrit dans `sorties/`. Chaque entrée porte l'empreinte du fichier, le script, la date, le commit et l'empreinte des paramètres.
+  - `tests/test_sorties.py` échoue si une sortie manque au manifeste, a été modifiée hors des scripts, ou a été produite avec d'autres paramètres que les paramètres actuels.
+  - Les sorties non régénérées (micro, tirages de l'incertitude, inventaire C1, comparaison de la phase E) sont inscrites comme antérieures au manifeste, avec leur origine.
+  - `statu_quo_validation.csv` n'a aucun script producteur : origine à retrouver.
+- **Sorties d'Écologie de droite** rangées dans `sorties/ecologie_de_droite/`, hors manifeste : tableau de bord du 04/11, leviers, IS progressif, sensibilité, inventaire C1. Leurs scripts y écrivent désormais.
+- **Régénérées** :
+  - export du comparateur (inchangé, hors les deux colonnes nouvelles) ;
+  - `statu_quo.json` et `statu_quo_*.csv` (le prudent 2037 passe de 9,195 %, périmé, à 9,503 %) ;
+  - variante du fonds, identique, calculée en 5 secondes et non 20 minutes.
+- **Documentation** :
+  - `docs/statu_quo.md` : indexation des prestations sur les salaires dans le tableau de départ, et tableau des résultats recalculé ;
+  - en-tête de `docs/offre.md` ;
+  - docstring de `moteur/statu_quo.py` (âge légal par génération) ;
+  - `python -m moteur.statu_quo --ecart <programme>` compare désormais un programme nommé.

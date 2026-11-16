@@ -319,4 +319,6 @@ if __name__ == "__main__":
         f = SORTIE.with_name(f"incertitude_rho{rho:g}.json")
         f.parent.mkdir(exist_ok=True)
         f.write_text(json.dumps(r, ensure_ascii=False), encoding="utf-8")
+        from outils import trace
+        trace.enregistrer([f, fichier_tirages(rho, 2029)], script="moteur.incertitude")
         print(f"Écrit : {f}")

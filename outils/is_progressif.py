@@ -89,7 +89,7 @@ def main() -> list[dict]:
         out.append(mesurer(nom, parametres(tr), tr[-1][1]))
     for t in UNIQUES:
         out.append(mesurer(f"Taux unique de {round(100 * t)} %", Parametres().avec({"entreprises.taux_is_etat": t}), t))
-    (RACINE / "sorties" / "is_progressif.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    (RACINE / "sorties" / "ecologie_de_droite" / "is_progressif.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     return out
 
 

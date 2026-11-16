@@ -126,3 +126,11 @@ economies:
 ecologie_options:
   emissions_activite: {valeur: true, v235: false, unite: sans_unite, statut: DECISION, note: "Décision d'Adrien du 05/11/2026 : les émissions suivent l'activité (population, revenu par habitant), le progrès technique et la part importée (moteur/ecologie/emissions.py), au lieu du taux fixe carbone.baisse_tendancielle_emissions. La recette carbone, l'ETS2 et le poids des taxes carbone dans l'inflation suivent ces émissions, et l'assiette répond au prix du carbone par rapport au statu quo (saut de 2029 compris), avec ajustement progressif : la même équation que les émissions."}
 
+
+# --- Publication du comparateur (roadmap du comparateur, phase 1, 16/11/2026) ---------------------------------
+publication:
+  seuil_dette_plausible:
+    valeur: 200
+    unite: pourcent
+    statut: HYPOTHESE
+    note: "Ratio de dette (% du PIB) au-delà duquel une trajectoire n'a plus valeur de prévision : un ajustement serait forcé avant (marchés, règles européennes). Le comparateur marque ces années (colonne hors_plausibilite de comparaison_trajectoire.csv) et les grise. 200 % reprend la colonne « Dette > 200 % » du comparateur ; décision D2 de la roadmap ouverte (horizon publié)."

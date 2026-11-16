@@ -98,7 +98,7 @@ def sensibilites(p: Parametres | None = None, statuts=("HYPOTHESE",), k: float =
 if __name__ == "__main__":
     import json
     from pathlib import Path
-    sortie = Path(__file__).resolve().parent.parent / "sorties" / "sensibilite.json"
+    sortie = Path(__file__).resolve().parent.parent / "sorties" / "ecologie_de_droite" / "sensibilite.json"
     sortie.parent.mkdir(exist_ok=True)
     res = sensibilites()
     sortie.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")

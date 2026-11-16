@@ -78,6 +78,8 @@ def inventaire(programme: str | None) -> list[dict]:
 if __name__ == "__main__":
     nom = sys.argv[1] if len(sys.argv) > 1 else None
     res = inventaire(nom)
-    f = RACINE / "sorties" / f"c1_{nom or 'commun'}.json"
+    f = RACINE / "sorties" / ("ecologie_de_droite" if nom == "ecologie_de_droite" else "") / f"c1_{nom or 'commun'}.json"
     f.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    from outils import trace
+    trace.enregistrer(f, script="outils.c1_inventaire")
     print(f"Écrit : {f} ({len(res)} variantes)")

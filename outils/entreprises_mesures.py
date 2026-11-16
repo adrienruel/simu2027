@@ -162,6 +162,8 @@ def main() -> None:
         w = csv.DictWriter(f, fieldnames=list(lignes[0]))
         w.writeheader()
         w.writerows(lignes)
+    from outils import trace
+    trace.enregistrer("micro_entreprises.csv", script="outils.entreprises_mesures")
 
 
 if __name__ == "__main__":

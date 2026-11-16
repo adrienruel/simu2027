@@ -111,7 +111,7 @@ def donnees(p: Parametres | None = None) -> dict:
         return x.statut
     # Sensibilité : lue dans sorties/sensibilite.json (python -m moteur.sensibilite, quelques minutes)
     import json
-    fichier = RACINE / "sorties" / "sensibilite.json"
+    fichier = RACINE / "sorties" / "ecologie_de_droite" / "sensibilite.json"
     brut = json.loads(fichier.read_text(encoding="utf-8")) if fichier.exists() else []
     sens = [r for r in brut if "erreur" not in r and r.get("parametre", r["cle"]) in p._p
             and p[r.get("parametre", r["cle"])].statut == "HYPOTHESE"][:15]

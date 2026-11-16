@@ -59,7 +59,7 @@ def mesurer(nom: str, modifs: dict) -> dict:
 
 def main() -> list[dict]:
     out = [mesurer(n, m) for n, m in VARIANTES]
-    (RACINE / "sorties" / "leviers.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    (RACINE / "sorties" / "ecologie_de_droite" / "leviers.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     return out
 
 

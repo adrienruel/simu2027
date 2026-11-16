@@ -55,7 +55,7 @@ def grille(p: Parametres | None = None) -> list[dict]:
 if __name__ == "__main__":
     g = grille()
     Path("sorties").mkdir(exist_ok=True)
-    Path("sorties/levier_is.json").write_text(json.dumps(g, ensure_ascii=False, indent=1), encoding="utf-8")
+    Path("sorties/ecologie_de_droite/levier_is.json").write_text(json.dumps(g, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{'IS':>4} {'déd.':>4} {'EATR':>5} {'recettes':>8} {'déduc.':>6} {'érosion':>7} {'invest.':>7} {'emplois loc':>11} | sans clause 2029 2032 2037 2050 | publié 2029 2037 | dette 50")
     for x in g:
         d, q = x["deficit_sans_clause"], x["deficit_publie"]

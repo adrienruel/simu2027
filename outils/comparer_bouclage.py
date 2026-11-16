@@ -42,7 +42,10 @@ def main():
     r = {}
     for nom, b, v in out:
         r.setdefault(nom, {})["apres" if b else "avant"] = v
-    json.dump(r, open("sorties/comparaison_bouclage.json", "w"), indent=1, default=str)
+    with open("sorties/comparaison_bouclage.json", "w") as fh:
+        json.dump(r, fh, indent=1, default=str)
+    from outils import trace
+    trace.enregistrer("comparaison_bouclage.json", script="outils.comparer_bouclage")
     for s in (scen or ["prudent", "median"]):
         print(f"\nDéficit (% du PIB), {s} : avant → après")
         for nom in noms:

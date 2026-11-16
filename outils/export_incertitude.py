@@ -59,6 +59,8 @@ def main() -> None:
         w = csv.DictWriter(fh, fieldnames=list(lignes[0]))
         w.writeheader()
         w.writerows(lignes)
+    from outils import trace
+    trace.enregistrer(out, script="outils.export_incertitude")
     print(f"Écrit : {out} ({len(lignes)} lignes)")
 
 

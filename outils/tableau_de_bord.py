@@ -11,7 +11,7 @@ from moteur.restitution import donnees
 
 RACINE = Path(__file__).resolve().parent.parent
 GABARIT = Path(__file__).resolve().parent / "gabarit_tableau.html"
-SORTIE = RACINE / "sorties" / "tableau_de_bord.html"
+SORTIE = RACINE / "sorties" / "ecologie_de_droite" / "tableau_de_bord.html"
 
 
 def generer(chemin: Path = SORTIE) -> Path:
