@@ -14,6 +14,8 @@
 
 glucksmann_smic:
   smic_net_programme:
+    url: "https://place-publique.eu/wp-content/uploads/2025/06/20250623_Projet_placepublique_acte1_BAT_BaDef.pdf"
+    page: "« Notre vision pour la France. Acte I », chantier 16 « Pour que le travail paie à nouveau »"
     valeur: 1600
     unite: eur_mois
     annee_euros: 2027

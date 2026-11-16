@@ -78,12 +78,37 @@ def _valeur(d: dict, z: float, i: int | None = None):
     return v
 
 
-def _tirer_jeu(d: dict, z: float) -> dict:
-    d = dict(d)
+# Paramètres que le moteur lit dans le scénario miroir quand le sens d'un effet s'inverse (MIROIR dans
+# moteur/bouclage.py, capital.py, migrations.py, noyau.py, offre.py, programme_simple.py, reformes_structurelles.py).
+# Phase 3.2 (16/11/2026) : leur colonne prudente, que le tirage médian lit en miroir, est tirée au point miroir
+# z_m = −z − z90 (z = 0, médian → prudent ; z = −z90, prudent → médian ; z = +z90, optimiste → vers la crise), comme
+# les scénarios publiés (MIROIR : prudent ↔ médian, crise ↔ optimiste). Avant, elle restait au prudent publié.
+# Liste explicite : d'autres lectures de la colonne prudente ne sont pas des miroirs (macro.tendance avant 2029,
+# inflation de 2027-2028), et ne doivent pas bouger.
+MIROIR_CLES = (
+    "macro.multiplicateur", "macro.annees_effet_ajustement", "bouclage.prime_demande", "emploi_public.eviction_privee",
+    "seniors.devenir", "macro.elasticite_invest", "capital_public.parametres", "demographie.titres_vers_solde",
+    "macro.reformes_structurelles", "offre.recherche", "offre.education", "offre.travail_participation",
+    "offre.travail_heures", "offre.demande_travail", "offre.travail_couples", "offre.travail_part_pib",
+    "offre.elasticite_capital_menages", "offre.elasticite_consommation", "offre.elasticite_cout_travail",
+    "offre.elasticite_successions", "offre.elasticite_transferts_actifs",
+)
+
+
+def z_miroir(z: float) -> float:
+    return -z - Z90
+
+
+def _tirer_jeu(d: dict, z: float, miroir: bool = False) -> dict:
+    orig, d = d, dict(d)
     if isinstance(d["median"], list):
-        d["median"] = [_valeur(d, z, i) for i in range(len(d["median"]))]
+        d["median"] = [_valeur(orig, z, i) for i in range(len(orig["median"]))]
+        if miroir and "prudent" in orig:
+            d["prudent"] = [_valeur(orig, z_miroir(z), i) for i in range(len(orig["median"]))]
     else:
-        d["median"] = _valeur(d, z)
+        d["median"] = _valeur(orig, z)
+        if miroir and "prudent" in orig:
+            d["prudent"] = _valeur(orig, z_miroir(z))
     return d
 
 
@@ -131,21 +156,28 @@ def z_tirage(graine: int, i: int, rho: float, nom: str) -> float:
     return math.sqrt(rho) * commun + math.sqrt(1 - rho) * propre
 
 
-def tirer(p: Parametres, graine: int, i: int, rho: float, liste=None) -> Parametres:
-    """Copie de p dont chaque jeu de scénarios incertain a sa colonne médiane tirée (tirage n° i)."""
+def tirer(p: Parametres, graine: int, i: int, rho: float, liste=None, miroir: bool = True) -> Parametres:
+    """Copie de p dont chaque jeu de scénarios incertain a sa colonne médiane tirée (tirage n° i), et, pour les
+    paramètres lus en miroir (MIROIR_CLES), sa colonne prudente au point miroir (miroir=False : l'ancien tirage)."""
+    return tirer_z(p, lambda nom: z_tirage(graine, i, rho, nom), liste, miroir)
+
+
+def tirer_z(p: Parametres, z_de, liste=None, miroir: bool = True) -> Parametres:
+    """Comme tirer, avec z_de(nom) → z donné (tests : tous les paramètres au même point)."""
     c = p.avec()
     for cle, chemin in (liste if liste is not None else cibles(p)):
         nom = "/".join((cle,) + tuple(str(k) for k in chemin))
-        z = z_tirage(graine, i, rho, nom)
+        z = z_de(nom)
         par = c._p[cle]
+        mir = miroir and cle in MIROIR_CLES
         if not chemin:
-            c._p[cle] = dataclasses.replace(par, valeur=_tirer_jeu(par.valeur, z))
+            c._p[cle] = dataclasses.replace(par, valeur=_tirer_jeu(par.valeur, z, mir))
             continue
         v = copy.deepcopy(par.valeur)
         cible = v
         for k in chemin[:-1]:
             cible = cible[k]
-        cible[chemin[-1]] = _tirer_jeu(cible[chemin[-1]], z)
+        cible[chemin[-1]] = _tirer_jeu(cible[chemin[-1]], z, mir)
         c._p[cle] = dataclasses.replace(par, valeur=v)
     return c
 
@@ -172,7 +204,21 @@ def un_tirage(i: int, graine: int, rho: float, noms: list[str], base: Parametres
         except Exception as e:  # noqa: BLE001 — tirage écarté pour ce programme, compté dans le résumé
             out[nom] = None
             out.setdefault("erreurs", {})[nom] = f"{type(e).__name__}: {e}"[:200]
+        # fonds de capitalisation compté dans les administrations publiques (variante commune, moteur/fonds_apu.py),
+        # tiré lui aussi (phase 3.2, 16/11/2026) : la fourchette du classement du fonds se lit à côté de la publiée
+        if nom in FONDS and out[nom] is not None:
+            from . import fonds_apu
+            try:
+                out[nom + SUFFIXE_FONDS] = _lire(fonds_apu.variante(p, prog, scenarios=("median",))["median"]["apu"])
+            except Exception as e:  # noqa: BLE001
+                out[nom + SUFFIXE_FONDS] = None
+                out.setdefault("erreurs", {})[nom + SUFFIXE_FONDS] = f"{type(e).__name__}: {e}"[:200]
     return out
+
+
+# programmes publiés qui proposent un fonds de capitalisation (outils/variante_fonds_apu.PROGRAMMES)
+FONDS = ("philippe", "retailleau", "bertrand", "zemmour", "le_pen")
+SUFFIXE_FONDS = "@fonds_apu"
 
 
 def _quantile(xs: list[float], q: float) -> float:
@@ -193,11 +239,17 @@ def _rangs(xs: list[float]) -> list[float]:
 def resumer(tirages: list[dict], noms: list[str], graine: int, rho: float, listes: dict, n_sensibilite: int = 10) -> dict:
     """Intervalles (D4), probabilité de faire mieux que le statu quo, et sensibilité (D3)."""
     out = {"n": len(tirages), "graine": graine, "rho": rho, "programmes": {}}
-    for nom in ["statu_quo"] + noms:
+    variantes = [n + SUFFIXE_FONDS for n in noms if n in FONDS and any(n + SUFFIXE_FONDS in d for d in tirages)]
+    for nom in ["statu_quo"] + noms + variantes:
         r = {}
         tous = tirages
         tirages = [d for d in tous if d.get(nom) is not None and d.get("statu_quo") is not None]
         r["tirages_retenus"] = len(tirages)
+        r["tirages_ecartes"] = len(tous) - len(tirages)
+        if not tirages:
+            out["programmes"][nom] = r
+            tirages = tous
+            continue
         for t in ANNEES_CLES:
             for g in GRANDEURS:
                 xs = [d[nom][t][g] for d in tirages]
@@ -208,7 +260,7 @@ def resumer(tirages: list[dict], noms: list[str], graine: int, rho: float, liste
                 r[f"ecart_deficit_{t}"] = {"p10": _quantile(ec, 0.1), "p50": _quantile(ec, 0.5), "p90": _quantile(ec, 0.9)}
                 r[f"proba_mieux_que_statu_quo_{t}"] = sum(x < 0 for x in ec) / len(ec)
         # sensibilité : corrélation de rang entre le z de chaque hypothèse et le déficit de 2037 du programme
-        cles = listes["base"] + (listes.get(nom) or [])
+        cles = listes["base"] + (listes.get(nom.split("@")[0]) or [])
         y = _rangs([d[nom][2037]["deficit"] for d in tirages])
         infl = []
         for cle, chemin in cles:

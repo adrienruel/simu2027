@@ -12,6 +12,8 @@
 
 philippe_retraites:
   age_cible:
+    url: "https://www.lagazettefrance.fr/article/age-de-depart-a-65-ans-45-annuites-de-cotisation-edouard-philippe-devoile-son-projet-de-reforme-des-retraites"
+    page: "Dépêche AFP du 29/09/2026 sur la vidéo du candidat (65 ans et 45 annuités « en moins de 10 ans »)"
     valeur: 65
     unite: sans_unite
     statut: SOURCE

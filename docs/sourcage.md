@@ -119,3 +119,25 @@ Avec la TVA des retraités recalculée, le modèle reconstitue une TVA actuelle 
 | macro.externalites_capital_fonds | HYPOTHÈSE encadrée | 0 (médian 1 %, optimiste 2 %) | Bom et Ligthart (2014) |
 
 Décompte des paramètres : 404, dont 109 sourcés, 89 décisions, 31 hypothèses encadrées, 175 hypothèses sans source.
+
+## Sources vérifiables (phase 3.4, 16 novembre 2026)
+
+Un paramètre au statut SOURCE peut désormais porter deux champs : `url` (adresse du document, http ou https) et
+`page` (page, tableau, article ou cellule où lire la valeur). `url` est refusée hors du statut SOURCE.
+
+- **Classement** : `python -m outils.sources_poids` → `sorties/sources_poids.csv` : les 173 paramètres sourcés
+  (communs sur le statu quo, propres à un programme sur ce programme), classés par l'effet de +10 % sur le déficit
+  de 2037 au prudent, même méthode que l'inventaire C1.
+- **Les vingt qui pèsent le plus** : 17 ont `url` et `page`. Trois restent sans adresse, nommés dans le test :
+  le SMIC de Roussel (université d'été du PCF, pas de texte publié retrouvé), le taux apparent de 2029 (cellule du
+  classeur, source primaire à retrouver), les dépenses de santé de 2024 (cartographie de l'Assurance maladie, sans
+  adresse stable retrouvée).
+- **Arriéré** : `parametres/sources/sans_url.txt` liste les 166 paramètres SOURCE encore sans url. Le test
+  `tests/test_sources.py` échoue si un nouveau paramètre SOURCE n'a pas d'url, ou si une ligne de l'arriéré
+  a reçu son url sans être retirée.
+- **À vérifier** : `statu_quo.charge_interets_base` cite l'avis HCFP n° 2026-5 pour 91 Md€ de charge d'intérêts
+  des administrations publiques en 2027. Le compte rendu du Conseil des ministres du 1er octobre 2026 donne
+  91,2 Md€, mais La Finance pour tous (08/10/2026) l'attribue au seul budget de l'État. L'avis du HCFP n'a pas été
+  retrouvé en ligne : la valeur n'est pas changée, le doute est écrit dans `page`.
+- **Pas encore fait** : archiver les tableaux sources dans `parametres/sources/`. L'environnement de travail ne
+  peut pas télécharger ces documents ; à faire depuis un poste qui y a accès.

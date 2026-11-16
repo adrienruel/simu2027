@@ -15,12 +15,16 @@ statu_quo:
     statut: SOURCE
     source: "PLF 2027 : dépense publique hors crédits d'impôt 56,9 % du PIB en 2027 (57,1 % en 2026) ; HCFP, avis n° 2026-5 sur les PLF et PLFSS pour 2027 (octobre 2026)"
   deficit_base:
+    url: "https://www.tresor.economie.gouv.fr/Articles/2026/10/06/le-rapport-economique-social-et-financier-resf-2027-est-publie"
+    page: "RESF 2027 (PLF 2027) : déficit public 5,4 % en 2026, 5,0 % en 2027"
     valeur: 0.050
     unite: taux
     statut: SOURCE
     source: "PLF 2027 : déficit public de 5,0 % du PIB en 2027 (5,4 % en 2026) ; HCFP, avis n° 2026-5"
     note: "Recettes publiques de départ = dépense − déficit = 51,9 % du PIB (prélèvements obligatoires 44,2 % ; le reste : ventes, revenus de la propriété, transferts). Hypothèse : les mesures du PLF 2027 sont votées et maintenues, comme dans calendrier.deficit_tendanciel_2027_2028. DÉCISION d'Adrien du 04/11/2026 : point de départ provisoire, à actualiser quand la loi de finances 2027 sera votée."
   charge_interets_base:
+    url: "https://acteurspublics.fr/media/2026/10/10-01-Communique-Compte-rendu-du-Conseil-des-ministres-du-jeudi-1er-octobre-2026.pdf"
+    page: "Compte rendu du Conseil des ministres du 1er octobre 2026 (PLF 2027) : charge d'intérêts de 79,2 Md€ en 2026 à 91,2 Md€ en 2027. À vérifier : La Finance pour tous (08/10/2026) rapporte 91 Md€ « pour le seul budget de l'État », pas pour les APU ; avis HCFP n° 2026-5 non retrouvé en ligne"
     valeur: 0.029
     unite: taux
     statut: SOURCE
@@ -185,6 +189,8 @@ statu_quo:
     source: "Classeur v235, Contrôle système actuel : mission Défense 66,7 Md€ en 2026 pensions comprises (loi de programmation) ; contribution au CAS Pensions 9,58 Md€ (missions_etat_2026.csv)"
     note: "Hors pensions (66,7 − 9,6), les pensions des militaires étant dans le bloc retraites. Pour mémoire : le bloc part du PLF 2027 (statu_quo.defense_2027_courants)."
   defense_2027_courants:
+    url: "https://www.vie-publique.fr/discours/305194-catherine-vautrin-alice-rufo-27102026-credits-des-armees-pour-2027"
+    page: "Déclaration de la ministre des Armées au Sénat, 27/10/2026 (63,4 Md€ en 2027)"
     valeur: 63.4
     unite: md_eur
     annee_euros: 2027

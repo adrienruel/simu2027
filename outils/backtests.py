@@ -100,6 +100,57 @@ def pfu(p: Parametres) -> dict:
     return out
 
 
+def is_33_25(p: Parametres) -> dict:
+    """Baisse du taux normal de l'IS de 33,3 % à 25 % (2018-2022), backtest hors calage (phase 3.3, 16/11/2026) :
+    coût ex ante ≈ 11 Md€ par an (FIPECO, 01/09/2017 ; Institut Montaigne, 2022), porté en euros de 2026 par le PIB
+    nominal (≈ +15 % de 2022 à 2026, HYPOTHESE), instrument « capital des entreprises », montée en cinq ans comme la
+    réforme. Évaluations ex post : aucun effet agrégé sur l'investissement isolé à ce jour (France Stratégie, comité
+    d'évaluation des réformes de la fiscalité du capital, rapport final d'octobre 2023) ; création d'entreprises +1
+    point par point de taux d'imposition des bénéfices en moins (IPP, rapport n° 47, 2023, PFU et IS ensemble) ; taux
+    implicite de l'IS passé de 20,7 % à 17,5 % de l'excédent net d'exploitation de 2016 à 2022 (Insee, document de
+    travail n° 2025-18), la base ayant crû plus vite que l'excédent. Aucun paramètre du moteur n'a été calé sur
+    cette réforme."""
+    out = {}
+    for s in SCENARIOS:
+        w = sq.salaires(p, s)
+        m = Mesure("Baisse de l'IS 33,3 → 25 % (backtest)", "recettes",
+                   {t: -11.0 * 1.15 * min(1.0, (t - 2028) / 5) * w[t] / w[2029] for t in ANNEES}, "detail",
+                   instrument="capital_entreprises")
+        ef = offre.effets(p, s, [m], annees_avant=())
+        y = sq.pib(p, s)
+        out[s] = {"pib_5_ans_pct": ef["dpib"][2033] / y[2033] * 100, "pib_10_ans_pct": ef["dpib"][2038] / y[2038] * 100,
+                  "emplois_10_ans": sum(v.get(2038, 0.0) for v in ef["emplois"].values()),
+                  "pib_10_ans_md": ef["dpib"][2038], "cout_statique_md": 11.0 * 1.15}
+    return out
+
+
+def assurance_chomage_2019(p: Parametres) -> dict:
+    """Réforme de l'assurance chômage de 2019-2021, backtest hors calage des lectures communes de « chômage
+    structurel en moins » (phase 3.3, 16/11/2026). Le moteur n'a pas de mécanisme commun pour l'assurance chômage :
+    chaque programme qui la resserre (Attal, Philippe, Retailleau, Lisnard) déclare une baisse du taux de chômage
+    (<programme>_chomage.baisse_taux). On la confronte à l'ordre de grandeur qui découle des effets mesurés de la
+    réforme de 2019-2021 (Dares, rapport final du comité d'évaluation, avril 2025, p. 2, 17 et 25) :
+    - salaire journalier de référence : 1,1 million d'allocataires touchés, durée sans emploi −10 jours (Paris-Cité) ;
+    - dégressivité : 70 000 personnes par an, durée de non-emploi −1,5 mois ;
+    - condition d'affiliation : 475 000 personnes, retour à l'emploi à 2 mois +3 points (base 30 %), compté ici
+      comme 2 mois d'avance pour ces 3 % ;
+    soit un stock de chômeurs plus bas de ≈ 1,1 M × 10 / 365 + 70 000 × 1,5 / 12 + 475 000 × 3 % × 2 / 12. Le
+    rapport ne donne pas d'effet sur le niveau d'emploi (p. 9) : c'est un ordre de grandeur, pas une évaluation
+    macroéconomique. Repère macro : réformes de 2021 et 2023 ensemble ≈ 0,6 point de chômage structurel (Banque de
+    France, bulletin n° 264, 2026, cité dans les paramètres des programmes). La réforme de 2019-2021 représentait
+    ≈ 2,3 Md€ d'économies par an ex ante, environ 7 % des allocations (même rapport, p. 16-17)."""
+    from moteur import noyau
+    e = sq.effectifs(p, "prudent")[2029]
+    actifs = e["emploi"] + e["chomeurs"]
+    stock = 1.1e6 * 10 / 365 + 70_000 * 1.5 / 12 + 475_000 * 0.03 * 2 / 12
+    out = {"reforme_2019_2021": {"chomeurs_en_moins": stock, "points_de_chomage": stock / actifs * 100,
+                                 "economies_ex_ante_md": 2.3}}
+    for nom in ("attal", "philippe", "retailleau", "lisnard"):
+        prog = noyau.charger(nom)
+        out[nom] = {s: prog.v("chomage.baisse_taux", s) * 100 for s in SCENARIOS}
+    return out
+
+
 if __name__ == "__main__":
     p = Parametres()
     print("CICE :", {s: {k: round(v / 1e3) if "emplois" in k else round(v, 2) for k, v in x.items()} for s, x in cice(p).items()})
@@ -108,3 +159,7 @@ if __name__ == "__main__":
     print("35 heures :", {s: {k: (round(v / 1e3) if "emplois" in k else round(v, 2)) for k, v in x.items()}
                           for s, x in trente_cinq_heures(p).items()})
     print("PFU :", {s: {k: (round(v / 1e3) if "emplois" in k else round(v, 3)) for k, v in x.items()} for s, x in pfu(p).items()})
+    print("IS 33,3 → 25 % :", {s: {k: (round(v / 1e3) if "emplois" in k else round(v, 3)) for k, v in x.items()} for s, x in is_33_25(p).items()})
+    ac = assurance_chomage_2019(p)
+    print("Assurance chômage 2019-2021 :", {k: round(v, 3) for k, v in ac.pop("reforme_2019_2021").items()})
+    print("  lectures des programmes (points de chômage) :", {k: {s: round(x, 2) for s, x in v.items()} for k, v in ac.items()})

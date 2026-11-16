@@ -184,7 +184,19 @@ def ecart_taux_borne(p: Parametres, prime: float, supplement: float) -> float:
 def ratio_reference(p: Parametres, s: str) -> float:
     """Dette/PIB de référence de la prime : celle du statu quo en 2029, commune à tous les programmes."""
     from . import statu_quo as sq
-    return sq.dette_fin_2028(p) / sq.pib(p, s)[2029]
+    return sq.dette_fin_2028(p) / facteur_2027_2028(p) / sq.pib(p, s)[2029]
+
+
+def facteur_2027_2028(p: Parametres) -> float:
+    """Croissance cumulée de 2027 et 2028 (calendrier.croissance_2027_2028, nulle par défaut : économie de 2026 placée
+    en 2029). Non nulle (variante de la décision D3) : la dette de fin 2028 est rapportée à une économie qui a grandi
+    pendant ces deux ans, ce qui revient à la diviser par ce facteur, les flux du statu quo restant inchangés."""
+    if "calendrier.croissance_2027_2028" not in p._p:
+        return 1.0
+    f = 1.0
+    for g in p.val("calendrier.croissance_2027_2028").values():
+        f *= 1 + g
+    return f
 
 
 def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, contexte: dict | None = None,
@@ -219,7 +231,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     app0, lt = p.val("macro.taux_apparent_2029"), p.val("macro.taux_long_terme")
     n_lt, mat = p.val("macro.annees_taux_long_terme"), p.val("macro.maturite_moyenne_dette")
     fisher_actif = p.val("inflation.active") and p.val("inflation.effet_fisher")
-    dette_prec = ctx.get("dette_depart") or sq.dette_fin_2028(p)
+    dette_prec = (ctx.get("dette_depart") or sq.dette_fin_2028(p)) / facteur_2027_2028(p)
     fisher = prime = bce = 0.0
     ratio_ref, pib_ref_2029 = ratio_reference(p, s), sq.pib(p, s)[2029]
     ecart_scen = sq._v(p, "macro.ecart_taux_scenario", s)
@@ -295,8 +307,12 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         if fisher_actif:
             fisher += ((infl_taux[t] - infl_ref) - fisher) / mat
         bce += (marche.get(t, 0.0) - bce) / mat
-        nominal = (min(lt, app0 + (lt - app0) * (t - 2029) / n_lt) + fisher + bce + ecart_taux_borne(p, prime, sup.get(t, 0.0))
-                   + ecart_scen * min(1.0, (t - 2029) / n_lt))
+        # composantes du taux apparent nominal, publiées pour la décomposition du déficit (moteur/decomposition.py)
+        taux_base = min(lt, app0 + (lt - app0) * (t - 2029) / n_lt)
+        taux_prime = ecart_taux_borne(p, prime, sup.get(t, 0.0))
+        taux_scen = ecart_scen * min(1.0, (t - 2029) / n_lt)
+        nominal = (taux_base + fisher + bce + taux_prime
+                   + taux_scen)
         interets_reels = (nominal - infl[t]) * dette_prec
         # emprunt aux ménages déjà dans la dette (phase A6, DÉCISION d'Adrien du 12/11/2026) : ce que l'État leur doit
         # porte le rendement servi (taux_quasi_dette, réel), pas le taux de la dette de marché. Écart compté en intérêts
@@ -320,7 +336,8 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "pib": y[t], "recettes": rec, "depenses_primaires": primaire, "blocs": bl,
             "interets_reels": interets_reels, "charge_dette": interets_reels + infl[t] * dette_prec,
             "interets_menages": interets_menages,
-            "taux_apparent": nominal, "taux_bce": bce, "ecart_marche": marche_t, "pib_taux": dy_r, "erosion_pensions": erosion,
+            "taux_apparent": nominal, "taux_bce": bce, "taux_base": taux_base, "taux_fisher": fisher, "taux_prime": taux_prime,
+            "taux_scenario": taux_scen, "dette_debut": dette_prec, "ecart_marche": marche_t, "pib_taux": dy_r, "erosion_pensions": erosion,
             "balance_commerciale": _balance(p, s, y[t], ctx.get("prix_bouclage", {}).get(t, 0.0), t)
                                    - ctx.get("facture_energie", {}).get(t, 0.0) / y[t] * 100,
             "facture_energie": ctx.get("facture_energie", {}).get(t, 0.0), "solde_primaire": rec - primaire, "solde": solde, "dette": dette,

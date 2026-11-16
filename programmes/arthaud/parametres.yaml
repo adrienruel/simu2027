@@ -13,6 +13,8 @@
 
 arthaud_smic:
   smic_net_programme:
+    url: "https://www.lagazettefrance.fr/article/plus-leon-trotski-que-leon-xiv-premier-meeting-de-campagne-pour-arthaud-et-lo"
+    page: "Dépêche AFP du 26/09/2026 (meeting de la Mutualité)"
     valeur: 2200
     unite: eur_mois
     annee_euros: 2027

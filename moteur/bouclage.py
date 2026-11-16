@@ -223,7 +223,10 @@ def reponse(p, s: str, cout_net: dict, annees, mesures=None, physiques=None) -> 
                   if m_.poste == "investissement" and m_.nature == "mesure" and not m_.instrument) for t in annees}
     chocs_inv, prec_inv = [], 0.0
     emplois = {}
-    m_med = sq._v(p, "macro.multiplicateur", "median")
+    # multiplicateur auquel les profils d'emploi de Mésange sont rapportés : fixe (bouclage.multiplicateur_reference).
+    # Lire la colonne médiane, tirée dans l'incertitude, rendait l'emploi de conjoncture insensible au multiplicateur
+    # tiré et divisait par zéro quand le tirage touchait la borne basse (phase 3.2, 16/11/2026)
+    m_med = p.val("bouclage.multiplicateur_reference")
     e_dep, e_inv = _emplois_generiques(p, "depense"), _emplois_generiques(p, "investissement")
     eff = sq.effectifs(p, s)
     e_ = {t: eff[max(t, 2029)]["emploi"] for t in annees}
@@ -263,7 +266,7 @@ def reponse(p, s: str, cout_net: dict, annees, mesures=None, physiques=None) -> 
         b_ = p.val("bouclage.bce")
         fp, fy = (b_["phi_pi"], b_["phi_y"]) if b_["active"] else (0.0, 0.0)
         f_ = p.val("bouclage.forme")
-        m_med = sq._v(p, "macro.multiplicateur", "median")
+        m_med = p.val("bouclage.multiplicateur_reference")
         x_pr = {t: 0.0 for t in annees}
         p_pr = {t: 0.0 for t in annees}
         for (c, inc), ser in profils.items():

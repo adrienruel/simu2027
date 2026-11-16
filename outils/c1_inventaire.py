@@ -45,19 +45,24 @@ def _sans_clause(p: Parametres) -> Parametres:
         return p
 
 
-def inventaire(programme: str | None) -> list[dict]:
+def inventaire(programme: str | None, statut: str = "HYPOTHESE") -> list[dict]:
+    """statut="HYPOTHESE" : hypothèses sans source (phase C1) ; statut="SOURCE" : paramètres sourcés, pour classer
+    ceux dont la source doit être vérifiable en premier (phase 3.4, outils/sources_poids.py)."""
     a_part = programme is not None and hasattr(noyau.charger(programme), "pt")
     if a_part:  # le moteur tourne sur les paramètres communs, le programme lit les siens (pt)
         p, q = _sans_clause(Parametres()), Parametres(programme=programme)
     else:
-        p, q = _sans_clause(Parametres(programme=programme or "ecologie_de_droite")), None
+        # paramètres communs seuls (avant le 16/11/2026, ceux d'Écologie de droite étaient chargés avec, sans effet
+        # sur le statu quo)
+        p, q = _sans_clause(Parametres(programme=programme)), None
     base = _deficit(p, programme, q)
     cibles = q if a_part else p
     out = []
     for x in cibles:
         origine = str(cibles.origine[x.cle])
         dans = (f"programmes/{programme}/" in origine) if programme else ("parametres/commun" in origine)
-        if not dans or x.statut != "HYPOTHESE" or x.source or x.unite == "annee" or not _numerique(x.valeur):
+        garde = (x.statut == "HYPOTHESE" and not x.source) if statut == "HYPOTHESE" else x.statut == statut
+        if not dans or not garde or x.unite == "annee" or not _numerique(x.valeur):
             continue
         for chemin in _cibles(x):
             if _est_une_date(x.valeur, chemin):

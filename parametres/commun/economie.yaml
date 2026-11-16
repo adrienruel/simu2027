@@ -204,7 +204,7 @@ accises_entreprises:
 # --- Budget de l'État 2026 (feuille Budget État 2026) ----------------------------
 budget_etat:
   cas_pensions_2026: {valeur: 50.4, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "45,5 Md€ en 2024 + 4 points de taux (B6)."}
-  lpm_2030_courants: {valeur: 76.3, unite: md_eur, annee_euros: 2030, statut: SOURCE, source: "Actualisation de la LPM : 76,3 Md€ en 2030 hors pensions (Total!B78)"}
+  lpm_2030_courants: {valeur: 76.3, unite: md_eur, annee_euros: 2030, statut: SOURCE, source: "Actualisation de la LPM : 76,3 Md€ en 2030 hors pensions (Total!B78)", url: "https://www.senat.fr/leg/pjl25-778.html", page: "Projet de loi actualisant la programmation militaire 2024-2030, article 2, tableau de la trajectoire (colonne 2030 : 76,3 Md€)"}
   inflation_2026_2030: {valeur: 0.074, unite: taux, statut: HYPOTHESE, source: "Encadrement : inflation prévue à 1,8 % en 2027 (PLF 2027, 01/10/2026) ; 1,018^4 = 1,074 de 2026 à 2030", note: "Total!B79."}
   contribution_ue_courants: {valeur: 30.9, unite: md_eur, annee_euros: 2027, statut: SOURCE, source: "Prélèvement sur recettes au profit de l'UE (PLF), v222"}
   deflateur_contribution_ue: {valeur: 1.018, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : inflation 2027 prévue à 1,9 % (IPCH, Banque de France, septembre 2026)", note: "Passage de la contribution de 2027 en euros de 2026 (B66 : 30,9/1,018). La contribution de 30,9 Md€ est confirmée par le PLF 2027 (rapport de Nicole Le Peih, Banque des territoires, 15/10/2026 ; 28,4 Md€ en LFI 2026)."}
@@ -214,7 +214,7 @@ budget_etat:
 
 # --- Dépenses statiques (feuille Total, lignes 23 à 44) -----------------------------
 sante:
-  ondam_2026: {valeur: 274.4, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "LFSS 2026 (Total!N20)"}
+  ondam_2026: {valeur: 274.4, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "LFSS 2026 (Total!N20)", url: "https://www.vie-publique.fr/dossierlegislatif/JORFDOLE000052390039", page: "Loi n° 2025-1403 du 30 décembre 2025 (LFSS 2026), article fixant l'ONDAM 2026 ; classeur : Total!N20"}
   pensions_invalidite_2024: {valeur: 8.6, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Hors objectif de dépenses, 2024 (Total!B138)"}
   aide_sociale_autonomie_2024: {valeur: 20.2, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Drees 2024 (écrit dans la formule Santé!B103)"}
   heures_apa_millions: {valeur: {montant_md: 4.29, cout_horaire: 25.18}, unite: sans_unite, statut: HYPOTHESE, note: "Santé!B105 = 4,29 / 25,18 × 1000, écrit dans la formule."}
@@ -341,7 +341,7 @@ macro:
     statut: SOURCE
     source: "Taux normal de l'IS, article 219 du code général des impôts (25 % depuis 2022)"
   taux_apparent_2029: {valeur: 0.027, unite: taux, statut: SOURCE, source: "Charge d'intérêts des APU ≈ 3,2 % du PIB (Effets macro!B211)"}
-  taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %)."}
+  taux_long_terme: {valeur: 0.04, v235: 0.033, unite: taux, statut: SOURCE, source: "OAT à 10 ans à 4,01 % le 24 juillet 2026, plus haut depuis 2008 (Banque de France, cité par ABC Bourse, 29/07/2026)", note: "Taux nominal de long terme de la dette avant tout effet des réformes, pris au niveau du marché. L'effet attendu des réformes sur les taux est porté par macro.baisse_spread, selon le scénario. Corrigé le 29/10/2026 (v235 : 3,3 %).", url: "https://www.abcbourse.com/analyses/chronique-l_oat_a_10_ans_repasse_la_barre_des_4__un_seuil_inedit_depuis_2009-1592", page: "Chronique du 29/07/2026 (OAT 10 ans 4,014 %, Bund 3,22 % le 24 juillet ; données mensuelles de la Banque de France)"}
   annees_taux_long_terme: {valeur: 6, unite: sans_unite, statut: HYPOTHESE, source: "Encadrement : durée de vie moyenne de la dette négociable de l'État de 8 ans et 184 jours au 31/12/2025 (AFT, bulletin mensuel de juillet 2026)", note: "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."}
   ecart_taux_scenario:
     valeur: {crise: 0.005, prudent: 0.0, median: 0.0, optimiste: 0.0}
@@ -363,7 +363,7 @@ macro:
     statut: HYPOTHESE
     source: "CBO, Working Paper 2019-01 (Debt and Interest Rates) : 2 à 3 points de base de taux long par point de dette/PIB (1,9 à 2,9 selon l'échantillon) ; Laubach (2009) : 2,1 à 3,5 points de base selon l'éviction compensée"
     note: "Hausse du taux long (en points de pourcentage) par point de dette/PIB au-dessus du niveau du statu quo en 2029, commun à tous les programmes (symétrique : baisse quand la dette baisse ; bornée par macro.prime_dette_bornes ; une dette négative compte pour zéro). Prudent : 3 points de base (haut de la fourchette du CBO) ; crise : 3,5 (Laubach sans compensation) ; médian 2 ; optimiste 1,5. Ajouté le 29/10/2026 (canal manquant)."
-  maturite_moyenne_dette: {valeur: 8.5, unite: sans_unite, statut: SOURCE, source: "Agence France Trésor : durée de vie moyenne de la dette négociable de l'État ≈ 8,5 ans (2025)", note: "Le taux apparent rejoint le taux de marché au rythme du renouvellement de la dette (1 / 8,5 par an)."}
+  maturite_moyenne_dette: {valeur: 8.5, unite: sans_unite, statut: SOURCE, source: "Agence France Trésor : durée de vie moyenne de la dette négociable de l'État ≈ 8,5 ans (2025)", note: "Le taux apparent rejoint le taux de marché au rythme du renouvellement de la dette (1 / 8,5 par an).", url: "https://www.aft.gouv.fr/files/medias-aft/7_Publications/7.2_BM/434_Bulletin%20mensuel%20juillet%202026.pdf", page: "Bulletin mensuel de l'AFT n° 434 (juillet 2026), p. 1-2 : 8 ans et 184 jours au 31/12/2025"}
   annees_ia: {valeur: 10, unite: sans_unite, statut: HYPOTHESE}
   premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}
   part_pib_tendanciel_au_solde: {valeur: 0.1, unite: taux, statut: HYPOTHESE, note: "Convention de la v235, sans source : ne sert plus que si macro.dividende_calcule est faux."}
@@ -385,8 +385,9 @@ renouvelables:
 
 # --- Calendrier 2027-2028 (feuille Calendrier budgétaire) ---------------------------
 calendrier:
-  dette_fin_2026_pib: {valeur: 1.193, unite: taux, statut: SOURCE, source: "Prévision de Bercy, septembre 2026 (119,3 % du PIB)"}
-  deficit_tendanciel_2027_2028: {valeur: 0.05, unite: taux, statut: SOURCE, source: "PLF 2027 : 5 % en 2027 ; 2028 gardé au même niveau (prudence)"}
+  dette_fin_2026_pib: {valeur: 1.193, unite: taux, statut: SOURCE, source: "Prévision de Bercy, septembre 2026 (119,3 % du PIB)", url: "https://www.tresor.economie.gouv.fr/Articles/2026/10/06/le-rapport-sur-la-dette-des-administrations-publiques-2027-est-publie", page: "Rapport sur la dette des administrations publiques 2027, partie I.A (119,3 % fin 2026)"}
+  deficit_tendanciel_2027_2028: {valeur: 0.05, unite: taux, statut: SOURCE, source: "PLF 2027 : 5 % en 2027 ; 2028 gardé au même niveau (prudence)", url: "https://www.tresor.economie.gouv.fr/Articles/2026/10/06/le-rapport-economique-social-et-financier-resf-2027-est-publie", page: "RESF 2027 : déficit public de 5,0 % en 2027 ; 2028 : hypothèse (même niveau)"}
+  croissance_2027_2028: {valeur: {2027: 0.0, 2028: 0.0}, unite: taux, statut: HYPOTHESE, source: "Convention actuelle : économie de 2026 placée en 2029, sans croissance en 2027 et 2028 (moteur/calendrier.py). Variante D3 (outils/variantes_dette.py) : 0,9 % en 2027 et 1,2 % en 2028, Banque de France, projections macroéconomiques intermédiaires du 15 septembre 2026", note: "Ajouté le 16/11/2026 (phase 3.1). Décision D3 d'Adrien en attente : garder la convention et l'afficher, ou projeter 2027-2028. Non nul, la dette de fin 2028 est divisée par la croissance cumulée (moteur/noyau.facteur_2027_2028), pour le statu quo comme pour les programmes."}
   dotations_collectivites: {valeur: 90, unite: md_eur, annee_euros: 2026, statut: HYPOTHESE, note: "≈ 54 Md€ de concours et ≈ 40 Md€ de fractions de TVA."}
   inflation: {valeur: 0.018, unite: taux, statut: DECISION, source: "Encadrement : Banque de France, projections de septembre 2026 (IPCH 1,9 % en 2027, 1,6 % en 2028) ; cible de la BCE 2 %", note: "Objectifs!B8 ; sert au passage en euros constants de la dette et au déficit de Maastricht. DÉCISION d'Adrien du 29/10/2026 : 1,8 % gardé, entre la Banque de France (1,6 % en 2028) et la cible de la BCE (2 %). Une inflation plus basse aggraverait le déficit (1,6 % : +0,13 point en 2037)."}
 
@@ -426,6 +427,8 @@ sante_trajectoire:
     statut: SOURCE
     source: "Assurance maladie, Charges et produits : hausse de la part du PIB de 2024 à 2030 (points)"
   promede:
+    url: "https://www.tresor.economie.gouv.fr/Articles/2013/12/12/document-de-travail-n-2013-08-projection-des-depenses-de-sante-a-l-horizon-2060-le-modele-promede"
+    page: "Document de travail de la DG Trésor n° 2013/08 (Geay et de Lagasnerie)"
     valeur: {reference: {part_2011: 0.068, part_2060: 0.088}, vieillissement: {part_2011: 0.068, part_2060: 0.081}}
     unite: sans_unite
     statut: SOURCE
@@ -563,6 +566,8 @@ demographie:
     note: "Sert seulement à la variante migratoire (moteur/migrations.py) : la santé du statu quo suit les salaires et les pentes communes, sans la population (décision d'Adrien) ; l'écart de population d'un programme change la dépense de santé dans le rapport des populations pondérées par ce profil."
   fecondite_variantes: {valeur: {fec_basse: 1.20, central: 1.45, fec_haute: 1.70}, unite: sans_unite, statut: SOURCE, source: "Insee, projections de population 2026 (Insee Première n° 2108)"}
   taux_emploi_age:
+    url: "https://www.insee.fr/fr/statistiques/8901327"
+    page: "Insee Première n° 2096, figure 2 (taux d'emploi par âge en 2025)"
     valeur: {"15-24": 0.345, "25-49": 0.828, "50-54": 0.844, "55-59": 0.788, "60-64": 0.444, "65-69": 0.11, "70+": 0.0}
     unite: sans_unite
     statut: SOURCE
@@ -604,6 +609,8 @@ ancien_systeme:
     source: "Loi n° 2023-270 du 14 avril 2023 de financement rectificative de la sécurité sociale (âge légal porté à 64 ans)"
     note: "Ajouté le 16/11/2026 : l'âge légal de la loi actuelle, lu par la bibliothèque commune (âge de départ d'un programme). Il était lu dans le fichier d'Écologie de droite (ancien_systeme.age_legal, champ « actuel »), qui ne doit plus peser sur les autres programmes."
   age_legal_generation:
+    url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000047445077"
+    page: "Loi n° 2023-270 du 14 avril 2023, art. 10 (âge par génération) ; suspension : LFSS 2026, loi n° 2025-1403 du 30 décembre 2025"
     valeur: {1960: 62.0, 1961: 62.25, 1962: 62.5, 1963: 62.75, 1964: 62.75, 1965: 63.0, 1966: 63.25, 1967: 63.5, 1968: 63.75, 1969: 64.0}
     unite: annees
     statut: SOURCE
@@ -964,6 +971,7 @@ bouclage:
     statut: SOURCE
     source: "Mésange 2017 (Bardaji et al., Insee G2017/04), emploi salarié marchand en milliers, écart au compte central à 1, 2, 3, 5, 10 ans et long terme, choc de 1 % du PIB : dépense publique (p. 105) ; investissement public (p. 102 : 92 / 198 / 201 / 91 / 45 / 14, ici l'écart à la dépense) ; TVA (4.1.5, signe inversé : baisse) ; CSG (4.1.6) ; impôt sur le revenu (4.1.7) ; cotisations employeurs (4.1.3)"
     note: "Phase E6 (14/11/2026) : emploi de conjoncture bouclé. Remplace la loi d'Okun fixe (macro.emplois_par_point_pib × PIB en plus) pour la demande : la dépense ramène l'emploi à son niveau d'équilibre en une dizaine d'années (le PIB reste plus haut par le capital et la productivité), les impôts des ménages et du travail le changent durablement (salaires). Pour les instruments du canal d'offre (travail, coût du travail, consommation), on retire les emplois que ce canal compte déjà au médian. Mis à l'échelle par le multiplicateur du scénario (miroir pour une relance) et par l'emploi de l'année ; emplois pris sur le chômage. La loi d'Okun reste pour la rétroaction des taux (noyau) et les programmes sans macro bouclée."
+  multiplicateur_reference: {valeur: 1.0, unite: sans_unite, statut: HYPOTHESE, source: "Égal au multiplicateur médian publié (macro.multiplicateur, DÉCISION d'Adrien du 29/10/2026 : 1, valeur du CAE, Focus n° 108, 2024)", note: "Ajouté le 16/11/2026 (phase 3.2). Multiplicateur auquel sont rapportés les profils d'emploi et de demande par instrument de Mésange (moteur/bouclage.reponse) : un multiplicateur de 1,3 donne 1,3 fois l'emploi du profil. Fixe, et non lu dans la colonne médiane, que l'incertitude tire : égal au médian publié, il ne change aucun résultat publié."}
   investissement_impact:
     valeur: {a: 0.53, persistance: 0.6}
     unite: sans_unite

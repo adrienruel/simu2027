@@ -20,8 +20,11 @@ python -m pytest -q -p no:cacheprovider           # suite par défaut (sans les 
 python -m pytest -q -p no:cacheprovider -m edd    # tests d'Écologie de droite seuls
 python -m moteur.noyau <programme>                # un programme contre le statu quo
 python -m outils.export_comparaison               # sorties/comparaison_*.csv (~1 min)
-python -m moteur.incertitude 600                  # Monte Carlo (~1 h 35), sorties/incertitude_rho0.json et _rho1.json
-python outils/export_incertitude.py               # sorties/comparaison_incertitude.csv
+python -m moteur.incertitude 600                  # Monte Carlo (~1 h 45), sorties/incertitude_rho0.json et _rho1.json
+python outils/export_incertitude.py               # sorties/comparaison_incertitude.csv (et _fonds.csv)
+python -m outils.variantes_dette                  # décomposition du déficit et variantes de la dette (~40 s)
+python -m outils.sources_poids                    # paramètres sourcés classés par poids (~5 min)
+python -m outils.backtests                        # backtests sur des réformes passées
 python -m outils.variante_fonds_apu               # variante « fonds dans les APU » (~20 min)
 python -m outils.openfisca_mesures <programme>    # micro des ménages, un programme par processus
 python -m outils.vieillissement <programme>       # micro vieillie (2029, 2032, 2037, 2050)
@@ -41,6 +44,7 @@ python -m moteur.statu_quo --ecart                # scénario sans réforme (sor
 | `moteur/programme_simple.py`, `moteur/bibliotheque.py` | Mécanique d'un programme ; mesures communes (SMIC, âge de départ, CSG, capitalisation…) |
 | `moteur/offre.py`, `bouclage.py`, `capital.py`, `naissances.py`, `migrations.py` | Canaux communs : offre, macro bouclée, capital, démographie |
 | `moteur/fonds_apu.py`, `moteur/incertitude.py` | Variante commune des fonds de capitalisation ; Monte Carlo commun |
+| `moteur/decomposition.py` | Décomposition du déficit : primaire, taux, prime de dette, dette en plus, croissance (`docs/dette.md`) |
 | `outils/` | Population synthétique, OpenFisca, vieillissement, exports |
 | `tests/` | Tests automatiques (marqueur `edd` : tests d'Écologie de droite, exclus par défaut) |
 | `docs/journal.md` | Journal des décisions, du plus ancien au plus récent |

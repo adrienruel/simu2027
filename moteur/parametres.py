@@ -67,6 +67,9 @@ class Parametre:
     note: str | None = None
     par_scenario: bool = False
     v235: Any = None  # valeur de la v235 si le paramètre a été corrigé depuis (_ABSENT sinon)
+    # source vérifiable (phase 3.4, 16/11/2026) : adresse du document et page, tableau ou cellule où lire la valeur
+    url: str | None = None
+    page: str | None = None
 
     def pour(self, scenario: str) -> Any:
         """Valeur du paramètre dans un scénario (identique partout si non ventilée)."""
@@ -131,6 +134,10 @@ class Parametres:
             raise ErreurParametre(f"{cle} : statut inconnu {c['statut']}")
         if c["statut"] == "SOURCE" and not c.get("source"):
             raise ErreurParametre(f"{cle} : statut SOURCE sans source")
+        if c.get("url") is not None and not str(c["url"]).startswith(("https://", "http://")):
+            raise ErreurParametre(f"{cle} : url sans http(s) : {c['url']}")
+        if c.get("url") and c["statut"] != "SOURCE":
+            raise ErreurParametre(f"{cle} : url sur un paramètre au statut {c['statut']} (réservée au statut SOURCE)")
         if c["unite"] in UNITES_MONTANT and "annee_euros" not in c:
             raise ErreurParametre(f"{cle} : montant sans année des euros")
         # Ventilé par scénario si toutes les clés sont des scénarios ; un dictionnaire qui mêle
@@ -143,6 +150,7 @@ class Parametres:
             annee_euros=c.get("annee_euros"), source=c.get("source"),
             note=" | ".join(x for x in (c.get("note"), ("Note de la v235 : " + c["note_v235"]) if c.get("note_v235") else None) if x) or None,
             par_scenario=par_scenario, v235=c.get("v235", _ABSENT),
+            url=c.get("url"), page=(str(c["page"]) if c.get("page") is not None else None),
         )
 
     # Colonne lue quand un module demande le prudent : « crise » pour le calcul du scénario de crise.

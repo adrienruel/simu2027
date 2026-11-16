@@ -20,8 +20,12 @@ sys.path.insert(0, str(RACINE))
 
 def libelles() -> dict:
     """Libellés des programmes, comme dans comparaison_trajectoire.csv."""
-    from moteur import noyau
-    return {nom: getattr(noyau.charger(nom), "libelle", nom) for nom in noyau.programmes_disponibles()}
+    from moteur import incertitude, noyau
+    lib = {nom: getattr(noyau.charger(nom), "libelle", nom) for nom in noyau.programmes_disponibles()}
+    for nom in incertitude.FONDS:
+        if nom in lib:
+            lib[nom + incertitude.SUFFIXE_FONDS] = lib[nom] + " — fonds dans les administrations publiques"
+    return lib
 
 
 def main() -> None:
@@ -44,7 +48,8 @@ def main() -> None:
                     continue
                 grandeur, annee = cle.rsplit("_", 1)
                 lignes.append({"programme": lib.get(nom, nom), "dossier": nom, "rho": rho_lib or f"{r['rho']:g}",
-                               "n": r["n"], "grandeur": grandeur, "annee": annee,
+                               "n": r["n"], "tirages_ecartes": x.get("tirages_ecartes", r["n"] - x.get("tirages_retenus", r["n"])),
+                               "grandeur": grandeur, "annee": annee,
                                "p10": round(v["p10"], 3), "p50": round(v["p50"], 3), "p90": round(v["p90"], 3),
                                "proba_mieux_que_statu_quo": (round(x[f"proba_mieux_que_statu_quo_{annee}"], 3)
                                                              if grandeur == "deficit" and f"proba_mieux_que_statu_quo_{annee}" in x else ""),
@@ -54,14 +59,20 @@ def main() -> None:
     for l in lignes:
         if l["rho"] == "1" and l["grandeur"] == "deficit" and l["annee"] == "2037":
             l["hypotheses_deficit_2037"] = h0.get(l["dossier"], "")
-    out = RACINE / "sorties" / "comparaison_incertitude.csv"
-    with out.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=list(lignes[0]))
-        w.writeheader()
-        w.writerows(lignes)
+    # variante « fonds dans les administrations publiques » (phase 3.2) : fichier à part, pour que le comparateur ne
+    # la prenne pas pour un programme de plus
     from outils import trace
-    trace.enregistrer(out, script="outils.export_incertitude")
-    print(f"Écrit : {out} ({len(lignes)} lignes)")
+    for nom, ls in (("comparaison_incertitude.csv", [l for l in lignes if "@" not in l["dossier"]]),
+                    ("comparaison_incertitude_fonds.csv", [l for l in lignes if "@" in l["dossier"]])):
+        if not ls:
+            continue
+        out = RACINE / "sorties" / nom
+        with out.open("w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=list(ls[0]))
+            w.writeheader()
+            w.writerows(ls)
+        trace.enregistrer(out, script="outils.export_incertitude")
+        print(f"Écrit : {out} ({len(ls)} lignes)")
 
 
 if __name__ == "__main__":

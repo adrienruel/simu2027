@@ -29,6 +29,8 @@
 
 melenchon_smic:
   smic_net_programme:
+    url: "https://melenchon2027.fr/?p=26643"
+    page: "L'Avenir en commun, partie 2, chapitre 2 « Partager les richesses » (p. 57 et 60 du livre)"
     valeur: 1700
     unite: eur_mois
     annee_euros: 2027
@@ -43,6 +45,8 @@ melenchon_fp:
     statut: HYPOTHESE
     source: "Même valeur que tondelier_mesures.point_indice : traitement indiciaire ≈ 55 % du coût employeur des agents (390 Md€, OpenFisca 2026 sur les distributions DGAFP)"
   hausse_point:
+    url: "https://melenchon2027.fr/?p=15580"
+    page: "L'Avenir en commun (p. 57 du livre) : point d'indice +10 %"
     valeur: 0.10
     unite: taux
     statut: SOURCE

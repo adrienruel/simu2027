@@ -21,14 +21,34 @@ redonne les scénarios) : `incertitude.correlation`, décision du 14/11/2026.
 **Tirages communs (D2).** Le z d'une hypothèse ne dépend que de la graine, du numéro du tirage et de son nom : une
 hypothèse commune est tirée au même point pour tous les programmes, et les écarts entre programmes se lisent tirage
 par tirage. Chaque tirage remplace la colonne médiane et se calcule dans le scénario médian, règle de trajectoire
-comprise. La colonne prudente reste celle du scénario prudent : le moteur la lit pour les effets en sens inverse
-(scénario miroir), comme dans le scénario médian publié ; ces effets ne sont donc pas tirés.
+comprise.
 
-**Contrôle.** Avec ρ = 1 et tous les z au 10e centile, le tirage retrouve le scénario prudent à quelques dixièmes
-près : statu quo 2037 9,47 contre 9,50 % ; Écologie de droite 4,00 contre 4,15 ; Retailleau 10,31 contre 10,46 ;
-Tondelier 13,36 contre 13,98 ; Mélenchon 28,66 contre 29,63. L'écart vient des règles propres au scénario prudent
-(effets en sens inverse lus dans le médian, moyennes de jeux) : le prudent publié est un peu plus prudent que le
-10e centile de la loi.
+**Effets en sens inverse (phase 3.2, 16/11/2026).** Le moteur lit le scénario miroir quand un effet change de sens
+(une relance prend les valeurs du prudent dans le médian : multiplicateur, transmission des taux, éviction, offre,
+seniors, capital public, solde migratoire, réformes de structure). Ces paramètres (`incertitude.MIROIR_CLES`) ont
+désormais leur colonne prudente tirée au point miroir z_m = −z − 1,2816 : au médian (z = 0) elle vaut le prudent, au
+10e centile le médian, au 90e centile elle va vers la crise, comme dans les scénarios publiés. Avant, elle restait
+au prudent publié : les effets en sens inverse n'étaient pas tirés. Les autres lectures de la colonne prudente
+(tendance d'avant 2029, inflation de 2027-2028) ne bougent pas.
+
+**Multiplicateur de référence.** Les profils d'emploi de Mésange étaient rapportés au multiplicateur médian, lu
+dans la colonne tirée : l'emploi de conjoncture ne suivait pas le multiplicateur tiré, et un tirage à la borne
+basse (multiplicateur nul) divisait par zéro (2 tirages sur 600 écartés à ρ = 0, 5 à ρ = 1, pour tous les
+programmes). La référence est désormais fixe (`bouclage.multiplicateur_reference`, 1, le médian publié) : aucun
+tirage n'est écarté, et le nombre de tirages écartés est publié (`tirages_ecartes` dans
+`comparaison_incertitude.csv`).
+
+**Fonds de capitalisation.** Pour les cinq programmes qui en ont un (Bertrand, Le Pen, Philippe, Retailleau,
+Zemmour), chaque tirage calcule aussi la variante « fonds dans les administrations publiques » : fourchettes dans
+`sorties/comparaison_incertitude_fonds.csv`, à côté de la publiée.
+
+**Contrôle (en test depuis le 16/11/2026, `tests/test_incertitude.py`).** Avec ρ = 1 et tous les z au 10e centile,
+le tirage retrouve le scénario prudent à quelques dixièmes près. Écart au statu quo en 2037, tirage moins publié :
+statu quo −0,04 point ; programmes de −0,04 (Bertrand) à −0,73 (Arthaud), Mélenchon −0,61, Tondelier −0,10. Avant le
+tirage des miroirs : jusqu'à −1,36 (Arthaud), Mélenchon −1,27, Tondelier −0,63. Le reste vient de règles propres au
+scénario prudent (moyennes de jeux, lectures de colonnes hors miroir) : le prudent publié reste un peu plus prudent
+que le 10e centile de la loi. Le test exige moins de 0,1 point pour le statu quo et moins de 0,8 pour chaque
+programme.
 
 ## Résultats (600 tirages communs, fourchette entre les deux bornes de la corrélation)
 
