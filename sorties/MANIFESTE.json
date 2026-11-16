@@ -31,9 +31,9 @@
   "comparaison_annonces.csv": {
    "sha256": "aa8a6ef91fd56048c00abb1db964d2e064639e6d4b99729d2790628690b2bbe8",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:14Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:16Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_bouclage.json": {
@@ -48,33 +48,33 @@
   "comparaison_ecarts.csv": {
    "sha256": "e66f49f43bad0f6199dcbc617a9132268721e258460621a3eaef50c8a93ed7eb",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:14Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:16Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_ecologie.csv": {
    "sha256": "c6b31751a23e5a93ffa4a620e009bc5e4f6607218c0570dc34a1d0aff52a0cf6",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:13Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:15Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_ecologie_mesures.csv": {
    "sha256": "cf7a8569f8ccbf21d787fdd86158575ab4844a8f22b01c18ac5115c30fe1648e",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:13Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:16Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_emploi_canaux.csv": {
    "sha256": "a975006c3bc7b666c75721b19afc988f4e3147b4d7a61d560885dfd8790f4890",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:13Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:16Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_incertitude.csv": {
@@ -89,43 +89,41 @@
   "comparaison_mesures.csv": {
    "sha256": "a0b300e9ba2e3a8f394abe001d223220e0a0a8c86469e86ae9ba55551e5cc95d",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:14Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:16Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_redistribution.csv": {
    "sha256": "3bd063c8431dce66c7d775200bcd6a0ac581f6053af201ecfe1e369978c4fed6",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:16Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
-   "parametres": "d7ae7fae5036bb37",
-   "note": "Réécrit par l'export à partir des sorties de la microsimulation (sorties/micro_*, antérieures au manifeste)."
+   "date": "2026-11-16T15:23:18Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
+   "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_redistribution_deciles.csv": {
    "sha256": "29af34c512ce6f200e5498b19391b1d06ebdb051eb83edc701b6d64c4b588e17",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:16Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
-   "parametres": "d7ae7fae5036bb37",
-   "note": "Réécrit par l'export à partir des sorties de la microsimulation (sorties/micro_*, antérieures au manifeste)."
+   "date": "2026-11-16T15:23:18Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
+   "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_trajectoire.csv": {
    "sha256": "8b7e9ef1bde5c9b68e1a32d5700f40d4853e556e0db2ee65205c3404cee85f41",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:10:13Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:15Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "comparaison_variante_fonds.csv": {
    "sha256": "dd50957b1f51a19081c08eb7e24470ec3b8e5a804fc8fd6450fceb9f8f70a5c7",
    "script": "outils.variante_fonds_apu",
-   "date": "2026-11-16T15:10:32Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:24Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "incertitude_rho0.json": {
@@ -896,33 +894,33 @@
   "statu_quo.json": {
    "sha256": "6a79cc1d97e48e0f4ebbc018ca18c4acb0ac6fd6f416ddc1881dfd017d28551c",
    "script": "moteur.statu_quo",
-   "date": "2026-11-16T15:10:17Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:19Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "statu_quo_depenses.csv": {
    "sha256": "a899a568aac05c39c6183539e99e652479cd5c23f7f393db3f38e0ce7abc1aa8",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-16T15:10:17Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:19Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "statu_quo_recettes.csv": {
    "sha256": "29411bd06588edab3ee0b9b467d4b3f39b00d7bade59ae0122286ff4a7dd2ef2",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-16T15:10:17Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:19Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "statu_quo_trajectoire.csv": {
    "sha256": "0d577348a56daa1cdb13d04ff5def56104311c56a59192815e74ceb8b76c20b0",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-16T15:10:17Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:19Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   },
   "statu_quo_validation.csv": {
@@ -937,9 +935,9 @@
   "variante_fonds_apu.json": {
    "sha256": "b754a031b3a12e0a580e0b37c011f7a5ee4cc7ccca2bbcb741d7dfd08bfa10b0",
    "script": "outils.variante_fonds_apu",
-   "date": "2026-11-16T15:10:32Z",
-   "commit": "52ef0a5",
-   "code_non_commite": true,
+   "date": "2026-11-16T15:23:24Z",
+   "commit": "58fea93",
+   "code_non_commite": false,
    "parametres": "d7ae7fae5036bb37"
   }
  }
