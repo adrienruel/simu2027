@@ -25,32 +25,7 @@
 #
 # Arbitrages pris par Claude le 06/11/2026 (le livre ne règle pas) : docs/melenchon.md, section « Arbitrages ».
 
-melenchon_emploi:
-  cout_poste_public:
-    valeur: 55000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
-  valeur_emploi:
-    valeur: 20000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
-  valeur_ajoutee_emploi:
-    valeur: 35000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
 
-melenchon_macro:
-  multiplicateur_actif:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
 
 melenchon_smic:
   smic_net_programme:
@@ -60,34 +35,6 @@ melenchon_smic:
     statut: SOURCE
     source: "Programme, p. 57 et 60 : « Porter immédiatement le SMIC mensuel à 1 700 euros net »"
     note: "En euros de 2027, ramené en euros de 2026 par l'inflation de 2027 (inflation.base), puis en brut par le barème OpenFisca de 2026. Dès juillet 2027 (moitié de l'effet en 2027)."
-  allegements_suivent_smic:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Le livre ne dit rien des allègements : lecture de la loi actuelle (allègements définis en multiples du SMIC), comme pour Arthaud. Variante « nominalisés » (lecture Tondelier) : coût au SMIC plus élevé, plus d'emplois perdus."
-  diffusion_jusqu_a:
-    valeur: 1.4
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_smic.diffusion_jusqu_a (Dares, Insee : diffusion jusqu'à 1,3 à 1,5 SMIC)"
-    note: "L'indexation des salaires sur l'inflation (p. 60) n'est pas chiffrée : les salaires du statu quo progressent déjà plus vite que les prix."
-  elasticite_emploi:
-    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Mêmes valeurs que tondelier_smic.elasticite_emploi (Kramarz et Philippon, 2001 ; Crépon et Desplatz, 2001 ; L'Horty, 2006)"
-    note: "Élasticité constante (emplois × (1 − rapport des coûts^élasticité)), montée en trois ans (2027-2029)."
-  part_marge_absorbee:
-    valeur: 0.5
-    unite: taux
-    statut: HYPOTHESE
-    note: "Même valeur que Tondelier et Arthaud."
-  valeur_emploi_chomeur:
-    valeur: 9000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur"
 
 melenchon_fp:
   part_indiciaire:
@@ -103,12 +50,6 @@ melenchon_fp:
     note: "Dès juillet 2027 (moitié en 2027). Compensation intégrale aux collectivités : transfert interne aux administrations publiques, sans effet sur le solde consolidé."
 
 melenchon_retraites:
-  profil_62_ans:
-    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Même profil que tondelier_retraites.profil_62_ans (DREES, fiche 16, 2023, âge légal 62 ans)"
-    note: "Abrogation de la réforme de 2023 (p. 78) : 62 ans pour les départs de 2028."
   profil_60_ans:
     valeur: {58: 0.03, 59: 0.05, 60: 0.65, 61: 0.74, 62: 0.81, 63: 0.86, 64: 0.90, 65: 0.96, 66: 0.97, 67: 0.98, 68: 1.0}
     unite: sans_unite
@@ -121,13 +62,6 @@ melenchon_retraites:
     statut: DECISION
     note: "« Abroger la réforme Macron [...] puis abaisser l'âge de départ jusqu'à restaurer le droit à la retraite à 60 ans » (p. 78) : 62 ans pour les départs de 2028, puis six mois de moins par an jusqu'à 60 ans pour les départs de 2032 (mélange linéaire des deux profils par année de départ). Durée de 40 annuités et fin de la décote : mesure à part (duree_decote)."
 
-melenchon_chomage:
-  hausse_taux:
-    valeur: {crise: 0.006, prudent: 0.006, median: 0.0045, optimiste: 0.003}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.assurance_chomage (Banque de France, Bulletin n° 264, 2026 : les réformes de 2021 et 2023 ont baissé le chômage structurel de 0,6 point)"
-    note: "Hausse du taux de chômage quand ces réformes sont annulées (PRE-03), montée de 2028 à 2030 ; chaque chômeur en plus coûte la valeur d'un emploi au SMIC."
 
 melenchon_temps_travail:
   hausse_cout_horaire:
@@ -136,11 +70,6 @@ melenchon_temps_travail:
     statut: HYPOTHESE
     source: "Calcul : sixième semaine de congés payés (5 jours) et 4 février férié (1 jour) sur ≈ 220 jours travaillés par an : −2,7 % d'heures payées au même salaire, soit +2,7 % de coût horaire du travail dans le privé"
     note: "Les 32 heures des métiers pénibles ou de nuit sont dans trente_deux_heures ; leur généralisation « par la négociation collective » n'est pas comptée."
-  elasticite_emploi:
-    valeur: {crise: -0.5, prudent: -0.3, median: -0.2, optimiste: -0.1}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Encadrement : élasticité de l'emploi au coût du travail hors du voisinage du SMIC −0,2 à −0,5 (Mésange, DG Trésor ; L'Horty, 2006) ; une partie de la baisse d'heures est rattrapée en productivité ou en embauches (35 heures : Insee, 2004)"
   emplois_prive:
     valeur: 20300000
     unite: sans_unite

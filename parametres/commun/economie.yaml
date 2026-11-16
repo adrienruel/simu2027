@@ -1119,3 +1119,111 @@ lectures_communes:
     source: "Décision d'Adrien (16/11/2026) : les programmes qui annoncent une part de retraite par capitalisation sans en donner le taux ni le financement (Bertrand, Zemmour, Le Pen) sont lus comme le seul dispositif détaillé, celui de Retailleau (retailleau_capitalisation.cotisation : 1 % du brut des entrants depuis 2028, moitié salarié, moitié employeur, plafond de 40 € par mois)"
     note: "Même règle pour tous (moteur/bibliotheque.capitalisation_obligatoire) ; la part salariale baisse le revenu disponible dans la micro. Exclue : la capitalisation d'Attal (proposition des seules conventions de Renaissance, non chiffrées par règle). Philippe : capitalisation collective versée par l'État, chiffrée à part (PHI-RET-05)."
 
+# --- Paramètres communs des programmes (16/11/2026, phase J2) -------------------------------------------------
+# Une valeur ici vaut pour tout programme (moteur/programme_simple.ProgrammeSimple.v : « <groupe>.<nom> » se lit
+# programme_commun.<groupe>_<nom>) ; un programme ne peut pas la redéfinir (tests/test_economies.py).
+programme_commun:
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 12 programmes : arthaud, attal, bertrand, glucksmann, le_pen, lisnard, melenchon, philippe, retailleau, roussel, tondelier, zemmour.
+  emploi_cout_poste_public:
+    valeur: 55000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes non remplacés ou créés"
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 11 programmes : arthaud, attal, bertrand, glucksmann, le_pen, lisnard, melenchon, philippe, retailleau, roussel, zemmour.
+  emploi_valeur_emploi:
+    valeur: 20000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 11 programmes : arthaud, attal, bertrand, glucksmann, le_pen, lisnard, melenchon, philippe, retailleau, roussel, zemmour.
+  emploi_valeur_ajoutee_emploi:
+    valeur: 35000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Calculé : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € (bibliotheque.smic, OpenFisca 2026) × 1,25, même règle que Tondelier"
+    note: "Les emplois perdus sont surtout au voisinage du SMIC : valeur ajoutée plus basse que la moyenne."
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 12 programmes : arthaud, attal, bertrand, glucksmann, le_pen, lisnard, melenchon, philippe, retailleau, roussel, tondelier, zemmour.
+  macro_multiplicateur_actif:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 5 programmes : arthaud, glucksmann, melenchon, roussel, tondelier.
+  smic_diffusion_jusqu_a:
+    valeur: 1.4
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.diffusion_jusqu_a (Dares, Insee : diffusion jusqu'à 1,3 à 1,5 SMIC)"
+    note: "Avec un SMIC relevé de moitié, 1,4 nouveau SMIC ≈ 2,1 SMIC actuels : la moitié des salariés du privé sont touchés. La « hausse générale des salaires » n'a pas de montant : elle n'est pas comptée au-delà."
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 5 programmes : arthaud, glucksmann, melenchon, roussel, tondelier.
+  smic_elasticite_emploi:
+    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Mêmes valeurs que tondelier_smic.elasticite_emploi (Kramarz et Philippon, 2001 ; Crépon et Desplatz, 2001 ; L'Horty, 2006)"
+    note: "Appliquées à élasticité constante (emplois × (1 − rapport des coûts^élasticité)), ce qui garde le résultat borné ; ces élasticités sont estimées pour des hausses de quelques pour cent : appliquées à une hausse de moitié, elles sortent de leur domaine de validité (résultat à lire comme un ordre de grandeur). L'interdiction des licenciements n'est pas modélisée comme un frein à ces pertes : elle ne s'applique pas aux embauches non faites, ni aux faillites."
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 5 programmes : arthaud, glucksmann, melenchon, roussel, tondelier.
+  smic_part_marge_absorbee:
+    valeur: 0.5
+    unite: taux
+    statut: HYPOTHESE
+    note: "Même valeur que Tondelier."
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 5 programmes : arthaud, glucksmann, melenchon, roussel, tondelier.
+  smic_valeur_emploi_chomeur:
+    valeur: 9000
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur"
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 4 programmes : arthaud, glucksmann, melenchon, roussel.
+  smic_allegements_suivent_smic:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Le programme ne dit rien des allègements : lecture de la loi actuelle, qui les définit en multiples du SMIC (ils suivent le nouveau SMIC). Le coût au SMIC monte alors comme le brut (+50 %). Variante « nominalisés » (lecture Tondelier) : coût au SMIC +88 %, emplois perdus bien plus nombreux."
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de glucksmann ; présent dans 5 programmes : glucksmann, le_pen, melenchon, roussel, tondelier.
+  retraites_profil_62_ans:
+    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même profil que tondelier_retraites.profil_62_ans et melenchon_retraites.profil_62_ans (DREES, fiche 16, 2023, âge légal 62 ans)"
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de arthaud ; présent dans 3 programmes : arthaud, melenchon, roussel.
+  temps_travail_elasticite_emploi:
+    valeur: {crise: -0.5, prudent: -0.3, median: -0.2, optimiste: -0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Même valeur que melenchon_temps_travail.elasticite_emploi (Mésange, DG Trésor ; L'Horty, 2006)"
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de glucksmann ; présent dans 3 programmes : glucksmann, melenchon, roussel.
+  chomage_hausse_taux:
+    valeur: {crise: 0.006, prudent: 0.006, median: 0.0045, optimiste: 0.003}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même valeur que tondelier_emploi.assurance_chomage (Banque de France, Bulletin n° 264, 2026 : les réformes de 2021 et 2023 ont baissé le chômage structurel de 0,6 point)"
+    note: "Hausse du taux de chômage quand ces réformes sont annulées (GLU-EMP-02), montée de 2028 à 2030 ; chaque chômeur en plus coûte la valeur d'un emploi au SMIC."
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de attal ; présent dans 6 programmes : attal, bertrand, le_pen, lisnard, philippe, retailleau.
+  enveloppe_debut:
+    valeur: 2028
+    unite: sans_unite
+    statut: DECISION
+  # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de attal ; présent dans 6 programmes : attal, bertrand, le_pen, lisnard, philippe, retailleau.
+  enveloppe_plein:
+    valeur: 2032
+    unite: sans_unite
+    statut: DECISION
+  # Barème commun des canaux déclarés (12/11/2026), rangé ici le 16/11/2026 (phase J2) : il était recopié dans chaque
+  # programme qui déclare le canal (et repris d'Écologie de droite, programme de test mis de côté).
+  canaux_adoption_ia_part:
+    valeur: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Eurostat (décembre 2025) : 18,2 % des entreprises françaises de 10 salariés ou plus utilisent l'IA, contre 20 % dans l'Union et 26 % en Allemagne"
+    note: "Part du gain de productivité de l'IA du statu quo (macro.ia_productivite) obtenue en plus par un programme qui déclare le canal adoption_ia, avant le facteur de budget (adoption_ia.budget) : médian, la France rejoint la moyenne de l'Union (20 / 18,2 − 1 ≈ +10 %) ; optimiste, l'Allemagne (26 / 18,2 − 1 ≈ +43 %) ; prudent, milieu entre crise et médian ; crise, aucun rattrapage. Recopié jusqu'ici dans attal, glucksmann, lisnard, philippe, retailleau et zemmour."
+  canaux_ecole_niveau_eleves:
+    valeur: {crise: 0, prudent: 0, median: 0, optimiste: 0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : DEPP, note du 3 février 2026 (le dédoublement des classes en éducation prioritaire n'a plus d'effet mesurable à l'entrée en 6e) ; 0,1 écart-type ≈ 10 points PISA, la moitié de la perte de 2018-2022"
+    note: "Niveau des élèves (écart-type) d'un programme qui déclare le canal école (réformes d'organisation sans budget) : compté dans le seul scénario optimiste, zéro ailleurs faute d'évaluation. Recopié jusqu'ici dans zemmour."

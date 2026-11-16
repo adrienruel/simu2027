@@ -10,32 +10,7 @@
 #
 # Calendrier (arbitrage) : élection en mai 2027 ; tout à partir de la loi de finances 2028, SMIC en deux ans.
 
-glucksmann_emploi:
-  cout_poste_public:
-    valeur: 55000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
-  valeur_emploi:
-    valeur: 20000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
-  valeur_ajoutee_emploi:
-    valeur: 35000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
 
-glucksmann_macro:
-  multiplicateur_actif:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
 
 glucksmann_smic:
   smic_net_programme:
@@ -45,41 +20,8 @@ glucksmann_smic:
     statut: SOURCE
     source: "Place publique, « Notre vision pour la France. Acte I » (23 juin 2025) : SMIC porté à 1 600 € net dans les deux ans suivant l'élection"
     note: "En euros de 2027, ramené en euros de 2026 par l'inflation de 2027, puis en brut par le barème OpenFisca de 2026. Montée : moitié en 2028, entier en 2029 (« dans les deux ans »)."
-  allegements_suivent_smic:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Le texte ne dit rien des allègements : lecture de la loi actuelle (allègements définis en multiples du SMIC), comme pour Arthaud. Variante « nominalisés » (lecture Tondelier) : coût au SMIC plus élevé, plus d'emplois perdus."
-  diffusion_jusqu_a:
-    valeur: 1.4
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_smic.diffusion_jusqu_a (Dares, Insee : diffusion jusqu'à 1,3 à 1,5 SMIC)"
-    note: "Les conférences salariales par branche ne sont pas chiffrées."
-  elasticite_emploi:
-    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Mêmes valeurs que tondelier_smic.elasticite_emploi (Kramarz et Philippon, 2001 ; Crépon et Desplatz, 2001 ; L'Horty, 2006)"
-    note: "Élasticité constante (emplois × (1 − rapport des coûts^élasticité)), montée en trois ans (2028-2030)."
-  part_marge_absorbee:
-    valeur: 0.5
-    unite: taux
-    statut: HYPOTHESE
-    note: "Même valeur que Tondelier et Arthaud."
-  valeur_emploi_chomeur:
-    valeur: 9000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur"
 
 glucksmann_retraites:
-  profil_62_ans:
-    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Même profil que tondelier_retraites.profil_62_ans et melenchon_retraites.profil_62_ans (DREES, fiche 16, 2023, âge légal 62 ans)"
   annee:
     valeur: 2028
     unite: sans_unite
@@ -94,13 +36,6 @@ glucksmann_emplois_aides:
     source: "Encadrement : Territoires zéro chômeur, ≈ 3 300 salariés dans 80 territoires en 2025 ; généralisation progressive à ≈ 1 000 territoires de 60 emplois ; éviction faible (activités non concurrentes, évaluation de 2021 du comité scientifique : 10 %)"
     note: "Emplois venus du chômage de longue durée ; coût dans glucksmann_mesures.tzcld."
 
-glucksmann_chomage:
-  hausse_taux:
-    valeur: {crise: 0.006, prudent: 0.006, median: 0.0045, optimiste: 0.003}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.assurance_chomage (Banque de France, Bulletin n° 264, 2026 : les réformes de 2021 et 2023 ont baissé le chômage structurel de 0,6 point)"
-    note: "Hausse du taux de chômage quand ces réformes sont annulées (GLU-EMP-02), montée de 2028 à 2030 ; chaque chômeur en plus coûte la valeur d'un emploi au SMIC."
 
 glucksmann_csg:
   baisse:
@@ -596,7 +531,7 @@ glucksmann_canaux:
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : facture d'électricité indexée sur le coût de production (GLU-ENE-03, prix réglementés, −0,5) ; la commande publique orientée vers le « Fabriqué en France » est hors champ. Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2."
   adoption_ia:
-    valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}, budget_md: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
+    valeur: {budget_md: {crise: 0.6, prudent: 0.5, median: 0.4, optimiste: 0.3}}
     unite: sans_unite
     statut: HYPOTHESE
     note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : GLU-NUM-02 (agence industrielle du numérique et de l'IA) et GLU-NUM-05 (IA dans les services publics). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure. Phase B6 (12/11/2026, nuit) : effet proportionnel au budget engagé (adoption_ia.budget) ; budget lu : GLU-NUM-02, agence industrielle du numérique et de l'IA (glucksmann_mesures, investissement)."

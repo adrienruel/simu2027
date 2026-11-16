@@ -112,11 +112,20 @@ class ProgrammeSimple:
         self._cache: dict = {}
 
     # ------------------------------------------------------------------ outils
+    def _cle(self, cle: str) -> str:
+        """Clé du programme (« <nom>_<groupe>.<nom> »), ou à défaut la valeur commune à tous les programmes
+        (« programme_commun.<groupe>_<nom> », parametres/commun/economie.yaml, phase J2 du 16/11/2026)."""
+        k = f"{self.nom}_{cle}"
+        if k in self.pt._p:
+            return k
+        commun = "programme_commun." + cle.replace(".", "_")
+        return commun if commun in self.pt._p else k
+
     def v(self, cle: str, s: str = "prudent"):
-        return self.pt[f"{self.nom}_{cle}"].pour(s)
+        return self.pt[self._cle(cle)].pour(s)
 
     def a(self, cle: str) -> bool:
-        return f"{self.nom}_{cle}" in self.pt._p
+        return self._cle(cle) in self.pt._p
 
     def indices(self, p: Parametres, s: str) -> dict:
         y = sq.pib(p, s)

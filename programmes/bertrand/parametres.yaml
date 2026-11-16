@@ -7,32 +7,7 @@
 # comparaison seulement) ; une économie sans source est estimée en crise / prudent / médian / optimiste ; une hypothèse
 # sans source est prise prudente. Format des mesures : celui de tondelier_mesures (moteur/programme_simple.py).
 
-bertrand_emploi:
-  cout_poste_public:
-    valeur: 55000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes non remplacés ou créés"
-  valeur_emploi:
-    valeur: 20000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
-  valeur_ajoutee_emploi:
-    valeur: 60000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Encadrement : PIB par emploi ≈ 95 000 € (Insee 2025) ; emplois concernés plutôt moins productifs que la moyenne"
 
-bertrand_macro:
-  multiplicateur_actif:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
 
 bertrand_retraites:
   age_cible:
@@ -185,14 +160,6 @@ bertrand_enveloppe:
     statut: HYPOTHESE
     source: "L'Opinion (19/08/2026) : 20 Md€ par an sans répartition ; santé exclue par le candidat ; les autres domaines comptés comme cités, sans cible principale."
     note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
-  debut:
-    valeur: 2028
-    unite: sans_unite
-    statut: DECISION
-  plein:
-    valeur: 2032
-    unite: sans_unite
-    statut: DECISION
 
 # --- Canaux déclarés (moteur/canaux_declares.py) ---
 bertrand_canaux:

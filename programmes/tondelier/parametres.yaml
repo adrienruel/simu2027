@@ -38,30 +38,6 @@ tondelier_smic:
     statut: SOURCE
     source: "Programme, p. 55 : « Passer le salaire minimum à 2000€ brut par mois dès 2027 »"
     note: "En euros de 2027 ; ramené en euros de 2026 par l'inflation de 2027 (inflation.base). Les allègements de cotisations sont « nominalisés et désindexés » (p. 67) : ils restent au barème de 2026, donc le coût du travail au SMIC monte de toute la hausse (table OpenFisca de 2026 lue au salaire relevé)."
-  diffusion_jusqu_a:
-    valeur: 1.4
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Encadrement : Dares et Insee (diffusion des hausses du SMIC aux salaires voisins, jusqu'à 1,3 à 1,5 SMIC, en décroissant)"
-    note: "La hausse décroît linéairement de son niveau au SMIC jusqu'à zéro à 1,4 SMIC (coût employeur)."
-  elasticite_emploi:
-    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Encadrement : Kramarz et Philippon (2001) : élasticité de l'emploi au coût du travail au voisinage du SMIC proche de −1,5 ; Crépon et Desplatz (2001), L'Horty (2006) : −0,4 à −1 pour les allègements ciblés"
-    note: "Élasticité de l'emploi au coût employeur, appliquée à la hausse de coût de chaque tranche. Montée en trois ans (2027-2029)."
-  valeur_emploi_chomeur:
-    valeur: 9000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Encadrement : allocation moyenne d'un chômeur indemnisé ≈ 1 050 € par mois (Unédic), un sur deux indemnisé ; garantie d'autonomie pour une partie des autres"
-    note: "Dépense publique en plus pour un emploi perdu, en plus des prélèvements perdus (OpenFisca 2026, au coût de l'emploi). Suit les salaires."
-  part_marge_absorbee:
-    valeur: 0.5
-    unite: taux
-    statut: HYPOTHESE
-    note: "Part de la hausse du coût du travail prise sur les marges (le reste passe dans les prix) : l'IS perd 25 % de cette part."
 
 tondelier_fp:
   part_prelevements:
@@ -89,11 +65,6 @@ tondelier_fp:
     note: "Les pensions des fonctionnaires suivent le traitement de fin de carrière : une hausse de rémunération se retrouve dans les pensions des départs suivants (montée sur 35 ans)."
 
 tondelier_retraites:
-  profil_62_ans:
-    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Profil commun à 64 ans (ancien_systeme.part_retraites_age) ramené de deux ans au-delà de 61 ans, carrières longues gardées ; DREES, fiche 16 (2023, âge légal 62 ans) : 31 % des départs à 62 ans, 94 à 97 % retraités à 67 ans"
   annee_retour:
     valeur: 2028
     unite: sans_unite
@@ -114,12 +85,6 @@ tondelier_tabac:
     source: "Programme, p. 111 : « Interdire la vente de tabac à toute personne née en 2014 et après »"
     note: "La recette baisse avec la part des adultes nés en 2014 ou après (les jeunes fument autant que les autres : prudent). Les économies de santé ne sont pas comptées faute de chiffrage sourcé (règle : économies sourcées seulement)."
 
-tondelier_macro:
-  multiplicateur_actif:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Même mécanique que l'ajustement budgétaire commun (macro.multiplicateur, macro.annees_effet_ajustement) : l'impulsion budgétaire nette des mesures (hausse du solde primaire = ajustement, baisse = relance) agit sur le PIB et s'efface linéairement. Les recettes suivent le PIB (part des recettes dans le PIB du statu quo)."
 
 tondelier_mesures:
 
@@ -822,13 +787,6 @@ tondelier_ecologie:
 # de travail) : sont-elles intégrées ? » Leur coût l'était, pas leur effet sur l'emploi. Même règle que le moteur
 # d'Écologie de droite : un emploi n'est compté qu'une fois ; ce qu'il rapporte ou coûte passe au solde.
 tondelier_emploi:
-  cout_poste_public:
-    valeur: 55000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Encadrée : masse salariale publique d'environ 390 Md€ de coût employeur pour environ 5,7 millions d'agents (Insee, Refonte_outil_de_simulation), soit environ 68 000 € en moyenne ; les recrutés débutent plus bas"
-    note: "Coût employeur d'un poste créé, pour passer des montants des mesures aux postes."
   postes:
     valeur: {sante_scolaire: 0.8, hopital: 1.0, grand_age: 1.0, classes: 1.0, aesh: 0.5, justice: 1.0, autres_postes: 1.0, voie_pro: 0.7, trente_deux_heures: 1.0}
     unite: sans_unite

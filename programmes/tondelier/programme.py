@@ -47,7 +47,11 @@ class Tondelier:
 
     # ------------------------------------------------------------------ outils
     def v(self, cle: str, s: str = "prudent"):
-        return self.pt.val(f"tondelier_{cle}", s)
+        # valeur du programme, ou à défaut la valeur commune à tous (programme_commun, phase J2 du 16/11/2026)
+        k = f"tondelier_{cle}"
+        if k not in self.pt._p and "programme_commun." + cle.replace(".", "_") in self.pt._p:
+            k = "programme_commun." + cle.replace(".", "_")
+        return self.pt.val(k, s)
 
     def _indices(self, p: Parametres, s: str) -> dict:
         y = sq.pib(p, s)

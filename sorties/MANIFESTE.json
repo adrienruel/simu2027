@@ -29,12 +29,12 @@
    "note": "Antérieur au manifeste. Inventaire C1 des hypothèses sans source (13/11/2026)."
   },
   "comparaison_annonces.csv": {
-   "sha256": "aa8a6ef91fd56048c00abb1db964d2e064639e6d4b99729d2790628690b2bbe8",
+   "sha256": "f3e569464b251c1450ceb263ce17817fa5a738afd79fa33fcab6540473589c68",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:16Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:03Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_bouclage.json": {
    "sha256": "903ad20cc2268afe94eb0291dbd0bcd7ec3bc9d2ad5bfdad71cbfe097faac19b",
@@ -46,36 +46,44 @@
    "note": "Antérieur au manifeste. Comparaison ponctuelle de la phase E (14/11/2026), avant et après la macro bouclée ; Écologie de droite retirée le 16/11."
   },
   "comparaison_ecarts.csv": {
-   "sha256": "e66f49f43bad0f6199dcbc617a9132268721e258460621a3eaef50c8a93ed7eb",
+   "sha256": "c126db16c7e9794007067a0f16f8ac18e41467c677dec0cd0ac1f224a33a33c8",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:16Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:02Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_ecologie.csv": {
-   "sha256": "c6b31751a23e5a93ffa4a620e009bc5e4f6607218c0570dc34a1d0aff52a0cf6",
+   "sha256": "330ffb501a28594565da3b1b2512bd42901e8978baf8df2400acd09f33e7a1e6",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:15Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:02Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_ecologie_mesures.csv": {
    "sha256": "cf7a8569f8ccbf21d787fdd86158575ab4844a8f22b01c18ac5115c30fe1648e",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:16Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:02Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
+  },
+  "comparaison_economies.csv": {
+   "sha256": "86517411b8e558346ea3adfdeaadf785d02265ce63ccf15e840581d141cb6de8",
+   "script": "outils.audit_economies",
+   "date": "2026-11-16T15:33:16Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_emploi_canaux.csv": {
    "sha256": "a975006c3bc7b666c75721b19afc988f4e3147b4d7a61d560885dfd8790f4890",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:16Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:02Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_incertitude.csv": {
    "sha256": "73f7769cd274853db8bff02d87f7c6c878d2dd0f28c6a05affeb05f0e0c21900",
@@ -86,37 +94,45 @@
    "parametres": null,
    "note": "Antérieur au manifeste. Résumé des tirages du 16/11/2026 (nuit), avant la capitalisation commune (effet < 0,02 point)."
   },
+  "comparaison_lectures.csv": {
+   "sha256": "d787f6d1557af8f007d7305912aa95806fb755c8c9780612bc5ea9c825321f49",
+   "script": "outils.poids_lectures",
+   "date": "2026-11-16T15:46:44Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
+  },
   "comparaison_mesures.csv": {
-   "sha256": "a0b300e9ba2e3a8f394abe001d223220e0a0a8c86469e86ae9ba55551e5cc95d",
+   "sha256": "98d04444f4708b03d9179c028e9940d6fcdbc6bf2dd13079ff0453ed0b533798",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:16Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:03Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_redistribution.csv": {
    "sha256": "3bd063c8431dce66c7d775200bcd6a0ac581f6053af201ecfe1e369978c4fed6",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:18Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:05Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_redistribution_deciles.csv": {
    "sha256": "29af34c512ce6f200e5498b19391b1d06ebdb051eb83edc701b6d64c4b588e17",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:18Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:05Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_trajectoire.csv": {
-   "sha256": "8b7e9ef1bde5c9b68e1a32d5700f40d4853e556e0db2ee65205c3404cee85f41",
+   "sha256": "25daf884f0abbf89341a4c1339bec5f7b59e2e4903894d2502dc9db42aa6c64a",
    "script": "outils.export_comparaison",
-   "date": "2026-11-16T15:23:15Z",
-   "commit": "58fea93",
-   "code_non_commite": false,
-   "parametres": "d7ae7fae5036bb37"
+   "date": "2026-11-16T19:07:02Z",
+   "commit": "804f588",
+   "code_non_commite": true,
+   "parametres": "0cd0f6fbdca49bc9"
   },
   "comparaison_variante_fonds.csv": {
    "sha256": "dd50957b1f51a19081c08eb7e24470ec3b8e5a804fc8fd6450fceb9f8f70a5c7",

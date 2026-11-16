@@ -10,39 +10,9 @@
 # l'enveloppe déduite du programme domaine par domaine. Dépense : crise ≥ prudent ≥ médian ≥ optimiste ; recette :
 # l'inverse. Calendrier : tout à partir de la loi de finances 2028.
 
-le_pen_emploi:
-  cout_poste_public:
-    valeur: 55000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
-  valeur_emploi:
-    valeur: 20000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
-  valeur_ajoutee_emploi:
-    valeur: 35000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
 
-le_pen_macro:
-  multiplicateur_actif:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
 
 le_pen_retraites:
-  profil_62_ans:
-    valeur: {58: 0.03, 59: 0.05, 60: 0.12, 61: 0.17, 62: 0.72, 63: 0.80, 64: 0.86, 65: 0.95, 66: 0.97, 67: 0.98, 68: 1.0}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Même profil que glucksmann_retraites.profil_62_ans (DREES, fiche 16, 2023, âge légal 62 ans, carrières longues de la loi d'avant 2023 : départ à 60 ans pour les carrières commencées avant 20 ans)"
   annee:
     valeur: 2028
     unite: sans_unite
@@ -63,14 +33,6 @@ le_pen_enveloppe:
     statut: HYPOTHESE
     source: "Contre-budget du 6/10/2026 : « la mère des réformes est la réorganisation de l'État » (État : cible principale, 20,7 Md€ annoncés), suppression de la quasi-totalité des agences (opérateurs : cible principale), collectivités 8,2 Md€ en 2027 puis 18 (cible principale) ; santé protégée (fin des fermetures de lits, soignants revalorisés) ; prestations : « priorité nationale » chiffrée à part (le_pen_mesures.priorite_nationale), corrections sociales citées."
     note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
-  debut:
-    valeur: 2028
-    unite: sans_unite
-    statut: DECISION
-  plein:
-    valeur: 2032
-    unite: sans_unite
-    statut: DECISION
 
 le_pen_mesures:
   # ---------------------------------------------------------------- fiscalité et pouvoir d'achat

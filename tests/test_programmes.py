@@ -24,8 +24,13 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     tous les programmes, décision du 16/11/2026)."""
     p = Parametres()
     decisions = sorted(x.cle for x in p if x.statut == "DECISION" and p.origine[x.cle].name == "economie.yaml")
+    # programme_commun (16/11/2026, phase J2) : lectures communes à tous, rangées là au lieu d'être recopiées dans
+    # chaque programme (multiplicateur actif pour tous ; allègements qui suivent le SMIC selon la loi actuelle ;
+    # calendrier des économies non détaillées)
     assert decisions == ["calendrier.inflation", "demographie.scenario_fecondite", "incertitude.correlation",
-                         "lectures_communes.capitalisation", "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi", "sante_trajectoire.pente_phase_1"]
+                         "lectures_communes.capitalisation", "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi",
+                         "programme_commun.enveloppe_debut", "programme_commun.enveloppe_plein",
+                         "programme_commun.macro_multiplicateur_actif", "programme_commun.smic_allegements_suivent_smic", "sante_trajectoire.pente_phase_1"]
 
 
 def _programme_temporaire(tmp_path, monkeypatch, texte_en_plus: str) -> str:

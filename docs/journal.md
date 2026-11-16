@@ -1684,3 +1684,37 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   - en-tête de `docs/offre.md` ;
   - docstring de `moteur/statu_quo.py` (âge légal par génération) ;
   - `python -m moteur.statu_quo --ecart <programme>` compare désormais un programme nommé.
+
+## 16/11/2026 (soir) — Phase J2 : équité entre les programmes comparés
+
+- **Paramètres communs dédupliqués.** Le nouveau groupe `programme_commun` (`parametres/commun/economie.yaml`) reçoit quatorze paramètres jusque-là recopiés dans les fichiers des programmes :
+  - coût d'un poste public, valeur d'un emploi, valeur ajoutée d'un emploi, multiplicateur actif ;
+  - paramètres du SMIC (diffusion, élasticité, part prise sur les marges, valeur d'un emploi de chômeur, allègements) ;
+  - profil de départ à 62 ans ;
+  - élasticité du temps de travail ;
+  - hausse du chômage à l'annulation des réformes de l'assurance chômage ;
+  - calendrier des économies non détaillées.
+
+  `ProgrammeSimple.v` (et `Tondelier.v`) lisent la valeur du programme, ou à défaut la valeur commune. `tests/test_economies.py` interdit à un programme de redéfinir une valeur commune.
+- **Valeur ajoutée d'un emploi alignée.** Elle valait 60 000 € pour Bertrand et Zemmour, contre 35 000 € pour les neuf autres programmes (« coût moyen d'un emploi perdu par le SMIC × 1,25 »). Elle est maintenant de 35 000 € pour tous.
+  - Déficit 2037 au prudent : Bertrand 9,504 → 9,506 % ; Zemmour 13,637 → 13,646 %.
+  - Écart de solde primaire 2037 : Zemmour −2,427 → −2,430 point.
+  - Aucun autre programme ne change (vérifié sur les sept fichiers du comparateur).
+- **Barème commun de l'IA et de l'école** : `programme_commun.canaux_adoption_ia_part` et `canaux_ecole_niveau_eleves`, lus par `moteur/canaux_declares.py`. Il était recopié dans six programmes et repris d'Écologie de droite. Résultats inchangés.
+- **Règle des économies vérifiée** (`outils/audit_economies.py`, `sorties/comparaison_economies.csv`) : 172 économies et recettes nommées dans les douze programmes.
+  - Toutes croissent de la crise à l'optimiste.
+  - Deux seulement sont identiques dans les quatre scénarios : la sous-indexation des hautes pensions de Tondelier (barème) et son malus au poids (0,3 Md€, à revoir).
+  - Rapport prudent / optimiste par programme : de 0,47 à 0,68.
+  - Deux montants n'ont ni source ni note : plafonnement des niches et superprofits de Tondelier. Dix autres ont une note sans source.
+  - `tests/test_economies.py` empêche ces listes de s'allonger.
+- **Tests de propriétés sur tous les programmes** (`tests/test_proprietes.py`, 36 cas) :
+  - la somme des mesures et des effets explique l'écart de solde primaire au statu quo à 10⁻¹² Md€ près (testé jusqu'ici pour Écologie de droite seulement) ;
+  - ordre des scénarios chaque année de 2029 à 2073 ;
+  - retirer la plus grosse mesure d'un programme déplace le solde dans le bon sens.
+- **Poids des lectures** (`outils/poids_lectures.py`, `docs/lectures_poids.md`, `sorties/comparaison_lectures.csv`) : chaque canal déclaré est retiré à son tour. En 2037 au prudent, ce qui pèse le plus :
+  - réformes de structure : Arthaud −0,66, Roussel −0,49, Mélenchon −0,42, Tondelier −0,26 point ;
+  - solde migratoire : Lisnard −0,46, Zemmour −0,36, Philippe −0,24, Le Pen −0,19, Retailleau −0,15 ;
+  - le reste est sous 0,1 point.
+
+  Ces lectures sont à faire valider en priorité.
+- **Incertitude** : les paramètres rangés dans `programme_commun` sont désormais tirés au même point pour tous les programmes (avant : un tirage par programme). Les tirages enregistrés sont antérieurs (manifeste) ; à refaire au prochain calcul.

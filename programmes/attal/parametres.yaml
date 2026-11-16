@@ -10,32 +10,7 @@
 # estimées) ; chaque ligne sans source est estimée en crise / prudent / médian / optimiste ; dépense : crise ≥ prudent ≥
 # médian ≥ optimiste ; recette : l'inverse. Calendrier : tout à partir de la loi de finances 2028.
 
-attal_emploi:
-  cout_poste_public:
-    valeur: 55000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes créés"
-  valeur_emploi:
-    valeur: 20000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
-  valeur_ajoutee_emploi:
-    valeur: 35000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même règle que Tondelier et Arthaud : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € × 1,25"
 
-attal_macro:
-  multiplicateur_actif:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
 
 attal_droit_au_brut:
   baisse:
@@ -330,14 +305,6 @@ attal_enveloppe:
     statut: HYPOTHESE
     source: "Lettre du 15/10/2026 et site : Sécurité sociale à l'équilibre en trois ans (santé : cible principale), frein d'urgence sur la dépense de l'État (État : cible principale), un échelon de collectivités et des doublons supprimés (collectivités : cité), année blanche des prestations (prestations : cité, déjà en partie chiffré), opérateurs non nommés à part (cité au titre des doublons)."
     note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
-  debut:
-    valeur: 2028
-    unite: sans_unite
-    statut: DECISION
-  plein:
-    valeur: 2032
-    unite: sans_unite
-    statut: DECISION
 
 # ---------------------------------------------------------------- effets en tonnes (phase 2, 11/11/2026)
 # Même méthode que tondelier_ecologie (moteur/ecologie/emissions.profil, lu par ProgrammeSimple.mesures_ecologie).
@@ -383,7 +350,7 @@ attal_canaux:
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : électricité à ≈ 75 €/MWh et contrats régulés pour l'industrie (ATT-ENE-03, prix réglementés, −0,5) ; normes agricoles, construction et statut du bailleur, hors champ, ne sont plus comptés (+1 avant le 12/11/2026). Protection de l'emploi : code du travail réécrit autour de principes fondamentaux (ATT-EMP-02, 0,5). Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2. DÉCISION d'Adrien du 12/11/2026 (soir, roadmap B1) : lectures confirmées."
   adoption_ia:
-    valeur: {part: {crise: 0, prudent: 0.05, median: 0.1, optimiste: 0.431718061674009}, budget_md: {crise: 8.0, prudent: 7.0, median: 6.0, optimiste: 5.0}}
+    valeur: {budget_md: {crise: 8.0, prudent: 7.0, median: 6.0, optimiste: 5.0}}
     unite: sans_unite
     statut: HYPOTHESE
     note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : ATT-NUM-01 (plan « France 2040 », 200 Md€ pour l'IA et l'innovation). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure. Phase B6 (12/11/2026, nuit) : effet proportionnel au budget engagé (adoption_ia.budget) ; budget lu : ATT-NUM-01, plan « France 2040 » (attal_mesures, investissement) : au-delà de 1 Md€, barème entier."

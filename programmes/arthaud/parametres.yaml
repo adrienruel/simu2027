@@ -9,33 +9,7 @@
 # coûtant et égalité salariale sont chiffrés ; l'expropriation, le contrôle ouvrier et la planification restent hors
 # du modèle (le chiffrage reste partiel).
 
-arthaud_emploi:
-  cout_poste_public:
-    valeur: 55000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.cout_poste_public : coût employeur moyen d'un agent ≈ 68 000 € (390 Md€ pour 5,7 millions d'agents), plus bas pour les postes non remplacés ou créés"
-  valeur_emploi:
-    valeur: 20000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Calculée pour le programme Tondelier (SMIC) : prélèvements, TVA et dépense de chômage d'un emploi au voisinage du SMIC, OpenFisca 2026 ≈ 19 600 €"
-  valeur_ajoutee_emploi:
-    valeur: 35000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Calculé : coût moyen d'un emploi perdu par le SMIC ≈ 28 000 € (bibliotheque.smic, OpenFisca 2026) × 1,25, même règle que Tondelier"
-    note: "Les emplois perdus sont surtout au voisinage du SMIC : valeur ajoutée plus basse que la moyenne."
 
-arthaud_macro:
-  multiplicateur_actif:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Même mécanique que tous les programmes (moteur/programme_simple.py)."
 
 arthaud_smic:
   smic_net_programme:
@@ -45,34 +19,6 @@ arthaud_smic:
     statut: SOURCE
     source: "Meeting du 26 septembre 2026 (discours de Nathalie Arthaud) : SMIC à 2 200 € net par mois"
     note: "En euros de 2027, ramené en euros de 2026 par l'inflation de 2027 (inflation.base), puis en brut par le barème OpenFisca de 2026 (≈ 2 740 € brut, +50 %). Allègements : voir allegements_suivent_smic."
-  allegements_suivent_smic:
-    valeur: true
-    unite: sans_unite
-    statut: DECISION
-    note: "Le programme ne dit rien des allègements : lecture de la loi actuelle, qui les définit en multiples du SMIC (ils suivent le nouveau SMIC). Le coût au SMIC monte alors comme le brut (+50 %). Variante « nominalisés » (lecture Tondelier) : coût au SMIC +88 %, emplois perdus bien plus nombreux."
-  diffusion_jusqu_a:
-    valeur: 1.4
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_smic.diffusion_jusqu_a (Dares, Insee : diffusion jusqu'à 1,3 à 1,5 SMIC)"
-    note: "Avec un SMIC relevé de moitié, 1,4 nouveau SMIC ≈ 2,1 SMIC actuels : la moitié des salariés du privé sont touchés. La « hausse générale des salaires » n'a pas de montant : elle n'est pas comptée au-delà."
-  elasticite_emploi:
-    valeur: {crise: -1.0, prudent: -0.8, median: -0.6, optimiste: -0.4}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Mêmes valeurs que tondelier_smic.elasticite_emploi (Kramarz et Philippon, 2001 ; Crépon et Desplatz, 2001 ; L'Horty, 2006)"
-    note: "Appliquées à élasticité constante (emplois × (1 − rapport des coûts^élasticité)), ce qui garde le résultat borné ; ces élasticités sont estimées pour des hausses de quelques pour cent : appliquées à une hausse de moitié, elles sortent de leur domaine de validité (résultat à lire comme un ordre de grandeur). L'interdiction des licenciements n'est pas modélisée comme un frein à ces pertes : elle ne s'applique pas aux embauches non faites, ni aux faillites."
-  part_marge_absorbee:
-    valeur: 0.5
-    unite: taux
-    statut: HYPOTHESE
-    note: "Même valeur que Tondelier."
-  valeur_emploi_chomeur:
-    valeur: 9000
-    unite: eur_an
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur"
   valeur_ajoutee_emploi_perdu:
     valeur: 1.25
     unite: sans_unite
@@ -174,11 +120,6 @@ arthaud_temps_travail:
     statut: DECISION
     source: "« Répartir le travail entre tous, sans perte de salaire » (brochure Présidentielle 2027, Lutte ouvrière, juin 2026, p. 12) ; aucune durée cible"
     note: "Lecture retenue (Adrien, 11/11/2026) : la durée baisse jusqu'à ce que les heures libérées égalent le chômage du statu quo en 2029 (chômeurs / emplois ≈ 9 %), soit ≈ 31,8 heures, calculée par le programme. Même mécanisme et mêmes parts de productivité, d'embauches et de compensation publique que roussel_temps_travail.trente_deux_heures (ProgrammeSimple.trente_deux_heures et heures_fonction_publique). Interaction avec la hausse du SMIC non comptée (effets additionnés)."
-  elasticite_emploi:
-    valeur: {crise: -0.5, prudent: -0.3, median: -0.2, optimiste: -0.1}
-    unite: sans_unite
-    statut: HYPOTHESE
-    source: "Même valeur que melenchon_temps_travail.elasticite_emploi (Mésange, DG Trésor ; L'Horty, 2006)"
 
 arthaud_licenciements:
   interdiction:

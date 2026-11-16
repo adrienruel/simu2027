@@ -123,17 +123,24 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme
     if "adoption_ia" in d:
         k_ia = facteur_ia(p, s, d["adoption_ia"].get("budget_md", "non_chiffre"))
         g, debut, duree = sq._v(p, "macro.ia_productivite", s), p.val("macro.premiere_annee_ia"), p.val("macro.annees_ia")
+        # barème commun (programme_commun.canaux_adoption_ia_part, 16/11/2026) ; un programme ne le redéfinit pas
+        # (Écologie de droite, programme de test gelé, fournit encore sa propre part : test_canaux_declares vérifie
+        # qu'aucun programme publié ne le fait)
+        part_ia = (d["adoption_ia"]["part"][s] if "part" in d["adoption_ia"]
+                   else p.val("programme_commun.canaux_adoption_ia_part", s))
         r, serie = 0.0, {}
         for t in ANNEES:
-            r = (1 + r) * (1 + g * (debut <= t < debut + duree) * d["adoption_ia"]["part"][s] * k_ia) - 1
+            r = (1 + r) * (1 + g * (debut <= t < debut + duree) * part_ia * k_ia) - 1
             serie[t] = y[t] * r
         ajouter("adoption de l'IA", serie)
     if "ecole" in d:
         x = d["ecole"]
         k = sq._v(p, "macro.croissance_par_ecart_type", s)
+        niveau_commun = p.val("programme_commun.canaux_ecole_niveau_eleves", s)  # barème commun (16/11/2026)
         r, serie = 0.0, {}
         for t in ANNEES:
-            r = (1 + r) * (1 + x["niveau_eleves"][s] * k * _montee(t, x["debut"], x["annees"])) - 1
+            niveau = x["niveau_eleves"][s] if "niveau_eleves" in x else niveau_commun
+            r = (1 + r) * (1 + niveau * k * _montee(t, x["debut"], x["annees"])) - 1
             serie[t] = y[t] * r
         ajouter("école (niveau des élèves)", serie)
     emplois, actifs = {t: 0.0 for t in ANNEES}, {t: 0.0 for t in ANNEES}
