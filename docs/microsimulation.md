@@ -390,3 +390,15 @@ La colonne « Mesures prises en compte » du comparateur le dit programme par pr
 - Non codés : âge de départ (son effet est dans la population de chaque programme, donc dans la pauvreté comparée au
   statu quo, mais pas dans les déciles, qui comparent la même population avec et sans les mesures) ; pensions des
   carrières complètes au SMIC (Mélenchon) et minimum contributif (Tondelier), faute de carrières dans la population.
+
+
+## Capitalisation obligatoire (16/11/2026)
+
+Formule `capitalisation` (`outils/openfisca_mesures.Base.capitalisation`) : la part salariale d'une capitalisation
+obligatoire (taux × brut, plafonné, × (1 − part employeur)) est retirée du revenu disponible des salariés et agents
+publics en emploi les plus jeunes, jusqu'au nombre d'entrants couverts depuis le début du dispositif
+(entrants_par_an × taux_emploi × années), comme le moteur (`bibliotheque.capitalisation_obligatoire`). Versée à un
+fonds hors des administrations publiques, elle n'est pas une recette : elle est retirée du budget de la mesure
+(`fonds`). Nulle en 2026, elle apparaît dans la population vieillie. La part employeur n'est pas reportée sur les
+salaires (incidence à long terme des cotisations : décision ouverte). Programmes : Retailleau (RET-RET-02), et par la
+lecture commune Bertrand (BER-RET-02), Zemmour (ZEM-RET-01), Le Pen (RN-RET-03).

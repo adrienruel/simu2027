@@ -46,7 +46,7 @@ class LePen(ProgrammeSimple):
         self.non_retraites = getattr(self, "non_retraites", {})
         self.non_retraites[(id(p), s)] = {"serie": {t: -v for t, v in det["retraites_en_plus"].items()},
                                           "baisse": True}
-        cap, emplois_cap = bib.capitalisation_obligatoire(p, s, p.val("entreprises.capitalisation_lecture_commune"), "RN-RET-03")
+        cap, emplois_cap = bib.capitalisation_obligatoire(p, s, p.val("lectures_communes.capitalisation"), "RN-RET-03")
         canaux["Capitalisation obligatoire : emplois (coût du travail et salaire net)"] = emplois_cap
         return out + cap, canaux
 

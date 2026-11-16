@@ -37,7 +37,7 @@ class Bertrand(ProgrammeSimple):
             Mesure("BER-RET-01 — prélèvements sur les pensions en moins", "recettes",
                    {t: taux_prel * v for t, v in serie.items()}),
         ]
-        cap, emplois_cap = bib.capitalisation_obligatoire(p, s, p.val("entreprises.capitalisation_lecture_commune"), "BER-RET-02")
+        cap, emplois_cap = bib.capitalisation_obligatoire(p, s, p.val("lectures_communes.capitalisation"), "BER-RET-02")
         return out + cap, {"Capitalisation obligatoire : emplois (coût du travail et salaire net)": emplois_cap}
 
 

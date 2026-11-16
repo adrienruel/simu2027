@@ -1615,3 +1615,17 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   - Attal 12 – 35 % ;
   - Tondelier 0 – 12 %.
 - Le multiplicateur pèse désormais pour Zemmour, Lisnard et Attal ; la contrainte de capacité pour Mélenchon.
+
+## 16/11/2026 (matin) — Capitalisation obligatoire : règle commune, part salariale dans la micro
+
+- Décision d'Adrien : les parts de capitalisation annoncées sans taux ni financement (Bertrand BER-RET-02, Zemmour
+  ZEM-RET-01, Le Pen RN-RET-03) sont lues comme le seul dispositif détaillé, celui de Retailleau (1 % du brut des
+  entrants depuis 2028, moitié salarié, moitié employeur) : `lectures_communes.capitalisation`,
+  `bibliotheque.capitalisation_obligatoire` (Retailleau passe par la même fonction). Attal exclu (proposition des
+  seules conventions de Renaissance, règle existante).
+- Micro : formule « capitalisation » (`Base.capitalisation`) : part salariale retirée du revenu disponible des plus
+  jeunes salariés en emploi, à hauteur des entrants couverts ; pas une recette publique (retirée du budget de la
+  mesure). Retailleau 2037 : 0,85 Md€ versés dans la micro, contre 0,99 au moteur (salaires réels des jeunes, temps
+  partiel compris, sous les 2 600 € du moteur).
+- Déficit 2037 au prudent : Bertrand 9,49 → 9,50 ; Zemmour 13,63 → 13,64 ; Le Pen 13,22 → 13,23 ; Retailleau
+  inchangé (10,20). Variante du fonds étendue à ces trois programmes.

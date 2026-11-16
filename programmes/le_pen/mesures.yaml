@@ -83,7 +83,7 @@ mesures:
 - id: RN-RET-03
   intitule: "15 à 20 Md€ d'économies sur les retraites par des « corrections de mesures injustes », pilier de capitalisation"
   source: "contre-budget, 06/10/2026"
-  traitement: "économies : non chiffrées, non détaillées (retraites hors enveloppe, règle commune) ; pilier de capitalisation : lecture commune du 16/11/2026 (dispositif de Retailleau, entreprises.capitalisation_lecture_commune)"
+  traitement: "économies : non chiffrées, non détaillées (retraites hors enveloppe, règle commune) ; pilier de capitalisation : lecture commune du 16/11/2026 (dispositif de Retailleau, lectures_communes.capitalisation)"
 - id: RN-FAM-01
   intitule: "Soutien aux mères isolées doublé, contrôles renforcés"
   source: "rassemblementnational.fr"

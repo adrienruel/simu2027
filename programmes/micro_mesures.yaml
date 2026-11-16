@@ -13,7 +13,7 @@
 
 bertrand:
   BER-RET-02:
-    operations: [{formule: {nom: capitalisation, parametre: entreprises.capitalisation_lecture_commune}}]
+    operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
   BER-FIS-01:
     operations: [{parametre: {chemin: "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate", valeur: 0.09}}]
@@ -154,7 +154,7 @@ melenchon:
 
 le_pen:
   RN-RET-03:
-    operations: [{formule: {nom: capitalisation, parametre: entreprises.capitalisation_lecture_commune}}]
+    operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
   RN-FIS-03:
     operations: [{formule: {nom: ir_jeunes, age_max: 29, plafond_smic: 4}}]
@@ -204,7 +204,7 @@ retailleau:
 
 zemmour:
   ZEM-RET-01:
-    operations: [{formule: {nom: capitalisation, parametre: entreprises.capitalisation_lecture_commune}}]
+    operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
   ZEM-IMM-04:
     operations: [{formule: {nom: condition_nationalite, groupe: hors_ue, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]

@@ -195,4 +195,5 @@ def test_variante_fonds_commune_aux_programmes(p):
         assert bas < -v["deplace"][2037] < haut
         assert v["apu"][2037]["pib"] == pytest.approx(v["publie"][2037]["pib"], rel=1e-3)
         assert v["apu"][2037]["deficit"] < v["publie"][2037]["deficit"]
-    assert not fonds_apu.a_un_fonds(noyau.charger("bertrand"), p)
+    assert fonds_apu.a_un_fonds(noyau.charger("bertrand"), p)  # lecture commune de la capitalisation (16/11/2026)
+    assert not fonds_apu.a_un_fonds(noyau.charger("attal"), p)
