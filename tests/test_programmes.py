@@ -6,11 +6,14 @@ from moteur import parametres as mp
 from moteur.parametres import ErreurParametre, Parametres
 
 
-def test_programme_par_defaut_charge_les_trois_fichiers():
+def test_sans_programme_seulement_les_fichiers_communs():
+    """Depuis le 16/11/2026, Parametres() ne charge que les hypothèses communes ; un programme s'ajoute par son nom."""
     p = Parametres()
-    assert p.programme == "ecologie_de_droite"
-    fichiers = {f.name if "commun" in str(f) else "programme" for f in p.origine.values()}
-    assert fichiers == {"economie.yaml", "options.yaml", "statu_quo.yaml", "ecologie.yaml", "microsimulation.yaml", "programme"}
+    assert p.programme is None
+    assert {f.name for f in p.origine.values()} == {"economie.yaml", "options.yaml", "statu_quo.yaml", "ecologie.yaml", "microsimulation.yaml"}
+    q = Parametres(programme="philippe")
+    fichiers = {f.name if "commun" in str(f) else "programme" for f in q.origine.values()}
+    assert q.programme == "philippe" and fichiers == {f.name for f in p.origine.values()} | {"programme"}
 
 
 def test_hypotheses_communes_sans_mesure_du_programme():
@@ -28,7 +31,7 @@ def test_hypotheses_communes_sans_mesure_du_programme():
 def _programme_temporaire(tmp_path, monkeypatch, texte_en_plus: str) -> str:
     racine = tmp_path / "racine"
     (racine / "programmes" / "essai").mkdir(parents=True)
-    source = mp.dossier_programme() / "parametres.yaml"
+    source = mp.dossier_programme("philippe") / "parametres.yaml"
     (racine / "programmes" / "essai" / "parametres.yaml").write_text(
         source.read_text(encoding="utf-8") + texte_en_plus, encoding="utf-8")
     monkeypatch.setattr(mp, "RACINE", racine)
@@ -49,8 +52,8 @@ def test_programme_inconnu():
 
 
 def test_copie_garde_le_programme():
-    p = Parametres()
-    assert p.avec({"clause.active": False}).programme == p.programme
+    p = Parametres(programme="philippe")
+    assert p.avec({"macro.prime_dette": 0}).programme == p.programme == "philippe"
     assert p.en_crise().programme == p.programme
 
 

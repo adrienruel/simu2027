@@ -1,0 +1,3 @@
+# Microsimulation (OpenFisca-France) et ses tests ; version de calage des tables du dépôt.
+-r requirements.txt
+openfisca-france==177.0.0

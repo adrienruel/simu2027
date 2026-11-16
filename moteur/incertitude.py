@@ -155,9 +155,8 @@ def _lire(res: dict) -> dict:
 
 
 def programmes() -> list[str]:
-    from .noyau import charger  # noqa: F401
-    racine = Path(__file__).resolve().parent.parent / "programmes"
-    return sorted(d.name for d in racine.iterdir() if (d / "programme.py").exists())
+    """Programmes publiés (programmes/publies.yaml), sans le statu quo."""
+    return noyau.programmes_disponibles()[1:]
 
 
 def un_tirage(i: int, graine: int, rho: float, noms: list[str], base: Parametres, propres: dict, listes: dict) -> dict:

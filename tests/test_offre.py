@@ -134,6 +134,7 @@ def test_baisse_de_la_csg_rapporte_de_l_offre_et_hausses_de_tondelier_en_coutent
         assert len(m) == 1 and signe * m[0].valeurs[2050] > 0
 
 
+@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
 def test_ecologie_de_droite_hors_du_canal(p):
     """Son moteur a ses propres canaux d'offre : aucune de ses mesures ne porte d'instrument."""
     e = noyau.charger("ecologie_de_droite")

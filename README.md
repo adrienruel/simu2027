@@ -1,77 +1,56 @@
-# Simulation des programmes — présidentielle 2027
+# simu2027 — comparateur des programmes de la présidentielle 2027
 
-Premier programme chiffré : « Écologie de droite ».
+Un moteur Python chiffre, sur un noyau commun, les programmes des candidats contre un statu quo (PLF 2027 provisoire,
+puis aucune mesure nouvelle). Mêmes règles pour tous les programmes : on ne reprend que leurs mesures, jamais les
+économies ou les recettes qu'ils annoncent ; le modèle les estime lui-même en crise, prudent, médian et optimiste.
 
-Refonte du classeur `Chiffrage_programme_complet_v235.xlsx` en moteur Python vérifiable.
-Cahier des charges : `Refonte_outil_de_simulation.md` (projet).
+Programmes publiés : `programmes/publies.yaml` (statu quo, Arthaud, Attal, Bertrand, Glucksmann, Le Pen, Lisnard,
+Mélenchon, Philippe, Retailleau, Roussel, Tondelier, Zemmour).
 
-## Lancer sous Windows
-
-Double-cliquer sur `lancer.bat`. La première fois, il crée un environnement Python local (`.venv`) et installe les
-bibliothèques (Python 3.10 ou plus requis : https://www.python.org/downloads/, cocher « Add python.exe to PATH »).
-Menu : résumé rapide, tableau de bord (recalculé puis ouvert dans le navigateur), tout recalculer, tests.
+« Écologie de droite » (`programmes/ecologie_de_droite/`) était un programme de test. Il est mis de côté depuis le
+16/11/2026 : gardé dans le dépôt, gelé, hors des sorties et des tests par défaut, et sans effet sur les autres
+programmes (`tests/test_independance.py`).
 
 ## Lancer (ligne de commande)
 
 ```
-pip install pyyaml pytest openpyxl
-pip install openfisca-france   # seulement pour régénérer les tables du système actuel
-python -m pytest
-python -m moteur.noyau          # « Écologie de droite » sur le noyau : mesures, déficits avec et sans la règle de trajectoire
-python -m outils.cibles_crise  # (LibreOffice) recalcule la crise de la v235 en pleine précision
-python -m outils.openfisca_actuel   # tables OpenFisca du système actuel (privé, public)
-python -m outils.openfisca_menages  # ménages types, système actuel
-python -m moteur.menages_types      # ménages types : actuel contre nouveau
-python -m moteur.sensibilite        # sorties/sensibilite.json
-python -m moteur.incertitude        # sorties/incertitude.json
-python -m outils.tableau_de_bord  # sorties/tableau_de_bord.html (avec l'attribution par mesure)
-python -m outils.population_insee <dossier>  # projections de l'Insee (xlsx) → parametres/donnees/population_insee_2026_*.csv
-python -m outils.valeur_enfant      # soutien par enfant, système actuel (OpenFisca)
-python -m outils.participation      # gain à travailler d'un inactif, système actuel (OpenFisca)
-python -m outils.levier_is          # grille taux de l'IS × déduction de l'investissement
-python -m outils.leviers            # variantes et paquets chiffrés (sorties/leviers.json, ~20 min)
-python -m moteur.statu_quo --ecart  # scénario sans réforme et écart avec le programme (sorties/statu_quo.json)
+pip install -r requirements.txt
+pip install -r requirements-micro.txt  # OpenFisca-France : microsimulation et ses tests
+python -m pytest -q -p no:cacheprovider           # suite par défaut (sans les tests d'Écologie de droite)
+python -m pytest -q -p no:cacheprovider -m edd    # tests d'Écologie de droite seuls
+python -m moteur.noyau <programme>                # un programme contre le statu quo
+python -m outils.export_comparaison               # sorties/comparaison_*.csv (~1 min)
+python -m moteur.incertitude 600                  # Monte Carlo (~1 h 35), sorties/incertitude_rho0.json et _rho1.json
+python outils/export_incertitude.py               # sorties/comparaison_incertitude.csv
+python -m outils.variante_fonds_apu               # variante « fonds dans les APU » (~20 min)
+python -m outils.openfisca_mesures <programme>    # micro des ménages, un programme par processus
+python -m outils.vieillissement <programme>       # micro vieillie (2029, 2032, 2037, 2050)
+python -m moteur.statu_quo --ecart                # scénario sans réforme (sorties/statu_quo.json)
 ```
-
-Relecture indépendante : `docs/relecture.md`.
 
 ## Organisation
 
 | Dossier | Contenu |
 |---|---|
-| `parametres/commun/` | Hypothèses communes à tous les programmes (`economie.yaml`), options du modèle (`options.yaml`) et scénario sans réforme (`statu_quo.yaml`) : valeur (par scénario si besoin), unité, année des euros, statut, source |
-| `programmes/<programme>/` | Un dossier par programme : ses paramètres (qui ne peuvent pas redéfinir une hypothèse commune), son registre des mesures, ses économies datées. Architecture : `docs/architecture.md` |
-| `moteur/parametres.py` | Chargement et validation (source obligatoire si SOURCE, année obligatoire pour un montant, scénarios complets) |
-| `moteur/unites.py` | Seul endroit où l'on convertit en euros de 2026 ; une double conversion lève une erreur |
-| `moteur/impot_unique.py` | Barème de l'impôt unique (personne seule) |
-| `moteur/trajectoire.py` | Bloc comptable de la trajectoire 2029-2073 (solde, dette, Maastricht) |
-| `moteur/noyau.py` | Comptabilité commune : un programme = statu quo + mesures + contexte (`python -m moteur.noyau <programme>`) |
-| `moteur/statu_quo.py` | Scénario sans réforme (système actuel projeté), référence commune ; écart d'un programme (docs/statu_quo.md) |
-| `reference/v235/` | Export de la v235, une feuille par fichier (valeurs seules) |
-| `reference/cibles/` | Valeurs cibles de Total et Trajectoire, que le moteur doit reproduire |
-| `outils/` | Extraction de la référence ; `recalcul.py` recalcule la v235 dans LibreOffice avec des cellules modifiées |
-| `tests/` | Tests automatiques |
-| `moteur/demographie.py` | Population année par année (Insee 2026), emploi par âge, effet du programme sur la natalité, crèches |
-| `moteur/ancien_systeme.py` | Pensions de l'ancien système génération par génération, report de l'âge légal (67 ans dans le programme) |
-| `moteur/taux_effectifs.py` | Taux effectif moyen d'imposition (Devereux et Griffith) pour la localisation |
-| `moteur/emploi_canaux.py` | Bloc emploi unifié : canaux, rendements décroissants, gain par emploi |
-| `docs/sourcage.md` | Paramètres sourcés, corrigés, et décisions sur les hypothèses |
-| `docs/demographie.md`, `docs/leviers.md`, `docs/levier_is.md`, `docs/bloc_emploi.md` | Notes de méthode et résultats |
-| `docs/journal.md` | Journal des décisions et des écarts avec la v235 |
+| `parametres/commun/` | Hypothèses communes à tous les programmes (économie, options, statu quo, écologie, microsimulation) : valeur par scénario si besoin, unité, année des euros, statut, source |
+| `programmes/<programme>/` | Un dossier par programme : `parametres.yaml` (qui ne peut pas redéfinir une hypothèse commune), `mesures.yaml`, `programme.py`. Architecture : `docs/architecture.md` |
+| `programmes/publies.yaml` | Liste des programmes publiés dans le comparateur |
+| `moteur/parametres.py` | Chargement et validation. `Parametres()` charge les seules hypothèses communes ; `Parametres(programme=<nom>)` y ajoute celles d'un programme |
+| `moteur/noyau.py` | Comptabilité commune : un programme = statu quo + mesures + canaux communs |
+| `moteur/statu_quo.py` | Scénario sans réforme, référence commune |
+| `moteur/programme_simple.py`, `moteur/bibliotheque.py` | Mécanique d'un programme ; mesures communes (SMIC, âge de départ, CSG, capitalisation…) |
+| `moteur/offre.py`, `bouclage.py`, `capital.py`, `naissances.py`, `migrations.py` | Canaux communs : offre, macro bouclée, capital, démographie |
+| `moteur/fonds_apu.py`, `moteur/incertitude.py` | Variante commune des fonds de capitalisation ; Monte Carlo commun |
+| `outils/` | Population synthétique, OpenFisca, vieillissement, exports |
+| `tests/` | Tests automatiques (marqueur `edd` : tests d'Écologie de droite, exclus par défaut) |
+| `docs/journal.md` | Journal des décisions, du plus ancien au plus récent |
 
 ## Règles
 
-- Une hypothèse sans source est prise prudente ; le prudent est publié.
-- Prudent toujours affiché avant et après la clause de trajectoire.
-- RUI, AAH et socle revalorisés du minimum de l'inflation et de la croissance nominale (valeur réelle garantie) ; barèmes qui suivent la croissance.
-- Programmes des autres candidats : on ne reprend que leurs mesures, jamais les économies qu'ils annoncent ; le modèle les estime lui-même en prudent, médian et optimiste.
+- Mêmes règles pour tous les programmes : un canal commun, jamais une règle propre à un programme.
+- Une économie annoncée n'est jamais reprise ; une économie nommée sans chiffre est estimée, jamais mise à 0.
+- Une hypothèse sans source est prise prudente.
 - Euros constants de 2026 ; économie de 2026 placée en 2029 ; une seule conversion.
 - Chaque changement de résultat est commité avec sa raison.
 
-## Étapes
-
-1. **Moteur budgétaire identique à la v235** (Total et trajectoire, 4 scénarios, à 0,01 Md€) — *fait : crise, prudent, médian, optimiste reproduits ; aucune valeur lue dans la v235*
-2. Paramètres complets (1 278 du registre) et tests de la partie 6
-3. Microsimulation OpenFisca — *fait : système actuel, ménages types, réforme codée dans OpenFisca (concordance au centime)*
-4. Bloc emploi unifié et incertitude — *fait ; population annuelle, ancien système par génération, prime de taux, participation des inactifs*
-5. Sorties (Excel généré, site, manifeste)
+Roadmap : `Roadmap_comparateur_2026-11-16.md` (projet).

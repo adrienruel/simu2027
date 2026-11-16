@@ -1,0 +1,19 @@
+# Programmes publiés dans le comparateur (sorties, incertitude, micro, variante du fonds).
+# Décision d'Adrien du 16/11/2026 : simu2027 compare les programmes des candidats. « Écologie de droite »
+# (programmes/ecologie_de_droite/) était un programme de test : il reste dans le dépôt, gelé, mais n'est plus
+# publié ni comparé aux autres, et ne doit plus peser sur eux.
+publies:
+  - arthaud
+  - attal
+  - bertrand
+  - glucksmann
+  - le_pen
+  - lisnard
+  - melenchon
+  - philippe
+  - retailleau
+  - roussel
+  - tondelier
+  - zemmour
+ecartes:
+  - ecologie_de_droite

@@ -133,10 +133,20 @@ class ProgrammeVide:
         return {}
 
 
-def programmes_disponibles() -> list[str]:
-    """Statu quo, puis chaque dossier programmes/<nom>/ qui a un programme.py (ordre alphabétique)."""
+def programmes_disponibles(tous: bool = False) -> list[str]:
+    """Statu quo, puis les programmes publiés (programmes/publies.yaml), par ordre alphabétique.
+
+    tous=True : chaque dossier programmes/<nom>/ qui a un programme.py, programmes écartés compris (Écologie de
+    droite, mis de côté le 16/11/2026)."""
+    import yaml
     from .parametres import RACINE
     noms = sorted(d.name for d in (RACINE / "programmes").iterdir() if (d / "programme.py").exists())
+    if not tous:
+        publies = set(yaml.safe_load((RACINE / "programmes" / "publies.yaml").read_text(encoding="utf-8"))["publies"])
+        manquants = publies - set(noms)
+        if manquants:
+            raise FileNotFoundError(f"programmes/publies.yaml : programmes sans dossier {sorted(manquants)}")
+        noms = [n for n in noms if n in publies]
     return ["statu_quo"] + noms
 
 
@@ -524,8 +534,10 @@ def bilan_mesures(programme, p: Parametres, s: str = "prudent", annees=(2029, 20
 if __name__ == "__main__":
     import sys
     from .statu_quo import SCENARIOS, simuler as simuler_sq
-    nom = sys.argv[1] if len(sys.argv) > 1 else "ecologie_de_droite"
-    p = Parametres()
+    from .parametres import PROGRAMME_ECARTE
+    nom = sys.argv[1] if len(sys.argv) > 1 else "statu_quo"
+    # Écologie de droite (mis de côté le 16/11/2026) lit ses paramètres dans p ; les programmes publiés, dans prog.pt
+    p = Parametres(programme=nom) if nom == PROGRAMME_ECARTE else Parametres()
     prog = charger(nom)
     res, sq = simuler(p, prog), simuler_sq(p)
     annees = (2029, 2037, 2050, 2073)

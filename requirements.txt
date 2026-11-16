@@ -1,5 +1,4 @@
 pyyaml>=6
 pytest>=8
 openpyxl>=3
-# facultatif, pour régénérer les tables du système actuel :
-# openfisca-france>=176
+numpy>=1.26

@@ -78,3 +78,19 @@ Le code est encore dans `moteur/`, qui mêle le noyau et le programme. Carte des
    missions), avec leurs effets micro (OpenFisca) et leurs réactions par instrument.
 4. **Population représentative** passée dans OpenFisca : distribution par décile.
 5. **Un deuxième programme chiffré en entier** comme test de l'architecture, puis les autres.
+
+## Écologie de droite mis de côté (16/11/2026)
+
+simu2027 compare les programmes des candidats ; Écologie de droite, programme de test, n'est plus publié
+(`programmes/publies.yaml`). `Parametres()` charge les seules hypothèses communes, et `tests/test_independance.py`
+vérifie que les programmes publiés tournent sans son dossier.
+
+Modules de `moteur/` jamais chargés par le comparateur (export, incertitude, variante du fonds) au commit de la phase
+J0 : ils ne servent qu'à Écologie de droite ou à ses outils, et restent en place pour que ce programme tourne encore
+(`pytest -m edd`) :
+`anciennes_pensions`, `ascenseur_social`, `attribution`, `carbone`, `carrieres`, `cohortes`, `depenses.budget_etat`,
+`depenses.economies_missions`, `depenses.ia_administration`, `depenses.quotient`, `depenses.statique`,
+`entreprises_cellules`, `hauts_revenus`, `inflation`, `is_investissement`, `logement`, `menages_types`, `mesures`,
+`objectifs`, `recettes.autres`, `recettes.independants`, `recettes.successions`, `recettes.total`, `restitution`,
+`retraites_transition`, `sante`, `sensibilite`, `taux_effectifs`.
+

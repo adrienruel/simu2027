@@ -14,10 +14,15 @@ FICHIERS_COMMUNS = (RACINE / "parametres" / "commun" / "economie.yaml", RACINE /
                     RACINE / "parametres" / "commun" / "statu_quo.yaml",
                     RACINE / "parametres" / "commun" / "ecologie.yaml",
                     RACINE / "parametres" / "commun" / "microsimulation.yaml")
-PROGRAMME_DEFAUT = "ecologie_de_droite"
+# Aucun programme par défaut : Parametres() charge les seules hypothèses communes (décision du 16/11/2026 :
+# simu2027 compare les programmes des candidats ; « Écologie de droite », programme de test, est mis de côté et
+# ne doit plus peser sur les autres).
+PROGRAMME_DEFAUT: str | None = None
+# Programme de test mis de côté (16/11/2026) : gardé dans le dépôt, hors des sorties et des tests par défaut.
+PROGRAMME_ECARTE = "ecologie_de_droite"
 
 
-def dossier_programme(programme: str = PROGRAMME_DEFAUT) -> Path:
+def dossier_programme(programme: str) -> Path:
     """Dossier d'un programme : paramètres, registre des mesures, ménages types, fiche."""
     d = RACINE / "programmes" / programme
     if not d.is_dir():
@@ -80,16 +85,24 @@ _VIVANTES: list = []
 
 class Parametres:
     def __init__(self, chemin: Path | str | None = None, reference: str | None = None,
-                 programme: str = PROGRAMME_DEFAUT):
+                 programme: str | None = ...):
         """Hypothèses communes (parametres/commun/) + paramètres d'un programme (programmes/<programme>/).
 
         Un programme ne peut pas redéfinir une hypothèse commune : une clé présente dans deux fichiers lève une
         erreur. chemin : un fichier unique à la place (ancien format, ou fichier de test).
         reference="v235" : reprend, pour chaque paramètre corrigé depuis, la valeur de la v235 (champ v235)
         — sert aux tests de reproduction du classeur. Par défaut : valeurs actuelles (publiées)."""
+        if programme is ...:  # lu à l'appel : les tests d'Écologie de droite (-m edd) le remplacent
+            programme = PROGRAMME_DEFAUT
         self.reference = reference
         self.programme = None if chemin else programme
-        fichiers = [Path(chemin)] if chemin else [*FICHIERS_COMMUNS, dossier_programme(programme) / "parametres.yaml"]
+        if chemin:
+            fichiers = [Path(chemin)]
+        elif programme in (None, "statu_quo", "vide"):
+            self.programme = None
+            fichiers = list(FICHIERS_COMMUNS)
+        else:
+            fichiers = [*FICHIERS_COMMUNS, dossier_programme(programme) / "parametres.yaml"]
         self.scenarios: list[str] = []
         self._p: dict[str, Parametre] = {}
         self.origine: dict[str, Path] = {}
@@ -162,7 +175,9 @@ class Parametres:
         c.__dict__.pop("_cache", None)
         c.__dict__.pop("_taux_local_force", None)
         c.colonne_prudent = "crise"
-        c._surcharges = {"transition.decote_participations": self.val("crise.decote_participations")}
+        # paramètre propre à Écologie de droite (mis de côté le 16/11/2026) : absent des hypothèses communes
+        c._surcharges = ({"transition.decote_participations": self.val("crise.decote_participations")}
+                         if "crise.decote_participations" in self._p else {})
         if comme_v235:
             c.taux_local_copie = self.val("impot_local.taux_point_fixe")
         _VIVANTES.append(c)

@@ -61,6 +61,7 @@ def test_ecole_et_ia():
     assert r[2034]["pib"] > BASE[2034]["pib"] and r[2060]["pib"] > r[2034]["pib"] / BASE[2034]["pib"] * BASE[2060]["pib"]
 
 
+@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
 def test_baisse_de_l_ecart_de_taux_gagnee_par_le_resultat():
     """Règle commune (critère absolu, phase A5 du 12/11/2026) : la baisse suit les années où le ratio de dette baisse,
     une année où il remonte en fait perdre une ; nulle en crise et au prudent (barème), nulle pour le statu quo ;
@@ -110,23 +111,28 @@ def test_regle_de_trajectoire_declaree():
     assert r[2073]["dette_pib"] < BASE[2073]["dette_pib"]
 
 
+# Barème commun du 12/11/2026 (valeurs reprises d'Écologie de droite, programme de test mis de côté le 16/11/2026 :
+# elles restent la référence du barème, mais ne sont plus lues dans son fichier).
+BAREME_IA = {"crise": 0, "prudent": 0.05, "median": 0.1, "optimiste": 0.431718061674009}
+BAREME_ECOLE = {"crise": 0, "prudent": 0, "median": 0, "optimiste": 0.1}
+
+
 def test_canaux_declares_par_les_programmes():
     """Barème commun du 12/11/2026 : adoption de l'IA et école déclarées par les programmes qui ont une mesure sur le
-    même objet, aux valeurs d'Écologie de droite ; rien dans le scénario de crise ; l'école seulement à l'optimiste."""
-    q = Parametres()
-    ia = q.val("macro.adoption_ia", "optimiste")
+    même objet, aux mêmes valeurs pour tous ; rien dans le scénario de crise ; l'école seulement à l'optimiste."""
+    ia = BAREME_IA["optimiste"]
     avec_ia, avec_ecole = set(), set()
     for nom in noyau.programmes_disponibles():
-        if nom in ("statu_quo", "ecologie_de_droite"):
+        if nom == "statu_quo":
             continue
         prog = noyau.charger(nom)
         d = canaux_declares.declares(prog)
         if "adoption_ia" in d:
             avec_ia.add(nom)
-            assert d["adoption_ia"]["part"] == {s: q.val("macro.adoption_ia", s) for s in ("crise", "prudent", "median", "optimiste")}
+            assert d["adoption_ia"]["part"] == BAREME_IA
         if "ecole" in d:
             avec_ecole.add(nom)
-            assert d["ecole"]["niveau_eleves"] == {s: q.val("macro.niveau_eleves", s) for s in ("crise", "prudent", "median", "optimiste")}
+            assert d["ecole"]["niveau_eleves"] == BAREME_ECOLE
         m = prog.mesures(P)
         # IA et école : rien en crise (la fraude, le logement et le solde migratoire jouent dans tous les scénarios)
         assert all(abs(v) < 1e-9 for x in m["crise"]

@@ -62,6 +62,7 @@ def test_regle_generique_du_noyau(p):
     assert all(r2[t]["deficit"] <= r2[t]["deficit_avant_regle"] + 1e-9 for t in ANNEES)
 
 
+@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
 def test_ecologie_de_droite_sur_le_noyau_sans_moteur_propre(p):
     """Le programme n'appelle plus aucun moteur : le noyau l'exécute avec ses mesures, un fonds (dynamique) et la
     règle de trajectoire. Chaque scénario publie les deux déficits ; la règle ramène à 3 % ou s'épuise."""
@@ -87,6 +88,7 @@ def test_ecologie_de_droite_sur_le_noyau_sans_moteur_propre(p):
                         and r[s][2037]["deficit"] == pytest.approx(r[s][2037]["deficit_avant_regle"] - auto, abs=0.01)))
 
 
+@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
 def test_scenario_sans_regle_est_un_vrai_contrefactuel(p):
     """Le « sans règle » publié est le scénario complet sans la règle : identique à un passage avec la clause
     désactivée (même dette et même PIB, années suivantes comprises) ; les créances de la règle sont publiées."""
@@ -108,6 +110,7 @@ def ed(p):
     return prog, noyau.simuler(p, prog), None
 
 
+@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
 def test_bilan_des_mesures(ed, p):
     prog, r, _ = ed
     b = noyau.bilan_mesures(prog, p)
@@ -124,6 +127,7 @@ def test_bilan_des_mesures(ed, p):
         assert effet == pytest.approx(r["prudent"][t]["solde_primaire"] - base[t]["solde_primaire"], abs=1e-6)
 
 
+@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
 def test_perimetre_aligne_sans_effet_sur_le_solde(ed, p):
     """Les collectivités remises au budget du programme : autant de ressources que de dépenses."""
     prog, _, _ = ed
@@ -140,12 +144,14 @@ def test_perimetre_aligne_sans_effet_sur_le_solde(ed, p):
 
 
 def test_programmes_disponibles():
-    """Le comparateur prend le statu quo et chaque dossier programmes/<nom>/ qui a un programme.py."""
+    """Le comparateur prend le statu quo et les programmes de programmes/publies.yaml (Écologie de droite, programme
+    de test, en est sorti le 16/11/2026 ; il reste dans le dépôt et dans la liste complète)."""
     noms = noyau.programmes_disponibles()
-    assert noms[0] == "statu_quo" and "ecologie_de_droite" in noms
-    assert noyau.charger("ecologie_de_droite").libelle == "Écologie de droite"
+    assert noms[0] == "statu_quo" and "ecologie_de_droite" not in noms and len(noms) == 13
+    assert set(noyau.programmes_disponibles(tous=True)) == set(noms) | {"ecologie_de_droite"}
 
 
+@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
 def test_impulsion_budgetaire_d_ecologie_de_droite(p):
     """Ce qui entre dans le multiplicateur (relecture indépendante du 11/11/2026) : natures connues ; reclassements
     et détails sans effet net ; revenu universel pondéré comme un transfert ; l'impulsion calculée de 2029 retrouve
@@ -172,6 +178,7 @@ def test_impulsion_budgetaire_d_ecologie_de_droite(p):
     assert -imp[2029] == pytest.approx(declare, rel=0.15)
 
 
+@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
 def test_variante_fonds_dans_les_administrations_publiques(p):
     """Variante de classement (relecture I5) : les investissements financés par le fonds comptés en dépense publique.
     Même économie (PIB inchangé la première année), déficit avant règle plus haut du montant de ces investissements."""

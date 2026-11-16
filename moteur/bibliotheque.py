@@ -85,7 +85,7 @@ def report_age_legal_detail(p: Parametres, s: str, age_cible: float, premiere_ge
     direct. Les personnes pas encore retraitées sont réparties entre emploi, chômage et inactivité par offre.seniors."""
     from .ancien_systeme import _part, profil_generation
     base, age_legal = profil_generation(p)
-    ecart = age_cible - p.val("ancien_systeme.age_legal")["actuel"]
+    ecart = age_cible - p.val("ancien_systeme.age_legal_actuel")
     a_tp = int(p.val("ancien_systeme.age_taux_plein"))
 
     def report(g: int) -> float:

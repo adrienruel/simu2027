@@ -368,6 +368,15 @@ macro:
   premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}
   part_pib_tendanciel_au_solde: {valeur: 0.1, unite: taux, statut: HYPOTHESE, note: "Convention de la v235, sans source : ne sert plus que si macro.dividende_calcule est faux."}
   ecart_dividende: {valeur: 0.003, unite: taux, statut: HYPOTHESE, note: "Hausse de la tendance de productivité utilisée pour mesurer le dividende de croissance (écart prudent-médian)."}
+  # Déplacé du fichier d'Écologie de droite le 16/11/2026 : paramètre lu par le moteur commun pour tous les programmes.
+  baisse_spread:
+    valeur: {crise: 0, prudent: 0, median: 0.002, optimiste: 0.004}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : écart OAT − Bund à 10 ans ≈ 0,8 point le 24 juillet 2026 (4,01 % contre 3,22 %)"
+    note: "Baisse du taux long attendue de la crédibilité des réformes, atteinte en 8 ans. DÉCISION d'Adrien du 29/10/2026 : l'effet des réformes sur les taux est incertain, il varie selon le scénario (aucun dans la crise et le prudent, un quart de l'écart avec le Bund dans le médian, la moitié dans l'optimiste)."
+  # Déplacé du fichier d'Écologie de droite le 16/11/2026 : paramètre lu par le moteur commun pour tous les programmes.
+  annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
 
 renouvelables:
   soutien_budget_2026: {valeur: 9.06, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149"}
@@ -588,6 +597,12 @@ ancien_systeme:
     statut: HYPOTHESE
     source: "DREES, Les retraités et les retraites 2025, fiche 16 : profil de départ de 2023 (âge légal 62 ans) ; même profil que tondelier_retraites.profil_62_ans"
     note: "Profil de référence des générations nées jusqu'en 1960 ; les générations 1961 à 1968 suivent un mélange de ce profil et du profil à 64 ans selon leur âge légal (age_legal_generation)."
+  age_legal_actuel:
+    valeur: 64
+    unite: sans_unite
+    statut: SOURCE
+    source: "Loi n° 2023-270 du 14 avril 2023 de financement rectificative de la sécurité sociale (âge légal porté à 64 ans)"
+    note: "Ajouté le 16/11/2026 : l'âge légal de la loi actuelle, lu par la bibliothèque commune (âge de départ d'un programme). Il était lu dans le fichier d'Écologie de droite (ancien_systeme.age_legal, champ « actuel »), qui ne doit plus peser sur les autres programmes."
   age_legal_generation:
     valeur: {1960: 62.0, 1961: 62.25, 1962: 62.5, 1963: 62.75, 1964: 62.75, 1965: 63.0, 1966: 63.25, 1967: 63.5, 1968: 63.75, 1969: 64.0}
     unite: annees

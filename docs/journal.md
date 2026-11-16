@@ -1629,3 +1629,28 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   partiel compris, sous les 2 600 € du moteur).
 - Déficit 2037 au prudent : Bertrand 9,49 → 9,50 ; Zemmour 13,63 → 13,64 ; Le Pen 13,22 → 13,23 ; Retailleau
   inchangé (10,20). Variante du fonds étendue à ces trois programmes.
+
+## 16/11/2026 (après-midi) — Phase J0 : le comparateur sans Écologie de droite
+
+- **Décision d'Adrien.** simu2027 est un comparateur des programmes des candidats. Écologie de droite était un programme de test : il sort du comparateur et n'est plus comparé aux autres. Il reste dans le dépôt, gelé (`programmes/ecologie_de_droite/`). Roadmap : `Roadmap_comparateur_2026-11-16.md` (projet), qui fait suite à l'évaluation externe du même jour.
+- **Dépendance découverte.** Le moteur commun chargeait par défaut le fichier de paramètres d'Écologie de droite (`PROGRAMME_DEFAUT`). En simulant les autres programmes, il y lisait :
+  - `macro.baisse_spread` et `macro.annees_baisse_spread`, pour tous ;
+  - le champ `actuel` de `ancien_systeme.age_legal`, pour les programmes qui changent l'âge de départ.
+- **Corrections :**
+  - `Parametres()` ne charge plus que les hypothèses communes, et `Parametres(programme=<nom>)` y ajoute un programme.
+  - Les deux paramètres de l'écart de taux passent tels quels dans `parametres/commun/economie.yaml`.
+  - Nouveau paramètre commun `ancien_systeme.age_legal_actuel` (64 ans, loi de 2023), lu par `bibliotheque`.
+  - `Parametres.en_crise` ne suppose plus de paramètre de programme.
+- **Programmes publiés :** `programmes/publies.yaml`, lu par `noyau.programmes_disponibles()` (`tous=True` pour tous les dossiers), l'export, l'incertitude et la variante du fonds.
+- **Résultats inchangés.** Les sorties `comparaison_*.csv` sont identiques à l'octet près pour les douze programmes et le statu quo, une fois retirées les lignes d'Écologie de droite.
+  - Incertitude : deux tirages recalculés avec le nouveau chargement redonnent exactement les tirages enregistrés. Écologie de droite est donc retiré des tirages sans relancer le calcul.
+  - Seul le classement de sensibilité change, plus bas dans la liste, faute de paramètres d'Écologie de droite (613 paramètres tirés au lieu de 641).
+  - Variante du fonds : Philippe recalculé, identique.
+- **Tests :**
+  - Marqueur `edd` pour les tests d'Écologie de droite, exclus par défaut (`pytest.ini`). Fichiers entiers dans `tests/fichiers_edd.txt`, tests isolés par décorateur.
+  - Avec `-m edd`, `Parametres()` retrouve l'ancien défaut (`tests/conftest.py`).
+  - Chaque test écarté échouait sur une clé du fichier d'Écologie de droite (45 clés vérifiées) : aucun ne révélait de dépendance du comparateur.
+  - Réécrits : `test_programmes` (fichiers chargés sans programme), `test_noyau.test_programmes_disponibles`, `test_canaux_declares.test_canaux_declares_par_les_programmes` (barème de l'IA et de l'école écrit dans le test, mêmes valeurs pour tous).
+  - Nouveau `tests/test_independance.py` : tous les programmes publiés sont simulés avec le code et les paramètres d'Écologie de droite rendus inaccessibles, et retrouvent les trajectoires publiées.
+- **Code laissé en place.** 28 modules de `moteur/` ne sont jamais chargés par le comparateur ; ils ne servent qu'à Écologie de droite ou à ses outils (liste dans `docs/architecture.md`). Ils restent en place pour que ce programme tourne encore avec `-m edd`.
+- **Installation :** `numpy` ajouté à `requirements.txt` ; `requirements-micro.txt` fixe OpenFisca-France 177.0.0.
