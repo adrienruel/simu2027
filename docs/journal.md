@@ -1604,3 +1604,14 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   - Écologie de droite 4,66 → 8,34 ;
   - Philippe 11,15 → 10,79 ;
   - Retailleau 10,20 → 10,19.
+
+## 16/11/2026 (nuit) — Incertitude recalculée avec la macro bouclée
+
+- 600 tirages par borne (ρ = 0 et ρ = 1), environ 47 minutes chacune ; résultats dans docs/incertitude.md.
+- Médiane du déficit 2037 : statu quo 8,5 ; Écologie de droite 2,6 ; Retailleau 8,1 ; Philippe 8,6 ; Mélenchon 20,7.
+- Part des tirages où le programme fait mieux que le statu quo en 2037 (ρ = 0 – ρ = 1) :
+  - Retailleau 100 – 68 % ;
+  - Philippe 38 – 46 % ;
+  - Attal 12 – 35 % ;
+  - Tondelier 0 – 12 %.
+- Le multiplicateur pèse désormais pour Zemmour, Lisnard et Attal ; la contrainte de capacité pour Mélenchon.
