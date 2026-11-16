@@ -399,7 +399,7 @@ philippe_mesures:
     note: "Économie non chiffrée : estimée."
 
   capitalisation_collective:
-    valeur: {id: PHI-RET-05, instrument: capital_menages, libelle: "Capitalisation collective généralisée à tous les salariés, sur le modèle de la retraite additionnelle des fonctionnaires, versée par l'État", poste: etat_missions, moteur: pib, debut: 2030, plein: 2034,
+    valeur: {id: PHI-RET-05, instrument: capital_menages, libelle: "Capitalisation collective généralisée à tous les salariés, sur le modèle de la retraite additionnelle des fonctionnaires, versée par l'État", poste: etat_missions, moteur: pib, debut: 2030, plein: 2034, fonds: versement,
              montant: {crise: 10.0, prudent: 8.0, median: 6.0, optimiste: 4.0}}
     unite: md_eur
     annee_euros: 2026

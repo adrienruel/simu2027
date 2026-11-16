@@ -944,19 +944,15 @@ class EcologieDeDroite:
 
     FONDS_HORS_BUDGET = ("Missions financées par le fonds", "Investissement des opérateurs, des hôpitaux et de la sécurité sociale")
 
-    def variante_fonds_apu(self, p: Parametres, scenarios=None) -> dict:
-        """Variante de classement (relecture I5, point ouvert) : le fonds compté parmi les administrations publiques.
+    def mesures_fonds_apu(self, p: Parametres, entrees: dict) -> dict[str, list[Mesure]]:
+        """Écritures de la variante commune « fonds dans les administrations publiques » (moteur/fonds_apu.py).
 
         Les investissements que le programme fait financer par le fonds (missions transports, énergie et France 2030 ;
-        opérateurs, hôpitaux et sécurité sociale ; investissements locaux repris) restent alors des dépenses publiques,
-        donc dans le déficit de Maastricht. Rien ne change dans l'économie (les mêmes investissements sont faits) : seuls
-        le déficit et la dette bougent, et la règle de trajectoire réagit à ce déficit plus haut. Convention haute :
-        l'épargne obligatoire versée au fonds n'est pas comptée en recette publique (elle reste due aux épargnants)."""
-        from moteur import noyau
-        ent = self.entrees(p, scenarios)
-        st = self._statique(p, scenarios)
+        opérateurs, hôpitaux et sécurité sociale ; investissements locaux repris) redeviennent des dépenses publiques.
+        L'épargne obligatoire versée au fonds n'est pas comptée en recette publique (elle reste due aux épargnants)."""
+        st = self._statique(p, tuple(entrees))
         out = {}
-        for s, e in ent.items():
+        for s, e in entrees.items():
             E = st[s]["effets"]
             plus = [Mesure(f"Fonds dans les administrations publiques : {m.nom.split(' : ')[0].split(' (')[0]}", m.poste,
                            {t: -v for t, v in m.valeurs.items()}, "perimetre")
@@ -965,9 +961,18 @@ class EcologieDeDroite:
             loc = E.q.val("fonds_reprises.investissements_locaux_rentables")
             plus.append(Mesure("Fonds dans les administrations publiques : investissements locaux repris par le fonds",
                                "investissement", {t: loc * E.croiss[t] for t in ANNEES}, "perimetre"))
-            out[s] = noyau.trajectoire(p, s, e.mesures + plus, e.contexte, e.dynamiques, e.regle)
+            out[s] = plus
+        return out
+
+    def variante_fonds_apu(self, p: Parametres, scenarios=None) -> dict:
+        """Comptes de la variante commune (moteur/fonds_apu.py), avec `investissements_du_fonds` (Md€)."""
+        from moteur import fonds_apu
+        v = fonds_apu.variante(p, self, scenarios)
+        out = {}
+        for s, x in v.items():
+            out[s] = x["apu"]
             for t in ANNEES:
-                out[s][t]["investissements_du_fonds"] = sum(m.valeurs[t] for m in plus)
+                out[s][t]["investissements_du_fonds"] = x["deplace"][t]
         return out
 
     def mesures(self, p: Parametres) -> dict[str, list[Mesure]]:

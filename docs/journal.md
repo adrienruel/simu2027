@@ -1584,3 +1584,48 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - PCF-RET-05 (Aspa à 1 400 €) recalé sur la micro : 8,5 → 4,7 Md€ au prudent (cohérent avec Mélenchon, 3,7 à 1 337 €).
 - Déficit 2037 au prudent : Mélenchon 28,14 → 28,04 ; Roussel 30,28 → 30,06. Pauvreté du statu quo en 2037 : 15,9 %
   (pensions indexées sur les prix, moins compensées par l'Aspa).
+
+## 15/11/2026 (soir) — Variante « fonds dans les APU » commune à tous
+
+- Règle d'Adrien : la variante du fonds s'applique à tous les programmes qui proposent une retraite par capitalisation
+  avec un fonds, pas seulement à Écologie de droite. Module commun `moteur/fonds_apu.py`, champ `Mesure.fonds`.
+- Conventions identiques pour tous :
+  - ce que le fonds paie à la place de l'État redevient une dépense publique ;
+  - l'argent public versé au fonds est consolidé (`fonds: versement`) ;
+  - l'épargne obligatoire n'est pas une recette publique ;
+  - publié et variante sont calculés de la même façon (deux passes, règle comprise).
+- Fonds codés :
+  - Écologie de droite (investissements repris) ;
+  - Philippe (PHI-RET-05, abondement de l'État) ;
+  - Retailleau (RET-RET-02, part des employeurs publics).
+- Lisnard : fonds déjà public, donc rien à changer.
+- Bertrand, Zemmour, Le Pen et Attal : capitalisation non chiffrée, financement non décrit (décision ouverte).
+- Déficit 2037, prudent, publié → fonds dans les APU :
+  - Écologie de droite 4,66 → 8,34 ;
+  - Philippe 11,15 → 10,79 ;
+  - Retailleau 10,20 → 10,19.
+
+## 16/11/2026 (nuit) — Incertitude recalculée avec la macro bouclée
+
+- 600 tirages par borne (ρ = 0 et ρ = 1), environ 47 minutes chacune ; résultats dans docs/incertitude.md.
+- Médiane du déficit 2037 : statu quo 8,5 ; Écologie de droite 2,6 ; Retailleau 8,1 ; Philippe 8,6 ; Mélenchon 20,7.
+- Part des tirages où le programme fait mieux que le statu quo en 2037 (ρ = 0 – ρ = 1) :
+  - Retailleau 100 – 68 % ;
+  - Philippe 38 – 46 % ;
+  - Attal 12 – 35 % ;
+  - Tondelier 0 – 12 %.
+- Le multiplicateur pèse désormais pour Zemmour, Lisnard et Attal ; la contrainte de capacité pour Mélenchon.
+
+## 16/11/2026 (matin) — Capitalisation obligatoire : règle commune, part salariale dans la micro
+
+- Décision d'Adrien : les parts de capitalisation annoncées sans taux ni financement (Bertrand BER-RET-02, Zemmour
+  ZEM-RET-01, Le Pen RN-RET-03) sont lues comme le seul dispositif détaillé, celui de Retailleau (1 % du brut des
+  entrants depuis 2028, moitié salarié, moitié employeur) : `lectures_communes.capitalisation`,
+  `bibliotheque.capitalisation_obligatoire` (Retailleau passe par la même fonction). Attal exclu (proposition des
+  seules conventions de Renaissance, règle existante).
+- Micro : formule « capitalisation » (`Base.capitalisation`) : part salariale retirée du revenu disponible des plus
+  jeunes salariés en emploi, à hauteur des entrants couverts ; pas une recette publique (retirée du budget de la
+  mesure). Retailleau 2037 : 0,85 Md€ versés dans la micro, contre 0,99 au moteur (salaires réels des jeunes, temps
+  partiel compris, sous les 2 600 € du moteur).
+- Déficit 2037 au prudent : Bertrand 9,49 → 9,50 ; Zemmour 13,63 → 13,64 ; Le Pen 13,22 → 13,23 ; Retailleau
+  inchangé (10,20). Variante du fonds étendue à ces trois programmes.

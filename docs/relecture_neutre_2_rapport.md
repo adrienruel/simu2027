@@ -424,3 +424,7 @@ que celle du COR (2,1 points de PIB par point de productivité contre 2,7). Acce
 - [Trésor, présentation de B. Égert : réforme typique de l'ETCR (−0,31), effets à cinq ans par canal](https://www.tresor.economie.gouv.fr/Articles/4780e961-e91f-431a-833b-0b9d67b029f2/files/b07ce64f-02b5-433c-8b4e-deb4a3ac039b)
 - [OCDE, B. Égert, « The Role of PMR » (2023) : ETCR, canaux de la productivité, du capital et de l'emploi](https://www.oecd.org/content/dam/oecd/en/events/2023/3/Session%201_Egert_FINAL.pdf)
 - [Insee, Gubian, Jugnot, Lerais et Passeron, « Les effets de la RTT sur l'emploi », Économie et Statistique n° 376-377, 2005](https://www.insee.fr/fr/statistiques/1376464)
+
+> Suite (15/11/2026) : la variante « fonds dans les administrations publiques » est devenue commune à tous les
+> programmes qui ont un fonds de capitalisation (`moteur/fonds_apu.py`, `python -m outils.variante_fonds_apu`) ;
+> voir docs/journal.md.

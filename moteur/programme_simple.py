@@ -394,7 +394,7 @@ class ProgrammeSimple:
                 court = nom.split(".")[1]
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
-                                    enfants=x.get("enfants")))
+                                    enfants=x.get("enfants"), fonds=x.get("fonds", "")))
                 if x.get("deductible_is"):
                     # impôts de production déductibles du bénéfice : l'IS bouge en sens inverse (règle commune)
                     rc = p.val("entreprises.retour_is_charges")

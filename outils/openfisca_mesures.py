@@ -181,7 +181,7 @@ def construire(operations: list[dict]):
 # --- Calcul --------------------------------------------------------------------------------------------------
 
 POST = ("garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
-        "allocation_unique")  # règles appliquées après le calcul d'OpenFisca
+        "allocation_unique", "capitalisation")  # règles appliquées après le calcul d'OpenFisca
 EMPLOI = ("salarie_prive", "agent_public", "independant")
 AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
 
@@ -373,6 +373,15 @@ class Base:
                     percu[k] = 0 * percu[k]
                 ajust_f = ajust_f - ancien + nouveau
         rd = rd + np.bincount(self.fam_men, weights=ajust_f, minlength=s["n_menages"])
+        fonds = 0.0
+        for x in post:
+            if x["nom"] == "capitalisation":
+                # part salariale d'une capitalisation obligatoire (bibliotheque.capitalisation_obligatoire, mêmes
+                # paramètres) : versée à un fonds hors des administrations, elle baisse le revenu disponible sans être
+                # une recette publique (retirée du budget de la mesure)
+                verse = self.capitalisation(sim, x)
+                rd = rd - np.bincount(s["menage"], weights=verse, minlength=s["n_menages"])
+                fonds += float((self.pp * verse).sum()) / 1e9
         for x in post:
             if x["nom"] == "garantie_niveau_vie":
                 # niveau de vie porté au seuil, ménages dont la personne de référence n'est pas étudiante (champ de
@@ -390,7 +399,30 @@ class Base:
         # coût des agents publics : payé par les administrations (une hausse est une dépense, pas une recette)
         cout_pub = float((self.pp * cout_i * self.public).sum()) / 1e9
         return {"rd": rd, "uc": uc, "cout_m": cout_m, "cout": float((self.wm * cout_m).sum()) / 1e9, "cout_public": cout_pub,
-                "rd_total": float((self.wm * rd).sum()) / 1e9, "comp": comp}
+                "rd_total": float((self.wm * rd).sum()) / 1e9, "comp": comp, "fonds": fonds}
+
+    def capitalisation(self, sim, x: dict) -> np.ndarray:
+        """Part salariale versée au fonds par personne (€ par an) : les salariés et agents publics les plus jeunes en
+        emploi, à hauteur des entrants couverts depuis le début (entrants_par_an × taux_emploi × années), comme le
+        moteur ; taux × brut, plafonné, × (1 − part employeur). Paramètres : x["parametre"], lu dans le programme
+        x["programme"] (ou les paramètres communs)."""
+        c = Parametres(programme=x["programme"]).val(x["parametre"]) if x.get("programme") else Parametres().val(x["parametre"])
+        annee = getattr(self, "annee", 2026)
+        n = c["entrants_par_an"] * c["taux_emploi"] * max(0, annee - c["debut"] + 1)
+        an = "2026"
+        travaille = sim.calculate_add("salaire_net", an) > 0
+        brut = np.array([l["salaire_brut"] if l["statut"] in ("salarie_prive", "agent_public") else 0.0 for l in self.lignes])
+        sal = travaille & (brut > 0)
+        age = np.array([l["age"] for l in self.lignes], float)
+        part = np.zeros(len(self.lignes))
+        if n > 0 and sal.any():
+            idx = np.where(sal)[0]
+            o = idx[np.argsort(age[idx], kind="stable")]
+            cum = np.cumsum(self.pp[o])
+            avant = cum - self.pp[o]
+            part[o] = np.clip((n - avant) / np.maximum(self.pp[o], 1e-9), 0.0, 1.0)
+        cot = np.minimum(c["taux"] * brut, 12 * c["plafond_mensuel"])
+        return part * (1 - c["part_employeur"]) * cot
 
     def _simuler(self, tbs, lignes=None):
         return op.simulation(lignes or self.lignes, tbs=tbs)[0]
@@ -517,7 +549,7 @@ class Base:
             gc.collect()
         e0 = self.etat0
         out = {"budget": (e1["cout"] - e0["cout"]) - (e1["cout_public"] - e0["cout_public"])
-                         - (e1["rd_total"] - e0["rd_total"]), "etat": e1,
+                         - (e1["rd_total"] - e0["rd_total"]) - (e1["fonds"] - e0["fonds"]), "etat": e1,
                "composantes": {k: e1["comp"][k] - e0["comp"][k] for k in e0["comp"]}}
         if self.emploi:
             cf1 = self.cf0 if (tbs is None and not post and lg is None) else self.contrefactuels(tbs, post, lg)

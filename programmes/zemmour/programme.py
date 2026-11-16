@@ -76,7 +76,8 @@ class Zemmour(ProgrammeSimple):
         out += [Mesure(f"ZEM-RET-01 — âge légal porté à {self.v('retraites.age_cible')} ans", "retraites", ser),
                 Mesure("ZEM-RET-01 — prélèvements sur les pensions en moins", "recettes",
                        {t: taux_prel * v for t, v in ser.items()})]
-        return out, {}
+        cap, emplois_cap = bib.capitalisation_obligatoire(p, s, p.val("lectures_communes.capitalisation"), "ZEM-RET-01")
+        return out + cap, {"Capitalisation obligatoire : emplois (coût du travail et salaire net)": emplois_cap}
 
 
 def programme() -> Zemmour:

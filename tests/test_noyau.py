@@ -183,3 +183,17 @@ def test_variante_fonds_dans_les_administrations_publiques(p):
     assert var[2029]["pib"] == pytest.approx(base[2029]["pib"])
     assert var[2029]["deficit_avant_regle"] - base[2029]["deficit_avant_regle"] == pytest.approx(inv / base[2029]["pib"] * 100, abs=1e-6)
     assert all(var[t]["dette_pib"] > base[t]["dette_pib"] for t in (2029, 2037, 2050, 2073))
+
+
+def test_variante_fonds_commune_aux_programmes(p):
+    """Règle commune (15/11/2026) : l'argent public versé à un fonds de capitalisation est consolidé quand le fonds
+    est compté dans les APU (Philippe : abondement de l'État ; Retailleau : part des employeurs publics)."""
+    from moteur import fonds_apu
+    for nom, bas, haut in (("philippe", 3.0, 11.0), ("retailleau", 0.05, 1.0)):
+        prog = noyau.charger(nom)
+        v = fonds_apu.variante(p, prog, ("prudent",))["prudent"]
+        assert bas < -v["deplace"][2037] < haut
+        assert v["apu"][2037]["pib"] == pytest.approx(v["publie"][2037]["pib"], rel=1e-3)
+        assert v["apu"][2037]["deficit"] < v["publie"][2037]["deficit"]
+    assert fonds_apu.a_un_fonds(noyau.charger("bertrand"), p)  # lecture commune de la capitalisation (16/11/2026)
+    assert not fonds_apu.a_un_fonds(noyau.charger("attal"), p)

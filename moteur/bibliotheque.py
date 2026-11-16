@@ -327,3 +327,38 @@ def baisse_prelevements_salaries(p: Parametres, idx: dict, montant: float, part_
         Mesure(f"{nom} : prime d'activité, RSA et aides au logement en moins", "pauvrete",
                ser(f * st["prestations_en_plus"], "recette:salaires_prive")),
     ]
+
+
+def capitalisation_obligatoire(p: Parametres, s: str, c: dict, ident: str) -> tuple[list[Mesure], dict[int, float]]:
+    """Part de retraite par capitalisation obligatoire, versée par les salariés et les employeurs à un fonds hors des
+    administrations publiques (règle commune, 16/11/2026 ; première lecture : RET-RET-02 de Retailleau).
+
+    c : {taux, part_employeur, plafond_mensuel, brut_moyen_mensuel, entrants_par_an, taux_emploi, part_public, debut} ;
+    entrants sur le marché du travail depuis `debut`. Budget : seulement la part des employeurs publics (versement au
+    fonds, consolidé dans la variante moteur/fonds_apu.py) et l'IS perdu sur la charge déductible des employeurs
+    privés. Emplois : canal d'offre commun sur la part employeur du privé (coût du travail) et la part salariale
+    (prélèvement sur le travail). La part salariale baisse le revenu disponible des ménages : codée dans la micro
+    (outils/openfisca_mesures.py, formule « capitalisation »), avec les mêmes paramètres."""
+    from . import offre
+    w = sq.salaires(p, s)
+    e = sq.effectifs(p, s)
+    par_tete = 12 * min(c["taux"] * c["brut_moyen_mensuel"], c["plafond_mensuel"]) / 1e9  # Md€ de 2026 par an
+    couverts = {t: min(e[t]["emploi"], c["entrants_par_an"] * c["taux_emploi"] * max(0, t - c["debut"] + 1))
+                for t in ANNEES}
+    total = {t: couverts[t] * par_tete * w[t] / w[2029] for t in ANNEES}
+    pe, pp = c["part_employeur"], c["part_public"]
+    employeur_prive = Mesure("capitalisation (part employeur, privé)", "recettes",
+                             {t: pe * (1 - pp) * total[t] for t in ANNEES}, instrument="cout_travail")
+    salariale = Mesure("capitalisation (part salariale)", "recettes",
+                       {t: (1 - pe) * total[t] for t in ANNEES}, instrument="travail")
+    of = offre.effets(p, s, [employeur_prive, salariale], annees_avant=())
+    emplois = {t: sum(serie.get(t, 0.0) for serie in of["emplois"].values()) for t in ANNEES}
+    rc = p.val("entreprises.retour_is_charges")
+    r_is = rc["taux_is_effectif"] * rc["part_marge"] * rc["part_employeurs_is"]
+    pct = f"{100 * c['taux']:g}".replace(".", ",")
+    out = [Mesure(f"{ident} — part de capitalisation : cotisation des employeurs publics ({pct} % du brut des entrants)",
+                  "etat_missions", {2027: 0.0, 2028: 0.0, **{t: pe * pp * total[t] for t in ANNEES}}, fonds="versement"),
+           # charge déductible des employeurs privés : IS en moins (règle commune, entreprises.retour_is_charges)
+           Mesure(f"{ident} — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
+                  {t: -r_is * pe * (1 - pp) * total[t] for t in ANNEES})]
+    return out, emplois

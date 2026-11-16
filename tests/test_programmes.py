@@ -17,11 +17,12 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     """Les fichiers communs ne contiennent que des sources, des hypothèses et des options de modèle :
     aucune décision de programme (les décisions admises sont des choix entre sources ou de modèle ; l'élasticité des
     moyens de l'enseignement aux effectifs, sans source, est devenue une décision de modèle en C1, le 13/11/2026 ; la corrélation des tirages de l'incertitude publie ses
-    deux bornes, décision du 14/11/2026)."""
+    deux bornes, décision du 14/11/2026 ; la lecture commune des capitalisations sans taux, règle identique pour
+    tous les programmes, décision du 16/11/2026)."""
     p = Parametres()
     decisions = sorted(x.cle for x in p if x.statut == "DECISION" and p.origine[x.cle].name == "economie.yaml")
     assert decisions == ["calendrier.inflation", "demographie.scenario_fecondite", "incertitude.correlation",
-                         "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi", "sante_trajectoire.pente_phase_1"]
+                         "lectures_communes.capitalisation", "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi", "sante_trajectoire.pente_phase_1"]
 
 
 def _programme_temporaire(tmp_path, monkeypatch, texte_en_plus: str) -> str:
