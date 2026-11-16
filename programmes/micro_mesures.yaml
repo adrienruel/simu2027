@@ -12,6 +12,9 @@
 # n'a pas cette information), patrimoine (ISF, taxe Zucman, IFI), niches non nommées, mesures sans barème publié.
 
 bertrand:
+  BER-RET-02:
+    operations: [{formule: {nom: capitalisation, parametre: entreprises.capitalisation_lecture_commune}}]
+    note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
   BER-FIS-01:
     operations: [{parametre: {chemin: "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate", valeur: 0.09}}]
   BER-FIS-02:
@@ -150,6 +153,9 @@ melenchon:
     note: "ASPA portée au seuil de pauvreté retenu par le programme (1 337 € par mois, contre 1 043,6 € en 2026), plafond de ressources relevé d'autant, couples dans la même proportion ; recours complet (le non-recours à l'ASPA, ≈ 50 %, n'est pas modélisé)."
 
 le_pen:
+  RN-RET-03:
+    operations: [{formule: {nom: capitalisation, parametre: entreprises.capitalisation_lecture_commune}}]
+    note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
   RN-FIS-03:
     operations: [{formule: {nom: ir_jeunes, age_max: 29, plafond_smic: 4}}]
     note: "Foyer dont le déclarant principal a moins de 30 ans et dont le revenu brut global est sous quatre SMIC bruts annuels : impôt sur le revenu nul."
@@ -183,6 +189,9 @@ arthaud:
     note: "SMIC à 2 200 € net (euros de 2027), même règle que le moteur ; la répartition du travail et l'égalité salariale ne sont pas codées."
 
 retailleau:
+  RET-RET-02:
+    operations: [{formule: {nom: capitalisation, programme: retailleau, parametre: retailleau_capitalisation.cotisation}}]
+    note: "Part salariale de la capitalisation obligatoire (0,5 % du brut des entrants depuis 2028) : revenu disponible en moins, versé à un fonds hors des administrations (pas une recette publique). Mêmes paramètres que le moteur (bibliotheque.capitalisation_obligatoire) ; les plus jeunes salariés en emploi sont couverts, à hauteur des entrants depuis 2028. Nulle en 2026."
   RET-EMP-01:
     operations: [{formule: {nom: revenu_incitation, base: 300, avec_activite: 250}}]
     note: "Revenu d'incitation à l'activité à la place du RSA et de la prime d'activité : une famille éligible au RSA reçoit 300 € par mois, 550 € avec une activité, à la place du RSA et de la prime d'activité ; les autres familles gardent la prime d'activité. Lecture à arbitrer : la lecture littérale (toute famille éligible au RSA ou à la prime) coûte 14 Md€, à l'opposé de l'économie annoncée. L'ASS n'est pas dans la population."
@@ -194,6 +203,9 @@ retailleau:
     note: "Cinq ans de résidence légale pour les prestations non contributives : familles étrangères hors UE arrivées depuis moins de cinq ans."
 
 zemmour:
+  ZEM-RET-01:
+    operations: [{formule: {nom: capitalisation, parametre: entreprises.capitalisation_lecture_commune}}]
+    note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
   ZEM-IMM-04:
     operations: [{formule: {nom: condition_nationalite, groupe: hors_ue, prestations: [af, cf, asf, ars, paje_base, aide_logement, rsa, ppa]}}]
     note: "« Préférence nationale » : prestations familiales, aides au logement, RSA et prime d'activité retirés aux familles étrangères hors UE (les ressortissants de l'UE sont protégés par le droit de l'Union). Application complète : le risque juridique reste dans les scénarios du moteur."

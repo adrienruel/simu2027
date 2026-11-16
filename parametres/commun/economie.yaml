@@ -162,6 +162,13 @@ entreprises:
     unite: sans_unite
     statut: HYPOTHESE
     note: Part importée et marge captée par les entreprises françaises sur la consommation en plus (Salariés du privé B61-B65).
+  capitalisation_lecture_commune:
+    valeur: {taux: 0.01, part_employeur: 0.5, plafond_mensuel: 40, brut_moyen_mensuel: 2600, entrants_par_an: 750000, taux_emploi: 0.85, part_public: 0.2, debut: 2028}
+    unite: sans_unite
+    annee_euros: 2026
+    statut: DECISION
+    source: "Décision d'Adrien (16/11/2026) : les programmes qui annoncent une part de retraite par capitalisation sans en donner le taux ni le financement (Bertrand, Zemmour, Le Pen) sont lus comme le seul dispositif détaillé, celui de Retailleau (retailleau_capitalisation.cotisation : 1 % du brut des entrants depuis 2028, moitié salarié, moitié employeur, plafond de 40 € par mois)"
+    note: "Même règle pour tous (moteur/bibliotheque.capitalisation_obligatoire) ; la part salariale baisse le revenu disponible dans la micro. Exclue : la capitalisation d'Attal (proposition des seules conventions de Renaissance, non chiffrées par règle). Philippe : capitalisation collective versée par l'État, chiffrée à part (PHI-RET-05)."
 
 # --- Indépendants (feuille Indépendants, v193) ------------------------------------
 independants:

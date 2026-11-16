@@ -31,12 +31,14 @@ class Bertrand(ProgrammeSimple):
         self.non_retraites[(id(p), s)] = {"serie": {t: k * v for t, v in det["non_retraites"].items()}, "baisse": False}
         serie = {2027: 0.0, 2028: 0.0, **{t: -k * eco[t] for t in ANNEES}}
         taux_prel = sq.recettes_par_impot(p, s)[2029]["retraites"] / sq.retraites(p, s)[2029]["depenses"]
-        return [
+        out = [
             Mesure(f"BER-RET-01 — âge légal porté à {self.v('retraites.age_cible')} ans, départs anticipés avec décote",
                    "retraites", serie),
             Mesure("BER-RET-01 — prélèvements sur les pensions en moins", "recettes",
                    {t: taux_prel * v for t, v in serie.items()}),
-        ], {}
+        ]
+        cap, emplois_cap = bib.capitalisation_obligatoire(p, s, p.val("entreprises.capitalisation_lecture_commune"), "BER-RET-02")
+        return out + cap, {"Capitalisation obligatoire : emplois (coût du travail et salaire net)": emplois_cap}
 
 
 def programme() -> Bertrand:
