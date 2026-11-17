@@ -52,7 +52,7 @@ programme.
 
 ## Résultats (600 tirages communs, fourchette entre les deux bornes de la corrélation)
 
-Recalculés le 16/11/2026 avec la macro bouclée (phase E), la micro des ménages et des entreprises (phases F et H).
+Recalculés le 17/11/2026 (phase 3.2 : effets miroirs tirés, multiplicateur de référence fixe, aucun tirage écarté), avec la macro bouclée (phase E), la micro des ménages et des entreprises (phases F et H).
 
 Décision d'Adrien (14/11/2026) : la corrélation entre hypothèses n'a pas de source ; on publie la fourchette entre
 ρ = 0 (hypothèses indépendantes) et ρ = 1 (toutes ensemble), sans valeur centrale. Déficit en % du PIB, règle de
@@ -61,29 +61,33 @@ est sous celui du statu quo dans le même tirage (ρ = 0 – ρ = 1).
 
 | Programme | Médiane 2037 | 2037, 8 sur 10 (indépendantes) | 2037, 8 sur 10 (ensemble) | 2050, de la borne basse à la borne haute | Mieux que le statu quo en 2037 |
 |---|---|---|---|---|---|
-| Écologie de droite | 2,6 | 2,1 – 3,4 | 1,3 – 4,1 | -0,8 – 4,1 | 100 % – 100 % |
-| Bertrand (Nous France) | 8,0 | 7,5 – 8,6 | 7,0 – 9,3 | 9,5 – 19,7 | 100 % – 94 % |
-| Retailleau (Les Républicains) | 8,1 | 7,5 – 8,7 | 6,5 – 9,9 | 8,5 – 22,0 | 100 % – 68 % |
+| Bertrand (Nous France) | 8,1 | 7,6 – 8,6 | 6,9 – 9,4 | 9,4 – 19,8 | 100 % – 93 % |
+| Retailleau (Les Républicains) | 8,1 | 7,5 – 8,8 | 6,2 – 9,9 | 8,0 – 22,2 | 99 % – 66 % |
 | Statu quo | 8,5 | 8,0 – 9,1 | 7,9 – 9,4 | 11,3 – 19,6 | — |
-| Philippe (Horizons) | 8,6 | 7,9 – 9,2 | 6,5 – 10,8 | 8,8 – 25,6 | 38 % – 46 % |
-| Attal (Renaissance) | 8,8 | 8,1 – 9,6 | 7,0 – 10,9 | 9,3 – 24,7 | 12 % – 35 % |
-| Tondelier (Les Écologistes) | 10,1 | 9,4 – 10,8 | 7,8 – 12,6 | 11,5 – 29,4 | 0 % – 12 % |
-| Zemmour (Reconquête) | 10,4 | 9,4 – 11,2 | 8,2 – 13,1 | 12,2 – 32,2 | 2 % – 3 % |
-| Lisnard (Nouvelle Énergie) | 10,8 | 9,7 – 11,5 | 8,6 – 13,5 | 13,0 – 34,4 | 1 % – 0 % |
-| Le Pen (Rassemblement national) — partiel | 10,8 | 10,1 – 11,5 | 9,1 – 12,8 | 14,1 – 30,5 | 0 % – 1 % |
-| Glucksmann (Place publique) | 11,2 | 10,6 – 11,9 | 9,8 – 13,0 | 15,3 – 30,0 | 0 % – 0 % |
-| Arthaud (Lutte ouvrière) — partiel | 12,6 | 11,8 – 13,5 | 10,3 – 15,8 | 16,5 – 37,5 | 0 % – 0 % |
-| Mélenchon (La France insoumise) | 20,7 | 19,7 – 21,8 | 16,1 – 26,6 | 30,7 – 63,1 | 0 % – 0 % |
-| Roussel (Parti communiste français) | 21,8 | 20,3 – 23,8 | 16,8 – 28,9 | 40,6 – 76,7 | 0 % – 0 % |
+| Philippe (Horizons) | 8,6 | 8,0 – 9,3 | 6,3 – 10,9 | 8,4 – 25,8 | 36 % – 47 % |
+| Attal (Renaissance) | 8,9 | 8,2 – 9,6 | 6,7 – 10,9 | 8,8 – 24,8 | 7 % – 36 % |
+| Tondelier (Les Écologistes) | 10,0 | 9,4 – 10,9 | 7,2 – 13,0 | 10,5 – 30,7 | 0 % – 20 % |
+| Zemmour (Reconquête) | 10,6 | 10,0 – 11,3 | 8,1 – 13,0 | 11,6 – 32,3 | 0 % – 7 % |
+| Le Pen (Rassemblement national) — partiel | 10,9 | 10,3 – 11,5 | 9,1 – 13,0 | 13,9 – 31,3 | 0 % – 0 % |
+| Lisnard (Nouvelle Énergie) | 10,9 | 10,2 – 11,6 | 8,3 – 13,5 | 11,9 – 34,1 | 0 % – 5 % |
+| Glucksmann (Place publique) | 11,3 | 10,6 – 12,0 | 9,7 – 13,1 | 15,0 – 30,4 | 0 % – 0 % |
+| Arthaud (Lutte ouvrière) — partiel | 12,7 | 11,8 – 13,7 | 10,3 – 15,8 | 16,5 – 38,2 | 0 % – 0 % |
+| Mélenchon (La France insoumise) | 20,8 | 19,7 – 22,1 | 15,7 – 27,0 | 29,5 – 64,5 | 0 % – 0 % |
+| Roussel (Parti communiste français) | 21,8 | 20,4 – 24,0 | 16,5 – 29,2 | 39,6 – 78,1 | 0 % – 0 % |
 
 Lecture :
-- Écologie de droite, Bertrand et Retailleau font mieux que le statu quo dans la plupart des tirages, aux deux bornes
-  (Retailleau de 100 % à 68 % des tirages) ; Arthaud, Glucksmann, Le Pen, Lisnard, Mélenchon et Roussel presque jamais ;
-- Philippe et Attal sont à portée du statu quo : leur classement dépend de la corrélation (Philippe de 38 à 46 %, Attal
-  de 12 à 35 %) ; Tondelier passe de 0 à 12 % ;
-- depuis la macro bouclée, le multiplicateur pèse davantage (Zemmour, Lisnard, Attal) et, pour Mélenchon, la contrainte
-  de capacité (`capacite.effet_au_dela`) ; à ρ = 0 les intervalles sont deux à trois fois plus étroits ; l'intervalle
-  s'élargit fortement avec le temps (dette et prime de taux).
+- Bertrand et Retailleau font mieux que le statu quo dans la plupart des tirages, aux deux bornes (Retailleau de 99 %
+  à 66 % des tirages) ; Arthaud, Glucksmann, Le Pen, Mélenchon et Roussel jamais ;
+- Philippe et Attal sont à portée du statu quo : leur classement dépend de la corrélation (Philippe de 36 à 47 %, Attal
+  de 7 à 36 %) ; Tondelier passe de 0 à 20 %, Zemmour de 0 à 7 %, Lisnard de 0 à 5 % ;
+- par rapport au calcul du 16/11 (miroirs non tirés), les médianes bougent de 0,1 point au plus et les fourchettes
+  « ensemble » s'élargissent un peu (Tondelier 7,8 – 12,6 → 7,2 – 13,0) : les effets en sens inverse sont désormais
+  incertains eux aussi ;
+- fonds dans les administrations publiques (`comparaison_incertitude_fonds.csv`) : Philippe fait mieux que le statu quo
+  dans 75 % à 55 % des tirages (36 % à 47 % publié) ; pour les quatre autres programmes à fonds, moins de 0,2 point
+  d'écart ;
+- à ρ = 0 les intervalles sont deux à trois fois plus étroits ; l'intervalle s'élargit fortement avec le temps (dette
+  et prime de taux).
 
 ## Sensibilité (D3) : ce qui fait le déficit de 2037
 

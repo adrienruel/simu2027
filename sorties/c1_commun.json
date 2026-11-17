@@ -1,35 +1,5 @@
 [
  {
-  "cle": "macro.tendance",
-  "deficit_2037": -0.11417338982270309,
-  "deficit_2050": -0.6901139451909692,
-  "note": "Prudent : 0,7 % (COR, juin 2026) ; médian et optimiste : 1 % ; crise : 0,4 %, le bas des variantes de productivité du COR (05/11/2026, décision d'Adrien après la relecture : la crise était meilleure que le prudent jusqu'en 2045, avec la même productivité)."
- },
- {
-  "cle": "macro.annees_taux_long_terme",
-  "deficit_2037": -0.036555912297462356,
-  "deficit_2050": -0.1399686081999576,
-  "note": "Durée de vie moyenne de la dette ≈ 8,5 ans (AFT) ; 6 ans prudent."
- },
- {
-  "cle": "budget_etat.inflation_2026_2030",
-  "deficit_2037": -0.024672048575848038,
-  "deficit_2050": -0.07582798944761748,
-  "note": "Total!B79."
- },
- {
-  "cle": "ministeres.elasticite_eleves_etudiants",
-  "deficit_2037": -0.014419393378700462,
-  "deficit_2050": -0.06144070075435337,
-  "note": "Baisse des moyens de l'enseignement pour 1 % d'élèves (après 2035) ou d'étudiants en moins. Prudent : la moitié (les moyens par élève ont augmenté quand les effectifs baissaient ; c'est aussi la règle « un départ sur deux » de la v235). La baisse d'ici 2035 est déjà dans les mesures (enseignants aju"
- },
- {
-  "cle": "unites.deflateur_2026",
-  "deficit_2037": -0.0009022791759143445,
-  "deficit_2050": -0.005422786400991697,
-  "note": "Prudente, sous l'inflation prévue de 2,1 %."
- },
- {
   "cle": "budget_etat.cas_pensions_2026",
   "deficit_2037": 0.0008017833743529934,
   "deficit_2050": 0.003929731788002044,
@@ -276,6 +246,12 @@
   "note": "Hausse de la tendance de productivité utilisée pour mesurer le dividende de croissance (écart prudent-médian)."
  },
  {
+  "cle": "macro.annees_baisse_spread",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": ""
+ },
+ {
   "cle": "calendrier.dotations_collectivites",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
@@ -286,6 +262,12 @@
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
   "note": ""
+ },
+ {
+  "cle": "emploi.marge_plancher",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "13/11/2026 : à moins de cette marge au-dessus du chômage incompressible, les emplois en plus des programmes ont des rendements décroissants (moteur/emploi_canaux.plancher_chomage) : le chômage tend vers le plancher sans le franchir, raccord sans cassure au-dessus. Un point : l'écart entre le plus ba"
  },
  {
   "cle": "emploi.cout_par_canal/offre",
@@ -420,6 +402,18 @@
   "note": "Remboursements partiels d'accise sur le gazole (transport routier, taxis, agriculture) retirés des taxes actuelles sur les carburants des entreprises : ordre de grandeur, à sourcer (PLF, évaluation des voies et moyens, tome II). Retirer ce montant réduit le gain du programme (prudent)."
  },
  {
+  "cle": "programme_commun.smic_part_marge_absorbee",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Même valeur que Tondelier."
+ },
+ {
+  "cle": "publication.seuil_dette_plausible",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Ratio de dette (% du PIB) au-delà duquel une trajectoire n'a plus valeur de prévision : un ajustement serait forcé avant (marchés, règles européennes). Le comparateur marque ces années (colonne hors_plausibilite de comparaison_trajectoire.csv) et les grise. 200 % reprend la colonne « Dette > 200 % »"
+ },
+ {
   "cle": "ecologie.elasticite_revenu/transports",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
@@ -460,5 +454,47 @@
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
   "note": "Émissions en France d'une production relocalisée, rapportées à celles de la même production importée. Électricité peu carbonée, mais écart très variable selon les secteurs (acier, ciment, chimie). Prudent : gain faible. À sourcer (Carbone 4 et SEI, empreinte carbone de la France)."
+ },
+ {
+  "cle": "microsimulation.depart_par_age/55-59",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des personnes sans emploi de chaque âge qui sont retraitées (carrières longues, départs à l'âge légal, taux plein à 67 ans) ; le total est recalé sur retraites_residents_2026."
+ },
+ {
+  "cle": "microsimulation.depart_par_age/60-61",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des personnes sans emploi de chaque âge qui sont retraitées (carrières longues, départs à l'âge légal, taux plein à 67 ans) ; le total est recalé sur retraites_residents_2026."
+ },
+ {
+  "cle": "microsimulation.depart_par_age/62",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des personnes sans emploi de chaque âge qui sont retraitées (carrières longues, départs à l'âge légal, taux plein à 67 ans) ; le total est recalé sur retraites_residents_2026."
+ },
+ {
+  "cle": "microsimulation.depart_par_age/63-64",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des personnes sans emploi de chaque âge qui sont retraitées (carrières longues, départs à l'âge légal, taux plein à 67 ans) ; le total est recalé sur retraites_residents_2026."
+ },
+ {
+  "cle": "microsimulation.depart_par_age/65-66",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des personnes sans emploi de chaque âge qui sont retraitées (carrières longues, départs à l'âge légal, taux plein à 67 ans) ; le total est recalé sur retraites_residents_2026."
+ },
+ {
+  "cle": "microsimulation.depart_par_age/67+",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des personnes sans emploi de chaque âge qui sont retraitées (carrières longues, départs à l'âge légal, taux plein à 67 ans) ; le total est recalé sur retraites_residents_2026."
+ },
+ {
+  "cle": "microsimulation.aah_en_emploi",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Part des adultes handicapés tirés parmi les salariés à bas salaire (temps partiel, établissements et services d'aide par le travail) plutôt que parmi les inactifs : l'AAH y est différentielle. Ordre de grandeur, à sourcer (Drees, minima sociaux)."
  }
 ]

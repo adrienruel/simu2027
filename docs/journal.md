@@ -1718,3 +1718,27 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 
   Ces lectures sont à faire valider en priorité.
 - **Incertitude** : les paramètres rangés dans `programme_commun` sont désormais tirés au même point pour tous les programmes (avant : un tirage par programme). Les tirages enregistrés sont antérieurs (manifeste) ; à refaire au prochain calcul.
+
+## 16/11/2026 (nuit) — Phase K (roadmap, phase 3) : niveaux et incertitude défendables
+
+- **3.1 Dynamique de la dette** (`docs/dette.md`).
+  - Le noyau publie les composantes du taux apparent (`taux_base`, `taux_fisher`, `taux_bce`, `taux_prime`, `taux_scenario`) et la dette du début d'année. Aucun résultat publié ne change.
+  - `moteur/decomposition.py` coupe un écart de déficit en six parts (primaire, taux, prime de dette, dette en plus, croissance, autres), sans résidu. Statu quo au prudent, de 2029 à 2037 : +3,59 points, dont +0,11 de primaire, +1,84 de taux, +0,53 de prime, +1,38 de dette en plus et −0,27 de croissance.
+  - Variantes communes (`outils/variantes_dette.py`, `sorties/comparaison_variantes_dette.csv`) : sans prime de dette, taux long à 3,3 %, 2027-2028 projetées. Le classement de 2037 tient ; sans prime, l'écart de Roussel passe sous celui de Mélenchon, et celui de Zemmour sous ceux de Glucksmann et de Tondelier.
+  - Décision D3 : `calendrier.croissance_2027_2028` vaut 0 par défaut (convention inchangée). Projeter 2027-2028 avec la croissance de la Banque de France (0,9 % puis 1,2 %) baisse les niveaux de 0,1 à 0,2 point en 2037 et les écarts au statu quo d'au plus 0,06 point.
+- **3.2 Incertitude** (`docs/incertitude.md`).
+  - Division par zéro corrigée à la source : les profils d'emploi de Mésange sont rapportés à un multiplicateur de référence fixe (`bouclage.multiplicateur_reference`, 1, le médian publié) au lieu de la colonne médiane tirée. Aucun tirage n'est plus écarté (avant : 2 et 5 sur 600), et l'emploi de conjoncture suit désormais le multiplicateur tiré. Le nombre de tirages écartés est publié.
+  - Effets miroirs tirés : la colonne prudente des paramètres lus en sens inverse (`incertitude.MIROIR_CLES`) est tirée au point miroir. Contrôle ρ = 1 au 10e centile remis en test : écart au prudent publié en 2037 de −0,04 à −0,73 point selon le programme (avant : jusqu'à −1,36).
+  - Variante « fonds dans les administrations publiques » tirée pour les cinq programmes à fonds (`sorties/comparaison_incertitude_fonds.csv`).
+  - Monte Carlo recalculé (600 tirages par borne, 0 écarté) : médianes de 2037 déplacées de 0,1 point au plus ; fourchettes « ensemble » un peu plus larges. Philippe fait mieux que le statu quo dans 36 à 47 % des tirages, et dans 55 à 75 % avec son fonds compté dans les administrations publiques.
+- **3.3 Validation externe** (`docs/backtests.md`).
+  - Baisse de l'IS de 33,3 à 25 % : PIB +0,03 à +0,05 % à 10 ans. Compatible avec l'absence d'effet agrégé mesuré, mais test faible faute d'évaluation ex post chiffrée.
+  - Assurance chômage 2019-2021 : les effets mesurés par la Dares donnent ≈ 0,13 point de chômage en moins. Les lectures des programmes au prudent (Lisnard 0,1 ; Attal et Philippe 0,2 ; Retailleau 0,3) sont du même ordre ; Attal, Philippe et Retailleau supposent 1,5 à 2,3 fois cet effet, défendable si leur réforme est plus large (à chiffrer).
+  - Chiffrage tiers : l'Institut Montaigne publiera le sien au premier trimestre 2027 ; `outils/ecarts_tiers.py` le comparera mesure par mesure.
+- **3.4 Sources vérifiables** (`docs/sourcage.md`).
+  - Champs `url` et `page` pour le statut SOURCE ; `url` refusée sur les autres statuts.
+  - `outils/sources_poids.py` classe les 173 paramètres sourcés par poids. 17 des 20 premiers ont une adresse et une page ; les trois autres sont nommés dans le test.
+  - L'arriéré (166 paramètres) est listé dans `parametres/sources/sans_url.txt` ; un nouveau paramètre SOURCE sans url fait échouer `tests/test_sources.py`.
+  - À vérifier : la charge d'intérêts de 91 Md€ en 2027 (`statu_quo.charge_interets_base`) est attribuée aux administrations publiques, mais une source l'attribue au seul budget de l'État.
+  - Archivage des tableaux sources : pas fait (téléchargement impossible depuis l'environnement de travail).
+- **Divers** : `outils/c1_inventaire.py` ne charge plus les paramètres d'Écologie de droite pour l'inventaire commun (résultats identiques).
