@@ -39,6 +39,37 @@ TOUTES = (*ANNEES_AVANT, *ANNEES)
 MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optimiste": "crise"}
 
 
+def generosite(p, s: str, liste: list, volume=()) -> dict | None:
+    """Coût d'un chômeur du programme rapporté à celui du statu quo (roadmap 5.4, emploi.generosite_programme) :
+    {année: (facteur du bloc chômage, facteur du bloc pauvreté)} = (bloc du statu quo + mesures de législation du
+    programme sur ce bloc) / bloc du statu quo ; mesures marquées volume exclues ; jamais sous zéro."""
+    if not p.val("emploi.generosite_programme"):
+        return None
+    bl = sq.blocs(p, s)
+    out = {}
+    for t in ANNEES:
+        d = {"chomage": 0.0, "pauvrete": 0.0}
+        for m in liste:
+            if m.nature == "mesure" and m.poste in d and m.nom not in volume:
+                d[m.poste] += m.valeurs.get(t, 0.0)
+        out[t] = tuple(max(0.0, 1 + d[b] / bl[t][b]) for b in ("chomage", "pauvrete"))
+    return out
+
+
+def retour_incidence(p, s: str, liste: list, details_offre: dict, y: dict, part_rec: dict) -> list:
+    """Mesure des prélèvements des ménages sur les salaires et dividendes de l'incidence (roadmap 5.6), sans ce que
+    l'effet d'offre de l'instrument capital_entreprises rapporte déjà."""
+    from . import incidence_entreprises as ie
+    det = details_offre.get("capital_entreprises") or {}
+    eff = det.get("effet_pib_pct", {})
+    rec_offre = {t: eff.get(t, 0.0) / 100 * y[max(t, 2029)] * part_rec[t] for t in TOUTES}
+    serie = ie.retour_budget(p, s, liste, rec_offre, TOUTES)
+    if not any(serie.values()):
+        return []
+    return [Mesure("Incidence : prélèvements des ménages sur les salaires et dividendes (entreprises)", "recettes",
+                   serie, nature="effet_macro")]
+
+
 def multiplicateur(p, s: str, cout_net: dict, annees) -> dict:
     """PIB en plus (Md€) dû à l'impulsion budgétaire nette (cout_net : coût net cumulé des mesures, + = relance).
 
@@ -400,6 +431,7 @@ class ProgrammeSimple:
             idx = self.indices(p, s)
             w = sq.salaires(p, s)
             liste: list[Mesure] = []
+            volume: set[str] = set()
             crees = {t: 0.0 for t in ANNEES}
             supprimes = {t: 0.0 for t in ANNEES}
             cout_postes = {t: 0.0 for t in TOUTES}  # dépense des postes publics (Md€), pour le PIB non marchand (A3)
@@ -414,6 +446,8 @@ class ProgrammeSimple:
                 from moteur import micro as _micro
                 serie = {t: v * _micro.indice(p, self.nom, x["id"], t) for t, v in serie.items()}
                 court = nom.split(".")[1]
+                if x.get("volume"):  # allocataires en moins, pas une allocation plus basse (roadmap 5.4)
+                    volume.add(f"{x['id']} — {x['libelle']}")
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
                                     enfants=x.get("enfants"), fonds=x.get("fonds", "")))
@@ -548,7 +582,18 @@ class ProgrammeSimple:
             # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
             from . import canaux_declares
             decl = canaux_declares.effets(self, p, s, mesures_programme=liste)
+            # roadmap 5.4 : coût d'un chômeur selon la générosité du programme, appliqué à tout ce qui suit le nombre
+            # de chômeurs (allocations des seniors, variante démographique ; dépenses de chômage dans le noyau)
+            gen = generosite(p, s, liste, volume)
+            if gen is not None:
+                for m in [*liste, *decl["mesures"]]:
+                    if m.nom.startswith(("Seniors : allocations chômage", "Démographie : ")) and m.poste in ("chomage", "pauvrete"):
+                        k = 0 if m.poste == "chomage" else 1
+                        m.valeurs = {t: v * gen.get(t, (1.0, 1.0))[k] for t, v in m.valeurs.items()}
             liste.extend(decl["mesures"])
+            # roadmap 5.6 : prélèvements des ménages sur les revenus que l'incidence des entreprises leur apporte
+            if p.val("entreprises.incidence_retour_budget"):
+                liste.extend(retour_incidence(p, s, liste, details_offre, y, part_rec))
             # postes publics : leur production entre au PIB à leur coût quand le multiplicateur s'est éteint (A3)
             d_npm = production_non_marchande(p, s, cout_postes, TOUTES) if actif else {t: cout_postes[t] for t in TOUTES}
             details_npm = d_npm
@@ -577,6 +622,8 @@ class ProgrammeSimple:
             demploi = {t: ctx_s[s]["emploi"][t] - e[t]["emploi"] for t in ANNEES}
             if dep_chom:
                 ctx_s[s]["chomeurs_depenses"] = self.chomeurs_depenses(canaux, actifs_bloc, budget_compte)
+                if gen is not None:
+                    ctx_s[s]["generosite_chomage"] = gen
             if decl["taux_supplementaire"]:
                 ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
             # phase E : inflation et taux bouclés (moteur/bouclage.py)

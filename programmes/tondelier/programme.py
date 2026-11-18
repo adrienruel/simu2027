@@ -412,6 +412,16 @@ class Tondelier:
                 pib[t] += sen["pib"][t]
                 act = e[t]["emploi"] + e[t]["chomeurs"] + em["actifs"][t] + actifs_offre[t]
                 chom[t] = (chom[t] / 100 * act + sen["chomeurs"][t]) / (act + sen["actifs"][t]) * 100
+            # roadmap 5.4 et 5.6, mêmes règles que ProgrammeSimple : générosité des allocations du programme, et
+            # prélèvements des ménages sur les revenus de l'incidence des entreprises
+            from moteur.programme_simple import generosite, retour_incidence
+            gen = generosite(p, s, liste)
+            if gen is not None:
+                for m in liste:
+                    if m.nom.startswith("Seniors : allocations chômage"):
+                        m.valeurs = {t: v * gen.get(t, (1.0, 1.0))[0] for t, v in m.valeurs.items()}
+            if p.val("entreprises.incidence_retour_budget"):
+                liste.extend(retour_incidence(p, s, liste, details_offre, y, part_rec))
             # dette de fin 2028 : mesures de 2027 et 2028 (recettes et dépenses), effet macro compris
             avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
                         for m in liste for t in ANNEES_AVANT if m.poste != "participations")
@@ -430,10 +440,17 @@ class Tondelier:
                 budget = {"SMIC à 2 000 € : emplois perdus", "Garantie d'emploi à 55 ans (Territoires zéro chômeur)"}
                 ctx_s[s]["chomeurs_depenses"] = ProgrammeSimple.chomeurs_depenses(
                     ctx_s[s]["emplois_canaux"], actifs_offre, budget)
+                if gen is not None:
+                    ctx_s[s]["generosite_chomage"] = gen
             liste.extend(self.ecologie(p, s))
             # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
             from moteur import canaux_declares
             decl = canaux_declares.effets(self, p, s, mesures_programme=liste)
+            if gen is not None:
+                for m in decl["mesures"]:
+                    if m.nom.startswith("Démographie : ") and m.poste in ("chomage", "pauvrete"):
+                        k = 0 if m.poste == "chomage" else 1
+                        m.valeurs = {t: v * gen.get(t, (1.0, 1.0))[k] for t, v in m.valeurs.items()}
             liste.extend(decl["mesures"])
             for t in ANNEES:
                 ctx_s[s]["pib"][t] += decl["pib"][t]

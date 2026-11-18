@@ -169,13 +169,26 @@ Résultats (prudent, 2032) : Lisnard laisse 27 Md€ aux entreprises (+3 000 €
 +5 € au 1er). Mélenchon leur prend 15 Md€ (−1 600 € par UC au 10e décile). Philippe : +15 Md€, Le Pen : +12 Md€,
 Tondelier : −8 Md€.
 
-**Sans effet sur le solde** (`retour_budget` : false, DÉCISION à prendre). Compter l'IR, la CSG et le PFU payés sur
-ces salaires et dividendes en plus est une décision ouverte : l'effet d'offre en compte déjà une partie, par le PIB
-en plus et ses recettes.
+**Effet sur le solde** (décision d'Adrien du 18/11/2026, roadmap 5.6, `entreprises.incidence_retour_budget`). Une
+mesure publiée, « Incidence : prélèvements des ménages sur les salaires et dividendes (entreprises) », compte deux
+parts :
+
+- **Salaires** : au taux marginal du salaire moyen du privé (≈ 62 % du coût du travail, table OpenFisca 2026).
+  - Moins les recettes que l'effet d'offre de l'instrument `capital_entreprises` compte déjà, bornées au même signe
+    et au même montant : c'est ce qui évite le double compte.
+  - La part des salaires monte à la vitesse commune de l'offre (`offre.vitesse`, roadmap 7.3). En attendant, elle
+    reste aux actionnaires.
+- **Dividendes** : PFU de 30 % × part distribuée (0,5) × part des ménages résidents (0,5), soit 7,5 % de la part
+  des actionnaires (`entreprises.retour_dividendes` ; les deux parts sont à sourcer).
+
+Déficit 2037 au prudent :
+
+- Lisnard 14,03 → 13,87 %, Le Pen 13,26 → 13,15 %, Philippe 11,16 → 11,06 % ;
+- Mélenchon 27,85 → 27,95 % ;
+- ces chiffres comprennent aussi la générosité des allocations et la prime d'activité (roadmap 5.4 et 5.5).
 
 **Suites** :
 
 - rapprocher ces déciles des déciles de niveau de vie de la micro (même population, OpenFisca) ;
-- un calendrier propre aux salaires (l'effet met plusieurs années à venir dans la source) ;
 - la part des prix ;
 - le coût du travail répercuté sur les salaires à long terme.

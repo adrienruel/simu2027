@@ -46,8 +46,10 @@ def test_incidence_repartit_tout_le_montant(p, nom):
     m = ie.montant_entreprises(p, prog, "prudent")[2032]
     d = ie.par_decile(p, prog, "prudent", 2032)
     assert sum(x["total_md"] for x in d) == pytest.approx(m, rel=1e-9)
+    # la part des salaires monte à la vitesse de l'offre (roadmap 7.3) : jamais plus que sa part de long terme
     x = p.val("entreprises.incidence_menages")
-    assert sum(x_["salaires_md"] for x_ in d) == pytest.approx(x["salaires"] * m, rel=1e-9)
+    sal = sum(x_["salaires_md"] for x_ in d)
+    assert abs(sal) <= abs(x["salaires"] * m) + 1e-9 and sal * m >= 0
 
 
 def test_incidence_signe(p):
@@ -62,3 +64,21 @@ def test_deciles_de_population():
     w = pop["poids"] * pop["personnes"]
     parts = [w[d == k].sum() / w.sum() for k in range(1, 11)]
     assert all(abs(x - 0.1) < 0.01 for x in parts)
+
+
+def test_retour_budget_sans_double_compte(p):
+    """Le retour des salaires ne dépasse jamais les prélèvements sur la part des salaires, ni ne change de signe
+    quand l'effet d'offre en compte déjà une partie (roadmap 5.6)."""
+    prog = noyau.charger("lisnard")
+    ms = prog.mesures(p)["prudent"]
+    mont = ie.montant_entreprises(p, prog, "prudent")
+    annees = sorted(mont)
+    sans = ie.retour_budget(p, "prudent", ms, {}, annees)
+    deja = {t: 1e3 for t in annees}  # l'offre compte déjà tout
+    avec = ie.retour_budget(p, "prudent", ms, deja, annees)
+    rd = p.val("entreprises.retour_dividendes")
+    td = rd["taux"] * rd["part_distribuee"] * rd["part_menages_residents"]
+    parts = ie.partage_annees(p, "prudent", mont)
+    for t in (2032, 2037):
+        assert avec[t] == pytest.approx(td * parts[t]["actionnaires"])
+        assert sans[t] > avec[t] > 0

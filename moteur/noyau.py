@@ -40,7 +40,9 @@ ANNEES = list(range(2029, 2074))
 POSTES = ("recettes", "participations")  # en plus des blocs de dépense du statu quo
 CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart", "emploi", "emplois_canaux",
             "pib_hors_consommation", "inflation_taux", "taux_marche", "inflation_bouclage", "prix_bouclage", "facture_energie",
-            "chomeurs_depenses")
+            "chomeurs_depenses", "generosite_chomage")
+# generosite_chomage : {année: (facteur du bloc chômage, facteur du bloc pauvreté)} coût d'un chômeur du programme
+# rapporté à celui du statu quo (roadmap 5.4, emploi.generosite_programme)
 # chomeurs_depenses : {année: personnes} chômeurs en plus (+) ou en moins (−) du programme par rapport au statu quo
 # qui changent les dépenses sensibles au chômage (phase L, roadmap 4.1, emploi.depenses_chomage_programme) : sans les
 # canaux dont la mesure compte déjà le budget, ni les seniors, ni la démographie ; le noyau y ajoute les chômeurs de la
@@ -252,6 +254,8 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     if ch_dep is not None:
         alloc_ch, part_ac = p.val("emploi.allocation_chomeur_evitee"), p.val("emploi.part_allocation_assurance_chomage")
         w_ch = sq.salaires(p, s)
+        gen = ctx.get("generosite_chomage") or {}
+        ppa_t = ppa_par_emploi(p, s) if p.val("emploi.prime_activite_emplois") else None
     zr = xr = qr = 0.0
     out = {}
     for t in ANNEES:
@@ -315,9 +319,15 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             d_ch = ch_dep.get(t, 0.0)
             if retro:
                 d_ch -= dy_r / y[t] * sq._v(p, "macro.emplois_par_point_pib", s) * e[t]["emploi"]
-            dep_chom = d_ch * alloc_ch * w_ch[t] / w_ch[2029] / 1e9
-            bl["chomage"] = bl.get("chomage", 0.0) + part_ac * dep_chom
-            bl["pauvrete"] = bl.get("pauvrete", 0.0) + (1 - part_ac) * dep_chom
+            k_ac, k_pa = gen.get(t, (1.0, 1.0))
+            base = d_ch * alloc_ch * w_ch[t] / w_ch[2029] / 1e9
+            d_ac, d_pa = part_ac * base * k_ac, (1 - part_ac) * base * k_pa
+            # roadmap 5.5 : un emploi en plus (un chômeur en moins) ouvre la prime d'activité
+            if ppa_t is not None:
+                d_pa -= d_ch * ppa_t[t] * k_pa / 1e9
+            dep_chom = d_ac + d_pa
+            bl["chomage"] = bl.get("chomage", 0.0) + d_ac
+            bl["pauvrete"] = bl.get("pauvrete", 0.0) + d_pa
         # dette de fin d'année précédente sur le PIB de cette année-là (dette/PIB publiée) ; pour 2029, PIB du statu
         # quo, comme la référence
         ratio = dette_prec / (y[t - 1] if t > 2029 else pib_ref_2029)
@@ -419,6 +429,27 @@ def _balance(p: Parametres, s: str, y_t: float, prix: float, t: int) -> float:
     from .statu_quo import pib
     e = p.val("bouclage.exterieur")
     return -e["alpha"] * (y_t / pib(p, s)[t] - 1) * 100 - e["beta"] * prix * 100
+
+
+def ppa_par_emploi(p: Parametres, s: str) -> dict[int, float]:
+    """Prime d'activité d'un emploi en plus (€ par an, roadmap 5.5) : table OpenFisca 2026 d'une personne seule au
+    coût d'un emploi créé (emploi.cout_emploi_cree_smic × coût du SMIC), indexée comme la prime du statu quo."""
+    from . import statu_quo as sq
+    cache = p.__dict__.setdefault("_cache", {})
+    if ("ppa_emploi", s) in cache:
+        return cache[("ppa_emploi", s)]
+    from .systeme_actuel import _interp, _table_openfisca
+    T = _table_openfisca()
+    c = _interp(1823.03 * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
+    v0 = _interp(c, T["cout_du_travail"], T["ppa"])
+    w = sq.salaires(p, s)
+    if p.val("statu_quo.indexation_prestations") == "salaires":
+        out = {t: v0 * w[t] / w[2029] for t in ANNEES}
+    else:
+        pa = sq.prime_activite_relative(p, s)
+        out = {t: v0 * pa[t] for t in ANNEES}
+    cache[("ppa_emploi", s)] = out
+    return out
 
 
 def _okun(p: Parametres, s: str, dy: float, y_t: float, e_t: dict) -> float:
