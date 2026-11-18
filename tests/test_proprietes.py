@@ -40,6 +40,8 @@ def test_mesures_expliquent_l_ecart_de_solde_primaire(nom, p, base):
         for t in (2029, 2037, 2050):
             x = r[s][t]
             effet = sum(m[t] for m in bilan) + x.get("pib_taux", 0.0) * rec[t] / y[t] + x.get("erosion_pensions", 0.0)
+            # phase L (4.1) : dépenses sensibles au chômage sur les chômeurs du programme (blocs chômage et pauvreté)
+            effet -= x.get("depenses_chomage_programme", 0.0)
             if "fonds" in x.get("dynamiques", {}):
                 effet += x["dynamiques"]["fonds"]["solde"]
             if x.get("regle"):

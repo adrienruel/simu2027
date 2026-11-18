@@ -241,14 +241,30 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
     c = _tirer_classes(rng, len(i_pr), [float(l["cout_employeur_milieu"]) for l in prive], [float(l["effectif_origine"]) for l in prive])
     cout[i_pr] = _ranger(c, score[i_pr])
     salaire_brut[i_pr] = _interp_table(cout[i_pr], table_prive, "cout_du_travail", "brut")
+    # Apprentis (phase L, roadmap 4.2) : parmi les salariés du privé de 16 à 29 ans, rémunérés à la grille légale
+    # (part du SMIC par âge) ; tirage séparé pour ne pas changer le reste de la population
+    smic = smic_mensuel_brut()
+    rng_l = np.random.default_rng(graine + 1)
+    apprenti = np.zeros(N, bool)
+    app = v("apprentis")
+    if app.get("actif"):
+        cand = i_pr[(age[i_pr] >= 16) & (age[i_pr] <= 29)]
+        prop = np.array([app["propension"][_bande(int(a), app["propension"])] for a in age[cand]], float)
+        w_init = v("menages_2026") * 1e6 / n  # poids de départ du calage (w0)
+        k_app = app["effectif"] / (prop.sum() * w_init) if prop.sum() > 0 else 0.0
+        tire = rng_l.random(len(cand)) < np.minimum(1.0, k_app * prop)
+        ia = cand[tire]
+        apprenti[ia] = True
+        salaire_brut[ia] = np.array([app["part_smic"][_bande(int(a), app["part_smic"])] for a in age[ia]]) * smic * 12
+        cout[ia] = salaire_brut[ia]
     # Mois travaillés : un bas salaire annuel est en partie un travail sur quelques mois (microsimulation.mois_travailles).
     mt = v("mois_travailles")
-    smic = smic_mensuel_brut()
     mois = np.full(N, 12, int)
     debut = np.zeros(N, int)
     taux_m = np.maximum(salaire_brut[i_pr] / 12, rng.uniform(mt["taux_mensuel_min"], mt["taux_mensuel_max"], len(i_pr)) * smic)
     mois[i_pr] = np.clip(np.ceil(salaire_brut[i_pr] / taux_m), 1, 12).astype(int)
     debut[i_pr] = rng.integers(0, 13 - mois[i_pr])
+    mois[apprenti], debut[apprenti] = 12, 0  # contrat sur l'année
     pub = [l for l in _lire("fonctionnaires.csv") if float(l["effectif_origine"]) > 0]
     table_pub = _lire("openfisca_public_etat_civils_2026.csv")
     i_pu = np.where(statut == "agent_public")[0]
@@ -354,6 +370,8 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
     ajouter(emp["independants"] * 1e6, compte(statut == "independant"))
     ajouter(p.val("inactifs.chomeurs_bit"), compte(statut == "chomeur"))
     ajouter(v("retraites_residents_2026") * 1e6, compte(statut == "retraite"))
+    if app.get("actif") and apprenti.any():
+        ajouter(app["effectif"], compte(apprenti))  # phase L (4.2) : apprentis calés sur la Dares
     bornes_cout = [0, 10e3, 20e3, 30e3, 40e3, 60e3, 100e3, 200e3, 1e12]
     milieux = np.array([float(l["cout_employeur_milieu"]) for l in prive])
     effp = np.array([float(l["effectif_origine"]) for l in prive])
@@ -390,6 +408,10 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
     fon = base * (logement == "proprietaire") * rng.lognormal(0, 0.5, n)
     div *= cap["dividendes"] * 1e9 / (w * div).sum()
     fon *= cap["revenus_fonciers"] * 1e9 / (w * fon).sum()
+    # plus-values mobilières (phase L, roadmap 4.2) : même rang que les dividendes, plus dispersées ; tirage séparé
+    pv_p = v("plus_values_mobilieres")
+    pv = base * rng_l.lognormal(0, pv_p["dispersion"], n)
+    pv *= pv_p["montant"] * 1e9 / (w * pv).sum()
 
     # --- Écriture --------------------------------------------------------------------------------------------
     maries = rng.random(n) < v("couples_maries")
@@ -407,6 +429,8 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
             "handicap": int(handicap[j]), "maries": int(maries[i]),
             "dividendes": round(float(div[i]), 2) if q["role"] == "ref" else 0.0,
             "revenus_fonciers": round(float(fon[i]), 2) if q["role"] == "ref" else 0.0,
+            "plus_values": round(float(pv[i]), 2) if q["role"] == "ref" else 0.0,
+            "apprenti": int(apprenti[j]),
             "logement": "locataire_prive" if et else logement[i],
             "loyer_mensuel": round(float(loyer_et[k_et[j]] if et else loyer[i]), 2), "zone": zone_et[k_et[j]] if et else zone[i],
         })
@@ -424,10 +448,12 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
         ECARTS_CALAGE[:] = list((A2 @ w) / c2 - 1)
         k_div = cap["dividendes"] * 1e9 / (w * div).sum()
         k_fon = cap["revenus_fonciers"] * 1e9 / (w * fon).sum()
+        k_pv = pv_p["montant"] * 1e9 / (w * pv).sum()
         for l in lignes:
             l["poids"] = round(float(w[l["unite"]]), 3)
             l["dividendes"] = round(l["dividendes"] * k_div, 2)
             l["revenus_fonciers"] = round(l["revenus_fonciers"] * k_fon, 2)
+            l["plus_values"] = round(l["plus_values"] * k_pv, 2)
     return lignes
 
 

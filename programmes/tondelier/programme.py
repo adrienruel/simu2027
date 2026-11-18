@@ -373,7 +373,11 @@ class Tondelier:
                     {t: (dpib[t] if self.v("macro.multiplicateur_actif") else 0.0) / y[t] * k_emp * e[t]["emploi"] for t in ANNEES})
             chom = {t: (e[t]["chomeurs"] + emplois * min(1.0, (t - 2026) / 3) - conj[t]) / (e[t]["emploi"] + e[t]["chomeurs"]) * 100 for t in ANNEES}
             # emploi : postes publics, garantie d'emploi, assurance chômage (tondelier_emploi)
-            em = self.emploi_mesures(p, s, liste, e, smic["perte_par_emploi"], ws)
+            # phase L (4.1) : l'allocation évitée des chômeurs de l'assurance chômage et de l'éviction passe dans les
+            # blocs chômage et pauvreté (noyau) ; les emplois perdus du SMIC gardent la leur (budget compté par la mesure)
+            dep_chom = p.val("emploi.depenses_chomage_programme")
+            v_em = smic["perte_par_emploi"] - (p.val("emploi.allocation_chomeur_evitee") if dep_chom else 0.0)
+            em = self.emploi_mesures(p, s, liste, e, v_em, ws)
             liste.extend(em["mesures"])
             # phase A3 (12/11/2026), même règle que ProgrammeSimple : les postes publics entrent au PIB à leur coût une
             # fois le multiplicateur éteint ; les emplois privés évincés en sortent à leur valeur ajoutée
@@ -419,6 +423,13 @@ class Tondelier:
                                                "Conjoncture (impulsion budgétaire)": conj[t], **em["canaux"][t],
                                                **{c: v[t] for c, v in canaux_offre.items()},
                                                "Seniors : emploi (âge de la retraite)": sen["emplois"][t]} for t in ANNEES}}
+            if dep_chom:
+                # même règle que ProgrammeSimple.chomeurs_depenses : ni les canaux dont la mesure compte le budget
+                # (SMIC, garantie d'emploi), ni les seniors, ni la démographie
+                from moteur.programme_simple import ProgrammeSimple
+                budget = {"SMIC à 2 000 € : emplois perdus", "Garantie d'emploi à 55 ans (Territoires zéro chômeur)"}
+                ctx_s[s]["chomeurs_depenses"] = ProgrammeSimple.chomeurs_depenses(
+                    ctx_s[s]["emplois_canaux"], actifs_offre, budget)
             liste.extend(self.ecologie(p, s))
             # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
             from moteur import canaux_declares

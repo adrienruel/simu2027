@@ -145,6 +145,37 @@ plancher) et ne suffit plus tout à fait (3,01 %).
 - **Secteurs** (industrie, commerce, construction, services) : impôts de production très inégaux (industrie
   16 %, commerce et transports 18 %).
 - **Démographie des entreprises** : créations, défaillances, passage de PME à ETI.
-- **Incidence** : part des impôts répercutée sur les salaires et les prix (Fuest, Peichl et Siegloch, 2018 :
-  environ la moitié de l'impôt local sur les entreprises retombe sur les salaires).
+- **Incidence** : premier lot fait en phase L (voir plus bas). Restent l'effet sur le solde et les prix.
 - **Localisation et transfert de bénéfices** par taille (aujourd'hui en agrégat, part des grandes entreprises).
+
+## Des entreprises aux revenus des ménages (phase L, roadmap du comparateur 4.3, 18/11/2026)
+
+C'est l'architecture visée : ce qu'une mesure laisse ou prend aux entreprises arrive aux ménages.
+`moteur/incidence_entreprises.py` en fait le premier lot.
+
+- **Montant** : chaque année, ce que les mesures de recettes à l'instrument `capital_entreprises` laissent aux
+  entreprises (IS, impôts de production), avec leur retour d'IS des charges.
+- **Hors du montant** : le coût du travail. Son effet passe par l'emploi, et sa répercussion à long terme sur les
+  salaires n'est pas modélisée.
+- **Partage** (`entreprises.incidence_menages`) :
+  - la moitié aux salaires (Fuest, Peichl et Siegloch, AER 2018) ;
+  - rien aux prix, faute de source ;
+  - le reste aux actionnaires (dividendes et plus-values).
+- **Répartition** : par décile de revenu initial par UC, sur la population synthétique, sans OpenFisca. Les salaires
+  sont répartis au prorata des salaires du privé, le capital au prorata des dividendes et des plus-values.
+- **Sortie** : `sorties/comparaison_incidence_entreprises.csv` (`python -m outils.export_incidence`).
+
+Résultats (prudent, 2032) : Lisnard laisse 27 Md€ aux entreprises (+3 000 € par UC et par an au 10e décile,
++5 € au 1er). Mélenchon leur prend 15 Md€ (−1 600 € par UC au 10e décile). Philippe : +15 Md€, Le Pen : +12 Md€,
+Tondelier : −8 Md€.
+
+**Sans effet sur le solde** (`retour_budget` : false, DÉCISION à prendre). Compter l'IR, la CSG et le PFU payés sur
+ces salaires et dividendes en plus est une décision ouverte : l'effet d'offre en compte déjà une partie, par le PIB
+en plus et ses recettes.
+
+**Suites** :
+
+- rapprocher ces déciles des déciles de niveau de vie de la micro (même population, OpenFisca) ;
+- un calendrier propre aux salaires (l'effet met plusieurs années à venir dans la source) ;
+- la part des prix ;
+- le coût du travail répercuté sur les salaires à long terme.

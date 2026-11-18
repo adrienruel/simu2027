@@ -402,3 +402,46 @@ fonds hors des administrations publiques, elle n'est pas une recette : elle est 
 (`fonds`). Nulle en 2026, elle apparaît dans la population vieillie. La part employeur n'est pas reportée sur les
 salaires (incidence à long terme des cotisations : décision ouverte). Programmes : Retailleau (RET-RET-02), et par la
 lecture commune Bertrand (BER-RET-02), Zemmour (ZEM-RET-01), Le Pen (RN-RET-03).
+
+## Phase L (roadmap du comparateur 4.2, 18/11/2026)
+
+**Déciles publiés selon la couverture.** `outils/couverture_micro.py` mesure, pour chaque programme, la part de son
+budget « ménages » que couvrent les mesures codées dans OpenFisca (`programmes/micro_mesures.yaml`).
+
+- **Budget « ménages »** : impôts et cotisations des ménages (instruments travail, capital des ménages, successions,
+  consommation, transferts aux actifs) et transferts aux ménages (blocs retraites, chômage, famille, logement,
+  pauvreté, AAH). Chaque mesure compte en valeur absolue, au prudent, en 2032.
+- **Seuil** : `publication.seuil_couverture_deciles` (DÉCISION, 80 %).
+- **En dessous du seuil** : les déciles du programme sortent de `comparaison_redistribution_deciles.csv`. La
+  pauvreté et le Gini restent publiés, avec la couverture (`couverture_menages_pct`, `deciles_publies`).
+- **Résultat** (`sorties/comparaison_couverture_micro.csv`) : seuls Attal (84 %) et Zemmour (80 %) passent. Les
+  autres sont entre 11 % (Lisnard) et 67 % (Arthaud).
+- **Ce qui manque le plus** :
+  - l'âge de départ, qui n'est pas un barème : Le Pen, Glucksmann, Mélenchon, Roussel et Tondelier ;
+  - les cotisations rendues aux actifs : Lisnard et Retailleau ;
+  - la TVA et les accises, faute de consommation dans la population : Le Pen et Roussel ;
+  - les successions : Zemmour et Glucksmann ;
+  - les réformes de l'assurance chômage.
+
+**Population : plus-values et apprentis** (`outils/population_synthetique.py`). Les deux ajouts sont tirés avec une
+graine séparée.
+
+- **Plus-values mobilières** : 15 Md€ (France Stratégie, 2022, revenus de 2020), réparties comme les dividendes
+  mais plus dispersées. Elles sont déclarées en case 3VG (`f3vg`).
+- **Apprentis** : 1 017 500 au 31/12/2025 (Dares).
+  - Ils sont tirés parmi les salariés du privé de 16 à 29 ans, avec une propension par âge (hypothèse) et une
+    marge de calage nouvelle.
+  - Ils sont payés à la grille légale (Code du travail, art. D6222-26) et marqués `apprenti` pour OpenFisca, si
+    la variable existe dans la version installée (à vérifier).
+- **Vérifié sans OpenFisca** (SMIC fixé à 1 823,03 €, sans le second calage) : 1,018 million d'apprentis pondérés,
+  âge moyen 20,3 ans, salaire moyen 12 600 € par an ; plus-values 15,0 Md€.
+- **À régénérer avec OpenFisca** : la population (`python -m outils.population_synthetique`), puis la micro de
+  chaque programme. La population du dépôt est antérieure, et ses deux colonnes nouvelles valent zéro à la lecture.
+
+**Toujours absents** : les intérêts imposables (livrets fiscalisés, comptes à terme) et l'assurance-vie, faute de
+source sur leur montant. Le patrimoine (ISF, taxe Zucman, IFI) l'est aussi, car la population ne porte pas de
+patrimoine.
+
+**ERFS** : l'accès est à demander à l'Insee par le CASD (Centre d'accès sécurisé aux données), au nom d'Adrien.
+Il faut un projet, un habilitant et une convention. Quand l'accès sera ouvert, l'ERFS remplacera la population
+synthétique.

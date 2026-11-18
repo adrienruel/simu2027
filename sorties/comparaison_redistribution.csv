@@ -1,53 +1,53 @@
-cle,programme,annee,mesures_codees,pauvrete_pct,gini,d9_d1,mediane,budget_mesures_md,pauvrete_pct_sq,gini_sq,d9_d1_sq,mediane_sq
-Arthaud (Lutte ouvrière) — partiel|2029,Arthaud (Lutte ouvrière) — partiel,2029,"ART-FAM-01, ART-ECO-01",17.397,0.279,3.622,26824.049,93.34,16.396,0.293,3.715,24008.485
-Arthaud (Lutte ouvrière) — partiel|2032,Arthaud (Lutte ouvrière) — partiel,2032,"ART-FAM-01, ART-ECO-01",17.509,0.28,3.638,26783.154,93.84,16.419,0.294,3.703,23992.13
-Arthaud (Lutte ouvrière) — partiel|2037,Arthaud (Lutte ouvrière) — partiel,2037,"ART-FAM-01, ART-ECO-01",17.733,0.281,3.666,26742.205,93.7,16.534,0.295,3.723,23983.445
-Arthaud (Lutte ouvrière) — partiel|2050,Arthaud (Lutte ouvrière) — partiel,2050,"ART-FAM-01, ART-ECO-01",17.672,0.283,3.655,26397.182,90.21,16.254,0.295,3.697,23684.764
-Attal (Renaissance)|2029,Attal (Renaissance),2029,ATT-ECO-01,16.136,0.292,3.66,25274.795,-36.74,15.649,0.289,3.57,24449.823
-Attal (Renaissance)|2032,Attal (Renaissance),2032,ATT-ECO-01,16.193,0.293,3.67,25214.552,-36.75,15.687,0.29,3.595,24400.393
-Attal (Renaissance)|2037,Attal (Renaissance),2037,ATT-ECO-01,16.241,0.294,3.683,25186.118,-36.77,15.834,0.291,3.607,24401.726
-Attal (Renaissance)|2050,Attal (Renaissance),2050,ATT-ECO-01,16.013,0.294,3.664,24904.002,-36.19,15.644,0.291,3.585,24245.282
-Bertrand (Nous France)|2029,Bertrand (Nous France),2029,"BER-RET-02, BER-FIS-01, BER-FIS-02",15.759,0.291,3.619,24529.178,-8.35,15.744,0.29,3.594,24380.125
-Bertrand (Nous France)|2032,Bertrand (Nous France),2032,"BER-RET-02, BER-FIS-01, BER-FIS-02",15.918,0.292,3.636,24480.443,-8.35,15.873,0.291,3.612,24332.835
-Bertrand (Nous France)|2037,Bertrand (Nous France),2037,"BER-RET-02, BER-FIS-01, BER-FIS-02",15.969,0.292,3.647,24492.005,-8.43,15.95,0.292,3.63,24360.869
-Bertrand (Nous France)|2050,Bertrand (Nous France),2050,"BER-RET-02, BER-FIS-01, BER-FIS-02",15.915,0.293,3.626,24304.036,-8.2,15.731,0.292,3.603,24200.242
-Glucksmann (Place publique)|2029,Glucksmann (Place publique),2029,"GLU-FIS-01b, GLU-ECO-01",15.728,0.289,3.594,24712.777,4.32,15.879,0.291,3.619,24280.981
-Glucksmann (Place publique)|2032,Glucksmann (Place publique),2032,"GLU-FIS-01b, GLU-ECO-01",15.857,0.29,3.62,24531.24,4.3,15.981,0.292,3.657,24115.762
-Glucksmann (Place publique)|2037,Glucksmann (Place publique),2037,"GLU-FIS-01b, GLU-ECO-01",16.074,0.292,3.646,24474.943,4.26,16.12,0.294,3.692,24082.018
-Glucksmann (Place publique)|2050,Glucksmann (Place publique),2050,"GLU-FIS-01b, GLU-ECO-01",15.936,0.292,3.648,24162.465,3.84,15.959,0.294,3.67,23800.295
-Le Pen (Rassemblement national) — partiel|2029,Le Pen (Rassemblement national) — partiel,2029,"RN-RET-03, RN-FIS-03, RN-FAM-01, RN-IMM-01",15.488,0.29,3.554,24523.921,-6.37,15.787,0.29,3.601,24351.728
-Le Pen (Rassemblement national) — partiel|2032,Le Pen (Rassemblement national) — partiel,2032,"RN-RET-03, RN-FIS-03, RN-FAM-01, RN-IMM-01",15.631,0.292,3.589,24393.104,-6.23,15.856,0.292,3.622,24238.914
-Le Pen (Rassemblement national) — partiel|2037,Le Pen (Rassemblement national) — partiel,2037,"RN-RET-03, RN-FIS-03, RN-FAM-01, RN-IMM-01",15.842,0.293,3.613,24377.674,-6.38,15.996,0.293,3.655,24210.523
-Le Pen (Rassemblement national) — partiel|2050,Le Pen (Rassemblement national) — partiel,2050,"RN-RET-03, RN-FIS-03, RN-FAM-01, RN-IMM-01",15.648,0.292,3.6,24143.542,-5.78,15.83,0.292,3.626,24042.4
-Lisnard (Nouvelle Énergie)|2029,Lisnard (Nouvelle Énergie),2029,"LIS-SOC-01, LIS-ECO-03, LIS-ECO-03b, LIS-RET-01",15.511,0.294,3.68,24201.488,15.32,15.684,0.29,3.576,24430.928
-Lisnard (Nouvelle Énergie)|2032,Lisnard (Nouvelle Énergie),2032,"LIS-SOC-01, LIS-ECO-03, LIS-ECO-03b, LIS-RET-01",15.375,0.294,3.653,24320.81,14.68,15.456,0.289,3.56,24535.299
-Lisnard (Nouvelle Énergie)|2037,Lisnard (Nouvelle Énergie),2037,"LIS-SOC-01, LIS-ECO-03, LIS-ECO-03b, LIS-RET-01",15.452,0.294,3.669,24464.25,11.05,15.653,0.29,3.579,24674.846
-Lisnard (Nouvelle Énergie)|2050,Lisnard (Nouvelle Énergie),2050,"LIS-SOC-01, LIS-ECO-03, LIS-ECO-03b, LIS-RET-01",15.378,0.293,3.636,24472.65,4.69,15.338,0.289,3.54,24582.339
-Mélenchon (La France insoumise)|2029,Mélenchon (La France insoumise),2029,"LFI-PRE-04, LFI-PRE-03, LFI-PRE-01, LFI-REC-01, LFI-REC-02, LFI-PRE-02, LFI-SAL-01, LFI-RET-04",0.0,0.246,2.789,25241.26,-49.81,15.92,0.291,3.63,24207.508
-Mélenchon (La France insoumise)|2032,Mélenchon (La France insoumise),2032,"LFI-PRE-04, LFI-PRE-03, LFI-PRE-01, LFI-REC-01, LFI-REC-02, LFI-PRE-02, LFI-SAL-01, LFI-RET-04",0.0,0.246,2.768,25040.398,-55.2,16.068,0.293,3.688,23999.573
-Mélenchon (La France insoumise)|2037,Mélenchon (La France insoumise),2037,"LFI-PRE-04, LFI-PRE-03, LFI-PRE-01, LFI-REC-01, LFI-REC-02, LFI-PRE-02, LFI-SAL-01, LFI-RET-04",0.0,0.247,2.752,24839.609,-58.41,16.213,0.295,3.726,23753.582
-Mélenchon (La France insoumise)|2050,Mélenchon (La France insoumise),2050,"LFI-PRE-04, LFI-PRE-03, LFI-PRE-01, LFI-REC-01, LFI-REC-02, LFI-PRE-02, LFI-SAL-01, LFI-RET-04",0.0,0.245,2.692,24266.963,-59.75,16.11,0.296,3.721,23180.878
-Philippe (Horizons)|2029,Philippe (Horizons),2029,"PHI-FIS-02, PHI-SOC-01, PHI-SOC-06",14.567,0.286,3.484,24407.504,-6.97,15.75,0.29,3.59,24390.693
-Philippe (Horizons)|2032,Philippe (Horizons),2032,"PHI-FIS-02, PHI-SOC-01, PHI-SOC-06",14.65,0.287,3.504,24380.094,-6.75,15.794,0.291,3.61,24371.827
-Philippe (Horizons)|2037,Philippe (Horizons),2037,"PHI-FIS-02, PHI-SOC-01, PHI-SOC-06",14.801,0.288,3.532,24417.928,-6.45,15.867,0.292,3.617,24380.125
-Philippe (Horizons)|2050,Philippe (Horizons),2050,"PHI-FIS-02, PHI-SOC-01, PHI-SOC-06",14.819,0.287,3.512,24227.951,-5.77,15.635,0.291,3.583,24201.718
-Retailleau (Les Républicains)|2029,Retailleau (Les Républicains),2029,"RET-RET-02, RET-EMP-01, RET-EMP-02, RET-IMM-03",16.299,0.298,3.769,24360.088,9.16,15.758,0.29,3.593,24384.404
-Retailleau (Les Républicains)|2032,Retailleau (Les Républicains),2032,"RET-RET-02, RET-EMP-01, RET-EMP-02, RET-IMM-03",16.325,0.299,3.784,24315.12,8.97,15.82,0.291,3.611,24359.102
-Retailleau (Les Républicains)|2037,Retailleau (Les Républicains),2037,"RET-RET-02, RET-EMP-01, RET-EMP-02, RET-IMM-03",16.319,0.299,3.784,24345.782,8.61,15.879,0.292,3.621,24380.125
-Retailleau (Les Républicains)|2050,Retailleau (Les Républicains),2050,"RET-RET-02, RET-EMP-01, RET-EMP-02, RET-IMM-03",16.037,0.298,3.732,24183.335,7.54,15.701,0.291,3.586,24280.57
-Roussel (Parti communiste français)|2029,Roussel (Parti communiste français),2029,"PCF-RET-03, PCF-LOG-02, PCF-PRE-01, PCF-FIS-03, PCF-SAL-01, PCF-RET-05, PCF-RET-02",15.347,0.286,3.636,25425.605,-14.62,15.797,0.291,3.617,24285.315
-Roussel (Parti communiste français)|2032,Roussel (Parti communiste français),2032,"PCF-RET-03, PCF-LOG-02, PCF-PRE-01, PCF-FIS-03, PCF-SAL-01, PCF-RET-05, PCF-RET-02",15.702,0.289,3.702,25377.271,-21.34,15.896,0.292,3.652,24116.27
-Roussel (Parti communiste français)|2037,Roussel (Parti communiste français),2037,"PCF-RET-03, PCF-LOG-02, PCF-PRE-01, PCF-FIS-03, PCF-SAL-01, PCF-RET-05, PCF-RET-02",15.989,0.29,3.738,25558.635,-34.6,16.115,0.294,3.686,24097.575
-Roussel (Parti communiste français)|2050,Roussel (Parti communiste français),2050,"PCF-RET-03, PCF-LOG-02, PCF-PRE-01, PCF-FIS-03, PCF-SAL-01, PCF-RET-05, PCF-RET-02",15.875,0.289,3.688,25436.676,-41.86,15.911,0.294,3.676,23734.705
-Statu quo|2029,Statu quo,2029,,15.777,0.29,3.595,24380.125,0.0,15.777,0.29,3.595,24380.125
-Statu quo|2032,Statu quo,2032,,15.848,0.291,3.617,24296.35,0.0,15.848,0.291,3.617,24296.35
-Statu quo|2037,Statu quo,2037,,15.936,0.292,3.633,24307.123,0.0,15.936,0.292,3.633,24307.123
-Statu quo|2050,Statu quo,2050,,15.78,0.292,3.608,24122.32,0.0,15.78,0.292,3.608,24122.32
-Tondelier (Les Écologistes)|2029,Tondelier (Les Écologistes),2029,"REC-10, REC-11, REC-13, COT-04, REC-20/21, PRE-11, PRE-12, PRE-13, PRE-10, PRE-01, RET-03, RET-04",14.293,0.28,3.375,24544.873,6.22,16.117,0.292,3.665,24123.228
-Tondelier (Les Écologistes)|2032,Tondelier (Les Écologistes),2032,"REC-10, REC-11, REC-13, COT-04, REC-20/21, PRE-11, PRE-12, PRE-13, PRE-10, PRE-01, RET-03, RET-04",14.487,0.281,3.401,24400.159,5.72,16.296,0.294,3.706,23979.039
-Tondelier (Les Écologistes)|2037,Tondelier (Les Écologistes),2037,"REC-10, REC-11, REC-13, COT-04, REC-20/21, PRE-11, PRE-12, PRE-13, PRE-10, PRE-01, RET-03, RET-04",14.6,0.283,3.444,24280.756,4.41,16.32,0.295,3.729,23800.295
-Tondelier (Les Écologistes)|2050,Tondelier (Les Écologistes),2050,"REC-10, REC-11, REC-13, COT-04, REC-20/21, PRE-11, PRE-12, PRE-13, PRE-10, PRE-01, RET-03, RET-04",14.706,0.284,3.455,23954.365,2.22,16.189,0.295,3.715,23426.888
-Zemmour (Reconquête)|2029,Zemmour (Reconquête),2029,"ZEM-RET-01, ZEM-IMM-04, ZEM-KNA-04, ZEM-FIS-01",16.836,0.298,3.726,25628.783,-44.28,15.546,0.289,3.555,24504.513
-Zemmour (Reconquête)|2032,Zemmour (Reconquête),2032,"ZEM-RET-01, ZEM-IMM-04, ZEM-KNA-04, ZEM-FIS-01",16.908,0.299,3.764,25601.41,-44.11,15.628,0.29,3.569,24501.932
-Zemmour (Reconquête)|2037,Zemmour (Reconquête),2037,"ZEM-RET-01, ZEM-IMM-04, ZEM-KNA-04, ZEM-FIS-01",16.926,0.3,3.782,25657.795,-44.06,15.699,0.291,3.592,24586.159
-Zemmour (Reconquête)|2050,Zemmour (Reconquête),2050,"ZEM-RET-01, ZEM-IMM-04, ZEM-KNA-04, ZEM-FIS-01",16.479,0.3,3.744,25492.299,-42.79,15.481,0.29,3.555,24568.208
+cle,programme,annee,mesures_codees,pauvrete_pct,gini,d9_d1,mediane,budget_mesures_md,pauvrete_pct_sq,gini_sq,d9_d1_sq,mediane_sq,couverture_menages_pct,deciles_publies
+Arthaud (Lutte ouvrière) — partiel|2029,Arthaud (Lutte ouvrière) — partiel,2029,"ART-FAM-01, ART-ECO-01",17.397,0.279,3.622,26824.049,93.34,16.396,0.293,3.715,24008.485,66.7,0
+Arthaud (Lutte ouvrière) — partiel|2032,Arthaud (Lutte ouvrière) — partiel,2032,"ART-FAM-01, ART-ECO-01",17.509,0.28,3.638,26783.154,93.84,16.419,0.294,3.703,23992.13,66.7,0
+Arthaud (Lutte ouvrière) — partiel|2037,Arthaud (Lutte ouvrière) — partiel,2037,"ART-FAM-01, ART-ECO-01",17.733,0.281,3.666,26742.205,93.7,16.534,0.295,3.723,23983.445,66.7,0
+Arthaud (Lutte ouvrière) — partiel|2050,Arthaud (Lutte ouvrière) — partiel,2050,"ART-FAM-01, ART-ECO-01",17.672,0.283,3.655,26397.182,90.21,16.254,0.295,3.697,23684.764,66.7,0
+Attal (Renaissance)|2029,Attal (Renaissance),2029,ATT-ECO-01,16.136,0.292,3.66,25274.795,-36.74,15.649,0.289,3.57,24449.823,83.8,1
+Attal (Renaissance)|2032,Attal (Renaissance),2032,ATT-ECO-01,16.193,0.293,3.67,25214.552,-36.75,15.687,0.29,3.595,24400.393,83.8,1
+Attal (Renaissance)|2037,Attal (Renaissance),2037,ATT-ECO-01,16.241,0.294,3.683,25186.118,-36.77,15.834,0.291,3.607,24401.726,83.8,1
+Attal (Renaissance)|2050,Attal (Renaissance),2050,ATT-ECO-01,16.013,0.294,3.664,24904.002,-36.19,15.644,0.291,3.585,24245.282,83.8,1
+Bertrand (Nous France)|2029,Bertrand (Nous France),2029,"BER-RET-02, BER-FIS-01, BER-FIS-02",15.759,0.291,3.619,24529.178,-8.35,15.744,0.29,3.594,24380.125,65.3,0
+Bertrand (Nous France)|2032,Bertrand (Nous France),2032,"BER-RET-02, BER-FIS-01, BER-FIS-02",15.918,0.292,3.636,24480.443,-8.35,15.873,0.291,3.612,24332.835,65.3,0
+Bertrand (Nous France)|2037,Bertrand (Nous France),2037,"BER-RET-02, BER-FIS-01, BER-FIS-02",15.969,0.292,3.647,24492.005,-8.43,15.95,0.292,3.63,24360.869,65.3,0
+Bertrand (Nous France)|2050,Bertrand (Nous France),2050,"BER-RET-02, BER-FIS-01, BER-FIS-02",15.915,0.293,3.626,24304.036,-8.2,15.731,0.292,3.603,24200.242,65.3,0
+Glucksmann (Place publique)|2029,Glucksmann (Place publique),2029,"GLU-FIS-01b, GLU-ECO-01",15.728,0.289,3.594,24712.777,4.32,15.879,0.291,3.619,24280.981,28.6,0
+Glucksmann (Place publique)|2032,Glucksmann (Place publique),2032,"GLU-FIS-01b, GLU-ECO-01",15.857,0.29,3.62,24531.24,4.3,15.981,0.292,3.657,24115.762,28.6,0
+Glucksmann (Place publique)|2037,Glucksmann (Place publique),2037,"GLU-FIS-01b, GLU-ECO-01",16.074,0.292,3.646,24474.943,4.26,16.12,0.294,3.692,24082.018,28.6,0
+Glucksmann (Place publique)|2050,Glucksmann (Place publique),2050,"GLU-FIS-01b, GLU-ECO-01",15.936,0.292,3.648,24162.465,3.84,15.959,0.294,3.67,23800.295,28.6,0
+Le Pen (Rassemblement national) — partiel|2029,Le Pen (Rassemblement national) — partiel,2029,"RN-RET-03, RN-FIS-03, RN-FAM-01, RN-IMM-01",15.488,0.29,3.554,24523.921,-6.37,15.787,0.29,3.601,24351.728,15.3,0
+Le Pen (Rassemblement national) — partiel|2032,Le Pen (Rassemblement national) — partiel,2032,"RN-RET-03, RN-FIS-03, RN-FAM-01, RN-IMM-01",15.631,0.292,3.589,24393.104,-6.23,15.856,0.292,3.622,24238.914,15.3,0
+Le Pen (Rassemblement national) — partiel|2037,Le Pen (Rassemblement national) — partiel,2037,"RN-RET-03, RN-FIS-03, RN-FAM-01, RN-IMM-01",15.842,0.293,3.613,24377.674,-6.38,15.996,0.293,3.655,24210.523,15.3,0
+Le Pen (Rassemblement national) — partiel|2050,Le Pen (Rassemblement national) — partiel,2050,"RN-RET-03, RN-FIS-03, RN-FAM-01, RN-IMM-01",15.648,0.292,3.6,24143.542,-5.78,15.83,0.292,3.626,24042.4,15.3,0
+Lisnard (Nouvelle Énergie)|2029,Lisnard (Nouvelle Énergie),2029,"LIS-SOC-01, LIS-ECO-03, LIS-ECO-03b, LIS-RET-01",15.511,0.294,3.68,24201.488,15.32,15.684,0.29,3.576,24430.928,11.2,0
+Lisnard (Nouvelle Énergie)|2032,Lisnard (Nouvelle Énergie),2032,"LIS-SOC-01, LIS-ECO-03, LIS-ECO-03b, LIS-RET-01",15.375,0.294,3.653,24320.81,14.68,15.456,0.289,3.56,24535.299,11.2,0
+Lisnard (Nouvelle Énergie)|2037,Lisnard (Nouvelle Énergie),2037,"LIS-SOC-01, LIS-ECO-03, LIS-ECO-03b, LIS-RET-01",15.452,0.294,3.669,24464.25,11.05,15.653,0.29,3.579,24674.846,11.2,0
+Lisnard (Nouvelle Énergie)|2050,Lisnard (Nouvelle Énergie),2050,"LIS-SOC-01, LIS-ECO-03, LIS-ECO-03b, LIS-RET-01",15.378,0.293,3.636,24472.65,4.69,15.338,0.289,3.54,24582.339,11.2,0
+Mélenchon (La France insoumise)|2029,Mélenchon (La France insoumise),2029,"LFI-PRE-04, LFI-PRE-03, LFI-PRE-01, LFI-REC-01, LFI-REC-02, LFI-PRE-02, LFI-SAL-01, LFI-RET-04",0.0,0.246,2.789,25241.26,-49.81,15.92,0.291,3.63,24207.508,38.6,0
+Mélenchon (La France insoumise)|2032,Mélenchon (La France insoumise),2032,"LFI-PRE-04, LFI-PRE-03, LFI-PRE-01, LFI-REC-01, LFI-REC-02, LFI-PRE-02, LFI-SAL-01, LFI-RET-04",0.0,0.246,2.768,25040.398,-55.2,16.068,0.293,3.688,23999.573,38.6,0
+Mélenchon (La France insoumise)|2037,Mélenchon (La France insoumise),2037,"LFI-PRE-04, LFI-PRE-03, LFI-PRE-01, LFI-REC-01, LFI-REC-02, LFI-PRE-02, LFI-SAL-01, LFI-RET-04",0.0,0.247,2.752,24839.609,-58.41,16.213,0.295,3.726,23753.582,38.6,0
+Mélenchon (La France insoumise)|2050,Mélenchon (La France insoumise),2050,"LFI-PRE-04, LFI-PRE-03, LFI-PRE-01, LFI-REC-01, LFI-REC-02, LFI-PRE-02, LFI-SAL-01, LFI-RET-04",0.0,0.245,2.692,24266.963,-59.75,16.11,0.296,3.721,23180.878,38.6,0
+Philippe (Horizons)|2029,Philippe (Horizons),2029,"PHI-FIS-02, PHI-SOC-01, PHI-SOC-06",14.567,0.286,3.484,24407.504,-6.97,15.75,0.29,3.59,24390.693,37.7,0
+Philippe (Horizons)|2032,Philippe (Horizons),2032,"PHI-FIS-02, PHI-SOC-01, PHI-SOC-06",14.65,0.287,3.504,24380.094,-6.75,15.794,0.291,3.61,24371.827,37.7,0
+Philippe (Horizons)|2037,Philippe (Horizons),2037,"PHI-FIS-02, PHI-SOC-01, PHI-SOC-06",14.801,0.288,3.532,24417.928,-6.45,15.867,0.292,3.617,24380.125,37.7,0
+Philippe (Horizons)|2050,Philippe (Horizons),2050,"PHI-FIS-02, PHI-SOC-01, PHI-SOC-06",14.819,0.287,3.512,24227.951,-5.77,15.635,0.291,3.583,24201.718,37.7,0
+Retailleau (Les Républicains)|2029,Retailleau (Les Républicains),2029,"RET-RET-02, RET-EMP-01, RET-EMP-02, RET-IMM-03",16.299,0.298,3.769,24360.088,9.16,15.758,0.29,3.593,24384.404,26.7,0
+Retailleau (Les Républicains)|2032,Retailleau (Les Républicains),2032,"RET-RET-02, RET-EMP-01, RET-EMP-02, RET-IMM-03",16.325,0.299,3.784,24315.12,8.97,15.82,0.291,3.611,24359.102,26.7,0
+Retailleau (Les Républicains)|2037,Retailleau (Les Républicains),2037,"RET-RET-02, RET-EMP-01, RET-EMP-02, RET-IMM-03",16.319,0.299,3.784,24345.782,8.61,15.879,0.292,3.621,24380.125,26.7,0
+Retailleau (Les Républicains)|2050,Retailleau (Les Républicains),2050,"RET-RET-02, RET-EMP-01, RET-EMP-02, RET-IMM-03",16.037,0.298,3.732,24183.335,7.54,15.701,0.291,3.586,24280.57,26.7,0
+Roussel (Parti communiste français)|2029,Roussel (Parti communiste français),2029,"PCF-RET-03, PCF-LOG-02, PCF-PRE-01, PCF-FIS-03, PCF-SAL-01, PCF-RET-05, PCF-RET-02",15.347,0.286,3.636,25425.605,-14.62,15.797,0.291,3.617,24285.315,31.1,0
+Roussel (Parti communiste français)|2032,Roussel (Parti communiste français),2032,"PCF-RET-03, PCF-LOG-02, PCF-PRE-01, PCF-FIS-03, PCF-SAL-01, PCF-RET-05, PCF-RET-02",15.702,0.289,3.702,25377.271,-21.34,15.896,0.292,3.652,24116.27,31.1,0
+Roussel (Parti communiste français)|2037,Roussel (Parti communiste français),2037,"PCF-RET-03, PCF-LOG-02, PCF-PRE-01, PCF-FIS-03, PCF-SAL-01, PCF-RET-05, PCF-RET-02",15.989,0.29,3.738,25558.635,-34.6,16.115,0.294,3.686,24097.575,31.1,0
+Roussel (Parti communiste français)|2050,Roussel (Parti communiste français),2050,"PCF-RET-03, PCF-LOG-02, PCF-PRE-01, PCF-FIS-03, PCF-SAL-01, PCF-RET-05, PCF-RET-02",15.875,0.289,3.688,25436.676,-41.86,15.911,0.294,3.676,23734.705,31.1,0
+Statu quo|2029,Statu quo,2029,,15.777,0.29,3.595,24380.125,0.0,15.777,0.29,3.595,24380.125,100.0,1
+Statu quo|2032,Statu quo,2032,,15.848,0.291,3.617,24296.35,0.0,15.848,0.291,3.617,24296.35,100.0,1
+Statu quo|2037,Statu quo,2037,,15.936,0.292,3.633,24307.123,0.0,15.936,0.292,3.633,24307.123,100.0,1
+Statu quo|2050,Statu quo,2050,,15.78,0.292,3.608,24122.32,0.0,15.78,0.292,3.608,24122.32,100.0,1
+Tondelier (Les Écologistes)|2029,Tondelier (Les Écologistes),2029,"REC-10, REC-11, REC-13, COT-04, REC-20/21, PRE-11, PRE-12, PRE-13, PRE-10, PRE-01, RET-03, RET-04",14.293,0.28,3.375,24544.873,6.22,16.117,0.292,3.665,24123.228,34.8,0
+Tondelier (Les Écologistes)|2032,Tondelier (Les Écologistes),2032,"REC-10, REC-11, REC-13, COT-04, REC-20/21, PRE-11, PRE-12, PRE-13, PRE-10, PRE-01, RET-03, RET-04",14.487,0.281,3.401,24400.159,5.72,16.296,0.294,3.706,23979.039,34.8,0
+Tondelier (Les Écologistes)|2037,Tondelier (Les Écologistes),2037,"REC-10, REC-11, REC-13, COT-04, REC-20/21, PRE-11, PRE-12, PRE-13, PRE-10, PRE-01, RET-03, RET-04",14.6,0.283,3.444,24280.756,4.41,16.32,0.295,3.729,23800.295,34.8,0
+Tondelier (Les Écologistes)|2050,Tondelier (Les Écologistes),2050,"REC-10, REC-11, REC-13, COT-04, REC-20/21, PRE-11, PRE-12, PRE-13, PRE-10, PRE-01, RET-03, RET-04",14.706,0.284,3.455,23954.365,2.22,16.189,0.295,3.715,23426.888,34.8,0
+Zemmour (Reconquête)|2029,Zemmour (Reconquête),2029,"ZEM-RET-01, ZEM-IMM-04, ZEM-KNA-04, ZEM-FIS-01",16.836,0.298,3.726,25628.783,-44.28,15.546,0.289,3.555,24504.513,80.3,1
+Zemmour (Reconquête)|2032,Zemmour (Reconquête),2032,"ZEM-RET-01, ZEM-IMM-04, ZEM-KNA-04, ZEM-FIS-01",16.908,0.299,3.764,25601.41,-44.11,15.628,0.29,3.569,24501.932,80.3,1
+Zemmour (Reconquête)|2037,Zemmour (Reconquête),2037,"ZEM-RET-01, ZEM-IMM-04, ZEM-KNA-04, ZEM-FIS-01",16.926,0.3,3.782,25657.795,-44.06,15.699,0.291,3.592,24586.159,80.3,1
+Zemmour (Reconquête)|2050,Zemmour (Reconquête),2050,"ZEM-RET-01, ZEM-IMM-04, ZEM-KNA-04, ZEM-FIS-01",16.479,0.3,3.744,25492.299,-42.79,15.481,0.29,3.555,24568.208,80.3,1

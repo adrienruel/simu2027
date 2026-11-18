@@ -129,6 +129,12 @@ ecologie_options:
 
 # --- Publication du comparateur (roadmap du comparateur, phase 1, 16/11/2026) ---------------------------------
 publication:
+  seuil_couverture_deciles:
+    valeur: 0.8
+    unite: taux
+    statut: DECISION
+    note: "Roadmap du comparateur, phase 4.2 (18/11/2026) : les déciles de niveau de vie d'un programme ne sont publiés que si les mesures codées dans la microsimulation couvrent au moins cette part du budget « ménages » du programme (outils/couverture_micro.py : impôts et cotisations des ménages, transferts aux ménages, en valeur absolue, scénario prudent, 2032). En dessous, la pauvreté et le Gini restent publiés avec leur couverture, les déciles non."
+  annee_couverture_deciles: {valeur: 2032, unite: annee, statut: DECISION, note: "Année où se mesure la couverture du budget « ménages » (phase 4.2), la même que la synthèse du comparateur."}
   seuil_dette_plausible:
     valeur: 200
     unite: pourcent

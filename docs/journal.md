@@ -1742,3 +1742,46 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   - À vérifier : la charge d'intérêts de 91 Md€ en 2027 (`statu_quo.charge_interets_base`) est attribuée aux administrations publiques, mais une source l'attribue au seul budget de l'État.
   - Archivage des tableaux sources : pas fait (téléchargement impossible depuis l'environnement de travail).
 - **Divers** : `outils/c1_inventaire.py` ne charge plus les paramètres d'Écologie de droite pour l'inventaire commun (résultats identiques).
+
+## 18/11/2026 — Phase L (roadmap, phase 4) : modèle
+
+- **4.1 Dépenses sensibles au chômage du programme** (`docs/depenses_chomage.md`).
+  - Les blocs chômage et pauvreté suivent les chômeurs du programme, et non plus ceux du statu quo. Le prix est
+    `emploi.allocation_chomeur_evitee`, partagé à 70/30 entre l'assurance chômage et le RSA.
+  - L'allocation sort de la valeur d'un emploi des canaux, pour ne pas être comptée deux fois.
+  - Restent comptés par leur propre mesure : les canaux en « * », les seniors et la démographie. Les postes publics
+    sont toujours comptés.
+  - Corrige trois défauts : la conjoncture, l'offre et les taux n'avaient pas d'allocation ; l'éviction était
+    comptée, mais pas les postes publics eux-mêmes ; le plancher du chômage n'était pas suivi par l'allocation.
+  - Déficit 2037 au prudent :
+    - Arthaud 16,82 → 16,53 %, Roussel 30,06 → 29,76 %, Mélenchon 28,04 → 27,85 %, Tondelier 13,32 → 13,20 % ;
+    - Lisnard 14,14 → 14,03 % ;
+    - Retailleau 10,20 → 10,24 %, Le Pen 13,23 → 13,26 % ;
+    - les autres bougent de moins de 0,07 point.
+  - Nouveau paramètre DÉCISION `emploi.depenses_chomage_programme` (false : le calcul d'avant). Comptes publiés :
+    `depenses_chomage_programme`. Tests : `tests/test_depenses_chomage.py`, identité de `tests/test_proprietes.py`
+    complétée.
+  - À décider : la prime d'activité des emplois en plus, et le coût moyen de la démographie (22 800 € par chômeur)
+    contre le coût marginal du reste du modèle (9 000 €).
+- **4.2 Micro** (`docs/microsimulation.md`).
+  - Déciles publiés seulement si la micro couvre au moins 80 % du budget « ménages » du programme
+    (`publication.seuil_couverture_deciles`, DÉCISION ; `outils/couverture_micro.py`,
+    `sorties/comparaison_couverture_micro.csv`). Passent seulement Attal (84 %) et Zemmour (80 %).
+  - Population synthétique : plus-values mobilières (15 Md€, France Stratégie) et apprentis (1 017 500, Dares ;
+    grille légale de rémunération ; marge de calage), avec une graine séparée. Le code est vérifié sans OpenFisca.
+    La population et la micro sont **à régénérer avec OpenFisca** sur le poste d'Adrien : l'environnement de travail
+    n'a pas OpenFisca, et les installations y sont bloquées.
+  - ERFS : demande d'accès au CASD à faire par Adrien.
+- **4.3 Des entreprises aux revenus des ménages** (`docs/entreprises.md`, `moteur/incidence_entreprises.py`).
+  - Premier lot : le montant laissé ou pris aux entreprises (instrument `capital_entreprises` et son retour d'IS)
+    est partagé entre salaires (50 %, Fuest, Peichl et Siegloch 2018), prix (0) et actionnaires.
+  - Il est réparti par décile de revenu initial par UC (`sorties/comparaison_incidence_entreprises.csv`), sans
+    effet sur le solde (`retour_budget` : DÉCISION à prendre).
+- **Sorties régénérées** : exports du comparateur, variantes de la dette, poids des lectures, économies, variante
+  du fonds, statu quo, inventaire C1, poids des sources.
+  - Monte Carlo recalculé de zéro : 600 tirages par borne, aucun écarté ; les anciens tirages ont été retirés, car
+    la reprise les aurait gardés.
+  - Philippe fait mieux que le statu quo dans 32 à 47 % des tirages (avant : 36 à 47 %). Avec son fonds compté dans
+    les administrations publiques : 54 à 72 % (avant : 55 à 75 %). Ses agents non remplacés coûtent désormais leur
+    allocation.
+  - La micro (déciles, vieillissement) reste antérieure au manifeste.
