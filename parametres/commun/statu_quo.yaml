@@ -10,6 +10,8 @@
 statu_quo:
   # --- Point de départ (comptes de 2027, PLF 2027) ---------------------------------------------------------
   depense_publique_base:
+    url: "https://www.tresor.economie.gouv.fr/Articles/2026/10/06/le-rapport-economique-social-et-financier-resf-2027-est-publie"
+    page: "RESF 2027 (PLF 2027) : dépense publique hors crédits d'impôt en 2026 et 2027"
     valeur: 0.569
     unite: taux
     statut: SOURCE
@@ -33,6 +35,8 @@ statu_quo:
 
   # --- Retraites (système actuel, toutes générations) -----------------------------------------------------
   retraites_part_pib_base:
+    url: "https://www.cor-retraites.fr/sites/default/files/2026-06/RA_Part2_Chap1.pdf"
+    page: "Rapport annuel du COR, juin 2026, partie 2, chapitre 1 : dépenses de retraite 14,1 % du PIB en 2025 (422,2 Md€), 15,3 % en 2070"
     valeur: 0.141
     unite: taux
     statut: SOURCE
@@ -52,6 +56,8 @@ statu_quo:
     note: "Baisse annuelle de la pension liquidée rapportée au salaire décalé, à règles inchangées (rendement des points Agirc-Arrco dont la valeur de service suit les prix, décote et durée requise de la réforme de 2023, carrières plus heurtées). Seul paramètre calé : il porte aussi l'écart d'emploi avec le COR (le COR fait monter l'emploi des seniors et ramène le chômage à 7 % ; ici les taux d'emploi par âge restent ceux de 2025, donc le PIB est plus bas et la part des retraites un peu plus haute à pension égale)."
   # --- Recettes impôt par impôt ---------------------------------------------------------------------------
   recettes_non_fiscales_part_pib:
+    url: "https://www.insee.fr/fr/statistiques/8997691"
+    page: "Insee Première n° 2106 (mai 2026), Le compte des administrations publiques en 2025"
     valeur: 0.063
     unite: taux
     statut: SOURCE
@@ -141,6 +147,8 @@ statu_quo:
     note: "DÉCISION d'Adrien du 04/11/2026 : prestations familiales, aides au logement, RSA, prime d'activité (barème compris), AAH et invalidité revalorisées sur les salaires, pour garder leur niveau par rapport aux revenus d'activité (la loi les revalorise sur les prix ; sur 45 ans elles perdraient environ un quart par rapport aux salaires, ce qui n'arriverait pas sans revalorisations exceptionnelles). Variante « prix » : la loi à la lettre (environ 0,9 point de PIB de dépenses en moins en 2060). Les barèmes des prélèvements sur les pensions restent sur les prix (statu_quo.baremes_retraites)."
 
   prestations_familiales:
+    url: "https://www.assemblee-nationale.fr/dyn/contenu/visualisation/922273/file/PLACSS%202024%20Annexe%201%20-%20REPSS%20Famille%202025.pdf"
+    page: "REPSS Famille, édition 2025 (annexe 1 du PLACSS 2024), 1.5.2 : masses de prestations versées par la branche famille"
     valeur: 34.7
     unite: md_eur
     annee_euros: 2026

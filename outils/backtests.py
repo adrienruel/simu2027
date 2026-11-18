@@ -151,6 +151,26 @@ def assurance_chomage_2019(p: Parametres) -> dict:
     return out
 
 
+def ampleur_assurance_chomage(p: Parametres, annee: int = 2032) -> dict:
+    """Roadmap 8.3 (18/11/2026) : l'ampleur de chaque réforme de l'assurance chômage, mesurée par ses économies de
+    législation (mesures du bloc chômage, prudent), rapportée à celle de 2019-2021 (2,3 Md€ ex ante), contre sa
+    lecture de chômage en moins rapportée à l'effet de 2019-2021 (0,13 point). Un rapport proche de 1 : la lecture
+    est proportionnée à l'ampleur de la réforme. Les 2,3 Md€ sont en euros de 2019-2021, les économies des
+    programmes en euros de 2026 à l'économie de 2032 : la comparaison est un ordre de grandeur."""
+    from moteur import noyau
+    ref = assurance_chomage_2019(p)
+    pts_ref, eco_ref = ref["reforme_2019_2021"]["points_de_chomage"], ref["reforme_2019_2021"]["economies_ex_ante_md"]
+    out = {}
+    for nom in ("attal", "philippe", "retailleau", "lisnard"):
+        prog = noyau.charger(nom)
+        eco = -sum(m.valeurs.get(annee, 0.0) for m in prog.mesures(p)["prudent"]
+                   if m.poste == "chomage" and m.nature == "mesure")
+        a = eco / eco_ref
+        lec = ref[nom]["prudent"] / pts_ref
+        out[nom] = {"economies_md": eco, "ampleur": a, "lecture_relative": lec, "rapport": lec / a if a else None}
+    return out
+
+
 if __name__ == "__main__":
     p = Parametres()
     print("CICE :", {s: {k: round(v / 1e3) if "emplois" in k else round(v, 2) for k, v in x.items()} for s, x in cice(p).items()})
@@ -163,3 +183,5 @@ if __name__ == "__main__":
     ac = assurance_chomage_2019(p)
     print("Assurance chômage 2019-2021 :", {k: round(v, 3) for k, v in ac.pop("reforme_2019_2021").items()})
     print("  lectures des programmes (points de chômage) :", {k: {s: round(x, 2) for s, x in v.items()} for k, v in ac.items()})
+    print("  ampleur des réformes (économies / 2,3 Md€) et lecture rapportée :",
+          {k: {c: round(x, 2) for c, x in v.items()} for k, v in ampleur_assurance_chomage(p).items()})

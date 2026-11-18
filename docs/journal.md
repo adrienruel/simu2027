@@ -1823,3 +1823,37 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - **Sorties régénérées** et Monte Carlo recalculé de zéro (600 tirages par borne).
   - Philippe fait mieux que le statu quo dans 39 à 47 % des tirages (avant la phase M : 32 à 47 %).
   - Avec son fonds compté dans les administrations publiques : 56 à 79 % (avant : 54 à 72 %).
+
+## 18/11/2026 (nuit) — Phase N (roadmap, phases 8 et 9) : validation et publication
+
+- **8.3 Backtest de l'assurance chômage** (`outils/backtests.ampleur_assurance_chomage`, `docs/backtests.md`).
+  - Chaque réforme est rapportée à celle de 2019-2021 (2,3 Md€ d'économies, 0,13 point de chômage).
+  - Les lectures d'Attal, Philippe et Retailleau sont proportionnées à l'ampleur de leurs réformes, à 15-25 % près.
+  - Lisnard suppose 1,7 fois l'effet que justifie sa réforme : c'est la lecture à revoir en premier (≈ 0,07 point au
+    lieu de 0,1).
+- **8.1 Sources** : huit paramètres lourds ont maintenant une adresse et une page.
+  - Retraites (COR, juin 2026), inflation (Banque de France, septembre 2026), dépense publique (RESF 2027),
+    recettes non fiscales (Insee Première n° 2106), profil des salaires par âge (Insee, 2024).
+  - Santé 2024 et scénarios de l'Assurance maladie (audition sur Charges et produits pour 2027), prestations
+    familiales (REPSS Famille 2025).
+  - L'arriéré passe de 166 à 158 paramètres.
+  - Pas trouvé de source primaire en ligne pour le SMIC de Roussel (université d'été du 22/08/2026).
+- **9.2 Veille des programmes** (`outils/veille_programmes.py`, `programmes/veille.yaml`, `tests/test_veille.py`).
+  - Pages de programme et de recensement de chaque candidat. Le texte de la dernière lecture est gardé dans `veille/`.
+  - Le rapport (`veille/rapport.md`) liste les lignes ajoutées et retirées depuis.
+  - À lancer sur un poste qui a accès au web : le shell de l'environnement de travail n'y a pas accès.
+- **9.3 Page publique** (`outils/page_comparateur.py`, `sorties/comparateur.html`, autonome) :
+  - bandeau « À lire avant les chiffres » ;
+  - synthèse classée sur l'écart de solde primaire en 2037, avec fourchettes et probabilités du Monte Carlo ;
+  - courbes du déficit et de la dette jusqu'en 2060 (échelle limitée aux années plausibles, au-delà en gris) ;
+  - mesures les plus lourdes du programme suivi ;
+  - redistribution avec la couverture de la micro (déciles seulement au-dessus du seuil) ;
+  - lectures à valider et paramètres sourcés avec leur lien.
+- **Sorties régénérées** (les notes et adresses des paramètres changent leur empreinte ; aucun résultat ne change).
+  Monte Carlo recalculé de zéro.
+- **Pas fait ici** :
+  - 9.1 (programmes partiels) : une recherche sur les programmes à mener ;
+  - 8.2 : le chiffrage de l'Institut Montaigne est attendu au T1 2027 ;
+  - 8.4 (relecture neutre n° 3) : à confier à un agent qui n'a pas vu le code ;
+  - phase 6 et 7.2 : demandent OpenFisca ;
+  - 7.4 et 7.5 : décisions de modèle.
