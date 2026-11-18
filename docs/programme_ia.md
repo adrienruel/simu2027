@@ -109,7 +109,9 @@ Choix :
 Résultat : 6,29 % en 2032 (prudent), −0,86 point sous le statu quo ; 8,07 % en 2037, −1,44 point ; dette 156 % du
 PIB en 2037 (163 % au statu quo).
 
-Ce que le modèle ne voit pas : il ne compte aucun effet des enseignants, des crèches ou de l'accès aux soins sur
-le niveau des élèves, l'emploi des mères ou la santé (pas de canal sans barème commun). Le « meilleur programme »
+Ce que le modèle ne voit pas (corrigé le 18/11/2026 au soir, détail dans `docs/manques_simulateur.md`) : il
+compte l'effet des enseignants sur les salaires futurs des élèves, mais presque rien avant 2040 (−0,06 point de
+déficit en 2073, prudent), et l'effet des crèches sur les naissances, à peine positif en 2073. Il ne compte rien
+sur l'emploi des mères, sur la santé ni sur la justice. Le « meilleur programme »
 du simulateur est donc d'abord le plus économe : c'est une limite de la mesure, pas un verdict sur ces politiques.
 Le multiplicateur le montre aussi : −7,0 Md€ au solde en 2037, le resserrement freine la croissance.
