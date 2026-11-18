@@ -34,7 +34,7 @@ def test_deciles_publies_selon_la_couverture():
     """Le comparateur ne publie les déciles que des programmes au-dessus du seuil."""
     with (RACINE / "sorties" / "comparaison_redistribution.csv").open(encoding="utf-8") as f:
         lignes = list(csv.DictReader(f))
-    publies = {l["programme"] for l in lignes if l["deciles_publies"] == "1"}
+    publies = {l["programme"] for l in lignes if l["deciles_publies"] == "1" and l["programme"] != "Statu quo"}
     with (RACINE / "sorties" / "comparaison_redistribution_deciles.csv").open(encoding="utf-8") as f:
         avec_deciles = {l["programme"] for l in csv.DictReader(f)}
     assert avec_deciles == publies

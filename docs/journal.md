@@ -1777,6 +1777,11 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
     est partagé entre salaires (50 %, Fuest, Peichl et Siegloch 2018), prix (0) et actionnaires.
   - Il est réparti par décile de revenu initial par UC (`sorties/comparaison_incidence_entreprises.csv`), sans
     effet sur le solde (`retour_budget` : DÉCISION à prendre).
-- **Sorties régénérées** : Monte Carlo recalculé (600 tirages par borne, anciens tirages écartés), exports du
-  comparateur, variantes de la dette, poids des lectures, économies, variante du fonds, statu quo. La micro
-  (déciles, vieillissement) reste antérieure au manifeste.
+- **Sorties régénérées** : exports du comparateur, variantes de la dette, poids des lectures, économies, variante
+  du fonds, statu quo, inventaire C1, poids des sources.
+  - Monte Carlo recalculé de zéro : 600 tirages par borne, aucun écarté ; les anciens tirages ont été retirés, car
+    la reprise les aurait gardés.
+  - Philippe fait mieux que le statu quo dans 32 à 47 % des tirages (avant : 36 à 47 %). Avec son fonds compté dans
+    les administrations publiques : 54 à 72 % (avant : 55 à 75 %). Ses agents non remplacés coûtent désormais leur
+    allocation.
+  - La micro (déciles, vieillissement) reste antérieure au manifeste.

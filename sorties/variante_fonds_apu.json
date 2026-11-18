@@ -9,24 +9,24 @@
     "deplace_md": 0.0
    },
    "2037": {
-    "deficit_publie": 15.92,
-    "deficit_fonds_apu": 15.43,
+    "deficit_publie": 15.94,
+    "deficit_fonds_apu": 15.45,
     "dette_pib_publiee": 208.1,
     "dette_pib_fonds_apu": 205.8,
     "deplace_md": -10.2
    },
    "2050": {
-    "deficit_publie": 44.59,
-    "deficit_fonds_apu": 43.34,
-    "dette_pib_publiee": 529.2,
-    "dette_pib_fonds_apu": 516.8,
+    "deficit_publie": 44.61,
+    "deficit_fonds_apu": 43.36,
+    "dette_pib_publiee": 529.5,
+    "dette_pib_fonds_apu": 517.2,
     "deplace_md": -10.5
    },
    "2073": {
-    "deficit_publie": 249.86,
-    "deficit_fonds_apu": 243.42,
-    "dette_pib_publiee": 3118.1,
-    "dette_pib_fonds_apu": 3037.6,
+    "deficit_publie": 250.0,
+    "deficit_fonds_apu": 243.56,
+    "dette_pib_publiee": 3119.9,
+    "dette_pib_fonds_apu": 3039.3,
     "deplace_md": -9.5
    }
   },
@@ -39,24 +39,24 @@
     "deplace_md": 0.0
    },
    "2037": {
-    "deficit_publie": 11.15,
-    "deficit_fonds_apu": 10.79,
-    "dette_pib_publiee": 174.1,
-    "dette_pib_fonds_apu": 172.3,
+    "deficit_publie": 11.16,
+    "deficit_fonds_apu": 10.8,
+    "dette_pib_publiee": 174.0,
+    "dette_pib_fonds_apu": 172.2,
     "deplace_md": -8.5
    },
    "2050": {
-    "deficit_publie": 27.23,
-    "deficit_fonds_apu": 26.23,
-    "dette_pib_publiee": 344.5,
-    "dette_pib_fonds_apu": 335.2,
+    "deficit_publie": 27.28,
+    "deficit_fonds_apu": 26.27,
+    "dette_pib_publiee": 344.8,
+    "dette_pib_fonds_apu": 335.4,
     "deplace_md": -9.2
    },
    "2073": {
-    "deficit_publie": 127.86,
-    "deficit_fonds_apu": 123.76,
-    "dette_pib_publiee": 1587.1,
-    "dette_pib_fonds_apu": 1536.2,
+    "deficit_publie": 128.07,
+    "deficit_fonds_apu": 123.96,
+    "dette_pib_publiee": 1589.3,
+    "dette_pib_fonds_apu": 1538.3,
     "deplace_md": -9.6
    }
   },
@@ -64,29 +64,29 @@
    "2029": {
     "deficit_publie": 5.98,
     "deficit_fonds_apu": 5.98,
-    "dette_pib_publiee": 128.7,
-    "dette_pib_fonds_apu": 128.7,
+    "dette_pib_publiee": 128.6,
+    "dette_pib_fonds_apu": 128.6,
     "deplace_md": 0.0
    },
    "2037": {
-    "deficit_publie": 8.55,
-    "deficit_fonds_apu": 8.3,
-    "dette_pib_publiee": 156.1,
-    "dette_pib_fonds_apu": 154.8,
+    "deficit_publie": 8.57,
+    "deficit_fonds_apu": 8.32,
+    "dette_pib_publiee": 155.9,
+    "dette_pib_fonds_apu": 154.6,
     "deplace_md": -6.6
    },
    "2050": {
-    "deficit_publie": 14.3,
-    "deficit_fonds_apu": 13.69,
-    "dette_pib_publiee": 236.0,
-    "dette_pib_fonds_apu": 230.4,
+    "deficit_publie": 14.34,
+    "deficit_fonds_apu": 13.73,
+    "dette_pib_publiee": 236.1,
+    "dette_pib_fonds_apu": 230.5,
     "deplace_md": -7.4
    },
    "2073": {
-    "deficit_publie": 65.7,
-    "deficit_fonds_apu": 62.87,
-    "dette_pib_publiee": 815.9,
-    "dette_pib_fonds_apu": 781.8,
+    "deficit_publie": 65.89,
+    "deficit_fonds_apu": 63.05,
+    "dette_pib_publiee": 817.7,
+    "dette_pib_fonds_apu": 783.6,
     "deplace_md": -8.3
    }
   },
@@ -94,29 +94,29 @@
    "2029": {
     "deficit_publie": 5.38,
     "deficit_fonds_apu": 5.38,
-    "dette_pib_publiee": 127.5,
-    "dette_pib_fonds_apu": 127.5,
+    "dette_pib_publiee": 127.4,
+    "dette_pib_fonds_apu": 127.4,
     "deplace_md": 0.0
    },
    "2037": {
-    "deficit_publie": 6.56,
-    "deficit_fonds_apu": 6.39,
-    "dette_pib_publiee": 140.3,
-    "dette_pib_fonds_apu": 139.5,
+    "deficit_publie": 6.6,
+    "deficit_fonds_apu": 6.44,
+    "dette_pib_publiee": 140.4,
+    "dette_pib_fonds_apu": 139.6,
     "deplace_md": -4.5
    },
    "2050": {
-    "deficit_publie": 9.3,
-    "deficit_fonds_apu": 8.98,
-    "dette_pib_publiee": 183.0,
-    "dette_pib_fonds_apu": 179.8,
+    "deficit_publie": 9.38,
+    "deficit_fonds_apu": 9.05,
+    "dette_pib_publiee": 183.7,
+    "dette_pib_fonds_apu": 180.4,
     "deplace_md": -5.1
    },
    "2073": {
-    "deficit_publie": 29.38,
-    "deficit_fonds_apu": 27.51,
-    "dette_pib_publiee": 407.7,
-    "dette_pib_fonds_apu": 389.8,
+    "deficit_publie": 29.8,
+    "deficit_fonds_apu": 27.9,
+    "dette_pib_publiee": 411.4,
+    "dette_pib_fonds_apu": 393.4,
     "deplace_md": -6.1
    }
   }
@@ -131,24 +131,24 @@
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 14.05,
-    "deficit_fonds_apu": 14.05,
-    "dette_pib_publiee": 197.6,
-    "dette_pib_fonds_apu": 197.6,
+    "deficit_publie": 14.09,
+    "deficit_fonds_apu": 14.08,
+    "dette_pib_publiee": 197.7,
+    "dette_pib_fonds_apu": 197.7,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 38.31,
-    "deficit_fonds_apu": 38.27,
-    "dette_pib_publiee": 468.1,
-    "dette_pib_fonds_apu": 467.7,
+    "deficit_publie": 38.4,
+    "deficit_fonds_apu": 38.37,
+    "dette_pib_publiee": 469.0,
+    "dette_pib_fonds_apu": 468.6,
     "deplace_md": -0.5
    },
    "2073": {
-    "deficit_publie": 230.2,
-    "deficit_fonds_apu": 229.94,
-    "dette_pib_publiee": 2857.7,
-    "dette_pib_fonds_apu": 2854.7,
+    "deficit_publie": 230.77,
+    "deficit_fonds_apu": 230.51,
+    "dette_pib_publiee": 2864.8,
+    "dette_pib_fonds_apu": 2861.8,
     "deplace_md": -0.9
    }
   },
@@ -156,89 +156,89 @@
    "2029": {
     "deficit_publie": 6.37,
     "deficit_fonds_apu": 6.37,
-    "dette_pib_publiee": 129.4,
-    "dette_pib_fonds_apu": 129.4,
+    "dette_pib_publiee": 129.3,
+    "dette_pib_fonds_apu": 129.3,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 10.2,
-    "deficit_fonds_apu": 10.19,
+    "deficit_publie": 10.24,
+    "deficit_fonds_apu": 10.23,
     "dette_pib_publiee": 168.1,
     "dette_pib_fonds_apu": 168.1,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 23.74,
-    "deficit_fonds_apu": 23.7,
-    "dette_pib_publiee": 312.0,
-    "dette_pib_fonds_apu": 311.7,
+    "deficit_publie": 23.86,
+    "deficit_fonds_apu": 23.82,
+    "dette_pib_publiee": 312.9,
+    "dette_pib_fonds_apu": 312.6,
     "deplace_md": -0.5
    },
    "2073": {
-    "deficit_publie": 114.94,
-    "deficit_fonds_apu": 114.74,
-    "dette_pib_publiee": 1421.9,
-    "dette_pib_fonds_apu": 1419.6,
+    "deficit_publie": 115.48,
+    "deficit_fonds_apu": 115.27,
+    "dette_pib_publiee": 1428.1,
+    "dette_pib_fonds_apu": 1425.8,
     "deplace_md": -1.1
    }
   },
   "median": {
    "2029": {
-    "deficit_publie": 6.05,
-    "deficit_fonds_apu": 6.05,
-    "dette_pib_publiee": 128.8,
-    "dette_pib_fonds_apu": 128.8,
+    "deficit_publie": 6.06,
+    "deficit_fonds_apu": 6.06,
+    "dette_pib_publiee": 128.7,
+    "dette_pib_fonds_apu": 128.7,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 8.12,
-    "deficit_fonds_apu": 8.11,
-    "dette_pib_publiee": 152.7,
-    "dette_pib_fonds_apu": 152.7,
+    "deficit_publie": 8.17,
+    "deficit_fonds_apu": 8.16,
+    "dette_pib_publiee": 152.6,
+    "dette_pib_fonds_apu": 152.6,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 12.77,
-    "deficit_fonds_apu": 12.74,
-    "dette_pib_publiee": 221.3,
-    "dette_pib_fonds_apu": 221.1,
+    "deficit_publie": 12.88,
+    "deficit_fonds_apu": 12.85,
+    "dette_pib_publiee": 222.1,
+    "dette_pib_fonds_apu": 221.8,
     "deplace_md": -0.6
    },
    "2073": {
-    "deficit_publie": 58.94,
-    "deficit_fonds_apu": 58.75,
-    "dette_pib_publiee": 731.5,
-    "dette_pib_fonds_apu": 729.4,
+    "deficit_publie": 59.51,
+    "deficit_fonds_apu": 59.32,
+    "dette_pib_publiee": 737.8,
+    "dette_pib_fonds_apu": 735.7,
     "deplace_md": -1.3
    }
   },
   "optimiste": {
    "2029": {
-    "deficit_publie": 5.43,
-    "deficit_fonds_apu": 5.43,
-    "dette_pib_publiee": 127.2,
-    "dette_pib_fonds_apu": 127.2,
+    "deficit_publie": 5.45,
+    "deficit_fonds_apu": 5.45,
+    "dette_pib_publiee": 127.1,
+    "dette_pib_fonds_apu": 127.1,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 6.29,
-    "deficit_fonds_apu": 6.28,
-    "dette_pib_publiee": 137.5,
-    "dette_pib_fonds_apu": 137.4,
+    "deficit_publie": 6.38,
+    "deficit_fonds_apu": 6.37,
+    "dette_pib_publiee": 137.7,
+    "dette_pib_fonds_apu": 137.6,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 8.45,
-    "deficit_fonds_apu": 8.43,
-    "dette_pib_publiee": 173.5,
-    "dette_pib_fonds_apu": 173.3,
+    "deficit_publie": 8.63,
+    "deficit_fonds_apu": 8.61,
+    "dette_pib_publiee": 175.1,
+    "dette_pib_fonds_apu": 174.9,
     "deplace_md": -0.6
    },
    "2073": {
-    "deficit_publie": 24.27,
-    "deficit_fonds_apu": 24.09,
-    "dette_pib_publiee": 357.3,
-    "dette_pib_fonds_apu": 355.6,
+    "deficit_publie": 25.18,
+    "deficit_fonds_apu": 25.0,
+    "dette_pib_publiee": 366.1,
+    "dette_pib_fonds_apu": 364.4,
     "deplace_md": -1.4
    }
   }
@@ -253,84 +253,84 @@
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 12.5,
-    "deficit_fonds_apu": 12.49,
+    "deficit_publie": 12.51,
+    "deficit_fonds_apu": 12.51,
     "dette_pib_publiee": 188.5,
-    "dette_pib_fonds_apu": 188.4,
+    "dette_pib_fonds_apu": 188.5,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 33.08,
-    "deficit_fonds_apu": 33.04,
-    "dette_pib_publiee": 415.7,
-    "dette_pib_fonds_apu": 415.4,
+    "deficit_publie": 33.11,
+    "deficit_fonds_apu": 33.07,
+    "dette_pib_publiee": 416.0,
+    "dette_pib_fonds_apu": 415.7,
     "deplace_md": -0.5
    },
    "2073": {
-    "deficit_publie": 192.46,
-    "deficit_fonds_apu": 192.21,
-    "dette_pib_publiee": 2389.2,
-    "dette_pib_fonds_apu": 2386.4,
+    "deficit_publie": 192.62,
+    "deficit_fonds_apu": 192.38,
+    "dette_pib_publiee": 2391.4,
+    "dette_pib_fonds_apu": 2388.6,
     "deplace_md": -0.9
    }
   },
   "prudent": {
    "2029": {
-    "deficit_publie": 6.03,
-    "deficit_fonds_apu": 6.03,
-    "dette_pib_publiee": 128.9,
-    "dette_pib_fonds_apu": 128.9,
+    "deficit_publie": 6.02,
+    "deficit_fonds_apu": 6.02,
+    "dette_pib_publiee": 128.8,
+    "dette_pib_fonds_apu": 128.8,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 9.51,
-    "deficit_fonds_apu": 9.5,
+    "deficit_publie": 9.52,
+    "deficit_fonds_apu": 9.51,
     "dette_pib_publiee": 164.1,
     "dette_pib_fonds_apu": 164.1,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 20.94,
-    "deficit_fonds_apu": 20.9,
-    "dette_pib_publiee": 287.1,
-    "dette_pib_fonds_apu": 286.8,
+    "deficit_publie": 20.98,
+    "deficit_fonds_apu": 20.93,
+    "dette_pib_publiee": 287.4,
+    "dette_pib_fonds_apu": 287.1,
     "deplace_md": -0.5
    },
    "2073": {
-    "deficit_publie": 100.82,
-    "deficit_fonds_apu": 100.62,
-    "dette_pib_publiee": 1247.7,
-    "dette_pib_fonds_apu": 1245.4,
+    "deficit_publie": 100.97,
+    "deficit_fonds_apu": 100.77,
+    "dette_pib_publiee": 1249.5,
+    "dette_pib_fonds_apu": 1247.3,
     "deplace_md": -1.1
    }
   },
   "median": {
    "2029": {
     "deficit_publie": 5.86,
-    "deficit_fonds_apu": 5.86,
+    "deficit_fonds_apu": 5.85,
     "dette_pib_publiee": 128.5,
     "dette_pib_fonds_apu": 128.5,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 8.0,
-    "deficit_fonds_apu": 7.99,
+    "deficit_publie": 8.02,
+    "deficit_fonds_apu": 8.01,
     "dette_pib_publiee": 152.0,
     "dette_pib_fonds_apu": 151.9,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 12.34,
-    "deficit_fonds_apu": 12.31,
-    "dette_pib_publiee": 217.1,
-    "dette_pib_fonds_apu": 216.9,
+    "deficit_publie": 12.37,
+    "deficit_fonds_apu": 12.34,
+    "dette_pib_publiee": 217.4,
+    "dette_pib_fonds_apu": 217.1,
     "deplace_md": -0.6
    },
    "2073": {
-    "deficit_publie": 56.43,
-    "deficit_fonds_apu": 56.23,
-    "dette_pib_publiee": 699.2,
-    "dette_pib_fonds_apu": 697.1,
+    "deficit_publie": 56.58,
+    "deficit_fonds_apu": 56.39,
+    "dette_pib_publiee": 701.0,
+    "dette_pib_fonds_apu": 698.8,
     "deplace_md": -1.3
    }
   },
@@ -343,24 +343,24 @@
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 7.04,
-    "deficit_fonds_apu": 7.04,
+    "deficit_publie": 7.06,
+    "deficit_fonds_apu": 7.05,
     "dette_pib_publiee": 142.8,
     "dette_pib_fonds_apu": 142.8,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 10.13,
-    "deficit_fonds_apu": 10.1,
-    "dette_pib_publiee": 191.0,
-    "dette_pib_fonds_apu": 190.8,
+    "deficit_publie": 10.17,
+    "deficit_fonds_apu": 10.14,
+    "dette_pib_publiee": 191.3,
+    "dette_pib_fonds_apu": 191.1,
     "deplace_md": -0.6
    },
    "2073": {
-    "deficit_publie": 33.75,
-    "deficit_fonds_apu": 33.55,
-    "dette_pib_publiee": 449.5,
-    "dette_pib_fonds_apu": 447.6,
+    "deficit_publie": 33.95,
+    "deficit_fonds_apu": 33.75,
+    "dette_pib_publiee": 451.4,
+    "dette_pib_fonds_apu": 449.6,
     "deplace_md": -1.4
    }
   }
@@ -368,121 +368,121 @@
  "zemmour": {
   "crise": {
    "2029": {
-    "deficit_publie": 9.17,
-    "deficit_fonds_apu": 9.17,
+    "deficit_publie": 9.14,
+    "deficit_fonds_apu": 9.14,
     "dette_pib_publiee": 134.9,
     "dette_pib_fonds_apu": 134.9,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 19.35,
-    "deficit_fonds_apu": 19.34,
+    "deficit_publie": 19.38,
+    "deficit_fonds_apu": 19.37,
     "dette_pib_publiee": 235.7,
-    "dette_pib_fonds_apu": 235.6,
+    "dette_pib_fonds_apu": 235.7,
     "deplace_md": -0.2
    },
    "2050": {
     "deficit_publie": 53.05,
     "deficit_fonds_apu": 53.01,
-    "dette_pib_publiee": 628.9,
-    "dette_pib_fonds_apu": 628.6,
+    "dette_pib_publiee": 629.2,
+    "dette_pib_fonds_apu": 628.9,
     "deplace_md": -0.5
    },
    "2073": {
-    "deficit_publie": 346.86,
-    "deficit_fonds_apu": 346.56,
-    "dette_pib_publiee": 4322.5,
-    "dette_pib_fonds_apu": 4319.1,
+    "deficit_publie": 346.93,
+    "deficit_fonds_apu": 346.64,
+    "dette_pib_publiee": 4323.9,
+    "dette_pib_fonds_apu": 4320.5,
     "deplace_md": -0.9
    }
   },
   "prudent": {
    "2029": {
-    "deficit_publie": 8.1,
-    "deficit_fonds_apu": 8.1,
-    "dette_pib_publiee": 131.3,
-    "dette_pib_fonds_apu": 131.3,
+    "deficit_publie": 8.02,
+    "deficit_fonds_apu": 8.02,
+    "dette_pib_publiee": 131.2,
+    "dette_pib_fonds_apu": 131.2,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 13.65,
-    "deficit_fonds_apu": 13.64,
-    "dette_pib_publiee": 192.7,
-    "dette_pib_fonds_apu": 192.6,
+    "deficit_publie": 13.6,
+    "deficit_fonds_apu": 13.59,
+    "dette_pib_publiee": 192.1,
+    "dette_pib_fonds_apu": 192.1,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 34.51,
-    "deficit_fonds_apu": 34.47,
-    "dette_pib_publiee": 420.5,
-    "dette_pib_fonds_apu": 420.2,
+    "deficit_publie": 34.41,
+    "deficit_fonds_apu": 34.37,
+    "dette_pib_publiee": 419.3,
+    "dette_pib_fonds_apu": 419.0,
     "deplace_md": -0.5
    },
    "2073": {
-    "deficit_publie": 171.82,
-    "deficit_fonds_apu": 171.6,
-    "dette_pib_publiee": 2124.7,
-    "dette_pib_fonds_apu": 2122.3,
+    "deficit_publie": 171.41,
+    "deficit_fonds_apu": 171.2,
+    "dette_pib_publiee": 2119.4,
+    "dette_pib_fonds_apu": 2117.0,
     "deplace_md": -1.1
    }
   },
   "median": {
    "2029": {
-    "deficit_publie": 7.66,
-    "deficit_fonds_apu": 7.66,
-    "dette_pib_publiee": 130.6,
-    "dette_pib_fonds_apu": 130.6,
+    "deficit_publie": 7.59,
+    "deficit_fonds_apu": 7.59,
+    "dette_pib_publiee": 130.4,
+    "dette_pib_fonds_apu": 130.4,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 10.59,
-    "deficit_fonds_apu": 10.59,
-    "dette_pib_publiee": 171.9,
-    "dette_pib_fonds_apu": 171.9,
+    "deficit_publie": 10.56,
+    "deficit_fonds_apu": 10.55,
+    "dette_pib_publiee": 171.3,
+    "dette_pib_fonds_apu": 171.2,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 19.53,
-    "deficit_fonds_apu": 19.49,
-    "dette_pib_publiee": 288.4,
-    "dette_pib_fonds_apu": 288.2,
+    "deficit_publie": 19.45,
+    "deficit_fonds_apu": 19.42,
+    "dette_pib_publiee": 287.4,
+    "dette_pib_fonds_apu": 287.1,
     "deplace_md": -0.6
    },
    "2073": {
-    "deficit_publie": 94.23,
-    "deficit_fonds_apu": 94.03,
-    "dette_pib_publiee": 1160.3,
-    "dette_pib_fonds_apu": 1158.0,
+    "deficit_publie": 93.95,
+    "deficit_fonds_apu": 93.75,
+    "dette_pib_publiee": 1156.2,
+    "dette_pib_fonds_apu": 1154.0,
     "deplace_md": -1.3
    }
   },
   "optimiste": {
    "2029": {
-    "deficit_publie": 6.22,
-    "deficit_fonds_apu": 6.22,
-    "dette_pib_publiee": 126.0,
-    "dette_pib_fonds_apu": 126.0,
+    "deficit_publie": 6.13,
+    "deficit_fonds_apu": 6.12,
+    "dette_pib_publiee": 125.9,
+    "dette_pib_fonds_apu": 125.9,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 7.38,
-    "deficit_fonds_apu": 7.37,
-    "dette_pib_publiee": 144.3,
-    "dette_pib_fonds_apu": 144.2,
+    "deficit_publie": 7.35,
+    "deficit_fonds_apu": 7.35,
+    "dette_pib_publiee": 143.6,
+    "dette_pib_fonds_apu": 143.6,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 10.71,
-    "deficit_fonds_apu": 10.68,
-    "dette_pib_publiee": 198.6,
-    "dette_pib_fonds_apu": 198.4,
+    "deficit_publie": 10.68,
+    "deficit_fonds_apu": 10.66,
+    "dette_pib_publiee": 197.8,
+    "dette_pib_fonds_apu": 197.6,
     "deplace_md": -0.6
    },
    "2073": {
-    "deficit_publie": 38.03,
-    "deficit_fonds_apu": 37.85,
-    "dette_pib_publiee": 496.4,
-    "dette_pib_fonds_apu": 494.5,
+    "deficit_publie": 37.93,
+    "deficit_fonds_apu": 37.75,
+    "dette_pib_publiee": 494.7,
+    "dette_pib_fonds_apu": 492.9,
     "deplace_md": -1.4
    }
   }
@@ -490,121 +490,121 @@
  "le_pen": {
   "crise": {
    "2029": {
-    "deficit_publie": 8.1,
-    "deficit_fonds_apu": 8.1,
+    "deficit_publie": 8.08,
+    "deficit_fonds_apu": 8.08,
     "dette_pib_publiee": 132.6,
     "dette_pib_fonds_apu": 132.6,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 18.06,
-    "deficit_fonds_apu": 18.05,
-    "dette_pib_publiee": 222.2,
-    "dette_pib_fonds_apu": 222.1,
+    "deficit_publie": 18.11,
+    "deficit_fonds_apu": 18.1,
+    "dette_pib_publiee": 222.3,
+    "dette_pib_fonds_apu": 222.2,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 48.85,
-    "deficit_fonds_apu": 48.81,
-    "dette_pib_publiee": 575.8,
-    "dette_pib_fonds_apu": 575.5,
+    "deficit_publie": 48.93,
+    "deficit_fonds_apu": 48.89,
+    "dette_pib_publiee": 576.8,
+    "dette_pib_fonds_apu": 576.4,
     "deplace_md": -0.5
    },
    "2073": {
-    "deficit_publie": 284.15,
-    "deficit_fonds_apu": 283.89,
-    "dette_pib_publiee": 3531.8,
-    "dette_pib_fonds_apu": 3528.7,
+    "deficit_publie": 284.62,
+    "deficit_fonds_apu": 284.35,
+    "dette_pib_publiee": 3537.9,
+    "dette_pib_fonds_apu": 3534.9,
     "deplace_md": -0.9
    }
   },
   "prudent": {
    "2029": {
-    "deficit_publie": 7.5,
-    "deficit_fonds_apu": 7.5,
-    "dette_pib_publiee": 130.9,
-    "dette_pib_fonds_apu": 130.9,
+    "deficit_publie": 7.47,
+    "deficit_fonds_apu": 7.47,
+    "dette_pib_publiee": 130.8,
+    "dette_pib_fonds_apu": 130.8,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 13.23,
-    "deficit_fonds_apu": 13.23,
-    "dette_pib_publiee": 185.9,
-    "dette_pib_fonds_apu": 185.8,
+    "deficit_publie": 13.26,
+    "deficit_fonds_apu": 13.25,
+    "dette_pib_publiee": 185.8,
+    "dette_pib_fonds_apu": 185.7,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 32.52,
-    "deficit_fonds_apu": 32.48,
-    "dette_pib_publiee": 394.4,
-    "dette_pib_fonds_apu": 394.1,
+    "deficit_publie": 32.6,
+    "deficit_fonds_apu": 32.57,
+    "dette_pib_publiee": 395.1,
+    "dette_pib_fonds_apu": 394.8,
     "deplace_md": -0.5
    },
    "2073": {
-    "deficit_publie": 151.79,
-    "deficit_fonds_apu": 151.59,
-    "dette_pib_publiee": 1872.0,
-    "dette_pib_fonds_apu": 1869.7,
+    "deficit_publie": 152.19,
+    "deficit_fonds_apu": 151.98,
+    "dette_pib_publiee": 1876.7,
+    "dette_pib_fonds_apu": 1874.4,
     "deplace_md": -1.1
    }
   },
   "median": {
    "2029": {
-    "deficit_publie": 7.09,
-    "deficit_fonds_apu": 7.09,
-    "dette_pib_publiee": 130.2,
-    "dette_pib_fonds_apu": 130.2,
+    "deficit_publie": 7.06,
+    "deficit_fonds_apu": 7.06,
+    "dette_pib_publiee": 130.1,
+    "dette_pib_fonds_apu": 130.1,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 10.77,
-    "deficit_fonds_apu": 10.76,
-    "dette_pib_publiee": 168.3,
-    "dette_pib_fonds_apu": 168.3,
+    "deficit_publie": 10.78,
+    "deficit_fonds_apu": 10.77,
+    "dette_pib_publiee": 168.1,
+    "dette_pib_fonds_apu": 168.0,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 19.67,
-    "deficit_fonds_apu": 19.63,
-    "dette_pib_publiee": 283.6,
+    "deficit_publie": 19.71,
+    "deficit_fonds_apu": 19.67,
+    "dette_pib_publiee": 283.7,
     "dette_pib_fonds_apu": 283.4,
     "deplace_md": -0.6
    },
    "2073": {
-    "deficit_publie": 90.19,
-    "deficit_fonds_apu": 90.0,
-    "dette_pib_publiee": 1104.4,
-    "dette_pib_fonds_apu": 1102.3,
+    "deficit_publie": 90.38,
+    "deficit_fonds_apu": 90.19,
+    "dette_pib_publiee": 1106.3,
+    "dette_pib_fonds_apu": 1104.2,
     "deplace_md": -1.3
    }
   },
   "optimiste": {
    "2029": {
-    "deficit_publie": 6.54,
-    "deficit_fonds_apu": 6.54,
+    "deficit_publie": 6.52,
+    "deficit_fonds_apu": 6.52,
     "dette_pib_publiee": 129.0,
     "dette_pib_fonds_apu": 129.0,
     "deplace_md": -0.0
    },
    "2037": {
-    "deficit_publie": 9.19,
-    "deficit_fonds_apu": 9.18,
-    "dette_pib_publiee": 155.8,
-    "dette_pib_fonds_apu": 155.7,
+    "deficit_publie": 9.2,
+    "deficit_fonds_apu": 9.19,
+    "dette_pib_publiee": 155.6,
+    "dette_pib_fonds_apu": 155.6,
     "deplace_md": -0.2
    },
    "2050": {
-    "deficit_publie": 14.67,
-    "deficit_fonds_apu": 14.65,
-    "dette_pib_publiee": 236.4,
-    "dette_pib_fonds_apu": 236.2,
+    "deficit_publie": 14.71,
+    "deficit_fonds_apu": 14.68,
+    "dette_pib_publiee": 236.5,
+    "dette_pib_fonds_apu": 236.3,
     "deplace_md": -0.6
    },
    "2073": {
-    "deficit_publie": 57.03,
-    "deficit_fonds_apu": 56.86,
-    "dette_pib_publiee": 709.2,
-    "dette_pib_fonds_apu": 707.3,
+    "deficit_publie": 57.19,
+    "deficit_fonds_apu": 57.01,
+    "dette_pib_publiee": 710.7,
+    "dette_pib_fonds_apu": 708.9,
     "deplace_md": -1.4
    }
   }
