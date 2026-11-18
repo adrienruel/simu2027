@@ -1,0 +1,63 @@
+# « Programme IA » : un programme écrit par Claude, au banc du comparateur (18 novembre 2026)
+
+Programme de test, pour s'amuser : 20 mesures proposées par une IA (Claude), chiffrées avec les mêmes règles que
+les candidats. **Non publié** : absent de `programmes/publies.yaml` (rangé dans `ecartes`), donc hors des sorties,
+de l'incertitude et des tests par défaut, et sans effet sur les autres programmes. Branche : `test/programme-ia`.
+
+```
+python -m moteur.noyau programme_ia
+```
+
+Fichiers : `programmes/programme_ia/` (`mesures.yaml` : la fiche des 20 mesures ; `parametres.yaml` : les montants
+par scénario ; `programme.py` : un `ProgrammeSimple` sans mesure calculée).
+
+## Ce que le programme annonçait, ce que le modèle retient
+
+Le programme annonçait +41,5 Md€ net par an en 2032 et un déficit ramené de 5 % à ≈ 3,6 % du PIB. Deux erreurs :
+
+1. **La règle de dépense (30 Md€ annoncés)** n'est pas reprise, comme pour tous les candidats : elle passe par
+   l'enveloppe commune (`enveloppe_economies`). Le modèle en retient ≈ 8 Md€ en 2037 (prudent), domaine par domaine.
+2. **Le point de départ** : le programme partait de 5 % du PIB comme si le déficit restait stable. Dans le statu quo
+   du modèle, il dérive (7,2 % en 2032 en prudent) : il faut d'abord battre cette dérive.
+
+Les autres gains annoncés (niches, fraude, taxe sur les boissons sucrées) sont aussi pris plus bas, en fourchette.
+
+## Résultats (déficit en % du PIB)
+
+Calcul du 18/11/2026, tous les programmes publiés sur le même noyau.
+
+| Programme | Prudent 2029 | Prudent 2032 | Prudent 2037 | Médian 2029 | Médian 2032 | Médian 2037 |
+|---|---:|---:|---:|---:|---:|---:|
+| **Programme IA (test)** | **5,79** | **6,98** | **9,27** | **5,57** | **6,37** | **7,69** |
+| Statu quo | 5,91 | 7,16 | 9,50 | 5,82 | 6,82 | 8,37 |
+| Bertrand | 6,02 | 7,21 | 9,52 | 5,86 | 6,68 | 8,02 |
+| Retailleau | 6,37 | 7,57 | 10,24 | 6,06 | 6,75 | 8,17 |
+| Philippe | 6,39 | 8,15 | 11,16 | 5,98 | 7,04 | 8,57 |
+| Attal | 6,67 | 8,21 | 11,22 | 6,25 | 7,24 | 8,88 |
+| Tondelier | 6,47 | 9,15 | 13,20 | 5,59 | 7,38 | 9,90 |
+| Glucksmann | 7,07 | 9,46 | 13,34 | 6,65 | 8,48 | 11,07 |
+| Le Pen (partiel) | 7,47 | 9,48 | 13,26 | 7,06 | 8,50 | 10,78 |
+| Zemmour | 8,02 | 9,81 | 13,60 | 7,59 | 8,65 | 10,56 |
+| Lisnard | 7,41 | 10,00 | 14,03 | 6,97 | 8,74 | 10,78 |
+| Arthaud (partiel) | 8,20 | 11,54 | 16,53 | 7,04 | 9,17 | 12,15 |
+| Roussel | 9,81 | 17,02 | 29,76 | 8,37 | 13,58 | 21,46 |
+| Mélenchon | 11,86 | 18,74 | 27,85 | 9,76 | 14,86 | 20,45 |
+
+Lecture : sur le seul critère du déficit, le programme IA est le seul sous le statu quo dans les deux scénarios et
+les trois années, mais il ne fait que **0,2 point de mieux en 2032 (prudent)**, loin des 3 % visés.
+
+## Ce qui pèse (prudent, Md€ de 2026, + = mieux pour le solde, 2037)
+
+- Gagnent : sous-indexation des pensions (+4,1), niches (+4,0), enveloppe de la règle de dépense (≈ +8,2 au total),
+  allègements de charges (+2,9), apprentissage (+1,7).
+- Coûtent : enseignants (−3,7, dont 2,1 reviennent en prélèvements), rénovation (−3,4), logement (−2,5),
+  crèches (−2,1), accès aux soins (−1,3), justice (−1,2), seniors (−1,1), leasing (−1,1).
+- Effets communs : l'effet d'offre (−1,9) et le multiplicateur (−1,8) jouent contre le programme (resserrement et
+  coût du travail en hausse).
+
+## Limites
+
+- Montants écrits par Claude à partir d'encadrements cités dans `parametres.yaml`, pas relus par Adrien.
+- Microsimulation (OpenFisca) non lancée : pas d'effet par décile.
+- Les mesures sans canal dans le noyau (bascule droits de mutation → taxe foncière, permis plus rapides,
+  proportionnelle) ne sont pas chiffrées.

@@ -1,0 +1,178 @@
+# « Programme IA » (test, 18 novembre 2026) : chiffrage sur le noyau.
+#
+# Programme écrit par Claude pour un benchmark ludique, non publié (absent de programmes/publies.yaml).
+# Fiche des 20 mesures : programmes/programme_ia/mesures.yaml.
+#
+# Mêmes règles que les candidats (README) : les gains annoncés par le programme ne sont pas repris ; chaque mesure est
+# estimée en crise / prudent / médian / optimiste ; une hypothèse sans source est prise prudente. Format des mesures :
+# celui de tondelier_mesures (moteur/programme_simple.py). Dépenses : + = dépense en plus ; recettes : + = recette en plus.
+
+programme_ia_mesures:
+
+  # ---------------------------------------------------------------- finances publiques
+  niches:
+    valeur: {id: IA-FIN-02, instrument: travail, incidence: haut, libelle: "Revue des niches fiscales et sociales : suppression ou plafonnement des moins efficaces", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 2.5, prudent: 3.5, median: 5.0, optimiste: 7.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : rabots des niches de 2011-2012 ≈ 3 à 5 Md€ (Cour des comptes) ; ≈ 85 Md€ de dépenses fiscales (PLF 2027, Voies et moyens tome II). Le programme annonce 10 Md€ : non repris"
+    note: "Incidence surtout sur les ménages aisés (niches à l'impôt sur le revenu) : instrument travail, incidence haut."
+  agences:
+    valeur: {id: IA-FIN-03, libelle: "Fusion d'agences et d'opérateurs de l'État", poste: etat_missions, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: -0.3, prudent: -0.5, median: -1.0, optimiste: -1.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : enveloppe_economies.domaines (opérateurs : rationalisation de 2025-2026 ≈ 0,5 Md€)"
+  doublons_collectivites:
+    valeur: {id: IA-FIN-03, libelle: "Fin des doublons entre l'État et les collectivités", poste: collectivites, moteur: pib, debut: 2028, plein: 2031,
+             montant: {crise: -0.5, prudent: -1.0, median: -1.5, optimiste: -2.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : baisse de la DGF de 2014-2017 ≈ 11 Md€, absorbée surtout par l'investissement local ; doublons seuls : une petite part"
+  pensions_sous_indexees:
+    valeur: {id: IA-FIN-04, libelle: "Pensions au-dessus de 2 000 € : inflation moins 0,8 point pendant 3 ans (petites pensions protégées)", poste: retraites, moteur: pensions, debut: 2028, plein: 2030,
+             montant: {crise: -3.0, prudent: -3.5, median: -4.2, optimiste: -4.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 400 Md€ de pensions, dont ≈ la moitié versée au-dessus de 2 000 € par mois (Drees, 2025) ; 0,8 point × 3 ans × 200 Md€ ≈ 4,8 Md€ en niveau"
+    note: "Prudent sous le statique : l'économie s'éteint avec les retraités concernés et une partie des pensions de réversion est protégée. Prélèvements perdus : ligne pensions_prelevements."
+  pensions_prelevements:
+    valeur: {id: IA-FIN-04, libelle: "Sous-indexation des pensions : CSG et cotisations sur les pensions en moins", poste: recettes, moteur: pensions, debut: 2028, plein: 2030,
+             montant: {crise: -0.30, prudent: -0.35, median: -0.40, optimiste: -0.45}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Taux de prélèvement moyen sur les pensions ≈ 9 à 10 % (CSG, CRDS, Casa)"
+  fraude:
+    valeur: {id: IA-FIN-05, libelle: "Lutte contre la fraude fiscale et sociale : montants recouvrés en plus", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 0.5, prudent: 1.0, median: 2.0, optimiste: 3.0}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : plan fraude de 2023 (1 500 contrôleurs de plus) ≈ 1 à 2 Md€ recouvrés en plus en régime de croisière (DGFiP, bilans 2024-2025) ; recouvrement des redressements ≈ 40 à 60 %. Le programme annonce 3 Md€ : non repris"
+  fraude_controleurs:
+    valeur: {id: IA-FIN-05, libelle: "Lutte contre la fraude : contrôleurs et data scientists en plus", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029, fp: true, postes: true,
+             montant: {crise: 0.2, prudent: 0.2, median: 0.15, optimiste: 0.15}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "≈ 3 000 agents au coût de 55 000 € (programme_commun.emploi_cout_poste_public)"
+
+  # ---------------------------------------------------------------- travail
+  allegements:
+    valeur: {id: IA-EMP-06, instrument: cout_travail, libelle: "Refonte des allègements de charges : sortie lissée, moins d'exonérations au total", poste: recettes, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 2.0, prudent: 2.5, median: 3.0, optimiste: 3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : rapport Bozio-Wasmer (2024), refonte à coût réduit de 1,5 à 4 Md€ ; allègements généraux ≈ 80 Md€"
+    note: "Coût du travail en hausse : le canal commun d'offre retire des emplois (instrument cout_travail)."
+  apprentissage:
+    valeur: {id: IA-EMP-07, libelle: "Aides à l'apprentissage recentrées sur le niveau bac et infra-bac", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -1.2, prudent: -1.5, median: -2.0, optimiste: -2.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : aides à l'embauche d'apprentis ≈ 4 Md€ après les baisses de 2025 (Dares) ; contrats du supérieur ≈ 60 % des entrées"
+  seniors:
+    valeur: {id: IA-EMP-08, instrument: cout_travail, libelle: "Seniors : cotisations allégées pour les 60 ans et plus en CDI, cumul emploi-retraite créateur de droits", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: -1.2, prudent: -1.0, median: -0.8, optimiste: -0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : ≈ 1,2 million de salariés de 60 ans et plus ; allègement de 2 à 3 points sur les CDI, effet d'aubaine élevé ; droits nouveaux du cumul ≈ 0,1 à 0,2 Md€"
+
+  # ---------------------------------------------------------------- logement, écologie
+  offre_logement:
+    valeur: {id: IA-LOG-09, libelle: "Choc d'offre de logements : foncier public, densification autour des gares", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 2.5, prudent: 2.2, median: 2.0, optimiste: 1.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : fonds friches (0,75 Md€ sur 2021-2022), aide aux maires bâtisseurs ≈ 0,1 à 0,3 Md€ par an ; ici un plan plus large"
+  renovation:
+    valeur: {id: IA-ECO-11, libelle: "Rénovation des passoires thermiques des ménages modestes, accompagnement de bout en bout", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 3.3, prudent: 3.0, median: 2.8, optimiste: 2.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement que attal_mesures.renovation (MaPrimeRénov' ≈ 2,3 Md€ en 2026) : +3 Md€ en plus"
+  leasing:
+    valeur: {id: IA-ECO-12, libelle: "Leasing social électrique reconduit chaque année, ciblé sur le rural", poste: etat_missions, moteur: pib, debut: 2028, plein: 2028,
+             montant: {crise: 1.1, prudent: 1.0, median: 0.9, optimiste: 0.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : leasing social de 2024 (≈ 50 000 voitures, ≈ 0,65 Md€) et de 2025"
+
+  # ---------------------------------------------------------------- éducation, santé, régalien
+  enseignants:
+    valeur: {id: IA-EDU-14, instrument: education, libelle: "Enseignants : revalorisation des débuts de carrière, formation refondue", poste: etat_missions, moteur: salaire, debut: 2028, plein: 2030, fp: true,
+             montant: {crise: 3.5, prudent: 3.2, median: 3.0, optimiste: 2.8}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : revalorisation de 2023 (« socle ») ≈ 1,9 Md€ en année pleine ; ici ≈ +1,5 fois"
+  creches:
+    valeur: {id: IA-EDU-15, libelle: "100 000 places de crèche en plus", poste: famille, moteur: pib, debut: 2028, plein: 2032,
+             montant: {crise: 1.9, prudent: 1.8, median: 1.6, optimiste: 1.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Onape, édition 2025 : coût public ≈ 16 000 à 19 500 € par place et par an (PSU, micro-crèches)"
+  acces_soins:
+    valeur: {id: IA-SAN-16, libelle: "Accès aux soins : assistants médicaux, délégation de tâches, 4e année d'internat en zone sous-dotée", poste: sante, moteur: pib, debut: 2028, plein: 2030,
+             montant: {crise: 1.2, prudent: 1.1, median: 1.0, optimiste: 0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : aide à l'emploi d'assistants médicaux ≈ 36 000 € par poste sur trois ans (Assurance maladie) ; 10 000 assistants en plus ≈ 0,3 Md€ ; docteurs juniors de 4e année ≈ 0,3 à 0,5 Md€"
+  boissons_sucrees:
+    valeur: {id: IA-SAN-17, instrument: consommation, libelle: "Taxe sur les boissons sucrées renforcée", poste: recettes, moteur: "recette:accises_et_taxes_sur_produits", debut: 2028, plein: 2028,
+             montant: {crise: 0.2, prudent: 0.3, median: 0.4, optimiste: 0.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : taxe actuelle ≈ 0,4 à 0,5 Md€ après la hausse de 2025 ; baisse des volumes (Santé publique France). Le programme annonce 1 Md€ : non repris"
+  justice:
+    valeur: {id: IA-REG-18, libelle: "Justice : greffiers et magistrats en plus, procédures numérisées", poste: etat_missions, moteur: salaire, debut: 2028, plein: 2031, fp: true, postes: true,
+             montant: {crise: 1.1, prudent: 1.0, median: 1.0, optimiste: 0.9}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : loi de programmation de la justice 2023-2027 (+1,5 Md€ et 10 000 emplois en cinq ans)"
+
+# ---------------------------------------------------------------- règle de dépense (IA-FIN-01)
+# Économie annoncée sans détail : enveloppe commune (moteur/programme_simple.enveloppe_economies), jamais le chiffre
+# du programme, qui ne sert que de plafond.
+programme_ia_enveloppe:
+  annonce:
+    valeur: 30
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Programme IA, mesure 1 : règle de dépense (hors défense et charge de la dette) à +0,5 % par an en volume, ≈ 30 Md€ en 2032"
+    note: "Plafond seulement."
+  intensite:
+    valeur: {etat: 1.0, operateurs: 1.0, collectivites: 0.5, sante: 0.5, prestations: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "La règle vise toute la dépense hors défense : État et opérateurs en cible principale ; collectivités, santé et prestations citées (le programme dépense en plus en santé et en famille)."
+    note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale."
+
+# ---------------------------------------------------------------- effets en tonnes (même méthode que attal_ecologie)
+programme_ia_ecologie:
+  renovation:
+    valeur: {id: "IA-ECO-11", libelle: "Rénovation des passoires thermiques des ménages modestes", secteur: "batiments", debut: 2028, plein: 2050, effet_mt: {crise: -0.85, prudent: -1.0, median: -1.8, optimiste: -3.0}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même tonne par euro que attal_ecologie.renovation (0,35 Md€ par an → −0,12 Mt en prudent), pour +3 Md€ par an, rendements décroissants"
+  leasing:
+    valeur: {id: "IA-ECO-12", libelle: "Leasing social électrique reconduit", secteur: "transports", debut: 2028, plein: 2032, fin_debut: 2035, fin: 2045, effet_mt: {crise: -0.3, prudent: -0.3, median: -0.45, optimiste: -0.6}}
+    unite: mt_co2e
+    statut: HYPOTHESE
+    source: "Même méthode que attal_ecologie.vehicules (1,6 t par voiture thermique remplacée et par an ; additionnalité 40 à 80 %) : ≈ 75 000 voitures par an de 2028 à 2032"

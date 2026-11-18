@@ -145,10 +145,11 @@ def test_perimetre_aligne_sans_effet_sur_le_solde(ed, p):
 
 def test_programmes_disponibles():
     """Le comparateur prend le statu quo et les programmes de programmes/publies.yaml (Écologie de droite, programme
-    de test, en est sorti le 16/11/2026 ; il reste dans le dépôt et dans la liste complète)."""
+    de test, en est sorti le 16/11/2026 ; il reste dans le dépôt et dans la liste complète). « Programme IA » (test du
+    18/11/2026) n'a jamais été publié : il n'est que dans la liste complète."""
     noms = noyau.programmes_disponibles()
     assert noms[0] == "statu_quo" and "ecologie_de_droite" not in noms and len(noms) == 13
-    assert set(noyau.programmes_disponibles(tous=True)) == set(noms) | {"ecologie_de_droite"}
+    assert set(noyau.programmes_disponibles(tous=True)) == set(noms) | {"ecologie_de_droite", "programme_ia"}
 
 
 @pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
