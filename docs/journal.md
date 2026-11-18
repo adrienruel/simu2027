@@ -1785,3 +1785,39 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
     les administrations publiques : 54 à 72 % (avant : 55 à 75 %). Ses agents non remplacés coûtent désormais leur
     allocation.
   - La micro (déciles, vieillissement) reste antérieure au manifeste.
+
+## 18/11/2026 (soir) — Phase M (roadmap, phase 5) : décisions d'Adrien
+
+- **5.3 Horizon** : les courbes restent à 2060. Les années où la dette dépasse 200 % du PIB restent en gris
+  (rien à changer dans le code).
+- **5.4 Coût d'un chômeur selon le programme** (`emploi.generosite_programme`, DÉCISION ;
+  `docs/depenses_chomage.md`).
+  - Facteur de générosité des blocs chômage et pauvreté : (statu quo + mesures de législation) / statu quo.
+  - Il s'applique aux dépenses de chômage du programme, aux allocations des seniors et à la variante démographique.
+  - Mesures `volume: true` exclues : garantie d'emploi de Mélenchon, sécurité d'emploi ou de formation de Roussel.
+- **5.5 Prime d'activité des emplois en plus** (`emploi.prime_activite_emplois`, DÉCISION) : ≈ 2 140 € par emploi
+  (table OpenFisca, personne seule, 1,3 SMIC), au bloc pauvreté.
+- **5.6 Retour budgétaire de l'incidence des entreprises** (`entreprises.incidence_retour_budget`, DÉCISION ;
+  `entreprises.retour_dividendes`, HYPOTHÈSE ; `docs/entreprises.md`).
+  - Salaires au taux marginal de 62 %, moins ce que l'effet d'offre compte déjà.
+  - Dividendes : 7,5 % de la part des actionnaires.
+  - Avec le calendrier de la roadmap 7.3 : la part des salaires monte à la vitesse de l'offre.
+- **5.7 Charge d'intérêts de 2027** : vérifiée. Les 91,2 Md€ sont ceux de toutes les administrations publiques ; ceux
+  du seul État sont de 72,9 Md€ (programme 117). Le paramètre ne change pas, sa note est corrigée.
+- **Effet cumulé de 5.4 à 5.6** (déficit 2037, prudent / médian) :
+
+  | Programme | Prudent avant | Prudent après | Médian avant | Médian après |
+  |---|---|---|---|---|
+  | Lisnard | 14,03 | 13,87 | 10,78 | 10,69 |
+  | Le Pen | 13,26 | 13,15 | 10,78 | 10,71 |
+  | Philippe | 11,16 | 11,06 | 8,57 | 8,53 |
+  | Retailleau | 10,24 | 10,19 | 8,17 | 8,14 |
+  | Mélenchon | 27,85 | 27,95 | 20,45 | 20,57 |
+  | Tondelier | 13,20 | 13,25 | 9,90 | 9,98 |
+
+  Les autres bougent de 0,05 point au plus.
+- **Restent à décider** : 5.1 (lectures des réformes de structure), 5.2 (solde migratoire), 5.8 (emploi spécifique
+  jeune).
+- **Tests** : `test_depenses_chomage` (générosité, prime d'activité, formule complète), `test_couverture_incidence`
+  (retour sans double compte), décisions ajoutées à `test_programmes`. Sorties régénérées, Monte Carlo recalculé de
+  zéro.

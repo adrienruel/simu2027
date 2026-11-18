@@ -28,7 +28,9 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     # chaque programme (multiplicateur actif pour tous ; allègements qui suivent le SMIC selon la loi actuelle ;
     # calendrier des économies non détaillées)
     # emploi.depenses_chomage_programme (18/11/2026, phase L, roadmap 4.1) : règle de modèle commune
+    # 18/11/2026, roadmap 5.4 à 5.6 : générosité des allocations, prime d'activité des emplois, retour de l'incidence
     assert decisions == ["calendrier.inflation", "demographie.scenario_fecondite", "emploi.depenses_chomage_programme",
+                         "emploi.generosite_programme", "emploi.prime_activite_emplois", "entreprises.incidence_retour_budget",
                          "incertitude.correlation",
                          "lectures_communes.capitalisation", "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi",
                          "programme_commun.enveloppe_debut", "programme_commun.enveloppe_plein",

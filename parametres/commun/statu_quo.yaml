@@ -24,7 +24,7 @@ statu_quo:
     note: "Recettes publiques de départ = dépense − déficit = 51,9 % du PIB (prélèvements obligatoires 44,2 % ; le reste : ventes, revenus de la propriété, transferts). Hypothèse : les mesures du PLF 2027 sont votées et maintenues, comme dans calendrier.deficit_tendanciel_2027_2028. DÉCISION d'Adrien du 04/11/2026 : point de départ provisoire, à actualiser quand la loi de finances 2027 sera votée."
   charge_interets_base:
     url: "https://acteurspublics.fr/media/2026/10/10-01-Communique-Compte-rendu-du-Conseil-des-ministres-du-jeudi-1er-octobre-2026.pdf"
-    page: "Compte rendu du Conseil des ministres du 1er octobre 2026 (PLF 2027) : charge d'intérêts de 79,2 Md€ en 2026 à 91,2 Md€ en 2027. À vérifier : La Finance pour tous (08/10/2026) rapporte 91 Md€ « pour le seul budget de l'État », pas pour les APU ; avis HCFP n° 2026-5 non retrouvé en ligne"
+    page: "Compte rendu du Conseil des ministres du 1er octobre 2026 (PLF 2027) : charge d'intérêts de 79,2 Md€ en 2026 à 91,2 Md€ en 2027. Vérifié le 18/11/2026 (roadmap 5.7) : 91,2 Md€ est bien la charge de toutes les administrations publiques ; celle du seul État (mission Engagements financiers, programme 117) est de 72,9 Md€ au PLF 2027 ; le rapport sur la dette des APU annexé au PLF 2027 donne 2,9 % du PIB en 2027. La Finance pour tous (08/10/2026) attribuait à tort les 91 Md€ au seul budget de l'État"
     valeur: 0.029
     unite: taux
     statut: SOURCE

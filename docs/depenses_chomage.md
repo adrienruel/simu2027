@@ -66,13 +66,26 @@ Lecture :
 - **Lisnard, Attal, Zemmour** : déficit plus bas de 0,03 à 0,11 point. L'effet d'offre et la conjoncture baissent
   le chômage, et les allocations suivent.
 
-## Reste à décider
+## Décisions d'Adrien du 18/11/2026 (roadmap 5.4 et 5.5)
 
-- **Prime d'activité** : elle suit les personnes en emploi dans le statu quo, mais pas les emplois en plus d'un
-  programme. Un emploi au SMIC en plus en ouvre souvent le droit, ce qui coûterait plus ; ce n'est pas compté.
-- **Coût marginal ou coût moyen** : la démographie (variante migratoire, naissances) applique la règle du statu quo,
-  soit le coût moyen d'un chômeur. Il vaut ≈ 22 800 € par chômeur en 2029 (46,6 Md€ d'assurance chômage et 13,5 Md€
-  de RSA pour 2,64 millions de chômeurs BIT). Le reste du modèle utilise le coût marginal de 9 000 €. Les deux
-  devraient être ramenés à une seule règle.
+- **Coût d'un chômeur selon le programme** (`emploi.generosite_programme`). Chaque année, deux facteurs : (bloc du
+  statu quo + mesures de législation du programme sur ce bloc) / bloc du statu quo, l'un pour le bloc chômage,
+  l'autre pour le bloc pauvreté.
+  - Ils multiplient tout ce qui suit le nombre de chômeurs : les dépenses de chômage du programme, les allocations
+    des seniors et la variante démographique.
+  - Les mesures marquées `volume: true` ne comptent pas : elles comptent des allocataires en moins, pas une
+    allocation plus basse (garantie d'emploi de Mélenchon, sécurité d'emploi ou de formation de Roussel).
+  - En 2037, au prudent, le facteur du bloc pauvreté vaut 2,52 pour Mélenchon (garantie d'autonomie) et 0,43 pour
+    Lisnard (allocation unique plafonnée).
+  - La démographie garde son coût moyen du statu quo, multiplié par le même facteur.
+- **Prime d'activité des emplois en plus** (`emploi.prime_activite_emplois`) : ≈ 2 140 € par emploi et par an.
+  - Le montant est lu sur la table OpenFisca de 2026 d'une personne seule, à 1,3 fois le coût du SMIC.
+  - Il est indexé comme la prime du statu quo, multiplié par le facteur du bloc pauvreté, et ajouté au bloc pauvreté
+    pour les mêmes emplois que la règle 4.1.
+
+## Reste ouvert
+
+- **Barème de la prime d'activité** : c'est celui d'une personne seule. Un couple ou des enfants changent le droit.
+  La micro relancée (phase 6) pourra le remplacer.
 - **Emploi spécifique jeune** (Mélenchon) : canal en « * » sans allocation évitée dans sa mesure. Il est laissé
   hors du bloc, faute de savoir si ces jeunes viennent du chômage.

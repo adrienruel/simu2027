@@ -266,7 +266,7 @@ roussel_mesures:
     source: "Fabien Roussel, Le Parti pris du travail (avril 2025) ; CNews (20/02/2025)"
     note: "Même échelle que melenchon_mesures.garantie_emploi : 240 000 emplois × ≈ 36 000 € (SMIC de 1 700 € net) ; emplois créés et éviction : roussel_emplois_aides."
   securite_emploi_rsa:
-    valeur: {id: PCF-EMP-02, libelle: "Sécurité d'emploi ou de formation : RSA et allocations évités", poste: chomage, moteur: "pib", debut: 2028, plein: 2032,
+    valeur: {id: PCF-EMP-02, libelle: "Sécurité d'emploi ou de formation : RSA et allocations évités", poste: chomage, moteur: "pib", volume: true, debut: 2028, plein: 2032,
              montant: {crise: -1.1, prudent: -1.3, median: -1.5, optimiste: -1.7}}
     unite: md_eur
     annee_euros: 2026

@@ -29,7 +29,11 @@ def test_formule_et_partage_des_blocs(p, nom):
     r = noyau.simuler(p, prog, scenarios=[s])[s][t]
     e, w = sq.effectifs(p, s), sq.salaires(p, s)
     d_ch = ctx["chomeurs_depenses"][t] - r["pib_taux"] / r["pib"] * sq._v(p, "macro.emplois_par_point_pib", s) * e[t]["emploi"]
-    attendu = d_ch * p.val("emploi.allocation_chomeur_evitee") * w[t] / w[2029] / 1e9
+    base = d_ch * p.val("emploi.allocation_chomeur_evitee") * w[t] / w[2029] / 1e9
+    part = p.val("emploi.part_allocation_assurance_chomage")
+    k_ac, k_pa = ctx["generosite_chomage"][t]  # roadmap 5.4 : générosité du programme
+    ppa = noyau.ppa_par_emploi(p, s)[t]  # roadmap 5.5 : prime d'activité des emplois en plus
+    attendu = part * base * k_ac + (1 - part) * base * k_pa - d_ch * ppa * k_pa / 1e9
     assert r["depenses_chomage_programme"] == pytest.approx(attendu, rel=1e-9)
     # partage : la part de l'assurance chômage va au bloc chômage, le reste au bloc pauvreté
     p0 = p.avec({"emploi.depenses_chomage_programme": False})
@@ -61,3 +65,22 @@ def test_allocation_retiree_de_la_valeur_d_un_emploi(p):
           if x.nom == "Emploi : Assurance chômage plus généreuse : chômeurs en plus"]
     v, a = prog.v("emploi.valeur_emploi"), p.val("emploi.allocation_chomeur_evitee")
     assert m[0].valeurs[2037] / m0[0].valeurs[2037] == pytest.approx((v - a) / v, rel=1e-6)
+
+
+def test_generosite(p):
+    """Un programme qui relève les allocations (Mélenchon : garantie d'autonomie) rend chaque chômeur plus cher ;
+    un programme qui les plafonne (Lisnard : allocation unique) moins cher. Les mesures « volume » ne comptent pas."""
+    g_m = noyau.charger("melenchon").contexte(p)["prudent"]["generosite_chomage"][2037]
+    g_l = noyau.charger("lisnard").contexte(p)["prudent"]["generosite_chomage"][2037]
+    assert g_m[1] > 1 > g_l[1]
+    from moteur.programme_simple import generosite
+    prog = noyau.charger("melenchon")
+    ms = prog.mesures(p)["prudent"]
+    vol = [m.nom for m in ms if m.nom.startswith("LFI-EMP-01 — Garantie d'emploi : allocations")]
+    assert generosite(p, "prudent", ms, set(vol))[2037][0] == pytest.approx(g_m[0])
+    assert generosite(p, "prudent", ms)[2037][0] < g_m[0]
+
+
+def test_ppa_par_emploi(p):
+    v = noyau.ppa_par_emploi(p, "prudent")
+    assert 1500 < v[2029] < 3000
