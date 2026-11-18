@@ -28,7 +28,8 @@ Calcul du 18/11/2026, tous les programmes publiés sur le même noyau.
 
 | Programme | Prudent 2029 | Prudent 2032 | Prudent 2037 | Médian 2029 | Médian 2032 | Médian 2037 |
 |---|---:|---:|---:|---:|---:|---:|
-| **Programme IA, version 2** | **5,56** | **6,49** | **8,39** | **5,23** | **5,72** | **6,62** |
+| **Programme IA, version 3** | **5,48** | **6,29** | **8,07** | **5,17** | **5,59** | **6,40** |
+| Programme IA, version 2 | 5,56 | 6,49 | 8,39 | 5,23 | 5,72 | 6,62 |
 | Programme IA, version 1 | 5,79 | 6,98 | 9,27 | 5,57 | 6,37 | 7,69 |
 | Statu quo | 5,91 | 7,16 | 9,50 | 5,82 | 6,82 | 8,37 |
 | Bertrand | 6,02 | 7,21 | 9,52 | 5,86 | 6,68 | 8,02 |
@@ -86,3 +87,29 @@ Ce qui ressort :
 - Microsimulation (OpenFisca) non lancée : pas d'effet par décile.
 - Les mesures sans canal dans le noyau (bascule droits de mutation → taxe foncière, permis plus rapides,
   proportionnelle) ne sont pas chiffrées.
+
+## Version 3 (18/11/2026, soir) : « le président choisit »
+
+Dana : « fais tous les choix que tu veux ». La règle a été fixée avant de chiffrer, pour que ce soit le critère qui
+choisisse et pas une préférence : **meilleur déficit prudent du simulateur**, avec deux contraintes :
+émissions en baisse, petites pensions et minima sociaux intacts.
+
+Gain du retrait de chaque dépense, mesuré une par une (écart de déficit, points de PIB, prudent 2032 / 2037) :
+crèches −0,05 / −0,09 ; rénovation −0,05 / −0,09 ; enseignants −0,03 / −0,04 ; accès aux soins −0,02 / −0,04 ;
+leasing −0,02 / −0,04 ; seniors −0,02 / −0,02 ; justice −0,01 / −0,02 ; foncier public −0,01 / −0,02.
+
+Choix :
+- **retirées** : enseignants, crèches, accès aux soins, justice, seniors, leasing, foncier public (le canal
+  logement reste : densification et permis ne coûtent rien) ;
+- **gardée** : la rénovation, seule mesure qui fait baisser les émissions (−0,36 Mt en 2037, prudent) ;
+- **durcies** : pensions au-dessus de 2 000 € sous-indexées 5 ans au lieu de 3 ; santé en cible principale de la
+  règle de dépense ;
+- **protégées** : prestations sociales retirées de la règle de dépense (intensité 0), ce qui coûte au solde.
+
+Résultat : 6,29 % en 2032 (prudent), −0,86 point sous le statu quo ; 8,07 % en 2037, −1,44 point ; dette 156 % du
+PIB en 2037 (163 % au statu quo).
+
+Ce que le modèle ne voit pas : il ne compte aucun effet des enseignants, des crèches ou de l'accès aux soins sur
+le niveau des élèves, l'emploi des mères ou la santé (pas de canal sans barème commun). Le « meilleur programme »
+du simulateur est donc d'abord le plus économe : c'est une limite de la mesure, pas un verdict sur ces politiques.
+Le multiplicateur le montre aussi : −7,0 Md€ au solde en 2037, le resserrement freine la croissance.

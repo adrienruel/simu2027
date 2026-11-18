@@ -13,6 +13,10 @@ chômage (forme d'Attal), âge légal à 65 ans (bibliothèque, forme de Bertran
 communs de l'offre de logements et des réformes de structure (rail, électricité) ; logement neuf ramené au foncier
 public ; plan IA testé puis retiré (rendement trop faible dans le prudent).
 
+Version 3 (18/11/2026, soir) : « le président choisit ». Règle fixée d'avance : meilleur déficit prudent du
+simulateur, avec les émissions en baisse et sans toucher aux petites pensions ni aux minima sociaux. Retirées :
+enseignants, crèches, accès aux soins, justice, seniors, leasing, foncier public ; pensions sous-indexées 5 ans.
+
     python -m moteur.noyau programme_ia
 """
 from __future__ import annotations

@@ -15,31 +15,31 @@ programme:
   document: "Programme IA 2027, 20 mesures chiffrées (conversation du 18/11/2026)"
   date_lecture: 2026-11-18
   annonce_non_saisie: "+41,5 Md€ net par an en 2032, dont 30 Md€ par la règle de dépense ; déficit annoncé ≈ 3,6 % du PIB en 2032"
-  version: "2 (18/11/2026, soir) : mesures 21 à 26 ajoutées, mesure 9 réduite, plan IA testé puis retiré (docs/programme_ia.md)"
+  version: "3 (18/11/2026, soir) : mesures 8, 12, 14, 15, 16 et 18 retirées, mesure 4 portée à 5 ans, santé en cible de la règle de dépense, prestations protégées (docs/programme_ia.md)"
 
 mesures:
   - {id: IA-FIN-01, intitule: "Règle de dépense : hors défense et charge de la dette, +0,5 % par an en volume au plus (loi organique)", traitement: estime, cle: "programme_ia_enveloppe",
      note: "Les 30 Md€ annoncés ne sont pas repris : enveloppe commune, domaine par domaine, l'annonce sert de plafond."}
   - {id: IA-FIN-02, intitule: "Revue des niches fiscales et sociales", traitement: chiffre, cle: niches}
   - {id: IA-FIN-03, intitule: "Fusion d'agences, fin des doublons État-collectivités", traitement: chiffre, cle: "agences, doublons_collectivites"}
-  - {id: IA-FIN-04, intitule: "Sous-indexation des pensions au-dessus de 2 000 €/mois (inflation − 0,8 pt pendant 3 ans)", traitement: chiffre, cle: "pensions_sous_indexees, pensions_prelevements"}
+  - {id: IA-FIN-04, intitule: "Sous-indexation des pensions au-dessus de 2 000 €/mois (inflation − 0,8 pt pendant 5 ans ; 3 ans avant la version 3)", traitement: chiffre, cle: "pensions_sous_indexees, pensions_prelevements"}
   - {id: IA-FIN-05, intitule: "Lutte contre la fraude fiscale et sociale", traitement: chiffre, cle: "fraude, fraude_controleurs"}
   - {id: IA-EMP-06, intitule: "Refonte des allègements de charges (fin de la trappe à bas salaires)", traitement: chiffre, cle: allegements,
      note: "Le gain d'emplois annoncé par le lissage n'est pas compté : seul le coût du travail en hausse passe par le canal commun."}
   - {id: IA-EMP-07, intitule: "Aides à l'apprentissage recentrées sur le niveau bac et infra-bac", traitement: chiffre, cle: apprentissage}
-  - {id: IA-EMP-08, intitule: "Emploi des seniors : cumul emploi-retraite créateur de droits, cotisations allégées en CDI", traitement: chiffre, cle: seniors}
-  - {id: IA-LOG-09, intitule: "Choc d'offre de logements (densification autour des gares, permis en 3 mois, foncier public)", traitement: chiffre, cle: "offre_logement, programme_ia_canaux.logement",
-     note: "Version 2 : la dépense est ramenée au foncier public ; densification et permis passent par le canal commun de l'offre de logements (intensité 0,5)."}
+  - {id: IA-EMP-08, intitule: "Emploi des seniors : cumul emploi-retraite créateur de droits, cotisations allégées en CDI", traitement: non_chiffre, note: "Retirée en version 3 (règle : meilleur déficit du simulateur, émissions en baisse, minima protégés) : la mesure ne faisait que coûter dans le modèle."}
+  - {id: IA-LOG-09, intitule: "Choc d'offre de logements (densification autour des gares, permis en 3 mois, foncier public)", traitement: chiffre, cle: "programme_ia_canaux.logement",
+     note: "Version 3 : dépense de foncier public retirée, seul le canal commun reste. Version 2 : la dépense est ramenée au foncier public ; densification et permis passent par le canal commun de l'offre de logements (intensité 0,5)."}
   - {id: IA-LOG-10, intitule: "Moins de droits de mutation, plus de taxe foncière (à budget constant)", traitement: non_chiffre,
      note: "Bascule neutre pour les collectivités ; pas de canal de mobilité résidentielle dans le noyau."}
   - {id: IA-ECO-11, intitule: "Rénovation des passoires thermiques des ménages modestes", traitement: chiffre, cle: "renovation (et programme_ia_ecologie.renovation)"}
-  - {id: IA-ECO-12, intitule: "Leasing social électrique reconduit, ciblé sur le rural", traitement: chiffre, cle: "leasing (et programme_ia_ecologie.leasing)"}
+  - {id: IA-ECO-12, intitule: "Leasing social électrique reconduit, ciblé sur le rural", traitement: non_chiffre, note: "Retirée en version 3 (règle : meilleur déficit du simulateur, émissions en baisse, minima protégés) : la mesure ne faisait que coûter dans le modèle."}
   - {id: IA-ECO-13, intitule: "Mix électrique : EPR2 au calendrier, solaire et éolien en mer accélérés", traitement: sans_effet, note: "Porté par EDF et les tarifs ; trajectoire du statu quo."}
-  - {id: IA-EDU-14, intitule: "Revalorisation des enseignants en début de carrière, formation refondue", traitement: chiffre, cle: enseignants}
-  - {id: IA-EDU-15, intitule: "100 000 places de crèche", traitement: chiffre, cle: creches}
-  - {id: IA-SAN-16, intitule: "Accès aux soins : assistants médicaux, délégation de tâches, 4e année d'internat en zone sous-dotée", traitement: chiffre, cle: acces_soins}
+  - {id: IA-EDU-14, intitule: "Revalorisation des enseignants en début de carrière, formation refondue", traitement: non_chiffre, note: "Retirée en version 3 (règle : meilleur déficit du simulateur, émissions en baisse, minima protégés) : la mesure ne faisait que coûter dans le modèle."}
+  - {id: IA-EDU-15, intitule: "100 000 places de crèche", traitement: non_chiffre, note: "Retirée en version 3 (règle : meilleur déficit du simulateur, émissions en baisse, minima protégés) : la mesure ne faisait que coûter dans le modèle."}
+  - {id: IA-SAN-16, intitule: "Accès aux soins : assistants médicaux, délégation de tâches, 4e année d'internat en zone sous-dotée", traitement: non_chiffre, note: "Retirée en version 3 (règle : meilleur déficit du simulateur, émissions en baisse, minima protégés) : la mesure ne faisait que coûter dans le modèle."}
   - {id: IA-SAN-17, intitule: "Taxe sur les boissons sucrées renforcée, prévention", traitement: chiffre, cle: boissons_sucrees}
-  - {id: IA-REG-18, intitule: "Justice : greffiers et magistrats, procédures numérisées", traitement: chiffre, cle: justice}
+  - {id: IA-REG-18, intitule: "Justice : greffiers et magistrats, procédures numérisées", traitement: non_chiffre, note: "Retirée en version 3 (règle : meilleur déficit du simulateur, émissions en baisse, minima protégés) : la mesure ne faisait que coûter dans le modèle."}
   - {id: IA-REG-19, intitule: "Défense : tenir la loi de programmation militaire", traitement: sans_effet, note: "Déjà dans le statu quo (statu_quo.yaml : LPM actualisée, 2,5 % du PIB en 2030)."}
   - {id: IA-INS-20, intitule: "Dose de proportionnelle, référendum d'initiative partagée plus accessible", traitement: sans_effet}
   # ---------------------------------------------------------------- version 2
