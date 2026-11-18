@@ -4,10 +4,10 @@
   "c1_commun.json": {
    "sha256": "d095982c0a08030fd4d9584c7459e8842fb615cbb19974da041becaf4c93aac1",
    "script": "outils.c1_inventaire",
-   "date": "2026-11-18T17:04:22Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:32:52Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "c1_melenchon.json": {
    "sha256": "bc2a807dcd09df34ff64060efe3bfe892a99728b5126e9ea376662c2aa42f3c3",
@@ -28,12 +28,12 @@
    "note": "Antérieur au manifeste. Inventaire C1 des hypothèses sans source (13/11/2026)."
   },
   "comparaison_annonces.csv": {
-   "sha256": "0148904622e049aa96ded3e9659e202b5bff0a47c336e76770f7d637a35b1002",
+   "sha256": "444e237906d69381469cc2c04a969b69ed56bdb103d9f5c29202a4e68f4fbe00",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:24Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:58Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_bouclage.json": {
    "sha256": "903ad20cc2268afe94eb0291dbd0bcd7ec3bc9d2ad5bfdad71cbfe097faac19b",
@@ -47,170 +47,170 @@
   "comparaison_couverture_micro.csv": {
    "sha256": "269104d505c90a63030938420def931a863bbe2339d941439b18c8ec5fff12da",
    "script": "outils.couverture_micro",
-   "date": "2026-11-18T17:06:16Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:34:44Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_decomposition.csv": {
-   "sha256": "4d5892d0332d8920ca187f594ba0abc3963016aabb375c9d0fe0b5b41bcc4fed",
+   "sha256": "275970b5aafb29721cb40f805c07f5d4a51ec78651d16455aca44ef9737e8c48",
    "script": "outils.variantes_dette",
-   "date": "2026-11-18T17:03:28Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:32:00Z",
+   "commit": "56ef22e",
    "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_ecarts.csv": {
-   "sha256": "56d5cfdfc28714303051713b19454478e7207abf5f84d476b02bfdabcdca9333",
+   "sha256": "32c492a3b84397bb491bce83acc7dedf4afb9264ad2b11931fe2d7402b2a9a8a",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:24Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:58Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_ecologie.csv": {
    "sha256": "e16c940a851d9f9ccc23a0234cca0f383be2c36142098809f2e800214a52498d",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:24Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:58Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_ecologie_mesures.csv": {
-   "sha256": "cf7a8569f8ccbf21d787fdd86158575ab4844a8f22b01c18ac5115c30fe1648e",
+   "sha256": "aca18d2563cc97cbdec74fd6ccba276b679ac936ef359a97d6acf785ee0f28f0",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:24Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:58Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_economies.csv": {
    "sha256": "86517411b8e558346ea3adfdeaadf785d02265ce63ccf15e840581d141cb6de8",
    "script": "outils.audit_economies",
-   "date": "2026-11-18T17:03:36Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:32:08Z",
+   "commit": "56ef22e",
    "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_emploi_canaux.csv": {
    "sha256": "d0cd2575fd7f84ecb827346f8885e1f5c0e3544d4f6e837fc2da03b34794dc63",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:24Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:58Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_incertitude.csv": {
-   "sha256": "d8b262d6de410d83502695283615d410d9d9cf73b773ac06ea10cc5fa6f12bb5",
+   "sha256": "270968170d6c5dfbdf26fb90d2bf8ff72cd7e90c2af20eb9b381434b1c4d2701",
    "script": "outils.export_incertitude",
-   "date": "2026-11-18T19:01:32Z",
-   "commit": "8447792",
+   "date": "2026-11-18T21:34:16Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_incertitude_fonds.csv": {
-   "sha256": "026af89230e606715c55253d811ee02cdf1a76cb1211524d02d5bd97d1852226",
+   "sha256": "e0ba46962b5426073cb58bfa7360924c83c2cc94db43fdc13f25f79f53566b4d",
    "script": "outils.export_incertitude",
-   "date": "2026-11-18T19:01:32Z",
-   "commit": "8447792",
+   "date": "2026-11-18T21:34:16Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_incidence_entreprises.csv": {
-   "sha256": "0948769713d992f2a1381ead028e14bc343d358f9f9b94c179185a0f01f39481",
+   "sha256": "ce45cfec5255f54b164b97abee139a6dd93b9b27623fb501e5c4fba9eba30e97",
    "script": "outils.export_incidence",
-   "date": "2026-11-18T17:06:28Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:34:56Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_lectures.csv": {
-   "sha256": "73d487a66415eb5e486d4fd8171d9828dc617cfc8e3d5f87aae4be2867aecde6",
+   "sha256": "204568f02949cd95c4896e3a40117dbfe6b2f145ab870855925b60ffb57f43ba",
    "script": "outils.poids_lectures",
-   "date": "2026-11-18T17:04:11Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:32:42Z",
+   "commit": "56ef22e",
    "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_mesures.csv": {
-   "sha256": "5c956277d232fa4af054598d864cfa694fe75c7dc76c5c61a459184d9272143b",
+   "sha256": "f6a035cd39608790d6c944b1059a276ad076cd11e58f2fcf6aebfdd275caf124",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:24Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:58Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_redistribution.csv": {
    "sha256": "3e732ed79bbd236e233eee846f4eec72fe5fed99355fa2957743f4ff6d7e9d3d",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:40Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:31:13Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_redistribution_deciles.csv": {
    "sha256": "a757dc63493e591767c1dfe3541e06ffd1b4510ba69896e21a21c6d6738c7740",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:40Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:31:13Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_trajectoire.csv": {
-   "sha256": "1dcd2368e66fc9cc0c0683217e13782364601315eae9f67a87ba50a868d32e35",
+   "sha256": "49f0389255bae3c88e19fd3647a124d4bca65644ab52b921990fc6370be6e8fe",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T17:02:23Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:58Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_variante_fonds.csv": {
-   "sha256": "5b85847c638dcdbb422b53ce8284a34af1ea13c076cb277b25e7257b72170ca5",
+   "sha256": "464a9eb373a0ae5990534473bc9cdbb26b2b8a3c8f51a20f64c5745387caede5",
    "script": "outils.variante_fonds_apu",
-   "date": "2026-11-18T17:04:18Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:32:49Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "comparaison_variantes_dette.csv": {
-   "sha256": "fa785f02cb6b67162ecc1c9e63ca86230a6840d8854c263ef0ebd84b8bc22ba8",
+   "sha256": "2aa2b3faca29d5e714ac4057c5f8e04e017c191b28f0d49197893e454b11d140",
    "script": "outils.variantes_dette",
-   "date": "2026-11-18T17:03:28Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:32:00Z",
+   "commit": "56ef22e",
    "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "incertitude_rho0.json": {
-   "sha256": "0ecbfe8359f4410b5e59de8cf8d612a79f17a5e48cdd22b78c2b69754f33af66",
+   "sha256": "4899f049f6c21aca5d50a0f128ab8239b0c6833196df7b78c72b1c4130f0213e",
    "script": "moteur.incertitude",
-   "date": "2026-11-18T18:01:24Z",
-   "commit": "8447792",
+   "date": "2026-11-18T20:34:20Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "incertitude_rho1.json": {
-   "sha256": "1f7e7287c23fac4168d5a224ef6467eb7674e7c29a5c8ff025e9c1cc337ab0ff",
+   "sha256": "5186f33859560db52cdaec382ae0e7b705406f9d3d8f6aafad3614a1af8db753",
    "script": "moteur.incertitude",
-   "date": "2026-11-18T19:00:35Z",
-   "commit": "8447792",
+   "date": "2026-11-18T21:34:12Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "incertitude_tirages_rho0_graine2029.jsonl": {
-   "sha256": "d35116ec32f976ee471c97cf2be32a43d55901ba94fa0cfb9057641b4db53197",
+   "sha256": "be009777b325ad49c5eb2dce96b8a02d930cfaf51acfa84ee2a50b5d54bd6438",
    "script": "moteur.incertitude",
-   "date": "2026-11-18T18:01:24Z",
-   "commit": "8447792",
+   "date": "2026-11-18T20:34:20Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "incertitude_tirages_rho1_graine2029.jsonl": {
-   "sha256": "05b5d4dc0b7674bda842af165f659bb5defaa548b623f88c9962d8c82b80fa1f",
+   "sha256": "6bb76e565fcf9f771b2d1b001be1cc73cfcce84d81c1e7aec6ba220fa87f3239",
    "script": "moteur.incertitude",
-   "date": "2026-11-18T19:00:35Z",
-   "commit": "8447792",
+   "date": "2026-11-18T21:34:12Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "micro/arthaud_deciles.csv": {
    "sha256": "a1f73709d4821c3d205a2641d6e70c439918beabc8b17172b78b3bee48d02d65",
@@ -942,44 +942,44 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "sources_poids.csv": {
-   "sha256": "9c98c13f4eaee9059b9eb856d8bcbedd353b09615f58ee744d81a459973853d8",
+   "sha256": "ed4c226e1f7977015504a8dcf060a69a1ea851d2602bd5075f05bf0952318018",
    "script": "outils.sources_poids",
-   "date": "2026-11-18T17:06:04Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:34:31Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   },
   "statu_quo.json": {
    "sha256": "9d5f604821c9ab1afc52151851437c5175fa96257e20ebd4b1d0a97c993cdcf9",
    "script": "moteur.statu_quo",
-   "date": "2026-11-18T17:02:01Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:36Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "statu_quo_depenses.csv": {
    "sha256": "a899a568aac05c39c6183539e99e652479cd5c23f7f393db3f38e0ce7abc1aa8",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-18T17:02:02Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:37Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "statu_quo_recettes.csv": {
    "sha256": "29411bd06588edab3ee0b9b467d4b3f39b00d7bade59ae0122286ff4a7dd2ef2",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-18T17:02:02Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:37Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "statu_quo_trajectoire.csv": {
    "sha256": "0d577348a56daa1cdb13d04ff5def56104311c56a59192815e74ceb8b76c20b0",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-18T17:02:02Z",
-   "commit": "8447792",
-   "code_non_commite": false,
-   "parametres": "8d6698337e00e600"
+   "date": "2026-11-18T19:30:37Z",
+   "commit": "74fedf6",
+   "code_non_commite": true,
+   "parametres": "794cdc8fe7f60276"
   },
   "statu_quo_validation.csv": {
    "sha256": "f294a65113527bb0abde4f7baa822625eb48823ceb4075721f0be00701792b4a",
@@ -991,12 +991,12 @@
    "note": "Antérieur au manifeste. Aucun script du dépôt n'écrit ce fichier : origine à retrouver."
   },
   "variante_fonds_apu.json": {
-   "sha256": "8fd4e56ee976864c609bf2ec1e48b74baf30b134f00913dfa67e6dde3bbaeea0",
+   "sha256": "f920a0a66ac64d37f9a51bbbc1954f8ab9456082c61a72d8014206810b790fa8",
    "script": "outils.variante_fonds_apu",
-   "date": "2026-11-18T17:04:18Z",
-   "commit": "8447792",
+   "date": "2026-11-18T19:32:49Z",
+   "commit": "56ef22e",
    "code_non_commite": true,
-   "parametres": "8d6698337e00e600"
+   "parametres": "794cdc8fe7f60276"
   }
  }
 }

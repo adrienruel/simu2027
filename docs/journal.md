@@ -1819,5 +1819,7 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - **Restent à décider** : 5.1 (lectures des réformes de structure), 5.2 (solde migratoire), 5.8 (emploi spécifique
   jeune).
 - **Tests** : `test_depenses_chomage` (générosité, prime d'activité, formule complète), `test_couverture_incidence`
-  (retour sans double compte), décisions ajoutées à `test_programmes`. Sorties régénérées, Monte Carlo recalculé de
-  zéro.
+  (retour sans double compte), décisions ajoutées à `test_programmes`.
+- **Sorties régénérées** et Monte Carlo recalculé de zéro (600 tirages par borne).
+  - Philippe fait mieux que le statu quo dans 39 à 47 % des tirages (avant la phase M : 32 à 47 %).
+  - Avec son fonds compté dans les administrations publiques : 56 à 79 % (avant : 54 à 72 %).

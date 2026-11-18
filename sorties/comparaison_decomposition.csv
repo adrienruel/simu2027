@@ -11,291 +11,291 @@ Statu quo,Médian,2050,depuis_2029,7.277,-0.448,2.379,1.836,4.46,-0.95,0.0,-0.0
 Statu quo,Optimiste,2032,depuis_2029,0.935,-0.148,0.876,0.034,0.334,-0.161,0.0,0.0
 Statu quo,Optimiste,2037,depuis_2029,2.332,-0.376,1.898,0.167,1.126,-0.482,0.0,0.0
 Statu quo,Optimiste,2050,depuis_2029,6.46,-0.135,2.446,1.17,3.985,-1.006,0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2032,depuis_2029,6.033,3.028,1.382,0.5,0.918,0.204,-0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2032,ecart_statu_quo,7.449,5.805,0.234,0.358,0.545,0.506,-0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2037,depuis_2029,16.002,4.56,3.324,3.127,4.748,0.242,-0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2037,ecart_statu_quo,13.743,7.279,0.427,2.049,2.836,1.15,-0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2050,depuis_2029,56.292,5.463,6.495,14.688,29.451,0.195,-0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2050,ecart_statu_quo,34.544,7.279,0.75,2.017,20.634,3.863,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Prudent,2032,depuis_2029,3.334,1.378,1.127,0.237,0.575,0.017,-0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Prudent,2032,ecart_statu_quo,4.378,3.401,0.315,0.149,0.223,0.291,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Prudent,2037,depuis_2029,8.325,2.16,2.491,1.288,2.515,-0.129,-0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Prudent,2037,ecart_statu_quo,7.024,4.11,0.522,0.743,1.113,0.536,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Prudent,2050,depuis_2029,32.419,3.433,4.193,9.185,16.142,-0.534,-0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Prudent,2050,ecart_statu_quo,20.05,4.613,0.778,2.956,10.073,1.63,0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Médian,2032,depuis_2029,2.13,0.64,1.045,0.1,0.437,-0.092,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Médian,2032,ecart_statu_quo,2.351,1.828,0.217,0.051,0.106,0.148,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Médian,2037,depuis_2029,5.102,0.997,2.256,0.493,1.718,-0.362,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Médian,2037,ecart_statu_quo,3.779,2.426,0.344,0.226,0.518,0.264,0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Médian,2050,depuis_2029,15.885,1.361,3.206,4.08,8.226,-0.988,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Médian,2050,ecart_statu_quo,9.829,2.884,0.433,2.195,3.772,0.545,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,depuis_2029,1.39,0.171,1.008,0.039,0.323,-0.151,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,ecart_statu_quo,0.769,0.557,0.176,0.006,-0.007,0.038,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,depuis_2029,3.452,0.372,2.135,0.193,1.228,-0.476,0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,ecart_statu_quo,1.434,0.986,0.271,0.026,0.082,0.07,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,depuis_2029,9.277,0.885,2.82,1.584,5.023,-1.035,0.0,-0.0
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,ecart_statu_quo,3.131,1.258,0.318,0.403,1.029,0.123,0.0,-0.0
-Attal (Renaissance),Crise,2032,depuis_2029,3.132,1.161,1.117,0.201,0.597,0.055,0.0,0.0
-Attal (Renaissance),Crise,2032,ecart_statu_quo,2.051,1.724,0.051,0.066,0.215,-0.005,-0.0,-0.0
-Attal (Renaissance),Crise,2037,depuis_2029,8.285,1.549,2.558,1.467,2.732,-0.019,0.0,-0.0
-Attal (Renaissance),Crise,2037,ecart_statu_quo,3.53,2.054,0.068,0.455,0.893,0.061,-0.0,-0.0
-Attal (Renaissance),Crise,2050,depuis_2029,34.203,2.526,4.36,9.899,17.563,-0.146,0.0,0.0
-Attal (Renaissance),Crise,2050,ecart_statu_quo,9.958,2.128,0.1,0.761,6.509,0.46,0.0,-0.0
-Attal (Renaissance),Prudent,2032,depuis_2029,1.547,0.204,0.88,0.1,0.431,-0.068,0.0,0.0
-Attal (Renaissance),Prudent,2032,ecart_statu_quo,1.056,0.902,0.071,0.015,0.099,-0.031,0.0,-0.0
-Attal (Renaissance),Prudent,2037,depuis_2029,4.559,0.487,1.933,0.673,1.698,-0.233,0.0,0.0
-Attal (Renaissance),Prudent,2037,ecart_statu_quo,1.722,1.111,0.079,0.145,0.398,-0.012,0.0,0.0
-Attal (Renaissance),Prudent,2050,depuis_2029,19.546,1.446,2.917,6.138,9.703,-0.657,0.0,0.0
-Attal (Renaissance),Prudent,2050,ecart_statu_quo,5.641,1.3,0.097,1.149,2.976,0.119,0.0,0.0
-Attal (Renaissance),Médian,2032,depuis_2029,0.991,-0.173,0.869,0.051,0.377,-0.134,0.0,0.0
-Attal (Renaissance),Médian,2032,ecart_statu_quo,0.416,0.358,0.035,0.002,0.06,-0.039,0.0,0.0
-Attal (Renaissance),Médian,2037,depuis_2029,2.633,-0.435,1.869,0.293,1.328,-0.421,0.0,0.0
-Attal (Renaissance),Médian,2037,ecart_statu_quo,0.515,0.337,0.02,0.032,0.188,-0.062,0.0,-0.0
-Attal (Renaissance),Médian,2050,depuis_2029,8.094,-0.53,2.446,2.127,5.018,-0.966,0.0,0.0
-Attal (Renaissance),Médian,2050,ecart_statu_quo,1.243,0.336,0.018,0.295,0.71,-0.115,0.0,0.0
-Attal (Renaissance),Optimiste,2032,depuis_2029,0.419,-0.569,0.874,0.016,0.283,-0.185,0.0,-0.0
-Attal (Renaissance),Optimiste,2032,ecart_statu_quo,-0.814,-0.699,0.038,-0.018,-0.035,-0.1,0.0,-0.0
-Attal (Renaissance),Optimiste,2037,depuis_2029,1.276,-1.011,1.822,0.087,0.925,-0.548,0.0,-0.0
-Attal (Renaissance),Optimiste,2037,ecart_statu_quo,-1.354,-0.913,0.021,-0.077,-0.176,-0.209,0.0,-0.0
-Attal (Renaissance),Optimiste,2050,depuis_2029,3.808,-0.927,2.207,0.657,2.93,-1.059,0.0,0.0
-Attal (Renaissance),Optimiste,2050,ecart_statu_quo,-2.95,-1.069,0.016,-0.512,-0.972,-0.413,0.0,0.0
-Bertrand (Nous France),Crise,2032,depuis_2029,2.56,0.829,1.065,0.153,0.471,0.042,0.0,0.0
-Bertrand (Nous France),Crise,2032,ecart_statu_quo,0.255,0.203,0.005,0.011,0.033,0.003,-0.0,0.0
-Bertrand (Nous France),Crise,2037,depuis_2029,6.376,0.877,2.38,1.083,2.096,-0.059,0.0,-0.0
-Bertrand (Nous France),Crise,2037,ecart_statu_quo,0.396,0.193,-0.005,0.067,0.116,0.025,-0.0,-0.0
-Bertrand (Nous France),Crise,2050,depuis_2029,26.971,1.885,3.73,8.201,13.368,-0.213,0.0,0.0
-Bertrand (Nous France),Crise,2050,ecart_statu_quo,1.502,0.298,-0.008,0.134,0.815,0.263,0.0,-0.0
-Bertrand (Nous France),Prudent,2032,depuis_2029,1.184,-0.041,0.833,0.092,0.378,-0.078,0.0,0.0
-Bertrand (Nous France),Prudent,2032,ecart_statu_quo,0.049,0.03,0.006,0.002,0.014,-0.003,0.0,-0.0
-Bertrand (Nous France),Prudent,2037,depuis_2029,3.494,-0.027,1.83,0.545,1.402,-0.257,0.0,0.0
-Bertrand (Nous France),Prudent,2037,ecart_statu_quo,0.013,-0.029,-0.006,0.015,0.03,0.004,0.0,0.0
-Bertrand (Nous France),Prudent,2050,depuis_2029,14.953,0.834,2.594,4.847,7.36,-0.681,0.0,-0.0
-Bertrand (Nous France),Prudent,2050,ecart_statu_quo,0.404,0.062,-0.006,0.116,0.136,0.097,0.0,-0.0
-Bertrand (Nous France),Médian,2032,depuis_2029,0.819,-0.289,0.843,0.051,0.349,-0.134,0.0,-0.0
-Bertrand (Nous France),Médian,2032,ecart_statu_quo,-0.149,-0.145,-0.007,0.0,0.005,-0.002,0.0,-0.0
-Bertrand (Nous France),Médian,2037,depuis_2029,2.16,-0.675,1.818,0.258,1.175,-0.417,0.0,-0.0
-Bertrand (Nous France),Médian,2037,ecart_statu_quo,-0.352,-0.29,-0.029,-0.004,-0.023,-0.006,0.0,-0.0
-Bertrand (Nous France),Médian,2050,depuis_2029,6.517,-0.792,2.317,1.713,4.21,-0.93,0.0,-0.0
-Bertrand (Nous France),Médian,2050,ecart_statu_quo,-0.728,-0.313,-0.03,-0.12,-0.28,0.014,0.0,-0.0
-Bertrand (Nous France),Optimiste,2032,depuis_2029,0.512,-0.525,0.865,0.028,0.305,-0.162,0.0,-0.0
-Bertrand (Nous France),Optimiste,2032,ecart_statu_quo,-0.618,-0.566,-0.001,-0.006,-0.029,-0.016,0.0,-0.0
-Bertrand (Nous France),Optimiste,2037,depuis_2029,1.525,-0.94,1.844,0.129,0.979,-0.487,0.0,0.0
-Bertrand (Nous France),Optimiste,2037,ecart_statu_quo,-1.002,-0.754,-0.017,-0.037,-0.164,-0.031,0.0,0.0
-Bertrand (Nous France),Optimiste,2050,depuis_2029,4.629,-0.759,2.288,0.851,3.236,-0.987,0.0,-0.0
-Bertrand (Nous France),Optimiste,2050,ecart_statu_quo,-2.026,-0.813,-0.018,-0.318,-0.83,-0.046,0.0,0.0
-Glucksmann (Place publique),Crise,2032,depuis_2029,4.272,2.126,1.18,0.233,0.67,0.063,0.0,0.0
-Glucksmann (Place publique),Crise,2032,ecart_statu_quo,3.731,3.208,0.111,0.096,0.274,0.042,-0.0,0.0
-Glucksmann (Place publique),Crise,2037,depuis_2029,10.59,2.833,2.761,1.762,3.232,0.002,0.0,-0.0
-Glucksmann (Place publique),Crise,2037,ecart_statu_quo,6.374,3.857,0.204,0.741,1.401,0.17,-0.0,-0.0
-Glucksmann (Place publique),Crise,2050,depuis_2029,39.935,3.547,4.902,11.044,20.623,-0.18,0.0,0.0
-Glucksmann (Place publique),Crise,2050,ecart_statu_quo,16.229,3.668,0.313,1.094,10.625,0.529,0.0,0.0
-Glucksmann (Place publique),Prudent,2032,depuis_2029,2.388,0.915,0.976,0.108,0.462,-0.073,0.0,0.0
-Glucksmann (Place publique),Prudent,2032,ecart_statu_quo,2.304,2.002,0.187,0.021,0.115,-0.02,0.0,-0.0
-Glucksmann (Place publique),Prudent,2037,depuis_2029,6.269,1.61,2.167,0.767,1.948,-0.222,-0.0,0.0
-Glucksmann (Place publique),Prudent,2037,ecart_statu_quo,3.839,2.624,0.317,0.234,0.624,0.04,-0.0,0.0
-Glucksmann (Place publique),Prudent,2050,depuis_2029,24.536,2.639,3.401,7.156,12.013,-0.673,0.0,0.0
-Glucksmann (Place publique),Prudent,2050,ecart_statu_quo,11.038,2.883,0.42,1.802,5.732,0.201,0.0,0.0
-Glucksmann (Place publique),Médian,2032,depuis_2029,1.833,0.546,0.971,0.054,0.404,-0.141,0.0,-0.0
-Glucksmann (Place publique),Médian,2032,ecart_statu_quo,1.657,1.458,0.16,0.004,0.072,-0.038,0.0,-0.0
-Glucksmann (Place publique),Médian,2037,depuis_2029,4.427,0.804,2.112,0.349,1.566,-0.404,0.0,-0.0
-Glucksmann (Place publique),Médian,2037,ecart_statu_quo,2.707,1.956,0.263,0.085,0.408,-0.005,0.0,-0.0
-Glucksmann (Place publique),Médian,2050,depuis_2029,13.202,1.003,2.922,3.219,7.042,-0.983,0.0,0.0
-Glucksmann (Place publique),Médian,2050,ecart_statu_quo,6.75,2.25,0.299,1.365,2.797,0.039,0.0,0.0
-Glucksmann (Place publique),Optimiste,2032,depuis_2029,1.414,0.265,0.992,0.02,0.318,-0.181,0.0,-0.0
-Glucksmann (Place publique),Optimiste,2032,ecart_statu_quo,0.696,0.625,0.177,-0.013,-0.011,-0.082,0.0,-0.0
-Glucksmann (Place publique),Optimiste,2037,depuis_2029,3.461,0.482,2.11,0.147,1.218,-0.495,0.0,-0.0
-Glucksmann (Place publique),Optimiste,2037,ecart_statu_quo,1.346,1.071,0.284,-0.02,0.099,-0.087,0.0,0.0
-Glucksmann (Place publique),Optimiste,2050,depuis_2029,9.123,0.94,2.773,1.482,4.959,-1.031,0.0,-0.0
-Glucksmann (Place publique),Optimiste,2050,ecart_statu_quo,2.88,1.288,0.308,0.305,1.1,-0.121,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Crise,2032,depuis_2029,3.765,1.595,1.15,0.251,0.693,0.077,-0.0,0.0
-Le Pen (Rassemblement national) — partiel,Crise,2032,ecart_statu_quo,3.405,2.862,0.057,0.116,0.318,0.052,-0.0,0.0
-Le Pen (Rassemblement national) — partiel,Crise,2037,depuis_2029,10.028,2.232,2.72,1.811,3.212,0.053,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Crise,2037,ecart_statu_quo,5.992,3.442,0.124,0.794,1.384,0.249,-0.0,-0.0
-Le Pen (Rassemblement national) — partiel,Crise,2050,depuis_2029,40.845,3.619,4.952,11.272,20.955,0.047,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Crise,2050,ecart_statu_quo,17.32,3.925,0.211,1.141,10.537,1.506,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Prudent,2032,depuis_2029,2.007,0.483,0.919,0.141,0.525,-0.06,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Prudent,2032,ecart_statu_quo,2.324,1.973,0.088,0.055,0.203,0.005,0.0,-0.0
-Le Pen (Rassemblement national) — partiel,Prudent,2037,depuis_2029,5.787,0.939,2.098,0.889,2.057,-0.196,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Prudent,2037,ecart_statu_quo,3.758,2.356,0.17,0.36,0.773,0.099,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Prudent,2050,depuis_2029,25.13,2.205,3.424,7.526,12.528,-0.553,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Prudent,2050,ecart_statu_quo,12.032,2.853,0.264,2.045,6.22,0.652,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Médian,2032,depuis_2029,1.437,0.109,0.911,0.077,0.466,-0.126,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Médian,2032,ecart_statu_quo,1.678,1.438,0.056,0.028,0.16,-0.005,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Médian,2037,depuis_2029,3.717,0.013,2.027,0.421,1.646,-0.391,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Médian,2037,ecart_statu_quo,2.414,1.582,0.104,0.16,0.533,0.035,0.0,-0.0
-Le Pen (Rassemblement national) — partiel,Médian,2050,depuis_2029,12.645,0.242,2.863,3.377,7.098,-0.935,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Médian,2050,ecart_statu_quo,6.609,1.905,0.139,1.526,2.818,0.221,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Optimiste,2032,depuis_2029,1.01,-0.194,0.913,0.045,0.403,-0.157,0.0,-0.0
-Le Pen (Rassemblement national) — partiel,Optimiste,2032,ecart_statu_quo,0.86,0.727,0.039,0.012,0.102,-0.02,0.0,-0.0
-Le Pen (Rassemblement national) — partiel,Optimiste,2037,depuis_2029,2.681,-0.414,1.998,0.223,1.353,-0.48,0.0,-0.0
-Le Pen (Rassemblement national) — partiel,Optimiste,2037,ecart_statu_quo,1.134,0.735,0.069,0.058,0.293,-0.021,0.0,-0.0
-Le Pen (Rassemblement national) — partiel,Optimiste,2050,depuis_2029,8.19,-0.108,2.687,1.618,5.009,-1.015,0.0,0.0
-Le Pen (Rassemblement national) — partiel,Optimiste,2050,ecart_statu_quo,2.516,0.8,0.098,0.448,1.16,0.009,0.0,0.0
-Lisnard (Nouvelle Énergie),Crise,2032,depuis_2029,5.027,2.82,1.143,0.249,0.754,0.061,0.0,0.0
-Lisnard (Nouvelle Énergie),Crise,2032,ecart_statu_quo,4.647,4.094,0.051,0.113,0.386,0.002,-0.0,-0.0
-Lisnard (Nouvelle Énergie),Crise,2037,depuis_2029,12.251,3.671,2.748,2.049,3.711,0.072,0.0,-0.0
-Lisnard (Nouvelle Énergie),Crise,2037,ecart_statu_quo,8.195,4.887,0.063,1.025,1.99,0.23,-0.0,-0.0
-Lisnard (Nouvelle Énergie),Crise,2050,depuis_2029,49.148,5.836,5.451,12.732,24.868,0.261,0.0,0.0
-Lisnard (Nouvelle Énergie),Crise,2050,ecart_statu_quo,25.603,6.149,0.11,1.41,15.637,2.296,0.0,0.0
-Lisnard (Nouvelle Énergie),Prudent,2032,depuis_2029,2.589,1.098,0.922,0.127,0.553,-0.111,0.0,0.0
-Lisnard (Nouvelle Énergie),Prudent,2032,ecart_statu_quo,2.844,2.55,0.096,0.042,0.237,-0.081,0.0,-0.0
-Lisnard (Nouvelle Énergie),Prudent,2037,depuis_2029,6.623,1.592,2.084,0.923,2.268,-0.244,0.0,0.0
-Lisnard (Nouvelle Énergie),Prudent,2037,ecart_statu_quo,4.532,2.971,0.13,0.391,1.058,-0.019,0.0,0.0
-Lisnard (Nouvelle Énergie),Prudent,2050,depuis_2029,28.932,3.272,3.598,8.245,14.329,-0.512,0.0,-0.0
-Lisnard (Nouvelle Énergie),Prudent,2050,ecart_statu_quo,15.772,3.882,0.189,2.4,8.613,0.689,0.0,-0.0
-Lisnard (Nouvelle Énergie),Médian,2032,depuis_2029,1.767,0.499,0.909,0.064,0.484,-0.189,0.0,0.0
-Lisnard (Nouvelle Énergie),Médian,2032,ecart_statu_quo,1.913,1.76,0.063,0.016,0.184,-0.109,0.0,-0.0
-Lisnard (Nouvelle Énergie),Médian,2037,depuis_2029,3.806,0.153,1.987,0.399,1.737,-0.47,0.0,0.0
-Lisnard (Nouvelle Énergie),Médian,2037,ecart_statu_quo,2.409,1.655,0.067,0.137,0.686,-0.136,0.0,0.0
-Lisnard (Nouvelle Énergie),Médian,2050,depuis_2029,13.204,0.37,2.852,3.518,7.466,-1.003,0.0,0.0
-Lisnard (Nouvelle Énergie),Médian,2050,ecart_statu_quo,7.074,1.967,0.078,1.665,3.41,-0.047,0.0,0.0
-Lisnard (Nouvelle Énergie),Optimiste,2032,depuis_2029,0.505,-0.531,0.942,0.016,0.345,-0.268,0.0,0.0
-Lisnard (Nouvelle Énergie),Optimiste,2032,ecart_statu_quo,-0.116,-0.04,0.11,-0.016,0.043,-0.212,0.0,0.0
-Lisnard (Nouvelle Énergie),Optimiste,2037,depuis_2029,1.432,-1.118,1.953,0.1,1.111,-0.614,0.0,-0.0
-Lisnard (Nouvelle Énergie),Optimiste,2037,ecart_statu_quo,-0.587,-0.4,0.139,-0.065,0.062,-0.323,0.0,-0.0
-Lisnard (Nouvelle Énergie),Optimiste,2050,depuis_2029,4.808,-1.089,2.425,0.916,3.681,-1.125,0.0,-0.0
-Lisnard (Nouvelle Énergie),Optimiste,2050,ecart_statu_quo,-1.339,-0.611,0.133,-0.254,-0.053,-0.553,0.0,0.0
-Mélenchon (La France insoumise),Crise,2032,depuis_2029,10.321,6.47,1.591,0.565,1.539,0.156,0.0,-0.0
-Mélenchon (La France insoumise),Crise,2032,ecart_statu_quo,15.554,13.161,0.502,0.442,1.316,0.133,-0.0,-0.0
-Mélenchon (La France insoumise),Crise,2037,depuis_2029,24.675,8.634,4.114,4.028,7.718,0.182,0.0,-0.0
-Mélenchon (La France insoumise),Crise,2037,ecart_statu_quo,26.233,15.267,1.018,2.905,6.575,0.467,0.0,-0.0
-Mélenchon (La France insoumise),Crise,2050,depuis_2029,84.432,10.868,9.143,19.495,44.864,0.062,0.0,0.0
-Mélenchon (La France insoumise),Crise,2050,ecart_statu_quo,66.501,16.598,1.964,2.856,43.523,1.561,0.0,0.0
-Mélenchon (La France insoumise),Prudent,2032,depuis_2029,6.875,4.098,1.52,0.266,1.025,-0.034,0.0,0.0
-Mélenchon (La France insoumise),Prudent,2032,ecart_statu_quo,11.581,9.78,0.841,0.189,0.761,0.01,0.0,-0.0
-Mélenchon (La France insoumise),Prudent,2037,depuis_2029,15.986,5.892,3.491,2.072,4.698,-0.165,0.0,0.0
-Mélenchon (La France insoumise),Prudent,2037,ecart_statu_quo,18.347,11.5,1.545,1.539,3.6,0.164,0.0,0.0
-Mélenchon (La France insoumise),Prudent,2050,depuis_2029,55.48,7.41,6.769,13.207,28.765,-0.67,0.0,0.0
-Mélenchon (La France insoumise),Prudent,2050,ecart_statu_quo,46.773,12.248,2.665,4.714,26.758,0.387,0.0,0.0
-Mélenchon (La France insoumise),Médian,2032,depuis_2029,5.097,2.997,1.394,0.099,0.741,-0.135,0.0,-0.0
-Mélenchon (La France insoumise),Médian,2032,ecart_statu_quo,8.034,6.907,0.698,0.055,0.465,-0.09,0.0,-0.0
-Mélenchon (La France insoumise),Médian,2037,depuis_2029,10.686,4.123,3.07,0.781,3.119,-0.408,0.0,0.0
-Mélenchon (La France insoumise),Médian,2037,ecart_statu_quo,12.079,8.274,1.208,0.519,2.119,-0.04,0.0,0.0
-Mélenchon (La France insoumise),Médian,2050,depuis_2029,35.765,5.268,5.198,8.425,18.007,-1.133,0.0,-0.0
-Mélenchon (La France insoumise),Médian,2050,ecart_statu_quo,32.426,9.512,1.779,6.176,14.979,-0.02,0.0,0.0
-Mélenchon (La France insoumise),Optimiste,2032,depuis_2029,3.636,2.041,1.395,0.003,0.391,-0.195,0.0,-0.0
-Mélenchon (La France insoumise),Optimiste,2032,ecart_statu_quo,4.082,3.517,0.759,-0.03,0.067,-0.231,0.0,-0.0
-Mélenchon (La France insoumise),Optimiste,2037,depuis_2029,7.723,3.304,2.891,0.189,1.834,-0.496,0.0,0.0
-Mélenchon (La France insoumise),Optimiste,2037,ecart_statu_quo,6.772,5.007,1.246,0.023,0.726,-0.23,0.0,0.0
-Mélenchon (La France insoumise),Optimiste,2050,depuis_2029,20.773,4.66,4.253,3.265,9.716,-1.121,0.0,-0.0
-Mélenchon (La France insoumise),Optimiste,2050,ecart_statu_quo,15.694,6.123,1.643,2.082,6.2,-0.354,0.0,-0.0
-Philippe (Horizons),Crise,2032,depuis_2029,3.649,1.742,1.094,0.186,0.572,0.055,0.0,0.0
-Philippe (Horizons),Crise,2032,ecart_statu_quo,2.033,1.803,0.021,0.045,0.154,0.01,-0.0,-0.0
-Philippe (Horizons),Crise,2037,depuis_2029,9.109,2.387,2.54,1.445,2.723,0.013,0.0,0.0
-Philippe (Horizons),Crise,2037,ecart_statu_quo,3.818,2.391,0.032,0.424,0.826,0.145,-0.0,0.0
-Philippe (Horizons),Crise,2050,depuis_2029,37.78,4.338,4.517,10.305,18.586,0.034,0.0,0.0
-Philippe (Horizons),Crise,2050,ecart_statu_quo,13.001,3.438,0.043,0.791,7.379,1.35,0.0,0.0
-Philippe (Horizons),Prudent,2032,depuis_2029,1.768,0.462,0.845,0.105,0.432,-0.077,0.0,0.0
-Philippe (Horizons),Prudent,2032,ecart_statu_quo,0.997,0.902,0.009,0.016,0.077,-0.008,0.0,0.0
-Philippe (Horizons),Prudent,2037,depuis_2029,4.775,0.729,1.902,0.682,1.688,-0.227,0.0,0.0
-Philippe (Horizons),Prudent,2037,ecart_statu_quo,1.658,1.096,0.012,0.149,0.353,0.048,0.0,-0.0
-Philippe (Horizons),Prudent,2050,depuis_2029,20.894,2.167,2.957,6.331,10.001,-0.562,0.0,0.0
-Philippe (Horizons),Prudent,2050,ecart_statu_quo,6.709,1.764,0.02,1.249,3.103,0.574,0.0,-0.0
-Philippe (Horizons),Médian,2032,depuis_2029,1.055,-0.071,0.836,0.055,0.374,-0.138,0.0,0.0
-Philippe (Horizons),Médian,2032,ecart_statu_quo,0.212,0.207,-0.024,0.004,0.034,-0.009,0.0,0.0
-Philippe (Horizons),Médian,2037,depuis_2029,2.594,-0.405,1.829,0.293,1.284,-0.408,0.0,0.0
-Philippe (Horizons),Médian,2037,ecart_statu_quo,0.207,0.114,-0.049,0.029,0.106,0.007,0.0,-0.0
-Philippe (Horizons),Médian,2050,depuis_2029,8.355,-0.231,2.426,2.127,4.925,-0.892,0.0,0.0
-Philippe (Horizons),Médian,2050,ecart_statu_quo,1.236,0.383,-0.053,0.286,0.449,0.172,0.0,0.0
-Philippe (Horizons),Optimiste,2032,depuis_2029,0.375,-0.618,0.845,0.026,0.297,-0.175,0.0,-0.0
-Philippe (Horizons),Optimiste,2032,ecart_statu_quo,-0.907,-0.799,-0.029,-0.008,-0.04,-0.031,0.0,-0.0
-Philippe (Horizons),Optimiste,2037,depuis_2029,1.215,-1.126,1.805,0.113,0.923,-0.5,0.0,0.0
-Philippe (Horizons),Optimiste,2037,ecart_statu_quo,-1.465,-1.08,-0.052,-0.053,-0.225,-0.055,0.0,-0.0
-Philippe (Horizons),Optimiste,2050,depuis_2029,3.993,-0.924,2.22,0.731,2.94,-0.974,0.0,0.0
-Philippe (Horizons),Optimiste,2050,ecart_statu_quo,-2.814,-1.118,-0.052,-0.439,-1.164,-0.041,0.0,0.0
-Retailleau (Les Républicains),Crise,2032,depuis_2029,2.814,0.985,1.086,0.172,0.526,0.045,-0.0,-0.0
-Retailleau (Les Républicains),Crise,2032,ecart_statu_quo,1.056,0.905,0.017,0.031,0.1,0.003,-0.0,-0.0
-Retailleau (Les Républicains),Crise,2037,depuis_2029,7.406,1.313,2.475,1.253,2.385,-0.02,0.0,-0.0
-Retailleau (Les Républicains),Crise,2037,ecart_statu_quo,1.972,1.175,0.032,0.235,0.437,0.092,-0.0,0.0
-Retailleau (Les Républicains),Crise,2050,depuis_2029,31.72,2.666,4.125,9.207,15.784,-0.062,0.0,0.0
-Retailleau (Les Républicains),Crise,2050,ecart_statu_quo,6.798,1.625,0.05,0.48,3.703,0.938,0.0,0.0
-Retailleau (Les Républicains),Prudent,2032,depuis_2029,1.2,-0.061,0.845,0.099,0.407,-0.089,0.0,-0.0
-Retailleau (Les Républicains),Prudent,2032,ecart_statu_quo,0.417,0.366,0.008,0.01,0.049,-0.017,0.0,-0.0
-Retailleau (Les Républicains),Prudent,2037,depuis_2029,3.866,0.115,1.88,0.599,1.522,-0.25,0.0,0.0
-Retailleau (Les Républicains),Prudent,2037,ecart_statu_quo,0.737,0.469,0.017,0.067,0.167,0.016,0.0,0.0
-Retailleau (Les Républicains),Prudent,2050,depuis_2029,17.484,1.268,2.777,5.539,8.522,-0.621,0.0,0.0
-Retailleau (Les Républicains),Prudent,2050,ecart_statu_quo,3.287,0.852,0.024,0.67,1.389,0.353,0.0,0.0
-Retailleau (Les Républicains),Médian,2032,depuis_2029,0.692,-0.409,0.842,0.052,0.362,-0.155,0.0,-0.0
-Retailleau (Les Républicains),Médian,2032,ecart_statu_quo,-0.072,-0.05,-0.016,0.001,0.024,-0.031,0.0,-0.0
-Retailleau (Les Républicains),Médian,2037,depuis_2029,2.106,-0.764,1.832,0.261,1.208,-0.432,0.0,-0.0
-Retailleau (Les Républicains),Médian,2037,ecart_statu_quo,-0.202,-0.164,-0.027,-0.002,0.026,-0.034,0.0,0.0
-Retailleau (Les Républicains),Médian,2050,depuis_2029,6.824,-0.803,2.357,1.807,4.395,-0.932,0.0,0.0
-Retailleau (Les Républicains),Médian,2050,ecart_statu_quo,-0.216,-0.11,-0.03,-0.029,-0.06,0.013,0.0,0.0
-Retailleau (Les Républicains),Optimiste,2032,depuis_2029,0.152,-0.808,0.854,0.02,0.284,-0.2,0.0,-0.0
-Retailleau (Les Républicains),Optimiste,2032,ecart_statu_quo,-1.062,-0.912,-0.011,-0.014,-0.047,-0.079,0.0,-0.0
-Retailleau (Les Républicains),Optimiste,2037,depuis_2029,0.927,-1.32,1.81,0.089,0.878,-0.53,0.0,0.0
-Retailleau (Les Républicains),Optimiste,2037,ecart_statu_quo,-1.683,-1.196,-0.024,-0.077,-0.258,-0.128,0.0,0.0
-Retailleau (Les Républicains),Optimiste,2050,depuis_2029,3.179,-1.273,2.175,0.603,2.695,-1.021,0.0,-0.0
-Retailleau (Les Républicains),Optimiste,2050,ecart_statu_quo,-3.56,-1.39,-0.028,-0.566,-1.339,-0.237,0.0,0.0
-Roussel (Parti communiste français),Crise,2032,depuis_2029,10.852,5.836,1.611,0.886,2.226,0.293,0.0,-0.0
-Roussel (Parti communiste français),Crise,2032,ecart_statu_quo,13.489,9.945,0.381,0.752,2.034,0.377,-0.0,0.0
-Roussel (Parti communiste français),Crise,2037,depuis_2029,28.554,7.597,4.579,5.244,10.789,0.344,0.0,-0.0
-Roussel (Parti communiste français),Crise,2037,ecart_statu_quo,27.516,11.649,0.876,3.932,10.164,0.895,-0.0,-0.0
-Roussel (Parti communiste français),Crise,2050,depuis_2029,101.271,8.283,10.98,24.198,57.635,0.174,0.0,0.0
-Roussel (Parti communiste français),Crise,2050,ecart_statu_quo,80.744,11.431,1.855,3.728,61.263,2.467,0.0,0.0
-Roussel (Parti communiste français),Prudent,2032,depuis_2029,7.211,3.567,1.427,0.506,1.649,0.062,0.0,-0.0
-Roussel (Parti communiste français),Prudent,2032,ecart_statu_quo,9.86,7.233,0.597,0.422,1.415,0.192,0.0,-0.0
-Roussel (Parti communiste français),Prudent,2037,depuis_2029,19.954,5.263,3.704,3.651,7.403,-0.067,0.0,-0.0
-Roussel (Parti communiste français),Prudent,2037,ecart_statu_quo,20.257,8.856,1.256,3.083,6.614,0.449,0.0,-0.0
-Roussel (Parti communiste français),Prudent,2050,depuis_2029,70.164,5.834,8.127,17.34,39.466,-0.603,0.0,0.0
-Roussel (Parti communiste français),Prudent,2050,ecart_statu_quo,59.4,8.657,2.448,6.451,40.968,0.876,0.0,0.0
-Roussel (Parti communiste français),Médian,2032,depuis_2029,5.218,2.529,1.306,0.224,1.227,-0.068,0.0,0.0
-Roussel (Parti communiste français),Médian,2032,ecart_statu_quo,6.761,5.066,0.475,0.177,0.986,0.056,0.0,-0.0
-Roussel (Parti communiste français),Médian,2037,depuis_2029,13.09,3.784,3.215,1.578,4.878,-0.365,0.0,0.0
-Roussel (Parti communiste français),Médian,2037,ecart_statu_quo,13.09,6.561,0.949,1.311,4.126,0.144,0.0,-0.0
-Roussel (Parti communiste français),Médian,2050,depuis_2029,48.469,4.23,6.384,12.157,26.814,-1.116,0.0,0.0
-Roussel (Parti communiste français),Médian,2050,ecart_statu_quo,43.736,7.102,1.667,9.158,25.501,0.308,0.0,0.0
-Roussel (Parti communiste français),Optimiste,2032,depuis_2029,3.756,1.724,1.267,0.083,0.819,-0.137,0.0,0.0
-Roussel (Parti communiste français),Optimiste,2032,ecart_statu_quo,3.654,2.655,0.48,0.051,0.542,-0.073,0.0,-0.0
-Roussel (Parti communiste français),Optimiste,2037,depuis_2029,9.21,2.975,2.944,0.608,3.162,-0.48,0.0,0.0
-Roussel (Parti communiste français),Optimiste,2037,ecart_statu_quo,7.71,4.133,0.91,0.443,2.298,-0.074,0.0,0.0
-Roussel (Parti communiste français),Optimiste,2050,depuis_2029,31.556,4.017,5.126,7.055,16.546,-1.187,0.0,0.0
-Roussel (Parti communiste français),Optimiste,2050,ecart_statu_quo,25.929,4.935,1.405,5.822,13.785,-0.018,0.0,-0.0
-Tondelier (Les Écologistes),Crise,2032,depuis_2029,4.756,2.542,1.176,0.266,0.698,0.074,0.0,0.0
-Tondelier (Les Écologistes),Crise,2032,ecart_statu_quo,4.334,3.727,0.079,0.123,0.271,0.134,-0.0,-0.0
-Tondelier (Les Écologistes),Crise,2037,depuis_2029,12.025,3.762,2.803,1.965,3.454,0.04,0.0,0.0
-Tondelier (Les Écologistes),Crise,2037,ecart_statu_quo,7.928,4.891,0.162,0.931,1.563,0.381,-0.0,0.0
-Tondelier (Les Écologistes),Crise,2050,depuis_2029,44.969,5.381,5.21,11.869,22.612,-0.103,0.0,0.0
-Tondelier (Les Écologistes),Crise,2050,ecart_statu_quo,21.382,5.605,0.272,1.274,12.914,1.317,0.0,0.0
-Tondelier (Les Écologistes),Prudent,2032,depuis_2029,2.674,1.253,0.992,0.089,0.401,-0.061,-0.0,-0.0
-Tondelier (Les Écologistes),Prudent,2032,ecart_statu_quo,1.99,1.75,0.216,-0.004,0.0,0.028,-0.0,-0.0
-Tondelier (Les Écologistes),Prudent,2037,depuis_2029,6.728,2.272,2.184,0.68,1.787,-0.194,0.0,-0.0
-Tondelier (Les Écologistes),Prudent,2037,ecart_statu_quo,3.698,2.695,0.372,0.14,0.356,0.136,0.0,-0.0
-Tondelier (Les Écologistes),Prudent,2050,depuis_2029,25.57,3.998,3.449,6.981,11.753,-0.612,0.0,0.0
-Tondelier (Les Écologistes),Prudent,2050,ecart_statu_quo,11.472,3.652,0.532,1.635,5.124,0.528,0.0,0.0
-Tondelier (Les Écologistes),Médian,2032,depuis_2029,1.786,0.639,0.969,0.028,0.294,-0.145,0.0,0.0
-Tondelier (Les Écologistes),Médian,2032,ecart_statu_quo,0.553,0.517,0.177,-0.026,-0.103,-0.013,0.0,-0.0
-Tondelier (Les Écologistes),Médian,2037,depuis_2029,4.312,1.187,2.069,0.224,1.224,-0.393,-0.0,0.0
-Tondelier (Les Écologistes),Médian,2037,ecart_statu_quo,1.536,1.307,0.295,-0.045,-0.067,0.047,-0.0,0.0
-Tondelier (Les Écologistes),Médian,2050,depuis_2029,11.702,1.846,2.765,2.36,5.668,-0.937,0.0,-0.0
-Tondelier (Les Écologistes),Médian,2050,ecart_statu_quo,4.193,2.059,0.353,0.496,1.159,0.126,0.0,0.0
-Tondelier (Les Écologistes),Optimiste,2032,depuis_2029,1.223,0.426,1.003,-0.139,0.104,-0.172,0.0,-0.0
-Tondelier (Les Écologistes),Optimiste,2032,ecart_statu_quo,-1.564,-1.227,0.248,-0.183,-0.316,-0.086,0.0,-0.0
-Tondelier (Les Écologistes),Optimiste,2037,depuis_2029,3.057,0.924,2.03,-0.022,0.589,-0.464,0.0,-0.0
-Tondelier (Les Écologistes),Optimiste,2037,ecart_statu_quo,-1.126,-0.502,0.386,-0.195,-0.746,-0.07,0.0,-0.0
-Tondelier (Les Écologistes),Optimiste,2050,depuis_2029,6.614,1.754,2.444,0.52,2.837,-0.941,0.0,0.0
-Tondelier (Les Écologistes),Optimiste,2050,ecart_statu_quo,-1.698,0.088,0.43,-0.677,-1.447,-0.092,0.0,0.0
-Zemmour (Reconquête),Crise,2032,depuis_2029,3.478,1.147,1.132,0.309,0.797,0.093,0.0,0.0
-Zemmour (Reconquête),Crise,2032,ecart_statu_quo,4.177,3.427,0.013,0.185,0.513,0.038,-0.0,-0.0
-Zemmour (Reconquête),Crise,2037,depuis_2029,10.234,1.637,2.693,2.166,3.657,0.082,0.0,0.0
-Zemmour (Reconquête),Crise,2037,ecart_statu_quo,7.258,3.859,-0.024,1.158,2.025,0.24,-0.0,0.0
-Zemmour (Reconquête),Crise,2050,depuis_2029,43.908,3.065,5.139,12.259,23.254,0.19,0.0,0.0
-Zemmour (Reconquête),Crise,2050,ecart_statu_quo,21.444,4.384,-0.025,1.429,13.705,1.95,0.0,0.0
-Zemmour (Reconquête),Prudent,2032,depuis_2029,1.793,0.215,0.902,0.152,0.566,-0.042,0.0,-0.0
-Zemmour (Reconquête),Prudent,2032,ecart_statu_quo,2.657,2.218,0.087,0.076,0.312,-0.037,0.0,-0.0
-Zemmour (Reconquête),Prudent,2037,depuis_2029,5.581,0.489,2.02,1.0,2.252,-0.18,0.0,0.0
-Zemmour (Reconquête),Prudent,2037,ecart_statu_quo,4.098,2.419,0.072,0.48,1.1,0.027,0.0,-0.0
-Zemmour (Reconquête),Prudent,2050,depuis_2029,26.388,1.792,3.406,8.051,13.613,-0.474,0.0,0.0
-Zemmour (Reconquête),Prudent,2050,ecart_statu_quo,13.837,2.952,0.108,2.369,7.743,0.665,0.0,0.0
-Zemmour (Reconquête),Médian,2032,depuis_2029,1.056,-0.294,0.885,0.082,0.503,-0.12,0.0,0.0
-Zemmour (Reconquête),Médian,2032,ecart_statu_quo,1.825,1.536,0.044,0.04,0.265,-0.06,0.0,-0.0
-Zemmour (Reconquête),Médian,2037,depuis_2029,2.971,-0.775,1.929,0.462,1.754,-0.399,0.0,0.0
-Zemmour (Reconquête),Médian,2037,ecart_statu_quo,2.195,1.296,-0.002,0.207,0.763,-0.068,0.0,0.0
-Zemmour (Reconquête),Médian,2050,depuis_2029,11.86,-0.738,2.748,3.518,7.255,-0.923,0.0,-0.0
-Zemmour (Reconquête),Médian,2050,ecart_statu_quo,6.352,1.427,-0.001,1.681,3.152,0.092,0.0,0.0
-Zemmour (Reconquête),Optimiste,2032,depuis_2029,0.316,-0.768,0.92,0.016,0.322,-0.174,0.0,0.0
-Zemmour (Reconquête),Optimiste,2032,ecart_statu_quo,-0.224,-0.228,0.12,-0.013,0.066,-0.17,0.0,-0.0
-Zemmour (Reconquête),Optimiste,2037,depuis_2029,1.227,-1.357,1.892,0.117,1.085,-0.51,0.0,0.0
-Zemmour (Reconquête),Optimiste,2037,ecart_statu_quo,-0.711,-0.59,0.104,-0.044,0.075,-0.256,0.0,0.0
-Zemmour (Reconquête),Optimiste,2050,depuis_2029,4.557,-1.31,2.352,0.928,3.589,-1.002,0.0,0.0
-Zemmour (Reconquête),Optimiste,2050,ecart_statu_quo,-1.509,-0.783,0.102,-0.232,-0.214,-0.381,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2032,depuis_2029,5.995,2.996,1.382,0.499,0.914,0.204,-0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2032,ecart_statu_quo,7.389,5.75,0.234,0.357,0.541,0.506,-0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2037,depuis_2029,15.901,4.501,3.32,3.115,4.723,0.242,-0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2037,ecart_statu_quo,13.619,7.197,0.427,2.038,2.807,1.149,-0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2050,depuis_2029,56.047,5.421,6.475,14.64,29.315,0.195,-0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2050,ecart_statu_quo,34.276,7.213,0.749,2.008,20.442,3.864,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Prudent,2032,depuis_2029,3.329,1.371,1.127,0.238,0.576,0.017,-0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Prudent,2032,ecart_statu_quo,4.385,3.406,0.315,0.149,0.224,0.291,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Prudent,2037,depuis_2029,8.307,2.139,2.491,1.289,2.516,-0.129,-0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Prudent,2037,ecart_statu_quo,7.018,4.1,0.522,0.744,1.115,0.536,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Prudent,2050,depuis_2029,32.379,3.406,4.192,9.182,16.133,-0.534,-0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Prudent,2050,ecart_statu_quo,20.021,4.597,0.778,2.956,10.06,1.63,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Médian,2032,depuis_2029,2.147,0.651,1.046,0.101,0.441,-0.092,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Médian,2032,ecart_statu_quo,2.402,1.873,0.217,0.051,0.111,0.148,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Médian,2037,depuis_2029,5.126,1.0,2.259,0.497,1.732,-0.363,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Médian,2037,ecart_statu_quo,3.837,2.463,0.345,0.231,0.534,0.264,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Médian,2050,depuis_2029,16.003,1.359,3.215,4.123,8.295,-0.989,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Médian,2050,ecart_statu_quo,9.981,2.915,0.434,2.238,3.847,0.547,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,depuis_2029,1.418,0.192,1.009,0.04,0.329,-0.151,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,ecart_statu_quo,0.844,0.624,0.176,0.007,-0.001,0.038,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,depuis_2029,3.496,0.388,2.139,0.198,1.247,-0.476,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,ecart_statu_quo,1.524,1.048,0.271,0.031,0.104,0.07,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,depuis_2029,9.42,0.899,2.834,1.621,5.102,-1.037,0.0,-0.0
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,ecart_statu_quo,3.32,1.319,0.319,0.439,1.12,0.123,0.0,-0.0
+Attal (Renaissance),Crise,2032,depuis_2029,3.134,1.163,1.117,0.201,0.597,0.055,0.0,-0.0
+Attal (Renaissance),Crise,2032,ecart_statu_quo,2.053,1.727,0.051,0.066,0.215,-0.005,-0.0,-0.0
+Attal (Renaissance),Crise,2037,depuis_2029,8.28,1.543,2.557,1.467,2.732,-0.019,0.0,0.0
+Attal (Renaissance),Crise,2037,ecart_statu_quo,3.525,2.049,0.068,0.455,0.893,0.061,-0.0,-0.0
+Attal (Renaissance),Crise,2050,depuis_2029,34.195,2.525,4.36,9.897,17.559,-0.146,0.0,0.0
+Attal (Renaissance),Crise,2050,ecart_statu_quo,9.951,2.128,0.1,0.761,6.502,0.46,0.0,0.0
+Attal (Renaissance),Prudent,2032,depuis_2029,1.553,0.209,0.88,0.1,0.432,-0.068,0.0,-0.0
+Attal (Renaissance),Prudent,2032,ecart_statu_quo,1.07,0.915,0.071,0.015,0.101,-0.031,0.0,-0.0
+Attal (Renaissance),Prudent,2037,depuis_2029,4.562,0.484,1.933,0.675,1.702,-0.233,0.0,0.0
+Attal (Renaissance),Prudent,2037,ecart_statu_quo,1.733,1.117,0.079,0.147,0.402,-0.012,0.0,0.0
+Attal (Renaissance),Prudent,2050,depuis_2029,19.565,1.44,2.918,6.146,9.718,-0.657,0.0,0.0
+Attal (Renaissance),Prudent,2050,ecart_statu_quo,5.669,1.303,0.097,1.156,2.995,0.119,0.0,0.0
+Attal (Renaissance),Médian,2032,depuis_2029,0.998,-0.167,0.87,0.051,0.379,-0.134,0.0,0.0
+Attal (Renaissance),Médian,2032,ecart_statu_quo,0.434,0.374,0.035,0.003,0.061,-0.039,0.0,-0.0
+Attal (Renaissance),Médian,2037,depuis_2029,2.642,-0.433,1.87,0.294,1.332,-0.421,0.0,0.0
+Attal (Renaissance),Médian,2037,ecart_statu_quo,0.533,0.349,0.02,0.033,0.193,-0.062,0.0,0.0
+Attal (Renaissance),Médian,2050,depuis_2029,8.129,-0.528,2.449,2.138,5.037,-0.967,0.0,0.0
+Attal (Renaissance),Médian,2050,ecart_statu_quo,1.288,0.348,0.018,0.306,0.731,-0.115,0.0,0.0
+Attal (Renaissance),Optimiste,2032,depuis_2029,0.43,-0.56,0.874,0.016,0.285,-0.185,0.0,-0.0
+Attal (Renaissance),Optimiste,2032,ecart_statu_quo,-0.787,-0.674,0.038,-0.017,-0.033,-0.1,0.0,-0.0
+Attal (Renaissance),Optimiste,2037,depuis_2029,1.291,-1.006,1.824,0.089,0.932,-0.548,0.0,0.0
+Attal (Renaissance),Optimiste,2037,ecart_statu_quo,-1.324,-0.892,0.021,-0.076,-0.168,-0.209,0.0,0.0
+Attal (Renaissance),Optimiste,2050,depuis_2029,3.852,-0.92,2.211,0.666,2.954,-1.06,0.0,-0.0
+Attal (Renaissance),Optimiste,2050,ecart_statu_quo,-2.891,-1.047,0.016,-0.502,-0.945,-0.413,0.0,-0.0
+Bertrand (Nous France),Crise,2032,depuis_2029,2.558,0.827,1.066,0.153,0.471,0.042,0.0,0.0
+Bertrand (Nous France),Crise,2032,ecart_statu_quo,0.254,0.201,0.005,0.011,0.033,0.003,-0.0,-0.0
+Bertrand (Nous France),Crise,2037,depuis_2029,6.372,0.874,2.38,1.083,2.096,-0.059,0.0,0.0
+Bertrand (Nous France),Crise,2037,ecart_statu_quo,0.393,0.191,-0.005,0.067,0.115,0.025,-0.0,0.0
+Bertrand (Nous France),Crise,2050,depuis_2029,26.962,1.882,3.729,8.199,13.364,-0.213,0.0,0.0
+Bertrand (Nous France),Crise,2050,ecart_statu_quo,1.493,0.296,-0.008,0.133,0.81,0.263,0.0,-0.0
+Bertrand (Nous France),Prudent,2032,depuis_2029,1.182,-0.044,0.833,0.092,0.378,-0.078,0.0,0.0
+Bertrand (Nous France),Prudent,2032,ecart_statu_quo,0.049,0.029,0.006,0.002,0.014,-0.003,0.0,-0.0
+Bertrand (Nous France),Prudent,2037,depuis_2029,3.49,-0.03,1.83,0.545,1.402,-0.257,0.0,-0.0
+Bertrand (Nous France),Prudent,2037,ecart_statu_quo,0.012,-0.031,-0.006,0.015,0.03,0.004,0.0,-0.0
+Bertrand (Nous France),Prudent,2050,depuis_2029,14.944,0.829,2.593,4.845,7.358,-0.681,0.0,0.0
+Bertrand (Nous France),Prudent,2050,ecart_statu_quo,0.397,0.059,-0.006,0.114,0.133,0.097,0.0,-0.0
+Bertrand (Nous France),Médian,2032,depuis_2029,0.818,-0.291,0.843,0.051,0.349,-0.134,0.0,-0.0
+Bertrand (Nous France),Médian,2032,ecart_statu_quo,-0.149,-0.145,-0.007,0.001,0.005,-0.002,0.0,-0.0
+Bertrand (Nous France),Médian,2037,depuis_2029,2.157,-0.677,1.818,0.258,1.175,-0.417,0.0,-0.0
+Bertrand (Nous France),Médian,2037,ecart_statu_quo,-0.353,-0.291,-0.029,-0.004,-0.023,-0.006,0.0,-0.0
+Bertrand (Nous France),Médian,2050,depuis_2029,6.515,-0.794,2.317,1.713,4.209,-0.93,0.0,0.0
+Bertrand (Nous France),Médian,2050,ecart_statu_quo,-0.728,-0.313,-0.03,-0.12,-0.28,0.014,0.0,0.0
+Bertrand (Nous France),Optimiste,2032,depuis_2029,0.512,-0.525,0.865,0.029,0.305,-0.162,0.0,-0.0
+Bertrand (Nous France),Optimiste,2032,ecart_statu_quo,-0.613,-0.562,-0.001,-0.006,-0.029,-0.016,0.0,-0.0
+Bertrand (Nous France),Optimiste,2037,depuis_2029,1.525,-0.941,1.844,0.129,0.98,-0.487,0.0,0.0
+Bertrand (Nous France),Optimiste,2037,ecart_statu_quo,-0.997,-0.751,-0.017,-0.037,-0.163,-0.031,0.0,0.0
+Bertrand (Nous France),Optimiste,2050,depuis_2029,4.634,-0.76,2.289,0.852,3.24,-0.987,0.0,-0.0
+Bertrand (Nous France),Optimiste,2050,ecart_statu_quo,-2.017,-0.81,-0.018,-0.316,-0.826,-0.046,0.0,0.0
+Glucksmann (Place publique),Crise,2032,depuis_2029,4.265,2.12,1.179,0.233,0.669,0.063,0.0,0.0
+Glucksmann (Place publique),Crise,2032,ecart_statu_quo,3.718,3.196,0.111,0.096,0.274,0.042,-0.0,-0.0
+Glucksmann (Place publique),Crise,2037,depuis_2029,10.569,2.82,2.76,1.759,3.227,0.002,0.0,0.0
+Glucksmann (Place publique),Crise,2037,ecart_statu_quo,6.347,3.839,0.204,0.738,1.396,0.17,-0.0,0.0
+Glucksmann (Place publique),Crise,2050,depuis_2029,39.88,3.539,4.897,11.033,20.592,-0.18,0.0,0.0
+Glucksmann (Place publique),Crise,2050,ecart_statu_quo,16.169,3.654,0.313,1.091,10.581,0.529,0.0,-0.0
+Glucksmann (Place publique),Prudent,2032,depuis_2029,2.387,0.914,0.976,0.108,0.462,-0.073,0.0,-0.0
+Glucksmann (Place publique),Prudent,2032,ecart_statu_quo,2.305,2.003,0.187,0.021,0.115,-0.02,0.0,-0.0
+Glucksmann (Place publique),Prudent,2037,depuis_2029,6.263,1.603,2.167,0.767,1.948,-0.222,0.0,0.0
+Glucksmann (Place publique),Prudent,2037,ecart_statu_quo,3.835,2.619,0.317,0.234,0.624,0.04,0.0,0.0
+Glucksmann (Place publique),Prudent,2050,depuis_2029,24.518,2.63,3.4,7.154,12.007,-0.673,0.0,0.0
+Glucksmann (Place publique),Prudent,2050,ecart_statu_quo,11.022,2.875,0.42,1.801,5.725,0.201,0.0,0.0
+Glucksmann (Place publique),Médian,2032,depuis_2029,1.837,0.548,0.972,0.054,0.405,-0.141,0.0,-0.0
+Glucksmann (Place publique),Médian,2032,ecart_statu_quo,1.67,1.469,0.16,0.004,0.074,-0.038,0.0,-0.0
+Glucksmann (Place publique),Médian,2037,depuis_2029,4.43,0.802,2.113,0.35,1.569,-0.404,0.0,-0.0
+Glucksmann (Place publique),Médian,2037,ecart_statu_quo,2.72,1.964,0.263,0.087,0.412,-0.005,0.0,-0.0
+Glucksmann (Place publique),Médian,2050,depuis_2029,13.225,1.0,2.924,3.228,7.057,-0.984,0.0,0.0
+Glucksmann (Place publique),Médian,2050,ecart_statu_quo,6.782,2.256,0.3,1.374,2.813,0.039,0.0,0.0
+Glucksmann (Place publique),Optimiste,2032,depuis_2029,1.423,0.271,0.992,0.021,0.32,-0.181,0.0,0.0
+Glucksmann (Place publique),Optimiste,2032,ecart_statu_quo,0.725,0.651,0.177,-0.013,-0.008,-0.082,0.0,-0.0
+Glucksmann (Place publique),Optimiste,2037,depuis_2029,3.477,0.487,2.111,0.149,1.225,-0.495,0.0,-0.0
+Glucksmann (Place publique),Optimiste,2037,ecart_statu_quo,1.382,1.095,0.284,-0.018,0.108,-0.087,0.0,-0.0
+Glucksmann (Place publique),Optimiste,2050,depuis_2029,9.18,0.946,2.779,1.496,4.991,-1.032,0.0,0.0
+Glucksmann (Place publique),Optimiste,2050,ecart_statu_quo,2.956,1.313,0.308,0.319,1.136,-0.121,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Crise,2032,depuis_2029,3.733,1.568,1.149,0.249,0.689,0.077,-0.0,0.0
+Le Pen (Rassemblement national) — partiel,Crise,2032,ecart_statu_quo,3.343,2.806,0.057,0.114,0.313,0.052,-0.0,0.0
+Le Pen (Rassemblement national) — partiel,Crise,2037,depuis_2029,9.925,2.174,2.716,1.796,3.187,0.053,-0.0,0.0
+Le Pen (Rassemblement national) — partiel,Crise,2037,ecart_statu_quo,5.86,3.354,0.124,0.779,1.354,0.248,-0.0,0.0
+Le Pen (Rassemblement national) — partiel,Crise,2050,depuis_2029,40.519,3.549,4.928,11.208,20.786,0.047,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Crise,2050,ecart_statu_quo,16.964,3.826,0.21,1.124,10.296,1.507,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Prudent,2032,depuis_2029,1.977,0.457,0.919,0.14,0.522,-0.06,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Prudent,2032,ecart_statu_quo,2.269,1.924,0.088,0.054,0.199,0.005,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Prudent,2037,depuis_2029,5.706,0.888,2.095,0.88,2.039,-0.196,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Prudent,2037,ecart_statu_quo,3.652,2.28,0.17,0.351,0.752,0.099,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Prudent,2050,depuis_2029,24.839,2.14,3.405,7.462,12.384,-0.552,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Prudent,2050,ecart_statu_quo,11.717,2.763,0.263,2.006,6.033,0.652,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Médian,2032,depuis_2029,1.416,0.092,0.91,0.076,0.464,-0.126,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Médian,2032,ecart_statu_quo,1.635,1.399,0.056,0.028,0.157,-0.005,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Médian,2037,depuis_2029,3.662,-0.022,2.024,0.417,1.634,-0.391,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Médian,2037,ecart_statu_quo,2.338,1.526,0.104,0.155,0.518,0.034,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Médian,2050,depuis_2029,12.439,0.189,2.85,3.324,7.009,-0.933,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Médian,2050,ecart_statu_quo,6.382,1.831,0.139,1.474,2.719,0.22,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Optimiste,2032,depuis_2029,0.993,-0.208,0.912,0.044,0.401,-0.157,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Optimiste,2032,ecart_statu_quo,0.824,0.695,0.039,0.011,0.099,-0.02,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Optimiste,2037,depuis_2029,2.639,-0.441,1.996,0.221,1.343,-0.48,0.0,0.0
+Le Pen (Rassemblement national) — partiel,Optimiste,2037,ecart_statu_quo,1.074,0.69,0.069,0.056,0.281,-0.021,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Optimiste,2050,depuis_2029,8.069,-0.143,2.678,1.593,4.954,-1.014,0.0,-0.0
+Le Pen (Rassemblement national) — partiel,Optimiste,2050,ecart_statu_quo,2.376,0.747,0.098,0.424,1.098,0.009,0.0,0.0
+Lisnard (Nouvelle Énergie),Crise,2032,depuis_2029,4.956,2.76,1.142,0.246,0.747,0.061,0.0,-0.0
+Lisnard (Nouvelle Énergie),Crise,2032,ecart_statu_quo,4.529,3.988,0.051,0.11,0.378,0.002,-0.0,-0.0
+Lisnard (Nouvelle Énergie),Crise,2037,depuis_2029,12.055,3.558,2.74,2.022,3.665,0.071,0.0,-0.0
+Lisnard (Nouvelle Énergie),Crise,2037,ecart_statu_quo,7.953,4.729,0.063,0.998,1.936,0.228,-0.0,-0.0
+Lisnard (Nouvelle Énergie),Crise,2050,depuis_2029,48.556,5.706,5.408,12.619,24.562,0.261,0.0,0.0
+Lisnard (Nouvelle Énergie),Crise,2050,ecart_statu_quo,24.965,5.974,0.109,1.384,15.2,2.297,0.0,0.0
+Lisnard (Nouvelle Énergie),Prudent,2032,depuis_2029,2.543,1.057,0.922,0.126,0.549,-0.111,0.0,0.0
+Lisnard (Nouvelle Énergie),Prudent,2032,ecart_statu_quo,2.764,2.477,0.096,0.04,0.231,-0.081,0.0,-0.0
+Lisnard (Nouvelle Énergie),Prudent,2037,depuis_2029,6.496,1.509,2.079,0.91,2.242,-0.244,0.0,0.0
+Lisnard (Nouvelle Énergie),Prudent,2037,ecart_statu_quo,4.372,2.855,0.13,0.378,1.027,-0.019,0.0,-0.0
+Lisnard (Nouvelle Énergie),Prudent,2050,depuis_2029,28.496,3.171,3.57,8.153,14.113,-0.511,0.0,0.0
+Lisnard (Nouvelle Énergie),Prudent,2050,ecart_statu_quo,15.303,3.748,0.188,2.35,8.328,0.69,0.0,0.0
+Lisnard (Nouvelle Énergie),Médian,2032,depuis_2029,1.74,0.476,0.909,0.064,0.481,-0.189,0.0,0.0
+Lisnard (Nouvelle Énergie),Médian,2032,ecart_statu_quo,1.867,1.718,0.063,0.015,0.18,-0.109,0.0,0.0
+Lisnard (Nouvelle Énergie),Médian,2037,depuis_2029,3.737,0.105,1.984,0.395,1.723,-0.47,0.0,-0.0
+Lisnard (Nouvelle Énergie),Médian,2037,ecart_statu_quo,2.32,1.587,0.067,0.132,0.67,-0.136,0.0,-0.0
+Lisnard (Nouvelle Énergie),Médian,2050,depuis_2029,12.953,0.302,2.837,3.455,7.359,-1.001,0.0,-0.0
+Lisnard (Nouvelle Énergie),Médian,2050,ecart_statu_quo,6.803,1.879,0.078,1.603,3.29,-0.047,0.0,-0.0
+Lisnard (Nouvelle Énergie),Optimiste,2032,depuis_2029,0.509,-0.527,0.942,0.016,0.345,-0.268,0.0,-0.0
+Lisnard (Nouvelle Énergie),Optimiste,2032,ecart_statu_quo,-0.111,-0.035,0.11,-0.016,0.043,-0.212,0.0,-0.0
+Lisnard (Nouvelle Énergie),Optimiste,2037,depuis_2029,1.412,-1.137,1.953,0.1,1.11,-0.614,0.0,-0.0
+Lisnard (Nouvelle Énergie),Optimiste,2037,ecart_statu_quo,-0.605,-0.418,0.139,-0.065,0.062,-0.323,0.0,-0.0
+Lisnard (Nouvelle Énergie),Optimiste,2050,depuis_2029,4.751,-1.119,2.421,0.909,3.664,-1.125,0.0,-0.0
+Lisnard (Nouvelle Énergie),Optimiste,2050,ecart_statu_quo,-1.395,-0.64,0.133,-0.26,-0.074,-0.553,0.0,0.0
+Mélenchon (La France insoumise),Crise,2032,depuis_2029,10.332,6.476,1.592,0.566,1.542,0.156,0.0,0.0
+Mélenchon (La France insoumise),Crise,2032,ecart_statu_quo,15.589,13.19,0.503,0.443,1.32,0.133,-0.0,0.0
+Mélenchon (La France insoumise),Crise,2037,depuis_2029,24.719,8.653,4.117,4.033,7.733,0.182,0.0,0.0
+Mélenchon (La France insoumise),Crise,2037,ecart_statu_quo,26.301,15.309,1.019,2.91,6.595,0.467,0.0,0.0
+Mélenchon (La France insoumise),Crise,2050,depuis_2029,84.616,10.915,9.157,19.526,44.955,0.062,0.0,0.0
+Mélenchon (La France insoumise),Crise,2050,ecart_statu_quo,66.708,16.668,1.967,2.861,43.652,1.561,0.0,0.0
+Mélenchon (La France insoumise),Prudent,2032,depuis_2029,6.895,4.112,1.52,0.268,1.029,-0.034,0.0,0.0
+Mélenchon (La France insoumise),Prudent,2032,ecart_statu_quo,11.631,9.824,0.841,0.19,0.766,0.01,0.0,-0.0
+Mélenchon (La France insoumise),Prudent,2037,depuis_2029,16.054,5.923,3.495,2.083,4.718,-0.165,0.0,0.0
+Mélenchon (La France insoumise),Prudent,2037,ecart_statu_quo,18.444,11.561,1.546,1.549,3.623,0.164,0.0,0.0
+Mélenchon (La France insoumise),Prudent,2050,depuis_2029,55.703,7.458,6.787,13.248,28.88,-0.67,0.0,0.0
+Mélenchon (La France insoumise),Prudent,2050,ecart_statu_quo,47.025,12.326,2.671,4.731,26.91,0.387,0.0,0.0
+Mélenchon (La France insoumise),Médian,2032,depuis_2029,5.125,3.018,1.395,0.1,0.747,-0.135,0.0,0.0
+Mélenchon (La France insoumise),Médian,2032,ecart_statu_quo,8.106,6.97,0.699,0.056,0.471,-0.09,0.0,0.0
+Mélenchon (La France insoumise),Médian,2037,depuis_2029,10.761,4.162,3.076,0.789,3.142,-0.408,0.0,-0.0
+Mélenchon (La France insoumise),Médian,2037,ecart_statu_quo,12.198,8.355,1.21,0.527,2.146,-0.04,0.0,-0.0
+Mélenchon (La France insoumise),Médian,2050,depuis_2029,36.069,5.325,5.223,8.492,18.164,-1.135,0.0,0.0
+Mélenchon (La France insoumise),Médian,2050,ecart_statu_quo,32.773,9.612,1.787,6.231,15.164,-0.02,0.0,0.0
+Mélenchon (La France insoumise),Optimiste,2032,depuis_2029,3.683,2.077,1.397,0.004,0.399,-0.195,0.0,-0.0
+Mélenchon (La France insoumise),Optimiste,2032,ecart_statu_quo,4.193,3.616,0.76,-0.028,0.076,-0.231,0.0,-0.0
+Mélenchon (La France insoumise),Optimiste,2037,depuis_2029,7.829,3.363,2.9,0.196,1.866,-0.496,0.0,0.0
+Mélenchon (La France insoumise),Optimiste,2037,ecart_statu_quo,6.941,5.129,1.25,0.03,0.763,-0.23,0.0,0.0
+Mélenchon (La France insoumise),Optimiste,2050,depuis_2029,21.167,4.74,4.288,3.357,9.908,-1.125,0.0,0.0
+Mélenchon (La France insoumise),Optimiste,2050,ecart_statu_quo,16.152,6.265,1.654,2.173,6.413,-0.354,0.0,0.0
+Philippe (Horizons),Crise,2032,depuis_2029,3.594,1.694,1.093,0.185,0.568,0.055,0.0,0.0
+Philippe (Horizons),Crise,2032,ecart_statu_quo,1.955,1.732,0.021,0.044,0.149,0.01,-0.0,-0.0
+Philippe (Horizons),Crise,2037,depuis_2029,8.977,2.303,2.534,1.43,2.696,0.013,0.0,-0.0
+Philippe (Horizons),Crise,2037,ecart_statu_quo,3.663,2.284,0.032,0.409,0.794,0.145,-0.0,-0.0
+Philippe (Horizons),Crise,2050,depuis_2029,37.359,4.232,4.488,10.226,18.379,0.034,0.0,0.0
+Philippe (Horizons),Crise,2050,ecart_statu_quo,12.556,3.309,0.043,0.767,7.085,1.351,0.0,-0.0
+Philippe (Horizons),Prudent,2032,depuis_2029,1.727,0.425,0.845,0.104,0.43,-0.077,0.0,-0.0
+Philippe (Horizons),Prudent,2032,ecart_statu_quo,0.94,0.849,0.009,0.015,0.074,-0.008,0.0,-0.0
+Philippe (Horizons),Prudent,2037,depuis_2029,4.688,0.67,1.899,0.674,1.672,-0.227,0.0,-0.0
+Philippe (Horizons),Prudent,2037,ecart_statu_quo,1.556,1.02,0.012,0.142,0.334,0.048,0.0,-0.0
+Philippe (Horizons),Prudent,2050,depuis_2029,20.588,2.092,2.94,6.26,9.859,-0.561,0.0,-0.0
+Philippe (Horizons),Prudent,2050,ecart_statu_quo,6.387,1.673,0.02,1.198,2.924,0.573,0.0,0.0
+Philippe (Horizons),Médian,2032,depuis_2029,1.035,-0.09,0.835,0.055,0.373,-0.138,0.0,0.0
+Philippe (Horizons),Médian,2032,ecart_statu_quo,0.185,0.182,-0.024,0.004,0.032,-0.009,0.0,0.0
+Philippe (Horizons),Médian,2037,depuis_2029,2.557,-0.432,1.828,0.291,1.278,-0.408,0.0,0.0
+Philippe (Horizons),Médian,2037,ecart_statu_quo,0.164,0.081,-0.048,0.027,0.098,0.007,0.0,0.0
+Philippe (Horizons),Médian,2050,depuis_2029,8.252,-0.262,2.419,2.103,4.883,-0.891,0.0,0.0
+Philippe (Horizons),Médian,2050,ecart_statu_quo,1.127,0.345,-0.053,0.262,0.401,0.172,0.0,0.0
+Philippe (Horizons),Optimiste,2032,depuis_2029,0.372,-0.621,0.845,0.026,0.297,-0.175,0.0,-0.0
+Philippe (Horizons),Optimiste,2032,ecart_statu_quo,-0.906,-0.798,-0.029,-0.008,-0.04,-0.031,0.0,-0.0
+Philippe (Horizons),Optimiste,2037,depuis_2029,1.212,-1.13,1.805,0.113,0.923,-0.5,0.0,0.0
+Philippe (Horizons),Optimiste,2037,ecart_statu_quo,-1.464,-1.079,-0.052,-0.053,-0.224,-0.055,0.0,-0.0
+Philippe (Horizons),Optimiste,2050,depuis_2029,3.999,-0.922,2.22,0.732,2.943,-0.974,0.0,-0.0
+Philippe (Horizons),Optimiste,2050,ecart_statu_quo,-2.804,-1.111,-0.052,-0.438,-1.161,-0.041,0.0,-0.0
+Retailleau (Les Républicains),Crise,2032,depuis_2029,2.806,0.981,1.085,0.171,0.524,0.045,-0.0,-0.0
+Retailleau (Les Républicains),Crise,2032,ecart_statu_quo,1.021,0.874,0.017,0.03,0.097,0.003,-0.0,-0.0
+Retailleau (Les Républicains),Crise,2037,depuis_2029,7.367,1.298,2.472,1.245,2.372,-0.02,0.0,0.0
+Retailleau (Les Républicains),Crise,2037,ecart_statu_quo,1.907,1.134,0.032,0.227,0.421,0.092,-0.0,0.0
+Retailleau (Les Républicains),Crise,2050,depuis_2029,31.575,2.657,4.113,9.171,15.697,-0.062,0.0,0.0
+Retailleau (Les Républicains),Crise,2050,ecart_statu_quo,6.626,1.589,0.05,0.467,3.581,0.939,0.0,0.0
+Retailleau (Les Républicains),Prudent,2032,depuis_2029,1.197,-0.062,0.844,0.099,0.405,-0.089,0.0,-0.0
+Retailleau (Les Républicains),Prudent,2032,ecart_statu_quo,0.388,0.342,0.008,0.009,0.046,-0.017,0.0,-0.0
+Retailleau (Les Républicains),Prudent,2037,depuis_2029,3.843,0.108,1.878,0.594,1.513,-0.25,0.0,0.0
+Retailleau (Les Républicains),Prudent,2037,ecart_statu_quo,0.69,0.438,0.017,0.063,0.156,0.015,0.0,0.0
+Retailleau (Les Républicains),Prudent,2050,depuis_2029,17.368,1.26,2.769,5.503,8.458,-0.62,0.0,0.0
+Retailleau (Les Républicains),Prudent,2050,ecart_statu_quo,3.147,0.82,0.024,0.641,1.31,0.352,0.0,0.0
+Retailleau (Les Républicains),Médian,2032,depuis_2029,0.697,-0.402,0.841,0.051,0.361,-0.155,0.0,-0.0
+Retailleau (Les Républicains),Médian,2032,ecart_statu_quo,-0.086,-0.061,-0.016,0.001,0.022,-0.031,0.0,-0.0
+Retailleau (Les Républicains),Médian,2037,depuis_2029,2.103,-0.76,1.831,0.259,1.204,-0.432,0.0,-0.0
+Retailleau (Les Républicains),Médian,2037,ecart_statu_quo,-0.223,-0.178,-0.027,-0.004,0.02,-0.034,0.0,0.0
+Retailleau (Les Républicains),Médian,2050,depuis_2029,6.793,-0.799,2.354,1.795,4.375,-0.931,0.0,0.0
+Retailleau (Les Républicains),Médian,2050,ecart_statu_quo,-0.265,-0.124,-0.03,-0.041,-0.083,0.013,0.0,0.0
+Retailleau (Les Républicains),Optimiste,2032,depuis_2029,0.174,-0.786,0.854,0.02,0.285,-0.2,0.0,0.0
+Retailleau (Les Républicains),Optimiste,2032,ecart_statu_quo,-1.046,-0.895,-0.011,-0.014,-0.047,-0.079,0.0,0.0
+Retailleau (Les Républicains),Optimiste,2037,depuis_2029,0.952,-1.3,1.81,0.09,0.882,-0.53,0.0,0.0
+Retailleau (Les Républicains),Optimiste,2037,ecart_statu_quo,-1.665,-1.182,-0.024,-0.076,-0.255,-0.128,0.0,0.0
+Retailleau (Les Républicains),Optimiste,2050,depuis_2029,3.225,-1.249,2.178,0.608,2.709,-1.022,0.0,-0.0
+Retailleau (Les Républicains),Optimiste,2050,ecart_statu_quo,-3.52,-1.372,-0.028,-0.561,-1.323,-0.237,0.0,0.0
+Roussel (Parti communiste français),Crise,2032,depuis_2029,10.823,5.809,1.611,0.885,2.225,0.293,0.0,0.0
+Roussel (Parti communiste français),Crise,2032,ecart_statu_quo,13.46,9.917,0.381,0.752,2.033,0.377,-0.0,-0.0
+Roussel (Parti communiste français),Crise,2037,depuis_2029,28.483,7.544,4.577,5.241,10.777,0.344,0.0,0.0
+Roussel (Parti communiste français),Crise,2037,ecart_statu_quo,27.444,11.594,0.876,3.93,10.15,0.895,-0.0,-0.0
+Roussel (Parti communiste français),Crise,2050,depuis_2029,101.12,8.244,10.969,24.173,57.561,0.174,0.0,0.0
+Roussel (Parti communiste français),Crise,2050,ecart_statu_quo,80.592,11.391,1.854,3.725,61.157,2.467,0.0,0.0
+Roussel (Parti communiste français),Prudent,2032,depuis_2029,7.213,3.565,1.427,0.507,1.651,0.062,0.0,-0.0
+Roussel (Parti communiste français),Prudent,2032,ecart_statu_quo,9.88,7.25,0.597,0.423,1.418,0.193,0.0,-0.0
+Roussel (Parti communiste français),Prudent,2037,depuis_2029,19.944,5.242,3.705,3.654,7.409,-0.067,0.0,-0.0
+Roussel (Parti communiste français),Prudent,2037,ecart_statu_quo,20.266,8.853,1.257,3.086,6.621,0.449,0.0,-0.0
+Roussel (Parti communiste français),Prudent,2050,depuis_2029,70.161,5.814,8.129,17.345,39.477,-0.603,0.0,-0.0
+Roussel (Parti communiste français),Prudent,2050,ecart_statu_quo,59.416,8.655,2.449,6.453,40.983,0.876,0.0,0.0
+Roussel (Parti communiste français),Médian,2032,depuis_2029,5.243,2.548,1.307,0.225,1.232,-0.068,0.0,0.0
+Roussel (Parti communiste français),Médian,2032,ecart_statu_quo,6.827,5.126,0.476,0.178,0.992,0.056,0.0,0.0
+Roussel (Parti communiste français),Médian,2037,depuis_2029,13.135,3.795,3.219,1.587,4.899,-0.365,0.0,0.0
+Roussel (Parti communiste français),Médian,2037,ecart_statu_quo,13.176,6.613,0.951,1.319,4.15,0.144,0.0,0.0
+Roussel (Parti communiste français),Médian,2050,depuis_2029,48.62,4.229,6.4,12.195,26.912,-1.117,0.0,0.0
+Roussel (Parti communiste français),Médian,2050,ecart_statu_quo,43.928,7.142,1.67,9.188,25.62,0.308,0.0,0.0
+Roussel (Parti communiste français),Optimiste,2032,depuis_2029,3.796,1.753,1.268,0.084,0.827,-0.137,0.0,-0.0
+Roussel (Parti communiste français),Optimiste,2032,ecart_statu_quo,3.76,2.75,0.48,0.052,0.551,-0.073,0.0,-0.0
+Roussel (Parti communiste français),Optimiste,2037,depuis_2029,9.287,3.006,2.951,0.617,3.193,-0.48,0.0,0.0
+Roussel (Parti communiste français),Optimiste,2037,ecart_statu_quo,7.855,4.231,0.912,0.452,2.334,-0.074,0.0,0.0
+Roussel (Parti communiste français),Optimiste,2050,depuis_2029,31.871,4.037,5.154,7.142,16.727,-1.189,0.0,-0.0
+Roussel (Parti communiste français),Optimiste,2050,ecart_statu_quo,26.311,5.021,1.412,5.904,13.991,-0.018,0.0,0.0
+Tondelier (Les Écologistes),Crise,2032,depuis_2029,4.752,2.535,1.176,0.266,0.699,0.075,0.0,0.0
+Tondelier (Les Écologistes),Crise,2032,ecart_statu_quo,4.341,3.731,0.079,0.123,0.273,0.134,-0.0,-0.0
+Tondelier (Les Écologistes),Crise,2037,depuis_2029,12.026,3.757,2.804,1.968,3.457,0.04,0.0,0.0
+Tondelier (Les Écologistes),Crise,2037,ecart_statu_quo,7.94,4.895,0.162,0.934,1.567,0.381,-0.0,-0.0
+Tondelier (Les Écologistes),Crise,2050,depuis_2029,45.005,5.388,5.213,11.877,22.631,-0.103,0.0,0.0
+Tondelier (Les Écologistes),Crise,2050,ecart_statu_quo,21.43,5.623,0.272,1.276,12.942,1.317,0.0,0.0
+Tondelier (Les Écologistes),Prudent,2032,depuis_2029,2.68,1.255,0.993,0.09,0.403,-0.061,-0.0,0.0
+Tondelier (Les Écologistes),Prudent,2032,ecart_statu_quo,2.021,1.776,0.216,-0.003,0.004,0.028,-0.0,0.0
+Tondelier (Les Écologistes),Prudent,2037,depuis_2029,6.75,2.276,2.186,0.685,1.797,-0.194,0.0,0.0
+Tondelier (Les Écologistes),Prudent,2037,ecart_statu_quo,3.745,2.724,0.373,0.145,0.368,0.136,0.0,-0.0
+Tondelier (Les Écologistes),Prudent,2050,depuis_2029,25.681,4.007,3.457,7.012,11.817,-0.613,0.0,0.0
+Tondelier (Les Écologistes),Prudent,2050,ecart_statu_quo,11.608,3.685,0.533,1.656,5.206,0.528,0.0,0.0
+Tondelier (Les Écologistes),Médian,2032,depuis_2029,1.798,0.646,0.97,0.029,0.298,-0.145,0.0,-0.0
+Tondelier (Les Écologistes),Médian,2032,ecart_statu_quo,0.603,0.561,0.177,-0.025,-0.098,-0.013,0.0,-0.0
+Tondelier (Les Écologistes),Médian,2037,depuis_2029,4.347,1.201,2.072,0.229,1.238,-0.393,-0.0,0.0
+Tondelier (Les Écologistes),Médian,2037,ecart_statu_quo,1.609,1.357,0.295,-0.04,-0.05,0.047,-0.0,0.0
+Tondelier (Les Écologistes),Médian,2050,depuis_2029,11.858,1.87,2.777,2.405,5.745,-0.939,0.0,0.0
+Tondelier (Les Écologistes),Médian,2050,ecart_statu_quo,4.388,2.121,0.354,0.54,1.246,0.127,0.0,0.0
+Tondelier (Les Écologistes),Optimiste,2032,depuis_2029,1.246,0.441,1.004,-0.138,0.11,-0.172,0.0,-0.0
+Tondelier (Les Écologistes),Optimiste,2032,ecart_statu_quo,-1.48,-1.152,0.249,-0.182,-0.309,-0.086,0.0,-0.0
+Tondelier (Les Écologistes),Optimiste,2037,depuis_2029,3.115,0.95,2.036,-0.017,0.61,-0.464,0.0,0.0
+Tondelier (Les Écologistes),Optimiste,2037,ecart_statu_quo,-1.007,-0.416,0.387,-0.19,-0.719,-0.07,0.0,0.0
+Tondelier (Les Écologistes),Optimiste,2050,depuis_2029,6.802,1.796,2.464,0.556,2.931,-0.944,0.0,0.0
+Tondelier (Les Écologistes),Optimiste,2050,ecart_statu_quo,-1.448,0.189,0.433,-0.641,-1.338,-0.091,0.0,0.0
+Zemmour (Reconquête),Crise,2032,depuis_2029,3.476,1.144,1.132,0.31,0.797,0.093,0.0,0.0
+Zemmour (Reconquête),Crise,2032,ecart_statu_quo,4.182,3.431,0.013,0.186,0.514,0.038,-0.0,0.0
+Zemmour (Reconquête),Crise,2037,depuis_2029,10.234,1.633,2.693,2.167,3.66,0.082,0.0,0.0
+Zemmour (Reconquête),Crise,2037,ecart_statu_quo,7.265,3.862,-0.024,1.16,2.027,0.24,-0.0,0.0
+Zemmour (Reconquête),Crise,2050,depuis_2029,43.966,3.093,5.142,12.267,23.274,0.19,0.0,-0.0
+Zemmour (Reconquête),Crise,2050,ecart_statu_quo,21.508,4.419,-0.025,1.43,13.733,1.95,0.0,-0.0
+Zemmour (Reconquête),Prudent,2032,depuis_2029,1.794,0.213,0.903,0.153,0.568,-0.042,0.0,-0.0
+Zemmour (Reconquête),Prudent,2032,ecart_statu_quo,2.679,2.237,0.087,0.077,0.315,-0.037,0.0,-0.0
+Zemmour (Reconquête),Prudent,2037,depuis_2029,5.586,0.482,2.021,1.004,2.259,-0.18,0.0,-0.0
+Zemmour (Reconquête),Prudent,2037,ecart_statu_quo,4.125,2.433,0.072,0.484,1.108,0.028,0.0,-0.0
+Zemmour (Reconquête),Prudent,2050,depuis_2029,26.455,1.798,3.411,8.068,13.651,-0.474,0.0,0.0
+Zemmour (Reconquête),Prudent,2050,ecart_statu_quo,13.926,2.98,0.108,2.379,7.794,0.665,0.0,-0.0
+Zemmour (Reconquête),Médian,2032,depuis_2029,1.061,-0.292,0.886,0.083,0.505,-0.12,0.0,0.0
+Zemmour (Reconquête),Médian,2032,ecart_statu_quo,1.853,1.561,0.044,0.04,0.267,-0.06,0.0,0.0
+Zemmour (Reconquête),Médian,2037,depuis_2029,2.982,-0.775,1.931,0.465,1.761,-0.399,0.0,0.0
+Zemmour (Reconquête),Médian,2037,ecart_statu_quo,2.23,1.319,-0.002,0.209,0.772,-0.068,0.0,0.0
+Zemmour (Reconquête),Médian,2050,depuis_2029,11.947,-0.728,2.753,3.545,7.3,-0.924,0.0,0.0
+Zemmour (Reconquête),Médian,2050,ecart_statu_quo,6.462,1.461,-0.001,1.708,3.202,0.092,0.0,0.0
+Zemmour (Reconquête),Optimiste,2032,depuis_2029,0.333,-0.756,0.921,0.017,0.326,-0.174,0.0,-0.0
+Zemmour (Reconquête),Optimiste,2032,ecart_statu_quo,-0.168,-0.178,0.12,-0.012,0.071,-0.17,0.0,-0.0
+Zemmour (Reconquête),Optimiste,2037,depuis_2029,1.25,-1.354,1.895,0.12,1.099,-0.511,0.0,0.0
+Zemmour (Reconquête),Optimiste,2037,ecart_statu_quo,-0.649,-0.547,0.104,-0.041,0.091,-0.256,0.0,-0.0
+Zemmour (Reconquête),Optimiste,2050,depuis_2029,4.651,-1.3,2.361,0.95,3.643,-1.003,0.0,0.0
+Zemmour (Reconquête),Optimiste,2050,ecart_statu_quo,-1.375,-0.734,0.102,-0.21,-0.153,-0.381,0.0,0.0
