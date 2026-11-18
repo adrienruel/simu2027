@@ -42,6 +42,9 @@ def lire(chemin: Path = POPULATION) -> list[dict]:
         for k in ("poids", "salaire_brut", "cout_employeur", "revenu_independant", "chomage_brut", "pension_brute",
                   "dividendes", "revenus_fonciers", "loyer_mensuel"):
             l[k] = float(l[k])
+        # phase L (4.2) : colonnes absentes d'une population générée avant (zéro)
+        l["plus_values"] = float(l.get("plus_values") or 0.0)
+        l["apprenti"] = int(l.get("apprenti") or 0)
     return lignes
 
 
@@ -180,11 +183,16 @@ def simulation(lignes: list[dict], annee: int = 2026, tbs=None):
     div_f = np.bincount(s["foyer"], weights=col("dividendes"), minlength=s["n_foyers"])
     fon_f = np.bincount(s["foyer"], weights=col("revenus_fonciers"), minlength=s["n_foyers"])
 
+    apprenti = np.array([bool(l.get("apprenti", 0)) for l in lignes])
+    a_apprentis = bool(apprenti.any()) and "apprenti" in tbs.variables  # variable d'OpenFisca-France (à vérifier)
     for y in (str(annee - 3), str(annee - 2), str(annee - 1), str(annee)):
         sim.set_input("date_naissance", y, np.array([f"{annee - a}-07-01" for a in age], dtype="datetime64[D]"))
         for m in range(12):
             travaille = (m >= debut) & (m < debut + mois)
             sim.set_input("salaire_de_base", f"{y}-{m + 1:02d}", np.where(public | ~travaille, 0.0, brut / mois))
+            if a_apprentis:
+                # phase L (4.2) : salaire exonéré d'IR jusqu'au SMIC annuel, cotisations salariales exonérées
+                sim.set_input("apprenti", f"{y}-{m + 1:02d}", apprenti & travaille & ~public)
         tib = np.where(public, brut * (1 - PART_PRIMES_FONCTIONNAIRES), 0.0)
         sim.set_input("traitement_indiciaire_brut", y, tib)
         sim.set_input("primes_fonction_publique", y, np.where(public, brut - tib, 0.0))
@@ -198,6 +206,10 @@ def simulation(lignes: list[dict], annee: int = 2026, tbs=None):
         sim.set_input("handicap", y, col("handicap") == 1)
         sim.set_input("taux_incapacite", y, np.where(col("handicap") == 1, 0.8, 0.0))
         sim.set_input("f2dc", y, div_f)
+        # phase L (4.2) : plus-values mobilières (case 3VG, PFU par défaut)
+        if "f3vg" in tbs.variables:
+            sim.set_input("f3vg", y, np.bincount(s["foyer"], weights=np.array([l.get("plus_values", 0.0) for l in lignes], float),
+                                                 minlength=s["n_foyers"]))
         sim.set_input("f4ba", y, fon_f * 0.85)  # loyers nets des charges déductibles (≈ 15 %), au réel
         sim.set_input("statut_occupation_logement", y, occ)
         sim.set_input("loyer", y, col("loyer_mensuel")[pm] * 12)

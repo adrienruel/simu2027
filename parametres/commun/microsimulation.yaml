@@ -98,6 +98,22 @@ microsimulation:
     statut: HYPOTHESE
     source: "dividendes.revenus_capitaux_mobiliers_2023 (53 Md€) ; revenus_capital.loyers (30 Md€)"
     note: "En Md€. Répartis sur les ménages selon le rang de leur revenu avec une loi de Pareto (paramètre 1,3 : le dernier centile reçoit environ la moitié des dividendes, Insee-DGFiP) ; dividendes au prélèvement forfaitaire (12,8 % d'IR), loyers au barème après abattement."
+  plus_values_mobilieres:
+    valeur: {montant: 15, dispersion: 1.0}
+    unite: sans_unite
+    statut: SOURCE
+    source: "France Stratégie, Comité d'évaluation des réformes de la fiscalité du capital, point de vue d'octobre 2022 : plus-values mobilières déclarées à l'IR (droit commun et abattement renforcé) ≈ 15 Md€ en 2020"
+    url: "https://www.strategie-plan.gouv.fr/files/files/Publications/Points%20de%20vue/2022-10-20%20-%20Point%20de%20vue%20Gros%20dividendes%20-%20Plus-values/FS-2022-PDV_Distribution%20dividendes%20en%202020_20oct.pdf"
+    page: "2"
+    note: "Phase L (roadmap 4.2, 18/11/2026). Montant en Md€ (euros de 2020, gardés tels quels faute de série plus récente : prudent pour une hausse du PFU, qui rapporte moins). Réparties comme les dividendes (rang du revenu du ménage, loi de Pareto de capital_menages), avec une dispersion lognormale plus forte (dispersion : écart type du log ; une plus-value est rare et grosse) ; déclarées en case 3VG (PFU par défaut). Tirage séparé (graine + 1) : la population d'avant la phase L ne change pas hors de cette colonne."
+  apprentis:
+    valeur: {actif: true, effectif: 1017500,
+             propension: {"16-17": 1.0, "18-20": 0.7, "21-25": 0.35, "26-29": 0.05},
+             part_smic: {"16-17": 0.40, "18-20": 0.54, "21-25": 0.64, "26-29": 1.0}}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Effectif : Dares, séries longues du système d'information sur l'apprentissage, 1 017 500 contrats en cours au 31/12/2025 (secteurs privé et public) ; part du SMIC : Code du travail, art. D6222-26 (grille par âge et année de contrat, moyenne des trois années : 16-17 ans 27/39/55 %, 18-20 ans 43/51/67 %, 21-25 ans 53/61/78 %, 26 ans et plus 100 %)"
+    note: "Phase L (roadmap 4.2, 18/11/2026). Apprentis tirés parmi les salariés du privé de 16 à 29 ans (tous comptés dans le privé, faute de lecture sûre de la part publique), avec une propension relative par âge (HYPOTHÈSE d'encadrement : l'âge moyen d'entrée est de 20,5 ans, Dares 2025), mise à l'échelle sur l'effectif. Rémunération : part du SMIC de la grille × SMIC brut × 12 ; coût employeur pris égal au brut (exonérations de cotisations des apprentis) ; effectif ajouté aux marges du calage ; marqués « apprenti » pour OpenFisca (salaire exonéré d'impôt sur le revenu jusqu'au SMIC annuel, cotisations salariales exonérées). Tirage séparé (graine + 1), mais la marge nouvelle change un peu tous les poids : la population est à régénérer avec OpenFisca."
   cibles_2026:
     valeur: {impot_revenu: 104.0, prestations_entretien: 25.2, aides_logement: 16.7, rsa: 12.4, prime_activite: 10.5, aah: 14.6}
     unite: sans_unite

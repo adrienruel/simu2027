@@ -232,6 +232,10 @@ def redistribution() -> None:
         return
     import yaml
     specs = yaml.safe_load((RACINE / "programmes" / "micro_mesures.yaml").read_text(encoding="utf-8"))
+    # phase 4.2 : déciles publiés seulement si la micro couvre publication.seuil_couverture_deciles du budget
+    # « ménages » du programme (outils/couverture_micro.py) ; pauvreté et Gini publiés avec leur couverture
+    from outils import couverture_micro
+    cov = couverture_micro.toutes()
     lignes, deciles = [], []
     with (src / "micro_vieillissement.csv").open(encoding="utf-8") as f:
         for r in csv.DictReader(f):
@@ -247,10 +251,15 @@ def redistribution() -> None:
                 x[k] = float(v) if v != "" else 0.0
             for k in ("pauvrete_pct", "gini", "d9_d1", "mediane"):
                 x[k + "_sq"] = float(r[k + "_sq"])
+            c = cov.get(r["programme"])
+            x["couverture_menages_pct"] = round(c["part_codee"] * 100, 1) if c else 100.0
+            x["deciles_publies"] = int(c["deciles_publies"]) if c else 1
             lignes.append(x)
     with (src / "micro_vieillissement_deciles.csv").open(encoding="utf-8") as f:
         for r in csv.DictReader(f):
             if r["programme"] not in noms or r["programme"] == "statu_quo":
+                continue
+            if not cov[r["programme"]]["deciles_publies"]:
                 continue
             lib = noms[r["programme"]]
             deciles.append({"cle": f"{lib}|{r['annee']}|{r['decile']}", "programme": lib, "annee": int(r["annee"]),

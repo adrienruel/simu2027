@@ -39,7 +39,12 @@ from .parametres import Parametres
 ANNEES = list(range(2029, 2074))
 POSTES = ("recettes", "participations")  # en plus des blocs de dépense du statu quo
 CONTEXTE = ("pib", "inflation", "taux_supplementaire", "chomage", "dette_depart", "emploi", "emplois_canaux",
-            "pib_hors_consommation", "inflation_taux", "taux_marche", "inflation_bouclage", "prix_bouclage", "facture_energie")
+            "pib_hors_consommation", "inflation_taux", "taux_marche", "inflation_bouclage", "prix_bouclage", "facture_energie",
+            "chomeurs_depenses")
+# chomeurs_depenses : {année: personnes} chômeurs en plus (+) ou en moins (−) du programme par rapport au statu quo
+# qui changent les dépenses sensibles au chômage (phase L, roadmap 4.1, emploi.depenses_chomage_programme) : sans les
+# canaux dont la mesure compte déjà le budget, ni les seniors, ni la démographie ; le noyau y ajoute les chômeurs de la
+# baisse ou de la hausse du PIB par les taux (rétroaction de la phase E1)
 # facture_energie : {année: Md€} importations de pétrole et de gaz en plus dues aux mesures (bouclage.facture_energie)
 # prix_bouclage : {année: fraction} niveau des prix en plus du statu quo dû au programme, pour la balance commerciale
 # inflation_bouclage : {année: points} inflation due au programme (moteur/bouclage.py) ; les pensions, revalorisées
@@ -243,6 +248,10 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         f_b = p.val("bouclage.forme")
         tr = {sc: sq._v(p, "bouclage.prime_demande", sc) for sc in (s, _MIROIR[s])}
         y_sq = sq.pib(p, s)
+    ch_dep = ctx.get("chomeurs_depenses") if p.val("emploi.depenses_chomage_programme") else None
+    if ch_dep is not None:
+        alloc_ch, part_ac = p.val("emploi.allocation_chomeur_evitee"), p.val("emploi.part_allocation_assurance_chomage")
+        w_ch = sq.salaires(p, s)
     zr = xr = qr = 0.0
     out = {}
     for t in ANNEES:
@@ -300,6 +309,15 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         if ctx.get("inflation_bouclage") and "retraites" in bl:
             erosion = ctx["inflation_bouclage"].get(t, 0.0) * bl["retraites"]
             bl["retraites"] -= erosion
+        # phase L (roadmap 4.1) : dépenses sensibles au chômage (assurance chômage, RSA) sur les chômeurs du programme
+        dep_chom = 0.0
+        if ch_dep is not None:
+            d_ch = ch_dep.get(t, 0.0)
+            if retro:
+                d_ch -= dy_r / y[t] * sq._v(p, "macro.emplois_par_point_pib", s) * e[t]["emploi"]
+            dep_chom = d_ch * alloc_ch * w_ch[t] / w_ch[2029] / 1e9
+            bl["chomage"] = bl.get("chomage", 0.0) + part_ac * dep_chom
+            bl["pauvrete"] = bl.get("pauvrete", 0.0) + (1 - part_ac) * dep_chom
         # dette de fin d'année précédente sur le PIB de cette année-là (dette/PIB publiée) ; pour 2029, PIB du statu
         # quo, comme la référence
         ratio = dette_prec / (y[t - 1] if t > 2029 else pib_ref_2029)
@@ -335,7 +353,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         out[t] = {
             "pib": y[t], "recettes": rec, "depenses_primaires": primaire, "blocs": bl,
             "interets_reels": interets_reels, "charge_dette": interets_reels + infl[t] * dette_prec,
-            "interets_menages": interets_menages,
+            "interets_menages": interets_menages, "depenses_chomage_programme": dep_chom,
             "taux_apparent": nominal, "taux_bce": bce, "taux_base": taux_base, "taux_fisher": fisher, "taux_prime": taux_prime,
             "taux_scenario": taux_scen, "dette_debut": dette_prec, "ecart_marche": marche_t, "pib_taux": dy_r, "erosion_pensions": erosion,
             "balance_commerciale": _balance(p, s, y[t], ctx.get("prix_bouclage", {}).get(t, 0.0), t)

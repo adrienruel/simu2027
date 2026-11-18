@@ -27,7 +27,9 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     # programme_commun (16/11/2026, phase J2) : lectures communes à tous, rangées là au lieu d'être recopiées dans
     # chaque programme (multiplicateur actif pour tous ; allègements qui suivent le SMIC selon la loi actuelle ;
     # calendrier des économies non détaillées)
-    assert decisions == ["calendrier.inflation", "demographie.scenario_fecondite", "incertitude.correlation",
+    # emploi.depenses_chomage_programme (18/11/2026, phase L, roadmap 4.1) : règle de modèle commune
+    assert decisions == ["calendrier.inflation", "demographie.scenario_fecondite", "emploi.depenses_chomage_programme",
+                         "incertitude.correlation",
                          "lectures_communes.capitalisation", "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi",
                          "programme_commun.enveloppe_debut", "programme_commun.enveloppe_plein",
                          "programme_commun.macro_multiplicateur_actif", "programme_commun.smic_allegements_suivent_smic", "sante_trajectoire.pente_phase_1"]

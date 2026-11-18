@@ -29,6 +29,8 @@ python -m outils.variante_fonds_apu               # variante « fonds dans les A
 python -m outils.openfisca_mesures <programme>    # micro des ménages, un programme par processus
 python -m outils.vieillissement <programme>       # micro vieillie (2029, 2032, 2037, 2050)
 python -m moteur.statu_quo --ecart                # scénario sans réforme (sorties/statu_quo.json)
+python -m outils.couverture_micro                 # part du budget « ménages » codée dans la micro (seuil des déciles)
+python -m outils.export_incidence                 # incidence des mesures sur les entreprises, par décile
 ```
 
 ## Organisation
@@ -44,6 +46,7 @@ python -m moteur.statu_quo --ecart                # scénario sans réforme (sor
 | `moteur/programme_simple.py`, `moteur/bibliotheque.py` | Mécanique d'un programme ; mesures communes (SMIC, âge de départ, CSG, capitalisation…) |
 | `moteur/offre.py`, `bouclage.py`, `capital.py`, `naissances.py`, `migrations.py` | Canaux communs : offre, macro bouclée, capital, démographie |
 | `moteur/fonds_apu.py`, `moteur/incertitude.py` | Variante commune des fonds de capitalisation ; Monte Carlo commun |
+| `moteur/incidence_entreprises.py` | Des entreprises aux revenus des ménages : salaires, prix, actionnaires (phase L, `docs/entreprises.md`) |
 | `moteur/decomposition.py` | Décomposition du déficit : primaire, taux, prime de dette, dette en plus, croissance (`docs/dette.md`) |
 | `outils/` | Population synthétique, OpenFisca, vieillissement, exports |
 | `tests/` | Tests automatiques (marqueur `edd` : tests d'Écologie de droite, exclus par défaut) |

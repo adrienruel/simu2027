@@ -366,6 +366,19 @@ class ProgrammeSimple:
         cache[cle] = v
         return v
 
+    @staticmethod
+    def chomeurs_depenses(canaux: dict, actifs: dict, budget_compte=()) -> dict[int, float]:
+        """Chômeurs en plus (+) ou en moins (−) qui changent les dépenses sensibles au chômage (phase L, roadmap 4.1) :
+        emplois de tous les canaux, après le plancher du chômage, moins les actifs en plus (offre, personnes retirées
+        de la population active), sauf les canaux dont la mesure compte déjà le budget (nom en « * »), les seniors
+        (seniors.allocation_chomage) et la démographie (règle du statu quo sur la population du programme)."""
+        exclus = ("Seniors", "Démographie")
+        # postes publics : leur mesure paie la rémunération et en reprend les prélèvements, jamais l'allocation évitée
+        # (même règle que les « Postes publics créés ou supprimés », sans « * »)
+        budget = {c for c in budget_compte if not c.startswith("Postes publics")}
+        return {t: -(sum(v for c, v in canaux[t].items() if c not in budget and not c.startswith(exclus))
+                     - actifs[t]) for t in ANNEES}
+
     # ------------------------------------------------------------------ à compléter par chaque programme
     def mesures_calculees(self, p: Parametres, s: str, idx: dict) -> tuple[list[Mesure], dict[str, dict[int, float]]]:
         """Mesures de la bibliothèque (montants) et emplois qu'elles changent ({canal: {année: emplois}}), hors
@@ -444,6 +457,11 @@ class ProgrammeSimple:
             ev_c = sq._v(p, "emploi_public.eviction_privee", s)
             ev_s = sq._v(p, "emploi_public.eviction_privee", miroir[s])
             valeur = self.v("emploi.valeur_emploi")
+            # phase L (4.1) : l'allocation évitée passe des recettes (valeur d'un emploi) aux blocs chômage et pauvreté,
+            # sur les chômeurs du programme (noyau, contexte « chomeurs_depenses »)
+            dep_chom = p.val("emploi.depenses_chomage_programme")
+            if dep_chom:
+                valeur -= p.val("emploi.allocation_chomeur_evitee")
             canaux = {t: {} for t in ANNEES}
             postes = {t: crees[t] + supprimes[t] for t in ANNEES}
             evince = {t: -(ev_c * crees[t] + ev_s * supprimes[t]) for t in ANNEES}
@@ -456,6 +474,7 @@ class ProgrammeSimple:
             # « * » : effet budgétaire déjà compté par la mesure ; « ** » : production aussi déjà comptée (pas de
             # valeur ajoutée en plus dans le PIB, ex. embauches de partage du travail)
             sans_va = set()
+            budget_compte = {c.lstrip("*") for c in canaux_calc if c.startswith("*")}
             for canal, serie in canaux_calc.items():
                 for t in ANNEES:
                     canaux[t][canal.lstrip("*")] = serie.get(t, 0.0)
@@ -501,6 +520,7 @@ class ProgrammeSimple:
                 details_offre = of["detail"]
             else:
                 details_offre = {}
+            actifs_bloc = {t: actifs[t] for t in ANNEES}  # actifs de l'offre (sans les seniors, comptés par leur mesure)
             # emploi des seniors quand l'âge de la retraite change (offre.seniors) : emplois, chômeurs, inactifs
             d_seniors = {t: 0.0 for t in ANNEES}
             nr = getattr(self, "non_retraites", {}).get((id(p), s))
@@ -515,6 +535,7 @@ class ProgrammeSimple:
             # leurs emplois perdus ne font pas de chômeurs
             for t, v in getattr(self, "actifs_en_plus", {}).get((id(p), s), {}).items():
                 actifs[t] += v
+                actifs_bloc[t] += v
             # PIB : multiplicateur, offre, et valeur ajoutée des emplois en plus ou en moins hors conjoncture et offre
             # (les postes publics : par leur dépense et le multiplicateur, puis à leur coût, production_non_marchande)
             va = self.v("emploi.valeur_ajoutee_emploi")
@@ -554,6 +575,8 @@ class ProgrammeSimple:
                     if k < 1 and t in m_offre.valeurs:
                         m_offre.valeurs[t] *= k
             demploi = {t: ctx_s[s]["emploi"][t] - e[t]["emploi"] for t in ANNEES}
+            if dep_chom:
+                ctx_s[s]["chomeurs_depenses"] = self.chomeurs_depenses(canaux, actifs_bloc, budget_compte)
             if decl["taux_supplementaire"]:
                 ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
             # phase E : inflation et taux bouclés (moteur/bouclage.py)
