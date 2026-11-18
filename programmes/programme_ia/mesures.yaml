@@ -15,6 +15,7 @@ programme:
   document: "Programme IA 2027, 20 mesures chiffrées (conversation du 18/11/2026)"
   date_lecture: 2026-11-18
   annonce_non_saisie: "+41,5 Md€ net par an en 2032, dont 30 Md€ par la règle de dépense ; déficit annoncé ≈ 3,6 % du PIB en 2032"
+  version: "2 (18/11/2026, soir) : mesures 21 à 26 ajoutées, mesure 9 réduite, plan IA testé puis retiré (docs/programme_ia.md)"
 
 mesures:
   - {id: IA-FIN-01, intitule: "Règle de dépense : hors défense et charge de la dette, +0,5 % par an en volume au plus (loi organique)", traitement: estime, cle: "programme_ia_enveloppe",
@@ -27,8 +28,8 @@ mesures:
      note: "Le gain d'emplois annoncé par le lissage n'est pas compté : seul le coût du travail en hausse passe par le canal commun."}
   - {id: IA-EMP-07, intitule: "Aides à l'apprentissage recentrées sur le niveau bac et infra-bac", traitement: chiffre, cle: apprentissage}
   - {id: IA-EMP-08, intitule: "Emploi des seniors : cumul emploi-retraite créateur de droits, cotisations allégées en CDI", traitement: chiffre, cle: seniors}
-  - {id: IA-LOG-09, intitule: "Choc d'offre de logements (densification autour des gares, permis en 3 mois, foncier public)", traitement: chiffre, cle: offre_logement,
-     note: "Permis plus rapides : sans coût ; l'effet sur les mises en chantier n'a pas de canal dans le noyau."}
+  - {id: IA-LOG-09, intitule: "Choc d'offre de logements (densification autour des gares, permis en 3 mois, foncier public)", traitement: chiffre, cle: "offre_logement, programme_ia_canaux.logement",
+     note: "Version 2 : la dépense est ramenée au foncier public ; densification et permis passent par le canal commun de l'offre de logements (intensité 0,5)."}
   - {id: IA-LOG-10, intitule: "Moins de droits de mutation, plus de taxe foncière (à budget constant)", traitement: non_chiffre,
      note: "Bascule neutre pour les collectivités ; pas de canal de mobilité résidentielle dans le noyau."}
   - {id: IA-ECO-11, intitule: "Rénovation des passoires thermiques des ménages modestes", traitement: chiffre, cle: "renovation (et programme_ia_ecologie.renovation)"}
@@ -41,3 +42,11 @@ mesures:
   - {id: IA-REG-18, intitule: "Justice : greffiers et magistrats, procédures numérisées", traitement: chiffre, cle: justice}
   - {id: IA-REG-19, intitule: "Défense : tenir la loi de programmation militaire", traitement: sans_effet, note: "Déjà dans le statu quo (statu_quo.yaml : LPM actualisée, 2,5 % du PIB en 2030)."}
   - {id: IA-INS-20, intitule: "Dose de proportionnelle, référendum d'initiative partagée plus accessible", traitement: sans_effet}
+  # ---------------------------------------------------------------- version 2
+  - {id: IA-EMP-21, intitule: "Assurance chômage : durée modulée selon la conjoncture, affiliation de 6 à 8 mois", traitement: chiffre, cle: "assurance_chomage, programme_ia_chomage.baisse_taux"}
+  - {id: IA-NUM-22, intitule: "Plan IA (1 Md€ par an) : diffusion de l'IA dans les PME et les services publics", traitement: non_chiffre,
+     note: "Testé puis retiré : le canal commun d'adoption de l'IA rend +0,2 Md€ au solde en 2037 (prudent) pour 1,1 Md€ de coût."}
+  - {id: IA-ECO-23, intitule: "TER et Intercités ouverts à la concurrence d'ici 2030 ; fin des tarifs réglementés d'électricité pour les petites entreprises", traitement: chiffre, cle: "programme_ia_canaux.reformes_structurelles (pmr 1,0)"}
+  - {id: IA-RET-24, intitule: "Âge légal porté à 65 ans (un trimestre par génération dès 1966), carrières longues et usure gardées", traitement: chiffre, cle: "programme_ia_retraites (bibliotheque.report_age_legal)"}
+  - {id: IA-FIS-25, intitule: "Successions : cumul sur la vie, abattement relevé pour les petits héritages, Dutreil et assurance-vie plafonnés au-delà de 1 M€", traitement: chiffre, cle: successions}
+  - {id: IA-FIN-26, intitule: "Trois jours de carence dans le public comme dans le privé", traitement: chiffre, cle: carence}

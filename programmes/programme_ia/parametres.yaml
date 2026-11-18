@@ -88,12 +88,13 @@ programme_ia_mesures:
 
   # ---------------------------------------------------------------- logement, écologie
   offre_logement:
-    valeur: {id: IA-LOG-09, libelle: "Choc d'offre de logements : foncier public, densification autour des gares", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
-             montant: {crise: 2.5, prudent: 2.2, median: 2.0, optimiste: 1.8}}
+    valeur: {id: IA-LOG-09, libelle: "Choc d'offre de logements : foncier public cédé et dépollué (la densification et les permis passent par le canal commun)", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
+             montant: {crise: 0.7, prudent: 0.6, median: 0.5, optimiste: 0.5}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : fonds friches (0,75 Md€ sur 2021-2022), aide aux maires bâtisseurs ≈ 0,1 à 0,3 Md€ par an ; ici un plan plus large"
+    source: "Encadrement : fonds friches (0,75 Md€ sur 2021-2022), aide aux maires bâtisseurs ≈ 0,1 à 0,3 Md€ par an"
+    note: "Version 2 (18/11/2026) : 2,2 Md€ en prudent dans la version 1 ; une dépense de construction ne passe que par le multiplicateur, la réforme du foncier par le canal logement (programme_ia_canaux.logement)."
   renovation:
     valeur: {id: IA-ECO-11, libelle: "Rénovation des passoires thermiques des ménages modestes, accompagnement de bout en bout", poste: investissement, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: 3.3, prudent: 3.0, median: 2.8, optimiste: 2.6}}
@@ -146,6 +147,30 @@ programme_ia_mesures:
     statut: HYPOTHESE
     source: "Encadrement : loi de programmation de la justice 2023-2027 (+1,5 Md€ et 10 000 emplois en cinq ans)"
 
+  # ---------------------------------------------------------------- version 2 (18/11/2026, soir)
+  assurance_chomage:
+    valeur: {id: IA-EMP-21, instrument: transferts_actifs, libelle: "Assurance chômage : durée d'indemnisation modulée selon la conjoncture, affiliation de 6 à 8 mois", poste: chomage, moteur: "bloc:chomage", debut: 2028, plein: 2029,
+             montant: {crise: -2.0, prudent: -2.8, median: -3.6, optimiste: -4.2}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement que attal_mesures.assurance_chomage : projet de 2024 (durée de 18 à 15 mois, affiliation de 6 à 8 mois sur 20), 3,6 Md€ par an selon le gouvernement, moins selon l'Unédic"
+    note: "Effet sur l'emploi : programme_ia_chomage.baisse_taux."
+  successions:
+    valeur: {id: IA-FIS-25, instrument: successions, libelle: "Successions : dons et héritages cumulés sur la vie, abattement relevé pour les petits héritages, pacte Dutreil et assurance-vie plafonnés au-delà de 1 M€", poste: recettes, moteur: "recette:successions", debut: 2028, plein: 2029,
+             montant: {crise: 0.8, prudent: 1.5, median: 2.5, optimiste: 3.5}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : Conseil d'analyse économique, note n° 69 (2021), « Repenser l'héritage » : réforme à rendement positif de quelques Md€ ; pacte Dutreil ≈ 4 à 5 Md€ de dépense fiscale (Cour des comptes, 2025) ; droits de succession et donation ≈ 20 Md€. Optimisation des grands patrimoines (délocalisation, montages) : prudent bas"
+  carence:
+    valeur: {id: IA-FIN-26, libelle: "Trois jours de carence dans le public comme dans le privé", poste: etat_missions, moteur: "bloc:etat_missions", debut: 2028, plein: 2028,
+             montant: {crise: -0.2, prudent: -0.3, median: -0.5, optimiste: -0.6}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement que bertrand_mesures.carence : passage d'un à trois jours ≈ 0,3 à 0,6 Md€ (étude d'impact du PLF 2025, Sénat)"
+
 # ---------------------------------------------------------------- règle de dépense (IA-FIN-01)
 # Économie annoncée sans détail : enveloppe commune (moteur/programme_simple.enveloppe_economies), jamais le chiffre
 # du programme, qui ne sert que de plafond.
@@ -158,10 +183,10 @@ programme_ia_enveloppe:
     source: "Programme IA, mesure 1 : règle de dépense (hors défense et charge de la dette) à +0,5 % par an en volume, ≈ 30 Md€ en 2032"
     note: "Plafond seulement."
   intensite:
-    valeur: {etat: 1.0, operateurs: 1.0, collectivites: 0.5, sante: 0.5, prestations: 0.5}
+    valeur: {etat: 1.0, operateurs: 1.0, collectivites: 1.0, sante: 0.5, prestations: 0.5}
     unite: sans_unite
     statut: HYPOTHESE
-    source: "La règle vise toute la dépense hors défense : État et opérateurs en cible principale ; collectivités, santé et prestations citées (le programme dépense en plus en santé et en famille)."
+    source: "La règle vise toute la dépense hors défense : État, opérateurs et collectivités (fin des doublons, IA-FIN-03) en cible principale ; santé et prestations citées (le programme dépense en plus en santé et en famille)."
     note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale."
 
 # ---------------------------------------------------------------- effets en tonnes (même méthode que attal_ecologie)
@@ -176,3 +201,48 @@ programme_ia_ecologie:
     unite: mt_co2e
     statut: HYPOTHESE
     source: "Même méthode que attal_ecologie.vehicules (1,6 t par voiture thermique remplacée et par an ; additionnalité 40 à 80 %) : ≈ 75 000 voitures par an de 2028 à 2032"
+
+# ---------------------------------------------------------------- version 2 : mesures calculées et canaux déclarés
+programme_ia_chomage:
+  baisse_taux:
+    valeur: {crise: 0.001, prudent: 0.002, median: 0.003, optimiste: 0.0035}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même encadrement que attal_chomage.baisse_taux : projet de 2024 ≈ 0,3 point selon le gouvernement ; Banque de France (Bulletin n° 264, 2026) : réformes de 2021 et 2023 = 0,6 point de chômage structurel"
+    note: "Baisse du taux de chômage, montée de 2028 à 2030."
+
+programme_ia_canaux:
+  logement:
+    valeur: {intensite: 0.5, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Barème commun logement_offre.bareme (Greenaway-McGrevy, 2025 ; SDES 2026)"
+    note: "IA-LOG-09 : densification de droit autour des gares et permis instruits en 3 mois : mesure ciblée (0,5), comme Attal."
+  reformes_structurelles:
+    valeur: {pmr: 1.0, epl: 0, debut: 2028}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Égert et Gal (2017), OCDE, document de travail n° 1354 ; grille commune (docs/reformes_structurelles.md)"
+    note: "IA-ECO-23 : deux mesures ciblées dans le champ de l'indicateur ETCR : ouverture complète des TER et Intercités à la concurrence d'ici 2030 (rail, 0,5) et fin des tarifs réglementés de vente d'électricité pour les petites entreprises (électricité, 0,5). Protection de l'emploi : rien (0)."
+
+programme_ia_retraites:
+  age_cible:
+    valeur: 65
+    unite: sans_unite
+    statut: DECISION
+    note: "IA-RET-24 : un an de plus que la loi actuelle, au rythme de la réforme de 2023, carrières longues et dispositifs d'usure gardés."
+  premiere_generation:
+    valeur: 1966
+    unite: sans_unite
+    statut: DECISION
+    note: "Génération qui atteint 64 ans en 2030 (même arbitrage que bertrand_retraites)."
+  pas_par_generation:
+    valeur: 0.25
+    unite: sans_unite
+    statut: DECISION
+    note: "Un trimestre par génération : 65 ans pour la génération 1969."
+  part_economie_gardee:
+    valeur: {crise: 0.6, prudent: 0.65, median: 0.75, optimiste: 0.85}
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même encadrement que bertrand_retraites.part_economie_gardee : carrières longues, invalidité et départs avec décote rendent une partie de l'économie (Conseil d'orientation des retraites, 2022)"

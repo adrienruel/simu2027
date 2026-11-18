@@ -28,7 +28,8 @@ Calcul du 18/11/2026, tous les programmes publiés sur le même noyau.
 
 | Programme | Prudent 2029 | Prudent 2032 | Prudent 2037 | Médian 2029 | Médian 2032 | Médian 2037 |
 |---|---:|---:|---:|---:|---:|---:|
-| **Programme IA (test)** | **5,79** | **6,98** | **9,27** | **5,57** | **6,37** | **7,69** |
+| **Programme IA, version 2** | **5,56** | **6,49** | **8,39** | **5,23** | **5,72** | **6,62** |
+| Programme IA, version 1 | 5,79 | 6,98 | 9,27 | 5,57 | 6,37 | 7,69 |
 | Statu quo | 5,91 | 7,16 | 9,50 | 5,82 | 6,82 | 8,37 |
 | Bertrand | 6,02 | 7,21 | 9,52 | 5,86 | 6,68 | 8,02 |
 | Retailleau | 6,37 | 7,57 | 10,24 | 6,06 | 6,75 | 8,17 |
@@ -43,8 +44,32 @@ Calcul du 18/11/2026, tous les programmes publiés sur le même noyau.
 | Roussel | 9,81 | 17,02 | 29,76 | 8,37 | 13,58 | 21,46 |
 | Mélenchon | 11,86 | 18,74 | 27,85 | 9,76 | 14,86 | 20,45 |
 
-Lecture : sur le seul critère du déficit, le programme IA est le seul sous le statu quo dans les deux scénarios et
-les trois années, mais il ne fait que **0,2 point de mieux en 2032 (prudent)**, loin des 3 % visés.
+Lecture (version 1) : seul programme sous le statu quo dans les deux scénarios et les trois années, mais seulement
+**0,2 point de mieux en 2032 (prudent)**, loin des 3 % visés.
+
+## Version 2 (18/11/2026, soir) : optimisée sur le comparateur
+
+Même règle que pour les candidats : rien n'est gonflé, chaque ajout reprend un barème ou un encadrement déjà utilisé
+pour un autre programme. Effet de chaque étape sur le déficit (écart au statu quo, prudent 2032 / 2037) :
+
+| Étape | 2032 | 2037 |
+|---|---:|---:|
+| Version 1 | −0,18 | −0,24 |
+| + assurance chômage, canal logement (logement neuf ramené au foncier public), rail et électricité ouverts, collectivités en cible principale de la règle de dépense, plan IA | −0,49 | −0,76 |
+| + âge légal à 65 ans | −0,60 | −1,01 |
+| + successions, jours de carence | −0,66 | −1,09 |
+| − plan IA (retiré) | **−0,67** | **−1,11** |
+
+Ce qui ressort :
+- **Le plan IA ne paie pas** dans ce modèle : 1 Md€ par an pour +0,2 Md€ au solde en 2037 (prudent). Retiré : le
+  « Programme IA » n'a plus de mesure sur l'IA.
+- **L'âge légal à 65 ans** est le levier le plus fort (+6,6 Md€ en 2037, plus ≈ 2 Md€ de prélèvements des seniors
+  en emploi). C'est aussi le choix le plus contesté : sans lui, le programme reste à −0,56 en 2032 et −0,86 en 2037.
+- **Le multiplicateur** coûte plus en version 2 (−3,1 Md€ en 2037) : un resserrement plus fort freine la croissance.
+- **3 % reste hors d'atteinte** : en prudent, le statu quo du modèle dérive à 7,2 % en 2032. Il faudrait ≈ 100 Md€
+  d'effort en plus, soit des coupes ou des hausses d'impôts bien au-delà de ce qu'aucun programme propose.
+- Pas essayé : une règle de trajectoire déclarée (canal `regle_trajectoire`), qui baisserait le déficit publié
+  mécaniquement sans dire quelles mesures la portent.
 
 ## Ce qui pèse (prudent, Md€ de 2026, + = mieux pour le solde, 2037)
 
