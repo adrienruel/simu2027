@@ -1,7 +1,7 @@
 # « Programme IA » : un programme écrit par Claude, au banc du comparateur (18 novembre 2026)
 
 Programme de test, pour s'amuser : 20 mesures proposées par une IA (Claude), chiffrées avec les mêmes règles que
-les candidats. **Non publié** : absent de `programmes/publies.yaml` (rangé dans `ecartes`), donc hors des sorties,
+les candidats. **Non publié** : absent de `programmes/publies.yaml`, donc hors des sorties,
 de l'incertitude et des tests par défaut, et sans effet sur les autres programmes. Branche : `test/programme-ia`.
 
 ```
