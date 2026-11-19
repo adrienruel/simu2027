@@ -1,62 +1,62 @@
 [
  {
-  "cle": "budget_etat.cas_pensions_2026",
-  "deficit_2037": 0.0008017833743529934,
-  "deficit_2050": 0.003929731788002044,
-  "note": "45,5 Md€ en 2024 + 4 points de taux (B6)."
- },
- {
   "cle": "systeme_actuel.taxe_fonciere/exposant",
-  "deficit_2037": -0.00037946288345303003,
-  "deficit_2050": -0.0014112681705746866,
+  "deficit_2037": -0.0009970598124837693,
+  "deficit_2050": -0.003900471744771039,
   "note": "Taxe foncière et locale estimée = coefficient × net^exposant."
  },
  {
+  "cle": "budget_etat.cas_pensions_2026",
+  "deficit_2037": -0.0005347892598130954,
+  "deficit_2050": -0.0013953355981115578,
+  "note": "45,5 Md€ en 2024 + 4 points de taux (B6)."
+ },
+ {
   "cle": "inactifs.etudiants",
-  "deficit_2037": 0.00012678782391439825,
-  "deficit_2050": 0.000672273088138553,
+  "deficit_2037": 0.00022622954339723833,
+  "deficit_2050": 0.001074610061344572,
   "note": "RUI!A5, à sourcer."
  },
  {
   "cle": "systeme_actuel.apl/montant_plein",
-  "deficit_2037": 5.366119828487115e-05,
-  "deficit_2050": 0.00028452978962789643,
+  "deficit_2037": 9.574853064364675e-05,
+  "deficit_2050": 0.00045481199517638515,
   "note": ""
  },
  {
-  "cle": "systeme_actuel.taxe_fonciere/coef_prive",
-  "deficit_2037": -3.2448507846893904e-05,
-  "deficit_2050": -0.00011461284731240085,
-  "note": "Taxe foncière et locale estimée = coefficient × net^exposant."
- },
- {
   "cle": "systeme_actuel.exoneration_taxe_fonciere_prive",
-  "deficit_2037": 3.1992303931360766e-05,
-  "deficit_2050": 0.0002625416010246795,
+  "deficit_2037": 9.372866557733062e-05,
+  "deficit_2050": 0.0005095299238533357,
   "note": "Dans la v235, la taxe foncière des sept premières classes du privé (net avant aides jusqu'à 17 956 €) est saisie à 0 au lieu d'être calculée. Seuil reconstitué entre 17 956 et 18 978 €. Rien d'équivalent pour les agents publics."
  },
  {
-  "cle": "anciennes_pensions.couples/part_en_couple",
-  "deficit_2037": 2.245738861539337e-05,
-  "deficit_2050": -0.00013490229201096327,
-  "note": "Imposition commune des couples de retraités de l'ancien système, calculée par le moteur année par année (le gain grandit quand les pensions gelées baissent en euros constants). Hypothèses prises prudentes faute de source (elles maximisent le gain des couples, donc la perte de recette) : 60 % des ret"
- },
- {
-  "cle": "systeme_actuel.taxe_fonciere/coef_public",
-  "deficit_2037": -1.0167554830076142e-05,
-  "deficit_2050": -5.074318859144e-05,
+  "cle": "systeme_actuel.taxe_fonciere/coef_prive",
+  "deficit_2037": -8.445729665140789e-05,
+  "deficit_2050": -0.0003243277517448462,
   "note": "Taxe foncière et locale estimée = coefficient × net^exposant."
  },
  {
+  "cle": "systeme_actuel.taxe_fonciere/coef_public",
+  "deficit_2037": -2.8854959156277005e-05,
+  "deficit_2050": -0.00012586491615351747,
+  "note": "Taxe foncière et locale estimée = coefficient × net^exposant."
+ },
+ {
+  "cle": "anciennes_pensions.couples/part_en_couple",
+  "deficit_2037": 2.4679704385022205e-05,
+  "deficit_2050": -0.00012036903025602896,
+  "note": "Imposition commune des couples de retraités de l'ancien système, calculée par le moteur année par année (le gain grandit quand les pensions gelées baissent en euros constants). Hypothèses prises prudentes faute de source (elles maximisent le gain des couples, donc la perte de recette) : 60 % des ret"
+ },
+ {
   "cle": "systeme_actuel.apl/revenu_extinction",
-  "deficit_2037": 2.043124338158009e-06,
-  "deficit_2050": 1.083332089990563e-05,
+  "deficit_2037": 3.6455791878609034e-06,
+  "deficit_2050": 1.7316697217495403e-05,
   "note": ""
  },
  {
   "cle": "systeme_actuel.apl/revenu_plein",
-  "deficit_2037": 1.302254638346767e-06,
-  "deficit_2050": 6.904984623190558e-06,
+  "deficit_2037": 2.3236336215148867e-06,
+  "deficit_2050": 1.103738421548428e-05,
   "note": ""
  },
  {
@@ -230,7 +230,7 @@
  {
   "cle": "macro.annees_ia",
   "deficit_2037": 0.0,
-  "deficit_2050": -0.04016146548237032,
+  "deficit_2050": -0.039765652577777644,
   "note": ""
  },
  {
@@ -346,6 +346,12 @@
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
   "note": "v215 : les 6 premiers déciles reçoivent la réversion ; cela rend la distribution non monotone (décile 7 sous le décile 6)."
+ },
+ {
+  "cle": "demographie.ecole_age_entree",
+  "deficit_2037": 0.0,
+  "deficit_2050": 0.0,
+  "note": "Âge à partir duquel une cohorte formée après la réforme compte dans l'emploi (phase P). Les taux d'emploi par âge font le reste : peu d'emplois avant 25 ans."
  },
  {
   "cle": "demographie.natalite_montee",

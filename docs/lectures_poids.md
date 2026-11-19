@@ -6,39 +6,39 @@ lecture, sans elle, et son poids. Une lecture est la traduction d'une mesure flo
 
 | Programme | Lecture | Avec | Sans | Poids 2037 | Statut |
 |---|---|---|---|---|---|
-| Arthaud (Lutte ouvrière) — partiel | canal déclaré : reformes structurelles | -4.10 | -3.44 | -0.66 | DECISION |
-| Roussel (Parti communiste français) | canal déclaré : reformes structurelles | -8.85 | -8.37 | -0.48 | HYPOTHESE |
-| Lisnard (Nouvelle Énergie) | canal déclaré : solde migratoire | -2.85 | -2.38 | -0.47 | HYPOTHESE |
-| Mélenchon (La France insoumise) | canal déclaré : reformes structurelles | -11.56 | -11.14 | -0.42 | HYPOTHESE |
-| Zemmour (Reconquête) | canal déclaré : solde migratoire | -2.43 | -2.07 | -0.37 | HYPOTHESE |
-| Tondelier (Les Écologistes) | canal déclaré : reformes structurelles | -2.72 | -2.47 | -0.26 | DECISION |
-| Philippe (Horizons) | canal déclaré : solde migratoire | -1.02 | -0.78 | -0.24 | HYPOTHESE |
-| Le Pen (Rassemblement national) — partiel | canal déclaré : solde migratoire | -2.28 | -2.09 | -0.19 | HYPOTHESE |
-| Retailleau (Les Républicains) | canal déclaré : solde migratoire | -0.44 | -0.28 | -0.16 | HYPOTHESE |
-| Glucksmann (Place publique) | canal déclaré : reformes structurelles | -2.62 | -2.49 | -0.13 | HYPOTHESE |
-| Le Pen (Rassemblement national) — partiel | canal déclaré : reformes structurelles | -2.28 | -2.15 | -0.13 | DECISION |
-| Attal (Renaissance) | canal déclaré : reformes structurelles | -1.12 | -1.02 | -0.10 | DECISION |
-| Retailleau (Les Républicains) | canal déclaré : logement | -0.44 | -0.53 | +0.10 | HYPOTHESE |
-| Mélenchon (La France insoumise) | canal déclaré : logement | -11.56 | -11.48 | -0.08 | HYPOTHESE |
+| Arthaud (Lutte ouvrière) — partiel | canal déclaré : reformes structurelles | -4.04 | -3.40 | -0.65 | DECISION |
+| Roussel (Parti communiste français) | canal déclaré : reformes structurelles | -8.85 | -8.36 | -0.48 | HYPOTHESE |
+| Lisnard (Nouvelle Énergie) | canal déclaré : solde migratoire | -2.83 | -2.37 | -0.45 | HYPOTHESE |
+| Mélenchon (La France insoumise) | canal déclaré : reformes structurelles | -11.46 | -11.05 | -0.41 | HYPOTHESE |
+| Zemmour (Reconquête) | canal déclaré : solde migratoire | -2.40 | -2.05 | -0.35 | HYPOTHESE |
+| Tondelier (Les Écologistes) | canal déclaré : reformes structurelles | -2.68 | -2.43 | -0.25 | DECISION |
+| Philippe (Horizons) | canal déclaré : solde migratoire | -1.02 | -0.78 | -0.23 | HYPOTHESE |
+| Le Pen (Rassemblement national) — partiel | canal déclaré : solde migratoire | -2.26 | -2.08 | -0.18 | HYPOTHESE |
+| Retailleau (Les Républicains) | canal déclaré : solde migratoire | -0.43 | -0.28 | -0.16 | HYPOTHESE |
+| Glucksmann (Place publique) | canal déclaré : reformes structurelles | -2.59 | -2.46 | -0.13 | HYPOTHESE |
+| Le Pen (Rassemblement national) — partiel | canal déclaré : reformes structurelles | -2.26 | -2.13 | -0.12 | DECISION |
+| Attal (Renaissance) | canal déclaré : reformes structurelles | -1.10 | -1.00 | -0.10 | DECISION |
+| Retailleau (Les Républicains) | canal déclaré : logement | -0.43 | -0.53 | +0.09 | HYPOTHESE |
+| Mélenchon (La France insoumise) | canal déclaré : logement | -11.46 | -11.38 | -0.08 | HYPOTHESE |
 | Roussel (Parti communiste français) | canal déclaré : fraude | -8.85 | -8.93 | +0.08 | HYPOTHESE |
 | Roussel (Parti communiste français) | canal déclaré : logement | -8.85 | -8.78 | -0.07 | HYPOTHESE |
-| Attal (Renaissance) | canal déclaré : solde migratoire | -1.12 | -1.05 | -0.07 | HYPOTHESE |
-| Lisnard (Nouvelle Énergie) | canal déclaré : logement | -2.85 | -2.91 | +0.05 | HYPOTHESE |
-| Lisnard (Nouvelle Énergie) | canal déclaré : reformes structurelles | -2.85 | -2.90 | +0.05 | HYPOTHESE |
-| Mélenchon (La France insoumise) | canal déclaré : fraude | -11.56 | -11.61 | +0.05 | HYPOTHESE |
-| Attal (Renaissance) | canal déclaré : logement | -1.12 | -1.16 | +0.05 | HYPOTHESE |
-| Bertrand (Nous France) | canal déclaré : solde migratoire | +0.03 | +0.08 | -0.05 | HYPOTHESE |
-| Glucksmann (Place publique) | canal déclaré : logement | -2.62 | -2.59 | -0.03 | HYPOTHESE |
+| Attal (Renaissance) | canal déclaré : solde migratoire | -1.10 | -1.03 | -0.07 | HYPOTHESE |
+| Lisnard (Nouvelle Énergie) | canal déclaré : logement | -2.83 | -2.88 | +0.05 | HYPOTHESE |
+| Mélenchon (La France insoumise) | canal déclaré : fraude | -11.46 | -11.51 | +0.05 | HYPOTHESE |
+| Attal (Renaissance) | canal déclaré : logement | -1.10 | -1.15 | +0.05 | HYPOTHESE |
+| Lisnard (Nouvelle Énergie) | canal déclaré : reformes structurelles | -2.83 | -2.87 | +0.05 | HYPOTHESE |
+| Bertrand (Nous France) | canal déclaré : solde migratoire | +0.03 | +0.07 | -0.04 | HYPOTHESE |
+| Glucksmann (Place publique) | canal déclaré : logement | -2.59 | -2.56 | -0.03 | HYPOTHESE |
+| Retailleau (Les Républicains) | canal déclaré : reformes structurelles | -0.43 | -0.46 | +0.02 | HYPOTHESE |
 | Philippe (Horizons) | canal déclaré : logement | -1.02 | -1.04 | +0.02 | HYPOTHESE |
-| Retailleau (Les Républicains) | canal déclaré : reformes structurelles | -0.44 | -0.46 | +0.02 | HYPOTHESE |
-| Le Pen (Rassemblement national) — partiel | canal déclaré : fraude | -2.28 | -2.29 | +0.01 | HYPOTHESE |
-| Tondelier (Les Écologistes) | canal déclaré : fraude | -2.72 | -2.73 | +0.01 | HYPOTHESE |
-| Attal (Renaissance) | canal déclaré : adoption ia | -1.12 | -1.12 | +0.01 | HYPOTHESE |
-| Glucksmann (Place publique) | canal déclaré : adoption ia | -2.62 | -2.62 | +0.00 | HYPOTHESE |
+| Le Pen (Rassemblement national) — partiel | canal déclaré : fraude | -2.26 | -2.27 | +0.01 | HYPOTHESE |
+| Tondelier (Les Écologistes) | canal déclaré : fraude | -2.68 | -2.69 | +0.01 | HYPOTHESE |
+| Attal (Renaissance) | canal déclaré : adoption ia | -1.10 | -1.10 | +0.01 | HYPOTHESE |
+| Glucksmann (Place publique) | canal déclaré : adoption ia | -2.59 | -2.59 | +0.00 | HYPOTHESE |
 | Philippe (Horizons) | canal déclaré : adoption ia | -1.02 | -1.02 | +0.00 | HYPOTHESE |
-| Lisnard (Nouvelle Énergie) | canal déclaré : adoption ia | -2.85 | -2.86 | +0.00 | HYPOTHESE |
-| Retailleau (Les Républicains) | canal déclaré : adoption ia | -0.44 | -0.44 | +0.00 | HYPOTHESE |
-| Zemmour (Reconquête) | canal déclaré : adoption ia | -2.43 | -2.44 | +0.00 | HYPOTHESE |
+| Lisnard (Nouvelle Énergie) | canal déclaré : adoption ia | -2.83 | -2.83 | +0.00 | HYPOTHESE |
+| Retailleau (Les Républicains) | canal déclaré : adoption ia | -0.43 | -0.43 | +0.00 | HYPOTHESE |
+| Zemmour (Reconquête) | canal déclaré : adoption ia | -2.40 | -2.40 | +0.00 | HYPOTHESE |
 | Philippe (Horizons) | canal déclaré : reformes structurelles | -1.02 | -1.02 | +0.00 | HYPOTHESE |
-| Zemmour (Reconquête) | canal déclaré : ecole | -2.43 | -2.43 | +0.00 | HYPOTHESE |
-| Zemmour (Reconquête) | canal déclaré : reformes structurelles | -2.43 | -2.43 | +0.00 | HYPOTHESE |
+| Zemmour (Reconquête) | canal déclaré : ecole | -2.40 | -2.40 | +0.00 | HYPOTHESE |
+| Zemmour (Reconquête) | canal déclaré : reformes structurelles | -2.40 | -2.40 | +0.00 | HYPOTHESE |

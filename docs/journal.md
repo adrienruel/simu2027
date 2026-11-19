@@ -1884,3 +1884,20 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   - la pension moyenne reste celle du statu quo.
 - Les comparaisons des programmes autres que Le Pen sont faites contre les sorties du commit 048b97d ; seul Le Pen a
   été recalculé avant et après avec le même code.
+
+## 19/11/2026 — phase P : emploi des seniors qui n'est plus figé, canal école par cohortes (branche `phase-p`)
+- **Taux d'emploi par âge** (`demographie.taux_emploi_par_age`, demande d'Adrien) : jusqu'ici figés à 2025
+  jusqu'en 2073. Les 55-59, 60-64 et 65-69 ans suivent désormais le rapport du taux d'activité projeté par l'Insee
+  (projections de population active 2022-2070, figure 3, exercice de 2022 sans la réforme de 2023, suspendue par la
+  LFSS 2026) à celui de 2025, à taux de chômage par âge inchangé. Les 15-24 et 25-54 ans, presque stables dans la
+  projection, restent figés. Option `demographie.taux_emploi_tendance` (false : comme avant).
+- **Effets (prudent)** :
+  - statu quo : emploi +0,78 million en 2037 et +1,1 million en 2050 ; déficit 2037 de 9,50 à 9,07 % ; 2050 de
+    20,57 à 18,55 % ; dette 2037 de 163 à 159 % ;
+  - écarts de solde primaire au statu quo : au plus 0,16 point (Mélenchon, Roussel), classement inchangé ;
+  - déficits 2037 de tous les programmes : −0,4 à −0,8 point.
+- **Canal école** (`canaux_declares.part_cohortes_ecole`, option `demographie.ecole_cohortes`) : l'effet suit la
+  part dans l'emploi des cohortes formées après la réforme (population × taux d'emploi par âge), au lieu d'une
+  montée linéaire sur 40 ans. Part en 2060 : 31 % (linéaire : 40 %) ; 2073 : 60 % (72 %). Le canal ne compte qu'à
+  l'optimiste et après 2045 : Zemmour 2073 +0,15 point ; les autres programmes ne bougent pas.
+- Sorties régénérées : export, statu quo, audits, variantes, micro vieillie de tous les programmes, incertitude.
