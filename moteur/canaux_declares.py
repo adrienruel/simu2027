@@ -64,6 +64,26 @@ def facteur_ia(p: Parametres, s: str, budget) -> float:
     return min(1.0, max(0.0, b / c["reference_md"]))
 
 
+def part_cohortes_ecole(p: Parametres, s: str, t: int, debut: int) -> float:
+    """Part dans l'emploi de l'année t des cohortes entrées sur le marché du travail à partir de `debut` (phase P,
+    19/11/2026) : personnes de moins de âge d'entrée + (t − debut + 1) ans, pondérées par la population du scénario et
+    les taux d'emploi par âge de l'année (demographie.taux_emploi_par_age). Âge d'entrée :
+    demographie.ecole_age_entree. Remplace la montée linéaire du canal école (Hanushek et Woessmann : l'effet suit le
+    renouvellement de la population active)."""
+    from . import statu_quo as sq
+    from .demographie import taux_emploi_par_age
+    if t < debut:
+        return 0.0
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("part_cohortes_ecole", s, t, debut)
+    if cle not in cache:
+        pop, taux = sq.population(p, s)[t], taux_emploi_par_age(p, t)
+        borne = p.val("demographie.ecole_age_entree") + (t - debut + 1)
+        e = [pop[a] * taux.get(a, 0.0) for a in range(len(pop))]
+        cache[cle] = sum(e[a] for a in range(len(pop)) if a < borne) / sum(e)
+    return cache[cle]
+
+
 def _montee(t: int, debut: int, annees: float) -> float:
     return max(0.0, min(1.0, (t - debut + 1) / annees)) if annees else float(t >= debut)
 
@@ -137,10 +157,14 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme
         x = d["ecole"]
         k = sq._v(p, "macro.croissance_par_ecart_type", s)
         niveau_commun = p.val("programme_commun.canaux_ecole_niveau_eleves", s)  # barème commun (16/11/2026)
+        cohortes = "demographie.ecole_cohortes" in p._p and p.val("demographie.ecole_cohortes")
         r, serie = 0.0, {}
         for t in ANNEES:
             niveau = x["niveau_eleves"][s] if "niveau_eleves" in x else niveau_commun
-            r = (1 + r) * (1 + niveau * k * _montee(t, x["debut"], x["annees"])) - 1
+            # phase P (19/11/2026) : part dans l'emploi des cohortes formées après la réforme (stock par cohortes), à la
+            # place de la montée linéaire sur x["annees"] ans, si demographie.ecole_cohortes
+            part = part_cohortes_ecole(p, s, t, x["debut"]) if cohortes else _montee(t, x["debut"], x["annees"])
+            r = (1 + r) * (1 + niveau * k * part) - 1
             serie[t] = y[t] * r
         ajouter("école (niveau des élèves)", serie)
     emplois, actifs = {t: 0.0 for t in ANNEES}, {t: 0.0 for t in ANNEES}

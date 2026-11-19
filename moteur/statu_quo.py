@@ -76,8 +76,8 @@ def _emploi_migrants_productif(p: Parametres, t: int) -> float:
     choc = p.__dict__.get("_choc_population")
     if not choc or t not in choc:
         return 0.0
-    from .demographie import _tranche
-    taux = {a: x for k, x in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    from .demographie import taux_emploi_par_age
+    taux = taux_emploi_par_age(p, t)
     m = p.val("demographie.migrations")
     return (1 - m["salaire_relatif"]) * m["emploi_relatif"] * sum(choc[t][a] * taux.get(a, 0.0) for a in range(18, len(choc[t])))
 
@@ -100,16 +100,16 @@ def choc_chomage(p: Parametres, s: str, t: int) -> float:
 
 
 def effectifs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
-    """Personnes en emploi (taux par âge de 2025, figés), chômeurs (taux par âge de 2025, calés sur 2026) et
+    """Personnes en emploi (taux par âge de 2025, seniors selon la projection de l'Insee : demographie.taux_emploi_par_age), chômeurs (taux par âge de 2025, calés sur 2026) et
     publics des dépenses, par année (2026-2073). Même méthode que demographie.chomage_tendanciel."""
     cache = p.__dict__.setdefault("_cache", {})
     if ("sq_effectifs", s) in cache:
         return cache[("sq_effectifs", s)]
-    from .demographie import AGE_MAX, _tranche
-    taux = {a: x for k, x in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    from .demographie import AGE_MAX, _tranche, taux_emploi_par_age
     u = {a: x for k, x in p.val("chomage.taux_par_age").items() for a in _tranche(k)}
     brut = {}
     for t, v in population(p, s).items():
+        taux = taux_emploi_par_age(p, t)  # phase P : taux de 2025, seniors selon la projection de l'Insee
         e = sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1)) - _emploi_en_moins_migrants(p, t, taux)
         c = sum(v[a] * taux.get(a, 0.0) * u.get(a, 0.0) / (1 - u.get(a, 0.0)) for a in range(18, AGE_MAX + 1))
         brut[t] = {"emploi": e, "chomeurs_bruts": c, "total": sum(v), "enfants": sum(v[0:18]),

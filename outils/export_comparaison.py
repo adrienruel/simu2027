@@ -58,12 +58,13 @@ def groupe(m: noyau.Mesure) -> str:
 
 def taux_emploi_18_66(p: Parametres, s: str, t: int, emploi: float, pop=None, chomage: float | None = None) -> float:
     """Personnes en emploi de 18 à 66 ans / population de 18 à 66 ans (%). Tranche qui contient le report de l'âge de
-    départ à 67 ans ; l'emploi après 67 ans est celui du statu quo (taux de 2025 par âge), retiré de l'emploi.
+    départ à 67 ans ; l'emploi après 67 ans est celui du statu quo (taux par âge de l'année, demographie.taux_emploi_par_age), retiré de l'emploi.
     pop : population du programme cette année (migrations.population_programme), sinon celle du statu quo.
     chomage (%) : rend alors le taux d'activité (emploi et chômeurs de 18 à 66 ans / population)."""
     from moteur.demographie import _tranche
     pop = pop if pop is not None else sq.population(p, s)[t]
-    taux = {a: x for k, x in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    from moteur.demographie import taux_emploi_par_age
+    taux = taux_emploi_par_age(p, t)
     apres = sum(pop[a] * taux.get(a, 0.0) for a in range(67, len(pop)))
     e = emploi - apres
     if chomage is not None:

@@ -123,14 +123,47 @@ def _tranche(nom: str) -> range:
     return range(int(a), int(b) + 1)
 
 
+ANNEE_TAUX_EMPLOI = 2025  # année des taux d'emploi par âge observés (demographie.taux_emploi_age)
+
+
+def taux_emploi_par_age(p: Parametres, t: int) -> dict[int, float]:
+    """Taux d'emploi par âge l'année t (phase P, 19/11/2026) : taux de 2025 (demographie.taux_emploi_age), et pour les
+    tranches de la projection de l'Insee (demographie.taux_activite_seniors_projection) le rapport du taux d'activité
+    projeté de l'année à celui de 2025 ; interpolation linéaire entre les années de la projection, constant au-delà
+    de ses bornes et avant 2025. Taux de 2025 figés si demographie.taux_emploi_tendance est faux (ou absent)."""
+    cache = p.__dict__.setdefault("_cache", {})
+    cle = ("taux_emploi_par_age", t)
+    if cle in cache:
+        return cache[cle]
+    base = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
+    actif = "demographie.taux_emploi_tendance" in p._p and p.val("demographie.taux_emploi_tendance")
+    if actif:
+        proj = p.val("demographie.taux_activite_seniors_projection")
+
+        def niveau(serie: dict, an: float) -> float:
+            ans = sorted(int(x) for x in serie)
+            v = {int(x): y for x, y in serie.items()}
+            an = min(max(an, ans[0]), ans[-1])
+            for a, b in zip(ans, ans[1:]):
+                if a <= an <= b:
+                    return v[a] + (v[b] - v[a]) * (an - a) / (b - a)
+            return v[ans[-1]]
+        for tranche, serie in proj.items():
+            k = niveau(serie, max(t, ANNEE_TAUX_EMPLOI)) / niveau(serie, ANNEE_TAUX_EMPLOI)
+            for a in _tranche(tranche):
+                base[a] = base.get(a, 0.0) * k
+    cache[cle] = base
+    return base
+
+
 def effectifs(p: Parametres, jeu: str = "prudent", carrieres: bool = True) -> dict[int, dict[str, float]]:
     """Effectifs par grand groupe et emploi (personnes), par année. carrieres : avec l'entrée plus tôt dans
     l'emploi due aux réformes du supérieur (moteur/carrieres.py)."""
     from .carrieres import emplois_entree_plus_tot
     prof = {a: v for k, v in p.val("cohortes.profil_salaire_age").items() for a in _tranche(k)}
-    taux = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
     out = {}
     for t, v in population(p, jeu).items():
+        taux = taux_emploi_par_age(p, t)
         # emplois des jeunes entrés plus tôt, pondérés par leur salaire relatif (profil par âge de l'Insee) :
         # l'indice d'emploi fait suivre le PIB et des recettes moyennes par emploi, un jeune y pèse moins
         plus = sum(n * prof.get(a, 1.0) for a, n in emplois_entree_plus_tot(p, jeu, t).items()) if carrieres else 0.0
@@ -179,18 +212,18 @@ def creches_nouvelles(p: Parametres) -> dict[int, float]:
 
 
 def chomage_tendanciel(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
-    """Chômage sans le programme, année par année : personnes en emploi par âge (population × taux d'emploi de
-    2025, figés) et chômeurs par âge au taux de chômage de 2025 de leur âge (Insee : 19,8 % avant 25 ans, 6,9 % de
+    """Chômage sans le programme, année par année : personnes en emploi par âge (population × taux d'emploi par âge de
+    l'année, taux_emploi_par_age) et chômeurs par âge au taux de chômage de 2025 de leur âge (Insee : 19,8 % avant 25 ans, 6,9 % de
     25 à 49 ans, 5,0 % après 50 ans), niveau calé sur le taux de 2026 (chomage.taux_2026). Le taux de chômage
     tendanciel ne bouge qu'avec la composition par âge des actifs (moins de jeunes : un taux plus bas)."""
     cache = p.__dict__.setdefault("_cache", {})
     cle = ("chomage_tendanciel", jeu, p.colonne_prudent)
     if cle in cache:
         return cache[cle]
-    taux = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
     u = {a: v for k, v in p.val("chomage.taux_par_age").items() for a in _tranche(k)}
     brut = {}
     for t, v in population(p, jeu).items():
+        taux = taux_emploi_par_age(p, t)
         e = sum(v[a] * taux.get(a, 0.0) for a in range(18, AGE_MAX + 1))
         c = sum(v[a] * taux.get(a, 0.0) * u.get(a, 0.0) / (1 - u.get(a, 0.0)) for a in range(18, AGE_MAX + 1))
         brut[t] = (e, c)

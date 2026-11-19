@@ -613,6 +613,32 @@ demographie:
     statut: SOURCE
     source: "Insee, Emploi selon le sexe et l'âge, 2025 (15-24 : 34,5 % ; 25-49 : 82,8 % ; 50-64 : 69,2 %) ; Dares et COR (rapport annuel juin 2026, partie 4, chapitre 1) : 55-59 : 78,8 % ; 60-64 : 44,4 % ; 65-69 : environ 11 %"
     note: "50-54 ans calculé : 3 × 69,2 − 78,8 − 44,4 = 84,4 % (tranches de tailles voisines) ; recoupé : 84 % des personnes de 50 ans sont en emploi (COR). 70 ans ou plus : 0 (prudent, moins de 3 %). Taux figés à leur niveau de 2025 : la démographie seule fait varier l'emploi ; les hausses de l'emploi des seniors dues au programme sont comptées dans leurs mesures. La fin de la montée à 64 ans de la réforme de 2023 n'est pas comptée (prudent)."
+  taux_activite_seniors_projection:
+    url: "https://www.insee.fr/fr/statistiques/6453758"
+    page: "Projections de population active 2022-2070, figure 3 (taux d'activité des seniors, ensemble)"
+    valeur:
+      "55-59": {2021: 79.2, 2030: 80.2, 2040: 80.6, 2050: 80.6, 2060: 80.9, 2070: 80.9}
+      "60-64": {2021: 37.7, 2030: 47.4, 2040: 57.7, 2050: 58.4, 2060: 60.0, 2070: 60.5}
+      "65-69": {2021: 9.0, 2030: 11.0, 2040: 14.7, 2050: 16.4, 2060: 16.9, 2070: 17.0}
+    unite: pct
+    statut: SOURCE
+    source: "Insee, projections de population active 2022-2070, scénario central, figure 3 (ensemble femmes et hommes). Exercice de 2022 : réformes de 2010 et 2014 comprises, réforme de 2023 non comprise (sa variante de 2023 ajoute 4,5 points aux 55-69 ans en 2070)."
+    note: "Phase P (19/11/2026, demande d'Adrien) : les taux d'emploi de 2025 (taux_emploi_age) suivent, tranche par tranche, le rapport du taux d'activité projeté de l'année à celui de 2025 (interpolé entre 2021 et 2030), à taux de chômage par âge inchangé ; constant après 2070. Les 15-24 et 25-54 ans sont presque stables dans la projection (figure 2 : 39,7 → 40,3 % et 87,9 → 87,9 %) et restent figés. Exercice de 2022 plutôt que la variante de 2023 : la LFSS 2026 suspend la réforme de 2023 (âge légal à 62 ans et 9 mois), plus proche de l'exercice de 2022 ; léger sous-compte, prudent."
+  taux_emploi_tendance:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Phase P (19/11/2026, demande d'Adrien) : taux d'emploi par âge non figés au statu quo (taux_activite_seniors_projection). false : taux de 2025 figés, comme avant."
+  ecole_cohortes:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    note: "Phase P (19/11/2026, demande d'Adrien) : le canal école suit la part dans l'emploi des cohortes formées après la réforme (canaux_declares.part_cohortes_ecole), et non une montée linéaire sur 40 ans. false : montée linéaire, comme avant."
+  ecole_age_entree:
+    valeur: 20
+    unite: annees
+    statut: HYPOTHESE
+    note: "Âge à partir duquel une cohorte formée après la réforme compte dans l'emploi (phase P). Les taux d'emploi par âge font le reste : peu d'emplois avant 25 ans."
   natalite_semi_elasticite:
     valeur: {crise: 0.02, prudent: 0.01, median: 0.01, optimiste: 0.005}
     unite: sans_unite
