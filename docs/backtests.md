@@ -43,3 +43,27 @@ l'outil de comparaison mesure par mesure est prêt (`outils/ecarts_tiers.py`, sa
 - France Stratégie, évaluation du CICE (septembre 2020) : https://www.vie-publique.fr/sites/default/files/rapport/pdf/276212.pdf
 - Banque de France, bulletin n° 231 (2020), CICE et pacte de responsabilité : https://www.banque-france.fr/system/files/2023-01/bdf231-6_politiques-economiques.pdf
 - Rexecode, Repères n° 5 (avril 2023), d'après l'étude d'impact de la réforme de 2023 : https://www.rexecode.fr/media/documents/document-de-travail/reperes/reperes-5-impact-de-la-reforme-des-retraites-sur-le-deficit-avril-2023
+
+## Ampleur des réformes de l'assurance chômage (roadmap 8.3, 18/11/2026)
+
+`outils/backtests.ampleur_assurance_chomage` rapporte chaque réforme à celle de 2019-2021. L'ampleur, ce sont les
+économies de législation du bloc chômage au prudent en 2032, divisées par 2,3 Md€. La lecture relative, c'est la
+baisse du chômage déclarée, divisée par 0,13 point. Un rapport proche de 1 veut dire que la lecture est
+proportionnée à la réforme.
+
+| Programme | Économies (Md€) | Ampleur | Lecture relative | Rapport |
+|---|---|---|---|---|
+| Retailleau | 4,61 | 2,01 | 2,30 | 1,15 |
+| Philippe | 3,08 | 1,34 | 1,53 | 1,15 |
+| Attal | 2,87 | 1,25 | 1,53 | 1,23 |
+| Lisnard | 1,03 | 0,45 | 0,77 | 1,72 |
+
+Les lectures d'Attal, Philippe et Retailleau sont proportionnées à l'ampleur de leurs réformes, à 15-25 % près.
+L'écart signalé en phase 3.3 (1,5 à 2,3 fois l'effet de 2019-2021) s'explique donc par des réformes plus larges.
+
+Lisnard suppose 1,7 fois l'effet que justifie l'ampleur de sa réforme (dégressivité seule, 1,0 Md€). L'écart est
+petit en absolu (0,1 point, ≈ 30 000 chômeurs), mais c'est la lecture à revoir en premier : la ramener à ≈ 0,07 point
+la mettrait au rapport des trois autres.
+
+Limite : les 2,3 Md€ sont en euros de 2019-2021, les économies des programmes en euros de 2026 et à l'économie de
+2032. La comparaison est un ordre de grandeur.

@@ -31,6 +31,8 @@ python -m outils.vieillissement <programme>       # micro vieillie (2029, 2032, 
 python -m moteur.statu_quo --ecart                # scénario sans réforme (sorties/statu_quo.json)
 python -m outils.couverture_micro                 # part du budget « ménages » codée dans la micro (seuil des déciles)
 python -m outils.export_incidence                 # incidence des mesures sur les entreprises, par décile
+python -m outils.page_comparateur                 # page publique autonome (sorties/comparateur.html)
+python -m outils.veille_programmes                # veille des sites de campagne (veille/rapport.md, poste avec accès web)
 ```
 
 ## Organisation

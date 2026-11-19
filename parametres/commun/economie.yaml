@@ -437,8 +437,10 @@ chomage:
 
 # --- Santé année par année (feuille Santé) ------------------------------------------
 sante_trajectoire:
-  depenses_2024: {valeur: {sante_md: 210, pib_md: 2919.9}, unite: sans_unite, statut: SOURCE, source: "Assurance maladie, cartographie 2024 ; Insee"}
+  depenses_2024: {valeur: {sante_md: 210, pib_md: 2919.9}, unite: sans_unite, statut: SOURCE, source: "Assurance maladie, cartographie 2024 ; Insee", url: "https://questions.assemblee-nationale.fr/dyn/opendata/CRCANR5L17S2026PO420120N097.html", page: "Audition de la Cnam sur le rapport Charges et produits pour 2027, commission des affaires sociales de l'Assemblée nationale (2026) : base de dépenses de 210 Md€ en 2024"}
   scenarios_assurance_maladie:
+    url: "https://questions.assemblee-nationale.fr/dyn/opendata/CRCANR5L17S2026PO420120N097.html"
+    page: "Même audition : scénario tendanciel +60 Md€ à l'horizon 2030, soit +0,7 point de PIB ; les autres scénarios dans le rapport Charges et produits pour 2027"
     valeur: {tendanciel: 0.007, regulation_volontariste: 0.003, virage_preventif: 0.001, rythme_pib: 0}
     unite: sans_unite
     statut: SOURCE
@@ -671,6 +673,8 @@ ancien_systeme:
 # --- Cellules de ménages (moteur/cohortes.py, 29 octobre 2026) -----------------------------
 cohortes:
   profil_salaire_age:
+    url: "https://www.insee.fr/fr/statistiques/8733089"
+    page: "Insee, Salaires dans le secteur privé : caractéristiques des individus (base Tous salariés 2024), figure 3 : salaire net moyen en EQTP par âge"
     valeur: {"18-24": 0.593, "25-39": 0.934, "40-49": 1.103, "50-54": 1.161, "55+": 1.198}
     unite: sans_unite
     statut: SOURCE
@@ -734,6 +738,8 @@ entreprises_cellules:
 # --- Inflation (moteur/inflation.py, 30/10/2026) -----------------------------------------------------------
 inflation:
   base:
+    url: "https://www.banque-france.fr/system/files/2026-09/Projections_macroeconomiques_Septembre_2026.pdf"
+    page: "Banque de France, projections macroéconomiques intermédiaires du 15 septembre 2026 : IPCH 2,3 % en 2026, 1,9 % en 2027, 1,6 % en 2028"
     valeur: {"2027": 0.019, "2028": 0.016, convergence_annees: 4}
     unite: sans_unite
     statut: SOURCE

@@ -1,0 +1,17 @@
+# Veille des programmes (roadmap 9.2, 18/11/2026) : pages à relire pour chaque candidat publié.
+# outils/veille_programmes.py les télécharge, garde le texte de la dernière lecture dans veille/ et liste ce qui a
+# changé depuis. Seules les pages d'un programme ou d'un recensement de mesures y sont ; les articles de presse
+# repris dans les fiches (mesures.yaml) n'y sont pas. Le Pen et Roussel : pas de page de programme stable en ligne
+# (contre-budget non publié, programme non arrêté), recensement seulement.
+arthaud: [https://programmes-2027.fr/candidats/arthaud/, https://www.lutte-ouvriere.org/]
+attal: [https://programmes-2027.fr/candidats/attal/]
+bertrand: [https://programmes-2027.fr/candidats/bertrand/, https://www.nousfrance.fr/]
+glucksmann: [https://programmes-2027.fr/candidats/glucksmann/, https://place-publique.eu/document/3Ari5O0s5O1L4iK1uyUhI0/pp-acte-un.pdf]
+le_pen: [https://programmes-2027.fr/candidats/le-pen/]
+lisnard: [https://programmes-2027.fr/candidats/lisnard/]
+melenchon: [https://programmes-2027.fr/candidats/melenchon/, https://melenchon2027.fr/programme/]
+philippe: [https://programmes-2027.fr/candidats/philippe/, https://www.edouardphilippe.fr/programme]
+retailleau: [https://programmes-2027.fr/candidats/retailleau/]
+roussel: [https://programmes-2027.fr/candidats/roussel/]
+tondelier: [https://programmes-2027.fr/candidats/tondelier/, https://lesecologistes.fr/document/3N4JsAEmq6vsx42IITGNZa/vdef-programme-1.pdf]
+zemmour: [https://programmes-2027.fr/candidats/zemmour/, https://assets.ericzemmour.fr/ressources/tracts/avenir-est-a-nous.pdf]
