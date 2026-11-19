@@ -32,6 +32,8 @@ python -m moteur.statu_quo --ecart                # scénario sans réforme (sor
 python -m outils.couverture_micro                 # part du budget « ménages » codée dans la micro (seuil des déciles)
 python -m outils.export_incidence                 # incidence des mesures sur les entreprises, par décile
 python -m outils.page_comparateur                 # page publique autonome (sorties/comparateur.html)
+python -m outils.export_demographie               # naissances, décès, migrations, âges du comparateur (~10 s)
+python -m outils.export_menages_types             # ménages types du comparateur, avec OpenFisca (~8 min)
 python -m outils.veille_programmes                # veille des sites de campagne (veille/rapport.md, poste avec accès web)
 ```
 
@@ -42,6 +44,7 @@ python -m outils.veille_programmes                # veille des sites de campagne
 | `parametres/commun/` | Hypothèses communes à tous les programmes (économie, options, statu quo, écologie, microsimulation) : valeur par scénario si besoin, unité, année des euros, statut, source |
 | `programmes/<programme>/` | Un dossier par programme : `parametres.yaml` (qui ne peut pas redéfinir une hypothèse commune), `mesures.yaml`, `programme.py`. Architecture : `docs/architecture.md` |
 | `programmes/publies.yaml` | Liste des programmes publiés dans le comparateur |
+| `comparateur/` | Code de la page du comparateur en ligne (onglets, scripts par vue), copie de l'artifact ; mise à jour : `docs/comparateur.md` |
 | `moteur/parametres.py` | Chargement et validation. `Parametres()` charge les seules hypothèses communes ; `Parametres(programme=<nom>)` y ajoute celles d'un programme |
 | `moteur/noyau.py` | Comptabilité commune : un programme = statu quo + mesures + canaux communs |
 | `moteur/statu_quo.py` | Scénario sans réforme, référence commune |
