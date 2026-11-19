@@ -67,7 +67,8 @@ détail chiffré est dans `docs/journal.md` (entrées du 18/11/2026).
 
 ```
 python -m outils.population_synthetique      # population avec apprentis et plus-values (OpenFisca)
-python -m outils.openfisca_mesures           # micro des programmes, puis le vieillissement
+python -m outils.openfisca_mesures <programme>   # micro d'un programme, un par processus
+python -m outils.vieillissement <programme>      # puis sa micro vieillie (2029, 2032, 2037, 2050)
 python -m outils.veille_programmes           # veille des sites de campagne (accès web)
 ```
 
