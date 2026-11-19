@@ -1,625 +1,625 @@
 programme,scenario,annee,variante,libelle_variante,deficit,dette_pib,ecart_deficit_statu_quo,ecart_solde_primaire_pib,ecart_dette_pib_statu_quo
-Statu quo,Crise,2032,centrale,Calcul publié,8.31,145.81,0.0,0.0,0.0
-Statu quo,Crise,2037,centrale,Calcul publié,11.624,181.05,0.0,0.0,0.0
-Statu quo,Crise,2050,centrale,Calcul publié,29.516,378.1,0.0,0.0,0.0
-Statu quo,Prudent,2032,centrale,Calcul publié,7.03,138.12,0.0,0.0,0.0
-Statu quo,Prudent,2037,centrale,Calcul publié,9.07,159.48,0.0,0.0,0.0
-Statu quo,Prudent,2050,centrale,Calcul publié,18.549,265.42,0.0,0.0,0.0
-Statu quo,Médian,2032,centrale,Calcul publié,6.7,134.95,0.0,0.0,0.0
-Statu quo,Médian,2037,centrale,Calcul publié,7.977,149.33,0.0,0.0,0.0
-Statu quo,Médian,2050,centrale,Calcul publié,11.798,209.61,0.0,0.0,0.0
-Statu quo,Optimiste,2032,centrale,Calcul publié,6.545,133.2,0.0,0.0,0.0
-Statu quo,Optimiste,2037,centrale,Calcul publié,7.689,144.81,0.0,0.0,0.0
-Statu quo,Optimiste,2050,centrale,Calcul publié,11.069,198.9,0.0,0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2032,centrale,Calcul publié,15.648,179.33,7.338,-5.716,33.52
-Arthaud (Lutte ouvrière) — partiel,Crise,2037,centrale,Calcul publié,25.009,263.21,13.385,-7.108,82.16
-Arthaud (Lutte ouvrière) — partiel,Crise,2050,centrale,Calcul publié,63.161,722.09,33.645,-7.033,343.99
-Arthaud (Lutte ouvrière) — partiel,Prudent,2032,centrale,Calcul publié,11.383,155.28,4.353,-3.384,17.16
-Arthaud (Lutte ouvrière) — partiel,Prudent,2037,centrale,Calcul publié,15.95,199.13,6.88,-4.045,39.65
-Arthaud (Lutte ouvrière) — partiel,Prudent,2050,centrale,Calcul publié,38.499,446.43,19.95,-4.587,181.01
-Arthaud (Lutte ouvrière) — partiel,Médian,2032,centrale,Calcul publié,9.085,143.71,2.385,-1.862,8.76
-Arthaud (Lutte ouvrière) — partiel,Médian,2037,centrale,Calcul publié,11.748,169.92,3.771,-2.431,20.59
-Arthaud (Lutte ouvrière) — partiel,Médian,2050,centrale,Calcul publié,21.199,291.16,9.401,-2.849,81.54
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,centrale,Calcul publié,7.385,134.41,0.84,-0.622,1.21
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,centrale,Calcul publié,9.19,149.77,1.501,-1.035,4.96
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,centrale,Calcul publié,14.242,225.05,3.173,-1.29,26.15
-Attal (Renaissance),Crise,2032,centrale,Calcul publié,10.35,153.44,2.041,-1.717,7.63
-Attal (Renaissance),Crise,2037,centrale,Calcul publié,15.073,202.72,3.449,-2.016,21.68
-Attal (Renaissance),Crise,2050,centrale,Calcul publié,39.321,479.04,9.805,-2.064,100.94
-Attal (Renaissance),Prudent,2032,centrale,Calcul publié,8.094,141.08,1.064,-0.91,2.95
-Attal (Renaissance),Prudent,2037,centrale,Calcul publié,10.77,169.72,1.7,-1.1,10.24
-Attal (Renaissance),Prudent,2050,centrale,Calcul publié,24.291,316.04,5.743,-1.328,50.62
-Attal (Renaissance),Médian,2032,centrale,Calcul publié,7.131,136.04,0.431,-0.372,1.09
-Attal (Renaissance),Médian,2037,centrale,Calcul publié,8.499,152.92,0.522,-0.342,3.59
-Attal (Renaissance),Médian,2050,centrale,Calcul publié,13.001,221.89,1.203,-0.337,12.27
-Attal (Renaissance),Optimiste,2032,centrale,Calcul publié,5.764,128.64,-0.782,0.67,-4.55
-Attal (Renaissance),Optimiste,2037,centrale,Calcul publié,6.386,134.99,-1.303,0.881,-9.83
-Attal (Renaissance),Optimiste,2050,centrale,Calcul publié,8.322,169.33,-2.747,1.02,-29.58
-Bertrand (Nous France),Crise,2032,centrale,Calcul publié,8.562,147.06,0.253,-0.201,1.25
-Bertrand (Nous France),Crise,2037,centrale,Calcul publié,12.012,184.21,0.388,-0.192,3.16
-Bertrand (Nous France),Crise,2050,centrale,Calcul publié,31.019,393.95,1.503,-0.294,15.84
-Bertrand (Nous France),Prudent,2032,centrale,Calcul publié,7.079,138.53,0.049,-0.03,0.4
-Bertrand (Nous France),Prudent,2037,centrale,Calcul publié,9.084,160.28,0.014,0.027,0.8
-Bertrand (Nous France),Prudent,2050,centrale,Calcul publié,18.958,269.21,0.409,-0.068,3.8
-Bertrand (Nous France),Médian,2032,centrale,Calcul publié,6.553,134.98,-0.147,0.144,0.03
-Bertrand (Nous France),Médian,2037,centrale,Calcul publié,7.633,148.41,-0.345,0.284,-0.92
-Bertrand (Nous France),Médian,2050,centrale,Calcul publié,11.112,204.1,-0.685,0.301,-5.52
-Bertrand (Nous France),Optimiste,2032,centrale,Calcul publié,5.936,131.38,-0.609,0.558,-1.82
-Bertrand (Nous France),Optimiste,2037,centrale,Calcul publié,6.709,139.48,-0.98,0.739,-5.34
-Bertrand (Nous France),Optimiste,2050,centrale,Calcul publié,9.15,179.87,-1.919,0.789,-19.03
-Glucksmann (Place publique),Crise,2032,centrale,Calcul publié,12.013,157.53,3.703,-3.185,11.72
-Glucksmann (Place publique),Crise,2037,centrale,Calcul publié,17.858,216.37,6.234,-3.792,35.32
-Glucksmann (Place publique),Crise,2050,centrale,Calcul publié,45.473,538.61,15.957,-3.57,160.51
-Glucksmann (Place publique),Prudent,2032,centrale,Calcul publié,9.325,142.34,2.295,-1.995,4.21
-Glucksmann (Place publique),Prudent,2037,centrale,Calcul publié,12.848,177.01,3.778,-2.59,17.53
-Glucksmann (Place publique),Prudent,2050,centrale,Calcul publié,29.66,360.59,11.111,-2.896,95.17
-Glucksmann (Place publique),Médian,2032,centrale,Calcul publié,8.365,137.0,1.665,-1.465,2.05
-Glucksmann (Place publique),Médian,2037,centrale,Calcul publié,10.66,160.68,2.683,-1.942,11.35
-Glucksmann (Place publique),Médian,2050,centrale,Calcul publié,18.225,264.69,6.427,-2.209,55.07
-Glucksmann (Place publique),Optimiste,2032,centrale,Calcul publié,7.27,130.69,0.725,-0.651,-2.5
-Glucksmann (Place publique),Optimiste,2037,centrale,Calcul publié,9.055,146.29,1.366,-1.083,1.48
-Glucksmann (Place publique),Optimiste,2050,centrale,Calcul publié,13.915,220.77,2.846,-1.29,21.86
-Le Pen (Rassemblement national) — partiel,Crise,2032,centrale,Calcul publié,11.638,158.77,3.328,-2.797,12.96
-Le Pen (Rassemblement national) — partiel,Crise,2037,centrale,Calcul publié,17.367,216.65,5.743,-3.31,35.6
-Le Pen (Rassemblement national) — partiel,Crise,2050,centrale,Calcul publié,46.152,547.54,16.636,-3.717,169.44
-Le Pen (Rassemblement national) — partiel,Prudent,2032,centrale,Calcul publié,9.291,145.86,2.262,-1.919,7.73
-Le Pen (Rassemblement national) — partiel,Prudent,2037,centrale,Calcul publié,12.661,181.01,3.591,-2.256,21.53
-Le Pen (Rassemblement national) — partiel,Prudent,2050,centrale,Calcul publié,30.325,371.81,11.777,-2.778,106.39
-Le Pen (Rassemblement national) — partiel,Médian,2032,centrale,Calcul publié,8.331,140.76,1.631,-1.396,5.81
-Le Pen (Rassemblement national) — partiel,Médian,2037,centrale,Calcul publié,10.282,163.84,2.304,-1.511,14.52
-Le Pen (Rassemblement national) — partiel,Médian,2050,centrale,Calcul publié,17.801,265.76,6.003,-1.788,56.15
-Le Pen (Rassemblement national) — partiel,Optimiste,2032,centrale,Calcul publié,7.368,136.22,0.823,-0.694,3.02
-Le Pen (Rassemblement national) — partiel,Optimiste,2037,centrale,Calcul publié,8.75,151.69,1.061,-0.685,6.88
-Le Pen (Rassemblement national) — partiel,Optimiste,2050,centrale,Calcul publié,13.326,222.03,2.257,-0.731,23.12
-Lisnard (Nouvelle Énergie),Crise,2032,centrale,Calcul publié,12.816,160.48,4.506,-3.97,14.67
-Lisnard (Nouvelle Énergie),Crise,2037,centrale,Calcul publié,19.409,229.31,7.785,-4.66,48.26
-Lisnard (Nouvelle Énergie),Crise,2050,centrale,Calcul publié,53.866,628.2,24.35,-5.784,250.1
-Lisnard (Nouvelle Énergie),Prudent,2032,centrale,Calcul publié,9.785,144.96,2.755,-2.471,6.84
-Lisnard (Nouvelle Énergie),Prudent,2037,centrale,Calcul publié,13.371,185.62,4.301,-2.826,26.14
-Lisnard (Nouvelle Énergie),Prudent,2050,centrale,Calcul publié,33.843,408.29,15.294,-3.738,142.87
-Lisnard (Nouvelle Énergie),Médian,2032,centrale,Calcul publié,8.563,138.8,1.863,-1.715,3.85
-Lisnard (Nouvelle Énergie),Médian,2037,centrale,Calcul publié,10.272,163.96,2.295,-1.578,14.63
-Lisnard (Nouvelle Énergie),Médian,2050,centrale,Calcul publié,18.219,271.76,6.421,-1.851,62.14
-Lisnard (Nouvelle Énergie),Optimiste,2032,centrale,Calcul publié,6.444,128.11,-0.101,0.026,-5.08
-Lisnard (Nouvelle Énergie),Optimiste,2037,centrale,Calcul publié,7.117,138.71,-0.571,0.392,-6.1
-Lisnard (Nouvelle Énergie),Optimiste,2050,centrale,Calcul publié,9.813,186.24,-1.256,0.583,-12.66
-Mélenchon (La France insoumise),Crise,2032,centrale,Calcul publié,23.84,195.78,15.53,-13.149,49.97
-Mélenchon (La France insoumise),Crise,2037,centrale,Calcul publié,37.691,324.68,26.067,-15.205,143.63
-Mélenchon (La France insoumise),Crise,2050,centrale,Calcul publié,95.213,1014.44,65.696,-16.388,636.34
-Mélenchon (La France insoumise),Prudent,2032,centrale,Calcul publié,18.623,166.28,11.593,-9.797,28.16
-Mélenchon (La France insoumise),Prudent,2037,centrale,Calcul publié,27.262,245.94,18.192,-11.461,86.46
-Mélenchon (La France insoumise),Prudent,2050,centrale,Calcul publié,65.3,675.32,46.751,-12.236,409.9
-Mélenchon (La France insoumise),Médian,2032,centrale,Calcul publié,14.783,150.2,8.082,-6.954,15.25
-Mélenchon (La France insoumise),Médian,2037,centrale,Calcul publié,20.036,202.2,12.058,-8.287,52.87
-Mélenchon (La France insoumise),Médian,2050,centrale,Calcul publié,43.736,466.1,31.938,-9.518,256.48
-Mélenchon (La France insoumise),Optimiste,2032,centrale,Calcul publié,10.732,130.26,4.187,-3.612,-2.94
-Mélenchon (La France insoumise),Optimiste,2037,centrale,Calcul publié,14.565,160.88,6.876,-5.089,16.06
-Mélenchon (La France insoumise),Optimiste,2050,centrale,Calcul publié,26.655,315.52,15.586,-6.183,116.61
-Philippe (Horizons),Crise,2032,centrale,Calcul publié,10.26,152.06,1.95,-1.728,6.25
-Philippe (Horizons),Crise,2037,centrale,Calcul publié,15.226,202.67,3.602,-2.263,21.63
-Philippe (Horizons),Crise,2050,centrale,Calcul publié,41.846,500.62,12.33,-3.224,122.52
-Philippe (Horizons),Prudent,2032,centrale,Calcul publié,7.969,141.02,0.939,-0.849,2.89
-Philippe (Horizons),Prudent,2037,centrale,Calcul publié,10.606,169.42,1.537,-1.016,9.94
-Philippe (Horizons),Prudent,2050,centrale,Calcul publié,25.017,322.4,6.468,-1.7,56.98
-Philippe (Horizons),Médian,2032,centrale,Calcul publié,6.886,135.98,0.186,-0.183,1.03
-Philippe (Horizons),Médian,2037,centrale,Calcul publié,8.143,152.0,0.166,-0.085,2.67
-Philippe (Horizons),Médian,2050,centrale,Calcul publié,12.853,221.01,1.055,-0.338,11.39
-Philippe (Horizons),Optimiste,2032,centrale,Calcul publié,5.645,130.44,-0.9,0.793,-2.76
-Philippe (Horizons),Optimiste,2037,centrale,Calcul publié,6.249,137.07,-1.44,1.064,-7.74
-Philippe (Horizons),Optimiste,2050,centrale,Calcul publié,8.389,172.35,-2.68,1.088,-26.55
-Retailleau (Les Républicains),Crise,2032,centrale,Calcul publié,9.327,149.47,1.017,-0.872,3.66
-Retailleau (Les Républicains),Crise,2037,centrale,Calcul publié,13.493,192.81,1.869,-1.121,11.77
-Retailleau (Les Républicains),Crise,2050,centrale,Calcul publié,36.02,443.72,6.504,-1.542,65.62
-Retailleau (Les Républicains),Prudent,2032,centrale,Calcul publié,7.417,139.32,0.388,-0.342,1.2
-Retailleau (Les Républicains),Prudent,2037,centrale,Calcul publié,9.747,163.92,0.677,-0.434,4.44
-Retailleau (Les Républicains),Prudent,2050,centrale,Calcul publié,21.732,292.6,3.183,-0.835,27.18
-Retailleau (Les Républicains),Médian,2032,centrale,Calcul publié,6.616,134.7,-0.085,0.06,-0.26
-Retailleau (Les Républicains),Médian,2037,centrale,Calcul publié,7.757,148.85,-0.22,0.175,-0.48
-Retailleau (Les Républicains),Médian,2050,centrale,Calcul publié,11.534,207.97,-0.264,0.123,-1.64
-Retailleau (Les Républicains),Optimiste,2032,centrale,Calcul publié,5.506,128.65,-1.039,0.89,-4.55
-Retailleau (Les Républicains),Optimiste,2037,centrale,Calcul publié,6.052,134.47,-1.637,1.164,-10.35
-Retailleau (Les Républicains),Optimiste,2050,centrale,Calcul publié,7.717,164.46,-3.352,1.338,-34.44
-Roussel (Parti communiste français),Crise,2032,centrale,Calcul publié,21.828,227.87,13.519,-9.989,82.06
-Roussel (Parti communiste français),Crise,2037,centrale,Calcul publié,38.912,401.57,27.288,-11.588,220.52
-Roussel (Parti communiste français),Crise,2050,centrale,Calcul publié,108.76,1270.11,79.244,-11.219,892.01
-Roussel (Parti communiste français),Prudent,2032,centrale,Calcul publié,16.967,195.85,9.937,-7.312,57.72
-Roussel (Parti communiste français),Prudent,2037,centrale,Calcul publié,29.183,313.54,20.114,-8.849,154.06
-Roussel (Parti communiste français),Prudent,2050,centrale,Calcul publié,77.526,891.14,58.977,-8.629,625.72
-Roussel (Parti communiste français),Médian,2032,centrale,Calcul publié,13.582,174.34,6.882,-5.181,39.39
-Roussel (Parti communiste français),Médian,2037,centrale,Calcul publié,21.037,252.54,13.059,-6.606,103.21
-Roussel (Parti communiste français),Médian,2050,centrale,Calcul publié,54.787,639.07,42.989,-7.096,429.45
-Roussel (Parti communiste français),Optimiste,2032,centrale,Calcul publié,10.351,152.44,3.806,-2.795,19.24
-Roussel (Parti communiste français),Optimiste,2037,centrale,Calcul publié,15.504,202.35,7.815,-4.24,57.54
-Roussel (Parti communiste français),Optimiste,2050,centrale,Calcul publié,36.428,446.91,25.359,-4.979,248.0
-Tondelier (Les Écologistes),Crise,2032,centrale,Calcul publié,12.621,160.49,4.311,-3.707,14.68
-Tondelier (Les Écologistes),Crise,2037,centrale,Calcul publié,19.392,224.57,7.768,-4.814,43.52
-Tondelier (Les Écologistes),Crise,2050,centrale,Calcul publié,50.582,583.77,21.066,-5.461,205.67
-Tondelier (Les Écologistes),Prudent,2032,centrale,Calcul publié,9.034,139.99,2.005,-1.762,1.86
-Tondelier (Les Écologistes),Prudent,2037,centrale,Calcul publié,12.742,173.19,3.672,-2.678,13.71
-Tondelier (Les Écologistes),Prudent,2050,centrale,Calcul publié,30.141,357.57,11.593,-3.658,92.15
-Tondelier (Les Écologistes),Médian,2032,centrale,Calcul publié,7.294,131.54,0.594,-0.552,-3.42
-Tondelier (Les Écologistes),Médian,2037,centrale,Calcul publié,9.544,150.21,1.567,-1.322,0.89
-Tondelier (Les Écologistes),Médian,2050,centrale,Calcul publié,15.921,237.13,4.123,-2.038,27.52
-Tondelier (Les Écologistes),Optimiste,2032,centrale,Calcul publié,5.065,119.46,-1.48,1.155,-13.73
-Tondelier (Les Écologistes),Optimiste,2037,centrale,Calcul publié,6.651,125.15,-1.038,0.44,-19.67
-Tondelier (Les Écologistes),Optimiste,2050,centrale,Calcul publié,9.62,168.26,-1.449,-0.14,-30.65
-Zemmour (Reconquête),Crise,2032,centrale,Calcul publié,12.466,164.96,4.156,-3.412,19.15
-Zemmour (Reconquête),Crise,2037,centrale,Calcul publié,18.721,230.47,7.097,-3.8,49.42
-Zemmour (Reconquête),Crise,2050,centrale,Calcul publié,50.515,601.77,20.999,-4.268,223.67
-Zemmour (Reconquête),Prudent,2032,centrale,Calcul publié,9.696,148.7,2.667,-2.229,10.58
-Zemmour (Reconquête),Prudent,2037,centrale,Calcul publié,13.118,188.0,4.048,-2.404,28.52
-Zemmour (Reconquête),Prudent,2050,centrale,Calcul publié,32.489,398.96,13.94,-2.985,133.54
-Zemmour (Reconquête),Médian,2032,centrale,Calcul publié,8.546,142.92,1.845,-1.556,7.97
-Zemmour (Reconquête),Médian,2037,centrale,Calcul publié,10.175,167.67,2.198,-1.309,18.35
-Zemmour (Reconquête),Médian,2050,centrale,Calcul publié,17.861,272.06,6.063,-1.435,62.44
-Zemmour (Reconquête),Optimiste,2032,centrale,Calcul publié,6.384,130.27,-0.161,0.171,-2.93
-Zemmour (Reconquête),Optimiste,2037,centrale,Calcul publié,7.068,140.76,-0.621,0.525,-4.05
-Zemmour (Reconquête),Optimiste,2050,centrale,Calcul publié,9.812,187.89,-1.257,0.682,-11.02
-Statu quo,Crise,2032,sans_prime_dette,Sans prime de dette,8.162,145.58,0.0,0.0,0.0
-Statu quo,Crise,2037,sans_prime_dette,Sans prime de dette,10.434,177.55,0.0,0.0,0.0
-Statu quo,Crise,2050,sans_prime_dette,Sans prime de dette,15.614,293.94,0.0,0.0,0.0
-Statu quo,Prudent,2032,sans_prime_dette,Sans prime de dette,6.939,137.97,0.0,0.0,0.0
-Statu quo,Prudent,2037,sans_prime_dette,Sans prime de dette,8.493,157.71,0.0,0.0,0.0
-Statu quo,Prudent,2050,sans_prime_dette,Sans prime de dette,11.865,228.86,0.0,0.0,0.0
-Statu quo,Médian,2032,sans_prime_dette,Sans prime de dette,6.65,134.86,0.0,0.0,0.0
-Statu quo,Médian,2037,sans_prime_dette,Sans prime de dette,7.704,148.46,0.0,0.0,0.0
-Statu quo,Médian,2050,sans_prime_dette,Sans prime de dette,9.418,195.51,0.0,0.0,0.0
-Statu quo,Optimiste,2032,sans_prime_dette,Sans prime de dette,6.511,133.14,0.0,0.0,0.0
-Statu quo,Optimiste,2037,sans_prime_dette,Sans prime de dette,7.52,144.27,0.0,0.0,0.0
-Statu quo,Optimiste,2050,sans_prime_dette,Sans prime de dette,9.59,190.25,0.0,0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2032,sans_prime_dette,Sans prime de dette,14.853,177.47,6.691,-5.519,31.89
-Arthaud (Lutte ouvrière) — partiel,Crise,2037,sans_prime_dette,Sans prime de dette,19.839,245.36,9.405,-6.398,67.81
-Arthaud (Lutte ouvrière) — partiel,Crise,2050,sans_prime_dette,Sans prime de dette,31.978,507.08,16.365,-7.423,213.15
-Arthaud (Lutte ouvrière) — partiel,Prudent,2032,sans_prime_dette,Sans prime de dette,11.059,154.58,4.12,-3.327,16.61
-Arthaud (Lutte ouvrière) — partiel,Prudent,2037,sans_prime_dette,Sans prime de dette,14.132,192.94,5.639,-3.854,35.24
-Arthaud (Lutte ouvrière) — partiel,Prudent,2050,sans_prime_dette,Sans prime de dette,21.31,339.62,9.445,-4.575,110.76
-Arthaud (Lutte ouvrière) — partiel,Médian,2032,sans_prime_dette,Sans prime de dette,8.962,143.46,2.312,-1.848,8.59
-Arthaud (Lutte ouvrière) — partiel,Médian,2037,sans_prime_dette,Sans prime de dette,11.125,167.81,3.421,-2.387,19.36
-Arthaud (Lutte ouvrière) — partiel,Médian,2050,sans_prime_dette,Sans prime de dette,14.797,255.13,5.379,-2.68,59.62
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,sans_prime_dette,Sans prime de dette,7.343,134.33,0.832,-0.621,1.19
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,sans_prime_dette,Sans prime de dette,8.978,149.09,1.458,-1.031,4.82
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,sans_prime_dette,Sans prime de dette,12.024,212.67,2.434,-1.266,22.43
-Attal (Renaissance),Crise,2032,sans_prime_dette,Sans prime de dette,10.091,152.93,1.93,-1.684,7.35
-Attal (Renaissance),Crise,2037,sans_prime_dette,Sans prime de dette,13.063,196.38,2.629,-1.864,18.83
-Attal (Renaissance),Crise,2050,sans_prime_dette,Sans prime de dette,20.287,356.03,4.673,-2.189,62.09
-Attal (Renaissance),Prudent,2032,sans_prime_dette,Sans prime de dette,7.981,140.87,1.042,-0.905,2.9
-Attal (Renaissance),Prudent,2037,sans_prime_dette,Sans prime de dette,9.956,167.19,1.463,-1.061,9.48
-Attal (Renaissance),Prudent,2050,sans_prime_dette,Sans prime de dette,14.354,260.28,2.488,-1.231,31.42
-Attal (Renaissance),Médian,2032,sans_prime_dette,Sans prime de dette,7.077,135.94,0.427,-0.371,1.08
-Attal (Renaissance),Médian,2037,sans_prime_dette,Sans prime de dette,8.177,151.9,0.473,-0.336,3.44
-Attal (Renaissance),Médian,2050,sans_prime_dette,Sans prime de dette,10.102,204.79,0.684,-0.314,9.28
-Attal (Renaissance),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.752,128.63,-0.759,0.666,-4.51
-Attal (Renaissance),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.337,134.88,-1.183,0.855,-9.39
-Attal (Renaissance),Optimiste,2050,sans_prime_dette,Sans prime de dette,7.712,166.21,-1.878,0.942,-24.04
-Bertrand (Nous France),Crise,2032,sans_prime_dette,Sans prime de dette,8.396,146.78,0.234,-0.195,1.2
-Bertrand (Nous France),Crise,2037,sans_prime_dette,Sans prime de dette,10.704,180.29,0.27,-0.17,2.74
-Bertrand (Nous France),Crise,2050,sans_prime_dette,Sans prime de dette,16.292,303.46,0.678,-0.313,9.53
-Bertrand (Nous France),Prudent,2032,sans_prime_dette,Sans prime de dette,6.985,138.36,0.046,-0.029,0.39
-Bertrand (Nous France),Prudent,2037,sans_prime_dette,Sans prime de dette,8.485,158.43,-0.008,0.03,0.72
-Bertrand (Nous France),Prudent,2050,sans_prime_dette,Sans prime de dette,12.001,231.14,0.136,-0.053,2.29
-Bertrand (Nous France),Médian,2032,sans_prime_dette,Sans prime de dette,6.502,134.89,-0.148,0.144,0.02
-Bertrand (Nous France),Médian,2037,sans_prime_dette,Sans prime de dette,7.366,147.55,-0.337,0.283,-0.91
-Bertrand (Nous France),Médian,2050,sans_prime_dette,Sans prime de dette,8.938,191.03,-0.479,0.285,-4.48
-Bertrand (Nous France),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.912,131.34,-0.6,0.556,-1.8
-Bertrand (Nous France),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.601,139.14,-0.919,0.725,-5.13
-Bertrand (Nous France),Optimiste,2050,sans_prime_dette,Sans prime de dette,8.227,174.58,-1.362,0.735,-15.67
-Glucksmann (Place publique),Crise,2032,sans_prime_dette,Sans prime de dette,11.7,156.9,3.538,-3.135,11.32
-Glucksmann (Place publique),Crise,2037,sans_prime_dette,Sans prime de dette,15.305,208.29,4.872,-3.536,30.74
-Glucksmann (Place publique),Crise,2050,sans_prime_dette,Sans prime de dette,23.533,394.76,7.919,-3.757,100.82
-Glucksmann (Place publique),Prudent,2032,sans_prime_dette,Sans prime de dette,9.203,142.11,2.264,-1.988,4.14
-Glucksmann (Place publique),Prudent,2037,sans_prime_dette,Sans prime de dette,11.884,174.07,3.39,-2.525,16.36
-Glucksmann (Place publique),Prudent,2050,sans_prime_dette,Sans prime de dette,17.32,290.08,5.455,-2.797,61.22
-Glucksmann (Place publique),Médian,2032,sans_prime_dette,Sans prime de dette,8.309,136.9,1.659,-1.464,2.03
-Glucksmann (Place publique),Médian,2037,sans_prime_dette,Sans prime de dette,10.254,159.45,2.551,-1.923,10.99
-Glucksmann (Place publique),Médian,2050,sans_prime_dette,Sans prime de dette,13.42,238.16,4.002,-2.096,42.65
-Glucksmann (Place publique),Optimiste,2032,sans_prime_dette,Sans prime de dette,7.252,130.67,0.741,-0.653,-2.47
-Glucksmann (Place publique),Optimiste,2037,sans_prime_dette,Sans prime de dette,8.909,145.88,1.389,-1.085,1.62
-Glucksmann (Place publique),Optimiste,2050,sans_prime_dette,Sans prime de dette,11.906,210.05,2.317,-1.268,19.8
-Le Pen (Rassemblement national) — partiel,Crise,2032,sans_prime_dette,Sans prime de dette,11.295,158.05,3.133,-2.738,12.48
-Le Pen (Rassemblement national) — partiel,Crise,2037,sans_prime_dette,Sans prime de dette,14.749,208.19,4.315,-3.047,30.64
-Le Pen (Rassemblement national) — partiel,Crise,2050,sans_prime_dette,Sans prime de dette,23.814,400.13,8.201,-3.914,106.19
-Le Pen (Rassemblement national) — partiel,Prudent,2032,sans_prime_dette,Sans prime de dette,9.118,145.51,2.179,-1.9,7.54
-Le Pen (Rassemblement national) — partiel,Prudent,2037,sans_prime_dette,Sans prime de dette,11.513,177.3,3.02,-2.165,19.59
-Le Pen (Rassemblement national) — partiel,Prudent,2050,sans_prime_dette,Sans prime de dette,17.263,294.84,5.398,-2.693,65.98
-Le Pen (Rassemblement national) — partiel,Médian,2032,sans_prime_dette,Sans prime de dette,8.242,140.59,1.592,-1.389,5.72
-Le Pen (Rassemblement national) — partiel,Médian,2037,sans_prime_dette,Sans prime de dette,9.776,162.18,2.073,-1.482,13.72
-Le Pen (Rassemblement national) — partiel,Médian,2050,sans_prime_dette,Sans prime de dette,12.82,237.14,3.403,-1.676,41.63
-Le Pen (Rassemblement national) — partiel,Optimiste,2032,sans_prime_dette,Sans prime de dette,7.32,136.13,0.809,-0.693,2.99
-Le Pen (Rassemblement national) — partiel,Optimiste,2037,sans_prime_dette,Sans prime de dette,8.505,150.88,0.985,-0.678,6.62
-Le Pen (Rassemblement national) — partiel,Optimiste,2050,sans_prime_dette,Sans prime de dette,11.136,209.26,1.547,-0.711,19.01
-Lisnard (Nouvelle Énergie),Crise,2032,sans_prime_dette,Sans prime de dette,12.478,159.8,4.317,-3.913,14.22
-Lisnard (Nouvelle Énergie),Crise,2037,sans_prime_dette,Sans prime de dette,16.365,219.68,5.931,-4.317,42.13
-Lisnard (Nouvelle Énergie),Crise,2050,sans_prime_dette,Sans prime de dette,28.029,456.8,12.416,-6.03,162.86
-Lisnard (Nouvelle Énergie),Prudent,2032,sans_prime_dette,Sans prime de dette,9.634,144.67,2.695,-2.457,6.7
-Lisnard (Nouvelle Énergie),Prudent,2037,sans_prime_dette,Sans prime de dette,12.172,181.89,3.679,-2.726,24.18
-Lisnard (Nouvelle Énergie),Prudent,2050,sans_prime_dette,Sans prime de dette,19.13,320.64,7.264,-3.668,91.79
-Lisnard (Nouvelle Énergie),Médian,2032,sans_prime_dette,Sans prime de dette,8.492,138.66,1.842,-1.711,3.8
-Lisnard (Nouvelle Énergie),Médian,2037,sans_prime_dette,Sans prime de dette,9.801,162.48,2.097,-1.552,14.02
-Lisnard (Nouvelle Énergie),Médian,2050,sans_prime_dette,Sans prime de dette,13.007,242.27,3.589,-1.729,46.76
-Lisnard (Nouvelle Énergie),Optimiste,2032,sans_prime_dette,Sans prime de dette,6.43,128.09,-0.081,0.024,-5.05
-Lisnard (Nouvelle Énergie),Optimiste,2037,sans_prime_dette,Sans prime de dette,7.033,138.48,-0.488,0.386,-5.79
-Lisnard (Nouvelle Énergie),Optimiste,2050,sans_prime_dette,Sans prime de dette,8.756,180.47,-0.834,0.557,-9.78
-Mélenchon (La France insoumise),Crise,2032,sans_prime_dette,Sans prime de dette,22.87,193.63,14.709,-12.9,48.06
-Mélenchon (La France insoumise),Crise,2037,sans_prime_dette,Sans prime de dette,30.322,299.55,19.889,-14.228,122.0
-Mélenchon (La France insoumise),Crise,2050,sans_prime_dette,Sans prime de dette,50.792,716.25,35.179,-16.886,422.31
-Mélenchon (La France insoumise),Prudent,2032,sans_prime_dette,Sans prime de dette,18.227,165.46,11.288,-9.723,27.49
-Mélenchon (La France insoumise),Prudent,2037,sans_prime_dette,Sans prime de dette,23.946,235.71,15.452,-11.051,78.0
-Mélenchon (La France insoumise),Prudent,2050,sans_prime_dette,Sans prime de dette,37.076,499.02,25.211,-12.352,270.17
-Mélenchon (La France insoumise),Médian,2032,sans_prime_dette,Sans prime de dette,14.652,149.95,8.002,-6.938,15.08
-Mélenchon (La France insoumise),Médian,2037,sans_prime_dette,Sans prime de dette,18.917,198.86,11.214,-8.18,50.41
-Mélenchon (La France insoumise),Médian,2050,sans_prime_dette,Sans prime de dette,27.473,378.35,18.055,-9.164,182.84
-Mélenchon (La France insoumise),Optimiste,2032,sans_prime_dette,Sans prime de dette,10.733,130.28,4.221,-3.617,-2.86
-Mélenchon (La France insoumise),Optimiste,2037,sans_prime_dette,Sans prime de dette,14.35,160.41,6.83,-5.083,16.14
-Mélenchon (La France insoumise),Optimiste,2050,sans_prime_dette,Sans prime de dette,21.277,290.07,11.688,-6.067,99.82
-Philippe (Horizons),Crise,2032,sans_prime_dette,Sans prime de dette,10.037,151.65,1.876,-1.706,6.07
-Philippe (Horizons),Crise,2037,sans_prime_dette,Sans prime de dette,13.286,196.71,2.853,-2.119,19.16
-Philippe (Horizons),Crise,2050,sans_prime_dette,Sans prime de dette,22.092,374.27,6.479,-3.351,80.33
-Philippe (Horizons),Prudent,2032,sans_prime_dette,Sans prime de dette,7.855,140.81,0.916,-0.844,2.84
-Philippe (Horizons),Prudent,2037,sans_prime_dette,Sans prime de dette,9.801,166.92,1.308,-0.978,9.21
-Philippe (Horizons),Prudent,2050,sans_prime_dette,Sans prime de dette,14.84,265.41,2.975,-1.594,36.55
-Philippe (Horizons),Médian,2032,sans_prime_dette,Sans prime de dette,6.83,135.88,0.18,-0.182,1.02
-Philippe (Horizons),Médian,2037,sans_prime_dette,Sans prime de dette,7.828,150.99,0.125,-0.078,2.53
-Philippe (Horizons),Médian,2050,sans_prime_dette,Sans prime de dette,10.025,204.33,0.607,-0.317,8.82
-Philippe (Horizons),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.625,130.41,-0.887,0.789,-2.73
-Philippe (Horizons),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.168,136.84,-1.352,1.043,-7.43
-Philippe (Horizons),Optimiste,2050,sans_prime_dette,Sans prime de dette,7.678,168.39,-1.912,1.012,-21.86
-Retailleau (Les Républicains),Crise,2032,sans_prime_dette,Sans prime de dette,9.128,149.12,0.967,-0.857,3.54
-Retailleau (Les Républicains),Crise,2037,sans_prime_dette,Sans prime de dette,11.893,187.92,1.459,-1.042,10.37
-Retailleau (Les Républicains),Crise,2050,sans_prime_dette,Sans prime de dette,18.888,335.88,3.274,-1.615,41.94
-Retailleau (Les Républicains),Prudent,2032,sans_prime_dette,Sans prime de dette,7.313,139.13,0.374,-0.338,1.16
-Retailleau (Les Républicains),Prudent,2037,sans_prime_dette,Sans prime de dette,9.07,161.81,0.577,-0.417,4.11
-Retailleau (Les Républicains),Prudent,2050,sans_prime_dette,Sans prime de dette,13.3,246.44,1.435,-0.758,17.59
-Retailleau (Les Républicains),Médian,2032,sans_prime_dette,Sans prime de dette,6.564,134.6,-0.086,0.06,-0.26
-Retailleau (Les Républicains),Médian,2037,sans_prime_dette,Sans prime de dette,7.49,147.99,-0.214,0.174,-0.47
-Retailleau (Les Républicains),Médian,2050,sans_prime_dette,Sans prime de dette,9.227,194.25,-0.191,0.118,-1.26
-Retailleau (Les Républicains),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.495,128.64,-1.016,0.883,-4.5
-Retailleau (Les Républicains),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.008,134.38,-1.512,1.135,-9.89
-Retailleau (Les Républicains),Optimiste,2050,sans_prime_dette,Sans prime de dette,7.21,161.88,-2.38,1.245,-28.37
-Roussel (Parti communiste français),Crise,2032,sans_prime_dette,Sans prime de dette,20.273,224.27,12.111,-9.599,78.69
-Roussel (Parti communiste français),Crise,2037,sans_prime_dette,Sans prime de dette,29.006,365.32,18.572,-10.538,187.77
-Roussel (Parti communiste français),Crise,2050,sans_prime_dette,Sans prime de dette,52.18,883.6,36.567,-11.759,589.66
-Roussel (Parti communiste français),Prudent,2032,sans_prime_dette,Sans prime de dette,16.184,194.17,9.245,-7.159,56.2
-Roussel (Parti communiste français),Prudent,2037,sans_prime_dette,Sans prime de dette,22.866,292.87,14.373,-8.156,135.16
-Roussel (Parti communiste français),Prudent,2050,sans_prime_dette,Sans prime de dette,38.582,634.62,26.717,-8.843,405.76
-Roussel (Parti communiste français),Médian,2032,sans_prime_dette,Sans prime de dette,13.269,173.71,6.62,-5.135,38.85
-Roussel (Parti communiste français),Médian,2037,sans_prime_dette,Sans prime de dette,18.585,244.87,10.881,-6.381,96.42
-Roussel (Parti communiste français),Médian,2050,sans_prime_dette,Sans prime de dette,29.238,485.55,19.82,-6.841,290.03
-Roussel (Parti communiste français),Optimiste,2032,sans_prime_dette,Sans prime de dette,10.25,152.26,3.739,-2.787,19.12
-Roussel (Parti communiste français),Optimiste,2037,sans_prime_dette,Sans prime de dette,14.667,199.88,7.147,-4.19,55.61
-Roussel (Parti communiste français),Optimiste,2050,sans_prime_dette,Sans prime de dette,23.388,380.68,13.798,-4.758,190.44
-Tondelier (Les Écologistes),Crise,2032,sans_prime_dette,Sans prime de dette,12.258,159.75,4.096,-3.641,14.17
-Tondelier (Les Écologistes),Crise,2037,sans_prime_dette,Sans prime de dette,16.468,215.21,6.034,-4.485,37.66
-Tondelier (Les Écologistes),Crise,2050,sans_prime_dette,Sans prime de dette,26.63,426.1,11.016,-5.692,132.16
-Tondelier (Les Écologistes),Prudent,2032,sans_prime_dette,Sans prime de dette,8.948,139.86,2.009,-1.763,1.89
-Tondelier (Les Écologistes),Prudent,2037,sans_prime_dette,Sans prime de dette,11.92,170.82,3.427,-2.633,13.11
-Tondelier (Les Écologistes),Prudent,2050,sans_prime_dette,Sans prime de dette,18.196,291.38,6.331,-3.542,62.53
-Tondelier (Les Écologistes),Médian,2032,sans_prime_dette,Sans prime de dette,7.277,131.53,0.627,-0.559,-3.33
-Tondelier (Les Écologistes),Médian,2037,sans_prime_dette,Sans prime de dette,9.325,149.66,1.622,-1.327,1.21
-Tondelier (Les Écologistes),Médian,2050,sans_prime_dette,Sans prime de dette,12.617,219.73,3.199,-1.976,24.22
-Tondelier (Les Écologistes),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.1,119.55,-1.411,1.146,-13.58
-Tondelier (Les Écologistes),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.735,125.58,-0.786,0.413,-18.69
-Tondelier (Les Écologistes),Optimiste,2050,sans_prime_dette,Sans prime de dette,9.245,167.82,-0.345,-0.209,-22.43
-Zemmour (Reconquête),Crise,2032,sans_prime_dette,Sans prime de dette,11.998,163.91,3.836,-3.319,18.33
-Zemmour (Reconquête),Crise,2037,sans_prime_dette,Sans prime de dette,15.409,219.39,4.976,-3.427,41.84
-Zemmour (Reconquête),Crise,2050,sans_prime_dette,Sans prime de dette,25.458,431.62,9.845,-4.525,137.68
-Zemmour (Reconquête),Prudent,2032,sans_prime_dette,Sans prime de dette,9.49,148.26,2.551,-2.202,10.29
-Zemmour (Reconquête),Prudent,2037,sans_prime_dette,Sans prime de dette,11.753,183.5,3.26,-2.284,25.79
-Zemmour (Reconquête),Prudent,2050,sans_prime_dette,Sans prime de dette,17.946,310.38,6.081,-2.927,81.52
-Zemmour (Reconquête),Médian,2032,sans_prime_dette,Sans prime de dette,8.439,142.7,1.789,-1.546,7.83
-Zemmour (Reconquête),Médian,2037,sans_prime_dette,Sans prime de dette,9.59,165.7,1.886,-1.271,17.24
-Zemmour (Reconquête),Médian,2050,sans_prime_dette,Sans prime de dette,12.458,240.28,3.04,-1.316,44.76
-Zemmour (Reconquête),Optimiste,2032,sans_prime_dette,Sans prime de dette,6.365,130.23,-0.146,0.169,-2.91
-Zemmour (Reconquête),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.951,140.41,-0.569,0.521,-3.86
-Zemmour (Reconquête),Optimiste,2050,sans_prime_dette,Sans prime de dette,8.672,181.37,-0.918,0.659,-8.88
-Statu quo,Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.803,144.85,0.0,0.0,0.0
-Statu quo,Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.126,174.61,0.0,0.0,0.0
-Statu quo,Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",23.944,331.95,0.0,0.0,0.0
-Statu quo,Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.546,137.2,0.0,0.0,0.0
-Statu quo,Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.773,153.74,0.0,0.0,0.0
-Statu quo,Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.056,230.95,0.0,0.0,0.0
-Statu quo,Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.227,134.05,0.0,0.0,0.0
-Statu quo,Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.783,143.96,0.0,0.0,0.0
-Statu quo,Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.898,183.63,0.0,0.0,0.0
-Statu quo,Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.078,132.3,0.0,0.0,0.0
-Statu quo,Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.538,139.62,0.0,0.0,0.0
-Statu quo,Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.531,175.26,0.0,0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",15.039,178.19,7.236,-5.716,33.34
-Arthaud (Lutte ouvrière) — partiel,Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",22.845,254.58,12.719,-7.109,79.96
-Arthaud (Lutte ouvrière) — partiel,Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",54.104,653.62,30.161,-6.998,321.67
-Arthaud (Lutte ouvrière) — partiel,Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.845,154.27,4.299,-3.384,17.07
-Arthaud (Lutte ouvrière) — partiel,Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.322,192.36,6.549,-4.042,38.62
-Arthaud (Lutte ouvrière) — partiel,Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",32.743,400.7,18.687,-4.783,169.75
-Arthaud (Lutte ouvrière) — partiel,Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.585,142.76,2.357,-1.862,8.71
-Arthaud (Lutte ouvrière) — partiel,Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.392,164.05,3.61,-2.43,20.09
-Arthaud (Lutte ouvrière) — partiel,Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.858,257.37,7.96,-2.834,73.74
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.914,133.51,0.836,-0.622,1.2
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.0,144.5,1.462,-1.035,4.88
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.332,199.51,2.801,-1.288,24.25
-Attal (Renaissance),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.823,152.44,2.019,-1.716,7.6
-Attal (Renaissance),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.397,195.72,3.27,-2.014,21.11
-Attal (Renaissance),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",32.87,427.17,8.927,-2.059,95.22
-Attal (Renaissance),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.603,140.14,1.057,-0.91,2.94
-Attal (Renaissance),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.394,163.73,1.621,-1.099,9.99
-Attal (Renaissance),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",19.388,277.19,5.332,-1.417,46.24
-Attal (Renaissance),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.656,135.13,0.428,-0.372,1.08
-Attal (Renaissance),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.278,147.47,0.496,-0.342,3.51
-Attal (Renaissance),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.894,194.65,0.996,-0.335,11.01
-Attal (Renaissance),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.31,127.77,-0.768,0.669,-4.53
-Attal (Renaissance),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.309,130.06,-1.229,0.88,-9.56
-Attal (Renaissance),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.201,148.43,-2.331,1.013,-26.83
-Bertrand (Nous France),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.052,146.09,0.249,-0.201,1.24
-Bertrand (Nous France),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.487,177.67,0.361,-0.191,3.06
-Bertrand (Nous France),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.306,346.72,1.362,-0.296,14.77
-Bertrand (Nous France),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.594,137.6,0.048,-0.03,0.4
-Bertrand (Nous France),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.78,154.51,0.007,0.027,0.77
-Bertrand (Nous France),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.371,234.18,0.314,-0.066,3.23
-Bertrand (Nous France),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.08,134.07,-0.148,0.144,0.03
-Bertrand (Nous France),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.444,143.05,-0.339,0.284,-0.91
-Bertrand (Nous France),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.293,178.48,-0.605,0.3,-5.15
-Bertrand (Nous France),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.474,130.49,-0.604,0.558,-1.82
-Bertrand (Nous France),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.596,134.39,-0.943,0.739,-5.23
-Bertrand (Nous France),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.871,157.79,-1.66,0.785,-17.47
-Glucksmann (Place publique),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.474,156.52,3.671,-3.184,11.67
-Glucksmann (Place publique),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.071,209.06,5.944,-3.788,34.45
-Glucksmann (Place publique),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",38.47,483.71,14.526,-3.555,151.76
-Glucksmann (Place publique),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.831,141.4,2.285,-1.995,4.2
-Glucksmann (Place publique),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.416,170.91,3.643,-2.589,17.17
-Glucksmann (Place publique),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",24.63,320.14,10.574,-3.055,89.19
-Glucksmann (Place publique),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.888,136.09,1.661,-1.465,2.05
-Glucksmann (Place publique),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.383,155.11,2.6,-1.941,11.15
-Glucksmann (Place publique),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.413,233.92,5.516,-2.201,50.29
-Glucksmann (Place publique),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.812,129.82,0.734,-0.651,-2.48
-Glucksmann (Place publique),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.896,141.15,1.358,-1.083,1.54
-Glucksmann (Place publique),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.088,195.86,2.557,-1.289,20.6
-Le Pen (Rassemblement national) — partiel,Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.095,157.75,3.292,-2.797,12.9
-Le Pen (Rassemblement national) — partiel,Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",15.571,209.27,5.445,-3.306,34.65
-Le Pen (Rassemblement national) — partiel,Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",39.017,491.35,15.073,-3.702,159.4
-Le Pen (Rassemblement national) — partiel,Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.786,144.9,2.24,-1.919,7.7
-Le Pen (Rassemblement national) — partiel,Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.192,174.73,3.419,-2.254,20.99
-Le Pen (Rassemblement national) — partiel,Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.152,329.78,11.096,-2.945,98.83
-Le Pen (Rassemblement national) — partiel,Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.842,139.83,1.614,-1.396,5.79
-Le Pen (Rassemblement national) — partiel,Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.977,158.12,2.194,-1.51,14.16
-Le Pen (Rassemblement national) — partiel,Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.928,234.16,5.03,-1.777,50.53
-Le Pen (Rassemblement national) — partiel,Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.893,135.31,0.815,-0.694,3.01
-Le Pen (Rassemblement national) — partiel,Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.548,146.33,1.009,-0.685,6.71
-Le Pen (Rassemblement national) — partiel,Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.446,196.22,1.914,-0.729,20.96
-Lisnard (Nouvelle Énergie),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.271,159.46,4.468,-3.97,14.61
-Lisnard (Nouvelle Énergie),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",17.519,221.63,7.393,-4.655,47.02
-Lisnard (Nouvelle Énergie),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",45.912,566.5,21.968,-5.761,234.55
-Lisnard (Nouvelle Énergie),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.285,144.02,2.739,-2.471,6.82
-Lisnard (Nouvelle Énergie),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.875,179.25,4.102,-2.824,25.51
-Lisnard (Nouvelle Énergie),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",28.414,364.15,14.358,-3.919,133.21
-Lisnard (Nouvelle Énergie),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.083,137.89,1.855,-1.715,3.84
-Lisnard (Nouvelle Énergie),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.974,158.27,2.191,-1.578,14.31
-Lisnard (Nouvelle Énergie),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.252,239.5,5.354,-1.84,55.87
-Lisnard (Nouvelle Énergie),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.994,127.25,-0.084,0.026,-5.05
-Lisnard (Nouvelle Énergie),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.014,133.72,-0.524,0.392,-5.9
-Lisnard (Nouvelle Énergie),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.447,163.73,-1.084,0.58,-11.53
-Mélenchon (La France insoumise),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",23.196,194.61,15.392,-13.149,49.76
-Mélenchon (La France insoumise),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",35.191,315.12,25.064,-15.236,140.5
-Mélenchon (La France insoumise),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",82.995,926.87,59.051,-16.344,594.92
-Mélenchon (La France insoumise),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",18.062,165.25,11.516,-9.797,28.06
-Mélenchon (La France insoumise),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.266,238.3,17.493,-11.456,84.56
-Mélenchon (La France insoumise),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",57.332,618.01,43.276,-12.428,387.06
-Mélenchon (La France insoumise),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.271,149.25,8.043,-6.953,15.2
-Mélenchon (La France insoumise),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",18.443,195.82,11.66,-8.285,51.86
-Mélenchon (La France insoumise),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",37.525,420.47,28.627,-9.582,236.84
-Mélenchon (La France insoumise),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.278,129.41,4.2,-3.612,-2.89
-Mélenchon (La France insoumise),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.299,155.63,6.76,-5.089,16.02
-Mélenchon (La France insoumise),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",22.432,284.2,13.9,-6.177,108.94
-Philippe (Horizons),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.737,151.07,1.934,-1.728,6.22
-Philippe (Horizons),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.556,195.69,3.429,-2.261,21.08
-Philippe (Horizons),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",35.199,447.52,11.255,-3.217,115.57
-Philippe (Horizons),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.478,140.08,0.932,-0.849,2.88
-Philippe (Horizons),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.234,163.44,1.46,-1.015,9.69
-Philippe (Horizons),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",20.107,283.16,6.051,-1.803,52.21
-Philippe (Horizons),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.411,135.07,0.184,-0.183,1.03
-Philippe (Horizons),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.929,146.55,0.146,-0.085,2.59
-Philippe (Horizons),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.765,193.73,0.867,-0.336,10.1
-Philippe (Horizons),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.186,129.55,-0.893,0.793,-2.75
-Philippe (Horizons),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.154,132.04,-1.385,1.063,-7.58
-Philippe (Horizons),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.214,150.87,-2.317,1.082,-24.39
-Retailleau (Les Républicains),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.81,148.49,1.007,-0.872,3.65
-Retailleau (Les Républicains),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.899,186.07,1.773,-1.119,11.45
-Retailleau (Les Républicains),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",29.895,393.84,5.952,-1.542,61.89
-Retailleau (Les Républicains),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.93,138.39,0.385,-0.342,1.19
-Retailleau (Les Républicains),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.416,158.06,0.643,-0.433,4.32
-Retailleau (Les Républicains),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.862,255.32,2.805,-0.86,24.38
-Retailleau (Les Républicains),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.144,133.79,-0.084,0.06,-0.25
-Retailleau (Les Républicains),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.567,143.48,-0.216,0.175,-0.48
-Retailleau (Les Républicains),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.656,182.01,-0.242,0.123,-1.62
-Retailleau (Les Républicains),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.053,127.78,-1.025,0.89,-4.53
-Retailleau (Les Républicains),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",4.977,129.52,-1.562,1.164,-10.1
-Retailleau (Les Républicains),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.652,143.81,-2.879,1.33,-31.45
-Roussel (Parti communiste français),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",21.095,226.56,13.292,-9.988,81.71
-Roussel (Parti communiste français),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",35.92,390.39,25.793,-11.631,215.78
-Roussel (Parti communiste français),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",93.625,1162.01,69.681,-11.174,830.06
-Roussel (Parti communiste français),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.324,194.68,9.778,-7.312,57.48
-Roussel (Parti communiste français),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",26.737,304.27,18.964,-8.857,150.53
-Roussel (Parti communiste français),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",67.214,817.97,53.157,-8.806,587.02
-Roussel (Parti communiste français),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.003,173.28,6.776,-5.181,39.23
-Roussel (Parti communiste français),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",19.057,244.84,12.275,-6.603,100.88
-Roussel (Parti communiste français),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",46.887,581.25,37.989,-7.167,397.62
-Roussel (Parti communiste français),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.836,151.48,3.757,-2.795,19.18
-Roussel (Parti communiste français),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.934,196.01,7.395,-4.239,56.39
-Roussel (Parti communiste français),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",30.078,402.3,21.546,-4.972,227.04
-Tondelier (Les Écologistes),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.074,159.46,4.27,-3.707,14.62
-Tondelier (Les Écologistes),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",17.538,217.05,7.412,-4.809,42.44
-Tondelier (Les Écologistes),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",43.134,526.19,19.19,-5.443,194.24
-Tondelier (Les Écologistes),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.547,139.06,2.001,-1.762,1.86
-Tondelier (Les Écologistes),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.343,167.22,3.569,-2.677,13.48
-Tondelier (Les Écologistes),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.16,318.0,11.104,-3.817,87.05
-Tondelier (Les Écologistes),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.832,130.65,0.605,-0.552,-3.39
-Tondelier (Les Écologistes),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.347,144.94,1.564,-1.322,0.98
-Tondelier (Les Écologistes),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.634,209.76,3.736,-2.035,26.13
-Tondelier (Les Écologistes),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",4.639,118.64,-1.44,1.155,-13.66
-Tondelier (Les Écologistes),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.55,120.07,-0.989,0.461,-19.55
-Tondelier (Les Écologistes),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.532,148.13,-1.0,-0.157,-27.13
-Zemmour (Reconquête),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.904,163.9,4.101,-3.412,19.06
-Zemmour (Reconquête),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.805,222.64,6.679,-3.794,48.03
-Zemmour (Reconquête),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",42.793,541.15,18.849,-4.246,209.2
-Zemmour (Reconquête),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.183,147.73,2.637,-2.229,10.53
-Zemmour (Reconquête),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.594,181.49,3.821,-2.402,27.75
-Zemmour (Reconquête),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",27.098,354.78,13.042,-3.163,123.83
-Zemmour (Reconquête),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.051,141.98,1.823,-1.556,7.94
-Zemmour (Reconquête),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.842,161.81,2.059,-1.308,17.85
-Zemmour (Reconquête),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.838,239.14,4.94,-1.423,55.51
-Zemmour (Reconquête),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.927,129.39,-0.151,0.171,-2.91
-Zemmour (Reconquête),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.946,135.67,-0.593,0.525,-3.94
-Zemmour (Reconquête),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.408,164.97,-1.123,0.68,-10.29
-Statu quo,Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.212,143.05,0.0,0.0,0.0
-Statu quo,Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.467,177.91,0.0,0.0,0.0
-Statu quo,Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.076,372.04,0.0,0.0,0.0
-Statu quo,Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.941,135.48,0.0,0.0,0.0
-Statu quo,Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.948,156.66,0.0,0.0,0.0
-Statu quo,Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.242,261.12,0.0,0.0,0.0
-Statu quo,Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.614,132.36,0.0,0.0,0.0
-Statu quo,Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.866,146.66,0.0,0.0,0.0
-Statu quo,Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.617,206.2,0.0,0.0,0.0
-Statu quo,Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.459,130.63,0.0,0.0,0.0
-Statu quo,Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.581,142.21,0.0,0.0,0.0
-Statu quo,Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.914,195.73,0.0,0.0,0.0
-Arthaud (Lutte ouvrière) — partiel,Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.521,176.27,7.309,-5.714,33.22
-Arthaud (Lutte ouvrière) — partiel,Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",24.77,259.51,13.303,-7.106,81.6
-Arthaud (Lutte ouvrière) — partiel,Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",62.589,714.47,33.513,-7.031,342.42
-Arthaud (Lutte ouvrière) — partiel,Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.278,152.51,4.337,-3.384,17.03
-Arthaud (Lutte ouvrière) — partiel,Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.793,196.13,6.845,-4.044,39.47
-Arthaud (Lutte ouvrière) — partiel,Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",38.13,441.29,19.888,-4.597,180.17
-Arthaud (Lutte ouvrière) — partiel,Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.99,141.06,2.377,-1.861,8.7
-Arthaud (Lutte ouvrière) — partiel,Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.623,167.18,3.757,-2.431,20.52
-Arthaud (Lutte ouvrière) — partiel,Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",20.949,287.34,9.331,-2.848,81.14
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.296,131.85,0.837,-0.622,1.22
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.078,147.2,1.497,-1.035,4.99
-Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.076,221.87,3.162,-1.29,26.14
-Attal (Renaissance),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.249,150.65,2.037,-1.716,7.61
-Attal (Renaissance),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.9,199.5,3.433,-2.016,21.58
-Attal (Renaissance),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",38.854,472.64,9.778,-2.063,100.59
-Attal (Renaissance),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.004,138.44,1.063,-0.91,2.96
-Attal (Renaissance),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.643,166.87,1.695,-1.1,10.21
-Attal (Renaissance),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",23.974,311.48,5.732,-1.334,50.36
-Attal (Renaissance),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.044,133.46,0.431,-0.372,1.1
-Attal (Renaissance),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.387,150.25,0.521,-0.342,3.59
-Attal (Renaissance),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.811,218.41,1.194,-0.337,12.21
-Attal (Renaissance),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.679,126.13,-0.78,0.669,-4.5
-Attal (Renaissance),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.284,132.47,-1.297,0.88,-9.74
-Attal (Renaissance),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.188,166.35,-2.726,1.019,-29.38
-Bertrand (Nous France),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.464,144.29,0.252,-0.201,1.24
-Bertrand (Nous France),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.852,181.05,0.385,-0.192,3.13
-Bertrand (Nous France),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",30.562,387.7,1.486,-0.294,15.66
-Bertrand (Nous France),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.99,135.88,0.049,-0.03,0.4
-Bertrand (Nous France),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.961,157.45,0.014,0.027,0.79
-Bertrand (Nous France),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.642,264.83,0.399,-0.068,3.72
-Bertrand (Nous France),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.466,132.38,-0.147,0.144,0.02
-Bertrand (Nous France),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.522,145.73,-0.345,0.284,-0.93
-Bertrand (Nous France),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.933,200.66,-0.684,0.301,-5.54
-Bertrand (Nous France),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.851,128.82,-0.608,0.558,-1.82
-Bertrand (Nous France),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.603,136.88,-0.978,0.739,-5.33
-Bertrand (Nous France),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.003,176.74,-1.911,0.789,-18.99
-Glucksmann (Place publique),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.909,154.74,3.697,-3.184,11.69
-Glucksmann (Place publique),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.677,213.14,6.21,-3.791,35.22
-Glucksmann (Place publique),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",45.002,532.21,15.927,-3.568,160.17
-Glucksmann (Place publique),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.234,139.74,2.293,-1.995,4.25
-Glucksmann (Place publique),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.719,174.22,3.772,-2.59,17.56
-Glucksmann (Place publique),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.352,356.14,11.11,-2.904,95.02
-Glucksmann (Place publique),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.277,134.45,1.663,-1.465,2.1
-Glucksmann (Place publique),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.546,158.06,2.68,-1.942,11.41
-Glucksmann (Place publique),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.016,261.19,6.398,-2.209,54.99
-Glucksmann (Place publique),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.184,128.21,0.725,-0.651,-2.42
-Glucksmann (Place publique),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.949,143.79,1.367,-1.084,1.58
-Glucksmann (Place publique),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.76,217.71,2.846,-1.29,21.98
-Le Pen (Rassemblement national) — partiel,Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.534,155.95,3.322,-2.796,12.9
-Le Pen (Rassemblement national) — partiel,Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.181,213.35,5.715,-3.309,35.44
-Le Pen (Rassemblement national) — partiel,Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",45.656,540.8,16.58,-3.716,168.76
-Le Pen (Rassemblement national) — partiel,Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.199,143.19,2.258,-1.919,7.71
-Le Pen (Rassemblement national) — partiel,Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.526,178.12,3.579,-2.255,21.46
-Le Pen (Rassemblement national) — partiel,Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.985,366.97,11.742,-2.786,105.85
-Le Pen (Rassemblement national) — partiel,Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.242,138.16,1.628,-1.396,5.8
-Le Pen (Rassemblement national) — partiel,Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.165,161.14,2.298,-1.511,14.48
-Le Pen (Rassemblement national) — partiel,Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.573,262.04,5.956,-1.787,55.84
-Le Pen (Rassemblement national) — partiel,Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.281,133.65,0.822,-0.694,3.02
-Le Pen (Rassemblement national) — partiel,Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.64,149.08,1.059,-0.685,6.87
-Le Pen (Rassemblement national) — partiel,Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.157,218.75,2.243,-0.731,23.02
-Lisnard (Nouvelle Énergie),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.713,157.68,4.501,-3.97,14.64
-Lisnard (Nouvelle Énergie),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",19.22,225.98,7.753,-4.659,48.06
-Lisnard (Nouvelle Énergie),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",53.352,621.17,24.276,-5.782,249.13
-Lisnard (Nouvelle Énergie),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.695,142.35,2.754,-2.471,6.87
-Lisnard (Nouvelle Énergie),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.239,182.74,4.291,-2.826,26.08
-Lisnard (Nouvelle Énergie),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",33.499,403.33,15.257,-3.747,142.21
-Lisnard (Nouvelle Énergie),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.477,136.25,1.863,-1.715,3.89
-Lisnard (Nouvelle Énergie),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.159,161.3,2.293,-1.578,14.64
-Lisnard (Nouvelle Énergie),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.992,268.03,6.374,-1.851,61.83
-Lisnard (Nouvelle Énergie),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.36,125.67,-0.099,0.026,-4.96
-Lisnard (Nouvelle Énergie),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.015,136.23,-0.566,0.392,-5.98
-Lisnard (Nouvelle Énergie),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.67,183.21,-1.244,0.582,-12.51
-Mélenchon (La France insoumise),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",23.72,192.96,15.508,-13.148,49.91
-Mélenchon (La France insoumise),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",37.479,321.35,26.012,-15.209,143.44
-Mélenchon (La France insoumise),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",94.692,1007.63,65.617,-16.384,635.59
-Mélenchon (La France insoumise),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.52,163.76,11.579,-9.797,28.28
-Mélenchon (La France insoumise),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",27.111,243.28,18.163,-11.462,86.62
-Mélenchon (La France insoumise),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",64.972,670.89,46.73,-12.244,409.77
-Mélenchon (La France insoumise),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.688,147.78,8.075,-6.954,15.42
-Mélenchon (La France insoumise),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",19.915,199.77,12.049,-8.287,53.11
-Mélenchon (La France insoumise),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",43.489,462.62,31.872,-9.519,256.42
-Mélenchon (La France insoumise),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.642,127.99,4.183,-3.612,-2.64
-Mélenchon (La France insoumise),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.459,158.66,6.878,-5.09,16.45
-Mélenchon (La France insoumise),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",26.498,312.81,15.584,-6.183,117.09
-Philippe (Horizons),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.16,149.28,1.948,-1.728,6.23
-Philippe (Horizons),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.055,199.44,3.588,-2.262,21.53
-Philippe (Horizons),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",41.369,494.07,12.293,-3.223,122.03
-Philippe (Horizons),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.88,138.37,0.939,-0.849,2.89
-Philippe (Horizons),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.479,166.56,1.532,-1.016,9.9
-Philippe (Horizons),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",24.689,317.71,6.447,-1.706,56.59
-Philippe (Horizons),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.8,133.38,0.186,-0.183,1.03
-Philippe (Horizons),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.031,149.3,0.165,-0.085,2.65
-Philippe (Horizons),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.659,217.45,1.042,-0.338,11.25
-Philippe (Horizons),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.56,127.88,-0.899,0.793,-2.75
-Philippe (Horizons),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.144,134.48,-1.437,1.063,-7.73
-Philippe (Horizons),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.245,169.23,-2.669,1.088,-26.5
-Retailleau (Les Républicains),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.227,146.7,1.015,-0.872,3.65
-Retailleau (Les Républicains),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.328,189.62,1.861,-1.12,11.71
-Retailleau (Les Républicains),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",35.559,437.36,6.483,-1.541,65.32
-Retailleau (Les Républicains),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.328,136.68,0.387,-0.342,1.2
-Retailleau (Les Républicains),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.623,161.08,0.675,-0.434,4.42
-Retailleau (Les Républicains),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",21.421,288.1,3.179,-0.84,26.99
-Retailleau (Les Républicains),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.53,132.11,-0.084,0.06,-0.25
-Retailleau (Les Républicains),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.647,146.18,-0.219,0.175,-0.48
-Retailleau (Les Républicains),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.353,204.53,-0.264,0.123,-1.66
-Retailleau (Les Républicains),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.422,126.12,-1.037,0.89,-4.51
-Retailleau (Les Républicains),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.949,131.91,-1.632,1.164,-10.3
-Retailleau (Les Républicains),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.581,161.44,-3.333,1.338,-34.29
-Roussel (Parti communiste français),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",21.698,224.89,13.486,-9.987,81.84
-Roussel (Parti communiste français),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",38.681,398.0,27.214,-11.592,220.09
-Roussel (Parti communiste français),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",108.197,1262.73,79.121,-11.215,890.68
-Roussel (Parti communiste français),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",16.857,193.16,9.916,-7.312,57.68
-Roussel (Parti communiste français),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.001,310.59,20.053,-8.85,153.93
-Roussel (Parti communiste français),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",77.147,886.04,58.905,-8.637,624.92
-Roussel (Parti communiste français),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.484,171.78,6.87,-5.181,39.42
-Roussel (Parti communiste français),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",20.898,249.9,13.031,-6.607,103.24
-Roussel (Parti communiste français),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",54.48,634.9,42.862,-7.098,428.7
-Roussel (Parti communiste français),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.26,150.0,3.801,-2.795,19.37
-Roussel (Parti communiste français),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.387,199.93,7.806,-4.24,57.72
-Roussel (Parti communiste français),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",36.199,443.57,25.285,-4.979,247.85
-Tondelier (Les Écologistes),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.516,157.67,4.304,-3.707,14.62
-Tondelier (Les Écologistes),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",19.204,221.28,7.737,-4.813,43.37
-Tondelier (Les Écologistes),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",50.106,577.29,21.03,-5.459,205.25
-Tondelier (Les Écologistes),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.944,137.4,2.003,-1.763,1.92
-Tondelier (Les Écologistes),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.616,170.44,3.669,-2.678,13.78
-Tondelier (Les Écologistes),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.848,353.29,11.606,-3.666,92.17
-Tondelier (Les Écologistes),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.207,129.03,0.594,-0.552,-3.33
-Tondelier (Les Écologistes),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.435,147.66,1.569,-1.322,1.0
-Tondelier (Les Écologistes),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.741,233.89,4.124,-2.038,27.69
-Tondelier (Les Écologistes),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",4.983,117.06,-1.476,1.155,-13.57
-Tondelier (Les Écologistes),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.552,122.77,-1.03,0.439,-19.45
-Tondelier (Les Écologistes),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.497,165.53,-1.417,-0.142,-30.2
-Zemmour (Reconquête),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.358,162.08,4.146,-3.411,19.03
-Zemmour (Reconquête),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.519,227.01,7.052,-3.798,49.1
-Zemmour (Reconquête),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",49.983,594.51,20.907,-4.266,222.47
-Zemmour (Reconquête),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.603,146.02,2.662,-2.229,10.54
-Zemmour (Reconquête),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.978,185.03,4.03,-2.403,28.37
-Zemmour (Reconquête),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",32.125,393.78,13.883,-2.994,132.66
-Zemmour (Reconquête),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.456,140.3,1.843,-1.556,7.94
-Zemmour (Reconquête),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.057,164.91,2.19,-1.308,18.25
-Zemmour (Reconquête),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.616,268.13,5.998,-1.435,61.93
-Zemmour (Reconquête),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.298,127.77,-0.161,0.171,-2.86
-Zemmour (Reconquête),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.962,138.21,-0.619,0.525,-4.0
-Zemmour (Reconquête),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.661,184.74,-1.253,0.682,-10.99
+Statu quo,Crise,2032,centrale,Calcul publié,8.314,145.82,0.0,0.0,0.0
+Statu quo,Crise,2037,centrale,Calcul publié,11.651,181.13,0.0,0.0,0.0
+Statu quo,Crise,2050,centrale,Calcul publié,29.746,379.57,0.0,0.0,0.0
+Statu quo,Prudent,2032,centrale,Calcul publié,7.033,138.13,0.0,0.0,0.0
+Statu quo,Prudent,2037,centrale,Calcul publié,9.095,159.56,0.0,0.0,0.0
+Statu quo,Prudent,2050,centrale,Calcul publié,18.776,266.74,0.0,0.0,0.0
+Statu quo,Médian,2032,centrale,Calcul publié,6.704,134.96,0.0,0.0,0.0
+Statu quo,Médian,2037,centrale,Calcul publié,8.001,149.4,0.0,0.0,0.0
+Statu quo,Médian,2050,centrale,Calcul publié,11.975,210.71,0.0,0.0,0.0
+Statu quo,Optimiste,2032,centrale,Calcul publié,6.549,133.2,0.0,0.0,0.0
+Statu quo,Optimiste,2037,centrale,Calcul publié,7.712,144.89,0.0,0.0,0.0
+Statu quo,Optimiste,2050,centrale,Calcul publié,11.233,199.94,0.0,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2032,centrale,Calcul publié,15.652,179.33,7.338,-5.717,33.52
+Arthaud (Lutte ouvrière) — partiel,Crise,2037,centrale,Calcul publié,25.04,263.3,13.389,-7.111,82.17
+Arthaud (Lutte ouvrière) — partiel,Crise,2050,centrale,Calcul publié,63.426,723.73,33.68,-7.055,344.15
+Arthaud (Lutte ouvrière) — partiel,Prudent,2032,centrale,Calcul publié,11.386,155.29,4.353,-3.384,17.16
+Arthaud (Lutte ouvrière) — partiel,Prudent,2037,centrale,Calcul publié,15.977,199.21,6.883,-4.046,39.66
+Arthaud (Lutte ouvrière) — partiel,Prudent,2050,centrale,Calcul publié,38.715,447.76,19.939,-4.592,181.02
+Arthaud (Lutte ouvrière) — partiel,Médian,2032,centrale,Calcul publié,9.089,143.71,2.385,-1.862,8.76
+Arthaud (Lutte ouvrière) — partiel,Médian,2037,centrale,Calcul publié,11.773,170.0,3.772,-2.432,20.59
+Arthaud (Lutte ouvrière) — partiel,Médian,2050,centrale,Calcul publié,21.407,292.37,9.432,-2.856,81.66
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,centrale,Calcul publié,7.389,134.41,0.84,-0.622,1.21
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,centrale,Calcul publié,9.214,149.85,1.501,-1.035,4.96
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,centrale,Calcul publié,14.415,226.11,3.182,-1.292,26.17
+Attal (Renaissance),Crise,2032,centrale,Calcul publié,10.354,153.45,2.041,-1.717,7.63
+Attal (Renaissance),Crise,2037,centrale,Calcul publié,15.101,202.81,3.45,-2.017,21.68
+Attal (Renaissance),Crise,2050,centrale,Calcul publié,39.55,480.5,9.804,-2.065,100.93
+Attal (Renaissance),Prudent,2032,centrale,Calcul publié,8.098,141.08,1.064,-0.91,2.95
+Attal (Renaissance),Prudent,2037,centrale,Calcul publié,10.795,169.79,1.7,-1.1,10.24
+Attal (Renaissance),Prudent,2050,centrale,Calcul publié,24.5,317.35,5.724,-1.324,50.6
+Attal (Renaissance),Médian,2032,centrale,Calcul publié,7.135,136.05,0.431,-0.372,1.09
+Attal (Renaissance),Médian,2037,centrale,Calcul publié,8.523,153.0,0.521,-0.342,3.59
+Attal (Renaissance),Médian,2050,centrale,Calcul publié,13.178,222.98,1.203,-0.336,12.27
+Attal (Renaissance),Optimiste,2032,centrale,Calcul publié,5.767,128.65,-0.782,0.67,-4.55
+Attal (Renaissance),Optimiste,2037,centrale,Calcul publié,6.409,135.06,-1.304,0.881,-9.83
+Attal (Renaissance),Optimiste,2050,centrale,Calcul publié,8.474,170.3,-2.759,1.025,-29.64
+Bertrand (Nous France),Crise,2032,centrale,Calcul publié,8.566,147.07,0.252,-0.201,1.25
+Bertrand (Nous France),Crise,2037,centrale,Calcul publié,12.038,184.29,0.387,-0.191,3.16
+Bertrand (Nous France),Crise,2050,centrale,Calcul publié,31.253,395.44,1.507,-0.295,15.87
+Bertrand (Nous France),Prudent,2032,centrale,Calcul publié,7.082,138.53,0.049,-0.03,0.4
+Bertrand (Nous France),Prudent,2037,centrale,Calcul publié,9.109,160.36,0.014,0.027,0.8
+Bertrand (Nous France),Prudent,2050,centrale,Calcul publié,19.187,270.54,0.411,-0.069,3.8
+Bertrand (Nous France),Médian,2032,centrale,Calcul publié,6.556,134.98,-0.148,0.144,0.03
+Bertrand (Nous France),Médian,2037,centrale,Calcul publié,7.656,148.48,-0.345,0.285,-0.92
+Bertrand (Nous France),Médian,2050,centrale,Calcul publié,11.288,205.18,-0.687,0.301,-5.53
+Bertrand (Nous France),Optimiste,2032,centrale,Calcul publié,5.94,131.38,-0.609,0.558,-1.82
+Bertrand (Nous France),Optimiste,2037,centrale,Calcul publié,6.731,139.54,-0.981,0.74,-5.34
+Bertrand (Nous France),Optimiste,2050,centrale,Calcul publié,9.308,180.87,-1.925,0.79,-19.07
+Glucksmann (Place publique),Crise,2032,centrale,Calcul publié,12.017,157.54,3.703,-3.185,11.72
+Glucksmann (Place publique),Crise,2037,centrale,Calcul publié,17.887,216.46,6.236,-3.793,35.33
+Glucksmann (Place publique),Crise,2050,centrale,Calcul publié,45.71,540.11,15.965,-3.576,160.53
+Glucksmann (Place publique),Prudent,2032,centrale,Calcul publié,9.329,142.34,2.296,-1.996,4.21
+Glucksmann (Place publique),Prudent,2037,centrale,Calcul publié,12.875,177.09,3.78,-2.591,17.53
+Glucksmann (Place publique),Prudent,2050,centrale,Calcul publié,29.868,361.89,11.092,-2.894,95.15
+Glucksmann (Place publique),Médian,2032,centrale,Calcul publié,8.369,137.0,1.665,-1.465,2.05
+Glucksmann (Place publique),Médian,2037,centrale,Calcul publié,10.685,160.76,2.684,-1.942,11.36
+Glucksmann (Place publique),Médian,2050,centrale,Calcul publié,18.419,265.85,6.444,-2.212,55.14
+Glucksmann (Place publique),Optimiste,2032,centrale,Calcul publié,7.274,130.7,0.725,-0.652,-2.5
+Glucksmann (Place publique),Optimiste,2037,centrale,Calcul publié,9.079,146.36,1.367,-1.084,1.48
+Glucksmann (Place publique),Optimiste,2050,centrale,Calcul publié,14.084,221.81,2.851,-1.29,21.87
+Le Pen (Rassemblement national) — partiel,Crise,2032,centrale,Calcul publié,11.643,158.78,3.329,-2.797,12.96
+Le Pen (Rassemblement national) — partiel,Crise,2037,centrale,Calcul publié,17.397,216.74,5.746,-3.312,35.61
+Le Pen (Rassemblement national) — partiel,Crise,2050,centrale,Calcul publié,46.397,549.1,16.651,-3.727,169.52
+Le Pen (Rassemblement national) — partiel,Prudent,2032,centrale,Calcul publié,9.295,145.86,2.262,-1.92,7.73
+Le Pen (Rassemblement national) — partiel,Prudent,2037,centrale,Calcul publié,12.688,181.09,3.593,-2.257,21.53
+Le Pen (Rassemblement national) — partiel,Prudent,2050,centrale,Calcul publié,30.54,373.16,11.764,-2.778,106.42
+Le Pen (Rassemblement national) — partiel,Médian,2032,centrale,Calcul publié,8.335,140.77,1.631,-1.396,5.81
+Le Pen (Rassemblement national) — partiel,Médian,2037,centrale,Calcul publié,10.307,163.92,2.306,-1.512,14.52
+Le Pen (Rassemblement national) — partiel,Médian,2050,centrale,Calcul publié,17.998,266.95,6.023,-1.792,56.24
+Le Pen (Rassemblement national) — partiel,Optimiste,2032,centrale,Calcul publié,7.372,136.23,0.824,-0.695,3.02
+Le Pen (Rassemblement national) — partiel,Optimiste,2037,centrale,Calcul publié,8.774,151.77,1.062,-0.686,6.88
+Le Pen (Rassemblement national) — partiel,Optimiste,2050,centrale,Calcul publié,13.498,223.1,2.265,-0.733,23.16
+Lisnard (Nouvelle Énergie),Crise,2032,centrale,Calcul publié,12.819,160.49,4.505,-3.97,14.67
+Lisnard (Nouvelle Énergie),Crise,2037,centrale,Calcul publié,19.436,229.39,7.785,-4.66,48.26
+Lisnard (Nouvelle Énergie),Crise,2050,centrale,Calcul publié,54.103,629.71,24.358,-5.791,250.13
+Lisnard (Nouvelle Énergie),Prudent,2032,centrale,Calcul publié,9.788,144.97,2.755,-2.471,6.84
+Lisnard (Nouvelle Énergie),Prudent,2037,centrale,Calcul publié,13.395,185.69,4.3,-2.825,26.13
+Lisnard (Nouvelle Énergie),Prudent,2050,centrale,Calcul publié,34.04,409.53,15.264,-3.733,142.79
+Lisnard (Nouvelle Énergie),Médian,2032,centrale,Calcul publié,8.566,138.8,1.862,-1.714,3.85
+Lisnard (Nouvelle Énergie),Médian,2037,centrale,Calcul publié,10.294,164.03,2.293,-1.577,14.63
+Lisnard (Nouvelle Énergie),Médian,2050,centrale,Calcul publié,18.403,272.87,6.428,-1.848,62.15
+Lisnard (Nouvelle Énergie),Optimiste,2032,centrale,Calcul publié,6.447,128.12,-0.102,0.027,-5.09
+Lisnard (Nouvelle Énergie),Optimiste,2037,centrale,Calcul publié,7.138,138.77,-0.574,0.395,-6.11
+Lisnard (Nouvelle Énergie),Optimiste,2050,centrale,Calcul publié,9.96,187.17,-1.273,0.593,-12.77
+Mélenchon (La France insoumise),Crise,2032,centrale,Calcul publié,23.846,195.79,15.533,-13.151,49.97
+Mélenchon (La France insoumise),Crise,2037,centrale,Calcul publié,37.722,324.78,26.071,-15.208,143.65
+Mélenchon (La France insoumise),Crise,2050,centrale,Calcul publié,95.479,1016.04,65.733,-16.41,636.47
+Mélenchon (La France insoumise),Prudent,2032,centrale,Calcul publié,18.629,166.29,11.595,-9.799,28.16
+Mélenchon (La France insoumise),Prudent,2037,centrale,Calcul publié,27.292,246.03,18.197,-11.463,86.48
+Mélenchon (La France insoumise),Prudent,2050,centrale,Calcul publié,65.52,676.6,46.743,-12.242,409.86
+Mélenchon (La France insoumise),Médian,2032,centrale,Calcul publié,14.788,150.2,8.084,-6.955,15.25
+Mélenchon (La France insoumise),Médian,2037,centrale,Calcul publié,20.062,202.28,12.061,-8.288,52.88
+Mélenchon (La France insoumise),Médian,2050,centrale,Calcul publié,43.943,467.33,31.969,-9.523,256.62
+Mélenchon (La France insoumise),Optimiste,2032,centrale,Calcul publié,10.736,130.27,4.188,-3.613,-2.94
+Mélenchon (La France insoumise),Optimiste,2037,centrale,Calcul publié,14.59,160.95,6.877,-5.09,16.06
+Mélenchon (La France insoumise),Optimiste,2050,centrale,Calcul publié,26.846,316.61,15.612,-6.185,116.67
+Philippe (Horizons),Crise,2032,centrale,Calcul publié,10.263,152.07,1.95,-1.728,6.25
+Philippe (Horizons),Crise,2037,centrale,Calcul publié,15.253,202.75,3.602,-2.262,21.62
+Philippe (Horizons),Crise,2050,centrale,Calcul publié,42.077,502.09,12.331,-3.227,122.52
+Philippe (Horizons),Prudent,2032,centrale,Calcul publié,7.972,141.02,0.939,-0.849,2.89
+Philippe (Horizons),Prudent,2037,centrale,Calcul publié,10.631,169.5,1.536,-1.015,9.94
+Philippe (Horizons),Prudent,2050,centrale,Calcul publié,25.227,323.71,6.45,-1.696,56.96
+Philippe (Horizons),Médian,2032,centrale,Calcul publié,6.89,135.99,0.186,-0.183,1.03
+Philippe (Horizons),Médian,2037,centrale,Calcul publié,8.166,152.07,0.165,-0.084,2.67
+Philippe (Horizons),Médian,2050,centrale,Calcul publié,13.03,222.1,1.055,-0.337,11.39
+Philippe (Horizons),Optimiste,2032,centrale,Calcul publié,5.648,130.44,-0.901,0.793,-2.76
+Philippe (Horizons),Optimiste,2037,centrale,Calcul publié,6.271,137.14,-1.441,1.065,-7.75
+Philippe (Horizons),Optimiste,2050,centrale,Calcul publié,8.543,173.33,-2.69,1.091,-26.6
+Retailleau (Les Républicains),Crise,2032,centrale,Calcul publié,9.33,149.48,1.017,-0.872,3.66
+Retailleau (Les Républicains),Crise,2037,centrale,Calcul publié,13.521,192.9,1.869,-1.121,11.77
+Retailleau (Les Républicains),Crise,2050,centrale,Calcul publié,36.253,445.2,6.508,-1.545,65.63
+Retailleau (Les Républicains),Prudent,2032,centrale,Calcul publié,7.421,139.33,0.388,-0.342,1.2
+Retailleau (Les Républicains),Prudent,2037,centrale,Calcul publié,9.772,164.0,0.677,-0.434,4.44
+Retailleau (Les Républicains),Prudent,2050,centrale,Calcul publié,21.947,293.92,3.171,-0.834,27.18
+Retailleau (Les Républicains),Médian,2032,centrale,Calcul publié,6.619,134.7,-0.085,0.06,-0.26
+Retailleau (Les Républicains),Médian,2037,centrale,Calcul publié,7.781,148.92,-0.22,0.175,-0.48
+Retailleau (Les Républicains),Médian,2050,centrale,Calcul publié,11.71,209.07,-0.265,0.123,-1.64
+Retailleau (Les Républicains),Optimiste,2032,centrale,Calcul publié,5.51,128.65,-1.039,0.89,-4.55
+Retailleau (Les Républicains),Optimiste,2037,centrale,Calcul publié,6.075,134.54,-1.638,1.165,-10.35
+Retailleau (Les Républicains),Optimiste,2050,centrale,Calcul publié,7.871,165.45,-3.362,1.341,-34.49
+Roussel (Parti communiste français),Crise,2032,centrale,Calcul publié,21.836,227.89,13.522,-9.992,82.07
+Roussel (Parti communiste français),Crise,2037,centrale,Calcul publié,38.951,401.67,27.3,-11.598,220.54
+Roussel (Parti communiste français),Crise,2050,centrale,Calcul publié,109.094,1271.84,79.348,-11.284,892.27
+Roussel (Parti communiste français),Prudent,2032,centrale,Calcul publié,16.973,195.85,9.94,-7.315,57.72
+Roussel (Parti communiste français),Prudent,2037,centrale,Calcul publié,29.222,313.64,20.127,-8.859,154.09
+Roussel (Parti communiste français),Prudent,2050,centrale,Calcul publié,77.822,892.54,59.046,-8.681,625.79
+Roussel (Parti communiste français),Médian,2032,centrale,Calcul publié,13.588,174.34,6.884,-5.184,39.39
+Roussel (Parti communiste français),Médian,2037,centrale,Calcul publié,21.072,252.63,13.071,-6.615,103.23
+Roussel (Parti communiste français),Médian,2050,centrale,Calcul publié,55.065,640.47,43.09,-7.147,429.76
+Roussel (Parti communiste français),Optimiste,2032,centrale,Calcul publié,10.357,152.44,3.808,-2.797,19.24
+Roussel (Parti communiste français),Optimiste,2037,centrale,Calcul publié,15.535,202.43,7.823,-4.246,57.54
+Roussel (Parti communiste français),Optimiste,2050,centrale,Calcul publié,36.674,448.1,25.441,-5.012,248.16
+Tondelier (Les Écologistes),Crise,2032,centrale,Calcul publié,12.625,160.5,4.312,-3.708,14.68
+Tondelier (Les Écologistes),Crise,2037,centrale,Calcul publié,19.422,224.66,7.771,-4.816,43.53
+Tondelier (Les Écologistes),Crise,2050,centrale,Calcul publié,50.822,585.28,21.076,-5.469,205.71
+Tondelier (Les Écologistes),Prudent,2032,centrale,Calcul publié,9.038,140.0,2.005,-1.763,1.86
+Tondelier (Les Écologistes),Prudent,2037,centrale,Calcul publié,12.768,173.27,3.673,-2.679,13.71
+Tondelier (Les Écologistes),Prudent,2050,centrale,Calcul publié,30.351,358.89,11.575,-3.657,92.15
+Tondelier (Les Écologistes),Médian,2032,centrale,Calcul publié,7.298,131.54,0.594,-0.552,-3.42
+Tondelier (Les Écologistes),Médian,2037,centrale,Calcul publié,9.569,150.29,1.568,-1.323,0.89
+Tondelier (Les Écologistes),Médian,2050,centrale,Calcul publié,16.107,238.27,4.132,-2.04,27.56
+Tondelier (Les Écologistes),Optimiste,2032,centrale,Calcul publié,5.068,119.47,-1.48,1.155,-13.73
+Tondelier (Les Écologistes),Optimiste,2037,centrale,Calcul publié,6.675,125.22,-1.038,0.44,-19.67
+Tondelier (Les Écologistes),Optimiste,2050,centrale,Calcul publié,9.779,169.26,-1.454,-0.139,-30.67
+Zemmour (Reconquête),Crise,2032,centrale,Calcul publié,12.47,164.97,4.156,-3.412,19.15
+Zemmour (Reconquête),Crise,2037,centrale,Calcul publié,18.748,230.56,7.097,-3.8,49.43
+Zemmour (Reconquête),Crise,2050,centrale,Calcul publié,50.751,603.27,21.005,-4.274,223.7
+Zemmour (Reconquête),Prudent,2032,centrale,Calcul publié,9.7,148.71,2.666,-2.229,10.58
+Zemmour (Reconquête),Prudent,2037,centrale,Calcul publié,13.142,188.07,4.047,-2.403,28.51
+Zemmour (Reconquête),Prudent,2050,centrale,Calcul publié,32.69,400.24,13.914,-2.98,133.49
+Zemmour (Reconquête),Médian,2032,centrale,Calcul publié,8.549,142.93,1.845,-1.556,7.97
+Zemmour (Reconquête),Médian,2037,centrale,Calcul publié,10.198,167.74,2.197,-1.307,18.34
+Zemmour (Reconquête),Médian,2050,centrale,Calcul publié,18.048,273.19,6.073,-1.433,62.48
+Zemmour (Reconquête),Optimiste,2032,centrale,Calcul publié,6.387,130.27,-0.162,0.172,-2.93
+Zemmour (Reconquête),Optimiste,2037,centrale,Calcul publié,7.089,140.83,-0.624,0.527,-4.06
+Zemmour (Reconquête),Optimiste,2050,centrale,Calcul publié,9.963,188.84,-1.27,0.69,-11.1
+Statu quo,Crise,2032,sans_prime_dette,Sans prime de dette,8.166,145.58,0.0,0.0,0.0
+Statu quo,Crise,2037,sans_prime_dette,Sans prime de dette,10.46,177.63,0.0,0.0,0.0
+Statu quo,Crise,2050,sans_prime_dette,Sans prime de dette,15.789,295.13,0.0,0.0,0.0
+Statu quo,Prudent,2032,sans_prime_dette,Sans prime de dette,6.943,137.98,0.0,0.0,0.0
+Statu quo,Prudent,2037,sans_prime_dette,Sans prime de dette,8.518,157.78,0.0,0.0,0.0
+Statu quo,Prudent,2050,sans_prime_dette,Sans prime de dette,12.023,229.92,0.0,0.0,0.0
+Statu quo,Médian,2032,sans_prime_dette,Sans prime de dette,6.653,134.87,0.0,0.0,0.0
+Statu quo,Médian,2037,sans_prime_dette,Sans prime de dette,7.727,148.53,0.0,0.0,0.0
+Statu quo,Médian,2050,sans_prime_dette,Sans prime de dette,9.565,196.49,0.0,0.0,0.0
+Statu quo,Optimiste,2032,sans_prime_dette,Sans prime de dette,6.515,133.14,0.0,0.0,0.0
+Statu quo,Optimiste,2037,sans_prime_dette,Sans prime de dette,7.543,144.34,0.0,0.0,0.0
+Statu quo,Optimiste,2050,sans_prime_dette,Sans prime de dette,9.734,191.2,0.0,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2032,sans_prime_dette,Sans prime de dette,14.857,177.47,6.691,-5.519,31.89
+Arthaud (Lutte ouvrière) — partiel,Crise,2037,sans_prime_dette,Sans prime de dette,19.868,245.45,9.408,-6.401,67.82
+Arthaud (Lutte ouvrière) — partiel,Crise,2050,sans_prime_dette,Sans prime de dette,32.185,508.47,16.397,-7.446,213.34
+Arthaud (Lutte ouvrière) — partiel,Prudent,2032,sans_prime_dette,Sans prime de dette,11.063,154.58,4.12,-3.327,16.61
+Arthaud (Lutte ouvrière) — partiel,Prudent,2037,sans_prime_dette,Sans prime de dette,14.158,193.02,5.641,-3.855,35.24
+Arthaud (Lutte ouvrière) — partiel,Prudent,2050,sans_prime_dette,Sans prime de dette,21.486,340.77,9.463,-4.586,110.86
+Arthaud (Lutte ouvrière) — partiel,Médian,2032,sans_prime_dette,Sans prime de dette,8.966,143.46,2.313,-1.848,8.59
+Arthaud (Lutte ouvrière) — partiel,Médian,2037,sans_prime_dette,Sans prime de dette,11.149,167.89,3.422,-2.388,19.36
+Arthaud (Lutte ouvrière) — partiel,Médian,2050,sans_prime_dette,Sans prime de dette,14.953,256.15,5.388,-2.686,59.66
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,sans_prime_dette,Sans prime de dette,7.347,134.33,0.832,-0.621,1.19
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,sans_prime_dette,Sans prime de dette,9.002,149.16,1.458,-1.032,4.82
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,sans_prime_dette,Sans prime de dette,12.172,213.64,2.439,-1.268,22.44
+Attal (Renaissance),Crise,2032,sans_prime_dette,Sans prime de dette,10.095,152.93,1.93,-1.684,7.35
+Attal (Renaissance),Crise,2037,sans_prime_dette,Sans prime de dette,13.088,196.46,2.629,-1.864,18.83
+Attal (Renaissance),Crise,2050,sans_prime_dette,Sans prime de dette,20.464,357.24,4.676,-2.191,62.11
+Attal (Renaissance),Prudent,2032,sans_prime_dette,Sans prime de dette,7.985,140.87,1.042,-0.905,2.9
+Attal (Renaissance),Prudent,2037,sans_prime_dette,Sans prime de dette,9.981,167.26,1.463,-1.061,9.48
+Attal (Renaissance),Prudent,2050,sans_prime_dette,Sans prime de dette,14.512,261.34,2.489,-1.23,31.42
+Attal (Renaissance),Médian,2032,sans_prime_dette,Sans prime de dette,7.081,135.95,0.427,-0.371,1.08
+Attal (Renaissance),Médian,2037,sans_prime_dette,Sans prime de dette,8.2,151.97,0.473,-0.335,3.44
+Attal (Renaissance),Médian,2050,sans_prime_dette,Sans prime de dette,10.246,205.75,0.682,-0.312,9.26
+Attal (Renaissance),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.756,128.64,-0.759,0.666,-4.51
+Attal (Renaissance),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.359,134.95,-1.184,0.856,-9.39
+Attal (Renaissance),Optimiste,2050,sans_prime_dette,Sans prime de dette,7.85,167.12,-1.884,0.947,-24.08
+Bertrand (Nous France),Crise,2032,sans_prime_dette,Sans prime de dette,8.4,146.78,0.234,-0.195,1.2
+Bertrand (Nous France),Crise,2037,sans_prime_dette,Sans prime de dette,10.729,180.36,0.27,-0.17,2.74
+Bertrand (Nous France),Crise,2050,sans_prime_dette,Sans prime de dette,16.469,304.67,0.68,-0.315,9.54
+Bertrand (Nous France),Prudent,2032,sans_prime_dette,Sans prime de dette,6.988,138.37,0.045,-0.029,0.39
+Bertrand (Nous France),Prudent,2037,sans_prime_dette,Sans prime de dette,8.509,158.5,-0.009,0.03,0.72
+Bertrand (Nous France),Prudent,2050,sans_prime_dette,Sans prime de dette,12.16,232.21,0.137,-0.054,2.29
+Bertrand (Nous France),Médian,2032,sans_prime_dette,Sans prime de dette,6.505,134.89,-0.148,0.144,0.02
+Bertrand (Nous France),Médian,2037,sans_prime_dette,Sans prime de dette,7.389,147.62,-0.338,0.283,-0.91
+Bertrand (Nous France),Médian,2050,sans_prime_dette,Sans prime de dette,9.085,192.0,-0.479,0.285,-4.49
+Bertrand (Nous France),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.915,131.34,-0.6,0.556,-1.8
+Bertrand (Nous France),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.623,139.21,-0.92,0.726,-5.13
+Bertrand (Nous France),Optimiste,2050,sans_prime_dette,Sans prime de dette,8.37,175.51,-1.364,0.736,-15.69
+Glucksmann (Place publique),Crise,2032,sans_prime_dette,Sans prime de dette,11.704,156.9,3.539,-3.135,11.32
+Glucksmann (Place publique),Crise,2037,sans_prime_dette,Sans prime de dette,15.333,208.37,4.873,-3.537,30.74
+Glucksmann (Place publique),Crise,2050,sans_prime_dette,Sans prime de dette,23.717,396.01,7.929,-3.763,100.88
+Glucksmann (Place publique),Prudent,2032,sans_prime_dette,Sans prime de dette,9.207,142.12,2.264,-1.988,4.14
+Glucksmann (Place publique),Prudent,2037,sans_prime_dette,Sans prime de dette,11.909,174.15,3.391,-2.526,16.36
+Glucksmann (Place publique),Prudent,2050,sans_prime_dette,Sans prime de dette,17.484,291.17,5.461,-2.801,61.25
+Glucksmann (Place publique),Médian,2032,sans_prime_dette,Sans prime de dette,8.312,136.9,1.659,-1.464,2.03
+Glucksmann (Place publique),Médian,2037,sans_prime_dette,Sans prime de dette,10.279,159.53,2.552,-1.924,11.0
+Glucksmann (Place publique),Médian,2050,sans_prime_dette,Sans prime de dette,13.571,239.15,4.006,-2.098,42.66
+Glucksmann (Place publique),Optimiste,2032,sans_prime_dette,Sans prime de dette,7.256,130.67,0.741,-0.654,-2.47
+Glucksmann (Place publique),Optimiste,2037,sans_prime_dette,Sans prime de dette,8.932,145.95,1.389,-1.085,1.62
+Glucksmann (Place publique),Optimiste,2050,sans_prime_dette,Sans prime de dette,12.052,211.0,2.318,-1.268,19.8
+Le Pen (Rassemblement national) — partiel,Crise,2032,sans_prime_dette,Sans prime de dette,11.299,158.06,3.133,-2.739,12.48
+Le Pen (Rassemblement national) — partiel,Crise,2037,sans_prime_dette,Sans prime de dette,14.777,208.28,4.317,-3.048,30.65
+Le Pen (Rassemblement national) — partiel,Crise,2050,sans_prime_dette,Sans prime de dette,24.004,401.43,8.215,-3.924,106.3
+Le Pen (Rassemblement national) — partiel,Prudent,2032,sans_prime_dette,Sans prime de dette,9.122,145.52,2.18,-1.9,7.54
+Le Pen (Rassemblement national) — partiel,Prudent,2037,sans_prime_dette,Sans prime de dette,11.539,177.38,3.021,-2.166,19.6
+Le Pen (Rassemblement national) — partiel,Prudent,2050,sans_prime_dette,Sans prime de dette,17.43,295.95,5.407,-2.7,66.04
+Le Pen (Rassemblement national) — partiel,Médian,2032,sans_prime_dette,Sans prime de dette,8.246,140.59,1.592,-1.389,5.72
+Le Pen (Rassemblement national) — partiel,Médian,2037,sans_prime_dette,Sans prime de dette,9.801,162.26,2.074,-1.482,13.73
+Le Pen (Rassemblement national) — partiel,Médian,2050,sans_prime_dette,Sans prime de dette,12.973,238.15,3.409,-1.68,41.66
+Le Pen (Rassemblement national) — partiel,Optimiste,2032,sans_prime_dette,Sans prime de dette,7.324,136.14,0.809,-0.693,2.99
+Le Pen (Rassemblement national) — partiel,Optimiste,2037,sans_prime_dette,Sans prime de dette,8.529,150.96,0.986,-0.679,6.62
+Le Pen (Rassemblement national) — partiel,Optimiste,2050,sans_prime_dette,Sans prime de dette,11.284,210.23,1.55,-0.713,19.03
+Lisnard (Nouvelle Énergie),Crise,2032,sans_prime_dette,Sans prime de dette,12.482,159.81,4.316,-3.913,14.22
+Lisnard (Nouvelle Énergie),Crise,2037,sans_prime_dette,Sans prime de dette,16.39,219.76,5.931,-4.316,42.13
+Lisnard (Nouvelle Énergie),Crise,2050,sans_prime_dette,Sans prime de dette,28.214,458.06,12.425,-6.037,162.93
+Lisnard (Nouvelle Énergie),Prudent,2032,sans_prime_dette,Sans prime de dette,9.637,144.68,2.694,-2.456,6.7
+Lisnard (Nouvelle Énergie),Prudent,2037,sans_prime_dette,Sans prime de dette,12.195,181.96,3.678,-2.725,24.18
+Lisnard (Nouvelle Énergie),Prudent,2050,sans_prime_dette,Sans prime de dette,19.289,321.72,7.266,-3.668,91.8
+Lisnard (Nouvelle Énergie),Médian,2032,sans_prime_dette,Sans prime de dette,8.495,138.67,1.841,-1.711,3.8
+Lisnard (Nouvelle Énergie),Médian,2037,sans_prime_dette,Sans prime de dette,9.822,162.54,2.095,-1.551,14.02
+Lisnard (Nouvelle Énergie),Médian,2050,sans_prime_dette,Sans prime de dette,13.148,243.22,3.584,-1.725,46.73
+Lisnard (Nouvelle Énergie),Optimiste,2032,sans_prime_dette,Sans prime de dette,6.433,128.09,-0.082,0.024,-5.05
+Lisnard (Nouvelle Énergie),Optimiste,2037,sans_prime_dette,Sans prime de dette,7.053,138.54,-0.49,0.388,-5.8
+Lisnard (Nouvelle Énergie),Optimiste,2050,sans_prime_dette,Sans prime de dette,8.887,181.34,-0.847,0.567,-9.86
+Mélenchon (La France insoumise),Crise,2032,sans_prime_dette,Sans prime de dette,22.876,193.64,14.711,-12.902,48.06
+Mélenchon (La France insoumise),Crise,2037,sans_prime_dette,Sans prime de dette,30.352,299.64,19.893,-14.231,122.02
+Mélenchon (La France insoumise),Crise,2050,sans_prime_dette,Sans prime de dette,51.001,717.6,35.212,-16.909,422.47
+Mélenchon (La France insoumise),Prudent,2032,sans_prime_dette,Sans prime de dette,18.233,165.47,11.29,-9.724,27.49
+Mélenchon (La France insoumise),Prudent,2037,sans_prime_dette,Sans prime de dette,23.974,235.79,15.456,-11.054,78.01
+Mélenchon (La France insoumise),Prudent,2050,sans_prime_dette,Sans prime de dette,37.259,500.17,25.235,-12.366,270.25
+Mélenchon (La France insoumise),Médian,2032,sans_prime_dette,Sans prime de dette,14.657,149.95,8.004,-6.94,15.08
+Mélenchon (La France insoumise),Médian,2037,sans_prime_dette,Sans prime de dette,18.943,198.94,11.216,-8.182,50.42
+Mélenchon (La France insoumise),Médian,2050,sans_prime_dette,Sans prime de dette,27.635,379.38,18.07,-9.172,182.89
+Mélenchon (La France insoumise),Optimiste,2032,sans_prime_dette,Sans prime de dette,10.738,130.28,4.223,-3.618,-2.86
+Mélenchon (La France insoumise),Optimiste,2037,sans_prime_dette,Sans prime de dette,14.374,160.48,6.831,-5.083,16.15
+Mélenchon (La France insoumise),Optimiste,2050,sans_prime_dette,Sans prime de dette,21.43,291.02,11.696,-6.069,99.82
+Philippe (Horizons),Crise,2032,sans_prime_dette,Sans prime de dette,10.041,151.65,1.875,-1.706,6.07
+Philippe (Horizons),Crise,2037,sans_prime_dette,Sans prime de dette,13.311,196.79,2.852,-2.118,19.16
+Philippe (Horizons),Crise,2050,sans_prime_dette,Sans prime de dette,22.272,375.5,6.483,-3.355,80.37
+Philippe (Horizons),Prudent,2032,sans_prime_dette,Sans prime de dette,7.859,140.82,0.916,-0.844,2.84
+Philippe (Horizons),Prudent,2037,sans_prime_dette,Sans prime de dette,9.825,166.99,1.307,-0.977,9.21
+Philippe (Horizons),Prudent,2050,sans_prime_dette,Sans prime de dette,14.999,266.48,2.976,-1.595,36.56
+Philippe (Horizons),Médian,2032,sans_prime_dette,Sans prime de dette,6.833,135.89,0.18,-0.181,1.02
+Philippe (Horizons),Médian,2037,sans_prime_dette,Sans prime de dette,7.851,151.06,0.123,-0.077,2.53
+Philippe (Horizons),Médian,2050,sans_prime_dette,Sans prime de dette,10.17,205.3,0.605,-0.316,8.81
+Philippe (Horizons),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.628,130.41,-0.887,0.789,-2.73
+Philippe (Horizons),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.19,136.9,-1.354,1.044,-7.44
+Philippe (Horizons),Optimiste,2050,sans_prime_dette,Sans prime de dette,7.817,169.31,-1.917,1.016,-21.89
+Retailleau (Les Républicains),Crise,2032,sans_prime_dette,Sans prime de dette,9.132,149.12,0.967,-0.857,3.54
+Retailleau (Les Républicains),Crise,2037,sans_prime_dette,Sans prime de dette,11.919,188.0,1.459,-1.043,10.37
+Retailleau (Les Républicains),Crise,2050,sans_prime_dette,Sans prime de dette,19.068,337.11,3.28,-1.618,41.98
+Retailleau (Les Républicains),Prudent,2032,sans_prime_dette,Sans prime de dette,7.316,139.14,0.374,-0.338,1.16
+Retailleau (Les Républicains),Prudent,2037,sans_prime_dette,Sans prime de dette,9.095,161.89,0.577,-0.417,4.11
+Retailleau (Les Républicains),Prudent,2050,sans_prime_dette,Sans prime de dette,13.461,247.52,1.437,-0.76,17.6
+Retailleau (Les Républicains),Médian,2032,sans_prime_dette,Sans prime de dette,6.568,134.61,-0.086,0.06,-0.26
+Retailleau (Les Républicains),Médian,2037,sans_prime_dette,Sans prime de dette,7.513,148.06,-0.214,0.174,-0.47
+Retailleau (Les Républicains),Médian,2050,sans_prime_dette,Sans prime de dette,9.374,195.23,-0.191,0.118,-1.26
+Retailleau (Les Républicains),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.498,128.65,-1.016,0.883,-4.5
+Retailleau (Les Républicains),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.03,134.45,-1.513,1.136,-9.89
+Retailleau (Les Républicains),Optimiste,2050,sans_prime_dette,Sans prime de dette,7.35,162.8,-2.384,1.248,-28.4
+Roussel (Parti communiste français),Crise,2032,sans_prime_dette,Sans prime de dette,20.28,224.28,12.114,-9.603,78.7
+Roussel (Parti communiste français),Crise,2037,sans_prime_dette,Sans prime de dette,29.043,365.42,18.584,-10.548,187.79
+Roussel (Parti communiste français),Crise,2050,sans_prime_dette,Sans prime de dette,52.449,885.11,36.661,-11.824,589.98
+Roussel (Parti communiste français),Prudent,2032,sans_prime_dette,Sans prime de dette,16.19,194.18,9.248,-7.162,56.2
+Roussel (Parti communiste français),Prudent,2037,sans_prime_dette,Sans prime de dette,22.903,292.96,14.385,-8.165,135.18
+Roussel (Parti communiste français),Prudent,2050,sans_prime_dette,Sans prime de dette,38.834,635.95,26.811,-8.903,406.03
+Roussel (Parti communiste français),Médian,2032,sans_prime_dette,Sans prime de dette,13.276,173.72,6.622,-5.138,38.85
+Roussel (Parti communiste français),Médian,2037,sans_prime_dette,Sans prime de dette,18.619,244.96,10.892,-6.39,96.43
+Roussel (Parti communiste français),Médian,2050,sans_prime_dette,Sans prime de dette,29.465,486.77,19.9,-6.893,290.28
+Roussel (Parti communiste français),Optimiste,2032,sans_prime_dette,Sans prime de dette,10.256,152.26,3.741,-2.789,19.12
+Roussel (Parti communiste français),Optimiste,2037,sans_prime_dette,Sans prime de dette,14.698,199.95,7.155,-4.196,55.61
+Roussel (Parti communiste français),Optimiste,2050,sans_prime_dette,Sans prime de dette,23.585,381.69,13.851,-4.792,190.49
+Tondelier (Les Écologistes),Crise,2032,sans_prime_dette,Sans prime de dette,12.262,159.75,4.097,-3.642,14.17
+Tondelier (Les Écologistes),Crise,2037,sans_prime_dette,Sans prime de dette,16.495,215.3,6.036,-4.486,37.67
+Tondelier (Les Écologistes),Crise,2050,sans_prime_dette,Sans prime de dette,26.816,427.37,11.028,-5.7,132.24
+Tondelier (Les Écologistes),Prudent,2032,sans_prime_dette,Sans prime de dette,8.952,139.87,2.01,-1.764,1.89
+Tondelier (Les Écologistes),Prudent,2037,sans_prime_dette,Sans prime de dette,11.946,170.9,3.428,-2.634,13.11
+Tondelier (Les Écologistes),Prudent,2050,sans_prime_dette,Sans prime de dette,18.362,292.49,6.339,-3.546,62.57
+Tondelier (Les Écologistes),Médian,2032,sans_prime_dette,Sans prime de dette,7.281,131.54,0.628,-0.559,-3.33
+Tondelier (Les Écologistes),Médian,2037,sans_prime_dette,Sans prime de dette,9.35,149.74,1.623,-1.328,1.21
+Tondelier (Les Écologistes),Médian,2050,sans_prime_dette,Sans prime de dette,12.767,220.73,3.202,-1.977,24.24
+Tondelier (Les Écologistes),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.104,119.56,-1.411,1.146,-13.58
+Tondelier (Les Écologistes),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.758,125.65,-0.785,0.413,-18.69
+Tondelier (Les Écologistes),Optimiste,2050,sans_prime_dette,Sans prime de dette,9.39,168.77,-0.344,-0.208,-22.43
+Zemmour (Reconquête),Crise,2032,sans_prime_dette,Sans prime de dette,12.002,163.91,3.836,-3.318,18.33
+Zemmour (Reconquête),Crise,2037,sans_prime_dette,Sans prime de dette,15.435,219.47,4.975,-3.427,41.84
+Zemmour (Reconquête),Crise,2050,sans_prime_dette,Sans prime de dette,25.641,432.88,9.853,-4.531,137.75
+Zemmour (Reconquête),Prudent,2032,sans_prime_dette,Sans prime de dette,9.493,148.27,2.55,-2.202,10.29
+Zemmour (Reconquête),Prudent,2037,sans_prime_dette,Sans prime de dette,11.776,183.57,3.258,-2.282,25.79
+Zemmour (Reconquête),Prudent,2050,sans_prime_dette,Sans prime de dette,18.106,311.45,6.083,-2.928,81.53
+Zemmour (Reconquête),Médian,2032,sans_prime_dette,Sans prime de dette,8.442,142.7,1.789,-1.546,7.83
+Zemmour (Reconquête),Médian,2037,sans_prime_dette,Sans prime de dette,9.612,165.77,1.885,-1.269,17.24
+Zemmour (Reconquête),Médian,2050,sans_prime_dette,Sans prime de dette,12.602,241.24,3.037,-1.314,44.75
+Zemmour (Reconquête),Optimiste,2032,sans_prime_dette,Sans prime de dette,6.368,130.24,-0.147,0.17,-2.91
+Zemmour (Reconquête),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.972,140.47,-0.571,0.523,-3.86
+Zemmour (Reconquête),Optimiste,2050,sans_prime_dette,Sans prime de dette,8.807,182.26,-0.927,0.666,-8.94
+Statu quo,Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.807,144.85,0.0,0.0,0.0
+Statu quo,Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.153,174.69,0.0,0.0,0.0
+Statu quo,Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",24.166,333.4,0.0,0.0,0.0
+Statu quo,Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.55,137.2,0.0,0.0,0.0
+Statu quo,Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.798,153.82,0.0,0.0,0.0
+Statu quo,Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.261,232.19,0.0,0.0,0.0
+Statu quo,Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.231,134.05,0.0,0.0,0.0
+Statu quo,Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.806,144.03,0.0,0.0,0.0
+Statu quo,Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.061,184.67,0.0,0.0,0.0
+Statu quo,Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.082,132.31,0.0,0.0,0.0
+Statu quo,Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.562,139.69,0.0,0.0,0.0
+Statu quo,Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.684,176.24,0.0,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",15.043,178.2,7.236,-5.716,33.34
+Arthaud (Lutte ouvrière) — partiel,Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",22.877,254.67,12.723,-7.112,79.97
+Arthaud (Lutte ouvrière) — partiel,Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",54.354,655.19,30.188,-7.02,321.79
+Arthaud (Lutte ouvrière) — partiel,Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.849,154.27,4.3,-3.384,17.07
+Arthaud (Lutte ouvrière) — partiel,Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.35,192.44,6.552,-4.043,38.62
+Arthaud (Lutte ouvrière) — partiel,Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",32.951,402.0,18.69,-4.789,169.81
+Arthaud (Lutte ouvrière) — partiel,Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.588,142.76,2.357,-1.862,8.71
+Arthaud (Lutte ouvrière) — partiel,Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.417,164.13,3.611,-2.431,20.1
+Arthaud (Lutte ouvrière) — partiel,Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",17.048,258.52,7.987,-2.84,73.85
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.918,133.51,0.836,-0.622,1.2
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.024,144.57,1.462,-1.035,4.88
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.493,200.52,2.809,-1.291,24.28
+Attal (Renaissance),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.826,152.45,2.019,-1.716,7.6
+Attal (Renaissance),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.424,195.8,3.271,-2.014,21.11
+Attal (Renaissance),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",33.087,428.57,8.92,-2.06,95.17
+Attal (Renaissance),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.606,140.15,1.057,-0.91,2.94
+Attal (Renaissance),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.419,163.81,1.621,-1.099,9.99
+Attal (Renaissance),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",19.598,278.47,5.337,-1.416,46.29
+Attal (Renaissance),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.659,135.14,0.428,-0.372,1.08
+Attal (Renaissance),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.302,147.54,0.496,-0.342,3.51
+Attal (Renaissance),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.058,195.68,0.996,-0.333,11.01
+Attal (Renaissance),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.314,127.78,-0.768,0.67,-4.53
+Attal (Renaissance),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.331,130.13,-1.23,0.881,-9.56
+Attal (Renaissance),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.342,149.35,-2.342,1.018,-26.89
+Bertrand (Nous France),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.056,146.1,0.249,-0.201,1.24
+Bertrand (Nous France),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.514,177.76,0.361,-0.191,3.06
+Bertrand (Nous France),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.527,348.16,1.361,-0.297,14.76
+Bertrand (Nous France),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.597,137.6,0.048,-0.03,0.4
+Bertrand (Nous France),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.805,154.59,0.007,0.027,0.77
+Bertrand (Nous France),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.577,235.42,0.316,-0.067,3.24
+Bertrand (Nous France),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.083,134.08,-0.148,0.144,0.03
+Bertrand (Nous France),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.467,143.12,-0.339,0.285,-0.92
+Bertrand (Nous France),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.455,179.51,-0.606,0.3,-5.16
+Bertrand (Nous France),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.477,130.49,-0.604,0.558,-1.82
+Bertrand (Nous France),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.618,134.46,-0.944,0.74,-5.23
+Bertrand (Nous France),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.019,158.74,-1.665,0.786,-17.5
+Glucksmann (Place publique),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.479,156.52,3.672,-3.185,11.67
+Glucksmann (Place publique),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.1,209.15,5.947,-3.79,34.45
+Glucksmann (Place publique),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",38.695,485.15,14.528,-3.561,151.75
+Glucksmann (Place publique),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.835,141.41,2.286,-1.996,4.2
+Glucksmann (Place publique),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.443,170.99,3.645,-2.59,17.17
+Glucksmann (Place publique),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",24.837,321.44,10.576,-3.055,89.25
+Glucksmann (Place publique),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.892,136.1,1.661,-1.465,2.05
+Glucksmann (Place publique),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.408,155.19,2.601,-1.942,11.16
+Glucksmann (Place publique),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.592,235.02,5.531,-2.203,50.35
+Glucksmann (Place publique),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.816,129.82,0.734,-0.652,-2.48
+Glucksmann (Place publique),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.92,141.22,1.358,-1.084,1.54
+Glucksmann (Place publique),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.245,196.85,2.561,-1.289,20.61
+Le Pen (Rassemblement national) — partiel,Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.099,157.75,3.292,-2.797,12.9
+Le Pen (Rassemblement national) — partiel,Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",15.601,209.36,5.448,-3.308,34.66
+Le Pen (Rassemblement national) — partiel,Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",39.248,492.84,15.082,-3.711,159.44
+Le Pen (Rassemblement national) — partiel,Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.79,144.9,2.24,-1.92,7.7
+Le Pen (Rassemblement national) — partiel,Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.219,174.81,3.421,-2.255,20.99
+Le Pen (Rassemblement national) — partiel,Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.358,331.09,11.097,-2.947,98.91
+Le Pen (Rassemblement national) — partiel,Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.846,139.84,1.615,-1.396,5.79
+Le Pen (Rassemblement national) — partiel,Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.002,158.19,2.195,-1.511,14.16
+Le Pen (Rassemblement national) — partiel,Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.109,235.28,5.048,-1.782,50.61
+Le Pen (Rassemblement national) — partiel,Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.897,135.32,0.815,-0.695,3.01
+Le Pen (Rassemblement national) — partiel,Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.572,146.4,1.01,-0.685,6.71
+Le Pen (Rassemblement national) — partiel,Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.606,197.24,1.922,-0.731,20.99
+Lisnard (Nouvelle Énergie),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.275,159.46,4.467,-3.97,14.61
+Lisnard (Nouvelle Énergie),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",17.546,221.71,7.393,-4.654,47.02
+Lisnard (Nouvelle Énergie),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",46.136,567.94,21.97,-5.767,234.54
+Lisnard (Nouvelle Énergie),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.288,144.02,2.739,-2.471,6.82
+Lisnard (Nouvelle Énergie),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.899,179.33,4.101,-2.823,25.51
+Lisnard (Nouvelle Énergie),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",28.607,365.39,14.346,-3.915,133.21
+Lisnard (Nouvelle Énergie),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.086,137.89,1.855,-1.714,3.84
+Lisnard (Nouvelle Énergie),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.996,158.33,2.189,-1.576,14.3
+Lisnard (Nouvelle Énergie),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.421,240.55,5.36,-1.836,55.87
+Lisnard (Nouvelle Énergie),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.997,127.26,-0.085,0.027,-5.05
+Lisnard (Nouvelle Énergie),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.035,133.78,-0.527,0.395,-5.91
+Lisnard (Nouvelle Énergie),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.584,164.61,-1.1,0.59,-11.63
+Mélenchon (La France insoumise),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",23.202,194.62,15.395,-13.151,49.77
+Mélenchon (La France insoumise),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",35.222,315.22,25.069,-15.239,140.52
+Mélenchon (La France insoumise),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",83.246,928.4,59.08,-16.365,595.0
+Mélenchon (La France insoumise),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",18.067,165.26,11.518,-9.799,28.06
+Mélenchon (La France insoumise),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.295,238.39,17.497,-11.458,84.57
+Mélenchon (La France insoumise),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",57.544,619.26,43.283,-12.435,387.08
+Mélenchon (La France insoumise),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.276,149.26,8.045,-6.955,15.2
+Mélenchon (La France insoumise),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",18.469,195.9,11.663,-8.287,51.86
+Mélenchon (La France insoumise),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",37.724,421.66,28.662,-9.589,236.99
+Mélenchon (La France insoumise),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",10.282,129.42,4.201,-3.613,-2.89
+Mélenchon (La France insoumise),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.323,155.71,6.762,-5.09,16.02
+Mélenchon (La France insoumise),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",22.608,285.23,13.924,-6.179,108.99
+Philippe (Horizons),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.741,151.07,1.934,-1.728,6.22
+Philippe (Horizons),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.582,195.77,3.429,-2.26,21.08
+Philippe (Horizons),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",35.417,448.93,11.251,-3.22,115.54
+Philippe (Horizons),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.481,140.08,0.932,-0.849,2.88
+Philippe (Horizons),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.257,163.51,1.459,-1.014,9.69
+Philippe (Horizons),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",20.318,284.44,6.057,-1.803,52.26
+Philippe (Horizons),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.415,135.08,0.183,-0.183,1.03
+Philippe (Horizons),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.951,146.62,0.145,-0.084,2.59
+Philippe (Horizons),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.928,194.77,0.866,-0.335,10.1
+Philippe (Horizons),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.189,129.56,-0.893,0.793,-2.75
+Philippe (Horizons),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.175,132.11,-1.386,1.065,-7.58
+Philippe (Horizons),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.358,151.8,-2.326,1.085,-24.44
+Retailleau (Les Républicains),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.814,148.5,1.007,-0.872,3.65
+Retailleau (Les Républicains),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.926,186.15,1.773,-1.12,11.45
+Retailleau (Les Républicains),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",30.116,395.27,5.949,-1.545,61.87
+Retailleau (Les Républicains),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.934,138.4,0.384,-0.342,1.19
+Retailleau (Les Républicains),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.441,158.14,0.643,-0.433,4.32
+Retailleau (Les Républicains),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",17.078,256.61,2.817,-0.862,24.43
+Retailleau (Les Républicains),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.147,133.8,-0.084,0.06,-0.25
+Retailleau (Les Républicains),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.59,143.56,-0.216,0.175,-0.48
+Retailleau (Les Républicains),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.819,183.05,-0.242,0.123,-1.62
+Retailleau (Les Républicains),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.056,127.78,-1.025,0.89,-4.53
+Retailleau (Les Républicains),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",4.999,129.59,-1.562,1.165,-10.1
+Retailleau (Les Républicains),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.796,144.74,-2.888,1.333,-31.5
+Roussel (Parti communiste français),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",21.103,226.57,13.296,-9.992,81.72
+Roussel (Parti communiste français),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",35.958,390.5,25.805,-11.641,215.8
+Roussel (Parti communiste français),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",93.942,1163.68,69.776,-11.238,830.28
+Roussel (Parti communiste français),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.331,194.69,9.781,-7.315,57.48
+Roussel (Parti communiste français),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",26.776,304.37,18.978,-8.867,150.55
+Roussel (Parti communiste français),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",67.5,819.36,53.239,-8.86,587.17
+Roussel (Parti communiste français),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.01,173.28,6.778,-5.184,39.23
+Roussel (Parti communiste français),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",19.092,244.93,12.286,-6.612,100.9
+Roussel (Parti communiste français),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",47.155,582.63,38.094,-7.219,397.96
+Roussel (Parti communiste français),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.841,151.49,3.76,-2.797,19.18
+Roussel (Parti communiste français),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.965,196.09,7.403,-4.245,56.4
+Roussel (Parti communiste français),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",30.322,403.47,21.638,-5.006,227.23
+Tondelier (Les Écologistes),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.078,159.47,4.271,-3.708,14.62
+Tondelier (Les Écologistes),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",17.567,217.14,7.414,-4.811,42.45
+Tondelier (Les Écologistes),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",43.36,527.65,19.193,-5.45,194.25
+Tondelier (Les Écologistes),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.551,139.07,2.001,-1.763,1.86
+Tondelier (Les Écologistes),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.369,167.3,3.571,-2.678,13.49
+Tondelier (Les Écologistes),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.369,319.31,11.108,-3.818,87.13
+Tondelier (Les Écologistes),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.836,130.66,0.605,-0.552,-3.39
+Tondelier (Les Écologistes),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.371,145.02,1.565,-1.323,0.98
+Tondelier (Les Écologistes),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.806,210.84,3.745,-2.037,26.17
+Tondelier (Les Écologistes),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",4.642,118.65,-1.439,1.155,-13.66
+Tondelier (Les Écologistes),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.573,120.14,-0.989,0.461,-19.55
+Tondelier (Les Écologistes),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.68,149.09,-1.004,-0.155,-27.15
+Zemmour (Reconquête),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.908,163.91,4.101,-3.412,19.06
+Zemmour (Reconquête),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.832,222.72,6.679,-3.794,48.03
+Zemmour (Reconquête),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",43.016,542.58,18.849,-4.251,209.18
+Zemmour (Reconquête),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.187,147.74,2.637,-2.229,10.53
+Zemmour (Reconquête),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.618,181.56,3.82,-2.401,27.75
+Zemmour (Reconquête),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",27.291,356.02,13.03,-3.159,123.83
+Zemmour (Reconquête),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.054,141.99,1.823,-1.556,7.94
+Zemmour (Reconquête),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.864,161.88,2.058,-1.307,17.84
+Zemmour (Reconquête),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",14.01,240.21,4.948,-1.421,55.54
+Zemmour (Reconquête),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.93,129.4,-0.152,0.172,-2.91
+Zemmour (Reconquête),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.967,135.74,-0.595,0.527,-3.95
+Zemmour (Reconquête),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.549,165.88,-1.135,0.688,-10.37
+Statu quo,Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.216,143.05,0.0,0.0,0.0
+Statu quo,Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.494,178.0,0.0,0.0,0.0
+Statu quo,Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.305,373.51,0.0,0.0,0.0
+Statu quo,Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.945,135.49,0.0,0.0,0.0
+Statu quo,Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.973,156.74,0.0,0.0,0.0
+Statu quo,Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.469,262.44,0.0,0.0,0.0
+Statu quo,Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.617,132.36,0.0,0.0,0.0
+Statu quo,Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.89,146.73,0.0,0.0,0.0
+Statu quo,Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.794,207.29,0.0,0.0,0.0
+Statu quo,Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.463,130.64,0.0,0.0,0.0
+Statu quo,Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.605,142.28,0.0,0.0,0.0
+Statu quo,Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.078,196.76,0.0,0.0,0.0
+Arthaud (Lutte ouvrière) — partiel,Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.525,176.27,7.31,-5.714,33.22
+Arthaud (Lutte ouvrière) — partiel,Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",24.802,259.6,13.308,-7.109,81.61
+Arthaud (Lutte ouvrière) — partiel,Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",62.853,716.1,33.548,-7.053,342.59
+Arthaud (Lutte ouvrière) — partiel,Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.282,152.52,4.337,-3.384,17.03
+Arthaud (Lutte ouvrière) — partiel,Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.821,196.21,6.848,-4.045,39.47
+Arthaud (Lutte ouvrière) — partiel,Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",38.346,442.62,19.878,-4.602,180.18
+Arthaud (Lutte ouvrière) — partiel,Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.994,141.07,2.377,-1.862,8.7
+Arthaud (Lutte ouvrière) — partiel,Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.649,167.26,3.758,-2.432,20.53
+Arthaud (Lutte ouvrière) — partiel,Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",21.155,288.55,9.362,-2.855,81.26
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.299,131.86,0.837,-0.622,1.22
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.102,147.27,1.497,-1.035,4.99
+Arthaud (Lutte ouvrière) — partiel,Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.249,222.92,3.171,-1.292,26.17
+Attal (Renaissance),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.253,150.66,2.037,-1.716,7.61
+Attal (Renaissance),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.928,199.58,3.434,-2.016,21.59
+Attal (Renaissance),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",39.083,474.09,9.778,-2.065,100.58
+Attal (Renaissance),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.008,138.45,1.063,-0.91,2.96
+Attal (Renaissance),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.668,166.95,1.695,-1.1,10.21
+Attal (Renaissance),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",24.183,312.78,5.714,-1.33,50.34
+Attal (Renaissance),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.048,133.46,0.431,-0.372,1.1
+Attal (Renaissance),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.411,150.33,0.521,-0.342,3.59
+Attal (Renaissance),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.988,219.5,1.194,-0.336,12.21
+Attal (Renaissance),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.683,126.14,-0.78,0.67,-4.5
+Attal (Renaissance),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.307,132.54,-1.298,0.881,-9.75
+Attal (Renaissance),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.339,167.32,-2.738,1.025,-29.44
+Bertrand (Nous France),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.468,144.3,0.252,-0.201,1.24
+Bertrand (Nous France),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.878,181.13,0.384,-0.191,3.13
+Bertrand (Nous France),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",30.795,389.2,1.49,-0.295,15.68
+Bertrand (Nous France),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.994,135.89,0.049,-0.03,0.4
+Bertrand (Nous France),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.986,157.53,0.013,0.027,0.79
+Bertrand (Nous France),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.87,266.16,0.401,-0.068,3.72
+Bertrand (Nous France),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.469,132.39,-0.148,0.144,0.02
+Bertrand (Nous France),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.545,145.8,-0.345,0.285,-0.93
+Bertrand (Nous France),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.108,201.75,-0.686,0.301,-5.55
+Bertrand (Nous France),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.854,128.82,-0.609,0.558,-1.82
+Bertrand (Nous France),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.625,136.95,-0.98,0.74,-5.34
+Bertrand (Nous France),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.161,177.73,-1.917,0.79,-19.02
+Glucksmann (Place publique),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.914,154.75,3.698,-3.185,11.69
+Glucksmann (Place publique),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.707,213.23,6.213,-3.793,35.23
+Glucksmann (Place publique),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",45.239,533.71,15.935,-3.574,160.2
+Glucksmann (Place publique),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.238,139.74,2.293,-1.996,4.26
+Glucksmann (Place publique),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.746,174.3,3.773,-2.591,17.57
+Glucksmann (Place publique),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.56,357.44,11.092,-2.902,95.0
+Glucksmann (Place publique),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.281,134.46,1.664,-1.465,2.1
+Glucksmann (Place publique),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.571,158.14,2.681,-1.942,11.41
+Glucksmann (Place publique),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.209,262.35,6.415,-2.212,55.06
+Glucksmann (Place publique),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.188,128.22,0.725,-0.652,-2.42
+Glucksmann (Place publique),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.973,143.86,1.368,-1.084,1.58
+Glucksmann (Place publique),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.928,218.75,2.851,-1.29,21.99
+Le Pen (Rassemblement national) — partiel,Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.538,155.95,3.322,-2.797,12.9
+Le Pen (Rassemblement national) — partiel,Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.211,213.44,5.717,-3.311,35.44
+Le Pen (Rassemblement national) — partiel,Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",45.901,542.35,16.596,-3.725,168.84
+Le Pen (Rassemblement national) — partiel,Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.203,143.2,2.258,-1.92,7.71
+Le Pen (Rassemblement national) — partiel,Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.553,178.21,3.58,-2.256,21.47
+Le Pen (Rassemblement national) — partiel,Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",30.199,368.32,11.73,-2.787,105.88
+Le Pen (Rassemblement national) — partiel,Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.246,138.16,1.629,-1.396,5.8
+Le Pen (Rassemblement national) — partiel,Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.19,161.22,2.299,-1.512,14.48
+Le Pen (Rassemblement national) — partiel,Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.77,263.23,5.976,-1.792,55.93
+Le Pen (Rassemblement national) — partiel,Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.285,133.66,0.823,-0.695,3.02
+Le Pen (Rassemblement national) — partiel,Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.664,149.16,1.06,-0.686,6.87
+Le Pen (Rassemblement national) — partiel,Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.329,219.82,2.251,-0.733,23.06
+Lisnard (Nouvelle Énergie),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.717,157.69,4.501,-3.969,14.64
+Lisnard (Nouvelle Énergie),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",19.247,226.06,7.753,-4.659,48.06
+Lisnard (Nouvelle Énergie),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",53.589,622.68,24.284,-5.789,249.17
+Lisnard (Nouvelle Énergie),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.698,142.36,2.753,-2.471,6.87
+Lisnard (Nouvelle Énergie),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.263,182.82,4.29,-2.825,26.08
+Lisnard (Nouvelle Énergie),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",33.7,404.6,15.232,-3.742,142.16
+Lisnard (Nouvelle Énergie),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.48,136.26,1.863,-1.714,3.89
+Lisnard (Nouvelle Énergie),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.182,161.37,2.291,-1.577,14.63
+Lisnard (Nouvelle Énergie),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.175,269.14,6.381,-1.847,61.85
+Lisnard (Nouvelle Énergie),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.363,125.67,-0.099,0.027,-4.96
+Lisnard (Nouvelle Énergie),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.036,136.29,-0.569,0.395,-5.99
+Lisnard (Nouvelle Énergie),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.817,184.14,-1.261,0.593,-12.62
+Mélenchon (La France insoumise),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",23.727,192.96,15.511,-13.15,49.91
+Mélenchon (La France insoumise),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",37.51,321.45,26.016,-15.212,143.46
+Mélenchon (La France insoumise),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",94.958,1009.24,65.654,-16.406,635.72
+Mélenchon (La France insoumise),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.526,163.77,11.581,-9.799,28.29
+Mélenchon (La France insoumise),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",27.141,243.37,18.168,-11.465,86.63
+Mélenchon (La France insoumise),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",65.192,672.17,46.723,-12.251,409.73
+Mélenchon (La France insoumise),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.694,147.79,8.076,-6.955,15.42
+Mélenchon (La France insoumise),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",19.942,199.85,12.051,-8.289,53.12
+Mélenchon (La France insoumise),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",43.696,463.85,31.903,-9.525,256.56
+Mélenchon (La France insoumise),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.647,128.0,4.185,-3.613,-2.64
+Mélenchon (La France insoumise),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.484,158.74,6.879,-5.09,16.45
+Mélenchon (La France insoumise),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",26.688,313.9,15.61,-6.186,117.14
+Philippe (Horizons),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.164,149.28,1.948,-1.728,6.23
+Philippe (Horizons),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.081,199.53,3.587,-2.262,21.53
+Philippe (Horizons),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",41.6,495.54,12.295,-3.227,122.03
+Philippe (Horizons),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.883,138.37,0.938,-0.849,2.89
+Philippe (Horizons),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.504,166.63,1.53,-1.015,9.9
+Philippe (Horizons),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",24.898,319.01,6.43,-1.702,56.57
+Philippe (Horizons),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.803,133.39,0.186,-0.183,1.03
+Philippe (Horizons),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.054,149.37,0.164,-0.084,2.64
+Philippe (Horizons),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.835,218.54,1.041,-0.337,11.24
+Philippe (Horizons),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.563,127.89,-0.899,0.793,-2.75
+Philippe (Horizons),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.166,134.55,-1.439,1.065,-7.74
+Philippe (Horizons),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.399,170.2,-2.679,1.091,-26.55
+Retailleau (Les Républicains),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.231,146.71,1.015,-0.872,3.65
+Retailleau (Les Républicains),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.355,189.71,1.861,-1.121,11.71
+Retailleau (Les Républicains),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",35.792,438.85,6.487,-1.545,65.34
+Retailleau (Les Républicains),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.332,136.69,0.387,-0.342,1.2
+Retailleau (Les Républicains),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.648,161.16,0.675,-0.434,4.42
+Retailleau (Les Républicains),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",21.635,289.43,3.167,-0.838,26.99
+Retailleau (Les Républicains),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.533,132.12,-0.084,0.06,-0.25
+Retailleau (Les Républicains),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.671,146.25,-0.219,0.175,-0.48
+Retailleau (Les Républicains),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",11.529,205.63,-0.265,0.123,-1.67
+Retailleau (Les Républicains),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.426,126.13,-1.037,0.89,-4.51
+Retailleau (Les Républicains),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.972,131.98,-1.633,1.165,-10.3
+Retailleau (Les Républicains),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.735,162.42,-3.343,1.341,-34.34
+Roussel (Parti communiste français),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",21.706,224.9,13.49,-9.991,81.85
+Roussel (Parti communiste français),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",38.72,398.11,27.226,-11.602,220.11
+Roussel (Parti communiste français),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",108.531,1264.46,79.226,-11.28,890.95
+Roussel (Parti communiste français),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",16.864,193.17,9.919,-7.315,57.69
+Roussel (Parti communiste français),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.039,310.69,20.066,-8.86,153.95
+Roussel (Parti communiste français),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",77.443,887.44,58.975,-8.69,625.0
+Roussel (Parti communiste français),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.49,171.79,6.873,-5.184,39.42
+Roussel (Parti communiste français),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",20.933,249.99,13.043,-6.615,103.26
+Roussel (Parti communiste français),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",54.758,636.31,42.964,-7.149,429.01
+Roussel (Parti communiste français),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.265,150.01,3.803,-2.797,19.37
+Roussel (Parti communiste français),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.419,200.01,7.814,-4.246,57.73
+Roussel (Parti communiste français),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",36.445,444.77,25.368,-5.013,248.01
+Tondelier (Les Écologistes),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.52,157.68,4.304,-3.707,14.62
+Tondelier (Les Écologistes),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",19.234,221.38,7.74,-4.815,43.38
+Tondelier (Les Écologistes),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",50.345,578.8,21.04,-5.467,205.29
+Tondelier (Les Écologistes),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.948,137.41,2.003,-1.763,1.92
+Tondelier (Les Écologistes),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.643,170.53,3.67,-2.679,13.79
+Tondelier (Les Écologistes),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",30.057,354.61,11.589,-3.665,92.17
+Tondelier (Les Écologistes),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.211,129.03,0.594,-0.553,-3.33
+Tondelier (Les Écologistes),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.46,147.73,1.57,-1.323,1.0
+Tondelier (Les Écologistes),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.928,235.03,4.134,-2.04,27.74
+Tondelier (Les Écologistes),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",4.987,117.07,-1.476,1.154,-13.57
+Tondelier (Les Écologistes),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.575,122.84,-1.03,0.439,-19.44
+Tondelier (Les Écologistes),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.656,166.53,-1.422,-0.14,-30.23
+Zemmour (Reconquête),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.362,162.08,4.146,-3.411,19.03
+Zemmour (Reconquête),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.546,227.1,7.052,-3.798,49.1
+Zemmour (Reconquête),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",50.218,596.0,20.913,-4.272,222.49
+Zemmour (Reconquête),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.606,146.02,2.661,-2.229,10.54
+Zemmour (Reconquête),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",13.002,185.1,4.029,-2.402,28.37
+Zemmour (Reconquête),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",32.326,395.05,13.857,-2.989,132.62
+Zemmour (Reconquête),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.459,140.31,1.842,-1.556,7.94
+Zemmour (Reconquête),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.079,164.98,2.189,-1.307,18.25
+Zemmour (Reconquête),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",17.802,269.26,6.008,-1.433,61.96
+Zemmour (Reconquête),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.301,127.77,-0.161,0.171,-2.86
+Zemmour (Reconquête),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.983,138.27,-0.622,0.527,-4.01
+Zemmour (Reconquête),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.812,185.69,-1.266,0.69,-11.07

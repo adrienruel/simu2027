@@ -1,9 +1,9 @@
 programme,mesure,annee,statique_md,indice
 bertrand,BER-FIS-01,2029,-9.421,1.0036
 bertrand,BER-FIS-02,2029,0.835,1.0051
-bertrand,BER-FIS-01,2032,-9.433,1.0049
-bertrand,BER-FIS-02,2032,0.857,1.031
-bertrand,BER-FIS-01,2037,-9.59,1.0217
-bertrand,BER-FIS-02,2037,0.876,1.0535
-bertrand,BER-FIS-01,2050,-9.457,1.0074
-bertrand,BER-FIS-02,2050,0.918,1.1047
+bertrand,BER-FIS-01,2032,-9.435,1.0051
+bertrand,BER-FIS-02,2032,0.857,1.0313
+bertrand,BER-FIS-01,2037,-9.601,1.0228
+bertrand,BER-FIS-02,2037,0.876,1.0538
+bertrand,BER-FIS-01,2050,-9.516,1.0138
+bertrand,BER-FIS-02,2050,0.918,1.1042

@@ -2,12 +2,12 @@
  "note": "Traçabilité des sorties (roadmap du comparateur, chantier 1.2, 16/11/2026).",
  "fichiers": {
   "c1_commun.json": {
-   "sha256": "7199765c7ed2e00055e7d29590614a36c5ee5425f4efe1cd91c2d645eaccdd6e",
+   "sha256": "8f1d7fd44d43af0ccff5805cbd3723bda319d83651d854329fbbf21fd0d78275",
    "script": "outils.c1_inventaire",
-   "date": "2026-11-19T12:39:19Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:17:39Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "c1_melenchon.json": {
    "sha256": "bc2a807dcd09df34ff64060efe3bfe892a99728b5126e9ea376662c2aa42f3c3",
@@ -28,12 +28,12 @@
    "note": "Antérieur au manifeste. Inventaire C1 des hypothèses sans source (13/11/2026)."
   },
   "comparaison_annonces.csv": {
-   "sha256": "c82c596b1d43a949dfa76f26eeb2c325fcb3802e294360ffd0cbc3482621bb91",
+   "sha256": "78cd4fb1395f060db65012f491f41b6a1c4ea1d5d3f73e9ffa0d0a4cc55e264e",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:09Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:02Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_bouclage.json": {
    "sha256": "903ad20cc2268afe94eb0291dbd0bcd7ec3bc9d2ad5bfdad71cbfe097faac19b",
@@ -45,180 +45,180 @@
    "note": "Antérieur au manifeste. Comparaison ponctuelle de la phase E (14/11/2026), avant et après la macro bouclée ; Écologie de droite retirée le 16/11."
   },
   "comparaison_couverture_micro.csv": {
-   "sha256": "8f28fa3b15fc502939f322012fc2dafb3a4b137c6fd8182e18d7aaac0b411b9f",
+   "sha256": "53f4927c3c703155b793eb02051ae4da78a732411088e54cac6f6a5a80552cf9",
    "script": "outils.couverture_micro",
-   "date": "2026-11-19T12:31:47Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:40Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_decomposition.csv": {
-   "sha256": "adbbf656e8f319731100f6ca4fc3a8da6d725242305bc32b73ca562021f84a9e",
+   "sha256": "5d054ed932fd25108253d616d36bb2a96f7b2a7b32e38a67280d5199a572393e",
    "script": "outils.variantes_dette",
-   "date": "2026-11-19T12:39:03Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:17:23Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_ecarts.csv": {
-   "sha256": "5a35040e60bcddbaed3d90d93f54a284bf6ba2dd9885a71cf38f8d3837f09111",
+   "sha256": "ce1bf91e3ebdab4c20eec6900f2328af7eefcb894ef5c8d0e703629a34128fcb",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:09Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:02Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_ecologie.csv": {
-   "sha256": "8c9d495ed1b259738aacb95e3b0fd060146cead8bcd35b794e342b14ca6213a4",
+   "sha256": "42b1abeb402d7880c062d47225146444a9302970a9f4d8d0fb3d538cc93796b8",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:08Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:02Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_ecologie_mesures.csv": {
    "sha256": "aca18d2563cc97cbdec74fd6ccba276b679ac936ef359a97d6acf785ee0f28f0",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:09Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:02Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_economies.csv": {
    "sha256": "86517411b8e558346ea3adfdeaadf785d02265ce63ccf15e840581d141cb6de8",
    "script": "outils.audit_economies",
-   "date": "2026-11-19T12:38:03Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:27Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_emploi_canaux.csv": {
-   "sha256": "220b171bac19b964ced8dcc15bd97d115535c7156de2158babafe9e65f13ebbe",
+   "sha256": "469c071156db0282054bb0f8deb957ca74082aa56c2def09d0211b8005a05f54",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:08Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:02Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_incertitude.csv": {
-   "sha256": "270968170d6c5dfbdf26fb90d2bf8ff72cd7e90c2af20eb9b381434b1c4d2701",
+   "sha256": "b5071278dba22246c146773e628d5cbaf634e00566e8bda94d2ae1559dfc13dc",
    "script": "outils.export_incertitude",
-   "date": "2026-11-19T01:05:07Z",
-   "commit": "36b9ee9",
+   "date": "2026-11-19T14:57:18Z",
+   "commit": "cab5151",
    "code_non_commite": false,
-   "parametres": "cd959b18ef3541db"
+   "parametres": "1883cd22fe38b47f"
   },
   "comparaison_incertitude_fonds.csv": {
-   "sha256": "e0ba46962b5426073cb58bfa7360924c83c2cc94db43fdc13f25f79f53566b4d",
+   "sha256": "e6252f97b489da23d8461d03d13b1ac942e1586b6764cb67ed54098dec5cb48d",
    "script": "outils.export_incertitude",
-   "date": "2026-11-19T01:05:07Z",
-   "commit": "36b9ee9",
+   "date": "2026-11-19T14:57:18Z",
+   "commit": "cab5151",
    "code_non_commite": false,
-   "parametres": "cd959b18ef3541db"
+   "parametres": "1883cd22fe38b47f"
   },
   "comparaison_incidence_entreprises.csv": {
    "sha256": "62f5e39d48c715711081f663ca56c4a0445953066ee2ec7cba77c8a48bbd4df4",
    "script": "outils.export_incidence",
-   "date": "2026-11-19T12:39:16Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:17:36Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_lectures.csv": {
-   "sha256": "35ccb5371f65638a3c8893cda5d105220bf5df20bfd5090d2be158a8239f972a",
+   "sha256": "19c0e56a145f07986a6825a150ff0e8343333044ee688ada53b5fafdc48918c5",
    "script": "outils.poids_lectures",
-   "date": "2026-11-19T12:41:46Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:19:56Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_mesures.csv": {
-   "sha256": "30b1458943cc3e856da8f210be2b4360c3121a5ca4ed6a55556244d38cc9d7cb",
+   "sha256": "d066ea00c07644fa8acd2d3504479b715f685bc47a7827ff1550bc9509f729a9",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:09Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:02Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_redistribution.csv": {
-   "sha256": "441d2184fde060d8909ba3d97759eb572795490b3559e9a371e16cee77f288a9",
+   "sha256": "74fb44c63243772c6e2f1d9b05c322fde0c557620bec695faaf02121d8e4e1bd",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:25Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:19Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_redistribution_deciles.csv": {
-   "sha256": "d48282fc44cd27fa547761a5811c6ff2d1f531fc126200a44f1aa14f13eb0577",
+   "sha256": "b43d69421a585aa5cc5b85617a683cb9b4226c73667237ed8c664d897ce6b4fb",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:25Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:19Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_trajectoire.csv": {
-   "sha256": "4b5d98079196ea162bcc7c952f34ecd6bedc88b35ebb41d37c036cdc35392021",
+   "sha256": "af5d8c7e574d4510b7f373c0be58cf1d903e8547e4d2b941ba8c0d00c4bef7c8",
    "script": "outils.export_comparaison",
-   "date": "2026-11-19T12:32:08Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:02Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_variante_fonds.csv": {
-   "sha256": "7d1f1e047d3f332ae3449ddefc91fb51c73bd31c48320ebd71e320f7046df18c",
+   "sha256": "ab13eab635f62097a3a908b4c422a9cb5b7b17e1cbdf98c7cbf56539d877515d",
    "script": "outils.variante_fonds_apu",
-   "date": "2026-11-19T12:38:11Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:34Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparaison_variantes_dette.csv": {
-   "sha256": "6b448a259f06fd84f8252d1e80d7252f886180ba705b85a3888238c0138b2508",
+   "sha256": "ebedafc77647a0f533d1187715db4058f0e35dbe838e66a552b98c3d8eec57cd",
    "script": "outils.variantes_dette",
-   "date": "2026-11-19T12:39:03Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:17:23Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "comparateur.html": {
-   "sha256": "f3b4b209e9fc43d13c646156c22bdb2b29e5ef8dc11f23216085d474db2ec141",
+   "sha256": "aa1f7a156280f70707996afabaa0491afdfa24dac36ecdebb6bb17c71bce44b2",
    "script": "outils.page_comparateur",
-   "date": "2026-11-19T01:05:08Z",
-   "commit": "36b9ee9",
+   "date": "2026-11-19T14:57:19Z",
+   "commit": "cab5151",
    "code_non_commite": false,
-   "parametres": "cd959b18ef3541db"
+   "parametres": "1883cd22fe38b47f"
   },
   "incertitude_rho0.json": {
-   "sha256": "4899f049f6c21aca5d50a0f128ab8239b0c6833196df7b78c72b1c4130f0213e",
+   "sha256": "37a4e06638ef1b69960fd55580759e510e34cfbaeb84321ce06181b790e3e66e",
    "script": "moteur.incertitude",
-   "date": "2026-11-18T23:44:41Z",
-   "commit": "36b9ee9",
+   "date": "2026-11-19T13:47:52Z",
+   "commit": "cab5151",
    "code_non_commite": false,
-   "parametres": "cd959b18ef3541db"
+   "parametres": "1883cd22fe38b47f"
   },
   "incertitude_rho1.json": {
-   "sha256": "5186f33859560db52cdaec382ae0e7b705406f9d3d8f6aafad3614a1af8db753",
+   "sha256": "293b86264e133b2b8eab65ae2e171c915db67311cbf834a4ffffce6760c50c62",
    "script": "moteur.incertitude",
-   "date": "2026-11-19T01:05:04Z",
-   "commit": "36b9ee9",
+   "date": "2026-11-19T14:57:13Z",
+   "commit": "cab5151",
    "code_non_commite": false,
-   "parametres": "cd959b18ef3541db"
+   "parametres": "1883cd22fe38b47f"
   },
   "incertitude_tirages_rho0_graine2029.jsonl": {
-   "sha256": "7719bdb90f52013cc9250ba1afa44bb6f9c310dc73efbc4532472bce5812c9ac",
+   "sha256": "129f7c22b3e6821cc5f650a2f3f7d46e36906fc14afba6a4fa1f0f0b4d8eeef4",
    "script": "moteur.incertitude",
-   "date": "2026-11-18T23:44:41Z",
-   "commit": "36b9ee9",
+   "date": "2026-11-19T13:47:52Z",
+   "commit": "cab5151",
    "code_non_commite": false,
-   "parametres": "cd959b18ef3541db"
+   "parametres": "1883cd22fe38b47f"
   },
   "incertitude_tirages_rho1_graine2029.jsonl": {
-   "sha256": "6b9f9782757035e4aaecb4ef8f50cd0c721b5bd277c19cb2239e74c7847455b8",
+   "sha256": "fcfb29e92465e2474b4fdc7ec9973209f016eb8fb3952472a10391f579380559",
    "script": "moteur.incertitude",
-   "date": "2026-11-19T01:05:04Z",
-   "commit": "36b9ee9",
+   "date": "2026-11-19T14:57:13Z",
+   "commit": "cab5151",
    "code_non_commite": false,
-   "parametres": "cd959b18ef3541db"
+   "parametres": "1883cd22fe38b47f"
   },
   "micro/arthaud_deciles.csv": {
    "sha256": "a1f73709d4821c3d205a2641d6e70c439918beabc8b17172b78b3bee48d02d65",
@@ -248,20 +248,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/arthaud_vieillissement.csv": {
-   "sha256": "e248af1db517bd389453843261af377db904a06559bdbffa161f3af0fb194799",
+   "sha256": "fc0b16d0ccf8680c09d62d675b36d19e38b92b4b7bcb8b9e8be3b1431fa15147",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T10:56:15Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:32:39Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/arthaud_vieillissement_deciles.csv": {
-   "sha256": "e924408b4670052aa4fb99d1e5ed0770ec4520bcdbb6c7be2bf24c0472b81eb6",
+   "sha256": "f4fa4bd5b2cfd0ca65ea665df9da433a2229d129224f84f9058d7fc84267dfe7",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T10:56:15Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:32:39Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/attal_deciles.csv": {
    "sha256": "8cd2ffef1e567003d0e7e6514b7a4df500c10637df53643b81129d4439b368ad",
@@ -291,20 +291,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/attal_vieillissement.csv": {
-   "sha256": "ba82625bc47f991a6d4ea222090d2b5e7061eea7aba0522d5b00468ebd7db180",
+   "sha256": "a1a9efe070219c74f5b7ead6c7fad5541275d7e8b9fbb8c2665bf68a1ae7e15a",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:01:49Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:38:55Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/attal_vieillissement_deciles.csv": {
-   "sha256": "70e2498e9e4292dc87d773309ae700d8ac0d15e85a1822e733af661bb1a6ccc2",
+   "sha256": "0e713ed2f322c909bed53ee87298693f92b1f3ccf5c0c2ea4ba9414d0e63e160",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:01:50Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:38:55Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/bertrand_deciles.csv": {
    "sha256": "fd02efd524100287149c3f841cfd97b1412666723c5303154eaa8ac11095d000",
@@ -334,28 +334,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/bertrand_vieillissement.csv": {
-   "sha256": "1d69831ec99caf5b0dc2d9e8bd53c80244532bc63fef1d3face31955f0952169",
+   "sha256": "de4f28ccc6ec8e0e6afa74c67c39c8c01a578cef86a812765928cfeac182f2aa",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:13:51Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:52:16Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/bertrand_vieillissement_deciles.csv": {
-   "sha256": "b9af467d2280d9f37591532f9c312b10700cd5d192b99a4ba0c466dbada874d6",
+   "sha256": "201dcc5701d9ee77b6fdd27c42e8b55b35bce555a6c158069be8f74afcadbf5d",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:13:51Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:52:16Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/bertrand_vieillissement_recettes.csv": {
-   "sha256": "b26ba0edcca975f62aed520f56fd6cc665c7c7534ad7a1dbbe733f2ae63279a4",
+   "sha256": "1bd1ebde5e616d4ef156fe9d2bbed718d01d225ebae319110df6cfe820453b21",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:13:51Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:52:16Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/glucksmann_deciles.csv": {
    "sha256": "307d2fc4366365166f59a6bed1383da89f7917d926f3efe98ee3d063c91e3b43",
@@ -385,20 +385,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/glucksmann_vieillissement.csv": {
-   "sha256": "289edb5bdf3118f2aa82a85a0082383be34aa45d898c9397812c6e723bd0e714",
+   "sha256": "e32e2ebd1a3425255d871f9311eca5995343f125cdd3849a4872f5dab455c4a8",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:19:28Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:58:43Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/glucksmann_vieillissement_deciles.csv": {
-   "sha256": "c561d355298063f46da1051e60522fef2b2c6569efae1a93f85f00c50bd6caee",
+   "sha256": "eaf340300ee99984ff3ca3395c70d9ca66a5f97723c74cb0c5a89463a9d98fd1",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:19:28Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:58:43Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/le_pen_deciles.csv": {
    "sha256": "fceff62cff2a4435cef62d5c96425ef748c5cf18512fbf17a4754ecb87cf486f",
@@ -428,28 +428,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/le_pen_vieillissement.csv": {
-   "sha256": "9592dfe156d161a0bd61203b7ad5de6a77150bb62344ff2c8c11685da030fea8",
+   "sha256": "f1b9d5474b85e2b641295646bb4ef1cfb06fac9fc942b808ce90daeba7d7da07",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:28:10Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:08:55Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/le_pen_vieillissement_deciles.csv": {
-   "sha256": "15b8eaf7f5c9eba9cdbcf73dbc636134de3673a5e67e133a1fd387566079fde3",
+   "sha256": "c23645747debbbd5a644c250886d49f182ac9afd06f7fc23b6eab39f6556d3c7",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:28:10Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:08:55Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/le_pen_vieillissement_recettes.csv": {
-   "sha256": "c61b830e3ba5751de0b9a3fe9ea5c5dabfc2e5e0d0449bacec57f6e5655d2368",
+   "sha256": "a5523ce751acc814844836a35cd944c5ad450054f9b48bb761275affaa9969bd",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:28:10Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:08:55Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/lisnard_deciles.csv": {
    "sha256": "a77a1dd32e19362fc6d949b741631947c53a27511545d05060a00e3e6bfca5f6",
@@ -479,28 +479,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/lisnard_vieillissement.csv": {
-   "sha256": "f00ac47a66a35b91cb689586f2ec3f2d3937355e0cafc02828e97657ee10ca5f",
+   "sha256": "78a8d5cdc19d5a53503de5807e856926cda0d387259bffb6e55ea30e8dce8726",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:36:59Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:18:57Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/lisnard_vieillissement_deciles.csv": {
-   "sha256": "66d881294204871b5305239bab0d79ba7710a9924ef923a0b305a6d44259dea0",
+   "sha256": "360460566bf6d8bed155bfdcccb8e9345d1b8f106e6902803534d17f87d1bc09",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:36:59Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:18:57Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/lisnard_vieillissement_recettes.csv": {
-   "sha256": "8740fa8578da26cb9ac83332e08b1453fb1c3882d68732a5afea6dad743a4236",
+   "sha256": "aa83a85a1f4df122629661746b5f021e7f0bcc204a8917ffbd586e155f413ffc",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:36:59Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:18:57Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/melenchon_deciles.csv": {
    "sha256": "c3344e6a7d7b893d571d1fd17ea0fe12beac762281b7263cb2529305d04185ba",
@@ -530,20 +530,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/melenchon_vieillissement.csv": {
-   "sha256": "14b2b67b7adc537b09c49768e35f4d6d7121002a0281537cefd84c5e4bf88610",
+   "sha256": "b43d7b65976451795392df690b52daf27605ae0772c6c3e30abc274e38087906",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:42:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:24:52Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/melenchon_vieillissement_deciles.csv": {
-   "sha256": "bca61dac1a0b2215ab52ecf490517bc0809bae963e628a8fabad67478dad3fec",
+   "sha256": "e0f32bb8c9c5bf4048c9698925286cea1fdc9595790fef204fb13b647ac2e8eb",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:42:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:24:52Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/philippe_deciles.csv": {
    "sha256": "e28ae7c4cdf07fbcaca41211c965a73f09c1bdf1c6691b12710ea43607c8bc53",
@@ -573,28 +573,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/philippe_vieillissement.csv": {
-   "sha256": "1d4a66e1b185326d8df871c00d60fb12c88d7b0b71b6327b5acc95e181f41cf0",
+   "sha256": "a2b7d68d8236a410fd5d927caa55063e084501ddc138ea5022d88701c4b66852",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:51:15Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:34:19Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/philippe_vieillissement_deciles.csv": {
-   "sha256": "747e04cc6cb1b7579a9d03481e5c428d9aebeb33ad06d29ef8a245855e90abb7",
+   "sha256": "5264c89fa3b7b8bf5e10fe59e9e05dd91f902e3ca102888c1b39a4cad642fc06",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:51:15Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:34:19Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/philippe_vieillissement_recettes.csv": {
-   "sha256": "c58bc65b3226c3bee0402c33884fee11746080b359b588ce4a3a3639112e631c",
+   "sha256": "79ef9dd5d0587b57eb05472c106b43dd71c7315d272ff1e0b950c0fe1dbc43eb",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:51:15Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:34:19Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/retailleau_deciles.csv": {
    "sha256": "8b1e3f75d04e145ce9ecd1c1d85c6ffdba31a5adc19992422edf8e2f3d913117",
@@ -624,20 +624,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/retailleau_vieillissement.csv": {
-   "sha256": "81696c863201e7b9bcc8520301c1bb6bd9957a7b94f707daf7d51ccd650ac03d",
+   "sha256": "32dd550a1f55d927adc143999ee28233d6ad71731fa6c13f9ab8f916a82691bd",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:54:42Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:38:07Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/retailleau_vieillissement_deciles.csv": {
-   "sha256": "7932c5874558bd8f75457455d2195de60f1f93af2b42fec6c682e66a77d8a478",
+   "sha256": "f5a18d468272b613450f75c01b9ba29869edb7179ebe92d607eab5410495c0de",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T11:54:42Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:38:07Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/roussel_deciles.csv": {
    "sha256": "70db1cc158978de02f2eed20d6dcd66c44522b433b76832666b38357cc8cc497",
@@ -667,132 +667,132 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/roussel_vieillissement.csv": {
-   "sha256": "c9d8114aed1bf998b49ca0f30f898e5e43b93b9435ecb99c657882f6e39fb97e",
+   "sha256": "7912b94266235829e414fc56fa38facbf4a4fc7097b13486cd9e01e8c2fbf082",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:03:44Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:47:17Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/roussel_vieillissement_deciles.csv": {
-   "sha256": "e9a081578bb8ada09b76ca6290a296420a7897a8848488d86cf814aa3ea62cf0",
+   "sha256": "27250aa1f03f44333286bede0f7b679afc88a44114085f4d0d1535d1d897a096",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:03:44Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:47:17Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/roussel_vieillissement_recettes.csv": {
-   "sha256": "d29d2e731bede9a3a38b616cdf2c2a610ec70de120019b13bed66c399d1c27a5",
+   "sha256": "7f40caadf2d61df55e55d5e47c2fbc059a2338f87d6dbad3a7c5e029f030b45e",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:03:44Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:47:17Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/statu_quo_vieillissement.csv": {
-   "sha256": "5f9b5a7094928e20cdef706744d1690415a93a51fef81b591110918d06096795",
+   "sha256": "f40fb4975786d16af5164891b9eec6a0ca0c51f30cbbc54cec789a584d68c623",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T10:50:47Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T15:25:45Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2029_vieillissement.csv": {
    "sha256": "43d47545e20f530c6ba2907cbec2fda176b646061ce975649d757eed8b1b84a2",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:14:55Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:58:34Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2029_vieillissement_deciles.csv": {
    "sha256": "8ab2af62d1f15beb646b1c6a4fba299ac1b65dd6806c15fdcd6ab2c10e36b788",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:14:55Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:58:34Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2029_vieillissement_recettes.csv": {
    "sha256": "24a9f137848b846acda6b4b91a7e4f0563333407bd51e7ee0dd529a292bb93d5",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:14:55Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:58:34Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2032_vieillissement.csv": {
-   "sha256": "dab4b198f4d4a787d3673fa390eda41dfa655b1100fc1d9f684082cf410c6e03",
+   "sha256": "41dbf731d721c73dcb8cea4f30a6f08aa2c933627874e6ce06554e1b87a2d792",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:20:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:04:18Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2032_vieillissement_deciles.csv": {
-   "sha256": "4c3425f6e3ff7a10424d2f41a40d19e348089d65261c6cc4031f12dcfea6b187",
+   "sha256": "37d24caba0148abbde7f3b8876ab4a4c04cac6b651e55e5e820975aa99573904",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:20:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:04:18Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2032_vieillissement_recettes.csv": {
-   "sha256": "7288d44183a6228e527dc1a6af29c1430493629ff0cec063d2c9a88b745855f4",
+   "sha256": "6cfed64a25b0a85813863490cd97dda565a50251869a50e8f313a9750cffaa21",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:20:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:04:18Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2037_vieillissement.csv": {
-   "sha256": "187952dfebb079f898f43a98662540b2cc69fb9c0d0fd0e5e41b2cf2b77f7bde",
+   "sha256": "2f0bb87f1f005f30e83efba54a11fecd4be92e2665c5a09c8e4c260e4eb5ccf9",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:26:05Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:09:52Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2037_vieillissement_deciles.csv": {
-   "sha256": "e3cfb79f9c079418fc1ec27b9bb84b3a8db00a1817cc10022a6f37f3bc3d75b6",
+   "sha256": "6faa5f14a472a465f70b4c75bbe74c09875b72de2714329b507cd430f8142f58",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:26:05Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:09:52Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2037_vieillissement_recettes.csv": {
-   "sha256": "86824b263ac9a2708ea8bc5a5ba65ab1b28bc3aa85d3ee887c4a29e8fe707cff",
+   "sha256": "9cc47f47d288b77daccac5eb2974b507b9acaf69c0f5aa42e9fe646b7e3b6794",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:26:05Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:09:52Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2050_vieillissement.csv": {
-   "sha256": "e22024df846731c75db5864948cb17b055d4db1d8a7556ad4deef7c9fa36f0e2",
+   "sha256": "3259a65d8c512402e4eee6440f46a1094ff72e0148d15ae0374cbe5a83619b8d",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:31:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:24Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2050_vieillissement_deciles.csv": {
-   "sha256": "baf9d9490291a60490de160169b39c5cc85c354905cf3b91cd04958c22439906",
+   "sha256": "f0b8d507e7888a011dd0cd3490b3743287920547ce1af0e2cc6ade1db23486ba",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:31:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:24Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_2050_vieillissement_recettes.csv": {
-   "sha256": "b33383783e678f9683d02c6829c070e48676b5d6195df1a89c80b4139bd0b259",
+   "sha256": "684aba0fd52592499f4dab0cebbf69b8ef3a71e5e80f143cd522b519824e24c9",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:31:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:24Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/tondelier_deciles.csv": {
    "sha256": "d59e90a4cb5f9c34e1561800caceaf3d4b4b962d9bb31072c3ce25a99bb57b85",
@@ -849,20 +849,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/zemmour_vieillissement.csv": {
-   "sha256": "8f13406d16ffabf4c8cd10b4ab2f761e7a272fa5359c6d562136a7b764fa8fb8",
+   "sha256": "cfa2c7a0ab2386bfe81008f13782e40ad50101280730ad4f83cd477e5fc795a8",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:09:28Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:53:00Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro/zemmour_vieillissement_deciles.csv": {
-   "sha256": "d18f50a2f3bda695200cb9a6a1ac1539979163b06c456f08205f8798c36a405c",
+   "sha256": "df1ca4ea09a700453d1f7cfc30d994ab533dcbcfb016bfd4814a3c41eafe964d",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:09:28Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T16:53:00Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro_deciles.csv": {
    "sha256": "12168d730c09f7a33fcf397f17c6ff8a3a190a8ae10e64c783941a417c3c1355",
@@ -892,60 +892,60 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro_vieillissement.csv": {
-   "sha256": "6d18c459566cd24db18c5a8f9bb35d4938febf53601ce8f95b2923bbd758a7be",
+   "sha256": "92be1b15e569f20d8ec380489048c5ba24d267000de9f7a88a302820856ec89f",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:31:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:24Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "micro_vieillissement_deciles.csv": {
-   "sha256": "559bd4ce567535419e835df96fbdcaa58c2f039771dbc8a45bd3718ef36d670d",
+   "sha256": "ea298d171a4c7beca1dc78d2a0329fea26d609e07bb313b460ad52a7941c8268",
    "script": "outils.vieillissement",
-   "date": "2026-11-19T12:31:32Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:24Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "sources_poids.csv": {
-   "sha256": "21dba893526101252858126277b29fb3a48fdd383b821bb7b72ab0c2ff49e833",
+   "sha256": "71a272ca41312996e74b6ce22f2865020a255c241d151f35cb517d5e805b60e3",
    "script": "outils.sources_poids",
-   "date": "2026-11-19T12:41:07Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:19:21Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "statu_quo.json": {
-   "sha256": "83fb4dfd57ec7fea42122a76efa1281481ca51e96da7523a98f347502d3c16d9",
+   "sha256": "19a1446cecb8613b7c00a2450de5a6cd56cdbb6323ce0d9ed2f934d7d78bfea7",
    "script": "moteur.statu_quo",
-   "date": "2026-11-19T12:37:55Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:40Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "statu_quo_depenses.csv": {
-   "sha256": "60c3b073555c2e0e5fc747029d8ec87d6524783332b5b97336ab76582ec27aa3",
+   "sha256": "5aed0264023abe1a3dac4d72376f8832533347414b5620a3a7aedda705399a1e",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-19T12:37:55Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:41Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "statu_quo_recettes.csv": {
-   "sha256": "c5488d4e3a6710a997671d6068602cc386ab22810c7349e3387493d3471a4f87",
+   "sha256": "13c0363cd6e374a2f6faa5b0455b0b5c99e963567080d4d0f32fae20c341c426",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-19T12:37:55Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:41Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "statu_quo_trajectoire.csv": {
-   "sha256": "fefa915d6a3d9572477dca7276cb4a417646c70c807661dcf7effe662e201ed4",
+   "sha256": "e29b289ae8809f0841fd1f6b050a92f16cc8a8e7af5794466eb6d69f48b0e5ed",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-19T12:37:55Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:15:41Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   },
   "statu_quo_validation.csv": {
    "sha256": "f294a65113527bb0abde4f7baa822625eb48823ceb4075721f0be00701792b4a",
@@ -957,12 +957,12 @@
    "note": "Antérieur au manifeste. Aucun script du dépôt n'écrit ce fichier : origine à retrouver."
   },
   "variante_fonds_apu.json": {
-   "sha256": "84cc73753475f550ede354b1eac6e68ea5408670ea217a4343637edb53921e25",
+   "sha256": "c167022a179be14735ed375b7b170f2c1ccfc5e2f2608edf324fffa240841ceb",
    "script": "outils.variante_fonds_apu",
-   "date": "2026-11-19T12:38:11Z",
-   "commit": "4efa671",
+   "date": "2026-11-19T17:16:34Z",
+   "commit": "8d14f77",
    "code_non_commite": true,
-   "parametres": "1883cd22fe38b47f"
+   "parametres": "498a6173523e0545"
   }
  }
 }
