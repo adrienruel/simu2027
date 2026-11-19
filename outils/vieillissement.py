@@ -45,9 +45,34 @@ def _hors_menage(p, a):
     return so["85+"] if a >= 85 else so["75-84"] if a >= 75 else so["autres"]
 
 
+AGES_SENIORS = (60, 69)  # âges où l'âge de départ change le statut (âge légal et taux plein entre 60 et 67 ans)
+
+
+def ecart_seniors(prog, p: Parametres, s: str = "prudent") -> dict[int, dict[str, float]] | None:
+    """Écart du programme à l'âge de départ du statu quo, année par année (phase O, 19/11/2026) : retraités en moins
+    (toutes les personnes pas encore retraitées, comme les pensions en moins du moteur) et personnes en emploi en plus
+    parmi elles (offre.seniors, même calcul que le moteur). None si le programme ne change pas l'âge de départ.
+
+    Les programmes rangent la série dans `non_retraites[(id(p), s)]` ({"serie", "baisse"}, ProgrammeSimple) ou dans
+    `_non_retraites[(id(p), s)]` (série seule, âge abaissé : Tondelier). Le moteur doit avoir été simulé avec ce `p`."""
+    from moteur import offre
+    nr = getattr(prog, "non_retraites", {}).get((id(p), s))
+    if nr is None and (id(p), s) in getattr(prog, "_non_retraites", {}):
+        nr = {"serie": prog._non_retraites[(id(p), s)], "baisse": True}
+    if nr is None or not any(abs(v) > 1 for v in nr["serie"].values()):
+        return None
+    sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"])
+    return {t: {"retraites": -nr["serie"][t], "emploi": sen["emplois"][t]} for t in nr["serie"]}
+
+
 def recaler(lignes: list[dict], prog, p: Parametres, annee: int, traj: dict, emploi_ref: float,
-            s: str = "prudent") -> list[dict]:
-    """Lignes avec les poids recalés sur les marges du programme en `annee`."""
+            s: str = "prudent", seniors: dict[str, float] | None = None) -> list[dict]:
+    """Lignes avec les poids recalés sur les marges du programme en `annee`.
+
+    `seniors` ({"retraites", "emploi"}, personnes, ecart_seniors) : écart du programme à l'âge de départ du statu quo.
+    Sans lui, les retraités suivent la série du COR (statu quo) quel que soit le programme. Avec lui, une seconde passe
+    de calage porte les retraités (total et 60-69 ans) et l'emploi des 60-69 ans à la première passe plus l'écart :
+    les retraités en moins et les emplois en plus sont des personnes de 60 à 69 ans, pas une moyenne de tous les âges."""
     unite = np.array([l["unite"] for l in lignes])
     n_u = int(unite.max()) + 1
     w0 = np.zeros(n_u)
@@ -82,6 +107,20 @@ def recaler(lignes: list[dict], prog, p: Parametres, annee: int, traj: dict, emp
     A.append(menages_u)
     c.append(float((w0 * menages_u).sum()) * adultes * (1 - 0.01) / adultes26)
     w = _raking(np.array(A), np.array(c), w0, bornes=(0.25, 4.0))
+    if seniors is not None:
+        lo, hi = AGES_SENIORS
+        en_age = (age >= lo) & (age <= hi)
+        occupe = np.isin(statut, ["salarie_prive", "agent_public", "independant"])
+        r_age, e_age = compte((statut == "retraite") & en_age), compte(occupe & en_age)
+        r1, e1 = float(w @ r_age), float(w @ e_age)
+        # la première passe a déjà réparti les emplois en plus du moteur sur tous les âges, au prorata : n'ajouter que
+        # la part restée hors des 60-69 ans
+        part = e1 / emploi
+        i_ret = len(BANDES) + 4  # cible des retraités : bandes d'âge, trois statuts d'emploi, chômeurs
+        c[i_ret] += seniors["retraites"]
+        A += [r_age, e_age]
+        c += [r1 + seniors["retraites"], e1 + seniors["emploi"] * (1 - part)]
+        w = _raking(np.array(A), np.array(c), w0, bornes=(0.25, 4.0))
     # pensions en unités de salaire : pension moyenne du moteur (bloc retraites / salaires / retraités du COR), qui
     # baisse quand les pensions suivent les prix et les salaires la productivité
     b, sal = sq.blocs(p, s), sq.salaires(p, s)
@@ -121,6 +160,7 @@ def main(noms):
         res = sq.simuler(p) if nom == "statu_quo" else noyau.simuler(p, prog, scenarios=("prudent",))
         traj = res["prudent"]
         emploi_ref = sq.simuler(p)["prudent"][2029]["emploi"]
+        ec_sen = None if nom == "statu_quo" else ecart_seniors(prog, p)
         ops = [o for spec in specs.get(nom, {}).values() for o in spec["operations"]]
         out, dec, rec = [], [], []
         statique26 = {}
@@ -131,7 +171,7 @@ def main(noms):
                     statique26[ident] = base26.reforme(spec["operations"])["budget"]
             del base26
         for annee in annees:
-            lg = recaler(lignes0, prog, p, annee, traj, emploi_ref)
+            lg = recaler(lignes0, prog, p, annee, traj, emploi_ref, seniors=ec_sen[annee] if ec_sen else None)
             base = om.Base(lg, emploi=False)
             base.annee = annee  # opérations qui dépendent de l'année (indexation des pensions, gels qui s'éteignent)
             i0 = indicateurs(base, base.etat0)

@@ -1857,3 +1857,30 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   - 8.4 (relecture neutre n° 3) : à confier à un agent qui n'a pas vu le code ;
   - phase 6 et 7.2 : demandent OpenFisca ;
   - 7.4 et 7.5 : décisions de modèle.
+
+## 19/11/2026 — phase O : la micro voit l'âge de départ du programme (branche `phase-o`)
+- **Constat** : dans la population vieillie (`outils/vieillissement.py`), les retraités suivaient la série du COR du
+  statu quo pour tous les programmes. Un programme qui change l'âge de départ n'avait ni plus ni moins de retraités
+  dans la micro, alors que le moteur les compte (pensions, `offre.seniors`).
+- **Correction** : `ecart_seniors` lit les personnes pas encore retraitées du programme (`non_retraites`, ou
+  `_non_retraites` pour Tondelier) et les emplois des seniors (`offre.seniors`, même calcul que le moteur). Une
+  seconde passe de calage porte les retraités (total et 60-69 ans) à la première passe plus cet écart, et l'emploi
+  des 60-69 ans au même écart que le moteur ; l'emploi total ne change pas. Test : `tests/test_vieillissement_seniors.py`.
+- **Neuf programmes recalculés** (Bertrand, Glucksmann, Le Pen, Lisnard, Mélenchon, Philippe, Roussel, Tondelier,
+  Zemmour), puis export et suite (301 passés).
+- **Effets** :
+  - budget : seul Roussel bouge, +0,17 point de déficit 2037 au prudent (29,77 → 29,94 %) : la suppression de la CSG
+    sur les pensions (PCF-RET-03) coûte 14 % de plus avec le retour à 60 ans ; les autres ≤ 0,002 point ;
+  - pauvreté 2037 comparée au statu quo : Le Pen et Roussel −0,15 à −0,37 point de plus, Glucksmann −0,17, Tondelier
+    −0,25 ; Philippe, Lisnard et Bertrand +0,10 à +0,18 (report de l'âge) ;
+  - coût des mesures codées en 2037 : Mélenchon −58,4 → −50,1 Md€, Roussel −34,6 → −41,4 Md€, Tondelier +1,3 Md€.
+    Écarts à rapprocher des montants du moteur (règle : quand la micro contredit le moteur, le montant est recalé).
+- **Limites** :
+  - le moteur retire des retraités toutes les personnes pas encore parties, mais n'en répartit que 42 %
+    (`seniors.part_concernee`) entre emploi, chômage et minima. Le reste devient inactif dans le moteur ; dans la
+    micro, le calage le prend surtout sur les inactifs de 60 à 69 ans ;
+  - effets de bord du calage sur des marges libres (18-59 ans : inactifs −0,2 million, étudiants −0,1 million pour
+    Le Pen en 2037) ;
+  - la pension moyenne reste celle du statu quo.
+- Les comparaisons des programmes autres que Le Pen sont faites contre les sorties du commit 048b97d ; seul Le Pen a
+  été recalculé avant et après avec le même code.

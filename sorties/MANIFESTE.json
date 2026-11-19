@@ -28,11 +28,11 @@
    "note": "Antérieur au manifeste. Inventaire C1 des hypothèses sans source (13/11/2026)."
   },
   "comparaison_annonces.csv": {
-   "sha256": "444e237906d69381469cc2c04a969b69ed56bdb103d9f5c29202a4e68f4fbe00",
+   "sha256": "e4ef5e5cfe51c121e1461897f52977999a259ed5860328f7f94d7826212ba901",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:42Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:17Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_bouclage.json": {
@@ -61,27 +61,27 @@
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_ecarts.csv": {
-   "sha256": "32c492a3b84397bb491bce83acc7dedf4afb9264ad2b11931fe2d7402b2a9a8a",
+   "sha256": "6fff8b6b10ec2979e10cebb7c34d72ee85e426eda9758361ee3459e1644e1371",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:42Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:16Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_ecologie.csv": {
-   "sha256": "e16c940a851d9f9ccc23a0234cca0f383be2c36142098809f2e800214a52498d",
+   "sha256": "c21dd9844692d4c01a6a35b20b919be12f316c647763ae49d65e6b36d97ce590",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:42Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:16Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_ecologie_mesures.csv": {
    "sha256": "aca18d2563cc97cbdec74fd6ccba276b679ac936ef359a97d6acf785ee0f28f0",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:42Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:16Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_economies.csv": {
@@ -93,11 +93,11 @@
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_emploi_canaux.csv": {
-   "sha256": "d0cd2575fd7f84ecb827346f8885e1f5c0e3544d4f6e837fc2da03b34794dc63",
+   "sha256": "9e75a75334a5c24392ec7910c55e986541e1a4574cabc15b20a2466b9ca68972",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:42Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:16Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_incertitude.csv": {
@@ -133,35 +133,35 @@
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_mesures.csv": {
-   "sha256": "f6a035cd39608790d6c944b1059a276ad076cd11e58f2fcf6aebfdd275caf124",
+   "sha256": "e44b7b62366e31e8f826f080dff3684beae9911eca1c684706e0ed4440ef0c54",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:42Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:17Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_redistribution.csv": {
-   "sha256": "3e732ed79bbd236e233eee846f4eec72fe5fed99355fa2957743f4ff6d7e9d3d",
+   "sha256": "c77ef751940a5e22c75af5529df97feaf33b6a0b1815b2186591412e9d1eb8ba",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:57Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:32Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_redistribution_deciles.csv": {
-   "sha256": "a757dc63493e591767c1dfe3541e06ffd1b4510ba69896e21a21c6d6738c7740",
+   "sha256": "5db01eef1c0c05a417543eaba8b8ad743e6ac01cf75e991eda416413ecd52a7a",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:57Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:32Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_trajectoire.csv": {
-   "sha256": "49f0389255bae3c88e19fd3647a124d4bca65644ab52b921990fc6370be6e8fe",
+   "sha256": "91a162747d5626412304fa40a6ea403fc321827d4fd51d95515989ec924899b4",
    "script": "outils.export_comparaison",
-   "date": "2026-11-18T22:42:42Z",
-   "commit": "36b9ee9",
-   "code_non_commite": false,
+   "date": "2026-11-19T10:07:16Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
    "parametres": "cd959b18ef3541db"
   },
   "comparaison_variante_fonds.csv": {
@@ -338,31 +338,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/bertrand_vieillissement.csv": {
-   "sha256": "eb89ea6d45838e218ac06f2374a92c14d4b6ced7983d864cf32932a92bb56416",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "6bc889be2ddb8462b2aec2bb08ea416ea3bf7405567d4e522e4095815e802907",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T08:58:04Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/bertrand_vieillissement_deciles.csv": {
-   "sha256": "28d4f12560c36ad1883e064a02159dfed9d6f907a1412122ba46bae07e0ceba8",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "76144b6bc93009ee20d215f6e3954ac5eff942639b3590c63fb4d0b849f4a61b",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T08:58:04Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/bertrand_vieillissement_recettes.csv": {
-   "sha256": "a1ab8cbb9334575afa455b9f126f1a2ea875e84b348047f9e823c23916eab4dc",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "b69c353100f7acd6f194260f9636cb3814074f2b35a7bb6f4ce65db0f52918e4",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T08:58:04Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/glucksmann_deciles.csv": {
    "sha256": "307d2fc4366365166f59a6bed1383da89f7917d926f3efe98ee3d063c91e3b43",
@@ -392,22 +389,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/glucksmann_vieillissement.csv": {
-   "sha256": "3b50a37425631e395c868e43227613d1bf2c5c9bacd38e244ca680f261a53f15",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "44693ce012f56af16f20c0337f3689bf09ccf58d96c93afff66026fa07add353",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:03:35Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/glucksmann_vieillissement_deciles.csv": {
-   "sha256": "ac9530a4000cbf52cfaea279978742bb5e2dace5215352da94d244db548e7c40",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "2293e6ad9fc5fc5eab0c2f17810444991e8d3b8b94093bdde5ebe244573e8125",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:03:35Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/le_pen_deciles.csv": {
    "sha256": "fceff62cff2a4435cef62d5c96425ef748c5cf18512fbf17a4754ecb87cf486f",
@@ -437,31 +432,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/le_pen_vieillissement.csv": {
-   "sha256": "a6b3b716d27a25f684d73a01f729465d7168109b6927419c667faee9dd94b4c5",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "e6de5c2f80b7f1e52c467dc8386d435cf3ef8687030a30651f00f784e4ff95ab",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T08:43:53Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/le_pen_vieillissement_deciles.csv": {
-   "sha256": "2c539a510e4ff0843b9518bb5db1a64d0334e673a0318081d49906ca4a65ac40",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "ce1b3b62f08e547dd8d8fa210cb43c25cbdddd01d835603062024fcf6ec63afb",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T08:43:53Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/le_pen_vieillissement_recettes.csv": {
-   "sha256": "5c848dd1cf19d2145761e871038403efb62f78d50799aba827de769d8a26cdf5",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "9fa99e797f17d3a6c6c616b296bb7450ff5b7c7a404794230c040be151dbf718",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T08:43:53Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/lisnard_deciles.csv": {
    "sha256": "a77a1dd32e19362fc6d949b741631947c53a27511545d05060a00e3e6bfca5f6",
@@ -491,31 +483,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/lisnard_vieillissement.csv": {
-   "sha256": "4fc64db348e9a9e5c58212ea00356fbf1c087886fbb6d67ba329218ad3d66920",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "e13178662e50fecc12f0fff8a1d8c5016a0fceea1f3354224b78f304ffa14429",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:12:27Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/lisnard_vieillissement_deciles.csv": {
-   "sha256": "ebf1c632fdd3030e4cda97c3edfa1c591c32e14502bbde4e0ca57bdeee50c375",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "88b0d46bf2cf2e974de792b8f480da1a582a971f7b3d853fcc8deb20970f14b1",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:12:27Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/lisnard_vieillissement_recettes.csv": {
-   "sha256": "4a73f10655367a82a4229083132959fe8304553e13fa1f5ccf26e5ac2e3cb4b1",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "61d0ad52c24fb921a7736499656952fe6cca5df9b233852f6be853f170d02c0d",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:12:27Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/melenchon_deciles.csv": {
    "sha256": "c3344e6a7d7b893d571d1fd17ea0fe12beac762281b7263cb2529305d04185ba",
@@ -545,22 +534,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/melenchon_vieillissement.csv": {
-   "sha256": "6fe4ee8faf9615fe802a6d4f7b5b5efc11b1cdf8552145af5a823ba68670e4be",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "38ae47a4f023642d8efc1f2a403f45b7ce526f292bb567b421d2948ad559b3e0",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:41:32Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/melenchon_vieillissement_deciles.csv": {
-   "sha256": "8883c21eff257eec028ba0c0df8e240a32a5c602620f10aa0046008724571ae6",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "eb6e825a68e7ce5180a4f13a7d8a65b31ad5b3d8af4c7f0960e53474d2a72ccf",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:41:32Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/philippe_deciles.csv": {
    "sha256": "e28ae7c4cdf07fbcaca41211c965a73f09c1bdf1c6691b12710ea43607c8bc53",
@@ -590,31 +577,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/philippe_vieillissement.csv": {
-   "sha256": "0e245ee52d4e477df8fd7030b4285d3fb83f90b8ec10caa23fba65d779279c40",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "49efa343319f3396e213802e249a318b4f41bc42df1c8fafae661e088019911a",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:21:07Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/philippe_vieillissement_deciles.csv": {
-   "sha256": "edcb7f6582d06a18598025e50784f33714f3c844f96ba2dd14664631152622e3",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "fc69d0249471ec06264d72e53dbcf1a9d9d7bb8e86f79ae5bb292c95012b15fa",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:21:07Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/philippe_vieillissement_recettes.csv": {
-   "sha256": "9f22fedd70ba43ade43dba5b7d74672b9093a7b3185999cebe714a010a2b0c27",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "d5ec0b27242ee3c3d863e37830f8acdc61a656f1c034198289b3d430b81a27ec",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:21:07Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/retailleau_deciles.csv": {
    "sha256": "8b1e3f75d04e145ce9ecd1c1d85c6ffdba31a5adc19992422edf8e2f3d913117",
@@ -689,31 +673,28 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/roussel_vieillissement.csv": {
-   "sha256": "e029ab0d73273438315e6df7e87ccb61fd3bd0e8e1b1c0faa714f673961f14a6",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "7719f159054e3ee1cb57e7b56757d9bcda8754fd1772c12ea3ffdbd5d67c1fdf",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:30:05Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/roussel_vieillissement_deciles.csv": {
-   "sha256": "b4ca2d8325dbf79e6f3a1fc439a8b7bbce063f70693765ec9e180b4af4bc529c",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "f1421e81eb05774bd6b46905cd427a0404b979b5f7136719b7637f5a2f245e2a",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:30:05Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/roussel_vieillissement_recettes.csv": {
-   "sha256": "eb7483efe7519a9b2c1ca6200ec35e8b684529465866ccb240afa91778bd97c2",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "d58fb5210a3d2503cfc3bc73e4cf02c0ad20ad4d0f5592dd61b6860dbcd5604a",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:30:05Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/statu_quo_vieillissement.csv": {
    "sha256": "4958cbb78a1020e5f0e8e0710fb991723f414923f24be980a4a3c53cdf6ac11f",
@@ -725,112 +706,100 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/tondelier_2029_vieillissement.csv": {
-   "sha256": "c9baaa6a6171c180405ed9698d5b723b0b5a8bb6a68cbc6e6b1ee9f75b2fbf76",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "2951e9d5af9e28a542febb6decf3762e349654fc9a99f12814eee3f430659985",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:46:54Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2029_vieillissement_deciles.csv": {
-   "sha256": "217c4e2420ad033062014f0fb3ce3e6f552cdaee16808ffdbff80a3b7ceb52ab",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "a7eb0617a11527870b3d4d39769fd457f7cb85b79530149fa93470472c4d3a52",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:46:54Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2029_vieillissement_recettes.csv": {
-   "sha256": "063e3c29060ba213926da36665888e6b6b77704344df0701c07273fc3fc4d793",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "af76eaded857aabfa4f795e16a65ec6f159889d3ca2bd99fb1be012d6d6a827b",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:46:54Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2032_vieillissement.csv": {
-   "sha256": "00fb7f5d77d87355aba2e02c8c4147673dbfd25f4c3359dddac246e0b26393b9",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "290344e29be527cb95b5b76ff04a949da0340616294da9b12b1bcf184da9808c",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:52:18Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2032_vieillissement_deciles.csv": {
-   "sha256": "200b541cc0f64d05ab0527f0c9eb153d73b92cfc2d1e414aec709c9c007e9d90",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "9679b4d46366b32514eeb1401dc6a9437efe9ac5e8e7337acc42fd9abd72c727",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:52:18Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2032_vieillissement_recettes.csv": {
-   "sha256": "61ab7f2705ee3938bfe7640506f39687baff21064a5539b6e234917db79827ad",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "c96959e6ca7b306037de009c901ba29e1a87f531d513345eb76e7458962e6ec6",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:52:18Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2037_vieillissement.csv": {
-   "sha256": "b695d64b6bd3a9aaf337521dca4fd4b04549b61c29dba5b19538328e6dee7010",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "82bc8b60bbf73d64c116f68cadf52cbf33320350d8657be4f9a4d0c3c0bee467",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:57:39Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2037_vieillissement_deciles.csv": {
-   "sha256": "5517fa897d6d10a947c048869a0f7d449e89b9197417d34fc2ba50c4ce4ee9a6",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "53cbd50c63484ca9147dbb2b752a46b422e6926621f4ff5373535546098869c8",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:57:39Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2037_vieillissement_recettes.csv": {
-   "sha256": "54362f213aa6266f3b5df3a074331832fc3c439ac3fb8269e9fbde517d8c1fcc",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "75f7a0e542b91caaf8a05e141775752cb8d140c49f496fcb388628c0312905ec",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:57:39Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2050_vieillissement.csv": {
-   "sha256": "1f96c348281216f5c1e9d76d3845c24210d7a47347eaaffb4f0e3cbba52c7c3a",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "12bc86bd5deae7e0f8b8b74fa6a76d6f00750f170b3fbaa0142002d440a16df0",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T10:03:00Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2050_vieillissement_deciles.csv": {
-   "sha256": "ad6573e7aae54fc3378cd34d8fbf5c7d3455c44b119a35367b48eb049121bd15",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "2f480209735427fb592c09d090ec902bd663ed98c9b18ce91a23a117f40579a7",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T10:03:00Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_2050_vieillissement_recettes.csv": {
-   "sha256": "e01ce4d178a2ec3c9ea3e0e3ea95cb93b906202213d2d70dfd03b4254830a33f",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "6f7322cdfd709da82e997295e4f02c2cfd5c4386de8c7ff200e2b196db9eddfb",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T10:03:00Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/tondelier_deciles.csv": {
    "sha256": "d59e90a4cb5f9c34e1561800caceaf3d4b4b962d9bb31072c3ce25a99bb57b85",
@@ -887,22 +856,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro/zemmour_vieillissement.csv": {
-   "sha256": "ffa55258f347bc5e806d7107a2738e43d162dcfecb2a5b03298d75a3378fac10",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "05b9814ab668d24e946d762985a0acf91ff6a6b64b38cfb655b69439da5ce4d6",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:35:46Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro/zemmour_vieillissement_deciles.csv": {
-   "sha256": "8c8717de6493755eb6dca2d6a954d4da3e430d1a2597e253fad1b35046809c3b",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "31a69307e38e168846c7cd5c082cc9ab6c71395ff1a6501c17d20f1751ec6495",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T09:35:46Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro_deciles.csv": {
    "sha256": "12168d730c09f7a33fcf397f17c6ff8a3a190a8ae10e64c783941a417c3c1355",
@@ -932,22 +899,20 @@
    "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
   },
   "micro_vieillissement.csv": {
-   "sha256": "d1105479dfd37a4491fac594210f8bfad4ae725967f7dcf74b862a0e543c7e8a",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "51fdd200ba99194e623384e413cb837c2079f158e421eea21218cc417d5b3023",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T10:03:00Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "micro_vieillissement_deciles.csv": {
-   "sha256": "80936bd5ac91c772ed2922506fc5630661b6bebd2b5fce90a3855971cf25a901",
-   "script": "outils.openfisca_mesures / outils.vieillissement",
-   "date": null,
-   "commit": null,
-   "code_non_commite": null,
-   "parametres": null,
-   "note": "Antérieur au manifeste. Microsimulation de la phase I (16/11/2026, matin) ; environ 3 heures de calcul, non refaite depuis."
+   "sha256": "7b662198927a26e082785313ecea6234be39a7409cb9c303ea7763774f57969d",
+   "script": "outils.vieillissement",
+   "date": "2026-11-19T10:03:00Z",
+   "commit": "048b97d",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "sources_poids.csv": {
    "sha256": "ad2f303362606eec7f8215b2762be4f97d36450aea478fd9d95ba34d4f683159",
