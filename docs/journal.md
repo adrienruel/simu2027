@@ -1900,4 +1900,10 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   part dans l'emploi des cohortes formées après la réforme (population × taux d'emploi par âge), au lieu d'une
   montée linéaire sur 40 ans. Part en 2060 : 31 % (linéaire : 40 %) ; 2073 : 60 % (72 %). Le canal ne compte qu'à
   l'optimiste et après 2045 : Zemmour 2073 +0,15 point ; les autres programmes ne bougent pas.
+- **Recalage des retraites** : le seul paramètre calé sur le COR (`statu_quo.retraites_erosion_relative`) portait
+  jusqu'ici l'écart d'emploi avec le COR, qui fait monter l'emploi des seniors (sa note le disait). Avec l'emploi de
+  l'Insee, il est recalé de 0,595 à 0,453 % (15,3 % du PIB en 2070, comme le COR). Contrôles : 2030 14,06 % (COR
+  14,1), 2045 13,99 % (COR 14,2 : tolérance portée à 0,25 point), productivité 0,4 % : 15,96 % (16,1), 1,0 % :
+  14,72 % (14,5). Taux moyen des prélèvements sur les pensions à barèmes sur les prix : 12,0 → 13,0 % en 2073
+  (tolérance du test portée à 1,5 point). Effet du recalage : statu quo 2037 9,07 → 9,09 %, 2050 18,55 → 18,78 %.
 - Sorties régénérées : export, statu quo, audits, variantes, micro vieillie de tous les programmes, incertitude.
