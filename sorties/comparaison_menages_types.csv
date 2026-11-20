@@ -91,8 +91,8 @@ Philippe (Horizons)|jeune_smic,Philippe (Horizons),jeune_smic,"Jeune salarié au
 Philippe (Horizons)|seul_smic,Philippe (Horizons),seul_smic,Personne seule au SMIC,1,20165.0,20165.0,0.0,0.0,0.0,3
 Philippe (Horizons)|seul_median,Philippe (Horizons),seul_median,"Personne seule, salaire médian",2,25027.0,25027.0,0.0,0.0,0.0,3
 Philippe (Horizons)|seul_cadre,Philippe (Horizons),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47275.0,0.0,0.0,0.0,3
-Philippe (Horizons)|parent_isole_smic,Philippe (Horizons),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27095.0,579.0,48.0,2.18,3
-Philippe (Horizons)|couple_deux_smic_deux_enfants,Philippe (Horizons),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,43027.0,1082.0,90.0,2.58,3
+Philippe (Horizons)|parent_isole_smic,Philippe (Horizons),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27125.0,609.0,51.0,2.3,3
+Philippe (Horizons)|couple_deux_smic_deux_enfants,Philippe (Horizons),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,43060.0,1115.0,93.0,2.66,3
 Philippe (Horizons)|couple_median_inactif_deux_enfants,Philippe (Horizons),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,36807.0,1509.0,126.0,4.28,3
 Philippe (Horizons)|couple_deux_medians,Philippe (Horizons),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,49744.0,0.0,0.0,0.0,3
 Philippe (Horizons)|couple_cadre_median_deux_enfants,Philippe (Horizons),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,78462.0,0.0,0.0,0.0,3

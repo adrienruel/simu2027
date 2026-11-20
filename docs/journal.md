@@ -1951,3 +1951,29 @@ Demande d'Adrien (« Philippe aide dès le premier enfant, pourquoi Mélenchon e
 - Limites : soutien moyen par enfant, sans effet du rang ni du revenu ; gratuité des crèches sans effet prix.
 - Sorties régénérées : micro vieillie de tous les programmes, export, démographie, statu quo, variantes, audits,
   ménages types, incertitude, page du comparateur.
+## 20/11/2026 — Phase Q (roadmap de la simulation globale, phase 0) : socle remis à jour (branche `phase-q`)
+
+Roadmap : `claude/Roadmap_simulation_globale_2026-11-20.md` (projet). Point de départ : `main` = b03ea64.
+
+- **0.1 OpenFisca dans l'environnement de travail** : `pip install -r requirements-micro.txt` passe de nouveau
+  (OpenFisca-France 177.0.0, OpenFisca-Core 46.0.4). Suite par défaut avec la micro : 304 passés, 0 ignoré, 11 min.
+- **0.2 Micro régénérée.**
+  - Population synthétique refaite avec OpenFisca : 1,019 million d'apprentis (âge moyen 20,8 ans, 13 200 € par an),
+    plus-values 15,0 Md€ ; masses salariales et pensions inchangées à 0,1 % près.
+  - Micro des douze programmes (≈ 2 h), micro vieillie (statu quo, douze programmes, Tondelier année par année ;
+    ≈ 2 h 15), ménages types, micro des entreprises, puis toutes les sorties et le Monte Carlo de zéro (600 tirages
+    par borne, 0 écarté, 2 h).
+  - Effets : coût des hausses de SMIC un peu plus bas (apprentis payés à la grille légale : Arthaud 97,7 → 93,8 Md€,
+    Mélenchon et Roussel 24,1 → 23,0 Md€ en OpenFisca) ; les mesures de capitalisation (16/11) entrent dans
+    `micro_mesures.csv`. Budget : au plus 0,02 point de déficit 2037 au prudent (Tondelier) ; médianes du Monte Carlo
+    à 0,013 point près. Pauvreté 2037 : ±0,25 point selon le programme (population retirée).
+  - Manifeste : plus aucune sortie antérieure sauf `statu_quo_validation.csv`, qui n'a pas de script producteur.
+- **0.3 Noyau seul dans `moteur/`** : 26 modules propres à Écologie de droite déplacés dans
+  `programmes/ecologie_de_droite/moteur_propre/` (`docs/architecture.md`). Les imports du pipeline publié ont été
+  tracés (`python -X importtime`) : aucun de ces modules n'y est chargé. Restent dans `moteur/` `menages_types` et
+  `sensibilite` (outils publiés), et dix modules communs qui gardent un import paresseux vers `moteur_propre` dans des
+  branches propres à Écologie de droite (modules mêlés, à scinder). Tests `edd` : 193 passés, 1 échec déjà présent sur
+  b03ea64 (`test_leviers::test_usure_du_fonds_dans_le_pib_pas_dans_les_impots`, solde du fonds 0,27 contre 0,37
+  attendu à 5 % près ; programme gelé, non corrigé).
+- **0.4 Point de référence** : étiquette `ref-2026-11-20` (b03ea64), résultats gardés dans `reference/ref-2026-11-20/`,
+  écarts par `python -m outils.ecarts_reference`.

@@ -1,7 +1,7 @@
 programme,mesure,micro_md,micro_comparable_md,moteur_md,ecart_pct,d_is,d_c3s,d_cvae,d_cfe,d_taxe_fonciere,taille_MIC,taille_PME,taille_GE_ETI,note
 lisnard,LIS-FIS-03,-13.18,-13.18,-10.0,32,-13.18,0.0,0.0,0.0,0.0,-2.32,-3.86,-6.99,Taux normal de 25 à 20 % ; taux réduit des PME inchangé ; part locale variable (0 à 5 points) non comptée.
 lisnard,LIS-FIS-01,-22.06,-27.55,-24.0,15,5.49,-4.8,0.0,-7.31,-15.43,-2.03,-2.8,-17.23,"Lecture haute : C3S, CFE et taxe foncière des entreprises supprimées en entier (le moteur retient 60 % de 40 Md€)."
-tondelier,REC-33,-1.53,-1.53,-1.45,6,-1.53,0.0,0.0,0.0,0.0,-1.4,-0.13,-0.0,Taux réduit des PME de 15 à 10 % sur les premiers 42 500 € de bénéfice (chiffre d'affaires sous 10 M€).
+tondelier,REC-33,-1.53,-1.53,-1.5,2,-1.53,0.0,0.0,0.0,0.0,-1.4,-0.13,-0.0,Taux réduit des PME de 15 à 10 % sur les premiers 42 500 € de bénéfice (chiffre d'affaires sous 10 M€).
 tondelier,REC-35,6.3,8.03,7.0,15,-1.73,0.0,8.03,0.0,0.0,0.04,1.27,4.99,"CVAE rétablie au taux maximal de 0,75 % (contre une CVAE supprimée en 2030 au statu quo)."
 le_pen,RN-FIS-04,-9.66,-12.11,-13.0,-7,2.46,-4.8,0.0,-7.31,0.0,-0.65,-1.02,-7.98,CFE et C3S supprimées.
 retailleau,RET-FIS-01,-5.59,-7.12,-6.0,19,1.53,-4.8,0.0,-2.32,0.0,-0.08,-0.4,-5.11,C3S supprimée et part industrielle de la CFE exonérée (CFE des entreprises de l'industrie).
