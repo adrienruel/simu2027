@@ -1,9 +1,9 @@
 programme,mesure,scenario,emplois,budget_md,statique_md
-arthaud,ART-FAM-01,crise,-4613,-0.07,-0.719
-arthaud,ART-FAM-01,prudent,-693,-0.028,-0.719
-arthaud,ART-FAM-01,median,5515,0.019,-0.719
-arthaud,ART-FAM-01,optimiste,12060,0.056,-0.719
-arthaud,ART-ECO-01,crise,125415,3.341,97.74
-arthaud,ART-ECO-01,prudent,195915,5.1,97.74
-arthaud,ART-ECO-01,median,506390,13.052,97.74
-arthaud,ART-ECO-01,optimiste,959341,24.694,97.74
+arthaud,ART-FAM-01,crise,-3792,-0.068,-0.725
+arthaud,ART-FAM-01,prudent,-267,-0.027,-0.725
+arthaud,ART-FAM-01,median,5658,0.018,-0.725
+arthaud,ART-FAM-01,optimiste,12122,0.053,-0.725
+arthaud,ART-ECO-01,crise,122731,3.252,93.809
+arthaud,ART-ECO-01,prudent,194666,4.992,93.809
+arthaud,ART-ECO-01,median,506472,12.805,93.809
+arthaud,ART-ECO-01,optimiste,960228,24.235,93.809
