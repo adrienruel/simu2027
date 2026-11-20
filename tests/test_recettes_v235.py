@@ -78,7 +78,9 @@ def test_tva_par_population(fonction):
     assert getattr(tm, fonction)(P) == pytest.approx(CIBLES_TVA[fonction], abs=TOL)
 
 
-from moteur.recettes import entreprises as en, independants as ind, total as tot
+from moteur.recettes import entreprises as en
+from programmes.ecologie_de_droite.moteur_propre.recettes import independants as ind
+from programmes.ecologie_de_droite.moteur_propre.recettes import total as tot
 
 CIBLES_ENTREPRISES = {
     "benefice_capte": -3.1122212034735e9,     # Entreprises & Dividendes!S13
@@ -107,7 +109,7 @@ def test_lignes_total(ligne, cible):
     assert tot.lignes_calculees(P)[ligne] == pytest.approx(cible, abs=TOL)
 
 
-from moteur.recettes import autres as au
+from programmes.ecologie_de_droite.moteur_propre.recettes import autres as au
 
 
 @pytest.mark.parametrize("ligne, cible", [
@@ -128,7 +130,8 @@ def test_recettes_totales_total_b17():
 
 
 # --- Dépenses statiques -----------------------------------------------------------
-from moteur.depenses import budget_etat as be, statique as st
+from programmes.ecologie_de_droite.moteur_propre.depenses import budget_etat as be
+from programmes.ecologie_de_droite.moteur_propre.depenses import statique as st
 
 
 @pytest.mark.parametrize("ligne, cible", [
@@ -156,8 +159,8 @@ def test_depenses_totales_total_b44():
 
 
 # --- Transition des retraites et IA ---------------------------------------------
-from moteur import retraites_transition as rt
-from moteur.depenses import ia_administration as iam
+from programmes.ecologie_de_droite.moteur_propre import retraites_transition as rt
+from programmes.ecologie_de_droite.moteur_propre.depenses import ia_administration as iam
 import sys as _sys
 _sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parents[1] / "outils"))
 

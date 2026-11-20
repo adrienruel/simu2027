@@ -1,12 +1,12 @@
 """Lignes 7, 8, 9, 15, 19 et 20 de la feuille Total, et l'ancienne TVA (colonne C, ligne 3)."""
 from __future__ import annotations
 
-from ..parametres import Parametres
-from ..systeme_actuel import consommation_actuelle_ht
-from ..tva import accises_calculees, taux_effectifs
-from .impot_salaires import effectifs_prive_2026, effectifs_public_2026
-from . import tva_menages
-from ..unites import facteur
+from moteur.parametres import Parametres
+from moteur.systeme_actuel import consommation_actuelle_ht
+from moteur.tva import accises_calculees, taux_effectifs
+from moteur.recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
+from moteur.recettes import tva_menages
+from moteur.unites import facteur
 
 MD = 1e9
 
@@ -39,7 +39,7 @@ def ligne_19_revenus_capital(p: Parametres) -> float:
 
 
 def ligne_20_bailleurs(p: Parametres, scenario: str = "prudent") -> float:
-    from ..is_bareme import taux_moyen
+    from moteur.is_bareme import taux_moyen
     t = taux_moyen(p, scenario)  # taux unique, ou moyen effectif d'un IS progressif
     loyers = p.val("revenus_capital.loyers") * (1 - p.val("logement.amortissement_loyers")) * t
     pv = p.val("revenus_capital.plus_values_immobilieres") * p.val("logement.part_plus_values_bailleurs") * t
@@ -66,11 +66,11 @@ def ancienne_tva_ligne_3(p: Parametres) -> float:
     t = p.val("systeme_actuel.taux_tva_moyen")
     total = 0.0
     d = effectifs_prive_2026(p)
-    from ..systeme_actuel import nets_prive
+    from moteur.systeme_actuel import nets_prive
     for n, na in zip(d.effectifs, nets_prive(p)["actuel"]):
         total += n * t * consommation_actuelle_ht(na, p)
     d = effectifs_public_2026(p)
-    from ..systeme_actuel import nets_public
+    from moteur.systeme_actuel import nets_public
     for n, na in zip(d.effectifs, nets_public(p)["actuel"]):
         total += n * t * consommation_actuelle_ht(na, p)
     total += tva_retraites_actuelle(p)
@@ -88,8 +88,8 @@ def accises_entreprises_brutes(p: Parametres) -> float:
 
 def carbone_importe_2029(p: Parametres, tva_ligne_3: float) -> float:
     """Accise sur le contenu carbone importé (Carbone!B69, année 2029, prix de 2029)."""
-    from ..tva import prix_carbone
-    from ..distribution import DONNEES
+    from moteur.tva import prix_carbone
+    from moteur.distribution import DONNEES
     import csv
     parts = {l["categorie"]: float(l["part_median"]) for l in csv.DictReader((DONNEES / "tva_produits.csv").open(encoding="utf-8"))}
     sante, tva = taux_effectifs(p)["median"]
@@ -101,7 +101,7 @@ def carbone_importe_2029(p: Parametres, tva_ligne_3: float) -> float:
 
 def ligne_15_accises_entreprises(p: Parametres, tva_ligne_3: float, scenario: str = "prudent") -> float:
     """Accises carbone des entreprises + accise de transition (calage « recettes TVA égales »), nettes de l'IS."""
-    from ..is_bareme import taux_moyen
+    from moteur.is_bareme import taux_moyen
     t = taux_moyen(p, scenario)
     brutes = accises_entreprises_brutes(p)
     ancien = ancienne_tva_ligne_3(p) + p.val("accises_entreprises.autres_impots_produits_actuels") * MD

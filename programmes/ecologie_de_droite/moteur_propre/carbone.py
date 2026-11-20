@@ -1,9 +1,9 @@
 """Carbone dynamique : prix, érosion de l'assiette, ETS2, importations, DOM (feuille Carbone, lignes 56 à 75)."""
 from __future__ import annotations
 
-from .is_bareme import taux_moyen
-from .parametres import Parametres
-from .tva import prix_carbone
+from moteur.is_bareme import taux_moyen
+from moteur.parametres import Parametres
+from moteur.tva import prix_carbone
 
 ANNEES = list(range(2029, 2074))
 SCENARIOS = ("prudent", "median", "optimiste")
@@ -33,9 +33,10 @@ def recette_statique(p: Parametres) -> float:
         return v
     cache = p.__dict__.setdefault("_cache", {})
     if "recette_carbone" not in cache:
-        from .recettes import autres, entreprises
-        from .recettes.total import ligne_3_tva
-        from .unites import facteur
+        from moteur.recettes import entreprises
+        from programmes.ecologie_de_droite.moteur_propre.recettes import autres
+        from programmes.ecologie_de_droite.moteur_propre.recettes.total import ligne_3_tva
+        from moteur.unites import facteur
         z = p.avec({"tva.prix_carbone_2024": 0.0})
         z.colonne_prudent, z._surcharges, z.taux_local_copie = p.colonne_prudent, p._surcharges, p.taux_local_copie
         menages = (ligne_3_tva(p) - entreprises.tva_non_deductible(p)) - (ligne_3_tva(z) - entreprises.tva_non_deductible(z))
@@ -55,8 +56,8 @@ def prix_finaux(p: Parametres) -> dict[str, dict[int, float]]:
     électricité à 5,5 % sans accise (37 %). Le statu quo ajoute l'ETS2 à partir de 2028 ; le prix du carbone du
     programme est supposé le comprendre. Prix hors taxe constants en euros de 2026."""
     import csv as _csv
-    from .distribution import DONNEES
-    from .ecologie import emissions as em
+    from moteur.distribution import DONNEES
+    from moteur.ecologie import emissions as em
     rows = {l["categorie"]: l for l in _csv.DictReader((DONNEES / "tva_produits.csv").open(encoding="utf-8"))}
     c, g = p.val("tva.carburants"), p.val("tva.gaz_fioul")
     k_carb = (c["co2_essence"] * (1 - c["part_gazole"]) + c["co2_gazole"] * c["part_gazole"]) / c["prix_ht"]
@@ -87,9 +88,9 @@ def couts_energie_entreprises(p: Parametres, s: str = "prudent") -> dict[int, di
     de 2028. Programme : accise écologique au prix du carbone de l'année (carburants, gaz et fioul, aérien), pas
     d'accise sur l'électricité. Volumes : ceux du statu quo (émissions des transports et des bâtiments), puis la
     réponse au prix (reponse_energie) dans le programme."""
-    from .ecologie import emissions as em
-    from .recettes.autres import accises_entreprises_brutes  # noqa: F401  (même assiette)
-    from .tva import accises_calculees
+    from moteur.ecologie import emissions as em
+    from programmes.ecologie_de_droite.moteur_propre.recettes.autres import accises_entreprises_brutes  # noqa: F401  (même assiette)
+    from moteur.tva import accises_calculees
     a = p.val("accises_entreprises.achats_ht")
     el = p.val("energie_entreprises.electricite")
     remb = p.val("energie_entreprises.remboursements_carburants")
@@ -126,7 +127,7 @@ def reponse_energie(p: Parametres, s: str = "prudent") -> dict[str, dict[int, fl
     """Facteur sur les émissions (et l'assiette taxée) des transports et des bâtiments : prix finaux du programme
     contre le statu quo, plus l'effet croisé de l'électricité moins chère. Une seule équation pour la recette, les
     émissions et l'inflation."""
-    from .ecologie import emissions as em
+    from moteur.ecologie import emissions as em
     pf = prix_finaux(p)
     return {i: em.reponse_ratio(p, pf[i], s, pf["electricite"]) for i in ("transports", "batiments")}
 
@@ -134,7 +135,7 @@ def reponse_energie(p: Parametres, s: str = "prudent") -> dict[str, dict[int, fl
 def reponse_moyenne(p: Parametres, s: str = "prudent") -> dict[int, float]:
     """Facteur moyen sur l'assiette carbone des ménages et des entreprises, pondéré par les émissions du statu quo
     de 2029 (transports et bâtiments)."""
-    from .ecologie import emissions as em
+    from moteur.ecologie import emissions as em
     r = reponse_energie(p, s)
     e = em.territoriales(p, s)[2029]
     w = {i: e[i] for i in r}
@@ -152,7 +153,7 @@ def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, flo
         # même équation que les émissions (moteur/ecologie/emissions.py) : l'assiette suit les émissions du statu quo
         # (activité, progrès technique) et répond au prix du programme rapporté au prix du statu quo, saut de 2029
         # compris, avec ajustement progressif
-        from .ecologie import emissions as em
+        from moteur.ecologie import emissions as em
         reponse = {s: reponse_moyenne(p, s) for s in SCENARIOS}
         ind = {s: em.indice(p, s) for s in SCENARIOS}
         ind_ets2 = em.indice(p, "prudent", ("transports", "batiments"))
@@ -180,9 +181,9 @@ def effet_solde(p: Parametres, tva_ligne_3_md: float) -> dict[str, dict[int, flo
 
 
 def _importe(p: Parametres, tva_md: float, t: int, fp: float) -> float:
-    from .tva import taux_effectifs
+    from moteur.tva import taux_effectifs
     import csv
-    from .distribution import DONNEES
+    from moteur.distribution import DONNEES
     parts = {l["categorie"]: float(l["part_median"]) for l in csv.DictReader((DONNEES / "tva_produits.csv").open(encoding="utf-8"))}
     sante, tva = taux_effectifs(p)["median"]
     conso = tva_md / (sante + tva) * (parts["Biens manufacturés"] + parts["Véhicules"])

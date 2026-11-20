@@ -1,8 +1,8 @@
 """Économies sur les missions conservées et mesures d'éducation (Budget État 2026 D105 et D111 ; feuille Éducation)."""
 from __future__ import annotations
 
-from ..parametres import Parametres
-from . import budget_etat
+from moteur.parametres import Parametres
+from programmes.ecologie_de_droite.moteur_propre.depenses import budget_etat
 
 
 def education(p: Parametres) -> dict[str, float]:
@@ -26,8 +26,8 @@ def education(p: Parametres) -> dict[str, float]:
 
 def economies(p: Parametres) -> dict[str, float]:
     """(D105, D111) : économies sur les missions et autres économies (Md€)."""
-    from ..collectivites import environnement
-    from ..objectifs import demi_rui_chez_parents
+    from moteur.collectivites import environnement
+    from programmes.ecologie_de_droite.moteur_propre.objectifs import demi_rui_chez_parents
     couts = {m["mission"]: m["cout"] for m in budget_etat.couts_par_mission(p)}
     ed = education(p)
     d105 = 0.0

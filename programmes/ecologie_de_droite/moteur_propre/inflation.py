@@ -21,7 +21,7 @@ par an).
 """
 from __future__ import annotations
 
-from .parametres import Parametres
+from moteur.parametres import Parametres
 
 ANNEES = list(range(2027, 2074))
 
@@ -30,8 +30,8 @@ def ecart_production(p: Parametres, jeu: str, t: int) -> float:
     """Écart de production dû à l'effort budgétaire de 2029 (part du PIB, négatif), connu avant le calcul macro."""
     if t < 2029:
         return 0.0
-    from .anciennes_pensions import recette_nette
-    from .unites import facteur
+    from programmes.ecologie_de_droite.moteur_propre.anciennes_pensions import recette_nette
+    from moteur.unites import facteur
     pib = 2920 * facteur(p, 2024, "recettes")
     # même effort que l'ancien module macro (supprimé le 12/11/2026 ; à remplacer par l'impulsion calculée) : effort de 2029 + prélèvement net sur les anciennes pensions − assouplissement
     # prélèvement net de 2029 sur les anciennes pensions : il ne dépend pas de l'inflation (pensions calées en 2029) ;
@@ -59,7 +59,7 @@ def serie(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
     b = p.val("inflation.base")
     lt = p.val("inflation.long_terme", jeu)
     conv = b["convergence_annees"]
-    from .carbone import prix
+    from programmes.ecologie_de_droite.moteur_propre.carbone import prix
     kappa = p.val("inflation.pente_phillips", jeu)
     trans = p.val("inflation.transmission_carbone", jeu)
     poids0 = p.val("inflation.poids_taxes_carbone_consommation")
@@ -67,9 +67,9 @@ def serie(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
     if p.val("ecologie_options.emissions_activite"):
         # poids des taxes carbone dans la consommation : assiette (émissions du statu quo × réponse au prix, comme la
         # recette carbone) rapportée au PIB
-        from . import statu_quo as sq
-        from .ecologie import emissions as em
-        from .carbone import reponse_moyenne
+        from moteur import statu_quo as sq
+        from moteur.ecologie import emissions as em
+        from programmes.ecologie_de_droite.moteur_propre.carbone import reponse_moyenne
         rep = reponse_moyenne(p, jeu)
         ind, y = em.indice(p, jeu), sq.pib(p, em.scenario(p, jeu))
         evol = {t: ind[t] * rep[t] / rep[2029] / (y[t] / y[2029]) for t in range(2029, 2074)}
@@ -134,7 +134,7 @@ def indice_reel(p: Parametres, jeu: str = "prudent") -> dict[int, float]:
             out[t] = idx
     elif regle == "croissance_sans_inflation":
         infl = serie(p, jeu)
-        from .reformes_structurelles import gain as gain_reformes
+        from moteur.reformes_structurelles import gain as gain_reformes
         prod = {t: 1 + gain_reformes(p, p.val("macro.reformes_programme"), jeu, t) for t in range(2029, 2074)}
         f = 1.0
         for t in range(2029, 2074):

@@ -1,7 +1,7 @@
 """Registre des lois et attribution par mesure."""
 import pytest
 
-from moteur.attribution import attribuer, mesures, variante
+from programmes.ecologie_de_droite.moteur_propre.attribution import attribuer, mesures, variante
 from moteur import noyau
 from moteur.parametres import ErreurParametre, Parametres
 
@@ -22,8 +22,8 @@ def test_avec_ne_touche_pas_l_original():
 
 
 def test_chaque_neutralisation_a_un_effet():
-    from moteur.mesures import ecartees
-    from moteur.mesures import registre, plein_effet
+    from programmes.ecologie_de_droite.moteur_propre.mesures import ecartees
+    from programmes.ecologie_de_droite.moteur_propre.mesures import registre, plein_effet
     ecartees_ = {"eco:" + x["mesure"][:50] for x in ecartees(P)}  # économies sans sources : comptées pour zéro (05/11/2026)
     ecartees_ |= {"eco:" + m["mesure"][:50] for m in registre(P.programme)  # estimées à zéro dans le prudent (AME…)
                   if (m.get("nature") or "montant") != "calcul_moteur" and plein_effet(m, P) == 0}

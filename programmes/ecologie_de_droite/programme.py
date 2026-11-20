@@ -129,11 +129,11 @@ def recettes_par_instrument(q: Parametres) -> dict[int, dict[str, float]]:
     impôt unique des salariés selon les cellules ; TVA des salariés selon les cellules ; retraités et part carbone
     hors TVA des retraités : indice 1 ; le reste selon les personnes en emploi). La somme est exactement celle des
     trois lignes « point de départ », « croissance » et « démographie » du registre du programme."""
-    from moteur.carbone import recette_statique
+    from programmes.ecologie_de_droite.moteur_propre.carbone import recette_statique
     from moteur.demographie import indices
     from moteur.recettes import tva_menages
     from moteur.recettes.entreprises import tva_non_deductible
-    from moteur.recettes.total import recettes_nouveau_systeme
+    from programmes.ecologie_de_droite.moteur_propre.recettes.total import recettes_nouveau_systeme
     from moteur.unites import facteur
     r = recettes_nouveau_systeme(q)
     l = {k: v / 1e9 for k, v in r["lignes"].items()}
@@ -221,7 +221,7 @@ def mesures_retraites(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> l
     générations (463 contre 465 Md€ en 2037, 28 contre 29 en 2073)."""
     from moteur import statu_quo as sq
     from moteur.ancien_systeme import depenses as depenses_ancien
-    from moteur.retraites_transition import cout_socle, cout_transition, remboursements
+    from programmes.ecologie_de_droite.moteur_propre.retraites_transition import cout_socle, cout_transition, remboursements
     from moteur.noyau import Mesure
     ret_sq = sq.retraites(p, s)
     anc, ct = depenses_ancien(q), cout_transition(q)
@@ -262,8 +262,8 @@ def mesures_sante(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> list:
     universel, elle, est comparée aux prestations hors invalidité) ; la gestion est une ligne de classement (le bloc
     « autres » du statu quo, retiré en entier, la contient).
     Contrôle : la somme des lignes retrouve la santé du moteur du programme."""
-    from moteur import sante as ms
-    from moteur.depenses.statique import autonomie, economie_hopitaux, securite_sociale
+    from programmes.ecologie_de_droite.moteur_propre import sante as ms
+    from programmes.ecologie_de_droite.moteur_propre.depenses.statique import autonomie, economie_hopitaux, securite_sociale
     from moteur.noyau import Mesure
     from moteur.unites import facteur
     k = ms.derive_2029(q)
@@ -328,7 +328,7 @@ def alignement_par_groupe(q: Parametres) -> dict[str, float]:
     """Hausse du coût des agents de l'État payés au coût employeur du privé (brut + charges patronales du privé, au
     lieu du titre 2 hors CAS Pensions), par ligne du modèle (Md€ de 2026, 2029) : part conservée × (coût aligné − titre 2
     hors CAS). Sa contrepartie est l'impôt unique des agents (recettes)."""
-    from moteur.depenses import budget_etat as be
+    from programmes.ecologie_de_droite.moteur_propre.depenses import budget_etat as be
     t_ = q.val("alignement.charges_patronales_prive")
     ms = be._missions()
     cas_s = sum(float(m["cas_pensions"]) for m in ms if m["cas_source"] == "s")
@@ -368,9 +368,9 @@ def mesures_autres(p: Parametres, q: Parametres, s: str, L, bl_sq: dict) -> list
     - Le reste (sécurité sociale hors santé, quotient familial, mesures datées) contre le reste du statu quo.
     Contrôle : la somme retrouve les autres dépenses et l'investissement du moteur du programme."""
     from moteur import statu_quo as sq
-    from moteur.depenses import budget_etat as be
+    from programmes.ecologie_de_droite.moteur_propre.depenses import budget_etat as be
     from moteur.depenses.ministeres import _regle
-    from moteur.depenses.statique import depenses as dep_statiques
+    from programmes.ecologie_de_droite.moteur_propre.depenses.statique import depenses as dep_statiques
     from moteur.noyau import Mesure
     e, w, y = sq.effectifs(p, s), sq.salaires(p, s), sq.pib(p, s)
     el = p.val("ministeres.elasticite_eleves_etudiants")
@@ -476,7 +476,7 @@ def mesures_revenu_universel(p: Parametres, q: Parametres, s: str, L, bl_sq: dic
     - effet du programme sur les naissances (moins d'enfants, donc moins de compléments de RUI) ;
     - RUI étudiant sous condition de ressources (ligne du registre)."""
     from moteur import statu_quo as sq
-    from moteur.inflation import indice_reel
+    from programmes.ecologie_de_droite.moteur_propre.inflation import indice_reel
     from moteur.noyau import Mesure
     from .budget import lignes as lignes_traj
     s_cel = "crise" if s == "crise" else "prudent"
@@ -595,7 +595,7 @@ def offre_commune(p: Parametres, q: Parametres, s: str, jeu: str) -> dict:
 
 def is_taxes_energie_supprimees(q: Parametres, s: str) -> dict[int, float]:
     """Impôt sur les bénéfices en plus : taux moyen de l'IS × taxes actuelles sur l'énergie supprimées (Md€)."""
-    from moteur.carbone import couts_energie_entreprises
+    from programmes.ecologie_de_droite.moteur_propre.carbone import couts_energie_entreprises
     from moteur.is_bareme import taux_moyen
     ce, t_is = couts_energie_entreprises(q, s), taux_moyen(q, s)
     return {t: t_is * ce[t]["statu_quo"] if t in ce else 0.0 for t in ANNEES}
@@ -615,7 +615,7 @@ def energie_entreprises(p: Parametres, q: Parametres, s: str, ctx: dict) -> dict
        par le chômage (même règle que le coût du travail) et ajoutent leur valeur ajoutée au PIB."""
     import math
     from moteur import statu_quo as sq
-    from moteur.carbone import couts_energie_entreprises
+    from programmes.ecologie_de_droite.moteur_propre.carbone import couts_energie_entreprises
     from moteur.emploi_canaux import gains_par_canal
     from moteur.is_bareme import taux_moyen
     from moteur.ecologie import emissions as em
@@ -658,7 +658,7 @@ def mesure_prix_carbone(p: Parametres, q: Parametres, s: str) -> Mesure:
     """Effet physique du prix du carbone (300 € en 2030, puis valeur de l'action pour le climat) sur les émissions
     des transports et des bâtiments, contre le prix du statu quo : la même réponse que l'assiette de la recette
     carbone (moteur/carbone.py), sans montant (la recette est déjà dans les instruments et l'effet macro carbone)."""
-    from moteur.carbone import reponse_energie
+    from programmes.ecologie_de_droite.moteur_propre.carbone import reponse_energie
     from moteur.ecologie import emissions as em
     rep = reponse_energie(q, s)
     e = em.territoriales(p, s)
@@ -672,7 +672,7 @@ def mesure_carbone_importe(p: Parametres, q: Parametres, s: str) -> Mesure:
     (moteur/carbone._importe) — le prix moyen des biens manufacturés monte de x / passage_prix_vente, la demande
     baisse avec l'élasticité — appliquée aux émissions importées liées à ces biens. La substitution vers des biens
     français ou européens n'est pas comptée (prudent)."""
-    from moteur.carbone import prix
+    from programmes.ecologie_de_droite.moteur_propre.carbone import prix
     from moteur.ecologie import emissions as em
     b = em.bilan(p, s)
     c = {k: q.val(f"carbone_importe.{k}") for k in ("intensite_kg_par_euro", "part_importee", "part_hors_ue",
@@ -732,7 +732,7 @@ class EcologieDeDroite:
         qu'il remplace (registre budget.py), périmètre, participations, effets physiques."""
         from moteur import statu_quo as sq
         from moteur.calendrier import transferts_collectivites
-        from moteur.retraites_transition import cout_transition
+        from programmes.ecologie_de_droite.moteur_propre.retraites_transition import cout_transition
         bl_sq = sq.blocs(p, s)
         m = []
         # recettes : chaque instrument du programme contre les impôts actuels qu'il remplace
@@ -803,7 +803,7 @@ class EcologieDeDroite:
             self._purger()
         from moteur import offre, statu_quo as sq
         from moteur.calendrier import dette_fin_2028
-        from moteur.inflation import serie
+        from programmes.ecologie_de_droite.moteur_propre.inflation import serie
         from moteur.programme_simple import MIROIR, TOUTES, multiplicateur
         pc = p.en_crise()
         if p.val("macro.registre_par_scenario"):

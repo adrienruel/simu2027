@@ -73,7 +73,7 @@ def test_copie_garde_le_programme():
 def test_economies_saisies_sourcees_et_recoupees():
     """Décision du 05/11/2026 : une économie saisie sans deux sources indépendantes, ou citant le programme d'un
     candidat, compte pour zéro ; une économie retenue est multipliée par le taux de réalisation du scénario."""
-    from moteur.mesures import motif_ecartee, effet
+    from programmes.ecologie_de_droite.moteur_propre.mesures import motif_ecartee, effet
     from moteur.parametres import Parametres
     p = Parametres()
     m = {"mesure": "x", "retenue": "1", "plein_effet_md": "10", "premiere_annee": "2029", "annee_plein_effet": "2029",

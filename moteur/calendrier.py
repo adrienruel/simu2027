@@ -15,7 +15,7 @@ def pib_2026(p: Parametres) -> float:
 
 def annees_2027_2028(p: Parametres) -> dict[int, dict]:
     pib = pib_2026(p)
-    from .inflation import serie as serie_inflation
+    from programmes.ecologie_de_droite.moteur_propre.inflation import serie as serie_inflation
     deficit = p.val("calendrier.deficit_tendanciel_2027_2028")
     dette = p.val("calendrier.dette_fin_2026_pib") * pib
     mesures_2028 = sum(p.val("calendrier.mesures_2028").values())

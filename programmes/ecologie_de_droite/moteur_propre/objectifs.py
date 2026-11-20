@@ -1,7 +1,7 @@
 """Mesures annuelles de la feuille Objectifs : TVA de 2028, fin du gel, RUI des étudiants."""
 from __future__ import annotations
 
-from .parametres import Parametres
+from moteur.parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 
@@ -18,7 +18,7 @@ def surcroit_tva_2028(p: Parametres, t: int) -> tuple[float, float]:
 
 
 def fin_gel(p: Parametres, t: int) -> float:
-    from .ancien_systeme import depenses as depenses_ancien
+    from moteur.ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
     part_sous = p.val("revalorisation.part_pensions_sous_seuil") if p.val("revalorisation.pensions_sous_minimum_vieillesse") else 0
     g = p.val("macro.tendance", "prudent")
@@ -27,7 +27,7 @@ def fin_gel(p: Parametres, t: int) -> float:
 
 def demi_rui_chez_parents(p: Parametres) -> float:
     """Économie du demi-RUI des étudiants logés chez leurs parents, nette de la TVA perdue (Budget État!D110)."""
-    from .recettes.tva_menages import tva_etudiants
+    from moteur.recettes.tva_menages import tva_etudiants
     rui_etu = p.val("inactifs.etudiants") * p.val("rui.montant") * 12 / 1e9
     tva_par_euro = tva_etudiants(p) / (p.val("rui.montant") * 12 * p.val("inactifs.etudiants"))
     return rui_etu * p.val("etudiants_rui.part_chez_parents") * 0.5 * (1 - tva_par_euro)

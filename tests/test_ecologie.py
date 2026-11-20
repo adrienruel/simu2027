@@ -100,7 +100,7 @@ def test_tondelier_chiffre_en_tonnes():
 def test_prix_finaux_ecologie_de_droite():
     """Le programme remplace les taxes actuelles sur l'énergie : essence et électricité moins chères au départ, gaz
     et fioul plus chers (remarque d'Adrien du 06/11/2026)."""
-    from moteur.carbone import prix_finaux
+    from programmes.ecologie_de_droite.moteur_propre.carbone import prix_finaux
     pf = prix_finaux(Parametres(programme="ecologie_de_droite"))
     assert pf["transports"][2029] < 0.9 and pf["transports"][2050] > 1.1
     assert pf["electricite"][2029] < 0.8
@@ -111,7 +111,7 @@ def test_prix_finaux_ecologie_de_droite():
 def test_energie_entreprises():
     """Énergie des entreprises (demande d'Adrien du 06/11/2026) : moins chère en 2029 (électricité, carburants), plus
     chère ensuite (gaz, aviation d'affaires, prix du carbone qui monte) ; l'IS reprend les taxes supprimées."""
-    from moteur.carbone import couts_energie_entreprises
+    from programmes.ecologie_de_droite.moteur_propre.carbone import couts_energie_entreprises
     ce = couts_energie_entreprises(Parametres(programme="ecologie_de_droite"), "prudent")
     assert ce[2029]["indice_prix"] < 1.0 < ce[2050]["indice_prix"]
     assert ce[2029]["statu_quo"] > 0

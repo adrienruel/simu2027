@@ -24,8 +24,9 @@ def environnement(p: Parametres) -> dict[str, float]:
 
 def is_local(p: Parametres) -> dict[str, float]:
     """IS local au taux de base, sur la même assiette que l'IS de l'État (Md€, lignes 33)."""
-    from .recettes import entreprises, independants
-    from .recettes.autres import accises_entreprises_brutes
+    from .recettes import entreprises
+    from programmes.ecologie_de_droite.moteur_propre.recettes import independants
+    from programmes.ecologie_de_droite.moteur_propre.recettes.autres import accises_entreprises_brutes
     from .unites import facteur
     t_is = taux_moyen(p)
     loc_ = p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
@@ -90,7 +91,7 @@ def assiette_impot_local(p: Parametres) -> float:
     if v != "calcul":
         return v
     from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
-    from .recettes import independants
+    from programmes.ecologie_de_droite.moteur_propre.recettes import independants
     ab = p.val("impot_local.abattement")
     a = facteur_alignement_public(p)
     dp, dg = effectifs_prive_2026(p), effectifs_public_2026(p)

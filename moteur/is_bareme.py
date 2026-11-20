@@ -57,7 +57,7 @@ def taux_taille(p: Parametres, taille: str) -> float:
     """Taux marginal de l'IS de l'État au bénéfice moyen de la taille (TPE, PME, ETI, GE)."""
     if not actif(p):
         return p.val("entreprises.taux_is_etat")
-    from .entreprises_cellules import tailles
+    from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import tailles
     x = next(y for y in tailles(p) if y["taille"] == taille)
     return taux_marginal_etat(p, benefice_representatif(x))
 
@@ -71,7 +71,7 @@ def taux_investissement(p: Parametres) -> float:
     """Taux marginal moyen pondéré par l'investissement de chaque taille (valeur de la déduction)."""
     if not actif(p):
         return p.val("entreprises.taux_is_etat")
-    from .entreprises_cellules import tailles
+    from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import tailles
     return sum(x["part_investissement"] * taux_taille(p, x["taille"]) for x in tailles(p))
 
 

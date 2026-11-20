@@ -31,44 +31,45 @@ def test_calendrier():
 
 
 def test_successions():
-    from moteur.recettes import successions, autres
+    from programmes.ecologie_de_droite.moteur_propre.recettes import successions
+    from programmes.ecologie_de_droite.moteur_propre.recettes import autres
     comparer(successions.supplement(P, autres.ligne_8_successions(P) / 1e9), "Successions", 15)
 
 
 def test_ascenseur_social():
-    from moteur.ascenseur_social import annuel
-    from moteur.recettes import autres
+    from programmes.ecologie_de_droite.moteur_propre.ascenseur_social import annuel
+    from programmes.ecologie_de_droite.moteur_propre.recettes import autres
     a = annuel(P, autres.ligne_8_successions(P) / 1e9, P.val("successions.exoneration_entreprises"))
     comparer({t: v["recettes"] for t, v in a.items()}, "Ascenseur social", 57)
     comparer({t: v["depenses"] for t, v in a.items()}, "Ascenseur social", 53)
 
 
 def test_economies_registre():
-    from moteur.mesures import economies
+    from programmes.ecologie_de_droite.moteur_propre.mesures import economies
     comparer(economies(P), "Économies", 28)
 
 
 @pytest.mark.parametrize("scenario, ligne", [("prudent", 49), ("median", 50), ("optimiste", 51)])
 def test_sante(scenario, ligne):
-    from moteur import sante
+    from programmes.ecologie_de_droite.moteur_propre import sante
     comparer(sante.depenses(P, scenario), "Santé", ligne)
 
 
 def test_tva_sante():
-    from moteur import sante
+    from programmes.ecologie_de_droite.moteur_propre import sante
     tv = sante.tva_sante(P)
     comparer(tv["prudent"], "Santé", 85)
     comparer(tv["median"], "Santé", 86)
 
 
 def test_logement_reprise_amortissements():
-    from moteur.logement import reprise_amortissements
+    from programmes.ecologie_de_droite.moteur_propre.logement import reprise_amortissements
     comparer(reprise_amortissements(P), "Logement", 104)
 
 
 @pytest.mark.parametrize("scenario, col", [("prudent", "B"), ("median", "C"), ("optimiste", "D")])
 def test_hauts_revenus(scenario, col):
-    from moteur import hauts_revenus as hr
+    from programmes.ecologie_de_droite.moteur_propre import hauts_revenus as hr
     assert hr.reactions(P)[scenario]["montant"] == pytest.approx(VAL[("Hauts revenus", f"{col}9")], abs=0.01)
     assert hr.baisse_revenus_declares(P)[scenario] == pytest.approx(VAL[("Effets macro", f"{col}226")], abs=0.01)
 
@@ -84,14 +85,14 @@ def test_emploi():
 
 @pytest.mark.parametrize("scenario, ligne", [("prudent", 72), ("median", 73), ("optimiste", 74)])
 def test_carbone(scenario, ligne):
-    from moteur import carbone
-    from moteur.recettes.total import ligne_3_tva
+    from programmes.ecologie_de_droite.moteur_propre import carbone
+    from programmes.ecologie_de_droite.moteur_propre.recettes.total import ligne_3_tva
     comparer(carbone.effet_solde(P, ligne_3_tva(P) / 1e9)[scenario], "Carbone", ligne)
 
 
 @pytest.mark.parametrize("etale, ligne", [(False, 41), (True, 78)])
 def test_is_investissement(etale, ligne):
-    from moteur.is_investissement import cout_net_etat
+    from programmes.ecologie_de_droite.moteur_propre.is_investissement import cout_net_etat
     comparer(cout_net_etat(P, etale), "IS investissement", ligne)
 
 
@@ -106,19 +107,19 @@ def test_collectivites_point_fixe():
 
 
 def test_quotient():
-    from moteur.depenses import quotient as q
+    from programmes.ecologie_de_droite.moteur_propre.depenses import quotient as q
     assert q.cout(P)["total"] == pytest.approx(VAL[("Total", "B122")], abs=0.01)
 
 
 def test_economies_missions():
-    from moteur.depenses import economies_missions as em
+    from programmes.ecologie_de_droite.moteur_propre.depenses import economies_missions as em
     e = em.economies(P)
     assert e["missions"] == pytest.approx(VAL[("Budget État 2026", "D105")], abs=0.01)
     assert e["autres"] == pytest.approx(VAL[("Budget État 2026", "D111")], abs=0.01)
 
 
 def test_anciennes_pensions():
-    from moteur.anciennes_pensions import recette_nette
+    from programmes.ecologie_de_droite.moteur_propre.anciennes_pensions import recette_nette
     comparer(recette_nette(P), "Anciennes pensions", 85)
 
 

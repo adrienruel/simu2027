@@ -146,7 +146,7 @@ def test_tva_par_source_de_revenu(p):
     """TVA du statu quo calée sur la répartition des recettes ; le calcul par source de revenu (fonction de
     consommation, revenus OpenFisca) en explique au moins 85 % ; la TVA des retraités recoupe le calcul de la v235
     (recettes.autres.tva_retraites_actuelle, Md€ de 2024)."""
-    from moteur.recettes.autres import tva_retraites_actuelle
+    from programmes.ecologie_de_droite.moteur_propre.recettes.autres import tva_retraites_actuelle
     from moteur.unites import facteur
     tv = sq.tva(p, "prudent")
     assert tv[2029]["total"] == pytest.approx(sq.recettes_par_impot(p, "prudent")[2029]["tva"])

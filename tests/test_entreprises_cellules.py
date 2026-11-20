@@ -1,7 +1,7 @@
 """Entreprises par taille (moteur/entreprises_cellules.py)."""
 import pytest
 
-from moteur.entreprises_cellules import bilan, facteur_production, tailles
+from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import bilan, facteur_production, tailles
 from moteur.parametres import Parametres
 from moteur.recettes.entreprises import is_beneficiaires
 
@@ -39,7 +39,7 @@ def test_v235_inchangee():
 
 
 def test_dirigeants_payes_en_salaire():
-    from moteur.entreprises_cellules import arbitrage_tpe
+    from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import arbitrage_tpe
     a = {j: arbitrage_tpe(P, j) for j in ("crise", "prudent", "median", "optimiste")}
     assert a["crise"]["perte"] > a["prudent"]["perte"] > a["median"]["perte"] > a["optimiste"]["perte"] > 0
     # on ne perd jamais plus que l'IS et la flat tax du bénéfice passé en salaire
@@ -49,7 +49,7 @@ def test_dirigeants_payes_en_salaire():
 
 
 def test_bilan_avec_deduction_et_interets():
-    from moteur.entreprises_cellules import bilan_annees
+    from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import bilan_annees
     b = {x["taille"]: x for x in bilan(P)}
     for t, lignes in bilan_annees(P, (2037, 2073)).items():
         for x in lignes:
@@ -58,13 +58,13 @@ def test_bilan_avec_deduction_et_interets():
 
 
 def test_deduction_sur_l_is_local_aussi():
-    from moteur.is_investissement import cout_net_etat
+    from programmes.ecologie_de_droite.moteur_propre.is_investissement import cout_net_etat
     sans = Parametres().avec({"is_investissement.assiette_locale": False})
     assert cout_net_etat(P)[2037] == pytest.approx(cout_net_etat(sans)[2037] * 0.45 / 0.40, rel=1e-6)
 
 
 def test_avantage_du_fonds():
-    from moteur.entreprises_cellules import bilan_annees
+    from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import bilan_annees
     b = bilan_annees(P, (2037, 2073))
     for t in (2037, 2073):
         for x in b[t]:
@@ -74,7 +74,7 @@ def test_avantage_du_fonds():
 
 
 def test_strategie_emploi_du_fonds():
-    from moteur.entreprises_cellules import allocation_fonds, capital_efficace, capital_productif
+    from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import allocation_fonds, capital_efficace, capital_productif
     cap = capital_productif(P)
     a = allocation_fonds(P, 100.0)
     assert a["PME"] == pytest.approx(min(100.0, 0.25 * cap["PME"]))  # d'abord la taille la moins capitalistique

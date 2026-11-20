@@ -10,11 +10,11 @@ import json
 from pathlib import Path
 
 from moteur.emploi_canaux import tableau
-from moteur.is_investissement import cout_net_etat
+from programmes.ecologie_de_droite.moteur_propre.is_investissement import cout_net_etat
 from moteur import noyau
 from moteur.parametres import Parametres
-from moteur.recettes.total import recettes_nouveau_systeme
-from moteur.taux_effectifs import eatr_nouveau
+from programmes.ecologie_de_droite.moteur_propre.recettes.total import recettes_nouveau_systeme
+from programmes.ecologie_de_droite.moteur_propre.taux_effectifs import eatr_nouveau
 
 TAUX_ETAT = (0.40, 0.35, 0.30, 0.25, 0.20)
 DEDUCTION = (1.0, 0.5, 0.0)

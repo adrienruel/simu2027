@@ -1,9 +1,9 @@
 """Dépenses de santé année par année et volet santé de la TVA (feuille Santé, sections 3 à 8)."""
 from __future__ import annotations
 
-from .parametres import Parametres
-from .depenses.statique import sante_statique, economies_sante_a_terme
-from .tva import produits as produits_tva
+from moteur.parametres import Parametres
+from programmes.ecologie_de_droite.moteur_propre.depenses.statique import sante_statique, economies_sante_a_terme
+from moteur.tva import produits as produits_tva
 
 ANNEES = list(range(2029, 2074))
 SCENARIOS = ("prudent", "median", "optimiste")
@@ -55,8 +55,8 @@ def trajectoire_statu_quo(p: Parametres, s: str) -> dict:
     santé (rapport à la base de 2026) et celui des salaires depuis 2029. Sert de base quand
     sante_trajectoire.base_statu_quo est vrai (décision d'Adrien du 13/11/2026)."""
     import copy
-    from . import statu_quo as sq
-    from .unites import facteur
+    from moteur import statu_quo as sq
+    from moteur.unites import facteur
     if s == "prudent" and p.colonne_prudent != "prudent":
         # copie en_crise / en_scenario : le statu quo se calcule sur le vrai scénario, comme sq.blocs(p, s) du noyau
         s = p.colonne_prudent
@@ -135,7 +135,7 @@ def surplus_pib(p: Parametres, s: str) -> dict[int, float]:
 def _perimetre_propre(p: Parametres, T: dict) -> float:
     """Périmètre santé propre au programme, hors statu quo (Md€ de 2026) : gestion de l'assurance maladie, autonomie
     nette du revenu universel, moins le coût des agents hospitaliers aligné sur le privé."""
-    from .depenses.statique import autonomie, economie_hopitaux, securite_sociale
+    from programmes.ecologie_de_droite.moteur_propre.depenses.statique import autonomie, economie_hopitaux, securite_sociale
     return securite_sociale(p)[1] + autonomie(p) - economie_hopitaux(p) - T["autonomie"]
 
 
@@ -151,7 +151,7 @@ def bases_produits_nocifs(p: Parametres) -> dict[str, float]:
     """Dépense des ménages par produit nocif (Md€ de 2026) : part du panier médian (tva_produits.csv) × dépense de
     consommation des ménages (Insee 2025), portée en 2026 par la croissance en valeur."""
     import csv
-    from .distribution import DONNEES
+    from moteur.distribution import DONNEES
     parts = {l["categorie"]: float(l["part_median"]) for l in csv.DictReader((DONNEES / "tva_produits.csv").open(encoding="utf-8"))}
     conso = p.val("sante_produits_nocifs.consommation_menages_2025") * (1 + p.val("unites.pib_volume_2026")) * (1 + p.val("unites.deflateur_2026"))
     return {k: parts[cat] * conso for k, cat in PRODUITS_NOCIFS.items()}
@@ -236,7 +236,7 @@ def tva_sante(p: Parametres) -> dict[str, dict[int, float]]:
     ht = p.val("tva_sante_long_terme.hausse_prix_tabac")
     hausse = {"tabac": ht["prix_apres"] / ht["prix_avant"] - 1}
     import csv
-    from .distribution import DONNEES
+    from moteur.distribution import DONNEES
     ancien = {l["categorie"]: float(l["ancien_taux"]) for l in csv.DictReader((DONNEES / "tva_produits.csv").open(encoding="utf-8"))}
     hausse["alcool"] = (1 + pr["Alcool"].taux_total) / (1 + ancien["Alcool"]) - 1
     hausse["sucres"] = (1 + pr["Produits sucrés et ultra-transformés"].taux_total) / (1 + ancien["Produits sucrés et ultra-transformés"]) - 1

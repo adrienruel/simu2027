@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import csv
 
-from .parametres import PROGRAMME_DEFAUT, Parametres, dossier_programme
+from moteur.parametres import PROGRAMME_DEFAUT, Parametres, dossier_programme
 
 ANNEES = list(range(2029, 2074))
 
@@ -93,7 +93,7 @@ def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float], scenario: st
     if m["mesure"] in p.mesures_desactivees:
         return 0.0
     if m["mesure"].startswith("Ancien système : âge de départ porté"):
-        from .ancien_systeme import economie_age_legal
+        from moteur.ancien_systeme import economie_age_legal
         e = economie_age_legal(p)
         if e is not None:  # calculée génération par génération (module de population)
             return float(m["retenue"]) * e[t]
@@ -115,14 +115,14 @@ def effet(m: dict, t: int, p: Parametres, ancien: dict[int, float], scenario: st
 def ecart_scenario(p: Parametres, s: str) -> dict[int, float]:
     """Économies du registre dans le scénario s moins celles du prudent (Md€, + = plus d'économies) : le moteur du
     programme calcule ses lignes au prudent, cet écart passe au solde du médian et de l'optimiste (mesure « méthode » du programme, effets.py)."""
-    from .ancien_systeme import depenses as depenses_ancien
+    from moteur.ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
     reg = registre(p.programme)
     return {t: sum(effet(m, t, p, anc, s) - effet(m, t, p, anc) for m in reg) for t in ANNEES}
 
 
 def economies(p: Parametres) -> dict[int, float]:
-    from .ancien_systeme import depenses as depenses_ancien
+    from moteur.ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
     reg = registre(p.programme)
     return {t: sum(effet(m, t, p, anc) for m in reg) for t in ANNEES}
@@ -130,7 +130,7 @@ def economies(p: Parametres) -> dict[int, float]:
 
 def economies_par_mesure(p: Parametres) -> dict[str, dict[int, float]]:
     """Économie de chaque mesure du registre, année par année (Md€, positif = économie)."""
-    from .ancien_systeme import depenses as depenses_ancien
+    from moteur.ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
     out: dict[str, dict[int, float]] = {}
     for m in registre(p.programme):

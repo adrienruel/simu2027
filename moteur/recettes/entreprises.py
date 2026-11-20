@@ -56,7 +56,7 @@ def classes_entreprises(p: Parametres, scenario: str = "prudent") -> list[dict]:
     capte = benefice_capte(p, scenario)
     r_tva = p.val("entreprises.ratio_tva_non_deductible")
     taux = p.val("entreprises.taux_is_etat", scenario)
-    from ..entreprises_cellules import facteur_production
+    from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import facteur_production
     from ..is_bareme import actif as _bareme_actif, impot_etat
     fp = facteur_production(p, scenario)
     bareme = _bareme_actif(p)

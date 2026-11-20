@@ -8,14 +8,14 @@ from __future__ import annotations
 
 import csv
 
-from ..distribution import DONNEES
-from ..impot_unique import impot
-from ..parametres import Parametres
-from ..tva import consommation_ht, taux_pour_revenu
+from moteur.distribution import DONNEES
+from moteur.impot_unique import impot
+from moteur.parametres import Parametres
+from moteur.tva import consommation_ht, taux_pour_revenu
 
 
 def taux_is_total(p: Parametres, scenario: str = "prudent", benefice: float | None = None) -> float:
-    from ..is_bareme import actif as _bareme_actif, taux_marginal_etat
+    from moteur.is_bareme import actif as _bareme_actif, taux_marginal_etat
     if benefice is not None and _bareme_actif(p):
         return (taux_marginal_etat(p, benefice) + p.val("impot_local_entreprises.taux_communes")
                 + p.val("impot_local_entreprises.taux_regions"))
@@ -54,7 +54,7 @@ def classes(p: Parametres, scenario: str = "prudent") -> list[dict]:
             salaire = s + ((r - j - s) if reste_bareme <= reste_societe else 0.0)
         local = 0.0
         if p.val("impot_local.independants_sur_salaire"):
-            from ..collectivites import taux_impot_local
+            from moteur.collectivites import taux_impot_local
             local = max(0.0, salaire - p.val("impot_local.abattement")) * taux_impot_local(p, salaries=True)
         net = r - fiscal - j * (1 - is_t) - local
         sante, tva = taux_pour_revenu(net, p)

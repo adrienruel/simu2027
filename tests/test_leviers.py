@@ -41,7 +41,7 @@ def test_externalites_du_fonds_nulles_dans_le_prudent():
 
 def test_hausse_de_la_deduction_conditionnee_au_deficit():
     """La part déduite ne monte que les années qui suivent un déficit (prudent, avant clause, sans la hausse) sous 3 %."""
-    from moteur.is_investissement import annees_sous_seuil, part_deduite
+    from programmes.ecologie_de_droite.moteur_propre.is_investissement import annees_sous_seuil, part_deduite
     assert all(part_deduite(P, t + 1) >= part_deduite(P, t) for t in range(2036, 2073))
     for t in range(2037, 2074):
         attendu = 0.5 + 0.5 * min(1.0, annees_sous_seuil(P, t) / 10)
@@ -69,7 +69,7 @@ def test_baisse_du_rui_par_la_clause_respecte_le_plancher():
         r = c["regle"]
         if r["leviers"]["Baisse du revenu universel"] > 0:
             # RUI réel de l'année (règle d'indexation, moteur/inflation.indice_reel)
-            from moteur.inflation import indice_reel
+            from programmes.ecologie_de_droite.moteur_propre.inflation import indice_reel
             rui_t = P.val("rui.montant") * indice_reel(P)[t]
             assert r["details"]["Baisse du revenu universel"]["euros"] <= rui_t - plancher + 60, t
 
@@ -89,7 +89,7 @@ def test_regle_automatique_vise_3_pour_cent():
 
 
 def test_socle_supplementaire_quand_l_epargne_est_prise():
-    from moteur.retraites_transition import socle_supplementaire
+    from programmes.ecologie_de_droite.moteur_propre.retraites_transition import socle_supplementaire
     assert socle_supplementaire(P, {}, 2060) == 0.0
     assert socle_supplementaire(P, {t: 0.5 for t in range(2030, 2040)}, 2060) > 0
 

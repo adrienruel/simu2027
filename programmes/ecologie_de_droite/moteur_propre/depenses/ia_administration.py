@@ -1,8 +1,8 @@
 """Non-remplacement des départs dans les fonctions de gestion de l'État (feuilles IA ministères et IA administration)."""
 from __future__ import annotations
 
-from ..parametres import Parametres
-from .budget_etat import baisse_cout_agents_etat
+from moteur.parametres import Parametres
+from programmes.ecologie_de_droite.moteur_propre.depenses.budget_etat import baisse_cout_agents_etat
 
 ANNEES = list(range(2029, 2074))
 

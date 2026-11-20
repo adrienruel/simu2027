@@ -13,10 +13,10 @@ from moteur.recettes.tva_menages import part_rui_agent
 
 
 from moteur.parametres import Parametres
-from moteur.recettes.total import recettes_nouveau_systeme
-from moteur.depenses.statique import depenses
-from moteur.depenses import ia_administration
-from moteur.retraites_transition import cout_transition, cout_socle
+from programmes.ecologie_de_droite.moteur_propre.recettes.total import recettes_nouveau_systeme
+from programmes.ecologie_de_droite.moteur_propre.depenses.statique import depenses
+from programmes.ecologie_de_droite.moteur_propre.depenses import ia_administration
+from programmes.ecologie_de_droite.moteur_propre.retraites_transition import cout_transition, cout_socle
 
 ANNEES = list(range(2029, 2074))
 
@@ -59,7 +59,7 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     # Le reste suit les personnes en emploi.
     if p.val("macro.corrections_relecture"):
         from moteur.recettes import tva_menages
-        from moteur.carbone import recette_statique as recette_carbone
+        from programmes.ecologie_de_droite.moteur_propre.carbone import recette_statique as recette_carbone
         tva_ret = tva_menages.tva_retraites(p)
         part_ret = tva_ret / _rns["lignes"][3]
         rec_ret = (_rns["lignes"][5] + tva_ret) / 1e9 + recette_carbone(p) * (1 - part_ret)
@@ -78,22 +78,23 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     socle = cout_socle(p)
     from moteur.ancien_systeme import contribution_solidarite
     contrib_anciens = contribution_solidarite(p)
-    from moteur.retraites_transition import attente_rui_et_socle
+    from programmes.ecologie_de_droite.moteur_propre.retraites_transition import attente_rui_et_socle
     attente = attente_rui_et_socle(p)
     ia = ia_administration.economie_nette(p)
     from moteur.ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
-    from moteur.recettes import successions, autres
+    from programmes.ecologie_de_droite.moteur_propre.recettes import successions
+    from programmes.ecologie_de_droite.moteur_propre.recettes import autres
     succ = successions.supplement(p, autres.ligne_8_successions(p) / 1e9)
-    from moteur.ascenseur_social import annuel as ascenseur
+    from programmes.ecologie_de_droite.moteur_propre.ascenseur_social import annuel as ascenseur
     asc = ascenseur(p, autres.ligne_8_successions(p) / 1e9, p.val("successions.exoneration_entreprises"))
     asc_r, asc_d = {t: v["recettes"] for t, v in asc.items()}, {t: v["depenses"] for t, v in asc.items()}
-    from moteur.mesures import economies_par_mesure
+    from programmes.ecologie_de_droite.moteur_propre.mesures import economies_par_mesure
     eco_detail = economies_par_mesure(p)
-    from moteur import sante as module_sante
+    from programmes.ecologie_de_droite.moteur_propre import sante as module_sante
     sante, gf = module_sante.depenses(p, scenario_retenu), module_sante.garde_fou(p, scenario_retenu)
-    from moteur import objectifs
-    from moteur.anciennes_pensions import recette_nette
+    from programmes.ecologie_de_droite.moteur_propre import objectifs
+    from programmes.ecologie_de_droite.moteur_propre.anciennes_pensions import recette_nette
     anc_p = recette_nette(p)
     etu = objectifs.rui_etudiants(p)
     tva2028 = {t: objectifs.surcroit_tva_2028(p, t)[0] for t in ANNEES}
@@ -102,7 +103,7 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     from moteur.emploi import cout_reformes, cout_prime_jeunes
     em = {"g24": cout_reformes(p), "b155": cout_prime_jeunes(p) * p.val("emploi.retenues_calculees")["prime_jeunes"],
           "b154": p.val("emploi.prime_jeunes")["derniere_annee"]}
-    from moteur.is_investissement import cout_net_etat
+    from programmes.ecologie_de_droite.moteur_propre.is_investissement import cout_net_etat
     is_inv = cout_net_etat(p)
     # Renouvelables (Budget État 2026, lignes 136 à 144)
     soutien_2026, soutien_2029 = p.val("renouvelables.soutien_budget_2026"), p.val("renouvelables.soutien_2029")
@@ -114,14 +115,14 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
     # Total!B44 + B72 : le total compte l'IA en déduction ; on la rajoute puis on la retranche année par année
     autres_base += -l["ia_administration"]
     from moteur.demographie import indices
-    from moteur.depenses.statique import rui_enfants
+    from programmes.ecologie_de_droite.moteur_propre.depenses.statique import rui_enfants
     demo = indices(p, "prudent")
     # quotient familial et conjugal, RUI du conjoint : suivent les enfants et les couples (cellules de ménages)
     # au lieu de la population totale, comme le reste des autres dépenses
     menages_idx = None
     if p.val("cohortes.active") and p.val("demographie.active"):
-        from moteur.cohortes import menages
-        from moteur.depenses import quotient as _quotient
+        from programmes.ecologie_de_droite.moteur_propre.cohortes import menages
+        from programmes.ecologie_de_droite.moteur_propre.depenses import quotient as _quotient
         qc = _quotient.cout(p)
         qcj = p.val("quotient.conjugal")
         g_conj = qc["conjugal"] - qcj["retraites_forfait"]
@@ -134,13 +135,13 @@ def postes(p: Parametres, scenario_retenu: str = "prudent") -> dict[int, dict]:
                            "i_conj": conj[t] / conj[2029], "i_sans": mn[t]["sans_emploi_en_couple"] / mn[2029]["sans_emploi_en_couple"]}
                        for t in ANNEES}
     rui_enf = rui_enfants(p)
-    from moteur.depenses.statique import rui_salaries as _rui_salaries
+    from programmes.ecologie_de_droite.moteur_propre.depenses.statique import rui_salaries as _rui_salaries
     rui_sal = _rui_salaries(p)
     from moteur.demographie import creches_nouvelles
     creches = creches_nouvelles(p)
     contrib = p.val("epargne.contribution_transition") * flux_epargne_obligatoire(p) / 1e9 if p.val("epargne.contribution_transition") else 0.0
     # revalorisation de la RUI, de l'AAH et du socle (moteur/inflation.indice_reel : règle d'indexation)
-    from moteur.inflation import indice_reel
+    from programmes.ecologie_de_droite.moteur_propre.inflation import indice_reel
     idx_reel = indice_reel(p, scenario_retenu)
 
     def reval(t):

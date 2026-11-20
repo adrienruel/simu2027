@@ -1,8 +1,9 @@
 """Assemblage des lignes de recettes de la feuille Total (nouveau système, statique, €)."""
 from __future__ import annotations
 
-from ..parametres import Parametres
-from . import entreprises, impot_salaires, independants, retraites_croisiere, tva_menages
+from moteur.parametres import Parametres
+from moteur.recettes import entreprises, impot_salaires, retraites_croisiere, tva_menages
+from programmes.ecologie_de_droite.moteur_propre.recettes import independants
 
 
 def ligne_2_is(p: Parametres, scenario: str = "prudent") -> float:
@@ -35,8 +36,8 @@ def recettes_nouveau_systeme(p: Parametres, scenario: str = "prudent") -> dict:
     Les lignes calées sur des montants de 2024 passent par le facteur de recettes (une seule fois) ;
     les lignes calculées sur les distributions de 2026 et la contribution d'épargne n'y passent pas.
     """
-    from ..unites import facteur
-    from . import autres
+    from moteur.unites import facteur
+    from programmes.ecologie_de_droite.moteur_propre.recettes import autres
     l = lignes_calculees(p, scenario)
     tva_ent = entreprises.tva_non_deductible(p, scenario)
     l[7] = autres.ligne_7_dividendes(p)

@@ -2,7 +2,7 @@
 import pytest
 
 from moteur.depenses.ministeres import publics, trajectoire
-from moteur.depenses.statique import depenses
+from programmes.ecologie_de_droite.moteur_propre.depenses.statique import depenses
 from moteur.parametres import Parametres
 
 P = Parametres()

@@ -1,7 +1,7 @@
 """Déduction intégrale de l'investissement et fin de la déduction des intérêts (feuille IS investissement)."""
 from __future__ import annotations
 
-from .parametres import Parametres
+from moteur.parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 
@@ -31,7 +31,7 @@ def annees_sous_seuil(p: Parametres, t: int) -> int:
     if cle not in cache:
         # déficit du prudent avant règle de trajectoire, sans la hausse, lu dans les comptes du noyau (12/11/2026 :
         # ancien moteur supprimé). Dans le calcul de crise, la colonne prudente est celle de crise.
-        from . import noyau
+        from moteur import noyau
         sans = p.avec({"is_investissement.hausse_part_admise/debut": 9999, "is_investissement.hausse_part_admise/fin": 9999})
         sans.colonne_prudent, sans._surcharges, sans.taux_local_copie = p.colonne_prudent, p._surcharges, p.taux_local_copie
         # déficit de l'année avant les leviers de la règle (même convention que l'ancien moteur) ; le scénario sans
@@ -77,7 +77,7 @@ def cout_net_etat(p: Parametres, etale: bool = False, parts: dict | None = None)
     depuis le 30/10/2026, IS local (même assiette)."""
     montee = p.val("is_investissement.montee_etalee_annees") if etale else p.val("is_investissement.montee_annees")
     ded = _deduction_en_plus(p, montee, parts)
-    from .is_bareme import taux_investissement
+    from moteur.is_bareme import taux_investissement
     t_is = taux_investissement(p)  # taux unique, ou marginal pondéré par l'investissement (IS progressif)
     if p.val("is_investissement.assiette_locale"):
         # l'IS local (communes, régions) a la même assiette que l'IS de l'État (moteur/collectivites.py) : la
@@ -90,7 +90,7 @@ def cout_net_etat(p: Parametres, etale: bool = False, parts: dict | None = None)
 def baisse_cout_capital(p: Parametres) -> float:
     """Baisse du coût du capital pour les entreprises qui paient l'IS (part du coût actuel, ligne 21)."""
     z = p.val("is_investissement.valeur_actuelle_amortissements")
-    from .is_bareme import taux_investissement
+    from moteur.is_bareme import taux_investissement
     te = taux_investissement(p)
     tl = p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
     ta = p.val("is_investissement.taux_is_actuel")

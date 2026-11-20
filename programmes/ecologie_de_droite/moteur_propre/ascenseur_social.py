@@ -1,7 +1,7 @@
 """Ascenseur social : dépenses et recettes année par année (feuille Ascenseur social, lignes 50 à 106)."""
 from __future__ import annotations
 
-from .parametres import Parametres
+from moteur.parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 

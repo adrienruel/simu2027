@@ -1,10 +1,10 @@
 """Tests de cohérence du levier IS : taux légal et déduction de l'investissement."""
 
-from moteur.is_investissement import cout_net_etat
+from programmes.ecologie_de_droite.moteur_propre.is_investissement import cout_net_etat
 from moteur import noyau
 from moteur.parametres import Parametres
-from moteur.recettes.total import recettes_nouveau_systeme
-from moteur.taux_effectifs import eatr_nouveau
+from programmes.ecologie_de_droite.moteur_propre.recettes.total import recettes_nouveau_systeme
+from programmes.ecologie_de_droite.moteur_propre.taux_effectifs import eatr_nouveau
 from moteur.emploi_canaux import tableau
 
 P = Parametres()

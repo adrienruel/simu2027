@@ -1,6 +1,6 @@
 """Réformes du supérieur et carrières (moteur/carrieres.py)."""
-from moteur.carrieres import emplois_entree_plus_tot, prime_salaire
-from moteur.cohortes import agregats, indices as indices_cohortes
+from programmes.ecologie_de_droite.moteur_propre.carrieres import emplois_entree_plus_tot, prime_salaire
+from programmes.ecologie_de_droite.moteur_propre.cohortes import agregats, indices as indices_cohortes
 from moteur.demographie import effectifs, indices
 from moteur.parametres import Parametres
 

@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 
 from moteur.emploi_canaux import emplois_par_mesure
-from moteur.entreprises_cellules import arbitrage_tpe, bilan
+from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import arbitrage_tpe, bilan
 from moteur.parametres import Parametres
 from moteur.recettes.entreprises import is_beneficiaires
 from moteur import noyau

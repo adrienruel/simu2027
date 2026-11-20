@@ -613,7 +613,7 @@ if __name__ == "__main__":
     print(f"{nom} contre le statu quo (prudent) — effet de chaque mesure sur le solde (Md€ de 2026, + = mieux)")
     for x in sorted(bilan_mesures(prog, p, annees=annees), key=lambda x: -abs(x[2050])):
         print(f"  {x['nature']:<12}" + "".join(f"{x[t]:9.1f}" for t in annees) + f"  {x['nom']}")
-    from .mesures import ecartees
+    from programmes.ecologie_de_droite.moteur_propre.mesures import ecartees
     ec = ecartees(p.__class__(programme=nom)) if nom not in ("statu_quo", "vide") else []
     if ec:
         print(f"Économies saisies écartées (sources insuffisantes ou déclaratives) : {sum(x['plein_effet_md'] for x in ec):.1f} Md€ à plein effet")

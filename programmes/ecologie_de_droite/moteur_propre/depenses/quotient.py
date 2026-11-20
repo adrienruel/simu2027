@@ -1,9 +1,9 @@
 """Quotient familial, quotient conjugal et RUI du conjoint sous condition de ressources (feuille Quotient familial)."""
 from __future__ import annotations
 
-from ..impot_unique import impot
-from ..parametres import Parametres
-from ..recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
+from moteur.impot_unique import impot
+from moteur.parametres import Parametres
+from moteur.recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
 
 
 def gain_demi_part(revenu: float, p: Parametres) -> float:
@@ -69,7 +69,7 @@ def gains(p: Parametres) -> tuple[float, float]:
 
 
 def cout(p: Parametres) -> dict[str, float]:
-    from ..recettes.tva_menages import lire_inactifs
+    from moteur.recettes.tva_menages import lire_inactifs
     enfants = p.val("rui_complements.enfants") + p.val("rui_complements.enfants_parent_isole")
     familial = enfants * p.val("quotient.part_enfants_parent_imposable") * gain_moyen_par_enfant(p) / 1e9
     c = p.val("quotient.conjugal")

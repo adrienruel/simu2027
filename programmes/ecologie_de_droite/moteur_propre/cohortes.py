@@ -26,9 +26,9 @@ plus le remboursement de 35 % ; socle de la tranche = socle plein × (1 − rent
 """
 from __future__ import annotations
 
-from .demographie import _tranche, population
-from .epargne import epargne_annuelle, part_rui_salarie, revenu_par_euro_de_capital
-from .parametres import Parametres
+from moteur.demographie import _tranche, population
+from moteur.epargne import epargne_annuelle, part_rui_salarie, revenu_par_euro_de_capital
+from moteur.parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 AGES_ACTIFS = range(18, 70)
@@ -45,8 +45,8 @@ def _taux_emploi(p: Parametres) -> dict[int, float]:
 
 def _tranches(p: Parametres) -> list[dict]:
     """Tranches de coût de 2026 (privé et public aligné), avec leur part dans les salariés."""
-    from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
-    from .recettes.tva_menages import part_rui_agent
+    from moteur.recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026, facteur_alignement_public
+    from moteur.recettes.tva_menages import part_rui_agent
     d, e, a = effectifs_prive_2026(p), effectifs_public_2026(p), facteur_alignement_public(p)
     out = [{"cout": c, "n": n, "public": False, "part_rui": None} for c, n in zip(d.milieux, d.effectifs)]
     out += [{"cout": c * a, "n": n, "public": True, "part_rui": part_rui_agent(c)} for c, n in zip(e.milieux, e.effectifs)]
@@ -65,9 +65,9 @@ def _normalisation(p: Parametres, tr: list[dict]) -> float:
 
 def _par_cellule(p: Parametres, scenario: str = "prudent") -> dict[float, dict[str, float]]:
     """Grandeurs annuelles par salarié, pour chaque multiplicateur de profil (5 tranches d'âge) et chaque tranche."""
-    from .collectivites import taux_impot_local
-    from .impot_unique import impot
-    from .recettes.tva_menages import budget_actif
+    from moteur.collectivites import taux_impot_local
+    from moteur.impot_unique import impot
+    from moteur.recettes.tva_menages import budget_actif
     tr = _tranches(p)
     k = _normalisation(p, tr)
     taux_local = taux_impot_local(p, salaries=True)
@@ -95,7 +95,7 @@ def agregats(p: Parametres, jeu: str = "prudent", carrieres: bool = True) -> dic
     TVA, épargne obligatoire, masse salariale, nombre de salariés. carrieres : avec les effets des réformes du
     supérieur (moteur/carrieres.py : entrée plus tôt dans l'emploi, gain de salaire des générations diplômées ;
     le gain est appliqué en proportion à l'impôt, ce qui sous-estime un peu l'effet de la progressivité)."""
-    from .carrieres import emplois_entree_plus_tot, prime_salaire
+    from programmes.ecologie_de_droite.moteur_propre.carrieres import emplois_entree_plus_tot, prime_salaire
     cache = p.__dict__.setdefault("_cache", {})
     cle = ("cohortes_agregats", jeu, p.colonne_prudent, carrieres)
     if cle in cache:
@@ -147,7 +147,7 @@ def indices(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
 def socle_par_cellule(p: Parametres) -> list[dict]:
     """Socle annuel moyen par personne de chaque génération du nouveau système (22 à 49 ans en 2029), en euros
     de 2026 : moyenne entre ceux qui font carrière (capital accumulé) et ceux qui n'en ont pas (socle plein)."""
-    from .retraites_transition import _csv
+    from programmes.ecologie_de_droite.moteur_propre.retraites_transition import _csv
     cell = _par_cellule(p)
     pr, te = _profil(p), _taux_emploi(p)
     r = p.val("epargne.rendement_fonds")
@@ -193,8 +193,8 @@ def comptes(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
     moitié placée. Les points pris par la règle et l'épargne rendue sont comptés à part, dans le module macro.
 
     Renvoie par année : encours (début d'année), versements, rendements, paiements aux retraités."""
-    from .carrieres import emplois_entree_plus_tot, prime_salaire
-    from .epargne import capital_par_euro_de_rente
+    from programmes.ecologie_de_droite.moteur_propre.carrieres import emplois_entree_plus_tot, prime_salaire
+    from moteur.epargne import capital_par_euro_de_rente
     cache = p.__dict__.setdefault("_cache", {})
     cle = ("comptes", jeu, p.colonne_prudent)
     if cle in cache:
@@ -249,10 +249,10 @@ def fiscalite_retraites_nouveaux(p: Parametres) -> dict[int, dict[str, float]]:
     calculés sur la rente et le socle de chaque profil (euros de 2026, hors croissance). Mêmes règles que le
     budget de croisière (moteur/recettes/retraites_croisiere.py) : socle exonéré ou au barème, rente imposée à
     la flat tax sur sa part imposable ; TVA sur la consommation du revenu net."""
-    from .impot_unique import impot
-    from .recettes.tva_menages import consommation_ht
-    from .retraites_transition import survivants
-    from .tva import taux_pour_revenu
+    from moteur.impot_unique import impot
+    from moteur.recettes.tva_menages import consommation_ht
+    from programmes.ecologie_de_droite.moteur_propre.retraites_transition import survivants
+    from moteur.tva import taux_pour_revenu
     cache = p.__dict__.setdefault("_cache", {})
     if "fiscalite_retraites_nouveaux" in cache:
         return cache["fiscalite_retraites_nouveaux"]

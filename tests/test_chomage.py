@@ -49,6 +49,6 @@ def test_v235_inchangee():
 
 def test_attente_couvre_les_generations_apres_2007():
     """Entre l'âge légal et 67 ans, le RUI est versé aussi aux générations nées après 2007 (2072-2073)."""
-    from moteur.retraites_transition import attente_rui_et_socle
+    from programmes.ecologie_de_droite.moteur_propre.retraites_transition import attente_rui_et_socle
     a = attente_rui_et_socle(P)
     assert a[2073] == pytest.approx(a[2070], rel=0.05)

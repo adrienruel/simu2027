@@ -9,10 +9,10 @@ from __future__ import annotations
 import csv
 import math
 
-from .distribution import DONNEES
-from .epargne import revenu_par_euro_de_capital
-from .impot_unique import impot
-from .parametres import Parametres
+from moteur.distribution import DONNEES
+from moteur.epargne import revenu_par_euro_de_capital
+from moteur.impot_unique import impot
+from moteur.parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 
@@ -68,7 +68,7 @@ def survivants(p: Parametres, g: dict, an: int) -> float:
     versé aux résidents, arrivés après 2029 compris). Sinon (v235) : population de 2026 × survie de Gompertz."""
     age = int(g["age_2029"] + an - 2029)
     if p.val("demographie.active"):
-        from .demographie import _projection
+        from moteur.demographie import _projection
         return _projection("central")[an][min(age, 105)] if age <= 105 else 0.0
     return g["population_2026"] * survie(p, g["age_2029"], age)
 
@@ -119,7 +119,7 @@ def cout_socle(p: Parametres) -> dict[int, float]:
     ayant leurs annuités entre l'âge légal et l'âge d'accès général (décision du 29/10/2026). Socle par
     génération : cellules de salariés (moteur/cohortes.py) si le module est actif."""
     if p.val("cohortes.active") and p.val("demographie.active"):
-        from .cohortes import socle_par_cellule
+        from programmes.ecologie_de_droite.moteur_propre.cohortes import socle_par_cellule
         gens = socle_par_cellule(p)
     else:
         gens = socle_par_generation(p)
@@ -145,7 +145,7 @@ def attente_rui_et_socle(p: Parametres) -> dict[int, float]:
     a, legal, sans_emploi, part = _attente(p)
     if not a["active"]:
         return {an: 0.0 for an in ANNEES}
-    from .ancien_systeme import retraites_reportes
+    from moteur.ancien_systeme import retraites_reportes
     rui = p.val("rui.montant") * 12
     socle = p.val("retraites.socle_plein") * 12
     acces = p.val("epargne.age_acces_socle")
@@ -157,7 +157,7 @@ def attente_rui_et_socle(p: Parametres) -> dict[int, float]:
         # générations nées après la dernière du fichier (2007 : 22 ans en 2029), qui atteignent l'âge légal à
         # partir de 2072 : population de l'Insee (oubli corrigé le 30/10/2026 : 0,8 million de personnes en 2073)
         if p.val("demographie.active"):
-            from .demographie import _projection
+            from moteur.demographie import _projection
             plus_jeune = min(g["age_2029"] for g in gens)
             n += sum(_projection("central")[an][a_] for a_ in range(int(legal), int(acces)) if a_ - (an - 2029) < plus_jeune)
         nouveau = n * sans_emploi * (1 - part) * rui
@@ -210,7 +210,7 @@ def penibilite(p: Parametres) -> dict[int, float]:
 
 
 def cout_transition(p: Parametres) -> dict[int, dict]:
-    from .ancien_systeme import depenses as depenses_ancien
+    from moteur.ancien_systeme import depenses as depenses_ancien
     anc = depenses_ancien(p)
     socle = cout_socle(p)
     remb = remboursements(p)

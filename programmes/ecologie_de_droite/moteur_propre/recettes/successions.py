@@ -5,7 +5,7 @@ est interpolé linéairement entre les repères, puis gardé constant après le 
 """
 from __future__ import annotations
 
-from ..parametres import Parametres
+from moteur.parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
 

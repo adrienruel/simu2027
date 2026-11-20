@@ -3,10 +3,10 @@ from __future__ import annotations
 
 import functools
 
-from .impot_unique import impot
-from .parametres import Parametres
-from .retraites_transition import ANNEES, retraites_nouveau_systeme
-from .tva import consommation_ht, taux_pour_revenu
+from moteur.impot_unique import impot
+from moteur.parametres import Parametres
+from programmes.ecologie_de_droite.moteur_propre.retraites_transition import ANNEES, retraites_nouveau_systeme
+from moteur.tva import consommation_ht, taux_pour_revenu
 
 
 @functools.lru_cache(maxsize=None)
@@ -37,11 +37,11 @@ def _calcul_paires(rho: float, n: int = 400) -> list[list[float]]:
 def recette_nette(p: Parametres) -> dict[int, float]:
     """Recette nette ajoutée à la trajectoire (Md€, ligne 85) : impôt au barème net de la baisse des hautes pensions,
     moins l'impôt de croisière déjà compté pour ces retraités, plus la correction de TVA."""
-    from .recettes.retraites_croisiere import impot_retraites
-    from .recettes.tva_menages import tva_retraites
-    from .mesures import registre, effet
-    from .retraites_transition import economie_hautes_pensions_2026
-    from .ancien_systeme import serie as serie_ancien
+    from moteur.recettes.retraites_croisiere import impot_retraites
+    from moteur.recettes.tva_menages import tva_retraites
+    from programmes.ecologie_de_droite.moteur_propre.mesures import registre, effet
+    from programmes.ecologie_de_droite.moteur_propre.retraites_transition import economie_hautes_pensions_2026
+    from moteur.ancien_systeme import serie as serie_ancien
     anc = serie_ancien(p)
     deciles = p.val("anciennes_pensions.deciles_drees_2020")
     moy = sum(deciles) / len(deciles)
@@ -55,7 +55,7 @@ def recette_nette(p: Parametres) -> dict[int, float]:
     nouveaux = retraites_nouveau_systeme(p)
     fisc_cellules = None
     if p.val("cohortes.active") and p.val("demographie.active"):
-        from .cohortes import fiscalite_retraites_nouveaux
+        from programmes.ecologie_de_droite.moteur_propre.cohortes import fiscalite_retraites_nouveaux
         fisc_cellules = fiscalite_retraites_nouveaux(p)
     impot_croisiere = impot_retraites(p) / 1e9
     tva_croisiere = tva_retraites(p) / 1e9

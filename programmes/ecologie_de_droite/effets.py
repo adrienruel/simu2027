@@ -82,15 +82,15 @@ class Effets:
     def _preparer(self) -> None:
         p, q, s, jeu, m = self.p, self.q, self.s, self.jeu, self.m
         from moteur.emploi import entrees_macro, participation_inactifs, population_active, cout_smic_annuel
-        from moteur.hauts_revenus import baisse_revenus_declares, reactions
+        from programmes.ecologie_de_droite.moteur_propre.hauts_revenus import baisse_revenus_declares, reactions
         from moteur.demographie import chomage_tendanciel, indices as indices_demo
-        from moteur import is_investissement as isi
-        from moteur import sante as module_sante
-        from moteur.carbone import effet_solde
-        from moteur.recettes.total import ligne_3_tva, recettes_nouveau_systeme
+        from programmes.ecologie_de_droite.moteur_propre import is_investissement as isi
+        from programmes.ecologie_de_droite.moteur_propre import sante as module_sante
+        from programmes.ecologie_de_droite.moteur_propre.carbone import effet_solde
+        from programmes.ecologie_de_droite.moteur_propre.recettes.total import ligne_3_tva, recettes_nouveau_systeme
         from moteur.unites import facteur
-        from moteur.logement import reprise_amortissements
-        from moteur.mesures import ecart_scenario
+        from programmes.ecologie_de_droite.moteur_propre.logement import reprise_amortissements
+        from programmes.ecologie_de_droite.moteur_propre.mesures import ecart_scenario
         self.tend0 = tend0 = q.val("macro.tendance", "prudent")
         self.corr = corr = q.val("macro.corrections_relecture")
         pv = entrees_macro(q)
@@ -109,7 +109,7 @@ class Effets:
             # réactions des contribuables, sans ce que le canal commun compte déjà : les heures des classes moyennes et
             # la part réelle (travail en moins) de la réaction des hauts revenus ; restent l'optimisation (revenus
             # déclarés ailleurs, sociétés), l'effet croisé du capital et la localisation des emplois
-            from moteur import hauts_revenus as hr
+            from programmes.ecologie_de_droite.moteur_propre import hauts_revenus as hr
             js = "prudent" if jeu == "crise" else jeu
             js = js if js in hr.SCENARIOS else "prudent"
             self.ri = {"montant": (hr.perte_hauts_revenus(q, js) * (1 - m("part_reelle_hauts_revenus"))
@@ -132,7 +132,7 @@ class Effets:
         self.part_budget = part_budget = rec / pib_2026
         par_revenu = q.val("macro.impots_par_revenu") and q.val("cohortes.active") and q.val("demographie.active")
         if par_revenu:
-            from moteur.cohortes import agregats
+            from programmes.ecologie_de_droite.moteur_propre.cohortes import agregats
             from moteur.is_bareme import taux_local, taux_moyen
             a = agregats(q)
             taux_salaires = {t: (a[t]["impot"] + a[t]["local"] + a[t]["tva"]) / a[t]["masse"] for t in ANNEES}
@@ -237,7 +237,7 @@ class Effets:
                 k = max(0, min(1, (t - m("annee_seniors_long") + 1) / m("montee_seniors_long")))
                 self.reportes[t] = self.reportes.get(t, 0.0) + pers * k * self.ds[t]["adultes"]
         # entreprises par taille
-        from moteur import entreprises_cellules as ec
+        from programmes.ecologie_de_droite.moteur_propre import entreprises_cellules as ec
         self.ec = ec
         self.ent_cellules = ec.actif(q)
         self.k_productif = sum(ec.capital_productif(q).values())
@@ -273,7 +273,7 @@ class Effets:
         """Séries de PIB (Md€ ajoutés au PIB du statu quo) et de solde (Md€), canal par canal, hors fonds et hors
         règle, avec les emplois."""
         p, q, jeu, m, tend0, corr = self.p, self.q, self.jeu, self.m, self.tend0, self.corr
-        from moteur.taux_effectifs import ecart_localisation
+        from programmes.ecologie_de_droite.moteur_propre.taux_effectifs import ecart_localisation
         pv, pvb = self.pv, self.pv_brut
         pib, solde, emplois = {}, {}, {}
         for c in ("emploi_reformes", "seniors_long", "inactifs", "hauts_revenus", "investissement", "permis"):
@@ -289,7 +289,7 @@ class Effets:
         r_ecole = r_ia = r_adopt = 0.0
         self.facteur_reformes, self.perdus = {}, {}
         arb = q.val("entreprises_cellules.arbitrage_tpe") if self.ent_cellules else None
-        from moteur.entreprises_cellules import arbitrage_tpe
+        from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import arbitrage_tpe
         for t in ANNEES:
             n = self.n[t]
             # emploi des réformes
@@ -419,7 +419,7 @@ class Effets:
         return {t: {noms[c]: self.emplois[c][t] for c in self.emplois} for t in ANNEES}
 
     def jeunes(self) -> dict[int, float]:
-        from moteur.carrieres import emplois_entree_plus_tot
+        from programmes.ecologie_de_droite.moteur_propre.carrieres import emplois_entree_plus_tot
         return {t: sum(emplois_entree_plus_tot(self.q, self.jeu, t).values()) for t in ANNEES}
 
     # ------------------------------------------------------------------------------------------ fonds et règle
@@ -457,8 +457,8 @@ class Fonds:
         from moteur.tva import taux_effectifs as taux_eff
         self.fuite_rui = (1 + sum(taux_eff(q)["modeste"])) if E.corr else 1.0
         self.comptes_actifs = q.val("cohortes.active") and q.val("demographie.active") and E.corr
-        from moteur.depenses.statique import subventions_restees, rui_aah
-        from moteur.depenses import budget_etat
+        from programmes.ecologie_de_droite.moteur_propre.depenses.statique import subventions_restees, rui_aah
+        from programmes.ecologie_de_droite.moteur_propre.depenses import budget_etat
         cr = {x["mission"]: float(x["credits"]) for x in budget_etat._missions() if x["credits"] != "calcul"}
         repris = (cr["Infrastructures et services de transport"] + cr["Service public de l’énergie, énergie et climat"]
                   + cr["Investir pour la France de 2030"] + q.val("fonds_reprises.investissements_locaux_rentables"))
@@ -468,16 +468,16 @@ class Fonds:
         self.b24 = self.flux_brut - self.repris_net * 1.0
         self.rui_total = rui_aah(q) - q.val("rui_complements.aah") - q.val("rui_complements.aide_poste_entreprises_adaptees")
         if self.comptes_actifs:
-            from moteur.cohortes import comptes
+            from programmes.ecologie_de_droite.moteur_propre.cohortes import comptes
             self.cpt = comptes(q, jeu)
             self.cal = self.flux_brut / (self.cpt[2029]["versements"] / 1e9)
-        from moteur.inflation import indice_reel
+        from programmes.ecologie_de_droite.moteur_propre.inflation import indice_reel
         self.idx_reel = indice_reel(q, "prudent")
         if self.restit["active"]:
             from moteur.demographie import population as pop_demo, _tranche
             self.pop_age = pop_demo(q, "prudent")
             self.taux_age = {a: v for k, v in q.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
-        from moteur import is_investissement as isi
+        from programmes.ecologie_de_droite.moteur_propre import is_investissement as isi
         c8, c16 = isi.cout_net_etat(q), isi.cout_net_etat(q, etale=True)
         self.gain_etalement = {t: c8[t] - c16[t] for t in ANNEES}
         self.pa_ent = E.ent_cellules and E.dyn_ch
@@ -526,7 +526,7 @@ class Fonds:
             if not self.emprunt:  # emprunt : rembourser la dette n'est pas une dépense
                 sortie += self.paiement
         elif E.corr:
-            from moteur.retraites_transition import socle_supplementaire
+            from programmes.ecologie_de_droite.moteur_propre.retraites_transition import socle_supplementaire
             reval = (self.idx_reel[t] - 1) if q.val("revalorisation.rui_aah_socle_croissance") else 0.0
             sortie += socle_supplementaire(q, self.part_prelevee, t) * (1 + reval)
         self.paiements[t] = self.paiement
@@ -644,7 +644,7 @@ class Fonds:
         return Regle(q.val("clause.cible"), ordre, int(q.val("clause.derniere_annee")), [etal])
 
 
-from moteur.is_investissement import HausseDeduction as _HausseDeduction
+from programmes.ecologie_de_droite.moteur_propre.is_investissement import HausseDeduction as _HausseDeduction
 
 
 class HausseDeductionProgramme(_HausseDeduction):
@@ -661,7 +661,7 @@ class HausseDeductionProgramme(_HausseDeduction):
     def debut(self, t: int, etat: dict) -> dict:
         out = super().debut(t, etat)
         E, q, m = self.E, self.E.q, self.E.m
-        from moteur.is_investissement import part_deduite
+        from programmes.ecologie_de_droite.moteur_propre.is_investissement import part_deduite
         l25 = part_deduite(q, t, parts=self.parts)
         if E.ent_cellules:
             fl = E.ec.flux_investissement(q, E.jeu, lambda cle, _s: m(cle), E.isv["b4"] * E.b20 * E.isv["b21"] * l25,
@@ -675,7 +675,7 @@ class HausseDeductionProgramme(_HausseDeduction):
         dsolde = (dk * m("pib_par_euro_capital") * E.taux_benefices if (E.corr and E.par_revenu)
                   else (dk * m("pib_par_euro_capital") if E.corr else dpib) * E.part_budget)
         # érosion de l'IS : taux effectif de l'année avec la part déduite du chemin
-        from moteur.taux_effectifs import ecart_localisation
+        from programmes.ecologie_de_droite.moteur_propre.taux_effectifs import ecart_localisation
         jeu_eff = "crise" if (E.jeu == "prudent" and q.colonne_prudent == "crise") else E.jeu
         e0, e1 = ecart_localisation(q, jeu_eff, t), ecart_localisation(q, jeu_eff, t, self.parts)
         derosion = (0.0 if e0 is None else

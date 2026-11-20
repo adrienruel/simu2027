@@ -7,7 +7,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from moteur.restitution import donnees
+from programmes.ecologie_de_droite.moteur_propre.restitution import donnees
 
 RACINE = Path(__file__).resolve().parent.parent
 GABARIT = Path(__file__).resolve().parent / "gabarit_tableau.html"

@@ -89,7 +89,7 @@ def publics(p: Parametres, jeu: str = "prudent") -> dict[str, dict[int, float]]:
 def indice(p: Parametres, regle: str, public: str | None, t: int, idx: dict, g: float) -> float:
     n = t - 2029
     if regle == "prix":
-        from ..inflation import indice_reel
+        from programmes.ecologie_de_droite.moteur_propre.inflation import indice_reel
         return indice_reel(p)[t]
     if regle == "pib":
         return (1 + g) ** n * idx["emploi"][t]
@@ -101,8 +101,8 @@ def indice(p: Parametres, regle: str, public: str | None, t: int, idx: dict, g: 
 def postes(p: Parametres) -> list[dict]:
     """Postes de départ (Md€ de 2026, 2029) avec leur règle : missions de l'État (y compris les compléments de leur
     ligne du modèle), contribution à l'UE, et les autres dépenses hors quotient familial."""
-    from . import budget_etat
-    from .statique import depenses
+    from programmes.ecologie_de_droite.moteur_propre.depenses import budget_etat
+    from programmes.ecologie_de_droite.moteur_propre.depenses.statique import depenses
     lignes = budget_etat.lignes_modele(p)
     out = []
     par_ligne = {}

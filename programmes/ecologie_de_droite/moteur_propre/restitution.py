@@ -1,6 +1,6 @@
 """Restitution : les résultats d'une simulation mis en forme pour le tableau de bord (JSON).
 
-    from moteur.restitution import donnees
+    from programmes.ecologie_de_droite.moteur_propre.restitution import donnees
     d = donnees()          # dictionnaire sérialisable
 """
 from __future__ import annotations
@@ -10,9 +10,9 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
-from . import noyau
-from .noyau import ANNEES
-from .parametres import Parametres
+from moteur import noyau
+from moteur.noyau import ANNEES
+from moteur.parametres import Parametres
 
 ORDRE = ("crise", "prudent", "median", "optimiste")
 
@@ -40,7 +40,7 @@ def donnees(p: Parametres | None = None) -> dict:
     p = p or Parametres()
     prog = noyau.charger(p.programme)
     res = noyau.simuler(p, prog)
-    from . import statu_quo as sq
+    from moteur import statu_quo as sq
     annees = sorted(res["prudent"])
     scen = [s for s in ORDRE if s in res]
     series, libelles_canaux = {}, {}
@@ -75,11 +75,11 @@ def donnees(p: Parametres | None = None) -> dict:
                 "rui_euros": [_r(r[t]["details"][ru]["euros"], 3) for t in annees],
                 "reste": [_r(r[t]["reste_a_couvrir"], 3) for t in annees]}
     # 2027-2028, avant la bascule : communes à tous les scénarios (moteur/calendrier.py ; chômage sans le programme)
-    from .calendrier import annees_2027_2028
+    from moteur.calendrier import annees_2027_2028
     avant_ = annees_2027_2028(p)
     ch_ = None
     if p.val("demographie.active"):
-        from .demographie import chomage_tendanciel
+        from moteur.demographie import chomage_tendanciel
         ch_ = chomage_tendanciel(p)
     avant_bascule = {"annees": [2027, 2028],
                      "deficit": [_r(avant_[t]["deficit"]) for t in (2027, 2028)],
@@ -93,9 +93,9 @@ def donnees(p: Parametres | None = None) -> dict:
         series[s]["lignes"] = [{"cle": x["cle"], "libelle": x["libelle"], "poste": x["poste"], "nature": x["nature"],
                                 "valeurs": [_r(x["valeurs"].get(t, 0.0), 3) for t in annees]}
                                for x in reg.lignes.values() if any(abs(v) > 1e-6 for v in x["valeurs"].values())]
-        from .calendrier import transferts_collectivites
+        from moteur.calendrier import transferts_collectivites
         series[s]["postes"]["transferts_collectivites"] = [_r(transferts_collectivites(p), 3) for t in annees]
-    from .attribution import attribuer
+    from programmes.ecologie_de_droite.moteur_propre.attribution import attribuer
     att = attribuer(p)
     cles = ("solde_avant_clause", "statique", "economie", "dette_interets", "deficit_avant_clause", "chomage")
     attribution = {
@@ -128,13 +128,13 @@ def donnees(p: Parametres | None = None) -> dict:
                        "notes": {k: (p[k].note or "")[:160] for k in cles if k in p._p}}
     else:
         incertitude = None
-    from .menages_types import comparer
+    from moteur.menages_types import comparer
     menages = [{"libelle": x["libelle"], "actuel": round(x["actuel"]["revenu_disponible"]),
                 "nouveau": round(x["nouveau"]["revenu_disponible"]), "epargne": round(x["nouveau"]["epargne_obligatoire"]),
                 "impot_unique": round(x["nouveau"]["impot_unique"]), "impot_local": round(x["nouveau"]["impot_local"]),
                 "rui": round(x["nouveau"]["rui"] + x["nouveau"]["complements_enfants"]),
                 "ecart_conso": round(100 * x["ecart_consommation_pct"], 1)} for x in comparer(p)]
-    from .menages_types import futurs_retraites, nouveau
+    from moteur.menages_types import futurs_retraites, nouveau
     actifs = {"Carrière au SMIC": "smic", "Carrière au salaire médian": "median", "Carrière de cadre (100 000 €)": 100000}
     retraites_futurs = []
     for x in futurs_retraites(p):
@@ -142,8 +142,8 @@ def donnees(p: Parametres | None = None) -> dict:
         retraites_futurs.append({"libelle": x["libelle"], "rente": round(x["rente"]), "socle": round(x["socle"]),
                                  "net": round(x["net_mensuel"]), "net_actif": round(net_actif),
                                  "remplacement": round(100 * x["net_mensuel"] / net_actif)})
-    from .emploi_canaux import tableau as tableau_emploi
-    from .attribution import mesures as registre_mesures
+    from moteur.emploi_canaux import tableau as tableau_emploi
+    from programmes.ecologie_de_droite.moteur_propre.attribution import mesures as registre_mesures
     libelles = {m["id"]: m["libelle"] for m in registre_mesures()}
     alias = {"bas_salaires": "bas_salaires_rui", "entreprises_cout_travail": "reforme_entreprises_emploi",
              "droit_a_construire": "droit_a_construire_emploi"}
@@ -153,14 +153,14 @@ def donnees(p: Parametres | None = None) -> dict:
                        "canal": x["canal"], "crise": round(x["emplois_crise"]), "prudent": round(x["emplois_prudent"]),
                        "median": round(x["emplois_median"]), "optimiste": round(x["emplois_optimiste"]),
                        "gain": round(x["gain_par_emploi"]), "solde": round(x["solde_md"], 2)} for x in tableau_emploi(p)]
-    from .emploi import participation_inactifs
-    from .emploi_canaux import gains_par_canal
+    from moteur.emploi import participation_inactifs
+    from moteur.emploi_canaux import gains_par_canal
     pi, g_in = participation_inactifs(p), gains_par_canal(p, "prudent")["inactifs"]
     emploi_mesures.append({"libelle": "RUI : inactifs du halo du chômage qui prennent un emploi (travailler rapporte plus)",
                            "canal": "inactifs", "crise": round(pi["crise"]), "prudent": round(pi["prudent"]),
                            "median": round(pi["median"]), "optimiste": round(pi["optimiste"]), "gain": round(g_in),
                            "solde": round(pi["prudent"] * g_in / 1e9, 2)})
-    from . import demographie as demo_m
+    from moteur import demographie as demo_m
     population = None
     if p.val("demographie.active"):
         jalons = [2029, 2037, 2050, 2060, 2073]
@@ -170,8 +170,8 @@ def donnees(p: Parametres | None = None) -> dict:
         for j in ("crise", "prudent", "optimiste"):
             e = demo_m.effectifs(p, j)
             population["scenarios"][j] = {k: [round(e[t][k] / 1e6, 2) for t in jalons] for k in ("emploi", "enfants", "seniors", "total")}
-        from .ancien_systeme import serie as serie_ancien
-        from .retraites_transition import retraites_nouveau_systeme, cout_socle
+        from moteur.ancien_systeme import serie as serie_ancien
+        from programmes.ecologie_de_droite.moteur_propre.retraites_transition import retraites_nouveau_systeme, cout_socle
         sa, rn, cs = serie_ancien(p), retraites_nouveau_systeme(p), cout_socle(p)
         population["retraites"] = {"ancien": [round(sa[t]["retraites_millions"], 2) for t in jalons],
                                    "depenses_ancien": [round(sa[t]["depenses_md"]) for t in jalons],
@@ -179,20 +179,20 @@ def donnees(p: Parametres | None = None) -> dict:
                                    "socle": [round(cs[t]) for t in jalons]}
         _f = {t: res["prudent"][t]["dynamiques"]["fonds"] for t in jalons}
         population["fonds"] = {k: [round(_f[t].get(k, 0.0)) for t in jalons] for k in ("encours_comptes", "capital", "rentes")}
-        from .carrieres import actif as _car_actif, resume as _car_resume
+        from programmes.ecologie_de_droite.moteur_propre.carrieres import actif as _car_actif, resume as _car_resume
         if _car_actif(p):
             population["carrieres"] = {j: {k: [_car_resume(p, j, jalons)[t][k] for t in jalons]
                                            for k in ("emplois_milliers", "prime_salaire_pct")}
                                        for j in ("crise", "prudent", "median", "optimiste")}
         population["valeur_enfant"] = [{**x, "nouveau": round(x["nouveau"], 2)} for x in demo_m.valeur_enfant(p)]
     entreprises_tailles = None
-    from .entreprises_cellules import actif as _ent_actif, bilan as _ent_bilan, facteur_production as _fp
+    from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import actif as _ent_actif, bilan as _ent_bilan, facteur_production as _fp
     if _ent_actif(p):
-        from .entreprises_cellules import arbitrage_tpe as _arb
+        from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import arbitrage_tpe as _arb
         entreprises_tailles = {"facteur_production": round(_fp(p), 3),
                                "arbitrage": {j: {k: round(v, 2) for k, v in _arb(p, j).items()} for j in ("crise", "prudent", "median", "optimiste")},
                                "tailles": [{k: (round(v, 2) if isinstance(v, float) else v) for k, v in x.items()} for x in _ent_bilan(p)]}
-        from .entreprises_cellules import bilan_annees as _ent_bilan_annees
+        from programmes.ecologie_de_droite.moteur_propre.entreprises_cellules import bilan_annees as _ent_bilan_annees
         entreprises_tailles["annees"] = {t: [{k: (round(v, 2) if isinstance(v, float) else v) for k, v in x.items()} for x in l]
                                          for t, l in _ent_bilan_annees(p, (2037, 2073)).items()}
     corriges = sorted(x.cle for x in p if x.v235 is not None)

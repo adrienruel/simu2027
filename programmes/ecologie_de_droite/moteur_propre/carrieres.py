@@ -28,7 +28,7 @@ l'effet présent dès 2029 ne soit pas effacé par la normalisation.
 """
 from __future__ import annotations
 
-from .parametres import Parametres
+from moteur.parametres import Parametres
 
 
 def actif(p: Parametres) -> bool:
@@ -70,8 +70,8 @@ def prime_salaire(p: Parametres, jeu: str, t: int, a: int) -> float:
 
 def resume(p: Parametres, jeu: str = "prudent", annees=(2029, 2032, 2037, 2050, 2073)) -> dict:
     """Pour la restitution : emplois en plus (milliers) et gain moyen de salaire des salariés (%), par année."""
-    from .cohortes import AGES_ACTIFS, _taux_emploi
-    from .demographie import population
+    from programmes.ecologie_de_droite.moteur_propre.cohortes import AGES_ACTIFS, _taux_emploi
+    from moteur.demographie import population
     pops, te = population(p, jeu), _taux_emploi(p)
     out = {}
     for t in annees:

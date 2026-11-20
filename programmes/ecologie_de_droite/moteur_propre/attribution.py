@@ -18,10 +18,10 @@ from pathlib import Path
 
 import yaml
 
-from . import noyau
-from .mesures import registre as registre_economies
-from .noyau import ANNEES
-from .parametres import PROGRAMME_DEFAUT, Parametres, dossier_programme
+from moteur import noyau
+from programmes.ecologie_de_droite.moteur_propre.mesures import registre as registre_economies
+from moteur.noyau import ANNEES
+from moteur.parametres import PROGRAMME_DEFAUT, Parametres, dossier_programme
 
 def mesures(programme: str = PROGRAMME_DEFAUT) -> list[dict]:
     """Le registre complet du programme : entrées de registre_lois.yaml, puis une entrée par économie datée."""
@@ -64,7 +64,7 @@ def _etat(p: Parametres, scenario: str = "prudent") -> dict:
                 canaux[m.nom] = canaux.get(m.nom, 0.0) + v
         canaux["Fonds : capital, rendements, créances"] = res[t]["dynamiques"]["fonds"]["solde"]
         # phase E (noyau) : PIB perdu ou gagné par l'écart de taux au statu quo, pensions en retard sur les prix
-        from . import statu_quo as sq
+        from moteur import statu_quo as sq
         canaux["Macro bouclée : taux de marché et demande"] = (res[t].get("pib_taux", 0.0) * sq.recettes(p, scenario)[t]
                                                              / sq.pib(p, scenario)[t])
         canaux["Macro bouclée : pensions en retard sur les prix"] = res[t].get("erosion_pensions", 0.0)

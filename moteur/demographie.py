@@ -159,7 +159,7 @@ def taux_emploi_par_age(p: Parametres, t: int) -> dict[int, float]:
 def effectifs(p: Parametres, jeu: str = "prudent", carrieres: bool = True) -> dict[int, dict[str, float]]:
     """Effectifs par grand groupe et emploi (personnes), par année. carrieres : avec l'entrée plus tôt dans
     l'emploi due aux réformes du supérieur (moteur/carrieres.py)."""
-    from .carrieres import emplois_entree_plus_tot
+    from programmes.ecologie_de_droite.moteur_propre.carrieres import emplois_entree_plus_tot
     prof = {a: v for k, v in p.val("cohortes.profil_salaire_age").items() for a in _tranche(k)}
     out = {}
     for t, v in population(p, jeu).items():
@@ -186,7 +186,7 @@ def indices(p: Parametres, jeu: str = "prudent") -> dict[int, dict[str, float]]:
         out = {t: {g: e[t][g] / e0[g] for g in groupes} for t in ANNEES}
     # cellules de salariés (moteur/cohortes.py) : impôt, TVA, RUI gardé et épargne des salariés ; sans les
     # cellules, ces grandeurs suivent les personnes en emploi
-    from .cohortes import indices as indices_cohortes
+    from programmes.ecologie_de_droite.moteur_propre.cohortes import indices as indices_cohortes
     ic = indices_cohortes(p, jeu) if p.val("cohortes.active") and p.val("demographie.active") else None
     for t in ANNEES:
         for k in ("impot", "tva", "rui", "epargne"):

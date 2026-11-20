@@ -94,3 +94,21 @@ J0 : ils ne servent qu'à Écologie de droite ou à ses outils, et restent en pl
 `objectifs`, `recettes.autres`, `recettes.independants`, `recettes.successions`, `recettes.total`, `restitution`,
 `retraites_transition`, `sante`, `sensibilite`, `taux_effectifs`.
 
+
+## Modules propres sortis de `moteur/` (20/11/2026, phase Q, chantier 0.3)
+
+Les 26 modules de la liste ci-dessus qu'aucun outil publié ne charge sont déplacés dans
+`programmes/ecologie_de_droite/moteur_propre/` (avec `recettes/` et `depenses/`). Vérifié en traçant les imports
+(`python -X importtime`) de l'export du comparateur, des variantes de la dette, des audits, de la couverture micro, de
+la démographie, du Monte Carlo et de la page publique, et des outils de la micro : aucun de ces modules n'y est chargé.
+
+Restent dans `moteur/` :
+- `menages_types` et `sensibilite`, chargés par les ménages types du comparateur et l'inventaire C1 ;
+- les modules que l'export charge, même s'ils ont des branches propres à Écologie de droite (`impot_unique`,
+  `epargne`, `collectivites`, `tva`, `ancien_systeme`…) : à scinder avec la bibliothèque de mesures.
+
+Dix modules communs gardent un import paresseux vers `moteur_propre`, dans des branches que seul Écologie de droite
+emprunte : `ancien_systeme`, `calendrier`, `collectivites`, `demographie`, `depenses/ministeres`, `emploi`,
+`emploi_canaux`, `is_bareme`, `noyau` (`mesures.ecartees`), `recettes/entreprises`. Ce sont les modules mêlés à scinder.
+Les notes des fichiers de paramètres citent encore les anciens chemins : elles ne sont pas modifiées, pour ne pas
+changer l'empreinte des paramètres.

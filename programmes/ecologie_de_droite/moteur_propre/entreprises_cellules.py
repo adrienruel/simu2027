@@ -23,8 +23,8 @@ from __future__ import annotations
 
 import csv
 
-from .distribution import DONNEES
-from .parametres import Parametres
+from moteur.distribution import DONNEES
+from moteur.parametres import Parametres
 
 
 def actif(p: Parametres) -> bool:
@@ -71,13 +71,13 @@ def facteur_production(p: Parametres, jeu: str = "prudent") -> float:
 def bilan(p: Parametres) -> list[dict]:
     """Impôts des entreprises par taille, système actuel contre nouveau (Md€ de 2026, budget statique, avant
     comportements). Bénéfices et impôts de production ramenés aux totaux du budget statique."""
-    from .recettes.entreprises import classes_entreprises
-    from .unites import facteur
+    from moteur.recettes.entreprises import classes_entreprises
+    from moteur.unites import facteur
     cl = classes_entreprises(p)
     benef = sum(c["benefice_median"] * c["entreprises_beneficiaires"] for c in cl) / 1e9
     prod = sum(c["impots_production"] * c["entreprises_beneficiaires"] for c in cl) / 1e9
-    from .is_bareme import benefice_representatif, impot_etat, taux_local
-    from .is_bareme import actif as bareme_actif
+    from moteur.is_bareme import benefice_representatif, impot_etat, taux_local
+    from moteur.is_bareme import actif as bareme_actif
     taux_unique = p.val("entreprises.taux_is_etat") + taux_local(p)
     d = p.val("entreprises_cellules.part_production_deficitaires") if actif(p) else 0.0
     recup = p.val("entreprises_cellules.recuperation_reports")
@@ -108,7 +108,7 @@ def flux_investissement(p: Parametres, s: str, m, t_coef: float, par_taille: boo
     m : accesseur des paramètres macro du scénario ; t_coef : b4 × b20 × b21 × part déduite de l'année
     (déduction immédiate, même pour toutes les tailles, le taux nouveau étant le même)."""
     z = p.val("is_investissement.valeur_actuelle_amortissements")
-    from .is_bareme import taux_local, taux_taille
+    from moteur.is_bareme import taux_local, taux_taille
     inv = p.val("is_investissement.investissement_snf_2025")
     total, detail = 0.0, {}
     for x in tailles(p):
@@ -133,9 +133,9 @@ def arbitrage_tpe(p: Parametres, jeu: str = "prudent") -> dict:
     contre IS (État et local) et flat tax sur la part distribuée du bénéfice gardé. Le barème est linéaire par
     morceaux : l'optimum est à un seuil. Renvoie la perte de recettes (Md€ de 2026, positive = perte) et le
     bénéfice passé en salaire (Md€), à plein effet."""
-    from .collectivites import taux_impot_local
-    from .impot_unique import impot
-    from .recettes.entreprises import classes_entreprises
+    from moteur.collectivites import taux_impot_local
+    from moteur.impot_unique import impot
+    from moteur.recettes.entreprises import classes_entreprises
     cache = p.__dict__.setdefault("_cache", {})
     cle = ("arbitrage_tpe", jeu, p.colonne_prudent)
     if cle in cache:
@@ -144,7 +144,7 @@ def arbitrage_tpe(p: Parametres, jeu: str = "prudent") -> dict:
     if not actif(p) or not a["active"]:
         cache[cle] = {"perte": 0.0, "salaire": 0.0}
         return cache[cle]
-    from .is_bareme import impot_etat, taux_local as _tl, tranches as _tranches
+    from moteur.is_bareme import impot_etat, taux_local as _tl, tranches as _tranches
     ft = p.val("capital.flat_tax_dividendes")
     d = p.val("entreprises_cellules.arbitrage_tpe_part_distribuee", jeu)
     recours = p.val("entreprises_cellules.arbitrage_tpe_recours", jeu)
@@ -187,9 +187,9 @@ def bilan_annees(p: Parametres, annees=(2032, 2037, 2050, 2073)) -> dict:
     (moteur/is_investissement.py), certaines années, ramené à la taille de l'économie de 2029 (Md€ de 2026, hors
     croissance) pour être comparable au bilan statique. Déduction : au prorata de l'investissement de chaque taille ;
     intérêts : au prorata de la valeur ajoutée (faute de données sur la dette par taille, hypothèse)."""
-    from .is_investissement import cout_net_etat, interets_non_deduits
+    from programmes.ecologie_de_droite.moteur_propre.is_investissement import cout_net_etat, interets_non_deduits
     g = p.val("macro.tendance", "prudent")
-    from .is_bareme import taux_investissement
+    from moteur.is_bareme import taux_investissement
     t_is = taux_investissement(p)
     if p.val("is_investissement.assiette_locale"):
         t_is += p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
@@ -199,7 +199,7 @@ def bilan_annees(p: Parametres, annees=(2032, 2037, 2050, 2073)) -> dict:
     base = bilan(p)
     # capital nouveau du fonds (prudent) : réparti entre les tailles ; avantage de financement = capital × (coût du
     # financement de marché − rendement du capital du fonds), équivalent d'une aide à l'appareil productif
-    from . import noyau
+    from moteur import noyau
     comptes = noyau.resultats(p, ("prudent",))["prudent"]
     fonds = {t: {"capital": c["dynamiques"].get("fonds", {}).get("capital_fin", 0.0)} for t, c in comptes.items()}
     marche = p.val("entreprises_cellules.cout_financement_marche")

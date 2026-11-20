@@ -8,16 +8,16 @@ from __future__ import annotations
 import csv
 import math
 
-from .distribution import DONNEES
-from .impot_unique import impot, taux_marginal
-from .parametres import Parametres
-from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
+from moteur.distribution import DONNEES
+from moteur.impot_unique import impot, taux_marginal
+from moteur.parametres import Parametres
+from moteur.recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
 
 SCENARIOS = ("prudent", "median", "optimiste")
 
 
 def _taux_local(p):
-    from .collectivites import taux_impot_local
+    from moteur.collectivites import taux_impot_local
     return taux_impot_local(p)
 
 
@@ -38,7 +38,7 @@ def revenu_apres_reaction(cout: float, tm_actuel: float, p: Parametres, s: str) 
 
 def perte_hauts_revenus(p: Parametres, s: str) -> float:
     loc = _taux_local(p)
-    from .is_bareme import actif as _bareme_actif, taux_marginal_etat
+    from moteur.is_bareme import actif as _bareme_actif, taux_marginal_etat
     is_total = p.val("entreprises.taux_is_etat") + p.val("impot_local_entreprises.taux_communes") + p.val("impot_local_entreprises.taux_regions")
     soc, nord = p.val("hauts_revenus.part_par_societe", s), p.val("hauts_revenus.regle_nordique", s)
     total = 0.0
@@ -67,7 +67,7 @@ def perte_croisee_capital(p: Parametres, s: str) -> float:
 def perte_classes_moyennes(p: Parametres, s: str) -> float:
     lo, hi = p.val("hauts_revenus.classes_moyennes_bornes")
     d = effectifs_prive_2026(p)
-    from .systeme_actuel import nets_prive
+    from moteur.systeme_actuel import nets_prive
     nets = nets_prive(p)["actuel"]
     loc = _taux_local(p)
     total = 0.0
@@ -84,9 +84,9 @@ def perte_classes_moyennes(p: Parametres, s: str) -> float:
 
 def perte_localisation(p: Parametres, s: str) -> float:
     """Emplois perdus par la localisation : recette en moins par rapport à l'emploi moyen créé (Md€)."""
-    from .emploi import gain_par_emploi
-    from .emploi import _taux_local as tl
-    from .epargne import taux_epargne
+    from moteur.emploi import gain_par_emploi
+    from moteur.emploi import _taux_local as tl
+    from moteur.epargne import taux_epargne
     loc_emplois = _localisation(p)
     cout = effectifs_prive_2026(p).milieux[13]  # emploi au salaire médian (Salariés du privé!C15, 42 500 €)
     def gain_median(sc):
@@ -102,8 +102,8 @@ def perte_localisation(p: Parametres, s: str) -> float:
 
 def _localisation(p: Parametres) -> dict[str, float]:
     """Emplois gagnés ou perdus par la localisation des activités (Emploi ligne 234)."""
-    from .emploi import JEUX
-    from .recettes import entreprises
+    from moteur.emploi import JEUX
+    from moteur.recettes import entreprises
     d = effectifs_prive_2026(p)
     ent = entreprises._lire("entreprises.csv")
     ia = p.val("entreprises.is_actuel")

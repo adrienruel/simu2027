@@ -5,14 +5,17 @@ from __future__ import annotations
 
 
 
-from ..parametres import Parametres
-from ..unites import facteur
-from ..recettes import tva_menages
-from ..recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
-from ..epargne import part_rui_salarie
-from ..recettes.independants import classes as classes_independants
-from . import budget_etat, ia_administration, economies_missions, quotient
-from ..retraites_transition import cout_transition_moyen
+from moteur.parametres import Parametres
+from moteur.unites import facteur
+from moteur.recettes import tva_menages
+from moteur.recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
+from moteur.epargne import part_rui_salarie
+from programmes.ecologie_de_droite.moteur_propre.recettes.independants import classes as classes_independants
+from programmes.ecologie_de_droite.moteur_propre.depenses import budget_etat
+from programmes.ecologie_de_droite.moteur_propre.depenses import ia_administration
+from programmes.ecologie_de_droite.moteur_propre.depenses import economies_missions
+from programmes.ecologie_de_droite.moteur_propre.depenses import quotient
+from programmes.ecologie_de_droite.moteur_propre.retraites_transition import cout_transition_moyen
 
 MD = 1e9
 

@@ -7,8 +7,8 @@ from __future__ import annotations
 
 import csv
 
-from ..distribution import DONNEES
-from ..parametres import Parametres
+from moteur.distribution import DONNEES
+from moteur.parametres import Parametres
 
 
 def _missions():

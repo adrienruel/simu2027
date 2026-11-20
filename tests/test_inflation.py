@@ -1,7 +1,7 @@
 """Inflation et règle d'indexation (moteur/inflation.py)."""
 import pytest
 
-from moteur.inflation import indice_reel, serie
+from programmes.ecologie_de_droite.moteur_propre.inflation import indice_reel, serie
 from moteur.parametres import Parametres
 
 P = Parametres()

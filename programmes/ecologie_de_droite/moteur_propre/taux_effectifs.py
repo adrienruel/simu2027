@@ -14,8 +14,8 @@ Projet type de l'OCDE (Corporate Tax Statistics, méthodologie de Hanappi, 2018)
 """
 from __future__ import annotations
 
-from .is_investissement import part_admise
-from .parametres import Parametres
+from programmes.ecologie_de_droite.moteur_propre.is_investissement import part_admise
+from moteur.parametres import Parametres
 
 
 def eatr(taux: float, z: float, p: float, r: float, delta: float) -> float:
@@ -30,7 +30,7 @@ def eatr(taux: float, z: float, p: float, r: float, delta: float) -> float:
 
 def part_impots_production(p: Parametres) -> float:
     """Impôts de production assis sur le capital, en part du résultat avant ces impôts (système actuel)."""
-    from .recettes import entreprises
+    from moteur.recettes import entreprises
     ent = entreprises._lire("entreprises.csv")
     assiette = sum(e["benefice_median"] * e["entreprises_beneficiaires"] for e in ent) / 1e9
     prod = p.val("entreprises.impots_production_2023") - p.val("entreprises.impots_production_hors_marchand")
@@ -52,7 +52,7 @@ def eatr_nouveau(p: Parametres, jeu: str = "prudent", annee: int | None = None, 
     """IS du nouveau système (État et local), déduction immédiate pour la part de l'investissement concernée,
     sans impôts de production."""
     c = p.val("entreprises.taux_effectifs")
-    from .is_bareme import taux_grandes
+    from moteur.is_bareme import taux_grandes
     taux = (taux_grandes(p) + p.val("impot_local_entreprises.taux_communes")
             + p.val("impot_local_entreprises.taux_regions"))  # activités mobiles : taux des grandes entreprises
     z0 = p.val("is_investissement.valeur_actuelle_amortissements")
