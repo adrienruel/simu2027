@@ -136,7 +136,7 @@ retailleau_mesures:
     statut: HYPOTHESE
     source: "Se loger mieux et moins cher (28/05/2026), p. 33 ; encadrement : revenus fonciers ≈ 40 Md€ ; statut de la loi de finances pour 2026 au statu quo (≈ 0,1 à 0,2 Md€) ; option au PFU et amortissement élargi"
   credit_famille:
-    valeur: {id: RET-SOC-03, enfants: garde, instrument: capital_entreprises, libelle: "Garde d'enfants : crédit d'impôt famille déplafonné, exonération relevée à 7 000 €", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
+    valeur: {id: RET-SOC-03, enfants: true, instrument: capital_entreprises, libelle: "Garde d'enfants : crédit d'impôt famille déplafonné, exonération relevée à 7 000 €", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -0.85, prudent: -0.8, median: -0.8, optimiste: -0.75}}
     unite: md_eur
     annee_euros: 2026
@@ -314,7 +314,7 @@ retailleau_mesures:
     statut: HYPOTHESE
     source: "Se loger mieux et moins cher (28/05/2026), p. 15 ; calcul : 9 000 € × ≈ 350 000 à 400 000 logements neufs par an (objectif de 450 000)"
   conge_naissance:
-    valeur: {id: RET-SOC-02, instrument: transferts_actifs, libelle: "Congé de naissance jusqu'aux six mois de l'enfant", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
+    valeur: {id: RET-SOC-02, enfants: conge, instrument: transferts_actifs, libelle: "Congé de naissance jusqu'aux six mois de l'enfant", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
              montant: {crise: 0.75, prudent: 0.7, median: 0.7, optimiste: 0.65}}
     unite: md_eur
     annee_euros: 2026

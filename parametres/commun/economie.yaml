@@ -644,15 +644,20 @@ demographie:
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : allocation de naissance de 2 500 € en Espagne (2007-2010) : +3 % de naissances (González et Trommlerová, 2023), soit ≈ 2 % par 100 € par an d'enfance ; Israël, baisse de l'allocation de 150 shekels par mois (≈ 400 € par an) en 2003 : −7,5 % de fécondité (Cohen, Dehejia et Romanov, 2013) ; une grande part de ces effets est de calendrier (revue CFFP, Université de Sherbrooke, 2026)."
-    note: "Variation relative des naissances pour 100 € par an de soutien en plus par enfant. Crise : borne haute (l'effet le plus défavorable si le soutien baisse) ; prudent et médian : la moitié, effets de calendrier retirés ; optimiste : le quart."
+    note: "Variation relative des naissances pour 100 € par an de soutien en plus par enfant. Crise : borne haute (l'effet le plus défavorable si le soutien baisse) ; prudent et médian : la moitié, effets de calendrier retirés ; optimiste : le quart. Valeurs définies pour une baisse du soutien ; une hausse lit le scénario miroir (moteur/naissances.py, phase Q, 20/11/2026) : en crise, 0,5 % ; en optimiste, 2 %."
+  conge_part_soutien:
+    valeur: 0.0
+    unite: sans_unite
+    statut: DECISION
+    note: "DÉCISION d'Adrien du 20/11/2026 (phase Q) : part du coût d'un congé indemnisé (`enfants: conge`) comptée comme soutien monétaire par enfant. 0 : l'indemnité remplace un salaire, le gain net du ménage n'est pas la dépense publique, et aucune élasticité de la fécondité à la durée du congé n'est encore sourcée pour la France (pistes à vérifier : Lalive et Zweimüller, QJE 2009, Autriche ; Raute, J. Public Econ. 2019, Elterngeld). Avant : 1 (le coût entier). Le temps partiel parental payé au-dessus du temps travaillé (Philippe) reste un soutien monétaire : son coût est le gain net."
   natalite_montee: {valeur: 3, unite: sans_unite, statut: HYPOTHESE, note: "Années pour que l'effet sur les naissances soit plein, à partir de 2030 (premières naissances conçues sous le nouveau système)."}
-  cout_place_accueil: {valeur: 19450, unite: eur_an, annee_euros: 2026, statut: SOURCE, source: "Onape, édition 2025 : prix de revient d'une place en crèche PSU", note: "Canal commun des naissances (moteur/naissances.py) : places d'accueil = dépense de fonctionnement des mesures « garde » / ce coût. Même valeur que famille.cout_place_fonctionnement d'Écologie de droite."}
+  cout_place_accueil: {valeur: 19450, unite: eur_an, annee_euros: 2026, statut: SOURCE, source: "Onape, édition 2025 : prix de revient d'une place en crèche PSU", note: "Coût complet d'une place, repère pour le champ cout_place (coût public) des mesures « garde » ; depuis la phase Q (20/11/2026), le canal commun des naissances ne lit plus ce paramètre. Même valeur que famille.cout_place_fonctionnement d'Écologie de droite."}
   creches_effet:
     valeur: {crise: 0.0, prudent: 0.014, median: 0.028, optimiste: 0.028}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Bauernschuster, Hener et Rainer (Journal of the European Economic Association, 2016) : +10 points de couverture des moins de 3 ans en accueil public → +1,2 naissance pour 1 000 femmes, soit +2,8 % ; pas un simple effet de calendrier"
-    note: "Hausse relative des naissances pour +10 points de couverture (mise à l'échelle des places créées : famille.creches_nouvelles). Médian et optimiste : l'estimation allemande ; prudent : la moitié (transposition à la France, où la couverture est déjà plus haute) ; crise : aucun effet. v235 : pas de places créées."
+    note: "Hausse relative des naissances pour +10 points de couverture (mise à l'échelle des places créées : famille.creches_nouvelles). Médian et optimiste : l'estimation allemande ; prudent : la moitié (transposition à la France, où la couverture est déjà plus haute) ; crise : aucun effet. v235 : pas de places créées. Canal commun (moteur/naissances.py) : places = dépense / cout_place de chaque mesure (coût public, phase Q, 20/11/2026) ; une baisse de places lirait le scénario miroir."
 
 # --- Ancien système : pensions génération par génération (29 octobre 2026) ---------------
 ancien_systeme:

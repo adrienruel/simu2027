@@ -416,7 +416,7 @@ philippe_mesures:
     source: "Site (page Comptes publics, 12/11/2026) : durée du RSA limitée, sans autre précision ; encadrement : RSA ≈ 12 Md€ pour ≈ 1,8 million de foyers (DREES, Minima sociaux, édition 2025), une large part y restant plusieurs années ; exceptions attendues (handicap, parents isolés, plus de 60 ans) ; l'alinéa 11 du Préambule de 1946 (droit à des moyens convenables d'existence) borne la mesure"
     note: "Même traitement que la condition de résidence de Le Pen : crise à zéro (mesure censurée ou vidée par les exceptions) ; 3 à 10 % du RSA sinon. Les sortants vers l'emploi ne sont pas comptés en emplois en plus."
   garde_enfants:
-    valeur: {id: PHI-SOC-07, enfants: garde, libelle: "« Plan Marshall » pour la garde d'enfants", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2032,
+    valeur: {id: PHI-SOC-07, enfants: garde, cout_place: 14600, libelle: "« Plan Marshall » pour la garde d'enfants", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2032,
              montant: {crise: 1.2, prudent: 0.9, median: 0.7, optimiste: 0.45}}
     unite: md_eur
     annee_euros: 2026

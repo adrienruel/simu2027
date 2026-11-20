@@ -450,7 +450,8 @@ class ProgrammeSimple:
                     volume.add(f"{x['id']} — {x['libelle']}")
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
-                                    enfants=x.get("enfants"), fonds=x.get("fonds", "")))
+                                    enfants=x.get("enfants"), fonds=x.get("fonds", ""),
+                                    cout_place=x.get("cout_place", 0.0)))
                 if x.get("deductible_is"):
                     # impôts de production déductibles du bénéfice : l'IS bouge en sens inverse (règle commune)
                     rc = p.val("entreprises.retour_is_charges")

@@ -92,6 +92,7 @@ MIROIR_CLES = (
     "offre.travail_heures", "offre.demande_travail", "offre.travail_couples", "offre.travail_part_pib",
     "offre.elasticite_capital_menages", "offre.elasticite_consommation", "offre.elasticite_cout_travail",
     "offre.elasticite_successions", "offre.elasticite_transferts_actifs",
+    "demographie.natalite_semi_elasticite", "demographie.creches_effet",
 )
 
 

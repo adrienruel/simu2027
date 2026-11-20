@@ -365,7 +365,7 @@ tondelier_mesures:
     statut: HYPOTHESE
     source: "≈ 1,37 million d'allocataires (DREES, 2025) × 250 € × 12 = 4,1 Md€ ; plafond de ressources relevé d'autant : +5 % d'allocataires"
   conges_naissance:
-    valeur: {id: PRE-14, libelle: "Congé d'accueil de 16 semaines à 100 % pour les deux parents ; congé de naissance à 80 % et 3 mois", poste: famille, moteur: bloc:famille, debut: 2028, plein: 2029,
+    valeur: {id: PRE-14, enfants: conge, libelle: "Congé d'accueil de 16 semaines à 100 % pour les deux parents ; congé de naissance à 80 % et 3 mois", poste: famille, moteur: bloc:famille, debut: 2028, plein: 2029,
              montant: {crise: 5.5, prudent: 5.5, median: 5.5, optimiste: 5.5}}
     unite: md_eur
     annee_euros: 2026
