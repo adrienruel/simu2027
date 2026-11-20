@@ -1,6 +1,6 @@
 """Écarts au point de référence (roadmap de la simulation globale, chantier 0.4, 20/11/2026).
 
-Le point de référence est l'état de `main` au 20/11/2026 (b03ea64, étiquette `ref-2026-11-20`). Ses résultats clés
+Le point de référence est l'état de `main` au 20/11/2026 à 21 h (4665947, après le canal des naissances, étiquette `ref-2026-11-20`). Ses résultats clés
 sont gardés dans `reference/ref-2026-11-20/`. Chaque phase de la roadmap publie son effet contre eux : on ne cherche
 pas à les retrouver, on explique les écarts.
 
