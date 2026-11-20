@@ -196,6 +196,23 @@ class ProgrammeSimple:
         a = sq.prelevements_activite(p)["public"]
         return (a["prelevements"] + a["impot_revenu"]) / a["cout"]
 
+    def mesures_formation(self, p: Parametres, s: str, part_fp: float) -> list[Mesure]:
+        """Coût du canal commun « formation_superieure » (phase Q, moteur/qualifications.py) : places en plus × coût
+        net × part publique, en dépense de l'État ; une part revient en prélèvements sur les rémunérations, comme une
+        mesure « fp ». Le gain (PIB) est dans les canaux déclarés."""
+        cle = f"{self.nom}_canaux.formation_superieure"
+        if cle not in self.pt._p:
+            return []
+        from . import qualifications
+        x = self.pt._p[cle].valeur
+        c = qualifications.cout(p, s, x, TOUTES)
+        lib = x.get("libelle", f"{x['objectif']:,.0f} diplômés ({x['filiere']}) par an".replace(",", " "))
+        ident = x.get("id", "")
+        nom = f"{ident} — {lib}" if ident else f"Formation supérieure : {lib}"
+        return [Mesure(nom, "etat_missions", c, note="formation_superieure"),
+                Mesure(f"{nom}, prélèvements sur ces rémunérations", "recettes", {t: part_fp * v for t, v in c.items()},
+                       note="formation_superieure")]
+
     # ------------------------------------------------------------------ économies annoncées sans mesures
     def enveloppe_economies(self, p: Parametres, s: str, idx: dict, liste: list[Mesure]) -> list[Mesure]:
         """Économies annoncées mais non détaillées, déduites du programme domaine par domaine (décision d'Adrien du
@@ -475,6 +492,7 @@ class ProgrammeSimple:
             for t, v in getattr(self, "cout_postes_calcules", {}).get((id(p), s), {}).items():
                 cout_postes[t] = cout_postes.get(t, 0.0) + v
             liste.extend(calc)
+            liste.extend(self.mesures_formation(p, s, part_fp))
             liste.extend(self.mesures_ecologie(p, s))
             liste.extend(self.enveloppe_economies(p, s, idx, liste))
             if getattr(self, "variante_annonces", False):

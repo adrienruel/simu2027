@@ -337,13 +337,6 @@ philippe_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : supercalculateurs publics (Jean Zay, Alice Recoque ≈ 0,5 Md€) ; investissement surtout privé et européen"
-  ingenieurs:
-    valeur: {id: PHI-NUM-03, libelle: "100 000 ingénieurs formés par an (contre 40 000) en cinq ans", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2032, fp: true,
-             montant: {crise: 1.5, prudent: 1.2, median: 1.0, optimiste: 0.8}}
-    unite: md_eur
-    annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Encadrement : coût d'un élève ingénieur ≈ 10 000 à 15 000 € par an (MESR) ; +60 000 diplômés par an sur trois à cinq ans d'études, en partie privé"
   temps_partiel_parental:
     valeur: {id: PHI-SOC-02, instrument: transferts_actifs, libelle: "Temps partiel parental à 80 % payé 100 % pendant deux mois", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
              montant: {crise: 0.3, prudent: 0.25, median: 0.2, optimiste: 0.15}}
@@ -484,6 +477,12 @@ philippe_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 philippe_canaux:
+  formation_superieure:
+    valeur: {id: PHI-NUM-03, libelle: "100 000 ingénieurs formés par an", filiere: ingenieurs, objectif: 100000, debut: 2028, plein: 2032}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Site de campagne, programme, « Les grands défis de demain », intelligence artificielle : « 100 000 ingénieurs formés par an »"
+    note: "Phase Q (20/11/2026) : canal commun formation_superieure (moteur/qualifications.py) ; flux du statu quo : 47 400 (IESF, 2024 ; Philippe écrit « contre 40 000 », non sourcé). Lecture du calendrier : places ouvertes à partir de 2028, objectif « en cinq ans » lu comme des places pleines en 2032 ; diplômés en plus après la durée des études. Coût, absorption, déclassement et départs : barème commun formation_superieure. Remplace la dépense forfaitaire de 0,8 à 1,5 Md€ (sans effet sur le PIB) du 07/11/2026."
   logement:
     valeur: {intensite: 0.25, debut: 2028}
     unite: sans_unite

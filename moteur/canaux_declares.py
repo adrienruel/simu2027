@@ -12,6 +12,7 @@ porte un statut et une source comme tout paramètre.
       reformes_structurelles: {valeur: {pmr: 1.0, epl: 0.5, debut: 2028}, ...}   (barème commun, 12/11/2026)
       adoption_ia:       {valeur: {part: {par scénario : part du gain de l'IA en plus du statu quo}}, ...}
       ecole:             {valeur: {niveau_eleves: {par scénario : écart-type}, debut: 2045, annees: 40}, ...}
+      formation_superieure: {valeur: {filiere: ingenieurs, objectif: 100000, debut: 2028, plein: 2032}, ...}
       regle_trajectoire: {valeur: {cible: 0.03, derniere_annee: 2073, scenarios: [crise, prudent, median, optimiste],
                                    leviers: [{nom: "…", poste: recettes, capacite_pib: 0.01}]}, ...}
 
@@ -23,6 +24,9 @@ Formules :
   productivité des réformes (le canal « productivite » libre n'est plus utilisé par aucun programme) ;
 - adoption de l'IA : gain de productivité de l'IA du statu quo (macro.ia_productivite) × part, cumulé ;
 - école : niveau des élèves × macro.croissance_par_ecart_type, monté linéairement, cumulé ;
+- formation supérieure (phase Q, moteur/qualifications.py) : diplômés en plus par cohorte, absorbés par le besoin de
+  postes ou en excédent (déclassés, partis), écart de productivité au cursus remplacé ; entrée retardée dans l'emploi
+  des étudiants en plus. Le coût est compté par le programme (ProgrammeSimple), avec le multiplicateur ;
 - le PIB en plus rapporte au solde le dividende de productivité du statu quo (statu_quo.dividende_programme, sur le profil du programme depuis la phase A1 ; avant, statu_quo.dividende_productivite :
   recettes en plus moins dépenses indexées en plus, ≈ 12 % après dix ans), comme pour tous les gains de productivité ;
 - baisse de l'écart de taux : plus un canal déclaré ; règle commune du noyau, gagnée par le résultat (chaque année de
@@ -40,7 +44,7 @@ from .noyau import ANNEES, Levier, Mesure, Regle
 from .parametres import Parametres
 
 CANAUX = ("fraude", "fraude_tva", "productivite", "reformes_structurelles", "adoption_ia", "ecole", "regle_trajectoire",
-          "solde_migratoire", "logement")
+          "solde_migratoire", "logement", "formation_superieure")
 
 
 def declares(prog) -> dict:
@@ -166,6 +170,11 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme
             r = (1 + r) * (1 + niveau * k * part) - 1
             serie[t] = y[t] * r
         ajouter("école (niveau des élèves)", serie)
+    if "formation_superieure" in d:
+        from . import qualifications
+        x = qualifications.pib(p, s, d["formation_superieure"])
+        ajouter("formation supérieure, diplômés en plus (productivité)", x["productivite"])
+        ajouter("formation supérieure, entrée retardée des étudiants en plus", x["entree_retardee"])
     emplois, actifs = {t: 0.0 for t in ANNEES}, {t: 0.0 for t in ANNEES}
     # naissances (canal commun, moteur/naissances.py) : mesures de soutien aux enfants du programme
     from . import naissances
