@@ -117,3 +117,15 @@ Publié (après clause) : 5,27 % en 2029, 4,10 % en 2037, 4,87 % en 2050.
 - Santé : la trajectoire est déjà calée sur des projections qui comptent le vieillissement ; pas de second compte.
 - Le système actuel souffrirait davantage de la même démographie (répartition) : la comparaison avec le statu
   quo reste à faire.
+
+## Canal commun du comparateur (`moteur/naissances.py`, phase Q du 20/11/2026)
+
+Pour les programmes comparés, l'effet sur les naissances = semi-élasticité × soutien monétaire moyen par enfant
+mineur / 100 € + effet des crèches × points de couverture des moins de 3 ans / 10 points.
+- Soutien monétaire : prestations du poste famille et mesures `enfants: true` (impôt par enfant, prêt à taux zéro,
+  crédit d'impôt garde). Les congés indemnisés (`enfants: conge`) comptent pour `demographie.conge_part_soutien` (0).
+- Places : dépense de fonctionnement des mesures `enfants: garde` / leur `cout_place` public. La qualité ou la
+  gratuité ne créent pas de place.
+- Sens : la semi-élasticité (crise 2 %, prudent et médian 1 %, optimiste 0,5 %) vaut pour une baisse du soutien ;
+  une hausse lit le scénario miroir. L'effet des places (crise 0, prudent 1,4 %, médian et optimiste 2,8 %) vaut pour
+  une hausse ; une baisse lirait le miroir.

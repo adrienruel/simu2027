@@ -1922,3 +1922,32 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
   14,72 % (14,5). Taux moyen des prélèvements sur les pensions à barèmes sur les prix : 12,0 → 13,0 % en 2073
   (tolérance du test portée à 1,5 point). Effet du recalage : statu quo 2037 9,07 → 9,09 %, 2050 18,55 → 18,78 %.
 - Sorties régénérées : export, statu quo, audits, variantes, micro vieillie de tous les programmes, incertitude.
+
+## 20/11/2026 — Phase Q : canal commun des naissances corrigé
+
+Demande d'Adrien (« Philippe aide dès le premier enfant, pourquoi Mélenchon est si haut ? »). Trois défauts de
+`moteur/naissances.py`, corrigés pour tous les programmes :
+- **Congés indemnisés** comptés euro pour euro comme soutien par enfant, alors que l'indemnité remplace un salaire.
+  Marqués `enfants: conge` (LFI-PRE-06, PRE-14, RET-SOC-02) et comptés pour `demographie.conge_part_soutien` = 0
+  (DÉCISION) : aucune élasticité de la fécondité à la durée du congé n'est sourcée pour la France. Le temps partiel
+  parental de Philippe (80 % travaillé, 100 % payé) reste un soutien : son coût est le gain net.
+- **Places d'accueil** : toute dépense « garde » était divisée par le coût complet d'une place (19 450 €). La qualité
+  des crèches de Mélenchon (gratuité, salaires, encadrement, PMI : 2,8 Md€) créait ≈ 145 000 places fictives ; ses
+  500 000 places étaient à l'inverse sous-comptées (son chiffrage : ≈ 9 000 € publics par place). Désormais chaque
+  mesure « garde » porte son `cout_place` public, obligatoire (Mélenchon 9 000 €, Glucksmann 12 000 €, Philippe
+  14 600 € = 75 % de 19 450 €) ; la qualité de Mélenchon passe en `enfants: false` ; le crédit d'impôt garde de
+  Retailleau, qui ne crée pas de place, devient un soutien monétaire (`enfants: true`).
+- **Sens de l'effet** : la semi-élasticité est définie pour une baisse (crise 2 %, optimiste 0,5 %) ; une hausse du
+  soutien la lisait telle quelle, si bien que la crise donnait le plus de naissances. Une hausse lit maintenant le
+  scénario miroir (crise 0,5 %, optimiste 2 % ; prudent et médian inchangés à 1 %), une baisse de places aussi. Les
+  deux paramètres sont ajoutés aux miroirs du Monte Carlo (`incertitude.MIROIR_CLES`).
+- Effet sur les naissances au prudent (fécondité, statu quo 1,45) : Philippe 1,553 → 1,555 (+7,1 → +7,25 %),
+  Mélenchon 1,574 → 1,523 (+8,5 → +5,0 %), Tondelier 1,544 → 1,482 (+6,5 → +2,2 %), Glucksmann 1,472 → 1,481,
+  Retailleau 1,463 → 1,460. Les naissances de Philippe en 2037 (+3,4 %) restent sous sa fécondité : son solde
+  migratoire plus bas retire des naissances (fécondité relative des immigrées 1,26).
+- Effet sur les déficits de 2037 au prudent : Tondelier 12,77 → 12,68 %, Mélenchon 27,29 → 27,22 %, les autres à
+  0,01 point près (plus de naissances coûte avant 2037 : prestations, école). En crise et en optimiste, jusqu'à
+  0,28 point (Philippe en crise 15,25 → 14,97 %).
+- Limites : soutien moyen par enfant, sans effet du rang ni du revenu ; gratuité des crèches sans effet prix.
+- Sorties régénérées : micro vieillie de tous les programmes, export, démographie, statu quo, variantes, audits,
+  ménages types, incertitude, page du comparateur.

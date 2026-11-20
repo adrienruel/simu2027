@@ -30,7 +30,9 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     # emploi.depenses_chomage_programme (18/11/2026, phase L, roadmap 4.1) : règle de modèle commune
     # 18/11/2026, roadmap 5.4 à 5.6 : générosité des allocations, prime d'activité des emplois, retour de l'incidence
     # demographie.ecole_cohortes et taux_emploi_tendance (19/11/2026, phase P) : options de modèle communes
-    assert decisions == ["calendrier.inflation", "demographie.ecole_cohortes", "demographie.scenario_fecondite",
+    # demographie.conge_part_soutien (20/11/2026, phase Q) : règle commune du canal des naissances (congés indemnisés)
+    assert decisions == ["calendrier.inflation", "demographie.conge_part_soutien", "demographie.ecole_cohortes",
+                         "demographie.scenario_fecondite",
                          "demographie.taux_emploi_tendance", "emploi.depenses_chomage_programme",
                          "emploi.generosite_programme", "emploi.prime_activite_emplois", "entreprises.incidence_retour_budget",
                          "incertitude.correlation",
