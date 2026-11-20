@@ -1,0 +1,144 @@
+cle,programme,menage,libelle,ordre,revenu_disponible_actuel,revenu_disponible,ecart_an,ecart_mois,ecart_pct,mesures_codees
+Statu quo|jeune_smic,Statu quo,jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20165.0,0.0,0.0,0.0,0
+Statu quo|seul_smic,Statu quo,seul_smic,Personne seule au SMIC,1,20165.0,20165.0,0.0,0.0,0.0,0
+Statu quo|seul_median,Statu quo,seul_median,"Personne seule, salaire médian",2,25027.0,25027.0,0.0,0.0,0.0,0
+Statu quo|seul_cadre,Statu quo,seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47275.0,0.0,0.0,0.0,0
+Statu quo|parent_isole_smic,Statu quo,parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,26516.0,0.0,0.0,0.0,0
+Statu quo|couple_deux_smic_deux_enfants,Statu quo,couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,41945.0,0.0,0.0,0.0,0
+Statu quo|couple_median_inactif_deux_enfants,Statu quo,couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35297.0,0.0,0.0,0.0,0
+Statu quo|couple_deux_medians,Statu quo,couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,49744.0,0.0,0.0,0.0,0
+Statu quo|couple_cadre_median_deux_enfants,Statu quo,couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,78462.0,0.0,0.0,0.0,0
+Statu quo|retraite_seul,Statu quo,retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,0
+Statu quo|couple_retraites,Statu quo,couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,0
+Arthaud (Lutte ouvrière) — partiel|jeune_smic,Arthaud (Lutte ouvrière) — partiel,jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,24799.0,4634.0,386.0,22.98,2
+Arthaud (Lutte ouvrière) — partiel|seul_smic,Arthaud (Lutte ouvrière) — partiel,seul_smic,Personne seule au SMIC,1,20165.0,24799.0,4634.0,386.0,22.98,2
+Arthaud (Lutte ouvrière) — partiel|seul_median,Arthaud (Lutte ouvrière) — partiel,seul_median,"Personne seule, salaire médian",2,25027.0,28920.0,3893.0,324.0,15.56,2
+Arthaud (Lutte ouvrière) — partiel|seul_cadre,Arthaud (Lutte ouvrière) — partiel,seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47275.0,0.0,0.0,0.0,2
+Arthaud (Lutte ouvrière) — partiel|parent_isole_smic,Arthaud (Lutte ouvrière) — partiel,parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,30942.0,4426.0,369.0,16.69,2
+Arthaud (Lutte ouvrière) — partiel|couple_deux_smic_deux_enfants,Arthaud (Lutte ouvrière) — partiel,couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,52985.0,11040.0,920.0,26.32,2
+Arthaud (Lutte ouvrière) — partiel|couple_median_inactif_deux_enfants,Arthaud (Lutte ouvrière) — partiel,couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,37942.0,2644.0,220.0,7.49,2
+Arthaud (Lutte ouvrière) — partiel|couple_deux_medians,Arthaud (Lutte ouvrière) — partiel,couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,57747.0,8003.0,667.0,16.09,2
+Arthaud (Lutte ouvrière) — partiel|couple_cadre_median_deux_enfants,Arthaud (Lutte ouvrière) — partiel,couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,80858.0,2395.0,200.0,3.05,2
+Arthaud (Lutte ouvrière) — partiel|retraite_seul,Arthaud (Lutte ouvrière) — partiel,retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,2
+Arthaud (Lutte ouvrière) — partiel|couple_retraites,Arthaud (Lutte ouvrière) — partiel,couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,2
+Attal (Renaissance)|jeune_smic,Attal (Renaissance),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20925.0,761.0,63.0,3.77,1
+Attal (Renaissance)|seul_smic,Attal (Renaissance),seul_smic,Personne seule au SMIC,1,20165.0,20925.0,761.0,63.0,3.77,1
+Attal (Renaissance)|seul_median,Attal (Renaissance),seul_median,"Personne seule, salaire médian",2,25027.0,26348.0,1320.0,110.0,5.28,1
+Attal (Renaissance)|seul_cadre,Attal (Renaissance),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,49681.0,2406.0,200.0,5.09,1
+Attal (Renaissance)|parent_isole_smic,Attal (Renaissance),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,26962.0,446.0,37.0,1.68,1
+Attal (Renaissance)|couple_deux_smic_deux_enfants,Attal (Renaissance),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,43466.0,1521.0,127.0,3.63,1
+Attal (Renaissance)|couple_median_inactif_deux_enfants,Attal (Renaissance),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,36154.0,857.0,71.0,2.43,1
+Attal (Renaissance)|couple_deux_medians,Attal (Renaissance),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,52386.0,2642.0,220.0,5.31,1
+Attal (Renaissance)|couple_cadre_median_deux_enfants,Attal (Renaissance),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,81083.0,2620.0,218.0,3.34,1
+Attal (Renaissance)|retraite_seul,Attal (Renaissance),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,1
+Attal (Renaissance)|couple_retraites,Attal (Renaissance),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,1
+Bertrand (Nous France)|jeune_smic,Bertrand (Nous France),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20055.0,-109.0,-9.0,-0.54,3
+Bertrand (Nous France)|seul_smic,Bertrand (Nous France),seul_smic,Personne seule au SMIC,1,20165.0,20165.0,0.0,0.0,0.0,3
+Bertrand (Nous France)|seul_median,Bertrand (Nous France),seul_median,"Personne seule, salaire médian",2,25027.0,25398.0,371.0,31.0,1.48,3
+Bertrand (Nous France)|seul_cadre,Bertrand (Nous France),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47635.0,360.0,30.0,0.76,3
+Bertrand (Nous France)|parent_isole_smic,Bertrand (Nous France),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,26516.0,0.0,0.0,0.0,3
+Bertrand (Nous France)|couple_deux_smic_deux_enfants,Bertrand (Nous France),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,41945.0,0.0,0.0,0.0,3
+Bertrand (Nous France)|couple_median_inactif_deux_enfants,Bertrand (Nous France),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35297.0,0.0,0.0,0.0,3
+Bertrand (Nous France)|couple_deux_medians,Bertrand (Nous France),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,50488.0,744.0,62.0,1.5,3
+Bertrand (Nous France)|couple_cadre_median_deux_enfants,Bertrand (Nous France),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,79182.0,720.0,60.0,0.92,3
+Bertrand (Nous France)|retraite_seul,Bertrand (Nous France),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,3
+Bertrand (Nous France)|couple_retraites,Bertrand (Nous France),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38674.0,378.0,32.0,0.99,3
+Glucksmann (Place publique)|jeune_smic,Glucksmann (Place publique),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,21386.0,1221.0,102.0,6.06,2
+Glucksmann (Place publique)|seul_smic,Glucksmann (Place publique),seul_smic,Personne seule au SMIC,1,20165.0,21386.0,1221.0,102.0,6.06,2
+Glucksmann (Place publique)|seul_median,Glucksmann (Place publique),seul_median,"Personne seule, salaire médian",2,25027.0,25337.0,309.0,26.0,1.24,2
+Glucksmann (Place publique)|seul_cadre,Glucksmann (Place publique),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47786.0,512.0,43.0,1.08,2
+Glucksmann (Place publique)|parent_isole_smic,Glucksmann (Place publique),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27264.0,748.0,62.0,2.82,2
+Glucksmann (Place publique)|couple_deux_smic_deux_enfants,Glucksmann (Place publique),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,44569.0,2624.0,219.0,6.26,2
+Glucksmann (Place publique)|couple_median_inactif_deux_enfants,Glucksmann (Place publique),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35499.0,201.0,17.0,0.57,2
+Glucksmann (Place publique)|couple_deux_medians,Glucksmann (Place publique),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,50363.0,619.0,52.0,1.24,2
+Glucksmann (Place publique)|couple_cadre_median_deux_enfants,Glucksmann (Place publique),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,79239.0,776.0,65.0,0.99,2
+Glucksmann (Place publique)|retraite_seul,Glucksmann (Place publique),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,2
+Glucksmann (Place publique)|couple_retraites,Glucksmann (Place publique),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,2
+Le Pen (Rassemblement national) — partiel|jeune_smic,Le Pen (Rassemblement national) — partiel,jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20055.0,-109.0,-9.0,-0.54,4
+Le Pen (Rassemblement national) — partiel|seul_smic,Le Pen (Rassemblement national) — partiel,seul_smic,Personne seule au SMIC,1,20165.0,20165.0,0.0,0.0,0.0,4
+Le Pen (Rassemblement national) — partiel|seul_median,Le Pen (Rassemblement national) — partiel,seul_median,"Personne seule, salaire médian",2,25027.0,25027.0,0.0,0.0,0.0,4
+Le Pen (Rassemblement national) — partiel|seul_cadre,Le Pen (Rassemblement national) — partiel,seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47275.0,0.0,0.0,0.0,4
+Le Pen (Rassemblement national) — partiel|parent_isole_smic,Le Pen (Rassemblement national) — partiel,parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,28920.0,2405.0,200.0,9.07,4
+Le Pen (Rassemblement national) — partiel|couple_deux_smic_deux_enfants,Le Pen (Rassemblement national) — partiel,couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,41945.0,0.0,0.0,0.0,4
+Le Pen (Rassemblement national) — partiel|couple_median_inactif_deux_enfants,Le Pen (Rassemblement national) — partiel,couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35297.0,0.0,0.0,0.0,4
+Le Pen (Rassemblement national) — partiel|couple_deux_medians,Le Pen (Rassemblement national) — partiel,couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,49744.0,0.0,0.0,0.0,4
+Le Pen (Rassemblement national) — partiel|couple_cadre_median_deux_enfants,Le Pen (Rassemblement national) — partiel,couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,78462.0,0.0,0.0,0.0,4
+Le Pen (Rassemblement national) — partiel|retraite_seul,Le Pen (Rassemblement national) — partiel,retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,4
+Le Pen (Rassemblement national) — partiel|couple_retraites,Le Pen (Rassemblement national) — partiel,couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|jeune_smic,Lisnard (Nouvelle Énergie),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20165.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|seul_smic,Lisnard (Nouvelle Énergie),seul_smic,Personne seule au SMIC,1,20165.0,20165.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|seul_median,Lisnard (Nouvelle Énergie),seul_median,"Personne seule, salaire médian",2,25027.0,25027.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|seul_cadre,Lisnard (Nouvelle Énergie),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47275.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|parent_isole_smic,Lisnard (Nouvelle Énergie),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,26516.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|couple_deux_smic_deux_enfants,Lisnard (Nouvelle Énergie),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,41945.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|couple_median_inactif_deux_enfants,Lisnard (Nouvelle Énergie),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35297.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|couple_deux_medians,Lisnard (Nouvelle Énergie),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,49744.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|couple_cadre_median_deux_enfants,Lisnard (Nouvelle Énergie),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,79451.0,989.0,82.0,1.26,4
+Lisnard (Nouvelle Énergie)|retraite_seul,Lisnard (Nouvelle Énergie),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,4
+Lisnard (Nouvelle Énergie)|couple_retraites,Lisnard (Nouvelle Énergie),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,36714.0,-1582.0,-132.0,-4.13,4
+Mélenchon (La France insoumise)|jeune_smic,Mélenchon (La France insoumise),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,22173.0,2009.0,167.0,9.96,8
+Mélenchon (La France insoumise)|seul_smic,Mélenchon (La France insoumise),seul_smic,Personne seule au SMIC,1,20165.0,22173.0,2009.0,167.0,9.96,8
+Mélenchon (La France insoumise)|seul_median,Mélenchon (La France insoumise),seul_median,"Personne seule, salaire médian",2,25027.0,25809.0,782.0,65.0,3.12,8
+Mélenchon (La France insoumise)|seul_cadre,Mélenchon (La France insoumise),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47635.0,360.0,30.0,0.76,8
+Mélenchon (La France insoumise)|parent_isole_smic,Mélenchon (La France insoumise),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27838.0,1322.0,110.0,4.99,8
+Mélenchon (La France insoumise)|couple_deux_smic_deux_enfants,Mélenchon (La France insoumise),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,45108.0,3164.0,264.0,7.54,8
+Mélenchon (La France insoumise)|couple_median_inactif_deux_enfants,Mélenchon (La France insoumise),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35573.0,276.0,23.0,0.78,8
+Mélenchon (La France insoumise)|couple_deux_medians,Mélenchon (La France insoumise),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,51619.0,1875.0,156.0,3.77,8
+Mélenchon (La France insoumise)|couple_cadre_median_deux_enfants,Mélenchon (La France insoumise),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,78882.0,419.0,35.0,0.53,8
+Mélenchon (La France insoumise)|retraite_seul,Mélenchon (La France insoumise),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,8
+Mélenchon (La France insoumise)|couple_retraites,Mélenchon (La France insoumise),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,39668.0,1372.0,114.0,3.58,8
+Philippe (Horizons)|jeune_smic,Philippe (Horizons),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20165.0,0.0,0.0,0.0,3
+Philippe (Horizons)|seul_smic,Philippe (Horizons),seul_smic,Personne seule au SMIC,1,20165.0,20165.0,0.0,0.0,0.0,3
+Philippe (Horizons)|seul_median,Philippe (Horizons),seul_median,"Personne seule, salaire médian",2,25027.0,25027.0,0.0,0.0,0.0,3
+Philippe (Horizons)|seul_cadre,Philippe (Horizons),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47275.0,0.0,0.0,0.0,3
+Philippe (Horizons)|parent_isole_smic,Philippe (Horizons),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27095.0,579.0,48.0,2.18,3
+Philippe (Horizons)|couple_deux_smic_deux_enfants,Philippe (Horizons),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,43027.0,1082.0,90.0,2.58,3
+Philippe (Horizons)|couple_median_inactif_deux_enfants,Philippe (Horizons),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,36807.0,1509.0,126.0,4.28,3
+Philippe (Horizons)|couple_deux_medians,Philippe (Horizons),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,49744.0,0.0,0.0,0.0,3
+Philippe (Horizons)|couple_cadre_median_deux_enfants,Philippe (Horizons),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,78462.0,0.0,0.0,0.0,3
+Philippe (Horizons)|retraite_seul,Philippe (Horizons),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,3
+Philippe (Horizons)|couple_retraites,Philippe (Horizons),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,3
+Retailleau (Les Républicains)|jeune_smic,Retailleau (Les Républicains),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20055.0,-109.0,-9.0,-0.54,4
+Retailleau (Les Républicains)|seul_smic,Retailleau (Les Républicains),seul_smic,Personne seule au SMIC,1,20165.0,20165.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|seul_median,Retailleau (Les Républicains),seul_median,"Personne seule, salaire médian",2,25027.0,25027.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|seul_cadre,Retailleau (Les Républicains),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47275.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|parent_isole_smic,Retailleau (Les Républicains),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,26516.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|couple_deux_smic_deux_enfants,Retailleau (Les Républicains),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,41945.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|couple_median_inactif_deux_enfants,Retailleau (Les Républicains),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35297.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|couple_deux_medians,Retailleau (Les Républicains),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,49744.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|couple_cadre_median_deux_enfants,Retailleau (Les Républicains),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,78462.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|retraite_seul,Retailleau (Les Républicains),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,4
+Retailleau (Les Républicains)|couple_retraites,Retailleau (Les Républicains),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,4
+Roussel (Parti communiste français)|jeune_smic,Roussel (Parti communiste français),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,22173.0,2009.0,167.0,9.96,7
+Roussel (Parti communiste français)|seul_smic,Roussel (Parti communiste français),seul_smic,Personne seule au SMIC,1,20165.0,22173.0,2009.0,167.0,9.96,7
+Roussel (Parti communiste français)|seul_median,Roussel (Parti communiste français),seul_median,"Personne seule, salaire médian",2,25027.0,25809.0,782.0,65.0,3.12,7
+Roussel (Parti communiste français)|seul_cadre,Roussel (Parti communiste français),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47635.0,360.0,30.0,0.76,7
+Roussel (Parti communiste français)|parent_isole_smic,Roussel (Parti communiste français),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27823.0,1307.0,109.0,4.93,7
+Roussel (Parti communiste français)|couple_deux_smic_deux_enfants,Roussel (Parti communiste français),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,45108.0,3164.0,264.0,7.54,7
+Roussel (Parti communiste français)|couple_median_inactif_deux_enfants,Roussel (Parti communiste français),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35565.0,268.0,22.0,0.76,7
+Roussel (Parti communiste français)|couple_deux_medians,Roussel (Parti communiste français),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,51307.0,1563.0,130.0,3.14,7
+Roussel (Parti communiste français)|couple_cadre_median_deux_enfants,Roussel (Parti communiste français),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,79519.0,1056.0,88.0,1.35,7
+Roussel (Parti communiste français)|retraite_seul,Roussel (Parti communiste français),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,20708.0,1185.0,99.0,6.07,7
+Roussel (Parti communiste français)|couple_retraites,Roussel (Parti communiste français),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,42094.0,3798.0,317.0,9.92,7
+Tondelier (Les Écologistes)|jeune_smic,Tondelier (Les Écologistes),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,21241.0,1077.0,90.0,5.34,12
+Tondelier (Les Écologistes)|seul_smic,Tondelier (Les Écologistes),seul_smic,Personne seule au SMIC,1,20165.0,21241.0,1077.0,90.0,5.34,12
+Tondelier (Les Écologistes)|seul_median,Tondelier (Les Écologistes),seul_median,"Personne seule, salaire médian",2,25027.0,25178.0,150.0,13.0,0.6,12
+Tondelier (Les Écologistes)|seul_cadre,Tondelier (Les Écologistes),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47128.0,-147.0,-12.0,-0.31,12
+Tondelier (Les Écologistes)|parent_isole_smic,Tondelier (Les Écologistes),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,28216.0,1700.0,142.0,6.41,12
+Tondelier (Les Écologistes)|couple_deux_smic_deux_enfants,Tondelier (Les Écologistes),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,44099.0,2154.0,179.0,5.13,12
+Tondelier (Les Écologistes)|couple_median_inactif_deux_enfants,Tondelier (Les Écologistes),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35183.0,-114.0,-9.0,-0.32,12
+Tondelier (Les Écologistes)|couple_deux_medians,Tondelier (Les Écologistes),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,50047.0,303.0,25.0,0.61,12
+Tondelier (Les Écologistes)|couple_cadre_median_deux_enfants,Tondelier (Les Écologistes),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,78492.0,30.0,2.0,0.04,12
+Tondelier (Les Écologistes)|retraite_seul,Tondelier (Les Écologistes),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,18890.0,-632.0,-53.0,-3.24,12
+Tondelier (Les Écologistes)|couple_retraites,Tondelier (Les Écologistes),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,37738.0,-558.0,-47.0,-1.46,12
+Zemmour (Reconquête)|jeune_smic,Zemmour (Reconquête),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,21144.0,980.0,82.0,4.86,4
+Zemmour (Reconquête)|seul_smic,Zemmour (Reconquête),seul_smic,Personne seule au SMIC,1,20165.0,21254.0,1089.0,91.0,5.4,4
+Zemmour (Reconquête)|seul_median,Zemmour (Reconquête),seul_median,"Personne seule, salaire médian",2,25027.0,26920.0,1892.0,158.0,7.56,4
+Zemmour (Reconquête)|seul_cadre,Zemmour (Reconquête),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,50719.0,3444.0,287.0,7.28,4
+Zemmour (Reconquête)|parent_isole_smic,Zemmour (Reconquête),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27149.0,633.0,53.0,2.39,4
+Zemmour (Reconquête)|couple_deux_smic_deux_enfants,Zemmour (Reconquête),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,44123.0,2178.0,182.0,5.19,4
+Zemmour (Reconquête)|couple_median_inactif_deux_enfants,Zemmour (Reconquête),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,36521.0,1224.0,102.0,3.47,4
+Zemmour (Reconquête)|couple_deux_medians,Zemmour (Reconquête),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,53526.0,3782.0,315.0,7.6,4
+Zemmour (Reconquête)|couple_cadre_median_deux_enfants,Zemmour (Reconquête),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,82607.0,4144.0,345.0,5.28,4
+Zemmour (Reconquête)|retraite_seul,Zemmour (Reconquête),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,4
+Zemmour (Reconquête)|couple_retraites,Zemmour (Reconquête),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,4

@@ -60,6 +60,14 @@
    "code_non_commite": true,
    "parametres": "498a6173523e0545"
   },
+  "comparaison_demographie.csv": {
+   "sha256": "6ed0be5e32396ffceb8245d0ada8196ddfd79201497e597654e831602a8c24f9",
+   "script": "outils.export_demographie",
+   "date": "2026-11-19T15:35:06Z",
+   "commit": "194c51a",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
+  },
   "comparaison_ecarts.csv": {
    "sha256": "ce1bf91e3ebdab4c20eec6900f2328af7eefcb894ef5c8d0e703629a34128fcb",
    "script": "outils.export_comparaison",
@@ -132,6 +140,22 @@
    "code_non_commite": true,
    "parametres": "498a6173523e0545"
   },
+  "comparaison_menages_types.csv": {
+   "sha256": "6c137f89deef32728cdea2247237d9e10960a223c775a1f738601675a0177b78",
+   "script": "outils.export_menages_types",
+   "date": "2026-11-19T15:43:12Z",
+   "commit": "194c51a",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
+  },
+  "comparaison_menages_types_mesures.csv": {
+   "sha256": "42ba0e336ee91cb7d8b9350466052dcdd372abed3434bf4dcb3911b630282663",
+   "script": "outils.export_menages_types",
+   "date": "2026-11-19T15:43:12Z",
+   "commit": "194c51a",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
+  },
   "comparaison_mesures.csv": {
    "sha256": "d066ea00c07644fa8acd2d3504479b715f685bc47a7827ff1550bc9509f729a9",
    "script": "outils.export_comparaison",
@@ -139,6 +163,14 @@
    "commit": "8d14f77",
    "code_non_commite": true,
    "parametres": "498a6173523e0545"
+  },
+  "comparaison_pyramide.csv": {
+   "sha256": "62a691dbf86099b821f76843a0ff62395cb93b5efa66f52062a671bb77b40921",
+   "script": "outils.export_demographie",
+   "date": "2026-11-19T15:35:06Z",
+   "commit": "194c51a",
+   "code_non_commite": true,
+   "parametres": "cd959b18ef3541db"
   },
   "comparaison_redistribution.csv": {
    "sha256": "74fb44c63243772c6e2f1d9b05c322fde0c557620bec695faaf02121d8e4e1bd",

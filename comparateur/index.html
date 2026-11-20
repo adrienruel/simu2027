@@ -1,0 +1,911 @@
+<meta name="dash-one-writer">
+<style>
+  .cp { font-family: var(--font-anthropic-sans); color: var(--color-fg); display: grid; gap: var(--cds-gap-lg); }
+  .cp h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .cp h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .cp h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .cp p { margin: 0; }
+  .cp .lead { color: var(--color-fg-muted); max-width: 78ch; line-height: 1.5; }
+  .cp .lead b, .cp .total b { color: var(--color-fg); font-weight: var(--cds-font-weight-medium); font-variant-numeric: tabular-nums; }
+  .cp .lead b.bon, .cp .total b.bon { color: var(--color-ok); }
+  .cp .lead b.mauvais, .cp .total b.mauvais { color: var(--color-bad); }
+  .cp .barre { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .cp .champ { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cp .seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; }
+  .cp .seg button { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: var(--color-bg); border: 0; padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; }
+  .cp .seg button + button { border-left: 1px solid var(--color-border-line); }
+  .cp .seg button[aria-pressed=true] { background: var(--color-panel); font-weight: var(--cds-font-weight-medium); }
+  .cp select.dash-select { font-size: var(--cds-font-size-caption); background-color: var(--color-bg); }
+  .cp input[type=search] { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); }
+  .cp button:focus-visible, .cp select:focus-visible, .cp input:focus-visible, .cp a:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 1px; }
+  .cp .filtres { position: sticky; top: 0; z-index: 3; background: var(--color-bg); padding: var(--cds-pad-sm) 0; border-bottom: 1px solid var(--color-border-line); display: grid; gap: var(--cds-gap-sm); }
+  .cp .onglets { display: flex; flex-wrap: wrap; gap: 2px; }
+  .cp .onglets button { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg-muted); background: transparent; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-xs) var(--cds-pad-md); cursor: pointer; }
+  .cp .onglets button:hover { color: var(--color-fg); }
+  .cp .onglets button[aria-selected=true] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+  .cp section.vue { display: grid; gap: var(--cds-gap-lg); }
+  .cp section.vue[hidden] { display: none; }
+  .cp .vue-intro { display: grid; gap: var(--cds-gap-xs); }
+  .cp .card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+  .cp .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+  .cp .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.45; max-width: 100ch; }
+  .cp .note a { color: inherit; }
+  .cp .chart { position: relative; min-height: 260px; }
+  .cp .bars { position: relative; min-height: 200px; }
+  .cp .pyramide { position: relative; min-height: 380px; }
+  .cp .legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-height: 1.2em; }
+  .cp .legend span::before { content: ""; display: inline-block; width: .9rem; height: 0; border-top: 2px var(--trait, solid) var(--sw); margin-right: .35rem; vertical-align: middle; }
+  .cp .legende-tri { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 2px var(--cds-gap-md); font-variant-numeric: tabular-nums; }
+  .cp .legende-tri .tri-titre { grid-column: 1 / -1; }
+  .cp .legende-tri .tri-titre::before { display: none; }
+  .cp .legende-tri span { cursor: default; }
+  .cp .legende-tri span.sq, .cp .legende-tri span.choisi { color: var(--color-fg); }
+  .cp .legende-tri span.choisi { font-weight: var(--cds-font-weight-medium); }
+  .cp .leg-dec span::before, .cp .leg-inc span::before { border-top-width: 8px; }
+  .cp .leg-inc .large { --sw: var(--cds-chart-muted); }
+  .cp .leg-pyr .prog::before { border-top-width: 8px; --sw: var(--cds-chart-muted); }
+  .cp .leg-pyr .sq::before { width: 2px; height: .9rem; border: 0; background: var(--color-fg); vertical-align: -2px; }
+  .cp .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; white-space: nowrap; z-index: 2; }
+  .cp .tip .t { color: var(--cds-text-secondary); }
+  .cp .scroll { overflow: auto; max-height: 32rem; }
+  .cp .scroll-x { overflow-x: auto; }
+  .cp table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .cp th, .cp td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+  .cp th:first-child, .cp td:first-child { text-align: left; }
+  .cp .gauche td, .cp .gauche th { text-align: left; }
+  .cp .mes td:nth-child(2), .cp .mes th:nth-child(2), .cp .mes td:nth-child(3), .cp .mes th:nth-child(3) { text-align: left; }
+  .cp th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); position: sticky; top: 0; background: var(--color-panel); }
+  .cp tr.sq td { color: var(--color-fg-muted); }
+  .cp tr.choisi td:first-child { font-weight: var(--cds-font-weight-medium); }
+  .cp tr.choisi td { background: color-mix(in srgb, var(--color-fg) 5%, transparent); }
+  .cp td.bon { color: var(--color-ok); }
+  .cp td.mauvais { color: var(--color-bad); }
+  .cp td.hors { color: var(--color-fg-muted); font-style: italic; }
+  .cp .incl td:last-child, .cp .incl th:last-child { text-align: left; white-space: normal; min-width: 18rem; }
+  .cp .limites summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+  .cp .limites ul { margin: var(--cds-gap-sm) 0 0; padding-left: 1.1rem; display: grid; gap: var(--cds-gap-xs); line-height: 1.45; max-width: 90ch; }
+  .cp .failed { display: flex; align-items: center; justify-content: center; gap: .4rem; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .cp .failed::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+  .cp .resume { gap: var(--cds-gap-md); }
+  .cp .resume h3 { margin: 0 0 var(--cds-gap-xs); }
+  .cp .resume .texte { max-width: 80ch; line-height: 1.5; }
+  .cp .pc { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--cds-gap-md); }
+  .cp .pc > div { border-top: 2px solid var(--color-border-line); padding-top: var(--cds-pad-sm); }
+  .cp .pc .pour { border-top-color: var(--color-ok); }
+  .cp .pc .contre { border-top-color: var(--color-bad); }
+  .cp .pc ul { margin: 0; padding-left: 1.1rem; display: grid; gap: var(--cds-gap-xs); line-height: 1.45; }
+  .cp .tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr)); gap: var(--cds-gap-md); }
+  .cp .tuile { display: grid; gap: 2px; align-content: start; border-left: 2px solid var(--color-border-line); padding-left: var(--cds-pad-sm); }
+  .cp .tuile .t-lab { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cp .tuile .t-val { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .cp .tuile .t-val.bon { color: var(--color-ok); }
+  .cp .tuile .t-val.mauvais { color: var(--color-bad); }
+  .cp .tuile .t-sq { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+  .cp .fourchette { position: relative; min-height: 420px; }
+  .cp .chip { font: inherit; font-size: var(--cds-font-size-caption); border: 1px solid var(--color-border-line); border-radius: 999px; background: var(--color-bg); color: var(--color-fg); padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; }
+  .cp .leg-ab span::before { border-top-width: 8px; }
+  .cp th span { color: inherit; }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  @media print { .cp .filtres { position: static; } .cp .onglets { display: none; } .cp section.vue { break-before: page; } .cp .scroll { max-height: none; overflow: visible; } }
+</style>
+
+<div class="cp" data-read lang="fr">
+  <header style="display: grid; gap: var(--cds-gap-sm)">
+    <h1 id="titre">Comparateur des programmes 2027</h1>
+    <p class="lead">En <b data-draw="l_annee">—</b>, scénario <b data-draw="l_scen">—</b> : <b data-draw="l_prog">—</b> a un déficit public de <b data-draw="l_def_prog" data-source="traj" data-field="deficit">—</b>, contre <b data-draw="l_def_sq" data-source="traj" data-field="deficit">—</b> pour le statu quo (% du PIB, au sens de Maastricht), et un solde primaire <b data-draw="l_esp" data-source="traj" data-field="ecart_solde_primaire_pib">—</b> point(s) de PIB par rapport au statu quo (+ = meilleur).</p>
+    <p class="note">Chaque programme est chiffré sur le même noyau que le statu quo : mêmes cohortes, mêmes cellules, même dette de départ, mêmes règles. Les économies et les recettes annoncées par les candidats ne sont pas reprises telles quelles : chaque mesure nommée est estimée d'après des sources et des précédents, et ce qui n'est pas détaillé est déduit domaine par domaine. Le modèle mesure ce qui est démontré, pas ce qui est impossible : un programme mieux détaillé serait mieux chiffré.</p>
+  </header>
+
+  <details class="card limites" id="limites" open>
+    <summary>À lire avant les chiffres</summary>
+    <ul>
+      <li>Le scénario prudent n'est pas un scénario central : il cumule des hypothèses défavorables. Le médian est le plus proche d'une prévision ; l'onglet « Fiabilité » montre la fourchette.</li>
+      <li>La mesure la plus solide est l'écart de solde primaire au statu quo (hors intérêts) : il dit ce que le programme change, sans dépendre de l'emballement des intérêts. Les niveaux de déficit et de dette au-delà de 2037 n'ont pas valeur de prévision, et les années où la dette dépasse 200 % du PIB sont en italique gris : un ajustement serait forcé bien avant.</li>
+      <li>Quatre programmes sont chiffrés sur des textes partiels ou des discours, faute de programme publié : Le Pen, Arthaud, Bertrand et Roussel. Leur chiffrage sera refait à la publication.</li>
+      <li>Les fonds de capitalisation sont comptés hors des administrations publiques ; la variante où ils y entrent, commune à tous, ne change le résultat que pour Philippe (environ −0,4 point de déficit en 2037 dans le prudent).</li>
+      <li>Pauvreté et déciles ne portent que les mesures codées dans la microsimulation, sur une population synthétique : un bilan partiel, à lire comme une indication.</li>
+    </ul>
+  </details>
+
+  <div class="filtres" id="filtres">
+    <div class="barre" aria-label="Filtres">
+      <label class="champ" for="f-prog"><span>Programme</span>
+        <select id="f-prog" class="dash-select" data-draw="f_prog" data-source="traj"></select>
+      </label>
+      <div class="champ"><span>Scénario</span>
+        <div class="seg" role="group" aria-label="Scénario">
+          <button type="button" data-scen="Crise">Crise</button><button type="button" data-scen="Prudent">Prudent</button><button type="button" data-scen="Médian">Médian</button><button type="button" data-scen="Optimiste">Optimiste</button>
+        </div>
+      </div>
+      <label class="champ" for="f-annee"><span>Année</span>
+        <select id="f-annee" class="dash-select f-annee">
+          <option value="2029">2029</option><option value="2032">2032</option><option value="2037">2037</option><option value="2040">2040</option><option value="2045">2045</option><option value="2050">2050</option><option value="2060">2060</option>
+        </select>
+      </label>
+    </div>
+    <nav class="onglets" role="tablist" aria-label="Vues">
+      <button type="button" role="tab" data-vue="ensemble">Vue d'ensemble</button><button type="button" role="tab" data-vue="comparer">Comparer</button><button type="button" role="tab" data-vue="economie">Économie</button><button type="button" role="tab" data-vue="emploi">Emploi</button><button type="button" role="tab" data-vue="population">Population</button><button type="button" role="tab" data-vue="menages">Ménages types</button><button type="button" role="tab" data-vue="ecologie">Écologie</button><button type="button" role="tab" data-vue="fiabilite">Fiabilité et méthode</button>
+    </nav>
+  </div>
+
+  <!-- ===================== VUE D'ENSEMBLE ===================== -->
+  <section class="vue" id="ensemble" role="tabpanel" aria-label="Vue d'ensemble">
+    <section class="card" id="chiffres-cles">
+      <h2>Chiffres clés : <span data-draw="l_prog">—</span></h2>
+      <p class="note">En <b data-draw="l_annee">—</b>, scénario <b data-draw="l_scen">—</b>. En vert, mieux que le statu quo ; en rouge, moins bien. Rang : place du programme parmi les programmes comparés sur l'écart de solde primaire au statu quo (1 = celui qui améliore le plus les comptes hors intérêts).</p>
+      <div class="tuiles">
+        <div class="tuile"><span class="t-lab">Écart de solde primaire au statu quo (points de PIB)</span><b class="t-val" data-draw="r_esp" data-source="traj" data-field="ecart_solde_primaire_pib">—</b><span class="t-sq">rang <span data-draw="r_rang" data-source="rangs" data-field="rang">—</span> sur <span data-draw="r_classes" data-source="rangs" data-field="classes">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Déficit public (% du PIB)</span><b class="t-val" data-draw="r_def" data-source="traj" data-field="deficit">—</b><span class="t-sq">statu quo : <span data-draw="r_def_sq" data-source="traj" data-field="deficit">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Dette publique (% du PIB)</span><b class="t-val" data-draw="r_dette" data-source="traj" data-field="dette_pib">—</b><span class="t-sq">statu quo : <span data-draw="r_dette_sq" data-source="traj" data-field="dette_pib">—</span></span></div>
+        <div class="tuile"><span class="t-lab">PIB, écart au statu quo</span><b class="t-val" data-draw="r_pib" data-source="croissance" data-field="ecart_pib_pct">—</b><span class="t-sq">euros constants de 2026</span></div>
+        <div class="tuile"><span class="t-lab">Chômage (%)</span><b class="t-val" data-draw="r_chom" data-source="traj" data-field="chomage">—</b><span class="t-sq">statu quo : <span data-draw="r_chom_sq" data-source="traj" data-field="chomage">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Emploi, écart au statu quo (milliers)</span><b class="t-val" data-draw="r_emploi" data-source="traj" data-field="ecart_emploi_milliers">—</b><span class="t-sq">personnes en emploi</span></div>
+        <div class="tuile"><span class="t-lab">Pauvreté (%), microsimulation, <span data-draw="r_pauv_annee">—</span></span><b class="t-val" data-draw="r_pauv" data-source="redistribution" data-field="pauvrete_pct">—</b><span class="t-sq">législation actuelle : <span data-draw="r_pauv_sq" data-source="redistribution" data-field="pauvrete_pct_sq">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Émissions par habitant (t CO₂e)</span><b class="t-val" data-draw="r_emi" data-source="ecologie" data-field="territoriales_hab_t">—</b><span class="t-sq">statu quo : <span data-draw="r_emi_sq" data-source="ecologie" data-field="territoriales_hab_t">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Population (millions)</span><b class="t-val" data-draw="r_pop" data-source="traj" data-field="population_millions">—</b><span class="t-sq">statu quo : <span data-draw="r_pop_sq" data-source="traj" data-field="population_millions">—</span></span></div>
+      </div>
+    </section>
+
+    <section class="card resume" id="resume">
+      <h2>En bref : <span data-draw="l_prog">—</span></h2>
+      <p class="note">Ce résumé décrit ce que calcule le modèle, avec les mêmes règles et les mêmes hypothèses pour tous les programmes, dans le scénario prudent en 2037 sauf mention contraire. Sans réforme, le déficit et la dette montent continuellement : chaque programme est jugé par rapport à ce point de départ. Les chiffres vivants sont dans les tuiles ci-dessus et dans les autres onglets.</p>
+      <div class="resume-prog" data-prog="Tondelier (Les Écologistes)" hidden>
+        <p class="texte">Un programme écologiste et social. La transition écologique passe par des investissements et des aides ciblées : rénovation des logements, transports en commun, rail, sortie du fioul, sortie progressive du nucléaire, TVA verte. La protection sociale et les services publics sont renforcés : SMIC à 2 000 € brut, retour de la retraite à 62 ans, recrutements à l'hôpital, à l'école et dans la justice, soins essentiels remboursés à 100 %, garantie d'autonomie pour les jeunes. Le tout est financé surtout par des impôts sur le patrimoine et les hauts revenus (ISF, impôt plancher sur les plus grandes fortunes, successions) et par une hausse de la CSG.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Une hausse directe du pouvoir d'achat des bas salaires et des jeunes, et une protection sociale renforcée (départ en retraite plus tôt, soins mieux remboursés).</li>
+              <li>Plus de moyens pour les services publics (soignants, enseignants, justice) et une garantie d'emploi pour les chômeurs âgés de longue durée.</li>
+              <li>Une transition écologique sans forte hausse du prix de l'énergie pour les ménages, par des aides ciblées : rénovation, transports, voitures électriques.</li>
+              <li>Les ménages les plus aisés et les grands patrimoines contribuent davantage.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Les dépenses augmentent bien plus que les recettes : dans le modèle, le déficit atteint 13,2 % du PIB en 2037 dans le prudent, contre 9,5 % sans réforme, et la dette monte plus vite que sans réforme, sauf dans l'optimiste, où le déficit finit sous le statu quo. Les hausses d'impôts sur le travail, les entreprises et le capital, et la fin des allègements de cotisations au-dessus de 1,6 SMIC, pèsent aussi, durablement, sur l'activité, et le retour à 62 ans fait sortir de l'emploi environ 280 000 seniors. Le tarif progressif de l'électricité et l'interdiction des vols courts pèsent un peu sur la productivité (barème du modèle, d'après une étude de l'OCDE).</li>
+              <li>Moins d'emploi que sans réforme : la forte hausse du SMIC fait perdre des emplois peu qualifiés, revenir sur les réformes de l'assurance chômage remonte le chômage, et les postes publics créés évincent en partie l'emploi privé.</li>
+              <li>Un effet sur le climat faible dans le scénario prudent : plusieurs mesures n'ont pas d'effet chiffré par une source, et la sortie du nucléaire peut demander des centrales au gaz en secours.</li>
+              <li>Les recettes annoncées par le parti ne sont pas reprises : le modèle estime lui-même ce que rapportent les nouveaux impôts, souvent moins, ce qui pèse sur le résultat.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Bertrand (Nous France)" hidden>
+        <p class="texte">Pas encore de programme publié : les mesures viennent d'entretiens et de tribunes. Un report de l'âge de la retraite (65 ans retenus, le candidat ne donnant pas d'âge), avec un départ anticipé possible moyennant une décote. Des économies annoncées sur l'assurance chômage et le nombre de fonctionnaires, une baisse de l'impôt sur le revenu des premières tranches, un léger relèvement de la flat tax, et quelques dépenses nouvelles (culture, bourses, protection civile).</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Les mesures identifiées améliorent un peu les comptes à partir du milieu des années 2030, surtout grâce au report de l'âge de la retraite, qui garde environ 70 000 seniors en emploi dans le scénario prudent.</li>
+              <li>Peu de risques de mise en œuvre : le système actuel est gardé, les changements sont graduels.</li>
+              <li>Les dépenses de santé ne sont pas mises à contribution.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>L'effet reste faible : le programme ne change presque pas la trajectoire du statu quo (déficit de 9,5 % du PIB en 2037 dans le prudent, comme sans réforme), et la dette continue de monter.</li>
+              <li>Les 20 Md€ d'économies par an annoncés ne sont pas détaillés : en plus des lignes nommées, le modèle en déduit environ 3 Md€ par an dans le prudent (État, collectivités, prestations ; santé exclue comme le dit le candidat), bien moins que l'annonce.</li>
+              <li>Moins de postes publics, sans détail sur les services concernés ; un peu plus de chômage au départ.</li>
+              <li>Le chiffrage repose sur plusieurs arbitrages (âge cible, nombre de postes, niveau des quotas migratoires) faute de programme écrit : il sera refait à sa publication. Les quotas, lus comme un dixième des premiers titres de séjour en moins, retirent environ 85 000 personnes de l'emploi en 2037 dans le prudent. L'étage obligatoire de capitalisation, sans taux annoncé, est lu comme celui de Retailleau (1 % du brut des nouveaux entrants, même règle pour Zemmour et Le Pen).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Zemmour (Reconquête)" hidden>
+        <p class="texte">Un programme centré sur l'immigration, l'identité et la baisse des impôts : arrêt de l'immigration légale, « remigration » et préférence nationale ; suppression de la CSG sur les revenus du travail et des droits de succession, baisse d'un tiers de la taxe sur les carburants. Elles doivent être financées par le plan d'économies de Sarah Knafo, repris ici mesure par mesure : 800 000 départs de fonctionnaires non remplacés, préférence nationale et RSA limité à trois ans, suppression de l'aide au développement, de l'Anah, de l'Ademe, des ARS et d'une partie de France Travail, privatisation de l'audiovisuel public, fin des aides aux renouvelables, contribution européenne réduite. S'y ajoutent un report de l'âge de la retraite, des recrutements à l'hôpital et la relance du nucléaire.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Une hausse immédiate et importante du salaire net de tous les actifs, et du pouvoir d'achat à la pompe.</li>
+              <li>Un plan d'économies détaillé : avec le report de l'âge de la retraite, le modèle y trouve de l'ordre de 60 Md€ par an en 2037 dans le scénario prudent, et près de 80 dans le médian.</li>
+              <li>Un salaire net plus élevé pousse durablement plus de gens à travailler, et le report de l'âge de la retraite garde environ 100 000 seniors en emploi ; la prime d'activité baisse aussi quand le salaire net monte : dans l'optimiste, le PIB dépasse celui du statu quo d'environ 4,4 % en 2037 et le déficit finit sous celui du statu quo ; dans le prudent, la baisse de l'immigration l'emporte (PIB inférieur de 0,4 %).</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Les recettes perdues (environ 145 Md€ par an) restent plus élevées que les économies et la croissance que le modèle retient : sauf dans le scénario optimiste, le déficit et la dette montent plus vite que sans réforme (déficit de 13,6 % du PIB en 2037 dans le prudent, contre 9,5 %). Dans le prudent, il faudrait encore près de 5 % de PIB en plus pour équilibrer. Une baisse d'impôt relance moins l'activité qu'une dépense : la première année, l'effet de relance reste faible.</li>
+              <li>Les montants annoncés par Sarah Knafo (140 Md€) ne sont pas repris : une seule mesure cite une source, plusieurs dépendent d'autres États (budget européen) ou se heurtent au droit européen et à la Constitution (préférence nationale, hébergement d'urgence).</li>
+              <li>Ne pas remplacer 800 000 départs ne se décide pas seul : l'État ne fixe pas les effectifs des collectivités et des hôpitaux. Le modèle en retient 200 000 dans le scénario prudent (même règle pour tous les candidats, d'après le précédent de la RGPP), avec plus de chômage le temps que le privé reprenne une partie de ces emplois ; la qualité des services n'est pas mesurée.</li>
+              <li>L'arrêt de l'immigration légale, lu comme la fin de tous les premiers titres de séjour sauf ceux des étudiants, ramène le solde migratoire près de zéro et retire environ 590 000 personnes de l'emploi en 2037 dans le prudent : moins d'actifs et de recettes, des dépenses qui ne baissent qu'en partie (variante démographique commune ; la « remigration » n'a pas de nombre et n'est pas comptée). La taxe sur les carburants baissée d'un tiers et la fin des aides à la rénovation et aux renouvelables ajoutent environ 7 Mt de CO₂ par an en 2037.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Arthaud (Lutte ouvrière) — partiel" hidden>
+        <p class="texte">Lutte ouvrière présente un programme révolutionnaire plutôt qu'électoral : expropriation des grands groupes, interdiction des licenciements, répartition du travail sans perte de salaire. Ce cœur du programme change toute l'économie : l'expropriation, le contrôle de l'économie par les travailleurs et la planification ne sont pas chiffrables par un modèle budgétaire. Le chiffrage couvre tout le reste : SMIC à 2 200 € net, répartition du travail sans perte de salaire (la durée baisse jusqu'à absorber le chômage, soit environ 32 heures), interdiction des licenciements avec réquisition des entreprises en difficulté, égalité salariale entre femmes et hommes, embauches massives dans les services publics, refus des économies du budget 2027, défense ramenée à son niveau actuel, confiscation des bénéfices du pétrole et de l'armement, carburant à prix coûtant.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Une forte hausse des bas salaires (le SMIC augmente de moitié) et des moyens importants pour l'hôpital, les Ehpad et l'école.</li>
+              <li>Les pensions et les prestations ne subissent pas les gels du budget 2027.</li>
+              <li>Renoncer à la hausse du budget militaire rapporte près de 9 Md€ par an.</li>
+              <li>Plus de temps libre pour les salariés, des emplois gardés dans les entreprises en difficulté (environ 570 000 en 2037 dans le prudent) et des salaires des femmes alignés sur ceux des hommes à poste égal. Dans l'optimiste, le chômage descend à 6,6 % en 2037.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Une hausse du SMIC de moitié n'a pas de précédent : le modèle y voit environ 1,6 million d'emplois perdus, ordre de grandeur seulement. La répartition du travail et l'égalité salariale, au même salaire mensuel, alourdissent encore le coût du travail : dans le prudent, le chômage est à 12,0 % en 2037, contre 8,3 % sans réforme.</li>
+              <li>Le déficit et la dette montent plus vite que sans réforme, dans tous les scénarios : 16,5 % du PIB en 2037 dans le prudent, contre 9,5 %. Sortir l'électricité et les transports du marché et interdire les licenciements pèsent aussi sur la productivité (barème du modèle, d'après une étude de l'OCDE). Les heures non compensées font baisser la production, et l'État paie la différence pour les emplois maintenus par réquisition (environ 15 Md€ par an en 2037).</li>
+              <li>Le carburant à prix coûtant augmente la consommation : les mesures du programme ajoutent environ 4 Mt de CO₂ par an en 2037 dans le prudent.</li>
+              <li>Chiffrage partiel par construction : l'expropriation des grands groupes, le contrôle ouvrier et la planification sont hors du modèle.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Mélenchon (La France insoumise)" hidden>
+        <p class="texte">Un programme de transformation : planification écologique inscrite dans la Constitution (« règle verte »), baisse de 65 % des émissions d'ici 2033, 100 % d'énergies renouvelables, isolation de 700 000 logements par an, relance du rail et du fret, agriculture paysanne ; sur le plan social, SMIC à 1 700 € net, retraite à 60 ans pour 40 annuités, 32 heures dans les métiers pénibles ou de nuit, sixième semaine de congés payés, aucun ménage sous le seuil de pauvreté, soins remboursés à 100 %, garantie d'emploi pour les chômeurs de longue durée ; services publics renforcés (école, hôpital, grand âge, petite enfance, logement public). Il est financé par l'ISF, la taxe Zucman, la fin du quotient conjugal et du crédit d'impôt recherche, un nouvel impôt sur les entreprises et le retour de la taxe d'habitation. Le livre (5e édition, novembre 2026) ne donne aucun chiffrage : chaque montant est estimé par le modèle.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>L'écologie est au centre : rénovation thermique massive, rail, transports publics, renouvelables, sortie des énergies fossiles et des subventions qui les soutiennent : environ 9 Mt de CO2 évitées par an en 2037 dans le prudent, 17 dans le médian, autant que le programme écologiste.</li>
+              <li>La pauvreté monétaire est presque supprimée par construction ; hausse forte du pouvoir d'achat des bas salaires, des retraités modestes et des agents publics ; soins sans reste à charge.</li>
+              <li>Des investissements et des recrutements massifs dans l'école, l'hôpital, le grand âge, la petite enfance et le logement public.</li>
+              <li>La relance soutient l'activité dès le début, malgré la limite de capacité de l'économie, et la hausse des prix qu'elle entraîne allège la dette ; les plus hauts patrimoines et revenus contribuent davantage.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Les dépenses nouvelles (environ 14 points de PIB en 2032) dépassent de loin les impôts nouveaux (environ 1,5 point) : dans le modèle, le déficit et la dette montent beaucoup plus vite que sans réforme, dans tous les scénarios (déficit de 27,9 % du PIB en 2037 dans le prudent, contre 9,5 %). La renationalisation d'Engie, les tarifs réglementés de l'énergie et l'interdiction des licenciements boursiers pèsent aussi sur la productivité (barème du modèle, d'après une étude de l'OCDE) : dans le prudent, le PIB est inférieur de 2,0 % au statu quo en 2037.</li>
+              <li>L'effet de la relance sur l'emploi s'estompe en quelques années, quand restent les emplois perdus par la retraite à 60 ans, la hausse du SMIC et la sixième semaine de congés : le chômage est au-dessus du statu quo dès 2029 (9,3 % en 2037 dans le prudent, contre 8,3 %). Les 32 heures des métiers pénibles ou de nuit, au même salaire, concernent 1,3 à 3 millions de salariés du privé selon le scénario : une partie de la production est perdue (environ 5 Md€ de recettes en moins par an en 2037 dans le prudent). Leur généralisation « par la négociation collective » n'est pas comptée.</li>
+              <li>Plusieurs leviers centraux sont hors du modèle : annulation de la dette détenue par la BCE, circuit du Trésor, règles européennes ; les gains de long terme de la santé et de la transition ne sont pas comptés (ceux de l'éducation et de la recherche le sont, mais restent faibles avant 2040).</li>
+              <li>Des lectures à trancher, qui changent beaucoup le total : garantie d'autonomie par ménage ou par personne, culture à 1 % du PIB, arrêts maladie payés par la Sécurité sociale ou les employeurs.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Glucksmann (Place publique)" hidden>
+        <p class="texte">Un projet social-démocrate et européen. Il veut une Europe puissance : traité de refondation, fonds de défense de 500 Md€ par emprunt commun, aide à l'Ukraine, aide au développement à 0,7 % du revenu national. Il veut sortir du gaz et du pétrole en s'appuyant à la fois sur le nucléaire et sur les renouvelables, avec MaPrimeRénov' relancée, un plan Rail et un « Ticket climat ». Sur la justice fiscale, il taxe davantage les très gros héritages pour baisser la CSG sur les salaires, demande un effort aux très hauts patrimoines et taxe automatiquement les superprofits. Il porte le SMIC à 1 600 € net, ramène la retraite à 62 ans et abroge la réforme de l'assurance chômage. Il renforce l'école (loi de programmation), la santé de proximité et la garde d'enfants, crée un service civique obligatoire de dix mois et instaure la proportionnelle. Il n'y a pas de programme présidentiel publié : le chiffrage repose sur le projet « Acte I » de Place publique (2025) et sur les débats de 2026. Chaque montant est estimé par le modèle, et les recettes annoncées ne sont pas reprises.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Le pouvoir d'achat des salariés modestes monte par deux leviers à la fois : le SMIC et une baisse de CSG de 15 Md€. Cette baisse rend le travail plus payant : environ 30 000 emplois en plus à long terme dans le prudent.</li>
+              <li>Le financement passe par le haut de la distribution : grosses successions, très hauts patrimoines, superprofits, plafonnement du crédit d'impôt recherche des grands groupes, niches des transports polluants.</li>
+              <li>Les services publics sont renforcés : enseignants revalorisés, santé de proximité et prévention, droit opposable à la garde d'enfants, plan contre les violences sexistes et sexuelles.</li>
+              <li>L'investissement public augmente : rénovation des logements, rail, écoles, renouvelables. La stratégie énergétique repose sur le nucléaire et les renouvelables. Le programme ne relance pas l'économie au-delà de ce que le modèle peut absorber.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Les dépenses nouvelles dépassent les recettes nouvelles, d'autant que la baisse de CSG et celle de la taxe sur l'électricité absorbent les impôts nouveaux. Dans le prudent, le déficit atteint 13,3 % du PIB en 2037, contre 9,5 % sans réforme ; le solde primaire est plus bas de 2,6 points. L'indexation de la facture d'électricité sur le coût de production pèse un peu sur la productivité (barème du modèle, d'après une étude de l'OCDE).</li>
+              <li>Le retour à 62 ans coûte environ 25 Md€ par an à plein effet et environ 280 000 emplois de seniors. Avec le SMIC (environ 170 000 emplois), l'assurance chômage plus généreuse et le service civique (environ 130 000 jeunes retirés de l'emploi), le chômage est à 8,9 % en 2037, contre 8,3 %.</li>
+              <li>Le service civique obligatoire coûte à lui seul environ 8 Md€ par an et l'aide au développement 9 Md€.</li>
+              <li>Une grande partie du projet est européenne (fonds de défense, budget de l'Union, Horizon Europe) et sort du solde national. Ses mesures écologiques (rénovation, Ticket climat, fonds chaleur, niches des transports, agriculture) évitent environ 2 Mt de CO₂ par an en 2037 dans le prudent et 4 dans le médian. Les gains de long terme de l'éducation sont comptés, mais restent faibles avant 2040.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Attal (Renaissance)" hidden>
+        <p class="texte">Un projet centré sur le travail et l'Europe. Sa mesure phare est le « droit au brut » : 250 € net de plus par mois au salaire médian, par la suppression de cotisations salariales. Il fixe une règle d'or budgétaire inscrite dans la Constitution et promet de ne pas hausser les impôts. En Europe, il propose de préparer des « États-Unis d'Europe » avec un noyau de pays volontaires. Pour l'énergie, son plan « Messmer II » prévoit 14 EPR et la baisse des énergies fossiles. Le plan « France 2040 » consacre 200 Md€ à l'IA et à l'innovation. À l'école, les enseignants sont revalorisés (200 à 500 € net par mois) et l'IA entre en classe. Sur le régalien, il veut une justice plus rapide et une immigration choisie. Il n'y a pas de programme complet : le chiffrage s'appuie sur le site de campagne et sur la lettre du 15 octobre 2026. Les 150 Md€ d'économies annoncés ne sont pas repris : seules les mesures nommées sont estimées, et les propositions des seules conventions de Renaissance ne sont pas chiffrées.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Le « droit au brut » rend le travail plus payant et, avec l'assurance chômage resserrée, ajoute de l'emploi ; moins d'immigration familiale et étudiante (lue comme un quart de ces titres de séjour) en retire environ 115 000 personnes : au total, environ 125 000 emplois de plus en 2037 dans le prudent, et un PIB proche du statu quo. La réécriture du code du travail compte, mais l'électricité à prix fixé par la régulation pèse un peu sur la productivité (barème du modèle, d'après une étude de l'OCDE).</li>
+              <li>Des économies sont nommées : année blanche de 2028 (petites retraites protégées), 100 000 postes publics, arrêts maladie, assurance chômage, un échelon de collectivités.</li>
+              <li>L'argent va à l'avenir : école, formation des médecins, innovation et IA (France 2040), géothermie.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Le « droit au brut » coûte environ 52 Md€ par an dans le prudent. Les économies nommées n'en couvrent qu'une partie, et le reste des 150 Md€ n'est pas détaillé (le modèle en déduit environ 5 Md€ par an dans le prudent, sur l'État et la santé, qu'il vise) : le déficit atteint 11,2 % du PIB en 2037, contre 9,5 % sans réforme.</li>
+              <li>Les retraites (système universel sans âge légal) sont laissées aux partenaires sociaux : aucun effet chiffrable.</li>
+              <li>Une partie du projet est européenne (dette commune, Trésor européen) et sort du solde national. Ses mesures écologiques changent peu les émissions (environ −0,1 Mt en 2037 dans le prudent) : le plan « Messmer II » et les EPR arrivent trop tard pour compter avant 2050.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Philippe (Horizons)" hidden>
+        <p class="texte">Un projet de redressement et de compétitivité. Il veut ramener le déficit à 2 % du PIB en fin de quinquennat, porter l'âge de départ à 65 ans avec 45 ans de cotisation, et ne remplacer qu'un fonctionnaire sur trois partant à la retraite. Il baisse les impôts de production de 50 Md€, compensés par autant d'aides aux entreprises en moins. Il veut libérer le temps de travail : heures au-delà de 35 heures sans impôt ni cotisation pour le salarié, sans cotisation patronale au-delà de 37 heures. Il généralise une retraite par capitalisation collective à tous les salariés, sur le modèle des fonctionnaires, qu'il dit financée par le travail plus long. Pour la famille, il crée une allocation unique de 350 € par mois dès le premier enfant pour les plus modestes, dégressive avec le revenu, supprime l'impôt sur le revenu pendant trois ans après une naissance et lance un plan pour la garde d'enfants ; il limite aussi la durée du RSA. Il augmente de 20 % la rémunération des enseignants, construit 8 EPR de plus et multiplie les réservistes par cinq. Sur le régalien, il durcit les peines et réduit l'immigration. Le chiffrage repose sur les 15 pages thématiques du site, mises à jour le 12 novembre 2026, et sur les interviews. Les économies annoncées ne sont pas reprises.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Les mesures nommées se financent en partie : le solde primaire est sous le statu quo en 2037 dans le prudent (1,0 point), au même niveau dans le médian et meilleur dans l'optimiste (+1,1 point).</li>
+              <li>La retraite à 65 ans ajoute environ 105 000 emplois de seniors et rapporte environ 11 Md€ par an en 2037 dans le prudent avec les 45 annuités, plus que la capitalisation collective qu'elle doit financer (environ 8,5 Md€). L'indemnisation chômage ramenée à 12 mois ajoute aussi de l'emploi ; mais l'immigration divisée par deux (lue comme la moitié des premiers titres de séjour) retire environ 425 000 personnes de l'emploi en 2037 dans le prudent : au total, environ 265 000 emplois de moins que le statu quo et un PIB inférieur de 0,7 %. La simplification administrative et le moratoire sur les normes ne sont pas comptés dans la productivité : l'étude de l'OCDE dont le modèle tire son barème ne les mesure pas.</li>
+              <li>Les entreprises sont moins taxées sur la production, et les aides sont supprimées à proportion.</li>
+              <li>Des économies sociales nommées, en 2037 dans le prudent : l'indemnisation chômage ramenée à 12 mois pour les moins de 50 ans rapporte environ 3,2 Md€ par an ; les dépenses de santé, que le candidat dit vouloir stabiliser sans les baisser, environ 1,6 Md€ (estimation du modèle), et le non-remplacement à l'hôpital environ 2,4 Md€ ; trois jours de carence pour tous rapportent environ 0,4 Md€ (chiffrage des inspections générales pour la fonction publique, et arrêts évités dans le privé).</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Le déficit ne descend pas vers 2 % dans le modèle : ses mesures nommées couvrent déjà une bonne partie de ce que permettent les précédents ; le modèle n'ajoute qu'environ 2 Md€ d'économies non détaillées dans le prudent, et le déficit est au-dessus du statu quo (11,1 % du PIB en 2037 contre 9,5 %). Les mesures ajoutées au site le 12 novembre pèsent : l'allocation familiale unique coûte environ 6,6 Md€ par an dans le prudent (lecture par famille ; par enfant, plus de 15), la capitalisation collective environ 8,5 Md€, les heures au-delà de 35 heures sans CSG environ 2 Md€, la garde d'enfants environ 1 Md€. Si le fonds de capitalisation était compté parmi les administrations publiques (même variante que pour les autres programmes à fonds), le versement de l'État serait un transfert interne : déficit de 10,7 % du PIB en 2037 au lieu de 11,1 %.</li>
+              <li>La retraite à 65 ans et l'indemnisation chômage plus courte reposent sur les actifs âgés et les chômeurs. Côté revenus, l'allocation familiale unique fait baisser la pauvreté : 14,9 % en 2037 dans la microsimulation, contre 16,0 % avec la législation actuelle sur la même population.</li>
+              <li>Les aides aux entreprises supprimées ne sont pas listées : le modèle en estime 20 Md€ dans le prudent, pas les 50 annoncés. Côté climat, le fret ferroviaire, la capture du carbone et l'aide aux voitures électriques d'occasion évitent environ 1,2 Mt par an en 2037 dans le prudent.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Retailleau (Les Républicains)" hidden>
+        <p class="texte">Un projet d'autorité et de travail. Sur le régalien, il prévoit des peines minimales, un état d'urgence contre les trafics et une immigration fortement réduite, avec cinq ans de résidence exigés pour les prestations non contributives et la fin du droit du sol. Pour valoriser le travail, il crée un revenu d'incitation à l'activité à la place du RSA et de la prime d'activité, supprime les cotisations au-delà de 1 623 heures et rend au moins 30 Md€ aux salariés et aux entreprises. Il fixe le taux plein à 65 ans, avec des départs possibles dès 63 ans moyennant une décote. Il ne remplace pas 400 000 fonctionnaires d'ici 2032 et porte la défense à 100 Md€. Sur l'énergie, il relance le nucléaire et arrête le soutien aux nouvelles éoliennes et au solaire. Il veut aussi une politique familiale renforcée et une agriculture moins normée. Le chiffrage s'appuie sur les livrets thématiques des Républicains (2026). Le plan de 197 Md€ d'économies n'est pas repris : seules les mesures nommées sont estimées.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Les mesures nommées couvrent presque tout le programme : le solde primaire est proche du statu quo en 2037 dans le prudent (0,4 point sous lui), meilleur en médian et en optimiste.</li>
+              <li>Le travail est favorisé de plusieurs façons : cotisations salariales en moins, heures au-delà de 1 623 heures sans cotisations, assurance chômage resserrée, revenu d'incitation à l'activité. Avec la refonte du code du travail (barème du modèle, d'après une étude de l'OCDE) et la fin du ZAN (environ 37 500 logements de plus par an dans le prudent), ses mesures relèvent le PIB ; mais la forte baisse de l'immigration (lue comme un tiers des premiers titres de séjour, environ 280 000 personnes de moins en emploi en 2037) l'emporte dans le prudent : PIB inférieur de 0,2 %, supérieur de 2,2 % dans l'optimiste.</li>
+              <li>La défense est fortement relevée et les entreprises paient moins d'impôts de production.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>La défense à 100 Md€ coûte à elle seule environ 16 Md€ de plus par an en 2032. Le déficit est un peu au-dessus du statu quo dans le prudent (10,2 % du PIB en 2037, contre 9,5 %) ; les mesures nommées atteignent déjà ce que les précédents permettent, le modèle n'ajoute donc pas d'économies non détaillées.</li>
+              <li>Le revenu d'incitation à l'activité, le plafond des aides et les cinq ans de résidence baissent les revenus des ménages sans emploi : dans la microsimulation, la pauvreté monte à 16,3 % en 2037, contre 15,9 % avec la législation actuelle sur la même population.</li>
+              <li>Sur les 400 000 postes annoncés, 200 000 sont comptés dans le prudent (même règle pour tous). La réforme des retraites (âge minimal de 63 ans avec décote, taux plein ramené à 65 ans) rapporte peu. Les émissions montent d'environ 2 Mt par an en 2037 dans le prudent : fin de MaPrimeRénov', passoires énergétiques de nouveau louables, arrêt du soutien aux nouvelles éoliennes et au solaire. La part de capitalisation obligatoire coûte quelques milliers d'emplois par le coût du travail.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Lisnard (Nouvelle Énergie)" hidden>
+        <p class="texte">Un projet libéral, contre la bureaucratie. Il veut une baisse massive de la dépense publique (80 Md€ la première année, puis 200 Md€) et des prélèvements : 120 Md€ rendus aux actifs, soit environ 400 € net par mois, avec la CSG ramenée de 9,2 à 6,6 %. Il baisse aussi les impôts de production de 40 Md€ et ramène l'impôt sur les sociétés à 20 %. Il supprime la moitié des agences, réduit les effectifs publics d'environ 12 % et généralise le « silence vaut accord ». Il crée un contrat de travail unique et fusionne les aides en une allocation unique plafonnée. Sur le régalien et l'immigration, il prévoit 20 000 places de prison et une majorité pénale à 16 ans. Il porte la retraite à 65 ans, défend le nucléaire et le retour au septennat. Il n'y a pas de document complet : le chiffrage repose sur les carnets, « Le livre noir », les fiches et les entretiens. Les économies annoncées ne sont pas reprises : seules les mesures nommées sont estimées.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>C'est le plus fort effet d'offre des programmes chiffrés : les prélèvements sur le travail et la production baissent beaucoup. Avec la retraite à 65 ans et le contrat de travail unique (barème du modèle, d'après une étude de l'OCDE), ses mesures relèvent nettement le PIB ; mais les titres de séjour divisés par huit rendent le solde migratoire négatif et retirent environ 740 000 personnes de l'emploi en 2037 dans le prudent : le PIB est supérieur au statu quo de 0,3 % dans le prudent et de 5,6 % dans l'optimiste.</li>
+              <li>Les salariés gagnent nettement en pouvoir d'achat, et les entreprises en compétitivité.</li>
+              <li>La réduction des effectifs, des agences et des aides est détaillée par grands blocs.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Les baisses de prélèvements (environ 170 Md€ à terme avec l'IS) dépassent de loin les économies nommées : le déficit atteint 13,9 % du PIB en 2037 dans le prudent, contre 9,5 % (la baisse des impôts de production fait revenir une partie en impôt sur les sociétés). Ses mesures nommées atteignent déjà ce que les précédents permettent dans chaque domaine : le modèle n'y ajoute pas d'économies non détaillées dans le prudent, et le programme ne se finance qu'avec des économies au-delà des précédents.</li>
+              <li>La suppression de cotisations de cette ampleur pose la question des droits à retraite et du financement de la Sécurité sociale : le modèle suppose que les droits à retraite sont gardés et que l'État compense les caisses.</li>
+              <li>La retraite à 65 ans et le gel des pensions au-delà de 2 000 € pendant le quinquennat (pour amorcer la capitalisation) pèsent sur les seniors et les retraités. Les émissions montent d'environ 1,7 Mt par an en 2037 dans le prudent (fin du soutien aux renouvelables, zones à faibles émissions supprimées).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Le Pen (Rassemblement national) — partiel" hidden>
+        <p class="texte">Un projet centré sur la souveraineté, le pouvoir d'achat et l'immigration. Il baisse la TVA de 20 % à 5,5 % sur les carburants, le gaz, le fioul et l'électricité, et la supprime sur une centaine de produits de première nécessité. Il exonère d'impôt sur le revenu les moins de 30 ans et supprime la CFE et la C3S. Il abroge la réforme des retraites de 2023 : 62 ans et 42 annuités, avec un départ à 60 ans pour ceux qui ont commencé avant 20 ans. Il veut réserver une partie des prestations aux Français par la « priorité nationale », remplacer l'AME par une aide d'urgence et réduire l'immigration par référendum. Il prévoit aussi des recrutements de policiers et de gendarmes, 85 000 places de prison, la relance du nucléaire avec un moratoire sur l'éolien, une recherche publique relevée et une réorganisation de l'État et des collectivités. Une règle d'or serait soumise à référendum. Le document du contre-budget (6 octobre 2026) n'est pas publié : le chiffrage repose sur des comptes rendus et des sources de seconde main, il est partiel. Les 140 Md€ d'économies annoncés ne sont pas repris : chaque mesure nommée est estimée.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Un gain de pouvoir d'achat direct et large : énergie et produits de base moins chers, impôt sur le revenu supprimé pour les jeunes, hausses de salaire exonérées de cotisations pendant cinq ans.</li>
+              <li>Des économies nommées sur l'État : environ 200 000 agents non remplacés en 2032 dans le prudent (même règle pour tous), agences supprimées, 35 heures dans la territoriale, AME et « priorité nationale ».</li>
+              <li>Les entreprises paient moins d'impôts de production, et la recherche publique est relevée.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Les baisses d'impôts (TVA sur l'énergie et impôts de production : environ 26 Md€ par an) et le retour à 62 ans (environ 23 Md€ par an) dépassent de loin les économies que le modèle retient : le déficit atteint 13,2 % du PIB en 2037 dans le prudent, contre 9,5 % sans réforme. Ses économies nommées atteignent déjà ce que les précédents permettent : le modèle n'en ajoute pas d'autres.</li>
+              <li>Plusieurs économies se heurtent au droit : la baisse de la contribution à l'Union européenne (comptée zéro dans le prudent) et la « priorité nationale » (zéro en crise, 2 Md€ dans le prudent, qui suppose une révision de la Constitution).</li>
+              <li>Le retour à 62 ans fait sortir de l'emploi environ 280 000 seniors. Le moratoire sur l'éolien pèse un peu sur la productivité (barème du modèle, d'après une étude de l'OCDE). La baisse de l'immigration (lue comme la fin de l'immigration familiale et la moitié des titres humanitaires) retire environ 300 000 personnes de l'emploi en 2037 dans le prudent, avec leurs recettes.</li>
+              <li>Les émissions montent d'environ 8 Mt par an en 2037 dans le prudent : énergie moins chère (TVA, composante carbone de 2017) et démontage des éoliennes.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-prog" data-prog="Roussel (Parti communiste français)" hidden>
+        <p class="texte">Un projet centré sur le travail et les salaires, les services publics et une énergie décarbonée publique. Il prévoit un SMIC à 1 700 € net, une hausse des autres salaires et du point d'indice, la retraite à 60 ans à taux plein et des pensions qui suivent les salaires. Il instaure la semaine de 32 heures sans perte de salaire et une « sécurité d'emploi ou de formation » à la place du RSA. Pour les services publics, il prévoit 90 000 enseignants, des recrutements massifs à l'hôpital, 30 000 policiers de proximité, les soins remboursés à 100 % et 200 000 logements sociaux par an. Côté énergie et transports : nucléaire public relancé (jusqu'à 20 EPR2), rail renforcé de 15 Md€ par an, transports en commun gratuits, carburant bloqué à 1,50 €. Il veut aussi nationaliser les grandes banques, AXA, Engie et les autoroutes, et créer un fonds public de 500 Md€. Côté recettes : ISF rétabli, impôt minimal de 2 % sur les plus grandes fortunes, cotisations sur les revenus financiers. Il n'y a pas de programme 2027 publié : le chiffrage repose sur les discours de 2025 et 2026. Les recettes annoncées ne sont pas reprises, et les mesures communes avec La France insoumise sont chiffrées comme les siennes.</p>
+        <div class="pc">
+          <div class="pour">
+            <h3>Ce qui joue en sa faveur</h3>
+            <ul>
+              <li>Une forte hausse du pouvoir d'achat des salariés modestes et des retraités : SMIC, pensions qui suivent les salaires, minimum vieillesse à 1 400 €, CSG des retraites supprimée.</li>
+              <li>Des services publics nettement renforcés (école, hôpital, police de proximité), des soins sans reste à charge et un emploi ou une formation garantis aux chômeurs de longue durée.</li>
+              <li>Plus de temps libre pour les salariés avec les 32 heures. Dans le prudent, le chômage reste proche du statu quo : les embauches de partage du travail et les embauches publiques compensent l'essentiel des emplois perdus par le coût horaire.</li>
+              <li>Les plus hauts patrimoines et les revenus financiers contribuent davantage. Le rail et les transports gratuits réduisent un peu les émissions, avec un nucléaire public renforcé à plus long terme.</li>
+            </ul>
+          </div>
+          <div class="contre">
+            <h3>Ce qui joue contre lui</h3>
+            <ul>
+              <li>Les dépenses nouvelles et les baisses de recettes dépassent de loin les impôts nouveaux. Dans le prudent, le déficit atteint 29,9 % du PIB en 2037, contre 9,5 % sans réforme. Avec celui de La France insoumise, c'est le déficit le plus élevé des programmes comparés.</li>
+              <li>Les 32 heures au même salaire, sans allègements de cotisations, font baisser la production. Une partie seulement est rattrapée par la productivité et les embauches. La nationalisation d'Engie et des transports et la sortie du marché européen de l'électricité pèsent aussi sur la productivité (barème du modèle, d'après une étude de l'OCDE) : dans le prudent, le PIB est inférieur de 5,1 % au statu quo en 2037. Les 32 heures sont l'hypothèse la plus incertaine du chiffrage.</li>
+              <li>La retraite à 60 ans coûte près de 50 Md€ par an à plein effet et fait sortir de l'emploi environ 520 000 seniors. L'indexation des pensions sur les salaires ajoute plus de 30 Md€ par an en 2037, et davantage ensuite.</li>
+              <li>Les nationalisations (environ 250 Md€ dans le prudent) augmentent la dette. Plusieurs mesures viennent de discours de 2025 et restent à confirmer dans le programme définitif.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="ecarts">
+      <h2>D'où vient l'écart avec le statu quo</h2>
+      <p class="note">Programme, scénario et année choisis, en points de PIB ; à droite de zéro, le poste améliore le solde par rapport au statu quo. Cliquez une barre pour ne garder que ses mesures dans la liste ci-dessous.</p>
+      <p class="total">Écart de déficit avec le statu quo : <b data-draw="l_ecart" data-source="ecart_deficit" data-field="ecart">—</b> point(s) de PIB (+ = moins de déficit), somme des barres.</p>
+      <div class="bars" data-draw="c_ecarts" data-source="ecarts"></div>
+    </section>
+
+    <section class="card" id="mesures">
+      <h2>Les mesures prises en compte</h2>
+      <p class="note">Toutes les mesures chiffrées du programme, de la plus lourde à la plus légère : effet sur le solde par rapport au statu quo (+ = l'améliore), en Md€ de 2026 et en points de PIB, au scénario et à l'année choisis (années de détail : 2029, 2032, 2037, 2045, 2050, 2060, 2073). « Effet économique » : ce que les mesures changent à l'activité, donc aux recettes. « Classement » et « méthode » ne sont pas des mesures : ils alignent les périmètres des deux chiffrages.</p>
+      <div class="barre">
+        <label class="champ" for="f-cherche"><span>Chercher</span><input id="f-cherche" class="f-cherche" type="search" placeholder="retraites, SMIC, CSG…"></label>
+        <label class="champ" for="f-groupe"><span>Poste</span><select id="f-groupe" class="dash-select" data-draw="f_groupe" data-source="ecarts"></select></label>
+      </div>
+      <div class="scroll">
+        <table class="mes" data-source="mesures" data-row-key="cle">
+          <thead><tr><th data-field="mesure">Mesure</th><th data-field="groupe">Poste</th><th data-field="nature">Nature</th><th data-field="md">Md€</th><th data-field="part_pib">Points de PIB</th></tr></thead>
+          <tbody data-draw="t_mesures"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===================== COMPARER ===================== -->
+  <section class="vue" id="comparer" role="tabpanel" aria-label="Comparer deux programmes" hidden>
+    <div class="vue-intro">
+      <div class="barre">
+        <div class="champ"><span>Programme A</span><b data-draw="l_prog_a">—</b></div>
+        <label class="champ" for="f-prog-b"><span>Programme B</span>
+          <select id="f-prog-b" class="dash-select" data-draw="f_prog_b" data-source="traj"></select>
+        </label>
+        <div class="champ"><span>&nbsp;</span><button type="button" class="chip f-inverser">Inverser A et B</button></div>
+      </div>
+      <p class="note">Le programme A est celui du menu « Programme » en haut de la page. Scénario et année choisis. Mêmes règles et mêmes hypothèses pour les deux, comparés aussi au statu quo. En vert, mieux que le statu quo (colonnes A et B) ou B mieux que A (colonne « B − A ») ; les grandeurs sans « mieux » évident (population, recettes, dépenses) ne sont pas colorées.</p>
+    </div>
+    <section class="card" id="cmp-tableau">
+      <h2>Côte à côte : <span data-draw="l_prog_a">—</span> et <span data-draw="l_prog_b">—</span></h2>
+      <div class="scroll-x">
+        <table data-source="comparaison" data-row-key="cle">
+          <thead><tr><th data-field="indicateur">Indicateur</th><th data-field="a">A : <span data-draw="l_prog_a">—</span></th><th data-field="b">B : <span data-draw="l_prog_b">—</span></th><th data-field="ecart">B − A</th><th data-field="statu_quo">Statu quo</th></tr></thead>
+          <tbody data-draw="t_comparer"></tbody>
+        </table>
+      </div>
+      <p class="note">Démographie : 2030 au plus tôt (les écarts de population commencent en 2030). Pauvreté : microsimulation, scénario prudent, année calculée la plus proche (2029, 2032, 2037 ou 2050), mesures codées seulement.</p>
+    </section>
+    <div class="legend leg-ab"><span class="a">A : <span data-draw="l_prog_a">—</span></span><span class="b">B : <span data-draw="l_prog_b">—</span></span></div>
+    <section class="grid">
+      <div class="card" id="c-cmp-esp">
+        <h3>Écart de solde primaire au statu quo</h3>
+        <p class="note">Points de PIB, 2029-2060 ; au-dessus de zéro, le programme améliore les comptes hors intérêts.</p>
+        <div class="chart" data-draw="c_cmp_esp" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-cmp-deficit">
+        <h3>Déficit au sens de Maastricht</h3>
+        <p class="note">% du PIB, 2029-2060, avec le statu quo en pointillés.</p>
+        <div class="chart" data-draw="c_cmp_deficit" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-cmp-pib">
+        <h3>PIB : écart au statu quo</h3>
+        <p class="note">% du PIB du statu quo, 2029-2060.</p>
+        <div class="chart" data-draw="c_cmp_pib" data-source="croissance"></div>
+      </div>
+      <div class="card" id="c-cmp-chomage">
+        <h3>Taux de chômage</h3>
+        <p class="note">%, 2029-2060.</p>
+        <div class="chart" data-draw="c_cmp_chomage" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-cmp-population">
+        <h3>Population</h3>
+        <p class="note">Millions d'habitants, 2030-2060.</p>
+        <div class="chart" data-draw="c_cmp_population" data-source="demographie"></div>
+      </div>
+      <div class="card" id="c-cmp-emissions">
+        <h3>Émissions territoriales</h3>
+        <p class="note">Mt CO₂e hors puits, 2029-2060.</p>
+        <div class="chart" data-draw="c_cmp_emissions" data-source="ecologie"></div>
+      </div>
+    </section>
+    <section class="card" id="cmp-postes">
+      <h2>D'où vient l'écart avec le statu quo, poste par poste</h2>
+      <p class="note">Scénario et année choisis, en points de PIB ; à droite de zéro, le poste améliore le solde par rapport au statu quo. Barre du haut : A ; barre du bas : B. Le détail des mesures est dans la vue d'ensemble de chaque programme.</p>
+      <div class="legend leg-ab"><span class="a">A : <span data-draw="l_prog_a">—</span></span><span class="b">B : <span data-draw="l_prog_b">—</span></span></div>
+      <div class="bars" data-draw="c_cmp_postes" data-source="ecarts"></div>
+    </section>
+  </section>
+
+  <!-- ===================== ÉCONOMIE ===================== -->
+  <section class="vue" id="economie" role="tabpanel" aria-label="Économie" hidden>
+    <div class="vue-intro">
+      <p class="lead">En <b data-draw="l_annee">—</b>, scénario <b data-draw="l_scen">—</b> : le PIB de <b data-draw="l_prog">—</b> est <b data-draw="e_pib_prog" data-source="croissance" data-field="ecart_pib_pct">—</b> par rapport au statu quo, avec une croissance de <b data-draw="e_crois_prog" data-source="croissance" data-field="croissance_pct">—</b> cette année-là (statu quo : <b data-draw="e_crois_sq" data-source="croissance" data-field="croissance_pct">—</b>).</p>
+    </div>
+
+    <section class="card" id="synthese">
+      <h2>Les programmes en un coup d'œil</h2>
+      <p class="note">Scénario choisi. Programmes classés par l'écart de solde primaire au statu quo en 2037, en points de PIB : au-dessus de zéro, le programme améliore les comptes hors intérêts ; c'est la comparaison la plus robuste. Déficit et solde primaire en % du PIB ; dette en % du PIB ; en italique gris, les valeurs d'une année où la dette dépasse 200 % du PIB, sans valeur de prévision. Dernière colonne : PIB qu'il faudrait encore en plus, au-delà des effets déjà comptés (demande et offre), pour que le programme ne dégrade pas le solde primaire par rapport au statu quo (« aucun » : il l'améliore déjà).</p>
+      <div class="scroll-x">
+        <table data-source="synthese" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="esp_2032">Écart de solde primaire 2032</th><th data-field="esp_2037">Écart de solde primaire 2037</th><th data-field="deficit_2029">Déficit 2029</th><th data-field="deficit_2037">Déficit 2037</th><th data-field="deficit_2050">Déficit 2050</th><th data-field="sp_2037">Solde primaire 2037</th><th data-field="dette_2037">Dette 2037</th><th data-field="dette_2050">Dette 2050</th><th data-field="annee_200">Dette &gt; 200 %</th><th data-field="pib_eq_2037">PIB en plus pour équilibrer (2037)</th></tr></thead>
+          <tbody data-draw="t_synthese"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <h2>Croissance</h2>
+    <section class="grid">
+      <div class="card" id="c-ecart-pib">
+        <h3>PIB : écart au statu quo</h3>
+        <p class="note">% du PIB du statu quo, même scénario, 2029-2060. Il additionne les effets de demande (multiplicateur, qui s'estompe) et d'offre (travail, capital, productivité, démographie, qui durent).</p>
+        <div class="chart" data-draw="c_ecart_pib" data-source="croissance"></div>
+      </div>
+      <div class="card" id="c-croissance">
+        <h3>Croissance du PIB</h3>
+        <p class="note">% par an, en euros constants de 2026, 2030-2060. 2029 n'a pas de croissance publiée : l'économie de 2026 y est placée.</p>
+        <div class="chart" data-draw="c_croissance" data-source="croissance"></div>
+      </div>
+    </section>
+
+    <h2>Finances publiques</h2>
+    <section class="grid">
+      <div class="card" id="c-esp">
+        <h3>Écart de solde primaire au statu quo</h3>
+        <p class="note">Points de PIB, 2029-2060, scénario choisi ; au-dessus de zéro, le programme améliore les comptes hors intérêts. La mesure la plus robuste.</p>
+        <div class="chart" data-draw="c_esp" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-deficit">
+        <h3>Déficit au sens de Maastricht</h3>
+        <p class="note">% du PIB, 2029-2060, scénario choisi.</p>
+        <div class="chart" data-draw="c_deficit" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-dette">
+        <h3>Dette publique</h3>
+        <p class="note">% du PIB, 2029-2060, scénario choisi. Au-delà de 200 %, une trajectoire n'a plus valeur de prévision.</p>
+        <div class="chart" data-draw="c_dette" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-primaire">
+        <h3>Solde primaire</h3>
+        <p class="note">% du PIB, hors intérêts : au-dessus de zéro, l'État dégage de quoi payer une partie de ses intérêts.</p>
+        <div class="chart" data-draw="c_primaire" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-depenses">
+        <h3>Dépenses hors intérêts et recettes : <span data-draw="l_prog">—</span></h3>
+        <p class="note">% du PIB, programme choisi et statu quo. Trait plein : dépenses hors intérêts ; pointillés : recettes.</p>
+        <div class="chart" data-draw="c_depenses" data-source="traj"></div>
+      </div>
+    </section>
+
+    <section class="card" id="dette-dynamique">
+      <h2>Ce qui fait monter le déficit : intérêts, prime de dette et croissance</h2>
+      <p class="lead">Statu quo, scénario <b data-draw="l_scen">—</b> : de 2029 à <b data-draw="v_annee">—</b>, le déficit monte de <b data-draw="d_sq_total" data-source="decomposition" data-field="ecart_deficit">—</b> point(s) de PIB, dont <b data-draw="d_sq_prim" data-source="decomposition" data-field="primaire">—</b> de déficit primaire : le reste vient des intérêts.</p>
+      <p class="note">Le déficit est la somme du déficit primaire et des intérêts (taux apparent × dette du début d'année, rapportés au PIB). Un écart de déficit se coupe sans reste en cinq parts : déficit primaire ; taux hors prime (taux long, effet de l'inflation, réaction de la BCE, choc de crise) ; prime de dette, avec la baisse d'écart de taux gagnée par un programme dont la dette recule ; dette en plus, à taux donné ; PIB différent, à dette donnée. Programme et scénario choisis, année la plus proche parmi 2032, 2037 et 2050. À droite de zéro, la part creuse le déficit par rapport au statu quo.</p>
+      <p class="total">Écart de déficit de <b data-draw="l_prog">—</b> avec le statu quo en <b data-draw="v_annee">—</b> : <b data-draw="d_prog_total" data-source="decomposition" data-field="ecart_deficit">—</b> point(s) de PIB (+ = plus de déficit), somme des barres.</p>
+      <div class="bars" data-draw="c_decomp" data-source="decomposition"></div>
+      <p class="note">Le classement tient-il avec d'autres taux d'intérêt ? Voir les variantes communes dans l'onglet <a href="#fiabilite" data-aller="fiabilite">Fiabilité et méthode</a>.</p>
+    </section>
+  </section>
+
+  <!-- ===================== EMPLOI ===================== -->
+  <section class="vue" id="emploi" role="tabpanel" aria-label="Emploi" hidden>
+    <div class="vue-intro">
+      <p class="lead">En <b data-draw="l_annee">—</b>, scénario <b data-draw="l_scen">—</b> : <b data-draw="l_prog">—</b> a un chômage de <b data-draw="m_chom_prog" data-source="traj" data-field="chomage">—</b> %, contre <b data-draw="m_chom_sq" data-source="traj" data-field="chomage">—</b> % pour le statu quo, et <b data-draw="m_ecart_prog" data-source="traj" data-field="ecart_emploi_milliers">—</b> milliers de personnes en emploi par rapport au statu quo.</p>
+      <p class="note">Taux de chômage au sens du BIT. Le taux d'emploi porte sur les 18-66 ans, rapportés à la population du programme (immigration et naissances comprises). Un programme peut baisser le chômage en reprenant des chômeurs, ou faire monter l'emploi en faisant venir des personnes de l'inactivité (seniors, inactifs) sans toucher au taux de chômage : les deux indicateurs se lisent ensemble. Même règle pour tous : un emploi n'est compté qu'une fois, et les emplois créés par la demande suivent les mêmes profils (modèle Mésange) : ceux d'une dépense disparaissent en une dizaine d'années, ceux d'une baisse d'impôt sur le travail restent. Pour les programmes qui réduisent l'immigration, l'écart d'emploi compte aussi des personnes qui ne sont pas dans le pays : ce ne sont pas des chômeurs en plus.</p>
+    </div>
+    <section class="card" id="emploi-tableau">
+      <h2>Emploi et chômage, tous les programmes</h2>
+      <div class="scroll-x">
+        <table data-source="emploi_tab" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="chomage">Chômage (%)</th><th data-field="emploi_millions">Emploi (millions)</th><th data-field="ecart_emploi_milliers">Écart au statu quo (milliers)</th><th data-field="taux_emploi_18_66">Taux d'emploi 18-66 ans (%)</th><th data-field="taux_activite_18_66">Taux d'activité 18-66 ans (%)</th></tr></thead>
+          <tbody data-draw="t_emploi"></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="grid">
+      <div class="card" id="c-chomage">
+        <h3>Taux de chômage</h3>
+        <p class="note">% de la population active, 2029-2060, scénario choisi.</p>
+        <div class="chart" data-draw="c_chomage" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-ecart-emploi">
+        <h3>Personnes en emploi : écart au statu quo</h3>
+        <p class="note">Milliers de personnes, 2029-2060, scénario choisi.</p>
+        <div class="chart" data-draw="c_ecart_emploi" data-source="traj"></div>
+      </div>
+      <div class="card" id="c-taux-emploi">
+        <h3>Taux d'emploi des 18-66 ans</h3>
+        <p class="note">% de la population de 18 à 66 ans, 2029-2060, scénario choisi.</p>
+        <div class="chart" data-draw="c_taux_emploi" data-source="traj"></div>
+      </div>
+    </section>
+    <section class="card" id="emploi-canaux">
+      <h2>Emploi mesure par mesure : <span data-draw="l_prog">—</span></h2>
+      <p class="note">Scénario et année choisis : emplois en plus ou en moins par rapport au statu quo, mesure par mesure (ou canal, pour les effets d'ensemble comme la conjoncture), en milliers de personnes. Le graphique montre les lignes d'au moins 500 personnes ; le tableau, toutes.</p>
+      <p class="total">Écart d'emploi avec le statu quo : <b data-draw="m_ecart_total" data-source="traj" data-field="ecart_emploi_milliers">—</b> milliers, somme des lignes.</p>
+      <div class="bars" data-draw="c_canaux" data-source="emploi_canaux"></div>
+      <div class="scroll">
+        <table data-source="emploi_canaux" data-row-key="cle">
+          <thead><tr><th data-field="canal">Mesure ou canal</th><th data-field="emplois_milliers">Emplois (milliers)</th></tr></thead>
+          <tbody data-draw="t_canaux"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===================== POPULATION ===================== -->
+  <section class="vue" id="population" role="tabpanel" aria-label="Population" hidden>
+    <div class="vue-intro">
+      <p class="lead">En <b data-draw="pop_annee">—</b>, scénario <b data-draw="l_scen">—</b> : <b data-draw="l_prog">—</b> compte <b data-draw="l_pop_prog" data-source="demographie" data-field="population_millions">—</b> millions d'habitants, contre <b data-draw="l_pop_sq" data-source="demographie" data-field="population_millions">—</b> millions pour le statu quo, soit <b data-draw="l_pop_ecart" data-source="demographie" data-field="ecart_population_milliers">—</b> milliers de personnes.</p>
+      <p class="note">Le statu quo suit la projection de population de l'Insee de juin 2026 : fécondité centrale de 1,45 enfant par femme (basse en crise, haute en optimiste), solde migratoire de +150 000 personnes par an. Un programme change la population par deux canaux communs à tous : le solde migratoire, quand il réduit ou augmente les entrées (titres de séjour en moins, convertis en solde migratoire), et les naissances, quand il change le soutien aux familles ou les places d'accueil des jeunes enfants. Les écarts commencent en 2030 : les entrées de 2028 et 2029 d'un programme arrivent toutes au 1er janvier 2030, d'où une marche cette année-là. Flux de l'année (du 1er janvier au 1er janvier suivant), à partir de 2030.</p>
+    </div>
+
+    <section class="card" id="demographie">
+      <h2>Démographie : <span data-draw="l_prog">—</span> en <span data-draw="pop_annee">—</span></h2>
+      <div class="tuiles">
+        <div class="tuile"><span class="t-lab">Population (millions)</span><b class="t-val" data-draw="d_pop" data-source="demographie" data-field="population_millions">—</b><span class="t-sq">statu quo : <span data-draw="d_pop_sq" data-source="demographie" data-field="population_millions">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Naissances (milliers par an)</span><b class="t-val" data-draw="d_nais" data-source="demographie" data-field="naissances_milliers">—</b><span class="t-sq">statu quo : <span data-draw="d_nais_sq" data-source="demographie" data-field="naissances_milliers">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Décès (milliers par an)</span><b class="t-val" data-draw="d_dec" data-source="demographie" data-field="deces_milliers">—</b><span class="t-sq">statu quo : <span data-draw="d_dec_sq" data-source="demographie" data-field="deces_milliers">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Solde naturel (milliers par an)</span><b class="t-val" data-draw="d_nat" data-source="demographie" data-field="solde_naturel_milliers">—</b><span class="t-sq">statu quo : <span data-draw="d_nat_sq" data-source="demographie" data-field="solde_naturel_milliers">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Solde migratoire (milliers par an)</span><b class="t-val" data-draw="d_mig" data-source="demographie" data-field="solde_migratoire_milliers">—</b><span class="t-sq">statu quo : <span data-draw="d_mig_sq" data-source="demographie" data-field="solde_migratoire_milliers">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Fécondité (enfants par femme)</span><b class="t-val" data-draw="d_icf" data-source="demographie" data-field="fecondite">—</b><span class="t-sq">statu quo : <span data-draw="d_icf_sq" data-source="demographie" data-field="fecondite">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Part des 65 ans ou plus (%)</span><b class="t-val" data-draw="d_p65" data-source="demographie" data-field="part_65_plus_pct">—</b><span class="t-sq">statu quo : <span data-draw="d_p65_sq" data-source="demographie" data-field="part_65_plus_pct">—</span></span></div>
+        <div class="tuile"><span class="t-lab">65 ans ou plus pour 100 personnes de 20 à 64 ans</span><b class="t-val" data-draw="d_dep" data-source="demographie" data-field="dependance_65_20_64">—</b><span class="t-sq">statu quo : <span data-draw="d_dep_sq" data-source="demographie" data-field="dependance_65_20_64">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Âge médian (ans)</span><b class="t-val" data-draw="d_age" data-source="demographie" data-field="age_median">—</b><span class="t-sq">statu quo : <span data-draw="d_age_sq" data-source="demographie" data-field="age_median">—</span></span></div>
+      </div>
+      <p class="note">Fécondité : indicateur du scénario de l'Insee, plus l'effet du canal commun des naissances ; la fécondité plus élevée des immigrées change le nombre de naissances, pas cet indicateur. Rapport entre les 65 ans ou plus et les 20-64 ans : en vert quand il est plus bas que celui du statu quo (moins de retraités par actif potentiel). Les autres chiffres ne sont pas colorés : plus ou moins d'habitants n'est ni un bien ni un mal en soi.</p>
+    </section>
+
+    <section class="grid">
+      <div class="card" id="c-population">
+        <h3>Population totale</h3>
+        <p class="note">Millions d'habitants au 1er janvier, 2030-2060, scénario choisi.</p>
+        <div class="chart" data-draw="c_population" data-source="demographie"></div>
+      </div>
+      <div class="card" id="c-migration">
+        <h3>Solde migratoire</h3>
+        <p class="note">Entrées moins sorties du territoire, milliers de personnes par an, 2030-2060.</p>
+        <div class="chart" data-draw="c_migration" data-source="demographie"></div>
+      </div>
+      <div class="card" id="c-naissances">
+        <h3>Naissances</h3>
+        <p class="note">Milliers par an, 2030-2060. Elles bougent avec la politique familiale et avec le nombre de femmes en âge d'avoir des enfants, donc aussi avec l'immigration.</p>
+        <div class="chart" data-draw="c_naissances" data-source="demographie"></div>
+      </div>
+      <div class="card" id="c-deces">
+        <h3>Décès</h3>
+        <p class="note">Milliers par an, 2030-2060 : la mortalité est celle de l'Insee pour tous ; seuls changent les effectifs.</p>
+        <div class="chart" data-draw="c_deces" data-source="demographie"></div>
+      </div>
+      <div class="card" id="c-fecondite">
+        <h3>Fécondité</h3>
+        <p class="note">Enfants par femme, 2030-2060.</p>
+        <div class="chart" data-draw="c_fecondite" data-source="demographie"></div>
+      </div>
+      <div class="card" id="c-dependance">
+        <h3>Vieillissement</h3>
+        <p class="note">Personnes de 65 ans ou plus pour 100 personnes de 20 à 64 ans, 2030-2060 ; plus bas = moins de retraités par actif potentiel.</p>
+        <div class="chart" data-draw="c_dependance" data-source="demographie"></div>
+      </div>
+    </section>
+
+    <section class="card" id="pyramide">
+      <h2>Population par âge en <span data-draw="pyr_annee">—</span> : <span data-draw="l_prog">—</span></h2>
+      <p class="note">Milliers de personnes par tranche de cinq ans, scénario choisi ; année la plus proche parmi 2029, 2037, 2050 et 2060. À droite, l'écart avec le statu quo.</p>
+      <div class="legend leg-pyr"><span class="prog">Programme</span><span class="sq">Statu quo</span></div>
+      <div class="pyramide" data-draw="c_pyramide" data-source="pyramide"></div>
+    </section>
+
+    <h2>Pauvreté et niveaux de vie</h2>
+    <section class="card" id="pauvrete">
+      <h3>Taux de pauvreté au fil des années</h3>
+      <p class="lead">En <b data-draw="p_annee">—</b> : <b data-draw="l_prog">—</b> a un taux de pauvreté de <b data-draw="p_prog" data-source="redistribution" data-field="pauvrete_pct">—</b> %, contre <b data-draw="p_sq" data-source="redistribution" data-field="pauvrete_pct_sq">—</b> % avec la législation actuelle sur la même population.</p>
+      <p class="note">% des personnes sous 60 % du niveau de vie médian, en 2029, 2032, 2037 et 2050 (années calculées), scénario prudent quel que soit le scénario choisi. Microsimulation : 20 000 ménages synthétiques calés sur l'Insee et les comptes de la Cnaf, dont les impôts et les prestations sont calculés par OpenFisca, avec un recours partiel aux aides, et vieillis année par année (emploi, chômage, retraités, nombre de ménages du programme). Seules les mesures codées dans OpenFisca comptent : impôt sur le revenu, CSG, cotisations salariales, prestations, minimum vieillesse, revalorisation des pensions, SMIC, part salariale d'une capitalisation obligatoire. Pas l'assurance chômage, les impôts sur le patrimoine et les successions, les services publics ni les prix : un programme dont une grande part passe par ces canaux est vu en partie seulement (colonne « Part du budget ménages codée »).</p>
+      <div class="chart" data-draw="c_pauvrete" data-source="redistribution"></div>
+      <div class="scroll-x">
+        <table data-source="redistribution" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="pauvrete_pct">Pauvreté (%)</th><th data-field="pauvrete_pct_sq">Même population, législation actuelle (%)</th><th data-field="gini">Gini</th><th data-field="d9_d1">D9/D1</th><th data-field="mediane">Niveau de vie médian (€/an)</th><th data-field="couverture_menages_pct">Part du budget ménages codée</th><th data-field="mesures_codees">Mesures prises en compte</th></tr></thead>
+          <tbody data-draw="t_redis"></tbody>
+        </table>
+      </div>
+      <p class="note">Gini : 0 si tous ont le même niveau de vie, 1 si un seul a tout. D9/D1 : niveau de vie au-dessus duquel sont les 10 % les plus aisés, rapporté à celui sous lequel sont les 10 % les plus modestes. « Même population, législation actuelle » isole l'effet des mesures de celui de l'emploi et de la démographie du programme.</p>
+    </section>
+
+    <section class="card" id="deciles">
+      <h3>Gagnants et perdants par décile, au fil des années : <span data-draw="l_prog">—</span></h3>
+      <div class="dec-presents">
+        <p class="note">Variation du niveau de vie due aux mesures codées, en %, du dixième le plus modeste (D1) au plus aisé (D10), aux quatre années calculées. Survolez un décile pour les euros par an et la part de gagnants et de perdants (niveau de vie qui monte ou baisse de plus de 10 € par an). Sans effet sur l'emploi : un ménage qui reprend un travail n'est pas compté comme gagnant.</p>
+        <div class="legend leg-dec"><span data-an="2029">2029</span><span data-an="2032">2032</span><span data-an="2037">2037</span><span data-an="2050">2050</span></div>
+        <div class="chart" data-draw="c_deciles_evol" data-source="redistribution_deciles"></div>
+      </div>
+      <div class="dec-absents" hidden>
+        <p class="note">Déciles non publiés pour ce programme : la microsimulation n'en couvre que <b data-draw="cv_part" data-source="couverture_tab" data-field="part_codee_pct">—</b> % du budget « ménages » en 2032, sous le seuil de 80 %. Montrer des déciles sur une si petite part donnerait une image fausse du programme. Mesures les plus lourdes non codées (Md€) : <span data-draw="cv_lourdes" data-source="couverture_tab" data-field="plus_lourdes_non_codees">—</span>.</p>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===================== MÉNAGES TYPES ===================== -->
+  <section class="vue" id="menages" role="tabpanel" aria-label="Ménages types" hidden>
+    <div class="vue-intro">
+      <div class="barre">
+        <label class="champ" for="f-menage"><span>Ménage type</span>
+          <select id="f-menage" class="dash-select" data-draw="f_menage" data-source="menages_types"></select>
+        </label>
+      </div>
+      <p class="lead">Pour un ménage <b data-draw="l_menage">—</b>, le revenu disponible est de <b data-draw="mt_actuel" data-source="menages_tab" data-field="actuel_mois">—</b> € par mois avec la législation actuelle. Les mesures de <b data-draw="l_prog">—</b> le changent de <b data-draw="mt_prog" data-source="menages_tab" data-field="ecart_mois">—</b> € par mois (part du budget « ménages » du programme codée : <b data-draw="mt_part" data-source="menages_tab" data-field="part_codee_pct">—</b> %).</p>
+      <p class="note">Revenu disponible : salaires et pensions nets, plus les prestations (RSA, prime d'activité, aides au logement, prestations familiales, minimum vieillesse), moins l'impôt sur le revenu ; euros de 2026. Calcul d'OpenFisca-France avec la législation de 2026, puis avec les mesures du programme codées dans la microsimulation (barèmes, SMIC, prestations), les mêmes que pour la population. Les ménages sont locataires du parc privé en zone 2 (550 € de loyer par mois seul, 800 € en famille), les adultes ont 40 ans (le jeune salarié 24 ans, les retraités 70), ils touchent toutes les aides auxquelles ils ont droit et sont de nationalité française. Pensions et capitalisation : effet de 2032 ; seul le jeune salarié, entrant sur le marché du travail, cotise à une capitalisation obligatoire.</p>
+      <p class="note"><b>Ce que le calcul ne montre pas</b> : un emploi trouvé ou perdu, les prix (TVA, énergie, carburants), les services publics, l'assurance chômage, les impôts sur le patrimoine et les successions, et toutes les mesures non codées. Même règle que pour les déciles : le total d'un programme n'est publié que si au moins 80 % de son budget « ménages » est codé ; sinon la page montre seulement l'effet des mesures codées, une par une, qui ne fait pas le bilan du programme.</p>
+    </div>
+    <section class="card" id="mt-tous">
+      <h2>Tous les programmes : <span data-draw="l_menage">—</span></h2>
+      <div class="bars" data-draw="c_menages" data-source="menages_tab"></div>
+      <div class="scroll-x">
+        <table data-source="menages_tab" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="actuel_mois">Actuel (€ par mois)</th><th data-field="programme_mois">Avec le programme</th><th data-field="ecart_mois">Écart (€ par mois)</th><th data-field="ecart_pct">Écart (%)</th><th data-field="part_codee_pct">Budget « ménages » codé</th></tr></thead>
+          <tbody data-draw="t_menages"></tbody>
+        </table>
+      </div>
+      <p class="note">En gris, les programmes dont le total n'est pas publié (moins de 80 % du budget « ménages » codé dans la microsimulation).</p>
+    </section>
+    <section class="grid">
+      <div class="card" id="mt-programme">
+        <h2>Tous les ménages : <span data-draw="l_prog">—</span></h2>
+        <div class="scroll-x">
+          <table data-source="menages_tab" data-row-key="cle">
+            <thead><tr><th data-field="libelle">Ménage type</th><th data-field="actuel_mois">Actuel (€ par mois)</th><th data-field="programme_mois">Avec le programme</th><th data-field="ecart_mois">Écart (€ par mois)</th><th data-field="ecart_pct">Écart (%)</th></tr></thead>
+            <tbody data-draw="t_menages_prog"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card" id="mt-mesures">
+        <h2>Mesure par mesure : <span data-draw="l_prog">—</span></h2>
+        <p class="note">Effet de chaque mesure codée seule, en € par mois, pour le ménage choisi. Mesures codées seulement : la somme n'est pas le bilan du programme quand il n'est pas publié.</p>
+        <div class="scroll">
+          <table class="gauche" data-source="menages_mesures" data-row-key="cle">
+            <thead><tr><th data-field="mesure">Mesure</th><th data-field="ecart_mois">€ par mois</th></tr></thead>
+            <tbody data-draw="t_menages_mesures"></tbody>
+          </table>
+        </div>
+        <p class="note mt-aucune" hidden>Aucune mesure codée de ce programme ne change le revenu de ce ménage.</p>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===================== ÉCOLOGIE ===================== -->
+  <section class="vue" id="ecologie" role="tabpanel" aria-label="Écologie" hidden>
+    <div class="vue-intro">
+      <p class="lead">En <b data-draw="l_annee">—</b>, scénario <b data-draw="l_scen">—</b> : <b data-draw="l_prog">—</b> émet <b data-draw="e_hab_prog" data-source="ecologie" data-field="territoriales_hab_t">—</b> t CO₂e par habitant sur le territoire, contre <b data-draw="e_hab_sq" data-source="ecologie" data-field="territoriales_hab_t">—</b> t pour le statu quo. Ses mesures changent les émissions de <b data-draw="e_mesures_prog" data-source="ecologie" data-field="effet_mesures_mt">—</b> Mt, et son activité de <b data-draw="e_activite_prog" data-source="ecologie" data-field="effet_activite_mt">—</b> Mt.</p>
+      <p class="note">Émissions territoriales hors puits de carbone (inventaire du Citepa) et empreinte carbone (SDES : ce que consomment les Français, importations comprises). « Effet des mesures » : ce que les mesures du programme changent aux émissions. « Effet de l'activité » : un PIB plus ou moins élevé que le statu quo, montré à part, car une récession baisse les émissions sans être une politique climatique. Dépassement : somme, depuis 2029, des émissions au-dessus du plafond des budgets carbone (SNBC-3). Les tonnes de chaque mesure sont estimées par le modèle, scénario par scénario, avec leurs sources ; une mesure sans chiffrage sourcé vaut zéro dans le prudent. Les tonnes annoncées par les candidats ne sont jamais reprises. Le climat n'est pas toute l'écologie : biodiversité, eau, sols et pollutions ne sont pas encore chiffrés.</p>
+    </div>
+    <section class="card" id="climat-tuiles">
+      <h2>Climat : <span data-draw="l_prog">—</span></h2>
+      <div class="tuiles">
+        <div class="tuile"><span class="t-lab">Émissions par habitant (t CO₂e)</span><b class="t-val" data-draw="e_hab_prog2" data-source="ecologie" data-field="territoriales_hab_t">—</b><span class="t-sq">statu quo : <span data-draw="e_hab_sq2" data-source="ecologie" data-field="territoriales_hab_t">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Empreinte par habitant (t CO₂e)</span><b class="t-val" data-draw="e_emp_prog" data-source="ecologie" data-field="empreinte_hab_t">—</b><span class="t-sq">statu quo : <span data-draw="e_emp_sq" data-source="ecologie" data-field="empreinte_hab_t">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Émissions territoriales (Mt CO₂e)</span><b class="t-val" data-draw="e_mt_prog" data-source="ecologie" data-field="territoriales_mt">—</b><span class="t-sq">statu quo : <span data-draw="e_mt_sq" data-source="ecologie" data-field="territoriales_mt">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Dépassement cumulé des budgets carbone (Mt)</span><b class="t-val" data-draw="e_snbc_prog" data-source="ecologie" data-field="ecart_snbc_cumule_mt">—</b><span class="t-sq">statu quo : <span data-draw="e_snbc_sq" data-source="ecologie" data-field="ecart_snbc_cumule_mt">—</span></span></div>
+      </div>
+    </section>
+    <section class="card" id="climat">
+      <h2>Tous les programmes</h2>
+      <div class="scroll-x">
+        <table data-source="ecologie" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="territoriales_mt">Émissions (Mt)</th><th data-field="territoriales_hab_t">Par habitant (t)</th><th data-field="empreinte_hab_t">Empreinte par habitant (t)</th><th data-field="effet_mesures_mt">Effet des mesures (Mt)</th><th data-field="effet_activite_mt">Effet de l'activité (Mt)</th><th data-field="ecart_snbc_cumule_mt">Dépassement SNBC cumulé (Mt)</th></tr></thead>
+          <tbody data-draw="t_climat"></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="grid">
+      <div class="card" id="c-emissions">
+        <h3>Émissions territoriales</h3>
+        <p class="note">Mt CO₂e hors puits, 2029-2060, scénario choisi. Le plafond descend en escalier : la SNBC-3 fixe un budget moyen par période de cinq ans jusqu'en 2038, puis une ligne droite mène à l'objectif de 2050.</p>
+        <div class="chart" data-draw="c_emissions" data-source="ecologie"></div>
+      </div>
+      <div class="card" id="c-effet-mesures">
+        <h3>Effet des mesures sur les émissions</h3>
+        <p class="note">Mt CO₂e par an contre le statu quo, hors effet de l'activité ; sous zéro, le programme évite des émissions.</p>
+        <div class="chart" data-draw="c_effet_mesures" data-source="ecologie"></div>
+      </div>
+      <div class="card" id="c-empreinte">
+        <h3>Empreinte carbone par habitant</h3>
+        <p class="note">t CO₂e par habitant, importations comprises. Relocaliser une production fait baisser l'empreinte même si les émissions sur le territoire montent un peu.</p>
+        <div class="chart" data-draw="c_empreinte" data-source="ecologie"></div>
+      </div>
+    </section>
+    <section class="card" id="climat-secteurs">
+      <h2>Par secteur, contre le statu quo : <span data-draw="l_prog">—</span></h2>
+      <p class="note">Scénario et année choisis, en Mt CO₂e. À gauche de zéro, le programme émet moins que le statu quo dans ce secteur.</p>
+      <div class="bars" data-draw="c_secteurs" data-source="eco_secteurs"></div>
+    </section>
+    <section class="card" id="climat-mesures">
+      <h2>Émissions mesure par mesure : <span data-draw="l_prog">—</span></h2>
+      <p class="note">Scénario et année choisis : émissions en plus (+) ou évitées (−) par chaque mesure, contre le statu quo, en Mt CO₂e (années de détail : 2029, 2032, 2037, 2045, 2050, 2060, 2073).</p>
+      <div class="scroll">
+        <table data-source="ecologie_mesures" data-row-key="cle">
+          <thead><tr><th data-field="mesure">Mesure</th><th data-field="secteur">Secteur</th><th data-field="mt">Mt CO₂e</th></tr></thead>
+          <tbody data-draw="t_eco_mesures"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===================== FIABILITÉ ET MÉTHODE ===================== -->
+  <section class="vue" id="fiabilite" role="tabpanel" aria-label="Fiabilité et méthode" hidden>
+    <div class="vue-intro">
+      <p class="lead">Ce qui rend les chiffres plus ou moins sûrs : l'écart avec ce qu'annoncent les candidats, la sensibilité aux taux d'intérêt, la fourchette de l'incertitude, et les lectures de mesures floues qui pèsent le plus.</p>
+    </div>
+    <section class="card" id="annonces">
+      <h2>Ce qu'annoncent les candidats, ce que retient le modèle</h2>
+      <p class="note">Scénario choisi, en 2032 (fin du quinquennat), en Md€ par an. « Annoncé » : montant donné par le candidat, d'économies sur l'ensemble des dépenses ou de recettes pour une mesure précise. « Retenu par le modèle » : économies nommées et chiffrées, plus les économies non détaillées déduites domaine par domaine, ou recette estimée pour la mesure. Les deux dernières colonnes viennent d'une variante complète du programme : l'écart y est ajouté comme des mesures ordinaires, qui passent par les mêmes effets économiques que le reste (multiplicateur, offre, intérêts). Une dépense en moins réduit l'activité, donc la TVA et les autres recettes : l'effet net sur le déficit est plus petit que l'écart brut, sauf quand la baisse de la dette et des intérêts l'emporte. Les programmes absents du tableau n'ont pas annoncé de montant d'ensemble.</p>
+      <div class="scroll-x">
+        <table data-source="annonces" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="annonce">Annonce</th><th data-field="annonce_md">Annoncé</th><th data-field="modele_md">Retenu par le modèle</th><th data-field="ecart_md">Écart</th><th data-field="ecart_pib">Écart brut (points de PIB)</th><th data-field="effet_net_pib">Effet net sur le déficit (points)</th><th data-field="deficit">Déficit 2032 (modèle)</th><th data-field="deficit_si_tenue">Déficit 2032 si l'annonce était tenue</th></tr></thead>
+          <tbody data-draw="t_annonces"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="variantes-dette">
+      <h2>Le classement tient-il avec d'autres taux ?</h2>
+      <p class="note">Trois variantes appliquées à tous, statu quo compris : sans prime de dette ; taux long à 3,3 % au lieu de 4 % ; 2027 et 2028 projetées avec la croissance de la Banque de France (0,9 % puis 1,2 %, projections du 15 septembre 2026), au lieu de placer l'économie de 2026 en 2029. Colonnes « écart » : déficit du programme moins celui du statu quo de la même variante, en points de PIB (+ = plus de déficit que le statu quo). Scénario choisi, année la plus proche parmi 2032, 2037 et 2050.</p>
+      <p class="lead">Déficit du statu quo en <b data-draw="v_annee2">—</b> : <b data-draw="v_sq_c" data-source="variantes_tab" data-field="deficit_centrale">—</b> % publié, <b data-draw="v_sq_p" data-source="variantes_tab" data-field="deficit_sans_prime_dette">—</b> % sans prime de dette, <b data-draw="v_sq_t" data-source="variantes_tab" data-field="deficit_taux_long_3_3">—</b> % avec un taux long à 3,3 %, <b data-draw="v_sq_g" data-source="variantes_tab" data-field="deficit_croissance_2027_2028">—</b> % avec 2027-2028 projetées.</p>
+      <div class="scroll-x">
+        <table data-source="variantes_tab" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="deficit_centrale">Déficit publié (%)</th><th data-field="ecart_centrale">Écart publié</th><th data-field="ecart_sans_prime_dette">Écart sans prime de dette</th><th data-field="ecart_taux_long_3_3">Écart, taux long à 3,3 %</th><th data-field="ecart_croissance_2027_2028">Écart, 2027-2028 projetées</th></tr></thead>
+          <tbody data-draw="t_variantes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="incertitude">
+      <h2>Incertitude : la fourchette de chaque programme</h2>
+      <p class="lead">En <b data-draw="i_annee">—</b>, huit tirages sur dix mettent le déficit du statu quo entre <b data-draw="i_sq_bas" data-source="incertitude_tab" data-field="p10_rho1">—</b> % et <b data-draw="i_sq_haut" data-source="incertitude_tab" data-field="p90_rho1">—</b> % du PIB quand les hypothèses vont ensemble, et entre <b data-draw="i_sq_bas0" data-source="incertitude_tab" data-field="p10_rho0">—</b> % et <b data-draw="i_sq_haut0" data-source="incertitude_tab" data-field="p90_rho0">—</b> % quand elles sont indépendantes.</p>
+      <p class="note">Au lieu de quatre scénarios, le modèle tire au hasard toutes ses hypothèses à la fois, 600 fois : pour chacune, le scénario prudent est la valeur que seul un tirage sur dix fait pire, l'optimiste celle que seul un sur dix fait mieux, le médian la valeur du milieu. Les mêmes tirages servent à tous les programmes : une hypothèse commune (productivité, multiplicateur, prime de risque…) tombe au même point pour tous, et les programmes se comparent tirage par tirage. Rien ne dit à quel point les hypothèses vont ensemble : on montre les deux bornes. Barre fine : hypothèses indépendantes ; barre large : hypothèses qui vont toutes dans le même sens. Point : médiane. Les barres couvrent huit tirages sur dix ; les scénarios de crise restent à lire à part. La médiane se lit contre le scénario médian du reste de la page.</p>
+      <div class="barre">
+        <div class="champ"><span>Année</span>
+          <div class="seg" role="group" aria-label="Année de la fourchette">
+            <button type="button" data-inc-annee="2029">2029</button><button type="button" data-inc-annee="2032">2032</button><button type="button" data-inc-annee="2037">2037</button><button type="button" data-inc-annee="2050">2050</button>
+          </div>
+        </div>
+        <div class="champ"><span>Grandeur</span>
+          <div class="seg" role="group" aria-label="Grandeur de la fourchette">
+            <button type="button" data-inc-grandeur="deficit">Déficit</button><button type="button" data-inc-grandeur="dette_pib">Dette</button><button type="button" data-inc-grandeur="chomage">Chômage</button>
+          </div>
+        </div>
+      </div>
+      <div class="legend leg-inc"><span class="etroite">Hypothèses indépendantes</span><span class="large">Hypothèses qui vont ensemble</span></div>
+      <div class="fourchette" data-draw="c_fourchette" data-source="incertitude_tab"></div>
+      <p class="note">Mieux que le statu quo : part des tirages où le déficit du programme est sous celui du statu quo, dans le même tirage (déficit seulement). Hypothèses qui pèsent le plus : celles dont le tirage fait le plus bouger le déficit de 2037 du programme, hors la part commune à toutes (signe moins : une valeur favorable baisse le déficit).</p>
+      <div class="scroll-x">
+        <table class="incl" data-source="incertitude_tab" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="p50_rho1">Médiane</th><th>8 tirages sur 10, hypothèses indépendantes</th><th>8 tirages sur 10, hypothèses ensemble</th><th data-field="proba_rho0">Mieux que le statu quo (indépendantes)</th><th data-field="proba_rho1">Mieux que le statu quo (ensemble)</th><th data-field="hypotheses">Hypothèses qui pèsent le plus (déficit 2037)</th></tr></thead>
+          <tbody data-draw="t_incertitude"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="lectures">
+      <h2>Les lectures qui pèsent le plus</h2>
+      <p class="note">Une lecture traduit une mesure floue en paramètre du modèle, avec un barème commun à tous : nombre de « réformes typiques » de l'OCDE, titres de séjour en moins, logements en plus, agents de contrôle de la fraude. Poids : ce que la lecture change à l'écart de solde primaire au statu quo en 2037, scénario prudent, en points de PIB (+ = elle améliore le solde). Les plus lourdes sont à valider en priorité ; « DECISION » : lecture déjà arbitrée.</p>
+      <div class="scroll">
+        <table class="gauche" data-source="lectures" data-row-key="cle">
+          <thead><tr><th data-field="programme">Programme</th><th data-field="lecture">Lecture</th><th data-field="valeur">Valeur retenue</th><th data-field="poids_2037">Poids 2037 (points)</th><th data-field="statut">Statut</th><th data-field="source">Source</th></tr></thead>
+          <tbody data-draw="t_lectures"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <details class="card" id="methode">
+      <summary><b>Méthode</b></summary>
+      <p class="note">Statu quo : législation du PLF 2027 (provisoire), puis aucune mesure nouvelle ; prestations revalorisées sur les salaires ; défense selon la loi de programmation militaire actualisée. Chaque programme est traduit en mesures contre ce statu quo (recettes impôt par impôt, dépenses bloc par bloc, périmètres alignés, effets économiques canal par canal) ; le noyau recalcule intérêts, dette et déficit. Trois effets économiques communs à tous les programmes. La demande : une macro bouclée calée sur le modèle Mésange de l'Insee et de la DG Trésor ; l'effet d'une dépense est maximal la deuxième année, puis se dissipe en une dizaine d'années à mesure que les prix montent et que la compétitivité baisse ; la TVA, la CSG, l'impôt sur le revenu et les cotisations patronales suivent chacun leur propre profil de Mésange ; la BCE réagit à l'inflation de la zone, où la France pèse un cinquième ; une dette plus chère que celle du statu quo renchérit le crédit et freine l'activité ; une inflation propre à la France allège la dette réelle, et les pensions, revalorisées avec un an de retard, en perdent le pouvoir d'achat cette année-là. L'offre : effet durable des impôts et des transferts, calculé avec OpenFisca pour le travail, cellule par cellule de salaire, pour les personnes seules et neuf types de couples (gain à travailler du ménage ; les bas salaires et les seconds apporteurs réagissent davantage), et pour le coût du travail (cotisations patronales, allègements) ; l'investissement public a un effet durable par un stock de capital public qui s'use, et la fiscalité des entreprises passe par un stock de capital commun à tous les programmes (élasticité de l'investissement de Mésange et de l'OFCE, usure de 10 % par an) ; une baisse d'impôt prend l'élasticité du scénario, une hausse celle du scénario miroir, pour rester prudent dans les deux sens. Les seniors : quand l'âge de la retraite change, une partie des personnes concernées reste en emploi, une partie passe au chômage, le reste en inactivité (réforme de 2010 : Insee, IPP), avec un nombre de personnes concernées calé sur l'étude d'impact de la réforme de 2023. Le coût d'un chômeur suit la générosité de l'assurance chômage et des minima du programme, et un emploi en plus touche la prime d'activité. Les réformes de structure : un barème du modèle tiré d'une étude de l'OCDE (Égert et Gal, 2017), limité à ce que l'étude mesure, la réglementation de l'énergie, des transports et des communications (propriété publique, entrée sur le marché, prix réglementés) et les règles du licenciement ; chaque programme compte un nombre de « réformes typiques », positif quand il libéralise, négatif quand il réglemente ou nationalise, plafonné à deux par domaine ; le prudent n'en compte que la moitié de l'effet à dix ans. Tout gain de productivité (réformes, IA, école, investissement, recherche) ne rapporte au solde que ce qu'il rapporte dans le statu quo, une fois comptées les dépenses qui suivent les salaires : environ un quart la première année, un huitième après dix ans. Déficit au sens de Maastricht : l'épargne qu'un programme prélève en promettant de la rendre est un emprunt, compté dans le déficit et la dette. Démographie : projection de l'Insee de juin 2026 ; un programme qui réduit les entrées est lu en premiers titres de séjour en moins (DGEF, 2025), convertis en solde migratoire ; la population par âge qui en résulte (profil des immigrés de l'Insee, enfants compris) passe dans le statu quo, qui recalcule emploi (taux d'emploi et salaires relatifs des immigrés), PIB, recettes et dépenses ; les naissances suivent le soutien aux familles et les places d'accueil, avec le même barème pour tous. Lutte contre la fraude : même barème pour tous, par agent de contrôle en plus (montants recouvrés de la DGFiP, rendement marginal décroissant). Logement : même barème pour tout changement des règles du foncier ou des loyers. Adoption de l'IA : effet proportionnel au budget engagé. Postes publics : comptés dans le PIB à leur coût, comme en comptabilité nationale. Un emploi vaut la même chose au solde quel que soit le chemin. Impôts des entreprises : une population de 17 400 entreprises synthétiques (Insee, Ésane ; DGFiP 2025) calcule l'impôt sur les sociétés, la C3S, la CVAE, la CFE et la taxe foncière entreprise par entreprise ; les impôts de production et les cotisations patronales étant déductibles du bénéfice, leur variation change l'impôt sur les sociétés en sens inverse, pour la part prise sur les marges et payée par des entreprises qui y sont soumises (environ 10 % de la variation, même règle pour tous, SMIC compris). Santé : la dépense du statu quo suit les prévisions (assurance maladie, puis projections de long terme), et un programme ne la change que par ses mesures. Euros constants de 2026, économie de 2026 placée en 2029 (la variante « 2027-2028 projetées » montre ce que change cette convention). Un programme ajouté au dépôt simu2027 (dossier programmes/) entre ici à la prochaine mise à jour des données.</p>
+    </details>
+  </section>
+</div>
+
+<script src="commun.js"></script>
+<script src="ensemble.js"></script>
+<script src="economie.js"></script>
+<script src="emploi.js"></script>
+<script src="population.js"></script>
+<script src="ecologie.js"></script>
+<script src="fiabilite.js"></script>
+<script src="comparer.js"></script>
+<script src="menages.js"></script>

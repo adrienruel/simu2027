@@ -1885,6 +1885,21 @@ alternance, contrat, accords de branche, commerces, prime jeunes, entrée plus t
 - Les comparaisons des programmes autres que Le Pen sont faites contre les sorties du commit 048b97d ; seul Le Pen a
   été recalculé avant et après avec le même code.
 
+## 19/11/2026 — Phase O : comparateur refait en onglets, démographie et ménages types
+
+- **Comparateur** (`comparateur/`, `docs/comparateur.md`) : huit onglets (vue d'ensemble, comparer, économie, emploi,
+  population, ménages types, écologie, fiabilité et méthode) au lieu d'une seule page ; données passées à 048b97d
+  (phases L à N). Chiffres des résumés corrigés (déficits, soldes primaires, PIB, emploi d'Attal : environ 125 000
+  emplois de plus en 2037, et non 30 000).
+- **Démographie** (`outils/export_demographie.py`) : flux tirés de la population que calcule déjà le moteur, sans
+  changement de modèle. Contrôle : population identique à `comparaison_trajectoire.csv`.
+- **Ménages types** (`outils/export_menages_types.py`) : onze ménages, mêmes réformes OpenFisca que la population,
+  recours complet. Totaux publiés avec la règle des déciles (au moins 80 % du budget « ménages » codé) : Attal et
+  Zemmour seulement. Lisnard (11 %), Le Pen (15 %), Retailleau (27 %) et Glucksmann (29 %) ont les plus grosses
+  mesures non codées.
+- **À décider** : garder ce seuil pour les ménages types ou tout afficher avec un avertissement ; coder dans OpenFisca
+  les grosses mesures qui manquent (baisse de CSG de Lisnard, retour à 62 ans).
+
 ## 19/11/2026 — phase P : emploi des seniors qui n'est plus figé, canal école par cohortes (branche `phase-p`)
 - **Taux d'emploi par âge** (`demographie.taux_emploi_par_age`, demande d'Adrien) : jusqu'ici figés à 2025
   jusqu'en 2073. Les 55-59, 60-64 et 65-69 ans suivent désormais le rapport du taux d'activité projeté par l'Insee
