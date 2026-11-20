@@ -1,7 +1,7 @@
 """Gains de productivité des réformes de structure : barème commun à tous les programmes (12/11/2026).
 
-Demande d'Adrien : évaluer les gains de productivité de la façon la plus juste possible, pour tous les programmes, au
-lieu d'un gain propre à « Écologie de droite ». Méthode : le cadre de quantification de l'OCDE (Égert et Gal, 2017),
+Demande d'Adrien : évaluer les gains de productivité de la façon la plus juste possible, pour tous les programmes.
+Méthode : le cadre de quantification de l'OCDE (Égert et Gal, 2017),
 qui donne l'effet sur le PIB par habitant d'une « réforme typique observée » par domaine, à 5 ans, 10 ans et long terme.
 Les domaines retenus sont ceux que le reste du modèle ne compte pas déjà : réglementation des marchés de produits (pmr)
 et protection de l'emploi (epl). Les autres domaines du cadre (coin fiscal, assurance chômage, IS, retraite, SMIC,
@@ -35,7 +35,7 @@ def gain(p: Parametres, decl: dict, s: str, t: int) -> float:
     ({"pmr": n, "epl": n, "debut": année})."""
     bar = p.val("macro.reformes_structurelles")
     if s == "prudent" and getattr(p, "colonne_prudent", "prudent") == "crise":
-        s = "crise"  # copie de crise d'« Écologie de droite » (Parametres.en_crise) : la colonne prudente lit la crise
+        s = "crise"  # copie de crise (Parametres.en_crise) : la colonne prudente lit la crise
     k = t - int(decl.get("debut", 2028)) + 1
     total = 0.0
     for dom in DOMAINES:

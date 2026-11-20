@@ -1,7 +1,7 @@
 """Lutte contre la fraude : barème commun (phase B5 de la roadmap, 12/11/2026, nuit).
 
 Un programme qui renforce le contrôle fiscal ou douanier déclare les agents de contrôle en plus (équivalents temps
-plein), son début et son plein effet (`<nom>_canaux.fraude`, ou `macro.fraude_controle` pour Écologie de droite).
+plein), son début et son plein effet (`<nom>_canaux.fraude`).
 Recettes en plus = agents × montant moyen recouvré par agent de contrôle (fraude.recouvre_par_agent) × rendement
 marginal du scénario (fraude.rendement_marginal), plafonnées (fraude.plafond_part × montants recouvrés de 2024), en
 montée de debut à plein, suivant le PIB. Coût des agents ajouté sauf s'il est déjà dans une mesure du programme

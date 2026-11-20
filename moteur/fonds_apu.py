@@ -4,17 +4,17 @@ retraite par capitalisation par un fonds, pas seulement au sien.
 
 Le chiffrage publié range ces fonds hors des APU (comme un fonds de pension ou le régime additionnel des
 fonctionnaires géré à part). La variante les met dedans, avec trois conventions identiques pour tous :
-  1. ce que le fonds paie à la place de l'État (Écologie de droite : investissements publics) redevient une
+  1. ce que le fonds paie à la place de l'État (par exemple des investissements publics) redevient une
      dépense publique ;
   2. l'argent public versé au fonds (mesures marquées fonds="versement" : abondement de l'État chez Philippe, part
      des employeurs publics chez Retailleau) est consolidé, donc retiré des dépenses : c'est un transfert interne
      aux APU ;
   3. l'épargne obligatoire des salariés et des employeurs privés n'est pas comptée en recette publique, car elle
-     reste due aux épargnants (convention haute, déjà celle d'Écologie de droite).
+     reste due aux épargnants (convention haute).
 Rien ne change dans l'économie : seuls les comptes publics bougent, et ce qui en dépend (règle de trajectoire du
 programme, écart de taux gagné ou perdu par la dette, moteur/noyau._deux_passes).
 
-Un programme peut fournir ses écritures propres par `mesures_fonds_apu(p, entrees)` (Écologie de droite) ; sinon
+Un programme peut fournir ses écritures propres par `mesures_fonds_apu(p, entrees)` ; sinon
 les mesures fonds="versement" sont retirées. Programme sans fonds codé : variante identique au publié."""
 from __future__ import annotations
 

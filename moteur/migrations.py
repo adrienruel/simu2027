@@ -154,8 +154,6 @@ def population_programme(prog, p: Parametres, s: str) -> dict[int, tuple[float, 
     from .demographie import population as population_naissances
     base = sq.population(p, s)
     pt = getattr(prog, "pt", None)
-    if pt is None and getattr(prog, "nom", None) == "ecologie_de_droite":  # ses paramètres sont ceux par défaut
-        pt = Parametres(programme="ecologie_de_droite")
     try:  # effet sur les naissances : seulement les programmes qui déclarent une politique familiale chiffrée
         nais = population_naissances(pt, s) if pt is not None and pt.val("demographie.active") else None
     except KeyError:

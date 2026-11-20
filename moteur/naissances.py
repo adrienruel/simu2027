@@ -1,7 +1,6 @@
 """Canal commun des naissances (14/11/2026, DÉCISION d'Adrien : mêmes règles pour tous les programmes).
 
-Avant, seul Écologie de droite avait un effet sur les naissances (soutien par enfant de ses ménages types et places
-de crèche, moteur/demographie.effet_naissances). Désormais tout programme dont les mesures changent le soutien aux
+Tout programme dont les mesures changent le soutien aux
 familles reçoit le même calcul :
 
 1. soutien moyen par enfant mineur (€ de 2026 par an) = montant des mesures de soutien aux enfants à plein effet
@@ -73,7 +72,7 @@ def points_couverture(p: Parametres, s: str, mesures) -> float:
 
 def effet(p: Parametres, s: str, mesures) -> float:
     """Variation relative des naissances à plein effet (0 si le canal est désactivé) : soutien monétaire et places
-    d'accueil, aux mêmes paramètres que le calcul d'Écologie de droite (demographie.effet_naissances)."""
+    d'accueil."""
     if not p.val("demographie.naissances_communes"):
         return 0.0
     soutien = soutien_par_enfant(p, s, mesures)

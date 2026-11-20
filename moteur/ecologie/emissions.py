@@ -89,26 +89,12 @@ def territoriales(p: Parametres, s: str, pib: dict[int, float] | None = None) ->
     return out
 
 
-def indice(p: Parametres, s: str, secteurs=ENERGIE, base: int = 2029) -> dict[int, float]:
-    """Émissions du statu quo des secteurs donnés, rapportées à l'année de base (sert à la recette carbone)."""
-    e = territoriales(p, s)
-    ref = sum(e[base][i] for i in secteurs)
-    return {t: sum(e[t][i] for i in secteurs) / ref for t in ANNEES}
-
-
 # --- Réponse au prix du carbone --------------------------------------------------------------------------------
 
 def prix_statu_quo(p: Parametres, t: int) -> float:
     """Prix du carbone sur les carburants et le chauffage sans programme (€ de 2026 par tonne)."""
     r = p.val("ecologie.prix_carbone_statu_quo")
     return r["cce"] + (r["ets2"] if t >= r["debut_ets2"] else 0.0)
-
-
-def reponse_long_terme(ecart_prix: float, contenu_kg_par_euro: float, elasticite: float) -> float:
-    """Facteur de long terme sur les émissions (et l'assiette) quand le prix du carbone dépasse celui du statu quo de
-    ecart_prix €/t : le prix final de l'énergie monte de ecart_prix × contenu / 1 000, la demande répond avec
-    l'élasticité. Même formule pour la recette (moteur/carbone.py)."""
-    return max(0.01, 1 + ecart_prix * contenu_kg_par_euro / 1000) ** (-elasticite)
 
 
 def reponse_ratio(p: Parametres, ratio: dict[int, float], s: str = "prudent", ratio_electricite: dict[int, float] | None = None,
@@ -136,7 +122,7 @@ def reponse_ratio(p: Parametres, ratio: dict[int, float], s: str = "prudent", ra
 def reponse_prix(p: Parametres, prix: dict[int, float], debut: int = 2029) -> dict[int, float]:
     """Cas d'un programme qui AJOUTE un prix du carbone aux taxes actuelles sur l'énergie : le prix final monte de
     (prix − prix du statu quo) × contenu carbone de la dépense d'énergie. Un programme qui remplace les taxes
-    actuelles passe par reponse_ratio avec ses prix finaux (Écologie de droite : moteur/carbone.prix_finaux)."""
+    actuelles passe par reponse_ratio avec ses prix finaux."""
     r = p.val("ecologie.reponse_prix")
     ratio = {t: max(0.01, 1 + (prix[t] - prix_statu_quo(p, t)) * r["contenu_carbone_kg_par_euro"] / 1000) for t in ANNEES}
     return reponse_ratio(p, ratio, debut=debut)

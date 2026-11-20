@@ -12,7 +12,6 @@ from __future__ import annotations
 import copy
 import dataclasses
 
-from . import noyau
 from .parametres import Parametres
 
 ANNEES_CLES = (2029, 2032, 2037, 2050)
@@ -67,39 +66,3 @@ def _cibles(x) -> list[tuple]:
             out.append(chemin)
     descendre(x.valeur, ())
     return out or [()]
-
-
-def _mesure(p: Parametres) -> dict:
-    """Solde (Md€) et déficit (points de PIB) du prudent du programme sur le noyau commun (12/11/2026)."""
-    res = noyau.simuler(p, noyau.charger(p.programme), scenarios=("prudent",))["prudent"]
-    return {t: (res[t]["solde"], res[t]["deficit"]) for t in ANNEES_CLES}
-
-
-def sensibilites(p: Parametres | None = None, statuts=("HYPOTHESE",), k: float = 1.1) -> list[dict]:
-    p = (p or Parametres()).avec({"clause.active": False})
-    base = _mesure(p)
-    out = []
-    for x in p:
-        if x.statut not in statuts or x.unite == "annee" or not _numerique(x.valeur) or x.cle.startswith("crise."):
-            continue
-        for chemin in _cibles(x):
-            nom = "/".join((x.cle,) + tuple(str(c) for c in chemin))
-            try:
-                v = _mesure(_variante(p, x.cle, k, chemin))
-            except Exception as e:  # une variante qui casse un calcul est signalée, pas ignorée
-                out.append({"cle": nom, "parametre": x.cle, "erreur": str(e)[:120]})
-                continue
-            out.append({"cle": nom, "parametre": x.cle, "unite": x.unite, "note": x.note,
-                        **{f"solde_{t}": v[t][0] - base[t][0] for t in ANNEES_CLES},
-                        **{f"deficit_{t}": v[t][1] - base[t][1] for t in ANNEES_CLES}})
-    return sorted(out, key=lambda r: -abs(r.get("deficit_2037", 0)))
-
-
-if __name__ == "__main__":
-    import json
-    from pathlib import Path
-    sortie = Path(__file__).resolve().parent.parent / "sorties" / "ecologie_de_droite" / "sensibilite.json"
-    sortie.parent.mkdir(exist_ok=True)
-    res = sensibilites()
-    sortie.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"Écrit : {sortie} ({len(res)} variantes)")

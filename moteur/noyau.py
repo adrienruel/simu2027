@@ -26,7 +26,7 @@ Deux mécanismes génériques servent aux programmes dont des flux dépendent du
 Un programme qui en a besoin fournit `entrees(p)` → {scénario: Entree} au lieu de `mesures` et `contexte` seuls.
 
 Un programme est un objet avec un attribut `nom` et deux méthodes, `mesures(p)` → {scénario: [Mesure]} et
-`contexte(p)` → {scénario: {clé: valeur}} (clés de CONTEXTE). Voir programmes/ecologie_de_droite/programme.py.
+`contexte(p)` → {scénario: {clé: valeur}} (clés de CONTEXTE). Voir moteur/programme_simple.py.
 """
 from __future__ import annotations
 
@@ -146,8 +146,7 @@ class ProgrammeVide:
 def programmes_disponibles(tous: bool = False) -> list[str]:
     """Statu quo, puis les programmes publiés (programmes/publies.yaml), par ordre alphabétique.
 
-    tous=True : chaque dossier programmes/<nom>/ qui a un programme.py, programmes écartés compris (Écologie de
-    droite, mis de côté le 16/11/2026)."""
+    tous=True : chaque dossier programmes/<nom>/ qui a un programme.py, publié ou non."""
     import yaml
     from .parametres import RACINE
     noms = sorted(d.name for d in (RACINE / "programmes").iterdir() if (d / "programme.py").exists())
@@ -603,22 +602,14 @@ def bilan_mesures(programme, p: Parametres, s: str = "prudent", annees=(2029, 20
 if __name__ == "__main__":
     import sys
     from .statu_quo import SCENARIOS, simuler as simuler_sq
-    from .parametres import PROGRAMME_ECARTE
     nom = sys.argv[1] if len(sys.argv) > 1 else "statu_quo"
-    # Écologie de droite (mis de côté le 16/11/2026) lit ses paramètres dans p ; les programmes publiés, dans prog.pt
-    p = Parametres(programme=nom) if nom == PROGRAMME_ECARTE else Parametres()
+    p = Parametres()
     prog = charger(nom)
     res, sq = simuler(p, prog), simuler_sq(p)
     annees = (2029, 2037, 2050, 2073)
     print(f"{nom} contre le statu quo (prudent) — effet de chaque mesure sur le solde (Md€ de 2026, + = mieux)")
     for x in sorted(bilan_mesures(prog, p, annees=annees), key=lambda x: -abs(x[2050])):
         print(f"  {x['nature']:<12}" + "".join(f"{x[t]:9.1f}" for t in annees) + f"  {x['nom']}")
-    from programmes.ecologie_de_droite.moteur_propre.mesures import ecartees
-    ec = ecartees(p.__class__(programme=nom)) if nom not in ("statu_quo", "vide") else []
-    if ec:
-        print(f"Économies saisies écartées (sources insuffisantes ou déclaratives) : {sum(x['plein_effet_md'] for x in ec):.1f} Md€ à plein effet")
-        for x in ec:
-            print(f"  {x['plein_effet_md']:6.2f}  {x['motif']}  — {x['mesure']}")
     print("Déficit (% du PIB) : programme / statu quo")
     for s in SCENARIOS:
         print(f"  {s:<10}" + "  ".join(f"{t} : {res[s][t]['deficit']:.2f} / {sq[s][t]['deficit']:.2f}" for t in annees[:3]))

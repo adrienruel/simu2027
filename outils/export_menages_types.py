@@ -34,12 +34,22 @@ from moteur.menages_types import definitions, pensions_adultes
 from moteur.parametres import Parametres
 from outils import openfisca_mesures as om
 from outils import openfisca_population as op
-from outils.openfisca_menages import _cout_en_brut
 
 RACINE = Path(__file__).resolve().parents[1]
 ANNEE = 2032
 JEUNE = {"id": "jeune_smic", "libelle": "Jeune salarié au SMIC, 24 ans, entré sur le marché du travail", "adultes": ["smic"],
          "enfants": [], "age": 24}
+
+
+def _cout_en_brut(cout: float, table: list[dict]) -> float:
+    xs = [float(l["cout_du_travail"]) for l in table]
+    ys = [float(l["brut"]) for l in table]
+    if cout <= 0:
+        return 0.0
+    for i in range(1, len(xs)):
+        if xs[i] >= cout:
+            return ys[i - 1] + (ys[i] - ys[i - 1]) * (cout - xs[i - 1]) / (xs[i] - xs[i - 1])
+    return ys[-1] * cout / xs[-1]
 
 
 def menages() -> list[dict]:

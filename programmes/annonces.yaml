@@ -11,7 +11,7 @@
 #   rémunérations publiques).
 # Montants en Md€ par an, signe + : améliore le solde. Les annonces sont en euros courants de leur date (≈ 2026-2027),
 # le modèle en euros de 2026 : écart de quelques pour cent, négligé.
-# Un programme absent de ce fichier n'a pas annoncé de montant d'ensemble (Mélenchon, Arthaud, Écologie de droite).
+# Un programme absent de ce fichier n'a pas annoncé de montant d'ensemble (Mélenchon, Arthaud).
 
 annonces:
 - programme: philippe

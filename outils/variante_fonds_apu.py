@@ -15,7 +15,7 @@ from moteur.parametres import Parametres
 
 RACINE = Path(__file__).resolve().parents[1]
 ANS = (2029, 2037, 2050, 2073)
-# Programmes publiés qui proposent un fonds de capitalisation (Écologie de droite, mis de côté le 16/11/2026, en est sorti).
+# Programmes publiés qui proposent un fonds de capitalisation.
 PROGRAMMES = ("philippe", "retailleau", "bertrand", "zemmour", "le_pen")
 
 

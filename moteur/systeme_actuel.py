@@ -1,7 +1,6 @@
-"""Système actuel par classe : approximé comme dans la v235, ou calculé par OpenFisca-France (salariés du privé).
+"""Système actuel par classe de salariés : calculé par OpenFisca-France (salariés du privé).
 
-Net actuel = net avant aides + RSA et prime d'activité + APL − taxe foncière estimée.
-"""
+Net actuel = net avant aides + RSA et prime d'activité + APL − taxe foncière estimée."""
 from __future__ import annotations
 
 from .parametres import Parametres
@@ -20,6 +19,16 @@ def rsa_et_prime_prive(net_annuel: float, p: Parametres) -> float:
     return 12 * (rsa + prime)
 
 
+def apl(net_annuel: float, p: Parametres) -> float:
+    m = net_annuel / 12
+    a = p.val("systeme_actuel.apl")
+    if m <= a["revenu_plein"]:
+        return 12 * a["montant_plein"]
+    if m <= a["revenu_extinction"]:
+        return 12 * a["montant_plein"] * (a["revenu_extinction"] - m) / (a["revenu_extinction"] - a["revenu_plein"])
+    return 0.0
+
+
 def prime_agents(net_annuel: float, p: Parametres) -> float:
     m = net_annuel / 12
     a = p.val("systeme_actuel.prime_activite_agents")
@@ -29,15 +38,6 @@ def prime_agents(net_annuel: float, p: Parametres) -> float:
         return 12 * a["montant_max"] * (a["revenu_extinction"] - m) / (a["revenu_extinction"] - a["revenu_max"])
     return 0.0
 
-
-def apl(net_annuel: float, p: Parametres) -> float:
-    m = net_annuel / 12
-    a = p.val("systeme_actuel.apl")
-    if m <= a["revenu_plein"]:
-        return 12 * a["montant_plein"]
-    if m <= a["revenu_extinction"]:
-        return 12 * a["montant_plein"] * (a["revenu_extinction"] - m) / (a["revenu_extinction"] - a["revenu_plein"])
-    return 0.0
 
 
 def taxe_fonciere(net_annuel: float, p: Parametres, public: bool) -> float:
@@ -92,13 +92,9 @@ def nets_prive(p: Parametres) -> dict[str, list[float]]:
     aides ») et net actuel (aides comprises, taxe foncière estimée retirée).
 
     Source : OpenFisca-France (table parametres/donnees/openfisca_prive_2026.csv, personne seule locataire)
-    si systeme_actuel.source vaut « openfisca » ; sinon les nets saisis de la v235."""
+    """
     from .recettes.impot_salaires import effectifs_prive_2026
-    from .recettes.entreprises import _net_avant_aides
     d = effectifs_prive_2026(p)
-    if p.val("systeme_actuel.source") != "openfisca":
-        avant = _net_avant_aides("salaries_prive.csv")
-        return {"avant_aides": avant, "actuel": [net_actuel(a, p, False) for a in avant]}
     cache = p.__dict__.setdefault("_cache", {})
     if "nets_prive" not in cache:
         T = _table_openfisca()
@@ -113,33 +109,3 @@ def nets_prive(p: Parametres) -> dict[str, list[float]]:
     return cache["nets_prive"]
 
 
-def nets_public(p: Parametres) -> dict[str, list[float]]:
-    """Par classe d'agents publics (coût employeur actuel de 2026) : net après impôt et net actuel.
-
-    OpenFisca : fonctionnaires titulaires de chaque versant (primes à 24,6 % du brut), moyenne pondérée par la
-    part de chaque versant dans la masse salariale ; sinon les nets saisis de la v235."""
-    from .recettes.impot_salaires import effectifs_public_2026
-    from .recettes.entreprises import _net_avant_aides
-    d = effectifs_public_2026(p)
-    if p.val("systeme_actuel.source") != "openfisca":
-        avant = _net_avant_aides("fonctionnaires.csv")
-        return {"avant_aides": avant, "actuel": [net_actuel(a, p, True) for a in avant]}
-    cache = p.__dict__.setdefault("_cache", {})
-    if "nets_public" not in cache:
-        versants = p.val("alignement.versants")
-        poids = {v: x["part"] for v, x in versants.items()}
-        tables = {v: _table_openfisca(versant=v) for v in poids}
-        total_poids = sum(poids.values())
-        avant, actuel = [], []
-        for c in d.milieux:
-            a = r = 0.0
-            for v, w in poids.items():
-                T, x = tables[v], tables[v]["cout_du_travail"]
-                net = _interp(c, x, T["salaire_net"]) + _interp(c, x, T["impot_revenu_restant_a_payer"])
-                aides = _interp(c, x, T["rsa"]) + _interp(c, x, T["ppa"]) + _interp(c, x, T["aide_logement"])
-                a += w * net
-                r += w * (net + aides - taxe_fonciere(net, p, True))
-            avant.append(a / total_poids)
-            actuel.append(r / total_poids)
-        cache["nets_public"] = {"avant_aides": avant, "actuel": actuel}
-    return cache["nets_public"]

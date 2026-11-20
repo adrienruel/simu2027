@@ -7,17 +7,12 @@ puis aucune mesure nouvelle). Mêmes règles pour tous les programmes : on ne re
 Programmes publiés : `programmes/publies.yaml` (statu quo, Arthaud, Attal, Bertrand, Glucksmann, Le Pen, Lisnard,
 Mélenchon, Philippe, Retailleau, Roussel, Tondelier, Zemmour).
 
-« Écologie de droite » (`programmes/ecologie_de_droite/`) était un programme de test. Il est mis de côté depuis le
-16/11/2026 : gardé dans le dépôt, gelé, hors des sorties et des tests par défaut, et sans effet sur les autres
-programmes (`tests/test_independance.py`).
-
 ## Lancer (ligne de commande)
 
 ```
 pip install -r requirements.txt
 pip install -r requirements-micro.txt  # OpenFisca-France : microsimulation et ses tests
-python -m pytest -q -p no:cacheprovider           # suite par défaut (sans les tests d'Écologie de droite)
-python -m pytest -q -p no:cacheprovider -m edd    # tests d'Écologie de droite seuls
+python -m pytest -q -p no:cacheprovider           # suite complète (~11 min avec OpenFisca)
 python -m moteur.noyau <programme>                # un programme contre le statu quo
 python -m outils.export_comparaison               # sorties/comparaison_*.csv (~1 min)
 python -m moteur.incertitude 600                  # Monte Carlo (~1 h 45), sorties/incertitude_rho0.json et _rho1.json
@@ -54,7 +49,7 @@ python -m outils.veille_programmes                # veille des sites de campagne
 | `moteur/incidence_entreprises.py` | Des entreprises aux revenus des ménages : salaires, prix, actionnaires (phase L, `docs/entreprises.md`) |
 | `moteur/decomposition.py` | Décomposition du déficit : primaire, taux, prime de dette, dette en plus, croissance (`docs/dette.md`) |
 | `outils/` | Population synthétique, OpenFisca, vieillissement, exports |
-| `tests/` | Tests automatiques (marqueur `edd` : tests d'Écologie de droite, exclus par défaut) |
+| `tests/` | Tests automatiques |
 | `docs/journal.md` | Journal des décisions, du plus ancien au plus récent |
 
 ## Règles
@@ -65,4 +60,5 @@ python -m outils.veille_programmes                # veille des sites de campagne
 - Euros constants de 2026 ; économie de 2026 placée en 2029 ; une seule conversion.
 - Chaque changement de résultat est commité avec sa raison.
 
-Roadmap : `Roadmap_comparateur_2026-11-16.md` (projet).
+Roadmap : `Roadmap_simulation_globale_2026-11-20.md` (projet). Point de référence des écarts : étiquette
+`ref-2026-11-20`, `python -m outils.ecarts_reference`.

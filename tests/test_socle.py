@@ -7,7 +7,6 @@ import pytest
 
 from moteur.parametres import ErreurParametre, Parametres
 from moteur.unites import DoubleConversion, Montant, en_euros_2026, facteur
-from moteur import impot_unique as iu
 
 P = Parametres()
 
@@ -50,33 +49,6 @@ def test_aucun_montant_converti_deux_fois():
 
 
 # --- Barème ------------------------------------------------------------------
-@pytest.mark.parametrize("cout, impot_mensuel", [
-    (23_750, 168),   # SMIC
-    (42_500, 1_129), # salarié médian
-])
-@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
-def test_profils_types_v232(cout, impot_mensuel):
-    assert iu.impot(cout, P) / 12 == pytest.approx(impot_mensuel, abs=0.5)
-
-
-@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
-def test_rien_sous_le_premier_seuil():
-    assert iu.impot(12_500, P) == 0
-
-
-@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
-def test_borne_taux_marginal():
-    for cout in range(0, 300_001, 1_000):
-        assert iu.taux_marginal(cout, P) <= P.val("impot_unique.plafond_taux_marginal")
-
-
-@pytest.mark.edd  # Écologie de droite, mis de côté le 16/11/2026
-def test_impot_croissant():
-    precedent = -1.0
-    for cout in range(0, 200_001, 500):
-        i = iu.impot(cout, P)
-        assert i >= precedent
-        precedent = i
 
 
 def test_facteur_public_2023():

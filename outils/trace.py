@@ -1,6 +1,6 @@
 """Traçabilité des sorties (roadmap du comparateur, chantier 1.2, 16/11/2026).
 
-Chaque fichier de `sorties/` (hors `sorties/ecologie_de_droite/`, programme de test mis de côté) a une entrée dans
+Chaque fichier de `sorties/` a une entrée dans
 `sorties/MANIFESTE.json` : empreinte du fichier, commit et date de production, empreinte des paramètres utilisés et
 script qui l'a écrit. `tests/test_sorties.py` échoue si un fichier n'y est pas, s'il a été modifié depuis, ou s'il a
 été produit avec d'autres paramètres que les paramètres actuels.
@@ -20,7 +20,6 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parents[1]
 SORTIES = RACINE / "sorties"
 MANIFESTE = SORTIES / "MANIFESTE.json"
-ECARTES = ("ecologie_de_droite",)  # sous-dossiers de sorties/ hors manifeste
 
 
 def empreinte_fichier(chemin: Path) -> str:
@@ -90,7 +89,7 @@ def enregistrer(fichiers, script: str | None = None, note: str | None = None) ->
     """Inscrit au manifeste les fichiers que le script vient d'écrire (noms relatifs à sorties/, ou chemins).
 
     Verrou de fichier : plusieurs processus de la micro peuvent écrire en même temps. Un fichier hors de sorties/,
-    ou dans un sous-dossier écarté (Écologie de droite), est ignoré."""
+    est ignoré."""
     import fcntl
     if isinstance(fichiers, (str, Path)):
         fichiers = [fichiers]
@@ -101,8 +100,7 @@ def enregistrer(fichiers, script: str | None = None, note: str | None = None) ->
             rel = f.resolve().relative_to(SORTIES.resolve())
         except ValueError:
             continue
-        if rel.parts[0] not in ECARTES:
-            noms.append(str(rel))
+        noms.append(str(rel))
     if not noms:
         return
     script = script or _script_principal()
@@ -125,8 +123,6 @@ def suivis() -> list[str]:
         if not f.is_file() or f == MANIFESTE or f.name == ".manifeste.verrou":
             continue
         rel = f.relative_to(SORTIES)
-        if rel.parts[0] in ECARTES:
-            continue
         out.append(str(rel))
     return sorted(out)
 

@@ -14,12 +14,6 @@ FICHIERS_COMMUNS = (RACINE / "parametres" / "commun" / "economie.yaml", RACINE /
                     RACINE / "parametres" / "commun" / "statu_quo.yaml",
                     RACINE / "parametres" / "commun" / "ecologie.yaml",
                     RACINE / "parametres" / "commun" / "microsimulation.yaml")
-# Aucun programme par défaut : Parametres() charge les seules hypothèses communes (décision du 16/11/2026 :
-# simu2027 compare les programmes des candidats ; « Écologie de droite », programme de test, est mis de côté et
-# ne doit plus peser sur les autres).
-PROGRAMME_DEFAUT: str | None = None
-# Programme de test mis de côté (16/11/2026) : gardé dans le dépôt, hors des sorties et des tests par défaut.
-PROGRAMME_ECARTE = "ecologie_de_droite"
 
 
 def dossier_programme(programme: str) -> Path:
@@ -66,7 +60,6 @@ class Parametre:
     source: str | None = None
     note: str | None = None
     par_scenario: bool = False
-    v235: Any = None  # valeur de la v235 si le paramètre a été corrigé depuis (_ABSENT sinon)
     # source vérifiable (phase 3.4, 16/11/2026) : adresse du document et page, tableau ou cellule où lire la valeur
     url: str | None = None
     page: str | None = None
@@ -87,17 +80,11 @@ _VIVANTES: list = []
 
 
 class Parametres:
-    def __init__(self, chemin: Path | str | None = None, reference: str | None = None,
-                 programme: str | None = ...):
+    def __init__(self, chemin: Path | str | None = None, programme: str | None = None):
         """Hypothèses communes (parametres/commun/) + paramètres d'un programme (programmes/<programme>/).
 
         Un programme ne peut pas redéfinir une hypothèse commune : une clé présente dans deux fichiers lève une
-        erreur. chemin : un fichier unique à la place (ancien format, ou fichier de test).
-        reference="v235" : reprend, pour chaque paramètre corrigé depuis, la valeur de la v235 (champ v235)
-        — sert aux tests de reproduction du classeur. Par défaut : valeurs actuelles (publiées)."""
-        if programme is ...:  # lu à l'appel : les tests d'Écologie de droite (-m edd) le remplacent
-            programme = PROGRAMME_DEFAUT
-        self.reference = reference
+        erreur. chemin : un fichier unique à la place (fichier de test)."""
         self.programme = None if chemin else programme
         if chemin:
             fichiers = [Path(chemin)]
@@ -125,8 +112,6 @@ class Parametres:
         _VIVANTES.append(self)
 
     def _valider(self, cle: str, c: dict) -> Parametre:
-        if getattr(self, "reference", None) == "v235" and "v235" in c:
-            c = {**c, "valeur": c["v235"]}
         for champ in ("valeur", "unite", "statut"):
             if champ not in c:
                 raise ErreurParametre(f"{cle} : champ « {champ} » manquant")
@@ -149,14 +134,13 @@ class Parametres:
             cle=cle, valeur=c["valeur"], unite=c["unite"], statut=c["statut"],
             annee_euros=c.get("annee_euros"), source=c.get("source"),
             note=" | ".join(x for x in (c.get("note"), ("Note de la v235 : " + c["note_v235"]) if c.get("note_v235") else None) if x) or None,
-            par_scenario=par_scenario, v235=c.get("v235", _ABSENT),
+            par_scenario=par_scenario,
             url=c.get("url"), page=(str(c["page"]) if c.get("page") is not None else None),
         )
 
     # Colonne lue quand un module demande le prudent : « crise » pour le calcul du scénario de crise.
     colonne_prudent: str = "prudent"
     _surcharges: dict = {}
-    taux_local_copie: float | None = None
     mesures_desactivees: frozenset = frozenset()
 
     def __getitem__(self, cle: str) -> Parametre:
@@ -171,39 +155,13 @@ class Parametres:
             scenario = self.colonne_prudent
         return self._p[cle].pour(scenario)
 
-    def en_crise(self, comme_v235: bool = False) -> "Parametres":
-        """Copie pour le calcul de crise : la v235 recopie les valeurs de crise dans la colonne prudente,
-        recalcule, puis lit le bloc prudent. On fait de même, sans toucher au fichier de paramètres.
-
-        comme_v235 : reproduit aussi le défaut de la v235, dont les feuilles de salariés gardent le taux
-        d'impôt local recopié à la main (Collectivités!B91, point fixe du prudent) au lieu de le recalculer ;
-        sert au test de reproduction. Par défaut, le point fixe est recalculé avec les paramètres de crise.
-        """
+    def en_crise(self) -> "Parametres":
+        """Copie pour le calcul de crise : la colonne prudente lit les valeurs de crise, sans toucher au fichier de
+        paramètres (la colonne « depart » reste le prudent)."""
         c = copy.copy(self)
         c.__dict__.pop("_cache", None)
-        c.__dict__.pop("_taux_local_force", None)
         c.colonne_prudent = "crise"
-        # paramètre propre à Écologie de droite (mis de côté le 16/11/2026) : absent des hypothèses communes
-        c._surcharges = ({"transition.decote_participations": self.val("crise.decote_participations")}
-                         if "crise.decote_participations" in self._p else {})
-        if comme_v235:
-            c.taux_local_copie = self.val("impot_local.taux_point_fixe")
-        _VIVANTES.append(c)
-        return c
-
-    def en_scenario(self, scenario: str) -> "Parametres":
-        """Copie dont la colonne prudente lit le scénario donné (médian ou optimiste), comme en_crise pour la crise :
-        un moteur écrit pour le prudent calcule alors tout ce scénario (phase A7 de la roadmap, 13/11/2026, registre
-        d'Écologie de droite par scénario). La colonne « depart » reste le prudent."""
-        if scenario == "prudent":
-            return self
-        if scenario == "crise":
-            return self.en_crise()
-        c = copy.copy(self)
-        c.__dict__.pop("_cache", None)
-        c.__dict__.pop("_taux_local_force", None)
-        c.colonne_prudent = scenario
-        c._surcharges = dict(self._surcharges)
+        c._surcharges = {}
         _VIVANTES.append(c)
         return c
 

@@ -11,7 +11,7 @@ P = Parametres()
 
 def test_stock_de_long_terme():
     """À long terme : capital en plus = élasticité × baisse du coût × investissement / usure ; PIB = capital × (rendement
-    net + usure), la valeur d'un euro de capital des cohortes d'Écologie de droite."""
+    net + usure)."""
     s = "prudent"
     r = capital.accumuler(P, s, {t: -0.01 for t in TOUTES}, TOUTES)
     el, us = sq._v(P, "macro.elasticite_invest", s), sq._v(P, "macro.usure_capital", s)

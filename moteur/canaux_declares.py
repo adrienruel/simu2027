@@ -1,6 +1,6 @@
 """Canaux déclarés par un programme, ouverts à tous (DÉCISION d'Adrien du 12/11/2026, relecture indépendante).
 
-Jusqu'ici, seul « Écologie de droite » comptait des effets propres hors du tronc commun (fraude à la TVA, productivité,
+Effets hors du tronc commun (fraude à la TVA, productivité,
 adoption de l'IA, niveau des élèves, baisse de l'écart de taux) et une règle de trajectoire ; les autres programmes
 n'avaient droit qu'à leurs mesures. Tout programme peut maintenant déclarer les mêmes canaux, avec les mêmes formules,
 dans son parametres.yaml (groupe `<nom>_canaux`). Rien n'est supposé : un canal absent vaut zéro, et chaque valeur
@@ -15,7 +15,7 @@ porte un statut et une source comme tout paramètre.
       regle_trajectoire: {valeur: {cible: 0.03, derniere_annee: 2073, scenarios: [crise, prudent, median, optimiste],
                                    leviers: [{nom: "…", poste: recettes, capacite_pib: 0.01}]}, ...}
 
-Formules (celles d'Écologie de droite, programmes/ecologie_de_droite/effets.py) :
+Formules :
 - fraude à la TVA : recette en Md€ de 2026, montée linéaire ;
 - productivité : PIB du statu quo × ((1 + taux)^années écoulées − 1), années plafonnées ;
 - réformes de structure : barème commun de l'OCDE (moteur/reformes_structurelles.py), nombre de réformes typiques
@@ -30,7 +30,7 @@ Formules (celles d'Écologie de droite, programmes/ecologie_de_droite/effets.py)
 - règle de trajectoire : celle du noyau (moteur/noyau.Regle) ; chaque levier a une capacité en part du PIB et porte
   sur les recettes (hausse) ou sur un bloc de dépenses (baisse). Les comptes sont publiés avec et sans la règle.
 
-Ces effets ne passent pas par le multiplicateur (comme ceux d'Écologie de droite) ; ils sont publiés à part, sous le
+Ces effets ne passent pas par le multiplicateur ; ils sont publiés à part, sous le
 nom « Canal déclaré : … », pour qu'un lecteur puisse les retirer.
 """
 from __future__ import annotations
@@ -90,7 +90,7 @@ def _montee(t: int, debut: int, annees: float) -> float:
 
 def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme=None) -> dict:
     """Mesures de recettes, PIB en plus (Md€) et écart de taux des canaux déclarés, dans le scénario s.
-    d : canaux déjà réunis (Écologie de droite les tire de ses paramètres), sinon ceux que déclare le programme."""
+    d : canaux déjà réunis, sinon ceux que déclare le programme."""
     d = declares(prog) if d is None else d
     y = sq.pib(p, s)
     # gains de productivité : ce qui reste au solde quand la productivité monte, dépenses indexées comprises
@@ -144,8 +144,7 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme
         k_ia = facteur_ia(p, s, d["adoption_ia"].get("budget_md", "non_chiffre"))
         g, debut, duree = sq._v(p, "macro.ia_productivite", s), p.val("macro.premiere_annee_ia"), p.val("macro.annees_ia")
         # barème commun (programme_commun.canaux_adoption_ia_part, 16/11/2026) ; un programme ne le redéfinit pas
-        # (Écologie de droite, programme de test gelé, fournit encore sa propre part : test_canaux_declares vérifie
-        # qu'aucun programme publié ne le fait)
+        # (test_canaux_declares le vérifie)
         part_ia = (d["adoption_ia"]["part"][s] if "part" in d["adoption_ia"]
                    else p.val("programme_commun.canaux_adoption_ia_part", s))
         r, serie = 0.0, {}

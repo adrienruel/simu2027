@@ -1,1 +1,1 @@
-"""Recettes du nouveau système, une fonction par ligne de la feuille Total."""
+"""Données de recettes communes (effectifs de salariés, inactifs)."""

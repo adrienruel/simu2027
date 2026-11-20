@@ -52,8 +52,7 @@ def inventaire(programme: str | None, statut: str = "HYPOTHESE") -> list[dict]:
     if a_part:  # le moteur tourne sur les paramètres communs, le programme lit les siens (pt)
         p, q = _sans_clause(Parametres()), Parametres(programme=programme)
     else:
-        # paramètres communs seuls (avant le 16/11/2026, ceux d'Écologie de droite étaient chargés avec, sans effet
-        # sur le statu quo)
+        # paramètres communs seuls
         p, q = _sans_clause(Parametres(programme=programme)), None
     base = _deficit(p, programme, q)
     cibles = q if a_part else p
@@ -83,7 +82,7 @@ def inventaire(programme: str | None, statut: str = "HYPOTHESE") -> list[dict]:
 if __name__ == "__main__":
     nom = sys.argv[1] if len(sys.argv) > 1 else None
     res = inventaire(nom)
-    f = RACINE / "sorties" / ("ecologie_de_droite" if nom == "ecologie_de_droite" else "") / f"c1_{nom or 'commun'}.json"
+    f = RACINE / "sorties" / f"c1_{nom or 'commun'}.json"
     f.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     from outils import trace
     trace.enregistrer(f, script="outils.c1_inventaire")

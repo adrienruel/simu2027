@@ -2,8 +2,7 @@
 
 Un impôt sur les entreprises change leur coût du capital ; l'investissement réagit (élasticité au coût du capital,
 macro.elasticite_invest), le capital s'accumule et s'use, et chaque euro de capital en plus produit chaque année son
-rendement net plus son usure. C'est la mécanique des cohortes d'entreprises d'Écologie de droite
-(programmes/ecologie_de_droite/effets.py, moteur/entreprises_cellules.flux_investissement), désormais commune :
+rendement net plus son usure. Mécanique commune à tous les programmes :
 
     flux_t = − élasticité × Δcoût_t × investissement des SNF_t       (Md€ d'investissement en plus)
     ΔK_t   = (1 − usure) × ΔK_(t−1) + flux_t                         (capital en plus, Md€)

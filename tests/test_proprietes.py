@@ -1,7 +1,6 @@
 """Propriétés communes à tous les programmes publiés (roadmap du comparateur, chantier 2.3, 16/11/2026).
 
-Jusqu'ici, l'identité « mesures = écart de solde primaire » n'était testée que pour Écologie de droite, programme de
-test mis de côté. Ces tests la vérifient pour chaque programme du comparateur, avec l'ordre des scénarios et le sens
+Ces tests vérifient l'identité « mesures = écart de solde primaire » pour chaque programme du comparateur, avec l'ordre des scénarios et le sens
 de l'effet d'une mesure."""
 import pytest
 

@@ -21,7 +21,7 @@ Ce que fait la classe, comme le programme Tondelier :
 Règle des autres candidats : on ne reprend que les mesures ; aucune recette ni économie annoncée n'est saisie.
 
 Canaux déclarés (12 novembre 2026, moteur/canaux_declares.py) : tout programme peut déclarer, dans le groupe
-`<nom>_canaux` de ses paramètres, les effets propres qu'Écologie de droite était seul à compter (fraude à la TVA,
+`<nom>_canaux` de ses paramètres, des effets hors du tronc commun (fraude à la TVA,
 productivité, adoption de l'IA, niveau des élèves, baisse de l'écart de taux) et une règle de trajectoire, avec les
 mêmes formules. Absent : zéro. Chaque valeur est sourcée et datée comme tout paramètre.
 """

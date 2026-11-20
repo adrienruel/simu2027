@@ -365,8 +365,8 @@ class Tondelier:
             pib_emplois = {t: -emplois * min(1.0, (t - 2026) / 3) * va_emploi / 1e9 * ws[t] for t in ANNEES}
             pib = {t: y[t] + (dpib[t] if self.v("macro.multiplicateur_actif") else 0.0) + pib_emplois[t] for t in ANNEES}
             e = sq.effectifs(p, s)
-            # conjoncture : l'impulsion budgétaire change l'emploi comme l'ajustement du modèle (même règle que le moteur
-            # d'Écologie de droite : macro.emplois_par_point_pib emplois pour 1 % de PIB)
+            # conjoncture : l'impulsion budgétaire change l'emploi comme l'ajustement du modèle (macro.emplois_par_point_pib
+            # emplois pour 1 % de PIB)
             k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
             # phase E6 : emploi de conjoncture bouclé (profils de Mésange) ; sinon Okun
             conj = ({t: rep["emplois"][t] for t in ANNEES} if rep else

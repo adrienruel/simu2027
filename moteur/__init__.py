@@ -1,1 +1,1 @@
-"""Moteur de simulation du programme « Écologie de droite »."""
+"""Moteur commun de simu2027 : statu quo, programmes des candidats et mécaniques communes."""

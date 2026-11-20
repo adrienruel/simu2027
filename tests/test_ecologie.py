@@ -59,16 +59,6 @@ def test_reponse_prix_deux_sens(p):
     assert em.reponse_prix(p, {t: em.prix_statu_quo(p, t) for t in em.ANNEES})[2050] == pytest.approx(1.0)
 
 
-def test_une_seule_equation():
-    """La réponse des émissions au prix utilise la même élasticité que la recette carbone d'Écologie de droite, et la
-    hausse du prix de l'essence reste dans le bon ordre de grandeur (correction du 05/11/2026)."""
-    q = Parametres(programme="ecologie_de_droite")
-    r = q.val("ecologie.reponse_prix")
-    assert r["elasticite"] == q.val("carbone_importe.elasticite_prix")
-    hausse = (315 - em.prix_statu_quo(q, 2030)) * r["contenu_carbone_kg_par_euro"] / 1000
-    assert 0.2 < hausse < 0.4  # essence : (315 − 91) €/t × 2,3 kg / 1,85 € ≈ +28 %
-
-
 def test_snbc(p):
     b = em.snbc(p)
     assert (b[2024], b[2028], b[2029], b[2034], b[2038]) == (342, 342, 262, 194, 194)
@@ -97,21 +87,3 @@ def test_tondelier_chiffre_en_tonnes():
             assert v["effet_mt"]["prudent"] == 0, k
 
 
-def test_prix_finaux_ecologie_de_droite():
-    """Le programme remplace les taxes actuelles sur l'énergie : essence et électricité moins chères au départ, gaz
-    et fioul plus chers (remarque d'Adrien du 06/11/2026)."""
-    from programmes.ecologie_de_droite.moteur_propre.carbone import prix_finaux
-    pf = prix_finaux(Parametres(programme="ecologie_de_droite"))
-    assert pf["transports"][2029] < 0.9 and pf["transports"][2050] > 1.1
-    assert pf["electricite"][2029] < 0.8
-    assert pf["batiments"][2029] > 1.0
-    assert pf["transports"][2028] == 1.0
-
-
-def test_energie_entreprises():
-    """Énergie des entreprises (demande d'Adrien du 06/11/2026) : moins chère en 2029 (électricité, carburants), plus
-    chère ensuite (gaz, aviation d'affaires, prix du carbone qui monte) ; l'IS reprend les taxes supprimées."""
-    from programmes.ecologie_de_droite.moteur_propre.carbone import couts_energie_entreprises
-    ce = couts_energie_entreprises(Parametres(programme="ecologie_de_droite"), "prudent")
-    assert ce[2029]["indice_prix"] < 1.0 < ce[2050]["indice_prix"]
-    assert ce[2029]["statu_quo"] > 0

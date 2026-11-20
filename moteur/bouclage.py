@@ -28,7 +28,7 @@ Sorties pour le noyau (`contexte`) :
 
 Une inflation française plus haute que celle de la zone allège donc la dette réelle (et une désinflation l'alourdit) :
 c'est l'effet du niveau des prix sur une dette nominale, que l'ancien calcul (inflation du statu quo pour tous les
-programmes sauf Écologie de droite) ignorait.
+programmes) ignorait.
 
 Dans le noyau (moteur/noyau.trajectoire) : l'écart de taux de marché au statu quo pèse sur le PIB
 (bouclage.prime_demande, E1) ; les pensions perdent l'inflation due au programme l'année où elle survient (E2).
@@ -328,7 +328,3 @@ def forme_production_non_marchande(p, tau: int) -> float:
     return max(0.0, 1.0 - _h(u["pib"], tau))
 
 
-def forme_clause(p, tau: int) -> float:
-    """Effet sur le PIB, tau années après, d'une impulsion de 1 au multiplicateur maximal de 1 (pour les leviers qui
-    calculent leur propre effet récessif, comme la clause d'Écologie de droite)."""
-    return _h(reponses_unitaires(p)["pib"], tau)

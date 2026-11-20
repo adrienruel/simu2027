@@ -1,1 +1,1 @@
-"""Dépenses du nouveau système (feuille Total, lignes 23 à 44)."""
+"""Dépenses communes (règles d'évolution des missions de l'État)."""

@@ -1,8 +1,5 @@
-"""Le comparateur ne dépend pas d'« Écologie de droite » (décision du 16/11/2026).
-
-Ce programme de test est mis de côté : il reste dans le dépôt, gelé, mais aucun programme publié ne doit lire ses
-paramètres ni son code. Le dernier test simule tous les programmes publiés avec son dossier rendu inaccessible et
-retrouve les trajectoires publiées."""
+"""Le comparateur ne garde rien d'« Écologie de droite » (supprimé le 20/11/2026, à refaire un jour sur le noyau
+commun comme un programme ordinaire), et les sorties publiées se recalculent à l'identique."""
 import csv
 import subprocess
 import sys
@@ -10,7 +7,7 @@ import textwrap
 from pathlib import Path
 
 from moteur import noyau
-from moteur.parametres import PROGRAMME_ECARTE, RACINE, Parametres
+from moteur.parametres import RACINE, Parametres
 
 
 def test_aucun_programme_par_defaut():
@@ -19,37 +16,24 @@ def test_aucun_programme_par_defaut():
     assert not [c for c, f in p.origine.items() if "programmes" in Path(f).parts]
 
 
-def test_ecarte_hors_des_programmes_publies():
-    publies = noyau.programmes_disponibles()
-    assert publies[0] == "statu_quo"
-    assert PROGRAMME_ECARTE not in publies
-    assert PROGRAMME_ECARTE in noyau.programmes_disponibles(tous=True)
+def test_plus_de_code_ni_de_sortie_d_ecologie_de_droite():
+    assert not (RACINE / "programmes" / "ecologie_de_droite").exists()
+    assert not (RACINE / "sorties" / "ecologie_de_droite").exists()
+    assert "ecologie_de_droite" not in noyau.programmes_disponibles(tous=True)
+    for d in ("moteur", "outils", "programmes", "tests"):
+        for f in (RACINE / d).rglob("*.py"):
+            if f.name != Path(__file__).name:
+                assert "ecologie_de_droite" not in f.read_text(encoding="utf-8"), f
 
 
-def test_sorties_sans_ecarte():
+def test_sorties_sans_ecologie_de_droite():
     for f in (RACINE / "sorties").glob("comparaison_*.csv"):
         assert "Écologie de droite" not in f.read_text(encoding="utf-8"), f.name
 
 
 SCRIPT = textwrap.dedent('''
-    import importlib.abc, json, sys
+    import json
     from moteur import parametres, noyau
-
-    class Bloque(importlib.abc.MetaPathFinder):
-        def find_spec(self, nom, chemin, cible=None):
-            if nom.startswith("programmes." + parametres.PROGRAMME_ECARTE):
-                raise ImportError("code d'Écologie de droite chargé par le comparateur : " + nom)
-            return None
-
-    sys.meta_path.insert(0, Bloque())
-    dossier = parametres.dossier_programme
-
-    def dossier_bloque(nom):
-        if nom == parametres.PROGRAMME_ECARTE:
-            raise FileNotFoundError("paramètres d'Écologie de droite lus par le comparateur")
-        return dossier(nom)
-
-    parametres.dossier_programme = dossier_bloque
     p = parametres.Parametres()
     out = {}
     for nom in noyau.programmes_disponibles():
@@ -62,7 +46,7 @@ SCRIPT = textwrap.dedent('''
 SCENARIOS = {"crise": "Crise", "prudent": "Prudent", "median": "Médian", "optimiste": "Optimiste"}
 
 
-def test_programmes_publies_sans_le_dossier_ecarte():
+def test_programmes_publies_se_recalculent_a_l_identique():
     r = subprocess.run([sys.executable, "-c", SCRIPT], cwd=RACINE, capture_output=True, text=True, timeout=1800)
     assert r.returncode == 0, r.stderr[-2000:]
     import json
