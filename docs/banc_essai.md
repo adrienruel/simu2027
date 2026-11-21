@@ -85,3 +85,44 @@ obligatoires).
 4. **L'indexation immédiate de toutes les dépenses sur le PIB** efface à long terme le gain de la productivité.
    C'est une convention à revoir bloc par bloc (missions et défense votées en euros, ONDAM, chantier 1.2).
 5. **Les pensions ne sont pas trop rigides :** elles répondent plus que celles du COR à la productivité.
+
+## Diagnostic du retour de l'activité (21/11/2026, suite)
+
+Décomposition au médian : PIB en plus, recettes en plus et blocs qui bougent (Md€).
+
+| Choc, année | PIB | Emplois | PIB par emploi | Recettes en plus, hors choc direct | Blocs |
+|---|---|---|---|---|---|
+| Dépense +1 pt, 2035 | +23,3 | +49 000 | — | +12,0, soit 51 % du PIB | chômage −0,3 |
+| TVA −1 pt, 2035 | +24,9 | +121 000 | — | +12,5, soit 50 % du PIB | chômage −0,8 |
+| Âge 65 ans, 2039 | +7,5 | +108 000 | 69 000 € | +1,2, soit 16 % du PIB, net des prélèvements sur les pensions en moins | pensions −10,1 ; chômage +0,9 ; AAH et invalidité +0,4 |
+
+1. **Quand l'activité vient de la demande** (dépense, TVA), les recettes rendent environ 50 % du PIB en plus :
+   c'est le taux de prélèvements, comme chez la DG Trésor. Pas de rigidité là.
+   - Pour la TVA, l'écart restant avec Mésange (0,2 point) vient probablement de l'effet prix. Dans Mésange, la
+     baisse de TVA fait baisser les prix, donc les dépenses indexées sur les prix ; dans le modèle, les comptes sont
+     en euros constants. Non vérifié dans le code.
+2. **Quand l'activité vient d'emplois en plus, le budget ne reçoit pas les prélèvements sur le PIB que ces
+   emplois créent : il reçoit une valeur fixe par emploi.**
+   - Canaux communs : `programme_commun.emploi_valeur_emploi`, 20 000 € (un emploi au SMIC, prélèvements, TVA et
+     chômage évité), avec une valeur ajoutée de 35 000 € par emploi.
+   - Seniors : `seniors.valeur_emploi`, 27 000 €. Or le canal des seniors ajoute environ 69 000 € de PIB par
+     emploi : le budget n'en reçoit que 39 %, contre 50 à 53 % de prélèvements. C'est une incohérence interne
+     (environ 1,8 Md€, 0,05 point, pour un an d'âge).
+   - Tous les emplois créés sont implicitement des emplois au SMIC (35 000 € de PIB) : une mesure qui crée ou
+     prolonge des emplois moyens (âge de départ, qualifications, immigration de travail) est sous-évaluée en PIB
+     comme en recettes. C'est le chantier 2.2 de la roadmap (valeur d'un emploi selon son salaire), qui devient
+     prioritaire.
+   - Les seniors maintenus en activité qui ne trouvent pas d'emploi coûtent en chômage et en AAH (+1,3 Md€) : c'est
+     un vrai effet, qui dépend de la part de 42 % (chantier 2.3).
+3. **Quand l'activité vient de la productivité,** environ 40 % du PIB en plus part tout de suite en dépenses
+   indexées (section 3) : le retour tombe à environ 9 %, puis vers 0. C'est le chantier 1.2 (indexation des blocs).
+
+### Correction proposée (noyau, à faire après la fusion de `phase-q`)
+- **Un seul prix par emploi, cohérent avec son PIB :** chaque canal déclare le salaire des emplois qu'il crée
+  (0,8 à 3 SMIC). Le PIB en plus et les recettes en plus (prélèvements calculés par OpenFisca, TVA, IS sur la
+  valeur ajoutée) viennent du même niveau de salaire. Un emploi senior prolongé est un emploi à son salaire, pas un
+  emploi au SMIC.
+- **Test du banc à ajouter :** pour tout canal d'emplois, les recettes en plus rapportées au PIB en plus restent
+  entre 40 et 55 %.
+- **Effet attendu :** l'âge de départ passe d'environ +0,29 à environ +0,35 ou +0,40 point à 20 ans. Les mesures
+  qui créent des emplois qualifiés y gagnent, celles qui créent des emplois au SMIC ne changent presque pas.
