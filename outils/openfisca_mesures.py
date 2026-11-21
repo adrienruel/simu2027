@@ -598,6 +598,21 @@ class Base:
             if "age_depart" in x:
                 age_depart(lg, x["age_depart"])
                 continue
+            if "assurance_chomage" in x:
+                # roadmap 3.4 (22/11/2026) : allocations de chômage changées. La population n'a ni la durée
+                # d'indemnisation ni l'ancienneté : le montant vient du moteur (montant_moteur, à plein effet) et se
+                # répartit au prorata de l'allocation des chômeurs concernés (âge, seuil d'allocation)
+                y = x["assurance_chomage"]
+                md = float(y["montant_md"]) if "montant_md" in y else montant_moteur(y["programme"], y["mesure"])
+                age_max = y.get("age_max", 200)
+                seuil = 12 * float(y.get("seuil_mensuel", 0.0))
+                vises = [l for l in lg if l["chomage_brut"] > seuil and l["age"] < age_max]
+                masse = sum(l["poids"] * (l["chomage_brut"] - seuil) for l in vises) / 1e9  # part au-dessus du seuil
+                if masse > 0:
+                    k = max(0.0, 1 - md / masse)  # économie (+) : allocations en moins
+                    for l in vises:
+                        l["chomage_brut"] = seuil + (l["chomage_brut"] - seuil) * k
+                continue
             if "pension_minimum" in x:
                 # roadmap 3.3 : pensions des carrières complètes portées à un minimum. Carrière complète lue sur le
                 # montant : une pension au-dessus du plancher (microsimulation.plancher_carriere_complete, minimum

@@ -8,6 +8,8 @@
 #   tranche   : {bareme, seuil, taux}                tranche ajoutée à un barème
 #   variable  : {nom, facteur}                       variable d'OpenFisca multipliée (prestation revalorisée)
 #   formule   : {nom, ...}                           règle nouvelle écrite dans outils/openfisca_mesures.py
+#   population: {assurance_chomage: {programme, mesure, age_max?, seuil_mensuel?}}  allocations de chômage changées
+#               du montant du moteur, au prorata de l'allocation des chômeurs concernés (3.4)
 #   population: {pension_minimum: {mensuel_brut}}  pensions des carrières complètes portées à un minimum (3.3)
 #   population: {age_depart: {age_actuel, age_cible}}  âge de départ changé (roadmap 3.3, openfisca_mesures.age_depart) :
 #               profil de départ de la population de 2026 décalé de l'écart entre l'âge du programme et celui du
@@ -16,6 +18,9 @@
 # n'a pas cette information), patrimoine (ISF, taxe Zucman, IFI), niches non nommées, mesures sans barème publié.
 
 bertrand:
+  BER-ECO-01:
+    operations: [{population: {assurance_chomage: {programme: bertrand, mesure: BER-ECO-01}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   BER-RET-01:
     operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
     note: "Roadmap 3.3 (21/11/2026) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
@@ -29,6 +34,9 @@ bertrand:
     note: "Part impôt sur le revenu du prélèvement forfaitaire unique : 12,8 % → 14,8 %."
 
 tondelier:
+  PRE-15:
+    operations: [{population: {assurance_chomage: {programme: tondelier, mesure: PRE-15}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   RET-01:
     operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
     note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
@@ -77,6 +85,17 @@ tondelier:
     note: "Pensions de plus de 2 000 € brut revalorisées 0,5 point sous l'inflation de 2028 à 2032 : − 2,5 % de niveau, qui s'éteint ensuite avec ces retraités."
 
 lisnard:
+  LIS-ECO-02:
+    operations: [{variable: {nom: cotisations_salariales, facteur: 0.122}}]
+    note: "Roadmap 3.5 (22/11/2026) : cotisations salariales réduites de 93,6 Md€ (privé 72,1, agents publics 21,5 : montants bruts du moteur en 2032) sur ≈ 106,6 Md€ de cotisations salariales de la population (OpenFisca 2026), au prorata de chaque salarié. Facteur 1 − 93,6 / 106,6 = 0,122."
+  LIS-ECO-07:
+    operations:
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.deductible, ajout: -0.026}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.026}}
+    note: "Roadmap 3.5 (22/11/2026) : CSG d'activité de 9,2 à 6,6 % (−2,6 points sur la part déductible, même lecture que Tondelier COT-04)."
+  LIS-EMP-04:
+    operations: [{population: {assurance_chomage: {programme: lisnard, mesure: LIS-EMP-04}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   LIS-SOC-01:
     operations: [{parametre: {chemin: impot_revenu.calcul_impot_revenu.plaf_qf.plafond_avantages_procures_par_demi_part.general, valeur: 1000000000.0}}]
   LIS-ECO-03:
@@ -131,6 +150,9 @@ roussel:
     note: "Pensions revalorisées comme le salaire moyen depuis 2029 : sans effet en 2026, visible dans le vieillissement (même calcul que le moteur)."
 
 melenchon:
+  LFI-PRE-05:
+    operations: [{population: {assurance_chomage: {programme: melenchon, mesure: LFI-PRE-05}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   LFI-RET-03:
     operations: [{population: {pension_minimum: {mensuel_brut: 1870}}}]
     note: "Roadmap 3.3 (21/11/2026) : pensions des carrières complètes portées au SMIC net de 1 700 € (euros de 2026, comme le moteur), soit ≈ 1 870 € brut (prélèvements sur les pensions ≈ 9,1 %). Carrière complète lue sur le montant de la pension (microsimulation.plancher_carriere_complete)."
@@ -188,6 +210,9 @@ le_pen:
     note: "« Priorité nationale » : prestations non contributives retirées aux familles étrangères hors UE présentes depuis moins de cinq ans (lecture de la condition d'années de résidence ou d'activité)."
 
 philippe:
+  PHI-EMP-02:
+    operations: [{population: {assurance_chomage: {programme: philippe, mesure: PHI-EMP-02, age_max: 50}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs de moins de 50 ans. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   PHI-RET-01:
     operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
     note: "Roadmap 3.3 (21/11/2026) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
@@ -214,6 +239,12 @@ arthaud:
     note: "SMIC à 2 200 € net (euros de 2027), même règle que le moteur ; la répartition du travail et l'égalité salariale ne sont pas codées."
 
 retailleau:
+  RET-ECO-06:
+    operations: [{variable: {nom: cotisations_salariales, facteur: 0.875}}]
+    note: "Roadmap 3.5 (22/11/2026) : cotisations salariales réduites de 13,3 Md€ (privé 10,2, agents publics 3,1 : montants bruts du moteur en 2032) sur ≈ 106,6 Md€ (OpenFisca 2026), au prorata. Facteur 1 − 13,3 / 106,6 = 0,875."
+  RET-EMP-03:
+    operations: [{population: {assurance_chomage: {programme: retailleau, mesure: RET-EMP-03}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   RET-RET-02:
     operations: [{formule: {nom: capitalisation, programme: retailleau, parametre: retailleau_capitalisation.cotisation}}]
     note: "Part salariale de la capitalisation obligatoire (0,5 % du brut des entrants depuis 2028) : revenu disponible en moins, versé à un fonds hors des administrations (pas une recette publique). Mêmes paramètres que le moteur (bibliotheque.capitalisation_obligatoire) ; les plus jeunes salariés en emploi sont couverts, à hauteur des entrants depuis 2028. Nulle en 2026."
@@ -244,6 +275,9 @@ zemmour:
     note: "CSG supprimée sur les revenus d'activité (salariés et indépendants)."
 
 glucksmann:
+  GLU-EMP-02:
+    operations: [{population: {assurance_chomage: {programme: glucksmann, mesure: GLU-EMP-02}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   GLU-RET-01:
     operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
     note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
@@ -257,6 +291,9 @@ glucksmann:
     note: "SMIC à 1 600 € net (euros de 2027), même règle que le moteur."
 
 attal:
+  ATT-EMP-01:
+    operations: [{population: {assurance_chomage: {programme: attal, mesure: ATT-EMP-01}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   ATT-ECO-01:
     operations:
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.0475}}

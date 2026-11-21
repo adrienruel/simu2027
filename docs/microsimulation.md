@@ -490,3 +490,41 @@ synthétique.
   - Couverture de Mélenchon : 63 → 74 %.
 - **Non représentés :** durée d'assurance, carrières longues, décote.
 
+## Roadmap 3.4 et 3.5 : assurance chômage et prélèvements rendus aux actifs (22/11/2026)
+
+- **Assurance chômage** (`population: {assurance_chomage: {programme, mesure, age_max?, seuil_mensuel?}}`) :
+  - La population n'a ni la durée d'indemnisation ni l'ancienneté. Le montant vient donc du moteur, à plein effet,
+    et se répartit au prorata de l'allocation des chômeurs concernés.
+  - Codé pour huit mesures, même règle pour tous : ATT-EMP-01, BER-ECO-01, GLU-EMP-02, LFI-PRE-05, PHI-EMP-02
+    (moins de 50 ans), RET-EMP-03, LIS-EMP-04, PRE-15. Exemple : Philippe, effet statique +2,3 Md€.
+  - L'emploi passe par le canal de l'assurance chômage du programme. La micro n'en compte pas, et l'élasticité
+    agrégée des transferts n'en compte plus non plus (`moteur/offre.effets`) : elle comptait ces mesures une seconde
+    fois, pour quelques milliers d'emplois (Attal, Philippe, Retailleau, Lisnard, Glucksmann, Mélenchon). Écarts de
+    solde primaire 2037 : moins de 0,02 point.
+- **Cotisations salariales rendues** (variable OpenFisca `cotisations_salariales`, facteur) :
+  - LIS-ECO-02 : −93,6 Md€ bruts ; effet statique −71,7 Md€, contre −72,0 au moteur.
+  - RET-ECO-06 : −13,3 Md€ bruts ; effet statique −10,4 Md€.
+  - Facteurs tirés des cotisations salariales de la population (≈ 106,6 Md€).
+- **CSG d'activité** de 9,2 à 6,6 % (LIS-ECO-07) : effet statique −20,0 Md€.
+- **Une seule voie** : une mesure dont une ligne passe par les prélèvements du travail (cellules) garde cette voie.
+  Ses lignes de prestations (prime d'activité en moins…) ne repassent pas par la micro.
+- **Couverture du budget « ménages »** (en %) :
+
+| Programme | Couverture |
+|---|---|
+| Bertrand | 100 |
+| Lisnard | 94 |
+| Attal | 87 |
+| Retailleau | 83 |
+| Zemmour | 80 |
+| Mélenchon | 78 |
+| Philippe | 77 |
+| Roussel | 76 |
+| Glucksmann | 72 |
+| Arthaud | 67 |
+| Le Pen | 55 |
+| Tondelier | 55 |
+
+  Six programmes atteignent le seuil de 80 %, contre deux avant la roadmap 3.3. Ce qui reste tient surtout à la
+  consommation : TVA et carburants (3.1, données de l'enquête Budget de famille en attente).
+

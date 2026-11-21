@@ -422,15 +422,22 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
     cles = {}
     groupes_micro = {}
     table = micro_emploi() if p.val("offre.micro_emploi") else {}
+    # une mesure dont une ligne passe par les prélèvements du travail (cellules) garde cette voie : ses lignes de
+    # prestations (prime d'activité en moins…) ne repassent pas par la micro (une seule voie, roadmap 2.1)
+    par_travail = {m.nom.split(" — ", 1)[0] for m in mesures if m.instrument in ("travail", "cout_travail")}
     for m in mesures:
         instrument = m.instrument or ("investissement_public" if (m.poste == "investissement" and m.nature == "mesure") else "")
         ident = m.nom.split(" — ", 1)[0]
         # transferts codés dans OpenFisca (avec ou sans instrument déclaré) : emplois par la microsimulation (F4)
-        if ident in table and m.nature == "mesure" and (instrument == "transferts_actifs" or (
+        if ident in table and ident not in par_travail and m.nature == "mesure" and m.poste != "chomage" and (instrument == "transferts_actifs" or (
                 not instrument and m.poste in ("famille", "pauvrete", "logement", "aah_invalidite"))):
             groupes_micro.setdefault(ident, []).append(m)
             continue
         if not instrument:
+            continue
+        if instrument == "transferts_actifs" and m.poste == "chomage":
+            # roadmap 3.4 (22/11/2026) : l'assurance chômage a son propre canal d'emploi (durée et montant des
+            # allocations, déclaré par le programme) ; l'élasticité agrégée des transferts la comptait une seconde fois
             continue
         if instrument not in INSTRUMENTS:
             raise ValueError(f"Mesure « {m.nom} » : instrument inconnu {instrument}")

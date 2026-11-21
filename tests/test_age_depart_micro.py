@@ -45,3 +45,15 @@ def test_minimum_de_pension_des_carrieres_completes(pop):
     assert 3e6 < n < 5.5e6
     assert 14 < gain < 26
     assert all(l2["pension_brute"] == l1["pension_brute"] for l1, l2 in zip(pop, lg) if l1["pension_brute"] < 12 * 1000)
+
+
+def test_assurance_chomage_au_montant_du_moteur(pop):
+    """Roadmap 3.4 : les allocations des chômeurs concernés baissent (ou montent) du montant donné, au prorata."""
+    from outils.openfisca_mesures import Base
+    b = type("B", (), {"lignes": pop})()
+    m0 = sum(l["poids"] * l["chomage_brut"] for l in pop) / 1e9
+    lg = Base.population(b, [{"population": {"assurance_chomage": {"montant_md": 3.0, "age_max": 50}}}])
+    assert sum(l["poids"] * l["chomage_brut"] for l in lg) / 1e9 == pytest.approx(m0 - 3.0, abs=0.01)
+    assert all(l2["chomage_brut"] == l1["chomage_brut"] for l1, l2 in zip(pop, lg) if l1["age"] >= 50)
+    lg = Base.population(b, [{"population": {"assurance_chomage": {"montant_md": -6.0}}}])
+    assert sum(l["poids"] * l["chomage_brut"] for l in lg) / 1e9 == pytest.approx(m0 + 6.0, abs=0.01)

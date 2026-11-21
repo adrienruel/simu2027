@@ -2123,3 +2123,13 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   (`microsimulation.plancher_carriere_complete`, 1 000 € brut) ; LFI-RET-03 codée (4,3 millions de retraités,
   ≈ 20 Md€ bruts, statique −17,3 Md€) ; couverture de Mélenchon 74 %.
 
+## 22/11/2026 — roadmap 3.4 et 3.5 (branche `phase-s`)
+- **Assurance chômage dans la micro** (`population.assurance_chomage`, montant du moteur au prorata des
+  allocations) : huit mesures codées.
+- **Double compte corrigé** : les mesures d'assurance chômage ne passent plus par l'élasticité agrégée des
+  transferts ; leur emploi passe par le canal propre du programme.
+- **Cotisations salariales et CSG rendues** : LIS-ECO-02, LIS-ECO-07, RET-ECO-06 codées.
+- **Une seule voie** : une mesure qui passe par les prélèvements du travail garde cette voie pour ses lignes de
+  prestations.
+- Couverture du budget « ménages » : six programmes sur douze au-dessus de 80 %.
+
