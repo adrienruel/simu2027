@@ -44,6 +44,10 @@ from .parametres import Parametres
 INSTRUMENTS = ("travail", "cout_travail", "capital_entreprises", "capital_menages", "successions", "consommation",
                "transferts_actifs", "investissement_public", "education", "recherche")
 INCIDENCES = ("proportionnel", "ir", "bas", "haut", "milieu", "plafond")
+# zones de salaire d'une baisse ou d'une hausse du coût du travail déclarée (chantier 2.1, 21/11/2026) : la mesure
+# passe alors par la demande de travail cellule par cellule (offre.demande_travail, par tranche de salaire), au lieu de
+# l'élasticité agrégée de Mésange (offre.elasticite_cout_travail), gardée pour les mesures sans zone
+ZONES_COUT = ("smic", "milieu", "prive")
 LIBELLES = {"travail": "prélèvements sur le travail", "cout_travail": "coût du travail",
             "capital_entreprises": "fiscalité des entreprises", "capital_menages": "fiscalité du capital des ménages",
             "successions": "successions", "consommation": "TVA et accises", "transferts_actifs": "transferts aux actifs",
@@ -111,13 +115,14 @@ def _cellules(p: Parametres) -> list[dict]:
     for d, tables in ((effectifs_prive_2026(p), {"prive": 1.0}),
                       (effectifs_public_2026(p), p.val("statu_quo.versants_fonction_publique"))):
         for nom, wv in tables.items():
+            prive = nom == "prive"
             T = _table_openfisca() if nom == "prive" else _table_openfisca(versant=nom)
             x = T["cout_du_travail"]
             for c, n in zip(d.milieux, d.effectifs):
                 net = _interp(c, x, T["salaire_net"]) + _interp(c, x, T["impot_revenu_restant_a_payer"])
                 if n <= 0 or net <= 0:
                     continue
-                out.append({"n": n * wv, "cout": c, "brut": _interp(c, x, T["brut"]), "net": net,
+                out.append({"n": n * wv, "cout": c, "brut": _interp(c, x, T["brut"]), "net": net, "prive": prive,
                             "prelevements": c - net, "ir": -_interp(c, x, T["impot_revenu_restant_a_payer"])})
     cache["offre_cellules"] = out
     return out
@@ -236,6 +241,47 @@ def base_incidence(incidence: str, x: dict) -> float:
     if incidence == "milieu":  # allègements entre 1,6 et 3,5 SMIC
         return x["prelevements"] if 1.6 * SMIC_BRUT_2026 < x["brut"] <= 3.5 * SMIC_BRUT_2026 else 0.0
     return max(0.0, x["brut"] - PLAFOND_SS_2026)  # cotisation au-dessus du plafond de la Sécurité sociale
+
+
+def poids_zone_cout(zone: str, x: dict) -> float:
+    """Part du coût du travail d'une cellule (par personne) touchée par une mesure de coût du travail de cette zone :
+    smic : profil des allègements généraux, entier jusqu'au SMIC et nul à 1,6 SMIC (décroissance linéaire) ;
+    milieu : de 1,6 à 3,5 SMIC (bandeaux maladie et famille) ; prive : tout le privé, au prorata du coût.
+    Agents publics exclus : l'employeur public n'embauche pas selon le coût."""
+    if not x.get("prive", True):
+        return 0.0
+    b = x["brut"] / SMIC_BRUT_2026
+    if zone == "smic":
+        return x["cout"] * min(1.0, max(0.0, (1.6 - b) / 0.6))
+    if zone == "milieu":
+        return x["cout"] if 1.6 < b <= 3.5 else 0.0
+    if zone == "prive":
+        return x["cout"]
+    raise ValueError(f"zone de coût du travail inconnue {zone} (zones : {', '.join(ZONES_COUT)})")
+
+
+def cout_travail_par_point(p: Parametres, s: str, zone: str) -> dict:
+    """Effet de long terme d'1 point de PIB (de 2029) de coût du travail en moins dans une zone de salaires : demande
+    de travail de chaque cellule (élasticité de sa tranche, offre.demande_travail) × baisse relative de son coût ;
+    % de PIB (travail en plus pondéré par son coût × part du travail) et emplois (pris sur le chômage)."""
+    cel = _cellules(p)
+    y29 = sq.pib(p, s)[2029]
+    dem = sq._v(p, "offre.demande_travail", s)
+    poids = [x["n"] * poids_zone_cout(zone, x) for x in cel]
+    total = sum(poids)
+    masse = sum(x["n"] * x["cout"] for x in cel)
+    montant = 0.01 * y29 * 1e9
+    travail = emplois = 0.0
+    for x, w in zip(cel, poids):
+        if not w:
+            continue
+        r = montant * w / total / x["n"] / x["cout"]  # coût du travail en moins, relatif
+        b = x["brut"] / SMIC_BRUT_2026
+        e = dem[0] if b <= 1.3 else (dem[1] if b <= 2.5 else dem[2])
+        emplois += x["n"] * e * r
+        travail += x["n"] * e * r * x["cout"]
+    pct = sq._v(p, "offre.travail_part_pib", s) * travail / masse * 100
+    return {"pib_pct": pct, "emplois": 0.0, "emplois_demande": emplois}
 
 
 def travail_par_point(p: Parametres, s: str, incidence: str = "proportionnel") -> dict:
@@ -387,7 +433,8 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
             continue
         if instrument not in INSTRUMENTS:
             raise ValueError(f"Mesure « {m.nom} » : instrument inconnu {instrument}")
-        inc = (m.incidence or "proportionnel") if instrument == "travail" else ""
+        inc = (m.incidence or "proportionnel") if instrument == "travail" else (
+            (m.incidence or "") if instrument == "cout_travail" else "")
         part = 1.0
         if "@" in inc:  # « réforme@part » : seule cette part du montant porte sur les revenus du travail
             inc, x = inc.split("@", 1)
@@ -412,6 +459,9 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
             if i == "travail":
                 x = travail_par_point(p, sc, inc)
                 return x["pib_pct"], x["emplois"], x.get("emplois_demande", 0.0)
+            if i == "cout_travail" and inc:
+                x = cout_travail_par_point(p, sc, inc)
+                return x["pib_pct"], x["emplois"], x["emplois_demande"]
             if i == "capital_entreprises":
                 return capital_entreprises_par_point(p, sc), None
             return sq._v(p, f"offre.elasticite_{i}", sc), None
@@ -455,11 +505,12 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
             out["detail"][i] = {"points_pib": pts, "effet_pib_pct": effet}
             continue
         el = {sc: elasticite(sc) for sc in {s, MIROIR[s]}}
+        par_cellules = i == "travail" or (i == "cout_travail" and bool(inc))
         for t in annees:
             sc = s if pts[t] >= 0 else MIROIR[s]
             cumul += vit * (el[sc][0] * pts[t] - cumul)
             effet[t] = cumul
-            if i == "travail":
+            if par_cellules:
                 cumul_e += vit * (el[sc][1] * pts[t] - cumul_e)
                 cumul_d += vit * (el[sc][2] * pts[t] - cumul_d)
                 emp[t], emp_d[t] = cumul_e, cumul_d
@@ -468,8 +519,8 @@ def effets(p: Parametres, s: str, mesures: list[Mesure], annees_avant=(2027, 202
             out["dpib"][t] += effet[t] / 100 * y[max(t, 2029)]
             if i in PRODUCTIVITE:
                 dpib_productivite[t] += (1 - (part_emploi or 0.0)) * effet[t] / 100 * y[max(t, 2029)]
-        if i == "travail":
-            serie = {t: emp[t] * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
+        if par_cellules:
+            serie = {t: emp[t] * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES} if i == "travail" else None
             dem = {t: emp_d[t] * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
             if any(abs(v) > 1 for v in dem.values()):
                 canal = f"Offre : coût du travail ({inc.split(':', 1)[-1]})"

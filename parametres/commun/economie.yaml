@@ -769,7 +769,7 @@ offre:
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : effets faibles du RSA sur la reprise d'emploi en France (Dares, évaluations du RSA, 2011 : borne basse) ; Bargain et Doorley (Journal of Public Economics, 2011) : le RMI à 25 ans baisse de 7 à 10 % la participation des hommes seuls peu diplômés (niveau central) ; Immervoll, Kleven, Kreiner et Saez (2007), Chetty et al. (2011) : élasticités de participation de offre.travail_participation (borne haute)"
-    note: "DÉCISION d'Adrien du 14/11/2026 : trois niveaux pour l'effet du gain à travailler quand il change par les aides sociales (microsimulation, outils/openfisca_mesures.py) : bas (crise, prudent), central (médian), haut (optimiste), en fraction des élasticités de participation du canal travail. Une baisse d'emploi prend le scénario miroir (prudent : le niveau central)."
+    note: "DÉCISION d'Adrien du 14/11/2026 : trois niveaux pour l'effet du gain à travailler quand il change par les aides sociales (microsimulation, outils/openfisca_mesures.py) : bas (crise, prudent), central (médian), haut (optimiste), en fraction des élasticités de participation du canal travail. Une baisse d'emploi prend le scénario miroir (prudent : le niveau central), choisi sur le sens net de la mesure depuis le chantier 2.1 (21/11/2026), plus personne par personne."
   travail_heures:
     valeur: {crise: 0.03, prudent: 0.05, median: 0.07, optimiste: 0.1}
     unite: sans_unite
@@ -792,7 +792,7 @@ offre:
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : élasticité de l'emploi au coût du travail ≈ 1 à 1,5 au voisinage du SMIC (Kramarz et Philippon, 2001), 0,4 à 1 pour les allègements ciblés (Crépon et Desplatz, 2001 ; L'Horty, 2006) ; faible au-delà de 1,6 SMIC et quasi nulle au-delà de 2,5 SMIC (rapport Bozio-Wasmer, octobre 2024)"
-    note: "Valeurs absolues par tranche de salaire brut (jusqu'à 1,3 SMIC ; 1,3 à 2,5 ; au-delà), appliquées au coût du travail calculé par OpenFisca, cellule par cellule. Emplois pris sur le chômage."
+    note: "Valeurs absolues par tranche de salaire brut (jusqu'à 1,3 SMIC ; 1,3 à 2,5 ; au-delà), appliquées au coût du travail calculé par OpenFisca, cellule par cellule. Emplois pris sur le chômage. Sert aussi, depuis le chantier 2.1 (21/11/2026), aux mesures de coût du travail qui déclarent leur zone (incidence smic, milieu ou prive : offre.cout_travail_par_point) ; au SMIC, ≈ 22 000 emplois par Md€ au prudent, 29 000 au médian, dans la fourchette du Trésor-Éco n° 97 (2012)."
   travail_part_pib:
     valeur: {crise: 0.65, prudent: 0.65, median: 0.75, optimiste: 0.85}
     unite: taux
@@ -832,7 +832,7 @@ offre:
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : effets faibles des minima sociaux et des aides au logement sur la reprise d'emploi en France (Dares, évaluations du RSA, 2011) ; plus forts pour la durée d'indemnisation du chômage (Banque de France, Bulletin n° 264, 2026), comptée à part par les programmes qui la changent"
-    note: "RSA, prime d'activité, aides au logement, allocations familiales : moins de transferts aux actifs = un peu plus de travail. Emplois venus de l'inactivité. L'assurance chômage n'y passe pas quand le programme a déjà son propre canal (Tondelier, PRE-15)."
+    note: "RSA, prime d'activité, aides au logement, allocations familiales : moins de transferts aux actifs = un peu plus de travail. Emplois venus de l'inactivité. L'assurance chômage n'y passe pas quand le programme a déjà son propre canal (Tondelier, PRE-15). Depuis le chantier 2.1 (21/11/2026) : seulement pour les transferts non codés dans OpenFisca ; un transfert codé passe par la micro (gain à travailler), qui distingue les aides liées à l'activité (prime d'activité : effet de signe contraire) des aides aux inactifs (docs/recoupements.md, Roadmap 2.1)."
   elasticite_investissement_public:
     valeur: {crise: 0.1, prudent: 0.2, median: 0.33, optimiste: 0.5}
     unite: sans_unite

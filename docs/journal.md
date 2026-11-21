@@ -2084,3 +2084,19 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   5,0 ; avant 5,67), taux apparent 3,65 % (Commission 3,7). Déficit du statu quo en 2037 au prudent : 8,69 → 8,12 %.
   Écarts de solde primaire des programmes inchangés ; à long terme, les programmes qui creusent la dette paient plus
   vite le taux du moment (Mélenchon 2050 : 66,8 → 73,3 % de déficit). Détail dans `docs/recoupements.md`.
+
+## 21/11/2026 — roadmap 2.1 : une seule voie d'emploi par mesure (branche `phase-r`)
+- Décomposition sur trois mesures tests (prime d'activité, cotisations au SMIC, âge de départ) et règle contre le
+  double compte : `docs/recoupements.md`, section « Roadmap 2.1 » ; test `tests/test_une_voie_emploi.py`.
+- **Micro** (`outils/openfisca_mesures.py`) :
+  - scénario miroir choisi sur le sens net de la mesure (avant : personne par personne ; +10 % et −10 % de prime
+    d'activité perdaient tous deux ≈ 5 000 emplois au prudent) ;
+  - au SMIC relevé, le gain à travailler en plus ne crée pas d'emploi (la demande, comptée par le coût horaire,
+    commande).
+  - `micro_emploi_2026.csv` recalculé (SMIC relevé : Arthaud +194 700 → +7 000 emplois au prudent ; Mélenchon et
+    Roussel +49 700 → +1 500 ; Tondelier et Glucksmann ≈ +28 000 → +1 000).
+- **Coût du travail par zone** (`offre.cout_travail_par_point`, `incidence: smic | milieu | prive`) : demande de
+  travail cellule par cellule au lieu de l'élasticité uniforme de Mésange. Au SMIC : 22 000 à 29 000 emplois par Md€
+  (Mésange : 9 600 à 14 400 ; Trésor-Éco n° 97 : 25 000 à 50 000). Zones déclarées : Philippe PHI-FIS-01b (`milieu`),
+  Lisnard LIS-EMP-05 (`smic`).
+

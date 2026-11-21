@@ -136,12 +136,13 @@ lisnard_mesures:
     statut: HYPOTHESE
     source: "Le livre noir (22/04/2026), p. 7 ; encadrement : ACRE ≈ 0,4 Md€ (créateurs) ; ≈ 50 000 créations d'entreprises employeuses par an (Insee)"
   embauche_rsa:
-    valeur: {id: LIS-EMP-05, deductible_is: 0.45, instrument: cout_travail, libelle: "Charges négatives à l'embauche d'un allocataire du RSA depuis plus de deux ans, emploi à domicile au SMIC sans charges", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: LIS-EMP-05, deductible_is: 0.45, instrument: cout_travail, incidence: smic, libelle: "Charges négatives à l'embauche d'un allocataire du RSA depuis plus de deux ans, emploi à domicile au SMIC sans charges", poste: recettes, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: -0.8, prudent: -0.6, median: -0.5, optimiste: -0.4}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Page programme (non datée) ; encadrement : exonérations de l'emploi à domicile ≈ 1 Md€ (déjà au statu quo, en partie) ; embauches aidées de longue durée ≈ 30 000 à 60 000 par an"
+    note: "Zone de salaires « smic » (chantier 2.1, 21/11/2026) : embauches au SMIC, emploi par la demande de travail des cellules au voisinage du SMIC (offre.demande_travail)."
   epargne_aleas:
     valeur: {id: LIS-AGR-02b, instrument: capital_entreprises, libelle: "Compte épargne aléas dans chaque exploitation (déduction fiscale)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: -0.15, prudent: -0.1, median: -0.08, optimiste: -0.05}}

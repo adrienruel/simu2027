@@ -53,13 +53,13 @@ philippe_mesures:
     statut: DECISION
     source: "Même source ; 60 % sur la CFE (≈ 7 Md€), la taxe foncière des entreprises (≈ 12 Md€), la C3S (≈ 4 Md€) et les autres impôts de production (≈ 10 Md€) ; compensation des collectivités par l'État incluse"
   aides_entreprises_travail:
-    valeur: {id: PHI-FIS-01b, deductible_is: 0.9, instrument: cout_travail, libelle: "Aides publiques aux entreprises supprimées : allègements et exonérations de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
+    valeur: {id: PHI-FIS-01b, deductible_is: 0.9, instrument: cout_travail, incidence: milieu, libelle: "Aides publiques aux entreprises supprimées : allègements et exonérations de cotisations", poste: recettes, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: 4.8, prudent: 8.0, median: 11.2, optimiste: 14.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : aides aux entreprises ≈ 210 Md€ en 2023 (commission d'enquête du Sénat, rapport n° 808, 2025), dont allègements de cotisations ≈ 80 Md€ ; estimation indépendante de l'annonce (relecture neutre du 11/11/2026), sur les leviers identifiables : crédit d'impôt recherche des grands groupes, taux réduits, subventions sectorielles, allègements au-delà de 2 SMIC ; total 12 (crise), 20 (prudent), 28 (médian), 35 (optimiste) Md€ ; précédents : LFSS 2025, 4 Md€ d'allègements visés, ≈ 1,6 retenus ; rapport Bozio-Wasmer (2024) : redéploiement de quelques Md€ ; 40 % pris sur les allègements"
-    note: "Les 50 Md€ annoncés ne sont pas repris : estimation propre."
+    note: "Les 50 Md€ annoncés ne sont pas repris : estimation propre. Zone de salaires « milieu » (chantier 2.1, 21/11/2026) : les allègements visés sont au-delà de 2 SMIC, l'emploi passe par la demande de travail de ces cellules (offre.demande_travail), pas par l'élasticité uniforme de Mésange."
   aides_entreprises_capital:
     valeur: {id: PHI-FIS-01b, instrument: capital_entreprises, libelle: "Aides publiques aux entreprises supprimées : niches fiscales et subventions", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2032,
              montant: {crise: 7.2, prudent: 12.0, median: 16.8, optimiste: 21.0}}

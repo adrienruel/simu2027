@@ -43,6 +43,89 @@ France, scénario sans changement de politique. Statu quo médian, après les co
   du PIB. Prudent : −2,1 % en 2035, en ligne.
 - **Prudent** : intérêts 5,3 % du PIB en 2035 (+0,3 point sur la Commission), par la prime de dette plus forte.
 
+## Roadmap 2.1 : une seule voie d'emploi par mesure (21/11/2026)
+
+Trois mesures tests, emplois de long terme par Md€ de mesure (personnes ; + : emplois en plus). Micro : gain à
+travailler de chaque personne en emploi (OpenFisca, population synthétique) × élasticité de participation de sa
+tranche × `offre.participation_transferts`. Agrégé : élasticité par point de PIB du canal de l'instrument.
+
+| Mesure test | Voie | Prudent | Médian | Repère |
+|---|---|---|---|---|
+| Prime d'activité +10 % (1,63 Md€) | micro, miroir personne par personne (avant) | −3 000 | +7 500 | IPP pour France Stratégie (2023), réforme de 2019 : effet non identifiable (placebo de 2018 de même ampleur) ; Cour des comptes (avril 2026) : pas d'effet mis en évidence |
+| | micro, miroir sur le sens net (après) | +1 300 | +3 300 | |
+| | agrégé, `elasticite_transferts_actifs` (hausse : miroir) | −1 900 | −1 000 | |
+| RSA +10 % (1,46 Md€) | micro (après ; baisse nette : miroir) | −27 700 | −10 900 | |
+| | agrégé | −1 900 | −1 000 | |
+| Aides au logement +10 % (1,68 Md€) | micro (après ; baisse nette : miroir) | −4 800 | −1 900 | |
+| | agrégé | −1 900 | −1 000 | |
+| Baisse de cotisations au SMIC | cellules, `offre.demande_travail` (zone `smic`) | +21 600 | +29 000 | Trésor-Éco n° 97 (2012) : 20 000 à 40 000 € bruts par emploi pour les allègements de 1993-1997, soit 25 000 à 50 000 emplois par Md€ |
+| | agrégé, `elasticite_cout_travail` (Mésange, baisse uniforme) | +9 600 | +14 400 | |
+| | cellules, zone `milieu` (1,6 à 3,5 SMIC) | +2 500 | +3 800 | Bozio-Wasmer (2024) : effets faibles au-delà de 1,6 SMIC |
+| Recul de l'âge de 64 à 65 ans | canal des seniors (`offre.seniors`) | — | ≈ +210 000 (un an d'âge) | Rexecode (2023), réforme de 2023 (deux ans) : +300 000 emplois en 2030 ; Insee (2023) : +600 000 à +800 000 actifs |
+| | micro | non codé (chantier 3.3) | | |
+
+Constats :
+- **Prime d'activité** : les deux voies ont le même ordre de grandeur (moins de 4 000 emplois par Md€), mais pas le
+  même signe. Logement : même signe, à un facteur 2,5 près. La voie agrégée traite toute aide comme une aide aux inactifs ; la micro voit qu'une aide liée à
+  l'activité augmente le gain à travailler de la plupart des bénéficiaires (6,3 millions de gagnants, 5,2 millions
+  de perdants, surtout des conjoints dont le contrefactuel change). Le résultat de la micro, petit et positif, est
+  compatible avec les évaluations.
+- **Défaut corrigé dans la micro** : le scénario miroir était choisi personne par personne. Les perdants prenaient
+  l'élasticité du miroir, plus forte au prudent : +10 % et −10 % de prime d'activité perdaient tous deux environ
+  5 000 emplois au prudent. Le miroir est désormais choisi sur le sens net de la mesure
+  (`outils.openfisca_mesures.emplois_par_scenario`).
+- **RSA** : la micro donne dix à quinze fois l'agrégé. Elle compte toutes les personnes en emploi dont le ménage toucherait
+  le RSA si elles cessaient de travailler (7,8 millions) ; l'élasticité agrégée de 0,1 ne distingue pas une aide aux
+  inactifs d'une aide aux actifs. Une seule voie est gardée, la micro, et l'écart est documenté (critère de la
+  roadmap : « une seule voie est utilisée et documentée »).
+- **Cotisations au SMIC** : l'élasticité uniforme de Mésange sous-estime d'un facteur 2,2 l'effet d'une baisse
+  ciblée au SMIC, et surestime d'un facteur 4 une baisse entre 1,6 et 3,5 SMIC. Une mesure de coût du travail peut
+  maintenant déclarer sa zone de salaires (`incidence: smic | milieu | prive`). Elle passe alors par la demande de
+  travail cellule par cellule (élasticités par tranche, déjà utilisées pour les réformes calculées par OpenFisca),
+  et non plus par Mésange. Sans zone, Mésange reste la voie (impôts de production sur la masse salariale, baisses
+  larges). Zones déclarées : Philippe PHI-FIS-01b (allègements au-delà de 2 SMIC : `milieu`, −67 000 → −18 000
+  emplois en 2037 au prudent, +2,9 Md€ de solde) ; Lisnard LIS-EMP-05 (embauches au SMIC : `smic`, +3 700 → +8 400
+  emplois, −0,07 Md€ de solde, car ces emplois rapportent moins).
+- **Âge de départ** : une seule voie (canal des seniors), dans le facteur 2 de Rexecode. La micro ne voit pas les
+  pensions de carrière (chantier 3.3) ; ses lignes « retraites » ne sont pas lues par le moteur.
+- **SMIC relevé** (Arthaud, Mélenchon, Roussel) : la micro comptait le gain à travailler des salariés dont le
+  salaire est relevé (+49 700 emplois pour Mélenchon et Roussel au prudent). Au SMIC, l'emploi est fixé par la
+  demande, déjà comptée par le canal du coût horaire (`bibliotheque.smic`) ; ces réponses positives sont désormais
+  mises à zéro.
+
+**Règle contre le double compte** (testée par `tests/test_une_voie_emploi.py`) :
+1. Une mesure n'a qu'une voie d'emploi. Le moteur choisit dans cet ordre :
+   - transfert codé dans OpenFisca (`programmes/micro_mesures.yaml`) : la micro, quel que soit l'instrument
+     déclaré ;
+   - mesure sur le coût du travail avec zone : la demande par cellule ;
+   - mesure sur les prélèvements du travail : les cellules (offre et demande) ;
+   - autre instrument déclaré : son élasticité agrégée ;
+   - âge de départ : le canal des seniors ;
+   - SMIC et temps de travail : le canal du coût horaire.
+2. Les emplois d'un canal ne repassent pas par la valeur générique d'un emploi (`programme_simple`, canaux « Offre »
+   et « Seniors » exclus).
+3. Au SMIC, l'offre ne crée pas d'emploi : seule la demande compte.
+
+**Reste ouvert** (hors 2.1) :
+- Des transferts sans instrument ni code OpenFisca n'ont aucun effet d'emploi : année blanche des prestations
+  (ATT-FIS-03), économies non détaillées sur les prestations (Bertrand, Philippe), aides aux étrangers (PHI-IMM-05).
+  Les classer relève des fiches de programmes (chantier 7).
+- L'assurance chômage passe encore par l'élasticité agrégée des transferts (chantier 3.4).
+- `parametres/donnees/micro_emploi_2026.csv` recalculé avec les deux corrections (21/11, un programme par
+  processus ; sorties de la micro non régénérées). Plus gros changements, emplois en application complète :
+
+| Mesure | Prudent, avant → après | Médian, avant → après | Cause |
+|---|---|---|---|
+| Arthaud ART-ECO-01 (SMIC à 2 200 € net) | +194 700 → +7 000 | +506 500 → +17 800 | SMIC |
+| Mélenchon LFI-SAL-01, Roussel PCF-SAL-01 (SMIC) | +49 700 → +1 500 | +137 900 → +3 900 | SMIC |
+| Tondelier PRE-01 (SMIC) | +29 700 → +1 000 | +85 600 → +2 500 | SMIC |
+| Glucksmann GLU-ECO-01 (SMIC) | +27 100 → +1 000 | +78 000 → +2 600 | SMIC |
+| Mélenchon LFI-REC-02 | +7 500 → +14 300 | +43 100 → +36 300 | miroir |
+| Roussel PCF-PRE-01 | −46 700 → −37 600 | −5 800 → −14 800 | miroir |
+| Retailleau RET-EMP-01 | +66 100 → +71 900 | +188 400 → +182 500 | miroir |
+
+  Les emplois du SMIC qui restent viennent des aides qui changent pour les autres membres du ménage.
+
 ## Reste à recouper (C3)
 
 - Santé : fiche France de l'Ageing Report 2024 (dépenses de santé publiques en 2022 et 2070), DREES ; la pente
