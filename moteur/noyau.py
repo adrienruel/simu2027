@@ -445,11 +445,9 @@ def ppa_par_emploi(p: Parametres, s: str) -> dict[int, float]:
     c = _interp(1823.03 * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
     v0 = _interp(c, T["cout_du_travail"], T["ppa"])
     w = sq.salaires(p, s)
-    if p.val("statu_quo.indexation_prestations") == "salaires":
-        out = {t: v0 * w[t] / w[2029] for t in ANNEES}
-    else:
-        pa = sq.prime_activite_relative(p, s)
-        out = {t: v0 * pa[t] for t in ANNEES}
+    r = sq.revalorisation(p, "prime_activite")
+    pa = sq.prime_activite_relative(p, s) if r < 1 else {t: 1.0 for t in ANNEES}
+    out = {t: v0 * pa[t] ** (1 - r) * (w[t] / w[2029]) ** r for t in ANNEES}
     cache[("ppa_emploi", s)] = out
     return out
 

@@ -14,7 +14,7 @@ La dépense primaire est découpée en blocs, chacun avec ce qui le fait vivre �
 | Retraites | toutes les générations : population de l'Insee × part partie à chaque âge (âge légal de chaque génération : loi de 2023, suspension de la LFSS 2026) × pension liquidée (salaire de quinze ans plus tôt, érosion relative calée sur le COR), puis revalorisée sur les prix |
 | Santé | pentes communes (Assurance maladie jusqu'en 2035, puis PROMEDE), dérive de 2027 à 2029 comprise |
 | Assurance chômage | chômeurs du scénario × salaires |
-| Famille | enfants, salaires (statu_quo.indexation_prestations ; « prix » : la loi à la lettre) |
+| Famille | enfants, revalorisation par prestation (statu_quo.revalorisation_prestations, 21/11/2026) |
 | Logement | population, salaires (idem) |
 | RSA ; prime d'activité | chômeurs, salaires (idem) ; personnes en emploi et barème qui suit les salaires |
 | AAH et invalidité | adultes de 18 à 64 ans, salaires (idem) |
@@ -152,7 +152,7 @@ def salaires(p: Parametres, s: str) -> dict[int, float]:
     return out
 
 
-BLOCS_LEGAUX = ("retraites", "chomage", "famille", "logement", "pauvrete", "aah_invalidite")
+BLOCS_LEGAUX = ("retraites", "chomage", "famille", "logement", "pauvrete", "aah_invalidite", "defense_ue")
 
 
 def _depenses_en_plus(p: Parametres, s: str, b0: dict, b1: dict) -> dict[int, float]:
@@ -163,7 +163,9 @@ def _depenses_en_plus(p: Parametres, s: str, b0: dict, b1: dict) -> dict[int, fl
       Pensions : loi et carrières. Chômage : allocation proportionnelle au salaire perdu. Prestations : selon
       statu_quo.indexation_prestations (sur les salaires, décision d'Adrien de novembre 2026 ; sur les prix, elles ne
       bougent pas).
-    - Autres blocs (santé, missions, collectivités, autres, investissement, défense) : seule leur part salariale
+    - Défense et contribution à l'UE (BLOCS_LEGAUX) : la défense est en euros, seule la contribution à l'UE suit le PIB
+      (ressource RNB) : réponse entière du bloc, qui ne contient plus que cette part.
+    - Autres blocs (santé, missions, collectivités, autres, investissement) : seule leur part salariale
       (indexation_programme.part_salariale) suit, à raison de indexation_programme.passage, en moyenne mobile sur
       indexation_programme.delai ans (passage progressif aux salaires publics, au point d'indice et aux tarifs). Le
       reste (achats, investissement, défense programmée) est fixé en euros constants et ne suit pas la croissance.
@@ -505,15 +507,39 @@ def hausse_defense(p: Parametres) -> float:
     return p.val("budget_etat.lpm_2030_courants") / (1 + p.val("budget_etat.inflation_2026_2030")) - defense_depart(p)
 
 
+def revalorisation(p: Parametres, nom: str) -> float:
+    """Part de la hausse des salaires transmise à une prestation (0 : prix, 1 : salaires), selon
+    statu_quo.indexation_prestations : « salaires » (1 pour toutes), « prix » (0, la loi à la lettre) ou
+    « par_prestation » (statu_quo.revalorisation_prestations, arbitrage du 21/11/2026 d'après l'histoire des
+    revalorisations, Drees). nom : famille, logement, rsa, prime_activite, aah_invalidite, transferts."""
+    mode = p.val("statu_quo.indexation_prestations")
+    if mode == "salaires":
+        return 1.0
+    if mode == "prix":
+        return 0.0
+    r = p.val("statu_quo.revalorisation_prestations")
+    if nom == "aah_invalidite":
+        aah, inv = p.val("statu_quo.aah"), p.val("sante.pensions_invalidite_2024")
+        return (aah * r["aah"] + inv * r["invalidite"]) / (aah + inv)
+    if nom == "transferts":  # moyenne des prestations, pondérée par leur masse de départ
+        d = depart(p)["blocs"]
+        poids = {"famille": d["famille"], "logement": d["logement"], "rsa": p.val("statu_quo.rsa"),
+                 "prime_activite": p.val("statu_quo.prime_activite"), "aah_invalidite": d["aah_invalidite"]}
+        return sum(revalorisation(p, k) * v for k, v in poids.items()) / sum(poids.values())
+    return r[nom]
+
+
 def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     """Dépense primaire par bloc, chaque année (Md€ de 2026)."""
     d = depart(p)["blocs"]
     e, w, y, y0 = effectifs(p, s), salaires(p, s), pib(p, s), pib_2026(p)
     ret, san = retraites(p, s), sante(p, s)
-    salaires_ = p.val("statu_quo.indexation_prestations") == "salaires"
-    # prestations revalorisées sur les salaires : montant par bénéficiaire et barème de la prime d'activité suivent le
-    # salaire moyen ; sur les prix : constants en euros de 2026, barème de la prime d'activité fixe
-    pa = {t: 1.0 for t in ANNEES} if salaires_ else prime_activite_relative(p, s)
+    # prestations : part r de la hausse des salaires transmise (revalorisation) ; montant par bénéficiaire × w^r ;
+    # barème de la prime d'activité : relatif aux salaires sur les prix (prime_activite_relative), puissance 1 − r
+    r = {k: revalorisation(p, k) for k in ("famille", "logement", "rsa", "prime_activite", "aah_invalidite")}
+    pa = (prime_activite_relative(p, s) if r["prime_activite"] < 1 else {t: 1.0 for t in ANNEES})
+    defense_euros = p.val("statu_quo.defense_apres_lpm") == "euros"
+    ue = p.val("budget_etat.contribution_ue_courants") / p.val("budget_etat.deflateur_contribution_ue")
     mis = missions_etat(p)
     el = p.val("ministeres.elasticite_eleves_etudiants")
     hausse_def = hausse_defense(p)
@@ -523,19 +549,24 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     out = {}
     for t in ANNEES:
         wt = w[t] / w[2029]
-        kp = wt if salaires_ else 1.0  # revalorisation des prestations
+        k = {b: wt ** r[b] for b in r}  # revalorisation de chaque prestation
         out[t] = {
             "retraites": ret[t]["depenses"],
             "sante": san[t],
             "chomage": d["chomage"] * i("chomeurs", t) * wt,
-            "famille": d["famille"] * i("enfants", t) * kp,
-            "logement": d["logement"] * i("total", t) * kp,
-            "pauvrete": (p.val("statu_quo.rsa") * i("chomeurs", t)
-                         + p.val("statu_quo.prime_activite") * i("emploi", t) * pa[t]) * kp,
-            "aah_invalidite": d["aah_invalidite"] * i("adultes", t) * kp,
+            "famille": d["famille"] * i("enfants", t) * k["famille"],
+            "logement": d["logement"] * i("total", t) * k["logement"],
+            "pauvrete": (p.val("statu_quo.rsa") * i("chomeurs", t) * k["rsa"]
+                         + p.val("statu_quo.prime_activite") * i("emploi", t) * pa[t] ** (1 - r["prime_activite"])
+                         * k["prime_activite"]),
+            "aah_invalidite": d["aah_invalidite"] * i("adultes", t) * k["aah_invalidite"],
             "investissement": d["investissement"] * y[t] / y0,
             "etat_missions": sum(x["cout"] * indice_mission(x["regle"], x["public"], t, e, w, y, el) for x in mis),
-            "defense_ue": (d["defense_ue"] + hausse_def) * y[t] / y0,
+            # défense : loi de programmation, puis en euros constants (décision d'Adrien du 21/11/2026 : pas de règle
+            # européenne de niveau ; la cible de l'OTAN n'en est pas une) ; contribution à l'UE : ressource RNB,
+            # suit le PIB (décision sur les ressources propres de l'Union)
+            "defense_ue": ((d["defense_ue"] - ue + hausse_def) * (1.0 if defense_euros else y[t] / y0)
+                           + ue * y[t] / y0),
             "collectivites": d["collectivites"] * wt * i("total", t),
             "autres": d["autres"] * wt * i("total", t),
         }
@@ -755,7 +786,7 @@ def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
             v += n / len(dec) * wr * c((12 * pm - prel) / wr)
         brut[t] = v / 1e9
     parts0 = {"actifs": actifs, "retraites": brut[2029], "transferts": transferts, "non_deductible": non_ded}
-    idx_sal = p.val("statu_quo.indexation_prestations") == "salaires"
+    r_tr = revalorisation(p, "transferts")
     cible = recettes_par_impot_depart(p)["tva"]
     k = cible / sum(parts0.values())
     out = {}
@@ -764,7 +795,7 @@ def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
                   "retraites": k * brut[t],
                   # transferts revalorisés comme les prestations (statu_quo.indexation_prestations ; corrigé le
                   # 05/11/2026 : ils restaient sur les prix quand les prestations suivent les salaires)
-                  "transferts": k * transferts * e[t]["adultes"] / e[2029]["adultes"] * (w[t] / w[2029] if idx_sal else 1.0),
+                  "transferts": k * transferts * e[t]["adultes"] / e[2029]["adultes"] * (w[t] / w[2029]) ** r_tr,
                   "non_deductible": k * non_ded * y[t] / y0}
         out[t]["total"] = sum(out[t].values())
     out["calage"] = k

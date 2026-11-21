@@ -2061,3 +2061,19 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   déclassés, partis, part dans l'emploi, par âge).
 - Sorties régénérées : export, statu quo, variantes de la dette, démographie, ménages types, variante du fonds,
   audits, sources, page. À régénérer : micro vieillie (chiffres inchangés : le canal n'y entre pas) et incertitude.
+
+## 21/11/2026 — arbitrages d'Adrien sur le statu quo (branche `phase-r`)
+- **Prestations** (« ça dépend de la presta, tu fais les arbitrages ») : `statu_quo.indexation_prestations` =
+  `par_prestation`, `statu_quo.revalorisation_prestations` = part de la hausse des salaires transmise.
+  - Familles et logement : 0 (prix, comme la loi, sans plan de rattrapage).
+  - RSA et prime d'activité : 0,3. Drees : de 1990 à 2023, le pouvoir d'achat du RSA a gagné 9 %, contre 33 % pour
+    le SMIC.
+  - AAH : 0,8 (+26 % sur la même période) ; pensions d'invalidité : 0 (prix).
+  - Remplace la décision du 04/11 (toutes les prestations sur les salaires).
+- **Défense** (« la directive européenne ; s'il n'y en a pas, en euros ») : il n'y a pas de règle européenne de
+  niveau, la cible de 3,5 % du PIB est de l'OTAN. `statu_quo.defense_apres_lpm` = `euros` : niveau de la loi de
+  programmation en 2030, puis constant en euros de 2026. La contribution à l'UE suit toujours le PIB (ressource RNB).
+- **Salaires publics, formation supérieure** : réglages du 21/11 gardés (choix laissés à Claude).
+- **Effet sur les dépenses du statu quo**, prudent : −0,36 point de PIB en 2037, −0,76 en 2050, −1,22 en 2073, dont
+  la défense pour environ la moitié. Déficit du statu quo en 2037 : 8,69 % (9,10 % dans les sorties publiées, avant
+  toutes les corrections du 21/11).
