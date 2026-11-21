@@ -508,6 +508,12 @@ emploi:
   taux_marge_snf: {valeur: 0.322, unite: taux, statut: SOURCE, source: "Insee Première n° 2105 (comptes de la Nation 2025)"}
   impots_production_va: {valeur: 0.05, unite: taux, statut: HYPOTHESE}
   cout_emploi_cree_smic: {valeur: 1.3, unite: sans_unite, statut: HYPOTHESE}
+  prelevements_programme:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    source: "Demande d'Adrien du 21/11/2026 : la valeur d'un emploi suit le manque à gagner en impôt du programme (moteur/emploi_valeur.py), comme l'allocation évitée suit la générosité de son assurance chômage"
+    note: "Prélèvements et TVA d'un emploi type (1,3 SMIC pour les canaux, coût moyen pour les seniors) au barème du programme : mesures de recettes sur le travail selon leur incidence (offre.base_incidence), mesures sur la consommation au prorata de la TVA et des accises. false : barème du statu quo pour tous."
   smic_effet_salaire_moyen: {valeur: 0.08, unite: sans_unite, statut: SOURCE, source: "Gautier, Roux et Suarez Castillo, Insee Références 2018"}
   marge_intensive: {valeur: {facteur_eqtp: 0.88, crise: 0.08, median: 0.05, optimiste: 0.02}, unite: sans_unite, statut: SOURCE, source: "Bargain, Orsini et Peichl, JHR 2014"}
   impots_production_salaires: {valeur: 52.0, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025), facteur travail 2023"}

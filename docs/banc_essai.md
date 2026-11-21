@@ -188,3 +188,35 @@ La règle est symétrique. Un programme qui fait baisser la production (moins d'
 ne voit plus ses dépenses baisser avec elle : il perd davantage. Un programme qui la fait monter garde davantage de
 son gain. Les écarts entre programmes s'élargissent, surtout vers le bas, parce que les canaux d'offre de la plupart
 des programmes sont petits ou négatifs.
+
+## Correction 2 : la valeur d'un emploi suit le barème du programme (21/11/2026)
+
+Demande d'Adrien : moduler la valeur d'un emploi selon le coût de l'assurance chômage du programme et selon son
+manque à gagner en impôt.
+
+- **Assurance chômage : déjà fait** (roadmap 5.4, phase L). L'allocation évitée est sortie de la valeur d'un emploi
+  et passe par le bloc chômage, au coût d'un chômeur du programme (`programme_simple.generosite`). Coût d'un chômeur
+  par rapport au statu quo, en 2037, au prudent :
+
+  | Programme | Bloc chômage | Bloc pauvreté |
+  |---|---|---|
+  | Mélenchon | 1,13 | 2,52 |
+  | Tondelier | 1,16 | 1,21 |
+  | Attal | 0,94 | 0,78 |
+  | Philippe | 0,94 | 0,92 |
+  | Retailleau | 0,90 | 0,56 |
+
+- **Manque à gagner en impôt : nouveau** (`moteur/emploi_valeur.py`, `emploi.prelevements_programme`).
+  - Les prélèvements et la TVA d'un emploi type sont calculés au barème du programme : 1,3 SMIC pour les canaux,
+    coût moyen pour les seniors.
+  - Chaque mesure de recettes sur le travail touche l'emploi selon son incidence, avec la règle du canal d'offre
+    (`offre.base_incidence`) ; les mesures sur la consommation jouent au prorata de la TVA et des accises.
+  - Facteur en 2037, au prudent, pour un emploi à 1,3 SMIC : Lisnard 0,87 ; Zemmour 0,89 ; Roussel 0,95 ;
+    Attal 0,95 ; Philippe 0,99 ; Mélenchon 1,00 (ses hausses portent sur les hauts revenus) ; Tondelier 1,04.
+- **Effet :** au plus 0,03 point d'écart de solde primaire (Roussel −9,20 → −9,17, Lisnard −2,76 → −2,77). Les
+  emplois qui pèsent le plus (SMIC, 32 heures, emplois aidés, canal d'offre) ont déjà leur propre calcul budgétaire
+  au barème de la mesure ; la modulation ne touche que les canaux génériques et les seniors. C'est un gain de
+  cohérence, pas un levier.
+
+Reste ouvert : les impôts sur la part non salariale de la valeur ajoutée (IS, impôts de production) ne sont pas dans
+la valeur d'un emploi. Pour un senior, le budget reçoit 37 % du PIB qu'il crée, contre 45 à 53 % de prélèvements.

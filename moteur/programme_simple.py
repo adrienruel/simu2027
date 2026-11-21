@@ -495,8 +495,14 @@ class ProgrammeSimple:
             # phase L (4.1) : l'allocation évitée passe des recettes (valeur d'un emploi) aux blocs chômage et pauvreté,
             # sur les chômeurs du programme (noyau, contexte « chomeurs_depenses »)
             dep_chom = p.val("emploi.depenses_chomage_programme")
+            alloc = 0.0 if dep_chom else p.val("emploi.allocation_chomeur_evitee")
             if dep_chom:
                 valeur -= p.val("emploi.allocation_chomeur_evitee")
+            # 21/11/2026 : prélèvements et TVA d'un emploi au barème du programme (moteur/emploi_valeur.py) ;
+            # l'allocation évitée suit déjà la générosité du programme
+            from . import emploi_valeur
+            f_emp = emploi_valeur.facteur(p, s, liste, p.val("emploi.cout_emploi_cree_smic"))
+            v_emp = {t: (valeur - alloc) * f_emp[t] + alloc for t in ANNEES}
             canaux = {t: {} for t in ANNEES}
             postes = {t: crees[t] + supprimes[t] for t in ANNEES}
             evince = {t: -(ev_c * crees[t] + ev_s * supprimes[t]) for t in ANNEES}
@@ -505,7 +511,7 @@ class ProgrammeSimple:
                     canaux[t]["Postes publics créés ou supprimés"] = postes[t]
                     canaux[t]["Éviction d'emplois privés par les postes publics"] = evince[t]
                 liste.append(Mesure("Emploi : emplois privés évincés (ou libérés) par les postes publics", "recettes",
-                                    {t: evince[t] * valeur * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
+                                    {t: evince[t] * v_emp[t] * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
             # « * » : effet budgétaire déjà compté par la mesure ; « ** » : production aussi déjà comptée (pas de
             # valeur ajoutée en plus dans le PIB, ex. embauches de partage du travail)
             sans_va = set()
@@ -517,7 +523,7 @@ class ProgrammeSimple:
                     sans_va.add(canal.lstrip("*"))
                 if not canal.startswith("*"):
                     liste.append(Mesure(f"Emploi : {canal}", "recettes",
-                                        {t: serie.get(t, 0.0) * valeur * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
+                                        {t: serie.get(t, 0.0) * v_emp[t] * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
             # effet macroéconomique : impulsion budgétaire nette, chaque mesure pondérée selon ce qu'elle est (demande
             # par instrument, moteur/offre.poids_demande : 1 pour la dépense publique)
             cout_net = offre.impulsion(p, liste, TOUTES)
@@ -560,7 +566,8 @@ class ProgrammeSimple:
             d_seniors = {t: 0.0 for t in ANNEES}
             nr = getattr(self, "non_retraites", {}).get((id(p), s))
             if nr is not None:
-                sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"])
+                sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"],
+                                    facteur_prelevements=emploi_valeur.facteur(p, s, liste, "moyen"))
                 liste.extend(sen["mesures"])
                 d_seniors = sen["pib"]
                 for t in ANNEES:
