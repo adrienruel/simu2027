@@ -129,7 +129,6 @@ statu_quo.aides_logement
 statu_quo.apul_depenses_2026
 statu_quo.chomage_indemnisation
 statu_quo.cvae_taux_legaux
-statu_quo.defense_2026
 statu_quo.investissement_part_pib
 statu_quo.prime_activite
 statu_quo.recettes_production_hors_apul_part_pib

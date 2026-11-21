@@ -43,6 +43,60 @@ France, scénario sans changement de politique. Statu quo médian, après les co
   du PIB. Prudent : −2,1 % en 2035, en ligne.
 - **Prudent** : intérêts 5,3 % du PIB en 2035 (+0,3 point sur la Commission), par la prime de dette plus forte.
 
+## Roadmap 1.1 et 1.2 : recettes et dépenses du statu quo (21/11/2026, en cours)
+
+**1.1, dérive de l'impôt sur le revenu** (`statu_quo.baremes_salaires`, `statu_quo.derive_ir_salaires`) :
+- **Barème :** il est revalorisé sur les prix, comme le font les lois de finances, et comme les pensions depuis la
+  décision du 04/11. Avant, l'impôt des salariés suivait la masse salariale, comme si le barème suivait les
+  salaires.
+- **Calcul :** l'impôt sur le revenu des salariés monte comme le salaire réel puissance 1,73 (OCDE, Price, Dang et
+  Botev, 2015, France). Contrôle : OpenFisca donne 2,0 sur la distribution des salaires du privé, pour une personne
+  seule.
+- **Assiette :** l'impôt sur le revenu fait 14 % des prélèvements sur les salaires du privé. Cotisations et CSG ne
+  dérivent pas.
+- **Effet sur les recettes** du statu quo (points de PIB) :
+
+| Scénario | 2037 | 2050 | 2073 |
+|---|---|---|---|
+| Prudent | +0,13 | +0,34 | +0,75 |
+| Médian | +0,23 | +0,55 | +1,19 |
+
+- **Déficit du statu quo, prudent :** 8,12 → 7,95 % en 2037, 16,97 → 16,06 % en 2050.
+- **Dividende de productivité** d'un programme : +0,02 environ, car un salaire réel plus haut paie aussi plus
+  d'impôt.
+- Le choix entre « prix » et « salaires » est la décision G3 d'Adrien. Le réglage « salaires » rend l'ancienne
+  convention.
+
+**1.1, répartition impôt par impôt** :
+- La répartition doit passer de la colonne « Ancien » de la v235 aux comptes de l'Insee de 2025 (tableaux 3.216 et
+  3.217 de « Dépenses et recettes des administrations publiques en 2025 », mai 2026).
+- **Bloqué :** les fichiers ne sont pas accessibles depuis l'environnement de travail. Repères 2025 vus en ligne :
+  TVA 208,8 Md€, impôt sur le revenu avant crédits d'impôt 103,6, IS avant crédits d'impôt 69,5.
+- **Élasticités par impôt :** l'OCDE (2015) donne, pour la France, l'IS à 2,40 sur l'excédent d'exploitation et les
+  impôts indirects à 0,91 sur la consommation. Ce sont des élasticités au cycle. À long terme, un impôt
+  proportionnel suit son assiette, ce que fait déjà le moteur. Seul l'impôt sur le revenu, progressif, s'en écarte
+  de façon durable.
+
+**1.2, blocs de dépense** : chaque bloc a une source (aucun bloc n'est au statut HYPOTHÈSE sans source). Indexation
+contre le droit actuel :
+
+| Bloc | Départ (Md€ 2026) | Indexation du statu quo | Droit actuel |
+|---|---|---|---|
+| Retraites | 428,0 | pensions par génération (COR) | revalorisation sur les prix, salaires portés au compte |
+| Santé | 297,4 | âge, coûts relatifs (Ageing Report) | ONDAM voté chaque année |
+| Chômage | 46,6 | chômeurs × salaires | allocation sur le salaire de référence |
+| Famille | 34,7 | enfants × prix | BMAF sur les prix (L551-1 CSS) |
+| Logement | 16,7 | population × prix | paramètres revalorisés sur l'IRL, proche des prix |
+| Pauvreté (RSA, prime d'activité) | 24,0 | bénéficiaires × prix, 30 % de la hausse des salaires | prix (L161-25 CSS), coups de pouce réguliers |
+| AAH, invalidité | 23,5 | adultes × prix, 80 % (AAH) | prix, revalorisations exceptionnelles de l'AAH |
+| Investissement | 133,5 | PIB | — |
+| Missions de l'État | 210,4 | règle par mission (élèves, effectifs, salaires publics) | lois de finances |
+| Défense et UE | 92,6 | LPM jusqu'en 2030, puis euros ; UE sur le PIB | LPM 2024-2030 actualisée ; ressource RNB |
+| Collectivités | 230,3 | salaires × population | — |
+| Autres (résidu) | 101,2 | salaires × population | — |
+
+La « défense 2026 » de la v235 (57,1 Md€), qui n'était plus lue, est retirée.
+
 ## Roadmap 2.1 : une seule voie d'emploi par mesure (21/11/2026)
 
 Trois mesures tests, emplois de long terme par Md€ de mesure (personnes ; + : emplois en plus). Micro : gain à

@@ -235,3 +235,19 @@ def test_scenarios_dans_l_ordre_chaque_annee(res):
     for t in range(2030, 2074):  # 2029 : point de départ commun (seules l'inflation et la fécondité diffèrent)
         d = [res[s][t]["deficit"] for s in ("crise", "prudent", "median", "optimiste")]
         assert d == sorted(d, reverse=True), (t, d)
+
+
+def test_derive_de_l_impot_sur_le_revenu_au_bareme_sur_les_prix():
+    """Roadmap 1.1 : barème de l'IR sur les prix, l'impôt des salariés monte plus vite que la masse salariale quand le
+    salaire réel monte (élasticité de l'OCDE, 1,73) ; barème qui suit les salaires : pas de dérive."""
+    from moteur import statu_quo as sq
+    from moteur.parametres import Parametres
+    p = Parametres()
+    w = sq.salaires(p, "median")
+    d = sq.derive_ir_salaires(p, "median")
+    assert d[2029]["prive"] == pytest.approx(1.0)
+    assert 1.0 < d[2050]["prive"] < 1.0 + 0.3 * ((w[2050] / w[2029]) ** 0.73 - 1)  # IR < 30 % des prélèvements
+    assert d[2073]["prive"] > d[2050]["prive"]
+    q = p.avec({"statu_quo.baremes_salaires": "salaires"})
+    assert sq.derive_ir_salaires(q, "median")[2073] == {"prive": 1.0, "public": 1.0}
+    assert sq.recettes(p, "median")[2073] > sq.recettes(q, "median")[2073]

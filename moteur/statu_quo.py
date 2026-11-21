@@ -589,6 +589,47 @@ def deces(p: Parametres, s: str) -> dict[int, float]:
     return {t: d.get(t, d[derniere]) for t in ANNEES}
 
 
+def derive_ir_salaires(p: Parametres, s: str) -> dict[int, dict[str, float]]:
+    """Roadmap 1.1 (21/11/2026) : effet du barème de l'impôt sur le revenu revalorisé sur les prix (législation
+    constante, statu_quo.baremes_salaires = « prix »). Quand le salaire réel monte de g (statu_quo.salaires, indice 1
+    en 2029), l'impôt sur le revenu des salariés monte comme g ** élasticité (statu_quo.elasticite_ir_salaires :
+    OCDE, 1,73 pour la France), plus vite que la masse salariale. Seul l'impôt sur le revenu dérive : cotisations et
+    CSG sont proportionnelles, et les seuils des allègements suivent le SMIC.
+
+    Rend, par année, le facteur des prélèvements sur les salaires du privé et du public : 1 + part de l'impôt sur le
+    revenu dans les prélèvements (OpenFisca 2026, distribution des salaires) × (g ** (élasticité − 1) − 1) ; 1 si
+    « salaires » (barème qui suit la croissance, convention avant le 21/11/2026). Contrôle : OpenFisca sur la
+    distribution des salaires du privé (personne seule) donne une élasticité de 2,0 ; l'OCDE compte les couples."""
+    cache = p.__dict__.setdefault("_cache", {})
+    if ("sq_derive_ir", s) in cache:
+        return cache[("sq_derive_ir", s)]
+    w = salaires(p, s)
+    if p.val("statu_quo.baremes_salaires") != "prix":
+        out = {t: {"prive": 1.0, "public": 1.0} for t in ANNEES}
+        cache[("sq_derive_ir", s)] = out
+        return out
+    from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
+    from .systeme_actuel import _interp, _table_openfisca
+    poids = p.val("statu_quo.versants_fonction_publique")
+    tables = {"prive": [(_table_openfisca(), 1.0)],
+              "public": [(_table_openfisca(versant=v), wv) for v, wv in poids.items()]}
+    eff = {"prive": effectifs_prive_2026(p), "public": effectifs_public_2026(p)}
+    part = {}
+    for cle in ("prive", "public"):
+        prel = ir = 0.0
+        for c, n in zip(eff[cle].milieux, eff[cle].effectifs):
+            for T, wv in tables[cle]:
+                x = T["cout_du_travail"]
+                ir_c = -_interp(c, x, T["impot_revenu_restant_a_payer"])
+                prel += n * wv * (c - _interp(c, x, T["salaire_net"]) + ir_c)
+                ir += n * wv * ir_c
+        part[cle] = ir / prel
+    el = p.val("statu_quo.elasticite_ir_salaires")
+    out = {t: {cle: 1 + part[cle] * ((w[t] / w[2029]) ** (el - 1) - 1) for cle in part} for t in ANNEES}
+    cache[("sq_derive_ir", s)] = out
+    return out
+
+
 def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     """Recettes publiques impôt par impôt (Md€ de 2026).
 
@@ -608,6 +649,7 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     pr = prelevements_retraites(p, s)
     tv = tva(p, s)
     cel, w = cellules_salaries(p, s), salaires(p, s)
+    dir_ = derive_ir_salaires(p, s)
     dc = deces(p, s)
     out = {}
     for t in ANNEES:
@@ -615,9 +657,10 @@ def recettes_par_impot(p: Parametres, s: str) -> dict[int, dict[str, float]]:
         x = {}
         for i, v in base.items():
             if i == "salaires_prive":
-                x[i] = v * cel[t]["prive"] * w[t]  # cellules par âge et salaire, barèmes qui suivent les salaires
+                # cellules par âge et salaire ; dérive de l'impôt sur le revenu au barème revalorisé sur les prix (1.1)
+                x[i] = v * cel[t]["prive"] * w[t] * dir_[t]["prive"]
             elif i == "salaires_public":
-                x[i] = v * cel[t]["public"] * w[t]
+                x[i] = v * cel[t]["public"] * w[t] * dir_[t]["public"]
             elif i in IMPOTS_SALAIRES:
                 x[i] = v * masse
             elif i == "retraites":

@@ -89,6 +89,22 @@ statu_quo:
     source: "Législation : seuils de revenu fiscal de référence des taux de CSG sur les pensions revalorisés sur l'inflation (code de la sécurité sociale, art. L136-8) ; barème de l'impôt sur le revenu revalorisé chaque année par la loi de finances, d'ordinaire sur l'inflation"
     note: "prix : seuils et barèmes revalorisés sur les prix (législation constante) ; le taux moyen sur les pensions reste vers 12 % (prudent : 1,7 % du PIB en 2029, 1,9 % en 2073). salaires : barèmes qui suivent la croissance, comme pour les programmes ; le taux moyen baisse quand les pensions baissent par rapport aux salaires (7,5 % en 2073, 0,7 point de PIB de recettes en moins). À trancher. Les prélèvements sur les salaires suivent la masse salariale (élasticité 1) dans les deux cas. DÉCISION d'Adrien du 04/11/2026 : la loi actuelle (prix)."
 
+  baremes_salaires:
+    valeur: prix
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Législation : barème de l'impôt sur le revenu revalorisé chaque année par la loi de finances sur l'inflation hors tabac (art. 2 des lois de finances) ; même convention que statu_quo.baremes_retraites (DÉCISION d'Adrien du 04/11/2026 : la loi actuelle, sur les prix)"
+    note: "Roadmap 1.1 et décision G3 (à confirmer par Adrien). prix : barème de l'impôt sur le revenu revalorisé sur les prix ; quand le salaire réel monte, l'impôt des salariés monte plus vite que la masse salariale (statu_quo.derive_ir_salaires). salaires : barème qui suit la croissance (convention avant le 21/11/2026), sans dérive. Cotisations et CSG proportionnelles dans les deux cas."
+
+  elasticite_ir_salaires:
+    url: "https://one.oecd.org/document/ECO/WKP(2015)93/en/pdf"
+    page: "Tableau 2 : élasticités des impôts sur le revenu et des cotisations à leur assiette (France)"
+    valeur: 1.73
+    unite: sans_unite
+    statut: SOURCE
+    source: "OCDE, Price, Dang et Botev, Adjusting fiscal balances for the business cycle (Economics Department Working Paper n° 1275, 2015), tableau 2 : élasticité de l'impôt sur le revenu des personnes à son assiette (revenus d'activité), France, 1,73 (1,70 en 2005)"
+    note: "Sert à la dérive de l'impôt sur le revenu des salariés au barème revalorisé sur les prix (statu_quo.derive_ir_salaires). Contrôle : OpenFisca 2026 sur la distribution des salaires du privé, personne seule, donne 2,0 (les couples et le quotient familial la réduisent)."
+
   retraites_ratio_conjoint:
     valeur: 0.62
     unite: taux
@@ -195,13 +211,6 @@ statu_quo:
     statut: SOURCE
     source: "Insee, Le compte des administrations publiques en 2025 (Insee Première n° 2106, mai 2026) : investissement 132,2 Md€, 4,4 % du PIB"
     note: "Suit le PIB."
-  defense_2026:
-    valeur: 57.1
-    unite: md_eur
-    annee_euros: 2026
-    statut: SOURCE
-    source: "Classeur v235, Contrôle système actuel : mission Défense 66,7 Md€ en 2026 pensions comprises (loi de programmation) ; contribution au CAS Pensions 9,58 Md€ (missions_etat_2026.csv)"
-    note: "Hors pensions (66,7 − 9,6), les pensions des militaires étant dans le bloc retraites. Pour mémoire : le bloc part du PLF 2027 (statu_quo.defense_2027_courants)."
   defense_2027_courants:
     url: "https://www.vie-publique.fr/discours/305194-catherine-vautrin-alice-rufo-27102026-credits-des-armees-pour-2027"
     page: "Déclaration de la ministre des Armées au Sénat, 27/10/2026 (63,4 Md€ en 2027)"

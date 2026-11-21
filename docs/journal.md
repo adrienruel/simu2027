@@ -2100,3 +2100,15 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   (Mésange : 9 600 à 14 400 ; Trésor-Éco n° 97 : 25 000 à 50 000). Zones déclarées : Philippe PHI-FIS-01b (`milieu`),
   Lisnard LIS-EMP-05 (`smic`).
 
+## 21/11/2026 — fusion de `phase-r` dans `main` (accord d'Adrien), roadmap 1.1 et 1.2 (branche `phase-s`)
+- `phase-r` fusionnée dans `main` (0ea9064).
+- **1.1, dérive de l'impôt sur le revenu** : barème sur les prix (`statu_quo.baremes_salaires`, décision G3 à
+  confirmer) ; élasticité de l'OCDE 1,73 (`statu_quo.elasticite_ir_salaires`). Recettes du statu quo +0,13 point de
+  PIB en 2037 au prudent, +0,75 en 2073 ; déficit 2037 au prudent 8,12 → 7,95 %.
+- **1.1, répartition par impôt** : bloquée, les tableaux 3.216 et 3.217 de l'Insee (2025) ne sont pas
+  téléchargeables depuis l'environnement.
+- **1.2** : blocs tous sourcés, indexations comparées au droit actuel (`docs/recoupements.md`) ; paramètre mort
+  `statu_quo.defense_2026` retiré.
+- `tests/test_coherence_phase_a.py` : l'écart de dividende entre profils est comparé en 2046 (2050 tombe sur le
+  croisement des deux profils).
+
