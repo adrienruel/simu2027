@@ -815,6 +815,12 @@ offre:
     statut: HYPOTHESE
     source: "Encadrement : effets faibles des minima sociaux et des aides au logement sur la reprise d'emploi en France (Dares, évaluations du RSA, 2011) ; plus forts pour la durée d'indemnisation du chômage (Banque de France, Bulletin n° 264, 2026), comptée à part par les programmes qui la changent"
     note: "RSA, prime d'activité, aides au logement, allocations familiales : moins de transferts aux actifs = un peu plus de travail. Emplois venus de l'inactivité. L'assurance chômage n'y passe pas quand le programme a déjà son propre canal (Tondelier, PRE-15)."
+  elasticite_investissement_public:
+    valeur: {crise: 0.1, prudent: 0.2, median: 0.33, optimiste: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "DG Trésor, Mésange (2017) : hausse permanente de l'investissement public de 1 point de PIB, +0,33 % de PIB à long terme (médian) ; Bom et Ligthart (Journal of Economic Surveys, 2014, méta-analyse) : élasticité de la production au capital public ≈ 0,08 à 0,12, plus forte pour les infrastructures de base (optimiste)"
+    note: "Dépense des mesures au poste investissement (sans autre instrument) : effet durable en plus du multiplicateur ; une baisse prend le scénario miroir. Emplois : 50 % de l'effet, pris sur le chômage. L'éducation n'a pas d'effet d'offre compté (effets trop lointains pour l'horizon des chiffrages)."
   education:
     valeur: {base_md: 155, age_scolaire: [6, 18], age_actif: [20, 64], part_travail: 0.6,
              gain_par_10pct: {crise: 0.25, prudent: 0.5, median: 1.0, optimiste: 2.0}}

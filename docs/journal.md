@@ -2001,9 +2001,9 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   branches propres au programme dans `parametres` (référence v235, programme par défaut, copie de crise du taux
   local), `noyau`, `migrations`, `trace`, `c1_inventaire`, `offre` (`nouveau:rui_aah`), `systeme_actuel` (nets
   saisis de la v235).
-- **Paramètres** : 66 paramètres communs jamais lus (journal des accès sur la suite et le pipeline, recoupé par leur absence du code : le journal ne voit pas les processus de calcul en parallèle) supprimés
-  (389 → 323) ; gardés malgré tout : `revenus_capital.*` (données pour la micro du patrimoine), `incertitude.correlation`,
-  `economies.taux_realisation`, et trois paramètres lus seulement dans les processus parallèles (`ecologie.elasticite_croisee_electricite`, `systeme_actuel.prime_activite_agents`, `accises_entreprises.ancienne_tva_entreprises`).
+- **Paramètres** : 65 paramètres communs jamais lus (journal des accès sur la suite et le pipeline, recoupé par leur absence du code : le journal ne voit pas les processus de calcul en parallèle) supprimés
+  (389 → 324) ; gardés malgré tout : `revenus_capital.*` (données pour la micro du patrimoine), `incertitude.correlation`,
+  `economies.taux_realisation`, et quatre paramètres lus seulement dans les processus parallèles ou par un nom composé (`ecologie.elasticite_croisee_electricite`, `systeme_actuel.prime_activite_agents`, `accises_entreprises.ancienne_tva_entreprises`, `offre.elasticite_investissement_public`).
 - **Contrôle** : sur le même code avant et après suppression, `comparaison_*.csv`, variantes de la dette, audits,
   démographie et poids des lectures sont identiques octet pour octet. Suite : 301 passés, seul échec
   `test_sorties` (sorties à régénérer). `tests/test_independance.py` vérifie maintenant qu'aucun code ne cite plus
