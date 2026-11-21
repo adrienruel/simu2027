@@ -386,7 +386,8 @@ def _micro(p: Parametres, s: str, groupes: dict, annees, vit: float) -> dict:
     salaires ; PIB : valeur ajoutée par emploi."""
     table = micro_emploi()
     w = sq.salaires(p, s)
-    va = p.val("offre.valeur_ajoutee_emploi_micro")
+    from . import emploi_valeur
+    va = emploi_valeur.valeur_ajoutee(p, s, 1.0)  # emplois venus de l'inactivité : surtout au SMIC (roadmap 2.2)
     emplois = {t: 0.0 for t in annees}
     budget = {t: 0.0 for t in annees}
     for ident, ms in groupes.items():

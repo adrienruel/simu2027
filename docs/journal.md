@@ -2111,4 +2111,8 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   `statu_quo.defense_2026` retiré.
 - `tests/test_coherence_phase_a.py` : l'écart de dividende entre profils est comparé en 2046 (2050 tombe sur le
   croisement des deux profils).
+- **Roadmap 2.2** : valeur d'un emploi selon son salaire. Valeur au solde par la cellule OpenFisca de son salaire,
+  valeur ajoutée = coût × `offre.travail_part_pib` / `emploi.part_travail_va`. Un canal déclare son salaire
+  (« nom@niveau », 1,3 SMIC sinon). Les valeurs uniques de 20 000 et 35 000 € de `programme_commun` et
+  `offre.valeur_ajoutee_emploi_micro` sont retirées. Écarts de solde primaire 2037 : moins de 0,07 point.
 

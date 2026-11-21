@@ -2,7 +2,7 @@
 le manque à gagner en impôt du programme, comme l'allocation évitée l'est déjà selon la générosité de son assurance
 chômage, roadmap 5.4).
 
-La valeur d'un emploi des canaux (programme_commun.emploi_valeur_emploi, ≈ cellule OpenFisca à 1,3 SMIC) et celle d'un
+La valeur d'un emploi des canaux (cellule OpenFisca du salaire du canal, 1,3 SMIC par défaut, roadmap 2.2) et celle d'un
 senior maintenu en emploi (seniors.valeur_emploi, ≈ cellule au coût moyen) sont des prélèvements et de la TVA au
 barème de 2026. Un programme qui baisse les prélèvements sur le travail ou la TVA fait rapporter moins à chaque emploi
 créé (et coûter moins à chaque emploi perdu) ; un programme qui les relève, davantage. Chaque mesure de recettes du
@@ -47,6 +47,23 @@ def cellule(p: Parametres, niveau) -> dict:
            "ir": -_interp(c, x, T["impot_revenu_restant_a_payer"]), "tva": p.val("systeme_actuel.taux_tva_moyen") * net}
     cache[cle] = out
     return out
+
+
+def valeur_ajoutee(p: Parametres, s: str, niveau) -> float:
+    """Roadmap 2.2 (21/11/2026) : valeur ajoutée d'un emploi en plus (€ de 2026 par an) selon son salaire : coût du
+    travail de l'emploi type × offre.travail_part_pib / emploi.part_travail_va. Même règle que le canal d'offre :
+    au prudent, capital inchangé, l'emploi produit son coût ; à l'optimiste, le capital suit et il produit davantage.
+    Remplace la valeur unique de 35 000 € (programme_commun.emploi_valeur_ajoutee_emploi)."""
+    return cellule(p, niveau)["cout"] * sq._v(p, "offre.travail_part_pib", s) / p.val("emploi.part_travail_va")
+
+
+def niveau_canal(canal: str, defaut):
+    """Nom et salaire déclaré d'un canal d'emploi (roadmap 2.2) : « nom@1.0 » (multiple du coût du SMIC) ou
+    « nom@moyen » ; sans « @ », le salaire par défaut (emploi.cout_emploi_cree_smic)."""
+    if "@" in canal:
+        nom, n = canal.rsplit("@", 1)
+        return nom, (n if n == "moyen" else float(n))
+    return canal, defaut
 
 
 def facteur(p: Parametres, s: str, liste: list, niveau) -> dict[int, float]:

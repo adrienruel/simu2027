@@ -43,6 +43,52 @@ France, scénario sans changement de politique. Statu quo médian, après les co
   du PIB. Prudent : −2,1 % en 2035, en ligne.
 - **Prudent** : intérêts 5,3 % du PIB en 2035 (+0,3 point sur la Commission), par la prime de dette plus forte.
 
+## Roadmap 2.2 : valeur d'un emploi selon son salaire (21/11/2026)
+
+- **Valeur au solde** : prélèvements, TVA et allocation évitée de la cellule OpenFisca du salaire de l'emploi
+  (`ProgrammeSimple.valeur_emploi_cellule`), à la place de la valeur unique de 20 000 €.
+- **Valeur ajoutée** : coût du travail × `offre.travail_part_pib` / `emploi.part_travail_va` (0,65)
+  (`emploi_valeur.valeur_ajoutee`), à la place de la valeur unique de 35 000 €. C'est la règle du canal d'offre :
+  au prudent, à capital inchangé, l'emploi produit son coût ; à l'optimiste, le capital suit.
+- **Salaire d'un canal** : un canal le déclare par son nom (« nom@1.0 », « nom@moyen »). Sinon, il prend 1,3 SMIC
+  (`emploi.cout_emploi_cree_smic`) : les emplois créés ou perdus par le coût du travail sont surtout près du SMIC,
+  où l'élasticité est la plus forte. Les emplois de la micro (venus de l'inactivité) sont comptés à 1 SMIC.
+  Aucun canal des programmes ne déclare encore d'autre salaire.
+
+| Coût (multiple du SMIC) | Coût employeur | Valeur au solde | Valeur ajoutée (prudent / médian / optimiste) |
+|---|---|---|---|
+| 0,8 (temps partiel) | 17 900 | 14 700 | 17 900 / 20 600 / 23 400 |
+| 1 | 22 300 | 16 200 | 22 300 / 25 800 / 29 200 |
+| 1,3 | 29 000 | 20 700 | 29 000 / 33 500 / 38 000 |
+| 2 | 44 700 | 31 000 | 44 700 / 51 500 / 58 400 |
+| 3 | 67 000 | 45 800 | 67 000 / 77 300 / 87 600 |
+
+€ de 2026 par an ; la valeur au solde comprend l'allocation évitée (9 000 €).
+
+**Effet** : écart de solde primaire au statu quo en 2037, prudent (points de PIB), avant → après :
+
+| Programme | Avant | Après |
+|---|---|---|
+| Arthaud | -4,73 | -4,67 |
+| Attal | -1,18 | -1,18 |
+| Bertrand | +0,07 | +0,07 |
+| Glucksmann | -2,97 | -2,96 |
+| Le Pen | -2,58 | -2,58 |
+| Lisnard | -2,73 | -2,73 |
+| Melenchon | -12,25 | -12,18 |
+| Philippe | -0,87 | -0,87 |
+| Retailleau | -0,41 | -0,41 |
+| Roussel | -9,84 | -9,78 |
+| Tondelier | -3,02 | -3,02 |
+| Zemmour | -2,37 | -2,37 |
+
+Les écarts bougent de moins de 0,07 point. À 1,3 SMIC, la valeur ajoutée médiane reste proche de l'ancienne
+valeur (33 500 contre 35 000 €) ; au prudent, l'excédent taxé sur la marge disparaît (valeur ajoutée = coût).
+
+**Reste** : la valeur ajoutée d'un senior (`seniors.valeur_ajoutee_emploi`, 75 000 €) garde sa source propre, car
+c'est une décision encore ouverte. Les valeurs propres à des programmes (Tondelier, Arthaud, coût × 1,25) relèvent
+du travail programme par programme.
+
 ## Roadmap 1.1 et 1.2 : recettes et dépenses du statu quo (21/11/2026, en cours)
 
 **1.1, dérive de l'impôt sur le revenu** (`statu_quo.baremes_salaires`, `statu_quo.derive_ir_salaires`) :

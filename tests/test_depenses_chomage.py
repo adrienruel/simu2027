@@ -57,7 +57,7 @@ def test_canaux_exclus():
 
 
 def test_allocation_retiree_de_la_valeur_d_un_emploi(p):
-    """Un canal sans « * » vaut emploi.valeur_emploi moins l'allocation : l'allocation est dans les blocs. Barème du
+    """Un canal sans « * » vaut la valeur d'un emploi de son salaire (cellule OpenFisca, roadmap 2.2) moins l'allocation : l'allocation est dans les blocs. Barème du
     statu quo et sans impôts sur la marge (21/11/2026), pour isoler l'allocation."""
     p = p.avec({"emploi.prelevements_programme": False, "emploi.taux_impots_excedent": 0.0})
     prog = noyau.charger("glucksmann")
@@ -65,7 +65,9 @@ def test_allocation_retiree_de_la_valeur_d_un_emploi(p):
     p0 = p.avec({"emploi.depenses_chomage_programme": False})
     m0 = [x for x in noyau.charger("glucksmann").mesures(p0)["prudent"]
           if x.nom == "Emploi : Assurance chômage plus généreuse : chômeurs en plus"]
-    v, a = prog.v("emploi.valeur_emploi"), p.val("emploi.allocation_chomeur_evitee")
+    from moteur.programme_simple import ProgrammeSimple
+    v = ProgrammeSimple.valeur_emploi_cellule(p, p.val("emploi.cout_emploi_cree_smic"))
+    a = p.val("emploi.allocation_chomeur_evitee")
     assert m[0].valeurs[2037] / m0[0].valeurs[2037] == pytest.approx((v - a) / v, rel=1e-6)
 
 
