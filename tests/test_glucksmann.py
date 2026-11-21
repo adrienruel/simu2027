@@ -75,7 +75,8 @@ def test_retraite_a_62_ans_comme_tondelier(p, prog):
     ref = bib.baisse_age_legal_detail(p, "prudent", {2028: prog.v("retraites.profil_62_ans")})
     assert d["pensions"][2040] == pytest.approx(ref["pensions"][2040])
     c = prog.contexte(p)["prudent"]["emplois_canaux"][2040]
-    assert -400000 < c["Seniors : emploi (âge de la retraite)"] < -200000
+    # deux ans d'âge, scénario miroir (médian) : 2 × ≈ 240 000 au plus (recalage du 21/11/2026, DG Trésor)
+    assert -500000 < c["Seniors : emploi (âge de la retraite)"] < -280000
 
 
 def test_service_civique_ne_fait_pas_de_chomeurs(p, prog):

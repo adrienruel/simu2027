@@ -34,7 +34,7 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     assert decisions == ["calendrier.inflation", "demographie.conge_part_soutien", "demographie.ecole_cohortes",
                          "demographie.scenario_fecondite",
                          "demographie.taux_emploi_tendance", "emploi.depenses_chomage_programme",
-                         "emploi.generosite_programme", "emploi.prime_activite_emplois", "entreprises.incidence_retour_budget",
+                         "emploi.generosite_programme", "emploi.prelevements_programme", "emploi.prime_activite_emplois", "entreprises.incidence_retour_budget",
                          "incertitude.correlation",
                          "lectures_communes.capitalisation", "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi",
                          "programme_commun.enveloppe_debut", "programme_commun.enveloppe_plein",
