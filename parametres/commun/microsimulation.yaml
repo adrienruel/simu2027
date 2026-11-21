@@ -126,6 +126,13 @@ microsimulation:
     statut: HYPOTHESE
     source: "Drees, Les retraités et les retraites (fiche 6, éditions 2022 à 2025) : taux de remplacement net médian de 75 % pour les anciens salariés à carrière complète de la génération 1950 ; passé en brut : 0,75 × salaire net / salaire brut (≈ 0,78) / (1 − prélèvements sur les pensions, ≈ 9,1 %) ≈ 0,64"
     note: "Roadmap 3.3 : pension brute d'une personne qui part plus tôt (âge abaissé), en part de son revenu d'activité brut ; à l'inverse, salaire d'un retraité qui reste en activité (âge relevé). Carrières incomplètes et décote non représentées."
+  plancher_carriere_complete:
+    valeur: 1000
+    unite: eur_mois
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Drees, Les retraités et les retraites (édition 2025, fiche 8) : minimum contributif de 747,69 € par mois au 1er janvier 2025 pour une carrière complète, 893,65 € avec la majoration ; plus une pension complémentaire minimale. Encadrement : ≈ 4,3 millions de retraités à carrière complète sous le SMIC net, écart moyen ≈ 350 € (melenchon, LFI-RET-03) ; la population donne 4,3 millions et 400 € au-dessus de ce plancher"
+    note: "Roadmap 3.3 (21/11/2026) : la population n'a pas la durée de carrière. Une pension brute au-dessus de ce plancher est lue comme une carrière complète, en dessous comme une carrière incomplète (opération population.pension_minimum)."
   taux_are:
     valeur: 0.57
     unite: taux

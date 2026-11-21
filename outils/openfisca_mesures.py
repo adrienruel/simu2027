@@ -598,6 +598,18 @@ class Base:
             if "age_depart" in x:
                 age_depart(lg, x["age_depart"])
                 continue
+            if "pension_minimum" in x:
+                # roadmap 3.3 : pensions des carrières complètes portées à un minimum. Carrière complète lue sur le
+                # montant : une pension au-dessus du plancher (microsimulation.plancher_carriere_complete, minimum
+                # contributif majoré et complémentaire) ; en dessous, carrière incomplète, inchangée
+                y = x["pension_minimum"]
+                cible = 12 * float(y["mensuel_brut"])
+                plancher = 12 * float(y.get("plancher_mensuel_brut",
+                                            Parametres().val("microsimulation.plancher_carriere_complete")))
+                for l in lg:
+                    if l["statut"] == "retraite" and plancher <= l["pension_brute"] < cible:
+                        l["pension_brute"] = cible
+                continue
             if "pensions" in x:
                 y = x["pensions"]
                 annee = getattr(self, "annee", 2026)

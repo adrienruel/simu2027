@@ -2119,4 +2119,7 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   règle pour tous). Couverture du budget « ménages » : Bertrand 90 %, Roussel 76 %, Philippe 64 %, Glucksmann et
   Mélenchon 63 %, Le Pen 55 %, Tondelier 51 %. Paramètres `microsimulation.taux_remplacement_brut` (0,64) et
   `microsimulation.taux_are` (0,57). Reste : minimum de pension des carrières complètes (LFI-RET-03).
+- **Roadmap 3.3, minimum de pension** : `population.pension_minimum`, carrière complète lue sur le montant
+  (`microsimulation.plancher_carriere_complete`, 1 000 € brut) ; LFI-RET-03 codée (4,3 millions de retraités,
+  ≈ 20 Md€ bruts, statique −17,3 Md€) ; couverture de Mélenchon 74 %.
 

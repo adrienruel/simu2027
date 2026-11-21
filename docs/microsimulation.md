@@ -479,6 +479,14 @@ synthétique.
   - Mélenchon 39 → 63 %
   - Le Pen 15 → 55 %
   - Tondelier 35 → 51 %
-- **Non représentés :** durée d'assurance, carrières longues, décote, minimum de pension des carrières complètes
-  (LFI-RET-03 : il manque la part des carrières complètes selon le niveau de pension, Drees, fiche 11).
+- **Minimum de pension des carrières complètes** (`population: {pension_minimum: {mensuel_brut}}`) :
+  - La population n'a pas la durée de carrière : une pension brute au-dessus de 1 000 € par mois
+    (`microsimulation.plancher_carriere_complete`, minimum contributif majoré et complémentaire) est lue comme une
+    carrière complète.
+  - Ces pensions sont portées au minimum. Pour LFI-RET-03, SMIC net de 1 700 €, soit ≈ 1 870 € brut : 4,3 millions
+    de retraités, ≈ +20 Md€ bruts. Cela retrouve l'encadrement du moteur (4,3 millions, ≈ 350 € par mois, 22 Md€
+    au prudent).
+  - Effet statique d'OpenFisca : −17,3 Md€, après la CSG et l'impôt sur le revenu repris.
+  - Couverture de Mélenchon : 63 → 74 %.
+- **Non représentés :** durée d'assurance, carrières longues, décote.
 

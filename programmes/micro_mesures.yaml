@@ -8,6 +8,7 @@
 #   tranche   : {bareme, seuil, taux}                tranche ajoutée à un barème
 #   variable  : {nom, facteur}                       variable d'OpenFisca multipliée (prestation revalorisée)
 #   formule   : {nom, ...}                           règle nouvelle écrite dans outils/openfisca_mesures.py
+#   population: {pension_minimum: {mensuel_brut}}  pensions des carrières complètes portées à un minimum (3.3)
 #   population: {age_depart: {age_actuel, age_cible}}  âge de départ changé (roadmap 3.3, openfisca_mesures.age_depart) :
 #               profil de départ de la population de 2026 décalé de l'écart entre l'âge du programme et celui du
 #               statu quo à terme (64 ans) ; mêmes règles pour tous les programmes
@@ -130,6 +131,9 @@ roussel:
     note: "Pensions revalorisées comme le salaire moyen depuis 2029 : sans effet en 2026, visible dans le vieillissement (même calcul que le moteur)."
 
 melenchon:
+  LFI-RET-03:
+    operations: [{population: {pension_minimum: {mensuel_brut: 1870}}}]
+    note: "Roadmap 3.3 (21/11/2026) : pensions des carrières complètes portées au SMIC net de 1 700 € (euros de 2026, comme le moteur), soit ≈ 1 870 € brut (prélèvements sur les pensions ≈ 9,1 %). Carrière complète lue sur le montant de la pension (microsimulation.plancher_carriere_complete)."
   LFI-RET-01:
     operations: [{population: {age_depart: {age_actuel: 64, age_cible: 60}}}]
     note: "Roadmap 3.3 (21/11/2026) : âge de départ de 60 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."

@@ -33,3 +33,15 @@ def test_age_abaisse_ou_releve(pop):
     lg = [dict(l) for l in pop]
     age_depart(lg, {"age_actuel": 64, "age_cible": 64})
     assert lg == pop
+
+
+def test_minimum_de_pension_des_carrieres_completes(pop):
+    """Pensions entre le plancher de carrière complète et 1 870 € brut portées à 1 870 € : ≈ 4 millions de retraités,
+    ≈ 20 Md€ bruts (moteur, LFI-RET-03 : 22 Md€ au prudent) ; sous le plancher, inchangées."""
+    from outils.openfisca_mesures import Base
+    lg = Base.population(type("B", (), {"lignes": pop})(), [{"population": {"pension_minimum": {"mensuel_brut": 1870}}}])
+    gain = sum(l2["poids"] * (l2["pension_brute"] - l1["pension_brute"]) for l1, l2 in zip(pop, lg)) / 1e9
+    n = sum(l1["poids"] for l1, l2 in zip(pop, lg) if l2["pension_brute"] > l1["pension_brute"])
+    assert 3e6 < n < 5.5e6
+    assert 14 < gain < 26
+    assert all(l2["pension_brute"] == l1["pension_brute"] for l1, l2 in zip(pop, lg) if l1["pension_brute"] < 12 * 1000)
