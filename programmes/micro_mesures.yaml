@@ -8,10 +8,16 @@
 #   tranche   : {bareme, seuil, taux}                tranche ajoutée à un barème
 #   variable  : {nom, facteur}                       variable d'OpenFisca multipliée (prestation revalorisée)
 #   formule   : {nom, ...}                           règle nouvelle écrite dans outils/openfisca_mesures.py
+#   population: {age_depart: {age_actuel, age_cible}}  âge de départ changé (roadmap 3.3, openfisca_mesures.age_depart) :
+#               profil de départ de la population de 2026 décalé de l'écart entre l'âge du programme et celui du
+#               statu quo à terme (64 ans) ; mêmes règles pour tous les programmes
 # Non codées ici (raison dans docs/microsimulation.md) : conditions de nationalité ou de résidence (la population
 # n'a pas cette information), patrimoine (ISF, taxe Zucman, IFI), niches non nommées, mesures sans barème publié.
 
 bertrand:
+  BER-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   BER-RET-02:
     operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
@@ -22,6 +28,9 @@ bertrand:
     note: "Part impôt sur le revenu du prélèvement forfaitaire unique : 12,8 % → 14,8 %."
 
 tondelier:
+  RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   REC-10:
     operations: [{tranche: {bareme: impot_revenu.bareme_ir_depuis_1945.bareme, seuil: 250000, taux: 0.60}}]
   REC-11:
@@ -81,6 +90,9 @@ lisnard:
     note: "Pensions de plus de 2 000 € brut non revalorisées de 2028 à 2032 : (1 / 1,016)^5 = 0,924 de niveau (inflation de 2028 du moteur), qui s'éteint ensuite avec ces retraités."
 
 roussel:
+  PCF-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 60}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 60 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   PCF-RET-03:
     operations:
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.remplacement.pensions_retraite_invalidite.deductible.taux_plein, valeur: 0.0}}
@@ -118,6 +130,9 @@ roussel:
     note: "Pensions revalorisées comme le salaire moyen depuis 2029 : sans effet en 2026, visible dans le vieillissement (même calcul que le moteur)."
 
 melenchon:
+  LFI-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 60}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 60 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   LFI-PRE-04:
     operations: [{variable: {nom: aide_logement, facteur: 1.10}}]
   LFI-PRE-03:
@@ -153,6 +168,9 @@ melenchon:
     note: "ASPA portée au seuil de pauvreté retenu par le programme (1 337 € par mois, contre 1 043,6 € en 2026), plafond de ressources relevé d'autant, couples dans la même proportion ; recours complet (le non-recours à l'ASPA, ≈ 50 %, n'est pas modélisé)."
 
 le_pen:
+  RN-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   RN-RET-03:
     operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
@@ -166,6 +184,9 @@ le_pen:
     note: "« Priorité nationale » : prestations non contributives retirées aux familles étrangères hors UE présentes depuis moins de cinq ans (lecture de la condition d'années de résidence ou d'activité)."
 
 philippe:
+  PHI-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   PHI-FIS-02:
     operations: [{formule: {nom: ir_naissance, age_enfant_max: 2, plafond: 3000}}]
     note: "Foyer avec un enfant de moins de 3 ans : impôt sur le revenu annulé jusqu'à 3 000 € (réduction de 3 000 € au-delà), comme le site du 12/11/2026."
@@ -219,6 +240,9 @@ zemmour:
     note: "CSG supprimée sur les revenus d'activité (salariés et indépendants)."
 
 glucksmann:
+  GLU-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   GLU-FIS-01b:
     operations:
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.0137}}

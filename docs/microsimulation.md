@@ -445,3 +445,40 @@ patrimoine.
 **ERFS** : l'accès est à demander à l'Insee par le CASD (Centre d'accès sécurisé aux données), au nom d'Adrien.
 Il faut un projet, un habilitant et une convention. Quand l'accès sera ouvert, l'ERFS remplacera la population
 synthétique.
+
+## Roadmap 3.3, premier pas : âge de départ dans la population (21/11/2026)
+
+- Opération `population: {age_depart: {age_actuel, age_cible}}` (`outils/openfisca_mesures.age_depart`).
+- **Principe :** le profil de départ par âge de la population de 2026 est décalé de l'écart entre l'âge du
+  programme et celui du statu quo à terme (64 ans).
+- **Âge abaissé :** à chaque âge, une part des personnes qui ne sont pas encore retraitées part. Leur pension brute
+  vaut 0,64 × leur revenu d'activité (`microsimulation.taux_remplacement_brut`) : c'est le taux de remplacement net
+  médian de 75 % de la Drees pour les carrières complètes, passé en brut. Sans revenu d'activité, elles reçoivent la
+  pension médiane des 62-66 ans.
+- **Âge relevé :** une part des retraités reprend un emploi, s'inscrit au chômage (allocation de 57 % du salaire)
+  ou devient inactive, selon `seniors.devenir`.
+- **Emplois :** les personnes qui changent de statut sont comptées par le canal des seniors du moteur, pas par le
+  gain à travailler.
+- **Codé pour sept programmes**, même règle pour tous : GLU-RET-01, RN-RET-01 et RET-01 (62 ans), LFI-RET-01 et
+  PCF-RET-01 (60 ans), BER-RET-01 et PHI-RET-01 (65 ans).
+- **Ordres de grandeur**, population de 2026 :
+
+| Âge cible | Retraités | Pensions brutes | Effet statique d'OpenFisca | Moteur, pensions en 2032 |
+|---|---|---|---|---|
+| 62 ans | +0,67 million | +18,4 Md€ | −27,1 Md€ | 23,5 Md€ |
+| 60 ans | +1,7 million | +45 Md€ | −55,7 Md€ | 48,1 Md€ |
+| 65 ans | −0,35 million | −8 Md€ | +8,4 Md€ | — |
+
+  L'effet statique d'OpenFisca compte aussi les prélèvements perdus sur les revenus d'activité, ce que le moteur
+  compte par le canal des seniors.
+- **Couverture du budget « ménages »** (seuil de publication des déciles : 80 %) :
+  - Bertrand 65 → 90 %
+  - Roussel 31 → 76 %
+  - Philippe 38 → 64 %
+  - Glucksmann 29 → 63 %
+  - Mélenchon 39 → 63 %
+  - Le Pen 15 → 55 %
+  - Tondelier 35 → 51 %
+- **Non représentés :** durée d'assurance, carrières longues, décote, minimum de pension des carrières complètes
+  (LFI-RET-03 : il manque la part des carrières complètes selon le niveau de pension, Drees, fiche 11).
+

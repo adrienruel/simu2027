@@ -2115,4 +2115,8 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   valeur ajoutée = coût × `offre.travail_part_pib` / `emploi.part_travail_va`. Un canal déclare son salaire
   (« nom@niveau », 1,3 SMIC sinon). Les valeurs uniques de 20 000 et 35 000 € de `programme_commun` et
   `offre.valeur_ajoutee_emploi_micro` sont retirées. Écarts de solde primaire 2037 : moins de 0,07 point.
+- **Roadmap 3.3, premier pas** : âge de départ dans la microsimulation (`age_depart`, sept mesures codées, même
+  règle pour tous). Couverture du budget « ménages » : Bertrand 90 %, Roussel 76 %, Philippe 64 %, Glucksmann et
+  Mélenchon 63 %, Le Pen 55 %, Tondelier 51 %. Paramètres `microsimulation.taux_remplacement_brut` (0,64) et
+  `microsimulation.taux_are` (0,57). Reste : minimum de pension des carrières complètes (LFI-RET-03).
 

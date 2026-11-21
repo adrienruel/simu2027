@@ -120,6 +120,18 @@ microsimulation:
     statut: SOURCE
     source: "PLF 2026, évaluation des voies et moyens : impôt net sur le revenu 104,0 Md€ ; Cnaf, Analyses statistiques n° 7 : prestations d'entretien (allocations familiales, complément familial, allocation de soutien familial, allocation de rentrée scolaire, allocation de base et prime à la naissance de la Paje) 24,5 Md€ en 2024 ; autres prestations : statu_quo.aides_logement, rsa, prime_activite, aah"
     note: "En Md€. Critère de sortie de la phase F : impôt sur le revenu et prestations à 5 % près. Prestations d'entretien : 24,5 × 1,009 × 1,021 (inflation 2025 et 2026, comme statu_quo.prestations_familiales) ≈ 25,2 ; le complément de mode de garde, la PreParE et l'AEEH (≈ 9,5 Md€ des 34,7 de statu_quo.prestations_familiales) dépendent de choix de garde que la population n'a pas : ils restent au moteur agrégé. L'IR net de l'État comprend le prélèvement forfaitaire sur les revenus du capital et la contribution sur les hauts revenus. RSA : allocations seules, 3,07 × 4 × 1,01 ≈ 12,4 ; statu_quo.rsa (13,5) compte aussi les dépenses d'insertion des départements (les 11,5 Md€ bruts de la Drees pour 2024 sont « allocations et insertion »)."
+  taux_remplacement_brut:
+    valeur: 0.64
+    unite: taux
+    statut: HYPOTHESE
+    source: "Drees, Les retraités et les retraites (fiche 6, éditions 2022 à 2025) : taux de remplacement net médian de 75 % pour les anciens salariés à carrière complète de la génération 1950 ; passé en brut : 0,75 × salaire net / salaire brut (≈ 0,78) / (1 − prélèvements sur les pensions, ≈ 9,1 %) ≈ 0,64"
+    note: "Roadmap 3.3 : pension brute d'une personne qui part plus tôt (âge abaissé), en part de son revenu d'activité brut ; à l'inverse, salaire d'un retraité qui reste en activité (âge relevé). Carrières incomplètes et décote non représentées."
+  taux_are:
+    valeur: 0.57
+    unite: taux
+    statut: HYPOTHESE
+    source: "Unédic, règles de l'allocation d'aide au retour à l'emploi : 57 % du salaire journalier de référence (ou 40,4 % plus une partie fixe, la formule la plus favorable), pour les salaires moyens"
+    note: "Roadmap 3.3 : allocation brute d'un senior au chômage quand l'âge de départ est relevé (outils/openfisca_mesures.age_depart)."
   recours:
     valeur: {rsa: 0.65, prime_activite: 0.50, forme: 0.2}
     unite: taux

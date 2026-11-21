@@ -190,6 +190,72 @@ def _post(operations):
     return [o["formule"] for o in operations if "formule" in o and o["formule"]["nom"] in POST]
 
 
+EN_EMPLOI_OU_NON = ("salarie_prive", "agent_public", "independant", "chomeur", "inactif")
+
+
+def age_depart(lg: list[dict], x: dict) -> None:
+    """Roadmap 3.3 (21/11/2026) : âge de départ changé dans la population (modifie lg en place).
+
+    x : {age_actuel, age_cible} (âges légaux, ans). Taux de retraités par âge de la population, r(a). Au nouvel âge,
+    le profil de départ est décalé de Δ = age_actuel − age_cible : r'(a) = r(a + Δ), plafonné à 70 ans.
+    - Âge abaissé (Δ > 0) : à chaque âge, une part (r' − r) / (1 − r) des personnes qui ne sont pas encore
+      retraitées (en emploi, au chômage, inactives) part. Pension brute : taux de remplacement brut
+      (microsimulation.taux_remplacement_brut) × leur revenu d'activité ; sinon la pension médiane des retraités de
+      62 à 66 ans de la population.
+    - Âge relevé (Δ < 0) : une part (r − r') / r des retraités de chaque âge ne l'est plus ; ils sont en emploi,
+      au chômage ou inactifs selon le partage des seniors maintenus en activité (seniors.devenir, prudent), salaire
+      = pension / taux de remplacement, allocation de chômage = microsimulation.taux_are × ce salaire.
+    Tirages fixés (graine par personne), mêmes ménages."""
+    import random
+    from moteur.parametres import Parametres
+    p = Parametres()
+    tr = p.val("microsimulation.taux_remplacement_brut")
+    are = p.val("microsimulation.taux_are")
+    emp, cho = p.val("seniors.devenir", "prudent")
+    delta = float(x["age_actuel"]) - float(x["age_cible"])
+    if abs(delta) < 1e-9:
+        return
+    adultes = [l for l in lg if l["statut"] in (*EN_EMPLOI_OU_NON, "retraite")]
+    tot, ret = {}, {}
+    for l in adultes:
+        tot[l["age"]] = tot.get(l["age"], 0.0) + l["poids"]
+        if l["statut"] == "retraite":
+            ret[l["age"]] = ret.get(l["age"], 0.0) + l["poids"]
+
+    def r(a: float) -> float:
+        a = min(70, max(50, int(round(a))))
+        return ret.get(a, 0.0) / tot[a] if tot.get(a) else 1.0
+    pens = sorted(l["pension_brute"] for l in adultes if l["statut"] == "retraite" and 62 <= l["age"] <= 66
+                  and l["pension_brute"] > 0)
+    mediane = pens[len(pens) // 2] if pens else 0.0
+    bas, haut = (int(x["age_cible"]), int(x["age_actuel"]) + 3) if delta > 0 else (int(x["age_actuel"]), int(x["age_cible"]) + 3)
+    for i, l in enumerate(lg):
+        a = l["age"]
+        if not (bas <= a <= haut):
+            continue
+        u = random.Random(1000003 * i + 17).random()
+        if delta > 0 and l["statut"] in EN_EMPLOI_OU_NON:
+            r0, r1 = r(a), r(a + delta)
+            if r0 < 1 and u < max(0.0, (r1 - r0) / (1 - r0)):
+                activite = max(0.0, l["salaire_brut"]) + max(0.0, l["revenu_independant"])
+                l["pension_brute"] = tr * activite if activite > 0 else mediane
+                for k in ("salaire_brut", "cout_employeur", "revenu_independant", "chomage_brut"):
+                    l[k] = 0.0
+                l["statut"], l["mois_travailles"], l["debut_mois"] = "retraite", 0, 0
+        elif delta < 0 and l["statut"] == "retraite":
+            r0, r1 = r(a), r(a + delta)
+            if r0 > 0 and u < max(0.0, (r0 - r1) / r0):
+                salaire = l["pension_brute"] / tr
+                l["pension_brute"] = 0.0
+                v = random.Random(1000003 * i + 29).random()
+                if v < emp:
+                    l["statut"], l["salaire_brut"], l["mois_travailles"], l["debut_mois"] = "salarie_prive", salaire, 12, 0
+                elif v < emp + cho:
+                    l["statut"], l["chomage_brut"] = "chomeur", are * salaire
+                else:
+                    l["statut"] = "inactif"
+
+
 def emplois_par_scenario(pp, rel, t, bande, eta: dict, valeur) -> dict:
     """Emplois en plus et effet sur le solde (Md€), par scénario, de variations relatives du gain à travailler rel
     (personnes en emploi t, poids pp, tranche de salaire bande, élasticités eta[scénario][tranche], valeur publique
@@ -471,7 +537,7 @@ class Base:
             v[choix] = (e["cout_m"] - cf[nom]["cout_m"])[m[choix]] - g[choix]
         return {"gain": g, "valeur": v}
 
-    def emploi_effet(self, e1, cf1, s: str = "prudent", releves=None) -> dict:
+    def emploi_effet(self, e1, cf1, s: str = "prudent", releves=None, exclus=None) -> dict:
         """Emplois en plus (personnes) et effet sur le solde (Md€) de la variation du gain à travailler : élasticité
         de participation de la tranche de salaire (offre.travail_participation) × facteur propre aux transferts
         (offre.participation_transferts), appliquée aux personnes en emploi (Immervoll et al., 2007). Rend le
@@ -489,6 +555,8 @@ class Base:
         rel[t] = np.clip((b["gain"][t] - a["gain"][t]) / np.maximum(a["gain"][t], 1.0), -1, 1)
         if releves is not None:
             rel[releves & (rel > 0)] = 0.0
+        if exclus is not None:
+            rel[exclus] = 0.0  # statut changé par la mesure (âge de départ) : compté par le canal des seniors
         par = emplois_par_scenario(self.pp, rel, t, self.bande, eta, b["valeur"])
         return {**par[s], "scenarios": par}
 
@@ -527,6 +595,9 @@ class Base:
                     else:
                         continue
                     l["salaire_brut"] = b2 * mois
+            if "age_depart" in x:
+                age_depart(lg, x["age_depart"])
+                continue
             if "pensions" in x:
                 y = x["pensions"]
                 annee = getattr(self, "annee", 2026)
@@ -574,7 +645,12 @@ class Base:
             if lg is not None and any("smic_net_2027" in o.get("population", {}) or "smic_brut_2026" in o.get("population", {})
                                       for o in operations):
                 releves = np.array([l2["salaire_brut"] > l1["salaire_brut"] + 1.0 for l1, l2 in zip(self.lignes, lg)])
-            out["emploi"] = self.emploi_effet(e1, cf1, releves=releves)
+            if lg is not None:
+                # âge de départ (3.3) : les personnes qui changent de statut sont comptées par le canal des seniors
+                exclus = np.array([l1["statut"] != l2["statut"] for l1, l2 in zip(self.lignes, lg)])
+            else:
+                exclus = None
+            out["emploi"] = self.emploi_effet(e1, cf1, releves=releves, exclus=exclus)
         return out
 
     def deciles(self, e1: dict) -> list[dict]:
