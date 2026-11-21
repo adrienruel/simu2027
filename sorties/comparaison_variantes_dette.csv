@@ -97,7 +97,7 @@ Mélenchon (La France insoumise),Optimiste,2037,centrale,Calcul publié,14.596,1
 Mélenchon (La France insoumise),Optimiste,2050,centrale,Calcul publié,26.876,316.81,15.643,-6.2,116.87
 Philippe (Horizons),Crise,2032,centrale,Calcul publié,10.203,151.97,1.89,-1.67,6.15
 Philippe (Horizons),Crise,2037,centrale,Calcul publié,14.967,201.75,3.316,-2.027,20.62
-Philippe (Horizons),Crise,2050,centrale,Calcul publié,40.777,492.13,11.032,-2.608,112.56
+Philippe (Horizons),Crise,2050,centrale,Calcul publié,40.778,492.13,11.032,-2.608,112.56
 Philippe (Horizons),Prudent,2032,centrale,Calcul publié,7.973,141.02,0.939,-0.85,2.89
 Philippe (Horizons),Prudent,2037,centrale,Calcul publié,10.633,169.51,1.538,-1.017,9.95
 Philippe (Horizons),Prudent,2050,centrale,Calcul publié,25.239,323.79,6.463,-1.702,57.05
@@ -105,8 +105,8 @@ Philippe (Horizons),Médian,2032,centrale,Calcul publié,6.891,135.99,0.187,-0.1
 Philippe (Horizons),Médian,2037,centrale,Calcul publié,8.17,152.09,0.169,-0.088,2.69
 Philippe (Horizons),Médian,2050,centrale,Calcul publié,13.05,222.25,1.075,-0.348,11.54
 Philippe (Horizons),Optimiste,2032,centrale,Calcul publié,5.665,130.47,-0.884,0.777,-2.73
-Philippe (Horizons),Optimiste,2037,centrale,Calcul publié,6.341,137.39,-1.371,1.003,-7.49
-Philippe (Horizons),Optimiste,2050,centrale,Calcul publié,8.824,175.48,-2.409,0.922,-24.45
+Philippe (Horizons),Optimiste,2037,centrale,Calcul publié,6.342,137.39,-1.371,1.003,-7.49
+Philippe (Horizons),Optimiste,2050,centrale,Calcul publié,8.824,175.49,-2.409,0.922,-24.45
 Retailleau (Les Républicains),Crise,2032,centrale,Calcul publié,9.326,149.47,1.013,-0.868,3.66
 Retailleau (Les Républicains),Crise,2037,centrale,Calcul publié,13.503,192.83,1.852,-1.106,11.7
 Retailleau (Les Républicains),Crise,2050,centrale,Calcul publié,36.172,444.57,6.426,-1.507,65.0
@@ -132,16 +132,16 @@ Roussel (Parti communiste français),Optimiste,2032,centrale,Calcul publié,10.3
 Roussel (Parti communiste français),Optimiste,2037,centrale,Calcul publié,15.535,202.41,7.822,-4.246,57.53
 Roussel (Parti communiste français),Optimiste,2050,centrale,Calcul publié,36.671,448.07,25.438,-5.012,248.13
 Tondelier (Les Écologistes),Crise,2032,centrale,Calcul publié,12.578,160.45,4.265,-3.661,14.63
-Tondelier (Les Écologistes),Crise,2037,centrale,Calcul publié,19.179,223.86,7.527,-4.614,42.73
-Tondelier (Les Écologistes),Crise,2050,centrale,Calcul publié,49.751,577.39,20.006,-4.934,197.82
+Tondelier (Les Écologistes),Crise,2037,centrale,Calcul publié,19.179,223.86,7.528,-4.614,42.73
+Tondelier (Les Écologistes),Crise,2050,centrale,Calcul publié,49.753,577.4,20.007,-4.935,197.83
 Tondelier (Les Écologistes),Prudent,2032,centrale,Calcul publié,9.028,140.0,1.995,-1.751,1.87
 Tondelier (Les Écologistes),Prudent,2037,centrale,Calcul publié,12.7,173.07,3.605,-2.617,13.52
-Tondelier (Les Écologistes),Prudent,2050,centrale,Calcul publié,30.002,356.42,11.225,-3.483,89.68
+Tondelier (Les Écologistes),Prudent,2050,centrale,Calcul publié,30.002,356.43,11.226,-3.483,89.68
 Tondelier (Les Écologistes),Médian,2032,centrale,Calcul publié,7.284,131.53,0.581,-0.539,-3.42
 Tondelier (Les Écologistes),Médian,2037,centrale,Calcul publié,9.495,150.06,1.494,-1.257,0.65
-Tondelier (Les Écologistes),Médian,2050,centrale,Calcul publié,15.746,235.8,3.771,-1.844,25.08
+Tondelier (Les Écologistes),Médian,2050,centrale,Calcul publié,15.746,235.8,3.772,-1.844,25.09
 Tondelier (Les Écologistes),Optimiste,2032,centrale,Calcul publié,5.081,119.51,-1.467,1.143,-13.69
-Tondelier (Les Écologistes),Optimiste,2037,centrale,Calcul publié,6.711,125.37,-1.002,0.41,-19.51
+Tondelier (Les Écologistes),Optimiste,2037,centrale,Calcul publié,6.711,125.37,-1.001,0.41,-19.51
 Tondelier (Les Écologistes),Optimiste,2050,centrale,Calcul publié,9.894,170.21,-1.339,-0.203,-29.73
 Zemmour (Reconquête),Crise,2032,centrale,Calcul publié,12.47,164.97,4.156,-3.412,19.15
 Zemmour (Reconquête),Crise,2037,centrale,Calcul publié,18.749,230.56,7.098,-3.8,49.43
@@ -252,7 +252,7 @@ Mélenchon (La France insoumise),Optimiste,2032,sans_prime_dette,Sans prime de d
 Mélenchon (La France insoumise),Optimiste,2037,sans_prime_dette,Sans prime de dette,14.381,160.5,6.838,-5.089,16.17
 Mélenchon (La France insoumise),Optimiste,2050,sans_prime_dette,Sans prime de dette,21.452,291.19,11.718,-6.084,99.99
 Philippe (Horizons),Crise,2032,sans_prime_dette,Sans prime de dette,9.981,151.56,1.816,-1.648,5.98
-Philippe (Horizons),Crise,2037,sans_prime_dette,Sans prime de dette,13.052,195.85,2.593,-1.888,18.22
+Philippe (Horizons),Crise,2037,sans_prime_dette,Sans prime de dette,13.052,195.85,2.593,-1.888,18.23
 Philippe (Horizons),Crise,2050,sans_prime_dette,Sans prime de dette,21.358,367.68,5.569,-2.73,72.55
 Philippe (Horizons),Prudent,2032,sans_prime_dette,Sans prime de dette,7.859,140.82,0.917,-0.844,2.84
 Philippe (Horizons),Prudent,2037,sans_prime_dette,Sans prime de dette,9.827,167.0,1.309,-0.978,9.22
@@ -262,7 +262,7 @@ Philippe (Horizons),Médian,2037,sans_prime_dette,Sans prime de dette,7.855,151.
 Philippe (Horizons),Médian,2050,sans_prime_dette,Sans prime de dette,10.185,205.42,0.62,-0.326,8.93
 Philippe (Horizons),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.645,130.44,-0.87,0.773,-2.7
 Philippe (Horizons),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.259,137.15,-1.285,0.983,-7.19
-Philippe (Horizons),Optimiste,2050,sans_prime_dette,Sans prime de dette,8.051,171.22,-1.683,0.853,-19.98
+Philippe (Horizons),Optimiste,2050,sans_prime_dette,Sans prime de dette,8.051,171.23,-1.683,0.853,-19.98
 Retailleau (Les Républicains),Crise,2032,sans_prime_dette,Sans prime de dette,9.128,149.12,0.963,-0.853,3.53
 Retailleau (Les Républicains),Crise,2037,sans_prime_dette,Sans prime de dette,11.902,187.94,1.443,-1.028,10.31
 Retailleau (Les Républicains),Crise,2050,sans_prime_dette,Sans prime de dette,19.011,336.62,3.223,-1.58,41.49
@@ -288,16 +288,16 @@ Roussel (Parti communiste français),Optimiste,2032,sans_prime_dette,Sans prime 
 Roussel (Parti communiste français),Optimiste,2037,sans_prime_dette,Sans prime de dette,14.698,199.94,7.154,-4.196,55.6
 Roussel (Parti communiste français),Optimiste,2050,sans_prime_dette,Sans prime de dette,23.584,381.67,13.85,-4.792,190.47
 Tondelier (Les Écologistes),Crise,2032,sans_prime_dette,Sans prime de dette,12.215,159.7,4.05,-3.595,14.12
-Tondelier (Les Écologistes),Crise,2037,sans_prime_dette,Sans prime de dette,16.275,214.55,5.816,-4.289,36.92
-Tondelier (Les Écologistes),Crise,2050,sans_prime_dette,Sans prime de dette,26.039,420.96,10.251,-5.162,125.83
+Tondelier (Les Écologistes),Crise,2037,sans_prime_dette,Sans prime de dette,16.276,214.56,5.816,-4.29,36.93
+Tondelier (Les Écologistes),Crise,2050,sans_prime_dette,Sans prime de dette,26.04,420.96,10.252,-5.163,125.83
 Tondelier (Les Écologistes),Prudent,2032,sans_prime_dette,Sans prime de dette,8.942,139.87,1.999,-1.753,1.9
 Tondelier (Les Écologistes),Prudent,2037,sans_prime_dette,Sans prime de dette,11.88,170.7,3.362,-2.573,12.92
-Tondelier (Les Écologistes),Prudent,2050,sans_prime_dette,Sans prime de dette,18.116,290.57,6.093,-3.372,60.66
+Tondelier (Les Écologistes),Prudent,2050,sans_prime_dette,Sans prime de dette,18.117,290.58,6.094,-3.373,60.66
 Tondelier (Les Écologistes),Médian,2032,sans_prime_dette,Sans prime de dette,7.267,131.53,0.614,-0.545,-3.34
-Tondelier (Les Écologistes),Médian,2037,sans_prime_dette,Sans prime de dette,9.278,149.51,1.551,-1.262,0.98
-Tondelier (Les Écologistes),Médian,2050,sans_prime_dette,Sans prime de dette,12.499,218.66,2.934,-1.787,22.17
+Tondelier (Les Écologistes),Médian,2037,sans_prime_dette,Sans prime de dette,9.278,149.51,1.551,-1.263,0.98
+Tondelier (Les Écologistes),Médian,2050,sans_prime_dette,Sans prime de dette,12.499,218.66,2.935,-1.787,22.17
 Tondelier (Les Écologistes),Optimiste,2032,sans_prime_dette,Sans prime de dette,5.116,119.6,-1.399,1.134,-13.54
-Tondelier (Les Écologistes),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.793,125.8,-0.751,0.383,-18.54
+Tondelier (Les Écologistes),Optimiste,2037,sans_prime_dette,Sans prime de dette,6.793,125.8,-0.75,0.383,-18.54
 Tondelier (Les Écologistes),Optimiste,2050,sans_prime_dette,Sans prime de dette,9.484,169.61,-0.249,-0.269,-21.59
 Zemmour (Reconquête),Crise,2032,sans_prime_dette,Sans prime de dette,12.002,163.91,3.836,-3.318,18.33
 Zemmour (Reconquête),Crise,2037,sans_prime_dette,Sans prime de dette,15.435,219.47,4.975,-3.427,41.84
@@ -409,14 +409,14 @@ Mélenchon (La France insoumise),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 
 Mélenchon (La France insoumise),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",22.636,285.42,13.952,-6.194,109.18
 Philippe (Horizons),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.681,150.98,1.874,-1.67,6.13
 Philippe (Horizons),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.303,194.78,3.15,-2.025,20.09
-Philippe (Horizons),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",34.191,439.27,10.025,-2.603,105.88
+Philippe (Horizons),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",34.192,439.28,10.025,-2.603,105.88
 Philippe (Horizons),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.482,140.09,0.932,-0.85,2.88
 Philippe (Horizons),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.26,163.52,1.462,-1.016,9.7
-Philippe (Horizons),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",20.331,284.53,6.07,-1.809,52.34
+Philippe (Horizons),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",20.331,284.53,6.07,-1.809,52.35
 Philippe (Horizons),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.416,135.08,0.185,-0.184,1.03
 Philippe (Horizons),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.956,146.64,0.149,-0.088,2.61
 Philippe (Horizons),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",9.946,194.91,0.884,-0.345,10.24
-Philippe (Horizons),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.205,129.59,-0.876,0.777,-2.72
+Philippe (Horizons),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.206,129.59,-0.876,0.777,-2.72
 Philippe (Horizons),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.244,132.36,-1.317,1.003,-7.33
 Philippe (Horizons),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.615,153.84,-2.07,0.917,-22.41
 Retailleau (Les Républicains),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.81,148.49,1.003,-0.868,3.64
@@ -444,16 +444,16 @@ Roussel (Parti communiste français),Optimiste,2032,taux_long_3_3,"Taux long à 
 Roussel (Parti communiste français),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",13.964,196.07,7.403,-4.245,56.39
 Roussel (Parti communiste français),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",30.32,403.44,21.635,-5.006,227.2
 Tondelier (Les Écologistes),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.031,159.42,4.224,-3.661,14.57
-Tondelier (Les Écologistes),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",17.329,216.35,7.176,-4.609,41.65
-Tondelier (Les Écologistes),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",42.348,519.98,18.182,-4.916,186.58
+Tondelier (Les Écologistes),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",17.33,216.35,7.176,-4.609,41.66
+Tondelier (Les Écologistes),Crise,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",42.349,519.99,18.183,-4.917,186.59
 Tondelier (Les Écologistes),Prudent,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.541,139.08,1.991,-1.751,1.87
-Tondelier (Les Écologistes),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.301,167.11,3.503,-2.617,13.29
-Tondelier (Les Écologistes),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.02,316.84,10.759,-3.641,84.66
+Tondelier (Les Écologistes),Prudent,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.302,167.11,3.504,-2.617,13.29
+Tondelier (Les Écologistes),Prudent,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",25.021,316.85,10.76,-3.641,84.67
 Tondelier (Les Écologistes),Médian,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",6.823,130.65,0.592,-0.539,-3.4
 Tondelier (Les Écologistes),Médian,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",8.299,144.78,1.493,-1.257,0.75
-Tondelier (Les Écologistes),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.478,208.51,3.417,-1.842,23.84
+Tondelier (Les Écologistes),Médian,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",12.479,208.51,3.418,-1.842,23.84
 Tondelier (Les Écologistes),Optimiste,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",4.655,118.69,-1.427,1.143,-13.62
-Tondelier (Les Écologistes),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.608,120.29,-0.954,0.431,-19.4
+Tondelier (Les Écologistes),Optimiste,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",5.608,120.29,-0.953,0.431,-19.4
 Tondelier (Les Écologistes),Optimiste,2050,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",7.784,149.97,-0.9,-0.219,-26.27
 Zemmour (Reconquête),Crise,2032,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",11.908,163.91,4.101,-3.412,19.06
 Zemmour (Reconquête),Crise,2037,taux_long_3_3,"Taux long à 3,3 % (au lieu de 4 %)",16.832,222.72,6.679,-3.794,48.03
@@ -565,13 +565,13 @@ Mélenchon (La France insoumise),Optimiste,2037,croissance_2027_2028,"2027-2028 
 Mélenchon (La France insoumise),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",26.719,314.1,15.641,-6.201,117.34
 Philippe (Horizons),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.104,149.19,1.888,-1.67,6.13
 Philippe (Horizons),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",14.796,198.52,3.302,-2.027,20.52
-Philippe (Horizons),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",40.301,485.59,10.996,-2.607,112.07
+Philippe (Horizons),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",40.301,485.59,10.997,-2.608,112.08
 Philippe (Horizons),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.883,138.37,0.939,-0.85,2.89
 Philippe (Horizons),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",10.506,166.64,1.533,-1.016,9.91
-Philippe (Horizons),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",24.91,319.1,6.442,-1.708,56.66
+Philippe (Horizons),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",24.911,319.1,6.442,-1.708,56.66
 Philippe (Horizons),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.804,133.39,0.187,-0.184,1.03
 Philippe (Horizons),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.059,149.39,0.168,-0.088,2.66
-Philippe (Horizons),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.855,218.69,1.061,-0.347,11.39
+Philippe (Horizons),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.855,218.69,1.062,-0.347,11.39
 Philippe (Horizons),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.58,127.92,-0.882,0.777,-2.72
 Philippe (Horizons),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.237,134.8,-1.368,1.003,-7.48
 Philippe (Horizons),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.68,172.35,-2.398,0.922,-24.4
@@ -601,15 +601,15 @@ Roussel (Parti communiste français),Optimiste,2037,croissance_2027_2028,"2027-2
 Roussel (Parti communiste français),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",36.443,444.74,25.365,-5.012,247.98
 Tondelier (Les Écologistes),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.473,157.62,4.257,-3.661,14.57
 Tondelier (Les Écologistes),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.991,220.57,7.497,-4.613,42.58
-Tondelier (Les Écologistes),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",49.273,570.89,19.968,-4.933,197.38
+Tondelier (Les Écologistes),Crise,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",49.274,570.9,19.969,-4.933,197.39
 Tondelier (Les Écologistes),Prudent,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",8.938,137.42,1.993,-1.752,1.93
 Tondelier (Les Écologistes),Prudent,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.575,170.33,3.602,-2.618,13.59
-Tondelier (Les Écologistes),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.708,352.14,11.24,-3.491,89.7
+Tondelier (Les Écologistes),Prudent,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",29.709,352.14,11.241,-3.491,89.71
 Tondelier (Les Écologistes),Médian,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",7.198,129.02,0.581,-0.539,-3.34
 Tondelier (Les Écologistes),Médian,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.386,147.5,1.496,-1.257,0.77
-Tondelier (Les Écologistes),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.567,232.56,3.773,-1.844,25.26
+Tondelier (Les Écologistes),Médian,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",15.568,232.56,3.774,-1.845,25.27
 Tondelier (Les Écologistes),Optimiste,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",5.0,117.11,-1.463,1.143,-13.53
-Tondelier (Les Écologistes),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.611,122.99,-0.994,0.41,-19.29
+Tondelier (Les Écologistes),Optimiste,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",6.611,122.99,-0.993,0.409,-19.29
 Tondelier (Les Écologistes),Optimiste,2050,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",9.77,167.47,-1.307,-0.204,-29.28
 Zemmour (Reconquête),Crise,2032,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",12.362,162.08,4.146,-3.411,19.03
 Zemmour (Reconquête),Crise,2037,croissance_2027_2028,"2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",18.547,227.1,7.053,-3.798,49.1

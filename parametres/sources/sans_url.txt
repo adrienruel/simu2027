@@ -2,7 +2,6 @@
 # Arriéré à résorber : tout nouveau paramètre SOURCE doit avoir url et page (tests/test_sources.py).
 # Retirer une ligne dès que le paramètre a son url.
 accises_entreprises.autres_impots_produits_actuels
-accises_entreprises.tva_retraites_actuelle
 ancien_systeme.age_legal_actuel
 ancien_systeme.age_taux_plein
 ancien_systeme.part_droit_direct
@@ -25,14 +24,11 @@ bouclage.prix_offre
 bouclage.profils_mesange
 budget_etat.contribution_ue_courants
 carbone.ets2
-carbone.fin_hausse
 carbone.hausse_valeur_action_climat
-carbone.recette_2029_nette_is
 chomage.seniors_chomeurs_par_emploi
 chomage.taux_2026
 chomage.taux_par_age
 cohortes.part_en_couple_age
-cohortes.part_salaries_emploi
 collectivites_detail.aide_sociale_enfance
 collectivites_detail.carence_poids
 collectivites_detail.concours_etat_aujourdhui

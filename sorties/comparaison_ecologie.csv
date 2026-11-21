@@ -1141,7 +1141,7 @@ Lisnard (Nouvelle Énergie)|Prudent|2042,Lisnard (Nouvelle Énergie),Prudent,204
 Lisnard (Nouvelle Énergie)|Prudent|2043,Lisnard (Nouvelle Énergie),Prudent,2043,259.21,3.724,470.0,6.752,272.95,259.0,-1.43,1.63,146.5,1358.7,88.94,37.99,44.89,24.83,51.72,10.83,simule
 Lisnard (Nouvelle Énergie)|Prudent|2044,Lisnard (Nouvelle Énergie),Prudent,2044,253.76,3.648,463.95,6.671,271.04,253.9,-1.76,1.62,137.0,1475.5,87.07,37.16,44.04,24.36,50.54,10.6,simule
 Lisnard (Nouvelle Énergie)|Prudent|2045,Lisnard (Nouvelle Énergie),Prudent,2045,248.38,3.574,457.88,6.589,269.06,248.86,-2.09,1.6,127.5,1596.4,85.22,36.33,43.19,23.89,49.38,10.37,simule
-Lisnard (Nouvelle Énergie)|Prudent|2046,Lisnard (Nouvelle Énergie),Prudent,2046,242.97,3.5,451.46,6.503,266.75,243.78,-2.42,1.6,118.0,1721.4,83.36,35.51,42.3,23.41,48.24,10.14,simule
+Lisnard (Nouvelle Énergie)|Prudent|2046,Lisnard (Nouvelle Énergie),Prudent,2046,242.97,3.5,451.46,6.504,266.75,243.78,-2.42,1.6,118.0,1721.4,83.36,35.51,42.3,23.41,48.24,10.14,simule
 Lisnard (Nouvelle Énergie)|Prudent|2047,Lisnard (Nouvelle Énergie),Prudent,2047,237.69,3.428,445.2,6.42,264.51,238.83,-2.74,1.6,108.5,1850.5,81.55,34.71,41.43,22.95,47.13,9.91,simule
 Lisnard (Nouvelle Énergie)|Prudent|2048,Lisnard (Nouvelle Énergie),Prudent,2048,232.46,3.356,438.87,6.337,262.15,233.92,-3.06,1.6,99.0,1984.0,79.75,33.92,40.57,22.49,46.04,9.69,simule
 Lisnard (Nouvelle Énergie)|Prudent|2049,Lisnard (Nouvelle Énergie),Prudent,2049,227.33,3.286,432.62,6.254,259.8,229.09,-3.35,1.59,89.5,2121.8,77.99,33.15,39.72,22.03,44.97,9.47,simule
@@ -1181,7 +1181,7 @@ Lisnard (Nouvelle Énergie)|Médian|2037,Lisnard (Nouvelle Énergie),Médian,203
 Lisnard (Nouvelle Énergie)|Médian|2038,Lisnard (Nouvelle Énergie),Médian,2038,286.42,4.105,503.11,7.211,285.37,282.68,2.81,0.93,194,831.1,98.78,41.67,50.79,26.9,56.35,11.94,simule
 Lisnard (Nouvelle Énergie)|Médian|2039,Lisnard (Nouvelle Énergie),Médian,2039,280.67,4.024,497.62,7.134,284.25,277.09,2.66,0.92,184.5,927.3,96.83,40.71,50.08,26.44,54.93,11.68,simule
 Lisnard (Nouvelle Énergie)|Médian|2040,Lisnard (Nouvelle Énergie),Médian,2040,275.06,3.945,492.33,7.06,283.22,271.66,2.5,0.91,175.0,1027.4,94.93,39.78,49.39,26.0,53.54,11.42,simule
-Lisnard (Nouvelle Énergie)|Médian|2041,Lisnard (Nouvelle Énergie),Médian,2041,269.28,3.863,486.3,6.977,281.59,266.05,2.33,0.9,165.5,1131.2,92.96,38.84,48.61,25.53,52.18,11.16,simule
+Lisnard (Nouvelle Énergie)|Médian|2041,Lisnard (Nouvelle Énergie),Médian,2041,269.28,3.863,486.31,6.977,281.59,266.05,2.33,0.9,165.5,1131.2,92.96,38.84,48.61,25.53,52.18,11.16,simule
 Lisnard (Nouvelle Énergie)|Médian|2042,Lisnard (Nouvelle Énergie),Médian,2042,263.55,3.783,480.18,6.893,279.83,260.5,2.16,0.89,156.0,1238.7,91.01,37.92,47.81,25.06,50.85,10.91,simule
 Lisnard (Nouvelle Énergie)|Médian|2043,Lisnard (Nouvelle Énergie),Médian,2043,257.81,3.704,473.81,6.807,277.82,254.95,1.98,0.88,146.5,1350.0,89.05,37.01,46.99,24.58,49.54,10.66,simule
 Lisnard (Nouvelle Énergie)|Médian|2044,Lisnard (Nouvelle Énergie),Médian,2044,252.19,3.626,467.55,6.722,275.83,249.52,1.8,0.87,137.0,1465.2,87.12,36.12,46.18,24.1,48.26,10.41,simule
@@ -1486,7 +1486,7 @@ Philippe (Horizons)|Crise|2072,Philippe (Horizons),Crise,2072,133.53,2.198,260.9
 Philippe (Horizons)|Crise|2073,Philippe (Horizons),Crise,2073,130.41,2.155,255.86,4.229,156.72,138.53,-7.83,-0.3,80.0,4353.9,44.77,19.77,21.17,11.5,27.6,5.59,simule
 Philippe (Horizons)|Prudent|2029,Philippe (Horizons),Prudent,2029,333.79,4.806,534.42,7.694,280.67,333.49,0.53,-0.23,262,71.8,114.53,50.49,54.62,29.41,70.46,14.28,simule
 Philippe (Horizons)|Prudent|2030,Philippe (Horizons),Prudent,2030,327.7,4.713,529.47,7.615,280.35,327.69,0.44,-0.43,262,137.5,112.5,49.5,53.75,28.96,68.98,14.01,simule
-Philippe (Horizons)|Prudent|2031,Philippe (Horizons),Prudent,2031,321.78,4.624,524.79,7.542,280.17,322.01,0.4,-0.62,262,197.3,110.53,48.54,52.93,28.51,67.52,13.75,simule
+Philippe (Horizons)|Prudent|2031,Philippe (Horizons),Prudent,2031,321.78,4.624,524.8,7.542,280.17,322.01,0.4,-0.62,262,197.3,110.53,48.54,52.93,28.51,67.52,13.75,simule
 Philippe (Horizons)|Prudent|2032,Philippe (Horizons),Prudent,2032,315.9,4.536,520.04,7.468,279.88,316.44,0.27,-0.81,262,251.2,108.57,47.58,52.11,28.07,66.08,13.49,simule
 Philippe (Horizons)|Prudent|2033,Philippe (Horizons),Prudent,2033,310.12,4.45,515.33,7.395,279.57,310.97,0.11,-0.96,262,299.3,106.65,46.64,51.29,27.63,64.67,13.23,simule
 Philippe (Horizons)|Prudent|2034,Philippe (Horizons),Prudent,2034,304.38,4.366,510.57,7.323,279.17,305.6,-0.11,-1.11,194,409.7,104.74,45.72,50.48,27.19,63.28,12.98,simule
@@ -1511,7 +1511,7 @@ Philippe (Horizons)|Prudent|2052,Philippe (Horizons),Prudent,2052,210.77,3.06,41
 Philippe (Horizons)|Prudent|2053,Philippe (Horizons),Prudent,2053,206.04,2.996,408.75,5.944,252.12,210.19,-3.37,-0.77,80.0,2583.6,71.32,30.16,36.12,18.88,40.9,8.65,simule
 Philippe (Horizons)|Prudent|2054,Philippe (Horizons),Prudent,2054,201.41,2.934,402.96,5.869,249.84,205.65,-3.48,-0.76,80.0,2705.0,69.72,29.47,35.36,18.47,39.93,8.46,simule
 Philippe (Horizons)|Prudent|2055,Philippe (Horizons),Prudent,2055,196.89,2.873,397.3,5.798,247.63,201.19,-3.56,-0.74,80.0,2821.9,68.16,28.78,34.62,18.07,38.98,8.26,simule
-Philippe (Horizons)|Prudent|2056,Philippe (Horizons),Prudent,2056,192.43,2.814,391.68,5.727,245.39,196.78,-3.62,-0.72,80.0,2934.3,66.63,28.11,33.9,17.67,38.05,8.07,simule
+Philippe (Horizons)|Prudent|2056,Philippe (Horizons),Prudent,2056,192.43,2.814,391.69,5.727,245.39,196.78,-3.62,-0.72,80.0,2934.3,66.63,28.11,33.9,17.67,38.05,8.07,simule
 Philippe (Horizons)|Prudent|2057,Philippe (Horizons),Prudent,2057,188.11,2.756,386.3,5.66,243.29,192.48,-3.66,-0.71,80.0,3042.4,65.14,27.45,33.2,17.29,37.14,7.89,simule
 Philippe (Horizons)|Prudent|2058,Philippe (Horizons),Prudent,2058,183.87,2.7,381.0,5.595,241.22,188.26,-3.69,-0.69,80.0,3146.3,63.69,26.81,32.52,16.92,36.24,7.7,simule
 Philippe (Horizons)|Prudent|2059,Philippe (Horizons),Prudent,2059,179.75,2.646,375.89,5.533,239.24,184.15,-3.73,-0.68,80.0,3246.1,62.27,26.18,31.86,16.56,35.36,7.53,simule
@@ -1526,7 +1526,7 @@ Philippe (Horizons)|Prudent|2067,Philippe (Horizons),Prudent,2067,149.19,2.245,3
 Philippe (Horizons)|Prudent|2068,Philippe (Horizons),Prudent,2068,145.72,2.199,331.1,4.996,220.32,150.2,-3.93,-0.55,80.0,3969.3,50.55,21.04,26.3,13.53,28.23,6.07,simule
 Philippe (Horizons)|Prudent|2069,Philippe (Horizons),Prudent,2069,142.32,2.154,326.41,4.94,218.22,146.79,-3.94,-0.54,80.0,4031.7,49.37,20.53,25.73,13.22,27.53,5.92,simule
 Philippe (Horizons)|Prudent|2070,Philippe (Horizons),Prudent,2070,138.98,2.109,321.74,4.883,216.09,143.45,-3.94,-0.53,80.0,4090.6,48.22,20.04,25.17,12.92,26.85,5.78,simule
-Philippe (Horizons)|Prudent|2071,Philippe (Horizons),Prudent,2071,135.82,2.067,317.47,4.831,214.22,140.23,-3.9,-0.52,80.0,4146.4,47.13,19.56,24.65,12.64,26.19,5.65,simule
+Philippe (Horizons)|Prudent|2071,Philippe (Horizons),Prudent,2071,135.82,2.067,317.47,4.831,214.22,140.23,-3.9,-0.52,80.0,4146.5,47.13,19.56,24.65,12.64,26.19,5.65,simule
 Philippe (Horizons)|Prudent|2072,Philippe (Horizons),Prudent,2072,132.75,2.025,313.36,4.78,212.44,137.1,-3.84,-0.51,80.0,4199.2,46.08,19.1,24.15,12.37,25.55,5.52,simule
 Philippe (Horizons)|Prudent|2073,Philippe (Horizons),Prudent,2073,129.77,1.984,309.34,4.73,210.69,134.05,-3.78,-0.5,80.0,4249.0,45.05,18.65,23.66,12.1,24.93,5.39,simule
 Philippe (Horizons)|Médian|2029,Philippe (Horizons),Médian,2029,333.39,4.8,533.62,7.683,280.17,333.49,0.27,-0.37,262,71.4,114.36,50.47,54.45,29.38,70.46,14.27,simule
@@ -1543,7 +1543,7 @@ Philippe (Horizons)|Médian|2039,Philippe (Horizons),Médian,2039,275.01,3.943,4
 Philippe (Horizons)|Médian|2040,Philippe (Horizons),Médian,2040,269.51,3.865,481.48,6.905,276.59,271.66,-0.46,-1.68,175.0,967.1,93.23,39.51,47.1,24.79,53.54,11.34,simule
 Philippe (Horizons)|Médian|2041,Philippe (Horizons),Médian,2041,263.85,3.786,475.59,6.823,275.0,266.05,-0.57,-1.63,165.5,1065.4,91.32,38.58,46.36,24.32,52.18,11.08,simule
 Philippe (Horizons)|Médian|2042,Philippe (Horizons),Médian,2042,258.25,3.707,469.62,6.742,273.3,260.5,-0.68,-1.58,156.0,1167.7,89.42,37.67,45.62,23.86,50.85,10.83,simule
-Philippe (Horizons)|Médian|2043,Philippe (Horizons),Médian,2043,252.64,3.629,463.44,6.658,271.37,254.95,-0.79,-1.52,146.5,1273.8,87.52,36.77,44.84,23.39,49.54,10.58,simule
+Philippe (Horizons)|Médian|2043,Philippe (Horizons),Médian,2043,252.64,3.629,463.44,6.658,271.38,254.95,-0.78,-1.52,146.5,1273.8,87.52,36.77,44.84,23.39,49.54,10.58,simule
 Philippe (Horizons)|Médian|2044,Philippe (Horizons),Médian,2044,247.15,3.553,457.37,6.576,269.48,249.52,-0.89,-1.48,137.0,1384.0,85.66,35.88,44.09,22.93,48.26,10.34,simule
 Philippe (Horizons)|Médian|2045,Philippe (Horizons),Médian,2045,241.74,3.479,451.31,6.495,267.53,244.16,-0.99,-1.43,127.5,1498.2,83.82,35.01,43.33,22.47,47.01,10.09,simule
 Philippe (Horizons)|Médian|2046,Philippe (Horizons),Médian,2046,236.3,3.404,444.91,6.409,265.27,238.78,-1.1,-1.39,118.0,1616.5,81.95,34.16,42.54,22.01,45.79,9.85,simule
@@ -1563,16 +1563,16 @@ Philippe (Horizons)|Médian|2059,Philippe (Horizons),Médian,2059,173.81,2.558,3
 Philippe (Horizons)|Médian|2060,Philippe (Horizons),Médian,2060,169.69,2.504,360.84,5.324,231.84,172.46,-1.8,-0.98,80.0,3227.3,59.04,23.87,32.28,16.17,31.36,6.96,simule
 Philippe (Horizons)|Médian|2061,Philippe (Horizons),Médian,2061,165.59,2.45,355.32,5.256,229.43,168.35,-1.81,-0.95,80.0,3312.9,57.63,23.25,31.63,15.81,30.5,6.78,simule
 Philippe (Horizons)|Médian|2062,Philippe (Horizons),Médian,2062,161.59,2.397,349.91,5.19,227.06,164.34,-1.82,-0.93,80.0,3394.5,56.25,22.64,30.98,15.45,29.66,6.61,simule
-Philippe (Horizons)|Médian|2063,Philippe (Horizons),Médian,2063,157.69,2.345,344.63,5.126,224.75,160.42,-1.82,-0.9,80.0,3472.2,54.9,22.05,30.36,15.11,28.84,6.44,simule
+Philippe (Horizons)|Médian|2063,Philippe (Horizons),Médian,2063,157.69,2.345,344.64,5.126,224.75,160.42,-1.82,-0.9,80.0,3472.2,54.9,22.05,30.36,15.11,28.84,6.44,simule
 Philippe (Horizons)|Médian|2064,Philippe (Horizons),Médian,2064,153.88,2.295,339.43,5.063,222.45,156.59,-1.83,-0.88,80.0,3546.1,53.58,21.47,29.75,14.77,28.04,6.28,simule
 Philippe (Horizons)|Médian|2065,Philippe (Horizons),Médian,2065,150.15,2.246,334.31,5.0,220.16,152.85,-1.83,-0.86,80.0,3616.2,52.29,20.9,29.15,14.43,27.26,6.12,simule
 Philippe (Horizons)|Médian|2066,Philippe (Horizons),Médian,2066,146.45,2.197,329.06,4.936,217.72,149.14,-1.84,-0.84,80.0,3682.7,51.01,20.35,28.53,14.1,26.5,5.96,simule
 Philippe (Horizons)|Médian|2067,Philippe (Horizons),Médian,2067,142.85,2.149,323.92,4.873,215.32,145.52,-1.85,-0.82,80.0,3745.6,49.77,19.81,27.93,13.77,25.76,5.8,simule
-Philippe (Horizons)|Médian|2068,Philippe (Horizons),Médian,2068,139.36,2.103,318.94,4.812,213.0,142.01,-1.85,-0.8,80.0,3804.9,48.55,19.29,27.35,13.46,25.05,5.65,simule
+Philippe (Horizons)|Médian|2068,Philippe (Horizons),Médian,2068,139.36,2.103,318.95,4.812,213.0,142.01,-1.85,-0.8,80.0,3804.9,48.55,19.29,27.35,13.46,25.05,5.65,simule
 Philippe (Horizons)|Médian|2069,Philippe (Horizons),Médian,2069,135.94,2.057,314.04,4.752,210.7,138.57,-1.85,-0.78,80.0,3860.9,47.37,18.78,26.79,13.15,24.35,5.51,simule
-Philippe (Horizons)|Médian|2070,Philippe (Horizons),Médian,2070,132.6,2.012,309.17,4.692,208.37,135.21,-1.85,-0.76,80.0,3913.4,46.21,18.28,26.22,12.84,23.67,5.37,simule
+Philippe (Horizons)|Médian|2070,Philippe (Horizons),Médian,2070,132.6,2.012,309.17,4.692,208.37,135.21,-1.85,-0.76,80.0,3913.5,46.21,18.28,26.22,12.84,23.67,5.37,simule
 Philippe (Horizons)|Médian|2071,Philippe (Horizons),Médian,2071,129.41,1.969,304.63,4.636,206.25,131.97,-1.82,-0.74,80.0,3962.9,45.11,17.8,25.7,12.56,23.02,5.23,simule
-Philippe (Horizons)|Médian|2072,Philippe (Horizons),Médian,2072,126.33,1.927,300.24,4.58,204.21,128.82,-1.77,-0.72,80.0,4009.2,44.04,17.34,25.19,12.28,22.39,5.1,simule
+Philippe (Horizons)|Médian|2072,Philippe (Horizons),Médian,2072,126.33,1.927,300.25,4.58,204.21,128.82,-1.77,-0.72,80.0,4009.2,44.04,17.34,25.19,12.28,22.39,5.1,simule
 Philippe (Horizons)|Médian|2073,Philippe (Horizons),Médian,2073,123.33,1.886,295.96,4.526,202.2,125.76,-1.72,-0.7,80.0,4052.5,43.0,16.89,24.69,12.01,21.78,4.97,simule
 Philippe (Horizons)|Optimiste|2029,Philippe (Horizons),Optimiste,2029,333.82,4.793,534.14,7.67,280.36,333.97,0.37,-0.51,262,71.8,114.48,50.58,54.41,29.41,70.64,14.3,simule
 Philippe (Horizons)|Optimiste|2030,Philippe (Horizons),Optimiste,2030,327.03,4.685,528.35,7.569,279.74,327.4,0.58,-0.95,262,136.9,112.24,49.43,53.58,28.97,68.82,13.99,simule
@@ -1581,7 +1581,7 @@ Philippe (Horizons)|Optimiste|2032,Philippe (Horizons),Optimiste,2032,313.95,4.4
 Philippe (Horizons)|Optimiste|2033,Philippe (Horizons),Optimiste,2033,307.62,4.378,511.85,7.284,277.99,308.63,1.06,-2.08,262,292.9,105.83,46.13,51.21,27.69,63.62,13.12,simule
 Philippe (Horizons)|Optimiste|2034,Philippe (Horizons),Optimiste,2034,301.35,4.28,506.37,7.192,277.28,302.65,1.1,-2.39,194,400.2,103.77,45.07,50.44,27.27,61.96,12.84,simule
 Philippe (Horizons)|Optimiste|2035,Philippe (Horizons),Optimiste,2035,295.2,4.185,500.95,7.102,276.54,296.76,1.11,-2.68,194,501.4,101.74,44.03,49.68,26.85,60.34,12.56,simule
-Philippe (Horizons)|Optimiste|2036,Philippe (Horizons),Optimiste,2036,289.53,4.097,495.92,7.018,275.82,291.0,1.12,-2.59,194,596.9,99.88,43.01,49.17,26.43,58.75,12.29,simule
+Philippe (Horizons)|Optimiste|2036,Philippe (Horizons),Optimiste,2036,289.53,4.098,495.92,7.018,275.82,291.0,1.12,-2.59,194,596.9,99.88,43.01,49.17,26.43,58.75,12.29,simule
 Philippe (Horizons)|Optimiste|2037,Philippe (Horizons),Optimiste,2037,283.9,4.011,490.79,6.935,274.97,285.27,1.12,-2.5,194,686.8,98.02,42.0,48.65,26.01,57.19,12.02,simule
 Philippe (Horizons)|Optimiste|2038,Philippe (Horizons),Optimiste,2038,278.32,3.927,485.63,6.852,274.04,279.63,1.1,-2.41,194,771.2,96.17,41.01,48.11,25.6,55.67,11.76,simule
 Philippe (Horizons)|Optimiste|2039,Philippe (Horizons),Optimiste,2039,272.18,3.835,478.59,6.744,271.68,273.48,1.02,-2.33,184.5,858.8,94.1,39.99,47.33,25.09,54.18,11.48,simule
@@ -1594,31 +1594,31 @@ Philippe (Horizons)|Optimiste|2045,Philippe (Horizons),Optimiste,2045,236.48,3.3
 Philippe (Horizons)|Optimiste|2046,Philippe (Horizons),Optimiste,2046,230.77,3.234,427.29,5.988,251.85,232.05,0.55,-1.83,118.0,1571.2,80.04,33.36,41.51,21.57,44.66,9.63,simule
 Philippe (Horizons)|Optimiste|2047,Philippe (Horizons),Optimiste,2047,225.25,3.155,420.16,5.886,248.92,226.54,0.48,-1.78,108.5,1687.9,78.14,32.49,40.7,21.09,43.43,9.39,simule
 Philippe (Horizons)|Optimiste|2048,Philippe (Horizons),Optimiste,2048,219.82,3.078,413.04,5.784,245.94,221.12,0.42,-1.73,99.0,1808.8,76.28,31.64,39.9,20.62,42.23,9.15,simule
-Philippe (Horizons)|Optimiste|2049,Philippe (Horizons),Optimiste,2049,214.53,3.004,406.13,5.686,243.04,215.83,0.38,-1.68,89.5,1933.8,74.47,30.81,39.11,20.16,41.05,8.92,simule
+Philippe (Horizons)|Optimiste|2049,Philippe (Horizons),Optimiste,2049,214.53,3.004,406.13,5.686,243.04,215.83,0.38,-1.68,89.5,1933.8,74.47,30.81,39.12,20.16,41.05,8.92,simule
 Philippe (Horizons)|Optimiste|2050,Philippe (Horizons),Optimiste,2050,209.33,2.93,399.23,5.588,240.09,210.61,0.35,-1.63,80.0,2063.1,72.68,30.0,38.33,19.71,39.91,8.69,simule
 Philippe (Horizons)|Optimiste|2051,Philippe (Horizons),Optimiste,2051,204.18,2.858,392.23,5.49,237.01,205.44,0.32,-1.58,80.0,2187.3,70.91,29.21,37.54,19.26,38.8,8.47,simule
-Philippe (Horizons)|Optimiste|2052,Philippe (Horizons),Optimiste,2052,199.17,2.788,385.45,5.395,234.04,200.43,0.29,-1.54,80.0,2306.5,69.19,28.43,36.77,18.82,37.71,8.25,simule
+Philippe (Horizons)|Optimiste|2052,Philippe (Horizons),Optimiste,2052,199.18,2.788,385.45,5.395,234.04,200.43,0.29,-1.54,80.0,2306.5,69.19,28.43,36.77,18.82,37.71,8.25,simule
 Philippe (Horizons)|Optimiste|2053,Philippe (Horizons),Optimiste,2053,194.3,2.72,378.85,5.303,231.14,195.54,0.26,-1.5,80.0,2420.8,67.51,27.68,36.03,18.39,36.65,8.04,simule
 Philippe (Horizons)|Optimiste|2054,Philippe (Horizons),Optimiste,2054,189.58,2.654,372.5,5.215,228.38,190.81,0.22,-1.46,80.0,2530.4,65.89,26.95,35.32,17.98,35.62,7.83,simule
 Philippe (Horizons)|Optimiste|2055,Philippe (Horizons),Optimiste,2055,184.99,2.59,366.35,5.13,225.72,186.2,0.21,-1.41,80.0,2635.3,64.31,26.23,34.63,17.58,34.62,7.63,simule
 Philippe (Horizons)|Optimiste|2056,Philippe (Horizons),Optimiste,2056,180.5,2.528,360.3,5.047,223.08,181.68,0.2,-1.37,80.0,2735.8,62.76,25.53,33.95,17.18,33.64,7.43,simule
 Philippe (Horizons)|Optimiste|2057,Philippe (Horizons),Optimiste,2057,176.15,2.468,354.48,4.967,220.57,177.28,0.21,-1.34,80.0,2832.0,61.27,24.85,33.3,16.8,32.68,7.24,simule
 Philippe (Horizons)|Optimiste|2058,Philippe (Horizons),Optimiste,2058,171.9,2.41,348.77,4.89,218.09,172.99,0.21,-1.3,80.0,2923.9,59.8,24.19,32.67,16.43,31.75,7.05,simule
-Philippe (Horizons)|Optimiste|2059,Philippe (Horizons),Optimiste,2059,167.78,2.354,343.26,4.815,215.71,168.83,0.22,-1.26,80.0,3011.7,58.38,23.55,32.06,16.08,30.84,6.87,simule
+Philippe (Horizons)|Optimiste|2059,Philippe (Horizons),Optimiste,2059,167.78,2.354,343.27,4.815,215.71,168.83,0.22,-1.26,80.0,3011.7,58.38,23.55,32.06,16.08,30.84,6.87,simule
 Philippe (Horizons)|Optimiste|2060,Philippe (Horizons),Optimiste,2060,163.76,2.299,337.88,4.742,213.38,164.76,0.23,-1.23,80.0,3095.4,57.0,22.92,31.46,15.72,29.96,6.7,simule
 Philippe (Horizons)|Optimiste|2061,Philippe (Horizons),Optimiste,2061,159.78,2.244,332.37,4.668,210.9,160.74,0.24,-1.19,80.0,3175.2,55.63,22.3,30.85,15.37,29.11,6.52,simule
 Philippe (Horizons)|Optimiste|2062,Philippe (Horizons),Optimiste,2062,155.9,2.191,326.99,4.595,208.47,156.82,0.24,-1.16,80.0,3251.1,54.28,21.71,30.25,15.03,28.27,6.35,simule
 Philippe (Horizons)|Optimiste|2063,Philippe (Horizons),Optimiste,2063,152.12,2.139,321.75,4.525,206.1,153.0,0.25,-1.13,80.0,3323.2,52.98,21.12,29.67,14.7,27.46,6.19,simule
 Philippe (Horizons)|Optimiste|2064,Philippe (Horizons),Optimiste,2064,148.44,2.089,316.59,4.455,203.75,149.28,0.25,-1.1,80.0,3391.7,51.71,20.56,29.1,14.37,26.68,6.03,simule
-Philippe (Horizons)|Optimiste|2065,Philippe (Horizons),Optimiste,2065,144.85,2.039,311.54,4.386,201.42,145.65,0.26,-1.06,80.0,3456.5,50.47,20.01,28.54,14.05,25.91,5.87,simule
+Philippe (Horizons)|Optimiste|2065,Philippe (Horizons),Optimiste,2065,144.85,2.039,311.54,4.387,201.42,145.65,0.26,-1.06,80.0,3456.5,50.47,20.01,28.54,14.05,25.91,5.87,simule
 Philippe (Horizons)|Optimiste|2066,Philippe (Horizons),Optimiste,2066,141.29,1.991,306.38,4.316,198.97,142.06,0.26,-1.04,80.0,3517.8,49.23,19.47,27.96,13.73,25.17,5.72,simule
 Philippe (Horizons)|Optimiste|2067,Philippe (Horizons),Optimiste,2067,137.83,1.943,301.34,4.248,196.56,138.58,0.26,-1.01,80.0,3575.7,48.04,18.95,27.41,13.42,24.46,5.57,simule
 Philippe (Horizons)|Optimiste|2068,Philippe (Horizons),Optimiste,2068,134.48,1.897,296.46,4.181,194.23,135.19,0.26,-0.98,80.0,3630.1,46.87,18.44,26.87,13.12,23.76,5.43,simule
 Philippe (Horizons)|Optimiste|2069,Philippe (Horizons),Optimiste,2069,131.21,1.851,291.67,4.116,191.92,131.89,0.27,-0.95,80.0,3681.3,45.74,17.94,26.33,12.82,23.08,5.29,simule
 Philippe (Horizons)|Optimiste|2070,Philippe (Horizons),Optimiste,2070,128.01,1.807,286.93,4.051,189.61,128.67,0.27,-0.92,80.0,3729.4,44.63,17.46,25.81,12.53,22.43,5.15,simule
-Philippe (Horizons)|Optimiste|2071,Philippe (Horizons),Optimiste,2071,124.94,1.764,282.44,3.988,187.46,125.54,0.3,-0.9,80.0,3774.3,43.57,17.0,25.31,12.25,21.79,5.02,simule
-Philippe (Horizons)|Optimiste|2072,Philippe (Horizons),Optimiste,2072,121.97,1.723,278.09,3.928,185.37,122.51,0.34,-0.87,80.0,3816.3,42.53,16.55,24.83,11.99,21.18,4.89,simule
-Philippe (Horizons)|Optimiste|2073,Philippe (Horizons),Optimiste,2073,119.08,1.682,273.84,3.868,183.31,119.55,0.37,-0.85,80.0,3855.3,41.53,16.12,24.36,11.72,20.58,4.76,simule
+Philippe (Horizons)|Optimiste|2071,Philippe (Horizons),Optimiste,2071,124.95,1.764,282.44,3.988,187.46,125.54,0.3,-0.9,80.0,3774.3,43.57,17.0,25.31,12.25,21.79,5.02,simule
+Philippe (Horizons)|Optimiste|2072,Philippe (Horizons),Optimiste,2072,121.97,1.723,278.1,3.928,185.37,122.51,0.34,-0.87,80.0,3816.3,42.53,16.55,24.83,11.99,21.18,4.89,simule
+Philippe (Horizons)|Optimiste|2073,Philippe (Horizons),Optimiste,2073,119.08,1.682,273.84,3.868,183.32,119.55,0.37,-0.85,80.0,3855.4,41.53,16.12,24.36,11.72,20.58,4.76,simule
 Retailleau (Les Républicains)|Crise|2029,Retailleau (Les Républicains),Crise,2029,334.13,4.818,534.26,7.704,280.26,333.22,0.31,0.6,262,72.1,114.46,50.65,54.68,29.73,70.36,14.26,simule
 Retailleau (Les Républicains)|Crise|2030,Retailleau (Les Républicains),Crise,2030,328.34,4.735,526.6,7.594,276.99,327.08,0.18,1.07,262,138.5,112.3,49.84,53.6,29.52,69.08,13.99,simule
 Retailleau (Les Républicains)|Crise|2031,Retailleau (Les Républicains),Crise,2031,322.63,4.656,519.15,7.491,273.88,320.99,0.11,1.54,262,199.1,110.17,49.02,52.57,29.33,67.8,13.73,simule
@@ -1996,16 +1996,16 @@ Tondelier (Les Écologistes)|Crise|2042,Tondelier (Les Écologistes),Crise,2042,
 Tondelier (Les Écologistes)|Crise|2043,Tondelier (Les Écologistes),Crise,2043,257.87,3.788,444.36,6.527,248.32,263.23,-5.01,-0.35,146.5,1225.5,87.74,36.88,40.82,28.5,52.95,10.98,simule
 Tondelier (Les Écologistes)|Crise|2044,Tondelier (Les Écologistes),Crise,2044,253.78,3.737,439.2,6.467,246.27,258.52,-5.07,0.34,137.0,1342.3,86.19,36.23,40.01,28.72,51.87,10.77,simule
 Tondelier (Les Écologistes)|Crise|2045,Tondelier (Les Écologistes),Crise,2045,249.74,3.686,434.03,6.407,244.18,253.83,-5.12,1.03,127.5,1464.6,84.64,35.58,39.21,28.93,50.81,10.56,simule
-Tondelier (Les Écologistes)|Crise|2046,Tondelier (Les Écologistes),Crise,2046,245.43,3.632,428.39,6.34,241.81,249.07,-5.15,1.52,118.0,1592.0,83.02,34.78,38.37,29.14,49.77,10.35,simule
-Tondelier (Les Écologistes)|Crise|2047,Tondelier (Les Écologistes),Crise,2047,241.23,3.579,422.88,6.275,239.5,244.4,-5.18,2.02,108.5,1724.7,81.44,34.0,37.56,29.35,48.74,10.15,simule
+Tondelier (Les Écologistes)|Crise|2046,Tondelier (Les Écologistes),Crise,2046,245.44,3.632,428.4,6.34,241.81,249.07,-5.15,1.52,118.0,1592.0,83.02,34.78,38.37,29.14,49.77,10.35,simule
+Tondelier (Les Écologistes)|Crise|2047,Tondelier (Les Écologistes),Crise,2047,241.23,3.579,422.89,6.275,239.5,244.4,-5.18,2.02,108.5,1724.7,81.44,34.0,37.56,29.35,48.74,10.15,simule
 Tondelier (Les Écologistes)|Crise|2048,Tondelier (Les Écologistes),Crise,2048,236.56,3.52,416.84,6.202,237.01,239.72,-5.21,2.04,99.0,1862.3,79.84,33.23,36.86,28.94,47.73,9.95,simule
 Tondelier (Les Écologistes)|Crise|2049,Tondelier (Les Écologistes),Crise,2049,231.93,3.461,410.77,6.129,234.45,235.08,-5.23,2.08,89.5,2004.7,78.26,32.47,36.17,28.54,46.74,9.74,simule
 Tondelier (Les Écologistes)|Crise|2050,Tondelier (Les Écologistes),Crise,2050,227.33,3.402,404.64,6.055,231.82,230.46,-5.23,2.11,80.0,2152.0,76.69,31.73,35.47,28.13,45.76,9.55,simule
 Tondelier (Les Écologistes)|Crise|2051,Tondelier (Les Écologistes),Crise,2051,222.8,3.344,398.36,5.979,228.98,225.82,-5.24,2.21,80.0,2294.8,75.11,31.06,34.75,27.72,44.8,9.35,simule
-Tondelier (Les Écologistes)|Crise|2052,Tondelier (Les Écologistes),Crise,2052,218.32,3.287,392.08,5.903,226.11,221.24,-5.24,2.32,80.0,2433.2,73.55,30.41,34.03,27.31,43.86,9.15,simule
+Tondelier (Les Écologistes)|Crise|2052,Tondelier (Les Écologistes),Crise,2052,218.32,3.287,392.08,5.903,226.12,221.24,-5.24,2.32,80.0,2433.2,73.55,30.41,34.03,27.31,43.86,9.15,simule
 Tondelier (Les Écologistes)|Crise|2053,Tondelier (Les Écologistes),Crise,2053,213.95,3.231,386.01,5.83,223.36,216.68,-5.15,2.42,80.0,2567.1,72.03,29.76,33.34,26.92,42.93,8.96,simule
 Tondelier (Les Écologistes)|Crise|2054,Tondelier (Les Écologistes),Crise,2054,209.64,3.177,379.98,5.758,220.61,212.19,-5.07,2.52,80.0,2696.7,70.53,29.13,32.66,26.53,42.02,8.77,simule
-Tondelier (Les Écologistes)|Crise|2055,Tondelier (Les Écologistes),Crise,2055,205.36,3.123,373.91,5.686,217.79,207.72,-4.98,2.62,80.0,2822.1,69.04,28.51,31.97,26.14,41.11,8.59,simule
+Tondelier (Les Écologistes)|Crise|2055,Tondelier (Les Écologistes),Crise,2055,205.36,3.123,373.91,5.686,217.79,207.72,-4.97,2.62,80.0,2822.1,69.04,28.51,31.97,26.14,41.11,8.59,simule
 Tondelier (Les Écologistes)|Crise|2056,Tondelier (Les Écologistes),Crise,2056,201.09,3.069,367.71,5.612,214.84,203.25,-4.87,2.71,80.0,2943.2,67.55,27.88,31.27,25.75,40.23,8.4,simule
 Tondelier (Les Écologistes)|Crise|2057,Tondelier (Les Écologistes),Crise,2057,196.91,3.017,361.67,5.541,211.97,198.87,-4.77,2.81,80.0,3060.1,66.1,27.28,30.6,25.37,39.35,8.22,simule
 Tondelier (Les Écologistes)|Crise|2058,Tondelier (Les Écologistes),Crise,2058,192.8,2.966,355.71,5.472,209.14,194.58,-4.68,2.9,80.0,3172.9,64.66,26.68,29.94,25.0,38.49,8.04,simule
@@ -2020,7 +2020,7 @@ Tondelier (Les Écologistes)|Crise|2066,Tondelier (Les Écologistes),Crise,2066,
 Tondelier (Les Écologistes)|Crise|2067,Tondelier (Les Écologistes),Crise,2067,158.71,2.547,305.01,4.895,184.35,158.9,-3.87,3.67,80.0,4014.2,52.79,21.69,24.46,21.9,31.31,6.56,simule
 Tondelier (Les Écologistes)|Crise|2068,Tondelier (Les Écologistes),Crise,2068,155.24,2.504,299.7,4.835,181.68,155.27,-3.78,3.75,80.0,4089.4,51.58,21.18,23.9,21.58,30.58,6.41,simule
 Tondelier (Les Écologistes)|Crise|2069,Tondelier (Les Écologistes),Crise,2069,151.84,2.463,294.43,4.775,179.0,151.71,-3.7,3.83,80.0,4161.2,50.39,20.69,23.35,21.27,29.87,6.26,simule
-Tondelier (Les Écologistes)|Crise|2070,Tondelier (Les Écologistes),Crise,2070,148.49,2.421,289.2,4.716,176.32,148.21,-3.62,3.9,80.0,4229.7,49.22,20.2,22.81,20.97,29.17,6.12,simule
+Tondelier (Les Écologistes)|Crise|2070,Tondelier (Les Écologistes),Crise,2070,148.49,2.421,289.21,4.716,176.32,148.21,-3.62,3.9,80.0,4229.7,49.22,20.2,22.81,20.97,29.17,6.12,simule
 Tondelier (Les Écologistes)|Crise|2071,Tondelier (Les Écologistes),Crise,2071,145.33,2.381,284.31,4.658,173.83,144.88,-3.53,3.98,80.0,4295.1,48.12,19.74,22.3,20.68,28.51,5.98,simule
 Tondelier (Les Écologistes)|Crise|2072,Tondelier (Les Écologistes),Crise,2072,142.27,2.341,279.57,4.601,171.42,141.66,-3.44,4.05,80.0,4357.3,47.05,19.29,21.8,20.4,27.87,5.85,simule
 Tondelier (Les Écologistes)|Crise|2073,Tondelier (Les Écologistes),Crise,2073,139.3,2.302,274.96,4.545,169.07,138.53,-3.35,4.12,80.0,4416.6,46.02,18.86,21.32,20.13,27.25,5.72,simule
@@ -2034,13 +2034,13 @@ Tondelier (Les Écologistes)|Prudent|2035,Tondelier (Les Écologistes),Prudent,2
 Tondelier (Les Écologistes)|Prudent|2036,Tondelier (Les Écologistes),Prudent,2036,284.62,4.08,491.63,7.047,275.26,295.11,-2.03,-8.46,194,556.2,98.69,41.02,46.3,26.74,59.43,12.44,simule
 Tondelier (Les Écologistes)|Prudent|2037,Tondelier (Les Écologistes),Prudent,2037,279.3,4.003,487.03,6.981,274.7,289.93,-2.26,-8.37,194,641.5,96.9,40.24,45.34,26.61,58.01,12.2,simule
 Tondelier (Les Écologistes)|Prudent|2038,Tondelier (Les Écologistes),Prudent,2038,274.24,3.931,482.71,6.919,274.23,284.79,-2.4,-8.15,194,721.7,95.15,39.48,44.42,26.5,56.73,11.96,simule
-Tondelier (Les Écologistes)|Prudent|2039,Tondelier (Les Écologistes),Prudent,2039,269.19,3.859,478.26,6.856,273.62,279.63,-2.52,-7.92,184.5,806.4,93.4,38.72,43.5,26.39,55.47,11.72,simule
-Tondelier (Les Écologistes)|Prudent|2040,Tondelier (Les Écologistes),Prudent,2040,264.3,3.79,474.08,6.799,273.15,274.6,-2.61,-7.68,175.0,895.7,91.7,37.97,42.62,26.29,54.23,11.49,simule
+Tondelier (Les Écologistes)|Prudent|2039,Tondelier (Les Écologistes),Prudent,2039,269.2,3.859,478.27,6.856,273.62,279.63,-2.52,-7.92,184.5,806.4,93.4,38.72,43.5,26.39,55.47,11.72,simule
+Tondelier (Les Écologistes)|Prudent|2040,Tondelier (Les Écologistes),Prudent,2040,264.31,3.79,474.08,6.799,273.15,274.6,-2.61,-7.68,175.0,895.7,91.7,37.97,42.62,26.29,54.23,11.49,simule
 Tondelier (Les Écologistes)|Prudent|2041,Tondelier (Les Écologistes),Prudent,2041,259.34,3.721,469.29,6.733,272.13,269.39,-2.69,-7.35,165.5,989.6,90.01,37.22,41.67,26.16,53.02,11.26,simule
 Tondelier (Les Écologistes)|Prudent|2042,Tondelier (Les Écologistes),Prudent,2042,254.43,3.652,464.44,6.667,271.02,264.2,-2.75,-7.02,156.0,1088.0,88.34,36.48,40.73,26.04,51.82,11.03,simule
 Tondelier (Les Écologistes)|Prudent|2043,Tondelier (Les Écologistes),Prudent,2043,249.51,3.584,459.38,6.599,269.7,259.0,-2.82,-6.68,146.5,1191.0,86.65,35.74,39.78,25.9,50.64,10.79,simule
-Tondelier (Les Écologistes)|Prudent|2044,Tondelier (Les Écologistes),Prudent,2044,244.7,3.518,454.45,6.534,268.43,253.9,-2.86,-6.34,137.0,1298.7,85.0,35.01,38.85,25.78,49.49,10.57,simule
-Tondelier (Les Écologistes)|Prudent|2045,Tondelier (Les Écologistes),Prudent,2045,239.97,3.453,449.55,6.469,267.12,248.86,-2.9,-5.99,127.5,1411.2,83.37,34.29,37.94,25.66,48.35,10.34,simule
+Tondelier (Les Écologistes)|Prudent|2044,Tondelier (Les Écologistes),Prudent,2044,244.7,3.518,454.46,6.534,268.43,253.9,-2.86,-6.34,137.0,1298.7,85.0,35.01,38.85,25.78,49.49,10.57,simule
+Tondelier (Les Écologistes)|Prudent|2045,Tondelier (Les Écologistes),Prudent,2045,239.97,3.453,449.55,6.469,267.12,248.86,-2.89,-5.99,127.5,1411.2,83.37,34.29,37.94,25.66,48.35,10.34,simule
 Tondelier (Les Écologistes)|Prudent|2046,Tondelier (Les Écologistes),Prudent,2046,235.02,3.386,444.2,6.399,265.53,243.78,-2.92,-5.85,118.0,1528.2,81.67,33.44,37.01,25.54,47.24,10.12,simule
 Tondelier (Les Écologistes)|Prudent|2047,Tondelier (Les Écologistes),Prudent,2047,230.2,3.32,439.03,6.331,264.03,238.83,-2.94,-5.69,108.5,1649.9,80.0,32.6,36.12,25.42,46.15,9.9,simule
 Tondelier (Les Écologistes)|Prudent|2048,Tondelier (Les Écologistes),Prudent,2048,225.4,3.254,433.78,6.263,262.43,233.92,-2.95,-5.57,99.0,1776.3,78.35,31.79,35.48,25.0,45.08,9.69,simule
@@ -2049,71 +2049,71 @@ Tondelier (Les Écologistes)|Prudent|2050,Tondelier (Les Écologistes),Prudent,2
 Tondelier (Les Écologistes)|Prudent|2051,Tondelier (Les Écologistes),Prudent,2051,211.47,3.065,418.0,6.059,257.24,219.52,-2.93,-5.13,80.0,2175.0,73.53,29.53,33.58,23.76,42.0,9.07,simule
 Tondelier (Les Écologistes)|Prudent|2052,Tondelier (Les Écologistes),Prudent,2052,206.98,3.005,412.69,5.991,255.34,214.82,-2.91,-4.93,80.0,2302.0,71.95,28.86,32.94,23.35,41.01,8.87,simule
 Tondelier (Les Écologistes)|Prudent|2053,Tondelier (Les Écologistes),Prudent,2053,202.6,2.946,407.52,5.926,253.5,210.19,-2.85,-4.73,80.0,2424.6,70.41,28.2,32.32,22.96,40.04,8.67,simule
-Tondelier (Les Écologistes)|Prudent|2054,Tondelier (Les Écologistes),Prudent,2054,198.31,2.889,402.45,5.862,251.69,205.65,-2.8,-4.54,80.0,2542.9,68.9,27.56,31.71,22.57,39.09,8.47,simule
+Tondelier (Les Écologistes)|Prudent|2054,Tondelier (Les Écologistes),Prudent,2054,198.31,2.889,402.45,5.862,251.69,205.65,-2.79,-4.54,80.0,2542.9,68.9,27.56,31.71,22.57,39.09,8.47,simule
 Tondelier (Les Écologistes)|Prudent|2055,Tondelier (Les Écologistes),Prudent,2055,194.11,2.833,397.48,5.8,249.91,201.19,-2.73,-4.35,80.0,2657.0,67.43,26.93,31.12,22.19,38.16,8.28,simule
 Tondelier (Les Écologistes)|Prudent|2056,Tondelier (Les Écologistes),Prudent,2056,189.96,2.778,392.5,5.739,248.09,196.78,-2.65,-4.17,80.0,2767.0,65.97,26.3,30.53,21.81,37.25,8.1,simule
 Tondelier (Les Écologistes)|Prudent|2057,Tondelier (Les Écologistes),Prudent,2057,185.92,2.724,387.7,5.681,246.36,192.48,-2.57,-3.99,80.0,2872.9,64.55,25.7,29.96,21.45,36.35,7.91,simule
-Tondelier (Les Écologistes)|Prudent|2058,Tondelier (Les Écologistes),Prudent,2058,181.95,2.672,382.97,5.624,244.65,188.26,-2.5,-3.81,80.0,2974.8,63.16,25.1,29.41,21.09,35.47,7.74,simule
-Tondelier (Les Écologistes)|Prudent|2059,Tondelier (Les Écologistes),Prudent,2059,178.09,2.621,378.41,5.57,243.03,184.15,-2.42,-3.64,80.0,3072.9,61.8,24.52,28.87,20.74,34.61,7.56,simule
+Tondelier (Les Écologistes)|Prudent|2058,Tondelier (Les Écologistes),Prudent,2058,181.96,2.672,382.97,5.624,244.65,188.26,-2.49,-3.81,80.0,2974.8,63.16,25.1,29.41,21.09,35.47,7.74,simule
+Tondelier (Les Écologistes)|Prudent|2059,Tondelier (Les Écologistes),Prudent,2059,178.09,2.621,378.42,5.57,243.03,184.15,-2.42,-3.64,80.0,3072.9,61.8,24.52,28.87,20.74,34.61,7.56,simule
 Tondelier (Les Écologistes)|Prudent|2060,Tondelier (Les Écologistes),Prudent,2060,174.31,2.572,373.94,5.518,241.43,180.13,-2.34,-3.47,80.0,3167.2,60.47,23.94,28.35,20.4,33.76,7.39,simule
 Tondelier (Les Écologistes)|Prudent|2061,Tondelier (Les Écologistes),Prudent,2061,170.53,2.523,369.27,5.463,239.63,176.11,-2.27,-3.31,80.0,3257.8,59.14,23.38,27.81,20.05,32.93,7.22,simule
 Tondelier (Les Écologistes)|Prudent|2062,Tondelier (Les Écologistes),Prudent,2062,166.83,2.475,364.7,5.41,237.87,172.18,-2.2,-3.15,80.0,3344.6,57.84,22.83,27.28,19.72,32.12,7.05,simule
 Tondelier (Les Écologistes)|Prudent|2063,Tondelier (Les Écologistes),Prudent,2063,163.22,2.428,360.24,5.358,236.15,168.35,-2.14,-2.99,80.0,3427.8,56.57,22.28,26.76,19.39,31.32,6.89,simule
-Tondelier (Les Écologistes)|Prudent|2064,Tondelier (Les Écologistes),Prudent,2064,159.68,2.382,355.83,5.307,234.43,164.59,-2.07,-2.84,80.0,3507.5,55.33,21.75,26.26,19.07,30.55,6.73,simule
-Tondelier (Les Écologistes)|Prudent|2065,Tondelier (Les Écologistes),Prudent,2065,156.22,2.337,351.48,5.257,232.73,160.9,-2.0,-2.68,80.0,3583.7,54.1,21.24,25.76,18.75,29.79,6.58,simule
+Tondelier (Les Écologistes)|Prudent|2064,Tondelier (Les Écologistes),Prudent,2064,159.68,2.382,355.83,5.307,234.44,164.59,-2.07,-2.84,80.0,3507.5,55.33,21.75,26.26,19.07,30.55,6.73,simule
+Tondelier (Les Écologistes)|Prudent|2065,Tondelier (Les Écologistes),Prudent,2065,156.22,2.337,351.49,5.257,232.73,160.9,-2.0,-2.68,80.0,3583.7,54.1,21.24,25.76,18.75,29.79,6.58,simule
 Tondelier (Les Écologistes)|Prudent|2066,Tondelier (Les Écologistes),Prudent,2066,152.77,2.292,347.0,5.205,230.86,157.25,-1.94,-2.54,80.0,3656.5,52.89,20.73,25.25,18.43,29.05,6.42,simule
-Tondelier (Les Écologistes)|Prudent|2067,Tondelier (Les Écologistes),Prudent,2067,149.41,2.248,342.61,5.154,229.03,153.67,-1.87,-2.39,80.0,3725.9,51.7,20.23,24.75,18.13,28.32,6.27,simule
+Tondelier (Les Écologistes)|Prudent|2067,Tondelier (Les Écologistes),Prudent,2067,149.41,2.248,342.61,5.154,229.03,153.67,-1.87,-2.39,80.0,3725.9,51.71,20.23,24.75,18.13,28.32,6.27,simule
 Tondelier (Les Écologistes)|Prudent|2068,Tondelier (Les Écologistes),Prudent,2068,146.14,2.205,338.36,5.105,227.26,150.2,-1.81,-2.25,80.0,3792.0,50.55,19.74,24.27,17.82,27.62,6.13,simule
-Tondelier (Les Écologistes)|Prudent|2069,Tondelier (Les Écologistes),Prudent,2069,142.93,2.163,334.14,5.057,225.49,146.79,-1.75,-2.12,80.0,3855.0,49.42,19.27,23.8,17.53,26.93,5.98,simule
-Tondelier (Les Écologistes)|Prudent|2070,Tondelier (Les Écologistes),Prudent,2070,139.78,2.122,329.94,5.008,223.68,143.45,-1.69,-1.98,80.0,3914.7,48.31,18.81,23.33,17.24,26.26,5.84,simule
+Tondelier (Les Écologistes)|Prudent|2069,Tondelier (Les Écologistes),Prudent,2069,142.93,2.163,334.15,5.057,225.49,146.79,-1.75,-2.12,80.0,3855.0,49.42,19.27,23.8,17.53,26.93,5.98,simule
+Tondelier (Les Écologistes)|Prudent|2070,Tondelier (Les Écologistes),Prudent,2070,139.78,2.122,329.95,5.008,223.68,143.45,-1.69,-1.98,80.0,3914.8,48.31,18.81,23.33,17.24,26.26,5.84,simule
 Tondelier (Les Écologistes)|Prudent|2071,Tondelier (Les Écologistes),Prudent,2071,136.77,2.081,325.99,4.961,222.01,140.23,-1.61,-1.85,80.0,3971.5,47.25,18.36,22.88,16.96,25.61,5.71,simule
 Tondelier (Les Écologistes)|Prudent|2072,Tondelier (Les Écologistes),Prudent,2072,133.84,2.042,322.14,4.914,220.39,137.1,-1.54,-1.72,80.0,4025.4,46.21,17.93,22.45,16.69,24.99,5.58,simule
-Tondelier (Les Écologistes)|Prudent|2073,Tondelier (Les Écologistes),Prudent,2073,130.99,2.003,318.39,4.869,218.8,134.05,-1.46,-1.59,80.0,4076.3,45.21,17.51,22.02,16.43,24.38,5.45,simule
+Tondelier (Les Écologistes)|Prudent|2073,Tondelier (Les Écologistes),Prudent,2073,130.99,2.003,318.39,4.869,218.81,134.05,-1.46,-1.59,80.0,4076.4,45.21,17.51,22.02,16.43,24.38,5.45,simule
 Tondelier (Les Écologistes)|Médian|2029,Tondelier (Les Écologistes),Médian,2029,327.58,4.716,529.19,7.619,280.15,333.49,0.26,-6.17,262,65.6,112.35,48.58,53.29,29.38,69.72,14.27,simule
 Tondelier (Les Écologistes)|Médian|2030,Tondelier (Les Écologistes),Médian,2030,318.93,4.587,522.98,7.522,280.53,327.41,0.55,-9.03,262,122.5,109.45,46.65,52.17,28.98,67.68,13.99,simule
 Tondelier (Les Écologistes)|Médian|2031,Tondelier (Les Écologistes),Médian,2031,310.89,4.468,516.76,7.426,280.41,321.45,0.55,-11.11,262,171.4,107.17,44.76,51.0,28.56,65.69,13.71,simule
 Tondelier (Les Écologistes)|Médian|2032,Tondelier (Les Écologistes),Médian,2032,303.0,4.351,510.54,7.331,280.19,315.62,0.46,-13.08,262,212.4,104.91,42.93,49.84,28.13,63.75,13.43,simule
 Tondelier (Les Écologistes)|Médian|2033,Tondelier (Les Écologistes),Médian,2033,295.69,4.243,504.03,7.233,279.24,309.9,0.0,-14.21,262,246.1,102.69,41.74,48.59,27.66,61.86,13.15,simule
-Tondelier (Les Écologistes)|Médian|2034,Tondelier (Les Écologistes),Médian,2034,288.93,4.144,498.24,7.147,278.59,304.3,-0.33,-15.04,194,341.0,100.57,40.83,47.43,27.21,60.02,12.87,simule
-Tondelier (Les Écologistes)|Médian|2035,Tondelier (Les Écologistes),Médian,2035,282.55,4.051,492.91,7.067,278.11,298.79,-0.58,-15.67,194,429.6,98.51,39.94,46.33,26.94,58.23,12.6,simule
+Tondelier (Les Écologistes)|Médian|2034,Tondelier (Les Écologistes),Médian,2034,288.93,4.144,498.24,7.147,278.6,304.3,-0.33,-15.04,194,341.0,100.57,40.83,47.43,27.21,60.02,12.87,simule
+Tondelier (Les Écologistes)|Médian|2035,Tondelier (Les Écologistes),Médian,2035,282.55,4.051,492.91,7.067,278.11,298.79,-0.57,-15.67,194,429.6,98.51,39.94,46.33,26.94,58.23,12.6,simule
 Tondelier (Les Écologistes)|Médian|2036,Tondelier (Les Écologistes),Médian,2036,276.52,3.964,488.0,6.995,277.78,293.38,-0.76,-16.11,194,512.1,96.66,39.07,45.3,26.68,56.47,12.34,simule
-Tondelier (Les Écologistes)|Médian|2037,Tondelier (Les Écologistes),Médian,2037,270.6,3.879,483.14,6.925,277.42,288.0,-0.89,-16.51,194,588.7,94.83,38.21,44.29,26.43,54.76,12.09,simule
+Tondelier (Les Écologistes)|Médian|2037,Tondelier (Les Écologistes),Médian,2037,270.6,3.879,483.14,6.925,277.43,288.0,-0.89,-16.51,194,588.7,94.83,38.21,44.29,26.43,54.76,12.09,simule
 Tondelier (Les Écologistes)|Médian|2038,Tondelier (Les Écologistes),Médian,2038,265.14,3.8,478.71,6.862,277.14,282.68,-0.96,-16.57,194,659.8,93.04,37.37,43.33,26.18,53.39,11.83,simule
 Tondelier (Les Écologistes)|Médian|2039,Tondelier (Les Écologistes),Médian,2039,259.46,3.72,473.39,6.787,276.14,277.09,-1.01,-16.62,184.5,734.8,91.15,36.52,42.27,25.9,52.05,11.58,simule
-Tondelier (Les Écologistes)|Médian|2040,Tondelier (Les Écologistes),Médian,2040,253.96,3.642,468.35,6.716,275.28,271.66,-1.05,-16.65,175.0,813.7,89.32,35.69,41.27,25.63,50.73,11.32,simule
+Tondelier (Les Écologistes)|Médian|2040,Tondelier (Les Écologistes),Médian,2040,253.96,3.642,468.35,6.716,275.28,271.66,-1.05,-16.65,175.0,813.8,89.32,35.69,41.27,25.63,50.73,11.32,simule
 Tondelier (Les Écologistes)|Médian|2041,Tondelier (Les Écologistes),Médian,2041,248.53,3.566,462.79,6.64,273.86,266.05,-1.08,-16.45,165.5,896.8,87.63,34.86,40.2,25.33,49.44,11.07,simule
 Tondelier (Les Écologistes)|Médian|2042,Tondelier (Les Écologistes),Médian,2042,243.16,3.491,457.19,6.563,272.34,260.5,-1.09,-16.25,156.0,983.9,85.95,34.04,39.14,25.03,48.17,10.82,simule
 Tondelier (Les Écologistes)|Médian|2043,Tondelier (Les Écologistes),Médian,2043,237.8,3.416,451.39,6.485,270.61,254.95,-1.11,-16.04,146.5,1075.2,84.25,33.23,38.08,24.73,46.93,10.57,simule
 Tondelier (Les Écologistes)|Médian|2044,Tondelier (Les Écologistes),Médian,2044,232.58,3.344,445.74,6.409,268.93,249.52,-1.12,-15.82,137.0,1170.8,82.59,32.44,37.06,24.43,45.72,10.33,simule
-Tondelier (Les Écologistes)|Médian|2045,Tondelier (Les Écologistes),Médian,2045,227.45,3.273,440.12,6.334,267.21,244.16,-1.12,-15.59,127.5,1270.8,80.95,31.66,36.06,24.14,44.53,10.09,simule
+Tondelier (Les Écologistes)|Médian|2045,Tondelier (Les Écologistes),Médian,2045,227.45,3.273,440.12,6.334,267.21,244.16,-1.12,-15.59,127.5,1270.8,80.95,31.66,36.06,24.15,44.53,10.09,simule
 Tondelier (Les Écologistes)|Médian|2046,Tondelier (Les Écologistes),Médian,2046,222.04,3.199,434.01,6.252,265.22,238.78,-1.12,-15.63,118.0,1374.8,79.2,30.72,35.05,23.85,43.37,9.85,simule
-Tondelier (Les Écologistes)|Médian|2047,Tondelier (Les Écologistes),Médian,2047,216.78,3.126,428.11,6.174,263.31,233.55,-1.11,-15.65,108.5,1483.1,77.49,29.79,34.07,23.56,42.24,9.62,simule
+Tondelier (Les Écologistes)|Médian|2047,Tondelier (Les Écologistes),Médian,2047,216.79,3.126,428.11,6.174,263.31,233.55,-1.11,-15.65,108.5,1483.1,77.49,29.79,34.07,23.56,42.24,9.62,simule
 Tondelier (Les Écologistes)|Médian|2048,Tondelier (Les Écologistes),Médian,2048,211.89,3.059,422.38,6.099,261.3,228.37,-1.11,-15.37,99.0,1596.0,75.8,28.9,33.53,23.13,41.13,9.4,simule
 Tondelier (Les Écologistes)|Médian|2049,Tondelier (Les Écologistes),Médian,2049,207.11,2.994,416.75,6.025,259.3,223.29,-1.09,-15.09,89.5,1713.6,74.15,28.04,33.0,22.7,40.05,9.17,simule
-Tondelier (Les Écologistes)|Médian|2050,Tondelier (Les Écologistes),Médian,2050,202.38,2.93,411.06,5.95,257.2,218.26,-1.06,-14.82,80.0,1836.0,72.51,27.19,32.46,22.27,39.0,8.95,simule
+Tondelier (Les Écologistes)|Médian|2050,Tondelier (Les Écologistes),Médian,2050,202.38,2.93,411.06,5.95,257.21,218.26,-1.06,-14.82,80.0,1836.0,72.51,27.19,32.46,22.27,39.0,8.95,simule
 Tondelier (Les Écologistes)|Médian|2051,Tondelier (Les Écologistes),Médian,2051,197.82,2.868,405.3,5.875,254.92,213.26,-1.04,-14.4,80.0,1953.8,70.87,26.52,31.89,21.84,37.96,8.74,simule
 Tondelier (Les Écologistes)|Médian|2052,Tondelier (Les Écologistes),Médian,2052,193.35,2.807,399.62,5.801,252.63,208.36,-1.01,-13.99,80.0,2067.1,69.26,25.85,31.33,21.42,36.96,8.53,simule
 Tondelier (Les Écologistes)|Médian|2053,Tondelier (Les Écologistes),Médian,2053,188.95,2.748,393.96,5.729,250.31,203.53,-0.98,-13.59,80.0,2176.1,67.68,25.21,30.77,21.0,35.97,8.32,simule
 Tondelier (Les Écologistes)|Médian|2054,Tondelier (Les Écologistes),Médian,2054,184.65,2.69,388.41,5.658,248.04,198.81,-0.95,-13.2,80.0,2280.7,66.14,24.57,30.23,20.6,35.01,8.12,simule
-Tondelier (Les Écologistes)|Médian|2055,Tondelier (Les Écologistes),Médian,2055,180.45,2.633,382.97,5.589,245.8,194.18,-0.91,-12.82,80.0,2381.2,64.62,23.95,29.69,20.2,34.07,7.92,simule
+Tondelier (Les Écologistes)|Médian|2055,Tondelier (Les Écologistes),Médian,2055,180.45,2.633,382.98,5.589,245.8,194.18,-0.91,-12.82,80.0,2381.2,64.62,23.95,29.69,20.2,34.07,7.92,simule
 Tondelier (Les Écologistes)|Médian|2056,Tondelier (Les Écologistes),Médian,2056,176.3,2.578,377.55,5.52,243.52,189.62,-0.87,-12.45,80.0,2477.5,63.13,23.34,29.16,19.81,33.15,7.72,simule
-Tondelier (Les Écologistes)|Médian|2057,Tondelier (Les Écologistes),Médian,2057,172.27,2.524,372.3,5.455,241.33,185.17,-0.81,-12.09,80.0,2569.8,61.68,22.74,28.64,19.42,32.25,7.53,simule
-Tondelier (Les Écologistes)|Médian|2058,Tondelier (Les Écologistes),Médian,2058,168.33,2.472,367.14,5.392,239.18,180.83,-0.76,-11.74,80.0,2658.1,60.26,22.16,28.14,19.05,31.37,7.35,simule
+Tondelier (Les Écologistes)|Médian|2057,Tondelier (Les Écologistes),Médian,2057,172.27,2.524,372.3,5.455,241.34,185.17,-0.81,-12.09,80.0,2569.8,61.68,22.74,28.64,19.42,32.25,7.53,simule
+Tondelier (Les Écologistes)|Médian|2058,Tondelier (Les Écologistes),Médian,2058,168.33,2.472,367.15,5.392,239.18,180.83,-0.76,-11.74,80.0,2658.1,60.26,22.16,28.14,19.05,31.37,7.35,simule
 Tondelier (Les Écologistes)|Médian|2059,Tondelier (Les Écologistes),Médian,2059,164.49,2.421,362.17,5.331,237.12,176.6,-0.72,-11.39,80.0,2742.6,58.88,21.59,27.66,18.69,30.51,7.16,simule
 Tondelier (Les Écologistes)|Médian|2060,Tondelier (Les Écologistes),Médian,2060,160.73,2.372,357.28,5.272,235.09,172.46,-0.67,-11.06,80.0,2823.3,57.53,21.04,27.18,18.33,29.67,6.99,simule
 Tondelier (Les Écologistes)|Médian|2061,Tondelier (Les Écologistes),Médian,2061,156.99,2.322,352.22,5.211,232.87,168.35,-0.63,-10.73,80.0,2900.3,56.18,20.49,26.69,17.98,28.85,6.81,simule
 Tondelier (Les Écologistes)|Médian|2062,Tondelier (Les Écologistes),Médian,2062,153.34,2.274,347.27,5.151,230.7,164.34,-0.58,-10.41,80.0,2973.6,54.87,19.96,26.2,17.63,28.05,6.64,simule
-Tondelier (Les Écologistes)|Médian|2063,Tondelier (Les Écologistes),Médian,2063,149.77,2.228,342.43,5.093,228.57,160.42,-0.54,-10.1,80.0,3043.4,53.58,19.43,25.73,17.29,27.27,6.47,simule
-Tondelier (Les Écologistes)|Médian|2064,Tondelier (Les Écologistes),Médian,2064,146.28,2.182,337.66,5.036,226.45,156.59,-0.51,-9.8,80.0,3109.7,52.32,18.92,25.27,16.95,26.51,6.31,simule
+Tondelier (Les Écologistes)|Médian|2063,Tondelier (Les Écologistes),Médian,2063,149.77,2.228,342.44,5.093,228.57,160.42,-0.54,-10.1,80.0,3043.4,53.58,19.43,25.73,17.29,27.27,6.47,simule
+Tondelier (Les Écologistes)|Médian|2064,Tondelier (Les Écologistes),Médian,2064,146.29,2.182,337.66,5.036,226.46,156.59,-0.51,-9.8,80.0,3109.7,52.32,18.93,25.27,16.95,26.51,6.31,simule
 Tondelier (Les Écologistes)|Médian|2065,Tondelier (Les Écologistes),Médian,2065,142.87,2.137,332.97,4.98,224.35,152.85,-0.47,-9.51,80.0,3172.6,51.09,18.43,24.81,16.62,25.77,6.15,simule
-Tondelier (Les Écologistes)|Médian|2066,Tondelier (Les Écologistes),Médian,2066,139.49,2.092,328.15,4.922,222.1,149.14,-0.43,-9.22,80.0,3232.1,49.87,17.94,24.34,16.3,25.05,5.99,simule
-Tondelier (Les Écologistes)|Médian|2067,Tondelier (Les Écologistes),Médian,2067,136.19,2.049,323.43,4.866,219.9,145.52,-0.39,-8.94,80.0,3288.2,48.68,17.47,23.88,15.98,24.34,5.84,simule
-Tondelier (Les Écologistes)|Médian|2068,Tondelier (Les Écologistes),Médian,2068,132.99,2.007,318.86,4.811,217.76,142.01,-0.35,-8.66,80.0,3341.2,47.52,17.01,23.44,15.67,23.66,5.69,simule
-Tondelier (Les Écologistes)|Médian|2069,Tondelier (Les Écologistes),Médian,2069,129.85,1.965,314.34,4.757,215.63,138.57,-0.32,-8.4,80.0,3391.1,46.39,16.56,23.0,15.36,23.0,5.55,simule
+Tondelier (Les Écologistes)|Médian|2066,Tondelier (Les Écologistes),Médian,2066,139.49,2.092,328.15,4.922,222.11,149.14,-0.43,-9.22,80.0,3232.1,49.87,17.94,24.34,16.3,25.05,5.99,simule
+Tondelier (Les Écologistes)|Médian|2067,Tondelier (Les Écologistes),Médian,2067,136.19,2.049,323.43,4.866,219.9,145.52,-0.39,-8.94,80.0,3288.3,48.68,17.47,23.88,15.98,24.34,5.84,simule
+Tondelier (Les Écologistes)|Médian|2068,Tondelier (Les Écologistes),Médian,2068,132.99,2.007,318.87,4.811,217.77,142.01,-0.35,-8.66,80.0,3341.2,47.52,17.01,23.44,15.67,23.66,5.69,simule
+Tondelier (Les Écologistes)|Médian|2069,Tondelier (Les Écologistes),Médian,2069,129.85,1.965,314.35,4.757,215.63,138.57,-0.32,-8.4,80.0,3391.1,46.39,16.56,23.0,15.36,23.0,5.55,simule
 Tondelier (Les Écologistes)|Médian|2070,Tondelier (Les Écologistes),Médian,2070,126.78,1.924,309.85,4.703,213.47,135.21,-0.29,-8.14,80.0,3437.9,45.28,16.12,22.56,15.06,22.35,5.41,simule
 Tondelier (Les Écologistes)|Médian|2071,Tondelier (Les Écologistes),Médian,2071,123.84,1.885,305.6,4.65,211.45,131.97,-0.24,-7.88,80.0,3481.7,44.22,15.7,22.15,14.78,21.74,5.27,simule
 Tondelier (Les Écologistes)|Médian|2072,Tondelier (Les Écologistes),Médian,2072,120.99,1.846,301.47,4.599,209.49,128.82,-0.19,-7.64,80.0,3522.7,43.19,15.29,21.74,14.5,21.14,5.14,simule
-Tondelier (Les Écologistes)|Médian|2073,Tondelier (Les Écologistes),Médian,2073,118.22,1.808,297.43,4.548,207.55,125.76,-0.14,-7.4,80.0,3560.9,42.18,14.89,21.35,14.23,20.56,5.01,simule
+Tondelier (Les Écologistes)|Médian|2073,Tondelier (Les Écologistes),Médian,2073,118.22,1.808,297.43,4.548,207.56,125.76,-0.14,-7.4,80.0,3560.9,42.18,14.89,21.35,14.23,20.56,5.01,simule
 Tondelier (Les Écologistes)|Optimiste|2029,Tondelier (Les Écologistes),Optimiste,2029,327.58,4.704,533.15,7.656,284.11,333.97,2.33,-8.71,262,65.6,112.17,48.45,53.47,29.69,69.44,14.35,simule
 Tondelier (Les Écologistes)|Optimiste|2030,Tondelier (Les Écologistes),Optimiste,2030,317.41,4.547,525.29,7.525,283.99,327.4,2.78,-12.77,262,121.0,108.6,46.29,52.1,29.28,67.08,14.06,simule
 Tondelier (Les Écologistes)|Optimiste|2031,Tondelier (Les Écologistes),Optimiste,2031,308.22,4.405,517.43,7.395,283.12,321.0,2.8,-15.58,262,167.2,106.02,44.18,50.64,28.82,64.8,13.76,simule
@@ -2123,41 +2123,41 @@ Tondelier (Les Écologistes)|Optimiste|2034,Tondelier (Les Écologistes),Optimis
 Tondelier (Les Écologistes)|Optimiste|2035,Tondelier (Les Écologistes),Optimiste,2035,276.21,3.916,488.04,6.919,278.06,296.76,1.85,-22.4,194,405.5,96.48,38.84,45.05,26.95,56.31,12.59,simule
 Tondelier (Les Écologistes)|Optimiste|2036,Tondelier (Les Écologistes),Optimiste,2036,269.31,3.811,481.63,6.816,276.89,291.0,1.63,-23.31,194,480.8,94.49,37.87,43.79,26.5,54.35,12.31,simule
 Tondelier (Les Écologistes)|Optimiste|2037,Tondelier (Les Écologistes),Optimiste,2037,262.59,3.71,475.33,6.716,275.71,285.27,1.47,-24.16,194,549.4,92.54,36.93,42.59,26.06,52.44,12.03,simule
-Tondelier (Les Écologistes)|Optimiste|2038,Tondelier (Les Écologistes),Optimiste,2038,256.49,3.619,469.54,6.625,274.55,279.63,1.34,-24.47,194,611.9,90.62,36.0,41.42,25.63,51.05,11.76,simule
+Tondelier (Les Écologistes)|Optimiste|2038,Tondelier (Les Écologistes),Optimiste,2038,256.5,3.619,469.55,6.625,274.55,279.63,1.34,-24.47,194,611.9,90.62,36.0,41.42,25.63,51.05,11.76,simule
 Tondelier (Les Écologistes)|Optimiste|2039,Tondelier (Les Écologistes),Optimiste,2039,249.96,3.522,462.16,6.512,272.13,273.48,1.23,-24.75,184.5,677.4,88.52,35.06,40.08,25.12,49.69,11.48,simule
 Tondelier (Les Écologistes)|Optimiste|2040,Tondelier (Les Écologistes),Optimiste,2040,243.65,3.429,455.11,6.406,269.88,267.5,1.14,-24.99,175.0,746.0,86.49,34.14,38.81,24.63,48.36,11.21,simule
 Tondelier (Les Écologistes)|Optimiste|2041,Tondelier (Les Écologistes),Optimiste,2041,237.56,3.34,447.72,6.295,267.12,261.39,1.07,-24.89,165.5,818.1,84.73,33.23,37.5,24.11,47.06,10.94,simule
-Tondelier (Les Écologistes)|Optimiste|2042,Tondelier (Les Écologistes),Optimiste,2042,231.58,3.253,440.34,6.186,264.29,255.34,1.01,-24.78,156.0,893.6,82.97,32.33,36.21,23.6,45.79,10.67,simule
+Tondelier (Les Écologistes)|Optimiste|2042,Tondelier (Les Écologistes),Optimiste,2042,231.58,3.253,440.35,6.186,264.3,255.34,1.01,-24.78,156.0,893.7,82.97,32.33,36.21,23.6,45.79,10.67,simule
 Tondelier (Les Écologistes)|Optimiste|2043,Tondelier (Les Écologistes),Optimiste,2043,225.65,3.167,432.84,6.076,261.3,249.34,0.96,-24.65,146.5,972.8,81.22,31.45,34.94,23.09,44.54,10.4,simule
-Tondelier (Les Écologistes)|Optimiste|2044,Tondelier (Les Écologistes),Optimiste,2044,219.88,3.085,425.56,5.97,258.41,243.48,0.92,-24.51,137.0,1055.7,79.5,30.6,33.72,22.59,43.33,10.14,simule
-Tondelier (Les Écologistes)|Optimiste|2045,Tondelier (Les Écologistes),Optimiste,2045,214.27,3.004,418.45,5.867,255.56,237.74,0.88,-24.36,127.5,1142.4,77.82,29.76,32.56,22.1,42.14,9.89,simule
+Tondelier (Les Écologistes)|Optimiste|2044,Tondelier (Les Écologistes),Optimiste,2044,219.88,3.085,425.57,5.97,258.41,243.48,0.92,-24.51,137.0,1055.7,79.5,30.6,33.72,22.59,43.33,10.14,simule
+Tondelier (Les Écologistes)|Optimiste|2045,Tondelier (Les Écologistes),Optimiste,2045,214.27,3.004,418.46,5.867,255.57,237.74,0.88,-24.36,127.5,1142.5,77.82,29.76,32.56,22.1,42.14,9.89,simule
 Tondelier (Les Écologistes)|Optimiste|2046,Tondelier (Les Écologistes),Optimiste,2046,208.38,2.92,410.97,5.759,252.56,232.05,0.85,-24.52,118.0,1232.8,76.0,28.75,31.4,21.61,40.98,9.64,simule
-Tondelier (Les Écologistes)|Optimiste|2047,Tondelier (Les Écologistes),Optimiste,2047,202.71,2.84,403.82,5.657,249.72,226.54,0.82,-24.66,108.5,1327.0,74.23,27.78,30.31,21.14,39.85,9.4,simule
-Tondelier (Les Écologistes)|Optimiste|2048,Tondelier (Les Écologistes),Optimiste,2048,197.74,2.769,397.19,5.562,246.86,221.12,0.8,-24.19,99.0,1425.8,72.5,26.85,29.81,20.68,38.75,9.16,simule
-Tondelier (Les Écologistes)|Optimiste|2049,Tondelier (Les Écologistes),Optimiste,2049,192.91,2.701,390.72,5.47,244.06,215.83,0.8,-23.72,89.5,1529.2,70.81,25.94,29.33,20.22,37.67,8.93,simule
-Tondelier (Les Écologistes)|Optimiste|2050,Tondelier (Les Écologistes),Optimiste,2050,188.16,2.634,384.25,5.379,241.21,210.61,0.81,-23.26,80.0,1637.3,69.14,25.06,28.85,19.78,36.62,8.7,simule
-Tondelier (Les Écologistes)|Optimiste|2051,Tondelier (Les Écologistes),Optimiste,2051,183.65,2.57,377.85,5.289,238.23,205.44,0.82,-22.61,80.0,1741.0,67.49,24.41,28.34,19.33,35.6,8.48,simule
+Tondelier (Les Écologistes)|Optimiste|2047,Tondelier (Les Écologistes),Optimiste,2047,202.71,2.84,403.83,5.657,249.72,226.54,0.82,-24.66,108.5,1327.0,74.23,27.78,30.31,21.14,39.85,9.4,simule
+Tondelier (Les Écologistes)|Optimiste|2048,Tondelier (Les Écologistes),Optimiste,2048,197.74,2.769,397.19,5.562,246.86,221.12,0.81,-24.19,99.0,1425.8,72.5,26.85,29.81,20.68,38.75,9.16,simule
+Tondelier (Les Écologistes)|Optimiste|2049,Tondelier (Les Écologistes),Optimiste,2049,192.91,2.701,390.72,5.47,244.07,215.83,0.8,-23.72,89.5,1529.2,70.81,25.94,29.33,20.22,37.67,8.93,simule
+Tondelier (Les Écologistes)|Optimiste|2050,Tondelier (Les Écologistes),Optimiste,2050,188.16,2.634,384.26,5.379,241.22,210.61,0.81,-23.26,80.0,1637.4,69.14,25.06,28.85,19.78,36.62,8.7,simule
+Tondelier (Les Écologistes)|Optimiste|2051,Tondelier (Les Écologistes),Optimiste,2051,183.65,2.57,377.85,5.289,238.24,205.44,0.82,-22.61,80.0,1741.0,67.49,24.41,28.34,19.33,35.6,8.48,simule
 Tondelier (Les Écologistes)|Optimiste|2052,Tondelier (Les Écologistes),Optimiste,2052,179.27,2.509,371.66,5.202,235.37,200.43,0.82,-21.98,80.0,1840.3,65.88,23.77,27.85,18.89,34.61,8.26,simule
-Tondelier (Les Écologistes)|Optimiste|2053,Tondelier (Les Écologistes),Optimiste,2053,175.01,2.45,365.64,5.118,232.59,195.54,0.83,-21.36,80.0,1935.3,64.32,23.15,27.38,18.47,33.64,8.05,simule
-Tondelier (Les Écologistes)|Optimiste|2054,Tondelier (Les Écologistes),Optimiste,2054,170.89,2.392,359.87,5.038,229.96,190.81,0.84,-20.76,80.0,2026.2,62.81,22.55,26.94,18.06,32.69,7.85,simule
+Tondelier (Les Écologistes)|Optimiste|2053,Tondelier (Les Écologistes),Optimiste,2053,175.01,2.45,365.64,5.118,232.6,195.54,0.83,-21.36,80.0,1935.3,64.32,23.15,27.38,18.47,33.64,8.05,simule
+Tondelier (Les Écologistes)|Optimiste|2054,Tondelier (Les Écologistes),Optimiste,2054,170.89,2.392,359.88,5.038,229.96,190.81,0.85,-20.76,80.0,2026.2,62.81,22.55,26.94,18.06,32.69,7.85,simule
 Tondelier (Les Écologistes)|Optimiste|2055,Tondelier (Les Écologistes),Optimiste,2055,166.88,2.337,354.29,4.961,227.42,186.2,0.87,-20.18,80.0,2113.1,61.34,21.96,26.51,17.67,31.77,7.65,simule
-Tondelier (Les Écologistes)|Optimiste|2056,Tondelier (Les Écologistes),Optimiste,2056,162.96,2.283,348.8,4.886,224.92,181.68,0.9,-19.62,80.0,2196.0,59.9,21.39,26.08,17.28,30.86,7.45,simule
+Tondelier (Les Écologistes)|Optimiste|2056,Tondelier (Les Écologistes),Optimiste,2056,162.96,2.283,348.81,4.886,224.92,181.68,0.91,-19.62,80.0,2196.0,59.9,21.39,26.08,17.28,30.86,7.45,simule
 Tondelier (Les Écologistes)|Optimiste|2057,Tondelier (Les Écologistes),Optimiste,2057,159.16,2.23,343.52,4.814,222.52,177.28,0.95,-19.07,80.0,2275.2,58.5,20.83,25.68,16.91,29.99,7.26,simule
 Tondelier (Les Écologistes)|Optimiste|2058,Tondelier (Les Écologistes),Optimiste,2058,155.45,2.179,338.35,4.744,220.17,172.99,1.0,-18.53,80.0,2350.6,57.14,20.28,25.28,16.54,29.13,7.07,simule
 Tondelier (Les Écologistes)|Optimiste|2059,Tondelier (Les Écologistes),Optimiste,2059,151.85,2.13,333.36,4.676,217.92,168.83,1.04,-18.02,80.0,2422.5,55.81,19.75,24.9,16.19,28.3,6.89,simule
-Tondelier (Les Écologistes)|Optimiste|2060,Tondelier (Les Écologistes),Optimiste,2060,148.33,2.082,328.46,4.61,215.7,164.76,1.08,-17.51,80.0,2490.8,54.52,19.23,24.53,15.84,27.49,6.72,simule
-Tondelier (Les Écologistes)|Optimiste|2061,Tondelier (Les Écologistes),Optimiste,2061,144.84,2.034,323.44,4.543,213.33,160.74,1.12,-17.02,80.0,2555.6,53.23,18.72,24.14,15.5,26.7,6.55,simule
+Tondelier (Les Écologistes)|Optimiste|2060,Tondelier (Les Écologistes),Optimiste,2060,148.33,2.082,328.47,4.61,215.7,164.76,1.08,-17.51,80.0,2490.8,54.52,19.23,24.53,15.84,27.49,6.72,simule
+Tondelier (Les Écologistes)|Optimiste|2061,Tondelier (Les Écologistes),Optimiste,2061,144.84,2.034,323.44,4.543,213.33,160.74,1.12,-17.02,80.0,2555.7,53.23,18.72,24.14,15.5,26.7,6.55,simule
 Tondelier (Les Écologistes)|Optimiste|2062,Tondelier (Les Écologistes),Optimiste,2062,141.43,1.988,318.53,4.476,211.01,156.82,1.16,-16.54,80.0,2617.1,51.98,18.23,23.75,15.16,25.94,6.38,simule
 Tondelier (Les Écologistes)|Optimiste|2063,Tondelier (Les Écologistes),Optimiste,2063,138.11,1.942,313.74,4.412,208.75,153.0,1.19,-16.08,80.0,2675.2,50.76,17.75,23.37,14.83,25.19,6.21,simule
-Tondelier (Les Écologistes)|Optimiste|2064,Tondelier (Les Écologistes),Optimiste,2064,134.87,1.898,309.02,4.348,206.49,149.28,1.22,-15.63,80.0,2730.1,49.57,17.28,23.0,14.5,24.47,6.05,simule
+Tondelier (Les Écologistes)|Optimiste|2064,Tondelier (Les Écologistes),Optimiste,2064,134.87,1.898,309.03,4.348,206.49,149.28,1.22,-15.63,80.0,2730.1,49.57,17.28,23.0,14.5,24.47,6.05,simule
 Tondelier (Les Écologistes)|Optimiste|2065,Tondelier (Les Écologistes),Optimiste,2065,131.71,1.854,304.38,4.286,204.26,145.65,1.25,-15.19,80.0,2781.8,48.4,16.82,22.63,14.19,23.77,5.9,simule
-Tondelier (Les Écologistes)|Optimiste|2066,Tondelier (Les Écologistes),Optimiste,2066,128.57,1.811,299.65,4.222,201.91,142.06,1.28,-14.77,80.0,2830.3,47.25,16.37,22.25,13.87,23.09,5.75,simule
+Tondelier (Les Écologistes)|Optimiste|2066,Tondelier (Les Écologistes),Optimiste,2066,128.57,1.811,299.65,4.222,201.91,142.06,1.28,-14.77,80.0,2830.4,47.25,16.37,22.25,13.87,23.09,5.75,simule
 Tondelier (Les Écologistes)|Optimiste|2067,Tondelier (Les Écologistes),Optimiste,2067,125.52,1.769,295.03,4.159,199.61,138.58,1.3,-14.35,80.0,2875.9,46.12,15.94,21.87,13.56,22.43,5.6,simule
-Tondelier (Les Écologistes)|Optimiste|2068,Tondelier (Les Écologistes),Optimiste,2068,122.57,1.729,290.56,4.098,197.39,135.19,1.33,-13.95,80.0,2918.4,45.03,15.52,21.51,13.27,21.79,5.45,simule
-Tondelier (Les Écologistes)|Optimiste|2069,Tondelier (Les Écologistes),Optimiste,2069,119.68,1.689,286.16,4.038,195.17,131.89,1.35,-13.56,80.0,2958.1,43.97,15.11,21.15,12.97,21.17,5.31,simule
-Tondelier (Les Écologistes)|Optimiste|2070,Tondelier (Les Écologistes),Optimiste,2070,116.86,1.65,281.79,3.978,192.96,128.67,1.37,-13.18,80.0,2995.0,42.92,14.71,20.8,12.69,20.56,5.18,simule
+Tondelier (Les Écologistes)|Optimiste|2068,Tondelier (Les Écologistes),Optimiste,2068,122.57,1.729,290.57,4.098,197.39,135.19,1.33,-13.95,80.0,2918.4,45.03,15.52,21.51,13.27,21.79,5.45,simule
+Tondelier (Les Écologistes)|Optimiste|2069,Tondelier (Les Écologistes),Optimiste,2069,119.68,1.689,286.16,4.038,195.18,131.89,1.35,-13.56,80.0,2958.1,43.97,15.11,21.15,12.97,21.17,5.31,simule
+Tondelier (Les Écologistes)|Optimiste|2070,Tondelier (Les Écologistes),Optimiste,2070,116.86,1.65,281.8,3.978,192.96,128.67,1.37,-13.18,80.0,2995.0,42.92,14.71,20.8,12.69,20.56,5.18,simule
 Tondelier (Les Écologistes)|Optimiste|2071,Tondelier (Les Écologistes),Optimiste,2071,114.15,1.612,277.67,3.921,190.89,125.54,1.42,-12.81,80.0,3029.1,41.92,14.33,20.46,12.41,19.98,5.04,simule
-Tondelier (Les Écologistes)|Optimiste|2072,Tondelier (Les Écologistes),Optimiste,2072,111.52,1.575,273.66,3.865,188.88,122.51,1.47,-12.45,80.0,3060.6,40.95,13.96,20.14,12.14,19.42,4.92,simule
+Tondelier (Les Écologistes)|Optimiste|2072,Tondelier (Les Écologistes),Optimiste,2072,111.52,1.575,273.66,3.865,188.88,122.51,1.47,-12.45,80.0,3060.7,40.95,13.96,20.14,12.14,19.42,4.92,simule
 Tondelier (Les Écologistes)|Optimiste|2073,Tondelier (Les Écologistes),Optimiste,2073,108.97,1.539,269.74,3.81,186.9,119.55,1.52,-12.11,80.0,3089.6,40.01,13.59,19.82,11.88,18.87,4.79,simule
 Zemmour (Reconquête)|Crise|2029,Zemmour (Reconquête),Crise,2029,337.87,4.872,538.35,7.763,281.49,333.22,0.96,3.69,262,75.9,117.52,50.59,55.31,29.82,70.36,14.27,simule
 Zemmour (Reconquête)|Crise|2030,Zemmour (Reconquête),Crise,2030,332.89,4.801,530.04,7.644,276.97,327.08,0.18,5.63,262,146.8,116.44,49.67,54.18,29.52,69.08,13.99,simule

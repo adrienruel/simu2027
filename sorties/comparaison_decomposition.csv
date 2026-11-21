@@ -154,7 +154,7 @@ Lisnard (Nouvelle Énergie),Optimiste,2032,ecart_statu_quo,-0.087,-0.013,0.108,-
 Lisnard (Nouvelle Énergie),Optimiste,2037,depuis_2029,1.155,-1.256,1.93,0.081,1.074,-0.675,0.0,-0.0
 Lisnard (Nouvelle Énergie),Optimiste,2037,ecart_statu_quo,-0.511,-0.339,0.133,-0.062,0.069,-0.313,0.0,0.0
 Lisnard (Nouvelle Énergie),Optimiste,2050,depuis_2029,4.176,-1.176,2.357,0.773,3.433,-1.211,0.0,-0.0
-Lisnard (Nouvelle Énergie),Optimiste,2050,ecart_statu_quo,-1.011,-0.437,0.121,-0.208,0.028,-0.515,0.0,0.0
+Lisnard (Nouvelle Énergie),Optimiste,2050,ecart_statu_quo,-1.011,-0.437,0.121,-0.208,0.028,-0.515,0.0,-0.0
 Mélenchon (La France insoumise),Crise,2032,depuis_2029,10.087,6.293,1.586,0.557,1.528,0.124,0.0,0.0
 Mélenchon (La France insoumise),Crise,2032,ecart_statu_quo,15.474,13.095,0.5,0.439,1.31,0.131,-0.0,0.0
 Mélenchon (La France insoumise),Crise,2037,depuis_2029,23.751,8.117,4.065,3.948,7.545,0.075,0.0,0.0
@@ -179,28 +179,28 @@ Mélenchon (La France insoumise),Optimiste,2037,depuis_2029,7.419,3.131,2.874,0.
 Mélenchon (La France insoumise),Optimiste,2037,ecart_statu_quo,6.884,5.096,1.231,0.029,0.753,-0.225,0.0,-0.0
 Mélenchon (La France insoumise),Optimiste,2050,depuis_2029,19.699,4.415,4.177,3.019,9.323,-1.235,0.0,0.0
 Mélenchon (La France insoumise),Optimiste,2050,ecart_statu_quo,15.643,6.2,1.601,2.033,6.139,-0.331,0.0,0.0
-Philippe (Horizons),Crise,2032,depuis_2029,3.399,1.544,1.089,0.178,0.561,0.027,0.0,0.0
+Philippe (Horizons),Crise,2032,depuis_2029,3.399,1.544,1.089,0.178,0.561,0.027,0.0,-0.0
 Philippe (Horizons),Crise,2032,ecart_statu_quo,1.89,1.67,0.021,0.043,0.147,0.009,-0.0,0.0
 Philippe (Horizons),Crise,2037,depuis_2029,8.163,1.835,2.496,1.329,2.577,-0.074,0.0,0.0
-Philippe (Horizons),Crise,2037,ecart_statu_quo,3.316,2.027,0.031,0.382,0.74,0.135,0.0,0.0
+Philippe (Horizons),Crise,2037,ecart_statu_quo,3.316,2.027,0.031,0.382,0.74,0.135,0.0,-0.0
 Philippe (Horizons),Crise,2050,depuis_2029,33.973,3.245,4.269,9.629,16.977,-0.147,0.0,0.0
 Philippe (Horizons),Crise,2050,ecart_statu_quo,11.032,2.608,0.043,0.831,6.27,1.279,0.0,-0.0
 Philippe (Horizons),Prudent,2032,depuis_2029,1.603,0.339,0.841,0.1,0.425,-0.102,0.0,-0.0
-Philippe (Horizons),Prudent,2032,ecart_statu_quo,0.939,0.85,0.009,0.015,0.073,-0.008,0.0,0.0
-Philippe (Horizons),Prudent,2037,depuis_2029,4.263,0.458,1.876,0.618,1.611,-0.299,0.0,0.0
-Philippe (Horizons),Prudent,2037,ecart_statu_quo,1.538,1.017,0.011,0.137,0.328,0.045,0.0,0.0
-Philippe (Horizons),Prudent,2050,depuis_2029,18.869,1.838,2.83,5.791,9.116,-0.706,0.0,-0.0
+Philippe (Horizons),Prudent,2032,ecart_statu_quo,0.939,0.85,0.009,0.015,0.073,-0.008,0.0,-0.0
+Philippe (Horizons),Prudent,2037,depuis_2029,4.263,0.458,1.876,0.618,1.611,-0.299,0.0,-0.0
+Philippe (Horizons),Prudent,2037,ecart_statu_quo,1.538,1.017,0.011,0.137,0.328,0.045,0.0,-0.0
+Philippe (Horizons),Prudent,2050,depuis_2029,18.869,1.838,2.83,5.791,9.117,-0.706,0.0,-0.0
 Philippe (Horizons),Prudent,2050,ecart_statu_quo,6.463,1.702,0.019,1.427,2.791,0.524,0.0,0.0
-Philippe (Horizons),Médian,2032,depuis_2029,0.916,-0.173,0.832,0.052,0.368,-0.163,0.0,0.0
-Philippe (Horizons),Médian,2032,ecart_statu_quo,0.187,0.184,-0.024,0.004,0.032,-0.009,0.0,0.0
+Philippe (Horizons),Médian,2032,depuis_2029,0.916,-0.173,0.832,0.052,0.368,-0.163,0.0,-0.0
+Philippe (Horizons),Médian,2032,ecart_statu_quo,0.187,0.184,-0.024,0.004,0.032,-0.009,0.0,-0.0
 Philippe (Horizons),Médian,2037,depuis_2029,2.196,-0.625,1.806,0.259,1.229,-0.474,0.0,0.0
 Philippe (Horizons),Médian,2037,ecart_statu_quo,0.169,0.088,-0.048,0.026,0.097,0.006,0.0,-0.0
 Philippe (Horizons),Médian,2050,depuis_2029,7.075,-0.512,2.336,1.794,4.448,-0.991,0.0,0.0
-Philippe (Horizons),Médian,2050,ecart_statu_quo,1.075,0.348,-0.051,0.241,0.387,0.151,0.0,0.0
+Philippe (Horizons),Médian,2050,ecart_statu_quo,1.075,0.348,-0.051,0.241,0.387,0.151,0.0,-0.0
 Philippe (Horizons),Optimiste,2032,depuis_2029,0.275,-0.685,0.842,0.024,0.294,-0.199,0.0,-0.0
-Philippe (Horizons),Optimiste,2032,ecart_statu_quo,-0.884,-0.777,-0.029,-0.008,-0.039,-0.031,0.0,-0.0
-Philippe (Horizons),Optimiste,2037,depuis_2029,0.952,-1.253,1.786,0.094,0.889,-0.563,0.0,0.0
-Philippe (Horizons),Optimiste,2037,ecart_statu_quo,-1.371,-1.003,-0.051,-0.05,-0.212,-0.053,0.0,0.0
+Philippe (Horizons),Optimiste,2032,ecart_statu_quo,-0.884,-0.777,-0.029,-0.008,-0.039,-0.031,0.0,0.0
+Philippe (Horizons),Optimiste,2037,depuis_2029,0.952,-1.253,1.786,0.094,0.889,-0.563,0.0,-0.0
+Philippe (Horizons),Optimiste,2037,ecart_statu_quo,-1.371,-1.003,-0.051,-0.05,-0.212,-0.053,0.0,-0.0
 Philippe (Horizons),Optimiste,2050,depuis_2029,3.435,-0.993,2.162,0.601,2.729,-1.065,0.0,0.0
 Philippe (Horizons),Optimiste,2050,ecart_statu_quo,-2.409,-0.922,-0.05,-0.38,-1.013,-0.043,0.0,0.0
 Retailleau (Les Républicains),Crise,2032,depuis_2029,2.669,0.887,1.081,0.165,0.518,0.018,0.0,-0.0
@@ -251,30 +251,30 @@ Roussel (Parti communiste français),Optimiste,2037,depuis_2029,8.88,2.801,2.93,
 Roussel (Parti communiste français),Optimiste,2037,ecart_statu_quo,7.822,4.246,0.91,0.439,2.302,-0.074,0.0,0.0
 Roussel (Parti communiste français),Optimiste,2050,depuis_2029,30.017,3.747,5.019,6.683,15.885,-1.317,0.0,-0.0
 Roussel (Parti communiste français),Optimiste,2050,ecart_statu_quo,25.438,5.012,1.381,5.672,13.392,-0.02,0.0,-0.0
-Tondelier (Les Écologistes),Crise,2032,depuis_2029,4.542,2.374,1.172,0.259,0.691,0.046,0.0,0.0
+Tondelier (Les Écologistes),Crise,2032,depuis_2029,4.543,2.374,1.172,0.259,0.691,0.046,0.0,-0.0
 Tondelier (Les Écologistes),Crise,2032,ecart_statu_quo,4.265,3.661,0.079,0.122,0.27,0.133,-0.0,0.0
 Tondelier (Les Écologistes),Crise,2037,depuis_2029,11.143,3.26,2.764,1.85,3.32,-0.051,0.0,0.0
-Tondelier (Les Écologistes),Crise,2037,ecart_statu_quo,7.527,4.614,0.16,0.891,1.496,0.367,0.0,-0.0
-Tondelier (Les Écologistes),Crise,2050,depuis_2029,41.715,4.409,4.995,11.322,21.268,-0.279,0.0,0.0
-Tondelier (Les Écologistes),Crise,2050,ecart_statu_quo,20.006,4.934,0.262,1.401,12.127,1.281,0.0,0.0
+Tondelier (Les Écologistes),Crise,2037,ecart_statu_quo,7.528,4.614,0.16,0.891,1.496,0.367,0.0,-0.0
+Tondelier (Les Écologistes),Crise,2050,depuis_2029,41.717,4.41,4.995,11.322,21.269,-0.279,0.0,-0.0
+Tondelier (Les Écologistes),Crise,2050,ecart_statu_quo,20.007,4.935,0.262,1.401,12.127,1.281,0.0,-0.0
 Tondelier (Les Écologistes),Prudent,2032,depuis_2029,2.525,1.139,0.989,0.085,0.399,-0.087,0.0,0.0
 Tondelier (Les Écologistes),Prudent,2032,ecart_statu_quo,1.995,1.751,0.215,-0.003,0.004,0.028,0.0,0.0
-Tondelier (Les Écologistes),Prudent,2037,depuis_2029,6.196,1.956,2.159,0.626,1.725,-0.269,0.0,0.0
+Tondelier (Les Écologistes),Prudent,2037,depuis_2029,6.197,1.956,2.159,0.626,1.725,-0.269,0.0,0.0
 Tondelier (Les Écologistes),Prudent,2037,ecart_statu_quo,3.605,2.617,0.365,0.138,0.352,0.132,0.0,-0.0
-Tondelier (Les Écologistes),Prudent,2050,depuis_2029,23.498,3.516,3.318,6.515,10.902,-0.752,0.0,-0.0
-Tondelier (Les Écologistes),Prudent,2050,ecart_statu_quo,11.225,3.483,0.507,1.924,4.795,0.517,0.0,-0.0
-Tondelier (Les Écologistes),Médian,2032,depuis_2029,1.65,0.533,0.967,0.026,0.294,-0.17,0.0,0.0
-Tondelier (Les Écologistes),Médian,2032,ecart_statu_quo,0.581,0.539,0.176,-0.024,-0.097,-0.013,0.0,0.0
+Tondelier (Les Écologistes),Prudent,2050,depuis_2029,23.499,3.516,3.318,6.515,10.902,-0.752,0.0,0.0
+Tondelier (Les Écologistes),Prudent,2050,ecart_statu_quo,11.226,3.483,0.507,1.924,4.796,0.517,0.0,0.0
+Tondelier (Les Écologistes),Médian,2032,depuis_2029,1.65,0.533,0.967,0.026,0.294,-0.17,0.0,-0.0
+Tondelier (Les Écologistes),Médian,2032,ecart_statu_quo,0.581,0.539,0.176,-0.024,-0.097,-0.013,0.0,-0.0
 Tondelier (Les Écologistes),Médian,2037,depuis_2029,3.86,0.895,2.047,0.197,1.182,-0.461,0.0,0.0
 Tondelier (Les Écologistes),Médian,2037,ecart_statu_quo,1.494,1.257,0.289,-0.04,-0.057,0.045,0.0,-0.0
-Tondelier (Les Écologistes),Médian,2050,depuis_2029,10.111,1.335,2.664,2.009,5.137,-1.034,0.0,0.0
-Tondelier (Les Écologistes),Médian,2050,ecart_statu_quo,3.771,1.844,0.335,0.438,1.034,0.121,0.0,0.0
+Tondelier (Les Écologistes),Médian,2050,depuis_2029,10.111,1.335,2.664,2.009,5.137,-1.034,0.0,-0.0
+Tondelier (Les Écologistes),Médian,2050,ecart_statu_quo,3.772,1.844,0.335,0.438,1.034,0.121,0.0,-0.0
 Tondelier (Les Écologistes),Optimiste,2032,depuis_2029,1.131,0.358,1.001,-0.14,0.108,-0.196,0.0,-0.0
 Tondelier (Les Écologistes),Optimiste,2032,ecart_statu_quo,-1.467,-1.143,0.247,-0.18,-0.305,-0.085,0.0,0.0
 Tondelier (Les Écologistes),Optimiste,2037,depuis_2029,2.76,0.748,2.011,-0.035,0.565,-0.529,0.0,-0.0
-Tondelier (Les Écologistes),Optimiste,2037,ecart_statu_quo,-1.002,-0.41,0.378,-0.185,-0.716,-0.068,0.0,0.0
-Tondelier (Les Écologistes),Optimiste,2050,depuis_2029,5.943,1.542,2.384,0.41,2.641,-1.033,0.0,-0.0
-Tondelier (Les Écologistes),Optimiste,2050,ecart_statu_quo,-1.339,0.203,0.411,-0.595,-1.273,-0.086,0.0,0.0
+Tondelier (Les Écologistes),Optimiste,2037,ecart_statu_quo,-1.001,-0.41,0.378,-0.185,-0.716,-0.069,0.0,-0.0
+Tondelier (Les Écologistes),Optimiste,2050,depuis_2029,5.943,1.542,2.384,0.41,2.641,-1.033,-0.0,0.0
+Tondelier (Les Écologistes),Optimiste,2050,ecart_statu_quo,-1.339,0.203,0.411,-0.595,-1.273,-0.086,-0.0,0.0
 Zemmour (Reconquête),Crise,2032,depuis_2029,3.32,1.037,1.127,0.302,0.79,0.064,0.0,0.0
 Zemmour (Reconquête),Crise,2032,ecart_statu_quo,4.156,3.412,0.013,0.184,0.51,0.037,-0.0,0.0
 Zemmour (Reconquête),Crise,2037,depuis_2029,9.599,1.359,2.655,2.055,3.543,-0.013,0.0,0.0

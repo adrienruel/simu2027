@@ -1,218 +1,218 @@
 [
  {
   "cle": "tondelier_mesures.services_publics_divers/montant/prudent",
-  "deficit_2037": 0.008233688571465336,
-  "deficit_2050": 0.02239940757929304,
+  "deficit_2037": 0.008233671314657798,
+  "deficit_2050": 0.022399502445480834,
   "note": "France Services 0,1 ; cantines et petits-déjeuners 0,3 ; associations, culture, sport, médias 0,8 ; hébergement et logement d'abord 0,8 ; indemnisation des victimes (chlordécone, essais nucléaires, pesticides) 0,2 (Md€)."
  },
  {
   "cle": "tondelier_mesures.fiscalite_sante/montant/prudent",
-  "deficit_2037": -0.0077335092274122275,
-  "deficit_2050": -0.02182375935480607,
+  "deficit_2037": -0.007733491091006073,
+  "deficit_2050": -0.021823869754122427,
   "note": "Hausses non chiffrées par le programme ; recette nette de la baisse de consommation. Économies de santé non comptées (pas de chiffrage sourcé)."
  },
  {
   "cle": "tondelier_mesures.is_minimal/montant/prudent",
-  "deficit_2037": -0.005959391724509544,
-  "deficit_2050": -0.015471321591302711,
+  "deficit_2037": -0.005959381341675396,
+  "deficit_2050": -0.0154713957558279,
   "note": "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
  },
  {
   "cle": "tondelier_mesures.energies_renouvelables/montant/prudent",
-  "deficit_2037": 0.005881198170401447,
-  "deficit_2050": 0.015999016428498436,
+  "deficit_2037": 0.005881185844240022,
+  "deficit_2050": 0.01599908419022711,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.agriculture/montant/prudent",
-  "deficit_2037": 0.005677604652298385,
-  "deficit_2050": 0.015514542597745873,
+  "deficit_2037": 0.005677592278120258,
+  "deficit_2050": 0.015514605776690615,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.penibilite/montant/prudent",
-  "deficit_2037": 0.0053226814407434375,
-  "deficit_2050": 0.014898450791118734,
+  "deficit_2037": 0.005322667983648444,
+  "deficit_2050": 0.01489850339161336,
   "note": ""
  },
  {
   "cle": "tondelier_emploi.postes/grand_age",
-  "deficit_2037": 0.004739954998077778,
-  "deficit_2050": 0.011624935882633025,
+  "deficit_2037": 0.004739953397848495,
+  "deficit_2050": 0.01162498671804002,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.jeunes/montant/prudent",
-  "deficit_2037": 0.0043128747670468925,
-  "deficit_2050": 0.011732338065289838,
+  "deficit_2037": 0.0043128657279272176,
+  "deficit_2050": 0.011732387757330542,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.securite_sociale_pro/montant/prudent",
-  "deficit_2037": 0.004089445163174332,
-  "deficit_2050": 0.011257979613610303,
+  "deficit_2037": 0.004089421952940597,
+  "deficit_2050": 0.01125799709810238,
   "note": ""
  },
  {
   "cle": "tondelier_emploi.postes/classes",
-  "deficit_2037": 0.003967018867781391,
-  "deficit_2050": 0.009368978825825991,
+  "deficit_2037": 0.003967017363251557,
+  "deficit_2050": 0.009369019416240576,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.aidants_apa/montant/prudent",
-  "deficit_2037": 0.003930430103510574,
-  "deficit_2050": 0.010880565768129458,
+  "deficit_2037": 0.003930421831238817,
+  "deficit_2050": 0.010880609046115097,
   "note": ""
  },
  {
   "cle": "tondelier_emploi.postes/hopital",
-  "deficit_2037": 0.003511033706528721,
-  "deficit_2050": 0.008610875488429315,
+  "deficit_2037": 0.003511032521263502,
+  "deficit_2050": 0.0086109131435812,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_emploi.postes/justice",
-  "deficit_2037": 0.003415982934587447,
-  "deficit_2050": 0.0074943428381324395,
+  "deficit_2037": 0.0034159858203981486,
+  "deficit_2050": 0.00749437240678219,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.voie_pro/montant/prudent",
-  "deficit_2037": 0.0026944195265361515,
-  "deficit_2050": 0.006952207620429363,
+  "deficit_2037": 0.0026944154950001575,
+  "deficit_2050": 0.006952235308457233,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.retraites_agricoles/montant/prudent",
-  "deficit_2037": 0.002204151345923222,
-  "deficit_2050": 0.0059716690818376605,
+  "deficit_2037": 0.0022041469941331826,
+  "deficit_2050": 0.0059716964785039295,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.recherche/montant/prudent",
-  "deficit_2037": 0.0020905724323423414,
-  "deficit_2050": 0.005416951338517606,
+  "deficit_2037": 0.0020905661320345104,
+  "deficit_2050": 0.005416962496148869,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.cheque_energie/montant/prudent",
-  "deficit_2037": 0.0020322739147893287,
-  "deficit_2050": 0.005515149229161409,
+  "deficit_2037": 0.00203226980989335,
+  "deficit_2050": 0.0055151735016245595,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.depassements/montant/prudent",
-  "deficit_2037": 0.001965212998827681,
-  "deficit_2050": 0.005440131296623463,
+  "deficit_2037": 0.001965208862731771,
+  "deficit_2050": 0.005440152935726417,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.prevention/montant/prudent",
-  "deficit_2037": 0.001965212998827681,
-  "deficit_2050": 0.005440131296623463,
+  "deficit_2037": 0.001965208862731771,
+  "deficit_2050": 0.005440152935726417,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.aerien/montant/prudent",
-  "deficit_2037": -0.0018759238457608518,
-  "deficit_2050": -0.005264843455844215,
+  "deficit_2037": -0.0018759193630000226,
+  "deficit_2050": -0.005264869439791653,
   "note": "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
  },
  {
   "cle": "tondelier_mesures.sante_scolaire/montant/prudent",
-  "deficit_2037": 0.0018137760823684346,
-  "deficit_2050": 0.004678755215675068,
+  "deficit_2037": 0.0018137734046579368,
+  "deficit_2050": 0.004678775226508947,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.niches_plafond/montant/prudent",
-  "deficit_2037": -0.0016840080773725674,
-  "deficit_2050": -0.004552540702860597,
+  "deficit_2037": -0.0016840035511691553,
+  "deficit_2050": -0.004552562952873984,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.trente_deux_heures/montant/prudent",
-  "deficit_2037": 0.0015777618007355443,
-  "deficit_2050": 0.004132648169175468,
+  "deficit_2037": 0.0015777598102317825,
+  "deficit_2050": 0.004132663567659733,
   "note": "Dans le privé : incitation par les aides, pas d'obligation : non chiffré."
  },
  {
   "cle": "tondelier_mesures.economies_diverses/montant/prudent",
-  "deficit_2037": -0.0015140278360732395,
-  "deficit_2050": -0.004136790594166939,
+  "deficit_2037": -0.0015140245364033689,
+  "deficit_2050": -0.004136807442240098,
   "note": "Économies déclaratives estimées (règle)."
  },
  {
   "cle": "tondelier_emploi.postes/voie_pro",
-  "deficit_2037": 0.0012196621813505004,
-  "deficit_2050": 0.0028907496691417123,
+  "deficit_2037": 0.001219661666013394,
+  "deficit_2050": 0.002890762400333813,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.pensions_alimentaires/montant/prudent",
-  "deficit_2037": 0.0012193633608710286,
-  "deficit_2050": 0.0033090476760762044,
+  "deficit_2037": 0.0012193608979416126,
+  "deficit_2050": 0.0033090622395590685,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.ase_25_ans/montant/prudent",
-  "deficit_2037": 0.0011762364479963594,
-  "deficit_2050": 0.00319957911694857,
+  "deficit_2037": 0.0011762339828162993,
+  "deficit_2050": 0.003199592669389517,
   "note": ""
  },
  {
   "cle": "tondelier_mesures.medicaments/montant/prudent",
-  "deficit_2037": -0.001138411853180088,
-  "deficit_2050": -0.003167075734367586,
+  "deficit_2037": -0.001138409361955084,
+  "deficit_2050": -0.0031670878014971038,
   "note": "Économie déclarative estimée par le modèle (règle)."
  },
  {
   "cle": "tondelier_mesures.outremer_plan/montant/prudent",
-  "deficit_2037": 0.0010981338309061783,
-  "deficit_2050": 0.0022789401581455593,
+  "deficit_2037": 0.0010981344968516993,
+  "deficit_2050": 0.0022789626131327623,
   "note": ""
  },
  {
   "cle": "tondelier_emploi.postes/aesh",
-  "deficit_2037": 0.001093646984140051,
-  "deficit_2050": 0.0026443703865233203,
+  "deficit_2037": 0.0010936462220509924,
+  "deficit_2050": 0.0026443822514927717,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.autres_postes/montant/prudent",
-  "deficit_2037": 0.00101287560045904,
-  "deficit_2050": 0.0025956260321144953,
+  "deficit_2037": 0.0010128741877561964,
+  "deficit_2050": 0.002595637187358335,
   "note": ""
  },
  {
   "cle": "tondelier_emploi.postes/trente_deux_heures",
-  "deficit_2037": 0.0008737425241260866,
-  "deficit_2050": 0.0021224414435430106,
+  "deficit_2037": 0.0008737423531339772,
+  "deficit_2050": 0.0021224506660040277,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_emploi.postes/sante_scolaire",
-  "deficit_2037": 0.0008479222846826673,
-  "deficit_2050": 0.0020502185223918445,
+  "deficit_2037": 0.0008479216938219736,
+  "deficit_2050": 0.0020502277214902165,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_emploi.postes/autres_postes",
-  "deficit_2037": 0.0005299498584019346,
-  "deficit_2050": 0.0012813788800123405,
+  "deficit_2037": 0.0005299494891257694,
+  "deficit_2050": 0.0012813846294221776,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.malus_poids/montant/prudent",
-  "deficit_2037": -0.00047361724310590603,
-  "deficit_2050": -0.0011745635427509171,
+  "deficit_2037": -0.00047361714403137967,
+  "deficit_2050": -0.0011745753349501342,
   "note": "S'éteint avec l'électrification et l'allègement du parc (2035 : 100 % de ventes à zéro émission)."
  },
  {
   "cle": "tondelier_mesures.superprofits/montant/prudent",
-  "deficit_2037": -0.00020935267837352,
-  "deficit_2050": -0.0005886269350732221,
+  "deficit_2037": -0.00020935269795785416,
+  "deficit_2050": -0.0005886328825255305,
   "note": ""
  },
  {
