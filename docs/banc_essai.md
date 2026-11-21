@@ -261,3 +261,37 @@ Programmes, écart de solde primaire au statu quo, prudent, 2037 :
 | Arthaud | −4,05 | −4,65 |
 | Roussel | −8,86 | −9,29 |
 | Mélenchon | −11,40 | −11,79 |
+
+## Correction 4 : emploi des seniors (21/11/2026)
+
+Constat. Pour un an d'âge d'ouverture des droits à plein effet, le modèle maintient 470 000 personnes hors de la
+retraite, pour environ 10 Md€ de pensions en moins (Cour des comptes : 9,2 Md€). Les évaluations trouvent entre 44
+et 64 % de ces départs retardés en emploi (Rabaté et Rochut 2020 ; IPP 2025 ; Insee pour la réforme de 2010), soit
+210 000 à 300 000 emplois. La DG Trésor (COR, mars 2026) compte 210 000 à 240 000 emplois pour 64 → 65 ans.
+
+Le modèle n'en comptait que 112 000. La part `seniors.part_concernee` de 0,42 avait été calée sur les 300 000
+emplois de l'étude d'impact de 2023, rapportés aux non-retraités à plein effet (470 000 « concernés » × 64 % en
+emploi). Mais le partage de `seniors.devenir` (50 % en emploi au prudent) s'appliquait ensuite une seconde fois.
+Résultat : 21 à 27 % des non-retraités en emploi, sous toutes les références, y compris l'étude d'impact elle-même.
+
+Correction. Part par scénario : 0,7 / 0,75 / 0,8 / 0,8, soit 32 / 38 / 44 / 51 % des non-retraités en emploi
+(crise / prudent / médian / optimiste). La crise est calée sur l'étude d'impact, le médian sur la DG Trésor et
+Rabaté et Rochut, l'optimiste sur le haut de la fourchette de la DG Trésor. Un âge abaissé prend le scénario miroir.
+
+Âge 64 → 65 ans, à 20 ans :
+
+| | Emplois | PIB | Solde | Autres dépenses sociales, en part des pensions économisées |
+|---|---|---|---|---|
+| Prudent | 180 000 | +0,45 % | +0,38 pt | 24 % |
+| Médian | 210 000 | +0,52 % | +0,39 pt | 25 % |
+| DG Trésor (COR, mars 2026) | 210 000 | +0,7 % | +0,5 pt | — |
+| Drees et Dares | | | | près d'un tiers à court terme |
+
+L'écart de PIB restant vient de la valeur ajoutée d'un senior en emploi (75 000 €, `seniors.valeur_ajoutee_emploi`),
+plus prudente que l'élasticité unitaire de la DG Trésor (≈ 100 000 € par emploi).
+
+Programmes, écart de solde primaire au statu quo, prudent, 2037 (avant cette correction → après) :
+- âge abaissé : Mélenchon −11,79 → −12,32 ; Roussel −9,29 → −9,79 ; Le Pen −2,37 → −2,58 ; Glucksmann
+  −2,76 → −2,97 ; Tondelier −2,84 → −3,02. Leur chômage baisse de 0,2 à 0,5 point, parce que les seniors qui partent
+  plus tôt quittent aussi la population active ;
+- âge reculé : Bertrand +0,04 → +0,07 ; Zemmour −2,40 → −2,34 ; Philippe −0,99 → −0,94 ; Lisnard −2,76 → −2,71.

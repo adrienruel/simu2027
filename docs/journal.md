@@ -1973,3 +1973,12 @@ Demande d'Adrien (« Philippe aide dès le premier enfant, pourquoi Mélenchon e
     salaires publics 100 / 100 / 75 / 50 % en 3 / 5 / 7 / 10 ans.
 - **À faire** : prix d'un emploi cohérent avec son salaire et son PIB (chantier 2.2) ; indexation du statu quo
   lui-même sourcée bloc par bloc (chantier 1.2) ; régénérer toutes les sorties.
+- **Correction 2** : valeur d'un emploi au barème du programme (`moteur/emploi_valeur.py`) : manque à gagner en
+  impôt selon l'incidence des mesures sur le travail et la consommation (au plus 0,03 point). L'allocation évitée
+  suivait déjà la générosité de l'assurance chômage de chaque programme.
+- **Correction 3** : impôts sur la marge d'un emploi (IS et impôts de production, taux implicite de 0,22 sur la part
+  non salariale de la valeur ajoutée), au barème du programme.
+- **Correction 4** : emploi des seniors. `seniors.part_concernee` passe de 0,42 à 0,7 / 0,75 / 0,8 / 0,8 : l'ancien
+  calage appliquait deux fois le partage entre emploi et chômage. Pour 64 → 65 ans : 210 000 emplois au médian,
+  comme la DG Trésor, et un solde de +0,39 point à 20 ans. Âge abaissé : Mélenchon −12,32, Roussel −9,79 en 2037 au
+  prudent.

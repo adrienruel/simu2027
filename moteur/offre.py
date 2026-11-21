@@ -614,7 +614,7 @@ def seniors(p: Parametres, s: str, non_retraites: dict[int, float], baisse_age: 
     excedent : impôts sur la part non salariale de la valeur ajoutée d'un emploi (€ de 2026, emploi_valeur.excedent)."""
     sc = MIROIR[s] if baisse_age else s
     pe, pc = sq._v(p, "seniors.devenir", sc)
-    k_c = p.val("seniors.part_concernee")  # calé sur l'étude d'impact de la réforme de 2023
+    k_c = sq._v(p, "seniors.part_concernee", sc)  # recalée le 21/11/2026 sur l'étude d'impact, la DG Trésor et l'IPP
     non_retraites = {t: k_c * v for t, v in non_retraites.items()}
     w = sq.salaires(p, s)
     k = {t: w[t] / w[2029] for t in ANNEES}
