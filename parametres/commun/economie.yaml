@@ -128,6 +128,11 @@ systeme_actuel:
     unite: sans_unite
     statut: SOURCE
     source: Décret n° 2026-222 du 30 mars 2026 (Salariés du privé, AV9 à AV14 et B69)
+  prime_activite_agents:
+    valeur: {revenu_max: 1470, montant_max: 230, revenu_extinction: 2150}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: Barème simplifié propre aux agents (Fonctionnaires B71-B73), différent de celui du privé.
   apl: {valeur: {revenu_plein: 700, montant_plein: 200, revenu_extinction: 1900}, unite: sans_unite, statut: HYPOTHESE}
   taxe_fonciere:
     valeur: {coef_prive: 2.65661297612247, coef_public: 2.90995818494813, exposant: 0.6}
@@ -201,6 +206,7 @@ successions:
   exoneration_entreprises: {valeur: 1.5, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Cour des comptes 2025 (pacte Dutreil), recoupé v170"}
 
 accises_entreprises:
+  ancienne_tva_entreprises: {valeur: 76.00990116, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE, source: "Encadrement : Fipeco, fiche TVA : TVA nette 2024 de 206 Md€ ; emplois taxables : consommation des ménages ≈ 60 %, logements neufs ≈ 8 %, achats des entreprises non assujetties ≈ 15 %, achats des administrations ≈ 16 % ; soit ≈ 80 Md€ de TVA hors consommation des ménages", note: "TVA non déductible actuelle, somme de la colonne U (à reprendre en données). Ordre de grandeur cohérent avec Fipeco."}
   autres_impots_produits_actuels: {valeur: 103.834, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "Total!C13 (TICPE, tabac, alcool, assurances, jeux, électricité)"}
 
 # --- Budget de l'État 2026 (feuille Budget État 2026) ----------------------------

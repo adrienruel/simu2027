@@ -1977,3 +1977,36 @@ Roadmap : `claude/Roadmap_simulation_globale_2026-11-20.md` (projet). Point de d
   attendu à 5 % près ; programme gelé, non corrigé).
 - **0.4 Point de référence** : étiquette `ref-2026-11-20` (b03ea64), résultats gardés dans `reference/ref-2026-11-20/`,
   écarts par `python -m outils.ecarts_reference`.
+
+## 20/11/2026 (soir) — Suppression d'Écologie de droite (branche `phase-q`)
+
+Décision d'Adrien : « dans le futur on va refaire Écologie de droite mais dans le moteur commun. Donc clean tous les
+tests et tout ce qui est relatif à ça. On reprendra le scoring de zéro. » Le programme, gelé depuis le 16/11, est
+supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-20` et commits antérieurs).
+
+- **Avant de supprimer** : `phase-q` rebasée sur `main` = 4665947 (canal des naissances, fusionné entre-temps par une
+  autre conversation) ; le point de référence `ref-2026-11-20` est déplacé sur 4665947.
+- **Supprimés** : `programmes/ecologie_de_droite/` (paramètres, mesures, budget, effets, 26 modules propres),
+  `sorties/ecologie_de_droite/`, les 17 fichiers de tests `edd` et les tests marqués `edd` des fichiers communs, le
+  marqueur et `tests/conftest.py`, le classeur v235 et ses cibles (`reference/v235`, `reference/cibles`, .xlsx,
+  .pkl), les outils du classeur (`arbre`, `feuille`, `recalcul`, `extraire_cibles`, `cibles_crise`,
+  `decouper_export`, `decouper_parametres`), ses leviers et son tableau de bord (`leviers`, `levier_is`,
+  `is_progressif`, `tableau_de_bord`, `table_offre_ecologie_de_droite`), la réforme OpenFisca du nouveau système
+  (`openfisca_reforme`, `openfisca_menages`, `participation`, `valeur_enfant`), sept fichiers de données et sept notes
+  de méthode propres à ce programme.
+- **Noyau** : couverture mesurée (`coverage`) sur toute la suite et tout le pipeline publié (export, variantes,
+  audits, démographie, ménages types, incertitude, micro, vieillissement). Supprimés : les modules sans aucune
+  fonction exécutée (`collectivites`, `emploi`, `epargne`, `impot_unique`, `is_bareme`, `tva`,
+  `recettes/entreprises`, `recettes/retraites_croisiere`) et 67 fonctions jamais exécutées des modules mêlés ; les
+  branches propres au programme dans `parametres` (référence v235, programme par défaut, copie de crise du taux
+  local), `noyau`, `migrations`, `trace`, `c1_inventaire`, `offre` (`nouveau:rui_aah`), `systeme_actuel` (nets
+  saisis de la v235).
+- **Paramètres** : 66 paramètres communs jamais lus (journal des accès sur la suite et le pipeline, recoupé par leur absence du code : le journal ne voit pas les processus de calcul en parallèle) supprimés
+  (389 → 323) ; gardés malgré tout : `revenus_capital.*` (données pour la micro du patrimoine), `incertitude.correlation`,
+  `economies.taux_realisation`, et trois paramètres lus seulement dans les processus parallèles (`ecologie.elasticite_croisee_electricite`, `systeme_actuel.prime_activite_agents`, `accises_entreprises.ancienne_tva_entreprises`).
+- **Contrôle** : sur le même code avant et après suppression, `comparaison_*.csv`, variantes de la dette, audits,
+  démographie et poids des lectures sont identiques octet pour octet. Suite : 301 passés, seul échec
+  `test_sorties` (sorties à régénérer). `tests/test_independance.py` vérifie maintenant qu'aucun code ne cite plus
+  ce programme et que les sorties publiées se recalculent à l'identique.
+- Toutes les sorties sont régénérées sur la base finale (micro, micro vieillie, export, variantes, ménages types,
+  Monte Carlo de zéro).
