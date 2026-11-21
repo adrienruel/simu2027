@@ -79,3 +79,26 @@ def facteur(p: Parametres, s: str, liste: list, niveau) -> dict[int, float]:
         base = job["prelevements"] + job["tva"]
         out[t] = max(0.0, (base + d_prel + job["tva"] * d_conso) / base)
     return out
+
+
+INSTRUMENTS_ENTREPRISES = ("capital_entreprises",)
+
+
+def excedent(p: Parametres, s: str, liste: list, niveau, va: float) -> dict[int, float]:
+    """Impôts sur la part non salariale de la valeur ajoutée d'un emploi (€ de 2026 par an et par emploi) : IS et
+    impôts de production non assis sur les salaires, au taux implicite emploi.taux_impots_excedent sur
+    (valeur ajoutée − coût du travail de l'emploi type), au barème du programme : les mesures de recettes sur les
+    entreprises (instrument capital_entreprises) le changent au prorata de l'IS et des impôts de production du statu
+    quo (21/11/2026, demande d'Adrien). Rien si la valeur ajoutée ne dépasse pas le coût."""
+    marge = max(0.0, va - cellule(p, niveau)["cout"])
+    taux = p.val("emploi.taux_impots_excedent")
+    if not marge or not taux:
+        return {t: 0.0 for t in ANNEES}
+    rec = sq.recettes_par_impot(p, s)
+    out = {}
+    for t in ANNEES:
+        base = rec[t]["impot_sur_les_societes"] + rec[t]["impots_de_production"]
+        d = sum(m.valeurs.get(t, 0.0) for m in liste
+                if m.nature == "mesure" and m.poste == "recettes" and m.instrument in INSTRUMENTS_ENTREPRISES)
+        out[t] = marge * taux * max(0.0, 1 + d / base) if p.val("emploi.prelevements_programme") else marge * taux
+    return out

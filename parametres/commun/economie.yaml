@@ -508,6 +508,12 @@ emploi:
   taux_marge_snf: {valeur: 0.322, unite: taux, statut: SOURCE, source: "Insee Première n° 2105 (comptes de la Nation 2025)"}
   impots_production_va: {valeur: 0.05, unite: taux, statut: HYPOTHESE}
   cout_emploi_cree_smic: {valeur: 1.3, unite: sans_unite, statut: HYPOTHESE}
+  taux_impots_excedent:
+    valeur: 0.22
+    unite: taux
+    statut: HYPOTHESE
+    source: "Calculé : (IS 2024, 69,5 Md€ avant crédits d'impôt, Insee + impôts de production hors facteur travail, 92,7 − 52,0 = 40,7 Md€, DGFiP Statistiques n° 35) / EBE des sociétés non financières 2025, 497,5 Md€ (Insee, comptes de la Nation 2025) = 0,22"
+    note: "Taux implicite des impôts sur la part non salariale de la valeur ajoutée d'un emploi en plus (moteur/emploi_valeur.excedent). Prudent : sans la fiscalité des dividendes distribués (PFU), ni la part des impôts de production payée hors du secteur marchand (17,4 Md€, mêlée au facteur travail). Années d'euros mêlées (2023 à 2025) : écart de quelques pour cent."
   prelevements_programme:
     valeur: true
     unite: sans_unite

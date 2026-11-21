@@ -606,11 +606,12 @@ def education(p: Parametres, s: str, pts: dict[int, float], annees) -> dict[int,
 
 # ------------------------------------------------------------------------------------------------ seniors
 def seniors(p: Parametres, s: str, non_retraites: dict[int, float], baisse_age: bool = False,
-            facteur_prelevements: dict[int, float] | None = None) -> dict:
+            facteur_prelevements: dict[int, float] | None = None, excedent: dict[int, float] | None = None) -> dict:
     """Personnes de plus (ou de moins) qui ne sont pas encore retraitées quand l'âge de la retraite change : une part
     reste en emploi, une part au chômage, le reste inactif (seniors.devenir). Renvoie les emplois, les chômeurs, les
     actifs en plus, les mesures budgétaires (prélèvements, allocations, autres prestations) et la valeur ajoutée (Md€).
-    facteur_prelevements : prélèvements d'un emploi au barème du programme, rapportés au statu quo (emploi_valeur)."""
+    facteur_prelevements : prélèvements d'un emploi au barème du programme, rapportés au statu quo (emploi_valeur) ;
+    excedent : impôts sur la part non salariale de la valeur ajoutée d'un emploi (€ de 2026, emploi_valeur.excedent)."""
     sc = MIROIR[s] if baisse_age else s
     pe, pc = sq._v(p, "seniors.devenir", sc)
     k_c = p.val("seniors.part_concernee")  # calé sur l'étude d'impact de la réforme de 2023
@@ -625,6 +626,8 @@ def seniors(p: Parametres, s: str, non_retraites: dict[int, float], baisse_age: 
     mesures = [
         Mesure("Seniors : prélèvements des emplois en plus (âge de la retraite)", "recettes",
                {t: em[t] * v * k[t] * (facteur_prelevements or {}).get(t, 1.0) / 1e9 for t in ANNEES}, nature="effet_macro"),
+        Mesure("Seniors : IS et impôts de production sur la valeur ajoutée des emplois en plus (âge de la retraite)",
+               "recettes", {t: em[t] * (excedent or {}).get(t, 0.0) * k[t] / 1e9 for t in ANNEES}, nature="effet_macro"),
         Mesure("Seniors : allocations chômage en plus (âge de la retraite)", "chomage",
                {t: ch[t] * a * k[t] / 1e9 for t in ANNEES}, nature="effet_macro"),
         Mesure("Seniors : invalidité et minima sociaux en plus (âge de la retraite)", "aah_invalidite",

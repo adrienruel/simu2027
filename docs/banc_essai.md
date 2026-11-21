@@ -220,3 +220,44 @@ manque à gagner en impôt.
 
 Reste ouvert : les impôts sur la part non salariale de la valeur ajoutée (IS, impôts de production) ne sont pas dans
 la valeur d'un emploi. Pour un senior, le budget reçoit 37 % du PIB qu'il crée, contre 45 à 53 % de prélèvements.
+
+## Correction 3 : impôts sur la marge d'un emploi (21/11/2026)
+
+`emploi_valeur.excedent`, paramètre `emploi.taux_impots_excedent` = 0,22. C'est l'IS (69,5 Md€) plus les impôts de
+production hors facteur travail (40,7 Md€), rapportés à l'EBE des sociétés non financières (497,5 Md€).
+- Il s'applique à la part non salariale de la valeur ajoutée d'un emploi en plus :
+  - environ 6 000 € pour un emploi des canaux (35 000 € de valeur ajoutée, 29 000 € de coût), soit environ 1 300 €
+    d'impôts par an ;
+  - environ 21 400 € pour un senior (75 000 € de valeur ajoutée, 53 600 € de coût), soit environ 4 700 € par an.
+- Le programme le module par ses mesures sur les entreprises (instrument capital_entreprises), au prorata de l'IS
+  et des impôts de production du statu quo.
+- Choix prudent : la fiscalité des dividendes distribués n'est pas comptée.
+
+Âge 64 → 65 ans (médian) : +0,27 point à 5 ans et +0,31 à 20 ans (avant : +0,26 et +0,29 ; DG Trésor : +0,4 et
++0,5). Le PIB en plus revient au budget à environ 45 % pour un senior. Le reste de l'écart avec la DG Trésor vient
+surtout du nombre d'emplois : 110 000 par an d'âge, avec 58 % des seniors maintenus qui deviennent inactifs
+(chantier 2.3).
+
+Programmes, écart de solde primaire au statu quo, prudent, 2037 :
+- Mélenchon −11,66 → −11,79 et Roussel −9,17 → −9,29 : ils détruisent des emplois dans les canaux génériques, et
+  chaque emploi perdu coûte l'IS de sa marge, plus élevé chez eux, puisqu'ils relèvent l'IS ;
+- Glucksmann −2,70 → −2,76 ; Le Pen −2,33 → −2,37 ;
+- Philippe −1,01 → −0,99 ; Lisnard −2,77 → −2,76 ;
+- les autres à 0,01 point près.
+
+### Bilan des trois corrections (prudent, 2037)
+
+| | Départ | Après les trois corrections |
+|---|---|---|
+| Bertrand | +0,03 | +0,04 |
+| Retailleau | −0,43 | −0,40 |
+| Philippe | −1,02 | −0,99 |
+| Attal | −1,10 | −1,17 |
+| Le Pen | −2,26 | −2,37 |
+| Zemmour | −2,40 | −2,40 |
+| Glucksmann | −2,60 | −2,76 |
+| Tondelier | −2,60 | −2,84 |
+| Lisnard | −2,83 | −2,76 |
+| Arthaud | −4,05 | −4,65 |
+| Roussel | −8,86 | −9,29 |
+| Mélenchon | −11,40 | −11,79 |

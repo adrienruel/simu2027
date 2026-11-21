@@ -501,8 +501,12 @@ class ProgrammeSimple:
             # 21/11/2026 : prélèvements et TVA d'un emploi au barème du programme (moteur/emploi_valeur.py) ;
             # l'allocation évitée suit déjà la générosité du programme
             from . import emploi_valeur
-            f_emp = emploi_valeur.facteur(p, s, liste, p.val("emploi.cout_emploi_cree_smic"))
-            v_emp = {t: (valeur - alloc) * f_emp[t] + alloc for t in ANNEES}
+            niveau = p.val("emploi.cout_emploi_cree_smic")
+            f_emp = emploi_valeur.facteur(p, s, liste, niveau)
+            # plus les impôts sur la part non salariale de leur valeur ajoutée (les canaux « * » et « ** » comptent leur
+            # budget eux-mêmes et ne passent pas ici)
+            exc = emploi_valeur.excedent(p, s, liste, niveau, self.v("emploi.valeur_ajoutee_emploi"))
+            v_emp = {t: (valeur - alloc) * f_emp[t] + alloc + exc[t] for t in ANNEES}
             canaux = {t: {} for t in ANNEES}
             postes = {t: crees[t] + supprimes[t] for t in ANNEES}
             evince = {t: -(ev_c * crees[t] + ev_s * supprimes[t]) for t in ANNEES}
@@ -567,7 +571,8 @@ class ProgrammeSimple:
             nr = getattr(self, "non_retraites", {}).get((id(p), s))
             if nr is not None:
                 sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"],
-                                    facteur_prelevements=emploi_valeur.facteur(p, s, liste, "moyen"))
+                                    facteur_prelevements=emploi_valeur.facteur(p, s, liste, "moyen"),
+                                    excedent=emploi_valeur.excedent(p, s, liste, "moyen", p.val("seniors.valeur_ajoutee_emploi")))
                 liste.extend(sen["mesures"])
                 d_seniors = sen["pib"]
                 for t in ANNEES:

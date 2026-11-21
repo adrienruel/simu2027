@@ -45,3 +45,15 @@ def test_consommation_et_mesures_hors_champ():
     assert ev.facteur(P, "prudent", [autre], 1.3)[2037] == 1.0
     effet = Mesure("Essai", "recettes", {t: -10 for t in ANNEES}, instrument="travail", nature="effet_macro")
     assert ev.facteur(P, "prudent", [effet], 1.3)[2037] == 1.0
+
+
+def test_impots_sur_la_marge_d_un_emploi():
+    """Part non salariale de la valeur ajoutée : IS et impôts de production au taux implicite, au barème du
+    programme ; rien sans marge."""
+    va = P.val("seniors.valeur_ajoutee_emploi")
+    e = ev.excedent(P, "prudent", [], "moyen", va)
+    marge = va - ev.cellule(P, "moyen")["cout"]
+    assert e[2037] == pytest.approx(marge * P.val("emploi.taux_impots_excedent"))
+    assert all(v == 0 for v in ev.excedent(P, "prudent", [], "moyen", 1000.0).values())
+    hausse_is = Mesure("Essai", "recettes", {t: 20.0 for t in ANNEES}, instrument="capital_entreprises")
+    assert ev.excedent(P, "prudent", [hausse_is], "moyen", va)[2037] > e[2037]
