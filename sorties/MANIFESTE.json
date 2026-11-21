@@ -1,6 +1,14 @@
 {
  "note": "Traçabilité des sorties (roadmap du comparateur, chantier 1.2, 16/11/2026).",
  "fichiers": {
+  "banc_essai.csv": {
+   "sha256": "357c0a1625860393f4cfaf3ce9002cfa7cef20c940a81aab6e88d4019989bf6d",
+   "script": "outils.banc_essai",
+   "date": "2026-11-21T07:19:09Z",
+   "commit": "4665947",
+   "code_non_commite": true,
+   "parametres": "6d4220cdba5832bd"
+  },
   "c1_commun.json": {
    "sha256": "8f1d7fd44d43af0ccff5805cbd3723bda319d83651d854329fbbf21fd0d78275",
    "script": "outils.c1_inventaire",

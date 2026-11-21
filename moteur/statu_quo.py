@@ -152,14 +152,46 @@ def salaires(p: Parametres, s: str) -> dict[int, float]:
     return out
 
 
+BLOCS_LEGAUX = ("retraites", "chomage", "famille", "logement", "pauvrete", "aah_invalidite")
+
+
+def _depenses_en_plus(p: Parametres, s: str, b0: dict, b1: dict) -> dict[int, float]:
+    """Dépenses du statu quo en plus quand la productivité monte (21/11/2026, demande d'Adrien : les budgets ne
+    suivent plus la croissance, mais ce qui fixe leur coût).
+
+    - Blocs dont le coût suit un salaire par une règle de droit ou par construction (BLOCS_LEGAUX) : réponse entière.
+      Pensions : loi et carrières. Chômage : allocation proportionnelle au salaire perdu. Prestations : selon
+      statu_quo.indexation_prestations (sur les salaires, décision d'Adrien de novembre 2026 ; sur les prix, elles ne
+      bougent pas).
+    - Autres blocs (santé, missions, collectivités, autres, investissement, défense) : seule leur part salariale
+      (indexation_programme.part_salariale) suit, à raison de indexation_programme.passage, en moyenne mobile sur
+      indexation_programme.delai ans (passage progressif aux salaires publics, au point d'indice et aux tarifs). Le
+      reste (achats, investissement, défense programmée) est fixé en euros constants et ne suit pas la croissance.
+    """
+    part = p.val("indexation_programme.part_salariale")
+    beta, delai = _v(p, "indexation_programme.passage", s), int(_v(p, "indexation_programme.delai", s))
+    out = {}
+    for t in ANNEES:
+        d = 0.0
+        for b in b0[t]:
+            if b in BLOCS_LEGAUX:
+                d += b1[t][b] - b0[t][b]
+                continue
+            ans = [u for u in range(t - delai + 1, t + 1) if u in b0]
+            moyenne = sum(b1[u][b] - b0[u][b] for u in ans) / delai
+            d += part.get(b, 0.0) * beta * moyenne
+        out[t] = d
+    return out
+
+
 def dividende_productivite(p: Parametres, s: str) -> dict[int, float]:
     """Part d'un euro de PIB en plus dû à la productivité qui reste au solde primaire, dans le statu quo lui-même
     (relecture neutre n° 2, point 1 ; DÉCISION d'Adrien du 12/11/2026 : la même règle pour tous les programmes).
 
-    Quand la productivité monte, les recettes montent (≈ 50 % du PIB gagné), mais aussi les dépenses qui suivent les
-    salaires ou le PIB à législation constante (santé, prestations, collectivités, missions, investissement, défense),
-    et les pensions, avec le décalage des carrières : il reste ≈ 25 % au solde la première année, ≈ 12 % après dix ans
-    et presque rien à très long terme. Calcul : la productivité du statu quo est relevée de 1 % en dix ans à partir de
+    Quand la productivité monte, les recettes montent (≈ 50 % du PIB gagné). Depuis le 21/11/2026, les dépenses ne
+    suivent que par ce qui fixe leur coût (_depenses_en_plus) : pensions (loi et carrières), chômage, prestations selon
+    leur indexation, et la part salariale des services publics, progressivement. Avant, tous les blocs suivaient le PIB
+    ou les salaires l'année même (≈ 25 % au solde la première année, ≈ 12 % après dix ans, presque rien à long terme). Calcul : la productivité du statu quo est relevée de 1 % en dix ans à partir de
     2029, puis gardée à ce niveau ; dividende = écart de solde primaire / écart de PIB, année par année. Limite : le
     profil du gain compte (un gain qui commence tard, comme celui de l'école, garde un peu plus longtemps un dividende
     plus élevé) ; un seul profil est retenu pour tous."""
@@ -170,10 +202,11 @@ def dividende_productivite(p: Parametres, s: str) -> dict[int, float]:
     q._choc_productivite = {t: 0.01 * min(1.0, max(0.0, (t - 2028) / 10)) for t in range(1990, 2074)}
     y0, r0, b0 = pib(p, s), recettes(p, s), blocs(p, s)
     y1, r1, b1 = pib(q, s), recettes(q, s), blocs(q, s)
+    dep = _depenses_en_plus(p, s, b0, b1)
     out = {}
     for t in ANNEES:
         dy = y1[t] - y0[t]
-        out[t] = ((r1[t] - r0[t]) - (sum(b1[t].values()) - sum(b0[t].values()))) / dy if dy else 0.0
+        out[t] = ((r1[t] - r0[t]) - dep[t]) / dy if dy else 0.0
     out[2029] = out[2030]  # le choc vaut 0,1 % en 2029 : même valeur que l'année suivante, pour éviter le bruit
     cache[("sq_dividende", s)] = out
     return out
@@ -200,11 +233,11 @@ def dividende_programme(p: Parametres, s: str, dpib: dict[int, float]) -> dict[i
     r0, b0 = recettes(p, s), blocs(p, s)
     y1, r1, b1 = pib(q, s), recettes(q, s), blocs(q, s)
     commun = dividende_productivite(p, s)
+    dep = _depenses_en_plus(p, s, b0, b1)
     out = {}
     for t in ANNEES:
         dy = y1[t] - y0[t]
-        out[t] = (((r1[t] - r0[t]) - (sum(b1[t].values()) - sum(b0[t].values()))) / dy
-                  if abs(dy) > 1e-6 else commun[t])
+        out[t] = ((r1[t] - r0[t]) - dep[t]) / dy if abs(dy) > 1e-6 else commun[t]
     cache[cle] = out
     return out
 

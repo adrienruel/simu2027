@@ -57,7 +57,9 @@ def test_canaux_exclus():
 
 
 def test_allocation_retiree_de_la_valeur_d_un_emploi(p):
-    """Un canal sans « * » vaut emploi.valeur_emploi moins l'allocation : l'allocation est dans les blocs."""
+    """Un canal sans « * » vaut emploi.valeur_emploi moins l'allocation : l'allocation est dans les blocs. Barème du
+    statu quo et sans impôts sur la marge (21/11/2026), pour isoler l'allocation."""
+    p = p.avec({"emploi.prelevements_programme": False, "emploi.taux_impots_excedent": 0.0})
     prog = noyau.charger("glucksmann")
     m = [x for x in prog.mesures(p)["prudent"] if x.nom == "Emploi : Assurance chômage plus généreuse : chômeurs en plus"]
     p0 = p.avec({"emploi.depenses_chomage_programme": False})

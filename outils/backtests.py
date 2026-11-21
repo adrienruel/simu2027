@@ -8,8 +8,9 @@ on compare le signe et l'ordre de grandeur aux évaluations publiées.
   160 000 (macro-sectoriel, 2013-2017), 240 000 pour CICE et pacte de responsabilité (Banque de France, 2020).
 - Âge légal + 2 ans (réforme de 2023, de 62 à 64 ans) : rejoué comme un report de 64 à 66 ans, au même rythme d'un
   trimestre par génération ; étude d'impact : un peu plus de 300 000 seniors en emploi en plus en 2030, PIB +1,1 point
-  (Rexecode, d'après l'étude d'impact). NB : la part des reportés concernés (seniors.part_concernee) est calée sur
-  l'étude d'impact : ce backtest vérifie la cohérence, pas une prévision indépendante.
+  (Rexecode, d'après l'étude d'impact). NB : la part des reportés concernés (seniors.part_concernee) est calée, en
+  crise, sur l'étude d'impact, et au médian sur la DG Trésor (recalage du 21/11/2026) : ce backtest vérifie la
+  cohérence, pas une prévision indépendante.
 
     python -m outils.backtests
 """

@@ -1951,3 +1951,34 @@ Demande d'Adrien (« Philippe aide dès le premier enfant, pourquoi Mélenchon e
 - Limites : soutien moyen par enfant, sans effet du rang ni du revenu ; gratuité des crèches sans effet prix.
 - Sorties régénérées : micro vieillie de tous les programmes, export, démographie, statu quo, variantes, audits,
   ménages types, incertitude, page du comparateur.
+
+## 21/11/2026 — banc d'essai et dépenses face à la croissance (branches `phase-banc`, `phase-indexation`)
+- **Banc d'essai** (`outils/banc_essai.py`, `docs/banc_essai.md`) : dépense +1 point de PIB, TVA −1 point,
+  productivité +1 %, âge 64 → 65 ans et variante de productivité du COR, comparés à Mésange, ThreeME (OFCE 2026-9),
+  à la DG Trésor (COR, mars 2026) et au COR 2026. Constats :
+  - dépense conforme (calage) ;
+  - TVA : environ 0,2 point de moins rendu au solde (effet prix probable) ;
+  - productivité : presque rien au solde à long terme, parce que toutes les dépenses suivaient le PIB ou les
+    salaires l'année même ;
+  - âge : 60 % de l'effet de la DG Trésor, faute d'un prix d'un emploi cohérent avec le PIB qu'il crée.
+- **Correction 1** (demande d'Adrien : les budgets ne suivent plus la croissance) : `statu_quo._depenses_en_plus` et
+  paramètres `indexation_programme`.
+  - Pensions, chômage et prestations suivent leur règle.
+  - Santé, missions, collectivités et autres : seule leur part salariale suit, avec un passage partiel et décalé.
+  - Investissement et défense ne suivent pas.
+  - Dividende au médian : 0,12 → 0,39 à dix ans, 0,01 → 0,28 en 2073.
+  - Écart de solde primaire 2037 au prudent : Mélenchon −11,40 → −11,66, Tondelier −2,60 → −2,84, Arthaud
+    −4,05 → −4,62, Lisnard −2,83 → −2,76.
+  - Choix par défaut à valider : prestations sur les salaires, défense en cible de PIB du statu quo, passage des
+    salaires publics 100 / 100 / 75 / 50 % en 3 / 5 / 7 / 10 ans.
+- **À faire** : prix d'un emploi cohérent avec son salaire et son PIB (chantier 2.2) ; indexation du statu quo
+  lui-même sourcée bloc par bloc (chantier 1.2) ; régénérer toutes les sorties.
+- **Correction 2** : valeur d'un emploi au barème du programme (`moteur/emploi_valeur.py`) : manque à gagner en
+  impôt selon l'incidence des mesures sur le travail et la consommation (au plus 0,03 point). L'allocation évitée
+  suivait déjà la générosité de l'assurance chômage de chaque programme.
+- **Correction 3** : impôts sur la marge d'un emploi (IS et impôts de production, taux implicite de 0,22 sur la part
+  non salariale de la valeur ajoutée), au barème du programme.
+- **Correction 4** : emploi des seniors. `seniors.part_concernee` passe de 0,42 à 0,7 / 0,75 / 0,8 / 0,8 : l'ancien
+  calage appliquait deux fois le partage entre emploi et chômage. Pour 64 → 65 ans : 210 000 emplois au médian,
+  comme la DG Trésor, et un solde de +0,39 point à 20 ans. Âge abaissé : Mélenchon −12,32, Roussel −9,79 en 2037 au
+  prudent.

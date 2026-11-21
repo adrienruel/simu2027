@@ -221,6 +221,24 @@ def ir_salaries_menages(p: Parametres, nom: str = "actuel") -> dict:
     return {"seuls": seul / 1e9, "menages": mix / 1e9}
 
 
+def base_incidence(incidence: str, x: dict) -> float:
+    """Assiette d'une cellule de salariés pour un prélèvement sur le travail de cette incidence (par personne) : une
+    mesure de M euros d'incidence i change les prélèvements d'une personne de la cellule x de
+    M × base_incidence(i, x) / Σ (effectif × base_incidence(i, cellule)). Sert au canal d'offre et à la valeur d'un
+    emploi (moteur/emploi_valeur.py)."""
+    if incidence == "proportionnel":
+        return x["prelevements"]
+    if incidence == "ir":
+        return x["ir"]
+    if incidence == "bas":
+        return 1.0 if (x["ir"] > 0 and x["brut"] <= 2.5 * SMIC_BRUT_2026) else 0.0
+    if incidence == "haut":
+        return x["ir"] if x["brut"] > 4 * SMIC_BRUT_2026 else 0.0
+    if incidence == "milieu":  # allègements entre 1,6 et 3,5 SMIC
+        return x["prelevements"] if 1.6 * SMIC_BRUT_2026 < x["brut"] <= 3.5 * SMIC_BRUT_2026 else 0.0
+    return max(0.0, x["brut"] - PLAFOND_SS_2026)  # cotisation au-dessus du plafond de la Sécurité sociale
+
+
 def travail_par_point(p: Parametres, s: str, incidence: str = "proportionnel") -> dict:
     """Effet de long terme d'1 point de PIB (de 2029) de prélèvement sur le travail en moins, réparti selon
     l'incidence : % de PIB et emplois (personnes) en plus."""
@@ -230,20 +248,7 @@ def travail_par_point(p: Parametres, s: str, incidence: str = "proportionnel") -
         raise ValueError(f"incidence inconnue {incidence}")
     cel = _cellules(p)
     y29 = sq.pib(p, s)[2029]
-
-    def base(x):
-        if incidence == "proportionnel":
-            return x["prelevements"]
-        if incidence == "ir":
-            return x["ir"]
-        if incidence == "bas":
-            return 1.0 if (x["ir"] > 0 and x["brut"] <= 2.5 * SMIC_BRUT_2026) else 0.0
-        if incidence == "haut":
-            return x["ir"] if x["brut"] > 4 * SMIC_BRUT_2026 else 0.0
-        if incidence == "milieu":  # allègements entre 1,6 et 3,5 SMIC
-            return x["prelevements"] if 1.6 * SMIC_BRUT_2026 < x["brut"] <= 3.5 * SMIC_BRUT_2026 else 0.0
-        return max(0.0, x["brut"] - PLAFOND_SS_2026)  # cotisation au-dessus du plafond de la Sécurité sociale
-    poids = [x["n"] * base(x) for x in cel]
+    poids = [x["n"] * base_incidence(incidence, x) for x in cel]
     total = sum(poids)
     ext = sq._v(p, "offre.travail_participation", s)
     hrs = sq._v(p, "offre.travail_heures", s)
@@ -600,13 +605,16 @@ def education(p: Parametres, s: str, pts: dict[int, float], annees) -> dict[int,
 
 
 # ------------------------------------------------------------------------------------------------ seniors
-def seniors(p: Parametres, s: str, non_retraites: dict[int, float], baisse_age: bool = False) -> dict:
+def seniors(p: Parametres, s: str, non_retraites: dict[int, float], baisse_age: bool = False,
+            facteur_prelevements: dict[int, float] | None = None, excedent: dict[int, float] | None = None) -> dict:
     """Personnes de plus (ou de moins) qui ne sont pas encore retraitées quand l'âge de la retraite change : une part
     reste en emploi, une part au chômage, le reste inactif (seniors.devenir). Renvoie les emplois, les chômeurs, les
-    actifs en plus, les mesures budgétaires (prélèvements, allocations, autres prestations) et la valeur ajoutée (Md€)."""
+    actifs en plus, les mesures budgétaires (prélèvements, allocations, autres prestations) et la valeur ajoutée (Md€).
+    facteur_prelevements : prélèvements d'un emploi au barème du programme, rapportés au statu quo (emploi_valeur) ;
+    excedent : impôts sur la part non salariale de la valeur ajoutée d'un emploi (€ de 2026, emploi_valeur.excedent)."""
     sc = MIROIR[s] if baisse_age else s
     pe, pc = sq._v(p, "seniors.devenir", sc)
-    k_c = p.val("seniors.part_concernee")  # calé sur l'étude d'impact de la réforme de 2023
+    k_c = sq._v(p, "seniors.part_concernee", sc)  # recalée le 21/11/2026 sur l'étude d'impact, la DG Trésor et l'IPP
     non_retraites = {t: k_c * v for t, v in non_retraites.items()}
     w = sq.salaires(p, s)
     k = {t: w[t] / w[2029] for t in ANNEES}
@@ -617,7 +625,9 @@ def seniors(p: Parametres, s: str, non_retraites: dict[int, float], baisse_age: 
                    p.val("seniors.valeur_ajoutee_emploi"))
     mesures = [
         Mesure("Seniors : prélèvements des emplois en plus (âge de la retraite)", "recettes",
-               {t: em[t] * v * k[t] / 1e9 for t in ANNEES}, nature="effet_macro"),
+               {t: em[t] * v * k[t] * (facteur_prelevements or {}).get(t, 1.0) / 1e9 for t in ANNEES}, nature="effet_macro"),
+        Mesure("Seniors : IS et impôts de production sur la valeur ajoutée des emplois en plus (âge de la retraite)",
+               "recettes", {t: em[t] * (excedent or {}).get(t, 0.0) * k[t] / 1e9 for t in ANNEES}, nature="effet_macro"),
         Mesure("Seniors : allocations chômage en plus (âge de la retraite)", "chomage",
                {t: ch[t] * a * k[t] / 1e9 for t in ANNEES}, nature="effet_macro"),
         Mesure("Seniors : invalidité et minima sociaux en plus (âge de la retraite)", "aah_invalidite",

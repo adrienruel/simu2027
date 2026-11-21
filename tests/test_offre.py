@@ -58,21 +58,23 @@ def test_demande_par_instrument(p):
 def test_seniors(p):
     """Âge reculé : une part en emploi, une au chômage, le reste inactif ; âge abaissé : scénario miroir."""
     nr = {t: 100000.0 for t in ANNEES}
-    k = p.val("seniors.part_concernee")
+    k = sq._v(p, "seniors.part_concernee", "prudent")
     r = offre.seniors(p, "prudent", nr)
     pe, pc = p.val("seniors.devenir", "prudent")
     assert r["emplois"][2040] == pytest.approx(k * pe * 1e5) and r["actifs"][2040] == pytest.approx(k * (pe + pc) * 1e5)
     b = offre.seniors(p, "prudent", {t: -v for t, v in nr.items()}, baisse_age=True)
     pe_m, _ = sq._v(p, "seniors.devenir", "median")
-    assert b["emplois"][2040] == pytest.approx(-k * pe_m * 1e5)
+    k_m = sq._v(p, "seniors.part_concernee", "median")
+    assert b["emplois"][2040] == pytest.approx(-k_m * pe_m * 1e5)
 
 
-def test_seniors_cales_sur_l_etude_d_impact_de_2023(p):
-    """Deux ans d'âge (retour à 62 ans) : 200 000 à 400 000 emplois, autour des 300 000 de l'étude d'impact de 2023."""
+def test_seniors_cales_sur_l_etude_d_impact_et_la_dg_tresor(p):
+    """Deux ans d'âge (retour à 62 ans, recalage du 21/11/2026) : entre les 300 000 emplois de l'étude d'impact de 2023
+    et les 2 × 240 000 du haut de la fourchette de la DG Trésor (COR, mars 2026) pour un an d'âge."""
     t = noyau.charger("tondelier")
     for s in ("prudent", "optimiste"):
         c = t.contexte(p)[s]["emplois_canaux"][2040]
-        assert 200000 < -c["Seniors : emploi (âge de la retraite)"] < 400000, s
+        assert 280000 < -c["Seniors : emploi (âge de la retraite)"] < 500000, s
 
 
 def test_seniors_dans_les_programmes(p):

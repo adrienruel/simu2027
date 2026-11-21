@@ -508,6 +508,18 @@ emploi:
   taux_marge_snf: {valeur: 0.322, unite: taux, statut: SOURCE, source: "Insee Première n° 2105 (comptes de la Nation 2025)"}
   impots_production_va: {valeur: 0.05, unite: taux, statut: HYPOTHESE}
   cout_emploi_cree_smic: {valeur: 1.3, unite: sans_unite, statut: HYPOTHESE}
+  taux_impots_excedent:
+    valeur: 0.22
+    unite: taux
+    statut: HYPOTHESE
+    source: "Calculé : (IS 2024, 69,5 Md€ avant crédits d'impôt, Insee + impôts de production hors facteur travail, 92,7 − 52,0 = 40,7 Md€, DGFiP Statistiques n° 35) / EBE des sociétés non financières 2025, 497,5 Md€ (Insee, comptes de la Nation 2025) = 0,22"
+    note: "Taux implicite des impôts sur la part non salariale de la valeur ajoutée d'un emploi en plus (moteur/emploi_valeur.excedent). Prudent : sans la fiscalité des dividendes distribués (PFU), ni la part des impôts de production payée hors du secteur marchand (17,4 Md€, mêlée au facteur travail). Années d'euros mêlées (2023 à 2025) : écart de quelques pour cent."
+  prelevements_programme:
+    valeur: true
+    unite: sans_unite
+    statut: DECISION
+    source: "Demande d'Adrien du 21/11/2026 : la valeur d'un emploi suit le manque à gagner en impôt du programme (moteur/emploi_valeur.py), comme l'allocation évitée suit la générosité de son assurance chômage"
+    note: "Prélèvements et TVA d'un emploi type (1,3 SMIC pour les canaux, coût moyen pour les seniors) au barème du programme : mesures de recettes sur le travail selon leur incidence (offre.base_incidence), mesures sur la consommation au prorata de la TVA et des accises. false : barème du statu quo pour tous."
   smic_effet_salaire_moyen: {valeur: 0.08, unite: sans_unite, statut: SOURCE, source: "Gautier, Roux et Suarez Castillo, Insee Références 2018"}
   marge_intensive: {valeur: {facteur_eqtp: 0.88, crise: 0.08, median: 0.05, optimiste: 0.02}, unite: sans_unite, statut: SOURCE, source: "Bargain, Orsini et Peichl, JHR 2014"}
   impots_production_salaires: {valeur: 52.0, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025), facteur travail 2023"}
@@ -1080,11 +1092,11 @@ seniors:
     source: "Réforme de 2010, personnes dont le départ est retardé : 64 % en emploi, 28 % au chômage, 8 % inactifs (Koubi et Dubois, Insee, cité par Trésor-Éco n° 302, février 2022 ; borne optimiste) ; IPP, rapport n° 61 (novembre 2025) : environ la moitié en emploi, un quart au chômage indemnisé ; Rabaté et Rochut (Journal of Pension Economics and Finance, 2020) : 21 points d'emploi pour 48 points de retraités en moins (44 %, borne crise)"
     note: "[part en emploi, part au chômage] ; le reste est inactif (maladie, invalidité, minima sociaux). Pour un report, le scénario ; pour un âge abaissé, le scénario miroir (moins d'emplois perdus n'est pas prudent)."
   part_concernee:
-    valeur: 0.42
+    valeur: {crise: 0.7, prudent: 0.75, median: 0.8, optimiste: 0.8}
     unite: taux
     statut: HYPOTHESE
-    source: "Calé sur l'étude d'impact de la réforme de 2023 (deux ans d'âge légal en plus) : +300 000 personnes en emploi sur sept à huit ans, avec +84 000 allocataires de l'assurance chômage et +60 000 de minima sociaux (DARES, notes au COR de janvier 2022 ; chiffres repris par Public Sénat, 2023) ; soit ≈ 470 000 personnes concernées avec la répartition de l'Insee (64 % en emploi)"
-    note: "Part des personnes que le profil de départ décalé fait rester non retraitées qui changent vraiment de situation (emploi, chômage indemnisé, minima) ; les autres restent inactives sans revenu public supplémentaire. Recalée le 11/11/2026 sur le nouveau calcul des retraites (âge légal réel par génération, taux plein à 67 ans inchangé) : le retour de 64 à 62 ans, cas exact de l'étude d'impact, donne ≈ 1,11 million de non-retraités en moins à plein effet (2040) ; 0,42 en garde ≈ 470 000, comme l'étude d'impact, soit ≈ 255 000 emplois en prudent (scénario miroir) et ≈ 210 000 en optimiste. La proposition de la relecture neutre (0,9 à 1) supposait des pensions recalées sur ≈ 0,47 million de retraités ; ce n'est pas la voie retenue : les pensions restent calculées sur le profil par génération (65 ans ≈ 9 à 10 Md€, Cour des comptes 9,2), qui compte bien ≈ 1,1 million de retraités en moins pour deux ans."
+    source: "Recalé le 21/11/2026 (banc d'essai, docs/banc_essai.md) sur l'emploi des seniors pour un an d'âge d'ouverture des droits, à plein effet (470 000 non-retraités dans le modèle, 10 Md€ de pensions en moins) : crise ≈ 150 000 emplois (étude d'impact de la réforme de 2023 : 300 000 emplois pour deux ans d'âge, Rexecode 2023) ; médian ≈ 210 000 (DG Trésor pour le COR, mars 2026 : 210 000 emplois à 20 ans pour 64 → 65 ans ; Rabaté et Rochut, 2020 : 44 % des départs retardés en emploi) ; optimiste ≈ 240 000 (haut de la fourchette de la DG Trésor, 210 000 à 240 000 ; IPP, rapport n° 61, 2025 : environ la moitié en emploi). Population active : +604 000 à long terme pour la réforme de 2023, deux ans d'âge et la durée d'assurance (OFCE, janvier 2026, d'après l'Insee)"
+    note: "Part des personnes que le décalage de l'âge maintient hors de la retraite qui changent vraiment de situation (emploi, chômage indemnisé, minima, invalidité) ; les autres (déjà inactives, sans revenu public en plus) ne comptent pas. Emploi = part × part en emploi de seniors.devenir : 32 / 38 / 44 / 51 % des non-retraités (crise / prudent / médian / optimiste), dans la fourchette publiée (32 % pour l'étude d'impact, 44 à 64 % pour les évaluations de la réforme de 2010). Avant le 21/11/2026 : 0,42 dans tous les scénarios (étude d'impact rapportée aux non-retraités à plein effet, puis partage de seniors.devenir appliqué une seconde fois), soit 21 à 27 % des non-retraités en emploi, sous toutes les références. Pour un âge abaissé, scénario miroir, comme seniors.devenir."
   valeur_emploi:
     valeur: 27000
     unite: eur_an
@@ -1310,3 +1322,26 @@ programme_commun:
     statut: HYPOTHESE
     source: "Encadrement : DEPP, note du 3 février 2026 (le dédoublement des classes en éducation prioritaire n'a plus d'effet mesurable à l'entrée en 6e) ; 0,1 écart-type ≈ 10 points PISA, la moitié de la perte de 2018-2022"
     note: "Niveau des élèves (écart-type) d'un programme qui déclare le canal école (réformes d'organisation sans budget) : compté dans le seul scénario optimiste, zéro ailleurs faute d'évaluation. Recopié jusqu'ici dans zemmour."
+
+# --- Dépenses du statu quo face à la croissance d'un programme (21/11/2026, statu_quo._depenses_en_plus) -----------
+# Demande d'Adrien : les budgets ne suivent plus la croissance, mais ce qui fixe leur coût. Pensions, chômage et
+# prestations suivent leur règle (statu_quo.BLOCS_LEGAUX) ; pour les autres blocs, seule la part salariale suit.
+indexation_programme:
+  part_salariale:
+    valeur: {sante: 0.6, etat_missions: 0.4, collectivites: 0.3, autres: 0.3, investissement: 0.0, defense_ue: 0.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : rémunérations dans la dépense de chaque bloc. Santé : personnel des établissements (≈ 2/3 de leurs charges) et honoraires de ville, qui suivent les revenus ; État : titre 2 hors pensions ≈ 40 % des missions ; collectivités : frais de personnel ≈ 26 % de leurs dépenses (DGCL, finances locales) ; investissement et défense programmés en euros (loi de programmation militaire, puis cible en part du PIB du statu quo)"
+    note: "À sourcer ligne par ligne (chantier 1.2). Une part plus haute est prudente : plus de la croissance repart en dépenses."
+  passage:
+    valeur: {crise: 1.0, prudent: 1.0, median: 0.75, optimiste: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : à long terme, les salaires publics suivent les salaires privés (sinon le recrutement échoue) ; le point d'indice a décroché des salaires privés depuis 2010 (gel de 2010 à 2016) : un passage partiel est plausible"
+    note: "Part de la hausse de salaire due au programme qui passe aux rémunérations publiques et aux tarifs de santé. Choix par défaut du 21/11/2026, à valider par Adrien."
+  delai:
+    valeur: {crise: 3, prudent: 5, median: 7, optimiste: 10}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : revalorisations du point d'indice et des tarifs négociées par étapes, plusieurs années après les salaires privés"
+    note: "Années pour que le passage soit complet (moyenne mobile)."
