@@ -2041,3 +2041,23 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   calage appliquait deux fois le partage entre emploi et chômage. Pour 64 → 65 ans : 210 000 emplois au médian,
   comme la DG Trésor, et un solde de +0,39 point à 20 ans. Âge abaissé : Mélenchon −12,32, Roussel −9,79 en 2037 au
   prudent.
+
+## 20/11/2026 — phase Q : formation supérieure, diplômés en plus par cohorte (branche `phase-formation`, rebasée sur `main` = 2151f03 le 21/11/2026)
+- **Demande d'Adrien** : intégrer « 100 000 ingénieurs formés par an » (Philippe, PHI-NUM-03), y compris le cas où
+  l'offre dépasse la demande, et suivre l'évolution des profils dans les cohortes de travailleurs. Point de départ :
+  47 400 diplômés par an (IESF, 2024), retenu par Adrien.
+- **Canal commun `formation_superieure`** (`moteur/qualifications.py`, `docs/formation.md`) :
+  - flux de diplômés en plus après la durée des études ;
+  - besoin de postes non pourvus (Institut Montaigne) en partie reporté ; excédent partagé entre départs à
+    l'étranger et déclassement ;
+  - cohortes vieillies (survie, emploi par âge) ;
+  - gain de productivité au solde par le dividende ; entrée retardée des étudiants en plus ;
+  - coût net dans les mesures du programme (multiplicateur, prélèvements « fp »).
+  La dépense forfaitaire de Philippe (0,8 à 1,5 Md€, sans effet sur le PIB) est remplacée.
+- **Effets** (calculés sur b03ea64, avant les corrections du noyau du 21/11 ; à refaire à la régénération) :
+  Philippe, écart de solde primaire 2037 au prudent −1,015 → −1,013 point ; 2050 −1,696 → −1,687 ;
+  optimiste 2073 +1,181 → +1,269. Autres programmes inchangés.
+- **Profils** : `outils/profils_formation.py` (ingénieurs en activité du statu quo calés sur l'IESF, en plus,
+  déclassés, partis, part dans l'emploi, par âge).
+- Sorties régénérées : export, statu quo, variantes de la dette, démographie, ménages types, variante du fonds,
+  audits, sources, page. À régénérer : micro vieillie (chiffres inchangés : le canal n'y entre pas) et incertitude.

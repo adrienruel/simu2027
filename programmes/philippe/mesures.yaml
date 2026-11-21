@@ -322,8 +322,8 @@ mesures:
   traitement: non chiffré
 - id: PHI-NUM-03
   intitule: 100 000 ingénieurs par an (contre 40 000), en cinq ans
-  source: Site (« … plus conquérante »)
-  traitement: philippe_mesures.ingenieurs
+  source: Site (« … plus conquérante ») ; page programme (« 100 000 ingénieurs formés par an »)
+  traitement: philippe_canaux.formation_superieure (canal commun, moteur/qualifications.py ; flux du statu quo 47 400, IESF 2024)
 - id: PHI-OM-01
   intitule: Asile suspendu à Mayotte et en Guyane
   source: Site (« … plus sûre »)

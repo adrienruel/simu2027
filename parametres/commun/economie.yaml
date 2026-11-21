@@ -1209,3 +1209,141 @@ indexation_programme:
     statut: HYPOTHESE
     source: "Encadrement : revalorisations du point d'indice et des tarifs négociées par étapes, plusieurs années après les salaires privés"
     note: "Années pour que le passage soit complet (moyenne mobile)."
+
+# --- Formation supérieure : diplômés en plus par cohorte (phase Q, 20/11/2026 ; moteur/qualifications.py) ---------
+# Canal commun « formation_superieure » (moteur/canaux_declares.py) : un programme déclare filière, objectif annuel
+# de diplômés, debut et plein ; tout le reste est ici. Seule filière codée : ingénieurs (PHI-NUM-03, demande d'Adrien).
+formation_superieure:
+  diplomes_statu_quo:
+    valeur: 47400
+    unite: sans_unite
+    statut: SOURCE
+    source: "IESF, 36e enquête nationale (2025) : 47 400 ingénieurs diplômés en 2024"
+    url: "https://www.iesf.fr/offres/doc_inline_src/752/Brochure+Enquete+IESF+2025-Repondants.pdf"
+    page: "Effectifs des ingénieurs et scientifiques au 31/12/2024"
+    note: "Point de départ retenu par Adrien le 20/11/2026 (≈ 47 000) : Philippe écrit « contre 40 000 », chiffre que sa page ne source pas. La CDEFI compte 48 700 diplômes accrédités par la CTI en 2023. Flux du statu quo supposé constant."
+  stock_en_activite:
+    valeur: 1000400
+    unite: sans_unite
+    statut: SOURCE
+    source: "IESF, 36e enquête nationale (2025) : 1 000 400 ingénieurs et scientifiques en activité au 31/12/2024"
+    url: "https://www.iesf.fr/offres/doc_inline_src/752/Brochure+Enquete+IESF+2025-Repondants.pdf"
+    page: "Effectifs des ingénieurs et scientifiques au 31/12/2024"
+    note: "Sert seulement aux profils (stock du statu quo, calé la première année du modèle). Comprend les docteurs et bac+5 scientifiques des universités suivis par l'IESF."
+  flux_historique:
+    valeur: {"1985": 14000, "2015": 38000, "2024": 47400}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "IESF, 27e enquête (2016) : 38 000 ingénieurs diplômés en 2015 ; IESF 2025 : 47 400 en 2024 ; 1985 : ordre de grandeur du rapport Decomps (1989), qui visait à doubler un flux d'environ 14 000"
+    note: "Flux passés interpolés linéairement, constants avant 1985 : ne servent qu'à répartir par âge le stock du statu quo (profils), pas au PIB."
+  age_diplome:
+    valeur: 23
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Diplôme de niveau bac+5 obtenu vers 23 ans"
+  delai_diplome:
+    valeur: {crise: 5, prudent: 4, median: 3, optimiste: 3}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : cycle ingénieur de trois ans après bac+2 (concours après prépa, admissions parallèles) ; cinq ans pour les écoles post-bac"
+    note: "Années entre l'ouverture des places et les premiers diplômés en plus, et années d'études financées en plus par diplômé (coût et entrée retardée). Prudent : une partie des places en écoles post-bac."
+  part_objectif_atteinte:
+    valeur: {crise: 0.4, prudent: 0.5, median: 0.7, optimiste: 0.9}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Institut Montaigne (mai 2025), le vivier est la contrainte (désaffection pour les sciences, générations de bacheliers en baisse) ; aucun précédent de doublement du flux en cinq ans"
+    note: "Part de l'écart entre l'objectif du programme et le flux du statu quo effectivement atteinte (places pourvues par des étudiants qui obtiennent le diplôme)."
+  cout_net_annee_etudiant:
+    valeur: {crise: 8000, prudent: 6500, median: 5000, optimiste: 4000}
+    unite: eur_an
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Encadrement : SIES, note d'information n° 5 (mai 2021) : coût moyen d'un étudiant en 2019, 10 100 € à l'université, 15 700 € en CPGE ; en 2002, 11 910 € en école d'ingénieurs universitaire contre 6 850 € à l'université (réponse ministérielle, question n° 23864, 12e législature)"
+    note: "Coût d'une année en école d'ingénieurs moins celui du cursus que l'étudiant aurait suivi (université le plus souvent) : ≈ 17 500 − 11 200 € de 2026, soit ≈ 6 300 €. Plus haut au prudent (étudiants qui n'auraient pas fait d'études longues, locaux et enseignants nouveaux), plus bas à l'optimiste (places dans des écoles existantes, plus d'élèves par enseignant)."
+  part_publique:
+    valeur: {crise: 0.9, prudent: 0.8, median: 0.7, optimiste: 0.6}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : une partie des diplômes vient d'écoles privées (droits d'inscription moyens ≈ 6 500 €) ; part des écoles privées dans les diplômes à sourcer (CDEFI)"
+    note: "Part du coût net payée par l'État (écoles publiques, subventions, contrats avec les écoles privées)."
+  part_etudiants_sinon_en_emploi:
+    valeur: {crise: 0.3, prudent: 0.2, median: 0.15, optimiste: 0.1}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : sans la mesure, la plupart de ces étudiants auraient suivi un master ou une licence ; une minorité aurait travaillé avec un bac+2 ou un bac+3"
+    note: "Part des années d'études en plus qui auraient été des années d'emploi (PIB au profil de salaire des 18-24 ans)."
+  ecart_salaire_observe:
+    valeur: 0.17
+    unite: taux
+    statut: SOURCE
+    source: "IESF, 31e enquête (2020) : salaire brut médian des ingénieurs supérieur de 17 % à celui des cadres (même écart dans les enquêtes 2015 et 2016)"
+    url: "https://www.iesf.fr/offres/file_inline_src/752/752_pj_260620_150632.pdf"
+    page: "Synthèse, salaire brut médian en France"
+    note: "Écart avec le cursus remplacé (cadre ou bac+5 non ingénieur), avant la part causale."
+  part_causale:
+    valeur: {crise: 0.25, prudent: 0.4, median: 0.6, optimiste: 0.8}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : l'écart observé mêle l'effet du diplôme et la sélection des élèves (même logique que carrieres.decrochage.part_causale)"
+    note: "Part de l'écart de salaire qui est un gain de productivité dû au diplôme. Les étudiants en plus sont, en moyenne, moins sélectionnés que ceux d'aujourd'hui : c'est aussi ce que dit une part causale prudente."
+  salaire_relatif_contrefactuel:
+    valeur: 1.3
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : IESF 2020, salaire médian des ingénieurs double de celui de l'ensemble des salariés et 17 % au-dessus des cadres, soit des cadres à ≈ 1,7 fois le salaire médian, ≈ 1,4 fois le salaire moyen ; une partie des étudiants en plus n'aurait pas été cadre"
+    note: "Salaire du cursus remplacé, rapporté au salaire moyen (productivité moyenne par emploi)."
+  taux_emploi:
+    valeur: 0.93
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : IESF, chômage des ingénieurs ≈ 3,5 % en 2019 ; activité quasi complète avant 55 ans"
+    note: "Taux d'emploi des ingénieurs de 30 à 49 ans ; aux autres âges, profil de la population (demographie.taux_emploi_par_age, sorties d'activité des seniors)."
+  part_etranger:
+    valeur: 0.11
+    unite: sans_unite
+    statut: SOURCE
+    source: "CGE, enquête insertion 2025 : un jeune diplômé sur neuf trouve un emploi hors de France, sans évolution notable"
+    url: "https://diplomeo.com/actualite-cge_resultats_enquete_insertion_2025"
+    page: "Le travail à l'étranger continue de séduire"
+    note: "Part des diplômés qui travaillent à l'étranger, gardée toute la carrière (retours non comptés)."
+  besoin_annuel:
+    valeur: {crise: 14000, prudent: 21000, median: 28000, optimiste: 40000}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Institut Montaigne, « Métiers de l'ingénieur : démultiplier nos ambitions » (mai 2025) : 28 000 ingénieurs et bac+5 de plus à former chaque année d'ici 2035 en réindustrialisation modérée (industrie à 12 % du PIB) ; 40 000 postes d'ingénieurs par an selon la présentation du rapport à L'Express ; de 30 000 à 150 000 ingénieurs et techniciens selon les scénarios"
+    note: "Postes d'ingénieurs non pourvus en plus chaque année, au-delà du flux du statu quo ; un besoin non utilisé se reporte. Médian : scénario modéré. Prudent : entre la stabilité de l'industrie et le scénario modéré. Crise : moitié du modéré."
+  besoin_report:
+    valeur: {crise: 0.25, prudent: 0.5, median: 0.75, optimiste: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : un poste qui ne trouve pas d'ingénieur est pourvu par un autre profil (technicien promu, recrutement à l'étranger) ou abandonné (projet reporté, activité délocalisée)"
+    note: "Part du besoin non pourvu une année qui reste ouverte l'année suivante."
+  besoin_annee_fin:
+    valeur: 2035
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Horizon du rapport de l'Institut Montaigne (2035)"
+  besoin_apres:
+    valeur: {crise: 0.25, prudent: 0.5, median: 0.75, optimiste: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Aucune projection au-delà de 2035"
+    note: "Besoin annuel après besoin_annee_fin, en part de celui d'avant."
+  besoin_suit_offre:
+    valeur: {crise: 0, prudent: 0, median: 0, optimiste: 0.25}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : changement technique orienté (Acemoglu, 1998, 2002) : une offre abondante de qualifications oriente la technologie vers elles ; aucune estimation pour la France"
+    note: "Part des diplômés en excédent qui créent leur propre poste d'ingénieur. Optimiste seulement (décision par défaut du 20/11/2026, révisable)."
+  prime_declasses:
+    valeur: {crise: 0.15, prudent: 0.25, median: 0.4, optimiste: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : un diplômé déclassé (technicien, cadre non technique) garde une partie de l'écart de productivité"
+    note: "Part de l'écart gardée par les diplômés en excédent restés en France."
+  part_etranger_excedent:
+    valeur: {crise: 0.4, prudent: 0.3, median: 0.25, optimiste: 0.2}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : 11 % des jeunes diplômés travaillent à l'étranger quand le marché français les absorbe (CGE 2025) ; davantage quand il ne les absorbe pas (Suisse, Allemagne, Luxembourg, Royaume-Uni)"
+    note: "Part des diplômés en excédent qui partent à l'étranger : le PIB français ne gagne rien, la formation a été payée."
