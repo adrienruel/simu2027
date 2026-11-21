@@ -242,6 +242,13 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     fisher_actif = p.val("inflation.active") and p.val("inflation.effet_fisher")
     dette_prec = (ctx.get("dette_depart") or sq.dette_fin_2028(p)) / facteur_2027_2028(p)
     fisher = prime = bce = 0.0
+    # 21/11/2026 (roadmap 1.3) : taux apparent au rythme du refinancement. Chaque année, la dette échue (1 / maturité)
+    # et la dette nouvelle (hausse de la dette de l'année précédente) se financent au taux du moment ; le reste garde
+    # son taux. Avant : convergence en ligne droite vers le taux long en macro.annees_taux_long_terme ans, plus rapide
+    # que la Commission (taux apparent de 4,1 % en 2035 au médian, contre 3,7 % dans le Debt Sustainability Monitor 2025)
+    refi = p.val("macro.taux_apparent_refinancement")
+    taux_base = app0
+    dette_prec_prec = None
     ratio_ref, pib_ref_2029 = ratio_reference(p, s), sq.pib(p, s)[2029]
     ecart_scen = sq._v(p, "macro.ecart_taux_scenario", s)
     # phase E1 (14/11/2026) : la hausse du taux de marché par rapport au statu quo (prime de dette, écart propre au
@@ -333,12 +340,22 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         # dette de fin d'année précédente sur le PIB de cette année-là (dette/PIB publiée) ; pour 2029, PIB du statu
         # quo, comme la référence
         ratio = dette_prec / (y[t - 1] if t > 2029 else pib_ref_2029)
-        prime += (prime_marche(p, s, ratio, ratio_ref) - prime) / mat
+        if refi:
+            nouvelle = max(0.0, dette_prec - dette_prec_prec) / dette_prec if (dette_prec_prec and dette_prec > 0) else 0.0
+            q = min(1.0, 1 / mat + nouvelle)
+        else:
+            q = 1 / mat
+        dette_prec_prec = dette_prec
+        prime += (prime_marche(p, s, ratio, ratio_ref) - prime) * q
         if fisher_actif:
-            fisher += ((infl_taux[t] - infl_ref) - fisher) / mat
-        bce += (marche.get(t, 0.0) - bce) / mat
+            fisher += ((infl_taux[t] - infl_ref) - fisher) * q
+        bce += (marche.get(t, 0.0) - bce) * q
         # composantes du taux apparent nominal, publiées pour la décomposition du déficit (moteur/decomposition.py)
-        taux_base = min(lt, app0 + (lt - app0) * (t - 2029) / n_lt)
+        if refi:
+            if t > 2029:
+                taux_base += (lt - taux_base) * q
+        else:
+            taux_base = min(lt, app0 + (lt - app0) * (t - 2029) / n_lt)
         taux_prime = ecart_taux_borne(p, prime, sup.get(t, 0.0))
         taux_scen = ecart_scen * min(1.0, (t - 2029) / n_lt)
         nominal = (taux_base + fisher + bce + taux_prime

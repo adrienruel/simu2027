@@ -2077,3 +2077,10 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
 - **Effet sur les dépenses du statu quo**, prudent : −0,36 point de PIB en 2037, −0,76 en 2050, −1,22 en 2073, dont
   la défense pour environ la moitié. Déficit du statu quo en 2037 : 8,69 % (9,10 % dans les sorties publiées, avant
   toutes les corrections du 21/11).
+
+- **Roadmap 1.3, taux apparent** (`macro.taux_apparent_refinancement`) : il suit maintenant le refinancement (dette
+  échue et dette nouvelle au taux du moment) au lieu d'une ligne droite vers 4 % en 6 ans. Recoupé avec la fiche
+  France du Debt Sustainability Monitor 2025 de la Commission : intérêts 4,97 % du PIB en 2035 au médian (Commission
+  5,0 ; avant 5,67), taux apparent 3,65 % (Commission 3,7). Déficit du statu quo en 2037 au prudent : 8,69 → 8,12 %.
+  Écarts de solde primaire des programmes inchangés ; à long terme, les programmes qui creusent la dette paient plus
+  vite le taux du moment (Mélenchon 2050 : 66,8 → 73,3 % de déficit). Détail dans `docs/recoupements.md`.
