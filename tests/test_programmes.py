@@ -36,7 +36,8 @@ def test_hypotheses_communes_sans_mesure_du_programme():
                          "demographie.taux_emploi_tendance", "emploi.depenses_chomage_programme",
                          "emploi.generosite_programme", "emploi.prelevements_programme", "emploi.prime_activite_emplois", "entreprises.incidence_retour_budget",
                          "incertitude.correlation",
-                         "lectures_communes.capitalisation", "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi",
+                         "lectures_communes.capitalisation", "macro.taux_apparent_refinancement",
+                         "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi",
                          "programme_commun.enveloppe_debut", "programme_commun.enveloppe_plein",
                          "programme_commun.macro_multiplicateur_actif", "programme_commun.smic_allegements_suivent_smic", "sante_trajectoire.pente_phase_1"]
 

@@ -141,10 +141,16 @@ statu_quo:
     source: "Unédic, prévisions financières d'octobre 2026 : dépenses totales 46,6 Md€ en 2026 (allocations et contribution à France Travail), 2,6 millions d'allocataires indemnisés"
     note: "Suit les chômeurs du scénario (population de l'Insee, taux par âge de 2025) et les salaires (allocations proportionnelles au salaire passé)."
   indexation_prestations:
-    valeur: salaires
+    valeur: par_prestation
     unite: sans_unite
     statut: DECISION
-    note: "DÉCISION d'Adrien du 04/11/2026 : prestations familiales, aides au logement, RSA, prime d'activité (barème compris), AAH et invalidité revalorisées sur les salaires, pour garder leur niveau par rapport aux revenus d'activité (la loi les revalorise sur les prix ; sur 45 ans elles perdraient environ un quart par rapport aux salaires, ce qui n'arriverait pas sans revalorisations exceptionnelles). Variante « prix » : la loi à la lettre (environ 0,9 point de PIB de dépenses en moins en 2060). Les barèmes des prélèvements sur les pensions restent sur les prix (statu_quo.baremes_retraites)."
+    note: "DÉCISION d'Adrien du 21/11/2026 : la revalorisation dépend de la prestation (statu_quo.revalorisation_prestations), arbitrée d'après l'histoire des revalorisations. Remplace sa décision du 04/11/2026 (toutes sur les salaires). Variantes : « salaires » (toutes), « prix » (la loi à la lettre, environ 0,9 point de PIB de dépenses en moins en 2060). Les barèmes des prélèvements sur les pensions restent sur les prix (statu_quo.baremes_retraites)."
+  revalorisation_prestations:
+    valeur: {famille: 0.0, logement: 0.0, rsa: 0.3, prime_activite: 0.3, aah: 0.8, invalidite: 0.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Drees, Minima sociaux et prestations sociales, édition 2023 : de 1990 à 2023, pouvoir d'achat du barème du RSA (RMI avant 2009) +9 %, de l'AAH +26 %, du SMIC brut à temps plein +33 % ; RSA à 44 % du SMIC net en 2023, AAH à 71 %. Lois : prestations familiales, RSA, prime d'activité, AAH et pensions d'invalidité revalorisées sur les prix (L. 161-25 du code de la sécurité sociale) ; aides au logement sur l'indice de référence des loyers"
+    note: "Adresse de la source : drees.solidarites-sante.gouv.fr, panorama Minima sociaux et prestations sociales, édition 2023. Part de la hausse des salaires transmise (0 : prix ; 1 : salaires), arbitrage du 21/11/2026 (Adrien : « ça dépend de la presta, tu fais les arbitrages »). Familles et logement : prix, comme la loi, sans plan de rattrapage (gels des aides au logement en 2017-2018). RSA et prime d'activité : 0,3 (ln 1,09 / ln 1,33 : la part du gain du SMIC que le RSA a suivie, par les plans de revalorisation, dont +10 % de 2013 à 2017). AAH : 0,8 (ln 1,26 / ln 1,33 : revalorisations de 2008-2012 et de 2018-2019). Pensions d'invalidité : prix, comme les pensions. Le bloc AAH et invalidité prend la moyenne pondérée (≈ 0,5)."
 
   prestations_familiales:
     url: "https://www.assemblee-nationale.fr/dyn/contenu/visualisation/922273/file/PLACSS%202024%20Annexe%201%20-%20REPSS%20Famille%202025.pdf"
@@ -205,6 +211,12 @@ statu_quo:
     statut: SOURCE
     source: "PLF 2027 : crédits de la mission Défense hors pensions 63,4 Md€ en 2027, +6,5 Md€ sur 2026 (ministère des Armées, « Projet de loi de finances des Armées 2027 : LPM année 4 »)"
     note: "Niveau de départ du bloc défense, comme la dépense primaire de départ (PLF 2027) ; ramené en euros de 2026 par budget_etat.deflateur_contribution_ue, comme la contribution à l'UE. Ajouté le 05/11/2026 (relecture indépendante) : avec le niveau de 2026, la marche 2026-2027 était comptée deux fois (dans le résidu « autres » et dans la hausse vers 2030)."
+  defense_apres_lpm:
+    valeur: euros
+    unite: sans_unite
+    statut: DECISION
+    source: "Décision d'Adrien du 21/11/2026 : suivre une directive européenne, et à défaut un montant en euros. Il n'existe pas de règle européenne de niveau de dépense militaire (la cible de 3,5 % du PIB en 2035 est un engagement de l'OTAN, sommet de La Haye, juin 2025 ; le programme SAFE de l'Union est un prêt) : la défense garde le niveau de 2030 de la loi de programmation, en euros constants de 2026"
+    note: "« euros » : niveau de la loi de programmation, puis constant en euros de 2026 ; « pib » : suit le PIB (avant le 21/11/2026). La contribution à l'UE, dans le même bloc, suit toujours le PIB : c'est une ressource assise sur le revenu national brut (décision 2020/2053 du Conseil sur les ressources propres)."
   defense_trajectoire:
     valeur: lpm
     unite: sans_unite

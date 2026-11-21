@@ -190,6 +190,24 @@ def _post(operations):
     return [o["formule"] for o in operations if "formule" in o and o["formule"]["nom"] in POST]
 
 
+def emplois_par_scenario(pp, rel, t, bande, eta: dict, valeur) -> dict:
+    """Emplois en plus et effet sur le solde (Md€), par scénario, de variations relatives du gain à travailler rel
+    (personnes en emploi t, poids pp, tranche de salaire bande, élasticités eta[scénario][tranche], valeur publique
+    d'un emploi). Chantier 2.1 (21/11/2026) : le scénario miroir est choisi sur le sens NET de la mesure, pas personne
+    par personne. Avant, les gagnants prenaient l'élasticité du scénario et les perdants celle du miroir : une mesure
+    qui fait des gagnants et des perdants (prime d'activité, qui change aussi le contrefactuel du conjoint) perdait
+    des emplois au prudent dans les deux sens (+10 % et −10 % : −4 800 et −5 200)."""
+    from moteur.offre import MIROIR
+    w = pp * rel * t
+    par = {}
+    for sc in eta:
+        net = float((w * eta[sc][bande]).sum())
+        el = eta[sc][bande] if net >= 0 else eta[MIROIR[sc]][bande]
+        d = w * el
+        par[sc] = {"emplois": float(d.sum()), "budget": float((d * valeur).sum()) / 1e9}
+    return par
+
+
 class Base:
     """Population et simulations du système actuel (avec les deux contrefactuels « sans travail »), tirages de
     recours fixés.
@@ -453,12 +471,13 @@ class Base:
             v[choix] = (e["cout_m"] - cf[nom]["cout_m"])[m[choix]] - g[choix]
         return {"gain": g, "valeur": v}
 
-    def emploi_effet(self, e1, cf1, s: str = "prudent") -> dict:
+    def emploi_effet(self, e1, cf1, s: str = "prudent", releves=None) -> dict:
         """Emplois en plus (personnes) et effet sur le solde (Md€) de la variation du gain à travailler : élasticité
         de participation de la tranche de salaire (offre.travail_participation) × facteur propre aux transferts
-        (offre.participation_transferts), appliquée aux personnes en emploi (Immervoll et al., 2007) ; scénario miroir
-        quand le gain baisse. Rend le scénario s et le détail des quatre scénarios."""
-        from moteur.offre import MIROIR
+        (offre.participation_transferts), appliquée aux personnes en emploi (Immervoll et al., 2007). Rend le
+        scénario s et le détail des quatre scénarios (emplois_par_scenario : miroir sur le sens net de la mesure).
+        releves : personnes dont le salaire est relevé par un nouveau SMIC ; leur gain à travailler en plus ne crée
+        pas d'emploi (au SMIC, l'emploi est fixé par la demande, compté par le canal du coût horaire)."""
         from moteur.statu_quo import SCENARIOS
         p = Parametres()
         eta = {sc: np.array(p.val("offre.travail_participation", sc)) * p.val("offre.participation_transferts", sc)
@@ -468,11 +487,9 @@ class Base:
         t = self.travaille & (a["gain"] > 0)
         rel = np.zeros(len(self.lignes))
         rel[t] = np.clip((b["gain"][t] - a["gain"][t]) / np.maximum(a["gain"][t], 1.0), -1, 1)
-        par = {}
-        for sc in SCENARIOS:
-            el = np.where(rel >= 0, eta[sc][self.bande], eta[MIROIR[sc]][self.bande])
-            d = self.pp * el * rel * t
-            par[sc] = {"emplois": float(d.sum()), "budget": float((d * b["valeur"]).sum()) / 1e9}
+        if releves is not None:
+            rel[releves & (rel > 0)] = 0.0
+        par = emplois_par_scenario(self.pp, rel, t, self.bande, eta, b["valeur"])
         return {**par[s], "scenarios": par}
 
     def population(self, operations: list[dict]) -> list[dict] | None:
@@ -553,7 +570,11 @@ class Base:
                "composantes": {k: e1["comp"][k] - e0["comp"][k] for k in e0["comp"]}}
         if self.emploi:
             cf1 = self.cf0 if (tbs is None and not post and lg is None) else self.contrefactuels(tbs, post, lg)
-            out["emploi"] = self.emploi_effet(e1, cf1)
+            releves = None
+            if lg is not None and any("smic_net_2027" in o.get("population", {}) or "smic_brut_2026" in o.get("population", {})
+                                      for o in operations):
+                releves = np.array([l2["salaire_brut"] > l1["salaire_brut"] + 1.0 for l1, l2 in zip(self.lignes, lg)])
+            out["emploi"] = self.emploi_effet(e1, cf1, releves=releves)
         return out
 
     def deciles(self, e1: dict) -> list[dict]:

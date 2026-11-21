@@ -87,10 +87,16 @@ def test_retraites_controles_hors_calage(p):
 def test_prestations_indexees_sur_les_prix_perdent_du_poids(p, res):
     """Les prestations revalorisées sur les prix perdent du poids face à celles revalorisées sur les salaires (même
     nombre d'enfants : la comparaison isole l'indexation) ; les dépenses qui suivent le PIB gardent leur part.
-    Corrigé le 05/11/2026 : le test passait par la baisse du nombre d'enfants alors que le réglage est « salaires »."""
-    assert p.val("statu_quo.indexation_prestations") == "salaires"
+    Corrigé le 05/11/2026 : le test passait par la baisse du nombre d'enfants alors que le réglage est « salaires ».
+    Depuis le 21/11/2026, le réglage est « par_prestation » : on compare les deux variantes extrêmes, et la variante
+    par prestation se place entre elles."""
+    assert p.val("statu_quo.indexation_prestations") == "par_prestation"
     prix = sq.blocs(p.avec({"statu_quo.indexation_prestations": "prix"}), "prudent")
-    sal = sq.blocs(p, "prudent")
+    sal = sq.blocs(p.avec({"statu_quo.indexation_prestations": "salaires"}), "prudent")
+    mix = sq.blocs(p, "prudent")
+    for b in ("pauvrete", "aah_invalidite"):
+        assert prix[2073][b] < mix[2073][b] < sal[2073][b]
+    assert mix[2073]["famille"] == pytest.approx(prix[2073]["famille"])
     assert prix[2073]["famille"] < 0.9 * sal[2073]["famille"]
     assert prix[2029]["famille"] == pytest.approx(sal[2029]["famille"])
     a, b = res["prudent"][2029], res["prudent"][2073]
