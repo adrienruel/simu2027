@@ -126,3 +126,65 @@ Décomposition au médian : PIB en plus, recettes en plus et blocs qui bougent (
   entre 40 et 55 %.
 - **Effet attendu :** l'âge de départ passe d'environ +0,29 à environ +0,35 ou +0,40 point à 20 ans. Les mesures
   qui créent des emplois qualifiés y gagnent, celles qui créent des emplois au SMIC ne changent presque pas.
+
+## Correction 1 : les dépenses ne suivent plus la croissance d'un programme (21/11/2026)
+
+Demande d'Adrien : « ne pas augmenter les budgets sur la croissance, mais sur quelque chose de plus cohérent ».
+
+La croissance d'un programme ne fait monter les dépenses que par le dividende de productivité
+(`statu_quo.dividende_programme`). Les blocs du statu quo ne répondent pas à la demande. La nouvelle règle est dans
+`statu_quo._depenses_en_plus`, avec les paramètres `indexation_programme` :
+- **Réponse entière** pour les blocs dont le coût suit un salaire par une règle de droit :
+  - pensions (loi et carrières) ;
+  - chômage (allocation proportionnelle au salaire perdu) ;
+  - prestations, selon `statu_quo.indexation_prestations`. Elles sont sur les salaires d'après la décision
+    d'Adrien de novembre 2026 ; sur les prix, elles ne bougeraient pas.
+- **Part salariale seulement** pour la santé (0,6), les missions (0,4), les collectivités (0,3) et les autres (0,3) :
+  - elle suit à 100 / 100 / 75 / 50 % (crise / prudent / médian / optimiste) ;
+  - en moyenne mobile sur 3 / 5 / 7 / 10 ans.
+- **Aucune réponse** pour l'investissement et la défense, programmés en euros, puis en cible de PIB du statu quo.
+- Le statu quo lui-même garde son indexation actuelle : c'est le chantier 1.2, qui reste à sourcer bloc par bloc.
+
+Choix par défaut du 21/11/2026, révisables : prestations gardées sur les salaires, défense en cible de PIB du statu
+quo, passage des salaires publics selon le scénario.
+
+### Effet
+Dividende d'un euro de PIB dû à la productivité, statu quo, médian :
+
+| | 2030 | 2038 | 2050 | 2073 |
+|---|---|---|---|---|
+| Avant | 0,25 | 0,12 | 0,11 | 0,01 |
+| Après | 0,46 | 0,39 | 0,36 | 0,28 |
+
+Banc, productivité +1 % due à un programme (solde primaire, points de PIB), rapporté au point de PIB en plus :
+
+| | t+9 | Long terme |
+|---|---|---|
+| simu2027, après | +0,36 | +0,26 |
+| Mésange | +0,05 / 0,61 = +0,08 | +0,18 / 0,89 = +0,20 |
+| ThreeME | — | +0,07 / 0,76 = +0,09 |
+
+À long terme, le modèle est maintenant en ligne avec Mésange. À moyen terme, il est plus favorable : dans Mésange,
+le PIB et l'emploi mettent du temps à suivre la productivité (le chômage monte d'abord), alors que dans le modèle,
+la productivité passe tout de suite au PIB.
+
+Programmes, écart de solde primaire au statu quo, prudent (points de PIB) :
+
+| | 2037 avant → après | 2050 avant → après |
+|---|---|---|
+| Lisnard | −2,83 → −2,76 | −3,73 → −3,65 |
+| Retailleau | −0,43 → −0,40 | −0,82 → −0,78 |
+| Philippe | −1,02 → −1,01 | −1,70 → −1,69 |
+| Zemmour, Bertrand | inchangés | inchangés |
+| Attal | −1,10 → −1,17 | −1,32 → −1,44 |
+| Le Pen | −2,26 → −2,33 | −2,78 → −2,88 |
+| Glucksmann | −2,60 → −2,71 | −2,92 → −3,07 |
+| Tondelier | −2,60 → −2,84 | −3,47 → −3,81 |
+| Arthaud | −4,05 → −4,62 | −4,59 → −5,47 |
+| Roussel | −8,86 → −9,20 | −8,68 → −9,18 |
+| Mélenchon | −11,40 → −11,66 | −12,09 → −12,47 |
+
+La règle est symétrique. Un programme qui fait baisser la production (moins d'heures, plus d'impôts sur le capital)
+ne voit plus ses dépenses baisser avec elle : il perd davantage. Un programme qui la fait monter garde davantage de
+son gain. Les écarts entre programmes s'élargissent, surtout vers le bas, parce que les canaux d'offre de la plupart
+des programmes sont petits ou négatifs.

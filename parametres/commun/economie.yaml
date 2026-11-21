@@ -1310,3 +1310,26 @@ programme_commun:
     statut: HYPOTHESE
     source: "Encadrement : DEPP, note du 3 février 2026 (le dédoublement des classes en éducation prioritaire n'a plus d'effet mesurable à l'entrée en 6e) ; 0,1 écart-type ≈ 10 points PISA, la moitié de la perte de 2018-2022"
     note: "Niveau des élèves (écart-type) d'un programme qui déclare le canal école (réformes d'organisation sans budget) : compté dans le seul scénario optimiste, zéro ailleurs faute d'évaluation. Recopié jusqu'ici dans zemmour."
+
+# --- Dépenses du statu quo face à la croissance d'un programme (21/11/2026, statu_quo._depenses_en_plus) -----------
+# Demande d'Adrien : les budgets ne suivent plus la croissance, mais ce qui fixe leur coût. Pensions, chômage et
+# prestations suivent leur règle (statu_quo.BLOCS_LEGAUX) ; pour les autres blocs, seule la part salariale suit.
+indexation_programme:
+  part_salariale:
+    valeur: {sante: 0.6, etat_missions: 0.4, collectivites: 0.3, autres: 0.3, investissement: 0.0, defense_ue: 0.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : rémunérations dans la dépense de chaque bloc. Santé : personnel des établissements (≈ 2/3 de leurs charges) et honoraires de ville, qui suivent les revenus ; État : titre 2 hors pensions ≈ 40 % des missions ; collectivités : frais de personnel ≈ 26 % de leurs dépenses (DGCL, finances locales) ; investissement et défense programmés en euros (loi de programmation militaire, puis cible en part du PIB du statu quo)"
+    note: "À sourcer ligne par ligne (chantier 1.2). Une part plus haute est prudente : plus de la croissance repart en dépenses."
+  passage:
+    valeur: {crise: 1.0, prudent: 1.0, median: 0.75, optimiste: 0.5}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : à long terme, les salaires publics suivent les salaires privés (sinon le recrutement échoue) ; le point d'indice a décroché des salaires privés depuis 2010 (gel de 2010 à 2016) : un passage partiel est plausible"
+    note: "Part de la hausse de salaire due au programme qui passe aux rémunérations publiques et aux tarifs de santé. Choix par défaut du 21/11/2026, à valider par Adrien."
+  delai:
+    valeur: {crise: 3, prudent: 5, median: 7, optimiste: 10}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : revalorisations du point d'indice et des tarifs négociées par étapes, plusieurs années après les salaires privés"
+    note: "Années pour que le passage soit complet (moyenne mobile)."

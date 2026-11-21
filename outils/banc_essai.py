@@ -8,7 +8,9 @@ dépenses du statu quo sont indexées en rapport à 2029 (indice 1), si bien qu'
 échapperait à toute indexation (constat du 21/11/2026 : dividende de 40 % au lieu de 9 %).
 - dépense : dépense publique +1 point de PIB (bloc etat_missions) ;
 - tva : TVA −1 point de PIB (instrument consommation) ;
-- productivite : productivité du travail +1 % (salaires du statu quo, comme statu_quo.dividende_productivite) ;
+- productivite : productivité du travail +1 % dans le statu quo lui-même (ses dépenses suivent leur indexation) ;
+- productivite_programme : productivité +1 % due à un programme : solde = dividende du programme
+  (statu_quo.dividende_programme, règle des dépenses du 21/11/2026) ;
 - age : âge d'ouverture des droits de 64 à 65 ans (bibliotheque.report_age_legal_detail, 3 mois par génération
   à partir de 1966, comme le report de Bertrand ; toute l'économie gardée, puis la part gardée de Bertrand) ;
 - productivite_cor : croissance de la productivité +0,3 point par an à partir de 2029 (variante haute du COR, 1 %
@@ -135,6 +137,12 @@ def calcul() -> dict:
                                    for t in (2037, 2050, 2070)} for s in SCENARIOS}
     # dividende de productivité du statu quo (part d'un euro de PIB en plus gardée au solde)
     res["dividende"] = {s: {t: sq.dividende_productivite(p, s)[t] for t in (2030, 2033, 2038, 2050, 2073)} for s in SCENARIOS}
+    # productivité +1 % due à un programme (et non au statu quo) : ce que garde le solde par le dividende du programme
+    res["productivite_programme"] = {}
+    for s_ in SCENARIOS:
+        y = sq.pib(p, s_)
+        d = sq.dividende_programme(p, s_, {t: 0.01 * y[t] for t in ANNEES if t >= T0})
+        res["productivite_programme"][s_] = {h: (1.0, 0.0, d[T0 + k]) for h, k in HORIZONS.items()}
     # où part le PIB en plus du choc de productivité : recettes et blocs de dépense, par euro de PIB en plus
     rp = noyau.simuler(_productivite(p, {t: 0.01 for t in range(T0, 2074)}), None, scenarios=["median"])["median"]
     b = r0["median"]
@@ -157,7 +165,7 @@ def ecrire(res: dict) -> None:
             for h, (dy, de, ds) in x.items():
                 lignes.append({"choc": choc, "source": "simu2027", "scenario": s, "horizon": h,
                                "pib_pct": round(dy, 3), "emploi_milliers": round(de, 1), "solde_primaire_pt": round(ds, 3)})
-        for src, x in REF.get(choc, {}).items():
+        for src, x in REF.get(choc if choc != "productivite_programme" else "productivite", {}).items():
             for h, (dy, de, ds) in x.items():
                 lignes.append({"choc": choc, "source": src, "scenario": "", "horizon": h,
                                "pib_pct": dy, "emploi_milliers": de, "solde_primaire_pt": ds})
