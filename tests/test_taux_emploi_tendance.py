@@ -14,7 +14,7 @@ def test_taux_de_2025_inchanges_et_seniors_en_hausse():
     t25, t40 = taux_emploi_par_age(p, 2025), taux_emploi_par_age(p, 2040)
     base = p.val("demographie.taux_emploi_age")
     assert t25[62] == pytest.approx(base["60-64"])
-    assert t40[30] == pytest.approx(base["25-49"])  # tranches stables de la projection : figées
+    assert t40[30] == pytest.approx(base["25-49"] * 87.8 / 87.9)  # roadmap 2.3 : 25-54 ans selon la figure 2
     # rapport de la projection de l'Insee (figure 3) : 57,7 % en 2040 contre ≈ 42,0 % en 2025
     proj = p.val("demographie.taux_activite_seniors_projection")["60-64"]
     v25 = proj[2021] + (proj[2030] - proj[2021]) * 4 / 9

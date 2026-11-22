@@ -2153,3 +2153,5 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   d'activité de la famille = 0,32 × celle d'une personne seule. Écarts 2037 : au plus 0,07 point.
 - **Roadmap 6.1** : `outils/poids_incertitude.py` par lots dans des processus séparés, reprise sur
   `sorties/poids_incertitude_lignes.jsonl`.
+- **Roadmap 2.3** : 15-24 et 25-54 ans selon la projection de l'Insee (figure 2) ; écarts 2037 ≤ 0,003 point.
+  Devenir des seniors inchangé (sourcé ; `part_concernee` reste un calage sur la DG Trésor).

@@ -285,3 +285,15 @@ Constats :
 - **Effet sur l'écart de solde primaire 2037 au prudent :** au plus 0,07 point (Mélenchon −0,07 ; Lisnard +0,03).
 - **Reste :** `tondelier_smic.valeur_emploi_chomeur` (9 000 €, paramètre propre au programme) dit reprendre l'ancienne
   valeur commune : à aligner dans le travail sur Tondelier.
+
+## Roadmap 2.3 : taux d'emploi par âge (22/11/2026)
+
+- **15-24 et 25-54 ans :** ils suivent maintenant la projection de l'Insee (projections de population active
+  2022-2070, figure 2, valeurs projetées), comme les seniors depuis la phase P. 15-24 ans : 39,7 % d'activité en
+  2021, 40,8 % en 2040, 40,3 % en 2070 ; 25-54 ans presque stables (87,8 à 88,0 %). Effet sur les écarts 2037 : au
+  plus 0,003 point ; déficit du statu quo 2037 au prudent 7,93 → 7,94 %.
+- **Devenir des seniors qui ne partent pas :** pas changé. Le partage `seniors.devenir` (emploi, chômage, le reste
+  inactif : somme de 100 %) est sourcé (Koubi et Dubois ; IPP n° 61 ; Rabaté et Rochut). `seniors.part_concernee`
+  (0,7 à 0,8) est un calage écrit le 21/11 sur l'emploi des seniors de la DG Trésor (210 000 emplois au médian pour
+  un an d'âge), pas une source : on le garde tant qu'aucune étude ne donne directement la part des non-retraités du
+  modèle qui changent de situation.

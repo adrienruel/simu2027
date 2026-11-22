@@ -27,3 +27,12 @@ def test_aides_au_logement_evitees_dans_le_bloc_logement():
                           scenarios=("prudent",))["prudent"][2037] for a in (0.0, 0.074)}
     assert r[0.074]["emploi"] > noyau.simuler(p, None, scenarios=("prudent",))["prudent"][2037]["emploi"]
     assert r[0.074]["blocs"]["logement"] < r[0.0]["blocs"]["logement"]
+
+
+def test_taux_emploi_des_jeunes_et_des_25_54_suivent_l_insee():
+    """Roadmap 2.3 : les 15-24 et 25-54 ans suivent la projection de l'Insee (figure 2), comme les seniors."""
+    from moteur.demographie import taux_emploi_par_age
+    p = Parametres()
+    t25, t40 = taux_emploi_par_age(p, 2025), taux_emploi_par_age(p, 2040)
+    assert abs(t40[20] / t25[20] - 40.8 / (40.0 - (40.0 - 39.7) * 5 / 9)) < 1e-6
+    assert abs(t40[40] / t25[40] - 1) < 0.002
