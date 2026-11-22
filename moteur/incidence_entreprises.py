@@ -12,7 +12,8 @@ sur ces revenus comptent au solde (entreprises.incidence_retour_budget, roadmap 
 2. **Partage** (entreprises.incidence_menages) : part salaires, part prix, le reste aux actionnaires.
 3. **Répartition par décile** de revenu initial par unité de consommation (population synthétique : salaires,
    revenus d'indépendant, allocations de chômage, pensions, revenus du capital ; échelle de l'OCDE modifiée) :
-   salaires au prorata des salaires du privé, actionnaires au prorata des dividendes et des plus-values, prix au
+   salaires au prorata des salaires du privé, actionnaires au prorata des dividendes et des plus-values, prix (depuis
+   la roadmap 4.2, 22/11/2026) au prorata de la consommation du décile (Budget de famille 2017) ; avant, au
    prorata du revenu initial (faute de consommation dans la population).
 
 Les déciles ne sont pas ceux de niveau de vie de la microsimulation (qui demandent OpenFisca) : ce sont des déciles de
@@ -156,7 +157,11 @@ def par_decile(p: Parametres, prog, s: str, t: int, pop: dict | None = None) -> 
     d = deciles_population(pop)
     parts = partage_annees(p, s, montant_entreprises(p, prog, s)).get(t, partage(p, 0.0))
     w = pop["poids"]
-    cles = {"salaires": pop["salaires"], "actionnaires": pop["capital"], "prix": pop["revenu"]}
+    # roadmap 4.2 (22/11/2026) : prix au prorata de la consommation du décile (Budget de famille 2017, TF106)
+    from outils.openfisca_mesures import depenses_bdf
+    dep = depenses_bdf()
+    conso = np.array([dep[("CTOTALE", int(k))] for k in d])
+    cles = {"salaires": pop["salaires"], "actionnaires": pop["capital"], "prix": conso}
     tot = {k: (w * v).sum() for k, v in cles.items()}
     out = []
     for k in range(1, 11):

@@ -82,3 +82,22 @@ def test_retour_budget_sans_double_compte(p):
     for t in (2032, 2037):
         assert avec[t] == pytest.approx(td * parts[t]["actionnaires"])
         assert sans[t] > avec[t] > 0
+
+
+def test_parts_d_incidence_font_100_pour_cent(p):
+    """Roadmap 4.1 : salaires + prix + actionnaires = 100 % du montant, chaque année, pour les mesures sur les
+    entreprises ; parts de long terme entre 0 et 1."""
+    x = p.val("entreprises.incidence_menages")
+    assert 0 <= x["salaires"] <= 1 and 0 <= x["prix"] <= 1 and x["salaires"] + x["prix"] <= 1
+    for nom in ("melenchon", "lisnard"):
+        mont = ie.montant_entreprises(p, noyau.charger(nom), "prudent")
+        for t, pa in ie.partage_annees(p, "prudent", mont).items():
+            assert pa["salaires"] + pa["prix"] + pa["actionnaires"] == pytest.approx(mont[t], abs=1e-12)
+
+
+def test_prix_au_prorata_de_la_consommation(p):
+    """Roadmap 4.2 : la part des prix va aux déciles selon leur consommation (plus étale que le revenu)."""
+    d = ie.par_decile(p, noyau.charger("lisnard"), "prudent", 2032)
+    part = lambda c, k: d[k - 1][f"{c}_md"] / sum(x[f"{c}_md"] for x in d)  # noqa: E731
+    assert part("prix", 1) > part("actionnaires", 1)
+    assert part("prix", 10) < part("actionnaires", 10)

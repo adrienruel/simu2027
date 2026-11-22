@@ -2157,3 +2157,5 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   Devenir des seniors inchangé (sourcé ; `part_concernee` reste un calage sur la DG Trésor).
 - **Roadmap 4.1** : population d'entreprises ramenée au champ d'Ésane (elle recevait les bénéfices de la finance :
   IS 67,7 → 57,0 Md€) et calée sur l'IS de 2025 par groupe de secteurs (DGFiP n° 51, tableau 1).
+- **Roadmap 4.2** : 31 % des impôts des entreprises retombent sur les prix (Baker, Sun et Yannelis), répartis selon la
+  consommation des déciles ; test salaires + prix + actionnaires = 100 %. Écarts 2037 ≤ 0,02 point.

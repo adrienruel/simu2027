@@ -649,3 +649,17 @@ synthétique.
   production (LIS-FIS-01 et PHI-FIS-01 : −22,1 → −21,1 Md€ ; RN-FIS-04 : −9,7 → −9,2 ; RET-FIS-01 : −5,6 → −5,3 ;
   REC-35 : +6,3 → +6,0). `parametres/donnees/population_entreprises_2023.csv` régénérée ; `sorties/micro_entreprises.csv`
   à régénérer.
+
+## Roadmap 4.2 : répercussion sur les prix des impôts des entreprises (22/11/2026)
+
+- **Avant :** ce que les mesures laissent ou prennent aux entreprises allait pour moitié aux salaires (Fuest, Peichl et
+  Siegloch, 2018) et pour moitié aux actionnaires ; rien aux prix, faute de source.
+- **Maintenant :** 31 % aux prix (`entreprises.incidence_menages.prix`), d'après Baker, Sun et Yannelis (NBER WP 27058 :
+  31 % de l'impôt sur les sociétés des États américains retombe sur les consommateurs ; plus de 40 % dans leur
+  révision de 2023, d'où la borne basse). Il reste 19 % aux actionnaires.
+- **Répartition par décile :** les prix au prorata de la consommation du décile (Budget de famille 2017, TF106), et non
+  plus du revenu initial.
+- **Effet sur le solde :** seulement par le retour des prélèvements sur les dividendes, qui baisse (la part des prix
+  n'a pas de retour au budget). Écarts 2037 au prudent : au plus 0,02 point (Lisnard −0,02).
+- **À valider par Adrien :** la somme vient de deux études et de deux pays. Avec Baker et al. seuls : salaires 38 %,
+  prix 31 %, actionnaires 31 %.
