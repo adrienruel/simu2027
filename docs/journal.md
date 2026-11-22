@@ -2148,3 +2148,8 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
 - **Roadmap 3.2** : patrimoine par ménage (Histoire de vie et Patrimoine 2020-2021, tranches de revenu disponible) ;
   dix mesures sur le patrimoine et les successions codées. ART-RET-01 codée (pensions calées sur le moteur).
   Couverture : dix programmes au-dessus de 80 %, critère de la phase 3 rempli.
+- **Roadmap 2.4** : allocations évitées et prime d'activité d'un emploi en plus tirées de la micro
+  (`outils/ppa_emplois.py`) : 10 660 € évités par chômeur (dont 785 € d'aides au logement, nouveau bloc), prime
+  d'activité de la famille = 0,32 × celle d'une personne seule. Écarts 2037 : au plus 0,07 point.
+- **Roadmap 6.1** : `outils/poids_incertitude.py` par lots dans des processus séparés, reprise sur
+  `sorties/poids_incertitude_lignes.jsonl`.

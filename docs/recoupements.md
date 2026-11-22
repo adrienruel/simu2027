@@ -262,3 +262,26 @@ Constats :
 - Banque de France, projections intermédiaires de septembre 2026 : https://www.banque-france.fr/fr/publications-et-statistiques/publications/projections-macroeconomiques-intermediaires-septembre-2026 ; chômage 2026-2027 (Reuters, 15/09/2026) : https://www.easybourse.com/international/news/1537735/la-banque-france-revoit-son-tour-sa-prevision-croissance-2026.html
 - OCDE, Panorama de la santé 2025, projections : https://www.oecd.org/fr/publications/panorama-de-la-sante-2025_2f564c6c-fr/full-report/health-spending-projections_d3702f1a.html
 - Dépendance, Ageing Report 2024 (profil France, Eurocarers) : https://eurocarers.org/country-profiles/france/
+
+## Roadmap 2.4 : allocations et prime d'activité d'un emploi en plus, selon la famille (22/11/2026)
+
+- **Avant :** un chômeur qui prend un emploi évitait 9 000 € (montant encadré : 70 % d'assurance chômage, 30 % de
+  RSA) et ouvrait la prime d'activité d'une personne seule (≈ 2 140 € par an à 1,3 SMIC).
+- **Calcul :** `outils/ppa_emplois.py`, sur la population de la microsimulation (OpenFisca-France 177). Chaque
+  chômeur de 18 à 64 ans prend un emploi toute l'année à 1,3 SMIC ; son allocation de chômage s'arrête ; le reste du
+  ménage ne change pas. Moyenne par chômeur :
+
+| Poste | € par an | Bloc |
+|---|---|---|
+| Allocation de chômage arrêtée | 8 010 | chômage |
+| RSA de la famille en moins | 1 866 | pauvreté |
+| Aides au logement en moins | 785 | logement (nouveau) |
+| **Total évité** (`emploi.allocation_chomeur_evitee`) | **10 660** | |
+| Prime d'activité en plus | 693 (personne seule : 2 138) | pauvreté |
+
+- **Prime d'activité par famille :** personne seule ≈ 1 830 € ; parent seul ≈ 1 980 € ; jeune adulte chez ses
+  parents ≈ 700 € ; couple : −100 à −740 €. Dans un couple, l'allocation de chômage comptait déjà dans les
+  ressources, et le salaire en plus réduit la prime du conjoint. D'où `emploi.prime_activite_familles` = 0,324.
+- **Effet sur l'écart de solde primaire 2037 au prudent :** au plus 0,07 point (Mélenchon −0,07 ; Lisnard +0,03).
+- **Reste :** `tondelier_smic.valeur_emploi_chomeur` (9 000 €, paramètre propre au programme) dit reprendre l'ancienne
+  valeur commune : à aligner dans le travail sur Tondelier.

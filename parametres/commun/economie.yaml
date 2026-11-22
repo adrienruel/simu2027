@@ -435,12 +435,12 @@ emploi:
   chomage_incompressible: {valeur: 0.035, unite: taux, statut: SOURCE, source: "Taux les plus bas tenus durablement en Europe de l'Ouest (Allemagne, Pays-Bas)"}
   marge_plancher: {valeur: 0.01, unite: taux, statut: HYPOTHESE, note: "13/11/2026 : à moins de cette marge au-dessus du chômage incompressible, les emplois en plus des programmes ont des rendements décroissants (moteur/emploi_canaux.plancher_chomage) : le chômage tend vers le plancher sans le franchir, raccord sans cassure au-dessus. Un point : l'écart entre le plus bas allemand récent (≈ 3 %) et les 4 % souvent cités comme plein emploi."}
   allocation_chomeur_evitee:
-    valeur: 9000
+    valeur: 10660
     unite: eur_an
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Même valeur que tondelier_smic.valeur_emploi_chomeur : allocation moyenne d'un chômeur indemnisé ≈ 1 050 € par mois (Unédic), un sur deux indemnisé ; garantie d'autonomie pour une partie des autres"
-    note: "Dépense publique évitée quand un chômeur prend un emploi (ou en plus quand un salarié perd le sien), commune à tous les programmes depuis la phase A2 (12/11/2026, ProgrammeSimple.valeur_emploi_cellule). Suit le salaire moyen par emploi. Phase L (4.1, 18/11/2026) : avec emploi.depenses_chomage_programme, elle n'est plus dans la valeur d'un emploi (recettes) mais dans les blocs chômage et pauvreté, pour les chômeurs du programme (moteur/noyau.py)."
+    source: "Microsimulation (outils/ppa_emplois.py, OpenFisca-France 177, population de 2026) : chaque chômeur de 18 à 64 ans prend un emploi à 1,3 SMIC ; allocation de chômage arrêtée 8 010 € (allocations de la population calées sur l'Unédic, 52 % indemnisés), RSA de sa famille −1 866 €, aides au logement −785 €, moyenne par chômeur"
+    note: "Roadmap 2.4 (22/11/2026) : avant, 9 000 € encadrés (≈ 1 050 € par mois, un sur deux indemnisé, plus une part de RSA ; aides au logement non comptées). Répartie entre assurance chômage (part_allocation_assurance_chomage), aides au logement (part_allocation_logement) et RSA (le reste). Dépense publique évitée quand un chômeur prend un emploi (ou en plus quand un salarié perd le sien), commune à tous les programmes depuis la phase A2 (12/11/2026, ProgrammeSimple.valeur_emploi_cellule). Suit le salaire moyen par emploi. Phase L (4.1, 18/11/2026) : avec emploi.depenses_chomage_programme, elle n'est plus dans la valeur d'un emploi (recettes) mais dans les blocs chômage et pauvreté, pour les chômeurs du programme (moteur/noyau.py)."
   depenses_chomage_programme:
     valeur: true
     unite: sans_unite
@@ -455,13 +455,25 @@ emploi:
     valeur: true
     unite: sans_unite
     statut: DECISION
-    note: "Décision d'Adrien du 18/11/2026 (roadmap 5.5) : un emploi en plus ouvre la prime d'activité. Montant lu sur la table OpenFisca de 2026 (personne seule) au coût d'un emploi créé (emploi.cout_emploi_cree_smic × SMIC, ≈ 2 140 € par an), indexé comme la prime du statu quo et multiplié par le facteur de générosité du bloc pauvreté ; ajouté au bloc pauvreté pour les mêmes emplois que les dépenses de chômage du programme (4.1). Limite : barème d'une personne seule (un couple ou des enfants changent le droit)."
+    note: "Décision d'Adrien du 18/11/2026 (roadmap 5.5) : un emploi en plus ouvre la prime d'activité. Montant lu sur la table OpenFisca de 2026 (personne seule) au coût d'un emploi créé (emploi.cout_emploi_cree_smic × SMIC, ≈ 2 140 € par an), indexé comme la prime du statu quo et multiplié par le facteur de générosité du bloc pauvreté ; ajouté au bloc pauvreté pour les mêmes emplois que les dépenses de chômage du programme (4.1). Roadmap 2.4 (22/11/2026) : multipliée par emploi.prime_activite_familles (famille des chômeurs, micro)."
   part_allocation_assurance_chomage:
-    valeur: 0.7
+    valeur: 0.751
     unite: taux
     statut: HYPOTHESE
-    source: "Même décomposition que emploi.allocation_chomeur_evitee : ≈ 1 050 € par mois × 12 × un chômeur sur deux indemnisé ≈ 6 300 € (Unédic) sur 9 000 € ; le reste (garantie d'autonomie, RSA) ≈ 2 700 €"
-    note: "Part de l'allocation évitée qui va au bloc chômage (assurance chômage) ; le reste va au bloc pauvreté (RSA). Phase L (4.1)."
+    source: "Même calcul que emploi.allocation_chomeur_evitee : 8 010 € d'allocation de chômage sur 10 660 €"
+    note: "Part de l'allocation évitée qui va au bloc chômage (assurance chômage) ; aides au logement : part_allocation_logement ; le reste va au bloc pauvreté (RSA). Phase L (4.1) ; roadmap 2.4 (22/11/2026) : 0,7 avant."
+  part_allocation_logement:
+    valeur: 0.074
+    unite: taux
+    statut: HYPOTHESE
+    source: "Même calcul que emploi.allocation_chomeur_evitee : 785 € d'aides au logement sur 10 660 €"
+    note: "Roadmap 2.4 (22/11/2026) : part de l'allocation évitée qui va au bloc logement (aides au logement), sans facteur de générosité."
+  prime_activite_familles:
+    valeur: 0.324
+    unite: taux
+    statut: HYPOTHESE
+    source: "Microsimulation (outils/ppa_emplois.py, OpenFisca-France 177, population de 2026) : prime d'activité en plus de la famille d'un chômeur de 18 à 64 ans qui prend un emploi à 1,3 SMIC, 693 € par an en moyenne, contre 2 138 € pour une personne seule au même salaire (table d'OpenFisca du moteur)"
+    note: "Roadmap 2.4 (22/11/2026). Par famille : personne seule ≈ 1 830 €, parent seul ≈ 1 980 €, jeune vivant chez ses parents ≈ 700 €, couple ≈ −100 à −740 € (l'allocation de chômage comptait déjà dans les ressources du couple et le salaire en plus réduit la prime du conjoint). Prime théorique (recours complet), comme la table de la personne seule."
   emplois_par_milliard: {valeur: {prudent: null, crise: 12500, median: 18750, optimiste: 25000}, unite: sans_unite, statut: SOURCE, source: "Mésange 12 500 ; jusqu'à 25 000 au voisinage du SMIC (CAE n° 51)"}
   taux_marge_snf: {valeur: 0.322, unite: taux, statut: SOURCE, source: "Insee Première n° 2105 (comptes de la Nation 2025)"}
   cout_emploi_cree_smic: {valeur: 1.3, unite: sans_unite, statut: HYPOTHESE}
