@@ -311,6 +311,10 @@ def indicateurs(lignes: list[dict], annee: int = 2026, seuils: dict | None = Non
         out["champ_erfs"] = np.bincount(unite_p, weights=champ.astype(float), minlength=n_u)
         for k, v in seuils.items():
             out["sous_" + k] = np.bincount(unite_p, weights=(champ & (nv < v)).astype(float), minlength=n_u)
+        foy_unite = np.zeros(s["n_foyers"], int)
+        foy_unite[s["foyer"]] = unite_p
+        ir = -sim.calculate_add("impot_revenu_restant_a_payer", an)
+        out["impot_revenu"] = np.bincount(foy_unite, weights=ir, minlength=n_u)
     return out
 
 

@@ -677,14 +677,15 @@ synthétique.
     (personne de référence non étudiante) : 10, 50 et 90 % des personnes sous D1, la médiane et D9, portés en 2026
     (× 1,0404, comme les salaires) ;
   - les masses des pensions (pension moyenne de la Drees × retraités), des revenus d'indépendants et des allocations
-    de chômage (part indemnisée × allocation de l'Unédic × chômeurs du BIT).
+    de chômage (part indemnisée × allocation de l'Unédic × chômeurs du BIT), et l'impôt sur le revenu du PLF 2026
+    (104 Md€ ; sans lui, le recalage le portait à 110,5).
 - **Résultat** (euros de 2026 ; Insee 2024 × 1,0404) :
 
 | Niveau de vie | Population avant | Après | Insee |
 |---|---|---|---|
 | D1 | 13 690 | 14 510 | 14 530 |
 | Médiane | 24 670 | 27 600 | 27 820 |
-| D9 | 44 720 | 48 170 | 50 540 |
+| D9 | 44 720 | 48 420 | 50 540 |
 | Salariés (médiane) | – | 30 330 | 31 150 |
 | Retraités | 26 570 | 28 640 | 27 910 |
 | Chômeurs | 17 690 | 19 350 | 20 330 |

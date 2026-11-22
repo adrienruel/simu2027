@@ -2168,3 +2168,8 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   distribution vers le bas. Médiane 24 670 → 27 600 € (Insee 27 820). Paramètres de la roadmap 2.4 recalculés.
 - **Roadmap 6.1** : classement complet des 78 cibles (`sorties/poids_incertitude.csv`, 52 pèsent) ; lois en attente
   de l'arbitrage du centre.
+- **Roadmap 7.1 à 7.3** : test de la bibliothèque commune (même mesure, même coût) ; fiches des 1 116 mesures et
+  ordre de travail (`outils/priorites_mesures.py`, `docs/priorites.md`) : Mélenchon, Tondelier, Roussel, puis Philippe
+  et Lisnard.
+- **Roadmap 4.4** (entrepreneurs individuels à l'impôt sur le revenu) : pas fait ; aucune mesure des programmes ne le
+  demande aujourd'hui, l'arbitrage entre dividendes et salaire passe par `dividendes.elasticite_taux_net`.

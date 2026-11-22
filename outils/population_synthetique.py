@@ -455,7 +455,9 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
                   (np.bincount(men, weights=np.where(i_in, rev_ind, 0.0), minlength=n),
                    rev_ind[i_in].mean() * emp["independants"] * 1e6),
                   (np.bincount(men, weights=chomage_brut, minlength=n),
-                   ci["part"] * ci["allocation_brute_mensuelle"] * 12 * p.val("inactifs.chomeurs_bit"))]
+                   ci["part"] * ci["allocation_brute_mensuelle"] * 12 * p.val("inactifs.chomeurs_bit")),
+                  # et l'impôt sur le revenu du PLF 2026 (sans lui, le recalage le portait à 110,5 Md€)
+                  (ind["impot_revenu"], v("cibles_2026")["impot_revenu"] * 1e9)]
         A2 = np.vstack([A] + [ind[k][None, :] for k in ben] + [hand_u[None, :]]
                        + [ind["sous_" + k][None, :] for k in seuils] + [m[None, :] for m, _ in masses])
         c2 = np.concatenate([cibles, [ben[k] * 1e6 for k in ben], [hand["adultes"] * 1e6],

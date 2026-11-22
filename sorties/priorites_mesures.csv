@@ -1,0 +1,505 @@
+rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,non_codee_micro,identique_scenarios,priorite
+1,philippe,PHI-FIS-01,"Impôts de production −50 Md€, compensés par 50 Md€ d'aides aux entreprises en moins",-1.4111,2,True,True,False,False,4.2334
+2,lisnard,LIS-FIS-01,"Impôts de production −40 Md€, en commençant par la C3S",-1.1289,2,True,True,False,False,3.3867
+3,zemmour,ZEM-FIS-01,Supprimer la CSG sur les revenus du travail,-2.8455,0,False,False,False,False,2.8455
+4,lisnard,LIS-ECO-02,"120 Md€ rendus aux actifs par la baisse des cotisations (≈ 400 € net par mois), 40 Md€ aux impôts de production, 40 Md€ à la dette",-2.2894,0,False,False,False,False,2.2894
+5,philippe,PHI-FIS-01b,… compensés par 50 Md€ d'aides aux entreprises en moins,0.6348,2,True,True,False,False,1.9043
+6,melenchon,LFI-SAN-01,"« 100 % Sécu », complémentaires intégrées",-0.9268,1,True,False,False,False,1.8537
+7,roussel,PCF-SAN-01,Soins prescrits remboursés à 100 %,-0.9268,1,True,False,False,False,1.8537
+8,arthaud,ART-EMP-02,Répartition du travail entre tous sans perte de salaire,-1.8224,0,False,False,False,False,1.8224
+9,roussel,PCF-RET-03,CSG sur les retraites supprimée,-0.8713,1,True,False,False,False,1.7426
+10,roussel,PCF-EMP-01,32 heures sans diminution de salaire,-1.718,0,False,False,False,False,1.718
+11,melenchon,LFI-PRE-01,Garantie d'autonomie : revenu au seuil de pauvreté,-0.8497,1,True,False,False,False,1.6995
+12,tondelier,REC-37,"Exonérations de cotisations au-delà de 1,6 SMIC et sur les heures supplémentaires supprimées ; montants nominalisés et désindexés",0.4943,2,True,False,True,False,1.483
+13,melenchon,LFI-RET-03,Pensions des carrières complètes au moins au SMIC revalorisé,-0.7243,1,True,False,False,False,1.4486
+14,arthaud,ART-ECO-01,SMIC à 2 200 € net par mois,-1.3415,0,False,False,False,False,1.3415
+15,attal,ATT-ECO-01,Droit au brut : +250 € net par mois au salaire médian (cotisations salariales supprimées),-1.3005,0,False,False,False,False,1.3005
+16,melenchon,LFI-RET-01,"Réforme de 2023 abrogée, puis retraite à 60 ans à taux plein pour 40 annuités",-1.2823,0,False,False,False,False,1.2823
+17,roussel,PCF-RET-01,"Retraite à 60 ans à taux plein, réforme de 2023 abrogée",-1.2823,0,False,False,False,False,1.2823
+18,tondelier,REC-11,Baisse de l'IR des tranches les plus basses,-0.3134,3,True,True,False,True,1.2537
+19,bertrand,BER-FIS-01,Baisser l'impôt sur le revenu des premières tranches,-0.3133,3,True,True,False,True,1.2532
+20,tondelier,FP-02,+10 % pour les catégories C et B et les catégories A ayant perdu du pouvoir d'achat ; enseignants +15 % sur le quinquennat ; chercheurs +10 % dès la première année,-0.5805,1,True,False,False,False,1.161
+21,tondelier,SAN-01,"Soins essentiels remboursés à 100 %, franchises supprimées, mutuelles cantonnées aux soins optionnels",-0.374,2,True,False,False,True,1.1221
+22,arthaud,ART-SP-01,Embauches massives dans les services publics,-0.2794,3,True,True,False,True,1.1177
+23,melenchon,LFI-PRE-03,AAH au niveau du SMIC,-0.3593,2,True,True,False,False,1.078
+24,retailleau,RET-INT-01,"Défense à 100 Md€ en fin de quinquennat, Livre blanc, réserve territorialisée",-0.5268,1,True,False,False,False,1.0536
+25,roussel,PCF-TRA-01,"Ferroviaire : +15 Md€ par an, petites lignes, fret doublé, billets −30 %, SNCF renationalisée",-0.4939,1,True,False,False,False,0.9877
+26,melenchon,LFI-EDU-10,Conscription citoyenne écologique de neuf mois au SMIC revalorisé,-0.4619,1,True,False,False,False,0.9238
+27,glucksmann,GLU-INT-03,"Aide publique au développement à 0,7 % du RNB",-0.2996,2,True,False,False,True,0.8988
+28,melenchon,LFI-COL-12,"Aide publique au développement à 0,7 % du RNB",-0.2996,2,True,False,False,True,0.8988
+29,tondelier,UE-02,"Aide publique à la coopération — retour vers 0,7 % du PNB",-0.2996,2,True,False,False,True,0.8988
+30,melenchon,LFI-COL-10,Dépense publique culturelle à 1 % du PIB,-0.2963,2,True,False,False,True,0.8889
+31,roussel,PCF-RET-02,Pensions indexées sur le salaire moyen,-0.8654,0,False,False,False,False,0.8654
+32,le_pen,RN-FIS-01,"TVA de 20 % à 5,5 % sur les carburants, le fioul, le gaz et l'électricité",-0.4246,1,True,False,False,False,0.8493
+33,tondelier,COT-04,CSG +1 point et rendue progressive (équilibre de l'assurance maladie),0.4139,1,True,False,False,False,0.8277
+34,philippe,PHI-RET-05,"Capitalisation collective généralisée à tous les salariés, sur le modèle des fonctionnaires",-0.2634,2,True,False,True,False,0.7902
+35,roussel,PCF-FIS-07,"Carburant bloqué à 1,50 € le litre, maîtrise publique de TotalEnergies",-0.3951,1,True,False,False,False,0.7902
+36,zemmour,ZEM-FIS-02,Supprimer les droits de succession,-0.7863,0,False,False,False,False,0.7863
+37,zemmour,ZEM-FIS-01b,Baisser d'un tiers l'accise sur les carburants,-0.3885,1,True,False,False,False,0.777
+38,le_pen,RN-FIS-04,"CFE, CVAE et C3S supprimées",-0.3852,1,True,False,False,False,0.7704
+39,lisnard,LIS-ECO-07,"CSG sur les revenus d'activité de 9,2 % à 6,6 %",-0.7496,0,False,False,False,False,0.7496
+40,tondelier,COT-02,"Cotisations vieillesse +0,2 point par an pendant le quinquennat",0.2305,2,True,False,True,False,0.6914
+41,glucksmann,GLU-RET-01,"Abroger la réforme de 2023, retour à 62 ans",-0.6819,0,False,False,False,False,0.6819
+42,le_pen,RN-RET-01,"Réforme de 2023 abrogée : 62 ans et 42 annuités, 60 ans pour les carrières commencées avant 20 ans",-0.6819,0,False,False,False,False,0.6819
+43,tondelier,RET-01,Retour immédiat à 62 ans (abrogation de la réforme de 2023),-0.6819,0,False,False,False,False,0.6819
+44,melenchon,LFI-LOG-05,Isolation d'au moins 700 000 logements par an,-0.3292,1,True,False,False,False,0.6585
+45,roussel,PCF-TRA-02,Transports en commun gratuits partout (10 Md€ par an),-0.3245,1,True,False,False,False,0.649
+46,tondelier,PRE-15,"Assurance chômage — réformes du calcul de l'ARE abrogées, allocations indexées sur l'inflation",-0.2128,2,True,False,False,True,0.6385
+47,melenchon,LFI-PRE-02,Garantie d'autonomie des jeunes détachés du foyer fiscal parental,-0.3035,1,True,False,False,False,0.607
+48,le_pen,RN-REC-01,Recherche publique relevée (+9 Md€),-0.2963,1,True,False,False,False,0.5926
+49,melenchon,LFI-INV-01,Plan global de rénovation des infrastructures pour l'adaptation,-0.1975,2,True,False,False,True,0.5926
+50,philippe,PHI-SOC-01,"Allocation familiale unique de 350 € par mois dès le premier enfant, dégressive avec le revenu",-0.1893,2,True,True,False,False,0.568
+51,lisnard,LIS-FIS-03,"Impôt sur les sociétés à 20 %, part de 0 à 5 % aux collectivités",-0.2831,1,True,False,False,False,0.5663
+52,roussel,PCF-PAR-02,"Fonds public de 500 Md€ sur cinq ans, dont 100 Md€ par an pour la transition",0.2634,1,True,False,False,False,0.5268
+53,glucksmann,GLU-SOC-02,Service civique obligatoire de dix mois,-0.2596,1,True,False,False,False,0.5192
+54,roussel,PCF-FIS-03,Impôt sur le revenu à neuf tranches,-0.2538,1,True,False,False,False,0.5076
+55,melenchon,LFI-PRE-05,Réformes Macron de l'assurance chômage annulées,-0.2489,1,True,False,False,False,0.4977
+56,melenchon,LFI-REC-01,Impôt sur le revenu à 14 tranches,-0.2403,1,True,False,False,False,0.4807
+57,arthaud,ART-EMP-01,Interdiction des licenciements sous peine de réquisition,-0.475,0,False,False,False,False,0.475
+58,lisnard,LIS-TER-07,Effectifs publics −12 % (plus de 400 000 suppressions),0.1543,2,True,True,False,False,0.4629
+59,philippe,PHI-TER-01,Un départ en retraite sur trois non remplacé (250 000 postes),0.1543,2,True,True,False,False,0.4629
+60,retailleau,RET-TER-01,"400 000 fonctionnaires non remplacés d'ici 2032 (25 Md€ annoncés), agences supprimées",0.1543,2,True,True,False,False,0.4629
+61,le_pen,RN-ETA-01,"Agents non remplacés (≈ 201 000 postes en 2032, agences et collectivités)",0.154,2,True,True,False,False,0.4621
+62,attal,ATT-NUM-01,"Plan « France 2040 » : 200 Md€ pour l'IA et l'innovation, moitié public",-0.2305,1,True,False,False,False,0.4609
+63,melenchon,LFI-REC-15,Crédit d'impôt recherche supprimé au profit de dotations récurrentes,0.2305,1,True,False,False,False,0.4609
+64,tondelier,MIS-02,"Rénovation — 500 000 rénovations performantes par an via MaPrimeRénov', reste à charge nul pour les modestes ; sortie du fioul en 2032 (300 000 ménages par an)",-0.2305,1,True,False,False,False,0.4609
+65,tondelier,MIS-01/07/08,"Adaptation : Fonds vert, écoles « refuges climatiques », sécurité civile, montée à 7 Md€ en 2032",-0.2305,1,False,False,False,True,0.4609
+66,zemmour,ZEM-KNA-01,800 000 départs administratifs non remplacés sur le quinquennat [40 Md€],0.1519,2,True,True,False,False,0.4558
+67,melenchon,LFI-COL-05,500 000 places d'accueil des jeunes enfants,-0.2256,1,True,False,False,False,0.4512
+68,tondelier,PRE-14,"Congé d'accueil de l'enfant de 16 semaines payé à 100 % du salaire, obligatoire pour les deux parents ; congé supplémentaire de naissance à 80 % et 3 mois par parent",-0.1488,2,True,False,False,True,0.4463
+69,melenchon,LFI-EMP-10,"35 heures rétablies, 32 heures dans les métiers pénibles ou de nuit",-0.2217,1,True,False,False,False,0.4433
+70,tondelier,REC-04/05/06/07,"Successions : +10 % au-delà de 4 M€, +10 % au-delà de 13 M€, Dutreil, assurance-vie, plus-values latentes",0.1464,2,True,False,True,False,0.4393
+71,melenchon,LFI-SAN-04,"Arrêts maladie à 100 %, jours de carence supprimés",-0.2152,1,True,False,False,False,0.4303
+72,melenchon,LFI-SAL-01,"SMIC à 1 700 € net par mois, immédiatement",-0.4287,0,False,False,False,False,0.4287
+73,roussel,PCF-SAL-01,"SMIC à 1 700 € net, hausse de 5 % de tous les salaires, échelle mobile",-0.4287,0,False,False,False,False,0.4287
+74,tondelier,REC-35,Rétablissement de la CVAE au profit des collectivités,0.2074,1,True,False,False,False,0.4148
+75,tondelier,PRE-13,"AAH +250 € par mois, intégrée à la branche autonomie",-0.1375,2,True,False,False,True,0.4125
+76,melenchon,LFI-PRE-06,Congé d'accueil de 20 semaines par parent,-0.1352,2,True,False,True,False,0.4057
+77,tondelier,PRE-10,"Garantie d'autonomie à la place du RSA, à 50 % du SMIC net, indexée sur le SMIC, dès 18 ans pour les personnes fiscalement indépendantes, sans contrepartie d'activité",-0.2003,1,True,False,False,False,0.4006
+78,glucksmann,GLU-FIS-01b,… pour baisser la CSG sur les salaires,-0.3951,0,False,False,False,False,0.3951
+79,melenchon,LFI-REC-02,Fin du quotient conjugal,0.1975,1,True,False,False,False,0.3951
+80,melenchon,LFI-REC-17,Taxe d'habitation progressive rétablie (80 % exonérés),0.1975,1,True,False,False,False,0.3951
+81,melenchon,LFI-COL-02,Moyens rendus aux communes par la taxe d'habitation,-0.1975,1,True,False,False,False,0.3951
+82,melenchon,LFI-EDU-04,Gratuité réelle de l'école publique,-0.1975,1,True,False,False,False,0.3951
+83,melenchon,LFI-INV-02,"Voies ferrées rénovées, lignes et gares rouvertes",-0.1317,2,True,False,False,True,0.3951
+84,glucksmann,GLU-EMP-02,Abroger la réforme de l'assurance chômage,-0.1965,1,True,False,False,False,0.3929
+85,melenchon,LFI-EMP-01,Garantie d'emploi pour les chômeurs de longue durée,-0.1299,2,True,False,False,True,0.3897
+86,roussel,PCF-EMP-02,"Sécurité d'emploi ou de formation à la place du RSA : emploi ou formation au SMIC, fin du chômage de longue durée en cinq ans",-0.1299,2,True,False,False,True,0.3897
+87,tondelier,REC-13,Suppression de l'abattement de 10 % des retraités,0.1939,1,True,False,False,False,0.3877
+88,tondelier,REC-41,"Électricité — accise unifiée avec le gaz, TVA de l'abonnement baissée, tarif progressif",-0.0922,3,True,False,True,True,0.3687
+89,attal,ATT-FIS-03,"« Année blanche » de 2028 (petites retraites protégées), réformes de l'assurance chômage, des retraites et des arrêts maladie",0.1813,1,True,False,False,False,0.3626
+90,melenchon,LFI-REC-16,CVAE remplacée par un impôt progressif selon le chiffre d'affaires et l'empreinte écologique,0.1778,1,True,False,False,False,0.3556
+91,retailleau,RET-FIS-01,"Quatre impôts de production supprimés ou réduits (C3S, CVAE, CFE industrielle, ≈ 15 Md€)",-0.1778,1,True,False,False,False,0.3556
+92,tondelier,REC-20/21,Capital : CSG +3 points et flat tax +3 points (cumulées),0.1152,2,True,True,False,False,0.3457
+93,tondelier,RET-03,Minimum contributif et ASPA portés progressivement au seuil de pauvreté,-0.115,2,True,False,False,True,0.3451
+94,tondelier,REC-40,"TVA verte — taux réduits pour la première nécessité et les produits écologiques, taux relevés pour le luxe et les produits nocifs",0.1143,2,True,False,True,False,0.343
+95,philippe,PHI-EDU-01,"Rémunération moyenne des enseignants +20 % sur le quinquennat, écoles normales",-0.1126,2,True,True,False,False,0.3378
+96,melenchon,LFI-RET-07,Pensions des fonctionnaires relevées par le point d'indice et le rattrapage (départs suivants),-0.1108,2,True,False,False,True,0.3325
+97,melenchon,LFI-REC-06,"Taxe Zucman (2 % sur les centimillionnaires), exit tax renforcée",0.1646,1,True,False,False,False,0.3292
+98,melenchon,LFI-LOG-01,200 000 logements publics par an et 30 000 logements jeunes pendant cinq ans,-0.1646,1,True,False,False,False,0.3292
+99,roussel,PCF-FIS-02,Impôt minimal de 2 % sur les patrimoines de plus de 100 M€,0.1646,1,True,False,False,False,0.3292
+100,roussel,PCF-LOG-01,"200 000 logements sociaux par an, loyers encadrés",-0.1646,1,True,False,False,False,0.3292
+101,tondelier,REC-01,Taxe Zucman de 2 % sur les patrimoines de plus de 100 M€,0.1646,1,True,False,False,False,0.3292
+102,retailleau,RET-ECO-06,"Au moins 30 Md€ par an restitués, moitié aux salariés, moitié aux entreprises",-0.3251,0,False,False,False,False,0.3251
+103,roussel,PCF-RET-05,ASPA à 1 400 € par mois,-0.1547,1,True,False,False,False,0.3095
+104,melenchon,LFI-FP-01,"Point d'indice +10 %, compensé aux collectivités",-0.3027,0,False,False,False,False,0.3027
+105,melenchon,LFI-RET-02,Décote supprimée,-0.1503,1,True,False,False,False,0.3005
+106,zemmour,ZEM-IMM-04,Prestations non contributives et allocations familiales réservées aux Français ; AME supprimée,0.1499,1,True,False,False,False,0.2998
+107,melenchon,LFI-PRE-08,"Première tranche gratuite d'électricité, de chaleur, d'eau, de gaz",-0.0988,2,True,False,True,False,0.2963
+108,melenchon,LFI-COL-01,DGF rééquilibrée et indexée sur l'inflation,-0.0988,2,True,False,False,True,0.2963
+109,tondelier,COT-03,"Cotisations étendues à l'épargne salariale, l'intéressement, la participation et aux actions gratuites",0.0988,2,True,False,True,False,0.2963
+110,tondelier,SAN-09,Loi intégrale contre les violences sexistes et sexuelles dotée de 3 Md€,-0.0988,2,True,False,False,True,0.2963
+111,tondelier,MIS-04,"Ferroviaire — loi de programmation à 10 ans (90 % de la population à moins de 30 minutes d'une gare desservie), petites lignes, RER métropolitains, trains de nuit",-0.0988,2,True,False,False,True,0.2963
+112,retailleau,RET-EMP-03,"Assurance chômage resserrée (≈ 8 Md€ annoncés, plus 4 à 5 Md€ des règles de 2024)",0.1473,1,True,False,False,False,0.2947
+113,glucksmann,GLU-FIS-01,Taxer davantage les très gros héritages,0.1464,1,True,False,False,False,0.2929
+114,melenchon,LFI-EMP-02,« Emploi spécifique jeune » de cinq ans,-0.0964,2,True,False,False,True,0.2892
+115,lisnard,LIS-RET-02,Réforme de 2023 gardée (une page non datée évoque 65 ans),0.2848,0,False,False,False,False,0.2848
+116,philippe,PHI-RET-01,Âge de départ à 65 ans et 45 ans de cotisation en moins de dix ans,0.2848,0,False,False,False,False,0.2848
+117,lisnard,LIS-EDU-03,"Rémunérations des enseignants +20 % en cinq ans, sous conditions",-0.0945,2,True,True,False,False,0.2836
+118,zemmour,ZEM-RET-01,"Reporter l'âge de départ, introduire une part de capitalisation",0.2761,0,False,False,False,False,0.2761
+119,attal,ATT-EDU-01,"Enseignants +200 € net par mois, jusqu'à +500 € en milieu de carrière",-0.0904,2,True,True,False,False,0.2711
+120,lisnard,LIS-SOC-01,Quotient familial déplafonné,-0.134,1,True,False,False,False,0.2679
+121,arthaud,ART-INT-01,Opposition à la hausse du budget militaire,0.2663,0,False,False,False,False,0.2663
+122,melenchon,LFI-SAN-13,"Service public de la dépendance, métiers du grand âge revalorisés, maintien à domicile",-0.1324,1,True,False,False,False,0.2648
+123,lisnard,LIS-ECO-05,Subventions compensant les charges des entreprises supprimées,0.1317,1,True,False,False,False,0.2634
+124,tondelier,RET-04,"Indexation différenciée des pensions, sous-indexation des plus hautes",0.0867,2,True,False,False,True,0.2601
+125,roussel,PCF-EDU-02,"Fournitures, cantine et transports scolaires gratuits",-0.1298,1,True,False,False,False,0.2596
+126,melenchon,LFI-SAN-02,Franchises et participations forfaitaires supprimées,-0.0861,2,True,False,False,True,0.2582
+127,arthaud,ART-FAM-02,Égalité salariale entre femmes et hommes,0.2567,0,False,False,False,False,0.2567
+128,melenchon,LFI-EDU-08,Investissement public dans la recherche relevé,-0.1283,1,True,False,False,False,0.2567
+129,retailleau,RET-EMP-01,"Revenu d'incitation à l'activité à la place du RSA, de la prime d'activité et de l'ASS",0.1275,1,True,False,False,False,0.2549
+130,glucksmann,GLU-EDU-01,Loi de programmation de l'école sur cinq ans (revalorisation),-0.0834,2,True,True,False,False,0.2502
+131,le_pen,RN-LOG-01,« 100 % Rénov' »,-0.1251,1,True,False,False,False,0.2502
+132,melenchon,LFI-EDU-07,Bâti scolaire rénové et adapté,-0.0823,2,True,False,False,True,0.2469
+133,melenchon,LFI-INV-03,Plan vélo rétabli ; leasing social,-0.0823,2,True,False,False,True,0.2469
+134,le_pen,RN-FIS-03,Impôt sur le revenu supprimé pour les moins de 30 ans (jusqu'à quatre SMIC),-0.1225,1,True,False,False,False,0.2451
+135,glucksmann,GLU-ECO-01,Porter le SMIC à 1 600 € net en deux ans,-0.2442,0,False,False,False,False,0.2442
+136,philippe,PHI-EMP-06,Heures au-delà de 35 h exonérées de tous impôts et cotisations du salarié,-0.0593,3,True,True,True,False,0.237
+137,lisnard,LIS-RET-01,Capitalisation obligatoire amorcée par la désindexation des pensions au-delà de ≈ 2 000 €,0.2361,0,False,False,False,False,0.2361
+138,glucksmann,GLU-ENE-03,"Facture indexée sur le coût de production, hausse de taxe de 2024 annulée",-0.1176,1,True,False,False,False,0.2352
+139,melenchon,LFI-INV-05,Relocaliser les productions essentielles ; plan de reconstruction industrielle,-0.1152,1,True,False,False,False,0.2305
+140,melenchon,LFI-INV-06,500 000 emplois agricoles,-0.1152,1,True,False,False,False,0.2305
+141,tondelier,PRE-12,Allocations familiales d'un même montant dès le premier enfant ; majoration dès 14 ans,-0.0757,2,True,False,False,True,0.2272
+142,melenchon,LFI-RET-04,Minimum vieillesse au seuil de pauvreté,-0.1119,1,True,False,False,False,0.2239
+143,retailleau,RET-TER-03,9 000 € de TVA à la commune par logement neuf,-0.1119,1,True,False,False,False,0.2239
+144,lisnard,LIS-FIS-04,"Transmission d'entreprise exonérée, taux marginal des successions à 20 %",-0.1098,1,True,False,False,False,0.2197
+145,melenchon,LFI-SAN-07,"Service public hospitalier reconstruit, recrutements",-0.0709,2,True,False,False,True,0.2127
+146,retailleau,RET-EMP-02,Aides sociales plafonnées à 70 % du SMIC net,0.1062,1,True,False,False,False,0.2124
+147,tondelier,MIS-09/12/14/15,"France Services, cantines, associations, culture, sport, médias, hébergement, indemnisations",-0.0691,2,True,False,False,True,0.2074
+148,retailleau,RET-EDU-01,"Professeurs : +135 € net en début de carrière, ≈ +300 € en milieu",-0.0667,2,True,True,False,False,0.2002
+149,glucksmann,GLU-FIS-03,Effort fiscal sur les très hauts patrimoines,0.0658,2,True,False,True,False,0.1975
+150,melenchon,LFI-REC-20,Heures supplémentaires majorées « cotisations incluses »,0.0658,2,True,False,True,False,0.1975
+151,melenchon,LFI-EMP-03,Sécurité sociale professionnelle : 36 heures de formation par an,-0.0988,1,True,False,False,False,0.1975
+152,melenchon,LFI-COL-08,"Loi contre les violences sexistes et sexuelles, 3 Md€",-0.0988,1,False,False,False,True,0.1975
+153,melenchon,LFI-INV-09,"Accès minimal gratuit à Internet, fibre partout",-0.0988,1,True,False,False,False,0.1975
+154,retailleau,RET-LOG-03,Intérêts d'emprunt de la résidence principale déductibles selon le nombre d'enfants,-0.0658,2,True,False,True,False,0.1975
+155,roussel,PCF-FIS-04,Cotisations sur les revenus financiers et les dividendes ; 10 % sur les revenus financiers des banques et assurances (60 Md€ annoncés),0.0988,1,True,False,False,False,0.1975
+156,tondelier,REC-03,Rétablissement de l'ISF avec composante climatique (remplace l'IFI),0.0658,2,True,False,True,False,0.1975
+157,tondelier,REC-42,Niches fossiles transformées en aides forfaitaires ; gazole des poids lourds au taux normal ; fin des abattements de TICPE,0.0658,2,True,False,True,False,0.1975
+158,tondelier,MIS-06,"Logement social — fin de la réduction de loyer de solidarité, TVA baissée sur la construction, FNAP abondé",-0.0658,2,True,False,False,True,0.1975
+159,zemmour,ZEM-INT-02,Supprimer l'aide publique au développement,0.0988,1,True,False,False,False,0.1975
+160,zemmour,ZEM-KNA-08,Suppression de l'Anah [6 Md€],0.0988,1,True,False,False,False,0.1975
+161,philippe,PHI-EMP-02,Indemnisation chômage de 18 à 12 mois pour les moins de 50 ans,0.0982,1,True,False,False,False,0.1965
+162,roussel,PCF-EDU-03,300 000 places de plus dans le supérieur,-0.0974,1,True,False,False,False,0.1947
+163,le_pen,RN-FIS-06,"Successions des familles modestes exonérées, donations de 100 000 € tous les dix ans, pacte Dutreil renforcé",-0.0622,2,True,False,True,False,0.1867
+164,bertrand,BER-RET-01,"Repousser l'âge légal, départ anticipé avec décote, décote annulée plus tôt pour les femmes, pas de désindexation",0.1851,0,False,False,False,False,0.1851
+165,attal,ATT-EMP-01,Réforme de l'assurance chômage de 2024 reprise (100 000 emplois et 5 Md€ annoncés),0.0917,1,True,False,False,False,0.1834
+166,arthaud,ART-RET-01,"Pensions indexées sur l'inflation, refus de leur gel",-0.1808,0,False,False,False,False,0.1808
+167,melenchon,LFI-EDU-01,"Rattrapage du gel du point depuis 2010 dans l'Éducation nationale, grilles revalorisées",-0.0904,1,True,False,False,False,0.1807
+168,melenchon,LFI-REC-23,Niches du kérosène supprimées,0.0593,2,True,False,True,False,0.1778
+169,melenchon,LFI-SAN-06,Sécurité sociale funéraire,-0.0889,1,True,False,False,False,0.1778
+170,melenchon,LFI-LOG-02,Aides aux HLM rétablies,-0.0593,2,True,False,False,True,0.1778
+171,le_pen,RN-FAM-01,"Soutien aux mères isolées doublé, contrôles renforcés",-0.0866,1,True,False,False,False,0.1731
+172,le_pen,RN-ENE-03,Composante carbone ramenée au niveau de 2017,-0.0856,1,True,False,False,False,0.1712
+173,melenchon,LFI-SAN-09,"Déserts médicaux : centres de santé publics, médecins publics",-0.0828,1,True,False,False,False,0.1655
+174,roussel,PCF-FIS-05,"Héritages de moins de 200 000 € exonérés, gros héritages taxés",-0.0549,2,True,False,True,False,0.1648
+175,melenchon,LFI-REC-05,"ISF rétabli et renforcé, volet climatique",0.0823,1,True,False,False,False,0.1646
+176,roussel,PCF-FIS-01,"ISF rétabli, assiette élargie aux actifs financiers",0.0823,1,True,False,False,False,0.1646
+177,zemmour,ZEM-CUL-01,Privatiser l'audiovisuel public,0.0823,1,True,False,False,False,0.1646
+178,le_pen,RN-FIS-02,TVA à 0 % sur une centaine de produits de première nécessité,-0.0817,1,True,False,False,False,0.1633
+179,roussel,PCF-FIS-06,TVA supprimée sur les produits de première nécessité,-0.0817,1,True,False,False,False,0.1633
+180,attal,ATT-SOC-04,Un mois d'engagement civique obligatoire avant 25 ans,-0.0811,1,True,False,False,False,0.1623
+181,bertrand,BER-ECO-01,Réduire les dépenses publiques de 20 Md€ par an pendant cinq ans,0.0792,1,True,False,False,False,0.1584
+182,lisnard,LIS-ECO-03,Allocation unique plafonnée ; plus de prestations non contributives versées à l'étranger,0.0789,1,True,False,False,False,0.1578
+183,roussel,PCF-SAN-02,"Recrutements massifs dans les hôpitaux publics, centres de santé municipaux",-0.078,1,True,False,False,False,0.156
+184,roussel,PCF-SAL-02,"Point d'indice relevé (+5 %, comme tous les salaires ; +10 % en 2025)",-0.1513,0,False,False,False,False,0.1513
+185,roussel,PCF-EDU-01,"90 000 enseignants, classes de 20 élèves en primaire, pré-recrutement",-0.0751,1,True,False,False,False,0.1501
+186,melenchon,LFI-SAN-08,Métiers et salaires du soin revalorisés,-0.0496,2,True,False,False,True,0.1489
+187,melenchon,LFI-REC-19,Avantages fiscaux de la retraite par capitalisation supprimés,0.0494,2,True,False,True,False,0.1482
+188,melenchon,LFI-INV-10,Plan pluriannuel d'investissement et de services publics en outre-mer,-0.0494,2,True,False,False,True,0.1482
+189,tondelier,REC-33,Réforme de la surtaxe d'IS et baisse du taux réduit d'IS des PME (compensation du SMIC),-0.0494,2,True,False,False,True,0.1482
+190,tondelier,MIS-05,"Ticket climat — abonnement mensuel unique aux transports en commun (hors TGV), gratuité ciblée jeunes et précaires",-0.0494,2,True,False,False,True,0.1482
+191,tondelier,MIS-10,"Énergies renouvelables — PTZ de la Caisse des dépôts à 60 % des devis, fonds chaleur, 10 000 communautés énergétiques ; prêt à taux zéro de long terme pour la décarbonation des PME",-0.0494,2,True,False,False,True,0.1482
+192,tondelier,MIS-11,"Agriculture — revenu garanti trois ans en contrat de transition, aide au maintien bio, plan de transition de l'élevage (rachat de dettes), dotation nouvel agriculteur ; 15 % des aides réorientées vers les services environnementaux",-0.0494,2,True,False,False,True,0.1482
+193,tondelier,RET-02,Retraite à 60 ans pour les carrières longues et pénibles ; quatre critères de pénibilité rétablis et un critère psychosocial,-0.0493,2,True,False,False,True,0.1479
+194,glucksmann,GLU-ECO-03,Tripler le chèque énergie pour les ménages dépendant de la voiture,-0.0724,1,True,False,False,False,0.1449
+195,melenchon,LFI-INV-08,Service public du réemploi,-0.0724,1,True,False,False,False,0.1449
+196,melenchon,LFI-PRE-07,"ASF déconjugalisée et revalorisée, pensions alimentaires défiscalisées",-0.0477,2,True,False,True,False,0.1432
+197,melenchon,LFI-PRE-11,Prime de vie chère étendue (outre-mer),-0.0455,2,True,False,True,False,0.1366
+198,glucksmann,GLU-SOC-04,Droit opposable à la garde d'enfant,-0.0676,1,True,False,False,False,0.1352
+199,tondelier,PRE-03,"Congé climatique de 5 jours par an, financé à parité par les employeurs et la Sécurité sociale",-0.0445,2,True,False,False,True,0.1336
+200,lisnard,LIS-ECO-03b,"Prestations non contributives après cinq ans de résidence, plus versées à l'étranger",0.0668,1,True,False,False,False,0.1335
+201,arthaud,ART-FIS-01,Confiscation des bénéfices des groupes pétroliers et de l'armement,0.0658,1,True,False,False,False,0.1317
+202,melenchon,LFI-LOG-03,"Zéro sans-abri, hébergement d'urgence inconditionnel",-0.0658,1,True,False,False,False,0.1317
+203,melenchon,LFI-INV-04,100 % renouvelable au plus tard en 2060,-0.0658,1,True,False,False,False,0.1317
+204,melenchon,LFI-PAR-02,"Revenus des entreprises nationalisées, péages ramenés en arrière",0.0658,1,True,False,False,False,0.1317
+205,philippe,PHI-INT-03,"Au-delà de 100 000 obus par an, vers l'échelle allemande (≈ 700 000), drones tactiques",-0.0658,1,True,False,False,False,0.1317
+206,retailleau,RET-CUL-01,"Économies sur la culture et l'audiovisuel, fin du SNU et de MaPrimeRénov' (ensemble de 23 Md€)",0.0658,1,True,False,False,False,0.1317
+207,zemmour,ZEM-ENE-02,Supprimer tous les soutiens publics aux renouvelables,0.0658,1,True,False,False,False,0.1317
+208,zemmour,ZEM-KNA-10,Fin de la mise en relation offre/demande de France Travail [4 Md€],0.0658,1,True,False,False,False,0.1317
+209,lisnard,LIS-TER-02,"Moitié des 1 200 agences supprimées, gouvernement de douze ministres",0.0649,1,True,False,False,False,0.1298
+210,melenchon,LFI-EDU-03,Effectifs par classe sous la moyenne européenne de 19 élèves,-0.0639,1,True,False,False,False,0.1279
+211,philippe,PHI-EMP-01,"Durée du travail par accord au-delà de 35 h, heures sup exonérées, aucune cotisation patronale au-delà de 37 h (seuil salarié : 35 ou 37 h selon les passages du site)",-0.0629,1,True,False,False,False,0.1258
+212,retailleau,RET-ECO-02,« Zéro cotisation » au-delà de 1 623 heures par an,-0.0629,1,True,False,False,False,0.1258
+213,tondelier,MIS-13,"Outre-mer — plan quinquennal d'investissement (écoles, transports, eau, assainissement) ; indemnisation des victimes (chlordécone, essais nucléaires, mercure) ; RSA et SMIC alignés à Mayotte",-0.0626,1,False,False,False,True,0.1251
+214,le_pen,RN-IMM-01,"Référendum sur l'immigration, priorité nationale sur les prestations (prestations conditionnées à des années de cotisation)",0.0607,1,True,False,False,False,0.1214
+215,retailleau,RET-IMM-03,Cinq ans de résidence et d'activité pour les prestations non contributives,0.0607,1,True,False,False,False,0.1214
+216,attal,ATT-FIS-02,"Pas de hausse d'impôts, retour sur plusieurs taxes votées depuis 2024, baisse des impôts de production poursuivie, loi de programmation fiscale",-0.0395,2,True,False,True,False,0.1185
+217,glucksmann,GLU-TER-03,Point d'indice indexé sur l'inflation,-0.0389,2,True,False,False,True,0.1168
+218,melenchon,LFI-FP-02,Dégel du point inscrit dans la loi,-0.0389,2,True,False,False,True,0.1168
+219,tondelier,FP-01,Point d'indice indexé sur l'inflation,-0.0389,2,True,False,False,True,0.1168
+220,melenchon,LFI-SAN-12,Ratio minimal d'encadrement « au chevet »,-0.0383,2,True,False,False,True,0.1149
+221,tondelier,SAN-06,"Grand âge — service public de la dépendance, taux d'encadrement des Ehpad, places, revalorisations",-0.0383,2,True,False,False,True,0.1149
+222,melenchon,LFI-REC-07,"Successions : cumul sur la vie, héritage maximal de 12 M€",-0.0366,2,True,False,True,False,0.1098
+223,tondelier,PRE-19/20,"Jeunes : bourses, CVEC supprimée, stages et alternants rémunérés, permis ; ADA relevée",-0.0362,2,True,False,False,True,0.1086
+224,zemmour,ZEM-NUM-01/02,"Investissements dans l'intelligence artificielle, formation à l'école",-0.0362,2,True,False,False,True,0.1086
+225,attal,ATT-TER-01,"100 000 postes supprimés dans l'État et les collectivités (Éducation, Armées, Justice, Intérieur sanctuarisés)",0.0532,1,True,False,False,False,0.1064
+226,melenchon,LFI-SAN-05,AME intégrée au régime général,-0.053,1,True,False,False,False,0.1059
+227,melenchon,LFI-COL-04,"Protection de l'enfance recentralisée, moyens augmentés",-0.0527,1,True,False,False,False,0.1054
+228,melenchon,LFI-PRE-04,APL +10 %,-0.0519,1,False,False,False,True,0.1038
+229,tondelier,PRE-11,"APL revalorisées de 10 %, ouvertes aux résidents mobiles et à l'habitat léger",-0.0519,1,False,False,False,True,0.1038
+230,le_pen,RN-SAN-01,"Fin des fermetures de lits et de maternités, soignants revalorisés, maisons médicales de garde",-0.0497,1,True,False,False,False,0.0993
+231,melenchon,LFI-SAN-03,Fin des dépassements d'honoraires dans le secteur conventionné,-0.0497,1,True,False,False,False,0.0993
+232,philippe,PHI-SAN-01,Dépenses de santé stabilisées par la prévention et la technologie,0.0497,1,True,False,False,False,0.0993
+233,retailleau,RET-SAN-01,Jour de carence d'ordre public dans le privé (4 Md€ d'économies sur les arrêts maladie annoncés),0.0497,1,True,False,False,False,0.0993
+234,tondelier,PRE-21,Aidants — congé de proche aidant rémunéré et revalorisé ; APA à domicile revalorisée,-0.0331,2,True,False,False,True,0.0993
+235,roussel,PCF-RET-04,Demi-part des veuves rétablie,-0.0494,1,True,False,False,False,0.0989
+236,arthaud,ART-ENE-02,Carburant vendu à prix coûtant,-0.0494,1,True,False,False,False,0.0988
+237,glucksmann,GLU-ENE-05,Relancer et simplifier MaPrimeRénov',-0.0494,1,True,False,False,False,0.0988
+238,lisnard,LIS-INT-02,"Hausse « incontournable » de la défense, combat aérien bâti sur le Rafale",-0.0494,1,True,False,False,False,0.0988
+239,melenchon,LFI-REC-04,Flat tax supprimée,0.0329,2,True,False,True,False,0.0988
+240,melenchon,LFI-REC-10,Impôt universel sur les entreprises et les particuliers,0.0494,1,True,False,False,False,0.0988
+241,melenchon,LFI-REC-03,Crédit d'impôt par enfant,-0.0329,2,True,False,True,False,0.0988
+242,melenchon,LFI-REC-14,Taxe réelle sur les transactions financières,0.0329,2,True,False,True,False,0.0988
+243,melenchon,LFI-SAN-10,Plan d'éradication des maladies chroniques liées aux pollutions ; VIH ; recherche environnement-santé,-0.0329,2,True,False,False,True,0.0988
+244,philippe,PHI-RET-04,Contribution accrue des retraités ; niches fiscales supprimées avant toute hausse sur le travail,0.0494,1,True,False,False,False,0.0988
+245,tondelier,REC-30,"Impôt minimal sur les bénéfices des sociétés de plus de 1 Md€ de chiffre d'affaires, au prorata de l'activité en France",0.0494,1,True,False,False,False,0.0988
+246,tondelier,REC-36,Crédit d'impôt recherche recentré sur les PME et ETI,0.0494,1,True,False,False,False,0.0988
+247,tondelier,COT-01,Cotisation vieillesse +1 point déplafonnée sur la part des salaires au-dessus du plafond,0.0329,2,True,False,True,False,0.0988
+248,zemmour,ZEM-KNA-09,"Suppression de l'Ademe hors renouvelables [3,4 Md€]",0.0494,1,True,False,False,False,0.0988
+249,roussel,PCF-SOC-01,"Ministère des Droits des femmes doté d'1 Md€, loi-cadre contre les violences",-0.0325,2,True,False,False,True,0.0974
+250,melenchon,LFI-EDU-02,Corps de fonctionnaires pour les AESH,-0.032,2,True,False,False,True,0.0959
+251,tondelier,FP-03,Classes de primaire à 19 élèves en 2032 et 12 en éducation prioritaire,-0.032,2,True,False,False,True,0.0959
+252,philippe,PHI-RET-01b,Durée de cotisation à 45 ans,0.0478,1,True,False,False,False,0.0956
+253,arthaud,ART-SAN-01,Refus des déremboursements de médicaments,-0.0463,1,False,False,False,True,0.0927
+254,melenchon,LFI-SAN-14,Statut de salarié pour les travailleurs des ESAT,-0.0461,1,True,False,False,False,0.0922
+255,zemmour,ZEM-KNA-04,"RSA limité à trois ans pour les aptes au travail [4,8 Md€]",0.0455,1,True,False,False,False,0.091
+256,tondelier,REC-45,"Fiscalité de santé — alcool (taxe selon l'alcool pur), tabac, sucre, produits transformés ; boissons sucrées +1 centime",0.0302,2,True,False,True,False,0.0907
+257,retailleau,RET-FIS-02,Droits de succession abaissés,-0.0439,1,True,False,False,False,0.0879
+258,tondelier,FP-05,"Justice — 9 000 magistrats sur dix ans, 10 000 greffiers, 7 000 attachés de justice ; salaires les plus bas à la moyenne européenne",-0.0292,2,True,False,False,True,0.0876
+259,tondelier,REC-10,Tranche d'IR à 60 % au-delà de 250 000 €,0.0435,1,True,False,False,False,0.0869
+260,le_pen,RN-JEU-01,Permis de conduire gratuit,-0.0428,1,True,False,False,False,0.0856
+261,tondelier,SAN-05,"Hôpital — recrutements, salaires, dette transférée à la CADES",-0.0284,2,True,False,False,True,0.0851
+262,melenchon,LFI-EDU-09,Enseignement supérieur gratuit,-0.0423,1,True,False,False,False,0.0846
+263,glucksmann,GLU-EMP-01,"Généraliser Territoires zéro chômeur, CDI d'insertion",-0.0422,1,True,False,False,False,0.0844
+264,tondelier,FP-04,Titularisation des 144 000 AESH et des contractuels ; personnels éducatifs renforcés,-0.0277,2,True,False,False,True,0.0831
+265,bertrand,BER-CUL-01,1 % du budget de l'État pour la culture en 2032,-0.0395,1,True,False,False,False,0.079
+266,glucksmann,GLU-TER-01,Plan Rail avec les régions,-0.0395,1,True,False,False,False,0.079
+267,glucksmann,GLU-TER-01b,Titre de transport unique « Ticket climat »,-0.0395,1,True,False,False,False,0.079
+268,philippe,PHI-INT-02b,Service militaire volontaire de 3 000 à 50 000 places,-0.0395,1,True,False,False,False,0.079
+269,retailleau,RET-LOG-06,"Statut du bailleur privé (amortissement de 4 %, PFU)",-0.0263,2,True,False,True,False,0.079
+270,tondelier,REC-23,"Taxe sur les transactions financières portée à 0,7 %, assiette élargie",0.0263,2,True,False,True,False,0.079
+271,glucksmann,GLU-RET-02,Âge modulé selon la pénibilité et l'espérance de vie en bonne santé,-0.0394,1,True,False,False,False,0.0789
+272,glucksmann,GLU-FIS-05,Supprimer les exonérations fiscales des transports polluants,0.0261,2,True,False,True,False,0.0784
+273,glucksmann,GLU-EDU-05,"Parcoursup repensé, capital formation universel (chantier)",-0.026,2,True,False,True,False,0.0779
+274,melenchon,LFI-COL-06,"Justice : recrutements, aide juridictionnelle, tribunaux de proximité",-0.025,2,True,False,False,True,0.0751
+275,melenchon,LFI-COL-03,Services publics essentiels à 15-30 minutes,-0.0353,1,True,False,False,False,0.0705
+276,melenchon,LFI-REC-25,Cannabis légalisé sous monopole d'État,0.023,2,True,False,True,False,0.0691
+277,tondelier,REC-47,Légalisation du cannabis avec une fiscalité propre,0.023,2,True,False,True,False,0.0691
+278,glucksmann,GLU-SAN-03,"Prévention hors Ondam annuel, fonds territorial",-0.0331,1,True,False,False,False,0.0662
+279,attal,ATT-NUM-05,"Crédit d'impôt productivité IA pour les PME et ETI, électricité stable cinq ans",-0.0329,1,True,False,False,False,0.0658
+280,attal,ATT-TER-02,"Un échelon de collectivités supprimé, doublons administratifs",0.0329,1,True,False,False,False,0.0658
+281,glucksmann,GLU-FIS-06,"Rééquilibrer la taxation entre travail, capital, héritage et retraites",0.0329,1,True,False,False,False,0.0658
+282,glucksmann,GLU-EDU-06,Plan de rénovation des écoles,-0.0329,1,True,False,False,False,0.0658
+283,glucksmann,GLU-SOC-03,Plan contre les violences sexistes et sexuelles doté d'un milliard,-0.0329,1,False,False,False,True,0.0658
+284,lisnard,LIS-FIS-02,"IFI supprimé, fiscalité foncière sur valeurs vénales",-0.0329,1,True,False,False,False,0.0658
+285,melenchon,LFI-COL-09,"Plan contre le racisme, 1 Md€",-0.0329,1,False,False,False,True,0.0658
+286,melenchon,LFI-LOG-04,Garantie universelle des loyers,-0.0329,1,True,False,False,False,0.0658
+287,melenchon,LFI-COL-11,Plan d'urgence pour les équipements sportifs,-0.0329,1,True,False,False,False,0.0658
+288,philippe,PHI-RET-04b,Niches fiscales supprimées avant toute hausse d'impôt sur le travail,0.0329,1,True,False,False,False,0.0658
+289,tondelier,PRE-16,Sécurité sociale professionnelle — salaire garanti deux ans en cas de perte d'emploi dans les secteurs exposés à la transition,-0.0329,1,True,False,False,False,0.0658
+290,tondelier,PRE-17,Garantie d'emploi à 55 ans par l'extension de Territoires zéro chômeur de longue durée,-0.0329,1,True,False,False,False,0.0658
+291,zemmour,ZEM-SP-02,Supprimer le soutien à la politique de la Ville,0.0329,1,True,False,False,False,0.0658
+292,zemmour,ZEM-KNA-15,Budget européen ramené au niveau d'avant le Covid [14 Md€],0.0329,1,True,False,False,False,0.0658
+293,melenchon,LFI-RET-06,Facteurs de pénibilité réinstaurés,-0.0329,1,True,False,False,False,0.0657
+294,lisnard,LIS-EMP-04,Allocations chômage dégressives,0.0327,1,True,False,False,False,0.0655
+295,glucksmann,GLU-SOC-05,Indemnité et droit au répit des proches aidants,-0.0216,2,True,False,True,False,0.0649
+296,le_pen,RN-ETA-02,"Quasi-totalité des agences supprimées (3,4 Md€ en 2027, 10 en 2031), fusion Urssaf-DGFiP (1,72 Md€)",0.0325,1,True,False,False,False,0.0649
+297,philippe,PHI-TER-02,"Agences et opérateurs fusionnés, privatisés ou supprimés",0.0325,1,True,False,False,False,0.0649
+298,retailleau,RET-TER-01b,La plupart des agences et opérateurs supprimés,0.0325,1,True,False,False,False,0.0649
+299,zemmour,ZEM-SAN-02,"40 000 personnels hospitaliers, T2A modifiée",-0.0312,1,False,False,False,True,0.0624
+300,philippe,PHI-INT-02,"Réservistes de 45 000 à 250 000, service militaire volontaire de 3 000 à 50 000 places, nouvelle LPM",-0.0296,1,True,False,False,False,0.0593
+301,retailleau,RET-CUL-01b,"Fin du SNU, économies sur la culture et l'audiovisuel",0.0296,1,True,False,False,False,0.0593
+302,tondelier,FP-07,"Recherche — personnels +10 % la première année, budgets des laboratoires en proportion, recrutements de chercheurs, 1 000 chaires",-0.0198,2,True,False,False,True,0.0593
+303,zemmour,ZEM-SAN-01,1 000 médecins salariés par l'État ; réouverture de services de proximité,-0.0187,2,True,False,False,True,0.056
+304,melenchon,LFI-SAN-11,10 000 places d'Ehpad publics par an pendant cinq ans,-0.0184,2,True,False,False,True,0.0553
+305,glucksmann,GLU-FIS-02,Réformer le pacte Dutreil,0.0183,2,True,False,True,False,0.0549
+306,glucksmann,GLU-SAN-02,"Centres de petites urgences, maisons de santé, permanences mobiles",-0.0265,1,True,False,False,False,0.053
+307,tondelier,SAN-03,2 000 centres de santé d'ici 2030,-0.0265,1,True,False,False,False,0.053
+308,glucksmann,GLU-FIS-04,Plafonner le crédit d'impôt recherche des grands groupes,0.0263,1,True,False,False,False,0.0527
+309,glucksmann,GLU-ENE-02,Plan pluriannuel d'investissement dans les renouvelables,-0.0263,1,True,False,False,False,0.0527
+310,glucksmann,GLU-LOG-02,"Fonds foncier, objectifs de logements sociaux rehaussés",-0.0263,1,True,False,False,False,0.0527
+311,le_pen,RN-RET-02,"Minimum vieillesse à 1 000 €, petites retraites augmentées, pensions réindexées sur l'inflation",-0.0263,1,True,False,False,False,0.0527
+312,melenchon,LFI-EMP-05,Rémunération des apprentis et alternants revalorisée,-0.0263,1,True,False,False,False,0.0527
+313,melenchon,LFI-PRE-09,Protections périodiques gratuites,-0.0263,1,True,False,False,False,0.0527
+314,philippe,PHI-CLI-05,Plan national baignade,-0.0263,1,True,False,False,False,0.0527
+315,zemmour,ZEM-IMM-02,"« Remigration » : expulsions, y compris d'étrangers au chômage depuis un an",-0.0263,1,True,False,False,False,0.0527
+316,zemmour,ZEM-KNA-16,Fin de la gratuité des études pour les étudiants étrangers [4 Md€],0.0263,1,True,False,False,False,0.0527
+317,melenchon,LFI-INV-07,Moyens humains et financiers de l'État et de ses opérateurs,-0.0167,2,True,False,False,True,0.05
+318,tondelier,SAN-02,Dépassements d'honoraires limités à 50 % du tarif et interdits pour la moitié des ménages les moins aisés ; tarifs des spécialités peu valorisées relevés,-0.0166,2,True,False,False,True,0.0497
+319,tondelier,SAN-07,"Prévention, santé mentale, AME garantie, activité physique adaptée remboursée",-0.0166,2,True,False,False,True,0.0497
+320,attal,ATT-LOG-03,"Statut du bailleur privé, construction simplifiée, accession des locataires HLM",-0.0165,2,True,False,True,False,0.0494
+321,le_pen,RN-FIS-05,IFI remplacé par un impôt sur la fortune financière,-0.0165,2,True,False,True,False,0.0494
+322,le_pen,RN-EMP-02,"Prime de pouvoir d'achat exonérée, heures supplémentaires défiscalisées",-0.0165,2,True,False,True,False,0.0494
+323,melenchon,LFI-REC-24,"Taxe kilométrique aux frontières, droits de douane écologiques",0.0165,2,True,False,True,False,0.0494
+324,philippe,PHI-LOG-02,"Droits des bailleurs renforcés, pression fiscale réduite, pas d'encadrement des loyers",-0.0165,2,True,False,True,False,0.0494
+325,tondelier,REC-12,Plafonnement global des niches fiscales par foyer ; avantages limités à deux logements,0.0165,2,True,False,True,False,0.0494
+326,tondelier,REC-43,"Fiscalité de l'aérien — TSBA et TVA des billets relevées, kérosène des vols intérieurs, interdiction des vols courts et des jets privés",0.0165,2,True,False,True,False,0.0494
+327,tondelier,PRE-18,"Chèque énergie remplacé par un crédit d'impôt automatique, élargi à toutes les personnes en précarité",-0.0165,2,True,False,False,True,0.0494
+328,tondelier,FP-08,"Universités — financement « durable et suffisant », recrutements BIATSS et enseignants-chercheurs ; 150 000 logements étudiants sur le quinquennat",-0.0165,2,True,False,False,True,0.0494
+329,tondelier,RET-05,"Retraite agricole réformée, droits familiaux et conjugaux unifiés vers le haut",-0.0164,2,True,False,False,True,0.0493
+330,roussel,PCF-LOG-02,APL revalorisées,-0.0244,1,True,False,False,False,0.0488
+331,glucksmann,GLU-SOC-01,Statut des parents seuls,-0.0162,2,True,False,True,False,0.0487
+332,philippe,PHI-SOC-07,« Plan Marshall » pour la garde d'enfants,-0.0243,1,True,False,False,False,0.0487
+333,bertrand,BER-FIS-02,"Rejeter la taxe Zucman, relever la flat tax",0.0243,1,True,False,False,False,0.0485
+334,lisnard,LIS-ECO-04,Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois,-0.024,1,True,False,False,False,0.0479
+335,philippe,PHI-FIS-02,"Pas d'impôt sur le revenu trois ans après une naissance (4e au 6e décile et début du 7e), réduction de 3 000 € par an au-dessus (≈ 3 Md€ par an)",-0.0475,0,False,False,False,False,0.0475
+336,melenchon,LFI-EMP-06,Burn-out reconnu en maladie professionnelle ; cancérogènes du CIRC,-0.023,1,True,False,False,False,0.0461
+337,tondelier,ECO-01,"Financement public de l'enseignement privé sous contrat ramené à 50 % (révision de la loi Debré), compensé par des frais de scolarité",0.023,1,True,False,False,False,0.0461
+338,roussel,PCF-SEC-01,Police nationale de proximité : 30 000 postes,-0.0229,1,True,False,False,False,0.0459
+339,attal,ATT-FIS-04,"Pas de hausse des droits de succession, donations du vivant facilitées",-0.0146,2,True,False,True,False,0.0439
+340,retailleau,RET-FIS-03,Droits de transmission d'entreprise payés à la cession,-0.0146,2,True,False,True,False,0.0439
+341,philippe,PHI-IMM-05,Aides sociales aux étrangers alignées sur la moyenne européenne,0.0212,1,True,False,False,False,0.0425
+342,melenchon,LFI-EDU-05,Service public national du périscolaire avec des titulaires,-0.0212,1,True,False,False,False,0.0423
+343,le_pen,RN-EDU-01,"Soutien scolaire gratuit, métier d'enseignant revalorisé, uniforme, méthode syllabique",-0.0209,1,True,False,False,False,0.0417
+344,melenchon,LFI-FP-03,Titularisation des précaires des trois fonctions publiques,-0.0209,1,True,False,False,False,0.0417
+345,melenchon,LFI-EDU-06,"Plus de classes et de lycées professionnels et agricoles publics, bac pro en 4 ans",-0.0209,1,True,False,False,False,0.0417
+346,tondelier,FP-09,"Heures d'enseignement en plus — bac professionnel en 4 ans, EPS à 4 h au collège et 3 h au lycée, RASED rétablis",-0.0139,2,True,False,False,True,0.0417
+347,attal,ATT-SOC-01,"Familles monoparentales : pensions alimentaires défiscalisées, versement automatique, carte famille",-0.0135,2,True,False,True,False,0.0406
+348,lisnard,LIS-SAN-06,"Loi de programmation de santé, convergence tarifaire public-privé, DMP obligatoire",0.0199,1,True,False,False,False,0.0397
+349,philippe,PHI-SAN-02,"Formation des médecins, prévention, IA en santé",-0.0199,1,True,False,False,False,0.0397
+350,attal,ATT-ECO-02,"Carburant : barème kilométrique, bonus électrique d'occasion, boîtier E85, prime carburant à 1 000 €",-0.0132,2,True,False,True,False,0.0395
+351,attal,ATT-ENE-05,"Voiture électrique française à 10 000 €, leasing pour les travailleurs de première ligne, bornes",-0.0198,1,True,False,False,False,0.0395
+352,glucksmann,GLU-AGR-03,Revenu de transition écologique pour agriculteurs et pêcheurs,-0.0198,1,True,False,False,False,0.0395
+353,le_pen,RN-COL-01,"Collectivités : 8,2 Md€ en 2027, 18 en fin de quinquennat ; 35 heures dans la territoriale (1,3 Md€)",0.0198,1,True,False,False,False,0.0395
+354,le_pen,RN-SEC-02,85 000 places de prison,-0.0198,1,True,False,False,False,0.0395
+355,lisnard,LIS-ENE-02,Renouvelables au droit commun,0.0198,1,True,False,False,False,0.0395
+356,lisnard,LIS-CUL-02,"Audiovisuel public recentré, France 2 privatisée",0.0198,1,True,False,False,False,0.0395
+357,melenchon,LFI-MIG-01,"Régularisation des travailleurs, étudiants et parents sans papiers",0.0132,2,True,False,True,False,0.0395
+358,retailleau,RET-ENE-02,"Fin du soutien aux nouvelles capacités éoliennes et solaires, TVA normale sur le solaire",0.0198,1,True,False,False,False,0.0395
+359,tondelier,ECO-03,"Niches défavorables au climat, voitures de fonction, barèmes kilométriques réformés",0.0099,3,True,True,True,False,0.0395
+360,zemmour,ZEM-ECO-02,Plan de 80 Md€ d'économies « urgentes »,0.0198,1,True,False,False,False,0.0395
+361,retailleau,RET-SOC-02,Congé de naissance jusqu'aux six mois de l'enfant (≈ 700 M€),-0.0189,1,False,False,True,False,0.0379
+362,lisnard,LIS-EMP-05,"Charges négatives à l'embauche d'allocataires du RSA, emploi à domicile au SMIC sans charges, apprentissage",-0.0189,1,True,False,False,False,0.0377
+363,philippe,PHI-CLI-01,"Fonds unique d'adaptation de 2 Md€ par an, « DATAR 2.0 »",-0.0181,1,True,False,False,False,0.0362
+364,melenchon,LFI-COL-07,Formation des gardiens de la paix portée à deux ans,-0.0167,1,True,False,False,False,0.0334
+365,lisnard,LIS-SAN-05,"Accès direct remboursé aux spécialistes, IPA, kinésithérapeutes",-0.0166,1,True,False,False,False,0.0331
+366,bertrand,BER-ECO-02,Redistribuer les recettes des hausses de carburant aux actifs contraints,-0.0165,1,True,False,False,False,0.0329
+367,glucksmann,GLU-FIS-03b,Taxation automatique des superprofits,0.0165,1,True,False,False,False,0.0329
+368,glucksmann,GLU-EDU-03,Séjour collectif garanti pour chaque enfant,-0.0165,1,True,False,False,False,0.0329
+369,glucksmann,GLU-NUM-02,Agence industrielle du numérique et de l'IA,-0.0165,1,True,False,False,False,0.0329
+370,lisnard,LIS-TER-01,Départements et régions fusionnés en une cinquantaine de provinces,0.0165,1,True,False,False,False,0.0329
+371,melenchon,LFI-PRE-10,Prix des produits de première nécessité bloqués,-0.0165,1,True,False,False,False,0.0329
+372,melenchon,LFI-COL-14,Éco-régions à la place des régions,-0.0165,1,True,False,False,False,0.0329
+373,retailleau,RET-RET-01,"Âge minimal de 63 ans, taux plein automatique à 65 ans, décote de 7 % par an",0.0329,0,False,False,False,False,0.0329
+374,tondelier,REC-32,"Taxe sur les services numériques de 3 à 5 %, étendue au e-commerce et aux data centers",0.0165,1,True,False,False,False,0.0329
+375,zemmour,ZEM-IMM-01,Arrêter l'immigration légale,0.0165,1,True,False,False,False,0.0329
+376,zemmour,ZEM-SEC-01/02,"Fin de l'excuse de minorité, peines planchers, fin du juge de l'application des peines : détenus en plus",-0.0165,1,True,False,False,False,0.0329
+377,arthaud,ART-FAM-01,Maintien des allocations familiales et de la prime de rentrée,-0.0162,1,True,False,False,False,0.0325
+378,retailleau,RET-TER-02,"Fonctionnaires à 1 623 heures, trois jours de carence",0.0162,1,True,False,False,False,0.0325
+379,zemmour,ZEM-KNA-05,"Fraude sociale, aides retirées aux délinquants et criminels [2 à 3 Md€]",0.0162,1,True,False,False,False,0.0325
+380,bertrand,BER-EDU-01,Réformer les bourses pour les classes moyennes,-0.016,1,True,False,False,False,0.0319
+381,le_pen,RN-SEC-01,Policiers et gendarmes recrutés par dizaines de milliers,-0.0153,1,True,False,False,False,0.0306
+382,roussel,PCF-FIS-08,Douanes et finances publiques : 10 000 postes rétablis et 10 000 créés,-0.0153,1,True,False,False,False,0.0306
+383,attal,ATT-LOG-02,"Garantie universelle des loyers, résidences universitaires",-0.0153,1,True,False,False,False,0.0305
+384,glucksmann,GLU-LOG-04,Programme « Logement d'abord »,-0.0153,1,True,False,False,False,0.0305
+385,retailleau,RET-IMM-04,"Hébergement d'urgence réservé au séjour régulier, 18 mois au plus",0.0153,1,True,False,False,False,0.0305
+386,arthaud,ART-SP-03,"Salaires des fonctionnaires, moyens des pompiers",-0.0099,2,True,False,False,True,0.0296
+387,melenchon,LFI-REC-18,Taxe unique et progressive sur les logements vacants,0.0099,2,True,False,True,False,0.0296
+388,melenchon,LFI-INS-01,Indépendance de la Kanaky-Nouvelle-Calédonie au 1er janvier 2028,0.0099,2,True,True,False,False,0.0296
+389,tondelier,REC-14,Défiscalisation des pensions alimentaires pour qui les reçoit (plafond par enfant),-0.0099,2,True,False,False,True,0.0296
+390,tondelier,PRE-22,Jeunes sortant de l'ASE accompagnés jusqu'à 25 ans,-0.0099,2,True,False,False,True,0.0296
+391,melenchon,LFI-REC-08,« TVA grand luxe »,0.0098,2,True,False,True,False,0.0294
+392,bertrand,BER-EMP-02,Supprimer l'écart de jours de carence entre public et privé,0.0096,2,True,True,False,False,0.0287
+393,glucksmann,GLU-EDU-01b,"Loi de programmation de l'école (effectifs, remplaçants)",-0.0139,1,True,False,False,False,0.0278
+394,lisnard,LIS-SEC-03b,20 000 places de prison : fonctionnement,-0.0139,1,True,False,False,False,0.0278
+395,le_pen,RN-IMM-02,AME remplacée par une aide médicale d'urgence,0.0132,1,True,False,False,False,0.0265
+396,lisnard,LIS-IMM-03,AME remplacée par une aide médicale d'urgence (600 à 900 M€ annoncés),0.0132,1,True,False,False,False,0.0265
+397,attal,ATT-LOG-01,Loi de programmation du logement et de la rénovation énergétique,-0.0132,1,True,False,False,False,0.0263
+398,glucksmann,GLU-ECO-04,"Commande publique vers le « Fabriqué en France », fonds régionaux",-0.0132,1,True,False,False,False,0.0263
+399,glucksmann,GLU-INT-04,Réserve opérationnelle fortement accrue,-0.0132,1,True,False,False,False,0.0263
+400,glucksmann,GLU-NUM-03,Sortir de la dépendance aux GAFAM en cinq ans,0.0132,1,True,False,False,False,0.0263
+401,melenchon,LFI-LOG-06,Fonds d'aide à la relocalisation des constructions menacées,-0.0132,1,True,False,False,False,0.0263
+402,philippe,PHI-CLI-08,Investissement massif dans la capture du carbone,-0.0132,1,True,False,False,False,0.0263
+403,philippe,PHI-AGR-02,"100 territoires de souveraineté alimentaire, transmission des exploitations",-0.0132,1,True,False,False,False,0.0263
+404,philippe,PHI-NUM-01,"Infrastructure d'IA souveraine, calcul doublé en cinq ans",-0.0132,1,True,False,False,False,0.0263
+405,philippe,PHI-NUM-04,Droit à la reconversion pour les métiers menacés par l'IA,-0.0132,1,True,False,False,False,0.0263
+406,retailleau,RET-SOC-03,Garde d'enfants : crédit d'impôt famille déplafonné (≈ 800 M€),-0.0263,0,False,False,False,False,0.0263
+407,tondelier,ECO-02/04/05,"Rétention administrative, nouvelles places de prison, achats publics mutualisés",0.0132,1,True,False,False,False,0.0263
+408,zemmour,ZEM-KNA-19,"Hébergement d'urgence fermé aux étrangers en situation irrégulière [0,7 Md€]",0.0132,1,True,False,False,False,0.0263
+409,tondelier,PRE-01,SMIC à 2 000 € brut par mois dès 2027,0.0256,0,False,False,False,False,0.0256
+410,retailleau,RET-RET-03,Cotisations exonérées pour les seniors ayant tous leurs trimestres,-0.0126,1,True,False,False,False,0.0252
+411,philippe,PHI-SEC-01,"Courtes peines dès la première infraction, peines planchers, loi pour accélérer la construction de prisons",-0.0125,1,True,False,False,False,0.025
+412,tondelier,SAN-04,"Santé scolaire et universitaire — 800 médecins et 1 000 psychologues (postes vacants), 7 500 infirmiers, +500 € en début de carrière, un centre de santé par université",-0.0083,2,True,False,False,True,0.025
+413,philippe,PHI-SOC-06,Durée du RSA limitée,0.0121,1,True,False,False,False,0.0243
+414,glucksmann,GLU-CLI-06,"Refuser les méga-bassines, tarification sociale de l'eau",-0.0115,1,True,False,False,False,0.023
+415,philippe,PHI-RET-03,"Capitalisation collective, PER abondé de 500 € dès le premier emploi",-0.0115,1,True,False,False,False,0.023
+416,zemmour,ZEM-KNA-12,"Suppression d'autres agences (Arcom, Conseil national du bruit, Haut Conseil à l'égalité…) [1 Md€]",0.0115,1,True,False,False,False,0.023
+417,philippe,PHI-NUM-03,"100 000 ingénieurs par an (contre 40 000), en cinq ans",-0.0076,2,True,True,False,False,0.0227
+418,lisnard,LIS-SAN-02,Étudiants en médecine doublés d'ici 2030,-0.0111,1,True,False,False,False,0.0222
+419,retailleau,RET-SEC-02,« État d'urgence anti-trafics » dans 50 à 60 quartiers,-0.0111,1,True,False,False,False,0.0222
+420,tondelier,PRE-02,32 heures sans perte de salaire dans les métiers pénibles ou de nuit,-0.0071,2,True,False,False,True,0.0213
+421,philippe,PHI-SOC-02,Temps partiel parental à 80 % payé 100 % pendant deux mois,-0.0068,2,True,False,True,False,0.0203
+422,tondelier,SAN-08,"Renégociation du prix des médicaments les plus coûteux (anticancéreux), pôle public du médicament",0.0099,1,True,False,False,False,0.0199
+423,attal,ATT-CLI-02,"Plan eau : 500 réseaux réparés, réutilisation des eaux usées, ministère de l'Eau",-0.0099,1,True,False,False,False,0.0198
+424,bertrand,BER-ECO-03,Règle d'or budgétaire soumise à référendum,-0.0099,1,True,False,False,False,0.0198
+425,glucksmann,GLU-ECO-06,« Taxe Amazon » pour le commerce de proximité,0.0066,2,True,False,True,False,0.0198
+426,glucksmann,GLU-CLI-05,Garantie universelle d'assurance climatique,-0.0099,1,True,False,False,False,0.0198
+427,glucksmann,GLU-AGR-04,"Cantines bio et locales, sécurité sociale de l'alimentation (expérimentations)",-0.0099,1,True,False,False,False,0.0198
+428,glucksmann,GLU-SAN-06,"Nutri-Score obligatoire, boissons sucrées plus taxées",0.0066,2,True,False,True,False,0.0198
+429,glucksmann,GLU-TER-04,Service public de transport rural,-0.0099,1,True,False,False,False,0.0198
+430,le_pen,RN-COL-02,"Intercommunalités et métropoles supprimées, compétences strictes",0.0099,1,True,False,False,False,0.0198
+431,melenchon,LFI-REC-21,Privilèges fiscaux du mécénat culturel abolis,0.0099,1,True,False,False,False,0.0198
+432,melenchon,LFI-REC-22,Avantages fiscaux de l'épargne investie à l'étranger supprimés,0.0066,2,True,False,True,False,0.0198
+433,philippe,PHI-SEC-08,"Canadairs construits en France, réserves communales, premiers secours",-0.0099,1,True,False,False,False,0.0198
+434,retailleau,RET-ECO-05,Fonds France Production de 600 M€ par an,-0.0099,1,True,False,False,False,0.0198
+435,retailleau,RET-CLI-05,"Prévention des incendies, avions bombardiers d'eau français",-0.0099,1,True,False,False,False,0.0198
+436,retailleau,RET-AGR-02,"OFB supprimé, autorisations phytosanitaires reconnues",0.0099,1,True,False,False,False,0.0198
+437,tondelier,ECO-05,Prisons — numerus clausus et moratoire sur les nouvelles places (hors remplacement),0.0066,2,True,True,False,False,0.0198
+438,zemmour,ZEM-SAN-03,Relocaliser les médicaments essentiels,-0.0099,1,True,False,False,False,0.0198
+439,zemmour,ZEM-KNA-11,Suppression des ARS [1 Md€],0.0099,1,True,False,False,False,0.0198
+440,philippe,PHI-LOG-01,Prêt à taux zéro à chaque naissance,-0.0092,1,True,False,False,False,0.0183
+441,attal,ATT-ECO-04,"Statut « Auto-TPE » pour le premier salarié, intéressement des petites entreprises, « test PME »",-0.009,1,True,False,False,False,0.018
+442,attal,ATT-RET-02,Plan d'épargne retraite de 1 000 € versé par l'État à chaque naissance,-0.0179,0,False,False,False,False,0.0179
+443,le_pen,RN-RET-03,"15 à 20 Md€ d'économies sur les retraites par des « corrections de mesures injustes », pilier de capitalisation",-0.0087,1,False,True,False,False,0.0175
+444,attal,ATT-SAN-01,"20 000 médecins formés, compétences des autres professions élargies",-0.0083,1,True,False,False,False,0.0167
+445,attal,ATT-SAN-04,"Aide à mourir encadrée, investissement massif dans les soins palliatifs",-0.0083,1,True,False,False,False,0.0166
+446,attal,ATT-AGR-05,"Renouvellement des générations : transmission, portage du foncier",-0.0055,2,True,False,True,False,0.0165
+447,attal,ATT-SEC-06,Sécurité civile : hélicoptères et avions bombardiers d'eau,-0.0082,1,True,False,False,False,0.0165
+448,bertrand,BER-SEC-01,"Peines planchers, par référendum",-0.0082,1,True,False,False,False,0.0165
+449,glucksmann,GLU-TER-02,"Services publics de proximité, cabinets de conseil encadrés",-0.0082,1,True,False,False,False,0.0165
+450,philippe,PHI-FIS-05,« Super Dutreil agricole » pour les transmissions d'exploitations,-0.0055,2,True,False,True,False,0.0165
+451,retailleau,RET-FIS-04,Contribution patronale sur l'actionnariat salarié supprimée,-0.0082,1,True,False,False,False,0.0165
+452,retailleau,RET-NUM-04,"« Vauban numérique », VIGINUM triplé",-0.0082,1,True,False,False,False,0.0165
+453,attal,ATT-EDU-06,"Assistant IA pour chaque élève, enseignants formés à l'IA, « plan Voltaire »",-0.0081,1,True,False,False,False,0.0162
+454,tondelier,REC-46,Taxe sur les bouteilles en plastique ; extension de la TIRUERT au maritime et aux carburants synthétiques ; redevances de dépollution (REP),0.0049,2,True,False,True,False,0.0148
+455,glucksmann,GLU-SAN-04,Santé mentale des jeunes priorité nationale,-0.0071,1,True,False,False,False,0.0142
+456,attal,ATT-EDU-07,Corps professionnel des AESH,-0.007,1,True,False,False,False,0.0139
+457,attal,ATT-SEC-02,"Parquet national contre la pédocriminalité, 3 000 magistrats et greffiers",-0.007,1,True,False,False,False,0.0139
+458,glucksmann,GLU-EDU-06b,Freiner les fermetures d'écoles rurales,-0.007,1,True,False,False,False,0.0139
+459,glucksmann,GLU-SEC-01,Police de proximité,-0.007,1,True,False,False,False,0.0139
+460,lisnard,LIS-EDU-04,"Classes d'excellence, latin, grec et philosophie dès le primaire",-0.007,1,True,False,False,False,0.0139
+461,melenchon,LFI-RET-05,RSA validant des trimestres,-0.0068,1,True,False,False,False,0.0136
+462,attal,ATT-SAN-02,Assistant médical fondé sur l'IA commandé par l'État,-0.0066,1,True,False,False,False,0.0132
+463,bertrand,BER-CUL-02,"Audiovisuel public défendu et réformé, coûts réduits",0.0066,1,True,False,False,False,0.0132
+464,glucksmann,GLU-EMP-06,Agence de financement de l'économie sociale et solidaire,-0.0066,1,True,False,False,False,0.0132
+465,glucksmann,GLU-IMM-02,Régulariser les travailleurs sans papiers,0.0066,1,True,False,False,False,0.0132
+466,glucksmann,GLU-INT-05,Programme « cyber sentinelle »,-0.0066,1,True,False,False,False,0.0132
+467,glucksmann,GLU-OM-01,"Démanteler les conglomérats, prix de première nécessité plafonnés",-0.0066,1,True,False,False,False,0.0132
+468,lisnard,LIS-SAN-03,ARS supprimées,0.0066,1,True,False,False,False,0.0132
+469,philippe,PHI-CLI-03,Mêmes aides pour un véhicule électrique d'occasion que neuf,-0.0066,1,True,False,False,False,0.0132
+470,philippe,PHI-CLI-07,Assurance du risque climatique réformée,-0.0066,1,True,False,False,False,0.0132
+471,philippe,PHI-IMM-07,"Centres de retour, ressources des étudiants, droits d'inscription appliqués",0.0066,1,True,False,False,False,0.0132
+472,attal,ATT-EMP-05,Contrat entre chaque lycéen professionnel et une entreprise,-0.0065,1,True,False,False,False,0.013
+473,philippe,PHI-EDU-03,Soutien scolaire universel : assistant IA et bénévoles,-0.0065,1,True,False,False,False,0.013
+474,tondelier,FP-06,"Autres créations de postes — 200 inspecteurs du travail, 1 000 à la DGCCRF, douanes, ONF, ICPE, police de proximité, travail social",-0.0042,2,True,False,False,True,0.0125
+475,philippe,PHI-EMP-03,Trois jours de carence dans le public et le privé ; délai avant rupture conventionnelle,0.0112,0,False,False,False,False,0.0112
+476,retailleau,RET-EDU-04,Une École normale du professorat par académie,-0.0056,1,True,False,False,False,0.0111
+477,melenchon,LFI-REC-26,Taxes sur les retransmissions sportives et les transferts,0.0033,2,True,False,True,False,0.0099
+478,melenchon,LFI-COL-13,"Retrait du commandement intégré de l'OTAN, puis de l'organisation",0.0049,1,True,False,False,False,0.0099
+479,philippe,PHI-OM-08,"Train à La Réunion et en Guyane, retenues collinaires à La Réunion",-0.0049,1,True,False,False,False,0.0099
+480,zemmour,ZEM-KNA-18,"Hausse du coût des visas [0,7 Md€]",0.0033,2,True,False,True,False,0.0099
+481,retailleau,RET-ENE-02b,TVA normale sur le solaire,0.0033,2,True,False,True,False,0.0098
+482,philippe,PHI-EDU-11,Tutorat d'orientation : un tuteur par élève,-0.0049,1,True,False,False,False,0.0097
+483,bertrand,BER-EDU-02,Une œuvre ou un spectacle pour chaque élève,-0.0032,2,True,False,False,True,0.0096
+484,tondelier,COT-06,"Bonus-malus renforcé sur les contrats courts, intérim contributeur au déficit de l'assurance chômage",0.003,2,True,True,False,False,0.009
+485,bertrand,BER-RET-02,Étage obligatoire de retraite par capitalisation ; régime de base géré par les partenaires sociaux,-0.0087,0,False,False,False,False,0.0087
+486,retailleau,RET-RET-02,Part de capitalisation (1 % du salaire brut),-0.0087,0,False,False,False,False,0.0087
+487,glucksmann,GLU-SEC-04,Doubler les Maisons de la justice et du droit,-0.0042,1,True,False,False,False,0.0083
+488,philippe,PHI-OM-03,Navires de la Marine aux Antilles doublés,-0.004,1,True,False,False,False,0.0079
+489,glucksmann,GLU-LOG-05,Taxer plus fortement la vacance longue,0.0033,1,True,False,False,False,0.0066
+490,glucksmann,GLU-INS-06,« Bon pour la démocratie »,-0.0033,1,True,False,False,False,0.0066
+491,glucksmann,GLU-TER-02b,Encadrement des cabinets de conseil,0.0033,1,True,False,False,False,0.0066
+492,lisnard,LIS-AGR-02b,Compte épargne aléas dans chaque exploitation,-0.0033,1,True,False,False,False,0.0066
+493,melenchon,LFI-REC-13,"Fraude et évasion fiscales : moyens du contrôle, fin de la CJIP, arbitrage de dividendes",0.0033,1,True,False,False,False,0.0066
+494,philippe,PHI-SEC-06,"« Fiche S financière », amendes recouvrées sur les prestations, opérations « place nette »",0.0033,1,True,False,False,False,0.0066
+495,retailleau,RET-NUM-01,"Assistant « Marianne » (≈ 1 Md€), 125 000 agents redéployés",-0.0066,0,False,False,False,False,0.0066
+496,retailleau,RET-NUM-05,« Retour au pays » : cinq ans sans impôt sur le revenu pour les talents de la tech,-0.0033,1,True,False,False,False,0.0066
+497,philippe,PHI-SAN-04,Santé mentale à l'école,-0.0032,1,True,False,False,False,0.0065
+498,retailleau,RET-EDU-03,"1 000 établissements innovants, apprentissage dès 14 ans",-0.0032,1,True,False,False,False,0.0065
+499,philippe,PHI-EDU-05,"Primaire recentré sur les fondamentaux, effectifs réduits",-0.0028,1,True,False,False,False,0.0056
+500,attal,ATT-ENE-04,"Géothermie : capacités ×5 d'ici 2035, fonds doublé à 160 M€ par an",-0.0026,1,False,False,False,True,0.0053
+501,zemmour,ZEM-KNA-20,"Aide juridictionnelle réservée aux Français [0,1 Md€]",0.0016,1,True,False,False,False,0.0033
+502,bertrand,BER-INS-02,Conseiller territorial fusionnant élus régionaux et départementaux,0.001,2,True,True,False,False,0.003
+503,lisnard,LIS-TER-06,"INSP supprimé, DRH de l'État",0.001,2,True,True,False,False,0.003
+504,philippe,PHI-SOC-03,Inspection nationale de l'enfance,-0.0008,1,True,False,False,False,0.0017
