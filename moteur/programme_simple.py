@@ -457,7 +457,12 @@ class ProgrammeSimple:
                 if not nom.startswith(prefixe):
                     continue
                 x = dict(par.valeur)
-                x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
+                if "pfu" in x:
+                    # roadmap 4.4 (22/11/2026) : impôt sur les dividendes et les intérêts chiffré par la règle commune
+                    from moteur.capital_dirigeants import recette_pfu
+                    x["_montant"] = recette_pfu(p, s, **x["pfu"])["total"]
+                else:
+                    x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
                 serie = self.serie(x, idx)
                 # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
                 from moteur import micro as _micro
@@ -486,6 +491,11 @@ class ProgrammeSimple:
                             * p.val("macro.part_grandes_entreprises", s))
                     liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : bénéfices déplacés par les groupes", "recettes",
                                         {t: -r_tr * v for t, v in serie.items()}, note=court))
+                    # roadmap 4.4 : entrepreneurs individuels qui passent à l'IS (ou en sortent), règle commune
+                    from moteur.capital_dirigeants import facteur_ei_vers_is
+                    k_ei = facteur_ei_vers_is(p, s, x["_montant"])
+                    liste.append(Mesure(f"{x['id']} — entrepreneurs individuels qui changent de forme (IR ou IS)", "recettes",
+                                        {t: k_ei * v for t, v in serie.items()}, note=court))
                 if x.get("fp"):
                     # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS
                     # pensions ni impôt sur le revenu, ≈ 0,39 ; relecture neutre du 11/11/2026)

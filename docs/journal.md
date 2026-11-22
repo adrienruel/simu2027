@@ -2175,3 +2175,7 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   demande aujourd'hui, l'arbitrage entre dividendes et salaire passe par `dividendes.elasticite_taux_net`.
 - **Roadmap 6.2** : corrélation historique productivité – emploi (Insee 1978-2025) de −0,3 à +0,1 selon la fenêtre :
   la borne ρ = 1 du Monte Carlo n'est pas soutenue ; taux manquants.
+- **Roadmap 4.4** : `moteur/capital_dirigeants.py` : PFU chiffré par une règle commune (BER-FIS-02, LFI-REC-04,
+  REC-20/21), redénomination salaire-dividendes (0, France Stratégie 2023), entrepreneurs individuels qui passent à
+  l'IS quand il baisse (de Mooij et Nicodème 2008). Micro : indépendants au bénéfice réel (ils étaient en case 5TA,
+  hors IR et CSG) ; population recalée ; IR de la population 123,5 Md€ contre 104 (à expliquer).

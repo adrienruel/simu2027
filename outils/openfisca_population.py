@@ -197,7 +197,12 @@ def simulation(lignes: list[dict], annee: int = 2026, tbs=None):
         sim.set_input("traitement_indiciaire_brut", y, tib)
         sim.set_input("primes_fonction_publique", y, np.where(public, brut - tib, 0.0))
         sim.set_input("categorie_salarie", y, np.where(public, "public_titulaire_etat", "prive_non_cadre"))
-        sim.set_input("ebic_impv", y, np.where(np.isin(groupe, ["classiques", "agriculteurs"]), np.maximum(rev_ind, 0), 0.0))
+        # roadmap 4.4 (22/11/2026) : bénéfice réel (avec centre de gestion agréé), pas la case 5TA des
+        # auto-entrepreneurs au versement libératoire, qui sortait ces revenus du barème de l'IR et de la CSG ;
+        # catégorie « commerçant » (artisans et commerçants : mêmes cotisations) pour la CSG des indépendants
+        sim.set_input("abic_impn", y, np.where(groupe == "classiques", np.maximum(rev_ind, 0), 0.0))
+        sim.set_input("arag_impg", y, np.where(groupe == "agriculteurs", np.maximum(rev_ind, 0), 0.0))
+        sim.set_input("categorie_non_salarie", y, np.where(groupe == "classiques", "commercant", "non_pertinent"))
         sim.set_input("mbnc_impo", y, np.where(groupe == "micro", rev_ind / 0.66, 0.0))
         sim.set_input("chomage_brut", y, col("chomage_brut"))
         sim.set_input("retraite_brute", y, col("pension_brute"))

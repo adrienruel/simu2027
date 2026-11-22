@@ -148,11 +148,11 @@ melenchon_mesures:
     note: "Arbitrage : le crédit d'impôt remplace le quotient familial à budget constant (médian) ; prudent : surcoût de transition (personne ne perd plus de 500 €). Montant du crédit non donné (p. 59)."
   flat_tax:
     valeur: {id: LFI-REC-04, instrument: capital_menages, libelle: "Flat tax supprimée : revenus du capital au barème de l'impôt sur le revenu", poste: recettes, moteur: "recette:capital_dividendes_ifi", debut: 2028, plein: 2028,
-             montant: {crise: 0.5, prudent: 1.0, median: 2.0, optimiste: 3.0}}
+             pfu: {points: 6.6}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : passage du PFU (12,8 %) au barème : ≈ 3 à 4 Md€ en statique ; baisse des dividendes versés après la hausse de 2013 et hausse après 2018 (IPP, rapports d'évaluation de 2019 à 2023) : prudent au quart"
+    source: "Encadrement : passage du PFU (12,8 %) au barème : ≈ 3 à 4 Md€ en statique, lu comme +6,6 points sur les dividendes et les intérêts (3,5 Md€ / 0,53 Md€ par point : lecture). Roadmap 4.4 (22/11/2026) : montant calculé par la règle commune (moteur/capital_dirigeants.recette_pfu) ; avant, prudent au quart du statique"
   isf:
     valeur: {id: LFI-REC-05, instrument: capital_menages, libelle: "ISF rétabli et renforcé, volet climatique (à la place de l'IFI)", poste: recettes, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 1.5, prudent: 2.5, median: 3.5, optimiste: 4.5}}

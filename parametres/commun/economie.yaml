@@ -170,6 +170,27 @@ entreprises:
     statut: HYPOTHESE
     source: "Taux : prélèvement forfaitaire unique, 12,8 % d'impôt sur le revenu (CGI, art. 200 A) et 17,2 % de prélèvements sociaux. Parts : hypothèses d'encadrement, sans source chiffrée retenue"
     note: "Phase 5.6 (18/11/2026). Sur la part des actionnaires : part versée en dividendes (le reste est gardé dans l'entreprise, sans impôt des ménages tout de suite) × part détenue par des ménages résidents (le reste va à des non-résidents ou à des institutions) × taux du PFU. Effet : 7,5 % de la part des actionnaires. À sourcer en priorité (comptes de la Nation, détention des actions cotées par la Banque de France)."
+  ei_vers_is:
+    valeur: {is_md: 70.5, taux_is: 0.25, benefices_pme_is_md: 111.5}
+    unite: md_eur
+    annee_euros: 2025
+    statut: SOURCE
+    source: "DGFiP Statistiques n° 51 (septembre 2026), tableau 1 : IS brut 2025 70,5 Md€, taux normal 25 % ; bénéfices des TPE et PME à l'IS 65,9 + 78,5 Md€ (parametres/donnees/entreprises_tailles.csv) × 0,772 (champ hors finance et agriculture, microsimulation.entreprises_champ_esane)"
+    note: "Roadmap 4.4 (22/11/2026) : IS par point de taux = 70,5 / 25 = 2,8 Md€ ; bénéfices des petites sociétés, base de la semi-élasticité de l'incorporation."
+  semi_elasticite_incorporation:
+    valeur: {crise: 0.5, prudent: 0.75, median: 1.0, optimiste: 1.25}
+    unite: sans_unite
+    statut: SOURCE
+    url: "https://www.cpb.nl/sites/default/files/publicaties/download/corporate-tax-policy-and-incorporation-eu.pdf"
+    page: "de Mooij et Nicodème, « Corporate tax policy and incorporation in the EU », CPB Discussion Paper n° 97 (2008), publié dans International Tax and Public Finance 15(4)"
+    source: "Semi-élasticité de 1,0 : un point d'écart en plus entre le taux de l'impôt des personnes et celui de l'IS augmente de 1 % la part des entreprises en société ; 12 à 21 % des recettes d'IS européennes viendraient de ce déplacement"
+    note: "Roadmap 4.4 (22/11/2026) : fourchette autour de l'estimation centrale (DÉCISION) ; ordonnée pour une hausse de l'IS (la crise regagne le moins de base) ; une baisse prend le scénario miroir."
+  ecart_prelevement_ei_is:
+    valeur: {crise: 0.15, prudent: 0.2, median: 0.2, optimiste: 0.25}
+    unite: taux
+    statut: DECISION
+    source: "Encadrement : bénéfice d'un entrepreneur individuel au barème de l'impôt sur le revenu et aux cotisations des indépendants (≈ 45 % de prélèvements au total au revenu moyen) ; en société : IS (15 à 25 %), puis PFU sur la part distribuée ou cotisations sur la rémunération du dirigeant"
+    note: "Roadmap 4.4 (22/11/2026) : prélèvement en moins par euro de bénéfice qui passe de l'entreprise individuelle à la société."
   retour_is_charges: {valeur: {taux_is_effectif: 0.20, part_marge: 0.5, part_employeurs_is: 0.9}, unite: sans_unite, statut: HYPOTHESE, source: "Taux effectif : population synthétique d'entreprises (outils/entreprises_mesures.py, 15/11/2026), IS retrouvé quand un impôt de production baisse, rapporté à la baisse, pertes de l'année calées sur la DGFiP 2025 (111,3 Md€, DGFiP Statistiques n° 51) : C3S et CFE 0,20 ; C3S et CFE industrielle 0,21 ; C3S, CFE et taxe foncière 0,20 ; CVAE 0,22 (0,25 avant le calage des pertes). Part prise sur les marges : 0,5, la valeur des programmes qui relèvent le SMIC (part_marge_absorbee)", note: "Impôts de production et cotisations patronales sont des charges déductibles : quand ils changent, la part prise sur les marges (le reste passe dans les prix) change le bénéfice imposable, donc l'IS, en sens inverse. Retour sur le solde = taux effectif × part des marges = 10 % de la variation. Même règle pour tous les programmes : mesures marquées deductible_is (true ou part de la mesure qui porte sur des charges des entreprises à l'IS), et hausses du SMIC (bibliotheque.smic). Cotisations patronales : 0,9 (0,45 si la mesure mêle cotisations salariales et patronales ou des particuliers employeurs), les associations (9,0 % de l'emploi privé) ne payant pas d'IS ; la micro compte déjà les entreprises individuelles à l'impôt sur le revenu. Impôts assis sur les salaires (taxe sur les salaires 15 Md€, versement mobilité 11 Md€, part des employeurs publics déjà retirée par les programmes) : part payée par des entreprises à l'IS 0,67 = (15 × 0,5 + 11 × 0,9) / 26 (DÉCISION) ; versement mobilité : associations 9,0 % de l'emploi privé (Recherches & Solidarités d'après l'Urssaf, 2022), d'où 0,9 ; taxe sur les salaires : produit venant largement des banques et assurances (réponses ministérielles), environ la moitié après retrait des employeurs publics d'après les impôts de production par secteur (DGFiP Statistiques n° 35 : finance 10,0 Md€, administrations, enseignement, santé et action sociale 17,4 Md€), le reste par des associations, cliniques et professions libérales hors IS. Constat du 15/11/2026 : le moteur ne comptait ce retour que pour le SMIC. À long terme, une partie des cotisations passe dans les salaires : non modélisé ici (le retour reste celui de court terme)."}
   impots_production_2023: {valeur: 92.7, unite: md_eur, annee_euros: 2023, note: "Traité comme euros de 2024 par la v235 (ligne 2 de Total × facteur 2024)", statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025)"}
   impots_production_hors_marchand: {valeur: 17.4, unite: md_eur, annee_euros: 2023, statut: SOURCE, source: "DGFiP Statistiques n° 35 (2025)"}
@@ -192,6 +213,33 @@ dividendes:
   revenus_capitaux_mobiliers_2023: {valeur: 53, unite: md_eur, annee_euros: 2024, statut: SOURCE, source: "DGFiP Statistiques n° 41 (revenus de 2023)", note: "Traité en euros de 2024 par la v235."}
   pfu_actuel: {valeur: 0.314, unite: taux, statut: SOURCE, source: "PFU 2026"}
   elasticite_taux_net: {valeur: 2, unite: sans_unite, statut: SOURCE, source: "Ordre de grandeur : dividendes déclarés +65 % après la flat tax de 2018"}
+  bases_2026:
+    valeur: {dividendes: 38, interets: 15, autres_csg: 97}
+    unite: md_eur
+    annee_euros: 2024
+    statut: HYPOTHESE
+    source: "Revenus de capitaux mobiliers 53 Md€ (DGFiP Statistiques n° 41, revenus de 2023 : dividendes.revenus_capitaux_mobiliers_2023), dont intérêts ≈ 15 (revenus_capital.interets) ; CSG sur les revenus du patrimoine et des placements ≈ 1,5 Md€ par point (encadrement repris des programmes) : base ≈ 150 Md€, dont 97 hors dividendes et intérêts (loyers, assurance-vie, plus-values)"
+    note: "Roadmap 4.4 (22/11/2026) : bases de moteur/capital_dirigeants.recette_pfu. Euros de 2024 pris pour ceux de 2026 (écart ≈ 3 %, sous la précision de l'encadrement)."
+  elasticite_taux_net_scenarios:
+    valeur: {crise: 2.5, prudent: 2.0, median: 1.5, optimiste: 1.0}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Comité d'évaluation des réformes de la fiscalité du capital (France Stratégie, rapports 2019 à 2023) : barémisation de 2013, effet très fortement négatif sur les dividendes versés ; PFU de 2018, dividendes déclarés de ≈ 14 à ≈ 23 Md€ (2013-2017 → 2018-2020), effet causal établi mais plus faible que celui de 2013 (rapport final 2023, p. 13-15). Ordre de grandeur : +65 % de dividendes pour un taux net passé de ≈ 0,56 à 0,70 (élasticité ≈ 2,3, majorant : tout n'est pas dû au PFU)"
+    note: "Roadmap 4.4 (22/11/2026) : élasticité des dividendes versés aux ménages au taux net (1 − taux). Ordonnée pour une hausse (la crise perd le plus de base) ; une baisse prend le scénario miroir. Remplace les réponses écrites mesure par mesure (Bertrand 60 % du statique, Mélenchon un quart, Tondelier 55 %)."
+  part_redenomination:
+    valeur: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
+    unite: taux
+    statut: SOURCE
+    url: "https://www.strategie.gouv.fr/sites/strategie.gouv.fr/files/atoms/files/fs-2023-rapport-isf-quatrieme_rapport_complet_17octobre_avis.pdf"
+    page: "Comité d'évaluation des réformes de la fiscalité du capital, rapport final (octobre 2023), avis, p. 16"
+    source: "France Stratégie (2023) : pas de redénomination des revenus d'activité en dividendes en moyenne après le PFU ; les ménages dont les dividendes ont fortement augmenté n'ont en moyenne pas réduit leurs revenus d'activité ; une petite fraction l'a fait, pour bien moins que la hausse de leurs dividendes"
+    note: "Roadmap 4.4 (22/11/2026) : part des dividendes perdus (ou gagnés) qui devient du salaire de dirigeant (ou en vient). Canal présent dans moteur/capital_dirigeants.recette_pfu, à 0 tant qu'aucune étude française ne donne une part positive."
+  ecart_prelevement_salaire_dividende:
+    valeur: 0.2
+    unite: taux
+    statut: DECISION
+    source: "Encadrement : salaire d'un dirigeant (cotisations et impôt sur le revenu) plus taxé que des dividendes (IS déjà payé, puis PFU de 31,4 %)"
+    note: "Roadmap 4.4 (22/11/2026) : prélèvement en plus par euro de dividende devenu salaire. Sans effet tant que part_redenomination vaut 0."
 
 revenus_capital:
   loyers: {valeur: 30, unite: md_eur, annee_euros: 2024, statut: HYPOTHESE}
@@ -435,11 +483,11 @@ emploi:
   chomage_incompressible: {valeur: 0.035, unite: taux, statut: SOURCE, source: "Taux les plus bas tenus durablement en Europe de l'Ouest (Allemagne, Pays-Bas)"}
   marge_plancher: {valeur: 0.01, unite: taux, statut: HYPOTHESE, note: "13/11/2026 : à moins de cette marge au-dessus du chômage incompressible, les emplois en plus des programmes ont des rendements décroissants (moteur/emploi_canaux.plancher_chomage) : le chômage tend vers le plancher sans le franchir, raccord sans cassure au-dessus. Un point : l'écart entre le plus bas allemand récent (≈ 3 %) et les 4 % souvent cités comme plein emploi."}
   allocation_chomeur_evitee:
-    valeur: 13990
+    valeur: 13900
     unite: eur_an
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Microsimulation (outils/ppa_emplois.py, OpenFisca-France 177, population de 2026) : chaque chômeur de 18 à 64 ans prend un emploi à 1,3 SMIC ; allocation de chômage arrêtée 11 575 € (72 % indemnisés, 1 310 € bruts par mois : microsimulation.chomeurs_indemnises), RSA de sa famille −1 729 €, aides au logement −690 €, moyenne par chômeur ; population recalée le 22/11 (roadmap 3.6)"
+    source: "Microsimulation (outils/ppa_emplois.py, OpenFisca-France 177, population de 2026) : chaque chômeur de 18 à 64 ans prend un emploi à 1,3 SMIC ; allocation de chômage arrêtée 11 504 € (72 % indemnisés, 1 310 € bruts par mois : microsimulation.chomeurs_indemnises), RSA de sa famille −1 701 €, aides au logement −699 €, moyenne par chômeur ; population recalée le 22/11 (roadmaps 3.6 et 4.4)"
     note: "Roadmap 2.4 (22/11/2026) : avant, 9 000 € encadrés (≈ 1 050 € par mois, un sur deux indemnisé, plus une part de RSA ; aides au logement non comptées) ; 10 660 € sur la population d'avant le recalage de la roadmap 3.6 (52 % de chômeurs indemnisés au lieu de 72 %). Répartie entre assurance chômage (part_allocation_assurance_chomage), aides au logement (part_allocation_logement) et RSA (le reste). Dépense publique évitée quand un chômeur prend un emploi (ou en plus quand un salarié perd le sien), commune à tous les programmes depuis la phase A2 (12/11/2026, ProgrammeSimple.valeur_emploi_cellule). Suit le salaire moyen par emploi. Phase L (4.1, 18/11/2026) : avec emploi.depenses_chomage_programme, elle n'est plus dans la valeur d'un emploi (recettes) mais dans les blocs chômage et pauvreté, pour les chômeurs du programme (moteur/noyau.py)."
   depenses_chomage_programme:
     valeur: true
@@ -460,20 +508,20 @@ emploi:
     valeur: 0.827
     unite: taux
     statut: HYPOTHESE
-    source: "Même calcul que emploi.allocation_chomeur_evitee : 11 575 € d'allocation de chômage sur 13 990 €"
+    source: "Même calcul que emploi.allocation_chomeur_evitee : 11 504 € d'allocation de chômage sur 13 900 €"
     note: "Part de l'allocation évitée qui va au bloc chômage (assurance chômage) ; aides au logement : part_allocation_logement ; le reste va au bloc pauvreté (RSA). Phase L (4.1) ; roadmap 2.4 (22/11/2026) : 0,7 avant."
   part_allocation_logement:
-    valeur: 0.049
+    valeur: 0.050
     unite: taux
     statut: HYPOTHESE
-    source: "Même calcul que emploi.allocation_chomeur_evitee : 690 € d'aides au logement sur 13 990 €"
+    source: "Même calcul que emploi.allocation_chomeur_evitee : 699 € d'aides au logement sur 13 900 €"
     note: "Roadmap 2.4 (22/11/2026) : part de l'allocation évitée qui va au bloc logement (aides au logement), sans facteur de générosité."
   prime_activite_familles:
-    valeur: 0.343
+    valeur: 0.317
     unite: taux
     statut: HYPOTHESE
-    source: "Microsimulation (outils/ppa_emplois.py, OpenFisca-France 177, population de 2026) : prime d'activité en plus de la famille d'un chômeur de 18 à 64 ans qui prend un emploi à 1,3 SMIC, 732 € par an en moyenne, contre 2 138 € pour une personne seule au même salaire (table d'OpenFisca du moteur)"
-    note: "Roadmap 2.4 (22/11/2026) ; recalculé après le recalage de la population (3.6) : 0,324 avant. Par famille (population d'avant 3.6) : personne seule ≈ 1 830 €, parent seul ≈ 1 980 €, jeune vivant chez ses parents ≈ 700 €, couple ≈ −100 à −740 € (l'allocation de chômage comptait déjà dans les ressources du couple et le salaire en plus réduit la prime du conjoint). Prime théorique (recours complet), comme la table de la personne seule."
+    source: "Microsimulation (outils/ppa_emplois.py, OpenFisca-France 177, population de 2026) : prime d'activité en plus de la famille d'un chômeur de 18 à 64 ans qui prend un emploi à 1,3 SMIC, 679 € par an en moyenne, contre 2 138 € pour une personne seule au même salaire (table d'OpenFisca du moteur)"
+    note: "Roadmap 2.4 (22/11/2026) ; recalculé après le recalage de la population (3.6, puis indépendants au bénéfice réel en 4.4) : 0,324 avant. Par famille (population d'avant 3.6) : personne seule ≈ 1 830 €, parent seul ≈ 1 980 €, jeune vivant chez ses parents ≈ 700 €, couple ≈ −100 à −740 € (l'allocation de chômage comptait déjà dans les ressources du couple et le salaire en plus réduit la prime du conjoint). Prime théorique (recours complet), comme la table de la personne seule."
   emplois_par_milliard: {valeur: {prudent: null, crise: 12500, median: 18750, optimiste: 25000}, unite: sans_unite, statut: SOURCE, source: "Mésange 12 500 ; jusqu'à 25 000 au voisinage du SMIC (CAE n° 51)"}
   taux_marge_snf: {valeur: 0.322, unite: taux, statut: SOURCE, source: "Insee Première n° 2105 (comptes de la Nation 2025)"}
   cout_emploi_cree_smic: {valeur: 1.3, unite: sans_unite, statut: HYPOTHESE}

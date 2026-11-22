@@ -273,19 +273,19 @@ Constats :
 
 | Poste | € par an | Bloc |
 |---|---|---|
-| Allocation de chômage arrêtée | 11 575 | chômage |
-| RSA de la famille en moins | 1 729 | pauvreté |
-| Aides au logement en moins | 690 | logement (nouveau) |
-| **Total évité** (`emploi.allocation_chomeur_evitee`) | **13 990** | |
-| Prime d'activité en plus | 732 (personne seule : 2 138) | pauvreté |
+| Allocation de chômage arrêtée | 11 504 | chômage |
+| RSA de la famille en moins | 1 701 | pauvreté |
+| Aides au logement en moins | 699 | logement (nouveau) |
+| **Total évité** (`emploi.allocation_chomeur_evitee`) | **13 900** | |
+| Prime d'activité en plus | 679 (personne seule : 2 138) | pauvreté |
 
-  Chiffres sur la population recalée de la roadmap 3.6 (72 % des chômeurs indemnisés, comme
+  Chiffres sur la population recalée des roadmaps 3.6 et 4.4 (72 % des chômeurs indemnisés, comme
   `microsimulation.chomeurs_indemnises`). Sur la population d'avant (52 % indemnisés) : 8 010 + 1 866 + 785 =
   10 660 €, prime 693 €.
 - **Prime d'activité par famille :** personne seule ≈ 1 830 € ; parent seul ≈ 1 980 € ; jeune adulte chez ses
   parents ≈ 700 € ; couple : −100 à −740 €. Dans un couple, l'allocation de chômage comptait déjà dans les
   ressources, et le salaire en plus réduit la prime du conjoint (population d'avant 3.6). D'où
-  `emploi.prime_activite_familles` = 0,343 (0,324 avant le recalage).
+  `emploi.prime_activite_familles` = 0,317 (0,324 avant le recalage).
 - **Effet sur l'écart de solde primaire 2037 au prudent :** au plus 0,07 point (Mélenchon −0,07 ; Lisnard +0,03).
 - **Reste :** `tondelier_smic.valeur_emploi_chomeur` (9 000 €, paramètre propre au programme) dit reprendre l'ancienne
   valeur commune : à aligner dans le travail sur Tondelier.
@@ -328,3 +328,39 @@ Déjà couvert, rien à ajouter au noyau :
   programme.
 Reste hors modèle : les prestations sous condition de ressources des personnes en emploi dont le salaire change
 (seule la prime d'activité des emplois en plus est comptée).
+
+## Roadmap 4.4 : revenus du capital, dirigeants et entrepreneurs individuels (22/11/2026)
+
+Trois canaux communs (`moteur/capital_dirigeants.py`), séparés pour ne pas compter deux fois.
+
+- **Impôt sur les dividendes et les intérêts.** Une mesure marquée `pfu: {points, points_csg}` n'a plus de montant
+  écrit : le moteur le calcule. Recette = taux après × base après − taux avant × base avant. Bases : dividendes
+  38 Md€, intérêts 15, autres revenus du patrimoine soumis à la CSG 97. Seuls les dividendes répondent au taux net,
+  avec une élasticité de 2,5 / 2 / 1,5 / 1 de la crise à l'optimiste (France Stratégie, réformes de 2013 et 2018 ;
+  scénario miroir pour une baisse). Avant, chaque programme écrivait sa propre réponse : Bertrand 60 % du statique,
+  Mélenchon un quart, Tondelier 55 %.
+
+| Mesure | Avant (prudent, Md€) | Règle commune |
+|---|---|---|
+| BER-FIS-02 (PFU +2 points) | 0,70 | 0,33 |
+| LFI-REC-04 (PFU supprimé, lu comme +6,6 points) | 1,00 | 0,85 |
+| REC-20/21 (CSG +3 et PFU +3 sur le capital) | 3,50 | 3,71 |
+
+- **Salaire ou dividendes des dirigeants.** Une part des dividendes perdus (ou gagnés) devient du salaire (ou en
+  vient). France Stratégie (rapport final 2023, avis p. 16) ne trouve pas de redénomination en moyenne après le PFU :
+  `dividendes.part_redenomination` = 0. Le canal est en place pour une étude qui donnerait une part positive.
+- **Entrepreneurs individuels et IS.** Une mesure sur le taux de l'IS (drapeau `taux_is`) fait aussi changer de
+  forme des entrepreneurs individuels : semi-élasticité de 1 (de Mooij et Nicodème, 2008 : un point d'écart en plus
+  entre l'impôt des personnes et l'IS augmente de 1 % la part des sociétés), sur les bénéfices des petites sociétés
+  (111,5 Md€) ; prélèvement en moins de 20 % sur les bénéfices qui passent en société (DÉCISION). IS à 20 % de
+  Lisnard : −0,86 Md€ au prudent, à côté des bénéfices rapatriés par les groupes (+1,52).
+- **Micro des ménages : erreur corrigée.** Les revenus des indépendants classiques et des agriculteurs entraient dans
+  OpenFisca par la case 5TA (`ebic_impv` : auto-entrepreneurs au versement libératoire). Ils sortaient du barème de
+  l'IR et de la CSG des indépendants (CSG nulle). Ils entrent maintenant au bénéfice réel (`abic_impn`, `arag_impg`),
+  catégorie « commerçant » pour la CSG : CSG des indépendants 10,9 Md€, IR des indépendants ≈ 22 Md€. Les mesures sur
+  les indépendants (CSG de Zemmour, cotisations) sont maintenant vues par la micro.
+- **Reste :** l'IR de la population monte à 123,5 Md€, contre 104 au PLF 2026, malgré la contrainte du calage (les
+  bornes des poids l'empêchent de l'atteindre). Les revenus des indépendants de la population (114 Md€, Insee) sont au-
+  dessus des revenus déclarés (≈ 70 Md€, Urssaf), et l'imposition des couples non mariés est à vérifier. Test
+  `test_impot_revenu_openfisca` marqué « échec attendu » en attendant.
+- **Effet sur les écarts 2037 au prudent :** Lisnard −0,019, Bertrand −0,012, autres ≤ 0,006.

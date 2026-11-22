@@ -795,7 +795,11 @@ def montant_moteur(nom: str, ident: str, s: str = "prudent") -> float:
         x = par.valeur
         if not isinstance(x, dict) or x.get("id") != ident:
             continue
-        m = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
+        if "pfu" in x:  # roadmap 4.4 : montant de la règle commune (moteur/capital_dirigeants.py)
+            from moteur.capital_dirigeants import recette_pfu
+            m = recette_pfu(p, s, **x["pfu"])["total"]
+        else:
+            m = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
         tot += m if x["poste"] == "recettes" else -m
     return tot
 

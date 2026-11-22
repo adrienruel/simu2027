@@ -268,9 +268,13 @@ class Tondelier:
                 if not nom.startswith("tondelier_mesures."):
                     continue
                 x = dict(par.valeur)
-                if x["montant"] == "auto":
+                if x.get("montant") == "auto":
                     continue
-                x["_montant"] = x["montant"][s]
+                if "pfu" in x:  # roadmap 4.4 : règle commune (moteur/capital_dirigeants.py)
+                    from moteur.capital_dirigeants import recette_pfu
+                    x["_montant"] = recette_pfu(p, s, **x["pfu"])["total"]
+                else:
+                    x["_montant"] = x["montant"][s]
                 serie = self._serie(x, idx)
                 # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
                 from moteur import micro as _micro
