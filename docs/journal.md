@@ -2132,4 +2132,10 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
 - **Une seule voie** : une mesure qui passe par les prélèvements du travail garde cette voie pour ses lignes de
   prestations.
 - Couverture du budget « ménages » : six programmes sur douze au-dessus de 80 %.
+- **Roadmap 5.1** : variantes de FR-BDF (Banque de France, WP 1045, mai 2026) rejouées hors calage
+  (`outils/variantes_frbdf.py`, `docs/backtests.md`, `tests/test_variantes_frbdf.py`). Signes tous retrouvés ;
+  dépense conforme. Impôts directs et TVA : effets d'activité deux fois plus forts que FR-BDF entre 1 et 5 ans
+  (calage sur Mésange), TVA rejointe à 10 ans. Prestations : poids des transferts ciblés. À ajouter à la
+  régénération : `python -m outils.variantes_frbdf`. Décision possible G9 (fourchette Mésange – FR-BDF dans
+  l'incertitude).
 
