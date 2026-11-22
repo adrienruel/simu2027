@@ -17,7 +17,7 @@ def p():
 
 def test_identifiants_groupes():
     specs = {"x": {"REC-20/21": {}, "BER-FIS-01": {}}}
-    assert cm.identifiants_codes("x", specs) == {"REC-20", "REC-21", "BER-FIS-01"}
+    assert cm.identifiants_codes("x", specs) == {"REC-20/21", "REC-20", "REC-21", "BER-FIS-01"}
 
 
 def test_seuil_des_deciles(p):

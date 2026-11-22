@@ -180,7 +180,7 @@ def construire(operations: list[dict]):
 
 # --- Calcul --------------------------------------------------------------------------------------------------
 
-POST = ("consommation", "patrimoine", "garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
+POST = ("consommation", "patrimoine", "cotisations_employeur", "heures_supplementaires", "jeunes_enfants", "garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
         "allocation_unique", "capitalisation")  # règles appliquées après le calcul d'OpenFisca
 EMPLOI = ("salarie_prive", "agent_public", "independant")
 AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
@@ -508,6 +508,15 @@ class Base:
                 rd = rd + self.gain_consommation(rd, uc, x)
             if x["nom"] == "patrimoine":
                 rd = rd + self.gain_patrimoine(rd, x)
+            if x["nom"] == "cotisations_employeur":
+                rd = rd + self.gain_cotisations_employeur(x)
+            if x["nom"] == "jeunes_enfants":
+                rd = rd + self.gain_jeunes_enfants(x)
+            if x["nom"] == "heures_supplementaires":
+                # la population n'a pas les heures : montant du moteur sur les salariés du privé de la bande (par
+                # défaut 1 à 2,5 SMIC : ouvriers, employés et professions intermédiaires font la plupart des heures
+                # supplémentaires, Insee, enquête sur la structure des salaires 2014), sans part d'incidence
+                rd = rd + self.gain_cotisations_employeur({"bande_smic": (1.0, 2.5), **x, "directe": True})
         for x in post:
             if x["nom"] == "garantie_niveau_vie":
                 # niveau de vie porté au seuil, ménages dont la personne de référence n'est pas étudiante (champ de
@@ -543,6 +552,34 @@ class Base:
         dec = np.empty(len(nv), int)
         dec[ordre] = np.minimum(10, 1 + (cum * 10).astype(int))
         w = np.array([sum(dep[(c, int(d))] for c in x["postes"]) for d in dec])
+        return -md * 1e9 * w / float((self.wm * w).sum())
+
+    def gain_cotisations_employeur(self, x: dict) -> np.ndarray:
+        """Derniers trous de la micro (22/11/2026) : gain (+) ou perte (−) par ménage (€ par an) d'une mesure sur les
+        cotisations des employeurs privés (allègements, taux). À court terme, rien ne change pour les ménages ; à long
+        terme, la part `entreprises.incidence_menages.salaires` (Fuest, Peichl et Siegloch, 2018) retombe sur les
+        salaires. Montant du moteur (× x["part_montant"], part de la mesure portée par les employeurs, 1 par défaut),
+        réparti au prorata du salaire brut des salariés du privé dont le salaire est dans la bande x["bande_smic"]
+        (en multiples du SMIC annuel, toute la distribution par défaut)."""
+        md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
+        md *= float(x.get("part_montant", 1.0))
+        if not x.get("directe"):
+            md *= Parametres().val("entreprises.incidence_menages")["salaires"]
+        lo, hi = x.get("bande_smic", (0.0, 1e9))
+        smic_an = ps_smic() * 12
+        brut = np.array([l["salaire_brut"] if l["statut"] == "salarie_prive" else 0.0 for l in self.lignes])
+        w_i = np.where((brut > lo * smic_an) & (brut <= hi * smic_an), brut, 0.0)
+        w = np.bincount(self.s["menage"], weights=w_i, minlength=len(self.wm))
+        return -md * 1e9 * w / float((self.wm * w).sum())
+
+    def gain_jeunes_enfants(self, x: dict) -> np.ndarray:
+        """Derniers trous de la micro (22/11/2026) : congés de naissance et parentaux, places et gratuité de l'accueil
+        du jeune enfant. Montant du moteur (+ = le solde s'améliore) réparti par enfant de x["age_max"] ans au plus
+        (0 : congés de naissance ; 2 : accueil avant l'école), en revenu des familles (transfert en nature pour
+        l'accueil)."""
+        md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
+        enf = np.array([float(l["role"] == "enfant" and l["age"] <= int(x.get("age_max", 0))) for l in self.lignes])
+        w = np.bincount(self.s["menage"], weights=enf, minlength=len(self.wm))
         return -md * 1e9 * w / float((self.wm * w).sum())
 
     def gain_patrimoine(self, rd: np.ndarray, x: dict) -> np.ndarray:

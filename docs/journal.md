@@ -2179,3 +2179,5 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   REC-20/21), redénomination salaire-dividendes (0, France Stratégie 2023), entrepreneurs individuels qui passent à
   l'IS quand il baisse (de Mooij et Nicodème 2008). Micro : indépendants au bénéfice réel (ils étaient en case 5TA,
   hors IR et CSG) ; population recalée ; IR de la population 123,5 Md€ contre 104 (à expliquer).
+- **Derniers trous de la micro** : formules communes `cotisations_employeur`, `heures_supplementaires`,
+  `jeunes_enfants` ; 25 mesures codées. Les douze programmes au-dessus de 80 % (de 87 à 100 %).

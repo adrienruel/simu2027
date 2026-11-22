@@ -34,6 +34,7 @@ def identifiants_codes(nom: str, specs: dict | None = None) -> set[str]:
         specs = yaml.safe_load((RACINE / "programmes" / "micro_mesures.yaml").read_text(encoding="utf-8"))
     out = set()
     for k in (specs.get(nom) or {}):
+        out.add(k)  # identifiant composé tel quel (« REC-20/21 » : une seule mesure dans le moteur)
         tete, _, suites = k.partition("/")
         out.add(tete)
         racine = tete.rsplit("-", 1)[0]

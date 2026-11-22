@@ -174,8 +174,8 @@ entreprises:
     valeur: {is_md: 70.5, taux_is: 0.25, benefices_pme_is_md: 111.5}
     unite: md_eur
     annee_euros: 2025
-    statut: SOURCE
-    source: "DGFiP Statistiques n° 51 (septembre 2026), tableau 1 : IS brut 2025 70,5 Md€, taux normal 25 % ; bénéfices des TPE et PME à l'IS 65,9 + 78,5 Md€ (parametres/donnees/entreprises_tailles.csv) × 0,772 (champ hors finance et agriculture, microsimulation.entreprises_champ_esane)"
+    statut: HYPOTHESE
+    source: "Calcul sur DGFiP Statistiques n° 51 (septembre 2026), tableau 1 : IS brut 2025 70,5 Md€, taux normal 25 % ; bénéfices des TPE et PME à l'IS 65,9 + 78,5 Md€ (parametres/donnees/entreprises_tailles.csv) × 0,772 (champ hors finance et agriculture, microsimulation.entreprises_champ_esane)"
     note: "Roadmap 4.4 (22/11/2026) : IS par point de taux = 70,5 / 25 = 2,8 Md€ ; bénéfices des petites sociétés, base de la semi-élasticité de l'incorporation."
   semi_elasticite_incorporation:
     valeur: {crise: 0.5, prudent: 0.75, median: 1.0, optimiste: 1.25}

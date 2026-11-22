@@ -107,3 +107,27 @@ def test_pensions_calees_sur_le_moteur(pop):
     gain = sum(n["poids"] * (n["pension_brute"] - a["pension_brute"]) for n, a in zip(lg, pop)) / 1e9
     assert abs(gain + montant_moteur("arthaud", "ART-RET-01")) < 0.01 and gain > 5
     assert all(n["pension_brute"] == a["pension_brute"] for n, a in zip(lg, pop) if a["pension_brute"] <= 12 * 1550)
+
+
+def test_formules_des_derniers_trous():
+    """Derniers trous de la micro (22/11/2026) : cotisations des employeurs (part de long terme sur les salaires de la
+    bande), heures supplémentaires (salariés de 1 à 2,5 SMIC), jeunes enfants (par enfant) ; montant conservé."""
+    import types
+
+    import numpy as np
+
+    from moteur.parametres import Parametres
+    from outils.openfisca_mesures import Base, ps_smic
+    smic = ps_smic() * 12
+    lignes = [{"statut": "salarie_prive", "salaire_brut": f * smic, "role": "ref", "age": 40} for f in (1.2, 2.0, 3.0)]
+    lignes += [{"statut": "retraite", "salaire_brut": 0.0, "role": "ref", "age": 70},
+               {"statut": "enfant", "salaire_brut": 0.0, "role": "enfant", "age": 0}]
+    b = types.SimpleNamespace(lignes=lignes, s={"menage": np.arange(5)}, wm=np.full(5, 1000.0))
+    g = Base.gain_cotisations_employeur(b, {"montant_md": 1.0, "bande_smic": (1.6, 3.5)})
+    part = Parametres().val("entreprises.incidence_menages")["salaires"]
+    assert g[0] == 0 and g[1] < 0 and g[2] < 0 and g[3] == 0
+    assert abs((b.wm * g).sum() / 1e9 + part) < 1e-9
+    h = Base.gain_cotisations_employeur(b, {"montant_md": -1.0, "bande_smic": (1.0, 2.5), "directe": True})
+    assert h[0] > 0 and h[1] > 0 and h[2] == 0 and abs((b.wm * h).sum() / 1e9 - 1.0) < 1e-9
+    j = Base.gain_jeunes_enfants(b, {"montant_md": -0.5, "age_max": 0})
+    assert j[4] > 0 and (j[:4] == 0).all() and abs((b.wm * j).sum() / 1e9 - 0.5) < 1e-9

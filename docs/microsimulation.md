@@ -759,3 +759,36 @@ synthétique.
   la métropole seule), échelle d'UC, prélèvements. Il faut la composition du revenu disponible par décile de l'ERFS
   2024 (Insee Résultats « Revenu, niveau de vie et pauvreté en 2024 », tableaux en xlsx, que l'environnement ne peut pas
   télécharger).
+
+## Derniers trous de la micro (22/11/2026)
+
+Trois formules communes, appliquées après le calcul d'OpenFisca (le montant vient du moteur, la micro le répartit) :
+
+- `cotisations_employeur` : cotisations des employeurs privés. Rien pour les ménages à court terme ; à long terme,
+  la part `entreprises.incidence_menages.salaires` (0,5) retombe sur les salaires de la bande visée, au prorata du
+  brut. Avec `directe: true`, tout le montant va aux salariés (cotisations salariales sur l'épargne salariale).
+- `heures_supplementaires` : la population n'a pas les heures ; montant sur les salariés du privé de 1 à 2,5 SMIC,
+  au prorata du brut (ouvriers, employés et professions intermédiaires en font le plus : Insee, enquête sur la
+  structure des salaires 2014).
+- `jeunes_enfants` : congés de naissance (`age_max: 0`) et accueil du jeune enfant (`age_max: 2`), par enfant.
+
+Mesures codées avec ces formules et celles de 3.1 et 3.2, même règle pour tous :
+
+| Programme | Mesures |
+|---|---|
+| Tondelier | REC-37, COT-02 (moitié salariés au barème d'OpenFisca, moitié employeurs), COT-03, PRE-14, REC-04/05/06/07, REC-03, REC-40, REC-41, REC-42, REC-45 |
+| Mélenchon | LFI-PRE-06, LFI-COL-05, LFI-REC-20, LFI-REC-23 |
+| Glucksmann | GLU-SOC-04, GLU-FIS-02, GLU-FIS-03, GLU-FIS-05 |
+| Le Pen | RN-FIS-05, RN-FIS-06, RN-EMP-02 |
+| Philippe | PHI-EMP-06, PHI-SOC-02, PHI-SOC-07, PHI-FIS-05 |
+| Retailleau | RET-SOC-02, RET-FIS-03 |
+
+Correction de `outils/couverture_micro.py` : un identifiant composé (« REC-20/21 ») codé tel quel est reconnu.
+
+**Couverture du budget « ménages »** : Arthaud, Bertrand, Lisnard, Zemmour 100 % ; Roussel 97 ; Tondelier 95 ;
+Glucksmann 92 ; Le Pen 92 ; Philippe 91 ; Mélenchon 89 ; Retailleau 89 ; Attal 87. Les douze programmes passent le
+seuil de 80 %. Restent surtout : l'année blanche d'Attal (calculée dans son programme), les retraites à 40 annuités
+et des fonctionnaires de Mélenchon, la rénovation de Le Pen, les intérêts d'emprunt de Retailleau.
+
+Contrôle sur la population (montant de la micro / moteur, prudent) : PRE-14, PHI-EMP-06, GLU-SOC-04 identiques ;
+REC-37 8,25 / 16,5 (la moitié de long terme) ; COT-02 4,5 / 7,0 (part salariale au barème, part employeur à moitié).

@@ -15,6 +15,13 @@
 #   formule   : {nom: patrimoine, composante, tranches?, programme, mesure}  impôts sur le patrimoine et les
 #               successions : montant du moteur réparti selon le patrimoine moyen de la tranche de revenu disponible
 #               (Histoire de vie et Patrimoine 2020-2021, 3.2)
+#   formule   : {nom: cotisations_employeur, programme, mesure, bande_smic?, part_montant?}  cotisations des
+#               employeurs privés : part de long terme sur les salaires (entreprises.incidence_menages.salaires),
+#               au prorata du salaire brut des salariés de la bande
+#   formule   : {nom: jeunes_enfants, age_max, programme, mesure}  congés de naissance et accueil du jeune enfant :
+#               montant du moteur par enfant de age_max ans au plus
+#   formule   : {nom: heures_supplementaires, programme, mesure, bande_smic?}  heures supplémentaires (absentes de
+#               la population) : montant du moteur sur les salariés du privé de 1 à 2,5 SMIC, au prorata du brut
 #   population: {pensions: {seuil_mensuel, facteur | programme+mesure, fin?}}  pensions au-delà d'un seuil mensuel
 #               brut multipliées (gel, sous-indexation) ; avec programme et mesure, facteur calé sur le montant du moteur
 #   population: {pension_minimum: {mensuel_brut}}  pensions des carrières complètes portées à un minimum (3.3)
@@ -41,6 +48,38 @@ bertrand:
     note: "Part impôt sur le revenu du prélèvement forfaitaire unique : 12,8 % → 14,8 %."
 
 tondelier:
+  PRE-14:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 0, programme: tondelier, mesure: PRE-14}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 0 an(s) au plus."
+  REC-04/05/06/07:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P95_99", "P99"], programme: tondelier, mesure: REC-04/05/06/07}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  REC-40:
+    operations: [{formule: {nom: consommation, postes: ["111", "112", "043", "073"], programme: tondelier, mesure: REC-40}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 111, 112, 043, 073 (Budget de famille 2017) ; postes approchés."
+  COT-03:
+    operations: [{formule: {nom: cotisations_employeur, bande_smic: [1.6, 1000], directe: true, programme: tondelier, mesure: COT-03}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur sur les salariés du privé au-dessus de 1,6 SMIC, au prorata du brut (épargne salariale concentrée sur les plus hauts salaires : HYPOTHÈSE)."
+  REC-41:
+    operations: [{formule: {nom: consommation, postes: ["0451"], programme: tondelier, mesure: REC-41}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0451 (Budget de famille 2017) ; postes approchés."
+  REC-45:
+    operations: [{formule: {nom: consommation, postes: ["02", "0118"], programme: tondelier, mesure: REC-45}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 02, 0118 (Budget de famille 2017) ; postes approchés."
+  REC-42:
+    operations: [{formule: {nom: consommation, postes: ["0722"], programme: tondelier, mesure: REC-42}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0722 (Budget de famille 2017) ; postes approchés."
+  REC-03:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P90_95", "P95_99", "P99"], programme: tondelier, mesure: REC-03}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches P90_95, P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  REC-37:
+    operations: [{formule: {nom: cotisations_employeur, programme: tondelier, mesure: REC-37, bande_smic: [1.6, 3.5]}}]
+    note: "Derniers trous (22/11/2026) : allègements des employeurs au-delà de 1,6 SMIC supprimés (bandeaux maladie et famille, jusqu'à 3,5 SMIC) : à court terme, rien pour les ménages ; à long terme, la moitié du montant du moteur sur les salaires de la bande (entreprises.incidence_menages.salaires). Heures supplémentaires : la population n'a pas les heures."
+  COT-02:
+    operations:
+      - {parametre: {chemin: "prelevements_sociaux.cotisations_securite_sociale_regime_general.cnav.salarie.vieillesse_deplafonnee.brackets[0].rate", ajout: 0.005}}
+      - {formule: {nom: cotisations_employeur, programme: tondelier, mesure: COT-02, part_montant: 0.5}}
+    note: "Derniers trous (22/11/2026) : cotisations vieillesse déplafonnées +1 point à terme (0,2 point par an de 2028 à 2032), moitié salariés (barème d'OpenFisca, comme outils/openfisca_offre.cotisations_vieillesse_plus1), moitié employeurs (part de long terme sur les salaires)."
   REC-01:
     operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: tondelier, mesure: REC-01}}]
     note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'impôt plancher sur les plus gros patrimoines : 1 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
@@ -181,6 +220,18 @@ roussel:
     note: "Pensions revalorisées comme le salaire moyen depuis 2029 : sans effet en 2026, visible dans le vieillissement (même calcul que le moteur)."
 
 melenchon:
+  LFI-PRE-06:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 0, programme: melenchon, mesure: LFI-PRE-06}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 0 an(s) au plus."
+  LFI-COL-05:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 2, programme: melenchon, mesure: LFI-COL-05}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 2 an(s) au plus."
+  LFI-REC-23:
+    operations: [{formule: {nom: consommation, postes: ["0722", "073"], programme: melenchon, mesure: LFI-REC-23}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0722, 073 (Budget de famille 2017) ; postes approchés."
+  LFI-REC-20:
+    operations: [{formule: {nom: heures_supplementaires, programme: melenchon, mesure: LFI-REC-20}}]
+    note: "Derniers trous (22/11/2026) : exonération de cotisations des heures supplémentaires supprimée ; la population n'a pas les heures : montant du moteur sur les salariés du privé de 1 à 2,5 SMIC, au prorata du brut."
   LFI-REC-06:
     operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: melenchon, mesure: LFI-REC-06}}]
     note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'impôt plancher sur les plus gros patrimoines : 1 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
@@ -231,6 +282,15 @@ melenchon:
     note: "ASPA portée au seuil de pauvreté retenu par le programme (1 337 € par mois, contre 1 043,6 € en 2026), plafond de ressources relevé d'autant, couples dans la même proportion ; recours complet (le non-recours à l'ASPA, ≈ 50 %, n'est pas modélisé)."
 
 le_pen:
+  RN-FIS-06:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9"], programme: le_pen, mesure: RN-FIS-06}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches D1, D2, D3, D4, D5, D6, D7, D8, D9 (Histoire de vie et Patrimoine 2020-2021)."
+  RN-FIS-05:
+    operations: [{formule: {nom: patrimoine, composante: financier, tranches: ["P95_99", "P99"], programme: le_pen, mesure: RN-FIS-05}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine financier moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  RN-EMP-02:
+    operations: [{formule: {nom: heures_supplementaires, programme: le_pen, mesure: RN-EMP-02}}]
+    note: "Derniers trous (22/11/2026), règle commune : la population n'a pas les heures supplémentaires : montant du moteur sur les salariés du privé de 1 à 2,5 SMIC."
   RN-FIS-02:
     operations: [{formule: {nom: consommation, postes: ["011"], programme: le_pen, mesure: RN-FIS-02}}]
     note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'alimentation (Insee, Budget de famille 2017, TF106 : 011). Répercussion entière sur les prix ; pas de changement de quantités."
@@ -256,6 +316,18 @@ le_pen:
     note: "« Priorité nationale » : prestations non contributives retirées aux familles étrangères hors UE présentes depuis moins de cinq ans (lecture de la condition d'années de résidence ou d'activité)."
 
 philippe:
+  PHI-SOC-07:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 2, programme: philippe, mesure: PHI-SOC-07}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 2 an(s) au plus."
+  PHI-SOC-02:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 0, programme: philippe, mesure: PHI-SOC-02}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 0 an(s) au plus."
+  PHI-FIS-05:
+    operations: [{formule: {nom: patrimoine, composante: professionnel, tranches: ["P95_99", "P99"], programme: philippe, mesure: PHI-FIS-05}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine professionnel moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  PHI-EMP-06:
+    operations: [{formule: {nom: heures_supplementaires, programme: philippe, mesure: PHI-EMP-06}}]
+    note: "Derniers trous (22/11/2026) : la population n'a pas les heures supplémentaires ; montant du moteur réparti sur les salariés du privé de 1 à 2,5 SMIC, au prorata du brut."
   PHI-EMP-02:
     operations: [{population: {assurance_chomage: {programme: philippe, mesure: PHI-EMP-02, age_max: 50}}}]
     note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs de moins de 50 ans. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
@@ -291,6 +363,12 @@ arthaud:
     note: "SMIC à 2 200 € net (euros de 2027), même règle que le moteur ; la répartition du travail et l'égalité salariale ne sont pas codées."
 
 retailleau:
+  RET-SOC-02:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 0, programme: retailleau, mesure: RET-SOC-02}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 0 an(s) au plus."
+  RET-FIS-03:
+    operations: [{formule: {nom: patrimoine, composante: professionnel, tranches: ["P95_99", "P99"], programme: retailleau, mesure: RET-FIS-03}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine professionnel moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
   RET-FIS-02:
     operations: [{formule: {nom: patrimoine, composante: net, programme: retailleau, mesure: RET-FIS-02}}]
     note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ des droits de succession : toutes les tranches. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
@@ -336,6 +414,18 @@ zemmour:
     note: "CSG supprimée sur les revenus d'activité (salariés et indépendants)."
 
 glucksmann:
+  GLU-SOC-04:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 2, programme: glucksmann, mesure: GLU-SOC-04}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 2 an(s) au plus."
+  GLU-FIS-03:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: glucksmann, mesure: GLU-FIS-03}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches P99 (Histoire de vie et Patrimoine 2020-2021)."
+  GLU-FIS-05:
+    operations: [{formule: {nom: consommation, postes: ["0722", "073"], programme: glucksmann, mesure: GLU-FIS-05}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0722, 073 (Budget de famille 2017) ; postes approchés."
+  GLU-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: professionnel, tranches: ["P95_99", "P99"], programme: glucksmann, mesure: GLU-FIS-02}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine professionnel moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
   GLU-FIS-01:
     operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P95_99", "P99"], programme: glucksmann, mesure: GLU-FIS-01}}]
     note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ des plus gros héritages : 5 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."

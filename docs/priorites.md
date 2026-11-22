@@ -47,16 +47,16 @@ Par programme (`sorties/priorites_programmes.csv`, somme des priorités) :
 
 | Rang | Programme | Priorité | Mesures fragiles |
 |---|---|---|---|
-| 1 | Mélenchon | 28,9 | 115 / 218 |
-| 2 | Tondelier | 19,6 | 82 / 122 |
+| 1 | Mélenchon | 28,6 | 115 / 218 |
+| 2 | Tondelier | 18,3 | 82 / 122 |
 | 3 | Roussel | 14,6 | 27 / 44 |
 | 4 | Philippe | 10,5 | 48 / 123 |
-| 5 | Lisnard | 10,0 | 30 / 94 |
+| 5 | Lisnard | 10,1 | 30 / 94 |
 | 6 | Zemmour | 7,2 | 28 / 63 |
-| 7 | Glucksmann | 6,3 | 56 / 118 |
+| 7 | Glucksmann | 6,2 | 56 / 118 |
 | 8 | Arthaud | 5,8 | 6 / 37 |
-| 9 | Le Pen | 5,3 | 28 / 49 |
-| 10 | Retailleau | 4,8 | 35 / 98 |
+| 9 | Le Pen | 5,2 | 28 / 49 |
+| 10 | Retailleau | 4,7 | 34 / 98 |
 | 11 | Attal | 3,6 | 29 / 106 |
 | 12 | Bertrand | 1,9 | 12 / 33 |
 
