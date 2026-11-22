@@ -625,3 +625,27 @@ synthétique.
 
   Dix programmes atteignent le seuil de 80 % : critère de la phase 3 rempli. Ce qui reste : Tondelier
   (exonérations au-delà de 1,6 SMIC, cotisations vieillesse), Philippe (heures au-delà de 35 h), congés parentaux.
+
+## Roadmap 4.1 : champ et secteurs de la population d'entreprises (22/11/2026)
+
+- **Erreur corrigée :** la population suit le champ d'Ésane (marchand non agricole et non financier), mais recevait
+  les nombres, pertes et bénéfices de toutes les entreprises à l'IS de la DGFiP, finance comprise. Son IS valait
+  67,7 Md€, contre 57,0 dans le champ (70,5 au total, dont finance 12,7 et agriculture 0,7).
+- **Correction** (`microsimulation.entreprises_champ_esane`, DGFiP Statistiques n° 51, tableau 1) : nombres et pertes
+  à 90,0 % (entreprises du champ), bénéfices à 77,2 % (résultat fiscal du champ).
+- **IS par secteur** (`microsimulation.entreprises_is_secteurs_2025`) : les bénéfices de chaque groupe de secteurs sont
+  calés sur son IS brut de 2025. Les tailles gardent la part des bénéfices de la DGFiP.
+
+| Groupe | IS de la population avant (Md€) | Après | DGFiP 2025 |
+|---|---|---|---|
+| Industrie | 18,5 | 14,7 | 14,7 |
+| Construction | 5,4 | 5,4 | 5,4 |
+| Commerce et transports | 16,8 | 17,7 | 17,7 |
+| Services (dont santé et enseignement marchands) | 26,8 | 19,2 | 19,2 |
+| **Total** | **67,7** | **57,0** | **57,0** |
+
+- **Effet sur les chiffrages :** l'IS des mesures reste ramené au total national (70,47 Md€, finance supposée réagir
+  comme les autres, inchangé). Ce qui change : la répartition entre secteurs et tailles et le retour d'IS des impôts de
+  production (LIS-FIS-01 et PHI-FIS-01 : −22,1 → −21,1 Md€ ; RN-FIS-04 : −9,7 → −9,2 ; RET-FIS-01 : −5,6 → −5,3 ;
+  REC-35 : +6,3 → +6,0). `parametres/donnees/population_entreprises_2023.csv` régénérée ; `sorties/micro_entreprises.csv`
+  à régénérer.

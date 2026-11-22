@@ -124,7 +124,13 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
                            "investissement": inv[i]})
     # part à l'IS
     mic_insee = sum(c["entreprises"] for c in cellules if c["taille"] == "MIC")
-    d25 = p_.val("microsimulation.entreprises_is_2025")
+    d25 = dict(p_.val("microsimulation.entreprises_is_2025"))
+    # roadmap 4.1 (22/11/2026) : champ d'Ésane (marchand non agricole et non financier) ; les totaux de la DGFiP
+    # comprennent la finance et l'agriculture (tableau 1) : nombres et pertes au prorata des entreprises du champ,
+    # bénéfices au prorata du résultat fiscal du champ
+    ch = p_.val("microsimulation.entreprises_champ_esane")
+    for k in ("beneficiaires", "deficitaires", "tpe_is", "deficit_md"):
+        d25[k] *= ch["entreprises"]
     part_is = {"MIC": min(1.0, d25["tpe_is"] / mic_insee), "PME": 1.0, "GE_ETI": 1.0}
     for e in sortie:
         e["part_is"] = part_is[e["taille"]]
@@ -145,7 +151,14 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
     echelle = np.maximum(va, 1.0) ** 0.8 * rng.lognormal(-0.5, 1.0, len(sortie))
     seuil = 1 - part_benef
     tailles_dg = {t["taille"]: t for t in tailles.values()}
-    cible = {"MIC": tailles_dg["TPE"]["benefices_md"], "PME": tailles_dg["PME"]["benefices_md"]}
+    tot_dg = sum(t["benefices_md"] for t in tailles_dg.values())
+    part_benef_taille = {"MIC": tailles_dg["TPE"]["benefices_md"] / tot_dg, "PME": tailles_dg["PME"]["benefices_md"] / tot_dg}
+
+    # roadmap 4.1 : IS brut de 2025 par groupe de secteurs (DGFiP, tableau 1, hors finance et agriculture)
+    is_sect = p_.val("microsimulation.entreprises_is_secteurs_2025")
+    secteur = np.array([e["secteur"] for e in sortie])
+    groupe = np.array([next(g for g, v in is_sect.items() if sec in v["secteurs"]) for sec in secteur])
+    k_sect = {g: 1.0 for g in is_sect}
 
     def attribuer(decal):
         score = base_score + np.select([taille == "MIC", taille == "PME"], [decal["MIC"], decal["PME"]], 0.0)
@@ -157,25 +170,37 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
         perte = rang < seuil
         brute = echelle * (1.5 - rang / seuil)  # les plus mauvais rangs perdent davantage
         k = d25["deficit_md"] * 1e9 / (poids[perte] @ brute[perte])
-        res = np.where(perte, -k * brute, _benefice(u, p, b))
+        # bénéfice par entreprise : résultat du champ / entreprises du champ, rapporté au total
+        fac = np.array([k_sect[g] for g in groupe])
+        res = np.where(perte, -k * brute, ch["benefices"] / ch["entreprises"] * fac * _benefice(u, p, b))
         return res
 
     decal = {"MIC": 0.0, "PME": 0.0}
     res = attribuer(decal)
     if caler:
-        for _ in range(60):
+        for _ in range(200):
             ecart = 0.0
+            # tailles : part des bénéfices de la DGFiP (le niveau vient de l'IS par secteur)
+            total = poids @ np.maximum(res, 0) / 1e9
             for t in ("MIC", "PME"):
                 m = taille == t
                 tot = poids[m] @ np.maximum(res[m], 0) / 1e9
-                decal[t] += 0.8 * np.log(cible[t] / tot)
-                ecart = max(ecart, abs(tot / cible[t] - 1))
+                vise = part_benef_taille[t] * total
+                decal[t] += 0.8 * np.log(vise / tot)
+                ecart = max(ecart, abs(tot / vise - 1))
+            imp = np.array([is_brut(r) for r in res])
+            for g, v in is_sect.items():
+                m = groupe == g
+                tot = poids[m] @ imp[m] / 1e9
+                k_sect[g] *= (v["is_brut_md"] / tot) ** 0.8
+                ecart = max(ecart, abs(tot / v["is_brut_md"] - 1))
             res = attribuer(decal)
             if ecart < 0.002:
                 break
     for i, e in enumerate(sortie):
         e["resultat_fiscal"] = float(res[i])
     generer.decalage = decal
+    generer.facteurs_secteurs = dict(k_sect)
     return sortie
 
 

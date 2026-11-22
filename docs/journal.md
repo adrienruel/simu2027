@@ -2155,3 +2155,5 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   `sorties/poids_incertitude_lignes.jsonl`.
 - **Roadmap 2.3** : 15-24 et 25-54 ans selon la projection de l'Insee (figure 2) ; écarts 2037 ≤ 0,003 point.
   Devenir des seniors inchangé (sourcé ; `part_concernee` reste un calage sur la DG Trésor).
+- **Roadmap 4.1** : population d'entreprises ramenée au champ d'Ésane (elle recevait les bénéfices de la finance :
+  IS 67,7 → 57,0 Md€) et calée sur l'IS de 2025 par groupe de secteurs (DGFiP n° 51, tableau 1).
