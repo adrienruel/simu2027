@@ -663,3 +663,19 @@ synthétique.
   n'a pas de retour au budget). Écarts 2037 au prudent : au plus 0,02 point (Lisnard −0,02).
 - **À valider par Adrien :** la somme vient de deux études et de deux pays. Avec Baker et al. seuls : salaires 38 %,
   prix 31 %, actionnaires 31 %.
+
+## Roadmap 3.6 : niveaux de vie, diagnostic (22/11/2026, pas de recalage)
+
+- **Écart :** médiane de la population 24 450 € par UC (2026) ; Insee 26 740 € en 2024 (ERFS, Insee Première
+  n° 2117), soit ≈ 27 300 € de 2026 sans croissance réelle : −10 %. Moyenne : ≈ 28 000 € contre ≈ 31 600 €.
+- **Ce qui n'explique pas l'écart :** les masses de revenus sont proches des comptes à 5 % près (salaires bruts
+  1 021 Md€, pensions 393, revenus d'indépendants 86, chômage 21,5). Les parts dans le niveau de vie autour de la
+  médiane ressemblent à celles de l'ERFS 2021 (Revenus et patrimoine des ménages 2024, fiche 1.4).
+- **Ce qui l'explique en partie :** les revenus du patrimoine. Ils font 3 à 3,7 % du niveau de vie autour de la
+  médiane dans l'ERFS (8,8 % en moyenne, revenus des livrets et de l'assurance-vie imputés depuis l'enquête
+  Patrimoine), contre ≈ 1 % dans la population. Une imputation à partir de l'enquête Histoire de vie et Patrimoine
+  (3.2) en rattraperait 2 à 3 points.
+- **Reste à comprendre** (≈ 7 points) : champ (l'ERFS exclut les ménages dont la personne de référence est étudiante,
+  la métropole seule), échelle d'UC, prélèvements. Il faut la composition du revenu disponible par décile de l'ERFS
+  2024 (Insee Résultats « Revenu, niveau de vie et pauvreté en 2024 », tableaux en xlsx, que l'environnement ne peut pas
+  télécharger).

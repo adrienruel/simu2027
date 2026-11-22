@@ -33,7 +33,8 @@ def test_formule_et_partage_des_blocs(p, nom):
     part = p.val("emploi.part_allocation_assurance_chomage")
     k_ac, k_pa = ctx["generosite_chomage"][t]  # roadmap 5.4 : générosité du programme
     ppa = noyau.ppa_par_emploi(p, s)[t]  # roadmap 5.5 : prime d'activité des emplois en plus
-    attendu = part * base * k_ac + (1 - part) * base * k_pa - d_ch * ppa * k_pa / 1e9
+    al = p.val("emploi.part_allocation_logement")  # roadmap 2.4 : aides au logement évitées, bloc logement
+    attendu = part * base * k_ac + al * base + (1 - part - al) * base * k_pa - d_ch * ppa * k_pa / 1e9
     assert r["depenses_chomage_programme"] == pytest.approx(attendu, rel=1e-9)
     # partage : la part de l'assurance chômage va au bloc chômage, le reste au bloc pauvreté
     p0 = p.avec({"emploi.depenses_chomage_programme": False})
@@ -87,4 +88,5 @@ def test_generosite(p):
 
 def test_ppa_par_emploi(p):
     v = noyau.ppa_par_emploi(p, "prudent")
-    assert 1500 < v[2029] < 3000
+    # roadmap 2.4 : famille des chômeurs (micro), ≈ 0,32 × la prime d'une personne seule (≈ 2 140 €)
+    assert 400 < v[2029] < 1200

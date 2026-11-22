@@ -28,9 +28,10 @@ def test_a1_dividende_du_programme_retrouve_le_statu_quo_recalcule():
 
 
 def test_a2_un_emploi_vaut_la_meme_chose_partout():
-    """Cellule OpenFisca au voisinage du SMIC (1,3 SMIC) ≈ valeur d'un emploi des autres canaux (20 000 €), à 5 %."""
+    """Cellule OpenFisca au voisinage du SMIC (1,3 SMIC) ≈ valeur d'un emploi des autres canaux, à 5 % : 20 000 €
+    avec l'allocation évitée de 9 000 € ; 21 660 € depuis la roadmap 2.4 (10 660 €, micro)."""
     v = ProgrammeSimple.valeur_emploi_cellule(P, P.val("emploi.cout_emploi_cree_smic"))
-    assert v == pytest.approx(20000, rel=0.05)
+    assert v == pytest.approx(20000 + P.val("emploi.allocation_chomeur_evitee") - 9000, rel=0.05)
     assert ProgrammeSimple.valeur_emploi_cellule(P, 1.0) < v < ProgrammeSimple.valeur_emploi_cellule(P, "moyen")
 
 

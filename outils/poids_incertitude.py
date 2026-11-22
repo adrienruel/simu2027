@@ -8,7 +8,7 @@ le plus la fourchette publiée.
 
     python -m outils.poids_incertitude        → sorties/poids_incertitude.csv
 
-Le calcul garde chaque ligne dans sorties/poids_incertitude_lignes.jsonl et reprend là où il s'est arrêté ; il tourne
+Le calcul garde chaque ligne dans .cache/poids_incertitude_lignes.jsonl et reprend là où il s'est arrêté ; il tourne
 par lots de LOT cibles, un processus par lot (la mémoire grossit avec les simulations : 8 Go ne suffisent pas pour
 les 78 cibles d'un coup). Effacer le fichier .jsonl pour repartir de zéro.
 """
@@ -28,7 +28,7 @@ from moteur.parametres import Parametres
 RACINE = Path(__file__).resolve().parents[1]
 T = 2037
 LOT = 8
-LIGNES = RACINE / "sorties" / "poids_incertitude_lignes.jsonl"
+LIGNES = RACINE / ".cache" / "poids_incertitude_lignes.jsonl"  # calcul en cours, hors des sorties publiées
 
 
 def faites() -> dict[str, dict]:
@@ -76,6 +76,7 @@ def calcul(programmes: list[str] | None = None, limite: int | None = None) -> li
             ligne["ecart_moyen_2037"] = sum(e) / len(e)
             ligne["ecart_max_2037"] = max(e)
         out.append(ligne)
+        LIGNES.parent.mkdir(exist_ok=True)
         with LIGNES.open("a", encoding="utf-8") as fh:
             fh.write(json.dumps(ligne, ensure_ascii=False) + "\n")
         print(nom, {k: round(v, 3) for k, v in ligne.items() if k != "parametre"}, flush=True)
@@ -103,6 +104,8 @@ def ecrire(lignes: list[dict]) -> Path:
         w.writeheader()
         for i, x in enumerate(lignes, 1):
             w.writerow({"rang": i, **{k: round(v, 4) if isinstance(v, float) else v for k, v in x.items()}})
+    from outils import trace
+    trace.enregistrer("poids_incertitude.csv", script="outils.poids_incertitude")
     return f
 
 

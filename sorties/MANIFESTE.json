@@ -905,6 +905,14 @@
    "code_non_commite": false,
    "parametres": "f06a9bf85d11438c"
   },
+  "poids_incertitude.csv": {
+   "sha256": "4a6634204d8bdc8fba35e7f93700444207b2a1da325b11eaa89f9e2ba0999f4c",
+   "script": "outils.poids_incertitude",
+   "date": "2026-11-22T12:44:20Z",
+   "commit": "25673c1",
+   "code_non_commite": true,
+   "parametres": "5db48e994509095d"
+  },
   "sources_poids.csv": {
    "sha256": "b145c030a9575eb5036c4df2d94975fbe5bead83d5e78ed866e4f7cab67bc2a1",
    "script": "outils.sources_poids",

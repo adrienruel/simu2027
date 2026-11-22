@@ -124,7 +124,7 @@ pèse le plus pour les programmes à fort déficit (Mélenchon, Roussel) ; l'él
   pour le tirage seulement ; les scénarios publiés ne changent pas. Aucune loi n'est encore écrite.
 - **Classement des poids :** `outils/poids_incertitude.py`. On fait varier chaque paramètre seul, du centile 10 au
   centile 90, et on mesure le demi-écart du déficit 2037 du statu quo et de l'écart moyen des programmes. Le calcul
-  a été coupé par la mémoire après 37 cibles sur 78. Il faut le relancer seul (≈ 1 h), sans autre calcul à côté.
+  a été coupé par la mémoire après 37 cibles sur 78 ; relancé par lots le 22/11 (classement complet plus bas).
 - **Premières cibles** (points de PIB en 2037, médian) :
 
 | Cible | Déficit du statu quo | Écart moyen des programmes | Écart maximal |
@@ -147,3 +147,44 @@ pèse le plus pour les programmes à fort déficit (Mélenchon, Roussel) ; l'él
   - Pour l'IA, la fourchette d'Aghion et Bunel (0,07 à 1,24 point par an) est celle des estimations publiées, pas
     une loi de probabilité.
 
+### Classement complet (22/11/2026, `sorties/poids_incertitude.csv`)
+
+Relancé par lots de 8 cibles dans des processus séparés (reprise sur `.cache/poids_incertitude_lignes.jsonl`),
+après les chantiers 2.3, 2.4, 4.2 et 4.3 du même jour. 52 cibles sur 78 pèsent ; les autres ne
+bougent ni le statu quo ni les programmes en 2037 (paramètres de canaux qu'aucun programme n'utilise, ou d'après
+2037). Les 20 premières (points de PIB en 2037, médian) :
+
+| Rang | Cible | Déficit du statu quo | Écart moyen des programmes | Écart maximal |
+|---|---|---|---|---|
+| 1 | `macro.ia_productivite` | 0,59 | 0,04 | 0,13 |
+| 2 | `macro.tendance` | 0,34 | 0,02 | 0,11 |
+| 3 | `macro.reformes_structurelles/poids` | 0,00 | 0,17 | 0,62 |
+| 4 | `macro.prime_dette` | 0,10 | 0,02 | 0,10 |
+| 5 | `emploi_public.eviction_privee` | 0,00 | 0,08 | 0,16 |
+| 6 | `inflation.long_terme` | 0,07 | 0,00 | 0,00 |
+| 7 | `seniors.devenir` | 0,00 | 0,05 | 0,14 |
+| 8 | `programme_commun.canaux_adoption_ia_part` | 0,00 | 0,04 | 0,21 |
+| 9 | `macro.multiplicateur` | 0,00 | 0,04 | 0,12 |
+| 10 | `capacite.effet_au_dela` | 0,00 | 0,03 | 0,23 |
+| 11 | `bouclage.prime_demande` | 0,00 | 0,03 | 0,14 |
+| 12 | `cohortes.effet_composition_salaires` | 0,02 | 0,01 | 0,04 |
+| 13 | `enveloppe_economies.domaines/etat/capacite` | 0,00 | 0,03 | 0,10 |
+| 14 | `offre.travail_part_pib` | 0,00 | 0,02 | 0,08 |
+| 15 | `offre.travail_heures` | 0,00 | 0,02 | 0,11 |
+| 16 | `demographie.titres_vers_solde/realisation` | 0,00 | 0,02 | 0,06 |
+| 17 | `capacite.seuil_pib` | 0,00 | 0,01 | 0,09 |
+| 18 | `offre.recherche/rendement` | 0,00 | 0,01 | 0,10 |
+| 19 | `enveloppe_economies.domaines/prestations/capacite` | 0,00 | 0,01 | 0,10 |
+| 20 | `logement_offre.bareme/logements` | 0,00 | 0,01 | 0,07 |
+
+- **Trois familles :**
+  - **croissance du statu quo** (IA, tendance, prime de dette, inflation) : elles font la fourchette du déficit ;
+    elles bougent peu les écarts entre programmes ;
+  - **lectures communes des programmes** (poids des réformes de structure, éviction de l'emploi public, adoption de
+    l'IA, enveloppes d'économies, titres de séjour) : ce sont des conventions, pas des paramètres de la littérature ;
+    leur loi est une décision ;
+  - **élasticités** (multiplicateur, devenir des seniors, capacité, prime de demande, offre de travail, recherche) :
+    les seules pour lesquelles la littérature donne une fourchette.
+- **Lois :** toujours aucune écrite (`lois.yaml` vide). Elles attendent l'arbitrage du centre (ci-dessus) : une
+  loi sourcée déplace le centre du Monte Carlo chaque fois que la colonne médiane n'est pas le centre de la
+  littérature.

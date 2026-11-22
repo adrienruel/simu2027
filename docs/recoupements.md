@@ -312,3 +312,15 @@ Constats :
   inchangés.
 - **Par taille (reste de 4.3) :** pas fait. La base des PME et des TPE ne se déplace pas dans la règle (part des groupes
   seulement) ; la localisation des investissements passe déjà par `macro.elasticite_invest`.
+
+## Roadmap 5.2 : dépenses du statu quo sensibles à l'activité (22/11/2026)
+
+Déjà couvert, rien à ajouter au noyau :
+- **chômage, RSA, aides au logement et prime d'activité** suivent les chômeurs du programme (phase L, 4.1 ; montants par
+  chômeur tirés de la micro depuis la roadmap 2.4) ;
+- **dépenses en volume** (santé, missions, collectivités) : la part salariale suit la croissance d'un programme, avec
+  passage partiel et décalé (`statu_quo._depenses_en_plus`, 21/11) ;
+- **pensions et prestations indexées** suivent leur règle (prix ou salaires), donc l'inflation et les salaires du
+  programme.
+Reste hors modèle : les prestations sous condition de ressources des personnes en emploi dont le salaire change
+(seule la prime d'activité des emplois en plus est comptée).

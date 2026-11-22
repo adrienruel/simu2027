@@ -2152,7 +2152,7 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   (`outils/ppa_emplois.py`) : 10 660 € évités par chômeur (dont 785 € d'aides au logement, nouveau bloc), prime
   d'activité de la famille = 0,32 × celle d'une personne seule. Écarts 2037 : au plus 0,07 point.
 - **Roadmap 6.1** : `outils/poids_incertitude.py` par lots dans des processus séparés, reprise sur
-  `sorties/poids_incertitude_lignes.jsonl`.
+  `.cache/poids_incertitude_lignes.jsonl`.
 - **Roadmap 2.3** : 15-24 et 25-54 ans selon la projection de l'Insee (figure 2) ; écarts 2037 ≤ 0,003 point.
   Devenir des seniors inchangé (sourcé ; `part_concernee` reste un calage sur la DG Trésor).
 - **Roadmap 4.1** : population d'entreprises ramenée au champ d'Ésane (elle recevait les bénéfices de la finance :
@@ -2161,3 +2161,10 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   consommation des déciles ; test salaires + prix + actionnaires = 100 %. Écarts 2037 ≤ 0,02 point.
 - **Roadmap 4.3** : bénéfices déplacés par les groupes quand le taux de l'IS change (drapeau `taux_is` : LIS-FIS-03,
   LFI-REC-11) ; Lisnard +0,034 point en 2037.
+- **Roadmap 5.2** : déjà couverte (chômage, RSA, aides au logement, prime d'activité, dépenses en volume) ; note dans
+  `docs/recoupements.md`.
+- **Roadmap 3.6** : diagnostic seulement (`docs/microsimulation.md`) : niveaux de vie ≈ 10 % sous l'ERFS 2024 ; les
+  masses de revenus sont justes à 5 % près ; les revenus du patrimoine expliquent 2 à 3 points ; il faut la
+  composition du revenu disponible par décile de l'ERFS 2024.
+- **Roadmap 6.1** : classement complet des 78 cibles (`sorties/poids_incertitude.csv`, 52 pèsent) ; lois en attente
+  de l'arbitrage du centre.
