@@ -180,7 +180,7 @@ def construire(operations: list[dict]):
 
 # --- Calcul --------------------------------------------------------------------------------------------------
 
-POST = ("consommation", "garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
+POST = ("consommation", "patrimoine", "garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
         "allocation_unique", "capitalisation")  # règles appliquées après le calcul d'OpenFisca
 EMPLOI = ("salarie_prive", "agent_public", "independant")
 AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
@@ -267,6 +267,29 @@ def depenses_bdf() -> dict:
         code, dec, v = ligne.split(";")
         if dec != "TOT":
             out[(code, int(dec))] = float(v)
+    return out
+
+
+def tranche_hvp(cum: np.ndarray) -> np.ndarray:
+    """Tranche de l'enquête Histoire de vie et Patrimoine pour une position cumulée (0 à 1) dans la distribution du
+    revenu disponible : D1 à D9, puis P90_95, P95_99 et P99 (1 % du haut)."""
+    cum = np.asarray(cum, float)
+    dix = np.array([f"D{k}" for k in range(1, 10)], object)[np.minimum(8, (cum * 10).astype(int))]
+    return np.where(cum < 0.9, dix, np.where(cum < 0.95, "P90_95", np.where(cum < 0.99, "P95_99", "P99")))
+
+
+def patrimoine_hvp() -> dict:
+    """Patrimoine moyen par ménage (€ de début 2021) par tranche de revenu disponible et composante (brut, net,
+    immobilier, financier, professionnel) : Insee, Histoire de vie et Patrimoine 2020-2021."""
+    f = RACINE / "parametres" / "donnees" / "hvp2021_patrimoine_revdisp.csv"
+    out = {}
+    for ligne in f.read_text(encoding="utf-8").splitlines()[1:]:
+        if not ligne.strip():
+            continue
+        t, b, im, fi, pr, _re, en = ligne.split(";")
+        b = float(b)
+        out[t] = {"brut": b, "net": b * (1 - float(en) / 100), "immobilier": b * float(im) / 100,
+                  "financier": b * float(fi) / 100, "professionnel": b * float(pr) / 100}
     return out
 
 
@@ -483,6 +506,8 @@ class Base:
         for x in post:
             if x["nom"] == "consommation":
                 rd = rd + self.gain_consommation(rd, uc, x)
+            if x["nom"] == "patrimoine":
+                rd = rd + self.gain_patrimoine(rd, x)
         for x in post:
             if x["nom"] == "garantie_niveau_vie":
                 # niveau de vie porté au seuil, ménages dont la personne de référence n'est pas étudiante (champ de
@@ -518,6 +543,25 @@ class Base:
         dec = np.empty(len(nv), int)
         dec[ordre] = np.minimum(10, 1 + (cum * 10).astype(int))
         w = np.array([sum(dep[(c, int(d))] for c in x["postes"]) for d in dec])
+        return -md * 1e9 * w / float((self.wm * w).sum())
+
+    def gain_patrimoine(self, rd: np.ndarray, x: dict) -> np.ndarray:
+        """Roadmap 3.2 (22/11/2026) : gain (+) ou perte (−) par ménage (€ par an) d'une mesure sur le patrimoine (ISF,
+        IFI, impôt plancher, droits de succession). La population n'a pas le patrimoine : le montant vient du moteur
+        (montant_moteur ou montant_md ; + = le solde s'améliore, les ménages perdent) et se répartit selon le
+        patrimoine moyen de leur tranche de revenu disponible (Insee, enquête Histoire de vie et Patrimoine 2020-2021,
+        parametres/donnees/hvp2021_patrimoine_revdisp.csv : dixièmes, puis 90-95e, 95-99e centiles et 1 % du haut).
+        x["composante"] : brut, net, immobilier, financier ou professionnel ; x["tranches"] : tranches visées (par
+        défaut toutes), pour les impôts réservés aux plus gros patrimoines."""
+        md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
+        pat = patrimoine_hvp()
+        comp = x.get("composante", "net")
+        vises = set(x.get("tranches", pat))
+        ordre = np.argsort(rd)
+        cum = np.cumsum(self.wm[ordre]) / self.wm.sum()
+        tr = np.empty(len(rd), object)
+        tr[ordre] = tranche_hvp(cum - self.wm[ordre] / (2 * self.wm.sum()))  # milieu du poids du ménage
+        w = np.array([pat[t][comp] if t in vises else 0.0 for t in tr])
         return -md * 1e9 * w / float((self.wm * w).sum())
 
     def capitalisation(self, sim, x: dict) -> np.ndarray:
@@ -675,8 +719,13 @@ class Base:
                 # pensions au-delà d'un seuil mensuel brut multipliées par un facteur (gel, sous-indexation), perte qui
                 # s'éteint avec les retraités concernés après la dernière année (≈ 18 ans, comme le moteur)
                 fin = y.get("fin", 2032)
-                k = 1 - (1 - y["facteur"]) * (math.exp(-(annee - fin) / 18) if annee > fin else 1.0)
                 seuil = 12 * y.get("seuil_mensuel", 0.0)
+                if "programme" in y:
+                    # facteur calé sur le montant du moteur (+ = le solde s'améliore, les retraités perdent), réparti au
+                    # prorata des pensions au-delà du seuil (3.3, 22/11/2026)
+                    masse = sum(l["poids"] * l["pension_brute"] for l in lg if l["pension_brute"] > seuil)
+                    y = {**y, "facteur": 1 - montant_moteur(y["programme"], y["mesure"]) * 1e9 / masse}
+                k = 1 - (1 - y["facteur"]) * (math.exp(-(annee - fin) / 18) if annee > fin else 1.0)
                 for l in lg:
                     if l["pension_brute"] > seuil:
                         l["pension_brute"] *= k

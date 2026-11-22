@@ -570,3 +570,58 @@ synthétique.
   - Tondelier : exonérations au-delà de 1,6 SMIC, cotisations vieillesse ;
   - congés parentaux.
 
+
+## Roadmap 3.2 : patrimoine par ménage (22/11/2026)
+
+- **Données :** Insee, enquête Histoire de vie et Patrimoine 2020-2021 (tableaux fournis par Adrien, archivés dans
+  `parametres/sources/insee_hvp2021/`). Patrimoine brut moyen par ménage et parts de ses composantes (immobilier,
+  financier, professionnel, résiduel, endettement), par tranche de revenu disponible du ménage : dixièmes D1 à D9,
+  puis 90-95e et 95-99e centiles, puis 1 % du haut (`hvp_mtpatbrut_composante_fr.xlsx`, feuille REVDISP ;
+  `parametres/donnees/hvp2021_patrimoine_revdisp.csv`). Exemples : 104 400 € en D1, 2,83 M€ pour le 1 % du haut.
+- **Opération :** `formule: {nom: patrimoine, composante, tranches?, programme, mesure}`
+  (`outils/openfisca_mesures.gain_patrimoine`).
+  - La population n'a pas le patrimoine. Le montant de la mesure vient du moteur, à plein effet, et se répartit
+    entre ménages selon le patrimoine moyen de leur tranche (net, ou immobilier pour l'IFI).
+  - `tranches` limite le champ aux tranches visées : impôts réservés aux plus gros patrimoines.
+- **Limites, à lire avec les déciles :**
+  - les tranches sont de revenu disponible du ménage, pas de niveau de vie par unité de consommation ;
+  - le premier dixième a plus de patrimoine que le deuxième (indépendants à faible revenu, patrimoine
+    professionnel) ;
+  - l'enquête n'atteint pas les très grandes fortunes : la taxe Zucman (au-delà de 100 M€) est entièrement mise
+    sur le 1 % du haut, ce qui dit qui paie dans la population, pas la concentration réelle ;
+  - successions : patrimoine du ménage lui-même, comme approximation de celui des héritiers.
+- **Codé, même règle pour tous (DÉCISION, à valider par Adrien) :**
+
+| Mesure | Composante | Tranches |
+|---|---|---|
+| GLU-FIS-01 (plus gros héritages) | net | 95-99e, 1 % |
+| ZEM-FIS-02, RET-FIS-02 (droits de succession) | net | toutes |
+| LIS-FIS-04 (transmissions, taux marginal) | net | 90-95e, 95-99e, 1 % |
+| LFI-REC-05, PCF-FIS-01 (ISF) | net | 90-95e, 95-99e, 1 % |
+| LIS-FIS-02 (IFI) | immobilier | 95-99e, 1 % |
+| LFI-REC-06, PCF-FIS-02, REC-01 (impôt plancher) | net | 1 % |
+
+  ZEM-FIS-02 est calculée par la bibliothèque (pas de montant fixe) : `montant_md` −20,6 Md€ de 2026 (22,8 Md€
+  courants en 2032 au prudent), à reprendre si le moteur change.
+- **Pensions calées sur le moteur (3.3) :** l'opération `population.pensions` accepte `programme` et `mesure` à la
+  place de `facteur`. ART-RET-01 (sous-indexation du budget 2027 annulée) : pensions au-delà de 1 550 € brut par
+  mois (85 % du SMIC brut de 2026, DÉCISION) relevées du montant du moteur, pour toujours.
+- **Couverture du budget « ménages »** (en %) :
+
+| Programme | Couverture |
+|---|---|
+| Arthaud | 100 |
+| Bertrand | 100 |
+| Lisnard | 100 |
+| Zemmour | 100 |
+| Roussel | 97 |
+| Attal | 87 |
+| Le Pen | 87 |
+| Retailleau | 86 |
+| Glucksmann | 83 |
+| Mélenchon | 82 |
+| Philippe | 77 |
+| Tondelier | 59 |
+
+  Dix programmes atteignent le seuil de 80 % : critère de la phase 3 rempli. Ce qui reste : Tondelier
+  (exonérations au-delà de 1,6 SMIC, cotisations vieillesse), Philippe (heures au-delà de 35 h), congés parentaux.

@@ -68,3 +68,42 @@ def test_depenses_budget_de_famille():
     for code in ("0722", "045"):
         assert d[(code, 10)] > d[(code, 1)]
         assert d[(code, 1)] / d[("CTOTALE", 1)] > d[(code, 10)] / d[("CTOTALE", 10)]
+
+
+def test_patrimoine_histoire_de_vie():
+    """Roadmap 3.2 : patrimoine moyen par tranche de revenu disponible (Histoire de vie et Patrimoine 2020-2021) lu ;
+    il croît avec le revenu à partir du 2e dixième (le premier compte des indépendants à faible revenu et fort patrimoine
+    professionnel) ; un impôt réservé au 1 % du haut ne touche que lui et le montant total est conservé."""
+    import types
+
+    import numpy as np
+
+    from outils.openfisca_mesures import Base, patrimoine_hvp, tranche_hvp
+    pat = patrimoine_hvp()
+    assert pat["D1"]["brut"] == 104400 and pat["P99"]["brut"] == 2828000
+    ordre = [f"D{k}" for k in range(1, 10)] + ["P90_95", "P95_99", "P99"]
+    assert all(pat[a]["brut"] < pat[b]["brut"] for a, b in zip(ordre[1:], ordre[2:]))
+    assert all(0 < pat[t]["immobilier"] < pat[t]["net"] <= pat[t]["brut"] for t in ordre)
+    assert list(tranche_hvp([0.05, 0.85, 0.92, 0.97, 0.995])) == ["D1", "D9", "P90_95", "P95_99", "P99"]
+    n = 1000
+    b = types.SimpleNamespace(wm=np.full(n, 30.0))
+    rd = np.arange(n, dtype=float)
+    g = Base.gain_patrimoine(b, rd, {"montant_md": 2.0, "composante": "net", "tranches": ["P99"]})
+    assert (g[:990] == 0).all() and (g[990:] < 0).all()
+    assert abs((b.wm * g).sum() / 1e9 + 2.0) < 1e-9
+    g = Base.gain_patrimoine(b, rd, {"montant_md": -1.0, "composante": "net"})
+    assert (g > 0).all() and g[-1] > g[0] and abs((b.wm * g).sum() / 1e9 - 1.0) < 1e-9
+
+
+def test_pensions_calees_sur_le_moteur(pop):
+    """Pensions au-delà d'un seuil multipliées par un facteur calé sur le montant du moteur (ART-RET-01 : sous-
+    indexation du budget 2027 annulée, ≈ 5,5 Md€ au prudent) : les pensions sous le seuil ne bougent pas."""
+    import types
+
+    from outils.openfisca_mesures import Base, montant_moteur
+    b = types.SimpleNamespace(lignes=pop, annee=2032)
+    lg = Base.population(b, [{"population": {"pensions": {"seuil_mensuel": 1550, "programme": "arthaud",
+                                                           "mesure": "ART-RET-01", "fin": 2200}}}])
+    gain = sum(n["poids"] * (n["pension_brute"] - a["pension_brute"]) for n, a in zip(lg, pop)) / 1e9
+    assert abs(gain + montant_moteur("arthaud", "ART-RET-01")) < 0.01 and gain > 5
+    assert all(n["pension_brute"] == a["pension_brute"] for n, a in zip(lg, pop) if a["pension_brute"] <= 12 * 1550)

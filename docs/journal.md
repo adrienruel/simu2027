@@ -2145,3 +2145,6 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
 - **Roadmap 6.1, premier pas** : `parametres/commun/lois.yaml` et `outils/poids_incertitude.py` (classement
   partiel, 37 cibles sur 78).
 
+- **Roadmap 3.2** : patrimoine par ménage (Histoire de vie et Patrimoine 2020-2021, tranches de revenu disponible) ;
+  dix mesures sur le patrimoine et les successions codées. ART-RET-01 codée (pensions calées sur le moteur).
+  Couverture : dix programmes au-dessus de 80 %, critère de la phase 3 rempli.

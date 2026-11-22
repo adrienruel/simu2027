@@ -12,12 +12,17 @@
 #               du montant du moteur, au prorata de l'allocation des chômeurs concernés (3.4)
 #   formule   : {nom: consommation, postes: [codes], programme, mesure}  prix de postes de consommation (TVA, accises,
 #               prix bloqués) : montant du moteur réparti selon la dépense du décile (Budget de famille 2017, TF106, 3.1)
+#   formule   : {nom: patrimoine, composante, tranches?, programme, mesure}  impôts sur le patrimoine et les
+#               successions : montant du moteur réparti selon le patrimoine moyen de la tranche de revenu disponible
+#               (Histoire de vie et Patrimoine 2020-2021, 3.2)
+#   population: {pensions: {seuil_mensuel, facteur | programme+mesure, fin?}}  pensions au-delà d'un seuil mensuel
+#               brut multipliées (gel, sous-indexation) ; avec programme et mesure, facteur calé sur le montant du moteur
 #   population: {pension_minimum: {mensuel_brut}}  pensions des carrières complètes portées à un minimum (3.3)
 #   population: {age_depart: {age_actuel, age_cible}}  âge de départ changé (roadmap 3.3, openfisca_mesures.age_depart) :
 #               profil de départ de la population de 2026 décalé de l'écart entre l'âge du programme et celui du
 #               statu quo à terme (64 ans) ; mêmes règles pour tous les programmes
 # Non codées ici (raison dans docs/microsimulation.md) : conditions de nationalité ou de résidence (la population
-# n'a pas cette information), patrimoine (ISF, taxe Zucman, IFI), niches non nommées, mesures sans barème publié.
+# n'a pas cette information), niches non nommées, mesures sans barème publié.
 
 bertrand:
   BER-ECO-01:
@@ -36,6 +41,9 @@ bertrand:
     note: "Part impôt sur le revenu du prélèvement forfaitaire unique : 12,8 % → 14,8 %."
 
 tondelier:
+  REC-01:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: tondelier, mesure: REC-01}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'impôt plancher sur les plus gros patrimoines : 1 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
   PRE-15:
     operations: [{population: {assurance_chomage: {programme: tondelier, mesure: PRE-15}}}]
     note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
@@ -87,6 +95,12 @@ tondelier:
     note: "Pensions de plus de 2 000 € brut revalorisées 0,5 point sous l'inflation de 2028 à 2032 : − 2,5 % de niveau, qui s'éteint ensuite avec ces retraités."
 
 lisnard:
+  LIS-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: immobilier, tranches: ["P95_99", "P99"], programme: lisnard, mesure: LIS-FIS-02}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine immobilier moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'IFI (patrimoine immobilier) : 5 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  LIS-FIS-04:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P90_95", "P95_99", "P99"], programme: lisnard, mesure: LIS-FIS-04}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ des transmissions d'entreprise et du taux marginal : 10 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
   LIS-RET-02:
     operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
     note: "Roadmap 3.3 (21/11/2026, ajouté le 22/11) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart), même règle que BER-RET-01 et PHI-RET-01."
@@ -115,6 +129,12 @@ lisnard:
     note: "Pensions de plus de 2 000 € brut non revalorisées de 2028 à 2032 : (1 / 1,016)^5 = 0,924 de niveau (inflation de 2028 du moteur), qui s'éteint ensuite avec ces retraités."
 
 roussel:
+  PCF-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: roussel, mesure: PCF-FIS-02}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'impôt plancher sur les plus gros patrimoines : 1 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  PCF-FIS-01:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P90_95", "P95_99", "P99"], programme: roussel, mesure: PCF-FIS-01}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'ISF : 10 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
   PCF-FIS-06:
     operations: [{formule: {nom: consommation, postes: ["011"], programme: roussel, mesure: PCF-FIS-06}}]
     note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'alimentation (Insee, Budget de famille 2017, TF106 : 011). Répercussion entière sur les prix ; pas de changement de quantités."
@@ -161,6 +181,12 @@ roussel:
     note: "Pensions revalorisées comme le salaire moyen depuis 2029 : sans effet en 2026, visible dans le vieillissement (même calcul que le moteur)."
 
 melenchon:
+  LFI-REC-06:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: melenchon, mesure: LFI-REC-06}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'impôt plancher sur les plus gros patrimoines : 1 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  LFI-REC-05:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P90_95", "P95_99", "P99"], programme: melenchon, mesure: LFI-REC-05}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'ISF : 10 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
   LFI-PRE-05:
     operations: [{population: {assurance_chomage: {programme: melenchon, mesure: LFI-PRE-05}}}]
     note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
@@ -247,6 +273,9 @@ philippe:
     note: "Durée du RSA limitée, sans durée donnée : même lecture que Zemmour (trois ans), mêmes exceptions."
 
 arthaud:
+  ART-RET-01:
+    operations: [{population: {pensions: {seuil_mensuel: 1550, programme: arthaud, mesure: ART-RET-01, fin: 2200}}}]
+    note: "Roadmap 3.3 (22/11/2026) : la sous-indexation du budget 2027 touche les pensions au-delà de 85 % du SMIC ; DÉCISION : 85 % du SMIC brut mensuel de 2026 (≈ 1 823 €), soit 1 550 € brut de pension. Montant du moteur (pour toujours : fin repoussée) réparti au prorata des pensions au-delà du seuil."
   ART-ENE-02:
     operations: [{formule: {nom: consommation, postes: ["0722"], programme: arthaud, mesure: ART-ENE-02}}]
     note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants (Insee, Budget de famille 2017, TF106 : 0722). Répercussion entière sur les prix ; pas de changement de quantités."
@@ -262,6 +291,9 @@ arthaud:
     note: "SMIC à 2 200 € net (euros de 2027), même règle que le moteur ; la répartition du travail et l'égalité salariale ne sont pas codées."
 
 retailleau:
+  RET-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: net, programme: retailleau, mesure: RET-FIS-02}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ des droits de succession : toutes les tranches. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
   RET-ECO-06:
     operations: [{variable: {nom: cotisations_salariales, facteur: 0.875}}]
     note: "Roadmap 3.5 (22/11/2026) : cotisations salariales réduites de 13,3 Md€ (privé 10,2, agents publics 3,1 : montants bruts du moteur en 2032) sur ≈ 106,6 Md€ (OpenFisca 2026), au prorata. Facteur 1 − 13,3 / 106,6 = 0,875."
@@ -282,6 +314,9 @@ retailleau:
     note: "Cinq ans de résidence légale pour les prestations non contributives : familles étrangères hors UE arrivées depuis moins de cinq ans."
 
 zemmour:
+  ZEM-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: net, montant_md: -20.6}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur (calculé par la bibliothèque : 22,8 Md€ courants en 2032 au prudent, soit 20,6 Md€ de 2026 ; à reprendre si le moteur change) réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de tous les héritages : toutes les tranches. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
   ZEM-FIS-01b:
     operations: [{formule: {nom: consommation, postes: ["0722"], programme: zemmour, mesure: ZEM-FIS-01b}}]
     note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants (Insee, Budget de famille 2017, TF106 : 0722). Répercussion entière sur les prix ; pas de changement de quantités."
@@ -301,6 +336,9 @@ zemmour:
     note: "CSG supprimée sur les revenus d'activité (salariés et indépendants)."
 
 glucksmann:
+  GLU-FIS-01:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P95_99", "P99"], programme: glucksmann, mesure: GLU-FIS-01}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ des plus gros héritages : 5 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
   GLU-ENE-03:
     operations: [{formule: {nom: consommation, postes: ["0451"], programme: glucksmann, mesure: GLU-ENE-03}}]
     note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'électricité (Insee, Budget de famille 2017, TF106 : 0451). Répercussion entière sur les prix ; pas de changement de quantités."
