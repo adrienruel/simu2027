@@ -81,7 +81,6 @@ lisnard_actifs.csg_points
 lisnard_enveloppe.annonce
 macro.eviction
 macro.part_grandes_entreprises
-macro.semi_elasticite_transfert
 macro.taux_apparent_2029
 macro.taux_reference_is
 melenchon_mesures.apl

@@ -311,15 +311,15 @@ macro:
   semi_elasticite_transfert:
     valeur: {crise: 1.5, prudent: 1.25, median: 1, optimiste: 0.8}
     unite: sans_unite
-    statut: SOURCE
-    source: "FMI, Beer, de Mooij et Liu (2018)"
-    note: "FMI, Beer, de Mooij et Liu (2018)."
+    statut: HYPOTHESE
+    source: "Beer, de Mooij et Liu, « International Corporate Tax Avoidance: A Review of the Channels, Magnitudes, and Blind Spots », Journal of Economic Surveys, 2020 (FMI WP 18/168, 2018) : méta-analyse, semi-élasticité des bénéfices déclarés à l'écart de taux ≈ 1 (estimations récentes 1 à 1,5)"
+    note: "Roadmap 4.3 (22/11/2026) : lu depuis le retrait d'Écologie de droite par les mesures qui changent le taux de l'IS (drapeau taux_is, moteur/programme_simple.py). Ordonné pour une hausse (la crise perd le plus de base) ; une baisse prend le scénario miroir (moteur/incertitude.MIROIR_CLES)."
   part_grandes_entreprises:
     valeur: {crise: 0.56, prudent: 0.56, median: 0.56, optimiste: 0.56}
     unite: sans_unite
     statut: SOURCE
     source: "Insee, Les entreprises en France 2023"
-    note: "Insee, Les entreprises en France 2023, fiche 3.6."
+    note: "Insee, Les entreprises en France 2023, fiche 3.6. Roadmap 4.3 (22/11/2026) : part de la base de l'IS des groupes qui peuvent déplacer leurs bénéfices ; recoupé avec l'IS des GE et ETI, 37,0 Md€ sur 70,5 en 2025 (DGFiP Statistiques n° 51, tableau 2 : 0,52)."
   taux_reference_is:
     valeur: {crise: 0.25, prudent: 0.25, median: 0.25, optimiste: 0.25}
     unite: sans_unite

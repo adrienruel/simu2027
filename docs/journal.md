@@ -2159,3 +2159,5 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   IS 67,7 → 57,0 Md€) et calée sur l'IS de 2025 par groupe de secteurs (DGFiP n° 51, tableau 1).
 - **Roadmap 4.2** : 31 % des impôts des entreprises retombent sur les prix (Baker, Sun et Yannelis), répartis selon la
   consommation des déciles ; test salaires + prix + actionnaires = 100 %. Écarts 2037 ≤ 0,02 point.
+- **Roadmap 4.3** : bénéfices déplacés par les groupes quand le taux de l'IS change (drapeau `taux_is` : LIS-FIS-03,
+  LFI-REC-11) ; Lisnard +0,034 point en 2037.

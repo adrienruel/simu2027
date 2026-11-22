@@ -205,7 +205,7 @@ melenchon_mesures:
     statut: HYPOTHESE
     source: "Même chiffrage que tondelier_mesures.is_minimal (répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent) ; impôt des expatriés : faible (conventions)"
   is_progressif:
-    valeur: {id: LFI-REC-11, instrument: capital_entreprises, libelle: "IS progressif et modulé selon l'usage des bénéfices (dividendes ou réinvestissement)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028,
+    valeur: {id: LFI-REC-11, instrument: capital_entreprises, taux_is: true, libelle: "IS progressif et modulé selon l'usage des bénéfices (dividendes ou réinvestissement)", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2028,
              montant: {crise: 0.0, prudent: 0.0, median: 0.5, optimiste: 1.0}}
     unite: md_eur
     annee_euros: 2026

@@ -476,6 +476,16 @@ class ProgrammeSimple:
                     r_is = rc["taux_is_effectif"] * rc["part_marge"] * part
                     liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
                                         {t: -r_is * v for t, v in serie.items()}, note=court))
+                if x.get("taux_is"):
+                    # roadmap 4.3 (22/11/2026) : taux de l'IS changé ; les bénéfices des groupes multinationaux se
+                    # déplacent (semi-élasticité de la base au taux, Beer, de Mooij et Liu, 2018), règle commune.
+                    # Base des groupes = part_grandes_entreprises × base ; recette perdue ou regagnée = taux × base
+                    # déplacée = − semi × taux × part × montant statique. Une baisse prend le scénario miroir.
+                    sc = MIROIR[s] if x["_montant"] < 0 else s
+                    r_tr = (p.val("macro.semi_elasticite_transfert", sc) * p.val("macro.taux_reference_is", s)
+                            * p.val("macro.part_grandes_entreprises", s))
+                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : bénéfices déplacés par les groupes", "recettes",
+                                        {t: -r_tr * v for t, v in serie.items()}, note=court))
                 if x.get("fp"):
                     # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS
                     # pensions ni impôt sur le revenu, ≈ 0,39 ; relecture neutre du 11/11/2026)

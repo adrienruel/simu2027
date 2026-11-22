@@ -297,3 +297,18 @@ Constats :
   (0,7 à 0,8) est un calage écrit le 21/11 sur l'emploi des seniors de la DG Trésor (210 000 emplois au médian pour
   un an d'âge), pas une source : on le garde tant qu'aucune étude ne donne directement la part des non-retraités du
   modèle qui changent de situation.
+
+## Roadmap 4.3 : bénéfices déplacés par les groupes (22/11/2026)
+
+- **Avant :** aucun canal. Les paramètres `macro.semi_elasticite_transfert` et `macro.part_grandes_entreprises` ne
+  servaient plus depuis le retrait d'Écologie de droite.
+- **Règle commune :** une mesure qui change le taux de l'IS (drapeau `taux_is` dans `parametres.yaml`) déplace la base
+  des groupes. Recette regagnée (baisse) ou perdue (hausse) = − semi-élasticité × taux de référence (25 %) × part des
+  groupes (0,56) × montant statique. Semi-élasticité ≈ 1 (Beer, de Mooij et Liu, 2020) : 1,5 / 1,25 / 1 / 0,8 de la
+  crise à l'optimiste pour une hausse, scénario miroir pour une baisse.
+- **Mesures concernées :** LIS-FIS-03 (IS à 20 %) et LFI-REC-11 (IS progressif, neutre en recette au prudent). La
+  taxe des superprofits de Glucksmann n'est pas concernée (rente de l'électricité, sans déplacement possible).
+- **Effet :** Lisnard +0,034 point en 2037 au prudent (≈ 14 % de la baisse regagnée) ; les autres programmes
+  inchangés.
+- **Par taille (reste de 4.3) :** pas fait. La base des PME et des TPE ne se déplace pas dans la règle (part des groupes
+  seulement) ; la localisation des investissements passe déjà par `macro.elasticite_invest`.
