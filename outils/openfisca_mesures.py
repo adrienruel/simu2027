@@ -180,7 +180,7 @@ def construire(operations: list[dict]):
 
 # --- Calcul --------------------------------------------------------------------------------------------------
 
-POST = ("garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
+POST = ("consommation", "garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
         "allocation_unique", "capitalisation")  # règles appliquées après le calcul d'OpenFisca
 EMPLOI = ("salarie_prive", "agent_public", "independant")
 AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
@@ -254,6 +254,20 @@ def age_depart(lg: list[dict], x: dict) -> None:
                     l["statut"], l["chomage_brut"] = "chomeur", are * salaire
                 else:
                     l["statut"] = "inactif"
+
+
+def depenses_bdf() -> dict:
+    """Dépense annuelle moyenne par ménage (€ de 2017) par poste et décile de niveau de vie : {(code, décile): €}
+    (Insee, Budget de famille 2017, TF106)."""
+    f = RACINE / "parametres" / "donnees" / "bdf2017_tf106.csv"
+    out = {}
+    for ligne in f.read_text(encoding="utf-8").splitlines()[1:]:
+        if not ligne.strip():
+            continue
+        code, dec, v = ligne.split(";")
+        if dec != "TOT":
+            out[(code, int(dec))] = float(v)
+    return out
 
 
 def emplois_par_scenario(pp, rel, t, bande, eta: dict, valeur) -> dict:
@@ -467,6 +481,9 @@ class Base:
                 rd = rd - np.bincount(s["menage"], weights=verse, minlength=s["n_menages"])
                 fonds += float((self.pp * verse).sum()) / 1e9
         for x in post:
+            if x["nom"] == "consommation":
+                rd = rd + self.gain_consommation(rd, uc, x)
+        for x in post:
             if x["nom"] == "garantie_niveau_vie":
                 # niveau de vie porté au seuil, ménages dont la personne de référence n'est pas étudiante (champ de
                 # l'Insee ; les jeunes ont leur propre mesure)
@@ -484,6 +501,24 @@ class Base:
         cout_pub = float((self.pp * cout_i * self.public).sum()) / 1e9
         return {"rd": rd, "uc": uc, "cout_m": cout_m, "cout": float((self.wm * cout_m).sum()) / 1e9, "cout_public": cout_pub,
                 "rd_total": float((self.wm * rd).sum()) / 1e9, "comp": comp, "fonds": fonds}
+
+    def gain_consommation(self, rd: np.ndarray, uc: np.ndarray, x: dict) -> np.ndarray:
+        """Roadmap 3.1 (22/11/2026) : gain (+) ou perte (−) de pouvoir d'achat par ménage (€ par an) d'une mesure sur
+        les prix de postes de consommation (TVA, accises, prix bloqués). La population n'a pas la consommation : le
+        montant vient du moteur (montant_moteur, à plein effet ; + = le solde s'améliore, les ménages perdent) et se
+        répartit selon la dépense moyenne des ménages de leur décile de niveau de vie pour ces postes (Insee, enquête
+        Budget de famille 2017, tableau TF106, parametres/donnees/bdf2017_tf106.csv). Postes : codes de la nomenclature
+        (COICOP de l'enquête), par exemple 0722 carburants, 045 électricité, gaz et combustibles, 0451 électricité,
+        011 alimentation. Montant donné directement par montant_md, ou lu dans le moteur (programme, mesure)."""
+        md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
+        dep = depenses_bdf()
+        nv = rd / np.maximum(uc, 1e-9)
+        ordre = np.argsort(nv)
+        cum = np.cumsum(self.wm[ordre]) / self.wm.sum()
+        dec = np.empty(len(nv), int)
+        dec[ordre] = np.minimum(10, 1 + (cum * 10).astype(int))
+        w = np.array([sum(dep[(c, int(d))] for c in x["postes"]) for d in dec])
+        return -md * 1e9 * w / float((self.wm * w).sum())
 
     def capitalisation(self, sim, x: dict) -> np.ndarray:
         """Part salariale versée au fonds par personne (€ par an) : les salariés et agents publics les plus jeunes en

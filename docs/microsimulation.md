@@ -528,3 +528,45 @@ synthétique.
   Six programmes atteignent le seuil de 80 %, contre deux avant la roadmap 3.3. Ce qui reste tient surtout à la
   consommation : TVA et carburants (3.1, données de l'enquête Budget de famille en attente).
 
+## Roadmap 3.1 : consommation par ménage (22/11/2026)
+
+- **Données :** Insee, enquête Budget de famille 2017. Dépense annuelle moyenne par ménage, par poste de
+  consommation et décile de niveau de vie (TF106, `parametres/donnees/bdf2017_tf106.csv`). Le tableau TF107 (même
+  dépense par quintile, propriétaires et locataires) est archivé, mais pas encore utilisé.
+- **Opération :** `formule: {nom: consommation, postes: [codes], programme, mesure}`
+  (`outils/openfisca_mesures.gain_consommation`).
+  - La population n'a pas la consommation. Le montant de la mesure vient du moteur, à plein effet, et se répartit
+    entre ménages selon la dépense de leur décile pour ces postes.
+  - La baisse de prix est entièrement répercutée, sans changement des quantités consommées.
+- **Codé, même règle pour tous :**
+
+| Mesure | Postes | Codes |
+|---|---|---|
+| RN-FIS-01, RN-ENE-03 | carburants et énergie du logement | 0722, 045 |
+| RN-FIS-02, PCF-FIS-06 | alimentation | 011 |
+| PCF-FIS-07, ZEM-FIS-01b, ART-ENE-02 | carburants | 0722 |
+| GLU-ENE-03 | électricité | 0451 |
+
+- **Ajout du 22/11 au chantier 3.3 :** LIS-RET-02 (âge de 65 ans), oubliée le 21/11.
+- **Couverture du budget « ménages »** (en %) :
+
+| Programme | Couverture |
+|---|---|
+| Bertrand | 100 |
+| Lisnard | 98 |
+| Roussel | 90 |
+| Attal | 87 |
+| Le Pen | 87 |
+| Zemmour | 87 |
+| Retailleau | 83 |
+| Mélenchon | 78 |
+| Philippe | 77 |
+| Glucksmann | 77 |
+| Arthaud | 74 |
+| Tondelier | 55 |
+
+  Huit programmes atteignent le seuil de 80 % (critère de la phase 3 : dix). Ce qui reste :
+  - patrimoine (3.2) : taxe Zucman, ISF, successions ;
+  - Tondelier : exonérations au-delà de 1,6 SMIC, cotisations vieillesse ;
+  - congés parentaux.
+

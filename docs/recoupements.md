@@ -113,11 +113,29 @@ du travail programme par programme.
 - Le choix entre « prix » et « salaires » est la décision G3 d'Adrien. Le réglage « salaires » rend l'ancienne
   convention.
 
-**1.1, répartition impôt par impôt** :
-- La répartition doit passer de la colonne « Ancien » de la v235 aux comptes de l'Insee de 2025 (tableaux 3.216 et
-  3.217 de « Dépenses et recettes des administrations publiques en 2025 », mai 2026).
-- **Bloqué :** les fichiers ne sont pas accessibles depuis l'environnement de travail. Repères 2025 vus en ligne :
-  TVA 208,8 Md€, impôt sur le revenu avant crédits d'impôt 103,6, IS avant crédits d'impôt 69,5.
+**1.1, répartition impôt par impôt** (22/11/2026, tableaux 3.216 et 3.217 de l'Insee fournis par Adrien) :
+- `statu_quo.structure_impots` est tirée des comptes de 2025 : prélèvements obligatoires 1 305,07 Md€, plus
+  52,41 Md€ de cotisations imputées. La correspondance ligne par ligne est dans la note du paramètre. L'ancienne clé
+  de la v235 est gardée dans `v_avant_1_1`.
+
+| Catégorie | v235 (2024) | Insee 2025 |
+|---|---|---|
+| TVA | 213,6 | 208,8 |
+| Accises et taxes sur produits (avec remises pharmaceutiques) | 103,8 | 123,0 |
+| IS (net des crédits, avec contributions sur les bénéfices) | 70,3 | 68,0 |
+| Impôts de production (D292 hors taxe foncière des ménages ; taxe sur les salaires, forfait social) | 75,3 | 71,3 |
+| Successions et donations | 20,8 | 21,1 |
+| Droits d'enregistrement | 14,7 | 20,2 |
+| Autres impôts | 16,7 | 5,6 |
+| Revenus des personnes (cotisations, CSG, CRDS, IR, autres D291) | 835,3 | 839,4 |
+
+- Les revenus des personnes restent répartis entre salaires, indépendants, retraités et capital selon les parts de
+  la v235. Les tableaux ne ventilent ni la CSG ni l'impôt sur le revenu par revenu. Contrôle d'OpenFisca : 516 Md€
+  sur les salaires du privé, contre 508,8.
+- **Effet :** déficit du statu quo en 2037 au prudent 7,95 → 7,93 % ; écarts des programmes au plus 0,012 point.
+- **Critère :** chaque grand impôt hors revenus des personnes est à 0,5 % près de l'Insee 2025 (test
+  `test_repartition_des_recettes_sur_l_insee_2025`). Pour la CSG et l'impôt sur le revenu, le critère ne peut pas
+  être vérifié tant qu'ils ne sont pas ventilés par revenu (il faudrait les comptes de la Sécurité sociale).
 - **Élasticités par impôt :** l'OCDE (2015) donne, pour la France, l'IS à 2,40 sur l'excédent d'exploitation et les
   impôts indirects à 0,91 sur la consommation. Ce sont des élasticités au cycle. À long terme, un impôt
   proportionnel suit son assiette, ce que fait déjà le moteur. Seul l'impôt sur le revenu, progressif, s'en écarte

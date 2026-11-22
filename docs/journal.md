@@ -2138,4 +2138,10 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   (calage sur Mésange), TVA rejointe à 10 ans. Prestations : poids des transferts ciblés. À ajouter à la
   régénération : `python -m outils.variantes_frbdf`. Décision possible G9 (fourchette Mésange – FR-BDF dans
   l'incertitude).
+- **Roadmap 1.1, répartition des recettes** : `statu_quo.structure_impots` tirée des tableaux 3.216 et 3.217 de
+  l'Insee (2025, fournis par Adrien) ; écarts des programmes ≤ 0,012 point.
+- **Roadmap 3.1** : consommation par ménage (Budget de famille 2017, TF106) ; huit mesures sur les prix codées ;
+  LIS-RET-02 ajoutée (3.3). Couverture : huit programmes au-dessus de 80 %.
+- **Roadmap 6.1, premier pas** : `parametres/commun/lois.yaml` et `outils/poids_incertitude.py` (classement
+  partiel, 37 cibles sur 78).
 

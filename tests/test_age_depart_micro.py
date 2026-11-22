@@ -57,3 +57,14 @@ def test_assurance_chomage_au_montant_du_moteur(pop):
     assert all(l2["chomage_brut"] == l1["chomage_brut"] for l1, l2 in zip(pop, lg) if l1["age"] >= 50)
     lg = Base.population(b, [{"population": {"assurance_chomage": {"montant_md": -6.0}}}])
     assert sum(l["poids"] * l["chomage_brut"] for l in lg) / 1e9 == pytest.approx(m0 + 6.0, abs=0.01)
+
+
+def test_depenses_budget_de_famille():
+    """Roadmap 3.1 : dépenses par décile de l'enquête Budget de famille 2017 (TF106) lues ; carburants et énergie
+    croissent avec le niveau de vie moins vite que la consommation totale (part plus forte chez les modestes)."""
+    from outils.openfisca_mesures import depenses_bdf
+    d = depenses_bdf()
+    assert d[("CTOTALE", 1)] == 16123 and d[("CTOTALE", 10)] == 48353
+    for code in ("0722", "045"):
+        assert d[(code, 10)] > d[(code, 1)]
+        assert d[(code, 1)] / d[("CTOTALE", 1)] > d[(code, 10)] / d[("CTOTALE", 10)]

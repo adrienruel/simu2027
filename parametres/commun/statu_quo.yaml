@@ -65,23 +65,23 @@ statu_quo:
     note: "Recettes hors impôts et cotisations (ventes, tarifs, revenus de la propriété, transferts). Suivent le PIB. Le reste des recettes de départ (51,9 − 6,3 = 45,6 % du PIB) est réparti entre impôts selon statu_quo.structure_impots."
   structure_impots:
     valeur:
-      salaires_prive: 506.24
-      salaires_public: 202.88
-      independants: 38.0
-      retraites: 50.0
-      tva: 213.57
-      accises_et_taxes_sur_produits: 103.83
-      impot_sur_les_societes: 70.3
-      impots_de_production: 75.31
-      capital_dividendes_ifi: 38.13
-      successions: 20.82
-      droits_de_mutation: 14.74
-      taxes_locales_et_affectees: 16.70
+      salaires_prive: 508.77
+      salaires_public: 203.9
+      independants: 38.19
+      retraites: 50.25
+      tva: 208.82
+      accises_et_taxes_sur_produits: 123.02
+      impot_sur_les_societes: 68.01
+      impots_de_production: 71.31
+      capital_dividendes_ifi: 38.32
+      successions: 21.05
+      droits_de_mutation: 20.21
+      taxes_locales_et_affectees: 5.64
+    v_avant_1_1: {salaires_prive: 506.24, salaires_public: 202.88, independants: 38.0, retraites: 50.0, tva: 213.57, accises_et_taxes_sur_produits: 103.83, impot_sur_les_societes: 70.3, impots_de_production: 75.31, capital_dividendes_ifi: 38.13, successions: 20.82, droits_de_mutation: 14.74, taxes_locales_et_affectees: 16.70}
     unite: sans_unite
     statut: SOURCE
-    source: "Classeur v235, feuille Total, colonne « Ancien » (Md€ de 2024), reconstitution du système actuel impôt par impôt ; feuille « Contrôle système actuel » : 1 318,9 Md€ contre 1 322,5 Md€ d'impôts et cotisations des administrations à l'Insee pour 2024 (−0,27 %)"
-    note: "Sert de clé de répartition (parts), le niveau étant celui du PLF 2027. Salaires du privé et du public, indépendants : cotisations, CSG, CRDS et impôt sur le revenu ; retraités : CSG, CASA et impôt sur le revenu des pensions (12 % des pensions) ; la taxe foncière des ménages est comptée avec leurs revenus. Moteur de chaque impôt : masse salariale (salaires, indépendants), pensions (retraités), PIB (consommation, bénéfices, patrimoine), PIB × décès (successions)."
-
+    source: "Insee, comptes nationaux base 2020 (mai 2026), tableaux 3.217 « Principaux impôts par catégorie » et 3.216 « Prélèvements obligatoires par sous-secteurs », année 2025 (fichiers fournis par Adrien le 22/11/2026) : prélèvements obligatoires 1 305,07 Md€, plus 52,41 Md€ de cotisations sociales imputées, soit 1 357,48 Md€"
+    note: "Roadmap 1.1 (22/11/2026). Sert de clé de répartition (parts), le niveau étant celui du PLF 2027. Lignes de l'Insee 2025 : tva = D211 ; accises_et_taxes_sur_produits = D212 + D214 hors droits d'enregistrement, plus les remises pharmaceutiques ; impot_sur_les_societes = IS avant crédits − crédits d'IS + contribution sociale sur les bénéfices + contribution exceptionnelle des grandes entreprises ; impots_de_production = D292 hors taxe foncière des ménages, plus la taxe sur les salaires, le forfait social et la contribution sur les stock-options (D291) ; successions = droits de mutation à titre gratuit ; droits_de_mutation = droits d'enregistrement ; taxes_locales_et_affectees = autres D59 et D91, et le reste de D51 non détaillé (4,05). Les revenus des personnes (cotisations effectives et imputées, autres impôts sur les salaires de D291 — versement mobilité, formation professionnelle et apprentissage, FNAL, CNSA, effort de construction, AGS — comptés par OpenFisca dans le coût du travail, CSG, CRDS, impôt sur le revenu net des crédits, prélèvement de solidarité, prélèvements sur les revenus de capitaux, IFI, taxe foncière des ménages, taxe d'habitation, contribution sur les hauts revenus, moins les prélèvements non recouvrés : 839,43 Md€) sont répartis entre salaires du privé et du public, indépendants, retraités et capital selon les parts de la reconstitution de la v235 (v_avant_1_1), faute d'une ventilation de la CSG et de l'impôt sur le revenu par revenu dans ces tableaux. Contrôle : OpenFisca donne 516 Md€ de prélèvements sur les salaires du privé (personne seule, euros de 2026), contre 508,77 ici (2025)."
   baremes_retraites:
     valeur: prix
     unite: sans_unite

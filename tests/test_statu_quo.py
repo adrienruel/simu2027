@@ -251,3 +251,15 @@ def test_derive_de_l_impot_sur_le_revenu_au_bareme_sur_les_prix():
     q = p.avec({"statu_quo.baremes_salaires": "salaires"})
     assert sq.derive_ir_salaires(q, "median")[2073] == {"prive": 1.0, "public": 1.0}
     assert sq.recettes(p, "median")[2073] > sq.recettes(q, "median")[2073]
+
+
+def test_repartition_des_recettes_sur_l_insee_2025():
+    """Roadmap 1.1 : la clé de répartition des recettes retrouve l'Insee 2025 (tableau 3.217) : total =
+    prélèvements obligatoires + cotisations imputées, et chaque grand impôt hors revenus des personnes à 0,5 % près."""
+    from moteur.parametres import Parametres
+    st = Parametres().val("statu_quo.structure_impots")
+    assert sum(st.values()) == pytest.approx(1305.07 + 52.41, rel=0.0005)
+    insee = {"tva": 208.82, "impot_sur_les_societes": 68.01, "successions": 21.05, "impots_de_production": 71.31,
+             "droits_de_mutation": 20.21}
+    for k, v in insee.items():
+        assert st[k] == pytest.approx(v, rel=0.005), k

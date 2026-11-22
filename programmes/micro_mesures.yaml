@@ -10,6 +10,8 @@
 #   formule   : {nom, ...}                           règle nouvelle écrite dans outils/openfisca_mesures.py
 #   population: {assurance_chomage: {programme, mesure, age_max?, seuil_mensuel?}}  allocations de chômage changées
 #               du montant du moteur, au prorata de l'allocation des chômeurs concernés (3.4)
+#   formule   : {nom: consommation, postes: [codes], programme, mesure}  prix de postes de consommation (TVA, accises,
+#               prix bloqués) : montant du moteur réparti selon la dépense du décile (Budget de famille 2017, TF106, 3.1)
 #   population: {pension_minimum: {mensuel_brut}}  pensions des carrières complètes portées à un minimum (3.3)
 #   population: {age_depart: {age_actuel, age_cible}}  âge de départ changé (roadmap 3.3, openfisca_mesures.age_depart) :
 #               profil de départ de la population de 2026 décalé de l'écart entre l'âge du programme et celui du
@@ -85,6 +87,9 @@ tondelier:
     note: "Pensions de plus de 2 000 € brut revalorisées 0,5 point sous l'inflation de 2028 à 2032 : − 2,5 % de niveau, qui s'éteint ensuite avec ces retraités."
 
 lisnard:
+  LIS-RET-02:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
+    note: "Roadmap 3.3 (21/11/2026, ajouté le 22/11) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart), même règle que BER-RET-01 et PHI-RET-01."
   LIS-ECO-02:
     operations: [{variable: {nom: cotisations_salariales, facteur: 0.122}}]
     note: "Roadmap 3.5 (22/11/2026) : cotisations salariales réduites de 93,6 Md€ (privé 72,1, agents publics 21,5 : montants bruts du moteur en 2032) sur ≈ 106,6 Md€ de cotisations salariales de la population (OpenFisca 2026), au prorata de chaque salarié. Facteur 1 − 93,6 / 106,6 = 0,122."
@@ -110,6 +115,12 @@ lisnard:
     note: "Pensions de plus de 2 000 € brut non revalorisées de 2028 à 2032 : (1 / 1,016)^5 = 0,924 de niveau (inflation de 2028 du moteur), qui s'éteint ensuite avec ces retraités."
 
 roussel:
+  PCF-FIS-06:
+    operations: [{formule: {nom: consommation, postes: ["011"], programme: roussel, mesure: PCF-FIS-06}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'alimentation (Insee, Budget de famille 2017, TF106 : 011). Répercussion entière sur les prix ; pas de changement de quantités."
+  PCF-FIS-07:
+    operations: [{formule: {nom: consommation, postes: ["0722"], programme: roussel, mesure: PCF-FIS-07}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants (Insee, Budget de famille 2017, TF106 : 0722). Répercussion entière sur les prix ; pas de changement de quantités."
   PCF-RET-01:
     operations: [{population: {age_depart: {age_actuel: 64, age_cible: 60}}}]
     note: "Roadmap 3.3 (21/11/2026) : âge de départ de 60 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
@@ -194,6 +205,15 @@ melenchon:
     note: "ASPA portée au seuil de pauvreté retenu par le programme (1 337 € par mois, contre 1 043,6 € en 2026), plafond de ressources relevé d'autant, couples dans la même proportion ; recours complet (le non-recours à l'ASPA, ≈ 50 %, n'est pas modélisé)."
 
 le_pen:
+  RN-FIS-02:
+    operations: [{formule: {nom: consommation, postes: ["011"], programme: le_pen, mesure: RN-FIS-02}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'alimentation (Insee, Budget de famille 2017, TF106 : 011). Répercussion entière sur les prix ; pas de changement de quantités."
+  RN-ENE-03:
+    operations: [{formule: {nom: consommation, postes: ["0722", "045"], programme: le_pen, mesure: RN-ENE-03}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants et l'électricité, le gaz et les combustibles (Insee, Budget de famille 2017, TF106 : 0722, 045). Répercussion entière sur les prix ; pas de changement de quantités."
+  RN-FIS-01:
+    operations: [{formule: {nom: consommation, postes: ["0722", "045"], programme: le_pen, mesure: RN-FIS-01}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants et l'électricité, le gaz et les combustibles (Insee, Budget de famille 2017, TF106 : 0722, 045). Répercussion entière sur les prix ; pas de changement de quantités."
   RN-RET-01:
     operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
     note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
@@ -227,6 +247,9 @@ philippe:
     note: "Durée du RSA limitée, sans durée donnée : même lecture que Zemmour (trois ans), mêmes exceptions."
 
 arthaud:
+  ART-ENE-02:
+    operations: [{formule: {nom: consommation, postes: ["0722"], programme: arthaud, mesure: ART-ENE-02}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants (Insee, Budget de famille 2017, TF106 : 0722). Répercussion entière sur les prix ; pas de changement de quantités."
   ART-FAM-01:
     operations:
       - {variable: {nom: af, facteur: 1.012}}
@@ -259,6 +282,9 @@ retailleau:
     note: "Cinq ans de résidence légale pour les prestations non contributives : familles étrangères hors UE arrivées depuis moins de cinq ans."
 
 zemmour:
+  ZEM-FIS-01b:
+    operations: [{formule: {nom: consommation, postes: ["0722"], programme: zemmour, mesure: ZEM-FIS-01b}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants (Insee, Budget de famille 2017, TF106 : 0722). Répercussion entière sur les prix ; pas de changement de quantités."
   ZEM-RET-01:
     operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
@@ -275,6 +301,9 @@ zemmour:
     note: "CSG supprimée sur les revenus d'activité (salariés et indépendants)."
 
 glucksmann:
+  GLU-ENE-03:
+    operations: [{formule: {nom: consommation, postes: ["0451"], programme: glucksmann, mesure: GLU-ENE-03}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'électricité (Insee, Budget de famille 2017, TF106 : 0451). Répercussion entière sur les prix ; pas de changement de quantités."
   GLU-EMP-02:
     operations: [{population: {assurance_chomage: {programme: glucksmann, mesure: GLU-EMP-02}}}]
     note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
