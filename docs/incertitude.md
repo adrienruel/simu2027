@@ -116,3 +116,34 @@ pèse le plus pour les programmes à fort déficit (Mélenchon, Roussel) ; l'él
 - Calcul : ≈ 6 s par tirage pour les quatorze trajectoires sur deux processus (1 000 tirages ≈ 1 h 40) ;
   les tirages sont écrits au fil de l'eau (`sorties/incertitude_tirages_*.jsonl`) et le calcul reprend après une
   interruption.
+
+## Roadmap 6.1 : lois sourcées, premier pas (22/11/2026)
+
+- **Mécanisme :** `parametres/commun/lois.yaml` reçoit, pour une cible du Monte Carlo, ses centiles 10 et 90 tirés
+  de la littérature, avec la source (`moteur/incertitude.lois`). Ces valeurs remplacent les colonnes de scénario
+  pour le tirage seulement ; les scénarios publiés ne changent pas. Aucune loi n'est encore écrite.
+- **Classement des poids :** `outils/poids_incertitude.py`. On fait varier chaque paramètre seul, du centile 10 au
+  centile 90, et on mesure le demi-écart du déficit 2037 du statu quo et de l'écart moyen des programmes. Le calcul
+  a été coupé par la mémoire après 37 cibles sur 78. Il faut le relancer seul (≈ 1 h), sans autre calcul à côté.
+- **Premières cibles** (points de PIB en 2037, médian) :
+
+| Cible | Déficit du statu quo | Écart moyen des programmes | Écart maximal |
+|---|---|---|---|
+| `macro.ia_productivite` | 0,59 | 0,04 | 0,13 |
+| `macro.tendance` | 0,34 | 0,02 | 0,11 |
+| `macro.reformes_structurelles/poids` | 0 | 0,17 | 0,62 |
+| `macro.prime_dette` | 0,10 | 0,02 | 0,10 |
+| `emploi_public.eviction_privee` | 0 | 0,07 | 0,14 |
+| `inflation.long_terme` | 0,07 | 0 | 0 |
+| `macro.multiplicateur` | 0 | 0,04 | 0,12 |
+| `cohortes.effet_composition_salaires` | 0,02 | 0,01 | 0,04 |
+| `offre.travail_part_pib` | 0 | 0,02 | 0,08 |
+| `offre.travail_heures` | 0 | 0,02 | 0,11 |
+
+- **À arbitrer (Adrien) avant d'écrire les lois :**
+  - Le centre du Monte Carlo est la colonne médiane. Pour la tendance de productivité, elle vaut 1,0 %, comme
+    l'optimiste, alors que la référence du COR est 0,7 %. Une loi sourcée sur le COR (0,4 / 0,7 / 1,0) déplacerait le
+    centre.
+  - Pour l'IA, la fourchette d'Aghion et Bunel (0,07 à 1,24 point par an) est celle des estimations publiées, pas
+    une loi de probabilité.
+

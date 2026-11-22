@@ -163,6 +163,41 @@ def tirer(p: Parametres, graine: int, i: int, rho: float, liste=None, miroir: bo
     return tirer_z(p, lambda nom: z_tirage(graine, i, rho, nom), liste, miroir)
 
 
+LOIS_FICHIER = Path(__file__).resolve().parent.parent / "parametres" / "commun" / "lois.yaml"
+_LOIS: dict | None = None
+
+
+def lois() -> dict:
+    """Roadmap 6.1 (22/11/2026) : lois sourcées (parametres/commun/lois.yaml), par nom de cible (« clé » ou
+    « clé/sous-champ »). Chaque loi donne les valeurs aux centiles 10 et 90 du côté défavorable (« prudent ») et
+    favorable (« optimiste ») tirées de la littérature, et sa source ; le centre reste la colonne médiane (sauf
+    « median » écrit). Elle remplace, pour le tirage seulement, les colonnes de scénario du paramètre."""
+    global _LOIS
+    if _LOIS is None:
+        import yaml
+        _LOIS = {}
+        if LOIS_FICHIER.exists():
+            for nom, x in (yaml.safe_load(LOIS_FICHIER.read_text(encoding="utf-8")) or {}).items():
+                if not x.get("source") or "prudent" not in x or "optimiste" not in x:
+                    raise ValueError(f"loi {nom} : prudent, optimiste et source obligatoires")
+                _LOIS[nom] = x
+    return _LOIS
+
+
+def _avec_loi(d: dict, nom: str) -> dict:
+    """Jeu de scénarios d'une cible, ses ancres remplacées par sa loi sourcée s'il y en a une."""
+    x = lois().get(nom)
+    if x is None:
+        return d
+    d = dict(d)
+    for k in ("prudent", "optimiste", "median", "crise"):
+        if k in x:
+            d[k] = x[k]
+    if "crise" in d and "crise" not in x:
+        del d["crise"]  # la borne de crise du scénario ne vaut plus pour une loi d'une autre source
+    return d
+
+
 def tirer_z(p: Parametres, z_de, liste=None, miroir: bool = True) -> Parametres:
     """Comme tirer, avec z_de(nom) → z donné (tests : tous les paramètres au même point)."""
     c = p.avec()
@@ -172,13 +207,17 @@ def tirer_z(p: Parametres, z_de, liste=None, miroir: bool = True) -> Parametres:
         par = c._p[cle]
         mir = miroir and cle in MIROIR_CLES
         if not chemin:
-            c._p[cle] = dataclasses.replace(par, valeur=_tirer_jeu(par.valeur, z, mir))
+            tire = _tirer_jeu(_avec_loi(par.valeur, nom), z, mir)
+            c._p[cle] = dataclasses.replace(par, valeur={**par.valeur, "median": tire["median"],
+                                                         **({"prudent": tire["prudent"]} if mir and "prudent" in par.valeur else {})})
             continue
         v = copy.deepcopy(par.valeur)
         cible = v
         for k in chemin[:-1]:
             cible = cible[k]
-        cible[chemin[-1]] = _tirer_jeu(cible[chemin[-1]], z, mir)
+        tire = _tirer_jeu(_avec_loi(cible[chemin[-1]], nom), z, mir)
+        orig = cible[chemin[-1]]
+        cible[chemin[-1]] = {**orig, "median": tire["median"], **({"prudent": tire["prudent"]} if mir and "prudent" in orig else {})}
         c._p[cle] = dataclasses.replace(par, valeur=v)
     return c
 

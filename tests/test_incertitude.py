@@ -88,3 +88,17 @@ def test_rho1_dixieme_centile_retrouve_le_prudent():
             prog.pt = inc.tirer_z(propres[nom], z, listes[nom])
         t = noyau.simuler(p, prog, scenarios=("median",), contrefactuel=False)["median"][2037]["deficit"]
         assert abs((t - t_sq) - (pub - pub_sq)) < 0.9, nom
+
+
+def test_loi_sourcee_remplace_les_colonnes_de_scenario(monkeypatch):
+    """Roadmap 6.1 : une loi de lois.yaml remplace les ancres de scénario pour le tirage seulement."""
+    from moteur import incertitude as inc
+    from moteur.parametres import Parametres
+    p = Parametres()
+    cle = "macro.ia_productivite"
+    monkeypatch.setattr(inc, "_LOIS", {cle: {"prudent": 0.0, "optimiste": 0.01, "source": "essai"}})
+    q = inc.tirer_z(p, lambda n: inc.Z90, [(cle, ())])
+    assert q.val(cle, "median") == pytest.approx(0.01)
+    assert q.val(cle, "optimiste") == p.val(cle, "optimiste")  # colonnes publiées inchangées
+    q = inc.tirer_z(p, lambda n: -inc.Z90, [(cle, ())])
+    assert q.val(cle, "median") == pytest.approx(0.0)

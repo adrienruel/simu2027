@@ -1,0 +1,8 @@
+# Roadmap 6.1 (22/11/2026) : lois sourcées des paramètres incertains, pour le Monte Carlo (moteur/incertitude.lois).
+# Clé : nom de la cible (« clé » ou « clé/sous-champ », comme moteur.incertitude.cibles). Valeurs aux centiles 10
+# (« prudent », côté défavorable) et 90 (« optimiste ») tirées de la littérature, et leur source ; le centre reste la
+# colonne médiane du paramètre, sauf « median » écrit. Une loi ne change que les tirages, pas les scénarios publiés.
+# Classement des paramètres par poids : outils/poids_incertitude.py, docs/incertitude.md (section « Roadmap 6.1 »).
+# Aucune loi n'est encore écrite : les premières (IA, tendance de productivité, poids des réformes de structure,
+# prime de dette) attendent l'arbitrage d'Adrien (centre du Monte Carlo).
+{}
