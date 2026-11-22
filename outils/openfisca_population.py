@@ -197,7 +197,12 @@ def simulation(lignes: list[dict], annee: int = 2026, tbs=None):
         sim.set_input("traitement_indiciaire_brut", y, tib)
         sim.set_input("primes_fonction_publique", y, np.where(public, brut - tib, 0.0))
         sim.set_input("categorie_salarie", y, np.where(public, "public_titulaire_etat", "prive_non_cadre"))
-        sim.set_input("ebic_impv", y, np.where(np.isin(groupe, ["classiques", "agriculteurs"]), np.maximum(rev_ind, 0), 0.0))
+        # roadmap 4.4 (22/11/2026) : bénéfice réel (avec centre de gestion agréé), pas la case 5TA des
+        # auto-entrepreneurs au versement libératoire, qui sortait ces revenus du barème de l'IR et de la CSG ;
+        # catégorie « commerçant » (artisans et commerçants : mêmes cotisations) pour la CSG des indépendants
+        sim.set_input("abic_impn", y, np.where(groupe == "classiques", np.maximum(rev_ind, 0), 0.0))
+        sim.set_input("arag_impg", y, np.where(groupe == "agriculteurs", np.maximum(rev_ind, 0), 0.0))
+        sim.set_input("categorie_non_salarie", y, np.where(groupe == "classiques", "commercant", "non_pertinent"))
         sim.set_input("mbnc_impo", y, np.where(groupe == "micro", rev_ind / 0.66, 0.0))
         sim.set_input("chomage_brut", y, col("chomage_brut"))
         sim.set_input("retraite_brute", y, col("pension_brute"))
@@ -214,6 +219,11 @@ def simulation(lignes: list[dict], annee: int = 2026, tbs=None):
         sim.set_input("statut_occupation_logement", y, occ)
         sim.set_input("loyer", y, col("loyer_mensuel")[pm] * 12)
         sim.set_input("zone_apl", y, col("zone")[pm])
+    # 22/11/2026 : l'ordre des calculs change le résultat. Le taux de CSG des pensions et du chômage dépend du revenu
+    # fiscal de référence de l'année N-2, qui dépend de l'impôt : demandé en premier, l'impôt sur le revenu tombe
+    # dans la boucle et compte les pensions sans leur CSG déductible (pensions imposables 403 Md€ au lieu de 384,
+    # impôt +4,2 Md€). Le revenu disponible calculé d'abord fixe les taux dans le bon ordre, pour tous les appels.
+    sim.calculate_add("revenu_disponible", str(annee))
     return sim, s
 
 
@@ -253,10 +263,30 @@ def recourt(montant, poids, part, graine=0, forme="racine", gamma=0.5):
     return (u < proba_recours(montant, poids, part, gamma)).astype(float)
 
 
-def indicateurs(lignes: list[dict], annee: int = 2026) -> dict[str, np.ndarray]:
+def niveaux_de_vie(sim, s, lignes: list[dict], annee: int = 2026) -> tuple[np.ndarray, np.ndarray]:
+    """Niveau de vie de chaque personne (revenu disponible du ménage / unités de consommation de l'Insee : 1, plus
+    0,5 par personne de 14 ans ou plus en plus, plus 0,3 par enfant de moins de 14 ans) et champ de l'ERFS (ménage
+    dont la personne de référence n'est pas étudiante)."""
+    rd = sim.calculate_add("revenu_disponible", str(annee))
+    men = np.asarray(s["menage"])
+    nm = s["n_menages"]
+    age = np.array([int(l["age"]) for l in lignes])
+    adultes = np.bincount(men, weights=(age >= 14).astype(float), minlength=nm)
+    enfants = np.bincount(men, weights=(age < 14).astype(float), minlength=nm)
+    uc = 1 + 0.5 * np.maximum(adultes - 1, 0) + 0.3 * enfants
+    etu_men = np.zeros(nm, bool)
+    for j, l in enumerate(lignes):
+        if l["role"] == "ref" and l["statut"] == "etudiant":
+            etu_men[men[j]] = True
+    return (rd / uc)[men], ~etu_men[men]
+
+
+def indicateurs(lignes: list[dict], annee: int = 2026, seuils: dict | None = None) -> dict[str, np.ndarray]:
     """Nombre attendu de familles bénéficiaires par unité de tirage, pour le calage sur les effectifs publiés
     (microsimulation.beneficiaires) : RSA et prime d'activité après recours (probabilité attendue, comme le
-    tirage de `recourt`), aides au logement et complément familial (recours complet)."""
+    tirage de `recourt`), aides au logement et complément familial (recours complet). Avec `seuils` (roadmap 3.6) :
+    aussi, par unité, les personnes du champ de l'ERFS (« champ_erfs ») et celles sous chaque seuil de niveau de
+    vie (« sous_<nom> »)."""
     sim, s = simulation(lignes, annee)
     an = str(annee)
     poids_p = np.array([l["poids"] for l in lignes])
@@ -286,6 +316,15 @@ def indicateurs(lignes: list[dict], annee: int = 2026) -> dict[str, np.ndarray]:
     for nom in ("rsa_avec_prime", "rsa_seul", "rsa_monoparentale", "rsa_couple_sans_enfant", "rsa_couple_avec_enfants",
                 "prime_activite", "aides_logement", "complement_familial"):
         out[nom] = np.bincount(fam_unite, weights=ind[nom], minlength=n_u)
+    if seuils:
+        nv, champ = niveaux_de_vie(sim, s, lignes, annee)
+        out["champ_erfs"] = np.bincount(unite_p, weights=champ.astype(float), minlength=n_u)
+        for k, v in seuils.items():
+            out["sous_" + k] = np.bincount(unite_p, weights=(champ & (nv < v)).astype(float), minlength=n_u)
+        foy_unite = np.zeros(s["n_foyers"], int)
+        foy_unite[s["foyer"]] = unite_p
+        ir = -sim.calculate_add("impot_revenu_restant_a_payer", an)
+        out["impot_revenu"] = np.bincount(foy_unite, weights=ir, minlength=n_u)
     return out
 
 

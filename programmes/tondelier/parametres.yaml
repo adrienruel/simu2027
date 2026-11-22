@@ -187,11 +187,11 @@ tondelier_mesures:
     statut: HYPOTHESE
   capital_csg_pfu:
     valeur: {id: REC-20/21, instrument: capital_menages, libelle: "Capital : CSG +3 points et flat tax +3 points (cumulées)", poste: recettes, moteur: capital, debut: 2028, plein: 2028,
-             montant: {crise: 3.0, prudent: 3.5, median: 4.5, optimiste: 5.5}}
+             pfu: {points: 3, points_csg: 3}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    source: "Encadrement : CSG sur les revenus du patrimoine et de placement ≈ 1,5 Md€ par point ; part impôt sur le revenu du PFU sur dividendes et intérêts ≈ 0,6 Md€ par point ; baisse des dividendes versés (réformes de 2013 et 2018, IPP) : prudent ≈ 55 % du statique"
+    source: "Roadmap 4.4 (22/11/2026) : montant calculé par la règle commune (moteur/capital_dirigeants.recette_pfu : CSG sur les revenus du patrimoine ≈ 1,5 Md€ par point, dividendes et intérêts, réponse des dividendes au taux net) ; avant, prudent ≈ 55 % du statique"
     note: "Arbitrage : les deux hausses de 3 points s'ajoutent (lecture littérale : deux mesures distinctes, p. 68)."
   ttf:
     valeur: {id: REC-23, instrument: capital_menages, libelle: "Taxe sur les transactions financières à 0,7 %", poste: recettes, moteur: pib, debut: 2028, plein: 2028,

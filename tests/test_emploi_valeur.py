@@ -57,3 +57,21 @@ def test_impots_sur_la_marge_d_un_emploi():
     assert all(v == 0 for v in ev.excedent(P, "prudent", [], "moyen", 1000.0).values())
     hausse_is = Mesure("Essai", "recettes", {t: 20.0 for t in ANNEES}, instrument="capital_entreprises")
     assert ev.excedent(P, "prudent", [hausse_is], "moyen", va)[2037] > e[2037]
+
+
+def test_valeur_d_un_emploi_selon_son_salaire():
+    """Roadmap 2.2 : un emploi au SMIC rapporte moins au solde et produit moins qu'un emploi à 2 SMIC ; plus de
+    valeur unique de 35 000 € dans programme_commun ; un canal déclare son salaire par « nom@niveau »."""
+    from pathlib import Path
+    from moteur.programme_simple import ProgrammeSimple
+    assert ProgrammeSimple.valeur_emploi_cellule(P, 1.0) < ProgrammeSimple.valeur_emploi_cellule(P, 2.0)
+    for s in ("prudent", "median"):
+        assert ev.valeur_ajoutee(P, s, 1.0) < ev.valeur_ajoutee(P, s, 2.0)
+    assert ev.valeur_ajoutee(P, "prudent", 1.3) < ev.valeur_ajoutee(P, "optimiste", 1.3)
+    assert ev.valeur_ajoutee(P, "prudent", 1.3) == pytest.approx(ev.cellule(P, 1.3)["cout"])
+    texte = (Path(__file__).parents[1] / "parametres" / "commun" / "economie.yaml").read_text(encoding="utf-8")
+    commun = texte.split("programme_commun:", 1)[1]
+    assert "valeur: 35000" not in commun
+    assert ev.niveau_canal("Assurance chômage : chômeurs en plus@1.0", 1.3) == ("Assurance chômage : chômeurs en plus", 1.0)
+    assert ev.niveau_canal("Embauches@moyen", 1.3)[1] == "moyen"
+    assert ev.niveau_canal("Embauches", 1.3)[1] == 1.3

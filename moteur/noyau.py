@@ -262,6 +262,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     ch_dep = ctx.get("chomeurs_depenses") if p.val("emploi.depenses_chomage_programme") else None
     if ch_dep is not None:
         alloc_ch, part_ac = p.val("emploi.allocation_chomeur_evitee"), p.val("emploi.part_allocation_assurance_chomage")
+        part_al = p.val("emploi.part_allocation_logement")
         w_ch = sq.salaires(p, s)
         gen = ctx.get("generosite_chomage") or {}
         ppa_t = ppa_par_emploi(p, s) if p.val("emploi.prime_activite_emplois") else None
@@ -330,12 +331,15 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
                 d_ch -= dy_r / y[t] * sq._v(p, "macro.emplois_par_point_pib", s) * e[t]["emploi"]
             k_ac, k_pa = gen.get(t, (1.0, 1.0))
             base = d_ch * alloc_ch * w_ch[t] / w_ch[2029] / 1e9
-            d_ac, d_pa = part_ac * base * k_ac, (1 - part_ac) * base * k_pa
+            # roadmap 2.4 (22/11/2026) : assurance chômage, aides au logement et RSA évités, parts de la micro
+            d_ac, d_al = part_ac * base * k_ac, part_al * base
+            d_pa = (1 - part_ac - part_al) * base * k_pa
             # roadmap 5.5 : un emploi en plus (un chômeur en moins) ouvre la prime d'activité
             if ppa_t is not None:
                 d_pa -= d_ch * ppa_t[t] * k_pa / 1e9
-            dep_chom = d_ac + d_pa
+            dep_chom = d_ac + d_pa + d_al
             bl["chomage"] = bl.get("chomage", 0.0) + d_ac
+            bl["logement"] = bl.get("logement", 0.0) + d_al
             bl["pauvrete"] = bl.get("pauvrete", 0.0) + d_pa
         # dette de fin d'année précédente sur le PIB de cette année-là (dette/PIB publiée) ; pour 2029, PIB du statu
         # quo, comme la référence
@@ -452,7 +456,9 @@ def _balance(p: Parametres, s: str, y_t: float, prix: float, t: int) -> float:
 
 def ppa_par_emploi(p: Parametres, s: str) -> dict[int, float]:
     """Prime d'activité d'un emploi en plus (€ par an, roadmap 5.5) : table OpenFisca 2026 d'une personne seule au
-    coût d'un emploi créé (emploi.cout_emploi_cree_smic × coût du SMIC), indexée comme la prime du statu quo."""
+    coût d'un emploi créé (emploi.cout_emploi_cree_smic × coût du SMIC), multipliée par le rapport de la famille des
+    chômeurs à la personne seule (emploi.prime_activite_familles, outils/ppa_emplois.py, roadmap 2.4), indexée comme
+    la prime du statu quo."""
     from . import statu_quo as sq
     cache = p.__dict__.setdefault("_cache", {})
     if ("ppa_emploi", s) in cache:
@@ -460,7 +466,8 @@ def ppa_par_emploi(p: Parametres, s: str) -> dict[int, float]:
     from .systeme_actuel import _interp, _table_openfisca
     T = _table_openfisca()
     c = _interp(1823.03 * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
-    v0 = _interp(c, T["cout_du_travail"], T["ppa"])
+    # roadmap 2.4 : prime de la famille de qui prend l'emploi, rapportée à celle d'une personne seule
+    v0 = _interp(c, T["cout_du_travail"], T["ppa"]) * p.val("emploi.prime_activite_familles")
     w = sq.salaires(p, s)
     r = sq.revalorisation(p, "prime_activite")
     pa = sq.prime_activite_relative(p, s) if r < 1 else {t: 1.0 for t in ANNEES}

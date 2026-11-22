@@ -31,10 +31,13 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     # 18/11/2026, roadmap 5.4 à 5.6 : générosité des allocations, prime d'activité des emplois, retour de l'incidence
     # demographie.ecole_cohortes et taux_emploi_tendance (19/11/2026, phase P) : options de modèle communes
     # demographie.conge_part_soutien (20/11/2026, phase Q) : règle commune du canal des naissances (congés indemnisés)
+    # roadmap 4.4 (22/11/2026) : écarts de prélèvement des canaux communs du capital et des entrepreneurs individuels
     assert decisions == ["calendrier.inflation", "demographie.conge_part_soutien", "demographie.ecole_cohortes",
                          "demographie.scenario_fecondite",
-                         "demographie.taux_emploi_tendance", "emploi.depenses_chomage_programme",
-                         "emploi.generosite_programme", "emploi.prelevements_programme", "emploi.prime_activite_emplois", "entreprises.incidence_retour_budget",
+                         "demographie.taux_emploi_tendance", "dividendes.ecart_prelevement_salaire_dividende",
+                         "emploi.depenses_chomage_programme",
+                         "emploi.generosite_programme", "emploi.prelevements_programme", "emploi.prime_activite_emplois", "entreprises.ecart_prelevement_ei_is",
+                         "entreprises.incidence_retour_budget",
                          "incertitude.correlation",
                          "lectures_communes.capitalisation", "macro.taux_apparent_refinancement",
                          "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi",

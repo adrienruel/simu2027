@@ -20,16 +20,18 @@ def test_a1_dividende_du_programme_retrouve_le_statu_quo_recalcule():
     commun = sq.dividende_productivite(P, "prudent")
     for t in (2033, 2037, 2050):
         assert d[t] == pytest.approx(commun[t], abs=1e-9)
-    # le profil compte : un gain d'un coup en 2045 n'a pas le dividende du profil type. Depuis le 21/11/2026, seules
-    # les pensions et la part salariale des services publics rattrapent le gain : l'écart est plus petit (≈ 0,005)
+    # le profil compte : un gain d'un coup en 2045 n'a pas le dividende du profil type. Les dépenses indexées le
+    # rattrapent avec retard : l'écart est le plus grand juste après le gain (≈ 0,06 en 2046) ; vers 2050, il change
+    # de signe (comparaison en 2050 avant le 21/11/2026, trop près de ce croisement depuis la dérive de l'IR)
     tardif = {t: y[t] * 0.01 * (t >= 2045) for t in ANNEES}
-    assert abs(sq.dividende_programme(P, "prudent", tardif)[2050] - d[2050]) > 0.002
+    assert sq.dividende_programme(P, "prudent", tardif)[2046] - d[2046] > 0.03
 
 
 def test_a2_un_emploi_vaut_la_meme_chose_partout():
-    """Cellule OpenFisca au voisinage du SMIC (1,3 SMIC) ≈ valeur d'un emploi des autres canaux (20 000 €), à 5 %."""
+    """Cellule OpenFisca au voisinage du SMIC (1,3 SMIC) ≈ valeur d'un emploi des autres canaux, à 5 % : 20 000 €
+    avec l'allocation évitée de 9 000 € ; 21 660 € depuis la roadmap 2.4 (10 660 €, micro)."""
     v = ProgrammeSimple.valeur_emploi_cellule(P, P.val("emploi.cout_emploi_cree_smic"))
-    assert v == pytest.approx(20000, rel=0.05)
+    assert v == pytest.approx(20000 + P.val("emploi.allocation_chomeur_evitee") - 9000, rel=0.05)
     assert ProgrammeSimple.valeur_emploi_cellule(P, 1.0) < v < ProgrammeSimple.valeur_emploi_cellule(P, "moyen")
 
 

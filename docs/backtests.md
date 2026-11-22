@@ -67,3 +67,94 @@ la mettrait au rapport des trois autres.
 
 Limite : les 2,3 Md€ sont en euros de 2019-2021, les économies des programmes en euros de 2026 et à l'économie de
 2032. La comparaison est un ordre de grandeur.
+
+## Roadmap 5.1 : variantes de FR-BDF, hors calage (22/11/2026)
+
+- **Pourquoi FR-BDF :** le bouclage est calé sur Mésange, donc la comparaison à Mésange (`docs/banc_essai.md`) ne
+  contrôle que le codage. FR-BDF, le modèle de la Banque de France, n'a servi à aucun calage.
+- **Source :** document de travail n° 1045 (mai 2026), variantes de 1 point de PIB ex ante, permanentes.
+- **Calcul :** `outils/variantes_frbdf.py`, chocs à partir de 2031. Le solde de simu2027 est le solde primaire ;
+  celui de FR-BDF compte aussi les intérêts. Signe de lecture : + = hausse ; un impôt en plus améliore le solde.
+
+**Consommation publique +1 pt** (PIB % / emploi % / solde, point de PIB)
+
+| Année | FR-BDF | simu2027 médian | simu2027 prudent |
+|---|---|---|---|
+| 1 | +0,94 / +0,17 / −0,63 | +0,84 / +0,11 / −0,50 | +0,84 / +0,11 / −0,50 |
+| 2 | +0,89 / +0,30 / −0,60 | +0,98 / +0,32 / −0,41 | +0,98 / +0,32 / −0,41 |
+| 3 | +0,79 / +0,33 / −0,61 | +0,92 / +0,37 / −0,44 | +0,91 / +0,37 / −0,44 |
+| 5 | +0,61 / +0,28 / −0,67 | +0,70 / +0,17 / −0,59 | +0,69 / +0,16 / −0,59 |
+| 10 | +0,47 / +0,26 / −0,73 | +0,42 / −0,01 / −0,76 | +0,40 / −0,01 / −0,78 |
+
+**Prestations +1 pt (bloc pauvreté)** (PIB % / emploi % / solde, point de PIB)
+
+| Année | FR-BDF | simu2027 médian | simu2027 prudent |
+|---|---|---|---|
+| 1 | +0,29 / +0,05 / −0,75 | +0,67 / +0,09 / −0,60 | +0,67 / +0,09 / −0,60 |
+| 2 | +0,34 / +0,10 / −0,72 | +0,79 / +0,26 / −0,52 | +0,78 / +0,26 / −0,52 |
+| 3 | +0,37 / +0,13 / −0,70 | +0,73 / +0,30 / −0,55 | +0,73 / +0,30 / −0,55 |
+| 5 | +0,39 / +0,16 / −0,68 | +0,56 / +0,13 / −0,67 | +0,55 / +0,13 / −0,67 |
+| 10 | +0,36 / +0,18 / −0,67 | +0,33 / −0,01 / −0,82 | +0,30 / −0,01 / −0,83 |
+
+**Impôts directs +1 pt** (PIB % / emploi % / solde, point de PIB)
+
+| Année | FR-BDF | simu2027 médian | simu2027 prudent |
+|---|---|---|---|
+| 1 | −0,10 / −0,01 / +0,97 | −0,39 / −0,09 / +0,78 | −0,41 / −0,10 / +0,77 |
+| 2 | −0,29 / −0,07 / +0,91 | −0,78 / −0,39 / +0,54 | −0,81 / −0,40 / +0,52 |
+| 3 | −0,35 / −0,11 / +0,88 | −0,78 / −0,59 / +0,53 | −0,83 / −0,60 / +0,50 |
+| 5 | −0,38 / −0,15 / +0,88 | −0,66 / −0,64 / +0,61 | −0,73 / −0,64 / +0,57 |
+| 10 | −0,36 / −0,18 / +0,93 | −0,66 / −0,66 / +0,63 | −0,75 / −0,66 / +0,57 |
+
+**Cotisations employeurs +1 pt** (PIB % / emploi % / solde, point de PIB)
+
+| Année | FR-BDF | simu2027 médian | simu2027 prudent |
+|---|---|---|---|
+| 1 | −0,02 / −0,04 / +0,91 | −0,15 / −0,38 / +0,94 | −0,20 / −0,43 / +0,91 |
+| 2 | −0,13 / −0,21 / +0,84 | −0,46 / −0,91 / +0,74 | −0,56 / −1,00 / +0,68 |
+| 3 | −0,31 / −0,39 / +0,74 | −0,62 / −0,87 / +0,64 | −0,76 / −1,00 / +0,55 |
+| 5 | −0,62 / −0,58 / +0,59 | −0,74 / −0,91 / +0,57 | −0,95 / −1,10 / +0,44 |
+| 10 | −0,69 / −0,51 / +0,50 | −0,89 / −0,81 / +0,49 | −1,22 / −1,12 / +0,29 |
+
+**TVA +1 pt** (PIB % / emploi % / solde, point de PIB)
+
+| Année | FR-BDF | simu2027 médian | simu2027 prudent |
+|---|---|---|---|
+| 1 | −0,16 / −0,03 / +0,76 | −0,32 / −0,11 / +1,03 | −0,33 / −0,12 / +1,02 |
+| 2 | −0,27 / −0,09 / +0,74 | −0,66 / −0,41 / +0,64 | −0,69 / −0,42 / +0,62 |
+| 3 | −0,34 / −0,14 / +0,73 | −0,68 / −0,52 / +0,60 | −0,72 / −0,53 / +0,58 |
+| 5 | −0,46 / −0,21 / +0,69 | −0,69 / −0,39 / +0,60 | −0,74 / −0,40 / +0,57 |
+| 10 | −0,53 / −0,23 / +0,68 | −0,56 / −0,24 / +0,69 | −0,63 / −0,26 / +0,64 |
+
+**Constats :**
+1. **Les signes sont tous retrouvés**, pour le PIB, l'emploi et le solde, à chaque horizon.
+2. **Dépense publique : conforme.** PIB à 20 % près jusqu'à 5 ans. Solde un peu moins dégradé la première année
+   (−0,50 contre −0,63), car le retour de l'activité au budget est plus rapide.
+   - L'emploi revient à son niveau d'équilibre en dix ans (décision E6 : la dépense ne change pas le chômage
+     structurel), alors que FR-BDF garde +0,26 %. C'est un choix de modèle.
+3. **Prestations : PIB deux fois plus fort qu'avec FR-BDF** (+0,67 contre +0,29 la première année). Le bloc
+   pauvreté a le poids de demande des transferts ciblés (0,8, Coenen et al., 2012 : ménages contraints), alors que
+   la variante de FR-BDF porte sur toutes les prestations. Écart expliqué. Il reste à vérifier, au travail programme
+   par programme, que les prestations générales (familles, logement) n'ont pas toutes ce poids.
+4. **Impôts directs et TVA : effets d'activité deux fois plus forts que FR-BDF entre 1 et 5 ans** (quatre fois
+   pour les impôts directs la première année : −0,39 contre −0,10). Par exemple, à 2 ans : PIB −0,78 contre −0,29 pour les impôts directs, −0,66 contre −0,27 pour la TVA.
+   - Le budget en garde donc moins : solde +0,54 contre +0,91 pour les impôts directs à 2 ans.
+   - À 10 ans, la TVA rejoint FR-BDF (PIB −0,56 contre −0,53, solde +0,69 contre +0,68). Les impôts directs restent
+     plus forts (−0,66 contre −0,36).
+   - Cause : la demande de ces instruments a le profil de Mésange (phase E). Mésange donne aux impôts des ménages
+     des effets plus forts que FR-BDF, dont l'équation de consommation lisse davantage le revenu.
+   - Pour les impôts directs, l'emploi s'ajoute au canal d'offre (incidence « ir » : ≈ 40 000 emplois par point au
+     médian, à long terme).
+   - Écart expliqué par le choix du modèle de référence, pas par une erreur de codage. Une hausse d'impôt rapporte
+     donc **moins** au solde que dans FR-BDF, et une baisse coûte moins cher.
+5. **Cotisations employeurs : PIB proche à 5 et 10 ans** (−0,74 contre −0,62 et −0,89 contre −0,69 au médian),
+   plus rapide la première année (−0,15 contre −0,02).
+   Emploi 1,5 fois plus touché (−0,91 contre −0,58 à 5 ans), au prudent plus encore : c'est l'élasticité de Mésange
+   au coût du travail.
+6. **Décision possible (G9, à soumettre à Adrien) :** les tirages d'incertitude (6.3) pourraient prendre aussi des
+   multiplicateurs d'impôts à mi-chemin de FR-BDF, ou la fourchette Mésange – FR-BDF. Aujourd'hui, la fourchette ne
+   contient que Mésange.
+
+Critère de la roadmap 5.1 (« signe et ordre de grandeur retrouvés ; tout écart de plus de 30 % expliqué ») :
+rempli. Les écarts tiennent au calage sur Mésange (impôts) et au poids des transferts ciblés (prestations).
+

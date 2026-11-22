@@ -100,7 +100,7 @@ lisnard_mesures:
     statut: HYPOTHESE
     source: "Fiche « Questions » (16/10/2026) ; encadrement : aides aux entreprises ≈ 210 Md€ (Sénat, 2025) ; « compensations de charges » non listées : 2 à 8 Md€ (la baisse des impôts de production les rend en partie inutiles)"
   is_20:
-    valeur: {id: LIS-FIS-03, instrument: capital_entreprises, libelle: "Impôt sur les sociétés à 20 %, part variable de 0 à 5 % laissée aux collectivités", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2030,
+    valeur: {id: LIS-FIS-03, instrument: capital_entreprises, taux_is: true, libelle: "Impôt sur les sociétés à 20 %, part variable de 0 à 5 % laissée aux collectivités", poste: recettes, moteur: "recette:impot_sur_les_societes", debut: 2028, plein: 2030,
              montant: {crise: -12, prudent: -10, median: -8, optimiste: -6}}
     unite: md_eur
     annee_euros: 2026

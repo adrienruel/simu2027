@@ -15,7 +15,7 @@ Ce que fait la classe, comme le programme Tondelier :
 - **effet macroéconomique** : multiplicateur commun sur l'impulsion budgétaire nette des mesures, dissipé comme
   l'ajustement budgétaire du modèle ; recettes au taux de prélèvement du statu quo ; emploi par la loi d'Okun ;
 - **emploi** : les emplois en plus ou en moins viennent du chômage ou y vont (pas d'effet sur l'activité) ; chaque
-  emploi vaut emploi.valeur_emploi au solde (prélèvements, TVA, allocation évitée), comme un emploi au SMIC ;
+  emploi vaut au solde la cellule OpenFisca du salaire déclaré par son canal (prélèvements, TVA, allocation évitée ; roadmap 2.2) ;
 - **2027 et 2028** : ce que les mesures coûtent ou rapportent ces années s'ajoute à la dette de fin 2028.
 
 Règle des autres candidats : on ne reprend que les mesures ; aucune recette ni économie annoncée n'est saisie.
@@ -430,7 +430,7 @@ class ProgrammeSimple:
     # ------------------------------------------------------------------ à compléter par chaque programme
     def mesures_calculees(self, p: Parametres, s: str, idx: dict) -> tuple[list[Mesure], dict[str, dict[int, float]]]:
         """Mesures de la bibliothèque (montants) et emplois qu'elles changent ({canal: {année: emplois}}), hors
-        effets budgétaires de ces emplois, ajoutés par la classe au prix emploi.valeur_emploi (sauf canal dont le nom
+        effets budgétaires de ces emplois, ajoutés par la classe au prix d'un emploi du salaire du canal (« nom@niveau », 1,3 SMIC sinon ; sauf canal dont le nom
         commence par « * » : effet budgétaire déjà compté par la mesure). Un programme qui change l'âge de la retraite
         range les personnes pas encore retraitées en plus dans self.non_retraites[(id(p), s)] = {"serie": {année:
         personnes}, "baisse": bool} : la classe en tire l'emploi des seniors (offre.seniors)."""
@@ -457,7 +457,12 @@ class ProgrammeSimple:
                 if not nom.startswith(prefixe):
                     continue
                 x = dict(par.valeur)
-                x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
+                if "pfu" in x:
+                    # roadmap 4.4 (22/11/2026) : impôt sur les dividendes et les intérêts chiffré par la règle commune
+                    from moteur.capital_dirigeants import recette_pfu
+                    x["_montant"] = recette_pfu(p, s, **x["pfu"])["total"]
+                else:
+                    x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
                 serie = self.serie(x, idx)
                 # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
                 from moteur import micro as _micro
@@ -476,6 +481,21 @@ class ProgrammeSimple:
                     r_is = rc["taux_is_effectif"] * rc["part_marge"] * part
                     liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
                                         {t: -r_is * v for t, v in serie.items()}, note=court))
+                if x.get("taux_is"):
+                    # roadmap 4.3 (22/11/2026) : taux de l'IS changé ; les bénéfices des groupes multinationaux se
+                    # déplacent (semi-élasticité de la base au taux, Beer, de Mooij et Liu, 2018), règle commune.
+                    # Base des groupes = part_grandes_entreprises × base ; recette perdue ou regagnée = taux × base
+                    # déplacée = − semi × taux × part × montant statique. Une baisse prend le scénario miroir.
+                    sc = MIROIR[s] if x["_montant"] < 0 else s
+                    r_tr = (p.val("macro.semi_elasticite_transfert", sc) * p.val("macro.taux_reference_is", s)
+                            * p.val("macro.part_grandes_entreprises", s))
+                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : bénéfices déplacés par les groupes", "recettes",
+                                        {t: -r_tr * v for t, v in serie.items()}, note=court))
+                    # roadmap 4.4 : entrepreneurs individuels qui passent à l'IS (ou en sortent), règle commune
+                    from moteur.capital_dirigeants import facteur_ei_vers_is
+                    k_ei = facteur_ei_vers_is(p, s, x["_montant"])
+                    liste.append(Mesure(f"{x['id']} — entrepreneurs individuels qui changent de forme (IR ou IS)", "recettes",
+                                        {t: k_ei * v for t, v in serie.items()}, note=court))
                 if x.get("fp"):
                     # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS
                     # pensions ni impôt sur le revenu, ≈ 0,39 ; relecture neutre du 11/11/2026)
@@ -509,22 +529,30 @@ class ProgrammeSimple:
             miroir = MIROIR
             ev_c = sq._v(p, "emploi_public.eviction_privee", s)
             ev_s = sq._v(p, "emploi_public.eviction_privee", miroir[s])
-            valeur = self.v("emploi.valeur_emploi")
             # phase L (4.1) : l'allocation évitée passe des recettes (valeur d'un emploi) aux blocs chômage et pauvreté,
             # sur les chômeurs du programme (noyau, contexte « chomeurs_depenses »)
             dep_chom = p.val("emploi.depenses_chomage_programme")
             alloc = 0.0 if dep_chom else p.val("emploi.allocation_chomeur_evitee")
-            if dep_chom:
-                valeur -= p.val("emploi.allocation_chomeur_evitee")
-            # 21/11/2026 : prélèvements et TVA d'un emploi au barème du programme (moteur/emploi_valeur.py) ;
-            # l'allocation évitée suit déjà la générosité du programme
+            # roadmap 2.2 (21/11/2026) : valeur d'un emploi selon son salaire (cellule OpenFisca du niveau déclaré par
+            # le canal, « nom@niveau » ; par défaut emploi.cout_emploi_cree_smic) ; 21/11/2026 : prélèvements et TVA au
+            # barème du programme (moteur/emploi_valeur.py), l'allocation évitée suit la générosité du programme ; plus
+            # les impôts sur la part non salariale de la valeur ajoutée (les canaux « * » et « ** » comptent leur
+            # budget eux-mêmes et ne passent pas ici)
             from . import emploi_valeur
             niveau = p.val("emploi.cout_emploi_cree_smic")
-            f_emp = emploi_valeur.facteur(p, s, liste, niveau)
-            # plus les impôts sur la part non salariale de leur valeur ajoutée (les canaux « * » et « ** » comptent leur
-            # budget eux-mêmes et ne passent pas ici)
-            exc = emploi_valeur.excedent(p, s, liste, niveau, self.v("emploi.valeur_ajoutee_emploi"))
-            v_emp = {t: (valeur - alloc) * f_emp[t] + alloc + exc[t] for t in ANNEES}
+            _v_emp: dict = {}
+
+            def v_emp_de(niv):
+                if niv not in _v_emp:
+                    valeur = self.valeur_emploi_cellule(p, niv)
+                    if dep_chom:
+                        valeur -= p.val("emploi.allocation_chomeur_evitee")
+                    f_emp = emploi_valeur.facteur(p, s, liste, niv)
+                    exc = emploi_valeur.excedent(p, s, liste, niv, emploi_valeur.valeur_ajoutee(p, s, niv))
+                    _v_emp[niv] = {t: (valeur - alloc) * f_emp[t] + alloc + exc[t] for t in ANNEES}
+                return _v_emp[niv]
+            v_emp = v_emp_de(niveau)
+            niveaux_canaux: dict[str, object] = {}
             canaux = {t: {} for t in ANNEES}
             postes = {t: crees[t] + supprimes[t] for t in ANNEES}
             evince = {t: -(ev_c * crees[t] + ev_s * supprimes[t]) for t in ANNEES}
@@ -537,15 +565,18 @@ class ProgrammeSimple:
             # « * » : effet budgétaire déjà compté par la mesure ; « ** » : production aussi déjà comptée (pas de
             # valeur ajoutée en plus dans le PIB, ex. embauches de partage du travail)
             sans_va = set()
-            budget_compte = {c.lstrip("*") for c in canaux_calc if c.startswith("*")}
-            for canal, serie in canaux_calc.items():
+            budget_compte = {emploi_valeur.niveau_canal(c, niveau)[0].lstrip("*") for c in canaux_calc if c.startswith("*")}
+            for canal_decl, serie in canaux_calc.items():
+                canal, niv = emploi_valeur.niveau_canal(canal_decl, niveau)
+                niveaux_canaux[canal.lstrip("*")] = niv
                 for t in ANNEES:
                     canaux[t][canal.lstrip("*")] = serie.get(t, 0.0)
                 if canal.startswith("**"):
                     sans_va.add(canal.lstrip("*"))
                 if not canal.startswith("*"):
+                    vn = v_emp_de(niv)
                     liste.append(Mesure(f"Emploi : {canal}", "recettes",
-                                        {t: serie.get(t, 0.0) * v_emp[t] * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
+                                        {t: serie.get(t, 0.0) * vn[t] * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
             # effet macroéconomique : impulsion budgétaire nette, chaque mesure pondérée selon ce qu'elle est (demande
             # par instrument, moteur/offre.poids_demande : 1 pour la dépense publique)
             cout_net = offre.impulsion(p, liste, TOUTES)
@@ -603,10 +634,13 @@ class ProgrammeSimple:
                 actifs_bloc[t] += v
             # PIB : multiplicateur, offre, et valeur ajoutée des emplois en plus ou en moins hors conjoncture et offre
             # (les postes publics : par leur dépense et le multiplicateur, puis à leur coût, production_non_marchande)
-            va = self.v("emploi.valeur_ajoutee_emploi")
-            hors_conj = {t: sum(v for c, v in canaux[t].items()
-                                if not c.startswith(("Conjoncture", "Postes publics", "Offre", "Seniors")) and c not in sans_va)
-                         for t in ANNEES}
+            # valeur ajoutée de chaque emploi selon le salaire déclaré par son canal (roadmap 2.2)
+            va = emploi_valeur.valeur_ajoutee(p, s, niveau)
+            hors_conj_va = {t: sum(v * emploi_valeur.valeur_ajoutee(p, s, niveaux_canaux.get(c, niveau))
+                                   for c, v in canaux[t].items()
+                                   if not c.startswith(("Conjoncture", "Postes publics", "Offre", "Seniors"))
+                                   and c not in sans_va)
+                            for t in ANNEES}
             # PIB en plus ou en moins hors emploi (ex. heures travaillées en moins par salarié, 32 heures) : rangé par une
             # mesure calculée dans self.pib_en_plus[(id(p), s)] = {année: Md€}, avec sa mesure de recettes (11/11/2026)
             d_autre = getattr(self, "pib_en_plus", {}).get((id(p), s), {})
@@ -629,7 +663,7 @@ class ProgrammeSimple:
             d_npm = production_non_marchande(p, s, cout_postes, TOUTES) if actif else {t: cout_postes[t] for t in TOUTES}
             details_npm = d_npm
             pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + d_autre.get(t, 0.0) + decl["pib"][t] + d_npm[t]
-                   + hors_conj[t] * va * idx["salaire"][t] / 1e9 for t in ANNEES}
+                   + hors_conj_va[t] * idx["salaire"][t] / 1e9 for t in ANNEES}
             # variante migratoire (phase B2) et naissances : personnes en emploi en plus ou en moins, hors du chômage
             if any(decl.get("emplois", {}).values()):
                 for t in ANNEES:

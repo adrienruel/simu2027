@@ -65,29 +65,45 @@ statu_quo:
     note: "Recettes hors impôts et cotisations (ventes, tarifs, revenus de la propriété, transferts). Suivent le PIB. Le reste des recettes de départ (51,9 − 6,3 = 45,6 % du PIB) est réparti entre impôts selon statu_quo.structure_impots."
   structure_impots:
     valeur:
-      salaires_prive: 506.24
-      salaires_public: 202.88
-      independants: 38.0
-      retraites: 50.0
-      tva: 213.57
-      accises_et_taxes_sur_produits: 103.83
-      impot_sur_les_societes: 70.3
-      impots_de_production: 75.31
-      capital_dividendes_ifi: 38.13
-      successions: 20.82
-      droits_de_mutation: 14.74
-      taxes_locales_et_affectees: 16.70
+      salaires_prive: 508.77
+      salaires_public: 203.9
+      independants: 38.19
+      retraites: 50.25
+      tva: 208.82
+      accises_et_taxes_sur_produits: 123.02
+      impot_sur_les_societes: 68.01
+      impots_de_production: 71.31
+      capital_dividendes_ifi: 38.32
+      successions: 21.05
+      droits_de_mutation: 20.21
+      taxes_locales_et_affectees: 5.64
+    v_avant_1_1: {salaires_prive: 506.24, salaires_public: 202.88, independants: 38.0, retraites: 50.0, tva: 213.57, accises_et_taxes_sur_produits: 103.83, impot_sur_les_societes: 70.3, impots_de_production: 75.31, capital_dividendes_ifi: 38.13, successions: 20.82, droits_de_mutation: 14.74, taxes_locales_et_affectees: 16.70}
     unite: sans_unite
     statut: SOURCE
-    source: "Classeur v235, feuille Total, colonne « Ancien » (Md€ de 2024), reconstitution du système actuel impôt par impôt ; feuille « Contrôle système actuel » : 1 318,9 Md€ contre 1 322,5 Md€ d'impôts et cotisations des administrations à l'Insee pour 2024 (−0,27 %)"
-    note: "Sert de clé de répartition (parts), le niveau étant celui du PLF 2027. Salaires du privé et du public, indépendants : cotisations, CSG, CRDS et impôt sur le revenu ; retraités : CSG, CASA et impôt sur le revenu des pensions (12 % des pensions) ; la taxe foncière des ménages est comptée avec leurs revenus. Moteur de chaque impôt : masse salariale (salaires, indépendants), pensions (retraités), PIB (consommation, bénéfices, patrimoine), PIB × décès (successions)."
-
+    source: "Insee, comptes nationaux base 2020 (mai 2026), tableaux 3.217 « Principaux impôts par catégorie » et 3.216 « Prélèvements obligatoires par sous-secteurs », année 2025 (fichiers fournis par Adrien le 22/11/2026) : prélèvements obligatoires 1 305,07 Md€, plus 52,41 Md€ de cotisations sociales imputées, soit 1 357,48 Md€"
+    note: "Roadmap 1.1 (22/11/2026). Sert de clé de répartition (parts), le niveau étant celui du PLF 2027. Lignes de l'Insee 2025 : tva = D211 ; accises_et_taxes_sur_produits = D212 + D214 hors droits d'enregistrement, plus les remises pharmaceutiques ; impot_sur_les_societes = IS avant crédits − crédits d'IS + contribution sociale sur les bénéfices + contribution exceptionnelle des grandes entreprises ; impots_de_production = D292 hors taxe foncière des ménages, plus la taxe sur les salaires, le forfait social et la contribution sur les stock-options (D291) ; successions = droits de mutation à titre gratuit ; droits_de_mutation = droits d'enregistrement ; taxes_locales_et_affectees = autres D59 et D91, et le reste de D51 non détaillé (4,05). Les revenus des personnes (cotisations effectives et imputées, autres impôts sur les salaires de D291 — versement mobilité, formation professionnelle et apprentissage, FNAL, CNSA, effort de construction, AGS — comptés par OpenFisca dans le coût du travail, CSG, CRDS, impôt sur le revenu net des crédits, prélèvement de solidarité, prélèvements sur les revenus de capitaux, IFI, taxe foncière des ménages, taxe d'habitation, contribution sur les hauts revenus, moins les prélèvements non recouvrés : 839,43 Md€) sont répartis entre salaires du privé et du public, indépendants, retraités et capital selon les parts de la reconstitution de la v235 (v_avant_1_1), faute d'une ventilation de la CSG et de l'impôt sur le revenu par revenu dans ces tableaux. Contrôle : OpenFisca donne 516 Md€ de prélèvements sur les salaires du privé (personne seule, euros de 2026), contre 508,77 ici (2025)."
   baremes_retraites:
     valeur: prix
     unite: sans_unite
     statut: DECISION
     source: "Législation : seuils de revenu fiscal de référence des taux de CSG sur les pensions revalorisés sur l'inflation (code de la sécurité sociale, art. L136-8) ; barème de l'impôt sur le revenu revalorisé chaque année par la loi de finances, d'ordinaire sur l'inflation"
     note: "prix : seuils et barèmes revalorisés sur les prix (législation constante) ; le taux moyen sur les pensions reste vers 12 % (prudent : 1,7 % du PIB en 2029, 1,9 % en 2073). salaires : barèmes qui suivent la croissance, comme pour les programmes ; le taux moyen baisse quand les pensions baissent par rapport aux salaires (7,5 % en 2073, 0,7 point de PIB de recettes en moins). À trancher. Les prélèvements sur les salaires suivent la masse salariale (élasticité 1) dans les deux cas. DÉCISION d'Adrien du 04/11/2026 : la loi actuelle (prix)."
+
+  baremes_salaires:
+    valeur: prix
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Législation : barème de l'impôt sur le revenu revalorisé chaque année par la loi de finances sur l'inflation hors tabac (art. 2 des lois de finances) ; même convention que statu_quo.baremes_retraites (DÉCISION d'Adrien du 04/11/2026 : la loi actuelle, sur les prix)"
+    note: "Roadmap 1.1 et décision G3 (à confirmer par Adrien). prix : barème de l'impôt sur le revenu revalorisé sur les prix ; quand le salaire réel monte, l'impôt des salariés monte plus vite que la masse salariale (statu_quo.derive_ir_salaires). salaires : barème qui suit la croissance (convention avant le 21/11/2026), sans dérive. Cotisations et CSG proportionnelles dans les deux cas."
+
+  elasticite_ir_salaires:
+    url: "https://one.oecd.org/document/ECO/WKP(2015)93/en/pdf"
+    page: "Tableau 2 : élasticités des impôts sur le revenu et des cotisations à leur assiette (France)"
+    valeur: 1.73
+    unite: sans_unite
+    statut: SOURCE
+    source: "OCDE, Price, Dang et Botev, Adjusting fiscal balances for the business cycle (Economics Department Working Paper n° 1275, 2015), tableau 2 : élasticité de l'impôt sur le revenu des personnes à son assiette (revenus d'activité), France, 1,73 (1,70 en 2005)"
+    note: "Sert à la dérive de l'impôt sur le revenu des salariés au barème revalorisé sur les prix (statu_quo.derive_ir_salaires). Contrôle : OpenFisca 2026 sur la distribution des salaires du privé, personne seule, donne 2,0 (les couples et le quotient familial la réduisent)."
 
   retraites_ratio_conjoint:
     valeur: 0.62
@@ -195,13 +211,6 @@ statu_quo:
     statut: SOURCE
     source: "Insee, Le compte des administrations publiques en 2025 (Insee Première n° 2106, mai 2026) : investissement 132,2 Md€, 4,4 % du PIB"
     note: "Suit le PIB."
-  defense_2026:
-    valeur: 57.1
-    unite: md_eur
-    annee_euros: 2026
-    statut: SOURCE
-    source: "Classeur v235, Contrôle système actuel : mission Défense 66,7 Md€ en 2026 pensions comprises (loi de programmation) ; contribution au CAS Pensions 9,58 Md€ (missions_etat_2026.csv)"
-    note: "Hors pensions (66,7 − 9,6), les pensions des militaires étant dans le bloc retraites. Pour mémoire : le bloc part du PLF 2027 (statu_quo.defense_2027_courants)."
   defense_2027_courants:
     url: "https://www.vie-publique.fr/discours/305194-catherine-vautrin-alice-rufo-27102026-credits-des-armees-pour-2027"
     page: "Déclaration de la ministre des Armées au Sénat, 27/10/2026 (63,4 Md€ en 2027)"

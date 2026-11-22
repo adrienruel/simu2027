@@ -43,6 +43,124 @@ France, scénario sans changement de politique. Statu quo médian, après les co
   du PIB. Prudent : −2,1 % en 2035, en ligne.
 - **Prudent** : intérêts 5,3 % du PIB en 2035 (+0,3 point sur la Commission), par la prime de dette plus forte.
 
+## Roadmap 2.2 : valeur d'un emploi selon son salaire (21/11/2026)
+
+- **Valeur au solde** : prélèvements, TVA et allocation évitée de la cellule OpenFisca du salaire de l'emploi
+  (`ProgrammeSimple.valeur_emploi_cellule`), à la place de la valeur unique de 20 000 €.
+- **Valeur ajoutée** : coût du travail × `offre.travail_part_pib` / `emploi.part_travail_va` (0,65)
+  (`emploi_valeur.valeur_ajoutee`), à la place de la valeur unique de 35 000 €. C'est la règle du canal d'offre :
+  au prudent, à capital inchangé, l'emploi produit son coût ; à l'optimiste, le capital suit.
+- **Salaire d'un canal** : un canal le déclare par son nom (« nom@1.0 », « nom@moyen »). Sinon, il prend 1,3 SMIC
+  (`emploi.cout_emploi_cree_smic`) : les emplois créés ou perdus par le coût du travail sont surtout près du SMIC,
+  où l'élasticité est la plus forte. Les emplois de la micro (venus de l'inactivité) sont comptés à 1 SMIC.
+  Aucun canal des programmes ne déclare encore d'autre salaire.
+
+| Coût (multiple du SMIC) | Coût employeur | Valeur au solde | Valeur ajoutée (prudent / médian / optimiste) |
+|---|---|---|---|
+| 0,8 (temps partiel) | 17 900 | 14 700 | 17 900 / 20 600 / 23 400 |
+| 1 | 22 300 | 16 200 | 22 300 / 25 800 / 29 200 |
+| 1,3 | 29 000 | 20 700 | 29 000 / 33 500 / 38 000 |
+| 2 | 44 700 | 31 000 | 44 700 / 51 500 / 58 400 |
+| 3 | 67 000 | 45 800 | 67 000 / 77 300 / 87 600 |
+
+€ de 2026 par an ; la valeur au solde comprend l'allocation évitée (9 000 €).
+
+**Effet** : écart de solde primaire au statu quo en 2037, prudent (points de PIB), avant → après :
+
+| Programme | Avant | Après |
+|---|---|---|
+| Arthaud | -4,73 | -4,67 |
+| Attal | -1,18 | -1,18 |
+| Bertrand | +0,07 | +0,07 |
+| Glucksmann | -2,97 | -2,96 |
+| Le Pen | -2,58 | -2,58 |
+| Lisnard | -2,73 | -2,73 |
+| Melenchon | -12,25 | -12,18 |
+| Philippe | -0,87 | -0,87 |
+| Retailleau | -0,41 | -0,41 |
+| Roussel | -9,84 | -9,78 |
+| Tondelier | -3,02 | -3,02 |
+| Zemmour | -2,37 | -2,37 |
+
+Les écarts bougent de moins de 0,07 point. À 1,3 SMIC, la valeur ajoutée médiane reste proche de l'ancienne
+valeur (33 500 contre 35 000 €) ; au prudent, l'excédent taxé sur la marge disparaît (valeur ajoutée = coût).
+
+**Reste** : la valeur ajoutée d'un senior (`seniors.valeur_ajoutee_emploi`, 75 000 €) garde sa source propre, car
+c'est une décision encore ouverte. Les valeurs propres à des programmes (Tondelier, Arthaud, coût × 1,25) relèvent
+du travail programme par programme.
+
+## Roadmap 1.1 et 1.2 : recettes et dépenses du statu quo (21/11/2026, en cours)
+
+**1.1, dérive de l'impôt sur le revenu** (`statu_quo.baremes_salaires`, `statu_quo.derive_ir_salaires`) :
+- **Barème :** il est revalorisé sur les prix, comme le font les lois de finances, et comme les pensions depuis la
+  décision du 04/11. Avant, l'impôt des salariés suivait la masse salariale, comme si le barème suivait les
+  salaires.
+- **Calcul :** l'impôt sur le revenu des salariés monte comme le salaire réel puissance 1,73 (OCDE, Price, Dang et
+  Botev, 2015, France). Contrôle : OpenFisca donne 2,0 sur la distribution des salaires du privé, pour une personne
+  seule.
+- **Assiette :** l'impôt sur le revenu fait 14 % des prélèvements sur les salaires du privé. Cotisations et CSG ne
+  dérivent pas.
+- **Effet sur les recettes** du statu quo (points de PIB) :
+
+| Scénario | 2037 | 2050 | 2073 |
+|---|---|---|---|
+| Prudent | +0,13 | +0,34 | +0,75 |
+| Médian | +0,23 | +0,55 | +1,19 |
+
+- **Déficit du statu quo, prudent :** 8,12 → 7,95 % en 2037, 16,97 → 16,06 % en 2050.
+- **Dividende de productivité** d'un programme : +0,02 environ, car un salaire réel plus haut paie aussi plus
+  d'impôt.
+- Le choix entre « prix » et « salaires » est la décision G3 d'Adrien. Le réglage « salaires » rend l'ancienne
+  convention.
+
+**1.1, répartition impôt par impôt** (22/11/2026, tableaux 3.216 et 3.217 de l'Insee fournis par Adrien) :
+- `statu_quo.structure_impots` est tirée des comptes de 2025 : prélèvements obligatoires 1 305,07 Md€, plus
+  52,41 Md€ de cotisations imputées. La correspondance ligne par ligne est dans la note du paramètre. L'ancienne clé
+  de la v235 est gardée dans `v_avant_1_1`.
+
+| Catégorie | v235 (2024) | Insee 2025 |
+|---|---|---|
+| TVA | 213,6 | 208,8 |
+| Accises et taxes sur produits (avec remises pharmaceutiques) | 103,8 | 123,0 |
+| IS (net des crédits, avec contributions sur les bénéfices) | 70,3 | 68,0 |
+| Impôts de production (D292 hors taxe foncière des ménages ; taxe sur les salaires, forfait social) | 75,3 | 71,3 |
+| Successions et donations | 20,8 | 21,1 |
+| Droits d'enregistrement | 14,7 | 20,2 |
+| Autres impôts | 16,7 | 5,6 |
+| Revenus des personnes (cotisations, CSG, CRDS, IR, autres D291) | 835,3 | 839,4 |
+
+- Les revenus des personnes restent répartis entre salaires, indépendants, retraités et capital selon les parts de
+  la v235. Les tableaux ne ventilent ni la CSG ni l'impôt sur le revenu par revenu. Contrôle d'OpenFisca : 516 Md€
+  sur les salaires du privé, contre 508,8.
+- **Effet :** déficit du statu quo en 2037 au prudent 7,95 → 7,93 % ; écarts des programmes au plus 0,012 point.
+- **Critère :** chaque grand impôt hors revenus des personnes est à 0,5 % près de l'Insee 2025 (test
+  `test_repartition_des_recettes_sur_l_insee_2025`). Pour la CSG et l'impôt sur le revenu, le critère ne peut pas
+  être vérifié tant qu'ils ne sont pas ventilés par revenu (il faudrait les comptes de la Sécurité sociale).
+- **Élasticités par impôt :** l'OCDE (2015) donne, pour la France, l'IS à 2,40 sur l'excédent d'exploitation et les
+  impôts indirects à 0,91 sur la consommation. Ce sont des élasticités au cycle. À long terme, un impôt
+  proportionnel suit son assiette, ce que fait déjà le moteur. Seul l'impôt sur le revenu, progressif, s'en écarte
+  de façon durable.
+
+**1.2, blocs de dépense** : chaque bloc a une source (aucun bloc n'est au statut HYPOTHÈSE sans source). Indexation
+contre le droit actuel :
+
+| Bloc | Départ (Md€ 2026) | Indexation du statu quo | Droit actuel |
+|---|---|---|---|
+| Retraites | 428,0 | pensions par génération (COR) | revalorisation sur les prix, salaires portés au compte |
+| Santé | 297,4 | âge, coûts relatifs (Ageing Report) | ONDAM voté chaque année |
+| Chômage | 46,6 | chômeurs × salaires | allocation sur le salaire de référence |
+| Famille | 34,7 | enfants × prix | BMAF sur les prix (L551-1 CSS) |
+| Logement | 16,7 | population × prix | paramètres revalorisés sur l'IRL, proche des prix |
+| Pauvreté (RSA, prime d'activité) | 24,0 | bénéficiaires × prix, 30 % de la hausse des salaires | prix (L161-25 CSS), coups de pouce réguliers |
+| AAH, invalidité | 23,5 | adultes × prix, 80 % (AAH) | prix, revalorisations exceptionnelles de l'AAH |
+| Investissement | 133,5 | PIB | — |
+| Missions de l'État | 210,4 | règle par mission (élèves, effectifs, salaires publics) | lois de finances |
+| Défense et UE | 92,6 | LPM jusqu'en 2030, puis euros ; UE sur le PIB | LPM 2024-2030 actualisée ; ressource RNB |
+| Collectivités | 230,3 | salaires × population | — |
+| Autres (résidu) | 101,2 | salaires × population | — |
+
+La « défense 2026 » de la v235 (57,1 Md€), qui n'était plus lue, est retirée.
+
 ## Roadmap 2.1 : une seule voie d'emploi par mesure (21/11/2026)
 
 Trois mesures tests, emplois de long terme par Md€ de mesure (personnes ; + : emplois en plus). Micro : gain à
@@ -144,3 +262,112 @@ Constats :
 - Banque de France, projections intermédiaires de septembre 2026 : https://www.banque-france.fr/fr/publications-et-statistiques/publications/projections-macroeconomiques-intermediaires-septembre-2026 ; chômage 2026-2027 (Reuters, 15/09/2026) : https://www.easybourse.com/international/news/1537735/la-banque-france-revoit-son-tour-sa-prevision-croissance-2026.html
 - OCDE, Panorama de la santé 2025, projections : https://www.oecd.org/fr/publications/panorama-de-la-sante-2025_2f564c6c-fr/full-report/health-spending-projections_d3702f1a.html
 - Dépendance, Ageing Report 2024 (profil France, Eurocarers) : https://eurocarers.org/country-profiles/france/
+
+## Roadmap 2.4 : allocations et prime d'activité d'un emploi en plus, selon la famille (22/11/2026)
+
+- **Avant :** un chômeur qui prend un emploi évitait 9 000 € (montant encadré : 70 % d'assurance chômage, 30 % de
+  RSA) et ouvrait la prime d'activité d'une personne seule (≈ 2 140 € par an à 1,3 SMIC).
+- **Calcul :** `outils/ppa_emplois.py`, sur la population de la microsimulation (OpenFisca-France 177). Chaque
+  chômeur de 18 à 64 ans prend un emploi toute l'année à 1,3 SMIC ; son allocation de chômage s'arrête ; le reste du
+  ménage ne change pas. Moyenne par chômeur :
+
+| Poste | € par an | Bloc |
+|---|---|---|
+| Allocation de chômage arrêtée | 11 524 | chômage |
+| RSA de la famille en moins | 1 712 | pauvreté |
+| Aides au logement en moins | 703 | logement (nouveau) |
+| **Total évité** (`emploi.allocation_chomeur_evitee`) | **13 940** | |
+| Prime d'activité en plus | 692 (personne seule : 2 138) | pauvreté |
+
+  Chiffres sur la population recalée des roadmaps 3.6 et 4.4 (72 % des chômeurs indemnisés, comme
+  `microsimulation.chomeurs_indemnises`). Sur la population d'avant (52 % indemnisés) : 8 010 + 1 866 + 785 =
+  10 660 €, prime 693 €.
+- **Prime d'activité par famille :** personne seule ≈ 1 830 € ; parent seul ≈ 1 980 € ; jeune adulte chez ses
+  parents ≈ 700 € ; couple : −100 à −740 €. Dans un couple, l'allocation de chômage comptait déjà dans les
+  ressources, et le salaire en plus réduit la prime du conjoint (population d'avant 3.6). D'où
+  `emploi.prime_activite_familles` = 0,324.
+- **Effet sur l'écart de solde primaire 2037 au prudent :** au plus 0,07 point (Mélenchon −0,07 ; Lisnard +0,03).
+- **Reste :** `tondelier_smic.valeur_emploi_chomeur` (9 000 €, paramètre propre au programme) dit reprendre l'ancienne
+  valeur commune : à aligner dans le travail sur Tondelier.
+
+## Roadmap 2.3 : taux d'emploi par âge (22/11/2026)
+
+- **15-24 et 25-54 ans :** ils suivent maintenant la projection de l'Insee (projections de population active
+  2022-2070, figure 2, valeurs projetées), comme les seniors depuis la phase P. 15-24 ans : 39,7 % d'activité en
+  2021, 40,8 % en 2040, 40,3 % en 2070 ; 25-54 ans presque stables (87,8 à 88,0 %). Effet sur les écarts 2037 : au
+  plus 0,003 point ; déficit du statu quo 2037 au prudent 7,93 → 7,94 %.
+- **Devenir des seniors qui ne partent pas :** pas changé. Le partage `seniors.devenir` (emploi, chômage, le reste
+  inactif : somme de 100 %) est sourcé (Koubi et Dubois ; IPP n° 61 ; Rabaté et Rochut). `seniors.part_concernee`
+  (0,7 à 0,8) est un calage écrit le 21/11 sur l'emploi des seniors de la DG Trésor (210 000 emplois au médian pour
+  un an d'âge), pas une source : on le garde tant qu'aucune étude ne donne directement la part des non-retraités du
+  modèle qui changent de situation.
+
+## Roadmap 4.3 : bénéfices déplacés par les groupes (22/11/2026)
+
+- **Avant :** aucun canal. Les paramètres `macro.semi_elasticite_transfert` et `macro.part_grandes_entreprises` ne
+  servaient plus depuis le retrait d'Écologie de droite.
+- **Règle commune :** une mesure qui change le taux de l'IS (drapeau `taux_is` dans `parametres.yaml`) déplace la base
+  des groupes. Recette regagnée (baisse) ou perdue (hausse) = − semi-élasticité × taux de référence (25 %) × part des
+  groupes (0,56) × montant statique. Semi-élasticité ≈ 1 (Beer, de Mooij et Liu, 2020) : 1,5 / 1,25 / 1 / 0,8 de la
+  crise à l'optimiste pour une hausse, scénario miroir pour une baisse.
+- **Mesures concernées :** LIS-FIS-03 (IS à 20 %) et LFI-REC-11 (IS progressif, neutre en recette au prudent). La
+  taxe des superprofits de Glucksmann n'est pas concernée (rente de l'électricité, sans déplacement possible).
+- **Effet :** Lisnard +0,034 point en 2037 au prudent (≈ 14 % de la baisse regagnée) ; les autres programmes
+  inchangés.
+- **Par taille (reste de 4.3) :** pas fait. La base des PME et des TPE ne se déplace pas dans la règle (part des groupes
+  seulement) ; la localisation des investissements passe déjà par `macro.elasticite_invest`.
+
+## Roadmap 5.2 : dépenses du statu quo sensibles à l'activité (22/11/2026)
+
+Déjà couvert, rien à ajouter au noyau :
+- **chômage, RSA, aides au logement et prime d'activité** suivent les chômeurs du programme (phase L, 4.1 ; montants par
+  chômeur tirés de la micro depuis la roadmap 2.4) ;
+- **dépenses en volume** (santé, missions, collectivités) : la part salariale suit la croissance d'un programme, avec
+  passage partiel et décalé (`statu_quo._depenses_en_plus`, 21/11) ;
+- **pensions et prestations indexées** suivent leur règle (prix ou salaires), donc l'inflation et les salaires du
+  programme.
+Reste hors modèle : les prestations sous condition de ressources des personnes en emploi dont le salaire change
+(seule la prime d'activité des emplois en plus est comptée).
+
+## Roadmap 4.4 : revenus du capital, dirigeants et entrepreneurs individuels (22/11/2026)
+
+Trois canaux communs (`moteur/capital_dirigeants.py`), séparés pour ne pas compter deux fois.
+
+- **Impôt sur les dividendes et les intérêts.** Une mesure marquée `pfu: {points, points_csg}` n'a plus de montant
+  écrit : le moteur le calcule. Recette = taux après × base après − taux avant × base avant. Bases : dividendes
+  38 Md€, intérêts 15, autres revenus du patrimoine soumis à la CSG 97. Seuls les dividendes répondent au taux net,
+  avec une élasticité de 2,5 / 2 / 1,5 / 1 de la crise à l'optimiste (France Stratégie, réformes de 2013 et 2018 ;
+  scénario miroir pour une baisse). Avant, chaque programme écrivait sa propre réponse : Bertrand 60 % du statique,
+  Mélenchon un quart, Tondelier 55 %.
+
+| Mesure | Avant (prudent, Md€) | Règle commune |
+|---|---|---|
+| BER-FIS-02 (PFU +2 points) | 0,70 | 0,33 |
+| LFI-REC-04 (PFU supprimé, lu comme +6,6 points) | 1,00 | 0,85 |
+| REC-20/21 (CSG +3 et PFU +3 sur le capital) | 3,50 | 3,71 |
+
+- **Salaire ou dividendes des dirigeants.** Une part des dividendes perdus (ou gagnés) devient du salaire (ou en
+  vient). France Stratégie (rapport final 2023, avis p. 16) ne trouve pas de redénomination en moyenne après le PFU :
+  `dividendes.part_redenomination` = 0. Le canal est en place pour une étude qui donnerait une part positive.
+- **Entrepreneurs individuels et IS.** Une mesure sur le taux de l'IS (drapeau `taux_is`) fait aussi changer de
+  forme des entrepreneurs individuels : semi-élasticité de 1 (de Mooij et Nicodème, 2008 : un point d'écart en plus
+  entre l'impôt des personnes et l'IS augmente de 1 % la part des sociétés), sur les bénéfices des petites sociétés
+  (111,5 Md€) ; prélèvement en moins de 20 % sur les bénéfices qui passent en société (DÉCISION). IS à 20 % de
+  Lisnard : −0,86 Md€ au prudent, à côté des bénéfices rapatriés par les groupes (+1,52).
+- **Micro des ménages : erreur corrigée.** Les revenus des indépendants classiques et des agriculteurs entraient dans
+  OpenFisca par la case 5TA (`ebic_impv` : auto-entrepreneurs au versement libératoire). Ils sortaient du barème de
+  l'IR et de la CSG des indépendants (CSG nulle). Ils entrent maintenant au bénéfice réel (`abic_impn`, `arag_impg`),
+  catégorie « commerçant » pour la CSG : CSG des indépendants 10,9 Md€, IR des indépendants ≈ 22 Md€. Les mesures sur
+  les indépendants (CSG de Zemmour, cotisations) sont maintenant vues par la micro.
+- **Écart d'impôt sur le revenu expliqué** (123,5 Md€ dans la population contre 104 au PLF 2026) :
+  - **dépenses fiscales que la population n'a pas : 15,5 Md€** (`microsimulation.niches_ir_non_modelisees`, Cour des
+    comptes 2026 d'après les voies et moyens) : emploi à domicile 7,2 ; heures supplémentaires 2,3 ; dons 2,2 ;
+    travaux des bailleurs 2,0 ; frais de garde 1,8. L'impôt de la population se compare à 104 + 15,5 = 119,5 Md€ ;
+  - **ordre des calculs d'OpenFisca : 4,2 Md€.** Le taux de CSG des pensions dépend du revenu fiscal de l'année N-2,
+    qui dépend de l'impôt. Demandé en premier, l'impôt tombait dans cette boucle et comptait les pensions sans leur CSG
+    déductible (pensions imposables 403 Md€ au lieu de 384). Corrigé : `openfisca_population.simulation` calcule
+    d'abord le revenu disponible ;
+  - **reste +3,5 %** (123,7 contre 119,5), sous la tolérance de 5 % du test ; le calage de la population vise
+    119,5 Md€.
+  - Écarté : les couples non mariés (tous mariés : −2,5 Md€ seulement).
+- **Effet sur les écarts 2037 au prudent :** Lisnard −0,019, Bertrand −0,012, autres ≤ 0,006.

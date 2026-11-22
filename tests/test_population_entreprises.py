@@ -26,8 +26,21 @@ def test_bornes_classes():
 
 
 def test_is_par_taille(pop):
+    """Roadmap 4.1 : champ d'Ésane (hors finance et agriculture) ; IS total = celui du champ (57,0 Md€), parts des
+    bénéfices par taille comme la DGFiP (toutes entreprises à l'IS)."""
     r = pe.controler(pop)
     tot = sum(v["is_brut_md"] for v in r.values())
-    tot_dg = sum(v["is_brut_md_dgfip"] for v in r.values())
-    assert abs(tot / tot_dg - 1) < 0.10
-    assert r["PME"]["benefices_md"] == pytest.approx(r["PME"]["benefices_md_dgfip"], rel=0.05)
+    assert tot == pytest.approx(57.0, rel=0.01)
+    benef = sum(v["benefices_md"] for v in r.values())
+    benef_dg = sum(v["benefices_md_dgfip"] for v in r.values())
+    assert r["PME"]["benefices_md"] / benef == pytest.approx(r["PME"]["benefices_md_dgfip"] / benef_dg, rel=0.02)
+
+
+def test_is_par_secteur(pop):
+    """Roadmap 4.1 : IS brut de 2025 par groupe de secteurs (DGFiP Statistiques n° 51, tableau 1)."""
+    from moteur.parametres import Parametres
+    cibles = Parametres().val("microsimulation.entreprises_is_secteurs_2025")
+    for g, v in cibles.items():
+        sel = [e for e in pop if e["secteur"] in v["secteurs"]]
+        tot = sum(e["poids"] * e["part_is"] * pe.is_brut(e["resultat_fiscal"]) for e in sel) / 1e9
+        assert tot == pytest.approx(v["is_brut_md"], rel=0.01), g

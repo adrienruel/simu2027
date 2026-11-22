@@ -39,7 +39,7 @@ def test_chaque_mesure_renvoie_a_la_fiche(prog):
 def test_sens_des_scenarios(prog):
     """Dépense : crise ≥ prudent ≥ médian ≥ optimiste ; recette : l'inverse (règle de prudence)."""
     for cle, par in prog.pt._p.items():
-        if not cle.startswith("melenchon_mesures.") or not isinstance(par.valeur["montant"], dict):
+        if not cle.startswith("melenchon_mesures.") or not isinstance(par.valeur.get("montant"), dict):
             continue
         # superprofits : recette qui ne joue qu'en crise ; dépenses des communes : contrepartie exacte de la taxe
         # d'habitation (même montant que la recette, effet net nul)

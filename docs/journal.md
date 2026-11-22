@@ -2100,3 +2100,88 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   (Mésange : 9 600 à 14 400 ; Trésor-Éco n° 97 : 25 000 à 50 000). Zones déclarées : Philippe PHI-FIS-01b (`milieu`),
   Lisnard LIS-EMP-05 (`smic`).
 
+## 21/11/2026 — fusion de `phase-r` dans `main` (accord d'Adrien), roadmap 1.1 et 1.2 (branche `phase-s`)
+- `phase-r` fusionnée dans `main` (0ea9064).
+- **1.1, dérive de l'impôt sur le revenu** : barème sur les prix (`statu_quo.baremes_salaires`, décision G3 à
+  confirmer) ; élasticité de l'OCDE 1,73 (`statu_quo.elasticite_ir_salaires`). Recettes du statu quo +0,13 point de
+  PIB en 2037 au prudent, +0,75 en 2073 ; déficit 2037 au prudent 8,12 → 7,95 %.
+- **1.1, répartition par impôt** : bloquée, les tableaux 3.216 et 3.217 de l'Insee (2025) ne sont pas
+  téléchargeables depuis l'environnement.
+- **1.2** : blocs tous sourcés, indexations comparées au droit actuel (`docs/recoupements.md`) ; paramètre mort
+  `statu_quo.defense_2026` retiré.
+- `tests/test_coherence_phase_a.py` : l'écart de dividende entre profils est comparé en 2046 (2050 tombe sur le
+  croisement des deux profils).
+- **Roadmap 2.2** : valeur d'un emploi selon son salaire. Valeur au solde par la cellule OpenFisca de son salaire,
+  valeur ajoutée = coût × `offre.travail_part_pib` / `emploi.part_travail_va`. Un canal déclare son salaire
+  (« nom@niveau », 1,3 SMIC sinon). Les valeurs uniques de 20 000 et 35 000 € de `programme_commun` et
+  `offre.valeur_ajoutee_emploi_micro` sont retirées. Écarts de solde primaire 2037 : moins de 0,07 point.
+- **Roadmap 3.3, premier pas** : âge de départ dans la microsimulation (`age_depart`, sept mesures codées, même
+  règle pour tous). Couverture du budget « ménages » : Bertrand 90 %, Roussel 76 %, Philippe 64 %, Glucksmann et
+  Mélenchon 63 %, Le Pen 55 %, Tondelier 51 %. Paramètres `microsimulation.taux_remplacement_brut` (0,64) et
+  `microsimulation.taux_are` (0,57). Reste : minimum de pension des carrières complètes (LFI-RET-03).
+- **Roadmap 3.3, minimum de pension** : `population.pension_minimum`, carrière complète lue sur le montant
+  (`microsimulation.plancher_carriere_complete`, 1 000 € brut) ; LFI-RET-03 codée (4,3 millions de retraités,
+  ≈ 20 Md€ bruts, statique −17,3 Md€) ; couverture de Mélenchon 74 %.
+
+## 22/11/2026 — roadmap 3.4 et 3.5 (branche `phase-s`)
+- **Assurance chômage dans la micro** (`population.assurance_chomage`, montant du moteur au prorata des
+  allocations) : huit mesures codées.
+- **Double compte corrigé** : les mesures d'assurance chômage ne passent plus par l'élasticité agrégée des
+  transferts ; leur emploi passe par le canal propre du programme.
+- **Cotisations salariales et CSG rendues** : LIS-ECO-02, LIS-ECO-07, RET-ECO-06 codées.
+- **Une seule voie** : une mesure qui passe par les prélèvements du travail garde cette voie pour ses lignes de
+  prestations.
+- Couverture du budget « ménages » : six programmes sur douze au-dessus de 80 %.
+- **Roadmap 5.1** : variantes de FR-BDF (Banque de France, WP 1045, mai 2026) rejouées hors calage
+  (`outils/variantes_frbdf.py`, `docs/backtests.md`, `tests/test_variantes_frbdf.py`). Signes tous retrouvés ;
+  dépense conforme. Impôts directs et TVA : effets d'activité deux fois plus forts que FR-BDF entre 1 et 5 ans
+  (calage sur Mésange), TVA rejointe à 10 ans. Prestations : poids des transferts ciblés. À ajouter à la
+  régénération : `python -m outils.variantes_frbdf`. Décision possible G9 (fourchette Mésange – FR-BDF dans
+  l'incertitude).
+- **Roadmap 1.1, répartition des recettes** : `statu_quo.structure_impots` tirée des tableaux 3.216 et 3.217 de
+  l'Insee (2025, fournis par Adrien) ; écarts des programmes ≤ 0,012 point.
+- **Roadmap 3.1** : consommation par ménage (Budget de famille 2017, TF106) ; huit mesures sur les prix codées ;
+  LIS-RET-02 ajoutée (3.3). Couverture : huit programmes au-dessus de 80 %.
+- **Roadmap 6.1, premier pas** : `parametres/commun/lois.yaml` et `outils/poids_incertitude.py` (classement
+  partiel, 37 cibles sur 78).
+
+- **Roadmap 3.2** : patrimoine par ménage (Histoire de vie et Patrimoine 2020-2021, tranches de revenu disponible) ;
+  dix mesures sur le patrimoine et les successions codées. ART-RET-01 codée (pensions calées sur le moteur).
+  Couverture : dix programmes au-dessus de 80 %, critère de la phase 3 rempli.
+- **Roadmap 2.4** : allocations évitées et prime d'activité d'un emploi en plus tirées de la micro
+  (`outils/ppa_emplois.py`) : 10 660 € évités par chômeur (dont 785 € d'aides au logement, nouveau bloc), prime
+  d'activité de la famille = 0,32 × celle d'une personne seule. Écarts 2037 : au plus 0,07 point.
+- **Roadmap 6.1** : `outils/poids_incertitude.py` par lots dans des processus séparés, reprise sur
+  `.cache/poids_incertitude_lignes.jsonl`.
+- **Roadmap 2.3** : 15-24 et 25-54 ans selon la projection de l'Insee (figure 2) ; écarts 2037 ≤ 0,003 point.
+  Devenir des seniors inchangé (sourcé ; `part_concernee` reste un calage sur la DG Trésor).
+- **Roadmap 4.1** : population d'entreprises ramenée au champ d'Ésane (elle recevait les bénéfices de la finance :
+  IS 67,7 → 57,0 Md€) et calée sur l'IS de 2025 par groupe de secteurs (DGFiP n° 51, tableau 1).
+- **Roadmap 4.2** : 31 % des impôts des entreprises retombent sur les prix (Baker, Sun et Yannelis), répartis selon la
+  consommation des déciles ; test salaires + prix + actionnaires = 100 %. Écarts 2037 ≤ 0,02 point.
+- **Roadmap 4.3** : bénéfices déplacés par les groupes quand le taux de l'IS change (drapeau `taux_is` : LIS-FIS-03,
+  LFI-REC-11) ; Lisnard +0,034 point en 2037.
+- **Roadmap 5.2** : déjà couverte (chômage, RSA, aides au logement, prime d'activité, dépenses en volume) ; note dans
+  `docs/recoupements.md`.
+- **Roadmap 3.6** : population recalée sur les déciles de niveau de vie de l'ERFS 2024 (Insee Première n° 2117) et
+  sur les masses des pensions, des indépendants et du chômage ; le calage sur les bénéficiaires tirait la
+  distribution vers le bas. Médiane 24 670 → 27 600 € (Insee 27 820). Paramètres de la roadmap 2.4 recalculés.
+- **Roadmap 6.1** : classement complet des 78 cibles (`sorties/poids_incertitude.csv`, 52 pèsent) ; lois en attente
+  de l'arbitrage du centre.
+- **Roadmap 7.1 à 7.3** : test de la bibliothèque commune (même mesure, même coût) ; fiches des 1 116 mesures et
+  ordre de travail (`outils/priorites_mesures.py`, `docs/priorites.md`) : Mélenchon, Tondelier, Roussel, puis Philippe
+  et Lisnard.
+- **Roadmap 4.4** (entrepreneurs individuels à l'impôt sur le revenu) : pas fait ; aucune mesure des programmes ne le
+  demande aujourd'hui, l'arbitrage entre dividendes et salaire passe par `dividendes.elasticite_taux_net`.
+- **Roadmap 6.2** : corrélation historique productivité – emploi (Insee 1978-2025) de −0,3 à +0,1 selon la fenêtre :
+  la borne ρ = 1 du Monte Carlo n'est pas soutenue ; taux manquants.
+- **Roadmap 4.4** : `moteur/capital_dirigeants.py` : PFU chiffré par une règle commune (BER-FIS-02, LFI-REC-04,
+  REC-20/21), redénomination salaire-dividendes (0, France Stratégie 2023), entrepreneurs individuels qui passent à
+  l'IS quand il baisse (de Mooij et Nicodème 2008). Micro : indépendants au bénéfice réel (ils étaient en case 5TA,
+  hors IR et CSG) ; population recalée ; IR de la population 123,5 Md€ contre 104 (à expliquer).
+- **Derniers trous de la micro** : formules communes `cotisations_employeur`, `heures_supplementaires`,
+  `jeunes_enfants` ; 25 mesures codées. Les douze programmes au-dessus de 80 % (de 87 à 100 %).
+- **Écart d'impôt sur le revenu expliqué** : 15,5 Md€ de dépenses fiscales que la population n'a pas (emploi à
+  domicile, heures supplémentaires, dons, travaux, garde : `microsimulation.niches_ir_non_modelisees`) et 4,2 Md€
+  d'un ordre de calcul d'OpenFisca (CSG des pensions oubliée quand l'impôt est demandé en premier ; corrigé dans
+  `openfisca_population.simulation`). Population recalée sur 119,5 Md€ ; 123,7 obtenus (+3,5 %).

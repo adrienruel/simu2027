@@ -8,10 +8,36 @@
 #   tranche   : {bareme, seuil, taux}                tranche ajoutée à un barème
 #   variable  : {nom, facteur}                       variable d'OpenFisca multipliée (prestation revalorisée)
 #   formule   : {nom, ...}                           règle nouvelle écrite dans outils/openfisca_mesures.py
+#   population: {assurance_chomage: {programme, mesure, age_max?, seuil_mensuel?}}  allocations de chômage changées
+#               du montant du moteur, au prorata de l'allocation des chômeurs concernés (3.4)
+#   formule   : {nom: consommation, postes: [codes], programme, mesure}  prix de postes de consommation (TVA, accises,
+#               prix bloqués) : montant du moteur réparti selon la dépense du décile (Budget de famille 2017, TF106, 3.1)
+#   formule   : {nom: patrimoine, composante, tranches?, programme, mesure}  impôts sur le patrimoine et les
+#               successions : montant du moteur réparti selon le patrimoine moyen de la tranche de revenu disponible
+#               (Histoire de vie et Patrimoine 2020-2021, 3.2)
+#   formule   : {nom: cotisations_employeur, programme, mesure, bande_smic?, part_montant?}  cotisations des
+#               employeurs privés : part de long terme sur les salaires (entreprises.incidence_menages.salaires),
+#               au prorata du salaire brut des salariés de la bande
+#   formule   : {nom: jeunes_enfants, age_max, programme, mesure}  congés de naissance et accueil du jeune enfant :
+#               montant du moteur par enfant de age_max ans au plus
+#   formule   : {nom: heures_supplementaires, programme, mesure, bande_smic?}  heures supplémentaires (absentes de
+#               la population) : montant du moteur sur les salariés du privé de 1 à 2,5 SMIC, au prorata du brut
+#   population: {pensions: {seuil_mensuel, facteur | programme+mesure, fin?}}  pensions au-delà d'un seuil mensuel
+#               brut multipliées (gel, sous-indexation) ; avec programme et mesure, facteur calé sur le montant du moteur
+#   population: {pension_minimum: {mensuel_brut}}  pensions des carrières complètes portées à un minimum (3.3)
+#   population: {age_depart: {age_actuel, age_cible}}  âge de départ changé (roadmap 3.3, openfisca_mesures.age_depart) :
+#               profil de départ de la population de 2026 décalé de l'écart entre l'âge du programme et celui du
+#               statu quo à terme (64 ans) ; mêmes règles pour tous les programmes
 # Non codées ici (raison dans docs/microsimulation.md) : conditions de nationalité ou de résidence (la population
-# n'a pas cette information), patrimoine (ISF, taxe Zucman, IFI), niches non nommées, mesures sans barème publié.
+# n'a pas cette information), niches non nommées, mesures sans barème publié.
 
 bertrand:
+  BER-ECO-01:
+    operations: [{population: {assurance_chomage: {programme: bertrand, mesure: BER-ECO-01}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
+  BER-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   BER-RET-02:
     operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
@@ -22,6 +48,47 @@ bertrand:
     note: "Part impôt sur le revenu du prélèvement forfaitaire unique : 12,8 % → 14,8 %."
 
 tondelier:
+  PRE-14:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 0, programme: tondelier, mesure: PRE-14}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 0 an(s) au plus."
+  REC-04/05/06/07:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P95_99", "P99"], programme: tondelier, mesure: REC-04/05/06/07}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  REC-40:
+    operations: [{formule: {nom: consommation, postes: ["111", "112", "043", "073"], programme: tondelier, mesure: REC-40}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 111, 112, 043, 073 (Budget de famille 2017) ; postes approchés."
+  COT-03:
+    operations: [{formule: {nom: cotisations_employeur, bande_smic: [1.6, 1000], directe: true, programme: tondelier, mesure: COT-03}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur sur les salariés du privé au-dessus de 1,6 SMIC, au prorata du brut (épargne salariale concentrée sur les plus hauts salaires : HYPOTHÈSE)."
+  REC-41:
+    operations: [{formule: {nom: consommation, postes: ["0451"], programme: tondelier, mesure: REC-41}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0451 (Budget de famille 2017) ; postes approchés."
+  REC-45:
+    operations: [{formule: {nom: consommation, postes: ["02", "0118"], programme: tondelier, mesure: REC-45}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 02, 0118 (Budget de famille 2017) ; postes approchés."
+  REC-42:
+    operations: [{formule: {nom: consommation, postes: ["0722"], programme: tondelier, mesure: REC-42}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0722 (Budget de famille 2017) ; postes approchés."
+  REC-03:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P90_95", "P95_99", "P99"], programme: tondelier, mesure: REC-03}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches P90_95, P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  REC-37:
+    operations: [{formule: {nom: cotisations_employeur, programme: tondelier, mesure: REC-37, bande_smic: [1.6, 3.5]}}]
+    note: "Derniers trous (22/11/2026) : allègements des employeurs au-delà de 1,6 SMIC supprimés (bandeaux maladie et famille, jusqu'à 3,5 SMIC) : à court terme, rien pour les ménages ; à long terme, la moitié du montant du moteur sur les salaires de la bande (entreprises.incidence_menages.salaires). Heures supplémentaires : la population n'a pas les heures."
+  COT-02:
+    operations:
+      - {parametre: {chemin: "prelevements_sociaux.cotisations_securite_sociale_regime_general.cnav.salarie.vieillesse_deplafonnee.brackets[0].rate", ajout: 0.005}}
+      - {formule: {nom: cotisations_employeur, programme: tondelier, mesure: COT-02, part_montant: 0.5}}
+    note: "Derniers trous (22/11/2026) : cotisations vieillesse déplafonnées +1 point à terme (0,2 point par an de 2028 à 2032), moitié salariés (barème d'OpenFisca, comme outils/openfisca_offre.cotisations_vieillesse_plus1), moitié employeurs (part de long terme sur les salaires)."
+  REC-01:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: tondelier, mesure: REC-01}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'impôt plancher sur les plus gros patrimoines : 1 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  PRE-15:
+    operations: [{population: {assurance_chomage: {programme: tondelier, mesure: PRE-15}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
+  RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   REC-10:
     operations: [{tranche: {bareme: impot_revenu.bareme_ir_depuis_1945.bareme, seuil: 250000, taux: 0.60}}]
   REC-11:
@@ -67,6 +134,26 @@ tondelier:
     note: "Pensions de plus de 2 000 € brut revalorisées 0,5 point sous l'inflation de 2028 à 2032 : − 2,5 % de niveau, qui s'éteint ensuite avec ces retraités."
 
 lisnard:
+  LIS-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: immobilier, tranches: ["P95_99", "P99"], programme: lisnard, mesure: LIS-FIS-02}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine immobilier moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'IFI (patrimoine immobilier) : 5 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  LIS-FIS-04:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P90_95", "P95_99", "P99"], programme: lisnard, mesure: LIS-FIS-04}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ des transmissions d'entreprise et du taux marginal : 10 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  LIS-RET-02:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
+    note: "Roadmap 3.3 (21/11/2026, ajouté le 22/11) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart), même règle que BER-RET-01 et PHI-RET-01."
+  LIS-ECO-02:
+    operations: [{variable: {nom: cotisations_salariales, facteur: 0.122}}]
+    note: "Roadmap 3.5 (22/11/2026) : cotisations salariales réduites de 93,6 Md€ (privé 72,1, agents publics 21,5 : montants bruts du moteur en 2032) sur ≈ 106,6 Md€ de cotisations salariales de la population (OpenFisca 2026), au prorata de chaque salarié. Facteur 1 − 93,6 / 106,6 = 0,122."
+  LIS-ECO-07:
+    operations:
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.deductible, ajout: -0.026}}
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.026}}
+    note: "Roadmap 3.5 (22/11/2026) : CSG d'activité de 9,2 à 6,6 % (−2,6 points sur la part déductible, même lecture que Tondelier COT-04)."
+  LIS-EMP-04:
+    operations: [{population: {assurance_chomage: {programme: lisnard, mesure: LIS-EMP-04}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   LIS-SOC-01:
     operations: [{parametre: {chemin: impot_revenu.calcul_impot_revenu.plaf_qf.plafond_avantages_procures_par_demi_part.general, valeur: 1000000000.0}}]
   LIS-ECO-03:
@@ -81,6 +168,21 @@ lisnard:
     note: "Pensions de plus de 2 000 € brut non revalorisées de 2028 à 2032 : (1 / 1,016)^5 = 0,924 de niveau (inflation de 2028 du moteur), qui s'éteint ensuite avec ces retraités."
 
 roussel:
+  PCF-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: roussel, mesure: PCF-FIS-02}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'impôt plancher sur les plus gros patrimoines : 1 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  PCF-FIS-01:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P90_95", "P95_99", "P99"], programme: roussel, mesure: PCF-FIS-01}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'ISF : 10 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  PCF-FIS-06:
+    operations: [{formule: {nom: consommation, postes: ["011"], programme: roussel, mesure: PCF-FIS-06}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'alimentation (Insee, Budget de famille 2017, TF106 : 011). Répercussion entière sur les prix ; pas de changement de quantités."
+  PCF-FIS-07:
+    operations: [{formule: {nom: consommation, postes: ["0722"], programme: roussel, mesure: PCF-FIS-07}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants (Insee, Budget de famille 2017, TF106 : 0722). Répercussion entière sur les prix ; pas de changement de quantités."
+  PCF-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 60}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 60 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   PCF-RET-03:
     operations:
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.remplacement.pensions_retraite_invalidite.deductible.taux_plein, valeur: 0.0}}
@@ -118,6 +220,33 @@ roussel:
     note: "Pensions revalorisées comme le salaire moyen depuis 2029 : sans effet en 2026, visible dans le vieillissement (même calcul que le moteur)."
 
 melenchon:
+  LFI-PRE-06:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 0, programme: melenchon, mesure: LFI-PRE-06}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 0 an(s) au plus."
+  LFI-COL-05:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 2, programme: melenchon, mesure: LFI-COL-05}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 2 an(s) au plus."
+  LFI-REC-23:
+    operations: [{formule: {nom: consommation, postes: ["0722", "073"], programme: melenchon, mesure: LFI-REC-23}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0722, 073 (Budget de famille 2017) ; postes approchés."
+  LFI-REC-20:
+    operations: [{formule: {nom: heures_supplementaires, programme: melenchon, mesure: LFI-REC-20}}]
+    note: "Derniers trous (22/11/2026) : exonération de cotisations des heures supplémentaires supprimée ; la population n'a pas les heures : montant du moteur sur les salariés du privé de 1 à 2,5 SMIC, au prorata du brut."
+  LFI-REC-06:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: melenchon, mesure: LFI-REC-06}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'impôt plancher sur les plus gros patrimoines : 1 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  LFI-REC-05:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P90_95", "P95_99", "P99"], programme: melenchon, mesure: LFI-REC-05}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de l'ISF : 10 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  LFI-PRE-05:
+    operations: [{population: {assurance_chomage: {programme: melenchon, mesure: LFI-PRE-05}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
+  LFI-RET-03:
+    operations: [{population: {pension_minimum: {mensuel_brut: 1870}}}]
+    note: "Roadmap 3.3 (21/11/2026) : pensions des carrières complètes portées au SMIC net de 1 700 € (euros de 2026, comme le moteur), soit ≈ 1 870 € brut (prélèvements sur les pensions ≈ 9,1 %). Carrière complète lue sur le montant de la pension (microsimulation.plancher_carriere_complete)."
+  LFI-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 60}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 60 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   LFI-PRE-04:
     operations: [{variable: {nom: aide_logement, facteur: 1.10}}]
   LFI-PRE-03:
@@ -153,6 +282,27 @@ melenchon:
     note: "ASPA portée au seuil de pauvreté retenu par le programme (1 337 € par mois, contre 1 043,6 € en 2026), plafond de ressources relevé d'autant, couples dans la même proportion ; recours complet (le non-recours à l'ASPA, ≈ 50 %, n'est pas modélisé)."
 
 le_pen:
+  RN-FIS-06:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9"], programme: le_pen, mesure: RN-FIS-06}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches D1, D2, D3, D4, D5, D6, D7, D8, D9 (Histoire de vie et Patrimoine 2020-2021)."
+  RN-FIS-05:
+    operations: [{formule: {nom: patrimoine, composante: financier, tranches: ["P95_99", "P99"], programme: le_pen, mesure: RN-FIS-05}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine financier moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  RN-EMP-02:
+    operations: [{formule: {nom: heures_supplementaires, programme: le_pen, mesure: RN-EMP-02}}]
+    note: "Derniers trous (22/11/2026), règle commune : la population n'a pas les heures supplémentaires : montant du moteur sur les salariés du privé de 1 à 2,5 SMIC."
+  RN-FIS-02:
+    operations: [{formule: {nom: consommation, postes: ["011"], programme: le_pen, mesure: RN-FIS-02}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'alimentation (Insee, Budget de famille 2017, TF106 : 011). Répercussion entière sur les prix ; pas de changement de quantités."
+  RN-ENE-03:
+    operations: [{formule: {nom: consommation, postes: ["0722", "045"], programme: le_pen, mesure: RN-ENE-03}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants et l'électricité, le gaz et les combustibles (Insee, Budget de famille 2017, TF106 : 0722, 045). Répercussion entière sur les prix ; pas de changement de quantités."
+  RN-FIS-01:
+    operations: [{formule: {nom: consommation, postes: ["0722", "045"], programme: le_pen, mesure: RN-FIS-01}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants et l'électricité, le gaz et les combustibles (Insee, Budget de famille 2017, TF106 : 0722, 045). Répercussion entière sur les prix ; pas de changement de quantités."
+  RN-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   RN-RET-03:
     operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
@@ -166,6 +316,24 @@ le_pen:
     note: "« Priorité nationale » : prestations non contributives retirées aux familles étrangères hors UE présentes depuis moins de cinq ans (lecture de la condition d'années de résidence ou d'activité)."
 
 philippe:
+  PHI-SOC-07:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 2, programme: philippe, mesure: PHI-SOC-07}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 2 an(s) au plus."
+  PHI-SOC-02:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 0, programme: philippe, mesure: PHI-SOC-02}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 0 an(s) au plus."
+  PHI-FIS-05:
+    operations: [{formule: {nom: patrimoine, composante: professionnel, tranches: ["P95_99", "P99"], programme: philippe, mesure: PHI-FIS-05}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine professionnel moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  PHI-EMP-06:
+    operations: [{formule: {nom: heures_supplementaires, programme: philippe, mesure: PHI-EMP-06}}]
+    note: "Derniers trous (22/11/2026) : la population n'a pas les heures supplémentaires ; montant du moteur réparti sur les salariés du privé de 1 à 2,5 SMIC, au prorata du brut."
+  PHI-EMP-02:
+    operations: [{population: {assurance_chomage: {programme: philippe, mesure: PHI-EMP-02, age_max: 50}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs de moins de 50 ans. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
+  PHI-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 65}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 65 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   PHI-FIS-02:
     operations: [{formule: {nom: ir_naissance, age_enfant_max: 2, plafond: 3000}}]
     note: "Foyer avec un enfant de moins de 3 ans : impôt sur le revenu annulé jusqu'à 3 000 € (réduction de 3 000 € au-delà), comme le site du 12/11/2026."
@@ -177,6 +345,12 @@ philippe:
     note: "Durée du RSA limitée, sans durée donnée : même lecture que Zemmour (trois ans), mêmes exceptions."
 
 arthaud:
+  ART-RET-01:
+    operations: [{population: {pensions: {seuil_mensuel: 1550, programme: arthaud, mesure: ART-RET-01, fin: 2200}}}]
+    note: "Roadmap 3.3 (22/11/2026) : la sous-indexation du budget 2027 touche les pensions au-delà de 85 % du SMIC ; DÉCISION : 85 % du SMIC brut mensuel de 2026 (≈ 1 823 €), soit 1 550 € brut de pension. Montant du moteur (pour toujours : fin repoussée) réparti au prorata des pensions au-delà du seuil."
+  ART-ENE-02:
+    operations: [{formule: {nom: consommation, postes: ["0722"], programme: arthaud, mesure: ART-ENE-02}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants (Insee, Budget de famille 2017, TF106 : 0722). Répercussion entière sur les prix ; pas de changement de quantités."
   ART-FAM-01:
     operations:
       - {variable: {nom: af, facteur: 1.012}}
@@ -189,6 +363,21 @@ arthaud:
     note: "SMIC à 2 200 € net (euros de 2027), même règle que le moteur ; la répartition du travail et l'égalité salariale ne sont pas codées."
 
 retailleau:
+  RET-SOC-02:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 0, programme: retailleau, mesure: RET-SOC-02}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 0 an(s) au plus."
+  RET-FIS-03:
+    operations: [{formule: {nom: patrimoine, composante: professionnel, tranches: ["P95_99", "P99"], programme: retailleau, mesure: RET-FIS-03}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine professionnel moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  RET-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: net, programme: retailleau, mesure: RET-FIS-02}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ des droits de succession : toutes les tranches. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  RET-ECO-06:
+    operations: [{variable: {nom: cotisations_salariales, facteur: 0.875}}]
+    note: "Roadmap 3.5 (22/11/2026) : cotisations salariales réduites de 13,3 Md€ (privé 10,2, agents publics 3,1 : montants bruts du moteur en 2032) sur ≈ 106,6 Md€ (OpenFisca 2026), au prorata. Facteur 1 − 13,3 / 106,6 = 0,875."
+  RET-EMP-03:
+    operations: [{population: {assurance_chomage: {programme: retailleau, mesure: RET-EMP-03}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   RET-RET-02:
     operations: [{formule: {nom: capitalisation, programme: retailleau, parametre: retailleau_capitalisation.cotisation}}]
     note: "Part salariale de la capitalisation obligatoire (0,5 % du brut des entrants depuis 2028) : revenu disponible en moins, versé à un fonds hors des administrations (pas une recette publique). Mêmes paramètres que le moteur (bibliotheque.capitalisation_obligatoire) ; les plus jeunes salariés en emploi sont couverts, à hauteur des entrants depuis 2028. Nulle en 2026."
@@ -203,6 +392,12 @@ retailleau:
     note: "Cinq ans de résidence légale pour les prestations non contributives : familles étrangères hors UE arrivées depuis moins de cinq ans."
 
 zemmour:
+  ZEM-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: net, montant_md: -20.6}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur (calculé par la bibliothèque : 22,8 Md€ courants en 2032 au prudent, soit 20,6 Md€ de 2026 ; à reprendre si le moteur change) réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ de tous les héritages : toutes les tranches. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  ZEM-FIS-01b:
+    operations: [{formule: {nom: consommation, postes: ["0722"], programme: zemmour, mesure: ZEM-FIS-01b}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour les carburants (Insee, Budget de famille 2017, TF106 : 0722). Répercussion entière sur les prix ; pas de changement de quantités."
   ZEM-RET-01:
     operations: [{formule: {nom: capitalisation, parametre: lectures_communes.capitalisation}}]
     note: "Part salariale de la capitalisation obligatoire, lecture commune du 16/11/2026 (dispositif de Retailleau) : revenu disponible en moins, versé à un fonds hors des administrations. Nulle en 2026."
@@ -219,6 +414,30 @@ zemmour:
     note: "CSG supprimée sur les revenus d'activité (salariés et indépendants)."
 
 glucksmann:
+  GLU-SOC-04:
+    operations: [{formule: {nom: jeunes_enfants, age_max: 2, programme: glucksmann, mesure: GLU-SOC-04}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti par enfant de 2 an(s) au plus."
+  GLU-FIS-03:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P99"], programme: glucksmann, mesure: GLU-FIS-03}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches P99 (Histoire de vie et Patrimoine 2020-2021)."
+  GLU-FIS-05:
+    operations: [{formule: {nom: consommation, postes: ["0722", "073"], programme: glucksmann, mesure: GLU-FIS-05}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0722, 073 (Budget de famille 2017) ; postes approchés."
+  GLU-FIS-02:
+    operations: [{formule: {nom: patrimoine, composante: professionnel, tranches: ["P95_99", "P99"], programme: glucksmann, mesure: GLU-FIS-02}}]
+    note: "Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine professionnel moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
+  GLU-FIS-01:
+    operations: [{formule: {nom: patrimoine, composante: net, tranches: ["P95_99", "P99"], programme: glucksmann, mesure: GLU-FIS-01}}]
+    note: "Roadmap 3.2 (22/11/2026) : montant du moteur réparti selon le patrimoine net moyen des tranches de revenu disponible (Insee, Histoire de vie et Patrimoine 2020-2021) ; champ des plus gros héritages : 5 % de revenus les plus hauts. Patrimoine du ménage lui-même, comme approximation de celui des héritiers pour les successions."
+  GLU-ENE-03:
+    operations: [{formule: {nom: consommation, postes: ["0451"], programme: glucksmann, mesure: GLU-ENE-03}}]
+    note: "Roadmap 3.1 (22/11/2026) : montant du moteur (à plein effet) réparti selon la dépense moyenne des ménages de chaque décile de niveau de vie pour l'électricité (Insee, Budget de famille 2017, TF106 : 0451). Répercussion entière sur les prix ; pas de changement de quantités."
+  GLU-EMP-02:
+    operations: [{population: {assurance_chomage: {programme: glucksmann, mesure: GLU-EMP-02}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
+  GLU-RET-01:
+    operations: [{population: {age_depart: {age_actuel: 64, age_cible: 62}}}]
+    note: "Roadmap 3.3 (21/11/2026) : âge de départ de 62 ans contre 64 au statu quo à terme, profil de départ de 2026 décalé de l'écart (outils/openfisca_mesures.age_depart). Durée d'assurance, carrières longues et décote non représentées."
   GLU-FIS-01b:
     operations:
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.0137}}
@@ -229,6 +448,9 @@ glucksmann:
     note: "SMIC à 1 600 € net (euros de 2027), même règle que le moteur."
 
 attal:
+  ATT-EMP-01:
+    operations: [{population: {assurance_chomage: {programme: attal, mesure: ATT-EMP-01}}}]
+    note: "Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
   ATT-ECO-01:
     operations:
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.0475}}

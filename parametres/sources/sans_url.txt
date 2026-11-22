@@ -81,7 +81,6 @@ lisnard_actifs.csg_points
 lisnard_enveloppe.annonce
 macro.eviction
 macro.part_grandes_entreprises
-macro.semi_elasticite_transfert
 macro.taux_apparent_2029
 macro.taux_reference_is
 melenchon_mesures.apl
@@ -93,7 +92,9 @@ microsimulation.emploi_par_configuration
 microsimulation.entreprises_base_taux_reduit
 microsimulation.entreprises_capital_par_etp
 microsimulation.entreprises_impots
+microsimulation.entreprises_champ_esane
 microsimulation.entreprises_is_2025
+microsimulation.entreprises_is_secteurs_2025
 microsimulation.etudiants_decohabitants
 microsimulation.familles_allocations_familiales
 microsimulation.profil_revenu_salarial_age
@@ -129,7 +130,6 @@ statu_quo.aides_logement
 statu_quo.apul_depenses_2026
 statu_quo.chomage_indemnisation
 statu_quo.cvae_taux_legaux
-statu_quo.defense_2026
 statu_quo.investissement_part_pib
 statu_quo.prime_activite
 statu_quo.recettes_production_hors_apul_part_pib

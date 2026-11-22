@@ -114,12 +114,40 @@ microsimulation:
     statut: HYPOTHESE
     source: "Effectif : Dares, séries longues du système d'information sur l'apprentissage, 1 017 500 contrats en cours au 31/12/2025 (secteurs privé et public) ; part du SMIC : Code du travail, art. D6222-26 (grille par âge et année de contrat, moyenne des trois années : 16-17 ans 27/39/55 %, 18-20 ans 43/51/67 %, 21-25 ans 53/61/78 %, 26 ans et plus 100 %)"
     note: "Phase L (roadmap 4.2, 18/11/2026). Apprentis tirés parmi les salariés du privé de 16 à 29 ans (tous comptés dans le privé, faute de lecture sûre de la part publique), avec une propension relative par âge (HYPOTHÈSE d'encadrement : l'âge moyen d'entrée est de 20,5 ans, Dares 2025), mise à l'échelle sur l'effectif. Rémunération : part du SMIC de la grille × SMIC brut × 12 ; coût employeur pris égal au brut (exonérations de cotisations des apprentis) ; effectif ajouté aux marges du calage ; marqués « apprenti » pour OpenFisca (salaire exonéré d'impôt sur le revenu jusqu'au SMIC annuel, cotisations salariales exonérées). Tirage séparé (graine + 1), mais la marge nouvelle change un peu tous les poids : la population est à régénérer avec OpenFisca."
+  niches_ir_non_modelisees:
+    valeur: {credit_emploi_domicile: 7.208, heures_supplementaires: 2.250, dons: 2.204, travaux_fonciers: 1.990, frais_de_garde: 1.799}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    url: "https://www.legifiscal.fr/actualites-fiscales/4730-niches-fiscales-1056-md-2025-cour-comptes-conseille-plafonner-cout-evaluer.html"
+    page: "Cour des comptes, « Les dépenses fiscales : maîtriser leur nombre et leur coût » (novembre 2026), tableau des quinze dépenses fiscales les plus coûteuses, d'après l'Évaluation des voies et moyens, tome II (PLF), coûts 2026"
+    source: "Crédit d'impôt pour l'emploi d'un salarié à domicile 7 208 M€ ; exonération des heures supplémentaires 2 250 ; réduction d'impôt pour dons 2 204 ; déduction des dépenses de réparation et d'amélioration (revenus fonciers) 1 990 ; crédit d'impôt pour frais de garde des jeunes enfants 1 799"
+    note: "Explication de l'écart d'impôt sur le revenu (22/11/2026) : ces dépenses fiscales baissent l'impôt réel (104 Md€) mais pas celui de la population, qui n'a ni emploi à domicile, ni heures supplémentaires, ni dons, ni travaux, ni frais de garde (revenus fonciers au réel avec 15 % de charges forfaitaires). L'impôt de la population se compare donc à 104 + 15,5 = 119,5 Md€. Pas comptées : épargne salariale (2 890 M€, impôt non précisé), Pinel (sorti du classement), petites niches."
   cibles_2026:
     valeur: {impot_revenu: 104.0, prestations_entretien: 25.2, aides_logement: 16.7, rsa: 12.4, prime_activite: 10.5, aah: 14.6}
     unite: sans_unite
     statut: SOURCE
     source: "PLF 2026, évaluation des voies et moyens : impôt net sur le revenu 104,0 Md€ ; Cnaf, Analyses statistiques n° 7 : prestations d'entretien (allocations familiales, complément familial, allocation de soutien familial, allocation de rentrée scolaire, allocation de base et prime à la naissance de la Paje) 24,5 Md€ en 2024 ; autres prestations : statu_quo.aides_logement, rsa, prime_activite, aah"
     note: "En Md€. Critère de sortie de la phase F : impôt sur le revenu et prestations à 5 % près. Prestations d'entretien : 24,5 × 1,009 × 1,021 (inflation 2025 et 2026, comme statu_quo.prestations_familiales) ≈ 25,2 ; le complément de mode de garde, la PreParE et l'AEEH (≈ 9,5 Md€ des 34,7 de statu_quo.prestations_familiales) dépendent de choix de garde que la population n'a pas : ils restent au moteur agrégé. L'IR net de l'État comprend le prélèvement forfaitaire sur les revenus du capital et la contribution sur les hauts revenus. RSA : allocations seules, 3,07 × 4 × 1,01 ≈ 12,4 ; statu_quo.rsa (13,5) compte aussi les dépenses d'insertion des départements (les 11,5 Md€ bruts de la Drees pour 2024 sont « allocations et insertion »)."
+  taux_remplacement_brut:
+    valeur: 0.64
+    unite: taux
+    statut: HYPOTHESE
+    source: "Drees, Les retraités et les retraites (fiche 6, éditions 2022 à 2025) : taux de remplacement net médian de 75 % pour les anciens salariés à carrière complète de la génération 1950 ; passé en brut : 0,75 × salaire net / salaire brut (≈ 0,78) / (1 − prélèvements sur les pensions, ≈ 9,1 %) ≈ 0,64"
+    note: "Roadmap 3.3 : pension brute d'une personne qui part plus tôt (âge abaissé), en part de son revenu d'activité brut ; à l'inverse, salaire d'un retraité qui reste en activité (âge relevé). Carrières incomplètes et décote non représentées."
+  plancher_carriere_complete:
+    valeur: 1000
+    unite: eur_mois
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Drees, Les retraités et les retraites (édition 2025, fiche 8) : minimum contributif de 747,69 € par mois au 1er janvier 2025 pour une carrière complète, 893,65 € avec la majoration ; plus une pension complémentaire minimale. Encadrement : ≈ 4,3 millions de retraités à carrière complète sous le SMIC net, écart moyen ≈ 350 € (melenchon, LFI-RET-03) ; la population donne 4,3 millions et 400 € au-dessus de ce plancher"
+    note: "Roadmap 3.3 (21/11/2026) : la population n'a pas la durée de carrière. Une pension brute au-dessus de ce plancher est lue comme une carrière complète, en dessous comme une carrière incomplète (opération population.pension_minimum)."
+  taux_are:
+    valeur: 0.57
+    unite: taux
+    statut: HYPOTHESE
+    source: "Unédic, règles de l'allocation d'aide au retour à l'emploi : 57 % du salaire journalier de référence (ou 40,4 % plus une partie fixe, la formule la plus favorable), pour les salaires moyens"
+    note: "Roadmap 3.3 : allocation brute d'un senior au chômage quand l'âge de départ est relevé (outils/openfisca_mesures.age_depart)."
   recours:
     valeur: {rsa: 0.65, prime_activite: 0.50, forme: 0.2}
     unite: taux
@@ -201,6 +229,15 @@ microsimulation:
     unite: sans_unite
     statut: DECISION
     note: "DÉCISION d'Adrien du 14/11/2026 : second calage des poids sur les effectifs de bénéficiaires publiés, OpenFisca dans la boucle (il calcule qui est éligible ; le calage ne change que les poids). Les montants versés restent un contrôle. Faux : calage sur les seules marges démographiques et d'activité."
+  niveaux_de_vie_erfs:
+    valeur: {D1: 13970, D5: 26740, D9: 48580, passage_2026: 1.0404}
+    unite: eur_an
+    annee_euros: 2024
+    statut: SOURCE
+    url: "https://www.insee.fr/fr/statistiques/9019316"
+    page: "Insee Première n° 2117 (juillet 2026), « Niveau de vie et pauvreté en 2024 », tableau complémentaire 2 (fichier ip2117.xlsx fourni par Adrien, parametres/sources/insee_ip2117.xlsx)"
+    source: "ERFS 2024 : premier décile 13 970 €, médiane 26 740 €, neuvième décile 48 580 € par an et par unité de consommation (France métropolitaine, logements ordinaires, personne de référence non étudiante)"
+    note: "Roadmap 3.6 (22/11/2026) : cibles du second calage de la population (outils/population_synthetique.py) : 10, 50 et 90 % des personnes du champ sous ces seuils. passage_2026 (HYPOTHESE) : niveaux de vie de 2024 portés en euros courants de 2026 comme le salaire moyen du privé (+2,0 % en 2025 et en 2026, comme independants.passage_2023_2026). Champ approché : la population couvre la France entière."
   beneficiaires:
     valeur: {rsa_avec_prime: 0.42, rsa_seul: 1.03, rsa_monoparentale: 0.61, rsa_couple_sans_enfant: 0.037, rsa_couple_avec_enfants: 0.166, prime_activite: 4.76, aides_logement: 5.66, complement_familial: 0.844}
     unite: sans_unite
@@ -236,6 +273,23 @@ microsimulation:
     statut: SOURCE
     source: "DGFiP Statistiques n° 51 (septembre 2026), graphique 2 et tableau 2 : en 2025, 1 788 000 entreprises à l'IS bénéficiaires et 1 046 000 déficitaires, 111,3 Md€ de déficits de l'année ; 2 604 821 très petites entreprises à l'IS ; IS brut 70,47 Md€"
     note: "Pertes de l'année seulement : le stock de déficits reportables en avant et la part des entreprises au plafond d'imputation (1 M€ + 50 %) ne sont pas publiés dans ces tableaux, et ne sont pas modélisés. Perte d'une entreprise déficitaire : proportionnelle à sa VA à la puissance 0,8 avec un bruit log-normal (DÉCISION), ramenée au total de 111,3 Md€."
+  entreprises_champ_esane:
+    valeur: {entreprises: 0.9000, benefices: 0.7723}
+    unite: taux
+    statut: SOURCE
+    source: "DGFiP Statistiques n° 51, tableau 1 : 2 834 000 entreprises à l'IS, dont 248 000 dans la finance et l'assurance et 35 100 dans l'agriculture (reste 2 551 000, 90,0 %) ; résultat fiscal 176,1 Md€, dont 38,4 et 1,7 (reste 136,0, 77,2 %)"
+    note: "Roadmap 4.1 (22/11/2026) : la population d'entreprises suit le champ d'Ésane (marchand non agricole et non financier) ; avant, elle recevait les nombres, pertes et bénéfices de toutes les entreprises à l'IS, finance comprise (IS de la population 67,7 Md€ contre 57,1 dans le champ). Pertes au prorata des entreprises (la DGFiP ne les donne pas par secteur : DÉCISION)."
+  entreprises_is_secteurs_2025:
+    valeur:
+      industrie: {secteurs: [industrie], is_brut_md: 14.7}
+      construction: {secteurs: [construction], is_brut_md: 5.4}
+      commerce_transports: {secteurs: [commerce, transports], is_brut_md: 17.7}
+      services: {secteurs: [services_marchands, sante_enseignement], is_brut_md: 19.2}
+    unite: md_eur
+    annee_euros: 2025
+    statut: SOURCE
+    source: "DGFiP Statistiques n° 51 (septembre 2026), tableau 1, IS brut 2025 : industrie 14,7 Md€ ; construction 5,4 ; commerce, transports, hébergement et restauration 17,7 ; services 19,2 (activités spécialisées 9,1, immobilier 4,1, information et communication 3,1, administration, enseignement et santé 1,9, autres 1,0) ; hors finance et assurance (12,7) et agriculture (0,7)"
+    note: "Roadmap 4.1 (22/11/2026) : les bénéfices de chaque groupe de secteurs de la population sont multipliés par un facteur calé sur son IS brut (outils/population_entreprises.generer). Correspondance des secteurs d'Ésane et de la DGFiP approchée (hébergement et restauration dans les services marchands d'Ésane, comptés avec le commerce chez la DGFiP) : DÉCISION."
   entreprises_dispersion:
     valeur: {MIC: 1.0, PME: 0.8, GE_ETI: 1.3, bruit_rentabilite: 0.8}
     unite: sans_unite

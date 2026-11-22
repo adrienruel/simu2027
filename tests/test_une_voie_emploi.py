@@ -76,3 +76,23 @@ def test_transfert_code_dans_la_micro_ne_passe_pas_par_l_agrege(p):
     r = offre.effets(p, "prudent", [_mesure(f"{ident} — essai", "transferts_actifs", 1.0, poste="pauvrete")])
     assert "transferts_actifs" not in r["detail"]
     assert set(r["emplois"]) <= {"Offre : gain à travailler (microsimulation)"}
+
+
+def test_assurance_chomage_hors_elasticite_agregee(p):
+    """Roadmap 3.4 : une mesure d'assurance chômage (poste chomage) ne passe pas par l'élasticité agrégée des
+    transferts, même si elle déclare l'instrument : son emploi passe par le canal de l'assurance chômage."""
+    r = offre.effets(p, "prudent", [_mesure("ESSAI — chômage", "transferts_actifs", -3.0, poste="chomage")])
+    assert r["emplois"] == {}
+    assert "transferts_actifs" not in r["detail"]
+
+
+def test_mesure_du_travail_garde_sa_voie_pour_ses_lignes_de_prestations(p):
+    """Une mesure codée dans la micro dont une ligne passe par les prélèvements du travail : sa ligne de prestations
+    (poste pauvrete, même identifiant) ne repasse pas par la micro."""
+    table = offre.micro_emploi()
+    if not table or not p.val("offre.micro_emploi"):
+        pytest.skip("table de la micro absente")
+    ident = next(iter(table))
+    r = offre.effets(p, "prudent", [_mesure(f"{ident} — cotisations", "travail", -3.0),
+                                    _mesure(f"{ident} — prime d'activité en moins", "", -0.5, poste="pauvrete")])
+    assert "Offre : gain à travailler (microsimulation)" not in r["emplois"]

@@ -180,7 +180,7 @@ def construire(operations: list[dict]):
 
 # --- Calcul --------------------------------------------------------------------------------------------------
 
-POST = ("garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
+POST = ("consommation", "patrimoine", "cotisations_employeur", "heures_supplementaires", "jeunes_enfants", "garantie_niveau_vie", "plafond_aides", "revenu_incitation", "condition_nationalite", "rsa_duree",
         "allocation_unique", "capitalisation")  # règles appliquées après le calcul d'OpenFisca
 EMPLOI = ("salarie_prive", "agent_public", "independant")
 AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
@@ -188,6 +188,109 @@ AIDES = ("rsa", "ppa", "aide_logement", "af", "cf", "asf", "ars", "paje_base")
 
 def _post(operations):
     return [o["formule"] for o in operations if "formule" in o and o["formule"]["nom"] in POST]
+
+
+EN_EMPLOI_OU_NON = ("salarie_prive", "agent_public", "independant", "chomeur", "inactif")
+
+
+def age_depart(lg: list[dict], x: dict) -> None:
+    """Roadmap 3.3 (21/11/2026) : âge de départ changé dans la population (modifie lg en place).
+
+    x : {age_actuel, age_cible} (âges légaux, ans). Taux de retraités par âge de la population, r(a). Au nouvel âge,
+    le profil de départ est décalé de Δ = age_actuel − age_cible : r'(a) = r(a + Δ), plafonné à 70 ans.
+    - Âge abaissé (Δ > 0) : à chaque âge, une part (r' − r) / (1 − r) des personnes qui ne sont pas encore
+      retraitées (en emploi, au chômage, inactives) part. Pension brute : taux de remplacement brut
+      (microsimulation.taux_remplacement_brut) × leur revenu d'activité ; sinon la pension médiane des retraités de
+      62 à 66 ans de la population.
+    - Âge relevé (Δ < 0) : une part (r − r') / r des retraités de chaque âge ne l'est plus ; ils sont en emploi,
+      au chômage ou inactifs selon le partage des seniors maintenus en activité (seniors.devenir, prudent), salaire
+      = pension / taux de remplacement, allocation de chômage = microsimulation.taux_are × ce salaire.
+    Tirages fixés (graine par personne), mêmes ménages."""
+    import random
+    from moteur.parametres import Parametres
+    p = Parametres()
+    tr = p.val("microsimulation.taux_remplacement_brut")
+    are = p.val("microsimulation.taux_are")
+    emp, cho = p.val("seniors.devenir", "prudent")
+    delta = float(x["age_actuel"]) - float(x["age_cible"])
+    if abs(delta) < 1e-9:
+        return
+    adultes = [l for l in lg if l["statut"] in (*EN_EMPLOI_OU_NON, "retraite")]
+    tot, ret = {}, {}
+    for l in adultes:
+        tot[l["age"]] = tot.get(l["age"], 0.0) + l["poids"]
+        if l["statut"] == "retraite":
+            ret[l["age"]] = ret.get(l["age"], 0.0) + l["poids"]
+
+    def r(a: float) -> float:
+        a = min(70, max(50, int(round(a))))
+        return ret.get(a, 0.0) / tot[a] if tot.get(a) else 1.0
+    pens = sorted(l["pension_brute"] for l in adultes if l["statut"] == "retraite" and 62 <= l["age"] <= 66
+                  and l["pension_brute"] > 0)
+    mediane = pens[len(pens) // 2] if pens else 0.0
+    bas, haut = (int(x["age_cible"]), int(x["age_actuel"]) + 3) if delta > 0 else (int(x["age_actuel"]), int(x["age_cible"]) + 3)
+    for i, l in enumerate(lg):
+        a = l["age"]
+        if not (bas <= a <= haut):
+            continue
+        u = random.Random(1000003 * i + 17).random()
+        if delta > 0 and l["statut"] in EN_EMPLOI_OU_NON:
+            r0, r1 = r(a), r(a + delta)
+            if r0 < 1 and u < max(0.0, (r1 - r0) / (1 - r0)):
+                activite = max(0.0, l["salaire_brut"]) + max(0.0, l["revenu_independant"])
+                l["pension_brute"] = tr * activite if activite > 0 else mediane
+                for k in ("salaire_brut", "cout_employeur", "revenu_independant", "chomage_brut"):
+                    l[k] = 0.0
+                l["statut"], l["mois_travailles"], l["debut_mois"] = "retraite", 0, 0
+        elif delta < 0 and l["statut"] == "retraite":
+            r0, r1 = r(a), r(a + delta)
+            if r0 > 0 and u < max(0.0, (r0 - r1) / r0):
+                salaire = l["pension_brute"] / tr
+                l["pension_brute"] = 0.0
+                v = random.Random(1000003 * i + 29).random()
+                if v < emp:
+                    l["statut"], l["salaire_brut"], l["mois_travailles"], l["debut_mois"] = "salarie_prive", salaire, 12, 0
+                elif v < emp + cho:
+                    l["statut"], l["chomage_brut"] = "chomeur", are * salaire
+                else:
+                    l["statut"] = "inactif"
+
+
+def depenses_bdf() -> dict:
+    """Dépense annuelle moyenne par ménage (€ de 2017) par poste et décile de niveau de vie : {(code, décile): €}
+    (Insee, Budget de famille 2017, TF106)."""
+    f = RACINE / "parametres" / "donnees" / "bdf2017_tf106.csv"
+    out = {}
+    for ligne in f.read_text(encoding="utf-8").splitlines()[1:]:
+        if not ligne.strip():
+            continue
+        code, dec, v = ligne.split(";")
+        if dec != "TOT":
+            out[(code, int(dec))] = float(v)
+    return out
+
+
+def tranche_hvp(cum: np.ndarray) -> np.ndarray:
+    """Tranche de l'enquête Histoire de vie et Patrimoine pour une position cumulée (0 à 1) dans la distribution du
+    revenu disponible : D1 à D9, puis P90_95, P95_99 et P99 (1 % du haut)."""
+    cum = np.asarray(cum, float)
+    dix = np.array([f"D{k}" for k in range(1, 10)], object)[np.minimum(8, (cum * 10).astype(int))]
+    return np.where(cum < 0.9, dix, np.where(cum < 0.95, "P90_95", np.where(cum < 0.99, "P95_99", "P99")))
+
+
+def patrimoine_hvp() -> dict:
+    """Patrimoine moyen par ménage (€ de début 2021) par tranche de revenu disponible et composante (brut, net,
+    immobilier, financier, professionnel) : Insee, Histoire de vie et Patrimoine 2020-2021."""
+    f = RACINE / "parametres" / "donnees" / "hvp2021_patrimoine_revdisp.csv"
+    out = {}
+    for ligne in f.read_text(encoding="utf-8").splitlines()[1:]:
+        if not ligne.strip():
+            continue
+        t, b, im, fi, pr, _re, en = ligne.split(";")
+        b = float(b)
+        out[t] = {"brut": b, "net": b * (1 - float(en) / 100), "immobilier": b * float(im) / 100,
+                  "financier": b * float(fi) / 100, "professionnel": b * float(pr) / 100}
+    return out
 
 
 def emplois_par_scenario(pp, rel, t, bande, eta: dict, valeur) -> dict:
@@ -401,6 +504,20 @@ class Base:
                 rd = rd - np.bincount(s["menage"], weights=verse, minlength=s["n_menages"])
                 fonds += float((self.pp * verse).sum()) / 1e9
         for x in post:
+            if x["nom"] == "consommation":
+                rd = rd + self.gain_consommation(rd, uc, x)
+            if x["nom"] == "patrimoine":
+                rd = rd + self.gain_patrimoine(rd, x)
+            if x["nom"] == "cotisations_employeur":
+                rd = rd + self.gain_cotisations_employeur(x)
+            if x["nom"] == "jeunes_enfants":
+                rd = rd + self.gain_jeunes_enfants(x)
+            if x["nom"] == "heures_supplementaires":
+                # la population n'a pas les heures : montant du moteur sur les salariés du privé de la bande (par
+                # défaut 1 à 2,5 SMIC : ouvriers, employés et professions intermédiaires font la plupart des heures
+                # supplémentaires, Insee, enquête sur la structure des salaires 2014), sans part d'incidence
+                rd = rd + self.gain_cotisations_employeur({"bande_smic": (1.0, 2.5), **x, "directe": True})
+        for x in post:
             if x["nom"] == "garantie_niveau_vie":
                 # niveau de vie porté au seuil, ménages dont la personne de référence n'est pas étudiante (champ de
                 # l'Insee ; les jeunes ont leur propre mesure)
@@ -418,6 +535,71 @@ class Base:
         cout_pub = float((self.pp * cout_i * self.public).sum()) / 1e9
         return {"rd": rd, "uc": uc, "cout_m": cout_m, "cout": float((self.wm * cout_m).sum()) / 1e9, "cout_public": cout_pub,
                 "rd_total": float((self.wm * rd).sum()) / 1e9, "comp": comp, "fonds": fonds}
+
+    def gain_consommation(self, rd: np.ndarray, uc: np.ndarray, x: dict) -> np.ndarray:
+        """Roadmap 3.1 (22/11/2026) : gain (+) ou perte (−) de pouvoir d'achat par ménage (€ par an) d'une mesure sur
+        les prix de postes de consommation (TVA, accises, prix bloqués). La population n'a pas la consommation : le
+        montant vient du moteur (montant_moteur, à plein effet ; + = le solde s'améliore, les ménages perdent) et se
+        répartit selon la dépense moyenne des ménages de leur décile de niveau de vie pour ces postes (Insee, enquête
+        Budget de famille 2017, tableau TF106, parametres/donnees/bdf2017_tf106.csv). Postes : codes de la nomenclature
+        (COICOP de l'enquête), par exemple 0722 carburants, 045 électricité, gaz et combustibles, 0451 électricité,
+        011 alimentation. Montant donné directement par montant_md, ou lu dans le moteur (programme, mesure)."""
+        md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
+        dep = depenses_bdf()
+        nv = rd / np.maximum(uc, 1e-9)
+        ordre = np.argsort(nv)
+        cum = np.cumsum(self.wm[ordre]) / self.wm.sum()
+        dec = np.empty(len(nv), int)
+        dec[ordre] = np.minimum(10, 1 + (cum * 10).astype(int))
+        w = np.array([sum(dep[(c, int(d))] for c in x["postes"]) for d in dec])
+        return -md * 1e9 * w / float((self.wm * w).sum())
+
+    def gain_cotisations_employeur(self, x: dict) -> np.ndarray:
+        """Derniers trous de la micro (22/11/2026) : gain (+) ou perte (−) par ménage (€ par an) d'une mesure sur les
+        cotisations des employeurs privés (allègements, taux). À court terme, rien ne change pour les ménages ; à long
+        terme, la part `entreprises.incidence_menages.salaires` (Fuest, Peichl et Siegloch, 2018) retombe sur les
+        salaires. Montant du moteur (× x["part_montant"], part de la mesure portée par les employeurs, 1 par défaut),
+        réparti au prorata du salaire brut des salariés du privé dont le salaire est dans la bande x["bande_smic"]
+        (en multiples du SMIC annuel, toute la distribution par défaut)."""
+        md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
+        md *= float(x.get("part_montant", 1.0))
+        if not x.get("directe"):
+            md *= Parametres().val("entreprises.incidence_menages")["salaires"]
+        lo, hi = x.get("bande_smic", (0.0, 1e9))
+        smic_an = ps_smic() * 12
+        brut = np.array([l["salaire_brut"] if l["statut"] == "salarie_prive" else 0.0 for l in self.lignes])
+        w_i = np.where((brut > lo * smic_an) & (brut <= hi * smic_an), brut, 0.0)
+        w = np.bincount(self.s["menage"], weights=w_i, minlength=len(self.wm))
+        return -md * 1e9 * w / float((self.wm * w).sum())
+
+    def gain_jeunes_enfants(self, x: dict) -> np.ndarray:
+        """Derniers trous de la micro (22/11/2026) : congés de naissance et parentaux, places et gratuité de l'accueil
+        du jeune enfant. Montant du moteur (+ = le solde s'améliore) réparti par enfant de x["age_max"] ans au plus
+        (0 : congés de naissance ; 2 : accueil avant l'école), en revenu des familles (transfert en nature pour
+        l'accueil)."""
+        md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
+        enf = np.array([float(l["role"] == "enfant" and l["age"] <= int(x.get("age_max", 0))) for l in self.lignes])
+        w = np.bincount(self.s["menage"], weights=enf, minlength=len(self.wm))
+        return -md * 1e9 * w / float((self.wm * w).sum())
+
+    def gain_patrimoine(self, rd: np.ndarray, x: dict) -> np.ndarray:
+        """Roadmap 3.2 (22/11/2026) : gain (+) ou perte (−) par ménage (€ par an) d'une mesure sur le patrimoine (ISF,
+        IFI, impôt plancher, droits de succession). La population n'a pas le patrimoine : le montant vient du moteur
+        (montant_moteur ou montant_md ; + = le solde s'améliore, les ménages perdent) et se répartit selon le
+        patrimoine moyen de leur tranche de revenu disponible (Insee, enquête Histoire de vie et Patrimoine 2020-2021,
+        parametres/donnees/hvp2021_patrimoine_revdisp.csv : dixièmes, puis 90-95e, 95-99e centiles et 1 % du haut).
+        x["composante"] : brut, net, immobilier, financier ou professionnel ; x["tranches"] : tranches visées (par
+        défaut toutes), pour les impôts réservés aux plus gros patrimoines."""
+        md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
+        pat = patrimoine_hvp()
+        comp = x.get("composante", "net")
+        vises = set(x.get("tranches", pat))
+        ordre = np.argsort(rd)
+        cum = np.cumsum(self.wm[ordre]) / self.wm.sum()
+        tr = np.empty(len(rd), object)
+        tr[ordre] = tranche_hvp(cum - self.wm[ordre] / (2 * self.wm.sum()))  # milieu du poids du ménage
+        w = np.array([pat[t][comp] if t in vises else 0.0 for t in tr])
+        return -md * 1e9 * w / float((self.wm * w).sum())
 
     def capitalisation(self, sim, x: dict) -> np.ndarray:
         """Part salariale versée au fonds par personne (€ par an) : les salariés et agents publics les plus jeunes en
@@ -471,7 +653,7 @@ class Base:
             v[choix] = (e["cout_m"] - cf[nom]["cout_m"])[m[choix]] - g[choix]
         return {"gain": g, "valeur": v}
 
-    def emploi_effet(self, e1, cf1, s: str = "prudent", releves=None) -> dict:
+    def emploi_effet(self, e1, cf1, s: str = "prudent", releves=None, exclus=None) -> dict:
         """Emplois en plus (personnes) et effet sur le solde (Md€) de la variation du gain à travailler : élasticité
         de participation de la tranche de salaire (offre.travail_participation) × facteur propre aux transferts
         (offre.participation_transferts), appliquée aux personnes en emploi (Immervoll et al., 2007). Rend le
@@ -489,6 +671,8 @@ class Base:
         rel[t] = np.clip((b["gain"][t] - a["gain"][t]) / np.maximum(a["gain"][t], 1.0), -1, 1)
         if releves is not None:
             rel[releves & (rel > 0)] = 0.0
+        if exclus is not None:
+            rel[exclus] = 0.0  # statut changé par la mesure (âge de départ) : compté par le canal des seniors
         par = emplois_par_scenario(self.pp, rel, t, self.bande, eta, b["valeur"])
         return {**par[s], "scenarios": par}
 
@@ -527,6 +711,36 @@ class Base:
                     else:
                         continue
                     l["salaire_brut"] = b2 * mois
+            if "age_depart" in x:
+                age_depart(lg, x["age_depart"])
+                continue
+            if "assurance_chomage" in x:
+                # roadmap 3.4 (22/11/2026) : allocations de chômage changées. La population n'a ni la durée
+                # d'indemnisation ni l'ancienneté : le montant vient du moteur (montant_moteur, à plein effet) et se
+                # répartit au prorata de l'allocation des chômeurs concernés (âge, seuil d'allocation)
+                y = x["assurance_chomage"]
+                md = float(y["montant_md"]) if "montant_md" in y else montant_moteur(y["programme"], y["mesure"])
+                age_max = y.get("age_max", 200)
+                seuil = 12 * float(y.get("seuil_mensuel", 0.0))
+                vises = [l for l in lg if l["chomage_brut"] > seuil and l["age"] < age_max]
+                masse = sum(l["poids"] * (l["chomage_brut"] - seuil) for l in vises) / 1e9  # part au-dessus du seuil
+                if masse > 0:
+                    k = max(0.0, 1 - md / masse)  # économie (+) : allocations en moins
+                    for l in vises:
+                        l["chomage_brut"] = seuil + (l["chomage_brut"] - seuil) * k
+                continue
+            if "pension_minimum" in x:
+                # roadmap 3.3 : pensions des carrières complètes portées à un minimum. Carrière complète lue sur le
+                # montant : une pension au-dessus du plancher (microsimulation.plancher_carriere_complete, minimum
+                # contributif majoré et complémentaire) ; en dessous, carrière incomplète, inchangée
+                y = x["pension_minimum"]
+                cible = 12 * float(y["mensuel_brut"])
+                plancher = 12 * float(y.get("plancher_mensuel_brut",
+                                            Parametres().val("microsimulation.plancher_carriere_complete")))
+                for l in lg:
+                    if l["statut"] == "retraite" and plancher <= l["pension_brute"] < cible:
+                        l["pension_brute"] = cible
+                continue
             if "pensions" in x:
                 y = x["pensions"]
                 annee = getattr(self, "annee", 2026)
@@ -542,8 +756,13 @@ class Base:
                 # pensions au-delà d'un seuil mensuel brut multipliées par un facteur (gel, sous-indexation), perte qui
                 # s'éteint avec les retraités concernés après la dernière année (≈ 18 ans, comme le moteur)
                 fin = y.get("fin", 2032)
-                k = 1 - (1 - y["facteur"]) * (math.exp(-(annee - fin) / 18) if annee > fin else 1.0)
                 seuil = 12 * y.get("seuil_mensuel", 0.0)
+                if "programme" in y:
+                    # facteur calé sur le montant du moteur (+ = le solde s'améliore, les retraités perdent), réparti au
+                    # prorata des pensions au-delà du seuil (3.3, 22/11/2026)
+                    masse = sum(l["poids"] * l["pension_brute"] for l in lg if l["pension_brute"] > seuil)
+                    y = {**y, "facteur": 1 - montant_moteur(y["programme"], y["mesure"]) * 1e9 / masse}
+                k = 1 - (1 - y["facteur"]) * (math.exp(-(annee - fin) / 18) if annee > fin else 1.0)
                 for l in lg:
                     if l["pension_brute"] > seuil:
                         l["pension_brute"] *= k
@@ -574,7 +793,12 @@ class Base:
             if lg is not None and any("smic_net_2027" in o.get("population", {}) or "smic_brut_2026" in o.get("population", {})
                                       for o in operations):
                 releves = np.array([l2["salaire_brut"] > l1["salaire_brut"] + 1.0 for l1, l2 in zip(self.lignes, lg)])
-            out["emploi"] = self.emploi_effet(e1, cf1, releves=releves)
+            if lg is not None:
+                # âge de départ (3.3) : les personnes qui changent de statut sont comptées par le canal des seniors
+                exclus = np.array([l1["statut"] != l2["statut"] for l1, l2 in zip(self.lignes, lg)])
+            else:
+                exclus = None
+            out["emploi"] = self.emploi_effet(e1, cf1, releves=releves, exclus=exclus)
         return out
 
     def deciles(self, e1: dict) -> list[dict]:
@@ -608,7 +832,11 @@ def montant_moteur(nom: str, ident: str, s: str = "prudent") -> float:
         x = par.valeur
         if not isinstance(x, dict) or x.get("id") != ident:
             continue
-        m = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
+        if "pfu" in x:  # roadmap 4.4 : montant de la règle commune (moteur/capital_dirigeants.py)
+            from moteur.capital_dirigeants import recette_pfu
+            m = recette_pfu(p, s, **x["pfu"])["total"]
+        else:
+            m = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
         tot += m if x["poste"] == "recettes" else -m
     return tot
 

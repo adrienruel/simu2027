@@ -116,3 +116,90 @@ pèse le plus pour les programmes à fort déficit (Mélenchon, Roussel) ; l'él
 - Calcul : ≈ 6 s par tirage pour les quatorze trajectoires sur deux processus (1 000 tirages ≈ 1 h 40) ;
   les tirages sont écrits au fil de l'eau (`sorties/incertitude_tirages_*.jsonl`) et le calcul reprend après une
   interruption.
+
+## Roadmap 6.1 : lois sourcées, premier pas (22/11/2026)
+
+- **Mécanisme :** `parametres/commun/lois.yaml` reçoit, pour une cible du Monte Carlo, ses centiles 10 et 90 tirés
+  de la littérature, avec la source (`moteur/incertitude.lois`). Ces valeurs remplacent les colonnes de scénario
+  pour le tirage seulement ; les scénarios publiés ne changent pas. Aucune loi n'est encore écrite.
+- **Classement des poids :** `outils/poids_incertitude.py`. On fait varier chaque paramètre seul, du centile 10 au
+  centile 90, et on mesure le demi-écart du déficit 2037 du statu quo et de l'écart moyen des programmes. Le calcul
+  a été coupé par la mémoire après 37 cibles sur 78 ; relancé par lots le 22/11 (classement complet plus bas).
+- **Premières cibles** (points de PIB en 2037, médian) :
+
+| Cible | Déficit du statu quo | Écart moyen des programmes | Écart maximal |
+|---|---|---|---|
+| `macro.ia_productivite` | 0,59 | 0,04 | 0,13 |
+| `macro.tendance` | 0,34 | 0,02 | 0,11 |
+| `macro.reformes_structurelles/poids` | 0 | 0,17 | 0,62 |
+| `macro.prime_dette` | 0,10 | 0,02 | 0,10 |
+| `emploi_public.eviction_privee` | 0 | 0,07 | 0,14 |
+| `inflation.long_terme` | 0,07 | 0 | 0 |
+| `macro.multiplicateur` | 0 | 0,04 | 0,12 |
+| `cohortes.effet_composition_salaires` | 0,02 | 0,01 | 0,04 |
+| `offre.travail_part_pib` | 0 | 0,02 | 0,08 |
+| `offre.travail_heures` | 0 | 0,02 | 0,11 |
+
+- **À arbitrer (Adrien) avant d'écrire les lois :**
+  - Le centre du Monte Carlo est la colonne médiane. Pour la tendance de productivité, elle vaut 1,0 %, comme
+    l'optimiste, alors que la référence du COR est 0,7 %. Une loi sourcée sur le COR (0,4 / 0,7 / 1,0) déplacerait le
+    centre.
+  - Pour l'IA, la fourchette d'Aghion et Bunel (0,07 à 1,24 point par an) est celle des estimations publiées, pas
+    une loi de probabilité.
+
+### Classement complet (22/11/2026, `sorties/poids_incertitude.csv`)
+
+Relancé par lots de 8 cibles dans des processus séparés (reprise sur `.cache/poids_incertitude_lignes.jsonl`),
+après les chantiers 2.3, 2.4, 4.2 et 4.3 du même jour. 52 cibles sur 78 pèsent ; les autres ne
+bougent ni le statu quo ni les programmes en 2037 (paramètres de canaux qu'aucun programme n'utilise, ou d'après
+2037). Les 20 premières (points de PIB en 2037, médian) :
+
+| Rang | Cible | Déficit du statu quo | Écart moyen des programmes | Écart maximal |
+|---|---|---|---|---|
+| 1 | `macro.ia_productivite` | 0,59 | 0,04 | 0,13 |
+| 2 | `macro.tendance` | 0,34 | 0,02 | 0,11 |
+| 3 | `macro.reformes_structurelles/poids` | 0,00 | 0,17 | 0,62 |
+| 4 | `macro.prime_dette` | 0,10 | 0,02 | 0,10 |
+| 5 | `emploi_public.eviction_privee` | 0,00 | 0,08 | 0,16 |
+| 6 | `inflation.long_terme` | 0,07 | 0,00 | 0,00 |
+| 7 | `seniors.devenir` | 0,00 | 0,05 | 0,14 |
+| 8 | `programme_commun.canaux_adoption_ia_part` | 0,00 | 0,04 | 0,21 |
+| 9 | `macro.multiplicateur` | 0,00 | 0,04 | 0,12 |
+| 10 | `capacite.effet_au_dela` | 0,00 | 0,03 | 0,23 |
+| 11 | `bouclage.prime_demande` | 0,00 | 0,03 | 0,14 |
+| 12 | `cohortes.effet_composition_salaires` | 0,02 | 0,01 | 0,04 |
+| 13 | `enveloppe_economies.domaines/etat/capacite` | 0,00 | 0,03 | 0,10 |
+| 14 | `offre.travail_part_pib` | 0,00 | 0,02 | 0,08 |
+| 15 | `offre.travail_heures` | 0,00 | 0,02 | 0,11 |
+| 16 | `demographie.titres_vers_solde/realisation` | 0,00 | 0,02 | 0,06 |
+| 17 | `capacite.seuil_pib` | 0,00 | 0,01 | 0,09 |
+| 18 | `offre.recherche/rendement` | 0,00 | 0,01 | 0,10 |
+| 19 | `enveloppe_economies.domaines/prestations/capacite` | 0,00 | 0,01 | 0,10 |
+| 20 | `logement_offre.bareme/logements` | 0,00 | 0,01 | 0,07 |
+
+- **Trois familles :**
+  - **croissance du statu quo** (IA, tendance, prime de dette, inflation) : elles font la fourchette du déficit ;
+    elles bougent peu les écarts entre programmes ;
+  - **lectures communes des programmes** (poids des réformes de structure, éviction de l'emploi public, adoption de
+    l'IA, enveloppes d'économies, titres de séjour) : ce sont des conventions, pas des paramètres de la littérature ;
+    leur loi est une décision ;
+  - **élasticités** (multiplicateur, devenir des seniors, capacité, prime de demande, offre de travail, recherche) :
+    les seules pour lesquelles la littérature donne une fourchette.
+- **Lois :** toujours aucune écrite (`lois.yaml` vide). Elles attendent l'arbitrage du centre (ci-dessus) : une
+  loi sourcée déplace le centre du Monte Carlo chaque fois que la colonne médiane n'est pas le centre de la
+  littérature.
+
+## Roadmap 6.2 : corrélation historique (22/11/2026)
+
+- **Données :** Insee, comptes nationaux annuels base 2020 (tableaux 1.102 et 1.108, fournis par Adrien) : PIB en
+  volume et emploi intérieur total, 1978-2025. Productivité par tête = PIB / emploi.
+- **Corrélation entre la croissance de la productivité et celle de l'emploi** (`outils/correlations_historiques.py`) :
+  annuelle (hors 2020-2021) +0,14 ; moyennes sur 5 ans −0,24 (glissantes), +0,03 (disjointes) ; sur 10 ans −0,28
+  (glissantes), −0,31 (disjointes).
+- **Lecture :** sur la durée, les décennies de forte productivité ne sont pas celles de fort emploi (plutôt
+  l'inverse : enrichissement de la croissance en emplois des années 2000 et 2010). La borne ρ = 1 du Monte Carlo
+  (productivité, comportements et emploi bons ou mauvais ensemble) n'est pas soutenue par l'histoire pour ces deux
+  familles ; la borne ρ = 0 est la plus proche des données.
+- **Pas fait :** les taux (la série de l'OAT à 10 ans de la Banque de France n'a pas pu être téléchargée) et les
+  multiplicateurs (pas de série historique). Le Monte Carlo garde ses deux bornes ; publier ρ = 0 comme cas central,
+  ou passer à des familles de paramètres corrélées entre elles, est une décision d'Adrien.

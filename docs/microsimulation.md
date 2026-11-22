@@ -445,3 +445,350 @@ patrimoine.
 **ERFS** : l'accès est à demander à l'Insee par le CASD (Centre d'accès sécurisé aux données), au nom d'Adrien.
 Il faut un projet, un habilitant et une convention. Quand l'accès sera ouvert, l'ERFS remplacera la population
 synthétique.
+
+## Roadmap 3.3, premier pas : âge de départ dans la population (21/11/2026)
+
+- Opération `population: {age_depart: {age_actuel, age_cible}}` (`outils/openfisca_mesures.age_depart`).
+- **Principe :** le profil de départ par âge de la population de 2026 est décalé de l'écart entre l'âge du
+  programme et celui du statu quo à terme (64 ans).
+- **Âge abaissé :** à chaque âge, une part des personnes qui ne sont pas encore retraitées part. Leur pension brute
+  vaut 0,64 × leur revenu d'activité (`microsimulation.taux_remplacement_brut`) : c'est le taux de remplacement net
+  médian de 75 % de la Drees pour les carrières complètes, passé en brut. Sans revenu d'activité, elles reçoivent la
+  pension médiane des 62-66 ans.
+- **Âge relevé :** une part des retraités reprend un emploi, s'inscrit au chômage (allocation de 57 % du salaire)
+  ou devient inactive, selon `seniors.devenir`.
+- **Emplois :** les personnes qui changent de statut sont comptées par le canal des seniors du moteur, pas par le
+  gain à travailler.
+- **Codé pour sept programmes**, même règle pour tous : GLU-RET-01, RN-RET-01 et RET-01 (62 ans), LFI-RET-01 et
+  PCF-RET-01 (60 ans), BER-RET-01 et PHI-RET-01 (65 ans).
+- **Ordres de grandeur**, population de 2026 :
+
+| Âge cible | Retraités | Pensions brutes | Effet statique d'OpenFisca | Moteur, pensions en 2032 |
+|---|---|---|---|---|
+| 62 ans | +0,67 million | +18,4 Md€ | −27,1 Md€ | 23,5 Md€ |
+| 60 ans | +1,7 million | +45 Md€ | −55,7 Md€ | 48,1 Md€ |
+| 65 ans | −0,35 million | −8 Md€ | +8,4 Md€ | — |
+
+  L'effet statique d'OpenFisca compte aussi les prélèvements perdus sur les revenus d'activité, ce que le moteur
+  compte par le canal des seniors.
+- **Couverture du budget « ménages »** (seuil de publication des déciles : 80 %) :
+  - Bertrand 65 → 90 %
+  - Roussel 31 → 76 %
+  - Philippe 38 → 64 %
+  - Glucksmann 29 → 63 %
+  - Mélenchon 39 → 63 %
+  - Le Pen 15 → 55 %
+  - Tondelier 35 → 51 %
+- **Minimum de pension des carrières complètes** (`population: {pension_minimum: {mensuel_brut}}`) :
+  - La population n'a pas la durée de carrière : une pension brute au-dessus de 1 000 € par mois
+    (`microsimulation.plancher_carriere_complete`, minimum contributif majoré et complémentaire) est lue comme une
+    carrière complète.
+  - Ces pensions sont portées au minimum. Pour LFI-RET-03, SMIC net de 1 700 €, soit ≈ 1 870 € brut : 4,3 millions
+    de retraités, ≈ +20 Md€ bruts. Cela retrouve l'encadrement du moteur (4,3 millions, ≈ 350 € par mois, 22 Md€
+    au prudent).
+  - Effet statique d'OpenFisca : −17,3 Md€, après la CSG et l'impôt sur le revenu repris.
+  - Couverture de Mélenchon : 63 → 74 %.
+- **Non représentés :** durée d'assurance, carrières longues, décote.
+
+## Roadmap 3.4 et 3.5 : assurance chômage et prélèvements rendus aux actifs (22/11/2026)
+
+- **Assurance chômage** (`population: {assurance_chomage: {programme, mesure, age_max?, seuil_mensuel?}}`) :
+  - La population n'a ni la durée d'indemnisation ni l'ancienneté. Le montant vient donc du moteur, à plein effet,
+    et se répartit au prorata de l'allocation des chômeurs concernés.
+  - Codé pour huit mesures, même règle pour tous : ATT-EMP-01, BER-ECO-01, GLU-EMP-02, LFI-PRE-05, PHI-EMP-02
+    (moins de 50 ans), RET-EMP-03, LIS-EMP-04, PRE-15. Exemple : Philippe, effet statique +2,3 Md€.
+  - L'emploi passe par le canal de l'assurance chômage du programme. La micro n'en compte pas, et l'élasticité
+    agrégée des transferts n'en compte plus non plus (`moteur/offre.effets`) : elle comptait ces mesures une seconde
+    fois, pour quelques milliers d'emplois (Attal, Philippe, Retailleau, Lisnard, Glucksmann, Mélenchon). Écarts de
+    solde primaire 2037 : moins de 0,02 point.
+- **Cotisations salariales rendues** (variable OpenFisca `cotisations_salariales`, facteur) :
+  - LIS-ECO-02 : −93,6 Md€ bruts ; effet statique −71,7 Md€, contre −72,0 au moteur.
+  - RET-ECO-06 : −13,3 Md€ bruts ; effet statique −10,4 Md€.
+  - Facteurs tirés des cotisations salariales de la population (≈ 106,6 Md€).
+- **CSG d'activité** de 9,2 à 6,6 % (LIS-ECO-07) : effet statique −20,0 Md€.
+- **Une seule voie** : une mesure dont une ligne passe par les prélèvements du travail (cellules) garde cette voie.
+  Ses lignes de prestations (prime d'activité en moins…) ne repassent pas par la micro.
+- **Couverture du budget « ménages »** (en %) :
+
+| Programme | Couverture |
+|---|---|
+| Bertrand | 100 |
+| Lisnard | 94 |
+| Attal | 87 |
+| Retailleau | 83 |
+| Zemmour | 80 |
+| Mélenchon | 78 |
+| Philippe | 77 |
+| Roussel | 76 |
+| Glucksmann | 72 |
+| Arthaud | 67 |
+| Le Pen | 55 |
+| Tondelier | 55 |
+
+  Six programmes atteignent le seuil de 80 %, contre deux avant la roadmap 3.3. Ce qui reste tient surtout à la
+  consommation : TVA et carburants (3.1, données de l'enquête Budget de famille en attente).
+
+## Roadmap 3.1 : consommation par ménage (22/11/2026)
+
+- **Données :** Insee, enquête Budget de famille 2017. Dépense annuelle moyenne par ménage, par poste de
+  consommation et décile de niveau de vie (TF106, `parametres/donnees/bdf2017_tf106.csv`). Le tableau TF107 (même
+  dépense par quintile, propriétaires et locataires) est archivé, mais pas encore utilisé.
+- **Opération :** `formule: {nom: consommation, postes: [codes], programme, mesure}`
+  (`outils/openfisca_mesures.gain_consommation`).
+  - La population n'a pas la consommation. Le montant de la mesure vient du moteur, à plein effet, et se répartit
+    entre ménages selon la dépense de leur décile pour ces postes.
+  - La baisse de prix est entièrement répercutée, sans changement des quantités consommées.
+- **Codé, même règle pour tous :**
+
+| Mesure | Postes | Codes |
+|---|---|---|
+| RN-FIS-01, RN-ENE-03 | carburants et énergie du logement | 0722, 045 |
+| RN-FIS-02, PCF-FIS-06 | alimentation | 011 |
+| PCF-FIS-07, ZEM-FIS-01b, ART-ENE-02 | carburants | 0722 |
+| GLU-ENE-03 | électricité | 0451 |
+
+- **Ajout du 22/11 au chantier 3.3 :** LIS-RET-02 (âge de 65 ans), oubliée le 21/11.
+- **Couverture du budget « ménages »** (en %) :
+
+| Programme | Couverture |
+|---|---|
+| Bertrand | 100 |
+| Lisnard | 98 |
+| Roussel | 90 |
+| Attal | 87 |
+| Le Pen | 87 |
+| Zemmour | 87 |
+| Retailleau | 83 |
+| Mélenchon | 78 |
+| Philippe | 77 |
+| Glucksmann | 77 |
+| Arthaud | 74 |
+| Tondelier | 55 |
+
+  Huit programmes atteignent le seuil de 80 % (critère de la phase 3 : dix). Ce qui reste :
+  - patrimoine (3.2) : taxe Zucman, ISF, successions ;
+  - Tondelier : exonérations au-delà de 1,6 SMIC, cotisations vieillesse ;
+  - congés parentaux.
+
+
+## Roadmap 3.2 : patrimoine par ménage (22/11/2026)
+
+- **Données :** Insee, enquête Histoire de vie et Patrimoine 2020-2021 (tableaux fournis par Adrien, archivés dans
+  `parametres/sources/insee_hvp2021/`). Patrimoine brut moyen par ménage et parts de ses composantes (immobilier,
+  financier, professionnel, résiduel, endettement), par tranche de revenu disponible du ménage : dixièmes D1 à D9,
+  puis 90-95e et 95-99e centiles, puis 1 % du haut (`hvp_mtpatbrut_composante_fr.xlsx`, feuille REVDISP ;
+  `parametres/donnees/hvp2021_patrimoine_revdisp.csv`). Exemples : 104 400 € en D1, 2,83 M€ pour le 1 % du haut.
+- **Opération :** `formule: {nom: patrimoine, composante, tranches?, programme, mesure}`
+  (`outils/openfisca_mesures.gain_patrimoine`).
+  - La population n'a pas le patrimoine. Le montant de la mesure vient du moteur, à plein effet, et se répartit
+    entre ménages selon le patrimoine moyen de leur tranche (net, ou immobilier pour l'IFI).
+  - `tranches` limite le champ aux tranches visées : impôts réservés aux plus gros patrimoines.
+- **Limites, à lire avec les déciles :**
+  - les tranches sont de revenu disponible du ménage, pas de niveau de vie par unité de consommation ;
+  - le premier dixième a plus de patrimoine que le deuxième (indépendants à faible revenu, patrimoine
+    professionnel) ;
+  - l'enquête n'atteint pas les très grandes fortunes : la taxe Zucman (au-delà de 100 M€) est entièrement mise
+    sur le 1 % du haut, ce qui dit qui paie dans la population, pas la concentration réelle ;
+  - successions : patrimoine du ménage lui-même, comme approximation de celui des héritiers.
+- **Codé, même règle pour tous (DÉCISION, à valider par Adrien) :**
+
+| Mesure | Composante | Tranches |
+|---|---|---|
+| GLU-FIS-01 (plus gros héritages) | net | 95-99e, 1 % |
+| ZEM-FIS-02, RET-FIS-02 (droits de succession) | net | toutes |
+| LIS-FIS-04 (transmissions, taux marginal) | net | 90-95e, 95-99e, 1 % |
+| LFI-REC-05, PCF-FIS-01 (ISF) | net | 90-95e, 95-99e, 1 % |
+| LIS-FIS-02 (IFI) | immobilier | 95-99e, 1 % |
+| LFI-REC-06, PCF-FIS-02, REC-01 (impôt plancher) | net | 1 % |
+
+  ZEM-FIS-02 est calculée par la bibliothèque (pas de montant fixe) : `montant_md` −20,6 Md€ de 2026 (22,8 Md€
+  courants en 2032 au prudent), à reprendre si le moteur change.
+- **Pensions calées sur le moteur (3.3) :** l'opération `population.pensions` accepte `programme` et `mesure` à la
+  place de `facteur`. ART-RET-01 (sous-indexation du budget 2027 annulée) : pensions au-delà de 1 550 € brut par
+  mois (85 % du SMIC brut de 2026, DÉCISION) relevées du montant du moteur, pour toujours.
+- **Couverture du budget « ménages »** (en %) :
+
+| Programme | Couverture |
+|---|---|
+| Arthaud | 100 |
+| Bertrand | 100 |
+| Lisnard | 100 |
+| Zemmour | 100 |
+| Roussel | 97 |
+| Attal | 87 |
+| Le Pen | 87 |
+| Retailleau | 86 |
+| Glucksmann | 83 |
+| Mélenchon | 82 |
+| Philippe | 77 |
+| Tondelier | 59 |
+
+  Dix programmes atteignent le seuil de 80 % : critère de la phase 3 rempli. Ce qui reste : Tondelier
+  (exonérations au-delà de 1,6 SMIC, cotisations vieillesse), Philippe (heures au-delà de 35 h), congés parentaux.
+
+## Roadmap 4.1 : champ et secteurs de la population d'entreprises (22/11/2026)
+
+- **Erreur corrigée :** la population suit le champ d'Ésane (marchand non agricole et non financier), mais recevait
+  les nombres, pertes et bénéfices de toutes les entreprises à l'IS de la DGFiP, finance comprise. Son IS valait
+  67,7 Md€, contre 57,0 dans le champ (70,5 au total, dont finance 12,7 et agriculture 0,7).
+- **Correction** (`microsimulation.entreprises_champ_esane`, DGFiP Statistiques n° 51, tableau 1) : nombres et pertes
+  à 90,0 % (entreprises du champ), bénéfices à 77,2 % (résultat fiscal du champ).
+- **IS par secteur** (`microsimulation.entreprises_is_secteurs_2025`) : les bénéfices de chaque groupe de secteurs sont
+  calés sur son IS brut de 2025. Les tailles gardent la part des bénéfices de la DGFiP.
+
+| Groupe | IS de la population avant (Md€) | Après | DGFiP 2025 |
+|---|---|---|---|
+| Industrie | 18,5 | 14,7 | 14,7 |
+| Construction | 5,4 | 5,4 | 5,4 |
+| Commerce et transports | 16,8 | 17,7 | 17,7 |
+| Services (dont santé et enseignement marchands) | 26,8 | 19,2 | 19,2 |
+| **Total** | **67,7** | **57,0** | **57,0** |
+
+- **Effet sur les chiffrages :** l'IS des mesures reste ramené au total national (70,47 Md€, finance supposée réagir
+  comme les autres, inchangé). Ce qui change : la répartition entre secteurs et tailles et le retour d'IS des impôts de
+  production (LIS-FIS-01 et PHI-FIS-01 : −22,1 → −21,1 Md€ ; RN-FIS-04 : −9,7 → −9,2 ; RET-FIS-01 : −5,6 → −5,3 ;
+  REC-35 : +6,3 → +6,0). `parametres/donnees/population_entreprises_2023.csv` régénérée ; `sorties/micro_entreprises.csv`
+  à régénérer.
+
+## Roadmap 4.2 : répercussion sur les prix des impôts des entreprises (22/11/2026)
+
+- **Avant :** ce que les mesures laissent ou prennent aux entreprises allait pour moitié aux salaires (Fuest, Peichl et
+  Siegloch, 2018) et pour moitié aux actionnaires ; rien aux prix, faute de source.
+- **Maintenant :** 31 % aux prix (`entreprises.incidence_menages.prix`), d'après Baker, Sun et Yannelis (NBER WP 27058 :
+  31 % de l'impôt sur les sociétés des États américains retombe sur les consommateurs ; plus de 40 % dans leur
+  révision de 2023, d'où la borne basse). Il reste 19 % aux actionnaires.
+- **Répartition par décile :** les prix au prorata de la consommation du décile (Budget de famille 2017, TF106), et non
+  plus du revenu initial.
+- **Effet sur le solde :** seulement par le retour des prélèvements sur les dividendes, qui baisse (la part des prix
+  n'a pas de retour au budget). Écarts 2037 au prudent : au plus 0,02 point (Lisnard −0,02).
+- **À valider par Adrien :** la somme vient de deux études et de deux pays. Avec Baker et al. seuls : salaires 38 %,
+  prix 31 %, actionnaires 31 %.
+
+## Roadmap 3.6 : niveaux de vie recalés sur l'ERFS 2024 (22/11/2026)
+
+- **Cause trouvée :** le second calage de la population (effectifs de bénéficiaires du RSA, de la prime d'activité,
+  des aides au logement) ne gardait que des marges démographiques. Pour trouver assez d'allocataires, il gonflait le
+  poids des ménages modestes et tirait toute la distribution vers le bas. Masses obtenues : revenus d'indépendants
+  86 Md€ au lieu de ≈ 119 (moyenne des classiques 38 000 € au lieu de 49 000), pensions 393 Md€, allocations de
+  chômage 21,5 Md€ (52 % des chômeurs indemnisés au lieu de 72 %). Médiane du niveau de vie 24 450 €.
+- **Correction** (`outils/population_synthetique.py`, `openfisca_population.niveaux_de_vie`) : le second calage
+  tient aussi
+  - les déciles de l'ERFS 2024 (Insee Première n° 2117, `microsimulation.niveaux_de_vie_erfs`) sur son champ
+    (personne de référence non étudiante) : 10, 50 et 90 % des personnes sous D1, la médiane et D9, portés en 2026
+    (× 1,0404, comme les salaires) ;
+  - les masses des pensions (pension moyenne de la Drees × retraités), des revenus d'indépendants et des allocations
+    de chômage (part indemnisée × allocation de l'Unédic × chômeurs du BIT), et l'impôt sur le revenu du PLF 2026
+    (104 Md€ ; sans lui, le recalage le portait à 110,5).
+- **Résultat** (euros de 2026 ; Insee 2024 × 1,0404) :
+
+| Niveau de vie | Population avant | Après | Insee |
+|---|---|---|---|
+| D1 | 13 690 | 14 510 | 14 530 |
+| Médiane | 24 670 | 27 600 | 27 820 |
+| D9 | 44 720 | 48 420 | 50 540 |
+| Salariés (médiane) | – | 30 330 | 31 150 |
+| Retraités | 26 570 | 28 640 | 27 910 |
+| Chômeurs | 17 690 | 19 350 | 20 330 |
+| Enfants de moins de 18 ans | 21 960 | 23 980 | 24 780 |
+| Familles monoparentales | 19 670 | 19 960 | 19 810 |
+| Couples avec enfants | 25 840 | 29 460 | 28 630 |
+| Personnes seules de moins de 65 ans | 21 550 | 21 370 | 25 990 |
+| Couples sans enfant de moins de 65 ans | 28 670 | 29 980 | 35 260 |
+| Indépendants | 17 880 | 18 560 | 30 030 |
+| Taux de pauvreté (au seuil de la population) | 12,9 % | 16,7 % | 15,4 % |
+
+  Masses : salaires bruts 1 041 Md€, pensions 408, indépendants 116, chômage 30,6. Critère de la roadmap (médiane à
+  moins de 5 %) atteint.
+- **Restent faux :** les personnes seules et les couples sans enfant d'âge actif (−15 à −18 %), les indépendants
+  (−38 % : micro-entrepreneurs nombreux et à faibles revenus dans la population ; l'ERFS classe selon l'activité
+  déclarée), le haut de la distribution (D9 −5 %), la pauvreté (+1,3 point).
+- **Conséquences :** `emploi.allocation_chomeur_evitee` et les parts de la roadmap 2.4 recalculées (13 990 € par
+  chômeur, prime d'activité 0,343). Écarts 2037 au prudent : au plus 0,06 point (Mélenchon −0,06, Lisnard +0,03).
+  Toute la micro (ménages, emplois de la micro, ménages types) est à régénérer.
+
+## Roadmap 4.1 : champ et secteurs de la population d'entreprises (22/11/2026)
+
+- **Erreur corrigée :** la population suit le champ d'Ésane (marchand non agricole et non financier), mais recevait
+  les nombres, pertes et bénéfices de toutes les entreprises à l'IS de la DGFiP, finance comprise. Son IS valait
+  67,7 Md€, contre 57,0 dans le champ (70,5 au total, dont finance 12,7 et agriculture 0,7).
+- **Correction** (`microsimulation.entreprises_champ_esane`, DGFiP Statistiques n° 51, tableau 1) : nombres et pertes
+  à 90,0 % (entreprises du champ), bénéfices à 77,2 % (résultat fiscal du champ).
+- **IS par secteur** (`microsimulation.entreprises_is_secteurs_2025`) : les bénéfices de chaque groupe de secteurs sont
+  calés sur son IS brut de 2025. Les tailles gardent la part des bénéfices de la DGFiP.
+
+| Groupe | IS de la population avant (Md€) | Après | DGFiP 2025 |
+|---|---|---|---|
+| Industrie | 18,5 | 14,7 | 14,7 |
+| Construction | 5,4 | 5,4 | 5,4 |
+| Commerce et transports | 16,8 | 17,7 | 17,7 |
+| Services (dont santé et enseignement marchands) | 26,8 | 19,2 | 19,2 |
+| **Total** | **67,7** | **57,0** | **57,0** |
+
+- **Effet sur les chiffrages :** l'IS des mesures reste ramené au total national (70,47 Md€, finance supposée réagir
+  comme les autres, inchangé). Ce qui change : la répartition entre secteurs et tailles et le retour d'IS des impôts de
+  production (LIS-FIS-01 et PHI-FIS-01 : −22,1 → −21,1 Md€ ; RN-FIS-04 : −9,7 → −9,2 ; RET-FIS-01 : −5,6 → −5,3 ;
+  REC-35 : +6,3 → +6,0). `parametres/donnees/population_entreprises_2023.csv` régénérée ; `sorties/micro_entreprises.csv`
+  à régénérer.
+
+## Roadmap 4.2 : répercussion sur les prix des impôts des entreprises (22/11/2026)
+
+- **Avant :** ce que les mesures laissent ou prennent aux entreprises allait pour moitié aux salaires (Fuest, Peichl et
+  Siegloch, 2018) et pour moitié aux actionnaires ; rien aux prix, faute de source.
+- **Maintenant :** 31 % aux prix (`entreprises.incidence_menages.prix`), d'après Baker, Sun et Yannelis (NBER WP 27058 :
+  31 % de l'impôt sur les sociétés des États américains retombe sur les consommateurs ; plus de 40 % dans leur
+  révision de 2023, d'où la borne basse). Il reste 19 % aux actionnaires.
+- **Répartition par décile :** les prix au prorata de la consommation du décile (Budget de famille 2017, TF106), et non
+  plus du revenu initial.
+- **Effet sur le solde :** seulement par le retour des prélèvements sur les dividendes, qui baisse (la part des prix
+  n'a pas de retour au budget). Écarts 2037 au prudent : au plus 0,02 point (Lisnard −0,02).
+- **À valider par Adrien :** la somme vient de deux études et de deux pays. Avec Baker et al. seuls : salaires 38 %,
+  prix 31 %, actionnaires 31 %.
+
+## Roadmap 3.6 : niveaux de vie, diagnostic (22/11/2026, pas de recalage)
+
+- **Écart :** médiane de la population 24 450 € par UC (2026) ; Insee 26 740 € en 2024 (ERFS, Insee Première
+  n° 2117), soit ≈ 27 300 € de 2026 sans croissance réelle : −10 %. Moyenne : ≈ 28 000 € contre ≈ 31 600 €.
+- **Ce qui n'explique pas l'écart :** les masses de revenus sont proches des comptes à 5 % près (salaires bruts
+  1 021 Md€, pensions 393, revenus d'indépendants 86, chômage 21,5). Les parts dans le niveau de vie autour de la
+  médiane ressemblent à celles de l'ERFS 2021 (Revenus et patrimoine des ménages 2024, fiche 1.4).
+- **Ce qui l'explique en partie :** les revenus du patrimoine. Ils font 3 à 3,7 % du niveau de vie autour de la
+  médiane dans l'ERFS (8,8 % en moyenne, revenus des livrets et de l'assurance-vie imputés depuis l'enquête
+  Patrimoine), contre ≈ 1 % dans la population. Une imputation à partir de l'enquête Histoire de vie et Patrimoine
+  (3.2) en rattraperait 2 à 3 points.
+- **Reste à comprendre** (≈ 7 points) : champ (l'ERFS exclut les ménages dont la personne de référence est étudiante,
+  la métropole seule), échelle d'UC, prélèvements. Il faut la composition du revenu disponible par décile de l'ERFS
+  2024 (Insee Résultats « Revenu, niveau de vie et pauvreté en 2024 », tableaux en xlsx, que l'environnement ne peut pas
+  télécharger).
+
+## Derniers trous de la micro (22/11/2026)
+
+Trois formules communes, appliquées après le calcul d'OpenFisca (le montant vient du moteur, la micro le répartit) :
+
+- `cotisations_employeur` : cotisations des employeurs privés. Rien pour les ménages à court terme ; à long terme,
+  la part `entreprises.incidence_menages.salaires` (0,5) retombe sur les salaires de la bande visée, au prorata du
+  brut. Avec `directe: true`, tout le montant va aux salariés (cotisations salariales sur l'épargne salariale).
+- `heures_supplementaires` : la population n'a pas les heures ; montant sur les salariés du privé de 1 à 2,5 SMIC,
+  au prorata du brut (ouvriers, employés et professions intermédiaires en font le plus : Insee, enquête sur la
+  structure des salaires 2014).
+- `jeunes_enfants` : congés de naissance (`age_max: 0`) et accueil du jeune enfant (`age_max: 2`), par enfant.
+
+Mesures codées avec ces formules et celles de 3.1 et 3.2, même règle pour tous :
+
+| Programme | Mesures |
+|---|---|
+| Tondelier | REC-37, COT-02 (moitié salariés au barème d'OpenFisca, moitié employeurs), COT-03, PRE-14, REC-04/05/06/07, REC-03, REC-40, REC-41, REC-42, REC-45 |
+| Mélenchon | LFI-PRE-06, LFI-COL-05, LFI-REC-20, LFI-REC-23 |
+| Glucksmann | GLU-SOC-04, GLU-FIS-02, GLU-FIS-03, GLU-FIS-05 |
+| Le Pen | RN-FIS-05, RN-FIS-06, RN-EMP-02 |
+| Philippe | PHI-EMP-06, PHI-SOC-02, PHI-SOC-07, PHI-FIS-05 |
+| Retailleau | RET-SOC-02, RET-FIS-03 |
+
+Correction de `outils/couverture_micro.py` : un identifiant composé (« REC-20/21 ») codé tel quel est reconnu.
+
+**Couverture du budget « ménages »** : Arthaud, Bertrand, Lisnard, Zemmour 100 % ; Roussel 97 ; Tondelier 95 ;
+Glucksmann 92 ; Le Pen 92 ; Philippe 91 ; Mélenchon 89 ; Retailleau 89 ; Attal 87. Les douze programmes passent le
+seuil de 80 %. Restent surtout : l'année blanche d'Attal (calculée dans son programme), les retraites à 40 annuités
+et des fonctionnaires de Mélenchon, la rénovation de Le Pen, les intérêts d'emprunt de Retailleau.
+
+Contrôle sur la population (montant de la micro / moteur, prudent) : PRE-14, PHI-EMP-06, GLU-SOC-04 identiques ;
+REC-37 8,25 / 16,5 (la moitié de long terme) ; COT-02 4,5 / 7,0 (part salariale au barème, part employeur à moitié).
