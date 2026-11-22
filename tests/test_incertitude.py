@@ -102,3 +102,12 @@ def test_loi_sourcee_remplace_les_colonnes_de_scenario(monkeypatch):
     assert q.val(cle, "optimiste") == p.val(cle, "optimiste")  # colonnes publiées inchangées
     q = inc.tirer_z(p, lambda n: -inc.Z90, [(cle, ())])
     assert q.val(cle, "median") == pytest.approx(0.0)
+
+
+def test_correlation_historique_productivite_emploi():
+    """Roadmap 6.2 : les tendances de la productivité et de l'emploi ne sont pas bonnes ou mauvaises ensemble
+    (Insee, comptes nationaux 1978-2025) : la borne ρ = 1 du climat commun n'est pas soutenue par l'histoire."""
+    from outils.correlations_historiques import correlations
+    c = correlations()
+    assert all(-0.5 < v < 0.3 for v in c.values())
+    assert c["glissant_10_ans"] < 0

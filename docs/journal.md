@@ -2173,3 +2173,5 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   et Lisnard.
 - **Roadmap 4.4** (entrepreneurs individuels à l'impôt sur le revenu) : pas fait ; aucune mesure des programmes ne le
   demande aujourd'hui, l'arbitrage entre dividendes et salaire passe par `dividendes.elasticite_taux_net`.
+- **Roadmap 6.2** : corrélation historique productivité – emploi (Insee 1978-2025) de −0,3 à +0,1 selon la fenêtre :
+  la borne ρ = 1 du Monte Carlo n'est pas soutenue ; taux manquants.

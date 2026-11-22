@@ -188,3 +188,18 @@ bougent ni le statu quo ni les programmes en 2037 (paramètres de canaux qu'aucu
 - **Lois :** toujours aucune écrite (`lois.yaml` vide). Elles attendent l'arbitrage du centre (ci-dessus) : une
   loi sourcée déplace le centre du Monte Carlo chaque fois que la colonne médiane n'est pas le centre de la
   littérature.
+
+## Roadmap 6.2 : corrélation historique (22/11/2026)
+
+- **Données :** Insee, comptes nationaux annuels base 2020 (tableaux 1.102 et 1.108, fournis par Adrien) : PIB en
+  volume et emploi intérieur total, 1978-2025. Productivité par tête = PIB / emploi.
+- **Corrélation entre la croissance de la productivité et celle de l'emploi** (`outils/correlations_historiques.py`) :
+  annuelle (hors 2020-2021) +0,14 ; moyennes sur 5 ans −0,24 (glissantes), +0,03 (disjointes) ; sur 10 ans −0,28
+  (glissantes), −0,31 (disjointes).
+- **Lecture :** sur la durée, les décennies de forte productivité ne sont pas celles de fort emploi (plutôt
+  l'inverse : enrichissement de la croissance en emplois des années 2000 et 2010). La borne ρ = 1 du Monte Carlo
+  (productivité, comportements et emploi bons ou mauvais ensemble) n'est pas soutenue par l'histoire pour ces deux
+  familles ; la borne ρ = 0 est la plus proche des données.
+- **Pas fait :** les taux (la série de l'OAT à 10 ans de la Banque de France n'a pas pu être téléchargée) et les
+  multiplicateurs (pas de série historique). Le Monte Carlo garde ses deux bornes ; publier ρ = 0 comme cas central,
+  ou passer à des familles de paramètres corrélées entre elles, est une décision d'Adrien.
