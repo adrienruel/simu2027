@@ -2181,3 +2181,7 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   hors IR et CSG) ; population recalée ; IR de la population 123,5 Md€ contre 104 (à expliquer).
 - **Derniers trous de la micro** : formules communes `cotisations_employeur`, `heures_supplementaires`,
   `jeunes_enfants` ; 25 mesures codées. Les douze programmes au-dessus de 80 % (de 87 à 100 %).
+- **Écart d'impôt sur le revenu expliqué** : 15,5 Md€ de dépenses fiscales que la population n'a pas (emploi à
+  domicile, heures supplémentaires, dons, travaux, garde : `microsimulation.niches_ir_non_modelisees`) et 4,2 Md€
+  d'un ordre de calcul d'OpenFisca (CSG des pensions oubliée quand l'impôt est demandé en premier ; corrigé dans
+  `openfisca_population.simulation`). Population recalée sur 119,5 Md€ ; 123,7 obtenus (+3,5 %).

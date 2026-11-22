@@ -273,11 +273,11 @@ Constats :
 
 | Poste | € par an | Bloc |
 |---|---|---|
-| Allocation de chômage arrêtée | 11 504 | chômage |
-| RSA de la famille en moins | 1 701 | pauvreté |
-| Aides au logement en moins | 699 | logement (nouveau) |
-| **Total évité** (`emploi.allocation_chomeur_evitee`) | **13 900** | |
-| Prime d'activité en plus | 679 (personne seule : 2 138) | pauvreté |
+| Allocation de chômage arrêtée | 11 524 | chômage |
+| RSA de la famille en moins | 1 712 | pauvreté |
+| Aides au logement en moins | 703 | logement (nouveau) |
+| **Total évité** (`emploi.allocation_chomeur_evitee`) | **13 940** | |
+| Prime d'activité en plus | 692 (personne seule : 2 138) | pauvreté |
 
   Chiffres sur la population recalée des roadmaps 3.6 et 4.4 (72 % des chômeurs indemnisés, comme
   `microsimulation.chomeurs_indemnises`). Sur la population d'avant (52 % indemnisés) : 8 010 + 1 866 + 785 =
@@ -285,7 +285,7 @@ Constats :
 - **Prime d'activité par famille :** personne seule ≈ 1 830 € ; parent seul ≈ 1 980 € ; jeune adulte chez ses
   parents ≈ 700 € ; couple : −100 à −740 €. Dans un couple, l'allocation de chômage comptait déjà dans les
   ressources, et le salaire en plus réduit la prime du conjoint (population d'avant 3.6). D'où
-  `emploi.prime_activite_familles` = 0,317 (0,324 avant le recalage).
+  `emploi.prime_activite_familles` = 0,324.
 - **Effet sur l'écart de solde primaire 2037 au prudent :** au plus 0,07 point (Mélenchon −0,07 ; Lisnard +0,03).
 - **Reste :** `tondelier_smic.valeur_emploi_chomeur` (9 000 €, paramètre propre au programme) dit reprendre l'ancienne
   valeur commune : à aligner dans le travail sur Tondelier.
@@ -359,8 +359,15 @@ Trois canaux communs (`moteur/capital_dirigeants.py`), séparés pour ne pas com
   l'IR et de la CSG des indépendants (CSG nulle). Ils entrent maintenant au bénéfice réel (`abic_impn`, `arag_impg`),
   catégorie « commerçant » pour la CSG : CSG des indépendants 10,9 Md€, IR des indépendants ≈ 22 Md€. Les mesures sur
   les indépendants (CSG de Zemmour, cotisations) sont maintenant vues par la micro.
-- **Reste :** l'IR de la population monte à 123,5 Md€, contre 104 au PLF 2026, malgré la contrainte du calage (les
-  bornes des poids l'empêchent de l'atteindre). Les revenus des indépendants de la population (114 Md€, Insee) sont au-
-  dessus des revenus déclarés (≈ 70 Md€, Urssaf), et l'imposition des couples non mariés est à vérifier. Test
-  `test_impot_revenu_openfisca` marqué « échec attendu » en attendant.
+- **Écart d'impôt sur le revenu expliqué** (123,5 Md€ dans la population contre 104 au PLF 2026) :
+  - **dépenses fiscales que la population n'a pas : 15,5 Md€** (`microsimulation.niches_ir_non_modelisees`, Cour des
+    comptes 2026 d'après les voies et moyens) : emploi à domicile 7,2 ; heures supplémentaires 2,3 ; dons 2,2 ;
+    travaux des bailleurs 2,0 ; frais de garde 1,8. L'impôt de la population se compare à 104 + 15,5 = 119,5 Md€ ;
+  - **ordre des calculs d'OpenFisca : 4,2 Md€.** Le taux de CSG des pensions dépend du revenu fiscal de l'année N-2,
+    qui dépend de l'impôt. Demandé en premier, l'impôt tombait dans cette boucle et comptait les pensions sans leur CSG
+    déductible (pensions imposables 403 Md€ au lieu de 384). Corrigé : `openfisca_population.simulation` calcule
+    d'abord le revenu disponible ;
+  - **reste +3,5 %** (123,7 contre 119,5), sous la tolérance de 5 % du test ; le calage de la population vise
+    119,5 Md€.
+  - Écarté : les couples non mariés (tous mariés : −2,5 Md€ seulement).
 - **Effet sur les écarts 2037 au prudent :** Lisnard −0,019, Bertrand −0,012, autres ≤ 0,006.

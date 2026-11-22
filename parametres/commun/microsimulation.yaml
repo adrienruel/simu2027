@@ -114,6 +114,15 @@ microsimulation:
     statut: HYPOTHESE
     source: "Effectif : Dares, séries longues du système d'information sur l'apprentissage, 1 017 500 contrats en cours au 31/12/2025 (secteurs privé et public) ; part du SMIC : Code du travail, art. D6222-26 (grille par âge et année de contrat, moyenne des trois années : 16-17 ans 27/39/55 %, 18-20 ans 43/51/67 %, 21-25 ans 53/61/78 %, 26 ans et plus 100 %)"
     note: "Phase L (roadmap 4.2, 18/11/2026). Apprentis tirés parmi les salariés du privé de 16 à 29 ans (tous comptés dans le privé, faute de lecture sûre de la part publique), avec une propension relative par âge (HYPOTHÈSE d'encadrement : l'âge moyen d'entrée est de 20,5 ans, Dares 2025), mise à l'échelle sur l'effectif. Rémunération : part du SMIC de la grille × SMIC brut × 12 ; coût employeur pris égal au brut (exonérations de cotisations des apprentis) ; effectif ajouté aux marges du calage ; marqués « apprenti » pour OpenFisca (salaire exonéré d'impôt sur le revenu jusqu'au SMIC annuel, cotisations salariales exonérées). Tirage séparé (graine + 1), mais la marge nouvelle change un peu tous les poids : la population est à régénérer avec OpenFisca."
+  niches_ir_non_modelisees:
+    valeur: {credit_emploi_domicile: 7.208, heures_supplementaires: 2.250, dons: 2.204, travaux_fonciers: 1.990, frais_de_garde: 1.799}
+    unite: md_eur
+    annee_euros: 2026
+    statut: SOURCE
+    url: "https://www.legifiscal.fr/actualites-fiscales/4730-niches-fiscales-1056-md-2025-cour-comptes-conseille-plafonner-cout-evaluer.html"
+    page: "Cour des comptes, « Les dépenses fiscales : maîtriser leur nombre et leur coût » (novembre 2026), tableau des quinze dépenses fiscales les plus coûteuses, d'après l'Évaluation des voies et moyens, tome II (PLF), coûts 2026"
+    source: "Crédit d'impôt pour l'emploi d'un salarié à domicile 7 208 M€ ; exonération des heures supplémentaires 2 250 ; réduction d'impôt pour dons 2 204 ; déduction des dépenses de réparation et d'amélioration (revenus fonciers) 1 990 ; crédit d'impôt pour frais de garde des jeunes enfants 1 799"
+    note: "Explication de l'écart d'impôt sur le revenu (22/11/2026) : ces dépenses fiscales baissent l'impôt réel (104 Md€) mais pas celui de la population, qui n'a ni emploi à domicile, ni heures supplémentaires, ni dons, ni travaux, ni frais de garde (revenus fonciers au réel avec 15 % de charges forfaitaires). L'impôt de la population se compare donc à 104 + 15,5 = 119,5 Md€. Pas comptées : épargne salariale (2 890 M€, impôt non précisé), Pinel (sorti du classement), petites niches."
   cibles_2026:
     valeur: {impot_revenu: 104.0, prestations_entretien: 25.2, aides_logement: 16.7, rsa: 12.4, prime_activite: 10.5, aah: 14.6}
     unite: sans_unite

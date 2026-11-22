@@ -219,6 +219,11 @@ def simulation(lignes: list[dict], annee: int = 2026, tbs=None):
         sim.set_input("statut_occupation_logement", y, occ)
         sim.set_input("loyer", y, col("loyer_mensuel")[pm] * 12)
         sim.set_input("zone_apl", y, col("zone")[pm])
+    # 22/11/2026 : l'ordre des calculs change le résultat. Le taux de CSG des pensions et du chômage dépend du revenu
+    # fiscal de référence de l'année N-2, qui dépend de l'impôt : demandé en premier, l'impôt sur le revenu tombe
+    # dans la boucle et compte les pensions sans leur CSG déductible (pensions imposables 403 Md€ au lieu de 384,
+    # impôt +4,2 Md€). Le revenu disponible calculé d'abord fixe les taux dans le bon ordre, pour tous les appels.
+    sim.calculate_add("revenu_disponible", str(annee))
     return sim, s
 
 

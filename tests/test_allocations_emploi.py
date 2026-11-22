@@ -17,8 +17,8 @@ def test_parts_des_allocations_evitees():
     p = Parametres()
     ac, al = p.val("emploi.part_allocation_assurance_chomage"), p.val("emploi.part_allocation_logement")
     assert 0 < al < ac < 1 and ac + al < 1
-    # 11 504 + 699 + 1 701 € par chômeur (outils/ppa_emplois.py, population recalée en 3.6 et 4.4)
-    assert abs(p.val("emploi.allocation_chomeur_evitee") - (11504 + 699 + 1701)) < 10
+    # 11 524 + 703 + 1 712 € par chômeur (outils/ppa_emplois.py, population recalée en 3.6 et 4.4)
+    assert abs(p.val("emploi.allocation_chomeur_evitee") - (11524 + 703 + 1712)) < 10
 
 
 def test_aides_au_logement_evitees_dans_le_bloc_logement():

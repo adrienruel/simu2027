@@ -40,12 +40,12 @@ def test_etudiants_rattaches(lignes):
     assert et and all(l["statut"] == "etudiant" and l["type"] == "seul" and l["role"] == "ref" for l in et)
 
 
-@pytest.mark.xfail(strict=False, reason="Roadmap 4.4 (22/11/2026) : les indépendants passent au barème (ils étaient en "
-                   "case 5TA, hors IR et CSG) ; IR de la population 123,5 Md€ contre 104 au PLF, à expliquer "
-                   "(docs/microsimulation.md)")
 def test_impot_revenu_openfisca(lignes):
-    """Critère de sortie de la phase F pour l'IR : à 5 % du PLF 2026 ."""
+    """Critère de sortie de la phase F pour l'IR : à 5 % du PLF 2026, plus les dépenses fiscales que la population n'a
+    pas (microsimulation.niches_ir_non_modelisees : emploi à domicile, heures supplémentaires, dons, travaux, garde)."""
     pytest.importorskip("openfisca_france")
     from outils import openfisca_population as op
     res = op.totaux(lignes)
-    assert res["impot_revenu"] == pytest.approx(Parametres().val("microsimulation.cibles_2026")["impot_revenu"], rel=0.05)
+    p = Parametres()
+    cible = p.val("microsimulation.cibles_2026")["impot_revenu"] + sum(p.val("microsimulation.niches_ir_non_modelisees").values())
+    assert res["impot_revenu"] == pytest.approx(cible, rel=0.05)
