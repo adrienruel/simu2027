@@ -273,15 +273,19 @@ Constats :
 
 | Poste | € par an | Bloc |
 |---|---|---|
-| Allocation de chômage arrêtée | 8 010 | chômage |
-| RSA de la famille en moins | 1 866 | pauvreté |
-| Aides au logement en moins | 785 | logement (nouveau) |
-| **Total évité** (`emploi.allocation_chomeur_evitee`) | **10 660** | |
-| Prime d'activité en plus | 693 (personne seule : 2 138) | pauvreté |
+| Allocation de chômage arrêtée | 11 575 | chômage |
+| RSA de la famille en moins | 1 729 | pauvreté |
+| Aides au logement en moins | 690 | logement (nouveau) |
+| **Total évité** (`emploi.allocation_chomeur_evitee`) | **13 990** | |
+| Prime d'activité en plus | 732 (personne seule : 2 138) | pauvreté |
 
+  Chiffres sur la population recalée de la roadmap 3.6 (72 % des chômeurs indemnisés, comme
+  `microsimulation.chomeurs_indemnises`). Sur la population d'avant (52 % indemnisés) : 8 010 + 1 866 + 785 =
+  10 660 €, prime 693 €.
 - **Prime d'activité par famille :** personne seule ≈ 1 830 € ; parent seul ≈ 1 980 € ; jeune adulte chez ses
   parents ≈ 700 € ; couple : −100 à −740 €. Dans un couple, l'allocation de chômage comptait déjà dans les
-  ressources, et le salaire en plus réduit la prime du conjoint. D'où `emploi.prime_activite_familles` = 0,324.
+  ressources, et le salaire en plus réduit la prime du conjoint (population d'avant 3.6). D'où
+  `emploi.prime_activite_familles` = 0,343 (0,324 avant le recalage).
 - **Effet sur l'écart de solde primaire 2037 au prudent :** au plus 0,07 point (Mélenchon −0,07 ; Lisnard +0,03).
 - **Reste :** `tondelier_smic.valeur_emploi_chomeur` (9 000 €, paramètre propre au programme) dit reprendre l'ancienne
   valeur commune : à aligner dans le travail sur Tondelier.

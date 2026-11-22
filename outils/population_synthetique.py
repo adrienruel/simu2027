@@ -439,11 +439,27 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
         caler_beneficiaires = bool(v("calage_beneficiaires"))
     if caler_beneficiaires:
         from outils import openfisca_population as op
-        ind = op.indicateurs(lignes)
+        # roadmap 3.6 (22/11/2026) : aussi les déciles de niveau de vie de l'ERFS (D1, médiane, D9), sur son champ ;
+        # sans eux, le calage sur les bénéficiaires tirait toute la distribution vers le bas (médiane −10 %)
+        nve = v("niveaux_de_vie_erfs")
+        seuils = {k: nve[k] * nve["passage_2026"] for k in ("D1", "D5", "D9")}
+        ind = op.indicateurs(lignes, seuils=seuils)
         ben = v("beneficiaires")
         hand_u = np.bincount(men, weights=handicap.astype(float), minlength=n)  # garde l'effectif tiré
-        A2 = np.vstack([A] + [ind[k][None, :] for k in ben] + [hand_u[None, :]])
-        c2 = np.concatenate([cibles, [ben[k] * 1e6 for k in ben], [hand["adultes"] * 1e6]])
+        n_champ = float(ind["champ_erfs"] @ w)
+        # masses des pensions, des revenus d'indépendants et des allocations de chômage tenues à leur source (moyennes du tirage × effectifs) :
+        # sans elles, le calage sur les déciles relevait la pension moyenne de 11 %
+        i_in = statut == "independant"
+        masses = [(np.bincount(men, weights=pension, minlength=n),
+                   v("pension_brute_moyenne") * 12 * v("retraites_residents_2026") * 1e6),
+                  (np.bincount(men, weights=np.where(i_in, rev_ind, 0.0), minlength=n),
+                   rev_ind[i_in].mean() * emp["independants"] * 1e6),
+                  (np.bincount(men, weights=chomage_brut, minlength=n),
+                   ci["part"] * ci["allocation_brute_mensuelle"] * 12 * p.val("inactifs.chomeurs_bit"))]
+        A2 = np.vstack([A] + [ind[k][None, :] for k in ben] + [hand_u[None, :]]
+                       + [ind["sous_" + k][None, :] for k in seuils] + [m[None, :] for m, _ in masses])
+        c2 = np.concatenate([cibles, [ben[k] * 1e6 for k in ben], [hand["adultes"] * 1e6],
+                             [n_champ * q for q in (0.1, 0.5, 0.9)], [c for _, c in masses]])
         w = _raking(A2, c2, w0)
         ECARTS_CALAGE[:] = list((A2 @ w) / c2 - 1)
         k_div = cap["dividendes"] * 1e9 / (w * div).sum()

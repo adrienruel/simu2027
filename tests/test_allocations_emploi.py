@@ -15,8 +15,8 @@ def test_parts_des_allocations_evitees():
     p = Parametres()
     ac, al = p.val("emploi.part_allocation_assurance_chomage"), p.val("emploi.part_allocation_logement")
     assert 0 < al < ac < 1 and ac + al < 1
-    # 8 010 + 785 + 1 866 € par chômeur (outils/ppa_emplois.py)
-    assert abs(p.val("emploi.allocation_chomeur_evitee") - (8010 + 785 + 1866)) < 10
+    # 11 575 + 690 + 1 729 € par chômeur (outils/ppa_emplois.py, population recalée en 3.6)
+    assert abs(p.val("emploi.allocation_chomeur_evitee") - (11575 + 690 + 1729)) < 10
 
 
 def test_aides_au_logement_evitees_dans_le_bloc_logement():
@@ -24,9 +24,9 @@ def test_aides_au_logement_evitees_dans_le_bloc_logement():
     grande."""
     p = Parametres()
     r = {a: noyau.simuler(p.avec({"emploi.part_allocation_logement": a}), noyau.charger("lisnard"),
-                          scenarios=("prudent",))["prudent"][2037] for a in (0.0, 0.074)}
-    assert r[0.074]["emploi"] > noyau.simuler(p, None, scenarios=("prudent",))["prudent"][2037]["emploi"]
-    assert r[0.074]["blocs"]["logement"] < r[0.0]["blocs"]["logement"]
+                          scenarios=("prudent",))["prudent"][2037] for a in (0.0, 0.049)}
+    assert r[0.049]["emploi"] > noyau.simuler(p, None, scenarios=("prudent",))["prudent"][2037]["emploi"]
+    assert r[0.049]["blocs"]["logement"] < r[0.0]["blocs"]["logement"]
 
 
 def test_taux_emploi_des_jeunes_et_des_25_54_suivent_l_insee():

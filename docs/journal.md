@@ -2163,8 +2163,8 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   LFI-REC-11) ; Lisnard +0,034 point en 2037.
 - **Roadmap 5.2** : déjà couverte (chômage, RSA, aides au logement, prime d'activité, dépenses en volume) ; note dans
   `docs/recoupements.md`.
-- **Roadmap 3.6** : diagnostic seulement (`docs/microsimulation.md`) : niveaux de vie ≈ 10 % sous l'ERFS 2024 ; les
-  masses de revenus sont justes à 5 % près ; les revenus du patrimoine expliquent 2 à 3 points ; il faut la
-  composition du revenu disponible par décile de l'ERFS 2024.
+- **Roadmap 3.6** : population recalée sur les déciles de niveau de vie de l'ERFS 2024 (Insee Première n° 2117) et
+  sur les masses des pensions, des indépendants et du chômage ; le calage sur les bénéficiaires tirait la
+  distribution vers le bas. Médiane 24 670 → 27 600 € (Insee 27 820). Paramètres de la roadmap 2.4 recalculés.
 - **Roadmap 6.1** : classement complet des 78 cibles (`sorties/poids_incertitude.csv`, 52 pèsent) ; lois en attente
   de l'arbitrage du centre.

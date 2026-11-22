@@ -253,10 +253,30 @@ def recourt(montant, poids, part, graine=0, forme="racine", gamma=0.5):
     return (u < proba_recours(montant, poids, part, gamma)).astype(float)
 
 
-def indicateurs(lignes: list[dict], annee: int = 2026) -> dict[str, np.ndarray]:
+def niveaux_de_vie(sim, s, lignes: list[dict], annee: int = 2026) -> tuple[np.ndarray, np.ndarray]:
+    """Niveau de vie de chaque personne (revenu disponible du ménage / unités de consommation de l'Insee : 1, plus
+    0,5 par personne de 14 ans ou plus en plus, plus 0,3 par enfant de moins de 14 ans) et champ de l'ERFS (ménage
+    dont la personne de référence n'est pas étudiante)."""
+    rd = sim.calculate_add("revenu_disponible", str(annee))
+    men = np.asarray(s["menage"])
+    nm = s["n_menages"]
+    age = np.array([int(l["age"]) for l in lignes])
+    adultes = np.bincount(men, weights=(age >= 14).astype(float), minlength=nm)
+    enfants = np.bincount(men, weights=(age < 14).astype(float), minlength=nm)
+    uc = 1 + 0.5 * np.maximum(adultes - 1, 0) + 0.3 * enfants
+    etu_men = np.zeros(nm, bool)
+    for j, l in enumerate(lignes):
+        if l["role"] == "ref" and l["statut"] == "etudiant":
+            etu_men[men[j]] = True
+    return (rd / uc)[men], ~etu_men[men]
+
+
+def indicateurs(lignes: list[dict], annee: int = 2026, seuils: dict | None = None) -> dict[str, np.ndarray]:
     """Nombre attendu de familles bénéficiaires par unité de tirage, pour le calage sur les effectifs publiés
     (microsimulation.beneficiaires) : RSA et prime d'activité après recours (probabilité attendue, comme le
-    tirage de `recourt`), aides au logement et complément familial (recours complet)."""
+    tirage de `recourt`), aides au logement et complément familial (recours complet). Avec `seuils` (roadmap 3.6) :
+    aussi, par unité, les personnes du champ de l'ERFS (« champ_erfs ») et celles sous chaque seuil de niveau de
+    vie (« sous_<nom> »)."""
     sim, s = simulation(lignes, annee)
     an = str(annee)
     poids_p = np.array([l["poids"] for l in lignes])
@@ -286,6 +306,11 @@ def indicateurs(lignes: list[dict], annee: int = 2026) -> dict[str, np.ndarray]:
     for nom in ("rsa_avec_prime", "rsa_seul", "rsa_monoparentale", "rsa_couple_sans_enfant", "rsa_couple_avec_enfants",
                 "prime_activite", "aides_logement", "complement_familial"):
         out[nom] = np.bincount(fam_unite, weights=ind[nom], minlength=n_u)
+    if seuils:
+        nv, champ = niveaux_de_vie(sim, s, lignes, annee)
+        out["champ_erfs"] = np.bincount(unite_p, weights=champ.astype(float), minlength=n_u)
+        for k, v in seuils.items():
+            out["sous_" + k] = np.bincount(unite_p, weights=(champ & (nv < v)).astype(float), minlength=n_u)
     return out
 
 

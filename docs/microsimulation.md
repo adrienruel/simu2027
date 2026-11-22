@@ -664,6 +664,85 @@ synthétique.
 - **À valider par Adrien :** la somme vient de deux études et de deux pays. Avec Baker et al. seuls : salaires 38 %,
   prix 31 %, actionnaires 31 %.
 
+## Roadmap 3.6 : niveaux de vie recalés sur l'ERFS 2024 (22/11/2026)
+
+- **Cause trouvée :** le second calage de la population (effectifs de bénéficiaires du RSA, de la prime d'activité,
+  des aides au logement) ne gardait que des marges démographiques. Pour trouver assez d'allocataires, il gonflait le
+  poids des ménages modestes et tirait toute la distribution vers le bas. Masses obtenues : revenus d'indépendants
+  86 Md€ au lieu de ≈ 119 (moyenne des classiques 38 000 € au lieu de 49 000), pensions 393 Md€, allocations de
+  chômage 21,5 Md€ (52 % des chômeurs indemnisés au lieu de 72 %). Médiane du niveau de vie 24 450 €.
+- **Correction** (`outils/population_synthetique.py`, `openfisca_population.niveaux_de_vie`) : le second calage
+  tient aussi
+  - les déciles de l'ERFS 2024 (Insee Première n° 2117, `microsimulation.niveaux_de_vie_erfs`) sur son champ
+    (personne de référence non étudiante) : 10, 50 et 90 % des personnes sous D1, la médiane et D9, portés en 2026
+    (× 1,0404, comme les salaires) ;
+  - les masses des pensions (pension moyenne de la Drees × retraités), des revenus d'indépendants et des allocations
+    de chômage (part indemnisée × allocation de l'Unédic × chômeurs du BIT).
+- **Résultat** (euros de 2026 ; Insee 2024 × 1,0404) :
+
+| Niveau de vie | Population avant | Après | Insee |
+|---|---|---|---|
+| D1 | 13 690 | 14 510 | 14 530 |
+| Médiane | 24 670 | 27 600 | 27 820 |
+| D9 | 44 720 | 48 170 | 50 540 |
+| Salariés (médiane) | – | 30 330 | 31 150 |
+| Retraités | 26 570 | 28 640 | 27 910 |
+| Chômeurs | 17 690 | 19 350 | 20 330 |
+| Enfants de moins de 18 ans | 21 960 | 23 980 | 24 780 |
+| Familles monoparentales | 19 670 | 19 960 | 19 810 |
+| Couples avec enfants | 25 840 | 29 460 | 28 630 |
+| Personnes seules de moins de 65 ans | 21 550 | 21 370 | 25 990 |
+| Couples sans enfant de moins de 65 ans | 28 670 | 29 980 | 35 260 |
+| Indépendants | 17 880 | 18 560 | 30 030 |
+| Taux de pauvreté (au seuil de la population) | 12,9 % | 16,7 % | 15,4 % |
+
+  Masses : salaires bruts 1 041 Md€, pensions 408, indépendants 116, chômage 30,6. Critère de la roadmap (médiane à
+  moins de 5 %) atteint.
+- **Restent faux :** les personnes seules et les couples sans enfant d'âge actif (−15 à −18 %), les indépendants
+  (−38 % : micro-entrepreneurs nombreux et à faibles revenus dans la population ; l'ERFS classe selon l'activité
+  déclarée), le haut de la distribution (D9 −5 %), la pauvreté (+1,3 point).
+- **Conséquences :** `emploi.allocation_chomeur_evitee` et les parts de la roadmap 2.4 recalculées (13 990 € par
+  chômeur, prime d'activité 0,343). Écarts 2037 au prudent : au plus 0,06 point (Mélenchon −0,06, Lisnard +0,03).
+  Toute la micro (ménages, emplois de la micro, ménages types) est à régénérer.
+
+## Roadmap 4.1 : champ et secteurs de la population d'entreprises (22/11/2026)
+
+- **Erreur corrigée :** la population suit le champ d'Ésane (marchand non agricole et non financier), mais recevait
+  les nombres, pertes et bénéfices de toutes les entreprises à l'IS de la DGFiP, finance comprise. Son IS valait
+  67,7 Md€, contre 57,0 dans le champ (70,5 au total, dont finance 12,7 et agriculture 0,7).
+- **Correction** (`microsimulation.entreprises_champ_esane`, DGFiP Statistiques n° 51, tableau 1) : nombres et pertes
+  à 90,0 % (entreprises du champ), bénéfices à 77,2 % (résultat fiscal du champ).
+- **IS par secteur** (`microsimulation.entreprises_is_secteurs_2025`) : les bénéfices de chaque groupe de secteurs sont
+  calés sur son IS brut de 2025. Les tailles gardent la part des bénéfices de la DGFiP.
+
+| Groupe | IS de la population avant (Md€) | Après | DGFiP 2025 |
+|---|---|---|---|
+| Industrie | 18,5 | 14,7 | 14,7 |
+| Construction | 5,4 | 5,4 | 5,4 |
+| Commerce et transports | 16,8 | 17,7 | 17,7 |
+| Services (dont santé et enseignement marchands) | 26,8 | 19,2 | 19,2 |
+| **Total** | **67,7** | **57,0** | **57,0** |
+
+- **Effet sur les chiffrages :** l'IS des mesures reste ramené au total national (70,47 Md€, finance supposée réagir
+  comme les autres, inchangé). Ce qui change : la répartition entre secteurs et tailles et le retour d'IS des impôts de
+  production (LIS-FIS-01 et PHI-FIS-01 : −22,1 → −21,1 Md€ ; RN-FIS-04 : −9,7 → −9,2 ; RET-FIS-01 : −5,6 → −5,3 ;
+  REC-35 : +6,3 → +6,0). `parametres/donnees/population_entreprises_2023.csv` régénérée ; `sorties/micro_entreprises.csv`
+  à régénérer.
+
+## Roadmap 4.2 : répercussion sur les prix des impôts des entreprises (22/11/2026)
+
+- **Avant :** ce que les mesures laissent ou prennent aux entreprises allait pour moitié aux salaires (Fuest, Peichl et
+  Siegloch, 2018) et pour moitié aux actionnaires ; rien aux prix, faute de source.
+- **Maintenant :** 31 % aux prix (`entreprises.incidence_menages.prix`), d'après Baker, Sun et Yannelis (NBER WP 27058 :
+  31 % de l'impôt sur les sociétés des États américains retombe sur les consommateurs ; plus de 40 % dans leur
+  révision de 2023, d'où la borne basse). Il reste 19 % aux actionnaires.
+- **Répartition par décile :** les prix au prorata de la consommation du décile (Budget de famille 2017, TF106), et non
+  plus du revenu initial.
+- **Effet sur le solde :** seulement par le retour des prélèvements sur les dividendes, qui baisse (la part des prix
+  n'a pas de retour au budget). Écarts 2037 au prudent : au plus 0,02 point (Lisnard −0,02).
+- **À valider par Adrien :** la somme vient de deux études et de deux pays. Avec Baker et al. seuls : salaires 38 %,
+  prix 31 %, actionnaires 31 %.
+
 ## Roadmap 3.6 : niveaux de vie, diagnostic (22/11/2026, pas de recalage)
 
 - **Écart :** médiane de la population 24 450 € par UC (2026) ; Insee 26 740 € en 2024 (ERFS, Insee Première
