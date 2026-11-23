@@ -2185,3 +2185,14 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   domicile, heures supplémentaires, dons, travaux, garde : `microsimulation.niches_ir_non_modelisees`) et 4,2 Md€
   d'un ordre de calcul d'OpenFisca (CSG des pensions oubliée quand l'impôt est demandé en premier ; corrigé dans
   `openfisca_population.simulation`). Population recalée sur 119,5 Md€ ; 123,7 obtenus (+3,5 %).
+
+## Recalcul complet et comparateur (23/11/2026)
+
+- `phase-t` fusionnée dans `main` (bde08ec) ; toutes les sorties régénérées ; 354 tests passent.
+- Écart aux résultats publiés le 20/11 (déficit 2037, prudent) : statu quo 9,1 → 7,9 % du PIB (intérêts −0,7 point,
+  taux apparent de la roadmap 1.3 ; dépenses −0,4, défense en euros et prestations par prestation ; recettes +0,1).
+  Emploi des seniors presque doublé (part concernée 0,7-0,8 au lieu de 0,42) ; dividende de productivité doublé
+  (dépenses qui ne suivent que leurs règles de coût). Classement de l'écart de solde primaire presque inchangé.
+- Point ouvert : pauvreté de la population vieillie ≈ 18,4 % (Insee 15,4 %) ; seul l'écart à la législation actuelle
+  se lit. Mention ajoutée au comparateur.
+- Comparateur en ligne : 18 jeux de données et textes des résumés mis à jour.
