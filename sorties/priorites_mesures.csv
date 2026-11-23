@@ -6,17 +6,17 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 5,philippe,PHI-FIS-01b,… compensés par 50 Md€ d'aides aux entreprises en moins,0.6348,2,True,True,False,False,1.9043
 6,melenchon,LFI-SAN-01,"« 100 % Sécu », complémentaires intégrées",-0.9268,1,True,False,False,False,1.8537
 7,roussel,PCF-SAN-01,Soins prescrits remboursés à 100 %,-0.9268,1,True,False,False,False,1.8537
-8,arthaud,ART-EMP-02,Répartition du travail entre tous sans perte de salaire,-1.8229,0,False,False,False,False,1.8229
-9,roussel,PCF-RET-03,CSG sur les retraites supprimée,-0.8713,1,True,False,False,False,1.7426
-10,roussel,PCF-EMP-01,32 heures sans diminution de salaire,-1.7184,0,False,False,False,False,1.7184
+8,arthaud,ART-EMP-02,Répartition du travail entre tous sans perte de salaire,-1.8227,0,False,False,False,False,1.8227
+9,roussel,PCF-RET-03,CSG sur les retraites supprimée,-0.8658,1,True,False,False,False,1.7317
+10,roussel,PCF-EMP-01,32 heures sans diminution de salaire,-1.7182,0,False,False,False,False,1.7182
 11,melenchon,LFI-PRE-01,Garantie d'autonomie : revenu au seuil de pauvreté,-0.8497,1,True,False,False,False,1.6995
 12,melenchon,LFI-RET-03,Pensions des carrières complètes au moins au SMIC revalorisé,-0.7243,1,True,False,False,False,1.4486
 13,arthaud,ART-ECO-01,SMIC à 2 200 € net par mois,-1.3415,0,False,False,False,False,1.3415
 14,attal,ATT-ECO-01,Droit au brut : +250 € net par mois au salaire médian (cotisations salariales supprimées),-1.3005,0,False,False,False,False,1.3005
 15,melenchon,LFI-RET-01,"Réforme de 2023 abrogée, puis retraite à 60 ans à taux plein pour 40 annuités",-1.2823,0,False,False,False,False,1.2823
 16,roussel,PCF-RET-01,"Retraite à 60 ans à taux plein, réforme de 2023 abrogée",-1.2823,0,False,False,False,False,1.2823
-17,tondelier,REC-11,Baisse de l'IR des tranches les plus basses,-0.3134,3,True,True,False,True,1.2537
-18,bertrand,BER-FIS-01,Baisser l'impôt sur le revenu des premières tranches,-0.3133,3,True,True,False,True,1.2532
+17,bertrand,BER-FIS-01,Baisser l'impôt sur le revenu des premières tranches,-0.3141,3,True,True,False,True,1.2564
+18,tondelier,REC-11,Baisse de l'IR des tranches les plus basses,-0.3107,3,True,True,False,True,1.2429
 19,tondelier,FP-02,+10 % pour les catégories C et B et les catégories A ayant perdu du pouvoir d'achat ; enseignants +15 % sur le quinquennat ; chercheurs +10 % dès la première année,-0.5805,1,True,False,False,False,1.161
 20,tondelier,SAN-01,"Soins essentiels remboursés à 100 %, franchises supprimées, mutuelles cantonnées aux soins optionnels",-0.374,2,True,False,False,True,1.1221
 21,arthaud,ART-SP-01,Embauches massives dans les services publics,-0.2794,3,True,True,False,True,1.1177
@@ -83,7 +83,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 82,glucksmann,GLU-EMP-02,Abroger la réforme de l'assurance chômage,-0.1965,1,True,False,False,False,0.3929
 83,melenchon,LFI-EMP-01,Garantie d'emploi pour les chômeurs de longue durée,-0.1299,2,True,False,False,True,0.3897
 84,roussel,PCF-EMP-02,"Sécurité d'emploi ou de formation à la place du RSA : emploi ou formation au SMIC, fin du chômage de longue durée en cinq ans",-0.1299,2,True,False,False,True,0.3897
-85,tondelier,REC-13,Suppression de l'abattement de 10 % des retraités,0.1939,1,True,False,False,False,0.3877
+85,tondelier,REC-13,Suppression de l'abattement de 10 % des retraités,0.193,1,True,False,False,False,0.3859
 86,tondelier,REC-20/21,Capital : CSG +3 points et flat tax +3 points (cumulées),0.1222,2,True,True,False,False,0.3667
 87,attal,ATT-FIS-03,"« Année blanche » de 2028 (petites retraites protégées), réformes de l'assurance chômage, des retraites et des arrêts maladie",0.1813,1,True,False,False,False,0.3626
 88,melenchon,LFI-REC-16,CVAE remplacée par un impôt progressif selon le chiffre d'affaires et l'empreinte écologique,0.1778,1,True,False,False,False,0.3556
@@ -116,9 +116,9 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 115,zemmour,ZEM-RET-01,"Reporter l'âge de départ, introduire une part de capitalisation",0.2761,0,False,False,False,False,0.2761
 116,attal,ATT-EDU-01,"Enseignants +200 € net par mois, jusqu'à +500 € en milieu de carrière",-0.0904,2,True,True,False,False,0.2711
 117,melenchon,LFI-PRE-06,Congé d'accueil de 20 semaines par parent,-0.1352,1,True,False,False,False,0.2705
-118,lisnard,LIS-SOC-01,Quotient familial déplafonné,-0.134,1,True,False,False,False,0.2679
-119,arthaud,ART-INT-01,Opposition à la hausse du budget militaire,0.2663,0,False,False,False,False,0.2663
-120,melenchon,LFI-SAN-13,"Service public de la dépendance, métiers du grand âge revalorisés, maintien à domicile",-0.1324,1,True,False,False,False,0.2648
+118,arthaud,ART-INT-01,Opposition à la hausse du budget militaire,0.2663,0,False,False,False,False,0.2663
+119,melenchon,LFI-SAN-13,"Service public de la dépendance, métiers du grand âge revalorisés, maintien à domicile",-0.1324,1,True,False,False,False,0.2648
+120,lisnard,LIS-SOC-01,Quotient familial déplafonné,-0.1323,1,True,False,False,False,0.2647
 121,lisnard,LIS-ECO-05,Subventions compensant les charges des entreprises supprimées,0.1317,1,True,False,False,False,0.2634
 122,tondelier,RET-04,"Indexation différenciée des pensions, sous-indexation des plus hautes",0.0867,2,True,False,False,True,0.2601
 123,roussel,PCF-EDU-02,"Fournitures, cantine et transports scolaires gratuits",-0.1298,1,True,False,False,False,0.2596
@@ -130,8 +130,8 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 129,le_pen,RN-LOG-01,« 100 % Rénov' »,-0.1251,1,True,False,False,False,0.2502
 130,melenchon,LFI-EDU-07,Bâti scolaire rénové et adapté,-0.0823,2,True,False,False,True,0.2469
 131,melenchon,LFI-INV-03,Plan vélo rétabli ; leasing social,-0.0823,2,True,False,False,True,0.2469
-132,le_pen,RN-FIS-03,Impôt sur le revenu supprimé pour les moins de 30 ans (jusqu'à quatre SMIC),-0.1225,1,True,False,False,False,0.2451
-133,glucksmann,GLU-ECO-01,Porter le SMIC à 1 600 € net en deux ans,-0.2442,0,False,False,False,False,0.2442
+132,glucksmann,GLU-ECO-01,Porter le SMIC à 1 600 € net en deux ans,-0.2442,0,False,False,False,False,0.2442
+133,le_pen,RN-FIS-03,Impôt sur le revenu supprimé pour les moins de 30 ans (jusqu'à quatre SMIC),-0.122,1,True,False,False,False,0.244
 134,lisnard,LIS-RET-01,Capitalisation obligatoire amorcée par la désindexation des pensions au-delà de ≈ 2 000 €,0.2361,0,False,False,False,False,0.2361
 135,glucksmann,GLU-ENE-03,"Facture indexée sur le coût de production, hausse de taxe de 2024 annulée",-0.1176,1,True,False,False,False,0.2352
 136,melenchon,LFI-INV-05,Relocaliser les productions essentielles ; plan de reconstruction industrielle,-0.1152,1,True,False,False,False,0.2305
@@ -256,20 +256,20 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 255,zemmour,ZEM-KNA-04,"RSA limité à trois ans pour les aptes au travail [4,8 Md€]",0.0455,1,True,False,False,False,0.091
 256,retailleau,RET-FIS-02,Droits de succession abaissés,-0.0439,1,True,False,False,False,0.0879
 257,tondelier,FP-05,"Justice — 9 000 magistrats sur dix ans, 10 000 greffiers, 7 000 attachés de justice ; salaires les plus bas à la moyenne européenne",-0.0292,2,True,False,False,True,0.0876
-258,tondelier,REC-10,Tranche d'IR à 60 % au-delà de 250 000 €,0.0435,1,True,False,False,False,0.0869
-259,le_pen,RN-JEU-01,Permis de conduire gratuit,-0.0428,1,True,False,False,False,0.0856
-260,tondelier,SAN-05,"Hôpital — recrutements, salaires, dette transférée à la CADES",-0.0284,2,True,False,False,True,0.0851
-261,melenchon,LFI-EDU-09,Enseignement supérieur gratuit,-0.0423,1,True,False,False,False,0.0846
-262,glucksmann,GLU-EMP-01,"Généraliser Territoires zéro chômeur, CDI d'insertion",-0.0422,1,True,False,False,False,0.0844
-263,tondelier,FP-04,Titularisation des 144 000 AESH et des contractuels ; personnels éducatifs renforcés,-0.0277,2,True,False,False,True,0.0831
-264,bertrand,BER-CUL-01,1 % du budget de l'État pour la culture en 2032,-0.0395,1,True,False,False,False,0.079
-265,glucksmann,GLU-TER-01,Plan Rail avec les régions,-0.0395,1,True,False,False,False,0.079
-266,glucksmann,GLU-TER-01b,Titre de transport unique « Ticket climat »,-0.0395,1,True,False,False,False,0.079
-267,philippe,PHI-INT-02b,Service militaire volontaire de 3 000 à 50 000 places,-0.0395,1,True,False,False,False,0.079
-268,retailleau,RET-LOG-06,"Statut du bailleur privé (amortissement de 4 %, PFU)",-0.0263,2,True,False,True,False,0.079
-269,tondelier,REC-23,"Taxe sur les transactions financières portée à 0,7 %, assiette élargie",0.0263,2,True,False,True,False,0.079
-270,glucksmann,GLU-RET-02,Âge modulé selon la pénibilité et l'espérance de vie en bonne santé,-0.0394,1,True,False,False,False,0.0789
-271,glucksmann,GLU-EDU-05,"Parcoursup repensé, capital formation universel (chantier)",-0.026,2,True,False,True,False,0.0779
+258,le_pen,RN-JEU-01,Permis de conduire gratuit,-0.0428,1,True,False,False,False,0.0856
+259,tondelier,SAN-05,"Hôpital — recrutements, salaires, dette transférée à la CADES",-0.0284,2,True,False,False,True,0.0851
+260,melenchon,LFI-EDU-09,Enseignement supérieur gratuit,-0.0423,1,True,False,False,False,0.0846
+261,glucksmann,GLU-EMP-01,"Généraliser Territoires zéro chômeur, CDI d'insertion",-0.0422,1,True,False,False,False,0.0844
+262,tondelier,FP-04,Titularisation des 144 000 AESH et des contractuels ; personnels éducatifs renforcés,-0.0277,2,True,False,False,True,0.0831
+263,bertrand,BER-CUL-01,1 % du budget de l'État pour la culture en 2032,-0.0395,1,True,False,False,False,0.079
+264,glucksmann,GLU-TER-01,Plan Rail avec les régions,-0.0395,1,True,False,False,False,0.079
+265,glucksmann,GLU-TER-01b,Titre de transport unique « Ticket climat »,-0.0395,1,True,False,False,False,0.079
+266,philippe,PHI-INT-02b,Service militaire volontaire de 3 000 à 50 000 places,-0.0395,1,True,False,False,False,0.079
+267,retailleau,RET-LOG-06,"Statut du bailleur privé (amortissement de 4 %, PFU)",-0.0263,2,True,False,True,False,0.079
+268,tondelier,REC-23,"Taxe sur les transactions financières portée à 0,7 %, assiette élargie",0.0263,2,True,False,True,False,0.079
+269,glucksmann,GLU-RET-02,Âge modulé selon la pénibilité et l'espérance de vie en bonne santé,-0.0394,1,True,False,False,False,0.0789
+270,glucksmann,GLU-EDU-05,"Parcoursup repensé, capital formation universel (chantier)",-0.026,2,True,False,True,False,0.0779
+271,tondelier,REC-10,Tranche d'IR à 60 % au-delà de 250 000 €,0.0387,1,True,False,False,False,0.0774
 272,melenchon,LFI-COL-06,"Justice : recrutements, aide juridictionnelle, tribunaux de proximité",-0.025,2,True,False,False,True,0.0751
 273,melenchon,LFI-COL-03,Services publics essentiels à 15-30 minutes,-0.0353,1,True,False,False,False,0.0705
 274,melenchon,LFI-REC-25,Cannabis légalisé sous monopole d'État,0.023,2,True,False,True,False,0.0691
@@ -329,7 +329,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 328,glucksmann,GLU-SOC-01,Statut des parents seuls,-0.0162,2,True,False,True,False,0.0487
 329,philippe,PHI-SOC-07,« Plan Marshall » pour la garde d'enfants,-0.0243,1,True,False,False,False,0.0487
 330,lisnard,LIS-ECO-04,Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois,-0.024,1,True,False,False,False,0.0479
-331,philippe,PHI-FIS-02,"Pas d'impôt sur le revenu trois ans après une naissance (4e au 6e décile et début du 7e), réduction de 3 000 € par an au-dessus (≈ 3 Md€ par an)",-0.0475,0,False,False,False,False,0.0475
+331,philippe,PHI-FIS-02,"Pas d'impôt sur le revenu trois ans après une naissance (4e au 6e décile et début du 7e), réduction de 3 000 € par an au-dessus (≈ 3 Md€ par an)",-0.0473,0,False,False,False,False,0.0473
 332,melenchon,LFI-EMP-06,Burn-out reconnu en maladie professionnelle ; cancérogènes du CIRC,-0.023,1,True,False,False,False,0.0461
 333,tondelier,ECO-01,"Financement public de l'enseignement privé sous contrat ramené à 50 % (révision de la loi Debré), compensé par des frais de scolarité",0.023,1,True,False,False,False,0.0461
 334,roussel,PCF-SEC-01,Police nationale de proximité : 30 000 postes,-0.0229,1,True,False,False,False,0.0459
@@ -413,10 +413,10 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 412,glucksmann,GLU-CLI-06,"Refuser les méga-bassines, tarification sociale de l'eau",-0.0115,1,True,False,False,False,0.023
 413,philippe,PHI-RET-03,"Capitalisation collective, PER abondé de 500 € dès le premier emploi",-0.0115,1,True,False,False,False,0.023
 414,zemmour,ZEM-KNA-12,"Suppression d'autres agences (Arcom, Conseil national du bruit, Haut Conseil à l'égalité…) [1 Md€]",0.0115,1,True,False,False,False,0.023
-415,bertrand,BER-FIS-02,"Rejeter la taxe Zucman, relever la flat tax",0.0115,1,True,False,False,False,0.0229
-416,philippe,PHI-NUM-03,"100 000 ingénieurs par an (contre 40 000), en cinq ans",-0.0076,2,True,True,False,False,0.0227
-417,lisnard,LIS-SAN-02,Étudiants en médecine doublés d'ici 2030,-0.0111,1,True,False,False,False,0.0222
-418,retailleau,RET-SEC-02,« État d'urgence anti-trafics » dans 50 à 60 quartiers,-0.0111,1,True,False,False,False,0.0222
+415,philippe,PHI-NUM-03,"100 000 ingénieurs par an (contre 40 000), en cinq ans",-0.0076,2,True,True,False,False,0.0227
+416,lisnard,LIS-SAN-02,Étudiants en médecine doublés d'ici 2030,-0.0111,1,True,False,False,False,0.0222
+417,retailleau,RET-SEC-02,« État d'urgence anti-trafics » dans 50 à 60 quartiers,-0.0111,1,True,False,False,False,0.0222
+418,bertrand,BER-FIS-02,"Rejeter la taxe Zucman, relever la flat tax",0.0111,1,True,False,False,False,0.0221
 419,tondelier,PRE-02,32 heures sans perte de salaire dans les métiers pénibles ou de nuit,-0.0071,2,True,False,False,True,0.0213
 420,tondelier,SAN-08,"Renégociation du prix des médicaments les plus coûteux (anticancéreux), pôle public du médicament",0.0099,1,True,False,False,False,0.0199
 421,attal,ATT-CLI-02,"Plan eau : 500 réseaux réparés, réutilisation des eaux usées, ministère de l'Eau",-0.0099,1,True,False,False,False,0.0198

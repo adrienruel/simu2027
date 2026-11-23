@@ -9,6 +9,10 @@ PAIRES = [
     (("melenchon", "LFI-SAN-01"), ("roussel", "PCF-SAN-01")),  # soins remboursés à 100 %
     (("bertrand", "BER-FIS-01"), ("tondelier", "REC-11")),  # IR des premières tranches
 ]
+# Les recettes de l'IR suivent la population vieillie de chaque programme (emploi, retraités : outils/vieillissement) :
+# même règle, assiette différente. Tondelier (retraite à 62 ans) a moins d'actifs imposables en 2037 que Bertrand
+# (65 ans) : environ 1 % d'écart (23/11/2026). Le montant statique de 2026 est, lui, identique (micro_mesures.csv).
+TOLERANCE = {("bertrand", "BER-FIS-01"): 0.02}
 
 
 def _effet(p, nom, ident, s="prudent", t=2037):
@@ -22,7 +26,7 @@ def _effet(p, nom, ident, s="prudent", t=2037):
 def test_meme_mesure_meme_cout(a, b):
     p = Parametres()
     ea, eb = _effet(p, *a), _effet(p, *b)
-    assert ea != 0 and ea == pytest.approx(eb, rel=0.01)
+    assert ea != 0 and ea == pytest.approx(eb, rel=TOLERANCE.get(a, 0.01))
 
 
 def test_fiches_et_priorites():

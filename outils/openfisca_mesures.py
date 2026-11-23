@@ -849,15 +849,38 @@ def main(programmes=None):
     dossier = RACINE / "sorties" / "micro"
     dossier.mkdir(exist_ok=True)
     base = None
+    # « programme@k/n » : seulement les mesures de rang k modulo n (fichiers _partk) ; « programme@ensemble » :
+    # seulement l'ensemble (déciles) ; « programme@joindre » : réunit les parties. Pour les gros programmes, dont la
+    # mémoire dépasse 8 Go en un seul processus (22/11/2026).
+    # Les parties vont dans .cache (calcul en cours, hors des sorties publiées et du manifeste).
+    cache = RACINE / ".cache" / "micro_parties"
+    parts = {}
+    for a in programmes or []:
+        n, _, q = a.partition("@")
+        parts[n] = q
+    if programmes:
+        programmes = list(parts)
     for nom, mesures in sp.items():
         if programmes and nom not in programmes:
+            continue
+        q = parts.get(nom, "")
+        if q == "joindre":
+            for suffixe in ("mesures", "emploi"):
+                lignes = []
+                for f in sorted(cache.glob(f"{nom}_{suffixe}_part*.csv")):
+                    with f.open(encoding="utf-8") as g:
+                        lignes += list(csv.DictReader(g))
+                _ecrire(dossier / f"{nom}_{suffixe}.csv", lignes)
             continue
         base = base or Base()
         lignes_m, lignes_d, lignes_e = [], [], []
         toutes = []
-        for ident, spec in mesures.items():
-            r = base.reforme(spec["operations"])
+        k_n = tuple(int(x) for x in q.split("/")) if "/" in q else None
+        for rang, (ident, spec) in enumerate(mesures.items()):
             toutes += spec["operations"]
+            if q == "ensemble" or (k_n and rang % k_n[1] != k_n[0]):
+                continue
+            r = base.reforme(spec["operations"])
             mot = montant_moteur(nom, ident)
             lignes_m.append({"programme": nom, "mesure": ident, "openfisca_md": round(r["budget"], 2),
                              "moteur_md": round(mot, 2),
@@ -872,6 +895,12 @@ def main(programmes=None):
             em = r.get("emploi", {"emplois": 0.0, "budget": 0.0})
             print(f"{nom:10s} {ident:11s} OpenFisca {r['budget']:+6.2f}  moteur {mot:+6.2f}  emplois {em['emplois'] / 1e3:+7.1f} k"
                   f"  ({em['budget']:+5.2f} Md€)", flush=True)
+        if k_n:
+            for suffixe, lignes in (("mesures", lignes_m), ("emploi", lignes_e)):
+                if lignes:
+                    cache.mkdir(parents=True, exist_ok=True)
+                    _ecrire(cache / f"{nom}_{suffixe}_part{k_n[0]}.csv", lignes)
+            continue
         r = base.reforme(toutes)
         em = r.get("emploi", {"emplois": 0.0, "budget": 0.0})
         for d in base.deciles(r["etat"]):
@@ -881,7 +910,8 @@ def main(programmes=None):
                              **{k: round(v, 2) if isinstance(v, float) else v for k, v in d.items()}})
         print(f"{nom:10s} ensemble OpenFisca {r['budget']:+6.2f}", flush=True)
         for suffixe, lignes in (("mesures", lignes_m), ("deciles", lignes_d), ("emploi", lignes_e)):
-            _ecrire(dossier / f"{nom}_{suffixe}.csv", lignes)
+            if lignes:
+                _ecrire(dossier / f"{nom}_{suffixe}.csv", lignes)
     reunir()
 
 

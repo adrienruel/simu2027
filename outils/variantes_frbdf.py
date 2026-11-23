@@ -103,6 +103,8 @@ def ecrire(res: dict) -> Path:
             for s, d in par.items():
                 for h, (y, e, b) in d.items():
                     w.writerow([c, f"simu2027 {s}", h, round(y, 3), round(e, 3), round(b, 3)])
+    from outils import trace
+    trace.enregistrer([f.name], script="outils.variantes_frbdf")
     return f
 
 

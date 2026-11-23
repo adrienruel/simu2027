@@ -8,7 +8,6 @@ Attal (Renaissance),attal,attal_mesures.assurance_chomage,ATT-EMP-01,Réforme de
 Bertrand (Nous France),bertrand,bertrand_mesures.conseiller_territorial,BER-INS-02,Conseiller territorial : élus régionaux et départementaux fusionnés,collectivites,economie,0.02,0.03,0.05,0.07,0.429,True,HYPOTHESE,True,True
 Bertrand (Nous France),bertrand,bertrand_mesures.assurance_chomage,BER-ECO-01,Économies sur l'assurance chômage (non détaillées),chomage,economie,1.0,1.5,2.5,3.5,0.429,True,HYPOTHESE,True,True
 Bertrand (Nous France),bertrand,bertrand_mesures.fonctionnaires,BER-ECO-01,Baisse du nombre de fonctionnaires (non chiffrée par le candidat),etat_missions,economie,1.4,2.2,3.3,4.4,0.5,True,HYPOTHESE,True,True
-Bertrand (Nous France),bertrand,bertrand_mesures.flat_tax,BER-FIS-02,Relèvement du prélèvement forfaitaire unique de 2 points,recettes,recette,0.6,0.7,0.9,1.1,0.636,True,HYPOTHESE,True,True
 Bertrand (Nous France),bertrand,bertrand_mesures.carence,BER-EMP-02,Jours de carence alignés : trois jours dans le public comme dans le privé,etat_missions,economie,0.2,0.3,0.5,0.6,0.5,True,HYPOTHESE,True,True
 Bertrand (Nous France),bertrand,bertrand_mesures.audiovisuel,BER-CUL-02,"Audiovisuel public réformé, coûts réduits",etat_missions,economie,0.0,0.2,0.3,0.5,0.4,True,HYPOTHESE,False,True
 Glucksmann (Place publique),glucksmann,glucksmann_mesures.grosses_successions,GLU-FIS-01,Successions : taxation accrue des très gros héritages (au-delà de ≈ 2 M€ reçus),recettes,recette,3,4,6,8,0.5,True,HYPOTHESE,True,True
@@ -49,7 +48,6 @@ Lisnard (Nouvelle Énergie),lisnard,lisnard_mesures.renouvelables,LIS-ENE-02,"Re
 Mélenchon (La France insoumise),melenchon,melenchon_mesures.nouvelle_caledonie,LFI-INS-01,"Indépendance de la Kanaky-Nouvelle-Calédonie : dépenses de l'État sur place en moins, plan de réparation déduit",etat_missions,economie,0.0,0.3,0.7,1.0,0.3,True,HYPOTHESE,True,True
 Mélenchon (La France insoumise),melenchon,melenchon_mesures.ir_hauts_revenus,LFI-REC-01,Impôt sur le revenu à 14 tranches : tranches du haut relevées,recettes,recette,1.5,2.0,3.0,4.0,0.5,True,HYPOTHESE,True,True
 Mélenchon (La France insoumise),melenchon,melenchon_mesures.quotient_conjugal,LFI-REC-02,Fin du quotient conjugal (impôt individualisé),recettes,recette,5.0,6.0,7.0,8.0,0.75,True,HYPOTHESE,True,False
-Mélenchon (La France insoumise),melenchon,melenchon_mesures.flat_tax,LFI-REC-04,Flat tax supprimée : revenus du capital au barème de l'impôt sur le revenu,recettes,recette,0.5,1.0,2.0,3.0,0.333,True,HYPOTHESE,True,False
 Mélenchon (La France insoumise),melenchon,melenchon_mesures.isf,LFI-REC-05,"ISF rétabli et renforcé, volet climatique (à la place de l'IFI)",recettes,recette,1.5,2.5,3.5,4.5,0.556,True,HYPOTHESE,True,False
 Mélenchon (La France insoumise),melenchon,melenchon_mesures.zucman,LFI-REC-06,Taxe Zucman : garantie d'impôt de 2 % sur les patrimoines de plus de 100 M€ ; exit tax renforcée,recettes,recette,3.0,5.0,8.0,12.0,0.417,True,HYPOTHESE,True,True
 Mélenchon (La France insoumise),melenchon,melenchon_mesures.tva_luxe,LFI-REC-08,"« TVA grand luxe » (yachts, jets privés, palaces)",recettes,recette,0.2,0.3,0.5,0.7,0.429,True,HYPOTHESE,True,False
@@ -124,7 +122,6 @@ Tondelier (Les Écologistes),tondelier,tondelier_mesures.successions,REC-04/05/0
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.ir_tranche_60,REC-10,Impôt sur le revenu : tranche à 60 % au-delà de 250 000 € par part,recettes,recette,0.8,1.2,2.0,2.5,0.48,True,HYPOTHESE,True,False
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.abattement_retraites,REC-13,Fin de l'abattement de 10 % des retraités,recettes,recette,5.5,5.5,5.8,5.8,0.948,True,HYPOTHESE,True,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.niches_plafond,REC-12,Plafonnement global des niches ; avantages limités à deux logements,recettes,recette,0.4,0.5,0.7,1.0,0.5,True,HYPOTHESE,False,False
-Tondelier (Les Écologistes),tondelier,tondelier_mesures.capital_csg_pfu,REC-20/21,Capital : CSG +3 points et flat tax +3 points (cumulées),recettes,recette,3.0,3.5,4.5,5.5,0.636,True,HYPOTHESE,True,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.ttf,REC-23,"Taxe sur les transactions financières à 0,7 %",recettes,recette,0.6,0.8,1.2,1.5,0.533,True,HYPOTHESE,True,False
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.is_minimal,REC-30,"Impôt minimal sur les bénéfices (chiffre d'affaires > 1 Md€, au prorata de l'activité en France)",recettes,recette,1.0,1.5,3.0,5.0,0.3,True,HYPOTHESE,False,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.tsn,REC-32,Taxe sur les services numériques à 5 %,recettes,recette,0.4,0.5,0.6,0.8,0.625,True,HYPOTHESE,True,False
