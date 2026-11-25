@@ -66,6 +66,7 @@ def test_reference_du_multiplicateur_fixe():
     assert Parametres().val("bouclage.multiplicateur_reference") == Parametres().val("macro.multiplicateur", "median")
 
 
+@pytest.mark.lent
 def test_rho1_dixieme_centile_retrouve_le_prudent():
     """Contrôle remis en test (phase 3.2, 16/11/2026) : ρ = 1 et tous les z au 10e centile redonnent le scénario
     prudent publié, à l'écart près des règles propres au prudent (moyennes de jeux, lectures hors miroir). Mesuré le

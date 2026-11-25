@@ -1,4 +1,6 @@
 """Canal commun des naissances (moteur/naissances.py, 14/11/2026)."""
+import pytest
+
 from moteur import naissances, noyau
 from moteur.parametres import Parametres
 
@@ -35,6 +37,7 @@ def test_conges_hors_soutien_monetaire():
         assert naissances.soutien_par_enfant(p, "prudent", m) == naissances.soutien_par_enfant(p, "prudent", sans)
 
 
+@pytest.mark.lent
 def test_garde_compte_les_places_au_cout_de_la_mesure():
     p = Parametres()
     for nom in noyau.programmes_disponibles():

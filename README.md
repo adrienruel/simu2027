@@ -13,6 +13,8 @@ Mélenchon, Philippe, Retailleau, Roussel, Tondelier, Zemmour).
 pip install -r requirements.txt
 pip install -r requirements-micro.txt  # OpenFisca-France : microsimulation et ses tests
 python -m pytest -q -p no:cacheprovider           # suite complète (~11 min avec OpenFisca)
+python -m outils.tests_paralleles                 # même suite, un processus par cœur (~1 min sans OpenFisca sur 2 cœurs)
+python -m pytest -q -m "not lent"                 # boucle rapide, sans les 6 tests de plus de 3 s
 python -m moteur.noyau <programme>                # un programme contre le statu quo
 python -m outils.export_comparaison               # sorties/comparaison_*.csv (~1 min)
 python -m moteur.incertitude 600                  # Monte Carlo (~1 h 45), sorties/incertitude_rho0.json et _rho1.json

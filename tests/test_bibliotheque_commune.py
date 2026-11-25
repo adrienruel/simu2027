@@ -29,6 +29,7 @@ def test_meme_mesure_meme_cout(a, b):
     assert ea != 0 and ea == pytest.approx(eb, rel=TOLERANCE.get(a, 0.01))
 
 
+@pytest.mark.lent
 def test_fiches_et_priorites():
     """Roadmap 7.2-7.3 : chaque fiche a son effet, ses fragilités et sa priorité."""
     from outils import priorites_mesures as pm

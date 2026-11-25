@@ -6,6 +6,8 @@ import sys
 import textwrap
 from pathlib import Path
 
+import pytest
+
 from moteur import noyau
 from moteur.parametres import RACINE, Parametres
 
@@ -46,6 +48,7 @@ SCRIPT = textwrap.dedent('''
 SCENARIOS = {"crise": "Crise", "prudent": "Prudent", "median": "Médian", "optimiste": "Optimiste"}
 
 
+@pytest.mark.lent
 def test_programmes_publies_se_recalculent_a_l_identique():
     r = subprocess.run([sys.executable, "-c", SCRIPT], cwd=RACINE, capture_output=True, text=True, timeout=1800)
     assert r.returncode == 0, r.stderr[-2000:]

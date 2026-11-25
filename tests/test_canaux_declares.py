@@ -78,6 +78,7 @@ def test_regle_de_trajectoire_declaree():
     assert r[2073]["dette_pib"] < BASE[2073]["dette_pib"]
 
 
+@pytest.mark.lent
 def test_canaux_declares_par_les_programmes():
     """Barème commun du 12/11/2026 : adoption de l'IA et école déclarées par les programmes qui ont une mesure sur le
     même objet, aux mêmes valeurs pour tous (programme_commun, rangé le 16/11/2026 : aucun programme ne le recopie ni ne

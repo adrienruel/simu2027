@@ -20,6 +20,7 @@ def test_identifiants_groupes():
     assert cm.identifiants_codes("x", specs) == {"REC-20/21", "REC-20", "REC-21", "BER-FIS-01"}
 
 
+@pytest.mark.lent
 def test_seuil_des_deciles(p):
     c = cm.toutes(p)
     for nom, x in c.items():
