@@ -40,7 +40,7 @@ class Arthaud(ProgrammeSimple):
     def mesures_calculees(self, p, s, idx):
         out = []
         ip = idx["pib"]
-        sm = self._cache.setdefault(("smic", id(p)), self.smic(p))
+        sm = self._cache.setdefault(("smic", p.jeton), self.smic(p))
         pr, pu = sm["prive"], sm["public"]
         montee = {2027: 0.5, 2028: 1.0}
 

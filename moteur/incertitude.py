@@ -377,9 +377,10 @@ def simuler(n: int = 200, graine: int = 2029, rho: float | None = None, noms: li
                 journal(f"{len(faits)}/{n} tirages, {time.time() - t0:.0f} s")
         if processus > 1 and a_faire:
             import multiprocessing as mp
-            # un processus neuf tous les 10 tirages : chaque tirage crée des copies de paramètres gardées en vie
-            # jusqu'à la fin du processus (parametres._VIVANTES) ; sans recyclage la mémoire sature
-            with mp.get_context("fork").Pool(processus, maxtasksperchild=10) as pool:
+            # plus de recyclage des processus (maxtasksperchild=10 jusqu'au 25/11/2026) : les copies de paramètres
+            # ne sont plus gardées en vie (parametres.jeton, R1.4), la mémoire d'un processus reste stable (≈ 60 Mo
+            # après 12 tirages, contre 1,1 Go avant)
+            with mp.get_context("fork").Pool(processus) as pool:
                 for d in pool.imap_unordered(_travail, [(i, graine, rho, noms) for i in a_faire]):
                     garder(d)
         else:

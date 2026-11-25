@@ -54,7 +54,7 @@ def test_trente_deux_heures(p, prog):
     ctx = prog.contexte(p)["prudent"]
     c = ctx["emplois_canaux"][2035]
     assert c["PCF-EMP-01 — 32 heures : embauches de partage du travail"] > 0 > c["PCF-EMP-01 — 32 heures : emplois perdus par le coût horaire"]
-    assert prog.pib_en_plus[(id(p), "prudent")][2035] < 0
+    assert prog.pib_en_plus[(p.jeton, "prudent")][2035] < 0
 
 
 def test_emissions(p, prog):

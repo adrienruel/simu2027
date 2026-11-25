@@ -90,7 +90,7 @@ class Choc(ProgrammeSimple):
             det = bib.report_age_legal_detail(p, s, 65, 1966, 0.25)
             k = 1.0 if self.part_gardee is None else self.part_gardee
             self.non_retraites = getattr(self, "non_retraites", {})
-            self.non_retraites[(id(p), s)] = {"serie": {t: k * v for t, v in det["non_retraites"].items()}, "baisse": False}
+            self.non_retraites[(p.jeton, s)] = {"serie": {t: k * v for t, v in det["non_retraites"].items()}, "baisse": False}
             serie = {**zero, **{t: -k * det["pensions"][t] for t in ANNEES}}
             taux_prel = sq.recettes_par_impot(p, s)[2029]["retraites"] / sq.retraites(p, s)[2029]["depenses"]
             return [Mesure("Banc — âge d'ouverture des droits porté à 65 ans", "retraites", serie),

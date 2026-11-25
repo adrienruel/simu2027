@@ -84,7 +84,7 @@ def main() -> None:
             pop = migrations.population_programme(prog, p, s) if nom != "statu_quo" else base
             dc = sq.deces(p, s)
             em = _ecart_migration(p, s, decl)
-            nc = getattr(prog, "ecart_naissances", {}).get((id(p), s))
+            nc = getattr(prog, "ecart_naissances", {}).get((p.jeton, s))
             icf_sq = fv[sq._v(p, "demographie.scenario_fecondite", s)]
             for t in ANNEES_FLUX:
                 P0, P1 = sum(base[t]), sum(base[t + 1])

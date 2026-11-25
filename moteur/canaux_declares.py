@@ -186,7 +186,7 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme
         from . import migrations
         mg = migrations.effets(p, s, d.get("solde_migratoire"), eff_n)
         if mg["ecart_naissances"] is not None:
-            prog.__dict__.setdefault("ecart_naissances", {})[(id(p), s)] = mg["ecart_naissances"]
+            prog.__dict__.setdefault("ecart_naissances", {})[(p.jeton, s)] = mg["ecart_naissances"]
         morceaux = []
         if "solde_migratoire" in d:
             morceaux.append(f"solde migratoire ({mg['variation_solde'] / 1e3:+.0f} 000 par an)")

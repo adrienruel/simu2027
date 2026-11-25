@@ -179,7 +179,7 @@ def main() -> None:
             # compris (multiplicateur, offre, intérêts)
             t_a = annonces_mod.ANNEE
             for k, a in enumerate(x for x in liste_annonces if x["programme"] == nom):
-                det = getattr(prog, "enveloppe_detail", {}).get((id(p), s))
+                det = getattr(prog, "enveloppe_detail", {}).get((p.jeton, s))
                 modele = annonces_mod.retenu(a, ms, det)
                 y = v[t_a]["pib"]
                 vt = variantes[nom][s][t_a]

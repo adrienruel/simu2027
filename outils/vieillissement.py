@@ -53,12 +53,12 @@ def ecart_seniors(prog, p: Parametres, s: str = "prudent") -> dict[int, dict[str
     (toutes les personnes pas encore retraitées, comme les pensions en moins du moteur) et personnes en emploi en plus
     parmi elles (offre.seniors, même calcul que le moteur). None si le programme ne change pas l'âge de départ.
 
-    Les programmes rangent la série dans `non_retraites[(id(p), s)]` ({"serie", "baisse"}, ProgrammeSimple) ou dans
-    `_non_retraites[(id(p), s)]` (série seule, âge abaissé : Tondelier). Le moteur doit avoir été simulé avec ce `p`."""
+    Les programmes rangent la série dans `non_retraites[(p.jeton, s)]` ({"serie", "baisse"}, ProgrammeSimple) ou dans
+    `_non_retraites[(p.jeton, s)]` (série seule, âge abaissé : Tondelier). Le moteur doit avoir été simulé avec ce `p`."""
     from moteur import offre
-    nr = getattr(prog, "non_retraites", {}).get((id(p), s))
-    if nr is None and (id(p), s) in getattr(prog, "_non_retraites", {}):
-        nr = {"serie": prog._non_retraites[(id(p), s)], "baisse": True}
+    nr = getattr(prog, "non_retraites", {}).get((p.jeton, s))
+    if nr is None and (p.jeton, s) in getattr(prog, "_non_retraites", {}):
+        nr = {"serie": prog._non_retraites[(p.jeton, s)], "baisse": True}
     if nr is None or not any(abs(v) > 1 for v in nr["serie"].values()):
         return None
     sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"])

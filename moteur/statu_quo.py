@@ -44,8 +44,6 @@ BLOCS = ("retraites", "sante", "chomage", "famille", "logement", "pauvrete", "aa
 
 def _v(p: Parametres, cle: str, s: str):
     """Valeur d'un paramètre dans le scénario s (sans le renvoi « prudent → crise » du calcul de crise)."""
-    if cle in p._surcharges:
-        return p._surcharges[cle]
     return p[cle].pour(s)
 
 
@@ -298,10 +296,18 @@ def retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     e = p.val("statu_quo.retraites_erosion_relative")
     nouveau = p.val("ancien_systeme.pension_nouveaux_relative")
 
-    def niveau(depart: int) -> float:
+    def _niveau(depart: int) -> float:
         if depart < 2029:
             return 1.0
         return nouveau * w[depart - lag] / w[2029 - lag] * (1 - e) ** (depart - 2029)
+    # niveau d'une année de départ calculé une fois (R1, 25/11/2026 : mêmes valeurs, appelé ≈ 2 millions de fois)
+    niv: dict[int, float] = {}
+
+    def niveau(depart: int) -> float:
+        v = niv.get(depart)
+        if v is None:
+            v = niv[depart] = _niveau(depart)
+        return v
 
     brut = {}
     for t in ANNEES:
@@ -581,12 +587,20 @@ def deces(p: Parametres, s: str) -> dict[int, float]:
     import csv
     from .distribution import DONNEES
     nom = _v(p, "demographie.scenario_fecondite", s)
-    d: dict[int, float] = {}
-    with (DONNEES / f"deces_insee_2026_{nom}.csv").open(encoding="utf-8") as f:
-        for l in csv.DictReader(f):
+    f = DONNEES / f"deces_insee_2026_{nom}.csv"
+    texte = f.read_text(encoding="utf-8")
+    deja = _DECES.get(f)
+    if deja is None or deja[0] != texte:
+        # fichier lu une fois par processus (R1, 25/11/2026 : 130 lectures de 4 800 lignes par tirage de Monte Carlo)
+        d: dict[int, float] = {}
+        for l in csv.DictReader(texte.splitlines()):
             d[int(l["annee"])] = d.get(int(l["annee"]), 0.0) + float(l["deces"])
-    derniere = max(d)
-    return {t: d.get(t, d[derniere]) for t in ANNEES}
+        derniere = max(d)
+        deja = _DECES[f] = (texte, {t: d.get(t, d[derniere]) for t in ANNEES})
+    return dict(deja[1])
+
+
+_DECES: dict = {}
 
 
 def derive_ir_salaires(p: Parametres, s: str) -> dict[int, dict[str, float]]:

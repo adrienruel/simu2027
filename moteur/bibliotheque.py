@@ -46,19 +46,29 @@ def _pensions_et_retraites(p: Parametres, s: str, part) -> tuple[dict[int, float
     """Pensions brutes (non calées) et retraités, part(g, b) = part de la génération g partie à l'âge b."""
     from .demographie import AGE_MAX
     pop, niveau = _cadre_pensions(p, s)
+    # part(g, ·) et niveau(·) gardés en tableaux (R1, 25/11/2026) : mêmes valeurs, mêmes opérations dans le même ordre
+    # (résultat identique au bit près), sans les millions d'appels de fonction de la triple boucle
+    parts: dict[int, list[float]] = {}
+    niv: dict[int, float] = {}
     dep_t, ret_t = {}, {}
     for t in ANNEES:
         dep = ret = 0.0
         for a in range(50, AGE_MAX + 1):
             n, g = pop[t][a], t - a
+            pg = parts.get(g)
+            if pg is None:
+                pg = parts[g] = [part(g, b) for b in range(49, AGE_MAX + 1)]  # pg[b - 49]
             cumul = 0.0
-            prec = part(g, 49)
+            prec = pg[0]
             for b in range(50, a + 1):
-                cur = part(g, b)
+                cur = pg[b - 49]
                 d = cur - prec
                 prec = cur
                 if d > 0:
-                    dep += n * d * niveau(g + b)
+                    nv = niv.get(g + b)
+                    if nv is None:
+                        nv = niv[g + b] = niveau(g + b)
+                    dep += n * d * nv
                     cumul += d
             ret += n * min(1.0, cumul)
         dep_t[t], ret_t[t] = dep, ret

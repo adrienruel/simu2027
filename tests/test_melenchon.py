@@ -60,7 +60,7 @@ def test_baisse_age_retrouve_le_retour_a_62_ans_de_tondelier(p):
     d = bib.baisse_age_legal_detail(pt, "prudent", {2028: t.v("retraites.profil_62_ans")})
     for a in (2029, 2040, 2060):
         assert d["pensions"][a] == pytest.approx(ref[a], rel=1e-9)
-        assert d["retraites_en_plus"][a] == pytest.approx(-t._non_retraites[(id(pt), "prudent")][a], rel=1e-9)
+        assert d["retraites_en_plus"][a] == pytest.approx(-t._non_retraites[(pt.jeton, "prudent")][a], rel=1e-9)
 
 
 def test_soixante_ans_coute_plus_que_62_ans(p, prog):

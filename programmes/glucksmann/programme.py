@@ -55,7 +55,7 @@ class Glucksmann(ProgrammeSimple):
         def ser(v):
             return {**{t: v * montee[t] for t in ANNEES_AVANT}, **{t: v * ip[t] for t in ANNEES}}
 
-        sm = self._cache.setdefault(("smic", id(p)), self.smic(p))
+        sm = self._cache.setdefault(("smic", p.jeton), self.smic(p))
         pr, pu = sm["prive"], sm["public"]
         nom = "GLU-ECO-01 — SMIC à 1 600 € net en deux ans"
         out += [
@@ -118,7 +118,7 @@ class Glucksmann(ProgrammeSimple):
                    {t: taux_prel * v for t, v in serie.items()}),
         ]
         self.non_retraites = getattr(self, "non_retraites", {})
-        self.non_retraites[(id(p), s)] = {"serie": {t: -v for t, v in det["retraites_en_plus"].items()},
+        self.non_retraites[(p.jeton, s)] = {"serie": {t: -v for t, v in det["retraites_en_plus"].items()},
                                           "baisse": True}
 
         # GLU-EMP-02 : chômage plus élevé quand la réforme de l'assurance chômage est abrogée
@@ -143,7 +143,7 @@ class Glucksmann(ProgrammeSimple):
         sc = {t: -n * msc(t) * e[t]["emploi"] / e[2029]["emploi"] for t in ANNEES}
         canaux["Service civique obligatoire : jeunes retirés de l'emploi"] = sc
         self.actifs_en_plus = getattr(self, "actifs_en_plus", {})
-        self.actifs_en_plus[(id(p), s)] = dict(sc)
+        self.actifs_en_plus[(p.jeton, s)] = dict(sc)
         return out, canaux
 
 

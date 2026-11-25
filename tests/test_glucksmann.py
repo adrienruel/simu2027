@@ -86,4 +86,4 @@ def test_service_civique_ne_fait_pas_de_chomeurs(p, prog):
     ctx = g.contexte(q)["prudent"]
     sc = ctx["emplois_canaux"][2035]["Service civique obligatoire : jeunes retirés de l'emploi"]
     assert -200000 < sc < -50000
-    assert g.actifs_en_plus[(id(q), "prudent")][2035] == pytest.approx(sc)
+    assert g.actifs_en_plus[(q.jeton, "prudent")][2035] == pytest.approx(sc)

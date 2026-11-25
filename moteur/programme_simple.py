@@ -258,7 +258,7 @@ class ProgrammeSimple:
         pts = 100 / y[2029]
         k = (min(1.0, max(0.0, annonce_pts - sum(nommees.values()) * pts) / (total * pts)) if total > 0 else 0.0)
         self.enveloppe_detail = getattr(self, "enveloppe_detail", {})
-        self.enveloppe_detail[(id(p), s)] = {"domaines": detail, "nommees": sum(nommees.values()),
+        self.enveloppe_detail[(p.jeton, s)] = {"domaines": detail, "nommees": sum(nommees.values()),
                                               "retenu": total * k, "plafond_annonce": total > 0 and k < 1.0}
 
         def mont(t):
@@ -372,8 +372,8 @@ class ProgrammeSimple:
                           {2027: 0.0, 2028: part_fp * hausse * m(2028),
                            **{t: part_fp * hausse * m(t) * ip[t] for t in ANNEES}}))
         self.cout_postes_calcules = getattr(self, "cout_postes_calcules", {})
-        prec = self.cout_postes_calcules.get((id(p), s), {})
-        self.cout_postes_calcules[(id(p), s)] = {t: prec.get(t, 0.0) + hausse * m(t) * (ip[t] if t in ip else 1.0)
+        prec = self.cout_postes_calcules.get((p.jeton, s), {})
+        self.cout_postes_calcules[(p.jeton, s)] = {t: prec.get(t, 0.0) + hausse * m(t) * (ip[t] if t in ip else 1.0)
                                                  for t in TOUTES}
         n_fp = hausse * 1e9 / self.v("emploi.cout_poste_public")
         canaux[f"*Postes publics : {prefixe} dans la fonction publique"] = {t: n_fp * m(t) for t in ANNEES}
@@ -384,8 +384,8 @@ class ProgrammeSimple:
     def ajouter_pib(self, p: Parametres, s: str, d: dict) -> None:
         """Production en plus ou en moins hors des canaux d'emploi (Md€ par année), lue dans le calcul du PIB."""
         self.pib_en_plus = getattr(self, "pib_en_plus", {})
-        prec = self.pib_en_plus.get((id(p), s), {})
-        self.pib_en_plus[(id(p), s)] = {t: prec.get(t, 0.0) + d.get(t, 0.0) for t in ANNEES}
+        prec = self.pib_en_plus.get((p.jeton, s), {})
+        self.pib_en_plus[(p.jeton, s)] = {t: prec.get(t, 0.0) + d.get(t, 0.0) for t in ANNEES}
 
     @staticmethod
     def valeur_emploi_cellule(p: Parametres, multiple_smic: float = 1.0) -> float:
@@ -432,13 +432,13 @@ class ProgrammeSimple:
         """Mesures de la bibliothèque (montants) et emplois qu'elles changent ({canal: {année: emplois}}), hors
         effets budgétaires de ces emplois, ajoutés par la classe au prix d'un emploi du salaire du canal (« nom@niveau », 1,3 SMIC sinon ; sauf canal dont le nom
         commence par « * » : effet budgétaire déjà compté par la mesure). Un programme qui change l'âge de la retraite
-        range les personnes pas encore retraitées en plus dans self.non_retraites[(id(p), s)] = {"serie": {année:
+        range les personnes pas encore retraitées en plus dans self.non_retraites[(p.jeton, s)] = {"serie": {année:
         personnes}, "baisse": bool} : la classe en tire l'emploi des seniors (offre.seniors)."""
         return [], {}
 
     # ------------------------------------------------------------------ assemblage
     def _calcul(self, p: Parametres) -> dict:
-        cle = id(p)
+        cle = p.jeton
         if cle in self._cache:
             return self._cache[cle]
         part_fp = self.part_prelevements_fp(p)
@@ -509,7 +509,7 @@ class ProgrammeSimple:
                     for t in ANNEES:
                         cible[t] += serie[t] * 1e9 / (x.get("cout_poste", cout_poste) * w[t] / w[2029])
             calc, canaux_calc = self.mesures_calculees(p, s, idx)
-            for t, v in getattr(self, "cout_postes_calcules", {}).get((id(p), s), {}).items():
+            for t, v in getattr(self, "cout_postes_calcules", {}).get((p.jeton, s), {}).items():
                 cout_postes[t] = cout_postes.get(t, 0.0) + v
             liste.extend(calc)
             liste.extend(self.mesures_formation(p, s, part_fp))
@@ -520,7 +520,7 @@ class ProgrammeSimple:
                 from . import annonces as ann
                 env = f"{self.nom}_enveloppe.intensite" in self.pt._p
                 liste.extend(ann.mesures_tenues(
-                    self.nom, p, s, liste, getattr(self, "enveloppe_detail", {}).get((id(p), s)),
+                    self.nom, p, s, liste, getattr(self, "enveloppe_detail", {}).get((p.jeton, s)),
                     self.v("enveloppe.intensite") if env else None,
                     int(self.v("enveloppe.debut")) if env else 2028, int(self.v("enveloppe.plein")) if env else 2032))
             # emplois : postes publics, éviction, canaux des mesures calculées
@@ -617,7 +617,7 @@ class ProgrammeSimple:
             actifs_bloc = {t: actifs[t] for t in ANNEES}  # actifs de l'offre (sans les seniors, comptés par leur mesure)
             # emploi des seniors quand l'âge de la retraite change (offre.seniors) : emplois, chômeurs, inactifs
             d_seniors = {t: 0.0 for t in ANNEES}
-            nr = getattr(self, "non_retraites", {}).get((id(p), s))
+            nr = getattr(self, "non_retraites", {}).get((p.jeton, s))
             if nr is not None:
                 sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"],
                                     facteur_prelevements=emploi_valeur.facteur(p, s, liste, "moyen"),
@@ -629,7 +629,7 @@ class ProgrammeSimple:
                     actifs[t] += sen["actifs"][t]
             # personnes retirées de la population active par une mesure calculée (ex. service civique obligatoire) :
             # leurs emplois perdus ne font pas de chômeurs
-            for t, v in getattr(self, "actifs_en_plus", {}).get((id(p), s), {}).items():
+            for t, v in getattr(self, "actifs_en_plus", {}).get((p.jeton, s), {}).items():
                 actifs[t] += v
                 actifs_bloc[t] += v
             # PIB : multiplicateur, offre, et valeur ajoutée des emplois en plus ou en moins hors conjoncture et offre
@@ -642,8 +642,8 @@ class ProgrammeSimple:
                                    and c not in sans_va)
                             for t in ANNEES}
             # PIB en plus ou en moins hors emploi (ex. heures travaillées en moins par salarié, 32 heures) : rangé par une
-            # mesure calculée dans self.pib_en_plus[(id(p), s)] = {année: Md€}, avec sa mesure de recettes (11/11/2026)
-            d_autre = getattr(self, "pib_en_plus", {}).get((id(p), s), {})
+            # mesure calculée dans self.pib_en_plus[(p.jeton, s)] = {année: Md€}, avec sa mesure de recettes (11/11/2026)
+            d_autre = getattr(self, "pib_en_plus", {}).get((p.jeton, s), {})
             # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
             from . import canaux_declares
             decl = canaux_declares.effets(self, p, s, mesures_programme=liste)
