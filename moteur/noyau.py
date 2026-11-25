@@ -566,6 +566,27 @@ def _deux_passes(p: Parametres, s: str, fabrique, ref: dict[int, dict]) -> dict[
     return res
 
 
+def hors_domaine(res: dict[str, dict[int, dict]], base: dict[str, dict[int, dict]] | None = None,
+                 dette_pib_max: float = 250.0, ecart_pib_max: float = 0.10) -> dict[str, dict]:
+    """Garde-fou de lecture (roadmap du moteur 25/11/2026, R3.3) : première année, par scénario, où la trajectoire
+    sort du domaine où le noyau reste une approximation défendable. Ne change aucun résultat.
+
+    - dette au-delà de dette_pib_max % du PIB : ni la croissance ni les comportements ne réagissent à la dette dans le
+      noyau (hors prime de dette bornée), la suite est une trajectoire mécanique ;
+    - PIB qui s'écarte de plus de ecart_pib_max (en part) du statu quo `base` : au-delà des chocs pour lesquels les
+      multiplicateurs et la balance commerciale linéaire sont calés (Mésange).
+    Seuils par défaut à confirmer (250 % et 10 %). Rend {scénario: {"dette": année ou None, "pib": année ou None}}."""
+    out = {}
+    for s, v in res.items():
+        dette = next((t for t in sorted(v) if v[t]["dette_pib"] > dette_pib_max), None)
+        pib = None
+        if base is not None and s in base:
+            pib = next((t for t in sorted(v) if t in base[s]
+                        and abs(v[t]["pib"] / base[s][t]["pib"] - 1) > ecart_pib_max), None)
+        out[s] = {"dette": dette, "pib": pib}
+    return out
+
+
 CLES_SANS_REGLE = ("deficit", "dette", "dette_pib", "pib", "solde", "solde_primaire", "chomage", "quasi_dette",
                    "dette_et_quasi_dette_pib")
 

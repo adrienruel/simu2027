@@ -77,3 +77,27 @@ def test_pas_de_smic_ni_de_plafond_en_dur():
 
 def test_plus_d_instances_gardees_en_vie():
     assert not hasattr(parametres, "_VIVANTES")
+
+
+def test_erreur_monte_carlo_bootstrap():
+    """R4.2 : deux programmes bien séparés gardent leur rang ; deux programmes confondus ne sont pas départagés."""
+    import random
+
+    from outils.erreur_monte_carlo import bootstrap
+    rng = random.Random(1)
+    ec = {"a": [rng.gauss(0, 1) for _ in range(400)], "b": [rng.gauss(5, 1) for _ in range(400)],
+          "c": [rng.gauss(5.01, 1) for _ in range(400)]}
+    r = bootstrap(ec, b=200)
+    assert r["a"]["rang"] == 1 and r["a"]["stabilite_rang"] == 1.0
+    assert r["b"]["stabilite_rang"] < 0.95 and r["c"]["stabilite_rang"] < 0.95
+    assert 0 < r["a"]["demi_ic90_p50"] < 0.2
+
+
+def test_hors_domaine():
+    """R3.3 : première année hors domaine, sans changer les résultats."""
+    fausse = {"prudent": {2029: {"dette_pib": 120.0, "pib": 100.0}, 2030: {"dette_pib": 260.0, "pib": 112.0},
+                          2031: {"dette_pib": 300.0, "pib": 100.0}}}
+    base = {"prudent": {t: {"dette_pib": 0.0, "pib": 100.0} for t in (2029, 2030, 2031)}}
+    assert noyau.hors_domaine(fausse, base) == {"prudent": {"dette": 2030, "pib": 2030}}
+    assert noyau.hors_domaine(fausse) == {"prudent": {"dette": 2030, "pib": None}}
+    assert noyau.hors_domaine(fausse, base, dette_pib_max=400, ecart_pib_max=0.2) == {"prudent": {"dette": None, "pib": None}}
