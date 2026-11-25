@@ -43,8 +43,8 @@ def _variante(p: Parametres, modifs: dict) -> Parametres:
         # valeur structurée (année → taux) : remplacée en entier, sans passer par la recopie par scénario
         import dataclasses
         q = p.avec()
-        par = q._p["calendrier.croissance_2027_2028"]
-        q._p["calendrier.croissance_2027_2028"] = dataclasses.replace(par, valeur=dict(modifs["calendrier.croissance_2027_2028"]))
+        par = q["calendrier.croissance_2027_2028"]
+        q.remplacer("calendrier.croissance_2027_2028", dataclasses.replace(par, valeur=dict(modifs["calendrier.croissance_2027_2028"])))
         return q
     return p.avec(modifs)
 

@@ -33,7 +33,7 @@ def test_chaque_mesure_renvoie_a_la_fiche(nom):
     fiche = yaml.safe_load((RACINE / "programmes" / nom / "mesures.yaml").read_text(encoding="utf-8"))
     ids = {m["id"] for m in fiche["mesures"]}
     prog = noyau.charger(nom)
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith(f"{nom}_mesures."):
             prefixe = par.valeur["id"].rsplit("-", 1)[0]
             for i in par.valeur["id"].split("/"):

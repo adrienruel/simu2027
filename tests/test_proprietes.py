@@ -68,7 +68,7 @@ def test_retirer_la_plus_grosse_mesure_deplace_le_solde_dans_le_bon_sens(nom, p,
     prefixe = f"{nom}_mesures."
     cand = []
     for m in prog.mesures(p)["prudent"]:
-        if m.note and f"{prefixe}{m.note}" in prog.pt._p and m.nature not in ("effet_macro", "perimetre", "classement"):
+        if m.note and f"{prefixe}{m.note}" in prog.pt and m.nature not in ("effet_macro", "perimetre", "classement"):
             signe = 1 if m.poste == "recettes" else (0 if m.poste == "participations" else -1)
             if signe == 1 or (signe == -1 and m.valeurs.get(2032, 0.0) > 0):
                 cand.append((abs(m.valeurs.get(2032, 0.0)), signe * m.valeurs.get(2032, 0.0), m.note))

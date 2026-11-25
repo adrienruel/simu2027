@@ -853,7 +853,7 @@ def montant_moteur(nom: str, ident: str, s: str = "prudent") -> float:
     """Effet sur le solde (Md€ de 2026, + = l'améliore) des mesures de cet identifiant dans le moteur, à plein effet."""
     p = Parametres(programme=nom)
     tot = 0.0
-    for cle, par in p._p.items():
+    for cle, par in p.items():
         if not cle.startswith(f"{nom}_mesures."):
             continue
         x = par.valeur

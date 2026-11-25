@@ -80,7 +80,7 @@ def test_profil(p):
 def test_tondelier_chiffre_en_tonnes():
     """Les mesures écologiques de Tondelier ont un effet physique, nul dans le prudent quand rien ne le source."""
     pt = Parametres(programme="tondelier")
-    mesures = {k: v.valeur for k, v in pt._p.items() if k.startswith("tondelier_ecologie.")}
+    mesures = {k: v.valeur for k, v in pt.items() if k.startswith("tondelier_ecologie.")}
     assert len(mesures) >= 8
     for k, v in mesures.items():
         if pt[k].source is None:

@@ -204,12 +204,12 @@ def tirer_z(p: Parametres, z_de, liste=None, miroir: bool = True) -> Parametres:
     for cle, chemin in (liste if liste is not None else cibles(p)):
         nom = "/".join((cle,) + tuple(str(k) for k in chemin))
         z = z_de(nom)
-        par = c._p[cle]
+        par = c[cle]
         mir = miroir and cle in MIROIR_CLES
         if not chemin:
             tire = _tirer_jeu(_avec_loi(par.valeur, nom), z, mir)
-            c._p[cle] = dataclasses.replace(par, valeur={**par.valeur, "median": tire["median"],
-                                                         **({"prudent": tire["prudent"]} if mir and "prudent" in par.valeur else {})})
+            c.remplacer(cle, dataclasses.replace(par, valeur={**par.valeur, "median": tire["median"],
+                                                         **({"prudent": tire["prudent"]} if mir and "prudent" in par.valeur else {})}))
             continue
         v = copy.deepcopy(par.valeur)
         cible = v
@@ -218,7 +218,7 @@ def tirer_z(p: Parametres, z_de, liste=None, miroir: bool = True) -> Parametres:
         tire = _tirer_jeu(_avec_loi(cible[chemin[-1]], nom), z, mir)
         orig = cible[chemin[-1]]
         cible[chemin[-1]] = {**orig, "median": tire["median"], **({"prudent": tire["prudent"]} if mir and "prudent" in orig else {})}
-        c._p[cle] = dataclasses.replace(par, valeur=v)
+        c.remplacer(cle, dataclasses.replace(par, valeur=v))
     return c
 
 

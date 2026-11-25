@@ -29,17 +29,17 @@ def test_fiche_complete_et_mesures_renvoyees(prog):
     fiche = yaml.safe_load((RACINE / "programmes" / "attal" / "mesures.yaml").read_text(encoding="utf-8"))
     ids = {m["id"] for m in fiche["mesures"]}
     assert len(ids) == 106 and all(m["traitement"] for m in fiche["mesures"])
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith("attal_mesures."):
             assert par.valeur["id"] in ids, cle
     # les propositions du seul parti ne sont pas chiffrées
     parti = [m["id"] for m in fiche["mesures"] if m["source"].startswith(("Convention", "Pétition"))]
-    chiffrees = {par.valeur["id"] for cle, par in prog.pt._p.items() if cle.startswith("attal_mesures.")}
+    chiffrees = {par.valeur["id"] for cle, par in prog.pt.items() if cle.startswith("attal_mesures.")}
     assert parti and not set(parti) & chiffrees
 
 
 def test_sens_des_scenarios(prog):
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if not cle.startswith("attal_mesures."):
             continue
         m = par.valeur["montant"]
@@ -49,7 +49,7 @@ def test_sens_des_scenarios(prog):
 
 def test_economies_annoncees_non_reprises(prog):
     """150 Md€ annoncés : les économies nommées et chiffrées restent bien en dessous."""
-    eco = -sum(min(0.0, par.valeur["montant"]["prudent"]) for cle, par in prog.pt._p.items()
+    eco = -sum(min(0.0, par.valeur["montant"]["prudent"]) for cle, par in prog.pt.items()
                if cle.startswith("attal_mesures.") and par.valeur["poste"] != "recettes")
     assert eco < 30
     assert prog.v("mesures.assurance_chomage")["montant"]["prudent"] > -5

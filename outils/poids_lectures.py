@@ -28,10 +28,10 @@ def _sp(r, base, t):
 def lectures(prog) -> list[tuple[str, str]]:
     """(clé du paramètre, libellé) des lectures du programme."""
     out = []
-    for cle in prog.pt._p:
+    for cle in prog.pt.cles():
         if cle.startswith(f"{prog.nom}_canaux."):
             out.append((cle, "canal déclaré : " + cle.split(".", 1)[1].replace("_", " ")))
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith(f"{prog.nom}_mesures.") and isinstance(par.valeur, dict) and par.valeur.get("lecture_commune"):
             out.append((cle, "lecture commune : " + par.valeur["lecture_commune"]))
     return out
@@ -47,10 +47,10 @@ def main() -> list[dict]:
         for cle, lib in lectures(prog):
             sans = noyau.charger(nom)
             c = prog.pt.avec()
-            del c._p[cle]
+            c.retirer(cle)
             sans.pt = c
             r2 = noyau.simuler(p, sans, scenarios=("prudent",), contrefactuel=False)
-            par = prog.pt._p[cle]
+            par = prog.pt[cle]
             lignes.append({"programme": getattr(prog, "libelle", nom), "dossier": nom, "cle": cle, "lecture": lib,
                            "valeur": json.dumps(par.valeur, ensure_ascii=False)[:160],
                            **{f"ecart_sp_{t}": round(_sp(r, base, t), 3) for t in ANNEES},

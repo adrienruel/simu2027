@@ -147,16 +147,16 @@ class ProgrammeSimple:
         """Clé du programme (« <nom>_<groupe>.<nom> »), ou à défaut la valeur commune à tous les programmes
         (« programme_commun.<groupe>_<nom> », parametres/commun/economie.yaml, phase J2 du 16/11/2026)."""
         k = f"{self.nom}_{cle}"
-        if k in self.pt._p:
+        if k in self.pt:
             return k
         commun = "programme_commun." + cle.replace(".", "_")
-        return commun if commun in self.pt._p else k
+        return commun if commun in self.pt else k
 
     def v(self, cle: str, s: str = "prudent"):
         return self.pt[self._cle(cle)].pour(s)
 
     def a(self, cle: str) -> bool:
-        return self._cle(cle) in self.pt._p
+        return self._cle(cle) in self.pt
 
     def indices(self, p: Parametres, s: str) -> dict:
         y = sq.pib(p, s)
@@ -201,10 +201,10 @@ class ProgrammeSimple:
         net × part publique, en dépense de l'État ; une part revient en prélèvements sur les rémunérations, comme une
         mesure « fp ». Le gain (PIB) est dans les canaux déclarés."""
         cle = f"{self.nom}_canaux.formation_superieure"
-        if cle not in self.pt._p:
+        if cle not in self.pt:
             return []
         from . import qualifications
-        x = self.pt._p[cle].valeur
+        x = self.pt[cle].valeur
         c = qualifications.cout(p, s, x, TOUTES)
         lib = x.get("libelle", f"{x['objectif']:,.0f} diplômés ({x['filiere']}) par an".replace(",", " "))
         ident = x.get("id", "")
@@ -224,7 +224,7 @@ class ProgrammeSimple:
         protégé, 0,5 s'il est cité, 1 s'il est une cible principale), moins les économies déjà nommées et chiffrées
         dans ce domaine (pas de double compte, plancher à 0). Le total ne dépasse pas l'annonce du candidat
         (<nom>_enveloppe.annonce), qui ne sert que de plafond. Montée de debut à plein."""
-        if f"{self.nom}_enveloppe.intensite" not in self.pt._p:
+        if f"{self.nom}_enveloppe.intensite" not in self.pt:
             return []
         dom = p.val("enveloppe_economies.domaines")
         inten = self.v("enveloppe.intensite")
@@ -283,7 +283,7 @@ class ProgrammeSimple:
         from .ecologie import emissions as em
         out = []
         prefixe = f"{self.nom}_ecologie."
-        for nom, par in self.pt._p.items():
+        for nom, par in self.pt.items():
             if not nom.startswith(prefixe):
                 continue
             x = par.valeur
@@ -453,7 +453,7 @@ class ProgrammeSimple:
             supprimes = {t: 0.0 for t in ANNEES}
             cout_postes = {t: 0.0 for t in TOUTES}  # dépense des postes publics (Md€), pour le PIB non marchand (A3)
             cout_poste = self.v("emploi.cout_poste_public")
-            for nom, par in self.pt._p.items():
+            for nom, par in self.pt.items():
                 if not nom.startswith(prefixe):
                     continue
                 x = dict(par.valeur)
@@ -518,7 +518,7 @@ class ProgrammeSimple:
             if getattr(self, "variante_annonces", False):
                 # variante « annonce tenue » (moteur/annonces.py) : jamais dans le chiffrage publié
                 from . import annonces as ann
-                env = f"{self.nom}_enveloppe.intensite" in self.pt._p
+                env = f"{self.nom}_enveloppe.intensite" in self.pt
                 liste.extend(ann.mesures_tenues(
                     self.nom, p, s, liste, getattr(self, "enveloppe_detail", {}).get((p.jeton, s)),
                     self.v("enveloppe.intensite") if env else None,

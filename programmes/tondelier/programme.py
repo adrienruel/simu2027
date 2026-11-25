@@ -49,7 +49,7 @@ class Tondelier:
     def v(self, cle: str, s: str = "prudent"):
         # valeur du programme, ou à défaut la valeur commune à tous (programme_commun, phase J2 du 16/11/2026)
         k = f"tondelier_{cle}"
-        if k not in self.pt._p and "programme_commun." + cle.replace(".", "_") in self.pt._p:
+        if k not in self.pt and "programme_commun." + cle.replace(".", "_") in self.pt:
             k = "programme_commun." + cle.replace(".", "_")
         return self.pt.val(k, s)
 
@@ -242,7 +242,7 @@ class Tondelier:
         dont le coût est déjà dans les mesures budgétaires."""
         from moteur.ecologie import emissions as em
         out = []
-        for nom, par in self.pt._p.items():
+        for nom, par in self.pt.items():
             if not nom.startswith("tondelier_ecologie."):
                 continue
             x = par.valeur
@@ -264,7 +264,7 @@ class Tondelier:
             idx = self._indices(p, s)
             liste: list[Mesure] = []
             # mesures simples
-            for nom, par in self.pt._p.items():
+            for nom, par in self.pt.items():
                 if not nom.startswith("tondelier_mesures."):
                     continue
                 x = dict(par.valeur)

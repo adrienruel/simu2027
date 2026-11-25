@@ -129,7 +129,7 @@ def montant_moteur(prog: str, ident: str, filtre: str | None = None, s: str = "p
     """Effet sur le solde dans le moteur (Md€ de 2026) des lignes de cet identifiant, filtrées par libellé."""
     p = Parametres(programme=prog)
     tot = 0.0
-    for cle, par in p._p.items():
+    for cle, par in p.items():
         x = par.valeur
         if not cle.startswith(f"{prog}_mesures.") or not isinstance(x, dict) or x.get("id") != ident:
             continue

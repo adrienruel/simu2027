@@ -41,7 +41,7 @@ def _numerique(v) -> bool:
 
 def _variante(p: Parametres, cle: str, k: float, chemin: tuple = ()) -> Parametres:
     c = p.avec()
-    valeur = copy.deepcopy(c._p[cle].valeur)
+    valeur = copy.deepcopy(c[cle].valeur)
     if not chemin:
         valeur = _multiplier(valeur, k)
     else:
@@ -49,7 +49,7 @@ def _variante(p: Parametres, cle: str, k: float, chemin: tuple = ()) -> Parametr
         for x in chemin[:-1]:
             cible = cible[x]
         cible[chemin[-1]] = _multiplier(cible[chemin[-1]], k)
-    c._p[cle] = dataclasses.replace(c._p[cle], valeur=valeur)
+    c.remplacer(cle, dataclasses.replace(c[cle], valeur=valeur))
     return c
 
 

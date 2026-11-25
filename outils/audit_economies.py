@@ -23,7 +23,7 @@ def lignes() -> list[dict]:
     for nom in noyau.programmes_disponibles()[1:]:
         q = Parametres(programme=nom)
         lib = getattr(noyau.charger(nom), "libelle", nom)
-        for cle, par in q._p.items():
+        for cle, par in q.items():
             if not cle.startswith(f"{nom}_mesures."):
                 continue
             x = par.valeur

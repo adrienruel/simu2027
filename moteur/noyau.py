@@ -31,7 +31,7 @@ Un programme est un objet avec un attribut `nom` et deux méthodes, `mesures(p)`
 from __future__ import annotations
 
 import importlib
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Callable
 
 from .parametres import Parametres
@@ -200,7 +200,7 @@ def facteur_2027_2028(p: Parametres) -> float:
     """Croissance cumulée de 2027 et 2028 (calendrier.croissance_2027_2028, nulle par défaut : économie de 2026 placée
     en 2029). Non nulle (variante de la décision D3) : la dette de fin 2028 est rapportée à une économie qui a grandi
     pendant ces deux ans, ce qui revient à la diviser par ce facteur, les flux du statu quo restant inchangés."""
-    if "calendrier.croissance_2027_2028" not in p._p:
+    if "calendrier.croissance_2027_2028" not in p:
         return 1.0
     f = 1.0
     for g in p.val("calendrier.croissance_2027_2028").values():
@@ -220,6 +220,10 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     plus tard aux ménages) : publiée en `quasi_dette` et `dette_et_quasi_dette_pib`."""
     from . import statu_quo as sq
     mesures, ctx = mesures or [], contexte or {}
+    if regle is not None:
+        # copie (R2.2, 25/11/2026) : _appliquer_regle note `declenchee` la première année ; sur l'objet reçu, une
+        # règle réutilisée garderait l'état de l'appel précédent sans erreur visible
+        regle = replace(regle)
     for m in mesures:
         _valider(m)
     for k in ctx:
@@ -400,7 +404,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "dynamiques": flux["detail"],
         }
         # balance courante (phase E4) : balance commerciale moins les intérêts en plus versés aux non-résidents
-        if "bouclage.non_residents" in p._p and p.val("macro.bouclage") and (mesures or ctx or dynamiques):
+        if "bouclage.non_residents" in p and p.val("macro.bouclage") and (mesures or ctx or dynamiques):
             dch = out[t]["charge_dette"] - _charge_statu_quo(p, s)[t]
             out[t]["balance_courante"] = out[t]["balance_commerciale"] - p.val("bouclage.non_residents") * dch / y[t] * 100
         else:
@@ -425,7 +429,7 @@ _MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "opti
 
 
 def _retroaction_active(p: Parametres) -> bool:
-    return bool(p.val("macro.bouclage")) and "bouclage.prime_demande" in p._p and p.val("macro.bouclage_prime_demande")
+    return bool(p.val("macro.bouclage")) and "bouclage.prime_demande" in p and p.val("macro.bouclage_prime_demande")
 
 
 def _marche_statu_quo(p: Parametres, s: str) -> dict[int, float]:
@@ -447,7 +451,7 @@ def _charge_statu_quo(p: Parametres, s: str) -> dict[int, float]:
 def _balance(p: Parametres, s: str, y_t: float, prix: float, t: int) -> float:
     """Balance commerciale en écart au statu quo (points de PIB, phase E4) : −alpha × écart de PIB (%) − beta × écart
     du niveau des prix (%), calés sur Mésange (bouclage.exterieur). Zéro pour le statu quo."""
-    if "bouclage.exterieur" not in p._p or not p.val("macro.bouclage"):
+    if "bouclage.exterieur" not in p or not p.val("macro.bouclage"):
         return 0.0
     from .statu_quo import pib
     e = p.val("bouclage.exterieur")

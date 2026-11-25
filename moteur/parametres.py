@@ -164,6 +164,36 @@ class Parametres:
     def __getitem__(self, cle: str) -> Parametre:
         return self._p[cle]
 
+    # Accès sans passer par _p (R2.3, 25/11/2026)
+    def __contains__(self, cle: str) -> bool:
+        return cle in self._p
+
+    def cles(self):
+        return self._p.keys()
+
+    def items(self):
+        return self._p.items()
+
+    def remplacer(self, cle: str, par: Parametre) -> None:
+        """Remplace un paramètre sur place : réservé aux copies neuves (avec(), en_crise()) ; les résultats déjà
+        mis en cache sur cette instance sont oubliés."""
+        if cle not in self._p:
+            raise ErreurParametre(f"Paramètre inconnu : {cle}")
+        self._p[cle] = par
+        self.__dict__.pop("_cache", None)
+
+    def ajouter(self, cle: str, par: Parametre) -> None:
+        """Ajoute un paramètre absent (copies neuves et tests seulement, comme remplacer)."""
+        if cle in self._p:
+            raise ErreurParametre(f"{cle} existe déjà : remplacer()")
+        self._p[cle] = par
+        self.__dict__.pop("_cache", None)
+
+    def retirer(self, cle: str) -> None:
+        """Retire un paramètre (copies neuves seulement, comme remplacer)."""
+        del self._p[cle]
+        self.__dict__.pop("_cache", None)
+
     def val(self, cle: str, scenario: str = "prudent") -> Any:
         if scenario == "depart":  # colonne prudente, même dans le calcul de crise (point de départ commun)
             scenario = "prudent"

@@ -30,13 +30,13 @@ def test_fiche_complete_et_mesures_renvoyees(prog):
     fiche = yaml.safe_load((RACINE / "programmes" / "roussel" / "mesures.yaml").read_text(encoding="utf-8"))
     ids = {m["id"] for m in fiche["mesures"]}
     assert all(m["traitement"] for m in fiche["mesures"])
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith(("roussel_mesures.", "roussel_ecologie.")):
             assert par.valeur["id"] in ids, cle
 
 
 def test_sens_des_scenarios(prog):
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if not cle.startswith("roussel_mesures."):
             continue
         m = par.valeur["montant"]

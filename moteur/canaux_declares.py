@@ -51,7 +51,7 @@ def declares(prog) -> dict:
     """Canaux déclarés par le programme : {nom: valeur du paramètre}. Un nom inconnu est une erreur."""
     prefixe = f"{prog.nom}_canaux."
     out = {}
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith(prefixe):
             nom = cle[len(prefixe):]
             if nom not in CANAUX:
@@ -160,7 +160,7 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme
         x = d["ecole"]
         k = sq._v(p, "macro.croissance_par_ecart_type", s)
         niveau_commun = p.val("programme_commun.canaux_ecole_niveau_eleves", s)  # barème commun (16/11/2026)
-        cohortes = "demographie.ecole_cohortes" in p._p and p.val("demographie.ecole_cohortes")
+        cohortes = "demographie.ecole_cohortes" in p and p.val("demographie.ecole_cohortes")
         r, serie = 0.0, {}
         for t in ANNEES:
             niveau = x["niveau_eleves"][s] if "niveau_eleves" in x else niveau_commun
