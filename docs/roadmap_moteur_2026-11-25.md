@@ -41,7 +41,7 @@ Carlo. Les programmes, le comparateur et les choix de sources ne sont relus que 
 | `test_age_depart_micro.py` (3 tests sur 4) | `AttributeError: 'B' object has no attribute '_masse'`. Les tests appellent `Base.population` sur un `SimpleNamespace`, alors que `Base.population` appelle maintenant `self._masse` (`outils/openfisca_mesures.py:752` et `:790`). C'est une **régression réelle**, sans lien avec OpenFisca. |
 | `test_age_depart_micro.py::test_formules_des_derniers_trous`, `test_microsimulation.py` (2 échecs, 4 erreurs) | `ModuleNotFoundError: openfisca_france`. Ces tests devraient être *ignorés* sans OpenFisca (`pytest.importorskip`), comme l'est déjà `test_openfisca_mesures.py`. |
 | `test_sorties.py::test_sorties_produites_avec_les_parametres_actuels` | Une vingtaine de sorties (`banc_essai.csv`, `c1_*.json`, `comparaison_*`…) datent d'avant les derniers changements de paramètres et sont à régénérer. |
-| `test_independance.py::test_programmes_publies_se_recalculent_a_l_identique` | Arthaud, crise, 2030 : `12.435 == 12.436`. Le test compare **à l'égalité stricte** des valeurs arrondies au millième. Il casse dès qu'un calcul flottant change de dernier chiffre (version de Python ou de numpy, ordre d'une somme). |
+| `test_independance.py::test_programmes_publies_se_recalculent_a_l_identique` | Arthaud, crise, 2030 : `12.435 == 12.436`. *Corrigé le 25/11 au soir* : ce n'est pas un problème d'arrondi. 1 763 valeurs sur 2 340 diffèrent (jusqu'à 3,6 Md€), parce que `comparaison_trajectoire.csv` date d'avant les paramètres des commits b6095e2 et 2f13404. Une fois la sortie régénérée, l'égalité stricte passe : elle est à garder. |
 | `test_incertitude.py::test_rho1_dixieme_centile_retrouve_le_prudent` | Mélenchon : écart de 0,917 pour une tolérance de 0,9. Il faut décider : régénérer les tirages, ou revoir la tolérance avec une justification. |
 
 ### 2.2 Performance
@@ -110,10 +110,11 @@ changent aucun résultat publié, ce qui se vérifie avec `outils/ecarts_referen
 - **R0.2** Ajouter `pytest.importorskip("openfisca_france")` en tête des tests qui en dépendent
   (`test_microsimulation.py`, `test_formules_des_derniers_trous`).
 - **R0.3** Régénérer les sorties signalées par `test_sorties.py` et commiter avec leur raison.
-- **R0.4** `test_independance` : comparer avec une tolérance (par exemple `abs(d − pub) ≤ 1e-3`) plutôt qu'à
-  l'égalité stricte sur des arrondis.
-- **R0.5** `test_incertitude` (Mélenchon) : régénérer les tirages ; si l'écart reste au-dessus de 0,9, documenter la
-  nouvelle tolérance dans `docs/incertitude.md`.
+- **R0.4** ~~Tolérance dans `test_independance`~~ : inutile, voir le tableau ci-dessus. Le test est ignoré, avec la
+  consigne de régénérer, tant que la sortie est périmée (PR #3).
+- **R0.5** `test_incertitude` (Mélenchon) : le test calcule les deux côtés en direct, sans sortie publiée. L'écart de
+  0,917 est donc un effet réel des paramètres du 25/11 (les autres programmes ≤ 0,71). À trancher : chercher la cause,
+  ou relever le seuil en le documentant dans `docs/incertitude.md`, comme le 21/11.
 - **R0.6** Intégration continue (GitHub Actions) avec deux tâches : suite rapide sans OpenFisca à chaque push, suite
   complète la nuit.
 
