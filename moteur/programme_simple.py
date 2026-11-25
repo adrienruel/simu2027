@@ -177,7 +177,12 @@ class ProgrammeSimple:
 
     @staticmethod
     def profil(x: dict, t: int) -> float:
-        """Montant de l'année t avant indice : montée linéaire de debut à plein (de « depart » si donné), puis fin."""
+        """Montant de l'année t avant indice : montée linéaire de debut à plein, puis fin.
+
+        Deux conventions, voulues (relecture du 25/11/2026, R2.5) : sans « depart », la montée compte l'année de début
+        comme un pas (debut : m / (n + 1), plein : m, n = plein − debut) ; avec « depart », depart est le montant écrit
+        de l'année de début (8 mesures, toutes non nulles : chiffrage annoncé de la première année), puis ligne droite
+        jusqu'à m en plein."""
         debut, plein, fin = x["debut"], x["plein"], x.get("fin")
         if t < debut or (fin is not None and t > fin):
             return 0.0
@@ -402,7 +407,7 @@ class ProgrammeSimple:
         from .systeme_actuel import _interp, _table_openfisca
         T = _table_openfisca()
         brut, cout = T["brut"], T["cout_du_travail"]
-        c_smic = _interp(1823.03 * 12, brut, cout)  # SMIC brut de 2026, comme bibliotheque.smic
+        c_smic = _interp(p.val("profils.smic_brut_mensuel_2026") * 12, brut, cout)  # SMIC brut de 2026, comme bibliotheque.smic
         if multiple_smic == "moyen":
             from .recettes.impot_salaires import effectifs_prive_2026
             d = effectifs_prive_2026(p)

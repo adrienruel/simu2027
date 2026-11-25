@@ -64,8 +64,9 @@ MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "optim
 # et avec lui les dépenses indexées ; le solde n'en garde que le dividende de productivité du statu quo
 PRODUCTIVITE = ("capital_entreprises", "capital_menages", "successions", "investissement_public", "education", "recherche")
 TRANSFERTS_CIBLES = ("famille", "logement", "pauvrete", "chomage", "aah_invalidite")
-SMIC_BRUT_2026 = 1823.03 * 12
-PLAFOND_SS_2026 = 48060.0  # plafond annuel de la Sécurité sociale 2026
+# SMIC brut et plafond de la Sécurité sociale de 2026, annuels : paramètres sourcés (R2.4, 25/11/2026)
+SMIC_BRUT_2026 = Parametres().val("profils.smic_brut_mensuel_2026") * 12
+PLAFOND_SS_2026 = float(Parametres().val("profils.plafond_securite_sociale_mensuel_2026") * 12)
 
 
 def actif(p: Parametres) -> bool:

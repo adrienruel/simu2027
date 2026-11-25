@@ -197,7 +197,7 @@ def csg_activite(p: Parametres) -> dict[str, float]:
 
 
 def smic(p: Parametres, brut_cible_2026: float, diffusion_jusqu_a: float, part_marge: float,
-         valeur_emploi_chomeur: float, smic_brut_mensuel_2026: float = 1823.03,
+         valeur_emploi_chomeur: float, smic_brut_mensuel_2026: float | None = None,
          allegements_suivent_smic: bool = False) -> dict:
     """Relèvement du SMIC à brut_cible_2026 € brut par mois (euros de 2026), même mécanique que le programme Tondelier
     (table OpenFisca de 2026 lue au salaire relevé : les allègements restent au barème de 2026).
@@ -208,6 +208,8 @@ def smic(p: Parametres, brut_cible_2026: float, diffusion_jusqu_a: float, part_m
     diffusion_jusqu_a × le nouveau SMIC."""
     from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
     from .systeme_actuel import _interp, _table_openfisca
+    if smic_brut_mensuel_2026 is None:
+        smic_brut_mensuel_2026 = p.val("profils.smic_brut_mensuel_2026")
     b_smic, b_new = smic_brut_mensuel_2026 * 12, brut_cible_2026 * 12
     plafond = diffusion_jusqu_a * b_new
     taux_tva = p.val("systeme_actuel.taux_tva_moyen")

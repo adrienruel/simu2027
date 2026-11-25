@@ -723,7 +723,7 @@ class Base:
                 else:
                     infl27 = Parametres().val("inflation.base")["2027"]
                     cible = bib.brut_de_net_mensuel(x["smic_net_2027"] / (1 + infl27))
-                smic0 = 1823.03  # SMIC brut mensuel de 2026 (même valeur que bibliotheque.smic)
+                smic0 = Parametres().val("profils.smic_brut_mensuel_2026")  # SMIC brut mensuel de 2026, comme bibliotheque.smic
                 plafond = x["diffusion"] * cible
                 for l in lg:
                     if l["statut"] not in ("salarie_prive", "agent_public") or l["salaire_brut"] <= 0:

@@ -469,7 +469,7 @@ def ppa_par_emploi(p: Parametres, s: str) -> dict[int, float]:
         return cache[("ppa_emploi", s)]
     from .systeme_actuel import _interp, _table_openfisca
     T = _table_openfisca()
-    c = _interp(1823.03 * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
+    c = _interp(p.val("profils.smic_brut_mensuel_2026") * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
     # roadmap 2.4 : prime de la famille de qui prend l'emploi, rapportée à celle d'une personne seule
     v0 = _interp(c, T["cout_du_travail"], T["ppa"]) * p.val("emploi.prime_activite_familles")
     w = sq.salaires(p, s)
