@@ -545,14 +545,55 @@ class Base:
         (COICOP de l'enquête), par exemple 0722 carburants, 045 électricité, gaz et combustibles, 0451 électricité,
         011 alimentation. Montant donné directement par montant_md, ou lu dans le moteur (programme, mesure)."""
         md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
-        dep = depenses_bdf()
-        nv = rd / np.maximum(uc, 1e-9)
+        return self._repartir(md, self.cle_consommation(rd, uc, x), "consommation", x)
+
+    # -- clés de répartition des montants du moteur (25/11/2026 : séparées du montant pour que les ménages types
+    # reçoivent leur part de la population, et non tout le montant national)
+    def deciles_nv(self, nv: np.ndarray) -> np.ndarray:
+        """Décile de niveau de vie de chaque ménage (1 à 10), pondéré par les ménages."""
         ordre = np.argsort(nv)
         cum = np.cumsum(self.wm[ordre]) / self.wm.sum()
         dec = np.empty(len(nv), int)
         dec[ordre] = np.minimum(10, 1 + (cum * 10).astype(int))
-        w = np.array([sum(dep[(c, int(d))] for c in x["postes"]) for d in dec])
+        return dec
+
+    def tranches_rd(self, rd: np.ndarray) -> np.ndarray:
+        """Tranche de revenu disponible de l'enquête Histoire de vie et Patrimoine de chaque ménage."""
+        ordre = np.argsort(rd)
+        cum = np.cumsum(self.wm[ordre]) / self.wm.sum()
+        tr = np.empty(len(rd), object)
+        tr[ordre] = tranche_hvp(cum - self.wm[ordre] / (2 * self.wm.sum()))  # milieu du poids du ménage
+        return tr
+
+    def cle_consommation(self, rd, uc, x) -> np.ndarray:
+        dep = depenses_bdf()
+        dec = self.deciles_nv(rd / np.maximum(uc, 1e-9))
+        return np.array([sum(dep[(c, int(d))] for c in x["postes"]) for d in dec])
+
+    def cle_salaires(self, x) -> np.ndarray:
+        lo, hi = x.get("bande_smic", (0.0, 1e9))
+        smic_an = ps_smic() * 12
+        brut = np.array([l["salaire_brut"] if l["statut"] == "salarie_prive" else 0.0 for l in self.lignes])
+        w_i = np.where((brut > lo * smic_an) & (brut <= hi * smic_an), brut, 0.0)
+        return np.bincount(self.s["menage"], weights=w_i, minlength=len(self.wm))
+
+    def cle_jeunes_enfants(self, x) -> np.ndarray:
+        enf = np.array([float(l["role"] == "enfant" and l["age"] <= int(x.get("age_max", 0))) for l in self.lignes])
+        return np.bincount(self.s["menage"], weights=enf, minlength=len(self.wm))
+
+    def cle_patrimoine(self, rd, x) -> np.ndarray:
+        pat = patrimoine_hvp()
+        comp = x.get("composante", "net")
+        vises = set(x.get("tranches", pat))
+        return np.array([pat[t][comp] if t in vises else 0.0 for t in self.tranches_rd(rd)])
+
+    def _repartir(self, md: float, w: np.ndarray, nom: str, x: dict) -> np.ndarray:
+        """Montant du moteur (Md€, + = le solde s'améliore) réparti selon la clé w de chaque ménage."""
         return -md * 1e9 * w / float((self.wm * w).sum())
+
+    def _masse(self, lg: list[dict], f) -> float:
+        """Somme pondérée de f(ligne) sur la population (assiette d'un montant du moteur)."""
+        return sum(l["poids"] * f(l) for l in lg)
 
     def gain_cotisations_employeur(self, x: dict) -> np.ndarray:
         """Derniers trous de la micro (22/11/2026) : gain (+) ou perte (−) par ménage (€ par an) d'une mesure sur les
@@ -565,12 +606,7 @@ class Base:
         md *= float(x.get("part_montant", 1.0))
         if not x.get("directe"):
             md *= Parametres().val("entreprises.incidence_menages")["salaires"]
-        lo, hi = x.get("bande_smic", (0.0, 1e9))
-        smic_an = ps_smic() * 12
-        brut = np.array([l["salaire_brut"] if l["statut"] == "salarie_prive" else 0.0 for l in self.lignes])
-        w_i = np.where((brut > lo * smic_an) & (brut <= hi * smic_an), brut, 0.0)
-        w = np.bincount(self.s["menage"], weights=w_i, minlength=len(self.wm))
-        return -md * 1e9 * w / float((self.wm * w).sum())
+        return self._repartir(md, self.cle_salaires(x), "salaires", x)
 
     def gain_jeunes_enfants(self, x: dict) -> np.ndarray:
         """Derniers trous de la micro (22/11/2026) : congés de naissance et parentaux, places et gratuité de l'accueil
@@ -578,9 +614,7 @@ class Base:
         (0 : congés de naissance ; 2 : accueil avant l'école), en revenu des familles (transfert en nature pour
         l'accueil)."""
         md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
-        enf = np.array([float(l["role"] == "enfant" and l["age"] <= int(x.get("age_max", 0))) for l in self.lignes])
-        w = np.bincount(self.s["menage"], weights=enf, minlength=len(self.wm))
-        return -md * 1e9 * w / float((self.wm * w).sum())
+        return self._repartir(md, self.cle_jeunes_enfants(x), "jeunes_enfants", x)
 
     def gain_patrimoine(self, rd: np.ndarray, x: dict) -> np.ndarray:
         """Roadmap 3.2 (22/11/2026) : gain (+) ou perte (−) par ménage (€ par an) d'une mesure sur le patrimoine (ISF,
@@ -591,15 +625,7 @@ class Base:
         x["composante"] : brut, net, immobilier, financier ou professionnel ; x["tranches"] : tranches visées (par
         défaut toutes), pour les impôts réservés aux plus gros patrimoines."""
         md = float(x["montant_md"]) if "montant_md" in x else montant_moteur(x["programme"], x["mesure"])
-        pat = patrimoine_hvp()
-        comp = x.get("composante", "net")
-        vises = set(x.get("tranches", pat))
-        ordre = np.argsort(rd)
-        cum = np.cumsum(self.wm[ordre]) / self.wm.sum()
-        tr = np.empty(len(rd), object)
-        tr[ordre] = tranche_hvp(cum - self.wm[ordre] / (2 * self.wm.sum()))  # milieu du poids du ménage
-        w = np.array([pat[t][comp] if t in vises else 0.0 for t in tr])
-        return -md * 1e9 * w / float((self.wm * w).sum())
+        return self._repartir(md, self.cle_patrimoine(rd, x), "patrimoine", x)
 
     def capitalisation(self, sim, x: dict) -> np.ndarray:
         """Part salariale versée au fonds par personne (€ par an) : les salariés et agents publics les plus jeunes en
@@ -723,7 +749,8 @@ class Base:
                 age_max = y.get("age_max", 200)
                 seuil = 12 * float(y.get("seuil_mensuel", 0.0))
                 vises = [l for l in lg if l["chomage_brut"] > seuil and l["age"] < age_max]
-                masse = sum(l["poids"] * (l["chomage_brut"] - seuil) for l in vises) / 1e9  # part au-dessus du seuil
+                masse = self._masse(lg, lambda l: (l["chomage_brut"] - seuil)
+                                    * (l["chomage_brut"] > seuil and l["age"] < age_max)) / 1e9  # part au-dessus du seuil
                 if masse > 0:
                     k = max(0.0, 1 - md / masse)  # économie (+) : allocations en moins
                     for l in vises:
@@ -760,7 +787,7 @@ class Base:
                 if "programme" in y:
                     # facteur calé sur le montant du moteur (+ = le solde s'améliore, les retraités perdent), réparti au
                     # prorata des pensions au-delà du seuil (3.3, 22/11/2026)
-                    masse = sum(l["poids"] * l["pension_brute"] for l in lg if l["pension_brute"] > seuil)
+                    masse = self._masse(lg, lambda l: l["pension_brute"] * (l["pension_brute"] > seuil))
                     y = {**y, "facteur": 1 - montant_moteur(y["programme"], y["mesure"]) * 1e9 / masse}
                 k = 1 - (1 - y["facteur"]) * (math.exp(-(annee - fin) / 18) if annee > fin else 1.0)
                 for l in lg:

@@ -24,6 +24,7 @@ sorties/comparaison_menages_types_mesures.csv (effet de chaque mesure codée seu
 from __future__ import annotations
 
 import csv
+import json
 from pathlib import Path
 
 import numpy as np
@@ -111,7 +112,38 @@ def bornes_population() -> dict:
 class Types(om.Base):
     """Ménages types : mêmes réformes et mêmes règles que la population, recours complet, nationalité française."""
 
-    def __init__(self, bornes: dict):
+    def __init__(self, bornes: dict, pop: om.Base | None = None):
+        # population de la microsimulation : les montants du moteur répartis par une clé (consommation, patrimoine,
+        # salaires, enfants, pensions, allocations de chômage) se rapportent à ses totaux, et les déciles et tranches
+        # de revenu à ses seuils (25/11/2026 : avant, chaque ménage type recevait tout le montant national)
+        # Tout est calculé ici, puis la population est libérée (mémoire).
+        P = pop if pop is not None else om.Base(op.lire(), emploi=False)
+        e = P.etat0
+        nv = e["rd"] / np.maximum(e["uc"], 1e-9)
+        o = np.argsort(nv)
+        cw = np.cumsum(P.wm[o]) / P.wm.sum()
+        self._seuils_deciles = [float(nv[o][np.searchsorted(cw, q)]) for q in np.arange(0.1, 0.95, 0.1)]
+        o = np.argsort(e["rd"])
+        self._rd_pop, self._cum_pop = e["rd"][o], np.cumsum(P.wm[o]) / P.wm.sum()
+        self._denoms = {}
+        cles = {"consommation": lambda x: P.cle_consommation(e["rd"], e["uc"], x),
+                "patrimoine": lambda x: P.cle_patrimoine(e["rd"], x),
+                "cotisations_employeur": lambda x: P.cle_salaires(x),
+                "heures_supplementaires": lambda x: P.cle_salaires({"bande_smic": (1.0, 2.5), **x, "directe": True}),
+                "jeunes_enfants": lambda x: P.cle_jeunes_enfants(x)}
+        nom_cle = {"cotisations_employeur": "salaires", "heures_supplementaires": "salaires"}
+        for mesures in om.specs().values():
+            for spec in mesures.values():
+                for x in om._post(spec["operations"]):
+                    if x["nom"] in cles:
+                        y = {"bande_smic": (1.0, 2.5), **x, "directe": True} if x["nom"] == "heures_supplementaires" else x
+                        cle = (nom_cle.get(x["nom"], x["nom"]), json.dumps(y, sort_keys=True, default=str))
+                        if cle not in self._denoms:
+                            self._denoms[cle] = float((P.wm * cles[x["nom"]](x)).sum())
+        self._pop_lignes = P.lignes
+        del P, e
+        import gc
+        gc.collect()
         self.lignes = lignes_types()
         self.annee = ANNEE
         self.sim, self.s = op.simulation(self.lignes)
@@ -140,6 +172,19 @@ class Types(om.Base):
         self.bornes_nv = bornes
         self.emploi = False
         self.etat0 = self.etat(self.sim, [])
+
+    def deciles_nv(self, nv: np.ndarray) -> np.ndarray:
+        return 1 + np.searchsorted(self._seuils_deciles, nv)
+
+    def tranches_rd(self, rd: np.ndarray) -> np.ndarray:
+        return om.tranche_hvp(np.interp(rd, self._rd_pop, self._cum_pop))
+
+    def _repartir(self, md: float, w: np.ndarray, nom: str, x: dict) -> np.ndarray:
+        d = self._denoms[(nom, json.dumps(x, sort_keys=True, default=str))]
+        return -md * 1e9 * w / d if d else 0.0 * w
+
+    def _masse(self, lg: list[dict], f) -> float:
+        return sum(l["poids"] * f(l) for l in self._pop_lignes)
 
     def capitalisation(self, sim, x: dict) -> np.ndarray:
         """Seul le jeune salarié (entrant) cotise ; même taux, plafond et part employeur que la population."""
