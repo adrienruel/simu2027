@@ -188,3 +188,29 @@ résultats identiques ou écarts expliqués dans le journal.*
 
 R0 (tout de suite) → R1.1 à R1.3 (gain immédiat, sans risque) → R2.2 et R2.3 (petits correctifs) → R1.4 et R2.1
 (gros chantier, à faire ensemble) → R3 et R4, point par point, chacun mesuré contre `ref-2026-11-20`.
+
+## 5. Avancement (26/11/2026)
+
+Règle suivie : aucun chiffre publié ne change. Une photo complète (13 programmes × 4 scénarios, toutes les
+grandeurs, et 6 tirages de Monte Carlo) reste identique au bit près après chaque étape. PR #2 → #3 → #4.
+
+| Chantier | État |
+|---|---|
+| R0.1, R0.2 | Fait (#3) |
+| R0.3 | **À faire par le propriétaire** : 126 sorties à régénérer, dont 81 avec OpenFisca, plus le Monte Carlo |
+| R0.4 | Inutile : l'égalité stricte passe une fois la sortie régénérée ; le test est ignoré tant qu'elle est périmée |
+| R0.5 | **À décider** : Mélenchon 0,917 pour un seuil de 0,9 (effet réel des paramètres du 25/11) |
+| R0.6 | Fait (#3) : suite rapide à chaque push, complète chaque nuit |
+| R1.1, R1.2, R1.4, R1.5 | Fait (#4) : un tirage 8,3 → 4,2 s ; mémoire 1,1 Go → 62 Mo après 12 tirages ; charger 0,24 s → 3 ms |
+| R1.3 | Inutile après R1.2 (charger ne coûte plus que 3 ms) |
+| R2.1 | Fait en partie (#4) : `_calcul` en 5 étapes (260 → 20 lignes). Restent les attributs posés par les programmes (`non_retraites`, `pib_en_plus`…) : les supprimer change l'interface des 12 programmes |
+| R2.2, R2.3, R2.4 | Fait (#4) |
+| R2.5 | Pas un bug : deux conventions voulues, documentées |
+| R2.6 | Pas fait : mypy et ruff ne sont pas installables dans cet environnement |
+| R3.1 | **Mesuré, à décider** : le point fixe ne change que le scénario optimiste de 3 programmes. Retailleau : déficit 2073 de 4,55 à 2,60 points (40 années touchées) ; Tondelier : 11 années autour de 2037 ; Attal : 2071 |
+| R3.2, R3.4 | Pas fait : choix de modélisation |
+| R3.3 | Fait sans branchement (#4) : `noyau.hors_domaine`. Le statu quo lui-même dépasse 250 % de dette en 2051 (prudent) et 2044 (crise). À décider : seuils, et affichage dans le comparateur |
+| R3.5 | Fait (#4) : programme vide = statu quo partout, monotonie d'une recette, déterminisme |
+| R4.1 | Déjà en place : `tirages_ecartes` est publié, et vaut 0 sur les 600 tirages publiés |
+| R4.2 | Fait (#4) : `python -m outils.erreur_monte_carlo`. À ρ = 1, Bertrand, Philippe et Retailleau ne sont pas départagés en 2037 (rang stable à 72-89 %) : il faut plus de tirages, ou présenter le trio comme ex æquo |
+| R4.3, R5 | Pas fait : données manquantes, ou travail de calage |
