@@ -230,14 +230,14 @@ microsimulation:
     statut: DECISION
     note: "DÉCISION d'Adrien du 14/11/2026 : second calage des poids sur les effectifs de bénéficiaires publiés, OpenFisca dans la boucle (il calcule qui est éligible ; le calage ne change que les poids). Les montants versés restent un contrôle. Faux : calage sur les seules marges démographiques et d'activité."
   niveaux_de_vie_erfs:
-    valeur: {D1: 13970, D5: 26740, D9: 48580, passage_2026: 1.0404}
+    valeur: {D1: 13970, D5: 26740, D9: 48580, pauvrete_50: 0.088, pauvrete_60: 0.154, passage_2026: 1.0404}
     unite: eur_an
     annee_euros: 2024
     statut: SOURCE
     url: "https://www.insee.fr/fr/statistiques/9019316"
     page: "Insee Première n° 2117 (juillet 2026), « Niveau de vie et pauvreté en 2024 », tableau complémentaire 2 (fichier ip2117.xlsx fourni par Adrien, parametres/sources/insee_ip2117.xlsx)"
-    source: "ERFS 2024 : premier décile 13 970 €, médiane 26 740 €, neuvième décile 48 580 € par an et par unité de consommation (France métropolitaine, logements ordinaires, personne de référence non étudiante)"
-    note: "Roadmap 3.6 (22/11/2026) : cibles du second calage de la population (outils/population_synthetique.py) : 10, 50 et 90 % des personnes du champ sous ces seuils. passage_2026 (HYPOTHESE) : niveaux de vie de 2024 portés en euros courants de 2026 comme le salaire moyen du privé (+2,0 % en 2025 et en 2026, comme independants.passage_2023_2026). Champ approché : la population couvre la France entière."
+    source: "ERFS 2024 : premier décile 13 970 €, médiane 26 740 €, neuvième décile 48 580 € par an et par unité de consommation (tableau complémentaire 2) ; taux de pauvreté 15,4 % au seuil de 60 % de la médiane (1 337 € par mois) et 8,8 % au seuil de 50 % (1 114 € par mois) (tableau complémentaire 3) ; France métropolitaine, logements ordinaires, personne de référence non étudiante"
+    note: "Roadmap 3.6 (22/11/2026) : cibles du second calage de la population (outils/population_synthetique.py) : 10, 50 et 90 % des personnes du champ sous ces seuils ; depuis le 25/11/2026, aussi 8,8 % et 15,4 % sous 50 et 60 % de la médiane. passage_2026 (HYPOTHESE) : niveaux de vie de 2024 portés en euros courants de 2026 comme le salaire moyen du privé (+2,0 % en 2025 et en 2026, comme independants.passage_2023_2026). Champ approché : la population couvre la France entière."
   beneficiaires:
     valeur: {rsa_avec_prime: 0.42, rsa_seul: 1.03, rsa_monoparentale: 0.61, rsa_couple_sans_enfant: 0.037, rsa_couple_avec_enfants: 0.166, prime_activite: 4.76, aides_logement: 5.66, complement_familial: 0.844}
     unite: sans_unite

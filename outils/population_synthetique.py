@@ -443,6 +443,12 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
         # sans eux, le calage sur les bénéficiaires tirait toute la distribution vers le bas (médiane −10 %)
         nve = v("niveaux_de_vie_erfs")
         seuils = {k: nve[k] * nve["passage_2026"] for k in ("D1", "D5", "D9")}
+        parts = {"D1": 0.1, "D5": 0.5, "D9": 0.9}
+        # 25/11/2026 : aussi les taux de pauvreté de l'ERFS aux seuils de 50 et 60 % de la médiane (D5) ; sans eux,
+        # le calage sur D1 et D5 laissait trop de personnes entre D1 et le seuil (pauvreté 16,7 % contre 15,4 %)
+        for k, q in (("seuil_50", 0.5), ("seuil_60", 0.6)):
+            seuils[k] = q * nve["D5"] * nve["passage_2026"]
+            parts[k] = nve["pauvrete_" + k[-2:]]
         ind = op.indicateurs(lignes, seuils=seuils)
         ben = v("beneficiaires")
         hand_u = np.bincount(men, weights=handicap.astype(float), minlength=n)  # garde l'effectif tiré
@@ -463,7 +469,7 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
         A2 = np.vstack([A] + [ind[k][None, :] for k in ben] + [hand_u[None, :]]
                        + [ind["sous_" + k][None, :] for k in seuils] + [m[None, :] for m, _ in masses])
         c2 = np.concatenate([cibles, [ben[k] * 1e6 for k in ben], [hand["adultes"] * 1e6],
-                             [n_champ * q for q in (0.1, 0.5, 0.9)], [c for _, c in masses]])
+                             [n_champ * parts[k] for k in seuils], [c for _, c in masses]])
         w = _raking(A2, c2, w0)
         ECARTS_CALAGE[:] = list((A2 @ w) / c2 - 1)
         k_div = cap["dividendes"] * 1e9 / (w * div).sum()

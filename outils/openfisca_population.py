@@ -263,11 +263,43 @@ def recourt(montant, poids, part, graine=0, forme="racine", gamma=0.5):
     return (u < proba_recours(montant, poids, part, gamma)).astype(float)
 
 
-def niveaux_de_vie(sim, s, lignes: list[dict], annee: int = 2026) -> tuple[np.ndarray, np.ndarray]:
+def non_recours_menages(sim, s, lignes: list[dict], annee: int = 2026) -> np.ndarray:
+    """Prestations non demandées par ménage (€ par an) : RSA, prime d'activité, allocation de soutien familial et
+    Aspa, avec les mêmes tirages et les mêmes probabilités que outils.openfisca_mesures.Base (graines 11 à 14, recours
+    microsimulation.recours et recours_aspa). Les niveaux de vie de l'ERFS comptent les prestations versées
+    (fichiers de la Cnaf) : le calage sur l'ERFS doit voir le même non-recours que la microsimulation (25/11/2026)."""
+    p = Parametres()
+    an = str(annee)
+    rec = p.val("microsimulation.recours")
+    n_f = s["n_familles"]
+    wf = np.zeros(n_f)
+    wf[s["famille"]] = [l["poids"] for l in lignes]
+    fam_men = np.zeros(n_f, int)
+    fam_men[s["famille"]] = s["menage"]
+    u = {k: np.random.default_rng(i + 11).random(n_f) for i, k in enumerate(("rsa", "ppa", "asf", "aspa"))}
+    perdu = np.zeros(n_f)
+    for k, var, part in (("rsa", "rsa", rec["rsa"]), ("ppa", "ppa", rec["prime_activite"])):
+        x = sim.calculate_add(var, an)
+        perdu += x * (u[k] >= proba_recours(x, wf, part, rec["forme"]))
+    asf = sim.calculate_add("asf", an)
+    c_asf = p.val("microsimulation.allocation_soutien_familial") * 1e6 / float((wf * (asf > 0)).sum())
+    perdu += asf * (u["asf"] >= c_asf)
+    aspa = sim.calculate_add("aspa", an)
+    n65 = np.bincount(s["famille"], weights=np.array([l["age"] >= 65 for l in lignes], float), minlength=n_f)
+    poids_a = wf * np.maximum(n65, 1)
+    part = min(1.0, p.val("microsimulation.recours_aspa")["allocataires"] / float((poids_a * (aspa > 0)).sum()))
+    perdu += aspa * (u["aspa"] >= proba_recours(aspa, poids_a, part, rec["forme"]))
+    return np.bincount(fam_men, weights=perdu, minlength=s["n_menages"])
+
+
+def niveaux_de_vie(sim, s, lignes: list[dict], annee: int = 2026, recours: bool = False) -> tuple[np.ndarray, np.ndarray]:
     """Niveau de vie de chaque personne (revenu disponible du ménage / unités de consommation de l'Insee : 1, plus
     0,5 par personne de 14 ans ou plus en plus, plus 0,3 par enfant de moins de 14 ans) et champ de l'ERFS (ménage
-    dont la personne de référence n'est pas étudiante)."""
+    dont la personne de référence n'est pas étudiante). Avec `recours` : prestations non demandées retirées
+    (non_recours_menages), comme dans la microsimulation."""
     rd = sim.calculate_add("revenu_disponible", str(annee))
+    if recours:
+        rd = rd - non_recours_menages(sim, s, lignes, annee)
     men = np.asarray(s["menage"])
     nm = s["n_menages"]
     age = np.array([int(l["age"]) for l in lignes])
@@ -317,7 +349,7 @@ def indicateurs(lignes: list[dict], annee: int = 2026, seuils: dict | None = Non
                 "prime_activite", "aides_logement", "complement_familial"):
         out[nom] = np.bincount(fam_unite, weights=ind[nom], minlength=n_u)
     if seuils:
-        nv, champ = niveaux_de_vie(sim, s, lignes, annee)
+        nv, champ = niveaux_de_vie(sim, s, lignes, annee, recours=True)
         out["champ_erfs"] = np.bincount(unite_p, weights=champ.astype(float), minlength=n_u)
         for k, v in seuils.items():
             out["sous_" + k] = np.bincount(unite_p, weights=(champ & (nv < v)).astype(float), minlength=n_u)

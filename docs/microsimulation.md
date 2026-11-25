@@ -792,3 +792,18 @@ et des fonctionnaires de Mélenchon, la rénovation de Le Pen, les intérêts d'
 
 Contrôle sur la population (montant de la micro / moteur, prudent) : PRE-14, PHI-EMP-06, GLU-SOC-04 identiques ;
 REC-37 8,25 / 16,5 (la moitié de long terme) ; COT-02 4,5 / 7,0 (part salariale au barème, part employeur à moitié).
+
+## Taux de pauvreté de la population (25/11/2026)
+
+- **Écart :** la microsimulation donnait 17,4 % de pauvres en 2026 (≈ 18,4 % vieillie), contre 15,4 % dans l'ERFS
+  2024. Deux causes. Le calage de la roadmap 3.6 tenait D1, la médiane et D9, mais laissait trop de personnes entre D1
+  et le seuil de 60 % de la médiane. Et il calait des niveaux de vie à recours complet, alors que la microsimulation
+  (`openfisca_mesures.Base`) retire les prestations non demandées (RSA, prime d'activité, ASF, Aspa) ; l'ERFS compte,
+  elle, les prestations versées.
+- **Correction :** le second calage vise aussi 8,8 % et 15,4 % des personnes sous 50 et 60 % de la médiane de l'ERFS
+  (Insee Première n° 2117, tableau complémentaire 3), et ses niveaux de vie retirent le non-recours avec les mêmes
+  tirages que la microsimulation (`openfisca_population.non_recours_menages`).
+- **Résultat (microsimulation, 2026) :** pauvreté 15,0 % (ERFS 15,4), médiane 27 675 € (≈ 27 820), D9/D1 3,35 (3,48),
+  Gini 0,281 (0,302 : le haut de la distribution reste trop resserré).
+- **Conséquences :** `emploi.allocation_chomeur_evitee` 13 950 €, `part_allocation_assurance_chomage` 0,826,
+  `prime_activite_familles` 0,361 (0,324 avant). Toute la micro et les sorties sont à régénérer.

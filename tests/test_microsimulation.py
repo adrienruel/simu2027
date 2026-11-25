@@ -49,3 +49,14 @@ def test_impot_revenu_openfisca(lignes):
     p = Parametres()
     cible = p.val("microsimulation.cibles_2026")["impot_revenu"] + sum(p.val("microsimulation.niches_ir_non_modelisees").values())
     assert res["impot_revenu"] == pytest.approx(cible, rel=0.05)
+
+
+def test_pauvrete_de_la_population_proche_de_l_erfs():
+    """25/11/2026 : avec le non-recours de la microsimulation, le taux de pauvreté de la population de 2026 est
+    proche de celui de l'ERFS 2024 (15,4 %, Insee Première n° 2117) ; avant le calage sur les taux de pauvreté :
+    17,4 %."""
+    from outils import openfisca_mesures as om
+    from outils import openfisca_population as op
+    from outils import vieillissement as v
+    b = om.Base(op.lire(), emploi=False)
+    assert abs(v.indicateurs(b, b.etat0)["pauvrete_pct"] - 15.4) < 1.0
