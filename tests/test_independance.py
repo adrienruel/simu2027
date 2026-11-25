@@ -50,6 +50,13 @@ SCENARIOS = {"crise": "Crise", "prudent": "Prudent", "median": "Médian", "optim
 
 @pytest.mark.lent
 def test_programmes_publies_se_recalculent_a_l_identique():
+    """Égalité stricte voulue : même code et mêmes paramètres doivent redonner les sorties au millième près. Si
+    sorties/comparaison_trajectoire.csv a été produite avec d'autres paramètres, test_sorties le signale déjà : le test
+    est alors ignoré, avec la consigne de régénérer, plutôt que d'échouer sur le premier des écarts."""
+    from outils import trace
+    if "comparaison_trajectoire.csv" in trace.verifier()["parametres_changes"]:
+        pytest.skip("sorties/comparaison_trajectoire.csv produite avec d'autres paramètres : "
+                    "python -m outils.export_comparaison (voir test_sorties)")
     r = subprocess.run([sys.executable, "-c", SCRIPT], cwd=RACINE, capture_output=True, text=True, timeout=1800)
     assert r.returncode == 0, r.stderr[-2000:]
     import json

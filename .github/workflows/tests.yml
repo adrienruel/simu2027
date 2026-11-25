@@ -1,0 +1,39 @@
+# Intégration continue (roadmap du moteur 25/11/2026, R0.6).
+# - rapide : à chaque push et pull request, sans OpenFisca (≈ 1 min) ; les tests de microsimulation sont ignorés.
+# - complete : chaque nuit et à la demande, avec OpenFisca-France (requirements-micro.txt, ≈ 11 min en série).
+# test_sorties échoue tant que des sorties ont été produites avec d'autres paramètres : c'est voulu, il dit quoi
+# régénérer (python -m outils.trace).
+name: tests
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  rapide:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m outils.tests_paralleles
+
+  complete:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements-micro.txt
+      - run: python -m outils.tests_paralleles
