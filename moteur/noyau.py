@@ -558,9 +558,25 @@ def _deux_passes(p: Parametres, s: str, fabrique, ref: dict[int, dict]) -> dict[
     sup = baisse_ecart_taux(p, s, res, ref)
     if sup is None:
         return res
-    mes, ctx, dyn, regle = fabrique()
-    deja = (ctx or {}).get("taux_supplementaire") or {}
-    res = trajectoire(p, s, mes, {**(ctx or {}), "taux_supplementaire": {t: deja.get(t, 0.0) + sup[t] for t in ANNEES}}, dyn, regle)
+    def passe(sup):
+        mes, ctx, dyn, regle = fabrique()
+        deja = (ctx or {}).get("taux_supplementaire") or {}
+        return trajectoire(p, s, mes, {**(ctx or {}), "taux_supplementaire": {t: deja.get(t, 0.0) + sup[t] for t in ANNEES}}, dyn, regle)
+    res = passe(sup)
+    if p.val("macro.point_fixe_baisse_spread"):
+        # R3.1 : recalculer tant que la baisse gagnée par la trajectoire diffère de celle qui l'a produite. La baisse
+        # ne dépend que du nombre d'années où la dette recule : elle se stabilise en quelques passes (6 au plus au
+        # 25/11/2026) ; au-delà de 10, la dernière passe est gardée et le nombre de passes le dit.
+        passes = 2
+        while passes < 10:
+            nouveau = baisse_ecart_taux(p, s, res, ref) or {t: 0.0 for t in ANNEES}
+            if all(nouveau[t] == sup[t] for t in ANNEES):
+                break
+            sup = nouveau
+            res = passe(sup)
+            passes += 1
+        for t in ANNEES:
+            res[t]["passes_ecart_taux"] = passes
     for t in ANNEES:
         res[t]["baisse_ecart_taux"] = -sup[t]
     return res
