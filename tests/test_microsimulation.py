@@ -1,6 +1,8 @@
 """Phase F1 : population synthétique et calcul par OpenFisca (outils/population_synthetique.py, openfisca_population.py)."""
 import pytest
 
+pytest.importorskip("openfisca_france")  # tout le fichier calcule avec OpenFisca
+
 from moteur.parametres import Parametres
 from outils import population_synthetique as ps
 

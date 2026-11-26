@@ -1,0 +1,56 @@
+# Intégration continue (roadmap du moteur 25/11/2026, R0.6).
+# - rapide : à chaque push sur main et à chaque pull request, sans OpenFisca (≈ 1 min).
+# - complete : seulement à la demande (onglet Actions → tests → Run workflow), avec OpenFisca-France.
+# Sans mail (26/11/2026) : un test qui échoue ne fait pas échouer l'exécution, donc GitHub n'envoie pas de mail.
+# Le bilan et la liste des échecs sont dans le résumé de chaque exécution (onglet Actions).
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  rapide:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - id: tests
+        continue-on-error: true
+        run: python -m outils.tests_paralleles 2>&1 | tee tests.log; exit ${PIPESTATUS[0]}
+      - name: Résumé
+        if: always()
+        run: |
+          echo "## Tests : ${{ steps.tests.outcome == 'success' && 'tout passe' || 'des tests échouent' }}" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          grep -E "^(FAILED|ERROR)|^groupe|processus" tests.log >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+  complete:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements-micro.txt
+      - id: tests
+        continue-on-error: true
+        run: python -m outils.tests_paralleles 2>&1 | tee tests.log; exit ${PIPESTATUS[0]}
+      - name: Résumé
+        if: always()
+        run: |
+          echo "## Suite complète : ${{ steps.tests.outcome == 'success' && 'tout passe' || 'des tests échouent' }}" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          grep -E "^(FAILED|ERROR)|^groupe|processus" tests.log >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
