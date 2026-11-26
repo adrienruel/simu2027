@@ -199,16 +199,16 @@ grandeurs, et 6 tirages de Monte Carlo) reste identique au bit près après chaq
 | R0.1, R0.2 | Fait (#3) |
 | R0.3 | **À faire par le propriétaire** : 126 sorties à régénérer, dont 81 avec OpenFisca, plus le Monte Carlo |
 | R0.4 | Inutile : l'égalité stricte passe une fois la sortie régénérée ; le test est ignoré tant qu'elle est périmée |
-| R0.5 | **À décider** : Mélenchon 0,917 pour un seuil de 0,9 (effet réel des paramètres du 25/11) |
+| R0.5 | **À décider** : Mélenchon 0,917 pour un seuil de 0,9. Cause trouvée le 26/11 : `micro_emploi_2026.csv` seul (table des emplois recalculée sur la population recalée du 25/11) le fait passer de 0,857 à 0,918 ; surtout LFI-PRE-01 (emplois perdus au prudent 658 000 → 636 000). Conséquence des nouvelles données, pas un défaut : relever le seuil à 0,95 en le documentant, ou le garder |
 | R0.6 | Fait (#3) : suite rapide à chaque pull request et push sur main ; complète à la demande. Depuis le 26/11, un test qui échoue ne fait plus échouer l'exécution (pas de mail) : le bilan est dans le résumé |
 | R1.1, R1.2, R1.4, R1.5 | Fait (#4) : un tirage 8,3 → 4,2 s ; mémoire 1,1 Go → 62 Mo après 12 tirages ; charger 0,24 s → 3 ms |
-| R1.3 | Inutile après R1.2 (charger ne coûte plus que 3 ms) |
-| R2.1 | Fait en partie (#4) : `_calcul` en 5 étapes (260 → 20 lignes). Restent les attributs posés par les programmes (`non_retraites`, `pib_en_plus`…) : les supprimer change l'interface des 12 programmes |
+| R1.3 | Inutile après R1.2 (charger ne coûte plus que 3 ms). 26/11 : mémoriser `statu_quo.retraites` ne gagne rien (les appels viennent d'instances différentes) ; le reste du temps est du calcul pur réparti, le gain suivant (interpolations numpy) ne serait plus identique au bit près |
+| R2.1 | Fait (#4) : `_calcul` en 5 étapes (260 → 20 lignes). Les annexes posées par les programmes (`non_retraites`, `pib_en_plus`…) restent : rangées par jeton depuis R1.4, elles ne peuvent plus être lues périmées ; les réécrire toucherait 40 endroits pour la seule lisibilité. **Tondelier** (classe à part, pas ProgrammeSimple) avait gardé des règles antérieures aux règles communes de l'emploi : aligné dans la PR #5, **à décider** (déficit 2037 prudent 12,28 → 12,65) |
 | R2.2, R2.3, R2.4 | Fait (#4) |
 | R2.5 | Pas un bug : deux conventions voulues, documentées |
 | R2.6 | Pas fait : mypy et ruff ne sont pas installables dans cet environnement |
-| R3.1 | **Mesuré, à décider** : le point fixe ne change que le scénario optimiste de 3 programmes. Retailleau : déficit 2073 de 4,55 à 2,60 points (40 années touchées) ; Tondelier : 11 années autour de 2037 ; Attal : 2071 |
-| R3.2, R3.4 | Pas fait : choix de modélisation |
+| R3.1 | Fait en option **désactivée** (#4) : `macro.point_fixe_baisse_spread`. Activée : seul le scénario optimiste change, pour Retailleau (déficit 2073 de 4,55 à 2,60 points, 40 années), Tondelier (11 années autour de 2037) et Attal (2071) ; le nombre de passes est publié. **À décider** : passer le paramètre à vrai |
+| R3.2, R3.4 | R3.2 pas fait (choix de modélisation). R3.4 mesuré le 26/11 : la balance commerciale linéaire dépasse 2 points de PIB dans 521 cas sur 2 160 et atteint −6,2 points en 2037 et −11,9 en 2073 (Mélenchon, optimiste, PIB +5 % seulement : c'est l'écart de prix qui pèse), très loin des petits chocs du calage de Mésange. **À décider** : borner, ou signaler |
 | R3.3 | Fait sans branchement (#4) : `noyau.hors_domaine`. Le statu quo lui-même dépasse 250 % de dette en 2051 (prudent) et 2044 (crise). **Décision du 26/11 : rien n'est affiché**, le comparateur montre l'écart de solde primaire, qui ne dépend pas de ce domaine |
 | R3.5 | Fait (#4) : programme vide = statu quo partout, monotonie d'une recette, déterminisme |
 | R4.1 | Déjà en place : `tirages_ecartes` est publié, et vaut 0 sur les 600 tirages publiés |
