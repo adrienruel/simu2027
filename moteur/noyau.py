@@ -587,15 +587,20 @@ def _deux_passes(p: Parametres, s: str, fabrique, ref: dict[int, dict]) -> dict[
 
 
 def hors_domaine(res: dict[str, dict[int, dict]], base: dict[str, dict[int, dict]] | None = None,
-                 dette_pib_max: float = 250.0, ecart_pib_max: float = 0.10) -> dict[str, dict]:
+                 dette_pib_max: float = 250.0, ecart_pib_max: float = 0.10,
+                 balance_max: float = 2.0) -> dict[str, dict]:
     """Garde-fou de lecture (roadmap du moteur 25/11/2026, R3.3) : première année, par scénario, où la trajectoire
     sort du domaine où le noyau reste une approximation défendable. Ne change aucun résultat.
 
     - dette au-delà de dette_pib_max % du PIB : ni la croissance ni les comportements ne réagissent à la dette dans le
       noyau (hors prime de dette bornée), la suite est une trajectoire mécanique ;
     - PIB qui s'écarte de plus de ecart_pib_max (en part) du statu quo `base` : au-delà des chocs pour lesquels les
-      multiplicateurs et la balance commerciale linéaire sont calés (Mésange).
-    Seuils par défaut à confirmer (250 % et 10 %). Rend {scénario: {"dette": année ou None, "pib": année ou None}}."""
+      multiplicateurs et la balance commerciale linéaire sont calés (Mésange) ;
+    - balance commerciale qui s'écarte de plus de balance_max points de PIB du statu quo (R3.4, 26/11/2026) : les
+      variantes de Mésange qui calent `_balance` restent sous 1 point ; au-delà, l'approximation linéaire (surtout le
+      terme de prix) est hors de son domaine. Signalée, pas bornée : la balance n'entre dans aucun autre calcul.
+    Seuils par défaut à confirmer (250 %, 10 % et 2 points). Rend {scénario: {"dette": année ou None, "pib": année ou
+    None, "balance": année ou None}}."""
     out = {}
     for s, v in res.items():
         dette = next((t for t in sorted(v) if v[t]["dette_pib"] > dette_pib_max), None)
@@ -603,7 +608,8 @@ def hors_domaine(res: dict[str, dict[int, dict]], base: dict[str, dict[int, dict
         if base is not None and s in base:
             pib = next((t for t in sorted(v) if t in base[s]
                         and abs(v[t]["pib"] / base[s][t]["pib"] - 1) > ecart_pib_max), None)
-        out[s] = {"dette": dette, "pib": pib}
+        balance = next((t for t in sorted(v) if abs(v[t].get("balance_commerciale", 0.0)) > balance_max), None)
+        out[s] = {"dette": dette, "pib": pib, "balance": balance}
     return out
 
 

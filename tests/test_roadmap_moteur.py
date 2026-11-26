@@ -98,9 +98,13 @@ def test_hors_domaine():
     fausse = {"prudent": {2029: {"dette_pib": 120.0, "pib": 100.0}, 2030: {"dette_pib": 260.0, "pib": 112.0},
                           2031: {"dette_pib": 300.0, "pib": 100.0}}}
     base = {"prudent": {t: {"dette_pib": 0.0, "pib": 100.0} for t in (2029, 2030, 2031)}}
-    assert noyau.hors_domaine(fausse, base) == {"prudent": {"dette": 2030, "pib": 2030}}
-    assert noyau.hors_domaine(fausse) == {"prudent": {"dette": 2030, "pib": None}}
-    assert noyau.hors_domaine(fausse, base, dette_pib_max=400, ecart_pib_max=0.2) == {"prudent": {"dette": None, "pib": None}}
+    assert noyau.hors_domaine(fausse, base) == {"prudent": {"dette": 2030, "pib": 2030, "balance": None}}
+    assert noyau.hors_domaine(fausse) == {"prudent": {"dette": 2030, "pib": None, "balance": None}}
+    assert noyau.hors_domaine(fausse, base, dette_pib_max=400, ecart_pib_max=0.2) == {
+        "prudent": {"dette": None, "pib": None, "balance": None}}
+    # R3.4 : balance commerciale au-delà de 2 points de PIB
+    fausse["prudent"][2031]["balance_commerciale"] = -2.5
+    assert noyau.hors_domaine(fausse)["prudent"]["balance"] == 2031
 
 
 def test_groupes_ex_aequo():
