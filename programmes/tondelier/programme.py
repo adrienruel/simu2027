@@ -199,10 +199,11 @@ class Tondelier:
         return out
 
     # ------------------------------------------------------------------ assemblage
-    def emploi_mesures(self, p: Parametres, s: str, liste: list, e: dict, valeur_emploi: float, ip: dict) -> dict:
+    def emploi_mesures(self, p: Parametres, s: str, liste: list, e: dict, valeur_emploi: dict[int, float], ip: dict) -> dict:
         """Effets sur l'emploi et le chômage des mesures qui en ont (groupe tondelier_emploi), par année :
         emplois par canal (contre le statu quo), chômeurs en plus (+) ou en moins (−), actifs en plus, et mesures
-        budgétaires de ces effets (effet_macro), au prix d'un emploi au SMIC comme les emplois perdus du SMIC."""
+        budgétaires de ces effets (effet_macro), au prix d'un emploi de la règle commune (valeur_emploi, € de 2026
+        par emploi et par année : ProgrammeSimple, emploi_valeur ; 26/11/2026, avant : prix d'un emploi au SMIC perdu)."""
         w = sq.salaires(p, s)
         cout = self.v("emploi.cout_poste_public")
         parts = self.v("emploi.postes")
@@ -230,9 +231,9 @@ class Tondelier:
         actifs = {t: (1 - g["part_venant_du_chomage"]) * tz[t] for t in ANNEES}
         mesures = [
             Mesure("Emploi : chômeurs en plus quand les réformes de l'assurance chômage sont abrogées", "recettes",
-                   {t: -ac[t] * valeur_emploi / 1e9 * ip[t] for t in ANNEES}, nature="effet_macro"),
+                   {t: -ac[t] * valeur_emploi[t] / 1e9 * ip[t] for t in ANNEES}, nature="effet_macro"),
             Mesure("Emploi : emplois privés évincés par les postes publics", "recettes",
-                   {t: -ev * postes[t] * valeur_emploi / 1e9 * ip[t] for t in ANNEES}, nature="effet_macro"),
+                   {t: -ev * postes[t] * valeur_emploi[t] / 1e9 * ip[t] for t in ANNEES}, nature="effet_macro"),
         ]
         return {"canaux": canaux, "chomeurs": chomeurs, "actifs": actifs, "mesures": mesures, "cout_postes": cout_postes,
                 "evinces": {t: ev * postes[t] for t in ANNEES}}
@@ -353,6 +354,21 @@ class Tondelier:
                 # variante « annonce tenue » (moteur/annonces.py) : jamais dans le chiffrage publié
                 from moteur import annonces as ann
                 liste.extend(ann.mesures_tenues("tondelier", p, s, liste, None))
+            # règles communes de l'emploi (26/11/2026, alignement sur ProgrammeSimple) : valeur d'un emploi au barème
+            # du programme (prélèvements, TVA, impôts sur l'excédent), calculée sur les mesures de ce moment-là, et
+            # valeur ajoutée d'un emploi selon son salaire
+            from moteur import emploi_valeur
+            from moteur.programme_simple import ProgrammeSimple
+            dep_chom = p.val("emploi.depenses_chomage_programme")
+            niveau = p.val("emploi.cout_emploi_cree_smic")
+            alloc = 0.0 if dep_chom else p.val("emploi.allocation_chomeur_evitee")
+            valeur = ProgrammeSimple.valeur_emploi_cellule(p, niveau)
+            if dep_chom:
+                valeur -= p.val("emploi.allocation_chomeur_evitee")
+            va = emploi_valeur.valeur_ajoutee(p, s, niveau)
+            f_emp = emploi_valeur.facteur(p, s, liste, niveau)
+            exc = emploi_valeur.excedent(p, s, liste, niveau, va)
+            v_emp = {t: (valeur - alloc) * f_emp[t] + alloc + exc[t] for t in ANNEES}
             cout_net = offre.impulsion(p, liste, annees)
             y = sq.pib(p, s)
             rec_sq = sq.recettes(p, s)
@@ -364,8 +380,9 @@ class Tondelier:
             if self.v("macro.multiplicateur_actif"):
                 liste.append(Mesure("Effet macro : multiplicateur sur l'impulsion budgétaire des mesures", "recettes",
                                     {t: dpib[t] * part_rec[t] for t in annees}, nature="effet_macro"))
-            # PIB : multiplicateur et emplois perdus (valeur ajoutée ≈ coût de l'emploi × 1,25)
-            va_emploi = smic["cout_moyen_emploi_perdu"] * 1.25
+            # PIB : multiplicateur et emplois perdus, à la valeur ajoutée d'un emploi de la règle commune
+            # (emploi_valeur.valeur_ajoutee ; avant le 26/11/2026 : coût de l'emploi perdu × 1,25)
+            va_emploi = va
             pib_emplois = {t: -emplois * min(1.0, (t - 2026) / 3) * va_emploi / 1e9 * ws[t] for t in ANNEES}
             pib = {t: y[t] + (dpib[t] if self.v("macro.multiplicateur_actif") else 0.0) + pib_emplois[t] for t in ANNEES}
             e = sq.effectifs(p, s)
@@ -379,23 +396,26 @@ class Tondelier:
             # emploi : postes publics, garantie d'emploi, assurance chômage (tondelier_emploi)
             # phase L (4.1) : l'allocation évitée des chômeurs de l'assurance chômage et de l'éviction passe dans les
             # blocs chômage et pauvreté (noyau) ; les emplois perdus du SMIC gardent la leur (budget compté par la mesure)
-            dep_chom = p.val("emploi.depenses_chomage_programme")
-            v_em = smic["perte_par_emploi"] - (p.val("emploi.allocation_chomeur_evitee") if dep_chom else 0.0)
-            em = self.emploi_mesures(p, s, liste, e, v_em, ws)
+            em = self.emploi_mesures(p, s, liste, e, v_emp, ws)
             liste.extend(em["mesures"])
             # phase A3 (12/11/2026), même règle que ProgrammeSimple : les postes publics entrent au PIB à leur coût une
             # fois le multiplicateur éteint ; les emplois privés évincés en sortent à leur valeur ajoutée
             from moteur.programme_simple import production_non_marchande
             npm = (production_non_marchande(p, s, em["cout_postes"], annees) if self.v("macro.multiplicateur_actif")
                    else em["cout_postes"])
+            # emplois des canaux (garantie d'emploi, assurance chômage, éviction) : valeur ajoutée au PIB, comme
+            # ProgrammeSimple (26/11/2026 ; avant : seule l'éviction comptait)
             for t in ANNEES:
-                pib[t] += npm[t] - em["evinces"][t] * va_emploi / 1e9 * ws[t]
+                hors = sum(v for k, v in em["canaux"][t].items() if not k.startswith("Postes publics"))
+                pib[t] += npm[t] + hors * va_emploi / 1e9 * ws[t]
             chom = {t: chom[t] + em["chomeurs"][t] / (e[t]["emploi"] + e[t]["chomeurs"] + em["actifs"][t]) * 100
                     for t in ANNEES}
             # canal d'offre commun (moteur/offre.py) : effet durable des impôts et des transferts
             canaux_offre, actifs_offre = {}, {t: 0.0 for t in ANNEES}
+            m_offre = None
             if offre.actif(p):
                 of = offre.effets(p, s, liste)
+                m_offre = of["mesure"]
                 liste.append(of["mesure"])
                 for t in ANNEES:
                     pib[t] += of["dpib"][t]
@@ -410,7 +430,9 @@ class Tondelier:
                 details_offre = {}
             # emploi des seniors : retour à 62 ans, moins de personnes en emploi et au chômage (offre.seniors, scénario
             # miroir : un âge abaissé fait perdre des emplois)
-            sen = offre.seniors(p, s, self._non_retraites[(p.jeton, s)], baisse_age=True)
+            sen = offre.seniors(p, s, self._non_retraites[(p.jeton, s)], baisse_age=True,
+                                facteur_prelevements=emploi_valeur.facteur(p, s, liste, "moyen"),
+                                excedent=emploi_valeur.excedent(p, s, liste, "moyen", p.val("seniors.valeur_ajoutee_emploi")))
             liste.extend(sen["mesures"])
             for t in ANNEES:
                 pib[t] += sen["pib"][t]
@@ -437,6 +459,13 @@ class Tondelier:
                                                "Conjoncture (impulsion budgétaire)": conj[t], **em["canaux"][t],
                                                **{c: v[t] for c, v in canaux_offre.items()},
                                                "Seniors : emploi (âge de la retraite)": sen["emplois"][t]} for t in ANNEES}}
+            # plancher du chômage (règle commune du 13/11/2026, appliquée à Tondelier le 26/11/2026)
+            from moteur.emploi_canaux import plancher_chomage
+            k_pl = plancher_chomage(p, ctx_s[s], {t: va * ws[t] / 1e9 for t in ANNEES})
+            if m_offre is not None:
+                for t, k in k_pl.items():
+                    if k < 1 and t in m_offre.valeurs:
+                        m_offre.valeurs[t] *= k
             if dep_chom:
                 # même règle que ProgrammeSimple.chomeurs_depenses : ni les canaux dont la mesure compte le budget
                 # (SMIC, garantie d'emploi), ni les seniors, ni la démographie
