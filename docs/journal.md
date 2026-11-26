@@ -2196,3 +2196,14 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
 - Point ouvert : pauvreté de la population vieillie ≈ 18,4 % (Insee 15,4 %) ; seul l'écart à la législation actuelle
   se lit. Mention ajoutée au comparateur.
 - Comparateur en ligne : 18 jeux de données et textes des résumés mis à jour.
+
+## Feuille de route du moteur, suite (26/11/2026, après-midi)
+
+- Branches : tout le travail fusionné dans `main` (05df1fc) ; on travaille sur `roadmap` (décision d'Adrien).
+- **R2.6** : ruff et mypy dans l'intégration continue ; `outils/photo.py` (photo au bit près). Aucun résultat change.
+- **R3.2** : emplois de la rétroaction des taux comptés dans l'emploi publié (ils baissaient déjà le chômage publié et
+  les dépenses de chômage). Déficit, dette et chômage inchangés ; emploi 2037 au prudent : Roussel −183 000,
+  Mélenchon −131 000, Arthaud −60 000, Tondelier −26 000.
+- **R3.4** : balance commerciale signalée par `noyau.hors_domaine` au-delà de 2 points de PIB.
+- **R5, IR de la population** : +2,4 % expliqués (calage non convergent +1,7 ; mise à l'échelle du capital après le
+  calage +0,8) ; correctif proposé, à faire avec la régénération.

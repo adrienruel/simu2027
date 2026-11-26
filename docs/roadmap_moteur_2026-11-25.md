@@ -189,7 +189,7 @@ résultats identiques ou écarts expliqués dans le journal.*
 R0 (tout de suite) → R1.1 à R1.3 (gain immédiat, sans risque) → R2.2 et R2.3 (petits correctifs) → R1.4 et R2.1
 (gros chantier, à faire ensemble) → R3 et R4, point par point, chacun mesuré contre `ref-2026-11-20`.
 
-## 5. Avancement (26/11/2026)
+## 5. Avancement (26/11/2026, mis à jour l'après-midi)
 
 Règle suivie : aucun chiffre publié ne change. Une photo complète (13 programmes × 4 scénarios, toutes les
 grandeurs, et 6 tirages de Monte Carlo) reste identique au bit près après chaque étape. PR #2 → #3 → #4.
@@ -206,11 +206,16 @@ grandeurs, et 6 tirages de Monte Carlo) reste identique au bit près après chaq
 | R2.1 | Fait (#4) : `_calcul` en 5 étapes (260 → 20 lignes). Les annexes posées par les programmes (`non_retraites`, `pib_en_plus`…) restent : rangées par jeton depuis R1.4, elles ne peuvent plus être lues périmées ; les réécrire toucherait 40 endroits pour la seule lisibilité. **Tondelier** (classe à part, pas ProgrammeSimple) avait gardé des règles antérieures aux règles communes de l'emploi : aligné dans la PR #5, **à décider** (déficit 2037 prudent 12,28 → 12,65) |
 | R2.2, R2.3, R2.4 | Fait (#4) |
 | R2.5 | Pas un bug : deux conventions voulues, documentées |
-| R2.6 | Pas fait : mypy et ruff ne sont pas installables dans cet environnement |
+| R2.6 | Fait (26/11, après-midi) : `ruff.toml` (F, E9, B ; B023 et B905 écartées, faux positifs) et `mypy.ini` (`noyau`, `parametres`, `statu_quo` sans erreur), tâche « lint » de l'intégration continue. Corrigé : imports et variables morts. `outils/photo.py` : photo au bit près (147 992 valeurs), identique |
 | R3.1 | Fait en option **désactivée** (#4) : `macro.point_fixe_baisse_spread`. Activée : seul le scénario optimiste change, pour Retailleau (déficit 2073 de 4,55 à 2,60 points, 40 années), Tondelier (11 années autour de 2037) et Attal (2071) ; le nombre de passes est publié. **À décider** : passer le paramètre à vrai |
-| R3.2, R3.4 | R3.2 pas fait (choix de modélisation). R3.4 mesuré le 26/11 : la balance commerciale linéaire dépasse 2 points de PIB dans 521 cas sur 2 160 et atteint −6,2 points en 2037 et −11,9 en 2073 (Mélenchon, optimiste, PIB +5 % seulement : c'est l'écart de prix qui pèse), très loin des petits chocs du calage de Mésange. **À décider** : borner, ou signaler |
+| R3.2 | Fait (26/11) : la rétroaction des taux passait déjà par les canaux du multiplicateur (recettes à la part du PIB, dépenses de chômage par `chomeurs_depenses` pour les 12 programmes ; les blocs ne suivent plus le PIB depuis le 21/11). Écart corrigé : ses emplois sont maintenant dans l'emploi publié (canal « Taux d'intérêt (bouclage) »). Déficit, dette, chômage identiques ; emploi 2037 au prudent : Roussel −183 000, Mélenchon −131 000, Arthaud −60 000 |
+| R3.4 | Signalée (26/11) : `noyau.hors_domaine` rend « balance », première année au-delà de 2 points de PIB (médian : Mélenchon 2030, Roussel 2037, Tondelier 2055). Pas bornée : la balance n'entre dans aucun calcul ni aucune sortie publiée. Mesure du 26/11 : la balance commerciale linéaire dépasse 2 points de PIB dans 521 cas sur 2 160 et atteint −6,2 points en 2037 et −11,9 en 2073 (Mélenchon, optimiste, PIB +5 % seulement : c'est l'écart de prix qui pèse), très loin des petits chocs du calage de Mésange. **À décider** : borner, ou signaler |
 | R3.3 | Fait sans branchement (#4) : `noyau.hors_domaine`. Le statu quo lui-même dépasse 250 % de dette en 2051 (prudent) et 2044 (crise). **Décision du 26/11 : rien n'est affiché**, le comparateur montre l'écart de solde primaire, qui ne dépend pas de ce domaine |
 | R3.5 | Fait (#4) : programme vide = statu quo partout, monotonie d'une recette, déterminisme |
 | R4.1 | Déjà en place : `tirages_ecartes` est publié, et vaut 0 sur les 600 tirages publiés |
 | R4.2 | Fait (#4) : `python -m outils.erreur_monte_carlo`. À ρ = 1, Bertrand, Philippe et Retailleau ne sont pas départagés en 2037 (rang stable à 72-89 %). **Décision du 26/11 : affichés « ex æquo »** dans la page Fiabilité (colonne `ex_aequo` de `comparaison_incertitude.csv`) |
-| R4.3, R5 | Pas fait : données manquantes, ou travail de calage |
+| R4.3 | Pas fait : série de l'OAT à 10 ans à fournir |
+| R5 pauvreté | Corrigé le 25/11 (calage sur les taux de pauvreté de l'ERFS avec le non-recours : 15,0 % en 2026, ERFS 15,4) ; le 18,4 % de la population vieillie se relira après la régénération (R0.3) |
+| R5 IR | Diagnostic (26/11) : population actuelle 122,3 Md€ pour 119,5 visés (+2,4 %). Calage seul : 121,5 (+1,7 %), ses contraintes se contredisent sous les bornes de poids (0,2-5 ; marges d'âge à −1,2 % même à 3 000 itérations). Mise à l'échelle des dividendes, revenus fonciers et plus-values *après* le calage (× 1,05, 1,05, 1,06) : +0,8. Correctif proposé : alterner calage et mise à l'échelle jusqu'au point fixe ; il faut regénérer la population, puis les paramètres qui en sont tirés (`outils/ppa_emplois.py`) et toute la micro : à faire avec R0.3 |
+| R5 Mélenchon nucléaire | Renvoyé au travail programme par programme |
+| R5 archivage des sources | Pas faisable d'ici : le shell ne télécharge pas ; à faire depuis un poste qui y a accès |
