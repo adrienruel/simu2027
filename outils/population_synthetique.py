@@ -448,37 +448,45 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
         for k, q in (("seuil_50", 0.5), ("seuil_60", 0.6)):
             seuils[k] = q * nve["D5"] * nve["passage_2026"]
             parts[k] = nve["pauvrete_" + k[-2:]]
-        ind = op.indicateurs(lignes, seuils=seuils)
-        ben = v("beneficiaires")
-        hand_u = np.bincount(men, weights=handicap.astype(float), minlength=n)  # garde l'effectif tiré
-        n_champ = float(ind["champ_erfs"] @ w)
-        # masses des pensions, des revenus d'indépendants et des allocations de chômage tenues à leur source (moyennes du tirage × effectifs) :
-        # sans elles, le calage sur les déciles relevait la pension moyenne de 11 %
-        i_in = statut == "independant"
-        masses = [(np.bincount(men, weights=pension, minlength=n),
-                   v("pension_brute_moyenne") * 12 * v("retraites_residents_2026") * 1e6),
-                  (np.bincount(men, weights=np.where(i_in, rev_ind, 0.0), minlength=n),
-                   rev_ind[i_in].mean() * emp["independants"] * 1e6),
-                  (np.bincount(men, weights=chomage_brut, minlength=n),
-                   ci["part"] * ci["allocation_brute_mensuelle"] * 12 * p.val("inactifs.chomeurs_bit")),
-                  # et l'impôt sur le revenu du PLF 2026, plus les dépenses fiscales que la population n'a pas
-                  # (emploi à domicile, heures supplémentaires, dons, travaux, frais de garde)
-                  (ind["impot_revenu"], (v("cibles_2026")["impot_revenu"]
-                                         + sum(v("niches_ir_non_modelisees").values())) * 1e9)]
-        A2 = np.vstack([A] + [ind[k][None, :] for k in ben] + [hand_u[None, :]]
-                       + [ind["sous_" + k][None, :] for k in seuils] + [m[None, :] for m, _ in masses])
-        c2 = np.concatenate([cibles, [ben[k] * 1e6 for k in ben], [hand["adultes"] * 1e6],
-                             [n_champ * parts[k] for k in seuils], [c for _, c in masses]])
-        w = _raking(A2, c2, w0)
-        ECARTS_CALAGE[:] = list((A2 @ w) / c2 - 1)
-        k_div = cap["dividendes"] * 1e9 / (w * div).sum()
-        k_fon = cap["revenus_fonciers"] * 1e9 / (w * fon).sum()
-        k_pv = pv_p["montant"] * 1e9 / (w * pv).sum()
-        for l in lignes:
-            l["poids"] = round(float(w[l["unite"]]), 3)
-            l["dividendes"] = round(l["dividendes"] * k_div, 2)
-            l["revenus_fonciers"] = round(l["revenus_fonciers"] * k_fon, 2)
-            l["plus_values"] = round(l["plus_values"] * k_pv, 2)
+        # 26/11/2026 (roadmap du moteur R5) : calage et remise à l'échelle des revenus du capital alternés jusqu'au point
+        # fixe. La remise à l'échelle, faite une seule fois après le calage, relevait l'impôt de la population de
+        # 0,8 Md€ au-delà de sa cible (dividendes, revenus fonciers et plus-values × 1,05 à 1,06).
+        for _passe in range(PASSES_CALAGE_CAPITAL):
+            ind = op.indicateurs(lignes, seuils=seuils)
+            ben = v("beneficiaires")
+            hand_u = np.bincount(men, weights=handicap.astype(float), minlength=n)  # garde l'effectif tiré
+            if _passe == 0:  # champ de l'ERFS sous les poids du premier calage, comme avant le 26/11
+                n_champ = float(ind["champ_erfs"] @ w)
+            # masses des pensions, des revenus d'indépendants et des allocations de chômage tenues à leur source (moyennes du tirage × effectifs) :
+            # sans elles, le calage sur les déciles relevait la pension moyenne de 11 %
+            i_in = statut == "independant"
+            masses = [(np.bincount(men, weights=pension, minlength=n),
+                       v("pension_brute_moyenne") * 12 * v("retraites_residents_2026") * 1e6),
+                      (np.bincount(men, weights=np.where(i_in, rev_ind, 0.0), minlength=n),
+                       rev_ind[i_in].mean() * emp["independants"] * 1e6),
+                      (np.bincount(men, weights=chomage_brut, minlength=n),
+                       ci["part"] * ci["allocation_brute_mensuelle"] * 12 * p.val("inactifs.chomeurs_bit")),
+                      # et l'impôt sur le revenu du PLF 2026, plus les dépenses fiscales que la population n'a pas
+                      # (emploi à domicile, heures supplémentaires, dons, travaux, frais de garde)
+                      (ind["impot_revenu"], (v("cibles_2026")["impot_revenu"]
+                                             + sum(v("niches_ir_non_modelisees").values())) * 1e9)]
+            A2 = np.vstack([A] + [ind[k][None, :] for k in ben] + [hand_u[None, :]]
+                           + [ind["sous_" + k][None, :] for k in seuils] + [m[None, :] for m, _ in masses])
+            c2 = np.concatenate([cibles, [ben[k] * 1e6 for k in ben], [hand["adultes"] * 1e6],
+                                 [n_champ * parts[k] for k in seuils], [c for _, c in masses]])
+            w = _raking(A2, c2, w0)
+            ECARTS_CALAGE[:] = list((A2 @ w) / c2 - 1)
+            k_div = cap["dividendes"] * 1e9 / (w * div).sum()
+            k_fon = cap["revenus_fonciers"] * 1e9 / (w * fon).sum()
+            k_pv = pv_p["montant"] * 1e9 / (w * pv).sum()
+            div, fon, pv = div * k_div, fon * k_fon, pv * k_pv  # facteurs de la passe suivante : sur les montants à jour
+            for l in lignes:
+                l["poids"] = round(float(w[l["unite"]]), 3)
+                l["dividendes"] = round(l["dividendes"] * k_div, 2)
+                l["revenus_fonciers"] = round(l["revenus_fonciers"] * k_fon, 2)
+                l["plus_values"] = round(l["plus_values"] * k_pv, 2)
+            if max(abs(k_div - 1), abs(k_fon - 1), abs(k_pv - 1)) < 1e-3:
+                break
     return lignes
 
 
@@ -489,7 +497,15 @@ def smic_mensuel_brut(annee: int = 2026) -> float:
     return float(h) * 151.67
 
 
-def _raking(A, cibles, w0, iterations=200, bornes=(0.2, 5.0)):
+PASSES_CALAGE_CAPITAL = 6
+# Bornes des poids du calage, en multiple du poids de tirage. 26/11/2026 (roadmap du moteur R5) : (0,2 ; 5) → (0,1 ; 10).
+# Sous (0,2 ; 5), les contraintes se contredisaient et le calage s'arrêtait à 2,1 % de sa cible la plus éloignée
+# (IR de la population +2,1 %, pensions +1,7 %, marges d'âge −1,2 %), même à 3 000 itérations. Sous (0,1 ; 10) :
+# écart maximal 1,2 %, IR +0,9 % ; poids de 157 à 15 700 (de 314 à 7 850 avant). (0,05 ; 20) ne gagne presque rien.
+BORNES_POIDS = (0.1, 10.0)
+
+
+def _raking(A, cibles, w0, iterations=200, bornes=BORNES_POIDS):
     """Calage par ratissage (méthode de Deville et Särndal, fonction raking bornée) : poids w = w0 · exp(Aᵀλ)."""
     w = w0.copy()
     for _ in range(iterations):

@@ -8,7 +8,8 @@ prime d'activité d'une personne seule au même salaire (table d'OpenFisca du mo
 complet), comme la table de la personne seule. Le RSA et les aides au logement en moins sont donnés pour
 information (le moteur les compte par emploi.allocation_chomeur_evitee).
 
-    python -m outils.ppa_emplois      → valeur à reporter dans emploi.prime_activite_familles (economie.yaml)
+    python -m outils.ppa_emplois      → valeurs à reporter dans economie.yaml : emploi.prime_activite_familles
+                                         (rapport), allocation_chomeur_evitee et ses deux parts
 """
 from __future__ import annotations
 
@@ -50,8 +51,14 @@ def calcul() -> dict:
     w = res["avant"]["poids"]
     n = sum(float(l["poids"]) for l in sous if ch(l))
     d = {v: float((w * (res["apres"][v] - res["avant"][v])).sum()) / n for v in ("ppa", "rsa", "aide_logement")}
+    # allocation de chômage arrêtée : moyenne par chômeur (26/11/2026 : calculée ici, avant reportée à la main)
+    alloc = sum(float(l["poids"]) * float(l["chomage_brut"]) for l in sous if ch(l)) / n
+    total = alloc - d["rsa"] - d["aide_logement"]
     return {"brut": b, "ppa_seul": ppa_seul, "chomeurs": n, "ppa_famille": d["ppa"], "rsa": d["rsa"],
-            "aide_logement": d["aide_logement"], "rapport": d["ppa"] / ppa_seul}
+            "aide_logement": d["aide_logement"], "rapport": d["ppa"] / ppa_seul, "allocation": alloc,
+            # valeurs à reporter dans economie.yaml (emploi.*)
+            "allocation_chomeur_evitee": total, "part_allocation_assurance_chomage": alloc / total,
+            "part_allocation_logement": -d["aide_logement"] / total}
 
 
 if __name__ == "__main__":

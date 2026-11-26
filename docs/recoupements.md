@@ -371,3 +371,18 @@ Trois canaux communs (`moteur/capital_dirigeants.py`), séparés pour ne pas com
     119,5 Md€.
   - Écarté : les couples non mariés (tous mariés : −2,5 Md€ seulement).
 - **Effet sur les écarts 2037 au prudent :** Lisnard −0,019, Bertrand −0,012, autres ≤ 0,006.
+
+## Population de la microsimulation : bornes des poids et capital au point fixe (26/11/2026)
+
+- **Écart :** IR de la population 122,3 Md€ pour 119,5 visés (+2,4 %). Deux causes : le calage s'arrêtait à 2,1 % de
+  sa cible la plus éloignée (contraintes contradictoires sous des poids bornés à 0,2-5 fois le poids de tirage ; même
+  à 3 000 itérations) ; les dividendes, revenus fonciers et plus-values étaient remis à l'échelle une seule fois après
+  le calage (× 1,05 à 1,06), ce qui relevait l'impôt de 0,8 Md€.
+- **Correction (`outils/population_synthetique.py`) :** bornes 0,1-10 (`BORNES_POIDS`) ; calage et remise à l'échelle
+  alternés jusqu'au point fixe (`PASSES_CALAGE_CAPITAL`).
+- **Résultat :** IR 120,6 Md€ (+0,9 %) ; écart maximal des marges 1,2 % (2,1 avant) ; poids de 157 à 15 700 (314 à
+  7 850 avant).
+- **Paramètres tirés de la population** (`outils/ppa_emplois.py`, qui calcule maintenant tout) :
+  `emploi.allocation_chomeur_evitee` 13 950 → 13 850 € (allocation 11 491, RSA 1 694, aides au logement 665) ;
+  `part_allocation_assurance_chomage` 0,826 → 0,830 ; `part_allocation_logement` 0,050 → 0,048 ;
+  `prime_activite_familles` 0,361 → 0,341.
