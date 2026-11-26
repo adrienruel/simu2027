@@ -21,7 +21,7 @@ import math
 from moteur import bibliotheque as bib
 from moteur import statu_quo as sq
 from moteur.noyau import ANNEES, Mesure
-from moteur.programme_simple import ANNEES_AVANT, ProgrammeSimple
+from moteur.programme_simple import ProgrammeSimple
 
 
 class Attal(ProgrammeSimple):

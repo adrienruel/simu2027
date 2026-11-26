@@ -1,17 +1,40 @@
 # Intégration continue (roadmap du moteur 25/11/2026, R0.6).
-# - rapide : à chaque push sur main et à chaque pull request, sans OpenFisca (≈ 1 min).
+# - rapide : à chaque push sur main ou roadmap et à chaque pull request, sans OpenFisca (≈ 1 min).
 # - complete : seulement à la demande (onglet Actions → tests → Run workflow), avec OpenFisca-France.
+# - lint : ruff et mypy (R2.6), à chaque push sur main et pull request.
 # Sans mail (26/11/2026) : un test qui échoue ne fait pas échouer l'exécution, donc GitHub n'envoie pas de mail.
 # Le bilan et la liste des échecs sont dans le résumé de chaque exécution (onglet Actions).
 name: tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, roadmap]
   pull_request:
   workflow_dispatch:
 
 jobs:
+  lint:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install ruff mypy types-PyYAML numpy
+      - id: lint
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          { ruff check . && mypy; } 2>&1 | tee lint.log
+      - name: Résumé
+        if: always()
+        run: |
+          echo "## Lint (ruff, mypy) : ${{ steps.lint.outcome == 'success' && 'propre' || 'des erreurs' }}" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          tail -40 lint.log >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
   rapide:
     if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest

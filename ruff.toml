@@ -1,0 +1,9 @@
+# Lint (roadmap du moteur 25/11/2026, R2.6). Règles : erreurs de Python (F, E9) et pièges courants (B).
+# B023 (fonction définie dans une boucle) : faux positifs ici, les fonctions sont appelées dans le même tour de boucle.
+# B905 (zip sans strict=) : les longueurs sont égales par construction ; l'ajouter partout n'apporterait rien.
+line-length = 120
+target-version = "py311"
+
+[lint]
+select = ["F", "E9", "B"]
+ignore = ["B023", "B905"]

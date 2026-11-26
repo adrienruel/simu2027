@@ -77,7 +77,6 @@ def test_a3_postes_publics_forme_bouclee():
     """Phase E : au multiplicateur de 1 (prudent, miroir médian), effet de demande restant + production non marchande
     = coût des postes à long terme ; rien n'entre avant l'effet maximal."""
     from moteur import bouclage
-    from moteur.programme_simple import multiplicateur
     cout = {t: (10.0 if t >= 2030 else 0.0) for t in ANNEES}
     npm = production_non_marchande(P, "prudent", cout, ANNEES)
     assert npm[2030] == 0 and npm[2031] == 0

@@ -8,8 +8,8 @@ from outils import population_synthetique as ps  # noqa: E402
 
 
 def test_toutes_les_reformes_se_construisent():
-    for nom, mesures in om.specs().items():
-        for ident, spec in mesures.items():
+    for mesures in om.specs().values():
+        for spec in mesures.values():
             om.construire(spec["operations"])
 
 

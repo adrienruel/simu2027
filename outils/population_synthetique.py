@@ -157,7 +157,6 @@ def generer(p: Parametres | None = None, n_menages: int | None = None, graine: i
     age = np.array([q["age"] for q in personnes])
     role = np.array([q["role"] for q in personnes])
     men = np.array([q["menage"] for q in personnes])
-    adulte = (role != "enfant") | (age >= 18)
 
     # --- Statuts ---------------------------------------------------------------------------------------------
     te = p.val("demographie.taux_emploi_age")

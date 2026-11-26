@@ -35,7 +35,7 @@ class ErreurParametre(ValueError):
 _ABSENT = None
 
 
-class _ChargeurStrict(getattr(yaml, "CSafeLoader", yaml.SafeLoader)):
+class _ChargeurStrict(getattr(yaml, "CSafeLoader", yaml.SafeLoader)):  # type: ignore[misc]
     """Refuse les clés en double : YAML garderait silencieusement la dernière. Analyseur en C (libyaml) quand PyYAML
     l'a, 12 fois plus rapide ; sinon le même en Python (roadmap du moteur 25/11/2026, R1.1)."""
 
@@ -99,6 +99,10 @@ _JETONS = itertools.count(1)
 
 
 class Parametres:
+    # attributs posés seulement sur des copies de calcul (statu_quo.dividende_productivite, migrations) ; absents sinon
+    _choc_productivite: dict[int, float]
+    _choc_population: dict
+
     def __init__(self, chemin: Path | str | None = None, programme: str | None = None):
         """Hypothèses communes (parametres/commun/) + paramètres d'un programme (programmes/<programme>/).
 

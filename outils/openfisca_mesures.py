@@ -172,7 +172,7 @@ def construire(operations: list[dict]):
         def apply(self):
             if params_ops:
                 self.modify_parameters(modifier_function=modifier)
-            for nom, fab in var_ops:
+            for _nom, fab in var_ops:
                 # une même variable modifiée deux fois : la seconde enveloppe la première (self.variables est à jour)
                 self.update_variable(fab(self))
     return R(tbs) if (params_ops or var_ops) else None

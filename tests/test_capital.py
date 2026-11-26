@@ -2,7 +2,7 @@
 import pytest
 
 from moteur import capital, offre, statu_quo as sq
-from moteur.noyau import ANNEES, Mesure
+from moteur.noyau import Mesure
 from moteur.parametres import Parametres
 from moteur.programme_simple import TOUTES
 

@@ -19,7 +19,6 @@ reprises : seules les mesures nommées sont estimées.
 from __future__ import annotations
 
 from moteur import bibliotheque as bib
-from moteur import offre
 from moteur import statu_quo as sq
 from moteur.noyau import ANNEES, Mesure
 from moteur.programme_simple import ProgrammeSimple

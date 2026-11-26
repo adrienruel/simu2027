@@ -61,7 +61,6 @@ def taux_emploi_18_66(p: Parametres, s: str, t: int, emploi: float, pop=None, ch
     départ à 67 ans ; l'emploi après 67 ans est celui du statu quo (taux par âge de l'année, demographie.taux_emploi_par_age), retiré de l'emploi.
     pop : population du programme cette année (migrations.population_programme), sinon celle du statu quo.
     chomage (%) : rend alors le taux d'activité (emploi et chômeurs de 18 à 66 ans / population)."""
-    from moteur.demographie import _tranche
     pop = pop if pop is not None else sq.population(p, s)[t]
     from moteur.demographie import taux_emploi_par_age
     taux = taux_emploi_par_age(p, t)

@@ -32,7 +32,7 @@ from __future__ import annotations
 
 import importlib
 from dataclasses import dataclass, field, replace
-from typing import Callable
+from typing import Any, Callable
 
 from .parametres import Parametres
 
@@ -271,10 +271,10 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
         gen = ctx.get("generosite_chomage") or {}
         ppa_t = ppa_par_emploi(p, s) if p.val("emploi.prime_activite_emplois") else None
     zr = xr = qr = 0.0
-    out = {}
+    out: dict[int, dict[str, Any]] = {}
     for t in ANNEES:
         etat = {"s": s, "t": t, "dette_prec": dette_prec, "pib": y, "publie": out}
-        flux = {"pib": 0.0, "recettes": 0.0, "blocs": {}, "participations": 0.0, "emploi": 0.0, "chomage": 0.0, "detail": {}}
+        flux: dict[str, Any] = {"pib": 0.0, "recettes": 0.0, "blocs": {}, "participations": 0.0, "emploi": 0.0, "chomage": 0.0, "detail": {}}
         for d in dynamiques:
             for k, v in (d.debut(t, etat) or {}).items():
                 if k == "blocs":
@@ -647,7 +647,7 @@ def simuler(p: Parametres | None = None, programme=None, scenarios=None, contref
 def resultats(p: Parametres | None = None, scenarios=None) -> dict[str, dict[int, dict]]:
     """Scénarios du programme de p.programme (dossier programmes/<nom>/) sur le noyau commun."""
     p = p or Parametres()
-    return simuler(p, charger(p.programme), scenarios)
+    return simuler(p, charger(p.programme), scenarios)  # type: ignore[arg-type]  # None : charger refuse
 
 
 def bilan_mesures(programme, p: Parametres, s: str = "prudent", annees=(2029, 2037, 2050, 2073)) -> list[dict]:

@@ -9,7 +9,6 @@ def norm(t):
 def main(yaml_path, pages_dir):
     mesures = yaml.safe_load(open(yaml_path, encoding="utf-8"))["mesures"]
     pages = {int(p.stem[1:]): norm(p.read_text(encoding="utf-8")) for p in pathlib.Path(pages_dir).glob("p*.txt")}
-    tout = " ".join(pages[k] for k in sorted(pages))
     erreurs = 0
     for m in mesures:
         c, p = m.get("citation"), m.get("page")

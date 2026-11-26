@@ -51,8 +51,6 @@ class Roussel(ProgrammeSimple):
         out, canaux = [], {}
         ip = idx["pib"]
         e = sq.effectifs(p, s)
-        y = sq.pib(p, s)
-        rec = sq.recettes(p, s)
         un = {2027: 0.0, 2028: 1.0}  # tout à partir de la loi de finances 2028
 
         def ser(v, montee=un):

@@ -34,6 +34,8 @@ effet d'un programme sur les taux.
 """
 from __future__ import annotations
 
+from typing import Any
+
 from .parametres import Parametres
 
 ANNEES = list(range(2029, 2074))
@@ -378,7 +380,7 @@ def sante_2027(p: Parametres) -> float:
 
 # --- Budget de départ et blocs ------------------------------------------------------------------------------
 
-def depart(p: Parametres) -> dict[str, float]:
+def depart(p: Parametres) -> dict[str, Any]:
     """Dépense primaire de départ par bloc (Md€ de 2026, législation du PLF 2027 sur l'économie de 2026) et
     recettes. Le reste (« autres ») est la dépense primaire moins les blocs identifiés."""
     from .unites import facteur
@@ -446,7 +448,7 @@ def missions_etat(p: Parametres) -> list[dict]:
     cas_sources = sum(float(m["cas_pensions"]) for m in ms if m["cas_source"] == "s")
     t2r = sum(float(m["titre2"]) for m in ms if m["cas_source"] == "r")
     reste_cas = p.val("budget_etat.cas_pensions_2026") - cas_sources
-    out = []
+    out: list[dict[str, Any]] = []
     for m in ms:
         if m["mission"].startswith(EXCLUES):
             continue
@@ -552,7 +554,7 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
 
     def i(cle, t):
         return e[t][cle] / e[2029][cle]
-    out = {}
+    out: dict[Any, Any] = {}
     for t in ANNEES:
         wt = w[t] / w[2029]
         k = {b: wt ** r[b] for b in r}  # revalorisation de chaque prestation
@@ -772,7 +774,7 @@ def prelevements_retraites(p: Parametres, s: str) -> dict[int, dict[str, float]]
     return out
 
 
-def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
+def tva(p: Parametres, s: str) -> dict[Any, Any]:  # années, plus "calage"
     """TVA par source de revenu (Md€ de 2026) : la consommation est financée par des salaires, des pensions, des
     transferts, et la TVA non déductible (entreprises non assujetties, administrations, logement neuf).
 
@@ -791,8 +793,6 @@ def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     cache = p.__dict__.setdefault("_cache", {})
     if ("sq_tva", s) in cache:
         return cache[("sq_tva", s)]
-    import csv
-    from .distribution import DONNEES
     from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
     from .recettes.tva_menages import lire_inactifs
     from .systeme_actuel import _interp, consommation_actuelle_ht, net_actuel, nets_prive
@@ -846,7 +846,7 @@ def tva(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     r_tr = revalorisation(p, "transferts")
     cible = recettes_par_impot_depart(p)["tva"]
     k = cible / sum(parts0.values())
-    out = {}
+    out: dict[Any, Any] = {}
     for t in ANNEES:
         out[t] = {"actifs": k * actifs * cel[t]["tva"] * w[t],
                   "retraites": k * brut[t],
@@ -870,7 +870,7 @@ def recettes_par_impot_depart(p: Parametres) -> dict[str, float]:
     return {**{i: v * k for i, v in struct.items()}, "non_fiscales": nf}
 
 
-def cellules_salaries(p: Parametres, s: str) -> dict[int, dict[str, float]]:
+def cellules_salaries(p: Parametres, s: str) -> dict[Any, Any]:  # années, plus "niveaux_2029"
     """Salariés du système actuel en cellules, comme le programme (moteur/cohortes.py) : chaque année, salariés par
     âge (18-69 ans : population de l'Insee × taux d'emploi par âge × part des salariés) et par tranche de coût de
     2026 (privé, public à son coût actuel), coût multiplié par le profil de salaire par âge (Insee) et normalisé sur
@@ -942,7 +942,7 @@ def cellules_salaries(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     brut = {}
     for t in range(2026, 2074):
         tot = {"prive": 0.0, "public": 0.0, "tva": 0.0, "masse": 0.0, "salaries": 0.0}
-        choc = p.__dict__.get("_choc_population")
+        choc: Any = p.__dict__.get("_choc_population")
         mig = p.val("demographie.migrations") if choc and t in choc else None
         for a in ages:
             if mig:
@@ -960,7 +960,7 @@ def cellules_salaries(p: Parametres, s: str) -> dict[int, dict[str, float]]:
                 tot[key] += n * par_m[profil.get(a, 1.0)][key]
         brut[t] = tot
     w = _v(p, "cohortes.effet_composition_salaires", s)
-    out = {}
+    out: dict[Any, Any] = {}
     for t in range(2026, 2074):
         comp = ((brut[t]["masse"] / brut[2029]["masse"]) / (brut[t]["salaries"] / brut[2029]["salaries"])) ** (1 - w)
         out[t] = {key: brut[t][key] / brut[2029][key] / comp for key in ("prive", "public", "tva", "masse")}
@@ -998,7 +998,7 @@ def ecart(programme: dict, statu_quo: dict, avant_regle: bool = False) -> dict[s
     PIB, hors intérêts : l'écart propre aux politiques, sans l'effet boule de neige de la dette), dette (points de
     PIB), chômage (points), PIB (%). avant_regle : déficit et dette du scénario complet sans la règle de trajectoire
     (le solde primaire, lui, est toujours celui du déficit publié)."""
-    out = {}
+    out: dict[Any, Any] = {}
     for s in statu_quo:
         if s not in programme:
             continue

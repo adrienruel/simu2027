@@ -32,7 +32,7 @@ def test_decomposition_exacte(p, sq, nom):
 
 def test_composantes_du_taux(sq):
     """Le taux apparent est la somme de ses composantes publiées."""
-    for s, traj in sq.items():
+    for traj in sq.values():
         for x in traj.values():
             assert x["taux_apparent"] == pytest.approx(x["taux_base"] + x["taux_fisher"] + x["taux_bce"] + x["taux_prime"] + x["taux_scenario"], abs=1e-15)
 

@@ -347,7 +347,6 @@ class ProgrammeSimple:
         e = sq.effectifs(p, s)
         y = sq.pib(p, s)
         rec = sq.recettes(p, s)
-        ip = idx["pib"]
         baisse = 1 - c["heures_cible"] / c["heures_actuelles"]
         gp, ge = c["gain_productivite"][s], c["part_embauches"][s]
         n = c["emplois_concernes"]

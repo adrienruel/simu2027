@@ -135,8 +135,6 @@ def generer(n_par_cellule: dict | None = None, graine: int = 2027,
     for e in sortie:
         e["part_is"] = part_is[e["taille"]]
     # résultat fiscal par rang (entreprises à l'IS, pondérées par poids × part_is)
-    ent = _lire("entreprises.csv")
-    defi = _lire("entreprises_deficitaires.csv")
     n_benef = d25["beneficiaires"]
     n_is = sum(e["poids"] * e["part_is"] for e in sortie)
     part_benef = min(1.0, n_benef / n_is)

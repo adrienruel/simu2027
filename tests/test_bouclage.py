@@ -162,7 +162,6 @@ def test_emploi_de_conjoncture_revient_a_l_equilibre(p):
     """E6 : une dépense permanente crée des emplois qui disparaissent en une dizaine d'années (Mésange : 107 000 à
     3 ans, −8 000 à 10 ans), alors que le PIB reste plus haut ; les baisses d'impôt sur le travail gardent leurs
     emplois (salaires)."""
-    from outils.banc_mesange import variante
     q = p.avec({"bouclage.bce/active": False})
     q.__dict__.pop("_cache", None)
     y = sq.pib(q, "median")

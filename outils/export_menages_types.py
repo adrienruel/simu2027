@@ -28,7 +28,6 @@ import json
 from pathlib import Path
 
 import numpy as np
-import yaml
 
 from moteur import noyau
 from moteur.menages_types import definitions, pensions_adultes
@@ -126,11 +125,12 @@ class Types(om.Base):
         o = np.argsort(e["rd"])
         self._rd_pop, self._cum_pop = e["rd"][o], np.cumsum(P.wm[o]) / P.wm.sum()
         self._denoms = {}
-        cles = {"consommation": lambda x: P.cle_consommation(e["rd"], e["uc"], x),
-                "patrimoine": lambda x: P.cle_patrimoine(e["rd"], x),
-                "cotisations_employeur": lambda x: P.cle_salaires(x),
-                "heures_supplementaires": lambda x: P.cle_salaires({"bande_smic": (1.0, 2.5), **x, "directe": True}),
-                "jeunes_enfants": lambda x: P.cle_jeunes_enfants(x)}
+        # noqa F821 ci-dessous : P et e sont libérés plus bas (del), après le dernier appel de ces fonctions
+        cles = {"consommation": lambda x: P.cle_consommation(e["rd"], e["uc"], x),  # noqa: F821
+                "patrimoine": lambda x: P.cle_patrimoine(e["rd"], x),  # noqa: F821
+                "cotisations_employeur": lambda x: P.cle_salaires(x),  # noqa: F821
+                "heures_supplementaires": lambda x: P.cle_salaires({"bande_smic": (1.0, 2.5), **x, "directe": True}),  # noqa: F821
+                "jeunes_enfants": lambda x: P.cle_jeunes_enfants(x)}  # noqa: F821
         nom_cle = {"cotisations_employeur": "salaires", "heures_supplementaires": "salaires"}
         for mesures in om.specs().values():
             for spec in mesures.values():

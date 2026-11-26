@@ -6,7 +6,6 @@ import yaml
 from moteur import bibliotheque as bib
 from moteur import noyau
 from moteur import statu_quo as sq
-from moteur.noyau import ANNEES
 from moteur.parametres import RACINE, Parametres
 
 
