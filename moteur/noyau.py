@@ -308,6 +308,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
                     xr *= k_pl
                     dy_r *= k_pl
         y[t] = y_base[t] + flux["pib"] + dy_r
+        emplois_taux = dy_r / y[t] * sq._v(p, "macro.emplois_par_point_pib", s) * e[t]["emploi"] if retro else 0.0
         bl = dict(bl_sq[t])
         for b, x in flux["blocs"].items():
             bl[b] = bl.get(b, 0.0) + x
@@ -397,8 +398,11 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
                                    - ctx.get("facture_energie", {}).get(t, 0.0) / y[t] * 100,
             "facture_energie": ctx.get("facture_energie", {}).get(t, 0.0), "solde_primaire": rec - primaire, "solde": solde, "dette": dette,
             "participations": part, "deficit": -maastricht * 100, "dette_pib": dette / y[t] * 100,
-            "chomage": chom[t] + flux["chomage"] - (_okun(p, s, dy_r, y[t], e[t]) if retro else 0.0), "inflation": infl[t] * 100, "emploi": emploi[t] + flux["emploi"],
-            "emplois_canaux": dict(canaux.get(t, {})),
+            "chomage": chom[t] + flux["chomage"] - (_okun(p, s, dy_r, y[t], e[t]) if retro else 0.0), "inflation": infl[t] * 100,
+            # R3.2 (26/11/2026) : les emplois de la rétroaction des taux (même loi d'Okun que le chômage publié et
+            # que les dépenses de chômage ci-dessus) sont aussi dans l'emploi publié ; avant, seul le chômage les voyait
+            "emploi": emploi[t] + flux["emploi"] + emplois_taux,
+            "emplois_canaux": {**canaux.get(t, {}), **({"Taux d'intérêt (bouclage)": emplois_taux} if retro else {})},
             "retraites_pib": bl["retraites"] / y[t] * 100, "sante_pib": bl["sante"] / y[t] * 100,
             "recettes_pib": rec / y[t] * 100, "depenses_primaires_pib": primaire / y[t] * 100,
             "dynamiques": flux["detail"],
