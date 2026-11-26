@@ -60,3 +60,31 @@ def niveau(c: dict) -> dict[str, float]:
     out["total"] = c["deficit"]
     out["residu"] = c["deficit"] - (out["primaire"] + out["taux"] + out["prime_dette"] + out["autres"])
     return out
+
+
+def aux_taux_statu_quo(v: dict[int, dict], base: dict[int, dict]) -> dict[int, dict[str, float]]:
+    """Dette et déficit d'un programme aux taux du statu quo (26/11/2026, demande d'Adrien : lire la dette que crée le
+    solde primaire, sans parier sur la réaction des marchés au programme).
+
+    Même solde primaire et mêmes participations que le programme, même PIB et même inflation ; mais chaque année le
+    taux apparent nominal est celui du statu quo (`base`), sans la prime de dette, l'écart de taux ni la baisse d'écart
+    propres au programme. Les intérêts de la dette en plus restent comptés : s'endetter coûte, même à taux inchangé.
+    Comptes en euros de 2026, comme le noyau :
+
+        dette_fin = dette_debut × (1 + i_sq − π) − solde primaire − participations
+        déficit   = (i_sq × dette_debut − solde primaire) / PIB
+
+    Pour le statu quo lui-même, redonne sa dette et son déficit (test). Les autres intérêts (emprunt aux ménages,
+    nuls pour les programmes publiés) sont gardés tels quels. Rend {année: {dette, dette_pib, deficit}}."""
+    out: dict[int, dict[str, float]] = {}
+    dette = None
+    for t in sorted(v):
+        c, i_sq = v[t], base[t]["taux_apparent"]
+        debut = c["dette_debut"] if dette is None else dette
+        pi = c["inflation"] / 100
+        autres = _autres(c) / 100 * c["pib"]
+        solde = c["solde_primaire"] - (i_sq - pi) * debut - autres
+        dette = debut - solde - c["participations"]
+        out[t] = {"dette": dette, "dette_pib": dette / c["pib"] * 100,
+                  "deficit": -(solde - pi * debut) / c["pib"] * 100}
+    return out

@@ -18,7 +18,7 @@ import csv
 import yaml
 
 from moteur import annonces as annonces_mod
-from moteur import migrations, noyau
+from moteur import decomposition, migrations, noyau
 from moteur import statu_quo as sq
 from moteur.parametres import RACINE, Parametres
 
@@ -120,6 +120,9 @@ def main() -> None:
             variantes[nom] = noyau.simuler(p, var)
         pop_prog = {s: migrations.population_programme(prog, p, s) for s in res}
         for s, v in res.items():
+            # dette et déficit aux taux du statu quo (26/11/2026) : la dette que crée le solde primaire, sans la prime
+            # de dette ni l'écart de taux propres au programme (moteur/decomposition.aux_taux_statu_quo)
+            tsq = decomposition.aux_taux_statu_quo(v, base[s])
             for t, x in v.items():
                 traj.append({"programme": lib, "scenario": SCENARIOS[s], "annee": t,
                              "deficit": round(x["deficit"], 3), "dette_pib": round(x["dette_pib"], 2),
@@ -150,6 +153,10 @@ def main() -> None:
                              # qui ne dépend pas de la boule de neige des intérêts (roadmap du comparateur, 1.1)
                              "ecart_solde_primaire_pib": round((x["solde_primaire"] / x["pib"]
                                                                 - base[s][t]["solde_primaire"] / base[s][t]["pib"]) * 100, 3),
+                             "deficit_taux_sq": round(tsq[t]["deficit"], 3),
+                             "dette_pib_taux_sq": round(tsq[t]["dette_pib"], 2),
+                             # dette aux taux du statu quo, en écart à celle du statu quo (points de PIB, + = plus de dette)
+                             "ecart_dette_pib_taux_sq": round(tsq[t]["dette_pib"] - base[s][t]["dette_pib"], 2),
                              # au-delà de ce ratio de dette, la trajectoire n'a plus valeur de prévision
                              "hors_plausibilite": int(x["dette_pib"] > p.val("publication.seuil_dette_plausible"))})
                 for canal, n in x["emplois_canaux"].items():

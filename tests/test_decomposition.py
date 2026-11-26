@@ -54,3 +54,22 @@ def test_variantes(p, sq):
     cr = noyau.simuler(q, scenarios=["prudent"])["prudent"]
     assert cr[2029]["dette_debut"] == pytest.approx(sq["prudent"][2029]["dette_debut"] / (1.009 * 1.012))
     assert cr[2029]["solde_primaire"] == pytest.approx(sq["prudent"][2029]["solde_primaire"])
+
+
+def test_aux_taux_statu_quo():
+    """26/11/2026 : dette et déficit aux taux du statu quo. Pour le statu quo, ses propres comptes ; pour un programme
+    plus endetté, moins de déficit qu'au sens de Maastricht (pas de prime de dette), mais les intérêts de la dette en
+    plus restent comptés (plus de déficit que le seul primaire)."""
+    from moteur import decomposition as dc
+    from moteur import noyau
+    from moteur.parametres import Parametres
+    p = Parametres()
+    base = noyau.simuler(p, None, scenarios=("prudent",))["prudent"]
+    a = dc.aux_taux_statu_quo(base, base)
+    assert all(abs(a[t]["dette_pib"] - base[t]["dette_pib"]) < 1e-9 for t in base)
+    assert all(abs(a[t]["deficit"] - base[t]["deficit"]) < 1e-9 for t in base)
+    r = noyau.simuler(p, noyau.charger("melenchon"), scenarios=("prudent",))["prudent"]
+    b = dc.aux_taux_statu_quo(r, base)
+    assert b[2037]["deficit"] < r[2037]["deficit"]
+    assert b[2037]["dette_pib"] < r[2037]["dette_pib"]
+    assert b[2037]["deficit"] > -r[2037]["solde_primaire"] / r[2037]["pib"] * 100
