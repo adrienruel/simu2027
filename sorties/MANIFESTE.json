@@ -2,116 +2,116 @@
  "note": "Traçabilité des sorties (roadmap du comparateur, chantier 1.2, 16/11/2026).",
  "fichiers": {
   "banc_essai.csv": {
-   "sha256": "168b7bb2cae849968d0defcc6ed1ca5951830118b445dab9ab5db5553eb6ba2a",
+   "sha256": "56b193b96af570b488c10083a1eacbe8dd544648ef22782457349ce9774c699b",
    "script": "outils.banc_essai",
-   "date": "2026-11-22T23:23:21Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "c1_commun.json": {
    "sha256": "cdedc35b35913df17601b542d9ec2f947c757cb593183608b6a359338fa31bf0",
    "script": "outils.c1_inventaire",
-   "date": "2026-11-22T23:21:20Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:19:17Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "c1_melenchon.json": {
-   "sha256": "6be27083f6f00c5fbdc790a573a31f838006d9bb99d007e4fe860bff453ba320",
+   "sha256": "bbd946fa684145b3f43d677e5c7745bfca5c641a0904b0667f83cd45986c980b",
    "script": "outils.c1_inventaire",
-   "date": "2026-11-22T23:25:06Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:19:36Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "c1_tondelier.json": {
-   "sha256": "7a3b559b379ea1e1cd905fa6ee2d19968e66001beaeac842107eb8d7cf88ea74",
+   "sha256": "ff5d59eccbc33b3c0c303671e039bf4c2667d127e3f0102b7ab6ee16e8daf2e7",
    "script": "outils.c1_inventaire",
-   "date": "2026-11-22T23:26:52Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:18Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_annonces.csv": {
-   "sha256": "d7a717ae320c517cdef9ea52024b76e586ab836545e8423bdc205907a5f01642",
+   "sha256": "d3ef4d73559cfd9fb580b7bb4e2a6c699c578c014025349095b353c7fb9b9ada",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:02:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:54Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_bouclage.json": {
-   "sha256": "a0319323a106a092196d8b17250f0dfeffadd2dfd47efe8bda8d37196fa38ac4",
+   "sha256": "9fccf1daaf9865a59f044818c755d6541c76b7281fd0b615fa3a5946a67b85ab",
    "script": "outils.comparer_bouclage",
-   "date": "2026-11-22T23:23:11Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:55Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_couverture_micro.csv": {
-   "sha256": "ecbc3690e2da3460a2c7069cb1f017bde0dff583ebc4fccac583ed33e6d70a9c",
+   "sha256": "9d5b455e58f08c46e0d2827f0143e45082933b6ba80d7104cd1e1e45d45a90fb",
    "script": "outils.couverture_micro",
-   "date": "2026-11-22T23:04:50Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:04:37Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_decomposition.csv": {
-   "sha256": "5daecc8098a4568ebe11524a6776ef0666b47668893e6025ddfaa57975f5b162",
+   "sha256": "144db2f023ad4fd5e8a08ca466659176d02feffdbe65a984b0dac36cf6ff4548",
    "script": "outils.variantes_dette",
-   "date": "2026-11-22T23:03:57Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:04:19Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_demographie.csv": {
-   "sha256": "01f9c9b82e033745771fd5c71d9160dd035d451ecc20c750e8361c17b5160a62",
+   "sha256": "0f5d57b2c7716975c941bb5bccd44b59149ca46e8e1e53c6d5b1e6906a25ac55",
    "script": "outils.export_demographie",
-   "date": "2026-11-22T23:05:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:04:47Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_ecarts.csv": {
-   "sha256": "08ffabebf62b95c1f086874a11585fe9f2b0119a1920eb3302bca4361deea658",
+   "sha256": "9fef12eaa67e1e097c225978931f31312f8a6011098d2fc57b32ee1617189b24",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:02:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:54Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_ecologie.csv": {
-   "sha256": "9230ad049076f960d41391b8e021358b0183d8c74dea0953a14452c10704103a",
+   "sha256": "16c141f42128ba65c5674ccdbde34648f9a19317a257c100f6040a90d0973a12",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:02:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:54Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_ecologie_mesures.csv": {
    "sha256": "d3fc70eaf93cd88e8418275302965100840f52c7d05e5b5132c9bb70150875d0",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:02:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:54Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_economies.csv": {
    "sha256": "6b98bfb572999e41f47a749718a5b4be0fefbed0a6be0d195851df9f74e2d750",
    "script": "outils.audit_economies",
-   "date": "2026-11-22T23:04:04Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:04:19Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_emploi_canaux.csv": {
-   "sha256": "d80467503963ba2c3160e4de2c77b47354edfc231f0c2cb61fb1488b0971c0f8",
+   "sha256": "5169e57e257b6e7d1f14f4dde0099e1570497527eb0e2231b383e3ce81c77120",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:02:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:54Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_incertitude.csv": {
    "sha256": "cb5c4ef264713cd9ac2a08410fe7bf3881cdf28544be9b3780e8cac473a5a032",
@@ -130,92 +130,92 @@
    "parametres": "62d026e530b63724"
   },
   "comparaison_incidence_entreprises.csv": {
-   "sha256": "f3a8c9883a0421e96031c07df5e2150b53b1b12a4e8ea3b0e0e84caf9db4cf66",
+   "sha256": "912792ea21be2a99b1271044e2c731948f4ee02f7032b6fa98adfc58ec864c5f",
    "script": "outils.export_incidence",
-   "date": "2026-11-22T23:05:02Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:04:42Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_lectures.csv": {
-   "sha256": "883bad34891d34381b2d5cbc472bd5f6d34cbe9a23e82111b0faaf5b5995fb87",
+   "sha256": "9be4b2fa20abccbc63e1d6efba46517d35fa817982a08b7d2407ddff0d7476b9",
    "script": "outils.poids_lectures",
-   "date": "2026-11-22T23:04:38Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:04:32Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_menages_types.csv": {
-   "sha256": "8adc3e629612239064ff4cd17487a91ab3f56bf5aec9a611ea1eb8a98a2f8d99",
+   "sha256": "0ac368883717ac32b76ff06c02c22c44f7e05aa47c08e9443ffcddb9188ee365",
    "script": "outils.export_menages_types",
-   "date": "2026-11-22T23:20:58Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:18:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_menages_types_mesures.csv": {
-   "sha256": "26659e041c8bac3f4b157922193d220ee99402dee1b99037b4636aa09740879f",
+   "sha256": "ecb195541ee4309dcee59b786b34f2abc2f15781e67c6c7901f052c0b3b6f66f",
    "script": "outils.export_menages_types",
-   "date": "2026-11-22T23:20:58Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:18:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_mesures.csv": {
-   "sha256": "1ca1aef54ba378b39ece2fa34240be6f22d9197a0455000743310a6d9d15f86c",
+   "sha256": "068bee7a5058e3400300cbea3f3e1b407ea0dcae8685f31b03e0505c396a5ee2",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:02:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:54Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_pyramide.csv": {
-   "sha256": "5b84df00285e034ed33ce901eab0dd7113c76a5dd0f3d6b5c70c941b84f806e5",
+   "sha256": "3c1cb62aaef08dfad937bacbbf13a445ebc0c025d651f04d4c6fed7c4b5a9707",
    "script": "outils.export_demographie",
-   "date": "2026-11-22T23:05:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:04:47Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_redistribution.csv": {
-   "sha256": "3e66f4ba9c463b039ce88062d6df75956bf21e0dd72a61edff9b6eee1e394c7a",
+   "sha256": "ecd765720edbc6709bd879b97cad86eceaaddc8eda77592bb9cf0d80fef626c7",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:03:10Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_redistribution_deciles.csv": {
-   "sha256": "85d4d52d4e349dc88bb8f2640d35e47af5e66d6b01a2b9da35e02d7d219efade",
+   "sha256": "e3c051338a90637f4bb857ea85f59e7dd1820e4e673f4ef2607377673ea6f316",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:03:10Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_trajectoire.csv": {
-   "sha256": "e8e083c8f0ae2af9d7f12839dfd49e97aa2af2e0e9386f86e37a9260fe9c63a4",
+   "sha256": "b580d81551aa98d5933e4500c92f90131fe589e139c0318ed64549c8c4ba3182",
    "script": "outils.export_comparaison",
-   "date": "2026-11-22T23:02:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:54Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_variante_fonds.csv": {
-   "sha256": "528e7592c1b3a55a2c5563fc9f05708a0ca47bc9e29aa54ea368757a704409d0",
+   "sha256": "41932ef9c67ced582687e13110c07da1f9097036f5436849027fb883e227db49",
    "script": "outils.variante_fonds_apu",
-   "date": "2026-11-22T23:21:18Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:19:16Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparaison_variantes_dette.csv": {
-   "sha256": "7910cd7632ef19cb875ad0146f7aa8a373bacc28d87e6ba41af546ee5afce9ff",
+   "sha256": "ca0c429949ef69f30adac6efd93629bbcb78a55ea98ed59ee8ef5139ae64fcfc",
    "script": "outils.variantes_dette",
-   "date": "2026-11-22T23:03:57Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:04:19Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "comparateur.html": {
    "sha256": "ceb8e387e0c1a11eb25706eb25bf75e66ae7631eee66e730d55f2cc7218b326d",
@@ -266,652 +266,652 @@
    "parametres": "62d026e530b63724"
   },
   "micro/arthaud_deciles.csv": {
-   "sha256": "f292566babf25c18c943b85a22512bd4dfa21a61cee454bf7c33a44743beb448",
+   "sha256": "3b419581bd55424b2d77c91727462ff56284027df4a723373bbae4a0fef63a8d",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:41:57Z",
-   "commit": "2c9c229",
-   "code_non_commite": false,
-   "parametres": "62d026e530b63724"
+   "date": "2026-11-26T19:14:35Z",
+   "commit": "ac451a2",
+   "code_non_commite": true,
+   "parametres": "63d579e037ed1e28"
   },
   "micro/arthaud_emploi.csv": {
-   "sha256": "eefd0344861f67a56723c173c9f6ecd258063a1b064c71ba1634be7a6781c549",
+   "sha256": "7c82987ce3fc456e43e4ed368fac5b850856cb33cf8237c6507d56c2f3b1ac72",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:41:57Z",
-   "commit": "2c9c229",
-   "code_non_commite": false,
-   "parametres": "62d026e530b63724"
+   "date": "2026-11-26T19:14:35Z",
+   "commit": "ac451a2",
+   "code_non_commite": true,
+   "parametres": "63d579e037ed1e28"
   },
   "micro/arthaud_mesures.csv": {
-   "sha256": "bd1c923db1056ac6535d3aa587e7498673d4b1b5047374f24e742cdb47456cfb",
+   "sha256": "9a763d5cd18110bd29e517e39b576f39786f802fd58e2b45a7e9074038ac518b",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:41:57Z",
-   "commit": "2c9c229",
-   "code_non_commite": false,
-   "parametres": "62d026e530b63724"
+   "date": "2026-11-26T19:14:35Z",
+   "commit": "ac451a2",
+   "code_non_commite": true,
+   "parametres": "63d579e037ed1e28"
   },
   "micro/arthaud_vieillissement.csv": {
-   "sha256": "ddc3f2453be86e9a247717ad27cca7460f86cd89fa746723c6b5834732ec88e2",
+   "sha256": "f1d91fa3dbd9413ce5727b5ae109c9b2b1bc57f3ed95706e8c43af36a3a59b45",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:39:50Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:32:33Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/arthaud_vieillissement_deciles.csv": {
-   "sha256": "ede19650dc2424b171726f8f2c0b4060052644cb27a7d5daba353cd43a6fbd13",
+   "sha256": "2814f30763c01bd212912ec4acaf19ac43d93728ebedf860431e842c9069fe69",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:39:50Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:32:33Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/attal_deciles.csv": {
-   "sha256": "1e1c3aa21df7e2fe12b9d6724f415be5e4bf9558fbcfcf1409cef42d5695242d",
+   "sha256": "f88362632e5fb6c2002e5cfb9939699ab7a7c704d1c3a083380780785e01bc91",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:48:23Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:49:45Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/attal_emploi.csv": {
-   "sha256": "047836fbe977c4b63e7ee99004cf14f339b2d743556f6660ff945ef1e22cc321",
+   "sha256": "94218b602bfceef06a65e159526a67786a8842c2dfc2393fe9d718808f4bc34f",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:48:23Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:49:45Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/attal_mesures.csv": {
-   "sha256": "8fa3bf2d8396a64e2e429db2686766bc8c1d4583ee951266f231dd8596c37b1e",
+   "sha256": "10c55a5f40fd6cb1d4550bef1d5b6787e4478bed04052a9e330e3b6613275a40",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:48:23Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:49:45Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/attal_vieillissement.csv": {
-   "sha256": "570624d40a615a2e6c4918ed72705e78147fea318917c8c5254652462812684d",
+   "sha256": "233f5e26ea504040386b7522ec9c8e9ca98558be298e6eacd11140b771f081c4",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:44:09Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:47:17Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/attal_vieillissement_deciles.csv": {
-   "sha256": "d4d33a1bce88c8837d26e6ea2a8b57f0658f0b99534dad7fd0989fb4935ddc37",
+   "sha256": "caec129d1720955a448e7787b5089a6d937c39b49888ec3b0dbe60e5767c8e3f",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:44:09Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:47:17Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/bertrand_deciles.csv": {
-   "sha256": "72161aa0490ce702a764e760804a9006028af38254b8f0aaa8a5ca7799f48535",
+   "sha256": "5804dbb993c3453aca63dce616acdc2d7d95898e1fafd45c3c46110b258bae13",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:59:03Z",
-   "commit": "2c9c229",
-   "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "date": "2026-11-26T16:03:46Z",
+   "commit": "1341acc",
+   "code_non_commite": false,
+   "parametres": "63d579e037ed1e28"
   },
   "micro/bertrand_emploi.csv": {
-   "sha256": "e0a071fd66d235263d49b488dd19d62a8a3af01e40c7cac3d058eef82c17752b",
+   "sha256": "4e0d7976fc119c41cae2ea20236446bfc6b19745f4a840f9a9484a5c5819b38f",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:59:03Z",
-   "commit": "2c9c229",
-   "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "date": "2026-11-26T16:03:46Z",
+   "commit": "1341acc",
+   "code_non_commite": false,
+   "parametres": "63d579e037ed1e28"
   },
   "micro/bertrand_mesures.csv": {
-   "sha256": "afe90af682ca8c83d06f7dce91811d4271ef566a9bc6089c93364be6b1b7aef9",
+   "sha256": "da4bf21b744785e41e8cccc62727c4901266bd488835d155ca898a36ece5ca81",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T17:59:03Z",
-   "commit": "2c9c229",
-   "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "date": "2026-11-26T16:03:46Z",
+   "commit": "1341acc",
+   "code_non_commite": false,
+   "parametres": "63d579e037ed1e28"
   },
   "micro/bertrand_vieillissement.csv": {
-   "sha256": "25c25182c41f2deefed4225706c55248cf7570b955c6eb5115b9004cf0805da2",
+   "sha256": "ac6c4795f8366800be682bf91d397566d3dbf80dbd13c97fc5e7229a835d3bee",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:54:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:00:17Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/bertrand_vieillissement_deciles.csv": {
-   "sha256": "4b4fd0ed052efef31abbc528408aefabed3c65845d65c9ba25ec7e1a75adc535",
+   "sha256": "721a0598a7bc97c3b7559e2f501e59719fb51b404f16630bb145a002eb959505",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:54:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:00:17Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/bertrand_vieillissement_recettes.csv": {
-   "sha256": "d0820a4f3635a2363a42a171d9da3e6fd39658f0cfa9d8ab1dc0ac5f2757495f",
+   "sha256": "9478aed366b82c6aaaf5a0b980eadd2e4f9240be5d05893b093d941ed187244a",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:54:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:00:17Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/glucksmann_deciles.csv": {
-   "sha256": "fd032a02414baef58e27035fe159d8d2c95018228ca584d2c50c2d617d501048",
+   "sha256": "68afcbed70b20548754ef1de15db67adbb028c7ef2e44b5e3a9545758ee505c0",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:16:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:45:02Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/glucksmann_emploi.csv": {
-   "sha256": "a1a547a83665db29ecb1b313b26d51d57bc8b47da4d911f0af1aee965aace061",
+   "sha256": "f85edf39c67a04a9d9c40e8ae50e871f9056887e7f52e90f51d8012468f44f90",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:16:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:45:02Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/glucksmann_mesures.csv": {
-   "sha256": "b15a7692dcdc5b59a177a97b32b95d7f8fdd053931ca4c9c56182ae1c02d0daa",
+   "sha256": "884f14ee072f58f4ec7bed4e47d036941f2754245085ef14990dd8e1c71dea21",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:16:54Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:45:02Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/glucksmann_vieillissement.csv": {
-   "sha256": "59ba5345798de33ce28dac0ad8ca997b2ea0348c42af3acfef2cf6b0964c9268",
+   "sha256": "9b0e1c1468eb754117c29559b6b1b1ea0431a241f91cac770bf52a193dba6cd8",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:58:52Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:43:37Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/glucksmann_vieillissement_deciles.csv": {
-   "sha256": "ab48635dc02d030e065c7f37856a374077d1d1e67d11b75af712d2ea278e8666",
+   "sha256": "76b4c0014f3cde7ecff3f3f67f97066d797374b0b46c9cb895f91d0cdf173199",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:58:52Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:43:37Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/le_pen_deciles.csv": {
-   "sha256": "899285b6c915ff11ba99b652bbaf18a54487b92e467b710b48ef9e5a9092f73a",
+   "sha256": "45bd529e8e4622c0ffa5412dbfada635e6e9d834a3c80f66ca321e1dbed1fef8",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:33:43Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T18:56:06Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/le_pen_emploi.csv": {
-   "sha256": "4b4dbd60939281a240abc696b51237f49c5c17ff2bdfb7355bcd925948e3e3b4",
+   "sha256": "006041e6cd9ff60036b265ce40c188f8624685b5591eb2b936a38a0edc5626f1",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:33:43Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T18:56:06Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/le_pen_mesures.csv": {
-   "sha256": "290a128c1f3dddaf141aff26c801b71fb052549f51d490f8dff8775a29beb9d0",
+   "sha256": "e0cd570bf9cec021356ba22347f190511d367941f2642d45c3c89e8c1431b242",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:33:43Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T18:56:06Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/le_pen_vieillissement.csv": {
-   "sha256": "81bee39d5c604db7d13ed0341f608c670e2c92e926874069917c65747d0323ca",
+   "sha256": "ed1b1cb51683528c02f8d28a6d1273acfce340acc2bb1238855d1c942403c4f7",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:06:36Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:22:34Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/le_pen_vieillissement_deciles.csv": {
-   "sha256": "d3aeef00e2263ab92416861283ba0aac023eb4e3a390d41b8c7a647ae1042623",
+   "sha256": "69d32f92dbb9f4417234d23016591ce80eb665bee3fc021dcdd0914752eccdd8",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:06:36Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:22:34Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/le_pen_vieillissement_recettes.csv": {
-   "sha256": "590332e9833219859b3579a4284d2bd7f71a18e2759284907121e07820b3a237",
+   "sha256": "102645c74e082d1ab585706d41d8a05a0f761128d8b794cfa555cc638ffacc6b",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:06:36Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:22:34Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/lisnard_deciles.csv": {
-   "sha256": "21e295c6c4c332768f21fb6181de775821a86e01c3bc3844cf721705242f5aaf",
+   "sha256": "84b183f28835432db96bf934925e5dbe1e87b9473106cf6d6cdcf40d27266a4f",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:49:45Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:42:58Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/lisnard_emploi.csv": {
-   "sha256": "cb264678303ea7927ccaa3cd6cf618864306a57d8d133bf692010eb9ae442a6e",
+   "sha256": "561dc082a8ac2df01cefb8036ae7e0cec7954e467413f3696129e1d3d8075432",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:49:45Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:42:58Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/lisnard_mesures.csv": {
-   "sha256": "86b12e4755926bc7b1dc38e1c39f356488d65893e20f5fb8ec2ecba8605759ac",
+   "sha256": "39786cb22b484604d72b92edbcef3116ccaafd821ccc08e11203a1eccb252657",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T18:49:45Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:42:58Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/lisnard_vieillissement.csv": {
-   "sha256": "3d3a3e53c7aec1a1865708129715d9f181211495293a0287a80ed6dc3376a5db",
+   "sha256": "ead23143919cc6a666bc17392854c626664f458fcb768508acacb1a027449ea7",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:14:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:06:20Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/lisnard_vieillissement_deciles.csv": {
-   "sha256": "460421805fcddd71e40f72d8ad5117a3fa9ab03b4b3e53cfcfd439831fd5bf07",
+   "sha256": "4884bd55e1c2decb2ee8de0ae696f17b16ad6cdf8c8b4cb639e7dbbd92c7220d",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:14:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:06:20Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/lisnard_vieillissement_recettes.csv": {
-   "sha256": "dce5e457ff26c021ffdac4598e6daf2b2d0246c6b7d7c9750aba65eeadb00c83",
+   "sha256": "c28efbd3ea92d0200da847c928ffae58c0b43f3aec9e5c41611d26523ac31904",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:14:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:06:20Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/melenchon_deciles.csv": {
-   "sha256": "511ecf3184e4db6a10c8f207e844954d98417bdff6cbda11603e6bbca46bf1f2",
+   "sha256": "458fb9a0386dd190daf0caadafd35a06c1f63f2bc67b57e81f7d870a5d73e538",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T19:55:12Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T18:42:51Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/melenchon_emploi.csv": {
-   "sha256": "a4ae04241ee93b60d0b9fc009860f8e2c89c397dbd0c194a5ecaae3c1ed31633",
+   "sha256": "cdf45cad3a244475a67670ad5512ca2adbb402a06a29d28a905dd81756e6b26c",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T19:55:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T18:42:54Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/melenchon_mesures.csv": {
-   "sha256": "c9091c8f075cd4e24cc02ee1e371b9559cd5828124b7ea58369de02899e1d535",
+   "sha256": "5cca63d291cfa30d26cd418f3380e040742fe387ebc011df1a07bc9a997cdcbc",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T19:55:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T18:42:54Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/melenchon_vieillissement.csv": {
-   "sha256": "9c482876b84787b572c2e0672fde60bbda9ac3ad003df1463efb13e976a424c5",
+   "sha256": "0503ebc7a074ce1eee17524f40cdd5b96177d0c37b69e3a49af169ea8ea3a88e",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:19:16Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:16:12Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/melenchon_vieillissement_deciles.csv": {
-   "sha256": "6738a5eabdd241fdf7e395196777dff97dccb6b631c5212e7b1b72d11f9fa111",
+   "sha256": "c5a5289796ae0efa48acd4cb21151526e8edb14e4a0749e0bd861e2798593fe5",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:19:16Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:16:12Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/philippe_deciles.csv": {
-   "sha256": "80729f92afe74538a8ffb0c00e0b146a931e1a6c8e7d952d466b8faf85e4cab2",
+   "sha256": "07c65fc61bb9ba3ea7bc2555e3e929b72e494895ffa57b7dbfacc4bcde6afaaf",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:09:19Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:07:49Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/philippe_emploi.csv": {
-   "sha256": "9797a34ce982e7654679f80cea4328ee8a5010e1bdd7369ddcd90c2d7bb51ae2",
+   "sha256": "16a906d05c0d3188e42b0d6cd0c71512f04ef70f22258fdcbb46a7121c3bd937",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:09:19Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:07:49Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/philippe_mesures.csv": {
-   "sha256": "b581ef08773655315bf6cec2099a83fd64091adbb13e4c5a10e681980e961fa2",
+   "sha256": "86bbb0e814ee3b49f7a931e5fecca48e437e8e69bca22fe310d2f0e58a8b5b2f",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:09:19Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:07:49Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/philippe_vieillissement.csv": {
-   "sha256": "44e90ed9d714242740c61da48956f92f9eeaddf762c672759a5deea626079ccc",
+   "sha256": "32b5db0a62cb61da35cecf57b0d8837dac3b7fe1c46cbb97f56fe87489e1274f",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:27:24Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:28:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/philippe_vieillissement_deciles.csv": {
-   "sha256": "5a06791d46b9c6c7551f4590db7ca06d18f6253d12a6ca54142a8771b858fce4",
+   "sha256": "cbfd430b735cc685433e39a0db52a089bdd891ddb7e9035fb475fe3faaa187b9",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:27:24Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:28:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/philippe_vieillissement_recettes.csv": {
-   "sha256": "196060bf18b8732b99771977fb36683448a9fe2704bc350be42f5ba786d1608c",
+   "sha256": "7ede89a02e8c85c272a9a7a2dcbfef4fd43eaba55a1c4d9ad5a00e7233c7febf",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:27:24Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:28:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/retailleau_deciles.csv": {
-   "sha256": "3d6d0fd73898dd9af6e2c2aeed7423136a0c46609399d42983053a078c45e7bf",
+   "sha256": "dcc5c2cdd955641dc1ee71d971804997a675cecf2229c59767cba5720e23acc8",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:23:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:25:19Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/retailleau_emploi.csv": {
-   "sha256": "78e597f8a2ef09ee24b70f3cc0ecfc41419eecf2cc40c7cf6f0a51290d0ffe28",
+   "sha256": "d34ef80a5024cc38ae86a31670f852a614ff8611889bccba7aaeef4ce5d47d53",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:23:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:25:19Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/retailleau_mesures.csv": {
-   "sha256": "203700b8c921b5cc056d7de23718ca25fc4b33a134a8f365f31673d9b297184a",
+   "sha256": "97d161d332ae5a383f98b54205e94adebb9caeb5220ed734cc969b7f154cc8e8",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:23:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:25:19Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/retailleau_vieillissement.csv": {
-   "sha256": "2c79111439023b7aeb4428c5123bce62f14a9dfe803c87fd4d8d64b8f4586ba3",
+   "sha256": "a25dd81460904dab48b1aa853561d75073b8238793a647d5cf6b93d91df8afd7",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:31:46Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:36:19Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/retailleau_vieillissement_deciles.csv": {
-   "sha256": "6d99538d99ad74d2a8d493d2abba6d84be4158b49f92e583e24e0ffd2a395af7",
+   "sha256": "eee38d6942118ef721de0568cbfba9311c8b9cc1b34f15a40f9a5c62d82d1e48",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:31:46Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:36:19Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/roussel_deciles.csv": {
-   "sha256": "0281009fd6485d6c20c892c715c920c48638ca9b80512d2a11ba036910879b9c",
+   "sha256": "5920b96afa40cc84436fc9714848cafa2a2ed5afc47081fb2abb535230b74348",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:42:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:58:01Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/roussel_emploi.csv": {
-   "sha256": "61accecc0313d908212408c3a81e91374b6fad133c7c41b9efc3dce9e61ef301",
+   "sha256": "af4dd4a0f7c2c0f736169dd5fe1bc3224397a0f400eca6986b76f5c92626a42f",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:42:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:58:01Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/roussel_mesures.csv": {
-   "sha256": "d29d29e3cb181052795d4b2f8adea5524a4e69e9c522cc2b6a5437afbb9888d3",
+   "sha256": "bda766a5bb7eb4eee8fc434943158d37a20a52a217ea1e1b9b501911e73c753f",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T20:42:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:58:01Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/roussel_vieillissement.csv": {
-   "sha256": "904bc80664d37cebaa1ee3d4228574c141c3c58e3b1f21341b96d3b62d1a38ad",
+   "sha256": "74e866f445184753236bb01e778528b7f899791ae133bacb7432bfedfebccbb0",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:39:06Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:12:18Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/roussel_vieillissement_deciles.csv": {
-   "sha256": "d18dcfbaff83f8616180f0e88ffebd99f636b1fcfcc0b3503eec739b5ac636d7",
+   "sha256": "2ab9c6fcad5ab7590558d1901c3538bd784298b606cf12e1d21b4c894096cd40",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:39:06Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:12:18Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/roussel_vieillissement_recettes.csv": {
-   "sha256": "b06e2dff12cfb85ffa19abd1aee80dd16fd3efea1cdd019dac33bd49281e1a62",
+   "sha256": "c8b325f011f5e82b277488e2b7f5bc99769f4e715f416bb9b0b82396ba077b8f",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:39:06Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:12:18Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/statu_quo_vieillissement.csv": {
-   "sha256": "becbcad8f18f69b735d9e4928fe13d917755422b670dae93e851531e4feb2f8a",
+   "sha256": "087262798890b942bfb0f162840b9828e4d083f0f11adaabc197d6bac4ca238a",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T21:35:32Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:51:49Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2029_vieillissement.csv": {
-   "sha256": "c685bee6aef180937c442b813280d77bd12aa228fb5e7981d51ac83f1dc822da",
+   "sha256": "e70bafc91ab138ac3cf35104383fc26c826f7c02de90203fc0c7d03edd946ff3",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:48:21Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:51:32Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2029_vieillissement_deciles.csv": {
-   "sha256": "05dab0164290369cc2a5a73c5d4d7819ce5bae0f82b8b94b1c9e6b0cf5ef5d03",
+   "sha256": "3800ab2db74bb21a5b379459cb944375f3808167072516b0967c5050242acbac",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:48:21Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:51:32Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2029_vieillissement_recettes.csv": {
-   "sha256": "381bc5038b2535c0390e1175753e5ac1127d17e95cce0698923b374ca89193d4",
+   "sha256": "40b8b42adbdb6a372a01467dc741c64354ade10eecf5768c9d0b4b8fb1329aaf",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:48:21Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:51:32Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2032_vieillissement.csv": {
-   "sha256": "cec2f5242fc6f2f4657bbceeadaf49a19b8179040bc539140b871e553db3f9b4",
+   "sha256": "5da276709eb1092c377eb015918697cf9cea12d14e27d8a8d2d2358983c42080",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:53:04Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:55:36Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2032_vieillissement_deciles.csv": {
-   "sha256": "bb098bb165993555503474434cf7e1e3c57e75d224e426ec0ce8fe05cca47407",
+   "sha256": "623502bfdd3d8b54e59d3a4f920a8c7d1e2e1eac6e316c3f6bec91bf5cf14285",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:53:04Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:55:36Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2032_vieillissement_recettes.csv": {
-   "sha256": "cdb9d5a826687b57d43bfede61640e776bc5143bfcf696acbe6b58561fb54113",
+   "sha256": "3cc54ae1fa17fe5009c5b9130ca1b7650cc1a318590bb28db91e0bfac33dd9f9",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:53:04Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:55:36Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2037_vieillissement.csv": {
-   "sha256": "a4d66c947021359b4f9ad3ebcf5c0e07ace60c6d7902d6e9f58dfd0888e8981b",
+   "sha256": "b442f445b748ab3597f8b20ae3e7721f4a2c19fda9955dd8ad684a6847ca1a98",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:57:49Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:59:28Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2037_vieillissement_deciles.csv": {
-   "sha256": "5697c25a996533591f9868b292e683955b4b86bf8ceb6f6abe5edcf0af28cd0f",
+   "sha256": "fbeb54dd004f35c8d905211265ae1ffb07f2e74813dcc581bdf046995c84be51",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:57:49Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:59:28Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2037_vieillissement_recettes.csv": {
-   "sha256": "6fccd59924d380ce92e0e9d1caddb1b529ac4d1abc7e5b1be4c17e2fce17ed28",
+   "sha256": "59d81949c8738de6b0e8db20c477a4c36f73f1ab0660f16f71a1cb96fdd9b43b",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:57:49Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:59:28Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2050_vieillissement.csv": {
-   "sha256": "6c1d8fd3917c9c48b4e03f18a341ed61faad08dd2a9449ac0b62c8a1eb7ef038",
+   "sha256": "b3f9b7cb4b255804ff4a20fdd78e4ecb086b1065413aa2e1221d8b6e6e804154",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T23:02:29Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:40Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2050_vieillissement_deciles.csv": {
-   "sha256": "dbbaec324ca8231b77ee01fa1b3617ec1ae36c62724fbe03bf374198cf902655",
+   "sha256": "7a3814e56dbe1a2a0eeb699846cbfd1f6f88843d523eaca22df220493b45a809",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T23:02:29Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:40Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_2050_vieillissement_recettes.csv": {
-   "sha256": "69e03c1358456eba1fc70940dbed2a4dd25bd03a54e2b695a614456437e3f2ba",
+   "sha256": "0ac8e2325f3ec25098f784e21a814d5a6b2e665496bbff4d6ebd17460ad8a053",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T23:02:29Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:40Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_deciles.csv": {
-   "sha256": "de5362f00dd04feb4dd9d9ebfb7613e3aa30edaf10acc230dbc4b55cde354257",
+   "sha256": "748cbb039d8dab331ea833337567881c11f5aa385ad9f2ad444a0e8fdf778e4f",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T21:24:14Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:29:39Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_emploi.csv": {
-   "sha256": "60629c245b1ffcf312ff954ceb03f3d0bd94e0972cfff3d5527deffcd8885c1c",
+   "sha256": "5121be6cfa310b1b512fc23410f0b559630615ada5a1365bf497c73e7783589c",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T21:24:17Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:29:42Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/tondelier_mesures.csv": {
-   "sha256": "5315a29730f28d95348325aee98d80db6d6df4cef5c3120e64fe697465b517e3",
+   "sha256": "57febcbb425a41a2bde69c02500ab4af9d95d94d194b6014b25d7c54ed282a2c",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T21:24:17Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T17:29:42Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/zemmour_deciles.csv": {
-   "sha256": "2ee349a308d0ce1df3a8a1e9ff2f4548a9b7c1b6030e3074955ac0c11dd27e47",
+   "sha256": "2e9966bccdb56941e868bfcc04acadfb87390ec3c39c95f548e7781532d8e6ea",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T21:33:21Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:32:48Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/zemmour_emploi.csv": {
-   "sha256": "551e8906c0dba5f1d4cf42c3253ffc7d1dfb8aad3a7b06e97f5c34154c695846",
+   "sha256": "e1827e59ab1f56cca4a7710573c8de9e3a22ef2b719fd2bdeb59c96863b7beb1",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T21:33:21Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:32:48Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/zemmour_mesures.csv": {
-   "sha256": "6e07cb61c4b3eb0e85319607f740bc5ca334243c94ebb246a2e8db489ad7c61e",
+   "sha256": "a4fe41d29478a456ed078504b1054da2ffd9387a27ca09fab5f4ac540c35c340",
    "script": "outils.openfisca_mesures",
-   "date": "2026-11-22T21:33:21Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T19:32:47Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/zemmour_vieillissement.csv": {
-   "sha256": "4190295c14b311880a6de5fbe145beed6aa1df46b526a315938f25d0a2d08f7d",
+   "sha256": "40b01da516f5e5cf69fa83c1bf55f608d4a2d05fbd15e3d615523d7e9b08caae",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:43:27Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:40:02Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro/zemmour_vieillissement_deciles.csv": {
-   "sha256": "1870513a504aeb11c3b5c91b0603d76673de8fbbdb03f8195395476cd4b5a17f",
+   "sha256": "1807debb3e53896849b953394f47bf8eefc72cf53ae47fd675f594a277ce6be1",
    "script": "outils.vieillissement",
-   "date": "2026-11-22T22:43:27Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T20:40:02Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro_deciles.csv": {
-   "sha256": "dd1319cee94dfbe178bbcae9483062c33cb00c918e9c1de61ccbde055c711fc6",
-   "script": "inconnu",
-   "date": "2026-11-22T21:33:25Z",
-   "commit": "2c9c229",
+   "sha256": "b091a9fafb82d95a8021a71af907dbfc16fec67976c858fed0af7f1395b0661d",
+   "script": "outils.openfisca_mesures",
+   "date": "2026-11-26T19:49:45Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro_entreprises.csv": {
    "sha256": "950b8a572caa3749697dbe2973ef207134e520d2d696aab52719bca6d66bf66c",
    "script": "outils.entreprises_mesures",
-   "date": "2026-11-22T23:23:16Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:58Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro_mesures.csv": {
-   "sha256": "6b395053b6892cc882e4818b559fb3f974843a580f1002f3c823776047520137",
-   "script": "inconnu",
-   "date": "2026-11-22T21:33:25Z",
-   "commit": "2c9c229",
+   "sha256": "ae82da70cd77b7392c974e90c5e1cf27087c902728b733c817dd061fab8bf088",
+   "script": "outils.openfisca_mesures",
+   "date": "2026-11-26T19:49:45Z",
+   "commit": "ac451a2",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro_vieillissement.csv": {
-   "sha256": "1a44e8392ada46f0cdd74f7ed84fac3ba573d3d2cbd8744fba516125ad0fe89a",
+   "sha256": "1af46b10a00e8cbafe20c449818de9d884ef4301507c2742ea7aa7390c58a577",
    "script": "inconnu",
-   "date": "2026-11-22T23:02:32Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:44Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "micro_vieillissement_deciles.csv": {
-   "sha256": "abaa147df368e4b266fb4a3eb68381a5a656c7b6422a25d8eb32a8c4e08fd53d",
+   "sha256": "55b207d8f88d46ad8961b34bbcb3d13cb062d6025ea763f882010557da86c0a7",
    "script": "inconnu",
-   "date": "2026-11-22T23:02:32Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:44Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "poids_incertitude.csv": {
    "sha256": "168f6be3e0f715249292e72c9713d130cd9220490b961ad0248500c719ae13dd",
@@ -940,58 +940,58 @@
   "profils_formation.csv": {
    "sha256": "6865a5991fb276dd0d78cec7c6f01229e09f926c5f33a2a6b1fb20f1ee67892a",
    "script": "outils.profils_formation",
-   "date": "2026-11-22T23:23:25Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "profils_formation_ages.csv": {
    "sha256": "f3dde972f8145b1c30bf0929907c38bd78a96a7c32f248a4ad66400c99d74e45",
    "script": "outils.profils_formation",
-   "date": "2026-11-22T23:23:25Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "sources_poids.csv": {
-   "sha256": "1e01420128af7fc6191cd4c9c2cd46dd6492d3417526a5cd89c4b0f4125ca69b",
+   "sha256": "0fa8e52642a473aa67a85c8042697ed9c1e452af7ae0b193be436ae858d6a9de",
    "script": "outils.sources_poids",
-   "date": "2026-11-22T23:22:52Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:49Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "statu_quo.json": {
    "sha256": "ac1126f6411b5ca37cb95d9bc416557eddb6500f9fdb2734894be50c51015caa",
    "script": "moteur.statu_quo",
-   "date": "2026-11-22T23:02:33Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:03:44Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "statu_quo_depenses.csv": {
    "sha256": "3f7a53d2de97d717b5d09a22a1660b742cb18abd4ab1c64bd3864c70607786a9",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-22T23:23:17Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:58Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "statu_quo_recettes.csv": {
    "sha256": "99e3bd9ae189e4262cd0ca345b28065ca7210c7031cd0902ae8e52a469e957f0",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-22T23:23:17Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:58Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "statu_quo_trajectoire.csv": {
    "sha256": "eb17f1f641162481edbd6280c888f04840be1a1d3da640622cd8757371ee7c42",
    "script": "outils.export_statu_quo",
-   "date": "2026-11-22T23:23:17Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:58Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "statu_quo_validation.csv": {
    "sha256": "f294a65113527bb0abde4f7baa822625eb48823ceb4075721f0be00701792b4a",
@@ -1003,20 +1003,20 @@
    "note": "Antérieur au manifeste. Aucun script du dépôt n'écrit ce fichier : origine à retrouver."
   },
   "variante_fonds_apu.json": {
-   "sha256": "7b884fd96c12cb2a4ee7f7eab20f241cc8d046a68a3bac9e9b2532b096f0e7ec",
+   "sha256": "5f96bc5be273edc763ccbe65d96db564fa3d42f8b74f028d23c7b1912244d3c3",
    "script": "outils.variante_fonds_apu",
-   "date": "2026-11-22T23:21:18Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:19:16Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   },
   "variantes_frbdf.csv": {
-   "sha256": "1bce3fe0e6c4fd10e0d3554a27c79ac71846c84ad7f1b8211b327b0768750881",
+   "sha256": "60031dda4e4685213d8e93a238bf7faa12ec353eb4f2b04da2dbeb76514827d0",
    "script": "outils.variantes_frbdf",
-   "date": "2026-11-23T02:21:59Z",
-   "commit": "2c9c229",
+   "date": "2026-11-26T21:20:59Z",
+   "commit": "a1ebad4",
    "code_non_commite": true,
-   "parametres": "62d026e530b63724"
+   "parametres": "63d579e037ed1e28"
   }
  }
 }
