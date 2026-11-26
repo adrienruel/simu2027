@@ -73,7 +73,9 @@ def test_rho1_dixieme_centile_retrouve_le_prudent():
     16/11/2026, écart au statu quo en 2037 (tirage − publié, points de PIB) : statu quo −0,04 ; de −0,04 (Bertrand) à
     −0,73 (Arthaud) ; avant le tirage des miroirs, jusqu'à −1,36. Mesuré le 21/11/2026, après le taux apparent au
     rythme du refinancement : de −0,04 (Bertrand) à −0,87 (Mélenchon, dont le déficit de 30 % du PIB rend les intérêts
-    plus sensibles à la dette nouvelle) ; seuil relevé de 0,8 à 0,9 point."""
+    plus sensibles à la dette nouvelle) ; seuil relevé de 0,8 à 0,9 point. 26/11/2026 (roadmap du moteur R0.5,
+    DÉCISION d'Adrien) : Mélenchon 0,917, effet de la table des emplois recalculée sur la population recalée du 25/11
+    (micro_emploi_2026.csv : 0,857 → 0,918 à elle seule ; LFI-PRE-01 surtout) ; seuil relevé à 0,95 point."""
     from moteur import noyau
     noms = inc.programmes()
     base, propres, listes = inc._preparer(noms)
@@ -88,7 +90,7 @@ def test_rho1_dixieme_centile_retrouve_le_prudent():
         if nom in propres:
             prog.pt = inc.tirer_z(propres[nom], z, listes[nom])
         t = noyau.simuler(p, prog, scenarios=("median",), contrefactuel=False)["median"][2037]["deficit"]
-        assert abs((t - t_sq) - (pub - pub_sq)) < 0.9, nom
+        assert abs((t - t_sq) - (pub - pub_sq)) < 0.95, nom
 
 
 def test_loi_sourcee_remplace_les_colonnes_de_scenario(monkeypatch):

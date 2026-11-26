@@ -433,10 +433,10 @@ macro:
   # Déplacé du fichier d'Écologie de droite le 16/11/2026 : paramètre lu par le moteur commun pour tous les programmes.
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
   point_fixe_baisse_spread:
-    valeur: false
+    valeur: true
     unite: sans_unite
     statut: DECISION
-    note: "Roadmap du moteur 25/11/2026, R3.1 (désactivé en attendant la décision). Vrai : la baisse de l'écart de taux est recalculée jusqu'à ce qu'elle soit cohérente avec la trajectoire qu'elle produit (point fixe, 10 passes au plus) ; faux : deux passes, comme avant. Mesure du 25/11 : seul le scénario optimiste change, pour Retailleau (déficit 2073 de 4,55 à 2,60 points), Tondelier (11 années autour de 2037) et Attal (2071)."
+    note: "Roadmap du moteur 25/11/2026, R3.1 : activé le 26/11/2026 (décision d'Adrien). Vrai : la baisse de l'écart de taux est recalculée jusqu'à ce qu'elle soit cohérente avec la trajectoire qu'elle produit (point fixe, 10 passes au plus) ; faux : deux passes, comme avant. Mesure du 25/11 : seul le scénario optimiste change, pour Retailleau (déficit 2073 de 4,55 à 2,60 points), Tondelier (11 années autour de 2037) et Attal (2071)."
 
 renouvelables:
   soutien_budget_2026: {valeur: 9.06, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149"}

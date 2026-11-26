@@ -124,23 +124,24 @@ def test_groupes_ex_aequo():
 
 @pytest.mark.lent
 def test_point_fixe_baisse_ecart_taux():
-    """R3.1 (option macro.point_fixe_baisse_spread, désactivée) : activée, la baisse de l'écart de taux est celle que
-    gagne la trajectoire qu'elle produit ; seul l'optimiste de Retailleau bouge parmi les cas mesurés le 25/11."""
+    """R3.1 (option macro.point_fixe_baisse_spread, activée le 26/11/2026 par décision d'Adrien) : la baisse de l'écart
+    de taux est celle que gagne la trajectoire qu'elle produit ; désactivée, on retrouve les deux passes d'avant. Seul
+    l'optimiste de Retailleau bouge parmi les cas mesurés le 25/11."""
     import dataclasses
 
     p = Parametres()
+    assert p.val("macro.point_fixe_baisse_spread") is True
     q = p.avec()
     cle = "macro.point_fixe_baisse_spread"
-    q.remplacer(cle, dataclasses.replace(q[cle], valeur=True))
-    prog = noyau.charger("retailleau")
-    a = noyau.simuler(p, prog, scenarios=("prudent", "optimiste"))
-    b = noyau.simuler(q, noyau.charger("retailleau"), scenarios=("prudent", "optimiste"))
+    q.remplacer(cle, dataclasses.replace(q[cle], valeur=False))  # q : deux passes, comme avant le 26/11
+    a = noyau.simuler(q, noyau.charger("retailleau"), scenarios=("prudent", "optimiste"))
+    b = noyau.simuler(p, noyau.charger("retailleau"), scenarios=("prudent", "optimiste"))
     assert all(a["prudent"][t]["deficit"] == b["prudent"][t]["deficit"] for t in a["prudent"])
     assert b["optimiste"][2073]["deficit"] == pytest.approx(2.596, abs=1e-3)
     assert a["optimiste"][2073]["deficit"] == pytest.approx(4.546, abs=1e-3)
     passes = b["optimiste"][2073]["passes_ecart_taux"]
     assert 2 < passes < 10
     # cohérence : la baisse publiée est celle que la trajectoire publiée gagne
-    gagne = noyau.baisse_ecart_taux(q, "optimiste", b["optimiste"], None)
+    gagne = noyau.baisse_ecart_taux(p, "optimiste", b["optimiste"], None)
     assert all(-gagne[t] == b["optimiste"][t]["baisse_ecart_taux"] for t in b["optimiste"])
     assert "passes_ecart_taux" not in a["optimiste"][2073]

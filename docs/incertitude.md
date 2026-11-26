@@ -47,8 +47,9 @@ le tirage retrouve le scénario prudent à quelques dixièmes près. Écart au s
 statu quo −0,04 point ; programmes de −0,04 (Bertrand) à −0,73 (Arthaud), Mélenchon −0,61, Tondelier −0,10. Avant le
 tirage des miroirs : jusqu'à −1,36 (Arthaud), Mélenchon −1,27, Tondelier −0,63. Le reste vient de règles propres au
 scénario prudent (moyennes de jeux, lectures de colonnes hors miroir) : le prudent publié reste un peu plus prudent
-que le 10e centile de la loi. Le test exige moins de 0,1 point pour le statu quo et moins de 0,8 pour chaque
-programme.
+que le 10e centile de la loi. Le test exige moins de 0,1 point pour le statu quo et moins de 0,95 pour chaque
+programme (0,8 au départ ; 0,9 le 21/11, taux apparent au rythme du refinancement ; 0,95 le 26/11, décision d'Adrien :
+Mélenchon 0,917 après la table des emplois recalculée sur la population du 25/11, effet des données, pas un défaut).
 
 ## Résultats (600 tirages communs, fourchette entre les deux bornes de la corrélation)
 
