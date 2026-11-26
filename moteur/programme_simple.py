@@ -27,6 +27,8 @@ mêmes formules. Absent : zéro. Chaque valeur est sourcée et datée comme tout
 """
 from __future__ import annotations
 
+from dataclasses import dataclass, field
+
 from . import offre
 from . import statu_quo as sq
 from .noyau import ANNEES, Mesure
@@ -134,6 +136,42 @@ def contrainte_capacite(p, s: str, dpib: dict) -> dict:
     return out
 
 
+@dataclass
+class _Scenario:
+    """État d'un scénario pendant ProgrammeSimple._calcul, passé d'une étape à la suivante (R2.1, 25/11/2026)."""
+    p: Parametres
+    s: str
+    idx: dict
+    w: dict
+    liste: list = field(default_factory=list)
+    volume: set = field(default_factory=set)
+    crees: dict = field(default_factory=lambda: {t: 0.0 for t in ANNEES})
+    supprimes: dict = field(default_factory=lambda: {t: 0.0 for t in ANNEES})
+    # dépense des postes publics (Md€), pour le PIB non marchand (A3)
+    cout_postes: dict = field(default_factory=lambda: {t: 0.0 for t in TOUTES})
+    canaux_calc: dict = field(default_factory=dict)
+    canaux: dict = field(default_factory=lambda: {t: {} for t in ANNEES})
+    niveaux_canaux: dict = field(default_factory=dict)
+    sans_va: set = field(default_factory=set)
+    budget_compte: set = field(default_factory=set)
+    dep_chom: bool = False
+    niveau: object = None
+    y: dict | None = None
+    actif: bool = False
+    rep: dict | None = None
+    dpib: dict | None = None
+    part_rec: dict | None = None
+    e: dict | None = None
+    actifs: dict | None = None
+    actifs_bloc: dict | None = None
+    d_offre: dict | None = None
+    m_offre: object = None
+    details_offre: dict | None = None
+    d_seniors: dict | None = None
+    ctx: dict | None = None
+    details: dict | None = None
+
+
 class ProgrammeSimple:
     nom = ""
     libelle = ""
@@ -147,16 +185,16 @@ class ProgrammeSimple:
         """Clé du programme (« <nom>_<groupe>.<nom> »), ou à défaut la valeur commune à tous les programmes
         (« programme_commun.<groupe>_<nom> », parametres/commun/economie.yaml, phase J2 du 16/11/2026)."""
         k = f"{self.nom}_{cle}"
-        if k in self.pt._p:
+        if k in self.pt:
             return k
         commun = "programme_commun." + cle.replace(".", "_")
-        return commun if commun in self.pt._p else k
+        return commun if commun in self.pt else k
 
     def v(self, cle: str, s: str = "prudent"):
         return self.pt[self._cle(cle)].pour(s)
 
     def a(self, cle: str) -> bool:
-        return self._cle(cle) in self.pt._p
+        return self._cle(cle) in self.pt
 
     def indices(self, p: Parametres, s: str) -> dict:
         y = sq.pib(p, s)
@@ -177,7 +215,12 @@ class ProgrammeSimple:
 
     @staticmethod
     def profil(x: dict, t: int) -> float:
-        """Montant de l'année t avant indice : montée linéaire de debut à plein (de « depart » si donné), puis fin."""
+        """Montant de l'année t avant indice : montée linéaire de debut à plein, puis fin.
+
+        Deux conventions, voulues (relecture du 25/11/2026, R2.5) : sans « depart », la montée compte l'année de début
+        comme un pas (debut : m / (n + 1), plein : m, n = plein − debut) ; avec « depart », depart est le montant écrit
+        de l'année de début (8 mesures, toutes non nulles : chiffrage annoncé de la première année), puis ligne droite
+        jusqu'à m en plein."""
         debut, plein, fin = x["debut"], x["plein"], x.get("fin")
         if t < debut or (fin is not None and t > fin):
             return 0.0
@@ -201,10 +244,10 @@ class ProgrammeSimple:
         net × part publique, en dépense de l'État ; une part revient en prélèvements sur les rémunérations, comme une
         mesure « fp ». Le gain (PIB) est dans les canaux déclarés."""
         cle = f"{self.nom}_canaux.formation_superieure"
-        if cle not in self.pt._p:
+        if cle not in self.pt:
             return []
         from . import qualifications
-        x = self.pt._p[cle].valeur
+        x = self.pt[cle].valeur
         c = qualifications.cout(p, s, x, TOUTES)
         lib = x.get("libelle", f"{x['objectif']:,.0f} diplômés ({x['filiere']}) par an".replace(",", " "))
         ident = x.get("id", "")
@@ -224,7 +267,7 @@ class ProgrammeSimple:
         protégé, 0,5 s'il est cité, 1 s'il est une cible principale), moins les économies déjà nommées et chiffrées
         dans ce domaine (pas de double compte, plancher à 0). Le total ne dépasse pas l'annonce du candidat
         (<nom>_enveloppe.annonce), qui ne sert que de plafond. Montée de debut à plein."""
-        if f"{self.nom}_enveloppe.intensite" not in self.pt._p:
+        if f"{self.nom}_enveloppe.intensite" not in self.pt:
             return []
         dom = p.val("enveloppe_economies.domaines")
         inten = self.v("enveloppe.intensite")
@@ -258,7 +301,7 @@ class ProgrammeSimple:
         pts = 100 / y[2029]
         k = (min(1.0, max(0.0, annonce_pts - sum(nommees.values()) * pts) / (total * pts)) if total > 0 else 0.0)
         self.enveloppe_detail = getattr(self, "enveloppe_detail", {})
-        self.enveloppe_detail[(id(p), s)] = {"domaines": detail, "nommees": sum(nommees.values()),
+        self.enveloppe_detail[(p.jeton, s)] = {"domaines": detail, "nommees": sum(nommees.values()),
                                               "retenu": total * k, "plafond_annonce": total > 0 and k < 1.0}
 
         def mont(t):
@@ -283,7 +326,7 @@ class ProgrammeSimple:
         from .ecologie import emissions as em
         out = []
         prefixe = f"{self.nom}_ecologie."
-        for nom, par in self.pt._p.items():
+        for nom, par in self.pt.items():
             if not nom.startswith(prefixe):
                 continue
             x = par.valeur
@@ -372,8 +415,8 @@ class ProgrammeSimple:
                           {2027: 0.0, 2028: part_fp * hausse * m(2028),
                            **{t: part_fp * hausse * m(t) * ip[t] for t in ANNEES}}))
         self.cout_postes_calcules = getattr(self, "cout_postes_calcules", {})
-        prec = self.cout_postes_calcules.get((id(p), s), {})
-        self.cout_postes_calcules[(id(p), s)] = {t: prec.get(t, 0.0) + hausse * m(t) * (ip[t] if t in ip else 1.0)
+        prec = self.cout_postes_calcules.get((p.jeton, s), {})
+        self.cout_postes_calcules[(p.jeton, s)] = {t: prec.get(t, 0.0) + hausse * m(t) * (ip[t] if t in ip else 1.0)
                                                  for t in TOUTES}
         n_fp = hausse * 1e9 / self.v("emploi.cout_poste_public")
         canaux[f"*Postes publics : {prefixe} dans la fonction publique"] = {t: n_fp * m(t) for t in ANNEES}
@@ -384,8 +427,8 @@ class ProgrammeSimple:
     def ajouter_pib(self, p: Parametres, s: str, d: dict) -> None:
         """Production en plus ou en moins hors des canaux d'emploi (Md€ par année), lue dans le calcul du PIB."""
         self.pib_en_plus = getattr(self, "pib_en_plus", {})
-        prec = self.pib_en_plus.get((id(p), s), {})
-        self.pib_en_plus[(id(p), s)] = {t: prec.get(t, 0.0) + d.get(t, 0.0) for t in ANNEES}
+        prec = self.pib_en_plus.get((p.jeton, s), {})
+        self.pib_en_plus[(p.jeton, s)] = {t: prec.get(t, 0.0) + d.get(t, 0.0) for t in ANNEES}
 
     @staticmethod
     def valeur_emploi_cellule(p: Parametres, multiple_smic: float = 1.0) -> float:
@@ -402,7 +445,7 @@ class ProgrammeSimple:
         from .systeme_actuel import _interp, _table_openfisca
         T = _table_openfisca()
         brut, cout = T["brut"], T["cout_du_travail"]
-        c_smic = _interp(1823.03 * 12, brut, cout)  # SMIC brut de 2026, comme bibliotheque.smic
+        c_smic = _interp(p.val("profils.smic_brut_mensuel_2026") * 12, brut, cout)  # SMIC brut de 2026, comme bibliotheque.smic
         if multiple_smic == "moyen":
             from .recettes.impot_salaires import effectifs_prive_2026
             d = effectifs_prive_2026(p)
@@ -432,274 +475,304 @@ class ProgrammeSimple:
         """Mesures de la bibliothèque (montants) et emplois qu'elles changent ({canal: {année: emplois}}), hors
         effets budgétaires de ces emplois, ajoutés par la classe au prix d'un emploi du salaire du canal (« nom@niveau », 1,3 SMIC sinon ; sauf canal dont le nom
         commence par « * » : effet budgétaire déjà compté par la mesure). Un programme qui change l'âge de la retraite
-        range les personnes pas encore retraitées en plus dans self.non_retraites[(id(p), s)] = {"serie": {année:
+        range les personnes pas encore retraitées en plus dans self.non_retraites[(p.jeton, s)] = {"serie": {année:
         personnes}, "baisse": bool} : la classe en tire l'emploi des seniors (offre.seniors)."""
         return [], {}
 
     # ------------------------------------------------------------------ assemblage
     def _calcul(self, p: Parametres) -> dict:
-        cle = id(p)
+        """Mesures, contexte et détails de chaque scénario, en cinq étapes (R2.1, 25/11/2026 : découpage sans
+        changement de calcul ; même ordre, mêmes opérations). Chaque étape lit et complète un _Scenario."""
+        cle = p.jeton
         if cle in self._cache:
             return self._cache[cle]
         part_fp = self.part_prelevements_fp(p)
         mes_s, ctx_s, details = {}, {}, {}
-        prefixe = f"{self.nom}_mesures."
         for s in sq.SCENARIOS:
-            idx = self.indices(p, s)
-            w = sq.salaires(p, s)
-            liste: list[Mesure] = []
-            volume: set[str] = set()
-            crees = {t: 0.0 for t in ANNEES}
-            supprimes = {t: 0.0 for t in ANNEES}
-            cout_postes = {t: 0.0 for t in TOUTES}  # dépense des postes publics (Md€), pour le PIB non marchand (A3)
-            cout_poste = self.v("emploi.cout_poste_public")
-            for nom, par in self.pt._p.items():
-                if not nom.startswith(prefixe):
-                    continue
-                x = dict(par.valeur)
-                if "pfu" in x:
-                    # roadmap 4.4 (22/11/2026) : impôt sur les dividendes et les intérêts chiffré par la règle commune
-                    from moteur.capital_dirigeants import recette_pfu
-                    x["_montant"] = recette_pfu(p, s, **x["pfu"])["total"]
-                else:
-                    x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
-                serie = self.serie(x, idx)
-                # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
-                from moteur import micro as _micro
-                serie = {t: v * _micro.indice(p, self.nom, x["id"], t) for t, v in serie.items()}
-                court = nom.split(".")[1]
-                if x.get("volume"):  # allocataires en moins, pas une allocation plus basse (roadmap 5.4)
-                    volume.add(f"{x['id']} — {x['libelle']}")
-                liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
-                                    instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
-                                    enfants=x.get("enfants"), fonds=x.get("fonds", ""),
-                                    cout_place=x.get("cout_place", 0.0)))
-                if x.get("deductible_is"):
-                    # impôts de production déductibles du bénéfice : l'IS bouge en sens inverse (règle commune)
-                    rc = p.val("entreprises.retour_is_charges")
-                    part = 1.0 if x["deductible_is"] is True else float(x["deductible_is"])
-                    r_is = rc["taux_is_effectif"] * rc["part_marge"] * part
-                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
-                                        {t: -r_is * v for t, v in serie.items()}, note=court))
-                if x.get("taux_is"):
-                    # roadmap 4.3 (22/11/2026) : taux de l'IS changé ; les bénéfices des groupes multinationaux se
-                    # déplacent (semi-élasticité de la base au taux, Beer, de Mooij et Liu, 2018), règle commune.
-                    # Base des groupes = part_grandes_entreprises × base ; recette perdue ou regagnée = taux × base
-                    # déplacée = − semi × taux × part × montant statique. Une baisse prend le scénario miroir.
-                    sc = MIROIR[s] if x["_montant"] < 0 else s
-                    r_tr = (p.val("macro.semi_elasticite_transfert", sc) * p.val("macro.taux_reference_is", s)
-                            * p.val("macro.part_grandes_entreprises", s))
-                    liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : bénéfices déplacés par les groupes", "recettes",
-                                        {t: -r_tr * v for t, v in serie.items()}, note=court))
-                    # roadmap 4.4 : entrepreneurs individuels qui passent à l'IS (ou en sortent), règle commune
-                    from moteur.capital_dirigeants import facteur_ei_vers_is
-                    k_ei = facteur_ei_vers_is(p, s, x["_montant"])
-                    liste.append(Mesure(f"{x['id']} — entrepreneurs individuels qui changent de forme (IR ou IS)", "recettes",
-                                        {t: k_ei * v for t, v in serie.items()}, note=court))
-                if x.get("fp"):
-                    # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS
-                    # pensions ni impôt sur le revenu, ≈ 0,39 ; relecture neutre du 11/11/2026)
-                    taux = x.get("fp_taux", part_fp)
-                    liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
-                                        {t: taux * v for t, v in serie.items()}, note=court))
-                if x.get("postes"):
-                    for t, v in serie.items():
-                        cout_postes[t] = cout_postes.get(t, 0.0) + v
-                    cible = crees if x["_montant"] >= 0 else supprimes
-                    for t in ANNEES:
-                        cible[t] += serie[t] * 1e9 / (x.get("cout_poste", cout_poste) * w[t] / w[2029])
-            calc, canaux_calc = self.mesures_calculees(p, s, idx)
-            for t, v in getattr(self, "cout_postes_calcules", {}).get((id(p), s), {}).items():
-                cout_postes[t] = cout_postes.get(t, 0.0) + v
-            liste.extend(calc)
-            liste.extend(self.mesures_formation(p, s, part_fp))
-            liste.extend(self.mesures_ecologie(p, s))
-            liste.extend(self.enveloppe_economies(p, s, idx, liste))
-            if getattr(self, "variante_annonces", False):
-                # variante « annonce tenue » (moteur/annonces.py) : jamais dans le chiffrage publié
-                from . import annonces as ann
-                env = f"{self.nom}_enveloppe.intensite" in self.pt._p
-                liste.extend(ann.mesures_tenues(
-                    self.nom, p, s, liste, getattr(self, "enveloppe_detail", {}).get((id(p), s)),
-                    self.v("enveloppe.intensite") if env else None,
-                    int(self.v("enveloppe.debut")) if env else 2028, int(self.v("enveloppe.plein")) if env else 2032))
-            # emplois : postes publics, éviction, canaux des mesures calculées
-            # éviction : prise au scénario du même côté de la prudence, pour chaque sens. Créer des postes publics :
-            # l'éviction forte est prudente ; en supprimer : c'est la reprise faible par le privé qui l'est (scénario miroir)
-            miroir = MIROIR
-            ev_c = sq._v(p, "emploi_public.eviction_privee", s)
-            ev_s = sq._v(p, "emploi_public.eviction_privee", miroir[s])
-            # phase L (4.1) : l'allocation évitée passe des recettes (valeur d'un emploi) aux blocs chômage et pauvreté,
-            # sur les chômeurs du programme (noyau, contexte « chomeurs_depenses »)
-            dep_chom = p.val("emploi.depenses_chomage_programme")
-            alloc = 0.0 if dep_chom else p.val("emploi.allocation_chomeur_evitee")
-            # roadmap 2.2 (21/11/2026) : valeur d'un emploi selon son salaire (cellule OpenFisca du niveau déclaré par
-            # le canal, « nom@niveau » ; par défaut emploi.cout_emploi_cree_smic) ; 21/11/2026 : prélèvements et TVA au
-            # barème du programme (moteur/emploi_valeur.py), l'allocation évitée suit la générosité du programme ; plus
-            # les impôts sur la part non salariale de la valeur ajoutée (les canaux « * » et « ** » comptent leur
-            # budget eux-mêmes et ne passent pas ici)
-            from . import emploi_valeur
-            niveau = p.val("emploi.cout_emploi_cree_smic")
-            _v_emp: dict = {}
-
-            def v_emp_de(niv):
-                if niv not in _v_emp:
-                    valeur = self.valeur_emploi_cellule(p, niv)
-                    if dep_chom:
-                        valeur -= p.val("emploi.allocation_chomeur_evitee")
-                    f_emp = emploi_valeur.facteur(p, s, liste, niv)
-                    exc = emploi_valeur.excedent(p, s, liste, niv, emploi_valeur.valeur_ajoutee(p, s, niv))
-                    _v_emp[niv] = {t: (valeur - alloc) * f_emp[t] + alloc + exc[t] for t in ANNEES}
-                return _v_emp[niv]
-            v_emp = v_emp_de(niveau)
-            niveaux_canaux: dict[str, object] = {}
-            canaux = {t: {} for t in ANNEES}
-            postes = {t: crees[t] + supprimes[t] for t in ANNEES}
-            evince = {t: -(ev_c * crees[t] + ev_s * supprimes[t]) for t in ANNEES}
-            if any(postes.values()):
-                for t in ANNEES:
-                    canaux[t]["Postes publics créés ou supprimés"] = postes[t]
-                    canaux[t]["Éviction d'emplois privés par les postes publics"] = evince[t]
-                liste.append(Mesure("Emploi : emplois privés évincés (ou libérés) par les postes publics", "recettes",
-                                    {t: evince[t] * v_emp[t] * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
-            # « * » : effet budgétaire déjà compté par la mesure ; « ** » : production aussi déjà comptée (pas de
-            # valeur ajoutée en plus dans le PIB, ex. embauches de partage du travail)
-            sans_va = set()
-            budget_compte = {emploi_valeur.niveau_canal(c, niveau)[0].lstrip("*") for c in canaux_calc if c.startswith("*")}
-            for canal_decl, serie in canaux_calc.items():
-                canal, niv = emploi_valeur.niveau_canal(canal_decl, niveau)
-                niveaux_canaux[canal.lstrip("*")] = niv
-                for t in ANNEES:
-                    canaux[t][canal.lstrip("*")] = serie.get(t, 0.0)
-                if canal.startswith("**"):
-                    sans_va.add(canal.lstrip("*"))
-                if not canal.startswith("*"):
-                    vn = v_emp_de(niv)
-                    liste.append(Mesure(f"Emploi : {canal}", "recettes",
-                                        {t: serie.get(t, 0.0) * vn[t] * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
-            # effet macroéconomique : impulsion budgétaire nette, chaque mesure pondérée selon ce qu'elle est (demande
-            # par instrument, moteur/offre.poids_demande : 1 pour la dépense publique)
-            cout_net = offre.impulsion(p, liste, TOUTES)
-            y = sq.pib(p, s)
-            rec_sq = sq.recettes(p, s)
-            actif = self.v("macro.multiplicateur_actif")
-            from . import bouclage
-            rep = bouclage.reponse(p, s, cout_net, TOUTES, liste) if actif and bouclage.actif(p) else None
-            dpib = (rep["dpib"] if rep else multiplicateur(p, s, cout_net, TOUTES)) if actif else {t: 0.0 for t in TOUTES}
-            part_rec = {t: rec_sq[t] / y[t] for t in ANNEES}
-            part_rec.update({t: part_rec[2029] for t in ANNEES_AVANT})
-            if actif:
-                liste.append(Mesure("Effet macro : multiplicateur sur l'impulsion budgétaire des mesures", "recettes",
-                                    {t: dpib[t] * part_rec[t] for t in TOUTES}, nature="effet_macro"))
-            e = sq.effectifs(p, s)
-            k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
-            # phase E6 : emploi de conjoncture bouclé (profils de Mésange, retour au chômage d'équilibre) ; sinon Okun
-            conj = ({t: rep["emplois"][t] for t in ANNEES} if rep else
-                    {t: dpib[t] / y[t] * k_emp * e[t]["emploi"] for t in ANNEES})
-            for t in ANNEES:
-                canaux[t]["Conjoncture (impulsion budgétaire)"] = conj[t]
-            # canal d'offre commun (moteur/offre.py) : effet durable des impôts et des transferts
-            actifs = {t: 0.0 for t in ANNEES}
-            d_offre = {t: 0.0 for t in TOUTES}
-            m_offre = None
-            if offre.actif(p):
-                of = offre.effets(p, s, liste)
-                m_offre = of["mesure"]
-                liste.append(m_offre)
-                d_offre = of["dpib"]
-                actifs = of["actifs"]
-                for canal, serie in of["emplois"].items():
-                    for t in ANNEES:
-                        canaux[t][canal] = serie[t]
-                details_offre = of["detail"]
-            else:
-                details_offre = {}
-            actifs_bloc = {t: actifs[t] for t in ANNEES}  # actifs de l'offre (sans les seniors, comptés par leur mesure)
-            # emploi des seniors quand l'âge de la retraite change (offre.seniors) : emplois, chômeurs, inactifs
-            d_seniors = {t: 0.0 for t in ANNEES}
-            nr = getattr(self, "non_retraites", {}).get((id(p), s))
-            if nr is not None:
-                sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"],
-                                    facteur_prelevements=emploi_valeur.facteur(p, s, liste, "moyen"),
-                                    excedent=emploi_valeur.excedent(p, s, liste, "moyen", p.val("seniors.valeur_ajoutee_emploi")))
-                liste.extend(sen["mesures"])
-                d_seniors = sen["pib"]
-                for t in ANNEES:
-                    canaux[t]["Seniors : emploi (âge de la retraite)"] = sen["emplois"][t]
-                    actifs[t] += sen["actifs"][t]
-            # personnes retirées de la population active par une mesure calculée (ex. service civique obligatoire) :
-            # leurs emplois perdus ne font pas de chômeurs
-            for t, v in getattr(self, "actifs_en_plus", {}).get((id(p), s), {}).items():
-                actifs[t] += v
-                actifs_bloc[t] += v
-            # PIB : multiplicateur, offre, et valeur ajoutée des emplois en plus ou en moins hors conjoncture et offre
-            # (les postes publics : par leur dépense et le multiplicateur, puis à leur coût, production_non_marchande)
-            # valeur ajoutée de chaque emploi selon le salaire déclaré par son canal (roadmap 2.2)
-            va = emploi_valeur.valeur_ajoutee(p, s, niveau)
-            hors_conj_va = {t: sum(v * emploi_valeur.valeur_ajoutee(p, s, niveaux_canaux.get(c, niveau))
-                                   for c, v in canaux[t].items()
-                                   if not c.startswith(("Conjoncture", "Postes publics", "Offre", "Seniors"))
-                                   and c not in sans_va)
-                            for t in ANNEES}
-            # PIB en plus ou en moins hors emploi (ex. heures travaillées en moins par salarié, 32 heures) : rangé par une
-            # mesure calculée dans self.pib_en_plus[(id(p), s)] = {année: Md€}, avec sa mesure de recettes (11/11/2026)
-            d_autre = getattr(self, "pib_en_plus", {}).get((id(p), s), {})
-            # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
-            from . import canaux_declares
-            decl = canaux_declares.effets(self, p, s, mesures_programme=liste)
-            # roadmap 5.4 : coût d'un chômeur selon la générosité du programme, appliqué à tout ce qui suit le nombre
-            # de chômeurs (allocations des seniors, variante démographique ; dépenses de chômage dans le noyau)
-            gen = generosite(p, s, liste, volume)
-            if gen is not None:
-                for m in [*liste, *decl["mesures"]]:
-                    if m.nom.startswith(("Seniors : allocations chômage", "Démographie : ")) and m.poste in ("chomage", "pauvrete"):
-                        k = 0 if m.poste == "chomage" else 1
-                        m.valeurs = {t: v * gen.get(t, (1.0, 1.0))[k] for t, v in m.valeurs.items()}
-            liste.extend(decl["mesures"])
-            # roadmap 5.6 : prélèvements des ménages sur les revenus que l'incidence des entreprises leur apporte
-            if p.val("entreprises.incidence_retour_budget"):
-                liste.extend(retour_incidence(p, s, liste, details_offre, y, part_rec))
-            # postes publics : leur production entre au PIB à leur coût quand le multiplicateur s'est éteint (A3)
-            d_npm = production_non_marchande(p, s, cout_postes, TOUTES) if actif else {t: cout_postes[t] for t in TOUTES}
-            details_npm = d_npm
-            pib = {t: y[t] + dpib[t] + d_offre[t] + d_seniors[t] + d_autre.get(t, 0.0) + decl["pib"][t] + d_npm[t]
-                   + hors_conj_va[t] * idx["salaire"][t] / 1e9 for t in ANNEES}
-            # variante migratoire (phase B2) et naissances : personnes en emploi en plus ou en moins, hors du chômage
-            if any(decl.get("emplois", {}).values()):
-                for t in ANNEES:
-                    canaux[t][decl.get("canal_demographie", "Démographie : solde migratoire")] = decl["emplois"][t]
-                    actifs[t] += decl["actifs"][t]
-            demploi = {t: sum(canaux[t].values()) for t in ANNEES}
-            chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
-                    for t in ANNEES}
-            avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
-                        for m in liste for t in ANNEES_AVANT if m.poste != "participations")
-            ctx_s[s] = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
-                        "emploi": {t: e[t]["emploi"] + demploi[t] for t in ANNEES}, "emplois_canaux": canaux}
-            # plancher du chômage (13/11/2026) : rendements décroissants des emplois en plus près du chômage
-            # incompressible ; les recettes de l'effet d'offre suivent les emplois retenus
-            from .emploi_canaux import plancher_chomage
-            k_pl = plancher_chomage(p, ctx_s[s], {t: va * idx["salaire"][t] / 1e9 for t in ANNEES})
-            if m_offre is not None:
-                for t, k in k_pl.items():
-                    if k < 1 and t in m_offre.valeurs:
-                        m_offre.valeurs[t] *= k
-            demploi = {t: ctx_s[s]["emploi"][t] - e[t]["emploi"] for t in ANNEES}
-            if dep_chom:
-                ctx_s[s]["chomeurs_depenses"] = self.chomeurs_depenses(canaux, actifs_bloc, budget_compte)
-                if gen is not None:
-                    ctx_s[s]["generosite_chomage"] = gen
-            if decl["taux_supplementaire"]:
-                ctx_s[s]["taux_supplementaire"] = decl["taux_supplementaire"]
-            # phase E : inflation et taux bouclés (moteur/bouclage.py)
-            ctx_s[s].update(bouclage.contexte(p, s, rep))
-            mes_s[s] = liste
-            details[s] = {"avant_2029": avant, "dpib": dpib, "emplois": demploi, "offre": details_offre,
-                          "pib_non_marchand": details_npm,
-                          "dpib_offre": d_offre, "bouclage": rep}
+            c = _Scenario(p=p, s=s, idx=self.indices(p, s), w=sq.salaires(p, s))
+            self._etape_mesures(c, part_fp)
+            self._etape_emploi(c)
+            self._etape_demande(c)
+            self._etape_offre_seniors(c)
+            self._etape_pib_contexte(c)
+            mes_s[s], ctx_s[s], details[s] = c.liste, c.ctx, c.details
         res = {"mesures": mes_s, "contexte": ctx_s, "details": details}
         self._cache[cle] = res
         return res
+
+    def _etape_mesures(self, c: "_Scenario", part_fp: float) -> None:
+        """1. Mesures du registre (avec leurs suites communes : IS, PFU, prélèvements des rémunérations, postes
+        publics), mesures calculées, formation, écologie, enveloppe d'économies, variante des annonces."""
+        p, s, idx, w = c.p, c.s, c.idx, c.w
+        liste = c.liste
+        crees, supprimes, cout_postes = c.crees, c.supprimes, c.cout_postes
+        cout_poste = self.v("emploi.cout_poste_public")
+        prefixe = f"{self.nom}_mesures."
+        for nom, par in self.pt.items():
+            if not nom.startswith(prefixe):
+                continue
+            x = dict(par.valeur)
+            if "pfu" in x:
+                # roadmap 4.4 (22/11/2026) : impôt sur les dividendes et les intérêts chiffré par la règle commune
+                from moteur.capital_dirigeants import recette_pfu
+                x["_montant"] = recette_pfu(p, s, **x["pfu"])["total"]
+            else:
+                x["_montant"] = x["montant"][s] if isinstance(x["montant"], dict) else x["montant"]
+            serie = self.serie(x, idx)
+            # phase F4 : profil dans le temps donné par la population vieillie du programme (moteur/micro.py)
+            from moteur import micro as _micro
+            serie = {t: v * _micro.indice(p, self.nom, x["id"], t) for t, v in serie.items()}
+            court = nom.split(".")[1]
+            if x.get("volume"):  # allocataires en moins, pas une allocation plus basse (roadmap 5.4)
+                c.volume.add(f"{x['id']} — {x['libelle']}")
+            liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=court,
+                                instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
+                                enfants=x.get("enfants"), fonds=x.get("fonds", ""),
+                                cout_place=x.get("cout_place", 0.0)))
+            if x.get("deductible_is"):
+                # impôts de production déductibles du bénéfice : l'IS bouge en sens inverse (règle commune)
+                rc = p.val("entreprises.retour_is_charges")
+                part = 1.0 if x["deductible_is"] is True else float(x["deductible_is"])
+                r_is = rc["taux_is_effectif"] * rc["part_marge"] * part
+                liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
+                                    {t: -r_is * v for t, v in serie.items()}, note=court))
+            if x.get("taux_is"):
+                # roadmap 4.3 (22/11/2026) : taux de l'IS changé ; les bénéfices des groupes multinationaux se
+                # déplacent (semi-élasticité de la base au taux, Beer, de Mooij et Liu, 2018), règle commune.
+                # Base des groupes = part_grandes_entreprises × base ; recette perdue ou regagnée = taux × base
+                # déplacée = − semi × taux × part × montant statique. Une baisse prend le scénario miroir.
+                sc = MIROIR[s] if x["_montant"] < 0 else s
+                r_tr = (p.val("macro.semi_elasticite_transfert", sc) * p.val("macro.taux_reference_is", s)
+                        * p.val("macro.part_grandes_entreprises", s))
+                liste.append(Mesure(f"{x['id']} — impôt sur les sociétés : bénéfices déplacés par les groupes", "recettes",
+                                    {t: -r_tr * v for t, v in serie.items()}, note=court))
+                # roadmap 4.4 : entrepreneurs individuels qui passent à l'IS (ou en sortent), règle commune
+                from moteur.capital_dirigeants import facteur_ei_vers_is
+                k_ei = facteur_ei_vers_is(p, s, x["_montant"])
+                liste.append(Mesure(f"{x['id']} — entrepreneurs individuels qui changent de forme (IR ou IS)", "recettes",
+                                    {t: k_ei * v for t, v in serie.items()}, note=court))
+            if x.get("fp"):
+                # fp_taux : part revenant en prélèvements propre à la mesure (emplois payés au SMIC : ni CAS
+                # pensions ni impôt sur le revenu, ≈ 0,39 ; relecture neutre du 11/11/2026)
+                taux = x.get("fp_taux", part_fp)
+                liste.append(Mesure(f"{x['id']} — prélèvements sur ces rémunérations", "recettes",
+                                    {t: taux * v for t, v in serie.items()}, note=court))
+            if x.get("postes"):
+                for t, v in serie.items():
+                    cout_postes[t] = cout_postes.get(t, 0.0) + v
+                cible = crees if x["_montant"] >= 0 else supprimes
+                for t in ANNEES:
+                    cible[t] += serie[t] * 1e9 / (x.get("cout_poste", cout_poste) * w[t] / w[2029])
+        calc, c.canaux_calc = self.mesures_calculees(p, s, idx)
+        for t, v in getattr(self, "cout_postes_calcules", {}).get((p.jeton, s), {}).items():
+            cout_postes[t] = cout_postes.get(t, 0.0) + v
+        liste.extend(calc)
+        liste.extend(self.mesures_formation(p, s, part_fp))
+        liste.extend(self.mesures_ecologie(p, s))
+        liste.extend(self.enveloppe_economies(p, s, idx, liste))
+        if getattr(self, "variante_annonces", False):
+            # variante « annonce tenue » (moteur/annonces.py) : jamais dans le chiffrage publié
+            from . import annonces as ann
+            env = f"{self.nom}_enveloppe.intensite" in self.pt
+            liste.extend(ann.mesures_tenues(
+                self.nom, p, s, liste, getattr(self, "enveloppe_detail", {}).get((p.jeton, s)),
+                self.v("enveloppe.intensite") if env else None,
+                int(self.v("enveloppe.debut")) if env else 2028, int(self.v("enveloppe.plein")) if env else 2032))
+
+    def _etape_emploi(self, c: "_Scenario") -> None:
+        """2. Emplois : postes publics et leur éviction, canaux des mesures calculées, au prix d'un emploi du salaire
+        de chaque canal."""
+        p, s, idx, liste = c.p, c.s, c.idx, c.liste
+        # éviction : prise au scénario du même côté de la prudence, pour chaque sens. Créer des postes publics :
+        # l'éviction forte est prudente ; en supprimer : c'est la reprise faible par le privé qui l'est (scénario miroir)
+        miroir = MIROIR
+        ev_c = sq._v(p, "emploi_public.eviction_privee", s)
+        ev_s = sq._v(p, "emploi_public.eviction_privee", miroir[s])
+        # phase L (4.1) : l'allocation évitée passe des recettes (valeur d'un emploi) aux blocs chômage et pauvreté,
+        # sur les chômeurs du programme (noyau, contexte « chomeurs_depenses »)
+        dep_chom = c.dep_chom = p.val("emploi.depenses_chomage_programme")
+        alloc = 0.0 if dep_chom else p.val("emploi.allocation_chomeur_evitee")
+        # roadmap 2.2 (21/11/2026) : valeur d'un emploi selon son salaire (cellule OpenFisca du niveau déclaré par
+        # le canal, « nom@niveau » ; par défaut emploi.cout_emploi_cree_smic) ; 21/11/2026 : prélèvements et TVA au
+        # barème du programme (moteur/emploi_valeur.py), l'allocation évitée suit la générosité du programme ; plus
+        # les impôts sur la part non salariale de la valeur ajoutée (les canaux « * » et « ** » comptent leur
+        # budget eux-mêmes et ne passent pas ici). Valeur calculée au premier appel de chaque niveau, sur les mesures
+        # de `liste` à ce moment-là (l'ordre des appels compte).
+        from . import emploi_valeur
+        niveau = c.niveau = p.val("emploi.cout_emploi_cree_smic")
+        _v_emp: dict = {}
+
+        def v_emp_de(niv):
+            if niv not in _v_emp:
+                valeur = self.valeur_emploi_cellule(p, niv)
+                if dep_chom:
+                    valeur -= p.val("emploi.allocation_chomeur_evitee")
+                f_emp = emploi_valeur.facteur(p, s, liste, niv)
+                exc = emploi_valeur.excedent(p, s, liste, niv, emploi_valeur.valeur_ajoutee(p, s, niv))
+                _v_emp[niv] = {t: (valeur - alloc) * f_emp[t] + alloc + exc[t] for t in ANNEES}
+            return _v_emp[niv]
+        v_emp = v_emp_de(niveau)
+        canaux = c.canaux
+        crees, supprimes = c.crees, c.supprimes
+        postes = {t: crees[t] + supprimes[t] for t in ANNEES}
+        evince = {t: -(ev_c * crees[t] + ev_s * supprimes[t]) for t in ANNEES}
+        if any(postes.values()):
+            for t in ANNEES:
+                canaux[t]["Postes publics créés ou supprimés"] = postes[t]
+                canaux[t]["Éviction d'emplois privés par les postes publics"] = evince[t]
+            liste.append(Mesure("Emploi : emplois privés évincés (ou libérés) par les postes publics", "recettes",
+                                {t: evince[t] * v_emp[t] * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
+        # « * » : effet budgétaire déjà compté par la mesure ; « ** » : production aussi déjà comptée (pas de
+        # valeur ajoutée en plus dans le PIB, ex. embauches de partage du travail)
+        c.budget_compte = {emploi_valeur.niveau_canal(k, niveau)[0].lstrip("*") for k in c.canaux_calc if k.startswith("*")}
+        for canal_decl, serie in c.canaux_calc.items():
+            canal, niv = emploi_valeur.niveau_canal(canal_decl, niveau)
+            c.niveaux_canaux[canal.lstrip("*")] = niv
+            for t in ANNEES:
+                canaux[t][canal.lstrip("*")] = serie.get(t, 0.0)
+            if canal.startswith("**"):
+                c.sans_va.add(canal.lstrip("*"))
+            if not canal.startswith("*"):
+                vn = v_emp_de(niv)
+                liste.append(Mesure(f"Emploi : {canal}", "recettes",
+                                    {t: serie.get(t, 0.0) * vn[t] * idx["salaire"][t] / 1e9 for t in ANNEES}, nature="effet_macro"))
+
+    def _etape_demande(self, c: "_Scenario") -> None:
+        """3. Demande : impulsion budgétaire nette des mesures, multiplicateur (ou bouclage), emploi de conjoncture."""
+        p, s, liste, canaux = c.p, c.s, c.liste, c.canaux
+        # effet macroéconomique : impulsion budgétaire nette, chaque mesure pondérée selon ce qu'elle est (demande
+        # par instrument, moteur/offre.poids_demande : 1 pour la dépense publique)
+        cout_net = offre.impulsion(p, liste, TOUTES)
+        y = c.y = sq.pib(p, s)
+        rec_sq = sq.recettes(p, s)
+        actif = c.actif = self.v("macro.multiplicateur_actif")
+        from . import bouclage
+        rep = c.rep = bouclage.reponse(p, s, cout_net, TOUTES, liste) if actif and bouclage.actif(p) else None
+        dpib = c.dpib = (rep["dpib"] if rep else multiplicateur(p, s, cout_net, TOUTES)) if actif else {t: 0.0 for t in TOUTES}
+        part_rec = c.part_rec = {t: rec_sq[t] / y[t] for t in ANNEES}
+        part_rec.update({t: part_rec[2029] for t in ANNEES_AVANT})
+        if actif:
+            liste.append(Mesure("Effet macro : multiplicateur sur l'impulsion budgétaire des mesures", "recettes",
+                                {t: dpib[t] * part_rec[t] for t in TOUTES}, nature="effet_macro"))
+        e = c.e = sq.effectifs(p, s)
+        k_emp = sq._v(p, "macro.emplois_par_point_pib", s)
+        # phase E6 : emploi de conjoncture bouclé (profils de Mésange, retour au chômage d'équilibre) ; sinon Okun
+        conj = ({t: rep["emplois"][t] for t in ANNEES} if rep else
+                {t: dpib[t] / y[t] * k_emp * e[t]["emploi"] for t in ANNEES})
+        for t in ANNEES:
+            canaux[t]["Conjoncture (impulsion budgétaire)"] = conj[t]
+
+    def _etape_offre_seniors(self, c: "_Scenario") -> None:
+        """4. Offre (effet durable des impôts et des transferts), emploi des seniors, actifs retirés par une mesure."""
+        p, s, liste, canaux = c.p, c.s, c.liste, c.canaux
+        from . import emploi_valeur
+        # canal d'offre commun (moteur/offre.py) : effet durable des impôts et des transferts
+        actifs = {t: 0.0 for t in ANNEES}
+        c.d_offre = {t: 0.0 for t in TOUTES}
+        c.m_offre = None
+        if offre.actif(p):
+            of = offre.effets(p, s, liste)
+            c.m_offre = of["mesure"]
+            liste.append(c.m_offre)
+            c.d_offre = of["dpib"]
+            actifs = of["actifs"]
+            for canal, serie in of["emplois"].items():
+                for t in ANNEES:
+                    canaux[t][canal] = serie[t]
+            c.details_offre = of["detail"]
+        else:
+            c.details_offre = {}
+        c.actifs = actifs
+        c.actifs_bloc = {t: actifs[t] for t in ANNEES}  # actifs de l'offre (sans les seniors, comptés par leur mesure)
+        # emploi des seniors quand l'âge de la retraite change (offre.seniors) : emplois, chômeurs, inactifs
+        c.d_seniors = {t: 0.0 for t in ANNEES}
+        nr = getattr(self, "non_retraites", {}).get((p.jeton, s))
+        if nr is not None:
+            sen = offre.seniors(p, s, nr["serie"], baisse_age=nr["baisse"],
+                                facteur_prelevements=emploi_valeur.facteur(p, s, liste, "moyen"),
+                                excedent=emploi_valeur.excedent(p, s, liste, "moyen", p.val("seniors.valeur_ajoutee_emploi")))
+            liste.extend(sen["mesures"])
+            c.d_seniors = sen["pib"]
+            for t in ANNEES:
+                canaux[t]["Seniors : emploi (âge de la retraite)"] = sen["emplois"][t]
+                actifs[t] += sen["actifs"][t]
+        # personnes retirées de la population active par une mesure calculée (ex. service civique obligatoire) :
+        # leurs emplois perdus ne font pas de chômeurs
+        for t, v in getattr(self, "actifs_en_plus", {}).get((p.jeton, s), {}).items():
+            actifs[t] += v
+            c.actifs_bloc[t] += v
+
+    def _etape_pib_contexte(self, c: "_Scenario") -> None:
+        """5. PIB (multiplicateur, offre, seniors, valeur ajoutée des emplois, canaux déclarés, production non
+        marchande), générosité du chômage, chômage, plancher, contexte du noyau et détails publiés."""
+        p, s, idx, liste, canaux, actifs, e, y = c.p, c.s, c.idx, c.liste, c.canaux, c.actifs, c.e, c.y
+        from . import bouclage, emploi_valeur
+        niveau = c.niveau
+        # PIB : multiplicateur, offre, et valeur ajoutée des emplois en plus ou en moins hors conjoncture et offre
+        # (les postes publics : par leur dépense et le multiplicateur, puis à leur coût, production_non_marchande)
+        # valeur ajoutée de chaque emploi selon le salaire déclaré par son canal (roadmap 2.2)
+        va = emploi_valeur.valeur_ajoutee(p, s, niveau)
+        hors_conj_va = {t: sum(v * emploi_valeur.valeur_ajoutee(p, s, c.niveaux_canaux.get(k, niveau))
+                               for k, v in canaux[t].items()
+                               if not k.startswith(("Conjoncture", "Postes publics", "Offre", "Seniors"))
+                               and k not in c.sans_va)
+                        for t in ANNEES}
+        # PIB en plus ou en moins hors emploi (ex. heures travaillées en moins par salarié, 32 heures) : rangé par une
+        # mesure calculée dans self.pib_en_plus[(p.jeton, s)] = {année: Md€}, avec sa mesure de recettes (11/11/2026)
+        d_autre = getattr(self, "pib_en_plus", {}).get((p.jeton, s), {})
+        # canaux déclarés par le programme (ouverts à tous : moteur/canaux_declares.py)
+        from . import canaux_declares
+        decl = canaux_declares.effets(self, p, s, mesures_programme=liste)
+        # roadmap 5.4 : coût d'un chômeur selon la générosité du programme, appliqué à tout ce qui suit le nombre
+        # de chômeurs (allocations des seniors, variante démographique ; dépenses de chômage dans le noyau)
+        gen = generosite(p, s, liste, c.volume)
+        if gen is not None:
+            for m in [*liste, *decl["mesures"]]:
+                if m.nom.startswith(("Seniors : allocations chômage", "Démographie : ")) and m.poste in ("chomage", "pauvrete"):
+                    k = 0 if m.poste == "chomage" else 1
+                    m.valeurs = {t: v * gen.get(t, (1.0, 1.0))[k] for t, v in m.valeurs.items()}
+        liste.extend(decl["mesures"])
+        # roadmap 5.6 : prélèvements des ménages sur les revenus que l'incidence des entreprises leur apporte
+        if p.val("entreprises.incidence_retour_budget"):
+            liste.extend(retour_incidence(p, s, liste, c.details_offre, y, c.part_rec))
+        # postes publics : leur production entre au PIB à leur coût quand le multiplicateur s'est éteint (A3)
+        cout_postes = c.cout_postes
+        d_npm = production_non_marchande(p, s, cout_postes, TOUTES) if c.actif else {t: cout_postes[t] for t in TOUTES}
+        details_npm = d_npm
+        pib = {t: y[t] + c.dpib[t] + c.d_offre[t] + c.d_seniors[t] + d_autre.get(t, 0.0) + decl["pib"][t] + d_npm[t]
+               + hors_conj_va[t] * idx["salaire"][t] / 1e9 for t in ANNEES}
+        # variante migratoire (phase B2) et naissances : personnes en emploi en plus ou en moins, hors du chômage
+        if any(decl.get("emplois", {}).values()):
+            for t in ANNEES:
+                canaux[t][decl.get("canal_demographie", "Démographie : solde migratoire")] = decl["emplois"][t]
+                actifs[t] += decl["actifs"][t]
+        demploi = {t: sum(canaux[t].values()) for t in ANNEES}
+        chom = {t: (e[t]["chomeurs"] - (demploi[t] - actifs[t])) / (e[t]["emploi"] + e[t]["chomeurs"] + actifs[t]) * 100
+                for t in ANNEES}
+        avant = sum(-(m.valeurs.get(t, 0.0)) if m.poste == "recettes" else m.valeurs.get(t, 0.0)
+                    for m in liste for t in ANNEES_AVANT if m.poste != "participations")
+        ctx = c.ctx = {"pib": pib, "chomage": chom, "dette_depart": sq.dette_fin_2028(p) + avant,
+                       "emploi": {t: e[t]["emploi"] + demploi[t] for t in ANNEES}, "emplois_canaux": canaux}
+        # plancher du chômage (13/11/2026) : rendements décroissants des emplois en plus près du chômage
+        # incompressible ; les recettes de l'effet d'offre suivent les emplois retenus
+        from .emploi_canaux import plancher_chomage
+        k_pl = plancher_chomage(p, ctx, {t: va * idx["salaire"][t] / 1e9 for t in ANNEES})
+        if c.m_offre is not None:
+            for t, k in k_pl.items():
+                if k < 1 and t in c.m_offre.valeurs:
+                    c.m_offre.valeurs[t] *= k
+        demploi = {t: ctx["emploi"][t] - e[t]["emploi"] for t in ANNEES}
+        if c.dep_chom:
+            ctx["chomeurs_depenses"] = self.chomeurs_depenses(canaux, c.actifs_bloc, c.budget_compte)
+            if gen is not None:
+                ctx["generosite_chomage"] = gen
+        if decl["taux_supplementaire"]:
+            ctx["taux_supplementaire"] = decl["taux_supplementaire"]
+        # phase E : inflation et taux bouclés (moteur/bouclage.py)
+        ctx.update(bouclage.contexte(p, s, c.rep))
+        c.details = {"avant_2029": avant, "dpib": c.dpib, "emplois": demploi, "offre": c.details_offre,
+                     "pib_non_marchand": details_npm,
+                     "dpib_offre": c.d_offre, "bouclage": c.rep}
 
     def entrees(self, p: Parametres, scenarios=None) -> dict:
         """Entrées du noyau : mesures, contexte et, si le programme en déclare une, sa règle de trajectoire (objet

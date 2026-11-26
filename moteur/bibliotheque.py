@@ -46,19 +46,29 @@ def _pensions_et_retraites(p: Parametres, s: str, part) -> tuple[dict[int, float
     """Pensions brutes (non calées) et retraités, part(g, b) = part de la génération g partie à l'âge b."""
     from .demographie import AGE_MAX
     pop, niveau = _cadre_pensions(p, s)
+    # part(g, ·) et niveau(·) gardés en tableaux (R1, 25/11/2026) : mêmes valeurs, mêmes opérations dans le même ordre
+    # (résultat identique au bit près), sans les millions d'appels de fonction de la triple boucle
+    parts: dict[int, list[float]] = {}
+    niv: dict[int, float] = {}
     dep_t, ret_t = {}, {}
     for t in ANNEES:
         dep = ret = 0.0
         for a in range(50, AGE_MAX + 1):
             n, g = pop[t][a], t - a
+            pg = parts.get(g)
+            if pg is None:
+                pg = parts[g] = [part(g, b) for b in range(49, AGE_MAX + 1)]  # pg[b - 49]
             cumul = 0.0
-            prec = part(g, 49)
+            prec = pg[0]
             for b in range(50, a + 1):
-                cur = part(g, b)
+                cur = pg[b - 49]
                 d = cur - prec
                 prec = cur
                 if d > 0:
-                    dep += n * d * niveau(g + b)
+                    nv = niv.get(g + b)
+                    if nv is None:
+                        nv = niv[g + b] = niveau(g + b)
+                    dep += n * d * nv
                     cumul += d
             ret += n * min(1.0, cumul)
         dep_t[t], ret_t[t] = dep, ret
@@ -187,7 +197,7 @@ def csg_activite(p: Parametres) -> dict[str, float]:
 
 
 def smic(p: Parametres, brut_cible_2026: float, diffusion_jusqu_a: float, part_marge: float,
-         valeur_emploi_chomeur: float, smic_brut_mensuel_2026: float = 1823.03,
+         valeur_emploi_chomeur: float, smic_brut_mensuel_2026: float | None = None,
          allegements_suivent_smic: bool = False) -> dict:
     """Relèvement du SMIC à brut_cible_2026 € brut par mois (euros de 2026), même mécanique que le programme Tondelier
     (table OpenFisca de 2026 lue au salaire relevé : les allègements restent au barème de 2026).
@@ -198,6 +208,8 @@ def smic(p: Parametres, brut_cible_2026: float, diffusion_jusqu_a: float, part_m
     diffusion_jusqu_a × le nouveau SMIC."""
     from .recettes.impot_salaires import effectifs_prive_2026, effectifs_public_2026
     from .systeme_actuel import _interp, _table_openfisca
+    if smic_brut_mensuel_2026 is None:
+        smic_brut_mensuel_2026 = p.val("profils.smic_brut_mensuel_2026")
     b_smic, b_new = smic_brut_mensuel_2026 * 12, brut_cible_2026 * 12
     plafond = diffusion_jusqu_a * b_new
     taux_tva = p.val("systeme_actuel.taux_tva_moyen")

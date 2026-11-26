@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import copy
 import dataclasses
+import itertools
+import pickle
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -33,8 +35,9 @@ class ErreurParametre(ValueError):
 _ABSENT = None
 
 
-class _ChargeurStrict(yaml.SafeLoader):
-    """Refuse les clés en double : YAML garderait silencieusement la dernière."""
+class _ChargeurStrict(getattr(yaml, "CSafeLoader", yaml.SafeLoader)):
+    """Refuse les clés en double : YAML garderait silencieusement la dernière. Analyseur en C (libyaml) quand PyYAML
+    l'a, 12 fois plus rapide ; sinon le même en Python (roadmap du moteur 25/11/2026, R1.1)."""
 
 
 def _sans_doublon(loader, node, deep=False):
@@ -48,6 +51,21 @@ def _sans_doublon(loader, node, deep=False):
 
 
 _ChargeurStrict.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _sans_doublon)
+
+# Fichiers déjà analysés (R1.2) : chemin → (texte, YAML brut en pickle). Chaque Parametres() reçoit une copie neuve
+# (pickle.loads, ≈ 0,6 ms) au lieu d'une nouvelle analyse (≈ 120 ms en Python). La clé est le texte lu : un fichier
+# modifié, même dans la même seconde et à la même taille, est analysé à nouveau.
+_LUS: dict[Path, tuple[str, bytes]] = {}
+
+
+def _lire_yaml(f: Path) -> dict:
+    texte = f.read_text(encoding="utf-8")
+    deja = _LUS.get(f)
+    if deja is not None and deja[0] == texte:
+        return pickle.loads(deja[1])
+    brut = yaml.load(texte, Loader=_ChargeurStrict) or {}
+    _LUS[f] = (texte, pickle.dumps(brut, protocol=pickle.HIGHEST_PROTOCOL))
+    return brut
 
 
 @dataclass(frozen=True)
@@ -73,10 +91,11 @@ class Parametre:
         return self.valeur
 
 
-# Toute instance reste en vie jusqu'à la fin du processus : plusieurs programmes mettent leurs résultats en cache
-# sous id(p) ; une instance libérée laisserait Python réattribuer son id à une autre, qui lirait alors des résultats
-# périmés (relecture indépendante du 11/11/2026). Le coût : quelques centaines d'instances au plus par processus.
-_VIVANTES: list = []
+# Jeton propre à chaque instance (R1.4, 25/11/2026). Les programmes rangent des résultats sous (p.jeton, scénario).
+# Avant : sous l'adresse de l'objet, avec toutes les instances gardées en vie pour que Python ne la réattribue pas à
+# une autre instance, qui aurait lu des résultats périmés (relecture du 11/11/2026). Un jeton ne revient jamais : les
+# instances peuvent être libérées.
+_JETONS = itertools.count(1)
 
 
 class Parametres:
@@ -97,7 +116,7 @@ class Parametres:
         self._p: dict[str, Parametre] = {}
         self.origine: dict[str, Path] = {}
         for f in fichiers:
-            brut = yaml.load(f.read_text(encoding="utf-8"), Loader=_ChargeurStrict) or {}
+            brut = _lire_yaml(Path(f).resolve())
             if "scenarios" in brut:
                 if self.scenarios:
                     raise ErreurParametre(f"{f.name} : liste des scénarios déjà définie")
@@ -109,7 +128,7 @@ class Parametres:
                         raise ErreurParametre(f"{cle} défini deux fois : {self.origine[cle]} et {f}")
                     self._p[cle] = self._valider(cle, champs)
                     self.origine[cle] = f
-        _VIVANTES.append(self)
+        self.jeton = next(_JETONS)
 
     def _valider(self, cle: str, c: dict) -> Parametre:
         for champ in ("valeur", "unite", "statut"):
@@ -140,15 +159,42 @@ class Parametres:
 
     # Colonne lue quand un module demande le prudent : « crise » pour le calcul du scénario de crise.
     colonne_prudent: str = "prudent"
-    _surcharges: dict = {}
     mesures_desactivees: frozenset = frozenset()
 
     def __getitem__(self, cle: str) -> Parametre:
         return self._p[cle]
 
+    # Accès sans passer par _p (R2.3, 25/11/2026)
+    def __contains__(self, cle: str) -> bool:
+        return cle in self._p
+
+    def cles(self):
+        return self._p.keys()
+
+    def items(self):
+        return self._p.items()
+
+    def remplacer(self, cle: str, par: Parametre) -> None:
+        """Remplace un paramètre sur place : réservé aux copies neuves (avec(), en_crise()) ; les résultats déjà
+        mis en cache sur cette instance sont oubliés."""
+        if cle not in self._p:
+            raise ErreurParametre(f"Paramètre inconnu : {cle}")
+        self._p[cle] = par
+        self.__dict__.pop("_cache", None)
+
+    def ajouter(self, cle: str, par: Parametre) -> None:
+        """Ajoute un paramètre absent (copies neuves et tests seulement, comme remplacer)."""
+        if cle in self._p:
+            raise ErreurParametre(f"{cle} existe déjà : remplacer()")
+        self._p[cle] = par
+        self.__dict__.pop("_cache", None)
+
+    def retirer(self, cle: str) -> None:
+        """Retire un paramètre (copies neuves seulement, comme remplacer)."""
+        del self._p[cle]
+        self.__dict__.pop("_cache", None)
+
     def val(self, cle: str, scenario: str = "prudent") -> Any:
-        if cle in self._surcharges:
-            return self._surcharges[cle]
         if scenario == "depart":  # colonne prudente, même dans le calcul de crise (point de départ commun)
             scenario = "prudent"
         elif scenario == "prudent":
@@ -161,8 +207,8 @@ class Parametres:
         c = copy.copy(self)
         c.__dict__.pop("_cache", None)
         c.colonne_prudent = "crise"
-        c._surcharges = {}
-        _VIVANTES.append(c)
+        c._p = dict(self._p)  # copie : une écriture dans c._p ne touche plus l'original (R2.3)
+        c.jeton = next(_JETONS)
         return c
 
     def __iter__(self):
@@ -197,5 +243,5 @@ class Parametres:
                     cible[chemin[-1]] = v
             c._p[cle] = dataclasses.replace(par, valeur=nouvelle)
         c.mesures_desactivees = frozenset(self.mesures_desactivees) | frozenset(mesures_desactivees)
-        _VIVANTES.append(c)
+        c.jeton = next(_JETONS)
         return c

@@ -59,7 +59,7 @@ class Roussel(ProgrammeSimple):
             return {**{t: v * montee[t] for t in ANNEES_AVANT}, **{t: v * ip[t] for t in ANNEES}}
 
         # PCF-SAL-01 : SMIC à 1 700 € net
-        sm = self._cache.setdefault(("smic", id(p)), self.smic(p))
+        sm = self._cache.setdefault(("smic", p.jeton), self.smic(p))
         pr, pu = sm["prive"], sm["public"]
         nom = "PCF-SAL-01 — SMIC à 1 700 € net"
         out += [
@@ -111,7 +111,7 @@ class Roussel(ProgrammeSimple):
                    {t: taux_prel * v for t, v in serie.items()}),
         ]
         self.non_retraites = getattr(self, "non_retraites", {})
-        self.non_retraites[(id(p), s)] = {"serie": {t: -v for t, v in det["retraites_en_plus"].items()},
+        self.non_retraites[(p.jeton, s)] = {"serie": {t: -v for t, v in det["retraites_en_plus"].items()},
                                           "baisse": True}
 
         # PCF-RET-02 : pensions indexées sur le salaire moyen au lieu des prix (à partir de 2028)

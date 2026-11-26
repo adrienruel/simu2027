@@ -204,12 +204,12 @@ def tirer_z(p: Parametres, z_de, liste=None, miroir: bool = True) -> Parametres:
     for cle, chemin in (liste if liste is not None else cibles(p)):
         nom = "/".join((cle,) + tuple(str(k) for k in chemin))
         z = z_de(nom)
-        par = c._p[cle]
+        par = c[cle]
         mir = miroir and cle in MIROIR_CLES
         if not chemin:
             tire = _tirer_jeu(_avec_loi(par.valeur, nom), z, mir)
-            c._p[cle] = dataclasses.replace(par, valeur={**par.valeur, "median": tire["median"],
-                                                         **({"prudent": tire["prudent"]} if mir and "prudent" in par.valeur else {})})
+            c.remplacer(cle, dataclasses.replace(par, valeur={**par.valeur, "median": tire["median"],
+                                                         **({"prudent": tire["prudent"]} if mir and "prudent" in par.valeur else {})}))
             continue
         v = copy.deepcopy(par.valeur)
         cible = v
@@ -218,7 +218,7 @@ def tirer_z(p: Parametres, z_de, liste=None, miroir: bool = True) -> Parametres:
         tire = _tirer_jeu(_avec_loi(cible[chemin[-1]], nom), z, mir)
         orig = cible[chemin[-1]]
         cible[chemin[-1]] = {**orig, "median": tire["median"], **({"prudent": tire["prudent"]} if mir and "prudent" in orig else {})}
-        c._p[cle] = dataclasses.replace(par, valeur=v)
+        c.remplacer(cle, dataclasses.replace(par, valeur=v))
     return c
 
 
@@ -377,9 +377,10 @@ def simuler(n: int = 200, graine: int = 2029, rho: float | None = None, noms: li
                 journal(f"{len(faits)}/{n} tirages, {time.time() - t0:.0f} s")
         if processus > 1 and a_faire:
             import multiprocessing as mp
-            # un processus neuf tous les 10 tirages : chaque tirage crée des copies de paramètres gardées en vie
-            # jusqu'à la fin du processus (parametres._VIVANTES) ; sans recyclage la mémoire sature
-            with mp.get_context("fork").Pool(processus, maxtasksperchild=10) as pool:
+            # plus de recyclage des processus (maxtasksperchild=10 jusqu'au 25/11/2026) : les copies de paramètres
+            # ne sont plus gardées en vie (parametres.jeton, R1.4), la mémoire d'un processus reste stable (≈ 60 Mo
+            # après 12 tirages, contre 1,1 Go avant)
+            with mp.get_context("fork").Pool(processus) as pool:
                 for d in pool.imap_unordered(_travail, [(i, graine, rho, noms) for i in a_faire]):
                     garder(d)
         else:

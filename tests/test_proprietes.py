@@ -68,7 +68,7 @@ def test_retirer_la_plus_grosse_mesure_deplace_le_solde_dans_le_bon_sens(nom, p,
     prefixe = f"{nom}_mesures."
     cand = []
     for m in prog.mesures(p)["prudent"]:
-        if m.note and f"{prefixe}{m.note}" in prog.pt._p and m.nature not in ("effet_macro", "perimetre", "classement"):
+        if m.note and f"{prefixe}{m.note}" in prog.pt and m.nature not in ("effet_macro", "perimetre", "classement"):
             signe = 1 if m.poste == "recettes" else (0 if m.poste == "participations" else -1)
             if signe == 1 or (signe == -1 and m.valeurs.get(2032, 0.0) > 0):
                 cand.append((abs(m.valeurs.get(2032, 0.0)), signe * m.valeurs.get(2032, 0.0), m.note))
@@ -86,3 +86,42 @@ def test_retirer_la_plus_grosse_mesure_deplace_le_solde_dans_le_bon_sens(nom, p,
     r2 = noyau.simuler(p, prog2, scenarios=("prudent",))
     ecart = r2["prudent"][2032]["solde_primaire"] - r["prudent"][2032]["solde_primaire"]
     assert ecart * direct < 0 and abs(ecart) >= abs(direct) / 3, (cle, direct, ecart)
+
+
+def _numeriques(x, chemin=()):
+    """Toutes les feuilles numériques d'une sortie, avec leur chemin."""
+    if isinstance(x, dict):
+        for k, v in x.items():
+            yield from _numeriques(v, chemin + (k,))
+    elif isinstance(x, (int, float)) and not isinstance(x, bool):
+        yield chemin, x
+
+
+def test_programme_vide_egal_statu_quo_partout(p, base):
+    """Roadmap du moteur 25/11/2026, R3.5 : le programme vide redonne le statu quo sur toutes les grandeurs publiées,
+    pas seulement le déficit et la dette (test_noyau)."""
+    vide = noyau.simuler(p, noyau.charger("vide"))
+    for s in sq.SCENARIOS:
+        a, b = dict(_numeriques(vide[s])), dict(_numeriques(base[s]))
+        # le statu quo publie en plus emploi_millions (statu_quo.simuler) ; tout le reste est commun
+        assert a.keys() <= b.keys() and {k[1:] for k in b.keys() - a.keys()} <= {("emploi_millions",)}
+        assert all(a[k] == b[k] for k in a), [k for k in a if a[k] != b[k]][:5]
+
+
+@pytest.mark.parametrize("s", ("crise", "prudent", "optimiste"))
+def test_recette_en_plus_jamais_plus_de_deficit(p, s):
+    """R3.5 : à contexte donné, une recette en plus chaque année ne fait jamais monter le déficit, et deux fois plus
+    de recette en fait baisser davantage (monotonie)."""
+    from moteur.noyau import Mesure
+    r = {k: noyau.trajectoire(p, s, [Mesure("essai", "recettes", {t: k for t in ANNEES})]) for k in (0.0, 10.0, 20.0)}
+    for t in ANNEES:
+        assert r[0.0][t]["deficit"] >= r[10.0][t]["deficit"] >= r[20.0][t]["deficit"], t
+        assert r[10.0][t]["deficit"] < r[0.0][t]["deficit"]
+
+
+def test_calcul_deterministe(p):
+    """R3.5 : deux calculs du même programme donnent les mêmes nombres, au bit près (aucun état gardé d'un appel à
+    l'autre : jetons, règle copiée)."""
+    a = noyau.simuler(p, noyau.charger("attal"))
+    b = noyau.simuler(Parametres(), noyau.charger("attal"))
+    assert dict(_numeriques(a)) == dict(_numeriques(b))

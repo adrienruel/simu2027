@@ -86,7 +86,7 @@ POINTS = (0, 1, 2, 4, 9, 24)  # 1, 2, 3, 5, 10 ans et long terme (atteint en 25 
 
 
 def profils_actifs(p) -> bool:
-    return "macro.bouclage_profils" in p._p and bool(p.val("macro.bouclage_profils"))
+    return "macro.bouclage_profils" in p and bool(p.val("macro.bouclage_profils"))
 
 
 def cle_profil(m) -> str | None:

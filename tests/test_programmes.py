@@ -32,6 +32,7 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     # demographie.ecole_cohortes et taux_emploi_tendance (19/11/2026, phase P) : options de modèle communes
     # demographie.conge_part_soutien (20/11/2026, phase Q) : règle commune du canal des naissances (congés indemnisés)
     # roadmap 4.4 (22/11/2026) : écarts de prélèvement des canaux communs du capital et des entrepreneurs individuels
+    # roadmap du moteur R3.1 (26/11/2026) : baisse de l'écart de taux au point fixe, option de modèle commune (désactivée)
     assert decisions == ["calendrier.inflation", "demographie.conge_part_soutien", "demographie.ecole_cohortes",
                          "demographie.scenario_fecondite",
                          "demographie.taux_emploi_tendance", "dividendes.ecart_prelevement_salaire_dividende",
@@ -39,7 +40,8 @@ def test_hypotheses_communes_sans_mesure_du_programme():
                          "emploi.generosite_programme", "emploi.prelevements_programme", "emploi.prime_activite_emplois", "entreprises.ecart_prelevement_ei_is",
                          "entreprises.incidence_retour_budget",
                          "incertitude.correlation",
-                         "lectures_communes.capitalisation", "macro.taux_apparent_refinancement",
+                         "lectures_communes.capitalisation", "macro.point_fixe_baisse_spread",
+                         "macro.taux_apparent_refinancement",
                          "ministeres.elasticite_eleves_etudiants", "offre.micro_emploi",
                          "programme_commun.enveloppe_debut", "programme_commun.enveloppe_plein",
                          "programme_commun.macro_multiplicateur_actif", "programme_commun.smic_allegements_suivent_smic", "sante_trajectoire.pente_phase_1"]

@@ -165,7 +165,7 @@ def population_programme(prog, p: Parametres, s: str) -> dict[int, tuple[float, 
         d = {}
     mig = ecart_population(p, s, d["solde_migratoire"]) if "solde_migratoire" in d else None
     # naissances du canal commun (moteur/naissances.py), rangées par canaux_declares.effets pendant la simulation
-    nc = getattr(prog, "ecart_naissances", {}).get((id(p), s))
+    nc = getattr(prog, "ecart_naissances", {}).get((p.jeton, s))
     out = {}
     for t, v in base.items():
         w = list(v)

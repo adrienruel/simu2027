@@ -30,13 +30,13 @@ def test_fiche_complete_et_mesures_renvoyees(prog):
     fiche = yaml.safe_load((RACINE / "programmes" / "roussel" / "mesures.yaml").read_text(encoding="utf-8"))
     ids = {m["id"] for m in fiche["mesures"]}
     assert all(m["traitement"] for m in fiche["mesures"])
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith(("roussel_mesures.", "roussel_ecologie.")):
             assert par.valeur["id"] in ids, cle
 
 
 def test_sens_des_scenarios(prog):
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if not cle.startswith("roussel_mesures."):
             continue
         m = par.valeur["montant"]
@@ -54,7 +54,7 @@ def test_trente_deux_heures(p, prog):
     ctx = prog.contexte(p)["prudent"]
     c = ctx["emplois_canaux"][2035]
     assert c["PCF-EMP-01 — 32 heures : embauches de partage du travail"] > 0 > c["PCF-EMP-01 — 32 heures : emplois perdus par le coût horaire"]
-    assert prog.pib_en_plus[(id(p), "prudent")][2035] < 0
+    assert prog.pib_en_plus[(p.jeton, "prudent")][2035] < 0
 
 
 def test_emissions(p, prog):

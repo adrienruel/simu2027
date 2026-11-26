@@ -13,11 +13,11 @@ PAR = {"crise": 0.0, "prudent": 0.001, "median": 0.002, "optimiste": 0.003}
 def _programme(canaux: dict) -> LePen:
     """Un programme existant auquel on déclare des canaux (sans toucher à son fichier de paramètres)."""
     prog = LePen()
-    for cle in [c for c in prog.pt._p if c.startswith(f"{prog.nom}_canaux.")]:
-        del prog.pt._p[cle]  # aucun canal propre (Bertrand déclare un solde migratoire depuis la phase B2)
+    for cle in [c for c in prog.pt.cles() if c.startswith(f"{prog.nom}_canaux.")]:
+        prog.pt.retirer(cle)  # aucun canal propre (Bertrand déclare un solde migratoire depuis la phase B2)
     for nom, valeur in canaux.items():
         cle = f"{prog.nom}_canaux.{nom}"
-        prog.pt._p[cle] = prog.pt._valider(cle, {"valeur": valeur, "unite": "sans_unite", "statut": "HYPOTHESE"})
+        prog.pt.ajouter(cle, prog.pt._valider(cle, {"valeur": valeur, "unite": "sans_unite", "statut": "HYPOTHESE"}))
     return prog
 
 

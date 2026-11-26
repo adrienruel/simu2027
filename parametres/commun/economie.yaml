@@ -54,6 +54,24 @@ unites:
 
 # --- Repères de profils -------------------------------------------------------
 profils:
+  smic_brut_mensuel_2026:
+    valeur: 1823.03
+    unite: eur_mois
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Décret n° 2025-1228 du 17 décembre 2025 (JO du 18/12/2025) : SMIC horaire brut 12,02 €, 1 823,03 € par mois pour 35 heures, au 1er janvier 2026"
+    url: "https://www.service-public.gouv.fr/entreprendre/actualites/A17008"
+    page: "Liste « Les nouveaux montants » : Smic mensuel brut (temps plein)"
+    note: "Roadmap du moteur 25/11/2026, R2.4 : valeur écrite jusque-là en dur à 6 endroits du code. Valeur de janvier, celle des tables OpenFisca de 2026 ; la revalorisation de juin 2026 n'est pas reprise."
+  plafond_securite_sociale_mensuel_2026:
+    valeur: 4005
+    unite: eur_mois
+    annee_euros: 2026
+    statut: SOURCE
+    source: "Arrêté du 22 décembre 2025 portant fixation du plafond de la sécurité sociale pour 2026 (JO du 23/12/2025) : 4 005 € par mois, 48 060 € par an ; repris par la circulaire CIR-1-2026 de l'Assurance maladie"
+    url: "https://circulaires.ameli.fr/sites/default/files/directives/cir/2026/CIR-1-2026.pdf"
+    page: "p. 1, montant du plafond mensuel"
+    note: "Roadmap du moteur 25/11/2026, R2.4 : valeur écrite jusque-là en dur dans moteur/offre.py."
   cout_smic_annuel:
     valeur: 23750
     unite: eur_an
@@ -414,6 +432,11 @@ macro:
     note: "Baisse du taux long attendue de la crédibilité des réformes, atteinte en 8 ans. DÉCISION d'Adrien du 29/10/2026 : l'effet des réformes sur les taux est incertain, il varie selon le scénario (aucun dans la crise et le prudent, un quart de l'écart avec le Bund dans le médian, la moitié dans l'optimiste)."
   # Déplacé du fichier d'Écologie de droite le 16/11/2026 : paramètre lu par le moteur commun pour tous les programmes.
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
+  point_fixe_baisse_spread:
+    valeur: false
+    unite: sans_unite
+    statut: DECISION
+    note: "Roadmap du moteur 25/11/2026, R3.1 (désactivé en attendant la décision). Vrai : la baisse de l'écart de taux est recalculée jusqu'à ce qu'elle soit cohérente avec la trajectoire qu'elle produit (point fixe, 10 passes au plus) ; faux : deux passes, comme avant. Mesure du 25/11 : seul le scénario optimiste change, pour Retailleau (déficit 2073 de 4,55 à 2,60 points), Tondelier (11 années autour de 2037) et Attal (2071)."
 
 renouvelables:
   soutien_budget_2026: {valeur: 9.06, unite: md_eur, annee_euros: 2026, statut: SOURCE, source: "CRE, délibération n° 2026-149"}

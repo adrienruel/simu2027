@@ -723,7 +723,7 @@ class Base:
                 else:
                     infl27 = Parametres().val("inflation.base")["2027"]
                     cible = bib.brut_de_net_mensuel(x["smic_net_2027"] / (1 + infl27))
-                smic0 = 1823.03  # SMIC brut mensuel de 2026 (même valeur que bibliotheque.smic)
+                smic0 = Parametres().val("profils.smic_brut_mensuel_2026")  # SMIC brut mensuel de 2026, comme bibliotheque.smic
                 plafond = x["diffusion"] * cible
                 for l in lg:
                     if l["statut"] not in ("salarie_prive", "agent_public") or l["salaire_brut"] <= 0:
@@ -853,7 +853,7 @@ def montant_moteur(nom: str, ident: str, s: str = "prudent") -> float:
     """Effet sur le solde (Md€ de 2026, + = l'améliore) des mesures de cet identifiant dans le moteur, à plein effet."""
     p = Parametres(programme=nom)
     tot = 0.0
-    for cle, par in p._p.items():
+    for cle, par in p.items():
         if not cle.startswith(f"{nom}_mesures."):
             continue
         x = par.valeur

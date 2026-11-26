@@ -63,6 +63,7 @@ dash.calc('incertitude_tab', {
       x['p10_' + k] = Number(r.p10); x['p50_' + k] = Number(r.p50); x['p90_' + k] = Number(r.p90);
       x['proba_' + k] = r.proba_mieux_que_statu_quo === '' || r.proba_mieux_que_statu_quo == null ? null : Number(r.proba_mieux_que_statu_quo) * 100;
       if (k === 'rho1' && r.hypotheses_deficit_2037) x.hypotheses = r.hypotheses_deficit_2037;
+      if (k === 'rho1') x.ex_aequo = r.ex_aequo || '';
       par.set(cle, x);
     }
     return [...par.values()].filter((x) => x.p50_rho0 != null && x.p50_rho1 != null);
@@ -94,6 +95,8 @@ dash.draw('i_sq_bas', (el) => incSq(el, 'p10_rho1'));
 dash.draw('i_sq_haut', (el) => incSq(el, 'p90_rho1'));
 dash.draw('i_sq_bas0', (el) => incSq(el, 'p10_rho0'));
 dash.draw('i_sq_haut0', (el) => incSq(el, 'p90_rho0'));
+// programmes que les tirages ne départagent pas : « ex æquo » après le nom (26/11/2026)
+const incNom = (r) => (r.ex_aequo ? `${r.programme} (ex æquo)` : r.programme);
 dash.draw('c_fourchette', (el) => {
   const d = dash.data('incertitude_tab');
   if (!cpPret(el, d)) return;
@@ -108,7 +111,7 @@ dash.draw('c_fourchette', (el) => {
     .attr('aria-label', `Fourchette de chaque programme en ${p.annee}, du plus bas au plus haut`);
   const m = svg.append('g').style('font-size', 'var(--cds-font-size-caption)');
   let ml = 0;
-  m.selectAll('text').data(rows).join('text').text((r) => r.programme).each(function () { ml = Math.max(ml, this.getComputedTextLength()); });
+  m.selectAll('text').data(rows).join('text').text(incNom).each(function () { ml = Math.max(ml, this.getComputedTextLength()); });
   m.remove();
   ml = Math.min(ml + 12, W * 0.42);
   const lab = (r) => `${cpFmt(r.p10_rho1, dec)} – ${cpFmt(r.p90_rho1, dec)}`;
@@ -121,7 +124,7 @@ dash.draw('c_fourchette', (el) => {
   if (sq) svg.append('line').attr('x1', x(sq.p50_rho1)).attr('x2', x(sq.p50_rho1)).attr('y1', 0).attr('y2', H - 20).style('stroke', 'var(--cds-chart-muted)').attr('stroke-dasharray', '4 3');
   const g = svg.selectAll('g.ligne').data(rows).join('g').attr('class', 'ligne').attr('transform', (r, i) => `translate(0,${i * pas})`);
   g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', pas).attr('fill', 'transparent');
-  g.append('text').attr('x', 0).attr('y', pas / 2).attr('dy', '0.35em').text((r) => r.programme)
+  g.append('text').attr('x', 0).attr('y', pas / 2).attr('dy', '0.35em').text(incNom)
     .style('fill', (r) => (r.dossier === 'statu_quo' ? 'var(--color-fg-muted)' : 'var(--color-fg)')).style('font-weight', (r) => (r.programme === choisi ? 600 : null)).style('font-size', 'var(--cds-font-size-caption)');
   const coul = (r) => (r.dossier === 'statu_quo' ? 'var(--cds-chart-muted)' : dash.colors[0]);
   g.append('rect').attr('x', (r) => x(r.p10_rho1)).attr('y', 7).attr('height', pas - 14).attr('rx', 3).attr('width', (r) => Math.max(1, x(r.p90_rho1) - x(r.p10_rho1))).style('fill', coul).style('opacity', 0.28);
@@ -138,6 +141,7 @@ dash.draw('c_fourchette', (el) => {
     tip.style('display', null).selectAll('*').remove();
     tip.append('div').attr('class', 't').text(`${r.programme}, ${p.annee}`);
     tip.append('div').text(`Médiane : ${cpFmt(r.p50_rho1, dec)}${u}`);
+    if (r.ex_aequo) tip.append('div').text(`Ex æquo avec : ${r.ex_aequo}`);
     tip.append('div').text(`Indépendantes : ${cpFmt(r.p10_rho0, dec)} – ${cpFmt(r.p90_rho0, dec)}${u}`);
     tip.append('div').text(`Ensemble : ${cpFmt(r.p10_rho1, dec)} – ${cpFmt(r.p90_rho1, dec)}${u}`);
     if (p.grandeur === 'deficit' && r.proba_rho0 != null) tip.append('div').text(`Mieux que le statu quo : ${cpFmt(r.proba_rho0, 0)} à ${cpFmt(r.proba_rho1, 0)} % des tirages`);
@@ -155,7 +159,7 @@ dash.draw('t_incertitude', (tb) => {
   for (const r of rows) {
     const pr = (v) => (p.grandeur !== 'deficit' || v == null ? '—' : cpFmt(v, 0) + ' %');
     const c = (v) => (p.grandeur === 'deficit' && r.dossier !== 'statu_quo' ? (v >= 90 ? 'bon' : (v <= 10 ? 'mauvais' : '')) : '');
-    cpLigneTableau(tb, r.cle, [[r.programme], [cpFmt(r.p50_rho1, dec) + u], [`${cpFmt(r.p10_rho0, dec)} – ${cpFmt(r.p90_rho0, dec)}${u}`],
+    cpLigneTableau(tb, r.cle, [[incNom(r)], [cpFmt(r.p50_rho1, dec) + u], [`${cpFmt(r.p10_rho0, dec)} – ${cpFmt(r.p90_rho0, dec)}${u}`],
       [`${cpFmt(r.p10_rho1, dec)} – ${cpFmt(r.p90_rho1, dec)}${u}`], [pr(r.proba_rho0), c(r.proba_rho0)], [pr(r.proba_rho1), c(r.proba_rho1)], [r.hypotheses || '—']],
     (r.dossier === 'statu_quo' ? 'sq' : '') + (r.programme === cpProgDetail() ? ' choisi' : ''));
   }

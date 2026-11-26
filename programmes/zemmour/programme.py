@@ -70,7 +70,7 @@ class Zemmour(ProgrammeSimple):
                                    self.v("retraites.pas_par_generation"))
         eco = det["pensions"]
         self.non_retraites = getattr(self, "non_retraites", {})
-        self.non_retraites[(id(p), s)] = {"serie": det["non_retraites"], "baisse": False}
+        self.non_retraites[(p.jeton, s)] = {"serie": det["non_retraites"], "baisse": False}
         ser = {2027: 0.0, 2028: 0.0, **{t: -eco[t] for t in ANNEES}}
         taux_prel = rec[2029]["retraites"] / sq.retraites(p, s)[2029]["depenses"]
         out += [Mesure(f"ZEM-RET-01 — âge légal porté à {self.v('retraites.age_cible')} ans", "retraites", ser),

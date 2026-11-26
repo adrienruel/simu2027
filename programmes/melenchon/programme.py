@@ -54,7 +54,7 @@ class Melenchon(ProgrammeSimple):
             return {**{t: v * montee[t] for t in ANNEES_AVANT}, **{t: v * ip[t] for t in ANNEES}}
 
         # LFI-SAL-01 : SMIC à 1 700 € net
-        sm = self._cache.setdefault(("smic", id(p)), self.smic(p))
+        sm = self._cache.setdefault(("smic", p.jeton), self.smic(p))
         pr, pu = sm["prive"], sm["public"]
         nom = "LFI-SAL-01 — SMIC à 1 700 € net"
         out += [
@@ -103,7 +103,7 @@ class Melenchon(ProgrammeSimple):
                    {t: taux_prel * v for t, v in serie.items()}),
         ]
         self.non_retraites = getattr(self, "non_retraites", {})
-        self.non_retraites[(id(p), s)] = {"serie": {t: -v for t, v in det["retraites_en_plus"].items()},
+        self.non_retraites[(p.jeton, s)] = {"serie": {t: -v for t, v in det["retraites_en_plus"].items()},
                                           "baisse": True}
 
         # LFI-PRE-05 : chômage plus élevé avec l'assurance chômage d'avant 2019

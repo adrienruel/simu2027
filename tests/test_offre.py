@@ -207,7 +207,7 @@ def test_economies_non_detaillees_deduites_du_programme(p):
     for nom in ("attal", "philippe", "retailleau", "lisnard", "bertrand"):
         g = noyau.charger(nom)
         g.mesures(p)
-        d = {s: g.enveloppe_detail[(id(p), s)] for s in sq.SCENARIOS}
+        d = {s: g.enveloppe_detail[(p.jeton, s)] for s in sq.SCENARIOS}
         assert d["crise"]["retenu"] <= d["prudent"]["retenu"] <= d["median"]["retenu"] <= d["optimiste"]["retenu"], nom
         assert d["optimiste"]["retenu"] <= g.v("enveloppe.annonce"), nom
         for s, x in d.items():

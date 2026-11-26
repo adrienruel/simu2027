@@ -31,7 +31,7 @@ Un programme est un objet avec un attribut `nom` et deux méthodes, `mesures(p)`
 from __future__ import annotations
 
 import importlib
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Callable
 
 from .parametres import Parametres
@@ -200,7 +200,7 @@ def facteur_2027_2028(p: Parametres) -> float:
     """Croissance cumulée de 2027 et 2028 (calendrier.croissance_2027_2028, nulle par défaut : économie de 2026 placée
     en 2029). Non nulle (variante de la décision D3) : la dette de fin 2028 est rapportée à une économie qui a grandi
     pendant ces deux ans, ce qui revient à la diviser par ce facteur, les flux du statu quo restant inchangés."""
-    if "calendrier.croissance_2027_2028" not in p._p:
+    if "calendrier.croissance_2027_2028" not in p:
         return 1.0
     f = 1.0
     for g in p.val("calendrier.croissance_2027_2028").values():
@@ -220,6 +220,10 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
     plus tard aux ménages) : publiée en `quasi_dette` et `dette_et_quasi_dette_pib`."""
     from . import statu_quo as sq
     mesures, ctx = mesures or [], contexte or {}
+    if regle is not None:
+        # copie (R2.2, 25/11/2026) : _appliquer_regle note `declenchee` la première année ; sur l'objet reçu, une
+        # règle réutilisée garderait l'état de l'appel précédent sans erreur visible
+        regle = replace(regle)
     for m in mesures:
         _valider(m)
     for k in ctx:
@@ -400,7 +404,7 @@ def trajectoire(p: Parametres, s: str, mesures: list[Mesure] | None = None, cont
             "dynamiques": flux["detail"],
         }
         # balance courante (phase E4) : balance commerciale moins les intérêts en plus versés aux non-résidents
-        if "bouclage.non_residents" in p._p and p.val("macro.bouclage") and (mesures or ctx or dynamiques):
+        if "bouclage.non_residents" in p and p.val("macro.bouclage") and (mesures or ctx or dynamiques):
             dch = out[t]["charge_dette"] - _charge_statu_quo(p, s)[t]
             out[t]["balance_courante"] = out[t]["balance_commerciale"] - p.val("bouclage.non_residents") * dch / y[t] * 100
         else:
@@ -425,7 +429,7 @@ _MIROIR = {"crise": "optimiste", "prudent": "median", "median": "prudent", "opti
 
 
 def _retroaction_active(p: Parametres) -> bool:
-    return bool(p.val("macro.bouclage")) and "bouclage.prime_demande" in p._p and p.val("macro.bouclage_prime_demande")
+    return bool(p.val("macro.bouclage")) and "bouclage.prime_demande" in p and p.val("macro.bouclage_prime_demande")
 
 
 def _marche_statu_quo(p: Parametres, s: str) -> dict[int, float]:
@@ -447,7 +451,7 @@ def _charge_statu_quo(p: Parametres, s: str) -> dict[int, float]:
 def _balance(p: Parametres, s: str, y_t: float, prix: float, t: int) -> float:
     """Balance commerciale en écart au statu quo (points de PIB, phase E4) : −alpha × écart de PIB (%) − beta × écart
     du niveau des prix (%), calés sur Mésange (bouclage.exterieur). Zéro pour le statu quo."""
-    if "bouclage.exterieur" not in p._p or not p.val("macro.bouclage"):
+    if "bouclage.exterieur" not in p or not p.val("macro.bouclage"):
         return 0.0
     from .statu_quo import pib
     e = p.val("bouclage.exterieur")
@@ -465,7 +469,7 @@ def ppa_par_emploi(p: Parametres, s: str) -> dict[int, float]:
         return cache[("ppa_emploi", s)]
     from .systeme_actuel import _interp, _table_openfisca
     T = _table_openfisca()
-    c = _interp(1823.03 * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
+    c = _interp(p.val("profils.smic_brut_mensuel_2026") * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
     # roadmap 2.4 : prime de la famille de qui prend l'emploi, rapportée à celle d'une personne seule
     v0 = _interp(c, T["cout_du_travail"], T["ppa"]) * p.val("emploi.prime_activite_familles")
     w = sq.salaires(p, s)
@@ -554,12 +558,49 @@ def _deux_passes(p: Parametres, s: str, fabrique, ref: dict[int, dict]) -> dict[
     sup = baisse_ecart_taux(p, s, res, ref)
     if sup is None:
         return res
-    mes, ctx, dyn, regle = fabrique()
-    deja = (ctx or {}).get("taux_supplementaire") or {}
-    res = trajectoire(p, s, mes, {**(ctx or {}), "taux_supplementaire": {t: deja.get(t, 0.0) + sup[t] for t in ANNEES}}, dyn, regle)
+    def passe(sup):
+        mes, ctx, dyn, regle = fabrique()
+        deja = (ctx or {}).get("taux_supplementaire") or {}
+        return trajectoire(p, s, mes, {**(ctx or {}), "taux_supplementaire": {t: deja.get(t, 0.0) + sup[t] for t in ANNEES}}, dyn, regle)
+    res = passe(sup)
+    if p.val("macro.point_fixe_baisse_spread"):
+        # R3.1 : recalculer tant que la baisse gagnée par la trajectoire diffère de celle qui l'a produite. La baisse
+        # ne dépend que du nombre d'années où la dette recule : elle se stabilise en quelques passes (6 au plus au
+        # 25/11/2026) ; au-delà de 10, la dernière passe est gardée et le nombre de passes le dit.
+        passes = 2
+        while passes < 10:
+            nouveau = baisse_ecart_taux(p, s, res, ref) or {t: 0.0 for t in ANNEES}
+            if all(nouveau[t] == sup[t] for t in ANNEES):
+                break
+            sup = nouveau
+            res = passe(sup)
+            passes += 1
+        for t in ANNEES:
+            res[t]["passes_ecart_taux"] = passes
     for t in ANNEES:
         res[t]["baisse_ecart_taux"] = -sup[t]
     return res
+
+
+def hors_domaine(res: dict[str, dict[int, dict]], base: dict[str, dict[int, dict]] | None = None,
+                 dette_pib_max: float = 250.0, ecart_pib_max: float = 0.10) -> dict[str, dict]:
+    """Garde-fou de lecture (roadmap du moteur 25/11/2026, R3.3) : première année, par scénario, où la trajectoire
+    sort du domaine où le noyau reste une approximation défendable. Ne change aucun résultat.
+
+    - dette au-delà de dette_pib_max % du PIB : ni la croissance ni les comportements ne réagissent à la dette dans le
+      noyau (hors prime de dette bornée), la suite est une trajectoire mécanique ;
+    - PIB qui s'écarte de plus de ecart_pib_max (en part) du statu quo `base` : au-delà des chocs pour lesquels les
+      multiplicateurs et la balance commerciale linéaire sont calés (Mésange).
+    Seuils par défaut à confirmer (250 % et 10 %). Rend {scénario: {"dette": année ou None, "pib": année ou None}}."""
+    out = {}
+    for s, v in res.items():
+        dette = next((t for t in sorted(v) if v[t]["dette_pib"] > dette_pib_max), None)
+        pib = None
+        if base is not None and s in base:
+            pib = next((t for t in sorted(v) if t in base[s]
+                        and abs(v[t]["pib"] / base[s][t]["pib"] - 1) > ecart_pib_max), None)
+        out[s] = {"dette": dette, "pib": pib}
+    return out
 
 
 CLES_SANS_REGLE = ("deficit", "dette", "dette_pib", "pib", "solde", "solde_primaire", "chomage", "quasi_dette",

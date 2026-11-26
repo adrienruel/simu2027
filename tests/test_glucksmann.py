@@ -35,14 +35,14 @@ def test_fiche_complete_et_mesures_renvoyees():
     assert len({i for i in ids if not i.endswith("b")}) == 112
     assert all(m["traitement"] for m in fiche["mesures"])
     prog = noyau.charger("glucksmann")
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith("glucksmann_mesures."):
             assert par.valeur["id"] in ids, cle
 
 
 def test_sens_des_scenarios(prog):
     """Dépense : crise ≥ prudent ≥ médian ≥ optimiste ; recette : l'inverse."""
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if not cle.startswith("glucksmann_mesures."):
             continue
         m = par.valeur["montant"]
@@ -57,7 +57,7 @@ def test_recette_des_successions_sous_l_annonce(prog):
     """Le candidat attend ≈ 15 Md€ des très gros héritages : rien de tel n'est saisi."""
     m = prog.v("mesures.grosses_successions")["montant"]
     assert m["prudent"] < 15 / 3 and m["optimiste"] < 15
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith("glucksmann_mesures.") and par.valeur["poste"] == "recettes":
             assert par.statut != "SOURCE", cle
 
@@ -86,4 +86,4 @@ def test_service_civique_ne_fait_pas_de_chomeurs(p, prog):
     ctx = g.contexte(q)["prudent"]
     sc = ctx["emplois_canaux"][2035]["Service civique obligatoire : jeunes retirés de l'emploi"]
     assert -200000 < sc < -50000
-    assert g.actifs_en_plus[(id(q), "prudent")][2035] == pytest.approx(sc)
+    assert g.actifs_en_plus[(q.jeton, "prudent")][2035] == pytest.approx(sc)

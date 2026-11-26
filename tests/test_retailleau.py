@@ -29,13 +29,13 @@ def test_fiche_complete_et_mesures_renvoyees(prog):
     fiche = yaml.safe_load((RACINE / "programmes" / "retailleau" / "mesures.yaml").read_text(encoding="utf-8"))
     ids = {m["id"] for m in fiche["mesures"]}
     assert len(ids) == 98 and all(m["traitement"] for m in fiche["mesures"])
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith("retailleau_mesures."):
             assert par.valeur["id"] in ids, cle
 
 
 def test_sens_des_scenarios(prog):
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if not cle.startswith("retailleau_mesures."):
             continue
         m = par.valeur["montant"]
@@ -45,7 +45,7 @@ def test_sens_des_scenarios(prog):
 
 def test_annonces_non_reprises(prog):
     """197 Md€ annoncés : les économies nommées restent bien en dessous ; 200 000 des 400 000 postes en prudent."""
-    eco = -sum(min(0.0, par.valeur["montant"]["prudent"]) for cle, par in prog.pt._p.items()
+    eco = -sum(min(0.0, par.valeur["montant"]["prudent"]) for cle, par in prog.pt.items()
                if cle.startswith("retailleau_mesures.") and par.valeur["poste"] != "recettes")
     assert eco < 60
     postes = -sum(prog.v(f"mesures.postes_{k}")["montant"]["prudent"] for k in ("etat", "collectivites", "hopitaux"))

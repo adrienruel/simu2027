@@ -89,7 +89,7 @@ def taux_emploi_par_age(p: Parametres, t: int) -> dict[int, float]:
     if cle in cache:
         return cache[cle]
     base = {a: v for k, v in p.val("demographie.taux_emploi_age").items() for a in _tranche(k)}
-    actif = "demographie.taux_emploi_tendance" in p._p and p.val("demographie.taux_emploi_tendance")
+    actif = "demographie.taux_emploi_tendance" in p and p.val("demographie.taux_emploi_tendance")
     if actif:
         proj = p.val("demographie.taux_activite_seniors_projection")
 

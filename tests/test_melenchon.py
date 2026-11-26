@@ -31,14 +31,14 @@ def test_programme_disponible_et_chiffre(p, prog):
 def test_chaque_mesure_renvoie_a_la_fiche(prog):
     fiche = yaml.safe_load((RACINE / "programmes" / "melenchon" / "mesures.yaml").read_text(encoding="utf-8"))
     ids = {m["id"] for m in fiche["mesures"]}
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith("melenchon_mesures."):
             assert par.valeur["id"] in ids, f"{cle} : {par.valeur['id']} absent de la fiche"
 
 
 def test_sens_des_scenarios(prog):
     """Dépense : crise ≥ prudent ≥ médian ≥ optimiste ; recette : l'inverse (règle de prudence)."""
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if not cle.startswith("melenchon_mesures.") or not isinstance(par.valeur.get("montant"), dict):
             continue
         # superprofits : recette qui ne joue qu'en crise ; dépenses des communes : contrepartie exacte de la taxe
@@ -60,7 +60,7 @@ def test_baisse_age_retrouve_le_retour_a_62_ans_de_tondelier(p):
     d = bib.baisse_age_legal_detail(pt, "prudent", {2028: t.v("retraites.profil_62_ans")})
     for a in (2029, 2040, 2060):
         assert d["pensions"][a] == pytest.approx(ref[a], rel=1e-9)
-        assert d["retraites_en_plus"][a] == pytest.approx(-t._non_retraites[(id(pt), "prudent")][a], rel=1e-9)
+        assert d["retraites_en_plus"][a] == pytest.approx(-t._non_retraites[(pt.jeton, "prudent")][a], rel=1e-9)
 
 
 def test_soixante_ans_coute_plus_que_62_ans(p, prog):
@@ -74,7 +74,7 @@ def test_soixante_ans_coute_plus_que_62_ans(p, prog):
 def test_aucune_recette_annoncee():
     """Le livre ne chiffre rien : aucune ligne ne porte le statut SOURCE pour un montant de recette ou d'économie."""
     prog = noyau.charger("melenchon")
-    for cle, par in prog.pt._p.items():
+    for cle, par in prog.pt.items():
         if cle.startswith("melenchon_mesures.") and par.valeur["poste"] == "recettes":
             assert par.statut != "SOURCE", cle
 

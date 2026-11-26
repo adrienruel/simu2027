@@ -42,9 +42,9 @@ def test_sans_source_ne_s_allonge_pas(tableau):
 
 
 def test_aucun_programme_ne_redefinit_un_parametre_commun():
-    communs = {c.split(".", 1)[1] for c in Parametres()._p if c.startswith("programme_commun.")}
+    communs = {c.split(".", 1)[1] for c in Parametres().cles() if c.startswith("programme_commun.")}
     for nom in noyau.programmes_disponibles()[1:]:
-        for c in Parametres(programme=nom)._p:
+        for c in Parametres(programme=nom).cles():
             if not c.startswith(f"{nom}_") or "." not in c:
                 continue
             groupe, champ = c[len(nom) + 1:].split(".", 1)

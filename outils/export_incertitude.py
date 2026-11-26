@@ -53,12 +53,29 @@ def main() -> None:
                                "p10": round(v["p10"], 3), "p50": round(v["p50"], 3), "p90": round(v["p90"], 3),
                                "proba_mieux_que_statu_quo": (round(x[f"proba_mieux_que_statu_quo_{annee}"], 3)
                                                              if grandeur == "deficit" and f"proba_mieux_que_statu_quo_{annee}" in x else ""),
-                               "hypotheses_deficit_2037": sens if (grandeur == "deficit" and annee == "2037") else ""})
+                               "hypotheses_deficit_2037": sens if (grandeur == "deficit" and annee == "2037") else "",
+                               "ex_aequo": ""})
     # la page lit les hypothèses sur la ligne rho 1 : on y recopie celles des tirages indépendants
     h0 = {l["dossier"]: l["hypotheses_deficit_2037"] for l in lignes if l["rho"] == "0" and l["hypotheses_deficit_2037"]}
     for l in lignes:
         if l["rho"] == "1" and l["grandeur"] == "deficit" and l["annee"] == "2037":
             l["hypotheses_deficit_2037"] = h0.get(l["dossier"], "")
+    # ex æquo (26/11/2026) : programmes que les tirages liés (rho 1) ne départagent pas sur la médiane, rangés comme
+    # la page les range (outils/erreur_monte_carlo.groupes_ex_aequo) ; libellés des autres programmes du groupe
+    from moteur import incertitude
+    from outils.erreur_monte_carlo import groupes_ex_aequo
+    f1 = RACINE / "sorties" / "incertitude_rho1.json"
+    if f1.exists():
+        r1 = json.loads(f1.read_text(encoding="utf-8"))
+        ft = incertitude.fichier_tirages(r1["rho"], r1.get("graine", 2029))
+        if ft.exists():
+            tirages = [json.loads(l) for l in ft.read_text(encoding="utf-8").splitlines() if l.strip()]
+            cles = {(l["grandeur"], l["annee"]) for l in lignes if l["rho"] == "1"}
+            groupes = {c: groupes_ex_aequo(tirages, int(c[1]), c[0]) for c in sorted(cles)}
+            for l in lignes:
+                autres = groupes.get((l["grandeur"], l["annee"]), {}).get(l["dossier"]) if l["rho"] == "1" else None
+                if autres:
+                    l["ex_aequo"] = ", ".join(lib.get(k, k) for k in autres)
     # variante « fonds dans les administrations publiques » (phase 3.2) : fichier à part, pour que le comparateur ne
     # la prenne pas pour un programme de plus
     from outils import trace

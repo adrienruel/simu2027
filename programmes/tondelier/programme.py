@@ -49,7 +49,7 @@ class Tondelier:
     def v(self, cle: str, s: str = "prudent"):
         # valeur du programme, ou à défaut la valeur commune à tous (programme_commun, phase J2 du 16/11/2026)
         k = f"tondelier_{cle}"
-        if k not in self.pt._p and "programme_commun." + cle.replace(".", "_") in self.pt._p:
+        if k not in self.pt and "programme_commun." + cle.replace(".", "_") in self.pt:
             k = "programme_commun." + cle.replace(".", "_")
         return self.pt.val(k, s)
 
@@ -117,7 +117,7 @@ class Tondelier:
         det = bib.baisse_age_legal_detail(p, s, {self.v("retraites.annee_retour"): self.v("retraites.profil_62_ans")})
         # personnes pas encore retraitées en moins, pour l'emploi des seniors (offre.seniors)
         self._non_retraites = getattr(self, "_non_retraites", {})
-        self._non_retraites[(id(p), s)] = {t: -v for t, v in det["retraites_en_plus"].items()}
+        self._non_retraites[(p.jeton, s)] = {t: -v for t, v in det["retraites_en_plus"].items()}
         return det["pensions"]
 
     def smic(self, p: Parametres) -> dict[str, float]:
@@ -242,7 +242,7 @@ class Tondelier:
         dont le coût est déjà dans les mesures budgétaires."""
         from moteur.ecologie import emissions as em
         out = []
-        for nom, par in self.pt._p.items():
+        for nom, par in self.pt.items():
             if not nom.startswith("tondelier_ecologie."):
                 continue
             x = par.valeur
@@ -253,7 +253,7 @@ class Tondelier:
         return out
 
     def _calcul(self, p: Parametres) -> dict:
-        cle = id(p)
+        cle = p.jeton
         if cle in self._cache:
             return self._cache[cle]
         part_fp = self.part_prelevements_fp(p)
@@ -264,7 +264,7 @@ class Tondelier:
             idx = self._indices(p, s)
             liste: list[Mesure] = []
             # mesures simples
-            for nom, par in self.pt._p.items():
+            for nom, par in self.pt.items():
                 if not nom.startswith("tondelier_mesures."):
                     continue
                 x = dict(par.valeur)
@@ -410,7 +410,7 @@ class Tondelier:
                 details_offre = {}
             # emploi des seniors : retour à 62 ans, moins de personnes en emploi et au chômage (offre.seniors, scénario
             # miroir : un âge abaissé fait perdre des emplois)
-            sen = offre.seniors(p, s, self._non_retraites[(id(p), s)], baisse_age=True)
+            sen = offre.seniors(p, s, self._non_retraites[(p.jeton, s)], baisse_age=True)
             liste.extend(sen["mesures"])
             for t in ANNEES:
                 pib[t] += sen["pib"][t]

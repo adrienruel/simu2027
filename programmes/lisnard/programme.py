@@ -47,7 +47,7 @@ class Lisnard(ProgrammeSimple):
         det = bib.report_age_legal_detail(p, s, self.v("retraites.age_cible"), self.v("retraites.premiere_generation"),
                                           self.v("retraites.pas_par_generation"))
         self.non_retraites = getattr(self, "non_retraites", {})
-        self.non_retraites[(id(p), s)] = {"serie": det["non_retraites"], "baisse": False}
+        self.non_retraites[(p.jeton, s)] = {"serie": det["non_retraites"], "baisse": False}
         serie = {2027: 0.0, 2028: 0.0, **{t: -det["pensions"][t] for t in ANNEES}}
         pens = sq.retraites(p, s)[2029]["depenses"]
         taux_prel = sq.recettes_par_impot(p, s)[2029]["retraites"] / pens

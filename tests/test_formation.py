@@ -87,7 +87,7 @@ def test_profil_statu_quo_cale_sur_l_iesf():
 def test_philippe_passe_par_le_canal_commun():
     prog = noyau.charger("philippe")
     assert "formation_superieure" in canaux_declares.declares(prog)
-    assert not any(k.startswith("philippe_mesures.ingenieurs") for k in prog.pt._p)
+    assert not any(k.startswith("philippe_mesures.ingenieurs") for k in prog.pt.cles())
     p = Parametres(programme="philippe")
     noms = [m.nom for m in prog.mesures(p)["prudent"]]
     assert any(n.startswith("PHI-NUM-03") for n in noms)

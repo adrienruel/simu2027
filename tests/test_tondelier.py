@@ -26,7 +26,7 @@ def test_chaque_mesure_renvoie_a_la_fiche(prog):
     """Chaque mesure chiffrée renvoie à un identifiant de la fiche des mesures (mesures.yaml, citations vérifiées)."""
     fiche = yaml.safe_load((RACINE / "programmes" / "tondelier" / "mesures.yaml").read_text(encoding="utf-8"))
     ids = {m["id"] for m in fiche["mesures"]}
-    for nom, par in prog.pt._p.items():
+    for nom, par in prog.pt.items():
         if nom.startswith("tondelier_mesures."):
             for i in par.valeur["id"].split("/"):
                 i = i if "-" in i else par.valeur["id"].split("-")[0] + "-" + i

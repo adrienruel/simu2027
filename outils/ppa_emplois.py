@@ -21,7 +21,7 @@ from outils import openfisca_population as op
 
 def brut_emploi_cree(p: Parametres) -> float:
     T = _table_openfisca()
-    c = _interp(1823.03 * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
+    c = _interp(p.val("profils.smic_brut_mensuel_2026") * 12, T["brut"], T["cout_du_travail"]) * p.val("emploi.cout_emploi_cree_smic")
     return _interp(c, T["cout_du_travail"], T["brut"]), _interp(c, T["cout_du_travail"], T["ppa"])
 
 
