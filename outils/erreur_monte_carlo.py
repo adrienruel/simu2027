@@ -55,6 +55,44 @@ def bootstrap(ec: dict[str, list[float]], b: int = 500, graine: int = 2029) -> d
     return out
 
 
+def groupes_ex_aequo(tirages: list[dict], annee: int, grandeur: str = "deficit", b: int = 500,
+                     seuil: float = 0.95, graine: int = 2029) -> dict[str, list[str]]:
+    """Programmes que les tirages ne départagent pas, pour l'affichage « ex æquo » du comparateur (26/11/2026).
+
+    Programmes rangés par médiane de la grandeur (statu quo à part). Deux voisins sont ex æquo quand leur ordre
+    s'inverse dans plus de 1 − seuil des rééchantillonnages ; les chaînes de voisins ex æquo forment un groupe.
+    Rend {programme: [autres programmes du groupe]} (liste vide : départagé de ses voisins)."""
+    noms = [k for k in tirages[0] if k not in ("statu_quo", "i", "erreurs") and inc.SUFFIXE_FONDS not in k]
+    communs = [d for d in tirages if d.get("statu_quo") and all(d.get(n) for n in noms)]
+    a = str(annee)
+    if grandeur.startswith("ecart_"):  # écart au statu quo, tirage par tirage (ex. ecart_deficit)
+        g = grandeur.removeprefix("ecart_")
+        val = {n: [d[n][a][g] - d["statu_quo"][a][g] for d in communs] for n in noms}
+    else:
+        val = {n: [d[n][a][grandeur] for d in communs] for n in noms}
+    ordre = sorted(noms, key=lambda n: _quantile(val[n], 0.5))
+    paires = list(zip(ordre, ordre[1:]))
+    tenu = Counter()
+    rng = random.Random(graine)
+    m = len(communs)
+    for _ in range(b):
+        idx = [rng.randrange(m) for _ in range(m)]
+        med = {n: _quantile([val[n][i] for i in idx], 0.5) for n in noms}
+        for x, y in paires:
+            if med[x] <= med[y]:
+                tenu[(x, y)] += 1
+    groupes, courant = [], [ordre[0]] if ordre else []
+    for x, y in paires:
+        if tenu[(x, y)] / b < seuil:
+            courant.append(y)
+        else:
+            groupes.append(courant)
+            courant = [y]
+    if courant:
+        groupes.append(courant)
+    return {n: [k for k in g if k != n] for g in groupes for n in g}
+
+
 def main(argv=None) -> dict:
     a = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     a.add_argument("--annee", type=int, default=2037)

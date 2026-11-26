@@ -101,3 +101,18 @@ def test_hors_domaine():
     assert noyau.hors_domaine(fausse, base) == {"prudent": {"dette": 2030, "pib": 2030}}
     assert noyau.hors_domaine(fausse) == {"prudent": {"dette": 2030, "pib": None}}
     assert noyau.hors_domaine(fausse, base, dette_pib_max=400, ecart_pib_max=0.2) == {"prudent": {"dette": None, "pib": None}}
+
+
+def test_groupes_ex_aequo():
+    """Affichage « ex æquo » (26/11/2026) : voisins non départagés regroupés, programme bien séparé seul."""
+    import random
+
+    from outils.erreur_monte_carlo import groupes_ex_aequo
+    rng = random.Random(3)
+    moy = {"a": 0.0, "b": 5.0, "c": 5.01, "d": 5.02, "e": 10.0}
+    tirages = [{"statu_quo": {"2037": {"deficit": 1.0}},
+                **{n: {"2037": {"deficit": rng.gauss(m, 1)}} for n, m in moy.items()}} for _ in range(400)]
+    g = groupes_ex_aequo(tirages, 2037, b=200)
+    assert g["a"] == [] and g["e"] == []
+    assert sorted(g["b"] + ["b"]) == ["b", "c", "d"]
+    assert groupes_ex_aequo(tirages, 2037, "ecart_deficit", b=200)["a"] == []
