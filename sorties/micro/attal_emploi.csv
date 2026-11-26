@@ -1,9 +1,9 @@
 programme,mesure,scenario,emplois,budget_md,statique_md
-attal,ATT-EMP-01,crise,45,0.003,2.248
-attal,ATT-EMP-01,prudent,67,0.004,2.248
-attal,ATT-EMP-01,median,167,0.01,2.248
-attal,ATT-EMP-01,optimiste,310,0.018,2.248
-attal,ATT-ECO-01,crise,26465,0.629,-35.971
-attal,ATT-ECO-01,prudent,39697,0.944,-35.971
-attal,ATT-ECO-01,median,100437,2.375,-35.971
-attal,ATT-ECO-01,optimiste,189082,4.435,-35.971
+attal,ATT-EMP-01,crise,60,0.003,2.281
+attal,ATT-EMP-01,prudent,89,0.004,2.281
+attal,ATT-EMP-01,median,225,0.009,2.281
+attal,ATT-EMP-01,optimiste,420,0.018,2.281
+attal,ATT-ECO-01,crise,26302,0.625,-35.948
+attal,ATT-ECO-01,prudent,39453,0.938,-35.948
+attal,ATT-ECO-01,median,99821,2.359,-35.948
+attal,ATT-ECO-01,optimiste,187928,4.407,-35.948
