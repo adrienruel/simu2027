@@ -6,17 +6,17 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 5,philippe,PHI-FIS-01b,… compensés par 50 Md€ d'aides aux entreprises en moins,0.6348,2,True,True,False,False,1.9043
 6,melenchon,LFI-SAN-01,"« 100 % Sécu », complémentaires intégrées",-0.9268,1,True,False,False,False,1.8537
 7,roussel,PCF-SAN-01,Soins prescrits remboursés à 100 %,-0.9268,1,True,False,False,False,1.8537
-8,arthaud,ART-EMP-02,Répartition du travail entre tous sans perte de salaire,-1.8227,0,False,False,False,False,1.8227
-9,roussel,PCF-RET-03,CSG sur les retraites supprimée,-0.8658,1,True,False,False,False,1.7317
-10,roussel,PCF-EMP-01,32 heures sans diminution de salaire,-1.7182,0,False,False,False,False,1.7182
+8,arthaud,ART-EMP-02,Répartition du travail entre tous sans perte de salaire,-1.8231,0,False,False,False,False,1.8231
+9,roussel,PCF-RET-03,CSG sur les retraites supprimée,-0.8642,1,True,False,False,False,1.7285
+10,roussel,PCF-EMP-01,32 heures sans diminution de salaire,-1.7187,0,False,False,False,False,1.7187
 11,melenchon,LFI-PRE-01,Garantie d'autonomie : revenu au seuil de pauvreté,-0.8497,1,True,False,False,False,1.6995
 12,melenchon,LFI-RET-03,Pensions des carrières complètes au moins au SMIC revalorisé,-0.7243,1,True,False,False,False,1.4486
 13,arthaud,ART-ECO-01,SMIC à 2 200 € net par mois,-1.3415,0,False,False,False,False,1.3415
 14,attal,ATT-ECO-01,Droit au brut : +250 € net par mois au salaire médian (cotisations salariales supprimées),-1.3005,0,False,False,False,False,1.3005
 15,melenchon,LFI-RET-01,"Réforme de 2023 abrogée, puis retraite à 60 ans à taux plein pour 40 annuités",-1.2823,0,False,False,False,False,1.2823
 16,roussel,PCF-RET-01,"Retraite à 60 ans à taux plein, réforme de 2023 abrogée",-1.2823,0,False,False,False,False,1.2823
-17,bertrand,BER-FIS-01,Baisser l'impôt sur le revenu des premières tranches,-0.3141,3,True,True,False,True,1.2564
-18,tondelier,REC-11,Baisse de l'IR des tranches les plus basses,-0.3107,3,True,True,False,True,1.2429
+17,bertrand,BER-FIS-01,Baisser l'impôt sur le revenu des premières tranches,-0.3136,3,True,True,False,True,1.2543
+18,tondelier,REC-11,Baisse de l'IR des tranches les plus basses,-0.31,3,True,True,False,True,1.2399
 19,tondelier,FP-02,+10 % pour les catégories C et B et les catégories A ayant perdu du pouvoir d'achat ; enseignants +15 % sur le quinquennat ; chercheurs +10 % dès la première année,-0.5805,1,True,False,False,False,1.161
 20,tondelier,SAN-01,"Soins essentiels remboursés à 100 %, franchises supprimées, mutuelles cantonnées aux soins optionnels",-0.374,2,True,False,False,True,1.1221
 21,arthaud,ART-SP-01,Embauches massives dans les services publics,-0.2794,3,True,True,False,True,1.1177
@@ -67,7 +67,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 66,zemmour,ZEM-KNA-01,800 000 départs administratifs non remplacés sur le quinquennat [40 Md€],0.1519,2,True,True,False,False,0.4558
 67,melenchon,LFI-COL-05,500 000 places d'accueil des jeunes enfants,-0.2256,1,True,False,False,False,0.4512
 68,tondelier,PRE-14,"Congé d'accueil de l'enfant de 16 semaines payé à 100 % du salaire, obligatoire pour les deux parents ; congé supplémentaire de naissance à 80 % et 3 mois par parent",-0.1488,2,True,False,False,True,0.4463
-69,melenchon,LFI-EMP-10,"35 heures rétablies, 32 heures dans les métiers pénibles ou de nuit",-0.2217,1,True,False,False,False,0.4434
+69,melenchon,LFI-EMP-10,"35 heures rétablies, 32 heures dans les métiers pénibles ou de nuit",-0.2217,1,True,False,False,False,0.4435
 70,melenchon,LFI-SAN-04,"Arrêts maladie à 100 %, jours de carence supprimés",-0.2152,1,True,False,False,False,0.4303
 71,melenchon,LFI-SAL-01,"SMIC à 1 700 € net par mois, immédiatement",-0.4287,0,False,False,False,False,0.4287
 72,roussel,PCF-SAL-01,"SMIC à 1 700 € net, hausse de 5 % de tous les salaires, échelle mobile",-0.4287,0,False,False,False,False,0.4287
@@ -83,7 +83,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 82,glucksmann,GLU-EMP-02,Abroger la réforme de l'assurance chômage,-0.1965,1,True,False,False,False,0.3929
 83,melenchon,LFI-EMP-01,Garantie d'emploi pour les chômeurs de longue durée,-0.1299,2,True,False,False,True,0.3897
 84,roussel,PCF-EMP-02,"Sécurité d'emploi ou de formation à la place du RSA : emploi ou formation au SMIC, fin du chômage de longue durée en cinq ans",-0.1299,2,True,False,False,True,0.3897
-85,tondelier,REC-13,Suppression de l'abattement de 10 % des retraités,0.193,1,True,False,False,False,0.3859
+85,tondelier,REC-13,Suppression de l'abattement de 10 % des retraités,0.1926,1,True,False,False,False,0.3851
 86,tondelier,REC-20/21,Capital : CSG +3 points et flat tax +3 points (cumulées),0.1222,2,True,True,False,False,0.3667
 87,attal,ATT-FIS-03,"« Année blanche » de 2028 (petites retraites protégées), réformes de l'assurance chômage, des retraites et des arrêts maladie",0.1813,1,True,False,False,False,0.3626
 88,melenchon,LFI-REC-16,CVAE remplacée par un impôt progressif selon le chiffre d'affaires et l'empreinte écologique,0.1778,1,True,False,False,False,0.3556
@@ -116,9 +116,9 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 115,zemmour,ZEM-RET-01,"Reporter l'âge de départ, introduire une part de capitalisation",0.2761,0,False,False,False,False,0.2761
 116,attal,ATT-EDU-01,"Enseignants +200 € net par mois, jusqu'à +500 € en milieu de carrière",-0.0904,2,True,True,False,False,0.2711
 117,melenchon,LFI-PRE-06,Congé d'accueil de 20 semaines par parent,-0.1352,1,True,False,False,False,0.2705
-118,arthaud,ART-INT-01,Opposition à la hausse du budget militaire,0.2663,0,False,False,False,False,0.2663
-119,melenchon,LFI-SAN-13,"Service public de la dépendance, métiers du grand âge revalorisés, maintien à domicile",-0.1324,1,True,False,False,False,0.2648
-120,lisnard,LIS-SOC-01,Quotient familial déplafonné,-0.1323,1,True,False,False,False,0.2647
+118,lisnard,LIS-SOC-01,Quotient familial déplafonné,-0.1335,1,True,False,False,False,0.267
+119,arthaud,ART-INT-01,Opposition à la hausse du budget militaire,0.2663,0,False,False,False,False,0.2663
+120,melenchon,LFI-SAN-13,"Service public de la dépendance, métiers du grand âge revalorisés, maintien à domicile",-0.1324,1,True,False,False,False,0.2648
 121,lisnard,LIS-ECO-05,Subventions compensant les charges des entreprises supprimées,0.1317,1,True,False,False,False,0.2634
 122,tondelier,RET-04,"Indexation différenciée des pensions, sous-indexation des plus hautes",0.0867,2,True,False,False,True,0.2601
 123,roussel,PCF-EDU-02,"Fournitures, cantine et transports scolaires gratuits",-0.1298,1,True,False,False,False,0.2596
@@ -269,7 +269,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 268,tondelier,REC-23,"Taxe sur les transactions financières portée à 0,7 %, assiette élargie",0.0263,2,True,False,True,False,0.079
 269,glucksmann,GLU-RET-02,Âge modulé selon la pénibilité et l'espérance de vie en bonne santé,-0.0394,1,True,False,False,False,0.0789
 270,glucksmann,GLU-EDU-05,"Parcoursup repensé, capital formation universel (chantier)",-0.026,2,True,False,True,False,0.0779
-271,tondelier,REC-10,Tranche d'IR à 60 % au-delà de 250 000 €,0.0387,1,True,False,False,False,0.0774
+271,tondelier,REC-10,Tranche d'IR à 60 % au-delà de 250 000 €,0.038,1,True,False,False,False,0.076
 272,melenchon,LFI-COL-06,"Justice : recrutements, aide juridictionnelle, tribunaux de proximité",-0.025,2,True,False,False,True,0.0751
 273,melenchon,LFI-COL-03,Services publics essentiels à 15-30 minutes,-0.0353,1,True,False,False,False,0.0705
 274,melenchon,LFI-REC-25,Cannabis légalisé sous monopole d'État,0.023,2,True,False,True,False,0.0691
@@ -329,7 +329,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 328,glucksmann,GLU-SOC-01,Statut des parents seuls,-0.0162,2,True,False,True,False,0.0487
 329,philippe,PHI-SOC-07,« Plan Marshall » pour la garde d'enfants,-0.0243,1,True,False,False,False,0.0487
 330,lisnard,LIS-ECO-04,Entreprises nouvelles exonérées de cotisations et de CFE pendant 12 mois,-0.024,1,True,False,False,False,0.0479
-331,philippe,PHI-FIS-02,"Pas d'impôt sur le revenu trois ans après une naissance (4e au 6e décile et début du 7e), réduction de 3 000 € par an au-dessus (≈ 3 Md€ par an)",-0.0473,0,False,False,False,False,0.0473
+331,philippe,PHI-FIS-02,"Pas d'impôt sur le revenu trois ans après une naissance (4e au 6e décile et début du 7e), réduction de 3 000 € par an au-dessus (≈ 3 Md€ par an)",-0.0472,0,False,False,False,False,0.0472
 332,melenchon,LFI-EMP-06,Burn-out reconnu en maladie professionnelle ; cancérogènes du CIRC,-0.023,1,True,False,False,False,0.0461
 333,tondelier,ECO-01,"Financement public de l'enseignement privé sous contrat ramené à 50 % (révision de la loi Debré), compensé par des frais de scolarité",0.023,1,True,False,False,False,0.0461
 334,roussel,PCF-SEC-01,Police nationale de proximité : 30 000 postes,-0.0229,1,True,False,False,False,0.0459

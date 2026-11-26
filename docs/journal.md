@@ -2207,3 +2207,17 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
 - **R3.4** : balance commerciale signalée par `noyau.hors_domaine` au-delà de 2 points de PIB.
 - **R5, IR de la population** : +2,4 % expliqués (calage non convergent +1,7 ; mise à l'échelle du capital après le
   calage +0,8) ; correctif proposé, à faire avec la régénération.
+
+## Régénération complète (26/11/2026, soir)
+
+- Population du 26/11 (bornes des poids 0,1-10, capital au point fixe), puis toute la chaîne : micro des 12
+  programmes (Tondelier et Mélenchon en trois parties, la mémoire manquant en un seul processus), vieillissement,
+  exports et audits, classement des incertitudes (12 min au lieu d'une heure), Monte Carlo à 600 tirages (47 min
+  pour les deux bornes), manifeste. Toutes les sorties sont à jour ; la suite de tests passe en entier.
+- Écart de solde primaire 2037 au statu quo, prudent : Bertrand +0,06 ; Retailleau −0,42 ; Philippe −0,87 ;
+  Attal −1,16 ; Zemmour −2,36 ; Le Pen −2,61 ; Lisnard −2,68 ; Glucksmann −2,98 ; Tondelier −3,25 ;
+  Arthaud −4,71 ; Roussel −9,82 ; Mélenchon −12,31.
+- Dette 2037 aux taux du statu quo, prudent (statu quo 154,3 % du PIB) : Bertrand 154,7 ; Retailleau 158,4 ;
+  Philippe 162,5 ; Attal 163,7 ; Tondelier 170,5 ; Glucksmann 172,5 ; Lisnard 176,8 ; Le Pen 177,0 ;
+  Zemmour 179,2 ; Arthaud 190,4 ; Mélenchon 232,7 ; Roussel 295,2.
+- `outils.priorites_mesures` ajouté à la liste de régénération (ses trois fiches étaient périmées).
