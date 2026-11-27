@@ -42,12 +42,33 @@ def fichiers_parametres() -> list[Path]:
     return sorted(set(out))
 
 
+# Champs documentaires des paramètres : ils ne changent aucun calcul (27/11/2026 : compléter une source ou une note ne
+# périme plus les sorties).
+DOCUMENTAIRES = frozenset({"source", "note", "url", "page", "citation", "a_fixer", "commentaire"})
+
+
+def _sans_documentation(x):
+    if isinstance(x, dict):
+        return {k: _sans_documentation(v) for k, v in x.items() if k not in DOCUMENTAIRES}
+    if isinstance(x, list):
+        return [_sans_documentation(v) for v in x]
+    return x
+
+
 def empreinte_parametres() -> str:
-    """Empreinte du contenu de tous les fichiers de paramètres qui servent au comparateur."""
+    """Empreinte des valeurs de tous les fichiers de paramètres qui servent au comparateur : contenu YAML lu, sans les
+    champs documentaires (source, note…) ; les autres fichiers (CSV de données) octet par octet."""
+    import json
+
+    import yaml
     h = hashlib.sha256()
     for f in fichiers_parametres():
         h.update(str(f.relative_to(RACINE)).encode())
-        h.update(f.read_bytes())
+        if f.suffix in (".yaml", ".yml"):
+            contenu = _sans_documentation(yaml.safe_load(f.read_text(encoding="utf-8")))
+            h.update(json.dumps(contenu, sort_keys=True, ensure_ascii=False, default=str).encode())
+        else:
+            h.update(f.read_bytes())
     return h.hexdigest()[:16]
 
 
