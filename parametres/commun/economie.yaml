@@ -408,7 +408,10 @@ macro:
     source: "Borne basse : écart OAT − Bund à 10 ans ≈ 0,8 point le 24 juillet 2026 (4,01 % contre 3,22 %, Banque de France). Borne haute : écart Italie − Allemagne au plus fort de la crise de la zone euro ≈ 5,5 points (novembre 2011), hors cas grec ; 4 points retenus comme seuil au-delà duquel la trajectoire est de toute façon intenable."
     note: "Ajouté le 05/11/2026 (relecture indépendante). Bornes de la prime de taux liée à la dette, et de la baisse totale du taux (prime + écart propre à un programme, comme macro.baisse_spread) : la crédibilité ne fait pas passer sous le taux allemand et ne se compte pas deux fois ; au-delà de +4 points, la trajectoire n'a plus de sens économique (un ajustement serait forcé) et l'outil le signale par le déficit, sans faire exploser les intérêts à l'infini. Sans borne, le statu quo atteignait 79 % de taux apparent et 14 000 % de dette/PIB en 2073 (prudent)."
   prime_dette:
-    valeur: {crise: 0.035, prudent: 0.03, median: 0.02, optimiste: 0.015}
+    # DÉCISION d'Adrien du 27/11/2026 : « on ne spécule pas sur les taux ». Calcul principal sans réaction des marchés
+    # à la dette (statu quo et programmes) ; les valeurs d'avant sont gardées pour la variante publiée « avec la
+    # réaction des marchés » (macro.prime_dette_reaction, moteur/reaction_marches.py).
+    valeur: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
     v235: {crise: 0.0, prudent: 0.0, median: 0.0, optimiste: 0.0}
     unite: sans_unite
     statut: HYPOTHESE
@@ -425,11 +428,25 @@ macro:
   premiere_annee_ia: {valeur: 2029, unite: annee, statut: HYPOTHESE}
   # Déplacé du fichier d'Écologie de droite le 16/11/2026 : paramètre lu par le moteur commun pour tous les programmes.
   baisse_spread:
-    valeur: {crise: 0, prudent: 0, median: 0.002, optimiste: 0.004}
+    # DÉCISION d'Adrien du 27/11/2026 : pas de baisse de l'écart de taux dans le calcul principal ; valeurs d'avant
+    # dans la variante « avec la réaction des marchés » (macro.baisse_spread_reaction).
+    valeur: {crise: 0, prudent: 0, median: 0, optimiste: 0}
     unite: sans_unite
     statut: HYPOTHESE
     source: "Encadrement : écart OAT − Bund à 10 ans ≈ 0,8 point le 24 juillet 2026 (4,01 % contre 3,22 %)"
     note: "Baisse du taux long attendue de la crédibilité des réformes, atteinte en 8 ans. DÉCISION d'Adrien du 29/10/2026 : l'effet des réformes sur les taux est incertain, il varie selon le scénario (aucun dans la crise et le prudent, un quart de l'écart avec le Bund dans le médian, la moitié dans l'optimiste)."
+  prime_dette_reaction:
+    valeur: {crise: 0.035, prudent: 0.03, median: 0.02, optimiste: 0.015}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "CBO, Working Paper 2019-01 (Debt and Interest Rates) : 2 à 3 points de base de taux long par point de dette/PIB ; Laubach (2009) : 2,1 à 3,5"
+    note: "Valeurs de macro.prime_dette jusqu'au 26/11/2026, gardées pour la variante « avec la réaction des marchés » (moteur/reaction_marches.py) ; le calcul principal n'a plus de prime (DÉCISION d'Adrien du 27/11/2026)."
+  baisse_spread_reaction:
+    valeur: {crise: 0, prudent: 0, median: 0.002, optimiste: 0.004}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : écart OAT − Bund à 10 ans ≈ 0,8 point le 24 juillet 2026"
+    note: "Valeurs de macro.baisse_spread jusqu'au 26/11/2026, gardées pour la variante « avec la réaction des marchés »."
   # Déplacé du fichier d'Écologie de droite le 16/11/2026 : paramètre lu par le moteur commun pour tous les programmes.
   annees_baisse_spread: {valeur: 8, unite: sans_unite, statut: HYPOTHESE}
   point_fixe_baisse_spread:

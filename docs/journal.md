@@ -2236,3 +2236,15 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   fin.
 - À arbitrer par Adrien : réaction des taux dans le PIB, effacement par l'inflation et prime du statu quo dans la
   « dette aux taux du statu quo » ; sources manquantes ; 42 annuités de Le Pen.
+- Corrigé ensuite (27/11/2026, accord d'Adrien : « ok corrige ») :
+  - **Calcul principal sans réaction des marchés** (C2, I2) : `macro.prime_dette` et `macro.baisse_spread` à zéro
+    pour le statu quo et les programmes ; les valeurs d'avant vivent dans `macro.prime_dette_reaction` et
+    `macro.baisse_spread_reaction`, pour la variante publiée « avec la réaction des marchés »
+    (`moteur/reaction_marches.py`, colonnes `deficit_reaction_marches`, `dette_pib_reaction_marches` ; variante de
+    `variantes_dette` « avec_reaction_marches », à la place de « sans prime de dette »). Statu quo, prudent : déficit
+    2037 7,98 → 7,38 %, dette 2050 243,7 → 209,5 %.
+  - **Dette aux taux du statu quo au taux réel du statu quo** (I1) : l'inflation propre au programme n'efface plus
+    sa dette.
+  - **Mélenchon** : garantie d'autonomie (LFI-PRE-01, LFI-PRE-02) indexée sur les salaires, comme le dit la note
+    (avant : bloc pauvreté, à plat). **Attal** : année blanche constante en euros de 2026 (avant : indice du PIB).
+    **Le Pen** : 42 annuités (RN-RET-04), barème de LFI-RET-02 au prorata d'une année sur trois.

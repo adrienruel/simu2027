@@ -44,7 +44,9 @@ class Attal(ProgrammeSimple):
         d = self.v("annee_blanche.duree_pensions")
         eco_p = pens * infl * (1 - prot)
         taux_prel = sq.recettes_par_impot(p, s)[2029]["retraites"] / pens
-        serie_p = {2027: 0.0, 2028: -eco_p, **{t: -eco_p * math.exp(-(t - 2028) / d) * idx["pib"][t] for t in ANNEES}}
+        # 27/11/2026 (analyse indépendante, M3) : pensions et prestations revalorisées sur les prix, donc constantes en
+        # euros de 2026 ; avant, multipliées par l'indice du PIB (≈ +8 % en 2037)
+        serie_p = {2027: 0.0, 2028: -eco_p, **{t: -eco_p * math.exp(-(t - 2028) / d) for t in ANNEES}}
         out += [
             Mesure("ATT-FIS-03 — année blanche de 2028 : pensions non revalorisées (petites retraites protégées)",
                    "retraites", serie_p),
@@ -53,7 +55,7 @@ class Attal(ProgrammeSimple):
         ]
         eco_q = self.v("annee_blanche.prestations_indexees") * infl
         out.append(Mesure("ATT-FIS-03 — année blanche de 2028 : prestations non revalorisées", "pauvrete",
-                          {2027: 0.0, 2028: -eco_q, **{t: -eco_q * idx["pib"][t] for t in ANNEES}}))
+                          {2027: 0.0, 2028: -eco_q, **{t: -eco_q for t in ANNEES}}))
 
         # ATT-EMP-01 : assurance chômage, chômage structurel plus bas
         h = self.v("chomage.baisse_taux", s)

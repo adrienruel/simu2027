@@ -106,6 +106,11 @@ def _ecrire(nom: str, lignes: list[dict]) -> None:
 def main() -> None:
     p = Parametres()
     base = sq.simuler(p)
+    # variante « avec la réaction des marchés » (27/11/2026, moteur/reaction_marches.py) : prime de dette et baisse de
+    # l'écart de taux ; le calcul principal n'en a pas
+    from moteur import reaction_marches
+    p_r = reaction_marches.parametres(p)
+    base_r = sq.simuler(p_r)
     traj, ecarts, mesures, ecologie, emploi_canaux, ecologie_mesures, annonces = [], [], [], [], [], [], []
     variantes = {}
     liste_annonces = yaml.safe_load((RACINE / "programmes" / "annonces.yaml").read_text(encoding="utf-8"))["annonces"]
@@ -113,6 +118,7 @@ def main() -> None:
         prog = noyau.charger(nom)
         lib = getattr(prog, "libelle", nom)
         res = base if nom == "statu_quo" else noyau.simuler(p, prog)
+        res_r = base_r if nom == "statu_quo" else noyau.simuler(p_r, prog)
         tout = prog.mesures(p)
         if nom != "statu_quo" and any(x["programme"] == nom for x in liste_annonces):
             var = noyau.charger(nom)
@@ -123,6 +129,7 @@ def main() -> None:
             # dette et déficit aux taux du statu quo (26/11/2026) : la dette que crée le solde primaire, sans la prime
             # de dette ni l'écart de taux propres au programme (moteur/decomposition.aux_taux_statu_quo)
             tsq = decomposition.aux_taux_statu_quo(v, base[s])
+            vr = res_r[s]
             for t, x in v.items():
                 traj.append({"programme": lib, "scenario": SCENARIOS[s], "annee": t,
                              "deficit": round(x["deficit"], 3), "dette_pib": round(x["dette_pib"], 2),
@@ -157,6 +164,9 @@ def main() -> None:
                              "dette_pib_taux_sq": round(tsq[t]["dette_pib"], 2),
                              # dette aux taux du statu quo, en écart à celle du statu quo (points de PIB, + = plus de dette)
                              "ecart_dette_pib_taux_sq": round(tsq[t]["dette_pib"] - base[s][t]["dette_pib"], 2),
+                             # variante « avec la réaction des marchés » (prime de dette, baisse de l'écart de taux)
+                             "deficit_reaction_marches": round(vr[t]["deficit"], 3),
+                             "dette_pib_reaction_marches": round(vr[t]["dette_pib"], 2),
                              # au-delà de ce ratio de dette, la trajectoire n'a plus valeur de prévision
                              "hors_plausibilite": int(x["dette_pib"] > p.val("publication.seuil_dette_plausible"))})
                 for canal, n in x["emplois_canaux"].items():

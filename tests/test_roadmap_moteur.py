@@ -129,7 +129,9 @@ def test_point_fixe_baisse_ecart_taux():
     l'optimiste de Retailleau bouge parmi les cas mesurés le 25/11."""
     import dataclasses
 
-    p = Parametres()
+    from moteur import reaction_marches
+    # la baisse de l'écart de taux n'existe que dans la variante « avec la réaction des marchés » (27/11/2026)
+    p = reaction_marches.parametres(Parametres())
     assert p.val("macro.point_fixe_baisse_spread") is True
     q = p.avec()
     cle = "macro.point_fixe_baisse_spread"

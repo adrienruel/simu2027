@@ -104,8 +104,11 @@ def test_prestations_indexees_sur_les_prix_perdent_du_poids(p, res):
 
 
 def test_sans_prime_de_dette_la_dette_monte_moins(p, res):
-    q = sq.simuler(p.avec({"macro.prime_dette": 0.0}))
-    assert q["prudent"][2050]["dette_pib"] < res["prudent"][2050]["dette_pib"]
+    """Calcul principal sans prime de dette (DÉCISION du 27/11/2026) ; la variante « avec la réaction des marchés »
+    fait monter la dette davantage, sans changer 2029."""
+    from moteur import reaction_marches
+    q = sq.simuler(reaction_marches.parametres(p))
+    assert q["prudent"][2050]["dette_pib"] > res["prudent"][2050]["dette_pib"]
     assert q["prudent"][2029]["deficit"] == pytest.approx(res["prudent"][2029]["deficit"])
 
 

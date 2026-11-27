@@ -23,14 +23,15 @@ ANNEES = (2032, 2037, 2050)
 # Variantes communes : mêmes modifications pour le statu quo et tous les programmes
 VARIANTES = {
     "centrale": {},
-    "sans_prime_dette": {"macro.prime_dette": 0.0},
+    # 27/11/2026 : le calcul principal est sans prime de dette (DÉCISION d'Adrien) ; la variante remet la réaction
+    "avec_reaction_marches": "reaction_marches",
     "taux_long_3_3": {"macro.taux_long_terme": 0.033},
     # Banque de France, projections intermédiaires du 15/09/2026 : 0,9 % en 2027, 1,2 % en 2028
     "croissance_2027_2028": {"calendrier.croissance_2027_2028": {2027: 0.009, 2028: 0.012}},
 }
 LIBELLES_VARIANTES = {
     "centrale": "Calcul publié",
-    "sans_prime_dette": "Sans prime de dette",
+    "avec_reaction_marches": "Avec la réaction des marchés (prime de dette, baisse de l'écart de taux)",
     "taux_long_3_3": "Taux long à 3,3 % (au lieu de 4 %)",
     "croissance_2027_2028": "2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",
 }
@@ -39,6 +40,9 @@ LIBELLES_VARIANTES = {
 def _variante(p: Parametres, modifs: dict) -> Parametres:
     if not modifs:
         return p
+    if modifs == "reaction_marches":
+        from moteur import reaction_marches
+        return reaction_marches.parametres(p)
     if "calendrier.croissance_2027_2028" in modifs:
         # valeur structurée (année → taux) : remplacée en entier, sans passer par la recopie par scénario
         import dataclasses

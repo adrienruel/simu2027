@@ -333,15 +333,15 @@ melenchon_mesures:
 
   # ================================================================ PRESTATIONS
   garantie_autonomie:
-    valeur: {id: LFI-PRE-01, instrument: transferts_actifs, libelle: "Garantie d'autonomie : revenu de chaque ménage porté au seuil de pauvreté (1 337 € pour une personne seule)", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2029,
+    valeur: {id: LFI-PRE-01, instrument: transferts_actifs, libelle: "Garantie d'autonomie : revenu de chaque ménage porté au seuil de pauvreté (1 337 € pour une personne seule)", poste: pauvrete, moteur: "salaire", debut: 2028, plein: 2029,
              montant: {crise: 32.0, prudent: 28.0, median: 24.0, optimiste: 20.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : Insee (enquête Revenus fiscaux et sociaux 2022) : 9,1 millions de personnes sous le seuil de 60 %, intensité de la pauvreté (écart médian) ≈ 20 % du seuil ; écart moyen plus grand (queue basse) ≈ 25 % ; ≈ 6 millions d'unités de consommation × ≈ 320 € par mois × 12 ≈ 23 Md€ en euros de 2026, avant le recours plus élevé (prestation automatique, p. 72) et la baisse d'activité au voisinage du seuil (taux marginal de 100 %) ; Institut Montaigne (2022, garantie à 1 063 €) : 15 Md€"
-    note: "Arbitrage : seuil appliqué au niveau de vie du ménage (définition de l'Insee), pas au revenu individuel ; un seuil individuel (« individualisation des droits », p. 72) coûterait plusieurs fois plus. Remplace la hausse « immédiate » des minima sociaux (p. 57). Les allocataires de l'AAH (portée au SMIC) sont au-dessus du seuil. Suit les salaires (seuil de pauvreté)."
+    note: "Arbitrage : seuil appliqué au niveau de vie du ménage (définition de l'Insee), pas au revenu individuel ; un seuil individuel (« individualisation des droits », p. 72) coûterait plusieurs fois plus. Remplace la hausse « immédiate » des minima sociaux (p. 57). Les allocataires de l'AAH (portée au SMIC) sont au-dessus du seuil. Suit les salaires (seuil de pauvreté) : moteur « salaire » depuis le 27/11/2026 (analyse indépendante : « bloc:pauvrete » restait à plat, −1,8 Md€ en 2037 et −6,2 Md€ en 2050)."
   garantie_jeunes:
-    valeur: {id: LFI-PRE-02, instrument: transferts_actifs, libelle: "Garantie d'autonomie pour les jeunes détachés du foyer fiscal de leurs parents", poste: pauvrete, moteur: "bloc:pauvrete", debut: 2028, plein: 2030,
+    valeur: {id: LFI-PRE-02, instrument: transferts_actifs, libelle: "Garantie d'autonomie pour les jeunes détachés du foyer fiscal de leurs parents", poste: pauvrete, moteur: "salaire", debut: 2028, plein: 2030,
              montant: {crise: 12.0, prudent: 10.0, median: 8.0, optimiste: 6.0}}
     unite: md_eur
     annee_euros: 2026

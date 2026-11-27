@@ -76,6 +76,10 @@ mesures:
   intitule: "Réforme de 2023 abrogée : 62 ans et 42 annuités, 60 ans pour les carrières commencées avant 20 ans"
   source: "débat du Medef, 27/08/2026"
   traitement: "calculé : programme.retraites (bib.baisse_age_legal_detail), emploi des seniors"
+- id: RN-RET-04
+  intitule: "42 annuités au lieu des 43 de la réforme Touraine"
+  source: "débat du Medef, 27/08/2026"
+  traitement: "le_pen_mesures.duree_42 (barème de LFI-RET-02 au prorata d'une année sur trois, 27/11/2026)"
 - id: RN-RET-02
   intitule: "Minimum vieillesse à 1 000 €, petites retraites augmentées, pensions réindexées sur l'inflation"
   source: "rassemblementnational.fr"

@@ -43,10 +43,12 @@ def test_convention_2027_2028_par_defaut(p):
 
 
 def test_variantes(p, sq):
-    """Sans prime de dette, la prime disparaît ; taux long plus bas : moins d'intérêts ; croissance en 2027-2028 :
-    dette de départ plus basse, flux inchangés."""
-    sans = noyau.simuler(vd._variante(p, vd.VARIANTES["sans_prime_dette"]), scenarios=["prudent"])["prudent"]
-    assert all(abs(x["taux_prime"]) < 1e-12 or x["taux_prime"] == p.val("macro.prime_dette_bornes")[0] for x in sans.values())
+    """Calcul principal sans prime de dette (27/11/2026) ; la variante « avec la réaction des marchés » la remet et
+    creuse le déficit du statu quo ; taux long plus bas : moins d'intérêts ; croissance en 2027-2028 : dette de départ
+    plus basse, flux inchangés."""
+    assert all(abs(x["taux_prime"]) < 1e-12 or x["taux_prime"] == p.val("macro.prime_dette_bornes")[0] for x in sq["prudent"].values())
+    avec = noyau.simuler(vd._variante(p, vd.VARIANTES["avec_reaction_marches"]), scenarios=["prudent"])["prudent"]
+    assert avec[2050]["taux_prime"] > 0.01 and avec[2050]["deficit"] > sq["prudent"][2050]["deficit"]
     bas = noyau.simuler(vd._variante(p, vd.VARIANTES["taux_long_3_3"]), scenarios=["prudent"])["prudent"]
     assert bas[2040]["deficit"] < sq["prudent"][2040]["deficit"]
     q = vd._variante(p, vd.VARIANTES["croissance_2027_2028"])
@@ -58,8 +60,8 @@ def test_variantes(p, sq):
 
 def test_aux_taux_statu_quo():
     """26/11/2026 : dette et déficit aux taux du statu quo. Pour le statu quo, ses propres comptes ; pour un programme
-    plus endetté, moins de déficit qu'au sens de Maastricht (pas de prime de dette), mais les intérêts de la dette en
-    plus restent comptés (plus de déficit que le seul primaire)."""
+    inflationniste, plus de dette que dans le calcul principal (27/11 : son inflation n'efface plus sa dette) ; les
+    intérêts de la dette en plus restent comptés (plus de déficit que le seul primaire)."""
     from moteur import decomposition as dc
     from moteur import noyau
     from moteur.parametres import Parametres
@@ -70,6 +72,5 @@ def test_aux_taux_statu_quo():
     assert all(abs(a[t]["deficit"] - base[t]["deficit"]) < 1e-9 for t in base)
     r = noyau.simuler(p, noyau.charger("melenchon"), scenarios=("prudent",))["prudent"]
     b = dc.aux_taux_statu_quo(r, base)
-    assert b[2037]["deficit"] < r[2037]["deficit"]
-    assert b[2037]["dette_pib"] < r[2037]["dette_pib"]
+    assert b[2037]["dette_pib"] > r[2037]["dette_pib"]
     assert b[2037]["deficit"] > -r[2037]["solde_primaire"] / r[2037]["pib"] * 100

@@ -17,7 +17,7 @@ le_pen_retraites:
     valeur: 2028
     unite: sans_unite
     statut: DECISION
-    note: "Débat du Medef (27/08/2026, France 24) : départ à 60 ans pour les entrées avant 20 ans, puis 42 annuités et âge légal de 62 ans ; c'est la loi d'avant 2023 (réforme Touraine gardée). Départs de 2028 (première loi de financement du quinquennat). Les « 15 à 20 Md€ d'économies à terme » par des « corrections de mesures injustes » (06/10/2026) et le « pilier de capitalisation » ne sont pas détaillés : non repris (retraites hors enveloppe, règle commune)."
+    note: "Débat du Medef (27/08/2026, France 24) : départ à 60 ans pour les entrées avant 20 ans, puis 42 annuités et âge légal de 62 ans ; c'est la loi d'avant 2023, mais à 42 annuités (la réforme Touraine portait la durée à 43 ans pour les générations de 1973 et après : RN-RET-04). Départs de 2028 (première loi de financement du quinquennat). Les « 15 à 20 Md€ d'économies à terme » par des « corrections de mesures injustes » (06/10/2026) et le « pilier de capitalisation » ne sont pas détaillés : non repris (retraites hors enveloppe, règle commune)."
 
 le_pen_enveloppe:
   annonce:
@@ -35,6 +35,14 @@ le_pen_enveloppe:
     note: "0 : domaine non visé ou protégé ; 0,5 : cité ; 1 : cible principale (décision d'Adrien du 11/11/2026 : économies déduites du programme, domaine par domaine)."
 
 le_pen_mesures:
+  duree_42:
+    valeur: {id: RN-RET-04, libelle: "Durée de référence ramenée de 43 à 42 annuités (pensions des nouveaux retraités)", poste: retraites, moteur: pensions, debut: 2028, plein: 2055,
+             montant: {crise: 5.7, prudent: 4.3, median: 2.8, optimiste: 1.4}}
+    unite: md_eur
+    annee_euros: 2026
+    statut: HYPOTHESE
+    source: "Même encadrement que melenchon_mesures.duree_decote (LFI-RET-02 : 43 → 40 annuités et décote supprimée, +3 % des pensions du statu quo au prudent, atteints vers 2055), au prorata d'une année sur trois (règle commune par année de durée en moins)"
+    note: "Ajouté le 27/11/2026 (analyse indépendante, I3) : le retour à la loi d'avant 2023 était chiffré avec la durée de 43 ans de la réforme Touraine, comme Tondelier et Glucksmann qui la gardent, alors que Le Pen annonce 42 annuités. Les départs à 60 ans pour les carrières commencées avant 20 ans restent dans le profil d'âge."
   # ---------------------------------------------------------------- fiscalité et pouvoir d'achat
   tva_energie:
     valeur: {id: RN-FIS-01, instrument: consommation, libelle: "TVA de 20 % à 5,5 % sur les carburants, le fioul, le gaz et l'électricité", poste: recettes, moteur: "recette:tva", debut: 2028, plein: 2028,
