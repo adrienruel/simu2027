@@ -140,3 +140,19 @@ def test_nouveau_nucleaire():
     assert nu.cout_systeme(p, None) == pytest.approx(68.0)
     with pytest.raises(ValueError):
         nu.effets(p, "prudent", {"epr": 6, "sortie": "60_ans"})
+
+
+def test_prix_electricite_vers_l_activite():
+    """27/11/2026 : le coût du système électrique d'un parc déclaré passe à l'activité (bouclage.facture_electricite) :
+    une sortie accélérée le renchérit et baisse le PIB par rapport au même programme sans ce canal ; il n'entre pas
+    dans la balance commerciale (pas de fuite vers l'étranger)."""
+    from moteur import bouclage, noyau
+    from moteur import nucleaire as nu
+    from moteur.parametres import Parametres
+    p = Parametres()
+    x = nu.effets(p, "prudent", {"epr": 0, "sortie": "acceleree"})
+    assert x["facture_electricite"][2060] > 10 and x["facture_electricite"][2030] == 0.0
+    assert nu.effets(p, "prudent", {"epr": 14})["facture_electricite"][2060] < 0
+    m = [noyau.Mesure("n", "recettes", {}, "physique", physique={"facture_md:electricite": x["facture_electricite"]})]
+    assert bouclage.facture_electricite(p, m, noyau.ANNEES)[2060] == x["facture_electricite"][2060]
+    assert bouclage.facture_energie(p, m, noyau.ANNEES)[2060] == 0.0

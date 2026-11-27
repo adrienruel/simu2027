@@ -145,9 +145,10 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme
             lib += ", parc prolongé"
         mesures.append(Mesure(f"Canal déclaré : nouveau nucléaire ({lib}), prêt bonifié et contrat pour différence",
                               "etat_missions", x["budget"]))
-        mesures.append(Mesure(f"Canal déclaré : nouveau nucléaire ({lib}), électrification par le prix de l'électricité (émissions)",
+        mesures.append(Mesure(f"Canal déclaré : nouveau nucléaire ({lib}), prix de l'électricité (électrification, émissions, activité)",
                               "recettes", {}, "physique",
-                              physique={f"emissions_mt:{sec}": serie for sec, serie in x["emissions"].items()},
+                              physique={**{f"emissions_mt:{sec}": serie for sec, serie in x["emissions"].items()},
+                                        "facture_md:electricite": x["facture_electricite"]},
                               vert="favorable" if x["ratio_prix"][ANNEES[-1]] < 1 else "defavorable"))
     if "fraude_tva" in d:
         x = d["fraude_tva"]

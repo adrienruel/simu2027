@@ -44,3 +44,13 @@ Un programme déclare son parc (`<nom>_canaux.nucleaire`) ; sans déclaration, i
 - Coûts de RTE de 2021, avant la hausse de 40 % du devis des EPR2 ; l'actualisation est en cours (2026).
 - Non comptés : dividendes et dépréciations d'EDF, démantèlement anticipé, SMR, importations et exportations
   d'électricité.
+
+## Prix de l'électricité et activité (27/11/2026, décision d'Adrien)
+
+Le coût du système électrique du parc déclaré, en écart au statu quo, passe à l'activité : coût de RTE (euros de 2020,
+×1,17 en euros de 2026, `nucleaire.euros_2020_en_2026`) × (ratio de prix − 1), montant de 2035 à 2060. Payé par les
+ménages et les entreprises résidents, il entre dans l'impulsion de demande au poids de la facture énergétique
+(`bouclage.energie_importee.poids_demande`, calé sur la variante pétrole de Mésange), mais pas dans la balance
+commerciale (`moteur/bouclage.facture_electricite`). Ordres de grandeur en 2060 : sortie accélérée +14 Md€ par an,
+sortie à 60 ans +7, 14 EPR2 −8, 20 EPR2 et parc prolongé −10,5. Limite : le canal reprend la réponse d'un choc
+pétrolier, faute de variante « électricité » dans Mésange.

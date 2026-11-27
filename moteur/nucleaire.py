@@ -136,4 +136,9 @@ def effets(p: Parametres, s: str, decl: dict) -> dict:
     facteur = em.reponse_ratio(p, {t: 1.0 for t in ANNEES}, s, ratio_electricite=ratio, debut=int(e["debut"]))
     terr = em.territoriales(p, em.scenario(p, s))
     emis = {sec: {t: terr[t][sec] * (facteur[t] - 1) for t in ANNEES} for sec in e["secteurs"]}
-    return {"budget": {t: b[t] - b0[t] for t in ANNEES}, "emissions": emis, "ratio_prix": ratio, "epr": n}
+    # coût du système électrique en plus (Md€ de 2026, + = plus cher), payé par les ménages et les entreprises : canal
+    # du prix de l'électricité vers l'activité (27/11/2026, décision d'Adrien ; moteur/bouclage.facture_electricite)
+    c0 = cout_systeme(p, None) * p.val("nucleaire.euros_2020_en_2026")
+    facture = {t: (ratio[t] - 1) * c0 for t in ANNEES}
+    return {"budget": {t: b[t] - b0[t] for t in ANNEES}, "emissions": emis, "ratio_prix": ratio, "epr": n,
+            "facture_electricite": facture}

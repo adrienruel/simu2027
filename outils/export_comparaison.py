@@ -223,6 +223,8 @@ def main() -> None:
             for s_, liste in tout.items():
                 for i, m in enumerate(liste):
                     for k, serie in (m.physique or {}).items():
+                        if k.startswith("facture_md:"):  # coût en Md€ (prix de l'électricité), pas des tonnes
+                            continue
                         for t in ANNEES_MESURES:
                             ecologie_mesures.append({"cle": f"{lib}|{SCENARIOS[s_]}|{t}|{i}|{k}", "programme": lib, "scenario": SCENARIOS[s_],
                                                      "annee": t, "mesure": m.nom.replace(" (émissions)", ""),

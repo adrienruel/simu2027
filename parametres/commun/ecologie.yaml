@@ -118,6 +118,12 @@ nucleaire:
     url: "https://www.banquedesterritoires.fr/nucleaire-un-pret-sur-fonds-depargne-garanti-par-letat-pour-financer-le-programme-epr2"
     page: "Article du 12/03/2026"
     note: "Prix de marché de gros moyen, en € de 2026 par MWh (HYPOTHESE) : la Cour des comptes s'inquiète d'un prix sous 70 € ; prudent 70, médian 80, optimiste 90, crise 60. Versement de l'État = (prix d'exercice − prix de marché) × production, négatif (recette) quand le marché passe au-dessus."
+  euros_2020_en_2026:
+    valeur: 1.17
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Encadrement : Insee, indice des prix à la consommation en moyenne annuelle, +1,6 % (2021), +5,2 % (2022), +4,9 % (2023), +2,0 % (2024), puis ≈ +1 % par an en 2025 et 2026"
+    note: "Passe les coûts de RTE (euros de 2020) en euros de 2026 pour le canal du prix de l'électricité (27/11/2026)."
   couts_systeme_rte:
     valeur: {M0: 80, M1: 77, M23: 71, N1: 66, N2: 61, N03: 59}
     unite: md_eur_2020_par_an

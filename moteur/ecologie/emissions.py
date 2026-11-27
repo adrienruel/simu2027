@@ -135,6 +135,8 @@ def physique(mesures) -> dict[str, dict[int, float]]:
     out: dict[str, dict[int, float]] = {}
     for m in mesures or []:
         for k, v in (getattr(m, "physique", None) or {}).items():
+            if k == "facture_md:electricite":  # coût du système électrique (Md€), lu par moteur/bouclage.py
+                continue
             if k not in ("relocalisation_mt", "importees_mt") and not (k.startswith("emissions_mt:") and k.split(":", 1)[1] in SECTEURS):
                 raise ValueError(f"Mesure « {m.nom} » : effet physique inconnu {k}")
             d = out.setdefault(k, {})

@@ -183,6 +183,20 @@ def facture_energie(p, mesures, annees) -> dict:
     return out
 
 
+def facture_electricite(p, mesures, annees) -> dict:
+    """Coût du système électrique en plus (Md€ de 2026, + = plus cher) que les mesures déclarent (clé physique
+    `facture_md:electricite`, canal commun du nouveau nucléaire, 27/11/2026). Payé par les ménages et les entreprises
+    résidents : impulsion de demande négative au poids de la facture énergétique (bouclage.energie_importee,
+    variante pétrole de Mésange), mais sans fuite vers l'étranger : hors de la balance commerciale."""
+    out = {t: 0.0 for t in annees}
+    for m in mesures or []:
+        serie = (getattr(m, "physique", None) or {}).get("facture_md:electricite")
+        if serie:
+            for t in annees:
+                out[t] += serie.get(t, 0.0)
+    return out
+
+
 def reponse(p, s: str, cout_net: dict, annees, mesures=None, physiques=None) -> dict:
     """Réponse de l'économie à l'impulsion budgétaire nette (cout_net : coût net cumulé des mesures, Md€, + = relance),
     année par année. Chaque variation d'impulsion prend le multiplicateur de son scénario (resserrement) ou du
@@ -208,9 +222,10 @@ def reponse(p, s: str, cout_net: dict, annees, mesures=None, physiques=None) -> 
                 relance = -m_.valeurs.get(t, 0.0) if m_.poste == "recettes" else m_.valeurs.get(t, 0.0)
                 cout_net[t] -= w_ * relance  # retiré de l'impulsion générique
                 ser[t] += relance
-    fe =facture_energie(p, physiques if physiques is not None else mesures, annees)
+    fe = facture_energie(p, physiques if physiques is not None else mesures, annees)
+    fel = facture_electricite(p, physiques if physiques is not None else mesures, annees)
     w_fe = p.val("bouclage.energie_importee")["poids_demande"]
-    cout_net = {t: cout_net[t] - w_fe * fe[t] for t in annees}
+    cout_net = {t: cout_net[t] - w_fe * (fe[t] + fel[t]) for t in annees}
     y = sq.pib(p, s)
     annees = list(annees)
     # g : impulsion en fraction du PIB ; les réponses unitaires sont en % pour 1 % de PIB, donc m × g × h est une
