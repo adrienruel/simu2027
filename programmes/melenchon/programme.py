@@ -108,7 +108,7 @@ class Melenchon(ProgrammeSimple):
 
         # LFI-PRE-05 : chômage plus élevé avec l'assurance chômage d'avant 2019
         e = sq.effectifs(p, s)
-        h = self.v("chomage.hausse_taux", s)
+        h = self.effet_ac(s)
         canaux["Assurance chômage plus généreuse : chômeurs en plus"] = {
             t: -h * min(1.0, (t - 2027) / 3) * (e[t]["emploi"] + e[t]["chomeurs"]) for t in ANNEES}
 

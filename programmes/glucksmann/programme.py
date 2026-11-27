@@ -122,7 +122,7 @@ class Glucksmann(ProgrammeSimple):
                                           "baisse": True}
 
         # GLU-EMP-02 : chômage plus élevé quand la réforme de l'assurance chômage est abrogée
-        h = self.v("chomage.hausse_taux", s)
+        h = self.effet_ac(s)
         canaux["Assurance chômage plus généreuse : chômeurs en plus"] = {
             t: -h * min(1.0, (t - 2027) / 3) * (e[t]["emploi"] + e[t]["chomeurs"]) for t in ANNEES}
 

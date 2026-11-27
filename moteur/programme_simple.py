@@ -196,6 +196,12 @@ class ProgrammeSimple:
     def a(self, cle: str) -> bool:
         return self._cle(cle) in self.pt
 
+    def effet_ac(self, s: str) -> float:
+        """Variation du taux de chômage structurel de la réforme de l'assurance chômage du programme (négative = baisse),
+        par le barème commun (moteur/bibliotheque.effet_assurance_chomage) et la déclaration `<nom>_chomage.reforme`."""
+        from . import bibliotheque as bib
+        return bib.effet_assurance_chomage(self.pt, s, self.v("chomage.reforme"))
+
     def indices(self, p: Parametres, s: str) -> dict:
         y = sq.pib(p, s)
         rec = sq.recettes_par_impot(p, s)

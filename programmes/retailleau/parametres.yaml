@@ -56,11 +56,11 @@ retailleau_restitution:
     note: "Restitution financée par le plan d'économies, montée à partir de 2029 (arbitrage)."
 
 retailleau_chomage:
-  baisse_taux:
-    valeur: {crise: 0.0015, prudent: 0.003, median: 0.004, optimiste: 0.005}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Encadrement : réformes de 2021 et 2023 = 0,6 point de chômage structurel (Banque de France, Bulletin n° 264, 2026) ; règles de juin 2024 ≈ 0,3 point selon le gouvernement ; ruptures conventionnelles et dégressivité en plus"
+  reforme:
+    valeur: {duree: -0.1667, degressivite_md: 1.0, non_evalues: [ruptures conventionnelles, fin au troisième refus]}
+    unite: sans_unite
+    statut: DECISION
+    note: "Lecture du 27/11/2026 pour le barème commun : règles de juin 2024 (durée de 18 à 15 mois) ; dégressivité au-dessus de 3 000 € lue comme 1 Md€ d'économie (encadrement de la mesure : dégressivité de 2021 au-dessus de ≈ 4 500 € ≈ 0,4 Md€, plus large ≈ 1 à 2 Md€) ; ruptures conventionnelles et fin au troisième refus : sans effet chiffré par une source, comptés zéro. Remplace retailleau_chomage.reforme (0,3 point au prudent)."
 
 retailleau_mesures:
   impots_production:
@@ -179,7 +179,7 @@ retailleau_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Le travail gagnant (09/01/2026), p. 32 ; encadrement : 8 Md€ plus 4 à 5 Md€ annoncés (non repris) ; règles de juin 2024 : 3,6 Md€ selon le gouvernement ; dégressivité de 2021 ≈ 0,4 Md€ ; ruptures conventionnelles ≈ 25 % des entrées (Unédic)"
-    note: "Effet sur l'emploi : retailleau_chomage.baisse_taux."
+    note: "Effet sur l'emploi : retailleau_chomage.reforme."
   ij_maladie:
     valeur: {id: RET-SAN-01, libelle: "Arrêts maladie : jour de carence d'ordre public, réforme des indemnités journalières", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
              montant: {crise: -1.0, prudent: -1.5, median: -2.0, optimiste: -2.5}}

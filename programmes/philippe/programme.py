@@ -37,7 +37,7 @@ class Philippe(ProgrammeSimple):
                    {t: taux_prel * v for t, v in serie.items()}),
         ]
         e = sq.effectifs(p, s)
-        h = self.v("chomage.baisse_taux", s)
+        h = -self.effet_ac(s)
         canaux["Indemnisation chômage ramenée à 12 mois : emplois en plus"] = {
             t: h * min(1.0, (t - 2027) / 3) * (e[t]["emploi"] + e[t]["chomeurs"]) for t in ANNEES}
         return out, canaux

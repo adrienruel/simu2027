@@ -50,12 +50,11 @@ attal_annee_blanche:
     source: "Espérance de vie à 65 ans ≈ 21 ans (Insee) ; durée moyenne restante des pensions en cours ≈ 18 ans : l'économie sur les pensions s'éteint avec les retraités de 2028"
 
 attal_chomage:
-  baisse_taux:
-    valeur: {crise: 0.001, prudent: 0.002, median: 0.003, optimiste: 0.0035}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Encadrement : projet de 2024 : ≈ 90 000 emplois selon le gouvernement (≈ 0,3 point) ; Banque de France (Bulletin n° 264, 2026) : réformes de 2021 et 2023 = 0,6 point de chômage structurel ; 100 000 emplois annoncés par le candidat, non repris tels quels"
-    note: "Baisse du taux de chômage, montée de 2028 à 2030 ; chaque emploi rapporte la valeur d'un emploi (attal_emploi.valeur_emploi)."
+  reforme:
+    valeur: {duree: -0.1667, affiliation: true}
+    unite: sans_unite
+    statut: DECISION
+    note: "Lecture du 27/11/2026 pour le barème commun (assurance_chomage.*, moteur/bibliotheque.effet_assurance_chomage) : règles de 2024 reprises, durée maximale de 18 à 15 mois (−1/6) ; condition d'affiliation de 6 à 8 mois sur 20 : sans effet durable chiffré, comptée zéro. Remplace attal_chomage.reforme (0,2 point au prudent, valeur propre au programme)."
 
 attal_mesures:
   cvae:
@@ -157,7 +156,7 @@ attal_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : projet de 2024 (durée de 18 à 15 mois, affiliation de 6 à 8 mois sur 20) : 3,6 Md€ par an selon le gouvernement, moins selon l'Unédic ; 5 Md€ annoncés par le candidat, non repris"
-    note: "Effet sur l'emploi : attal_chomage.baisse_taux."
+    note: "Effet sur l'emploi : attal_chomage.reforme."
   enseignants:
     valeur: {id: ATT-EDU-01, instrument: education, libelle: "Enseignants revalorisés de 200 € net par mois, jusqu'à 500 € en milieu de carrière", poste: etat_missions, moteur: "bloc:autres", debut: 2028, plein: 2030, fp: true,
              montant: {crise: 7.0, prudent: 6.5, median: 6.0, optimiste: 5.5}}

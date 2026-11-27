@@ -817,12 +817,6 @@ tondelier_emploi:
     statut: HYPOTHESE
     source: "Paramètres de la mesure PRE-17 (tondelier_mesures.tzcld) : environ 150 000 chômeurs de longue durée de 55 ans et plus, recours de 30 % (évaluation de Territoires zéro chômeur de longue durée, Dares)"
     note: "Emplois créés = éligibles × recours ; éviction de 10 % (les entreprises à but d'emploi ne doivent pas concurrencer l'emploi existant) ; la moitié des personnes recrutées vient du chômage, l'autre de l'inactivité (halo). Coût déjà net des prestations évitées dans la mesure : pas d'effet budgétaire en plus."
-  assurance_chomage:
-    valeur: {crise: 0.006, prudent: 0.006, median: 0.0045, optimiste: 0.003}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Banque de France, Bulletin n° 264 (2026), « Les réformes du marché du travail et la baisse du chômage structurel en France » : les réformes de l'assurance chômage de 2021 et 2023 ont baissé le chômage structurel de 0,6 point (0,2 et 0,4)"
-    note: "Hausse du taux de chômage quand ces réformes sont abrogées (PRE-15), montée de 2028 à 2030. Prudent et crise : l'effet entier de la source ; médian : trois quarts ; optimiste : la moitié (les estimations sont ex ante). La réforme de 2025, non évaluée, n'est pas comptée. Chaque chômeur en plus coûte au solde ce que rapporte un emploi au SMIC (même valeur que les emplois perdus du SMIC)."
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 tondelier_canaux:
@@ -844,3 +838,10 @@ tondelier_canaux:
     statut: DECISION
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : tarif progressif de l'électricité (REC-41, prix réglementés, −0,5), vols intérieurs courts interdits (REC-43, entrée interdite sur un segment de l'aérien, −0,5) ; la préférence européenne dans la commande publique et la renationalisation des autoroutes sont hors champ. Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2. DÉCISION d'Adrien du 12/11/2026 (soir, roadmap B1) : lectures confirmées."
+
+tondelier_chomage:
+  reforme:
+    valeur: {abroge: [reforme_2021, reforme_2023]}
+    unite: sans_unite
+    statut: DECISION
+    note: "Lecture du 27/11/2026 pour le barème commun : réformes de 2019 à 2025 abrogées (PRE-15) ; seules 2021 et 2023 ont un effet chiffré (Banque de France, 2026). Remplace tondelier_emploi.assurance_chomage."

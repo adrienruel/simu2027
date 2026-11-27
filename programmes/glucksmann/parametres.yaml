@@ -391,7 +391,7 @@ glucksmann_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : Unédic, effets des réformes de 2019 à 2025 ≈ 6 à 7 Md€ par an en régime de croisière (tondelier_mesures.assurance_chomage, 6,5)"
-    note: "Effet sur le chômage : glucksmann_chomage.hausse_taux."
+    note: "Effet sur le chômage : glucksmann_chomage.reforme."
   ess:
     valeur: {id: GLU-EMP-06, libelle: "Agence de financement de l'économie sociale et solidaire", poste: etat_missions, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: 0.3, prudent: 0.2, median: 0.2, optimiste: 0.1}}
@@ -537,3 +537,10 @@ glucksmann_canaux:
     unite: sans_unite
     statut: HYPOTHESE
     note: "Rattrapage de l'adoption de l'IA par les entreprises. Mesure du programme : GLU-NUM-02 (agence industrielle du numérique et de l'IA) et GLU-NUM-05 (IA dans les services publics). Barème commun (12/11/2026, décision d'Adrien : canaux ouverts à tous) : même valeur que pour Écologie de droite dès qu'une mesure du programme porte sur le même objet, quelle que soit son ampleur. À affiner mesure par mesure. Phase B6 (12/11/2026, nuit) : effet proportionnel au budget engagé (adoption_ia.budget) ; budget lu : GLU-NUM-02, agence industrielle du numérique et de l'IA (glucksmann_mesures, investissement)."
+
+glucksmann_chomage:
+  reforme:
+    valeur: {abroge: [reforme_2021, reforme_2023]}
+    unite: sans_unite
+    statut: DECISION
+    note: "Lecture du 27/11/2026 pour le barème commun : réforme de l'assurance chômage abrogée (GLU-EMP-02), soit les réformes de 2021 et de 2023 (Banque de France, 2026 : 0,2 et 0,4 point) ; les règles de 2024-2025, non évaluées, ne comptent pas. Remplace programme_commun.chomage_hausse_taux."

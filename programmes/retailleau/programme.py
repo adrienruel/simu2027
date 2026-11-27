@@ -42,7 +42,7 @@ class Retailleau(ProgrammeSimple):
             p, idx, self.v("restitution.baisse_salaries"), self.v("restitution.part_ir_retrouvee", s),
             self.v("restitution.premiere_annee"), "RET-ECO-06 — restitution aux salariés : cotisations salariales en moins")
         e = sq.effectifs(p, s)
-        h = self.v("chomage.baisse_taux", s)
+        h = -self.effet_ac(s)
         canaux["Assurance chômage resserrée : emplois en plus"] = {
             t: h * min(1.0, (t - 2027) / 3) * (e[t]["emploi"] + e[t]["chomeurs"]) for t in ANNEES}
         out_c, emplois_c = self.capitalisation(p, s)

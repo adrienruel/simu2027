@@ -62,11 +62,11 @@ lisnard_retraites:
     note: "Amorçage sur le quinquennat (arbitrage)."
 
 lisnard_chomage:
-  baisse_taux:
-    valeur: {crise: 0.0005, prudent: 0.001, median: 0.0015, optimiste: 0.002}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Encadrement : dégressivité de 2021 : effet faible sur le retour à l'emploi des cadres (Unédic, 2024) ; généralisée : 0,05 à 0,2 point"
+  reforme:
+    valeur: {degressivite_md: 1.0}
+    unite: sans_unite
+    statut: DECISION
+    note: "Lecture du 27/11/2026 pour le barème commun : dégressivité élargie, de l'ampleur de son économie au prudent (lisnard_mesures.chomage, 1 Md€). Remplace lisnard_chomage.reforme (0,1 point au prudent)."
 
 lisnard_mesures:
   insp:
@@ -214,7 +214,7 @@ lisnard_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Fiche « Questions » (16/10/2026) ; encadrement : dégressivité de 2021 au-dessus de ≈ 4 500 € brut ≈ 0,4 Md€ ; généralisée : 1 à 2 Md€"
-    note: "Effet sur l'emploi : lisnard_chomage.baisse_taux."
+    note: "Effet sur l'emploi : lisnard_chomage.reforme."
   ars:
     valeur: {id: LIS-SAN-03, libelle: "ARS supprimées, moyens répartis par les préfets", poste: sante, moteur: "bloc:sante", debut: 2028, plein: 2029,
              montant: {crise: -0.1, prudent: -0.2, median: -0.3, optimiste: -0.4}}

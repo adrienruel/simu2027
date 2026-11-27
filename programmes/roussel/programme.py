@@ -126,7 +126,7 @@ class Roussel(ProgrammeSimple):
         ]
 
         # PCF-EMP-03 : assurance chômage d'avant 2019
-        h = self.v("chomage.hausse_taux", s)
+        h = self.effet_ac(s)
         canaux["Assurance chômage plus généreuse : chômeurs en plus"] = {
             t: -h * min(1.0, (t - 2027) / 3) * (e[t]["emploi"] + e[t]["chomeurs"]) for t in ANNEES}
 

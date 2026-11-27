@@ -127,9 +127,9 @@ def is_33_25(p: Parametres) -> dict:
 
 def assurance_chomage_2019(p: Parametres) -> dict:
     """Réforme de l'assurance chômage de 2019-2021, backtest hors calage des lectures communes de « chômage
-    structurel en moins » (phase 3.3, 16/11/2026). Le moteur n'a pas de mécanisme commun pour l'assurance chômage :
-    chaque programme qui la resserre (Attal, Philippe, Retailleau, Lisnard) déclare une baisse du taux de chômage
-    (<programme>_chomage.baisse_taux). On la confronte à l'ordre de grandeur qui découle des effets mesurés de la
+    structurel en moins » (phase 3.3, 16/11/2026). Depuis le 27/11/2026, la baisse du taux de chômage vient du barème
+    commun (assurance_chomage.*, moteur/bibliotheque.effet_assurance_chomage) et de la déclaration de chaque programme
+    (<programme>_chomage.reforme). On la confronte à l'ordre de grandeur qui découle des effets mesurés de la
     réforme de 2019-2021 (Dares, rapport final du comité d'évaluation, avril 2025, p. 2, 17 et 25) :
     - salaire journalier de référence : 1,1 million d'allocataires touchés, durée sans emploi −10 jours (Paris-Cité) ;
     - dégressivité : 70 000 personnes par an, durée de non-emploi −1,5 mois ;
@@ -148,7 +148,7 @@ def assurance_chomage_2019(p: Parametres) -> dict:
                                  "economies_ex_ante_md": 2.3}}
     for nom in ("attal", "philippe", "retailleau", "lisnard"):
         prog = noyau.charger(nom)
-        out[nom] = {s: prog.v("chomage.baisse_taux", s) * 100 for s in SCENARIOS}
+        out[nom] = {s: -prog.effet_ac(s) * 100 for s in SCENARIOS}
     return out
 
 

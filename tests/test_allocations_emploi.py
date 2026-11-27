@@ -25,10 +25,11 @@ def test_aides_au_logement_evitees_dans_le_bloc_logement():
     """Un programme qui crée des emplois baisse le bloc logement d'autant plus que part_allocation_logement est
     grande."""
     p = Parametres()
-    r = {a: noyau.simuler(p.avec({"emploi.part_allocation_logement": a}), noyau.charger("lisnard"),
+    r = {a: noyau.simuler(p.avec({"emploi.part_allocation_logement": a}), noyau.charger("attal"),
                           scenarios=("prudent",))["prudent"][2037] for a in (0.0, 0.050)}
     # emplois créés par les mesures, hors rétroaction des taux (comptée dans l'emploi publié depuis R3.2, 26/11/2026 :
-    # au prudent, la hausse des taux de Lisnard retire ≈ 27 000 emplois en 2037)
+    # 27/11/2026 : Attal, qui crée des emplois au prudent ; Lisnard n'en crée plus en 2037 depuis le barème commun
+    # de l'assurance chômage)
     hors_taux = r[0.050]["emploi"] - r[0.050]["emplois_canaux"].get("Taux d'intérêt (bouclage)", 0.0)
     assert hors_taux > noyau.simuler(p, None, scenarios=("prudent",))["prudent"][2037]["emploi"]
     assert r[0.050]["blocs"]["logement"] < r[0.0]["blocs"]["logement"]

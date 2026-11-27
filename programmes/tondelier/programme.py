@@ -46,6 +46,11 @@ class Tondelier:
         self._cache: dict = {}
 
     # ------------------------------------------------------------------ outils
+    def effet_ac(self, s: str) -> float:
+        """Barème commun de l'assurance chômage (moteur/bibliotheque.effet_assurance_chomage), comme ProgrammeSimple."""
+        from moteur import bibliotheque as bib
+        return bib.effet_assurance_chomage(self.pt, s, self.v("chomage.reforme"))
+
     def v(self, cle: str, s: str = "prudent"):
         # valeur du programme, ou à défaut la valeur commune à tous (programme_commun, phase J2 du 16/11/2026)
         k = f"tondelier_{cle}"
@@ -220,7 +225,7 @@ class Tondelier:
         rec = g["recours"][s]
         tz = {t: g["eligibles"] * rec * (1 - g["eviction"]) * min(1.0, max(0.0, (t - g["debut"] + 1) / (g["plein"] - g["debut"] + 1)))
               for t in ANNEES}
-        pts = self.v("emploi.assurance_chomage", s)
+        pts = self.effet_ac(s)
         actifs_sq = {t: e[t]["emploi"] + e[t]["chomeurs"] for t in ANNEES}
         ac = {t: pts * actifs_sq[t] * min(1.0, max(0.0, (t - 2027) / 3)) for t in ANNEES}
         canaux = {t: {"Postes publics créés": postes[t], "Éviction d'emplois privés par les postes publics": -ev * postes[t],

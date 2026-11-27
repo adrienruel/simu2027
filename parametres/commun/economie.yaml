@@ -1254,12 +1254,6 @@ programme_commun:
     statut: HYPOTHESE
     source: "Même valeur que melenchon_temps_travail.elasticite_emploi (Mésange, DG Trésor ; L'Horty, 2006)"
   # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de glucksmann ; présent dans 3 programmes : glucksmann, melenchon, roussel.
-  chomage_hausse_taux:
-    valeur: {crise: 0.006, prudent: 0.006, median: 0.0045, optimiste: 0.003}
-    unite: taux
-    statut: HYPOTHESE
-    source: "Même valeur que tondelier_emploi.assurance_chomage (Banque de France, Bulletin n° 264, 2026 : les réformes de 2021 et 2023 ont baissé le chômage structurel de 0,6 point)"
-    note: "Hausse du taux de chômage quand ces réformes sont annulées (GLU-EMP-02), montée de 2028 à 2030 ; chaque chômeur en plus coûte la valeur d'un emploi au SMIC."
   # Paramètre recopié dans les programmes, rangé ici le 16/11/2026 (phase J2). Repris de attal ; présent dans 6 programmes : attal, bertrand, le_pen, lisnard, philippe, retailleau.
   enveloppe_debut:
     valeur: 2028
@@ -1445,3 +1439,37 @@ formation_superieure:
     statut: HYPOTHESE
     source: "Encadrement : 11 % des jeunes diplômés travaillent à l'étranger quand le marché français les absorbe (CGE 2025) ; davantage quand il ne les absorbe pas (Suisse, Allemagne, Luxembourg, Royaume-Uni)"
     note: "Part des diplômés en excédent qui partent à l'étranger : le PIB français ne gagne rien, la formation a été payée."
+
+# Barème commun de l'assurance chômage (27/11/2026, demande d'Adrien : sourcer la baisse du chômage selon le type de
+# réforme ; moteur/bibliotheque.effet_assurance_chomage). Effets en fraction du taux de chômage structurel ; négatif =
+# baisse.
+assurance_chomage:
+  duree:
+    valeur: {effet_reference: -0.004, variation_reference: -0.25}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Banque de France, Bulletin n° 264/1 (mai-juin 2026), Devulder et Palladino, « Les réformes du marché du travail et la baisse du chômage structurel en France : rétrospective 2015-2025 » : réforme de 2023 (durée maximale réduite de 25 %) = −0,4 point de chômage structurel, par l'élasticité du taux de retour à l'emploi à la durée d'indemnisation de Le Barbanchon (Labour Economics, 2016) : 0,28 / 1,14 ≈ 0,25, soit +6 % de retour à l'emploi"
+    url: "https://www.banque-france.fr/system/files/2026-05/BDF264-1_Ch%C3%B4mage-structurel_web.pdf"
+    page: "p. 6 (−0,4 point), p. 11-12 (élasticité et calcul)"
+    note: "Effet supposé linéaire dans la variation de durée, avec les réserves de linéarité et d'homogénéité que le Bulletin signale (p. 11-12). Une durée plus courte pour une partie des allocataires (moins de 50 ans) compte au prorata de cette part."
+  degressivite:
+    valeur: {effet_reference: -0.00015, economie_reference_md: 0.4}
+    unite: sans_unite
+    statut: HYPOTHESE
+    source: "Comité d'évaluation de la réforme de l'assurance chômage 2019-2021 (Dares, avril 2025, https://www.vie-publique.fr/files/rapport/pdf/298088.pdf) : la dégressivité touche ≈ 3 % des demandeurs indemnisables, ≈ 40 000 personnes en stock, et réduit la durée hors emploi d'environ un mois et demi pour le groupe à −30 % (p. 1, 13, 17) ; économie ≈ 0,4 Md€ par an (encadrement repris des programmes)"
+    note: "Calcul : 40 000 × 1,5 / 12 mois de durée hors emploi ≈ 5 000 chômeurs de moins, ≈ 0,015 point de 31,5 millions d'actifs (durée de 12 mois : hypothèse). Une dégressivité plus large compte au prorata de son économie : c'est le budget qui dit combien d'allocataires elle touche."
+  reformes:
+    valeur: {reforme_2021: -0.002, reforme_2023: -0.004}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Banque de France, Bulletin n° 264/1 (mai-juin 2026) : réforme de 2021 (salaire journalier de référence, contrats courts) −0,2 point ; réforme de 2023 (durée) −0,4 point ; ensemble −0,6 point"
+    url: "https://www.banque-france.fr/system/files/2026-05/BDF264-1_Ch%C3%B4mage-structurel_web.pdf"
+    page: "p. 6 et 11-12"
+    note: "Abroger une réforme rend son effet (signe inverse). Composantes sans effet durable chiffré, comptées zéro : condition d'affiliation (effet sur le retour à l'emploi à deux mois, plus visible deux à trois ans après : comité d'évaluation 2025, p. 23-24), contrôles, refus d'offres, ruptures conventionnelles, indemnisation dès le premier jour, régimes particuliers."
+  facteurs:
+    valeur: {baisse: {crise: 0.333, prudent: 0.667, median: 1.0, optimiste: 1.0}, hausse: {crise: 1.0, prudent: 1.0, median: 0.667, optimiste: 0.333}}
+    unite: sans_unite
+    statut: DECISION
+    source: "Banque de France, Bulletin n° 264/1 (2026), p. 12 : environ deux tiers des effets de 2023 supposés durables"
+    note: "Médian : effet estimé par la Banque de France ; prudent : ses deux tiers durables ; crise : un tiers. Une hausse du chômage prend le scénario miroir (règle du multiplicateur d'une relance) : entière en crise et au prudent."
+

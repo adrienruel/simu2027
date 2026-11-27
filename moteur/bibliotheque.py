@@ -374,3 +374,30 @@ def capitalisation_obligatoire(p: Parametres, s: str, c: dict, ident: str) -> tu
            Mesure(f"{ident} — impôt sur les sociétés : charges déductibles des entreprises", "recettes",
                   {t: -r_is * pe * (1 - pp) * total[t] for t in ANNEES})]
     return out, emplois
+
+
+def effet_assurance_chomage(p: Parametres, s: str, decl: dict) -> float:
+    """Variation du taux de chômage structurel (fraction ; négative = baisse) d'une réforme de l'assurance chômage,
+    par le barème commun `assurance_chomage.*` (27/11/2026, demande d'Adrien : la baisse du chômage dépend du type de
+    réforme et chaque type a sa source). Déclaration du programme (`<nom>_chomage.reforme`) :
+
+    - duree : variation relative de la durée maximale d'indemnisation (−0,25 = un quart de moins), et part_duree :
+      part des allocataires concernés (1 par défaut) ; effet linéaire, calé sur la réforme de 2023 ;
+    - degressivite_md : économie de la dégressivité (Md€ de 2026), effet proportionnel, calé sur celle de 2021 ;
+    - abroge : réformes annulées, parmi `reforme_2021` (salaire journalier de référence) et `reforme_2023` (durée) ;
+    - affiliation, non_evalues : composantes sans effet durable chiffré (zéro, pour mémoire).
+
+    Facteur de scénario : un effet qui baisse le chômage prend `facteurs.baisse`, un effet qui le monte
+    `facteurs.hausse` (scénario miroir), comme le multiplicateur d'une relance."""
+    b = {k: p.val(f"assurance_chomage.{k}") for k in ("duree", "degressivite", "reformes")}
+    brut = 0.0
+    if decl.get("duree"):
+        d = b["duree"]
+        brut += d["effet_reference"] * decl["duree"] / d["variation_reference"] * decl.get("part_duree", 1.0)
+    if decl.get("degressivite_md"):
+        g = b["degressivite"]
+        brut += g["effet_reference"] * decl["degressivite_md"] / g["economie_reference_md"]
+    for r in decl.get("abroge", ()):
+        brut -= b["reformes"][r]  # annuler une réforme rend son effet
+    f = p.val("assurance_chomage.facteurs")
+    return brut * f["baisse" if brut < 0 else "hausse"][s]

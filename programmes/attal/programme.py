@@ -58,7 +58,7 @@ class Attal(ProgrammeSimple):
                           {2027: 0.0, 2028: -eco_q, **{t: -eco_q for t in ANNEES}}))
 
         # ATT-EMP-01 : assurance chômage, chômage structurel plus bas
-        h = self.v("chomage.baisse_taux", s)
+        h = -self.effet_ac(s)
         canaux["Assurance chômage resserrée : emplois en plus"] = {
             t: h * min(1.0, (t - 2027) / 3) * (e[t]["emploi"] + e[t]["chomeurs"]) for t in ANNEES}
         return out, canaux

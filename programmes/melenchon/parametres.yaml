@@ -371,7 +371,7 @@ melenchon_mesures:
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Encadrement : Unédic, effets des réformes de 2019, 2021, 2023 et 2025 ≈ 6 à 7 Md€ par an en régime de croisière (tondelier_mesures.assurance_chomage, 6,5) ; différé et délai d'attente de 7 jours supprimés ≈ +0,6 ; régime des intérimaires ≈ +0,5"
-    note: "Effet sur le chômage (durées plus longues) : melenchon_chomage.hausse_taux. Abrogation de l'obligation de 15 heures d'activité (loi France Travail) : économie de gestion non comptée."
+    note: "Effet sur le chômage (durées plus longues) : melenchon_chomage.reforme. Abrogation de l'obligation de 15 heures d'activité (loi France Travail) : économie de gestion non comptée."
   conge_accueil:
     valeur: {id: LFI-PRE-06, enfants: conge, instrument: transferts_actifs, libelle: "Congé d'accueil de l'enfant obligatoire de 20 semaines pour chaque parent", poste: famille, moteur: "bloc:famille", debut: 2028, plein: 2029,
              montant: {crise: 5.5, prudent: 5.0, median: 4.5, optimiste: 4.0}}
@@ -1093,3 +1093,10 @@ melenchon_canaux:
     statut: HYPOTHESE
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : Engie renationalisé (LFI-PAR-01c, 0,5), tarifs réglementés de l'énergie calculés sur les coûts de production (LFI-PRE-08b, 0,5) ; les aéroports, autoroutes, la FDJ, le pôle public bancaire, ArcelorMittal, ArianeGroup, les Ehpad et le médicament sont hors champ (−2 avant le 12/11/2026). Protection de l'emploi : licenciements boursiers interdits (LFI-ECO-01, −0,5). Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2."
+
+melenchon_chomage:
+  reforme:
+    valeur: {abroge: [reforme_2021, reforme_2023], non_evalues: [indemnisation dès le premier jour, intermittents de l'emploi, intérimaires]}
+    unite: sans_unite
+    statut: DECISION
+    note: "Lecture du 27/11/2026 pour le barème commun : réformes Macron annulées (LFI-PRE-05), soit 2021 et 2023 ; indemnisation dès le premier jour et régimes particuliers : sans effet chiffré par une source, comptés zéro. Remplace programme_commun.chomage_hausse_taux."

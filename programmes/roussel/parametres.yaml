@@ -358,3 +358,10 @@ roussel_canaux:
     statut: HYPOTHESE
     source: "Égert et Gal (2017), OCDE, document de travail n° 1354"
     note: "Marchés de produits : Engie nationalisé dans un pôle public de l'énergie (PCF-PAR-01, 0,5), transports nationalisés (PCF-PAR-01, 0,5), sortie du marché européen de l'électricité avec prix baissés (PCF-ENE-02, prix réglementés, 0,5) ; banques, AXA, autoroutes, pharmacie et carburant bloqué sont hors champ (−2 avant le 12/11/2026). Barème restreint au champ des deux indicateurs de l'OCDE (relecture neutre n° 2, point 2 ; DÉCISION d'Adrien du 12/11/2026, docs/reformes_structurelles.md) : marchés de produits = réglementation de l'électricité, du gaz, des télécommunications, de la poste, du rail, de l'aérien et du fret routier (indicateur ETCR : entrée, propriété publique, structure du marché, prix réglementés) ; protection de l'emploi = règles du licenciement des contrats réguliers. Hors champ, donc non comptés pour aucun programme : normes générales, simplification, commande publique, banques et assurances, autoroutes, aéroports, audiovisuel, santé, logement, commerce extérieur, prix de détail. Grille : 1 = un secteur entier du champ (nationalisation, refonte, interdiction des licenciements), 0,5 = mesure ciblée dans un secteur du champ (une grande entreprise, prix réglementés, entrée interdite ou facilitée sur un segment) ; positif = libéralise, négatif = réglemente ; plafond ±2."
+
+roussel_chomage:
+  reforme:
+    valeur: {abroge: [reforme_2021, reforme_2023]}
+    unite: sans_unite
+    statut: DECISION
+    note: "Lecture du 27/11/2026 pour le barème commun : assurance chômage d'avant 2019 (PCF-EMP-03), soit les réformes de 2021 et 2023 annulées. Remplace programme_commun.chomage_hausse_taux."

@@ -66,7 +66,7 @@ class Lisnard(ProgrammeSimple):
                 Mesure("LIS-RET-01 — prélèvements sur les pensions en moins (désindexation)", "recettes",
                        {t: taux_prel * v for t, v in ser_d.items()})]
         e = sq.effectifs(p, s)
-        h = self.v("chomage.baisse_taux", s)
+        h = -self.effet_ac(s)
         canaux["Allocations chômage dégressives : emplois en plus"] = {
             t: h * min(1.0, (t - 2027) / 3) * (e[t]["emploi"] + e[t]["chomeurs"]) for t in ANNEES}
         return out, canaux
