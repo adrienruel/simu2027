@@ -766,7 +766,6 @@ melenchon_mesures:
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    note: "Programme p. 185 (« Fonds d'aide à la relocalisation des constructions menacées par les inondations »), inspection du logement, permis de louer. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
 
   # ================================================================ PLANIFICATION ÉCOLOGIQUE ET INVESTISSEMENT
   adaptation:
@@ -838,7 +837,6 @@ melenchon_mesures:
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    note: "Programme p. 185 (« plan pluriannuel d'investissement et de développement des services publics »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
 
   # ================================================================ COLLECTIVITÉS, SERVICES PUBLICS, JUSTICE, POLICE
   dotations_communes:
@@ -861,7 +859,6 @@ melenchon_mesures:
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    note: "Programme p. 182-183 (distance maximale de 15 à 30 minutes, moratoire sur les fermetures d'écoles, maternités, bureaux de poste, gares). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = maintien et réouverture de sites ; pas de liste de sites dans le programme."
   enfance:
     valeur: {id: LFI-COL-04, libelle: "Protection de l'enfance recentralisée et renforcée (places, accompagnement jusqu'à 25 ans), PJJ, plan contre les violences faites aux enfants", poste: collectivites, moteur: pib, debut: 2028, plein: 2030,
              montant: {crise: 1.8, prudent: 1.6, median: 1.4, optimiste: 1.2}}
@@ -933,7 +930,6 @@ melenchon_mesures:
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    note: "Programme p. 132 (« plan national d'urgence pour la construction et la rénovation des équipements sportifs »), gratuité pour les plus pauvres, conseillers techniques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
   aide_developpement:
     valeur: {id: LFI-COL-12, libelle: "Aide publique au développement portée à 0,7 % du revenu national brut", poste: defense_ue, moteur: pib, debut: 2028, plein: 2032,
              montant: {crise: 9.1, prudent: 9.1, median: 9.1, optimiste: 9.1}}
@@ -955,7 +951,6 @@ melenchon_mesures:
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
-    note: "Programme p. 181 (« Créer des éco-régions pour remplacer les régions actuelles »), ingénierie territoriale, Défenseurs de la nature. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
 
   # ================================================================ PARTICIPATIONS (achats d'actifs, hors solde)
   nationalisations:

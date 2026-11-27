@@ -2248,9 +2248,3 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   - **Mélenchon** : garantie d'autonomie (LFI-PRE-01, LFI-PRE-02) indexée sur les salaires, comme le dit la note
     (avant : bloc pauvreté, à plat). **Attal** : année blanche constante en euros de 2026 (avant : indice du PIB).
     **Le Pen** : 42 annuités (RN-RET-04), barème de LFI-RET-02 au prorata d'une année sur trois.
-
-## 27/11/2026 — Audit I4 : montants des mesures justifiés
-
-- 25 mesures n'avaient ni source ni note (19 Tondelier, 5 Mélenchon, 1 Zemmour). Chacune reçoit une note : page et citation du programme, calcul quand il existe (7 500 infirmiers scolaires × 50 000 € ≈ 0,4 Md€ ; 200 inspecteurs du travail ≈ 0,01 Md€), sinon la mention que le programme ne chiffre pas et que le montant est une enveloppe retenue par le projet.
-- Aucune valeur ne change ; l'empreinte des paramètres (champs documentaires exclus) reste b8f68c23d1c4da0f, donc la régénération en cours reste valable.
-- Nouveau test `test_hypotheses_lourdes_justifiees` : une mesure HYPOTHESE de plus de 0,5 Md€ doit avoir une source ou une note (391 mesures contrôlées).
