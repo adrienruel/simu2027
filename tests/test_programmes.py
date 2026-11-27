@@ -91,3 +91,18 @@ def test_participations_ont_une_fin():
                 v = par.get("valeur") if isinstance(par, dict) else None
                 if isinstance(v, dict) and v.get("poste") == "participations":
                     assert "fin" in v, f"{f.parent.name} {nom} : participation sans fin"
+
+
+def test_cumul_participations_plafonne():
+    """Audit I6 (27/11/2026) : les achats d'actifs cumulés d'un programme restent sous 15 % du PIB de 2029 (Roussel,
+    nationalisations : 250 Md€, 8 % du PIB ; Mélenchon : 90 Md€). Un compte annuel au lieu d'un achat unique les
+    ferait dépasser de loin, comme avant la correction de C1 (2 250 Md€ en 2037)."""
+    from moteur import noyau
+    from moteur import statu_quo as sq
+    from moteur.parametres import Parametres
+    pib = sq.pib(Parametres(), "prudent")[2029]
+    for nom in noyau.programmes_disponibles()[1:]:
+        prog, p = noyau.charger(nom), Parametres(programme=nom)
+        for s, mesures in prog.mesures(p).items():
+            tot = sum(sum(m.valeurs.values()) for m in mesures if m.poste == "participations")
+            assert abs(tot) < 0.15 * pib, f"{nom} ({s}) : participations cumulées {tot:.0f} Md€"
