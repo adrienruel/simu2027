@@ -105,6 +105,14 @@
    "code_non_commite": true,
    "parametres": "7373ea06af5be478"
   },
+  "comparaison_economies_nommees.csv": {
+   "sha256": "a84ca97b32ea26f604d28d9d4e9263be52eae4bf287b0639fc2092d48c4a5ca9",
+   "script": "outils.economies_nommees",
+   "date": "2026-11-27T23:03:13Z",
+   "commit": "37fc42c",
+   "code_non_commite": true,
+   "parametres": "0f2851b7134bf42b"
+  },
   "comparaison_emploi_canaux.csv": {
    "sha256": "a60ad5318c1be5b6a9e98b0d0821fefadbe7b32962c7eb61dbbaad1424c033e2",
    "script": "outils.export_comparaison",

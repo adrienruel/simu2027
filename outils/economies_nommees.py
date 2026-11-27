@@ -24,7 +24,7 @@ from moteur.parametres import Parametres
 RACINE = Path(__file__).resolve().parents[1]
 SORTIE = RACINE / "sorties" / "comparaison_economies_nommees.csv"
 ANNEE = 2032
-SCENARIOS = {"prudent": "Prudent", "median": "Médian"}
+SCENARIOS = {"crise": "Crise", "prudent": "Prudent", "median": "Médian", "optimiste": "Optimiste"}
 NON_DETAILLEES = "Économies annoncées non détaillées"
 
 
