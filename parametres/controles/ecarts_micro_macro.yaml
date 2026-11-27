@@ -1,0 +1,30 @@
+# Écarts de plus de 30 % entre OpenFisca et le moteur (sorties/controle_micro_macro.csv, outils/controle_micro_macro.py).
+# Audit I5 du 27/11/2026. « expliques » : raison vérifiée. « a_expliquer » : arriéré, à vider (comme
+# parametres/sources/sans_url.txt) ; une mesure qui en sort doit recevoir une raison ou voir son écart résorbé.
+# Corrigé le 27/11 grâce à ce contrôle : ZEM-FIS-01 et GLU-FIS-01b (part non déductible de la CSG non appliquée dans
+# OpenFisca), désormais à −11 % et −5 %.
+
+expliques:
+  arthaud.ART-ECO-01: "Périmètre : OpenFisca ne voit que les ménages (prélèvements en plus et prestations en moins sur les salaires relevés) ; le moteur compte aussi la hausse de la masse salariale des employeurs publics, l'IS sur les marges réduites et le coût des emplois perdus."
+  roussel.PCF-SAL-01: "Périmètre, comme ART-ECO-01 : côté ménages seulement dans OpenFisca ; le moteur ajoute la masse salariale publique, l'IS sur les marges et les emplois perdus."
+  melenchon.LFI-SAL-01: "Périmètre, comme ART-ECO-01 : côté ménages seulement dans OpenFisca ; le moteur ajoute la masse salariale publique, l'IS sur les marges et les emplois perdus."
+  glucksmann.GLU-ECO-01: "Périmètre, comme ART-ECO-01 : côté ménages seulement dans OpenFisca ; le moteur ajoute la masse salariale publique, l'IS sur les marges et les emplois perdus."
+  tondelier.PRE-01: "Périmètre : les lignes côté ménages du moteur (prélèvements 9,4, TVA 0,6, aides 2,6 Md€ en 2029) font 12,6 Md€ contre 13,5 dans OpenFisca ; le solde du moteur (0,8) retranche l'IS sur les marges (−1,5) et les emplois perdus (−10,5)."
+  tondelier.REC-37: "Voulu : à court terme la fin des allègements au-delà de 1,6 SMIC ne touche pas les ménages ; la micro en reporte la moitié sur les salaires de la bande (incidence de long terme), soit 8,3 Md€ pour 15,0 au moteur."
+  tondelier.COT-04: "Assiette : OpenFisca ne relève que la CSG des revenus d'activité ; le moteur compte le point sur tous les revenus (pensions et capital compris), faute de lecture sûre sur ces revenus dans la micro (docs/microsimulation.md)."
+  roussel.PCF-RET-02: "Nul en 2026 par construction : la revalorisation des pensions sur les salaires n'a d'effet qu'à partir de 2029, visible dans la population vieillie (même calcul que le moteur)."
+  zemmour.ZEM-RET-01: "Nul en 2026 par construction : la part salariale de la capitalisation obligatoire ne touche que les entrants ; effet visible dans la population vieillie. Le moteur compte aussi l'âge légal à 65 ans sous le même identifiant."
+
+a_expliquer:
+  - lisnard.LIS-RET-01
+  - melenchon.LFI-PRE-02
+  - bertrand.BER-RET-01
+  - lisnard.LIS-SOC-01
+  - tondelier.RET-04
+  - tondelier.COT-02
+  - le_pen.RN-FAM-01
+  - arthaud.ART-RET-01
+  - zemmour.ZEM-KNA-04
+  - tondelier.REC-20/21
+  - roussel.PCF-PRE-01
+  - tondelier.REC-10
