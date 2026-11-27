@@ -21,6 +21,8 @@ def test_signes_et_ordre_de_grandeur(res):
 
 
 def test_depense_publique_proche(res):
-    """Consommation publique : PIB à 25 % près de FR-BDF jusqu'à 5 ans."""
-    for h in ("A1", "A2", "A3", "A5"):
+    """Consommation publique : PIB à 25 % près de FR-BDF jusqu'à 3 ans. Depuis le 27/11/2026 (BCE hors du calcul
+    publié, décision d'Adrien), le noyau est à taux constants comme Mésange (0,80 à 5 ans, Mésange 0,83) ; FR-BDF
+    descend plus vite (0,61 à 5 ans)."""
+    for h in ("A1", "A2", "A3"):
         assert res["consommation_publique"]["median"][h][0] == pytest.approx(v.FRBDF["consommation_publique"][h][0], rel=0.25)
