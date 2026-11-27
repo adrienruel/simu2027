@@ -13,7 +13,7 @@ dash.draw('t_annonces', (tb) => {
 });
 
 // variantes communes de la dette
-const VARIANTES_DETTE = ['centrale', 'sans_prime_dette', 'taux_long_3_3', 'croissance_2027_2028'];
+const VARIANTES_DETTE = ['centrale', 'avec_reaction_marches', 'taux_long_3_3', 'croissance_2027_2028'];
 dash.calc('variantes_tab', {
   inputs: ['dette_variantes'],
   title: 'Variantes de la dette par programme',
@@ -33,7 +33,7 @@ dash.calc('variantes_tab', {
 dash.draw('v_annee2', (el) => { el.textContent = String(cpProche([2032, 2037, 2050])); });
 const varSq = (el, v) => cpValeurCle(el, 'variantes_tab', CP_SQ, 'deficit_' + v, { annee: cpProche([2032, 2037, 2050]) });
 dash.draw('v_sq_c', (el) => varSq(el, 'centrale'));
-dash.draw('v_sq_p', (el) => varSq(el, 'sans_prime_dette'));
+dash.draw('v_sq_p', (el) => varSq(el, 'avec_reaction_marches'));
 dash.draw('v_sq_t', (el) => varSq(el, 'taux_long_3_3'));
 dash.draw('v_sq_g', (el) => varSq(el, 'croissance_2027_2028'));
 dash.draw('t_variantes', (tb) => {
