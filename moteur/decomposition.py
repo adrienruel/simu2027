@@ -29,9 +29,10 @@ LIBELLES = {
 
 
 def _autres(c: dict) -> float:
-    """Intérêts hors taux apparent × dette (emprunt aux ménages : nul pour les programmes publiés), en points de PIB."""
-    i = c["taux_apparent"]
-    return (c["interets_reels"] - (i - c["inflation"] / 100) * c["dette_debut"]) / c["pib"] * 100
+    """Intérêts hors taux apparent × dette (emprunt aux ménages : nul pour les programmes publiés), en points de PIB.
+    Champ publié par le noyau (audit M5, 27/11/2026) : avant, un résidu, qui absorbait en silence toute incohérence
+    entre le taux, l'inflation et les intérêts d'un compte modifié à la main."""
+    return c["interets_menages"] / c["pib"] * 100
 
 
 def ecart(a: dict, b: dict) -> dict[str, float]:
