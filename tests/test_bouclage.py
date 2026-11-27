@@ -104,7 +104,12 @@ def test_inflation_allege_dette_nominale(p):
 
 
 def test_prime_de_dette_pese_sur_le_pib(p):
-    """E1 : un programme dont le taux de marché dépasse celui du statu quo perd du PIB ; le statu quo n'en perd pas."""
+    """E1 : un programme dont le taux de marché dépasse celui du statu quo perd du PIB ; le statu quo n'en perd pas.
+    27/11/2026 : seulement dans la variante avec la réaction des marchés (calcul publié sans prime ni BCE)."""
+    from moteur import reaction_marches
+    r_pub = noyau.simuler(p, noyau.charger("melenchon"), scenarios=["prudent"], contrefactuel=False)["prudent"]
+    assert all(r_pub[t]["pib_taux"] == 0.0 and r_pub[t]["ecart_marche"] == 0.0 for t in noyau.ANNEES)
+    p = reaction_marches.parametres(p)
     base = noyau.simuler(p, None, scenarios=["prudent"])["prudent"]
     assert all(base[t]["pib_taux"] == 0.0 for t in noyau.ANNEES)
     r = noyau.simuler(p, noyau.charger("melenchon"), scenarios=["prudent"], contrefactuel=False)["prudent"]

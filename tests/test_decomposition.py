@@ -38,8 +38,8 @@ def test_composantes_du_taux(sq):
 
 
 def test_convention_2027_2028_par_defaut(p):
-    """Sans décision D3, la convention reste celle d'avant (économie de 2026 placée en 2029)."""
-    assert noyau.facteur_2027_2028(p) == 1.0
+    """Décision D3 d'Adrien (27/11/2026) : 2027 et 2028 projetées avec la croissance de la Banque de France."""
+    assert noyau.facteur_2027_2028(p) == pytest.approx(1.009 * 1.012)
 
 
 def test_variantes(p, sq):
@@ -51,10 +51,13 @@ def test_variantes(p, sq):
     assert avec[2050]["taux_prime"] > 0.01 and avec[2050]["deficit"] > sq["prudent"][2050]["deficit"]
     bas = noyau.simuler(vd._variante(p, vd.VARIANTES["taux_long_3_3"]), scenarios=["prudent"])["prudent"]
     assert bas[2040]["deficit"] < sq["prudent"][2040]["deficit"]
-    q = vd._variante(p, vd.VARIANTES["croissance_2027_2028"])
-    assert noyau.facteur_2027_2028(q) == pytest.approx(1.009 * 1.012)
+    # 27/11/2026 (D3) : le calcul publié projette 2027-2028 (Banque de France) ; la variante remet l'économie de 2026
+    # en 2029 : dette de départ plus haute, flux inchangés
+    assert noyau.facteur_2027_2028(p) == pytest.approx(1.009 * 1.012)
+    q = vd._variante(p, vd.VARIANTES["economie_2026_en_2029"])
+    assert noyau.facteur_2027_2028(q) == pytest.approx(1.0)
     cr = noyau.simuler(q, scenarios=["prudent"])["prudent"]
-    assert cr[2029]["dette_debut"] == pytest.approx(sq["prudent"][2029]["dette_debut"] / (1.009 * 1.012))
+    assert cr[2029]["dette_debut"] == pytest.approx(sq["prudent"][2029]["dette_debut"] * (1.009 * 1.012))
     assert cr[2029]["solde_primaire"] == pytest.approx(sq["prudent"][2029]["solde_primaire"])
 
 

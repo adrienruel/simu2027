@@ -26,14 +26,15 @@ VARIANTES = {
     # 27/11/2026 : le calcul principal est sans prime de dette (DÉCISION d'Adrien) ; la variante remet la réaction
     "avec_reaction_marches": "reaction_marches",
     "taux_long_3_3": {"macro.taux_long_terme": 0.033},
-    # Banque de France, projections intermédiaires du 15/09/2026 : 0,9 % en 2027, 1,2 % en 2028
-    "croissance_2027_2028": {"calendrier.croissance_2027_2028": {2027: 0.009, 2028: 0.012}},
+    # 27/11/2026 (décision D3) : le calcul publié prend la croissance de la Banque de France pour 2027 et 2028 ;
+    # la variante remet l'ancienne convention (économie de 2026 placée en 2029, croissance nulle)
+    "economie_2026_en_2029": {"calendrier.croissance_2027_2028": {2027: 0.0, 2028: 0.0}},
 }
 LIBELLES_VARIANTES = {
     "centrale": "Calcul publié",
     "avec_reaction_marches": "Avec la réaction des marchés (prime de dette, baisse de l'écart de taux)",
     "taux_long_3_3": "Taux long à 3,3 % (au lieu de 4 %)",
-    "croissance_2027_2028": "2027-2028 projetées (0,9 % et 1,2 %, Banque de France)",
+    "economie_2026_en_2029": "Économie de 2026 placée en 2029 (croissance nulle en 2027 et 2028)",
 }
 
 

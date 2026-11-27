@@ -32,7 +32,8 @@ def test_independant_du_programme(tmp_path, monkeypatch, res):
 def test_identites_comptables(p, res):
     infl = sq.inflation(p, "prudent")
     v = res["prudent"]
-    dette_prec = sq.dette_fin_2028(p)
+    from moteur import noyau
+    dette_prec = sq.dette_fin_2028(p) / noyau.facteur_2027_2028(p)  # 27/11/2026 : 2027-2028 projetées (D3)
     for t in sq.ANNEES:
         x = v[t]
         assert x["depenses_primaires"] == pytest.approx(sum(x["blocs"].values()))
