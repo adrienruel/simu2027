@@ -111,6 +111,15 @@ def test_correlation_historique_productivite_emploi():
     """Roadmap 6.2 : les tendances de la productivité et de l'emploi ne sont pas bonnes ou mauvaises ensemble
     (Insee, comptes nationaux 1978-2025) : la borne ρ = 1 du climat commun n'est pas soutenue par l'histoire."""
     from outils.correlations_historiques import correlations
-    c = correlations()
+    c = correlations()["productivite_emploi"]
     assert all(-0.5 < v < 0.3 for v in c.values())
     assert c["glissant_10_ans"] < 0
+
+
+def test_correlation_historique_taux_productivite():
+    """Roadmap du moteur R4.3 (27/11/2026) : le taux réel long (OAT à 10 ans, OCDE) est élevé quand la productivité
+    croît vite, y compris hors de leur baisse commune : un taux défavorable va avec une productivité favorable, à
+    l'inverse de la borne ρ = 1 (tout favorable ou tout défavorable ensemble)."""
+    from outils.correlations_historiques import correlations
+    c = correlations()["taux_reel_productivite"]
+    assert c["glissant_5_ans"] > 0.7 and c["glissant_5_ans_hors_tendance"] > 0.2 and c["annuel_hors_2020_2021"] > 0.3

@@ -201,6 +201,16 @@ bougent ni le statu quo ni les programmes en 2037 (paramètres de canaux qu'aucu
   l'inverse : enrichissement de la croissance en emplois des années 2000 et 2010). La borne ρ = 1 du Monte Carlo
   (productivité, comportements et emploi bons ou mauvais ensemble) n'est pas soutenue par l'histoire pour ces deux
   familles ; la borne ρ = 0 est la plus proche des données.
-- **Pas fait :** les taux (la série de l'OAT à 10 ans de la Banque de France n'a pas pu être téléchargée) et les
-  multiplicateurs (pas de série historique). Le Monte Carlo garde ses deux bornes ; publier ρ = 0 comme cas central,
+- **Taux (roadmap du moteur R4.3, 27/11/2026) :** OAT à 10 ans en moyenne annuelle (OCDE, Main Economic Indicators,
+  série IRLTLT01FRA156N reprise par la Fed de Saint-Louis : `parametres/donnees/oat10_annuel_ocde.csv`) ; taux réel =
+  OAT − hausse du déflateur du PIB (Insee). Corrélation du taux réel avec la croissance de la productivité, 1979-2025 :
+  annuelle +0,42 ; moyennes sur 5 ans +0,85 (glissantes), +0,75 (disjointes) ; sur 10 ans +0,95 et +0,99 ; moyennes
+  sur 5 ans hors tendance linéaire commune +0,32 ; depuis 1999, +0,68. Avec l'emploi : −0,24 (annuelle) à −0,42.
+- **Lecture :** les décennies de forte productivité sont celles de taux réels élevés (r suit g, en partie par la baisse
+  commune des deux depuis les années 1980, mais pas seulement). Un taux défavorable au solde va donc avec une
+  productivité favorable : ils se compensent. La borne ρ = 1, qui les fait aller du même côté (tout bon ou tout mauvais),
+  est contraire à l'histoire ; la borne ρ = 0 en est plus proche, et une corrélation estimée mettrait la sensibilité
+  des taux (`macro.prime_dette`) du côté opposé à la productivité. Peu d'observations indépendantes (quatre décennies) :
+  le signe est sûr, la valeur ne l'est pas.
+- **Pas fait :** les multiplicateurs (pas de série historique). Le Monte Carlo garde ses deux bornes ; publier ρ = 0 comme cas central,
   ou passer à des familles de paramètres corrélées entre elles, est une décision d'Adrien.
