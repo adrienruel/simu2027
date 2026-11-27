@@ -294,6 +294,7 @@ zemmour_mesures:
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
+    note: "Tract « Urgence nationale : notre système de santé » (Reconquête, 3 juin 2025), p. 2 : réouverture de maternités, urgences et soins palliatifs de proximité. Le tract ne chiffre pas ce volet ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
   medicaments:
     valeur: {id: ZEM-SAN-03, libelle: "Relocalisation des médicaments essentiels", poste: etat_missions, moteur: pib, debut: 2028, plein: 2030,
              montant: {crise: 0.4, prudent: 0.3, median: 0.3, optimiste: 0.2}}

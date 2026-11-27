@@ -55,3 +55,25 @@ def test_url_reservee_aux_sources(tmp_path):
     f.write_text("scenarios: [crise, prudent, median, optimiste]\ng:\n  x: {valeur: 1, unite: taux, statut: SOURCE, source: s, url: \"a.fr\"}\n", encoding="utf-8")
     with pytest.raises(ErreurParametre):
         Parametres(chemin=f)
+
+
+def _montant_max(v):
+    m = v.get("montant") if isinstance(v, dict) else None
+    if isinstance(m, dict):
+        return max((abs(x) for x in m.values() if isinstance(x, (int, float))), default=0.0)
+    return abs(m) if isinstance(m, (int, float)) else 0.0
+
+
+def test_hypotheses_lourdes_justifiees():
+    """Audit I4 (27/11/2026) : une mesure en HYPOTHESE de plus de 0,5 Md€ dit d'où vient son montant, par une source
+    ou une note (calcul, ordre de grandeur, ou enveloppe retenue faute de chiffrage dans le programme)."""
+    manquants = []
+    for nom in noyau.programmes_disponibles()[1:]:
+        p = Parametres(programme=nom)
+        for x in p:
+            if not x.cle.startswith(f"{nom}_mesures.") or x.statut != "HYPOTHESE":
+                continue
+            v = x.valeur if isinstance(x.valeur, dict) else {}
+            if _montant_max(v) > 0.5 and not (x.source or x.note or v.get("source") or v.get("note")):
+                manquants.append(x.cle)
+    assert manquants == [], manquants
