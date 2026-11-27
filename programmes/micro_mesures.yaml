@@ -411,7 +411,8 @@ zemmour:
     operations:
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, valeur: 0.0}}
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.deductible, valeur: 0.0}}
-    note: "CSG supprimée sur les revenus d'activité (salariés et indépendants)."
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.imposable, valeur: 0.0}}
+    note: "CSG supprimée sur les revenus d'activité (salariés et indépendants). 27/11/2026 (audit I5) : la part imposable (2,4 points) restait en place, OpenFisca calculant la CSG d'activité sur deductible et imposable (taux_global n'entre dans aucune formule des revenus d'activité) ; seuls 6,8 points sur 9,2 étaient supprimés."
 
 glucksmann:
   GLU-SOC-04:
@@ -442,7 +443,8 @@ glucksmann:
     operations:
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.taux_global, ajout: -0.0137}}
       - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.deductible, ajout: -0.0101}}
-    note: "CSG sur les revenus d'activité abaissée de 15 Md€ : 15 / 100,7 Md€ de CSG d'activité (bibliotheque.csg_activite) × 9,2 points = 1,37 point, réparti entre parts déductible et non déductible dans leur proportion (6,8 / 9,2)."
+      - {parametre: {chemin: prelevements_sociaux.contributions_sociales.csg.activite.imposable, ajout: -0.0036}}
+    note: "CSG sur les revenus d'activité abaissée de 15 Md€ : 15 / 100,7 Md€ de CSG d'activité (bibliotheque.csg_activite) × 9,2 points = 1,37 point, réparti entre parts déductible et non déductible dans leur proportion (6,8 / 9,2) : 1,01 et 0,36 point. 27/11/2026 (audit I5) : la part non déductible n'était pas appliquée (taux_global n'entre dans aucune formule des revenus d'activité)."
   GLU-ECO-01:
     operations: [{population: {smic_net_2027: 1600, diffusion: 1.4}}]
     note: "SMIC à 1 600 € net (euros de 2027), même règle que le moteur."
