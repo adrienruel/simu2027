@@ -43,8 +43,8 @@ dash.calc('comparaison', {
     };
     return [
       ['esp', "Écart de solde primaire au statu quo (points de PIB)", 'traj', 'ecart_solde_primaire_pib', 2, 'haut', '', 'traj'],
-      ['deficit', 'Déficit public (% du PIB, sans réaction des marchés)', 'traj', 'deficit', 1, 'bas', ' %', 'traj'],
-      ['dette', 'Dette publique (% du PIB, sans réaction des marchés)', 'traj', 'dette_pib', 0, 'bas', ' %', 'traj'],
+      ['deficit', 'Déficit public (% du PIB)', 'traj', 'deficit', 1, 'bas', ' %', 'traj'],
+      ['dette', 'Dette publique (% du PIB)', 'traj', 'dette_pib', 0, 'bas', ' %', 'traj'],
       ['recettes', 'Recettes publiques (% du PIB)', 'traj', 'recettes_pib', 1, null, ' %', 'traj'],
       ['depenses', 'Dépenses hors intérêts (% du PIB)', 'traj', 'depenses_primaires_pib', 1, null, ' %', 'traj'],
       ['pib', 'PIB, écart au statu quo (%)', 'croissance', 'ecart_pib_pct', 1, 'haut', ' %', 'cle'],

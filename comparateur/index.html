@@ -93,7 +93,7 @@
 <div class="cp" data-read lang="fr">
   <header style="display: grid; gap: var(--cds-gap-sm)">
     <h1 id="titre">Comparateur des programmes 2027</h1>
-    <p class="lead">En <b data-draw="l_annee">—</b>, scénario <b data-draw="l_scen">—</b> : <b data-draw="l_prog">—</b> a un déficit public de <b data-draw="l_def_prog" data-source="traj" data-field="deficit">—</b>, contre <b data-draw="l_def_sq" data-source="traj" data-field="deficit">—</b> pour le statu quo (% du PIB, au sens de Maastricht, sans réaction des marchés), et un solde primaire <b data-draw="l_esp" data-source="traj" data-field="ecart_solde_primaire_pib">—</b> point(s) de PIB par rapport au statu quo (+ = meilleur).</p>
+    <p class="lead">En <b data-draw="l_annee">—</b>, scénario <b data-draw="l_scen">—</b> : <b data-draw="l_prog">—</b> a un déficit public de <b data-draw="l_def_prog" data-source="traj" data-field="deficit">—</b>, contre <b data-draw="l_def_sq" data-source="traj" data-field="deficit">—</b> pour le statu quo (% du PIB, au sens de Maastricht), et un solde primaire <b data-draw="l_esp" data-source="traj" data-field="ecart_solde_primaire_pib">—</b> point(s) de PIB par rapport au statu quo (+ = meilleur).</p>
     <p class="note">Chaque programme est chiffré sur le même noyau que le statu quo : mêmes cohortes, mêmes cellules, même dette de départ, mêmes règles. Les économies et les recettes annoncées par les candidats ne sont pas reprises telles quelles : chaque mesure nommée est estimée d'après des sources et des précédents, et ce qui n'est pas détaillé est déduit domaine par domaine. Le modèle mesure ce qui est démontré, pas ce qui est impossible : un programme mieux détaillé serait mieux chiffré.</p>
   </header>
 
@@ -101,7 +101,7 @@
     <summary>À lire avant les chiffres</summary>
     <ul>
       <li>Le scénario prudent n'est pas un scénario central : il cumule des hypothèses défavorables. Le médian est le plus proche d'une prévision ; l'onglet « Fiabilité » montre la fourchette.</li>
-      <li>La mesure la plus solide est l'écart de solde primaire au statu quo (hors intérêts) : il dit ce que le programme change, sans dépendre de l'emballement des intérêts. Déficit et dette sont calculés sans réaction des marchés : un programme qui creuse la dette ne paie pas de prime, celui qui la réduit ne gagne pas de baisse d'écart de taux ; cette réaction est une variante, dans l'onglet <a href="#fiabilite" data-aller="fiabilite">Fiabilité et méthode</a>. Les niveaux de déficit et de dette au-delà de 2037 n'ont pas valeur de prévision, et les années où la dette dépasse 200 % du PIB sont en italique gris : un ajustement serait forcé bien avant.</li>
+      <li>La mesure la plus solide est l'écart de solde primaire au statu quo (hors intérêts) : il dit ce que le programme change, sans dépendre de l'emballement des intérêts. Les niveaux de déficit et de dette au-delà de 2037 n'ont pas valeur de prévision, et les années où la dette dépasse 200 % du PIB sont en italique gris : un ajustement serait forcé bien avant.</li>
       <li>Quatre programmes sont chiffrés sur des textes partiels ou des discours, faute de programme publié : Le Pen, Arthaud, Bertrand et Roussel. Leur chiffrage sera refait à la publication.</li>
       <li>Les fonds de capitalisation sont comptés hors des administrations publiques ; la variante où ils y entrent, commune à tous, ne change le résultat que pour Philippe (environ −0,4 point de déficit en 2037 dans le prudent).</li>
       <li>Pauvreté et déciles ne portent que les mesures codées dans la microsimulation, sur une population synthétique : un bilan partiel, à lire comme une indication.</li>
@@ -136,8 +136,8 @@
       <p class="note">En <b data-draw="l_annee">—</b>, scénario <b data-draw="l_scen">—</b>. En vert, mieux que le statu quo ; en rouge, moins bien. Rang : place du programme parmi les programmes comparés sur l'écart de solde primaire au statu quo (1 = celui qui améliore le plus les comptes hors intérêts).</p>
       <div class="tuiles">
         <div class="tuile"><span class="t-lab">Écart de solde primaire au statu quo (points de PIB)</span><b class="t-val" data-draw="r_esp" data-source="traj" data-field="ecart_solde_primaire_pib">—</b><span class="t-sq">rang <span data-draw="r_rang" data-source="rangs" data-field="rang">—</span> sur <span data-draw="r_classes" data-source="rangs" data-field="classes">—</span></span></div>
-        <div class="tuile"><span class="t-lab">Déficit public (% du PIB, sans réaction des marchés)</span><b class="t-val" data-draw="r_def" data-source="traj" data-field="deficit">—</b><span class="t-sq">statu quo : <span data-draw="r_def_sq" data-source="traj" data-field="deficit">—</span></span></div>
-        <div class="tuile"><span class="t-lab">Dette publique (% du PIB, sans réaction des marchés)</span><b class="t-val" data-draw="r_dette" data-source="traj" data-field="dette_pib">—</b><span class="t-sq">statu quo : <span data-draw="r_dette_sq" data-source="traj" data-field="dette_pib">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Déficit public (% du PIB)</span><b class="t-val" data-draw="r_def" data-source="traj" data-field="deficit">—</b><span class="t-sq">statu quo : <span data-draw="r_def_sq" data-source="traj" data-field="deficit">—</span></span></div>
+        <div class="tuile"><span class="t-lab">Dette publique (% du PIB)</span><b class="t-val" data-draw="r_dette" data-source="traj" data-field="dette_pib">—</b><span class="t-sq">statu quo : <span data-draw="r_dette_sq" data-source="traj" data-field="dette_pib">—</span></span></div>
         <div class="tuile"><span class="t-lab">PIB, écart au statu quo</span><b class="t-val" data-draw="r_pib" data-source="croissance" data-field="ecart_pib_pct">—</b><span class="t-sq">euros constants de 2026</span></div>
         <div class="tuile"><span class="t-lab">Chômage (%)</span><b class="t-val" data-draw="r_chom" data-source="traj" data-field="chomage">—</b><span class="t-sq">statu quo : <span data-draw="r_chom_sq" data-source="traj" data-field="chomage">—</span></span></div>
         <div class="tuile"><span class="t-lab">Emploi, écart au statu quo (milliers)</span><b class="t-val" data-draw="r_emploi" data-source="traj" data-field="ecart_emploi_milliers">—</b><span class="t-sq">personnes en emploi</span></div>
@@ -483,7 +483,7 @@
       </div>
       <div class="card" id="c-cmp-deficit">
         <h3>Déficit au sens de Maastricht</h3>
-        <p class="note">% du PIB, 2029-2060, sans réaction des marchés, avec le statu quo en pointillés.</p>
+        <p class="note">% du PIB, 2029-2060, avec le statu quo en pointillés.</p>
         <div class="chart" data-draw="c_cmp_deficit" data-source="traj"></div>
       </div>
       <div class="card" id="c-cmp-pib">
@@ -555,7 +555,7 @@
       </div>
       <div class="card" id="c-deficit">
         <h3>Déficit au sens de Maastricht</h3>
-        <p class="note">% du PIB, 2029-2060, sans réaction des marchés, scénario choisi.</p>
+        <p class="note">% du PIB, 2029-2060, scénario choisi.</p>
         <div class="chart" data-draw="c_deficit" data-source="traj"></div>
       </div>
       <div class="card" id="c-dette">
@@ -576,9 +576,9 @@
     </section>
 
     <section class="card" id="dette-dynamique">
-      <h2>Ce qui fait monter le déficit : intérêts et croissance</h2>
+      <h2>Ce qui fait monter le déficit : intérêts, prime de dette et croissance</h2>
       <p class="lead">Statu quo, scénario <b data-draw="l_scen">—</b> : de 2029 à <b data-draw="v_annee">—</b>, le déficit monte de <b data-draw="d_sq_total" data-source="decomposition" data-field="ecart_deficit">—</b> point(s) de PIB, dont <b data-draw="d_sq_prim" data-source="decomposition" data-field="primaire">—</b> de déficit primaire : le reste vient des intérêts.</p>
-      <p class="note">Le déficit est la somme du déficit primaire et des intérêts (taux apparent × dette du début d'année, rapportés au PIB). Un écart de déficit se coupe sans reste en cinq parts : déficit primaire ; taux hors prime (taux long, effet de l'inflation, réaction de la BCE, choc de crise) ; prime de dette et baisse d'écart de taux (nulles ici : la lecture principale est sans réaction des marchés) ; dette en plus, à taux donné ; PIB différent, à dette donnée. Programme et scénario choisis, année la plus proche parmi 2032, 2037 et 2050. À droite de zéro, la part creuse le déficit par rapport au statu quo.</p>
+      <p class="note">Le déficit est la somme du déficit primaire et des intérêts (taux apparent × dette du début d'année, rapportés au PIB). Un écart de déficit se coupe sans reste en cinq parts : déficit primaire ; taux hors prime (taux long, effet de l'inflation, réaction de la BCE, choc de crise) ; prime de dette, avec la baisse d'écart de taux gagnée par un programme dont la dette recule ; dette en plus, à taux donné ; PIB différent, à dette donnée. Programme et scénario choisis, année la plus proche parmi 2032, 2037 et 2050. À droite de zéro, la part creuse le déficit par rapport au statu quo.</p>
       <p class="total">Écart de déficit de <b data-draw="l_prog">—</b> avec le statu quo en <b data-draw="v_annee">—</b> : <b data-draw="d_prog_total" data-source="decomposition" data-field="ecart_deficit">—</b> point(s) de PIB (+ = plus de déficit), somme des barres.</p>
       <div class="bars" data-draw="c_decomp" data-source="decomposition"></div>
       <p class="note">Le classement tient-il avec d'autres taux d'intérêt ? Voir les variantes communes dans l'onglet <a href="#fiabilite" data-aller="fiabilite">Fiabilité et méthode</a>.</p>
@@ -845,11 +845,11 @@
 
     <section class="card" id="variantes-dette">
       <h2>Le classement tient-il avec d'autres taux ?</h2>
-      <p class="note">Trois variantes appliquées à tous, statu quo compris : avec la réaction des marchés (prime de dette pour un programme dont la dette dépasse celle du statu quo, baisse de l'écart de taux pour celui dont elle recule) ; taux long à 3,3 % au lieu de 4 % ; 2027 et 2028 projetées avec la croissance de la Banque de France (0,9 % puis 1,2 %, projections du 15 septembre 2026), au lieu de placer l'économie de 2026 en 2029. Colonnes « écart » : déficit du programme moins celui du statu quo de la même variante, en points de PIB (+ = plus de déficit que le statu quo). Scénario choisi, année la plus proche parmi 2032, 2037 et 2050.</p>
-      <p class="lead">Déficit du statu quo en <b data-draw="v_annee2">—</b> : <b data-draw="v_sq_c" data-source="variantes_tab" data-field="deficit_centrale">—</b> % publié, <b data-draw="v_sq_p" data-source="variantes_tab" data-field="deficit_avec_reaction_marches">—</b> % avec la réaction des marchés, <b data-draw="v_sq_t" data-source="variantes_tab" data-field="deficit_taux_long_3_3">—</b> % avec un taux long à 3,3 %, <b data-draw="v_sq_g" data-source="variantes_tab" data-field="deficit_croissance_2027_2028">—</b> % avec 2027-2028 projetées.</p>
+      <p class="note">Trois variantes appliquées à tous, statu quo compris : sans prime de dette ; taux long à 3,3 % au lieu de 4 % ; 2027 et 2028 projetées avec la croissance de la Banque de France (0,9 % puis 1,2 %, projections du 15 septembre 2026), au lieu de placer l'économie de 2026 en 2029. Colonnes « écart » : déficit du programme moins celui du statu quo de la même variante, en points de PIB (+ = plus de déficit que le statu quo). Scénario choisi, année la plus proche parmi 2032, 2037 et 2050.</p>
+      <p class="lead">Déficit du statu quo en <b data-draw="v_annee2">—</b> : <b data-draw="v_sq_c" data-source="variantes_tab" data-field="deficit_centrale">—</b> % publié, <b data-draw="v_sq_p" data-source="variantes_tab" data-field="deficit_sans_prime_dette">—</b> % sans prime de dette, <b data-draw="v_sq_t" data-source="variantes_tab" data-field="deficit_taux_long_3_3">—</b> % avec un taux long à 3,3 %, <b data-draw="v_sq_g" data-source="variantes_tab" data-field="deficit_croissance_2027_2028">—</b> % avec 2027-2028 projetées.</p>
       <div class="scroll-x">
         <table data-source="variantes_tab" data-row-key="cle">
-          <thead><tr><th data-field="programme">Programme</th><th data-field="deficit_centrale">Déficit publié (%)</th><th data-field="ecart_centrale">Écart publié</th><th data-field="ecart_avec_reaction_marches">Écart avec la réaction des marchés</th><th data-field="ecart_taux_long_3_3">Écart, taux long à 3,3 %</th><th data-field="ecart_croissance_2027_2028">Écart, 2027-2028 projetées</th></tr></thead>
+          <thead><tr><th data-field="programme">Programme</th><th data-field="deficit_centrale">Déficit publié (%)</th><th data-field="ecart_centrale">Écart publié</th><th data-field="ecart_sans_prime_dette">Écart sans prime de dette</th><th data-field="ecart_taux_long_3_3">Écart, taux long à 3,3 %</th><th data-field="ecart_croissance_2027_2028">Écart, 2027-2028 projetées</th></tr></thead>
           <tbody data-draw="t_variantes"></tbody>
         </table>
       </div>
