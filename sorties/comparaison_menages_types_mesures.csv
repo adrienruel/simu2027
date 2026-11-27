@@ -63,15 +63,15 @@ Glucksmann (Place publique)|couple_deux_medians|GLU-ENE-03,Glucksmann (Place pub
 Glucksmann (Place publique)|couple_cadre_median_deux_enfants|GLU-ENE-03,Glucksmann (Place publique),couple_cadre_median_deux_enfants,GLU-ENE-03 — Hausse de l'accise sur l'électricité de 2024 annulée ; part de la facture indexée sur le coût de production,131.0,11.0
 Glucksmann (Place publique)|retraite_seul|GLU-ENE-03,Glucksmann (Place publique),retraite_seul,GLU-ENE-03 — Hausse de l'accise sur l'électricité de 2024 annulée ; part de la facture indexée sur le coût de production,105.0,9.0
 Glucksmann (Place publique)|couple_retraites|GLU-ENE-03,Glucksmann (Place publique),couple_retraites,GLU-ENE-03 — Hausse de l'accise sur l'électricité de 2024 annulée ; part de la facture indexée sur le coût de production,117.0,10.0
-Glucksmann (Place publique)|jeune_smic|GLU-FIS-01b,Glucksmann (Place publique),jeune_smic,GLU-FIS-01b — CSG sur les salaires abaissée (privé),162.0,13.0
-Glucksmann (Place publique)|seul_smic|GLU-FIS-01b,Glucksmann (Place publique),seul_smic,GLU-FIS-01b — CSG sur les salaires abaissée (privé),162.0,13.0
-Glucksmann (Place publique)|seul_median|GLU-FIS-01b,Glucksmann (Place publique),seul_median,GLU-FIS-01b — CSG sur les salaires abaissée (privé),281.0,23.0
-Glucksmann (Place publique)|seul_cadre|GLU-FIS-01b,Glucksmann (Place publique),seul_cadre,GLU-FIS-01b — CSG sur les salaires abaissée (privé),512.0,43.0
-Glucksmann (Place publique)|parent_isole_smic|GLU-FIS-01b,Glucksmann (Place publique),parent_isole_smic,GLU-FIS-01b — CSG sur les salaires abaissée (privé),90.0,7.0
-Glucksmann (Place publique)|couple_deux_smic_deux_enfants|GLU-FIS-01b,Glucksmann (Place publique),couple_deux_smic_deux_enfants,GLU-FIS-01b — CSG sur les salaires abaissée (privé),324.0,27.0
-Glucksmann (Place publique)|couple_median_inactif_deux_enfants|GLU-FIS-01b,Glucksmann (Place publique),couple_median_inactif_deux_enfants,GLU-FIS-01b — CSG sur les salaires abaissée (privé),181.0,15.0
-Glucksmann (Place publique)|couple_deux_medians|GLU-FIS-01b,Glucksmann (Place publique),couple_deux_medians,GLU-FIS-01b — CSG sur les salaires abaissée (privé),562.0,47.0
-Glucksmann (Place publique)|couple_cadre_median_deux_enfants|GLU-FIS-01b,Glucksmann (Place publique),couple_cadre_median_deux_enfants,GLU-FIS-01b — CSG sur les salaires abaissée (privé),752.0,63.0
+Glucksmann (Place publique)|jeune_smic|GLU-FIS-01b,Glucksmann (Place publique),jeune_smic,GLU-FIS-01b — CSG sur les salaires abaissée (privé),219.0,18.0
+Glucksmann (Place publique)|seul_smic|GLU-FIS-01b,Glucksmann (Place publique),seul_smic,GLU-FIS-01b — CSG sur les salaires abaissée (privé),219.0,18.0
+Glucksmann (Place publique)|seul_median|GLU-FIS-01b,Glucksmann (Place publique),seul_median,GLU-FIS-01b — CSG sur les salaires abaissée (privé),398.0,33.0
+Glucksmann (Place publique)|seul_cadre|GLU-FIS-01b,Glucksmann (Place publique),seul_cadre,GLU-FIS-01b — CSG sur les salaires abaissée (privé),761.0,63.0
+Glucksmann (Place publique)|parent_isole_smic|GLU-FIS-01b,Glucksmann (Place publique),parent_isole_smic,GLU-FIS-01b — CSG sur les salaires abaissée (privé),147.0,12.0
+Glucksmann (Place publique)|couple_deux_smic_deux_enfants|GLU-FIS-01b,Glucksmann (Place publique),couple_deux_smic_deux_enfants,GLU-FIS-01b — CSG sur les salaires abaissée (privé),439.0,37.0
+Glucksmann (Place publique)|couple_median_inactif_deux_enfants|GLU-FIS-01b,Glucksmann (Place publique),couple_median_inactif_deux_enfants,GLU-FIS-01b — CSG sur les salaires abaissée (privé),251.0,21.0
+Glucksmann (Place publique)|couple_deux_medians|GLU-FIS-01b,Glucksmann (Place publique),couple_deux_medians,GLU-FIS-01b — CSG sur les salaires abaissée (privé),796.0,66.0
+Glucksmann (Place publique)|couple_cadre_median_deux_enfants|GLU-FIS-01b,Glucksmann (Place publique),couple_cadre_median_deux_enfants,GLU-FIS-01b — CSG sur les salaires abaissée (privé),1118.0,93.0
 Glucksmann (Place publique)|jeune_smic|GLU-ECO-01,Glucksmann (Place publique),jeune_smic,GLU-ECO-01 — SMIC à 1 600 € net en deux ans : prélèvements sur les hausses de salaire (privé),1136.0,95.0
 Glucksmann (Place publique)|seul_smic|GLU-ECO-01,Glucksmann (Place publique),seul_smic,GLU-ECO-01 — SMIC à 1 600 € net en deux ans : prélèvements sur les hausses de salaire (privé),1136.0,95.0
 Glucksmann (Place publique)|seul_median|GLU-ECO-01,Glucksmann (Place publique),seul_median,GLU-ECO-01 — SMIC à 1 600 € net en deux ans : prélèvements sur les hausses de salaire (privé),29.0,2.0
@@ -362,12 +362,12 @@ Zemmour (Reconquête)|couple_cadre_median_deux_enfants|ZEM-FIS-01b,Zemmour (Reco
 Zemmour (Reconquête)|retraite_seul|ZEM-FIS-01b,Zemmour (Reconquête),retraite_seul,ZEM-FIS-01b — Accise sur les carburants baissée d'un tiers,341.0,28.0
 Zemmour (Reconquête)|couple_retraites|ZEM-FIS-01b,Zemmour (Reconquête),couple_retraites,ZEM-FIS-01b — Accise sur les carburants baissée d'un tiers,406.0,34.0
 Zemmour (Reconquête)|jeune_smic|ZEM-RET-01,Zemmour (Reconquête),jeune_smic,ZEM-RET-01 — âge légal porté à 65 ans,-109.0,-9.0
-Zemmour (Reconquête)|jeune_smic|ZEM-FIS-01,Zemmour (Reconquête),jeune_smic,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,1089.0,91.0
-Zemmour (Reconquête)|seul_smic|ZEM-FIS-01,Zemmour (Reconquête),seul_smic,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,1089.0,91.0
-Zemmour (Reconquête)|seul_median|ZEM-FIS-01,Zemmour (Reconquête),seul_median,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,1892.0,158.0
-Zemmour (Reconquête)|seul_cadre|ZEM-FIS-01,Zemmour (Reconquête),seul_cadre,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,3444.0,287.0
-Zemmour (Reconquête)|parent_isole_smic|ZEM-FIS-01,Zemmour (Reconquête),parent_isole_smic,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,633.0,53.0
-Zemmour (Reconquête)|couple_deux_smic_deux_enfants|ZEM-FIS-01,Zemmour (Reconquête),couple_deux_smic_deux_enfants,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,2178.0,182.0
-Zemmour (Reconquête)|couple_median_inactif_deux_enfants|ZEM-FIS-01,Zemmour (Reconquête),couple_median_inactif_deux_enfants,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,1224.0,102.0
-Zemmour (Reconquête)|couple_deux_medians|ZEM-FIS-01,Zemmour (Reconquête),couple_deux_medians,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,3782.0,315.0
-Zemmour (Reconquête)|couple_cadre_median_deux_enfants|ZEM-FIS-01,Zemmour (Reconquête),couple_cadre_median_deux_enfants,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,4144.0,345.0
+Zemmour (Reconquête)|jeune_smic|ZEM-FIS-01,Zemmour (Reconquête),jeune_smic,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,1473.0,123.0
+Zemmour (Reconquête)|seul_smic|ZEM-FIS-01,Zemmour (Reconquête),seul_smic,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,1473.0,123.0
+Zemmour (Reconquête)|seul_median|ZEM-FIS-01,Zemmour (Reconquête),seul_median,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,2672.0,223.0
+Zemmour (Reconquête)|seul_cadre|ZEM-FIS-01,Zemmour (Reconquête),seul_cadre,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,5108.0,426.0
+Zemmour (Reconquête)|parent_isole_smic|ZEM-FIS-01,Zemmour (Reconquête),parent_isole_smic,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,1017.0,85.0
+Zemmour (Reconquête)|couple_deux_smic_deux_enfants|ZEM-FIS-01,Zemmour (Reconquête),couple_deux_smic_deux_enfants,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,2947.0,246.0
+Zemmour (Reconquête)|couple_median_inactif_deux_enfants|ZEM-FIS-01,Zemmour (Reconquête),couple_median_inactif_deux_enfants,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,1692.0,141.0
+Zemmour (Reconquête)|couple_deux_medians|ZEM-FIS-01,Zemmour (Reconquête),couple_deux_medians,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,5342.0,445.0
+Zemmour (Reconquête)|couple_cadre_median_deux_enfants|ZEM-FIS-01,Zemmour (Reconquête),couple_cadre_median_deux_enfants,ZEM-FIS-01 — CSG supprimée sur les salaires du privé,6589.0,549.0

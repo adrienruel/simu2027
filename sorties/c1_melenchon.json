@@ -1,200 +1,200 @@
 [
  {
   "cle": "melenchon_mesures.grand_age_domicile/montant/prudent",
-  "deficit_2037": 0.02365950703419628,
-  "deficit_2050": 0.0545410112490714,
+  "deficit_2037": 0.01822351063536587,
+  "deficit_2050": 0.029761443413413247,
   "note": "Revalorisation des aides à domicile (+10 % sur ≈ 12 Md€ de masse) ≈ 1,2 ; aménagements et équipements du maintien à domicile ≈ 1,0 ; aidants rémunérés ≈ 1,0 ; tarifs d'hébergement publics abaissés ≈ 0,8 (Md€). EHPAD privés lucratifs collectivisés : achat d'actifs (participations)."
  },
  {
   "cle": "melenchon_mesures.industrie/montant/prudent",
-  "deficit_2037": 0.021516225678364975,
-  "deficit_2050": 0.0477844423242999,
+  "deficit_2037": 0.016185762679061355,
+  "deficit_2050": 0.025097403978961097,
   "note": "Aucun montant : arbitrage de 3,5 Md€ par an (France 2030 ≈ 6 Md€ par an, dont une partie déjà au statu quo). Nationalisations : participations."
  },
  {
   "cle": "melenchon_mesures.agriculture/montant/prudent",
-  "deficit_2037": 0.021516225678364975,
-  "deficit_2050": 0.0477844423242999,
+  "deficit_2037": 0.016185762679061355,
+  "deficit_2050": 0.025097403978961097,
   "note": "Contrats de transition ≈ 1,5 (tondelier_mesures.agriculture) ; installation ≈ 1,0 ; dettes reprises par la caisse de défaisance (perte en capital) ≈ 1,0 par an pendant cinq ans ; maltraitance animale et normes d'élevage ≈ 0,3 (Md€). Prix planchers payés par l'aval (pas de ligne)."
  },
  {
   "cle": "melenchon_mesures.numerique_spatial_mer/montant/prudent",
-  "deficit_2037": 0.017507354336867564,
-  "deficit_2050": 0.03876534211789817,
+  "deficit_2037": 0.013390052456607293,
+  "deficit_2050": 0.020549709986035225,
   "note": "Numérique ≈ 2,0 (dont fonderie de microprocesseurs ≈ 1,0 par an) ; espace et mer ≈ 1,0 (Md€)."
  },
  {
   "cle": "melenchon_mesures.psychiatrie_deserts/montant/prudent",
-  "deficit_2037": 0.015410773137265465,
-  "deficit_2050": 0.03517512938536527,
+  "deficit_2037": 0.011601610040443688,
+  "deficit_2050": 0.018830261092105616,
   "note": "Psychiatrie ≈ 1,0 ; centres de santé et médecins publics ≈ 0,8 ; pôle public du médicament et réserve stratégique ≈ 0,5 ; formation ≈ 0,2 (Md€)."
  },
  {
   "cle": "melenchon_mesures.transports_quotidien/montant/prudent",
-  "deficit_2037": 0.015368386433792125,
-  "deficit_2050": 0.0341310507592425,
+  "deficit_2037": 0.011561161755619054,
+  "deficit_2050": 0.01792647914739831,
   "note": "Transports publics ≈ 1,0 ; plan vélo ≈ 0,5 ; leasing social ≈ 1,0 (tondelier_mesures.leasing_social) (Md€)."
  },
  {
   "cle": "melenchon_mesures.bati_scolaire/montant/prudent",
-  "deficit_2037": 0.014589300605734934,
-  "deficit_2050": 0.032304137486661944,
+  "deficit_2037": 0.011158321484792566,
+  "deficit_2050": 0.017124645986513087,
   "note": "Écoles, collèges et lycées ≈ 1,5 (même ordre que les 2 Md€ des écoles « refuges climatiques » de Tondelier) ; immobilier universitaire ≈ 1,0 (Md€)."
  },
  {
   "cle": "melenchon_mesures.ecologie_divers/montant/prudent",
-  "deficit_2037": 0.013524088666279965,
-  "deficit_2050": 0.030035141517487318,
+  "deficit_2037": 0.01017379665739071,
+  "deficit_2050": 0.015775238822705262,
   "note": "Service public du réemploi et consigne ≈ 0,5 ; forêts (préemption, ONF) ≈ 0,3 ; sécurité civile et feux de forêt ≈ 0,8 ; dépollution et indemnisations ≈ 0,4 ; stocks tampons ≈ 0,2 (Md€)."
  },
  {
   "cle": "melenchon_mesures.energie_renouvelable/montant/prudent",
-  "deficit_2037": 0.011303782020622322,
-  "deficit_2050": 0.025585206283068374,
+  "deficit_2037": 0.00889170190974653,
+  "deficit_2050": 0.013970800722987065,
   "note": "Soutien public en plus du statu quo (programmation pluriannuelle de l'énergie) ; sortie du nucléaire au-delà de 60 ans et arrêt de l'EPR2 : EDF hors des administrations publiques, effets sur les prix et les émissions non comptés ici."
  },
  {
   "cle": "melenchon_mesures.ame_sante_divers/montant/prudent",
-  "deficit_2037": 0.010260940781421368,
-  "deficit_2050": 0.02321340458443899,
+  "deficit_2037": 0.0075418000858888945,
+  "deficit_2050": 0.012191510263711791,
   "note": "AME : restrictions de 2026 levées et couverture renforcée ≈ 0,3 ; psychologues conventionnés à 100 % et au-delà de 12 séances ≈ 0,6 ; dispositifs médicaux de la vie quotidienne ≈ 0,5 ; le reste ≈ 0,2 (Md€)."
  },
  {
   "cle": "melenchon_mesures.outre_mer_investissement/montant/prudent",
-  "deficit_2037": 0.009119560430189466,
-  "deficit_2050": 0.02002337856491465,
-  "note": ""
+  "deficit_2037": 0.00680274329904762,
+  "deficit_2050": 0.01040176537110682,
+  "note": "Programme p. 185 (« plan pluriannuel d'investissement et de développement des services publics »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.handicap_divers/montant/prudent",
-  "deficit_2037": 0.008922014801949985,
-  "deficit_2050": 0.01962692472972094,
+  "deficit_2037": 0.006515511869409352,
+  "deficit_2050": 0.010038293840899826,
   "note": "ESAT : ≈ 120 000 travailleurs payés entre 55 et 110 % du SMIC, aide au poste de l'État relevée ≈ 0,6 ; adaptation des logements anciens ≈ 0,3 ; MDPH et accessibilité ≈ 0,5 (Md€)."
  },
  {
   "cle": "melenchon_mesures.enseignement_superieur/montant/prudent",
-  "deficit_2037": 0.007644293732539609,
-  "deficit_2050": 0.014860186095120298,
+  "deficit_2037": 0.005740900983237651,
+  "deficit_2050": 0.007563855747584114,
   "note": "Frais d'inscription et CVEC ≈ 0,6 ; budget des universités +10 % ≈ 1,5 ; Crous et repas à 1 € pour tous ≈ 0,3 ; psychologues et soins gratuits ≈ 0,2 ; titularisation et recrutements ≈ 0,3 ; APL des étudiants étrangers ≈ 0,1 (Md€)."
  },
  {
   "cle": "melenchon_mesures.petite_enfance_qualite/montant/prudent",
-  "deficit_2037": 0.007365664014159279,
-  "deficit_2050": 0.016317073954837724,
+  "deficit_2037": 0.005414201498407323,
+  "deficit_2050": 0.008368685635879558,
   "note": "Gratuité ≈ 1,0 ; salaires +10 % ≈ 0,5 ; encadrement +20 % ≈ 1,0 ; PMI ≈ 0,3 (Md€)."
  },
  {
   "cle": "melenchon_mesures.services_publics/montant/prudent",
-  "deficit_2037": 0.006583078345546056,
-  "deficit_2050": 0.014620148233248642,
-  "note": ""
+  "deficit_2037": 0.004952346082536252,
+  "deficit_2050": 0.007678943877756694,
+  "note": "Programme p. 182-183 (distance maximale de 15 à 30 minutes, moratoire sur les fermetures d'écoles, maternités, bureaux de poste, gares). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = maintien et réouverture de sites ; pas de li"
  },
  {
   "cle": "melenchon_mesures.sante_prevention_addictions/montant/prudent",
-  "deficit_2037": 0.006147146855909114,
-  "deficit_2050": 0.013652004055629163,
+  "deficit_2037": 0.004624406321127594,
+  "deficit_2050": 0.0071704488699779745,
   "note": "Recettes du cannabis affectées (≈ 0,7 en prudent) ; recherche environnement-santé, Institut national du cancer, VIH et Fonds mondial ≈ 0,3. Économies de santé de la prévention non comptées (règle)."
  },
  {
   "cle": "melenchon_mesures.sport/montant/prudent",
-  "deficit_2037": 0.006147146855909114,
-  "deficit_2050": 0.013652004055629163,
-  "note": ""
+  "deficit_2037": 0.004624406321124042,
+  "deficit_2050": 0.0071704488699779745,
+  "note": "Programme p. 132 (« plan national d'urgence pour la construction et la rénovation des équipements sportifs »), gratuité pour les plus pauvres, conseillers techniques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.justice/montant/prudent",
-  "deficit_2037": 0.006011674690356017,
-  "deficit_2050": 0.01230646815652392,
+  "deficit_2037": 0.004602509586145942,
+  "deficit_2050": 0.0066684482256889055,
   "note": "Aucun effectif donné : ≈ 1,5 de recrutements (moins que Tondelier : 2,1 pour 26 000 postes) ; aide juridictionnelle et gratuité ≈ 0,3 (Md€)."
  },
  {
   "cle": "melenchon_mesures.penibilite_agricoles/montant/prudent",
-  "deficit_2037": 0.0059489579115741265,
-  "deficit_2050": 0.01327861416538667,
+  "deficit_2037": 0.0044296100539718,
+  "deficit_2050": 0.006905509148289468,
   "note": "Moins que chez Tondelier (1,5 et 0,5) : avec la retraite à 60 ans pour tous, les départs anticipés pour pénibilité gagnent moins d'années."
  },
  {
+  "cle": "melenchon_mesures.voie_pro_formation/montant/prudent",
+  "deficit_2037": 0.004041732832668288,
+  "deficit_2050": 0.0052314444691816675,
+  "note": "Bac professionnel en 4 ans (≈ +200 000 élèves-année) et classes en plus ≈ 1,0 (tondelier_mesures.voie_pro) ; pré-recrutement et écoles des métiers de l'éducation ≈ 0,5 (Md€)."
+ },
+ {
   "cle": "melenchon_mesures.niches_suppression/montant/prudent",
-  "deficit_2037": -0.005809634567743416,
-  "deficit_2050": -0.013023340548869555,
+  "deficit_2037": -0.0038360868420674876,
+  "deficit_2050": -0.005753388048418628,
   "note": "Économie déclarative (aucune niche nommée, p. 59) : estimée par le modèle (règle). Les niches nommées ailleurs sont comptées à part (retraite par capitalisation, mécénat culturel, kérosène, assurance-vie, LBO, meublés de tourisme)."
  },
  {
   "cle": "melenchon_mesures.apprentis/montant/prudent",
-  "deficit_2037": 0.00532841362391423,
-  "deficit_2050": 0.011650471439423882,
+  "deficit_2037": 0.003806428267132844,
+  "deficit_2050": 0.005875639701940827,
   "note": "Arbitrage : +10 points de SMIC pour ≈ 900 000 apprentis, aide de l'État relevée pour moitié (le reste à la charge des employeurs)."
  },
  {
-  "cle": "melenchon_mesures.voie_pro_formation/montant/prudent",
-  "deficit_2037": 0.005325697110137639,
-  "deficit_2050": 0.00993167574857523,
-  "note": "Bac professionnel en 4 ans (≈ +200 000 élèves-année) et classes en plus ≈ 1,0 (tondelier_mesures.voie_pro) ; pré-recrutement et écoles des métiers de l'éducation ≈ 0,5 (Md€)."
- },
- {
   "cle": "melenchon_mesures.agences_inspections/montant/prudent",
-  "deficit_2037": 0.004794901618350167,
-  "deficit_2050": 0.009893386967391393,
+  "deficit_2037": 0.0034983348434458605,
+  "deficit_2050": 0.005112659569483924,
   "note": "Inspection du travail ≈ +2 000 agents ; police de l'eau ≈ +3 000 ; opérateurs ≈ +5 000 ; contrôle fiscal ≈ +5 000 ; ≈ 15 000 postes × 55 000 € ≈ 0,8 et fonctionnement 0,4 (Md€)."
  },
  {
   "cle": "melenchon_mesures.travail_sante/montant/prudent",
-  "deficit_2037": 0.004302973718523617,
-  "deficit_2050": 0.009556344564884967,
+  "deficit_2037": 0.0032370762513700413,
+  "deficit_2050": 0.005019294218456594,
   "note": "Transfert de la branche maladie vers la branche accidents du travail (neutre) sauf indemnisation plus généreuse ≈ 0,5 ; visites médicales des chômeurs ≈ 0,1 ; services de prévention intégrés au service public à financement constant."
  },
  {
   "cle": "melenchon_mesures.periscolaire/montant/prudent",
-  "deficit_2037": 0.0036260955659841443,
-  "deficit_2050": 0.008204184808946025,
+  "deficit_2037": 0.002870128564932628,
+  "deficit_2050": 0.00449134058687406,
   "note": "Titularisation et temps de travail des animateurs (≈ 150 000, souvent à temps partiel) ≈ 1,0 ; associations sportives et culturelles encadrées par des professionnels ≈ 0,5 (Md€)."
  },
  {
   "cle": "melenchon_mesures.police/montant/prudent",
-  "deficit_2037": 0.0031319759923391643,
-  "deficit_2050": 0.006928023567112973,
+  "deficit_2037": 0.0023515081674112537,
+  "deficit_2050": 0.0036277011096288447,
   "note": "Une année de formation en plus pour ≈ 10 000 élèves par an ≈ 0,3 ; police scientifique et financière ≈ 0,5 ; prévention ≈ 0,3 ; victimes ≈ 0,1 (Md€). Polices municipales intégrées : transfert interne."
  },
  {
   "cle": "melenchon_mesures.communes_eco_regions/montant/prudent",
-  "deficit_2037": 0.0029451942101808015,
-  "deficit_2050": 0.006598154675472756,
-  "note": ""
+  "deficit_2037": 0.0022787840742601873,
+  "deficit_2050": 0.0035416706852018365,
+  "note": "Programme p. 181 (« Créer des éco-régions pour remplacer les régions actuelles »), ingénierie territoriale, Défenseurs de la nature. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.logement_divers/montant/prudent",
-  "deficit_2037": 0.0025583751905990937,
-  "deficit_2050": 0.005636150575043075,
-  "note": ""
+  "deficit_2037": 0.0018789592354551132,
+  "deficit_2050": 0.0029032291406281274,
+  "note": "Programme p. 185 (« Fonds d'aide à la relocalisation des constructions menacées par les inondations »), inspection du logement, permis de louer. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.justice/cout_poste",
-  "deficit_2037": -0.0025497979449546904,
-  "deficit_2050": -0.00550823292579139,
+  "deficit_2037": -0.0017349633923089414,
+  "deficit_2050": -0.0026969597066397455,
   "note": "Aucun effectif donné : ≈ 1,5 de recrutements (moins que Tondelier : 2,1 pour 26 000 postes) ; aide juridictionnelle et gratuité ≈ 0,3 (Md€)."
  },
  {
   "cle": "melenchon_mesures.voie_pro_formation/cout_poste",
-  "deficit_2037": -0.002512240578116831,
-  "deficit_2050": -0.005408212724546502,
+  "deficit_2037": -0.0016986791068873686,
+  "deficit_2050": -0.002632362327631199,
   "note": "Bac professionnel en 4 ans (≈ +200 000 élèves-année) et classes en plus ≈ 1,0 (tondelier_mesures.voie_pro) ; pré-recrutement et écoles des métiers de l'éducation ≈ 0,5 (Md€)."
  },
  {
   "cle": "melenchon_mesures.epargne_etranger/montant/prudent",
-  "deficit_2037": -0.0013632876434996888,
-  "deficit_2050": -0.0028028038198470995,
+  "deficit_2037": -0.0008756286132509672,
+  "deficit_2050": -0.001270905525160515,
   "note": "Assiette mal connue (unités de compte et fonds investis hors de France) ; prudent bas."
  },
  {
   "cle": "melenchon_mesures.rsa_trimestres/montant/prudent",
-  "deficit_2037": 0.000891710615000818,
-  "deficit_2050": 0.003936827489923189,
+  "deficit_2037": 0.000766434613449718,
+  "deficit_2050": 0.0027583254299372584,
   "note": "Effet lent (validations nouvelles, pensions liquidées des décennies plus tard) ; en grande partie couvert par le minimum au SMIC pour les carrières devenues complètes."
  },
  {
   "cle": "melenchon_mesures.sport_taxes/montant/prudent",
-  "deficit_2037": -0.0006483526499820869,
-  "deficit_2050": -0.001453525425986868,
+  "deficit_2037": -0.0004275204210379968,
+  "deficit_2050": -0.0006700225818789818,
   "note": "Affectée au sport amateur : contrepartie dans sport."
  },
  {
@@ -495,19 +495,19 @@
   "cle": "melenchon_mesures.logement_divers/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 185 (« Fonds d'aide à la relocalisation des constructions menacées par les inondations »), inspection du logement, permis de louer. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.logement_divers/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 185 (« Fonds d'aide à la relocalisation des constructions menacées par les inondations »), inspection du logement, permis de louer. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.logement_divers/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 185 (« Fonds d'aide à la relocalisation des constructions menacées par les inondations »), inspection du logement, permis de louer. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.transports_quotidien/montant/crise",
@@ -639,37 +639,37 @@
   "cle": "melenchon_mesures.outre_mer_investissement/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 185 (« plan pluriannuel d'investissement et de développement des services publics »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.outre_mer_investissement/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 185 (« plan pluriannuel d'investissement et de développement des services publics »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.outre_mer_investissement/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 185 (« plan pluriannuel d'investissement et de développement des services publics »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.services_publics/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 182-183 (distance maximale de 15 à 30 minutes, moratoire sur les fermetures d'écoles, maternités, bureaux de poste, gares). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = maintien et réouverture de sites ; pas de li"
  },
  {
   "cle": "melenchon_mesures.services_publics/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 182-183 (distance maximale de 15 à 30 minutes, moratoire sur les fermetures d'écoles, maternités, bureaux de poste, gares). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = maintien et réouverture de sites ; pas de li"
  },
  {
   "cle": "melenchon_mesures.services_publics/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 182-183 (distance maximale de 15 à 30 minutes, moratoire sur les fermetures d'écoles, maternités, bureaux de poste, gares). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = maintien et réouverture de sites ; pas de li"
  },
  {
   "cle": "melenchon_mesures.petite_enfance_qualite/montant/crise",
@@ -729,36 +729,36 @@
   "cle": "melenchon_mesures.sport/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 132 (« plan national d'urgence pour la construction et la rénovation des équipements sportifs »), gratuité pour les plus pauvres, conseillers techniques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.sport/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 132 (« plan national d'urgence pour la construction et la rénovation des équipements sportifs »), gratuité pour les plus pauvres, conseillers techniques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.sport/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 132 (« plan national d'urgence pour la construction et la rénovation des équipements sportifs »), gratuité pour les plus pauvres, conseillers techniques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.communes_eco_regions/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 181 (« Créer des éco-régions pour remplacer les régions actuelles »), ingénierie territoriale, Défenseurs de la nature. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.communes_eco_regions/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 181 (« Créer des éco-régions pour remplacer les régions actuelles »), ingénierie territoriale, Défenseurs de la nature. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "melenchon_mesures.communes_eco_regions/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 181 (« Créer des éco-régions pour remplacer les régions actuelles »), ingénierie territoriale, Défenseurs de la nature. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  }
 ]

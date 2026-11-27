@@ -43,15 +43,15 @@ Bertrand (Nous France)|couple_deux_medians,Bertrand (Nous France),couple_deux_me
 Bertrand (Nous France)|couple_cadre_median_deux_enfants,Bertrand (Nous France),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,79182.0,720.0,60.0,0.92,5
 Bertrand (Nous France)|retraite_seul,Bertrand (Nous France),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,5
 Bertrand (Nous France)|couple_retraites,Bertrand (Nous France),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38674.0,378.0,32.0,0.99,5
-Glucksmann (Place publique)|jeune_smic,Glucksmann (Place publique),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,21472.0,1307.0,109.0,6.48,10
-Glucksmann (Place publique)|seul_smic,Glucksmann (Place publique),seul_smic,Personne seule au SMIC,1,20165.0,21472.0,1307.0,109.0,6.48,10
-Glucksmann (Place publique)|seul_median,Glucksmann (Place publique),seul_median,"Personne seule, salaire médian",2,25027.0,25428.0,401.0,33.0,1.6,10
-Glucksmann (Place publique)|seul_cadre,Glucksmann (Place publique),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47892.0,617.0,51.0,1.31,10
-Glucksmann (Place publique)|parent_isole_smic,Glucksmann (Place publique),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27348.0,832.0,69.0,3.14,10
-Glucksmann (Place publique)|couple_deux_smic_deux_enfants,Glucksmann (Place publique),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,44653.0,2708.0,226.0,6.46,10
-Glucksmann (Place publique)|couple_median_inactif_deux_enfants,Glucksmann (Place publique),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35579.0,282.0,24.0,0.8,10
-Glucksmann (Place publique)|couple_deux_medians,Glucksmann (Place publique),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,50459.0,715.0,60.0,1.44,10
-Glucksmann (Place publique)|couple_cadre_median_deux_enfants,Glucksmann (Place publique),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,79335.0,873.0,73.0,1.11,10
+Glucksmann (Place publique)|jeune_smic,Glucksmann (Place publique),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,21534.0,1370.0,114.0,6.79,10
+Glucksmann (Place publique)|seul_smic,Glucksmann (Place publique),seul_smic,Personne seule au SMIC,1,20165.0,21534.0,1370.0,114.0,6.79,10
+Glucksmann (Place publique)|seul_median,Glucksmann (Place publique),seul_median,"Personne seule, salaire médian",2,25027.0,25545.0,518.0,43.0,2.07,10
+Glucksmann (Place publique)|seul_cadre,Glucksmann (Place publique),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,48142.0,867.0,72.0,1.83,10
+Glucksmann (Place publique)|parent_isole_smic,Glucksmann (Place publique),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27411.0,895.0,75.0,3.38,10
+Glucksmann (Place publique)|couple_deux_smic_deux_enfants,Glucksmann (Place publique),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,44779.0,2834.0,236.0,6.76,10
+Glucksmann (Place publique)|couple_median_inactif_deux_enfants,Glucksmann (Place publique),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35650.0,352.0,29.0,1.0,10
+Glucksmann (Place publique)|couple_deux_medians,Glucksmann (Place publique),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,50693.0,949.0,79.0,1.91,10
+Glucksmann (Place publique)|couple_cadre_median_deux_enfants,Glucksmann (Place publique),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,79702.0,1240.0,103.0,1.58,10
 Glucksmann (Place publique)|retraite_seul,Glucksmann (Place publique),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19607.0,84.0,7.0,0.43,10
 Glucksmann (Place publique)|couple_retraites,Glucksmann (Place publique),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38387.0,91.0,8.0,0.24,10
 Le Pen (Rassemblement national) — partiel|jeune_smic,Le Pen (Rassemblement national) — partiel,jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20628.0,463.0,39.0,2.3,11
@@ -131,14 +131,14 @@ Tondelier (Les Écologistes)|couple_deux_medians,Tondelier (Les Écologistes),co
 Tondelier (Les Écologistes)|couple_cadre_median_deux_enfants,Tondelier (Les Écologistes),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,75635.0,-2827.0,-236.0,-3.6,25
 Tondelier (Les Écologistes)|retraite_seul,Tondelier (Les Écologistes),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,18781.0,-742.0,-62.0,-3.8,25
 Tondelier (Les Écologistes)|couple_retraites,Tondelier (Les Écologistes),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,37585.0,-711.0,-59.0,-1.86,25
-Zemmour (Reconquête)|jeune_smic,Zemmour (Reconquête),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,21832.0,1667.0,139.0,8.27,6
-Zemmour (Reconquête)|seul_smic,Zemmour (Reconquête),seul_smic,Personne seule au SMIC,1,20165.0,21941.0,1776.0,148.0,8.81,6
-Zemmour (Reconquête)|seul_median,Zemmour (Reconquête),seul_median,"Personne seule, salaire médian",2,25027.0,27684.0,2657.0,221.0,10.62,6
-Zemmour (Reconquête)|seul_cadre,Zemmour (Reconquête),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,51816.0,4541.0,378.0,9.61,6
-Zemmour (Reconquête)|parent_isole_smic,Zemmour (Reconquête),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,27849.0,1333.0,111.0,5.03,6
-Zemmour (Reconquête)|couple_deux_smic_deux_enfants,Zemmour (Reconquête),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,45095.0,3151.0,263.0,7.51,6
-Zemmour (Reconquête)|couple_median_inactif_deux_enfants,Zemmour (Reconquête),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,37308.0,2011.0,168.0,5.7,6
-Zemmour (Reconquête)|couple_deux_medians,Zemmour (Reconquête),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,54707.0,4964.0,414.0,9.98,6
-Zemmour (Reconquête)|couple_cadre_median_deux_enfants,Zemmour (Reconquête),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,84061.0,5599.0,467.0,7.14,6
+Zemmour (Reconquête)|jeune_smic,Zemmour (Reconquête),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,22216.0,2051.0,171.0,10.17,6
+Zemmour (Reconquête)|seul_smic,Zemmour (Reconquête),seul_smic,Personne seule au SMIC,1,20165.0,22325.0,2161.0,180.0,10.72,6
+Zemmour (Reconquête)|seul_median,Zemmour (Reconquête),seul_median,"Personne seule, salaire médian",2,25027.0,28464.0,3437.0,286.0,13.73,6
+Zemmour (Reconquête)|seul_cadre,Zemmour (Reconquête),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,53481.0,6206.0,517.0,13.13,6
+Zemmour (Reconquête)|parent_isole_smic,Zemmour (Reconquête),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,28291.0,1775.0,148.0,6.69,6
+Zemmour (Reconquête)|couple_deux_smic_deux_enfants,Zemmour (Reconquête),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,45921.0,3976.0,331.0,9.48,6
+Zemmour (Reconquête)|couple_median_inactif_deux_enfants,Zemmour (Reconquête),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,37776.0,2479.0,207.0,7.02,6
+Zemmour (Reconquête)|couple_deux_medians,Zemmour (Reconquête),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,56326.0,6582.0,549.0,13.23,6
+Zemmour (Reconquête)|couple_cadre_median_deux_enfants,Zemmour (Reconquête),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,87007.0,8545.0,712.0,10.89,6
 Zemmour (Reconquête)|retraite_seul,Zemmour (Reconquête),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,20153.0,630.0,53.0,3.23,6
 Zemmour (Reconquête)|couple_retraites,Zemmour (Reconquête),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,39194.0,898.0,75.0,2.34,6

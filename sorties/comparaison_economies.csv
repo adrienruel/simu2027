@@ -121,7 +121,7 @@ Tondelier (Les Écologistes),tondelier,tondelier_mesures.isf_climatique,REC-03,"
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.successions,REC-04/05/06/07,"Successions : +10 % au-delà de 4 M€, +10 % au-delà de 13 M€, Dutreil, assurance-vie, plus-values latentes",recettes,recette,3.0,4.0,7.0,10.0,0.4,True,HYPOTHESE,True,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.ir_tranche_60,REC-10,Impôt sur le revenu : tranche à 60 % au-delà de 250 000 € par part,recettes,recette,0.8,1.2,2.0,2.5,0.48,True,HYPOTHESE,True,False
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.abattement_retraites,REC-13,Fin de l'abattement de 10 % des retraités,recettes,recette,5.5,5.5,5.8,5.8,0.948,True,HYPOTHESE,True,True
-Tondelier (Les Écologistes),tondelier,tondelier_mesures.niches_plafond,REC-12,Plafonnement global des niches ; avantages limités à deux logements,recettes,recette,0.4,0.5,0.7,1.0,0.5,True,HYPOTHESE,False,False
+Tondelier (Les Écologistes),tondelier,tondelier_mesures.niches_plafond,REC-12,Plafonnement global des niches ; avantages limités à deux logements,recettes,recette,0.4,0.5,0.7,1.0,0.5,True,HYPOTHESE,False,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.ttf,REC-23,"Taxe sur les transactions financières à 0,7 %",recettes,recette,0.6,0.8,1.2,1.5,0.533,True,HYPOTHESE,True,False
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.is_minimal,REC-30,"Impôt minimal sur les bénéfices (chiffre d'affaires > 1 Md€, au prorata de l'activité en France)",recettes,recette,1.0,1.5,3.0,5.0,0.3,True,HYPOTHESE,False,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.tsn,REC-32,Taxe sur les services numériques à 5 %,recettes,recette,0.4,0.5,0.6,0.8,0.625,True,HYPOTHESE,True,False
@@ -138,7 +138,7 @@ Tondelier (Les Écologistes),tondelier,tondelier_mesures.aerien,REC-43,Taxe sur 
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.malus_poids,REC-44,Malus au poids dès 1 300 kg (thermiques) et 1 600 kg (électriques),recettes,recette,0.3,0.3,0.3,0.3,1.0,True,HYPOTHESE,False,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.fiscalite_sante,REC-45,"Fiscalité de santé : alcool selon l'alcool pur, tabac, sucre, produits transformés",recettes,recette,1.5,2.0,2.5,3.0,0.667,True,HYPOTHESE,False,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.cannabis,REC-47,Cannabis légalisé : fiscalité propre,recettes,recette,0.5,0.7,1.5,2.0,0.35,True,HYPOTHESE,True,False
-Tondelier (Les Écologistes),tondelier,tondelier_mesures.superprofits,REC-34,Taxe exceptionnelle sur les superprofits pétroliers et maritimes (2028-2029),recettes,recette,0.5,0.5,1.0,1.5,0.333,True,HYPOTHESE,False,False
+Tondelier (Les Écologistes),tondelier,tondelier_mesures.superprofits,REC-34,Taxe exceptionnelle sur les superprofits pétroliers et maritimes (2028-2029),recettes,recette,0.5,0.5,1.0,1.5,0.333,True,HYPOTHESE,False,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.sous_indexation,RET-04,"Hautes pensions sous-indexées (inflation − 0,5 point au-dessus de 2 000 €, 2028-2032)",retraites,economie,3.5,3.5,3.5,3.5,1.0,True,DECISION,True,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.medicaments,SAN-08,Prix des médicaments les plus coûteux renégociés,sante,economie,0.0,0.3,1.0,2.0,0.15,True,HYPOTHESE,False,True
 Tondelier (Les Écologistes),tondelier,tondelier_mesures.prive_sous_contrat,ECO-01,Financement public du privé sous contrat ramené à 50 %,etat_missions,economie,0.3,0.7,1.5,2.5,0.28,True,HYPOTHESE,True,False

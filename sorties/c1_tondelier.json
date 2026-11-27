@@ -1,255 +1,255 @@
 [
  {
   "cle": "tondelier_mesures.services_publics_divers/montant/prudent",
-  "deficit_2037": 0.008845607128384003,
-  "deficit_2050": 0.025937592368237006,
+  "deficit_2037": 0.007511702098334183,
+  "deficit_2050": 0.012170755518202014,
   "note": "France Services 0,1 ; cantines et petits-déjeuners 0,3 ; associations, culture, sport, médias 0,8 ; hébergement et logement d'abord 0,8 ; indemnisation des victimes (chlordécone, essais nucléaires, pesticides) 0,2 (Md€)."
  },
  {
   "cle": "tondelier_mesures.fiscalite_sante/montant/prudent",
-  "deficit_2037": -0.00833284806677348,
-  "deficit_2050": -0.0250441412488982,
+  "deficit_2037": -0.006155544566251336,
+  "deficit_2050": -0.00989313768362976,
   "note": "Hausses non chiffrées par le programme ; recette nette de la baisse de consommation. Économies de santé non comptées (pas de chiffrage sourcé)."
  },
  {
-  "cle": "tondelier_mesures.is_minimal/montant/prudent",
-  "deficit_2037": -0.006364318656045143,
-  "deficit_2050": -0.017708421050656398,
-  "note": "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
- },
- {
   "cle": "tondelier_mesures.energies_renouvelables/montant/prudent",
-  "deficit_2037": 0.0063182318557757355,
-  "deficit_2050": 0.018526048355326452,
-  "note": ""
+  "deficit_2037": 0.005365497430654287,
+  "deficit_2050": 0.00869335011817185,
+  "note": "Programme p. 17 (« prêt à taux zéro de la Caisse des Dépôts ... à hauteur de 60 % des devis »), fonds chaleur, communautés énergétiques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Pour le prêt à taux zéro, seul le coût de bonificat"
  },
  {
   "cle": "tondelier_mesures.agriculture/montant/prudent",
-  "deficit_2037": 0.006100582124403786,
-  "deficit_2050": 0.017968684803577162,
-  "note": ""
+  "deficit_2037": 0.005239385044127687,
+  "deficit_2050": 0.008586228333371082,
+  "note": "Programme p. 49 (« Garantir un revenu sur trois ans aux agriculteur·trices s'engageant dans un contrat de transition agroécologique »), aide au maintien bio, transition de l'élevage. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.penibilite/montant/prudent",
-  "deficit_2037": 0.005655068211078529,
-  "deficit_2050": 0.017207830368967336,
-  "note": ""
+  "deficit_2037": 0.004967369132454991,
+  "deficit_2050": 0.008504085549159157,
+  "note": "Programme p. 117 (« Réintroduire les 4 critères ... supprimés en 2017 » : charges lourdes, postures pénibles, vibrations, agents chimiques). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = départs anticipés supplémentaires ; mont"
+ },
+ {
+  "cle": "tondelier_mesures.is_minimal/montant/prudent",
+  "deficit_2037": -0.004937650990848752,
+  "deficit_2050": -0.007042592931540526,
+  "note": "Taux minimal de 25 % effectif (arbitrage, p. 67). Répartition des bénéfices mondiaux contraire aux conventions fiscales : recouvrement partiel en prudent."
  },
  {
   "cle": "tondelier_emploi.postes/grand_age",
-  "deficit_2037": 0.005554822848765184,
-  "deficit_2050": 0.014791634099587725,
-  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
- },
- {
-  "cle": "tondelier_emploi.postes/classes",
-  "deficit_2037": 0.004653380585747158,
-  "deficit_2050": 0.011979443355691899,
+  "deficit_2037": 0.004227678304774329,
+  "deficit_2050": 0.006110077382530221,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.jeunes/montant/prudent",
-  "deficit_2037": 0.004633341200005248,
-  "deficit_2050": 0.013585376051629794,
-  "note": ""
+  "deficit_2037": 0.003934696123767623,
+  "deficit_2050": 0.006375100594585348,
+  "note": "Programme p. 126 (« Supprimer la Contribution de Vie Étudiante et de Campus (CVEC) ») et mesures jeunesse voisines. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). La CVEC seule rapporte de l'ordre de 0,15 à 0,2 Md€ par an ; le reste de"
  },
  {
   "cle": "tondelier_mesures.securite_sociale_pro/montant/prudent",
-  "deficit_2037": 0.004360522208298079,
-  "deficit_2050": 0.013107955833817186,
-  "note": ""
+  "deficit_2037": 0.0036653126519894386,
+  "deficit_2050": 0.006064439320574877,
+  "note": "Programme p. 55 (« salaire équivalent en cas de perte d'emploi pendant deux ans dans les secteurs les plus exposés »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = complément entre l'allocation chômage et le salaire antérieur "
  },
  {
   "cle": "tondelier_mesures.aidants_apa/montant/prudent",
-  "deficit_2037": 0.004221085585204065,
-  "deficit_2050": 0.012582906017946982,
-  "note": ""
+  "deficit_2037": 0.0035858166206672593,
+  "deficit_2050": 0.006021737040803998,
+  "note": "Programme p. 128 (« Remplacer l'indemnisation du congé de proche aidant par une rémunération revalorisée ») et APA à domicile. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le niveau de rémunération n'étant pas fixé, l'enveloppe est u"
  },
  {
-  "cle": "tondelier_emploi.postes/hopital",
-  "deficit_2037": 0.004114624811071721,
-  "deficit_2050": 0.010956492355710168,
+  "cle": "tondelier_emploi.postes/classes",
+  "deficit_2037": 0.003531871792038288,
+  "deficit_2050": 0.0048114257532212434,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_emploi.postes/justice",
-  "deficit_2037": 0.00389848052797781,
-  "deficit_2050": 0.009462871523531646,
+  "deficit_2037": 0.00319713851610004,
+  "deficit_2050": 0.004117926872964972,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+ },
+ {
+  "cle": "tondelier_emploi.postes/hopital",
+  "deficit_2037": 0.003131607070159248,
+  "deficit_2050": 0.0045260126820885205,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.voie_pro/montant/prudent",
-  "deficit_2037": 0.0030143959797079845,
-  "deficit_2050": 0.008396361524930285,
-  "note": ""
+  "deficit_2037": 0.002477836771596742,
+  "deficit_2050": 0.003814734113134932,
+  "note": "Programme p. 91 (« en rétablissant le baccalauréat professionnel en 4 ans »), EPS et RASED. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le coût principal est l'année d'enseignement supplémentaire en lycée professionnel."
  },
  {
   "cle": "tondelier_mesures.retraites_agricoles/montant/prudent",
-  "deficit_2037": 0.002377878729674876,
-  "deficit_2050": 0.00695305347059616,
-  "note": ""
+  "deficit_2037": 0.0019468916609586273,
+  "deficit_2050": 0.003068812348047345,
+  "note": "Programme p. 117 (« Réformer le système de retraite agricole et améliorer les pensions des femmes de ce régime »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ampleur de la revalorisation non précisée."
  },
  {
   "cle": "tondelier_mesures.cheque_energie/montant/prudent",
-  "deficit_2037": 0.0021829270000353063,
-  "deficit_2050": 0.006384008197038327,
-  "note": ""
- },
- {
-  "cle": "tondelier_mesures.depassements/montant/prudent",
-  "deficit_2037": 0.002110526533531498,
-  "deficit_2050": 0.006291233038254518,
-  "note": ""
+  "deficit_2037": 0.0018247242713513856,
+  "deficit_2050": 0.002933905543997639,
+  "note": "Programme p. 119 (« Remplacer les chèques énergies par un crédit d'impôt ciblé ... versé automatiquement »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le montant est le surcoût de l'élargissement et du versement automatique (non-r"
  },
  {
   "cle": "tondelier_mesures.prevention/montant/prudent",
-  "deficit_2037": 0.002110526533531498,
-  "deficit_2050": 0.006291233038254518,
-  "note": ""
+  "deficit_2037": 0.0017929072971210047,
+  "deficit_2050": 0.0030108559747858976,
+  "note": "Programme p. 111 (« Généraliser la prise en charge de l'activité physique adaptée par la Sécurité sociale ») et volets prévention et santé mentale. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
-  "cle": "tondelier_mesures.sante_scolaire/montant/prudent",
-  "deficit_2037": 0.002040969256551506,
-  "deficit_2050": 0.005677965085112646,
-  "note": ""
- },
- {
-  "cle": "tondelier_mesures.aerien/montant/prudent",
-  "deficit_2037": -0.0019851716447707446,
-  "deficit_2050": -0.005962030700786158,
-  "note": "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
+  "cle": "tondelier_mesures.depassements/montant/prudent",
+  "deficit_2037": 0.0017929072971192284,
+  "deficit_2050": 0.0030108559747858976,
+  "note": "Programme p. 111 (« en limitant les dépassements d'honoraires à 50 % du tarif de la Sécurité sociale »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le plafonnement lui-même ne coûte pas à l'Assurance maladie ; le montant correspond"
  },
  {
   "cle": "tondelier_mesures.recherche/montant/prudent",
-  "deficit_2037": 0.001984773518241667,
-  "deficit_2050": 0.005281210751839183,
-  "note": ""
+  "deficit_2037": 0.0016985406039200512,
+  "deficit_2050": 0.002510478125117288,
+  "note": "Programme p. 96 (« augmentation significative des salaires des personnels de recherche (+10 % dès la première année) »), crédits des laboratoires et 1 000 chaires. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
+ },
+ {
+  "cle": "tondelier_mesures.sante_scolaire/montant/prudent",
+  "deficit_2037": 0.001635023624444898,
+  "deficit_2050": 0.002476118248392112,
+  "note": "Programme p. 112 (« Recruter 7500 infirmier·es scolaires »). Calcul : 7 500 postes × environ 50 000 € chargés ≈ 0,4 Md€, plus les postes vacants pourvus et la prime de +500 € en début de carrière ; enveloppe arrondie à 0,6 Md€ (statut HYPOTHESE)."
+ },
+ {
+  "cle": "tondelier_mesures.aerien/montant/prudent",
+  "deficit_2037": -0.0015158392961058809,
+  "deficit_2050": -0.00242733507737114,
+  "note": "La TVA à 20 % sur l'aérien domestique est dans la TVA écologique ; vols remplaçables par moins de 4 h 30 de train interdits : assiette réduite."
  },
  {
   "cle": "tondelier_mesures.trente_deux_heures/montant/prudent",
-  "deficit_2037": 0.001772765568119894,
-  "deficit_2050": 0.005011608807436119,
+  "deficit_2037": 0.0014592007242821836,
+  "deficit_2050": 0.0023397592259435385,
   "note": "Dans le privé : incitation par les aides, pas d'obligation : non chiffré."
  },
  {
-  "cle": "tondelier_mesures.niches_plafond/montant/prudent",
-  "deficit_2037": -0.0017349368965700052,
-  "deficit_2050": -0.005044922773443261,
-  "note": ""
- },
- {
   "cle": "tondelier_mesures.economies_diverses/montant/prudent",
-  "deficit_2037": -0.0016267812363501832,
-  "deficit_2050": -0.00479103979849782,
+  "deficit_2037": -0.0013971667360141993,
+  "deficit_2050": -0.002289622070644981,
   "note": "Économies déclaratives estimées (règle)."
  },
  {
-  "cle": "tondelier_emploi.postes/voie_pro",
-  "deficit_2037": 0.0014333938389778922,
-  "deficit_2050": 0.003699072776363721,
-  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
+  "cle": "tondelier_mesures.niches_plafond/montant/prudent",
+  "deficit_2037": -0.001305379360374559,
+  "deficit_2050": -0.0018776077127853341,
+  "note": "Programme p. 68 (« Plafonner le montant total des niches fiscales par foyer »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Borne basse : le plafond global existant (10 000 €, art. 200-0 A du CGI) capte déjà l'essentiel des niches c"
  },
  {
   "cle": "tondelier_mesures.pensions_alimentaires/montant/prudent",
-  "deficit_2037": 0.0013097516683711063,
-  "deficit_2050": 0.0038303456487511767,
-  "note": ""
+  "deficit_2037": 0.0010948343894696677,
+  "deficit_2050": 0.0017603403359593983,
+  "note": "Programme p. 68 (« Défiscaliser les pensions alimentaires pour les personnes qui les reçoivent »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ordre de grandeur : impôt sur le revenu payé sur les pensions alimentaires reçues, qui so"
  },
  {
-  "cle": "tondelier_emploi.postes/aesh",
-  "deficit_2037": 0.0012938559879600575,
-  "deficit_2050": 0.003396632265726396,
+  "cle": "tondelier_emploi.postes/voie_pro",
+  "deficit_2037": 0.0010791079898169187,
+  "deficit_2050": 0.0014729528757584376,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.ase_25_ans/montant/prudent",
-  "deficit_2037": 0.0012636227800637556,
-  "deficit_2050": 0.0037048883363723917,
-  "note": ""
+  "deficit_2037": 0.001073097854195737,
+  "deficit_2050": 0.0017386513457751107,
+  "note": "Programme p. 135 (« prise en charge obligatoire des enfants placés jusqu'à 25 ans »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ordre de grandeur : prolongation des contrats jeunes majeurs pour les sortants de l'ASE entre 18 et 25"
  },
  {
   "cle": "tondelier_mesures.medicaments/montant/prudent",
-  "deficit_2037": -0.0012227768599224476,
-  "deficit_2050": -0.0036631048536932553,
+  "deficit_2037": -0.00105052152268037,
+  "deficit_2050": -0.0017850776274705993,
   "note": "Économie déclarative estimée par le modèle (règle)."
  },
  {
-  "cle": "tondelier_mesures.outremer_plan/montant/prudent",
-  "deficit_2037": 0.0012030796366122587,
-  "deficit_2050": 0.002702253305116642,
-  "note": ""
+  "cle": "tondelier_emploi.postes/aesh",
+  "deficit_2037": 0.0009605361647704314,
+  "deficit_2050": 0.0013259869626338627,
+  "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.autres_postes/montant/prudent",
-  "deficit_2037": 0.001145872686546312,
-  "deficit_2050": 0.003168121434640625,
-  "note": ""
+  "deficit_2037": 0.0009106016942954653,
+  "deficit_2050": 0.0013665680630019494,
+  "note": "Programme p. 57 (« Créer 200 postes d'inspecteur·ices du travail ») et renforts DGCCRF, douanes, ONF, ICPE. Les 200 inspecteurs ne coûtent que de l'ordre de 0,01 Md€ ; le reste de l'enveloppe (0,3 Md€) couvre les autres corps, dont les effectifs ne sont pas chiffrés dans le programme (statut HYPOTHE"
+ },
+ {
+  "cle": "tondelier_mesures.outremer_plan/montant/prudent",
+  "deficit_2037": 0.0008038488457451365,
+  "deficit_2050": 0.0005385445166368186,
+  "note": "Programme p. 153 (« plan quinquennal d'investissement dans les écoles, les infrastructures de transport, d'eau potable et d'assainissement »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_emploi.postes/trente_deux_heures",
-  "deficit_2037": 0.0010207449483061737,
-  "deficit_2050": 0.002695606652700633,
+  "deficit_2037": 0.0007814039348676971,
+  "deficit_2050": 0.0011231912490217155,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_emploi.postes/sante_scolaire",
-  "deficit_2037": 0.001003147087088152,
-  "deficit_2050": 0.002633455652436112,
+  "deficit_2037": 0.00074472102361689,
+  "deficit_2050": 0.0010280630632095722,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_emploi.postes/autres_postes",
-  "deficit_2037": 0.0006269646740548751,
-  "deficit_2050": 0.0016458979873448243,
+  "deficit_2037": 0.0004654506531309721,
+  "deficit_2050": 0.0006425405981005383,
   "note": "Part du montant de chaque mesure qui paie des postes nouveaux (le reste : primes, temps de travail des personnes déjà en poste). 32 heures : embauches compensatrices à l'hôpital (la mesure est déjà au budget). AESH : moitié titularisations sans emploi nouveau. Hausses de salaires (FP-01, FP-02) : au"
  },
  {
   "cle": "tondelier_mesures.malus_poids/montant/prudent",
-  "deficit_2037": -0.00055900792158603,
-  "deficit_2050": -0.001344689846710878,
+  "deficit_2037": -0.0003395242360433315,
+  "deficit_2050": -0.00027707162014323217,
   "note": "S'éteint avec l'électrification et l'allègement du parc (2035 : 100 % de ventes à zéro émission)."
  },
  {
   "cle": "tondelier_mesures.superprofits/montant/prudent",
-  "deficit_2037": -0.00023624633001873008,
-  "deficit_2050": -0.0006962453383039247,
-  "note": ""
+  "deficit_2037": -7.778198908603429e-05,
+  "deficit_2050": -0.00010396925162226012,
+  "note": "Programme p. 66 (« taxe exceptionnelle sur les superprofits de l'industrie pétrogazière et du commerce maritime »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Taxe temporaire (2028-2029) ; rendement très dépendant des prix de l'éne"
  },
  {
   "cle": "tondelier_mesures.niches_plafond/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 68 (« Plafonner le montant total des niches fiscales par foyer »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Borne basse : le plafond global existant (10 000 €, art. 200-0 A du CGI) capte déjà l'essentiel des niches c"
  },
  {
   "cle": "tondelier_mesures.niches_plafond/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 68 (« Plafonner le montant total des niches fiscales par foyer »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Borne basse : le plafond global existant (10 000 €, art. 200-0 A du CGI) capte déjà l'essentiel des niches c"
  },
  {
   "cle": "tondelier_mesures.niches_plafond/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 68 (« Plafonner le montant total des niches fiscales par foyer »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Borne basse : le plafond global existant (10 000 €, art. 200-0 A du CGI) capte déjà l'essentiel des niches c"
  },
  {
   "cle": "tondelier_mesures.pensions_alimentaires/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 68 (« Défiscaliser les pensions alimentaires pour les personnes qui les reçoivent »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ordre de grandeur : impôt sur le revenu payé sur les pensions alimentaires reçues, qui so"
  },
  {
   "cle": "tondelier_mesures.pensions_alimentaires/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 68 (« Défiscaliser les pensions alimentaires pour les personnes qui les reçoivent »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ordre de grandeur : impôt sur le revenu payé sur les pensions alimentaires reçues, qui so"
  },
  {
   "cle": "tondelier_mesures.pensions_alimentaires/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 68 (« Défiscaliser les pensions alimentaires pour les personnes qui les reçoivent »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ordre de grandeur : impôt sur le revenu payé sur les pensions alimentaires reçues, qui so"
  },
  {
   "cle": "tondelier_mesures.is_minimal/montant/crise",
@@ -327,199 +327,199 @@
   "cle": "tondelier_mesures.superprofits/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 66 (« taxe exceptionnelle sur les superprofits de l'industrie pétrogazière et du commerce maritime »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Taxe temporaire (2028-2029) ; rendement très dépendant des prix de l'éne"
  },
  {
   "cle": "tondelier_mesures.superprofits/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 66 (« taxe exceptionnelle sur les superprofits de l'industrie pétrogazière et du commerce maritime »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Taxe temporaire (2028-2029) ; rendement très dépendant des prix de l'éne"
  },
  {
   "cle": "tondelier_mesures.superprofits/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 66 (« taxe exceptionnelle sur les superprofits de l'industrie pétrogazière et du commerce maritime »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Taxe temporaire (2028-2029) ; rendement très dépendant des prix de l'éne"
  },
  {
   "cle": "tondelier_mesures.securite_sociale_pro/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 55 (« salaire équivalent en cas de perte d'emploi pendant deux ans dans les secteurs les plus exposés »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = complément entre l'allocation chômage et le salaire antérieur "
  },
  {
   "cle": "tondelier_mesures.securite_sociale_pro/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 55 (« salaire équivalent en cas de perte d'emploi pendant deux ans dans les secteurs les plus exposés »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = complément entre l'allocation chômage et le salaire antérieur "
  },
  {
   "cle": "tondelier_mesures.securite_sociale_pro/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 55 (« salaire équivalent en cas de perte d'emploi pendant deux ans dans les secteurs les plus exposés »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = complément entre l'allocation chômage et le salaire antérieur "
  },
  {
   "cle": "tondelier_mesures.cheque_energie/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 119 (« Remplacer les chèques énergies par un crédit d'impôt ciblé ... versé automatiquement »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le montant est le surcoût de l'élargissement et du versement automatique (non-r"
  },
  {
   "cle": "tondelier_mesures.cheque_energie/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 119 (« Remplacer les chèques énergies par un crédit d'impôt ciblé ... versé automatiquement »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le montant est le surcoût de l'élargissement et du versement automatique (non-r"
  },
  {
   "cle": "tondelier_mesures.cheque_energie/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 119 (« Remplacer les chèques énergies par un crédit d'impôt ciblé ... versé automatiquement »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le montant est le surcoût de l'élargissement et du versement automatique (non-r"
  },
  {
   "cle": "tondelier_mesures.jeunes/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 126 (« Supprimer la Contribution de Vie Étudiante et de Campus (CVEC) ») et mesures jeunesse voisines. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). La CVEC seule rapporte de l'ordre de 0,15 à 0,2 Md€ par an ; le reste de"
  },
  {
   "cle": "tondelier_mesures.jeunes/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 126 (« Supprimer la Contribution de Vie Étudiante et de Campus (CVEC) ») et mesures jeunesse voisines. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). La CVEC seule rapporte de l'ordre de 0,15 à 0,2 Md€ par an ; le reste de"
  },
  {
   "cle": "tondelier_mesures.jeunes/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 126 (« Supprimer la Contribution de Vie Étudiante et de Campus (CVEC) ») et mesures jeunesse voisines. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). La CVEC seule rapporte de l'ordre de 0,15 à 0,2 Md€ par an ; le reste de"
  },
  {
   "cle": "tondelier_mesures.aidants_apa/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 128 (« Remplacer l'indemnisation du congé de proche aidant par une rémunération revalorisée ») et APA à domicile. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le niveau de rémunération n'étant pas fixé, l'enveloppe est u"
  },
  {
   "cle": "tondelier_mesures.aidants_apa/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 128 (« Remplacer l'indemnisation du congé de proche aidant par une rémunération revalorisée ») et APA à domicile. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le niveau de rémunération n'étant pas fixé, l'enveloppe est u"
  },
  {
   "cle": "tondelier_mesures.aidants_apa/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 128 (« Remplacer l'indemnisation du congé de proche aidant par une rémunération revalorisée ») et APA à domicile. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le niveau de rémunération n'étant pas fixé, l'enveloppe est u"
  },
  {
   "cle": "tondelier_mesures.ase_25_ans/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 135 (« prise en charge obligatoire des enfants placés jusqu'à 25 ans »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ordre de grandeur : prolongation des contrats jeunes majeurs pour les sortants de l'ASE entre 18 et 25"
  },
  {
   "cle": "tondelier_mesures.ase_25_ans/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 135 (« prise en charge obligatoire des enfants placés jusqu'à 25 ans »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ordre de grandeur : prolongation des contrats jeunes majeurs pour les sortants de l'ASE entre 18 et 25"
  },
  {
   "cle": "tondelier_mesures.ase_25_ans/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 135 (« prise en charge obligatoire des enfants placés jusqu'à 25 ans »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ordre de grandeur : prolongation des contrats jeunes majeurs pour les sortants de l'ASE entre 18 et 25"
  },
  {
   "cle": "tondelier_mesures.penibilite/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 117 (« Réintroduire les 4 critères ... supprimés en 2017 » : charges lourdes, postures pénibles, vibrations, agents chimiques). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = départs anticipés supplémentaires ; mont"
  },
  {
   "cle": "tondelier_mesures.penibilite/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 117 (« Réintroduire les 4 critères ... supprimés en 2017 » : charges lourdes, postures pénibles, vibrations, agents chimiques). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = départs anticipés supplémentaires ; mont"
  },
  {
   "cle": "tondelier_mesures.penibilite/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 117 (« Réintroduire les 4 critères ... supprimés en 2017 » : charges lourdes, postures pénibles, vibrations, agents chimiques). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = départs anticipés supplémentaires ; mont"
  },
  {
   "cle": "tondelier_mesures.retraites_agricoles/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 117 (« Réformer le système de retraite agricole et améliorer les pensions des femmes de ce régime »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ampleur de la revalorisation non précisée."
  },
  {
   "cle": "tondelier_mesures.retraites_agricoles/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 117 (« Réformer le système de retraite agricole et améliorer les pensions des femmes de ce régime »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ampleur de la revalorisation non précisée."
  },
  {
   "cle": "tondelier_mesures.retraites_agricoles/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 117 (« Réformer le système de retraite agricole et améliorer les pensions des femmes de ce régime »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Ampleur de la revalorisation non précisée."
  },
  {
   "cle": "tondelier_mesures.depassements/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 111 (« en limitant les dépassements d'honoraires à 50 % du tarif de la Sécurité sociale »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le plafonnement lui-même ne coûte pas à l'Assurance maladie ; le montant correspond"
  },
  {
   "cle": "tondelier_mesures.depassements/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 111 (« en limitant les dépassements d'honoraires à 50 % du tarif de la Sécurité sociale »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le plafonnement lui-même ne coûte pas à l'Assurance maladie ; le montant correspond"
  },
  {
   "cle": "tondelier_mesures.depassements/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 111 (« en limitant les dépassements d'honoraires à 50 % du tarif de la Sécurité sociale »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le plafonnement lui-même ne coûte pas à l'Assurance maladie ; le montant correspond"
  },
  {
   "cle": "tondelier_mesures.sante_scolaire/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 112 (« Recruter 7500 infirmier·es scolaires »). Calcul : 7 500 postes × environ 50 000 € chargés ≈ 0,4 Md€, plus les postes vacants pourvus et la prime de +500 € en début de carrière ; enveloppe arrondie à 0,6 Md€ (statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.sante_scolaire/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 112 (« Recruter 7500 infirmier·es scolaires »). Calcul : 7 500 postes × environ 50 000 € chargés ≈ 0,4 Md€, plus les postes vacants pourvus et la prime de +500 € en début de carrière ; enveloppe arrondie à 0,6 Md€ (statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.sante_scolaire/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 112 (« Recruter 7500 infirmier·es scolaires »). Calcul : 7 500 postes × environ 50 000 € chargés ≈ 0,4 Md€, plus les postes vacants pourvus et la prime de +500 € en début de carrière ; enveloppe arrondie à 0,6 Md€ (statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.prevention/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 111 (« Généraliser la prise en charge de l'activité physique adaptée par la Sécurité sociale ») et volets prévention et santé mentale. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.prevention/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 111 (« Généraliser la prise en charge de l'activité physique adaptée par la Sécurité sociale ») et volets prévention et santé mentale. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.prevention/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 111 (« Généraliser la prise en charge de l'activité physique adaptée par la Sécurité sociale ») et volets prévention et santé mentale. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.medicaments/montant/median",
@@ -537,55 +537,55 @@
   "cle": "tondelier_mesures.autres_postes/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 57 (« Créer 200 postes d'inspecteur·ices du travail ») et renforts DGCCRF, douanes, ONF, ICPE. Les 200 inspecteurs ne coûtent que de l'ordre de 0,01 Md€ ; le reste de l'enveloppe (0,3 Md€) couvre les autres corps, dont les effectifs ne sont pas chiffrés dans le programme (statut HYPOTHE"
  },
  {
   "cle": "tondelier_mesures.autres_postes/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 57 (« Créer 200 postes d'inspecteur·ices du travail ») et renforts DGCCRF, douanes, ONF, ICPE. Les 200 inspecteurs ne coûtent que de l'ordre de 0,01 Md€ ; le reste de l'enveloppe (0,3 Md€) couvre les autres corps, dont les effectifs ne sont pas chiffrés dans le programme (statut HYPOTHE"
  },
  {
   "cle": "tondelier_mesures.autres_postes/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 57 (« Créer 200 postes d'inspecteur·ices du travail ») et renforts DGCCRF, douanes, ONF, ICPE. Les 200 inspecteurs ne coûtent que de l'ordre de 0,01 Md€ ; le reste de l'enveloppe (0,3 Md€) couvre les autres corps, dont les effectifs ne sont pas chiffrés dans le programme (statut HYPOTHE"
  },
  {
   "cle": "tondelier_mesures.recherche/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 96 (« augmentation significative des salaires des personnels de recherche (+10 % dès la première année) »), crédits des laboratoires et 1 000 chaires. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.recherche/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 96 (« augmentation significative des salaires des personnels de recherche (+10 % dès la première année) »), crédits des laboratoires et 1 000 chaires. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.recherche/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 96 (« augmentation significative des salaires des personnels de recherche (+10 % dès la première année) »), crédits des laboratoires et 1 000 chaires. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.voie_pro/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 91 (« en rétablissant le baccalauréat professionnel en 4 ans »), EPS et RASED. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le coût principal est l'année d'enseignement supplémentaire en lycée professionnel."
  },
  {
   "cle": "tondelier_mesures.voie_pro/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 91 (« en rétablissant le baccalauréat professionnel en 4 ans »), EPS et RASED. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le coût principal est l'année d'enseignement supplémentaire en lycée professionnel."
  },
  {
   "cle": "tondelier_mesures.voie_pro/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 91 (« en rétablissant le baccalauréat professionnel en 4 ans »), EPS et RASED. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Le coût principal est l'année d'enseignement supplémentaire en lycée professionnel."
  },
  {
   "cle": "tondelier_mesures.trente_deux_heures/montant/crise",
@@ -609,55 +609,55 @@
   "cle": "tondelier_mesures.outremer_plan/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 153 (« plan quinquennal d'investissement dans les écoles, les infrastructures de transport, d'eau potable et d'assainissement »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.outremer_plan/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 153 (« plan quinquennal d'investissement dans les écoles, les infrastructures de transport, d'eau potable et d'assainissement »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.outremer_plan/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 153 (« plan quinquennal d'investissement dans les écoles, les infrastructures de transport, d'eau potable et d'assainissement »). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.energies_renouvelables/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 17 (« prêt à taux zéro de la Caisse des Dépôts ... à hauteur de 60 % des devis »), fonds chaleur, communautés énergétiques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Pour le prêt à taux zéro, seul le coût de bonificat"
  },
  {
   "cle": "tondelier_mesures.energies_renouvelables/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 17 (« prêt à taux zéro de la Caisse des Dépôts ... à hauteur de 60 % des devis »), fonds chaleur, communautés énergétiques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Pour le prêt à taux zéro, seul le coût de bonificat"
  },
  {
   "cle": "tondelier_mesures.energies_renouvelables/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 17 (« prêt à taux zéro de la Caisse des Dépôts ... à hauteur de 60 % des devis »), fonds chaleur, communautés énergétiques. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Pour le prêt à taux zéro, seul le coût de bonificat"
  },
  {
   "cle": "tondelier_mesures.agriculture/montant/crise",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 49 (« Garantir un revenu sur trois ans aux agriculteur·trices s'engageant dans un contrat de transition agroécologique »), aide au maintien bio, transition de l'élevage. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.agriculture/montant/median",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 49 (« Garantir un revenu sur trois ans aux agriculteur·trices s'engageant dans un contrat de transition agroécologique »), aide au maintien bio, transition de l'élevage. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.agriculture/montant/optimiste",
   "deficit_2037": 0.0,
   "deficit_2050": 0.0,
-  "note": ""
+  "note": "Programme p. 49 (« Garantir un revenu sur trois ans aux agriculteur·trices s'engageant dans un contrat de transition agroécologique »), aide au maintien bio, transition de l'élevage. Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE)."
  },
  {
   "cle": "tondelier_mesures.services_publics_divers/montant/crise",
