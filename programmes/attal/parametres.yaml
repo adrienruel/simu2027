@@ -223,12 +223,13 @@ attal_mesures:
     statut: HYPOTHESE
     source: "Encadrement : un Canadair ≈ 50 M€ ; flotte de 12 appareils, commande européenne de 2024 ; +2 à 4 appareils par an"
   france_2040:
-    valeur: {id: ATT-NUM-01, libelle: "Plan « France 2040 » : 200 Md€ pour l'IA et l'innovation en dix ans, moitié publique", poste: investissement, moteur: pib, debut: 2028, plein: 2030,
+    valeur: {id: ATT-NUM-01, libelle: "Plan « France 2040 » : 200 Md€ pour l'IA et l'innovation en dix ans, moitié publique", poste: investissement, moteur: pib, debut: 2028, plein: 2030, fin: 2037,
              montant: {crise: 8.0, prudent: 7.0, median: 6.0, optimiste: 5.0}}
     unite: md_eur
     annee_euros: 2026
     statut: HYPOTHESE
     source: "Site du candidat (Les Échos, 17/06/2026) : 200 Md€ sur dix ans, à parts égales entre public et privé, soit 10 Md€ publics par an ; moins la suite de France 2030 déjà au statu quo (≈ 3 à 5 Md€ par an)"
+    note: "Dix ans, de 2028 à 2037 (fin ajoutée le 27/11/2026, analyse indépendante : sans `fin`, la dépense continuait jusqu'en 2073)."
   geothermie:
     valeur: {id: ATT-ENE-04, libelle: "Fonds chaleur pour la géothermie doublé (160 M€ par an)", poste: investissement, moteur: pib, debut: 2028, plein: 2028,
              montant: {crise: 0.08, prudent: 0.08, median: 0.08, optimiste: 0.08}}

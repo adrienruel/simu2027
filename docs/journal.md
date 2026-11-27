@@ -2227,3 +2227,12 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   Statu quo : six EPR2 (calendrier d'EDF, prêt bonifié, contrat pour différence) ; canal `nucleaire` pour les huit
   programmes qui en parlent. Détail et tableau : `docs/nucleaire.md`. Déficit du statu quo 2037 au prudent : +0,04
   point. Sorties à régénérer.
+
+## Analyse indépendante du moteur (27/11/2026)
+- Rapport : `docs/audits/analyse_independante_2026-11-27.md` (agent sans contexte, sur roadmap e796068).
+- Corrigé tout de suite (erreurs de saisie) : Roussel, nationalisations comptées chaque année (−250 Md€ par an) au
+  lieu d'un achat unique en 2029 : déficit 2037 au prudent 33,6 → 25,7 %, dette 333 → 248 % ; Attal, plan « France
+  2040 » « en dix ans » sans fin : arrêté en 2037 (déficit 2050 23,7 → 23,4 %). Test : une participation doit avoir une
+  fin.
+- À arbitrer par Adrien : réaction des taux dans le PIB, effacement par l'inflation et prime du statu quo dans la
+  « dette aux taux du statu quo » ; sources manquantes ; 42 annuités de Le Pen.

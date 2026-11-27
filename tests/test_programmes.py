@@ -76,3 +76,18 @@ def test_copie_garde_le_programme():
     assert p.en_crise().programme == p.programme
 
 
+
+
+def test_participations_ont_une_fin():
+    """Analyse indépendante du 27/11/2026 : un achat d'actifs (poste participations) sans `fin` est compté chaque
+    année (Roussel : 250 Md€ par an au lieu d'un achat unique). Toute mesure sur ce poste doit dire quand elle s'arrête."""
+    import yaml
+    from pathlib import Path
+    for f in Path(__file__).resolve().parents[1].glob("programmes/*/parametres.yaml"):
+        for groupe in (yaml.safe_load(f.read_text(encoding="utf-8")) or {}).values():
+            if not isinstance(groupe, dict):
+                continue
+            for nom, par in groupe.items():
+                v = par.get("valeur") if isinstance(par, dict) else None
+                if isinstance(v, dict) and v.get("poste") == "participations":
+                    assert "fin" in v, f"{f.parent.name} {nom} : participation sans fin"
