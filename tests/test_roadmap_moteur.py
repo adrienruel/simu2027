@@ -137,9 +137,10 @@ def test_point_fixe_baisse_ecart_taux():
     a = noyau.simuler(q, noyau.charger("retailleau"), scenarios=("prudent", "optimiste"))
     b = noyau.simuler(p, noyau.charger("retailleau"), scenarios=("prudent", "optimiste"))
     assert all(a["prudent"][t]["deficit"] == b["prudent"][t]["deficit"] for t in a["prudent"])
-    # valeurs mesurées après la régénération du 26/11/2026 (25/11 : 2,596 et 4,546)
-    assert b["optimiste"][2073]["deficit"] == pytest.approx(2.618, abs=1e-3)
-    assert a["optimiste"][2073]["deficit"] == pytest.approx(4.575, abs=1e-3)
+    # valeurs mesurées le 27/11/2026, nouveau nucléaire compris (Retailleau : 14 EPR2 et parc prolongé ; 26/11 : 2,618
+    # et 4,575)
+    assert b["optimiste"][2073]["deficit"] == pytest.approx(2.939, abs=1e-3)
+    assert a["optimiste"][2073]["deficit"] == pytest.approx(4.853, abs=1e-3)
     passes = b["optimiste"][2073]["passes_ecart_taux"]
     assert 2 < passes < 10
     # cohérence : la baisse publiée est celle que la trajectoire publiée gagne

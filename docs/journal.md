@@ -2221,3 +2221,9 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
   Philippe 162,5 ; Attal 163,7 ; Tondelier 170,5 ; Glucksmann 172,5 ; Lisnard 176,8 ; Le Pen 177,0 ;
   Zemmour 179,2 ; Arthaud 190,4 ; Mélenchon 232,7 ; Roussel 295,2.
 - `outils.priorites_mesures` ajouté à la liste de régénération (ses trois fiches étaient périmées).
+
+## Nouveau nucléaire, canal commun (27/11/2026)
+- Demande d'Adrien : les EPR qui vont être livrés, avec le prix de l'électricité et la décarbonation, pour tous.
+  Statu quo : six EPR2 (calendrier d'EDF, prêt bonifié, contrat pour différence) ; canal `nucleaire` pour les huit
+  programmes qui en parlent. Détail et tableau : `docs/nucleaire.md`. Déficit du statu quo 2037 au prudent : +0,04
+  point. Sorties à régénérer.

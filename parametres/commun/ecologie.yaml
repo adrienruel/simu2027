@@ -76,3 +76,58 @@ ecologie:
     statut: HYPOTHESE
     source: "SNBC-2 : environ 80 Mt d'émissions brutes en 2050 pour la neutralité carbone"
     note: "Après le cinquième budget (2034-2038), trajectoire droite jusqu'à cette valeur en 2050, puis stable. À remplacer par la valeur de la SNBC-3 si elle en publie une."
+
+# --- Nouveau nucléaire (27/11/2026, demande d'Adrien) -------------------------------------------------------------
+# « Pour ceux qui ne disent rien, il faut intégrer les nouveaux EPR qui vont être livrés, avec la conséquence sur le
+# prix de l'électricité et la décarbonation. » Le statu quo compte les six EPR2 décidés (calendrier, prêt bonifié,
+# contrat pour différence) ; un programme qui en ajoute, n'en veut pas ou sort du nucléaire passe par le canal commun
+# `nucleaire` (moteur/nucleaire.py, moteur/canaux_declares.py) : budget, prix de l'électricité, électrification.
+nucleaire:
+  epr2:
+    valeur: {nombre_statu_quo: 6, puissance_gw: 1.67, facteur_charge: 0.80, debut_financement: 2027, debut_supplementaires: 2029,
+             premiere: {crise: 2041, prudent: 2040, median: 2039, optimiste: 2038},
+             cadence_ans: {crise: 1.5, prudent: 1.5, median: 1.25, optimiste: 1.0}}
+    unite: sans_unite
+    statut: SOURCE
+    source: "EDF, communiqué du 18/12/2025 (devis prévisionnel du programme EPR2) : mise en service du premier réacteur à Penly en 2038, cadencement de 12 à 18 mois pour les suivants ; six réacteurs (Penly, Gravelines, Bugey) ; 1 670 MW chacun ; environ 70 mois de chantier par réacteur"
+    url: "https://www.edf.fr/groupe-edf/espaces-dedies/journalistes/tous-les-communiques-de-presse/edf-presente-son-devis-previsionnel-du-programme-epr2-a-hauteur-de-728-mdeu"
+    page: "Communiqué du 18/12/2025"
+    note: "Optimiste : calendrier d'EDF (2038, un réacteur par an) ; médian : un an de retard, 15 mois ; prudent : deux ans, 18 mois ; crise : trois ans (Flamanville 3 a pris douze ans de retard). Facteur de charge de 80 % (HYPOTHESE : parc existant ≈ 70 à 75 % ces dernières années, un réacteur neuf fait mieux). Les réacteurs au-delà des six du statu quo suivent à la même cadence. Financement : le prêt est tiré dès 2027 (PLF 2027 : 137,8 M€ de bonification cette année-là) ; chaque réacteur du statu quo est décaissé linéairement de 2027 à sa mise en service ; un réacteur en plus, décidé après l'élection, à partir de 2029."
+  cout_reacteur_md:
+    valeur: {crise: 16.7, prudent: 15.3, median: 13.9, optimiste: 13.9}
+    unite: md_eur_2026
+    statut: SOURCE
+    source: "EDF, devis prévisionnel de décembre 2025 : 72,8 Md€ de 2020 pour les six EPR2, marges pour aléas comprises (hors frais financiers), soit 83,5 Md€ de 2026 (déflateur du PIB 2020-2025 : 1,130, Insee ; 2026 : +1,5 %) et 13,9 Md€ par réacteur"
+    url: "https://www.edf.fr/groupe-edf/espaces-dedies/journalistes/tous-les-communiques-de-presse/edf-presente-son-devis-previsionnel-du-programme-epr2-a-hauteur-de-728-mdeu"
+    page: "Communiqué du 18/12/2025"
+    note: "Médian et optimiste : le devis ; prudent : +10 % ; crise : +20 % (le devis a déjà monté de 40 % depuis 2022)."
+  pret:
+    valeur: {part: 0.60, taux_ressource: 0.03, duree_remboursement: 35,
+             bonification_apres: {crise: 1.0, prudent: 0.5, median: 0.5, optimiste: 0.0}}
+    unite: sans_unite
+    statut: SOURCE
+    source: "Conseil de politique nucléaire du 12/03/2026 : prêt bonifié de l'État pour 60 % du programme, sur le fonds d'épargne de la Caisse des dépôts ; PLF 2027, article 69 (garantie à 100 %, remboursement sur 35 ans au plus ; 137,8 M€ de bonification en 2027) ; Cour des comptes, novembre 2026 : taux nul pour EDF pendant la construction, environ 1,5 Md€ par an à la charge de l'État vers 2035 pour un encours de 50 Md€ et une ressource à 3 %"
+    url: "https://www.jechange.fr/banques/news/livret-a-epr2-bonification-pret-137-millions-2027-1-5-milliard-2035"
+    page: "Article de novembre 2026 reprenant la note de la Cour des comptes et le PLF 2027"
+    note: "Bonification = encours × taux de la ressource pendant le chantier de chaque réacteur ; après sa mise en service, part du taux de la ressource que l'État paie encore (HYPOTHESE : le taux d'EDF après la construction n'est pas publié) ; remboursement linéaire. Le prêt vient du fonds d'épargne, hors des administrations publiques : il ne compte pas dans la dette publique, seule la bonification passe au déficit."
+  contrat_difference:
+    valeur: {prix_exercice: 102.6, duree: 40, prix_marche: {crise: 60.0, prudent: 70.0, median: 80.0, optimiste: 90.0}}
+    unite: eur_2026_par_mwh
+    statut: SOURCE
+    source: "Conseil de politique nucléaire du 17/03/2025 : contrat pour différence sur la production des EPR2 à un prix de 100 € de 2024 au plus par MWh (102,6 € de 2026), 40 ans ; sous ce prix, l'État compense EDF, au-dessus EDF reverse"
+    url: "https://www.banquedesterritoires.fr/nucleaire-un-pret-sur-fonds-depargne-garanti-par-letat-pour-financer-le-programme-epr2"
+    page: "Article du 12/03/2026"
+    note: "Prix de marché de gros moyen, en € de 2026 par MWh (HYPOTHESE) : la Cour des comptes s'inquiète d'un prix sous 70 € ; prudent 70, médian 80, optimiste 90, crise 60. Versement de l'État = (prix d'exercice − prix de marché) × production, négatif (recette) quand le marché passe au-dessus."
+  couts_systeme_rte:
+    valeur: {M0: 80, M1: 77, M23: 71, N1: 66, N2: 61, N03: 59}
+    unite: md_eur_2020_par_an
+    statut: SOURCE
+    source: "RTE, Futurs énergétiques 2050 (octobre 2021), coûts complets annualisés du système électrique à l'horizon 2060, trajectoire de référence : M0 ≈ 80, M1 ≈ 77, M23 ≈ 71, N1 ≈ 66, N2 ≈ 61, N03 ≈ 59 Md€ par an ; N1 : 8 EPR2, N2 : 14 EPR2, N03 : 14 EPR2, SMR et parc prolongé au-delà de 60 ans ; M0 : sortie du nucléaire en 2050, M1 et M23 : fermetures à 60 ans sans nouveau réacteur"
+    url: "https://www.nouvelle-aquitaine.developpement-durable.gouv.fr/IMG/pdf/fiche_21_analyse_economique_et_environnemtale_fe2050.pdf"
+    page: "Fiche 21 (analyse économique des scénarios), graphique des coûts complets"
+    note: "Lecture commune (moteur/nucleaire.cout_systeme) : sans nouveau réacteur, moyenne de M1 et M23 (74) ; 8 EPR2 : N1 ; 14 : N2 ; interpolation linéaire entre ; 14 ou plus avec un parc prolongé au-delà de 60 ans : N03 ; jamais sous N03 ; sortie avant 2050 : M0. Le statu quo (6 EPR2) vaut 68. Le prix de l'électricité suit le coût complet du système (RTE : 645 TWh consommés en 2050), en écart au statu quo, monté linéairement de 2035 à 2060 (horizon des coûts de RTE). Le coût des EPR2 a monté de 40 % depuis 2021 : les écarts entre scénarios sont gardés tels que RTE les publie (l'actualisation des Futurs énergétiques est en cours)."
+  electrification:
+    valeur: {secteurs: [transports, batiments], debut: 2035, plein: 2060}
+    unite: sans_unite
+    statut: HYPOTHESE
+    note: "Décarbonation par le prix de l'électricité : les émissions des transports et des bâtiments du statu quo × ratio de prix^(élasticité croisée) (ecologie.elasticite_croisee_electricite : 0 en crise et en prudent, 0,1 en médian, 0,2 en optimiste), par ajustement partiel comme pour le prix du carbone. Le gaz de secours d'une sortie (programmes/<nom>/parametres.yaml, <nom>_ecologie.sortie_nucleaire) reste compté à part."

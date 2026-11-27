@@ -122,3 +122,21 @@ def test_reformes_structurelles_bareme():
     assert gain(p, {"pmr": 5}, "median", 2045) == gain(p, {"pmr": 2}, "median", 2045)  # plafond
     # effet à 10 ans de l'OCDE au médian
     assert abs(gain(p, lib, "median", 2037) - 0.0102) < 1e-12
+
+
+def test_nouveau_nucleaire():
+    """Canal commun du nouveau nucléaire (27/11/2026) : le statu quo paie ses six EPR2 ; un programme qui n'en déclare
+    pas est au statu quo ; une sortie économise la bonification et le contrat mais renchérit l'électricité ; plus
+    d'EPR2 coûte plus à l'État et baisse le prix."""
+    from moteur import nucleaire as nu
+    p = Parametres()
+    sq6 = nu.statu_quo(p, "prudent")
+    assert sq6[2029] > 0 and 2 < sq6[2050] < 4
+    assert all(v == 0 for v in nu.effets(p, "prudent", {})["budget"].values())
+    sortie = nu.effets(p, "prudent", {"epr": 0, "sortie": "acceleree"})
+    plus = nu.effets(p, "prudent", {"epr": 14})
+    assert sortie["budget"][2050] == pytest.approx(-sq6[2050]) and sortie["ratio_prix"][2060] > 1.15
+    assert plus["budget"][2050] > 0 and plus["ratio_prix"][2060] < 0.9 and plus["ratio_prix"][2034] == 1
+    assert nu.cout_systeme(p, None) == pytest.approx(68.0)
+    with pytest.raises(ValueError):
+        nu.effets(p, "prudent", {"epr": 6, "sortie": "60_ans"})

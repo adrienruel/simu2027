@@ -389,6 +389,12 @@ retailleau_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 retailleau_canaux:
+  nucleaire:
+    valeur: {epr: 14, prolongation: true}
+    unite: sans_unite
+    statut: DECISION
+    source: "Canal commun du nouveau nucléaire (moteur/nucleaire.py, 27/11/2026) : décision d'Adrien, intégrer les EPR livrés, le prix de l'électricité et la décarbonation"
+    note: "LR : « relance du nucléaire, 8 EPR2 de plus » et « parc nucléaire exploité 80 ans » (livret Électricité, 07/05/2026, p. 11 et 14) : 14 EPR2 en tout, parc prolongé (N03)."
   logement:
     valeur: {intensite: 1, debut: 2028}
     unite: sans_unite

@@ -1119,7 +1119,7 @@ mesures:
     citation: "Mettre fin aux nouveaux programmes EPR-2 et SMR extrêmement dispendieux"
     statut: macro
     poids: lourd
-    note: "pas dans le budget de l'État directement (EDF hors APU) : prix de l'électricité, dividendes et soutien public d'EDF, investissement, coûts de démantèlement anticipés, importations. Canal à créer ; à défaut, variante qualitative"
+    note: "tondelier_canaux.nucleaire (canal commun du nouveau nucléaire, 27/11/2026) : budget des EPR2 du statu quo économisé, prix de l'électricité (RTE, M0), électrification ; gaz de secours : tondelier_ecologie.sortie_nucleaire. Non comptés : dividendes d'EDF, démantèlement anticipé, importations."
 
   - id: MAC-02
     intitule: Commerce — accords non ratifiés (Mercosur, CETA…), préférence européenne de 50 à 80 % dans la commande publique, protections aux frontières

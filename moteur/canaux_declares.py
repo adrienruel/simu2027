@@ -13,6 +13,8 @@ porte un statut et une source comme tout paramètre.
       adoption_ia:       {valeur: {part: {par scénario : part du gain de l'IA en plus du statu quo}}, ...}
       ecole:             {valeur: {niveau_eleves: {par scénario : écart-type}, debut: 2045, annees: 40}, ...}
       formation_superieure: {valeur: {filiere: ingenieurs, objectif: 100000, debut: 2028, plein: 2032}, ...}
+      nucleaire:         {valeur: {epr: 14, prolongation: true}, ...} ou {valeur: {epr: 0, sortie: 60_ans | acceleree}}
+                         (27/11/2026, moteur/nucleaire.py ; sans déclaration : les six EPR2 du statu quo)
       regle_trajectoire: {valeur: {cible: 0.03, derniere_annee: 2073, scenarios: [crise, prudent, median, optimiste],
                                    leviers: [{nom: "…", poste: recettes, capacite_pib: 0.01}]}, ...}
 
@@ -44,7 +46,7 @@ from .noyau import ANNEES, Levier, Mesure, Regle
 from .parametres import Parametres
 
 CANAUX = ("fraude", "fraude_tva", "productivite", "reformes_structurelles", "adoption_ia", "ecole", "regle_trajectoire",
-          "solde_migratoire", "logement", "formation_superieure")
+          "solde_migratoire", "logement", "formation_superieure", "nucleaire")
 
 
 def declares(prog) -> dict:
@@ -133,6 +135,20 @@ def effets(prog, p: Parametres, s: str, d: dict | None = None, mesures_programme
                               "recettes", x["recettes"], "effet_macro"))
         if any(x["cout"].values()):
             mesures.append(Mesure("Canal déclaré : lutte contre la fraude, coût des agents", "etat_missions", x["cout"]))
+    if "nucleaire" in d:
+        # nouveau nucléaire, canal commun (27/11/2026, moteur/nucleaire.py) : écarts au parc du statu quo (six EPR2)
+        from . import nucleaire as nu
+        x = nu.effets(p, s, d["nucleaire"])
+        lib = (f"{x['epr']} EPR2 en tout" if d["nucleaire"].get("sortie", "aucune") == "aucune"
+               else {"60_ans": "aucun EPR2, réacteurs fermés à 60 ans", "acceleree": "sortie du nucléaire"}[d["nucleaire"]["sortie"]])
+        if d["nucleaire"].get("prolongation"):
+            lib += ", parc prolongé"
+        mesures.append(Mesure(f"Canal déclaré : nouveau nucléaire ({lib}), prêt bonifié et contrat pour différence",
+                              "etat_missions", x["budget"]))
+        mesures.append(Mesure(f"Canal déclaré : nouveau nucléaire ({lib}), électrification par le prix de l'électricité (émissions)",
+                              "recettes", {}, "physique",
+                              physique={f"emissions_mt:{sec}": serie for sec, serie in x["emissions"].items()},
+                              vert="favorable" if x["ratio_prix"][ANNEES[-1]] < 1 else "defavorable"))
     if "fraude_tva" in d:
         x = d["fraude_tva"]
         mesures.append(Mesure("Canal déclaré : fraude à la TVA", "recettes",

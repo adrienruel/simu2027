@@ -807,6 +807,12 @@ tondelier_emploi:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 tondelier_canaux:
+  nucleaire:
+    valeur: {epr: 0, sortie: acceleree}
+    unite: sans_unite
+    statut: DECISION
+    source: "Canal commun du nouveau nucléaire (moteur/nucleaire.py, 27/11/2026) : décision d'Adrien, intégrer les EPR livrés, le prix de l'électricité et la décarbonation"
+    note: "MAC-01 : « sortie du nucléaire en une vingtaine d'années, fin des EPR2 et SMR » (p. 17) : aucun EPR2, sortie avant 2050 (coût du système de RTE : M0). Le gaz de secours reste compté dans tondelier_ecologie.sortie_nucleaire."
   fraude:
     valeur: {agents: 1000, debut: 2028, plein: 2032, cout_deja_compte: true}
     unite: sans_unite

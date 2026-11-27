@@ -347,6 +347,12 @@ zemmour_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 zemmour_canaux:
+  nucleaire:
+    valeur: {epr: 14}
+    unite: sans_unite
+    statut: DECISION
+    source: "Canal commun du nouveau nucléaire (moteur/nucleaire.py, 27/11/2026) : décision d'Adrien, intégrer les EPR livrés, le prix de l'électricité et la décarbonation"
+    note: "ZEM-ENE-01 : « six EPR d'ici 2035, quatorze d'ici 2045 » : 14 EPR2 en tout ; la date annoncée n'est pas reprise (cadence commune : le premier EPR2 ne peut pas entrer en service avant 2038)."
   ecole:
     valeur: {debut: 2045, annees: 40}
     unite: sans_unite

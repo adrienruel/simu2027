@@ -95,7 +95,7 @@ mesures:
 - id: RET-ENE-01
   intitule: Relance du nucléaire, 8 EPR2 de plus
   source: Électricité (07/05/2026), p. 14
-  traitement: 'hors solde : financement par EDF'
+  traitement: 'retailleau_canaux.nucleaire (canal commun du nouveau nucléaire : 14 EPR2 en tout, parc prolongé)'
 - id: RET-ENE-02
   intitule: Fin du soutien aux nouvelles capacités éoliennes et solaires, TVA normale sur le solaire
   source: Électricité (07/05/2026), p. 21
@@ -111,7 +111,7 @@ mesures:
 - id: RET-ENE-04
   intitule: Parc nucléaire exploité 80 ans
   source: Électricité (07/05/2026), p. 11
-  traitement: hors solde
+  traitement: 'retailleau_canaux.nucleaire (prolongation : coût du système de RTE N03)'
 - id: RET-ENE-05
   intitule: Réacteurs à neutrons rapides en 2045
   source: Électricité (07/05/2026), p. 31

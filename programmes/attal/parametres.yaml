@@ -331,6 +331,12 @@ attal_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 attal_canaux:
+  nucleaire:
+    valeur: {epr: 14}
+    unite: sans_unite
+    statut: DECISION
+    source: "Canal commun du nouveau nucléaire (moteur/nucleaire.py, 27/11/2026) : décision d'Adrien, intégrer les EPR livrés, le prix de l'électricité et la décarbonation"
+    note: "ATT : « 14 EPR, un réacteur par an » (site du candidat, 23/09/2026) : 14 EPR2 en tout, dont les 6 du statu quo ; cadence commune (nucleaire.epr2)."
   logement:
     valeur: {intensite: 0.5, debut: 2028}
     unite: sans_unite

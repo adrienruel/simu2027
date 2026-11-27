@@ -551,6 +551,10 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
     mis = missions_etat(p)
     el = p.val("ministeres.elasticite_eleves_etudiants")
     hausse_def = hausse_defense(p)
+    # nouveau nucléaire (27/11/2026, demande d'Adrien) : bonification du prêt et contrat pour différence des six EPR2
+    # décidés, au calendrier du scénario (moteur/nucleaire.py)
+    from . import nucleaire
+    epr2 = nucleaire.statu_quo(p, s)
 
     def i(cle, t):
         return e[t][cle] / e[2029][cle]
@@ -569,7 +573,7 @@ def blocs(p: Parametres, s: str) -> dict[int, dict[str, float]]:
                          * k["prime_activite"]),
             "aah_invalidite": d["aah_invalidite"] * i("adultes", t) * k["aah_invalidite"],
             "investissement": d["investissement"] * y[t] / y0,
-            "etat_missions": sum(x["cout"] * indice_mission(x["regle"], x["public"], t, e, w, y, el) for x in mis),
+            "etat_missions": sum(x["cout"] * indice_mission(x["regle"], x["public"], t, e, w, y, el) for x in mis) + epr2[t],
             # défense : loi de programmation, puis en euros constants (décision d'Adrien du 21/11/2026 : pas de règle
             # européenne de niveau ; la cible de l'OTAN n'en est pas une) ; contribution à l'UE : ressource RNB,
             # suit le PIB (décision sur les ressources propres de l'Union)

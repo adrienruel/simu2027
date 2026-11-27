@@ -281,6 +281,12 @@ le_pen_ecologie:
 
 # --- Canaux déclarés (moteur/canaux_declares.py) : effets ouverts à tous les programmes, barème commun -----------
 le_pen_canaux:
+  nucleaire:
+    valeur: {epr: 10}
+    unite: sans_unite
+    statut: DECISION
+    source: "Canal commun du nouveau nucléaire (moteur/nucleaire.py, 27/11/2026) : décision d'Adrien, intégrer les EPR livrés, le prix de l'électricité et la décarbonation"
+    note: "RN : « nucléaire relancé : 6 à 14 réacteurs » : milieu de la fourchette, 10 EPR2 en tout (lecture à valider) ; cadence commune."
   fraude:
     valeur: {agents: non_chiffre, debut: 2028, plein: 2032}
     unite: sans_unite
