@@ -189,7 +189,7 @@ résultats identiques ou écarts expliqués dans le journal.*
 R0 (tout de suite) → R1.1 à R1.3 (gain immédiat, sans risque) → R2.2 et R2.3 (petits correctifs) → R1.4 et R2.1
 (gros chantier, à faire ensemble) → R3 et R4, point par point, chacun mesuré contre `ref-2026-11-20`.
 
-## 5. Avancement (26/11/2026, mis à jour l'après-midi)
+## 5. Avancement (27/11/2026)
 
 Règle suivie : aucun chiffre publié ne change. Une photo complète (13 programmes × 4 scénarios, toutes les
 grandeurs, et 6 tirages de Monte Carlo) reste identique au bit près après chaque étape. PR #2 → #3 → #4.
@@ -197,26 +197,26 @@ grandeurs, et 6 tirages de Monte Carlo) reste identique au bit près après chaq
 | Chantier | État |
 |---|---|
 | R0.1, R0.2 | Fait (#3) |
-| R0.3 | **À faire par le propriétaire** : 126 sorties à régénérer, dont 81 avec OpenFisca, plus le Monte Carlo |
+| R0.3 | Fait (26/11, soir) : régénération complète (micro, vieillissement, exports, Monte Carlo, manifeste) ; suite de tests au vert |
 | R0.4 | Inutile : l'égalité stricte passe une fois la sortie régénérée ; le test est ignoré tant qu'elle est périmée |
-| R0.5 | **À décider** : Mélenchon 0,917 pour un seuil de 0,9. Cause trouvée le 26/11 : `micro_emploi_2026.csv` seul (table des emplois recalculée sur la population recalée du 25/11) le fait passer de 0,857 à 0,918 ; surtout LFI-PRE-01 (emplois perdus au prudent 658 000 → 636 000). Conséquence des nouvelles données, pas un défaut : relever le seuil à 0,95 en le documentant, ou le garder |
+| R0.5 | Décidé (26/11, Adrien) : seuil relevé à 0,95 (Mélenchon 0,917, effet de la table des emplois recalculée) |
 | R0.6 | Fait (#3) : suite rapide à chaque pull request et push sur main ; complète à la demande. Depuis le 26/11, un test qui échoue ne fait plus échouer l'exécution (pas de mail) : le bilan est dans le résumé |
 | R1.1, R1.2, R1.4, R1.5 | Fait (#4) : un tirage 8,3 → 4,2 s ; mémoire 1,1 Go → 62 Mo après 12 tirages ; charger 0,24 s → 3 ms |
 | R1.3 | Inutile après R1.2 (charger ne coûte plus que 3 ms). 26/11 : mémoriser `statu_quo.retraites` ne gagne rien (les appels viennent d'instances différentes) ; le reste du temps est du calcul pur réparti, le gain suivant (interpolations numpy) ne serait plus identique au bit près |
-| R2.1 | Fait (#4) : `_calcul` en 5 étapes (260 → 20 lignes). Les annexes posées par les programmes (`non_retraites`, `pib_en_plus`…) restent : rangées par jeton depuis R1.4, elles ne peuvent plus être lues périmées ; les réécrire toucherait 40 endroits pour la seule lisibilité. **Tondelier** (classe à part, pas ProgrammeSimple) avait gardé des règles antérieures aux règles communes de l'emploi : aligné dans la PR #5, **à décider** (déficit 2037 prudent 12,28 → 12,65) |
+| R2.1 | Fait (#4) : `_calcul` en 5 étapes (260 → 20 lignes). Tondelier aligné sur les règles communes de l'emploi (déficit 2037 prudent 12,28 → 12,65) : **gardé** (décision d'Adrien, 26/11) |
 | R2.2, R2.3, R2.4 | Fait (#4) |
 | R2.5 | Pas un bug : deux conventions voulues, documentées |
 | R2.6 | Fait (26/11, après-midi) : `ruff.toml` (F, E9, B ; B023 et B905 écartées, faux positifs) et `mypy.ini` (`noyau`, `parametres`, `statu_quo` sans erreur), tâche « lint » de l'intégration continue. Corrigé : imports et variables morts. `outils/photo.py` : photo au bit près (147 992 valeurs), identique |
-| R3.1 | Fait en option **désactivée** (#4) : `macro.point_fixe_baisse_spread`. Activée : seul le scénario optimiste change, pour Retailleau (déficit 2073 de 4,55 à 2,60 points, 40 années), Tondelier (11 années autour de 2037) et Attal (2071) ; le nombre de passes est publié. **À décider** : passer le paramètre à vrai |
+| R3.1 | Fait : `macro.point_fixe_baisse_spread` **activé** le 26/11 (décision d'Adrien). Seul l'optimiste change : Retailleau 2073 4,58 → 2,62 points de déficit, Tondelier autour de 2037, Attal 2071 |
 | R3.2 | Fait (26/11) : la rétroaction des taux passait déjà par les canaux du multiplicateur (recettes à la part du PIB, dépenses de chômage par `chomeurs_depenses` pour les 12 programmes ; les blocs ne suivent plus le PIB depuis le 21/11). Écart corrigé : ses emplois sont maintenant dans l'emploi publié (canal « Taux d'intérêt (bouclage) »). Déficit, dette, chômage identiques ; emploi 2037 au prudent : Roussel −183 000, Mélenchon −131 000, Arthaud −60 000 |
-| R3.4 | Signalée (26/11) : `noyau.hors_domaine` rend « balance », première année au-delà de 2 points de PIB (médian : Mélenchon 2030, Roussel 2037, Tondelier 2055). Pas bornée : la balance n'entre dans aucun calcul ni aucune sortie publiée. Mesure du 26/11 : la balance commerciale linéaire dépasse 2 points de PIB dans 521 cas sur 2 160 et atteint −6,2 points en 2037 et −11,9 en 2073 (Mélenchon, optimiste, PIB +5 % seulement : c'est l'écart de prix qui pèse), très loin des petits chocs du calage de Mésange. **À décider** : borner, ou signaler |
+| R3.4 | Signalée (26/11) : `noyau.hors_domaine` rend « balance », première année au-delà de 2 points de PIB (médian : Mélenchon 2030, Roussel 2037, Tondelier 2055). Pas bornée : la balance n'entre dans aucun calcul ni aucune sortie publiée. Mesure du 26/11 : la balance commerciale linéaire dépasse 2 points de PIB dans 521 cas sur 2 160 et atteint −6,2 points en 2037 et −11,9 en 2073 (Mélenchon, optimiste, PIB +5 % seulement : c'est l'écart de prix qui pèse), très loin des petits chocs du calage de Mésange. Retenu : signaler sans borner (la balance n'entre dans aucun calcul) |
 | R3.3 | Fait sans branchement (#4) : `noyau.hors_domaine`. Le statu quo lui-même dépasse 250 % de dette en 2051 (prudent) et 2044 (crise). **Décision du 26/11 : rien n'est affiché**, le comparateur montre l'écart de solde primaire, qui ne dépend pas de ce domaine |
 | R3.5 | Fait (#4) : programme vide = statu quo partout, monotonie d'une recette, déterminisme |
 | R4.1 | Déjà en place : `tirages_ecartes` est publié, et vaut 0 sur les 600 tirages publiés |
 | R4.2 | Fait (#4) : `python -m outils.erreur_monte_carlo`. À ρ = 1, Bertrand, Philippe et Retailleau ne sont pas départagés en 2037 (rang stable à 72-89 %). **Décision du 26/11 : affichés « ex æquo »** dans la page Fiabilité (colonne `ex_aequo` de `comparaison_incertitude.csv`) |
-| R4.3 | Pas fait : série de l'OAT à 10 ans à fournir |
-| R5 pauvreté | Corrigé le 25/11 (calage sur les taux de pauvreté de l'ERFS avec le non-recours : 15,0 % en 2026, ERFS 15,4) ; le 18,4 % de la population vieillie se relira après la régénération (R0.3) |
-| R5 IR | Diagnostic (26/11) : population actuelle 122,3 Md€ pour 119,5 visés (+2,4 %). Calage seul : 121,5 (+1,7 %), ses contraintes se contredisent sous les bornes de poids (0,2-5 ; marges d'âge à −1,2 % même à 3 000 itérations). Mise à l'échelle des dividendes, revenus fonciers et plus-values *après* le calage (× 1,05, 1,05, 1,06) : +0,8. Correctif proposé : alterner calage et mise à l'échelle jusqu'au point fixe ; il faut regénérer la population, puis les paramètres qui en sont tirés (`outils/ppa_emplois.py`) et toute la micro : à faire avec R0.3 |
+| R4.3 | Mesuré (27/11) : OAT à 10 ans (OCDE) ; le taux réel est élevé quand la productivité croît vite (+0,42 annuel, +0,85 sur 5 ans, +0,32 hors tendance commune, +0,68 depuis 1999) : un taux défavorable va avec une productivité favorable, à l'inverse de la borne ρ = 1 (`docs/incertitude.md`). **À décider** : corrélation estimée dans le Monte Carlo (familles), ou ρ = 0 comme cas central |
+| R5 pauvreté | Fermé : après la régénération du 26/11, la population vieillie du statu quo est à 15,2 % (2029) et 15,3 % (2037), pour 15,4 % à l'Insee |
+| R5 IR | Corrigé (26/11) : bornes des poids 0,1-10 et capital au point fixe ; IR de la population 120,6 Md€ pour 119,5 visés (+0,9 %, contre +2,4 %) ; paramètres tirés de la population recalculés ; sorties régénérées |
 | Affichage (26/11) | Décision d'Adrien : en tête, l'écart de solde primaire ; puis la dette et le déficit aux taux du statu quo (`decomposition.aux_taux_statu_quo`, colonnes `dette_pib_taux_sq`, `deficit_taux_sq`, `ecart_dette_pib_taux_sq` de `comparaison_trajectoire.csv`) ; le déficit au sens de Maastricht en variante, « avec la réaction des marchés ». Comparateur modifié (phrase d'accroche, tuiles, deux graphiques, colonne de la synthèse) ; chiffres affichés après la régénération et l'envoi des données |
-| R5 Mélenchon nucléaire | Renvoyé au travail programme par programme |
+| R5 Mélenchon nucléaire | Émissions chiffrées depuis le 07/11 (`melenchon_ecologie.sortie_nucleaire`, même règle que Tondelier). Reste le volet économique (prix de l'électricité, dividendes et investissement d'EDF, hors administrations publiques), pour Tondelier et Mélenchon comme pour les programmes qui relancent le nucléaire : **canal commun à concevoir** (décision d'Adrien) |
 | R5 archivage des sources | Pas faisable d'ici : le shell ne télécharge pas ; à faire depuis un poste qui y a accès |
