@@ -1,8 +1,10 @@
 # Écarts de plus de 30 % entre OpenFisca et le moteur (sorties/controle_micro_macro.csv, outils/controle_micro_macro.py).
 # Audit I5 du 27/11/2026. « expliques » : raison vérifiée. « a_expliquer » : arriéré, à vider (comme
 # parametres/sources/sans_url.txt) ; une mesure qui en sort doit recevoir une raison ou voir son écart résorbé.
-# Corrigé le 27/11 grâce à ce contrôle : ZEM-FIS-01 et GLU-FIS-01b (part non déductible de la CSG non appliquée dans
-# OpenFisca), désormais à −11 % et −5 %.
+# Corrigé grâce à ce contrôle : ZEM-FIS-01 et GLU-FIS-01b (27/11, part non déductible de la CSG non appliquée dans
+# OpenFisca) ; 28/11 : REC-20/21 (CSG du capital : OpenFisca lit taux_global, la spécification changeait
+# taux_deductible), prélèvements sur les pensions des mesures codées en montant (règle commune, ART-RET-01 et autres),
+# part des pensions au-delà de 2 000 € (LIS-RET-01, RET-04), garantie des jeunes recalée (LFI-PRE-02).
 
 expliques:
   arthaud.ART-ECO-01: "Périmètre : OpenFisca ne voit que les ménages (prélèvements en plus et prestations en moins sur les salaires relevés) ; le moteur compte aussi la hausse de la masse salariale des employeurs publics, l'IS sur les marges réduites et le coût des emplois perdus."
@@ -14,17 +16,18 @@ expliques:
   tondelier.COT-04: "Assiette : OpenFisca ne relève que la CSG des revenus d'activité ; le moteur compte le point sur tous les revenus (pensions et capital compris), faute de lecture sûre sur ces revenus dans la micro (docs/microsimulation.md)."
   roussel.PCF-RET-02: "Nul en 2026 par construction : la revalorisation des pensions sur les salaires n'a d'effet qu'à partir de 2029, visible dans la population vieillie (même calcul que le moteur)."
   zemmour.ZEM-RET-01: "Nul en 2026 par construction : la part salariale de la capitalisation obligatoire ne touche que les entrants ; effet visible dans la population vieillie. Le moteur compte aussi l'âge légal à 65 ans sous le même identifiant."
+  tondelier.COT-02: "Périmètre : la micro mesure la charge des ménages (part salariale, et à long terme la moitié de la part employeur reportée sur les salaires), nette de l'impôt sur le revenu en moins (0,8 Md€) ; le moteur, la recette des caisses, avec 70 % gardés au prudent. Revu le 28/11/2026."
+  tondelier.REC-10: "Haut de la distribution : la population synthétique a trop peu de très hauts revenus (limite publiée sur la page) ; le moteur part de la contribution exceptionnelle sur les hauts revenus (≈ 1,3 Md€ au-delà de 250 000 €). Revu le 28/11/2026."
+  roussel.PCF-PRE-01: "Structure de la population : un jeune de 18 à 24 ans qui vit chez ses parents reste dans leur famille au sens d'OpenFisca et ne peut pas demander le RSA seul ; le moteur compte 300 000 à 400 000 jeunes éligibles, avec 30 % de non-recours. Paramètre age_minimum_allocataire sans effet dans OpenFisca (la condition passe par age_pac, aussi changé). Revu le 28/11/2026."
+  le_pen.RN-FAM-01: "Population : 4,5 Md€ d'allocation de soutien familial de base, contre ≈ 3,3 Md€ attendus en 2026 (Cnaf : 3,1 Md€ pour 909 000 familles en 2024) : le nombre de familles est calé, mais elles ont trop d'enfants à charge. Le moteur (3,2 Md€ pour un doublement) suit la Cnaf. Revu le 28/11/2026."
+  zemmour.ZEM-KNA-04: "Scénarios : la micro donne l'effet statique (2,3 Md€), proche du médian du moteur (2,2) ; le prudent (1,5) compte des sorties vers l'aide sociale des départements et des contentieux. La micro chiffre la mesure seule, avant l'exclusion des étrangers (ZEM-IMM-04). Revu le 28/11/2026."
+  lisnard.LIS-SOC-01: "DÉCISION d'Adrien du 28/11/2026 : montant gardé à 4,3 Md€ (haut de l'encadrement des Voies et moyens, 3 à 4 Md€) ; la micro, à 6,5 Md€ depuis le recalage de la population du 26/11, est hors de cet encadrement."
 
 a_expliquer:
+  # À revoir après la régénération du 28/11/2026 (corrections du contrôle) : si l'écart passe sous 30 %, l'entrée
+  # disparaît ; sinon elle reçoit une raison.
   - lisnard.LIS-RET-01
-  - melenchon.LFI-PRE-02
-  - bertrand.BER-RET-01
-  - lisnard.LIS-SOC-01
   - tondelier.RET-04
-  - tondelier.COT-02
-  - le_pen.RN-FAM-01
   - arthaud.ART-RET-01
-  - zemmour.ZEM-KNA-04
+  - melenchon.LFI-PRE-02
   - tondelier.REC-20/21
-  - roussel.PCF-PRE-01
-  - tondelier.REC-10

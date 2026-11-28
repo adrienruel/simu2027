@@ -170,7 +170,7 @@ roussel_mesures:
     source: "pcf.fr (Pacte pour l'avenir de la France, 2025 ; autoroutes) ; L'Usine nouvelle"
     note: "Valeurs de marché fin 2025 ≈ BNP Paribas 85 Md€, AXA 80, Société générale 30, Engie (part non détenue) 35, concessions d'autoroutes ≈ 40 à 50 (indemnisation) ; prime de rachat comprise en prudent. Achat unique en 2029 (corrigé le 27/11/2026, analyse indépendante : sans `fin`, l'achat était compté chaque année, 2 250 Md€ de dette en trop en 2037). Opération financière : elle ne touche pas le déficit mais la dette (règle du noyau pour les participations)."
   aspa:
-    valeur: {id: PCF-RET-05, libelle: "Minimum vieillesse (ASPA) porté à 1 400 € par mois", poste: retraites, moteur: "pib", debut: 2028, plein: 2029,
+    valeur: {id: PCF-RET-05, hors_prelevements: true, libelle: "Minimum vieillesse (ASPA) porté à 1 400 € par mois", poste: retraites, moteur: "pib", debut: 2028, plein: 2029,
              montant: {crise: 4.9, prudent: 4.7, median: 4.5, optimiste: 4.3}}
     unite: md_eur
     annee_euros: 2026

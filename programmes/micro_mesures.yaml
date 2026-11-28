@@ -104,6 +104,8 @@ tondelier:
     operations:
       - {parametre: {chemin: taxation_capital.prelevement_forfaitaire.partir_2018.taux_prelevement_forfaitaire_rev_capital_eligibles_pfu_interets_dividendes_etc, ajout: 0.03}}
       - {parametre: {chemin: taxation_capital.prelevements_sociaux.csg.taux_deductible.revenus_du_patrimoine, ajout: 0.03}}
+      - {parametre: {chemin: taxation_capital.prelevements_sociaux.csg.taux_global.produits_de_placement, ajout: 0.03}}
+      - {parametre: {chemin: taxation_capital.prelevements_sociaux.csg.taux_global.produits_de_placement_alleges, ajout: 0.03}}
   PRE-11:
     operations: [{variable: {nom: aide_logement, facteur: 1.10}}]
   PRE-12:

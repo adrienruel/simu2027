@@ -434,7 +434,7 @@ tondelier_mesures:
 
   # ---------------------------------------------------------------- retraites (hors âge, calculé)
   minimum_vieillesse:
-    valeur: {id: RET-03, libelle: "ASPA et minimum contributif portés au seuil de pauvreté", poste: retraites, moteur: bloc:retraites, debut: 2028, plein: 2032,
+    valeur: {id: RET-03, hors_prelevements: true, libelle: "ASPA et minimum contributif portés au seuil de pauvreté", poste: retraites, moteur: bloc:retraites, debut: 2028, plein: 2032,
              montant: {crise: 3.5, prudent: 3.5, median: 3.5, optimiste: 3.5}}
     unite: md_eur
     annee_euros: 2026
@@ -449,11 +449,11 @@ tondelier_mesures:
     note: "Programme p. 117 (« Réintroduire les 4 critères ... supprimés en 2017 » : charges lourdes, postures pénibles, vibrations, agents chimiques). Le programme ne chiffre pas la mesure ; montant = enveloppe retenue par le projet (décision, statut HYPOTHESE). Coût = départs anticipés supplémentaires ; montée en charge lente car les droits s'acquièrent au fil des carrières."
   sous_indexation:
     valeur: {id: RET-04, libelle: "Hautes pensions sous-indexées (inflation − 0,5 point au-dessus de 2 000 €, 2028-2032)", poste: retraites, moteur: decroit_4, debut: 2028, plein: 2032,
-             montant: {crise: -3.5, prudent: -3.5, median: -3.5, optimiste: -3.5}}
+             montant: {crise: -7.0, prudent: -7.0, median: -7.0, optimiste: -7.0}}
     unite: md_eur
     annee_euros: 2026
     statut: DECISION
-    source: "Arbitrage (le programme ne donne ni seuil ni taux) : pensions au-dessus de 2 000 € ≈ 150 Md€ (DREES), 0,5 point par an pendant cinq ans"
+    source: "Arbitrage (le programme ne donne ni seuil ni taux) : 0,5 point par an pendant cinq ans (−2,5 % de niveau) sur les pensions des retraités au-delà de 2 000 € brut, 65 % de la masse des pensions (DÉCISION d'Adrien du 28/11/2026, contrôle micro/macro : 71 % dans la population synthétique, qui a un peu trop de hautes pensions ; Drees, Les retraités et les retraites 2025, fiche 5 : 8 % au-delà de 3 000 € de droit direct fin 2020) : 0,65 × 428 Md€ (pensions du statu quo en 2029) × 2,5 % ≈ 7,0 Md€. Avant le 28/11 : 150 Md€ (≈ 35 %), 3,5 Md€"
     note: "L'économie s'éteint ensuite au rythme des décès de ces retraités (−4 % par an)."
   retraites_agricoles:
     valeur: {id: RET-05, libelle: "Retraites agricoles et droits familiaux améliorés", poste: retraites, moteur: bloc:retraites, debut: 2028, plein: 2030,

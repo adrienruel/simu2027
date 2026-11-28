@@ -4,7 +4,7 @@ Un moteur Python chiffre, sur un noyau commun, les programmes des candidats cont
 puis aucune mesure nouvelle). Mêmes règles pour tous les programmes : on ne reprend que leurs mesures, jamais les
 économies ou les recettes qu'ils annoncent ; le modèle les estime lui-même en crise, prudent, médian et optimiste.
 
-Programmes publiés : `programmes/publies.yaml` (statu quo, Arthaud, Attal, Bertrand, Glucksmann, Le Pen, Lisnard,
+Programmes publiés : `programmes/publies.yaml` (statu quo, Arthaud, Attal, Glucksmann, Le Pen, Lisnard,
 Mélenchon, Philippe, Retailleau, Roussel, Tondelier, Zemmour).
 
 ## Lancer (ligne de commande)

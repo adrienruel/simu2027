@@ -2282,3 +2282,14 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
 - Régénération complète (micro des 12 programmes, population vieillie, exports, Monte Carlo de 600 tirages, manifeste) avec les décisions de la nuit : BCE hors du calcul, 2027-2028 projetées, barème commun de l'assurance chômage, prix de l'électricité vers l'activité, économies nommées. Suite de tests au vert (379).
 - Prudent 2037, déficit aux taux du statu quo : statu quo 7,3 % ; Bertrand 7,2, Retailleau 7,8, Philippe 8,3, Attal 8,7, Zemmour 10,2, Lisnard 10,4, Le Pen 10,5, Glucksmann 10,7, Tondelier 11,0, Arthaud 13,0, Roussel 18,8, Mélenchon 21,9. Dette du statu quo aux taux du statu quo : 150 % du PIB.
 - Comparateur : données envoyées ; tableau « Économies nommées et précédents » dans Fiabilité ; variante « économie de 2026 placée en 2029 » ; méthode sans réaction de la BCE ; résumés recalés.
+
+## 28/11/2026 — Bertrand retiré, écarts micro/macro revus, arbitrages
+
+- **Bertrand retiré du comparateur** (plus en campagne, décision d'Adrien) : hors de `programmes/publies.yaml`, de la variante des fonds et du Monte Carlo ; son dossier reste comme programme de test.
+- **Écarts micro/macro revus un par un** :
+  - Erreur de la micro : la hausse de la CSG du capital de Tondelier (REC-20/21) changeait `taux_deductible`, alors qu'OpenFisca calcule la CSG des revenus du capital sur `taux_global` (produits de placement) : sans effet jusqu'ici. Corrigé.
+  - Règle commune du moteur : une mesure codée en montant sur les pensions change aussi les prélèvements sur ces pensions, au taux moyen du statu quo, comme les mesures de retraite calculées (`bibliotheque.prelevements_pensions`) ; sauf minimum vieillesse et petites pensions (`hors_prelevements`). Touche Arthaud, Glucksmann, Le Pen, Mélenchon, Philippe et Tondelier.
+  - Pensions au-delà de 2 000 € : 65 % de la masse (DÉCISION d'Adrien ; 71 % dans la population, qui a un peu trop de hautes pensions ; avant, 35 à 45 %, encadrement non retrouvé chez la Drees). Économie de Lisnard (LIS-RET-01) presque doublée, Tondelier (RET-04) 3,5 → 7,0 Md€.
+  - Garantie des jeunes de Mélenchon (LFI-PRE-02) recalée sur la micro : 13,7 Md€ au prudent (DÉCISION d'Adrien).
+  - Expliqués et gardés : COT-02, REC-10 (Tondelier), PCF-PRE-01 (jeunes au foyer parental dans OpenFisca), RN-FAM-01 (ASF trop forte dans la population : 4,5 Md€ contre 3,3), ZEM-KNA-04 (statique ≈ médian), LIS-SOC-01 (gardé à 4,3 Md€, DÉCISION d'Adrien).
+- **Arbitrages d'Adrien** : Le Pen 10 EPR (validé) ; G3 barème de l'IR sur les prix (confirmé) ; dégressivité de Retailleau à 1 Md€ ; seuil de 1 550 € d'ART-RET-01 ; G9 : fourchette Mésange – FR-BDF dans l'incertitude (`bouclage.echelle_profils_impots`, lu dans la colonne médiane : calcul publié inchangé).

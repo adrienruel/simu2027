@@ -1023,6 +1023,12 @@ bouclage:
     statut: SOURCE
     source: "Mésange 2017 (Bardaji et al., Insee G2017/04, variantes analytiques à taux réels et change constants, choc de 1 % du PIB ex ante) : TVA (4.1.5, signe inversé : baisse), CSG (4.1.6, baisse), impôt sur le revenu (4.1.7, baisse), cotisations employeurs (4.1.3, baisse) ; PIB en volume et prix de consommation, écart en % à 1, 2, 3, 5, 10 ans et long terme"
     note: "Phase E (14/11/2026) : pour ces instruments, la demande bouclée prend le profil de Mésange (une BAISSE d'un point de PIB), moins ce que le canal d'offre commun compte déjà au médian pour le même choc ; mise à l'échelle par le multiplicateur du scénario (miroir pour une relance), comme la demande générique. Le canal d'offre reste structurel (offre de travail par cellule, capital). travail : incidences proportionnelles (CSG, cotisations salariés, réformes d'ensemble) ; travail_ir : incidences « ir », « haut », « bas ». Long terme atteint en 25 ans (interpolation linéaire). Remplace le poids de demande fixe de ces instruments et les prix par les coûts (bouclage.prix_offre). Cause : la forme unique sous-estimait de 40 à 50 % à moyen terme l'effet des impôts des ménages (la TVA et la CSG jouent aussi sur les salaires et la compétitivité)."
+  echelle_profils_impots:
+    valeur: {crise: 0.5, prudent: 0.6, median: 1.0, optimiste: 1.0}
+    unite: sans_unite
+    statut: DECISION
+    source: "Banque de France, WP 1045 (mai 2026), variantes de FR-BDF rejouées par outils/variantes_frbdf.py (docs/backtests.md) : pour les impôts directs et la TVA, effets sur l'activité environ deux fois plus faibles que Mésange entre 1 et 5 ans"
+    note: "G9, DÉCISION d'Adrien du 28/11/2026 : fourchette Mésange – FR-BDF dans l'incertitude seulement. Facteur appliqué à la demande bouclée des profils de Mésange (bouclage.profil_demande) et lu dans la colonne médiane : le calcul publié garde Mésange (1) dans tous les scénarios ; le Monte Carlo tire le facteur entre 0,6 au 10e centile, borné à 0,5 (FR-BDF), et Mésange (médiane et au-delà)."
   emplois_mesange:
     valeur:
       depense: [33, 94, 107, 44, -8, -42]

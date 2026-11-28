@@ -401,3 +401,16 @@ def effet_assurance_chomage(p: Parametres, s: str, decl: dict) -> float:
         brut -= b["reformes"][r]  # annuler une réforme rend son effet
     f = p.val("assurance_chomage.facteurs")
     return brut * f["baisse" if brut < 0 else "hausse"][s]
+
+
+def prelevements_pensions(p: Parametres, s: str, x: dict, serie: dict, note: str = "") -> list:
+    """Règle commune (28/11/2026, contrôle micro/macro) : une mesure codée en montant sur les pensions (poste
+    retraites) change aussi les prélèvements sur ces pensions (CSG, CRDS, Casa, cotisation maladie), au taux moyen du
+    statu quo (recettes sur les pensions / pensions, 2029), comme les mesures de retraite calculées. Exception :
+    `hors_prelevements` (minimum vieillesse, petites pensions exonérées ou au taux réduit). L'impôt sur le revenu des
+    retraités n'est pas compté (même règle que les mesures calculées)."""
+    if x.get("poste") != "retraites" or x.get("hors_prelevements"):
+        return []
+    taux = sq.recettes_par_impot(p, s)[2029]["retraites"] / sq.retraites(p, s)[2029]["depenses"]
+    return [Mesure(f"{x['id']} — prélèvements sur les pensions", "recettes", {t: taux * v for t, v in serie.items()},
+                   note=note)]

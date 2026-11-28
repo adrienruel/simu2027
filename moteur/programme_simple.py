@@ -534,6 +534,8 @@ class ProgrammeSimple:
                                 instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
                                 enfants=x.get("enfants"), fonds=x.get("fonds", ""),
                                 cout_place=x.get("cout_place", 0.0)))
+            from moteur import bibliotheque as _bib
+            liste.extend(_bib.prelevements_pensions(p, s, x, serie, court))
             if x.get("deductible_is"):
                 # impôts de production déductibles du bénéfice : l'IS bouge en sens inverse (règle commune)
                 rc = p.val("entreprises.retour_is_charges")

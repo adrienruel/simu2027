@@ -50,10 +50,10 @@ lisnard_retraites:
     unite: sans_unite
     statut: DECISION
   desindexation_part:
-    valeur: {crise: 0.3, prudent: 0.35, median: 0.4, optimiste: 0.45}
+    valeur: {crise: 0.65, prudent: 0.65, median: 0.65, optimiste: 0.65}
     unite: taux
-    statut: HYPOTHESE
-    source: "Fiche « Questions » (03/10/2026) : amorçage de la capitalisation par la désindexation des pensions au-delà d'environ 2 000 € par mois ; encadrement : pensions de droit propre au-dessus de 2 000 € brut ≈ 35 à 45 % de la masse des pensions (DREES, Les retraités et les retraites, 2025)"
+    statut: DECISION
+    source: "Fiche « Questions » (03/10/2026) : amorçage de la capitalisation par la désindexation des pensions au-delà d'environ 2 000 € par mois. Part de la masse des pensions versée aux retraités au-delà de 2 000 € brut : 65 % (DÉCISION d'Adrien du 28/11/2026, contrôle micro/macro : 71 % dans la population synthétique, qui a un peu trop de hautes pensions ; Drees, Les retraités et les retraites 2025, fiche 5 : pension moyenne de droit direct 1 666 € fin 2023, 8 % au-delà de 3 000 € fin 2020). Avant le 28/11 : 0,30 à 0,45, encadrement non retrouvé dans les publications de la Drees"
     note: "Économie non chiffrée par le candidat : estimée. Lecture : les pensions de plus de 2 000 € ne sont pas revalorisées de 2028 à 2032 (le quinquennat), puis le sont de nouveau ; la perte de niveau s'éteint avec les retraités concernés (durée moyenne ≈ 18 ans). Le fonds de capitalisation amorcé est public (comme le Fonds de réserve pour les retraites) : l'économie reste dans les comptes publics."
   desindexation_annees:
     valeur: 5

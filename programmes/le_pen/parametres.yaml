@@ -125,7 +125,7 @@ le_pen_mesures:
     note: "−14 € par tonne sur 44,6 ≈ −31 % de la composante carbone : ≈ 2,5 Md€ ; un peu moins si les volumes montent (effet en tonnes : le_pen_ecologie.carbone_2017)."
   # ---------------------------------------------------------------- retraites et social
   petites_retraites:
-    valeur: {id: RN-RET-02, libelle: "Petites retraites revalorisées (minimum vieillesse à 1 000 € déjà atteint)", poste: retraites, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: RN-RET-02, hors_prelevements: true, libelle: "Petites retraites revalorisées (minimum vieillesse à 1 000 € déjà atteint)", poste: retraites, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: 1.0, prudent: 0.8, median: 0.6, optimiste: 0.4}}
     unite: md_eur
     annee_euros: 2026
@@ -294,7 +294,7 @@ le_pen_canaux:
     unite: sans_unite
     statut: DECISION
     source: "Canal commun du nouveau nucléaire (moteur/nucleaire.py, 27/11/2026) : décision d'Adrien, intégrer les EPR livrés, le prix de l'électricité et la décarbonation"
-    note: "RN : « nucléaire relancé : 6 à 14 réacteurs » : milieu de la fourchette, 10 EPR2 en tout (lecture à valider) ; cadence commune."
+    note: "RN : « nucléaire relancé : 6 à 14 réacteurs » : milieu de la fourchette, 10 EPR2 en tout (lecture validée par Adrien le 28/11/2026) ; cadence commune."
   fraude:
     valeur: {agents: non_chiffre, debut: 2028, plein: 2032}
     unite: sans_unite

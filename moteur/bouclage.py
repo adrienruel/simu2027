@@ -137,6 +137,11 @@ def profil_demande(p, cle: str, incidence: str = "") -> dict:
                  for t in e if t >= 2029} if "emplois" in of else {}
     em = p.val("bouclage.emplois_mesange")[cle]
     emplois = [_interp(em, i) * 1000 - offre_emp.get(2027 + i, offre_emp.get(2073, 0.0) if i > 46 else 0.0) for i in range(n)]
+    # G9 (28/11/2026, décision d'Adrien) : fourchette Mésange – FR-BDF dans l'incertitude seulement. Le facteur est lu
+    # dans la colonne médiane, que le Monte Carlo tire ; publié : 1 dans tous les scénarios (Mésange).
+    ech = p.val("bouclage.echelle_profils_impots", "median")
+    if ech != 1.0:
+        pib, emplois = [ech * v for v in pib], [ech * v for v in emplois]
     cache[k] = {"pib": pib, "prix": prix, "emplois": emplois}
     return cache[k]
 

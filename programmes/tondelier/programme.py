@@ -288,6 +288,8 @@ class Tondelier:
                 liste.append(Mesure(f"{x['id']} — {x['libelle']}", x["poste"], serie, note=nom.split(".")[1],
                                     instrument=x.get("instrument", ""), incidence=x.get("incidence", ""),
                                     enfants=x.get("enfants")))
+                from moteur import bibliotheque as _bib
+                liste.extend(_bib.prelevements_pensions(p, s, x, serie, nom.split(".")[1]))
                 if x.get("deductible_is"):
                     rc = p.val("entreprises.retour_is_charges")
                     part = 1.0 if x["deductible_is"] is True else float(x["deductible_is"])

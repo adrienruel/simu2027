@@ -13,7 +13,6 @@ arthaud_mesures.pensions_indexees
 attal_enveloppe.annonce
 attal_mesures.geothermie
 attal_mesures.per_naissance
-bertrand_enveloppe.annonce
 bouclage.emplois_mesange
 bouclage.energie_importee
 bouclage.exterieur

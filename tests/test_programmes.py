@@ -35,7 +35,8 @@ def test_hypotheses_communes_sans_mesure_du_programme():
     # roadmap du moteur R3.1 (26/11/2026) : baisse de l'écart de taux au point fixe, option de modèle commune (désactivée)
     # 27/11/2026 : facteurs de scénario du barème de l'assurance chômage, 2027-2028 projetées (D3), BCE hors du calcul,
     # réaction des marchés en variante (décisions d'Adrien)
-    assert decisions == ["assurance_chomage.facteurs", "bouclage.bce", "calendrier.croissance_2027_2028", "calendrier.inflation", "demographie.conge_part_soutien", "demographie.ecole_cohortes",
+    assert decisions == ["assurance_chomage.facteurs", "bouclage.bce", "bouclage.echelle_profils_impots",
+                         "calendrier.croissance_2027_2028", "calendrier.inflation", "demographie.conge_part_soutien", "demographie.ecole_cohortes",
                          "demographie.scenario_fecondite",
                          "demographie.taux_emploi_tendance", "dividendes.ecart_prelevement_salaire_dividende",
                          "emploi.depenses_chomage_programme",

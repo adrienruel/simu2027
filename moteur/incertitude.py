@@ -257,7 +257,7 @@ def un_tirage(i: int, graine: int, rho: float, noms: list[str], base: Parametres
 
 
 # programmes publiés qui proposent un fonds de capitalisation (outils/variante_fonds_apu.PROGRAMMES)
-FONDS = ("philippe", "retailleau", "bertrand", "zemmour", "le_pen")
+FONDS = ("philippe", "retailleau", "zemmour", "le_pen")  # Bertrand retiré le 28/11/2026
 SUFFIXE_FONDS = "@fonds_apu"
 
 

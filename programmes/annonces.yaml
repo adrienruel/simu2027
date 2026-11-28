@@ -39,11 +39,6 @@ annonces:
   type: economies
   montant: 140
   source: "Contre-budget du 6 octobre 2026 (Public Sénat, AFP)"
-- programme: bertrand
-  libelle: "20 Md€ d'économies par an pendant cinq ans"
-  type: economies
-  montant: 100
-  source: "L'Opinion (19/08/2026)"
 - programme: zemmour
   libelle: "Plan de Sarah Knafo : « 140 Md€ par an au minimum »"
   type: mesures

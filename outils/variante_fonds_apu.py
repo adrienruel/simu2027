@@ -16,7 +16,7 @@ from moteur.parametres import Parametres
 RACINE = Path(__file__).resolve().parents[1]
 ANS = (2029, 2037, 2050, 2073)
 # Programmes publiés qui proposent un fonds de capitalisation.
-PROGRAMMES = ("philippe", "retailleau", "bertrand", "zemmour", "le_pen")
+PROGRAMMES = ("philippe", "retailleau", "zemmour", "le_pen")  # Bertrand retiré le 28/11/2026
 
 
 def calcul(nom: str, p: Parametres | None = None) -> dict:

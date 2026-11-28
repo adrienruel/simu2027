@@ -92,9 +92,9 @@ statu_quo:
   baremes_salaires:
     valeur: prix
     unite: sans_unite
-    statut: HYPOTHESE
+    statut: DECISION
     source: "Législation : barème de l'impôt sur le revenu revalorisé chaque année par la loi de finances sur l'inflation hors tabac (art. 2 des lois de finances) ; même convention que statu_quo.baremes_retraites (DÉCISION d'Adrien du 04/11/2026 : la loi actuelle, sur les prix)"
-    note: "Roadmap 1.1 et décision G3 (à confirmer par Adrien). prix : barème de l'impôt sur le revenu revalorisé sur les prix ; quand le salaire réel monte, l'impôt des salariés monte plus vite que la masse salariale (statu_quo.derive_ir_salaires). salaires : barème qui suit la croissance (convention avant le 21/11/2026), sans dérive. Cotisations et CSG proportionnelles dans les deux cas."
+    note: "Roadmap 1.1 et décision G3, confirmée par Adrien le 28/11/2026 (prix, règle légale). prix : barème de l'impôt sur le revenu revalorisé sur les prix ; quand le salaire réel monte, l'impôt des salariés monte plus vite que la masse salariale (statu_quo.derive_ir_salaires). salaires : barème qui suit la croissance (convention avant le 21/11/2026), sans dérive. Cotisations et CSG proportionnelles dans les deux cas."
 
   elasticite_ir_salaires:
     url: "https://one.oecd.org/document/ECO/WKP(2015)93/en/pdf"

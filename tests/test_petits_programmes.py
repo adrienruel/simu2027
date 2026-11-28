@@ -19,7 +19,9 @@ def p():
 
 @pytest.mark.parametrize("nom", PETITS)
 def test_programme_disponible_et_chiffre(nom, p):
-    assert nom in noyau.programmes_disponibles()
+    # Bertrand : retiré du comparateur le 28/11/2026 (plus en campagne), gardé comme programme de test
+    assert nom in noyau.programmes_disponibles(tous=True)
+    assert (nom in noyau.programmes_disponibles()) == (nom != "bertrand")
     prog = noyau.charger(nom)
     res = noyau.simuler(p, prog)
     assert set(res) == set(sq.SCENARIOS)

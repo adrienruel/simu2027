@@ -342,11 +342,11 @@ melenchon_mesures:
     note: "Arbitrage : seuil appliqué au niveau de vie du ménage (définition de l'Insee), pas au revenu individuel ; un seuil individuel (« individualisation des droits », p. 72) coûterait plusieurs fois plus. Remplace la hausse « immédiate » des minima sociaux (p. 57). Les allocataires de l'AAH (portée au SMIC) sont au-dessus du seuil. Suit les salaires (seuil de pauvreté) : moteur « salaire » depuis le 27/11/2026 (analyse indépendante : « bloc:pauvrete » restait à plat, −1,8 Md€ en 2037 et −6,2 Md€ en 2050)."
   garantie_jeunes:
     valeur: {id: LFI-PRE-02, instrument: transferts_actifs, libelle: "Garantie d'autonomie pour les jeunes détachés du foyer fiscal de leurs parents", poste: pauvrete, moteur: "salaire", debut: 2028, plein: 2030,
-             montant: {crise: 12.0, prudent: 10.0, median: 8.0, optimiste: 6.0}}
+             montant: {crise: 15.7, prudent: 13.7, median: 11.7, optimiste: 9.7}}
     unite: md_eur
     annee_euros: 2026
-    statut: HYPOTHESE
-    source: "Encadrement : Institut Montaigne (2022) : 14,8 Md€ pour la même mesure au seuil de 1 063 € ; ≈ 1,2 million de 18-24 ans vivant seuls ou en couple hors du foyer parental avec des revenus faibles (Insee, DREES, enquête nationale sur les ressources des jeunes) ; une partie est déjà comptée dans la garantie d'autonomie (jeunes en ménages ordinaires)"
+    statut: DECISION
+    source: "Recalé le 28/11/2026 sur la microsimulation (DÉCISION d'Adrien, contrôle micro/macro : 13,7 Md€ au seuil du programme, 1 337 €, sur la population synthétique ; outils/openfisca_mesures.py), même écart entre scénarios qu'avant (avant : 12 / 10 / 8 / 6). Encadrement : Institut Montaigne (2022) : 14,8 Md€ pour la même mesure au seuil de 1 063 € ; ≈ 1,2 million de 18-24 ans vivant seuls ou en couple hors du foyer parental avec des revenus faibles (Insee, DREES, enquête nationale sur les ressources des jeunes) ; une partie est déjà comptée dans la garantie d'autonomie (jeunes en ménages ordinaires)"
     note: "Rattachement au foyer fiscal des parents abandonné pour en bénéficier : demi-part perdue par les parents (non comptée, prudent)."
   aah_smic:
     valeur: {id: LFI-PRE-03, instrument: transferts_actifs, libelle: "AAH portée au niveau du SMIC (1 700 € net)", poste: aah_invalidite, moteur: "bloc:aah_invalidite", debut: 2028, plein: 2029,
@@ -443,7 +443,7 @@ melenchon_mesures:
     source: "Encadrement : DREES, Les retraités et les retraites 2025 : ≈ 9 à 10 millions de retraités à carrière complète ; pension moyenne nette de droit direct ≈ 1 530 € ; environ 45 % des carrières complètes sous ≈ 1 680 € net (SMIC de 1 700 € en euros de 2026), écart moyen ≈ 350 € par mois : 4,3 millions × 350 € × 12 ≈ 18 Md€ ; plus les agriculteurs et indépendants (pensions plus basses) et la hausse des pensions au voisinage du seuil"
     note: "Suit le SMIC, donc les salaires (moteur pib), quand les pensions suivent les prix : l'écart se creuse avec le temps, en partie compensé par des pensions plus élevées des générations suivantes."
   minimum_vieillesse:
-    valeur: {id: LFI-RET-04, libelle: "Minimum vieillesse (ASPA) porté au seuil de pauvreté", poste: retraites, moteur: pib, debut: 2028, plein: 2029,
+    valeur: {id: LFI-RET-04, hors_prelevements: true, libelle: "Minimum vieillesse (ASPA) porté au seuil de pauvreté", poste: retraites, moteur: pib, debut: 2028, plein: 2029,
              montant: {crise: 3.6, prudent: 3.4, median: 3.2, optimiste: 3.0}}
     unite: md_eur
     annee_euros: 2026
