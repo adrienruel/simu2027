@@ -1,20 +1,20 @@
 programme,scenario,annee,deficit_publie,deficit_fonds_apu,dette_pib_publiee,dette_pib_fonds_apu,deplace_md
 Philippe (Horizons),crise,2029,6.73,6.73,127.4,127.4,0.0
 Philippe (Horizons),crise,2037,11.8,11.4,187.3,185.2,-10.4
-Philippe (Horizons),crise,2050,19.77,19.11,343.9,335.7,-10.8
-Philippe (Horizons),crise,2073,58.69,57.13,1100.0,1069.8,-9.9
+Philippe (Horizons),crise,2050,19.77,19.11,344.0,335.7,-10.8
+Philippe (Horizons),crise,2073,58.71,57.14,1100.2,1070.0,-9.9
 Philippe (Horizons),prudent,2029,6.28,6.28,126.6,126.6,0.0
-Philippe (Horizons),prudent,2037,8.37,8.05,157.7,156.0,-8.7
-Philippe (Horizons),prudent,2050,12.61,12.11,237.6,231.7,-9.4
-Philippe (Horizons),prudent,2073,28.11,27.15,539.1,521.4,-10.0
+Philippe (Horizons),prudent,2037,8.37,8.06,157.7,156.0,-8.7
+Philippe (Horizons),prudent,2050,12.61,12.12,237.7,231.7,-9.4
+Philippe (Horizons),prudent,2073,28.13,27.17,539.4,521.7,-10.0
 Philippe (Horizons),median,2029,5.86,5.86,125.9,125.9,0.0
 Philippe (Horizons),median,2037,5.98,5.74,140.0,138.8,-6.8
-Philippe (Horizons),median,2050,6.59,6.22,166.5,162.2,-7.7
-Philippe (Horizons),median,2073,12.55,11.88,268.4,256.6,-8.7
+Philippe (Horizons),median,2050,6.6,6.24,166.6,162.3,-7.7
+Philippe (Horizons),median,2073,12.57,11.9,268.8,256.9,-8.7
 Philippe (Horizons),optimiste,2029,5.24,5.24,124.7,124.7,0.0
-Philippe (Horizons),optimiste,2037,3.86,3.7,123.5,122.7,-4.6
-Philippe (Horizons),optimiste,2050,3.3,3.06,121.2,118.4,-5.2
-Philippe (Horizons),optimiste,2073,3.14,2.72,117.7,110.5,-6.3
+Philippe (Horizons),optimiste,2037,3.87,3.71,123.5,122.8,-4.6
+Philippe (Horizons),optimiste,2050,3.32,3.08,121.4,118.6,-5.2
+Philippe (Horizons),optimiste,2073,3.17,2.76,118.3,111.1,-6.3
 Retailleau (Les Républicains),crise,2029,6.6,6.6,127.3,127.3,-0.0
 Retailleau (Les Républicains),crise,2037,10.77,10.76,180.2,180.2,-0.2
 Retailleau (Les Républicains),crise,2050,17.67,17.64,315.8,315.6,-0.5
@@ -31,22 +31,6 @@ Retailleau (Les Républicains),optimiste,2029,5.37,5.37,124.6,124.6,-0.0
 Retailleau (Les Républicains),optimiste,2037,4.27,4.26,124.7,124.7,-0.2
 Retailleau (Les Républicains),optimiste,2050,4.0,3.98,128.0,127.8,-0.6
 Retailleau (Les Républicains),optimiste,2073,5.41,5.35,147.7,146.9,-1.4
-Bertrand (Nous France),crise,2029,6.08,6.08,126.7,126.7,-0.0
-Bertrand (Nous France),crise,2037,9.6,9.59,172.6,172.5,-0.2
-Bertrand (Nous France),crise,2050,15.04,15.01,283.5,283.3,-0.5
-Bertrand (Nous France),crise,2073,44.04,43.96,819.5,818.2,-0.9
-Bertrand (Nous France),prudent,2029,5.96,5.96,126.2,126.2,-0.0
-Bertrand (Nous France),prudent,2037,7.24,7.23,150.2,150.2,-0.2
-Bertrand (Nous France),prudent,2050,10.14,10.11,207.7,207.5,-0.5
-Bertrand (Nous France),prudent,2073,23.31,23.24,442.9,441.9,-1.1
-Bertrand (Nous France),median,2029,5.79,5.79,125.9,125.9,-0.0
-Bertrand (Nous France),median,2037,5.85,5.84,138.4,138.4,-0.2
-Bertrand (Nous France),median,2050,6.27,6.25,161.4,161.2,-0.6
-Bertrand (Nous France),median,2073,12.71,12.64,261.1,260.2,-1.3
-Bertrand (Nous France),optimiste,2029,5.47,5.46,125.0,125.0,-0.0
-Bertrand (Nous France),optimiste,2037,4.9,4.89,129.2,129.2,-0.2
-Bertrand (Nous France),optimiste,2050,5.17,5.15,141.4,141.2,-0.6
-Bertrand (Nous France),optimiste,2073,7.64,7.58,184.3,183.4,-1.4
 Zemmour (Reconquête),crise,2029,9.01,9.01,132.1,132.1,-0.0
 Zemmour (Reconquête),crise,2037,14.24,14.23,211.3,211.2,-0.2
 Zemmour (Reconquête),crise,2050,24.15,24.13,409.8,409.6,-0.5
@@ -64,18 +48,18 @@ Zemmour (Reconquête),optimiste,2037,4.71,4.71,127.0,127.0,-0.2
 Zemmour (Reconquête),optimiste,2050,4.92,4.9,138.8,138.7,-0.6
 Zemmour (Reconquête),optimiste,2073,7.24,7.17,180.3,179.4,-1.4
 Le Pen (Rassemblement national) — partiel,crise,2029,8.18,8.18,130.7,130.7,-0.0
-Le Pen (Rassemblement national) — partiel,crise,2037,13.97,13.96,203.7,203.7,-0.2
-Le Pen (Rassemblement national) — partiel,crise,2050,23.26,23.23,388.6,388.4,-0.5
-Le Pen (Rassemblement national) — partiel,crise,2073,67.26,67.17,1254.5,1253.1,-0.9
+Le Pen (Rassemblement national) — partiel,crise,2037,13.96,13.95,203.7,203.7,-0.2
+Le Pen (Rassemblement national) — partiel,crise,2050,23.24,23.21,388.5,388.3,-0.5
+Le Pen (Rassemblement national) — partiel,crise,2073,67.19,67.1,1253.5,1252.1,-0.9
 Le Pen (Rassemblement national) — partiel,prudent,2029,7.52,7.52,128.8,128.8,-0.0
 Le Pen (Rassemblement national) — partiel,prudent,2037,10.46,10.45,171.0,171.0,-0.2
-Le Pen (Rassemblement national) — partiel,prudent,2050,15.85,15.83,276.3,276.1,-0.5
-Le Pen (Rassemblement national) — partiel,prudent,2073,35.46,35.39,663.5,662.4,-1.1
+Le Pen (Rassemblement national) — partiel,prudent,2050,15.84,15.82,276.3,276.1,-0.5
+Le Pen (Rassemblement national) — partiel,prudent,2073,35.43,35.36,663.1,662.0,-1.1
 Le Pen (Rassemblement national) — partiel,median,2029,7.07,7.07,127.9,127.9,-0.0
-Le Pen (Rassemblement national) — partiel,median,2037,8.34,8.33,154.3,154.3,-0.2
-Le Pen (Rassemblement national) — partiel,median,2050,10.25,10.23,209.1,208.9,-0.6
-Le Pen (Rassemblement national) — partiel,median,2073,20.32,20.25,397.0,396.1,-1.3
+Le Pen (Rassemblement national) — partiel,median,2037,8.33,8.33,154.3,154.3,-0.2
+Le Pen (Rassemblement national) — partiel,median,2050,10.25,10.22,209.1,208.9,-0.6
+Le Pen (Rassemblement national) — partiel,median,2073,20.3,20.23,396.8,395.8,-1.3
 Le Pen (Rassemblement national) — partiel,optimiste,2029,6.47,6.47,126.7,126.7,-0.0
 Le Pen (Rassemblement national) — partiel,optimiste,2037,6.8,6.79,141.7,141.7,-0.2
-Le Pen (Rassemblement national) — partiel,optimiste,2050,7.98,7.96,175.7,175.5,-0.6
-Le Pen (Rassemblement national) — partiel,optimiste,2073,12.22,12.15,267.5,266.6,-1.4
+Le Pen (Rassemblement national) — partiel,optimiste,2050,7.98,7.95,175.7,175.5,-0.6
+Le Pen (Rassemblement national) — partiel,optimiste,2073,12.21,12.14,267.4,266.5,-1.4

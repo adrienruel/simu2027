@@ -1,9 +1,4 @@
 programme,mesure,openfisca_md,moteur_md,ecart_pct,hors_seuil
-bertrand,BER-ECO-01,3.0,2.44,23,0
-bertrand,BER-RET-01,9.4,5.62,67,1
-bertrand,BER-RET-02,0.0,-0.27,,0
-bertrand,BER-FIS-01,-10.17,-9.52,7,0
-bertrand,BER-FIS-02,1.36,0.34,,0
 tondelier,PRE-14,-5.5,-5.5,0,0
 tondelier,COT-03,3.0,3.0,0,0
 tondelier,REC-42,2.0,2.0,0,0
@@ -12,7 +7,7 @@ tondelier,RET-01,-22.8,-21.58,6,0
 tondelier,REC-13,6.29,5.85,8,0
 tondelier,PRE-11,-1.45,-1.7,-15,0
 tondelier,PRE-10,-4.78,-6.6,-28,0
-tondelier,RET-04,5.0,3.4,47,1
+tondelier,RET-04,5.0,5.98,-16,0
 tondelier,REC-04/05/06/07,4.0,4.45,-10,0
 tondelier,REC-41,-2.8,-2.8,0,0
 tondelier,REC-03,2.0,2.0,0,0
@@ -26,7 +21,7 @@ tondelier,REC-45,2.0,2.0,0,0
 tondelier,REC-37,8.25,15.02,-45,1
 tondelier,PRE-15,-5.24,-6.51,-20,0
 tondelier,REC-11,-10.17,-9.42,8,0
-tondelier,REC-20/21,2.04,3.71,-45,1
+tondelier,REC-20/21,4.85,3.71,31,1
 tondelier,PRE-13,-3.87,-4.4,-12,0
 tondelier,RET-03,-3.2,-3.49,-8,0
 lisnard,LIS-FIS-02,-1.0,-1.0,0,0
@@ -38,7 +33,7 @@ lisnard,LIS-EMP-04,0.81,1.0,-19,0
 lisnard,LIS-SOC-01,-6.46,-4.34,49,1
 lisnard,LIS-ECO-03,2.54,2.58,-1,0
 lisnard,LIS-ECO-03b,1.6,2.2,-27,0
-lisnard,LIS-RET-01,15.31,9.47,62,1
+lisnard,LIS-RET-01,15.31,17.58,-13,0
 roussel,PCF-FIS-02,5.0,5.0,0,0
 roussel,PCF-FIS-01,2.5,2.5,0,0
 roussel,PCF-FIS-06,-2.5,-2.5,0,0
@@ -59,7 +54,7 @@ melenchon,LFI-REC-01,-7.6,-7.3,4,0
 melenchon,LFI-SAL-01,23.72,-13.07,-281,1
 melenchon,LFI-COL-05,-8.55,-6.85,25,0
 melenchon,LFI-REC-06,5.0,5.0,0,0
-melenchon,LFI-RET-03,-16.5,-22.0,-25,0
+melenchon,LFI-RET-03,-16.5,-19.37,-15,0
 melenchon,LFI-PRE-03,-10.56,-11.5,-8,0
 melenchon,LFI-REC-02,6.94,6.0,16,0
 melenchon,LFI-RET-04,-3.9,-3.4,15,0
@@ -67,7 +62,7 @@ melenchon,LFI-REC-23,1.8,1.8,0,0
 melenchon,LFI-REC-05,2.5,2.5,0,0
 melenchon,LFI-RET-01,-49.71,-42.18,18,0
 melenchon,LFI-PRE-01,-33.1,-28.0,18,0
-melenchon,LFI-PRE-02,-13.65,-9.98,37,1
+melenchon,LFI-PRE-02,-13.65,-13.68,0,0
 le_pen,RN-FIS-06,-1.7,-1.89,-10,0
 le_pen,RN-FIS-05,-0.5,-0.5,0,0
 le_pen,RN-EMP-02,-0.5,-0.5,0,0
@@ -88,7 +83,7 @@ philippe,PHI-RET-01,9.4,8.65,9,0
 philippe,PHI-FIS-02,-1.75,-1.44,22,0
 philippe,PHI-SOC-01,-7.38,-7.0,5,0
 philippe,PHI-SOC-06,2.34,0.39,,0
-arthaud,ART-RET-01,-3.84,-5.5,-30,1
+arthaud,ART-RET-01,-3.84,-4.84,-21,0
 arthaud,ART-ENE-02,-1.5,-1.5,0,0
 arthaud,ART-FAM-01,-0.47,-0.6,-22,0
 arthaud,ART-ECO-01,95.74,-41.3,-332,1

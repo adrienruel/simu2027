@@ -22,12 +22,8 @@ expliques:
   le_pen.RN-FAM-01: "Population : 4,5 Md€ d'allocation de soutien familial de base, contre ≈ 3,3 Md€ attendus en 2026 (Cnaf : 3,1 Md€ pour 909 000 familles en 2024) : le nombre de familles est calé, mais elles ont trop d'enfants à charge. Le moteur (3,2 Md€ pour un doublement) suit la Cnaf. Revu le 28/11/2026."
   zemmour.ZEM-KNA-04: "Scénarios : la micro donne l'effet statique (2,3 Md€), proche du médian du moteur (2,2) ; le prudent (1,5) compte des sorties vers l'aide sociale des départements et des contentieux. La micro chiffre la mesure seule, avant l'exclusion des étrangers (ZEM-IMM-04). Revu le 28/11/2026."
   lisnard.LIS-SOC-01: "DÉCISION d'Adrien du 28/11/2026 : montant gardé à 4,3 Md€ (haut de l'encadrement des Voies et moyens, 3 à 4 Md€) ; la micro, à 6,5 Md€ depuis le recalage de la population du 26/11, est hors de cet encadrement."
+  tondelier.REC-20/21: "Comportements : la micro donne l'effet statique (4,9 Md€, CSG du capital corrigée le 28/11/2026) ; le moteur (3,7) applique la règle commune de la réponse des dividendes au taux net (moteur/capital_dirigeants.recette_pfu). Revu le 28/11/2026."
 
-a_expliquer:
-  # À revoir après la régénération du 28/11/2026 (corrections du contrôle) : si l'écart passe sous 30 %, l'entrée
-  # disparaît ; sinon elle reçoit une raison.
-  - lisnard.LIS-RET-01
-  - tondelier.RET-04
-  - arthaud.ART-RET-01
-  - melenchon.LFI-PRE-02
-  - tondelier.REC-20/21
+a_expliquer: []
+# Vidé le 28/11/2026 : LIS-RET-01 (−13 %), RET-04 (−16 %), ART-RET-01 (−21 %) et LFI-PRE-02 (0 %) sont revenus sous
+# 30 % après les corrections ; les autres ont reçu une raison.

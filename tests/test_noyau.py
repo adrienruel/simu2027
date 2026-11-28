@@ -64,8 +64,9 @@ def test_regle_generique_du_noyau(p):
 def test_programmes_disponibles():
     """Le comparateur prend le statu quo et les programmes de programmes/publies.yaml."""
     noms = noyau.programmes_disponibles()
-    assert noms[0] == "statu_quo" and len(noms) == 13
-    assert set(noyau.programmes_disponibles(tous=True)) == set(noms)
+    assert noms[0] == "statu_quo" and len(noms) == 12
+    # Bertrand : retiré le 28/11/2026 (plus en campagne), gardé comme programme de test
+    assert set(noyau.programmes_disponibles(tous=True)) == set(noms) | {"bertrand"}
 
 
 def test_variante_fonds_commune_aux_programmes(p):

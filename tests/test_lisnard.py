@@ -67,4 +67,5 @@ def test_retraite_a_65_ans_et_desindexation(p, prog):
     c = prog.contexte(p)["prudent"]["emplois_canaux"][2040]
     assert c["Seniors : emploi (âge de la retraite)"] > 30000
     d = next(x for x in prog.mesures(p)["prudent"] if x.nom.startswith("LIS-RET-01 — pensions"))
-    assert -15 < d.valeurs[2032] < -5 and abs(d.valeurs[2060]) < 0.3 * abs(d.valeurs[2032])
+    # 28/11/2026 : 65 % de la masse des pensions au-delà de 2 000 € (DÉCISION d'Adrien, avant 35 %) : ≈ −20 Md€ en 2032
+    assert -25 < d.valeurs[2032] < -15 and abs(d.valeurs[2060]) < 0.3 * abs(d.valeurs[2032])

@@ -87,10 +87,10 @@ tondelier,REC-11,crise,5331,0.119,-10.173
 tondelier,REC-11,prudent,7997,0.179,-10.173
 tondelier,REC-11,median,20238,0.451,-10.173
 tondelier,REC-11,optimiste,38113,0.846,-10.173
-tondelier,REC-20/21,crise,5,-0.001,2.043
-tondelier,REC-20/21,prudent,7,-0.001,2.043
-tondelier,REC-20/21,median,18,-0.003,2.043
-tondelier,REC-20/21,optimiste,35,-0.006,2.043
+tondelier,REC-20/21,crise,5,-0.001,4.847
+tondelier,REC-20/21,prudent,7,-0.001,4.847
+tondelier,REC-20/21,median,18,-0.003,4.847
+tondelier,REC-20/21,optimiste,35,-0.006,4.847
 tondelier,PRE-13,crise,-900,-0.018,-3.865
 tondelier,PRE-13,prudent,-476,-0.01,-3.865
 tondelier,PRE-13,median,-188,-0.004,-3.865

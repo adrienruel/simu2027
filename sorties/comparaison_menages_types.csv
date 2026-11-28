@@ -32,17 +32,6 @@ Attal (Renaissance)|couple_deux_medians,Attal (Renaissance),couple_deux_medians,
 Attal (Renaissance)|couple_cadre_median_deux_enfants,Attal (Renaissance),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,81083.0,2620.0,218.0,3.34,2
 Attal (Renaissance)|retraite_seul,Attal (Renaissance),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,2
 Attal (Renaissance)|couple_retraites,Attal (Renaissance),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38296.0,0.0,0.0,0.0,2
-Bertrand (Nous France)|jeune_smic,Bertrand (Nous France),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,20055.0,-109.0,-9.0,-0.54,5
-Bertrand (Nous France)|seul_smic,Bertrand (Nous France),seul_smic,Personne seule au SMIC,1,20165.0,20165.0,0.0,0.0,0.0,5
-Bertrand (Nous France)|seul_median,Bertrand (Nous France),seul_median,"Personne seule, salaire médian",2,25027.0,25398.0,371.0,31.0,1.48,5
-Bertrand (Nous France)|seul_cadre,Bertrand (Nous France),seul_cadre,"Personne seule, cadre (100 000 € de coût employeur)",3,47275.0,47635.0,360.0,30.0,0.76,5
-Bertrand (Nous France)|parent_isole_smic,Bertrand (Nous France),parent_isole_smic,"Parent isolé au SMIC, un enfant de 8 ans",4,26516.0,26516.0,0.0,0.0,0.0,5
-Bertrand (Nous France)|couple_deux_smic_deux_enfants,Bertrand (Nous France),couple_deux_smic_deux_enfants,"Couple, deux SMIC, deux enfants (6 et 10 ans)",5,41945.0,41945.0,0.0,0.0,0.0,5
-Bertrand (Nous France)|couple_median_inactif_deux_enfants,Bertrand (Nous France),couple_median_inactif_deux_enfants,"Couple, un salaire médian et un conjoint sans emploi, deux enfants (6 et 10 ans)",6,35297.0,35297.0,0.0,0.0,0.0,5
-Bertrand (Nous France)|couple_deux_medians,Bertrand (Nous France),couple_deux_medians,"Couple, deux salaires médians, sans enfant",7,49744.0,50488.0,744.0,62.0,1.5,5
-Bertrand (Nous France)|couple_cadre_median_deux_enfants,Bertrand (Nous France),couple_cadre_median_deux_enfants,"Couple, un cadre (100 000 €) et un salaire médian, deux enfants (6 et 10 ans)",8,78462.0,79182.0,720.0,60.0,0.92,5
-Bertrand (Nous France)|retraite_seul,Bertrand (Nous France),retraite_seul,"Retraité seul, pension de 1 700 € bruts par mois",9,19523.0,19523.0,0.0,0.0,0.0,5
-Bertrand (Nous France)|couple_retraites,Bertrand (Nous France),couple_retraites,"Couple de retraités, pensions de 2 200 € et 1 300 € bruts par mois",10,38296.0,38674.0,378.0,32.0,0.99,5
 Glucksmann (Place publique)|jeune_smic,Glucksmann (Place publique),jeune_smic,"Jeune salarié au SMIC, 24 ans, entré sur le marché du travail",0,20165.0,21534.0,1370.0,114.0,6.79,10
 Glucksmann (Place publique)|seul_smic,Glucksmann (Place publique),seul_smic,Personne seule au SMIC,1,20165.0,21534.0,1370.0,114.0,6.79,10
 Glucksmann (Place publique)|seul_median,Glucksmann (Place publique),seul_median,"Personne seule, salaire médian",2,25027.0,25545.0,518.0,43.0,2.07,10

@@ -7,7 +7,7 @@ tondelier,RET-01,-22.8,0.0,,-1.6,0.0,-0.21,-0.2,0.0,-0.09,0.0,-0.03,-0.69,-0.72,
 tondelier,REC-13,6.29,5.5,14,-0.2,-0.0,0.0,0.0,0.0,-0.12,0.0,0.0,0.0,5.13,0.96,
 tondelier,PRE-11,-1.45,-1.7,-15,-13.8,-0.22,-0.0,-0.04,0.0,1.49,0.0,0.0,0.0,0.0,0.0,
 tondelier,PRE-10,-4.78,-6.6,-28,-151.0,-3.32,4.77,-0.18,0.0,0.08,0.0,0.0,0.0,0.0,0.0,"Garantie d'autonomie à 50 % du SMIC net (≈ 790 € contre ≈ 660 € : + 20 %) à la place du RSA, dès 18 ans. Recours : celui du RSA (le programme dit « sans contrepartie », le recours pourrait être plus haut)."
-tondelier,RET-04,5.0,3.5,43,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-1.46,-0.7,"Pensions de plus de 2 000 € brut revalorisées 0,5 point sous l'inflation de 2028 à 2032 : − 2,5 % de niveau, qui s'éteint ensuite avec ces retraités."
+tondelier,RET-04,5.0,7.0,-29,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-1.46,-0.7,"Pensions de plus de 2 000 € brut revalorisées 0,5 point sous l'inflation de 2028 à 2032 : − 2,5 % de niveau, qui s'éteint ensuite avec ces retraités."
 tondelier,REC-04/05/06/07,4.0,4.0,0,1.0,-0.05,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
 tondelier,REC-41,-2.8,-2.8,0,0.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon la dépense des déciles pour les postes 0451 (Budget de famille 2017) ; postes approchés."
 tondelier,REC-03,2.0,2.0,0,0.1,-0.03,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Derniers trous (22/11/2026), règle commune : montant du moteur réparti selon le patrimoine net moyen des tranches P90_95, P95_99, P99 (Histoire de vie et Patrimoine 2020-2021)."
@@ -21,6 +21,6 @@ tondelier,REC-45,2.0,2.0,0,-0.1,-0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Derni
 tondelier,REC-37,8.25,16.5,-50,-0.0,-0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"Derniers trous (22/11/2026) : allègements des employeurs au-delà de 1,6 SMIC supprimés (bandeaux maladie et famille, jusqu'à 3,5 SMIC) : à court terme, rien pour les ménages ; à long terme, la moitié du montant du moteur sur les salaires de la bande (entreprises.incidence_menages.salaires). Heures supplémentaires : la population n'a pas les heures."
 tondelier,PRE-15,-5.24,-6.5,-19,-0.6,-0.02,-0.02,-0.0,0.0,-0.14,0.0,-0.0,0.0,0.93,0.14,"Roadmap 3.4 (22/11/2026) : la population n'a ni la durée d'indemnisation ni l'ancienneté ; le montant du moteur (à plein effet) se répartit au prorata de l'allocation des chômeurs. L'emploi passe par le canal de l'assurance chômage du programme, pas par la micro."
 tondelier,REC-11,-10.17,-9.3,9,8.0,0.18,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-10.17,0.0,
-tondelier,REC-20/21,2.04,3.71,-45,0.0,-0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.05,0.0,
+tondelier,REC-20/21,4.85,3.71,31,0.0,-0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.05,2.8,
 tondelier,PRE-13,-3.87,-4.4,-12,-0.5,-0.01,-0.0,-0.1,0.0,-0.0,0.0,-0.0,3.97,0.0,0.0,
 tondelier,RET-03,-3.2,-3.5,-9,-0.6,-0.02,-0.0,-0.0,0.0,0.01,0.0,3.19,0.0,0.0,0.0,ASPA au seuil de pauvreté (≈ 1 290 € par mois d'après la source du moteur) ; minimum contributif non codé (carrières inconnues).
