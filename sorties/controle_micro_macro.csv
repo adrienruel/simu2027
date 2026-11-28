@@ -44,7 +44,7 @@ roussel,PCF-FIS-01,2.5,2.5,0,0
 roussel,PCF-FIS-06,-2.5,-2.5,0,0
 roussel,PCF-FIS-07,-12.0,-12.0,0,0
 roussel,PCF-RET-01,-49.71,-42.18,18,0
-roussel,PCF-RET-03,-24.24,-26.25,-8,0
+roussel,PCF-RET-03,-24.24,-26.26,-8,0
 roussel,PCF-LOG-02,-0.73,-0.8,-9,0
 roussel,PCF-PRE-01,-0.68,-2.0,-66,1
 roussel,PCF-FIS-03,-9.86,-7.8,26,0
@@ -76,7 +76,7 @@ le_pen,RN-ENE-03,-2.6,-2.6,0,0
 le_pen,RN-FIS-01,-13.0,-13.0,0,0
 le_pen,RN-RET-01,-22.8,-21.58,6,0
 le_pen,RN-RET-03,0.0,-0.27,,0
-le_pen,RN-FIS-03,-4.21,-3.71,14,0
+le_pen,RN-FIS-03,-4.21,-3.71,13,0
 le_pen,RN-FAM-01,-4.47,-3.2,40,1
 le_pen,RN-IMM-01,1.6,1.98,-19,0
 philippe,PHI-SOC-07,-0.9,-0.83,8,0
@@ -85,7 +85,7 @@ philippe,PHI-FIS-05,-0.15,-0.17,,0
 philippe,PHI-EMP-06,-1.8,-1.8,0,0
 philippe,PHI-EMP-02,2.44,3.0,-19,0
 philippe,PHI-RET-01,9.4,8.65,9,0
-philippe,PHI-FIS-02,-1.75,-1.43,22,0
+philippe,PHI-FIS-02,-1.75,-1.44,22,0
 philippe,PHI-SOC-01,-7.38,-7.0,5,0
 philippe,PHI-SOC-06,2.34,0.39,,0
 arthaud,ART-RET-01,-3.84,-5.5,-30,1

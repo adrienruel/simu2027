@@ -16,7 +16,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 15,melenchon,LFI-RET-01,"Réforme de 2023 abrogée, puis retraite à 60 ans à taux plein pour 40 annuités",-1.2823,0,False,False,False,False,1.2823
 16,roussel,PCF-RET-01,"Retraite à 60 ans à taux plein, réforme de 2023 abrogée",-1.2823,0,False,False,False,False,1.2823
 17,bertrand,BER-FIS-01,Baisser l'impôt sur le revenu des premières tranches,-0.3136,3,True,True,False,True,1.2543
-18,tondelier,REC-11,Baisse de l'IR des tranches les plus basses,-0.31,3,True,True,False,True,1.2402
+18,tondelier,REC-11,Baisse de l'IR des tranches les plus basses,-0.3101,3,True,True,False,True,1.2404
 19,tondelier,FP-02,+10 % pour les catégories C et B et les catégories A ayant perdu du pouvoir d'achat ; enseignants +15 % sur le quinquennat ; chercheurs +10 % dès la première année,-0.5805,1,True,False,False,False,1.161
 20,tondelier,SAN-01,"Soins essentiels remboursés à 100 %, franchises supprimées, mutuelles cantonnées aux soins optionnels",-0.374,2,True,False,False,True,1.1221
 21,arthaud,ART-SP-01,Embauches massives dans les services publics,-0.2797,3,True,True,False,True,1.119
@@ -116,7 +116,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 115,zemmour,ZEM-RET-01,"Reporter l'âge de départ, introduire une part de capitalisation",0.2761,0,False,False,False,False,0.2761
 116,attal,ATT-EDU-01,"Enseignants +200 € net par mois, jusqu'à +500 € en milieu de carrière",-0.0904,2,True,True,False,False,0.2711
 117,melenchon,LFI-PRE-06,Congé d'accueil de 20 semaines par parent,-0.1352,1,True,False,False,False,0.2705
-118,lisnard,LIS-SOC-01,Quotient familial déplafonné,-0.1337,1,True,False,False,False,0.2673
+118,lisnard,LIS-SOC-01,Quotient familial déplafonné,-0.1335,1,True,False,False,False,0.2671
 119,arthaud,ART-INT-01,Opposition à la hausse du budget militaire,0.2663,0,False,False,False,False,0.2663
 120,melenchon,LFI-SAN-13,"Service public de la dépendance, métiers du grand âge revalorisés, maintien à domicile",-0.1324,1,True,False,False,False,0.2648
 121,lisnard,LIS-ECO-05,Subventions compensant les charges des entreprises supprimées,0.1317,1,True,False,False,False,0.2634
@@ -130,7 +130,7 @@ rang,programme,id,intitule,effet_prudent_pt_pib,fragilites,sans_source,lecture,n
 129,le_pen,RN-LOG-01,« 100 % Rénov' »,-0.1251,1,True,False,False,False,0.2502
 130,melenchon,LFI-EDU-07,Bâti scolaire rénové et adapté,-0.0823,2,True,False,False,True,0.2469
 131,melenchon,LFI-INV-03,Plan vélo rétabli ; leasing social,-0.0823,2,True,False,False,True,0.2469
-132,le_pen,RN-FIS-03,Impôt sur le revenu supprimé pour les moins de 30 ans (jusqu'à quatre SMIC),-0.1221,1,True,False,False,False,0.2443
+132,le_pen,RN-FIS-03,Impôt sur le revenu supprimé pour les moins de 30 ans (jusqu'à quatre SMIC),-0.1222,1,True,False,False,False,0.2443
 133,glucksmann,GLU-ECO-01,Porter le SMIC à 1 600 € net en deux ans,-0.2442,0,False,False,False,False,0.2442
 134,lisnard,LIS-RET-01,Capitalisation obligatoire amorcée par la désindexation des pensions au-delà de ≈ 2 000 €,0.2361,0,False,False,False,False,0.2361
 135,glucksmann,GLU-ENE-03,"Facture indexée sur le coût de production, hausse de taxe de 2024 annulée",-0.1176,1,True,False,False,False,0.2352

@@ -4,73 +4,73 @@ consommation_publique,FR-BDF,A2,0.89,0.3,-0.6
 consommation_publique,FR-BDF,A3,0.79,0.33,-0.61
 consommation_publique,FR-BDF,A5,0.61,0.28,-0.67
 consommation_publique,FR-BDF,A10,0.47,0.26,-0.73
-consommation_publique,simu2027 prudent,A1,0.836,0.108,-0.497
-consommation_publique,simu2027 prudent,A2,0.976,0.312,-0.389
-consommation_publique,simu2027 prudent,A3,0.905,0.356,-0.425
-consommation_publique,simu2027 prudent,A5,0.684,0.144,-0.583
-consommation_publique,simu2027 prudent,A10,0.418,-0.022,-0.763
-consommation_publique,simu2027 median,A1,0.839,0.11,-0.498
-consommation_publique,simu2027 median,A2,0.982,0.316,-0.39
-consommation_publique,simu2027 median,A3,0.914,0.363,-0.424
-consommation_publique,simu2027 median,A5,0.698,0.155,-0.578
-consommation_publique,simu2027 median,A10,0.434,-0.013,-0.758
+consommation_publique,simu2027 prudent,A1,0.823,0.113,-0.505
+consommation_publique,simu2027 prudent,A2,0.998,0.322,-0.376
+consommation_publique,simu2027 prudent,A3,0.971,0.37,-0.386
+consommation_publique,simu2027 prudent,A5,0.801,0.161,-0.514
+consommation_publique,simu2027 prudent,A10,0.489,-0.013,-0.721
+consommation_publique,simu2027 median,A1,0.823,0.113,-0.507
+consommation_publique,simu2027 median,A2,0.997,0.323,-0.38
+consommation_publique,simu2027 median,A3,0.971,0.372,-0.391
+consommation_publique,simu2027 median,A5,0.803,0.166,-0.517
+consommation_publique,simu2027 median,A10,0.5,-0.007,-0.72
 prestations,FR-BDF,A1,0.29,0.05,-0.75
 prestations,FR-BDF,A2,0.34,0.1,-0.72
 prestations,FR-BDF,A3,0.37,0.13,-0.7
 prestations,FR-BDF,A5,0.39,0.16,-0.68
 prestations,FR-BDF,A10,0.36,0.18,-0.67
-prestations,simu2027 prudent,A1,0.669,0.087,-0.596
-prestations,simu2027 prudent,A2,0.781,0.25,-0.507
-prestations,simu2027 prudent,A3,0.724,0.284,-0.536
-prestations,simu2027 prudent,A5,0.547,0.115,-0.664
-prestations,simu2027 prudent,A10,0.335,-0.018,-0.811
-prestations,simu2027 median,A1,0.671,0.088,-0.597
-prestations,simu2027 median,A2,0.786,0.253,-0.507
-prestations,simu2027 median,A3,0.731,0.29,-0.535
-prestations,simu2027 median,A5,0.559,0.124,-0.66
-prestations,simu2027 median,A10,0.347,-0.01,-0.807
+prestations,simu2027 prudent,A1,0.658,0.09,-0.602
+prestations,simu2027 prudent,A2,0.799,0.258,-0.496
+prestations,simu2027 prudent,A3,0.777,0.296,-0.504
+prestations,simu2027 prudent,A5,0.641,0.129,-0.609
+prestations,simu2027 prudent,A10,0.391,-0.011,-0.777
+prestations,simu2027 median,A1,0.658,0.09,-0.604
+prestations,simu2027 median,A2,0.798,0.258,-0.5
+prestations,simu2027 median,A3,0.777,0.297,-0.508
+prestations,simu2027 median,A5,0.642,0.133,-0.611
+prestations,simu2027 median,A10,0.4,-0.005,-0.776
 impots_directs,FR-BDF,A1,-0.1,-0.01,0.97
 impots_directs,FR-BDF,A2,-0.29,-0.07,0.91
 impots_directs,FR-BDF,A3,-0.35,-0.11,0.88
 impots_directs,FR-BDF,A5,-0.38,-0.15,0.88
 impots_directs,FR-BDF,A10,-0.36,-0.18,0.93
-impots_directs,simu2027 prudent,A1,-0.407,-0.094,0.767
-impots_directs,simu2027 prudent,A2,-0.807,-0.395,0.498
-impots_directs,simu2027 prudent,A3,-0.828,-0.592,0.468
-impots_directs,simu2027 prudent,A5,-0.729,-0.636,0.537
-impots_directs,simu2027 prudent,A10,-0.774,-0.655,0.525
-impots_directs,simu2027 median,A1,-0.393,-0.092,0.776
-impots_directs,simu2027 median,A2,-0.776,-0.39,0.518
-impots_directs,simu2027 median,A3,-0.785,-0.586,0.496
-impots_directs,simu2027 median,A5,-0.668,-0.631,0.573
-impots_directs,simu2027 median,A10,-0.685,-0.657,0.577
+impots_directs,simu2027 prudent,A1,-0.41,-0.096,0.765
+impots_directs,simu2027 prudent,A2,-0.826,-0.399,0.487
+impots_directs,simu2027 prudent,A3,-0.876,-0.598,0.442
+impots_directs,simu2027 prudent,A5,-0.81,-0.644,0.493
+impots_directs,simu2027 prudent,A10,-0.872,-0.661,0.472
+impots_directs,simu2027 median,A1,-0.397,-0.093,0.773
+impots_directs,simu2027 median,A2,-0.799,-0.394,0.505
+impots_directs,simu2027 median,A3,-0.838,-0.594,0.466
+impots_directs,simu2027 median,A5,-0.756,-0.641,0.526
+impots_directs,simu2027 median,A10,-0.788,-0.665,0.523
 cotisations_employeurs,FR-BDF,A1,-0.02,-0.04,0.91
 cotisations_employeurs,FR-BDF,A2,-0.13,-0.21,0.84
 cotisations_employeurs,FR-BDF,A3,-0.31,-0.39,0.74
 cotisations_employeurs,FR-BDF,A5,-0.62,-0.58,0.59
 cotisations_employeurs,FR-BDF,A10,-0.69,-0.51,0.5
-cotisations_employeurs,simu2027 prudent,A1,-0.203,-0.435,0.887
-cotisations_employeurs,simu2027 prudent,A2,-0.56,-1.006,0.622
-cotisations_employeurs,simu2027 prudent,A3,-0.767,-1.001,0.488
-cotisations_employeurs,simu2027 prudent,A5,-0.96,-1.099,0.365
-cotisations_employeurs,simu2027 prudent,A10,-1.256,-1.118,0.199
-cotisations_employeurs,simu2027 median,A1,-0.152,-0.384,0.921
-cotisations_employeurs,simu2027 median,A2,-0.463,-0.912,0.687
-cotisations_employeurs,simu2027 median,A3,-0.628,-0.87,0.582
-cotisations_employeurs,simu2027 median,A5,-0.752,-0.904,0.507
-cotisations_employeurs,simu2027 median,A10,-0.928,-0.808,0.425
+cotisations_employeurs,simu2027 prudent,A1,-0.2,-0.433,0.889
+cotisations_employeurs,simu2027 prudent,A2,-0.548,-1.005,0.628
+cotisations_employeurs,simu2027 prudent,A3,-0.756,-1.0,0.494
+cotisations_employeurs,simu2027 prudent,A5,-0.966,-1.1,0.362
+cotisations_employeurs,simu2027 prudent,A10,-1.288,-1.121,0.181
+cotisations_employeurs,simu2027 median,A1,-0.15,-0.383,0.922
+cotisations_employeurs,simu2027 median,A2,-0.452,-0.911,0.693
+cotisations_employeurs,simu2027 median,A3,-0.619,-0.869,0.587
+cotisations_employeurs,simu2027 median,A5,-0.759,-0.906,0.503
+cotisations_employeurs,simu2027 median,A10,-0.962,-0.811,0.406
 tva,FR-BDF,A1,-0.16,-0.03,0.76
 tva,FR-BDF,A2,-0.27,-0.09,0.74
 tva,FR-BDF,A3,-0.34,-0.14,0.73
 tva,FR-BDF,A5,-0.46,-0.21,0.69
 tva,FR-BDF,A10,-0.53,-0.23,0.68
-tva,simu2027 prudent,A1,-0.331,-0.124,1.016
-tva,simu2027 prudent,A2,-0.695,-0.426,0.59
-tva,simu2027 prudent,A3,-0.729,-0.528,0.537
-tva,simu2027 prudent,A5,-0.764,-0.394,0.53
-tva,simu2027 prudent,A10,-0.675,-0.254,0.602
-tva,simu2027 median,A1,-0.318,-0.117,1.022
-tva,simu2027 median,A2,-0.67,-0.415,0.609
-tva,simu2027 median,A3,-0.695,-0.514,0.562
-tva,simu2027 median,A5,-0.714,-0.379,0.565
-tva,simu2027 median,A10,-0.604,-0.232,0.65
+tva,simu2027 prudent,A1,-0.32,-0.119,1.022
+tva,simu2027 prudent,A2,-0.657,-0.423,0.612
+tva,simu2027 prudent,A3,-0.716,-0.527,0.545
+tva,simu2027 prudent,A5,-0.804,-0.4,0.508
+tva,simu2027 prudent,A10,-0.779,-0.263,0.545
+tva,simu2027 median,A1,-0.31,-0.114,1.027
+tva,simu2027 median,A2,-0.636,-0.414,0.627
+tva,simu2027 median,A3,-0.687,-0.516,0.566
+tva,simu2027 median,A5,-0.76,-0.387,0.54
+tva,simu2027 median,A10,-0.714,-0.243,0.591

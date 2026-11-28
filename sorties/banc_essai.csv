@@ -1,18 +1,18 @@
 choc,source,scenario,horizon,pib_pct,emploi_milliers,solde_primaire_pt
-depense,simu2027,prudent,t,0.836,31.8,-0.497
-depense,simu2027,prudent,t+1,0.976,92.0,-0.389
-depense,simu2027,prudent,t+4,0.684,42.7,-0.583
-depense,simu2027,prudent,t+9,0.418,-6.6,-0.763
-depense,simu2027,prudent,t+19,0.293,-30.1,-0.848
-depense,simu2027,prudent,t+29,0.243,-43.4,-0.88
-depense,simu2027,prudent,LT (t+42),0.213,-43.5,-0.894
-depense,simu2027,median,t,0.839,32.3,-0.498
-depense,simu2027,median,t+1,0.982,93.2,-0.39
-depense,simu2027,median,t+4,0.698,46.1,-0.578
-depense,simu2027,median,t+9,0.434,-3.9,-0.758
-depense,simu2027,median,t+19,0.304,-29.9,-0.846
-depense,simu2027,median,t+29,0.257,-44.7,-0.878
-depense,simu2027,median,LT (t+42),0.23,-46.0,-0.891
+depense,simu2027,prudent,t,0.823,33.1,-0.505
+depense,simu2027,prudent,t+1,0.998,94.9,-0.376
+depense,simu2027,prudent,t+4,0.801,47.8,-0.514
+depense,simu2027,prudent,t+9,0.489,-4.0,-0.721
+depense,simu2027,prudent,t+19,0.27,-30.7,-0.861
+depense,simu2027,prudent,t+29,0.214,-44.2,-0.898
+depense,simu2027,prudent,LT (t+42),0.197,-43.9,-0.905
+depense,simu2027,median,t,0.823,33.1,-0.507
+depense,simu2027,median,t+1,0.997,95.1,-0.38
+depense,simu2027,median,t+4,0.803,49.3,-0.517
+depense,simu2027,median,t+9,0.5,-2.1,-0.72
+depense,simu2027,median,t+19,0.286,-30.3,-0.856
+depense,simu2027,median,t+29,0.233,-45.2,-0.892
+depense,simu2027,median,LT (t+42),0.217,-46.3,-0.899
 depense,Mésange,,t,0.76,33,-0.53
 depense,Mésange,,t+1,1.01,88,-0.34
 depense,Mésange,,t+4,0.88,48,-0.53
@@ -25,20 +25,20 @@ depense,ThreeME,,t+4,0.9,195,-0.49
 depense,ThreeME,,t+9,0.8,142,-0.53
 depense,ThreeME,,t+29,0.46,73,-0.69
 depense,ThreeME,,LT (t+42),0.45,83,-0.71
-tva,simu2027,prudent,t,0.318,34.6,-1.017
-tva,simu2027,prudent,t+1,0.672,122.3,-0.596
-tva,simu2027,prudent,t+4,0.716,110.1,-0.551
-tva,simu2027,prudent,t+9,0.603,65.7,-0.637
-tva,simu2027,prudent,t+19,0.544,61.2,-0.677
-tva,simu2027,prudent,t+29,0.524,56.6,-0.681
-tva,simu2027,prudent,LT (t+42),0.522,52.9,-0.668
-tva,simu2027,median,t,0.331,36.3,-1.008
-tva,simu2027,median,t+1,0.694,125.7,-0.586
-tva,simu2027,median,t+4,0.762,119.5,-0.529
-tva,simu2027,median,t+9,0.676,80.5,-0.6
-tva,simu2027,median,t+19,0.636,78.8,-0.63
-tva,simu2027,median,t+29,0.625,75.4,-0.63
-tva,simu2027,median,LT (t+42),0.627,72.2,-0.615
+tva,simu2027,prudent,t,0.31,33.6,-1.022
+tva,simu2027,prudent,t+1,0.638,121.8,-0.615
+tva,simu2027,prudent,t+4,0.763,112.8,-0.525
+tva,simu2027,prudent,t+9,0.714,69.3,-0.576
+tva,simu2027,prudent,t+19,0.648,62.1,-0.62
+tva,simu2027,prudent,t+29,0.613,56.5,-0.631
+tva,simu2027,prudent,LT (t+42),0.607,52.8,-0.618
+tva,simu2027,median,t,0.32,35.1,-1.014
+tva,simu2027,median,t+1,0.655,124.8,-0.608
+tva,simu2027,median,t+4,0.801,120.9,-0.507
+tva,simu2027,median,t+9,0.779,82.9,-0.544
+tva,simu2027,median,t+19,0.739,79.5,-0.576
+tva,simu2027,median,t+29,0.715,75.3,-0.582
+tva,simu2027,median,LT (t+42),0.713,72.1,-0.567
 tva,Mésange,,t,0.3,31,-0.8
 tva,Mésange,,t+1,0.65,115,-0.37
 tva,Mésange,,t+4,0.81,113,-0.37
@@ -51,36 +51,36 @@ tva,ThreeME,,t+4,1.08,237,-0.4
 tva,ThreeME,,t+9,1.36,296,-0.33
 tva,ThreeME,,t+29,1.38,303,-0.29
 tva,ThreeME,,LT (t+42),1.38,343,-0.29
-age,simu2027,prudent,t,0.058,32.7,0.063
-age,simu2027,prudent,t+1,0.126,71.6,0.137
-age,simu2027,prudent,t+4,0.297,162.1,0.311
-age,simu2027,prudent,t+9,0.36,176.2,0.343
-age,simu2027,prudent,t+19,0.39,180.0,0.346
-age,simu2027,prudent,t+29,0.414,181.2,0.356
-age,simu2027,prudent,LT (t+42),0.451,183.3,0.38
-age,simu2027,median,t,0.072,38.6,0.069
-age,simu2027,median,t+1,0.159,84.7,0.151
-age,simu2027,median,t+4,0.374,192.5,0.338
-age,simu2027,median,t+9,0.438,207.2,0.361
-age,simu2027,median,t+19,0.466,210.4,0.353
-age,simu2027,median,t+29,0.492,211.3,0.355
-age,simu2027,median,LT (t+42),0.535,213.9,0.374
+age,simu2027,prudent,t,0.058,32.6,0.063
+age,simu2027,prudent,t+1,0.126,71.5,0.137
+age,simu2027,prudent,t+4,0.288,161.7,0.306
+age,simu2027,prudent,t+9,0.347,175.8,0.335
+age,simu2027,prudent,t+19,0.393,180.0,0.347
+age,simu2027,prudent,t+29,0.418,181.3,0.358
+age,simu2027,prudent,LT (t+42),0.454,183.4,0.382
+age,simu2027,median,t,0.072,38.5,0.069
+age,simu2027,median,t+1,0.159,84.6,0.15
+age,simu2027,median,t+4,0.364,192.0,0.332
+age,simu2027,median,t+9,0.424,206.7,0.353
+age,simu2027,median,t+19,0.469,210.5,0.354
+age,simu2027,median,t+29,0.496,211.4,0.357
+age,simu2027,median,LT (t+42),0.537,213.9,0.376
 age,"DG Trésor (COR, 2026)",,t+4,,,0.4
 age,"DG Trésor (COR, 2026)",,t+19,,,0.5
-age (part gardée de Bertrand),simu2027,prudent,t,0.037,21.2,0.041
+age (part gardée de Bertrand),simu2027,prudent,t,0.038,21.2,0.041
 age (part gardée de Bertrand),simu2027,prudent,t+1,0.082,46.5,0.089
-age (part gardée de Bertrand),simu2027,prudent,t+4,0.193,105.4,0.202
-age (part gardée de Bertrand),simu2027,prudent,t+9,0.234,114.6,0.223
-age (part gardée de Bertrand),simu2027,prudent,t+19,0.253,117.0,0.225
-age (part gardée de Bertrand),simu2027,prudent,t+29,0.269,117.8,0.232
-age (part gardée de Bertrand),simu2027,prudent,LT (t+42),0.293,119.2,0.248
-age (part gardée de Bertrand),simu2027,median,t,0.047,25.1,0.045
-age (part gardée de Bertrand),simu2027,median,t+1,0.103,55.1,0.098
-age (part gardée de Bertrand),simu2027,median,t+4,0.243,125.1,0.22
-age (part gardée de Bertrand),simu2027,median,t+9,0.285,134.7,0.235
-age (part gardée de Bertrand),simu2027,median,t+19,0.303,136.7,0.23
-age (part gardée de Bertrand),simu2027,median,t+29,0.32,137.3,0.231
-age (part gardée de Bertrand),simu2027,median,LT (t+42),0.348,139.0,0.244
+age (part gardée de Bertrand),simu2027,prudent,t+4,0.187,105.1,0.199
+age (part gardée de Bertrand),simu2027,prudent,t+9,0.225,114.3,0.218
+age (part gardée de Bertrand),simu2027,prudent,t+19,0.255,117.0,0.226
+age (part gardée de Bertrand),simu2027,prudent,t+29,0.272,117.8,0.233
+age (part gardée de Bertrand),simu2027,prudent,LT (t+42),0.295,119.2,0.249
+age (part gardée de Bertrand),simu2027,median,t,0.047,25.0,0.045
+age (part gardée de Bertrand),simu2027,median,t+1,0.103,55.0,0.098
+age (part gardée de Bertrand),simu2027,median,t+4,0.237,124.8,0.216
+age (part gardée de Bertrand),simu2027,median,t+9,0.276,134.4,0.23
+age (part gardée de Bertrand),simu2027,median,t+19,0.305,136.8,0.231
+age (part gardée de Bertrand),simu2027,median,t+29,0.322,137.4,0.233
+age (part gardée de Bertrand),simu2027,median,LT (t+42),0.349,139.0,0.245
 age (part gardée de Bertrand),"DG Trésor (COR, 2026)",,t+4,,,0.4
 age (part gardée de Bertrand),"DG Trésor (COR, 2026)",,t+19,,,0.5
 productivite,simu2027,prudent,t,1.0,0.0,0.185

@@ -2276,3 +2276,9 @@ supprimé du dépôt (il reste dans l'historique git : étiquette `ref-2026-11-2
 - **Prix de l'électricité vers l'activité** (décision d'Adrien) : le coût du système électrique du parc déclaré passe à la demande, au poids de la facture énergétique (`docs/nucleaire.md`).
 - Ouvert : dans la variante « avec la réaction des marchés », le point fixe de la baisse de l'écart de taux n'est plus atteint pour l'optimiste de Retailleau (10 passes, dernière gardée). Sans effet sur le calcul publié.
 - Validation FR-BDF : à taux constants (BCE hors du calcul), la consommation publique donne 0,80 point de PIB à 5 ans (Mésange 0,83, FR-BDF 0,61) ; l'écart à 25 % n'est plus tenu qu'à 1-3 ans.
+
+## 28/11/2026 (matin) — Régénération complète et comparateur
+
+- Régénération complète (micro des 12 programmes, population vieillie, exports, Monte Carlo de 600 tirages, manifeste) avec les décisions de la nuit : BCE hors du calcul, 2027-2028 projetées, barème commun de l'assurance chômage, prix de l'électricité vers l'activité, économies nommées. Suite de tests au vert (379).
+- Prudent 2037, déficit aux taux du statu quo : statu quo 7,3 % ; Bertrand 7,2, Retailleau 7,8, Philippe 8,3, Attal 8,7, Zemmour 10,2, Lisnard 10,4, Le Pen 10,5, Glucksmann 10,7, Tondelier 11,0, Arthaud 13,0, Roussel 18,8, Mélenchon 21,9. Dette du statu quo aux taux du statu quo : 150 % du PIB.
+- Comparateur : données envoyées ; tableau « Économies nommées et précédents » dans Fiabilité ; variante « économie de 2026 placée en 2029 » ; méthode sans réaction de la BCE ; résumés recalés.
